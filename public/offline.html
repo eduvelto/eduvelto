@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="bn">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#0A1F44" />
+    <title>Eduvelto — অফলাইনে আছেন</title>
+    <style>
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        font-family: system-ui, -apple-system, 'Noto Sans Bengali', sans-serif;
+        background: #0A1F44;
+        color: #fff;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 24px 16px;
+        text-align: center;
+      }
+      .card { max-width: 420px; }
+      .logo {
+        font-size: 28px;
+        font-weight: 700;
+        color: #F1B308;
+        margin: 0 0 8px;
+      }
+      .tagline { color: #cdd7ea; margin: 0 0 24px; font-size: 15px; }
+      h1 { font-size: 22px; margin: 0 0 12px; }
+      p { color: #cdd7ea; line-height: 1.6; margin: 0 0 8px; }
+      button {
+        margin-top: 20px;
+        padding: 12px 28px;
+        min-height: 48px;
+        font-size: 16px;
+        font-weight: 700;
+        border: none;
+        border-radius: 8px;
+        background: #F1B308;
+        color: #041742;
+        cursor: pointer;
+      }
+      a { color: #F1B308; }
+    </style>
+  </head>
+  <body>
+    <div class="card">
+      <p class="logo">Eduvelto</p>
+      <p class="tagline">শেখো, এগিয়ে যাও, স্বপ্ন গড়ো &middot; Learn, Grow, Achieve</p>
+      <h1>আপনি অফলাইনে আছেন</h1>
+      <p>ইন্টারনেট সংযোগ নেই। সংযোগ ফিরে এলে আবার চেষ্টা করুন।</p>
+      <p>You&rsquo;re offline. Please check your internet connection and try again.</p>
+      <button type="button" onclick="location.reload()">আবার চেষ্টা করুন / Try again</button>
+      <p style="margin-top: 20px; font-size: 14px;">
+        <a href="/">হোমে ফিরুন / Back to Home</a>
+      </p>
+    </div>
+  </body>
+</html>

@@ -14,7 +14,9 @@ export default defineConfig({
       manifest: false,
       workbox: {
         globPatterns: ['**/*.{js,css,html,ico,png,svg,woff2}'],
-        navigateFallback: 'index.html',
+        // Offline: a failed navigation shows the branded offline page.
+        // The app shell itself is precached, so a reload retries the app.
+        navigateFallback: '/offline.html',
       },
       devOptions: { enabled: false },
     }),

@@ -3,6 +3,7 @@ import { strings } from './i18n/strings';
 import { useAuth } from './lib/auth';
 import { isBottomBannerAllowed, adsEnabled, BOTTOM_BANNER_RESERVE_PX } from './lib/ads';
 import AdSlot from './components/AdSlot';
+import InstallAppPrompt from './components/InstallAppPrompt';
 import HomePage from './pages/HomePage';
 import RegisterPage from './pages/RegisterPage';
 import LoginPage from './pages/LoginPage';
@@ -106,6 +107,7 @@ export default function App() {
         </main>
       ) : (
         <>
+        <InstallAppPrompt />
         <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/register" element={<RegisterPage />} />
