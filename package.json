@@ -12,13 +12,13 @@
     "emulators": "firebase emulators:start --only firestore,auth"
   },
   "dependencies": {
-    "firebase": "^10.14.1",
+    "firebase": "11.10.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-router-dom": "^6.28.0"
   },
   "devDependencies": {
-    "@firebase/rules-unit-testing": "^3.0.2",
+    "@firebase/rules-unit-testing": "^4.0.1",
     "@types/react": "^18.3.12",
     "@types/react-dom": "^18.3.1",
     "@vitejs/plugin-react": "^4.3.4",
@@ -27,5 +27,8 @@
     "vite": "^6.0.3",
     "vite-plugin-pwa": "^0.21.1",
     "vitest": "^2.1.8"
+  },
+  "overrides": {
+    "@grpc/grpc-js": "^1.13.0"
   }
 }

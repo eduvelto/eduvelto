@@ -34,6 +34,22 @@
  *   If the emulator is ever started without firebase.json (no rules loaded),
  *   the tests would run against open rules — so always start it from this
  *   project directory (`npm run test:rules` / `npm run emulators`).
+ *
+ * 20 NOV 2026 UPDATE — emulator-side bug PROVEN, not a client problem:
+ *   Upgraded firebase 10.14.1 → 11.10.0, @firebase/rules-unit-testing
+ *   3.0.4 → 4.0.1, @grpc/grpc-js 1.9.16 → 1.14.7 (npm override) and
+ *   re-ran with ALL proxy vars cleared: seed writes STILL fail
+ *   (now "14 UNAVAILABLE ... Protocol error"). Decisive test: a plain
+ *   curl HTTP/1.1 REST write against the running emulator ALSO fails with
+ *   `{"error":{"code":500,"message":"http2 exception"}}`, and the emulator
+ *   log shows "Detected non-HTTP/2 connection" followed by
+ *   "Exception when handling request: INTERNAL: http2 exception".
+ *   So the emulator's own HTTP handler rejects EVERY request in this
+ *   sandbox, whatever the client. The suite can only go green on a
+ *   machine where the emulator serves traffic (try Temurin JRE 17, or an
+ *   older cloud-firestore-emulator jar) — the hard gate stands: rules
+ *   must pass here (or there) BEFORE they are deployed to the live
+ *   project. Do NOT deploy firestore.rules to production unverified.
  */
 import { describe, it, beforeAll, afterAll } from 'vitest';
 import {
