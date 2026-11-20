@@ -1,7 +1,7 @@
 import { Link, Route, Routes, useLocation } from 'react-router-dom';
 import { strings } from './i18n/strings';
 import { useAuth } from './lib/auth';
-import { isBottomBannerAllowed } from './lib/ads';
+import { isBottomBannerAllowed, adsEnabled, BOTTOM_BANNER_RESERVE_PX } from './lib/ads';
 import AdSlot from './components/AdSlot';
 import HomePage from './pages/HomePage';
 import RegisterPage from './pages/RegisterPage';
@@ -35,12 +35,18 @@ export default function App() {
   const nav = strings.nav;
   const { user, profile, suspended, loading, signOut } = useAuth();
   const location = useLocation();
-  // Bottom banner: permanent placement on list/home pages only. It never
-  // appears on lesson, quiz, exam or book routes (see lib/ads.ts), and
-  // AdSlot renders nothing at all until AdSense is configured.
+  // Persistent bottom banner (owner brief 20 Nov 21:52): fixed to the
+  // viewport bottom, outside the router outlet, on all eligible pages
+  // (including lessons, quizzes, exams, AI Teacher). It renders nothing
+  // until AdSense is configured, so the banner is live only when
+  // adsEnabled('bottom-banner') is true. While live, the page reserves
+  // the banner's height (+ safe-area inset) as bottom padding, so the
+  // fixed banner never covers content, buttons or essential controls.
+  // When ads are not configured there is no reservation and no gap.
   const showBottomBanner = isBottomBannerAllowed(location.pathname);
+  const bannerLive = showBottomBanner && adsEnabled('bottom-banner');
   return (
-    <div>
+    <div style={bannerLive ? { paddingBottom: `calc(${BOTTOM_BANNER_RESERVE_PX}px + env(safe-area-inset-bottom, 0px))` } : undefined}>
       <header
         style={{
           background: '#0b5e3f',

@@ -15,10 +15,22 @@ import {
 // a responsive <ins class="adsbygoogle"> unit with non-personalised ads
 // requested (child safety: PERSONALISED_ADS is always false).
 //
-// Placement rules (binding): never inside lesson, quiz, exam or book
-// views, and never over essential navigation. Callers enforce this —
-// App.tsx hides the bottom banner on those routes, and no slot is placed
-// in LessonPage / QuizPage / ExamPage / ChapterPage / BookPage.
+// Placement rules (binding, owner brief 20 Nov 21:52 — persistent bottom
+// banner): the banner is FIXED to the viewport bottom and lives in the app
+// layout OUTSIDE the router outlet (App.tsx), so navigation never reloads
+// or interrupts it. It appears on all eligible pages, including lessons,
+// quizzes, exams and the AI Teacher (this supersedes the earlier "no ads
+// during AI lessons or active exams" rule). The content area reserves the
+// banner's height (BOTTOM_BANNER_RESERVE_PX + safe-area inset, set in
+// App.tsx), so the banner never covers content, buttons or essential
+// navigation. No slot is placed in LessonPage / QuizPage / ExamPage /
+// ChapterPage / BookPage as an in-page unit — the banner is the layout's
+// own element, not part of those views.
+//
+// Collapse: the banner container has NO vertical padding of its own, so
+// when no ad is available (empty <ins>) it takes zero height. The
+// reserved space in the content area only applies while ads are
+// configured + enabled, so there is no empty gap when ads are off.
 
 declare global {
   interface Window {
@@ -76,12 +88,17 @@ export default function AdSlot(props: { placement: AdPlacement; format?: 'auto' 
       style={
         isBanner
           ? {
-              position: 'sticky',
+              // Persistent banner: fixed to the viewport bottom, outside
+              // the router outlet (App.tsx). No vertical padding of its
+              // own, so an empty unit collapses to zero height.
+              position: 'fixed',
+              left: 0,
+              right: 0,
               bottom: 0,
               zIndex: 10,
               background: '#fff',
               borderTop: '1px solid #ddd',
-              padding: '8px 0',
+              paddingBottom: 'env(safe-area-inset-bottom, 0px)',
               textAlign: 'center',
             }
           : { margin: '12px 0', textAlign: 'center' }

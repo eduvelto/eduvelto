@@ -19,6 +19,16 @@
 // - Placement toggles are stored in this browser's localStorage for now.
 //   Do NOT move them to Firestore without a rules change approved for that
 //   purpose (no new collection, no rules change in this track).
+//
+// SUPERSESSION (owner brief 20 Nov 21:52, MANDATORY — persistent bottom
+// banner): the bottom banner is now required on ALL eligible pages,
+// including lessons, quizzes, exams and the AI Teacher. This SUPERSEDES
+// the earlier 20 Nov 13:25 rule "no ads during AI lessons or active
+// exams". The reconciliation is reserved space: the content area reserves
+// the banner's height (BOTTOM_BANNER_RESERVE_PX + safe-area inset) so
+// the banner never covers content, buttons, navigation, quiz answers or
+// essential controls. When no ad is available the slot collapses to zero
+// height — no fake ads, no empty placeholder boxes.
 
 export type AdPlacement = 'bottom-banner' | 'in-feed';
 
@@ -34,10 +44,10 @@ export interface AdPlacementDef {
 export const AD_PLACEMENTS: readonly AdPlacementDef[] = [
   {
     id: 'bottom-banner',
-    labelBn: 'নিচের ব্যানার',
-    labelEn: 'Bottom banner',
-    whereBn: 'তালিকা/হোম পাতার নিচে — পাঠ, কুইজ, পরীক্ষা ও বইয়ের পাতায় নয়',
-    whereEn: 'Bottom of list/home pages — never on lesson, quiz, exam or book pages',
+    labelBn: 'নিচের ব্যানার (স্থায়ী)',
+    labelEn: 'Bottom banner (persistent)',
+    whereBn: 'সব পাতায় — হোম, লাইব্রেরি, পাঠ, বই, কুইজ, পরীক্ষা, AI Teacher, প্রোফাইল; নিচে জায়গা রেখে দেওয়া হয়, তাই কিছু ঢাকে না',
+    whereEn: 'All pages — home, library, lessons, books, quizzes, exams, AI Teacher, profiles; space is reserved below the content so it never covers anything',
     format: 'banner',
   },
   {
@@ -80,23 +90,56 @@ export const AD_SLOT_IDS: Record<AdPlacement, string> = {
 /** Non-personalised ads only, ALWAYS (child safety). Never set to true. */
 export const PERSONALISED_ADS = false;
 
-/** Child-safety rules for advertising (binding). */
+/** Child-safety rules for advertising (binding).
+ *  NOTE (owner brief 20 Nov 21:52): the persistent bottom banner now
+ *  appears on all eligible pages INCLUDING lessons, quizzes, exams and
+ *  the AI Teacher — this supersedes the earlier "no ads during AI lessons
+ *  or active exams" rule. The banner never covers content or controls:
+ *  the content area reserves its height (see BOTTOM_BANNER_RESERVE_PX).
+ *  It still never covers essential navigation (the header sits at the
+ *  top; the banner is fixed to the bottom). */
 export const ADS_CHILD_SAFETY = {
   personalisedAds: false,
   familySafeOnly: true,
-  noAdsOver: ['lesson', 'quiz', 'exam', 'essential navigation'],
+  noAdsOver: ['essential navigation'],
   minSpacingPx: 12,
 } as const;
 
 /**
- * Routes where the bottom banner must NEVER appear (learning + assessment
- * views). The list page itself stays allowed; detail pages under /library/
- * (a single book) are excluded too.
+ * Height (px) the content area reserves for the persistent bottom banner,
+ * so the fixed banner never covers content, buttons or controls. The
+ * banner itself is a standard responsive unit (~50px mobile / ~90px
+ * desktop); 96px covers it plus spacing. Safe-area inset is added on
+ * top of this at the call site.
  */
-const ADS_FREE_PATH_PREFIXES = ['/lessons', '/quiz', '/exam', '/books', '/library/'] as const;
+export const BOTTOM_BANNER_RESERVE_PX = 96;
 
-export function isBottomBannerAllowed(pathname: string): boolean {
-  return !ADS_FREE_PATH_PREFIXES.some((p) => pathname.startsWith(p));
+/** Pages the persistent bottom banner appears on (owner brief 20 Nov 21:52). */
+export const BOTTOM_BANNER_ELIGIBLE_PAGES: readonly string[] = [
+  'Home',
+  'Library',
+  'Lessons',
+  'Books',
+  'Quizzes',
+  'Exams',
+  'AI Teacher',
+  'Profiles',
+  'Directory',
+  'Progress',
+  'Routine',
+];
+
+/**
+ * Whether the bottom banner may appear on this route. Since the owner
+ * brief of 20 Nov 21:52 the answer is ALWAYS true: the persistent banner
+ * is required on all eligible pages, including lessons, quizzes, exams
+ * and the AI Teacher. The old route exclusion list was retired by that
+ * brief (kept here as a function so callers keep one allowlist check).
+ * The only screen without the banner is the suspended-account screen,
+ * which replaces the whole app (App.tsx) and never reaches the banner.
+ */
+export function isBottomBannerAllowed(_pathname: string): boolean {
+  return true;
 }
 
 const PLACEMENT_TOGGLES_KEY = 'eduorbit-ads-placements-v1';
