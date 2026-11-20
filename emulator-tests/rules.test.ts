@@ -881,4 +881,34 @@ describe('Eduvelto security rules', () => {
     await assertFails(getDoc(doc(unauth(), 'bookmarks', 'student-1__lesson-published')));
     await assertFails(getDoc(doc(unauth(), 'progress', 'student-1__english')));
   });
+  it('(n4) progressSummaries: own create/read/update ALLOWED; other student read DENIED; spoofed userId DENIED', async () => {
+    const id = 'student-1__english__2026-11';
+    await assertSucceeds(
+      setDoc(doc(asStudent1(), 'progressSummaries', id), {
+        userId: 'student-1',
+        subject: 'English',
+        month: '2026-11',
+        attemptsCount: 2,
+        averagePercentage: 60,
+        bestPercentage: 80,
+        weakChapters: ['Shakespeare'],
+        strongChapters: ['Marlowe'],
+      }),
+    );
+    await assertSucceeds(getDoc(doc(asStudent1(), 'progressSummaries', id)));
+    await assertFails(getDoc(doc(asStudent2(), 'progressSummaries', id)));
+    await assertSucceeds(
+      updateDoc(doc(asStudent1(), 'progressSummaries', id), { attemptsCount: 3 }),
+    );
+    await assertFails(
+      setDoc(doc(asStudent1(), 'progressSummaries', 'student-1__bangla__2026-11'), {
+        userId: 'student-2',
+        subject: 'Bangla',
+        month: '2026-11',
+        attemptsCount: 1,
+        averagePercentage: 50,
+      }),
+    );
+    await assertFails(getDoc(doc(unauth(), 'progressSummaries', id)));
+  });
 });

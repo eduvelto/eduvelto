@@ -14,6 +14,7 @@ import { listBookmarks, type Bookmark } from '../lib/bookmarks';
 import {
   listQuizSummaries,
   listSubjectProgress,
+  recomputeQuizSummaries,
   type QuizSummary,
   type SubjectProgress,
 } from '../lib/progress';
@@ -33,12 +34,26 @@ export default function ProgressPage() {
       return;
     }
     let live = true;
-    Promise.all([listSubjectProgress(user.uid), listBookmarks(user.uid), listQuizSummaries(user.uid)])
-      .then(([p, b, s]) => {
+    Promise.all([listSubjectProgress(user.uid), listBookmarks(user.uid)])
+      .then(async ([p, b]) => {
         if (!live) return;
         setProgress(p);
         setBookmarks(b);
-        setSummaries(s);
+        // Recompute the monthly quiz summaries from the student's OWN quiz
+        // attempts so the page always shows the current summary (a second
+        // quiz attempt updates the stored summary). If the recompute fails
+        // for any reason, fall back to reading the stored summaries.
+        try {
+          const s = await recomputeQuizSummaries(user.uid);
+          if (live) setSummaries(s);
+        } catch {
+          try {
+            const s = await listQuizSummaries(user.uid);
+            if (live) setSummaries(s);
+          } catch {
+            if (live) setSummaries([]);
+          }
+        }
       })
       .catch(() => {
         if (live) setError('অগ্রগতি লোড করা যায়নি — আবার চেষ্টা করুন। / Could not load progress — please try again.');
@@ -93,11 +108,21 @@ export default function ProgressPage() {
           {summaries !== null && summaries.length > 0 ? (
             <>
               <h2 style={{ fontSize: 19, margin: '20px 0 8px' }}>কুইজের ফলাফল / Quiz results</h2>
+              <p style={{ color: '#555', fontSize: 14, margin: '0 0 12px' }}>
+                দুর্বল/শক্ত জায়গা আপনার নিজের কুইজ চেষ্টার ভিত্তিতে (৬০%-এর নিচে দুর্বল)। /
+                Weak/strong areas are based on your own quiz attempts (below 60% is weak).
+              </p>
               <ul style={{ paddingLeft: 20 }}>
                 {summaries.map((s) => (
                   <li key={s.id} style={{ marginBottom: 8 }}>
                     {s.subject} {s.month ? `· ${s.month}` : ''} — {s.attemptsCount}টি চেষ্টা · গড়{' '}
                     {s.averagePercentage}% · সেরা {s.bestPercentage}%
+                    {s.weakChapters.length > 0 ? (
+                      <span style={{ display: 'block' }}>দুর্বল জায়গা / Weak: {s.weakChapters.join(', ')}</span>
+                    ) : null}
+                    {s.strongChapters.length > 0 ? (
+                      <span style={{ display: 'block' }}>শক্ত জায়গা / Strong: {s.strongChapters.join(', ')}</span>
+                    ) : null}
                   </li>
                 ))}
               </ul>
