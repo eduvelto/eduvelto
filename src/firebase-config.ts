@@ -1,30 +1,33 @@
 /**
- * EduOrbit — Firebase client config TEMPLATE.
+ * EduOrbit — Firebase client config (REAL project, wired 20 Nov 2026).
  *
- * HOW TO USE:
- * 1. The owner creates the Firebase project (gate G1) at
- *    https://console.firebase.google.com — Spark plan, NO billing,
- *    no payment method.
- * 2. In the Firebase console: Project settings → "Your apps" → Web app →
- *    copy the firebaseConfig object.
- * 3. Copy this file to `src/firebase-config.ts` and paste the real values
- *    over the YOUR_* placeholders below.
- * 4. `src/firebase-config.ts` is git-ignored? NO — it is NOT git-ignored,
- *    because these client keys are PUBLIC-BY-DESIGN: they identify the
- *    project in the browser and are safe to ship in the app. Security comes
- *    from Firestore Security Rules, never from hiding these keys.
- *    (See Firebase docs: "Firebase API keys are not secret".)
+ * Project: Eduvelto — project ID `eduvelto` (Spark plan, no billing).
+ * Web app: "Eduvelto Web" (registered in the Firebase console 20 Nov 2026).
+ * Console: https://console.firebase.google.com/project/eduvelto/overview
+ *
+ * These client keys are PUBLIC-BY-DESIGN: they identify the project in
+ * the browser and are safe to ship in the app. Security comes from
+ * Firestore Security Rules + Firebase Auth, never from hiding these keys.
+ * (See Firebase docs: "Firebase API keys are not secret".)
  *
  * NEVER commit a SERVICE-ACCOUNT key (firebase-adminsdk-*.json) or any
  * private key. Those belong nowhere in this repo — see .gitignore.
+ *
+ * Still missing in the console (not code — needs a console session):
+ * - Enable sign-in providers: Authentication → Sign-in method →
+ *   Email/Password ON + Google ON. Until then every sign-in fails with
+ *   `auth/operation-not-allowed`, and the app says so honestly.
+ * - Create the Firestore database: Firestore Database → Create database →
+ *   production mode, location `asia-south1`. Until then profile reads
+ *   and writes fail, and the app says so honestly.
  */
 export const firebaseConfig = {
-  apiKey: 'YOUR_API_KEY',
-  authDomain: 'YOUR_PROJECT_ID.firebaseapp.com',
-  projectId: 'YOUR_PROJECT_ID',
-  storageBucket: 'YOUR_PROJECT_ID.firebasestorage.app',
-  messagingSenderId: 'YOUR_MESSAGING_SENDER_ID',
-  appId: 'YOUR_APP_ID',
+  apiKey: 'AIzaSyBWtzXrFraiHJsKjsO2YCr_BK7GYlLBkr8',
+  authDomain: 'eduvelto.firebaseapp.com',
+  projectId: 'eduvelto',
+  storageBucket: 'eduvelto.firebasestorage.app',
+  messagingSenderId: '781355434811',
+  appId: '1:781355434811:web:87a77ac0d45bb9bc5a6d1e',
 };
 
 export const isFirebaseConfigured =

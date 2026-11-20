@@ -6,10 +6,17 @@ no billing, no paid API credits, no public launch without the owner's approval.
 
 This is the **Phase 2 implementation skeleton** (Vite + React 18 + TypeScript +
 Firebase Spark). It is **push-ready**: the moment the owner creates the empty
-GitHub repository (action A2), this code can be pushed. Nothing here is a live
-system yet — there is no Firebase project (action A1), no real users, no real
-content. Every page renders an honest "no data yet" empty state until real
-published content exists.
+GitHub repository (action A2), this code can be pushed. **Step 1 (auth +
+profiles) is implemented** — email/password + Google sign-in, profile
+creation on first sign-in, profile view/edit — against the real Firebase
+project `eduvelto` (Spark, no billing); the web-app config is wired in
+`src/firebase-config.ts`. Two console steps remain before a real student
+can sign in (not code — needs a console session): enable **Email/Password
++ Google** sign-in (Authentication → Sign-in method) and create the
+**Firestore database** (production mode, `asia-south1`). The security-rules
+emulator suite must go green on a Java-capable machine before
+`firestore.rules` is deployed (see "Emulator" below). Every page renders
+an honest "no data yet" empty state until real published content exists.
 
 **Demo-data rule: demo users and demo data are WIPED, never migrated.**
 The Phase 1b demo (exported HTML + docs archive, already delivered) used
@@ -26,10 +33,12 @@ The Phase 1b demo (exported HTML + docs archive, already delivered) used
 ## Prerequisites
 
 - Node.js 18+ and npm (verified here: Node v24.22.1, npm 10.9.4)
-- A Firebase project created via action **A1**: the owner signs in once in
-  the takeover browser and watches (~5 min); Muse does every click after
-  that (see `../phase2-implementation-plan.md` §3). Muse never creates
-  accounts in his name.
+- The Firebase project `eduvelto` (created 20 Nov 2026, Spark, no billing).
+  The web-app config ("Eduvelto Web") is already wired in
+  `src/firebase-config.ts`. Still to do in the console: enable
+  Email/Password + Google sign-in and create the Firestore database
+  (production mode, `asia-south1`) — see the note at the top of
+  `src/firebase-config.ts`.
 - A GitHub repository via action **A2** (same shape: owner signs in once,
   Muse does the clicks; Muse pushes the code).
 - Java 17+ (only for running the Firestore emulator + rules tests locally;
@@ -41,17 +50,16 @@ The Phase 1b demo (exported HTML + docs archive, already delivered) used
 npm install          # install dependencies (package-lock.json is NOT committed)
 ```
 
-1. Copy the Firebase config template and paste the real values from the
-   Firebase console (Project settings → Your apps → Web app):
-   ```bash
-   cp src/firebase-config.example.ts src/firebase-config.ts
-   ```
+1. The Firebase config is already wired in `src/firebase-config.ts`
+   (project `eduvelto`, web app "Eduvelto Web"). If it ever needs
+   re-pasting, copy the values from the Firebase console
+   (Project settings → Your apps → Web app) over the placeholders in
+   `src/firebase-config.example.ts`.
    These client keys are **public-by-design** (they identify the project in
    the browser); security comes from `firestore.rules`, never from hiding
    them. **Never** commit a service-account key (`firebase-adminsdk-*.json`)
    — see `.gitignore`.
-2. In `.firebaserc`, replace the placeholder project id `eduorbit-dev` with
-   the owner's real Firebase project id.
+2. `.firebaserc` already points at the real project id `eduvelto`.
 
 ## Commands
 

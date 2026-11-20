@@ -1,5 +1,6 @@
 import { Link, Route, Routes } from 'react-router-dom';
 import { strings } from './i18n/strings';
+import { useAuth } from './lib/auth';
 import HomePage from './pages/HomePage';
 import RegisterPage from './pages/RegisterPage';
 import LoginPage from './pages/LoginPage';
@@ -24,8 +25,12 @@ import SocialPage from './pages/SocialPage';
 // /social is a DESIGN PROPOSAL only (blueprint §7): no live social
 // features, no messaging, until safety + moderation are ready.
 // /ai-teacher is a scripted demonstration, not live AI (blueprint §5).
+// Step 1: the header reflects the auth state, and a suspended account
+// (profile isActive === false) sees only the suspended screen — Auth
+// login still succeeds, but the app cannot be used (plan Step 1).
 export default function App() {
   const nav = strings.nav;
+  const { user, profile, suspended, loading, signOut } = useAuth();
   return (
     <div>
       <header
@@ -43,16 +48,50 @@ export default function App() {
           EduOrbit
         </Link>
         <span style={{ fontSize: 14 }}>{strings.tagline.bn}</span>
-        <nav style={{ display: 'flex', flexWrap: 'wrap', gap: 12, marginLeft: 'auto' }}>
+        <nav style={{ display: 'flex', flexWrap: 'wrap', gap: 12, marginLeft: 'auto', alignItems: 'center' }}>
           <Link to="/directory" style={{ color: '#fff' }}>{nav.directory.bn}</Link>
           <Link to="/library" style={{ color: '#fff' }}>{nav.library.bn}</Link>
           <Link to="/exam" style={{ color: '#fff' }}>{nav.exam.bn}</Link>
           <Link to="/routine" style={{ color: '#fff' }}>{nav.routine.bn}</Link>
           <Link to="/progress" style={{ color: '#fff' }}>{nav.progress.bn}</Link>
-          <Link to="/login" style={{ color: '#fff' }}>{nav.login.bn}</Link>
+          {loading ? null : user ? (
+            <>
+              <Link to="/profile" style={{ color: '#fff' }}>
+                {profile?.displayName ?? nav.profile.bn}
+              </Link>
+              <button
+                type="button"
+                onClick={() => void signOut()}
+                style={{ background: 'transparent', border: '1px solid #fff', color: '#fff', borderRadius: 6, padding: '4px 10px', cursor: 'pointer', fontSize: 14 }}
+              >
+                {nav.logout.bn}
+              </button>
+            </>
+          ) : (
+            <>
+              <Link to="/login" style={{ color: '#fff' }}>{nav.login.bn}</Link>
+              <Link to="/register" style={{ color: '#fff' }}>{nav.register.bn}</Link>
+            </>
+          )}
         </nav>
       </header>
-      <Routes>
+      {suspended ? (
+        <main style={{ maxWidth: 720, margin: '0 auto', padding: '24px 16px', fontFamily: 'system-ui, sans-serif' }}>
+          <div style={{ border: '1px solid #b00020', borderRadius: 8, padding: '20px 16px', background: '#fdf0f0' }}>
+            <h1 style={{ marginTop: 0, color: '#b00020', fontSize: 24 }}>{strings.profile.suspendedTitle.bn}</h1>
+            <p>{strings.profile.suspendedBody.bn}</p>
+            <p style={{ color: '#555' }}>{strings.profile.suspendedBody.en}</p>
+            <button
+              type="button"
+              onClick={() => void signOut()}
+              style={{ padding: '10px 18px', fontSize: 16, borderRadius: 6, border: 'none', background: '#0b5e3f', color: '#fff', cursor: 'pointer' }}
+            >
+              {nav.logout.bn} / {nav.logout.en}
+            </button>
+          </div>
+        </main>
+      ) : (
+        <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/login" element={<LoginPage />} />
@@ -73,7 +112,8 @@ export default function App() {
         <Route path="/progress" element={<ProgressPage />} />
         <Route path="/social" element={<SocialPage />} />
         <Route path="*" element={<HomePage />} />
-      </Routes>
+        </Routes>
+      )}
     </div>
   );
 }
