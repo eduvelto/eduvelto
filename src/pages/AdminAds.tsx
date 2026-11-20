@@ -67,6 +67,7 @@ export default function AdminAds() {
   const [toggles, setToggles] = useState<Record<AdPlacement, boolean>>(() => ({
     'bottom-banner': getPlacementEnabled('bottom-banner'),
     'in-feed': getPlacementEnabled('in-feed'),
+    'in-feed-2': getPlacementEnabled('in-feed-2'),
   }));
 
   function onToggle(placement: AdPlacement, enabled: boolean): void {

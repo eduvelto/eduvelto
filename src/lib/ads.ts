@@ -30,7 +30,11 @@
 // essential controls. When no ad is available the slot collapses to zero
 // height — no fake ads, no empty placeholder boxes.
 
-export type AdPlacement = 'bottom-banner' | 'in-feed';
+export type AdPlacement = 'bottom-banner' | 'in-feed' | 'in-feed-2';
+
+// Placement layout (owner brief 20 Nov 22:06): 1 persistent bottom banner
+// (always) + 2 in-feed slots in the middle of list pages, revealed on
+// scroll — the second in-feed slot sits lower down the list than the first.
 
 export interface AdPlacementDef {
   id: AdPlacement;
@@ -56,6 +60,14 @@ export const AD_PLACEMENTS: readonly AdPlacementDef[] = [
     labelEn: 'In-feed slot',
     whereBn: 'হোম পাতার তালিকার ভেতরে — পাঠ, কুইজ, পরীক্ষার ভেতরে নয়',
     whereEn: 'Inside the home-page list — never inside lessons, quizzes or exams',
+    format: 'in-feed',
+  },
+  {
+    id: 'in-feed-2',
+    labelBn: 'তালিকার ভেতরের ২য় বিজ্ঞাপন',
+    labelEn: 'Second in-feed slot',
+    whereBn: 'হোম ও লাইব্রেরি তালিকার নিচের দিকে — স্ক্রল করলে দেখা যায়; পাঠ, কুইজ, পরীক্ষার ভেতরে নয়',
+    whereEn: 'Lower down the home and library lists — revealed on scroll; never inside lessons, quizzes or exams',
     format: 'in-feed',
   },
 ];
@@ -85,6 +97,7 @@ export const ADSENSE_CLIENT_ID: string = readEnv('VITE_ADSENSE_CLIENT_ID');
 export const AD_SLOT_IDS: Record<AdPlacement, string> = {
   'bottom-banner': readEnv('VITE_ADSENSE_SLOT_BOTTOM_BANNER'),
   'in-feed': readEnv('VITE_ADSENSE_SLOT_IN_FEED'),
+  'in-feed-2': readEnv('VITE_ADSENSE_SLOT_IN_FEED_2'),
 };
 
 /** Non-personalised ads only, ALWAYS (child safety). Never set to true. */
