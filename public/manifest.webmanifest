@@ -1,0 +1,26 @@
+{
+  "name": "EduOrbit",
+  "short_name": "EduOrbit",
+  "description": "শেখো, এগিয়ে যাও, স্বপ্ন গড়ো — Learn, Grow, Achieve. Free digital education for Bangladesh.",
+  "lang": "bn",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#ffffff",
+  "theme_color": "#0b5e3f",
+  "icons": [
+    {
+      "src": "/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

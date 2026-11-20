@@ -1,0 +1,9 @@
+import { PageShell, EmptyState } from '../components/PageShell';
+
+export default function RoutinePage() {
+  return (
+    <PageShell titleBn="পড়ার রুটিন" titleEn="Study Routine">
+      <EmptyState bn="এখনো কোনো তথ্য নেই। কনটেন্ট প্রকাশিত হলে এখানে দেখা যাবে।" en="No data yet. Content will appear here once it is published." />
+    </PageShell>
+  );
+}

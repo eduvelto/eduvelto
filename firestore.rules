@@ -1,0 +1,437 @@
+rules_version = '2';
+
+// EduOrbit — Firestore Security Rules (Phase 2).
+// Implements database-schema.md §5 + blueprint §4.7 principles.
+// Governing idea: the client is untrusted; the rule is the enforcement.
+// Deny by default: every match below allows explicitly, and anything not
+// matched is denied. All writes require auth. No client may write
+// reviewStatus "Published", a role, or a verificationStatus directly.
+// NOTE: rules cannot strip fields from a read. The quiz answer key
+// (quizzes.questions[].correctOptionIndex) must NOT be shipped to the
+// student client before submission — Phase 2 must implement a projection
+// (or a post-submit re-fetch) for that; these rules alone do not hide it.
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // ---------- helpers ----------
+    function signedIn() { return request.auth != null; }
+    function uid() { return request.auth.uid; }
+    function isOwner(id) { return signedIn() && uid() == id; }
+
+    // Role is read from the caller's own users doc. If that doc does not
+    // exist (or the read fails), get() errors and the rule denies — safe.
+    function callerRole() {
+      return get(/databases/$(database)/documents/users/$(uid())).data.role;
+    }
+    function isAdmin() {
+      return signedIn() && (callerRole() == 'admin' || callerRole() == 'owner');
+    }
+    function isModerator() {
+      return signedIn() && (callerRole() in ['moderator', 'admin', 'owner']);
+    }
+    function isTeacher() {
+      return signedIn() && (callerRole() in ['teacher', 'admin', 'moderator', 'owner']);
+    }
+
+    // ---------- validation helpers ----------
+    function isStr(v, max) { return v is string && v.size() > 0 && v.size() <= max; }
+    function isOptStr(v, max) { return v == null || (v is string && v.size() <= max); }
+    function isDraftStatus(s) { return s in ['Not Started', 'In Progress', 'Under Review']; }
+    function isPublished(d) { return d.get('reviewStatus', '') == 'Published'; }
+
+    // ---------- users ----------
+    // A user reads/writes only their own doc. Role and verificationStatus
+    // can NEVER be changed by the owner of the doc — only Admin/Owner.
+    // isActive is also admin-only (suspension must not be self-reversible).
+    match /users/{userId} {
+      allow read: if isOwner(userId) || isModerator();
+      allow create: if isOwner(userId)
+        && request.resource.data.role == 'student'
+        && !('verificationStatus' in request.resource.data)
+        && !('isActive' in request.resource.data)
+        && isStr(request.resource.data.displayName, 100)
+        && request.resource.data.email is string
+        && request.resource.data.language in ['bn', 'en'];
+      allow update: if isOwner(userId)
+        // The update may touch ONLY these fields; role, verificationStatus
+        // and isActive are excluded, so they cannot change here.
+        && request.resource.data.diff(resource.data).affectedKeys()
+             .hasOnly(['displayName', 'educationType', 'board', 'institution',
+                       'academicYear', 'program', 'department', 'classLevel',
+                       'language', 'lastActiveAt', 'updatedAt'])
+        && isOptStr(request.resource.data.displayName, 100);
+      // Admin/Owner change role / verificationStatus / isActive, and only
+      // they may do so — and only to valid enum values.
+      allow update: if isAdmin()
+        && (!('role' in request.resource.data)
+            || request.resource.data.role in ['owner', 'admin', 'moderator', 'teacher', 'student', 'parent'])
+        && (!('verificationStatus' in request.resource.data)
+            || request.resource.data.verificationStatus in ['pending', 'verified', 'rejected', 'revoked']);
+      allow delete: if false; // accounts are suspended (isActive=false), never deleted by clients
+    }
+
+    // ---------- quizAttempts (sub-collection under the user) ----------
+    // Immutable after submit: create only, never update/delete by anyone
+    // except an Admin delete for support. Readable only by the owner + Admin.
+    match /users/{userId}/quizAttempts/{attemptId} {
+      allow read: if isOwner(userId) || isAdmin();
+      allow create: if isOwner(userId)
+        && request.resource.data.quizId is string
+        && request.resource.data.answers is list
+        && request.resource.data.score is number
+        && request.resource.data.totalMarks is number
+        && request.resource.data.percentage is number;
+      allow update, delete: if false;
+    }
+
+    // ---------- studyPlans / progressSummaries (owner only) ----------
+    match /studyPlans/{planId} {
+      allow read: if signedIn() && (resource.data.userId == uid() || isAdmin());
+      allow create: if signedIn() && request.resource.data.userId == uid()
+        && isStr(request.resource.data.title, 200);
+      allow update, delete: if signedIn() && resource.data.userId == uid();
+    }
+    match /progressSummaries/{summaryId} {
+      allow read: if signedIn() && (resource.data.userId == uid() || isAdmin());
+      allow create, update: if signedIn() && request.resource.data.userId == uid()
+        && request.resource.data.attemptsCount is number
+        && request.resource.data.averagePercentage is number;
+      allow delete: if isAdmin();
+    }
+
+    // ---------- public content: directory, books, chapters, lessons, quizzes ----------
+    // Public reads ONLY where reviewStatus == "Published". Teachers/Admins
+    // may read their own drafts; moderators read all. Teachers create
+    // drafts only; only Moderator/Admin can publish / remove / send back.
+    function contentRead(d) {
+      return isPublished(d)
+        || isModerator()
+        || (signedIn() && d.get('authorId', '') == uid())
+        || (signedIn() && d.get('createdBy', '') == uid());
+    }
+    function contentCreate() {
+      return isTeacher()
+        && isDraftStatus(request.resource.data.reviewStatus)
+        && isStr(request.resource.data.title, 200);
+    }
+    function contentUpdate(d) {
+      // Moderator/Admin may move any status (publish, correct, remove).
+      // An author may edit only their own draft, and may not publish it.
+      return isModerator()
+        || (signedIn() && d.get('authorId', '') == uid()
+            && isDraftStatus(d.reviewStatus)
+            && isDraftStatus(request.resource.data.reviewStatus))
+        || (signedIn() && d.get('createdBy', '') == uid()
+            && isDraftStatus(d.reviewStatus)
+            && isDraftStatus(request.resource.data.reviewStatus));
+    }
+
+    match /educationDirectory/{docId} {
+      allow read: if contentRead(resource.data);
+      allow create: if isTeacher() && isDraftStatus(request.resource.data.reviewStatus);
+      allow update: if contentUpdate(resource.data);
+      allow delete: if isAdmin();
+    }
+    match /books/{bookId} {
+      allow read: if contentRead(resource.data);
+      allow create: if contentCreate() && isStr(request.resource.data.sourceUrl, 2000);
+      allow update: if contentUpdate(resource.data);
+      allow delete: if isAdmin();
+    }
+    match /chapters/{chapterId} {
+      allow read: if contentRead(resource.data);
+      allow create: if contentCreate();
+      allow update: if contentUpdate(resource.data);
+      allow delete: if isAdmin();
+    }
+    match /lessons/{lessonId} {
+      allow read: if contentRead(resource.data);
+      allow create: if contentCreate() && isStr(request.resource.data.body, 100000);
+      allow update: if contentUpdate(resource.data);
+      allow delete: if isAdmin();
+    }
+    match /quizzes/{quizId} {
+      allow read: if contentRead(resource.data);
+      allow create: if contentCreate() && request.resource.data.questions is list;
+      allow update: if contentUpdate(resource.data);
+      allow delete: if isAdmin();
+    }
+
+    // ---------- community posts / comments / questions / answers ----------
+    // Create with reviewStatus forced to "Under Review". Authors edit only
+    // their own while still unreviewed. Only Moderator/Admin publish/remove.
+    match /posts/{postId} {
+      allow read: if isPublished(resource.data) || isModerator()
+        || (signedIn() && resource.data.authorId == uid());
+      allow create: if signedIn()
+        && request.resource.data.authorId == uid()
+        && request.resource.data.reviewStatus == 'Under Review'
+        && isStr(request.resource.data.title, 200)
+        && isStr(request.resource.data.body, 5000);
+      allow update: if isModerator()
+        || (signedIn() && resource.data.authorId == uid()
+            && resource.data.reviewStatus == 'Under Review'
+            && request.resource.data.reviewStatus == 'Under Review');
+      allow delete: if isAdmin();
+    }
+    match /posts/{postId}/comments/{commentId} {
+      allow read: if isPublished(resource.data) || isModerator()
+        || (signedIn() && resource.data.authorId == uid());
+      allow create: if signedIn()
+        && request.resource.data.authorId == uid()
+        && request.resource.data.reviewStatus == 'Under Review'
+        && isStr(request.resource.data.body, 1000);
+      allow update, delete: if isModerator();
+    }
+    match /questions/{questionId} {
+      allow read: if isPublished(resource.data) || isModerator()
+        || (signedIn() && resource.data.authorId == uid());
+      allow create: if signedIn()
+        && request.resource.data.authorId == uid()
+        && request.resource.data.reviewStatus == 'Under Review'
+        && isStr(request.resource.data.title, 200)
+        && isStr(request.resource.data.body, 5000);
+      allow update: if isModerator()
+        || (signedIn() && resource.data.authorId == uid()
+            && resource.data.reviewStatus == 'Under Review'
+            && request.resource.data.reviewStatus == 'Under Review');
+      allow delete: if isAdmin();
+    }
+    match /questions/{questionId}/answers/{answerId} {
+      allow read: if isPublished(resource.data) || isModerator()
+        || (signedIn() && resource.data.authorId == uid());
+      allow create: if signedIn()
+        && request.resource.data.authorId == uid()
+        && request.resource.data.reviewStatus == 'Under Review'
+        && isStr(request.resource.data.body, 5000);
+      // isAccepted may be set only by the question author or a moderator.
+      allow update: if isModerator()
+        || (signedIn() && get(/databases/$(database)/documents/questions/$(questionId)).data.authorId == uid());
+      allow delete: if isAdmin();
+    }
+
+    // ---------- reports / moderationQueue ----------
+    match /reports/{reportId} {
+      allow read: if signedIn() && (resource.data.reporterId == uid() || isModerator());
+      allow create: if signedIn()
+        && request.resource.data.reporterId == uid()
+        && request.resource.data.status == 'open'
+        && request.resource.data.reason in ['spam', 'abuse', 'copyright', 'personal-info', 'other']
+        && isOptStr(request.resource.data.details, 2000);
+      allow update: if isModerator();
+      allow delete: if false;
+    }
+    match /moderationQueue/{itemId} {
+      allow read, write: if isModerator();
+    }
+
+    // ---------- teacherVerifications ----------
+    // Applicant creates their own PENDING record only. Status, checkedBy and
+    // checkedAt changeable ONLY by Admin/Moderator after the human check.
+    match /teacherVerifications/{recordId} {
+      allow read: if signedIn() && (resource.data.userId == uid() || isModerator());
+      allow create: if signedIn()
+        && request.resource.data.userId == uid()
+        && request.resource.data.status == 'pending'
+        && isStr(request.resource.data.fullName, 100)
+        && isStr(request.resource.data.institution, 200);
+      allow update: if isModerator()
+        && request.resource.data.status in ['pending', 'verified', 'rejected', 'revoked']
+        && request.resource.data.checkedBy == uid();
+      allow delete: if isAdmin();
+    }
+
+    // ---------- social (design gated: Phase 3, only after moderator + consent gates) ----------
+    match /socialProfiles/{userId} {
+      allow read: if isOwner(userId) || isModerator()
+        || (resource.data.isPublic == true && isPublished(resource.data));
+      allow create, update: if isOwner(userId)
+        && isOptStr(request.resource.data.bio, 300)
+        // A user may never make their own profile public: public visibility
+        // is Admin-approved only (age cannot be verified).
+        && request.resource.data.isPublic == false;
+      allow delete: if isAdmin();
+    }
+    match /friendships/{pairId} {
+      allow read: if signedIn()
+        && (resource.data.userA == uid() || resource.data.userB == uid() || isModerator());
+      allow create: if signedIn()
+        && (request.resource.data.userA == uid() || request.resource.data.userB == uid())
+        && request.resource.data.status == 'pending'
+        && request.resource.data.guardianApproved == false;
+      // Acceptance requires guardianApproved == true; only the recipient
+      // may accept, and nobody may set guardianApproved themselves —
+      // that field may only become true via a Moderator/Admin update.
+      allow update: if isModerator()
+        || (signedIn() && resource.data.userB == uid()
+            && request.resource.data.status in ['accepted', 'declined', 'blocked']
+            && request.resource.data.guardianApproved == resource.data.guardianApproved);
+      allow delete: if false;
+    }
+    match /follows/{followId} {
+      allow read: if signedIn() && resource.data.followerId == uid();
+      allow create: if signedIn() && request.resource.data.followerId == uid();
+      allow delete: if signedIn() && resource.data.followerId == uid();
+      allow update: if false;
+    }
+    match /socialPosts/{postId} {
+      allow read: if isPublished(resource.data) || isModerator()
+        || (signedIn() && resource.data.authorId == uid());
+      allow create: if signedIn()
+        && request.resource.data.authorId == uid()
+        && request.resource.data.reviewStatus == 'Under Review'
+        && isStr(request.resource.data.body, 1000);
+      allow update: if isModerator()
+        || (signedIn() && resource.data.authorId == uid()
+            && resource.data.reviewStatus == 'Under Review'
+            && request.resource.data.reviewStatus == 'Under Review');
+      allow delete: if isAdmin();
+    }
+    match /socialPosts/{postId}/comments/{commentId} {
+      allow read: if isPublished(resource.data) || isModerator();
+      allow create: if signedIn()
+        && request.resource.data.authorId == uid()
+        && request.resource.data.reviewStatus == 'Under Review'
+        && isStr(request.resource.data.body, 500);
+      allow update, delete: if isModerator();
+    }
+    match /studyGroups/{groupId} {
+      allow read: if isPublished(resource.data) || isModerator();
+      allow create: if signedIn() && request.resource.data.reviewStatus == 'Under Review'
+        && isStr(request.resource.data.name, 100) && isStr(request.resource.data.description, 500);
+      allow update: if isModerator();
+      allow delete: if isAdmin();
+    }
+    match /groupMemberships/{membershipId} {
+      allow read: if signedIn() && (resource.data.userId == uid() || isModerator());
+      allow create: if signedIn() && request.resource.data.userId == uid()
+        && request.resource.data.status == 'pending';
+      allow update: if isModerator();
+      allow delete: if isAdmin();
+    }
+    match /institutionPages/{pageId} {
+      allow read: if isPublished(resource.data) || isModerator();
+      allow create, update: if isAdmin();
+      allow delete: if isAdmin();
+    }
+    match /notices/{noticeId} {
+      allow read: if isPublished(resource.data) || isModerator();
+      allow create: if isModerator()
+        && request.resource.data.reviewStatus == 'Under Review'
+        && isStr(request.resource.data.title, 200) && isStr(request.resource.data.body, 2000);
+      allow update: if isModerator();
+      allow delete: if isAdmin();
+    }
+
+    // ---------- games / competitions (Phase 3) ----------
+    match /games/{gameId} {
+      allow read: if isPublished(resource.data) || isModerator();
+      allow create: if contentCreate();
+      allow update: if contentUpdate(resource.data);
+      allow delete: if isAdmin();
+    }
+    match /users/{userId}/gameAttempts/{attemptId} {
+      allow read: if isOwner(userId) || isAdmin();
+      allow create: if isOwner(userId) && request.resource.data.gameId is string
+        && request.resource.data.score is number;
+      allow update, delete: if false;
+    }
+    match /competitions/{competitionId} {
+      allow read: if isPublished(resource.data) || isModerator();
+      allow create: if isModerator();
+      allow update: if isModerator();
+      allow delete: if isAdmin();
+    }
+    match /competitions/{competitionId}/entries/{userId} {
+      allow read: if isOwner(userId) || isModerator();
+      allow create: if isOwner(userId) && request.resource.data.score is number;
+      allow update, delete: if false;
+    }
+    match /leaderboardSnapshots/{snapshotId} {
+      allow read: if true;
+      allow write: if isModerator();
+    }
+
+    // ---------- rewards / certificates / passport (Phases 3–4) ----------
+    // rewardBalances: NO direct client write to points, ever. The document
+    // is read-only for the owner; balances are computed on read from the
+    // user's own attempts until a safe server-side rule is proven in Phase 2.
+    match /rewardBalances/{userId} {
+      allow read: if isOwner(userId) || isAdmin();
+      allow write: if false;
+    }
+    match /achievements/{key} {
+      allow read: if isPublished(resource.data) || isModerator();
+      allow write: if isAdmin();
+    }
+    match /users/{userId}/userAchievements/{key} {
+      allow read: if isOwner(userId) || isAdmin();
+      allow create: if isOwner(userId);
+      allow update, delete: if false;
+    }
+    match /certificates/{certId} {
+      allow read: if signedIn() && (resource.data.userId == uid() || isAdmin());
+      allow write: if isModerator();
+    }
+    match /users/{userId}/passportEntries/{entryId} {
+      allow read: if isOwner(userId) || isAdmin();
+      allow create: if isOwner(userId);
+      allow update, delete: if false;
+    }
+
+    // ---------- career / opportunities (Phase 4) ----------
+    match /careerPaths/{pathId} {
+      allow read: if isPublished(resource.data) || isModerator();
+      allow create: if isTeacher() && isDraftStatus(request.resource.data.reviewStatus);
+      allow update: if contentUpdate(resource.data);
+      allow delete: if isAdmin();
+    }
+    match /opportunities/{oppId} {
+      allow read: if isPublished(resource.data) || isModerator();
+      allow create: if isModerator() && isDraftStatus(request.resource.data.reviewStatus);
+      allow update: if isModerator();
+      allow delete: if isAdmin();
+    }
+
+    // ---------- parent links / invites (Phase 4, gated on consent design G7) ----------
+    match /parentLinks/{linkId} {
+      allow read: if signedIn()
+        && (resource.data.parentId == uid() || resource.data.studentId == uid() || isAdmin());
+      allow create: if signedIn() && request.resource.data.status == 'pending';
+      // Only Admin activates a link after the consent record is complete.
+      allow update: if isAdmin()
+        || (signedIn() && (resource.data.parentId == uid() || resource.data.studentId == uid())
+            && request.resource.data.status == 'revoked');
+      allow delete: if isAdmin();
+    }
+    match /parentInvites/{inviteId} {
+      allow read: if signedIn() && (resource.data.studentId == uid() || isAdmin());
+      allow create: if signedIn() && request.resource.data.studentId == uid()
+        && request.resource.data.status == 'sent';
+      allow update: if isAdmin();
+      allow delete: if isAdmin();
+    }
+
+    // ---------- gift catalogue / partnerships: empty / owner-only until funded ----------
+    match /giftCatalogue/{giftId} {
+      allow read: if resource.data.status == 'available' || isAdmin();
+      allow write: if isAdmin();
+    }
+    match /giftRedemptions/{redemptionId} {
+      allow read: if signedIn() && (resource.data.userId == uid() || isAdmin());
+      allow create: if signedIn() && request.resource.data.userId == uid()
+        && request.resource.data.status == 'requested';
+      allow update: if isAdmin();
+      allow delete: if false;
+    }
+    match /partnerships/{partnerId} {
+      allow read, write: if isAdmin();
+    }
+
+    // ---------- everything else: denied ----------
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

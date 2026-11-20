@@ -1,0 +1,31 @@
+{
+  "name": "eduorbit",
+  "private": true,
+  "version": "0.1.0",
+  "description": "EduOrbit — free digital education platform for Bangladesh (Vite + React + Firebase Spark). Tagline: শেখো, এগিয়ে যাও, স্বপ্ন গড়ো / Learn, Grow, Achieve.",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "preview": "vite preview",
+    "test:rules": "firebase emulators:exec --only firestore,auth \"vitest run emulator-tests/rules.test.ts\"",
+    "emulators": "firebase emulators:start --only firestore,auth"
+  },
+  "dependencies": {
+    "firebase": "^10.14.1",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^6.28.0"
+  },
+  "devDependencies": {
+    "@firebase/rules-unit-testing": "^3.0.2",
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "@vitejs/plugin-react": "^4.3.4",
+    "firebase-tools": "^13.28.0",
+    "typescript": "^5.6.3",
+    "vite": "^6.0.3",
+    "vite-plugin-pwa": "^0.21.1",
+    "vitest": "^2.1.8"
+  }
+}
