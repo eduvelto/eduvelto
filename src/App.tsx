@@ -1,6 +1,8 @@
-import { Link, Route, Routes } from 'react-router-dom';
+import { Link, Route, Routes, useLocation } from 'react-router-dom';
 import { strings } from './i18n/strings';
 import { useAuth } from './lib/auth';
+import { isBottomBannerAllowed } from './lib/ads';
+import AdSlot from './components/AdSlot';
 import HomePage from './pages/HomePage';
 import RegisterPage from './pages/RegisterPage';
 import LoginPage from './pages/LoginPage';
@@ -15,6 +17,7 @@ import LessonPage from './pages/LessonPage';
 import QuizPage from './pages/QuizPage';
 import QuizResultPage from './pages/QuizResultPage';
 import AdminPage from './pages/AdminPage';
+import AdminAds from './pages/AdminAds';
 import AiTeacherPage from './pages/AiTeacherPage';
 import ExamPage from './pages/ExamPage';
 import RoutinePage from './pages/RoutinePage';
@@ -31,6 +34,11 @@ import SocialPage from './pages/SocialPage';
 export default function App() {
   const nav = strings.nav;
   const { user, profile, suspended, loading, signOut } = useAuth();
+  const location = useLocation();
+  // Bottom banner: permanent placement on list/home pages only. It never
+  // appears on lesson, quiz, exam or book routes (see lib/ads.ts), and
+  // AdSlot renders nothing at all until AdSense is configured.
+  const showBottomBanner = isBottomBannerAllowed(location.pathname);
   return (
     <div>
       <header
@@ -91,6 +99,7 @@ export default function App() {
           </div>
         </main>
       ) : (
+        <>
         <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/register" element={<RegisterPage />} />
@@ -106,6 +115,7 @@ export default function App() {
         <Route path="/quiz/:quizId" element={<QuizPage />} />
         <Route path="/quiz/:quizId/result/:attemptId" element={<QuizResultPage />} />
         <Route path="/admin" element={<AdminPage />} />
+        <Route path="/admin/ads" element={<AdminAds />} />
         <Route path="/ai-teacher" element={<AiTeacherPage />} />
         <Route path="/exam" element={<ExamPage />} />
         <Route path="/routine" element={<RoutinePage />} />
@@ -113,6 +123,8 @@ export default function App() {
         <Route path="/social" element={<SocialPage />} />
         <Route path="*" element={<HomePage />} />
         </Routes>
+        {showBottomBanner ? <AdSlot placement="bottom-banner" /> : null}
+        </>
       )}
     </div>
   );
