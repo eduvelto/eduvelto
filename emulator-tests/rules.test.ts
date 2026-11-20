@@ -35,21 +35,26 @@
  *   the tests would run against open rules — so always start it from this
  *   project directory (`npm run test:rules` / `npm run emulators`).
  *
- * 20 NOV 2026 UPDATE — emulator-side bug PROVEN, not a client problem:
- *   Upgraded firebase 10.14.1 → 11.10.0, @firebase/rules-unit-testing
- *   3.0.4 → 4.0.1, @grpc/grpc-js 1.9.16 → 1.14.7 (npm override) and
- *   re-ran with ALL proxy vars cleared: seed writes STILL fail
- *   (now "14 UNAVAILABLE ... Protocol error"). Decisive test: a plain
- *   curl HTTP/1.1 REST write against the running emulator ALSO fails with
- *   `{"error":{"code":500,"message":"http2 exception"}}`, and the emulator
- *   log shows "Detected non-HTTP/2 connection" followed by
- *   "Exception when handling request: INTERNAL: http2 exception".
- *   So the emulator's own HTTP handler rejects EVERY request in this
- *   sandbox, whatever the client. The suite can only go green on a
- *   machine where the emulator serves traffic (try Temurin JRE 17, or an
- *   older cloud-firestore-emulator jar) — the hard gate stands: rules
- *   must pass here (or there) BEFORE they are deployed to the live
- *   project. Do NOT deploy firestore.rules to production unverified.
+ * 20 NOV 2026 — ROOT CAUSE FOUND + FIXED (was misdiagnosed as an
+ * emulator bug): the sandbox resolves `localhost` to ::1 (IPv6) FIRST
+ * (see /etc/hosts + getaddrinfo order), and the emulator's internal
+ * gRPC channel to its own datastore backend fails on IPv6 — every
+ * Firestore operation then fails with
+ * `{"error":{"code":500,"message":"http2 exception"}}` while plain
+ * GET / still returns 200. Ruled out before finding this: proxy vars,
+ * firebase 10→11, rules-unit-testing 3→4, grpc-js 1.9→1.14, Java 17
+ * vs 21, emulator jar v1.19.8 vs v1.18.2, with/without firestore.rules.
+ * FIX: force IPv4 for the emulator JVM —
+ *   JAVA_TOOL_OPTIONS="-Djava.net.preferIPv4Stack=true"
+ * (baked into the `test:rules` / `emulators` npm scripts). Verified
+ * 20 Nov 20:44: plain curl REST write + read against BOTH jars
+ * (v1.18.2 on 8087, v1.19.8 on 8088) return HTTP 200 with the flag,
+ * and the suite's firestore-debug.log shows zero "http2 exception".
+ * The beforeAll hook timeout is 120s because the first Firestore ops
+ * on a cold emulator take ~2s each in this sandbox (default 10s was
+ * too tight even after the fix). The hard gate stands: rules must pass
+ * here BEFORE they are deployed to the live project. Do NOT deploy
+ * firestore.rules to production unverified.
  */
 import { describe, it, beforeAll, afterAll } from 'vitest';
 import {
@@ -133,7 +138,7 @@ beforeAll(async () => {
     firestore: { host: '127.0.0.1', port: 8080 },
   });
   await seed();
-});
+}, 120000); // 120s: first Firestore ops on a cold emulator take ~2s each in this sandbox
 
 afterAll(async () => {
   await env.cleanup();

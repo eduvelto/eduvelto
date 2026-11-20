@@ -8,8 +8,8 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "preview": "vite preview",
-    "test:rules": "firebase emulators:exec --only firestore,auth \"vitest run emulator-tests/rules.test.ts\"",
-    "emulators": "firebase emulators:start --only firestore,auth"
+    "test:rules": "JAVA_TOOL_OPTIONS=\"-Djava.net.preferIPv4Stack=true\" firebase emulators:exec --only firestore,auth \"vitest run emulator-tests/rules.test.ts\"",
+    "emulators": "JAVA_TOOL_OPTIONS=\"-Djava.net.preferIPv4Stack=true\" firebase emulators:start --only firestore,auth"
   },
   "dependencies": {
     "firebase": "11.10.0",
