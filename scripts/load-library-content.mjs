@@ -48,6 +48,8 @@ const onlyIdx = args.indexOf('--only');
 const ONLY_FOLDER = onlyIdx >= 0 ? args[onlyIdx + 1] : null;
 const limitIdx = args.indexOf('--limit');
 const LIMIT = limitIdx >= 0 ? parseInt(args[limitIdx + 1], 10) : Infinity;
+const dumpIdx = args.indexOf('--dump-plan');
+const DUMP_PLAN_PATH = dumpIdx >= 0 ? args[dumpIdx + 1] : null;
 const VERBOSE = args.includes('--verbose');
 
 // ---------------------------------------------------------------------------
@@ -410,6 +412,13 @@ function parsePack(filePath, folderName) {
   };
 }
 
+// The 231101 broad/extra pack stays Draft on purpose (it proves drafts
+// stay invisible to students). Its variant must NEVER be set 1: the
+// published (canonical) content carries the plain chapter IDs, and the
+// draft variant gets the -set2 IDs. (Without this, "broad-extra" sorts
+// before "mcq" alphabetically and the sets invert.)
+const DRAFT_PACK_FILE = 'elizabethan-and-jacobean-drama-broad-extra-pack-01.md';
+
 // ---------------------------------------------------------------------------
 // Build the load plan (dedupe by code; merge content variants as extra sets)
 // ---------------------------------------------------------------------------
@@ -480,16 +489,25 @@ function buildPlan() {
       })),
     };
     // Assign set numbers: first hash group = set 1 (canonical), others = set 2, 3...
+    // Draft variants sort last (see DRAFT_PACK_FILE above) so canonical
+    // content keeps the plain chapter IDs.
+    book.variants.sort((a, b) =>
+      (a.packs.some((p) => p.file === DRAFT_PACK_FILE) ? 1 : 0) -
+      (b.packs.some((p) => p.file === DRAFT_PACK_FILE) ? 1 : 0));
     book.variants.forEach((v, i) => { v.setNo = i + 1; });
-    // Question count + chapters: one chapter per part per set.
+    // Question count + chapters: one chapter per part per set. Each hash
+    // group (variant) is one distinct content set, even when the same pack
+    // content is duplicated across department folders (common courses like
+    // 219901/219903) — count only the representative pack, or the book
+    // overstates its chapters/questions (verified 21 Nov 2026: 219901
+    // claimed 33 chapters / 286 Q, only 21 distinct chapters exist).
     let questionCount = 0;
     const chapters = [];
     for (const variant of book.variants) {
-      for (const pack of variant.packs) {
-        for (const part of pack.parts) {
-          questionCount += part.questions.length;
-          chapters.push({ pack, part, setNo: variant.setNo });
-        }
+      const pack = variant.packs[0];
+      for (const part of pack.parts) {
+        questionCount += part.questions.length;
+        chapters.push({ pack, part, setNo: variant.setNo });
       }
     }
     book.questionCount = questionCount;
@@ -503,10 +521,22 @@ function buildPlan() {
 // ---------------------------------------------------------------------------
 // Write one book (book + chapters + lessons + directory row)
 // ---------------------------------------------------------------------------
-const DRAFT_PACK_FILE = 'elizabethan-and-jacobean-drama-broad-extra-pack-01.md';
-
 async function writeBook(book, log) {
   const now = new Date();
+  // --only guard: a book whose packs span multiple folders must NOT be
+  // overwritten with a folder-scoped plan — the 21 Nov 2026 --only
+  // hsc-humanities run clobbered 5 HSC books (bangla/english/ict) to
+  // 3 chapters / 38 Q because their science/commerce packs were out of
+  // scope. Skip such books; they need a full run.
+  if (ONLY_FOLDER) {
+    const live = await getDoc('books', book.bookId);
+    const liveFolders = (live?.sourceFiles ?? []).map((f) => String(f).split('/')[0]);
+    if (liveFolders.some((f) => f !== ONLY_FOLDER)) {
+      console.log(`  SKIP (multi-folder book, needs full run): ${book.bookId}`);
+      log.books[book.bookId] = { title: book.title, code: book.code, skipped: 'multi-folder --only' };
+      return;
+    }
+  }
   const isDraftBook = false; // the book itself is Published; only its broad/extra chapters stay Draft
   const bookFields = {
     title: book.title,
@@ -596,6 +626,23 @@ async function main() {
   }
   const limited = LIMIT === Infinity ? books : books.slice(0, LIMIT);
   if (limited.length < books.length) console.log(`LIMIT: loading first ${limited.length} of ${books.length} books`);
+
+  if (DUMP_PLAN_PATH) {
+    const plan = {
+      generatedAt: new Date().toISOString(),
+      packCount,
+      books: books.map((b) => ({
+        bookId: b.bookId,
+        questionCount: b.questionCount,
+        chapterCount: b.chapterCount,
+        chapterIds: b.chapters.map(({ part, setNo }) =>
+          `${b.bookId}--part-${part.letter.toLowerCase()}${setNo > 1 ? `-set${setNo}` : ''}`),
+      })),
+    };
+    writeFileSync(DUMP_PLAN_PATH, JSON.stringify(plan, null, 2));
+    console.log(`PLAN DUMPED: ${books.length} books, ${totalChapters} chapters -> ${DUMP_PLAN_PATH}`);
+    return;
+  }
 
   if (DRY_RUN) {
     for (const b of limited) console.log(`  DRY: ${b.bookId} | ${b.title} | ${b.departments.join(', ')} | ${b.yearLabel} | ${b.questionCount} Q, ${b.chapterCount} chapters`);
