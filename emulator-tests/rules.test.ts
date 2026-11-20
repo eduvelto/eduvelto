@@ -111,6 +111,20 @@ async function seed() {
       language: 'bn',
       isActive: true,
     });
+    await setDoc(doc(db, 'users', 'moderator-1'), {
+      displayName: 'Moderator',
+      email: 'moderator@example.com',
+      role: 'moderator',
+      language: 'bn',
+      isActive: true,
+    });
+    await setDoc(doc(db, 'users', 'suspended-1'), {
+      displayName: 'Suspended Student',
+      email: 'suspended@example.com',
+      role: 'student',
+      language: 'bn',
+      isActive: false,
+    });
     await setDoc(doc(db, 'lessons', 'lesson-published'), {
       chapterId: 'ch1',
       bookId: 'book1',
@@ -133,6 +147,64 @@ async function seed() {
       authorId: 'admin-1',
       reviewStatus: 'In Progress',
     });
+    // --- Health v1 seeds ---
+    const medFields = {
+      title: 'Paracetamol',
+      titleBn: 'প্যারাসিটামল',
+      useBn: 'জ্বর ও ব্যথা কমাতে ব্যবহৃত হয়।',
+      useEn: 'Used to reduce fever and relieve pain.',
+      formBn: 'ট্যাবলেট / সিরাপ',
+      formEn: 'Tablet / syrup',
+      sideEffectsBn: 'সাধারণত পার্শ্বপ্রতিক্রিয়া হয় না।',
+      sideEffectsEn: 'Usually no side effects.',
+      warningsBn: 'মাত্রা সম্পর্কে ডাক্তারের পরামর্শ নিন।',
+      warningsEn: 'Ask a doctor about the dose.',
+      prescriptionOnly: false,
+      source: 'WHO',
+    };
+    await setDoc(doc(db, 'medicines', 'med-published'), { ...medFields, reviewStatus: 'Published' });
+    await setDoc(doc(db, 'medicines', 'med-draft'), { ...medFields, title: 'ORS', titleBn: 'ওরস্যালাইন', reviewStatus: 'Under Review' });
+    const disFields = {
+      title: 'Dengue',
+      titleBn: 'ডেঙ্গু',
+      symptomsBn: 'হঠাৎ তীব্র জ্বর, মাথা ব্যথা।',
+      symptomsEn: 'Sudden high fever, headache.',
+      preventionBn: 'মশার কামড় থেকে বাঁচুন।',
+      preventionEn: 'Avoid mosquito bites.',
+      seeDoctorBn: 'জ্বর ৩ দিনের বেশি থাকলে ডাক্তার দেখান।',
+      seeDoctorEn: 'See a doctor if fever lasts more than 3 days.',
+      source: 'WHO / DGHS Bangladesh',
+    };
+    await setDoc(doc(db, 'diseases', 'dis-published'), { ...disFields, reviewStatus: 'Published' });
+    await setDoc(doc(db, 'diseases', 'dis-draft'), { ...disFields, title: 'Typhoid', titleBn: 'টাইফয়েড', reviewStatus: 'Under Review' });
+    await setDoc(doc(db, 'facilities', 'fac-published'), {
+      title: 'Dhaka Medical College Hospital',
+      titleBn: 'ঢাকা মেডিকেল কলেজ হাসপাতাল',
+      kind: 'hospital',
+      areaBn: 'ঢাকা',
+      areaEn: 'Dhaka',
+      addressBn: 'ঢাকা',
+      addressEn: 'Dhaka',
+      source: 'DGHS Bangladesh — public hospital list',
+      reviewStatus: 'Published',
+    });
+    const docFields = {
+      title: 'Dr Ayesha Rahman',
+      titleBn: 'ডা. আয়েশা রহমান',
+      qualificationBn: 'এমবিবিএস',
+      qualificationEn: 'MBBS',
+      specialityBn: 'সাধারণ চিকিৎসা',
+      specialityEn: 'General medicine',
+      workplaceBn: 'ঢাকা মেডিকেল কলেজ হাসপাতাল',
+      workplaceEn: 'Dhaka Medical College Hospital',
+      source: 'DGHS Bangladesh',
+    };
+    await setDoc(doc(db, 'doctors', 'doc-verified-published'), { ...docFields, verificationStatus: 'verified', reviewStatus: 'Published', userId: 'doctor-user' });
+    await setDoc(doc(db, 'doctors', 'doc-verified-draft'), { ...docFields, verificationStatus: 'verified', reviewStatus: 'Under Review', userId: 'doctor-user' });
+    await setDoc(doc(db, 'doctors', 'doc-pending'), { ...docFields, verificationStatus: 'pending', reviewStatus: 'Under Review', userId: 'doctor-user' });
+    await setDoc(doc(db, 'doctors', 'doc-pending-nochecks'), { ...docFields, verificationStatus: 'pending', reviewStatus: 'Under Review', userId: 'doctor-user' });
+    await setDoc(doc(db, 'doctors', 'doc-pending-shortreason'), { ...docFields, verificationStatus: 'pending', reviewStatus: 'Under Review', userId: 'doctor-user' });
+    await setDoc(doc(db, 'doctors', 'doc-pending-own'), { ...docFields, verificationStatus: 'pending', reviewStatus: 'Under Review', userId: 'admin-1' });
   });
 }
 
@@ -154,6 +226,8 @@ afterAll(async () => {
 const unauth = () => env.unauthenticatedContext().firestore();
 const asStudent1 = () => env.authenticatedContext('student-1').firestore();
 const asStudent2 = () => env.authenticatedContext('student-2').firestore();
+const asModerator = () => env.authenticatedContext('moderator-1').firestore();
+const asSuspended = () => env.authenticatedContext('suspended-1').firestore();
 const asAdmin = () => env.authenticatedContext('admin-1').firestore();
 const asOwner = () => env.authenticatedContext('owner-1').firestore();
 
@@ -285,7 +359,8 @@ describe('Eduvelto security rules', () => {
     );
   });
 
-  // (h) Admin approving a teacher verification is ALLOWED.
+  // (h) Admin approving a teacher verification is ALLOWED — with the
+  // mandatory reason (min 10 chars) and the 4-point human checklist.
   it('(h1) admin approving a teacher verification is ALLOWED', async () => {
     // The applicant creates their own pending record; the admin approves it.
     const ref = await addDoc(collection(asStudent1(), 'teacherVerifications'), {
@@ -301,6 +376,8 @@ describe('Eduvelto security rules', () => {
         status: 'verified',
         checkedBy: 'admin-1',
         checkedAt: new Date(),
+        reason: 'পরিচয়, প্রতিষ্ঠান, বিষয় ও বয়স যাচাই করা হয়েছে',
+        checks: { identity: true, institution: true, subject: true, adult: true },
       }),
     );
   });
@@ -366,7 +443,7 @@ describe('Eduvelto security rules', () => {
     await assertSucceeds(
       addDoc(collection(asAdmin(), 'adminActions'), {
         actorId: 'admin-1',
-        action: 'suspend-user',
+        action: 'user-suspend',
         createdAt: new Date(),
       }),
     );
@@ -375,7 +452,7 @@ describe('Eduvelto security rules', () => {
     const ref = await assertSucceeds(
       addDoc(collection(asOwner(), 'adminActions'), {
         actorId: 'owner-1',
-        action: 'approve-teacher',
+        action: 'teacher-verification-approved',
         createdAt: new Date(),
       }),
     );
@@ -385,12 +462,423 @@ describe('Eduvelto security rules', () => {
   it('(i8) NOBODY can update or delete an adminActions entry', async () => {
     const ref = await addDoc(collection(asOwner(), 'adminActions'), {
       actorId: 'owner-1',
-      action: 'immutable-check',
+      action: 'feature-enabled',
       createdAt: new Date(),
     });
     await assertFails(updateDoc(doc(asOwner(), 'adminActions', ref.id), { action: 'edited' }));
     await assertFails(updateDoc(doc(asAdmin(), 'adminActions', ref.id), { action: 'edited' }));
     await assertFails(deleteDoc(doc(asOwner(), 'adminActions', ref.id)));
     await assertFails(deleteDoc(doc(asAdmin(), 'adminActions', ref.id)));
+  });
+
+  // (j) settings rules (owner dashboard, 20 Nov 2026): there was no
+  // settings rule at all — feature toggles could not work.
+  it('(j1) settings/features: owner write ALLOWED, admin/student DENIED, signed-in read ALLOWED', async () => {
+    await assertSucceeds(
+      setDoc(doc(asOwner(), 'settings', 'features'), {
+        'ai-teacher': false,
+        updatedAt: new Date(),
+      }),
+    );
+    await assertSucceeds(
+      updateDoc(doc(asOwner(), 'settings', 'features'), {
+        comments: true,
+        updatedAt: new Date(),
+      }),
+    );
+    await assertFails(
+      setDoc(doc(asAdmin(), 'settings', 'features'), {
+        'ai-teacher': true,
+        updatedAt: new Date(),
+      }),
+    );
+    await assertFails(
+      setDoc(doc(asStudent1(), 'settings', 'features'), {
+        'ai-teacher': true,
+        updatedAt: new Date(),
+      }),
+    );
+    await assertSucceeds(getDoc(doc(asStudent1(), 'settings', 'features')));
+    await assertFails(getDoc(doc(unauth(), 'settings', 'features')));
+  });
+  it('(j2) settings/features: non-boolean flag value DENIED; bottom-banner key DENIED', async () => {
+    await assertFails(
+      setDoc(doc(asOwner(), 'settings', 'features'), {
+        'ai-teacher': 'yes',
+        updatedAt: new Date(),
+      }),
+    );
+    // The mandatory bottom banner has no field anywhere: it can never
+    // be turned off, not even in settings (owner brief 20 Nov 21:52).
+    await assertFails(
+      setDoc(doc(asOwner(), 'settings', 'features'), {
+        'bottom-banner': false,
+        updatedAt: new Date(),
+      }),
+    );
+  });
+  it('(j3) settings/ads: owner write ALLOWED (in-feed only), admin DENIED, bottom-banner key DENIED', async () => {
+    await assertSucceeds(
+      setDoc(doc(asOwner(), 'settings', 'ads'), { 'in-feed': true, updatedAt: new Date() }),
+    );
+    await assertFails(
+      setDoc(doc(asAdmin(), 'settings', 'ads'), { 'in-feed': true, updatedAt: new Date() }),
+    );
+    await assertFails(
+      setDoc(doc(asOwner(), 'settings', 'ads'), {
+        'bottom-banner': false,
+        updatedAt: new Date(),
+      }),
+    );
+  });
+
+  // (k) Owner protection + suspension enforcement + verification hardening.
+  it('(k1) NOBODY can create a second owner via the client rules', async () => {
+    await assertFails(updateDoc(doc(asAdmin(), 'users', 'admin-1'), { role: 'owner' }));
+    await assertFails(updateDoc(doc(asAdmin(), 'users', 'student-1'), { role: 'owner' }));
+    await assertFails(updateDoc(doc(asOwner(), 'users', 'student-1'), { role: 'owner' }));
+  });
+  it('(k2) admin updating a user email / arbitrary field is DENIED (field allowlist)', async () => {
+    await assertFails(updateDoc(doc(asAdmin(), 'users', 'student-1'), { email: 'x@example.com' }));
+    await assertFails(
+      updateDoc(doc(asAdmin(), 'users', 'student-1'), { displayName: 'Renamed by admin' }),
+    );
+  });
+  it('(k3) a suspended user cannot create content (suspension is enforced in the rules)', async () => {
+    await assertFails(
+      addDoc(collection(asSuspended(), 'posts'), {
+        authorId: 'suspended-1',
+        authorDisplayName: 'Suspended Student',
+        title: 'Should not post',
+        body: 'Suspended accounts cannot post.',
+        category: 'general',
+        reviewStatus: 'Under Review',
+      }),
+    );
+  });
+  it('(k4) a moderator cannot approve teachers and cannot read user docs', async () => {
+    const ref = await addDoc(collection(asStudent1(), 'teacherVerifications'), {
+      userId: 'student-1',
+      fullName: 'Student One',
+      institution: 'Test College',
+      status: 'pending',
+    });
+    await assertFails(
+      updateDoc(doc(asModerator(), 'teacherVerifications', ref.id), {
+        status: 'verified',
+        checkedBy: 'moderator-1',
+        checkedAt: new Date(),
+        reason: 'পরিচয়, প্রতিষ্ঠান, বিষয় ও বয়স যাচাই করা হয়েছে',
+        checks: { identity: true, institution: true, subject: true, adult: true },
+      }),
+    );
+    await assertFails(getDoc(doc(asModerator(), 'users', 'student-1')));
+  });
+  it('(k5) an admin cannot decide their OWN teacher application', async () => {
+    const ref = await addDoc(collection(asModerator(), 'teacherVerifications'), {
+      userId: 'moderator-1',
+      fullName: 'Moderator',
+      institution: 'Test College',
+      status: 'pending',
+    });
+    await assertFails(
+      updateDoc(doc(asModerator(), 'teacherVerifications', ref.id), {
+        status: 'verified',
+        checkedBy: 'moderator-1',
+        checkedAt: new Date(),
+        reason: 'পরিচয়, প্রতিষ্ঠান, বিষয় ও বয়স যাচাই করা হয়েছে',
+        checks: { identity: true, institution: true, subject: true, adult: true },
+      }),
+    );
+  });
+  it('(k6) approve without reason / without checklist / reject without reason is DENIED', async () => {
+    const ref = await addDoc(collection(asStudent1(), 'teacherVerifications'), {
+      userId: 'student-1',
+      fullName: 'Student One',
+      institution: 'Test College',
+      status: 'pending',
+    });
+    const db = asAdmin();
+    await assertFails(
+      updateDoc(doc(db, 'teacherVerifications', ref.id), {
+        status: 'verified',
+        checkedBy: 'admin-1',
+        checkedAt: new Date(),
+        checks: { identity: true, institution: true, subject: true, adult: true },
+      }),
+    );
+    await assertFails(
+      updateDoc(doc(db, 'teacherVerifications', ref.id), {
+        status: 'verified',
+        checkedBy: 'admin-1',
+        checkedAt: new Date(),
+        reason: 'পরিচয়, প্রতিষ্ঠান, বিষয় ও বয়স যাচাই করা হয়েছে',
+      }),
+    );
+    await assertFails(
+      updateDoc(doc(db, 'teacherVerifications', ref.id), {
+        status: 'rejected',
+        checkedBy: 'admin-1',
+        checkedAt: new Date(),
+      }),
+    );
+  });
+  it('(k7) adminActions: forged action / non-timestamp createdAt DENIED; valid entry ALLOWED', async () => {
+    await assertFails(
+      addDoc(collection(asAdmin(), 'adminActions'), {
+        actorId: 'admin-1',
+        action: 'fake-action',
+        createdAt: new Date(),
+      }),
+    );
+    await assertFails(
+      addDoc(collection(asAdmin(), 'adminActions'), {
+        actorId: 'admin-1',
+        action: 'user-suspend',
+        createdAt: '2026-11-20',
+      }),
+    );
+    await assertSucceeds(
+      addDoc(collection(asAdmin(), 'adminActions'), {
+        actorId: 'admin-1',
+        action: 'user-suspend',
+        details: 'Student One',
+        targetId: 'student-1',
+        before: 'active',
+        after: 'suspended',
+        reason: 'পরীক্ষার প্রশ্ন ফাঁস করেছে',
+        createdAt: new Date(),
+      }),
+    );
+  });
+  it('(k8) admin reopening a decided application back to pending is ALLOWED', async () => {
+    const ref = await addDoc(collection(asStudent1(), 'teacherVerifications'), {
+      userId: 'student-1',
+      fullName: 'Student One',
+      institution: 'Test College',
+      status: 'pending',
+    });
+    await updateDoc(doc(asAdmin(), 'teacherVerifications', ref.id), {
+      status: 'verified',
+      checkedBy: 'admin-1',
+      checkedAt: new Date(),
+      reason: 'পরিচয়, প্রতিষ্ঠান, বিষয় ও বয়স যাচাই করা হয়েছে',
+      checks: { identity: true, institution: true, subject: true, adult: true },
+    });
+    await assertSucceeds(
+      updateDoc(doc(asAdmin(), 'teacherVerifications', ref.id), {
+        status: 'pending',
+        checkedBy: 'admin-1',
+        checkedAt: new Date(),
+        reason: 'আরও যাচাই দরকার — নতুন তথ্য এসেছে',
+      }),
+    );
+  });
+  it('(k9) a report without target fields is DENIED; with them ALLOWED', async () => {
+    await assertFails(
+      addDoc(collection(asStudent1(), 'reports'), {
+        reporterId: 'student-1',
+        status: 'open',
+        reason: 'spam',
+        details: 'No target named.',
+      }),
+    );
+    await assertSucceeds(
+      addDoc(collection(asStudent1(), 'reports'), {
+        reporterId: 'student-1',
+        status: 'open',
+        reason: 'spam',
+        targetType: 'post',
+        targetId: 'post-1',
+        targetAuthorId: 'student-2',
+        details: 'Spam post.',
+      }),
+    );
+  });
+
+  // (l) Messenger (owner decision 20 Nov 23:25): support messaging is
+  // live in the rules; direct messages stay DENIED until the six
+  // mandatory safeguards exist in code.
+  it('(l1) support thread: own thread + text message ALLOWED; others DENIED; non-text DENIED', async () => {
+    const ref = await addDoc(collection(asStudent1(), 'supportMessages'), {
+      userId: 'student-1',
+      status: 'open',
+    });
+    await assertFails(
+      addDoc(collection(asStudent2(), 'supportMessages'), {
+        userId: 'student-1',
+        status: 'open',
+      }),
+    );
+    await assertSucceeds(
+      addDoc(collection(asStudent1(), 'supportMessages', ref.id, 'messages'), {
+        senderId: 'student-1',
+        kind: 'text',
+        body: 'আমার অ্যাকাউন্টে সমস্যা হচ্ছে।',
+      }),
+    );
+    await assertFails(
+      addDoc(collection(asStudent1(), 'supportMessages', ref.id, 'messages'), {
+        senderId: 'student-1',
+        kind: 'voice',
+        body: 'voice note',
+      }),
+    );
+    await assertFails(getDoc(doc(asStudent2(), 'supportMessages', ref.id)));
+    await assertSucceeds(getDoc(doc(asAdmin(), 'supportMessages', ref.id)));
+  });
+  it('(l2) direct messages: client create is DENIED for everyone until the safeguards land', async () => {
+    await assertFails(
+      addDoc(collection(asStudent1(), 'directMessages'), {
+        participants: ['student-1', 'student-2'],
+        createdAt: new Date(),
+      }),
+    );
+    await assertFails(
+      addDoc(collection(asOwner(), 'directMessages'), {
+        participants: ['owner-1', 'student-1'],
+        createdAt: new Date(),
+      }),
+    );
+  });
+
+  // (m) Health v1 (owner brief 20 Nov 23:51): students read ONLY Published
+  // health content; moderators edit drafts but never publish or verify;
+  // publishing + doctor verification are ADMIN-only, verification needs
+  // the human checklist + a reason, and nobody verifies themself.
+  const medCreate = (over: Record<string, unknown> = {}) => ({
+    title: 'Test Medicine',
+    titleBn: 'পরীক্ষামূলক ঔষধ',
+    useBn: 'পরীক্ষার জন্য।',
+    useEn: 'For testing.',
+    formBn: 'ট্যাবলেট',
+    formEn: 'Tablet',
+    sideEffectsBn: 'কোনো পার্শ্বপ্রতিক্রিয়া জানা নেই।',
+    sideEffectsEn: 'No known side effects.',
+    warningsBn: 'ডাক্তারের পরামর্শ নিন।',
+    warningsEn: 'Ask a doctor.',
+    prescriptionOnly: false,
+    source: 'WHO',
+    reviewStatus: 'Under Review',
+    ...over,
+  });
+  it('(m1) health reads: Published visible to everyone incl. logged-out; drafts hidden from students', async () => {
+    await assertSucceeds(getDoc(doc(asStudent1(), 'medicines', 'med-published')));
+    await assertSucceeds(getDoc(doc(unauth(), 'medicines', 'med-published')));
+    await assertFails(getDoc(doc(asStudent1(), 'medicines', 'med-draft')));
+    await assertFails(getDoc(doc(asStudent1(), 'diseases', 'dis-draft')));
+    await assertSucceeds(getDoc(doc(asStudent1(), 'diseases', 'dis-published')));
+    await assertSucceeds(getDoc(doc(asStudent1(), 'facilities', 'fac-published')));
+    await assertSucceeds(getDoc(doc(asModerator(), 'medicines', 'med-draft')));
+  });
+  it('(m2) medicine create: student DENIED; moderator draft ALLOWED; moderator Published DENIED; dosage field DENIED', async () => {
+    await assertFails(addDoc(collection(asStudent1(), 'medicines'), medCreate()));
+    await assertSucceeds(addDoc(collection(asModerator(), 'medicines'), medCreate()));
+    await assertFails(addDoc(collection(asModerator(), 'medicines'), medCreate({ reviewStatus: 'Published' })));
+    await assertFails(addDoc(collection(asModerator(), 'medicines'), medCreate({ dosage: '500mg' })));
+  });
+  it('(m3) medicine publish: moderator DENIED; admin ALLOWED', async () => {
+    await assertFails(updateDoc(doc(asModerator(), 'medicines', 'med-draft'), { reviewStatus: 'Published' }));
+    await assertSucceeds(updateDoc(doc(asAdmin(), 'medicines', 'med-draft'), { reviewStatus: 'Published' }));
+  });
+  it('(m4) disease + facility create: student DENIED; moderator draft ALLOWED', async () => {
+    await assertFails(
+      addDoc(collection(asStudent1(), 'diseases'), {
+        title: 'Flu', titleBn: 'ফ্লু', symptomsBn: 'জ্বর।', symptomsEn: 'Fever.',
+        preventionBn: 'টিকা নিন।', preventionEn: 'Get vaccinated.',
+        seeDoctorBn: 'শ্বাসকষ্ট হলে ডাক্তার দেখান।', seeDoctorEn: 'See a doctor for breathing difficulty.',
+        source: 'WHO', reviewStatus: 'Under Review',
+      }),
+    );
+    await assertSucceeds(
+      addDoc(collection(asModerator(), 'facilities'), {
+        title: 'Test Clinic', titleBn: 'পরীক্ষামূলক ক্লিনিক', kind: 'clinic',
+        areaBn: 'ঢাকা', areaEn: 'Dhaka', source: 'DGHS Bangladesh', reviewStatus: 'Under Review',
+      }),
+    );
+  });
+  it('(m5) doctor visibility: only verified + Published is readable by students', async () => {
+    await assertSucceeds(getDoc(doc(asStudent1(), 'doctors', 'doc-verified-published')));
+    await assertFails(getDoc(doc(asStudent1(), 'doctors', 'doc-verified-draft')));
+    await assertFails(getDoc(doc(asStudent1(), 'doctors', 'doc-pending')));
+    await assertSucceeds(getDoc(doc(asModerator(), 'doctors', 'doc-pending')));
+  });
+  it('(m6) doctor verification: moderator DENIED; admin with checklist + reason ALLOWED; missing checks DENIED; short reason DENIED; self-verification DENIED', async () => {
+    const decision = (over: Record<string, unknown> = {}) => ({
+      verificationStatus: 'verified',
+      verifiedBy: 'admin-1',
+      verifiedAt: new Date(),
+      reason: 'Identity and qualification checked',
+      checks: { identity: true, qualification: true, adult: true },
+      updatedAt: new Date(),
+      ...over,
+    });
+    await assertFails(updateDoc(doc(asModerator(), 'doctors', 'doc-pending'), decision({ verifiedBy: 'moderator-1' })));
+    await assertSucceeds(updateDoc(doc(asAdmin(), 'doctors', 'doc-pending'), decision()));
+    await assertFails(updateDoc(doc(asAdmin(), 'doctors', 'doc-pending-nochecks'), decision({ checks: { identity: true } })));
+    await assertFails(updateDoc(doc(asAdmin(), 'doctors', 'doc-pending-shortreason'), decision({ reason: 'ok' })));
+    await assertFails(updateDoc(doc(asAdmin(), 'doctors', 'doc-pending-own'), decision()));
+  });
+  it('(m7) doctor create: student DENIED; verificationStatus must start pending', async () => {
+    const docCreate = (over: Record<string, unknown> = {}) => ({
+      title: 'Dr Test', titleBn: 'ডা. পরীক্ষা', qualificationBn: 'এমবিবিএস', qualificationEn: 'MBBS',
+      specialityBn: 'সাধারণ', specialityEn: 'General', workplaceBn: 'ঢাকা', workplaceEn: 'Dhaka',
+      verificationStatus: 'pending', reviewStatus: 'Under Review', ...over,
+    });
+    await assertFails(addDoc(collection(asStudent1(), 'doctors'), docCreate()));
+    await assertFails(addDoc(collection(asModerator(), 'doctors'), docCreate({ verificationStatus: 'verified' })));
+    await assertSucceeds(addDoc(collection(asModerator(), 'doctors'), docCreate()));
+  });
+
+  // (n) Step 3 — bookmarks + per-subject progress: owner-scoped only.
+  it('(n1) bookmark: own create/read/delete ALLOWED; other student read DENIED; spoofed userId DENIED', async () => {
+    const id = 'student-1__lesson-published';
+    await assertSucceeds(
+      setDoc(doc(asStudent1(), 'bookmarks', id), {
+        userId: 'student-1',
+        lessonId: 'lesson-published',
+        bookId: 'book1',
+        title: 'Published lesson',
+      }),
+    );
+    await assertSucceeds(getDoc(doc(asStudent1(), 'bookmarks', id)));
+    await assertFails(getDoc(doc(asStudent2(), 'bookmarks', id)));
+    await assertFails(
+      setDoc(doc(asStudent1(), 'bookmarks', 'student-1__lesson-draft'), {
+        userId: 'student-2',
+        lessonId: 'lesson-draft',
+        bookId: 'book1',
+        title: 'Draft lesson',
+      }),
+    );
+    await assertSucceeds(deleteDoc(doc(asStudent1(), 'bookmarks', id)));
+    await assertFails(deleteDoc(doc(asStudent2(), 'bookmarks', id)));
+  });
+  it('(n2) progress: own create/update ALLOWED; other student read DENIED; userId cannot be moved', async () => {
+    const id = 'student-1__english';
+    await assertSucceeds(
+      setDoc(doc(asStudent1(), 'progress', id), {
+        userId: 'student-1',
+        subject: 'English',
+        lessonsRead: ['lesson-published'],
+        questionsAttempted: 3,
+        questionsCorrect: 2,
+      }),
+    );
+    await assertSucceeds(getDoc(doc(asStudent1(), 'progress', id)));
+    await assertFails(getDoc(doc(asStudent2(), 'progress', id)));
+    await assertSucceeds(
+      updateDoc(doc(asStudent1(), 'progress', id), { questionsAttempted: 4 }),
+    );
+    await assertFails(
+      updateDoc(doc(asStudent1(), 'progress', id), { userId: 'student-2' }),
+    );
+    await assertFails(
+      updateDoc(doc(asStudent2(), 'progress', id), { questionsAttempted: 99 }),
+    );
+  });
+  it('(n3) unauthenticated read of a bookmark or progress doc is DENIED', async () => {
+    await assertFails(getDoc(doc(unauth(), 'bookmarks', 'student-1__lesson-published')));
+    await assertFails(getDoc(doc(unauth(), 'progress', 'student-1__english')));
   });
 });

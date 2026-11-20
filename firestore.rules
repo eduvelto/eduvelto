@@ -24,8 +24,17 @@ service cloud.firestore {
     function callerRole() {
       return get(/databases/$(database)/documents/users/$(uid())).data.role;
     }
+    // Suspension is enforced SERVER-side, not just in the UI (review
+    // 20 Nov 2026: suspension used to hide the app only — a suspended
+    // admin/moderator/teacher kept full Firestore powers via direct
+    // calls). A suspended account is not active: every privileged
+    // helper below, and every content create, requires it.
+    // Missing isActive = active (only an explicit false suspends).
+    function callerActive() {
+      return get(/databases/$(database)/documents/users/$(uid())).data.get('isActive', true) != false;
+    }
     function isAdmin() {
-      return signedIn() && (callerRole() == 'admin' || callerRole() == 'owner');
+      return signedIn() && callerActive() && (callerRole() == 'admin' || callerRole() == 'owner');
     }
     // The Owner is the highest role (spec §3). isAdmin()/isModerator()/
     // isTeacher() already include 'owner' — the owner bypasses every admin
@@ -35,10 +44,10 @@ service cloud.firestore {
       return signedIn() && callerRole() == 'owner';
     }
     function isModerator() {
-      return signedIn() && (callerRole() in ['moderator', 'admin', 'owner']);
+      return signedIn() && callerActive() && (callerRole() in ['moderator', 'admin', 'owner']);
     }
     function isTeacher() {
-      return signedIn() && (callerRole() in ['teacher', 'admin', 'moderator', 'owner']);
+      return signedIn() && callerActive() && (callerRole() in ['teacher', 'admin', 'moderator', 'owner']);
     }
 
     // ---------- validation helpers ----------
@@ -51,8 +60,12 @@ service cloud.firestore {
     // A user reads/writes only their own doc. Role and verificationStatus
     // can NEVER be changed by the owner of the doc — only Admin/Owner.
     // isActive is also admin-only (suspension must not be self-reversible).
+    // READ (review 20 Nov 2026): moderators no longer read every user's
+    // email + education details in bulk — full records are owner/admin
+    // only. Moderator access to user data is re-scoped when moderators
+    // are onboarded (minimal per-case projection, audit-logged).
     match /users/{userId} {
-      allow read: if isOwner(userId) || isModerator();
+      allow read: if isOwner(userId) || isAdmin();
       allow create: if isOwner(userId)
         && request.resource.data.role == 'student'
         && !('verificationStatus' in request.resource.data)
@@ -74,21 +87,54 @@ service cloud.firestore {
       // EXCLUDED here. No admin or moderator can change the owner's role,
       // isActive, email, or downgrade the owner account — only the owner
       // themselves may touch their own doc (owner rule below).
+      // (Review 20 Nov 2026 — B1/S4 fixed:) the admin update has a field
+      // allowlist now: an admin can touch ONLY role / verificationStatus /
+      // isActive / suspendedReason / verifiedBy / verifiedAt / updatedAt.
+      // 'owner' is REMOVED from the assignable role enum — no admin can
+      // create a second owner by direct Firestore call (client code alone
+      // never enforced this). Email, displayName and education fields
+      // cannot be overwritten by an admin. verificationStatus may change
+      // ONLY together with verifiedBy == the caller (the decision path in
+      // admin.ts sets it) — an admin cannot silently verify anyone.
       allow update: if isAdmin()
         && resource.data.role != 'owner'
+        && request.resource.data.diff(resource.data).affectedKeys()
+             .hasOnly(['role', 'verificationStatus', 'isActive', 'suspendedReason',
+                       'verifiedBy', 'verifiedAt', 'updatedAt'])
         && (!('role' in request.resource.data)
-            || request.resource.data.role in ['owner', 'admin', 'moderator', 'teacher', 'student', 'parent'])
+            || request.resource.data.role in ['admin', 'moderator', 'teacher', 'student', 'parent'])
         && (!('verificationStatus' in request.resource.data)
-            || request.resource.data.verificationStatus in ['pending', 'verified', 'rejected', 'revoked']);
-      // The owner updates their own doc without restriction (highest
-      // authority; the self-update rule above still covers the everyday
-      // profile fields for every user, owner included). Enum values are
-      // still validated.
-      allow update: if isOwnerRole() && isOwner(userId)
-        && (!('role' in request.resource.data)
-            || request.resource.data.role in ['owner', 'admin', 'moderator', 'teacher', 'student', 'parent'])
-        && (!('verificationStatus' in request.resource.data)
-            || request.resource.data.verificationStatus in ['pending', 'verified', 'rejected', 'revoked']);
+            || request.resource.data.verificationStatus in ['pending', 'verified', 'rejected', 'revoked'])
+        && (!('isActive' in request.resource.data) || request.resource.data.isActive is bool)
+        && (!('suspendedReason' in request.resource.data)
+            || request.resource.data.suspendedReason is string
+            || request.resource.data.suspendedReason == null)
+        && (!('verificationStatus' in request.resource.data.diff(resource.data).affectedKeys())
+            || request.resource.data.verifiedBy == uid());
+      // The owner updates ANY user's doc (highest authority — this is
+      // what lets the owner rename a user, test (i1)). The owner may
+      // touch profile fields + the admin fields, but may NEVER create a
+      // second owner: role 'owner' is excluded here too. Exactly one
+      // Owner exists; a second owner is created only in the Firebase
+      // console by the owner himself, never by a client rule.
+      allow update: if isOwnerRole()
+        && request.resource.data.diff(resource.data).affectedKeys()
+             .hasOnly(['displayName', 'educationType', 'board', 'institution',
+                       'academicYear', 'program', 'department', 'classLevel',
+                       'language', 'lastActiveAt', 'role', 'verificationStatus',
+                       'isActive', 'suspendedReason', 'verifiedBy', 'verifiedAt',
+                       'updatedAt'])
+        // Role may NEVER be *changed to* 'owner' — but the owner's own doc
+        // already carries role 'owner', and request.resource.data is the
+        // FULL post-update document, so 'role' in request.resource.data is
+        // always true. Only check the enum when role is actually in the
+        // affected keys (i.e. being changed). Same for verificationStatus.
+        && (!('role' in request.resource.data.diff(resource.data).affectedKeys())
+            || request.resource.data.role in ['admin', 'moderator', 'teacher', 'student', 'parent'])
+        && (!('verificationStatus' in request.resource.data.diff(resource.data).affectedKeys())
+            || request.resource.data.verificationStatus in ['pending', 'verified', 'rejected', 'revoked'])
+        && (!('isActive' in request.resource.data) || request.resource.data.isActive is bool)
+        && isOptStr(request.resource.data.displayName, 100);
       allow delete: if false; // accounts are suspended (isActive=false), never deleted by clients
     }
 
@@ -97,7 +143,7 @@ service cloud.firestore {
     // except an Admin delete for support. Readable only by the owner + Admin.
     match /users/{userId}/quizAttempts/{attemptId} {
       allow read: if isOwner(userId) || isAdmin();
-      allow create: if isOwner(userId)
+      allow create: if isOwner(userId) && callerActive()
         && request.resource.data.quizId is string
         && request.resource.data.answers is list
         && request.resource.data.score is number
@@ -109,15 +155,38 @@ service cloud.firestore {
     // ---------- studyPlans / progressSummaries (owner only) ----------
     match /studyPlans/{planId} {
       allow read: if signedIn() && (resource.data.userId == uid() || isAdmin());
-      allow create: if signedIn() && request.resource.data.userId == uid()
+      allow create: if signedIn() && callerActive() && request.resource.data.userId == uid()
         && isStr(request.resource.data.title, 200);
-      allow update, delete: if signedIn() && resource.data.userId == uid();
+      allow update, delete: if signedIn() && callerActive() && resource.data.userId == uid();
     }
     match /progressSummaries/{summaryId} {
       allow read: if signedIn() && (resource.data.userId == uid() || isAdmin());
-      allow create, update: if signedIn() && request.resource.data.userId == uid()
+      allow create, update: if signedIn() && callerActive() && request.resource.data.userId == uid()
         && request.resource.data.attemptsCount is number
         && request.resource.data.averagePercentage is number;
+      allow delete: if isAdmin();
+    }
+
+    // ---------- bookmarks / progress (Step 3) — owner-scoped only ----------
+    // One bookmark = one write; unbookmark = one delete. One progress
+    // document per student per subject (lessons read + practice counts).
+    // userId can never be spoofed: every write must carry the caller's
+    // own uid, and updates may not move the doc to another user.
+    match /bookmarks/{bookmarkId} {
+      allow read: if signedIn() && (resource.data.userId == uid() || isAdmin());
+      allow create: if signedIn() && callerActive() && request.resource.data.userId == uid()
+        && isStr(request.resource.data.lessonId, 200)
+        && isStr(request.resource.data.title, 200);
+      allow update: if signedIn() && callerActive() && resource.data.userId == uid()
+        && request.resource.data.userId == uid();
+      allow delete: if signedIn() && callerActive() && resource.data.userId == uid();
+    }
+    match /progress/{progressId} {
+      allow read: if signedIn() && (resource.data.userId == uid() || isAdmin());
+      allow create: if signedIn() && callerActive() && request.resource.data.userId == uid()
+        && isStr(request.resource.data.subject, 100);
+      allow update: if signedIn() && callerActive() && resource.data.userId == uid()
+        && request.resource.data.userId == uid();
       allow delete: if isAdmin();
     }
 
@@ -128,8 +197,8 @@ service cloud.firestore {
     function contentRead(d) {
       return isPublished(d)
         || isModerator()
-        || (signedIn() && d.get('authorId', '') == uid())
-        || (signedIn() && d.get('createdBy', '') == uid());
+        || (signedIn() && callerActive() && d.get('authorId', '') == uid())
+        || (signedIn() && callerActive() && d.get('createdBy', '') == uid());
     }
     function contentCreate() {
       return isTeacher()
@@ -140,10 +209,10 @@ service cloud.firestore {
       // Moderator/Admin may move any status (publish, correct, remove).
       // An author may edit only their own draft, and may not publish it.
       return isModerator()
-        || (signedIn() && d.get('authorId', '') == uid()
+        || (signedIn() && callerActive() && d.get('authorId', '') == uid()
             && isDraftStatus(d.reviewStatus)
             && isDraftStatus(request.resource.data.reviewStatus))
-        || (signedIn() && d.get('createdBy', '') == uid()
+        || (signedIn() && callerActive() && d.get('createdBy', '') == uid()
             && isDraftStatus(d.reviewStatus)
             && isDraftStatus(request.resource.data.reviewStatus));
     }
@@ -179,19 +248,34 @@ service cloud.firestore {
       allow delete: if isAdmin();
     }
 
+    // ---------- contact form messages ----------
+    // Any signed-in, active user may send a message (their own userId,
+    // bounded fields). Only owner/admin may read messages; the client
+    // can never update or delete one (append-only; admins reply from
+    // the dashboard by creating a new record).
+    match /contactMessages/{messageId} {
+      allow read: if isAdmin();
+      allow create: if signedIn() && callerActive()
+        && request.resource.data.userId == uid()
+        && isStr(request.resource.data.name, 100)
+        && isStr(request.resource.data.message, 5000)
+        && isOptStr(request.resource.data.email, 200);
+      allow update, delete: if false;
+    }
+
     // ---------- community posts / comments / questions / answers ----------
     // Create with reviewStatus forced to "Under Review". Authors edit only
     // their own while still unreviewed. Only Moderator/Admin publish/remove.
     match /posts/{postId} {
       allow read: if isPublished(resource.data) || isModerator()
         || (signedIn() && resource.data.authorId == uid());
-      allow create: if signedIn()
+      allow create: if signedIn() && callerActive()
         && request.resource.data.authorId == uid()
         && request.resource.data.reviewStatus == 'Under Review'
         && isStr(request.resource.data.title, 200)
         && isStr(request.resource.data.body, 5000);
       allow update: if isModerator()
-        || (signedIn() && resource.data.authorId == uid()
+        || (signedIn() && callerActive() && resource.data.authorId == uid()
             && resource.data.reviewStatus == 'Under Review'
             && request.resource.data.reviewStatus == 'Under Review');
       allow delete: if isAdmin();
@@ -199,7 +283,7 @@ service cloud.firestore {
     match /posts/{postId}/comments/{commentId} {
       allow read: if isPublished(resource.data) || isModerator()
         || (signedIn() && resource.data.authorId == uid());
-      allow create: if signedIn()
+      allow create: if signedIn() && callerActive()
         && request.resource.data.authorId == uid()
         && request.resource.data.reviewStatus == 'Under Review'
         && isStr(request.resource.data.body, 1000);
@@ -208,13 +292,13 @@ service cloud.firestore {
     match /questions/{questionId} {
       allow read: if isPublished(resource.data) || isModerator()
         || (signedIn() && resource.data.authorId == uid());
-      allow create: if signedIn()
+      allow create: if signedIn() && callerActive()
         && request.resource.data.authorId == uid()
         && request.resource.data.reviewStatus == 'Under Review'
         && isStr(request.resource.data.title, 200)
         && isStr(request.resource.data.body, 5000);
       allow update: if isModerator()
-        || (signedIn() && resource.data.authorId == uid()
+        || (signedIn() && callerActive() && resource.data.authorId == uid()
             && resource.data.reviewStatus == 'Under Review'
             && request.resource.data.reviewStatus == 'Under Review');
       allow delete: if isAdmin();
@@ -222,44 +306,236 @@ service cloud.firestore {
     match /questions/{questionId}/answers/{answerId} {
       allow read: if isPublished(resource.data) || isModerator()
         || (signedIn() && resource.data.authorId == uid());
-      allow create: if signedIn()
+      allow create: if signedIn() && callerActive()
         && request.resource.data.authorId == uid()
         && request.resource.data.reviewStatus == 'Under Review'
         && isStr(request.resource.data.body, 5000);
       // isAccepted may be set only by the question author or a moderator.
       allow update: if isModerator()
-        || (signedIn() && get(/databases/$(database)/documents/questions/$(questionId)).data.authorId == uid());
+        || (signedIn() && callerActive() && get(/databases/$(database)/documents/questions/$(questionId)).data.authorId == uid());
       allow delete: if isAdmin();
     }
 
     // ---------- reports / moderationQueue ----------
     match /reports/{reportId} {
       allow read: if signedIn() && (resource.data.reporterId == uid() || isModerator());
-      allow create: if signedIn()
+      // (Review 20 Nov 2026 — F16:) a report must name what was reported,
+      // or moderators cannot find the offending content. targetType /
+      // targetId / targetAuthorId are required.
+      allow create: if signedIn() && callerActive()
         && request.resource.data.reporterId == uid()
         && request.resource.data.status == 'open'
         && request.resource.data.reason in ['spam', 'abuse', 'copyright', 'personal-info', 'other']
+        && request.resource.data.targetType in ['post', 'comment', 'socialPost', 'user', 'message']
+        && request.resource.data.targetId is string
+        && request.resource.data.targetAuthorId is string
         && isOptStr(request.resource.data.details, 2000);
       allow update: if isModerator();
       allow delete: if false;
     }
+    // (Review 20 Nov 2026 — F17:) the queue used to be an unvalidated
+    // free-for-all — any moderator could delete a genuine abuse report.
+    // Queue items now have a shape, a status enum, and no delete.
     match /moderationQueue/{itemId} {
-      allow read, write: if isModerator();
+      allow read: if isModerator();
+      allow create: if isModerator()
+        && request.resource.data.reportId is string
+        && request.resource.data.status in ['open', 'reviewing', 'resolved', 'dismissed'];
+      allow update: if isModerator()
+        && request.resource.data.reportId is string
+        && request.resource.data.status in ['open', 'reviewing', 'resolved', 'dismissed'];
+      allow delete: if false;
     }
 
     // ---------- teacherVerifications ----------
     // Applicant creates their own PENDING record only. Status, checkedBy and
-    // checkedAt changeable ONLY by Admin/Moderator after the human check.
+    // checkedAt changeable ONLY by Admin/Owner after the human check.
+    // (Review 20 Nov 2026 — child safety F1–F3, security S1 — hardened:)
+    // - Decisions are ADMIN/OWNER only now (moderators cannot mint
+    //   verified teachers alone; the dashboard is owner-only).
+    // - Only a PENDING record can be decided; a moderator/admin can never
+    //   decide their OWN application (userId != uid).
+    // - Only the decision fields may change (affectedKeys) — userId,
+    //   fullName, institution and createdAt cannot be rewritten.
+    // - A reason (min 10 chars) is REQUIRED for every decision.
+    // - Approving (status 'verified') additionally requires the human
+    //   checklist: checks.identity + checks.institution +
+    //   checks.subject + checks.adult all true (identity checked,
+    //   institution checked, subject/qualification checked, applicant is
+    //   an adult). A one-tap approve of a fake teacher is impossible.
+    // - Re-opening a decided record (back to 'pending') is a separate,
+    //   explicit path with its own reason — decided records cannot be
+    //   silently flipped back and forth.
     match /teacherVerifications/{recordId} {
       allow read: if signedIn() && (resource.data.userId == uid() || isModerator());
-      allow create: if signedIn()
+      allow create: if signedIn() && callerActive()
         && request.resource.data.userId == uid()
         && request.resource.data.status == 'pending'
         && isStr(request.resource.data.fullName, 100)
         && isStr(request.resource.data.institution, 200);
-      allow update: if isModerator()
+      allow update: if isAdmin()
+        && resource.data.status == 'pending'
+        && resource.data.userId != uid()
+        && request.resource.data.diff(resource.data).affectedKeys()
+             .hasOnly(['status', 'checkedBy', 'checkedAt', 'reason', 'checks', 'updatedAt'])
         && request.resource.data.status in ['pending', 'verified', 'rejected', 'revoked']
-        && request.resource.data.checkedBy == uid();
+        && request.resource.data.checkedBy == uid()
+        && request.resource.data.reason is string
+        && request.resource.data.reason.size() >= 10
+        && (request.resource.data.status != 'verified'
+            || (request.resource.data.checks is map
+                && request.resource.data.checks.get('identity', false) == true
+                && request.resource.data.checks.get('institution', false) == true
+                && request.resource.data.checks.get('subject', false) == true
+                && request.resource.data.checks.get('adult', false) == true));
+      allow update: if isAdmin()
+        && resource.data.status == 'verified'
+        && resource.data.userId != uid()
+        && request.resource.data.status == 'revoked'
+        && request.resource.data.diff(resource.data).affectedKeys()
+             .hasOnly(['status', 'checkedBy', 'checkedAt', 'reason', 'updatedAt'])
+        && request.resource.data.checkedBy == uid()
+        && request.resource.data.reason is string
+        && request.resource.data.reason.size() >= 10;
+      allow update: if isAdmin()
+        && resource.data.status in ['verified', 'rejected', 'revoked']
+        && resource.data.userId != uid()
+        && request.resource.data.status == 'pending'
+        && request.resource.data.diff(resource.data).affectedKeys()
+             .hasOnly(['status', 'checkedBy', 'checkedAt', 'reason', 'updatedAt'])
+        && request.resource.data.checkedBy == uid()
+        && request.resource.data.reason is string
+        && request.resource.data.reason.size() >= 10;
+      allow delete: if isAdmin();
+    }
+
+    // ---------- health (Health v1, owner brief 20 Nov 23:51) ----------
+    // Eduvelto Health: medicines, diseases, doctors, hospitals/pharmacies.
+    // Safety (Blueprint v4, binding): the AI Doctor is NOT a doctor; no
+    // diagnosis, no prescribing, no invented dosages. ALL health content
+    // needs qualified professional review before it is Published — so
+    // students read ONLY Published records, and a moderator may edit
+    // drafts only, never publish. Publishing is an ADMIN action (the
+    // dashboard's publish step confirms professional review happened).
+    // A medicine record may NEVER carry a dosage field — the loader and
+    // the rules both refuse it.
+    function healthRead(d) {
+      return isPublished(d) || isModerator();
+    }
+    function healthDraftCreate() {
+      return isModerator() && isDraftStatus(request.resource.data.reviewStatus);
+    }
+    function healthUpdate(d) {
+      // Moderator: edit own drafts only, never publish.
+      // Admin: edit + publish (publish = review-confirmed step).
+      return (isModerator()
+              && isDraftStatus(d.reviewStatus)
+              && isDraftStatus(request.resource.data.reviewStatus))
+        || isAdmin();
+    }
+    function noDosage() { return !('dosage' in request.resource.data); }
+
+    match /medicines/{medicineId} {
+      allow read: if healthRead(resource.data);
+      allow create: if healthDraftCreate() && noDosage()
+        && isStr(request.resource.data.title, 100)
+        && isStr(request.resource.data.titleBn, 100)
+        && isStr(request.resource.data.useBn, 2000)
+        && isStr(request.resource.data.useEn, 2000)
+        && isStr(request.resource.data.formBn, 200)
+        && isStr(request.resource.data.formEn, 200)
+        && isStr(request.resource.data.sideEffectsBn, 2000)
+        && isStr(request.resource.data.sideEffectsEn, 2000)
+        && isStr(request.resource.data.warningsBn, 2000)
+        && isStr(request.resource.data.warningsEn, 2000)
+        && isStr(request.resource.data.source, 200)
+        && request.resource.data.prescriptionOnly is bool;
+      allow update: if healthUpdate(resource.data) && noDosage();
+      allow delete: if isAdmin();
+    }
+    match /diseases/{diseaseId} {
+      allow read: if healthRead(resource.data);
+      allow create: if healthDraftCreate()
+        && isStr(request.resource.data.title, 100)
+        && isStr(request.resource.data.titleBn, 100)
+        && isStr(request.resource.data.symptomsBn, 2000)
+        && isStr(request.resource.data.symptomsEn, 2000)
+        && isStr(request.resource.data.preventionBn, 2000)
+        && isStr(request.resource.data.preventionEn, 2000)
+        && isStr(request.resource.data.seeDoctorBn, 2000)
+        && isStr(request.resource.data.seeDoctorEn, 2000)
+        && isStr(request.resource.data.source, 200);
+      allow update: if healthUpdate(resource.data);
+      allow delete: if isAdmin();
+    }
+    match /facilities/{facilityId} {
+      allow read: if healthRead(resource.data);
+      allow create: if healthDraftCreate()
+        && isStr(request.resource.data.title, 200)
+        && isStr(request.resource.data.titleBn, 200)
+        && request.resource.data.kind in ['hospital', 'clinic', 'pharmacy']
+        && isStr(request.resource.data.areaBn, 100)
+        && isStr(request.resource.data.areaEn, 100)
+        && isStr(request.resource.data.source, 200);
+      allow update: if healthUpdate(resource.data);
+      allow delete: if isAdmin();
+    }
+    // Doctors: a doctor is visible to students ONLY when BOTH
+    // verificationStatus == 'verified' AND reviewStatus == 'Published'.
+    // Verification is a human check, ADMIN-only, mirroring
+    // teacherVerifications: only a PENDING record can be decided, never
+    // the verifier's own application (userId != uid), a reason (>= 10
+    // chars) is required, and 'verified' additionally requires the
+    // checklist identity + qualification + adult all true. Moderators
+    // may edit pending drafts but may never verify or publish.
+    match /doctors/{doctorId} {
+      allow read: if (isPublished(resource.data)
+              && resource.data.verificationStatus == 'verified')
+        || isModerator();
+      allow create: if healthDraftCreate()
+        && request.resource.data.verificationStatus == 'pending'
+        && isStr(request.resource.data.title, 100)
+        && isStr(request.resource.data.titleBn, 100)
+        && isStr(request.resource.data.qualificationBn, 500)
+        && isStr(request.resource.data.qualificationEn, 500)
+        && isStr(request.resource.data.specialityBn, 200)
+        && isStr(request.resource.data.specialityEn, 200)
+        && isStr(request.resource.data.workplaceBn, 200)
+        && isStr(request.resource.data.workplaceEn, 200);
+      // Moderator draft edit: pending + stays pending, stays a draft.
+      allow update: if isModerator()
+        && resource.data.verificationStatus == 'pending'
+        && request.resource.data.verificationStatus == 'pending'
+        && isDraftStatus(resource.data.reviewStatus)
+        && isDraftStatus(request.resource.data.reviewStatus);
+      // Admin verification decision (pending -> verified / rejected).
+      allow update: if isAdmin()
+        && resource.data.verificationStatus == 'pending'
+        && resource.data.get('userId', '') != uid()
+        && request.resource.data.diff(resource.data).affectedKeys()
+             .hasOnly(['verificationStatus', 'verifiedBy', 'verifiedAt', 'reason', 'checks', 'updatedAt'])
+        && request.resource.data.verificationStatus in ['verified', 'rejected']
+        && request.resource.data.verifiedBy == uid()
+        && request.resource.data.reason is string
+        && request.resource.data.reason.size() >= 10
+        && (request.resource.data.verificationStatus != 'verified'
+            || (request.resource.data.checks is map
+                && request.resource.data.checks.get('identity', false) == true
+                && request.resource.data.checks.get('qualification', false) == true
+                && request.resource.data.checks.get('adult', false) == true));
+      // Admin revoke (verified -> revoked) with a reason.
+      allow update: if isAdmin()
+        && resource.data.verificationStatus == 'verified'
+        && resource.data.get('userId', '') != uid()
+        && request.resource.data.verificationStatus == 'revoked'
+        && request.resource.data.diff(resource.data).affectedKeys()
+             .hasOnly(['verificationStatus', 'verifiedBy', 'verifiedAt', 'reason', 'updatedAt'])
+        && request.resource.data.verifiedBy == uid()
+        && request.resource.data.reason is string
+        && request.resource.data.reason.size() >= 10;
+      // Admin general edit + publish (verification untouched here).
+      allow update: if isAdmin()
+        && !('verificationStatus' in request.resource.data.diff(resource.data).affectedKeys());
       allow delete: if isAdmin();
     }
 
@@ -277,7 +553,7 @@ service cloud.firestore {
     match /friendships/{pairId} {
       allow read: if signedIn()
         && (resource.data.userA == uid() || resource.data.userB == uid() || isModerator());
-      allow create: if signedIn()
+      allow create: if signedIn() && callerActive()
         && (request.resource.data.userA == uid() || request.resource.data.userB == uid())
         && request.resource.data.status == 'pending'
         && request.resource.data.guardianApproved == false;
@@ -285,33 +561,33 @@ service cloud.firestore {
       // may accept, and nobody may set guardianApproved themselves —
       // that field may only become true via a Moderator/Admin update.
       allow update: if isModerator()
-        || (signedIn() && resource.data.userB == uid()
+        || (signedIn() && callerActive() && resource.data.userB == uid()
             && request.resource.data.status in ['accepted', 'declined', 'blocked']
             && request.resource.data.guardianApproved == resource.data.guardianApproved);
       allow delete: if false;
     }
     match /follows/{followId} {
       allow read: if signedIn() && resource.data.followerId == uid();
-      allow create: if signedIn() && request.resource.data.followerId == uid();
+      allow create: if signedIn() && callerActive() && request.resource.data.followerId == uid();
       allow delete: if signedIn() && resource.data.followerId == uid();
       allow update: if false;
     }
     match /socialPosts/{postId} {
       allow read: if isPublished(resource.data) || isModerator()
         || (signedIn() && resource.data.authorId == uid());
-      allow create: if signedIn()
+      allow create: if signedIn() && callerActive()
         && request.resource.data.authorId == uid()
         && request.resource.data.reviewStatus == 'Under Review'
         && isStr(request.resource.data.body, 1000);
       allow update: if isModerator()
-        || (signedIn() && resource.data.authorId == uid()
+        || (signedIn() && callerActive() && resource.data.authorId == uid()
             && resource.data.reviewStatus == 'Under Review'
             && request.resource.data.reviewStatus == 'Under Review');
       allow delete: if isAdmin();
     }
     match /socialPosts/{postId}/comments/{commentId} {
       allow read: if isPublished(resource.data) || isModerator();
-      allow create: if signedIn()
+      allow create: if signedIn() && callerActive()
         && request.resource.data.authorId == uid()
         && request.resource.data.reviewStatus == 'Under Review'
         && isStr(request.resource.data.body, 500);
@@ -319,14 +595,14 @@ service cloud.firestore {
     }
     match /studyGroups/{groupId} {
       allow read: if isPublished(resource.data) || isModerator();
-      allow create: if signedIn() && request.resource.data.reviewStatus == 'Under Review'
+      allow create: if signedIn() && callerActive() && request.resource.data.reviewStatus == 'Under Review'
         && isStr(request.resource.data.name, 100) && isStr(request.resource.data.description, 500);
       allow update: if isModerator();
       allow delete: if isAdmin();
     }
     match /groupMemberships/{membershipId} {
       allow read: if signedIn() && (resource.data.userId == uid() || isModerator());
-      allow create: if signedIn() && request.resource.data.userId == uid()
+      allow create: if signedIn() && callerActive() && request.resource.data.userId == uid()
         && request.resource.data.status == 'pending';
       allow update: if isModerator();
       allow delete: if isAdmin();
@@ -354,7 +630,7 @@ service cloud.firestore {
     }
     match /users/{userId}/gameAttempts/{attemptId} {
       allow read: if isOwner(userId) || isAdmin();
-      allow create: if isOwner(userId) && request.resource.data.gameId is string
+      allow create: if isOwner(userId) && callerActive() && request.resource.data.gameId is string
         && request.resource.data.score is number;
       allow update, delete: if false;
     }
@@ -366,7 +642,7 @@ service cloud.firestore {
     }
     match /competitions/{competitionId}/entries/{userId} {
       allow read: if isOwner(userId) || isModerator();
-      allow create: if isOwner(userId) && request.resource.data.score is number;
+      allow create: if isOwner(userId) && callerActive() && request.resource.data.score is number;
       allow update, delete: if false;
     }
     match /leaderboardSnapshots/{snapshotId} {
@@ -388,7 +664,7 @@ service cloud.firestore {
     }
     match /users/{userId}/userAchievements/{key} {
       allow read: if isOwner(userId) || isAdmin();
-      allow create: if isOwner(userId);
+      allow create: if isOwner(userId) && callerActive();
       allow update, delete: if false;
     }
     match /certificates/{certId} {
@@ -397,7 +673,7 @@ service cloud.firestore {
     }
     match /users/{userId}/passportEntries/{entryId} {
       allow read: if isOwner(userId) || isAdmin();
-      allow create: if isOwner(userId);
+      allow create: if isOwner(userId) && callerActive();
       allow update, delete: if false;
     }
 
@@ -419,7 +695,7 @@ service cloud.firestore {
     match /parentLinks/{linkId} {
       allow read: if signedIn()
         && (resource.data.parentId == uid() || resource.data.studentId == uid() || isAdmin());
-      allow create: if signedIn() && request.resource.data.status == 'pending';
+      allow create: if signedIn() && callerActive() && request.resource.data.status == 'pending';
       // Only Admin activates a link after the consent record is complete.
       allow update: if isAdmin()
         || (signedIn() && (resource.data.parentId == uid() || resource.data.studentId == uid())
@@ -428,7 +704,7 @@ service cloud.firestore {
     }
     match /parentInvites/{inviteId} {
       allow read: if signedIn() && (resource.data.studentId == uid() || isAdmin());
-      allow create: if signedIn() && request.resource.data.studentId == uid()
+      allow create: if signedIn() && callerActive() && request.resource.data.studentId == uid()
         && request.resource.data.status == 'sent';
       allow update: if isAdmin();
       allow delete: if isAdmin();
@@ -441,7 +717,7 @@ service cloud.firestore {
     }
     match /giftRedemptions/{redemptionId} {
       allow read: if signedIn() && (resource.data.userId == uid() || isAdmin());
-      allow create: if signedIn() && request.resource.data.userId == uid()
+      allow create: if signedIn() && callerActive() && request.resource.data.userId == uid()
         && request.resource.data.status == 'requested';
       allow update: if isAdmin();
       allow delete: if false;
@@ -454,12 +730,148 @@ service cloud.firestore {
     // Admins/Owners record their own actions (actorId must be their own
     // uid). Readable by the owner ONLY. Entries are never updated or
     // deleted by anyone — the log is append-only.
+    // (Review 20 Nov 2026 — security S3:) the action is now a fixed enum
+    // (no forged "action" strings), only the known fields may be present,
+    // and createdAt must be a real timestamp (no backdating). The client
+    // writes the action + its audit entry in ONE batch (admin.ts), so an
+    // action cannot happen with no audit trail.
     match /adminActions/{actionId} {
       allow create: if isAdmin()
         && request.resource.data.actorId == uid()
-        && request.resource.data.action is string;
+        && request.resource.data.action in [
+             'user-suspend', 'user-reactivate', 'user-role-change',
+             'teacher-verification-approved', 'teacher-verification-rejected',
+             'teacher-verification-revoked', 'teacher-verification-reopened',
+             'feature-enabled', 'feature-disabled',
+             'backup-exported',
+             'user-profile-viewed', 'user-messages-viewed',
+             'support-message-sent', 'message-reported', 'message-blocked']
+        && request.resource.data.keys().hasOnly(
+             ['actorId', 'action', 'details', 'targetId', 'before', 'after', 'reason', 'createdAt'])
+        && request.resource.data.createdAt is timestamp;
       allow read: if isOwnerRole();
       allow update, delete: if false;
+    }
+
+    // ---------- settings (dashboard-controlled toggles) ----------
+    // (Review 20 Nov 2026 — security B4, cost F9, child safety F13:)
+    // there was NO settings rule at all, so every feature toggle failed
+    // with permission-denied. The dashboard could not work.
+    // - settings/features: read by any signed-in user (plain booleans —
+    //   NEVER put secrets, API keys or AdSense IDs in this doc); write by
+    //   the OWNER ONLY, field allowlist = the 11 known flags + updatedAt,
+    //   every flag value must be a boolean. Category C flags
+    //   (live-classes, video-ads, paid-subscriptions) are additionally
+    //   hard-blocked in admin.ts — the code refuses them, so even the
+    //   owner cannot flip one by accident from the dashboard; enabling
+    //   one needs a separate, explicitly-approved owner decision.
+    // - settings/ads: the future home of the ad placement toggles
+    //   (today they are localStorage-only — see lib/ads.ts). The
+    //   bottom-banner is DELIBERATELY absent from this allowlist: the
+    //   persistent banner can never be turned off (owner brief
+    //   20 Nov 21:52), so there is no field for it to be stored in.
+    match /settings/features {
+      allow read: if signedIn();
+      allow create: if isOwnerRole()
+        && request.resource.data.keys().toSet().hasOnly(
+             ['ai-teacher', 'video-uploads', 'comments', 'social', 'games',
+              'health', 'career', 'offline-downloads', 'live-classes',
+              'video-ads', 'paid-subscriptions', 'updatedAt'])
+        && request.resource.data.get('ai-teacher', false) is bool
+        && request.resource.data.get('video-uploads', false) is bool
+        && request.resource.data.get('comments', false) is bool
+        && request.resource.data.get('social', false) is bool
+        && request.resource.data.get('games', false) is bool
+        && request.resource.data.get('health', false) is bool
+        && request.resource.data.get('career', false) is bool
+        && request.resource.data.get('offline-downloads', false) is bool
+        && request.resource.data.get('live-classes', false) is bool
+        && request.resource.data.get('video-ads', false) is bool
+        && request.resource.data.get('paid-subscriptions', false) is bool
+        && request.resource.data.updatedAt is timestamp;
+      allow update: if isOwnerRole()
+        && request.resource.data.diff(resource.data).affectedKeys()
+             .hasOnly(['ai-teacher', 'video-uploads', 'comments', 'social', 'games',
+                       'health', 'career', 'offline-downloads', 'live-classes',
+                       'video-ads', 'paid-subscriptions', 'updatedAt'])
+        && request.resource.data.get('ai-teacher', false) is bool
+        && request.resource.data.get('video-uploads', false) is bool
+        && request.resource.data.get('comments', false) is bool
+        && request.resource.data.get('social', false) is bool
+        && request.resource.data.get('games', false) is bool
+        && request.resource.data.get('health', false) is bool
+        && request.resource.data.get('career', false) is bool
+        && request.resource.data.get('offline-downloads', false) is bool
+        && request.resource.data.get('live-classes', false) is bool
+        && request.resource.data.get('video-ads', false) is bool
+        && request.resource.data.get('paid-subscriptions', false) is bool;
+      allow delete: if false;
+    }
+    match /settings/ads {
+      allow read: if signedIn();
+      allow create, update: if isOwnerRole()
+        && request.resource.data.keys().toSet().hasOnly(['in-feed', 'in-feed-2', 'updatedAt'])
+        && request.resource.data.get('in-feed', true) is bool
+        && request.resource.data.get('in-feed-2', true) is bool;
+      allow delete: if false;
+    }
+
+    // ---------- messenger (owner decision 20 Nov 23:25 — private messaging
+    // IS in the product, staged, with mandatory safeguards) ----------
+    // Phase 1a — support messaging (owner/admin <-> any user): a user
+    // opens their own support thread; owner/admin read and reply.
+    // Messages are TEXT ONLY in Phase 1 (kind == 'text' — no voice/video
+    // calls). Every message is logged; the owner can view any thread
+    // (audit-logged from the dashboard). The rules below are LIVE.
+    match /supportMessages/{threadId} {
+      allow read: if signedIn() && (resource.data.userId == uid() || isAdmin());
+      allow create: if signedIn() && callerActive()
+        && request.resource.data.userId == uid()
+        && request.resource.data.status in ['open', 'closed'];
+      allow update: if isAdmin()
+        && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['status', 'updatedAt'])
+        && request.resource.data.status in ['open', 'closed'];
+      allow delete: if false;
+    }
+    match /supportMessages/{threadId}/messages/{messageId} {
+      allow read: if signedIn()
+        && (get(/databases/$(database)/documents/supportMessages/$(threadId)).data.userId == uid() || isAdmin());
+      allow create: if signedIn() && callerActive()
+        && request.resource.data.senderId == uid()
+        && request.resource.data.kind == 'text'
+        && isStr(request.resource.data.body, 2000);
+      allow update, delete: if false;
+    }
+    // Phase 1b — direct messages (student <-> student, teacher <->
+    // student): RULES SCAFFOLD ONLY — client writes are DENIED until the
+    // six mandatory safeguards from the 23:25 decision exist in code, AND
+    // the privacy + messaging design proposal is explicitly approved by
+    // the owner. PRIVACY BRIEF 21 Nov 00:17 (binding, supersedes the
+    // 23:25 access model): NO routine access to private message content
+    // for ANYONE — not the owner, not admins, not moderators, not
+    // teachers, not guardians. Guardians must NOT read their children's
+    // private messages; teachers must NOT read students' private
+    // messages. That is why the read rule below is participants ONLY —
+    // isAdmin() was deliberately REMOVED: no routine admin/owner read of
+    // private DM content is possible, even at the rules level.
+    // Exceptional access is allowed ONLY for a serious safety incident,
+    // via a clearly documented, auditable process with Owner approval,
+    // time-boxed, scoped, read-only, every read logged — never hidden or
+    // unrestricted. No inbox-viewing feature is built until the design is
+    // approved. Until the safeguards + approval land, DMs stay OFF and
+    // this match proves it in the emulator tests.
+    // The 23:25 decision SUPERSEDES the 13:19 "moderated groups only"
+    // decision (DMs exist); the 00:17 brief supersedes the 23:25 ACCESS
+    // model (nobody routinely reads them). Blueprint v4 §2.1 + the Phase
+    // 2 plan social section must be updated to match both.
+    match /directMessages/{threadId} {
+      allow read: if signedIn() && uid() in resource.data.get('participants', []);
+      allow create, update, delete: if false;
+    }
+    match /directMessages/{threadId}/messages/{messageId} {
+      allow read: if signedIn()
+        && uid() in get(/databases/$(database)/documents/directMessages/$(threadId)).data.get('participants', []);
+      allow create, update, delete: if false;
     }
 
     // ---------- everything else: denied ----------

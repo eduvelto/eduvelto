@@ -51,6 +51,8 @@ export interface UserProfile {
   lastActiveAt?: Timestamp | null;
   /** Absent = active. Only an explicit `false` (set by Admin) suspends. */
   isActive?: boolean;
+  /** Reason for suspension, shown to the user on the suspended screen. Admin-set only. */
+  suspendedReason?: string;
   /** Admin-set only; the client never writes this field. */
   verificationStatus?: string;
 }

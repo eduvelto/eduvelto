@@ -15,9 +15,12 @@ export const strings = {
     routine: { bn: 'রুটিন', en: 'Study Routine' },
     progress: { bn: 'অগ্রগতি', en: 'Progress' },
     social: { bn: 'সোশ্যাল', en: 'Social' },
+    health: { bn: 'স্বাস্থ্য', en: 'Health' },
+    about: { bn: 'আমাদের সম্পর্কে', en: 'About' },
+    contact: { bn: 'যোগাযোগ', en: 'Contact' },
     aiTeacher: { bn: 'এডুভেল্টো এআই শিক্ষক', en: 'Eduvelto AI Teacher' },
     profile: { bn: 'প্রোফাইল', en: 'Profile' },
-    admin: { bn: 'অ্যাডমিন', en: 'Admin' },
+  admin: { bn: 'অ্যাডমিন', en: 'Admin' },
     login: { bn: 'লগইন', en: 'Log in' },
     register: { bn: 'রেজিস্টার', en: 'Register' },
     logout: { bn: 'লগআউট', en: 'Log out' },
@@ -61,14 +64,14 @@ export const strings = {
     role: { bn: 'ভূমিকা', en: 'Role' },
     email: { bn: 'ইমেইল', en: 'Email' },
     language: { bn: 'ভাষা', en: 'Language' },
-    educationType: { bn: 'ধারা', en: 'Stream' },
+    educationType: { bn: 'শিক্ষার ধারা', en: 'Stream' },
     board: { bn: 'বোর্ড', en: 'Board' },
     institution: { bn: 'প্রতিষ্ঠান', en: 'Institution' },
     academicYear: { bn: 'শিক্ষাবর্ষ', en: 'Academic year' },
     program: { bn: 'প্রোগ্রাম', en: 'Program' },
     department: { bn: 'বিভাগ', en: 'Department' },
     classLevel: { bn: 'শ্রেণি / লেভেল', en: 'Class / level' },
-    memberSince: { bn: 'সদস্য যেদিন থেকে', en: 'Member since' },
+    memberSince: { bn: 'সদস্য হওয়ার তারিখ', en: 'Member since' },
     suspendedTitle: { bn: 'অ্যাকাউন্টটি স্থগিত আছে', en: 'This account is suspended' },
     suspendedBody: {
       bn: 'অ্যাডমিন আপনার অ্যাকাউন্টটি স্থগিত করেছেন। লগইন কাজ করলেও অ্যাপ ব্যবহার করা যাবে না। সাহায্যের জন্য অ্যাডমিনের সঙ্গে যোগাযোগ করুন।',
@@ -115,6 +118,116 @@ export const strings = {
       bn: 'সোশ্যাল ফিচার শুধুমাত্র ডিজাইন প্রস্তাব। প্রাইভেট মেসেজিং, গ্রুপ চ্যাট ও ভয়েস মেসেজ তৈরি করা হবে না — নিরাপত্তা ও মডারেশন প্রস্তুত না হওয়া পর্যন্ত।',
       en: 'Social features are a design proposal only. No private messaging, group chat or voice messages will be built until safety and moderation are ready.',
     },
+  },
+  health: {
+    title: { bn: 'স্বাস্থ্য', en: 'Health' },
+    hubIntro: {
+      bn: 'স্বাস্থ্য বিষয়ক সাধারণ তথ্য — ঔষধ, রোগ, ডাক্তার, হাসপাতাল ও রিপোর্ট বোঝার সহায়তা।',
+      en: 'General health information — medicines, diseases, doctors, hospitals and help understanding reports.',
+    },
+    // Binding disclaimer (Blueprint v4): on EVERY health page.
+    disclaimer: {
+      bn: 'এই তথ্য শুধুমাত্র শিক্ষামূলক — এটি চিকিৎসা পরামর্শ নয়। যেকোনো স্বাস্থ্য সিদ্ধান্তের আগে একজন যোগ্য ডাক্তারের পরামর্শ নিন।',
+      en: 'This information is educational only, not medical advice — consult a qualified doctor before any health decision.',
+    },
+    // Owner order 20 Nov 23:58 — exact wording, shown directly UNDER every
+    // health content block (medicine info, disease info, report
+    // explanations, AI Doctor answers), not only in a footer or a
+    // separate disclaimer page.
+    accuracyNote: {
+      bn: 'এই তথ্য ১০০% সঠিক নাও হতে পারে, আমার ভুল হতে পারে — তাই যাচাই করে নিন',
+      en: 'This information may not be 100% correct — I could be wrong, so please verify it',
+    },
+    emergency: {
+      bn: 'জরুরি অবস্থা মনে হলে এখনই ডাক্তারের কাছে যান বা হাসপাতালে যান — অপেক্ষা করবেন না। জরুরি নম্বর: ৯৯৯।',
+      en: 'If you think it is an emergency, see a doctor or go to a hospital immediately — do not wait. Emergency number: 999.',
+    },
+    medicinesTitle: { bn: 'ঔষধ নির্দেশিকা', en: 'Medicine Directory' },
+    medicinesIntro: {
+      bn: 'সাধারণ ঔষধের ব্যবহার, ধরন, পার্শ্বপ্রতিক্রিয়া ও সতর্কতা — শুধুমাত্র যাচাইকৃত উৎস থেকে। এখানে কোনো ডোজ দেওয়া হয় না; ডোজ শুধুমাত্র ডাক্তারের পরামর্শ অনুযায়ী।',
+      en: 'Uses, forms, common side effects and warnings for common medicines — from verified sources only. No dosage is given here; dosage is only as a qualified doctor prescribes.',
+    },
+    diseasesTitle: { bn: 'রোগের তথ্য', en: 'Disease Library' },
+    diseasesIntro: {
+      bn: 'সাধারণ রোগের লক্ষণ, প্রতিরোধ ও কখন ডাক্তার দেখাবেন — সাধারণ তথ্য, রোগ নির্ণয় নয়।',
+      en: 'Symptoms, prevention and when to see a doctor for common diseases — general information, not a diagnosis.',
+    },
+    doctorsTitle: { bn: 'ডাক্তার নির্দেশিকা', en: 'Doctor Directory' },
+    doctorsIntro: {
+      bn: 'শুধুমাত্র যাচাইকৃত ডাক্তারদের তালিকা। যাচাই ছাড়া কেউ "ভেরিফায়েড" হিসেবে দেখানো হয় না।',
+      en: 'Only verified doctors are listed. Nobody is shown as "verified" without proof.',
+    },
+    doctorsEmpty: {
+      bn: 'এখনো কোনো যাচাইকৃত ডাক্তার তালিকাভুক্ত হয়নি। ডাক্তার যাচাই হলে এখানে দেখা যাবে।',
+      en: 'No verified doctor is listed yet. Verified doctors will appear here once checked.',
+    },
+    doctorsApply: {
+      bn: 'ডাক্তার হিসেবে তালিকাভুক্ত হতে চাইলে: আপনার পরিচয় ও যোগ্যতার প্রমাণসহ সাপোর্টে যোগাযোগ করুন। মানুষের মাধ্যমে যাচাইয়ের পরেই "ভেরিফায়েড" ব্যাজ দেওয়া হয়।',
+      en: 'To be listed as a doctor: contact support with proof of your identity and qualifications. The "verified" badge is given only after a human check.',
+    },
+    hospitalsTitle: { bn: 'হাসপাতাল ও ফার্মেসি', en: 'Hospitals & Pharmacies' },
+    hospitalsIntro: {
+      bn: 'এলাকা অনুযায়ী হাসপাতাল, ক্লিনিক ও ফার্মেসি খুঁজুন। তালিকাটি এখনো ছোট — যাচাই করে বাড়ানো হচ্ছে।',
+      en: 'Find hospitals, clinics and pharmacies by area. The list is still small — it is growing as entries are verified.',
+    },
+    reportTitle: { bn: 'রিপোর্ট বোঝার সহায়তা', en: 'Understanding Your Report' },
+    reportIntro: {
+      bn: 'আপনার রিপোর্টের মানগুলো সহজ ভাষায় বোঝানো হয় — এটি রোগ নির্ণয় নয়। রিপোর্টের নিজের রেফারেন্স রেঞ্জই আসল; এখানে দেওয়া রেঞ্জ শুধুমাত্র সাধারণ ধারণা।',
+      en: 'Your report values explained in simple language — this is not a diagnosis. Your own report’s reference range is what matters; the ranges here are only a general guide.',
+    },
+    reportPickTest: { bn: 'পরীক্ষা বেছে নিন', en: 'Choose a test' },
+    reportEnterValue: { bn: 'আপনার মানটি লিখুন', en: 'Enter your value' },
+    reportExplain: { bn: 'বুঝিয়ে দিন', en: 'Explain it' },
+    reportNoStorage: {
+      bn: 'আপনার লেখা মান কোথাও সংরক্ষণ করা হয় না — এটি শুধু আপনার ডিভাইসেই দেখা যায়।',
+      en: 'The value you enter is not stored anywhere — it is only shown on your device.',
+    },
+    reportAskDoctor: {
+      bn: 'ফলাফল নিয়ে প্রশ্ন থাকলে আপনার ডাক্তারকে জিজ্ঞাসা করুন — তিনিই আপনার পুরো ইতিহাস জানেন।',
+      en: 'If you have questions about a result, ask your doctor — they know your full history.',
+    },
+    searchPlaceholder: { bn: 'নাম লিখে খুঁজুন…', en: 'Type a name to search…' },
+    areaPlaceholder: { bn: 'এলাকা লিখুন (যেমন: কক্সবাজার)…', en: 'Type an area (e.g. Cox’s Bazar)…' },
+    use: { bn: 'ব্যবহার', en: 'Use' },
+    form: { bn: 'ধরন', en: 'Form' },
+    sideEffects: { bn: 'সাধারণ পার্শ্বপ্রতিক্রিয়া', en: 'Common side effects' },
+    warnings: { bn: 'সতর্কতা', en: 'Warnings' },
+    source: { bn: 'উৎস', en: 'Source' },
+    symptoms: { bn: 'লক্ষণ', en: 'Symptoms' },
+    prevention: { bn: 'প্রতিরোধ', en: 'Prevention' },
+    seeDoctorWhen: { bn: 'কখন ডাক্তার দেখাবেন', en: 'When to see a doctor' },
+    verified: { bn: 'ভেরিফায়েড', en: 'Verified' },
+    hospital: { bn: 'হাসপাতাল', en: 'Hospital' },
+    clinic: { bn: 'ক্লিনিক', en: 'Clinic' },
+    pharmacy: { bn: 'ফার্মেসি', en: 'Pharmacy' },
+    reportPaste: { bn: 'রিপোর্টের লেখা বসান', en: 'Paste your report text' },
+    reportPastePlaceholder: { bn: 'রিপোর্টের লেখা এখানে বসান — যেমন পরীক্ষার নাম ও মান…', en: 'Paste your report text here — e.g. test names and values…' },
+    reportNoMatch: { bn: 'এই লেখায় চেনা কোনো পরীক্ষার নাম পাওয়া যায়নি — উপরের তালিকা থেকে পরীক্ষা বেছে নিন।', en: 'No known test name was found in this text — choose a test from the list above.' },
+    reportAllTests: { bn: 'সব পরীক্ষার সাধারণ ব্যাখ্যা', en: 'General explanations for all tests' },
+    reportSource: {
+      bn: 'সাধারণ রেঞ্জগুলো মানসম্মত ল্যাবরেটরি রেফারেন্স রেঞ্জ অনুযায়ী দেওয়া — আপনার রিপোর্টের নিজের রেঞ্জই আসল।',
+      en: 'General ranges follow standard laboratory reference ranges — your own report’s range is what matters.',
+    },
+    inRange: { bn: 'আপনার মান সাধারণ রেঞ্জের ভেতরে আছে।', en: 'Your value is within the general range.' },
+    underReview: {
+      bn: 'এই তথ্যটি এখনো যাচাইয়ের অপেক্ষায় আছে — যোগ্য পেশাদারের পর্যালোচনার পরেই প্রকাশ করা হবে।',
+      en: 'This information is still awaiting review — it will be published only after a qualified professional reviews it.',
+    },
+    whatItMeasures: { bn: 'এই পরীক্ষা কী মাপে', en: 'What this test measures' },
+    generalRange: { bn: 'সাধারণ রেফারেন্স রেঞ্জ', en: 'General reference range' },
+    yourValue: { bn: 'আপনার মান', en: 'Your value' },
+    whatItMayMean: { bn: 'এর সাধারণ অর্থ কী হতে পারে', en: 'What it may generally mean' },
+    noDiagnosis: {
+      bn: 'এটি রোগ নির্ণয় নয় — একটি মাত্র মান দিয়ে রোগ বলা যায় না।',
+      en: 'This is not a diagnosis — one value alone cannot diagnose a disease.',
+    },
+  },
+  admin: {
+    accessDenied: {
+      bn: 'আপনার এই পাতায় যাওয়ার অনুমতি নেই। এই ড্যাশবোর্ড শুধু মালিকের জন্য।',
+      en: 'You do not have permission to view this page. This dashboard is for the owner only.',
+    },
+    homeTitle: { bn: 'অ্যাডমিন ড্যাশবোর্ড', en: 'Admin dashboard' },
   },
 } as const;
 

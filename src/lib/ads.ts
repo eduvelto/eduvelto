@@ -16,9 +16,13 @@
 //   owner's explicit approval.
 // - Video ads and creator monetisation stay OFF — general advertising and
 //   video monetisation are two separate systems.
-// - Placement toggles are stored in this browser's localStorage for now.
-//   Do NOT move them to Firestore without a rules change approved for that
-//   purpose (no new collection, no rules change in this track).
+// - Placement toggles for the in-feed slots are stored in this
+//   browser's localStorage for now. A Firestore home for them now
+//   exists (settings/ads — see firestore.rules); the move happens
+//   with the dashboard work, and the toggles must be labelled
+//   "this browser only" until then. The bottom banner is NEVER a
+//   toggle: it is mandatory (owner brief 20 Nov 21:52) and
+//   adsEnabled('bottom-banner') below ignores any toggle value.
 //
 // SUPERSESSION (owner brief 20 Nov 21:52, MANDATORY — persistent bottom
 // banner): the bottom banner is now required on ALL eligible pages,
@@ -172,12 +176,18 @@ function readToggles(): PlacementToggles {
   }
 }
 
-/** Admin toggle for a placement. Default ON: a placement is ready the moment its IDs are configured (it still renders nothing until then — see adsEnabled). */
+/** Admin toggle for a placement. Default ON: a placement is ready the moment its IDs are configured (it still renders nothing until then — see adsEnabled).
+ *  The bottom banner has NO toggle (owner brief 20 Nov 21:52 — mandatory):
+ *  it is always enabled, and setPlacementEnabled() ignores it. */
 export function getPlacementEnabled(placement: AdPlacement): boolean {
+  if (placement === 'bottom-banner') return true;
   return readToggles()[placement] ?? true;
 }
 
 export function setPlacementEnabled(placement: AdPlacement, enabled: boolean): void {
+  // The mandatory bottom banner cannot be turned off — not even by an
+  // admin tap (review 20 Nov 2026, ads B1: the one-click off-switch).
+  if (placement === 'bottom-banner') return;
   if (typeof localStorage === 'undefined') return;
   const toggles = readToggles();
   toggles[placement] = enabled;
@@ -196,10 +206,15 @@ export type AdPlacementStatus = 'not-configured' | 'ready' | 'active';
 
 export function placementStatus(placement: AdPlacement): AdPlacementStatus {
   if (!isPlacementConfigured(placement)) return 'not-configured';
+  // The bottom banner is never "ready" (off-but-configured): once its
+  // IDs exist it is live — there is no off state for it.
+  if (placement === 'bottom-banner') return 'active';
   return getPlacementEnabled(placement) ? 'active' : 'ready';
 }
 
-/** True only when the placement has real AdSense IDs AND its toggle is on. */
+/** True only when the placement has real AdSense IDs AND its toggle is on.
+ *  The bottom banner ignores the toggle entirely: configured = live. */
 export function adsEnabled(placement: AdPlacement): boolean {
+  if (placement === 'bottom-banner') return isPlacementConfigured(placement);
   return isPlacementConfigured(placement) && getPlacementEnabled(placement);
 }

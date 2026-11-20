@@ -25,7 +25,7 @@ const buttonStyle: React.CSSProperties = {
   fontSize: 16,
   borderRadius: 6,
   border: 'none',
-  background: '#0b5e3f',
+  background: '#0A1F44',
   color: '#fff',
   cursor: 'pointer',
 };

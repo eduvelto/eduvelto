@@ -31,7 +31,7 @@ const buttonStyle: React.CSSProperties = {
   fontSize: 16,
   borderRadius: 6,
   border: 'none',
-  background: '#0b5e3f',
+  background: '#0A1F44',
   color: '#fff',
   cursor: 'pointer',
 };
@@ -256,7 +256,7 @@ export default function ProfilePage() {
           <input style={inputStyle} type="text" value={classLevel} onChange={(e) => setClassLevel(e.target.value)} placeholder="যেমন: Class 10" />
         </label>
         {shownError ? <p style={{ color: '#b00020' }}>{shownError}</p> : null}
-        {saved ? <p style={{ color: '#0b5e3f' }}>{p.saved.bn}</p> : null}
+        {saved ? <p style={{ color: '#0A1F44' }}>{p.saved.bn}</p> : null}
         <button style={buttonStyle} type="submit" disabled={busy}>
           {busy ? strings.common.loading.bn : `${strings.common.save.bn} / ${strings.common.save.en}`}
         </button>

@@ -19,11 +19,26 @@ import QuizPage from './pages/QuizPage';
 import QuizResultPage from './pages/QuizResultPage';
 import AdminPage from './pages/AdminPage';
 import AdminAds from './pages/AdminAds';
+import AdminUsersPage from './pages/AdminUsersPage';
+import AdminUserDetailPage from './pages/AdminUserDetailPage';
+import AdminTeachersPage from './pages/AdminTeachersPage';
+import AdminFeaturesPage from './pages/AdminFeaturesPage';
+import AdminBackupPage from './pages/AdminBackupPage';
+import AdminAuditPage from './pages/AdminAuditPage';
+import { AdminGuard } from './components/AdminGuard';
 import AiTeacherPage from './pages/AiTeacherPage';
 import ExamPage from './pages/ExamPage';
 import RoutinePage from './pages/RoutinePage';
 import ProgressPage from './pages/ProgressPage';
 import SocialPage from './pages/SocialPage';
+import HealthPage from './pages/HealthPage';
+import HealthMedicinesPage from './pages/HealthMedicinesPage';
+import HealthDiseasesPage from './pages/HealthDiseasesPage';
+import HealthDoctorsPage from './pages/HealthDoctorsPage';
+import HealthHospitalsPage from './pages/HealthHospitalsPage';
+import HealthReportPage from './pages/HealthReportPage';
+import AboutPage from './pages/AboutPage';
+import ContactPage from './pages/ContactPage';
 
 // Routes mirror page-map.md + the Phase 2 route list.
 // /social is a DESIGN PROPOSAL only (blueprint §7): no live social
@@ -50,7 +65,7 @@ export default function App() {
     <div style={bannerLive ? { paddingBottom: `calc(${BOTTOM_BANNER_RESERVE_PX}px + env(safe-area-inset-bottom, 0px))` } : undefined}>
       <header
         style={{
-          background: '#0b5e3f',
+          background: '#0A1F44',
           color: '#fff',
           padding: '12px 16px',
           display: 'flex',
@@ -63,29 +78,35 @@ export default function App() {
           Eduvelto
         </Link>
         <span style={{ fontSize: 14 }}>{strings.tagline.bn}</span>
-        <nav style={{ display: 'flex', flexWrap: 'wrap', gap: 12, marginLeft: 'auto', alignItems: 'center' }}>
-          <Link to="/directory" style={{ color: '#fff' }}>{nav.directory.bn}</Link>
-          <Link to="/library" style={{ color: '#fff' }}>{nav.library.bn}</Link>
-          <Link to="/exam" style={{ color: '#fff' }}>{nav.exam.bn}</Link>
-          <Link to="/routine" style={{ color: '#fff' }}>{nav.routine.bn}</Link>
-          <Link to="/progress" style={{ color: '#fff' }}>{nav.progress.bn}</Link>
+        <nav aria-label="প্রধান মেনু" style={{ display: 'flex', flexWrap: 'wrap', gap: 12, marginLeft: 'auto', alignItems: 'center' }}>
+          <Link to="/directory" style={{ color: '#fff', padding: '10px 6px' }}>{nav.directory.bn}</Link>
+          <Link to="/library" style={{ color: '#fff', padding: '10px 6px' }}>{nav.library.bn}</Link>
+          <Link to="/exam" style={{ color: '#fff', padding: '10px 6px' }}>{nav.exam.bn}</Link>
+          <Link to="/routine" style={{ color: '#fff', padding: '10px 6px' }}>{nav.routine.bn}</Link>
+          <Link to="/progress" style={{ color: '#fff', padding: '10px 6px' }}>{nav.progress.bn}</Link>
+          <Link to="/health" style={{ color: '#fff', padding: '10px 6px' }}>{nav.health.bn}</Link>
+          <Link to="/about" style={{ color: '#fff', padding: '10px 6px' }}>{nav.about.bn}</Link>
+          <Link to="/contact" style={{ color: '#fff', padding: '10px 6px' }}>{nav.contact.bn}</Link>
+          {profile?.role === 'owner' ? (
+            <Link to="/admin" style={{ color: '#F1B308', padding: '10px 6px', fontWeight: 700 }}>{nav.admin.bn}</Link>
+          ) : null}
           {loading ? null : user ? (
             <>
-              <Link to="/profile" style={{ color: '#fff' }}>
+              <Link to="/profile" style={{ color: '#fff', padding: '10px 6px' }}>
                 {profile?.displayName ?? nav.profile.bn}
               </Link>
               <button
                 type="button"
                 onClick={() => void signOut()}
-                style={{ background: 'transparent', border: '1px solid #fff', color: '#fff', borderRadius: 6, padding: '4px 10px', cursor: 'pointer', fontSize: 14 }}
+                style={{ background: 'transparent', border: '1px solid #fff', color: '#fff', borderRadius: 6, padding: '10px 16px', minHeight: 44, cursor: 'pointer', fontSize: 14 }}
               >
                 {nav.logout.bn}
               </button>
             </>
           ) : (
             <>
-              <Link to="/login" style={{ color: '#fff' }}>{nav.login.bn}</Link>
-              <Link to="/register" style={{ color: '#fff' }}>{nav.register.bn}</Link>
+              <Link to="/login" style={{ color: '#fff', padding: '10px 6px' }}>{nav.login.bn}</Link>
+              <Link to="/register" style={{ color: '#fff', padding: '10px 6px' }}>{nav.register.bn}</Link>
             </>
           )}
         </nav>
@@ -96,10 +117,22 @@ export default function App() {
             <h1 style={{ marginTop: 0, color: '#b00020', fontSize: 24 }}>{strings.profile.suspendedTitle.bn}</h1>
             <p>{strings.profile.suspendedBody.bn}</p>
             <p style={{ color: '#555' }}>{strings.profile.suspendedBody.en}</p>
+            {profile?.suspendedReason ? (
+              <p>
+                <strong>স্থগিতের কারণ / Reason:</strong> {profile.suspendedReason}
+              </p>
+            ) : null}
+            <p style={{ color: '#555', fontSize: 14 }}>
+              আপিল করতে অ্যাডমিনের সঙ্গে যোগাযোগ করুন (সাপোর্ট পাতা / ইমেইল)। / To appeal, contact
+              an admin (support page / email). আপনি মালিক হলে: Firebase console → Firestore →
+              users → আপনার ডকুমেন্ট → isActive ফিল্ডটি মুছে দিন (শুধু মালিকের অ্যাকাউন্টের
+              ক্ষেত্রে)। / If you are the owner: Firebase console → Firestore → users → your
+              document → delete the isActive field.
+            </p>
             <button
               type="button"
               onClick={() => void signOut()}
-              style={{ padding: '10px 18px', fontSize: 16, borderRadius: 6, border: 'none', background: '#0b5e3f', color: '#fff', cursor: 'pointer' }}
+              style={{ padding: '10px 18px', minHeight: 48, fontSize: 16, borderRadius: 6, border: 'none', background: '#0A1F44', color: '#fff', cursor: 'pointer' }}
             >
               {nav.logout.bn} / {nav.logout.en}
             </button>
@@ -122,13 +155,27 @@ export default function App() {
         <Route path="/lessons/:lessonId" element={<LessonPage />} />
         <Route path="/quiz/:quizId" element={<QuizPage />} />
         <Route path="/quiz/:quizId/result/:attemptId" element={<QuizResultPage />} />
-        <Route path="/admin" element={<AdminPage />} />
-        <Route path="/admin/ads" element={<AdminAds />} />
+        <Route path="/admin" element={<AdminGuard><AdminPage /></AdminGuard>} />
+        <Route path="/admin/ads" element={<AdminGuard><AdminAds /></AdminGuard>} />
+        <Route path="/admin/users" element={<AdminGuard><AdminUsersPage /></AdminGuard>} />
+        <Route path="/admin/users/:uid" element={<AdminGuard><AdminUserDetailPage /></AdminGuard>} />
+        <Route path="/admin/teachers" element={<AdminGuard><AdminTeachersPage /></AdminGuard>} />
+        <Route path="/admin/features" element={<AdminGuard><AdminFeaturesPage /></AdminGuard>} />
+        <Route path="/admin/backup" element={<AdminGuard><AdminBackupPage /></AdminGuard>} />
+        <Route path="/admin/audit" element={<AdminGuard><AdminAuditPage /></AdminGuard>} />
         <Route path="/ai-teacher" element={<AiTeacherPage />} />
         <Route path="/exam" element={<ExamPage />} />
         <Route path="/routine" element={<RoutinePage />} />
         <Route path="/progress" element={<ProgressPage />} />
         <Route path="/social" element={<SocialPage />} />
+        <Route path="/health" element={<HealthPage />} />
+        <Route path="/health/medicines" element={<HealthMedicinesPage />} />
+        <Route path="/health/diseases" element={<HealthDiseasesPage />} />
+        <Route path="/health/doctors" element={<HealthDoctorsPage />} />
+        <Route path="/health/hospitals" element={<HealthHospitalsPage />} />
+        <Route path="/health/report" element={<HealthReportPage />} />
+        <Route path="/about" element={<AboutPage />} />
+        <Route path="/contact" element={<ContactPage />} />
         <Route path="*" element={<HomePage />} />
         </Routes>
         {showBottomBanner ? <AdSlot placement="bottom-banner" /> : null}

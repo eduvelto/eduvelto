@@ -24,7 +24,7 @@ const buttonStyle: React.CSSProperties = {
   fontSize: 16,
   borderRadius: 6,
   border: 'none',
-  background: '#0b5e3f',
+  background: '#0A1F44',
   color: '#fff',
   cursor: 'pointer',
 };
@@ -152,7 +152,7 @@ export default function LoginPage() {
             setShowReset((v) => !v);
             setResetSent(false);
           }}
-          style={{ background: 'none', border: 'none', padding: 0, color: '#0b5e3f', cursor: 'pointer', fontSize: 16, textDecoration: 'underline' }}
+          style={{ background: 'none', border: 'none', padding: 0, color: '#0A1F44', cursor: 'pointer', fontSize: 16, textDecoration: 'underline' }}
         >
           {s.forgotPassword.bn}
         </button>
@@ -160,7 +160,7 @@ export default function LoginPage() {
       {showReset ? (
         <form onSubmit={onReset} style={{ border: '1px solid #ddd', borderRadius: 8, padding: 16, background: '#fafafa' }}>
           {resetSent ? (
-            <p style={{ color: '#0b5e3f' }}>{s.resetSent.bn}</p>
+            <p style={{ color: '#0A1F44' }}>{s.resetSent.bn}</p>
           ) : (
             <>
               <p style={{ marginTop: 0 }}>রিসেট লিংক পেতে আপনার ইমেইল দিন।</p>
