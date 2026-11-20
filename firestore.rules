@@ -6,10 +6,16 @@ rules_version = '2';
 // Deny by default: every match below allows explicitly, and anything not
 // matched is denied. All writes require auth. No client may write
 // reviewStatus "Published", a role, or a verificationStatus directly.
-// NOTE: rules cannot strip fields from a read. The quiz answer key
-// (quizzes.questions[].correctOptionIndex) must NOT be shipped to the
-// student client before submission — Phase 2 must implement a projection
-// (or a post-submit re-fetch) for that; these rules alone do not hide it.
+// NOTE: rules cannot strip fields from a read. The quiz answer key is
+// therefore NEVER stored in the `quizzes` document a student fetches:
+// the student projection (quizzes/{id}) carries questions + options
+// only. The key lives in `quizKeys/{quizId}` (below), readable by a
+// student only through a fresh submission receipt (quizReceipts) — the
+// app creates the receipt at submit time and deletes it right after
+// scoring. Honest limit (no server on the free Spark plan): the receipt
+// gate stops casual access; a determined user with console access could
+// forge a receipt. True server-side verification needs a Cloud Function
+// (Blaze) — flagged for Phase 3.
 
 service cloud.firestore {
   match /databases/{database}/documents {
@@ -140,16 +146,59 @@ service cloud.firestore {
 
     // ---------- quizAttempts (sub-collection under the user) ----------
     // Immutable after submit: create only, never update/delete by anyone
-    // except an Admin delete for support. Readable only by the owner + Admin.
+    // except an Admin delete for support. Readable by the owner +
+    // Moderator/Admin (a moderator must read a written attempt to mark it).
+    // EXCEPTION (Step 4, written exams): a Moderator/Admin may update ONLY
+    // the marking fields of a PENDING written attempt (markingStatus ==
+    // 'pending') — that is how a teacher marks typed answers (per-question
+    // marks + correct flags inside `answers`, and the totals). An MCQ
+    // attempt (markingStatus 'auto') can never be rewritten, and no one
+    // may touch quizId or the submitted answer text once submitted.
     match /users/{userId}/quizAttempts/{attemptId} {
-      allow read: if isOwner(userId) || isAdmin();
+      // Readable by the owner, and by Moderator/Admin — a moderator must
+      // be able to read a written attempt to mark it (Step 4).
+      allow read: if isOwner(userId) || isModerator();
       allow create: if isOwner(userId) && callerActive()
         && request.resource.data.quizId is string
         && request.resource.data.answers is list
         && request.resource.data.score is number
         && request.resource.data.totalMarks is number
         && request.resource.data.percentage is number;
-      allow update, delete: if false;
+      allow update: if isModerator()
+        && resource.data.markingStatus == 'pending'
+        && request.resource.data.diff(resource.data).affectedKeys()
+            .hasOnly(['answers', 'marks', 'score', 'percentage', 'markingStatus', 'markedBy', 'markedAt']);
+      allow delete: if false;
+    }
+
+    // ---------- quizKeys + quizReceipts (Step 4 answer-key protection) ----------
+    // The key is readable by Moderator/Admin any time, and by a student
+    // ONLY while a fresh submission receipt exists for them + this quiz
+    // (created by the app at submit time, deleted right after scoring;
+    // a receipt older than 10 minutes no longer opens the key).
+    function hasFreshReceipt(quizId) {
+      return signedIn() && callerActive()
+        && get(/databases/$(database)/documents/quizReceipts/$(uid() + '_' + quizId)).data.createdAt
+            > request.time - duration.value(10, 'm');
+    }
+    match /quizKeys/{quizId} {
+      allow read: if isModerator() || hasFreshReceipt(quizId);
+      allow create, update: if isModerator();
+      allow delete: if isAdmin();
+    }
+    // Receipt id is `{uid}_{quizId}` — one per student per quiz. Only the
+    // owning student may create/delete their own receipt; nobody may
+    // update one (a receipt is single-use by design).
+    match /quizReceipts/{receiptId} {
+      allow read: if isOwner(receiptId.split('_')[0]) || isAdmin();
+      allow create: if signedIn() && callerActive()
+        && receiptId == uid() + '_' + request.resource.data.quizId
+        && request.resource.data.userId == uid()
+        && request.resource.data.quizId is string
+        && request.resource.data.attemptId is string
+        && request.resource.data.createdAt is timestamp;
+      allow update: if false;
+      allow delete: if isOwner(receiptId.split('_')[0]);
     }
 
     // ---------- studyPlans / progressSummaries (owner only) ----------

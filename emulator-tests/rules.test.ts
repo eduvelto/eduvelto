@@ -147,6 +147,27 @@ async function seed() {
       authorId: 'admin-1',
       reviewStatus: 'In Progress',
     });
+    // --- Step 4 seeds: a Published quiz (projection, NO key) + its key ---
+    await setDoc(doc(db, 'quizzes', 'quiz1'), {
+      title: 'Test Quiz — MCQ পরীক্ষা',
+      bookId: 'book1',
+      subject: 'English',
+      department: 'English',
+      classLevel: '3rd Year',
+      educationType: 'honours',
+      kind: 'mcq',
+      questions: [
+        { n: 1, topic: 'Drama', question: 'Who wrote Macbeth?', options: [{ letter: 'A', text: 'Marlowe' }, { letter: 'B', text: 'Shakespeare' }], marks: 1 },
+      ],
+      questionCount: 1,
+      totalMarks: 1,
+      timeLimitMinutes: 30,
+      reviewStatus: 'Published',
+    });
+    await setDoc(doc(db, 'quizKeys', 'quiz1'), {
+      quizId: 'quiz1',
+      answers: [{ n: 1, correctLetter: 'B', correctText: 'Shakespeare' }],
+    });
     // --- Health v1 seeds ---
     const medFields = {
       title: 'Paracetamol',
@@ -910,5 +931,130 @@ describe('Eduvelto security rules', () => {
       }),
     );
     await assertFails(getDoc(doc(unauth(), 'progressSummaries', id)));
+  });
+
+  // (o) Step 4 — answer-key protection (quizKeys + quizReceipts) + written marking.
+  it('(o1) student reading quizKeys WITHOUT a submission receipt is DENIED', async () => {
+    await assertFails(getDoc(doc(asStudent1(), 'quizKeys', 'quiz1')));
+  });
+  it('(o2) student creating their own receipt, then reading quizKeys, is ALLOWED', async () => {
+    await assertSucceeds(
+      setDoc(doc(asStudent1(), 'quizReceipts', 'student-1_quiz1'), {
+        userId: 'student-1',
+        quizId: 'quiz1',
+        attemptId: 'attempt-1',
+        createdAt: new Date(),
+      }),
+    );
+    await assertSucceeds(getDoc(doc(asStudent1(), 'quizKeys', 'quiz1')));
+    await assertSucceeds(deleteDoc(doc(asStudent1(), 'quizReceipts', 'student-1_quiz1')));
+  });
+  it('(o3) student reading quizKeys with a STALE receipt (older than 10 minutes) is DENIED', async () => {
+    await assertSucceeds(
+      setDoc(doc(asStudent1(), 'quizReceipts', 'student-1_quiz1'), {
+        userId: 'student-1',
+        quizId: 'quiz1',
+        attemptId: 'attempt-1',
+        createdAt: new Date(Date.now() - 60 * 60 * 1000),
+      }),
+    );
+    await assertFails(getDoc(doc(asStudent1(), 'quizKeys', 'quiz1')));
+    await assertSucceeds(deleteDoc(doc(asStudent1(), 'quizReceipts', 'student-1_quiz1')));
+  });
+  it('(o4) student reading another student’s receipt is DENIED; creating a receipt for another uid is DENIED', async () => {
+    await assertSucceeds(
+      setDoc(doc(asStudent1(), 'quizReceipts', 'student-1_quiz1'), {
+        userId: 'student-1',
+        quizId: 'quiz1',
+        attemptId: 'attempt-1',
+        createdAt: new Date(),
+      }),
+    );
+    await assertFails(getDoc(doc(asStudent2(), 'quizReceipts', 'student-1_quiz1')));
+    await assertFails(
+      setDoc(doc(asStudent1(), 'quizReceipts', 'student-2_quiz1'), {
+        userId: 'student-2',
+        quizId: 'quiz1',
+        attemptId: 'attempt-1',
+        createdAt: new Date(),
+      }),
+    );
+    await assertSucceeds(deleteDoc(doc(asStudent1(), 'quizReceipts', 'student-1_quiz1')));
+  });
+  it('(o5) moderator reading quizKeys is ALLOWED; student creating a quizKey is DENIED', async () => {
+    await assertSucceeds(getDoc(doc(asModerator(), 'quizKeys', 'quiz1')));
+    await assertFails(
+      setDoc(doc(asStudent1(), 'quizKeys', 'quiz-evil'), {
+        quizId: 'quiz-evil',
+        answers: [{ n: 1, correctLetter: 'A', correctText: 'Fake' }],
+      }),
+    );
+  });
+  it('(o6) moderator marking a PENDING written attempt (marking fields only) is ALLOWED; rewriting an MCQ attempt or changing quizId is DENIED', async () => {
+    const db1 = asStudent1();
+    const writtenRef = await addDoc(collection(db1, 'users', 'student-1', 'quizAttempts'), {
+      quizId: 'quiz1',
+      kind: 'written',
+      answers: [{ n: 1, topic: 'Drama', text: 'An essay.', correct: null, marks: null }],
+      score: 0,
+      totalMarks: 10,
+      percentage: 0,
+      markingStatus: 'pending',
+    });
+    const mcqRef = await addDoc(collection(db1, 'users', 'student-1', 'quizAttempts'), {
+      quizId: 'quiz1',
+      kind: 'mcq',
+      answers: [{ n: 1, topic: 'Drama', selected: 'B', correct: true, marks: 1 }],
+      score: 1,
+      totalMarks: 1,
+      percentage: 100,
+      markingStatus: 'auto',
+    });
+    // Moderator marks the pending written attempt: ALLOWED.
+    await assertSucceeds(
+      updateDoc(doc(asModerator(), 'users', 'student-1', 'quizAttempts', writtenRef.id), {
+        marks: [8],
+        score: 8,
+        percentage: 80,
+        markingStatus: 'marked',
+        markedBy: 'moderator-1',
+      }),
+    );
+    // Moderator may NOT change quizId of a pending attempt.
+    const writtenRef2 = await addDoc(collection(db1, 'users', 'student-1', 'quizAttempts'), {
+      quizId: 'quiz1',
+      kind: 'written',
+      answers: [{ n: 1, topic: 'Drama', text: 'An essay.', correct: null, marks: null }],
+      score: 0,
+      totalMarks: 10,
+      percentage: 0,
+      markingStatus: 'pending',
+    });
+    await assertFails(
+      updateDoc(doc(asModerator(), 'users', 'student-1', 'quizAttempts', writtenRef2.id), {
+        quizId: 'quiz-other',
+      }),
+    );
+    // Moderator may NOT rewrite an MCQ ('auto') attempt.
+    await assertFails(
+      updateDoc(doc(asModerator(), 'users', 'student-1', 'quizAttempts', mcqRef.id), {
+        score: 0,
+        percentage: 0,
+      }),
+    );
+    // The student themselves may NOT update even their own pending attempt.
+    await assertFails(updateDoc(doc(db1, 'users', 'student-1', 'quizAttempts', writtenRef2.id), { score: 10 }));
+  });
+  it('(o7) moderator reading a student’s attempt (to mark it) is ALLOWED', async () => {
+    const ref = await addDoc(collection(asStudent1(), 'users', 'student-1', 'quizAttempts'), {
+      quizId: 'quiz1',
+      kind: 'written',
+      answers: [{ n: 1, topic: 'Drama', text: 'An essay.', correct: null, marks: null }],
+      score: 0,
+      totalMarks: 10,
+      percentage: 0,
+      markingStatus: 'pending',
+    });
+    await assertSucceeds(getDoc(doc(asModerator(), 'users', 'student-1', 'quizAttempts', ref.id)));
   });
 });
