@@ -27,6 +27,13 @@ service cloud.firestore {
     function isAdmin() {
       return signedIn() && (callerRole() == 'admin' || callerRole() == 'owner');
     }
+    // The Owner is the highest role (spec §3). isAdmin()/isModerator()/
+    // isTeacher() already include 'owner' — the owner bypasses every admin
+    // gate. isOwnerRole() is for OWNER-ONLY actions (owner-doc protection,
+    // audit-log reads).
+    function isOwnerRole() {
+      return signedIn() && callerRole() == 'owner';
+    }
     function isModerator() {
       return signedIn() && (callerRole() in ['moderator', 'admin', 'owner']);
     }
@@ -63,7 +70,21 @@ service cloud.firestore {
         && isOptStr(request.resource.data.displayName, 100);
       // Admin/Owner change role / verificationStatus / isActive, and only
       // they may do so — and only to valid enum values.
+      // OWNER PROTECTION (spec §3): a users doc whose role is 'owner' is
+      // EXCLUDED here. No admin or moderator can change the owner's role,
+      // isActive, email, or downgrade the owner account — only the owner
+      // themselves may touch their own doc (owner rule below).
       allow update: if isAdmin()
+        && resource.data.role != 'owner'
+        && (!('role' in request.resource.data)
+            || request.resource.data.role in ['owner', 'admin', 'moderator', 'teacher', 'student', 'parent'])
+        && (!('verificationStatus' in request.resource.data)
+            || request.resource.data.verificationStatus in ['pending', 'verified', 'rejected', 'revoked']);
+      // The owner updates their own doc without restriction (highest
+      // authority; the self-update rule above still covers the everyday
+      // profile fields for every user, owner included). Enum values are
+      // still validated.
+      allow update: if isOwnerRole() && isOwner(userId)
         && (!('role' in request.resource.data)
             || request.resource.data.role in ['owner', 'admin', 'moderator', 'teacher', 'student', 'parent'])
         && (!('verificationStatus' in request.resource.data)
@@ -427,6 +448,18 @@ service cloud.firestore {
     }
     match /partnerships/{partnerId} {
       allow read, write: if isAdmin();
+    }
+
+    // ---------- adminActions (append-only audit log, spec §3) ----------
+    // Admins/Owners record their own actions (actorId must be their own
+    // uid). Readable by the owner ONLY. Entries are never updated or
+    // deleted by anyone — the log is append-only.
+    match /adminActions/{actionId} {
+      allow create: if isAdmin()
+        && request.resource.data.actorId == uid()
+        && request.resource.data.action is string;
+      allow read: if isOwnerRole();
+      allow update, delete: if false;
     }
 
     // ---------- everything else: denied ----------

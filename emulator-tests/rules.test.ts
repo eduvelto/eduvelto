@@ -63,7 +63,7 @@ import {
   assertFails,
   type RulesTestEnvironment,
 } from '@firebase/rules-unit-testing';
-import { doc, setDoc, getDoc, updateDoc, collection, addDoc } from 'firebase/firestore';
+import { doc, setDoc, getDoc, updateDoc, deleteDoc, collection, addDoc } from 'firebase/firestore';
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 
@@ -87,6 +87,13 @@ async function seed() {
       displayName: 'Admin',
       email: 'admin@example.com',
       role: 'admin',
+      language: 'bn',
+      isActive: true,
+    });
+    await setDoc(doc(db, 'users', 'owner-1'), {
+      displayName: 'Owner',
+      email: 'owner@example.com',
+      role: 'owner',
       language: 'bn',
       isActive: true,
     });
@@ -148,6 +155,7 @@ const unauth = () => env.unauthenticatedContext().firestore();
 const asStudent1 = () => env.authenticatedContext('student-1').firestore();
 const asStudent2 = () => env.authenticatedContext('student-2').firestore();
 const asAdmin = () => env.authenticatedContext('admin-1').firestore();
+const asOwner = () => env.authenticatedContext('owner-1').firestore();
 
 describe('EduOrbit security rules', () => {
   // (a) Public reads: Published lesson ALLOWED, draft lesson DENIED.
@@ -307,5 +315,82 @@ describe('EduOrbit security rules', () => {
       status: 'pending',
     });
     await assertFails(updateDoc(ref, { status: 'verified', checkedBy: 'student-1' }));
+  });
+
+  // (i) Owner role (spec §3): owner protection + append-only audit log.
+  it('(i1) owner updating any user document is ALLOWED', async () => {
+    await assertSucceeds(
+      updateDoc(doc(asOwner(), 'users', 'student-1'), { displayName: 'Renamed by owner' }),
+    );
+    await assertSucceeds(
+      updateDoc(doc(asOwner(), 'users', 'admin-1'), { displayName: 'Renamed by owner' }),
+    );
+  });
+  it('(i2) owner updating their own doc (incl. verificationStatus) is ALLOWED', async () => {
+    // The self-update rule alone forbids verificationStatus — only the
+    // owner rule can allow this, so it proves the owner rule specifically.
+    await assertSucceeds(
+      updateDoc(doc(asOwner(), 'users', 'owner-1'), {
+        displayName: 'Owner Renamed',
+        verificationStatus: 'verified',
+      }),
+    );
+  });
+  it('(i3) admin updating the owner’s document is DENIED', async () => {
+    const db = asAdmin();
+    await assertFails(updateDoc(doc(db, 'users', 'owner-1'), { displayName: 'Sneaky rename' }));
+    await assertFails(updateDoc(doc(db, 'users', 'owner-1'), { isActive: false }));
+    await assertFails(updateDoc(doc(db, 'users', 'owner-1'), { email: 'taken-over@example.com' }));
+  });
+  it('(i4) admin changing the owner’s role is DENIED', async () => {
+    await assertFails(updateDoc(doc(asAdmin(), 'users', 'owner-1'), { role: 'student' }));
+    await assertFails(updateDoc(doc(asAdmin(), 'users', 'owner-1'), { role: 'admin' }));
+  });
+  it('(i5) student creating adminActions entries is DENIED', async () => {
+    await assertFails(
+      addDoc(collection(asStudent1(), 'adminActions'), {
+        actorId: 'student-2',
+        action: 'fake-action',
+        createdAt: new Date(),
+      }),
+    );
+    await assertFails(
+      addDoc(collection(asStudent1(), 'adminActions'), {
+        actorId: 'student-1',
+        action: 'fake-action',
+        createdAt: new Date(),
+      }),
+    );
+  });
+  it('(i6) admin recording their own action in adminActions is ALLOWED', async () => {
+    await assertSucceeds(
+      addDoc(collection(asAdmin(), 'adminActions'), {
+        actorId: 'admin-1',
+        action: 'suspend-user',
+        createdAt: new Date(),
+      }),
+    );
+  });
+  it('(i7) owner creating + reading adminActions is ALLOWED; admin reading is DENIED', async () => {
+    const ref = await assertSucceeds(
+      addDoc(collection(asOwner(), 'adminActions'), {
+        actorId: 'owner-1',
+        action: 'approve-teacher',
+        createdAt: new Date(),
+      }),
+    );
+    await assertSucceeds(getDoc(doc(asOwner(), 'adminActions', ref.id)));
+    await assertFails(getDoc(doc(asAdmin(), 'adminActions', ref.id)));
+  });
+  it('(i8) NOBODY can update or delete an adminActions entry', async () => {
+    const ref = await addDoc(collection(asOwner(), 'adminActions'), {
+      actorId: 'owner-1',
+      action: 'immutable-check',
+      createdAt: new Date(),
+    });
+    await assertFails(updateDoc(doc(asOwner(), 'adminActions', ref.id), { action: 'edited' }));
+    await assertFails(updateDoc(doc(asAdmin(), 'adminActions', ref.id), { action: 'edited' }));
+    await assertFails(deleteDoc(doc(asOwner(), 'adminActions', ref.id)));
+    await assertFails(deleteDoc(doc(asAdmin(), 'adminActions', ref.id)));
   });
 });
