@@ -1,4 +1,4 @@
-# EduOrbit — Phase 2 project skeleton
+# Eduvelto — Phase 2 project skeleton
 
 **শেখো, এগিয়ে যাও, স্বপ্ন গড়ো — Learn, Grow, Achieve.**
 Free digital education platform for Bangladesh. **Budget: BDT 0** — no purchases,
@@ -110,7 +110,7 @@ src/
 firestore.rules       hardened security rules (database-schema.md §5)
 firestore.indexes.json composite indexes (database-schema.md §4)
 firebase.json         hosting + firestore config (no Functions / no Storage)
-.firebaserc           placeholder project id "eduorbit-dev" — replace with the real one
+.firebaserc           project id "eduvelto" — the real project (set 20 Nov 2026)
 ```
 
 ## Free-tier quotas (Spark, verified 20 Nov 2026 — do not exceed by design)

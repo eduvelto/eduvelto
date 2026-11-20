@@ -1,5 +1,5 @@
 /**
- * EduOrbit — Firebase client config (REAL project, wired 20 Nov 2026).
+ * Eduvelto — Firebase client config (REAL project, wired 20 Nov 2026).
  *
  * Project: Eduvelto — project ID `eduvelto` (Spark plan, no billing).
  * Web app: "Eduvelto Web" (registered in the Firebase console 20 Nov 2026).

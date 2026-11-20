@@ -1,5 +1,5 @@
 /**
- * EduOrbit usage counters (client-side estimates).
+ * Eduvelto usage counters (client-side estimates).
  *
  * HONEST LIMIT, READ THIS FIRST:
  * These counters are ESTIMATES kept in this browser's localStorage. They
@@ -44,7 +44,7 @@ export const QUOTAS = {
   authMau: 50_000,
 } as const;
 
-const STORAGE_KEY = 'eduorbit-usage-v1';
+const STORAGE_KEY = 'eduvelto-usage-v1';
 
 function todayKey(): string {
   const d = new Date();

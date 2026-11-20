@@ -7,7 +7,7 @@ import {
   type AdPlacement,
 } from '../lib/ads';
 
-// EduOrbit — one AdSense ad unit.
+// Eduvelto — one AdSense ad unit.
 //
 // Renders NOTHING (null — collapses completely, no fake ad, no placeholder
 // box, no invented content) until the placement is configured with real

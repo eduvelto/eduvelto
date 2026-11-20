@@ -1,4 +1,4 @@
-// EduOrbit — student registration (Step 1).
+// Eduvelto — student registration (Step 1).
 // Email/password sign-up + Google sign-in. Registering creates a STUDENT
 // account only (role 'student'); teacher verification is a separate human
 // process in Step 5 — registering never grants a "verified" badge.

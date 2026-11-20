@@ -1,6 +1,6 @@
 rules_version = '2';
 
-// EduOrbit — Firestore Security Rules (Phase 2).
+// Eduvelto — Firestore Security Rules (Phase 2).
 // Implements database-schema.md §5 + blueprint §4.7 principles.
 // Governing idea: the client is untrusted; the rule is the enforcement.
 // Deny by default: every match below allows explicitly, and anything not

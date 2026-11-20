@@ -17,7 +17,7 @@ if (isFirebaseConfigured) {
   db = getFirestore(app);
 } else if (typeof console !== 'undefined') {
   console.warn(
-    '[EduOrbit] Firebase is not configured yet. Copy src/firebase-config.example.ts ' +
+    '[Eduvelto] Firebase is not configured yet. Copy src/firebase-config.example.ts ' +
       'to src/firebase-config.ts and paste the project config from the Firebase console (gate G1).',
   );
 }

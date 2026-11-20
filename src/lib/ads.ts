@@ -1,4 +1,4 @@
-// EduOrbit — Website advertising configuration (Advertising track, parallel
+// Eduvelto — Website advertising configuration (Advertising track, parallel
 // with Steps 1–8; owner brief 20 Nov 21:44, URGENT).
 //
 // WEBSITE (Google AdSense) preparation only. No AdMob code lives in this
@@ -155,7 +155,7 @@ export function isBottomBannerAllowed(_pathname: string): boolean {
   return true;
 }
 
-const PLACEMENT_TOGGLES_KEY = 'eduorbit-ads-placements-v1';
+const PLACEMENT_TOGGLES_KEY = 'eduvelto-ads-placements-v1';
 
 type PlacementToggles = Partial<Record<AdPlacement, boolean>>;
 

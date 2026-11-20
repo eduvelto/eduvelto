@@ -1,5 +1,5 @@
 /**
- * EduOrbit Firestore security-rules test suite.
+ * Eduvelto Firestore security-rules test suite.
  *
  * RUN IT (needs Java 17+ for the Firestore emulator):
  *   npm run test:rules
@@ -67,7 +67,7 @@ import { doc, setDoc, getDoc, updateDoc, deleteDoc, collection, addDoc } from 'f
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 
-const PROJECT_ID = 'eduorbit-rules-test';
+const PROJECT_ID = 'eduvelto-rules-test';
 let env: RulesTestEnvironment;
 
 const RULES_PATH = resolve(__dirname, '../firestore.rules');
@@ -157,7 +157,7 @@ const asStudent2 = () => env.authenticatedContext('student-2').firestore();
 const asAdmin = () => env.authenticatedContext('admin-1').firestore();
 const asOwner = () => env.authenticatedContext('owner-1').firestore();
 
-describe('EduOrbit security rules', () => {
+describe('Eduvelto security rules', () => {
   // (a) Public reads: Published lesson ALLOWED, draft lesson DENIED.
   it('(a1) unauthenticated read of a Published lesson is ALLOWED', async () => {
     await assertSucceeds(getDoc(doc(unauth(), 'lessons', 'lesson-published')));

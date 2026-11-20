@@ -59,7 +59,7 @@ export default function App() {
         }}
       >
         <Link to="/" style={{ color: '#f5c542', fontWeight: 700, textDecoration: 'none', fontSize: 20 }}>
-          EduOrbit
+          Eduvelto
         </Link>
         <span style={{ fontSize: 14 }}>{strings.tagline.bn}</span>
         <nav style={{ display: 'flex', flexWrap: 'wrap', gap: 12, marginLeft: 'auto', alignItems: 'center' }}>

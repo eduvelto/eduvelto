@@ -1,4 +1,4 @@
-// EduOrbit — sign-in (Step 1).
+// Eduvelto — sign-in (Step 1).
 // Email/password sign-in + Google sign-in + password reset. The session
 // survives a page reload (Firebase Auth local persistence).
 import { useState, type FormEvent } from 'react';

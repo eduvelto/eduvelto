@@ -1,4 +1,4 @@
-// EduOrbit — user profile documents (`users/{uid}`).
+// Eduvelto — user profile documents (`users/{uid}`).
 //
 // Shape: database-schema.md §2.1. Document ID = Firebase Auth UID.
 // The Firestore security rules (firestore.rules, `users` match) are the
@@ -211,7 +211,7 @@ export function friendlyErrorMessage(error: unknown): string {
     case 'profile-read-failed':
       return 'প্রোফাইল পড়া বা তৈরি করা যায়নি। আবার চেষ্টা করুন।';
     default:
-      if (typeof console !== 'undefined') console.error('[EduOrbit] error:', code, error);
+      if (typeof console !== 'undefined') console.error('[Eduvelto] error:', code, error);
       return 'কিছু একটা ভুল হয়েছে। আবার চেষ্টা করুন।';
   }
 }

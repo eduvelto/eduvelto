@@ -1,5 +1,5 @@
 /**
- * EduOrbit JSON backup / restore (client-side, admin only).
+ * Eduvelto JSON backup / restore (client-side, admin only).
  *
  * EXPORT (admin clicks Export in the admin dashboard):
  *   1. App reads each collection, paginated (500 docs per page).
@@ -47,7 +47,7 @@ export const BACKUP_PAGE_SIZE = 500; // max docs per read page
 export const RESTORE_BATCH_SIZE = 500; // Firestore writeBatch max
 
 export interface BackupMetadata {
-  app: 'EduOrbit';
+  app: 'Eduvelto';
   backupVersion: number;
   exportedAt: string; // ISO timestamp
   exportedBy: string; // admin UID (or 'unknown')
@@ -125,7 +125,7 @@ export async function buildBackup(
   }
   return {
     metadata: {
-      app: 'EduOrbit',
+      app: 'Eduvelto',
       backupVersion: BACKUP_VERSION,
       exportedAt: new Date().toISOString(),
       exportedBy,
@@ -142,7 +142,7 @@ export function downloadBackup(backup: BackupFile): void {
   const a = document.createElement('a');
   const date = backup.metadata.exportedAt.slice(0, 10);
   a.href = url;
-  a.download = `eduorbit-backup-${date}.json`;
+  a.download = `eduvelto-backup-${date}.json`;
   a.click();
   URL.revokeObjectURL(url);
 }
@@ -159,7 +159,7 @@ export function validateBackup(parsed: unknown): BackupValidation {
     return { ok: false, errors: ['Backup file is not a JSON object.'] };
   }
   const file = parsed as Partial<BackupFile>;
-  if (file.metadata?.app !== 'EduOrbit') errors.push('metadata.app is not "EduOrbit".');
+  if (file.metadata?.app !== 'Eduvelto') errors.push('metadata.app is not "Eduvelto".');
   if (file.metadata?.backupVersion !== BACKUP_VERSION) {
     errors.push(`Unsupported backupVersion (expected ${BACKUP_VERSION}).`);
   }

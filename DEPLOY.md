@@ -1,4 +1,4 @@
-# EduOrbit — Deployment guide (Phase 2)
+# Eduvelto — Deployment guide (Phase 2)
 
 ## The no-billing rule (read first)
 
@@ -12,18 +12,18 @@
 
 - **A1 — Firebase project:** the owner signs in once in the takeover
   browser; Muse does every click (console.firebase.google.com → Add project
-  → name `EduOrbit` → Analytics off → Create → enable Email/Google sign-in
+  → name `Eduvelto` → Analytics off → Create → enable Email/Google sign-in
   → Firestore in production mode → Hosting setup). Spark plan, no billing,
   no payment method. Full click-by-click flow: implementation plan §3.
   Copy the web-app config into `src/firebase-config.ts` (Muse does this).
-  Replace `eduorbit-dev` in `.firebaserc` with the real project id.
+  `.firebaserc` already uses the real project id (`eduvelto`).
 - **A2 — GitHub repo:** the owner signs in once in the takeover browser;
-  Muse creates the empty repo (`eduorbit`, no README/.gitignore/license)
+  Muse creates the empty repo (`eduvelto`, no README/.gitignore/license)
   and pushes the code. Push:
   ```bash
   git init
   git add .
-  git commit -m "EduOrbit Phase 2 skeleton"
+  git commit -m "Eduvelto Phase 2 skeleton"
   git branch -M main
   git remote add origin https://github.com/<owner>/<repo>.git
   git push -u origin main
@@ -48,7 +48,7 @@ Verify afterwards in the console: Firestore → Rules shows the deployed
 
 ## 3. PWA notes
 
-- Manifest: `public/manifest.webmanifest` (name EduOrbit, standalone,
+- Manifest: `public/manifest.webmanifest` (name Eduvelto, standalone,
   theme `#0b5e3f`). Icons `public/icons/icon-192.png` and
   `public/icons/icon-512.png` are **to be added — original artwork only**,
   no copied logos. Until they exist, install prompts may show a generic icon.

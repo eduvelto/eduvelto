@@ -1,11 +1,11 @@
-// EduOrbit UI strings — Bangla first (bn), English second (en).
+// Eduvelto UI strings — Bangla first (bn), English second (en).
 // All UI copy lives here, never hard-coded in components, so the bn/en
 // toggle is one lookup. Content (lessons, quizzes) is data, not strings.
 
 export type Lang = 'bn' | 'en';
 
 export const strings = {
-  appName: { bn: 'EduOrbit', en: 'EduOrbit' },
+  appName: { bn: 'Eduvelto', en: 'Eduvelto' },
   tagline: { bn: 'শেখো, এগিয়ে যাও, স্বপ্ন গড়ো', en: 'Learn, Grow, Achieve' },
   nav: {
     home: { bn: 'হোম', en: 'Home' },
@@ -15,7 +15,7 @@ export const strings = {
     routine: { bn: 'রুটিন', en: 'Study Routine' },
     progress: { bn: 'অগ্রগতি', en: 'Progress' },
     social: { bn: 'সোশ্যাল', en: 'Social' },
-    aiTeacher: { bn: 'অরবিট এআই শিক্ষক', en: 'Orbit AI Teacher' },
+    aiTeacher: { bn: 'এডুভেল্টো এআই শিক্ষক', en: 'Eduvelto AI Teacher' },
     profile: { bn: 'প্রোফাইল', en: 'Profile' },
     admin: { bn: 'অ্যাডমিন', en: 'Admin' },
     login: { bn: 'লগইন', en: 'Log in' },
@@ -99,7 +99,7 @@ export const strings = {
     },
   },
   aiTeacher: {
-    title: { bn: 'অরবিট এআই শিক্ষক', en: 'Orbit AI Teacher' },
+    title: { bn: 'এডুভেল্টো এআই শিক্ষক', en: 'Eduvelto AI Teacher' },
     scriptedNote: {
       bn: 'এটি একটি স্ক্রিপ্ট করা প্রদর্শনী, আসল এআই নয়। বিনামূল্যে প্রোডাকশন-মানের এআই শিক্ষক সম্ভব নয় — বিস্তারিত ব্লুপ্রিন্ট §5 দেখুন।',
       en: 'This is a scripted demonstration, not live AI. A free production-quality AI teacher is not feasible — see blueprint §5.',

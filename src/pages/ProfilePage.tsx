@@ -1,4 +1,4 @@
-// EduOrbit — student profile (Step 1).
+// Eduvelto — student profile (Step 1).
 // Shows the signed-in student's profile and lets them edit ONLY the
 // fields the security rules allow the owner to change: displayName,
 // educationType, board, institution, academicYear, program, department,

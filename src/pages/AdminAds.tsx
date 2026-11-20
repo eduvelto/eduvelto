@@ -14,7 +14,7 @@ import {
   type AdPlacementStatus,
 } from '../lib/ads';
 
-// EduOrbit — Admin advertising page (/admin/ads).
+// Eduvelto — Admin advertising page (/admin/ads).
 //
 // Part of the existing admin area (same treatment as /admin: the app has
 // no role-based guard yet — admin roles are assigned in the Firebase

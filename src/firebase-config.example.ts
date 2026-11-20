@@ -1,5 +1,5 @@
 /**
- * EduOrbit — Firebase client config TEMPLATE.
+ * Eduvelto — Firebase client config TEMPLATE.
  *
  * HOW TO USE:
  * 1. The owner creates the Firebase project (gate G1) at

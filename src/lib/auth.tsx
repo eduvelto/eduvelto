@@ -1,4 +1,4 @@
-// EduOrbit — Firebase Auth (Step 1: real authentication + student profiles).
+// Eduvelto — Firebase Auth (Step 1: real authentication + student profiles).
 //
 // - Email/password sign-up + sign-in, Google sign-in (popup), sign-out,
 //   password reset, and auth-state handling for the whole app.
@@ -95,7 +95,7 @@ export function AuthProvider(props: { children: ReactNode }) {
       });
     } catch (e) {
       // Non-fatal: the profile is usable without the timestamp.
-      if (typeof console !== 'undefined') console.warn('[EduOrbit] lastActiveAt update failed:', e);
+      if (typeof console !== 'undefined') console.warn('[Eduvelto] lastActiveAt update failed:', e);
     }
   }
 

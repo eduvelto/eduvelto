@@ -1,8 +1,8 @@
 {
-  "name": "eduorbit",
+  "name": "eduvelto",
   "private": true,
   "version": "0.1.0",
-  "description": "EduOrbit — free digital education platform for Bangladesh (Vite + React + Firebase Spark). Tagline: শেখো, এগিয়ে যাও, স্বপ্ন গড়ো / Learn, Grow, Achieve.",
+  "description": "Eduvelto — free digital education platform for Bangladesh (Vite + React + Firebase Spark). Tagline: শেখো, এগিয়ে যাও, স্বপ্ন গড়ো / Learn, Grow, Achieve.",
   "type": "module",
   "scripts": {
     "dev": "vite",
