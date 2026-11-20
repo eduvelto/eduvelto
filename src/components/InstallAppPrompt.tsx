@@ -84,7 +84,7 @@ export default function InstallAppPrompt() {
   };
 
   const install = async () => {
-    if (!deferredPrompt) return;
+    if (!deferredPrompt || typeof deferredPrompt.prompt !== 'function') return;
     await deferredPrompt.prompt();
     const choice = await deferredPrompt.userChoice;
     if (choice.outcome === 'accepted') {
