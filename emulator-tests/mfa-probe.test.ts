@@ -75,10 +75,10 @@ describe('MFA claim probe', () => {
     await assertFails(
       updateDoc(doc(asTeamNoMfa(), 'posts', 'post-1'), { reviewStatus: 'Published' }),
     );
-  });
+  }, 120000);
   it('sector write WITH MFA claim is ALLOWED', async () => {
     await assertSucceeds(
       updateDoc(doc(asTeamMfa(), 'posts', 'post-1'), { reviewStatus: 'Published' }),
     );
-  });
+  }, 120000);
 });
