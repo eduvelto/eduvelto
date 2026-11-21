@@ -8,7 +8,6 @@
 import {
   collection,
   doc,
-  getCountFromServer,
   getDoc,
   getDocs,
   limit,
@@ -16,6 +15,7 @@ import {
   query,
   startAfter,
   where,
+  documentId,
   type DocumentData,
   type QueryConstraint,
   type QueryDocumentSnapshot,
@@ -238,20 +238,28 @@ function directoryConstraints(filters: DirectoryFilters): QueryConstraint[] {
 /**
  * One page of Published books, server-side (50 reads at most).
  *
- * The query orders by `reviewStatus` — the same field the equality filter
- * constrains — so it needs NO composite index (equality filters on several
- * fields + orderBy on an equality-constrained field are served by
- * Firestore's single-field indexes; verified against LIVE Firestore,
- * read-only, 21 Nov 2026 — see team/pagination-test-report.md §2).
- * NOTE: the emulator does NOT enforce composite-index requirements, so
- * an emulator run cannot prove this — the live read-only check is the
- * proof. All Published books share that value, so the effective order is document
- * ID order; each page is re-sorted client-side with compareBooks so the
- * books ON a page appear in the Library's usual order. The GLOBAL order
- * across pages is document-ID order, not the old class/department/title
- * order — restoring the old global order needs a composite index
- * (books: reviewStatus, classLevel, department, title), which is a
- * follow-up for the owner's approval, not built here.
+ * The query orders by DOCUMENT ID — the only orderBy shape that works
+ * with the equality filters on live Firestore WITHOUT a composite index.
+ * Verified against LIVE Firestore, read-only, 21 Nov 2026 (scripts
+ * probe-live-queries.mjs + the inline F1–F4 probes): equality filters
+ * (up to 3) + orderBy(documentId()) + limit(50) + startAfter all pass.
+ * The shape the first draft used — orderBy('reviewStatus') with filters
+ * — FAILS live with failed-precondition (composite index required);
+ * the emulator does NOT enforce that, so the emulator run hid it.
+ * All Published books share reviewStatus, so the effective order is
+ * document ID order; each page is re-sorted client-side with
+ * compareBooks so the books ON a page appear in the Library's usual
+ * order. The GLOBAL order across pages is document-ID order, not the
+ * old class/department/title order — restoring the old global order
+ * needs a composite index (books: reviewStatus, classLevel, department,
+ * title), which is a follow-up for the owner's approval, not built here.
+ *
+ * NO count() here: getCountFromServer FAILS on live Firestore right now
+ * (resource-exhausted / Quota exceeded, reproducible 21 Nov 2026 even
+ * as the first call of the day — see team/pagination-test-report.md
+ * §5). The pages therefore show no exact total, only "showing X–Y"
+ * and Previous/Next. Restoring totals needs either the count quota
+ * fixed or a loader-maintained stats doc (owner follow-up).
  */
 export async function listPublishedBooksPage(
   filters: BookFilters,
@@ -260,7 +268,7 @@ export async function listPublishedBooksPage(
   if (!db) return { items: [], lastDoc: null, hasMore: false };
   const constraints: QueryConstraint[] = [
     ...bookConstraints(filters),
-    orderBy('reviewStatus'),
+    orderBy(documentId()),
     limit(PAGE_SIZE),
   ];
   if (cursor) constraints.push(startAfter(cursor));
@@ -274,13 +282,6 @@ export async function listPublishedBooksPage(
   };
 }
 
-/** How many Published books match the filters (count aggregation: 1 read per 1000 docs). */
-export async function countPublishedBooks(filters: BookFilters): Promise<number> {
-  if (!db) return 0;
-  const snap = await getCountFromServer(query(collection(db, 'books'), ...bookConstraints(filters)));
-  return snap.data().count;
-}
-
 /** One page of Published directory rows, server-side (50 reads at most). Same index note as listPublishedBooksPage. */
 export async function listPublishedDirectoryPage(
   filters: DirectoryFilters,
@@ -289,7 +290,7 @@ export async function listPublishedDirectoryPage(
   if (!db) return { items: [], lastDoc: null, hasMore: false };
   const constraints: QueryConstraint[] = [
     ...directoryConstraints(filters),
-    orderBy('reviewStatus'),
+    orderBy(documentId()),
     limit(PAGE_SIZE),
   ];
   if (cursor) constraints.push(startAfter(cursor));
@@ -301,13 +302,6 @@ export async function listPublishedDirectoryPage(
     lastDoc: snap.docs[snap.docs.length - 1] ?? null,
     hasMore: snap.size === PAGE_SIZE,
   };
-}
-
-/** How many Published directory rows match the filters. */
-export async function countPublishedDirectory(filters: DirectoryFilters): Promise<number> {
-  if (!db) return 0;
-  const snap = await getCountFromServer(query(collection(db, 'educationDirectory'), ...directoryConstraints(filters)));
-  return snap.data().count;
 }
 
 // ---- session caches for the search path only ---------------------------------

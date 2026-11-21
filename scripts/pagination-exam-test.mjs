@@ -1,5 +1,5 @@
 // Eduvelto — Exam quiz measurement + emulator seed + pagination experiments
-// (TEMPORARY test script; delete before committing the branch).
+// (Test script — KEPT on the branch as the evidence for the pagination work.)
 //
 // Rebuilds the exact quiz documents scripts/load-quizzes.mjs builds, from
 // the content packs (via the loader's own buildPlan), measures their JSON
@@ -19,6 +19,7 @@ import {
   query,
   where,
   orderBy,
+  documentId,
   limit,
   startAfter,
   getDocs,
@@ -169,17 +170,17 @@ async function main() {
     return { docs: s.size, bytes: bytesOf(s), mib: +(bytesOf(s) / 1048576).toFixed(2) };
   });
   let last1 = null;
-  await run('E21', "orderBy('reviewStatus') + limit(50) [page 1]", async () => {
-    const s = await getDocs(query(qCol, ...qBase, orderBy('reviewStatus'), limit(50)));
+  await run('E21', "orderBy(documentId()) + limit(50) [page 1]", async () => {
+    const s = await getDocs(query(qCol, ...qBase, orderBy(documentId()), limit(50)));
     last1 = s.docs[s.docs.length - 1];
     return { docs: s.size, bytes: bytesOf(s), mib: +(bytesOf(s) / 1048576).toFixed(2), firstId: s.docs[0]?.id };
   });
   await run('E22', 'page 2 via startAfter', async () => {
-    const s = await getDocs(query(qCol, ...qBase, orderBy('reviewStatus'), limit(50), startAfter(last1)));
+    const s = await getDocs(query(qCol, ...qBase, orderBy(documentId()), limit(50), startAfter(last1)));
     return { docs: s.size, bytes: bytesOf(s), firstId: s.docs[0]?.id };
   });
   await run('E23', '3 consecutive pages: unique + bytes', async () => {
-    const q = (c) => query(qCol, ...qBase, orderBy('reviewStatus'), limit(50), ...(c ? [startAfter(c)] : []));
+    const q = (c) => query(qCol, ...qBase, orderBy(documentId()), limit(50), ...(c ? [startAfter(c)] : []));
     const p1 = await getDocs(q(null));
     const p2 = await getDocs(q(p1.docs[p1.docs.length - 1]));
     const p3 = await getDocs(q(p2.docs[p2.docs.length - 1]));
@@ -191,8 +192,14 @@ async function main() {
     return { count: s.data().count };
   });
   await run('E25', "filter educationType=='Higher' + limit(50)", async () => {
-    const s = await getDocs(query(qCol, ...qBase, where('educationType', '==', 'Higher'), orderBy('reviewStatus'), limit(50)));
+    const s = await getDocs(query(qCol, ...qBase, where('educationType', '==', 'Higher'), orderBy(documentId()), limit(50)));
     return { docs: s.size };
+  });
+  await run('E26', 'FULL WALK quizzes: all pages, no loss, no duplicates', async () => {
+    const q = (c) => query(qCol, ...qBase, orderBy(documentId()), limit(50), ...(c ? [startAfter(c)] : []));
+    let cursor = null; const ids = []; let pages = 0; let bytes = 0;
+    for (;;) { const snap = await getDocs(q(cursor)); pages++; ids.push(...snap.docs.map((d) => d.id)); bytes += bytesOf(snap); if (snap.size < 50) break; cursor = snap.docs[snap.docs.length - 1]; }
+    return { pages, docs: ids.length, unique: new Set(ids).size, bytes, mib: +(bytes / 1048576).toFixed(2) };
   });
   await run('E27', 'single quiz by ID (exam-taking path)', async () => {
     const { getDoc, doc: docRef } = await import('firebase/firestore');

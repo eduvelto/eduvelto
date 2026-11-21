@@ -27,7 +27,6 @@ import {
   collection,
   deleteDoc,
   doc,
-  getCountFromServer,
   getDoc,
   getDocs,
   limit,
@@ -38,6 +37,7 @@ import {
   startAfter,
   updateDoc,
   where,
+  documentId,
   type DocumentData,
   type QueryConstraint,
   type QueryDocumentSnapshot,
@@ -199,24 +199,26 @@ function quizConstraints(filters: QuizFilters): QueryConstraint[] {
 /**
  * One page of Published quizzes, server-side (50 reads at most).
  *
- * The query orders by `reviewStatus` — the same field the equality filter
- * constrains — so it needs NO composite index (equality filters on several
- * fields + orderBy on an equality-constrained field are served by
- * Firestore's single-field indexes; verified against LIVE Firestore,
- * read-only, 21 Nov 2026 — see team/pagination-test-report.md §2).
- * All Published quizzes share that value, so the effective order is
- * document ID order; each page is re-sorted client-side with
- * compareQuizzes so the quizzes ON a page appear in the Exam list's usual
- * order. The GLOBAL order across pages is document-ID order, not the old
- * class/department/title order — restoring the old global order needs a
- * composite index (quizzes: reviewStatus, classLevel, department, title),
- * which is a follow-up for the owner's approval, not built here.
+ * Orders by DOCUMENT ID — the only orderBy shape that works with the
+ * equality filters on live Firestore WITHOUT a composite index
+ * (verified against LIVE Firestore, read-only, 21 Nov 2026). The first
+ * draft's orderBy('reviewStatus') with filters FAILS live with
+ * failed-precondition (composite index required); the emulator hid it
+ * because it does not enforce index requirements. Each page is re-sorted
+ * client-side with compareQuizzes; the GLOBAL order across pages is
+ * document-ID order — restoring the old global order needs a composite
+ * index (quizzes: reviewStatus, classLevel, department, title), an
+ * owner follow-up, not built here.
  *
  * NOTE on size: each quiz doc carries its full `questions` array, so one
  * page of 50 is still ~0.21 MiB live (full inventory: ~0.21 MiB). The
  * full list (0.91 MiB live) is never downloaded at once any more. Making
  * a page lighter still would need a metadata-only quiz collection — a
  * data-model change for the owner to approve, not built here.
+ *
+ * NO count() here: getCountFromServer FAILS on live Firestore right now
+ * (resource-exhausted / Quota exceeded — see team/pagination-test-report.md
+ * §5). The Exam page therefore shows no exact total.
  */
 export async function listPublishedQuizzesPage(
   filters: QuizFilters,
@@ -225,7 +227,7 @@ export async function listPublishedQuizzesPage(
   if (!db) return { items: [], lastDoc: null, hasMore: false };
   const constraints: QueryConstraint[] = [
     ...quizConstraints(filters),
-    orderBy('reviewStatus'),
+    orderBy(documentId()),
     limit(QUIZ_PAGE_SIZE),
   ];
   if (cursor) constraints.push(startAfter(cursor));
@@ -237,13 +239,6 @@ export async function listPublishedQuizzesPage(
     lastDoc: snap.docs[snap.docs.length - 1] ?? null,
     hasMore: snap.size === QUIZ_PAGE_SIZE,
   };
-}
-
-/** How many Published quizzes match the filters (count aggregation: 1 read per 1000 docs). */
-export async function countPublishedQuizzes(filters: QuizFilters): Promise<number> {
-  if (!db) return 0;
-  const snap = await getCountFromServer(query(collection(db, 'quizzes'), ...quizConstraints(filters)));
-  return snap.data().count;
 }
 
 /** One Published quiz by id; null when missing or not Published. */
