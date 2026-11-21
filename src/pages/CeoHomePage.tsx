@@ -44,6 +44,17 @@ export default function CeoHomePage() {
         ))}
       </div>
 
+      <Link to="/ceo/approvals" className="ev-ceo-wide-link">
+        <span aria-hidden="true">✓</span>
+        <span>
+          <strong>{t({ bn: 'অনুমোদন কেন্দ্র', en: 'Approval Center' })}</strong>
+          <span className="ev-ceo-list-sub">
+            {t({ bn: 'পেইড সার্ভিস, ডেপ্লয়, মাইগ্রেশনসহ ৭টি অনুমোদনের ইতিহাস', en: 'History of the 7 approvals — paid services, deploys, migrations and more' })}
+          </span>
+        </span>
+        <span aria-hidden="true">›</span>
+      </Link>
+
       <p className="ev-ceo-note">
         {t({
           bn: 'এই প্যানেল শুধু মালিকের জন্য — এখানকার সব সংখ্যা আসল তথ্য থেকে আসে, নমুনা সংখ্যা দেখানো হয় না।',
