@@ -13,7 +13,7 @@
 // value with its source, or hides the tile.
 
 import { collection, getCountFromServer, query, where } from 'firebase/firestore';
-import type { Firestore } from 'firebase/firestore';
+import type { CollectionReference, Firestore, Query, DocumentData } from 'firebase/firestore';
 
 /** Last verified by the Step 2 loader run + live /library check, 21 Nov 2026. */
 export const LAST_VERIFIED_INVENTORY = {
@@ -40,7 +40,9 @@ export interface CeoCounts {
   pendingVerifications: number | null;
 }
 
-async function tryCount(db: Firestore, q: Parameters<typeof getCountFromServer>[0]): Promise<number | null> {
+async function tryCount(
+  q: Query<DocumentData, DocumentData> | CollectionReference<DocumentData, DocumentData>,
+): Promise<number | null> {
   try {
     const snap = await getCountFromServer(q);
     return snap.data().count;
@@ -53,13 +55,10 @@ async function tryCount(db: Firestore, q: Parameters<typeof getCountFromServer>[
 
 export async function getCeoCounts(db: Firestore): Promise<CeoCounts> {
   const [users, books, exams, pending] = await Promise.all([
-    tryCount(db, collection(db, 'users')),
-    tryCount(db, query(collection(db, 'books'), where('reviewStatus', '==', 'Published'))),
-    tryCount(db, query(collection(db, 'quizzes'), where('reviewStatus', '==', 'Published'))),
-    tryCount(
-      db,
-      query(collection(db, 'teacherVerifications'), where('status', '==', 'pending')),
-    ),
+    tryCount(collection(db, 'users')),
+    tryCount(query(collection(db, 'books'), where('reviewStatus', '==', 'Published'))),
+    tryCount(query(collection(db, 'quizzes'), where('reviewStatus', '==', 'Published'))),
+    tryCount(query(collection(db, 'teacherVerifications'), where('status', '==', 'pending'))),
   ]);
   return {
     users,
