@@ -12,6 +12,12 @@ import { PageShell, EmptyState } from '../components/PageShell';
 import { AlertBox, Button, Card, Chip, SkeletonCards } from '../components/ui';
 import AdSlot from '../components/AdSlot';
 import { listPublishedBooks, type Book } from '../lib/content';
+import {
+  classFilterFromParam,
+  classFilterOptions,
+  levelOfClassFilter,
+  matchesClassFilter,
+} from '../lib/classLevels';
 
 const PAGE_SIZE = 20;
 
@@ -25,7 +31,9 @@ export default function LibraryPage() {
   const [params] = useSearchParams();
   const [query, setQuery] = useState(() => params.get('q') ?? '');
   const [typeFilter, setTypeFilter] = useState(() => params.get('type') ?? '');
-  const [classFilter, setClassFilter] = useState(() => params.get('class') ?? '');
+  // `?class=` accepts a level slug (class-1-5, hsc, …) or a raw classLevel
+  // value (SSC, 1st Year, …) — see lib/classLevels.
+  const [classFilter, setClassFilter] = useState(() => classFilterFromParam(params.get('class')));
   const [deptFilter, setDeptFilter] = useState(() => params.get('dept') ?? '');
   const [page, setPage] = useState(1);
 
@@ -43,22 +51,31 @@ export default function LibraryPage() {
     () => [...new Set((books ?? []).map((b) => b.educationType).filter(Boolean))].sort(),
     [books],
   );
-  const classes = useMemo(
-    () =>
-      [...new Set((books ?? []).filter((b) => !typeFilter || b.educationType === typeFilter).map((b) => b.classLevel).filter(Boolean))].sort(),
-    [books, typeFilter],
-  );
+  // Class options list EVERY class level — including Class 1–5 and Class
+  // 6–8, which have zero books (owner brief 21 Nov 13:20). Levels are
+  // offered as `level:<slug>` options; any extra classLevel found in live
+  // data that no level covers stays as a raw option.
+  const classes = useMemo(() => {
+    const present = [...new Set((books ?? []).map((b) => b.classLevel).filter(Boolean))];
+    const byType = typeFilter
+      ? present.filter((c) => (books ?? []).some((b) => b.classLevel === c && b.educationType === typeFilter))
+      : present;
+    return classFilterOptions(byType, typeFilter || null);
+  }, [books, typeFilter]);
   const departments = useMemo(
     () =>
-      [...new Set((books ?? []).filter((b) => (!typeFilter || b.educationType === typeFilter) && (!classFilter || b.classLevel === classFilter)).map((b) => b.department).filter(Boolean))].sort(),
+      [...new Set((books ?? []).filter((b) => (!typeFilter || b.educationType === typeFilter) && matchesClassFilter(b, classFilter)).map((b) => b.department).filter(Boolean))].sort(),
     [books, typeFilter, classFilter],
   );
+  // The level behind the selected class option, if any — used for the
+  // honest coming-soon empty state (never fake books).
+  const selectedLevel = levelOfClassFilter(classFilter);
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
     return (books ?? []).filter((b) => {
       if (typeFilter && b.educationType !== typeFilter) return false;
-      if (classFilter && b.classLevel !== classFilter) return false;
+      if (!matchesClassFilter(b, classFilter)) return false;
       if (deptFilter && b.department !== deptFilter) return false;
       if (q) {
         const hay = `${b.title} ${b.paperCode} ${b.department} ${b.subject}`.toLowerCase();
@@ -135,8 +152,8 @@ export default function LibraryPage() {
               >
                 <option value="">সব শ্রেণি / All classes</option>
                 {classes.map((c) => (
-                  <option key={c} value={c}>
-                    {c}
+                  <option key={c.value} value={c.value}>
+                    {c.label}
                   </option>
                 ))}
               </select>
@@ -164,7 +181,36 @@ export default function LibraryPage() {
             {filtered.length !== books.length ? ` (মোট ${books.length}টি প্রকাশিত / of ${books.length} published)` : ''}
           </p>
           {filtered.length === 0 ? (
-            <p>এই খোঁজে কোনো বই পাওয়া যায়নি — ফিল্টার বদলে আবার চেষ্টা করুন। / No books match — try different filters.</p>
+            selectedLevel && !selectedLevel.educationType ? (
+              <Card>
+                <div style={{ fontWeight: 700, color: '#142B3B', fontSize: 17 }}>
+                  {selectedLevel.bn} — শীঘ্রই আসছে! / Coming soon
+                </div>
+                <p style={{ margin: '8px 0 12px', color: '#68747B', fontSize: 15, lineHeight: 1.7 }}>
+                  {selectedLevel.bn}-এর বই এখনো লাইব্রেরিতে প্রকাশিত হয়নি — বই, পাঠ ও প্রশ্ন তৈরি
+                  হচ্ছে। প্রকাশিত হলেই এখানে দেখতে পাবে। / No books for {selectedLevel.en} are
+                  published yet — books, lessons and questions are being prepared.
+                </p>
+                <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
+                  <Link to={`/class/${selectedLevel.slug}`} style={{ fontWeight: 600 }}>
+                    {selectedLevel.bn} ড্যাশবোর্ড →
+                  </Link>
+                  <Link
+                    to="/library"
+                    onClick={() => {
+                      setTypeFilter('');
+                      setClassFilter('');
+                      setDeptFilter('');
+                    }}
+                    style={{ fontWeight: 600 }}
+                  >
+                    সব বই দেখুন / See all books →
+                  </Link>
+                </div>
+              </Card>
+            ) : (
+              <p>এই খোঁজে কোনো বই পাওয়া যায়নি — ফিল্টার বদলে আবার চেষ্টা করুন। / No books match — try different filters.</p>
+            )
           ) : null}
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: 12 }}>
             {pageBooks.map((b) => (

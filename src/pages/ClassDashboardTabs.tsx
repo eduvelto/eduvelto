@@ -18,6 +18,7 @@ import { Link } from 'react-router-dom';
 import { Button, Card, Chip, LinkButton, ProgressBar } from '../components/ui';
 import { EmptyState } from '../components/PageShell';
 import AdPlaceholder from '../components/AdPlaceholder';
+import { ComingSoonCompact } from '../components/ComingSoon';
 import type { Book } from '../lib/content';
 import { bookTitleOf, type Quiz, type QuizAttempt } from '../lib/exams';
 import type { QuizSummary, SubjectProgress } from '../lib/progress';
@@ -100,12 +101,7 @@ export function BooksTab({ data }: { data: ClassTabData }) {
   const safePage = Math.min(page, pageCount);
   const pageBooks = data.books.slice((safePage - 1) * BOOKS_PAGE_SIZE, safePage * BOOKS_PAGE_SIZE);
   if (data.books.length === 0) {
-    return (
-      <EmptyState
-        bn="এই শ্রেণির কোনো বই এখনো প্রকাশিত হয়নি — শীঘ্রই আসছে।"
-        en="No books published for this class yet — coming soon."
-      />
-    );
+    return <ComingSoonCompact def={data.def} whatBn="বই" whatEn="Books" />;
   }
   return (
     <>
@@ -139,12 +135,7 @@ export function BooksTab({ data }: { data: ClassTabData }) {
 
 export function SubjectsTab({ data }: { data: ClassTabData }) {
   if (data.subjects.length === 0) {
-    return (
-      <EmptyState
-        bn="এই শ্রেণির কোনো বিষয় এখনো প্রকাশিত হয়নি — শীঘ্রই আসছে।"
-        en="No subjects published for this class yet — coming soon."
-      />
-    );
+    return <ComingSoonCompact def={data.def} whatBn="বিষয়" whatEn="Subjects" />;
   }
   return (
     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(240px, 1fr))', gap: 12 }}>
@@ -177,12 +168,7 @@ export function SubjectsTab({ data }: { data: ClassTabData }) {
 
 export function PracticeTab({ data }: { data: ClassTabData }) {
   if (data.books.length === 0) {
-    return (
-      <EmptyState
-        bn="এই শ্রেণির অনুশীলন প্রশ্ন এখনো তৈরি হয়নি — বই প্রকাশিত হলে এখানে আসবে।"
-        en="Practice questions for this class are not ready yet."
-      />
-    );
+    return <ComingSoonCompact def={data.def} whatBn="অনুশীলন প্রশ্ন" whatEn="Practice questions" />;
   }
   return (
     <>
@@ -220,6 +206,11 @@ export function PracticeTab({ data }: { data: ClassTabData }) {
 
 export function TestsTab({ data }: { data: ClassTabData }) {
   if (data.quizzes.length === 0) {
+    // Class with no books at all → the friendly Coming Soon state.
+    // Class WITH books but no quizzes yet → the plain "no tests yet" state.
+    if (data.books.length === 0) {
+      return <ComingSoonCompact def={data.def} whatBn="পরীক্ষা" whatEn="Tests" />;
+    }
     return (
       <EmptyState
         bn="এই শ্রেণির কোনো পরীক্ষা এখনো তৈরি হয়নি — শীঘ্রই আসছে।"

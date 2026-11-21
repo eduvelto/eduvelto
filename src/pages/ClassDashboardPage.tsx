@@ -28,6 +28,7 @@ import { Link, useParams } from 'react-router-dom';
 import { PageShell, EmptyState } from '../components/PageShell';
 import { AlertBox, Card, Chip, LinkButton, ProgressBar, Reveal, SkeletonCards } from '../components/ui';
 import AdPlaceholder from '../components/AdPlaceholder';
+import { ComingSoonHero } from '../components/ComingSoon';
 import { useAuth } from '../lib/auth';
 import { listPublishedBooks, type Book } from '../lib/content';
 import { listMyAttempts, listPublishedQuizzes, type Quiz, type QuizAttempt } from '../lib/exams';
@@ -359,29 +360,7 @@ export default function ClassDashboardPage() {
           {activeTab === 'home' ? (
             <>
               {!ready ? (
-                <>
-                  <EmptyState
-                    bn="এই শ্রেণির বই এখনো লাইব্রেরিতে আসেনি — শীঘ্রই আসছে।"
-                    en="Books for this class have not arrived in the library yet — coming soon."
-                  />
-                  {def.slug === 'class-1-5' ? (
-                    <Card style={{ marginTop: 16 }}>
-                      <div style={{ fontWeight: 700, color: '#142B3B' }}>তৈরি হচ্ছে / In preparation</div>
-                      <p style={{ margin: '6px 0 0', color: '#68747B', fontSize: 14 }}>
-                        প্রথম খসড়া অধ্যায় — Class 5 গণিত, অধ্যায় ৯: শতকরা — শিক্ষক যাচাইয়ের জন্য
-                        তৈরি হচ্ছে। এটি এখনো লাইব্রেরির বই নয়, তাই এখানে কোনো বই দেখানো হচ্ছে না।
-                      </p>
-                    </Card>
-                  ) : null}
-                  <div style={{ display: 'flex', gap: 10, marginTop: 16, flexWrap: 'wrap' }}>
-                    <LinkButton to="/library" variant="primary">
-                      লাইব্রেরি দেখুন / Browse library
-                    </LinkButton>
-                    <LinkButton to="/exam" variant="outline">
-                      পরীক্ষা দেখুন / See exams
-                    </LinkButton>
-                  </div>
-                </>
+                <ComingSoonHero def={def} />
               ) : (
                 <>
                   {/* Continue learning — real attempts only, never a fake % */}

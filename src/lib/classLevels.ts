@@ -129,3 +129,70 @@ export function quizzesForClass(quizzes: Quiz[], def: ClassLevelDef): Quiz[] {
 export function subjectsForClass(books: Book[], def: ClassLevelDef): string[] {
   return [...new Set(booksForClass(books, def).map((b) => b.department).filter(Boolean))].sort();
 }
+
+// ---------------------------------------------------------------------------
+// Class filter options (owner brief 21 Nov 13:20, BINDING): the Library and
+// Directory "শ্রেণি / Class" dropdowns must list EVERY class level —
+// including Class 1–5 and Class 6–8, which have zero books — never only
+// the levels that happen to have content. A level with no books still
+// appears as an option; selecting it shows an honest empty/coming-soon
+// state, never fake books.
+//
+// Option values: `level:<slug>` for the 5 class levels, the raw classLevel
+// string for any extra value found in live data that no level covers
+// (e.g. Madrasa/Technical class levels) so nothing that exists today
+// disappears. `?class=` deep links accept both forms.
+// ---------------------------------------------------------------------------
+
+export interface ClassFilterOption {
+  value: string;
+  label: string;
+  levelSlug?: string;
+}
+
+/** All class-filter options for a dropdown, levels first, then extras. */
+export function classFilterOptions(
+  presentClassLevels: string[],
+  typeFilter?: string | null,
+): ClassFilterOption[] {
+  const covered = new Set<string>();
+  for (const def of CLASS_LEVELS) for (const cl of def.classLevels) covered.add(cl);
+  const options: ClassFilterOption[] = [];
+  for (const def of CLASS_LEVELS) {
+    // Cascade: when a type is chosen, only levels of that type are offered.
+    if (typeFilter && def.educationType !== typeFilter) continue;
+    options.push({ value: `level:${def.slug}`, label: `${def.bn} · ${def.en}`, levelSlug: def.slug });
+  }
+  const extras = [...new Set(presentClassLevels.filter((c) => c && !covered.has(c)))].sort();
+  for (const c of extras) options.push({ value: c, label: c });
+  return options;
+}
+
+/** Does this row's classLevel belong to the selected class-filter value? */
+export function matchesClassFilter(
+  row: { educationType?: string; type?: string; classLevel: string },
+  classFilter: string,
+): boolean {
+  if (!classFilter) return true;
+  if (classFilter.startsWith('level:')) {
+    const def = classLevelBySlug(classFilter.slice('level:'.length));
+    if (!def || !def.educationType) return false; // level with no books yet
+    const type = row.educationType ?? row.type ?? '';
+    return type === def.educationType && def.classLevels.includes(row.classLevel);
+  }
+  return row.classLevel === classFilter;
+}
+
+/** Normalise a `?class=` deep-link value to a filter value. */
+export function classFilterFromParam(param: string | null): string {
+  if (!param) return '';
+  if (param.startsWith('level:')) return param;
+  if (classLevelBySlug(param)) return `level:${param}`;
+  return param;
+}
+
+/** The level behind a selected class-filter value, if it is a level. */
+export function levelOfClassFilter(classFilter: string): ClassLevelDef | undefined {
+  if (!classFilter.startsWith('level:')) return undefined;
+  return classLevelBySlug(classFilter.slice('level:'.length));
+}

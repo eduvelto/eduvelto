@@ -11,6 +11,11 @@ import { Link } from 'react-router-dom';
 import { PageShell, EmptyState } from '../components/PageShell';
 import { AlertBox, Button, Card, Chip, SkeletonCards } from '../components/ui';
 import { listPublishedDirectory, type DirectoryRow } from '../lib/content';
+import {
+  classFilterOptions,
+  levelOfClassFilter,
+  matchesClassFilter,
+} from '../lib/classLevels';
 
 const PAGE_SIZE = 20;
 
@@ -45,16 +50,23 @@ export default function DirectoryPage() {
       [...new Set(all.filter((r) => (!type || r.type === type) && (!board || r.board === board)).map((r) => r.program).filter(Boolean))].sort(),
     [all, type, board],
   );
-  const classes = useMemo(
-    () =>
-      [...new Set(all.filter((r) => (!type || r.type === type) && (!board || r.board === board) && (!program || r.program === program)).map((r) => r.classLevel).filter(Boolean))].sort(),
-    [all, type, board, program],
-  );
+  // Class options list EVERY class level — including Class 1–5 and Class
+  // 6–8, which have no entries yet (owner brief 21 Nov 13:20). Levels are
+  // offered as `level:<slug>` options; extra classLevel values found in
+  // live rows stay as raw options.
+  const classes = useMemo(() => {
+    const narrowed = all.filter(
+      (r) => (!type || r.type === type) && (!board || r.board === board) && (!program || r.program === program),
+    );
+    const byParents = [...new Set(narrowed.map((r) => r.classLevel).filter(Boolean))];
+    return classFilterOptions(byParents, type || null);
+  }, [all, type, board, program]);
   const departments = useMemo(
     () =>
-      [...new Set(all.filter((r) => (!type || r.type === type) && (!board || r.board === board) && (!program || r.program === program) && (!classLevel || r.classLevel === classLevel)).map((r) => r.department).filter(Boolean))].sort(),
+      [...new Set(all.filter((r) => (!type || r.type === type) && (!board || r.board === board) && (!program || r.program === program) && matchesClassFilter(r, classLevel)).map((r) => r.department).filter(Boolean))].sort(),
     [all, type, board, program, classLevel],
   );
+  const selectedLevel = levelOfClassFilter(classLevel);
 
   const filtered = useMemo(
     () =>
@@ -63,7 +75,7 @@ export default function DirectoryPage() {
           (!type || r.type === type) &&
           (!board || r.board === board) &&
           (!program || r.program === program) &&
-          (!classLevel || r.classLevel === classLevel) &&
+          matchesClassFilter(r, classLevel) &&
           (!dept || r.department === dept),
       ),
     [all, type, board, program, classLevel, dept],
@@ -169,8 +181,8 @@ export default function DirectoryPage() {
               >
                 <option value="">সব শ্রেণি / All classes</option>
                 {classes.map((c) => (
-                  <option key={c} value={c}>
-                    {c}
+                  <option key={c.value} value={c.value}>
+                    {c.label}
                   </option>
                 ))}
               </select>
@@ -197,7 +209,25 @@ export default function DirectoryPage() {
             {filtered.length}টি এন্ট্রি / {filtered.length} entries
           </p>
           {filtered.length === 0 ? (
-            <p>এই বাছাইয়ে কিছু পাওয়া যায়নি — উপরের ধাপ বদলে আবার চেষ্টা করুন। / Nothing matches — try different steps above.</p>
+            selectedLevel && !selectedLevel.educationType ? (
+              <Card>
+                <div style={{ fontWeight: 700, color: '#142B3B', fontSize: 17 }}>
+                  {selectedLevel.bn} — শীঘ্রই আসছে! / Coming soon
+                </div>
+                <p style={{ margin: '8px 0 12px', color: '#68747B', fontSize: 15, lineHeight: 1.7 }}>
+                  {selectedLevel.bn}-এর কোনো নির্দেশিকা এন্ট্রি এখনো প্রকাশিত হয়নি — তথ্য তৈরি হচ্ছে।
+                  প্রকাশিত হলেই এখানে দেখতে পাবে। / No directory entries for {selectedLevel.en} yet
+                  — information is being prepared.
+                </p>
+                <p style={{ margin: 0 }}>
+                  <Link to={`/class/${selectedLevel.slug}`} style={{ fontWeight: 600 }}>
+                    {selectedLevel.bn} ড্যাশবোর্ড →
+                  </Link>
+                </p>
+              </Card>
+            ) : (
+              <p>এই বাছাইয়ে কিছু পাওয়া যায়নি — উপরের ধাপ বদলে আবার চেষ্টা করুন। / Nothing matches — try different steps above.</p>
+            )
           ) : null}
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: 12 }}>
             {pageRows.map((r) => (
