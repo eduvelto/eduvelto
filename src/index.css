@@ -2768,7 +2768,11 @@ a.ev-ceo-list-row:hover {
   background: #f5f7fa;
 }
 .ev-admin-sidebar {
-  width: 240px;
+  /* Defect fix (21 Nov 2026): 240px truncated the EN section labels —
+     "Content Management" rendered "Content Managem…" and "Analytics &
+     Reports" (the longest label) also clipped at 1280px. 268px fits every
+     EN + BN label with room; the Bangla labels were already fine. */
+  width: 268px;
   flex: none;
   background: var(--forest-deep);
   color: #fff;
@@ -3493,5 +3497,16 @@ button.ev-admin-quick-item:hover {
   }
   .ev-admin-banner-title {
     font-size: 22px;
+  }
+}
+
+@media (max-width: 480px) {
+  /* Defect fix (21 Nov 2026): at 390px the top-bar search is only ~120px
+     wide (hamburger + Live Site + bell + avatar share the row), so the
+     placeholder truncated to "Search" / "যেকো". Hide the placeholder text
+     on very small screens — the ⌕ icon stays visible and the input still
+     works; typed text still shows. Desktop/tablet placeholder unchanged. */
+  .ev-admin-search-input::placeholder {
+    color: transparent;
   }
 }
