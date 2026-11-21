@@ -72,6 +72,74 @@ a:hover {
   text-decoration: underline;
 }
 
+/* ---- Scroll-reveal (lightweight; JS adds .ev-reveal-visible on intersect) ---- */
+.ev-reveal {
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 400ms ease-out, transform 400ms ease-out;
+  display: flex;
+  flex-direction: column;
+}
+/* A card directly inside a reveal stretches to fill its grid cell. */
+.ev-reveal > .ev-card {
+  flex: 1;
+}
+.ev-reveal-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ---- Hero glow: solid navy + a soft gold radial glow (CSS only, no image) ---- */
+.ev-hero {
+  position: relative;
+  overflow: hidden;
+  background: #0a1f44;
+}
+.ev-hero::after {
+  content: '';
+  position: absolute;
+  top: -70px;
+  right: -70px;
+  width: 260px;
+  height: 260px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(241, 179, 8, 0.28) 0%, rgba(241, 179, 8, 0) 70%);
+  pointer-events: none;
+}
+
+/* ---- Numbered step circle (How to start) ---- */
+.ev-step-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--gold);
+  color: var(--navy-dark);
+  font-family: var(--font-head);
+  font-size: 17px;
+  font-weight: 800;
+  flex: none;
+}
+
+/* ---- Icon tile (small line-icon container inside cards) ---- */
+.ev-icon-tile {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: var(--blue-soft);
+  color: var(--navy);
+  margin-bottom: 10px;
+}
+.ev-icon-tile-gold {
+  background: var(--gold-soft);
+  color: #7a5200;
+}
+
 /* ---- Page enter animation (lightweight, skipped for reduced motion) ---- */
 @keyframes ev-fade-up {
   from {
@@ -363,8 +431,11 @@ a:hover {
   box-shadow: inset 0 -3px 0 var(--star);
 }
 
-/* ---- App header (navy) ---- */
+/* ---- App header (navy, sticky) ---- */
 .ev-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
   background: #0a1f44;
   color: #fff;
   padding: 10px 16px;
@@ -381,6 +452,28 @@ a:hover {
   margin-left: auto;
   align-items: center;
 }
+.ev-menu-btn {
+  display: none;
+  margin-left: auto;
+  min-width: 44px;
+  min-height: 44px;
+  padding: 8px 12px;
+  border: 1px solid rgba(255, 255, 255, 0.65);
+  border-radius: 10px;
+  background: transparent;
+  color: #fff;
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.ev-menu-btn:hover {
+  background: rgba(255, 255, 255, 0.12);
+}
+.ev-menu-btn:focus-visible {
+  outline: 3px solid var(--star);
+  outline-offset: 2px;
+}
 .ev-btn-header {
   background: transparent;
   border: 1px solid rgba(255, 255, 255, 0.65);
@@ -390,13 +483,45 @@ a:hover {
   background: rgba(255, 255, 255, 0.12);
   border-color: #fff;
 }
+.ev-header-tagline {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.85);
+}
+@media (max-width: 860px) {
+  .ev-menu-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+  .ev-header-nav {
+    display: none;
+    flex-basis: 100%;
+    flex-direction: column;
+    align-items: stretch;
+    margin-left: 0;
+    gap: 2px;
+    padding-top: 4px;
+    border-top: 1px solid rgba(255, 255, 255, 0.18);
+  }
+  .ev-header-nav-open {
+    display: flex;
+  }
+  .ev-header-nav .ev-navlink {
+    padding: 12px 10px;
+    font-size: 16px;
+  }
+  .ev-header-nav .ev-btn-header {
+    margin-top: 6px;
+  }
+}
 @media (max-width: 560px) {
   .ev-header {
     padding: 10px 12px;
     gap: 8px 12px;
   }
-  .ev-header-nav {
-    margin-left: 0;
+  .ev-header-tagline {
+    display: none;
   }
 }
 
@@ -407,8 +532,14 @@ a:hover {
   .ev-spinner,
   .ev-progress > span,
   .ev-card-hover,
-  .ev-btn {
+  .ev-btn,
+  .ev-reveal {
     animation: none !important;
     transition: none !important;
+  }
+  /* Reveal content must never stay hidden when motion is reduced. */
+  .ev-reveal {
+    opacity: 1 !important;
+    transform: none !important;
   }
 }

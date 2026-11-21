@@ -2,8 +2,71 @@
 // one EmptyState, so every page looks like the same product.
 // All styling lives in index.css classes; these components only compose them.
 
-import type { ButtonHTMLAttributes, ReactNode } from 'react';
+import { useEffect, useRef, useState, type ButtonHTMLAttributes, type ReactNode } from 'react';
 import { Link } from 'react-router-dom';
+
+/** True when the OS asks for reduced motion — animations then jump to the end state. */
+export function prefersReducedMotion(): boolean {
+  return typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+}
+
+/** Count-up number (e.g. 0 → 609). Jumps straight to the value under reduced motion. */
+export function AnimatedNumber(props: { value: number; durationMs?: number }) {
+  const [shown, setShown] = useState(0);
+  const value = props.value;
+  useEffect(() => {
+    if (prefersReducedMotion()) {
+      setShown(value);
+      return;
+    }
+    let raf = 0;
+    const start = performance.now();
+    const duration = props.durationMs ?? 700;
+    const tick = (now: number) => {
+      const p = Math.min(1, (now - start) / duration);
+      setShown(Math.round(value * (1 - Math.pow(1 - p, 3))));
+      if (p < 1) raf = requestAnimationFrame(tick);
+    };
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+  }, [value, props.durationMs]);
+  return <>{shown.toLocaleString('en-US')}</>;
+}
+
+/** Scroll-reveal wrapper: fades + slides content in once when it enters the viewport.
+ *  Visible immediately when IntersectionObserver is unavailable or motion is reduced. */
+export function Reveal(props: { children: ReactNode; delayMs?: number; className?: string }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [visible, setVisible] = useState(false);
+  useEffect(() => {
+    if (prefersReducedMotion() || typeof IntersectionObserver === 'undefined') {
+      setVisible(true);
+      return;
+    }
+    const el = ref.current;
+    if (!el) return;
+    const io = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((e) => e.isIntersecting)) {
+          setVisible(true);
+          io.disconnect();
+        }
+      },
+      { threshold: 0.08 },
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+  return (
+    <div
+      ref={ref}
+      className={`ev-reveal ${visible ? 'ev-reveal-visible' : ''} ${props.className ?? ''}`.trim()}
+      style={props.delayMs ? { transitionDelay: `${props.delayMs}ms` } : undefined}
+    >
+      {props.children}
+    </div>
+  );
+}
 
 type ButtonVariant = 'primary' | 'accent' | 'gold' | 'outline' | 'danger' | 'ghost';
 type ButtonSize = 'sm' | 'md' | 'lg';
@@ -128,8 +191,9 @@ export function AlertBox(props: { tone: 'error' | 'ok' | 'info'; children: React
   );
 }
 
-/** Stat tile for dashboards / progress / home hero. */
-export function StatCard(props: { value: string; labelBn: string; labelEn: string; tone?: 'blue' | 'gold' }) {
+/** Stat tile for dashboards / progress / home hero. Pass `numeric` to animate the
+ *  number counting up; `suffix` (e.g. "%") is appended after the animated number. */
+export function StatCard(props: { value: string; labelBn: string; labelEn: string; tone?: 'blue' | 'gold'; numeric?: number; suffix?: string }) {
   return (
     <div className="ev-card" style={{ textAlign: 'center', padding: '18px 12px' }}>
       <div
@@ -141,7 +205,14 @@ export function StatCard(props: { value: string; labelBn: string; labelEn: strin
           color: props.tone === 'gold' ? '#F5A623' : '#0A1F44',
         }}
       >
-        {props.value}
+        {props.numeric !== undefined ? (
+          <>
+            <AnimatedNumber value={props.numeric} />
+            {props.suffix ?? ''}
+          </>
+        ) : (
+          props.value
+        )}
       </div>
       <div style={{ fontWeight: 600, color: '#0A1F44', marginTop: 2 }}>{props.labelBn}</div>
       <div style={{ fontSize: 13, color: '#5A6478' }}>{props.labelEn}</div>
@@ -149,13 +220,19 @@ export function StatCard(props: { value: string; labelBn: string; labelEn: strin
   );
 }
 
-/** Thin progress bar (0–100). Animated; freezes under reduced motion via CSS. */
+/** Thin progress bar (0–100). Animates from 0 to the value on mount;
+ *  freezes under reduced motion via CSS. */
 export function ProgressBar(props: { value: number; tone?: 'blue' | 'gold'; label?: string }) {
   const pct = Math.max(0, Math.min(100, Math.round(props.value)));
+  const [width, setWidth] = useState(0);
+  useEffect(() => {
+    const raf = requestAnimationFrame(() => setWidth(pct));
+    return () => cancelAnimationFrame(raf);
+  }, [pct]);
   return (
     <div>
       <div className={`ev-progress ${props.tone === 'gold' ? 'ev-progress-gold' : ''}`} role="progressbar" aria-valuenow={pct} aria-valuemin={0} aria-valuemax={100} aria-label={props.label ?? `${pct}%`}>
-        <span style={{ width: `${pct}%` }} />
+        <span style={{ width: `${width}%` }} />
       </div>
     </div>
   );

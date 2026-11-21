@@ -10,7 +10,7 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { PageShell } from '../components/PageShell';
-import { AlertBox, Card, Chip, ProgressBar, SkeletonCards, StatCard } from '../components/ui';
+import { AlertBox, Card, Chip, LinkButton, ProgressBar, Reveal, SkeletonCards, StatCard } from '../components/ui';
 import { useAuth } from '../lib/auth';
 import { listBookmarks, type Bookmark } from '../lib/bookmarks';
 import {
@@ -75,10 +75,13 @@ export default function ProgressPage() {
       {loading ? <SkeletonCards count={3} /> : null}
       {!loading && !user ? (
         <Card>
-          <p style={{ margin: 0 }}>
+          <p style={{ margin: '0 0 14px' }}>
             আপনার অগ্রগতি দেখতে <Link to="/login" style={{ fontWeight: 600 }}>লগইন করুন</Link>। /{' '}
             <Link to="/login" style={{ fontWeight: 600 }}>Log in</Link> to see your progress.
           </p>
+          <LinkButton to="/login" variant="accent">
+            লগইন করুন / Log in
+          </LinkButton>
         </Card>
       ) : null}
       {error ? (
@@ -96,35 +99,65 @@ export default function ProgressPage() {
               marginBottom: 8,
             }}
           >
-            <StatCard value={String(totalLessons)} labelBn="পাঠ পড়া হয়েছে" labelEn="Lessons read" />
-            <StatCard value={String(totalAttempted)} labelBn="প্রশ্ন চেষ্টা" labelEn="Questions attempted" />
-            <StatCard value={`${accuracy}%`} labelBn="সঠিক উত্তর" labelEn="Correct answers" tone="gold" />
+            <StatCard value={String(totalLessons)} numeric={totalLessons} labelBn="পাঠ পড়া হয়েছে" labelEn="Lessons read" />
+            <StatCard value={String(totalAttempted)} numeric={totalAttempted} labelBn="প্রশ্ন চেষ্টা" labelEn="Questions attempted" />
+            <StatCard value={`${accuracy}%`} numeric={accuracy} suffix="%" labelBn="সঠিক উত্তর" labelEn="Correct answers" tone="gold" />
+            <StatCard value={String(bookmarks?.length ?? 0)} numeric={bookmarks?.length ?? 0} labelBn="বুকমার্ক" labelEn="Bookmarks" />
           </div>
           <p style={{ color: '#5A6478', fontSize: 14 }}>
             এই সংখ্যাগুলো আপনার নিজের অনুশীলনের ভিত্তিতে — পাঠ পড়া ও নিজে যাচাই করা প্রশ্ন।
             / These numbers come from your own practice — lessons read and self-checked questions.
           </p>
 
-          <h2 style={{ fontFamily: "'Poppins','Hind Siliguri',system-ui,sans-serif", fontSize: 20, color: '#0A1F44', margin: '24px 0 12px' }}>বিষয় অনুযায়ী / By subject</h2>
+          {/* Continue learning — quick actions to the real Library / Exam / Routine. */}
+          <Reveal>
+            <h2 style={{ fontFamily: "'Poppins','Hind Siliguri',system-ui,sans-serif", fontSize: 20, color: '#0A1F44', margin: '24px 0 12px' }}>শেখা চালিয়ে যান / Continue learning</h2>
+          </Reveal>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: 12, marginBottom: 8 }}>
+            <Reveal delayMs={0}>
+              <Card hover>
+                <Link to="/library" style={{ fontWeight: 700, color: '#0A1F44' }}>লাইব্রেরি / Library</Link>
+                <p style={{ margin: '6px 0 0', color: '#5A6478', fontSize: 14 }}>নতুন পাঠ পড়ুন ও প্রশ্নের অনুশীলন করুন।</p>
+              </Card>
+            </Reveal>
+            <Reveal delayMs={80}>
+              <Card hover>
+                <Link to="/exam" style={{ fontWeight: 700, color: '#0A1F44' }}>পরীক্ষা / Exams</Link>
+                <p style={{ margin: '6px 0 0', color: '#5A6478', fontSize: 14 }}>কুইজ দিন — ফলাফল এখানে যোগ হবে।</p>
+              </Card>
+            </Reveal>
+            <Reveal delayMs={160}>
+              <Card hover>
+                <Link to="/routine" style={{ fontWeight: 700, color: '#0A1F44' }}>রুটিন / Routine</Link>
+                <p style={{ margin: '6px 0 0', color: '#5A6478', fontSize: 14 }}>পড়ার পরিকল্পনা — শীঘ্রই আসছে।</p>
+              </Card>
+            </Reveal>
+          </div>
+
+          <Reveal>
+            <h2 style={{ fontFamily: "'Poppins','Hind Siliguri',system-ui,sans-serif", fontSize: 20, color: '#0A1F44', margin: '24px 0 12px' }}>বিষয় অনুযায়ী / By subject</h2>
+          </Reveal>
           {progress.length === 0 ? (
             <p>এখনো কোনো পাঠ শেষ করেননি — লাইব্রেরি থেকে একটি পাঠ পড়ে &quot;পড়া শেষ করেছি&quot; চাপুন। / You have not finished a lesson yet — read one from the library and press “Mark lesson complete”.</p>
           ) : (
             <div style={{ display: 'grid', gap: 12 }}>
-              {progress.map((p) => {
+              {progress.map((p, i) => {
                 const pct = p.questionsAttempted > 0 ? Math.round((p.questionsCorrect / p.questionsAttempted) * 100) : 0;
                 return (
-                  <Card key={p.id}>
-                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, alignItems: 'center', justifyContent: 'space-between' }}>
-                      <strong style={{ fontSize: 16, color: '#0A1F44' }}>{p.subject}</strong>
-                      <Chip tone={pct >= 60 ? 'blue' : 'gold'}>
-                        {p.questionsAttempted > 0 ? `${pct}% সঠিক` : 'এখনো প্রশ্ন করা হয়নি'}
-                      </Chip>
-                    </div>
-                    <p style={{ margin: '8px 0', color: '#5A6478', fontSize: 14 }}>
-                      {p.lessonsRead.length}টি পাঠ · {p.questionsAttempted}টি প্রশ্ন চেষ্টা · {p.questionsCorrect}টি সঠিক
-                    </p>
-                    {p.questionsAttempted > 0 ? <ProgressBar value={pct} label={`${p.subject}: ${pct}% correct`} /> : null}
-                  </Card>
+                  <Reveal key={p.id} delayMs={Math.min(i, 3) * 60}>
+                    <Card>
+                      <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, alignItems: 'center', justifyContent: 'space-between' }}>
+                        <strong style={{ fontSize: 16, color: '#0A1F44' }}>{p.subject}</strong>
+                        <Chip tone={pct >= 60 ? 'blue' : 'gold'}>
+                          {p.questionsAttempted > 0 ? `${pct}% সঠিক` : 'এখনো প্রশ্ন করা হয়নি'}
+                        </Chip>
+                      </div>
+                      <p style={{ margin: '8px 0', color: '#5A6478', fontSize: 14 }}>
+                        {p.lessonsRead.length}টি পাঠ · {p.questionsAttempted}টি প্রশ্ন চেষ্টা · {p.questionsCorrect}টি সঠিক
+                      </p>
+                      {p.questionsAttempted > 0 ? <ProgressBar value={pct} label={`${p.subject}: ${pct}% correct`} /> : null}
+                    </Card>
+                  </Reveal>
                 );
               })}
             </div>
@@ -138,23 +171,25 @@ export default function ProgressPage() {
                 Weak/strong areas are based on your own quiz attempts (below 60% is weak).
               </p>
               <div style={{ display: 'grid', gap: 12 }}>
-                {summaries.map((s) => (
-                  <Card key={s.id}>
-                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, alignItems: 'center', justifyContent: 'space-between' }}>
-                      <strong style={{ fontSize: 16, color: '#0A1F44' }}>
-                        {s.subject} {s.month ? `· ${s.month}` : ''}
-                      </strong>
-                      <Chip tone="gold">গড় {s.averagePercentage}% · সেরা {s.bestPercentage}%</Chip>
-                    </div>
-                    <p style={{ margin: '8px 0 10px', color: '#5A6478', fontSize: 14 }}>{s.attemptsCount}টি চেষ্টা</p>
-                    <ProgressBar value={s.averagePercentage} label={`${s.subject} average ${s.averagePercentage}%`} />
-                    {s.weakChapters.length > 0 ? (
-                      <p style={{ margin: '10px 0 0', fontSize: 14 }}>দুর্বল জায়গা / Weak: {s.weakChapters.join(', ')}</p>
-                    ) : null}
-                    {s.strongChapters.length > 0 ? (
-                      <p style={{ margin: '6px 0 0', fontSize: 14 }}>শক্ত জায়গা / Strong: {s.strongChapters.join(', ')}</p>
-                    ) : null}
-                  </Card>
+                {summaries.map((s, i) => (
+                  <Reveal key={s.id} delayMs={Math.min(i, 3) * 60}>
+                    <Card>
+                      <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, alignItems: 'center', justifyContent: 'space-between' }}>
+                        <strong style={{ fontSize: 16, color: '#0A1F44' }}>
+                          {s.subject} {s.month ? `· ${s.month}` : ''}
+                        </strong>
+                        <Chip tone="gold">গড় {s.averagePercentage}% · সেরা {s.bestPercentage}%</Chip>
+                      </div>
+                      <p style={{ margin: '8px 0 10px', color: '#5A6478', fontSize: 14 }}>{s.attemptsCount}টি চেষ্টা</p>
+                      <ProgressBar value={s.averagePercentage} label={`${s.subject} average ${s.averagePercentage}%`} />
+                      {s.weakChapters.length > 0 ? (
+                        <p style={{ margin: '10px 0 0', fontSize: 14 }}>দুর্বল জায়গা / Weak: {s.weakChapters.join(', ')}</p>
+                      ) : null}
+                      {s.strongChapters.length > 0 ? (
+                        <p style={{ margin: '6px 0 0', fontSize: 14 }}>শক্ত জায়গা / Strong: {s.strongChapters.join(', ')}</p>
+                      ) : null}
+                    </Card>
+                  </Reveal>
                 ))}
               </div>
             </>

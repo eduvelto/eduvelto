@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { Link, NavLink, Route, Routes, useLocation } from 'react-router-dom';
 import { strings } from './i18n/strings';
 import { useAuth } from './lib/auth';
@@ -61,14 +62,30 @@ export default function App() {
   // When ads are not configured there is no reservation and no gap.
   const showBottomBanner = isBottomBannerAllowed(location.pathname);
   const bannerLive = showBottomBanner && adsEnabled('bottom-banner');
+  // Mobile menu (≤860px): the full nav would wrap into 3 rows, so it lives
+  // behind a hamburger button and closes on every navigation.
+  const [menuOpen, setMenuOpen] = useState(false);
+  useEffect(() => {
+    setMenuOpen(false);
+  }, [location.pathname]);
   return (
     <div style={bannerLive ? { paddingBottom: `calc(${BOTTOM_BANNER_RESERVE_PX}px + env(safe-area-inset-bottom, 0px))` } : undefined}>
       <header className="ev-header">
         <Link to="/" style={{ display: 'inline-flex', alignItems: 'center', textDecoration: 'none' }} aria-label="Eduvelto — হোম">
           <img src="/logo-white.png" alt="Eduvelto" style={{ height: 40, width: 'auto', display: 'block' }} />
         </Link>
-        <span style={{ fontSize: 14, color: 'rgba(255,255,255,0.85)' }}>{strings.tagline.bn}</span>
-        <nav aria-label="প্রধান মেনু" className="ev-header-nav">
+        <span className="ev-header-tagline">{strings.tagline.bn}</span>
+        <button
+          type="button"
+          className="ev-menu-btn"
+          aria-expanded={menuOpen}
+          aria-controls="ev-main-nav"
+          aria-label={menuOpen ? 'মেনু বন্ধ করুন / Close menu' : 'মেনু খুলুন / Open menu'}
+          onClick={() => setMenuOpen((o) => !o)}
+        >
+          {menuOpen ? '✕ বন্ধ' : '☰ মেনু'}
+        </button>
+        <nav aria-label="প্রধান মেনু" id="ev-main-nav" className={`ev-header-nav${menuOpen ? ' ev-header-nav-open' : ''}`}>
           <NavLink to="/directory" className={({ isActive }) => `ev-navlink${isActive ? ' ev-navlink-active' : ''}`}>{nav.directory.bn}</NavLink>
           <NavLink to="/library" className={({ isActive }) => `ev-navlink${isActive ? ' ev-navlink-active' : ''}`}>{nav.library.bn}</NavLink>
           <NavLink to="/exam" className={({ isActive }) => `ev-navlink${isActive ? ' ev-navlink-active' : ''}`}>{nav.exam.bn}</NavLink>
