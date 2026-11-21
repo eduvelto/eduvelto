@@ -75,7 +75,7 @@ beforeAll(async () => {
     firestore: { host: '127.0.0.1', port: Number(process.env.FIRESTORE_EMULATOR_PORT ?? 8080) },
   });
   await seed();
-}, 120000);
+}, 300000);
 
 afterAll(async () => {
   await env.cleanup();

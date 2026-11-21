@@ -272,7 +272,7 @@ beforeAll(async () => {
     firestore: { host: '127.0.0.1', port: Number(process.env.FIRESTORE_EMULATOR_PORT ?? 8080) },
   });
   await seed();
-}, 120000); // 120s: first Firestore ops on a cold emulator take ~2s each in this sandbox
+}, 300000); // 300s: first Firestore ops on a cold emulator take ~2s each in this sandbox
 
 afterAll(async () => {
   await env.cleanup();
