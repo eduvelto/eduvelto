@@ -41,12 +41,13 @@ export default function AboutPage() {
       </p>
       <p style={{ lineHeight: 1.7 }}>
         Eduvelto is a free digital education platform for Bangladesh. It brings together lessons,
-        exams, a personal AI teacher, a digital library and smart study planning — in Bangla and
-        in English — so that a student anywhere in the country can learn, grow and achieve,
-        without cost standing in the way. / Eduvelto বাংলাদেশের শিক্ষার্থীদের জন্য একটি বিনামূল্যের
-        ডিজিটাল শিক্ষা প্ল্যাটফর্ম। এখানে পাঠ, পরীক্ষা, ব্যক্তিগত AI শিক্ষক, ডিজিটাল লাইব্রেরি ও
-        স্মার্ট পড়ার পরিকল্পনা এক জায়গায় — বাংলায় ও ইংরেজিতে — যাতে দেশের যেকোনো প্রান্তের
-        শিক্ষার্থী শিখতে, এগিয়ে যেতে ও স্বপ্ন গড়তে পারে।
+        exams, a digital library and smart study planning — with a personal AI teacher planned for
+        the future — in Bangla and in English — so that a student anywhere in the country can
+        learn, grow and achieve, without cost standing in the way. / Eduvelto বাংলাদেশের
+        শিক্ষার্থীদের জন্য একটি বিনামূল্যের ডিজিটাল শিক্ষা প্ল্যাটফর্ম। এখানে পাঠ, পরীক্ষা,
+        ডিজিটাল লাইব্রেরি ও স্মার্ট পড়ার পরিকল্পনা এক জায়গায় — ভবিষ্যতে ব্যক্তিগত AI শিক্ষকসহ —
+        বাংলায় ও ইংরেজিতে — যাতে দেশের যেকোনো প্রান্তের শিক্ষার্থী শিখতে, এগিয়ে যেতে ও স্বপ্ন
+        গড়তে পারে.
       </p>
       <h2 style={{ fontSize: 19, margin: '24px 0 8px' }}>যা যা আছে / What Eduvelto offers</h2>
       <ul style={{ lineHeight: 1.8 }}>
