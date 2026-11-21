@@ -43,6 +43,13 @@ const AdminGuardiansPage = lazy(() => import('./pages/AdminGuardiansPage'));
 const AdminFeaturesPage = lazy(() => import('./pages/AdminFeaturesPage'));
 const AdminBackupPage = lazy(() => import('./pages/AdminBackupPage'));
 const AdminAuditPage = lazy(() => import('./pages/AdminAuditPage'));
+const AdminLayout = lazy(() => import('./components/AdminLayout'));
+const AdminJobsPage = lazy(() => import('./pages/AdminJobsPage'));
+const AdminAdmissionsPage = lazy(() => import('./pages/AdminAdmissionsPage'));
+const AdminAnalyticsPage = lazy(() => import('./pages/AdminAnalyticsPage'));
+const AdminSettingsPage = lazy(() => import('./pages/AdminSettingsPage'));
+const AdminContentPage = lazy(() => import('./pages/AdminContentPage'));
+const AdminExamsPage = lazy(() => import('./pages/AdminExamsPage'));
 const CeoLayout = lazy(() => import('./components/CeoLayout'));
 const CeoHomePage = lazy(() => import('./pages/CeoHomePage'));
 const CeoDashboardPage = lazy(() => import('./pages/CeoDashboardPage'));
@@ -113,6 +120,9 @@ export default function App() {
   // When ads are not configured there is no reservation and no gap.
   const showBottomBanner = isBottomBannerAllowed(location.pathname);
   const bannerLive = showBottomBanner && adsEnabled('bottom-banner');
+  // Admin + CEO panels render their own shell (sidebar/top bar/bottom
+  // nav) — the public header, footer and BottomNav are hidden there.
+  const isAdminShell = location.pathname.startsWith('/admin') || location.pathname.startsWith('/ceo');
   // Mobile menu (≤860px): the full nav would wrap into 3 rows, so it lives
   // behind a hamburger button and closes on every navigation.
   const [menuOpen, setMenuOpen] = useState(false);
@@ -128,7 +138,7 @@ export default function App() {
           : undefined
       }
     >
-      <header className="ev-header">
+      {isAdminShell ? null : (<header className="ev-header">
         <Link to="/" style={{ display: 'inline-flex', alignItems: 'center', textDecoration: 'none' }} aria-label={t({ bn: 'Eduvelto — হোম', en: 'Eduvelto — Home' })}>
           <img src="/logo-white.png" alt="Eduvelto" style={{ height: 40, width: 'auto', display: 'block' }} />
         </Link>
@@ -177,7 +187,7 @@ export default function App() {
             </>
           )}
         </nav>
-      </header>
+      </header>)}
       {suspended ? (
         <main style={{ maxWidth: 720, margin: '0 auto', padding: '24px 16px', fontFamily: 'system-ui, sans-serif' }}>
           <div style={{ border: '1px solid #b00020', borderRadius: 8, padding: '20px 16px', background: '#fdf0f0' }}>
@@ -228,15 +238,23 @@ export default function App() {
         <Route path="/lessons/:lessonId" element={<LessonPage />} />
         <Route path="/quiz/:quizId" element={<QuizPage />} />
         <Route path="/quiz/:quizId/result/:attemptId" element={<QuizResultPage />} />
-        <Route path="/admin" element={<AdminGuard><AdminPage /></AdminGuard>} />
-        <Route path="/admin/ads" element={<AdminGuard><AdminAds /></AdminGuard>} />
-        <Route path="/admin/users" element={<AdminGuard><AdminUsersPage /></AdminGuard>} />
-        <Route path="/admin/users/:uid" element={<AdminGuard><AdminUserDetailPage /></AdminGuard>} />
-        <Route path="/admin/teachers" element={<AdminGuard><AdminTeachersPage /></AdminGuard>} />
-        <Route path="/admin/guardians" element={<AdminGuard><AdminGuardiansPage /></AdminGuard>} />
-        <Route path="/admin/features" element={<AdminGuard><AdminFeaturesPage /></AdminGuard>} />
-        <Route path="/admin/backup" element={<AdminGuard><AdminBackupPage /></AdminGuard>} />
-        <Route path="/admin/audit" element={<AdminGuard><AdminAuditPage /></AdminGuard>} />
+        <Route path="/admin" element={<AdminGuard><AdminLayout /></AdminGuard>}>
+          <Route index element={<AdminPage />} />
+          <Route path="ads" element={<AdminAds />} />
+          <Route path="users" element={<AdminUsersPage />} />
+          <Route path="users/:uid" element={<AdminUserDetailPage />} />
+          <Route path="teachers" element={<AdminTeachersPage />} />
+          <Route path="guardians" element={<AdminGuardiansPage />} />
+          <Route path="features" element={<AdminFeaturesPage />} />
+          <Route path="backup" element={<AdminBackupPage />} />
+          <Route path="audit" element={<AdminAuditPage />} />
+          <Route path="jobs" element={<AdminJobsPage />} />
+          <Route path="admissions" element={<AdminAdmissionsPage />} />
+          <Route path="analytics" element={<AdminAnalyticsPage />} />
+          <Route path="settings" element={<AdminSettingsPage />} />
+          <Route path="content" element={<AdminContentPage />} />
+          <Route path="exams" element={<AdminExamsPage />} />
+        </Route>
         {/* CEO Panel (owner-only, 21 Nov 2026): the 8-screen mobile
             design from the owner's mockup. Same AdminGuard as /admin —
             owner role only; the layout renders the CEO bottom nav. */}
@@ -269,9 +287,9 @@ export default function App() {
         <Route path="*" element={<HomePage />} />
         </Routes>
         </Suspense>
-        <Footer />
-        {/* Mobile bottom navigation (stage 3): Home / Books / Tests / Progress / Profile, ≤768px. Sits above the bottom ad banner when one is live. Hidden on /ceo* routes — the CEO Panel renders its own bottom nav. */}
-        {location.pathname.startsWith('/ceo') ? null : (
+        {isAdminShell ? null : <Footer />}
+        {/* Mobile bottom navigation (stage 3): Home / Books / Tests / Progress / Profile, ≤768px. Sits above the bottom ad banner when one is live. Hidden on /admin* and /ceo* routes — the Admin Panel and CEO Panel render their own bottom nav. */}
+        {isAdminShell ? null : (
           <BottomNav bottomOffsetPx={bannerLive ? BOTTOM_BANNER_RESERVE_PX : 0} />
         )}
         {showBottomBanner ? <AdSlot placement="bottom-banner" /> : null}

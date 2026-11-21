@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import { PageShell } from '../components/PageShell';
 import { useLanguage } from '../i18n/LanguageContext';
 import { Button, Card } from '../components/ui';
@@ -33,6 +33,11 @@ const ROLE_LABEL: Record<string, { bn: string; en: string }> = {
 
 export default function AdminUsersPage() {
   const { lang, t } = useLanguage();
+  const [searchParams] = useSearchParams();
+  // The admin top-bar search links here with ?email=… — run that search
+  // once on mount instead of showing the unfiltered list.
+  const emailParam = searchParams.get('email') ?? '';
+  const emailParamUsed = useRef(false);
   const [rows, setRows] = useState<AdminUserRow[]>([]);
   const [total, setTotal] = useState<number | null>(null);
   const [lastDoc, setLastDoc] = useState<QueryDocumentSnapshot<DocumentData> | null>(null);
@@ -54,16 +59,22 @@ export default function AdminUsersPage() {
       // list. Before this fix both were in one Promise.all, so a count
       // failure left the owner staring at "nobody found" with zero rows
       // even though listUsers() itself works.
-      try {
-        const page = await listUsers(requireDb());
-        if (!mounted.current) return;
-        setRows(page.rows);
-        setLastDoc(page.lastDoc);
-        setHasMore(page.hasMore);
-      } catch (e) {
-        if (mounted.current) setError(friendlyAdminError(e, lang));
-      } finally {
-        if (mounted.current) setLoading(false);
+      // With ?email= (admin top-bar search) the email search below loads
+      // the rows instead — loading the full list here would race it.
+      if (!emailParam) {
+        try {
+          const page = await listUsers(requireDb());
+          if (!mounted.current) return;
+          setRows(page.rows);
+          setLastDoc(page.lastDoc);
+          setHasMore(page.hasMore);
+        } catch (e) {
+          if (mounted.current) setError(friendlyAdminError(e, lang));
+        } finally {
+          if (mounted.current) setLoading(false);
+        }
+      } else {
+        // Loading stays true until the email search below finishes.
       }
       try {
         const counts = await getDashboardCounts(requireDb());
@@ -94,21 +105,38 @@ export default function AdminUsersPage() {
   }
 
   async function onSearch(): Promise<void> {
-    const q = email.trim();
+    await runSearch(email.trim());
+  }
+
+  async function runSearch(q: string): Promise<void> {
     if (!q) return;
     setSearching(true);
     setError('');
     try {
       const found = await searchUsersByEmail(requireDb(), q);
+      if (!mounted.current) return;
       setRows(found);
       setHasMore(false);
       setSearched(true);
     } catch (e) {
-      setError(friendlyAdminError(e, lang));
+      if (mounted.current) setError(friendlyAdminError(e, lang));
     } finally {
-      setSearching(false);
+      if (mounted.current) {
+        setSearching(false);
+        setLoading(false);
+      }
     }
   }
+
+  useEffect(() => {
+    if (emailParam && !emailParamUsed.current) {
+      emailParamUsed.current = true;
+      setEmail(emailParam);
+      void runSearch(emailParam);
+    }
+    // Runs once on mount for the ?email= deep link.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   async function clearSearch(): Promise<void> {
     setEmail('');
