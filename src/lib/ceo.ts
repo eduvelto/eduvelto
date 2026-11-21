@@ -1,0 +1,73 @@
+// Eduvelto — CEO Panel data (owner-only, 21 Nov 2026).
+//
+// HONESTY RULES (binding — the CEO mockups are full of fake sample
+// numbers: 1.28M users, 8.72M views, 520K tests, ৳2.48L revenue,
+// 24 team members, 12,842 verified content, "Platform Rank #1").
+// The real platform today: ~3 users, 609 books, 212 exams, ~20,970
+// questions, ৳0 revenue, 1 staff account (the owner), 0 verified
+// teachers, no view/engagement/retention tracking, no team system on
+// main, no paid products. Every number on the CEO screens comes from
+// a live count() attempt below, or from the LAST-VERIFIED constants
+// (labelled with their check date in the UI). A failed live count
+// NEVER falls back to a mockup number — it shows the last-verified
+// value with its source, or hides the tile.
+
+import { collection, getCountFromServer, query, where } from 'firebase/firestore';
+import type { Firestore } from 'firebase/firestore';
+
+/** Last verified by the Step 2 loader run + live /library check, 21 Nov 2026. */
+export const LAST_VERIFIED_INVENTORY = {
+  books: 609,
+  exams: 212,
+  questions: 20970,
+  /** Human-readable source shown under every fallback value. */
+  checkedBn: '২১ নভেম্বর ২০২৬ যাচাই করা',
+  checkedEn: 'verified 21 Nov 2026',
+} as const;
+
+export interface CeoCounts {
+  /** Live users count, or null when count() failed (quota). */
+  users: number | null;
+  /** Live Published books count, or the last-verified 609. */
+  books: number;
+  booksLive: boolean;
+  /** Live Published quizzes count, or the last-verified 212. */
+  exams: number;
+  examsLive: boolean;
+  /** Questions are inside quiz documents — no live count exists. */
+  questions: number;
+  /** Live pending teacher applications, or null when count() failed. */
+  pendingVerifications: number | null;
+}
+
+async function tryCount(db: Firestore, q: Parameters<typeof getCountFromServer>[0]): Promise<number | null> {
+  try {
+    const snap = await getCountFromServer(q);
+    return snap.data().count;
+  } catch {
+    // count() fails live when the Spark daily quota is exhausted
+    // (audit H1) — the caller shows the fallback, never a fake number.
+    return null;
+  }
+}
+
+export async function getCeoCounts(db: Firestore): Promise<CeoCounts> {
+  const [users, books, exams, pending] = await Promise.all([
+    tryCount(db, collection(db, 'users')),
+    tryCount(db, query(collection(db, 'books'), where('reviewStatus', '==', 'Published'))),
+    tryCount(db, query(collection(db, 'quizzes'), where('reviewStatus', '==', 'Published'))),
+    tryCount(
+      db,
+      query(collection(db, 'teacherVerifications'), where('status', '==', 'pending')),
+    ),
+  ]);
+  return {
+    users,
+    books: books ?? LAST_VERIFIED_INVENTORY.books,
+    booksLive: books !== null,
+    exams: exams ?? LAST_VERIFIED_INVENTORY.exams,
+    examsLive: exams !== null,
+    questions: LAST_VERIFIED_INVENTORY.questions,
+    pendingVerifications: pending,
+  };
+}

@@ -43,6 +43,15 @@ const AdminGuardiansPage = lazy(() => import('./pages/AdminGuardiansPage'));
 const AdminFeaturesPage = lazy(() => import('./pages/AdminFeaturesPage'));
 const AdminBackupPage = lazy(() => import('./pages/AdminBackupPage'));
 const AdminAuditPage = lazy(() => import('./pages/AdminAuditPage'));
+const CeoLayout = lazy(() => import('./components/CeoLayout'));
+const CeoHomePage = lazy(() => import('./pages/CeoHomePage'));
+const CeoDashboardPage = lazy(() => import('./pages/CeoDashboardPage'));
+const CeoStrategyPage = lazy(() => import('./pages/CeoStrategyPage'));
+const CeoRevenuePage = lazy(() => import('./pages/CeoRevenuePage'));
+const CeoTeamPage = lazy(() => import('./pages/CeoTeamPage'));
+const CeoContentPage = lazy(() => import('./pages/CeoContentPage'));
+const CeoGrowthPage = lazy(() => import('./pages/CeoGrowthPage'));
+const CeoSettingsPage = lazy(() => import('./pages/CeoSettingsPage'));
 const AiTeacherPage = lazy(() => import('./pages/AiTeacherPage'));
 const ExamPage = lazy(() => import('./pages/ExamPage'));
 const RoutinePage = lazy(() => import('./pages/RoutinePage'));
@@ -227,6 +236,19 @@ export default function App() {
         <Route path="/admin/features" element={<AdminGuard><AdminFeaturesPage /></AdminGuard>} />
         <Route path="/admin/backup" element={<AdminGuard><AdminBackupPage /></AdminGuard>} />
         <Route path="/admin/audit" element={<AdminGuard><AdminAuditPage /></AdminGuard>} />
+        {/* CEO Panel (owner-only, 21 Nov 2026): the 8-screen mobile
+            design from the owner's mockup. Same AdminGuard as /admin —
+            owner role only; the layout renders the CEO bottom nav. */}
+        <Route path="/ceo" element={<AdminGuard><CeoLayout titleBn="সিইও প্যানেল" titleEn="CEO Panel" /></AdminGuard>}>
+          <Route index element={<CeoHomePage />} />
+          <Route path="dashboard" element={<CeoDashboardPage />} />
+          <Route path="strategy" element={<CeoStrategyPage />} />
+          <Route path="revenue" element={<CeoRevenuePage />} />
+          <Route path="team" element={<CeoTeamPage />} />
+          <Route path="content" element={<CeoContentPage />} />
+          <Route path="growth" element={<CeoGrowthPage />} />
+          <Route path="settings" element={<CeoSettingsPage />} />
+        </Route>
         <Route path="/ai-teacher" element={<AiTeacherPage />} />
         <Route path="/exam" element={<ExamPage />} />
         <Route path="/routine" element={<RoutinePage />} />
@@ -246,8 +268,10 @@ export default function App() {
         </Routes>
         </Suspense>
         <Footer />
-        {/* Mobile bottom navigation (stage 3): Home / Books / Tests / Progress / Profile, ≤768px. Sits above the bottom ad banner when one is live. */}
-        <BottomNav bottomOffsetPx={bannerLive ? BOTTOM_BANNER_RESERVE_PX : 0} />
+        {/* Mobile bottom navigation (stage 3): Home / Books / Tests / Progress / Profile, ≤768px. Sits above the bottom ad banner when one is live. Hidden on /ceo* routes — the CEO Panel renders its own bottom nav. */}
+        {location.pathname.startsWith('/ceo') ? null : (
+          <BottomNav bottomOffsetPx={bannerLive ? BOTTOM_BANNER_RESERVE_PX : 0} />
+        )}
         {showBottomBanner ? <AdSlot placement="bottom-banner" /> : null}
         </>
       )}
