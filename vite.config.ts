@@ -29,4 +29,21 @@ export default defineConfig({
       devOptions: { enabled: false },
     }),
   ],
+  build: {
+    // SCALE (10k users): split the vendor code out of the app bundle so
+    // repeat visits reuse the cached vendor chunk (React + Firebase change
+    // far less often than app code). Measured before/after in the
+    // scalability report (team/scalability-10k-report.md).
+    // NOTE: manualChunks must NOT split the PWA service worker (src/sw.ts
+    // is built separately by vite-plugin-pwa); these chunks cover the app
+    // entry only.
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          'vendor-react': ['react', 'react-dom', 'react-router-dom'],
+          'vendor-firebase': ['firebase/app', 'firebase/auth', 'firebase/firestore'],
+        },
+      },
+    },
+  },
 });

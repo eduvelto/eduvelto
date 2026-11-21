@@ -1,45 +1,54 @@
+import { Suspense, lazy } from 'react';
 import { Link, Route, Routes, useLocation } from 'react-router-dom';
 import { strings } from './i18n/strings';
 import { useAuth } from './lib/auth';
 import { isBottomBannerAllowed, adsEnabled, BOTTOM_BANNER_RESERVE_PX } from './lib/ads';
 import AdSlot from './components/AdSlot';
 import InstallAppPrompt from './components/InstallAppPrompt';
-import HomePage from './pages/HomePage';
-import RegisterPage from './pages/RegisterPage';
-import LoginPage from './pages/LoginPage';
-import ProfilePage from './pages/ProfilePage';
-import TeacherRegisterPage from './pages/TeacherRegisterPage';
-import DirectoryPage from './pages/DirectoryPage';
-import SubjectPage from './pages/SubjectPage';
-import LibraryPage from './pages/LibraryPage';
-import BookPage from './pages/BookPage';
-import ChapterPage from './pages/ChapterPage';
-import LessonPage from './pages/LessonPage';
-import QuizPage from './pages/QuizPage';
-import QuizResultPage from './pages/QuizResultPage';
-import AdminPage from './pages/AdminPage';
-import AdminAds from './pages/AdminAds';
-import AdminUsersPage from './pages/AdminUsersPage';
-import AdminUserDetailPage from './pages/AdminUserDetailPage';
-import AdminTeachersPage from './pages/AdminTeachersPage';
-import AdminFeaturesPage from './pages/AdminFeaturesPage';
-import AdminBackupPage from './pages/AdminBackupPage';
-import AdminAuditPage from './pages/AdminAuditPage';
 import { AdminGuard } from './components/AdminGuard';
-import AiTeacherPage from './pages/AiTeacherPage';
-import ExamPage from './pages/ExamPage';
-import RoutinePage from './pages/RoutinePage';
-import ProgressPage from './pages/ProgressPage';
-import SocialPage from './pages/SocialPage';
-import HealthPage from './pages/HealthPage';
-import HealthMedicinesPage from './pages/HealthMedicinesPage';
-import HealthDiseasesPage from './pages/HealthDiseasesPage';
-import HealthDoctorsPage from './pages/HealthDoctorsPage';
-import HealthHospitalsPage from './pages/HealthHospitalsPage';
-import HealthReportPage from './pages/HealthReportPage';
-import AboutPage from './pages/AboutPage';
-import FounderPage from './pages/FounderPage';
-import ContactPage from './pages/ContactPage';
+// SCALE (10k users): route-level code splitting. Before this change the
+// first visit downloaded ALL 35 pages in one 909 kB bundle (admin pages
+// included, for every visitor). Now the first load is only the shell +
+// Home; each route's chunk loads on demand. The header, auth and ad
+// shell stay static — they are small and needed on every page.
+const HomePage = lazy(() => import('./pages/HomePage'));
+const RegisterPage = lazy(() => import('./pages/RegisterPage'));
+const LoginPage = lazy(() => import('./pages/LoginPage'));
+const ProfilePage = lazy(() => import('./pages/ProfilePage'));
+const TeacherRegisterPage = lazy(() => import('./pages/TeacherRegisterPage'));
+const DirectoryPage = lazy(() => import('./pages/DirectoryPage'));
+const SubjectPage = lazy(() => import('./pages/SubjectPage'));
+const LibraryPage = lazy(() => import('./pages/LibraryPage'));
+const BookPage = lazy(() => import('./pages/BookPage'));
+const ChapterPage = lazy(() => import('./pages/ChapterPage'));
+const LessonPage = lazy(() => import('./pages/LessonPage'));
+const QuizPage = lazy(() => import('./pages/QuizPage'));
+const QuizResultPage = lazy(() => import('./pages/QuizResultPage'));
+const AdminPage = lazy(() => import('./pages/AdminPage'));
+const AdminAds = lazy(() => import('./pages/AdminAds'));
+const AdminUsersPage = lazy(() => import('./pages/AdminUsersPage'));
+const AdminUserDetailPage = lazy(() => import('./pages/AdminUserDetailPage'));
+const AdminTeachersPage = lazy(() => import('./pages/AdminTeachersPage'));
+const AdminFeaturesPage = lazy(() => import('./pages/AdminFeaturesPage'));
+const AdminBackupPage = lazy(() => import('./pages/AdminBackupPage'));
+const AdminAuditPage = lazy(() => import('./pages/AdminAuditPage'));
+const AiTeacherPage = lazy(() => import('./pages/AiTeacherPage'));
+const ExamPage = lazy(() => import('./pages/ExamPage'));
+const RoutinePage = lazy(() => import('./pages/RoutinePage'));
+const ProgressPage = lazy(() => import('./pages/ProgressPage'));
+const SocialPage = lazy(() => import('./pages/SocialPage'));
+const HealthPage = lazy(() => import('./pages/HealthPage'));
+const HealthMedicinesPage = lazy(() => import('./pages/HealthMedicinesPage'));
+const HealthDiseasesPage = lazy(() => import('./pages/HealthDiseasesPage'));
+const HealthDoctorsPage = lazy(() => import('./pages/HealthDoctorsPage'));
+const HealthHospitalsPage = lazy(() => import('./pages/HealthHospitalsPage'));
+const HealthReportPage = lazy(() => import('./pages/HealthReportPage'));
+const AboutPage = lazy(() => import('./pages/AboutPage'));
+const ContactPage = lazy(() => import('./pages/ContactPage'));
+// STAGING MERGE (scale #4): FounderPage added as lazy — the scale branch
+// was based on f112b5c (pre-founder) and had no /founder route at all;
+// main 054c230 + the live site do, so the route is restored here.
+const FounderPage = lazy(() => import('./pages/FounderPage'));
 
 // Routes mirror page-map.md + the Phase 2 route list.
 // /social is a DESIGN PROPOSAL only (blueprint §7): no live social
@@ -143,6 +152,7 @@ export default function App() {
       ) : (
         <>
         <InstallAppPrompt />
+        <Suspense fallback={<main style={{ maxWidth: 720, margin: '0 auto', padding: '24px 16px' }}><p>লোড হচ্ছে… / Loading…</p></main>}>
         <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/register" element={<RegisterPage />} />
@@ -181,6 +191,7 @@ export default function App() {
         <Route path="/contact" element={<ContactPage />} />
         <Route path="*" element={<HomePage />} />
         </Routes>
+        </Suspense>
         {showBottomBanner ? <AdSlot placement="bottom-banner" /> : null}
         </>
       )}
