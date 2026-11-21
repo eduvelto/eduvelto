@@ -16,6 +16,7 @@ import {
 import { doc, setDoc, updateDoc } from 'firebase/firestore';
 
 const PROJECT_ID = 'eduvelto-rules-test';
+const FIRESTORE_PORT = Number(process.env.FIRESTORE_EMULATOR_PORT ?? 8080);
 let env: RulesTestEnvironment;
 
 async function seed() {
@@ -52,7 +53,7 @@ async function seed() {
 beforeAll(async () => {
   env = await initializeTestEnvironment({
     projectId: PROJECT_ID,
-    firestore: { host: '127.0.0.1', port: 8080 },
+    firestore: { host: '127.0.0.1', port: FIRESTORE_PORT },
   });
   await seed();
 }, 120000);
