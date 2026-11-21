@@ -2,9 +2,14 @@
 // Shows the signed-in student's profile and lets them edit ONLY the
 // fields the security rules allow the owner to change: displayName,
 // educationType, board, institution, academicYear, program, department,
-// classLevel, language. Role, verificationStatus and isActive are shown
-// read-only (when present) and can never be changed from this page —
-// the rules deny it, and there is no UI for it.
+// classLevel, language. Role and isActive are shown read-only (when
+// present) and can never be changed from this page — the rules deny it,
+// and there is no UI for it. `verificationStatus` is the mirror of a
+// TEACHER application only, so it is shown ONLY for teachers: a student
+// never has a verification state (owner decision 21 Nov 2026 — student
+// identity verification removed entirely), and showing a rejected
+// teacher application as "যাচাই" on a student's own profile would imply
+// a student-verification gate that does not exist.
 // A suspended account (isActive === false) sees the suspended notice
 // and cannot use the app (the App shell gates on it too).
 import { useEffect, useState, type FormEvent } from 'react';
@@ -183,7 +188,7 @@ export default function ProfilePage() {
         <dd style={{ margin: 0 }}>{profile.email}</dd>
         <dt style={{ color: '#555' }}>{p.role.bn}</dt>
         <dd style={{ margin: 0 }}>{profile.role}</dd>
-        {profile.verificationStatus ? (
+        {profile.role === 'teacher' && profile.verificationStatus ? (
           <>
             <dt style={{ color: '#555' }}>ভেরিফিকেশন</dt>
             <dd style={{ margin: 0 }}>{profile.verificationStatus}</dd>

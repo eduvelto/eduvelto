@@ -181,7 +181,7 @@ export default function AdminUserDetailPage() {
             </p>
             <p style={{ margin: '4px 0', color: '#555', fontSize: 14 }}>
               সদস্য: {formatTime(user.createdAt)}
-              {user.verificationStatus ? ` · যাচাই: ${user.verificationStatus}` : ''}
+              {user.verificationStatus ? ` · শিক্ষক যাচাই: ${user.verificationStatus}` : ''}
             </p>
             {!user.isActive && user.suspendedReason ? (
               <p style={{ margin: '4px 0', color: '#b00020' }}>

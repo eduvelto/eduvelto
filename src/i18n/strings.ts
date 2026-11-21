@@ -52,8 +52,8 @@ export const strings = {
       en: 'A password-reset link was sent to your email. Check your inbox (and spam).',
     },
     studentNote: {
-      bn: 'রেজিস্টার করলে শিক্ষার্থী অ্যাকাউন্ট তৈরি হয়। শিক্ষক ভেরিফিকেশন আলাদা প্রক্রিয়া (Step 5) — রেজিস্টার করলেই "ভেরিফায়েড" ব্যাজ পাওয়া যায় না।',
-      en: 'Registering creates a student account. Teacher verification is a separate process (Step 5) — registering does not grant a "verified" badge.',
+      bn: 'রেজিস্টার করলে শিক্ষার্থী অ্যাকাউন্ট তৈরি হয় এবং পরপরই ড্যাশবোর্ড ব্যবহার করা যায় — কোনো যাচাইয়ের অপেক্ষা নেই। শিক্ষক ভেরিফিকেশন আলাদা প্রক্রিয়া (Step 5) — রেজিস্টার করলেই "ভেরিফায়েড" ব্যাজ পাওয়া যায় না।',
+      en: 'Registering creates a student account that works immediately — no verification wait. Teacher verification is a separate process (Step 5) — registering does not grant a "verified" badge.',
     },
     notConfigured: {
       bn: 'Firebase এখনো যুক্ত হয়নি। প্রকল্প সেটআপ সম্পূর্ণ হলে লগইন চালু হবে।',

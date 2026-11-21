@@ -11,6 +11,9 @@
 // - A suspended account (profile `isActive === false`) stays signed in at
 //   the Auth level but cannot use the app: `suspended` is true and App
 //   renders the suspended screen instead of the routes.
+// - OWNER DECISION 21 Nov 2026: student identity verification is REMOVED
+//   entirely — students are NEVER gated on any verification state. The
+//   only account gate in this module is suspension (see above).
 //
 // Until the Firebase console has the sign-in providers enabled
 // (Authentication → Sign-in method → Email/Password + Google) and the

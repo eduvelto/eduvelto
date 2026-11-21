@@ -13,6 +13,14 @@
 //   show `isActive: true` at creation, but the committed rule forbids it;
 //   the rule wins. The app treats a MISSING isActive as active — an
 //   account is suspended only when isActive is explicitly `false`.)
+// - OWNER DECISION 21 Nov 2026: student identity verification is REMOVED
+//   entirely. A student account is NEVER gated on any verification: no
+//   NID, no face, no biometric, no manual approval, no wait — the account
+//   works the moment it is created. `verificationStatus` below is the
+//   mirror of a teacherVerifications record ONLY (teacher verification);
+//   it is never a student-verification state, and no student access
+//   decision may ever read it (enforced in firestore.rules by
+//   validVerificationTransition()).
 // - UPDATE (owner): only displayName, educationType, board, institution,
 //   academicYear, program, department, classLevel, language, lastActiveAt,
 //   updatedAt. Role, verificationStatus and isActive can never be changed
@@ -53,7 +61,15 @@ export interface UserProfile {
   isActive?: boolean;
   /** Reason for suspension, shown to the user on the suspended screen. Admin-set only. */
   suspendedReason?: string;
-  /** Admin-set only; the client never writes this field. */
+  /**
+   * Teacher-verification mirror ONLY (set by admin.ts decide/revoke/reopen).
+   * NEVER a student-verification state: students are never required to have
+   * it, and no student access decision may read it (owner decision
+   * 21 Nov 2026 — student identity verification removed entirely).
+   * A student whose teacher application was rejected/reopened may carry
+   * 'rejected'/'pending' here; that is teacher-application state, not a
+   * gate on the student account.
+   */
   verificationStatus?: string;
 }
 

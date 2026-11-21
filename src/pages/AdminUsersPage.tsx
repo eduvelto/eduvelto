@@ -230,7 +230,7 @@ export default function AdminUsersPage() {
               <span lang="en">{row.email}</span>
               {row.institution ? ` · ${row.institution}` : ''}
               {row.classLevel ? ` · ${row.classLevel}` : ''}
-              {row.verificationStatus ? ` · যাচাই: ${row.verificationStatus}` : ''}
+              {row.verificationStatus ? ` · শিক্ষক যাচাই: ${row.verificationStatus}` : ''}
             </p>
             <p style={{ margin: '0 0 6px', color: '#555', fontSize: 14 }}>
               সদস্য: {formatTime(row.createdAt)}
