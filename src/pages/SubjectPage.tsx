@@ -7,6 +7,7 @@ import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { PageShell } from '../components/PageShell';
 import { listPublishedDirectory, type DirectoryRow } from '../lib/content';
+import { cachedFetch, CACHE_KEYS } from '../lib/cache';
 
 export default function SubjectPage() {
   const { subjectId } = useParams<{ subjectId: string }>();
@@ -16,7 +17,9 @@ export default function SubjectPage() {
 
   useEffect(() => {
     let live = true;
-    listPublishedDirectory()
+    // Same session cache as the Directory page: one 609-row read per
+    // session, not one per subject visited.
+    cachedFetch(CACHE_KEYS.publishedDirectory, listPublishedDirectory)
       .then((all) => {
         if (live) setRows(all.filter((r) => r.subject === subject || r.department === subject));
       })

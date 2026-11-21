@@ -20,12 +20,15 @@ import {
   getDoc,
   getDocs,
   increment,
+  limit,
+  orderBy,
   query,
   serverTimestamp,
   setDoc,
   where,
 } from 'firebase/firestore';
 import { db } from '../firebase';
+import { dedupeInFlight } from './rateLimit';
 
 export interface SubjectProgress {
   id: string;
@@ -64,17 +67,22 @@ export async function markLessonComplete(
   correct: number,
 ): Promise<void> {
   if (!db) throw new Error('not-configured');
-  await setDoc(
-    doc(db, 'progress', progressId(uid, subject)),
-    {
-      userId: uid,
-      subject,
-      lessonsRead: arrayUnion(lessonId),
-      questionsAttempted: increment(attempted),
-      questionsCorrect: increment(correct),
-      updatedAt: serverTimestamp(),
-    },
-    { merge: true },
+  const firestore = db;
+  // Defence-in-depth against double-clicks / double-renders: identical
+  // concurrent calls share one write (the UI already has a busy guard).
+  await dedupeInFlight(`progress:${uid}:${subjectSlug(subject)}:${lessonId}:${attempted}:${correct}`, () =>
+    setDoc(
+      doc(firestore, 'progress', progressId(uid, subject)),
+      {
+        userId: uid,
+        subject,
+        lessonsRead: arrayUnion(lessonId),
+        questionsAttempted: increment(attempted),
+        questionsCorrect: increment(correct),
+        updatedAt: serverTimestamp(),
+      },
+      { merge: true },
+    ),
   );
 }
 
@@ -110,6 +118,8 @@ export interface QuizSummary {
   bestPercentage: number;
   weakChapters: string[];
   strongChapters: string[];
+  /** Last recompute time — used by recomputeQuizSummaries' freshness check. */
+  updatedAt?: { toDate?: () => Date; seconds?: number } | Date | null;
 }
 
 /**
@@ -136,8 +146,35 @@ export async function listQuizSummaries(uid: string): Promise<QuizSummary[]> {
       bestPercentage: (d.bestPercentage as number) ?? 0,
       weakChapters: (d.weakChapters as string[]) ?? [],
       strongChapters: (d.strongChapters as string[]) ?? [],
+      updatedAt: (d.updatedAt as QuizSummary['updatedAt']) ?? null,
     };
   });
+}
+
+/** Milliseconds since epoch for a Firestore timestamp-ish value, or null when unparseable. */
+function millisOf(v: { toDate?: () => Date; seconds?: number } | Date | null | undefined): number | null {
+  if (v instanceof Date) return Number.isNaN(v.getTime()) ? null : v.getTime();
+  if (v && typeof v.toDate === 'function') {
+    const t = v.toDate().getTime();
+    return Number.isNaN(t) ? null : t;
+  }
+  if (v && typeof v.seconds === 'number') return v.seconds * 1000;
+  return null;
+}
+
+/**
+ * Newest quiz attempt of one student (one read). Returns { found, at }:
+ * found=false means no attempts at all; at=null means the newest attempt
+ * has no parseable createdAt (legacy data) — treat as "unknown, recompute".
+ */
+async function getLatestAttempt(uid: string): Promise<{ found: boolean; at: number | null }> {
+  if (!db) return { found: false, at: null };
+  const snap = await getDocs(
+    query(collection(db, 'users', uid, 'quizAttempts'), orderBy('createdAt', 'desc'), limit(1)),
+  );
+  if (snap.empty) return { found: false, at: null };
+  const d = snap.docs[0].data();
+  return { found: true, at: millisOf(d.createdAt as QuizSummary['updatedAt']) };
 }
 
 /**
@@ -263,9 +300,30 @@ export async function listQuizAttempts(uid: string): Promise<QuizAttemptInput[]>
  * summaries. Called from the Progress page so the summary is always
  * current when viewed; the plan's "take a quiz twice" test is exactly
  * this: a second attempt changes the stored summary.
+ *
+ * SCALE (10k users): the old code ran the full recompute — read ALL
+ * attempts (full answer arrays) + one write per subject-month — on EVERY
+ * Progress page view, even when nothing had changed. The freshness check
+ * below reads the stored summaries + the single newest attempt first: when
+ * the newest attempt predates the newest summary, nothing changed and the
+ * stored summaries are returned with ZERO extra reads and ZERO writes.
+ * A new attempt always forces a full recompute, so the numbers stay exact.
  */
 export async function recomputeQuizSummaries(uid: string): Promise<QuizSummary[]> {
   if (!db) throw new Error('not-configured');
+  const stored = await listQuizSummaries(uid);
+  if (stored.length > 0) {
+    const latest = await getLatestAttempt(uid);
+    if (!latest.found) return stored;
+    if (latest.at !== null) {
+      const newestSummary = Math.max(
+        ...stored.map((s) => millisOf(s.updatedAt) ?? 0),
+      );
+      if (latest.at <= newestSummary) return stored;
+    }
+    // latest.at === null (legacy attempt without a timestamp): fall
+    // through to a full recompute rather than risk a stale summary.
+  }
   const attempts = await listQuizAttempts(uid);
   const subjectCache = new Map<string, string>();
   for (const a of attempts) {

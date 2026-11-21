@@ -8,13 +8,17 @@ import { Link } from 'react-router-dom';
 import { PageShell, EmptyState } from '../components/PageShell';
 import AdSlot from '../components/AdSlot';
 import { listPublishedBooks, type Book } from '../lib/content';
+import { cachedFetch, CACHE_KEYS } from '../lib/cache';
 
 export default function HomePage() {
   const [books, setBooks] = useState<Book[] | null>(null);
 
   useEffect(() => {
     let live = true;
-    listPublishedBooks()
+    // Reference data: the same 609-book list is also read by the Library
+    // page. Cache it for the session (10 min TTL) so navigating
+    // Home -> Library -> Home costs one read instead of three.
+    cachedFetch(CACHE_KEYS.publishedBooks, listPublishedBooks)
       .then((b) => {
         if (live) setBooks(b);
       })

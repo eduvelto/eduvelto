@@ -17,6 +17,7 @@ import {
   where,
 } from 'firebase/firestore';
 import { db } from '../firebase';
+import { dedupeInFlight } from './rateLimit';
 
 export interface Bookmark {
   id: string;
@@ -43,18 +44,25 @@ export async function addBookmark(
   title: string,
 ): Promise<void> {
   if (!db) throw new Error('not-configured');
-  await setDoc(doc(db, 'bookmarks', bookmarkId(uid, lessonId)), {
-    userId: uid,
-    lessonId,
-    bookId,
-    title,
-    createdAt: serverTimestamp(),
-  });
+  const firestore = db;
+  // Identical concurrent calls (double-click / double-render) share one write.
+  await dedupeInFlight(`bookmark:add:${uid}:${lessonId}`, () =>
+    setDoc(doc(firestore, 'bookmarks', bookmarkId(uid, lessonId)), {
+      userId: uid,
+      lessonId,
+      bookId,
+      title,
+      createdAt: serverTimestamp(),
+    }),
+  );
 }
 
 export async function removeBookmark(uid: string, lessonId: string): Promise<void> {
   if (!db) throw new Error('not-configured');
-  await deleteDoc(doc(db, 'bookmarks', bookmarkId(uid, lessonId)));
+  const firestore = db;
+  await dedupeInFlight(`bookmark:remove:${uid}:${lessonId}`, () =>
+    deleteDoc(doc(firestore, 'bookmarks', bookmarkId(uid, lessonId))),
+  );
 }
 
 export async function listBookmarks(uid: string): Promise<Bookmark[]> {
