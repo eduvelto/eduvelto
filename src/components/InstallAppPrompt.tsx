@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Button } from './ui';
+import { useLanguage } from '../i18n/LanguageContext';
 
 // PWA install prompt (owner brief 20 Nov 23:53 — installable phone app).
 // Android/Chrome fire `beforeinstallprompt` when the PWA is installable;
@@ -41,6 +42,7 @@ function wasDismissedRecently(): boolean {
 }
 
 export default function InstallAppPrompt() {
+  const { t } = useLanguage();
   const [deferredPrompt, setDeferredPrompt] =
     useState<BeforeInstallPromptEvent | null>(null);
   const [showIOS, setShowIOS] = useState(false);
@@ -99,7 +101,7 @@ export default function InstallAppPrompt() {
   return (
     <div
       role="region"
-      aria-label="অ্যাপ ইনস্টল / Install app"
+      aria-label={t({ bn: 'অ্যাপ ইনস্টল', en: 'Install app' })}
       style={{
         background: '#FFF6D6',
         borderBottom: '2px solid #D9A441',
@@ -115,20 +117,15 @@ export default function InstallAppPrompt() {
     >
       <span style={{ fontWeight: 700 }}>
         {showIOS
-          ? 'Eduvelto অ্যাপ ফোনে রাখুন — Share → Add to Home Screen চাপুন।'
-          : 'Eduvelto অ্যাপ ফোনে ইনস্টল করুন — Install app চাপুন।'}
-      </span>
-      <span style={{ color: '#44506a' }}>
-        {showIOS
-          ? 'Install Eduvelto on your phone: Share → Add to Home Screen.'
-          : 'Install Eduvelto on your phone.'}
+          ? t({ bn: 'Eduvelto অ্যাপ ফোনে রাখুন — Share → Add to Home Screen চাপুন।', en: 'Install Eduvelto on your phone: Share → Add to Home Screen.' })
+          : t({ bn: 'Eduvelto অ্যাপ ফোনে ইনস্টল করুন — Install app চাপুন।', en: 'Install Eduvelto on your phone.' })}
       </span>
       {deferredPrompt ? (
         <Button onClick={() => void install()} size="sm">
-          অ্যাপ ইনস্টল করুন / Install app
+          {t({ bn: 'অ্যাপ ইনস্টল করুন', en: 'Install app' })}
         </Button>
       ) : null}
-      <Button variant="ghost" size="sm" onClick={dismiss} aria-label="বন্ধ করুন / Dismiss">
+      <Button variant="ghost" size="sm" onClick={dismiss} aria-label={t({ bn: 'বন্ধ করুন', en: 'Dismiss' })}>
         ✕
       </Button>
     </div>

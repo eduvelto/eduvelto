@@ -21,6 +21,7 @@ import { Link } from 'react-router-dom';
 import { PageShell, EmptyState } from '../components/PageShell';
 import { AlertBox, Card, Chip, LinkButton, SkeletonCards, StatCard } from '../components/ui';
 import { useAuth } from '../lib/auth';
+import { useLanguage } from '../i18n/LanguageContext';
 import {
   bookTitleOf,
   getPublishedQuiz,
@@ -68,17 +69,18 @@ function groupByBook(quizzes: Quiz[]): BookGroup[] {
   return groups;
 }
 
-function formatDate(a: QuizAttempt): string {
+function formatDate(a: QuizAttempt, lang: 'bn' | 'en'): string {
   const c = a.createdAt;
   let d: Date | null = null;
   if (c instanceof Date) d = c;
   else if (c && typeof c.toDate === 'function') d = c.toDate();
   else if (c && typeof c.seconds === 'number') d = new Date(c.seconds * 1000);
-  return d ? d.toLocaleString('bn-BD', { dateStyle: 'medium', timeStyle: 'short' }) : '';
+  return d ? d.toLocaleString(lang === 'bn' ? 'bn-BD' : 'en-GB', { dateStyle: 'medium', timeStyle: 'short' }) : '';
 }
 
 export default function ExamPage() {
   const { user } = useAuth();
+  const { lang, t } = useLanguage();
   const [pages, setPages] = useState<QuizPageResult[]>([]);
   const [pageIndex, setPageIndex] = useState(0);
   const [attempts, setAttempts] = useState<QuizAttempt[] | null>(null);
@@ -106,7 +108,7 @@ export default function ExamPage() {
       })
       .catch(() => {
         if (!alive) return;
-        setError('পরীক্ষার তালিকা লোড করা যায়নি। / Could not load the exam list.');
+        setError(t({ bn: 'পরীক্ষার তালিকা লোড করা যায়নি।', en: 'Could not load the exam list.' }));
         setLoading(false);
       });
     return () => {
@@ -173,7 +175,7 @@ export default function ExamPage() {
         setLoading(false);
       })
       .catch(() => {
-        setError('পরীক্ষার তালিকা লোড করা যায়নি। / Could not load the exam list.');
+        setError(t({ bn: 'পরীক্ষার তালিকা লোড করা যায়নি।', en: 'Could not load the exam list.' }));
         setLoading(false);
       });
   }
@@ -188,7 +190,7 @@ export default function ExamPage() {
       setPageIndex((i) => i + 1);
       setTitlesVersion((v) => v + 1);
     } catch {
-      setError('পরের পাতা লোড করা যায়নি — আবার চেষ্টা করুন। / Could not load the next page — please try again.');
+      setError(t({ bn: 'পরের পাতা লোড করা যায়নি — আবার চেষ্টা করুন।', en: 'Could not load the next page — please try again.' }));
     } finally {
       setLoading(false);
     }
@@ -224,7 +226,7 @@ export default function ExamPage() {
             <StatCard value={String(pageQuestions)} labelBn="প্রশ্ন" labelEn="Questions" tone="gold" />
           </div>
           <p style={{ color: '#555', marginTop: 0 }}>
-            এই পাতায় {groups.length}টি বই · {pageQuizzes.length}টি পরীক্ষা · {pageQuestions}টি প্রশ্ন (দেখাচ্ছি {shownFrom}–{shownTo}) / This page: {groups.length} books · {pageQuizzes.length} exams · {pageQuestions} questions (showing {shownFrom}–{shownTo})
+            {t({ bn: `এই পাতায় ${groups.length}টি বই · ${pageQuizzes.length}টি পরীক্ষা · ${pageQuestions}টি প্রশ্ন (দেখাচ্ছি ${shownFrom}–${shownTo})`, en: `This page: ${groups.length} books · ${pageQuizzes.length} exams · ${pageQuestions} questions (showing ${shownFrom}–${shownTo})` })}
           </p>
           {groups.map((g) => (
             <Card key={g.bookId} style={{ marginBottom: 16 }}>
@@ -240,22 +242,22 @@ export default function ExamPage() {
                   style={{ display: 'flex', flexWrap: 'wrap', gap: 10, alignItems: 'center', justifyContent: 'space-between', padding: '12px 0', borderTop: '1px solid #E3E8F0' }}
                 >
                   <div>
-                    <strong>{q.kind === 'mcq' ? 'MCQ পরীক্ষা' : 'লিখিত পরীক্ষা'}</strong>
+                    <strong>{q.kind === 'mcq' ? t({ bn: 'MCQ পরীক্ষা', en: 'MCQ exam' }) : t({ bn: 'লিখিত পরীক্ষা', en: 'Written exam' })}</strong>
                     <span style={{ color: '#5A6478', fontSize: 14 }}>
                       {' '}
-                      · {q.questionCount}টি প্রশ্ন · {q.totalMarks} নম্বর · {q.timeLimitMinutes} মিনিট
+                      {t({ bn: `· ${q.questionCount}টি প্রশ্ন · ${q.totalMarks} নম্বর · ${q.timeLimitMinutes} মিনিট`, en: `· ${q.questionCount} questions · ${q.totalMarks} marks · ${q.timeLimitMinutes} minutes` })}
                     </span>
                     {q.kind === 'written' ? (
-                      <span style={{ color: '#5A6478', fontSize: 14 }}> · শিক্ষক মূল্যায়ন করবেন</span>
+                      <span style={{ color: '#5A6478', fontSize: 14 }}> {t({ bn: '· শিক্ষক মূল্যায়ন করবেন', en: '· Marked by a teacher' })}</span>
                     ) : null}
                   </div>
                   {user ? (
                     <LinkButton to={`/quiz/${q.id}`} size="sm">
-                      পরীক্ষা দিন
+                      {t({ bn: 'পরীক্ষা দিন', en: 'Take exam' })}
                     </LinkButton>
                   ) : (
                     <Link to="/login" style={{ fontWeight: 600 }}>
-                      পরীক্ষা দিতে লগইন করুন
+                      {t({ bn: 'পরীক্ষা দিতে লগইন করুন', en: 'Log in to take the exam' })}
                     </Link>
                   )}
                 </div>
@@ -270,10 +272,10 @@ export default function ExamPage() {
                 disabled={pageIndex <= 0}
                 style={{ padding: '10px 16px', minHeight: 44, borderRadius: 6, border: '1px solid #0A1F44', background: '#fff', color: '#0A1F44', cursor: 'pointer' }}
               >
-                ← আগের / Previous
+                {t({ bn: '← আগের', en: '← Previous' })}
               </button>
               <span>
-                পাতা {pageIndex + 1} / Page {pageIndex + 1}
+                {t({ bn: `পাতা ${pageIndex + 1}`, en: `Page ${pageIndex + 1}` })}
               </span>
               <button
                 type="button"
@@ -281,22 +283,26 @@ export default function ExamPage() {
                 disabled={!currentPage?.hasMore || loading}
                 style={{ padding: '10px 16px', minHeight: 44, borderRadius: 6, border: '1px solid #0A1F44', background: '#fff', color: '#0A1F44', cursor: 'pointer' }}
               >
-                পরের / Next →
+                {t({ bn: 'পরের →', en: 'Next →' })}
               </button>
             </div>
           ) : null}
         </>
       )}
 
-      <h2 style={{ fontFamily: "'Poppins','Hind Siliguri',system-ui,sans-serif", fontSize: 20, color: '#0A1F44', margin: '28px 0 12px' }}>আমার ফলাফল / My results</h2>
+      <h2 style={{ fontFamily: "'Poppins','Hind Siliguri',system-ui,sans-serif", fontSize: 20, color: '#0A1F44', margin: '28px 0 12px' }}>{t({ bn: 'আমার ফলাফল', en: 'My results' })}</h2>
       {!user ? (
         <p>
-          ফলাফল দেখতে <Link to="/login" style={{ fontWeight: 600 }}>লগইন করুন</Link>। / Sign in to see your results.
+          {lang === 'bn' ? (
+            <>ফলাফল দেখতে <Link to="/login" style={{ fontWeight: 600 }}>লগইন করুন</Link>।</>
+          ) : (
+            <><Link to="/login" style={{ fontWeight: 600 }}>Sign in</Link> to see your results.</>
+          )}
         </p>
       ) : attempts === null ? (
         <SkeletonCards count={2} />
       ) : attempts.length === 0 ? (
-        <p style={{ color: '#5A6478' }}>এখনো কোনো পরীক্ষা দেননি। / You have not taken any exam yet.</p>
+        <p style={{ color: '#5A6478' }}>{t({ bn: 'এখনো কোনো পরীক্ষা দেননি।', en: 'You have not taken any exam yet.' })}</p>
       ) : (
         <div style={{ display: 'grid', gap: 10 }}>
           {attempts.slice(0, 20).map((a) => {
@@ -306,13 +312,13 @@ export default function ExamPage() {
               <Card key={a.id} hover>
                 <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, alignItems: 'center', justifyContent: 'space-between' }}>
                   <Link to={`/quiz/${a.quizId}/result/${a.id}`} style={{ fontWeight: 700, color: '#0A1F44' }}>
-                    {q ? bookTitleOf(q) : a.quizId} — {a.kind === 'mcq' ? 'MCQ' : 'লিখিত'}
+                    {q ? bookTitleOf(q) : a.quizId} — {a.kind === 'mcq' ? 'MCQ' : t({ bn: 'লিখিত', en: 'Written' })}
                   </Link>
                   <Chip tone={pending ? 'gold' : 'blue'}>
-                    {pending ? 'মূল্যায়নের অপেক্ষায়' : `${a.score}/${a.totalMarks} (${a.percentage}%)`}
+                    {pending ? t({ bn: 'মূল্যায়নের অপেক্ষায়', en: 'Awaiting marking' }) : `${a.score}/${a.totalMarks} (${a.percentage}%)`}
                   </Chip>
                 </div>
-                <p style={{ margin: '6px 0 0', color: '#5A6478', fontSize: 14 }}>{formatDate(a)}</p>
+                <p style={{ margin: '6px 0 0', color: '#5A6478', fontSize: 14 }}>{formatDate(a, lang)}</p>
               </Card>
             );
           })}

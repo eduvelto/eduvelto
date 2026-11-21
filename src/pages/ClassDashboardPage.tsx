@@ -30,6 +30,7 @@ import { AlertBox, Card, Chip, LinkButton, ProgressBar, Reveal, SkeletonCards } 
 import AdPlaceholder from '../components/AdPlaceholder';
 import { ComingSoonHero } from '../components/ComingSoon';
 import { useAuth } from '../lib/auth';
+import { useLanguage, T } from '../i18n/LanguageContext';
 import { listPublishedBooks, type Book } from '../lib/content';
 import { listMyAttempts, listPublishedQuizzes, type Quiz, type QuizAttempt } from '../lib/exams';
 import { listBookmarks } from '../lib/bookmarks';
@@ -133,6 +134,7 @@ function TileIcon({ kind }: { kind: string }) {
 }
 
 export default function ClassDashboardPage() {
+  const { t } = useLanguage();
   const { slug = '', tab } = useParams<{ slug: string; tab?: string }>();
   const def = classLevelBySlug(slug);
   const activeTab: TabSlug = isTabSlug(tab) ? tab : 'home';
@@ -226,7 +228,7 @@ export default function ClassDashboardPage() {
         <EmptyState bn="এই শ্রেণিটি খুঁজে পাওয়া যায়নি।" en="This class could not be found." />
         <p style={{ marginTop: 16 }}>
           <Link to="/#select-class" style={{ fontWeight: 600 }}>
-            ← সব শ্রেণি দেখুন / See all classes
+            {t({ bn: '← সব শ্রেণি দেখুন', en: '← See all classes' })}
           </Link>
         </p>
       </PageShell>
@@ -273,7 +275,7 @@ export default function ClassDashboardPage() {
     <PageShell titleBn={def.bn} titleEn={def.en} wide hideTitle maxWidth={1240}>
       <p style={{ margin: '0 0 12px' }}>
         <Link to="/#select-class" style={{ fontWeight: 600 }}>
-          ← সব শ্রেণি / All classes
+          {t({ bn: '← সব শ্রেণি', en: '← All classes' })}
         </Link>
       </p>
 
@@ -284,7 +286,7 @@ export default function ClassDashboardPage() {
       <section
         className="ev-class-hero"
         style={{ background: def.accent }}
-        aria-label={`${def.bn} — ${def.en}`}
+        aria-label={t(def)}
       >
         <div>
           <h2
@@ -296,36 +298,36 @@ export default function ClassDashboardPage() {
               color: '#fff',
             }}
           >
-            {def.bn} — চলো, একসাথে শিখি!
+            {t({ bn: `${def.bn} — চলো, একসাথে শিখি!`, en: `${def.en} — Let's Learn Together!` })}
           </h2>
           <p style={{ margin: 0, color: 'rgba(255,255,255,0.92)', fontSize: 15 }}>
-            {def.en} · {def.tagBn} · {def.tagEn} — Let&apos;s Learn Together!
+            {t({ bn: def.tagBn, en: def.tagEn })}
           </p>
         </div>
         {books === null || quizzes === null ? null : ready ? (
           <div className="ev-class-hero-stats">
             <span>
-              <strong>{classBooks.length}</strong>টি বই
+              <strong>{classBooks.length}</strong>{t({ bn: 'টি বই', en: ' books' })}
             </span>
             <span>
-              <strong>{classSubjects.length}</strong>টি বিষয়
+              <strong>{classSubjects.length}</strong>{t({ bn: 'টি বিষয়', en: ' subjects' })}
             </span>
             <span>
-              <strong>{totalQuestions}</strong>টি প্রশ্ন
+              <strong>{totalQuestions}</strong>{t({ bn: 'টি প্রশ্ন', en: ' questions' })}
             </span>
             <span>
-              <strong>{classQuizzes.length}</strong>টি পরীক্ষা
+              <strong>{classQuizzes.length}</strong>{t({ bn: 'টি পরীক্ষা', en: ' tests' })}
             </span>
           </div>
         ) : (
           <p style={{ margin: '12px 0 0' }}>
-            <span className="ev-class-hero-coming">শীঘ্রই আসছে / Coming soon</span>
+            <span className="ev-class-hero-coming">{t({ bn: 'শীঘ্রই আসছে', en: 'Coming soon' })}</span>
           </p>
         )}
       </section>
 
       {/* Tab bar — Home, Books, Subjects, Practice, Tests, Results, Progress, Profile. */}
-      <nav className="ev-class-tabs" aria-label={`${def.bn} — ট্যাব / tabs`}>
+      <nav className="ev-class-tabs" aria-label={t({ bn: `${def.bn} — ট্যাব`, en: `${def.en} — tabs` })}>
         {TABS.map((t) => {
           const active = t.slug === activeTab;
           return (
@@ -340,7 +342,7 @@ export default function ClassDashboardPage() {
                 fontWeight: active ? 700 : 500,
               }}
             >
-              {t.bn}
+              <T bn={t.bn} en={t.en} />
             </Link>
           );
         })}
@@ -351,7 +353,7 @@ export default function ClassDashboardPage() {
           {books === null || quizzes === null ? <SkeletonCards count={3} /> : null}
           {error ? (
             <AlertBox tone="error" onRetry={load}>
-              শ্রেণির তথ্য লোড করা যায়নি — আবার চেষ্টা করুন। / Could not load this class — please try again.
+              {t({ bn: 'শ্রেণির তথ্য লোড করা যায়নি — আবার চেষ্টা করুন।', en: 'Could not load this class — please try again.' })}
             </AlertBox>
           ) : null}
 
@@ -369,42 +371,42 @@ export default function ClassDashboardPage() {
                       <Card style={{ marginBottom: 20 }}>
                         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', gap: 10, flexWrap: 'wrap' }}>
                           <div style={{ fontWeight: 700, color: '#142B3B', fontSize: 17 }}>
-                            আপনার অগ্রগতি / Your progress
+                            {t({ bn: 'আপনার অগ্রগতি', en: 'Your progress' })}
                           </div>
-                          <strong style={{ color: '#12766E', fontSize: 20 }}>{avgPct}% গড়</strong>
+                          <strong style={{ color: '#12766E', fontSize: 20 }}>{t({ bn: `${avgPct}% গড়`, en: `${avgPct}% average` })}</strong>
                         </div>
                         <div style={{ marginTop: 10 }}>
                           <ProgressBar value={avgPct} />
                         </div>
                         <p style={{ margin: '10px 0 12px', color: '#68747B', fontSize: 14 }}>
-                          এই শ্রেণিতে {classAttempts.length}টি পরীক্ষা দিয়েছেন।
+                          {t({ bn: `এই শ্রেণিতে ${classAttempts.length}টি পরীক্ষা দিয়েছেন।`, en: `You have taken ${classAttempts.length} tests in this class.` })}
                         </p>
                         <LinkButton to={tabHref('tests')} variant="accent">
-                          পড়া চালিয়ে যান / Continue Learning →
+                          {t({ bn: 'পড়া চালিয়ে যান →', en: 'Continue Learning →' })}
                         </LinkButton>
                       </Card>
                     </Reveal>
                   ) : user ? (
                     <Reveal>
                       <Card style={{ marginBottom: 20 }}>
-                        <div style={{ fontWeight: 700, color: '#142B3B', fontSize: 17 }}>শুরু করুন / Start learning</div>
+                        <div style={{ fontWeight: 700, color: '#142B3B', fontSize: 17 }}>{t({ bn: 'শুরু করুন', en: 'Start learning' })}</div>
                         <p style={{ margin: '6px 0 12px', color: '#68747B', fontSize: 14 }}>
-                          এই শ্রেণিতে এখনো কোনো পরীক্ষা দেননি — বই দিয়ে শুরু করুন।
+                          {t({ bn: 'এই শ্রেণিতে এখনো কোনো পরীক্ষা দেননি — বই দিয়ে শুরু করুন।', en: 'You have not taken any test in this class yet — start with a book.' })}
                         </p>
                         <LinkButton to={tabHref('books')} variant="accent">
-                          বই দেখুন / See books →
+                          {t({ bn: 'বই দেখুন →', en: 'See books →' })}
                         </LinkButton>
                       </Card>
                     </Reveal>
                   ) : (
                     <Reveal>
                       <Card style={{ marginBottom: 20 }}>
-                        <div style={{ fontWeight: 700, color: '#142B3B', fontSize: 17 }}>লগইন করে শিখুন / Log in to learn</div>
+                        <div style={{ fontWeight: 700, color: '#142B3B', fontSize: 17 }}>{t({ bn: 'লগইন করে শিখুন', en: 'Log in to learn' })}</div>
                         <p style={{ margin: '6px 0 12px', color: '#68747B', fontSize: 14 }}>
-                          লগইন করলে আপনার পড়া, পরীক্ষা ও অগ্রগতি এখানে দেখাবে।
+                          {t({ bn: 'লগইন করলে আপনার পড়া, পরীক্ষা ও অগ্রগতি এখানে দেখাবে।', en: 'Log in and your lessons, tests and progress will show here.' })}
                         </p>
                         <LinkButton to="/login" variant="primary">
-                          লগইন / Log in
+                          {t({ bn: 'লগইন', en: 'Log in' })}
                         </LinkButton>
                       </Card>
                     </Reveal>
@@ -412,7 +414,7 @@ export default function ClassDashboardPage() {
 
                   {/* Quick Access tiles */}
                   <Reveal>
-                    <h3 className="ev-section-h2">Quick Access / দ্রুত লিংক</h3>
+                    <h3 className="ev-section-h2">{t({ bn: 'দ্রুত লিংক', en: 'Quick Access' })}</h3>
                   </Reveal>
                   <div className="ev-quick-tiles">
                     {quickTiles.map((t) => (
@@ -420,8 +422,9 @@ export default function ClassDashboardPage() {
                         <span style={{ color: def.accentDeep }}>
                           <TileIcon kind={t.kind} />
                         </span>
-                        <span>{t.bn}</span>
-                        <span className="ev-quick-tile-en">{t.en}</span>
+                        <span>
+                          <T bn={t.bn} en={t.en} />
+                        </span>
                       </Link>
                     ))}
                   </div>
@@ -431,7 +434,7 @@ export default function ClassDashboardPage() {
 
                   {/* Books preview */}
                   <Reveal>
-                    <h3 className="ev-section-h2">বই / Books</h3>
+                    <h3 className="ev-section-h2">{t({ bn: 'বই', en: 'Books' })}</h3>
                   </Reveal>
                   <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: 12 }}>
                     {classBooks.slice(0, 6).map((b) => (
@@ -443,10 +446,10 @@ export default function ClassDashboardPage() {
                           <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, marginTop: 10 }}>
                             <Chip>{b.department}</Chip>
                             <Chip tone="outline">{b.classLevel}</Chip>
-                            <Chip tone="gold">{b.questionCount}টি প্রশ্ন</Chip>
+                            <Chip tone="gold">{t({ bn: `${b.questionCount}টি প্রশ্ন`, en: `${b.questionCount} questions` })}</Chip>
                           </div>
                           <p style={{ margin: '10px 0 0', color: '#68747B', fontSize: 14 }}>
-                            {b.chapterCount}টি পাঠ
+                            {t({ bn: `${b.chapterCount}টি পাঠ`, en: `${b.chapterCount} lessons` })}
                           </p>
                         </Card>
                       </Reveal>
@@ -454,13 +457,13 @@ export default function ClassDashboardPage() {
                   </div>
                   <p style={{ margin: '12px 0 24px' }}>
                     <Link to={tabHref('books')} style={{ fontWeight: 600 }}>
-                      সব {classBooks.length}টি বই দেখুন →
+                      {t({ bn: `সব ${classBooks.length}টি বই দেখুন →`, en: `See all ${classBooks.length} books →` })}
                     </Link>
                   </p>
 
                   {/* Subjects preview */}
                   <Reveal>
-                    <h3 className="ev-section-h2">বিষয়সমূহ / Subjects</h3>
+                    <h3 className="ev-section-h2">{t({ bn: 'বিষয়সমূহ', en: 'Subjects' })}</h3>
                   </Reveal>
                   <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, marginBottom: 24 }}>
                     {classSubjects.map((s) => (
@@ -474,7 +477,7 @@ export default function ClassDashboardPage() {
                   {user ? (
                     <>
                       <Reveal>
-                        <h3 className="ev-section-h2">আমার বই / My Books</h3>
+                        <h3 className="ev-section-h2">{t({ bn: 'আমার বই', en: 'My Books' })}</h3>
                       </Reveal>
                       {userLoading ? (
                         <SkeletonCards count={2} />
@@ -486,15 +489,14 @@ export default function ClassDashboardPage() {
                                 {b.title}
                               </Link>
                               <p style={{ margin: '8px 0 0', color: '#68747B', fontSize: 14 }}>
-                                {b.chapterCount}টি পাঠ · {b.questionCount}টি প্রশ্ন · সংরক্ষিত
+                                {t({ bn: `${b.chapterCount}টি পাঠ · ${b.questionCount}টি প্রশ্ন · সংরক্ষিত`, en: `${b.chapterCount} lessons · ${b.questionCount} questions · saved` })}
                               </p>
                             </Card>
                           ))}
                         </div>
                       ) : (
                         <p style={{ color: '#68747B', margin: '0 0 8px' }}>
-                          এই শ্রেণিতে এখনো কোনো বই সংরক্ষণ করেননি — বই খুলে বুকমার্ক করুন, সেটি এখানে
-                          দেখাবে।
+                          {t({ bn: 'এই শ্রেণিতে এখনো কোনো বই সংরক্ষণ করেননি — বই খুলে বুকমার্ক করুন, সেটি এখানে দেখাবে।', en: 'You have not saved any book in this class yet — open a book and bookmark it, and it will show here.' })}
                         </p>
                       )}
                     </>
@@ -502,13 +504,11 @@ export default function ClassDashboardPage() {
 
                   {/* Complete Study Guide — honest status, never "complete" */}
                   <Reveal>
-                    <h3 className="ev-section-h2">Complete Study Guide / সম্পূর্ণ গাইড</h3>
+                    <h3 className="ev-section-h2">{t({ bn: 'সম্পূর্ণ গাইড', en: 'Complete Study Guide' })}</h3>
                   </Reveal>
                   <Card>
                     <p style={{ margin: 0, color: '#68747B', fontSize: 14, lineHeight: 1.7 }}>
-                      এই শ্রেণির বইগুলো এখন প্রশ্ন ব্যাংক হিসেবে প্রকাশিত — কোনো বই এখনো সম্পূর্ণ
-                      গাইড মান (১৮টি আইটেম: ব্যাখ্যা, উদাহরণ, অনুশীলনী, পরীক্ষা, বিশ্লেষণ) পূরণ করেনি।
-                      সম্পূর্ণ গাইড তৈরি হচ্ছে; বই প্রকাশিত হলে এখানে আসবে।
+                      {t({ bn: 'এই শ্রেণির বইগুলো এখন প্রশ্ন ব্যাংক হিসেবে প্রকাশিত — কোনো বই এখনো সম্পূর্ণ গাইড মান (১৮টি আইটেম: ব্যাখ্যা, উদাহরণ, অনুশীলনী, পরীক্ষা, বিশ্লেষণ) পূরণ করেনি। সম্পূর্ণ গাইড তৈরি হচ্ছে; বই প্রকাশিত হলে এখানে আসবে।', en: 'This class’s books are published as question banks so far — no book yet meets the full guide standard (18 items: explanations, examples, exercises, tests, analysis). Complete guides are being prepared; they will appear here once published.' })}
                     </p>
                   </Card>
                 </>

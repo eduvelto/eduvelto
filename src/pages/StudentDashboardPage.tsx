@@ -23,9 +23,11 @@ import {
 } from '../lib/dashboardContent';
 import type { Book } from '../lib/content';
 import type { DocumentSnapshot } from 'firebase/firestore';
+import { T, useLanguage } from '../i18n/LanguageContext';
 
 export default function StudentDashboardPage() {
   const { user, profile, loading } = useAuth();
+  const { t } = useLanguage();
   const d = strings.dashboard;
   const [page, setPage] = useState<Page<Book> | null>(null);
   const [cursors, setCursors] = useState<(DocumentSnapshot | null)[]>([null]);
@@ -46,7 +48,7 @@ export default function StudentDashboardPage() {
         if (live) setPage(p);
       })
       .catch(() => {
-        if (live) setError('বই লোড করা যায়নি — আবার চেষ্টা করুন। / Could not load books — please try again.');
+        if (live) setError(t({ bn: 'বই লোড করা যায়নি — আবার চেষ্টা করুন।', en: 'Could not load books — please try again.' }));
       })
       .finally(() => {
         if (live) setFetching(false);
@@ -91,9 +93,9 @@ export default function StudentDashboardPage() {
   if (!user || !profile) {
     return (
       <PageShell titleBn={d.studentTitle.bn} titleEn={d.studentTitle.en}>
-        <p>{strings.profile.notSignedIn.bn}</p>
+        <p>{t(strings.profile.notSignedIn)}</p>
         <p>
-          <LinkButton to="/login" variant="outline">{strings.auth.loginTitle.bn}</LinkButton>
+          <LinkButton to="/login" variant="outline">{t(strings.auth.loginTitle)}</LinkButton>
         </p>
       </PageShell>
     );
@@ -102,9 +104,9 @@ export default function StudentDashboardPage() {
   if (profile.role === 'teacher' || profile.role === 'parent') {
     return (
       <PageShell titleBn={d.studentTitle.bn} titleEn={d.studentTitle.en}>
-        <p>এই ড্যাশবোর্ড শুধু শিক্ষার্থীদের জন্য।</p>
+        <p>{t({ bn: 'এই ড্যাশবোর্ড শুধু শিক্ষার্থীদের জন্য।', en: 'This dashboard is for students only.' })}</p>
         <p>
-          <LinkButton to="/dashboard" variant="outline">আপনার ড্যাশবোর্ডে যান →</LinkButton>
+          <LinkButton to="/dashboard" variant="outline">{t({ bn: 'আপনার ড্যাশবোর্ডে যান →', en: 'Go to your dashboard →' })}</LinkButton>
         </p>
       </PageShell>
     );
@@ -142,22 +144,22 @@ export default function StudentDashboardPage() {
 
       <div className="ev-dash-stats">
         <StatCard value={String(bookmarkCount ?? '…')} labelBn="বুকমার্ক" labelEn="Bookmarks" numeric={bookmarkCount ?? undefined} />
-        <StatCard value={summaries === null ? '…' : String(summaries.length)} labelBn="পরীক্ষার সারসংক্ষেপ" labelEn="Exam summaries" numeric={summaries === null ? undefined : summaries.length} suffix="টি বিষয়" />
+        <StatCard value={summaries === null ? '…' : String(summaries.length)} labelBn="পরীক্ষার সারসংক্ষেপ" labelEn="Exam summaries" numeric={summaries === null ? undefined : summaries.length} suffix={t({ bn: 'টি বিষয়', en: ' subjects' })} />
         <StatCard value={String(books.length)} labelBn="এই পাতার বই" labelEn="Books on this page" numeric={books.length} />
       </div>
 
       <div className="ev-dash-actions">
-        <LinkButton to="/library">লাইব্রেরি / Library</LinkButton>
-        <LinkButton to="/exam" variant="outline">পরীক্ষা / Exams</LinkButton>
-        <LinkButton to="/progress" variant="outline">আমার অগ্রগতি / My Progress</LinkButton>
-        <LinkButton to="/profile" variant="outline">প্রোফাইল সেটিংস / Profile Settings</LinkButton>
+        <LinkButton to="/library">{t({ bn: 'লাইব্রেরি', en: 'Library' })}</LinkButton>
+        <LinkButton to="/exam" variant="outline">{t({ bn: 'পরীক্ষা', en: 'Exams' })}</LinkButton>
+        <LinkButton to="/progress" variant="outline">{t({ bn: 'আমার অগ্রগতি', en: 'My Progress' })}</LinkButton>
+        <LinkButton to="/profile" variant="outline">{t({ bn: 'প্রোফাইল সেটিংস', en: 'Profile Settings' })}</LinkButton>
       </div>
 
       {!hasProfile ? (
         <EmptyState bn={EMPTY_STATES.noProfile.bn} en={EMPTY_STATES.noProfile.en} />
       ) : (
         <>
-          <h2 className="ev-section-h2">{d.myBooks.bn} / {d.myBooks.en}</h2>
+          <h2 className="ev-section-h2"><T bn={d.myBooks.bn} en={d.myBooks.en} /></h2>
           {error ? <AlertBox tone="error">{error}</AlertBox> : null}
           {fetching && !page ? <SkeletonCards count={3} /> : null}
           {page && books.length === 0 && !fetching ? (
@@ -172,15 +174,18 @@ export default function StudentDashboardPage() {
               </div>
               <div style={{ display: 'flex', gap: 12, alignItems: 'center', marginTop: 20, flexWrap: 'wrap' }}>
                 <Button variant="outline" onClick={prevPage} disabled={pageIndex <= 0 || fetching}>
-                  ← আগের / Previous
+                  <T bn="← আগের" en="← Previous" />
                 </Button>
-                <span>পাতা {pageIndex + 1} / Page {pageIndex + 1}</span>
+                <span>{t({ bn: `পাতা ${pageIndex + 1}`, en: `Page ${pageIndex + 1}` })}</span>
                 <Button variant="outline" onClick={nextPage} disabled={!page?.hasMore || fetching}>
-                  {fetching ? strings.common.loading.bn : 'পরের / Next →'}
+                  {fetching ? <T bn={strings.common.loading.bn} en={strings.common.loading.en} /> : <T bn="পরের →" en="Next →" />}
                 </Button>
               </div>
               <p className="ev-muted-ivory" style={{ fontSize: 13 }}>
-                এই পাতায় {books.length}টি বই · প্রতি পাতায় সর্বোচ্চ ৫০টি — প্রোফাইল অনুযায়ী ফিল্টার করা।
+                {t({
+                  bn: `এই পাতায় ${books.length}টি বই · প্রতি পাতায় সর্বোচ্চ ৫০টি — প্রোফাইল অনুযায়ী ফিল্টার করা।`,
+                  en: `${books.length} books on this page · at most 50 per page — filtered by your profile.`,
+                })}
               </p>
             </>
           ) : null}
@@ -189,7 +194,7 @@ export default function StudentDashboardPage() {
 
       {weak.length > 0 ? (
         <>
-          <h2 className="ev-section-h2">{d.weakAreas.bn} / {d.weakAreas.en}</h2>
+          <h2 className="ev-section-h2"><T bn={d.weakAreas.bn} en={d.weakAreas.en} /></h2>
           {weak.map((s) => (
             <div className="ev-dash-row" key={String(s.id)}>
               <span className="ev-dash-row-label">{String(s.subject ?? '')}</span>
@@ -203,7 +208,7 @@ export default function StudentDashboardPage() {
       ) : null}
       {strong.length > 0 ? (
         <>
-          <h2 className="ev-section-h2">{d.strongAreas.bn} / {d.strongAreas.en}</h2>
+          <h2 className="ev-section-h2"><T bn={d.strongAreas.bn} en={d.strongAreas.en} /></h2>
           {strong.map((s) => (
             <div className="ev-dash-row" key={String(s.id)}>
               <span className="ev-dash-row-label">{String(s.subject ?? '')}</span>

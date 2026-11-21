@@ -8,6 +8,7 @@ import { Link, useParams } from 'react-router-dom';
 import { PageShell } from '../components/PageShell';
 import { AlertBox, Skeleton } from '../components/ui';
 import LessonReader from '../components/LessonReader';
+import { useLanguage } from '../i18n/LanguageContext';
 import {
   getPublishedBook,
   getPublishedChapter,
@@ -17,6 +18,7 @@ import {
 } from '../lib/content';
 
 export default function ChapterPage() {
+  const { t } = useLanguage();
   const { bookId, chapterId } = useParams<{ bookId: string; chapterId: string }>();
   const [book, setBook] = useState<Book | null>(null);
   const [lesson, setLesson] = useState<Lesson | null>(null);
@@ -37,13 +39,13 @@ export default function ChapterPage() {
         setLesson(l);
         setLoaded(true);
         if (!ch || !l) {
-          setError('এই পাঠটি পাওয়া যায়নি বা এখনো প্রকাশিত হয়নি। / This lesson was not found or is not published yet.');
+          setError(t({ bn: 'এই পাঠটি পাওয়া যায়নি বা এখনো প্রকাশিত হয়নি।', en: 'This lesson was not found or is not published yet.' }));
         }
       })
       .catch(() => {
         if (live) {
           setLoaded(true);
-          setError('পাঠটি লোড করা যায়নি — আবার চেষ্টা করুন। / Could not load the lesson — please try again.');
+          setError(t({ bn: 'পাঠটি লোড করা যায়নি — আবার চেষ্টা করুন।', en: 'Could not load the lesson — please try again.' }));
         }
       });
     return () => {
@@ -52,12 +54,12 @@ export default function ChapterPage() {
   }, [bookId, chapterId]);
 
   return (
-    <PageShell titleBn={lesson ? lesson.title : 'পাঠ'} titleEn={lesson ? 'Lesson' : 'Lesson'}>
+    <PageShell titleBn={lesson ? lesson.title : 'পাঠ'} titleEn={lesson ? lesson.title : 'Lesson'}>
       {!loaded ? <Skeleton lines={5} /> : null}
       {error ? (
         <AlertBox tone="error">
           {error}{' '}
-          {bookId ? <Link to={`/library/${bookId}`}>← বইয়ে ফিরুন / Back to the book</Link> : null}
+          {bookId ? <Link to={`/library/${bookId}`}>{t({ bn: '← বইয়ে ফিরুন', en: '← Back to the book' })}</Link> : null}
         </AlertBox>
       ) : null}
       {lesson && book ? (
@@ -66,7 +68,7 @@ export default function ChapterPage() {
           bookTitle={book.title}
           subject={book.department}
           backTo={`/library/${book.id}`}
-          backLabel={`${book.title} / Book`}
+          backLabel={t({ bn: `${book.title} / বই`, en: `${book.title} / Book` })}
         />
       ) : null}
     </PageShell>

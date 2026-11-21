@@ -12,6 +12,7 @@ import { db } from '../firebase';
 import { PageShell } from '../components/PageShell';
 import { strings } from '../i18n/strings';
 import { useAuth } from '../lib/auth';
+import { T, useLanguage } from '../i18n/LanguageContext';
 import {
   getMyTeacherApplication,
   submitTeacherApplication,
@@ -41,6 +42,7 @@ const buttonStyle: React.CSSProperties = {
 
 export default function TeacherRegisterPage() {
   const { user, profile, loading } = useAuth();
+  const { t } = useLanguage();
   const d = strings.dashboard;
   const [existing, setExisting] = useState<VerificationRow | null>(null);
   const [checked, setChecked] = useState(false);
@@ -103,7 +105,7 @@ export default function TeacherRegisterPage() {
   if (loading) {
     return (
       <PageShell titleBn="শিক্ষক রেজিস্ট্রেশন" titleEn="Teacher registration">
-        <p>{strings.common.loading.bn}</p>
+        <p>{t(strings.common.loading)}</p>
       </PageShell>
     );
   }
@@ -111,9 +113,9 @@ export default function TeacherRegisterPage() {
   if (!user || !profile) {
     return (
       <PageShell titleBn="শিক্ষক রেজিস্ট্রেশন" titleEn="Teacher registration">
-        <p>{strings.profile.notSignedIn.bn}</p>
+        <p>{t(strings.profile.notSignedIn)}</p>
         <p>
-          <Link to="/login">{strings.auth.loginTitle.bn}</Link>
+          <Link to="/login">{t(strings.auth.loginTitle)}</Link>
         </p>
       </PageShell>
     );
@@ -123,11 +125,11 @@ export default function TeacherRegisterPage() {
     return (
       <PageShell titleBn="শিক্ষক রেজিস্ট্রেশন" titleEn="Teacher registration">
         <p>
-          এই ফর্মটি শুধু শিক্ষক ভূমিকার অ্যাকাউন্টের জন্য। আপনার ভূমিকা:{' '}
-          {profile.role === 'student' ? d.roleStudent.bn : profile.role === 'parent' ? d.roleGuardian.bn : profile.role}
+          {t({ bn: 'এই ফর্মটি শুধু শিক্ষক ভূমিকার অ্যাকাউন্টের জন্য। আপনার ভূমিকা:', en: 'This form is only for teacher-role accounts. Your role:' })}{' '}
+          {profile.role === 'student' ? <T bn={d.roleStudent.bn} en={d.roleStudent.en} /> : profile.role === 'parent' ? <T bn={d.roleGuardian.bn} en={d.roleGuardian.en} /> : profile.role}
         </p>
         <p>
-          <Link to="/dashboard">আপনার ড্যাশবোর্ডে যান →</Link>
+          <Link to="/dashboard">{t({ bn: 'আপনার ড্যাশবোর্ডে যান →', en: 'Go to your dashboard →' })}</Link>
         </p>
       </PageShell>
     );
@@ -140,11 +142,11 @@ export default function TeacherRegisterPage() {
     const subjectList = subjects.split(',').map((s) => s.trim()).filter(Boolean);
     const classList = classes.split(',').map((s) => s.trim()).filter(Boolean);
     if (subjectList.length === 0 || classList.length === 0) {
-      setError('কমপক্ষে একটি বিষয় ও একটি শ্রেণি লিখুন। / Enter at least one subject and one class.');
+      setError(t({ bn: 'কমপক্ষে একটি বিষয় ও একটি শ্রেণি লিখুন।', en: 'Enter at least one subject and one class.' }));
       return;
     }
     if (reason.trim().length < 10) {
-      setError('যাচাইয়ের কারণ কমপক্ষে ১০ অক্ষরের হতে হবে। / The verification reason must be at least 10 characters.');
+      setError(t({ bn: 'যাচাইয়ের কারণ কমপক্ষে ১০ অক্ষরের হতে হবে।', en: 'The verification reason must be at least 10 characters.' }));
       return;
     }
     setBusy(true);
@@ -166,11 +168,11 @@ export default function TeacherRegisterPage() {
     } catch (err) {
       const msg = err instanceof Error ? err.message : '';
       if (msg === 'application-already-pending') {
-        setError('আপনার আবেদন ইতিমধ্যে জমা আছে — অ্যাডমিন যাচাই করছেন। / Your application is already submitted — an admin is reviewing it.');
+        setError(t({ bn: 'আপনার আবেদন ইতিমধ্যে জমা আছে — অ্যাডমিন যাচাই করছেন।', en: 'Your application is already submitted — an admin is reviewing it.' }));
       } else if (msg === 'already-verified') {
-        setError('আপনি ইতিমধ্যে ভেরিফায়েড শিক্ষক। / You are already a verified teacher.');
+        setError(t({ bn: 'আপনি ইতিমধ্যে ভেরিফায়েড শিক্ষক।', en: 'You are already a verified teacher.' }));
       } else {
-        setError('আবেদন জমা দেওয়া যায়নি — আবার চেষ্টা করুন। / Could not submit the application — please try again.');
+        setError(t({ bn: 'আবেদন জমা দেওয়া যায়নি — আবার চেষ্টা করুন।', en: 'Could not submit the application — please try again.' }));
       }
     } finally {
       setBusy(false);
@@ -180,10 +182,10 @@ export default function TeacherRegisterPage() {
   if (checked && existing && existing.status === 'pending') {
     return (
       <PageShell titleBn="শিক্ষক রেজিস্ট্রেশন" titleEn="Teacher registration">
-        <p>⏳ {d.verificationPending.bn}</p>
-        <p>আপনার আবেদন জমা আছে — অ্যাডমিন যাচাই করছেন। অনুমোদন হলে আপনার শিক্ষক ড্যাশবোর্ডে বিষয় ও উপকরণ দেখা যাবে।</p>
+        <p>⏳ {t(d.verificationPending)}</p>
+        <p>{t({ bn: 'আপনার আবেদন জমা আছে — অ্যাডমিন যাচাই করছেন। অনুমোদন হলে আপনার শিক্ষক ড্যাশবোর্ডে বিষয় ও উপকরণ দেখা যাবে।', en: 'Your application is submitted — an admin is reviewing it. Once approved, your subjects and materials will appear on your teacher dashboard.' })}</p>
         <p>
-          <Link to="/teacher">শিক্ষক ড্যাশবোর্ড →</Link>
+          <Link to="/teacher">{t({ bn: 'শিক্ষক ড্যাশবোর্ড →', en: 'Teacher Dashboard →' })}</Link>
         </p>
       </PageShell>
     );
@@ -192,10 +194,10 @@ export default function TeacherRegisterPage() {
   if (checked && existing && existing.status === 'verified') {
     return (
       <PageShell titleBn="শিক্ষক রেজিস্ট্রেশন" titleEn="Teacher registration">
-        <p>✅ {d.verified.bn}</p>
-        <p>আপনি ভেরিফায়েড শিক্ষক।</p>
+        <p>✅ {t(d.verified)}</p>
+        <p>{t({ bn: 'আপনি ভেরিফায়েড শিক্ষক।', en: 'You are a verified teacher.' })}</p>
         <p>
-          <Link to="/teacher">শিক্ষক ড্যাশবোর্ড →</Link>
+          <Link to="/teacher">{t({ bn: 'শিক্ষক ড্যাশবোর্ড →', en: 'Teacher Dashboard →' })}</Link>
         </p>
       </PageShell>
     );
@@ -203,45 +205,49 @@ export default function TeacherRegisterPage() {
 
   return (
     <PageShell titleBn="শিক্ষক রেজিস্ট্রেশন" titleEn="Teacher registration">
-      <p>শিক্ষক ভেরিফিকেশন মানুষের মাধ্যমে যাচাই করা হয়। রেজিস্টার করলেই “ভেরিফায়েড” ব্যাজ পাওয়া যায় না। কোনো ফি নেই, কোনো কাগজপত্র আপলোড করতে হয় না — শুধু লিখিত তথ্য দিন।</p>
-      <p style={{ color: '#555' }}>Teacher verification is a human check. Registering does not grant a “verified” badge.</p>
+      <p>{t({
+        bn: 'শিক্ষক ভেরিফিকেশন মানুষের মাধ্যমে যাচাই করা হয়। রেজিস্টার করলেই “ভেরিফায়েড” ব্যাজ পাওয়া যায় না। কোনো ফি নেই, কোনো কাগজপত্র আপলোড করতে হয় না — শুধু লিখিত তথ্য দিন।',
+        en: 'Teacher verification is a human check. Registering does not grant a “verified” badge. There is no fee and no document upload — just provide the written information.',
+      })}</p>
       {existing?.status === 'rejected' ? (
         <p style={{ color: '#b00020' }}>
-          আপনার আগের আবেদন প্রত্যাখ্যাত হয়েছে{existing.reason ? ` — কারণ: ${existing.reason}` : ''}। সংশোধন করে আবার
-          আবেদন করতে পারেন।
+          {t({
+            bn: `আপনার আগের আবেদন প্রত্যাখ্যাত হয়েছে${existing.reason ? ` — কারণ: ${existing.reason}` : ''}। সংশোধন করে আবার আবেদন করতে পারেন।`,
+            en: `Your previous application was rejected${existing.reason ? ` — reason: ${existing.reason}` : ''}. You can correct it and apply again.`,
+          })}
         </p>
       ) : null}
       <form onSubmit={onSubmit}>
         <label>
-          {d.teachingLevel.bn} / {d.teachingLevel.en}
-          <input style={inputStyle} type="text" value={teachingLevel} onChange={(e) => setTeachingLevel(e.target.value)} placeholder="যেমন: Honours" />
+          <T bn={d.teachingLevel.bn} en={d.teachingLevel.en} />
+          <input style={inputStyle} type="text" value={teachingLevel} onChange={(e) => setTeachingLevel(e.target.value)} placeholder={t({ bn: 'যেমন: Honours', en: 'e.g.: Honours' })} />
         </label>
         <label>
-          {d.subjects.bn} / {d.subjects.en} * (কমা দিয়ে আলাদা করুন / comma-separated)
-          <input style={inputStyle} type="text" value={subjects} onChange={(e) => setSubjects(e.target.value)} placeholder="যেমন: English, Mathematics" />
+          <T bn={d.subjects.bn} en={d.subjects.en} /> * <T bn="(কমা দিয়ে আলাদা করুন)" en="(comma-separated)" />
+          <input style={inputStyle} type="text" value={subjects} onChange={(e) => setSubjects(e.target.value)} placeholder={t({ bn: 'যেমন: English, Mathematics', en: 'e.g.: English, Mathematics' })} />
         </label>
         <label>
-          {d.myClasses.bn} / {d.myClasses.en} * (কমা দিয়ে আলাদা করুন / comma-separated)
-          <input style={inputStyle} type="text" value={classes} onChange={(e) => setClasses(e.target.value)} placeholder="যেমন: 3rd Year, SSC" />
+          <T bn={d.myClasses.bn} en={d.myClasses.en} /> * <T bn="(কমা দিয়ে আলাদা করুন)" en="(comma-separated)" />
+          <input style={inputStyle} type="text" value={classes} onChange={(e) => setClasses(e.target.value)} placeholder={t({ bn: 'যেমন: 3rd Year, SSC', en: 'e.g.: 3rd Year, SSC' })} />
         </label>
         <label>
-          {strings.profile.institution.bn} / {strings.profile.institution.en} *
+          <T bn={strings.profile.institution.bn} en={strings.profile.institution.en} /> *
           <input style={inputStyle} type="text" value={institution} onChange={(e) => setInstitution(e.target.value)} />
         </label>
         <label>
-          পদ / Post (job title)
-          <input style={inputStyle} type="text" value={post} onChange={(e) => setPost(e.target.value)} placeholder="যেমন: সহকারী শিক্ষক / Assistant Teacher" />
+          <T bn="পদ" en="Post (job title)" />
+          <input style={inputStyle} type="text" value={post} onChange={(e) => setPost(e.target.value)} placeholder={t({ bn: 'যেমন: সহকারী শিক্ষক', en: 'e.g.: Assistant Teacher' })} />
         </label>
         <label>
-          প্রতিষ্ঠানের যোগাযোগ / Institution contact
-          <input style={inputStyle} type="text" value={institutionContact} onChange={(e) => setInstitutionContact(e.target.value)} placeholder="যেমন: ফোন নম্বর বা ইমেইল" />
+          <T bn="প্রতিষ্ঠানের যোগাযোগ" en="Institution contact" />
+          <input style={inputStyle} type="text" value={institutionContact} onChange={(e) => setInstitutionContact(e.target.value)} placeholder={t({ bn: 'যেমন: ফোন নম্বর বা ইমেইল', en: 'e.g.: phone number or email' })} />
         </label>
         <label>
-          {d.qualifications.bn} / {d.qualifications.en} *
-          <input style={inputStyle} type="text" value={qualifications} onChange={(e) => setQualifications(e.target.value)} placeholder="যেমন: M.A. in English" />
+          <T bn={d.qualifications.bn} en={d.qualifications.en} /> *
+          <input style={inputStyle} type="text" value={qualifications} onChange={(e) => setQualifications(e.target.value)} placeholder={t({ bn: 'যেমন: M.A. in English', en: 'e.g.: M.A. in English' })} />
         </label>
         <label>
-          {d.experienceYears.bn} / {d.experienceYears.en}
+          <T bn={d.experienceYears.bn} en={d.experienceYears.en} />
           <input
             style={inputStyle}
             type="number"
@@ -252,21 +258,22 @@ export default function TeacherRegisterPage() {
           />
         </label>
         <label>
-          যাচাইয়ের কারণ / Why should you be verified? * (কমপক্ষে ১০ অক্ষর / at least 10 characters)
-          <input style={inputStyle} type="text" value={reason} onChange={(e) => setReason(e.target.value)} placeholder="যেমন: আমি ৫ বছর ধরে ইংরেজি পড়াই" />
+          <T bn="যাচাইয়ের কারণ" en="Why should you be verified?" /> * <T bn="(কমপক্ষে ১০ অক্ষর)" en="(at least 10 characters)" />
+          <input style={inputStyle} type="text" value={reason} onChange={(e) => setReason(e.target.value)} placeholder={t({ bn: 'যেমন: আমি ৫ বছর ধরে ইংরেজি পড়াই', en: 'e.g.: I have taught English for 5 years' })} />
         </label>
         <label>
-          প্রমাণের রেফারেন্স / Evidence reference (ঐচ্ছিক / optional)
-          <input style={inputStyle} type="text" value={evidenceRef} onChange={(e) => setEvidenceRef(e.target.value)} placeholder="যেমন: সনদের লিংক বা নম্বর" />
+          <T bn="প্রমাণের রেফারেন্স" en="Evidence reference" /> <T bn="(ঐচ্ছিক)" en="(optional)" />
+          <input style={inputStyle} type="text" value={evidenceRef} onChange={(e) => setEvidenceRef(e.target.value)} placeholder={t({ bn: 'যেমন: সনদের লিংক বা নম্বর', en: 'e.g.: certificate link or number' })} />
         </label>
         {error ? <p style={{ color: '#b00020' }}>{error}</p> : null}
         {done ? (
           <p style={{ color: '#0A1F44' }}>
-            আবেদন জমা হয়েছে — অ্যাডমিন যাচাই করছেন। <Link to="/teacher">শিক্ষক ড্যাশবোর্ড →</Link>
+            {t({ bn: 'আবেদন জমা হয়েছে — অ্যাডমিন যাচাই করছেন।', en: 'Application submitted — an admin is reviewing it.' })}{' '}
+            <Link to="/teacher">{t({ bn: 'শিক্ষক ড্যাশবোর্ড →', en: 'Teacher Dashboard →' })}</Link>
           </p>
         ) : null}
         <button style={buttonStyle} type="submit" disabled={busy || done}>
-          {busy ? strings.common.loading.bn : 'আবেদন জমা দিন / Submit application'}
+          {busy ? <T bn={strings.common.loading.bn} en={strings.common.loading.en} /> : <T bn="আবেদন জমা দিন" en="Submit application" />}
         </button>
       </form>
     </PageShell>

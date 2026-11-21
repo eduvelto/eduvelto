@@ -12,6 +12,7 @@
 
 import { Link } from 'react-router-dom';
 import { Reveal } from './ui';
+import { useLanguage } from '../i18n/LanguageContext';
 import type { ClassLevelDef } from '../lib/classLevels';
 
 /** Small line icon per level (inline SVG, currentColor) — no emoji. */
@@ -107,22 +108,22 @@ export function ClassCard({
   delayMs?: number;
 }) {
   const ready = bookCount > 0;
+  const { lang, t } = useLanguage();
   return (
     <Reveal delayMs={delayMs}>
       <Link
         to={`/class/${def.slug}`}
         className="ev-class-card"
         style={{ background: def.accent, textDecoration: 'none' }}
-        aria-label={`${def.bn} — ${def.en}. ${ready ? `${bookCount}টি বই` : 'শীঘ্রই আসছে'}`}
+        aria-label={t({ bn: `${def.bn}. ${ready ? `${bookCount}টি বই` : 'শীঘ্রই আসছে'}`, en: `${def.en}. ${ready ? `${bookCount} books` : 'Coming soon'}` })}
       >
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: 8 }}>
           <div>
             <div style={{ fontFamily: "'Poppins','Hind Siliguri',system-ui,sans-serif", fontSize: 20, fontWeight: 700, lineHeight: 1.3, color: '#fff' }}>
-              {def.bn}
+              {lang === 'bn' ? def.bn : def.en}
             </div>
-            <div style={{ fontSize: 14, color: 'rgba(255,255,255,0.92)', marginTop: 2 }}>{def.en}</div>
             <div style={{ fontSize: 13, color: 'rgba(255,255,255,0.85)', marginTop: 4 }}>
-              {def.tagBn} · {def.tagEn}
+              {lang === 'bn' ? def.tagBn : def.tagEn}
             </div>
           </div>
           <span
@@ -148,7 +149,7 @@ export function ClassCard({
         <div style={{ marginTop: 'auto' }}>
           {ready ? (
             <p style={{ margin: '0 0 10px', fontSize: 14, color: 'rgba(255,255,255,0.95)', fontWeight: 600 }}>
-              {bookCount}টি বই · {subjectCount}টি বিষয়
+              {t({ bn: `${bookCount}টি বই · ${subjectCount}টি বিষয়`, en: `${bookCount} books · ${subjectCount} subjects` })}
             </p>
           ) : (
             <p style={{ margin: '0 0 10px' }}>
@@ -163,7 +164,7 @@ export function ClassCard({
                   borderRadius: 999,
                 }}
               >
-                শীঘ্রই আসছে / Coming soon
+                {t({ bn: 'শীঘ্রই আসছে', en: 'Coming soon' })}
               </span>
             </p>
           )}
@@ -182,7 +183,7 @@ export function ClassCard({
               minHeight: 40,
             }}
           >
-            Explore →
+            {t({ bn: 'ঘুরে দেখুন →', en: 'Explore →' })}
           </span>
         </div>
       </Link>

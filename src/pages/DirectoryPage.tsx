@@ -21,6 +21,7 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { PageShell, EmptyState } from '../components/PageShell';
+import { useLanguage } from '../i18n/LanguageContext';
 import { AlertBox, Button, Card, Chip, SkeletonCards } from '../components/ui';
 import {
   listPublishedDirectoryPage,
@@ -42,6 +43,7 @@ import {
 } from '../lib/classLevels';
 
 export default function DirectoryPage() {
+  const { t } = useLanguage();
   const [pages, setPages] = useState<PageResult<DirectoryRow>[]>([]);
   const [pageIndex, setPageIndex] = useState(0);
   const [error, setError] = useState('');
@@ -98,7 +100,7 @@ export default function DirectoryPage() {
         setLoading(false);
       })
       .catch(() => {
-        setError('নির্দেশিকা লোড করা যায়নি — আবার চেষ্টা করুন। / Could not load the directory — please try again.');
+        setError(t({ bn: 'নির্দেশিকা লোড করা যায়নি — আবার চেষ্টা করুন।', en: 'Could not load the directory — please try again.' }));
         setLoading(false);
       });
   }
@@ -127,7 +129,7 @@ export default function DirectoryPage() {
       })
       .catch(() => {
         if (!live) return;
-        setError('নির্দেশিকা লোড করা যায়নি — আবার চেষ্টা করুন। / Could not load the directory — please try again.');
+        setError(t({ bn: 'নির্দেশিকা লোড করা যায়নি — আবার চেষ্টা করুন।', en: 'Could not load the directory — please try again.' }));
         setLoading(false);
       });
     return () => {
@@ -169,7 +171,7 @@ export default function DirectoryPage() {
       setPages((p) => [...p, res]);
       setPageIndex((i) => i + 1);
     } catch {
-      setError('পরের পাতা লোড করা যায়নি — আবার চেষ্টা করুন। / Could not load the next page — please try again.');
+      setError(t({ bn: 'পরের পাতা লোড করা যায়নি — আবার চেষ্টা করুন।', en: 'Could not load the next page — please try again.' }));
     } finally {
       setLoading(false);
     }
@@ -183,7 +185,7 @@ export default function DirectoryPage() {
     <PageShell titleBn="শিক্ষা নির্দেশিকা" titleEn="Education Directory" wide>
       {error ? (
         <AlertBox tone="error" onRetry={reloadFirst}>
-          নির্দেশিকা লোড করা যায়নি — আবার চেষ্টা করুন। / Could not load the directory — please try again.
+          {error}
         </AlertBox>
       ) : null}
       {loading && pages.length === 0 && !error && !levelEmpty ? <SkeletonCards count={4} /> : null}
@@ -193,8 +195,7 @@ export default function DirectoryPage() {
       {pages.length > 0 || levelEmpty ? (
         <>
           <p style={{ color: '#5A6478', margin: '0 0 12px' }}>
-            ধাপে ধাপে বাছুন: ধারা → বোর্ড → প্রোগ্রাম → শ্রেণি → বিষয় / Pick step by step: type →
-            board → program → class → subject.
+            {t({ bn: 'ধাপে ধাপে বাছুন: ধারা → বোর্ড → প্রোগ্রাম → শ্রেণি → বিষয়', en: 'Pick step by step: type → board → program → class → subject.' })}
           </p>
           <Card style={{ marginBottom: 16 }}>
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
@@ -207,11 +208,11 @@ export default function DirectoryPage() {
                   setClassLevel('');
                   setDept('');
                 }}
-                aria-label="শিক্ষার ধারা / Education type"
+                aria-label={t({ bn: 'শিক্ষার ধারা', en: 'Education type' })}
                 className="ev-select"
                 style={{ flex: '1 1 160px' }}
               >
-                <option value="">সব ধারা / All types</option>
+                <option value="">{t({ bn: 'সব ধারা', en: 'All types' })}</option>
                 {EDUCATION_TYPES.map((t) => (
                   <option key={t} value={t}>
                     {t}
@@ -226,11 +227,11 @@ export default function DirectoryPage() {
                   setClassLevel('');
                   setDept('');
                 }}
-                aria-label="বোর্ড / Board"
+                aria-label={t({ bn: 'বোর্ড', en: 'Board' })}
                 className="ev-select"
                 style={{ flex: '1 1 160px' }}
               >
-                <option value="">সব বোর্ড / All boards</option>
+                <option value="">{t({ bn: 'সব বোর্ড', en: 'All boards' })}</option>
                 {boards.map((b) => (
                   <option key={b} value={b}>
                     {b}
@@ -244,11 +245,11 @@ export default function DirectoryPage() {
                   setClassLevel('');
                   setDept('');
                 }}
-                aria-label="প্রোগ্রাম / Program"
+                aria-label={t({ bn: 'প্রোগ্রাম', en: 'Program' })}
                 className="ev-select"
                 style={{ flex: '1 1 160px' }}
               >
-                <option value="">সব প্রোগ্রাম / All programs</option>
+                <option value="">{t({ bn: 'সব প্রোগ্রাম', en: 'All programs' })}</option>
                 {programs.map((p) => (
                   <option key={p} value={p}>
                     {p}
@@ -261,14 +262,16 @@ export default function DirectoryPage() {
                   setClassLevel(e.target.value);
                   setDept('');
                 }}
-                aria-label="শ্রেণি / Class"
+                aria-label={t({ bn: 'শ্রেণি', en: 'Class' })}
                 className="ev-select"
                 style={{ flex: '1 1 160px' }}
               >
-                <option value="">সব শ্রেণি / All classes</option>
+                <option value="">{t({ bn: 'সব শ্রেণি', en: 'All classes' })}</option>
                 {classes.map((c) => (
                   <option key={c.value} value={c.value}>
-                    {c.label}
+                    {c.value.startsWith('level:')
+                      ? t(levelOfClassFilter(c.value) ?? { bn: c.labelBn, en: c.labelEn })
+                      : t({ bn: c.labelBn, en: c.labelEn })}
                   </option>
                 ))}
               </select>
@@ -277,11 +280,11 @@ export default function DirectoryPage() {
                 onChange={(e) => {
                   setDept(e.target.value);
                 }}
-                aria-label="বিষয় / Subject"
+                aria-label={t({ bn: 'বিষয়', en: 'Subject' })}
                 className="ev-select"
                 style={{ flex: '1 1 160px' }}
               >
-                <option value="">সব বিষয় / All subjects</option>
+                <option value="">{t({ bn: 'সব বিষয়', en: 'All subjects' })}</option>
                 {departments.map((d) => (
                   <option key={d} value={d}>
                     {d}
@@ -293,26 +296,24 @@ export default function DirectoryPage() {
           {levelEmpty && selectedLevel ? (
             <Card>
               <div style={{ fontWeight: 700, color: '#142B3B', fontSize: 17 }}>
-                {selectedLevel.bn} — শীঘ্রই আসছে! / Coming soon
+                {t({ bn: `${selectedLevel.bn} — শীঘ্রই আসছে!`, en: `${selectedLevel.en} — Coming soon!` })}
               </div>
               <p style={{ margin: '8px 0 12px', color: '#68747B', fontSize: 15, lineHeight: 1.7 }}>
-                {selectedLevel.bn}-এর কোনো নির্দেশিকা এন্ট্রি এখনো প্রকাশিত হয়নি — তথ্য তৈরি হচ্ছে।
-                প্রকাশিত হলেই এখানে দেখতে পাবে। / No directory entries for {selectedLevel.en} yet
-                — information is being prepared.
+                {t({ bn: `${selectedLevel.bn}-এর কোনো নির্দেশিকা এন্ট্রি এখনো প্রকাশিত হয়নি — তথ্য তৈরি হচ্ছে। প্রকাশিত হলেই এখানে দেখতে পাবে।`, en: `No directory entries for ${selectedLevel.en} yet — information is being prepared.` })}
               </p>
               <p style={{ margin: 0 }}>
                 <Link to={`/class/${selectedLevel.slug}`} style={{ fontWeight: 600 }}>
-                  {selectedLevel.bn} ড্যাশবোর্ড →
+                  {t({ bn: `${selectedLevel.bn} ড্যাশবোর্ড →`, en: `${selectedLevel.en} dashboard →` })}
                 </Link>
               </p>
             </Card>
           ) : (
             <>
               <p style={{ color: '#555', margin: '0 0 12px' }}>
-                দেখাচ্ছি {shownFrom}–{shownTo} / Showing {shownFrom}–{shownTo}
+                {t({ bn: `দেখাচ্ছি ${shownFrom}–${shownTo}`, en: `Showing ${shownFrom}–${shownTo}` })}
               </p>
               {pageRows.length === 0 && !loading ? (
-                <p>এই বাছাইয়ে কিছু পাওয়া যায়নি — উপরের ধাপ বদলে আবার চেষ্টা করুন। / Nothing matches — try different steps above.</p>
+                <p>{t({ bn: 'এই বাছাইয়ে কিছু পাওয়া যায়নি — উপরের ধাপ বদলে আবার চেষ্টা করুন।', en: 'Nothing matches — try different steps above.' })}</p>
               ) : null}
             </>
           )}
@@ -325,7 +326,7 @@ export default function DirectoryPage() {
                 <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, marginTop: 10 }}>
                   <Chip>{r.department}</Chip>
                   <Chip tone="outline">{r.classLevel}</Chip>
-                  <Chip tone="outline">কোড {r.paperCode}</Chip>
+                  <Chip tone="outline">{t({ bn: `কোড ${r.paperCode}`, en: `Code ${r.paperCode}` })}</Chip>
                 </div>
                 <p style={{ margin: '10px 0 0', color: '#5A6478', fontSize: 14 }}>
                   {r.type} · {r.program}
@@ -336,13 +337,13 @@ export default function DirectoryPage() {
           {currentPage?.hasMore || pageIndex > 0 ? (
             <div style={{ display: 'flex', gap: 12, alignItems: 'center', marginTop: 16 }}>
               <Button variant="outline" onClick={prevPage} disabled={pageIndex <= 0}>
-                ← আগের / Previous
+                {t({ bn: '← আগের', en: '← Previous' })}
               </Button>
               <span>
-                পাতা {pageIndex + 1} / Page {pageIndex + 1}
+                {t({ bn: `পাতা ${pageIndex + 1}`, en: `Page ${pageIndex + 1}` })}
               </span>
               <Button variant="outline" onClick={nextPage} disabled={!currentPage?.hasMore || loading}>
-                পরের / Next →
+                {t({ bn: 'পরের →', en: 'Next →' })}
               </Button>
             </div>
           ) : null}

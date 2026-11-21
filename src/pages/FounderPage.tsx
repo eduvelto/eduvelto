@@ -32,6 +32,7 @@
 
 import { Link } from 'react-router-dom';
 import { useSeo } from '../lib/seo';
+import { useLanguage } from '../i18n/LanguageContext';
 
 const NAVY = '#0A1F44';
 const DARK_NAVY = '#041742';
@@ -166,10 +167,16 @@ const sectionH2: React.CSSProperties = { fontSize: 20, margin: '32px 0 10px', co
 const bodyP: React.CSSProperties = { lineHeight: 1.8, margin: '0 0 12px' };
 
 export default function FounderPage() {
+  const { lang, t } = useLanguage();
   useSeo({
-    title: 'Ali Hasan Mohammed Mizan — Founder & CEO, Eduvelto',
+    title:
+      lang === 'bn'
+        ? 'আলী হাসান মোহাম্মদ মিজান — প্রতিষ্ঠাতা ও সিইও, Eduvelto'
+        : 'Ali Hasan Mohammed Mizan — Founder & CEO, Eduvelto',
     description:
-      'Ali Hasan Mohammed Mizan is the Founder & CEO of Eduvelto, a free digital education platform from Bangladesh. English teacher, Honours student, and founder.',
+      lang === 'bn'
+        ? 'আলী হাসান মোহাম্মদ মিজান Eduvelto-র প্রতিষ্ঠাতা ও সিইও — বাংলাদেশের শিক্ষার্থীদের জন্য বিনামূল্যের ডিজিটাল শিক্ষা প্ল্যাটফর্ম। ইংরেজি শিক্ষক, অনার্স শিক্ষার্থী ও প্রতিষ্ঠাতা।'
+        : 'Ali Hasan Mohammed Mizan is the Founder & CEO of Eduvelto, a free digital education platform from Bangladesh. English teacher, Honours student, and founder.',
     canonical: CANONICAL,
     ogType: 'profile',
     ogImage: 'https://eduvelto.com/founder-photo.jpg',
@@ -217,11 +224,13 @@ export default function FounderPage() {
               Founder &amp; CEO, Eduvelto
             </p>
             <p style={{ margin: '0 0 4px', fontSize: 16, lineHeight: 1.6 }}>
-              শেখো, এগিয়ে যাও, স্বপ্ন গড়ো — Learn, Grow, Achieve.
+              {t({ bn: 'শেখো, এগিয়ে যাও, স্বপ্ন গড়ো', en: 'Learn, Grow, Achieve' })}.
             </p>
             <p style={{ margin: 0, fontSize: 15, lineHeight: 1.6, color: '#dbe4f5' }}>
-              Founder of Eduvelto — a free digital education platform for Bangladesh, in Bangla and
-              in English.
+              {t({
+                bn: 'Eduvelto-র প্রতিষ্ঠাতা — বাংলাদেশের জন্য একটি বিনামূল্যের ডিজিটাল শিক্ষা প্ল্যাটফর্ম, বাংলায় ও ইংরেজিতে।',
+                en: 'Founder of Eduvelto — a free digital education platform for Bangladesh, in Bangla and in English.',
+              })}
             </p>
           </div>
         </div>
@@ -230,7 +239,7 @@ export default function FounderPage() {
       <div style={{ maxWidth: 760, margin: '0 auto', padding: '24px 16px 40px' }}>
         {/* At a glance */}
         <section
-          aria-label="At a glance"
+          aria-label={t({ bn: 'এক নজরে', en: 'At a glance' })}
           style={{
             border: `1px solid #dfe4f0`,
             borderRadius: 12,
@@ -238,210 +247,222 @@ export default function FounderPage() {
             background: '#f8f9fc',
           }}
         >
-          <h2 style={{ fontSize: 17, margin: '0 0 10px', color: NAVY }}>এক নজরে / At a glance</h2>
+          <h2 style={{ fontSize: 17, margin: '0 0 10px', color: NAVY }}>{t({ bn: 'এক নজরে', en: 'At a glance' })}</h2>
           <dl style={{ margin: 0, display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '8px 24px', lineHeight: 1.7 }}>
             <div>
-              <dt style={{ fontWeight: 700, display: 'inline' }}>Born: </dt>
-              <dd style={{ display: 'inline', margin: 0 }}>21 February 2005</dd>
+              <dt style={{ fontWeight: 700, display: 'inline' }}>{t({ bn: 'জন্ম:', en: 'Born:' })} </dt>
+              <dd style={{ display: 'inline', margin: 0 }}>{t({ bn: '২১ ফেব্রুয়ারি ২০০৫', en: '21 February 2005' })}</dd>
             </div>
             <div>
-              <dt style={{ fontWeight: 700, display: 'inline' }}>SSC: </dt>
-              <dd style={{ display: 'inline', margin: 0 }}>2020, Science</dd>
+              <dt style={{ fontWeight: 700, display: 'inline' }}>{t({ bn: 'এসএসসি:', en: 'SSC:' })} </dt>
+              <dd style={{ display: 'inline', margin: 0 }}>{t({ bn: '২০২০, বিজ্ঞান', en: '2020, Science' })}</dd>
             </div>
             <div>
-              <dt style={{ fontWeight: 700, display: 'inline' }}>HSC: </dt>
-              <dd style={{ display: 'inline', margin: 0 }}>2022, Science — Cox&apos;s Bazar City College</dd>
+              <dt style={{ fontWeight: 700, display: 'inline' }}>{t({ bn: 'এইচএসসি:', en: 'HSC:' })} </dt>
+              <dd style={{ display: 'inline', margin: 0 }}>{t({ bn: '২০২২, বিজ্ঞান — কক্সবাজার সিটি কলেজ', en: '2022, Science — Cox’s Bazar City College' })}</dd>
             </div>
             <div>
-              <dt style={{ fontWeight: 700, display: 'inline' }}>Higher education: </dt>
+              <dt style={{ fontWeight: 700, display: 'inline' }}>{t({ bn: 'উচ্চশিক্ষা:', en: 'Higher education:' })} </dt>
               <dd style={{ display: 'inline', margin: 0 }}>
-                Honours 3rd year, English — National University
+                {t({ bn: 'অনার্স তৃতীয় বর্ষ, ইংরেজি — জাতীয় বিশ্ববিদ্যালয়', en: 'Honours 3rd year, English — National University' })}
               </dd>
             </div>
             <div>
-              <dt style={{ fontWeight: 700, display: 'inline' }}>Profession: </dt>
+              <dt style={{ fontWeight: 700, display: 'inline' }}>{t({ bn: 'পেশা:', en: 'Profession:' })} </dt>
               <dd style={{ display: 'inline', margin: 0 }}>
-                English teacher, Tahsinul Ummah International Madrasa (since 2023)
+                {t({ bn: 'ইংরেজি শিক্ষক, তাহসিনুল উম্মাহ ইন্টারন্যাশনাল মাদ্রাসা (২০২৩ থেকে)', en: 'English teacher, Tahsinul Ummah International Madrasa (since 2023)' })}
               </dd>
             </div>
           </dl>
         </section>
 
         {/* Biography */}
-        <h2 style={sectionH2}>জীবনী / Biography</h2>
-        <p style={bodyP}>
-          Ali Hasan Mohammed Mizan is the Founder and Owner of Eduvelto. He has taught English
-          at Tahsinul Ummah International Madrasa since 2023, and is currently in his third year
-          of Honours in English at the National University. He completed his SSC in Science in
-          2020 and his HSC in Science in 2022 at Cox&apos;s Bazar City College. Alongside his
-          studies, he helps look after his father&apos;s business. He founded Eduvelto with a
-          simple belief: quality education should be free and within reach of every student in
-          Bangladesh — in Bangla and in English. Eduvelto brings together lessons, exams, a
-          digital library and smart study planning — with a personal AI teacher planned for the
-          future — so that a student anywhere in the country can learn, grow and achieve,
-          without cost standing in the way.
-        </p>
-        <p style={bodyP}>
-          আলী হাসান মোহাম্মদ মিজান Eduvelto-র প্রতিষ্ঠাতা ও মালিক। তিনি ২০২৩ সাল থেকে
-          তাহসিনুল উম্মাহ ইন্টারন্যাশনাল মাদ্রাসায় ইংরেজি পড়াচ্ছেন। তিনি জাতীয়
-          বিশ্ববিদ্যালয়ে ইংরেজি বিষয়ে অনার্স তৃতীয় বর্ষের শিক্ষার্থী। ২০২০ সালে বিজ্ঞান বিভাগে
-          এসএসসি এবং ২০২২ সালে বিজ্ঞান বিভাগ থেকে কক্সবাজার সিটি কলেজ থেকে এইচএসসি সম্পন্ন করেন।
-          পড়ালেখার পাশাপাশি তিনি বাবার ব্যবসা দেখাশোনা করেন। তাঁর বিশ্বাস — মানসম্মত শিক্ষা
-          বাংলাদেশের প্রত্যেক শিক্ষার্থীর জন্য বিনামূল্যে পৌঁছে দেওয়া উচিত, বাংলায় ও ইংরেজিতে।
-          সেই লক্ষ্যেই তিনি Eduvelto গড়েছেন — পাঠ, পরীক্ষা, ডিজিটাল লাইব্রেরি ও স্মার্ট পড়ার
-          পরিকল্পনা এক জায়গায়, ভবিষ্যতে ব্যক্তিগত AI শিক্ষকসহ, যাতে দেশের যেকোনো প্রান্তের
-          শিক্ষার্থী শিখতে, এগিয়ে যেতে ও স্বপ্ন গড়তে পারে।
-        </p>
+        <h2 style={sectionH2}>{t({ bn: 'জীবনী', en: 'Biography' })}</h2>
+        {lang === 'bn' ? (
+          <p style={bodyP}>
+            আলী হাসান মোহাম্মদ মিজান Eduvelto-র প্রতিষ্ঠাতা ও মালিক। তিনি ২০২৩ সাল থেকে
+            তাহসিনুল উম্মাহ ইন্টারন্যাশনাল মাদ্রাসায় ইংরেজি পড়াচ্ছেন। তিনি জাতীয়
+            বিশ্ববিদ্যালয়ে ইংরেজি বিষয়ে অনার্স তৃতীয় বর্ষের শিক্ষার্থী। ২০২০ সালে বিজ্ঞান বিভাগে
+            এসএসসি এবং ২০২২ সালে বিজ্ঞান বিভাগ থেকে কক্সবাজার সিটি কলেজ থেকে এইচএসসি সম্পন্ন করেন।
+            পড়ালেখার পাশাপাশি তিনি বাবার ব্যবসা দেখাশোনা করেন। তাঁর বিশ্বাস — মানসম্মত শিক্ষা
+            বাংলাদেশের প্রত্যেক শিক্ষার্থীর জন্য বিনামূল্যে পৌঁছে দেওয়া উচিত, বাংলায় ও ইংরেজিতে।
+            সেই লক্ষ্যেই তিনি Eduvelto গড়েছেন — পাঠ, পরীক্ষা, ডিজিটাল লাইব্রেরি ও স্মার্ট পড়ার
+            পরিকল্পনা এক জায়গায়, ভবিষ্যতে ব্যক্তিগত AI শিক্ষকসহ, যাতে দেশের যেকোনো প্রান্তের
+            শিক্ষার্থী শিখতে, এগিয়ে যেতে ও স্বপ্ন গড়তে পারে।
+          </p>
+        ) : (
+          <p style={bodyP}>
+            Ali Hasan Mohammed Mizan is the Founder and Owner of Eduvelto. He has taught English
+            at Tahsinul Ummah International Madrasa since 2023, and is currently in his third year
+            of Honours in English at the National University. He completed his SSC in Science in
+            2020 and his HSC in Science in 2022 at Cox&apos;s Bazar City College. Alongside his
+            studies, he helps look after his father&apos;s business. He founded Eduvelto with a
+            simple belief: quality education should be free and within reach of every student in
+            Bangladesh — in Bangla and in English. Eduvelto brings together lessons, exams, a
+            digital library and smart study planning — with a personal AI teacher planned for the
+            future — so that a student anywhere in the country can learn, grow and achieve,
+            without cost standing in the way.
+          </p>
+        )}
 
         {/* Founder story */}
-        <h2 style={sectionH2}>কেন Eduvelto / Founder story</h2>
-        <p style={bodyP}>
-          Ali Hasan Mohammed Mizan founded Eduvelto in 2026 from Cox&apos;s Bazar. He is a student
-          himself and a teacher — so he sees the same problem from both sides: good learning
-          material is scattered, expensive, or in a language students struggle with. Eduvelto is
-          his answer: one free place where a student anywhere in Bangladesh can find books,
-          lessons, question banks, exams and results — in Bangla and in English — and see their
-          own progress, weak areas and next steps.
-        </p>
-        <p style={bodyP}>
-          আলী হাসান মোহাম্মদ মিজান ২০২৬ সালে কক্সবাজার থেকে Eduvelto গড়েছেন। তিনি নিজে একজন
-          শিক্ষার্থী এবং একজন শিক্ষক — তাই সমস্যাটা তিনি দুই দিক থেকেই দেখেন: ভালো পড়ার উপকরণ হয়
-          ছড়িয়ে-ছিটিয়ে থাকে, নয়তো খরচের বাইরে, নয়তো এমন ভাষায় যা শিক্ষার্থীর জন্য কঠিন।
-          Eduvelto-ই তার উত্তর: বাংলাদেশের যেকোনো প্রান্তের শিক্ষার্থী এক জায়গায় বই, পাঠ,
-          প্রশ্নব্যাংক, পরীক্ষা ও ফলাফল পাবে — বাংলায় ও ইংরেজিতে — আর নিজের অগ্রগতি, দুর্বল দিক ও
-          পরের ধাপ দেখতে পাবে।
-        </p>
+        <h2 style={sectionH2}>{t({ bn: 'কেন Eduvelto', en: 'Founder story' })}</h2>
+        {lang === 'bn' ? (
+          <p style={bodyP}>
+            আলী হাসান মোহাম্মদ মিজান ২০২৬ সালে কক্সবাজার থেকে Eduvelto গড়েছেন। তিনি নিজে একজন
+            শিক্ষার্থী এবং একজন শিক্ষক — তাই সমস্যাটা তিনি দুই দিক থেকেই দেখেন: ভালো পড়ার উপকরণ হয়
+            ছড়িয়ে-ছিটিয়ে থাকে, নয়তো খরচের বাইরে, নয়তো এমন ভাষায় যা শিক্ষার্থীর জন্য কঠিন।
+            Eduvelto-ই তার উত্তর: বাংলাদেশের যেকোনো প্রান্তের শিক্ষার্থী এক জায়গায় বই, পাঠ,
+            প্রশ্নব্যাংক, পরীক্ষা ও ফলাফল পাবে — বাংলায় ও ইংরেজিতে — আর নিজের অগ্রগতি, দুর্বল দিক ও
+            পরের ধাপ দেখতে পাবে।
+          </p>
+        ) : (
+          <p style={bodyP}>
+            Ali Hasan Mohammed Mizan founded Eduvelto in 2026 from Cox&apos;s Bazar. He is a student
+            himself and a teacher — so he sees the same problem from both sides: good learning
+            material is scattered, expensive, or in a language students struggle with. Eduvelto is
+            his answer: one free place where a student anywhere in Bangladesh can find books,
+            lessons, question banks, exams and results — in Bangla and in English — and see their
+            own progress, weak areas and next steps.
+          </p>
+        )}
 
         {/* Eduvelto showcase — three-way status, owner decision 21 Nov 07:24 (5) */}
-        <h2 style={sectionH2}>Eduvelto — কী আছে, কী আসছে / What Eduvelto offers</h2>
+        <h2 style={sectionH2}>{t({ bn: 'Eduvelto — কী আছে, কী আসছে', en: 'What Eduvelto offers' })}</h2>
         <p style={bodyP}>
-          Eduvelto is a free digital education platform for Bangladesh — lessons, exams, a digital
-          library and study planning, for students from Class 1 to Honours. It is free for
-          students, teachers and guardians: no registration fee and no verification fee, ever.
+          {t({
+            bn: 'Eduvelto বাংলাদেশের শিক্ষার্থীদের জন্য একটি বিনামূল্যের ডিজিটাল শিক্ষা প্ল্যাটফর্ম — পাঠ, পরীক্ষা, ডিজিটাল লাইব্রেরি ও পড়ার পরিকল্পনা, প্রথম শ্রেণি থেকে অনার্স পর্যন্ত। শিক্ষার্থী, শিক্ষক ও অভিভাবকদের জন্য সম্পূর্ণ বিনামূল্যে: কোনো রেজিস্ট্রেশন ফি নেই, কোনো যাচাই ফি নেই, কখনোই না।',
+            en: 'Eduvelto is a free digital education platform for Bangladesh — lessons, exams, a digital library and study planning, for students from Class 1 to Honours. It is free for students, teachers and guardians: no registration fee and no verification fee, ever.',
+          })}
         </p>
         <h3 style={{ fontSize: 16, margin: '20px 0 8px', color: NAVY }}>
-          উপলব্ধ এখন / Available now
+          {t({ bn: 'উপলব্ধ এখন', en: 'Available now' })}
         </h3>
         <ul style={{ lineHeight: 2, paddingLeft: 20, margin: '0 0 12px' }}>
           <li>
-            <Link to="/library">Digital Library — 609 books, 2,109 chapters, 20,970 questions</Link>{' '}
-            <StatusChip label="Available now" kind="live" />
+            <Link to="/library">{t({ bn: 'ডিজিটাল লাইব্রেরি — ৬০৯টি বই, ২,১০৯টি অধ্যায়, ২০,৯৭০টি প্রশ্ন', en: 'Digital Library — 609 books, 2,109 chapters, 20,970 questions' })}</Link>{' '}
+            <StatusChip label={t({ bn: 'উপলব্ধ এখন', en: 'Available now' })} kind="live" />
           </li>
           <li>
-            <Link to="/exam">Exams — 212 exams with results and progress tracking</Link>{' '}
-            <StatusChip label="Available now" kind="live" />
+            <Link to="/exam">{t({ bn: 'পরীক্ষা — ২১২টি পরীক্ষা, ফলাফল ও অগ্রগতি পর্যবেক্ষণসহ', en: 'Exams — 212 exams with results and progress tracking' })}</Link>{' '}
+            <StatusChip label={t({ bn: 'উপলব্ধ এখন', en: 'Available now' })} kind="live" />
           </li>
           <li>
-            Lessons, bookmarks and progress <StatusChip label="Available now" kind="live" />
+            {t({ bn: 'পাঠ, বুকমার্ক ও অগ্রগতি', en: 'Lessons, bookmarks and progress' })} <StatusChip label={t({ bn: 'উপলব্ধ এখন', en: 'Available now' })} kind="live" />
           </li>
           <li>
-            Study routine <StatusChip label="Available now" kind="live" />
+            {t({ bn: 'পড়ার রুটিন', en: 'Study routine' })} <StatusChip label={t({ bn: 'উপলব্ধ এখন', en: 'Available now' })} kind="live" />
           </li>
           <li>
-            PWA — installable app, works offline <StatusChip label="Available now" kind="live" />
+            {t({ bn: 'PWA — ইনস্টল করা যায় এমন অ্যাপ, অফলাইনে চলে', en: 'PWA — installable app, works offline' })} <StatusChip label={t({ bn: 'উপলব্ধ এখন', en: 'Available now' })} kind="live" />
           </li>
           <li>
-            Owner Admin Dashboard <StatusChip label="Available now" kind="live" />
+            {t({ bn: 'মালিকের অ্যাডমিন ড্যাশবোর্ড', en: 'Owner Admin Dashboard' })} <StatusChip label={t({ bn: 'উপলব্ধ এখন', en: 'Available now' })} kind="live" />
           </li>
           <li>
-            Health pages (medicines, diseases, facilities){' '}
-            <StatusChip label="Available now — all content under review" kind="review" />
+            {t({ bn: 'স্বাস্থ্য পাতা (ওষুধ, রোগ, সুবিধা)', en: 'Health pages (medicines, diseases, facilities)' })}{' '}
+            <StatusChip label={t({ bn: 'উপলব্ধ এখন — সব কনটেন্ট পর্যালোচনাধীন', en: 'Available now — all content under review' })} kind="review" />
           </li>
         </ul>
         <h3 style={{ fontSize: 16, margin: '20px 0 8px', color: NAVY }}>
-          উন্নয়নাধীন / In development
+          {t({ bn: 'উন্নয়নাধীন', en: 'In development' })}
         </h3>
         <ul style={{ lineHeight: 2, paddingLeft: 20, margin: '0 0 12px' }}>
           <li>
-            Student, Teacher and Guardian dashboards{' '}
-            <StatusChip label="In development (staging)" kind="planned" />
+            {t({ bn: 'শিক্ষার্থী, শিক্ষক ও অভিভাবক ড্যাশবোর্ড', en: 'Student, Teacher and Guardian dashboards' })}{' '}
+            <StatusChip label={t({ bn: 'উন্নয়নাধীন (স্টেজিং)', en: 'In development (staging)' })} kind="planned" />
           </li>
         </ul>
         <h3 style={{ fontSize: 16, margin: '20px 0 8px', color: NAVY }}>
-          পরিকল্পিত / Planned
+          {t({ bn: 'পরিকল্পিত', en: 'Planned' })}
         </h3>
         <ul style={{ lineHeight: 2, paddingLeft: 20, margin: '0 0 12px' }}>
           <li>
-            <Link to="/ai-teacher">AI Teacher</Link>{' '}
-            <StatusChip label="Planned — demo only, not live AI" kind="planned" />
+            <Link to="/ai-teacher">{t({ bn: 'AI শিক্ষক', en: 'AI Teacher' })}</Link>{' '}
+            <StatusChip label={t({ bn: 'পরিকল্পিত — শুধু ডেমো, আসল AI নয়', en: 'Planned — demo only, not live AI' })} kind="planned" />
           </li>
           <li>
-            Native Android and iOS apps{' '}
-            <StatusChip label="Planned — 0% built, PWA only today" kind="planned" />
+            {t({ bn: 'নেটিভ অ্যান্ড্রয়েড ও iOS অ্যাপ', en: 'Native Android and iOS apps' })}{' '}
+            <StatusChip label={t({ bn: 'পরিকল্পিত — ০% তৈরি, আজ শুধু PWA', en: 'Planned — 0% built, PWA only today' })} kind="planned" />
           </li>
           <li>
-            Private messaging and educational communities{' '}
-            <StatusChip label="Planned — after safety review" kind="planned" />
+            {t({ bn: 'ব্যক্তিগত মেসেজিং ও শিক্ষামূলক কমিউনিটি', en: 'Private messaging and educational communities' })}{' '}
+            <StatusChip label={t({ bn: 'পরিকল্পিত — নিরাপত্তা পর্যালোচনার পর', en: 'Planned — after safety review' })} kind="planned" />
           </li>
           <li>
-            Video lessons / Shorts{' '}
-            <StatusChip label="Planned — classification approved, not built" kind="planned" />
+            {t({ bn: 'ভিডিও পাঠ / শর্টস', en: 'Video lessons / Shorts' })}{' '}
+            <StatusChip label={t({ bn: 'পরিকল্পিত — শ্রেণিবিন্যাস অনুমোদিত, তৈরি হয়নি', en: 'Planned — classification approved, not built' })} kind="planned" />
           </li>
         </ul>
 
         {/* Vision & mission */}
-        <h2 style={sectionH2}>ভিশন ও মিশন / Vision &amp; mission</h2>
+        <h2 style={sectionH2}>{t({ bn: 'ভিশন ও মিশন', en: 'Vision & mission' })}</h2>
         <p style={bodyP}>
-          <strong>Vision:</strong> free, accessible, quality education for every student in
-          Bangladesh — Learn, Grow, Achieve.
+          <strong>{t({ bn: 'ভিশন:', en: 'Vision:' })}</strong>{' '}
+          {t({
+            bn: 'বাংলাদেশের প্রত্যেক শিক্ষার্থীর জন্য বিনামূল্যে, সহজলভ্য, মানসম্মত শিক্ষা — শেখো, এগিয়ে যাও, স্বপ্ন গড়ো।',
+            en: 'free, accessible, quality education for every student in Bangladesh — Learn, Grow, Achieve.',
+          })}
         </p>
         <p style={bodyP}>
-          <strong>Mission:</strong> make learning resources — books, lessons, question banks,
-          exams, results and progress tracking — available to everyone, in Bangla and English,
-          from Class 1 to Honours.
+          <strong>{t({ bn: 'মিশন:', en: 'Mission:' })}</strong>{' '}
+          {t({
+            bn: 'শেখার উপকরণ — বই, পাঠ, প্রশ্নব্যাংক, পরীক্ষা, ফলাফল ও অগ্রগতি পর্যবেক্ষণ — প্রথম শ্রেণি থেকে অনার্স পর্যন্ত, বাংলায় ও ইংরেজিতে, সবার জন্য উপলব্ধ করা।',
+            en: 'make learning resources — books, lessons, question banks, exams, results and progress tracking — available to everyone, in Bangla and English, from Class 1 to Honours.',
+          })}
         </p>
         <p style={bodyP}>
-          <strong>Long-term:</strong> finish the website first, then Android and iOS apps with the
-          same premium identity; a real AI Teacher (costed first, only with approval); student,
-          teacher and guardian dashboards; school accounts; and educational communities — only
-          when safety, age protection and moderation are ready.
+          <strong>{t({ bn: 'দীর্ঘমেয়াদি:', en: 'Long-term:' })}</strong>{' '}
+          {t({
+            bn: 'প্রথমে ওয়েবসাইট শেষ করা, তারপর একই প্রিমিয়াম পরিচয়ে অ্যান্ড্রয়েড ও iOS অ্যাপ; আসল AI শিক্ষক (আগে খরচ হিসাব, শুধু অনুমোদন পেলে); শিক্ষার্থী, শিক্ষক ও অভিভাবক ড্যাশবোর্ড; স্কুল অ্যাকাউন্ট; এবং শিক্ষামূলক কমিউনিটি — শুধু তখনই, যখন নিরাপত্তা, বয়স সুরক্ষা ও মডারেশন প্রস্তুত।',
+            en: 'finish the website first, then Android and iOS apps with the same premium identity; a real AI Teacher (costed first, only with approval); student, teacher and guardian dashboards; school accounts; and educational communities — only when safety, age protection and moderation are ready.',
+          })}
         </p>
 
         {/* Projects & achievements */}
-        <h2 style={sectionH2}>প্রকল্প / Projects</h2>
+        <h2 style={sectionH2}>{t({ bn: 'প্রকল্প', en: 'Projects' })}</h2>
         <ul style={{ lineHeight: 2, paddingLeft: 20, margin: '0 0 12px' }}>
           <li>
-            <strong>Eduvelto</strong> — Founder &amp; CEO (2026). Free digital education platform
-            for Bangladesh. <Link to="/about">About Eduvelto →</Link>
+            <strong>Eduvelto</strong> — {t({ bn: 'প্রতিষ্ঠাতা ও CEO (২০২৬)। বাংলাদেশের জন্য বিনামূল্যের ডিজিটাল শিক্ষা প্ল্যাটফর্ম।', en: 'Founder & CEO (2026). Free digital education platform for Bangladesh.' })} <Link to="/about">{t({ bn: 'Eduvelto সম্পর্কে', en: 'About Eduvelto' })} →</Link>
           </li>
           <li>
-            <strong>Facebook page — Ali Hasan Mohammed Mizan</strong> —{' '}
+            <strong>{t({ bn: 'ফেসবুক পেজ — আলী হাসান মোহাম্মদ মিজান', en: 'Facebook page — Ali Hasan Mohammed Mizan' })}</strong> —{' '}
             <a href="https://www.facebook.com/ahmmmizan" target="_blank" rel="noopener noreferrer">
               facebook.com/ahmmmizan
             </a>
           </li>
           <li>
-            <strong>YouTube — Ali Hasan Mohammed Mizan</strong> —{' '}
+            <strong>{t({ bn: 'ইউটিউব — আলী হাসান মোহাম্মদ মিজান', en: 'YouTube — Ali Hasan Mohammed Mizan' })}</strong> —{' '}
             <a href="https://www.youtube.com/@alihasanmdmizan" target="_blank" rel="noopener noreferrer">
               @alihasanmdmizan
             </a>
           </li>
         </ul>
         <p style={{ ...bodyP, color: '#555', fontSize: 15 }}>
-          No awards or formal honours are claimed here — only verified milestones are listed.
+          {t({ bn: 'এখানে কোনো পুরস্কার বা আনুষ্ঠানিক সম্মান দাবি করা হয়নি — শুধু যাচাইকৃত মাইলফলকই তালিকাভুক্ত।', en: 'No awards or formal honours are claimed here — only verified milestones are listed.' })}
         </p>
 
         {/* Social links */}
-        <h2 style={sectionH2}>অফিসিয়াল লিংক / Official links</h2>
+        <h2 style={sectionH2}>{t({ bn: 'অফিসিয়াল লিংক', en: 'Official links' })}</h2>
         <ul style={{ lineHeight: 2.2, paddingLeft: 20, margin: '0 0 12px', listStyle: 'none', paddingInlineStart: 0 }}>
           <li>
             <a href="https://www.facebook.com/ahmmmizan" target="_blank" rel="noopener noreferrer" style={{ color: BLUE }}>
-              Facebook Page — Ali Hasan Mohammed Mizan
+              {t({ bn: 'ফেসবুক পেজ — আলী হাসান মোহাম্মদ মিজান', en: 'Facebook Page — Ali Hasan Mohammed Mizan' })}
             </a>
           </li>
           <li>
             <a href="https://www.youtube.com/@alihasanmdmizan" target="_blank" rel="noopener noreferrer" style={{ color: BLUE }}>
-              YouTube — Ali Hasan Mohammed Mizan
+              {t({ bn: 'ইউটিউব — আলী হাসান মোহাম্মদ মিজান', en: 'YouTube — Ali Hasan Mohammed Mizan' })}
             </a>
           </li>
           <li>
             <a href="https://www.instagram.com/ahmmmizan" target="_blank" rel="noopener noreferrer" style={{ color: BLUE }}>
-              Instagram — @ahmmmizan
+              {t({ bn: 'ইনস্টাগ্রাম — @ahmmmizan', en: 'Instagram — @ahmmmizan' })}
             </a>
           </li>
           <li>
             <a href="https://www.tiktok.com/@ahmmizan" target="_blank" rel="noopener noreferrer" style={{ color: BLUE }}>
-              TikTok — @ahmmizan
+              {t({ bn: 'টিকটক — @ahmmizan', en: 'TikTok — @ahmmizan' })}
             </a>
           </li>
           <li>
@@ -450,21 +471,21 @@ export default function FounderPage() {
         </ul>
 
         {/* Contact — official business email (owner decision 21 Nov 07:24, 2) */}
-        <h2 style={sectionH2}>যোগাযোগ / Contact</h2>
+        <h2 style={sectionH2}>{t({ bn: 'যোগাযোগ', en: 'Contact' })}</h2>
         <p style={bodyP}>
-          Official business email:{' '}
+          {t({ bn: 'অফিসিয়াল ব্যবসায়িক ইমেইল:', en: 'Official business email:' })}{' '}
           <a href="mailto:ahmmizan23@gmail.com" style={{ color: BLUE }}>
             ahmmizan23@gmail.com
           </a>
         </p>
         <p style={bodyP}>
-          For anything else, please use the <Link to="/contact">contact page</Link>.
+          {t({ bn: 'অন্য যেকোনো প্রয়োজনে অনুগ্রহ করে', en: 'For anything else, please use the' })} <Link to="/contact">{t({ bn: 'যোগাযোগের পাতা', en: 'contact page' })}</Link>{t({ bn: ' ব্যবহার করুন।', en: '.' })}
         </p>
 
         <p style={{ marginTop: 32 }}>
-          <Link to="/">← হোম / Home</Link>
+          <Link to="/">← {t({ bn: 'হোম', en: 'Home' })}</Link>
           {' · '}
-          <Link to="/about">Eduvelto সম্পর্কে / About Eduvelto</Link>
+          <Link to="/about">{t({ bn: 'Eduvelto সম্পর্কে', en: 'About Eduvelto' })}</Link>
         </p>
       </div>
     </main>

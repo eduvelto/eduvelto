@@ -43,6 +43,7 @@ import AdPlaceholder from '../components/AdPlaceholder';
 import { ClassCard } from '../components/ClassCards';
 import { listPublishedBooks, type Book } from '../lib/content';
 import { CLASS_LEVELS, booksForClass, subjectsForClass } from '../lib/classLevels';
+import { useLanguage } from '../i18n/LanguageContext';
 
 function SearchIcon() {
   return (
@@ -183,21 +184,22 @@ function PhoneIcon() {
 }
 
 const FEATURE_STRIP = [
-  { icon: <BookIcon />, bn: 'Complete Study', en: 'Notes & Solutions' },
-  { icon: <QuizIcon />, bn: 'Practice & Test', en: 'Be Exam Ready' },
-  { icon: <ChartIcon />, bn: 'Track Progress', en: 'See Your Growth' },
-  { icon: <GiftIcon />, bn: 'Free for All', en: 'Learn Without Cost' },
-  { icon: <PhoneIcon />, bn: 'Mobile Friendly', en: 'Learn Anywhere' },
+  { icon: <BookIcon />, bn: 'সম্পূর্ণ পড়াশোনা', en: 'Complete Study', subBn: 'নোট ও সমাধান', subEn: 'Notes & Solutions' },
+  { icon: <QuizIcon />, bn: 'অনুশীলন ও পরীক্ষা', en: 'Practice & Test', subBn: 'পরীক্ষার জন্য প্রস্তুত হোন', subEn: 'Be Exam Ready' },
+  { icon: <ChartIcon />, bn: 'অগ্রগতি দেখুন', en: 'Track Progress', subBn: 'নিজের অগ্রগতি দেখুন', subEn: 'See Your Growth' },
+  { icon: <GiftIcon />, bn: 'সবার জন্য বিনামূল্যে', en: 'Free for All', subBn: 'বিনামূল্যে শিখুন', subEn: 'Learn Without Cost' },
+  { icon: <PhoneIcon />, bn: 'মোবাইল-বান্ধব', en: 'Mobile Friendly', subBn: 'যেকোনো জায়গায় শিখুন', subEn: 'Learn Anywhere' },
 ];
 
 const WHY_CHOOSE = [
-  { icon: <RocketIcon />, bn: 'Smart Learning', en: 'Anytime, Anywhere' },
-  { icon: <TargetIcon />, bn: 'Exam Focused', en: 'Get Better Results' },
-  { icon: <UsersIcon />, bn: 'For Every Student', en: 'From Class 1 to HSC' },
-  { icon: <ShieldIcon />, bn: 'Trusted Platform', en: 'Safe & Secure' },
+  { icon: <RocketIcon />, bn: 'স্মার্ট শেখা', en: 'Smart Learning', subBn: 'যেকোনো সময়, যেকোনো জায়গায়', subEn: 'Anytime, Anywhere' },
+  { icon: <TargetIcon />, bn: 'পরীক্ষাকেন্দ্রিক', en: 'Exam Focused', subBn: 'আরও ভালো ফলাফল করুন', subEn: 'Get Better Results' },
+  { icon: <UsersIcon />, bn: 'প্রত্যেক শিক্ষার্থীর জন্য', en: 'For Every Student', subBn: 'শ্রেণি ১ থেকে HSC পর্যন্ত', subEn: 'From Class 1 to HSC' },
+  { icon: <ShieldIcon />, bn: 'বিশ্বস্ত প্ল্যাটফর্ম', en: 'Trusted Platform', subBn: 'নিরাপদ ও সুরক্ষিত', subEn: 'Safe & Secure' },
 ];
 
 export default function HomePage() {
+  const { t } = useLanguage();
   const [books, setBooks] = useState<Book[] | null>(null);
   const [error, setError] = useState(false);
   const [searchText, setSearchText] = useState('');
@@ -270,7 +272,7 @@ export default function HomePage() {
             }}
           >
             <p style={{ margin: '0 0 4px', color: 'rgba(255,255,255,0.85)', fontSize: 15, position: 'relative', zIndex: 1 }}>
-              Welcome to Eduvelto
+              {t({ bn: 'Eduvelto-তে স্বাগতম', en: 'Welcome to Eduvelto' })}
             </p>
             <h2
               style={{
@@ -283,39 +285,38 @@ export default function HomePage() {
                 zIndex: 1,
               }}
             >
-              Your <span style={{ color: '#D9A441' }}>Complete</span> Learning Partner
+              {t({ bn: 'আপনার', en: 'Your' })} <span style={{ color: '#D9A441' }}>{t({ bn: 'সম্পূর্ণ', en: 'Complete' })}</span> {t({ bn: 'শেখার সঙ্গী', en: 'Learning Partner' })}
             </h2>
             <p style={{ margin: '0 0 6px', color: 'rgba(255,255,255,0.88)', fontSize: 16, lineHeight: 1.7, position: 'relative', zIndex: 1 }}>
-              শেখো, এগিয়ে যাও, <span style={{ color: '#D9A441' }}>স্বপ্ন গড়ো</span> — Study Smart.
-              Practice More. Achieve Higher.
+              {t({ bn: 'শেখো, এগিয়ে যাও, ', en: 'Study Smart. Practice More. ' })}<span style={{ color: '#D9A441' }}>{t({ bn: 'স্বপ্ন গড়ো', en: 'Achieve Higher' })}</span>
             </p>
             <p className="ev-hero-dream" style={{ position: 'relative', zIndex: 1 }}>
-              Dream Big... Learn with Eduvelto!
+              {t({ bn: 'বড় স্বপ্ন দেখো... Eduvelto-র সাথে শেখো!', en: 'Dream Big... Learn with Eduvelto!' })}
             </p>
             <form className="ev-hero-search" onSubmit={runSearch} role="search">
               <label htmlFor="ev-hero-search" style={{ position: 'absolute', width: 1, height: 1, overflow: 'hidden', clip: 'rect(0 0 0 0)' }}>
-                বই, বিষয় বা প্রশ্ন খুঁজুন / Search books, subjects or questions
+                {t({ bn: 'বই, বিষয় বা প্রশ্ন খুঁজুন', en: 'Search books, subjects or questions' })}
               </label>
               <input
                 id="ev-hero-search"
                 type="search"
                 value={searchText}
                 onChange={(e) => setSearchText(e.target.value)}
-                placeholder="বই, বিষয় বা প্রশ্ন খুঁজুন… / Search books…"
+                placeholder={t({ bn: 'বই, বিষয় বা প্রশ্ন খুঁজুন…', en: 'Search books, subjects or questions…' })}
               />
               <button type="submit" className="ev-btn ev-btn-accent" style={{ flex: 'none' }}>
-                <SearchIcon /> খুঁজুন
+                <SearchIcon /> {t({ bn: 'খুঁজুন', en: 'Search' })}
               </button>
             </form>
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10, position: 'relative', zIndex: 1 }}>
               <a href="#select-class" className="ev-btn ev-btn-gold">
-                Start Learning Now →
+                {t({ bn: 'এখনই শেখা শুরু করুন →', en: 'Start Learning Now →' })}
               </a>
               <LinkButton to="/library" variant="outline-light">
-                লাইব্রেরি দেখুন / Browse library
+                {t({ bn: 'লাইব্রেরি দেখুন', en: 'Browse library' })}
               </LinkButton>
               <LinkButton to="/exam" variant="outline-light">
-                পরীক্ষা দিন / Take an exam
+                {t({ bn: 'পরীক্ষা দিন', en: 'Take an exam' })}
               </LinkButton>
             </div>
           </section>
@@ -323,17 +324,15 @@ export default function HomePage() {
           {/* Select Your Class — the primary navigation. */}
           <section id="select-class" style={{ scrollMarginTop: 76 }}>
             <Reveal>
-              <h2 className="ev-section-h2">আপনার শ্রেণি বেছে নিন / Select Your Class</h2>
+              <h2 className="ev-section-h2">{t({ bn: 'আপনার শ্রেণি বেছে নিন', en: 'Select Your Class' })}</h2>
             </Reveal>
             <p style={{ color: '#57616A', margin: '-8px 0 14px', fontSize: 14 }}>
-              For Every Class, Every Student! — প্রথমে আপনার শ্রেণি বেছে নিন, তারপর সেই শ্রেণির বই,
-              বিষয়, পাঠ ও পরীক্ষা দেখুন।
+              {t({ bn: 'প্রথমে আপনার শ্রেণি বেছে নিন, তারপর সেই শ্রেণির বই, বিষয়, পাঠ ও পরীক্ষা দেখুন।', en: 'For every class, every student! First pick your class, then see its books, subjects, lessons and exams.' })}
             </p>
             {books === null ? <SkeletonCards count={3} /> : null}
             {error ? (
               <p style={{ color: '#B00020', margin: '0 0 16px' }}>
-                বইয়ের তালিকা লোড করা যায়নি — পাতাটি রিফ্রেশ করে আবার চেষ্টা করুন। / Could not load
-                the book list — please refresh and try again.
+                {t({ bn: 'বইয়ের তালিকা লোড করা যায়নি — পাতাটি রিফ্রেশ করে আবার চেষ্টা করুন।', en: 'Could not load the book list — please refresh and try again.' })}
               </p>
             ) : null}
             {books !== null ? (
@@ -360,7 +359,7 @@ export default function HomePage() {
       {books !== null && books.length === 0 && !error ? (
         <>
           <EmptyState bn="এখনো কোনো তথ্য নেই। কনটেন্ট প্রকাশিত হলে এখানে দেখা যাবে।" en="No data yet. Content will appear here once it is published." />
-          <p style={{ marginTop: 16 }}>এখানে প্রকাশিত বিষয়, বই ও কুইজ দেখা যাবে। / Published subjects, books and quizzes will appear here.</p>
+          <p style={{ marginTop: 16 }}>{t({ bn: 'এখানে প্রকাশিত বিষয়, বই ও কুইজ দেখা যাবে।', en: 'Published subjects, books and quizzes will appear here.' })}</p>
         </>
       ) : null}
       {books !== null && books.length > 0 ? (
@@ -372,8 +371,8 @@ export default function HomePage() {
                 <div key={f.bn} className="ev-feature-strip-item">
                   <span style={{ color: '#12766E' }}>{f.icon}</span>
                   <div>
-                    <div style={{ fontWeight: 700, color: '#142B3B', fontSize: 14 }}>{f.bn}</div>
-                    <div style={{ color: '#68747B', fontSize: 13 }}>{f.en}</div>
+                    <div style={{ fontWeight: 700, color: '#142B3B', fontSize: 14 }}>{t(f)}</div>
+                    <div style={{ color: '#68747B', fontSize: 13 }}>{t({ bn: f.subBn, en: f.subEn })}</div>
                   </div>
                 </div>
               ))}
@@ -383,18 +382,18 @@ export default function HomePage() {
           {/* Our Learning Apps — working apps link to real pages; deferred
               ones are labelled Roadmap / In preparation, never as working. */}
           <Reveal>
-            <h2 className="ev-section-h2">Our Learning Apps / আমাদের শেখার অ্যাপ</h2>
+            <h2 className="ev-section-h2">{t({ bn: 'আমাদের শেখার অ্যাপ', en: 'Our Learning Apps' })}</h2>
           </Reveal>
           <div className="ev-apps-grid">
             {[
-              { icon: <BookIcon />, bn: 'Eduvelto Books', to: '/library', status: null as string | null },
+              { icon: <BookIcon />, bn: 'Eduvelto Books', to: '/library', status: null as { bn: string; en: string } | null },
               { icon: <QuizIcon />, bn: 'Eduvelto Quiz', to: '/exam', status: null },
               { icon: <ChartIcon />, bn: 'Eduvelto Progress', to: '/progress', status: null },
               { icon: <TrophyIcon />, bn: 'Eduvelto Exam', to: '/exam', status: null },
-              { icon: <GameIcon />, bn: 'Eduvelto Games', to: null, status: 'পরিকল্পনায় আছে / Roadmap' },
-              { icon: <CalendarIcon />, bn: 'Eduvelto Planner', to: '/routine', status: 'তৈরি হচ্ছে / In preparation' },
-              { icon: <StarIcon />, bn: 'Eduvelto Rewards', to: null, status: 'পরিকল্পনায় আছে / Roadmap' },
-              { icon: <UsersIcon />, bn: 'Eduvelto Community', to: '/social', status: 'পরিকল্পনায় আছে / Roadmap' },
+              { icon: <GameIcon />, bn: 'Eduvelto Games', to: null, status: { bn: 'পরিকল্পনায় আছে', en: 'Roadmap' } },
+              { icon: <CalendarIcon />, bn: 'Eduvelto Planner', to: '/routine', status: { bn: 'তৈরি হচ্ছে', en: 'In preparation' } },
+              { icon: <StarIcon />, bn: 'Eduvelto Rewards', to: null, status: { bn: 'পরিকল্পনায় আছে', en: 'Roadmap' } },
+              { icon: <UsersIcon />, bn: 'Eduvelto Community', to: '/social', status: { bn: 'পরিকল্পনায় আছে', en: 'Roadmap' } },
             ].map((app) => (
               <div key={app.bn} className="ev-app-tile">
                 <span className="ev-icon-tile" aria-hidden="true">
@@ -409,7 +408,7 @@ export default function HomePage() {
                 )}
                 {app.status ? (
                   <p style={{ margin: '6px 0 0' }}>
-                    <Chip tone="gold">{app.status}</Chip>
+                    <Chip tone="gold">{t(app.status)}</Chip>
                   </p>
                 ) : null}
               </div>
@@ -419,10 +418,10 @@ export default function HomePage() {
           {/* Popular Books — ranked by question count (stated criterion);
               no usage data exists, so no "most viewed" claim is made. */}
           <Reveal>
-            <h2 className="ev-section-h2">জনপ্রিয় বই / Popular Books</h2>
+            <h2 className="ev-section-h2">{t({ bn: 'জনপ্রিয় বই', en: 'Popular Books' })}</h2>
           </Reveal>
           <p style={{ color: '#57616A', margin: '-8px 0 14px', fontSize: 13 }}>
-            প্রশ্নের সংখ্যা অনুযায়ী সাজানো / Ranked by question count
+            {t({ bn: 'প্রশ্নের সংখ্যা অনুযায়ী সাজানো', en: 'Ranked by question count' })}
           </p>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(160px, 1fr))', gap: 12, marginBottom: 8 }}>
             {popular.map((b: Book, i: number) => (
@@ -436,7 +435,7 @@ export default function HomePage() {
                     <Chip tone="outline">{b.classLevel}</Chip>
                   </div>
                   <p style={{ margin: '10px 0 0', color: '#68747B', fontSize: 13 }}>
-                    {b.questionCount}টি প্রশ্ন · {b.chapterCount}টি পাঠ
+                    {t({ bn: `${b.questionCount}টি প্রশ্ন · ${b.chapterCount}টি পাঠ`, en: `${b.questionCount} questions · ${b.chapterCount} lessons` })}
                   </p>
                 </Card>
               </Reveal>
@@ -444,13 +443,13 @@ export default function HomePage() {
           </div>
           <p style={{ margin: '4px 0 24px' }}>
             <Link to="/library" style={{ fontWeight: 600 }}>
-              সব বই দেখুন / See all books →
+              {t({ bn: 'সব বই দেখুন →', en: 'See all books →' })}
             </Link>
           </p>
 
           {/* Why Choose Eduvelto? + Be a Topper CTA */}
           <Reveal>
-            <h2 className="ev-section-h2">Why Choose Eduvelto? / কেন Eduvelto?</h2>
+            <h2 className="ev-section-h2">{t({ bn: 'কেন Eduvelto?', en: 'Why Choose Eduvelto?' })}</h2>
           </Reveal>
           <div className="ev-why-grid">
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: 12 }}>
@@ -459,8 +458,8 @@ export default function HomePage() {
                   <span className="ev-icon-tile" aria-hidden="true">
                     {w.icon}
                   </span>
-                  <div style={{ fontWeight: 700, color: '#142B3B', marginTop: 10 }}>{w.bn}</div>
-                  <p style={{ margin: '4px 0 0', color: '#68747B', fontSize: 14 }}>{w.en}</p>
+                  <div style={{ fontWeight: 700, color: '#142B3B', marginTop: 10 }}>{t(w)}</div>
+                  <p style={{ margin: '4px 0 0', color: '#68747B', fontSize: 14 }}>{t({ bn: w.subBn, en: w.subEn })}</p>
                 </Card>
               ))}
             </div>
@@ -469,12 +468,12 @@ export default function HomePage() {
                 <TrophyIcon />
               </span>
               <div style={{ fontFamily: "'Poppins','Hind Siliguri',system-ui,sans-serif", fontSize: 20, fontWeight: 800, color: '#fff', lineHeight: 1.35 }}>
-                Be a <span style={{ color: '#D9A441' }}>Topper</span>
+                {t({ bn: 'Eduvelto-র সাথে', en: 'Be a' })} <span style={{ color: '#D9A441' }}>{t({ bn: 'টপার', en: 'Topper' })}</span>
                 <br />
-                with Eduvelto!
+                {t({ bn: 'হোন!', en: 'with Eduvelto!' })}
               </div>
               <a href="#select-class" className="ev-btn ev-btn-gold" style={{ marginTop: 12 }}>
-                Start Learning →
+                {t({ bn: 'শেখা শুরু করুন →', en: 'Start Learning →' })}
               </a>
             </div>
           </div>
@@ -495,7 +494,7 @@ export default function HomePage() {
           </div>
 
           <Reveal>
-            <h2 className="ev-section-h2">নতুন বই / New books</h2>
+            <h2 className="ev-section-h2">{t({ bn: 'নতুন বই', en: 'New books' })}</h2>
           </Reveal>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: 12, marginBottom: 8 }}>
             {featured.map((b: Book, i: number) => (
@@ -507,7 +506,7 @@ export default function HomePage() {
                   <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, marginTop: 10 }}>
                     <Chip>{b.department}</Chip>
                     <Chip tone="outline">{b.classLevel}</Chip>
-                    <Chip tone="gold">{b.questionCount}টি প্রশ্ন</Chip>
+                    <Chip tone="gold">{t({ bn: `${b.questionCount}টি প্রশ্ন`, en: `${b.questionCount} questions` })}</Chip>
                   </div>
                 </Card>
               </Reveal>
@@ -515,59 +514,59 @@ export default function HomePage() {
           </div>
           <p style={{ margin: '4px 0 24px' }}>
             <Link to="/library" style={{ fontWeight: 600 }}>
-              সব বই দেখুন / See all books →
+              {t({ bn: 'সব বই দেখুন →', en: 'See all books →' })}
             </Link>
           </p>
 
           <Reveal>
-            <h2 className="ev-section-h2">কীভাবে শুরু করবেন / How to start</h2>
+            <h2 className="ev-section-h2">{t({ bn: 'কীভাবে শুরু করবেন', en: 'How to start' })}</h2>
           </Reveal>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))', gap: 12, marginBottom: 24 }}>
             <Reveal delayMs={0}>
               <Card hover>
-                <span className="ev-step-num" aria-hidden="true">১</span>
+                <span className="ev-step-num" aria-hidden="true">{t({ bn: '১', en: '1' })}</span>
                 <div style={{ fontWeight: 700, color: '#142B3B', marginTop: 10 }}>
-                  <Link to="/register">ফ্রি রেজিস্টার করুন</Link>
+                  <Link to="/register">{t({ bn: 'ফ্রি রেজিস্টার করুন', en: 'Register free' })}</Link>
                 </div>
-                <p style={{ margin: '6px 0 0', color: '#68747B', fontSize: 14 }}>ইমেইল বা Google দিয়ে — সম্পূর্ণ বিনামূল্যে।</p>
+                <p style={{ margin: '6px 0 0', color: '#68747B', fontSize: 14 }}>{t({ bn: 'ইমেইল বা Google দিয়ে — সম্পূর্ণ বিনামূল্যে।', en: 'With email or Google — completely free.' })}</p>
               </Card>
             </Reveal>
             <Reveal delayMs={80}>
               <Card hover>
-                <span className="ev-step-num" aria-hidden="true">২</span>
+                <span className="ev-step-num" aria-hidden="true">{t({ bn: '২', en: '2' })}</span>
                 <div style={{ fontWeight: 700, color: '#142B3B', marginTop: 10 }}>
-                  <Link to="/#select-class">আপনার শ্রেণি বেছে নিন</Link>
+                  <Link to="/#select-class">{t({ bn: 'আপনার শ্রেণি বেছে নিন', en: 'Choose your class' })}</Link>
                 </div>
-                <p style={{ margin: '6px 0 0', color: '#68747B', fontSize: 14 }}>শ্রেণি অনুযায়ী বই, বিষয়, পাঠ ও পরীক্ষা।</p>
+                <p style={{ margin: '6px 0 0', color: '#68747B', fontSize: 14 }}>{t({ bn: 'শ্রেণি অনুযায়ী বই, বিষয়, পাঠ ও পরীক্ষা।', en: 'Books, subjects, lessons and exams by class.' })}</p>
               </Card>
             </Reveal>
             <Reveal delayMs={160}>
               <Card hover>
-                <span className="ev-step-num" aria-hidden="true">৩</span>
+                <span className="ev-step-num" aria-hidden="true">{t({ bn: '৩', en: '3' })}</span>
                 <div style={{ fontWeight: 700, color: '#142B3B', marginTop: 10 }}>
-                  <Link to="/exam">পরীক্ষা দিন</Link>
+                  <Link to="/exam">{t({ bn: 'পরীক্ষা দিন', en: 'Take an exam' })}</Link>
                 </div>
-                <p style={{ margin: '6px 0 0', color: '#68747B', fontSize: 14 }}>কুইজ দিয়ে নিজেকে যাচাই করুন, ফলাফল দেখুন।</p>
+                <p style={{ margin: '6px 0 0', color: '#68747B', fontSize: 14 }}>{t({ bn: 'কুইজ দিয়ে নিজেকে যাচাই করুন, ফলাফল দেখুন।', en: 'Test yourself with quizzes and see your results.' })}</p>
               </Card>
             </Reveal>
           </div>
 
           {/* AI Teacher + Community — honest previews, roadmap only. */}
           <Reveal>
-            <h2 className="ev-section-h2">ভবিষ্যৎ পরিকল্পনা / Future roadmap</h2>
+            <h2 className="ev-section-h2">{t({ bn: 'ভবিষ্যৎ পরিকল্পনা', en: 'Future roadmap' })}</h2>
           </Reveal>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: 12, marginBottom: 24 }}>
             <Reveal delayMs={0}>
               <Card hover>
                 <span className="ev-icon-tile" aria-hidden="true"><ChatIcon /></span>
                 <Link to="/ai-teacher" style={{ fontWeight: 700, color: '#142B3B', display: 'block' }}>
-                  AI Teacher / এআই শিক্ষক
+                  {t({ bn: 'এআই শিক্ষক', en: 'AI Teacher' })}
                 </Link>
                 <p style={{ margin: '6px 0 0', color: '#68747B', fontSize: 14 }}>
-                  বাংলায় ও ইংরেজিতে প্রশ্নের উত্তর — ভবিষ্যৎ পরিকল্পনায় আছে, এখন তৈরি হচ্ছে না।
+                  {t({ bn: 'বাংলায় ও ইংরেজিতে প্রশ্নের উত্তর — ভবিষ্যৎ পরিকল্পনায় আছে, এখন তৈরি হচ্ছে না।', en: 'Answers to questions in Bangla and English — on the future roadmap, not being built now.' })}
                 </p>
                 <p style={{ margin: '8px 0 0' }}>
-                  <Chip tone="gold">পরিকল্পনায় আছে / Roadmap</Chip>
+                  <Chip tone="gold">{t({ bn: 'পরিকল্পনায় আছে', en: 'Roadmap' })}</Chip>
                 </p>
               </Card>
             </Reveal>
@@ -575,30 +574,30 @@ export default function HomePage() {
               <Card hover>
                 <span className="ev-icon-tile ev-icon-tile-amber" aria-hidden="true"><UsersIcon /></span>
                 <Link to="/social" style={{ fontWeight: 700, color: '#142B3B', display: 'block' }}>
-                  কমিউনিটি / Community
+                  {t({ bn: 'কমিউনিটি', en: 'Community' })}
                 </Link>
                 <p style={{ margin: '6px 0 0', color: '#68747B', fontSize: 14 }}>
-                  শিক্ষার্থীদের আলোচনা ও প্রশ্নোত্তর — ভবিষ্যৎ পরিকল্পনায় আছে।
+                  {t({ bn: 'শিক্ষার্থীদের আলোচনা ও প্রশ্নোত্তর — ভবিষ্যৎ পরিকল্পনায় আছে।', en: 'Student discussions and Q&A — on the future roadmap.' })}
                 </p>
                 <p style={{ margin: '8px 0 0' }}>
-                  <Chip tone="gold">পরিকল্পনায় আছে / Roadmap</Chip>
+                  <Chip tone="gold">{t({ bn: 'পরিকল্পনায় আছে', en: 'Roadmap' })}</Chip>
                 </p>
               </Card>
             </Reveal>
           </div>
 
           <Reveal>
-            <h2 className="ev-section-h2">আরও দেখুন / Explore</h2>
+            <h2 className="ev-section-h2">{t({ bn: 'আরও দেখুন', en: 'Explore' })}</h2>
           </Reveal>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))', gap: 12 }}>
             <Reveal delayMs={0}>
               <Card hover>
                 <span className="ev-icon-tile" aria-hidden="true"><BookIcon /></span>
                 <Link to="/directory" style={{ fontWeight: 700, color: '#142B3B', display: 'block' }}>
-                  শিক্ষা নির্দেশিকা / Education Directory
+                  {t({ bn: 'শিক্ষা নির্দেশিকা', en: 'Education Directory' })}
                 </Link>
                 <p style={{ margin: '6px 0 0', color: '#68747B', fontSize: 14 }}>
-                  ধারা → বোর্ড → প্রোগ্রাম → শ্রেণি → বিষয়
+                  {t({ bn: 'ধারা → বোর্ড → প্রোগ্রাম → শ্রেণি → বিষয়', en: 'Type → Board → Program → Class → Subject' })}
                 </p>
               </Card>
             </Reveal>
@@ -606,10 +605,10 @@ export default function HomePage() {
               <Card hover>
                 <span className="ev-icon-tile ev-icon-tile-amber" aria-hidden="true"><ChartIcon /></span>
                 <Link to="/progress" style={{ fontWeight: 700, color: '#142B3B', display: 'block' }}>
-                  আমার অগ্রগতি / My Progress
+                  {t({ bn: 'আমার অগ্রগতি', en: 'My Progress' })}
                 </Link>
                 <p style={{ margin: '6px 0 0', color: '#68747B', fontSize: 14 }}>
-                  পাঠ, প্রশ্ন ও কুইজের ফলাফল এক জায়গায়
+                  {t({ bn: 'পাঠ, প্রশ্ন ও কুইজের ফলাফল এক জায়গায়', en: 'Lessons, questions and quiz results in one place' })}
                 </p>
               </Card>
             </Reveal>
@@ -617,10 +616,10 @@ export default function HomePage() {
               <Card hover>
                 <span className="ev-icon-tile" aria-hidden="true"><HeartIcon /></span>
                 <Link to="/health" style={{ fontWeight: 700, color: '#142B3B', display: 'block' }}>
-                  স্বাস্থ্য / Health
+                  {t({ bn: 'স্বাস্থ্য', en: 'Health' })}
                 </Link>
                 <p style={{ margin: '6px 0 0', color: '#68747B', fontSize: 14 }}>
-                  ঔষধ, রোগ ও স্বাস্থ্য তথ্য — যাচাইকৃত
+                  {t({ bn: 'ঔষধ, রোগ ও স্বাস্থ্য তথ্য — যাচাইকৃত', en: 'Medicine, disease and health information — verified' })}
                 </p>
               </Card>
             </Reveal>

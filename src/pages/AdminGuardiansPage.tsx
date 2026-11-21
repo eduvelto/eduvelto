@@ -20,6 +20,7 @@ import { PageShell } from '../components/PageShell';
 import { Button, Card } from '../components/ui';
 import { StatusPill } from '../components/AdminShared';
 import { strings } from '../i18n/strings';
+import { useLanguage } from '../i18n/LanguageContext';
 import { useAuth } from '../lib/auth';
 import {
   decideParentLink,
@@ -34,6 +35,7 @@ type Decision = 'verified' | 'rejected' | 'revoked';
 
 function LinkCard(props: { link: ParentLink; actorUid: string; onDone: () => void }) {
   const { link, actorUid, onDone } = props;
+  const { t } = useLanguage();
   const [reason, setReason] = useState('');
   const [decision, setDecision] = useState<Decision | null>(null);
   const [busy, setBusy] = useState(false);
@@ -53,7 +55,7 @@ function LinkCard(props: { link: ParentLink; actorUid: string; onDone: () => voi
       }
       onDone();
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'সিদ্ধান্তটি সংরক্ষণ করা যায়নি। / Could not save the decision.');
+      setError(err instanceof Error ? err.message : t({ bn: 'সিদ্ধান্তটি সংরক্ষণ করা যায়নি।', en: 'Could not save the decision.' }));
     } finally {
       setBusy(false);
     }
@@ -70,38 +72,38 @@ function LinkCard(props: { link: ParentLink; actorUid: string; onDone: () => voi
         {link.guardianContact ? ` · ${link.guardianContact}` : ''}
       </p>
       <p style={{ margin: '0 0 6px', color: '#68747B' }}>
-        সন্তান: {link.childDisplayName} ({link.childClassLevel}
+        {t({ bn: 'সন্তান', en: 'Child' })}: {link.childDisplayName} ({link.childClassLevel}
         {link.childInstitution ? ` · ${link.childInstitution}` : ''})
       </p>
       <p style={{ margin: '0 0 6px', color: '#68747B', display: 'flex', flexWrap: 'wrap', gap: 8, alignItems: 'center' }}>
         <StatusPill
           label={
             link.status === 'pending'
-              ? 'অপেক্ষায় / Pending'
+              ? t({ bn: 'অপেক্ষায়', en: 'Pending' })
               : link.status === 'confirmed'
-                ? 'নিশ্চিত / Confirmed'
+                ? t({ bn: 'নিশ্চিত', en: 'Confirmed' })
                 : link.status === 'verified'
-                  ? 'ভেরিফায়েড / Verified'
+                  ? t({ bn: 'ভেরিফায়েড', en: 'Verified' })
                   : link.status === 'rejected'
-                    ? 'বাতিল / Rejected'
-                    : 'বাতিলকৃত / Revoked'
+                    ? t({ bn: 'বাতিল', en: 'Rejected' })
+                    : t({ bn: 'বাতিলকৃত', en: 'Revoked' })
           }
           tone={link.status === 'verified' ? 'active' : link.status === 'pending' || link.status === 'confirmed' ? 'ready' : 'muted'}
         />
         <span>
-          {link.status === 'pending' ? ' — সন্তান এখনো নিশ্চিত করেনি' : ''}
-          {link.status === 'confirmed' ? ' — সন্তান নিশ্চিত করেছে' : ''}
-          {link.status === 'rejected' && link.decisionReason ? ` — কারণ: ${link.decisionReason}` : ''}
+          {link.status === 'pending' ? ` — ${t({ bn: 'সন্তান এখনো নিশ্চিত করেনি', en: 'Child has not confirmed yet' })}` : ''}
+          {link.status === 'confirmed' ? ` — ${t({ bn: 'সন্তান নিশ্চিত করেছে', en: 'Child confirmed' })}` : ''}
+          {link.status === 'rejected' && link.decisionReason ? ` — ${t({ bn: 'কারণ', en: 'Reason' })}: ${link.decisionReason}` : ''}
         </span>
       </p>
       <p style={{ margin: '0 0 12px', color: '#68747B', fontSize: 13 }}>
-        Eduvelto ID (অভিভাবক): <code>{link.parentId}</code> · (সন্তান): <code>{link.studentId}</code>
+        Eduvelto ID ({t({ bn: 'অভিভাবক', en: 'Guardian' })}): <code>{link.parentId}</code> · ({t({ bn: 'সন্তান', en: 'Child' })}): <code>{link.studentId}</code>
       </p>
       {error ? <p style={{ color: '#B00020' }}>{error}</p> : null}
       {decidable ? (
         <>
           <label className="ev-label" htmlFor={`guardian-reason-${link.id}`}>
-            সিদ্ধান্তের কারণ (কমপক্ষে ১০ অক্ষর) / Reason (at least 10 characters)
+            {t({ bn: 'সিদ্ধান্তের কারণ (কমপক্ষে ১০ অক্ষর)', en: 'Reason (at least 10 characters)' })}
           </label>
           <input
             id={`guardian-reason-${link.id}`}
@@ -110,33 +112,33 @@ function LinkCard(props: { link: ParentLink; actorUid: string; onDone: () => voi
             type="text"
             value={reason}
             onChange={(e) => setReason(e.target.value)}
-            placeholder="যেমন: সন্তান নিশ্চিত করেছে এবং তথ্য মিলেছে"
+            placeholder={t({ bn: 'যেমন: সন্তান নিশ্চিত করেছে এবং তথ্য মিলেছে', en: 'e.g. Child confirmed and the information matches' })}
             maxLength={500}
           />
           {decision ? (
             <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
               <Button onClick={() => void doConfirm()} loading={busy} disabled={busy || !reasonOk}>
                 {busy
-                  ? strings.common.loading.bn
+                  ? t(strings.common.loading)
                   : decision === 'verified'
-                    ? 'অনুমোদন নিশ্চিত করুন / Confirm approval'
-                    : 'বাতিল নিশ্চিত করুন / Confirm rejection'}
+                    ? t({ bn: 'অনুমোদন নিশ্চিত করুন', en: 'Confirm approval' })
+                    : t({ bn: 'বাতিল নিশ্চিত করুন', en: 'Confirm rejection' })}
               </Button>
               <Button variant="outline" onClick={() => setDecision(null)} disabled={busy}>
-                বাতিল / Cancel
+                {t({ bn: 'বাতিল', en: 'Cancel' })}
               </Button>
             </div>
           ) : (
             <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
               <Button onClick={() => setDecision('verified')}>
-                অনুমোদন করুন / Approve
+                {t({ bn: 'অনুমোদন করুন', en: 'Approve' })}
               </Button>
               <Button variant="outline" onClick={() => setDecision('rejected')}>
-                বাতিল করুন / Reject
+                {t({ bn: 'বাতিল করুন', en: 'Reject' })}
               </Button>
             </div>
           )}
-          {!reasonOk && decision ? <p style={{ color: '#B00020' }}>কারণ কমপক্ষে ১০ অক্ষর হতে হবে।</p> : null}
+          {!reasonOk && decision ? <p style={{ color: '#B00020' }}>{t({ bn: 'কারণ কমপক্ষে ১০ অক্ষর হতে হবে।', en: 'The reason must be at least 10 characters.' })}</p> : null}
         </>
       ) : null}
       {link.status === 'verified' ? (
@@ -144,15 +146,15 @@ function LinkCard(props: { link: ParentLink; actorUid: string; onDone: () => voi
           {decision === 'revoked' ? (
             <>
               <Button onClick={() => void doConfirm()} loading={busy} disabled={busy}>
-                {busy ? strings.common.loading.bn : 'বাতিল নিশ্চিত করুন / Confirm revoke'}
+                {busy ? t(strings.common.loading) : t({ bn: 'বাতিল নিশ্চিত করুন', en: 'Confirm revoke' })}
               </Button>{' '}
               <Button variant="outline" onClick={() => setDecision(null)} disabled={busy}>
-                বাতিল / Cancel
+                {t({ bn: 'বাতিল', en: 'Cancel' })}
               </Button>
             </>
           ) : (
             <Button variant="outline" onClick={() => setDecision('revoked')}>
-              সংযোগ বাতিল করুন / Revoke link
+              {t({ bn: 'সংযোগ বাতিল করুন', en: 'Revoke link' })}
             </Button>
           )}
         </p>
@@ -164,6 +166,7 @@ function LinkCard(props: { link: ParentLink; actorUid: string; onDone: () => voi
 
 export default function AdminGuardiansPage() {
   const { user, profile } = useAuth();
+  const { t } = useLanguage();
   const d = strings.dashboard;
   const [links, setLinks] = useState<ParentLink[] | null>(null);
   const [reload, setReload] = useState(0);
@@ -186,9 +189,9 @@ export default function AdminGuardiansPage() {
   if (!user || !profile || (profile.role !== 'admin' && profile.role !== 'owner')) {
     return (
       <PageShell titleBn={d.adminGuardiansTitle.bn} titleEn={d.adminGuardiansTitle.en}>
-        <p>{strings.admin.accessDenied.bn}</p>
+        <p>{t(strings.admin.accessDenied)}</p>
         <p>
-          <Link to="/admin">অ্যাডমিন ড্যাশবোর্ডে ফিরে যান →</Link>
+          <Link to="/admin">{t({ bn: 'অ্যাডমিন ড্যাশবোর্ডে ফিরে যান →', en: 'Back to admin dashboard →' })}</Link>
         </p>
       </PageShell>
     );
@@ -201,20 +204,17 @@ export default function AdminGuardiansPage() {
   return (
     <PageShell titleBn={d.adminGuardiansTitle.bn} titleEn={d.adminGuardiansTitle.en}>
       <p>
-        <Link to="/admin">← অ্যাডমিন ড্যাশবোর্ড</Link>
+        <Link to="/admin">← {t({ bn: 'অ্যাডমিন ড্যাশবোর্ড', en: 'Admin dashboard' })}</Link>
       </p>
       <p className="ev-muted-ivory">
-        লিখিত তথ্য যাচাই করুন — অভিভাবকের নাম, সম্পর্ক, যোগাযোগ এবং সন্তানের তথ্য। কোনো কাগজপত্র, NID বা
-        ফেস ভেরিফিকেশন লাগে না; সন্তান নিজে অ্যাপে নিশ্চিত করেছে কিনা সেটিই মূল প্রমাণ। / Cross-check the
-        written information. No documents, NID or face verification — the child's own in-app confirmation is
-        the key proof.
+        {t({ bn: 'লিখিত তথ্য যাচাই করুন — অভিভাবকের নাম, সম্পর্ক, যোগাযোগ এবং সন্তানের তথ্য। কোনো কাগজপত্র, NID বা ফেস ভেরিফিকেশন লাগে না; সন্তান নিজে অ্যাপে নিশ্চিত করেছে কিনা সেটিই মূল প্রমাণ।', en: 'Cross-check the written information — guardian name, relationship, contact and the child’s information. No documents, NID or face verification — the child’s own in-app confirmation is the key proof.' })}
       </p>
 
-      <h2 className="ev-section-h2">যাচাইয়ের অপেক্ষায় ({queue.length}) / Awaiting decision</h2>
+      <h2 className="ev-section-h2">{t({ bn: 'যাচাইয়ের অপেক্ষায়', en: 'Awaiting decision' })} ({queue.length})</h2>
       {links === null ? (
-        <p>{strings.common.loading.bn}</p>
+        <p>{t(strings.common.loading)}</p>
       ) : queue.length === 0 ? (
-        <p className="ev-muted-ivory">কোনো অপেক্ষমাণ অনুরোধ নেই। / No pending requests.</p>
+        <p className="ev-muted-ivory">{t({ bn: 'কোনো অপেক্ষমাণ অনুরোধ নেই।', en: 'No pending requests.' })}</p>
       ) : (
         <ul style={{ paddingLeft: 0 }}>
           {queue.map((l) => (
@@ -223,9 +223,9 @@ export default function AdminGuardiansPage() {
         </ul>
       )}
 
-      <h2 className="ev-section-h2">সক্রিয় সংযোগ ({verified.length}) / Active links</h2>
+      <h2 className="ev-section-h2">{t({ bn: 'সক্রিয় সংযোগ', en: 'Active links' })} ({verified.length})</h2>
       {verified.length === 0 ? (
-        <p className="ev-muted-ivory">কোনো সক্রিয় সংযোগ নেই। / No active links.</p>
+        <p className="ev-muted-ivory">{t({ bn: 'কোনো সক্রিয় সংযোগ নেই।', en: 'No active links.' })}</p>
       ) : (
         <ul style={{ paddingLeft: 0 }}>
           {verified.map((l) => (
@@ -236,13 +236,13 @@ export default function AdminGuardiansPage() {
 
       {closed.length > 0 ? (
         <>
-          <h2 className="ev-section-h2">বাতিলকৃত ({closed.length}) / Closed</h2>
+          <h2 className="ev-section-h2">{t({ bn: 'বাতিলকৃত', en: 'Closed' })} ({closed.length})</h2>
           <div className="ev-dash-grid">
             {closed.map((l) => (
               <Card key={l.id}>
                 <strong>{l.guardianDisplayName || '—'} → {l.childDisplayName}</strong>
                 <p className="ev-muted" style={{ margin: '8px 0 0', fontSize: 14 }}>
-                  {l.status}
+                  {l.status === 'rejected' ? t({ bn: 'বাতিল', en: 'Rejected' }) : t({ bn: 'বাতিলকৃত', en: 'Revoked' })}
                   {l.decisionReason ? ` — ${l.decisionReason}` : ''}
                 </p>
               </Card>

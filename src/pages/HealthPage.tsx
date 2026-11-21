@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { doc, getDoc } from 'firebase/firestore';
 import { db } from '../firebase';
 import { strings } from '../i18n/strings';
+import { useLanguage } from '../i18n/LanguageContext';
 import { PageShell } from '../components/PageShell';
 import { Skeleton } from '../components/ui';
 import { AccuracyNote, HealthDisclaimer } from '../components/HealthDisclaimer';
@@ -16,15 +17,16 @@ import { AccuracyNote, HealthDisclaimer } from '../components/HealthDisclaimer';
 // (ui/premium-polish: icon cards, skeleton while the flag loads.)
 
 const CARDS = [
-  { to: '/health/medicines', key: 'medicinesTitle' as const, icon: '✚', desc: 'ঔষধের ব্যবহার, পার্শ্বপ্রতিক্রিয়া ও সতর্কতা' },
-  { to: '/health/diseases', key: 'diseasesTitle' as const, icon: '◉', desc: 'রোগের লক্ষণ, কারণ ও করণীয়' },
-  { to: '/health/doctors', key: 'doctorsTitle' as const, icon: '⚕', desc: 'চিকিৎসকদের তথ্য ও যোগাযোগ' },
-  { to: '/health/hospitals', key: 'hospitalsTitle' as const, icon: '⌂', desc: 'হাসপাতাল ও স্বাস্থ্যসেবা কেন্দ্র' },
-  { to: '/health/report', key: 'reportTitle' as const, icon: '✎', desc: 'স্বাস্থ্য সমস্যা জানান' },
+  { to: '/health/medicines', key: 'medicinesTitle' as const, icon: '✚', desc: 'ঔষধের ব্যবহার, পার্শ্বপ্রতিক্রিয়া ও সতর্কতা', descEn: 'Medicine uses, side effects and warnings' },
+  { to: '/health/diseases', key: 'diseasesTitle' as const, icon: '◉', desc: 'রোগের লক্ষণ, কারণ ও করণীয়', descEn: 'Disease symptoms, causes and what to do' },
+  { to: '/health/doctors', key: 'doctorsTitle' as const, icon: '⚕', desc: 'চিকিৎসকদের তথ্য ও যোগাযোগ', descEn: 'Doctor information and contact' },
+  { to: '/health/hospitals', key: 'hospitalsTitle' as const, icon: '⌂', desc: 'হাসপাতাল ও স্বাস্থ্যসেবা কেন্দ্র', descEn: 'Hospitals and health centres' },
+  { to: '/health/report', key: 'reportTitle' as const, icon: '✎', desc: 'স্বাস্থ্য সমস্যা জানান', descEn: 'Report a health issue' },
 ];
 
 export default function HealthPage() {
   const h = strings.health;
+  const { lang, t } = useLanguage();
   const [enabled, setEnabled] = useState(true);
   const [checked, setChecked] = useState(false);
 
@@ -60,7 +62,7 @@ export default function HealthPage() {
     return (
       <PageShell titleBn={h.title.bn} titleEn={h.title.en}>
         <HealthDisclaimer />
-        <p>স্বাস্থ্য বিভাগটি বর্তমানে অ্যাডমিন বন্ধ রেখেছেন। / The Health section is currently turned off by the admin.</p>
+        <p>{t({ bn: 'স্বাস্থ্য বিভাগটি বর্তমানে অ্যাডমিন বন্ধ রেখেছেন।', en: 'The Health section is currently turned off by the admin.' })}</p>
       </PageShell>
     );
   }
@@ -68,8 +70,7 @@ export default function HealthPage() {
   return (
     <PageShell titleBn={h.title.bn} titleEn={h.title.en}>
       <HealthDisclaimer />
-      <p>{h.hubIntro.bn}</p>
-      <p style={{ color: '#5A6478' }}>{h.hubIntro.en}</p>
+      <p>{t(h.hubIntro)}</p>
       <AccuracyNote />
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(240px, 1fr))', gap: 12, marginTop: 20 }}>
         {CARDS.map((c) => (
@@ -97,9 +98,10 @@ export default function HealthPage() {
             >
               {c.icon}
             </span>
-            <strong style={{ display: 'block', fontSize: 16 }}>{h[c.key].bn}</strong>
-            <span style={{ display: 'block', color: '#5A6478', fontSize: 13, marginTop: 2 }}>{h[c.key].en}</span>
-            <span style={{ display: 'block', color: '#5A6478', fontSize: 14, marginTop: 8 }}>{c.desc}</span>
+            <strong style={{ display: 'block', fontSize: 16 }}>{t(h[c.key])}</strong>
+            <span style={{ display: 'block', color: '#5A6478', fontSize: 14, marginTop: 8 }}>
+              {lang === 'bn' ? c.desc : c.descEn}
+            </span>
           </Link>
         ))}
       </div>

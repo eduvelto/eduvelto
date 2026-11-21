@@ -14,6 +14,7 @@
 
 import { Link } from 'react-router-dom';
 import { LinkButton } from './ui';
+import { useLanguage } from '../i18n/LanguageContext';
 import type { ClassLevelDef } from '../lib/classLevels';
 
 function BookSproutArt({ accent, size }: { accent: string; size: number }) {
@@ -57,26 +58,24 @@ const COMING_ITEMS: Array<{ bn: string; en: string }> = [
 ];
 
 export function ComingSoonHero({ def }: { def: ClassLevelDef }) {
+  const { t } = useLanguage();
   return (
     <section
       className="ev-coming-soon-hero"
       style={{ backgroundColor: def.accentSoft }}
-      aria-label={`${def.bn} — শীঘ্রই আসছে / Coming soon`}
+      aria-label={t({ bn: `${def.bn} — শীঘ্রই আসছে`, en: `${def.en} — Coming soon` })}
     >
       <BookSproutArt accent={def.accent} size={132} />
       <h3 style={{ color: '#142B3B', fontSize: 24, margin: '14px 0 6px' }}>
-        {def.bn} — শীঘ্রই আসছে! / Coming soon
+        {t({ bn: `${def.bn} — শীঘ্রই আসছে!`, en: `${def.en} — Coming soon` })}
       </h3>
       <p style={{ margin: '0 auto', maxWidth: 560, color: '#57616A', fontSize: 15, lineHeight: 1.8 }}>
-        {def.bn}-এর বই, পাঠ, অনুশীলন প্রশ্ন ও পরীক্ষা এখন তৈরি হচ্ছে। প্রকাশিত হলেই এখানে দেখতে
-        পাবে — ততদিন একটু অপেক্ষা করো, আমরা কাজ করছি! / Books, lessons, practice questions and
-        tests for {def.en} are being prepared — they will appear here as soon as they are
-        published.
+        {t({ bn: `${def.bn}-এর বই, পাঠ, অনুশীলন প্রশ্ন ও পরীক্ষা এখন তৈরি হচ্ছে। প্রকাশিত হলেই এখানে দেখতে পাবে — ততদিন একটু অপেক্ষা করো, আমরা কাজ করছি!`, en: `Books, lessons, practice questions and tests for ${def.en} are being prepared — they will appear here as soon as they are published.` })}
       </p>
-      <div className="ev-coming-soon-chips" aria-label="যা আসছে / What is coming">
+      <div className="ev-coming-soon-chips" aria-label={t({ bn: 'যা আসছে', en: 'What is coming' })}>
         {COMING_ITEMS.map((it) => (
           <span key={it.bn} className="ev-coming-soon-chip">
-            {it.bn} · {it.en} <span className="ev-coming-soon-chip-soon">আসছে</span>
+            {t(it)} <span className="ev-coming-soon-chip-soon">{t({ bn: 'আসছে', en: 'Coming' })}</span>
           </span>
         ))}
       </div>
@@ -94,19 +93,18 @@ export function ComingSoonHero({ def }: { def: ClassLevelDef }) {
             padding: '10px 14px',
           }}
         >
-          তৈরি হচ্ছে / In preparation — প্রথম খসড়া অধ্যায়: Class 5 গণিত, অধ্যায় ৯: শতকরা —
-          শিক্ষক যাচাইয়ের জন্য তৈরি হচ্ছে। এটি এখনো লাইব্রেরির বই নয়।
+          {t({ bn: 'তৈরি হচ্ছে — প্রথম খসড়া অধ্যায়: Class 5 গণিত, অধ্যায় ৯: শতকরা — শিক্ষক যাচাইয়ের জন্য তৈরি হচ্ছে। এটি এখনো লাইব্রেরির বই নয়।', en: 'In preparation — first draft chapter: Class 5 Math, Chapter 9: Percentage — being prepared for teacher review. This is not a library book yet.' })}
         </p>
       ) : null}
       <div style={{ display: 'flex', gap: 10, marginTop: 20, flexWrap: 'wrap', justifyContent: 'center' }}>
         <LinkButton to="/library" variant="primary">
-          লাইব্রেরি দেখুন / Browse library
+          {t({ bn: 'লাইব্রেরি দেখুন', en: 'Browse library' })}
         </LinkButton>
         <LinkButton to="/exam" variant="outline">
-          পরীক্ষা দেখুন / See exams
+          {t({ bn: 'পরীক্ষা দেখুন', en: 'See exams' })}
         </LinkButton>
         <LinkButton to="/#select-class" variant="outline">
-          সব শ্রেণি / All classes
+          {t({ bn: 'সব শ্রেণি', en: 'All classes' })}
         </LinkButton>
       </div>
     </section>
@@ -122,6 +120,7 @@ export function ComingSoonCompact({
   whatBn: string;
   whatEn: string;
 }) {
+  const { t } = useLanguage();
   return (
     <div className="ev-coming-soon-compact" style={{ backgroundColor: def.accentSoft }}>
       <span aria-hidden="true" style={{ flex: 'none', color: def.accentDeep }}>
@@ -129,14 +128,13 @@ export function ComingSoonCompact({
       </span>
       <div>
         <div style={{ fontWeight: 700, color: '#142B3B', fontSize: 16 }}>
-          {def.bn} — {whatBn} শীঘ্রই আসছে / {whatEn} coming soon
+          {t({ bn: `${def.bn} — ${whatBn} শীঘ্রই আসছে`, en: `${def.en} — ${whatEn} coming soon` })}
         </div>
         <p style={{ margin: '6px 0 10px', color: '#57616A', fontSize: 14, lineHeight: 1.7 }}>
-          এই শ্রেণির {whatBn} এখনো প্রকাশিত হয়নি — তৈরি হচ্ছে, প্রকাশিত হলেই এখানে দেখাবে। /{' '}
-          {whatEn} for this class is not published yet.
+          {t({ bn: `এই শ্রেণির ${whatBn} এখনো প্রকাশিত হয়নি — তৈরি হচ্ছে, প্রকাশিত হলেই এখানে দেখাবে।`, en: `${whatEn} for this class is not published yet.` })}
         </p>
         <Link to="/library" style={{ fontWeight: 600 }}>
-          লাইব্রেরি দেখুন / Browse library →
+          {t({ bn: 'লাইব্রেরি দেখুন →', en: 'Browse library →' })}
         </Link>
       </div>
     </div>

@@ -25,9 +25,11 @@ import {
 } from '../lib/teacherChanges';
 import type { Book } from '../lib/content';
 import type { DocumentSnapshot } from 'firebase/firestore';
+import { T, useLanguage } from '../i18n/LanguageContext';
 
 export default function TeacherDashboardPage() {
   const { user, profile, loading } = useAuth();
+  const { t } = useLanguage();
   const d = strings.dashboard;
   const [approvedSubjects, setApprovedSubjects] = useState<string[] | null>(null);
   const [approvedClasses, setApprovedClasses] = useState<string[] | null>(null);
@@ -90,7 +92,7 @@ export default function TeacherDashboardPage() {
         if (live) setPage(p);
       })
       .catch(() => {
-        if (live) setError('উপকরণ লোড করা যায়নি — আবার চেষ্টা করুন। / Could not load materials — please try again.');
+        if (live) setError(t({ bn: 'উপকরণ লোড করা যায়নি — আবার চেষ্টা করুন।', en: 'Could not load materials — please try again.' }));
       })
       .finally(() => {
         if (live) setFetching(false);
@@ -128,9 +130,9 @@ export default function TeacherDashboardPage() {
   if (!user || !profile) {
     return (
       <PageShell titleBn={d.teacherTitle.bn} titleEn={d.teacherTitle.en}>
-        <p>{strings.profile.notSignedIn.bn}</p>
+        <p>{t(strings.profile.notSignedIn)}</p>
         <p>
-          <LinkButton to="/login" variant="outline">{strings.auth.loginTitle.bn}</LinkButton>
+          <LinkButton to="/login" variant="outline">{t(strings.auth.loginTitle)}</LinkButton>
         </p>
       </PageShell>
     );
@@ -139,9 +141,9 @@ export default function TeacherDashboardPage() {
   if (profile.role === 'student' || profile.role === 'parent') {
     return (
       <PageShell titleBn={d.teacherTitle.bn} titleEn={d.teacherTitle.en}>
-        <p>এই ড্যাশবোর্ড শুধু শিক্ষকদের জন্য।</p>
+        <p>{t({ bn: 'এই ড্যাশবোর্ড শুধু শিক্ষকদের জন্য।', en: 'This dashboard is for teachers only.' })}</p>
         <p>
-          <LinkButton to="/dashboard" variant="outline">আপনার ড্যাশবোর্ডে যান →</LinkButton>
+          <LinkButton to="/dashboard" variant="outline">{t({ bn: 'আপনার ড্যাশবোর্ডে যান →', en: 'Go to your dashboard →' })}</LinkButton>
         </p>
       </PageShell>
     );
@@ -155,11 +157,11 @@ export default function TeacherDashboardPage() {
     const subjects = reqSubjects.split(',').map((s) => s.trim()).filter(Boolean);
     const classes = reqClasses.split(',').map((s) => s.trim()).filter(Boolean);
     if (subjects.length === 0 || classes.length === 0) {
-      setReqError('কমপক্ষে একটি বিষয় ও একটি শ্রেণি লিখুন। / Enter at least one subject and one class.');
+      setReqError(t({ bn: 'কমপক্ষে একটি বিষয় ও একটি শ্রেণি লিখুন।', en: 'Enter at least one subject and one class.' }));
       return;
     }
     if (reqReason.trim().length < 10) {
-      setReqError('কারণ কমপক্ষে ১০ অক্ষরের হতে হবে। / The reason must be at least 10 characters.');
+      setReqError(t({ bn: 'কারণ কমপক্ষে ১০ অক্ষরের হতে হবে।', en: 'The reason must be at least 10 characters.' }));
       return;
     }
     setReqBusy(true);
@@ -170,7 +172,7 @@ export default function TeacherDashboardPage() {
       setReqClasses('');
       setReqReason('');
     } catch (err) {
-      setReqError(err instanceof Error ? err.message : 'অনুরোধ পাঠানো যায়নি। / Could not send the request.');
+      setReqError(err instanceof Error ? err.message : t({ bn: 'অনুরোধ পাঠানো যায়নি।', en: 'Could not send the request.' }));
     } finally {
       setReqBusy(false);
     }
@@ -195,25 +197,25 @@ export default function TeacherDashboardPage() {
       <div className="ev-dash-hero">
         <h2>🪪 {profile.displayName}</h2>
         <p style={{ display: 'flex', flexWrap: 'wrap', gap: 8, alignItems: 'center', marginTop: 10 }}>
-          <span>{strings.dashboard.verified.bn}:</span>
+          <span>{t(strings.dashboard.verified)}:</span>
           {verified ? (
-            <Chip>✅ {d.verified.bn}</Chip>
+            <Chip>✅ {t(d.verified)}</Chip>
           ) : (
-            <Chip tone="gold">⏳ {d.verificationPending.bn}</Chip>
+            <Chip tone="gold">⏳ {t(d.verificationPending)}</Chip>
           )}
         </p>
       </div>
       {hasApplication === false ? (
         <AlertBox tone="info">
-          শিক্ষক ভেরিফিকেশনের জন্য এখনো আবেদন করেননি।{' '}
-          <Link to="/teacher/register">শিক্ষক রেজিস্ট্রেশন →</Link>
+          {t({ bn: 'শিক্ষক ভেরিফিকেশনের জন্য এখনো আবেদন করেননি।', en: 'You have not applied for teacher verification yet.' })}{' '}
+          <Link to="/teacher/register">{t({ bn: 'শিক্ষক রেজিস্ট্রেশন →', en: 'Teacher registration →' })}</Link>
         </AlertBox>
       ) : null}
       {!verified ? (
         <EmptyState bn={EMPTY_STATES.teacherPending.bn} en={EMPTY_STATES.teacherPending.en} />
       ) : (
         <>
-          <h2 className="ev-section-h2">{d.mySubjects.bn} / {d.mySubjects.en}</h2>
+          <h2 className="ev-section-h2"><T bn={d.mySubjects.bn} en={d.mySubjects.en} /></h2>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, marginBottom: 16 }}>
             {(approvedSubjects ?? []).length > 0 ? (
               approvedSubjects?.map((s) => <Chip key={s}>{s}</Chip>)
@@ -221,7 +223,7 @@ export default function TeacherDashboardPage() {
               <span className="ev-muted-ivory">—</span>
             )}
           </div>
-          <h2 className="ev-section-h2">{d.myClasses.bn} / {d.myClasses.en}</h2>
+          <h2 className="ev-section-h2"><T bn={d.myClasses.bn} en={d.myClasses.en} /></h2>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, marginBottom: 16 }}>
             {(approvedClasses ?? []).length > 0 ? (
               approvedClasses?.map((c) => <Chip key={c} tone="gold">{c}</Chip>)
@@ -229,7 +231,7 @@ export default function TeacherDashboardPage() {
               <span className="ev-muted-ivory">—</span>
             )}
           </div>
-          <h2 className="ev-section-h2">{d.myBooks.bn} / {d.myBooks.en}</h2>
+          <h2 className="ev-section-h2"><T bn={d.myBooks.bn} en={d.myBooks.en} /></h2>
           {error ? <AlertBox tone="error">{error}</AlertBox> : null}
           {fetching && !page ? <SkeletonCards count={3} /> : null}
           {page && books.length === 0 && !fetching ? (
@@ -244,11 +246,11 @@ export default function TeacherDashboardPage() {
               </div>
               <div style={{ display: 'flex', gap: 12, alignItems: 'center', marginTop: 20, flexWrap: 'wrap' }}>
                 <Button variant="outline" onClick={prevPage} disabled={pageIndex <= 0 || fetching}>
-                  ← আগের / Previous
+                  <T bn="← আগের" en="← Previous" />
                 </Button>
-                <span>পাতা {pageIndex + 1} / Page {pageIndex + 1}</span>
+                <span>{t({ bn: `পাতা ${pageIndex + 1}`, en: `Page ${pageIndex + 1}` })}</span>
                 <Button variant="outline" onClick={nextPage} disabled={!page?.hasMore || fetching}>
-                  {fetching ? strings.common.loading.bn : 'পরের / Next →'}
+                  {fetching ? <T bn={strings.common.loading.bn} en={strings.common.loading.en} /> : <T bn="পরের →" en="Next →" />}
                 </Button>
               </div>
             </>
@@ -258,18 +260,21 @@ export default function TeacherDashboardPage() {
 
       {verified ? (
         <>
-          <h2 className="ev-section-h2">{d.changeRequestTitle.bn} / {d.changeRequestTitle.en}</h2>
-          <p className="ev-muted-ivory">{d.changeRequestNote.bn}</p>
+          <h2 className="ev-section-h2"><T bn={d.changeRequestTitle.bn} en={d.changeRequestTitle.en} /></h2>
+          <p className="ev-muted-ivory">{t(d.changeRequestNote)}</p>
           {pendingRequests.length > 0 ? (
             <AlertBox tone="info">
-              ⏳ {pendingRequests.length}টি অনুরোধ অনুমোদনের অপেক্ষায় আছে। / {pendingRequests.length} request(s)
-              awaiting approval.
+              ⏳{' '}
+              {t({
+                bn: `${pendingRequests.length}টি অনুরোধ অনুমোদনের অপেক্ষায় আছে।`,
+                en: `${pendingRequests.length} request(s) awaiting approval.`,
+              })}
             </AlertBox>
           ) : null}
           <Card>
             <form onSubmit={onChangeRequest}>
               <label className="ev-label" htmlFor="req-subjects">
-                {d.subjects.bn} / {d.subjects.en} (কমা দিয়ে আলাদা করুন / comma-separated)
+                <T bn={d.subjects.bn} en={d.subjects.en} /> <T bn="(কমা দিয়ে আলাদা করুন)" en="(comma-separated)" />
               </label>
               <input
                 id="req-subjects"
@@ -278,10 +283,10 @@ export default function TeacherDashboardPage() {
                 type="text"
                 value={reqSubjects}
                 onChange={(e) => setReqSubjects(e.target.value)}
-                placeholder="যেমন: English, Mathematics"
+                placeholder={t({ bn: 'যেমন: English, Mathematics', en: 'e.g.: English, Mathematics' })}
               />
               <label className="ev-label" htmlFor="req-classes">
-                {d.myClasses.bn} / {d.myClasses.en} (কমা দিয়ে আলাদা করুন / comma-separated)
+                <T bn={d.myClasses.bn} en={d.myClasses.en} /> <T bn="(কমা দিয়ে আলাদা করুন)" en="(comma-separated)" />
               </label>
               <input
                 id="req-classes"
@@ -290,10 +295,10 @@ export default function TeacherDashboardPage() {
                 type="text"
                 value={reqClasses}
                 onChange={(e) => setReqClasses(e.target.value)}
-                placeholder="যেমন: 3rd Year, SSC"
+                placeholder={t({ bn: 'যেমন: 3rd Year, SSC', en: 'e.g.: 3rd Year, SSC' })}
               />
               <label className="ev-label" htmlFor="req-level">
-                {d.teachingLevel.bn} / {d.teachingLevel.en}
+                <T bn={d.teachingLevel.bn} en={d.teachingLevel.en} />
               </label>
               <input
                 id="req-level"
@@ -302,10 +307,10 @@ export default function TeacherDashboardPage() {
                 type="text"
                 value={reqLevel}
                 onChange={(e) => setReqLevel(e.target.value)}
-                placeholder="যেমন: Honours"
+                placeholder={t({ bn: 'যেমন: Honours', en: 'e.g.: Honours' })}
               />
               <label className="ev-label" htmlFor="req-reason">
-                কারণ / Reason (কমপক্ষে ১০ অক্ষর / at least 10 characters)
+                <T bn="কারণ" en="Reason" /> <T bn="(কমপক্ষে ১০ অক্ষর)" en="(at least 10 characters)" />
               </label>
               <input
                 id="req-reason"
@@ -314,12 +319,12 @@ export default function TeacherDashboardPage() {
                 type="text"
                 value={reqReason}
                 onChange={(e) => setReqReason(e.target.value)}
-                placeholder="কেন পরিবর্তন প্রয়োজন"
+                placeholder={t({ bn: 'কেন পরিবর্তন প্রয়োজন', en: 'Why the change is needed' })}
               />
               {reqError ? <AlertBox tone="error">{reqError}</AlertBox> : null}
-              {reqDone ? <AlertBox tone="ok">অনুরোধ পাঠানো হয়েছে — অ্যাডমিন অনুমোদন দিলে প্রযোজ্য হবে।</AlertBox> : null}
+              {reqDone ? <AlertBox tone="ok">{t({ bn: 'অনুরোধ পাঠানো হয়েছে — অ্যাডমিন অনুমোদন দিলে প্রযোজ্য হবে।', en: 'Request sent — it will apply once an admin approves it.' })}</AlertBox> : null}
               <Button type="submit" loading={reqBusy}>
-                {reqBusy ? strings.common.loading.bn : 'অনুরোধ পাঠান / Send request'}
+                {reqBusy ? <T bn={strings.common.loading.bn} en={strings.common.loading.en} /> : <T bn="অনুরোধ পাঠান" en="Send request" />}
               </Button>
             </form>
           </Card>

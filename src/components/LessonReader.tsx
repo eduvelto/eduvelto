@@ -21,6 +21,7 @@ import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../lib/auth';
 import { AlertBox, Button } from './ui';
+import { useLanguage } from '../i18n/LanguageContext';
 import { addBookmark, isBookmarked, removeBookmark } from '../lib/bookmarks';
 import { markLessonComplete } from '../lib/progress';
 import type { Lesson } from '../lib/content';
@@ -52,6 +53,7 @@ export default function LessonReader(props: {
 }) {
   const { lesson, bookTitle, subject, backTo, backLabel } = props;
   const { user } = useAuth();
+  const { lang, t } = useLanguage();
   const [picked, setPicked] = useState<Record<string, string>>({});
   const [revealed, setRevealed] = useState<Record<string, boolean>>({});
   const [bookmarked, setBookmarked] = useState<boolean | null>(null);
@@ -111,7 +113,7 @@ export default function LessonReader(props: {
         setBookmarked(true);
       }
     } catch (e) {
-      setError('বুকমার্ক সংরক্ষণ করা যায়নি — আবার চেষ্টা করুন। / Could not save the bookmark — please try again.');
+      setError(t({ bn: 'বুকমার্ক সংরক্ষণ করা যায়নি — আবার চেষ্টা করুন।', en: 'Could not save the bookmark — please try again.' }));
       if (typeof console !== 'undefined') console.warn('[Eduvelto] bookmark failed:', e);
     } finally {
       setBookmarkBusy(false);
@@ -126,7 +128,7 @@ export default function LessonReader(props: {
       await markLessonComplete(user.uid, subject, lesson.id, attemptedCount, correctCount);
       setCompleted(true);
     } catch (e) {
-      setError('অগ্রগতি সংরক্ষণ করা যায়নি — আবার চেষ্টা করুন। / Could not save progress — please try again.');
+      setError(t({ bn: 'অগ্রগতি সংরক্ষণ করা যায়নি — আবার চেষ্টা করুন।', en: 'Could not save progress — please try again.' }));
       if (typeof console !== 'undefined') console.warn('[Eduvelto] progress failed:', e);
     } finally {
       setCompleteBusy(false);
@@ -135,7 +137,7 @@ export default function LessonReader(props: {
 
   function speak(): void {
     if (typeof window === 'undefined' || !window.speechSynthesis) {
-      setError('এই ডিভাইসে শোনার সুবিধা নেই। / Listening is not available on this device.');
+      setError(t({ bn: 'এই ডিভাইসে শোনার সুবিধা নেই।', en: 'Listening is not available on this device.' }));
       return;
     }
     const synth = window.speechSynthesis;
@@ -188,9 +190,7 @@ export default function LessonReader(props: {
       </p>
       <h2 style={{ fontSize: 22, margin: '0 0 4px' }}>{lesson.title}</h2>
       <p style={{ color: '#555', margin: '0 0 16px' }}>
-        {lesson.questionCount}টি প্রশ্ন / {lesson.questionCount} questions
-        {lesson.part ? ` · Part ${lesson.part}` : ''}
-        {lesson.set > 1 ? ` · সেট ${lesson.set}` : ''}
+        {t({ bn: `${lesson.questionCount}টি প্রশ্ন${lesson.part ? ` · পার্ট ${lesson.part}` : ''}${lesson.set > 1 ? ` · সেট ${lesson.set}` : ''}`, en: `${lesson.questionCount} questions${lesson.part ? ` · Part ${lesson.part}` : ''}${lesson.set > 1 ? ` · Set ${lesson.set}` : ''}` })}
       </p>
 
       <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, marginBottom: 20 }}>
@@ -200,27 +200,26 @@ export default function LessonReader(props: {
             onClick={() => void toggleBookmark()}
             loading={bookmarkBusy}
           >
-            {bookmarked ? '★ বুকমার্ক করা আছে / Bookmarked' : '☆ বুকমার্ক করুন / Bookmark'}
+            {bookmarked ? t({ bn: '★ বুকমার্ক করা আছে', en: '★ Bookmarked' }) : t({ bn: '☆ বুকমার্ক করুন', en: '☆ Bookmark' })}
           </Button>
         ) : (
           <Link to="/login" className="ev-btn ev-btn-outline">
-            বুকমার্ক করতে লগইন করুন / Log in to bookmark
+            {t({ bn: 'বুকমার্ক করতে লগইন করুন', en: 'Log in to bookmark' })}
           </Link>
         )}
         {speaking ? (
           <Button variant="danger" onClick={stopSpeaking}>
-            ■ থামান / Stop
+            {t({ bn: '■ থামান', en: '■ Stop' })}
           </Button>
         ) : (
           <Button variant="outline" onClick={speak}>
-            🔊 শুনুন / Listen
+            {t({ bn: '🔊 শুনুন', en: '🔊 Listen' })}
           </Button>
         )}
       </div>
       {noBanglaVoice ? (
         <p style={{ color: '#555', fontSize: 14 }}>
-          আপনার ডিভাইসে বাংলা কণ্ঠ পাওয়া যায়নি, তাই ডিফল্ট কণ্ঠে পড়া হচ্ছে। / No Bangla voice
-          was found on this device, so the default voice is used.
+          {t({ bn: 'আপনার ডিভাইসে বাংলা কণ্ঠ পাওয়া যায়নি, তাই ডিফল্ট কণ্ঠে পড়া হচ্ছে।', en: 'No Bangla voice was found on this device, so the default voice is used.' })}
         </p>
       ) : null}
       {error ? <AlertBox tone="error">{error}</AlertBox> : null}
@@ -233,15 +232,13 @@ export default function LessonReader(props: {
         </div>
       ) : null}
 
-      <h3 style={{ fontSize: 19, margin: '24px 0 4px' }}>প্রশ্ন ও সহজ উত্তর / Questions &amp; simple answers</h3>
+      <h3 style={{ fontSize: 19, margin: '24px 0 4px' }}>{t({ bn: 'প্রশ্ন ও সহজ উত্তর', en: 'Questions & simple answers' })}</h3>
       <p style={{ color: '#555', fontSize: 14, margin: '0 0 16px' }}>
-        এই প্রশ্নগুলো Eduvelto-র নিজস্ব অনুশীলনী প্রশ্ন — বোর্ড বা বিশ্ববিদ্যালয়ের পরীক্ষার প্রশ্ন
-        নয়। / These are Eduvelto&apos;s own original practice questions — not board or
-        university exam questions.
+        {t({ bn: 'এই প্রশ্নগুলো Eduvelto-র নিজস্ব অনুশীলনী প্রশ্ন — বোর্ড বা বিশ্ববিদ্যালয়ের পরীক্ষার প্রশ্ন নয়।', en: 'These are Eduvelto’s own original practice questions — not board or university exam questions.' })}
       </p>
 
       {lesson.questions.length === 0 ? (
-        <p>এই পাঠে এখনো কোনো প্রশ্ন যোগ করা হয়নি। / No questions have been added to this lesson yet.</p>
+        <p>{t({ bn: 'এই পাঠে এখনো কোনো প্রশ্ন যোগ করা হয়নি।', en: 'No questions have been added to this lesson yet.' })}</p>
       ) : (
         <ol style={{ paddingLeft: 20 }}>
           {lesson.questions.map((q) => {
@@ -285,10 +282,10 @@ export default function LessonReader(props: {
                       <p style={{ margin: '4px 0 0', fontSize: 14 }}>
                         {q.correctLetter !== '' ? (
                           pick === q.correctLetter ? (
-                            <span style={{ color: '#1E7CE8', fontWeight: 700 }}>সঠিক! / Correct!</span>
+                            <span style={{ color: '#1E7CE8', fontWeight: 700 }}>{t({ bn: 'সঠিক!', en: 'Correct!' })}</span>
                           ) : (
                             <span>
-                              সঠিক উত্তর: <strong>{q.correctLetter}) {q.correctText}</strong>
+                              {t({ bn: 'সঠিক উত্তর', en: 'Correct answer' })}: <strong>{q.correctLetter}) {q.correctText}</strong>
                             </span>
                           )
                         ) : null}
@@ -303,13 +300,13 @@ export default function LessonReader(props: {
                       variant="outline"
                       onClick={() => setRevealed((r) => ({ ...r, [q.label]: !r[q.label] }))}
                     >
-                      {show ? 'উত্তর লুকান / Hide answer' : 'সহজ উত্তর দেখুন / Show simple answer'}
+                      {show ? t({ bn: 'উত্তর লুকান', en: 'Hide answer' }) : t({ bn: 'সহজ উত্তর দেখুন', en: 'Show simple answer' })}
                     </Button>
                     {show ? (
                       <div style={{ marginTop: 8, padding: '12px', background: '#f7f9fc', borderRadius: 6, lineHeight: 1.7 }}>
                         {answerText ? <p style={{ margin: '0 0 8px' }}>{answerText}</p> : null}
                         {q.explanation ? <p style={{ margin: 0, color: '#555' }}>{q.explanation}</p> : null}
-                        {!answerText && !q.explanation ? <p style={{ margin: 0 }}>উত্তর যোগ করা হয়নি। / No answer added yet.</p> : null}
+                        {!answerText && !q.explanation ? <p style={{ margin: 0 }}>{t({ bn: 'উত্তর যোগ করা হয়নি।', en: 'No answer added yet.' })}</p> : null}
                       </div>
                     ) : null}
                   </div>
@@ -324,26 +321,29 @@ export default function LessonReader(props: {
         {user ? (
           completed ? (
             <p style={{ margin: 0, color: '#1E7CE8', fontWeight: 700 }}>
-              ✓ পড়া শেষ হিসেবে সংরক্ষণ করা হয়েছে — আপনার অগ্রগতি পাতায় দেখা যাবে। / Saved as
-              read — see your Progress page.
+              {t({ bn: '✓ পড়া শেষ হিসেবে সংরক্ষণ করা হয়েছে — আপনার অগ্রগতি পাতায় দেখা যাবে।', en: '✓ Saved as read — see your Progress page.' })}
             </p>
           ) : (
             <>
               <p style={{ margin: '0 0 12px' }}>
-                এই পাঠে আপনি {attemptedCount}টি প্রশ্ন চেষ্টা করেছেন
-                {attemptedCount > 0 ? `, এর মধ্যে ${correctCount}টি MCQ সঠিক হয়েছে` : ''}।
-                / You tried {attemptedCount} questions in this lesson
-                {attemptedCount > 0 ? `, ${correctCount} MCQ correct` : ''}.
+                {t({ bn: `এই পাঠে আপনি ${attemptedCount}টি প্রশ্ন চেষ্টা করেছেন${attemptedCount > 0 ? `, এর মধ্যে ${correctCount}টি MCQ সঠিক হয়েছে` : ''}।`, en: `You tried ${attemptedCount} questions in this lesson${attemptedCount > 0 ? `, ${correctCount} MCQ correct` : ''}.` })}
               </p>
               <Button onClick={() => void completeLesson()} loading={completeBusy} size="lg">
-                পড়া শেষ করেছি / Mark lesson complete
+                {t({ bn: 'পড়া শেষ করেছি', en: 'Mark lesson complete' })}
               </Button>
             </>
           )
         ) : (
           <p style={{ margin: 0 }}>
-            <Link to="/login">লগইন করুন</Link> — তাহলে আপনার পড়া ও অগ্রগতি সংরক্ষণ করা হবে। /{' '}
-            <Link to="/login">Log in</Link> to save your reading and progress.
+            {lang === 'bn' ? (
+              <>
+                <Link to="/login">লগইন করুন</Link> — তাহলে আপনার পড়া ও অগ্রগতি সংরক্ষণ করা হবে।
+              </>
+            ) : (
+              <>
+                <Link to="/login">Log in</Link> to save your reading and progress.
+              </>
+            )}
           </p>
         )}
       </div>

@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import { PageShell } from '../components/PageShell';
+import { useLanguage } from '../i18n/LanguageContext';
 import {
   AdminBackLink,
   EmptyAdminBox,
@@ -32,7 +33,7 @@ const FILTERS = [
   'support-thread-viewed',
 ] as const;
 
-function dayKey(value: unknown): string {
+function dayKey(value: unknown, lang: 'bn' | 'en'): string {
   try {
     let d: Date | null = null;
     if (typeof value === 'object' && value !== null && 'toDate' in value) {
@@ -43,14 +44,15 @@ function dayKey(value: unknown): string {
       const t = new Date(value);
       d = Number.isNaN(t.getTime()) ? null : t;
     }
-    if (!d) return 'অজানা তারিখ';
-    return d.toLocaleDateString('bn-BD', { day: 'numeric', month: 'long', year: 'numeric' });
+    if (!d) return lang === 'bn' ? 'অজানা তারিখ' : 'Unknown date';
+    return d.toLocaleDateString(lang === 'bn' ? 'bn-BD' : 'en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
   } catch {
-    return 'অজানা তারিখ';
+    return lang === 'bn' ? 'অজানা তারিখ' : 'Unknown date';
   }
 }
 
 export default function AdminAuditPage() {
+  const { lang, t } = useLanguage();
   const [rows, setRows] = useState<AuditRow[]>([]);
   const [filter, setFilter] = useState<string>('all');
   const [loading, setLoading] = useState(true);
@@ -63,7 +65,7 @@ export default function AdminAuditPage() {
         const list = await listAdminActions(requireDb());
         if (!cancelled) setRows(list);
       } catch (e) {
-        if (!cancelled) setError(friendlyAdminError(e));
+        if (!cancelled) setError(friendlyAdminError(e, lang));
       } finally {
         if (!cancelled) setLoading(false);
       }
@@ -81,7 +83,7 @@ export default function AdminAuditPage() {
   const grouped = useMemo(() => {
     const groups = new Map<string, AuditRow[]>();
     for (const row of shown) {
-      const key = dayKey(row.createdAt);
+      const key = dayKey(row.createdAt, lang);
       const list = groups.get(key) ?? [];
       list.push(row);
       groups.set(key, list);
@@ -103,14 +105,16 @@ export default function AdminAuditPage() {
     <PageShell titleBn="অডিট লগ" titleEn="Audit log">
       <AdminBackLink />
       <p>
-        সব অ্যাডমিন কাজের লগ — কে, কী করলেন, কখন, আগে কী ছিল, পরে কী হলো, কেন। লগ কখনো মোছা বা
-        বদলানো যায় না। / The log of all admin actions — who, what, when, before, after, why.
-        Entries can never be edited or deleted.
+        {t({
+          bn: 'সব অ্যাডমিন কাজের লগ — কে, কী করলেন, কখন, আগে কী ছিল, পরে কী হলো, কেন। লগ কখনো মোছা বা বদলানো যায় না।',
+          en: 'The log of all admin actions — who, what, when, before, after, why. Entries can never be edited or deleted.',
+        })}
       </p>
       <p style={{ color: '#555', fontSize: 14 }}>
-        সর্বশেষ {formatBnNumber(100)}টি দেখানো হচ্ছে — তার আগের লগ দেখতে Firebase console-এ
-        adminActions সংগ্রহ খুলুন। / Showing the latest 100 — for older entries, open the
-        adminActions collection in the Firebase console.
+        {t({
+          bn: `সর্বশেষ ${formatBnNumber(100)}টি দেখানো হচ্ছে — তার আগের লগ দেখতে Firebase console-এ adminActions সংগ্রহ খুলুন।`,
+          en: 'Showing the latest 100 — for older entries, open the adminActions collection in the Firebase console.',
+        })}
       </p>
 
       <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', marginBottom: 12 }}>
@@ -130,13 +134,15 @@ export default function AdminAuditPage() {
               cursor: 'pointer',
             }}
           >
-            {f === 'all' ? 'সব / All' : auditActionLabel(f).bn}
+            {f === 'all' ? t({ bn: 'সব', en: 'All' }) : t(auditActionLabel(f))}
           </button>
         ))}
       </div>
       <p style={{ color: '#555', fontSize: 14 }}>
-        মোট {formatBnNumber(rows.length)}টি — দেখানো হচ্ছে {formatBnNumber(shown.length)}টি /
-        Total {rows.length} — showing {shown.length}
+        {t({
+          bn: `মোট ${formatBnNumber(rows.length)}টি — দেখানো হচ্ছে ${formatBnNumber(shown.length)}টি`,
+          en: `Total ${rows.length} — showing ${shown.length}`,
+        })}
       </p>
 
       {loading ? <LoadingBox /> : null}
@@ -146,6 +152,7 @@ export default function AdminAuditPage() {
           bn="এই ফিল্টারে কোনো লগ নেই।"
           en="No log entries for this filter."
           nextBn="ফিল্টার বদলে দেখুন, অথবা নতুন অ্যাডমিন কাজ করলে এখানে আসবে।"
+          nextEn="Try changing the filter, or new admin activity will appear here."
         />
       ) : null}
 
@@ -165,27 +172,26 @@ export default function AdminAuditPage() {
                     marginBottom: 8,
                   }}
                 >
-                  <strong>{label.bn}</strong>{' '}
-                  <span style={{ color: '#555', fontSize: 14 }}>· {label.en}</span>
+                  <strong>{t(label)}</strong>
                   <p style={{ margin: '4px 0', fontSize: 15 }}>
                     {row.details ?? ''}
                   </p>
                   <p style={{ margin: '0 0 4px', color: '#555', fontSize: 14 }}>
-                    {formatTime(row.createdAt)}
+                    {formatTime(row.createdAt, lang)}
                     {row.before !== undefined || row.after !== undefined
-                      ? ` · আগে: ${row.before ?? '—'} → পরে: ${row.after ?? '—'}`
+                      ? ` · ${t({ bn: 'আগে', en: 'Before' })}: ${row.before ?? '—'} → ${t({ bn: 'পরে', en: 'After' })}: ${row.after ?? '—'}`
                       : ''}
                   </p>
                   {row.reason ? (
                     <p style={{ margin: '0 0 4px', color: '#555', fontSize: 14 }}>
-                      কারণ: {row.reason}
+                      {t({ bn: 'কারণ', en: 'Reason' })}: {row.reason}
                     </p>
                   ) : null}
                   <p style={{ margin: 0, color: '#999', fontSize: 13 }}>
                     <span lang="en">{row.actorId.slice(0, 8)}…</span>
                     {row.targetId ? (
                       <>
-                        {' · লক্ষ্য: '}
+                        {` · ${t({ bn: 'লক্ষ্য', en: 'Target' })}: `}
                         <span lang="en">{row.targetId.slice(0, 12)}…</span>
                       </>
                     ) : null}
@@ -213,7 +219,7 @@ export default function AdminAuditPage() {
             cursor: 'pointer',
           }}
         >
-          এই লগ ডাউনলোড করুন (JSON) / Download this log (JSON)
+          {t({ bn: 'এই লগ ডাউনলোড করুন (JSON)', en: 'Download this log (JSON)' })}
         </button>
       ) : null}
     </PageShell>

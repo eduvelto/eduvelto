@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { PageShell } from '../components/PageShell';
+import { useLanguage } from '../i18n/LanguageContext';
 import {
   AdminBackLink,
   ConfirmDialog,
@@ -23,18 +24,19 @@ import {
 } from '../lib/admin';
 import type { UserRole } from '../lib/profile';
 
-const ROLE_LABEL: Record<string, string> = {
-  owner: 'মালিক',
-  admin: 'অ্যাডমিন',
-  moderator: 'মডারেটর',
-  teacher: 'শিক্ষক',
-  student: 'শিক্ষার্থী',
-  parent: 'অভিভাবক',
+const ROLE_LABEL: Record<string, { bn: string; en: string }> = {
+  owner: { bn: 'মালিক', en: 'Owner' },
+  admin: { bn: 'অ্যাডমিন', en: 'Admin' },
+  moderator: { bn: 'মডারেটর', en: 'Moderator' },
+  teacher: { bn: 'শিক্ষক', en: 'Teacher' },
+  student: { bn: 'শিক্ষার্থী', en: 'Student' },
+  parent: { bn: 'অভিভাবক', en: 'Guardian' },
 };
 
 type ConfirmKind = 'suspend' | 'reactivate' | 'role';
 
 export default function AdminUserDetailPage() {
+  const { lang, t } = useLanguage();
   const { uid } = useParams<{ uid: string }>();
   const [detail, setDetail] = useState<UserDetail | null>(null);
   const [loading, setLoading] = useState(true);
@@ -57,7 +59,7 @@ export default function AdminUserDetailPage() {
       const d = await getUserDetail(requireDb(), uid);
       setDetail(d);
     } catch (e) {
-      setError(friendlyAdminError(e));
+      setError(friendlyAdminError(e, lang));
     } finally {
       setLoading(false);
     }
@@ -85,17 +87,17 @@ export default function AdminUserDetailPage() {
       if (confirm === 'role') await setUserRole(requireDb(), user.uid, newRole, reason, adultChecked);
       setNotice(
         confirm === 'suspend'
-          ? 'ব্যবহারকারী স্থগিত হয়েছে। / User suspended.'
+          ? t({ bn: 'ব্যবহারকারী স্থগিত হয়েছে।', en: 'User suspended.' })
           : confirm === 'reactivate'
-            ? 'ব্যবহারকারী আবার চালু হয়েছে। / User reactivated.'
-            : 'ভূমিকা বদলানো হয়েছে। / Role changed.',
+            ? t({ bn: 'ব্যবহারকারী আবার চালু হয়েছে।', en: 'User reactivated.' })
+            : t({ bn: 'ভূমিকা বদলানো হয়েছে।', en: 'Role changed.' }),
       );
       setReason('');
       setAdultChecked(false);
       setConfirm(null);
       await reload();
     } catch (e) {
-      setError(friendlyAdminError(e));
+      setError(friendlyAdminError(e, lang));
       setConfirm(null);
     } finally {
       setBusy(false);
@@ -114,7 +116,7 @@ export default function AdminUserDetailPage() {
       const msgs = await getSupportThreadMessages(requireDb(), threadId, user?.displayName ?? threadId);
       setThreadMessages(msgs);
     } catch (e) {
-      setError(friendlyAdminError(e));
+      setError(friendlyAdminError(e, lang));
     } finally {
       setThreadLoading(false);
     }
@@ -124,7 +126,7 @@ export default function AdminUserDetailPage() {
     return (
       <PageShell titleBn="ব্যবহারকারী" titleEn="User">
         <AdminBackLink />
-        <ErrorBox message="ব্যবহারকারীর ID পাওয়া যায়নি। / No user ID." />
+        <ErrorBox message={t({ bn: 'ব্যবহারকারীর ID পাওয়া যায়নি।', en: 'No user ID.' })} />
       </PageShell>
     );
   }
@@ -133,8 +135,10 @@ export default function AdminUserDetailPage() {
     <PageShell titleBn="ব্যবহারকারীর প্রোফাইল" titleEn="User profile">
       <AdminBackLink />
       <p style={{ color: '#555', fontSize: 14 }}>
-        মালিকের তদারকি: এই পাতা খোলা অডিট লগে লেখা হয়েছে (কে, কাকে, কখন)। / Owner oversight: opening
-        this page was written to the audit log (who, whom, when).
+        {t({
+          bn: 'মালিকের তদারকি: এই পাতা খোলা অডিট লগে লেখা হয়েছে (কে, কাকে, কখন)।',
+          en: 'Owner oversight: opening this page was written to the audit log (who, whom, when).',
+        })}
       </p>
       {loading ? <LoadingBox /> : null}
       {error ? <ErrorBox message={error} /> : null}
@@ -163,29 +167,29 @@ export default function AdminUserDetailPage() {
                   ★ CEO
                 </span>
               ) : null}
-              <StatusPill label={ROLE_LABEL[user.role] ?? user.role} tone="muted" />
+              <StatusPill label={ROLE_LABEL[user.role] ? t(ROLE_LABEL[user.role]) : user.role} tone="muted" />
               <StatusPill
-                label={user.isActive ? 'সক্রিয় / Active' : 'স্থগিত / Suspended'}
+                label={user.isActive ? t({ bn: 'সক্রিয়', en: 'Active' }) : t({ bn: 'স্থগিত', en: 'Suspended' })}
                 tone={user.isActive ? 'active' : 'ready'}
               />
             </div>
             <p style={{ margin: '8px 0' }}>
-              ইমেইল: <span lang="en">{user.email}</span>
+              {t({ bn: 'ইমেইল', en: 'Email' })}: <span lang="en">{user.email}</span>
             </p>
             <p style={{ margin: '4px 0', color: '#555', fontSize: 14 }}>
-              {user.educationType ? `ধারা: ${user.educationType} · ` : ''}
-              {user.institution ? `প্রতিষ্ঠান: ${user.institution} · ` : ''}
-              {user.program ? `প্রোগ্রাম: ${user.program} · ` : ''}
-              {user.department ? `বিভাগ: ${user.department} · ` : ''}
-              {user.classLevel ? `শ্রেণি: ${user.classLevel}` : ''}
+              {user.educationType ? `${t({ bn: 'ধারা', en: 'Stream' })}: ${user.educationType} · ` : ''}
+              {user.institution ? `${t({ bn: 'প্রতিষ্ঠান', en: 'Institution' })}: ${user.institution} · ` : ''}
+              {user.program ? `${t({ bn: 'প্রোগ্রাম', en: 'Programme' })}: ${user.program} · ` : ''}
+              {user.department ? `${t({ bn: 'বিভাগ', en: 'Department' })}: ${user.department} · ` : ''}
+              {user.classLevel ? `${t({ bn: 'শ্রেণি', en: 'Class' })}: ${user.classLevel}` : ''}
             </p>
             <p style={{ margin: '4px 0', color: '#555', fontSize: 14 }}>
-              সদস্য: {formatTime(user.createdAt)}
-              {user.verificationStatus ? ` · শিক্ষক যাচাই: ${user.verificationStatus}` : ''}
+              {t({ bn: 'সদস্য', en: 'Member since' })}: {formatTime(user.createdAt, lang)}
+              {user.verificationStatus ? ` · ${t({ bn: 'শিক্ষক যাচাই', en: 'Teacher verification' })}: ${user.verificationStatus}` : ''}
             </p>
             {!user.isActive && user.suspendedReason ? (
               <p style={{ margin: '4px 0', color: '#b00020' }}>
-                স্থগিতের কারণ: {user.suspendedReason}
+                {t({ bn: 'স্থগিতের কারণ', en: 'Suspension reason' })}: {user.suspendedReason}
               </p>
             ) : null}
           </div>
@@ -197,15 +201,15 @@ export default function AdminUserDetailPage() {
             />
           ) : (
             <div style={{ border: '1px solid #ddd', borderRadius: 8, padding: '14px', marginBottom: 12 }}>
-              <h2 style={{ fontSize: 17, marginTop: 0 }}>পদক্ষেপ / Actions</h2>
+              <h2 style={{ fontSize: 17, marginTop: 0 }}>{t({ bn: 'পদক্ষেপ', en: 'Actions' })}</h2>
               <label style={{ display: 'block', fontWeight: 700, marginBottom: 4 }}>
-                কারণ (অবশ্যই লিখুন — কমপক্ষে ১০ অক্ষর) / Reason (required — at least 10 characters)
+                {t({ bn: 'কারণ (অবশ্যই লিখুন — কমপক্ষে ১০ অক্ষর)', en: 'Reason (required — at least 10 characters)' })}
               </label>
               <textarea
                 value={reason}
                 onChange={(e) => setReason(e.target.value)}
                 rows={2}
-                placeholder="কেন এই সিদ্ধান্ত নিচ্ছেন — পরে অডিট লগে দেখা যাবে"
+                placeholder={t({ bn: 'কেন এই সিদ্ধান্ত নিচ্ছেন — পরে অডিট লগে দেখা যাবে', en: 'Why are you taking this decision — it will be visible in the audit log later' })}
                 style={{
                   width: '100%',
                   boxSizing: 'border-box',
@@ -233,7 +237,7 @@ export default function AdminUserDetailPage() {
                       cursor: 'pointer',
                     }}
                   >
-                    স্থগিত করুন / Suspend
+                    {t({ bn: 'স্থগিত করুন', en: 'Suspend' })}
                   </button>
                 ) : (
                   <button
@@ -251,21 +255,21 @@ export default function AdminUserDetailPage() {
                       cursor: 'pointer',
                     }}
                   >
-                    আবার চালু করুন / Reactivate
+                    {t({ bn: 'আবার চালু করুন', en: 'Reactivate' })}
                   </button>
                 )}
               </div>
-              <h3 style={{ fontSize: 16, marginTop: 20 }}>ভূমিকা বদলান / Change role</h3>
+              <h3 style={{ fontSize: 16, marginTop: 20 }}>{t({ bn: 'ভূমিকা বদলান', en: 'Change role' })}</h3>
               <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', alignItems: 'center' }}>
                 <select
                   value={newRole}
                   onChange={(e) => setNewRole(e.target.value as UserRole)}
-                  aria-label="নতুন ভূমিকা"
+                  aria-label={t({ bn: 'নতুন ভূমিকা', en: 'New role' })}
                   style={{ padding: '12px 10px', minHeight: 48, fontSize: 16, borderRadius: 8 }}
                 >
                   {ASSIGNABLE_ROLES.map((r) => (
                     <option key={r} value={r}>
-                      {ROLE_LABEL[r] ?? r}
+                      {ROLE_LABEL[r] ? t(ROLE_LABEL[r]) : r}
                     </option>
                   ))}
                 </select>
@@ -284,7 +288,7 @@ export default function AdminUserDetailPage() {
                     cursor: 'pointer',
                   }}
                 >
-                  ভূমিকা বদলান / Change role
+                  {t({ bn: 'ভূমিকা বদলান', en: 'Change role' })}
                 </button>
               </div>
               {elevating ? (
@@ -305,61 +309,61 @@ export default function AdminUserDetailPage() {
                     style={{ width: 24, height: 24, accentColor: '#1E7CE8', flexShrink: 0 }}
                   />
                   <span>
-                    নিশ্চিত করছি — এই ব্যক্তি প্রাপ্তবয়স্ক এবং পরিচয় যাচাই করা হয়েছে। শিশুকে
-                    কখনো শিক্ষক/মডারেটর/অ্যাডমিন বানানো যায় না। / I confirm — this person is an
-                    adult and their identity was checked. A child can never be made
-                    teacher/moderator/admin.
+                    {t({
+                      bn: 'নিশ্চিত করছি — এই ব্যক্তি প্রাপ্তবয়স্ক এবং পরিচয় যাচাই করা হয়েছে। শিশুকে কখনো শিক্ষক/মডারেটর/অ্যাডমিন বানানো যায় না।',
+                      en: 'I confirm — this person is an adult and their identity was checked. A child can never be made teacher/moderator/admin.',
+                    })}
                   </span>
                 </label>
               ) : null}
               <p style={{ color: '#555', fontSize: 14 }}>
-                স্থগিত করলে ব্যবহারকারী আর লগইন করে অ্যাপ ব্যবহার করতে পারবেন না (নিয়মেও
-                আটকানো আছে)। ভূমিকা বদলালে আগের ভূমিকা অডিট লগে থাকবে। / Suspending blocks the
-                account in the app and in the rules. A role change keeps the old role in the
-                audit log.
+                {t({
+                  bn: 'স্থগিত করলে ব্যবহারকারী আর লগইন করে অ্যাপ ব্যবহার করতে পারবেন না (নিয়মেও আটকানো আছে)। ভূমিকা বদলালে আগের ভূমিকা অডিট লগে থাকবে।',
+                  en: 'Suspending blocks the account in the app and in the rules. A role change keeps the old role in the audit log.',
+                })}
               </p>
             </div>
           )}
 
-          <h2 style={{ fontSize: 18 }}>এই ব্যবহারকারীর লেখা / Their posts &amp; questions</h2>
+          <h2 style={{ fontSize: 18 }}>{t({ bn: 'এই ব্যবহারকারীর লেখা', en: 'Their posts & questions' })}</h2>
           {detail && detail.posts.length === 0 && detail.questions.length === 0 ? (
-            <p style={{ color: '#555' }}>কিছু লেখেননি এখনো। / Nothing written yet.</p>
+            <p style={{ color: '#555' }}>{t({ bn: 'কিছু লেখেননি এখনো।', en: 'Nothing written yet.' })}</p>
           ) : null}
           <ul style={{ listStyle: 'none', padding: 0 }}>
             {detail?.posts.map((p) => (
               <li key={p.id} style={{ border: '1px solid #eee', borderRadius: 8, padding: '10px 12px', marginBottom: 8 }}>
-                <strong>পোস্ট: {p.title}</strong>
+                <strong>{t({ bn: 'পোস্ট', en: 'Post' })}: {p.title}</strong>
                 <p style={{ margin: '4px 0', color: '#555', fontSize: 14 }}>
-                  {p.body.slice(0, 200)} · {p.reviewStatus ?? ''} · {formatTime(p.createdAt)}
+                  {p.body.slice(0, 200)} · {p.reviewStatus ?? ''} · {formatTime(p.createdAt, lang)}
                 </p>
               </li>
             ))}
             {detail?.questions.map((q) => (
               <li key={q.id} style={{ border: '1px solid #eee', borderRadius: 8, padding: '10px 12px', marginBottom: 8 }}>
-                <strong>প্রশ্ন: {q.title}</strong>
+                <strong>{t({ bn: 'প্রশ্ন', en: 'Question' })}: {q.title}</strong>
                 <p style={{ margin: '4px 0', color: '#555', fontSize: 14 }}>
-                  {q.body.slice(0, 200)} · {q.reviewStatus ?? ''} · {formatTime(q.createdAt)}
+                  {q.body.slice(0, 200)} · {q.reviewStatus ?? ''} · {formatTime(q.createdAt, lang)}
                 </p>
               </li>
             ))}
           </ul>
 
-          <h2 style={{ fontSize: 18 }}>সাপোর্ট মেসেজ / Support messages</h2>
+          <h2 style={{ fontSize: 18 }}>{t({ bn: 'সাপোর্ট মেসেজ', en: 'Support messages' })}</h2>
           {detail && detail.supportThreads.length === 0 ? (
             <p style={{ color: '#555' }}>
-              কোনো সাপোর্ট কথোপকথন নেই। / No support conversations.
+              {t({ bn: 'কোনো সাপোর্ট কথোপকথন নেই।', en: 'No support conversations.' })}
             </p>
           ) : null}
           <ul style={{ listStyle: 'none', padding: 0 }}>
-            {detail?.supportThreads.map((t) => (
-              <li key={t.id} style={{ border: '1px solid #eee', borderRadius: 8, padding: '10px 12px', marginBottom: 8 }}>
+            {detail?.supportThreads.map((thread) => (
+              <li key={thread.id} style={{ border: '1px solid #eee', borderRadius: 8, padding: '10px 12px', marginBottom: 8 }}>
                 <div style={{ display: 'flex', gap: 8, alignItems: 'center', flexWrap: 'wrap' }}>
-                  <strong>সাপোর্ট থ্রেড</strong>
-                  <StatusPill label={t.status === 'open' ? 'খোলা / Open' : 'বন্ধ / Closed'} tone={t.status === 'open' ? 'active' : 'muted'} />
-                  <span style={{ color: '#555', fontSize: 14 }}>{formatTime(t.createdAt)}</span>
+                  <strong>{t({ bn: 'সাপোর্ট থ্রেড', en: 'Support thread' })}</strong>
+                  <StatusPill label={thread.status === 'open' ? t({ bn: 'খোলা', en: 'Open' }) : t({ bn: 'বন্ধ', en: 'Closed' })} tone={thread.status === 'open' ? 'active' : 'muted'} />
+                  <span style={{ color: '#555', fontSize: 14 }}>{formatTime(thread.createdAt, lang)}</span>
                   <button
                     type="button"
-                    onClick={() => void openThread(t.id)}
+                    onClick={() => void openThread(thread.id)}
                     style={{
                       marginLeft: 'auto',
                       padding: '10px 14px',
@@ -371,22 +375,22 @@ export default function AdminUserDetailPage() {
                       cursor: 'pointer',
                     }}
                   >
-                    {expandedThread === t.id ? 'লুকান / Hide' : 'মেসেজ দেখুন / View messages'}
+                    {expandedThread === thread.id ? t({ bn: 'লুকান', en: 'Hide' }) : t({ bn: 'মেসেজ দেখুন', en: 'View messages' })}
                   </button>
                 </div>
-                {expandedThread === t.id ? (
+                {expandedThread === thread.id ? (
                   threadLoading ? (
                     <LoadingBox />
                   ) : threadMessages.length === 0 ? (
-                    <p style={{ color: '#555' }}>এই থ্রেডে কোনো মেসেজ নেই। / No messages in this thread.</p>
+                    <p style={{ color: '#555' }}>{t({ bn: 'এই থ্রেডে কোনো মেসেজ নেই।', en: 'No messages in this thread.' })}</p>
                   ) : (
                     <ul style={{ listStyle: 'none', padding: 0, marginTop: 8 }}>
                       {threadMessages.map((m) => (
                         <li key={m.id} style={{ borderTop: '1px solid #eee', padding: '8px 0' }}>
                           <p style={{ margin: 0 }}>{m.body}</p>
                           <p style={{ margin: '4px 0 0', color: '#555', fontSize: 14 }}>
-                            {m.senderId === user.uid ? 'ব্যবহারকারী' : 'অ্যাডমিন'} ·{' '}
-                            {formatTime(m.createdAt)}
+                            {m.senderId === user.uid ? t({ bn: 'ব্যবহারকারী', en: 'User' }) : t({ bn: 'অ্যাডমিন', en: 'Admin' })} ·{' '}
+                            {formatTime(m.createdAt, lang)}
                           </p>
                         </li>
                       ))}
@@ -397,9 +401,9 @@ export default function AdminUserDetailPage() {
             ))}
           </ul>
 
-          <h2 style={{ fontSize: 18 }}>এই ব্যবহারকারী সম্পর্কে রিপোর্ট / Reports about this user</h2>
+          <h2 style={{ fontSize: 18 }}>{t({ bn: 'এই ব্যবহারকারী সম্পর্কে রিপোর্ট', en: 'Reports about this user' })}</h2>
           {detail && detail.reportsAbout.length === 0 ? (
-            <p style={{ color: '#555' }}>কোনো রিপোর্ট নেই। / No reports.</p>
+            <p style={{ color: '#555' }}>{t({ bn: 'কোনো রিপোর্ট নেই।', en: 'No reports.' })}</p>
           ) : null}
           <ul style={{ listStyle: 'none', padding: 0 }}>
             {detail?.reportsAbout.map((r) => (
@@ -408,13 +412,13 @@ export default function AdminUserDetailPage() {
                   {r.reason} · {r.status}
                 </strong>
                 <p style={{ margin: '4px 0', color: '#555', fontSize: 14 }}>
-                  {r.targetType ?? ''} {r.details ? `— ${r.details}` : ''} · {formatTime(r.createdAt)}
+                  {r.targetType ?? ''} {r.details ? `— ${r.details}` : ''} · {formatTime(r.createdAt, lang)}
                 </p>
               </li>
             ))}
           </ul>
           <p style={{ marginTop: 24 }}>
-            <Link to="/admin/users">← সব ব্যবহারকারী / All users</Link>
+            <Link to="/admin/users">← {t({ bn: 'সব ব্যবহারকারী', en: 'All users' })}</Link>
           </p>
         </>
       ) : null}
@@ -428,14 +432,14 @@ export default function AdminUserDetailPage() {
               ? `${user.displayName}-কে স্থগিত করবেন? তিনি আর লগইন করে অ্যাপ ব্যবহার করতে পারবেন না। কারণ: ${reason}`
               : confirm === 'reactivate'
                 ? `${user.displayName}-কে আবার চালু করবেন? তিনি আবার অ্যাপ ব্যবহার করতে পারবেন। কারণ: ${reason}`
-                : `${user.displayName}-এর ভূমিকা ${ROLE_LABEL[user.role] ?? user.role} থেকে ${ROLE_LABEL[newRole] ?? newRole}-এ বদলাবেন? কারণ: ${reason}`
+                : `${user.displayName}-এর ভূমিকা ${ROLE_LABEL[user.role]?.bn ?? user.role} থেকে ${ROLE_LABEL[newRole]?.bn ?? newRole}-এ বদলাবেন? কারণ: ${reason}`
           }
           bodyEn={
             confirm === 'suspend'
               ? `${user.displayName} will be suspended and cannot use the app.`
               : confirm === 'reactivate'
                 ? `${user.displayName} will be reactivated and can use the app again.`
-                : `${user.displayName}'s role will change from ${user.role} to ${newRole}.`
+                : `${user.displayName}'s role will change from ${ROLE_LABEL[user.role]?.en ?? user.role} to ${ROLE_LABEL[newRole]?.en ?? newRole}.`
           }
           confirmBn="হ্যাঁ, করুন"
           confirmEn="Yes, do it"

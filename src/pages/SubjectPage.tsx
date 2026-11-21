@@ -13,6 +13,7 @@
 import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { PageShell } from '../components/PageShell';
+import { useLanguage } from '../i18n/LanguageContext';
 import { AlertBox, Card, Chip, SkeletonCards } from '../components/ui';
 import {
   listPublishedDirectoryPage,
@@ -21,6 +22,7 @@ import {
 } from '../lib/content';
 
 export default function SubjectPage() {
+  const { t } = useLanguage();
   const { subjectId } = useParams<{ subjectId: string }>();
   const subject = subjectId ? decodeURIComponent(subjectId) : '';
   const [rows, setRows] = useState<DirectoryRow[]>([]);
@@ -45,7 +47,7 @@ export default function SubjectPage() {
         setLoaded(true);
       })
       .catch(() => {
-        setError('বিষয়টি লোড করা যায়নি — আবার চেষ্টা করুন। / Could not load the subject — please try again.');
+        setError(t({ bn: 'বিষয়টি লোড করা যায়নি — আবার চেষ্টা করুন।', en: 'Could not load the subject — please try again.' }));
         setLoaded(true);
       });
   }
@@ -61,7 +63,7 @@ export default function SubjectPage() {
       setLastDoc(res.lastDoc);
       setHasMore(res.hasMore);
     } catch {
-      setError('আরও লোড করা যায়নি — আবার চেষ্টা করুন। / Could not load more — please try again.');
+      setError(t({ bn: 'আরও লোড করা যায়নি — আবার চেষ্টা করুন।', en: 'Could not load more — please try again.' }));
     } finally {
       setLoadingMore(false);
     }
@@ -73,11 +75,11 @@ export default function SubjectPage() {
     <PageShell titleBn={subject || 'বিষয়'} titleEn={subject || 'Subject'} wide>
       <p style={{ margin: '0 0 16px' }}>
         <Link to="/directory" style={{ fontWeight: 600 }}>
-          ← শিক্ষা নির্দেশিকা / Directory
+          {t({ bn: '← শিক্ষা নির্দেশিকা', en: '← Education Directory' })}
         </Link>
         {' · '}
         <Link to="/library" style={{ fontWeight: 600 }}>
-          লাইব্রেরি / Library
+          {t({ bn: 'লাইব্রেরি', en: 'Library' })}
         </Link>
       </p>
       {error ? (
@@ -87,7 +89,7 @@ export default function SubjectPage() {
       ) : null}
       {!loaded && !error ? <SkeletonCards count={3} /> : null}
       {loaded && shown.length === 0 && !hasMore ? (
-        <p>এই বিষয়ে এখনো কোনো বই প্রকাশিত হয়নি। / No books from this subject are published yet.</p>
+        <p>{t({ bn: 'এই বিষয়ে এখনো কোনো বই প্রকাশিত হয়নি।', en: 'No books from this subject are published yet.' })}</p>
       ) : null}
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: 12 }}>
         {shown.map((r) => (
@@ -97,7 +99,7 @@ export default function SubjectPage() {
             </Link>
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, marginTop: 10 }}>
               <Chip tone="outline">{r.classLevel}</Chip>
-              <Chip tone="outline">কোড {r.paperCode}</Chip>
+              <Chip tone="outline">{t({ bn: `কোড ${r.paperCode}`, en: `Code ${r.paperCode}` })}</Chip>
             </div>
           </Card>
         ))}
@@ -109,7 +111,7 @@ export default function SubjectPage() {
           disabled={loadingMore}
           style={{ padding: '10px 16px', minHeight: 44, borderRadius: 6, border: '1px solid #0A1F44', background: '#fff', color: '#0A1F44', cursor: 'pointer', marginTop: 8 }}
         >
-          {loadingMore ? 'লোড হচ্ছে… / Loading…' : 'আরও দেখুন / Load more'}
+          {loadingMore ? t({ bn: 'লোড হচ্ছে…', en: 'Loading…' }) : t({ bn: 'আরও দেখুন', en: 'Load more' })}
         </button>
       ) : null}
     </PageShell>

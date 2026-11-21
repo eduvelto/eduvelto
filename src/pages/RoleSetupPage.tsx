@@ -16,6 +16,7 @@ import { strings } from '../i18n/strings';
 import { releaseProfileCreationHold, useAuth } from '../lib/auth';
 import { ensureUserProfile } from '../lib/profile';
 import type { EducationType, ProfileEdit } from '../lib/profile';
+import { T, useLanguage } from '../i18n/LanguageContext';
 
 const inputStyle: React.CSSProperties = {
   display: 'block',
@@ -51,6 +52,7 @@ type RoleChoice = 'student' | 'teacher' | 'parent';
 export default function RoleSetupPage() {
   const { user, profile, loading } = useAuth();
   const navigate = useNavigate();
+  const { t } = useLanguage();
   const d = strings.dashboard;
   const [role, setRole] = useState<RoleChoice>('student');
   const [educationType, setEducationType] = useState<EducationType>('general');
@@ -71,7 +73,7 @@ export default function RoleSetupPage() {
   if (loading) {
     return (
       <PageShell titleBn={d.rolePickerTitle.bn} titleEn={d.rolePickerTitle.en}>
-        <p>{strings.common.loading.bn}</p>
+        <p>{t(strings.common.loading)}</p>
       </PageShell>
     );
   }
@@ -79,9 +81,9 @@ export default function RoleSetupPage() {
   if (!user) {
     return (
       <PageShell titleBn={d.rolePickerTitle.bn} titleEn={d.rolePickerTitle.en}>
-        <p>{strings.profile.notSignedIn.bn}</p>
+        <p>{t(strings.profile.notSignedIn)}</p>
         <p>
-          <Link to="/login">{strings.auth.loginTitle.bn}</Link>
+          <Link to="/login">{t(strings.auth.loginTitle)}</Link>
         </p>
       </PageShell>
     );
@@ -90,9 +92,9 @@ export default function RoleSetupPage() {
   if (profile) {
     return (
       <PageShell titleBn={d.rolePickerTitle.bn} titleEn={d.rolePickerTitle.en}>
-        <p>আপনার প্রোফাইল ইতিমধ্যে তৈরি আছে।</p>
+        <p>{t({ bn: 'আপনার প্রোফাইল ইতিমধ্যে তৈরি আছে।', en: 'Your profile already exists.' })}</p>
         <p>
-          <Link to="/dashboard">ড্যাশবোর্ডে যান →</Link>
+          <Link to="/dashboard">{t({ bn: 'ড্যাশবোর্ডে যান →', en: 'Go to your dashboard →' })}</Link>
         </p>
       </PageShell>
     );
@@ -103,11 +105,11 @@ export default function RoleSetupPage() {
     if (!db || !user) return;
     setError(null);
     if (role === 'parent' && phone.trim().length < 11) {
-      setError('অভিভাবকের ফোন নম্বর আবশ্যক (কমপক্ষে ১১ সংখ্যা)। / A guardian phone number is required (at least 11 digits).');
+      setError(t({ bn: 'অভিভাবকের ফোন নম্বর আবশ্যক (কমপক্ষে ১১ সংখ্যা)।', en: 'A guardian phone number is required (at least 11 digits).' }));
       return;
     }
     if (role === 'teacher' && (!subjects.trim() || !qualifications.trim())) {
-      setError('শিক্ষকের কমপক্ষে একটি বিষয় ও একটি যোগ্যতা লাগবে। / A teacher needs at least one subject and one qualification.');
+      setError(t({ bn: 'শিক্ষকের কমপক্ষে একটি বিষয় ও একটি যোগ্যতা লাগবে।', en: 'A teacher needs at least one subject and one qualification.' }));
       return;
     }
     const fields: ProfileEdit = {
@@ -132,7 +134,7 @@ export default function RoleSetupPage() {
       releaseProfileCreationHold();
       navigate('/dashboard');
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'প্রোফাইল তৈরি করা যায়নি। / Could not create the profile.');
+      setError(err instanceof Error ? err.message : t({ bn: 'প্রোফাইল তৈরি করা যায়নি।', en: 'Could not create the profile.' }));
     } finally {
       setBusy(false);
     }
@@ -141,16 +143,19 @@ export default function RoleSetupPage() {
   return (
     <PageShell titleBn={d.rolePickerTitle.bn} titleEn={d.rolePickerTitle.en}>
       <p style={{ color: '#555' }}>
-        একটি ভূমিকা বাছাই করুন — পরে এটি নিজে বদলানো যায় না। / Choose one role — you cannot change it yourself later.
+        {t({
+          bn: 'একটি ভূমিকা বাছাই করুন — পরে এটি নিজে বদলানো যায় না।',
+          en: 'Choose one role — you cannot change it yourself later.',
+        })}
       </p>
       <form onSubmit={onSubmit}>
         <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', marginBottom: 16 }}>
           {(
             [
-              ['student', d.roleStudent.bn],
-              ['teacher', d.roleTeacher.bn],
-              ['parent', d.roleGuardian.bn],
-            ] as [RoleChoice, string][]
+              ['student', d.roleStudent],
+              ['teacher', d.roleTeacher],
+              ['parent', d.roleGuardian],
+            ] as [RoleChoice, { bn: string; en: string }][]
           ).map(([value, label]) => (
             <button
               key={value}
@@ -163,12 +168,12 @@ export default function RoleSetupPage() {
                 border: '1px solid #0A1F44',
               }}
             >
-              {label}
+              {t(label)}
             </button>
           ))}
         </div>
         <label>
-          {strings.profile.educationType.bn} / {strings.profile.educationType.en}
+          <T bn={strings.profile.educationType.bn} en={strings.profile.educationType.en} />
           <select
             style={inputStyle}
             value={educationType}
@@ -176,69 +181,69 @@ export default function RoleSetupPage() {
           >
             {EDUCATION_TYPES.map((t) => (
               <option key={t.value} value={t.value}>
-                {t.bn} / {t.en}
+                <T bn={t.bn} en={t.en} />
               </option>
             ))}
           </select>
         </label>
         <label>
-          {strings.profile.board.bn} / {strings.profile.board.en}
-          <input style={inputStyle} type="text" value={board} onChange={(e) => setBoard(e.target.value)} placeholder="যেমন: National University" />
+          <T bn={strings.profile.board.bn} en={strings.profile.board.en} />
+          <input style={inputStyle} type="text" value={board} onChange={(e) => setBoard(e.target.value)} placeholder={t({ bn: 'যেমন: National University', en: 'e.g.: National University' })} />
         </label>
         <label>
-          {strings.profile.institution.bn} / {strings.profile.institution.en}
+          <T bn={strings.profile.institution.bn} en={strings.profile.institution.en} />
           <input style={inputStyle} type="text" value={institution} onChange={(e) => setInstitution(e.target.value)} />
         </label>
         <label>
-          {d.academicSession.bn} / {d.academicSession.en}
-          <input style={inputStyle} type="text" value={academicSession} onChange={(e) => setAcademicSession(e.target.value)} placeholder="যেমন: 2025-26" />
+          <T bn={d.academicSession.bn} en={d.academicSession.en} />
+          <input style={inputStyle} type="text" value={academicSession} onChange={(e) => setAcademicSession(e.target.value)} placeholder={t({ bn: 'যেমন: 2025-26', en: 'e.g.: 2025-26' })} />
         </label>
         <label>
-          {d.curriculum.bn} / {d.curriculum.en}
-          <input style={inputStyle} type="text" value={curriculum} onChange={(e) => setCurriculum(e.target.value)} placeholder="যেমন: NCTB 2023, NU 2013-14" />
+          <T bn={d.curriculum.bn} en={d.curriculum.en} />
+          <input style={inputStyle} type="text" value={curriculum} onChange={(e) => setCurriculum(e.target.value)} placeholder={t({ bn: 'যেমন: NCTB 2023, NU 2013-14', en: 'e.g.: NCTB 2023, NU 2013-14' })} />
         </label>
         <label>
-          {strings.profile.classLevel.bn} / {strings.profile.classLevel.en}
-          <input style={inputStyle} type="text" value={classLevel} onChange={(e) => setClassLevel(e.target.value)} placeholder="যেমন: Class 5, SSC, 3rd Year" />
+          <T bn={strings.profile.classLevel.bn} en={strings.profile.classLevel.en} />
+          <input style={inputStyle} type="text" value={classLevel} onChange={(e) => setClassLevel(e.target.value)} placeholder={t({ bn: 'যেমন: Class 5, SSC, 3rd Year', en: 'e.g.: Class 5, SSC, 3rd Year' })} />
         </label>
         <label>
-          {strings.profile.department.bn} / {strings.profile.department.en}
-          <input style={inputStyle} type="text" value={department} onChange={(e) => setDepartment(e.target.value)} placeholder="যেমন: Science, English" />
+          <T bn={strings.profile.department.bn} en={strings.profile.department.en} />
+          <input style={inputStyle} type="text" value={department} onChange={(e) => setDepartment(e.target.value)} placeholder={t({ bn: 'যেমন: Science, English', en: 'e.g.: Science, English' })} />
         </label>
         {educationType === 'higher' ? (
           <label>
-            {d.semester.bn} / {d.semester.en}
-            <input style={inputStyle} type="text" value={semester} onChange={(e) => setSemester(e.target.value)} placeholder="যেমন: 1st Semester" />
+            <T bn={d.semester.bn} en={d.semester.en} />
+            <input style={inputStyle} type="text" value={semester} onChange={(e) => setSemester(e.target.value)} placeholder={t({ bn: 'যেমন: 1st Semester', en: 'e.g.: 1st Semester' })} />
           </label>
         ) : null}
         {role === 'parent' ? (
           <label>
-            {d.phone.bn} / {d.phone.en} *
-            <input style={inputStyle} type="tel" value={phone} onChange={(e) => setPhone(e.target.value)} placeholder="যেমন: 01XXXXXXXXX" />
+            <T bn={d.phone.bn} en={d.phone.en} /> *
+            <input style={inputStyle} type="tel" value={phone} onChange={(e) => setPhone(e.target.value)} placeholder={t({ bn: 'যেমন: 01XXXXXXXXX', en: 'e.g.: 01XXXXXXXXX' })} />
           </label>
         ) : null}
         {role === 'teacher' ? (
           <>
             <label>
-              {d.teachingLevel.bn} / {d.teachingLevel.en}
-              <input style={inputStyle} type="text" value={teachingLevel} onChange={(e) => setTeachingLevel(e.target.value)} placeholder="যেমন: Honours" />
+              <T bn={d.teachingLevel.bn} en={d.teachingLevel.en} />
+              <input style={inputStyle} type="text" value={teachingLevel} onChange={(e) => setTeachingLevel(e.target.value)} placeholder={t({ bn: 'যেমন: Honours', en: 'e.g.: Honours' })} />
             </label>
             <label>
-              {d.subjects.bn} / {d.subjects.en} * (কমা দিয়ে আলাদা করুন / comma-separated)
-              <input style={inputStyle} type="text" value={subjects} onChange={(e) => setSubjects(e.target.value)} placeholder="যেমন: English, Mathematics" />
+              <T bn={d.subjects.bn} en={d.subjects.en} /> * <T bn="(কমা দিয়ে আলাদা করুন)" en="(comma-separated)" />
+              <input style={inputStyle} type="text" value={subjects} onChange={(e) => setSubjects(e.target.value)} placeholder={t({ bn: 'যেমন: English, Mathematics', en: 'e.g.: English, Mathematics' })} />
             </label>
             <label>
-              {d.qualifications.bn} / {d.qualifications.en} *
-              <input style={inputStyle} type="text" value={qualifications} onChange={(e) => setQualifications(e.target.value)} placeholder="যেমন: M.A. in English" />
+              <T bn={d.qualifications.bn} en={d.qualifications.en} /> *
+              <input style={inputStyle} type="text" value={qualifications} onChange={(e) => setQualifications(e.target.value)} placeholder={t({ bn: 'যেমন: M.A. in English', en: 'e.g.: M.A. in English' })} />
             </label>
             <p style={{ color: '#555' }}>
-              {strings.auth.teacherRegisterNote.bn} {strings.auth.teacherRegisterNote.en}
+              <T bn={strings.auth.teacherRegisterNote.bn} en={strings.auth.teacherRegisterNote.en} />
             </p>
           </>
         ) : null}
         {error ? <p style={{ color: '#b00020' }}>{error}</p> : null}
         <button style={buttonStyle} type="submit" disabled={busy}>
-          {busy ? strings.common.loading.bn : `${strings.common.save.bn} / ${strings.common.save.en}`}
+          {busy ? <T bn={strings.common.loading.bn} en={strings.common.loading.en} /> : <T bn={strings.common.save.bn} en={strings.common.save.en} />}
         </button>
       </form>
     </PageShell>

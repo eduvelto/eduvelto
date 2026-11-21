@@ -12,6 +12,7 @@ import { Link } from 'react-router-dom';
 import { PageShell } from '../components/PageShell';
 import { AlertBox, Card, Chip, LinkButton, ProgressBar, Reveal, SkeletonCards, StatCard } from '../components/ui';
 import { useAuth } from '../lib/auth';
+import { useLanguage } from '../i18n/LanguageContext';
 import { listBookmarks, type Bookmark } from '../lib/bookmarks';
 import {
   listQuizSummaries,
@@ -23,6 +24,7 @@ import {
 
 export default function ProgressPage() {
   const { user, loading } = useAuth();
+  const { lang, t } = useLanguage();
   const [progress, setProgress] = useState<SubjectProgress[] | null>(null);
   const [bookmarks, setBookmarks] = useState<Bookmark[] | null>(null);
   const [summaries, setSummaries] = useState<QuizSummary[] | null>(null);
@@ -76,17 +78,20 @@ export default function ProgressPage() {
       {!loading && !user ? (
         <Card>
           <p style={{ margin: '0 0 14px' }}>
-            আপনার অগ্রগতি দেখতে <Link to="/login" style={{ fontWeight: 600 }}>লগইন করুন</Link>। /{' '}
-            <Link to="/login" style={{ fontWeight: 600 }}>Log in</Link> to see your progress.
+            {lang === 'bn' ? (
+              <>আপনার অগ্রগতি দেখতে <Link to="/login" style={{ fontWeight: 600 }}>লগইন করুন</Link>।</>
+            ) : (
+              <><Link to="/login" style={{ fontWeight: 600 }}>Log in</Link> to see your progress.</>
+            )}
           </p>
           <LinkButton to="/login" variant="accent">
-            লগইন করুন / Log in
+            {t({ bn: 'লগইন করুন', en: 'Log in' })}
           </LinkButton>
         </Card>
       ) : null}
       {error ? (
         <AlertBox tone="error">
-          অগ্রগতি লোড করা যায়নি — আবার চেষ্টা করুন। / Could not load progress — please try again.
+          {t({ bn: 'অগ্রগতি লোড করা যায়নি — আবার চেষ্টা করুন।', en: 'Could not load progress — please try again.' })}
         </AlertBox>
       ) : null}
       {user && progress !== null ? (
@@ -105,40 +110,39 @@ export default function ProgressPage() {
             <StatCard value={String(bookmarks?.length ?? 0)} numeric={bookmarks?.length ?? 0} labelBn="বুকমার্ক" labelEn="Bookmarks" />
           </div>
           <p style={{ color: '#5A6478', fontSize: 14 }}>
-            এই সংখ্যাগুলো আপনার নিজের অনুশীলনের ভিত্তিতে — পাঠ পড়া ও নিজে যাচাই করা প্রশ্ন।
-            / These numbers come from your own practice — lessons read and self-checked questions.
+            {t({ bn: 'এই সংখ্যাগুলো আপনার নিজের অনুশীলনের ভিত্তিতে — পাঠ পড়া ও নিজে যাচাই করা প্রশ্ন।', en: 'These numbers come from your own practice — lessons read and self-checked questions.' })}
           </p>
 
           {/* Continue learning — quick actions to the real Library / Exam / Routine. */}
           <Reveal>
-            <h2 style={{ fontFamily: "'Poppins','Hind Siliguri',system-ui,sans-serif", fontSize: 20, color: '#0A1F44', margin: '24px 0 12px' }}>শেখা চালিয়ে যান / Continue learning</h2>
+            <h2 style={{ fontFamily: "'Poppins','Hind Siliguri',system-ui,sans-serif", fontSize: 20, color: '#0A1F44', margin: '24px 0 12px' }}>{t({ bn: 'শেখা চালিয়ে যান', en: 'Continue learning' })}</h2>
           </Reveal>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: 12, marginBottom: 8 }}>
             <Reveal delayMs={0}>
               <Card hover>
-                <Link to="/library" style={{ fontWeight: 700, color: '#0A1F44' }}>লাইব্রেরি / Library</Link>
-                <p style={{ margin: '6px 0 0', color: '#5A6478', fontSize: 14 }}>নতুন পাঠ পড়ুন ও প্রশ্নের অনুশীলন করুন।</p>
+                <Link to="/library" style={{ fontWeight: 700, color: '#0A1F44' }}>{t({ bn: 'লাইব্রেরি', en: 'Library' })}</Link>
+                <p style={{ margin: '6px 0 0', color: '#5A6478', fontSize: 14 }}>{t({ bn: 'নতুন পাঠ পড়ুন ও প্রশ্নের অনুশীলন করুন।', en: 'Read new lessons and practise questions.' })}</p>
               </Card>
             </Reveal>
             <Reveal delayMs={80}>
               <Card hover>
-                <Link to="/exam" style={{ fontWeight: 700, color: '#0A1F44' }}>পরীক্ষা / Exams</Link>
-                <p style={{ margin: '6px 0 0', color: '#5A6478', fontSize: 14 }}>কুইজ দিন — ফলাফল এখানে যোগ হবে।</p>
+                <Link to="/exam" style={{ fontWeight: 700, color: '#0A1F44' }}>{t({ bn: 'পরীক্ষা', en: 'Exams' })}</Link>
+                <p style={{ margin: '6px 0 0', color: '#5A6478', fontSize: 14 }}>{t({ bn: 'কুইজ দিন — ফলাফল এখানে যোগ হবে।', en: 'Take quizzes — results will appear here.' })}</p>
               </Card>
             </Reveal>
             <Reveal delayMs={160}>
               <Card hover>
-                <Link to="/routine" style={{ fontWeight: 700, color: '#0A1F44' }}>রুটিন / Routine</Link>
-                <p style={{ margin: '6px 0 0', color: '#5A6478', fontSize: 14 }}>পড়ার পরিকল্পনা — শীঘ্রই আসছে।</p>
+                <Link to="/routine" style={{ fontWeight: 700, color: '#0A1F44' }}>{t({ bn: 'রুটিন', en: 'Routine' })}</Link>
+                <p style={{ margin: '6px 0 0', color: '#5A6478', fontSize: 14 }}>{t({ bn: 'পড়ার পরিকল্পনা — শীঘ্রই আসছে।', en: 'Study plan — coming soon.' })}</p>
               </Card>
             </Reveal>
           </div>
 
           <Reveal>
-            <h2 style={{ fontFamily: "'Poppins','Hind Siliguri',system-ui,sans-serif", fontSize: 20, color: '#0A1F44', margin: '24px 0 12px' }}>বিষয় অনুযায়ী / By subject</h2>
+            <h2 style={{ fontFamily: "'Poppins','Hind Siliguri',system-ui,sans-serif", fontSize: 20, color: '#0A1F44', margin: '24px 0 12px' }}>{t({ bn: 'বিষয় অনুযায়ী', en: 'By subject' })}</h2>
           </Reveal>
           {progress.length === 0 ? (
-            <p>এখনো কোনো পাঠ শেষ করেননি — লাইব্রেরি থেকে একটি পাঠ পড়ে &quot;পড়া শেষ করেছি&quot; চাপুন। / You have not finished a lesson yet — read one from the library and press “Mark lesson complete”.</p>
+            <p>{t({ bn: 'এখনো কোনো পাঠ শেষ করেননি — লাইব্রেরি থেকে একটি পাঠ পড়ে “পড়া শেষ করেছি” চাপুন।', en: 'You have not finished a lesson yet — read one from the library and press “Mark lesson complete”.' })}</p>
           ) : (
             <div style={{ display: 'grid', gap: 12 }}>
               {progress.map((p, i) => {
@@ -149,13 +153,13 @@ export default function ProgressPage() {
                       <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, alignItems: 'center', justifyContent: 'space-between' }}>
                         <strong style={{ fontSize: 16, color: '#0A1F44' }}>{p.subject}</strong>
                         <Chip tone={pct >= 60 ? 'blue' : 'gold'}>
-                          {p.questionsAttempted > 0 ? `${pct}% সঠিক` : 'এখনো প্রশ্ন করা হয়নি'}
+                          {p.questionsAttempted > 0 ? t({ bn: `${pct}% সঠিক`, en: `${pct}% correct` }) : t({ bn: 'এখনো প্রশ্ন করা হয়নি', en: 'No questions attempted yet' })}
                         </Chip>
                       </div>
                       <p style={{ margin: '8px 0', color: '#5A6478', fontSize: 14 }}>
-                        {p.lessonsRead.length}টি পাঠ · {p.questionsAttempted}টি প্রশ্ন চেষ্টা · {p.questionsCorrect}টি সঠিক
+                        {t({ bn: `${p.lessonsRead.length}টি পাঠ · ${p.questionsAttempted}টি প্রশ্ন চেষ্টা · ${p.questionsCorrect}টি সঠিক`, en: `${p.lessonsRead.length} lessons · ${p.questionsAttempted} questions attempted · ${p.questionsCorrect} correct` })}
                       </p>
-                      {p.questionsAttempted > 0 ? <ProgressBar value={pct} label={`${p.subject}: ${pct}% correct`} /> : null}
+                      {p.questionsAttempted > 0 ? <ProgressBar value={pct} label={t({ bn: `${p.subject}: ${pct}% সঠিক`, en: `${p.subject}: ${pct}% correct` })} /> : null}
                     </Card>
                   </Reveal>
                 );
@@ -165,10 +169,9 @@ export default function ProgressPage() {
 
           {summaries !== null && summaries.length > 0 ? (
             <>
-              <h2 style={{ fontFamily: "'Poppins','Hind Siliguri',system-ui,sans-serif", fontSize: 20, color: '#0A1F44', margin: '24px 0 12px' }}>কুইজের ফলাফল / Quiz results</h2>
+              <h2 style={{ fontFamily: "'Poppins','Hind Siliguri',system-ui,sans-serif", fontSize: 20, color: '#0A1F44', margin: '24px 0 12px' }}>{t({ bn: 'কুইজের ফলাফল', en: 'Quiz results' })}</h2>
               <p style={{ color: '#5A6478', fontSize: 14, margin: '0 0 12px' }}>
-                দুর্বল/শক্ত জায়গা আপনার নিজের কুইজ চেষ্টার ভিত্তিতে (৬০%-এর নিচে দুর্বল)। /
-                Weak/strong areas are based on your own quiz attempts (below 60% is weak).
+                {t({ bn: 'দুর্বল/শক্ত জায়গা আপনার নিজের কুইজ চেষ্টার ভিত্তিতে (৬০%-এর নিচে দুর্বল)।', en: 'Weak/strong areas are based on your own quiz attempts (below 60% is weak).' })}
               </p>
               <div style={{ display: 'grid', gap: 12 }}>
                 {summaries.map((s, i) => (
@@ -178,15 +181,15 @@ export default function ProgressPage() {
                         <strong style={{ fontSize: 16, color: '#0A1F44' }}>
                           {s.subject} {s.month ? `· ${s.month}` : ''}
                         </strong>
-                        <Chip tone="gold">গড় {s.averagePercentage}% · সেরা {s.bestPercentage}%</Chip>
+                        <Chip tone="gold">{t({ bn: `গড় ${s.averagePercentage}% · সেরা ${s.bestPercentage}%`, en: `Average ${s.averagePercentage}% · Best ${s.bestPercentage}%` })}</Chip>
                       </div>
-                      <p style={{ margin: '8px 0 10px', color: '#5A6478', fontSize: 14 }}>{s.attemptsCount}টি চেষ্টা</p>
-                      <ProgressBar value={s.averagePercentage} label={`${s.subject} average ${s.averagePercentage}%`} />
+                      <p style={{ margin: '8px 0 10px', color: '#5A6478', fontSize: 14 }}>{t({ bn: `${s.attemptsCount}টি চেষ্টা`, en: `${s.attemptsCount} attempts` })}</p>
+                      <ProgressBar value={s.averagePercentage} label={t({ bn: `${s.subject} গড় ${s.averagePercentage}%`, en: `${s.subject} average ${s.averagePercentage}%` })} />
                       {s.weakChapters.length > 0 ? (
-                        <p style={{ margin: '10px 0 0', fontSize: 14 }}>দুর্বল জায়গা / Weak: {s.weakChapters.join(', ')}</p>
+                        <p style={{ margin: '10px 0 0', fontSize: 14 }}>{t({ bn: 'দুর্বল জায়গা:', en: 'Weak areas:' })} {s.weakChapters.join(', ')}</p>
                       ) : null}
                       {s.strongChapters.length > 0 ? (
-                        <p style={{ margin: '6px 0 0', fontSize: 14 }}>শক্ত জায়গা / Strong: {s.strongChapters.join(', ')}</p>
+                        <p style={{ margin: '6px 0 0', fontSize: 14 }}>{t({ bn: 'শক্ত জায়গা:', en: 'Strong areas:' })} {s.strongChapters.join(', ')}</p>
                       ) : null}
                     </Card>
                   </Reveal>
@@ -195,10 +198,10 @@ export default function ProgressPage() {
             </>
           ) : null}
 
-          <h2 style={{ fontFamily: "'Poppins','Hind Siliguri',system-ui,sans-serif", fontSize: 20, color: '#0A1F44', margin: '24px 0 12px' }}>বুকমার্ক / Bookmarks ({bookmarks?.length ?? 0})</h2>
+          <h2 style={{ fontFamily: "'Poppins','Hind Siliguri',system-ui,sans-serif", fontSize: 20, color: '#0A1F44', margin: '24px 0 12px' }}>{t({ bn: `বুকমার্ক (${bookmarks?.length ?? 0})`, en: `Bookmarks (${bookmarks?.length ?? 0})` })}</h2>
           {bookmarks === null ? <SkeletonCards count={2} /> : null}
           {bookmarks !== null && bookmarks.length === 0 ? (
-            <p>এখনো কোনো বুকমার্ক নেই — পাঠের পাতায় ☆ বোতাম চাপুন। / No bookmarks yet — press the ☆ button on a lesson page.</p>
+            <p>{t({ bn: 'এখনো কোনো বুকমার্ক নেই — পাঠের পাতায় ☆ বোতাম চাপুন।', en: 'No bookmarks yet — press the ☆ button on a lesson page.' })}</p>
           ) : (
             <div style={{ display: 'grid', gap: 10 }}>
               {(bookmarks ?? []).map((b) => (

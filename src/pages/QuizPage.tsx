@@ -12,6 +12,7 @@ import { Link, useNavigate, useParams } from 'react-router-dom';
 import { PageShell, EmptyState } from '../components/PageShell';
 import { AlertBox, Button, Card, ProgressBar, Skeleton } from '../components/ui';
 import { useAuth } from '../lib/auth';
+import { useLanguage } from '../i18n/LanguageContext';
 import {
   getPublishedQuiz,
   submitMcqAttempt,
@@ -32,6 +33,7 @@ function formatTime(totalSeconds: number): string {
 export default function QuizPage() {
   const { quizId } = useParams<{ quizId: string }>();
   const { user } = useAuth();
+  const { lang, t } = useLanguage();
   const navigate = useNavigate();
   const [quiz, setQuiz] = useState<Quiz | null>(null);
   const [notFound, setNotFound] = useState(false);
@@ -74,7 +76,7 @@ export default function QuizPage() {
     } catch (e) {
       setSubmitting(false);
       setConfirming(false);
-      setError(`জমা দেওয়া যায়নি — আবার চেষ্টা করুন। / Could not submit — please try again. (${e instanceof Error ? e.message : 'unknown'})`);
+      setError(t({ bn: `জমা দেওয়া যায়নি — আবার চেষ্টা করুন। (${e instanceof Error ? e.message : 'unknown'})`, en: `Could not submit — please try again. (${e instanceof Error ? e.message : 'unknown'})` }));
     }
   };
   submitRef.current = doSubmit;
@@ -108,8 +110,11 @@ export default function QuizPage() {
     return (
       <PageShell titleBn={quiz.title} titleEn="Quiz">
         <p>
-          পরীক্ষা দিতে প্রথমে <Link to="/login">লগইন করুন</Link>। / Please{' '}
-          <Link to="/login">sign in</Link> to take this exam.
+          {lang === 'bn' ? (
+            <>পরীক্ষা দিতে প্রথমে <Link to="/login">লগইন করুন</Link>।</>
+          ) : (
+            <>Please <Link to="/login">sign in</Link> to take this exam.</>
+          )}
         </p>
       </PageShell>
     );
@@ -126,18 +131,18 @@ export default function QuizPage() {
       <Card style={{ marginBottom: 20 }}>
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, alignItems: 'center', justifyContent: 'space-between' }}>
           <p style={{ color: '#5A6478', margin: 0 }}>
-            {quiz.questionCount}টি প্রশ্ন · {quiz.totalMarks} নম্বর · সময় {quiz.timeLimitMinutes} মিনিট
+            {t({ bn: `${quiz.questionCount}টি প্রশ্ন · ${quiz.totalMarks} নম্বর · সময় ${quiz.timeLimitMinutes} মিনিট`, en: `${quiz.questionCount} questions · ${quiz.totalMarks} marks · ${quiz.timeLimitMinutes} minutes` })}
           </p>
           {secondsLeft !== null ? (
             <p style={{ fontSize: 18, fontWeight: 700, color: lowTime ? '#B00020' : '#0A1F44', margin: 0 }}>
-              বাকি সময়: {formatTime(secondsLeft)} / Time left: {formatTime(secondsLeft)}
+              {t({ bn: `বাকি সময়: ${formatTime(secondsLeft)}`, en: `Time left: ${formatTime(secondsLeft)}` })}
             </p>
           ) : null}
         </div>
         <div style={{ marginTop: 12 }}>
-          <ProgressBar value={(answeredCount / quiz.questionCount) * 100} label={`Answered ${answeredCount} of ${quiz.questionCount}`} />
+          <ProgressBar value={(answeredCount / quiz.questionCount) * 100} label={t({ bn: `উত্তর দেওয়া হয়েছে ${answeredCount}/${quiz.questionCount}`, en: `Answered ${answeredCount} of ${quiz.questionCount}` })} />
           <p style={{ color: '#5A6478', margin: '6px 0 0', fontSize: 14 }}>
-            উত্তর দেওয়া হয়েছে: {answeredCount}/{quiz.questionCount} / Answered: {answeredCount}/{quiz.questionCount}
+            {t({ bn: `উত্তর দেওয়া হয়েছে: ${answeredCount}/${quiz.questionCount}`, en: `Answered: ${answeredCount}/${quiz.questionCount}` })}
           </p>
         </div>
       </Card>
@@ -148,11 +153,11 @@ export default function QuizPage() {
             {i + 1}. {q.question}
           </h2>
           <p style={{ margin: '0 0 12px', color: '#5A6478', fontSize: 14 }}>
-            {q.marks} নম্বর
+            {t({ bn: `${q.marks} নম্বর`, en: `${q.marks} marks` })}
             {q.topic ? ` · ${q.topic}` : ''}
           </p>
           {quiz.kind === 'mcq' && q.options ? (
-            <div role="radiogroup" aria-label={`প্রশ্ন ${i + 1}`}>
+            <div role="radiogroup" aria-label={t({ bn: `প্রশ্ন ${i + 1}`, en: `Question ${i + 1}` })}>
               {q.options.map((o) => (
                 <label
                   key={o.letter}
@@ -183,7 +188,7 @@ export default function QuizPage() {
               value={texts[q.n] ?? ''}
               onChange={(e) => setTexts((t) => ({ ...t, [q.n]: e.target.value }))}
               rows={5}
-              placeholder="আপনার উত্তর এখানে লিখুন… / Write your answer here…"
+              placeholder={t({ bn: 'আপনার উত্তর এখানে লিখুন…', en: 'Write your answer here…' })}
               className="ev-textarea"
             />
           )}
@@ -192,27 +197,25 @@ export default function QuizPage() {
 
       {quiz.kind === 'written' ? (
         <p style={{ color: '#5A6478' }}>
-          লিখিত উত্তর শিক্ষক মূল্যায়ন করবেন — জমা দেওয়ার পর তাৎক্ষণিক নম্বর দেখানো হবে না। / Written
-          answers are marked by a teacher — no instant score after submitting.
+          {t({ bn: 'লিখিত উত্তর শিক্ষক মূল্যায়ন করবেন — জমা দেওয়ার পর তাৎক্ষণিক নম্বর দেখানো হবে না।', en: 'Written answers are marked by a teacher — no instant score after submitting.' })}
         </p>
       ) : null}
       {error ? <AlertBox tone="error">{error}</AlertBox> : null}
       {!confirming ? (
         <Button onClick={() => setConfirming(true)} disabled={submitting} size="lg">
-          জমা দিন / Submit
+          {t({ bn: 'জমা দিন', en: 'Submit' })}
         </Button>
       ) : (
         <div className="ev-card" style={{ background: '#FDF0F0', borderColor: '#F3C1C8' }}>
           <p style={{ marginTop: 0 }}>
-            নিশ্চিত করুন — জমা দেওয়ার পর উত্তর বদলানো যাবে না। / Confirm — answers cannot be changed after
-            submitting.
+            {t({ bn: 'নিশ্চিত করুন — জমা দেওয়ার পর উত্তর বদলানো যাবে না।', en: 'Confirm — answers cannot be changed after submitting.' })}
           </p>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
             <Button variant="danger" onClick={() => void doSubmit()} loading={submitting}>
-              হ্যাঁ, জমা দিন
+              {t({ bn: 'হ্যাঁ, জমা দিন', en: 'Yes, submit' })}
             </Button>
             <Button variant="outline" onClick={() => setConfirming(false)} disabled={submitting}>
-              ফিরে যান
+              {t({ bn: 'ফিরে যান', en: 'Go back' })}
             </Button>
           </div>
         </div>

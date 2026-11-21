@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react';
 import { PageShell } from './PageShell';
 import { useAuth } from '../lib/auth';
+import { useLanguage } from '../i18n/LanguageContext';
 
 // Route guard for /admin/* — OWNER ONLY (review 20 Nov 2026,
 // security B2 + child safety F21 + UX B2 + a11y B1).
@@ -14,11 +15,12 @@ import { useAuth } from '../lib/auth';
 // then the only role that may open the dashboard is 'owner'.
 export function AdminGuard(props: { children: ReactNode }) {
   const { user, profile, loading } = useAuth();
+  const { t } = useLanguage();
   if (loading) {
     return (
       <PageShell titleBn="অ্যাডমিন ড্যাশবোর্ড" titleEn="Admin dashboard">
         <p aria-live="polite" style={{ color: '#57616A' }}>
-          লোড হচ্ছে… / Loading…
+          {t({ bn: 'লোড হচ্ছে…', en: 'Loading…' })}
         </p>
       </PageShell>
     );
@@ -26,10 +28,7 @@ export function AdminGuard(props: { children: ReactNode }) {
   if (!user || profile?.role !== 'owner') {
     return (
       <PageShell titleBn="অনুমতি নেই" titleEn="Access denied">
-        <p>আপনার এই পাতায় যাওয়ার অনুমতি নেই। এই ড্যাশবোর্ড শুধু মালিকের জন্য।</p>
-        <p style={{ color: '#57616A' }}>
-          You do not have permission to view this page. This dashboard is for the owner only.
-        </p>
+        <p>{t({ bn: 'আপনার এই পাতায় যাওয়ার অনুমতি নেই। এই ড্যাশবোর্ড শুধু মালিকের জন্য।', en: 'You do not have permission to view this page. This dashboard is for the owner only.' })}</p>
       </PageShell>
     );
   }

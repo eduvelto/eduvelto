@@ -24,6 +24,7 @@ import { bookTitleOf, type Quiz, type QuizAttempt } from '../lib/exams';
 import type { QuizSummary, SubjectProgress } from '../lib/progress';
 import type { UserProfile } from '../lib/profile';
 import type { ClassLevelDef } from '../lib/classLevels';
+import { useLanguage } from '../i18n/LanguageContext';
 
 export interface ClassTabData {
   def: ClassLevelDef;
@@ -56,19 +57,20 @@ function attemptDate(a: QuizAttempt): Date | null {
   return null;
 }
 
-function SignInPrompt({ what }: { what: string }) {
+function SignInPrompt({ what }: { what: { bn: string; en: string } }) {
+  const { t } = useLanguage();
   return (
     <Card>
-      <div style={{ fontWeight: 700, color: '#142B3B', marginBottom: 6 }}>লগইন করুন / Log in</div>
+      <div style={{ fontWeight: 700, color: '#142B3B', marginBottom: 6 }}>{t({ bn: 'লগইন করুন', en: 'Log in' })}</div>
       <p style={{ margin: '0 0 12px', color: '#68747B', fontSize: 14 }}>
-        {what} দেখতে লগইন করুন — আপনার তথ্য শুধু আপনিই দেখতে পাবেন।
+        {t({ bn: `${t(what)} দেখতে লগইন করুন — আপনার তথ্য শুধু আপনিই দেখতে পাবেন।`, en: `Log in to see ${t(what)} — only you can see your information.` })}
       </p>
       <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
         <LinkButton to="/login" variant="primary">
-          লগইন / Log in
+          {t({ bn: 'লগইন', en: 'Log in' })}
         </LinkButton>
         <LinkButton to="/register" variant="outline">
-          ফ্রি রেজিস্টার / Register free
+          {t({ bn: 'ফ্রি রেজিস্টার', en: 'Register free' })}
         </LinkButton>
       </div>
     </Card>
@@ -76,6 +78,7 @@ function SignInPrompt({ what }: { what: string }) {
 }
 
 function BookCard({ book }: { book: Book }) {
+  const { t } = useLanguage();
   return (
     <Card hover>
       <Link to={`/library/${book.id}`} style={{ fontWeight: 700, fontSize: 16, color: '#142B3B', lineHeight: 1.5 }}>
@@ -84,10 +87,10 @@ function BookCard({ book }: { book: Book }) {
       <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, marginTop: 10 }}>
         <Chip>{book.department}</Chip>
         <Chip tone="outline">{book.classLevel}</Chip>
-        <Chip tone="gold">{book.questionCount}টি প্রশ্ন</Chip>
+        <Chip tone="gold">{t({ bn: `${book.questionCount}টি প্রশ্ন`, en: `${book.questionCount} questions` })}</Chip>
       </div>
       <p style={{ margin: '10px 0 0', color: '#68747B', fontSize: 14 }}>
-        {book.chapterCount}টি পাঠ · {book.paperCode ? `কোড ${book.paperCode}` : 'কোড নেই'}
+        {t({ bn: `${book.chapterCount}টি পাঠ · ${book.paperCode ? `কোড ${book.paperCode}` : 'কোড নেই'}`, en: `${book.chapterCount} lessons · ${book.paperCode ? `Code ${book.paperCode}` : 'No code'}` })}
       </p>
     </Card>
   );
@@ -96,6 +99,7 @@ function BookCard({ book }: { book: Book }) {
 const BOOKS_PAGE_SIZE = 20;
 
 export function BooksTab({ data }: { data: ClassTabData }) {
+  const { t } = useLanguage();
   const [page, setPage] = useState(1);
   const pageCount = Math.max(1, Math.ceil(data.books.length / BOOKS_PAGE_SIZE));
   const safePage = Math.min(page, pageCount);
@@ -106,7 +110,7 @@ export function BooksTab({ data }: { data: ClassTabData }) {
   return (
     <>
       <p style={{ color: '#57616A', margin: '0 0 12px' }}>
-        {data.books.length}টি বই / {data.books.length} books · এই শ্রেণির শুধুমাত্র
+        {t({ bn: `${data.books.length}টি বই · এই শ্রেণির শুধুমাত্র`, en: `${data.books.length} books · this class only` })}
       </p>
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: 12 }}>
         {pageBooks.map((b, i) => (
@@ -119,13 +123,13 @@ export function BooksTab({ data }: { data: ClassTabData }) {
       {pageCount > 1 ? (
         <div style={{ display: 'flex', gap: 12, alignItems: 'center', marginTop: 20, flexWrap: 'wrap' }}>
           <Button variant="outline" onClick={() => setPage((p) => Math.max(1, p - 1))} disabled={safePage <= 1}>
-            ← আগের / Previous
+            {t({ bn: '← আগের', en: '← Previous' })}
           </Button>
           <span>
-            পাতা {safePage} / {pageCount}
+            {t({ bn: `পাতা ${safePage} / ${pageCount}`, en: `Page ${safePage} of ${pageCount}` })}
           </span>
           <Button variant="outline" onClick={() => setPage((p) => Math.min(pageCount, p + 1))} disabled={safePage >= pageCount}>
-            পরের / Next →
+            {t({ bn: 'পরের →', en: 'Next →' })}
           </Button>
         </div>
       ) : null}
@@ -134,6 +138,7 @@ export function BooksTab({ data }: { data: ClassTabData }) {
 }
 
 export function SubjectsTab({ data }: { data: ClassTabData }) {
+  const { t } = useLanguage();
   if (data.subjects.length === 0) {
     return <ComingSoonCompact def={data.def} whatBn="বিষয়" whatEn="Subjects" />;
   }
@@ -152,11 +157,11 @@ export function SubjectsTab({ data }: { data: ClassTabData }) {
               {s}
             </Link>
             <p style={{ margin: '8px 0 0', color: '#68747B', fontSize: 14 }}>
-              {books.length}টি বই · {chapters}টি পাঠ · {questions}টি প্রশ্ন
+              {t({ bn: `${books.length}টি বই · ${chapters}টি পাঠ · ${questions}টি প্রশ্ন`, en: `${books.length} books · ${chapters} lessons · ${questions} questions` })}
             </p>
             <p style={{ margin: '10px 0 0' }}>
               <Link to={`/class/${data.def.slug}/subjects/${encodeURIComponent(s)}`} style={{ fontWeight: 600 }}>
-                বিষয়টি দেখুন →
+                {t({ bn: 'বিষয়টি দেখুন →', en: 'See this subject →' })}
               </Link>
             </p>
           </Card>
@@ -167,14 +172,14 @@ export function SubjectsTab({ data }: { data: ClassTabData }) {
 }
 
 export function PracticeTab({ data }: { data: ClassTabData }) {
+  const { t } = useLanguage();
   if (data.books.length === 0) {
     return <ComingSoonCompact def={data.def} whatBn="অনুশীলন প্রশ্ন" whatEn="Practice questions" />;
   }
   return (
     <>
       <p style={{ color: '#57616A', margin: '0 0 12px' }}>
-        মোট {data.totalQuestions}টি অনুশীলন প্রশ্ন / {data.totalQuestions} practice questions · প্রতিটি
-        বইয়ের ভেতরে অধ্যায়ভিত্তিক পাঠ ও প্রশ্ন আছে।
+        {t({ bn: `মোট ${data.totalQuestions}টি অনুশীলন প্রশ্ন · প্রতিটি বইয়ের ভেতরে অধ্যায়ভিত্তিক পাঠ ও প্রশ্ন আছে।`, en: `${data.totalQuestions} practice questions in total · each book has chapter-wise lessons and questions.` })}
       </p>
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: 12 }}>
         {data.books.slice(0, 20).map((b) => (
@@ -183,11 +188,11 @@ export function PracticeTab({ data }: { data: ClassTabData }) {
               {b.title}
             </Link>
             <p style={{ margin: '8px 0 0', color: '#68747B', fontSize: 14 }}>
-              {b.questionCount}টি প্রশ্ন · {b.chapterCount}টি পাঠ
+              {t({ bn: `${b.questionCount}টি প্রশ্ন · ${b.chapterCount}টি পাঠ`, en: `${b.questionCount} questions · ${b.chapterCount} lessons` })}
             </p>
             <p style={{ margin: '10px 0 0' }}>
               <Link to={`/library/${b.id}`} style={{ fontWeight: 600 }}>
-                পাঠ ও প্রশ্ন দেখুন →
+                {t({ bn: 'পাঠ ও প্রশ্ন দেখুন →', en: 'See lessons and questions →' })}
               </Link>
             </p>
           </Card>
@@ -196,7 +201,7 @@ export function PracticeTab({ data }: { data: ClassTabData }) {
       {data.books.length > 20 ? (
         <p style={{ marginTop: 16 }}>
           <Link to={`/class/${data.def.slug}/books`} style={{ fontWeight: 600 }}>
-            সব {data.books.length}টি বই দেখুন →
+            {t({ bn: `সব ${data.books.length}টি বই দেখুন →`, en: `See all ${data.books.length} books →` })}
           </Link>
         </p>
       ) : null}
@@ -205,6 +210,7 @@ export function PracticeTab({ data }: { data: ClassTabData }) {
 }
 
 export function TestsTab({ data }: { data: ClassTabData }) {
+  const { t } = useLanguage();
   if (data.quizzes.length === 0) {
     // Class with no books at all → the friendly Coming Soon state.
     // Class WITH books but no quizzes yet → the plain "no tests yet" state.
@@ -221,7 +227,7 @@ export function TestsTab({ data }: { data: ClassTabData }) {
   return (
     <>
       <p style={{ color: '#57616A', margin: '0 0 12px' }}>
-        {data.quizzes.length}টি পরীক্ষা / {data.quizzes.length} tests · এই শ্রেণির শুধুমাত্র
+        {t({ bn: `${data.quizzes.length}টি পরীক্ষা · এই শ্রেণির শুধুমাত্র`, en: `${data.quizzes.length} tests · this class only` })}
       </p>
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: 12 }}>
         {data.quizzes.slice(0, 20).map((q) => (
@@ -230,17 +236,16 @@ export function TestsTab({ data }: { data: ClassTabData }) {
               {bookTitleOf(q)}
             </Link>
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, marginTop: 10 }}>
-              <Chip>{q.kind === 'mcq' ? 'MCQ' : 'লিখিত'}</Chip>
+              <Chip>{q.kind === 'mcq' ? 'MCQ' : t({ bn: 'লিখিত', en: 'Written' })}</Chip>
               <Chip tone="outline">{q.department}</Chip>
-              <Chip tone="gold">{q.questionCount}টি প্রশ্ন</Chip>
+              <Chip tone="gold">{t({ bn: `${q.questionCount}টি প্রশ্ন`, en: `${q.questionCount} questions` })}</Chip>
             </div>
             <p style={{ margin: '10px 0 0', color: '#68747B', fontSize: 14 }}>
-              মোট {q.totalMarks} নম্বর
-              {q.timeLimitMinutes ? ` · ${q.timeLimitMinutes} মিনিট` : ''}
+              {t({ bn: `মোট ${q.totalMarks} নম্বর${q.timeLimitMinutes ? ` · ${q.timeLimitMinutes} মিনিট` : ''}`, en: `${q.totalMarks} marks in total${q.timeLimitMinutes ? ` · ${q.timeLimitMinutes} minutes` : ''}` })}
             </p>
             <p style={{ margin: '10px 0 0' }}>
               <Link to={`/quiz/${q.id}`} style={{ fontWeight: 600 }}>
-                পরীক্ষা দিন →
+                {t({ bn: 'পরীক্ষা দিন →', en: 'Take the test →' })}
               </Link>
             </p>
           </Card>
@@ -248,9 +253,9 @@ export function TestsTab({ data }: { data: ClassTabData }) {
       </div>
       {data.quizzes.length > 20 ? (
         <p style={{ marginTop: 16, color: '#57616A' }}>
-          আরও {data.quizzes.length - 20}টি পরীক্ষা আছে — সব দেখতে{' '}
+          {t({ bn: `আরও ${data.quizzes.length - 20}টি পরীক্ষা আছে — সব দেখতে`, en: `${data.quizzes.length - 20} more tests — see them all on the` })}{' '}
           <Link to="/exam" style={{ fontWeight: 600 }}>
-            পরীক্ষার পাতায় যান →
+            {t({ bn: 'পরীক্ষার পাতায় যান →', en: 'exams page →' })}
           </Link>
         </p>
       ) : null}
@@ -259,7 +264,8 @@ export function TestsTab({ data }: { data: ClassTabData }) {
 }
 
 export function ResultsTab({ data }: { data: ClassTabData }) {
-  if (!data.signedIn) return <SignInPrompt what="আপনার ফলাফল" />;
+  const { lang, t } = useLanguage();
+  if (!data.signedIn) return <SignInPrompt what={{ bn: 'আপনার ফলাফল', en: 'your results' }} />;
   if (data.attempts.length === 0) {
     return (
       <>
@@ -269,7 +275,7 @@ export function ResultsTab({ data }: { data: ClassTabData }) {
         />
         <p style={{ marginTop: 16 }}>
           <Link to={`/class/${data.def.slug}/tests`} style={{ fontWeight: 600 }}>
-            পরীক্ষা দেখুন →
+            {t({ bn: 'পরীক্ষা দেখুন →', en: 'See tests →' })}
           </Link>
         </p>
       </>
@@ -288,23 +294,23 @@ export function ResultsTab({ data }: { data: ClassTabData }) {
         return (
           <Card key={a.id} hover>
             <div style={{ fontWeight: 700, color: '#142B3B', fontSize: 16, lineHeight: 1.5 }}>
-              {q ? bookTitleOf(q) : a.subject || 'পরীক্ষা'}
+              {q ? bookTitleOf(q) : a.subject || t({ bn: 'পরীক্ষা', en: 'Test' })}
             </div>
             <div style={{ display: 'flex', alignItems: 'baseline', gap: 8, marginTop: 8 }}>
               <span style={{ fontFamily: "'Poppins','Hind Siliguri',system-ui,sans-serif", fontSize: 26, fontWeight: 800, color: '#12766E' }}>
                 {a.percentage}%
               </span>
               <span style={{ color: '#68747B', fontSize: 14 }}>
-                {a.score}/{a.totalMarks} নম্বর
+                {t({ bn: `${a.score}/${a.totalMarks} নম্বর`, en: `${a.score}/${a.totalMarks} marks` })}
               </span>
             </div>
             <p style={{ margin: '8px 0 0', color: '#68747B', fontSize: 14 }}>
-              {a.markingStatus === 'auto' ? 'স্বয়ংক্রিয় মূল্যায়ন' : a.markingStatus === 'marked' ? 'মূল্যায়ন সম্পন্ন' : 'মূল্যায়ন বাকি'}
-              {d ? ` · ${d.toLocaleDateString('bn-BD', { day: 'numeric', month: 'short', year: 'numeric' })}` : ''}
+              {t(a.markingStatus === 'auto' ? { bn: 'স্বয়ংক্রিয় মূল্যায়ন', en: 'Auto-marked' } : a.markingStatus === 'marked' ? { bn: 'মূল্যায়ন সম্পন্ন', en: 'Marking complete' } : { bn: 'মূল্যায়ন বাকি', en: 'Marking pending' })}
+              {d ? ` · ${d.toLocaleDateString(lang === 'bn' ? 'bn-BD' : 'en-GB', { day: 'numeric', month: 'short', year: 'numeric' })}` : ''}
             </p>
             <p style={{ margin: '10px 0 0' }}>
               <Link to={`/quiz/${a.quizId}/result/${a.id}`} style={{ fontWeight: 600 }}>
-                বিস্তারিত ফলাফল →
+                {t({ bn: 'বিস্তারিত ফলাফল →', en: 'Detailed results →' })}
               </Link>
             </p>
           </Card>
@@ -315,7 +321,8 @@ export function ResultsTab({ data }: { data: ClassTabData }) {
 }
 
 export function ProgressTab({ data }: { data: ClassTabData }) {
-  if (!data.signedIn) return <SignInPrompt what="আপনার অগ্রগতি" />;
+  const { t } = useLanguage();
+  if (!data.signedIn) return <SignInPrompt what={{ bn: 'আপনার অগ্রগতি', en: 'your progress' }} />;
   const attempts = data.attempts;
   const avg = attempts.length > 0 ? Math.round(attempts.reduce((s, a) => s + (a.percentage ?? 0), 0) / attempts.length) : null;
   const best = attempts.length > 0 ? Math.max(...attempts.map((a) => a.percentage ?? 0)) : null;
@@ -331,7 +338,7 @@ export function ProgressTab({ data }: { data: ClassTabData }) {
         />
         <p style={{ marginTop: 16 }}>
           <Link to={`/class/${data.def.slug}/books`} style={{ fontWeight: 600 }}>
-            বই দেখুন →
+            {t({ bn: 'বই দেখুন →', en: 'See books →' })}
           </Link>
         </p>
       </>
@@ -342,31 +349,31 @@ export function ProgressTab({ data }: { data: ClassTabData }) {
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))', gap: 12, marginBottom: 20 }}>
         <Card>
           <div style={{ fontFamily: "'Poppins','Hind Siliguri',system-ui,sans-serif", fontSize: 26, fontWeight: 800, color: '#142B3B' }}>{attempts.length}</div>
-          <div style={{ color: '#68747B', fontSize: 14 }}>পরীক্ষা দিয়েছেন</div>
+          <div style={{ color: '#68747B', fontSize: 14 }}>{t({ bn: 'পরীক্ষা দিয়েছেন', en: 'Tests taken' })}</div>
         </Card>
         <Card>
           <div style={{ fontFamily: "'Poppins','Hind Siliguri',system-ui,sans-serif", fontSize: 26, fontWeight: 800, color: '#142B3B' }}>{avg !== null ? `${avg}%` : '—'}</div>
-          <div style={{ color: '#68747B', fontSize: 14 }}>গড় নম্বর</div>
+          <div style={{ color: '#68747B', fontSize: 14 }}>{t({ bn: 'গড় নম্বর', en: 'Average score' })}</div>
           {avg !== null ? <ProgressBar value={avg} /> : null}
         </Card>
         <Card>
           <div style={{ fontFamily: "'Poppins','Hind Siliguri',system-ui,sans-serif", fontSize: 26, fontWeight: 800, color: '#142B3B' }}>{best !== null ? `${best}%` : '—'}</div>
-          <div style={{ color: '#68747B', fontSize: 14 }}>সেরা ফলাফল</div>
+          <div style={{ color: '#68747B', fontSize: 14 }}>{t({ bn: 'সেরা ফলাফল', en: 'Best result' })}</div>
         </Card>
         <Card>
           <div style={{ fontFamily: "'Poppins','Hind Siliguri',system-ui,sans-serif", fontSize: 26, fontWeight: 800, color: '#142B3B' }}>{lessonsRead}</div>
-          <div style={{ color: '#68747B', fontSize: 14 }}>পাঠ পড়েছেন</div>
+          <div style={{ color: '#68747B', fontSize: 14 }}>{t({ bn: 'পাঠ পড়েছেন', en: 'Lessons read' })}</div>
         </Card>
         <Card>
           <div style={{ fontFamily: "'Poppins','Hind Siliguri',system-ui,sans-serif", fontSize: 26, fontWeight: 800, color: '#142B3B' }}>
             {qAttempted > 0 ? `${qCorrect}/${qAttempted}` : '—'}
           </div>
-          <div style={{ color: '#68747B', fontSize: 14 }}>সঠিক প্রশ্নোত্তর</div>
+          <div style={{ color: '#68747B', fontSize: 14 }}>{t({ bn: 'সঠিক প্রশ্নোত্তর', en: 'Correct answers' })}</div>
         </Card>
       </div>
       {data.quizSummaries.length > 0 ? (
         <>
-          <h3 style={{ color: '#142B3B', fontSize: 17, margin: '0 0 10px' }}>মাসিক সারাংশ / Monthly summaries</h3>
+          <h3 style={{ color: '#142B3B', fontSize: 17, margin: '0 0 10px' }}>{t({ bn: 'মাসিক সারাংশ', en: 'Monthly summaries' })}</h3>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))', gap: 12 }}>
             {data.quizSummaries.map((s) => (
               <Card key={s.id}>
@@ -374,11 +381,11 @@ export function ProgressTab({ data }: { data: ClassTabData }) {
                   {s.subject} · {s.month}
                 </div>
                 <p style={{ margin: '8px 0 0', color: '#68747B', fontSize: 14 }}>
-                  {s.attemptsCount}টি চেষ্টা · গড় {s.averagePercentage}% · সেরা {s.bestPercentage}%
+                  {t({ bn: `${s.attemptsCount}টি চেষ্টা · গড় ${s.averagePercentage}% · সেরা ${s.bestPercentage}%`, en: `${s.attemptsCount} attempts · average ${s.averagePercentage}% · best ${s.bestPercentage}%` })}
                 </p>
                 {s.weakChapters.length > 0 ? (
                   <p style={{ margin: '8px 0 0', color: '#68747B', fontSize: 14 }}>
-                    দুর্বল: {s.weakChapters.slice(0, 3).join(', ')}
+                    {t({ bn: `দুর্বল: ${s.weakChapters.slice(0, 3).join(', ')}`, en: `Weak: ${s.weakChapters.slice(0, 3).join(', ')}` })}
                   </p>
                 ) : null}
               </Card>
@@ -388,20 +395,20 @@ export function ProgressTab({ data }: { data: ClassTabData }) {
       ) : null}
       <p style={{ marginTop: 16 }}>
         <Link to="/progress" style={{ fontWeight: 600 }}>
-          সব শ্রেণির অগ্রগতি দেখুন →
+          {t({ bn: 'সব শ্রেণির অগ্রগতি দেখুন →', en: 'See progress for all classes →' })}
         </Link>
       </p>
     </>
   );
 }
 
-const ROLE_BN: Record<string, string> = {
-  student: 'শিক্ষার্থী',
-  teacher: 'শিক্ষক',
-  guardian: 'অভিভাবক',
-  admin: 'অ্যাডমিন',
-  owner: 'মালিক',
-  moderator: 'মডারেটর',
+const ROLE_LABEL: Record<string, { bn: string; en: string }> = {
+  student: { bn: 'শিক্ষার্থী', en: 'Student' },
+  teacher: { bn: 'শিক্ষক', en: 'Teacher' },
+  guardian: { bn: 'অভিভাবক', en: 'Guardian' },
+  admin: { bn: 'অ্যাডমিন', en: 'Admin' },
+  owner: { bn: 'মালিক', en: 'Owner' },
+  moderator: { bn: 'মডারেটর', en: 'Moderator' },
 };
 
 export function ProfileTab({
@@ -413,15 +420,16 @@ export function ProfileTab({
   profile: UserProfile | null;
   onSignOut: () => void;
 }) {
-  if (!data.signedIn || !profile) return <SignInPrompt what="আপনার প্রোফাইল" />;
+  const { t } = useLanguage();
+  if (!data.signedIn || !profile) return <SignInPrompt what={{ bn: 'আপনার প্রোফাইল', en: 'your profile' }} />;
   const rows: Array<[string, string]> = [];
-  if (profile.displayName) rows.push(['নাম / Name', profile.displayName]);
-  if (profile.email) rows.push(['ইমেইল / Email', profile.email]);
-  if (profile.role) rows.push(['ভূমিকা / Role', ROLE_BN[profile.role] ?? profile.role]);
-  if (profile.educationType) rows.push(['ধারা / Type', profile.educationType]);
-  if (profile.classLevel) rows.push(['শ্রেণি / Class', profile.classLevel]);
-  if (profile.department) rows.push(['বিভাগ / Department', profile.department]);
-  if (profile.board) rows.push(['বোর্ড / Board', profile.board]);
+  if (profile.displayName) rows.push([t({ bn: 'নাম', en: 'Name' }), profile.displayName]);
+  if (profile.email) rows.push([t({ bn: 'ইমেইল', en: 'Email' }), profile.email]);
+  if (profile.role) rows.push([t({ bn: 'ভূমিকা', en: 'Role' }), ROLE_LABEL[profile.role] ? t(ROLE_LABEL[profile.role]) : profile.role]);
+  if (profile.educationType) rows.push([t({ bn: 'ধারা', en: 'Type' }), profile.educationType]);
+  if (profile.classLevel) rows.push([t({ bn: 'শ্রেণি', en: 'Class' }), profile.classLevel]);
+  if (profile.department) rows.push([t({ bn: 'বিভাগ', en: 'Department' }), profile.department]);
+  if (profile.board) rows.push([t({ bn: 'বোর্ড', en: 'Board' }), profile.board]);
   return (
     <>
       <Card>
@@ -446,7 +454,7 @@ export function ProfileTab({
           <div>
             <div style={{ fontWeight: 700, fontSize: 18, color: '#142B3B' }}>{profile.displayName ?? '—'}</div>
             <div style={{ color: '#68747B', fontSize: 14 }}>
-              {data.def.bn} ড্যাশবোর্ডে আছেন · Viewing {data.def.en} dashboard
+              {t({ bn: `${data.def.bn} ড্যাশবোর্ডে আছেন`, en: `Viewing ${data.def.en} dashboard` })}
             </div>
           </div>
         </div>
@@ -460,16 +468,15 @@ export function ProfileTab({
         </dl>
         <div style={{ display: 'flex', gap: 10, marginTop: 18, flexWrap: 'wrap' }}>
           <LinkButton to="/profile" variant="primary">
-            সম্পূর্ণ প্রোফাইল / Full profile
+            {t({ bn: 'সম্পূর্ণ প্রোফাইল', en: 'Full profile' })}
           </LinkButton>
           <Button variant="outline" onClick={onSignOut}>
-            লগআউট / Log out
+            {t({ bn: 'লগআউট', en: 'Log out' })}
           </Button>
         </div>
       </Card>
       <p style={{ marginTop: 14, color: '#68747B', fontSize: 14 }}>
-        আপনার তথ্য শুধু আপনিই দেখতে পাবেন — অন্য শিক্ষার্থী বা শিক্ষক আপনার ব্যক্তিগত তথ্য দেখতে
-        পায় না।
+        {t({ bn: 'আপনার তথ্য শুধু আপনিই দেখতে পাবেন — অন্য শিক্ষার্থী বা শিক্ষক আপনার ব্যক্তিগত তথ্য দেখতে পায় না।', en: 'Only you can see your information — other students and teachers cannot see your personal details.' })}
       </p>
     </>
   );

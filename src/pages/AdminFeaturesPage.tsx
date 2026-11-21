@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { PageShell } from '../components/PageShell';
+import { useLanguage } from '../i18n/LanguageContext';
 import {
   AdminBackLink,
   ConfirmDialog,
@@ -17,6 +18,7 @@ import {
 } from '../lib/admin';
 
 export default function AdminFeaturesPage() {
+  const { lang, t } = useLanguage();
   const [flags, setFlags] = useState<Record<string, boolean>>({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
@@ -30,7 +32,7 @@ export default function AdminFeaturesPage() {
     try {
       setFlags(await getFeatureFlags(requireDb()));
     } catch (e) {
-      setError(friendlyAdminError(e));
+      setError(friendlyAdminError(e, lang));
     } finally {
       setLoading(false);
     }
@@ -46,11 +48,15 @@ export default function AdminFeaturesPage() {
     setError('');
     try {
       await setFeatureFlag(requireDb(), def.id, next);
-      setNotice(`${def.labelBn} ${next ? 'চালু হয়েছে।' : 'বন্ধ হয়েছে।'}`);
+      setNotice(
+        `${lang === 'bn' ? def.labelBn : def.labelEn} ${
+          next ? t({ bn: 'চালু হয়েছে।', en: 'is now on.' }) : t({ bn: 'বন্ধ হয়েছে।', en: 'is now off.' })
+        }`,
+      );
       setConfirm(null);
       await reload();
     } catch (e) {
-      setError(friendlyAdminError(e));
+      setError(friendlyAdminError(e, lang));
       setConfirm(null);
     } finally {
       setBusy(false);
@@ -61,13 +67,16 @@ export default function AdminFeaturesPage() {
     <PageShell titleBn="ফিচার চালু/বন্ধ" titleEn="Feature toggles">
       <AdminBackLink />
       <p>
-        কোন ফিচার চালু থাকবে — এখান থেকে বদলান। প্রতিটি ফিচারের নিচে লেখা আছে আজ চালু করলে
-        আসলে কী হবে। / Which features are on — change them here. Under each feature it says what
-        actually happens if you turn it on today.
+        {t({
+          bn: 'কোন ফিচার চালু থাকবে — এখান থেকে বদলান। প্রতিটি ফিচারের নিচে লেখা আছে আজ চালু করলে আসলে কী হবে।',
+          en: 'Which features are on — change them here. Under each feature it says what actually happens if you turn it on today.',
+        })}
       </p>
       <p style={{ color: '#555', fontSize: 14 }}>
-        সীমাবদ্ধ ফিচার (তালাবদ্ধ) কখনো চালু করা যায় না — মালিকের আলাদা অনুমোদন লাগবে। / Restricted
-        features (locked) can never be enabled — they need the owner&apos;s separate approval.
+        {t({
+          bn: 'সীমাবদ্ধ ফিচার (তালাবদ্ধ) কখনো চালু করা যায় না — মালিকের আলাদা অনুমোদন লাগবে।',
+          en: 'Restricted features (locked) can never be enabled — they need the owner’s separate approval.',
+        })}
       </p>
       {loading ? <LoadingBox /> : null}
       {error ? <ErrorBox message={error} /> : null}
@@ -92,28 +101,26 @@ export default function AdminFeaturesPage() {
               }}
             >
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, alignItems: 'center' }}>
-                <strong style={{ fontSize: 16 }}>{def.labelBn}</strong>
+                <strong style={{ fontSize: 16 }}>{lang === 'bn' ? def.labelBn : def.labelEn}</strong>
                 {locked ? (
-                  <StatusPill label="🔒 সীমাবদ্ধ / Restricted" tone="ready" />
+                  <StatusPill label={t({ bn: '🔒 সীমাবদ্ধ', en: '🔒 Restricted' })} tone="ready" />
                 ) : (
-                  <StatusPill label={on ? 'চালু / On' : 'বন্ধ / Off'} tone={on ? 'active' : 'muted'} />
+                  <StatusPill label={on ? t({ bn: 'চালু', en: 'On' }) : t({ bn: 'বন্ধ', en: 'Off' })} tone={on ? 'active' : 'muted'} />
                 )}
               </div>
               <p style={{ margin: '6px 0', color: '#555', fontSize: 14 }}>
-                {def.labelEn} · {def.noteBn}
+                {lang === 'bn' ? def.noteBn : def.noteEn}
               </p>
-              <p style={{ margin: '0 0 8px', color: '#555', fontSize: 14 }}>{def.noteEn}</p>
               <p style={{ margin: '0 0 8px', fontSize: 15 }}>
-                আজ চালু করলে কী হবে: <strong>{def.effectBn}</strong>
-              </p>
-              <p style={{ margin: '0 0 8px', color: '#555', fontSize: 14 }}>
-                What happens if turned on today: {def.effectEn}
+                {t({ bn: 'আজ চালু করলে কী হবে:', en: 'What happens if turned on today:' })}{' '}
+                <strong>{lang === 'bn' ? def.effectBn : def.effectEn}</strong>
               </p>
               {locked ? (
                 <p style={{ margin: 0, color: '#555', fontSize: 14 }}>
-                  এই ফিচার চালু করতে মালিকের আলাদা অনুমোদন লাগবে — ড্যাশবোর্ড থেকে চালু করা যায়
-                  না। / Enabling this needs the owner&apos;s separate approval — it cannot be
-                  enabled from the dashboard.
+                  {t({
+                    bn: 'এই ফিচার চালু করতে মালিকের আলাদা অনুমোদন লাগবে — ড্যাশবোর্ড থেকে চালু করা যায় না।',
+                    en: 'Enabling this needs the owner’s separate approval — it cannot be enabled from the dashboard.',
+                  })}
                 </p>
               ) : (
                 <label
@@ -136,7 +143,7 @@ export default function AdminFeaturesPage() {
                     }}
                     style={{ width: 24, height: 24, accentColor: '#1E7CE8' }}
                   />
-                  চালু / Enabled
+                  {t({ bn: 'চালু', en: 'Enabled' })}
                 </label>
               )}
             </li>

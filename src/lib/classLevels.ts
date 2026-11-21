@@ -146,7 +146,8 @@ export function subjectsForClass(books: Book[], def: ClassLevelDef): string[] {
 
 export interface ClassFilterOption {
   value: string;
-  label: string;
+  labelBn: string;
+  labelEn: string;
   levelSlug?: string;
 }
 
@@ -161,10 +162,10 @@ export function classFilterOptions(
   for (const def of CLASS_LEVELS) {
     // Cascade: when a type is chosen, only levels of that type are offered.
     if (typeFilter && def.educationType !== typeFilter) continue;
-    options.push({ value: `level:${def.slug}`, label: `${def.bn} · ${def.en}`, levelSlug: def.slug });
+    options.push({ value: `level:${def.slug}`, labelBn: def.bn, labelEn: def.en, levelSlug: def.slug });
   }
   const extras = [...new Set(presentClassLevels.filter((c) => c && !covered.has(c)))].sort();
-  for (const c of extras) options.push({ value: c, label: c });
+  for (const c of extras) options.push({ value: c, labelBn: c, labelEn: c });
   return options;
 }
 

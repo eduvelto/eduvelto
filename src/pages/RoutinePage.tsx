@@ -1,4 +1,5 @@
 import { PageShell } from '../components/PageShell';
+import { useLanguage } from '../i18n/LanguageContext';
 import { Card, LinkButton } from '../components/ui';
 
 // Study Routine (Phase 2, Step 7 — smart study planner) is NOT built yet.
@@ -7,25 +8,25 @@ import { Card, LinkButton } from '../components/ui';
 // do work today.
 
 export default function RoutinePage() {
+  const { t } = useLanguage();
   return (
     <PageShell titleBn="পড়ার রুটিন" titleEn="Study Routine">
       <Card style={{ textAlign: 'center', padding: '28px 20px' }}>
         <h2 style={{ fontFamily: "'Poppins','Hind Siliguri',system-ui,sans-serif", fontSize: 20, color: '#0A1F44', margin: '0 0 8px' }}>
-          পড়ার রুটিন শীঘ্রই আসছে / Study routine coming soon
+          {t({ bn: 'পড়ার রুটিন শীঘ্রই আসছে', en: 'Study routine coming soon' })}
         </h2>
         <p style={{ color: '#5A6478', margin: '0 0 20px', lineHeight: 1.7 }}>
-          স্মার্ট পড়ার পরিকল্পনা তৈরি হচ্ছে — আপনার ক্লাস, বিষয় ও অগ্রগতি অনুযায়ী রুটিন সাজাবে।
-          ততদিন নিচের পাতাগুলো ব্যবহার করুন।
+          {t({ bn: 'স্মার্ট পড়ার পরিকল্পনা তৈরি হচ্ছে — আপনার ক্লাস, বিষয় ও অগ্রগতি অনুযায়ী রুটিন সাজাবে। ততদিন নিচের পাতাগুলো ব্যবহার করুন।', en: 'A smart study plan is being built — it will arrange your routine according to your class, subjects and progress. Until then, use the pages below.' })}
         </p>
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10, justifyContent: 'center' }}>
           <LinkButton to="/library" variant="primary">
-            লাইব্রেরি / Library
+            {t({ bn: 'লাইব্রেরি', en: 'Library' })}
           </LinkButton>
           <LinkButton to="/exam" variant="outline">
-            পরীক্ষা / Exams
+            {t({ bn: 'পরীক্ষা', en: 'Exams' })}
           </LinkButton>
           <LinkButton to="/progress" variant="outline">
-            অগ্রগতি / Progress
+            {t({ bn: 'অগ্রগতি', en: 'Progress' })}
           </LinkButton>
         </div>
       </Card>

@@ -4,6 +4,7 @@ import { PageShell, EmptyState } from '../components/PageShell';
 import { AlertBox, Skeleton } from '../components/ui';
 import { AccuracyNote, HealthDisclaimer } from '../components/HealthDisclaimer';
 import { listPublishedFacilities, type Facility } from '../lib/health';
+import { useLanguage } from '../i18n/LanguageContext';
 
 // Hospital / clinic + pharmacy finder (Health v1): search by area.
 // Seed data comes only from public listings, with the source noted.
@@ -12,6 +13,7 @@ import { listPublishedFacilities, type Facility } from '../lib/health';
 
 export default function HealthHospitalsPage() {
   const h = strings.health;
+  const { lang, t } = useLanguage();
   const [items, setItems] = useState<Facility[] | null>(null);
   const [error, setError] = useState('');
   const [search, setSearch] = useState('');
@@ -23,7 +25,7 @@ export default function HealthHospitalsPage() {
         if (!cancelled) setItems(rows);
       })
       .catch(() => {
-        if (!cancelled) setError('লোড করা যায়নি — পরে আবার চেষ্টা করুন। / Could not load — please try again later.');
+        if (!cancelled) setError(t({ bn: 'লোড করা যায়নি — পরে আবার চেষ্টা করুন।', en: 'Could not load — please try again later.' }));
       });
     return () => {
       cancelled = true;
@@ -46,15 +48,14 @@ export default function HealthHospitalsPage() {
   return (
     <PageShell titleBn={h.hospitalsTitle.bn} titleEn={h.hospitalsTitle.en}>
       <HealthDisclaimer />
-      <p>{h.hospitalsIntro.bn}</p>
-      <p style={{ color: '#555' }}>{h.hospitalsIntro.en}</p>
+      <p>{t(h.hospitalsIntro)}</p>
       <AccuracyNote />
       <input
         type="search"
         value={search}
         onChange={(e) => setSearch(e.target.value)}
-        placeholder={h.areaPlaceholder.bn}
-        aria-label={h.areaPlaceholder.bn}
+        placeholder={t(h.areaPlaceholder)}
+        aria-label={t(h.areaPlaceholder)}
         className="ev-input" style={{ margin: '16px 0' }}
       />
       {error ? <AlertBox tone="error">{error}</AlertBox> : null}
@@ -65,14 +66,15 @@ export default function HealthHospitalsPage() {
       {filtered.map((f) => (
         <article key={f.id} className="ev-card" style={{ marginBottom: 12 }}>
           <h2 style={{ margin: '0 0 8px', fontSize: 20 }}>
-            {f.titleBn} <span style={{ color: '#555', fontSize: 16 }}>({f.title})</span>
+            {lang === 'bn' ? f.titleBn : f.title}
           </h2>
           <p style={{ margin: '0 0 6px' }}>
-            <strong>{f.kind === 'pharmacy' ? h.pharmacy.bn : h.hospital.bn}:</strong> {f.areaBn} ({f.areaEn})
+            <strong>{t(f.kind === 'pharmacy' ? h.pharmacy : h.hospital)}:</strong>{' '}
+            {lang === 'bn' ? f.areaBn : f.areaEn}
           </p>
-          <p style={{ margin: '0 0 6px', color: '#555' }}>{f.addressBn}</p>
+          <p style={{ margin: '0 0 6px', color: '#555' }}>{lang === 'bn' ? f.addressBn : f.addressEn}</p>
           <p style={{ margin: '0 0 6px', fontSize: 14, color: '#555' }}>
-            {h.source.bn}: {f.source}
+            {t(h.source)}: {f.source}
           </p>
           <AccuracyNote />
         </article>

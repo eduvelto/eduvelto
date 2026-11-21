@@ -1,4 +1,5 @@
 import { strings } from '../i18n/strings';
+import { useLanguage } from '../i18n/LanguageContext';
 
 // Eduvelto Health — shared safety components (Blueprint v4, binding).
 //
@@ -33,25 +34,23 @@ const ACCURACY_STYLE: React.CSSProperties = {
 export function HealthDisclaimer() {
   const d = strings.health.disclaimer;
   const e = strings.health.emergency;
+  const { t } = useLanguage();
   return (
     <div style={DISCLAIMER_STYLE} role="note">
-      <p style={{ margin: '0 0 8px', fontWeight: 700, color: '#b00020' }}>{d.bn}</p>
-      <p style={{ margin: '0 0 8px', color: '#555' }}>{d.en}</p>
+      <p style={{ margin: '0 0 8px', fontWeight: 700, color: '#b00020' }}>{t(d)}</p>
       <p style={{ margin: 0 }}>
-        <strong>{e.bn}</strong>
+        <strong>{t(e)}</strong>
       </p>
-      <p style={{ margin: '4px 0 0', color: '#555' }}>{e.en}</p>
     </div>
   );
 }
 
 export function AccuracyNote() {
   const a = strings.health.accuracyNote;
+  const { t } = useLanguage();
   return (
     <p style={ACCURACY_STYLE}>
-      {a.bn}
-      <br />
-      <span style={{ color: '#555' }}>{a.en}</span>
+      {t(a)}
     </p>
   );
 }

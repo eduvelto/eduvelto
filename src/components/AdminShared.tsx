@@ -2,6 +2,7 @@ import { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import type { Firestore } from 'firebase/firestore';
 import { db } from '../firebase';
+import { useLanguage } from '../i18n/LanguageContext';
 
 // Shared pieces for the Owner Admin Dashboard.
 // - ConfirmDialog: the ONE confirmation modal for the whole dashboard.
@@ -56,14 +57,17 @@ export function ErrorBox(props: { message: string }) {
 }
 
 export function LoadingBox(props: { label?: string }) {
+  const { t } = useLanguage();
   return (
     <p aria-live="polite" style={{ color: '#57616A' }}>
-      {props.label ?? 'লোড হচ্ছে… / Loading…'}
+      {props.label ?? t({ bn: 'লোড হচ্ছে…', en: 'Loading…' })}
     </p>
   );
 }
 
-export function EmptyAdminBox(props: { bn: string; en: string; nextBn?: string }) {
+export function EmptyAdminBox(props: { bn: string; en: string; nextBn?: string; nextEn?: string }) {
+  const { lang, t } = useLanguage();
+  const next = lang === 'bn' ? props.nextBn : (props.nextEn ?? props.nextBn);
   return (
     <div
       style={{
@@ -73,10 +77,12 @@ export function EmptyAdminBox(props: { bn: string; en: string; nextBn?: string }
         background: '#E3F2F0',
       }}
     >
-      <p style={{ margin: 0, fontWeight: 600, color: '#142B3B' }}>{props.bn}</p>
-      <p style={{ margin: '8px 0 0', color: '#68747B' }}>{props.en}</p>
-      {props.nextBn ? (
-        <p style={{ margin: '8px 0 0', color: '#68747B' }}>পরবর্তী পদক্ষেপ: {props.nextBn}</p>
+      <p style={{ margin: 0, fontWeight: 600, color: '#142B3B' }}>{lang === 'bn' ? props.bn : props.en}</p>
+      {next ? (
+        <p style={{ margin: '8px 0 0', color: '#68747B' }}>
+          {t({ bn: 'পরবর্তী পদক্ষেপ: ', en: 'Next step: ' })}
+          {next}
+        </p>
       ) : null}
     </div>
   );
@@ -84,6 +90,7 @@ export function EmptyAdminBox(props: { bn: string; en: string; nextBn?: string }
 
 /** Sticky back-link every admin sub-page shows at the top (review UX S10). */
 export function AdminBackLink() {
+  const { t } = useLanguage();
   return (
     <p
       style={{
@@ -95,7 +102,7 @@ export function AdminBackLink() {
         zIndex: 1,
       }}
     >
-      <Link to="/admin">← অ্যাডমিন হোম / Admin home</Link>
+      <Link to="/admin">{t({ bn: '← অ্যাডমিন হোম', en: '← Admin home' })}</Link>
     </p>
   );
 }
@@ -119,6 +126,10 @@ export interface ConfirmDialogProps {
 export function ConfirmDialog(props: ConfirmDialogProps) {
   const cancelRef = useRef<HTMLButtonElement>(null);
   const previousFocus = useRef<Element | null>(null);
+  const { lang, t } = useLanguage();
+  const title = lang === 'bn' ? props.titleBn : props.titleEn;
+  const body = lang === 'bn' ? props.bodyBn : props.bodyEn;
+  const confirm = lang === 'bn' ? props.confirmBn : props.confirmEn;
 
   useEffect(() => {
     previousFocus.current = document.activeElement;
@@ -162,10 +173,8 @@ export function ConfirmDialog(props: ConfirmDialogProps) {
         }}
         onClick={(e) => e.stopPropagation()}
       >
-        <h2 style={{ margin: '0 0 8px', fontSize: 20, color: NAVY }}>{props.titleBn}</h2>
-        <p style={{ margin: '0 0 8px', color: '#555' }}>{props.titleEn}</p>
-        <p style={{ margin: '0 0 16px' }}>{props.bodyBn}</p>
-        <p style={{ margin: '0 0 16px', color: '#555' }}>{props.bodyEn}</p>
+        <h2 style={{ margin: '0 0 8px', fontSize: 20, color: NAVY }}>{title}</h2>
+        <p style={{ margin: '0 0 16px' }}>{body}</p>
         <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
           <button
             type="button"
@@ -181,7 +190,7 @@ export function ConfirmDialog(props: ConfirmDialogProps) {
               cursor: 'pointer',
             }}
           >
-            {props.confirmBn} / {props.confirmEn}
+            {confirm}
           </button>
           <button
             ref={cancelRef}
@@ -198,7 +207,7 @@ export function ConfirmDialog(props: ConfirmDialogProps) {
               cursor: 'pointer',
             }}
           >
-            বাতিল / Cancel
+            {t({ bn: 'বাতিল', en: 'Cancel' })}
           </button>
         </div>
       </div>

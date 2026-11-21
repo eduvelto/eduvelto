@@ -12,20 +12,22 @@ import { PageShell, EmptyState } from '../components/PageShell';
 import { AlertBox, Card, Chip, Reveal, SkeletonCards } from '../components/ui';
 import { listPublishedBooks, type Book } from '../lib/content';
 import { booksForClass, classLevelBySlug } from '../lib/classLevels';
+import { useLanguage } from '../i18n/LanguageContext';
 
 export default function ClassSubjectPage() {
+  const { t } = useLanguage();
   const { slug = '', dept = '' } = useParams<{ slug: string; dept: string }>();
   const def = classLevelBySlug(slug);
   const subject = decodeURIComponent(dept);
   const [books, setBooks] = useState<Book[] | null>(null);
-  const [error, setError] = useState(false);
+  const [error, setError] = useState('');
 
   function load() {
-    setError(false);
+    setError('');
     setBooks(null);
     listPublishedBooks()
       .then((b) => setBooks(b))
-      .catch(() => setError(true));
+      .catch(() => setError(t({ bn: 'বইয়ের তালিকা লোড করা যায়নি — আবার চেষ্টা করুন।', en: 'Could not load the books — please try again.' })));
   }
   useEffect(load, []);
 
@@ -35,7 +37,7 @@ export default function ClassSubjectPage() {
         <EmptyState bn="এই শ্রেণিটি খুঁজে পাওয়া যায়নি।" en="This class could not be found." />
         <p style={{ marginTop: 16 }}>
           <Link to="/#select-class" style={{ fontWeight: 600 }}>
-            ← সব শ্রেণি দেখুন / See all classes
+            {t({ bn: '← সব শ্রেণি দেখুন', en: '← See all classes' })}
           </Link>
         </p>
       </PageShell>
@@ -51,18 +53,17 @@ export default function ClassSubjectPage() {
     <PageShell titleBn={subject} titleEn={subject} wide>
       <p style={{ margin: '0 0 12px' }}>
         <Link to={`/class/${def.slug}/subjects`} style={{ fontWeight: 600 }}>
-          ← {def.bn} — সব বিষয় / All subjects
+          {t({ bn: `← ${def.bn} — সব বিষয়`, en: `← ${def.en} — All subjects` })}
         </Link>
       </p>
       <h2 style={{ color: '#142B3B', fontSize: 24, margin: '0 0 4px' }}>{subject}</h2>
       <p style={{ color: '#57616A', margin: '0 0 20px' }}>
-        {def.bn} · {def.en} — এই বিষয়ের শুধুমাত্র এই শ্রেণির বই
+        {t({ bn: `${def.bn} — এই বিষয়ের শুধুমাত্র এই শ্রেণির বই`, en: `${def.en} — only this class's books for this subject` })}
       </p>
       {books === null ? <SkeletonCards count={3} /> : null}
       {error ? (
         <AlertBox tone="error" onRetry={load}>
-          বইয়ের তালিকা লোড করা যায়নি — আবার চেষ্টা করুন। / Could not load the books — please try
-          again.
+          {error}
         </AlertBox>
       ) : null}
       {books !== null && subjectBooks.length === 0 && !error ? (
@@ -74,7 +75,7 @@ export default function ClassSubjectPage() {
       {subjectBooks.length > 0 ? (
         <>
           <p style={{ color: '#57616A', margin: '0 0 12px' }}>
-            {subjectBooks.length}টি বই · {totalChapters}টি পাঠ · {totalQuestions}টি প্রশ্ন
+            {t({ bn: `${subjectBooks.length}টি বই · ${totalChapters}টি পাঠ · ${totalQuestions}টি প্রশ্ন`, en: `${subjectBooks.length} books · ${totalChapters} lessons · ${totalQuestions} questions` })}
           </p>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: 12 }}>
             {subjectBooks.map((b, i) => (
@@ -86,14 +87,14 @@ export default function ClassSubjectPage() {
                   <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, marginTop: 10 }}>
                     <Chip>{b.department}</Chip>
                     <Chip tone="outline">{b.classLevel}</Chip>
-                    <Chip tone="gold">{b.questionCount}টি প্রশ্ন</Chip>
+                    <Chip tone="gold">{t({ bn: `${b.questionCount}টি প্রশ্ন`, en: `${b.questionCount} questions` })}</Chip>
                   </div>
                   <p style={{ margin: '10px 0 0', color: '#68747B', fontSize: 14 }}>
-                    {b.chapterCount}টি পাঠ — বই খুলে অধ্যায় দেখুন
+                    {t({ bn: `${b.chapterCount}টি পাঠ — বই খুলে অধ্যায় দেখুন`, en: `${b.chapterCount} lessons — open the book to see chapters` })}
                   </p>
                   <p style={{ margin: '10px 0 0' }}>
                     <Link to={`/library/${b.id}`} style={{ fontWeight: 600 }}>
-                      বইটি খুলুন →
+                      {t({ bn: 'বইটি খুলুন →', en: 'Open the book →' })}
                     </Link>
                   </p>
                 </Card>
@@ -101,8 +102,7 @@ export default function ClassSubjectPage() {
             ))}
           </div>
           <p style={{ marginTop: 16, color: '#68747B', fontSize: 14 }}>
-            প্রতিটি বইয়ের ভেতরে অধ্যায়ভিত্তিক পাঠ আছে — বই খুলে অধ্যায় ও পাঠ দেখুন। / Each book
-            contains chapter-wise lessons — open a book to see its chapters.
+            {t({ bn: 'প্রতিটি বইয়ের ভেতরে অধ্যায়ভিত্তিক পাঠ আছে — বই খুলে অধ্যায় ও পাঠ দেখুন।', en: 'Each book contains chapter-wise lessons — open a book to see its chapters and lessons.' })}
           </p>
         </>
       ) : null}

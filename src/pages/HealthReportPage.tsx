@@ -3,6 +3,7 @@ import { strings } from '../i18n/strings';
 import { PageShell } from '../components/PageShell';
 import { AccuracyNote, HealthDisclaimer } from '../components/HealthDisclaimer';
 import { REPORT_TESTS, type ReportTest } from '../lib/health';
+import { useLanguage } from '../i18n/LanguageContext';
 
 // Medical report explainer (Health v1): the user picks a test and enters
 // a value, or pastes report text; the app shows a SIMPLE explanation of
@@ -35,41 +36,32 @@ function verdictFor(test: ReportTest, value: string): { bn: string; en: string }
 
 function TestCard({ test, value }: { test: ReportTest; value?: string }) {
   const h = strings.health;
+  const { lang, t } = useLanguage();
   const verdict = value !== undefined ? verdictFor(test, value) : null;
   return (
     <article className="ev-card" style={{ marginBottom: 12 }}>
       <h2 style={{ margin: '0 0 8px', fontSize: 20 }}>
-        {test.nameBn} <span style={{ color: '#555', fontSize: 16 }}>({test.nameEn})</span>
+        {lang === 'bn' ? test.nameBn : test.nameEn}
       </h2>
       <p style={{ margin: '0 0 6px' }}>
-        <strong>{h.whatItMeasures.bn}:</strong> {test.measuresBn}
-      </p>
-      <p style={{ margin: '0 0 6px', color: '#555' }}>
-        <strong>{h.whatItMeasures.en}:</strong> {test.measuresEn}
+        <strong>{t(h.whatItMeasures)}:</strong> {lang === 'bn' ? test.measuresBn : test.measuresEn}
       </p>
       <p style={{ margin: '0 0 6px' }}>
-        <strong>{h.generalRange.bn}:</strong> {test.generalRange}
+        <strong>{t(h.generalRange)}:</strong> {test.generalRange}
       </p>
       {value !== undefined && value.trim() !== '' ? (
         <p style={{ margin: '0 0 6px' }}>
-          <strong>{h.yourValue.bn}:</strong> {value} {test.unit}
+          <strong>{t(h.yourValue)}:</strong> {value} {test.unit}
         </p>
       ) : null}
       {verdict ? (
         <p style={{ margin: '0 0 6px' }}>
-          <strong>{h.whatItMayMean.bn}:</strong> {verdict.bn}
-          <br />
-          <span style={{ color: '#555' }}>
-            <strong>{h.whatItMayMean.en}:</strong> {verdict.en}
-          </span>
+          <strong>{t(h.whatItMayMean)}:</strong> {t(verdict)}
         </p>
       ) : null}
-      <p style={{ margin: '0 0 6px' }}>{h.noDiagnosis.bn}</p>
-      <p style={{ margin: '0 0 6px', color: '#555' }}>{h.noDiagnosis.en}</p>
-      <p style={{ margin: '0 0 6px' }}>{h.reportAskDoctor.bn}</p>
-      <p style={{ margin: '0 0 6px', color: '#555' }}>{h.reportAskDoctor.en}</p>
-      <p style={{ margin: '0 0 6px', fontSize: 14, color: '#555' }}>{h.reportSource.bn}</p>
-      <p style={{ margin: '0 0 6px', fontSize: 14, color: '#555' }}>{h.reportSource.en}</p>
+      <p style={{ margin: '0 0 6px' }}>{t(h.noDiagnosis)}</p>
+      <p style={{ margin: '0 0 6px' }}>{t(h.reportAskDoctor)}</p>
+      <p style={{ margin: '0 0 6px', fontSize: 14, color: '#555' }}>{t(h.reportSource)}</p>
       <AccuracyNote />
     </article>
   );
@@ -77,6 +69,7 @@ function TestCard({ test, value }: { test: ReportTest; value?: string }) {
 
 export default function HealthReportPage() {
   const h = strings.health;
+  const { lang, t } = useLanguage();
   const [selectedId, setSelectedId] = useState('');
   const [value, setValue] = useState('');
   const [pasted, setPasted] = useState('');
@@ -93,22 +86,21 @@ export default function HealthReportPage() {
   return (
     <PageShell titleBn={h.reportTitle.bn} titleEn={h.reportTitle.en}>
       <HealthDisclaimer />
-      <p>{h.reportIntro.bn}</p>
-      <p style={{ color: '#555' }}>{h.reportIntro.en}</p>
-      <p style={{ fontSize: 14, color: '#555' }}>{h.reportNoStorage.bn}</p>
+      <p>{t(h.reportIntro)}</p>
+      <p style={{ fontSize: 14, color: '#555' }}>{t(h.reportNoStorage)}</p>
       <AccuracyNote />
 
-      <h2 style={{ marginTop: 24 }}>{h.reportPickTest.bn}</h2>
+      <h2 style={{ marginTop: 24 }}>{t(h.reportPickTest)}</h2>
       <select
         value={selectedId}
         onChange={(e) => setSelectedId(e.target.value)}
-        aria-label={h.reportPickTest.bn}
+        aria-label={t(h.reportPickTest)}
         className="ev-input" style={{ marginBottom: 12 }}
       >
-        <option value="">— {h.reportPickTest.bn} —</option>
+        <option value="">— {t(h.reportPickTest)} —</option>
         {REPORT_TESTS.map((t) => (
           <option key={t.id} value={t.id}>
-            {t.nameBn} ({t.nameEn})
+            {lang === 'bn' ? t.nameBn : t.nameEn}
           </option>
         ))}
       </select>
@@ -119,31 +111,31 @@ export default function HealthReportPage() {
             inputMode="decimal"
             value={value}
             onChange={(e) => setValue(e.target.value)}
-            placeholder={h.reportEnterValue.bn}
-            aria-label={h.reportEnterValue.bn}
+            placeholder={t(h.reportEnterValue)}
+            aria-label={t(h.reportEnterValue)}
             className="ev-input" style={{ marginBottom: 16 }}
           />
           <TestCard test={selected} value={value} />
         </>
       ) : null}
 
-      <h2 style={{ marginTop: 24 }}>{h.reportPaste.bn}</h2>
+      <h2 style={{ marginTop: 24 }}>{t(h.reportPaste)}</h2>
       <textarea
         value={pasted}
         onChange={(e) => setPasted(e.target.value)}
-        placeholder={h.reportPastePlaceholder.bn}
-        aria-label={h.reportPaste.bn}
+        placeholder={t(h.reportPastePlaceholder)}
+        aria-label={t(h.reportPaste)}
         rows={5}
         className="ev-input" style={{ marginBottom: 16 }}
       />
       {pasted.trim() !== '' && matched.length === 0 ? (
-        <p>{h.reportNoMatch.bn}</p>
+        <p>{t(h.reportNoMatch)}</p>
       ) : null}
       {matched.map((t) => (
         <TestCard key={t.id} test={t} />
       ))}
 
-      <h2 style={{ marginTop: 24 }}>{h.reportAllTests.bn}</h2>
+      <h2 style={{ marginTop: 24 }}>{t(h.reportAllTests)}</h2>
       {REPORT_TESTS.map((t) => (
         <TestCard key={t.id} test={t} />
       ))}

@@ -15,6 +15,7 @@ import { Link, useParams, useSearchParams } from 'react-router-dom';
 import { PageShell, EmptyState } from '../components/PageShell';
 import { AlertBox, Button, Card, Chip, ProgressBar, Skeleton } from '../components/ui';
 import { useAuth } from '../lib/auth';
+import { useLanguage } from '../i18n/LanguageContext';
 import {
   getMyAttempt,
   getPublishedQuiz,
@@ -27,6 +28,7 @@ export default function QuizResultPage() {
   const { quizId, attemptId } = useParams<{ quizId: string; attemptId: string }>();
   const [searchParams] = useSearchParams();
   const { user, profile } = useAuth();
+  const { lang, t } = useLanguage();
   const [quiz, setQuiz] = useState<Quiz | null>(null);
   const [attempt, setAttempt] = useState<QuizAttempt | null>(null);
   const [notFound, setNotFound] = useState(false);
@@ -60,8 +62,11 @@ export default function QuizResultPage() {
     return (
       <PageShell titleBn="কুইজের ফলাফল" titleEn="Quiz result">
         <p>
-          ফলাফল দেখতে <Link to="/login">লগইন করুন</Link>। / Please <Link to="/login">sign in</Link> to
-          see the result.
+          {lang === 'bn' ? (
+            <>ফলাফল দেখতে <Link to="/login">লগইন করুন</Link>।</>
+          ) : (
+            <>Please <Link to="/login">sign in</Link> to see the result.</>
+          )}
         </p>
       </PageShell>
     );
@@ -99,7 +104,7 @@ export default function QuizResultPage() {
       const fresh = await getMyAttempt(ownerUid, attempt.id);
       if (fresh) setAttempt(fresh);
     } catch (e) {
-      setMarkError(`মূল্যায়ন সংরক্ষণ করা যায়নি। / Could not save the marking. (${e instanceof Error ? e.message : 'unknown'})`);
+      setMarkError(t({ bn: `মূল্যায়ন সংরক্ষণ করা যায়নি। (${e instanceof Error ? e.message : 'unknown'})`, en: `Could not save the marking. (${e instanceof Error ? e.message : 'unknown'})` }));
     } finally {
       setMarking(false);
     }
@@ -112,21 +117,20 @@ export default function QuizResultPage() {
         {attempt.kind === 'mcq' ? (
           <>
             <p style={{ fontSize: 24, fontWeight: 800, color: '#0A1F44', margin: '0 0 10px' }}>
-              নম্বর: {attempt.score}/{attempt.totalMarks} ({attempt.percentage}%)
+              {t({ bn: `নম্বর: ${attempt.score}/${attempt.totalMarks} (${attempt.percentage}%)`, en: `Score: ${attempt.score}/${attempt.totalMarks} (${attempt.percentage}%)` })}
             </p>
-            <ProgressBar value={attempt.percentage} label={`Score ${attempt.percentage}%`} />
+            <ProgressBar value={attempt.percentage} label={t({ bn: `নম্বর ${attempt.percentage}%`, en: `Score ${attempt.percentage}%` })} />
           </>
         ) : attempt.markingStatus === 'pending' ? (
           <p style={{ fontSize: 16, margin: 0 }}>
-            উত্তর জমা হয়েছে — শিক্ষক মূল্যায়ন করবেন। মূল্যায়ন শেষ হলে এখানে নম্বর দেখা যাবে। / Answers
-            submitted — a teacher will mark them. The score will appear here once marked.
+            {t({ bn: 'উত্তর জমা হয়েছে — শিক্ষক মূল্যায়ন করবেন। মূল্যায়ন শেষ হলে এখানে নম্বর দেখা যাবে।', en: 'Answers submitted — a teacher will mark them. The score will appear here once marked.' })}
           </p>
         ) : (
           <>
             <p style={{ fontSize: 24, fontWeight: 800, color: '#0A1F44', margin: '0 0 10px' }}>
-              নম্বর: {attempt.score}/{attempt.totalMarks} ({attempt.percentage}%) · শিক্ষক মূল্যায়ন করেছেন
+              {t({ bn: `নম্বর: ${attempt.score}/${attempt.totalMarks} (${attempt.percentage}%) · শিক্ষক মূল্যায়ন করেছেন`, en: `Score: ${attempt.score}/${attempt.totalMarks} (${attempt.percentage}%) · Marked by a teacher` })}
             </p>
-            <ProgressBar value={attempt.percentage} label={`Score ${attempt.percentage}%`} />
+            <ProgressBar value={attempt.percentage} label={t({ bn: `নম্বর ${attempt.percentage}%`, en: `Score ${attempt.percentage}%` })} />
           </>
         )}
       </Card>
@@ -141,16 +145,16 @@ export default function QuizResultPage() {
             {attempt.kind === 'mcq' ? (
               <>
                 <p style={{ margin: '4px 0' }}>
-                  আপনার উত্তর: <strong>{a.selected ?? '—'}</strong>{' '}
+                  {t({ bn: 'আপনার উত্তর:', en: 'Your answer:' })} <strong>{a.selected ?? '—'}</strong>{' '}
                   {a.correct ? (
-                    <Chip>✓ সঠিক</Chip>
+                    <Chip>{t({ bn: '✓ সঠিক', en: '✓ Correct' })}</Chip>
                   ) : (
-                    <Chip tone="outline"><span style={{ color: '#B00020' }}>✗ ভুল</span></Chip>
+                    <Chip tone="outline"><span style={{ color: '#B00020' }}>{t({ bn: '✗ ভুল', en: '✗ Incorrect' })}</span></Chip>
                   )}
                 </p>
                 {!a.correct ? (
                   <p style={{ margin: '4px 0' }}>
-                    সঠিক উত্তর: <strong>{a.correctText ?? '—'}</strong>
+                    {t({ bn: 'সঠিক উত্তর:', en: 'Correct answer:' })} <strong>{a.correctText ?? '—'}</strong>
                   </p>
                 ) : null}
               </>
@@ -159,14 +163,14 @@ export default function QuizResultPage() {
                 <p style={{ margin: '4px 0', whiteSpace: 'pre-wrap' }}>{a.text || '—'}</p>
                 <p style={{ margin: '4px 0', color: '#5A6478', fontSize: 14 }}>
                   {attempt.markingStatus === 'marked'
-                    ? `প্রাপ্ত নম্বর: ${a.marks ?? 0}/${q?.marks ?? 0}`
-                    : `পূর্ণ নম্বর: ${q?.marks ?? 0}`}
+                    ? t({ bn: `প্রাপ্ত নম্বর: ${a.marks ?? 0}/${q?.marks ?? 0}`, en: `Marks obtained: ${a.marks ?? 0}/${q?.marks ?? 0}` })
+                    : t({ bn: `পূর্ণ নম্বর: ${q?.marks ?? 0}`, en: `Full marks: ${q?.marks ?? 0}` })}
                 </p>
               </>
             )}
             {canMark ? (
               <label style={{ display: 'block', marginTop: 10 }}>
-                নম্বর দিন (সর্বোচ্চ {q?.marks ?? 0}):{' '}
+                {t({ bn: `নম্বর দিন (সর্বোচ্চ ${q?.marks ?? 0}):`, en: `Enter marks (max ${q?.marks ?? 0}):` })}{' '}
                 <input
                   type="number"
                   min={0}
@@ -187,13 +191,13 @@ export default function QuizResultPage() {
         <div>
           {markError ? <AlertBox tone="error">{markError}</AlertBox> : null}
           <Button onClick={() => void doMark()} loading={marking} size="lg">
-            মূল্যায়ন সংরক্ষণ করুন
+            {t({ bn: 'মূল্যায়ন সংরক্ষণ করুন', en: 'Save marking' })}
           </Button>
         </div>
       ) : null}
 
       <p style={{ marginTop: 24 }}>
-        <Link to="/exam" style={{ fontWeight: 600 }}>← সব পরীক্ষা / All exams</Link>
+        <Link to="/exam" style={{ fontWeight: 600 }}>{t({ bn: '← সব পরীক্ষা', en: '← All exams' })}</Link>
       </p>
     </PageShell>
   );

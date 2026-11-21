@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { PageShell } from '../components/PageShell';
+import { useLanguage } from '../i18n/LanguageContext';
 import { Card, LinkButton, ProgressBar, SkeletonCards } from '../components/ui';
 import { ErrorBox, StatusPill, requireDb } from '../components/AdminShared';
 import {
@@ -25,11 +26,13 @@ interface AreaCard {
   status: 'working' | 'soon';
   to?: string;
   countBn?: string;
+  countEn?: string;
 }
 
 const LAST_BACKUP_KEY = 'eduvelto-last-backup-v1';
 
 export default function AdminPage() {
+  const { lang, t } = useLanguage();
   const [counts, setCounts] = useState<DashboardCounts | null>(null);
   const [pending, setPending] = useState<VerificationRow[]>([]);
   const [error, setError] = useState('');
@@ -52,7 +55,7 @@ export default function AdminPage() {
           setLastBackup(null);
         }
       } catch (e) {
-        if (!cancelled) setError(friendlyAdminError(e));
+        if (!cancelled) setError(friendlyAdminError(e, lang));
       } finally {
         if (!cancelled) setLoading(false);
       }
@@ -83,6 +86,7 @@ export default function AdminPage() {
       status: 'working',
       to: '/admin/users',
       countBn: counts ? `${formatBnNumber(counts.users)} জন` : undefined,
+      countEn: counts ? `${counts.users} users` : undefined,
     },
     {
       id: 'teachers',
@@ -93,6 +97,7 @@ export default function AdminPage() {
       status: 'working',
       to: '/admin/teachers',
       countBn: counts ? `${formatBnNumber(counts.pendingVerifications)}টি অপেক্ষায়` : undefined,
+      countEn: counts ? `${counts.pendingVerifications} pending` : undefined,
     },
     {
       id: 'guardians',
@@ -128,6 +133,7 @@ export default function AdminPage() {
       status: 'working',
       to: '/admin/ads',
       countBn: ADSENSE_CLIENT_ID === '' ? 'এখনো সংযুক্ত হয়নি' : 'সংযুক্ত আছে',
+      countEn: ADSENSE_CLIENT_ID === '' ? 'Not connected yet' : 'Connected',
     },
     {
       id: 'ai',
@@ -180,8 +186,11 @@ export default function AdminPage() {
       status: 'working',
       to: '/admin/backup',
       countBn: lastBackup
-        ? `শেষ ব্যাকআপ: ${formatTime(lastBackup)}`
+        ? `শেষ ব্যাকআপ: ${formatTime(lastBackup, lang)}`
         : 'এখনো কোনো ব্যাকআপ হয়নি',
+      countEn: lastBackup
+        ? `Last backup: ${formatTime(lastBackup, lang)}`
+        : 'No backup yet',
     },
     {
       id: 'expansion',
@@ -196,24 +205,30 @@ export default function AdminPage() {
   return (
     <PageShell titleBn="অ্যাডমিন ড্যাশবোর্ড" titleEn="Admin dashboard" wide>
       <p>
-        মালিকের নিয়ন্ত্রণ কেন্দ্র — সব কাজ এখান থেকে, কোড ছাড়া। / The owner&apos;s control
-        centre — everything from here, no code.
+        {t({
+          bn: 'মালিকের নিয়ন্ত্রণ কেন্দ্র — সব কাজ এখান থেকে, কোড ছাড়া।',
+          en: 'The owner’s control centre — everything from here, no code.',
+        })}
       </p>
       <p className="ev-muted-ivory">
-        প্রতিটি অনুমোদন আলাদা — একটির সিদ্ধান্ত অন্যটিকে প্রভাবিত করে না। / Every approval is
-        separate — one decision never affects another.
+        {t({
+          bn: 'প্রতিটি অনুমোদন আলাদা — একটির সিদ্ধান্ত অন্যটিকে প্রভাবিত করে না।',
+          en: 'Every approval is separate — one decision never affects another.',
+        })}
       </p>
 
       {loading ? <SkeletonCards count={3} /> : null}
       {error ? <ErrorBox message={error} /> : null}
 
       <h2 className="ev-section-h2" style={{ marginTop: 24 }}>
-        অনুমোদনের অপেক্ষায় / Waiting for approval
+        {t({ bn: 'অনুমোদনের অপেক্ষায়', en: 'Waiting for approval' })}
       </h2>
       {loading ? null : pending.length === 0 ? (
         <p className="ev-muted-ivory">
-          কোনো আবেদন অপেক্ষায় নেই — নতুন আবেদন এলে প্রতিটি আলাদা করে এখানে দেখা যাবে। / Nothing
-          waiting — new applications appear here, each separately.
+          {t({
+            bn: 'কোনো আবেদন অপেক্ষায় নেই — নতুন আবেদন এলে প্রতিটি আলাদা করে এখানে দেখা যাবে।',
+            en: 'Nothing waiting — new applications appear here, each separately.',
+          })}
         </p>
       ) : (
         <div className="ev-dash-grid">
@@ -221,35 +236,34 @@ export default function AdminPage() {
             <Card key={row.id}>
               <strong style={{ fontSize: 16 }}>{row.fullName}</strong> — {row.institution}
               <p className="ev-muted" style={{ fontSize: 14, margin: '8px 0 12px' }}>
-                শিক্ষক আবেদন · {formatTime(row.createdAt)}
+                {t({ bn: 'শিক্ষক আবেদন', en: 'Teacher application' })} · {formatTime(row.createdAt, lang)}
               </p>
-              <LinkButton to="/admin/teachers" variant="outline" size="sm">এই আবেদনের সিদ্ধান্ত নিন / Decide this application →</LinkButton>
+              <LinkButton to="/admin/teachers" variant="outline" size="sm">{t({ bn: 'এই আবেদনের সিদ্ধান্ত নিন', en: 'Decide this application' })} →</LinkButton>
             </Card>
           ))}
         </div>
       )}
 
-      <h2 className="ev-section-h2" style={{ marginTop: 24 }}>সব এলাকা / All areas</h2>
+      <h2 className="ev-section-h2" style={{ marginTop: 24 }}>{t({ bn: 'সব এলাকা', en: 'All areas' })}</h2>
       <div className="ev-dash-grid">
         {areas.map((a) => (
           <Card key={a.id} style={{ opacity: a.status === 'soon' ? 0.75 : 1 }}>
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, alignItems: 'center' }}>
-              <strong style={{ fontSize: 16 }}>{a.titleBn}</strong>
+              <strong style={{ fontSize: 16 }}>{lang === 'bn' ? a.titleBn : a.titleEn}</strong>
               <StatusPill
-                label={a.status === 'working' ? 'চালু / Working' : 'শীঘ্রই আসছে / Coming soon'}
+                label={a.status === 'working' ? t({ bn: 'চালু', en: 'Working' }) : t({ bn: 'শীঘ্রই আসছে', en: 'Coming soon' })}
                 tone={a.status === 'working' ? 'active' : 'muted'}
               />
               {a.countBn ? (
-                <span style={{ marginLeft: 'auto', color: '#57616A', fontSize: 14 }}>{a.countBn}</span>
+                <span style={{ marginLeft: 'auto', color: '#57616A', fontSize: 14 }}>{lang === 'bn' ? a.countBn : a.countEn}</span>
               ) : null}
             </div>
-            <p style={{ margin: '8px 0 4px', color: '#68747B', fontSize: 14 }}>{a.descBn}</p>
-            <p style={{ margin: '0 0 12px', color: '#68747B', fontSize: 14 }}>{a.descEn}</p>
+            <p style={{ margin: '8px 0 12px', color: '#68747B', fontSize: 14 }}>{lang === 'bn' ? a.descBn : a.descEn}</p>
             {a.to ? (
-              <LinkButton to={a.to} variant="outline" size="sm">খুলুন / Open →</LinkButton>
+              <LinkButton to={a.to} variant="outline" size="sm">{t({ bn: 'খুলুন', en: 'Open' })} →</LinkButton>
             ) : (
               <span className="ev-muted" style={{ fontSize: 14 }}>
-                এখনো তৈরি হয়নি — চালু হলে এখান থেকে খোলা যাবে। / Not built yet.
+                {t({ bn: 'এখনো তৈরি হয়নি — চালু হলে এখান থেকে খোলা যাবে।', en: 'Not built yet — it will open from here once live.' })}
               </span>
             )}
           </Card>
@@ -257,13 +271,13 @@ export default function AdminPage() {
       </div>
 
       <h2 className="ev-section-h2" style={{ marginTop: 24 }}>
-        বাইরের জিনিস — অবস্থা ও করণীয় / External items — status &amp; what to do
+        {t({ bn: 'বাইরের জিনিস — অবস্থা ও করণীয়', en: 'External items — status & what to do' })}
       </h2>
       <p className="ev-muted-ivory" style={{ fontSize: 14 }}>
-        এগুলো ড্যাশবোর্ড থেকে করা যায় না — কিন্তু অবস্থা এখানে দেখা যায়, আর কী করতে হবে তা
-        প্রতিটির নিচে লেখা আছে। শেষ যাচাই: {formatTime(new Date())} / These cannot be done from
-        the dashboard — but their status is shown here, with what to do under each. Last checked:{' '}
-        {formatTime(new Date())}
+        {t({
+          bn: `এগুলো ড্যাশবোর্ড থেকে করা যায় না — কিন্তু অবস্থা এখানে দেখা যায়, আর কী করতে হবে তা প্রতিটির নিচে লেখা আছে। শেষ যাচাই: ${formatTime(new Date(), lang)}`,
+          en: `These cannot be done from the dashboard — but their status is shown here, with what to do under each. Last checked: ${formatTime(new Date(), lang)}`,
+        })}
       </p>
       {external.map((item) => (
         <Card
@@ -274,7 +288,7 @@ export default function AdminPage() {
           }}
         >
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, alignItems: 'center' }}>
-            <strong>{item.titleBn}</strong>
+            <strong>{lang === 'bn' ? item.titleBn : item.titleEn}</strong>
             <span
               style={{
                 marginLeft: 'auto',
@@ -283,51 +297,53 @@ export default function AdminPage() {
                 fontWeight: 700,
               }}
             >
-              {item.statusBn}
+              {lang === 'bn' ? item.statusBn : item.statusEn}
             </span>
           </div>
-          <p style={{ margin: '8px 0', fontSize: 15 }}>{item.detailBn}</p>
-          <p style={{ margin: '0 0 8px', color: '#68747B', fontSize: 14 }}>{item.detailEn}</p>
+          <p style={{ margin: '8px 0', fontSize: 15 }}>{lang === 'bn' ? item.detailBn : item.detailEn}</p>
           <p style={{ margin: 0, fontSize: 14 }}>
-            কোথায় করবেন: <span lang="en">{item.whereBn}</span> / Where: {item.whereEn}
+            {t({ bn: 'কোথায় করবেন:', en: 'Where:' })} {lang === 'bn' ? item.whereBn : item.whereEn}
           </p>
         </Card>
       ))}
 
       <h2 className="ev-section-h2" style={{ marginTop: 24 }}>
-        ব্যবহারের হিসাব (আনুমানিক) / Usage estimate
+        {t({ bn: 'ব্যবহারের হিসাব (আনুমানিক)', en: 'Usage estimate' })}
       </h2>
       <p className="ev-muted-ivory" style={{ fontSize: 14 }}>
-        এই সংখ্যাগুলো শুধু এই ব্রাউজারের আনুমানিক হিসাব — আসল কোটা নয়। আসল সংখ্যা Firebase
-        console-এ দেখুন। / These numbers are this browser&apos;s estimate only — not the real
-        quota. See the real numbers in the Firebase console.
+        {t({
+          bn: 'এই সংখ্যাগুলো শুধু এই ব্রাউজারের আনুমানিক হিসাব — আসল কোটা নয়। আসল সংখ্যা Firebase console-এ দেখুন।',
+          en: 'These numbers are this browser’s estimate only — not the real quota. See the real numbers in the Firebase console.',
+        })}
       </p>
       <Card>
         <div className="ev-dash-row">
-          <span className="ev-dash-row-label">আজকের পড়া (Reads)</span>
+          <span className="ev-dash-row-label">{t({ bn: 'আজকের পড়া', en: 'Reads today' })}</span>
           <span className="ev-dash-row-bar">
-            <ProgressBar value={perc.firestoreReads} label={`Reads ${perc.firestoreReads.toFixed(1)}%`} />
+            <ProgressBar value={perc.firestoreReads} label={lang === 'bn' ? `পড়া ${perc.firestoreReads.toFixed(1)}%` : `Reads ${perc.firestoreReads.toFixed(1)}%`} />
           </span>
           <span className="ev-dash-row-pct">
-            {formatBnNumber(usage.firestoreReads)} / {formatBnNumber(QUOTAS.firestoreReadsPerDay)} ({perc.firestoreReads.toFixed(1)}%)
+            {lang === 'bn' ? formatBnNumber(usage.firestoreReads) : usage.firestoreReads} / {lang === 'bn' ? formatBnNumber(QUOTAS.firestoreReadsPerDay) : QUOTAS.firestoreReadsPerDay} ({perc.firestoreReads.toFixed(1)}%)
           </span>
         </div>
         <div className="ev-dash-row" style={{ marginBottom: 0 }}>
-          <span className="ev-dash-row-label">লেখা (Writes)</span>
+          <span className="ev-dash-row-label">{t({ bn: 'লেখা', en: 'Writes' })}</span>
           <span className="ev-dash-row-bar">
-            <ProgressBar value={perc.firestoreWrites} label={`Writes ${perc.firestoreWrites.toFixed(1)}%`} />
+            <ProgressBar value={perc.firestoreWrites} label={lang === 'bn' ? `লেখা ${perc.firestoreWrites.toFixed(1)}%` : `Writes ${perc.firestoreWrites.toFixed(1)}%`} />
           </span>
           <span className="ev-dash-row-pct">
-            {formatBnNumber(usage.firestoreWrites)} / {formatBnNumber(QUOTAS.firestoreWritesPerDay)} ({perc.firestoreWrites.toFixed(1)}%)
+            {lang === 'bn' ? formatBnNumber(usage.firestoreWrites) : usage.firestoreWrites} / {lang === 'bn' ? formatBnNumber(QUOTAS.firestoreWritesPerDay) : QUOTAS.firestoreWritesPerDay} ({perc.firestoreWrites.toFixed(1)}%)
           </span>
         </div>
         <p className="ev-muted" style={{ fontSize: 14, margin: '12px 0 0' }}>
-          Firebase console → Firestore Database → Usage tab-এ আসল সংখ্যা দেখুন। / See the real
-          numbers in Firebase console → Firestore Database → Usage tab.
+          {t({
+            bn: 'Firebase console → Firestore Database → Usage tab-এ আসল সংখ্যা দেখুন।',
+            en: 'See the real numbers in Firebase console → Firestore Database → Usage tab.',
+          })}
         </p>
       </Card>
       <p style={{ marginTop: 24 }}>
-        <LinkButton to="/admin/audit" variant="outline">অডিট লগ দেখুন / View audit log →</LinkButton>
+        <LinkButton to="/admin/audit" variant="outline">{t({ bn: 'অডিট লগ দেখুন', en: 'View audit log' })} →</LinkButton>
       </p>
     </PageShell>
   );

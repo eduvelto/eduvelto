@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { PageShell } from '../components/PageShell';
+import { useLanguage } from '../i18n/LanguageContext';
 import { Button, Card } from '../components/ui';
 import {
   AdminBackLink,
@@ -21,16 +22,17 @@ import {
 } from '../lib/admin';
 import type { DocumentData, QueryDocumentSnapshot } from 'firebase/firestore';
 
-const ROLE_LABEL: Record<string, string> = {
-  owner: 'মালিক',
-  admin: 'অ্যাডমিন',
-  moderator: 'মডারেটর',
-  teacher: 'শিক্ষক',
-  student: 'শিক্ষার্থী',
-  parent: 'অভিভাবক',
+const ROLE_LABEL: Record<string, { bn: string; en: string }> = {
+  owner: { bn: 'মালিক', en: 'Owner' },
+  admin: { bn: 'অ্যাডমিন', en: 'Admin' },
+  moderator: { bn: 'মডারেটর', en: 'Moderator' },
+  teacher: { bn: 'শিক্ষক', en: 'Teacher' },
+  student: { bn: 'শিক্ষার্থী', en: 'Student' },
+  parent: { bn: 'অভিভাবক', en: 'Guardian' },
 };
 
 export default function AdminUsersPage() {
+  const { lang, t } = useLanguage();
   const [rows, setRows] = useState<AdminUserRow[]>([]);
   const [total, setTotal] = useState<number | null>(null);
   const [lastDoc, setLastDoc] = useState<QueryDocumentSnapshot<DocumentData> | null>(null);
@@ -59,7 +61,7 @@ export default function AdminUsersPage() {
         setLastDoc(page.lastDoc);
         setHasMore(page.hasMore);
       } catch (e) {
-        if (mounted.current) setError(friendlyAdminError(e));
+        if (mounted.current) setError(friendlyAdminError(e, lang));
       } finally {
         if (mounted.current) setLoading(false);
       }
@@ -85,7 +87,7 @@ export default function AdminUsersPage() {
       setLastDoc(page.lastDoc);
       setHasMore(page.hasMore);
     } catch (e) {
-      setError(friendlyAdminError(e));
+      setError(friendlyAdminError(e, lang));
     } finally {
       setLoadingMore(false);
     }
@@ -102,7 +104,7 @@ export default function AdminUsersPage() {
       setHasMore(false);
       setSearched(true);
     } catch (e) {
-      setError(friendlyAdminError(e));
+      setError(friendlyAdminError(e, lang));
     } finally {
       setSearching(false);
     }
@@ -119,7 +121,7 @@ export default function AdminUsersPage() {
       setLastDoc(page.lastDoc);
       setHasMore(page.hasMore);
     } catch (e) {
-      setError(friendlyAdminError(e));
+      setError(friendlyAdminError(e, lang));
     } finally {
       setLoading(false);
     }
@@ -129,9 +131,10 @@ export default function AdminUsersPage() {
     <PageShell titleBn="ব্যবহারকারী" titleEn="Users">
       <AdminBackLink />
       <p>
-        সব অ্যাকাউন্ট — নতুন আগে। একজনকে খুলে তার প্রোফাইল, মেসেজ ও রিপোর্ট দেখুন; স্থগিত করুন বা
-        ভূমিকা বদলান। / All accounts — newest first. Open one to see their profile, messages and
-        reports; suspend or change their role.
+        {t({
+          bn: 'সব অ্যাকাউন্ট — নতুন আগে। একজনকে খুলে তার প্রোফাইল, মেসেজ ও রিপোর্ট দেখুন; স্থগিত করুন বা ভূমিকা বদলান।',
+          en: 'All accounts — newest first. Open one to see their profile, messages and reports; suspend or change their role.',
+        })}
       </p>
 
       <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', marginBottom: 8 }}>
@@ -139,8 +142,8 @@ export default function AdminUsersPage() {
           type="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          placeholder="ইমেইল দিয়ে খুঁজুন — search by exact email"
-          aria-label="ইমেইল দিয়ে খুঁজুন"
+          placeholder={t({ bn: 'ইমেইল দিয়ে খুঁজুন', en: 'Search by exact email' })}
+          aria-label={t({ bn: 'ইমেইল দিয়ে খুঁজুন', en: 'Search by email' })}
           className="ev-input"
           style={{ flex: '1 1 220px' }}
         />
@@ -149,18 +152,18 @@ export default function AdminUsersPage() {
           disabled={searching || email.trim() === ''}
           loading={searching}
         >
-          {searching ? 'খুঁজছি…' : 'খুঁজুন / Search'}
+          {searching ? t({ bn: 'খুঁজছি…', en: 'Searching…' }) : t({ bn: 'খুঁজুন', en: 'Search' })}
         </Button>
         {searched ? (
           <Button variant="outline" onClick={() => void clearSearch()}>
-            সব দেখান / Show all
+            {t({ bn: 'সব দেখান', en: 'Show all' })}
           </Button>
         ) : null}
       </div>
       <p className="ev-muted-ivory" style={{ fontSize: 14, marginTop: 0 }}>
-        {total !== null ? `মোট ${formatBnNumber(total)} জন — ` : ''}দেখানো হচ্ছে{' '}
-        {formatBnNumber(rows.length)} জন / Showing {rows.length}
-        {total !== null ? ` of ${total}` : ''}
+        {lang === 'bn'
+          ? `${total !== null ? `মোট ${formatBnNumber(total)} জন — ` : ''}দেখানো হচ্ছে ${formatBnNumber(rows.length)} জন`
+          : `Showing ${rows.length}${total !== null ? ` of ${total}` : ''}`}
       </p>
 
       {loading ? <LoadingBox /> : null}
@@ -170,6 +173,7 @@ export default function AdminUsersPage() {
           bn="কাউকে পাওয়া যায়নি।"
           en="Nobody found."
           nextBn="ইমেইল হুবহু মিলিয়ে লিখুন, অথবা তালিকা রিফ্রেশ করুন।"
+          nextEn="Type the email exactly, or refresh the list."
         />
       ) : null}
 
@@ -180,7 +184,7 @@ export default function AdminUsersPage() {
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, alignItems: 'center' }}>
               <strong>{row.displayName}</strong>
               <StatusPill
-                label={ROLE_LABEL[row.role] ?? row.role}
+                label={ROLE_LABEL[row.role] ? t(ROLE_LABEL[row.role]) : row.role}
                 tone={row.role === 'owner' ? 'ready' : 'muted'}
               />
               {row.role === 'owner' ? (
@@ -198,7 +202,7 @@ export default function AdminUsersPage() {
                 </span>
               ) : null}
               <StatusPill
-                label={row.isActive ? 'সক্রিয় / Active' : 'স্থগিত / Suspended'}
+                label={row.isActive ? t({ bn: 'সক্রিয়', en: 'Active' }) : t({ bn: 'স্থগিত', en: 'Suspended' })}
                 tone={row.isActive ? 'active' : 'ready'}
               />
             </div>
@@ -206,19 +210,19 @@ export default function AdminUsersPage() {
               <span lang="en">{row.email}</span>
               {row.institution ? ` · ${row.institution}` : ''}
               {row.classLevel ? ` · ${row.classLevel}` : ''}
-              {row.verificationStatus ? ` · শিক্ষক যাচাই: ${row.verificationStatus}` : ''}
+              {row.verificationStatus ? ` · ${t({ bn: 'শিক্ষক যাচাই', en: 'Teacher verification' })}: ${row.verificationStatus}` : ''}
             </p>
             <p style={{ margin: '0 0 6px', color: '#68747B', fontSize: 14 }}>
-              সদস্য: {formatTime(row.createdAt)}
+              {t({ bn: 'সদস্য', en: 'Member since' })}: {formatTime(row.createdAt, lang)}
             </p>
-            <Link to={`/admin/users/${row.uid}`}>প্রোফাইল খুলুন / Open profile →</Link>
+            <Link to={`/admin/users/${row.uid}`}>{t({ bn: 'প্রোফাইল খুলুন', en: 'Open profile' })} →</Link>
             </Card>
           </li>
         ))}
       </ul>
       {hasMore && !searched ? (
         <Button variant="outline" block onClick={() => void loadMore()} loading={loadingMore}>
-          {loadingMore ? 'লোড হচ্ছে…' : 'আরও দেখুন / Load more'}
+          {loadingMore ? t({ bn: 'লোড হচ্ছে…', en: 'Loading…' }) : t({ bn: 'আরও দেখুন', en: 'Load more' })}
         </Button>
       ) : null}
     </PageShell>

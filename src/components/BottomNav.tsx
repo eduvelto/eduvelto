@@ -12,6 +12,7 @@
 // must never cover content or buttons (PWA design-review must-fix, 21 Nov).
 
 import { NavLink, useLocation } from 'react-router-dom';
+import { useLanguage } from '../i18n/LanguageContext';
 
 const ITEMS = [
   { to: '/', bn: 'হোম', en: 'Home' },
@@ -74,8 +75,9 @@ function NavIcon({ to }: { to: string }) {
 
 export default function BottomNav(props: { bottomOffsetPx: number }) {
   const location = useLocation();
+  const { t } = useLanguage();
   return (
-    <nav aria-label="মোবাইল মেনু / Mobile menu" className="ev-bottom-nav" style={{ bottom: props.bottomOffsetPx }}>
+    <nav aria-label={t({ bn: 'মোবাইল মেনু', en: 'Mobile menu' })} className="ev-bottom-nav" style={{ bottom: props.bottomOffsetPx }}>
       {ITEMS.map((item) => {
         const active =
           item.to === '/'
@@ -89,7 +91,7 @@ export default function BottomNav(props: { bottomOffsetPx: number }) {
             className={`ev-bottom-nav-item${active ? ' ev-bottom-nav-item-active' : ''}`}
           >
             <NavIcon to={item.to} />
-            <span>{item.bn}</span>
+            <span>{t(item)}</span>
           </NavLink>
         );
       })}

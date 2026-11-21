@@ -188,8 +188,9 @@ export function formatBnNumber(n: number): string {
   return n.toLocaleString('bn-BD');
 }
 
-/** Human-readable time from a Firestore Timestamp, Date, string or null. */
-export function formatTime(value: unknown): string {
+/** Human-readable time from a Firestore Timestamp, Date, string or null.
+ *  `lang` picks the locale: Bangla month names/digits in 'bn', English in 'en'. */
+export function formatTime(value: unknown, lang: 'bn' | 'en' = 'bn'): string {
   try {
     if (value == null) return '—';
     let d: Date | null = null;
@@ -203,7 +204,7 @@ export function formatTime(value: unknown): string {
     }
     if (!d) return '—';
     // No seconds, month name, Bangla day period (REVIEW a11y S7).
-    return d.toLocaleString('bn-BD', {
+    return d.toLocaleString(lang === 'bn' ? 'bn-BD' : 'en-GB', {
       day: 'numeric',
       month: 'long',
       year: 'numeric',
@@ -231,54 +232,94 @@ function byNewest(a: { createdAt: unknown }, b: { createdAt: unknown }): number 
 }
 
 /**
- * Friendly Bangla error for admin failures — every error box in the
+ * Friendly error for admin failures — every error box in the
  * dashboard shows this, plus what to do next (REVIEW UX B6). The raw
  * code is logged to the console for debugging; the UI never shows a
- * bare error code.
+ * bare error code. `lang` picks the message language.
  */
-export function friendlyAdminError(error: unknown): string {
+export function friendlyAdminError(error: unknown, lang: 'bn' | 'en' = 'bn'): string {
   const code =
     error instanceof Error ? error.message : typeof error === 'string' ? error : 'unknown';
   if (typeof console !== 'undefined') console.error('[Eduvelto admin] error:', code, error);
-  switch (code) {
-    case 'not-signed-in':
-      return 'আবার লগইন করুন — আপনার সেশন শেষ হয়ে গেছে। লগইন করে আবার চেষ্টা করুন।';
-    case 'not-configured':
-      return 'Firebase এখনো যুক্ত হয়নি — প্রকল্প সেটআপ সম্পূর্ণ হলে এই পাতা কাজ করবে।';
-    case 'owner-protected':
-      return 'মালিকের অ্যাকাউন্টে এই কাজ করা যায় না — মালিককে কেউ স্থগিত বা ডাউনগ্রেড করতে পারে না।';
-    case 'owner-role-not-assignable':
-      return 'মালিকের ভূমিকা কাউকে দেওয়া যায় না — মালিক একজনই।';
-    case 'reason-too-short':
-      return `কারণ কমপক্ষে ${formatBnNumber(MIN_REASON_LENGTH)} অক্ষর লিখুন — কেন এই সিদ্ধান্ত, তা পরে দেখা যায় এজন্য।`;
-    case 'user-not-found':
-      return 'এই ব্যবহারকারী পাওয়া যায়নি। তালিকা রিফ্রেশ করে আবার চেষ্টা করুন।';
-    case 'verification-not-found':
-      return 'এই আবেদনটি পাওয়া যায়নি। তালিকা রিফ্রেশ করে আবার চেষ্টা করুন।';
-    case 'verification-not-pending':
-      return 'এই আবেদনটির সিদ্ধান্ত ইতিমধ্যে হয়ে গেছে। নতুন সিদ্ধান্ত নিতে প্রথমে "আবার খুলুন" করুন।';
-    case 'verification-not-verified':
-      return 'এই শিক্ষক এখনো ভেরিফায়েড নন — শুধু ভেরিফায়েড শিক্ষকের যাচাই বাতিল করা যায়।';
-    case 'verification-not-decided':
-      return 'এই আবেদনটির এখনো কোনো সিদ্ধান্ত হয়নি — "আবার খুলুন" শুধু সিদ্ধান্ত হওয়া আবেদনে চলে।';
-    case 'cannot-decide-own-application':
-      return 'নিজের আবেদনে নিজে সিদ্ধান্ত নেওয়া যায় না — অন্য অ্যাডমিন/মালিক সিদ্ধান্ত নেবেন।';
-    case 'verification-checks-incomplete':
-      return 'অনুমোদনের আগে ৪টি যাচাই সবগুলো টিক দিতে হবে — পরিচয়, প্রতিষ্ঠান, বিষয়/যোগ্যতা ও প্রাপ্তবয়স্ক।';
-    case 'adult-check-required':
-      return 'এই ভূমিকা দেওয়ার আগে নিশ্চিত করুন — এই ব্যক্তি প্রাপ্তবয়স্ক এবং পরিচয় যাচাই করা হয়েছে। টিক দিয়ে আবার চেষ্টা করুন।';
-    case 'restricted-feature-needs-separate-owner-approval':
-      return 'এই ফিচারটি সীমাবদ্ধ (Category C) — মালিকের আলাদা অনুমোদন ছাড়া চালু হবে না।';
-    case 'unknown-feature':
-      return 'এই ফিচারটি চেনা যায়নি। পাতাটি রিফ্রেশ করে আবার চেষ্টা করুন।';
-    case 'permission-denied':
-      return 'ডাটাবেস অনুমতি দেয়নি — Firestore নিয়ম (rules) এখনো ডেপ্লয় হয়নি, অথবা এই কাজের অনুমতি আপনার নেই। নিয়ম ডেপ্লয় হয়েছে কিনা দেখুন।';
-    case 'unavailable':
-    case 'failed-precondition':
-      return 'Firebase-এ পৌঁছানো যাচ্ছে না, অথবা ডাটাবেসের ইনডেক্স এখনো তৈরি হয়নি। সংযোগ দেখে আবার চেষ্টা করুন।';
-    default:
-      return 'কিছু একটা ভুল হয়েছে। আবার চেষ্টা করুন — না হলে পাতাটি রিফ্রেশ করুন।';
-  }
+  const M: Record<string, { bn: string; en: string }> = {
+    'not-signed-in': {
+      bn: 'আবার লগইন করুন — আপনার সেশন শেষ হয়ে গেছে। লগইন করে আবার চেষ্টা করুন।',
+      en: 'Please log in again — your session has expired. Log in and try again.',
+    },
+    'not-configured': {
+      bn: 'Firebase এখনো যুক্ত হয়নি — প্রকল্প সেটআপ সম্পূর্ণ হলে এই পাতা কাজ করবে।',
+      en: 'Firebase is not connected yet — this page will work once the project setup is complete.',
+    },
+    'owner-protected': {
+      bn: 'মালিকের অ্যাকাউন্টে এই কাজ করা যায় না — মালিককে কেউ স্থগিত বা ডাউনগ্রেড করতে পারে না।',
+      en: 'This cannot be done on the owner’s account — nobody can suspend or downgrade the owner.',
+    },
+    'owner-role-not-assignable': {
+      bn: 'মালিকের ভূমিকা কাউকে দেওয়া যায় না — মালিক একজনই।',
+      en: 'The owner role cannot be given to anyone — there is only one owner.',
+    },
+    'reason-too-short': {
+      bn: `কারণ কমপক্ষে ${formatBnNumber(MIN_REASON_LENGTH)} অক্ষর লিখুন — কেন এই সিদ্ধান্ত, তা পরে দেখা যায় এজন্য।`,
+      en: `Write a reason of at least ${MIN_REASON_LENGTH} characters — so the reason for this decision can be seen later.`,
+    },
+    'user-not-found': {
+      bn: 'এই ব্যবহারকারী পাওয়া যায়নি। তালিকা রিফ্রেশ করে আবার চেষ্টা করুন।',
+      en: 'This user was not found. Refresh the list and try again.',
+    },
+    'verification-not-found': {
+      bn: 'এই আবেদনটি পাওয়া যায়নি। তালিকা রিফ্রেশ করে আবার চেষ্টা করুন।',
+      en: 'This application was not found. Refresh the list and try again.',
+    },
+    'verification-not-pending': {
+      bn: 'এই আবেদনটির সিদ্ধান্ত ইতিমধ্যে হয়ে গেছে। নতুন সিদ্ধান্ত নিতে প্রথমে "আবার খুলুন" করুন।',
+      en: 'This application has already been decided. To decide again, first choose "Reopen".',
+    },
+    'verification-not-verified': {
+      bn: 'এই শিক্ষক এখনো ভেরিফায়েড নন — শুধু ভেরিফায়েড শিক্ষকের যাচাই বাতিল করা যায়।',
+      en: 'This teacher is not verified yet — only a verified teacher’s verification can be revoked.',
+    },
+    'verification-not-decided': {
+      bn: 'এই আবেদনটির এখনো কোনো সিদ্ধান্ত হয়নি — "আবার খুলুন" শুধু সিদ্ধান্ত হওয়া আবেদনে চলে।',
+      en: 'This application has not been decided yet — "Reopen" only works on decided applications.',
+    },
+    'cannot-decide-own-application': {
+      bn: 'নিজের আবেদনে নিজে সিদ্ধান্ত নেওয়া যায় না — অন্য অ্যাডমিন/মালিক সিদ্ধান্ত নেবেন।',
+      en: 'You cannot decide your own application — another admin or the owner will decide.',
+    },
+    'verification-checks-incomplete': {
+      bn: 'অনুমোদনের আগে ৪টি যাচাই সবগুলো টিক দিতে হবে — পরিচয়, প্রতিষ্ঠান, বিষয়/যোগ্যতা ও প্রাপ্তবয়স্ক।',
+      en: 'Before approving, tick all 4 checks — identity, institution, subject/qualification and adult.',
+    },
+    'adult-check-required': {
+      bn: 'এই ভূমিকা দেওয়ার আগে নিশ্চিত করুন — এই ব্যক্তি প্রাপ্তবয়স্ক এবং পরিচয় যাচাই করা হয়েছে। টিক দিয়ে আবার চেষ্টা করুন।',
+      en: 'Before giving this role, make sure this person is an adult and their identity has been verified. Tick and try again.',
+    },
+    'restricted-feature-needs-separate-owner-approval': {
+      bn: 'এই ফিচারটি সীমাবদ্ধ (Category C) — মালিকের আলাদা অনুমোদন ছাড়া চালু হবে না।',
+      en: 'This feature is restricted (Category C) — it will not turn on without the owner’s separate approval.',
+    },
+    'unknown-feature': {
+      bn: 'এই ফিচারটি চেনা যায়নি। পাতাটি রিফ্রেশ করে আবার চেষ্টা করুন।',
+      en: 'This feature was not recognised. Refresh the page and try again.',
+    },
+    'permission-denied': {
+      bn: 'ডাটাবেস অনুমতি দেয়নি — Firestore নিয়ম (rules) এখনো ডেপ্লয় হয়নি, অথবা এই কাজের অনুমতি আপনার নেই। নিয়ম ডেপ্লয় হয়েছে কিনা দেখুন।',
+      en: 'The database did not allow this — the Firestore rules are not deployed yet, or you do not have permission for this. Check whether the rules are deployed.',
+    },
+    unavailable: {
+      bn: 'Firebase-এ পৌঁছানো যাচ্ছে না, অথবা ডাটাবেসের ইনডেক্স এখনো তৈরি হয়নি। সংযোগ দেখে আবার চেষ্টা করুন।',
+      en: 'Cannot reach Firebase, or the database index is not ready yet. Check the connection and try again.',
+    },
+    'failed-precondition': {
+      bn: 'Firebase-এ পৌঁছানো যাচ্ছে না, অথবা ডাটাবেসের ইনডেক্স এখনো তৈরি হয়নি। সংযোগ দেখে আবার চেষ্টা করুন।',
+      en: 'Cannot reach Firebase, or the database index is not ready yet. Check the connection and try again.',
+    },
+  };
+  const m = M[code] ?? {
+    bn: 'কিছু একটা ভুল হয়েছে। আবার চেষ্টা করুন — না হলে পাতাটি রিফ্রেশ করুন।',
+    en: 'Something went wrong. Try again — if not, refresh the page.',
+  };
+  return lang === 'bn' ? m.bn : m.en;
 }
 
 /** Bangla dictionary for audit-log actions (REVIEW UX S4). */

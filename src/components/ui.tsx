@@ -4,6 +4,7 @@
 
 import { useEffect, useRef, useState, type ButtonHTMLAttributes, type ReactNode } from 'react';
 import { Link } from 'react-router-dom';
+import { useLanguage } from '../i18n/LanguageContext';
 
 /** True when the OS asks for reduced motion — animations then jump to the end state. */
 export function prefersReducedMotion(): boolean {
@@ -147,8 +148,9 @@ export function Chip(props: { children: ReactNode; tone?: 'blue' | 'gold' | 'nav
 export function Skeleton(props: { lines?: number; height?: number; width?: string }) {
   const lines = props.lines ?? 3;
   const height = props.height ?? 18;
+  const { t } = useLanguage();
   return (
-    <div role="status" aria-label="লোড হচ্ছে / Loading" style={{ margin: '4px 0 16px' }}>
+    <div role="status" aria-label={t({ bn: 'লোড হচ্ছে', en: 'Loading' })} style={{ margin: '4px 0 16px' }}>
       {Array.from({ length: lines }).map((_, i) => (
         <div
           key={i}
@@ -163,8 +165,9 @@ export function Skeleton(props: { lines?: number; height?: number; width?: strin
 /** Card-shaped skeleton used while a list of cards loads. */
 export function SkeletonCards(props: { count?: number }) {
   const count = props.count ?? 3;
+  const { t } = useLanguage();
   return (
-    <div role="status" aria-label="লোড হচ্ছে / Loading">
+    <div role="status" aria-label={t({ bn: 'লোড হচ্ছে', en: 'Loading' })}>
       {Array.from({ length: count }).map((_, i) => (
         <div key={i} className="ev-card" style={{ marginBottom: 12, padding: 16 }}>
           <div className="ev-skeleton" style={{ height: 20, width: '55%', marginBottom: 10 }} />
@@ -178,13 +181,14 @@ export function SkeletonCards(props: { count?: number }) {
 
 export function AlertBox(props: { tone: 'error' | 'ok' | 'info'; children: ReactNode; onRetry?: () => void }) {
   const cls = props.tone === 'error' ? 'ev-alert-error' : props.tone === 'ok' ? 'ev-alert-ok' : 'ev-alert-info';
+  const { t } = useLanguage();
   return (
     <div className={`ev-alert ${cls}`} role={props.tone === 'error' ? 'alert' : 'status'}>
       {props.children}
       {props.onRetry ? (
         <span style={{ display: 'block', marginTop: 8 }}>
           <Button variant="outline" size="sm" onClick={props.onRetry}>
-            আবার চেষ্টা করুন / Retry
+            {t({ bn: 'আবার চেষ্টা করুন', en: 'Retry' })}
           </Button>
         </span>
       ) : null}
@@ -193,8 +197,10 @@ export function AlertBox(props: { tone: 'error' | 'ok' | 'info'; children: React
 }
 
 /** Stat tile for dashboards / progress / home hero. Pass `numeric` to animate the
- *  number counting up; `suffix` (e.g. "%") is appended after the animated number. */
+ *  number counting up; `suffix` (e.g. "%") is appended after the animated number.
+ *  LANGUAGE: one label only — labelBn in Bangla mode, labelEn in English mode. */
 export function StatCard(props: { value: string; labelBn: string; labelEn: string; tone?: 'blue' | 'gold'; numeric?: number; suffix?: string }) {
+  const { lang } = useLanguage();
   return (
     <div className="ev-card" style={{ textAlign: 'center', padding: '18px 12px' }}>
       <div
@@ -215,8 +221,9 @@ export function StatCard(props: { value: string; labelBn: string; labelEn: strin
           props.value
         )}
       </div>
-      <div style={{ fontWeight: 600, color: '#142B3B', marginTop: 2 }}>{props.labelBn}</div>
-      <div style={{ fontSize: 13, color: '#68747B' }}>{props.labelEn}</div>
+      <div style={{ fontWeight: 600, color: '#142B3B', marginTop: 2 }}>
+        {lang === 'bn' ? props.labelBn : props.labelEn}
+      </div>
     </div>
   );
 }

@@ -8,6 +8,7 @@ import BottomNav from './components/BottomNav';
 import Footer from './components/Footer';
 import InstallAppPrompt from './components/InstallAppPrompt';
 import { AdminGuard } from './components/AdminGuard';
+import { T, useLanguage } from './i18n/LanguageContext';
 // SCALE (10k users): route-level code splitting. Before this change the
 // first visit downloaded ALL 35 pages in one 909 kB bundle (admin pages
 // included, for every visitor). Now the first load is only the shell +
@@ -89,6 +90,7 @@ function DashboardRedirect() {
 // login still succeeds, but the app cannot be used (plan Step 1).
 export default function App() {
   const nav = strings.nav;
+  const { t } = useLanguage();
   const { user, profile, suspended, loading, signOut } = useAuth();
   const location = useLocation();
   // Persistent bottom banner (owner brief 20 Nov 21:52): fixed to the
@@ -117,51 +119,51 @@ export default function App() {
       }
     >
       <header className="ev-header">
-        <Link to="/" style={{ display: 'inline-flex', alignItems: 'center', textDecoration: 'none' }} aria-label="Eduvelto — হোম">
+        <Link to="/" style={{ display: 'inline-flex', alignItems: 'center', textDecoration: 'none' }} aria-label={t({ bn: 'Eduvelto — হোম', en: 'Eduvelto — Home' })}>
           <img src="/logo-white.png" alt="Eduvelto" style={{ height: 40, width: 'auto', display: 'block' }} />
         </Link>
-        <span className="ev-header-tagline">{strings.tagline.bn}</span>
+        <span className="ev-header-tagline">{t(strings.tagline)}</span>
         <button
           type="button"
           className="ev-menu-btn"
           aria-expanded={menuOpen}
           aria-controls="ev-main-nav"
-          aria-label={menuOpen ? 'মেনু বন্ধ করুন / Close menu' : 'মেনু খুলুন / Open menu'}
+          aria-label={menuOpen ? t({ bn: 'মেনু বন্ধ করুন', en: 'Close menu' }) : t({ bn: 'মেনু খুলুন', en: 'Open menu' })}
           onClick={() => setMenuOpen((o) => !o)}
         >
-          {menuOpen ? '✕ বন্ধ' : '☰ মেনু'}
+          {menuOpen ? `✕ ${t({ bn: 'বন্ধ', en: 'Close' })}` : `☰ ${t({ bn: 'মেনু', en: 'Menu' })}`}
         </button>
-        <nav aria-label="প্রধান মেনু" id="ev-main-nav" className={`ev-header-nav${menuOpen ? ' ev-header-nav-open' : ''}`}>
-          <NavLink to="/directory" className={({ isActive }) => `ev-navlink${isActive ? ' ev-navlink-active' : ''}`}>{nav.directory.bn}</NavLink>
-          <NavLink to="/library" className={({ isActive }) => `ev-navlink${isActive ? ' ev-navlink-active' : ''}`}>{nav.library.bn}</NavLink>
-          <NavLink to="/exam" className={({ isActive }) => `ev-navlink${isActive ? ' ev-navlink-active' : ''}`}>{nav.exam.bn}</NavLink>
-          <NavLink to="/routine" className={({ isActive }) => `ev-navlink${isActive ? ' ev-navlink-active' : ''}`}>{nav.routine.bn}</NavLink>
-          <NavLink to="/progress" className={({ isActive }) => `ev-navlink${isActive ? ' ev-navlink-active' : ''}`}>{nav.progress.bn}</NavLink>
-          <NavLink to="/health" className={({ isActive }) => `ev-navlink${isActive ? ' ev-navlink-active' : ''}`}>{nav.health.bn}</NavLink>
-          <NavLink to="/about" className={({ isActive }) => `ev-navlink${isActive ? ' ev-navlink-active' : ''}`}>{nav.about.bn}</NavLink>
-          <NavLink to="/founder" className={({ isActive }) => `ev-navlink${isActive ? ' ev-navlink-active' : ''}`}>{nav.founder.bn}</NavLink>
-          <NavLink to="/contact" className={({ isActive }) => `ev-navlink${isActive ? ' ev-navlink-active' : ''}`}>{nav.contact.bn}</NavLink>
+        <nav aria-label={t({ bn: 'প্রধান মেনু', en: 'Main menu' })} id="ev-main-nav" className={`ev-header-nav${menuOpen ? ' ev-header-nav-open' : ''}`}>
+          <NavLink to="/directory" className={({ isActive }) => `ev-navlink${isActive ? ' ev-navlink-active' : ''}`}>{t(nav.directory)}</NavLink>
+          <NavLink to="/library" className={({ isActive }) => `ev-navlink${isActive ? ' ev-navlink-active' : ''}`}>{t(nav.library)}</NavLink>
+          <NavLink to="/exam" className={({ isActive }) => `ev-navlink${isActive ? ' ev-navlink-active' : ''}`}>{t(nav.exam)}</NavLink>
+          <NavLink to="/routine" className={({ isActive }) => `ev-navlink${isActive ? ' ev-navlink-active' : ''}`}>{t(nav.routine)}</NavLink>
+          <NavLink to="/progress" className={({ isActive }) => `ev-navlink${isActive ? ' ev-navlink-active' : ''}`}>{t(nav.progress)}</NavLink>
+          <NavLink to="/health" className={({ isActive }) => `ev-navlink${isActive ? ' ev-navlink-active' : ''}`}>{t(nav.health)}</NavLink>
+          <NavLink to="/about" className={({ isActive }) => `ev-navlink${isActive ? ' ev-navlink-active' : ''}`}>{t(nav.about)}</NavLink>
+          <NavLink to="/founder" className={({ isActive }) => `ev-navlink${isActive ? ' ev-navlink-active' : ''}`}>{t(nav.founder)}</NavLink>
+          <NavLink to="/contact" className={({ isActive }) => `ev-navlink${isActive ? ' ev-navlink-active' : ''}`}>{t(nav.contact)}</NavLink>
           {profile?.role === 'owner' ? (
-            <NavLink to="/admin" className={({ isActive }) => `ev-navlink${isActive ? ' ev-navlink-active' : ''}`} style={{ color: '#D9A441', fontWeight: 700 }}>{nav.admin.bn}</NavLink>
+            <NavLink to="/admin" className={({ isActive }) => `ev-navlink${isActive ? ' ev-navlink-active' : ''}`} style={{ color: '#D9A441', fontWeight: 700 }}>{t(nav.admin)}</NavLink>
           ) : null}
           {loading ? null : user ? (
             <>
-              <NavLink to="/dashboard" className={({ isActive }) => `ev-navlink${isActive ? ' ev-navlink-active' : ''}`}>{nav.dashboard.bn}</NavLink>
+              <NavLink to="/dashboard" className={({ isActive }) => `ev-navlink${isActive ? ' ev-navlink-active' : ''}`}>{t(nav.dashboard)}</NavLink>
               <NavLink to="/profile" className={({ isActive }) => `ev-navlink${isActive ? ' ev-navlink-active' : ''}`}>
-                {profile?.displayName ?? nav.profile.bn}
+                {profile?.displayName ?? t(nav.profile)}
               </NavLink>
               <button
                 type="button"
                 onClick={() => void signOut()}
                 className="ev-btn ev-btn-sm ev-btn-header"
               >
-                {nav.logout.bn}
+                {t(nav.logout)}
               </button>
             </>
           ) : (
             <>
-              <NavLink to="/login" className={({ isActive }) => `ev-navlink${isActive ? ' ev-navlink-active' : ''}`}>{nav.login.bn}</NavLink>
-              <NavLink to="/register" className={({ isActive }) => `ev-navlink${isActive ? ' ev-navlink-active' : ''}`}>{nav.register.bn}</NavLink>
+              <NavLink to="/login" className={({ isActive }) => `ev-navlink${isActive ? ' ev-navlink-active' : ''}`}>{t(nav.login)}</NavLink>
+              <NavLink to="/register" className={({ isActive }) => `ev-navlink${isActive ? ' ev-navlink-active' : ''}`}>{t(nav.register)}</NavLink>
             </>
           )}
         </nav>
@@ -169,34 +171,29 @@ export default function App() {
       {suspended ? (
         <main style={{ maxWidth: 720, margin: '0 auto', padding: '24px 16px', fontFamily: 'system-ui, sans-serif' }}>
           <div style={{ border: '1px solid #b00020', borderRadius: 8, padding: '20px 16px', background: '#fdf0f0' }}>
-            <h1 style={{ marginTop: 0, color: '#b00020', fontSize: 24 }}>{strings.profile.suspendedTitle.bn}</h1>
-            <p>{strings.profile.suspendedBody.bn}</p>
-            <p style={{ color: '#555' }}>{strings.profile.suspendedBody.en}</p>
+            <h1 style={{ marginTop: 0, color: '#b00020', fontSize: 24 }}>{t(strings.profile.suspendedTitle)}</h1>
+            <p>{t(strings.profile.suspendedBody)}</p>
             {profile?.suspendedReason ? (
               <p>
-                <strong>স্থগিতের কারণ / Reason:</strong> {profile.suspendedReason}
+                <strong>{t({ bn: 'স্থগিতের কারণ', en: 'Reason' })}:</strong> {profile.suspendedReason}
               </p>
             ) : null}
             <p style={{ color: '#555', fontSize: 14 }}>
-              আপিল করতে অ্যাডমিনের সঙ্গে যোগাযোগ করুন (সাপোর্ট পাতা / ইমেইল)। / To appeal, contact
-              an admin (support page / email). আপনি মালিক হলে: Firebase console → Firestore →
-              users → আপনার ডকুমেন্ট → isActive ফিল্ডটি মুছে দিন (শুধু মালিকের অ্যাকাউন্টের
-              ক্ষেত্রে)। / If you are the owner: Firebase console → Firestore → users → your
-              document → delete the isActive field.
+              {t({ bn: 'আপিল করতে অ্যাডমিনের সঙ্গে যোগাযোগ করুন (সাপোর্ট পাতা / ইমেইল)। আপনি মালিক হলে: Firebase console → Firestore → users → আপনার ডকুমেন্ট → isActive ফিল্ডটি মুছে দিন (শুধু মালিকের অ্যাকাউন্টের ক্ষেত্রে)।', en: 'To appeal, contact an admin (support page / email). If you are the owner: Firebase console → Firestore → users → your document → delete the isActive field.' })}
             </p>
             <button
               type="button"
               onClick={() => void signOut()}
               style={{ padding: '10px 18px', minHeight: 48, fontSize: 16, borderRadius: 6, border: 'none', background: '#142B3B', color: '#fff', cursor: 'pointer' }}
             >
-              {nav.logout.bn} / {nav.logout.en}
+              <T bn={nav.logout.bn} en={nav.logout.en} />
             </button>
           </div>
         </main>
       ) : (
         <>
         <InstallAppPrompt />
-        <Suspense fallback={<main style={{ maxWidth: 720, margin: '0 auto', padding: '24px 16px' }}><p>লোড হচ্ছে… / Loading…</p></main>}>
+        <Suspense fallback={<main style={{ maxWidth: 720, margin: '0 auto', padding: '24px 16px' }}><p>{t(strings.common.loading)}</p></main>}>
         <Routes>
         <Route path="/" element={<HomePage />} />
         {/* Class-wise navigation (stage 3): Select Class → Class Dashboard → Tab → Subject → Book → Chapter. */}

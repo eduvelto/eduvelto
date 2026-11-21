@@ -4,6 +4,7 @@ import { PageShell, EmptyState } from '../components/PageShell';
 import { AlertBox, Skeleton } from '../components/ui';
 import { AccuracyNote, HealthDisclaimer } from '../components/HealthDisclaimer';
 import { listPublishedMedicines, type Medicine } from '../lib/health';
+import { useLanguage } from '../i18n/LanguageContext';
 
 // Medicine directory (Health v1): search by name, Published records only.
 // The AccuracyNote sits directly under EACH medicine's information
@@ -11,6 +12,7 @@ import { listPublishedMedicines, type Medicine } from '../lib/health';
 
 export default function HealthMedicinesPage() {
   const h = strings.health;
+  const { lang, t } = useLanguage();
   const [items, setItems] = useState<Medicine[] | null>(null);
   const [error, setError] = useState('');
   const [search, setSearch] = useState('');
@@ -22,7 +24,7 @@ export default function HealthMedicinesPage() {
         if (!cancelled) setItems(rows);
       })
       .catch(() => {
-        if (!cancelled) setError('লোড করা যায়নি — পরে আবার চেষ্টা করুন। / Could not load — please try again later.');
+        if (!cancelled) setError(t({ bn: 'লোড করা যায়নি — পরে আবার চেষ্টা করুন।', en: 'Could not load — please try again later.' }));
       });
     return () => {
       cancelled = true;
@@ -41,15 +43,14 @@ export default function HealthMedicinesPage() {
   return (
     <PageShell titleBn={h.medicinesTitle.bn} titleEn={h.medicinesTitle.en}>
       <HealthDisclaimer />
-      <p>{h.medicinesIntro.bn}</p>
-      <p style={{ color: '#555' }}>{h.medicinesIntro.en}</p>
+      <p>{t(h.medicinesIntro)}</p>
       <AccuracyNote />
       <input
         type="search"
         value={search}
         onChange={(e) => setSearch(e.target.value)}
-        placeholder={h.searchPlaceholder.bn}
-        aria-label={h.searchPlaceholder.bn}
+        placeholder={t(h.searchPlaceholder)}
+        aria-label={t(h.searchPlaceholder)}
         className="ev-input" style={{ margin: '16px 0' }}
       />
       {error ? <AlertBox tone="error">{error}</AlertBox> : null}
@@ -60,36 +61,27 @@ export default function HealthMedicinesPage() {
       {filtered.map((m) => (
         <article key={m.id} className="ev-card" style={{ marginBottom: 12 }}>
           <h2 style={{ margin: '0 0 8px', fontSize: 20 }}>
-            {m.titleBn} <span style={{ color: '#555', fontSize: 16 }}>({m.title})</span>
+            {lang === 'bn' ? m.titleBn : m.title}
           </h2>
           {m.prescriptionOnly ? (
             <p style={{ margin: '0 0 8px' }}>
-              <strong>প্রেসক্রিপশন প্রয়োজন / Prescription only</strong>
+              <strong>{t({ bn: 'প্রেসক্রিপশন প্রয়োজন', en: 'Prescription only' })}</strong>
             </p>
           ) : null}
           <p style={{ margin: '0 0 6px' }}>
-            <strong>{h.use.bn}:</strong> {m.useBn}
-          </p>
-          <p style={{ margin: '0 0 6px', color: '#555' }}>
-            <strong>{h.use.en}:</strong> {m.useEn}
+            <strong>{t(h.use)}:</strong> {lang === 'bn' ? m.useBn : m.useEn}
           </p>
           <p style={{ margin: '0 0 6px' }}>
-            <strong>{h.form.bn}:</strong> {m.formBn} ({m.formEn})
+            <strong>{t(h.form)}:</strong> {lang === 'bn' ? m.formBn : m.formEn}
           </p>
           <p style={{ margin: '0 0 6px' }}>
-            <strong>{h.sideEffects.bn}:</strong> {m.sideEffectsBn}
-          </p>
-          <p style={{ margin: '0 0 6px', color: '#555' }}>
-            <strong>{h.sideEffects.en}:</strong> {m.sideEffectsEn}
+            <strong>{t(h.sideEffects)}:</strong> {lang === 'bn' ? m.sideEffectsBn : m.sideEffectsEn}
           </p>
           <p style={{ margin: '0 0 6px' }}>
-            <strong>{h.warnings.bn}:</strong> {m.warningsBn}
-          </p>
-          <p style={{ margin: '0 0 6px', color: '#555' }}>
-            <strong>{h.warnings.en}:</strong> {m.warningsEn}
+            <strong>{t(h.warnings)}:</strong> {lang === 'bn' ? m.warningsBn : m.warningsEn}
           </p>
           <p style={{ margin: '0 0 6px', fontSize: 14, color: '#555' }}>
-            {h.source.bn}: {m.source}
+            {t(h.source)}: {m.source}
           </p>
           <AccuracyNote />
         </article>

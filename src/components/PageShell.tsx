@@ -1,10 +1,15 @@
 import type { ReactNode } from 'react';
 import { Link } from 'react-router-dom';
+import { useLanguage } from '../i18n/LanguageContext';
 
 // Shared page shell — every page renders through this, so the header
 // treatment, spacing and empty states stay consistent across the app.
 // (ui/premium-polish: navy title + gold accent bar, wider option for
 // list pages, card-style empty state, page-enter animation.)
+//
+// LANGUAGE (21 Nov 16:09/16:11): the shell renders ONE language only —
+// the title is titleBn in Bangla mode, titleEn in English mode. Call
+// sites keep passing both; the shell picks. Same for EmptyState.
 
 export function PageShell(props: {
   titleBn: string;
@@ -19,6 +24,7 @@ export function PageShell(props: {
   /** Hide the generic page title (home page: the hero is the title). */
   hideTitle?: boolean;
 }) {
+  const { lang, t } = useLanguage();
   return (
     <main
       className="ev-page"
@@ -41,20 +47,19 @@ export function PageShell(props: {
               lineHeight: 1.3,
             }}
           >
-            {props.titleBn}
+            {lang === 'bn' ? props.titleBn : props.titleEn}
           </h1>
           <div
             aria-hidden="true"
             style={{ width: 48, height: 4, borderRadius: 2, background: '#D9A441', margin: '6px 0 10px' }}
           />
-          <p style={{ color: '#68747B', margin: '0 0 22px', fontSize: 15 }}>{props.titleEn}</p>
         </>
       )}
       {props.children}
       {props.hideHomeLink ? null : (
         <p style={{ marginTop: 36, paddingTop: 16, borderTop: '1px solid #E5E8E5' }}>
           <Link to="/" style={{ fontWeight: 600 }}>
-            ← হোম / Home
+            {t({ bn: '← হোম', en: '← Home' })}
           </Link>
         </p>
       )}
@@ -63,6 +68,7 @@ export function PageShell(props: {
 }
 
 export function EmptyState(props: { bn: string; en: string }) {
+  const { lang } = useLanguage();
   return (
     <div
       style={{
@@ -79,8 +85,9 @@ export function EmptyState(props: { bn: string; en: string }) {
           <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />
         </svg>
       </div>
-      <p style={{ margin: 0, fontWeight: 600, color: '#142B3B', fontSize: 16 }}>{props.bn}</p>
-      <p style={{ margin: '8px 0 0', color: '#68747B', fontSize: 14 }}>{props.en}</p>
+      <p style={{ margin: 0, fontWeight: 600, color: '#142B3B', fontSize: 16 }}>
+        {lang === 'bn' ? props.bn : props.en}
+      </p>
     </div>
   );
 }

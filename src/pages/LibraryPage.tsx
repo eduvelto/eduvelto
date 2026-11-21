@@ -25,6 +25,7 @@
 // (ui/premium-polish: filter card, book cards, skeletons, retry on error.)
 
 import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useLanguage } from '../i18n/LanguageContext';
 import { Link, useSearchParams } from 'react-router-dom';
 import { PageShell, EmptyState } from '../components/PageShell';
 import { AlertBox, Button, Card, Chip, SkeletonCards } from '../components/ui';
@@ -52,6 +53,7 @@ import {
 const SEARCH_PAGE_SIZE = 20;
 
 export default function LibraryPage() {
+  const { t } = useLanguage();
   // Deep links from the homepage (search box, subject + level chips) and
   // from class dashboards (?type= education type):
   // ?q= text search, ?type= education type, ?class= class/level, ?dept= department. Absent
@@ -120,7 +122,7 @@ export default function LibraryPage() {
         setLoading(false);
       })
       .catch(() => {
-        setError('লাইব্রেরি লোড করা যায়নি — আবার চেষ্টা করুন। / Could not load the library — please try again.');
+        setError(t({ bn: 'লাইব্রেরি লোড করা যায়নি — আবার চেষ্টা করুন।', en: 'Could not load the library — please try again.' }));
         setLoading(false);
       });
   }
@@ -150,7 +152,7 @@ export default function LibraryPage() {
       })
       .catch(() => {
         if (!live) return;
-        setError('লাইব্রেরি লোড করা যায়নি — আবার চেষ্টা করুন। / Could not load the library — please try again.');
+        setError(t({ bn: 'লাইব্রেরি লোড করা যায়নি — আবার চেষ্টা করুন।', en: 'Could not load the library — please try again.' }));
         setLoading(false);
       });
     return () => {
@@ -209,7 +211,7 @@ export default function LibraryPage() {
       setPages((p) => [...p, res]);
       setPageIndex((i) => i + 1);
     } catch {
-      setError('পরের পাতা লোড করা যায়নি — আবার চেষ্টা করুন। / Could not load the next page — please try again.');
+      setError(t({ bn: 'পরের পাতা লোড করা যায়নি — আবার চেষ্টা করুন।', en: 'Could not load the next page — please try again.' }));
     } finally {
       setLoading(false);
     }
@@ -236,7 +238,7 @@ export default function LibraryPage() {
     <PageShell titleBn="ডিজিটাল লাইব্রেরি" titleEn="Digital Library" wide>
       {error ? (
         <AlertBox tone="error" onRetry={reloadFirst}>
-          লাইব্রেরি লোড করা যায়নি — আবার চেষ্টা করুন। / Could not load the library — please try again.
+          {error}
         </AlertBox>
       ) : null}
       {loading && pages.length === 0 && !error && !levelEmpty ? <SkeletonCards count={4} /> : null}
@@ -254,8 +256,8 @@ export default function LibraryPage() {
                   setQuery(e.target.value);
                   setSearchPage(1);
                 }}
-                placeholder="খুঁজুন — বইয়ের নাম, কোড বা বিষয় / Search title, code or subject"
-                aria-label="বই খুঁজুন / Search books"
+                placeholder={t({ bn: 'খুঁজুন — বইয়ের নাম, কোড বা বিষয়', en: 'Search title, code or subject' })}
+                aria-label={t({ bn: 'বই খুঁজুন', en: 'Search books' })}
                 className="ev-input"
                 style={{ flex: '1 1 240px' }}
               />
@@ -266,11 +268,11 @@ export default function LibraryPage() {
                   setClassFilter('');
                   setDeptFilter('');
                 }}
-                aria-label="শিক্ষার ধারা / Education type"
+                aria-label={t({ bn: 'শিক্ষার ধারা', en: 'Education type' })}
                 className="ev-select"
                 style={{ flex: '1 1 160px' }}
               >
-                <option value="">সব ধারা / All types</option>
+                <option value="">{t({ bn: 'সব ধারা', en: 'All types' })}</option>
                 {EDUCATION_TYPES.map((t) => (
                   <option key={t} value={t}>
                     {t}
@@ -283,14 +285,16 @@ export default function LibraryPage() {
                   setClassFilter(e.target.value);
                   setDeptFilter('');
                 }}
-                aria-label="শ্রেণি / Class"
+                aria-label={t({ bn: 'শ্রেণি', en: 'Class' })}
                 className="ev-select"
                 style={{ flex: '1 1 160px' }}
               >
-                <option value="">সব শ্রেণি / All classes</option>
+                <option value="">{t({ bn: 'সব শ্রেণি', en: 'All classes' })}</option>
                 {classes.map((c) => (
                   <option key={c.value} value={c.value}>
-                    {c.label}
+                    {c.value.startsWith('level:')
+                      ? t(levelOfClassFilter(c.value) ?? { bn: c.labelBn, en: c.labelEn })
+                      : t({ bn: c.labelBn, en: c.labelEn })}
                   </option>
                 ))}
               </select>
@@ -299,11 +303,11 @@ export default function LibraryPage() {
                 onChange={(e) => {
                   setDeptFilter(e.target.value);
                 }}
-                aria-label="বিষয় / Department"
+                aria-label={t({ bn: 'বিষয়', en: 'Department' })}
                 className="ev-select"
                 style={{ flex: '1 1 160px' }}
               >
-                <option value="">সব বিষয় / All subjects</option>
+                <option value="">{t({ bn: 'সব বিষয়', en: 'All subjects' })}</option>
                 {departments.map((d) => (
                   <option key={d} value={d}>
                     {d}
@@ -315,16 +319,14 @@ export default function LibraryPage() {
           {levelEmpty && selectedLevel ? (
             <Card>
               <div style={{ fontWeight: 700, color: '#142B3B', fontSize: 17 }}>
-                {selectedLevel.bn} — শীঘ্রই আসছে! / Coming soon
+                {t({ bn: `${selectedLevel.bn} — শীঘ্রই আসছে!`, en: `${selectedLevel.en} — Coming soon!` })}
               </div>
               <p style={{ margin: '8px 0 12px', color: '#68747B', fontSize: 15, lineHeight: 1.7 }}>
-                {selectedLevel.bn}-এর বই এখনো লাইব্রেরিতে প্রকাশিত হয়নি — বই, পাঠ ও প্রশ্ন তৈরি
-                হচ্ছে। প্রকাশিত হলেই এখানে দেখতে পাবে। / No books for {selectedLevel.en} are
-                published yet — books, lessons and questions are being prepared.
+                {t({ bn: `${selectedLevel.bn}-এর বই এখনো লাইব্রেরিতে প্রকাশিত হয়নি — বই, পাঠ ও প্রশ্ন তৈরি হচ্ছে। প্রকাশিত হলেই এখানে দেখতে পাবে।`, en: `No books for ${selectedLevel.en} are published yet — books, lessons and questions are being prepared.` })}
               </p>
               <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
                 <Link to={`/class/${selectedLevel.slug}`} style={{ fontWeight: 600 }}>
-                  {selectedLevel.bn} ড্যাশবোর্ড →
+                  {t({ bn: `${selectedLevel.bn} ড্যাশবোর্ড →`, en: `${selectedLevel.en} dashboard →` })}
                 </Link>
                 <Link
                   to="/library"
@@ -335,18 +337,17 @@ export default function LibraryPage() {
                   }}
                   style={{ fontWeight: 600 }}
                 >
-                  সব বই দেখুন / See all books →
+                  {t({ bn: 'সব বই দেখুন →', en: 'See all books →' })}
                 </Link>
               </div>
             </Card>
           ) : searching ? (
             <>
               <p style={{ color: '#555', margin: '0 0 12px' }}>
-                খোঁজে {searchFiltered.length}টি বই পাওয়া গেছে / {searchFiltered.length} books found
-                {searchBooks === null ? ' — খুঁজছি… / searching…' : ''}
+                {t({ bn: `খোঁজে ${searchFiltered.length}টি বই পাওয়া গেছে${searchBooks === null ? ' — খুঁজছি…' : ''}`, en: `${searchFiltered.length} books found${searchBooks === null ? ' — searching…' : ''}` })}
               </p>
               {searchBooks !== null && searchFiltered.length === 0 ? (
-                <p>এই খোঁজে কোনো বই পাওয়া যায়নি — ফিল্টার বদলে আবার চেষ্টা করুন। / No books match — try different filters.</p>
+                <p>{t({ bn: 'এই খোঁজে কোনো বই পাওয়া যায়নি — ফিল্টার বদলে আবার চেষ্টা করুন।', en: 'No books match — try different filters.' })}</p>
               ) : null}
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: 12 }}>
                 {searchPageBooks.map((b) => (
@@ -357,11 +358,10 @@ export default function LibraryPage() {
                     <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, marginTop: 10 }}>
                       <Chip>{b.department}</Chip>
                       <Chip tone="outline">{b.classLevel}</Chip>
-                      {b.paperCode ? <Chip tone="outline">কোড {b.paperCode}</Chip> : null}
+                      {b.paperCode ? <Chip tone="outline">{t({ bn: `কোড ${b.paperCode}`, en: `Code ${b.paperCode}` })}</Chip> : null}
                     </div>
                     <p style={{ margin: '10px 0 0', color: '#5A6478', fontSize: 14 }}>
-                      {b.chapterCount}টি পাঠ · {b.questionCount}টি প্রশ্ন
-                      {b.bilingual ? ' · বাংলা উত্তরসহ' : ''}
+                      {t({ bn: `${b.chapterCount}টি পাঠ · ${b.questionCount}টি প্রশ্ন${b.bilingual ? ' · বাংলা উত্তরসহ' : ''}`, en: `${b.chapterCount} lessons · ${b.questionCount} questions${b.bilingual ? ' · with Bangla answers' : ''}` })}
                     </p>
                   </Card>
                 ))}
@@ -369,13 +369,13 @@ export default function LibraryPage() {
               {searchPageCount > 1 ? (
                 <div style={{ display: 'flex', gap: 12, alignItems: 'center', marginTop: 16 }}>
                   <Button variant="outline" onClick={() => setSearchPage((p) => Math.max(1, p - 1))} disabled={safeSearchPage <= 1}>
-                    ← আগের / Previous
+                    {t({ bn: '← আগের', en: '← Previous' })}
                   </Button>
                   <span>
-                    পাতা {safeSearchPage} / {searchPageCount} / Page {safeSearchPage} of {searchPageCount}
+                    {t({ bn: `পাতা ${safeSearchPage} / ${searchPageCount}`, en: `Page ${safeSearchPage} of ${searchPageCount}` })}
                   </span>
                   <Button variant="outline" onClick={() => setSearchPage((p) => Math.min(searchPageCount, p + 1))} disabled={safeSearchPage >= searchPageCount}>
-                    পরের / Next →
+                    {t({ bn: 'পরের →', en: 'Next →' })}
                   </Button>
                 </div>
               ) : null}
@@ -383,7 +383,7 @@ export default function LibraryPage() {
           ) : (
             <>
               <p style={{ color: '#555', margin: '0 0 12px' }}>
-                দেখাচ্ছি {shownFrom}–{shownTo} / Showing {shownFrom}–{shownTo}
+                {t({ bn: `দেখাচ্ছি ${shownFrom}–${shownTo}`, en: `Showing ${shownFrom}–${shownTo}` })}
               </p>
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: 12 }}>
                 {pageBooks.map((b) => (
@@ -394,11 +394,10 @@ export default function LibraryPage() {
                     <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, marginTop: 10 }}>
                       <Chip>{b.department}</Chip>
                       <Chip tone="outline">{b.classLevel}</Chip>
-                      {b.paperCode ? <Chip tone="outline">কোড {b.paperCode}</Chip> : null}
+                      {b.paperCode ? <Chip tone="outline">{t({ bn: `কোড ${b.paperCode}`, en: `Code ${b.paperCode}` })}</Chip> : null}
                     </div>
                     <p style={{ margin: '10px 0 0', color: '#5A6478', fontSize: 14 }}>
-                      {b.chapterCount}টি পাঠ · {b.questionCount}টি প্রশ্ন
-                      {b.bilingual ? ' · বাংলা উত্তরসহ' : ''}
+                      {t({ bn: `${b.chapterCount}টি পাঠ · ${b.questionCount}টি প্রশ্ন${b.bilingual ? ' · বাংলা উত্তরসহ' : ''}`, en: `${b.chapterCount} lessons · ${b.questionCount} questions${b.bilingual ? ' · with Bangla answers' : ''}` })}
                     </p>
                   </Card>
                 ))}
@@ -406,13 +405,13 @@ export default function LibraryPage() {
               {currentPage?.hasMore || pageIndex > 0 ? (
                 <div style={{ display: 'flex', gap: 12, alignItems: 'center', marginTop: 16 }}>
                   <Button variant="outline" onClick={prevPage} disabled={pageIndex <= 0}>
-                    ← আগের / Previous
+                    {t({ bn: '← আগের', en: '← Previous' })}
                   </Button>
                   <span>
-                    পাতা {pageIndex + 1} / Page {pageIndex + 1}
+                    {t({ bn: `পাতা ${pageIndex + 1}`, en: `Page ${pageIndex + 1}` })}
                   </span>
                   <Button variant="outline" onClick={nextPage} disabled={!currentPage?.hasMore || loading}>
-                    পরের / Next →
+                    {t({ bn: 'পরের →', en: 'Next →' })}
                   </Button>
                 </div>
               ) : null}
@@ -423,8 +422,7 @@ export default function LibraryPage() {
       {/* First in-feed ad slot (library list page). Renders nothing until AdSense is configured. */}
       <AdSlot placement="in-feed" />
       <p style={{ marginTop: 16, color: '#5A6478', fontSize: 14 }}>
-        লাইব্রেরিতে বই, নোট ও প্রশ্নোত্তর যোগ করা হবে — নিচে স্ক্রল করলে আরও দেখা যাবে। / Books,
-        notes and Q&A will be added to the library — scroll down to see more.
+        {t({ bn: 'লাইব্রেরিতে বই, নোট ও প্রশ্নোত্তর যোগ করা হবে — নিচে স্ক্রল করলে আরও দেখা যাবে।', en: 'Books, notes and Q&A will be added to the library — scroll down to see more.' })}
       </p>
       {/* Second in-feed ad slot, lower down the list — revealed on scroll. Renders nothing until AdSense is configured. */}
       <AdSlot placement="in-feed-2" />

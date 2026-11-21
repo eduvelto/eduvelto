@@ -4,6 +4,7 @@ import { PageShell, EmptyState } from '../components/PageShell';
 import { AlertBox, Skeleton } from '../components/ui';
 import { AccuracyNote, HealthDisclaimer } from '../components/HealthDisclaimer';
 import { listVerifiedDoctors, type Doctor } from '../lib/health';
+import { T, useLanguage } from '../i18n/LanguageContext';
 
 // Doctor directory (Health v1): verified doctors ONLY. A doctor is listed
 // only when verificationStatus == 'verified' AND reviewStatus ==
@@ -14,6 +15,7 @@ import { listVerifiedDoctors, type Doctor } from '../lib/health';
 
 export default function HealthDoctorsPage() {
   const h = strings.health;
+  const { lang, t } = useLanguage();
   const [items, setItems] = useState<Doctor[] | null>(null);
   const [error, setError] = useState('');
 
@@ -24,7 +26,7 @@ export default function HealthDoctorsPage() {
         if (!cancelled) setItems(rows);
       })
       .catch(() => {
-        if (!cancelled) setError('লোড করা যায়নি — পরে আবার চেষ্টা করুন। / Could not load — please try again later.');
+        if (!cancelled) setError(t({ bn: 'লোড করা যায়নি — পরে আবার চেষ্টা করুন।', en: 'Could not load — please try again later.' }));
       });
     return () => {
       cancelled = true;
@@ -34,8 +36,7 @@ export default function HealthDoctorsPage() {
   return (
     <PageShell titleBn={h.doctorsTitle.bn} titleEn={h.doctorsTitle.en}>
       <HealthDisclaimer />
-      <p>{h.doctorsIntro.bn}</p>
-      <p style={{ color: '#555' }}>{h.doctorsIntro.en}</p>
+      <p>{t(h.doctorsIntro)}</p>
       <AccuracyNote />
       {error ? <AlertBox tone="error">{error}</AlertBox> : null}
       {items === null && !error ? <Skeleton lines={3} /> : null}
@@ -46,25 +47,21 @@ export default function HealthDoctorsPage() {
         items.map((d) => (
           <article key={d.id} className="ev-card" style={{ marginBottom: 12 }}>
             <h2 style={{ margin: '0 0 8px', fontSize: 20 }}>
-              {d.titleBn} <span style={{ color: '#555', fontSize: 16 }}>({d.title})</span>
+              {lang === 'bn' ? d.titleBn : d.title}
             </h2>
             <p style={{ margin: '0 0 6px', color: '#1E7CE8', fontWeight: 700 }}>
-              ✓ {h.verified.bn} / {h.verified.en}
+              ✓ <T bn={h.verified.bn} en={h.verified.en} />
             </p>
-            <p style={{ margin: '0 0 6px' }}>{d.qualificationBn}</p>
-            <p style={{ margin: '0 0 6px', color: '#555' }}>{d.qualificationEn}</p>
+            <p style={{ margin: '0 0 6px' }}>{lang === 'bn' ? d.qualificationBn : d.qualificationEn}</p>
             <p style={{ margin: '0 0 6px' }}>
-              {d.specialityBn} — {d.workplaceBn}
-            </p>
-            <p style={{ margin: '0 0 6px', color: '#555' }}>
-              {d.specialityEn} — {d.workplaceEn}
+              {lang === 'bn' ? d.specialityBn : d.specialityEn} —{' '}
+              {lang === 'bn' ? d.workplaceBn : d.workplaceEn}
             </p>
             <AccuracyNote />
           </article>
         ))}
       <div style={{ border: '1px solid #1E7CE8', borderRadius: 8, padding: '16px', marginTop: 20 }}>
-        <p style={{ margin: 0 }}>{h.doctorsApply.bn}</p>
-        <p style={{ margin: '8px 0 0', color: '#555' }}>{h.doctorsApply.en}</p>
+        <p style={{ margin: 0 }}>{t(h.doctorsApply)}</p>
       </div>
     </PageShell>
   );
