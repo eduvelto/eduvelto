@@ -294,9 +294,24 @@ export async function updateUserProfile(db: Firestore, uid: string, fields: Prof
 
 /**
  * Friendly Bangla message for Firebase Auth / Firestore errors.
- * The raw code is also logged to the console for debugging — the UI
- * never shows a bare error code.
+ * The raw code is also logged to the console for debugging, and shown
+ * in small text under the message (see authErrorCode) so a failure can
+ * be diagnosed from a screenshot alone — a bare code is never shown
+ * *instead of* the friendly message.
+ *
+ * 21 Nov 2026 — Google login fix: the owner tapped "Google দিয়ে লগইন"
+ * on his phone and got the generic default message immediately, with
+ * no account chooser. That means the code was one of the unmapped
+ * ones below (popup never opened: operation-not-supported in the
+ * WebView/PWA context, or storage blocked) — previously invisible.
+ * Those codes now have their own messages.
  */
+export function authErrorCode(error: unknown): string | null {
+  if (error instanceof FirebaseError) return error.code;
+  if (error instanceof Error && error.message.startsWith('auth/')) return error.message;
+  return null;
+}
+
 export function friendlyErrorMessage(error: unknown): string {
   const code =
     error instanceof FirebaseError
@@ -324,6 +339,14 @@ export function friendlyErrorMessage(error: unknown): string {
     case 'auth/cancelled-popup-request':
     case 'auth/popup-blocked':
       return 'ব্রাউজার পপ-আপ আটকে দিয়েছে। পপ-আপ চালু করে আবার চেষ্টা করুন।';
+    case 'auth/redirect-cancelled-by-user':
+      return 'Google সাইন-ইন বন্ধ করা হয়েছে। আবার চেষ্টা করুন।';
+    case 'auth/operation-not-supported-in-this-environment':
+      return 'এই ব্রাউজার/অ্যাপে Google সাইন-ইন খুলছে না। Chrome ব্রাউজারে সাইটটি খুলে আবার চেষ্টা করুন।';
+    case 'auth/web-storage-unsupported':
+      return 'ব্রাউজারে স্টোরেজ বন্ধ আছে। ব্রাউজার সেটিংসে কুকি ও স্টোরেজ চালু করে আবার চেষ্টা করুন।';
+    case 'auth/account-exists-with-different-credential':
+      return 'এই ইমেইল দিয়ে ইতিমধ্যে পাসওয়ার্ড-অ্যাকাউন্ট আছে। পাসওয়ার্ড দিয়ে লগইন করুন।';
     case 'auth/unauthorized-domain':
       return 'এই ডোমেইন থেকে সাইন-ইন অনুমোদিত নয়।';
     case 'auth/network-request-failed':
