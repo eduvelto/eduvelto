@@ -8,7 +8,7 @@
 
 import { Link } from 'react-router-dom';
 import { PageShell } from '../components/PageShell';
-import { Card, LinkButton, Reveal } from '../components/ui';
+import { Card, Reveal } from '../components/ui';
 import { CommonPrepCard, JobCard } from '../components/JobCards';
 import { useLanguage } from '../i18n/LanguageContext';
 import { JOB_EXAMS } from '../lib/jobExams';
