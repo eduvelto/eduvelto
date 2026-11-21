@@ -1,0 +1,111 @@
+// Eduvelto — class-scoped subject view (stage 3: class-wise homepage +
+// mobile app preview). Navigation model: Select Class → Class Dashboard →
+// Tab → Subject → Book → Chapter. This page is the Subject step: it shows
+// ONLY this subject's books inside THIS class — never another class's
+// books. The Chapter step is the existing working book page
+// (/library/:bookId), which lists the book's chapters; each chapter links
+// to its lessons. No new chapter UI is built here.
+
+import { useEffect, useState } from 'react';
+import { Link, useParams } from 'react-router-dom';
+import { PageShell, EmptyState } from '../components/PageShell';
+import { AlertBox, Card, Chip, Reveal, SkeletonCards } from '../components/ui';
+import { listPublishedBooks, type Book } from '../lib/content';
+import { booksForClass, classLevelBySlug } from '../lib/classLevels';
+
+export default function ClassSubjectPage() {
+  const { slug = '', dept = '' } = useParams<{ slug: string; dept: string }>();
+  const def = classLevelBySlug(slug);
+  const subject = decodeURIComponent(dept);
+  const [books, setBooks] = useState<Book[] | null>(null);
+  const [error, setError] = useState(false);
+
+  function load() {
+    setError(false);
+    setBooks(null);
+    listPublishedBooks()
+      .then((b) => setBooks(b))
+      .catch(() => setError(true));
+  }
+  useEffect(load, []);
+
+  if (!def) {
+    return (
+      <PageShell titleBn="শ্রেণি পাওয়া যায়নি" titleEn="Class not found" wide>
+        <EmptyState bn="এই শ্রেণিটি খুঁজে পাওয়া যায়নি।" en="This class could not be found." />
+        <p style={{ marginTop: 16 }}>
+          <Link to="/#select-class" style={{ fontWeight: 600 }}>
+            ← সব শ্রেণি দেখুন / See all classes
+          </Link>
+        </p>
+      </PageShell>
+    );
+  }
+
+  const classBooks = books ? booksForClass(books, def) : [];
+  const subjectBooks = classBooks.filter((b) => b.department === subject);
+  const totalChapters = subjectBooks.reduce((s, b) => s + (b.chapterCount ?? 0), 0);
+  const totalQuestions = subjectBooks.reduce((s, b) => s + (b.questionCount ?? 0), 0);
+
+  return (
+    <PageShell titleBn={subject} titleEn={subject} wide>
+      <p style={{ margin: '0 0 12px' }}>
+        <Link to={`/class/${def.slug}/subjects`} style={{ fontWeight: 600 }}>
+          ← {def.bn} — সব বিষয় / All subjects
+        </Link>
+      </p>
+      <h2 style={{ color: '#142B3B', fontSize: 24, margin: '0 0 4px' }}>{subject}</h2>
+      <p style={{ color: '#57616A', margin: '0 0 20px' }}>
+        {def.bn} · {def.en} — এই বিষয়ের শুধুমাত্র এই শ্রেণির বই
+      </p>
+      {books === null ? <SkeletonCards count={3} /> : null}
+      {error ? (
+        <AlertBox tone="error" onRetry={load}>
+          বইয়ের তালিকা লোড করা যায়নি — আবার চেষ্টা করুন। / Could not load the books — please try
+          again.
+        </AlertBox>
+      ) : null}
+      {books !== null && subjectBooks.length === 0 && !error ? (
+        <EmptyState
+          bn="এই শ্রেণিতে এই বিষয়ের কোনো বই এখনো প্রকাশিত হয়নি।"
+          en="No books for this subject in this class yet."
+        />
+      ) : null}
+      {subjectBooks.length > 0 ? (
+        <>
+          <p style={{ color: '#57616A', margin: '0 0 12px' }}>
+            {subjectBooks.length}টি বই · {totalChapters}টি পাঠ · {totalQuestions}টি প্রশ্ন
+          </p>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: 12 }}>
+            {subjectBooks.map((b, i) => (
+              <Reveal key={b.id} delayMs={Math.min(i, 3) * 60}>
+                <Card hover>
+                  <Link to={`/library/${b.id}`} style={{ fontWeight: 700, fontSize: 16, color: '#142B3B', lineHeight: 1.5 }}>
+                    {b.title}
+                  </Link>
+                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, marginTop: 10 }}>
+                    <Chip>{b.department}</Chip>
+                    <Chip tone="outline">{b.classLevel}</Chip>
+                    <Chip tone="gold">{b.questionCount}টি প্রশ্ন</Chip>
+                  </div>
+                  <p style={{ margin: '10px 0 0', color: '#68747B', fontSize: 14 }}>
+                    {b.chapterCount}টি পাঠ — বই খুলে অধ্যায় দেখুন
+                  </p>
+                  <p style={{ margin: '10px 0 0' }}>
+                    <Link to={`/library/${b.id}`} style={{ fontWeight: 600 }}>
+                      বইটি খুলুন →
+                    </Link>
+                  </p>
+                </Card>
+              </Reveal>
+            ))}
+          </div>
+          <p style={{ marginTop: 16, color: '#68747B', fontSize: 14 }}>
+            প্রতিটি বইয়ের ভেতরে অধ্যায়ভিত্তিক পাঠ আছে — বই খুলে অধ্যায় ও পাঠ দেখুন। / Each book
+            contains chapter-wise lessons — open a book to see its chapters.
+          </p>
+        </>
+      ) : null}
+    </PageShell>
+  );
+}

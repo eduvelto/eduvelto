@@ -28,6 +28,7 @@ export default function Footer() {
         <div>
           <h3>প্ল্যাটফর্ম / Platform</h3>
           <Link to="/about">আমাদের সম্পর্কে / About</Link>
+          <Link to="/privacy">গোপনীয়তা নীতি / Privacy Policy</Link>
           <Link to="/contact">যোগাযোগ / Contact</Link>
           <Link to="/health">স্বাস্থ্য / Health</Link>
           <Link to="/ai-teacher">AI Teacher (পরিকল্পনায় আছে)</Link>

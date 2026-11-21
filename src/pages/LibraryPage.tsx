@@ -18,12 +18,13 @@ const PAGE_SIZE = 20;
 export default function LibraryPage() {
   const [books, setBooks] = useState<Book[] | null>(null);
   const [error, setError] = useState(false);
-  // Deep links from the homepage (search box, subject + level chips):
-  // ?q= text search, ?class= class/level, ?dept= department. Absent
+  // Deep links from the homepage (search box, subject + level chips) and
+  // from class dashboards (?type= education type):
+  // ?q= text search, ?type= education type, ?class= class/level, ?dept= department. Absent
   // params behave exactly as before (empty filters).
   const [params] = useSearchParams();
   const [query, setQuery] = useState(() => params.get('q') ?? '');
-  const [typeFilter, setTypeFilter] = useState('');
+  const [typeFilter, setTypeFilter] = useState(() => params.get('type') ?? '');
   const [classFilter, setClassFilter] = useState(() => params.get('class') ?? '');
   const [deptFilter, setDeptFilter] = useState(() => params.get('dept') ?? '');
   const [page, setPage] = useState(1);

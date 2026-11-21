@@ -661,3 +661,422 @@ a:hover {
     transform: none !important;
   }
 }
+
+/* ---- Stage 3: class-wise homepage + mobile app ---- */
+
+/* App shell — reserves space for the fixed bottom nav (mobile) and the
+   bottom ad banner (when live, via --ev-banner). The bar must never cover
+   content or buttons (PWA design-review must-fix). */
+.ev-app-shell {
+  padding-bottom: var(--ev-banner, 0px);
+}
+@media (max-width: 768px) {
+  .ev-app-shell {
+    padding-bottom: calc(60px + var(--ev-banner, 0px) + env(safe-area-inset-bottom, 0px));
+  }
+}
+
+/* Mobile bottom navigation — ≤768px only. Forest navy bar, amber active. */
+.ev-bottom-nav {
+  display: none;
+}
+@media (max-width: 768px) {
+  .ev-bottom-nav {
+    display: flex;
+    position: fixed;
+    left: 0;
+    right: 0;
+    max-width: 100vw;
+    z-index: 40;
+    background: #142b3b;
+    border-top: 2px solid #d9a441;
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  .ev-bottom-nav-item {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+    min-height: 58px;
+    padding: 8px 2px 6px;
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 1.2;
+    text-decoration: none;
+  }
+  .ev-bottom-nav-item:hover {
+    color: #fff;
+    text-decoration: none;
+  }
+  .ev-bottom-nav-item-active {
+    color: #d9a441;
+    font-weight: 700;
+    box-shadow: inset 0 3px 0 #d9a441;
+  }
+}
+
+/* Class cards — colour identity per level (AA white text, see
+   lib/classLevels.ts). */
+.ev-class-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  border-radius: 16px;
+  padding: 16px;
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(13, 30, 41, 0.12), 0 2px 4px rgba(13, 30, 41, 0.08);
+  transition: box-shadow 150ms ease, transform 150ms ease;
+}
+.ev-class-card:hover {
+  box-shadow: 0 8px 20px rgba(13, 30, 41, 0.16), 0 2px 6px rgba(13, 30, 41, 0.1);
+  transform: translateY(-2px);
+}
+.ev-class-card:focus-visible {
+  outline: 3px solid #fff;
+  outline-offset: 3px;
+}
+
+/* Class dashboard header band. */
+.ev-class-hero {
+  border-radius: 16px;
+  padding: 20px;
+  margin-bottom: 16px;
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(13, 30, 41, 0.1), 0 2px 4px rgba(13, 30, 41, 0.08);
+}
+.ev-class-hero-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 20px;
+  margin-top: 14px;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.95);
+}
+.ev-class-hero-stats strong {
+  font-size: 18px;
+}
+.ev-class-hero-coming {
+  display: inline-block;
+  background: rgba(255, 255, 255, 0.22);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 4px 12px;
+  border-radius: 999px;
+}
+
+/* Class dashboard tab bar — horizontal scroll on small screens. */
+.ev-class-tabs {
+  display: flex;
+  gap: 2px;
+  overflow-x: auto;
+  border-bottom: 1px solid var(--line);
+  margin-bottom: 20px;
+  scrollbar-width: none;
+}
+.ev-class-tabs::-webkit-scrollbar {
+  display: none;
+}
+.ev-class-tab {
+  flex: none;
+  padding: 10px 12px;
+  font-size: 15px;
+  white-space: nowrap;
+  text-decoration: none;
+  border-bottom: 3px solid transparent;
+  margin-bottom: -1px;
+}
+.ev-class-tab:hover {
+  text-decoration: none;
+  color: var(--forest);
+}
+
+/* Quick Access tiles (class dashboard Home tab). */
+.ev-quick-tiles {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(104px, 1fr));
+  gap: 10px;
+  margin-bottom: 20px;
+}
+.ev-quick-tile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 14px 8px 12px;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  box-shadow: var(--shadow-sm);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--forest);
+  text-align: center;
+  text-decoration: none;
+}
+.ev-quick-tile:hover {
+  text-decoration: none;
+  border-color: var(--line-strong);
+  box-shadow: var(--shadow-md);
+}
+.ev-quick-tile-en {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--muted);
+}
+
+/* Homepage: hero dream line (desktop only), rail grid, feature strip,
+   learning-apps grid, why-choose + topper CTA. */
+.ev-hero-dream {
+  font-style: italic;
+  font-weight: 700;
+  font-size: 20px;
+  color: #d9a441;
+  margin: 0 0 16px;
+}
+@media (max-width: 768px) {
+  .ev-hero-dream {
+    display: none;
+  }
+}
+.ev-rail-grid {
+  display: block;
+}
+@media (min-width: 1280px) {
+  .ev-rail-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 300px;
+    gap: 16px;
+    align-items: start;
+  }
+}
+.ev-feature-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  box-shadow: var(--shadow-sm);
+  padding: 12px;
+  margin-bottom: 24px;
+}
+.ev-feature-strip-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1 1 160px;
+  padding: 6px 8px;
+}
+.ev-apps-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 12px;
+  margin-bottom: 24px;
+}
+.ev-app-tile {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  box-shadow: var(--shadow-sm);
+  padding: 14px;
+  text-align: center;
+}
+/* App tiles: long status chips (e.g. "পরিকল্পনায় আছে / Roadmap") must wrap
+   inside the narrow tile instead of overflowing the page on mobile — the
+   chip is inline-flex by default, so its text never wraps on its own. */
+.ev-app-tile .ev-chip {
+  display: inline-block;
+  white-space: normal;
+  max-width: 100%;
+  line-height: 1.4;
+}
+.ev-why-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+@media (min-width: 860px) {
+  .ev-why-grid {
+    grid-template-columns: 2fr 1fr;
+  }
+}
+.ev-topper-cta {
+  background: #142b3b;
+  border-radius: 16px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  box-shadow: 0 4px 12px rgba(13, 30, 41, 0.12), 0 2px 4px rgba(13, 30, 41, 0.08);
+}
+
+/* Ad placeholders — styled slots only, NEVER real ads (see
+   components/AdPlaceholder.tsx). Sizes are AdSense-ready (IAB standard):
+   top banner 728×90 leaderboard, side / in-content / in-app 300×250
+   medium rectangle, mobile 320×50. NO ad code, NO SDK, NO activation. */
+.ev-ad {
+  position: relative;
+  border: 2px dashed #c9cfcb;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #fdf9ef 0%, #eff7f6 100%);
+  padding: 14px;
+  margin-bottom: 16px;
+}
+.ev-ad-label {
+  position: absolute;
+  top: -9px;
+  left: 12px;
+  background: #142b3b;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 999px;
+}
+.ev-ad-body {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.ev-ad-icon {
+  flex: none;
+  color: #8a6100;
+}
+.ev-ad-text {
+  flex: 1;
+  min-width: 0;
+}
+.ev-ad-text strong {
+  display: block;
+  font-size: 16px;
+  color: #142b3b;
+}
+.ev-ad-text span {
+  display: block;
+  font-size: 13px;
+  color: #68747b;
+}
+.ev-ad-cta {
+  flex: none;
+  background: #142b3b;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 700;
+  padding: 9px 14px;
+  border-radius: 999px;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.ev-ad-cta:hover {
+  color: #fff;
+  text-decoration: none;
+  background: #0d1e29;
+}
+.ev-ad-top-banner {
+  display: none;
+}
+@media (min-width: 769px) {
+  .ev-ad-top-banner {
+    display: block;
+    max-width: 728px;
+    height: 90px;
+    padding: 0;
+  }
+  .ev-ad-top-banner .ev-ad-body {
+    height: 100%;
+    padding: 10px 14px;
+  }
+}
+.ev-ad-mobile,
+.ev-ad-in-app {
+  display: none;
+}
+@media (max-width: 768px) {
+  .ev-ad-mobile {
+    display: block;
+    max-width: 360px;
+    min-height: 50px;
+    padding: 0;
+  }
+  .ev-ad-mobile .ev-ad-body {
+    padding: 8px 12px;
+  }
+  .ev-ad-mobile .ev-ad-cta {
+    font-size: 12px;
+    padding: 6px 10px;
+  }
+  .ev-ad-mobile .ev-ad-text span {
+    font-size: 11px;
+  }
+  .ev-ad-in-app {
+    display: flex;
+    flex-direction: column;
+    max-width: 300px;
+    height: 250px;
+    padding: 0;
+  }
+  .ev-ad-in-app .ev-ad-body {
+    flex: 1;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    gap: 8px;
+  }
+  .ev-ad-in-app .ev-ad-text { flex: none; }
+}
+.ev-ad-in-content {
+  display: flex;
+  flex-direction: column;
+  max-width: 300px;
+  height: 250px;
+  padding: 0;
+}
+.ev-ad-in-content .ev-ad-body {
+  flex: 1;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  gap: 8px;
+}
+.ev-ad-in-content .ev-ad-text { flex: none; }
+.ev-ad-side {
+  display: none;
+}
+@media (min-width: 1280px) {
+  .ev-ad-side {
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    height: 250px;
+    padding: 0;
+    position: sticky;
+    top: 76px;
+    margin-bottom: 0;
+  }
+  .ev-ad-side .ev-ad-body {
+    flex: 1;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    gap: 10px;
+  }
+  .ev-ad-side .ev-ad-text { flex: none; }
+  .ev-ad-side .ev-ad-text span {
+    font-size: 12px;
+  }
+}
+.ev-ad-bottom-banner {
+  margin: 24px 0 8px;
+  min-height: 90px;
+}
+.ev-ad-bottom-banner .ev-ad-text span {
+  font-size: 15px;
+  font-weight: 700;
+  color: #142b3b;
+}

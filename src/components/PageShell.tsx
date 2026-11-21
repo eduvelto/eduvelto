@@ -12,6 +12,8 @@ export function PageShell(props: {
   children?: ReactNode;
   /** Wide layout (960px) for list/browse pages; default is 720px reading width. */
   wide?: boolean;
+  /** Extra-wide shell (px) — homepage/class dashboard with the 300px side-ad rail. */
+  maxWidth?: number;
   /** Hide the "back home" footer link (home page itself). */
   hideHomeLink?: boolean;
   /** Hide the generic page title (home page: the hero is the title). */
@@ -21,7 +23,7 @@ export function PageShell(props: {
     <main
       className="ev-page"
       style={{
-        maxWidth: props.wide ? 960 : 720,
+        maxWidth: props.maxWidth ?? (props.wide ? 960 : 720),
         margin: '0 auto',
         padding: '28px 16px 40px',
         fontFamily: "'Hind Siliguri','Noto Sans Bengali',system-ui,-apple-system,'Segoe UI',sans-serif",

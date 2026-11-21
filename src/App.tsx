@@ -4,9 +4,12 @@ import { strings } from './i18n/strings';
 import { useAuth } from './lib/auth';
 import { isBottomBannerAllowed, adsEnabled, BOTTOM_BANNER_RESERVE_PX } from './lib/ads';
 import AdSlot from './components/AdSlot';
+import BottomNav from './components/BottomNav';
 import Footer from './components/Footer';
 import InstallAppPrompt from './components/InstallAppPrompt';
 import HomePage from './pages/HomePage';
+import ClassDashboardPage from './pages/ClassDashboardPage';
+import ClassSubjectPage from './pages/ClassSubjectPage';
 import RegisterPage from './pages/RegisterPage';
 import LoginPage from './pages/LoginPage';
 import ProfilePage from './pages/ProfilePage';
@@ -41,6 +44,7 @@ import HealthHospitalsPage from './pages/HealthHospitalsPage';
 import HealthReportPage from './pages/HealthReportPage';
 import AboutPage from './pages/AboutPage';
 import ContactPage from './pages/ContactPage';
+import PrivacyPage from './pages/PrivacyPage';
 
 // Routes mirror page-map.md + the Phase 2 route list.
 // /social is a DESIGN PROPOSAL only (blueprint §7): no live social
@@ -70,7 +74,14 @@ export default function App() {
     setMenuOpen(false);
   }, [location.pathname]);
   return (
-    <div style={bannerLive ? { paddingBottom: `calc(${BOTTOM_BANNER_RESERVE_PX}px + env(safe-area-inset-bottom, 0px))` } : undefined}>
+    <div
+      className="ev-app-shell"
+      style={
+        bannerLive
+          ? ({ '--ev-banner': `${BOTTOM_BANNER_RESERVE_PX}px` } as React.CSSProperties)
+          : undefined
+      }
+    >
       <header className="ev-header">
         <Link to="/" style={{ display: 'inline-flex', alignItems: 'center', textDecoration: 'none' }} aria-label="Eduvelto — হোম">
           <img src="/logo-white.png" alt="Eduvelto" style={{ height: 40, width: 'auto', display: 'block' }} />
@@ -151,6 +162,10 @@ export default function App() {
         <InstallAppPrompt />
         <Routes>
         <Route path="/" element={<HomePage />} />
+        {/* Class-wise navigation (stage 3): Select Class → Class Dashboard → Tab → Subject → Book → Chapter. */}
+        <Route path="/class/:slug/subjects/:dept" element={<ClassSubjectPage />} />
+        <Route path="/class/:slug/:tab" element={<ClassDashboardPage />} />
+        <Route path="/class/:slug" element={<ClassDashboardPage />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/profile" element={<ProfilePage />} />
@@ -184,9 +199,12 @@ export default function App() {
         <Route path="/health/report" element={<HealthReportPage />} />
         <Route path="/about" element={<AboutPage />} />
         <Route path="/contact" element={<ContactPage />} />
+        <Route path="/privacy" element={<PrivacyPage />} />
         <Route path="*" element={<HomePage />} />
         </Routes>
         <Footer />
+        {/* Mobile bottom navigation (stage 3): Home / Books / Tests / Progress / Profile, ≤768px. Sits above the bottom ad banner when one is live. */}
+        <BottomNav bottomOffsetPx={bannerLive ? BOTTOM_BANNER_RESERVE_PX : 0} />
         {showBottomBanner ? <AdSlot placement="bottom-banner" /> : null}
         </>
       )}
