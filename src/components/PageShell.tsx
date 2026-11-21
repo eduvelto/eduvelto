@@ -14,6 +14,8 @@ export function PageShell(props: {
   wide?: boolean;
   /** Hide the "back home" footer link (home page itself). */
   hideHomeLink?: boolean;
+  /** Hide the generic page title (home page: the hero is the title). */
+  hideTitle?: boolean;
 }) {
   return (
     <main
@@ -25,26 +27,30 @@ export function PageShell(props: {
         fontFamily: "'Hind Siliguri','Noto Sans Bengali',system-ui,-apple-system,'Segoe UI',sans-serif",
       }}
     >
-      <h1
-        style={{
-          fontFamily: "'Poppins','Hind Siliguri',system-ui,sans-serif",
-          fontSize: 28,
-          fontWeight: 700,
-          color: '#0A1F44',
-          margin: '0 0 4px',
-          lineHeight: 1.3,
-        }}
-      >
-        {props.titleBn}
-      </h1>
-      <div
-        aria-hidden="true"
-        style={{ width: 48, height: 4, borderRadius: 2, background: '#F1B308', margin: '6px 0 10px' }}
-      />
-      <p style={{ color: '#5A6478', margin: '0 0 22px', fontSize: 15 }}>{props.titleEn}</p>
+      {props.hideTitle ? null : (
+        <>
+          <h1
+            style={{
+              fontFamily: "'Poppins','Hind Siliguri',system-ui,sans-serif",
+              fontSize: 28,
+              fontWeight: 700,
+              color: '#142B3B',
+              margin: '0 0 4px',
+              lineHeight: 1.3,
+            }}
+          >
+            {props.titleBn}
+          </h1>
+          <div
+            aria-hidden="true"
+            style={{ width: 48, height: 4, borderRadius: 2, background: '#D9A441', margin: '6px 0 10px' }}
+          />
+          <p style={{ color: '#68747B', margin: '0 0 22px', fontSize: 15 }}>{props.titleEn}</p>
+        </>
+      )}
       {props.children}
       {props.hideHomeLink ? null : (
-        <p style={{ marginTop: 36, paddingTop: 16, borderTop: '1px solid #E3E8F0' }}>
+        <p style={{ marginTop: 36, paddingTop: 16, borderTop: '1px solid #E5E8E5' }}>
           <Link to="/" style={{ fontWeight: 600 }}>
             ← হোম / Home
           </Link>
@@ -58,21 +64,21 @@ export function EmptyState(props: { bn: string; en: string }) {
   return (
     <div
       style={{
-        border: '1px solid #E3E8F0',
+        border: '1px solid #E5E8E5',
         borderRadius: 12,
         padding: '24px 18px',
-        background: '#EEF3FB',
+        background: '#E3F2F0',
         textAlign: 'center',
       }}
     >
-      <div aria-hidden="true" style={{ marginBottom: 10, color: '#1E7CE8' }}>
+      <div aria-hidden="true" style={{ marginBottom: 10, color: '#12766E' }}>
         <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
           <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
           <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />
         </svg>
       </div>
-      <p style={{ margin: 0, fontWeight: 600, color: '#0A1F44', fontSize: 16 }}>{props.bn}</p>
-      <p style={{ margin: '8px 0 0', color: '#5A6478', fontSize: 14 }}>{props.en}</p>
+      <p style={{ margin: 0, fontWeight: 600, color: '#142B3B', fontSize: 16 }}>{props.bn}</p>
+      <p style={{ margin: '8px 0 0', color: '#68747B', fontSize: 14 }}>{props.en}</p>
     </div>
   );
 }

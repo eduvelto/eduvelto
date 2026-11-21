@@ -102,8 +102,8 @@ export default function InstallAppPrompt() {
       aria-label="অ্যাপ ইনস্টল / Install app"
       style={{
         background: '#FFF6D6',
-        borderBottom: '2px solid #F1B308',
-        color: '#041742',
+        borderBottom: '2px solid #D9A441',
+        color: '#142B3B',
         padding: '10px 16px',
         display: 'flex',
         flexWrap: 'wrap',
