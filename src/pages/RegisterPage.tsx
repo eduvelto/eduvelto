@@ -49,7 +49,7 @@ const buttonStyle: React.CSSProperties = {
 };
 
 export default function RegisterPage() {
-  const { signUp, signInWithGoogle, user, error, errorCode, loading } = useAuth();
+  const { signUp, signInWithGoogle, user, error, errorCode, loading, clearError } = useAuth();
   const navigate = useNavigate();
   const [displayName, setDisplayName] = useState('');
   const [email, setEmail] = useState('');
@@ -73,6 +73,13 @@ export default function RegisterPage() {
   const { t } = useLanguage();
   const s = strings.auth;
   const d = strings.dashboard;
+
+  // আগের চেষ্টার পুরোনো ভুল মুছে ফেলুন (LoginPage-এর মতোই): error
+  // গোটা সেশনে থাকে, তাই /register-এ ফিরে এলে আগের ভুল আবার দেখাত।
+  useEffect(() => {
+    clearError();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   // Google sign-in is a redirect: after Google sends a new user back,
   // `user` appears via the auth listener (no promise resolves here).
@@ -323,7 +330,7 @@ export default function RegisterPage() {
         </fieldset>
         {shownError ? <p style={{ color: '#b00020' }}>{shownError}</p> : null}
         {shownError && errorCode ? (
-          <p style={{ color: '#b00020', fontSize: 13, marginTop: -8 }}>ত্রুটি কোড: {errorCode}</p>
+          <p style={{ color: '#b00020', fontSize: 13, marginTop: -8 }}>{t({ bn: 'ত্রুটি কোড:', en: 'Error code:' })} {errorCode}</p>
         ) : null}
         <button style={buttonStyle} type="submit" disabled={busy || loading}>
           {busy ? <T bn={strings.common.loading.bn} en={strings.common.loading.en} /> : <T bn={s.registerButton.bn} en={s.registerButton.en} />}

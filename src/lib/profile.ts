@@ -360,6 +360,44 @@ export function friendlyErrorMessage(error: unknown): string {
       return 'Google লগইনে সার্ভারের সমস্যা হয়েছে। একবার আবার চেষ্টা করুন — না হলে ইমেইল ও পাসওয়ার্ড দিয়ে লগইন করুন।';
     case 'auth/network-request-failed':
       return 'নেটওয়ার্ক সমস্যা। সংযোগ দেখে আবার চেষ্টা করুন।';
+    case 'auth/timeout':
+      return 'সময় শেষ হয়ে গেছে। সংযোগ দেখে আবার চেষ্টা করুন।';
+    case 'auth/user-cancelled':
+      return 'Google সাইন-ইন বন্ধ করা হয়েছে। আবার চেষ্টা করুন।';
+    case 'auth/credential-already-in-use':
+      return 'এই Google অ্যাকাউন্টটি অন্য একটি অ্যাকাউন্টের সঙ্গে যুক্ত আছে। অন্য Google অ্যাকাউন্ট দিয়ে চেষ্টা করুন।';
+    case 'auth/provider-already-linked':
+      return 'এই Google অ্যাকাউন্টটি ইতিমধ্যে সংযুক্ত আছে।';
+    case 'auth/invalid-login-credentials':
+      return 'ইমেইল বা পাসওয়ার্ড ভুল।';
+    case 'auth/token-expired':
+    case 'auth/invalid-user-token':
+    case 'auth/invalid-id-token':
+      return 'আপনার সেশন শেষ হয়ে গেছে। আবার লগইন করুন।';
+    case 'auth/quota-exceeded':
+      return 'অনেক বেশি চেষ্টা হয়েছে। কিছুক্ষণ পর আবার চেষ্টা করুন।';
+    // অ্যাকাউন্ট কনফিগারেশনের ভুল (Firebase console / OAuth সেটআপ):
+    // এগুলো দেখা গেলে অ্যাপের কোডে নয়, console-এর সেটিংসে ঠিক করতে হয়।
+    case 'auth/invalid-api-key':
+      return 'অ্যাপের সেটিংসে সমস্যা আছে (API key সঠিক নয়)। Firebase console-এ সেটিংস দেখুন।';
+    case 'auth/invalid-oauth-client-id':
+    case 'auth/invalid-oauth-provider':
+      return 'Google OAuth সেটআপ মেলেনি (Client ID)। Firebase console-এ Google প্রোভাইডারের সেটিংস দেখুন।';
+    case 'auth/expired-oauth-token':
+    case 'auth/invalid-oauth-token':
+      return 'Google লগইনের তথ্য মেয়াদোত্তীর্ণ। আবার চেষ্টা করুন।';
+    case 'auth/missing-auth-domain':
+      return 'অ্যাপের Auth Domain সেট করা নেই। Firebase console-এ সেটিংস দেখুন।';
+    case 'auth/invalid-app-credential':
+    case 'auth/missing-app-credential':
+    case 'auth/app-deleted':
+      return 'অ্যাপের সেটিংসে সমস্যা আছে। Firebase console-এ সেটিংস দেখুন।';
+    case 'auth/invalid-continue-uri':
+    case 'auth/missing-continue-uri':
+    case 'auth/unauthorized-continue-uri':
+      return 'ফেরত আসার ঠিকানা অনুমোদিত নয়। Firebase console-এ Redirect URI দেখুন।';
+    case 'auth/argument-error':
+      return 'অ্যাপের অনুরোধে ভুল আছে। আবার চেষ্টা করুন।';
     case 'auth/too-many-requests':
       return 'অনেকবার চেষ্টা করা হয়েছে। কিছুক্ষণ পর আবার চেষ্টা করুন।';
     case 'permission-denied':

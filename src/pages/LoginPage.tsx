@@ -31,7 +31,7 @@ const buttonStyle: React.CSSProperties = {
 };
 
 export default function LoginPage() {
-  const { signIn, signInWithGoogle, resetPassword, user, error, errorCode, loading } = useAuth();
+  const { signIn, signInWithGoogle, resetPassword, user, error, errorCode, loading, clearError } = useAuth();
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -41,6 +41,15 @@ export default function LoginPage() {
   const [localError, setLocalError] = useState<string | null>(null);
   const { t } = useLanguage();
   const s = strings.auth;
+
+  // আগের চেষ্টার পুরোনো ভুল মুছে ফেলুন: AuthProvider-এর error গোটা
+  // সেশনে থাকে, তাই /login-এ ফিরে এলে আগের ভুল আবার দেখাত। মাউন্টে
+  // মোছা নিরাপদ — redirect ফিরে এলে getRedirectResult-এর ভুল এর
+  // পরে (অ্যাসিঙ্ক) সেট হয়, তাই সেটা মুছবে না।
+  useEffect(() => {
+    clearError();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   // Google sign-in is a redirect: after Google sends the user back,
   // `user` appears via the auth listener (no promise resolves here),
@@ -138,7 +147,7 @@ export default function LoginPage() {
         </label>
         {shownError ? <p style={{ color: '#b00020' }}>{shownError}</p> : null}
         {shownError && errorCode ? (
-          <p style={{ color: '#b00020', fontSize: 13, marginTop: -8 }}>ত্রুটি কোড: {errorCode}</p>
+          <p style={{ color: '#b00020', fontSize: 13, marginTop: -8 }}>{t({ bn: 'ত্রুটি কোড:', en: 'Error code:' })} {errorCode}</p>
         ) : null}
         <button style={buttonStyle} type="submit" disabled={busy || loading}>
           {busy ? <T bn={strings.common.loading.bn} en={strings.common.loading.en} /> : <T bn={s.loginButton.bn} en={s.loginButton.en} />}
