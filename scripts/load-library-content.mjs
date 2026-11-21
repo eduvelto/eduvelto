@@ -24,10 +24,14 @@
 //
 // Usage:
 //   node scripts/load-library-content.mjs [--dry-run] [--only <folder>]
-//     [--limit <n>] [--verbose]
+//     [--limit <n>] [--verbose] [--emulator [host:port]] [--log <path>]
 //   --dry-run : parse everything, print the plan, write nothing.
 //   --only    : load only one content folder, e.g. honours-english-3rd-year
 //   --limit   : load at most N packs (for a staged load).
+//   --emulator: write to a local Firestore EMULATOR (default 127.0.0.1:8080)
+//               instead of live Firestore — D-2 verification only, never live.
+//   --log     : write the run log to <path> instead of the default log file
+//               (emulator runs use a separate log so the live log is untouched).
 
 import { createRequire } from 'node:module';
 import { readdirSync, readFileSync, writeFileSync, existsSync, statSync } from 'node:fs';
@@ -39,8 +43,8 @@ import { createHash } from 'node:crypto';
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const CONTENT_ROOT = '/home/hatch/workspace/eduorbit/content';
 const PROJECT_ID = 'eduvelto';
-const REST = `https://firestore.googleapis.com/v1/projects/${PROJECT_ID}/databases/(default)/documents`;
-const LOG_PATH = join(__dirname, 'load-library-content-log.json');
+const DEFAULT_REST = `https://firestore.googleapis.com/v1/projects/${PROJECT_ID}/databases/(default)/documents`;
+const DEFAULT_LOG_PATH = join(__dirname, 'load-library-content-log.json');
 
 const args = process.argv.slice(2);
 const DRY_RUN = args.includes('--dry-run');
@@ -51,6 +55,18 @@ const LIMIT = limitIdx >= 0 ? parseInt(args[limitIdx + 1], 10) : Infinity;
 const dumpIdx = args.indexOf('--dump-plan');
 const DUMP_PLAN_PATH = dumpIdx >= 0 ? args[dumpIdx + 1] : null;
 const VERBOSE = args.includes('--verbose');
+const emuIdx = args.indexOf('--emulator');
+// --emulator [host:port] : write to a local Firestore EMULATOR instead of live
+// Firestore (D-2 verification; NEVER writes to live). The emulator ignores
+// auth, but its REST API accepts `Bearer owner` as a superuser token.
+// Default host:port 127.0.0.1:8080 when the flag has no value.
+const EMULATOR_HOST = emuIdx >= 0 ? (args[emuIdx + 1] && !args[emuIdx + 1].startsWith('--') ? args[emuIdx + 1] : '127.0.0.1:8080') : null;
+const logIdx = args.indexOf('--log');
+const LOG_PATH = logIdx >= 0 ? args[logIdx + 1] : DEFAULT_LOG_PATH;
+// REST base: live Firestore, or the emulator when --emulator is set.
+const REST = EMULATOR_HOST
+  ? `http://${EMULATOR_HOST}/v1/projects/${PROJECT_ID}/databases/(default)/documents`
+  : DEFAULT_REST;
 
 // ---------------------------------------------------------------------------
 // Firestore REST value encoding
@@ -112,13 +128,14 @@ async function getAccessToken() {
 }
 
 async function fsFetch(path, { method = 'GET', body = null, retryAuth = true } = {}) {
-  const token = await getAccessToken();
+  // Emulator mode: no OAuth exchange — `Bearer owner` bypasses rules.
+  const token = EMULATOR_HOST ? 'owner' : await getAccessToken();
   const res = await fetch(`${REST}${path}`, {
     method,
     headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
     body: body ? JSON.stringify(body) : undefined,
   });
-  if (res.status === 401 && retryAuth) {
+  if (res.status === 401 && retryAuth && !EMULATOR_HOST) {
     accessToken = null;
     return fsFetch(path, { method, body, retryAuth: false });
   }
@@ -521,8 +538,35 @@ function buildPlan() {
 // ---------------------------------------------------------------------------
 // Write one book (book + chapters + lessons + directory row)
 // ---------------------------------------------------------------------------
+// ---------------------------------------------------------------------------
+// Cascading-filter fields (21 Nov 2026, D-1).
+// MUST match src/lib/taxonomy.ts CASCADE_STREAMS (the app-side taxonomy).
+// Derived ONLY from the existing legacy fields — NO new data, NO backfill,
+// NO bookType field. Every book maps to exactly one (stream, level, group):
+//   SSC/HSC  -> stream 'general',  level 'Secondary'/'Higher Secondary',
+//               group = program ('Science'/'Commerce'/'Humanities')
+//   Madrasa  -> stream 'madrasa',  level = program = classLevel
+//               ('Dakhil'/'Alim'/'Fazil'/'Kamil'), group = level
+//               (department is 'Madrasa' — NOT the group)
+//   Technical-> stream 'technical', level = program = classLevel
+//               ('Bmt'/'Hsc Vocational'/'Ssc Vocational'), group = level
+//   Higher   -> stream 'higher',   level 'Honours', group = department
+// Unknown types fall back to ('general', classLevel, department) and are
+// flagged by the D-2 verification — the fallback must never occur on the
+// real inventory (5 education types only).
+// ---------------------------------------------------------------------------
+function deriveCascadeFields(type, program, classLevel, department) {
+  if (type === 'SSC') return { stream: 'general', level: 'Secondary', group: program };
+  if (type === 'HSC') return { stream: 'general', level: 'Higher Secondary', group: program };
+  if (type === 'Madrasa') return { stream: 'madrasa', level: program, group: program };
+  if (type === 'Technical') return { stream: 'technical', level: program, group: program };
+  if (type === 'Higher') return { stream: 'higher', level: program, group: department };
+  return { stream: 'general', level: classLevel, group: department, _fallback: true };
+}
+
 async function writeBook(book, log) {
   const now = new Date();
+  const cascade = deriveCascadeFields(book.eduType, book.program, book.yearLabel, book.department);
   // --only guard: a book whose packs span multiple folders must NOT be
   // overwritten with a folder-scoped plan — the 21 Nov 2026 --only
   // hsc-humanities run clobbered 5 HSC books (bangla/english/ict) to
@@ -559,12 +603,13 @@ async function writeBook(book, log) {
     questionCount: book.questionCount,
     chapterCount: book.chapterCount,
     sourceFiles: book.sourceFiles,
+    stream: cascade.stream, level: cascade.level, group: cascade.group,
     reviewStatus: 'Under Review',
     createdAt: now,
     updatedAt: now,
   };
   const res1 = await upsertPublished('books', book.bookId, bookFields, true);
-  log.books[book.bookId] = { title: book.title, code: book.code, departments: book.departments, questionCount: book.questionCount, chapters: book.chapterCount, write: res1 };
+  log.books[book.bookId] = { title: book.title, code: book.code, departments: book.departments, questionCount: book.questionCount, chapters: book.chapterCount, cascade: { stream: cascade.stream, level: cascade.level, group: cascade.group, fallback: !!cascade._fallback }, write: res1 };
 
   for (const { pack, part, setNo } of book.chapters) {
     const isDraftPart = pack.file === DRAFT_PACK_FILE;
@@ -593,10 +638,11 @@ async function writeBook(book, log) {
     classLevel: book.yearLabel, department: book.department, departments: book.departments,
     subject: book.department, paperCode: book.code, paperTitle: book.title,
     bookId: book.bookId, title: book.title,
+    stream: cascade.stream, level: cascade.level, group: cascade.group,
     reviewStatus: 'Under Review', createdAt: now, updatedAt: now,
   };
   await upsertPublished('educationDirectory', book.bookId, dirFields, true);
-  log.directory[book.bookId] = { title: book.title, departments: book.departments };
+  log.directory[book.bookId] = { title: book.title, departments: book.departments, cascade: { stream: cascade.stream, level: cascade.level, group: cascade.group } };
 }
 
 // ---------------------------------------------------------------------------

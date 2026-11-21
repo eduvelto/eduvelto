@@ -45,6 +45,16 @@ export interface Book {
   reviewStatus: string;
   credit?: number | null;
   marks?: number | null;
+  /**
+   * Cascading-filter fields (loader-stored; see scripts/load-library-content.mjs
+   * deriveCascadeFields). OPTIONAL: live rows do not carry them yet (live
+   * writes need separate owner approval), so readers must not require them —
+   * the Directory queries translate cascade selections to the legacy fields
+   * above instead (cascadeToDirectoryFilters).
+   */
+  stream?: 'general' | 'madrasa' | 'technical' | 'higher';
+  level?: string;
+  group?: string;
 }
 
 export interface Chapter {
@@ -98,6 +108,10 @@ export interface DirectoryRow {
   bookId: string;
   title: string;
   reviewStatus: string;
+  /** Cascading-filter fields — loader-stored, optional; see Book.stream. */
+  stream?: 'general' | 'madrasa' | 'technical' | 'higher';
+  level?: string;
+  group?: string;
 }
 
 function toBook(id: string, d: Record<string, unknown>): Book {
@@ -121,6 +135,9 @@ function toBook(id: string, d: Record<string, unknown>): Book {
     reviewStatus: (d.reviewStatus as string) ?? '',
     credit: (d.credit as number) ?? null,
     marks: (d.marks as number) ?? null,
+    stream: typeof d.stream === 'string' ? (d.stream as Book['stream']) : undefined,
+    level: typeof d.level === 'string' ? d.level : undefined,
+    group: typeof d.group === 'string' ? d.group : undefined,
   };
 }
 
@@ -166,6 +183,9 @@ function toDirectoryRow(id: string, d: Record<string, unknown>): DirectoryRow {
     bookId: (d.bookId as string) ?? '',
     title: (d.title as string) ?? '',
     reviewStatus: (d.reviewStatus as string) ?? '',
+    stream: typeof d.stream === 'string' ? (d.stream as DirectoryRow['stream']) : undefined,
+    level: typeof d.level === 'string' ? d.level : undefined,
+    group: typeof d.group === 'string' ? d.group : undefined,
   };
 }
 
@@ -203,6 +223,9 @@ export interface BookFilters {
 
 export interface DirectoryFilters {
   type?: string;
+  /** `in` list for `type` — used only for stream=general with level=All
+   * (SSC + HSC). Mutually exclusive with `type`; never set both. */
+  types?: string[];
   board?: string;
   program?: string;
   classLevel?: string;
@@ -228,11 +251,105 @@ function bookConstraints(filters: BookFilters): QueryConstraint[] {
 function directoryConstraints(filters: DirectoryFilters): QueryConstraint[] {
   const cs: QueryConstraint[] = [where('reviewStatus', '==', 'Published')];
   if (filters.type) cs.push(where('type', '==', filters.type));
+  else if (filters.types?.length) cs.push(where('type', 'in', filters.types));
   if (filters.board) cs.push(where('board', '==', filters.board));
   if (filters.program) cs.push(where('program', '==', filters.program));
   if (filters.classLevel) cs.push(where('classLevel', '==', filters.classLevel));
   if (filters.department) cs.push(where('department', '==', filters.department));
   return cs;
+}
+
+// ---------------------------------------------------------------------------
+// Cascading filters → legacy directory fields.
+//
+// The cascade (src/lib/taxonomy.ts CASCADE_STREAMS) selects stream / level /
+// class / group, but live `educationDirectory` rows do NOT yet carry the
+// stream/level/group fields — live writes need separate owner approval, and
+// the loader stores them only in the emulator / future loads. So the
+// cascade queries MUST translate to the legacy fields the live rows DO
+// carry (type / program / classLevel / department), which is what this
+// function does. It is the single translation point: the DirectoryPage
+// never builds DirectoryFilters by hand.
+//
+// Translation table (verified against the live inventory, 609 books):
+//   general + level Secondary        -> type 'SSC'
+//   general + level Higher Secondary -> type 'HSC'
+//   general + level All              -> type IN ['SSC','HSC']  (needs the V-1 probe)
+//   general + class 'SSC'/'HSC'      -> classLevel 'SSC'/'HSC' (also fixes type)
+//   general + group                  -> program 'Science'/'Commerce'/'Humanities'
+//   madrasa + level                  -> type 'Madrasa', program == classLevel == level
+//                                      (group == level for madrasa; NOT department,
+//                                      whose live value is 'Madrasa')
+//   technical + level                -> type 'Technical', program == classLevel == level
+//                                      (group == level; department == level too)
+//   higher + level 'Honours'         -> type 'Higher', program 'Honours'
+//   higher + class 'Nth Year'        -> classLevel 'Nth Year'
+//   higher + group                   -> department '<department>'
+//
+// ONE-LINE SWITCH (when live rows carry stream/level/group): replace this
+// function with a direct mapping —
+//   { ...(stream && { stream }), ...(level && { level }),
+//     ...(classLevel && { group: classLevel }), ...(group && { group }) }
+// — and add where('stream'/'level'/'group', '==', …) to directoryConstraints.
+// Do NOT flip it before the live re-run is approved and verified.
+// ---------------------------------------------------------------------------
+
+export interface CascadeSelection {
+  /** '' = All streams (no stream filter). */
+  stream: '' | 'general' | 'madrasa' | 'technical' | 'higher';
+  /** Program / Level value; '' = All. */
+  level: string;
+  /** Class / Year / Semester value; '' = All. */
+  classLevel: string;
+  /** Group / Department / Trade value; '' = All. */
+  group: string;
+}
+
+export function cascadeToDirectoryFilters(sel: CascadeSelection): DirectoryFilters {
+  const f: DirectoryFilters = {};
+  if (!sel.stream) return f;
+  switch (sel.stream) {
+    case 'general': {
+      if (sel.classLevel === 'SSC' || sel.classLevel === 'HSC') {
+        // A class selection fixes the type exactly — no `in` needed.
+        f.type = sel.classLevel;
+        f.classLevel = sel.classLevel;
+      } else if (sel.level === 'Secondary') {
+        f.type = 'SSC';
+      } else if (sel.level === 'Higher Secondary') {
+        f.type = 'HSC';
+      } else {
+        // Stream chosen, level All: both general types.
+        f.types = ['SSC', 'HSC'];
+      }
+      if (sel.group) f.program = sel.group;
+      break;
+    }
+    case 'madrasa': {
+      f.type = 'Madrasa';
+      if (sel.level) {
+        f.program = sel.level;
+        f.classLevel = sel.level;
+      }
+      break;
+    }
+    case 'technical': {
+      f.type = 'Technical';
+      if (sel.level) {
+        f.program = sel.level;
+        f.classLevel = sel.level;
+      }
+      break;
+    }
+    case 'higher': {
+      f.type = 'Higher';
+      if (sel.level) f.program = sel.level;
+      if (sel.classLevel) f.classLevel = sel.classLevel;
+      if (sel.group) f.department = sel.group;
+      break;
+    }
+  }
+  return f;
 }
 
 /**
