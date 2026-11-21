@@ -39,13 +39,12 @@ export default function AdminPage() {
   useEffect(() => {
     let cancelled = false;
     void (async () => {
+      // Same decoupling as AdminUsersPage: the pending-verifications list
+      // is the page content and must load even when count() fails on live
+      // Spark (RESOURCE_EXHAUSTED, audit H1). The count is a nicety.
       try {
-        const [c, p] = await Promise.all([
-          getDashboardCounts(requireDb()),
-          listTeacherVerifications(requireDb(), 'pending'),
-        ]);
+        const p = await listTeacherVerifications(requireDb(), 'pending');
         if (cancelled) return;
-        setCounts(c);
         setPending(p);
         try {
           setLastBackup(localStorage.getItem(LAST_BACKUP_KEY));
@@ -56,6 +55,12 @@ export default function AdminPage() {
         if (!cancelled) setError(friendlyAdminError(e));
       } finally {
         if (!cancelled) setLoading(false);
+      }
+      try {
+        const c = await getDashboardCounts(requireDb());
+        if (!cancelled) setCounts(c);
+      } catch {
+        // Counts stay hidden; the dashboard and pending list are intact.
       }
     })();
     return () => {

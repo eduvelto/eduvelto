@@ -45,17 +45,28 @@ export default function AdminUsersPage() {
   useEffect(() => {
     mounted.current = true;
     void (async () => {
+      // The user LIST is the page: load it on its own. The total count is
+      // loaded separately afterwards — count() is known to fail on live
+      // Spark (RESOURCE_EXHAUSTED, audit H1) and must never blank the
+      // list. Before this fix both were in one Promise.all, so a count
+      // failure left the owner staring at "nobody found" with zero rows
+      // even though listUsers() itself works.
       try {
-        const [page, counts] = await Promise.all([listUsers(requireDb()), getDashboardCounts(requireDb())]);
+        const page = await listUsers(requireDb());
         if (!mounted.current) return;
         setRows(page.rows);
         setLastDoc(page.lastDoc);
         setHasMore(page.hasMore);
-        setTotal(counts.users);
       } catch (e) {
         if (mounted.current) setError(friendlyAdminError(e));
       } finally {
         if (mounted.current) setLoading(false);
+      }
+      try {
+        const counts = await getDashboardCounts(requireDb());
+        if (mounted.current) setTotal(counts.users);
+      } catch {
+        // Total stays null — the "of N" suffix hides, the list is intact.
       }
     })();
     return () => {
