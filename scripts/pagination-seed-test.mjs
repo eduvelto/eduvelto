@@ -240,11 +240,11 @@ async function main() {
     const s = await getDocs(query(booksCol, where('reviewStatus', '==', 'Published'), limit(50), startAfter(page1Last)));
     return { docs: s.size, firstId: s.docs[0]?.id, lastId: s.docs[s.docs.length - 1]?.id };
   });
-  await run('E3', "orderBy('reviewStatus') + limit(50)", async () => {
-    const s = await getDocs(query(booksCol, where('reviewStatus', '==', 'Published'), orderBy('reviewStatus'), limit(50)));
+  await run('E3', "orderBy(documentId()) + limit(50)", async () => {
+    const s = await getDocs(query(booksCol, where('reviewStatus', '==', 'Published'), orderBy(documentId()), limit(50)));
     return { docs: s.size, firstId: s.docs[0]?.id };
   });
-  await run('E4', "orderBy('classLevel') + limit(50) [expect FAIL: composite index]", async () => {
+  await run('E4', "orderBy('classLevel') + limit(50) [emulator does NOT enforce indexes: passes here, FAILS live]", async () => {
     const s = await getDocs(query(booksCol, where('reviewStatus', '==', 'Published'), orderBy('classLevel'), limit(50)));
     return { docs: s.size };
   });
@@ -262,8 +262,8 @@ async function main() {
     const s = await getDocs(query(booksCol, where('reviewStatus', '==', 'Published'), where('educationType', '==', 'Higher'), where('classLevel', '==', '1st Year'), limit(50)));
     return { docs: s.size };
   });
-  await run('E8', "filter educationType + orderBy('reviewStatus') + limit(50)", async () => {
-    const s = await getDocs(query(booksCol, where('reviewStatus', '==', 'Published'), where('educationType', '==', 'Higher'), orderBy('reviewStatus'), limit(50)));
+  await run('E8', "filter educationType + orderBy(documentId()) + limit(50)", async () => {
+    const s = await getDocs(query(booksCol, where('reviewStatus', '==', 'Published'), where('educationType', '==', 'Higher'), orderBy(documentId()), limit(50)));
     return { docs: s.size };
   });
   await run('E9', 'count() all Published books', async () => {
@@ -288,42 +288,54 @@ async function main() {
     const s = await getDocs(query(booksCol, where('reviewStatus', '==', 'Published'), orderBy(documentId()), limit(50)));
     return { docs: s.size, firstId: s.docs[0]?.id };
   });
-  await run('E14', "orderBy classLevel+department+title [expect FAIL: composite index]", async () => {
+  await run('E14', "orderBy classLevel+department+title [emulator does NOT enforce indexes: passes here, FAILS live]", async () => {
     const s = await getDocs(query(booksCol, where('reviewStatus', '==', 'Published'), orderBy('classLevel'), orderBy('department'), orderBy('title'), limit(50)));
     return { docs: s.size };
   });
-  await run('E3b', "orderBy('reviewStatus') + limit(50) + startAfter (the shape we will ship)", async () => {
-    const s1 = await getDocs(query(booksCol, where('reviewStatus', '==', 'Published'), orderBy('reviewStatus'), limit(50)));
+  await run('E3b', "orderBy(documentId()) + limit(50) + startAfter (the shape we will ship)", async () => {
+    const s1 = await getDocs(query(booksCol, where('reviewStatus', '==', 'Published'), orderBy(documentId()), limit(50)));
     const last = s1.docs[s1.docs.length - 1];
-    const s = await getDocs(query(booksCol, where('reviewStatus', '==', 'Published'), orderBy('reviewStatus'), limit(50), startAfter(last)));
+    const s = await getDocs(query(booksCol, where('reviewStatus', '==', 'Published'), orderBy(documentId()), limit(50), startAfter(last)));
     return { page1: s1.size, page2: s.size, page2firstId: s.docs[0]?.id, overlap: s.docs.some((d) => d.id === last.id) };
   });
-  await run('E3c', "orderBy('reviewStatus') + filter educationType + limit(50) + startAfter", async () => {
-    const q1 = query(booksCol, where('reviewStatus', '==', 'Published'), where('educationType', '==', 'Higher'), orderBy('reviewStatus'), limit(50));
+  await run('E3c', "orderBy(documentId()) + filter educationType + limit(50) + startAfter", async () => {
+    const q1 = query(booksCol, where('reviewStatus', '==', 'Published'), where('educationType', '==', 'Higher'), orderBy(documentId()), limit(50));
     const s1 = await getDocs(q1);
     const last = s1.docs[s1.docs.length - 1];
-    const s = await getDocs(query(booksCol, where('reviewStatus', '==', 'Published'), where('educationType', '==', 'Higher'), orderBy('reviewStatus'), limit(50), startAfter(last)));
+    const s = await getDocs(query(booksCol, where('reviewStatus', '==', 'Published'), where('educationType', '==', 'Higher'), orderBy(documentId()), limit(50), startAfter(last)));
     return { page1: s1.size, page2: s.size, page2firstId: s.docs[0]?.id };
   });
   await run('E15', "count() type+classLevel filter", async () => {
     const s = await getCountFromServer(query(booksCol, where('reviewStatus', '==', 'Published'), where('educationType', '==', 'Higher'), where('classLevel', '==', '1st Year')));
     return { count: s.data().count };
   });
-  await run('E16', "directory: orderBy('reviewStatus') + filter type + limit(50) + startAfter", async () => {
-    const q1 = query(dirCol, where('reviewStatus', '==', 'Published'), where('type', '==', 'Higher'), orderBy('reviewStatus'), limit(50));
+  await run('E16', "directory: orderBy(documentId()) + filter type + limit(50) + startAfter", async () => {
+    const q1 = query(dirCol, where('reviewStatus', '==', 'Published'), where('type', '==', 'Higher'), orderBy(documentId()), limit(50));
     const s1 = await getDocs(q1);
     const last = s1.docs[s1.docs.length - 1];
-    const s = await getDocs(query(dirCol, where('reviewStatus', '==', 'Published'), where('type', '==', 'Higher'), orderBy('reviewStatus'), limit(50), startAfter(last)));
+    const s = await getDocs(query(dirCol, where('reviewStatus', '==', 'Published'), where('type', '==', 'Higher'), orderBy(documentId()), limit(50), startAfter(last)));
     return { page1: s1.size, page2: s.size, page2firstId: s.docs[0]?.id };
   });
   await run('E17', 'three consecutive pages: no overlap, sequential doc IDs', async () => {
-    const q = (c) => query(booksCol, where('reviewStatus', '==', 'Published'), orderBy('reviewStatus'), limit(50), ...(c ? [startAfter(c)] : []));
+    const q = (c) => query(booksCol, where('reviewStatus', '==', 'Published'), orderBy(documentId()), limit(50), ...(c ? [startAfter(c)] : []));
     const p1 = await getDocs(q(null));
     const p2 = await getDocs(q(p1.docs[p1.docs.length - 1]));
     const p3 = await getDocs(q(p2.docs[p2.docs.length - 1]));
     const ids = [...p1.docs, ...p2.docs, ...p3.docs].map((d) => d.id);
     const sorted = [...ids].sort();
     return { pages: [p1.size, p2.size, p3.size], unique: new Set(ids).size, inDocIdOrder: JSON.stringify(ids) === JSON.stringify(sorted) };
+  });
+  await run('E18', 'FULL WALK books: all pages, no loss, no duplicates', async () => {
+    const q = (c) => query(booksCol, where('reviewStatus', '==', 'Published'), orderBy(documentId()), limit(50), ...(c ? [startAfter(c)] : []));
+    let cursor = null; const ids = []; let pages = 0;
+    for (;;) { const snap = await getDocs(q(cursor)); pages++; ids.push(...snap.docs.map((d) => d.id)); if (snap.size < 50) break; cursor = snap.docs[snap.docs.length - 1]; }
+    return { pages, docs: ids.length, unique: new Set(ids).size };
+  });
+  await run('E19', 'FULL WALK directory: all pages, no loss, no duplicates', async () => {
+    const q = (c) => query(dirCol, where('reviewStatus', '==', 'Published'), orderBy(documentId()), limit(50), ...(c ? [startAfter(c)] : []));
+    let cursor = null; const ids = []; let pages = 0;
+    for (;;) { const snap = await getDocs(q(cursor)); pages++; ids.push(...snap.docs.map((d) => d.id)); if (snap.size < 50) break; cursor = snap.docs[snap.docs.length - 1]; }
+    return { pages, docs: ids.length, unique: new Set(ids).size };
   });
   // Distinct values actually present (for the taxonomy + order check).
   const all = await getDocs(query(booksCol, where('reviewStatus', '==', 'Published'), limit(50)));

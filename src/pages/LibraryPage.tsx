@@ -1,10 +1,11 @@
 // Eduvelto — digital library (Phase 2, Step 2 + Step 3; pagination 21 Nov 2026).
 //
 // Server-side pagination: 50 books per page (limit + startAfter), filters
-// run server-side, total from a count aggregation — opening the Library
-// no longer downloads all 609 books (was ~0.48 MiB + 609 reads; now one
-// page of 50, ~0.04 MiB + 50 reads). Filter dropdowns come from the static
-// taxonomy (src/lib/taxonomy.ts) because Firestore has no DISTINCT query.
+// run server-side — opening the Library no longer downloads all 609 books
+// (was ~0.48 MiB + 609 reads; now one page of 50, ~0.04 MiB + 50 reads).
+// No exact total is shown: getCountFromServer fails on live Firestore
+// right now (resource-exhausted), so the page shows "showing X–Y" +
+// Previous/Next only. Filter dropdowns come from the static taxonomy
 // Substring search cannot run server-side, so searching loads the full
 // Published list ONCE per session (module-level cache in lib/content.ts)
 // and searches it client-side — exactly the old behaviour, but only when
@@ -18,7 +19,6 @@ import { Link } from 'react-router-dom';
 import { PageShell, EmptyState } from '../components/PageShell';
 import AdSlot from '../components/AdSlot';
 import {
-  countPublishedBooks,
   getAllPublishedBooksCached,
   listPublishedBooksPage,
   PAGE_SIZE,
@@ -47,7 +47,6 @@ const selectStyle: React.CSSProperties = {
 export default function LibraryPage() {
   const [pages, setPages] = useState<PageResult<Book>[]>([]);
   const [pageIndex, setPageIndex] = useState(0);
-  const [total, setTotal] = useState<number | null>(null);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(true);
   const [query, setQuery] = useState('');
@@ -77,18 +76,20 @@ export default function LibraryPage() {
     [],
   );
 
-  // (Re)load page 1 + total whenever the filters change.
+  // (Re)load page 1 whenever the filters change.
+  // NOTE: no exact total is shown — getCountFromServer fails on live
+  // Firestore right now (resource-exhausted), so the page shows
+  // "showing X–Y" + Previous/Next only (see pagination-test-report §5).
   useEffect(() => {
     let live = true;
     setLoading(true);
     setError('');
     setPages([]);
     setPageIndex(0);
-    Promise.all([loadPage(filters, null), countPublishedBooks(filters)])
-      .then(([first, count]) => {
+    loadPage(filters, null)
+      .then((first) => {
         if (!live) return;
         setPages([first]);
-        setTotal(count);
         setLoading(false);
       })
       .catch(() => {
@@ -126,7 +127,7 @@ export default function LibraryPage() {
 
   const currentPage = pages[pageIndex];
   const pageBooks = currentPage?.items ?? [];
-  const shownFrom = total === 0 ? 0 : pageIndex * PAGE_SIZE + 1;
+  const shownFrom = pageBooks.length === 0 ? 0 : pageIndex * PAGE_SIZE + 1;
   const shownTo = pageIndex * PAGE_SIZE + pageBooks.length;
 
   async function nextPage() {
@@ -164,10 +165,10 @@ export default function LibraryPage() {
     <PageShell titleBn="ডিজিটাল লাইব্রেরি" titleEn="Digital Library">
       {error ? <p style={{ color: '#b00020' }}>{error}</p> : null}
       {loading && pages.length === 0 && !error ? <p>লোড হচ্ছে… / Loading…</p> : null}
-      {!loading && total === 0 ? (
-        <EmptyState bn="এখনো কোনো বই প্রকাশিত হয়নি। কনটেন্ট প্রকাশিত হলে এখানে দেখা যাবে।" en="No books published yet. Content will appear here once it is published." />
+      {!loading && pages.length > 0 && pageBooks.length === 0 && pageIndex === 0 && !searching ? (
+        <EmptyState bn="এই বাছাইয়ে কোনো বই পাওয়া যায়নি। ফিল্টার বদলে আবার চেষ্টা করুন।" en="No books match these filters. Try different filters." />
       ) : null}
-      {total !== null && total > 0 ? (
+      {pages.length > 0 ? (
         <>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, marginBottom: 12 }}>
             <input
@@ -277,8 +278,7 @@ export default function LibraryPage() {
           ) : (
             <>
               <p style={{ color: '#555', margin: '0 0 12px' }}>
-                {total}টি বই পাওয়া গেছে / {total} books found
-                {pageBooks.length > 0 ? ` — দেখাচ্ছি ${shownFrom}–${shownTo} / showing ${shownFrom}–${shownTo}` : ''}
+                দেখাচ্ছি {shownFrom}–{shownTo} / Showing {shownFrom}–{shownTo}
               </p>
               {pageBooks.length === 0 && !loading ? (
                 <p>এই বাছাইয়ে কোনো বই পাওয়া যায়নি — ফিল্টার বদলে আবার চেষ্টা করুন। / No books match — try different filters.</p>
@@ -294,7 +294,7 @@ export default function LibraryPage() {
                   </li>
                 ))}
               </ul>
-              {total > PAGE_SIZE || pageIndex > 0 ? (
+              {currentPage?.hasMore || pageIndex > 0 ? (
                 <div style={{ display: 'flex', gap: 12, alignItems: 'center', marginTop: 16 }}>
                   <button
                     type="button"
@@ -306,7 +306,6 @@ export default function LibraryPage() {
                   </button>
                   <span>
                     পাতা {pageIndex + 1} / Page {pageIndex + 1}
-                    {total > 0 ? ` — মোট ${total}টি বই / ${total} books total` : ''}
                   </span>
                   <button
                     type="button"

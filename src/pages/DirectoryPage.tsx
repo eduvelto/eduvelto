@@ -1,8 +1,9 @@
 // Eduvelto — education directory (Phase 2, Step 2 + Step 3; pagination 21 Nov 2026).
 //
 // Server-side pagination: 50 rows per page (limit + startAfter), cascade
-// filters run server-side, total from a count aggregation — opening the
-// Directory no longer downloads all 609 rows. Filter dropdowns come from
+// filters run server-side — opening the Directory no longer downloads all
+// 609 rows. No exact total is shown: getCountFromServer fails on live
+// Firestore right now (resource-exhausted). Filter dropdowns come from
 // the static taxonomy (src/lib/taxonomy.ts) because Firestore has no
 // DISTINCT query. Each server page is sorted client-side in the
 // Directory's usual order (class, department, paper title); the GLOBAL
@@ -13,7 +14,6 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { PageShell, EmptyState } from '../components/PageShell';
 import {
-  countPublishedDirectory,
   listPublishedDirectoryPage,
   PAGE_SIZE,
   type DirectoryFilters,
@@ -41,7 +41,6 @@ const selectStyle: React.CSSProperties = {
 export default function DirectoryPage() {
   const [pages, setPages] = useState<PageResult<DirectoryRow>[]>([]);
   const [pageIndex, setPageIndex] = useState(0);
-  const [total, setTotal] = useState<number | null>(null);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(true);
   const [type, setType] = useState('');
@@ -67,18 +66,19 @@ export default function DirectoryPage() {
     [],
   );
 
-  // (Re)load page 1 + total whenever the filters change.
+  // (Re)load page 1 whenever the filters change.
+  // NOTE: no exact total — getCountFromServer fails on live Firestore
+  // right now (resource-exhausted); see pagination-test-report §5.
   useEffect(() => {
     let live = true;
     setLoading(true);
     setError('');
     setPages([]);
     setPageIndex(0);
-    Promise.all([loadPage(filters, null), countPublishedDirectory(filters)])
-      .then(([first, count]) => {
+    loadPage(filters, null)
+      .then((first) => {
         if (!live) return;
         setPages([first]);
-        setTotal(count);
         setLoading(false);
       })
       .catch(() => {
@@ -99,7 +99,7 @@ export default function DirectoryPage() {
 
   const currentPage = pages[pageIndex];
   const pageRows = currentPage?.items ?? [];
-  const shownFrom = total === 0 ? 0 : pageIndex * PAGE_SIZE + 1;
+  const shownFrom = pageRows.length === 0 ? 0 : pageIndex * PAGE_SIZE + 1;
   const shownTo = pageIndex * PAGE_SIZE + pageRows.length;
 
   async function nextPage() {
@@ -124,10 +124,10 @@ export default function DirectoryPage() {
     <PageShell titleBn="শিক্ষা নির্দেশিকা" titleEn="Education Directory">
       {error ? <p style={{ color: '#b00020' }}>{error}</p> : null}
       {loading && pages.length === 0 && !error ? <p>লোড হচ্ছে… / Loading…</p> : null}
-      {!loading && total === 0 ? (
-        <EmptyState bn="এখনো কোনো তথ্য নেই। কনটেন্ট প্রকাশিত হলে এখানে দেখা যাবে।" en="No data yet. Content will appear here once it is published." />
+      {!loading && pages.length > 0 && pageRows.length === 0 && pageIndex === 0 ? (
+        <EmptyState bn="এই বাছাইয়ে কিছু পাওয়া যায়নি। উপরের ধাপ বদলে আবার চেষ্টা করুন।" en="Nothing matches these filters. Try different steps above." />
       ) : null}
-      {total !== null && total > 0 ? (
+      {pages.length > 0 && pageRows.length > 0 ? (
         <>
           <p style={{ color: '#555', margin: '0 0 12px' }}>
             ধাপে ধাপে বাছুন: ধারা → বোর্ড → প্রোগ্রাম → শ্রেণি → বিষয় / Pick step by step: type →
@@ -221,8 +221,7 @@ export default function DirectoryPage() {
             </select>
           </div>
           <p style={{ color: '#555', margin: '0 0 12px' }}>
-            {total}টি এন্ট্রি / {total} entries
-            {pageRows.length > 0 ? ` — দেখাচ্ছি ${shownFrom}–${shownTo} / showing ${shownFrom}–${shownTo}` : ''}
+            দেখাচ্ছি {shownFrom}–{shownTo} / Showing {shownFrom}–{shownTo}
           </p>
           {pageRows.length === 0 && !loading ? (
             <p>এই বাছাইয়ে কিছু পাওয়া যায়নি — উপরের ধাপ বদলে আবার চেষ্টা করুন। / Nothing matches — try different steps above.</p>
@@ -237,7 +236,7 @@ export default function DirectoryPage() {
               </li>
             ))}
           </ul>
-          {total > PAGE_SIZE || pageIndex > 0 ? (
+          {currentPage?.hasMore || pageIndex > 0 ? (
             <div style={{ display: 'flex', gap: 12, alignItems: 'center', marginTop: 16 }}>
               <button
                 type="button"
@@ -249,7 +248,6 @@ export default function DirectoryPage() {
               </button>
               <span>
                 পাতা {pageIndex + 1} / Page {pageIndex + 1}
-                {total > 0 ? ` — মোট ${total}টি এন্ট্রি / ${total} entries total` : ''}
               </span>
               <button
                 type="button"

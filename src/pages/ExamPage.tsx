@@ -21,7 +21,6 @@ import { PageShell, EmptyState } from '../components/PageShell';
 import { useAuth } from '../lib/auth';
 import {
   bookTitleOf,
-  countPublishedQuizzes,
   getPublishedQuiz,
   listMyAttempts,
   listPublishedQuizzesPage,
@@ -80,7 +79,6 @@ export default function ExamPage() {
   const { user } = useAuth();
   const [pages, setPages] = useState<QuizPageResult[]>([]);
   const [pageIndex, setPageIndex] = useState(0);
-  const [total, setTotal] = useState<number | null>(null);
   const [attempts, setAttempts] = useState<QuizAttempt[] | null>(null);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(true);
@@ -96,12 +94,11 @@ export default function ExamPage() {
   useEffect(() => {
     let alive = true;
     setLoading(true);
-    Promise.all([loadPage(null), countPublishedQuizzes({})])
-      .then(([first, count]) => {
+    loadPage(null)
+      .then((first) => {
         if (!alive) return;
         for (const q of first.items) quizByIdRef.current.set(q.id, q);
         setPages([first]);
-        setTotal(count);
         setTitlesVersion((v) => v + 1);
         setLoading(false);
       })
@@ -158,7 +155,7 @@ export default function ExamPage() {
   void titlesVersion;
   const quizById = quizByIdRef.current;
   const pageQuestions = pageQuizzes.reduce((s, q) => s + q.questionCount, 0);
-  const shownFrom = total === 0 ? 0 : pageIndex * QUIZ_PAGE_SIZE + 1;
+  const shownFrom = pageQuizzes.length === 0 ? 0 : pageIndex * QUIZ_PAGE_SIZE + 1;
   const shownTo = pageIndex * QUIZ_PAGE_SIZE + pageQuizzes.length;
 
   async function nextPage() {
@@ -186,15 +183,12 @@ export default function ExamPage() {
       {error ? <p style={{ color: '#b00020' }}>{error}</p> : null}
       {loading && pages.length === 0 ? (
         <p>লোড হচ্ছে… / Loading…</p>
-      ) : total === 0 ? (
+      ) : pageQuizzes.length === 0 && pageIndex === 0 ? (
         <EmptyState bn="এখনো কোনো পরীক্ষা প্রকাশিত হয়নি। কনটেন্ট প্রকাশিত হলে এখানে দেখা যাবে।" en="No exam has been published yet. Content will appear here once it is published." />
       ) : (
         <>
           <p style={{ color: '#555', marginTop: 0 }}>
-            {total}টি পরীক্ষা প্রকাশিত / {total} exams published
-            {pageQuizzes.length > 0
-              ? ` — এই পাতায় ${groups.length}টি বই · ${pageQuizzes.length}টি পরীক্ষা · ${pageQuestions}টি প্রশ্ন (দেখাচ্ছি ${shownFrom}–${shownTo}) / this page: ${groups.length} books · ${pageQuizzes.length} exams · ${pageQuestions} questions (showing ${shownFrom}–${shownTo})`
-              : ''}
+            এই পাতায় {groups.length}টি বই · {pageQuizzes.length}টি পরীক্ষা · {pageQuestions}টি প্রশ্ন (দেখাচ্ছি {shownFrom}–{shownTo}) / This page: {groups.length} books · {pageQuizzes.length} exams · {pageQuestions} questions (showing {shownFrom}–{shownTo})
           </p>
           {groups.map((g) => (
             <section key={g.bookId} style={{ border: '1px solid #ddd', borderRadius: 8, padding: '16px', marginBottom: 16 }}>
@@ -233,7 +227,7 @@ export default function ExamPage() {
               ))}
             </section>
           ))}
-          {total !== null && (total > QUIZ_PAGE_SIZE || pageIndex > 0) ? (
+          {currentPage?.hasMore || pageIndex > 0 ? (
             <div style={{ display: 'flex', gap: 12, alignItems: 'center', marginTop: 16, marginBottom: 8 }}>
               <button
                 type="button"
@@ -245,7 +239,6 @@ export default function ExamPage() {
               </button>
               <span>
                 পাতা {pageIndex + 1} / Page {pageIndex + 1}
-                {total > 0 ? ` — মোট ${total}টি পরীক্ষা / ${total} exams total` : ''}
               </span>
               <button
                 type="button"
