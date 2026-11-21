@@ -15,8 +15,9 @@
 //   account is suspended only when isActive is explicitly `false`.)
 // - UPDATE (owner): only displayName, educationType, board, institution,
 //   academicYear, program, department, classLevel, language, lastActiveAt,
-//   updatedAt. Role, verificationStatus and isActive can never be changed
-//   by the owner — only Admin/Owner (see firestore.rules).
+//   dateOfBirth (set-once — the rules refuse any change once it exists),
+//   updatedAt. Role, verificationStatus, isActive and dmSuspended can never
+//   be changed by the owner — only Admin/Owner (see firestore.rules).
 
 import { FirebaseError } from 'firebase/app';
 import type { User } from 'firebase/auth';
@@ -26,8 +27,8 @@ import {
   setDoc,
   updateDoc,
   serverTimestamp,
+  Timestamp,
   type Firestore,
-  type Timestamp,
 } from 'firebase/firestore';
 
 export type EducationType = 'general' | 'madrasa' | 'technical' | 'higher' | 'other';
@@ -55,6 +56,16 @@ export interface UserProfile {
   suspendedReason?: string;
   /** Admin-set only; the client never writes this field. */
   verificationStatus?: string;
+  /**
+   * Date of birth. Optional at registration; set-once on the profile
+   * (the rules refuse any change once set, and require a past date
+   * after 1900-01-01). The DM permission matrix reads it: missing DOB
+   * = age unknown = no DM path opens (fail-safe). Never shown to other
+   * users — it is not part of publicProfiles.
+   */
+  dateOfBirth?: Timestamp | null;
+  /** Admin/owner-set only; when true the user cannot send DMs. */
+  dmSuspended?: boolean;
 }
 
 /** Fields the owner may edit on their own profile (rules allowlist). */
@@ -68,6 +79,8 @@ export interface ProfileEdit {
   department?: string | null;
   classLevel?: string | null;
   language?: 'bn' | 'en';
+  /** Set-once: only sent when the profile has no date of birth yet. */
+  dateOfBirth?: Date | null;
 }
 
 const EDITABLE_KEYS: (keyof ProfileEdit)[] = [
@@ -80,6 +93,7 @@ const EDITABLE_KEYS: (keyof ProfileEdit)[] = [
   'department',
   'classLevel',
   'language',
+  'dateOfBirth',
 ];
 
 function isUserProfile(data: unknown): data is UserProfile {
@@ -112,6 +126,18 @@ export async function getUserProfile(db: Firestore, uid: string): Promise<UserPr
   return data;
 }
 
+/** Whole years since the date of birth, or null when DOB is not on file. */
+export function ageYears(profile: Pick<UserProfile, 'dateOfBirth'>): number | null {
+  const dob = profile.dateOfBirth;
+  if (!dob) return null;
+  const d = typeof dob.toDate === 'function' ? dob.toDate() : null;
+  if (!d || Number.isNaN(d.getTime())) return null;
+  const now = new Date();
+  let age = now.getFullYear() - d.getFullYear();
+  if (now.getMonth() < d.getMonth() || (now.getMonth() === d.getMonth() && now.getDate() < d.getDate())) age -= 1;
+  return age;
+}
+
 /**
  * Create the `users/{uid}` document on first sign-in, or return the
  * existing one. `preferredDisplayName` (typed at registration) wins over
@@ -123,6 +149,7 @@ export async function ensureUserProfile(
   db: Firestore,
   user: User,
   preferredDisplayName?: string,
+  dateOfBirth?: Date | null,
 ): Promise<{ profile: UserProfile; created: boolean }> {
   const existing = await getUserProfile(db, user.uid);
   if (existing) return { profile: existing, created: false };
@@ -130,7 +157,7 @@ export async function ensureUserProfile(
   const displayName = (preferredDisplayName ?? user.displayName ?? '').trim() || fallbackDisplayName(user);
   // NOTE: no `isActive`, no `verificationStatus` — the security rules deny
   // create when either is present (see the module header).
-  const data = {
+  const data: Record<string, unknown> = {
     displayName: displayName.slice(0, 100),
     email: user.email ?? '',
     role: 'student' as const,
@@ -139,6 +166,14 @@ export async function ensureUserProfile(
     updatedAt: serverTimestamp(),
     lastActiveAt: serverTimestamp(),
   };
+  // Date of birth is optional at registration (rules: past date after
+  // 1900-01-01). It gates the DM permission matrix, so collecting it
+  // here saves a later Profile-page step.
+  if (dateOfBirth instanceof Date && !Number.isNaN(dateOfBirth.getTime())) {
+    if (dateOfBirth < new Date() && dateOfBirth > new Date(1900, 0, 1)) {
+      data.dateOfBirth = Timestamp.fromDate(dateOfBirth);
+    }
+  }
   await setDoc(doc(db, 'users', user.uid), data);
   const created = await getUserProfile(db, user.uid);
   if (!created) throw new Error('profile-create-failed');
@@ -154,6 +189,12 @@ export async function updateUserProfile(db: Firestore, uid: string, fields: Prof
   for (const key of EDITABLE_KEYS) {
     const value = fields[key];
     if (value === undefined) continue;
+    // A Date for dateOfBirth becomes a Firestore Timestamp (rules
+    // require a timestamp; the UI sends a plain Date from <input type="date">).
+    if (key === 'dateOfBirth' && value instanceof Date) {
+      clean[key] = Timestamp.fromDate(value);
+      continue;
+    }
     // An empty select/text means "not chosen" -> store null, never undefined.
     clean[key] = value === '' ? null : value;
   }

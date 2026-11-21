@@ -56,6 +56,7 @@ export default function ProfilePage() {
   const [program, setProgram] = useState('');
   const [department, setDepartment] = useState('');
   const [classLevel, setClassLevel] = useState('');
+  const [dob, setDob] = useState('');
   const [busy, setBusy] = useState(false);
   const [saved, setSaved] = useState(false);
   const [localError, setLocalError] = useState<string | null>(null);
@@ -157,6 +158,16 @@ export default function ProfilePage() {
     if (norm(program) !== (profile.program ?? null)) fields.program = norm(program);
     if (norm(department) !== (profile.department ?? null)) fields.department = norm(department);
     if (norm(classLevel) !== (profile.classLevel ?? null)) fields.classLevel = norm(classLevel);
+    // Date of birth is set-once: only when the profile has none yet.
+    // The rules refuse any change once it exists.
+    if (!profile.dateOfBirth && dob.trim().length > 0) {
+      const dobDate = new Date(`${dob.trim()}T00:00:00`);
+      if (Number.isNaN(dobDate.getTime()) || dobDate >= new Date() || dobDate <= new Date(1900, 0, 1)) {
+        setLocalError('জন্মতারিখ সঠিক নয় — অতীতের একটি তারিখ দিন। / Enter a valid past date of birth.');
+        return;
+      }
+      fields.dateOfBirth = dobDate;
+    }
 
     if (Object.keys(fields).length === 0) {
       setSaved(true);
@@ -255,6 +266,13 @@ export default function ProfilePage() {
           {p.classLevel.bn} / {p.classLevel.en}
           <input style={inputStyle} type="text" value={classLevel} onChange={(e) => setClassLevel(e.target.value)} placeholder="যেমন: Class 10" />
         </label>
+        {!profile.dateOfBirth ? (
+          <label>
+            {p.dateOfBirth.bn} / {p.dateOfBirth.en}
+            <input style={inputStyle} type="date" value={dob} onChange={(e) => setDob(e.target.value)} min="1900-01-02" />
+            <span style={{ color: '#555', fontSize: 14 }}>{p.dobMissing.bn}</span>
+          </label>
+        ) : null}
         {shownError ? <p style={{ color: '#b00020' }}>{shownError}</p> : null}
         {saved ? <p style={{ color: '#0A1F44' }}>{p.saved.bn}</p> : null}
         <button style={buttonStyle} type="submit" disabled={busy}>

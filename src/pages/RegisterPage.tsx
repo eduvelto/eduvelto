@@ -37,6 +37,7 @@ export default function RegisterPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirm, setConfirm] = useState('');
+  const [dob, setDob] = useState('');
   const [busy, setBusy] = useState(false);
   const [localError, setLocalError] = useState<string | null>(null);
   const s = strings.auth;
@@ -76,9 +77,19 @@ export default function RegisterPage() {
       setLocalError(s.passwordsDoNotMatch.bn);
       return;
     }
+    // Date of birth is optional; when given it must be a real past date
+    // after 1900-01-01 (the rules enforce the same).
+    let dobDate: Date | null = null;
+    if (dob.trim().length > 0) {
+      dobDate = new Date(`${dob.trim()}T00:00:00`);
+      if (Number.isNaN(dobDate.getTime()) || dobDate >= new Date() || dobDate <= new Date(1900, 0, 1)) {
+        setLocalError('জন্মতারিখ সঠিক নয় — অতীতের একটি তারিখ দিন। / Enter a valid past date of birth.');
+        return;
+      }
+    }
     setBusy(true);
     try {
-      await signUp(displayName.trim(), email, password);
+      await signUp(displayName.trim(), email, password, dobDate);
       navigate('/profile');
     } catch {
       // The friendly message is already in `error` from the AuthProvider.
@@ -153,6 +164,11 @@ export default function RegisterPage() {
             minLength={6}
           />
         </label>
+        <label>
+          {strings.profile.dateOfBirth.bn} / {strings.profile.dateOfBirth.en} (ঐচ্ছিক / optional)
+          <input style={inputStyle} type="date" value={dob} onChange={(e) => setDob(e.target.value)} min="1900-01-02" />
+        </label>
+        <p style={{ color: '#555', fontSize: 14, marginTop: -8 }}>{strings.profile.dobNote.bn}</p>
         {shownError ? <p style={{ color: '#b00020' }}>{shownError}</p> : null}
         <button style={buttonStyle} type="submit" disabled={busy || loading}>
           {busy ? strings.common.loading.bn : `${s.registerButton.bn} / ${s.registerButton.en}`}

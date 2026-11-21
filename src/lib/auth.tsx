@@ -58,7 +58,7 @@ export interface AuthState {
   suspended: boolean;
   /** Last friendly error message, if any. */
   error: string | null;
-  signUp: (displayName: string, email: string, password: string) => Promise<void>;
+  signUp: (displayName: string, email: string, password: string, dateOfBirth?: Date | null) => Promise<void>;
   signIn: (email: string, password: string) => Promise<void>;
   signInWithGoogle: () => Promise<void>;
   signOut: () => Promise<void>;
@@ -133,7 +133,7 @@ export function AuthProvider(props: { children: ReactNode }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  async function signUp(displayName: string, email: string, password: string): Promise<void> {
+  async function signUp(displayName: string, email: string, password: string, dateOfBirth?: Date | null): Promise<void> {
     if (!auth || !db) throw new Error('not-configured');
     setError(null);
     setLoading(true);
@@ -143,7 +143,7 @@ export function AuthProvider(props: { children: ReactNode }) {
       creatingForUid.current = u.uid;
       try {
         await updateAuthProfile(u, { displayName: displayName.trim() });
-        const { profile: p } = await ensureUserProfile(db, u, displayName.trim());
+        const { profile: p } = await ensureUserProfile(db, u, displayName.trim(), dateOfBirth ?? null);
         setUser(u);
         setProfile(p);
       } finally {

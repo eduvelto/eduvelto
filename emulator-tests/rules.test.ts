@@ -235,7 +235,7 @@ beforeAll(async () => {
     // NOTE: no `rules:` option — see header comment (loadFirestoreRules
     // fails with "http2 exception" in this environment; the emulator loads
     // firestore.rules from firebase.json at startup instead).
-    firestore: { host: '127.0.0.1', port: 8080 },
+    firestore: { host: '127.0.0.1', port: Number(process.env.FIRESTORE_EMULATOR_PORT ?? 8080) },
   });
   await seed();
 }, 120000); // 120s: first Firestore ops on a cold emulator take ~2s each in this sandbox
@@ -718,8 +718,9 @@ describe('Eduvelto security rules', () => {
   });
 
   // (l) Messenger (owner decision 20 Nov 23:25): support messaging is
-  // live in the rules; direct messages stay DENIED until the six
-  // mandatory safeguards exist in code.
+  // live in the rules; direct messages are matrix-gated (messaging
+  // branch, 21 Nov 2026) — the six mandatory safeguards from the 23:25
+  // decision + the approved privacy proposal now exist in code + rules.
   it('(l1) support thread: own thread + text message ALLOWED; others DENIED; non-text DENIED', async () => {
     const ref = await addDoc(collection(asStudent1(), 'supportMessages'), {
       userId: 'student-1',
@@ -748,19 +749,36 @@ describe('Eduvelto security rules', () => {
     await assertFails(getDoc(doc(asStudent2(), 'supportMessages', ref.id)));
     await assertSucceeds(getDoc(doc(asAdmin(), 'supportMessages', ref.id)));
   });
-  it('(l2) direct messages: client create is DENIED for everyone until the safeguards land', async () => {
-    await assertFails(
-      addDoc(collection(asStudent1(), 'directMessages'), {
-        participants: ['student-1', 'student-2'],
-        createdAt: new Date(),
+  it('(l2) direct messages: matrix-gated — no-DOB create DENIED, owner create DENIED, adult/adult with DOB ALLOWED, moderator read DENIED', async () => {
+    const pairId = 'student-1_student-2';
+    const threadData = {
+      participants: ['student-1', 'student-2'],
+      type: 'dm',
+      status: 'active',
+      createdAt: new Date(),
+      updatedAt: new Date(),
+      lastMessageAt: null,
+      lastMessagePreview: '',
+      lastMessageSenderId: '',
+      aboutStudentId: '',
+    };
+    // student-1 + student-2 have no date of birth in the seed: age
+    // unknown, so the matrix denies the thread (fail-safe).
+    await assertFails(setDoc(doc(asStudent1(), 'directMessages', pairId), threadData));
+    // The owner is not a DM participant (support threads only).
+    await assertFails(setDoc(doc(asOwner(), 'directMessages', pairId), threadData));
+    // Both students set their date of birth (set-once, allowed); the
+    // same create is now ALLOWED, a message send works, and a moderator
+    // still cannot read the thread (no routine access, proposal §5).
+    await assertSucceeds(updateDoc(doc(asStudent1(), 'users', 'student-1'), { dateOfBirth: new Date('2000-01-01') }));
+    await assertSucceeds(updateDoc(doc(asStudent2(), 'users', 'student-2'), { dateOfBirth: new Date('1999-01-01') }));
+    await assertSucceeds(setDoc(doc(asStudent1(), 'directMessages', pairId), threadData));
+    await assertSucceeds(
+      addDoc(collection(asStudent1(), 'directMessages', pairId, 'messages'), {
+        senderId: 'student-1', kind: 'text', body: 'হ্যালো!', createdAt: new Date(),
       }),
     );
-    await assertFails(
-      addDoc(collection(asOwner(), 'directMessages'), {
-        participants: ['owner-1', 'student-1'],
-        createdAt: new Date(),
-      }),
-    );
+    await assertFails(getDoc(doc(asModerator(), 'directMessages', pairId)));
   });
 
   // (m) Health v1 (owner brief 20 Nov 23:51): students read ONLY Published

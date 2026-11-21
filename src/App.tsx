@@ -27,6 +27,13 @@ import AdminBackupPage from './pages/AdminBackupPage';
 import AdminAuditPage from './pages/AdminAuditPage';
 import { AdminGuard } from './components/AdminGuard';
 import AiTeacherPage from './pages/AiTeacherPage';
+import MessagesPage from './pages/MessagesPage';
+import ConversationPage from './pages/ConversationPage';
+import NotificationsPage from './pages/NotificationsPage';
+import UserProfilePage from './pages/UserProfilePage';
+import GroupsPage from './pages/GroupsPage';
+import GroupChatPage from './pages/GroupChatPage';
+import AdminModerationPage from './pages/AdminModerationPage';
 import ExamPage from './pages/ExamPage';
 import RoutinePage from './pages/RoutinePage';
 import ProgressPage from './pages/ProgressPage';
@@ -41,9 +48,14 @@ import AboutPage from './pages/AboutPage';
 import ContactPage from './pages/ContactPage';
 
 // Routes mirror page-map.md + the Phase 2 route list.
-// /social is a DESIGN PROPOSAL only (blueprint §7): no live social
-// features, no messaging, until safety + moderation are ready.
+// /social is a DESIGN PROPOSAL only (blueprint §7): no live public
+// social posting until safety + moderation are ready. Private
+// messaging (/messages) and groups (/groups) ARE live now, with the
+// approved privacy safeguards in firestore.rules.
 // /ai-teacher is a scripted demonstration, not live AI (blueprint §5).
+// /ai-chat is owned by the AI Chat workstream (branch ai-chat/ui) — the
+// pinned Eduvelto AI entry in MessagesPage links to it; no /ai-chat
+// route is defined here.
 // Step 1: the header reflects the auth state, and a suspended account
 // (profile isActive === false) sees only the suspended screen — Auth
 // login still succeeds, but the app cannot be used (plan Step 1).
@@ -85,6 +97,13 @@ export default function App() {
           <Link to="/routine" style={{ color: '#fff', padding: '10px 6px' }}>{nav.routine.bn}</Link>
           <Link to="/progress" style={{ color: '#fff', padding: '10px 6px' }}>{nav.progress.bn}</Link>
           <Link to="/health" style={{ color: '#fff', padding: '10px 6px' }}>{nav.health.bn}</Link>
+          {loading ? null : user ? (
+            <>
+              <Link to="/messages" style={{ color: '#fff', padding: '10px 6px' }}>{nav.messages.bn}</Link>
+              <Link to="/notifications" style={{ color: '#fff', padding: '10px 6px' }}>{nav.notifications.bn}</Link>
+              <Link to="/groups" style={{ color: '#fff', padding: '10px 6px' }}>{nav.groups.bn}</Link>
+            </>
+          ) : null}
           <Link to="/about" style={{ color: '#fff', padding: '10px 6px' }}>{nav.about.bn}</Link>
           <Link to="/contact" style={{ color: '#fff', padding: '10px 6px' }}>{nav.contact.bn}</Link>
           {profile?.role === 'owner' ? (
@@ -163,7 +182,14 @@ export default function App() {
         <Route path="/admin/features" element={<AdminGuard><AdminFeaturesPage /></AdminGuard>} />
         <Route path="/admin/backup" element={<AdminGuard><AdminBackupPage /></AdminGuard>} />
         <Route path="/admin/audit" element={<AdminGuard><AdminAuditPage /></AdminGuard>} />
+        <Route path="/admin/moderation" element={<AdminGuard><AdminModerationPage /></AdminGuard>} />
         <Route path="/ai-teacher" element={<AiTeacherPage />} />
+        <Route path="/messages" element={<MessagesPage />} />
+        <Route path="/messages/:convId" element={<ConversationPage />} />
+        <Route path="/notifications" element={<NotificationsPage />} />
+        <Route path="/users/:uid" element={<UserProfilePage />} />
+        <Route path="/groups" element={<GroupsPage />} />
+        <Route path="/groups/:groupId" element={<GroupChatPage />} />
         <Route path="/exam" element={<ExamPage />} />
         <Route path="/routine" element={<RoutinePage />} />
         <Route path="/progress" element={<ProgressPage />} />

@@ -297,6 +297,20 @@ export const AUDIT_ACTION_LABELS: Record<string, { bn: string; en: string }> = {
   'support-message-sent': { bn: 'সাপোর্ট মেসেজ পাঠানো', en: 'Support message sent' },
   'message-reported': { bn: 'মেসেজ রিপোর্ট', en: 'Message reported' },
   'message-blocked': { bn: 'মেসেজ ব্লক', en: 'Message blocked' },
+  'dm-access-requested': { bn: 'বার্তা যাচাইয়ের অনুরোধ', en: 'DM access requested' },
+  'dm-access-approved': { bn: 'বার্তা যাচাই অনুমোদন', en: 'DM access approved' },
+  'dm-access-revoked': { bn: 'বার্তা যাচাই বাতিল', en: 'DM access revoked' },
+  'dm-access-read': { bn: 'অনুমোদিত বার্তা পড়া', en: 'DM read under grant' },
+  'dm-access-notified': { bn: 'বার্তা যাচাইয়ের নোটিশ', en: 'DM access notified' },
+  'dm-suspended': { bn: 'বার্তা স্থগিত', en: 'DM suspended' },
+  'dm-unsuspended': { bn: 'বার্তা আবার চালু', en: 'DM unsuspended' },
+  'dm-consent-granted': { bn: 'শিশুর বার্তা সম্মতি', en: 'DM consent granted' },
+  'dm-consent-revoked': { bn: 'শিশুর বার্তা সম্মতি বাতিল', en: 'DM consent revoked' },
+  'report-resolved': { bn: 'রিপোর্ট নিষ্পত্তি', en: 'Report resolved' },
+  'report-dismissed': { bn: 'রিপোর্ট বাতিল', en: 'Report dismissed' },
+  'group-created': { bn: 'গ্রুপ তৈরি', en: 'Group created' },
+  'group-member-added': { bn: 'গ্রুপ সদস্য যোগ', en: 'Group member added' },
+  'group-member-removed': { bn: 'গ্রুপ সদস্য অপসারণ', en: 'Group member removed' },
 };
 
 export function auditActionLabel(action: string): { bn: string; en: string } {

@@ -135,9 +135,10 @@ export default function AdminPage() {
       id: 'moderation',
       titleBn: 'মডারেশন, রিপোর্ট, নিরাপত্তা',
       titleEn: 'Moderation, reports, security',
-      descBn: 'রিপোর্ট পর্যালোচনা, কনটেন্ট অনুমোদন, ব্লক — মডারেশন কিউ তৈরি হলে আসবে।',
-      descEn: 'Review reports, approve content, block users — arrives with the moderation queue.',
-      status: 'soon',
+      descBn: 'খোলা রিপোর্ট পর্যালোচনা ও নিষ্পত্তি, বার্তা যাচাই অনুমোদন (শুধু মালিক), শিশুর বার্তা সম্মতি, বার্তা স্থগিত।',
+      descEn: 'Review and resolve open reports, message-access grants (owner only), child DM consents, DM suspension.',
+      status: 'working',
+      to: '/admin/moderation',
     },
     {
       id: 'features',
