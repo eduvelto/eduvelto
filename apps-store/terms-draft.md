@@ -6,6 +6,25 @@ language on purpose.
 **Effective date:** [TO BE SET AT LAUNCH — fill in before publishing.]
 **Version:** 1.0 (draft)
 
+## Correction log — 21 November 2026 (accuracy pass against the live platform)
+
+Re-checked against the code and Firestore rules on branch `apps/twa-prep`:
+
+- **CORRECTED — §3 "Uploading".** The app has NO user upload feature
+  today (no file storage, no upload button). The upload rules below now
+  say so and apply only if/when uploading is enabled.
+- **CORRECTED — §2 "Guardian accounts link".** Guardian linking is a free
+  manual process (written information, the child's confirmation, and
+  Admin activation). No NID, face or biometric verification is used, and
+  no verification fee is charged to anyone. Student accounts need no
+  identity verification at all.
+- **CONFIRMED — §5 health.** Health content is reviewed by a qualified
+  professional before it is published; nothing is Published today
+  (all health content is "Under Review"), so the app currently shows
+  health pages with "under review" notices, not health information.
+- **CONFIRMED — §1 "no paid subscriptions at launch".** Core learning is
+  free; no payments are taken inside the app.
+
 ---
 
 ## 1. What Eduvelto is
@@ -23,7 +42,10 @@ are no paid subscriptions at launch.
 - One account per person. Do not share your account or let anyone else
   use it.
 - Students under 18 should register with a guardian's knowledge.
-  Guardian accounts link to a child only with verification (consent).
+  Guardian accounts link to a child only after a free manual
+  verification (written information, the child's confirmation, and
+  Admin activation). No identity verification is required for student
+  accounts, and no verification fee is charged to anyone.
 - We may suspend or close an account that breaks these terms, after a
   warning where appropriate. The Owner account cannot be removed or
   downgraded by any other administrator.
@@ -34,8 +56,10 @@ You must NOT:
 - Cheat in exams, or help others cheat, or copy answers from outside the
   exam;
 - Upload or share copyrighted material you do not own or have permission
-  to share (uploading is limited to admin-approved creators, verified
-  teachers and verified institutions);
+  to share. Note: the app has NO upload feature today — you cannot
+  upload videos, files or images. If uploading is enabled in future,
+  it will be limited to admin-approved creators, verified teachers and
+  verified institutions, and the same copyright rules will apply;
 - Harass, threaten, bully or harm anyone, especially children;
 - Share anyone's private information (phone, email, address, photos)
   without their permission;

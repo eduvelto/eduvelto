@@ -5,12 +5,48 @@
 **Category:** Education
 **Price:** Free (no in-app purchases at launch)
 
-All copy uses only approved brand language and facts verified on the live
-site on 21 Nov 2026 (609 books, 212 exams, 5,326 questions). Nothing is
-invented: no awards, no user numbers, no partnerships, no certifications.
-The AI Teacher is NOT mentioned: the live site's AI Teacher is a scripted
-demo, not real AI, and must only be listed once a real AI Teacher exists.
-Counts will grow — re-verify them before submission.
+## Correction log — 21 November 2026 (accuracy pass against the live platform)
+
+Every feature and number below was re-checked against the live site and
+the code on branch `apps/twa-prep` (main @ f112b5c). Claims that did not
+match what works today were removed or corrected. Nothing is invented: no
+awards, no user numbers, no partnerships, no certifications.
+
+- **REMOVED — "Health information" section.** The health pages exist, but
+  ALL health content (24 medicines, 20 diseases, 4 facilities) is
+  "Under Review" and nothing is Published, so a user opening the app
+  sees "under review" empty states, not health information. The
+  verified-doctors list is also empty (no doctor is Published +
+  verified). The section returns to the listing only when published
+  health content exists. The medical-report explainer tool works
+  (client-side, built-in test data), but it is part of Health v1 and
+  stays out of the listing until the health library is published.
+- **REMOVED — "Study routine" section.** `/routine` is a placeholder
+  page ("No data yet. Content will appear here once it is published.").
+  The smart study planner (Phase 2, Step 7) is not built. The section
+  returns only when a working routine feature exists.
+- **CORRECTED — written-exam marking.** Was "kept for teacher marking".
+  Written answers are stored with marking status "pending" and are
+  marked by a **moderator/admin** (`markWrittenAttempt` in
+  `src/lib/exams.ts`); there is no teacher-marking flow. The listing
+  now says so.
+- **KEPT — "600+ books", "200+ exams", "5,000+ questions".** Verified
+  live 21 Nov 2026: 609 books, 212 exams (8 MCQ quizzes of 30 questions
+  + 204 written), 5,326 questions. Re-verify before submission — the
+  counts grow.
+- **KEPT — progress / weak areas.** Verified in code: bookmarks,
+  mark-lesson-complete, and a Progress page showing weak areas
+  (below 60% on your own quiz attempts).
+- **KEPT — "browsing the library is free without an account".** The
+  Firestore rules allow anyone to read Published books
+  (`contentRead` / `isPublished` in `firestore.rules`); bookmarks and
+  progress require sign-in. NOTE: an app-level logged-out check is
+  still owed (a roadmap flag noted an anonymous REST read returning
+  403) — re-verify in the app before submission.
+- **NOT MENTIONED — AI Teacher.** The live site's AI Teacher is a
+  scripted demo, not real AI. It is listed only once a real AI Teacher
+  exists. Role dashboards are also not mentioned: they are in
+  development (staging), not live.
 
 ---
 
@@ -38,21 +74,12 @@ practice questions.
 **Free exams with instant results**
 200+ exams with 5,000+ questions. Take an MCQ exam, submit, and see your
 score and a question-by-question review right away. Written answers are
-kept for teacher marking.
+saved and marked later by a moderator — written results are not instant.
 
 **Track your progress**
 Bookmark lessons, mark lessons complete, and see your progress by subject
 — including your weak areas — on your Progress page. Sign in to save your
 bookmarks and progress; browsing the library is free without an account.
-
-**Health information**
-General health information — medicines, diseases, doctors and hospitals,
-and a medical report helper. Every health page carries a clear note that
-the information may not be 100% correct and must be verified, and that it
-is not a diagnosis. Health content is reviewed before it is published.
-
-**Study routine**
-Plan your study routine and keep your learning on track.
 
 Eduvelto is free for every student. No payments are taken inside the app.
 Founded by Ali Hasan Mohammed Mizan, Founder & CEO, Eduvelto.
@@ -73,22 +100,14 @@ Eduvelto — বাংলাদেশের জন্য একটি বিন�
 
 **বিনামূল্যে পরীক্ষা, সঙ্গে সঙ্গে ফলাফল**
 ২০০+ পরীক্ষা, ৫,০০০+ প্রশ্ন। MCQ পরীক্ষা দিয়ে জমা দিন — নম্বর আর
-প্রতিটি প্রশ্নের পর্যালোচনা সঙ্গে সঙ্গে দেখুন। লিখিত উত্তর শিক্ষকের
-মূল্যায়নের জন্য সংরক্ষিত থাকে।
+প্রতিটি প্রশ্নের পর্যালোচনা সঙ্গে সঙ্গে দেখুন। লিখিত উত্তর সংরক্ষিত
+থাকে এবং পরে মডারেটর মূল্যায়ন করেন — লিখিত ফলাফল সঙ্গে সঙ্গে পাওয়া
+যায় না।
 
 **অগ্রগতি দেখুন**
 পাঠ বুকমার্ক করুন, পড়া শেষ চিহ্নিত করুন, আর বিষয় অনুযায়ী আপনার
 অগ্রগতি ও দুর্বল জায়গাগুলো দেখুন। বুকমার্ক ও অগ্রগতি সংরক্ষণ করতে
 সাইন ইন করুন; লাইব্রেরি দেখা অ্যাকাউন্ট ছাড়াই বিনামূল্যে।
-
-**স্বাস্থ্য তথ্য**
-সাধারণ স্বাস্থ্য তথ্য — ওষুধ, রোগ, ডাক্তার ও হাসপাতাল, এবং মেডিকেল
-রিপোর্ট সহায়ক। প্রতিটি স্বাস্থ্য পাতায় স্পষ্ট লেখা থাকে যে তথ্য ১০০%
-সঠিক নাও হতে পারে, যাচাই করে নিন — এটি রোগ নির্ণয় নয়। স্বাস্থ্য
-তথ্য প্রকাশের আগে যাচাই করা হয়।
-
-**পড়ার রুটিন**
-পড়ার রুটিন সাজান আর শেখা ঠিক পথে রাখুন।
 
 Eduvelto প্রতিটি শিক্ষার্থীর জন্য বিনামূল্যে। অ্যাপের ভেতরে কোনো
 পেমেন্ট নেওয়া হয় না।

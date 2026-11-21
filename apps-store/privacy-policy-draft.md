@@ -7,10 +7,40 @@ language on purpose.
 **Version:** 1.0 (draft)
 
 Sections marked **[PLANNED]** describe features that are NOT live yet
-(private messaging, guardian linking, profile pictures, advertising).
-Those sections apply only when the feature launches; they must be
-re-checked — and this policy updated — before each launch. Do not publish
-this policy as if those features already exist.
+(private messaging, guardian progress access, profile pictures,
+advertising). Those sections apply only when the feature launches; they
+must be re-checked — and this policy updated — before each launch. Do not
+publish this policy as if those features already exist.
+
+## Correction log — 21 November 2026 (accuracy pass against the live platform)
+
+Re-checked against the code and Firestore rules on branch `apps/twa-prep`:
+
+- **CORRECTED — §2 "Account".** Registration collects ONLY name, email
+  and password (role defaults to student). Education details (class,
+  board, institution, subjects) are NOT collected at registration
+  today — academic profiles are in development (staging), not live.
+  The policy now says so.
+- **CORRECTED — §2 "Learning" visibility.** Your learning records are
+  visible ONLY to you and to Admin/Owner. Teachers and guardians
+  CANNOT read your progress today (the rules allow read only to the
+  owner of the record or an Admin). Guardian access to a linked child's
+  progress is [PLANNED], not live. The old wording ("your verified
+  teachers (your own class)") was wrong and is removed.
+- **CORRECTED — §2 "Guardian" phone.** A guardian phone number is
+  optional contact information, NOT required. Guardian verification is
+  a free manual process (written information + child confirmation +
+  admin-activated link); no NID, face or biometric verification is
+  used, and no verification fee is charged to anyone.
+- **CORRECTED — §2 "Usage counters".** They are client-side estimates
+  kept in this browser's localStorage only — they are NOT server-side
+  quota monitoring and cannot see other users.
+- **CORRECTED — §7 "download their learning records".** No download
+  button exists in the app today. Marked [PLANNED].
+- **CORRECTED — §3 deletion.** Deletion is a manual admin process:
+  you email ahmmizan23@gmail.com and an Admin deletes the account and
+  its learning records within 30 days. There is no in-app delete
+  button today.
 
 ---
 
@@ -23,17 +53,24 @@ Contact for privacy questions: ahmmizan23@gmail.com.
 ## 2. What we collect and why
 
 **Account** — name, email, password (stored hashed by Firebase — Eduvelto
-never sees your password), language, role (student / teacher / guardian),
-education details (class, board, institution, subjects). Used to run your
-account and show you the right homepage.
+never sees your password), language, role (student by default). Used to
+run your account. Education details (class, board, institution, subjects)
+are NOT collected at registration today — academic profiles are in
+development and will be added only when they launch.
 
 **Learning** — lessons read, exam attempts, results, progress, bookmarks.
-Used to show your results, weak areas and study plans. Visible only to
-you, your verified teachers (your own class), and your verified guardian
-(progress and results only).
+Used to show your results, weak areas and study plans. Visible ONLY to
+you and to Admin/Owner. Teachers and guardians cannot read your learning
+records today.
 
-**[PLANNED] Guardian** — phone number (required for guardian accounts).
-Used only for child-linking verification and account recovery.
+**[PLANNED] Guardian** — a guardian account links to a child only after
+a free manual verification (written information, the child's
+confirmation, and Admin activation) — no NID, face or biometric
+verification, and no verification fee. A guardian phone number is
+optional contact information, not required. [PLANNED] Once linking and
+guardian progress access launch, a guardian will see only learning
+progress, results, routines and notices for a verified-linked child —
+never messages, never contact details.
 
 **[PLANNED] Messages** — private messages are stored so the participants
 can read them. Nobody else reads them — not guardians, not teachers, not
@@ -43,8 +80,10 @@ process described in §6.
 **Reports and moderation** — reports, blocks and moderation decisions.
 Used for safety.
 
-**Usage counters** — anonymous counters for quota monitoring (reads/writes).
-No advertising tracking.
+**Usage counters** — client-side estimates kept in this browser's
+localStorage only, for rough quota awareness. They are NOT server-side
+monitoring, they cannot see other users, and they reset if localStorage
+is cleared. No advertising tracking.
 
 **What we NEVER collect:** precise location, your contacts, photos of other
 people, payment details (no payments are taken inside Eduvelto).
@@ -57,11 +96,15 @@ children, or share data with advertisers.
   default** — invisible to everyone except the child themself.
 - A guardian sees only learning progress, results, routines and notices for
   a verified-linked child — never messages, never contact details.
+  (Guardian linking and guardian progress access are [PLANNED] — see §2.
+  Today, only the child themself and Admin/Owner can read learning
+  records.)
 - No unrestricted direct messaging for children.
 - A child (or their guardian, or an Admin) can ask for their data to be
-  deleted at any time by contacting ahmmizan23@gmail.com. Deletion removes
-  the account and its learning records within 30 days. Audit logs keep only
-  the fact that an account existed, never its content.
+  deleted at any time by contacting ahmmizan23@gmail.com. Deletion is a
+  manual admin process: an Admin deletes the account and its learning
+  records within 30 days. There is no in-app delete button today. Audit
+  logs keep only the fact that an account existed, never its content.
 
 ## 4. Advertising
 
@@ -98,9 +141,9 @@ three months.
 ## 7. Your rights
 
 Every user can: see their own data; correct their profile; change
-visibility settings; block and report any user; download their learning
-records (from the dashboard); ask for deletion (§3). Questions or
-complaints: ahmmizan23@gmail.com.
+visibility settings; block and report any user; [PLANNED] download their
+learning records (no download button exists in the app today); ask for
+deletion (§3). Questions or complaints: ahmmizan23@gmail.com.
 
 ## 8. Third-party services
 
