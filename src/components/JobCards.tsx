@@ -121,7 +121,7 @@ export function JobCard({ def, delayMs = 0 }: { def: JobExamDef; delayMs?: numbe
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: 8 }}>
           <div>
             <div style={{ fontFamily: "'Poppins','Hind Siliguri',system-ui,sans-serif", fontSize: 20, fontWeight: 700, lineHeight: 1.3, color: '#fff' }}>
-              {def.bn}
+              {lang === 'bn' ? def.bn : def.en}
             </div>
             <div style={{ fontSize: 13, color: 'rgba(255,255,255,0.85)', marginTop: 4 }}>
               {lang === 'bn' ? def.orgBn : def.orgEn}

@@ -36,7 +36,7 @@ const WEEKLY_PATTERN: Record<string, { bn: string; en: string }> = {
 };
 
 export default function JobsCommonPage() {
-  const { t } = useLanguage();
+  const { lang, t } = useLanguage();
   const cycle = WEEKLY_MOCK_CYCLE.map((s) => jobExamBySlug(s)!).filter(Boolean);
 
   return (
@@ -104,7 +104,7 @@ export default function JobsCommonPage() {
             <ul style={{ margin: '0 0 10px', paddingLeft: 20, color: '#57616A', fontSize: 14, lineHeight: 1.9 }}>
               {cycle.map((def) => (
                 <li key={def.slug}>
-                  <strong style={{ color: '#142B3B' }}>{def.bn}</strong> —{' '}
+                  <strong style={{ color: '#142B3B' }}>{lang === 'bn' ? def.bn : def.en}</strong> —{' '}
                   {t({ bn: WEEKLY_PATTERN[def.slug].bn, en: WEEKLY_PATTERN[def.slug].en })}
                 </li>
               ))}
