@@ -1,10 +1,11 @@
-import { Suspense, lazy, useEffect, useState } from 'react';
-import { Link, Navigate, NavLink, Route, Routes, useLocation } from 'react-router-dom';
+import { Suspense, lazy } from 'react';
+import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
 import { strings } from './i18n/strings';
 import { useAuth } from './lib/auth';
 import { isBottomBannerAllowed, adsEnabled, BOTTOM_BANNER_RESERVE_PX } from './lib/ads';
 import AdSlot from './components/AdSlot';
 import BottomNav from './components/BottomNav';
+import HeaderNav from './components/HeaderNav';
 import Footer from './components/Footer';
 import InstallAppPrompt from './components/InstallAppPrompt';
 import { AdminGuard } from './components/AdminGuard';
@@ -15,6 +16,8 @@ import { T, useLanguage } from './i18n/LanguageContext';
 // Home; each route's chunk loads on demand. The header, auth and ad
 // shell stay static — they are small and needed on every page.
 const HomePage = lazy(() => import('./pages/HomePage'));
+const ClassIndexPage = lazy(() => import('./pages/ClassIndexPage'));
+const ComingSoonPage = lazy(() => import('./pages/ComingSoonPage'));
 const ClassDashboardPage = lazy(() => import('./pages/ClassDashboardPage'));
 const ClassSubjectPage = lazy(() => import('./pages/ClassSubjectPage'));
 const RegisterPage = lazy(() => import('./pages/RegisterPage'));
@@ -106,9 +109,8 @@ function DashboardRedirect() {
 // (profile isActive === false) sees only the suspended screen — Auth
 // login still succeeds, but the app cannot be used (plan Step 1).
 export default function App() {
-  const nav = strings.nav;
   const { t } = useLanguage();
-  const { user, profile, suspended, loading, signOut } = useAuth();
+  const { profile, suspended, signOut } = useAuth();
   const location = useLocation();
   // Persistent bottom banner (owner brief 20 Nov 21:52): fixed to the
   // viewport bottom, outside the router outlet, on all eligible pages
@@ -122,13 +124,9 @@ export default function App() {
   const bannerLive = showBottomBanner && adsEnabled('bottom-banner');
   // Admin + CEO panels render their own shell (sidebar/top bar/bottom
   // nav) — the public header, footer and BottomNav are hidden there.
+  // (HeaderNav has its own mobile-menu state; the old inline header's
+  // menuOpen state was removed with the homepage redesign.)
   const isAdminShell = location.pathname.startsWith('/admin') || location.pathname.startsWith('/ceo');
-  // Mobile menu (≤860px): the full nav would wrap into 3 rows, so it lives
-  // behind a hamburger button and closes on every navigation.
-  const [menuOpen, setMenuOpen] = useState(false);
-  useEffect(() => {
-    setMenuOpen(false);
-  }, [location.pathname]);
   return (
     <div
       className="ev-app-shell"
@@ -138,56 +136,11 @@ export default function App() {
           : undefined
       }
     >
-      {isAdminShell ? null : (<header className="ev-header">
-        <Link to="/" style={{ display: 'inline-flex', alignItems: 'center', textDecoration: 'none' }} aria-label={t({ bn: 'Eduvelto — হোম', en: 'Eduvelto — Home' })}>
-          <img src="/logo-white.png" alt="Eduvelto" style={{ height: 40, width: 'auto', display: 'block' }} />
-        </Link>
-        <span className="ev-header-tagline">{t(strings.tagline)}</span>
-        <button
-          type="button"
-          className="ev-menu-btn"
-          aria-expanded={menuOpen}
-          aria-controls="ev-main-nav"
-          aria-label={menuOpen ? t({ bn: 'মেনু বন্ধ করুন', en: 'Close menu' }) : t({ bn: 'মেনু খুলুন', en: 'Open menu' })}
-          onClick={() => setMenuOpen((o) => !o)}
-        >
-          {menuOpen ? `✕ ${t({ bn: 'বন্ধ', en: 'Close' })}` : `☰ ${t({ bn: 'মেনু', en: 'Menu' })}`}
-        </button>
-        <nav aria-label={t({ bn: 'প্রধান মেনু', en: 'Main menu' })} id="ev-main-nav" className={`ev-header-nav${menuOpen ? ' ev-header-nav-open' : ''}`}>
-          <NavLink to="/directory" className={({ isActive }) => `ev-navlink${isActive ? ' ev-navlink-active' : ''}`}>{t(nav.directory)}</NavLink>
-          <NavLink to="/library" className={({ isActive }) => `ev-navlink${isActive ? ' ev-navlink-active' : ''}`}>{t(nav.library)}</NavLink>
-          <NavLink to="/exam" className={({ isActive }) => `ev-navlink${isActive ? ' ev-navlink-active' : ''}`}>{t(nav.exam)}</NavLink>
-          <NavLink to="/routine" className={({ isActive }) => `ev-navlink${isActive ? ' ev-navlink-active' : ''}`}>{t(nav.routine)}</NavLink>
-          <NavLink to="/progress" className={({ isActive }) => `ev-navlink${isActive ? ' ev-navlink-active' : ''}`}>{t(nav.progress)}</NavLink>
-          <NavLink to="/health" className={({ isActive }) => `ev-navlink${isActive ? ' ev-navlink-active' : ''}`}>{t(nav.health)}</NavLink>
-          <NavLink to="/about" className={({ isActive }) => `ev-navlink${isActive ? ' ev-navlink-active' : ''}`}>{t(nav.about)}</NavLink>
-          <NavLink to="/founder" className={({ isActive }) => `ev-navlink${isActive ? ' ev-navlink-active' : ''}`}>{t(nav.founder)}</NavLink>
-          <NavLink to="/contact" className={({ isActive }) => `ev-navlink${isActive ? ' ev-navlink-active' : ''}`}>{t(nav.contact)}</NavLink>
-          {profile?.role === 'owner' ? (
-            <NavLink to="/admin" className={({ isActive }) => `ev-navlink${isActive ? ' ev-navlink-active' : ''}`} style={{ color: '#D9A441', fontWeight: 700 }}>{t(nav.admin)}</NavLink>
-          ) : null}
-          {loading ? null : user ? (
-            <>
-              <NavLink to="/dashboard" className={({ isActive }) => `ev-navlink${isActive ? ' ev-navlink-active' : ''}`}>{t(nav.dashboard)}</NavLink>
-              <NavLink to="/profile" className={({ isActive }) => `ev-navlink${isActive ? ' ev-navlink-active' : ''}`}>
-                {profile?.displayName ?? t(nav.profile)}
-              </NavLink>
-              <button
-                type="button"
-                onClick={() => void signOut()}
-                className="ev-btn ev-btn-sm ev-btn-header"
-              >
-                {t(nav.logout)}
-              </button>
-            </>
-          ) : (
-            <>
-              <NavLink to="/login" className={({ isActive }) => `ev-navlink${isActive ? ' ev-navlink-active' : ''}`}>{t(nav.login)}</NavLink>
-              <NavLink to="/register" className={({ isActive }) => `ev-navlink${isActive ? ' ev-navlink-active' : ''}`}>{t(nav.register)}</NavLink>
-            </>
-          )}
-        </nav>
-      </header>)}
+      {/* Light header (homepage redesign, 21 Nov 2026): Home pill + 4
+          section dropdowns + search + dark-mode (Coming Soon) + auth.
+          See components/HeaderNav.tsx. Hidden on /admin* and /ceo* —
+          the Admin Panel and CEO Panel render their own shell. */}
+      {isAdminShell ? null : <HeaderNav />}
       {suspended ? (
         <main style={{ maxWidth: 720, margin: '0 auto', padding: '24px 16px', fontFamily: 'system-ui, sans-serif' }}>
           <div style={{ border: '1px solid #b00020', borderRadius: 8, padding: '20px 16px', background: '#fdf0f0' }}>
@@ -206,7 +159,7 @@ export default function App() {
               onClick={() => void signOut()}
               style={{ padding: '10px 18px', minHeight: 48, fontSize: 16, borderRadius: 6, border: 'none', background: '#142B3B', color: '#fff', cursor: 'pointer' }}
             >
-              <T bn={nav.logout.bn} en={nav.logout.en} />
+              <T bn={strings.nav.logout.bn} en={strings.nav.logout.en} />
             </button>
           </div>
         </main>
@@ -216,6 +169,13 @@ export default function App() {
         <Suspense fallback={<main style={{ maxWidth: 720, margin: '0 auto', padding: '24px 16px' }}><p>{t(strings.common.loading)}</p></main>}>
         <Routes>
         <Route path="/" element={<HomePage />} />
+        {/* Four main sections (homepage redesign, 21 Nov 2026): /class is
+            the real class index; /jobs, /admissions and /skills land on
+            ONE shared Coming Soon page until the sections are built. */}
+        <Route path="/class" element={<ClassIndexPage />} />
+        <Route path="/jobs" element={<ComingSoonPage section="jobs" />} />
+        <Route path="/admissions" element={<ComingSoonPage section="admissions" />} />
+        <Route path="/skills" element={<ComingSoonPage section="skills" />} />
         {/* Class-wise navigation (stage 3): Select Class → Class Dashboard → Tab → Subject → Book → Chapter. */}
         <Route path="/class/:slug/subjects/:dept" element={<ClassSubjectPage />} />
         <Route path="/class/:slug/:tab" element={<ClassDashboardPage />} />
@@ -288,7 +248,11 @@ export default function App() {
         </Routes>
         </Suspense>
         {isAdminShell ? null : <Footer />}
-        {/* Mobile bottom navigation (stage 3): Home / Books / Tests / Progress / Profile, ≤768px. Sits above the bottom ad banner when one is live. Hidden on /admin* and /ceo* routes — the Admin Panel and CEO Panel render their own bottom nav. */}
+        {/* Mobile bottom navigation (homepage redesign, 21 Nov 2026):
+            হোম / আমার কোর্স / প্রগ্রেস / বেশি কিছু / মেনু, ≤768px. Sits
+            above the bottom ad banner when one is live. Hidden on /admin*
+            and /ceo* routes — the Admin Panel and CEO Panel render their
+            own bottom nav. */}
         {isAdminShell ? null : (
           <BottomNav bottomOffsetPx={bannerLive ? BOTTOM_BANNER_RESERVE_PX : 0} />
         )}

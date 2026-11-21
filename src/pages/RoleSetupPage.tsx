@@ -8,12 +8,12 @@
 // choice is never lost to a default 'student' document.
 // Nobody can pick admin / moderator / owner here — those roles are not
 // offered, and the rules reject them at creation anyway.
-import { useState, type FormEvent } from 'react';
+import { useEffect, useState, type FormEvent } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { db } from '../firebase';
 import { PageShell } from '../components/PageShell';
 import { strings } from '../i18n/strings';
-import { releaseProfileCreationHold, useAuth } from '../lib/auth';
+import { clearStoredRoleSetupHold, releaseProfileCreationHold, useAuth } from '../lib/auth';
 import { ensureUserProfile } from '../lib/profile';
 import type { EducationType, ProfileEdit } from '../lib/profile';
 import { T, useLanguage } from '../i18n/LanguageContext';
@@ -69,6 +69,14 @@ export default function RoleSetupPage() {
   const [qualifications, setQualifications] = useState('');
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
+
+  // The stored role-setup hold has served its purpose once this page
+  // mounts (the auth listener already consumed the in-memory flag) —
+  // clear it so a later sign-in is unaffected. The in-memory flag
+  // stays set until the profile is created below.
+  useEffect(() => {
+    clearStoredRoleSetupHold();
+  }, []);
 
   if (loading) {
     return (

@@ -1,7 +1,7 @@
 // Eduvelto — sign-in (Step 1).
 // Email/password sign-in + Google sign-in + password reset. The session
 // survives a page reload (Firebase Auth local persistence).
-import { useState, type FormEvent } from 'react';
+import { useEffect, useState, type FormEvent } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { PageShell } from '../components/PageShell';
 import { strings } from '../i18n/strings';
@@ -31,7 +31,7 @@ const buttonStyle: React.CSSProperties = {
 };
 
 export default function LoginPage() {
-  const { signIn, signInWithGoogle, resetPassword, user, error, loading } = useAuth();
+  const { signIn, signInWithGoogle, resetPassword, user, error, errorCode, loading } = useAuth();
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -41,6 +41,13 @@ export default function LoginPage() {
   const [localError, setLocalError] = useState<string | null>(null);
   const { t } = useLanguage();
   const s = strings.auth;
+
+  // Google sign-in is a redirect: after Google sends the user back,
+  // `user` appears via the auth listener (no promise resolves here),
+  // so navigate then. Also covers opening /login while signed in.
+  useEffect(() => {
+    if (user) navigate('/profile');
+  }, [user, navigate]);
 
   if (!isFirebaseConfigured) {
     return (
@@ -130,6 +137,9 @@ export default function LoginPage() {
           />
         </label>
         {shownError ? <p style={{ color: '#b00020' }}>{shownError}</p> : null}
+        {shownError && errorCode ? (
+          <p style={{ color: '#b00020', fontSize: 13, marginTop: -8 }}>ত্রুটি কোড: {errorCode}</p>
+        ) : null}
         <button style={buttonStyle} type="submit" disabled={busy || loading}>
           {busy ? <T bn={strings.common.loading.bn} en={strings.common.loading.en} /> : <T bn={s.loginButton.bn} en={s.loginButton.en} />}
         </button>

@@ -8,11 +8,11 @@
 // "verified" badge: teachers are 'pending' until an Admin verifies
 // them in the admin dashboard, and guardian links need child
 // confirmation + Admin activation.
-import { useState, type FormEvent } from 'react';
+import { useEffect, useState, type FormEvent } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { PageShell } from '../components/PageShell';
 import { strings } from '../i18n/strings';
-import { useAuth } from '../lib/auth';
+import { isRoleSetupHoldStored, useAuth } from '../lib/auth';
 import { isFirebaseConfigured } from '../firebase';
 import type { EducationType, ProfileEdit } from '../lib/profile';
 import { T, useLanguage } from '../i18n/LanguageContext';
@@ -49,7 +49,7 @@ const buttonStyle: React.CSSProperties = {
 };
 
 export default function RegisterPage() {
-  const { signUp, signInWithGoogle, user, error, loading } = useAuth();
+  const { signUp, signInWithGoogle, user, error, errorCode, loading } = useAuth();
   const navigate = useNavigate();
   const [displayName, setDisplayName] = useState('');
   const [email, setEmail] = useState('');
@@ -73,6 +73,14 @@ export default function RegisterPage() {
   const { t } = useLanguage();
   const s = strings.auth;
   const d = strings.dashboard;
+
+  // Google sign-in is a redirect: after Google sends a new user back,
+  // `user` appears via the auth listener (no promise resolves here).
+  // When the role-setup hold is set, send them to /register/role to
+  // choose their role instead of showing "already signed in".
+  useEffect(() => {
+    if (user && isRoleSetupHoldStored()) navigate('/register/role');
+  }, [user, navigate]);
 
   if (!isFirebaseConfigured) {
     return (
@@ -314,6 +322,9 @@ export default function RegisterPage() {
           ) : null}
         </fieldset>
         {shownError ? <p style={{ color: '#b00020' }}>{shownError}</p> : null}
+        {shownError && errorCode ? (
+          <p style={{ color: '#b00020', fontSize: 13, marginTop: -8 }}>ত্রুটি কোড: {errorCode}</p>
+        ) : null}
         <button style={buttonStyle} type="submit" disabled={busy || loading}>
           {busy ? <T bn={strings.common.loading.bn} en={strings.common.loading.en} /> : <T bn={s.registerButton.bn} en={s.registerButton.en} />}
         </button>
