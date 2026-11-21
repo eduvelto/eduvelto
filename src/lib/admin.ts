@@ -659,6 +659,10 @@ export interface TeacherApplicationFields {
   subjects: string[];
   classes: string[];
   institution: string;
+  /** Job title / post at the institution (e.g. "Assistant Teacher"). */
+  post?: string;
+  /** Institution contact (phone or email) the admin can use to verify employment. */
+  institutionContact?: string;
   qualifications: string;
   experienceYears: number;
   verificationReason: string;
@@ -693,13 +697,14 @@ export async function submitTeacherApplication(
   const id = `tv_${userId}`;
   const ref = doc(db, 'teacherVerifications', id);
   const existing = await getDoc(ref);
-  if (existing.exists()) {
+  const isReapply = existing.exists();
+  if (isReapply) {
     const status = existing.data().status as string | undefined;
     if (status === 'pending') throw new Error('application-already-pending');
     if (status === 'verified') throw new Error('already-verified');
-    // 'rejected' → allow re-application below.
+    // 'rejected' → allow re-application below (merge: createdAt stays).
   }
-  await setDoc(ref, {
+  const data = {
     id,
     userId,
     fullName: fields.fullName.trim().slice(0, 100),
@@ -707,6 +712,8 @@ export async function submitTeacherApplication(
     subjects,
     classes,
     institution: fields.institution.trim().slice(0, 200),
+    post: (fields.post ?? '').trim().slice(0, 100),
+    institutionContact: (fields.institutionContact ?? '').trim().slice(0, 100),
     qualifications: fields.qualifications.trim().slice(0, 500),
     experienceYears: Math.max(0, Math.min(60, Math.floor(fields.experienceYears))),
     verificationReason: cleanReason,
@@ -714,9 +721,14 @@ export async function submitTeacherApplication(
     status: 'pending',
     verificationStatus: 'pending',
     submittedAt: serverTimestamp(),
-    createdAt: serverTimestamp(),
     updatedAt: serverTimestamp(),
-  });
+  };
+  if (isReapply) {
+    // Merge: the original createdAt is preserved (rules allowlist).
+    await setDoc(ref, data, { merge: true });
+  } else {
+    await setDoc(ref, { ...data, createdAt: serverTimestamp() });
+  }
   return id;
 }
 

@@ -35,11 +35,12 @@
 import { FirebaseError } from 'firebase/app';
 import type { User } from 'firebase/auth';
 import {
+  collection,
   doc,
   getDoc,
   setDoc,
-  updateDoc,
   serverTimestamp,
+  writeBatch,
   type Firestore,
   type Timestamp,
 } from 'firebase/firestore';
@@ -244,7 +245,32 @@ export async function updateUserProfile(db: Firestore, uid: string, fields: Prof
     clean[key] = value === '' ? null : value;
   }
   clean.updatedAt = serverTimestamp();
-  await updateDoc(doc(db, 'users', uid), clean);
+  // Audit invariant (Step 5): every profile change writes an audit-log
+  // entry (adminActions, action 'profile-changed') in the SAME batch as
+  // the update — the change and its audit trail succeed or fail
+  // together. before/after are JSON strings (same convention as
+  // admin.ts auditEntryData). The rules allow a user to append ONLY this
+  // action for their own uid; the log stays append-only for everyone.
+  const current = await getUserProfile(db, uid);
+  const before: Record<string, unknown> = {};
+  const after: Record<string, unknown> = {};
+  for (const key of Object.keys(clean)) {
+    if (key === 'updatedAt') continue;
+    before[key] = current ? ((current as unknown as Record<string, unknown>)[key] ?? null) : null;
+    after[key] = clean[key];
+  }
+  const batch = writeBatch(db);
+  batch.update(doc(db, 'users', uid), clean);
+  batch.set(doc(collection(db, 'adminActions')), {
+    actorId: uid,
+    action: 'profile-changed',
+    details: `Profile updated: ${Object.keys(after).join(', ')}`.slice(0, 1000),
+    targetId: uid,
+    before: JSON.stringify(before).slice(0, 500),
+    after: JSON.stringify(after).slice(0, 500),
+    createdAt: serverTimestamp(),
+  });
+  await batch.commit();
   const updated = await getUserProfile(db, uid);
   if (!updated) throw new Error('profile-read-failed');
   return updated;

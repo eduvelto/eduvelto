@@ -48,6 +48,8 @@ export default function TeacherRegisterPage() {
   const [subjects, setSubjects] = useState('');
   const [classes, setClasses] = useState('');
   const [institution, setInstitution] = useState('');
+  const [post, setPost] = useState('');
+  const [institutionContact, setInstitutionContact] = useState('');
   const [qualifications, setQualifications] = useState('');
   const [experienceYears, setExperienceYears] = useState('0');
   const [reason, setReason] = useState('');
@@ -71,6 +73,8 @@ export default function TeacherRegisterPage() {
           if (typeof extra.qualifications === 'string') setQualifications(extra.qualifications);
           if (typeof extra.experienceYears === 'number') setExperienceYears(String(extra.experienceYears));
           if (typeof extra.institution === 'string') setInstitution(extra.institution);
+          if (typeof extra.post === 'string') setPost(extra.post);
+          if (typeof extra.institutionContact === 'string') setInstitutionContact(extra.institutionContact);
         }
         setChecked(true);
       })
@@ -151,6 +155,8 @@ export default function TeacherRegisterPage() {
         subjects: subjectList,
         classes: classList,
         institution,
+        post,
+        institutionContact,
         qualifications,
         experienceYears: Number(experienceYears) || 0,
         verificationReason: reason.trim(),
@@ -197,7 +203,7 @@ export default function TeacherRegisterPage() {
 
   return (
     <PageShell titleBn="শিক্ষক রেজিস্ট্রেশন" titleEn="Teacher registration">
-      <p>শিক্ষক ভেরিফিকেশন মানুষের মাধ্যমে যাচাই করা হয়। রেজিস্টার করলেই “ভেরিফায়েড” ব্যাজ পাওয়া যায় না।</p>
+      <p>শিক্ষক ভেরিফিকেশন মানুষের মাধ্যমে যাচাই করা হয়। রেজিস্টার করলেই “ভেরিফায়েড” ব্যাজ পাওয়া যায় না। কোনো ফি নেই, কোনো কাগজপত্র আপলোড করতে হয় না — শুধু লিখিত তথ্য দিন।</p>
       <p style={{ color: '#555' }}>Teacher verification is a human check. Registering does not grant a “verified” badge.</p>
       {existing?.status === 'rejected' ? (
         <p style={{ color: '#b00020' }}>
@@ -221,6 +227,14 @@ export default function TeacherRegisterPage() {
         <label>
           {strings.profile.institution.bn} / {strings.profile.institution.en} *
           <input style={inputStyle} type="text" value={institution} onChange={(e) => setInstitution(e.target.value)} />
+        </label>
+        <label>
+          পদ / Post (job title)
+          <input style={inputStyle} type="text" value={post} onChange={(e) => setPost(e.target.value)} placeholder="যেমন: সহকারী শিক্ষক / Assistant Teacher" />
+        </label>
+        <label>
+          প্রতিষ্ঠানের যোগাযোগ / Institution contact
+          <input style={inputStyle} type="text" value={institutionContact} onChange={(e) => setInstitutionContact(e.target.value)} placeholder="যেমন: ফোন নম্বর বা ইমেইল" />
         </label>
         <label>
           {d.qualifications.bn} / {d.qualifications.en} *

@@ -90,6 +90,15 @@ export default function AdminPage() {
       countBn: counts ? `${formatBnNumber(counts.pendingVerifications)}টি অপেক্ষায়` : undefined,
     },
     {
+      id: 'guardians',
+      titleBn: 'অভিভাবক সংযোগ যাচাই',
+      titleEn: 'Guardian link verification',
+      descBn: 'অভিভাবক–সন্তান সংযোগের অনুরোধ যাচাই করুন — লিখিত তথ্য + সন্তানের নিশ্চিতকরণ।',
+      descEn: 'Verify guardian–child link requests — written information + the child’s confirmation.',
+      status: 'working',
+      to: '/admin/guardians',
+    },
+    {
       id: 'content',
       titleBn: 'কনটেন্ট / ভিডিও / লাইব্রেরি',
       titleEn: 'Content / Video / Library',

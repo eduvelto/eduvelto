@@ -9,19 +9,29 @@
 // link per guardian–child pair, and the rules can check it with a
 // single get() (isLinkedGuardian helper in firestore.rules).
 //
-// FLOW (two proofs, per the proposal §4):
+// FLOW (two proofs, per the proposal §4, corrected 21 Nov 07:36):
 //   1. Guardian requests: creates parentLinks/{parentUid}_{childUid}
-//      with status 'pending', carrying the child's name/class/
-//      institution as typed by the guardian.
+//      with status 'pending', carrying their OWN name + relationship +
+//      contact and the child's name/class/institution/ID as typed.
+//      Written info ONLY — no documents, no OTP, no SMS, no fee.
 //   2. Child confirms in-app: the child (signed in as themself) sets
-//      status 'pending' -> 'confirmed'. This is the family's proof.
-//   3. Admin activates: an Admin sets 'confirmed' -> 'verified' after
-//      the consent record is complete. This is the record's proof.
-//      (The existing rule already said "Only Admin activates a link
-//      after the consent record is complete" — kept.)
-//   4. Anyone revokes at any time: guardian, child, or Admin sets
-//      status 'revoked'. After revocation the guardian immediately
-//      loses access (rules deny reads without a 'verified' link).
+//      status 'pending' -> 'confirmed' on their own Confirmation
+//      Screen ("Yes, this is my parent/guardian"). No link without the
+//      child's consent. This is the family's proof.
+//   3. Admin decides: an Admin cross-checks the written information
+//      and sets 'confirmed' -> 'verified' (approve) or -> 'rejected'
+//      (reject, with a reason ≥10 chars). This is the record's proof.
+//   4. Anyone revokes at any time: the child, the guardian, or an
+//      Admin sets status 'revoked'. After revocation the guardian
+//      immediately loses access (rules deny reads without a 'verified'
+//      link).
+//
+// AUDIT (binding): EVERY linking activity writes an adminActions entry
+// in the SAME batch as the link change — request, child confirmation,
+// admin decision, revoke. The change and its audit trail succeed or
+// fail together. Actions: guardian-link-requested /
+// guardian-link-confirmed / guardian-link-approved /
+// guardian-link-rejected / guardian-link-revoked.
 //
 // PRIVACY (privacy proposal §0–§3, binding): a guardian sees ONLY
 // progress, results, routines, notices and teacher updates for
@@ -41,20 +51,24 @@ import {
   getDoc,
   getDocs,
   query,
-  setDoc,
   updateDoc,
   where,
+  writeBatch,
   serverTimestamp,
   type Firestore,
 } from 'firebase/firestore';
 
-export type ParentLinkStatus = 'pending' | 'confirmed' | 'verified' | 'revoked';
+export type ParentLinkStatus = 'pending' | 'confirmed' | 'verified' | 'rejected' | 'revoked';
 
 export interface ParentLink {
   id: string;
   parentId: string;
   studentId: string;
   status: ParentLinkStatus;
+  /** Guardian's own name, relationship and contact — as typed in the request. */
+  guardianDisplayName: string;
+  relationship: string;
+  guardianContact: string;
   childDisplayName: string;
   childClassLevel: string;
   childInstitution: string;
@@ -69,8 +83,11 @@ export interface ParentLink {
   requestedAt?: unknown;
   confirmedAt?: unknown;
   verifiedAt?: unknown;
+  rejectedAt?: unknown;
   revokedAt?: unknown;
   verifiedBy?: string;
+  decidedBy?: string;
+  decisionReason?: string;
 }
 
 export function parentLinkId(parentUid: string, childUid: string): string {
@@ -83,6 +100,9 @@ function toLink(id: string, d: Record<string, unknown>): ParentLink {
     parentId: (d.parentId as string) ?? '',
     studentId: (d.studentId as string) ?? '',
     status: (d.status as ParentLinkStatus) ?? 'pending',
+    guardianDisplayName: (d.guardianDisplayName as string) ?? '',
+    relationship: (d.relationship as string) ?? '',
+    guardianContact: (d.guardianContact as string) ?? '',
     childDisplayName: (d.childDisplayName as string) ?? '',
     childClassLevel: (d.childClassLevel as string) ?? '',
     childInstitution: (d.childInstitution as string) ?? '',
@@ -93,53 +113,213 @@ function toLink(id: string, d: Record<string, unknown>): ParentLink {
     requestedAt: d.requestedAt,
     confirmedAt: d.confirmedAt,
     verifiedAt: d.verifiedAt,
+    rejectedAt: d.rejectedAt,
     revokedAt: d.revokedAt,
     verifiedBy: (d.verifiedBy as string) ?? undefined,
+    decidedBy: (d.decidedBy as string) ?? undefined,
+    decisionReason: (d.decisionReason as string) ?? undefined,
   };
 }
 
-/** Guardian requests a link to a child (status 'pending'). */
+/** One audit entry for a linking activity (same batch as the link change). */
+function auditEntry(
+  batch: ReturnType<typeof writeBatch>,
+  db: Firestore,
+  actorUid: string,
+  action: string,
+  linkId: string,
+  details: string,
+  before: string,
+  after: string,
+): void {
+  batch.set(doc(collection(db, 'adminActions')), {
+    actorId: actorUid,
+    action,
+    details: details.slice(0, 1000),
+    targetId: linkId,
+    before: before.slice(0, 500),
+    after: after.slice(0, 500),
+    createdAt: serverTimestamp(),
+  });
+}
+
+export interface GuardianRequestInfo {
+  guardianDisplayName: string;
+  relationship: string;
+  guardianContact: string;
+  childDisplayName: string;
+  childClassLevel: string;
+  childInstitution: string;
+}
+
+/** Guardian requests a link to a child (status 'pending') + audit entry. */
 export async function requestParentLink(
   db: Firestore,
   parentUid: string,
   childUid: string,
-  childDisplayName: string,
-  childClassLevel: string,
-  childInstitution: string,
+  info: GuardianRequestInfo,
 ): Promise<ParentLink> {
+  if (childUid === parentUid) throw new Error('cannot-link-self');
+  if (!info.guardianDisplayName.trim() || !info.relationship.trim()) {
+    throw new Error('guardian-info-required');
+  }
+  if (!info.childDisplayName.trim() || !info.childClassLevel.trim()) {
+    throw new Error('child-info-required');
+  }
   const id = parentLinkId(parentUid, childUid);
-  const data = {
+  const batch = writeBatch(db);
+  batch.set(doc(db, 'parentLinks', id), {
     parentId: parentUid,
     studentId: childUid,
     status: 'pending' as const,
-    childDisplayName: childDisplayName.slice(0, 100),
-    childClassLevel: childClassLevel.slice(0, 100),
-    childInstitution: childInstitution.slice(0, 200),
+    guardianDisplayName: info.guardianDisplayName.trim().slice(0, 100),
+    relationship: info.relationship.trim().slice(0, 50),
+    guardianContact: info.guardianContact.trim().slice(0, 20),
+    childDisplayName: info.childDisplayName.trim().slice(0, 100),
+    childClassLevel: info.childClassLevel.trim().slice(0, 100),
+    childInstitution: info.childInstitution.trim().slice(0, 200),
     requestedAt: serverTimestamp(),
     updatedAt: serverTimestamp(),
-  };
-  await setDoc(doc(db, 'parentLinks', id), data);
+  });
+  auditEntry(
+    batch,
+    db,
+    parentUid,
+    'guardian-link-requested',
+    id,
+    `${info.guardianDisplayName.trim()} (${info.relationship.trim()}) → ${info.childDisplayName.trim()} (${info.childClassLevel.trim()})`,
+    'none',
+    'pending',
+  );
+  await batch.commit();
   const snap = await getDoc(doc(db, 'parentLinks', id));
   if (!snap.exists()) throw new Error('link-create-failed');
   return toLink(snap.id, snap.data());
 }
 
-/** The child confirms the guardian's request (pending -> confirmed). */
-export async function confirmParentLink(db: Firestore, linkId: string): Promise<void> {
-  await updateDoc(doc(db, 'parentLinks', linkId), {
+/** The child confirms the guardian's request (pending -> confirmed) + audit entry. */
+export async function confirmParentLink(db: Firestore, linkId: string, childUid: string): Promise<void> {
+  const ref = doc(db, 'parentLinks', linkId);
+  const snap = await getDoc(ref);
+  if (!snap.exists()) throw new Error('link-not-found');
+  if (snap.data().status !== 'pending') throw new Error('link-not-pending');
+  if (snap.data().studentId !== childUid) throw new Error('not-the-child');
+  const batch = writeBatch(db);
+  batch.update(ref, {
     status: 'confirmed',
     confirmedAt: serverTimestamp(),
     updatedAt: serverTimestamp(),
   });
+  auditEntry(
+    batch,
+    db,
+    childUid,
+    'guardian-link-confirmed',
+    linkId,
+    `Child confirmed guardian link ${linkId}`,
+    'pending',
+    'confirmed',
+  );
+  await batch.commit();
 }
 
-/** Guardian or child revokes a link at any time (any status -> revoked). */
-export async function revokeParentLink(db: Firestore, linkId: string): Promise<void> {
-  await updateDoc(doc(db, 'parentLinks', linkId), {
+/** The child REJECTS the guardian's request (pending -> revoked) + audit entry. */
+export async function rejectParentLink(db: Firestore, linkId: string, childUid: string): Promise<void> {
+  const ref = doc(db, 'parentLinks', linkId);
+  const snap = await getDoc(ref);
+  if (!snap.exists()) throw new Error('link-not-found');
+  if (snap.data().status !== 'pending') throw new Error('link-not-pending');
+  if (snap.data().studentId !== childUid) throw new Error('not-the-child');
+  const batch = writeBatch(db);
+  batch.update(ref, {
     status: 'revoked',
     revokedAt: serverTimestamp(),
     updatedAt: serverTimestamp(),
   });
+  auditEntry(
+    batch,
+    db,
+    childUid,
+    'guardian-link-revoked',
+    linkId,
+    `Child rejected guardian link ${linkId}`,
+    'pending',
+    'revoked',
+  );
+  await batch.commit();
+}
+
+/**
+ * Admin decides a confirmed (or pending) link: approve -> 'verified',
+ * reject -> 'rejected' (reason mandatory, >= 10 chars). The decision +
+ * audit entry are ONE batch. The decider may never decide a link they
+ * are part of (a guardian-admin cannot approve their own child's link).
+ */
+export async function decideParentLink(
+  db: Firestore,
+  actorUid: string,
+  linkId: string,
+  decision: 'verified' | 'rejected',
+  reason: string,
+): Promise<void> {
+  if (reason.trim().length < 10) throw new Error('decision-needs-reason');
+  const ref = doc(db, 'parentLinks', linkId);
+  const snap = await getDoc(ref);
+  if (!snap.exists()) throw new Error('link-not-found');
+  const data = snap.data();
+  if (data.status !== 'pending' && data.status !== 'confirmed') {
+    throw new Error('link-not-decidable');
+  }
+  if (data.parentId === actorUid || data.studentId === actorUid) {
+    throw new Error('cannot-decide-own-link');
+  }
+  const batch = writeBatch(db);
+  if (decision === 'verified') {
+    batch.update(ref, {
+      status: 'verified',
+      verifiedBy: actorUid,
+      verifiedAt: serverTimestamp(),
+      decidedBy: actorUid,
+      decisionReason: reason.trim().slice(0, 500),
+      updatedAt: serverTimestamp(),
+    });
+  } else {
+    batch.update(ref, {
+      status: 'rejected',
+      decidedBy: actorUid,
+      decisionReason: reason.trim().slice(0, 500),
+      rejectedAt: serverTimestamp(),
+      updatedAt: serverTimestamp(),
+    });
+  }
+  auditEntry(
+    batch,
+    db,
+    actorUid,
+    decision === 'verified' ? 'guardian-link-approved' : 'guardian-link-rejected',
+    linkId,
+    `${String(data.guardianDisplayName ?? '')} → ${String(data.childDisplayName ?? '')} — ${reason.trim().slice(0, 200)}`,
+    String(data.status ?? ''),
+    decision,
+  );
+  await batch.commit();
+}
+
+/** Guardian, child, or admin revokes a link at any time + audit entry. */
+export async function revokeParentLink(db: Firestore, linkId: string, actorUid: string): Promise<void> {
+  const ref = doc(db, 'parentLinks', linkId);
+  const snap = await getDoc(ref);
+  if (!snap.exists()) throw new Error('link-not-found');
+  const before = String(snap.data().status ?? '');
+  if (before === 'revoked') throw new Error('link-already-revoked');
+  const batch = writeBatch(db);
+  batch.update(ref, {
+    status: 'revoked',
+    revokedAt: serverTimestamp(),
+    updatedAt: serverTimestamp(),
+  });
+  auditEntry(batch, db, actorUid, 'guardian-link-revoked', linkId, `Link ${linkId} revoked`, before, 'revoked');
+  await batch.commit();
 }
 
 /** The child updates the denormalized academic snapshot on their own
@@ -182,6 +362,17 @@ export async function listLinksForChild(db: Firestore, childUid: string): Promis
 export async function listMyLinks(db: Firestore, parentUid: string): Promise<ParentLink[]> {
   const snap = await getDocs(query(collection(db, 'parentLinks'), where('parentId', '==', parentUid)));
   return snap.docs.map((s) => toLink(s.id, s.data()));
+}
+
+/** All links, newest-requested first (admin queue — client-sorted). */
+export async function listAllParentLinks(db: Firestore): Promise<ParentLink[]> {
+  const snap = await getDocs(collection(db, 'parentLinks'));
+  const links = snap.docs.map((s) => toLink(s.id, s.data()));
+  return links.sort((a, b) => {
+    const ta = (a.requestedAt as { seconds?: number } | undefined)?.seconds ?? 0;
+    const tb = (b.requestedAt as { seconds?: number } | undefined)?.seconds ?? 0;
+    return tb - ta;
+  });
 }
 
 /** Pending link requests addressed to one child (for the child's confirm step). */

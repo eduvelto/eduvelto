@@ -14,12 +14,7 @@ import { strings } from '../i18n/strings';
 import { useAuth } from '../lib/auth';
 import type { EducationType, ProfileEdit } from '../lib/profile';
 import { db, isFirebaseConfigured } from '../firebase';
-import {
-  confirmParentLink,
-  listLinksForChild,
-  updateLinkChildClass,
-  type ParentLink,
-} from '../lib/guardian';
+import { listLinksForChild, updateLinkChildClass, type ParentLink } from '../lib/guardian';
 
 const inputStyle: React.CSSProperties = {
   display: 'block',
@@ -73,7 +68,6 @@ export default function ProfilePage() {
   const [confirming, setConfirming] = useState<ProfileEdit | null>(null);
   /** Guardian-link requests waiting for this student's confirmation. */
   const [childLinks, setChildLinks] = useState<ParentLink[] | null>(null);
-  const [confirmingLink, setConfirmingLink] = useState<string | null>(null);
   const p = strings.profile;
   const d = strings.dashboard;
 
@@ -273,17 +267,6 @@ export default function ProfilePage() {
     }
   }
 
-  async function onConfirmLink(linkId: string): Promise<void> {
-    if (!db) return;
-    setConfirmingLink(linkId);
-    try {
-      await confirmParentLink(db, linkId);
-      setChildLinks((links) => (links ?? []).map((l) => (l.id === linkId ? { ...l, status: 'confirmed' } : l)));
-    } finally {
-      setConfirmingLink(null);
-    }
-  }
-
   const shownError = localError ?? error;
   const createdAt = profile.createdAt?.toDate?.();
 
@@ -433,30 +416,21 @@ export default function ProfilePage() {
           </div>
         </div>
       ) : null}
-      {profile.role === 'student' && childLinks && childLinks.filter((l) => l.status === 'pending').length > 0 ? (
+      {profile.role === 'student' ? (
         <div style={{ marginTop: 24 }}>
           <h2 style={{ fontSize: 20 }}>{d.linkConfirmTitle.bn} / {d.linkConfirmTitle.en}</h2>
-          <p style={{ color: '#555' }}>
-            একজন অভিভাবক আপনার সাথে সংযোগ চাইছেন — নিশ্চিত করলে তিনি আপনার অগ্রগতি দেখতে পারবেন, আপনার মেসেজ নয়।
-            / A guardian is asking to link with you — confirming lets them see your progress, never your messages.
+          {childLinks && childLinks.filter((l) => l.status === 'pending').length > 0 ? (
+            <p>
+              আপনার {childLinks.filter((l) => l.status === 'pending').length}টি অভিভাবক সংযোগের অনুরোধ
+              অপেক্ষমাণ আছে। / You have {childLinks.filter((l) => l.status === 'pending').length} pending
+              guardian link request(s).
+            </p>
+          ) : (
+            <p style={{ color: '#555' }}>কোনো নতুন অনুরোধ নেই। / No new requests.</p>
+          )}
+          <p>
+            <Link to="/profile/guardian-links">অনুরোধগুলো দেখুন / See the requests →</Link>
           </p>
-          <ul style={{ paddingLeft: 20 }}>
-            {childLinks
-              .filter((l) => l.status === 'pending')
-              .map((l) => (
-                <li key={l.id} style={{ marginBottom: 12 }}>
-                  {l.childDisplayName} — {l.childClassLevel}{' '}
-                  <button
-                    style={{ ...buttonStyle, padding: '6px 12px', marginLeft: 8 }}
-                    type="button"
-                    onClick={() => void onConfirmLink(l.id)}
-                    disabled={confirmingLink === l.id}
-                  >
-                    {confirmingLink === l.id ? strings.common.loading.bn : 'নিশ্চিত করুন / Confirm'}
-                  </button>
-                </li>
-              ))}
-          </ul>
         </div>
       ) : null}
       <p style={{ marginTop: 24 }}>

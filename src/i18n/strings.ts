@@ -263,6 +263,12 @@ export const strings = {
     verificationPending: { bn: 'যাচাই চলছে', en: 'Verification pending' },
     verified: { bn: 'ভেরিফায়েড', en: 'Verified' },
     linkChild: { bn: 'সন্তান যুক্ত করুন', en: 'Link a Child' },
+    guardianName: { bn: 'আপনার নাম', en: 'Your name' },
+    relationship: { bn: 'সন্তানের সঙ্গে সম্পর্ক', en: 'Relationship to the child' },
+    guardianContact: { bn: 'যোগাযোগের নম্বর', en: 'Contact number' },
+    linkRejected: { bn: 'অনুরোধটি বাতিল হয়েছে', en: 'This request was rejected' },
+    rejectLink: { bn: 'অনুরোধটি প্রত্যাখ্যান করুন', en: 'Reject this request' },
+    adminGuardiansTitle: { bn: 'অভিভাবক সংযোগ যাচাই', en: 'Guardian Link Verification' },
     linkChildNote: {
       bn: 'সন্তানের Eduvelto ID দিন (সন্তানের প্রোফাইল পাতায় দেখা যায়)। সন্তান নিজে নিশ্চিত করলে এবং অ্যাডমিন যাচাই করলে সংযোগ চালু হবে।',
       en: 'Enter your child’s Eduvelto ID (shown on their profile page). The link activates after the child confirms it and an admin verifies it.',

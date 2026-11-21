@@ -12,6 +12,7 @@ import RoleSetupPage from './pages/RoleSetupPage';
 import StudentDashboardPage from './pages/StudentDashboardPage';
 import TeacherDashboardPage from './pages/TeacherDashboardPage';
 import GuardianDashboardPage from './pages/GuardianDashboardPage';
+import GuardianLinksPage from './pages/GuardianLinksPage';
 import TeacherRegisterPage from './pages/TeacherRegisterPage';
 import DirectoryPage from './pages/DirectoryPage';
 import SubjectPage from './pages/SubjectPage';
@@ -26,6 +27,7 @@ import AdminAds from './pages/AdminAds';
 import AdminUsersPage from './pages/AdminUsersPage';
 import AdminUserDetailPage from './pages/AdminUserDetailPage';
 import AdminTeachersPage from './pages/AdminTeachersPage';
+import AdminGuardiansPage from './pages/AdminGuardiansPage';
 import AdminFeaturesPage from './pages/AdminFeaturesPage';
 import AdminBackupPage from './pages/AdminBackupPage';
 import AdminAuditPage from './pages/AdminAuditPage';
@@ -171,6 +173,7 @@ export default function App() {
         <Route path="/register/role" element={<RoleSetupPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/profile" element={<ProfilePage />} />
+        <Route path="/profile/guardian-links" element={<GuardianLinksPage />} />
         <Route path="/dashboard" element={<DashboardRedirect />} />
         <Route path="/student" element={<StudentDashboardPage />} />
         <Route path="/teacher" element={<TeacherDashboardPage />} />
@@ -189,6 +192,7 @@ export default function App() {
         <Route path="/admin/users" element={<AdminGuard><AdminUsersPage /></AdminGuard>} />
         <Route path="/admin/users/:uid" element={<AdminGuard><AdminUserDetailPage /></AdminGuard>} />
         <Route path="/admin/teachers" element={<AdminGuard><AdminTeachersPage /></AdminGuard>} />
+        <Route path="/admin/guardians" element={<AdminGuard><AdminGuardiansPage /></AdminGuard>} />
         <Route path="/admin/features" element={<AdminGuard><AdminFeaturesPage /></AdminGuard>} />
         <Route path="/admin/backup" element={<AdminGuard><AdminBackupPage /></AdminGuard>} />
         <Route path="/admin/audit" element={<AdminGuard><AdminAuditPage /></AdminGuard>} />

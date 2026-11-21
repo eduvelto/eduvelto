@@ -103,6 +103,9 @@ export default function GuardianDashboardPage() {
   const [childName, setChildName] = useState('');
   const [childClass, setChildClass] = useState('');
   const [childInstitution, setChildInstitution] = useState('');
+  const [guardianName, setGuardianName] = useState('');
+  const [relationship, setRelationship] = useState('');
+  const [guardianContact, setGuardianContact] = useState('');
   const [linkBusy, setLinkBusy] = useState(false);
   const [linkDone, setLinkDone] = useState(false);
   const [linkError, setLinkError] = useState<string | null>(null);
@@ -212,18 +215,32 @@ export default function GuardianDashboardPage() {
     setLinkError(null);
     setLinkDone(false);
     const uid = childUid.trim();
+    if (!guardianName.trim() || !relationship.trim()) {
+      setLinkError('আপনার নাম ও সন্তানের সঙ্গে সম্পর্ক — দুটোই লাগবে। / Your name and relationship to the child are both required.');
+      return;
+    }
     if (!uid || !childName.trim() || !childClass.trim()) {
       setLinkError('সন্তানের Eduvelto ID, নাম ও শ্রেণি — তিনটিই লাগবে। / Child Eduvelto ID, name and class are all required.');
       return;
     }
     setLinkBusy(true);
     try {
-      await requestParentLink(db, user.uid, uid, childName.trim(), childClass.trim(), childInstitution.trim());
+      await requestParentLink(db, user.uid, uid, {
+        guardianDisplayName: guardianName.trim(),
+        relationship: relationship.trim(),
+        guardianContact: guardianContact.trim(),
+        childDisplayName: childName.trim(),
+        childClassLevel: childClass.trim(),
+        childInstitution: childInstitution.trim(),
+      });
       setLinkDone(true);
       setChildUid('');
       setChildName('');
       setChildClass('');
       setChildInstitution('');
+      setGuardianName('');
+      setRelationship('');
+      setGuardianContact('');
     } catch (err) {
       setLinkError(err instanceof Error ? err.message : 'অনুরোধ পাঠানো যায়নি। / Could not send the request.');
     } finally {
@@ -232,10 +249,10 @@ export default function GuardianDashboardPage() {
   }
 
   async function onRevoke(linkId: string): Promise<void> {
-    if (!db) return;
+    if (!db || !user) return;
     setRevoking(true);
     try {
-      await revokeParentLink(db, linkId);
+      await revokeParentLink(db, linkId, user.uid);
     } finally {
       setRevoking(false);
     }
@@ -372,6 +389,23 @@ export default function GuardianDashboardPage() {
         </>
       ) : null}
 
+      {(links ?? []).filter((l) => l.status === 'rejected').length > 0 ? (
+        <>
+          <h2 style={{ fontSize: 19 }}>{d.linkRejected.bn} / {d.linkRejected.en}</h2>
+          <ul style={{ paddingLeft: 20 }}>
+            {(links ?? [])
+              .filter((l) => l.status === 'rejected')
+              .map((l) => (
+                <li key={l.id}>
+                  {l.childDisplayName} ({l.childClassLevel})
+                  {l.decisionReason ? ` — কারণ: ${l.decisionReason}` : ''} — নতুন করে আবার অনুরোধ
+                  পাঠাতে পারেন।
+                </li>
+              ))}
+          </ul>
+        </>
+      ) : null}
+
       <h2 style={{ fontSize: 19 }}>{d.linkChild.bn} / {d.linkChild.en}</h2>
       <p style={{ color: '#555' }}>{d.linkChildNote.bn}</p>
       <p style={{ color: '#555' }}>
@@ -379,6 +413,18 @@ export default function GuardianDashboardPage() {
         Eduvelto ID is shown on their profile page — they share it with you.
       </p>
       <form onSubmit={onLinkChild}>
+        <label>
+          {d.guardianName.bn} / {d.guardianName.en}
+          <input style={inputStyle} type="text" value={guardianName} onChange={(e) => setGuardianName(e.target.value)} placeholder="যেমন: মোঃ রহিম উদ্দিন" />
+        </label>
+        <label>
+          {d.relationship.bn} / {d.relationship.en}
+          <input style={inputStyle} type="text" value={relationship} onChange={(e) => setRelationship(e.target.value)} placeholder="যেমন: বাবা / মা / অভিভাবক" />
+        </label>
+        <label>
+          {d.guardianContact.bn} / {d.guardianContact.en}
+          <input style={inputStyle} type="tel" value={guardianContact} onChange={(e) => setGuardianContact(e.target.value)} placeholder="যেমন: 01XXXXXXXXX" />
+        </label>
         <label>
           সন্তানের Eduvelto ID / Child’s Eduvelto ID
           <input style={inputStyle} type="text" value={childUid} onChange={(e) => setChildUid(e.target.value)} placeholder="যেমন: AbC123xYz…" />

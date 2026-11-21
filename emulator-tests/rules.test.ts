@@ -235,7 +235,7 @@ beforeAll(async () => {
     // NOTE: no `rules:` option — see header comment (loadFirestoreRules
     // fails with "http2 exception" in this environment; the emulator loads
     // firestore.rules from firebase.json at startup instead).
-    firestore: { host: '127.0.0.1', port: 8080 },
+    firestore: { host: '127.0.0.1', port: Number(process.env.FIRESTORE_EMULATOR_PORT ?? 8080) },
   });
   await seed();
 }, 120000); // 120s: first Firestore ops on a cold emulator take ~2s each in this sandbox
@@ -388,8 +388,6 @@ describe('Eduvelto security rules', () => {
       userId: 'student-1',
       fullName: 'Student One',
       institution: 'Test College',
-      idType: 'nid',
-      idReference: 'checked in person by admin',
       status: 'pending',
     });
     await assertSucceeds(
@@ -408,8 +406,6 @@ describe('Eduvelto security rules', () => {
       userId: 'student-1',
       fullName: 'Student One',
       institution: 'Test College',
-      idType: 'nid',
-      idReference: 'self',
       status: 'pending',
     });
     await assertFails(updateDoc(ref, { status: 'verified', checkedBy: 'student-1' }));
