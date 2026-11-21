@@ -1820,6 +1820,7 @@ a:hover {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  min-width: 0;
   border-radius: 16px;
   padding: 20px 18px;
   box-shadow: 0 4px 12px rgba(13, 30, 41, 0.08), 0 2px 4px rgba(13, 30, 41, 0.05);
@@ -1850,6 +1851,13 @@ a:hover {
   color: #fff;
   font-size: 12px;
   font-weight: 700;
+}
+/* Mockup: the Admission badge shows on mobile only (Job's badge shows
+   on both). */
+@media (min-width: 769px) {
+  .ev-home-card-badge-mobile {
+    display: none;
+  }
 }
 .ev-home-card-icon {
   display: inline-flex;
@@ -1945,11 +1953,6 @@ a:hover {
     font-size: 14px;
   }
 }
-@media (max-width: 400px) {
-  .ev-home-sections {
-    grid-template-columns: 1fr;
-  }
-}
 
 /* Homepage: feature strip (desktop) / quick access (mobile). */
 .ev-home-strip {
@@ -2029,6 +2032,7 @@ a.ev-home-strip-link:hover {
     border-radius: 12px;
     background: #fff;
     box-shadow: 0 2px 6px rgba(13, 30, 41, 0.05);
+    min-width: 0;
   }
   .ev-home-quick-link {
     display: flex;
@@ -2069,6 +2073,10 @@ a.ev-home-strip-link:hover {
   background: #fff;
   padding: 18px;
   box-shadow: 0 2px 6px rgba(13, 30, 41, 0.05);
+  /* Grid item: must be allowed to shrink below its content width, or
+     the horizontally-scrolling popular row forces the whole page wider
+     than the viewport on mobile (verified: 572px scrollWidth at 390px). */
+  min-width: 0;
 }
 .ev-home-panel-head {
   display: flex;
@@ -2094,7 +2102,10 @@ a.ev-home-strip-link:hover {
   font-weight: 600;
   white-space: nowrap;
 }
-.ev-home-popular-mobile {
+/* The h2 rules need the element in the selector: .ev-home-panel-head h2
+   (specificity 0-1-1) beats a bare class rule (0-1-0), so without it
+   both titles showed at once. */
+.ev-home-panel-head h2.ev-home-popular-mobile {
   display: none;
 }
 .ev-home-popular-grid {
@@ -2157,10 +2168,10 @@ a.ev-home-strip-link:hover {
   }
 }
 @media (max-width: 768px) {
-  .ev-home-popular-desktop {
+  .ev-home-panel-head h2.ev-home-popular-desktop {
     display: none;
   }
-  .ev-home-popular-mobile {
+  .ev-home-panel-head h2.ev-home-popular-mobile {
     display: inline-flex;
   }
   .ev-home-popular-grid {
@@ -2173,6 +2184,7 @@ a.ev-home-strip-link:hover {
     overflow-x: auto;
     padding-bottom: 4px;
     -webkit-overflow-scrolling: touch;
+    min-width: 0;
   }
   .ev-home-popular-row .ev-home-popular-tile {
     flex: none;

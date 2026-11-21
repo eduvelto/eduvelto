@@ -57,7 +57,7 @@ export default function ComingSoonPage(props: { section: Section }) {
   const { t } = useLanguage();
   const c = CONTENT[props.section];
   return (
-    <PageShell titleBn={c.titleBn} titleEn={c.titleEn} maxWidth={760}>
+    <PageShell titleBn={c.titleBn} titleEn={c.titleEn} maxWidth={760} hideHomeLink>
       <p style={{ fontSize: 16, lineHeight: 1.8, color: '#3A444B' }}>{t({ bn: c.bodyBn, en: c.bodyEn })}</p>
       <ul style={{ lineHeight: 1.9, color: '#3A444B' }}>
         {c.items.map((item) => (
