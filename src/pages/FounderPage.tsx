@@ -2,19 +2,26 @@
 //
 // Dedicated personal profile for Ali Hasan Mohammed Mizan, Founder &
 // CEO of Eduvelto. STAGING ONLY — publication requires the owner's
-// approval of the full preview (report: digital-identity-report.md,
-// gates G1 + G2). Content rules that bind this page:
+// approval of the full preview (preview-final-report.md).
+// Owner decisions 21 Nov 07:24 applied here:
+// - Date of birth (21 February 2005) APPROVED for publication as a
+//   factual detail, in the facts box and in the Person JSON-LD.
+//   No age is stated anywhere (age changes over time).
+// - Birthplace NOT approved: removed from the facts box and from the
+//   Person JSON-LD (no birthPlace field) until separately approved.
+//   The approved biography prose (decision 5) still says "From Cox's
+//   Bazar" — that wording is part of the approved bio text itself and
+//   is flagged in the preview report for the owner to confirm.
+// - Contact: official business email ahmmizan23@gmail.com is shown.
+//   Personal phone number is NOT shown. The Contact page is unchanged.
+// - LinkedIn: no account exists; LinkedIn appears nowhere here.
+// - Team section: OMITTED — no verified team members with approved
+//   public identification exist; none are invented.
+// - Features are grouped AVAILABLE NOW / IN DEVELOPMENT / PLANNED —
+//   nothing unfinished is advertised as operational.
 // - Biography: the text the owner approved 20 Nov 2026 (21:08), with
 //   the private-tuition clause omitted per his public-details rule
 //   (20 Nov 22:54). Madrasa teaching stays.
-// - Date of birth (21 February 2005) and birthplace (Cox's Bazar,
-//   Bangladesh) are PROPOSED additions, shown as labelled facts and
-//   in the structured data. No age is stated anywhere (age changes
-//   over time). Home address is never shown.
-// - Contact details: placeholder only — no email or phone on this
-//   page until the owner explicitly confirms (gate G2).
-// - Features are labelled AVAILABLE NOW vs PLANNED — nothing
-//   unfinished is advertised as operational.
 // - Only the approved founder photo is used (/founder-photo.jpg).
 // - No awards, honours, follower counts or other claims are made:
 //   the page states plainly that none are claimed.
@@ -37,9 +44,8 @@ const PERSON_JSON_LD = {
   name: 'Ali Hasan Mohammed Mizan',
   alternateName: ['আলী হাসান মোহাম্মদ মিজান', 'AHM Mizan'],
   description:
-    'Founder and CEO of Eduvelto, a free digital education platform from Bangladesh. English teacher at Tahsinul Ummah International Madrasa since 2023. Honours 3rd year English, National University. From Cox\'s Bazar, Bangladesh.',
+    'Founder and CEO of Eduvelto, a free digital education platform from Bangladesh. English teacher at Tahsinul Ummah International Madrasa since 2023. Honours 3rd year English, National University.',
   birthDate: '2005-02-21',
-  birthPlace: { '@type': 'Place', name: "Cox's Bazar, Bangladesh" },
   image: 'https://eduvelto.com/founder-photo.jpg',
   jobTitle: 'Founder & CEO, Eduvelto',
   worksFor: { '@type': 'Organization', name: 'Eduvelto', url: 'https://eduvelto.com' },
@@ -159,7 +165,7 @@ export default function FounderPage() {
   useSeo({
     title: 'Ali Hasan Mohammed Mizan — Founder & CEO, Eduvelto',
     description:
-      'Ali Hasan Mohammed Mizan is the Founder & CEO of Eduvelto, a free digital education platform from Bangladesh. English teacher, Honours student, and founder — from Cox\'s Bazar.',
+      'Ali Hasan Mohammed Mizan is the Founder & CEO of Eduvelto, a free digital education platform from Bangladesh. English teacher, Honours student, and founder.',
     canonical: CANONICAL,
     ogType: 'profile',
     ogImage: 'https://eduvelto.com/founder-photo.jpg',
@@ -235,10 +241,6 @@ export default function FounderPage() {
               <dd style={{ display: 'inline', margin: 0 }}>21 February 2005</dd>
             </div>
             <div>
-              <dt style={{ fontWeight: 700, display: 'inline' }}>Birthplace: </dt>
-              <dd style={{ display: 'inline', margin: 0 }}>Cox&apos;s Bazar, Bangladesh</dd>
-            </div>
-            <div>
               <dt style={{ fontWeight: 700, display: 'inline' }}>SSC: </dt>
               <dd style={{ display: 'inline', margin: 0 }}>2020, Science</dd>
             </div>
@@ -306,13 +308,16 @@ export default function FounderPage() {
           পরের ধাপ দেখতে পাবে।
         </p>
 
-        {/* Eduvelto showcase */}
+        {/* Eduvelto showcase — three-way status, owner decision 21 Nov 07:24 (5) */}
         <h2 style={sectionH2}>Eduvelto — কী আছে, কী আসছে / What Eduvelto offers</h2>
         <p style={bodyP}>
           Eduvelto is a free digital education platform for Bangladesh — lessons, exams, a digital
           library and study planning, for students from Class 1 to Honours. It is free for
           students, teachers and guardians: no registration fee and no verification fee, ever.
         </p>
+        <h3 style={{ fontSize: 16, margin: '20px 0 8px', color: NAVY }}>
+          উপলব্ধ এখন / Available now
+        </h3>
         <ul style={{ lineHeight: 2, paddingLeft: 20, margin: '0 0 12px' }}>
           <li>
             <Link to="/library">Digital Library — 609 books, 2,109 chapters, 20,970 questions</Link>{' '}
@@ -332,16 +337,29 @@ export default function FounderPage() {
             PWA — installable app, works offline <StatusChip label="Available now" kind="live" />
           </li>
           <li>
-            Health pages (medicines, diseases, facilities){' '}
-            <StatusChip label="Live — content under review" kind="review" />
+            Owner Admin Dashboard <StatusChip label="Available now" kind="live" />
           </li>
           <li>
-            <Link to="/ai-teacher">AI Teacher</Link>{' '}
-            <StatusChip label="Planned — demo only, not live AI" kind="planned" />
+            Health pages (medicines, diseases, facilities){' '}
+            <StatusChip label="Available now — all content under review" kind="review" />
           </li>
+        </ul>
+        <h3 style={{ fontSize: 16, margin: '20px 0 8px', color: NAVY }}>
+          উন্নয়নাধীন / In development
+        </h3>
+        <ul style={{ lineHeight: 2, paddingLeft: 20, margin: '0 0 12px' }}>
           <li>
             Student, Teacher and Guardian dashboards{' '}
             <StatusChip label="In development (staging)" kind="planned" />
+          </li>
+        </ul>
+        <h3 style={{ fontSize: 16, margin: '20px 0 8px', color: NAVY }}>
+          পরিকল্পিত / Planned
+        </h3>
+        <ul style={{ lineHeight: 2, paddingLeft: 20, margin: '0 0 12px' }}>
+          <li>
+            <Link to="/ai-teacher">AI Teacher</Link>{' '}
+            <StatusChip label="Planned — demo only, not live AI" kind="planned" />
           </li>
           <li>
             Native Android and iOS apps{' '}
@@ -350,6 +368,10 @@ export default function FounderPage() {
           <li>
             Private messaging and educational communities{' '}
             <StatusChip label="Planned — after safety review" kind="planned" />
+          </li>
+          <li>
+            Video lessons / Shorts{' '}
+            <StatusChip label="Planned — classification approved, not built" kind="planned" />
           </li>
         </ul>
 
@@ -423,11 +445,16 @@ export default function FounderPage() {
           </li>
         </ul>
 
-        {/* Contact — placeholder only */}
+        {/* Contact — official business email (owner decision 21 Nov 07:24, 2) */}
         <h2 style={sectionH2}>যোগাযোগ / Contact</h2>
         <p style={bodyP}>
-          Official contact details will appear here after the owner&apos;s approval. Until then,
-          please use the <Link to="/contact">contact page</Link>.
+          Official business email:{' '}
+          <a href="mailto:ahmmizan23@gmail.com" style={{ color: BLUE }}>
+            ahmmizan23@gmail.com
+          </a>
+        </p>
+        <p style={bodyP}>
+          For anything else, please use the <Link to="/contact">contact page</Link>.
         </p>
 
         <p style={{ marginTop: 32 }}>
