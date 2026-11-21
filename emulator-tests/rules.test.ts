@@ -235,7 +235,12 @@ beforeAll(async () => {
     // NOTE: no `rules:` option — see header comment (loadFirestoreRules
     // fails with "http2 exception" in this environment; the emulator loads
     // firestore.rules from firebase.json at startup instead).
-    firestore: { host: '127.0.0.1', port: 8080 },
+    firestore: {
+      host: '127.0.0.1',
+      // Alt-port support: defaults are contested by parallel agents;
+      // set FIRESTORE_EMULATOR_PORT to the live-picked port (default 8080).
+      port: Number(process.env.FIRESTORE_EMULATOR_PORT ?? 8080),
+    },
   });
   await seed();
 }, 120000); // 120s: first Firestore ops on a cold emulator take ~2s each in this sandbox
