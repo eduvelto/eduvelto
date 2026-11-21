@@ -41,6 +41,7 @@ import { Card, Chip, LinkButton, Reveal, SkeletonCards, StatCard } from '../comp
 import AdSlot from '../components/AdSlot';
 import AdPlaceholder from '../components/AdPlaceholder';
 import { ClassCard } from '../components/ClassCards';
+import { JobsSection } from '../components/JobCards';
 import { listPublishedBooks, type Book } from '../lib/content';
 import { CLASS_LEVELS, booksForClass, subjectsForClass } from '../lib/classLevels';
 import { useLanguage } from '../i18n/LanguageContext';
@@ -350,6 +351,10 @@ export default function HomePage() {
               </div>
             ) : null}
           </section>
+
+          {/* Job Preparation — directly after the class cards (design
+              plan §1.3, proposed default for open question §7.1). */}
+          <JobsSection />
         </div>
 
         {/* Desktop Side Ad — sticky right rail, ≥1200px only. Placeholder only. */}
