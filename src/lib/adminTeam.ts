@@ -238,17 +238,12 @@ export function sectorSummary(sectors: SectorMap): string {
 
 export function isAssignmentExpired(a: AdminAssignment, now = new Date()): boolean {
   if (!a.expiresAt) return false;
-  try {
-    const d =
-      typeof a.expiresAt === 'object' &&
-      a.expiresAt !== null &&
-      'toDate' in (a.expiresAt as Record<string, unknown>)
-        ? (a.expiresAt as Timestamp).toDate()
-        : new Date(a.expiresAt as unknown as string);
-    return d.getTime() <= now.getTime();
-  } catch {
-    return false;
-  }
+  const v: unknown = a.expiresAt;
+  let d: Date | null = null;
+  if (v instanceof Timestamp) d = v.toDate();
+  else if (v instanceof Date) d = v;
+  if (!d) return false;
+  return d.getTime() <= now.getTime();
 }
 
 export function assignmentStatus(a: AdminAssignment): 'active' | 'suspended' | 'expired' {
@@ -312,7 +307,14 @@ export function getMyMfaFactors(): string[] {
     const auth = getAuth();
     const user = auth.currentUser;
     if (!user) return [];
-    return (user.multiFactor?.enrolledFactors ?? []).map((f) => f.factorId);
+    // multiFactor is not on the firebase/auth User type in this version —
+    // read it through a loose cast instead of pretending otherwise.
+    const mf = (
+      user as unknown as {
+        multiFactor?: { enrolledFactors?: Array<{ factorId: string }> };
+      }
+    ).multiFactor;
+    return (mf?.enrolledFactors ?? []).map((f) => f.factorId);
   } catch {
     return [];
   }

@@ -1,1 +1,24 @@
-{"emulators": {"auth": {"port": 9101}, "firestore": {"port": 8082}, "hub": {"port": 4403}, "logging": {"port": 4504}, "singleProjectMode": true, "ui": {"enabled": false}}, "firestore": {"indexes": "firestore.indexes.json", "rules": "firestore.rules"}}
+{
+  "emulators": {
+    "auth": {
+      "port": 9090
+    },
+    "firestore": {
+      "port": 8080
+    },
+    "hub": {
+      "port": 4402
+    },
+    "logging": {
+      "port": 4501
+    },
+    "singleProjectMode": true,
+    "ui": {
+      "enabled": false
+    }
+  },
+  "firestore": {
+    "indexes": "firestore.indexes.json",
+    "rules": "firestore.rules"
+  }
+}
