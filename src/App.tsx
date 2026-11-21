@@ -38,6 +38,7 @@ import HealthDoctorsPage from './pages/HealthDoctorsPage';
 import HealthHospitalsPage from './pages/HealthHospitalsPage';
 import HealthReportPage from './pages/HealthReportPage';
 import AboutPage from './pages/AboutPage';
+import FounderPage from './pages/FounderPage';
 import ContactPage from './pages/ContactPage';
 
 // Routes mirror page-map.md + the Phase 2 route list.
@@ -86,6 +87,7 @@ export default function App() {
           <Link to="/progress" style={{ color: '#fff', padding: '10px 6px' }}>{nav.progress.bn}</Link>
           <Link to="/health" style={{ color: '#fff', padding: '10px 6px' }}>{nav.health.bn}</Link>
           <Link to="/about" style={{ color: '#fff', padding: '10px 6px' }}>{nav.about.bn}</Link>
+          <Link to="/founder" style={{ color: '#fff', padding: '10px 6px' }}>{nav.founder.bn}</Link>
           <Link to="/contact" style={{ color: '#fff', padding: '10px 6px' }}>{nav.contact.bn}</Link>
           {profile?.role === 'owner' ? (
             <Link to="/admin" style={{ color: '#F1B308', padding: '10px 6px', fontWeight: 700 }}>{nav.admin.bn}</Link>
@@ -175,6 +177,7 @@ export default function App() {
         <Route path="/health/hospitals" element={<HealthHospitalsPage />} />
         <Route path="/health/report" element={<HealthReportPage />} />
         <Route path="/about" element={<AboutPage />} />
+        <Route path="/founder" element={<FounderPage />} />
         <Route path="/contact" element={<ContactPage />} />
         <Route path="*" element={<HomePage />} />
         </Routes>

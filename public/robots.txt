@@ -1,0 +1,33 @@
+# Eduvelto robots.txt — PREPARED 20 Nov 2026, NOT deployed.
+# To deploy: copy to phase2-project/public/robots.txt, rebuild, deploy hosting.
+# Then it lives at https://eduvelto.com/robots.txt (only after the domain connects).
+# Public pages are crawlable. Admin, login, register and app-internal routes are not.
+
+User-agent: *
+Allow: /
+Allow: /about
+Allow: /founder
+Allow: /features
+Allow: /ai-teacher
+Allow: /library
+Allow: /teachers-institutions
+Allow: /parents-students
+Allow: /health
+Allow: /career
+Allow: /videos
+Allow: /community
+Allow: /life
+Allow: /eduvelto-id
+Allow: /contact
+Disallow: /admin
+Disallow: /login
+Disallow: /register
+Disallow: /profile
+Disallow: /teacher/register
+Disallow: /directory
+Disallow: /quiz/
+Disallow: /books/
+Disallow: /lessons/
+Disallow: /subjects/
+
+Sitemap: https://eduvelto.com/sitemap.xml
