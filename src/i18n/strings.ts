@@ -17,6 +17,7 @@ export const strings = {
     social: { bn: 'সোশ্যাল', en: 'Social' },
     health: { bn: 'স্বাস্থ্য', en: 'Health' },
     about: { bn: 'আমাদের সম্পর্কে', en: 'About' },
+    founder: { bn: 'প্রতিষ্ঠাতা', en: 'Founder' },
     contact: { bn: 'যোগাযোগ', en: 'Contact' },
     aiTeacher: { bn: 'এডুভেল্টো এআই শিক্ষক', en: 'Eduvelto AI Teacher' },
     profile: { bn: 'প্রোফাইল', en: 'Profile' },

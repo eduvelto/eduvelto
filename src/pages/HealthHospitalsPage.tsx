@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { strings } from '../i18n/strings';
 import { PageShell, EmptyState } from '../components/PageShell';
+import { AlertBox, Skeleton } from '../components/ui';
 import { AccuracyNote, HealthDisclaimer } from '../components/HealthDisclaimer';
 import { listPublishedFacilities, type Facility } from '../lib/health';
 
@@ -54,15 +55,15 @@ export default function HealthHospitalsPage() {
         onChange={(e) => setSearch(e.target.value)}
         placeholder={h.areaPlaceholder.bn}
         aria-label={h.areaPlaceholder.bn}
-        style={{ width: '100%', padding: '12px', fontSize: 16, borderRadius: 6, border: '1px solid #999', margin: '16px 0' }}
+        className="ev-input" style={{ margin: '16px 0' }}
       />
-      {error ? <p style={{ color: '#b00020' }}>{error}</p> : null}
-      {items === null && !error ? <p>{strings.common.loading.bn}</p> : null}
+      {error ? <AlertBox tone="error">{error}</AlertBox> : null}
+      {items === null && !error ? <Skeleton lines={3} /> : null}
       {items !== null && filtered.length === 0 ? (
         <EmptyState bn={h.underReview.bn} en={h.underReview.en} />
       ) : null}
       {filtered.map((f) => (
-        <article key={f.id} style={{ border: '1px solid #ddd', borderRadius: 8, padding: '16px', marginBottom: 12 }}>
+        <article key={f.id} className="ev-card" style={{ marginBottom: 12 }}>
           <h2 style={{ margin: '0 0 8px', fontSize: 20 }}>
             {f.titleBn} <span style={{ color: '#555', fontSize: 16 }}>({f.title})</span>
           </h2>

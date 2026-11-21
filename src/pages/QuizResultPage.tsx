@@ -13,6 +13,7 @@
 import { useEffect, useState } from 'react';
 import { Link, useParams, useSearchParams } from 'react-router-dom';
 import { PageShell, EmptyState } from '../components/PageShell';
+import { AlertBox, Button, Card, Chip, ProgressBar, Skeleton } from '../components/ui';
 import { useAuth } from '../lib/auth';
 import {
   getMyAttempt,
@@ -75,7 +76,7 @@ export default function QuizResultPage() {
   if (!quiz || !attempt) {
     return (
       <PageShell titleBn="কুইজের ফলাফল" titleEn="Quiz result">
-        <p>লোড হচ্ছে… / Loading…</p>
+        <Skeleton lines={5} />
       </PageShell>
     );
   }
@@ -106,27 +107,35 @@ export default function QuizResultPage() {
 
   return (
     <PageShell titleBn="কুইজের ফলাফল" titleEn="Quiz result">
-      <h2 style={{ fontSize: 20, margin: '0 0 8px' }}>{quiz.title}</h2>
-      {attempt.kind === 'mcq' ? (
-        <p style={{ fontSize: 20, fontWeight: 700 }}>
-          নম্বর: {attempt.score}/{attempt.totalMarks} ({attempt.percentage}%)
-        </p>
-      ) : attempt.markingStatus === 'pending' ? (
-        <p style={{ fontSize: 17 }}>
-          উত্তর জমা হয়েছে — শিক্ষক মূল্যায়ন করবেন। মূল্যায়ন শেষ হলে এখানে নম্বর দেখা যাবে। / Answers
-          submitted — a teacher will mark them. The score will appear here once marked.
-        </p>
-      ) : (
-        <p style={{ fontSize: 20, fontWeight: 700 }}>
-          নম্বর: {attempt.score}/{attempt.totalMarks} ({attempt.percentage}%) · শিক্ষক মূল্যায়ন করেছেন
-        </p>
-      )}
+      <Card style={{ marginBottom: 20, borderTop: '4px solid #F1B308' }}>
+        <h2 style={{ fontFamily: "'Poppins','Hind Siliguri',system-ui,sans-serif", fontSize: 20, color: '#0A1F44', margin: '0 0 10px' }}>{quiz.title}</h2>
+        {attempt.kind === 'mcq' ? (
+          <>
+            <p style={{ fontSize: 24, fontWeight: 800, color: '#0A1F44', margin: '0 0 10px' }}>
+              নম্বর: {attempt.score}/{attempt.totalMarks} ({attempt.percentage}%)
+            </p>
+            <ProgressBar value={attempt.percentage} label={`Score ${attempt.percentage}%`} />
+          </>
+        ) : attempt.markingStatus === 'pending' ? (
+          <p style={{ fontSize: 16, margin: 0 }}>
+            উত্তর জমা হয়েছে — শিক্ষক মূল্যায়ন করবেন। মূল্যায়ন শেষ হলে এখানে নম্বর দেখা যাবে। / Answers
+            submitted — a teacher will mark them. The score will appear here once marked.
+          </p>
+        ) : (
+          <>
+            <p style={{ fontSize: 24, fontWeight: 800, color: '#0A1F44', margin: '0 0 10px' }}>
+              নম্বর: {attempt.score}/{attempt.totalMarks} ({attempt.percentage}%) · শিক্ষক মূল্যায়ন করেছেন
+            </p>
+            <ProgressBar value={attempt.percentage} label={`Score ${attempt.percentage}%`} />
+          </>
+        )}
+      </Card>
 
       {attempt.answers.map((a, i) => {
         const q = questionByN.get(a.n);
         return (
-          <section key={a.n} style={{ border: '1px solid #ddd', borderRadius: 8, padding: '16px', marginBottom: 16 }}>
-            <h3 style={{ fontSize: 16, margin: '0 0 8px' }}>
+          <Card key={a.n} style={{ marginBottom: 16 }}>
+            <h3 style={{ fontFamily: "'Poppins','Hind Siliguri',system-ui,sans-serif", fontSize: 16, color: '#0A1F44', margin: '0 0 8px' }}>
               {i + 1}. {q?.question ?? ''}
             </h3>
             {attempt.kind === 'mcq' ? (
@@ -134,9 +143,9 @@ export default function QuizResultPage() {
                 <p style={{ margin: '4px 0' }}>
                   আপনার উত্তর: <strong>{a.selected ?? '—'}</strong>{' '}
                   {a.correct ? (
-                    <span style={{ color: '#1a7a1a' }}>✓ সঠিক</span>
+                    <Chip>✓ সঠিক</Chip>
                   ) : (
-                    <span style={{ color: '#b00020' }}>✗ ভুল</span>
+                    <Chip tone="outline"><span style={{ color: '#B00020' }}>✗ ভুল</span></Chip>
                   )}
                 </p>
                 {!a.correct ? (
@@ -148,7 +157,7 @@ export default function QuizResultPage() {
             ) : (
               <>
                 <p style={{ margin: '4px 0', whiteSpace: 'pre-wrap' }}>{a.text || '—'}</p>
-                <p style={{ margin: '4px 0', color: '#555', fontSize: 14 }}>
+                <p style={{ margin: '4px 0', color: '#5A6478', fontSize: 14 }}>
                   {attempt.markingStatus === 'marked'
                     ? `প্রাপ্ত নম্বর: ${a.marks ?? 0}/${q?.marks ?? 0}`
                     : `পূর্ণ নম্বর: ${q?.marks ?? 0}`}
@@ -156,7 +165,7 @@ export default function QuizResultPage() {
               </>
             )}
             {canMark ? (
-              <label style={{ display: 'block', marginTop: 8 }}>
+              <label style={{ display: 'block', marginTop: 10 }}>
                 নম্বর দিন (সর্বোচ্চ {q?.marks ?? 0}):{' '}
                 <input
                   type="number"
@@ -165,30 +174,26 @@ export default function QuizResultPage() {
                   step="0.5"
                   value={marks[a.n] ?? ''}
                   onChange={(e) => setMarks((m) => ({ ...m, [a.n]: e.target.value }))}
-                  style={{ width: 80, padding: '8px', fontSize: 15, borderRadius: 6, border: '1px solid #ccc' }}
+                  className="ev-input"
+                  style={{ width: 96, display: 'inline-block' }}
                 />
               </label>
             ) : null}
-          </section>
+          </Card>
         );
       })}
 
       {canMark ? (
         <div>
-          {markError ? <p style={{ color: '#b00020' }}>{markError}</p> : null}
-          <button
-            type="button"
-            onClick={() => void doMark()}
-            disabled={marking}
-            style={{ padding: '12px 24px', minHeight: 48, fontSize: 16, borderRadius: 6, border: 'none', background: '#0A1F44', color: '#fff', cursor: 'pointer' }}
-          >
-            {marking ? 'সংরক্ষণ হচ্ছে…' : 'মূল্যায়ন সংরক্ষণ করুন'}
-          </button>
+          {markError ? <AlertBox tone="error">{markError}</AlertBox> : null}
+          <Button onClick={() => void doMark()} loading={marking} size="lg">
+            মূল্যায়ন সংরক্ষণ করুন
+          </Button>
         </div>
       ) : null}
 
       <p style={{ marginTop: 24 }}>
-        <Link to="/exam">← সব পরীক্ষা / All exams</Link>
+        <Link to="/exam" style={{ fontWeight: 600 }}>← সব পরীক্ষা / All exams</Link>
       </p>
     </PageShell>
   );

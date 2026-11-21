@@ -10,6 +10,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { PageShell, EmptyState } from '../components/PageShell';
+import { AlertBox, Button, Card, ProgressBar, Skeleton } from '../components/ui';
 import { useAuth } from '../lib/auth';
 import {
   getPublishedQuiz,
@@ -99,7 +100,7 @@ export default function QuizPage() {
   if (!quiz) {
     return (
       <PageShell titleBn="কুইজ" titleEn="Quiz">
-        <p>লোড হচ্ছে… / Loading…</p>
+        <Skeleton lines={5} />
       </PageShell>
     );
   }
@@ -122,24 +123,31 @@ export default function QuizPage() {
 
   return (
     <PageShell titleBn={quiz.title} titleEn={quiz.kind === 'mcq' ? 'MCQ exam' : 'Written exam'}>
-      <p style={{ color: '#555', marginTop: 0 }}>
-        {quiz.questionCount}টি প্রশ্ন · {quiz.totalMarks} নম্বর · সময় {quiz.timeLimitMinutes} মিনিট
-      </p>
-      {secondsLeft !== null ? (
-        <p style={{ fontSize: 18, fontWeight: 700, color: lowTime ? '#b00020' : '#0A1F44' }}>
-          বাকি সময়: {formatTime(secondsLeft)} / Time left: {formatTime(secondsLeft)}
-        </p>
-      ) : null}
-      <p style={{ color: '#555' }}>
-        উত্তর দেওয়া হয়েছে: {answeredCount}/{quiz.questionCount} / Answered: {answeredCount}/{quiz.questionCount}
-      </p>
+      <Card style={{ marginBottom: 20 }}>
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, alignItems: 'center', justifyContent: 'space-between' }}>
+          <p style={{ color: '#5A6478', margin: 0 }}>
+            {quiz.questionCount}টি প্রশ্ন · {quiz.totalMarks} নম্বর · সময় {quiz.timeLimitMinutes} মিনিট
+          </p>
+          {secondsLeft !== null ? (
+            <p style={{ fontSize: 18, fontWeight: 700, color: lowTime ? '#B00020' : '#0A1F44', margin: 0 }}>
+              বাকি সময়: {formatTime(secondsLeft)} / Time left: {formatTime(secondsLeft)}
+            </p>
+          ) : null}
+        </div>
+        <div style={{ marginTop: 12 }}>
+          <ProgressBar value={(answeredCount / quiz.questionCount) * 100} label={`Answered ${answeredCount} of ${quiz.questionCount}`} />
+          <p style={{ color: '#5A6478', margin: '6px 0 0', fontSize: 14 }}>
+            উত্তর দেওয়া হয়েছে: {answeredCount}/{quiz.questionCount} / Answered: {answeredCount}/{quiz.questionCount}
+          </p>
+        </div>
+      </Card>
 
       {quiz.questions.map((q, i) => (
-        <section key={q.n} style={{ border: '1px solid #ddd', borderRadius: 8, padding: '16px', marginBottom: 16 }}>
-          <h2 style={{ fontSize: 17, margin: '0 0 4px' }}>
+        <Card key={q.n} style={{ marginBottom: 16 }}>
+          <h2 style={{ fontFamily: "'Poppins','Hind Siliguri',system-ui,sans-serif", fontSize: 17, color: '#0A1F44', margin: '0 0 4px' }}>
             {i + 1}. {q.question}
           </h2>
-          <p style={{ margin: '0 0 12px', color: '#555', fontSize: 14 }}>
+          <p style={{ margin: '0 0 12px', color: '#5A6478', fontSize: 14 }}>
             {q.marks} নম্বর
             {q.topic ? ` · ${q.topic}` : ''}
           </p>
@@ -150,12 +158,12 @@ export default function QuizPage() {
                   key={o.letter}
                   style={{
                     display: 'block',
-                    padding: '10px 12px',
+                    padding: '12px',
                     marginBottom: 8,
-                    border: selected[q.n] === o.letter ? '2px solid #0A1F44' : '1px solid #ccc',
-                    borderRadius: 6,
+                    border: selected[q.n] === o.letter ? '2px solid #0A1F44' : '1px solid #C9D2E0',
+                    borderRadius: 10,
                     cursor: 'pointer',
-                    background: selected[q.n] === o.letter ? '#eef3fb' : '#fff',
+                    background: selected[q.n] === o.letter ? '#E8EFFA' : '#fff',
                   }}
                 >
                   <input
@@ -176,50 +184,37 @@ export default function QuizPage() {
               onChange={(e) => setTexts((t) => ({ ...t, [q.n]: e.target.value }))}
               rows={5}
               placeholder="আপনার উত্তর এখানে লিখুন… / Write your answer here…"
-              style={{ width: '100%', boxSizing: 'border-box', padding: '10px 12px', fontSize: 15, borderRadius: 6, border: '1px solid #ccc', fontFamily: 'inherit' }}
+              className="ev-textarea"
             />
           )}
-        </section>
+        </Card>
       ))}
 
       {quiz.kind === 'written' ? (
-        <p style={{ color: '#555' }}>
+        <p style={{ color: '#5A6478' }}>
           লিখিত উত্তর শিক্ষক মূল্যায়ন করবেন — জমা দেওয়ার পর তাৎক্ষণিক নম্বর দেখানো হবে না। / Written
           answers are marked by a teacher — no instant score after submitting.
         </p>
       ) : null}
-      {error ? <p style={{ color: '#b00020' }}>{error}</p> : null}
+      {error ? <AlertBox tone="error">{error}</AlertBox> : null}
       {!confirming ? (
-        <button
-          type="button"
-          onClick={() => setConfirming(true)}
-          disabled={submitting}
-          style={{ padding: '12px 24px', minHeight: 48, fontSize: 16, borderRadius: 6, border: 'none', background: '#0A1F44', color: '#fff', cursor: 'pointer' }}
-        >
+        <Button onClick={() => setConfirming(true)} disabled={submitting} size="lg">
           জমা দিন / Submit
-        </button>
+        </Button>
       ) : (
-        <div style={{ border: '1px solid #b00020', borderRadius: 8, padding: '16px', background: '#fdf0f0' }}>
+        <div className="ev-card" style={{ background: '#FDF0F0', borderColor: '#F3C1C8' }}>
           <p style={{ marginTop: 0 }}>
             নিশ্চিত করুন — জমা দেওয়ার পর উত্তর বদলানো যাবে না। / Confirm — answers cannot be changed after
             submitting.
           </p>
-          <button
-            type="button"
-            onClick={() => void doSubmit()}
-            disabled={submitting}
-            style={{ padding: '12px 24px', minHeight: 48, fontSize: 16, borderRadius: 6, border: 'none', background: '#b00020', color: '#fff', cursor: 'pointer', marginRight: 8 }}
-          >
-            {submitting ? 'জমা হচ্ছে…' : 'হ্যাঁ, জমা দিন'}
-          </button>
-          <button
-            type="button"
-            onClick={() => setConfirming(false)}
-            disabled={submitting}
-            style={{ padding: '12px 24px', minHeight: 48, fontSize: 16, borderRadius: 6, border: '1px solid #0A1F44', background: '#fff', color: '#0A1F44', cursor: 'pointer' }}
-          >
-            ফিরে যান
-          </button>
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
+            <Button variant="danger" onClick={() => void doSubmit()} loading={submitting}>
+              হ্যাঁ, জমা দিন
+            </Button>
+            <Button variant="outline" onClick={() => setConfirming(false)} disabled={submitting}>
+              ফিরে যান
+            </Button>
+          </div>
         </div>
       )}
     </PageShell>
