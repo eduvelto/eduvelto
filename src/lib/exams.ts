@@ -27,15 +27,25 @@ import {
   collection,
   deleteDoc,
   doc,
+  getCountFromServer,
   getDoc,
   getDocs,
+  limit,
+  orderBy,
   query,
   serverTimestamp,
   setDoc,
+  startAfter,
   updateDoc,
   where,
+  type DocumentData,
+  type QueryConstraint,
+  type QueryDocumentSnapshot,
 } from 'firebase/firestore';
 import { db } from '../firebase';
+
+/** Quizzes shown per page (owner decision, 21 Nov 2026 — same as books). */
+export const QUIZ_PAGE_SIZE = 50;
 
 export interface QuizOption {
   letter: string;
@@ -136,20 +146,104 @@ function toAttempt(id: string, d: Record<string, unknown>): QuizAttempt {
   };
 }
 
-/** All Published quizzes (one-time read; drafts stay invisible via rules). */
+/** All Published quizzes (one-time read; drafts stay invisible via rules).
+ *
+ * WARNING — unbounded: loads every Published quiz WITH its full questions
+ * array (live: 212 quizzes, ~0.91 MiB; full inventory: 902 quizzes,
+ * ~3.4 MiB). List pages MUST use listPublishedQuizzesPage instead.
+ * Kept only for callers that genuinely need the whole set (none in the
+ * app at the moment — ExamPage uses the paginated version). */
 export async function listPublishedQuizzes(): Promise<Quiz[]> {
   if (!db) return [];
   const snap = await getDocs(
     query(collection(db, 'quizzes'), where('reviewStatus', '==', 'Published')),
   );
   const quizzes = snap.docs.map((s) => toQuiz(s.id, s.data()));
-  quizzes.sort(
-    (a, b) =>
-      a.classLevel.localeCompare(b.classLevel) ||
-      a.department.localeCompare(b.department) ||
-      a.title.localeCompare(b.title),
-  );
+  quizzes.sort(compareQuizzes);
   return quizzes;
+}
+
+/** The Exam list's sort order (class, then department, then title). */
+export function compareQuizzes(a: Quiz, b: Quiz): number {
+  return (
+    a.classLevel.localeCompare(b.classLevel) ||
+    a.department.localeCompare(b.department) ||
+    a.title.localeCompare(b.title)
+  );
+}
+
+export interface QuizFilters {
+  educationType?: string;
+  classLevel?: string;
+  department?: string;
+  kind?: 'mcq' | 'written';
+}
+
+export interface QuizPageResult {
+  items: Quiz[];
+  /** Last document snapshot of this page — the cursor for the next page. Null on an empty page. */
+  lastDoc: QueryDocumentSnapshot<DocumentData> | null;
+  /** True when this page was full, so a next page may exist. */
+  hasMore: boolean;
+}
+
+function quizConstraints(filters: QuizFilters): QueryConstraint[] {
+  const cs: QueryConstraint[] = [where('reviewStatus', '==', 'Published')];
+  if (filters.educationType) cs.push(where('educationType', '==', filters.educationType));
+  if (filters.classLevel) cs.push(where('classLevel', '==', filters.classLevel));
+  if (filters.department) cs.push(where('department', '==', filters.department));
+  if (filters.kind) cs.push(where('kind', '==', filters.kind));
+  return cs;
+}
+
+/**
+ * One page of Published quizzes, server-side (50 reads at most).
+ *
+ * The query orders by `reviewStatus` — the same field the equality filter
+ * constrains — so it needs NO composite index (equality filters on several
+ * fields + orderBy on an equality-constrained field are served by
+ * Firestore's single-field indexes; verified against LIVE Firestore,
+ * read-only, 21 Nov 2026 — see team/pagination-test-report.md §2).
+ * All Published quizzes share that value, so the effective order is
+ * document ID order; each page is re-sorted client-side with
+ * compareQuizzes so the quizzes ON a page appear in the Exam list's usual
+ * order. The GLOBAL order across pages is document-ID order, not the old
+ * class/department/title order — restoring the old global order needs a
+ * composite index (quizzes: reviewStatus, classLevel, department, title),
+ * which is a follow-up for the owner's approval, not built here.
+ *
+ * NOTE on size: each quiz doc carries its full `questions` array, so one
+ * page of 50 is still ~0.21 MiB live (full inventory: ~0.21 MiB). The
+ * full list (0.91 MiB live) is never downloaded at once any more. Making
+ * a page lighter still would need a metadata-only quiz collection — a
+ * data-model change for the owner to approve, not built here.
+ */
+export async function listPublishedQuizzesPage(
+  filters: QuizFilters,
+  cursor: QueryDocumentSnapshot<DocumentData> | null,
+): Promise<QuizPageResult> {
+  if (!db) return { items: [], lastDoc: null, hasMore: false };
+  const constraints: QueryConstraint[] = [
+    ...quizConstraints(filters),
+    orderBy('reviewStatus'),
+    limit(QUIZ_PAGE_SIZE),
+  ];
+  if (cursor) constraints.push(startAfter(cursor));
+  const snap = await getDocs(query(collection(db, 'quizzes'), ...constraints));
+  const quizzes = snap.docs.map((s) => toQuiz(s.id, s.data()));
+  quizzes.sort(compareQuizzes);
+  return {
+    items: quizzes,
+    lastDoc: snap.docs[snap.docs.length - 1] ?? null,
+    hasMore: snap.size === QUIZ_PAGE_SIZE,
+  };
+}
+
+/** How many Published quizzes match the filters (count aggregation: 1 read per 1000 docs). */
+export async function countPublishedQuizzes(filters: QuizFilters): Promise<number> {
+  if (!db) return 0;
+  const snap = await getCountFromServer(query(collection(db, 'quizzes'), ...quizConstraints(filters)));
+  return snap.data().count;
 }
 
 /** One Published quiz by id; null when missing or not Published. */

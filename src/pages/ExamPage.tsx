@@ -1,19 +1,34 @@
-// Eduvelto — Exam list (Phase 2, Step 4).
+// Eduvelto — Exam list (Phase 2, Step 4; pagination 21 Nov 2026).
 //
-// Lists every Published quiz, grouped by book (one row per book with its
-// MCQ + written quizzes), plus the signed-in student's own results.
-// Quizzes are public data; results need sign-in.
+// Server-side pagination: 50 quizzes per page (limit + startAfter), total
+// from a count aggregation — opening /exam no longer downloads every
+// Published quiz WITH its full questions array (live: 212 quizzes,
+// ~0.91 MiB; full inventory: 902 quizzes, ~3.4 MiB). One page of 50 is
+// ~0.21 MiB. The quizzes on a page are grouped by book exactly as before.
+// The exam-taking path is unchanged: QuizPage still reads ONE quiz doc by
+// ID. The "My results" section resolves quiz titles from every page the
+// user has visited this session, plus a single-doc fetch for any attempt
+// whose quiz is not in that set yet.
+//
+// Each server page is sorted client-side in the Exam list's usual order
+// (class, department, title); the GLOBAL order across pages is document-ID
+// order — restoring the old global order needs a composite index (owner
+// follow-up, not built here).
 
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { PageShell, EmptyState } from '../components/PageShell';
 import { useAuth } from '../lib/auth';
 import {
   bookTitleOf,
+  countPublishedQuizzes,
+  getPublishedQuiz,
   listMyAttempts,
-  listPublishedQuizzes,
+  listPublishedQuizzesPage,
+  QUIZ_PAGE_SIZE,
   type Quiz,
   type QuizAttempt,
+  type QuizPageResult,
 } from '../lib/exams';
 
 interface BookGroup {
@@ -63,19 +78,42 @@ function formatDate(a: QuizAttempt): string {
 
 export default function ExamPage() {
   const { user } = useAuth();
-  const [quizzes, setQuizzes] = useState<Quiz[] | null>(null);
+  const [pages, setPages] = useState<QuizPageResult[]>([]);
+  const [pageIndex, setPageIndex] = useState(0);
+  const [total, setTotal] = useState<number | null>(null);
   const [attempts, setAttempts] = useState<QuizAttempt[] | null>(null);
   const [error, setError] = useState('');
+  const [loading, setLoading] = useState(true);
+  // Quiz titles seen on any page visited this session (for the results list).
+  const quizByIdRef = useRef(new Map<string, Quiz>());
+  const [titlesVersion, setTitlesVersion] = useState(0);
+
+  const loadPage = useCallback(
+    async (cursor: QuizPageResult['lastDoc']) => listPublishedQuizzesPage({}, cursor),
+    [],
+  );
 
   useEffect(() => {
     let alive = true;
-    listPublishedQuizzes()
-      .then((qs) => alive && setQuizzes(qs))
-      .catch(() => alive && setError('পরীক্ষার তালিকা লোড করা যায়নি। / Could not load the exam list.'));
+    setLoading(true);
+    Promise.all([loadPage(null), countPublishedQuizzes({})])
+      .then(([first, count]) => {
+        if (!alive) return;
+        for (const q of first.items) quizByIdRef.current.set(q.id, q);
+        setPages([first]);
+        setTotal(count);
+        setTitlesVersion((v) => v + 1);
+        setLoading(false);
+      })
+      .catch(() => {
+        if (!alive) return;
+        setError('পরীক্ষার তালিকা লোড করা যায়নি। / Could not load the exam list.');
+        setLoading(false);
+      });
     return () => {
       alive = false;
     };
-  }, []);
+  }, [loadPage]);
 
   useEffect(() => {
     if (!user) {
@@ -91,22 +129,72 @@ export default function ExamPage() {
     };
   }, [user]);
 
-  const groups = quizzes ? groupByBook(quizzes) : [];
-  const quizById = new Map((quizzes ?? []).map((q) => [q.id, q]));
-  const totalQuestions = (quizzes ?? []).reduce((s, q) => s + q.questionCount, 0);
+  // Resolve titles for results whose quiz is not on a visited page yet.
+  useEffect(() => {
+    if (!attempts) return;
+    const missing = attempts.slice(0, 20).filter((a) => !quizByIdRef.current.has(a.quizId));
+    if (missing.length === 0) return;
+    let alive = true;
+    (async () => {
+      for (const a of missing) {
+        try {
+          const q = await getPublishedQuiz(a.quizId);
+          if (q) quizByIdRef.current.set(q.id, q);
+        } catch {
+          // Title stays the raw quiz id — the result link still works.
+        }
+      }
+      if (alive) setTitlesVersion((v) => v + 1);
+    })();
+    return () => {
+      alive = false;
+    };
+  }, [attempts]);
+
+  const currentPage = pages[pageIndex];
+  const pageQuizzes = currentPage?.items ?? [];
+  const groups = groupByBook(pageQuizzes);
+  // titlesVersion is read so the results list re-renders when titles resolve.
+  void titlesVersion;
+  const quizById = quizByIdRef.current;
+  const pageQuestions = pageQuizzes.reduce((s, q) => s + q.questionCount, 0);
+  const shownFrom = total === 0 ? 0 : pageIndex * QUIZ_PAGE_SIZE + 1;
+  const shownTo = pageIndex * QUIZ_PAGE_SIZE + pageQuizzes.length;
+
+  async function nextPage() {
+    if (!currentPage || !currentPage.hasMore) return;
+    setLoading(true);
+    try {
+      const res = await loadPage(currentPage.lastDoc);
+      for (const q of res.items) quizByIdRef.current.set(q.id, q);
+      setPages((p) => [...p, res]);
+      setPageIndex((i) => i + 1);
+      setTitlesVersion((v) => v + 1);
+    } catch {
+      setError('পরের পাতা লোড করা যায়নি — আবার চেষ্টা করুন। / Could not load the next page — please try again.');
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  function prevPage() {
+    setPageIndex((i) => Math.max(0, i - 1));
+  }
 
   return (
     <PageShell titleBn="পরীক্ষা" titleEn="Exam">
       {error ? <p style={{ color: '#b00020' }}>{error}</p> : null}
-      {quizzes === null ? (
+      {loading && pages.length === 0 ? (
         <p>লোড হচ্ছে… / Loading…</p>
-      ) : quizzes.length === 0 ? (
+      ) : total === 0 ? (
         <EmptyState bn="এখনো কোনো পরীক্ষা প্রকাশিত হয়নি। কনটেন্ট প্রকাশিত হলে এখানে দেখা যাবে।" en="No exam has been published yet. Content will appear here once it is published." />
       ) : (
         <>
           <p style={{ color: '#555', marginTop: 0 }}>
-            {groups.length}টি বই · {quizzes.length}টি পরীক্ষা · {totalQuestions}টি প্রশ্ন / {groups.length} books ·{' '}
-            {quizzes.length} exams · {totalQuestions} questions
+            {total}টি পরীক্ষা প্রকাশিত / {total} exams published
+            {pageQuizzes.length > 0
+              ? ` — এই পাতায় ${groups.length}টি বই · ${pageQuizzes.length}টি পরীক্ষা · ${pageQuestions}টি প্রশ্ন (দেখাচ্ছি ${shownFrom}–${shownTo}) / this page: ${groups.length} books · ${pageQuizzes.length} exams · ${pageQuestions} questions (showing ${shownFrom}–${shownTo})`
+              : ''}
           </p>
           {groups.map((g) => (
             <section key={g.bookId} style={{ border: '1px solid #ddd', borderRadius: 8, padding: '16px', marginBottom: 16 }}>
@@ -145,6 +233,30 @@ export default function ExamPage() {
               ))}
             </section>
           ))}
+          {total !== null && (total > QUIZ_PAGE_SIZE || pageIndex > 0) ? (
+            <div style={{ display: 'flex', gap: 12, alignItems: 'center', marginTop: 16, marginBottom: 8 }}>
+              <button
+                type="button"
+                onClick={prevPage}
+                disabled={pageIndex <= 0}
+                style={{ padding: '10px 16px', minHeight: 44, borderRadius: 6, border: '1px solid #0A1F44', background: '#fff', color: '#0A1F44', cursor: 'pointer' }}
+              >
+                ← আগের / Previous
+              </button>
+              <span>
+                পাতা {pageIndex + 1} / Page {pageIndex + 1}
+                {total > 0 ? ` — মোট ${total}টি পরীক্ষা / ${total} exams total` : ''}
+              </span>
+              <button
+                type="button"
+                onClick={nextPage}
+                disabled={!currentPage?.hasMore || loading}
+                style={{ padding: '10px 16px', minHeight: 44, borderRadius: 6, border: '1px solid #0A1F44', background: '#fff', color: '#0A1F44', cursor: 'pointer' }}
+              >
+                পরের / Next →
+              </button>
+            </div>
+          ) : null}
         </>
       )}
 
