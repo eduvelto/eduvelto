@@ -13,17 +13,7 @@ import { addDoc, collection, serverTimestamp } from 'firebase/firestore';
 import { db } from '../firebase';
 import { useAuth } from '../lib/auth';
 import { PageShell } from '../components/PageShell';
-
-const inputStyle: React.CSSProperties = {
-  width: '100%',
-  boxSizing: 'border-box',
-  padding: '10px 12px',
-  minHeight: 44,
-  fontSize: 16,
-  border: '1px solid #999',
-  borderRadius: 6,
-  fontFamily: 'inherit',
-};
+import { AlertBox, Button } from '../components/ui';
 
 export default function ContactPage() {
   const { user, profile } = useAuth();
@@ -79,10 +69,10 @@ export default function ContactPage() {
           email/number above.
         </p>
       ) : status === 'sent' ? (
-        <p style={{ color: '#0A1F44', fontWeight: 600 }}>
+        <AlertBox tone="ok">
           ধন্যবাদ! আপনার বার্তা পৌঁছেছে — আমরা উত্তর দেব। / Thank you! Your message was received —
           we will reply.
-        </p>
+        </AlertBox>
       ) : (
         <form
           onSubmit={(e) => {
@@ -91,55 +81,45 @@ export default function ContactPage() {
           }}
           style={{ maxWidth: 560 }}
         >
-          <label style={{ display: 'block', marginBottom: 12 }}>
+          <label className="ev-label" style={{ display: 'block', marginBottom: 12 }}>
             নাম / Name *
             <input
               type="text"
               value={name}
               onChange={(e) => setName(e.target.value)}
               maxLength={100}
-              style={{ ...inputStyle, marginTop: 4 }}
+              className="ev-input"
+              style={{ marginTop: 4 }}
               required
             />
           </label>
-          <label style={{ display: 'block', marginBottom: 12 }}>
+          <label className="ev-label" style={{ display: 'block', marginBottom: 12 }}>
             ইমেইল / Email (ঐচ্ছিক / optional)
             <input
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               maxLength={200}
-              style={{ ...inputStyle, marginTop: 4 }}
+              className="ev-input"
+              style={{ marginTop: 4 }}
             />
           </label>
-          <label style={{ display: 'block', marginBottom: 12 }}>
+          <label className="ev-label" style={{ display: 'block', marginBottom: 12 }}>
             বার্তা / Message *
             <textarea
               value={message}
               onChange={(e) => setMessage(e.target.value)}
               maxLength={5000}
               rows={5}
-              style={{ ...inputStyle, marginTop: 4, resize: 'vertical' }}
+              className="ev-textarea"
+              style={{ marginTop: 4 }}
               required
             />
           </label>
-          {error ? <p style={{ color: '#b00020' }}>{error}</p> : null}
-          <button
-            type="submit"
-            disabled={status === 'sending'}
-            style={{
-              padding: '12px 24px',
-              minHeight: 48,
-              fontSize: 16,
-              borderRadius: 6,
-              border: 'none',
-              background: '#0A1F44',
-              color: '#fff',
-              cursor: 'pointer',
-            }}
-          >
-            {status === 'sending' ? 'পাঠানো হচ্ছে… / Sending…' : 'বার্তা পাঠান / Send message'}
-          </button>
+          {error ? <AlertBox tone="error">{error}</AlertBox> : null}
+          <Button type="submit" loading={status === 'sending'} size="lg">
+            বার্তা পাঠান / Send message
+          </Button>
         </form>
       )}
       <p style={{ marginTop: 20, color: '#555', fontSize: 14, lineHeight: 1.6 }}>

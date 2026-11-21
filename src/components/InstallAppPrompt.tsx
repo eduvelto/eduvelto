@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { Button } from './ui';
 
 // PWA install prompt (owner brief 20 Nov 23:53 — installable phone app).
 // Android/Chrome fire `beforeinstallprompt` when the PWA is installable;
@@ -101,8 +102,8 @@ export default function InstallAppPrompt() {
       aria-label="অ্যাপ ইনস্টল / Install app"
       style={{
         background: '#FFF6D6',
-        borderBottom: '2px solid #F1B308',
-        color: '#041742',
+        borderBottom: '2px solid #D9A441',
+        color: '#142B3B',
         padding: '10px 16px',
         display: 'flex',
         flexWrap: 'wrap',
@@ -123,41 +124,13 @@ export default function InstallAppPrompt() {
           : 'Install Eduvelto on your phone.'}
       </span>
       {deferredPrompt ? (
-        <button
-          type="button"
-          onClick={() => void install()}
-          style={{
-            background: '#0A1F44',
-            color: '#fff',
-            border: 'none',
-            borderRadius: 6,
-            padding: '10px 18px',
-            minHeight: 44,
-            fontSize: 15,
-            fontWeight: 700,
-            cursor: 'pointer',
-          }}
-        >
+        <Button onClick={() => void install()} size="sm">
           অ্যাপ ইনস্টল করুন / Install app
-        </button>
+        </Button>
       ) : null}
-      <button
-        type="button"
-        onClick={dismiss}
-        aria-label="বন্ধ করুন / Dismiss"
-        style={{
-          background: 'transparent',
-          border: '1px solid #041742',
-          color: '#041742',
-          borderRadius: 6,
-          padding: '8px 12px',
-          minHeight: 44,
-          fontSize: 15,
-          cursor: 'pointer',
-        }}
-      >
+      <Button variant="ghost" size="sm" onClick={dismiss} aria-label="বন্ধ করুন / Dismiss">
         ✕
-      </button>
+      </Button>
     </div>
   );
 }

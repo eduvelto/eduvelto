@@ -37,7 +37,7 @@ function TestCard({ test, value }: { test: ReportTest; value?: string }) {
   const h = strings.health;
   const verdict = value !== undefined ? verdictFor(test, value) : null;
   return (
-    <article style={{ border: '1px solid #ddd', borderRadius: 8, padding: '16px', marginBottom: 12 }}>
+    <article className="ev-card" style={{ marginBottom: 12 }}>
       <h2 style={{ margin: '0 0 8px', fontSize: 20 }}>
         {test.nameBn} <span style={{ color: '#555', fontSize: 16 }}>({test.nameEn})</span>
       </h2>
@@ -103,7 +103,7 @@ export default function HealthReportPage() {
         value={selectedId}
         onChange={(e) => setSelectedId(e.target.value)}
         aria-label={h.reportPickTest.bn}
-        style={{ width: '100%', padding: '12px', fontSize: 16, borderRadius: 6, border: '1px solid #999', marginBottom: 12 }}
+        className="ev-input" style={{ marginBottom: 12 }}
       >
         <option value="">— {h.reportPickTest.bn} —</option>
         {REPORT_TESTS.map((t) => (
@@ -121,7 +121,7 @@ export default function HealthReportPage() {
             onChange={(e) => setValue(e.target.value)}
             placeholder={h.reportEnterValue.bn}
             aria-label={h.reportEnterValue.bn}
-            style={{ width: '100%', padding: '12px', fontSize: 16, borderRadius: 6, border: '1px solid #999', marginBottom: 16 }}
+            className="ev-input" style={{ marginBottom: 16 }}
           />
           <TestCard test={selected} value={value} />
         </>
@@ -134,7 +134,7 @@ export default function HealthReportPage() {
         placeholder={h.reportPastePlaceholder.bn}
         aria-label={h.reportPaste.bn}
         rows={5}
-        style={{ width: '100%', padding: '12px', fontSize: 16, borderRadius: 6, border: '1px solid #999', marginBottom: 16 }}
+        className="ev-input" style={{ marginBottom: 16 }}
       />
       {pasted.trim() !== '' && matched.length === 0 ? (
         <p>{h.reportNoMatch.bn}</p>

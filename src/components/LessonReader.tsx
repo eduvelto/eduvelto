@@ -20,6 +20,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../lib/auth';
+import { AlertBox, Button } from './ui';
 import { addBookmark, isBookmarked, removeBookmark } from '../lib/bookmarks';
 import { markLessonComplete } from '../lib/progress';
 import type { Lesson } from '../lib/content';
@@ -194,35 +195,26 @@ export default function LessonReader(props: {
 
       <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, marginBottom: 20 }}>
         {user ? (
-          <button
-            type="button"
+          <Button
+            variant={bookmarked ? 'primary' : 'outline'}
             onClick={() => void toggleBookmark()}
-            disabled={bookmarkBusy}
-            style={{ padding: '10px 16px', minHeight: 44, borderRadius: 6, border: '1px solid #0A1F44', background: bookmarked ? '#0A1F44' : '#fff', color: bookmarked ? '#fff' : '#0A1F44', cursor: 'pointer', fontSize: 15 }}
+            loading={bookmarkBusy}
           >
             {bookmarked ? '★ বুকমার্ক করা আছে / Bookmarked' : '☆ বুকমার্ক করুন / Bookmark'}
-          </button>
+          </Button>
         ) : (
-          <Link to="/login" style={{ padding: '10px 16px', border: '1px solid #0A1F44', borderRadius: 6, textDecoration: 'none' }}>
+          <Link to="/login" className="ev-btn ev-btn-outline">
             বুকমার্ক করতে লগইন করুন / Log in to bookmark
           </Link>
         )}
         {speaking ? (
-          <button
-            type="button"
-            onClick={stopSpeaking}
-            style={{ padding: '10px 16px', minHeight: 44, borderRadius: 6, border: '1px solid #b00020', background: '#fff', color: '#b00020', cursor: 'pointer', fontSize: 15 }}
-          >
+          <Button variant="danger" onClick={stopSpeaking}>
             ■ থামান / Stop
-          </button>
+          </Button>
         ) : (
-          <button
-            type="button"
-            onClick={speak}
-            style={{ padding: '10px 16px', minHeight: 44, borderRadius: 6, border: '1px solid #0A1F44', background: '#fff', color: '#0A1F44', cursor: 'pointer', fontSize: 15 }}
-          >
+          <Button variant="outline" onClick={speak}>
             🔊 শুনুন / Listen
-          </button>
+          </Button>
         )}
       </div>
       {noBanglaVoice ? (
@@ -231,12 +223,12 @@ export default function LessonReader(props: {
           was found on this device, so the default voice is used.
         </p>
       ) : null}
-      {error ? <p style={{ color: '#b00020' }}>{error}</p> : null}
+      {error ? <AlertBox tone="error">{error}</AlertBox> : null}
 
       {intro ? (
         <div style={{ marginBottom: 24 }}>
           {intro.split('\n\n').map((para, i) => (
-            <p key={i} style={{ lineHeight: 1.7 }}>{para}</p>
+            <p key={i} style={{ lineHeight: 1.8 }}>{para}</p>
           ))}
         </div>
       ) : null}
@@ -270,7 +262,7 @@ export default function LessonReader(props: {
                       const isPicked = pick === opt.letter;
                       const bg = pick
                         ? isCorrect
-                          ? '#e6f4ea'
+                          ? '#E8EFFA'
                           : isPicked
                             ? '#fdecea'
                             : '#fff'
@@ -293,7 +285,7 @@ export default function LessonReader(props: {
                       <p style={{ margin: '4px 0 0', fontSize: 14 }}>
                         {q.correctLetter !== '' ? (
                           pick === q.correctLetter ? (
-                            <span style={{ color: '#137333' }}>সঠিক! / Correct!</span>
+                            <span style={{ color: '#1E7CE8', fontWeight: 700 }}>সঠিক! / Correct!</span>
                           ) : (
                             <span>
                               সঠিক উত্তর: <strong>{q.correctLetter}) {q.correctText}</strong>
@@ -307,13 +299,12 @@ export default function LessonReader(props: {
                   </div>
                 ) : (
                   <div>
-                    <button
-                      type="button"
+                    <Button
+                      variant="outline"
                       onClick={() => setRevealed((r) => ({ ...r, [q.label]: !r[q.label] }))}
-                      style={{ padding: '8px 14px', minHeight: 40, borderRadius: 6, border: '1px solid #0A1F44', background: '#fff', color: '#0A1F44', cursor: 'pointer', fontSize: 14 }}
                     >
                       {show ? 'উত্তর লুকান / Hide answer' : 'সহজ উত্তর দেখুন / Show simple answer'}
-                    </button>
+                    </Button>
                     {show ? (
                       <div style={{ marginTop: 8, padding: '12px', background: '#f7f9fc', borderRadius: 6, lineHeight: 1.7 }}>
                         {answerText ? <p style={{ margin: '0 0 8px' }}>{answerText}</p> : null}
@@ -329,10 +320,10 @@ export default function LessonReader(props: {
         </ol>
       )}
 
-      <div style={{ marginTop: 28, padding: '16px', border: '1px solid #ddd', borderRadius: 8, background: '#fafafa' }}>
+      <div className="ev-card" style={{ marginTop: 28, background: '#F7F9FC' }}>
         {user ? (
           completed ? (
-            <p style={{ margin: 0, color: '#137333' }}>
+            <p style={{ margin: 0, color: '#1E7CE8', fontWeight: 700 }}>
               ✓ পড়া শেষ হিসেবে সংরক্ষণ করা হয়েছে — আপনার অগ্রগতি পাতায় দেখা যাবে। / Saved as
               read — see your Progress page.
             </p>
@@ -344,14 +335,9 @@ export default function LessonReader(props: {
                 / You tried {attemptedCount} questions in this lesson
                 {attemptedCount > 0 ? `, ${correctCount} MCQ correct` : ''}.
               </p>
-              <button
-                type="button"
-                onClick={() => void completeLesson()}
-                disabled={completeBusy}
-                style={{ padding: '12px 20px', minHeight: 48, borderRadius: 6, border: 'none', background: '#0A1F44', color: '#fff', cursor: 'pointer', fontSize: 16 }}
-              >
+              <Button onClick={() => void completeLesson()} loading={completeBusy} size="lg">
                 পড়া শেষ করেছি / Mark lesson complete
-              </button>
+              </Button>
             </>
           )
         ) : (
