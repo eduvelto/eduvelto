@@ -24,8 +24,9 @@
  *          JAVA_TOOL_OPTIONS="-Djava.net.preferIPv4Stack=true" \
  *            npx firebase emulators:start --only firestore,auth \
  *            --config firebase.alt-ports.json
- *        (firebase.alt-ports.json: firestore 8081, auth 9098)
- *     2. AI_CHAT_FIRESTORE_PORT=8081 AI_CHAT_AUTH_PORT=9098 \
+ *        (firebase.alt-ports.json: firestore 8082, auth 9098 — 8080/8081
+ *        are held by other workstreams' emulators)
+ *     2. AI_CHAT_FIRESTORE_PORT=8082 \
  *          npx vitest run emulator-tests/ai-chat.test.ts
  *   The ports below default to 8080/9099, so `npm run test:rules`
  *   needs no env vars. The emulator loads firestore.rules from
@@ -298,14 +299,14 @@ describe('AI Chat security rules', () => {
 
   // (e) Platform-wide daily totals — readable by all signed-in users, writable by nobody.
   it('(e1) signed-in user reading platform totals is ALLOWED', async () => {
-    await assertSucceeds(getDoc(doc(asStudent1(), 'aiUsagePlatform', 'daily', '2026-11-21')));
+    await assertSucceeds(getDoc(doc(asStudent1(), 'aiUsagePlatform', '2026-11-21')));
   });
   it('(e2) unauthenticated read of platform totals is DENIED', async () => {
-    await assertFails(getDoc(doc(unauth(), 'aiUsagePlatform', 'daily', '2026-11-21')));
+    await assertFails(getDoc(doc(unauth(), 'aiUsagePlatform', '2026-11-21')));
   });
   it('(e3) client writing platform totals is DENIED (gateway-only)', async () => {
     await assertFails(
-      setDoc(doc(asOwner(), 'aiUsagePlatform', 'daily', '2026-11-21'), {
+      setDoc(doc(asOwner(), 'aiUsagePlatform', '2026-11-21'), {
         date: '2026-11-21',
         totalExchanges: 1,
         totalImages: 0,

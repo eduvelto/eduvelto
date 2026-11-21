@@ -965,6 +965,12 @@ service cloud.firestore {
       // no extra get() on the parent conversation.
       allow read: if signedIn() && resource.data.ownerId == uid();
       allow create: if signedIn() && callerActive()
+        // The parent conversation must belong to the caller — without
+        // this, any student could write into ANY conversation (only
+        // their own ownerId/senderId on the message, which they
+        // control). The data layer checks ownership too, but the rule
+        // is the enforcement point.
+        && get(/databases/$(database)/documents/aiConversations/$(conversationId)).data.ownerId == uid()
         && request.resource.data.keys().hasOnly(['role', 'senderId', 'ownerId', 'body', 'createdAt'])
         && request.resource.data.ownerId == uid()
         && request.resource.data.senderId == uid()
@@ -1013,7 +1019,11 @@ service cloud.firestore {
     // the platform limit is nearly reached. Writable ONLY by the
     // gateway (Admin SDK) — never by clients: a client-written total
     // would be trivially forgeable and is not a quota.
-    match /aiUsagePlatform/daily/{dateId} {
+    // NOTE (21 Nov 2026 fix): the path is aiUsagePlatform/{dateId}
+    // (2 segments). The earlier aiUsagePlatform/daily/{dateId} was a
+    // 3-segment path — invalid as a document reference in the client
+    // SDK (doc() throws) and unreachable in rules.
+    match /aiUsagePlatform/{dateId} {
       allow read: if signedIn();
       allow create, update, delete: if false;
     }

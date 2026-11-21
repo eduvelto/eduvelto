@@ -16,7 +16,7 @@
 // - aiUsage/{uid}/daily/{yyyy-mm-dd} — per-user daily counters
 //   (exchanges, images, voice minutes, estimated cost in BDT).
 //   Counters only ever increase (rules enforce monotonicity).
-// - aiUsagePlatform/daily/{yyyy-mm-dd} — platform totals for the
+// - aiUsagePlatform/{yyyy-mm-dd} — platform totals for the
 //   free-tier 500-requests/day ceiling. Readable by any signed-in user
 //   (so the UI can warn when the platform limit is nearly reached);
 //   writable ONLY by the gateway (Admin SDK) — never by clients.
@@ -51,7 +51,9 @@ import {
   writeBatch,
   type DocumentData,
   type DocumentSnapshot,
+  type Query,
   type QueryDocumentSnapshot,
+  type QuerySnapshot,
   type Timestamp,
 } from 'firebase/firestore';
 import { db } from '../firebase';
@@ -304,13 +306,15 @@ export async function deleteConversation(uid: string, conversationId: string): P
   let last: DocumentSnapshot<DocumentData> | null = null;
   for (;;) {
     const col = collection(firestore, 'aiConversations', conversationId, 'messages');
-    const q = last
+    // Explicit Query type: without it tsc infers `q` circularly
+    // (TS7022) from the two query() overloads in the ternary.
+    const q: Query<DocumentData> = last
       ? query(col, orderBy('createdAt', 'desc'), startAfter(last), limit(100))
       : query(col, orderBy('createdAt', 'desc'), limit(100));
-    const snap = await getDocs(q);
+    const snap: QuerySnapshot<DocumentData> = await getDocs(q);
     if (snap.empty) break;
     const batch = writeBatch(firestore);
-    snap.docs.forEach((d) => batch.delete(d.ref));
+    snap.docs.forEach((d: QueryDocumentSnapshot<DocumentData>) => batch.delete(d.ref));
     await batch.commit();
     last = snap.docs[snap.docs.length - 1];
     if (snap.docs.length < 100) break;
@@ -347,7 +351,7 @@ export async function getTodayAiUsage(uid: string, date = todayKey()): Promise<A
 /** Read today's platform totals (0 when no doc exists yet). Gateway-written only. */
 export async function getTodayPlatformUsage(date = todayKey()): Promise<AiPlatformUsage> {
   const firestore = requireDb();
-  const snap = await getDoc(doc(firestore, 'aiUsagePlatform', 'daily', date));
+  const snap = await getDoc(doc(firestore, 'aiUsagePlatform', date));
   if (!snap.exists()) return { date, totalExchanges: 0, totalImages: 0, updatedAt: null };
   const d = snap.data();
   return {
