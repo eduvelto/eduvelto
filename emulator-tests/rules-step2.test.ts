@@ -72,7 +72,7 @@ async function seed() {
 beforeAll(async () => {
   env = await initializeTestEnvironment({
     projectId: PROJECT_ID,
-    firestore: { host: '127.0.0.1', port: 8080 },
+    firestore: { host: '127.0.0.1', port: Number(process.env.FIRESTORE_EMULATOR_PORT ?? 8080) },
   });
   await seed();
 }, 120000);

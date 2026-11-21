@@ -62,6 +62,34 @@ service cloud.firestore {
     function isDraftStatus(s) { return s in ['Not Started', 'In Progress', 'Under Review']; }
     function isPublished(d) { return d.get('reviewStatus', '') == 'Published'; }
 
+    // ---------- users.verificationStatus ----------
+    // OWNER DECISION 21 Nov 2026 — student identity verification is
+    // REMOVED entirely. `users.verificationStatus` is ONLY the mirror of
+    // a teacherVerifications record (teacher verification); it is NEVER
+    // a student-verification state, and NO access decision for a student
+    // may ever read it. The transitions below are exactly the four
+    // writes admin.ts performs for the teacher flow:
+    //   approve: absent/'pending' -> 'verified' (+ role becomes 'teacher')
+    //   reject:  absent/'pending' -> 'rejected' (role stays student)
+    //   revoke:  'verified' -> 'revoked' (+ role returns to 'student')
+    //   reopen:  'rejected'/'revoked'/'verified' -> 'pending'
+    // Anything else — in particular putting a fresh student into
+    // 'pending' or 'verified' — is denied, so a student can never be
+    // gated by a verification state again. Called from both the admin
+    // and the owner update rules on /users/{userId} below.
+    function validVerificationTransition() {
+      return !('verificationStatus' in request.resource.data.diff(resource.data).affectedKeys())
+        || (request.resource.data.verificationStatus == 'verified'
+            && request.resource.data.role == 'teacher')
+        || (request.resource.data.verificationStatus == 'pending'
+            && (request.resource.data.role == 'teacher'
+                || resource.data.get('verificationStatus', '') in ['rejected', 'revoked', 'verified']))
+        || (request.resource.data.verificationStatus == 'rejected'
+            && resource.data.get('verificationStatus', '') in ['pending', ''])
+        || (request.resource.data.verificationStatus == 'revoked'
+            && resource.data.get('verificationStatus', '') == 'verified');
+    }
+
     // ---------- users ----------
     // A user reads/writes only their own doc. Role and verificationStatus
     // can NEVER be changed by the owner of the doc — only Admin/Owner.
@@ -111,6 +139,7 @@ service cloud.firestore {
             || request.resource.data.role in ['admin', 'moderator', 'teacher', 'student', 'parent'])
         && (!('verificationStatus' in request.resource.data)
             || request.resource.data.verificationStatus in ['pending', 'verified', 'rejected', 'revoked'])
+        && validVerificationTransition()
         && (!('isActive' in request.resource.data) || request.resource.data.isActive is bool)
         && (!('suspendedReason' in request.resource.data)
             || request.resource.data.suspendedReason is string
@@ -139,6 +168,7 @@ service cloud.firestore {
             || request.resource.data.role in ['admin', 'moderator', 'teacher', 'student', 'parent'])
         && (!('verificationStatus' in request.resource.data.diff(resource.data).affectedKeys())
             || request.resource.data.verificationStatus in ['pending', 'verified', 'rejected', 'revoked'])
+        && validVerificationTransition()
         && (!('isActive' in request.resource.data) || request.resource.data.isActive is bool)
         && isOptStr(request.resource.data.displayName, 100);
       allow delete: if false; // accounts are suspended (isActive=false), never deleted by clients

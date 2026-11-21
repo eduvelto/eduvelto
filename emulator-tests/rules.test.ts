@@ -56,7 +56,7 @@
  * here BEFORE they are deployed to the live project. Do NOT deploy
  * firestore.rules to production unverified.
  */
-import { describe, it, beforeAll, afterAll } from 'vitest';
+import { describe, it, beforeAll, afterAll, expect } from 'vitest';
 import {
   initializeTestEnvironment,
   assertSucceeds,
@@ -110,6 +110,40 @@ async function seed() {
       role: 'student',
       language: 'bn',
       isActive: true,
+    });
+    // (sv) Student-verification-removal fixtures (owner decision 21 Nov 2026):
+    // fresh students carry NO verificationStatus at all, exactly like the
+    // live accounts; the teacher/applicant fixtures carry the
+    // teacher-verification mirror states the admin.ts flows write.
+    await setDoc(doc(db, 'users', 'sv-fresh'), {
+      displayName: 'SV Fresh Student',
+      email: 'sv-fresh@example.com',
+      role: 'student',
+      language: 'bn',
+      isActive: true,
+    });
+    await setDoc(doc(db, 'users', 'sv-applicant'), {
+      displayName: 'SV Teacher Applicant',
+      email: 'sv-applicant@example.com',
+      role: 'student',
+      language: 'bn',
+      isActive: true,
+    });
+    await setDoc(doc(db, 'users', 'sv-teacher'), {
+      displayName: 'SV Verified Teacher',
+      email: 'sv-teacher@example.com',
+      role: 'teacher',
+      language: 'bn',
+      isActive: true,
+      verificationStatus: 'verified',
+    });
+    await setDoc(doc(db, 'users', 'sv-rejected'), {
+      displayName: 'SV Rejected Applicant',
+      email: 'sv-rejected@example.com',
+      role: 'student',
+      language: 'bn',
+      isActive: true,
+      verificationStatus: 'rejected',
     });
     await setDoc(doc(db, 'users', 'moderator-1'), {
       displayName: 'Moderator',
@@ -235,7 +269,7 @@ beforeAll(async () => {
     // NOTE: no `rules:` option — see header comment (loadFirestoreRules
     // fails with "http2 exception" in this environment; the emulator loads
     // firestore.rules from firebase.json at startup instead).
-    firestore: { host: '127.0.0.1', port: 8080 },
+    firestore: { host: '127.0.0.1', port: Number(process.env.FIRESTORE_EMULATOR_PORT ?? 8080) },
   });
   await seed();
 }, 120000); // 120s: first Firestore ops on a cold emulator take ~2s each in this sandbox
@@ -424,14 +458,17 @@ describe('Eduvelto security rules', () => {
       updateDoc(doc(asOwner(), 'users', 'admin-1'), { displayName: 'Renamed by owner' }),
     );
   });
-  it('(i2) owner updating their own doc (incl. verificationStatus) is ALLOWED', async () => {
-    // The self-update rule alone forbids verificationStatus — only the
-    // owner rule can allow this, so it proves the owner rule specifically.
+  it('(i2) owner updating their own doc is ALLOWED — but verificationStatus is teacher-only', async () => {
+    // The owner may update their own displayName (proves the owner rule
+    // specifically — the self-update rule alone forbids verificationStatus).
     await assertSucceeds(
-      updateDoc(doc(asOwner(), 'users', 'owner-1'), {
-        displayName: 'Owner Renamed',
-        verificationStatus: 'verified',
-      }),
+      updateDoc(doc(asOwner(), 'users', 'owner-1'), { displayName: 'Owner Renamed' }),
+    );
+    // (sv) 21 Nov 2026 — student verification removed: verificationStatus
+    // is the mirror of a teacherVerifications record ONLY, so setting
+    // 'verified' on the owner's own (owner-role) doc is now DENIED.
+    await assertFails(
+      updateDoc(doc(asOwner(), 'users', 'owner-1'), { verificationStatus: 'verified' }),
     );
   });
   it('(i3) admin updating the owner’s document is DENIED', async () => {
@@ -1056,5 +1093,137 @@ describe('Eduvelto security rules', () => {
       markingStatus: 'pending',
     });
     await assertSucceeds(getDoc(doc(asModerator(), 'users', 'student-1', 'quizAttempts', ref.id)));
+  });
+
+  // (sv) Student verification removal (owner decision 21 Nov 2026).
+  // `users.verificationStatus` is the mirror of a teacherVerifications
+  // record ONLY — a student is never gated on it. These tests prove the
+  // four legitimate teacher-flow writes still pass (sv6–sv8) while no
+  // fresh student can be put into a verification state (sv2, sv3, sv5).
+  const asSvFresh = () => env.authenticatedContext('sv-fresh').firestore();
+  const asSvApplicant = () => env.authenticatedContext('sv-applicant').firestore();
+  const asSvNew = () => env.authenticatedContext('sv-new').firestore();
+
+  it('(sv0) a brand-new student creates their own doc with NO verificationStatus — ALLOWED; with it — DENIED', async () => {
+    await assertSucceeds(
+      setDoc(doc(asSvNew(), 'users', 'sv-new'), {
+        displayName: 'SV New Student',
+        email: 'sv-new@example.com',
+        role: 'student',
+        language: 'bn',
+      }),
+    );
+    await assertFails(
+      setDoc(doc(asSvNew(), 'users', 'sv-new'), {
+        displayName: 'SV New Student',
+        email: 'sv-new@example.com',
+        role: 'student',
+        language: 'bn',
+        verificationStatus: 'pending',
+      }),
+    );
+  });
+  it('(sv1) existing student with no verificationStatus uses the app normally — ALLOWED', async () => {
+    const db = asSvFresh();
+    const snap = await getDoc(doc(db, 'users', 'sv-fresh'));
+    expect(snap.exists()).toBe(true);
+    expect(snap.data()?.verificationStatus).toBeUndefined();
+    await assertSucceeds(getDoc(doc(db, 'users', 'sv-fresh')));
+    await assertSucceeds(updateDoc(doc(db, 'users', 'sv-fresh'), { displayName: 'SV Fresh Renamed' }));
+    await assertSucceeds(getDoc(doc(db, 'lessons', 'lesson-published')));
+    await assertSucceeds(
+      addDoc(collection(db, 'bookmarks'), { userId: 'sv-fresh', lessonId: 'lesson-published', title: 'A lesson' }),
+    );
+    await assertSucceeds(
+      addDoc(collection(db, 'users', 'sv-fresh', 'quizAttempts'), {
+        quizId: 'quiz1',
+        answers: [0, 1],
+        score: 1,
+        totalMarks: 2,
+        percentage: 50,
+        startedAt: new Date(),
+        submittedAt: new Date(),
+      }),
+    );
+  });
+  it('(sv2) admin setting verificationStatus=verified on a fresh student (no role change) is DENIED', async () => {
+    await assertFails(
+      updateDoc(doc(asAdmin(), 'users', 'sv-fresh'), { verificationStatus: 'verified', verifiedBy: 'admin-1' }),
+    );
+  });
+  it('(sv3) admin setting verificationStatus=pending on a fresh student is DENIED', async () => {
+    await assertFails(
+      updateDoc(doc(asAdmin(), 'users', 'sv-fresh'), { verificationStatus: 'pending', verifiedBy: 'admin-1' }),
+    );
+  });
+  it('(sv4) admin setting verificationStatus=rejected on a fresh student (reject mirror) is ALLOWED', async () => {
+    await assertSucceeds(
+      updateDoc(doc(asAdmin(), 'users', 'sv-fresh'), { verificationStatus: 'rejected', verifiedBy: 'admin-1' }),
+    );
+  });
+  it('(sv5) admin setting verificationStatus=revoked on a never-verified student is DENIED', async () => {
+    await assertFails(
+      updateDoc(doc(asAdmin(), 'users', 'sv-applicant'), { verificationStatus: 'revoked', verifiedBy: 'admin-1' }),
+    );
+  });
+  it('(sv6) approve mirror: admin sets role=teacher + verificationStatus=verified is ALLOWED', async () => {
+    await assertSucceeds(
+      updateDoc(doc(asAdmin(), 'users', 'sv-applicant'), {
+        role: 'teacher',
+        verificationStatus: 'verified',
+        verifiedBy: 'admin-1',
+        verifiedAt: new Date(),
+      }),
+    );
+    const snap = await getDoc(doc(asAdmin(), 'users', 'sv-applicant'));
+    expect(snap.data()?.role).toBe('teacher');
+    expect(snap.data()?.verificationStatus).toBe('verified');
+  });
+  it('(sv7) revoke mirror: admin sets role=student + verificationStatus=revoked on a verified teacher is ALLOWED', async () => {
+    await assertSucceeds(
+      updateDoc(doc(asAdmin(), 'users', 'sv-teacher'), {
+        role: 'student',
+        verificationStatus: 'revoked',
+        verifiedBy: 'admin-1',
+        verifiedAt: new Date(),
+      }),
+    );
+    const snap = await getDoc(doc(asAdmin(), 'users', 'sv-teacher'));
+    expect(snap.data()?.role).toBe('student');
+    expect(snap.data()?.verificationStatus).toBe('revoked');
+  });
+  it('(sv8) reopen mirror: admin sets verificationStatus=pending on a rejected applicant is ALLOWED', async () => {
+    await assertSucceeds(
+      updateDoc(doc(asAdmin(), 'users', 'sv-rejected'), { verificationStatus: 'pending', verifiedBy: 'admin-1' }),
+    );
+    const snap = await getDoc(doc(asAdmin(), 'users', 'sv-rejected'));
+    expect(snap.data()?.verificationStatus).toBe('pending');
+  });
+  it('(sv9) guardian linking still needs admin activation: student creates pending link, cannot activate it, admin can', async () => {
+    const ref = await addDoc(collection(asSvFresh(), 'parentLinks'), {
+      parentId: 'sv-parent',
+      studentId: 'sv-fresh',
+      status: 'pending',
+    });
+    await assertFails(updateDoc(doc(asSvFresh(), 'parentLinks', ref.id), { status: 'active' }));
+    await assertSucceeds(updateDoc(doc(asAdmin(), 'parentLinks', ref.id), { status: 'active' }));
+  });
+  it('(sv10) a verified teacher can create draft content; a student cannot publish — teacher gate intact', async () => {
+    // sv-applicant became a verified teacher in sv6; sv-teacher was
+    // revoked back to student in sv7, so the applicant is the teacher here.
+    await assertSucceeds(
+      addDoc(collection(asSvApplicant(), 'lessons'), {
+        title: 'Teacher draft',
+        body: 'Draft body.',
+        reviewStatus: 'Under Review',
+      }),
+    );
+    await assertFails(
+      addDoc(collection(asSvFresh(), 'lessons'), {
+        title: 'Student publish attempt',
+        body: 'Trying to publish.',
+        reviewStatus: 'Published',
+      }),
+    );
   });
 });
