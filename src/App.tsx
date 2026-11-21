@@ -52,6 +52,7 @@ const CeoTeamPage = lazy(() => import('./pages/CeoTeamPage'));
 const CeoContentPage = lazy(() => import('./pages/CeoContentPage'));
 const CeoGrowthPage = lazy(() => import('./pages/CeoGrowthPage'));
 const CeoSettingsPage = lazy(() => import('./pages/CeoSettingsPage'));
+const CeoApprovalsPage = lazy(() => import('./pages/CeoApprovalsPage'));
 const AiTeacherPage = lazy(() => import('./pages/AiTeacherPage'));
 const ExamPage = lazy(() => import('./pages/ExamPage'));
 const RoutinePage = lazy(() => import('./pages/RoutinePage'));
@@ -248,6 +249,7 @@ export default function App() {
           <Route path="content" element={<CeoContentPage />} />
           <Route path="growth" element={<CeoGrowthPage />} />
           <Route path="settings" element={<CeoSettingsPage />} />
+          <Route path="approvals" element={<CeoApprovalsPage />} />
         </Route>
         <Route path="/ai-teacher" element={<AiTeacherPage />} />
         <Route path="/exam" element={<ExamPage />} />
