@@ -76,16 +76,31 @@ service cloud.firestore {
         && request.resource.data.role == 'student'
         && !('verificationStatus' in request.resource.data)
         && !('isActive' in request.resource.data)
+        // Date of birth is OPTIONAL at registration and may be set later
+        // (Profile page, set-once). When present it must be a real past
+        // date — the DM age gates (messenger section) read it.
+        && (!('dateOfBirth' in request.resource.data)
+            || (request.resource.data.dateOfBirth is timestamp
+                && request.resource.data.dateOfBirth < request.time
+                && request.resource.data.dateOfBirth > timestamp.date(1900, 1, 1)))
         && isStr(request.resource.data.displayName, 100)
         && request.resource.data.email is string
         && request.resource.data.language in ['bn', 'en'];
       allow update: if isOwner(userId)
         // The update may touch ONLY these fields; role, verificationStatus
         // and isActive are excluded, so they cannot change here.
+        // dateOfBirth may be SET once (when missing) but NEVER changed
+        // afterwards — age must not be editable after the fact.
         && request.resource.data.diff(resource.data).affectedKeys()
              .hasOnly(['displayName', 'educationType', 'board', 'institution',
                        'academicYear', 'program', 'department', 'classLevel',
-                       'language', 'lastActiveAt', 'updatedAt'])
+                       'language', 'lastActiveAt', 'updatedAt', 'dateOfBirth'])
+        && (!('dateOfBirth' in request.resource.data.diff(resource.data).affectedKeys())
+            || (request.resource.data.dateOfBirth is timestamp
+                && request.resource.data.dateOfBirth < request.time
+                && request.resource.data.dateOfBirth > timestamp.date(1900, 1, 1)))
+        && (!('dateOfBirth' in resource.data)
+            || request.resource.data.dateOfBirth == resource.data.dateOfBirth)
         && isOptStr(request.resource.data.displayName, 100);
       // Admin/Owner change role / verificationStatus / isActive, and only
       // they may do so — and only to valid enum values.
@@ -106,12 +121,13 @@ service cloud.firestore {
         && resource.data.role != 'owner'
         && request.resource.data.diff(resource.data).affectedKeys()
              .hasOnly(['role', 'verificationStatus', 'isActive', 'suspendedReason',
-                       'verifiedBy', 'verifiedAt', 'updatedAt'])
+                       'verifiedBy', 'verifiedAt', 'updatedAt', 'dmSuspended'])
         && (!('role' in request.resource.data)
             || request.resource.data.role in ['admin', 'moderator', 'teacher', 'student', 'parent'])
         && (!('verificationStatus' in request.resource.data)
             || request.resource.data.verificationStatus in ['pending', 'verified', 'rejected', 'revoked'])
         && (!('isActive' in request.resource.data) || request.resource.data.isActive is bool)
+        && (!('dmSuspended' in request.resource.data) || request.resource.data.dmSuspended is bool)
         && (!('suspendedReason' in request.resource.data)
             || request.resource.data.suspendedReason is string
             || request.resource.data.suspendedReason == null)
@@ -129,7 +145,7 @@ service cloud.firestore {
                        'academicYear', 'program', 'department', 'classLevel',
                        'language', 'lastActiveAt', 'role', 'verificationStatus',
                        'isActive', 'suspendedReason', 'verifiedBy', 'verifiedAt',
-                       'updatedAt'])
+                       'updatedAt', 'dmSuspended'])
         // Role may NEVER be *changed to* 'owner' — but the owner's own doc
         // already carries role 'owner', and request.resource.data is the
         // FULL post-update document, so 'role' in request.resource.data is
@@ -140,6 +156,7 @@ service cloud.firestore {
         && (!('verificationStatus' in request.resource.data.diff(resource.data).affectedKeys())
             || request.resource.data.verificationStatus in ['pending', 'verified', 'rejected', 'revoked'])
         && (!('isActive' in request.resource.data) || request.resource.data.isActive is bool)
+        && (!('dmSuspended' in request.resource.data) || request.resource.data.dmSuspended is bool)
         && isOptStr(request.resource.data.displayName, 100);
       allow delete: if false; // accounts are suspended (isActive=false), never deleted by clients
     }
@@ -375,7 +392,7 @@ service cloud.firestore {
         && request.resource.data.reporterId == uid()
         && request.resource.data.status == 'open'
         && request.resource.data.reason in ['spam', 'abuse', 'copyright', 'personal-info', 'other']
-        && request.resource.data.targetType in ['post', 'comment', 'socialPost', 'user', 'message']
+        && request.resource.data.targetType in ['post', 'comment', 'socialPost', 'user', 'message', 'groupMessage', 'conversation']
         && request.resource.data.targetId is string
         && request.resource.data.targetAuthorId is string
         && isOptStr(request.resource.data.details, 2000);
@@ -642,19 +659,43 @@ service cloud.firestore {
         && isStr(request.resource.data.body, 500);
       allow update, delete: if isModerator();
     }
+    // Educational groups (messenger work, 21 Nov 2026): admin-created,
+    // member-only. The group doc itself carries only public-safe fields
+    // (name, description, status) so any signed-in user may discover it;
+    // group MESSAGES are member-only (see /groupMessages below) and
+    // moderators may read them (groups are moderated spaces, unlike
+    // private DMs). Membership is by request (pending) or direct add by
+    // a moderator (active). Membership doc id is `{groupId}_{userId}`.
     match /studyGroups/{groupId} {
-      allow read: if isPublished(resource.data) || isModerator();
-      allow create: if signedIn() && callerActive() && request.resource.data.reviewStatus == 'Under Review'
-        && isStr(request.resource.data.name, 100) && isStr(request.resource.data.description, 500);
-      allow update: if isModerator();
+      allow read: if signedIn();
+      allow create: if isModerator()
+        && request.resource.data.keys().hasOnly(['name', 'description', 'status', 'createdBy', 'createdAt', 'updatedAt', 'memberCount'])
+        && isStr(request.resource.data.name, 100)
+        && isStr(request.resource.data.description, 500)
+        && request.resource.data.status == 'active'
+        && request.resource.data.createdBy == uid()
+        && request.resource.data.createdAt is timestamp
+        && request.resource.data.get('memberCount', 0) == 0;
+      allow update: if isModerator()
+        && request.resource.data.diff(resource.data).affectedKeys()
+             .hasOnly(['name', 'description', 'status', 'updatedAt', 'memberCount'])
+        && request.resource.data.status in ['active', 'closed']
+        && isStr(request.resource.data.name, 100)
+        && isStr(request.resource.data.description, 500);
       allow delete: if isAdmin();
     }
     match /groupMemberships/{membershipId} {
       allow read: if signedIn() && (resource.data.userId == uid() || isModerator());
-      allow create: if signedIn() && callerActive() && request.resource.data.userId == uid()
-        && request.resource.data.status == 'pending';
-      allow update: if isModerator();
-      allow delete: if isAdmin();
+      allow create: if signedIn() && callerActive()
+        && membershipId == request.resource.data.groupId + '_' + request.resource.data.userId
+        && request.resource.data.keys().hasOnly(['groupId', 'userId', 'status', 'createdAt', 'updatedAt'])
+        && ((request.resource.data.userId == uid() && request.resource.data.status == 'pending')
+            || (isModerator() && request.resource.data.status == 'active'))
+        && request.resource.data.createdAt is timestamp;
+      allow update: if isModerator()
+        && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['status', 'updatedAt'])
+        && request.resource.data.status in ['pending', 'active', 'rejected', 'removed'];
+      allow delete: if isAdmin() || (signedIn() && resource.data.userId == uid());
     }
     match /institutionPages/{pageId} {
       allow read: if isPublished(resource.data) || isModerator();
@@ -794,7 +835,13 @@ service cloud.firestore {
              'feature-enabled', 'feature-disabled',
              'backup-exported',
              'user-profile-viewed', 'user-messages-viewed',
-             'support-message-sent', 'message-reported', 'message-blocked']
+             'support-message-sent', 'message-reported', 'message-blocked',
+             'dm-access-requested', 'dm-access-approved', 'dm-access-revoked',
+             'dm-access-read', 'dm-access-notified',
+             'dm-suspended', 'dm-unsuspended',
+             'dm-consent-granted', 'dm-consent-revoked',
+             'report-resolved', 'report-dismissed',
+             'group-created', 'group-member-added', 'group-member-removed']
         && request.resource.data.keys().hasOnly(
              ['actorId', 'action', 'details', 'targetId', 'before', 'after', 'reason', 'createdAt'])
         && request.resource.data.createdAt is timestamp;
@@ -865,8 +912,9 @@ service cloud.firestore {
       allow delete: if false;
     }
 
-    // ---------- messenger (owner decision 20 Nov 23:25 — private messaging
-    // IS in the product, staged, with mandatory safeguards) ----------
+    // ---------- messenger (owner decisions 20 Nov 23:25 + 21 Nov 00:17,
+    // privacy + messaging proposal; master directive 21 Nov 07:34
+    // authorizes implementation) ----------
     // Phase 1a — support messaging (owner/admin <-> any user): a user
     // opens their own support thread; owner/admin read and reply.
     // Messages are TEXT ONLY in Phase 1 (kind == 'text' — no voice/video
@@ -891,38 +939,332 @@ service cloud.firestore {
         && isStr(request.resource.data.body, 2000);
       allow update, delete: if false;
     }
-    // Phase 1b — direct messages (student <-> student, teacher <->
-    // student): RULES SCAFFOLD ONLY — client writes are DENIED until the
-    // six mandatory safeguards from the 23:25 decision exist in code, AND
-    // the privacy + messaging design proposal is explicitly approved by
-    // the owner. PRIVACY BRIEF 21 Nov 00:17 (binding, supersedes the
-    // 23:25 access model): NO routine access to private message content
-    // for ANYONE — not the owner, not admins, not moderators, not
-    // teachers, not guardians. Guardians must NOT read their children's
-    // private messages; teachers must NOT read students' private
-    // messages. That is why the read rule below is participants ONLY —
-    // isAdmin() was deliberately REMOVED: no routine admin/owner read of
-    // private DM content is possible, even at the rules level.
-    // Exceptional access is allowed ONLY for a serious safety incident,
-    // via a clearly documented, auditable process with Owner approval,
-    // time-boxed, scoped, read-only, every read logged — never hidden or
-    // unrestricted. No inbox-viewing feature is built until the design is
-    // approved. Until the safeguards + approval land, DMs stay OFF and
-    // this match proves it in the emulator tests.
-    // The 23:25 decision SUPERSEDES the 13:19 "moderated groups only"
-    // decision (DMs exist); the 00:17 brief supersedes the 23:25 ACCESS
-    // model (nobody routinely reads them). Blueprint v4 §2.1 + the Phase
-    // 2 plan social section must be updated to match both.
+
+    // ---------- messaging helpers ----------
+    // Age is computed from the date of birth on the users doc. A missing
+    // date of birth means "age unknown" — fail-safe: the user is neither
+    // adult nor minor for DM purposes, so no DM path opens until the
+    // date of birth is set (Profile page, set-once). Thresholds are
+    // conservative: adulthood at 18 years + ~5 days (6575 days covers
+    // the leap days), under-13 below 13 years + ~4 days (4749 days).
+    function userData(otherUid) { return get(/databases/$(database)/documents/users/$(otherUid)).data; }
+    function dobOf(otherUid) { return userData(otherUid).get('dateOfBirth', null); }
+    function isAdultUid(otherUid) {
+      return dobOf(otherUid) != null
+        && (request.time - dobOf(otherUid)) >= duration.value(6575, 'd');
+    }
+    function isMinorUid(otherUid) {
+      return dobOf(otherUid) != null
+        && (request.time - dobOf(otherUid)) < duration.value(6575, 'd');
+    }
+    function isUnder13Uid(otherUid) {
+      return dobOf(otherUid) != null
+        && (request.time - dobOf(otherUid)) < duration.value(4749, 'd');
+    }
+    function roleOf(otherUid) { return userData(otherUid).get('role', ''); }
+    function verifiedOf(otherUid) { return userData(otherUid).get('verificationStatus', '') == 'verified'; }
+    function activeOf(otherUid) { return userData(otherUid).get('isActive', true) != false; }
+    function dmSuspendedOf(otherUid) { return userData(otherUid).get('dmSuspended', false) == true; }
+    // "Verified" for a student means an active account with a date of
+    // birth on file — student identity verification was removed entirely
+    // by the owner's decision (21 Nov 06:53), so there is no student
+    // verificationStatus to check. Teachers/guardians need
+    // verificationStatus 'verified' (free manual verification).
+    // Admins, moderators and the owner are NOT DM participants — they
+    // use support threads.
+    function dmEligible(otherUid) {
+      return activeOf(otherUid) && !dmSuspendedOf(otherUid)
+        && ((roleOf(otherUid) == 'student' && dobOf(otherUid) != null)
+            || ((roleOf(otherUid) == 'teacher' || roleOf(otherUid) == 'parent') && verifiedOf(otherUid)));
+    }
+    function dmPairId(a, b) { return a < b ? a + '_' + b : b + '_' + a; }
+    function otherParticipant(participants, me) {
+      return participants[0] == me ? participants[1] : participants[0];
+    }
+    function isBlockedBetween(a, b) {
+      return (exists(/databases/$(database)/documents/blocks/$(a))
+              && get(/databases/$(database)/documents/blocks/$(a)).data.get('blockedUids', []).hasAny([b]))
+          || (exists(/databases/$(database)/documents/blocks/$(b))
+              && get(/databases/$(database)/documents/blocks/$(b)).data.get('blockedUids', []).hasAny([a]));
+    }
+    function dmConsentGranted(childUid) {
+      return exists(/databases/$(database)/documents/dmConsents/$(childUid))
+        && get(/databases/$(database)/documents/dmConsents/$(childUid)).data.get('status', '') == 'granted';
+    }
+    function friendshipAccepted(a, b) {
+      return exists(/databases/$(database)/documents/friendships/$(dmPairId(a, b)))
+        && get(/databases/$(database)/documents/friendships/$(dmPairId(a, b))).data.get('status', '') == 'accepted'
+        && get(/databases/$(database)/documents/friendships/$(dmPairId(a, b))).data.get('guardianApproved', false) == true;
+    }
+    // Parent link id is `{parentUid}_{studentUid}` (dashboards branch,
+    // guardian.ts); a live link has status 'verified' (admin-activated
+    // after the child's confirmation).
+    function parentLinkVerified(parentUid, studentUid) {
+      return exists(/databases/$(database)/documents/parentLinks/$(parentUid + '_' + studentUid))
+        && get(/databases/$(database)/documents/parentLinks/$(parentUid + '_' + studentUid)).data.get('status', '') == 'verified';
+    }
+    function sameInstitution(a, b) {
+      return userData(a).get('institution', '') != ''
+        && userData(a).get('institution', '') == userData(b).get('institution', '');
+    }
+    function parentTeacherPair(c, o) {
+      return (roleOf(c) == 'parent' && roleOf(o) == 'teacher')
+        || (roleOf(c) == 'teacher' && roleOf(o) == 'parent');
+    }
+    // The DM permission matrix (privacy proposal §2), enforced here.
+    // aboutStudentId is required exactly when one side is a guardian and
+    // the other a teacher: the conversation is about that linked child.
+    function dmPairAllowed(c, o, aboutStudentId) {
+      return dmEligible(c) && dmEligible(o) && !isBlockedBetween(c, o)
+        && (
+          (roleOf(c) == 'student' && roleOf(o) == 'student' && isAdultUid(c) && isAdultUid(o))
+          || (isMinorUid(c) && isMinorUid(o) && !isUnder13Uid(c) && !isUnder13Uid(o)
+              && dmConsentGranted(c) && dmConsentGranted(o) && friendshipAccepted(c, o))
+          || (isMinorUid(c) && roleOf(o) == 'teacher' && verifiedOf(o) && sameInstitution(c, o)
+              && (isUnder13Uid(c) || dmConsentGranted(c)))
+          || (isMinorUid(o) && roleOf(c) == 'teacher' && verifiedOf(c) && sameInstitution(c, o)
+              && (isUnder13Uid(o) || dmConsentGranted(o)))
+          || (isMinorUid(c) && roleOf(o) == 'parent' && parentLinkVerified(o, c))
+          || (isMinorUid(o) && roleOf(c) == 'parent' && parentLinkVerified(c, o))
+          || (roleOf(c) == 'student' && isAdultUid(c) && roleOf(o) == 'teacher' && verifiedOf(o) && sameInstitution(c, o))
+          || (roleOf(o) == 'student' && isAdultUid(o) && roleOf(c) == 'teacher' && verifiedOf(c) && sameInstitution(c, o))
+          || (roleOf(c) == 'teacher' && roleOf(o) == 'teacher' && verifiedOf(c) && verifiedOf(o))
+          || (roleOf(c) == 'parent' && roleOf(o) == 'teacher' && verifiedOf(o)
+              && aboutStudentId != '' && parentLinkVerified(c, aboutStudentId)
+              && sameInstitution(aboutStudentId, o))
+          || (roleOf(c) == 'teacher' && verifiedOf(c) && roleOf(o) == 'parent'
+              && aboutStudentId != '' && parentLinkVerified(o, aboutStudentId)
+              && sameInstitution(c, aboutStudentId))
+        );
+    }
+    // Exceptional access (proposal §5): a valid, unexpired,
+    // Owner-approved grant opens exactly the named conversation,
+    // read-only, for at most 72 hours. Grant id is `{threadId}_{uid}`.
+    function hasValidDmGrant(threadId) {
+      return signedIn()
+        && exists(/databases/$(database)/documents/dmAccessGrants/$(threadId + '_' + uid()))
+        && get(/databases/$(database)/documents/dmAccessGrants/$(threadId + '_' + uid())).data.get('status', '') == 'approved'
+        && get(/databases/$(database)/documents/dmAccessGrants/$(threadId + '_' + uid())).data.get('grantedTo', '') == uid()
+        && get(/databases/$(database)/documents/dmAccessGrants/$(threadId + '_' + uid())).data.get('expiresAt', request.time) > request.time;
+    }
+
+    // Phase 1b — direct messages. Thread id is the sorted pair id
+    // `{smallerUid}_{largerUid}`. Read: participants ONLY — no routine
+    // access for anyone else, including the owner, admins, moderators,
+    // teachers and guardians (privacy brief 21 Nov 00:17, binding).
+    // Exceptional access is via dmAccessGrants only (below).
     match /directMessages/{threadId} {
-      allow read: if signedIn() && uid() in resource.data.get('participants', []);
-      allow create, update, delete: if false;
+      allow read: if signedIn()
+        && (uid() in resource.data.get('participants', []) || hasValidDmGrant(threadId));
+      allow create: if signedIn() && callerActive()
+        && request.resource.data.keys().hasOnly(['participants', 'type', 'status', 'createdAt', 'updatedAt', 'lastMessageAt', 'lastMessagePreview', 'lastMessageSenderId', 'aboutStudentId'])
+        && request.resource.data.participants is list
+        && request.resource.data.participants.size() == 2
+        && request.resource.data.participants[0] < request.resource.data.participants[1]
+        && threadId == dmPairId(request.resource.data.participants[0], request.resource.data.participants[1])
+        && uid() in request.resource.data.participants
+        && request.resource.data.type == 'dm'
+        && request.resource.data.status == 'active'
+        && request.resource.data.createdAt is timestamp
+        && request.resource.data.updatedAt is timestamp
+        && request.resource.data.get('lastMessageAt', null) == null
+        && request.resource.data.get('lastMessagePreview', '') == ''
+        && request.resource.data.get('lastMessageSenderId', '') == ''
+        && (parentTeacherPair(uid(), otherParticipant(request.resource.data.participants, uid()))
+            == (request.resource.data.get('aboutStudentId', '') != ''))
+        && dmPairAllowed(uid(), otherParticipant(request.resource.data.participants, uid()), request.resource.data.get('aboutStudentId', ''));
+      // Participants update only the last-message preview fields and the
+      // open/closed status. Participants, type and history are immutable.
+      allow update: if signedIn() && uid() in resource.data.get('participants', [])
+        && resource.data.status in ['active', 'closed']
+        && request.resource.data.diff(resource.data).affectedKeys()
+             .hasOnly(['lastMessageAt', 'lastMessagePreview', 'lastMessageSenderId', 'status', 'updatedAt'])
+        && request.resource.data.status in ['active', 'closed']
+        && (request.resource.data.get('lastMessageAt', null) == null
+            || request.resource.data.lastMessageAt is timestamp)
+        && request.resource.data.get('lastMessagePreview', '') is string
+        && request.resource.data.get('lastMessagePreview', '').size() <= 200;
+      allow delete: if false;
     }
     match /directMessages/{threadId}/messages/{messageId} {
       allow read: if signedIn()
-        && uid() in get(/databases/$(database)/documents/directMessages/$(threadId)).data.get('participants', []);
-      allow create, update, delete: if false;
+        && (uid() in get(/databases/$(database)/documents/directMessages/$(threadId)).data.get('participants', [])
+            || hasValidDmGrant(threadId));
+      // Text only, max 2000 chars, at least 3 seconds since the previous
+      // message in the thread (flood control), never to a blocked user.
+      // Messages are immutable: no edit, no delete — block/report is the
+      // remedy for abuse.
+      allow create: if signedIn() && callerActive()
+        && request.resource.data.keys().hasOnly(['senderId', 'kind', 'body', 'createdAt'])
+        && request.resource.data.senderId == uid()
+        && request.resource.data.kind == 'text'
+        && isStr(request.resource.data.body, 2000)
+        && request.resource.data.createdAt is timestamp
+        && uid() in get(/databases/$(database)/documents/directMessages/$(threadId)).data.get('participants', [])
+        && get(/databases/$(database)/documents/directMessages/$(threadId)).data.get('status', '') == 'active'
+        && !isBlockedBetween(uid(), otherParticipant(get(/databases/$(database)/documents/directMessages/$(threadId)).data.get('participants', []), uid()))
+        && (get(/databases/$(database)/documents/directMessages/$(threadId)).data.get('lastMessageAt', null) == null
+            || request.time - get(/databases/$(database)/documents/directMessages/$(threadId)).data.get('lastMessageAt', null) >= duration.value(3, 's'));
+      allow update, delete: if false;
     }
 
+    // ---------- public profiles (DM directory) ----------
+    // Minimal public-safe mirror of a user's profile: displayName, role,
+    // institution, classLevel. Any signed-in user may READ it (this is
+    // how a user finds someone to message). Writes are owner-only and
+    // the values MUST match the users doc — a user cannot impersonate
+    // someone else's name or role. No email, phone or date of birth here.
+    match /publicProfiles/{userId} {
+      allow read: if signedIn();
+      allow create: if isOwner(userId) && callerActive()
+        && request.resource.data.keys().hasOnly(['displayName', 'role', 'institution', 'classLevel', 'updatedAt'])
+        && request.resource.data.get('displayName', '') == userData(userId).get('displayName', '')
+        && request.resource.data.get('role', '') == userData(userId).get('role', '')
+        && request.resource.data.get('institution', null) == userData(userId).get('institution', null)
+        && request.resource.data.get('classLevel', null) == userData(userId).get('classLevel', null)
+        && isStr(request.resource.data.displayName, 100);
+      allow update: if isOwner(userId) && callerActive()
+        && request.resource.data.keys().hasOnly(['displayName', 'role', 'institution', 'classLevel', 'updatedAt'])
+        && request.resource.data.get('displayName', '') == userData(userId).get('displayName', '')
+        && request.resource.data.get('role', '') == userData(userId).get('role', '')
+        && request.resource.data.get('institution', null) == userData(userId).get('institution', null)
+        && request.resource.data.get('classLevel', null) == userData(userId).get('classLevel', null)
+        && isStr(request.resource.data.displayName, 100);
+      allow delete: if isAdmin();
+    }
+
+    // ---------- DM consent (guardian consent for a minor to use DMs) ----------
+    // Created/updated by Admin ONLY, after the free manual guardian-consent
+    // check. The child and the consenting guardian may read it; nobody
+    // else. A revoked consent immediately closes the minor's DM paths
+    // (the matrix checks status == 'granted').
+    match /dmConsents/{childUid} {
+      allow read: if signedIn() && (isOwner(childUid) || isAdmin()
+        || resource.data.get('guardianUid', '') == uid());
+      allow create: if isAdmin()
+        && request.resource.data.keys().hasOnly(['childUid', 'guardianUid', 'status', 'grantedBy', 'reason', 'createdAt', 'updatedAt'])
+        && request.resource.data.childUid == childUid
+        && exists(/databases/$(database)/documents/users/$(childUid))
+        && exists(/databases/$(database)/documents/users/$(request.resource.data.guardianUid))
+        && request.resource.data.status == 'granted'
+        && request.resource.data.grantedBy == uid()
+        && request.resource.data.createdAt is timestamp;
+      allow update: if isAdmin()
+        && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['status', 'reason', 'updatedAt'])
+        && request.resource.data.status in ['granted', 'revoked'];
+      allow delete: if false;
+    }
+
+    // ---------- blocks ----------
+    // A user's private block list. Owner-only read/write — nobody else
+    // (not even an admin) reads who you blocked. The DM rules consult
+    // it via get() inside rule evaluation (not subject to this read
+    // rule), so blocks are enforced even though the list stays private.
+    match /blocks/{userId} {
+      allow read: if isOwner(userId);
+      allow create: if isOwner(userId) && callerActive()
+        && request.resource.data.keys().hasOnly(['blockedUids', 'updatedAt'])
+        && request.resource.data.blockedUids is list
+        && request.resource.data.blockedUids.size() <= 500
+        && request.resource.data.updatedAt is timestamp;
+      allow update: if isOwner(userId) && callerActive()
+        && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['blockedUids', 'updatedAt'])
+        && request.resource.data.blockedUids is list
+        && request.resource.data.blockedUids.size() <= 500;
+      allow delete: if isOwner(userId);
+    }
+
+    // ---------- exceptional DM access grants (proposal §5) ----------
+    // The ONLY way anyone other than the participants reads DM content.
+    // Created by the OWNER alone (never by an admin for themself), with a
+    // written reason, scoped to ONE conversation + ONE admin, read-only,
+    // expiring at most 72 hours after creation. The grant id is
+    // `{threadId}_{grantedTo}` so the DM read rule can find it with one
+    // get(). Every read under a grant must be logged by the dashboard
+    // code ('dm-access-read' in adminActions) and the affected users
+    // notified afterwards — the rules cannot force the client to log, so
+    // the grant itself (owner-created, reasoned, time-boxed) is the hard
+    // control and the audit entry is the soft one; both are reported.
+    match /dmAccessGrants/{grantId} {
+      allow read: if signedIn() && (isOwnerRole() || resource.data.grantedTo == uid());
+      allow create: if isOwnerRole()
+        && grantId == request.resource.data.threadId + '_' + request.resource.data.grantedTo
+        && request.resource.data.keys().hasOnly(['threadId', 'grantedTo', 'grantedBy', 'reason', 'status', 'createdAt', 'expiresAt'])
+        && request.resource.data.grantedBy == uid()
+        && request.resource.data.status == 'approved'
+        && isStr(request.resource.data.threadId, 500)
+        && isStr(request.resource.data.grantedTo, 200)
+        && request.resource.data.reason is string && request.resource.data.reason.size() >= 10
+        && request.resource.data.createdAt is timestamp
+        && request.resource.data.expiresAt is timestamp
+        && request.resource.data.expiresAt > request.time
+        && request.resource.data.expiresAt <= request.resource.data.createdAt + duration.value(72, 'h');
+      allow update: if isOwnerRole()
+        && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['status', 'updatedAt'])
+        && request.resource.data.status == 'revoked';
+      allow delete: if false;
+    }
+
+    // ---------- notifications ----------
+    // In-app, Firestore-backed. A notification NEVER carries private
+    // message text — a new-message notification says only who wrote,
+    // never what they wrote. Create is restricted per type (below);
+    // only the recipient reads, marks read, or deletes.
+    match /notifications/{userId}/items/{itemId} {
+      allow read: if isOwner(userId);
+      allow create: if signedIn() && callerActive()
+        && request.resource.data.keys().hasOnly(['recipientId', 'type', 'title', 'body', 'link', 'conversationId', 'groupId', 'refId', 'createdAt', 'read'])
+        && request.resource.data.recipientId == userId
+        && request.resource.data.type in ['message', 'group_message', 'verification', 'exam_result', 'admin_notice', 'report_update', 'friend_request', 'group_invite']
+        && isStr(request.resource.data.title, 200)
+        && isStr(request.resource.data.body, 500)
+        && request.resource.data.read == false
+        && request.resource.data.createdAt is timestamp
+        && (
+          (request.resource.data.type == 'message'
+           && request.resource.data.conversationId is string
+           && uid() in get(/databases/$(database)/documents/directMessages/$(request.resource.data.conversationId)).data.get('participants', [])
+           && userId in get(/databases/$(database)/documents/directMessages/$(request.resource.data.conversationId)).data.get('participants', [])
+           && uid() != userId)
+          || (request.resource.data.type == 'group_message'
+           && request.resource.data.groupId is string
+           && get(/databases/$(database)/documents/groupMemberships/$(request.resource.data.groupId + '_' + uid())).data.get('status', '') == 'active'
+           && get(/databases/$(database)/documents/groupMemberships/$(request.resource.data.groupId + '_' + userId)).data.get('status', '') == 'active'
+           && uid() != userId)
+          || ((request.resource.data.type in ['verification', 'admin_notice', 'report_update']) && isAdmin())
+          || (request.resource.data.type == 'exam_result' && uid() == userId)
+          || (request.resource.data.type == 'group_invite' && (uid() == userId || isAdmin()))
+          || (request.resource.data.type == 'friend_request'
+           && request.resource.data.refId is string
+           && get(/databases/$(database)/documents/friendships/$(request.resource.data.refId)).data.get('status', '') == 'pending'
+           && (get(/databases/$(database)/documents/friendships/$(request.resource.data.refId)).data.get('userA', '') == uid()
+               || get(/databases/$(database)/documents/friendships/$(request.resource.data.refId)).data.get('userB', '') == uid())
+           && (get(/databases/$(database)/documents/friendships/$(request.resource.data.refId)).data.get('userA', '') == userId
+               || get(/databases/$(database)/documents/friendships/$(request.resource.data.refId)).data.get('userB', '') == userId)
+           && uid() != userId)
+        );
+      allow update: if isOwner(userId)
+        && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['read']);
+      allow delete: if isOwner(userId);
+    }
+
+    // ---------- group messages (member-only, moderated) ----------
+    // Read: active members + moderators (groups are moderated spaces,
+    // unlike private DMs). Send: active members only, text only.
+    // Messages are immutable; report/block is the remedy for abuse.
+    match /groupMessages/{groupId}/messages/{messageId} {
+      allow read: if signedIn()
+        && (isModerator()
+            || get(/databases/$(database)/documents/groupMemberships/$(groupId + '_' + uid())).data.get('status', '') == 'active');
+      allow create: if signedIn() && callerActive()
+        && get(/databases/$(database)/documents/groupMemberships/$(groupId + '_' + uid())).data.get('status', '') == 'active'
+        && request.resource.data.keys().hasOnly(['senderId', 'kind', 'body', 'createdAt'])
+        && request.resource.data.senderId == uid()
+        && request.resource.data.kind == 'text'
+        && isStr(request.resource.data.body, 2000)
+        && request.resource.data.createdAt is timestamp;
+      allow update, delete: if false;
+    }
     // ---------- everything else: denied ----------
     match /{document=**} {
       allow read, write: if false;
