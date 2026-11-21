@@ -484,9 +484,9 @@ a:hover {
   background: var(--amber-deep);
 }
 
-/* ---- Header nav link ---- */
+/* ---- Header nav link (light header: forest text) ---- */
 .ev-navlink {
-  color: #fff;
+  color: var(--forest);
   padding: 10px 8px;
   border-radius: 8px;
   font-size: 15px;
@@ -495,27 +495,30 @@ a:hover {
   white-space: nowrap;
 }
 .ev-navlink:hover {
-  background: rgba(255, 255, 255, 0.12);
+  background: #eaf3fb;
   text-decoration: none;
 }
 .ev-navlink-active {
-  background: rgba(255, 255, 255, 0.16);
-  box-shadow: inset 0 -3px 0 var(--amber);
+  background: #eaf3fb;
+  box-shadow: inset 0 -3px 0 var(--teal);
 }
 
-/* ---- App header (deep forest navy, sticky) ---- */
+/* ---- App header (LIGHT, sticky — homepage redesign 21 Nov 2026) ----
+   Owner-approved mockups show a white header with the dark-navy logo
+   (/logo.png). The old forest-navy header is gone; the footer stays navy. */
 .ev-header {
   position: sticky;
   top: 0;
   z-index: 50;
-  background: #142b3b;
-  color: #fff;
+  background: #fff;
+  color: var(--forest);
   padding: 10px 16px;
   display: flex;
   flex-wrap: wrap;
   gap: 12px 16px;
   align-items: center;
-  box-shadow: 0 2px 8px rgba(13, 30, 41, 0.25);
+  border-bottom: 1px solid #e3e7ea;
+  box-shadow: 0 2px 8px rgba(13, 30, 41, 0.08);
 }
 .ev-header-nav {
   display: flex;
@@ -533,17 +536,17 @@ a:hover {
   min-width: 44px;
   min-height: 44px;
   padding: 8px 12px;
-  border: 1px solid rgba(255, 255, 255, 0.65);
+  border: 1px solid rgba(20, 43, 59, 0.4);
   border-radius: 10px;
   background: transparent;
-  color: #fff;
+  color: var(--forest);
   font-family: var(--font-body);
   font-size: 15px;
   font-weight: 600;
   cursor: pointer;
 }
 .ev-menu-btn:hover {
-  background: rgba(255, 255, 255, 0.12);
+  background: #eaf3fb;
 }
 .ev-menu-btn:focus-visible {
   outline: 3px solid var(--amber);
@@ -577,7 +580,7 @@ a:hover {
     margin-left: 0;
     gap: 2px;
     padding-top: 4px;
-    border-top: 1px solid rgba(255, 255, 255, 0.18);
+    border-top: 1px solid rgba(20, 43, 59, 0.12);
   }
   .ev-header-nav-open {
     display: flex;
@@ -1357,4 +1360,944 @@ a:hover {
   background: #f2f4f2;
   color: #9aa3a7;
   cursor: not-allowed;
+}
+
+/* ---- Homepage redesign (21 Nov 2026) ---- */
+
+/* HeaderNav: Home pill, dropdowns, icon buttons, auth buttons, notes. */
+.ev-hnav-home {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  border-radius: 999px;
+  background: #1d4ed8;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 700;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.ev-hnav-home:hover {
+  background: #1e40af;
+  color: #fff;
+  text-decoration: none;
+}
+.ev-hnav-home-active {
+  box-shadow: inset 0 0 0 2px #93c5fd;
+}
+.ev-hnav-drop {
+  position: relative;
+  display: inline-flex;
+}
+.ev-hnav-drop-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 8px;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--forest);
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 600;
+  white-space: nowrap;
+  cursor: pointer;
+}
+.ev-hnav-drop-btn:hover {
+  background: #eaf3fb;
+}
+.ev-hnav-drop-btn-open {
+  background: #eaf3fb;
+  box-shadow: inset 0 -3px 0 var(--teal);
+}
+.ev-hnav-panel {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  min-width: 240px;
+  padding: 6px;
+  border: 1px solid #e3e7ea;
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: 0 8px 24px rgba(13, 30, 41, 0.16);
+  z-index: 60;
+}
+.ev-hnav-panel-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  color: var(--forest);
+  font-size: 15px;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.ev-hnav-panel-link:hover {
+  background: #eaf3fb;
+  text-decoration: none;
+}
+.ev-hnav-soon {
+  flex: none;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: #fdf3d7;
+  color: #8a6100;
+  font-size: 12px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+.ev-hnav-secondary {
+  display: none;
+}
+.ev-header-actions {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-left: 8px;
+}
+.ev-header-icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--forest);
+  text-decoration: none;
+  cursor: pointer;
+}
+.ev-header-icon-btn:hover {
+  background: #eaf3fb;
+  text-decoration: none;
+}
+.ev-header-btn-login {
+  background: #1d4ed8;
+  border-color: #1d4ed8;
+  color: #fff;
+  text-decoration: none;
+}
+.ev-header-btn-login:hover {
+  background: #1e40af;
+  border-color: #1e40af;
+  color: #fff;
+  text-decoration: none;
+}
+.ev-header-btn-register {
+  background: #fff;
+  border-color: #1d4ed8;
+  color: #1d4ed8;
+  text-decoration: none;
+}
+.ev-header-btn-register:hover {
+  background: #eaf3fb;
+  color: #1d4ed8;
+  text-decoration: none;
+}
+.ev-header-btn-outline {
+  background: #fff;
+  border-color: rgba(20, 43, 59, 0.4);
+  color: var(--forest);
+}
+.ev-header-btn-outline:hover {
+  background: #eaf3fb;
+}
+.ev-header-note {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  z-index: 70;
+  min-width: 200px;
+  padding: 10px 12px;
+  border: 1px solid #e3e7ea;
+  border-radius: 10px;
+  background: #fff;
+  box-shadow: 0 8px 24px rgba(13, 30, 41, 0.16);
+  color: var(--forest);
+  font-size: 14px;
+  line-height: 1.5;
+  white-space: normal;
+}
+.ev-header-mobile-actions {
+  display: none;
+}
+.ev-header-avatar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--teal-deep);
+  color: #fff;
+  font-size: 16px;
+  font-weight: 800;
+  text-decoration: none;
+}
+.ev-header-avatar:hover {
+  color: #fff;
+  text-decoration: none;
+}
+@media (max-width: 860px) {
+  .ev-header-mobile-actions {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    margin-left: auto;
+  }
+  .ev-header-mobile-actions .ev-header-icon-btn {
+    width: 40px;
+    height: 40px;
+  }
+  .ev-menu-btn {
+    margin-left: 4px;
+  }
+  /* Mobile menu: sections become accordions; secondary links show here. */
+  .ev-header-nav .ev-hnav-home {
+    margin: 4px 0;
+    justify-content: center;
+  }
+  .ev-hnav-drop {
+    display: block;
+  }
+  .ev-hnav-drop-btn {
+    width: 100%;
+    justify-content: flex-start;
+    padding: 12px 10px;
+    font-size: 16px;
+  }
+  .ev-hnav-panel {
+    position: static;
+    min-width: 0;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+    padding: 0 0 6px 26px;
+  }
+  .ev-hnav-panel-link {
+    white-space: normal;
+  }
+  .ev-hnav-secondary {
+    display: flex;
+    flex-direction: column;
+    border-top: 1px solid rgba(20, 43, 59, 0.12);
+    margin-top: 6px;
+    padding-top: 6px;
+  }
+  .ev-header-nav .ev-header-actions {
+    flex-wrap: wrap;
+    margin: 8px 0 0;
+    gap: 8px;
+  }
+  .ev-header-note {
+    position: fixed;
+    top: auto;
+    bottom: 76px;
+    right: 12px;
+    left: 12px;
+    min-width: 0;
+  }
+}
+
+/* Homepage: mobile search bar (≤768px only). */
+.ev-home-msearch {
+  display: none;
+}
+@media (max-width: 768px) {
+  .ev-home-msearch {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 4px 0 14px;
+    padding: 10px 12px;
+    border: 1px solid #d7dee3;
+    border-radius: 12px;
+    background: #fff;
+    box-shadow: 0 2px 6px rgba(13, 30, 41, 0.06);
+  }
+  .ev-home-msearch input {
+    flex: 1;
+    min-width: 0;
+    border: 0;
+    outline: none;
+    font-family: var(--font-body);
+    font-size: 15px;
+    color: var(--forest);
+    background: transparent;
+  }
+  .ev-home-msearch button {
+    flex: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border: 0;
+    border-radius: 8px;
+    background: #eaf3fb;
+    color: var(--forest);
+    cursor: pointer;
+  }
+}
+
+/* Homepage: desktop hero (≥769px) — light gradient, NO photos. */
+.ev-home-hero {
+  position: relative;
+  overflow: hidden;
+  border-radius: 20px;
+  padding: 36px 32px 32px;
+  margin-bottom: 22px;
+  background: linear-gradient(120deg, #eaf3fb 0%, #fdf8ec 55%, #eaf6f3 100%);
+  border: 1px solid #e3e7ea;
+  box-shadow: 0 4px 12px rgba(13, 30, 41, 0.06);
+}
+.ev-home-hero::before,
+.ev-home-hero::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+}
+.ev-home-hero::before {
+  width: 260px;
+  height: 260px;
+  right: -70px;
+  top: -90px;
+  background: rgba(29, 78, 216, 0.1);
+}
+.ev-home-hero::after {
+  width: 200px;
+  height: 200px;
+  right: 120px;
+  bottom: -120px;
+  background: rgba(22, 140, 130, 0.1);
+}
+.ev-home-hero-eyebrow {
+  margin: 0 0 10px;
+  font-size: 17px;
+  font-weight: 600;
+  color: #3a444b;
+}
+.ev-home-hero-eyebrow span {
+  border-bottom: 3px solid var(--amber);
+  padding-bottom: 2px;
+}
+.ev-home-wordmark {
+  margin: 0 0 10px;
+  font-family: 'Poppins', 'Hind Siliguri', system-ui, sans-serif;
+  font-size: clamp(42px, 6vw, 64px);
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+}
+.ev-home-wordmark-edu {
+  color: #1d4ed8;
+}
+.ev-home-wordmark-velto {
+  color: #15803d;
+}
+.ev-home-wordmark-tag {
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 14px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: #1d4ed8;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+.ev-home-hero-line {
+  margin: 0 0 12px;
+  font-size: 19px;
+  font-weight: 700;
+  color: var(--forest);
+}
+.ev-home-hero-badge {
+  display: inline-block;
+  padding: 8px 16px;
+  border-radius: 999px;
+  background: var(--forest);
+  color: #f1b308;
+  font-size: 15px;
+  font-weight: 700;
+}
+@media (max-width: 768px) {
+  .ev-home-hero {
+    display: none;
+  }
+}
+
+/* Homepage: mobile hero carousel (≤768px). */
+.ev-home-hero-mobile {
+  display: none;
+}
+@media (max-width: 768px) {
+  .ev-home-hero-mobile {
+    display: block;
+    position: relative;
+    margin-bottom: 18px;
+  }
+  .ev-home-slide {
+    display: none;
+    border-radius: 16px;
+    padding: 24px 18px;
+    text-align: center;
+  }
+  .ev-home-slide-active {
+    display: block;
+  }
+  .ev-home-slide-job {
+    background: linear-gradient(135deg, #e8f5e9, #f1f8e9);
+    border: 1px solid #c8e6c9;
+  }
+  .ev-home-slide-admissions {
+    background: linear-gradient(135deg, #e3f2fd, #e8eaf6);
+    border: 1px solid #bbdefb;
+  }
+  .ev-home-slide-academic {
+    background: linear-gradient(135deg, #f3e5f5, #ede7f6);
+    border: 1px solid #e1bee7;
+  }
+  .ev-home-slide h2 {
+    margin: 0 0 6px;
+    font-size: 21px;
+    color: var(--forest);
+  }
+  .ev-home-slide p {
+    margin: 0 0 14px;
+    color: #3a444b;
+    font-size: 15px;
+  }
+  .ev-home-slide-cta {
+    background: #1d4ed8;
+    border-color: #1d4ed8;
+    color: #fff;
+  }
+  .ev-home-slide-cta:hover {
+    background: #1e40af;
+    color: #fff;
+  }
+  .ev-home-dots {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 10px;
+  }
+  .ev-home-dot {
+    width: 10px;
+    height: 10px;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    background: #c9d2d8;
+    cursor: pointer;
+  }
+  .ev-home-dot-active {
+    background: #1d4ed8;
+    width: 22px;
+    border-radius: 999px;
+  }
+}
+
+/* Homepage: four section cards. Tints follow the mockups; button colours
+   are darkened to AA contrast on white (report §3). */
+.ev-home-sections {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+  margin-bottom: 22px;
+}
+.ev-home-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-width: 0;
+  border-radius: 16px;
+  padding: 20px 18px;
+  box-shadow: 0 4px 12px rgba(13, 30, 41, 0.08), 0 2px 4px rgba(13, 30, 41, 0.05);
+}
+.ev-home-card-job {
+  background: #e8f5e9;
+  border: 1px solid #c8e6c9;
+}
+.ev-home-card-admissions {
+  background: #e3f2fd;
+  border: 1px solid #bbdefb;
+}
+.ev-home-card-academic {
+  background: #f3e5f5;
+  border: 1px solid #e1bee7;
+}
+.ev-home-card-skills {
+  background: #fff3e0;
+  border: 1px solid #ffe0b2;
+}
+.ev-home-card-badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  padding: 3px 9px;
+  border-radius: 999px;
+  background: #c62828;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+}
+/* Mockup: the Admission badge shows on mobile only (Job's badge shows
+   on both). */
+@media (min-width: 769px) {
+  .ev-home-card-badge-mobile {
+    display: none;
+  }
+}
+.ev-home-card-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  margin-bottom: 12px;
+  background: rgba(255, 255, 255, 0.75);
+}
+.ev-home-card-job .ev-home-card-icon {
+  color: #2e7d32;
+}
+.ev-home-card-admissions .ev-home-card-icon {
+  color: #1565c0;
+}
+.ev-home-card-academic .ev-home-card-icon {
+  color: #7b1fa2;
+}
+.ev-home-card-skills .ev-home-card-icon {
+  color: #c2410c;
+}
+.ev-home-card h2 {
+  margin: 0 0 6px;
+  font-size: 19px;
+  color: var(--forest);
+}
+.ev-home-card p {
+  margin: 0 0 14px;
+  color: #3a444b;
+  font-size: 14px;
+  line-height: 1.6;
+  flex: 1;
+}
+.ev-home-card-cta {
+  color: #fff;
+  text-decoration: none;
+}
+.ev-home-card-job .ev-home-card-cta {
+  background: #2e7d32;
+  border-color: #2e7d32;
+}
+.ev-home-card-job .ev-home-card-cta:hover {
+  background: #1b5e20;
+  color: #fff;
+}
+.ev-home-card-admissions .ev-home-card-cta {
+  background: #1565c0;
+  border-color: #1565c0;
+}
+.ev-home-card-admissions .ev-home-card-cta:hover {
+  background: #0d47a1;
+  color: #fff;
+}
+.ev-home-card-academic .ev-home-card-cta {
+  background: #7b1fa2;
+  border-color: #7b1fa2;
+}
+.ev-home-card-academic .ev-home-card-cta:hover {
+  background: #6a1b9a;
+  color: #fff;
+}
+.ev-home-card-skills .ev-home-card-cta {
+  background: #c2410c;
+  border-color: #c2410c;
+}
+.ev-home-card-skills .ev-home-card-cta:hover {
+  background: #9a3412;
+  color: #fff;
+}
+@media (max-width: 1023px) {
+  .ev-home-sections {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 768px) {
+  .ev-home-sections {
+    gap: 10px;
+  }
+  .ev-home-card {
+    padding: 16px 14px;
+  }
+  .ev-home-card h2 {
+    font-size: 17px;
+  }
+  .ev-home-card p {
+    font-size: 13px;
+  }
+  .ev-home-card-cta {
+    padding: 8px 14px;
+    min-height: 40px;
+    font-size: 14px;
+  }
+}
+
+/* Homepage: feature strip (desktop) / quick access (mobile). */
+.ev-home-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  margin-bottom: 22px;
+  padding: 14px;
+  border: 1px solid #e3e7ea;
+  border-radius: 14px;
+  background: #fff;
+}
+.ev-home-strip-item {
+  flex: 1 1 auto;
+}
+.ev-home-strip-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 10px;
+  border-radius: 10px;
+  color: var(--forest);
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  white-space: nowrap;
+}
+a.ev-home-strip-link:hover {
+  background: #eaf3fb;
+  text-decoration: none;
+}
+.ev-home-strip-link svg {
+  color: var(--teal-deep);
+  flex: none;
+}
+.ev-home-strip-soon .ev-home-strip-link {
+  color: #68747b;
+  cursor: default;
+}
+.ev-home-strip-soon .ev-home-strip-link svg {
+  color: #9aa5ab;
+}
+.ev-home-strip-more {
+  flex: none;
+}
+.ev-home-strip-more .ev-home-strip-link {
+  color: #1d4ed8;
+}
+.ev-home-soon-chip {
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: #fdf3d7;
+  color: #8a6100;
+  font-size: 11px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+.ev-home-quick {
+  display: none;
+}
+@media (max-width: 768px) {
+  .ev-home-strip {
+    display: none;
+  }
+  .ev-home-quick {
+    display: block;
+    margin-bottom: 20px;
+  }
+  .ev-home-quick-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+  }
+  .ev-home-quick-tile {
+    border: 1px solid #e3e7ea;
+    border-radius: 12px;
+    background: #fff;
+    box-shadow: 0 2px 6px rgba(13, 30, 41, 0.05);
+    min-width: 0;
+  }
+  .ev-home-quick-link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    padding: 14px 6px 12px;
+    color: var(--forest);
+    font-size: 13px;
+    font-weight: 600;
+    text-align: center;
+    text-decoration: none;
+  }
+  a.ev-home-quick-link:hover {
+    text-decoration: none;
+  }
+  .ev-home-quick-link svg {
+    color: var(--teal-deep);
+  }
+  .ev-home-quick-soon .ev-home-quick-link {
+    color: #68747b;
+  }
+  .ev-home-quick-soon .ev-home-quick-link svg {
+    color: #9aa5ab;
+  }
+}
+
+/* Homepage: three panels. */
+.ev-home-panels {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  margin-bottom: 22px;
+}
+.ev-home-panel {
+  border: 1px solid #e3e7ea;
+  border-radius: 14px;
+  background: #fff;
+  padding: 18px;
+  box-shadow: 0 2px 6px rgba(13, 30, 41, 0.05);
+  /* Grid item: must be allowed to shrink below its content width, or
+     the horizontally-scrolling popular row forces the whole page wider
+     than the viewport on mobile (verified: 572px scrollWidth at 390px). */
+  min-width: 0;
+}
+.ev-home-panel-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+.ev-home-panel-head h2 {
+  margin: 0;
+  font-size: 17px;
+  color: var(--forest);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.ev-home-panel-head h2 svg {
+  color: var(--amber-deep);
+  flex: none;
+}
+.ev-home-panel-head a {
+  font-size: 14px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+/* The h2 rules need the element in the selector: .ev-home-panel-head h2
+   (specificity 0-1-1) beats a bare class rule (0-1-0), so without it
+   both titles showed at once. */
+.ev-home-panel-head h2.ev-home-popular-mobile {
+  display: none;
+}
+.ev-home-popular-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin-top: 10px;
+}
+.ev-home-popular-row {
+  display: none;
+}
+.ev-home-popular-tile {
+  display: block;
+  padding: 10px 6px;
+  border: 1px solid #e3e7ea;
+  border-radius: 10px;
+  background: #f8fafb;
+  color: var(--forest);
+  font-size: 14px;
+  font-weight: 600;
+  text-align: center;
+  text-decoration: none;
+}
+.ev-home-popular-tile:hover {
+  background: #eaf3fb;
+  text-decoration: none;
+}
+.ev-home-progress-body {
+  display: flex;
+  gap: 18px;
+  align-items: center;
+  margin-top: 8px;
+}
+.ev-home-progress-rows {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  flex: 1;
+  min-width: 0;
+}
+.ev-home-progress-rows li {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 8px 0;
+  border-bottom: 1px solid #eef1f3;
+  font-size: 14px;
+  color: #3a444b;
+}
+.ev-home-progress-rows li:last-child {
+  border-bottom: 0;
+}
+.ev-home-progress-rows strong {
+  color: var(--forest);
+  white-space: nowrap;
+}
+@media (max-width: 1023px) {
+  .ev-home-panels {
+    grid-template-columns: 1fr;
+  }
+}
+@media (max-width: 768px) {
+  .ev-home-panel-head h2.ev-home-popular-desktop {
+    display: none;
+  }
+  .ev-home-panel-head h2.ev-home-popular-mobile {
+    display: inline-flex;
+  }
+  .ev-home-popular-grid {
+    display: none;
+  }
+  .ev-home-popular-row {
+    display: flex;
+    gap: 8px;
+    margin-top: 10px;
+    overflow-x: auto;
+    padding-bottom: 4px;
+    -webkit-overflow-scrolling: touch;
+    min-width: 0;
+  }
+  .ev-home-popular-row .ev-home-popular-tile {
+    flex: none;
+    padding: 10px 14px;
+  }
+}
+
+/* Homepage: footer banner (navy, mockup). */
+.ev-home-banner {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  border-radius: 16px;
+  padding: 24px 26px;
+  margin-bottom: 8px;
+  background: var(--forest);
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(13, 30, 41, 0.12);
+}
+.ev-home-banner h2 {
+  margin: 0 0 4px;
+  font-size: 20px;
+  color: #fff;
+}
+.ev-home-banner p {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 15px;
+}
+.ev-home-banner > div {
+  flex: 1;
+  min-width: 0;
+}
+.ev-home-banner-cta {
+  flex: none;
+}
+@media (max-width: 768px) {
+  .ev-home-banner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 20px 18px;
+  }
+  .ev-home-banner h2 {
+    font-size: 18px;
+  }
+}
+
+/* Bottom nav (mobile, ≤768px): new items হোম / আমার কোর্স / প্রগ্রেস /
+   বেশি কিছু / মেনু. Buttons share the link styles. */
+@media (max-width: 768px) {
+  .ev-bottom-nav-link {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+    min-height: 58px;
+    padding: 8px 2px 6px;
+    border: 0;
+    background: transparent;
+    color: rgba(255, 255, 255, 0.85);
+    font-family: var(--font-body);
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 1.2;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  .ev-bottom-nav-link:hover {
+    color: #fff;
+    text-decoration: none;
+  }
+  .ev-bottom-nav-link-active {
+    color: #d9a441;
+    font-weight: 700;
+    box-shadow: inset 0 3px 0 #d9a441;
+  }
+}
+
+/* Bottom sheets (বেশি কিছু / মেনু) — slide up above the bottom nav. */
+.ev-sheet-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 45;
+  background: rgba(13, 30, 41, 0.5);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+.ev-sheet {
+  width: 100%;
+  max-width: 640px;
+  max-height: 70vh;
+  overflow-y: auto;
+  border-radius: 18px 18px 0 0;
+  background: #fff;
+  padding: 18px 18px calc(20px + env(safe-area-inset-bottom, 0px));
+  box-shadow: 0 -8px 32px rgba(13, 30, 41, 0.25);
+}
+.ev-sheet-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 11px 10px;
+  border-radius: 8px;
+  color: var(--forest);
+  font-size: 15px;
+  text-decoration: none;
+}
+.ev-sheet-link:hover {
+  background: #eaf3fb;
+  text-decoration: none;
 }
