@@ -349,6 +349,15 @@ export function friendlyErrorMessage(error: unknown): string {
       return 'এই ইমেইল দিয়ে ইতিমধ্যে পাসওয়ার্ড-অ্যাকাউন্ট আছে। পাসওয়ার্ড দিয়ে লগইন করুন।';
     case 'auth/unauthorized-domain':
       return 'এই ডোমেইন থেকে সাইন-ইন অনুমোদিত নয়।';
+    case 'auth/internal-error':
+      // Server-side failure during the Google redirect return (the
+      // Firebase/Google OAuth exchange failed, not the app's code).
+      // 21 Nov 22:04 follow-up: the owner got this after the redirect
+      // fix went live. Tell the user to retry once (it can be
+      // transient) and that email/password login still works; the
+      // lasting fix is a Firebase console check (OAuth consent
+      // screen / Google provider client — see the fix report).
+      return 'Google লগইনে সার্ভারের সমস্যা হয়েছে। একবার আবার চেষ্টা করুন — না হলে ইমেইল ও পাসওয়ার্ড দিয়ে লগইন করুন।';
     case 'auth/network-request-failed':
       return 'নেটওয়ার্ক সমস্যা। সংযোগ দেখে আবার চেষ্টা করুন।';
     case 'auth/too-many-requests':
