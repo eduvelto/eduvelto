@@ -252,6 +252,25 @@ const asSuspended = () => env.authenticatedContext('suspended-1').firestore();
 const asAdmin = () => env.authenticatedContext('admin-1').firestore();
 const asOwner = () => env.authenticatedContext('owner-1').firestore();
 
+// Teacher verification records use the deterministic id 'tv_' + uid
+// (dashboards Step 5 create rule). Tests share one record per applicant,
+// so each create first removes any record an earlier test left behind
+// (this file has no per-test clear).
+async function createTvRecord(uid: 'student-1' | 'moderator-1'): Promise<string> {
+  const id = 'tv_' + uid;
+  await env.withSecurityRulesDisabled(async (ctx) => {
+    await deleteDoc(doc(ctx.firestore(), 'teacherVerifications', id));
+  });
+  const db = uid === 'moderator-1' ? asModerator() : asStudent1();
+  await setDoc(doc(db, 'teacherVerifications', id), {
+    userId: uid,
+    fullName: uid === 'moderator-1' ? 'Moderator' : 'Student One',
+    institution: 'Test College',
+    status: 'pending',
+  });
+  return id;
+}
+
 describe('Eduvelto security rules', () => {
   // (a) Public reads: Published lesson ALLOWED, draft lesson DENIED.
   it('(a1) unauthenticated read of a Published lesson is ALLOWED', async () => {
@@ -384,14 +403,9 @@ describe('Eduvelto security rules', () => {
   // mandatory reason (min 10 chars) and the 4-point human checklist.
   it('(h1) admin approving a teacher verification is ALLOWED', async () => {
     // The applicant creates their own pending record; the admin approves it.
-    const ref = await addDoc(collection(asStudent1(), 'teacherVerifications'), {
-      userId: 'student-1',
-      fullName: 'Student One',
-      institution: 'Test College',
-      status: 'pending',
-    });
+    const tvId = await createTvRecord('student-1');
     await assertSucceeds(
-      updateDoc(doc(asAdmin(), 'teacherVerifications', ref.id), {
+      updateDoc(doc(asAdmin(), 'teacherVerifications', tvId), {
         status: 'verified',
         checkedBy: 'admin-1',
         checkedAt: new Date(),
@@ -402,13 +416,8 @@ describe('Eduvelto security rules', () => {
   });
   it('(h2) student changing their own verification status is DENIED', async () => {
     const db = asStudent1();
-    const ref = await addDoc(collection(db, 'teacherVerifications'), {
-      userId: 'student-1',
-      fullName: 'Student One',
-      institution: 'Test College',
-      status: 'pending',
-    });
-    await assertFails(updateDoc(ref, { status: 'verified', checkedBy: 'student-1' }));
+    const tvId = await createTvRecord('student-1');
+    await assertFails(updateDoc(doc(db, 'teacherVerifications', tvId), { status: 'verified', checkedBy: 'student-1' }));
   });
 
   // (i) Owner role (spec §3): owner protection + append-only audit log.
@@ -574,14 +583,9 @@ describe('Eduvelto security rules', () => {
     );
   });
   it('(k4) a moderator cannot approve teachers and cannot read user docs', async () => {
-    const ref = await addDoc(collection(asStudent1(), 'teacherVerifications'), {
-      userId: 'student-1',
-      fullName: 'Student One',
-      institution: 'Test College',
-      status: 'pending',
-    });
+    const tvId = await createTvRecord('student-1');
     await assertFails(
-      updateDoc(doc(asModerator(), 'teacherVerifications', ref.id), {
+      updateDoc(doc(asModerator(), 'teacherVerifications', tvId), {
         status: 'verified',
         checkedBy: 'moderator-1',
         checkedAt: new Date(),
@@ -592,14 +596,9 @@ describe('Eduvelto security rules', () => {
     await assertFails(getDoc(doc(asModerator(), 'users', 'student-1')));
   });
   it('(k5) an admin cannot decide their OWN teacher application', async () => {
-    const ref = await addDoc(collection(asModerator(), 'teacherVerifications'), {
-      userId: 'moderator-1',
-      fullName: 'Moderator',
-      institution: 'Test College',
-      status: 'pending',
-    });
+    const tvId = await createTvRecord('moderator-1');
     await assertFails(
-      updateDoc(doc(asModerator(), 'teacherVerifications', ref.id), {
+      updateDoc(doc(asModerator(), 'teacherVerifications', tvId), {
         status: 'verified',
         checkedBy: 'moderator-1',
         checkedAt: new Date(),
@@ -609,15 +608,10 @@ describe('Eduvelto security rules', () => {
     );
   });
   it('(k6) approve without reason / without checklist / reject without reason is DENIED', async () => {
-    const ref = await addDoc(collection(asStudent1(), 'teacherVerifications'), {
-      userId: 'student-1',
-      fullName: 'Student One',
-      institution: 'Test College',
-      status: 'pending',
-    });
+    const tvId = await createTvRecord('student-1');
     const db = asAdmin();
     await assertFails(
-      updateDoc(doc(db, 'teacherVerifications', ref.id), {
+      updateDoc(doc(db, 'teacherVerifications', tvId), {
         status: 'verified',
         checkedBy: 'admin-1',
         checkedAt: new Date(),
@@ -625,7 +619,7 @@ describe('Eduvelto security rules', () => {
       }),
     );
     await assertFails(
-      updateDoc(doc(db, 'teacherVerifications', ref.id), {
+      updateDoc(doc(db, 'teacherVerifications', tvId), {
         status: 'verified',
         checkedBy: 'admin-1',
         checkedAt: new Date(),
@@ -633,7 +627,7 @@ describe('Eduvelto security rules', () => {
       }),
     );
     await assertFails(
-      updateDoc(doc(db, 'teacherVerifications', ref.id), {
+      updateDoc(doc(db, 'teacherVerifications', tvId), {
         status: 'rejected',
         checkedBy: 'admin-1',
         checkedAt: new Date(),
@@ -669,13 +663,8 @@ describe('Eduvelto security rules', () => {
     );
   });
   it('(k8) admin reopening a decided application back to pending is ALLOWED', async () => {
-    const ref = await addDoc(collection(asStudent1(), 'teacherVerifications'), {
-      userId: 'student-1',
-      fullName: 'Student One',
-      institution: 'Test College',
-      status: 'pending',
-    });
-    await updateDoc(doc(asAdmin(), 'teacherVerifications', ref.id), {
+    const tvId = await createTvRecord('student-1');
+    await updateDoc(doc(asAdmin(), 'teacherVerifications', tvId), {
       status: 'verified',
       checkedBy: 'admin-1',
       checkedAt: new Date(),
@@ -683,7 +672,7 @@ describe('Eduvelto security rules', () => {
       checks: { identity: true, institution: true, subject: true, adult: true },
     });
     await assertSucceeds(
-      updateDoc(doc(asAdmin(), 'teacherVerifications', ref.id), {
+      updateDoc(doc(asAdmin(), 'teacherVerifications', tvId), {
         status: 'pending',
         checkedBy: 'admin-1',
         checkedAt: new Date(),

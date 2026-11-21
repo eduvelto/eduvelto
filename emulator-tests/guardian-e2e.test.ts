@@ -37,8 +37,6 @@ import {
   getDocs,
   type Firestore,
 } from 'firebase/firestore';
-import { readFileSync } from 'node:fs';
-import { resolve } from 'node:path';
 import {
   requestParentLink,
   confirmParentLink,
@@ -52,8 +50,6 @@ import { submitTeacherApplication, getMyTeacherApplication } from '../src/lib/ad
 
 const PROJECT_ID = 'eduvelto-guardian-e2e';
 let env: RulesTestEnvironment;
-
-const RULES_TEXT = readFileSync(resolve(__dirname, '../firestore.rules'), 'utf8');
 
 function as(uid: string): Firestore {
   return env.authenticatedContext(uid).firestore() as unknown as Firestore;
@@ -123,7 +119,7 @@ beforeAll(async () => {
   // setDoc an UPDATE (denied) instead of a create.
   await env.clearFirestore();
   await seed();
-});
+}, 120000);
 
 afterAll(async () => {
   await env.cleanup();

@@ -25,10 +25,14 @@ service cloud.firestore {
     function uid() { return request.auth.uid; }
     function isOwner(id) { return signedIn() && uid() == id; }
 
-    // Role is read from the caller's own users doc. If that doc does not
-    // exist (or the read fails), get() errors and the rule denies — safe.
+    // Role is read from the caller's own users doc. `.data.get('role', '')`
+    // (not `.data.role`): dot-access ERRORS when the doc/field is missing,
+    // which turns a clean deny into a rules EVALUATION error — the client
+    // then gets an opaque error instead of permission-denied, and lib code
+    // that reads-then-checks (e.g. confirmParentLink's 'not-the-child')
+    // can never run. A missing doc/field now yields '' (never a role).
     function callerRole() {
-      return get(/databases/$(database)/documents/users/$(uid())).data.role;
+      return get(/databases/$(database)/documents/users/$(uid())).data.get('role', '');
     }
     // Suspension is enforced SERVER-side, not just in the UI (review
     // 20 Nov 2026: suspension used to hide the app only — a suspended

@@ -94,6 +94,23 @@ export function parentLinkId(parentUid: string, childUid: string): string {
   return `${parentUid}_${childUid}`;
 }
 
+/**
+ * The child named in a link id is `parentUid_childUid` (enforced by the
+ * parentLinks create rule). A confirm/reject may only come from THAT
+ * child — check it from the id BEFORE any Firestore read: the read rule
+ * denies a wrong child (correctly), but the emulator reports that deny
+ * as a rules "evaluation error" (get()-derived FALSE comparisons do not
+ * evaluate cleanly in emulator v1.19.8 — proven by probes, see
+ * dashboards-test-report §5), which would mask the intended
+ * 'not-the-child' error. The id check is exact, needs no read, and
+ * keeps 'link-not-found' / 'link-not-pending' reachable for the right
+ * child (their read is allowed by the rules).
+ */
+export function assertLinkChild(linkId: string, childUid: string): void {
+  const parts = linkId.split('_');
+  if (parts.length !== 2 || parts[1] !== childUid) throw new Error('not-the-child');
+}
+
 function toLink(id: string, d: Record<string, unknown>): ParentLink {
   return {
     id,
@@ -199,6 +216,7 @@ export async function requestParentLink(
 
 /** The child confirms the guardian's request (pending -> confirmed) + audit entry. */
 export async function confirmParentLink(db: Firestore, linkId: string, childUid: string): Promise<void> {
+  assertLinkChild(linkId, childUid);
   const ref = doc(db, 'parentLinks', linkId);
   const snap = await getDoc(ref);
   if (!snap.exists()) throw new Error('link-not-found');
@@ -225,6 +243,7 @@ export async function confirmParentLink(db: Firestore, linkId: string, childUid:
 
 /** The child REJECTS the guardian's request (pending -> revoked) + audit entry. */
 export async function rejectParentLink(db: Firestore, linkId: string, childUid: string): Promise<void> {
+  assertLinkChild(linkId, childUid);
   const ref = doc(db, 'parentLinks', linkId);
   const snap = await getDoc(ref);
   if (!snap.exists()) throw new Error('link-not-found');
