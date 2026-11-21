@@ -167,6 +167,7 @@ export default function App() {
         <Route path="/admin/backup" element={<AdminGuard><AdminBackupPage /></AdminGuard>} />
         <Route path="/admin/audit" element={<AdminGuard><AdminAuditPage /></AdminGuard>} />
         <Route path="/ai-teacher" element={<AiTeacherPage />} />
+        <Route path="/ai-chat" element={<AiChatPage />} />
         <Route path="/exam" element={<ExamPage />} />
         <Route path="/routine" element={<RoutinePage />} />
         <Route path="/progress" element={<ProgressPage />} />
