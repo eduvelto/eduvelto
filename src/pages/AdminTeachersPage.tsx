@@ -23,7 +23,7 @@ import {
 type Decision = 'verified' | 'rejected' | 'revoked' | 'reopen';
 
 const CHECK_LABELS: Array<{ key: keyof Omit<VerificationChecks, 'evidenceRef'>; bn: string }> = [
-  { key: 'identity', bn: 'পরিচয় যাচাই করেছি (নাম ID/কাগজের সঙ্গে মিলেছে)' },
+  { key: 'identity', bn: 'পরিচয় যাচাই করেছি (নাম, প্রতিষ্ঠান ও যোগ্যতার তথ্য মিলেছে)' },
   { key: 'institution', bn: 'প্রতিষ্ঠান যাচাই করেছি (চাকরি/প্রতিষ্ঠান নিশ্চিত)' },
   { key: 'subject', bn: 'বিষয় + যোগ্যতা যাচাই করেছি' },
   { key: 'adult', bn: 'আবেদনকারী প্রাপ্তবয়স্ক (শিশু নয়)' },
@@ -161,7 +161,7 @@ function VerificationCard(props: {
             type="text"
             value={checks.evidenceRef ?? ''}
             onChange={(e) => setChecks((p) => ({ ...p, evidenceRef: e.target.value }))}
-            placeholder="যেমন: NID দেখা হয়েছে, কলেজে ফোন করা হয়েছে"
+            placeholder="যেমন: কলেজে ফোন করে চাকরি নিশ্চিত করা হয়েছে"
             style={{
               width: '100%',
               boxSizing: 'border-box',
