@@ -1,25 +1,34 @@
-// Eduvelto — home (Phase 2, Step 2 + Step 3).
+// Eduvelto — home (Phase 2, Step 2 + Step 3; pagination 21 Nov 2026).
 //
 // Shows the real published library: counts + a first set of books.
+// Uses the paginated query (first page of 50) + a count aggregation —
+// the home page no longer downloads all 609 books just to show 6.
 // When nothing is published yet, the honest empty state stays.
 
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { PageShell, EmptyState } from '../components/PageShell';
 import AdSlot from '../components/AdSlot';
-import { listPublishedBooks, type Book } from '../lib/content';
+import { countPublishedBooks, listPublishedBooksPage, type Book } from '../lib/content';
+import { ALL_DEPARTMENTS } from '../lib/taxonomy';
 
 export default function HomePage() {
   const [books, setBooks] = useState<Book[] | null>(null);
+  const [total, setTotal] = useState<number | null>(null);
 
   useEffect(() => {
     let live = true;
-    listPublishedBooks()
-      .then((b) => {
-        if (live) setBooks(b);
+    Promise.all([listPublishedBooksPage({}, null), countPublishedBooks({})])
+      .then(([first, count]) => {
+        if (!live) return;
+        setBooks(first.items);
+        setTotal(count);
       })
       .catch(() => {
-        if (live) setBooks([]);
+        if (live) {
+          setBooks([]);
+          setTotal(0);
+        }
       });
     return () => {
       live = false;
@@ -27,21 +36,21 @@ export default function HomePage() {
   }, []);
 
   const featured = (books ?? []).slice(0, 6);
-  const subjects = [...new Set((books ?? []).map((b) => b.department))];
+  const subjects = ALL_DEPARTMENTS.length;
 
   return (
     <PageShell titleBn="হোম" titleEn="Home">
       {books === null ? <p>লোড হচ্ছে… / Loading…</p> : null}
-      {books !== null && books.length === 0 ? (
+      {books !== null && (total ?? 0) === 0 ? (
         <>
           <EmptyState bn="এখনো কোনো তথ্য নেই। কনটেন্ট প্রকাশিত হলে এখানে দেখা যাবে।" en="No data yet. Content will appear here once it is published." />
           <p style={{ marginTop: 16 }}>এখানে প্রকাশিত বিষয়, বই ও কুইজ দেখা যাবে। / Published subjects, books and quizzes will appear here.</p>
         </>
       ) : null}
-      {books !== null && books.length > 0 ? (
+      {books !== null && (total ?? 0) > 0 ? (
         <>
           <p style={{ fontSize: 17 }}>
-            <strong>{books.length}টি বই</strong> প্রকাশিত · {subjects.length}টি বিষয় ·{' '}
+            <strong>{total}টি বই</strong> প্রকাশিত · {subjects}টি বিষয় ·{' '}
             <Link to="/library">সব বই দেখুন / See all books</Link>
           </p>
           <h2 style={{ fontSize: 19, margin: '16px 0 8px' }}>নতুন বই / New books</h2>

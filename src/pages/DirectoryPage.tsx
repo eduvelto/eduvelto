@@ -1,16 +1,32 @@
-// Eduvelto — education directory (Phase 2, Step 2 + Step 3).
+// Eduvelto — education directory (Phase 2, Step 2 + Step 3; pagination 21 Nov 2026).
 //
-// Browse the cascade type → board → program → class → subject, reading
-// only Published educationDirectory rows (one-time read). Each select
-// narrows the next; the result list is 20 rows per page. Drafts are
-// invisible by the rules.
+// Server-side pagination: 50 rows per page (limit + startAfter), cascade
+// filters run server-side, total from a count aggregation — opening the
+// Directory no longer downloads all 609 rows. Filter dropdowns come from
+// the static taxonomy (src/lib/taxonomy.ts) because Firestore has no
+// DISTINCT query. Each server page is sorted client-side in the
+// Directory's usual order (class, department, paper title); the GLOBAL
+// order across pages is document-ID order — restoring the old global
+// order needs a composite index (owner follow-up, not built here).
 
-import { useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { PageShell, EmptyState } from '../components/PageShell';
-import { listPublishedDirectory, type DirectoryRow } from '../lib/content';
-
-const PAGE_SIZE = 20;
+import {
+  countPublishedDirectory,
+  listPublishedDirectoryPage,
+  PAGE_SIZE,
+  type DirectoryFilters,
+  type DirectoryRow,
+  type PageResult,
+} from '../lib/content';
+import {
+  EDUCATION_TYPES,
+  directoryBoardOptions,
+  directoryClassOptions,
+  directoryDepartmentOptions,
+  directoryProgramOptions,
+} from '../lib/taxonomy';
 
 const selectStyle: React.CSSProperties = {
   padding: '8px 10px',
@@ -23,80 +39,95 @@ const selectStyle: React.CSSProperties = {
 };
 
 export default function DirectoryPage() {
-  const [rows, setRows] = useState<DirectoryRow[] | null>(null);
+  const [pages, setPages] = useState<PageResult<DirectoryRow>[]>([]);
+  const [pageIndex, setPageIndex] = useState(0);
+  const [total, setTotal] = useState<number | null>(null);
   const [error, setError] = useState('');
+  const [loading, setLoading] = useState(true);
   const [type, setType] = useState('');
   const [board, setBoard] = useState('');
   const [program, setProgram] = useState('');
   const [classLevel, setClassLevel] = useState('');
   const [dept, setDept] = useState('');
-  const [page, setPage] = useState(1);
 
+  const filters: DirectoryFilters = useMemo(
+    () => ({
+      type: type || undefined,
+      board: board || undefined,
+      program: program || undefined,
+      classLevel: classLevel || undefined,
+      department: dept || undefined,
+    }),
+    [type, board, program, classLevel, dept],
+  );
+
+  const loadPage = useCallback(
+    async (f: DirectoryFilters, cursor: PageResult<DirectoryRow>['lastDoc']) =>
+      listPublishedDirectoryPage(f, cursor),
+    [],
+  );
+
+  // (Re)load page 1 + total whenever the filters change.
   useEffect(() => {
     let live = true;
-    listPublishedDirectory()
-      .then((r) => {
-        if (live) setRows(r);
+    setLoading(true);
+    setError('');
+    setPages([]);
+    setPageIndex(0);
+    Promise.all([loadPage(filters, null), countPublishedDirectory(filters)])
+      .then(([first, count]) => {
+        if (!live) return;
+        setPages([first]);
+        setTotal(count);
+        setLoading(false);
       })
       .catch(() => {
-        if (live) setError('নির্দেশিকা লোড করা যায়নি — আবার চেষ্টা করুন। / Could not load the directory — please try again.');
+        if (!live) return;
+        setError('নির্দেশিকা লোড করা যায়নি — আবার চেষ্টা করুন। / Could not load the directory — please try again.');
+        setLoading(false);
       });
     return () => {
       live = false;
     };
-  }, []);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [filters.type, filters.board, filters.program, filters.classLevel, filters.department]);
 
-  const all = rows ?? [];
-  const types = useMemo(() => [...new Set(all.map((r) => r.type).filter(Boolean))].sort(), [all]);
-  const boards = useMemo(
-    () => [...new Set(all.filter((r) => !type || r.type === type).map((r) => r.board).filter(Boolean))].sort(),
-    [all, type],
-  );
-  const programs = useMemo(
-    () =>
-      [...new Set(all.filter((r) => (!type || r.type === type) && (!board || r.board === board)).map((r) => r.program).filter(Boolean))].sort(),
-    [all, type, board],
-  );
-  const classes = useMemo(
-    () =>
-      [...new Set(all.filter((r) => (!type || r.type === type) && (!board || r.board === board) && (!program || r.program === program)).map((r) => r.classLevel).filter(Boolean))].sort(),
-    [all, type, board, program],
-  );
-  const departments = useMemo(
-    () =>
-      [...new Set(all.filter((r) => (!type || r.type === type) && (!board || r.board === board) && (!program || r.program === program) && (!classLevel || r.classLevel === classLevel)).map((r) => r.department).filter(Boolean))].sort(),
-    [all, type, board, program, classLevel],
-  );
+  const boards = directoryBoardOptions(type);
+  const programs = directoryProgramOptions(type, board);
+  const classes = directoryClassOptions(type, board, program);
+  const departments = directoryDepartmentOptions(type, board, program, classLevel);
 
-  const filtered = useMemo(
-    () =>
-      all.filter(
-        (r) =>
-          (!type || r.type === type) &&
-          (!board || r.board === board) &&
-          (!program || r.program === program) &&
-          (!classLevel || r.classLevel === classLevel) &&
-          (!dept || r.department === dept),
-      ),
-    [all, type, board, program, classLevel, dept],
-  );
+  const currentPage = pages[pageIndex];
+  const pageRows = currentPage?.items ?? [];
+  const shownFrom = total === 0 ? 0 : pageIndex * PAGE_SIZE + 1;
+  const shownTo = pageIndex * PAGE_SIZE + pageRows.length;
 
-  const pageCount = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
-  const safePage = Math.min(page, pageCount);
-  const pageRows = filtered.slice((safePage - 1) * PAGE_SIZE, safePage * PAGE_SIZE);
+  async function nextPage() {
+    if (!currentPage || !currentPage.hasMore) return;
+    setLoading(true);
+    try {
+      const res = await loadPage(filters, currentPage.lastDoc);
+      setPages((p) => [...p, res]);
+      setPageIndex((i) => i + 1);
+    } catch {
+      setError('পরের পাতা লোড করা যায়নি — আবার চেষ্টা করুন। / Could not load the next page — please try again.');
+    } finally {
+      setLoading(false);
+    }
+  }
 
-  function resetPage() {
-    setPage(1);
+  function prevPage() {
+    setPageIndex((i) => Math.max(0, i - 1));
   }
 
   return (
     <PageShell titleBn="শিক্ষা নির্দেশিকা" titleEn="Education Directory">
       {error ? <p style={{ color: '#b00020' }}>{error}</p> : null}
-      {rows === null && !error ? <p>লোড হচ্ছে… / Loading…</p> : null}
-      {rows !== null && rows.length === 0 ? (
+      {loading && pages.length === 0 && !error ? <p>লোড হচ্ছে… / Loading…</p> : null}
+      {!loading && total === 0 ? (
         <EmptyState bn="এখনো কোনো তথ্য নেই। কনটেন্ট প্রকাশিত হলে এখানে দেখা যাবে।" en="No data yet. Content will appear here once it is published." />
       ) : null}
-      {rows !== null && rows.length > 0 ? (
+      {total !== null && total > 0 ? (
         <>
           <p style={{ color: '#555', margin: '0 0 12px' }}>
             ধাপে ধাপে বাছুন: ধারা → বোর্ড → প্রোগ্রাম → শ্রেণি → বিষয় / Pick step by step: type →
@@ -111,13 +142,12 @@ export default function DirectoryPage() {
                 setProgram('');
                 setClassLevel('');
                 setDept('');
-                resetPage();
               }}
               aria-label="শিক্ষার ধারা / Education type"
               style={selectStyle}
             >
               <option value="">সব ধারা / All types</option>
-              {types.map((t) => (
+              {EDUCATION_TYPES.map((t) => (
                 <option key={t} value={t}>
                   {t}
                 </option>
@@ -130,7 +160,6 @@ export default function DirectoryPage() {
                 setProgram('');
                 setClassLevel('');
                 setDept('');
-                resetPage();
               }}
               aria-label="বোর্ড / Board"
               style={selectStyle}
@@ -148,7 +177,6 @@ export default function DirectoryPage() {
                 setProgram(e.target.value);
                 setClassLevel('');
                 setDept('');
-                resetPage();
               }}
               aria-label="প্রোগ্রাম / Program"
               style={selectStyle}
@@ -165,7 +193,6 @@ export default function DirectoryPage() {
               onChange={(e) => {
                 setClassLevel(e.target.value);
                 setDept('');
-                resetPage();
               }}
               aria-label="শ্রেণি / Class"
               style={selectStyle}
@@ -181,7 +208,6 @@ export default function DirectoryPage() {
               value={dept}
               onChange={(e) => {
                 setDept(e.target.value);
-                resetPage();
               }}
               aria-label="বিষয় / Subject"
               style={selectStyle}
@@ -195,9 +221,10 @@ export default function DirectoryPage() {
             </select>
           </div>
           <p style={{ color: '#555', margin: '0 0 12px' }}>
-            {filtered.length}টি এন্ট্রি / {filtered.length} entries
+            {total}টি এন্ট্রি / {total} entries
+            {pageRows.length > 0 ? ` — দেখাচ্ছি ${shownFrom}–${shownTo} / showing ${shownFrom}–${shownTo}` : ''}
           </p>
-          {filtered.length === 0 ? (
+          {pageRows.length === 0 && !loading ? (
             <p>এই বাছাইয়ে কিছু পাওয়া যায়নি — উপরের ধাপ বদলে আবার চেষ্টা করুন। / Nothing matches — try different steps above.</p>
           ) : null}
           <ul style={{ margin: 0, paddingLeft: 20 }}>
@@ -210,23 +237,24 @@ export default function DirectoryPage() {
               </li>
             ))}
           </ul>
-          {pageCount > 1 ? (
+          {total > PAGE_SIZE || pageIndex > 0 ? (
             <div style={{ display: 'flex', gap: 12, alignItems: 'center', marginTop: 16 }}>
               <button
                 type="button"
-                onClick={() => setPage((p) => Math.max(1, p - 1))}
-                disabled={safePage <= 1}
+                onClick={prevPage}
+                disabled={pageIndex <= 0}
                 style={{ padding: '10px 16px', minHeight: 44, borderRadius: 6, border: '1px solid #0A1F44', background: '#fff', color: '#0A1F44', cursor: 'pointer' }}
               >
                 ← আগের / Previous
               </button>
               <span>
-                পাতা {safePage} / {pageCount} / Page {safePage} of {pageCount}
+                পাতা {pageIndex + 1} / Page {pageIndex + 1}
+                {total > 0 ? ` — মোট ${total}টি এন্ট্রি / ${total} entries total` : ''}
               </span>
               <button
                 type="button"
-                onClick={() => setPage((p) => Math.min(pageCount, p + 1))}
-                disabled={safePage >= pageCount}
+                onClick={nextPage}
+                disabled={!currentPage?.hasMore || loading}
                 style={{ padding: '10px 16px', minHeight: 44, borderRadius: 6, border: '1px solid #0A1F44', background: '#fff', color: '#0A1F44', cursor: 'pointer' }}
               >
                 পরের / Next →
