@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 // PWA install prompt (owner brief 20 Nov 23:53 — installable phone app).
 // Android/Chrome fire `beforeinstallprompt` when the PWA is installable;
@@ -141,6 +142,12 @@ export default function InstallAppPrompt() {
           অ্যাপ ইনস্টল করুন / Install app
         </button>
       ) : null}
+      <Link
+        to="/install"
+        style={{ color: '#041742', fontWeight: 700, padding: '10px 6px', minHeight: 44, display: 'inline-flex', alignItems: 'center' }}
+      >
+        কীভাবে ইনস্টল করবেন? / How to install
+      </Link>
       <button
         type="button"
         onClick={dismiss}

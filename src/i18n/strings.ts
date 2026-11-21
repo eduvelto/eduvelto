@@ -9,6 +9,7 @@ export const strings = {
   tagline: { bn: 'শেখো, এগিয়ে যাও, স্বপ্ন গড়ো', en: 'Learn, Grow, Achieve' },
   nav: {
     home: { bn: 'হোম', en: 'Home' },
+    install: { bn: 'অ্যাপ ইনস্টল', en: 'Install app' },
     directory: { bn: 'শিক্ষা নির্দেশিকা', en: 'Education Directory' },
     library: { bn: 'লাইব্রেরি', en: 'Library' },
     exam: { bn: 'পরীক্ষা', en: 'Exam' },

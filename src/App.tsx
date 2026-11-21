@@ -4,6 +4,9 @@ import { useAuth } from './lib/auth';
 import { isBottomBannerAllowed, adsEnabled, BOTTOM_BANNER_RESERVE_PX } from './lib/ads';
 import AdSlot from './components/AdSlot';
 import InstallAppPrompt from './components/InstallAppPrompt';
+import UpdatePrompt from './components/UpdatePrompt';
+import BottomNav from './components/BottomNav';
+import InstallPage from './pages/InstallPage';
 import HomePage from './pages/HomePage';
 import RegisterPage from './pages/RegisterPage';
 import LoginPage from './pages/LoginPage';
@@ -62,7 +65,7 @@ export default function App() {
   const showBottomBanner = isBottomBannerAllowed(location.pathname);
   const bannerLive = showBottomBanner && adsEnabled('bottom-banner');
   return (
-    <div style={bannerLive ? { paddingBottom: `calc(${BOTTOM_BANNER_RESERVE_PX}px + env(safe-area-inset-bottom, 0px))` } : undefined}>
+    <div className="eduvelto-app-shell" style={bannerLive ? { paddingBottom: `calc(${BOTTOM_BANNER_RESERVE_PX}px + env(safe-area-inset-bottom, 0px))` } : undefined}>
       <header
         style={{
           background: '#0A1F44',
@@ -87,6 +90,7 @@ export default function App() {
           <Link to="/health" style={{ color: '#fff', padding: '10px 6px' }}>{nav.health.bn}</Link>
           <Link to="/about" style={{ color: '#fff', padding: '10px 6px' }}>{nav.about.bn}</Link>
           <Link to="/contact" style={{ color: '#fff', padding: '10px 6px' }}>{nav.contact.bn}</Link>
+          <Link to="/install" style={{ color: '#F1B308', padding: '10px 6px' }}>{nav.install.bn}</Link>
           {profile?.role === 'owner' ? (
             <Link to="/admin" style={{ color: '#F1B308', padding: '10px 6px', fontWeight: 700 }}>{nav.admin.bn}</Link>
           ) : null}
@@ -141,8 +145,10 @@ export default function App() {
       ) : (
         <>
         <InstallAppPrompt />
+        <UpdatePrompt />
         <Routes>
         <Route path="/" element={<HomePage />} />
+        <Route path="/install" element={<InstallPage />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/profile" element={<ProfilePage />} />
@@ -179,6 +185,7 @@ export default function App() {
         <Route path="*" element={<HomePage />} />
         </Routes>
         {showBottomBanner ? <AdSlot placement="bottom-banner" /> : null}
+        <BottomNav bottomOffsetPx={bannerLive ? BOTTOM_BANNER_RESERVE_PX : 0} />
         </>
       )}
     </div>

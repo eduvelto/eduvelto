@@ -22,6 +22,22 @@
     "rewrites": [{ "source": "**", "destination": "/index.html" }],
     "headers": [
       {
+        // PWA: the service worker script and the manifest must NEVER be
+        // served from a long-lived HTTP cache. The generic js/css rule
+        // below sets max-age=31536000, which would delay service-worker
+        // updates (browsers cap SW-script caching at 24h, so a new worker
+        // could take up to a day to reach users) and stale the manifest.
+        // These specific rules come FIRST: Firebase Hosting applies the
+        // first matching header rule, so /sw.js and /manifest.webmanifest
+        // are always revalidated.
+        "source": "/sw.js",
+        "headers": [{ "key": "Cache-Control", "value": "no-cache" }]
+      },
+      {
+        "source": "/manifest.webmanifest",
+        "headers": [{ "key": "Cache-Control", "value": "no-cache" }]
+      },
+      {
         "source": "**/*.@(js|css)",
         "headers": [{ "key": "Cache-Control", "value": "max-age=31536000" }]
       }
