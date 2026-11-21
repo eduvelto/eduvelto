@@ -120,6 +120,10 @@ export default function AboutPage() {
       </section>
 
       <p style={{ marginTop: 20, lineHeight: 1.7 }}>
+        <Link to="/founder">সম্পূর্ণ প্রতিষ্ঠাতা প্রোফাইল / Full founder profile →</Link>
+      </p>
+
+      <p style={{ marginTop: 20, lineHeight: 1.7 }}>
         যোগাযোগ করতে চান? / Want to get in touch?{' '}
         <Link to="/contact">যোগাযোগ পাতা / Contact page</Link> — অফিসিয়াল ইমেইল{' '}
         <a href="mailto:ahmmizan23@gmail.com">ahmmizan23@gmail.com</a> ও নম্বর{' '}
