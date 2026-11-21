@@ -8,10 +8,12 @@
 // all 609 directory rows at once (the old behaviour). Rows are filtered
 // client-side by subject OR department exactly as before, over the pages
 // loaded so far.
+// (ui/premium-polish: book cards, skeletons, retry on error.)
 
 import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { PageShell } from '../components/PageShell';
+import { AlertBox, Card, Chip, SkeletonCards } from '../components/ui';
 import {
   listPublishedDirectoryPage,
   type DirectoryRow,
@@ -28,8 +30,8 @@ export default function SubjectPage() {
   const [loadingMore, setLoadingMore] = useState(false);
   const [error, setError] = useState('');
 
-  useEffect(() => {
-    let live = true;
+  // First-page load — also the retry target for the error AlertBox.
+  function loadFirst() {
     setRows([]);
     setLastDoc(null);
     setHasMore(false);
@@ -37,21 +39,18 @@ export default function SubjectPage() {
     setError('');
     listPublishedDirectoryPage({ department: subject }, null)
       .then((res) => {
-        if (!live) return;
         setRows(res.items);
         setLastDoc(res.lastDoc);
         setHasMore(res.hasMore);
         setLoaded(true);
       })
       .catch(() => {
-        if (!live) return;
         setError('বিষয়টি লোড করা যায়নি — আবার চেষ্টা করুন। / Could not load the subject — please try again.');
         setLoaded(true);
       });
-    return () => {
-      live = false;
-    };
-  }, [subject]);
+  }
+
+  useEffect(loadFirst, [subject]);
 
   async function loadMore() {
     if (!hasMore || loadingMore) return;
@@ -71,27 +70,38 @@ export default function SubjectPage() {
   const shown = rows.filter((r) => r.subject === subject || r.department === subject);
 
   return (
-    <PageShell titleBn={subject || 'বিষয়'} titleEn={subject || 'Subject'}>
+    <PageShell titleBn={subject || 'বিষয়'} titleEn={subject || 'Subject'} wide>
       <p style={{ margin: '0 0 16px' }}>
-        <Link to="/directory">← শিক্ষা নির্দেশিকা / Directory</Link>
+        <Link to="/directory" style={{ fontWeight: 600 }}>
+          ← শিক্ষা নির্দেশিকা / Directory
+        </Link>
         {' · '}
-        <Link to="/library">লাইব্রেরি / Library</Link>
+        <Link to="/library" style={{ fontWeight: 600 }}>
+          লাইব্রেরি / Library
+        </Link>
       </p>
-      {error ? <p style={{ color: '#b00020' }}>{error}</p> : null}
-      {!loaded && !error ? <p>লোড হচ্ছে… / Loading…</p> : null}
+      {error ? (
+        <AlertBox tone="error" onRetry={loadFirst}>
+          {error}
+        </AlertBox>
+      ) : null}
+      {!loaded && !error ? <SkeletonCards count={3} /> : null}
       {loaded && shown.length === 0 && !hasMore ? (
         <p>এই বিষয়ে এখনো কোনো বই প্রকাশিত হয়নি। / No books from this subject are published yet.</p>
       ) : null}
-      <ul style={{ paddingLeft: 20 }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: 12 }}>
         {shown.map((r) => (
-          <li key={r.id} style={{ marginBottom: 10, lineHeight: 1.5 }}>
-            <Link to={`/library/${r.bookId}`}>{r.paperTitle}</Link>
-            <span style={{ color: '#555', fontSize: 13 }}>
-              {' '}· {r.classLevel} · কোড {r.paperCode}
-            </span>
-          </li>
+          <Card key={r.id} hover>
+            <Link to={`/library/${r.bookId}`} style={{ fontWeight: 700, fontSize: 16, color: '#0A1F44', lineHeight: 1.5 }}>
+              {r.paperTitle}
+            </Link>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, marginTop: 10 }}>
+              <Chip tone="outline">{r.classLevel}</Chip>
+              <Chip tone="outline">কোড {r.paperCode}</Chip>
+            </div>
+          </Card>
         ))}
-      </ul>
+      </div>
       {hasMore ? (
         <button
           type="button"

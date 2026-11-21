@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { strings } from '../i18n/strings';
 import { PageShell, EmptyState } from '../components/PageShell';
+import { AlertBox, Skeleton } from '../components/ui';
 import { AccuracyNote, HealthDisclaimer } from '../components/HealthDisclaimer';
 import { listVerifiedDoctors, type Doctor } from '../lib/health';
 
@@ -36,14 +37,14 @@ export default function HealthDoctorsPage() {
       <p>{h.doctorsIntro.bn}</p>
       <p style={{ color: '#555' }}>{h.doctorsIntro.en}</p>
       <AccuracyNote />
-      {error ? <p style={{ color: '#b00020' }}>{error}</p> : null}
-      {items === null && !error ? <p>{strings.common.loading.bn}</p> : null}
+      {error ? <AlertBox tone="error">{error}</AlertBox> : null}
+      {items === null && !error ? <Skeleton lines={3} /> : null}
       {items !== null && items.length === 0 ? (
         <EmptyState bn={h.doctorsEmpty.bn} en={h.doctorsEmpty.en} />
       ) : null}
       {items !== null &&
         items.map((d) => (
-          <article key={d.id} style={{ border: '1px solid #ddd', borderRadius: 8, padding: '16px', marginBottom: 12 }}>
+          <article key={d.id} className="ev-card" style={{ marginBottom: 12 }}>
             <h2 style={{ margin: '0 0 8px', fontSize: 20 }}>
               {d.titleBn} <span style={{ color: '#555', fontSize: 16 }}>({d.title})</span>
             </h2>

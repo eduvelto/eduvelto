@@ -6,8 +6,14 @@
 // allow the owner to write:
 //
 // - CREATE (first sign-in): displayName (non-empty, <=100), email,
-//   role == 'student', language in ['bn','en'], createdAt / updatedAt /
-//   lastActiveAt. The rules DENY create when `isActive` or
+//   role in ['student', 'teacher', 'parent'] (Step 5 role-based
+//   accounts — NEVER 'admin'/'moderator'/'owner' at creation; the rules
+//   deny those), language in ['bn','en'], createdAt / updatedAt /
+//   lastActiveAt, plus the academic fields the user chose at
+//   registration (educationType, board, institution, academicYear,
+//   program, department, classLevel, semester, academicSession,
+//   curriculum, phone, teachingLevel, subjects, qualifications,
+//   experienceYears). The rules DENY create when `isActive` or
 //   `verificationStatus` is present in the document — so this module does
 //   NOT write either of them. (The plan Step 1 text and the schema example
 //   show `isActive: true` at creation, but the committed rule forbids it;
@@ -21,19 +27,28 @@
 //   it is never a student-verification state, and no student access
 //   decision may ever read it (enforced in firestore.rules by
 //   validVerificationTransition()).
+//   A teacher created here is UNVERIFIED (verificationStatus is set only
+//   by the Admin decision in admin.ts, never at registration).
 // - UPDATE (owner): only displayName, educationType, board, institution,
-//   academicYear, program, department, classLevel, language, lastActiveAt,
+//   academicYear, program, department, classLevel, semester,
+//   academicSession, curriculum, phone, teachingLevel, subjects,
+//   qualifications, experienceYears, language, lastActiveAt,
 //   updatedAt. Role, verificationStatus and isActive can never be changed
 //   by the owner — only Admin/Owner (see firestore.rules).
+//   Changing class/subject NEVER deletes progress, bookmarks, results or
+//   learning history: progress is keyed to content IDs (book/chapter/
+//   lesson), not to the profile — the profile only decides what is
+//   SHOWN, never what is KEPT.
 
 import { FirebaseError } from 'firebase/app';
 import type { User } from 'firebase/auth';
 import {
+  collection,
   doc,
   getDoc,
   setDoc,
-  updateDoc,
   serverTimestamp,
+  writeBatch,
   type Firestore,
   type Timestamp,
 } from 'firebase/firestore';
@@ -41,6 +56,10 @@ import {
 export type EducationType = 'general' | 'madrasa' | 'technical' | 'higher' | 'other';
 
 export type UserRole = 'owner' | 'admin' | 'moderator' | 'teacher' | 'student' | 'parent';
+
+/** Verification state of a teacher (admin-set only, mirrored from the
+ * teacherVerifications decision). 'pending' = registered, not approved. */
+export type VerificationStatus = 'pending' | 'verified' | 'rejected' | 'revoked';
 
 export interface UserProfile {
   displayName: string;
@@ -53,6 +72,23 @@ export interface UserProfile {
   program?: string | null;
   department?: string | null;
   classLevel?: string | null;
+  /** Honours / semester-based programmes: '1st Semester', '2nd Semester', … */
+  semester?: string | null;
+  /** Academic session, e.g. '2025-26'. Profile-only: books carry no session. */
+  academicSession?: string | null;
+  /** Curriculum / syllabus, e.g. 'NCTB 2023', 'NU 2013-14'. */
+  curriculum?: string | null;
+  /** Guardian-required phone (guardian accounts). Owner-editable by self. */
+  phone?: string | null;
+  /** Teacher-only: teaching level, e.g. 'SSC', 'HSC', 'Honours'. */
+  teachingLevel?: string | null;
+  /** Teacher-only: subjects the teacher teaches (the REQUEST — approval
+   * lives in the teacherVerifications record, not here). */
+  subjects?: string[] | null;
+  /** Teacher-only: qualifications, free text. */
+  qualifications?: string | null;
+  /** Teacher-only: years of teaching experience. */
+  experienceYears?: number | null;
   language: 'bn' | 'en';
   createdAt?: Timestamp | null;
   updatedAt?: Timestamp | null;
@@ -71,6 +107,10 @@ export interface UserProfile {
    * gate on the student account.
    */
   verificationStatus?: string;
+  /** Admin-set only: uid of the admin who verified this teacher. */
+  verifiedBy?: string | null;
+  /** Admin-set only: when the teacher was verified. */
+  verifiedAt?: Timestamp | null;
 }
 
 /** Fields the owner may edit on their own profile (rules allowlist). */
@@ -83,6 +123,14 @@ export interface ProfileEdit {
   program?: string | null;
   department?: string | null;
   classLevel?: string | null;
+  semester?: string | null;
+  academicSession?: string | null;
+  curriculum?: string | null;
+  phone?: string | null;
+  teachingLevel?: string | null;
+  subjects?: string[] | null;
+  qualifications?: string | null;
+  experienceYears?: number | null;
   language?: 'bn' | 'en';
 }
 
@@ -95,6 +143,14 @@ const EDITABLE_KEYS: (keyof ProfileEdit)[] = [
   'program',
   'department',
   'classLevel',
+  'semester',
+  'academicSession',
+  'curriculum',
+  'phone',
+  'teachingLevel',
+  'subjects',
+  'qualifications',
+  'experienceYears',
   'language',
 ];
 
@@ -128,6 +184,16 @@ export async function getUserProfile(db: Firestore, uid: string): Promise<UserPr
   return data;
 }
 
+export interface EnsureProfileOptions {
+  /** Role chosen at registration. Defaults to 'student'. Admin /
+   * moderator / owner are rejected here (and by the rules) — they are
+   * never a registration choice. */
+  role?: 'student' | 'teacher' | 'parent';
+  /** Academic fields chosen at registration (only the rules-allowlisted
+   * ones are written; anything else is dropped silently). */
+  fields?: Partial<ProfileEdit>;
+}
+
 /**
  * Create the `users/{uid}` document on first sign-in, or return the
  * existing one. `preferredDisplayName` (typed at registration) wins over
@@ -139,6 +205,7 @@ export async function ensureUserProfile(
   db: Firestore,
   user: User,
   preferredDisplayName?: string,
+  options?: EnsureProfileOptions,
 ): Promise<{ profile: UserProfile; created: boolean }> {
   const existing = await getUserProfile(db, user.uid);
   if (existing) return { profile: existing, created: false };
@@ -146,15 +213,35 @@ export async function ensureUserProfile(
   const displayName = (preferredDisplayName ?? user.displayName ?? '').trim() || fallbackDisplayName(user);
   // NOTE: no `isActive`, no `verificationStatus` — the security rules deny
   // create when either is present (see the module header).
-  const data = {
+  const role = options?.role ?? 'student';
+  const data: Record<string, unknown> = {
     displayName: displayName.slice(0, 100),
     email: user.email ?? '',
-    role: 'student' as const,
+    role,
     language: 'bn' as const,
     createdAt: serverTimestamp(),
     updatedAt: serverTimestamp(),
     lastActiveAt: serverTimestamp(),
   };
+  // Registration-time academic fields (allowlisted only).
+  const f = options?.fields;
+  if (f) {
+    for (const key of EDITABLE_KEYS) {
+      if (key === 'displayName' || key === 'language') continue;
+      const v = f[key];
+      if (v === undefined) continue;
+      if (key === 'subjects') {
+        if (Array.isArray(v)) data[key] = v.slice(0, 20).map((s) => String(s).slice(0, 100));
+        continue;
+      }
+      if (key === 'experienceYears') {
+        if (typeof v === 'number' && Number.isFinite(v)) data[key] = Math.max(0, Math.min(60, Math.floor(v)));
+        continue;
+      }
+      data[key] = v === '' ? null : v;
+    }
+    if (f.language) data.language = f.language;
+  }
   await setDoc(doc(db, 'users', user.uid), data);
   const created = await getUserProfile(db, user.uid);
   if (!created) throw new Error('profile-create-failed');
@@ -174,7 +261,32 @@ export async function updateUserProfile(db: Firestore, uid: string, fields: Prof
     clean[key] = value === '' ? null : value;
   }
   clean.updatedAt = serverTimestamp();
-  await updateDoc(doc(db, 'users', uid), clean);
+  // Audit invariant (Step 5): every profile change writes an audit-log
+  // entry (adminActions, action 'profile-changed') in the SAME batch as
+  // the update — the change and its audit trail succeed or fail
+  // together. before/after are JSON strings (same convention as
+  // admin.ts auditEntryData). The rules allow a user to append ONLY this
+  // action for their own uid; the log stays append-only for everyone.
+  const current = await getUserProfile(db, uid);
+  const before: Record<string, unknown> = {};
+  const after: Record<string, unknown> = {};
+  for (const key of Object.keys(clean)) {
+    if (key === 'updatedAt') continue;
+    before[key] = current ? ((current as unknown as Record<string, unknown>)[key] ?? null) : null;
+    after[key] = clean[key];
+  }
+  const batch = writeBatch(db);
+  batch.update(doc(db, 'users', uid), clean);
+  batch.set(doc(collection(db, 'adminActions')), {
+    actorId: uid,
+    action: 'profile-changed',
+    details: `Profile updated: ${Object.keys(after).join(', ')}`.slice(0, 1000),
+    targetId: uid,
+    before: JSON.stringify(before).slice(0, 500),
+    after: JSON.stringify(after).slice(0, 500),
+    createdAt: serverTimestamp(),
+  });
+  await batch.commit();
   const updated = await getUserProfile(db, uid);
   if (!updated) throw new Error('profile-read-failed');
   return updated;

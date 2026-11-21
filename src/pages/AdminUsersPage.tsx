@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { PageShell } from '../components/PageShell';
+import { Button, Card } from '../components/ui';
 import {
   AdminBackLink,
   EmptyAdminBox,
@@ -45,17 +46,28 @@ export default function AdminUsersPage() {
   useEffect(() => {
     mounted.current = true;
     void (async () => {
+      // The user LIST is the page: load it on its own. The total count is
+      // loaded separately afterwards — count() is known to fail on live
+      // Spark (RESOURCE_EXHAUSTED, audit H1) and must never blank the
+      // list. Before this fix both were in one Promise.all, so a count
+      // failure left the owner staring at "nobody found" with zero rows
+      // even though listUsers() itself works.
       try {
-        const [page, counts] = await Promise.all([listUsers(requireDb()), getDashboardCounts(requireDb())]);
+        const page = await listUsers(requireDb());
         if (!mounted.current) return;
         setRows(page.rows);
         setLastDoc(page.lastDoc);
         setHasMore(page.hasMore);
-        setTotal(counts.users);
       } catch (e) {
         if (mounted.current) setError(friendlyAdminError(e));
       } finally {
         if (mounted.current) setLoading(false);
+      }
+      try {
+        const counts = await getDashboardCounts(requireDb());
+        if (mounted.current) setTotal(counts.users);
+      } catch {
+        // Total stays null — the "of N" suffix hides, the list is intact.
       }
     })();
     return () => {
@@ -129,52 +141,23 @@ export default function AdminUsersPage() {
           onChange={(e) => setEmail(e.target.value)}
           placeholder="ইমেইল দিয়ে খুঁজুন — search by exact email"
           aria-label="ইমেইল দিয়ে খুঁজুন"
-          style={{
-            flex: '1 1 220px',
-            padding: '12px 10px',
-            minHeight: 48,
-            fontSize: 16,
-            borderRadius: 8,
-            border: '1px solid #888',
-          }}
+          className="ev-input"
+          style={{ flex: '1 1 220px' }}
         />
-        <button
-          type="button"
+        <Button
           onClick={() => void onSearch()}
           disabled={searching || email.trim() === ''}
-          style={{
-            padding: '12px 20px',
-            minHeight: 48,
-            fontSize: 16,
-            borderRadius: 8,
-            border: 'none',
-            background: '#0A1F44',
-            color: '#fff',
-            cursor: 'pointer',
-          }}
+          loading={searching}
         >
           {searching ? 'খুঁজছি…' : 'খুঁজুন / Search'}
-        </button>
+        </Button>
         {searched ? (
-          <button
-            type="button"
-            onClick={() => void clearSearch()}
-            style={{
-              padding: '12px 20px',
-              minHeight: 48,
-              fontSize: 16,
-              borderRadius: 8,
-              border: '1px solid #0A1F44',
-              background: '#fff',
-              color: '#0A1F44',
-              cursor: 'pointer',
-            }}
-          >
+          <Button variant="outline" onClick={() => void clearSearch()}>
             সব দেখান / Show all
-          </button>
+          </Button>
         ) : null}
       </div>
-      <p style={{ color: '#555', fontSize: 14, marginTop: 0 }}>
+      <p className="ev-muted-ivory" style={{ fontSize: 14, marginTop: 0 }}>
         {total !== null ? `মোট ${formatBnNumber(total)} জন — ` : ''}দেখানো হচ্ছে{' '}
         {formatBnNumber(rows.length)} জন / Showing {rows.length}
         {total !== null ? ` of ${total}` : ''}
@@ -192,15 +175,8 @@ export default function AdminUsersPage() {
 
       <ul style={{ listStyle: 'none', padding: 0 }}>
         {rows.map((row) => (
-          <li
-            key={row.uid}
-            style={{
-              border: '1px solid #ddd',
-              borderRadius: 8,
-              padding: '12px 14px',
-              marginBottom: 8,
-            }}
-          >
+          <li key={row.uid} style={{ marginBottom: 12 }}>
+            <Card>
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, alignItems: 'center' }}>
               <strong>{row.displayName}</strong>
               <StatusPill
@@ -210,8 +186,8 @@ export default function AdminUsersPage() {
               {row.role === 'owner' ? (
                 <span
                   style={{
-                    background: '#F1B308',
-                    color: '#041742',
+                    background: '#D9A441',
+                    color: '#142B3B',
                     fontWeight: 700,
                     borderRadius: 999,
                     padding: '2px 10px',
@@ -226,38 +202,24 @@ export default function AdminUsersPage() {
                 tone={row.isActive ? 'active' : 'ready'}
               />
             </div>
-            <p style={{ margin: '6px 0', color: '#555', fontSize: 14 }}>
+            <p style={{ margin: '6px 0', color: '#68747B', fontSize: 14 }}>
               <span lang="en">{row.email}</span>
               {row.institution ? ` · ${row.institution}` : ''}
               {row.classLevel ? ` · ${row.classLevel}` : ''}
               {row.verificationStatus ? ` · শিক্ষক যাচাই: ${row.verificationStatus}` : ''}
             </p>
-            <p style={{ margin: '0 0 6px', color: '#555', fontSize: 14 }}>
+            <p style={{ margin: '0 0 6px', color: '#68747B', fontSize: 14 }}>
               সদস্য: {formatTime(row.createdAt)}
             </p>
             <Link to={`/admin/users/${row.uid}`}>প্রোফাইল খুলুন / Open profile →</Link>
+            </Card>
           </li>
         ))}
       </ul>
       {hasMore && !searched ? (
-        <button
-          type="button"
-          onClick={() => void loadMore()}
-          disabled={loadingMore}
-          style={{
-            padding: '12px 20px',
-            minHeight: 48,
-            fontSize: 16,
-            borderRadius: 8,
-            border: '1px solid #0A1F44',
-            background: '#fff',
-            color: '#0A1F44',
-            cursor: 'pointer',
-            width: '100%',
-          }}
-        >
+        <Button variant="outline" block onClick={() => void loadMore()} loading={loadingMore}>
           {loadingMore ? 'লোড হচ্ছে…' : 'আরও দেখুন / Load more'}
-        </button>
+        </Button>
       ) : null}
     </PageShell>
   );

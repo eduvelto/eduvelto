@@ -7,23 +7,24 @@ import { db } from '../firebase';
 // - ConfirmDialog: the ONE confirmation modal for the whole dashboard.
 //   Never use window.confirm (its buttons are in English, it traps no
 //   focus, and it is not Bangla — review 20 Nov 2026, a11y S11).
-// - StatusPill: brand colours only (navy/gold/grey — NO green).
+// - StatusPill: design-system v2 colours only (forest/teal/amber — the
+//   old navy/gold/grey palette was replaced 21 Nov 2026).
 // - ErrorBox / LoadingBox / EmptyAdminBox: every admin screen shows one
 //   of these states, never a bare error code or a silent blank page
 //   (review UX S6/S11).
 
-export const NAVY = '#0A1F44';
-export const DARK_NAVY = '#041742';
-export const BLUE = '#1E7CE8';
-export const GOLD = '#F1B308';
+export const NAVY = '#142B3B';
+export const DARK_NAVY = '#0D1E29';
+export const BLUE = '#12766E';
+export const GOLD = '#D9A441';
 
 /** Firestore instance or a clear error — Firebase is always configured in production. */
 export function requireDb(): Firestore {
   if (!db) throw new Error('not-configured');
   return db;
 }
-export const PILL_ACTIVE = { background: '#E8EFFA', color: '#0A1F44' };
-export const PILL_READY = { background: '#FDF3D0', color: '#041742' };
+export const PILL_ACTIVE = { background: '#E3F2F0', color: '#12766E' };
+export const PILL_READY = { background: '#FBF3E2', color: '#8A6100' };
 export const PILL_MUTED = { background: '#F1F1F1', color: '#444' };
 
 export function StatusPill(props: { label: string; tone: 'active' | 'ready' | 'muted' }) {
@@ -48,17 +49,7 @@ export function StatusPill(props: { label: string; tone: 'active' | 'ready' | 'm
 
 export function ErrorBox(props: { message: string }) {
   return (
-    <div
-      role="alert"
-      style={{
-        border: '1px solid #b00020',
-        borderRadius: 8,
-        padding: '12px 14px',
-        background: '#fdf0f0',
-        color: '#5f0a0a',
-        margin: '12px 0',
-      }}
-    >
+    <div role="alert" className="ev-alert ev-alert-error" style={{ margin: '12px 0' }}>
       {props.message}
     </div>
   );
@@ -66,7 +57,7 @@ export function ErrorBox(props: { message: string }) {
 
 export function LoadingBox(props: { label?: string }) {
   return (
-    <p aria-live="polite" style={{ color: '#555' }}>
+    <p aria-live="polite" style={{ color: '#57616A' }}>
       {props.label ?? 'লোড হচ্ছে… / Loading…'}
     </p>
   );
@@ -76,16 +67,16 @@ export function EmptyAdminBox(props: { bn: string; en: string; nextBn?: string }
   return (
     <div
       style={{
-        border: '1px solid #ddd',
-        borderRadius: 8,
+        border: '1px solid #E5E8E5',
+        borderRadius: 12,
         padding: '20px 16px',
-        background: '#fafafa',
+        background: '#E3F2F0',
       }}
     >
-      <p style={{ margin: 0 }}>{props.bn}</p>
-      <p style={{ margin: '8px 0 0', color: '#555' }}>{props.en}</p>
+      <p style={{ margin: 0, fontWeight: 600, color: '#142B3B' }}>{props.bn}</p>
+      <p style={{ margin: '8px 0 0', color: '#68747B' }}>{props.en}</p>
       {props.nextBn ? (
-        <p style={{ margin: '8px 0 0', color: '#555' }}>পরবর্তী পদক্ষেপ: {props.nextBn}</p>
+        <p style={{ margin: '8px 0 0', color: '#68747B' }}>পরবর্তী পদক্ষেপ: {props.nextBn}</p>
       ) : null}
     </div>
   );
@@ -98,7 +89,7 @@ export function AdminBackLink() {
       style={{
         position: 'sticky',
         top: 0,
-        background: '#fff',
+        background: '#F4F1E9',
         padding: '8px 0',
         margin: '0 0 8px',
         zIndex: 1,
@@ -151,7 +142,7 @@ export function ConfirmDialog(props: ConfirmDialogProps) {
       style={{
         position: 'fixed',
         inset: 0,
-        background: 'rgba(4, 23, 66, 0.55)',
+        background: 'rgba(13, 30, 41, 0.55)',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',

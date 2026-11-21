@@ -1,0 +1,1268 @@
+/* Eduvelto design system v2 — complete premium redesign (owner directive 21 Nov 2026).
+ *
+ * Palette (proposed brand colours, directive §2 — REPLACES the 20 Nov navy/gold
+ * palette and the old "NO GREEN" rule; Emerald Teal is now the primary accent):
+ *   Deep Forest Navy #142B3B · Warm Ivory #F4F1E9 · Emerald Teal #168C82
+ *   Muted Amber #D9A441 · Primary Text #202B33 · Secondary Text #68747B
+ *   White Surface #FFFFFF · Soft Border #E5E8E5.
+ *
+ * Contrast refinements (measured with WCAG relative-luminance math, 21 Nov 2026 —
+ * the directive says to refine exact usage/contrast after the first preview):
+ *   - Brand teal #168C82 as white-text-on-teal is only 4.11:1 (AA large/UI only),
+ *     so interactive white-on-teal uses TEAL DEEP #12766E (5.47:1, AA normal).
+ *     Teal text on white also uses teal-deep. Plain #168C82 is kept for icons,
+ *     large display text and decorative accents only.
+ *   - Muted Amber #D9A441 on white is 2.25:1 — NEVER amber text on white.
+ *     Amber is used only on dark surfaces (6.49:1 on forest navy) or as a
+ *     background with dark forest text (6.49:1). Amber text on light surfaces
+ *     uses AMBER DEEP #8A6100 (5.56:1 on white).
+ *   - Muted #68747B on warm ivory is 4.25:1 (AA large only), so text sitting
+ *     directly on ivory uses MUTED IVORY #57616A (5.61:1 on ivory).
+ *   - Focus ring: teal-deep on light surfaces, amber on dark surfaces.
+ * Semantic colours: success = teal-deep, warning = amber (dark text),
+ * error = #B00020 (7.33:1 on white).
+ *
+ * Typography: Poppins (English headings) + Hind Siliguri (Bangla),
+ * loaded via <link> in index.html with system fallbacks, so the app still
+ * renders offline (PWA) when the font CDN is unreachable.
+ */
+
+:root {
+  --forest: #142b3b;
+  --forest-deep: #0d1e29;
+  --teal: #168c82;
+  --teal-deep: #12766e;
+  --teal-soft: #e3f2f0;
+  --teal-softer: #eff7f6;
+  --amber: #d9a441;
+  --amber-deep: #8a6100;
+  --amber-soft: #fbf3e2;
+  --amber-dark-text: #7a5200;
+  --ink: #202b33;
+  --muted: #68747b;
+  --muted-ivory: #57616a;
+  --ivory: #f4f1e9;
+  --line: #e5e8e5;
+  --line-strong: #c9cfcb;
+  --bg: #f4f1e9;
+  --card: #ffffff;
+  --error: #b00020;
+  --error-bg: #fdf0f0;
+  --ok-teal: #12766e;
+  --ok-teal-bg: #e3f2f0;
+  --radius: 12px;
+  --radius-sm: 8px;
+  --shadow-sm: 0 1px 2px rgba(20, 43, 59, 0.06), 0 1px 3px rgba(20, 43, 59, 0.08);
+  --shadow-md: 0 4px 12px rgba(20, 43, 59, 0.1), 0 2px 4px rgba(20, 43, 59, 0.08);
+  --shadow-lg: 0 12px 32px rgba(20, 43, 59, 0.16);
+  --font-head: 'Poppins', 'Hind Siliguri', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-body: 'Hind Siliguri', 'Noto Sans Bengali', system-ui, -apple-system, 'Segoe UI', sans-serif;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--ink);
+  background: var(--bg);
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-head);
+  line-height: 1.35;
+  color: var(--forest);
+}
+
+a {
+  color: var(--teal-deep);
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+
+/* ---- Section heading used on the homepage (replaces inline h2 styles) ---- */
+.ev-section-h2 {
+  font-family: var(--font-head);
+  font-size: 20px;
+  color: var(--forest);
+  margin: 0 0 12px;
+}
+
+/* ---- Scroll-reveal (lightweight; JS adds .ev-reveal-visible on intersect) ---- */
+.ev-reveal {
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 400ms ease-out, transform 400ms ease-out;
+  display: flex;
+  flex-direction: column;
+}
+/* A card directly inside a reveal stretches to fill its grid cell. */
+.ev-reveal > .ev-card {
+  flex: 1;
+}
+.ev-reveal-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ---- Hero glow: deep forest navy + a soft amber radial glow (CSS only, no image) ---- */
+.ev-hero {
+  position: relative;
+  overflow: hidden;
+  background: #142b3b;
+}
+.ev-hero::after {
+  content: '';
+  position: absolute;
+  top: -70px;
+  right: -70px;
+  width: 260px;
+  height: 260px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(217, 164, 65, 0.22) 0%, rgba(217, 164, 65, 0) 70%);
+  pointer-events: none;
+}
+
+/* ---- Hero search (white input + teal action on the dark hero) ---- */
+.ev-hero-search {
+  display: flex;
+  gap: 8px;
+  margin: 0 0 18px;
+  position: relative;
+  z-index: 1;
+}
+.ev-hero-search input {
+  flex: 1;
+  min-width: 0;
+  min-height: 48px;
+  padding: 10px 14px;
+  font-family: var(--font-body);
+  font-size: 15px;
+  color: var(--ink);
+  background: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 10px;
+}
+.ev-hero-search input::placeholder {
+  color: #8a94a8;
+}
+.ev-hero-search input:focus {
+  border-color: var(--amber);
+  box-shadow: 0 0 0 3px rgba(217, 164, 65, 0.35);
+  outline: none;
+}
+
+/* ---- Numbered step circle (How to start) ---- */
+.ev-step-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--amber);
+  color: var(--forest);
+  font-family: var(--font-head);
+  font-size: 17px;
+  font-weight: 800;
+  flex: none;
+}
+
+/* ---- Icon tile (small line-icon container inside cards) ---- */
+.ev-icon-tile {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: var(--teal-soft);
+  color: var(--teal-deep);
+  margin-bottom: 10px;
+}
+.ev-icon-tile-amber {
+  background: var(--amber-soft);
+  color: var(--amber-dark-text);
+}
+
+/* ---- Page enter animation (lightweight, skipped for reduced motion) ---- */
+@keyframes ev-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.ev-page {
+  animation: ev-fade-up 240ms ease-out;
+}
+
+/* ---- Skeleton shimmer (warm neutrals to match the ivory page) ---- */
+@keyframes ev-shimmer {
+  from {
+    background-position: 200% 0;
+  }
+  to {
+    background-position: -200% 0;
+  }
+}
+.ev-skeleton {
+  border-radius: var(--radius-sm);
+  background: linear-gradient(90deg, #eae6db 25%, #f4f1e9 50%, #eae6db 75%);
+  background-size: 200% 100%;
+  animation: ev-shimmer 1.4s ease-in-out infinite;
+}
+
+/* ---- Buttons ---- */
+.ev-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 10px 20px;
+  border-radius: 10px;
+  border: 1px solid transparent;
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.4;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background-color 120ms ease, border-color 120ms ease, box-shadow 120ms ease,
+    transform 80ms ease;
+  -webkit-tap-highlight-color: transparent;
+}
+.ev-btn:hover {
+  text-decoration: none;
+}
+.ev-btn:active {
+  transform: translateY(1px);
+}
+.ev-btn:focus-visible {
+  outline: 3px solid var(--teal-deep);
+  outline-offset: 2px;
+}
+.ev-btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  transform: none;
+}
+.ev-btn-primary {
+  background: var(--forest);
+  color: #fff;
+}
+.ev-btn-primary:hover {
+  background: var(--forest-deep);
+  box-shadow: var(--shadow-sm);
+}
+.ev-btn-accent {
+  background: var(--teal-deep);
+  color: #fff;
+}
+.ev-btn-accent:hover {
+  background: #0e5f59;
+  box-shadow: var(--shadow-sm);
+}
+.ev-btn-gold {
+  background: var(--amber);
+  color: var(--forest);
+}
+.ev-btn-gold:hover {
+  background: #c99336;
+  box-shadow: var(--shadow-sm);
+}
+.ev-btn-outline {
+  background: #fff;
+  border-color: var(--forest);
+  color: var(--forest);
+}
+.ev-btn-outline:hover {
+  background: var(--teal-softer);
+}
+.ev-btn-outline-light {
+  background: transparent;
+  border-color: rgba(255, 255, 255, 0.75);
+  color: #fff;
+}
+.ev-btn-outline-light:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: #fff;
+}
+.ev-btn-outline-light:focus-visible {
+  outline-color: var(--amber);
+}
+.ev-btn-danger {
+  background: var(--error);
+  color: #fff;
+}
+.ev-btn-danger:hover {
+  background: #8f001a;
+}
+.ev-btn-ghost {
+  background: transparent;
+  color: var(--forest);
+}
+.ev-btn-ghost:hover {
+  background: var(--teal-softer);
+}
+.ev-btn-sm {
+  min-height: 40px;
+  padding: 8px 14px;
+  font-size: 14px;
+}
+.ev-btn-lg {
+  min-height: 52px;
+  padding: 12px 28px;
+  font-size: 16px;
+}
+.ev-btn-block {
+  width: 100%;
+}
+
+/* Small spinner used inside loading buttons. */
+@keyframes ev-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+.ev-spinner {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.45);
+  border-top-color: #fff;
+  animation: ev-spin 700ms linear infinite;
+  flex: none;
+}
+.ev-spinner-dark {
+  border-color: rgba(20, 43, 59, 0.25);
+  border-top-color: var(--forest);
+}
+
+/* ---- Cards ---- */
+.ev-card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+  padding: 16px;
+}
+.ev-card-hover {
+  transition: box-shadow 150ms ease, transform 150ms ease, border-color 150ms ease;
+}
+.ev-card-hover:hover {
+  box-shadow: var(--shadow-md);
+  border-color: var(--line-strong);
+  transform: translateY(-1px);
+}
+
+/* ---- Form controls ---- */
+.ev-input,
+.ev-select,
+.ev-textarea {
+  width: 100%;
+  min-height: 44px;
+  padding: 10px 12px;
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--ink);
+  background: #fff;
+  border: 1px solid var(--line-strong);
+  border-radius: 10px;
+  transition: border-color 120ms ease, box-shadow 120ms ease;
+}
+.ev-input:focus,
+.ev-select:focus,
+.ev-textarea:focus {
+  border-color: var(--teal-deep);
+  box-shadow: 0 0 0 3px rgba(18, 118, 110, 0.18);
+  outline: none;
+}
+.ev-input::placeholder,
+.ev-textarea::placeholder {
+  color: #8a94a8;
+}
+.ev-textarea {
+  min-height: 110px;
+  resize: vertical;
+}
+.ev-label {
+  display: block;
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--forest);
+  margin-bottom: 6px;
+}
+
+/* ---- Chips / badges ---- */
+.ev-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.5;
+  background: var(--teal-soft);
+  color: var(--forest);
+  white-space: nowrap;
+}
+.ev-chip-gold {
+  background: var(--amber-soft);
+  color: var(--amber-dark-text);
+}
+.ev-chip-navy {
+  background: var(--forest);
+  color: #fff;
+}
+.ev-chip-outline {
+  background: #fff;
+  border: 1px solid var(--line-strong);
+  color: var(--muted);
+}
+
+/* ---- Alerts ---- */
+.ev-alert {
+  border-radius: var(--radius-sm);
+  padding: 12px 14px;
+  font-size: 15px;
+  line-height: 1.55;
+  margin: 0 0 16px;
+}
+.ev-alert-error {
+  background: var(--error-bg);
+  border: 1px solid #f3c1c8;
+  color: #7a0013;
+}
+.ev-alert-ok {
+  background: var(--ok-teal-bg);
+  border: 1px solid #bfe3df;
+  color: var(--forest);
+}
+.ev-alert-info {
+  background: var(--teal-softer);
+  border: 1px solid #cfe7e4;
+  color: var(--forest);
+}
+
+/* ---- Progress bar ---- */
+.ev-progress {
+  height: 8px;
+  border-radius: 999px;
+  background: #e9e7de;
+  overflow: hidden;
+}
+.ev-progress > span {
+  display: block;
+  height: 100%;
+  border-radius: 999px;
+  background: var(--teal-deep);
+  transition: width 400ms ease;
+}
+.ev-progress-gold > span {
+  background: var(--amber-deep);
+}
+
+/* ---- Header nav link ---- */
+.ev-navlink {
+  color: #fff;
+  padding: 10px 8px;
+  border-radius: 8px;
+  font-size: 15px;
+  text-decoration: none;
+  transition: background-color 120ms ease;
+  white-space: nowrap;
+}
+.ev-navlink:hover {
+  background: rgba(255, 255, 255, 0.12);
+  text-decoration: none;
+}
+.ev-navlink-active {
+  background: rgba(255, 255, 255, 0.16);
+  box-shadow: inset 0 -3px 0 var(--amber);
+}
+
+/* ---- App header (deep forest navy, sticky) ---- */
+.ev-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: #142b3b;
+  color: #fff;
+  padding: 10px 16px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 16px;
+  align-items: center;
+  box-shadow: 0 2px 8px rgba(13, 30, 41, 0.25);
+}
+.ev-header-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px 4px;
+  margin-left: auto;
+  align-items: center;
+}
+.ev-header :focus-visible {
+  outline-color: var(--amber);
+}
+.ev-menu-btn {
+  display: none;
+  margin-left: auto;
+  min-width: 44px;
+  min-height: 44px;
+  padding: 8px 12px;
+  border: 1px solid rgba(255, 255, 255, 0.65);
+  border-radius: 10px;
+  background: transparent;
+  color: #fff;
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.ev-menu-btn:hover {
+  background: rgba(255, 255, 255, 0.12);
+}
+.ev-menu-btn:focus-visible {
+  outline: 3px solid var(--amber);
+  outline-offset: 2px;
+}
+.ev-btn-header {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.65);
+  color: #fff;
+}
+.ev-btn-header:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: #fff;
+}
+.ev-header-tagline {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.85);
+}
+@media (max-width: 860px) {
+  .ev-menu-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+  .ev-header-nav {
+    display: none;
+    flex-basis: 100%;
+    flex-direction: column;
+    align-items: stretch;
+    margin-left: 0;
+    gap: 2px;
+    padding-top: 4px;
+    border-top: 1px solid rgba(255, 255, 255, 0.18);
+  }
+  .ev-header-nav-open {
+    display: flex;
+  }
+  .ev-header-nav .ev-navlink {
+    padding: 12px 10px;
+    font-size: 16px;
+  }
+  .ev-header-nav .ev-btn-header {
+    margin-top: 6px;
+  }
+}
+@media (max-width: 560px) {
+  .ev-header {
+    padding: 10px 12px;
+    gap: 8px 12px;
+  }
+  .ev-header-tagline {
+    display: none;
+  }
+}
+
+/* ---- Footer (deep forest navy, below the router outlet) ---- */
+.ev-footer {
+  background: #142b3b;
+  color: rgba(255, 255, 255, 0.85);
+  margin-top: 8px;
+}
+.ev-footer-inner {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 28px 16px 20px;
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr;
+  gap: 24px;
+}
+.ev-footer h3 {
+  color: #fff;
+  font-size: 15px;
+  margin: 0 0 10px;
+}
+.ev-footer a {
+  color: rgba(255, 255, 255, 0.85);
+  display: block;
+  padding: 3px 0;
+  font-size: 14px;
+}
+.ev-footer a:hover {
+  color: #fff;
+  text-decoration: underline;
+}
+.ev-footer-bottom {
+  border-top: 1px solid rgba(255, 255, 255, 0.18);
+  padding: 14px 16px 18px;
+  text-align: center;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.7);
+}
+@media (max-width: 640px) {
+  .ev-footer-inner {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+}
+
+/* ---- Reduced motion: respect the OS setting everywhere ---- */
+@media (prefers-reduced-motion: reduce) {
+  .ev-page,
+  .ev-skeleton,
+  .ev-spinner,
+  .ev-progress > span,
+  .ev-card-hover,
+  .ev-btn,
+  .ev-reveal {
+    animation: none !important;
+    transition: none !important;
+  }
+  /* Reveal content must never stay hidden when motion is reduced. */
+  .ev-reveal {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+/* ---- Stage 3: class-wise homepage + mobile app ---- */
+
+/* App shell — reserves space for the fixed bottom nav (mobile) and the
+   bottom ad banner (when live, via --ev-banner). The bar must never cover
+   content or buttons (PWA design-review must-fix). */
+.ev-app-shell {
+  padding-bottom: var(--ev-banner, 0px);
+}
+@media (max-width: 768px) {
+  .ev-app-shell {
+    padding-bottom: calc(60px + var(--ev-banner, 0px) + env(safe-area-inset-bottom, 0px));
+  }
+}
+
+/* Mobile bottom navigation — ≤768px only. Forest navy bar, amber active. */
+.ev-bottom-nav {
+  display: none;
+}
+@media (max-width: 768px) {
+  .ev-bottom-nav {
+    display: flex;
+    position: fixed;
+    left: 0;
+    right: 0;
+    max-width: 100vw;
+    z-index: 40;
+    background: #142b3b;
+    border-top: 2px solid #d9a441;
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  .ev-bottom-nav-item {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+    min-height: 58px;
+    padding: 8px 2px 6px;
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 1.2;
+    text-decoration: none;
+  }
+  .ev-bottom-nav-item:hover {
+    color: #fff;
+    text-decoration: none;
+  }
+  .ev-bottom-nav-item-active {
+    color: #d9a441;
+    font-weight: 700;
+    box-shadow: inset 0 3px 0 #d9a441;
+  }
+}
+
+/* Class cards — colour identity per level (AA white text, see
+   lib/classLevels.ts). */
+.ev-class-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  border-radius: 16px;
+  padding: 16px;
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(13, 30, 41, 0.12), 0 2px 4px rgba(13, 30, 41, 0.08);
+  transition: box-shadow 150ms ease, transform 150ms ease;
+}
+.ev-class-card:hover {
+  box-shadow: 0 8px 20px rgba(13, 30, 41, 0.16), 0 2px 6px rgba(13, 30, 41, 0.1);
+  transform: translateY(-2px);
+}
+.ev-class-card:focus-visible {
+  outline: 3px solid #fff;
+  outline-offset: 3px;
+}
+
+/* Class dashboard header band. */
+.ev-class-hero {
+  border-radius: 16px;
+  padding: 20px;
+  margin-bottom: 16px;
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(13, 30, 41, 0.1), 0 2px 4px rgba(13, 30, 41, 0.08);
+}
+.ev-class-hero-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 20px;
+  margin-top: 14px;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.95);
+}
+.ev-class-hero-stats strong {
+  font-size: 18px;
+}
+.ev-class-hero-coming {
+  display: inline-block;
+  background: rgba(255, 255, 255, 0.22);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 4px 12px;
+  border-radius: 999px;
+}
+
+/* Class dashboard tab bar — horizontal scroll on small screens. */
+.ev-class-tabs {
+  display: flex;
+  gap: 2px;
+  overflow-x: auto;
+  border-bottom: 1px solid var(--line);
+  margin-bottom: 20px;
+  scrollbar-width: none;
+}
+.ev-class-tabs::-webkit-scrollbar {
+  display: none;
+}
+.ev-class-tab {
+  flex: none;
+  padding: 10px 12px;
+  font-size: 15px;
+  white-space: nowrap;
+  text-decoration: none;
+  border-bottom: 3px solid transparent;
+  margin-bottom: -1px;
+}
+.ev-class-tab:hover {
+  text-decoration: none;
+  color: var(--forest);
+}
+
+/* Quick Access tiles (class dashboard Home tab). */
+.ev-quick-tiles {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(104px, 1fr));
+  gap: 10px;
+  margin-bottom: 20px;
+}
+.ev-quick-tile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 14px 8px 12px;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  box-shadow: var(--shadow-sm);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--forest);
+  text-align: center;
+  text-decoration: none;
+}
+.ev-quick-tile:hover {
+  text-decoration: none;
+  border-color: var(--line-strong);
+  box-shadow: var(--shadow-md);
+}
+.ev-quick-tile-en {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--muted);
+}
+
+/* Homepage: hero dream line (desktop only), rail grid, feature strip,
+   learning-apps grid, why-choose + topper CTA. */
+.ev-hero-dream {
+  font-style: italic;
+  font-weight: 700;
+  font-size: 20px;
+  color: #d9a441;
+  margin: 0 0 16px;
+}
+@media (max-width: 768px) {
+  .ev-hero-dream {
+    display: none;
+  }
+}
+.ev-rail-grid {
+  display: block;
+}
+@media (min-width: 1280px) {
+  .ev-rail-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 300px;
+    gap: 16px;
+    align-items: start;
+  }
+}
+.ev-feature-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  box-shadow: var(--shadow-sm);
+  padding: 12px;
+  margin-bottom: 24px;
+}
+.ev-feature-strip-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1 1 160px;
+  padding: 6px 8px;
+}
+.ev-apps-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 12px;
+  margin-bottom: 24px;
+}
+.ev-app-tile {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  box-shadow: var(--shadow-sm);
+  padding: 14px;
+  text-align: center;
+}
+/* App tiles: long status chips (e.g. "পরিকল্পনায় আছে / Roadmap") must wrap
+   inside the narrow tile instead of overflowing the page on mobile — the
+   chip is inline-flex by default, so its text never wraps on its own. */
+.ev-app-tile .ev-chip {
+  display: inline-block;
+  white-space: normal;
+  max-width: 100%;
+  line-height: 1.4;
+}
+.ev-why-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+@media (min-width: 860px) {
+  .ev-why-grid {
+    grid-template-columns: 2fr 1fr;
+  }
+}
+.ev-topper-cta {
+  background: #142b3b;
+  border-radius: 16px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  box-shadow: 0 4px 12px rgba(13, 30, 41, 0.12), 0 2px 4px rgba(13, 30, 41, 0.08);
+}
+
+/* Ad placeholders — styled slots only, NEVER real ads (see
+   components/AdPlaceholder.tsx). Sizes are AdSense-ready (IAB standard):
+   top banner 728×90 leaderboard, side / in-content / in-app 300×250
+   medium rectangle, mobile 320×50. NO ad code, NO SDK, NO activation. */
+.ev-ad {
+  position: relative;
+  border: 2px dashed #c9cfcb;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #fdf9ef 0%, #eff7f6 100%);
+  padding: 14px;
+  margin-bottom: 16px;
+}
+.ev-ad-label {
+  position: absolute;
+  top: -9px;
+  left: 12px;
+  background: #142b3b;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 999px;
+}
+.ev-ad-body {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.ev-ad-icon {
+  flex: none;
+  color: #8a6100;
+}
+.ev-ad-text {
+  flex: 1;
+  min-width: 0;
+}
+.ev-ad-text strong {
+  display: block;
+  font-size: 16px;
+  color: #142b3b;
+}
+.ev-ad-text span {
+  display: block;
+  font-size: 13px;
+  color: #68747b;
+}
+.ev-ad-cta {
+  flex: none;
+  background: #142b3b;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 700;
+  padding: 9px 14px;
+  border-radius: 999px;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.ev-ad-cta:hover {
+  color: #fff;
+  text-decoration: none;
+  background: #0d1e29;
+}
+.ev-ad-top-banner {
+  display: none;
+}
+@media (min-width: 769px) {
+  .ev-ad-top-banner {
+    display: block;
+    max-width: 728px;
+    height: 90px;
+    padding: 0;
+  }
+  .ev-ad-top-banner .ev-ad-body {
+    height: 100%;
+    padding: 10px 14px;
+  }
+}
+.ev-ad-mobile,
+.ev-ad-in-app {
+  display: none;
+}
+@media (max-width: 768px) {
+  .ev-ad-mobile {
+    display: block;
+    max-width: 360px;
+    min-height: 50px;
+    padding: 0;
+  }
+  .ev-ad-mobile .ev-ad-body {
+    padding: 8px 12px;
+  }
+  .ev-ad-mobile .ev-ad-cta {
+    font-size: 12px;
+    padding: 6px 10px;
+  }
+  .ev-ad-mobile .ev-ad-text span {
+    font-size: 11px;
+  }
+  .ev-ad-in-app {
+    display: flex;
+    flex-direction: column;
+    max-width: 300px;
+    height: 250px;
+    padding: 0;
+  }
+  .ev-ad-in-app .ev-ad-body {
+    flex: 1;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    gap: 8px;
+  }
+  .ev-ad-in-app .ev-ad-text { flex: none; }
+}
+.ev-ad-in-content {
+  display: flex;
+  flex-direction: column;
+  max-width: 300px;
+  height: 250px;
+  padding: 0;
+}
+.ev-ad-in-content .ev-ad-body {
+  flex: 1;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  gap: 8px;
+}
+.ev-ad-in-content .ev-ad-text { flex: none; }
+.ev-ad-side {
+  display: none;
+}
+@media (min-width: 1280px) {
+  .ev-ad-side {
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    height: 250px;
+    padding: 0;
+    position: sticky;
+    top: 76px;
+    margin-bottom: 0;
+  }
+  .ev-ad-side .ev-ad-body {
+    flex: 1;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    gap: 10px;
+  }
+  .ev-ad-side .ev-ad-text { flex: none; }
+  .ev-ad-side .ev-ad-text span {
+    font-size: 12px;
+  }
+}
+.ev-ad-bottom-banner {
+  margin: 24px 0 8px;
+  min-height: 90px;
+}
+.ev-ad-bottom-banner .ev-ad-text span {
+  font-size: 15px;
+  font-weight: 700;
+  color: #142b3b;
+}
+
+/* Coming Soon — Class 1–5 / Class 6–8 (owner briefs 21 Nov 13:14 + 13:20).
+   Student-friendly honest empty state: soft class-tint card, dotted
+   pattern, "what is coming" chips. Never shows fake books/counts. */
+.ev-coming-soon-hero {
+  border: 1px solid #e5e8e5;
+  border-radius: 16px;
+  padding: 30px 22px 26px;
+  text-align: center;
+  background-image: radial-gradient(rgba(20, 43, 59, 0.07) 1.2px, transparent 1.2px);
+  background-size: 18px 18px;
+}
+.ev-coming-soon-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+  margin-top: 16px;
+}
+.ev-coming-soon-chip {
+  background: #fff;
+  border: 1px solid #e5e8e5;
+  border-radius: 999px;
+  padding: 6px 12px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #142b3b;
+}
+.ev-coming-soon-chip-soon {
+  color: #8a6100;
+  font-weight: 700;
+}
+.ev-coming-soon-compact {
+  border: 1px solid #e5e8e5;
+  border-radius: 12px;
+  padding: 18px;
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  background-image: radial-gradient(rgba(20, 43, 59, 0.06) 1.2px, transparent 1.2px);
+  background-size: 16px 16px;
+}
+@media (max-width: 560px) {
+  .ev-coming-soon-hero {
+    padding: 24px 16px 22px;
+  }
+  .ev-coming-soon-compact {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+}
+
+/* ---- Stage 6–8: role dashboards (visual-only restyle, 21 Nov 2026) ---- */
+
+/* Dashboard hero — deep forest card with white text; chips inside go
+   translucent white so they stay readable on the dark surface. */
+.ev-dash-hero {
+  background: #142b3b;
+  color: #fff;
+  border-radius: 16px;
+  padding: 20px;
+  margin-bottom: 16px;
+  box-shadow: 0 4px 12px rgba(13, 30, 41, 0.12), 0 2px 4px rgba(13, 30, 41, 0.08);
+}
+.ev-dash-hero h2 {
+  color: #fff;
+  font-size: 20px;
+  margin: 0 0 6px;
+}
+.ev-dash-hero p {
+  color: rgba(255, 255, 255, 0.88);
+  margin: 4px 0 0;
+}
+.ev-dash-hero .ev-chip {
+  background: rgba(255, 255, 255, 0.18);
+  color: #fff;
+}
+
+/* Dashboard card grids — 1 column on mobile, 2 columns ≥720px. */
+.ev-dash-grid {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: 1fr;
+}
+@media (min-width: 720px) {
+  .ev-dash-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* Stat tiles — auto-fit, so 2–3 tiles fit a 360px screen without overflow. */
+.ev-dash-stats {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  margin-bottom: 16px;
+}
+
+/* Quick-action button row. */
+.ev-dash-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+/* Child switcher (guardian) — pill tabs; active tab is forest. */
+.ev-dash-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+.ev-dash-tab {
+  min-height: 44px;
+  padding: 10px 18px;
+  border-radius: 999px;
+  border: 1px solid var(--forest);
+  background: #fff;
+  color: var(--forest);
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.4;
+  cursor: pointer;
+}
+.ev-dash-tab:hover {
+  background: var(--teal-softer);
+}
+.ev-dash-tab-active {
+  background: var(--forest);
+  color: #fff;
+}
+.ev-dash-tab-active:hover {
+  background: var(--forest-deep);
+}
+.ev-dash-tab:focus-visible {
+  outline: 3px solid var(--teal-deep);
+  outline-offset: 2px;
+}
+
+/* Weak/strong area rows — label + bar + % on one line (wraps on narrow
+   screens; the bar never squeezes below 100px). */
+.ev-dash-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+.ev-dash-row-label {
+  flex: 1 1 auto;
+  min-width: 0;
+  font-weight: 600;
+  color: var(--forest);
+}
+.ev-dash-row-bar {
+  flex: 2 1 100px;
+  min-width: 100px;
+}
+.ev-dash-row-pct {
+  flex: none;
+  font-weight: 700;
+  color: var(--forest);
+  font-variant-numeric: tabular-nums;
+}
+/* ≤560px: the bar drops to its own full-width line so long labels
+   (e.g. "আজকের পড়া (Reads)") never squeeze it to a sliver. */
+@media (max-width: 560px) {
+  .ev-dash-row {
+    flex-wrap: wrap;
+    row-gap: 6px;
+  }
+  .ev-dash-row-bar {
+    flex: 1 1 100%;
+    order: 3;
+  }
+}
+
+/* Muted text — --muted on white cards, --muted-ivory directly on ivory. */
+.ev-muted {
+  color: var(--muted);
+}
+.ev-muted-ivory {
+  color: var(--muted-ivory);
+}

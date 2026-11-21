@@ -14,10 +14,12 @@
 // (class, department, title); the GLOBAL order across pages is document-ID
 // order — restoring the old global order needs a composite index (owner
 // follow-up, not built here).
+// (ui/premium-polish: stat strip, group cards, result cards, skeletons, retry.)
 
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { PageShell, EmptyState } from '../components/PageShell';
+import { AlertBox, Card, Chip, LinkButton, SkeletonCards, StatCard } from '../components/ui';
 import { useAuth } from '../lib/auth';
 import {
   bookTitleOf,
@@ -158,6 +160,24 @@ export default function ExamPage() {
   const shownFrom = pageQuizzes.length === 0 ? 0 : pageIndex * QUIZ_PAGE_SIZE + 1;
   const shownTo = pageIndex * QUIZ_PAGE_SIZE + pageQuizzes.length;
 
+  // Reload the first page — retry target for the error AlertBox.
+  function reload() {
+    setError('');
+    setLoading(true);
+    loadPage(null)
+      .then((first) => {
+        for (const q of first.items) quizByIdRef.current.set(q.id, q);
+        setPages([first]);
+        setPageIndex(0);
+        setTitlesVersion((v) => v + 1);
+        setLoading(false);
+      })
+      .catch(() => {
+        setError('পরীক্ষার তালিকা লোড করা যায়নি। / Could not load the exam list.');
+        setLoading(false);
+      });
+  }
+
   async function nextPage() {
     if (!currentPage || !currentPage.hasMore) return;
     setLoading(true);
@@ -179,53 +199,68 @@ export default function ExamPage() {
   }
 
   return (
-    <PageShell titleBn="পরীক্ষা" titleEn="Exam">
-      {error ? <p style={{ color: '#b00020' }}>{error}</p> : null}
-      {loading && pages.length === 0 ? (
-        <p>লোড হচ্ছে… / Loading…</p>
+    <PageShell titleBn="পরীক্ষা" titleEn="Exam" wide>
+      {error ? (
+        <AlertBox tone="error" onRetry={reload}>
+          {error}
+        </AlertBox>
+      ) : null}
+      {loading && pages.length === 0 && !error ? (
+        <SkeletonCards count={3} />
       ) : pageQuizzes.length === 0 && pageIndex === 0 ? (
         <EmptyState bn="এখনো কোনো পরীক্ষা প্রকাশিত হয়নি। কনটেন্ট প্রকাশিত হলে এখানে দেখা যাবে।" en="No exam has been published yet. Content will appear here once it is published." />
       ) : (
         <>
+          <div
+            style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))',
+              gap: 12,
+              marginBottom: 20,
+            }}
+          >
+            <StatCard value={String(groups.length)} labelBn="বই" labelEn="Books" />
+            <StatCard value={String(pageQuizzes.length)} labelBn="পরীক্ষা" labelEn="Exams" />
+            <StatCard value={String(pageQuestions)} labelBn="প্রশ্ন" labelEn="Questions" tone="gold" />
+          </div>
           <p style={{ color: '#555', marginTop: 0 }}>
             এই পাতায় {groups.length}টি বই · {pageQuizzes.length}টি পরীক্ষা · {pageQuestions}টি প্রশ্ন (দেখাচ্ছি {shownFrom}–{shownTo}) / This page: {groups.length} books · {pageQuizzes.length} exams · {pageQuestions} questions (showing {shownFrom}–{shownTo})
           </p>
           {groups.map((g) => (
-            <section key={g.bookId} style={{ border: '1px solid #ddd', borderRadius: 8, padding: '16px', marginBottom: 16 }}>
-              <h2 style={{ margin: '0 0 4px', fontSize: 18 }}>{g.title}</h2>
-              <p style={{ margin: '0 0 12px', color: '#555', fontSize: 14 }}>
-                {[g.subject, g.department, g.classLevel].filter(Boolean).join(' · ')}
-              </p>
+            <Card key={g.bookId} style={{ marginBottom: 16 }}>
+              <h2 style={{ fontFamily: "'Poppins','Hind Siliguri',system-ui,sans-serif", margin: '0 0 6px', fontSize: 18, color: '#0A1F44' }}>{g.title}</h2>
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, marginBottom: 12 }}>
+                {[g.subject, g.department, g.classLevel].filter(Boolean).map((t) => (
+                  <Chip key={t} tone="outline">{t}</Chip>
+                ))}
+              </div>
               {g.quizzes.map((q) => (
                 <div
                   key={q.id}
-                  style={{ display: 'flex', flexWrap: 'wrap', gap: 8, alignItems: 'center', justifyContent: 'space-between', padding: '10px 0', borderTop: '1px solid #eee' }}
+                  style={{ display: 'flex', flexWrap: 'wrap', gap: 10, alignItems: 'center', justifyContent: 'space-between', padding: '12px 0', borderTop: '1px solid #E3E8F0' }}
                 >
                   <div>
                     <strong>{q.kind === 'mcq' ? 'MCQ পরীক্ষা' : 'লিখিত পরীক্ষা'}</strong>
-                    <span style={{ color: '#555', fontSize: 14 }}>
+                    <span style={{ color: '#5A6478', fontSize: 14 }}>
                       {' '}
                       · {q.questionCount}টি প্রশ্ন · {q.totalMarks} নম্বর · {q.timeLimitMinutes} মিনিট
                     </span>
                     {q.kind === 'written' ? (
-                      <span style={{ color: '#555', fontSize: 14 }}> · শিক্ষক মূল্যায়ন করবেন</span>
+                      <span style={{ color: '#5A6478', fontSize: 14 }}> · শিক্ষক মূল্যায়ন করবেন</span>
                     ) : null}
                   </div>
                   {user ? (
-                    <Link
-                      to={`/quiz/${q.id}`}
-                      style={{ background: '#0A1F44', color: '#fff', borderRadius: 6, padding: '10px 18px', textDecoration: 'none', minHeight: 44, display: 'inline-flex', alignItems: 'center' }}
-                    >
+                    <LinkButton to={`/quiz/${q.id}`} size="sm">
                       পরীক্ষা দিন
-                    </Link>
+                    </LinkButton>
                   ) : (
-                    <Link to="/login" style={{ color: '#0A1F44' }}>
+                    <Link to="/login" style={{ fontWeight: 600 }}>
                       পরীক্ষা দিতে লগইন করুন
                     </Link>
                   )}
                 </div>
               ))}
-            </section>
+            </Card>
           ))}
           {currentPage?.hasMore || pageIndex > 0 ? (
             <div style={{ display: 'flex', gap: 12, alignItems: 'center', marginTop: 16, marginBottom: 8 }}>
@@ -253,37 +288,35 @@ export default function ExamPage() {
         </>
       )}
 
-      <h2 style={{ fontSize: 20, marginTop: 32 }}>আমার ফলাফল / My results</h2>
+      <h2 style={{ fontFamily: "'Poppins','Hind Siliguri',system-ui,sans-serif", fontSize: 20, color: '#0A1F44', margin: '28px 0 12px' }}>আমার ফলাফল / My results</h2>
       {!user ? (
         <p>
-          ফলাফল দেখতে <Link to="/login">লগইন করুন</Link>। / Sign in to see your results.
+          ফলাফল দেখতে <Link to="/login" style={{ fontWeight: 600 }}>লগইন করুন</Link>। / Sign in to see your results.
         </p>
       ) : attempts === null ? (
-        <p>লোড হচ্ছে… / Loading…</p>
+        <SkeletonCards count={2} />
       ) : attempts.length === 0 ? (
-        <p style={{ color: '#555' }}>এখনো কোনো পরীক্ষা দেননি। / You have not taken any exam yet.</p>
+        <p style={{ color: '#5A6478' }}>এখনো কোনো পরীক্ষা দেননি। / You have not taken any exam yet.</p>
       ) : (
-        <ul style={{ listStyle: 'none', padding: 0 }}>
+        <div style={{ display: 'grid', gap: 10 }}>
           {attempts.slice(0, 20).map((a) => {
             const q = quizById.get(a.quizId);
+            const pending = a.markingStatus === 'pending';
             return (
-              <li key={a.id} style={{ borderBottom: '1px solid #eee', padding: '10px 0' }}>
-                <Link to={`/quiz/${a.quizId}/result/${a.id}`}>
-                  {q ? bookTitleOf(q) : a.quizId} — {a.kind === 'mcq' ? 'MCQ' : 'লিখিত'}
-                </Link>
-                <span style={{ color: '#555', fontSize: 14 }}>
-                  {' '}
-                  ·{' '}
-                  {a.markingStatus === 'pending'
-                    ? 'মূল্যায়নের অপেক্ষায়'
-                    : `${a.score}/${a.totalMarks} (${a.percentage}%)`}
-                  {' · '}
-                  {formatDate(a)}
-                </span>
-              </li>
+              <Card key={a.id} hover>
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, alignItems: 'center', justifyContent: 'space-between' }}>
+                  <Link to={`/quiz/${a.quizId}/result/${a.id}`} style={{ fontWeight: 700, color: '#0A1F44' }}>
+                    {q ? bookTitleOf(q) : a.quizId} — {a.kind === 'mcq' ? 'MCQ' : 'লিখিত'}
+                  </Link>
+                  <Chip tone={pending ? 'gold' : 'blue'}>
+                    {pending ? 'মূল্যায়নের অপেক্ষায়' : `${a.score}/${a.totalMarks} (${a.percentage}%)`}
+                  </Chip>
+                </div>
+                <p style={{ margin: '6px 0 0', color: '#5A6478', fontSize: 14 }}>{formatDate(a)}</p>
+              </Card>
             );
           })}
-        </ul>
+        </div>
       )}
     </PageShell>
   );

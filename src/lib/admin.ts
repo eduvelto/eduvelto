@@ -47,6 +47,7 @@ import {
   orderBy,
   query,
   serverTimestamp,
+  setDoc,
   startAfter,
   where,
   writeBatch,
@@ -651,6 +652,108 @@ export async function setUserRole(
 // ---------------------------------------------------------------------------
 // Teacher verification (area 2)
 // ---------------------------------------------------------------------------
+
+export interface TeacherApplicationFields {
+  fullName: string;
+  teachingLevel: string;
+  subjects: string[];
+  classes: string[];
+  institution: string;
+  /** Job title / post at the institution (e.g. "Assistant Teacher"). */
+  post?: string;
+  /** Institution contact (phone or email) the admin can use to verify employment. */
+  institutionContact?: string;
+  qualifications: string;
+  experienceYears: number;
+  verificationReason: string;
+  evidenceRef?: string;
+}
+
+/**
+ * File a teacher verification application (Step 5 — the REAL form).
+ * One application per teacher: deterministic id `tv_{userId}`. A pending
+ * application cannot be re-filed; a verified teacher cannot re-apply; a
+ * rejected teacher MAY re-apply (record is overwritten as pending again).
+ * The record is the REQUEST — nothing here grants 'verified': only an
+ * Admin's decideTeacherVerification() can do that, with the 4-point
+ * human checklist + mandatory reason. The teacher's profile already
+ * carries verificationStatus 'pending' from registration, so no user-doc
+ * write happens here.
+ */
+export async function submitTeacherApplication(
+  db: Firestore,
+  userId: string,
+  fields: TeacherApplicationFields,
+): Promise<string> {
+  const cleanReason = requireReason(fields.verificationReason);
+  const subjects = fields.subjects.map((s) => s.trim()).filter(Boolean).slice(0, 20);
+  const classes = fields.classes.map((s) => s.trim()).filter(Boolean).slice(0, 20);
+  if (subjects.length === 0 || classes.length === 0) {
+    throw new Error('teacher-application-needs-subject-and-class');
+  }
+  if (!fields.fullName.trim() || !fields.institution.trim() || !fields.qualifications.trim()) {
+    throw new Error('teacher-application-incomplete');
+  }
+  const id = `tv_${userId}`;
+  const ref = doc(db, 'teacherVerifications', id);
+  const existing = await getDoc(ref);
+  const isReapply = existing.exists();
+  if (isReapply) {
+    const status = existing.data().status as string | undefined;
+    if (status === 'pending') throw new Error('application-already-pending');
+    if (status === 'verified') throw new Error('already-verified');
+    // 'rejected' → allow re-application below (merge: createdAt stays).
+  }
+  const data = {
+    id,
+    userId,
+    fullName: fields.fullName.trim().slice(0, 100),
+    teachingLevel: fields.teachingLevel.trim().slice(0, 100),
+    subjects,
+    classes,
+    institution: fields.institution.trim().slice(0, 200),
+    post: (fields.post ?? '').trim().slice(0, 100),
+    institutionContact: (fields.institutionContact ?? '').trim().slice(0, 100),
+    qualifications: fields.qualifications.trim().slice(0, 500),
+    experienceYears: Math.max(0, Math.min(60, Math.floor(fields.experienceYears))),
+    verificationReason: cleanReason,
+    evidenceRef: (fields.evidenceRef ?? '').trim().slice(0, 200),
+    status: 'pending',
+    verificationStatus: 'pending',
+    submittedAt: serverTimestamp(),
+    updatedAt: serverTimestamp(),
+  };
+  if (isReapply) {
+    // Merge: the original createdAt is preserved (rules allowlist).
+    await setDoc(ref, data, { merge: true });
+  } else {
+    await setDoc(ref, { ...data, createdAt: serverTimestamp() });
+  }
+  return id;
+}
+
+/** The signed-in teacher's own application, if any (for the form page). */
+export async function getMyTeacherApplication(
+  db: Firestore,
+  userId: string,
+): Promise<VerificationRow | null> {
+  const snap = await getDoc(doc(db, 'teacherVerifications', `tv_${userId}`));
+  if (!snap.exists()) return null;
+  const data = snap.data();
+  const { userId: uid, fullName, institution, status, createdAt, checkedBy, reason, checks, ...extra } = data;
+  return {
+    id: snap.id,
+    userId: typeof uid === 'string' ? uid : '',
+    fullName: typeof fullName === 'string' ? fullName : '(নাম নেই)',
+    institution: typeof institution === 'string' ? institution : '',
+    status: typeof status === 'string' ? status : 'pending',
+    createdAt: createdAt ?? null,
+    checkedBy: typeof checkedBy === 'string' ? checkedBy : undefined,
+    reason: typeof reason === 'string' ? reason : undefined,
+    checks: (checks as VerificationChecks | undefined) ?? undefined,
+    extra,
+  };
+}
 
 /**
  * Verification applications, newest first (limit 50). The status filter

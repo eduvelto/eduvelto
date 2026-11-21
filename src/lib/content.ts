@@ -343,10 +343,23 @@ export async function getPublishedBook(bookId: string): Promise<Book | null> {
 }
 
 /** Published chapters of one book, in part order (A, B, C, then set 2…). */
+// The reviewStatus filter is REQUIRED, not just cosmetic: live Firestore
+// rules allow public reads only where reviewStatus == "Published", and a
+// query without that constraint is rejected (permission-denied) whenever
+// the book has any non-Published chapter — which is why /library/:id
+// failed to load at all. Every other public list query (books, directory,
+// quizzes) already carries this filter; chapters was the only one missing
+// it (found by the phase-2 probe, 21 Nov 2026). Two equality filters need
+// no composite index (zigzag merge join). The client-side filter stays as
+// a second layer.
 export async function listPublishedChapters(bookId: string): Promise<Chapter[]> {
   if (!db) return [];
   const snap = await getDocs(
-    query(collection(db, 'chapters'), where('bookId', '==', bookId)),
+    query(
+      collection(db, 'chapters'),
+      where('bookId', '==', bookId),
+      where('reviewStatus', '==', 'Published'),
+    ),
   );
   const chapters = snap.docs
     .map((s) => toChapter(s.id, s.data()))

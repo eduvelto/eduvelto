@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { PageShell } from '../components/PageShell';
+import { AlertBox, Skeleton } from '../components/ui';
 import LessonReader from '../components/LessonReader';
 import { getPublishedBook, getPublishedLesson, type Book, type Lesson } from '../lib/content';
 
@@ -41,11 +42,11 @@ export default function LessonPage() {
 
   return (
     <PageShell titleBn={lesson ? lesson.title : 'পাঠ'} titleEn={lesson ? 'Lesson' : 'Lesson'}>
-      {!loaded ? <p>লোড হচ্ছে… / Loading…</p> : null}
+      {!loaded ? <Skeleton lines={5} /> : null}
       {error ? (
-        <p style={{ color: '#b00020' }}>
+        <AlertBox tone="error">
           {error} <Link to="/library">← লাইব্রেরিতে ফিরুন / Back to the library</Link>
-        </p>
+        </AlertBox>
       ) : null}
       {lesson ? (
         <LessonReader

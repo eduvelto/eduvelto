@@ -145,6 +145,15 @@ async function seed() {
       isActive: true,
       verificationStatus: 'rejected',
     });
+    // (sv9) guardian persona: under the merged rules the GUARDIAN creates
+    // the pending parentLink (deterministic id), not the student.
+    await setDoc(doc(db, 'users', 'sv-parent'), {
+      displayName: 'SV Parent',
+      email: 'sv-parent@example.com',
+      role: 'guardian',
+      language: 'bn',
+      isActive: true,
+    });
     await setDoc(doc(db, 'users', 'moderator-1'), {
       displayName: 'Moderator',
       email: 'moderator@example.com',
@@ -286,6 +295,25 @@ const asSuspended = () => env.authenticatedContext('suspended-1').firestore();
 const asAdmin = () => env.authenticatedContext('admin-1').firestore();
 const asOwner = () => env.authenticatedContext('owner-1').firestore();
 
+// Teacher verification records use the deterministic id 'tv_' + uid
+// (dashboards Step 5 create rule). Tests share one record per applicant,
+// so each create first removes any record an earlier test left behind
+// (this file has no per-test clear).
+async function createTvRecord(uid: 'student-1' | 'moderator-1'): Promise<string> {
+  const id = 'tv_' + uid;
+  await env.withSecurityRulesDisabled(async (ctx) => {
+    await deleteDoc(doc(ctx.firestore(), 'teacherVerifications', id));
+  });
+  const db = uid === 'moderator-1' ? asModerator() : asStudent1();
+  await setDoc(doc(db, 'teacherVerifications', id), {
+    userId: uid,
+    fullName: uid === 'moderator-1' ? 'Moderator' : 'Student One',
+    institution: 'Test College',
+    status: 'pending',
+  });
+  return id;
+}
+
 describe('Eduvelto security rules', () => {
   // (a) Public reads: Published lesson ALLOWED, draft lesson DENIED.
   it('(a1) unauthenticated read of a Published lesson is ALLOWED', async () => {
@@ -418,16 +446,9 @@ describe('Eduvelto security rules', () => {
   // mandatory reason (min 10 chars) and the 4-point human checklist.
   it('(h1) admin approving a teacher verification is ALLOWED', async () => {
     // The applicant creates their own pending record; the admin approves it.
-    const ref = await addDoc(collection(asStudent1(), 'teacherVerifications'), {
-      userId: 'student-1',
-      fullName: 'Student One',
-      institution: 'Test College',
-      idType: 'nid',
-      idReference: 'checked in person by admin',
-      status: 'pending',
-    });
+    const tvId = await createTvRecord('student-1');
     await assertSucceeds(
-      updateDoc(doc(asAdmin(), 'teacherVerifications', ref.id), {
+      updateDoc(doc(asAdmin(), 'teacherVerifications', tvId), {
         status: 'verified',
         checkedBy: 'admin-1',
         checkedAt: new Date(),
@@ -438,15 +459,8 @@ describe('Eduvelto security rules', () => {
   });
   it('(h2) student changing their own verification status is DENIED', async () => {
     const db = asStudent1();
-    const ref = await addDoc(collection(db, 'teacherVerifications'), {
-      userId: 'student-1',
-      fullName: 'Student One',
-      institution: 'Test College',
-      idType: 'nid',
-      idReference: 'self',
-      status: 'pending',
-    });
-    await assertFails(updateDoc(ref, { status: 'verified', checkedBy: 'student-1' }));
+    const tvId = await createTvRecord('student-1');
+    await assertFails(updateDoc(doc(db, 'teacherVerifications', tvId), { status: 'verified', checkedBy: 'student-1' }));
   });
 
   // (i) Owner role (spec §3): owner protection + append-only audit log.
@@ -615,14 +629,9 @@ describe('Eduvelto security rules', () => {
     );
   });
   it('(k4) a moderator cannot approve teachers and cannot read user docs', async () => {
-    const ref = await addDoc(collection(asStudent1(), 'teacherVerifications'), {
-      userId: 'student-1',
-      fullName: 'Student One',
-      institution: 'Test College',
-      status: 'pending',
-    });
+    const tvId = await createTvRecord('student-1');
     await assertFails(
-      updateDoc(doc(asModerator(), 'teacherVerifications', ref.id), {
+      updateDoc(doc(asModerator(), 'teacherVerifications', tvId), {
         status: 'verified',
         checkedBy: 'moderator-1',
         checkedAt: new Date(),
@@ -633,14 +642,9 @@ describe('Eduvelto security rules', () => {
     await assertFails(getDoc(doc(asModerator(), 'users', 'student-1')));
   });
   it('(k5) an admin cannot decide their OWN teacher application', async () => {
-    const ref = await addDoc(collection(asModerator(), 'teacherVerifications'), {
-      userId: 'moderator-1',
-      fullName: 'Moderator',
-      institution: 'Test College',
-      status: 'pending',
-    });
+    const tvId = await createTvRecord('moderator-1');
     await assertFails(
-      updateDoc(doc(asModerator(), 'teacherVerifications', ref.id), {
+      updateDoc(doc(asModerator(), 'teacherVerifications', tvId), {
         status: 'verified',
         checkedBy: 'moderator-1',
         checkedAt: new Date(),
@@ -650,15 +654,10 @@ describe('Eduvelto security rules', () => {
     );
   });
   it('(k6) approve without reason / without checklist / reject without reason is DENIED', async () => {
-    const ref = await addDoc(collection(asStudent1(), 'teacherVerifications'), {
-      userId: 'student-1',
-      fullName: 'Student One',
-      institution: 'Test College',
-      status: 'pending',
-    });
+    const tvId = await createTvRecord('student-1');
     const db = asAdmin();
     await assertFails(
-      updateDoc(doc(db, 'teacherVerifications', ref.id), {
+      updateDoc(doc(db, 'teacherVerifications', tvId), {
         status: 'verified',
         checkedBy: 'admin-1',
         checkedAt: new Date(),
@@ -666,7 +665,7 @@ describe('Eduvelto security rules', () => {
       }),
     );
     await assertFails(
-      updateDoc(doc(db, 'teacherVerifications', ref.id), {
+      updateDoc(doc(db, 'teacherVerifications', tvId), {
         status: 'verified',
         checkedBy: 'admin-1',
         checkedAt: new Date(),
@@ -674,7 +673,7 @@ describe('Eduvelto security rules', () => {
       }),
     );
     await assertFails(
-      updateDoc(doc(db, 'teacherVerifications', ref.id), {
+      updateDoc(doc(db, 'teacherVerifications', tvId), {
         status: 'rejected',
         checkedBy: 'admin-1',
         checkedAt: new Date(),
@@ -710,13 +709,8 @@ describe('Eduvelto security rules', () => {
     );
   });
   it('(k8) admin reopening a decided application back to pending is ALLOWED', async () => {
-    const ref = await addDoc(collection(asStudent1(), 'teacherVerifications'), {
-      userId: 'student-1',
-      fullName: 'Student One',
-      institution: 'Test College',
-      status: 'pending',
-    });
-    await updateDoc(doc(asAdmin(), 'teacherVerifications', ref.id), {
+    const tvId = await createTvRecord('student-1');
+    await updateDoc(doc(asAdmin(), 'teacherVerifications', tvId), {
       status: 'verified',
       checkedBy: 'admin-1',
       checkedAt: new Date(),
@@ -724,7 +718,7 @@ describe('Eduvelto security rules', () => {
       checks: { identity: true, institution: true, subject: true, adult: true },
     });
     await assertSucceeds(
-      updateDoc(doc(asAdmin(), 'teacherVerifications', ref.id), {
+      updateDoc(doc(asAdmin(), 'teacherVerifications', tvId), {
         status: 'pending',
         checkedBy: 'admin-1',
         checkedAt: new Date(),
@@ -1103,6 +1097,7 @@ describe('Eduvelto security rules', () => {
   const asSvFresh = () => env.authenticatedContext('sv-fresh').firestore();
   const asSvApplicant = () => env.authenticatedContext('sv-applicant').firestore();
   const asSvNew = () => env.authenticatedContext('sv-new').firestore();
+  const asSvParent = () => env.authenticatedContext('sv-parent').firestore();
 
   it('(sv0) a brand-new student creates their own doc with NO verificationStatus — ALLOWED; with it — DENIED', async () => {
     await assertSucceeds(
@@ -1199,14 +1194,36 @@ describe('Eduvelto security rules', () => {
     const snap = await getDoc(doc(asAdmin(), 'users', 'sv-rejected'));
     expect(snap.data()?.verificationStatus).toBe('pending');
   });
-  it('(sv9) guardian linking still needs admin activation: student creates pending link, cannot activate it, admin can', async () => {
-    const ref = await addDoc(collection(asSvFresh(), 'parentLinks'), {
-      parentId: 'sv-parent',
-      studentId: 'sv-fresh',
-      status: 'pending',
-    });
-    await assertFails(updateDoc(doc(asSvFresh(), 'parentLinks', ref.id), { status: 'active' }));
-    await assertSucceeds(updateDoc(doc(asAdmin(), 'parentLinks', ref.id), { status: 'active' }));
+  it('(sv9) guardian linking still needs admin activation: guardian creates pending link, student cannot verify it, admin can', async () => {
+    // Merged-rules model (dashboards branch): the GUARDIAN creates the
+    // pending link (deterministic id parent_student + required fields);
+    // the child can only confirm it; only an admin can verify (activate)
+    // it. The old 'active' status no longer exists — activation is
+    // 'verified'. This test keeps the original intent (the student cannot
+    // self-activate a pending link) under the new model.
+    await assertSucceeds(
+      setDoc(doc(asSvParent(), 'parentLinks', 'sv-parent_sv-fresh'), {
+        parentId: 'sv-parent',
+        studentId: 'sv-fresh',
+        status: 'pending',
+        guardianDisplayName: 'SV Parent',
+        relationship: 'Father',
+        childDisplayName: 'SV Fresh Student',
+        childClassLevel: 'Class 5',
+      }),
+    );
+    await assertFails(
+      updateDoc(doc(asSvFresh(), 'parentLinks', 'sv-parent_sv-fresh'), {
+        status: 'verified',
+        verifiedBy: 'sv-fresh',
+      }),
+    );
+    await assertSucceeds(
+      updateDoc(doc(asAdmin(), 'parentLinks', 'sv-parent_sv-fresh'), {
+        status: 'verified',
+        verifiedBy: 'admin-1',
+      }),
+    );
   });
   it('(sv10) a verified teacher can create draft content; a student cannot publish — teacher gate intact', async () => {
     // sv-applicant became a verified teacher in sv6; sv-teacher was

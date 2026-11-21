@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 import { PageShell } from '../components/PageShell';
-import { ErrorBox, LoadingBox, StatusPill, requireDb } from '../components/AdminShared';
+import { Card, LinkButton, ProgressBar, SkeletonCards } from '../components/ui';
+import { ErrorBox, StatusPill, requireDb } from '../components/AdminShared';
 import {
   domainDaysLeft,
   formatBnNumber,
@@ -39,13 +39,12 @@ export default function AdminPage() {
   useEffect(() => {
     let cancelled = false;
     void (async () => {
+      // Same decoupling as AdminUsersPage: the pending-verifications list
+      // is the page content and must load even when count() fails on live
+      // Spark (RESOURCE_EXHAUSTED, audit H1). The count is a nicety.
       try {
-        const [c, p] = await Promise.all([
-          getDashboardCounts(requireDb()),
-          listTeacherVerifications(requireDb(), 'pending'),
-        ]);
+        const p = await listTeacherVerifications(requireDb(), 'pending');
         if (cancelled) return;
-        setCounts(c);
         setPending(p);
         try {
           setLastBackup(localStorage.getItem(LAST_BACKUP_KEY));
@@ -56,6 +55,12 @@ export default function AdminPage() {
         if (!cancelled) setError(friendlyAdminError(e));
       } finally {
         if (!cancelled) setLoading(false);
+      }
+      try {
+        const c = await getDashboardCounts(requireDb());
+        if (!cancelled) setCounts(c);
+      } catch {
+        // Counts stay hidden; the dashboard and pending list are intact.
       }
     })();
     return () => {
@@ -88,6 +93,15 @@ export default function AdminPage() {
       status: 'working',
       to: '/admin/teachers',
       countBn: counts ? `${formatBnNumber(counts.pendingVerifications)}টি অপেক্ষায়` : undefined,
+    },
+    {
+      id: 'guardians',
+      titleBn: 'অভিভাবক সংযোগ যাচাই',
+      titleEn: 'Guardian link verification',
+      descBn: 'অভিভাবক–সন্তান সংযোগের অনুরোধ যাচাই করুন — লিখিত তথ্য + সন্তানের নিশ্চিতকরণ।',
+      descEn: 'Verify guardian–child link requests — written information + the child’s confirmation.',
+      status: 'working',
+      to: '/admin/guardians',
     },
     {
       id: 'content',
@@ -180,63 +194,45 @@ export default function AdminPage() {
   ];
 
   return (
-    <PageShell titleBn="অ্যাডমিন ড্যাশবোর্ড" titleEn="Admin dashboard">
+    <PageShell titleBn="অ্যাডমিন ড্যাশবোর্ড" titleEn="Admin dashboard" wide>
       <p>
         মালিকের নিয়ন্ত্রণ কেন্দ্র — সব কাজ এখান থেকে, কোড ছাড়া। / The owner&apos;s control
         centre — everything from here, no code.
       </p>
-      <p style={{ color: '#555' }}>
+      <p className="ev-muted-ivory">
         প্রতিটি অনুমোদন আলাদা — একটির সিদ্ধান্ত অন্যটিকে প্রভাবিত করে না। / Every approval is
         separate — one decision never affects another.
       </p>
 
-      {loading ? <LoadingBox /> : null}
+      {loading ? <SkeletonCards count={3} /> : null}
       {error ? <ErrorBox message={error} /> : null}
 
-      <h2 style={{ fontSize: 18, marginTop: 24 }}>
+      <h2 className="ev-section-h2" style={{ marginTop: 24 }}>
         অনুমোদনের অপেক্ষায় / Waiting for approval
       </h2>
       {loading ? null : pending.length === 0 ? (
-        <p style={{ color: '#555' }}>
+        <p className="ev-muted-ivory">
           কোনো আবেদন অপেক্ষায় নেই — নতুন আবেদন এলে প্রতিটি আলাদা করে এখানে দেখা যাবে। / Nothing
           waiting — new applications appear here, each separately.
         </p>
       ) : (
-        <ul style={{ listStyle: 'none', padding: 0 }}>
+        <div className="ev-dash-grid">
           {pending.map((row) => (
-            <li
-              key={row.id}
-              style={{
-                border: '1px solid #ddd',
-                borderRadius: 8,
-                padding: '12px 14px',
-                marginBottom: 8,
-              }}
-            >
-              <strong>{row.fullName}</strong> — {row.institution}
-              <br />
-              <span style={{ color: '#555', fontSize: 14 }}>
+            <Card key={row.id}>
+              <strong style={{ fontSize: 16 }}>{row.fullName}</strong> — {row.institution}
+              <p className="ev-muted" style={{ fontSize: 14, margin: '8px 0 12px' }}>
                 শিক্ষক আবেদন · {formatTime(row.createdAt)}
-              </span>
-              <br />
-              <Link to="/admin/teachers">এই আবেদনের সিদ্ধান্ত নিন / Decide this application →</Link>
-            </li>
+              </p>
+              <LinkButton to="/admin/teachers" variant="outline" size="sm">এই আবেদনের সিদ্ধান্ত নিন / Decide this application →</LinkButton>
+            </Card>
           ))}
-        </ul>
+        </div>
       )}
 
-      <h2 style={{ fontSize: 18, marginTop: 24 }}>সব এলাকা / All areas</h2>
-      <div style={{ display: 'grid', gap: 12 }}>
+      <h2 className="ev-section-h2" style={{ marginTop: 24 }}>সব এলাকা / All areas</h2>
+      <div className="ev-dash-grid">
         {areas.map((a) => (
-          <div
-            key={a.id}
-            style={{
-              border: '1px solid #ddd',
-              borderRadius: 8,
-              padding: '12px 14px',
-              opacity: a.status === 'soon' ? 0.75 : 1,
-            }}
-          >
+          <Card key={a.id} style={{ opacity: a.status === 'soon' ? 0.75 : 1 }}>
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, alignItems: 'center' }}>
               <strong style={{ fontSize: 16 }}>{a.titleBn}</strong>
               <StatusPill
@@ -244,39 +240,37 @@ export default function AdminPage() {
                 tone={a.status === 'working' ? 'active' : 'muted'}
               />
               {a.countBn ? (
-                <span style={{ marginLeft: 'auto', color: '#555', fontSize: 14 }}>{a.countBn}</span>
+                <span style={{ marginLeft: 'auto', color: '#57616A', fontSize: 14 }}>{a.countBn}</span>
               ) : null}
             </div>
-            <p style={{ margin: '8px 0 4px', color: '#555', fontSize: 14 }}>{a.descBn}</p>
-            <p style={{ margin: '0 0 8px', color: '#555', fontSize: 14 }}>{a.descEn}</p>
+            <p style={{ margin: '8px 0 4px', color: '#68747B', fontSize: 14 }}>{a.descBn}</p>
+            <p style={{ margin: '0 0 12px', color: '#68747B', fontSize: 14 }}>{a.descEn}</p>
             {a.to ? (
-              <Link to={a.to}>খুলুন / Open →</Link>
+              <LinkButton to={a.to} variant="outline" size="sm">খুলুন / Open →</LinkButton>
             ) : (
-              <span style={{ color: '#888', fontSize: 14 }}>
+              <span className="ev-muted" style={{ fontSize: 14 }}>
                 এখনো তৈরি হয়নি — চালু হলে এখান থেকে খোলা যাবে। / Not built yet.
               </span>
             )}
-          </div>
+          </Card>
         ))}
       </div>
 
-      <h2 style={{ fontSize: 18, marginTop: 24 }}>
+      <h2 className="ev-section-h2" style={{ marginTop: 24 }}>
         বাইরের জিনিস — অবস্থা ও করণীয় / External items — status &amp; what to do
       </h2>
-      <p style={{ color: '#555', fontSize: 14 }}>
+      <p className="ev-muted-ivory" style={{ fontSize: 14 }}>
         এগুলো ড্যাশবোর্ড থেকে করা যায় না — কিন্তু অবস্থা এখানে দেখা যায়, আর কী করতে হবে তা
         প্রতিটির নিচে লেখা আছে। শেষ যাচাই: {formatTime(new Date())} / These cannot be done from
         the dashboard — but their status is shown here, with what to do under each. Last checked:{' '}
         {formatTime(new Date())}
       </p>
       {external.map((item) => (
-        <div
+        <Card
           key={item.id}
           style={{
-            border: item.id === 'domain' && days <= 30 ? '2px solid #b00020' : '1px solid #ddd',
-            borderRadius: 8,
-            padding: '12px 14px',
             marginBottom: 12,
+            border: item.id === 'domain' && days <= 30 ? '2px solid #B00020' : undefined,
           }}
         >
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, alignItems: 'center' }}>
@@ -285,7 +279,7 @@ export default function AdminPage() {
               style={{
                 marginLeft: 'auto',
                 fontSize: 14,
-                color: item.id === 'domain' && days <= 30 ? '#b00020' : '#0A1F44',
+                color: item.id === 'domain' && days <= 30 ? '#B00020' : '#12766E',
                 fontWeight: 700,
               }}
             >
@@ -293,33 +287,47 @@ export default function AdminPage() {
             </span>
           </div>
           <p style={{ margin: '8px 0', fontSize: 15 }}>{item.detailBn}</p>
-          <p style={{ margin: '0 0 8px', color: '#555', fontSize: 14 }}>{item.detailEn}</p>
+          <p style={{ margin: '0 0 8px', color: '#68747B', fontSize: 14 }}>{item.detailEn}</p>
           <p style={{ margin: 0, fontSize: 14 }}>
             কোথায় করবেন: <span lang="en">{item.whereBn}</span> / Where: {item.whereEn}
           </p>
-        </div>
+        </Card>
       ))}
 
-      <h2 style={{ fontSize: 18, marginTop: 24 }}>
+      <h2 className="ev-section-h2" style={{ marginTop: 24 }}>
         ব্যবহারের হিসাব (আনুমানিক) / Usage estimate
       </h2>
-      <p style={{ color: '#555', fontSize: 14 }}>
+      <p className="ev-muted-ivory" style={{ fontSize: 14 }}>
         এই সংখ্যাগুলো শুধু এই ব্রাউজারের আনুমানিক হিসাব — আসল কোটা নয়। আসল সংখ্যা Firebase
         console-এ দেখুন। / These numbers are this browser&apos;s estimate only — not the real
         quota. See the real numbers in the Firebase console.
       </p>
-      <p style={{ fontSize: 15 }}>
-        আজকের পড়া (Reads): {formatBnNumber(usage.firestoreReads)} /{' '}
-        {formatBnNumber(QUOTAS.firestoreReadsPerDay)} ({perc.firestoreReads.toFixed(1)}%) · লেখা
-        (Writes): {formatBnNumber(usage.firestoreWrites)} /{' '}
-        {formatBnNumber(QUOTAS.firestoreWritesPerDay)} ({perc.firestoreWrites.toFixed(1)}%)
-      </p>
-      <p style={{ color: '#555', fontSize: 14 }}>
-        Firebase console → Firestore Database → Usage tab-এ আসল সংখ্যা দেখুন। / See the real
-        numbers in Firebase console → Firestore Database → Usage tab.
-      </p>
+      <Card>
+        <div className="ev-dash-row">
+          <span className="ev-dash-row-label">আজকের পড়া (Reads)</span>
+          <span className="ev-dash-row-bar">
+            <ProgressBar value={perc.firestoreReads} label={`Reads ${perc.firestoreReads.toFixed(1)}%`} />
+          </span>
+          <span className="ev-dash-row-pct">
+            {formatBnNumber(usage.firestoreReads)} / {formatBnNumber(QUOTAS.firestoreReadsPerDay)} ({perc.firestoreReads.toFixed(1)}%)
+          </span>
+        </div>
+        <div className="ev-dash-row" style={{ marginBottom: 0 }}>
+          <span className="ev-dash-row-label">লেখা (Writes)</span>
+          <span className="ev-dash-row-bar">
+            <ProgressBar value={perc.firestoreWrites} label={`Writes ${perc.firestoreWrites.toFixed(1)}%`} />
+          </span>
+          <span className="ev-dash-row-pct">
+            {formatBnNumber(usage.firestoreWrites)} / {formatBnNumber(QUOTAS.firestoreWritesPerDay)} ({perc.firestoreWrites.toFixed(1)}%)
+          </span>
+        </div>
+        <p className="ev-muted" style={{ fontSize: 14, margin: '12px 0 0' }}>
+          Firebase console → Firestore Database → Usage tab-এ আসল সংখ্যা দেখুন। / See the real
+          numbers in Firebase console → Firestore Database → Usage tab.
+        </p>
+      </Card>
       <p style={{ marginTop: 24 }}>
-        <Link to="/admin/audit">অডিট লগ দেখুন / View audit log →</Link>
+        <LinkButton to="/admin/audit" variant="outline">অডিট লগ দেখুন / View audit log →</LinkButton>
       </p>
     </PageShell>
   );

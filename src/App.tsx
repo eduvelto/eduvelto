@@ -1,9 +1,11 @@
-import { Suspense, lazy } from 'react';
-import { Link, Route, Routes, useLocation } from 'react-router-dom';
+import { Suspense, lazy, useEffect, useState } from 'react';
+import { Link, Navigate, NavLink, Route, Routes, useLocation } from 'react-router-dom';
 import { strings } from './i18n/strings';
 import { useAuth } from './lib/auth';
 import { isBottomBannerAllowed, adsEnabled, BOTTOM_BANNER_RESERVE_PX } from './lib/ads';
 import AdSlot from './components/AdSlot';
+import BottomNav from './components/BottomNav';
+import Footer from './components/Footer';
 import InstallAppPrompt from './components/InstallAppPrompt';
 import { AdminGuard } from './components/AdminGuard';
 // SCALE (10k users): route-level code splitting. Before this change the
@@ -12,9 +14,16 @@ import { AdminGuard } from './components/AdminGuard';
 // Home; each route's chunk loads on demand. The header, auth and ad
 // shell stay static — they are small and needed on every page.
 const HomePage = lazy(() => import('./pages/HomePage'));
+const ClassDashboardPage = lazy(() => import('./pages/ClassDashboardPage'));
+const ClassSubjectPage = lazy(() => import('./pages/ClassSubjectPage'));
 const RegisterPage = lazy(() => import('./pages/RegisterPage'));
+const RoleSetupPage = lazy(() => import('./pages/RoleSetupPage'));
 const LoginPage = lazy(() => import('./pages/LoginPage'));
 const ProfilePage = lazy(() => import('./pages/ProfilePage'));
+const StudentDashboardPage = lazy(() => import('./pages/StudentDashboardPage'));
+const TeacherDashboardPage = lazy(() => import('./pages/TeacherDashboardPage'));
+const GuardianDashboardPage = lazy(() => import('./pages/GuardianDashboardPage'));
+const GuardianLinksPage = lazy(() => import('./pages/GuardianLinksPage'));
 const TeacherRegisterPage = lazy(() => import('./pages/TeacherRegisterPage'));
 const DirectoryPage = lazy(() => import('./pages/DirectoryPage'));
 const SubjectPage = lazy(() => import('./pages/SubjectPage'));
@@ -29,6 +38,7 @@ const AdminAds = lazy(() => import('./pages/AdminAds'));
 const AdminUsersPage = lazy(() => import('./pages/AdminUsersPage'));
 const AdminUserDetailPage = lazy(() => import('./pages/AdminUserDetailPage'));
 const AdminTeachersPage = lazy(() => import('./pages/AdminTeachersPage'));
+const AdminGuardiansPage = lazy(() => import('./pages/AdminGuardiansPage'));
 const AdminFeaturesPage = lazy(() => import('./pages/AdminFeaturesPage'));
 const AdminBackupPage = lazy(() => import('./pages/AdminBackupPage'));
 const AdminAuditPage = lazy(() => import('./pages/AdminAuditPage'));
@@ -49,6 +59,26 @@ const ContactPage = lazy(() => import('./pages/ContactPage'));
 // was based on f112b5c (pre-founder) and had no /founder route at all;
 // main 054c230 + the live site do, so the route is restored here.
 const FounderPage = lazy(() => import('./pages/FounderPage'));
+const PrivacyPage = lazy(() => import('./pages/PrivacyPage'));
+
+// Step 5 — role-based dashboards: /dashboard routes by the signed-in
+// user's role. Owner/admin/moderator go to the Owner Admin Dashboard
+// (/admin); student → /student, teacher → /teacher, guardian →
+// /guardian. A signed-in user with NO profile yet (Google sign-in
+// mid-role-setup) goes to /register/role; a signed-out visitor goes
+// to /login.
+function DashboardRedirect() {
+  const { user, profile, loading } = useAuth();
+  if (loading) return null;
+  if (!user) return <Navigate to="/login" replace />;
+  if (!profile) return <Navigate to="/register/role" replace />;
+  if (profile.role === 'owner' || profile.role === 'admin' || profile.role === 'moderator') {
+    return <Navigate to="/admin" replace />;
+  }
+  if (profile.role === 'teacher') return <Navigate to="/teacher" replace />;
+  if (profile.role === 'parent') return <Navigate to="/guardian" replace />;
+  return <Navigate to="/student" replace />;
+}
 
 // Routes mirror page-map.md + the Phase 2 route list.
 // /social is a DESIGN PROPOSAL only (blueprint §7): no live social
@@ -71,53 +101,67 @@ export default function App() {
   // When ads are not configured there is no reservation and no gap.
   const showBottomBanner = isBottomBannerAllowed(location.pathname);
   const bannerLive = showBottomBanner && adsEnabled('bottom-banner');
+  // Mobile menu (≤860px): the full nav would wrap into 3 rows, so it lives
+  // behind a hamburger button and closes on every navigation.
+  const [menuOpen, setMenuOpen] = useState(false);
+  useEffect(() => {
+    setMenuOpen(false);
+  }, [location.pathname]);
   return (
-    <div style={bannerLive ? { paddingBottom: `calc(${BOTTOM_BANNER_RESERVE_PX}px + env(safe-area-inset-bottom, 0px))` } : undefined}>
-      <header
-        style={{
-          background: '#0A1F44',
-          color: '#fff',
-          padding: '12px 16px',
-          display: 'flex',
-          flexWrap: 'wrap',
-          gap: 16,
-          alignItems: 'center',
-        }}
-      >
-        <Link to="/" style={{ color: '#f5c542', fontWeight: 700, textDecoration: 'none', fontSize: 20 }}>
-          Eduvelto
+    <div
+      className="ev-app-shell"
+      style={
+        bannerLive
+          ? ({ '--ev-banner': `${BOTTOM_BANNER_RESERVE_PX}px` } as React.CSSProperties)
+          : undefined
+      }
+    >
+      <header className="ev-header">
+        <Link to="/" style={{ display: 'inline-flex', alignItems: 'center', textDecoration: 'none' }} aria-label="Eduvelto — হোম">
+          <img src="/logo-white.png" alt="Eduvelto" style={{ height: 40, width: 'auto', display: 'block' }} />
         </Link>
-        <span style={{ fontSize: 14 }}>{strings.tagline.bn}</span>
-        <nav aria-label="প্রধান মেনু" style={{ display: 'flex', flexWrap: 'wrap', gap: 12, marginLeft: 'auto', alignItems: 'center' }}>
-          <Link to="/directory" style={{ color: '#fff', padding: '10px 6px' }}>{nav.directory.bn}</Link>
-          <Link to="/library" style={{ color: '#fff', padding: '10px 6px' }}>{nav.library.bn}</Link>
-          <Link to="/exam" style={{ color: '#fff', padding: '10px 6px' }}>{nav.exam.bn}</Link>
-          <Link to="/routine" style={{ color: '#fff', padding: '10px 6px' }}>{nav.routine.bn}</Link>
-          <Link to="/progress" style={{ color: '#fff', padding: '10px 6px' }}>{nav.progress.bn}</Link>
-          <Link to="/health" style={{ color: '#fff', padding: '10px 6px' }}>{nav.health.bn}</Link>
-          <Link to="/about" style={{ color: '#fff', padding: '10px 6px' }}>{nav.about.bn}</Link>
-          <Link to="/founder" style={{ color: '#fff', padding: '10px 6px' }}>{nav.founder.bn}</Link>
-          <Link to="/contact" style={{ color: '#fff', padding: '10px 6px' }}>{nav.contact.bn}</Link>
+        <span className="ev-header-tagline">{strings.tagline.bn}</span>
+        <button
+          type="button"
+          className="ev-menu-btn"
+          aria-expanded={menuOpen}
+          aria-controls="ev-main-nav"
+          aria-label={menuOpen ? 'মেনু বন্ধ করুন / Close menu' : 'মেনু খুলুন / Open menu'}
+          onClick={() => setMenuOpen((o) => !o)}
+        >
+          {menuOpen ? '✕ বন্ধ' : '☰ মেনু'}
+        </button>
+        <nav aria-label="প্রধান মেনু" id="ev-main-nav" className={`ev-header-nav${menuOpen ? ' ev-header-nav-open' : ''}`}>
+          <NavLink to="/directory" className={({ isActive }) => `ev-navlink${isActive ? ' ev-navlink-active' : ''}`}>{nav.directory.bn}</NavLink>
+          <NavLink to="/library" className={({ isActive }) => `ev-navlink${isActive ? ' ev-navlink-active' : ''}`}>{nav.library.bn}</NavLink>
+          <NavLink to="/exam" className={({ isActive }) => `ev-navlink${isActive ? ' ev-navlink-active' : ''}`}>{nav.exam.bn}</NavLink>
+          <NavLink to="/routine" className={({ isActive }) => `ev-navlink${isActive ? ' ev-navlink-active' : ''}`}>{nav.routine.bn}</NavLink>
+          <NavLink to="/progress" className={({ isActive }) => `ev-navlink${isActive ? ' ev-navlink-active' : ''}`}>{nav.progress.bn}</NavLink>
+          <NavLink to="/health" className={({ isActive }) => `ev-navlink${isActive ? ' ev-navlink-active' : ''}`}>{nav.health.bn}</NavLink>
+          <NavLink to="/about" className={({ isActive }) => `ev-navlink${isActive ? ' ev-navlink-active' : ''}`}>{nav.about.bn}</NavLink>
+          <NavLink to="/founder" className={({ isActive }) => `ev-navlink${isActive ? ' ev-navlink-active' : ''}`}>{nav.founder.bn}</NavLink>
+          <NavLink to="/contact" className={({ isActive }) => `ev-navlink${isActive ? ' ev-navlink-active' : ''}`}>{nav.contact.bn}</NavLink>
           {profile?.role === 'owner' ? (
-            <Link to="/admin" style={{ color: '#F1B308', padding: '10px 6px', fontWeight: 700 }}>{nav.admin.bn}</Link>
+            <NavLink to="/admin" className={({ isActive }) => `ev-navlink${isActive ? ' ev-navlink-active' : ''}`} style={{ color: '#D9A441', fontWeight: 700 }}>{nav.admin.bn}</NavLink>
           ) : null}
           {loading ? null : user ? (
             <>
-              <Link to="/profile" style={{ color: '#fff', padding: '10px 6px' }}>
+              <NavLink to="/dashboard" className={({ isActive }) => `ev-navlink${isActive ? ' ev-navlink-active' : ''}`}>{nav.dashboard.bn}</NavLink>
+              <NavLink to="/profile" className={({ isActive }) => `ev-navlink${isActive ? ' ev-navlink-active' : ''}`}>
                 {profile?.displayName ?? nav.profile.bn}
-              </Link>
+              </NavLink>
               <button
                 type="button"
                 onClick={() => void signOut()}
-                style={{ background: 'transparent', border: '1px solid #fff', color: '#fff', borderRadius: 6, padding: '10px 16px', minHeight: 44, cursor: 'pointer', fontSize: 14 }}
+                className="ev-btn ev-btn-sm ev-btn-header"
               >
                 {nav.logout.bn}
               </button>
             </>
           ) : (
             <>
-              <Link to="/login" style={{ color: '#fff', padding: '10px 6px' }}>{nav.login.bn}</Link>
-              <Link to="/register" style={{ color: '#fff', padding: '10px 6px' }}>{nav.register.bn}</Link>
+              <NavLink to="/login" className={({ isActive }) => `ev-navlink${isActive ? ' ev-navlink-active' : ''}`}>{nav.login.bn}</NavLink>
+              <NavLink to="/register" className={({ isActive }) => `ev-navlink${isActive ? ' ev-navlink-active' : ''}`}>{nav.register.bn}</NavLink>
             </>
           )}
         </nav>
@@ -143,7 +187,7 @@ export default function App() {
             <button
               type="button"
               onClick={() => void signOut()}
-              style={{ padding: '10px 18px', minHeight: 48, fontSize: 16, borderRadius: 6, border: 'none', background: '#0A1F44', color: '#fff', cursor: 'pointer' }}
+              style={{ padding: '10px 18px', minHeight: 48, fontSize: 16, borderRadius: 6, border: 'none', background: '#142B3B', color: '#fff', cursor: 'pointer' }}
             >
               {nav.logout.bn} / {nav.logout.en}
             </button>
@@ -155,9 +199,19 @@ export default function App() {
         <Suspense fallback={<main style={{ maxWidth: 720, margin: '0 auto', padding: '24px 16px' }}><p>লোড হচ্ছে… / Loading…</p></main>}>
         <Routes>
         <Route path="/" element={<HomePage />} />
+        {/* Class-wise navigation (stage 3): Select Class → Class Dashboard → Tab → Subject → Book → Chapter. */}
+        <Route path="/class/:slug/subjects/:dept" element={<ClassSubjectPage />} />
+        <Route path="/class/:slug/:tab" element={<ClassDashboardPage />} />
+        <Route path="/class/:slug" element={<ClassDashboardPage />} />
         <Route path="/register" element={<RegisterPage />} />
+        <Route path="/register/role" element={<RoleSetupPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/profile" element={<ProfilePage />} />
+        <Route path="/profile/guardian-links" element={<GuardianLinksPage />} />
+        <Route path="/dashboard" element={<DashboardRedirect />} />
+        <Route path="/student" element={<StudentDashboardPage />} />
+        <Route path="/teacher" element={<TeacherDashboardPage />} />
+        <Route path="/guardian" element={<GuardianDashboardPage />} />
         <Route path="/teacher/register" element={<TeacherRegisterPage />} />
         <Route path="/directory" element={<DirectoryPage />} />
         <Route path="/subjects/:subjectId" element={<SubjectPage />} />
@@ -172,6 +226,7 @@ export default function App() {
         <Route path="/admin/users" element={<AdminGuard><AdminUsersPage /></AdminGuard>} />
         <Route path="/admin/users/:uid" element={<AdminGuard><AdminUserDetailPage /></AdminGuard>} />
         <Route path="/admin/teachers" element={<AdminGuard><AdminTeachersPage /></AdminGuard>} />
+        <Route path="/admin/guardians" element={<AdminGuard><AdminGuardiansPage /></AdminGuard>} />
         <Route path="/admin/features" element={<AdminGuard><AdminFeaturesPage /></AdminGuard>} />
         <Route path="/admin/backup" element={<AdminGuard><AdminBackupPage /></AdminGuard>} />
         <Route path="/admin/audit" element={<AdminGuard><AdminAuditPage /></AdminGuard>} />
@@ -189,9 +244,13 @@ export default function App() {
         <Route path="/about" element={<AboutPage />} />
         <Route path="/founder" element={<FounderPage />} />
         <Route path="/contact" element={<ContactPage />} />
+        <Route path="/privacy" element={<PrivacyPage />} />
         <Route path="*" element={<HomePage />} />
         </Routes>
         </Suspense>
+        <Footer />
+        {/* Mobile bottom navigation (stage 3): Home / Books / Tests / Progress / Profile, ≤768px. Sits above the bottom ad banner when one is live. */}
+        <BottomNav bottomOffsetPx={bannerLive ? BOTTOM_BANNER_RESERVE_PX : 0} />
         {showBottomBanner ? <AdSlot placement="bottom-banner" /> : null}
         </>
       )}

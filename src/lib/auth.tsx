@@ -61,9 +61,17 @@ export interface AuthState {
   suspended: boolean;
   /** Last friendly error message, if any. */
   error: string | null;
-  signUp: (displayName: string, email: string, password: string) => Promise<void>;
+  signUp: (
+    displayName: string,
+    email: string,
+    password: string,
+    options?: { role?: 'student' | 'teacher' | 'parent'; fields?: ProfileEdit },
+  ) => Promise<void>;
   signIn: (email: string, password: string) => Promise<void>;
-  signInWithGoogle: () => Promise<void>;
+  /** holdForRoleSetup: skip profile creation — the caller navigates to
+   * /register/role and RoleSetupPage creates the profile with the
+   * chosen role. */
+  signInWithGoogle: (options?: { holdForRoleSetup?: boolean }) => Promise<void>;
   signOut: () => Promise<void>;
   resetPassword: (email: string) => Promise<void>;
   saveProfile: (fields: ProfileEdit) => Promise<void>;
@@ -75,6 +83,24 @@ const AuthContext = createContext<AuthState | null>(null);
 const googleProvider = new GoogleAuthProvider();
 // Always ask which Google account to use (shared devices / many accounts).
 googleProvider.setCustomParameters({ prompt: 'select_account' });
+
+/** Role-setup hold: while the user is on /register/role choosing their
+ * role after a Google sign-in, the provider must NOT auto-create a
+ * default 'student' profile — that would destroy the choice. Set by
+ * RegisterPage before Google sign-in (via signInWithGoogle's
+ * holdForRoleSetup option), released by RoleSetupPage once the profile
+ * is created, and cleared on sign-out. In-memory only: if the tab
+ * closes mid-setup, the next sign-in auto-creates a student profile
+ * (documented behaviour). */
+let roleSetupHold = false;
+
+export function holdProfileCreationForRoleSetup(): void {
+  roleSetupHold = true;
+}
+
+export function releaseProfileCreationHold(): void {
+  roleSetupHold = false;
+}
 
 export function AuthProvider(props: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
@@ -121,6 +147,21 @@ export function AuthProvider(props: { children: ReactNode }) {
         // An explicit sign-in call is creating this profile right now;
         // it owns the profile state — do not race it here.
         if (creatingForUid.current === u.uid) return;
+        // Role-setup hold: a Google sign-in whose role is not chosen yet.
+        // Load the profile if one already exists; otherwise do NOT create
+        // one — RoleSetupPage creates it with the chosen role.
+        if (roleSetupHold) {
+          try {
+            const existing = await getUserProfile(db, u.uid);
+            setProfile(existing);
+            if (existing) await touchLastActive(u.uid);
+          } catch (e) {
+            setError(friendlyErrorMessage(e));
+          } finally {
+            setLoading(false);
+          }
+          return;
+        }
         try {
           const { profile: p, created } = await ensureUserProfile(db, u);
           setProfile(p);
@@ -136,7 +177,12 @@ export function AuthProvider(props: { children: ReactNode }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  async function signUp(displayName: string, email: string, password: string): Promise<void> {
+  async function signUp(
+    displayName: string,
+    email: string,
+    password: string,
+    options?: { role?: 'student' | 'teacher' | 'parent'; fields?: ProfileEdit },
+  ): Promise<void> {
     if (!auth || !db) throw new Error('not-configured');
     setError(null);
     setLoading(true);
@@ -146,7 +192,7 @@ export function AuthProvider(props: { children: ReactNode }) {
       creatingForUid.current = u.uid;
       try {
         await updateAuthProfile(u, { displayName: displayName.trim() });
-        const { profile: p } = await ensureUserProfile(db, u, displayName.trim());
+        const { profile: p } = await ensureUserProfile(db, u, displayName.trim(), options);
         setUser(u);
         setProfile(p);
       } finally {
@@ -184,7 +230,7 @@ export function AuthProvider(props: { children: ReactNode }) {
     }
   }
 
-  async function signInWithGoogle(): Promise<void> {
+  async function signInWithGoogle(options?: { holdForRoleSetup?: boolean }): Promise<void> {
     if (!auth || !db) throw new Error('not-configured');
     setError(null);
     setLoading(true);
@@ -193,6 +239,16 @@ export function AuthProvider(props: { children: ReactNode }) {
       const u = cred.user;
       creatingForUid.current = u.uid;
       try {
+        if (options?.holdForRoleSetup) {
+          roleSetupHold = true;
+          // Load an existing profile if this is a returning account;
+          // do NOT create one — RoleSetupPage does it with the role.
+          const existing = await getUserProfile(db, u.uid);
+          setUser(u);
+          setProfile(existing);
+          if (existing) await touchLastActive(u.uid);
+          return;
+        }
         const { profile: p, created } = await ensureUserProfile(db, u);
         setUser(u);
         setProfile(p);
@@ -219,6 +275,7 @@ export function AuthProvider(props: { children: ReactNode }) {
     }
     touchedUid.current = null;
     creatingForUid.current = null;
+    roleSetupHold = false;
     setUser(null);
     setProfile(null);
   }

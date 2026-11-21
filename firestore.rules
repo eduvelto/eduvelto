@@ -25,10 +25,14 @@ service cloud.firestore {
     function uid() { return request.auth.uid; }
     function isOwner(id) { return signedIn() && uid() == id; }
 
-    // Role is read from the caller's own users doc. If that doc does not
-    // exist (or the read fails), get() errors and the rule denies — safe.
+    // Role is read from the caller's own users doc. `.data.get('role', '')`
+    // (not `.data.role`): dot-access ERRORS when the doc/field is missing,
+    // which turns a clean deny into a rules EVALUATION error — the client
+    // then gets an opaque error instead of permission-denied, and lib code
+    // that reads-then-checks (e.g. confirmParentLink's 'not-the-child')
+    // can never run. A missing doc/field now yields '' (never a role).
     function callerRole() {
-      return get(/databases/$(database)/documents/users/$(uid())).data.role;
+      return get(/databases/$(database)/documents/users/$(uid())).data.get('role', '');
     }
     // Suspension is enforced SERVER-side, not just in the UI (review
     // 20 Nov 2026: suspension used to hide the app only — a suspended
@@ -54,6 +58,18 @@ service cloud.firestore {
     }
     function isTeacher() {
       return signedIn() && callerActive() && (callerRole() in ['teacher', 'admin', 'moderator', 'owner']);
+    }
+    // DASHBOARDS (Step 5/8, branch draft — NOT deployed): a guardian may
+    // read a linked child's progress/bookmarks/results ONLY while the
+    // parentLink is 'verified'. The link id is deterministic
+    // `{guardianUid}_{childUid}`, so this is one exists() + one get().
+    // exists() short-circuits: a missing link denies without erroring.
+    // A guardian NEVER reads the child's users doc (email lives there)
+    // and NEVER reads quizAttempts (detailed answers stay with the child).
+    function isLinkedGuardian(studentId) {
+      return signedIn() && callerActive()
+        && exists(/databases/$(database)/documents/parentLinks/$(uid() + '_' + studentId))
+        && get(/databases/$(database)/documents/parentLinks/$(uid() + '_' + studentId)).data.status == 'verified';
     }
 
     // ---------- validation helpers ----------
@@ -100,21 +116,62 @@ service cloud.firestore {
     // are onboarded (minimal per-case projection, audit-logged).
     match /users/{userId} {
       allow read: if isOwner(userId) || isAdmin();
+      // DASHBOARDS (Step 5, branch draft): self-service roles are
+      // student / teacher / parent ONLY — admin / moderator / owner can
+      // never be self-assigned (the old rule allowed student only, so
+      // teacher + guardian registration was impossible). A teacher or
+      // guardian profile is created with verificationStatus 'pending'
+      // (verification is a human Admin decision afterwards); a student
+      // NEVER carries verificationStatus (no student verification exists
+      // — owner decision 21 Nov 06:53 + 07:02, 100% free, manual only).
+      // isActive is still never set at creation (missing = active).
       allow create: if isOwner(userId)
-        && request.resource.data.role == 'student'
-        && !('verificationStatus' in request.resource.data)
+        && request.resource.data.role in ['student', 'teacher', 'parent']
+        && (!('verificationStatus' in request.resource.data)
+            || (request.resource.data.role in ['teacher', 'parent']
+                && request.resource.data.verificationStatus == 'pending'))
         && !('isActive' in request.resource.data)
         && isStr(request.resource.data.displayName, 100)
         && request.resource.data.email is string
-        && request.resource.data.language in ['bn', 'en'];
+        && request.resource.data.language in ['bn', 'en']
+        && isOptStr(request.resource.data.get('board', null), 200)
+        && isOptStr(request.resource.data.get('institution', null), 200)
+        && isOptStr(request.resource.data.get('academicSession', null), 50)
+        && isOptStr(request.resource.data.get('curriculum', null), 200)
+        && isOptStr(request.resource.data.get('classLevel', null), 100)
+        && isOptStr(request.resource.data.get('department', null), 100)
+        && isOptStr(request.resource.data.get('semester', null), 50)
+        && isOptStr(request.resource.data.get('phone', null), 20)
+        && isOptStr(request.resource.data.get('teachingLevel', null), 100)
+        && isOptStr(request.resource.data.get('qualifications', null), 500)
+        && (!('subjects' in request.resource.data)
+            || (request.resource.data.subjects is list
+                && request.resource.data.subjects.size() <= 20))
+        && (!('experienceYears' in request.resource.data)
+            || (request.resource.data.experienceYears is number
+                && request.resource.data.experienceYears >= 0
+                && request.resource.data.experienceYears <= 60));
       allow update: if isOwner(userId)
         // The update may touch ONLY these fields; role, verificationStatus
         // and isActive are excluded, so they cannot change here.
+        // DASHBOARDS (Step 5): the academic fields added are semester,
+        // academicSession, curriculum, phone and experienceYears.
+        // subjects / teachingLevel / qualifications are DELIBERATELY
+        // absent: a teacher's approved subjects change ONLY through the
+        // admin-decided change request (teacherChangeRequests) — a
+        // teacher must never silently rewrite their own approved set.
         && request.resource.data.diff(resource.data).affectedKeys()
              .hasOnly(['displayName', 'educationType', 'board', 'institution',
-                       'academicYear', 'program', 'department', 'classLevel',
+                       'academicYear', 'academicSession', 'curriculum',
+                       'program', 'department', 'classLevel', 'semester',
+                       'phone', 'experienceYears',
                        'language', 'lastActiveAt', 'updatedAt'])
-        && isOptStr(request.resource.data.displayName, 100);
+        && isOptStr(request.resource.data.displayName, 100)
+        && isOptStr(request.resource.data.get('phone', null), 20)
+        && (!('experienceYears' in request.resource.data)
+            || (request.resource.data.experienceYears is number
+                && request.resource.data.experienceYears >= 0
+                && request.resource.data.experienceYears <= 60));
       // Admin/Owner change role / verificationStatus / isActive, and only
       // they may do so — and only to valid enum values.
       // OWNER PROTECTION (spec §3): a users doc whose role is 'owner' is
@@ -146,6 +203,24 @@ service cloud.firestore {
             || request.resource.data.suspendedReason == null)
         && (!('verificationStatus' in request.resource.data.diff(resource.data).affectedKeys())
             || request.resource.data.verifiedBy == uid());
+      // DASHBOARDS (Step 7, branch draft): applying an APPROVED teacher
+      // change request. An Admin may set a teacher's approved subjects /
+      // teachingLevel / classLevel — ONLY those three fields, and only on
+      // a teacher's doc. The change-request document + the audit entry
+      // are written in the SAME batch by admin.ts (decideTeacherChange-
+      // Request); the rules permit the field change, the code enforces
+      // the batch + audit. A teacher can never set these fields
+      // themselves (the self-update allowlist excludes them).
+      allow update: if isAdmin()
+        && resource.data.role == 'teacher'
+        && request.resource.data.diff(resource.data).affectedKeys()
+             .hasOnly(['subjects', 'teachingLevel', 'classLevel', 'updatedAt'])
+        && (!('subjects' in request.resource.data)
+            || (request.resource.data.subjects is list
+                && request.resource.data.subjects.size() > 0
+                && request.resource.data.subjects.size() <= 20))
+        && isOptStr(request.resource.data.get('teachingLevel', null), 100)
+        && isOptStr(request.resource.data.get('classLevel', null), 100);
       // The owner updates ANY user's doc (highest authority — this is
       // what lets the owner rename a user, test (i1)). The owner may
       // touch profile fields + the admin fields, but may NEVER create a
@@ -239,7 +314,10 @@ service cloud.firestore {
       allow update, delete: if signedIn() && callerActive() && resource.data.userId == uid();
     }
     match /progressSummaries/{summaryId} {
-      allow read: if signedIn() && (resource.data.userId == uid() || isAdmin());
+      // DASHBOARDS (Step 8): a guardian with a VERIFIED link reads the
+      // linked child's summaries (weak/strong subjects, results).
+      allow read: if signedIn() && (resource.data.userId == uid() || isAdmin()
+        || isLinkedGuardian(resource.data.userId));
       allow create, update: if signedIn() && callerActive() && request.resource.data.userId == uid()
         && request.resource.data.attemptsCount is number
         && request.resource.data.averagePercentage is number;
@@ -252,7 +330,10 @@ service cloud.firestore {
     // userId can never be spoofed: every write must carry the caller's
     // own uid, and updates may not move the doc to another user.
     match /bookmarks/{bookmarkId} {
-      allow read: if signedIn() && (resource.data.userId == uid() || isAdmin());
+      // DASHBOARDS (Step 8): a guardian with a VERIFIED link reads the
+      // linked child's bookmarks (learning history).
+      allow read: if signedIn() && (resource.data.userId == uid() || isAdmin()
+        || isLinkedGuardian(resource.data.userId));
       allow create: if signedIn() && callerActive() && request.resource.data.userId == uid()
         && isStr(request.resource.data.lessonId, 200)
         && isStr(request.resource.data.title, 200);
@@ -261,7 +342,10 @@ service cloud.firestore {
       allow delete: if signedIn() && callerActive() && resource.data.userId == uid();
     }
     match /progress/{progressId} {
-      allow read: if signedIn() && (resource.data.userId == uid() || isAdmin());
+      // DASHBOARDS (Step 8): a guardian with a VERIFIED link reads the
+      // linked child's progress (lessons read, practice counts).
+      allow read: if signedIn() && (resource.data.userId == uid() || isAdmin()
+        || isLinkedGuardian(resource.data.userId));
       allow create: if signedIn() && callerActive() && request.resource.data.userId == uid()
         && isStr(request.resource.data.subject, 100);
       allow update: if signedIn() && callerActive() && resource.data.userId == uid()
@@ -446,10 +530,35 @@ service cloud.firestore {
     //   explicit path with its own reason — decided records cannot be
     //   silently flipped back and forth.
     match /teacherVerifications/{recordId} {
-      allow read: if signedIn() && (resource.data.userId == uid() || isModerator());
+      // `resource == null` first: a first-time applicant has NO record
+      // yet, and the form/lib must be able to read that absence
+      // (getMyTeacherApplication returns null). Without the guard,
+      // `resource.data.userId` on a missing doc throws a Null value
+      // error and the read is DENIED — no data leaks either way, since
+      // a missing doc returns nothing.
+      allow read: if signedIn() && (resource == null || resource.data.userId == uid() || isModerator());
       allow create: if signedIn() && callerActive()
+        && recordId == 'tv_' + uid()
         && request.resource.data.userId == uid()
         && request.resource.data.status == 'pending'
+        && isStr(request.resource.data.fullName, 100)
+        && isStr(request.resource.data.institution, 200)
+        && isOptStr(request.resource.data.get('post', null), 100)
+        && isOptStr(request.resource.data.get('institutionContact', null), 100);
+      // DASHBOARDS (Step 5): a REJECTED teacher may re-apply — the
+      // applicant re-files their own record as 'pending' again (same
+      // deterministic id). Only the application fields may change, and
+      // the record must have been 'rejected'.
+      allow update: if signedIn() && callerActive()
+        && resource.data.userId == uid()
+        && resource.data.status == 'rejected'
+        && request.resource.data.status == 'pending'
+        && request.resource.data.diff(resource.data).affectedKeys()
+             .hasOnly(['teachingLevel', 'subjects', 'classes', 'institution',
+                       'post', 'institutionContact',
+                       'qualifications', 'experienceYears', 'verificationReason',
+                       'evidenceRef', 'status', 'verificationStatus',
+                       'submittedAt', 'updatedAt'])
         && isStr(request.resource.data.fullName, 100)
         && isStr(request.resource.data.institution, 200);
       allow update: if isAdmin()
@@ -486,6 +595,44 @@ service cloud.firestore {
         && request.resource.data.reason is string
         && request.resource.data.reason.size() >= 10;
       allow delete: if isAdmin();
+    }
+
+    // ---------- teacherChangeRequests (Dashboards Step 7, branch draft) ----------
+    // A verified teacher's subject/class change goes through here — the
+    // request is PENDING until an Admin approves it, and the dashboard
+    // keeps showing the OLD approved subjects until then.
+    // - CREATE: the teacher files their own request (teacherUid == uid,
+    //   status 'pending', ≥1 subject + ≥1 class, reason ≥10 chars).
+    // - READ: the teacher + Admin/Owner (the admin dashboard decides it).
+    // - UPDATE: Admin ONLY, pending -> approved / rejected, with a reason
+    //   (≥10 chars) and decidedBy == the caller. The profile update
+    //   (subjects/teachingLevel/classLevel) + this decision + the audit
+    //   entry are ONE batch in admin.ts — the rules permit each half.
+    // - DELETE: never (a decided request stays as the audit trail).
+    match /teacherChangeRequests/{requestId} {
+      allow read: if signedIn() && (resource.data.teacherUid == uid() || isAdmin());
+      allow create: if signedIn() && callerActive()
+        && request.resource.data.teacherUid == uid()
+        && request.resource.data.status == 'pending'
+        && request.resource.data.requestedSubjects is list
+        && request.resource.data.requestedSubjects.size() > 0
+        && request.resource.data.requestedSubjects.size() <= 20
+        && request.resource.data.requestedClasses is list
+        && request.resource.data.requestedClasses.size() > 0
+        && request.resource.data.requestedClasses.size() <= 20
+        && isOptStr(request.resource.data.get('requestedTeachingLevel', null), 100)
+        && request.resource.data.reason is string
+        && request.resource.data.reason.size() >= 10;
+      allow update: if isAdmin()
+        && resource.data.status == 'pending'
+        && resource.data.teacherUid != uid()
+        && request.resource.data.status in ['approved', 'rejected']
+        && request.resource.data.diff(resource.data).affectedKeys()
+             .hasOnly(['status', 'decidedBy', 'decidedAt', 'decisionReason', 'updatedAt'])
+        && request.resource.data.decidedBy == uid()
+        && request.resource.data.decisionReason is string
+        && request.resource.data.decisionReason.size() >= 10;
+      allow delete: if false;
     }
 
     // ---------- health (Health v1, owner brief 20 Nov 23:51) ----------
@@ -771,14 +918,90 @@ service cloud.firestore {
     }
 
     // ---------- parent links / invites (Phase 4, gated on consent design G7) ----------
+    // DASHBOARDS (Step 8, branch draft): the full link lifecycle.
+    // - CREATE: the guardian creates the link (parentId must be their own
+    //   uid; the id is deterministic `{guardianUid}_{childUid}` — one
+    //   link per guardian+child; status starts 'pending').
+    // - CONFIRM: the CHILD confirms (pending -> confirmed). Only the
+    //   child may do this, and only from 'pending'.
+    // - SNAPSHOT: the CHILD keeps the denormalized academic snapshot in
+    //   sync when their class changes (ProfilePage) — only the snapshot
+    //   fields, status untouched. This is how the guardian dashboard
+    //   updates automatically WITHOUT reading the child's users doc.
+    // - REVOKE: either party may revoke at any time (status 'revoked').
+    // - ACTIVATE: ONLY an Admin activates (pending/confirmed ->
+    //   'verified') after cross-checking the written information; the
+    //   admin sets verifiedBy/At + the decision reason.
+    // - REJECT: ONLY an Admin rejects (pending/confirmed -> 'rejected')
+    //   with a reason >= 10 chars; a rejected link is a dead end — the
+    //   guardian may request again (a new link overwrites it).
+    //   A guardian NEVER reads the child's users doc or messages through
+    //   this collection — the snapshot carries only name + academic
+    //   fields, and the rules tests prove the users-doc read is denied.
     match /parentLinks/{linkId} {
+      // `resource == null` first: reading a link that does not exist
+      // (e.g. a stale id) must return "not found", not a permission
+      // error — same Null-value guard as teacherVerifications above.
       allow read: if signedIn()
-        && (resource.data.parentId == uid() || resource.data.studentId == uid() || isAdmin());
-      allow create: if signedIn() && callerActive() && request.resource.data.status == 'pending';
-      // Only Admin activates a link after the consent record is complete.
+        && (resource == null || resource.data.parentId == uid() || resource.data.studentId == uid() || isAdmin());
+      allow create: if signedIn() && callerActive()
+        && linkId == uid() + '_' + request.resource.data.studentId
+        && request.resource.data.parentId == uid()
+        && request.resource.data.studentId is string
+        && request.resource.data.studentId != uid()
+        && request.resource.data.status == 'pending'
+        && isStr(request.resource.data.guardianDisplayName, 100)
+        && isStr(request.resource.data.relationship, 50)
+        && isOptStr(request.resource.data.get('guardianContact', null), 20)
+        && isStr(request.resource.data.childDisplayName, 100)
+        && isStr(request.resource.data.childClassLevel, 100)
+        && isOptStr(request.resource.data.get('childInstitution', null), 200)
+        && isOptStr(request.resource.data.get('childEducationType', null), 50)
+        && isOptStr(request.resource.data.get('childDepartment', null), 100)
+        && isOptStr(request.resource.data.get('childProgram', null), 100)
+        && isOptStr(request.resource.data.get('childBoard', null), 200);
+      allow update: if signedIn() && callerActive()
+        && resource.data.studentId == uid()
+        && resource.data.status == 'pending'
+        && request.resource.data.status == 'confirmed'
+        && request.resource.data.diff(resource.data).affectedKeys()
+             .hasOnly(['status', 'confirmedAt', 'updatedAt']);
+      // Child REJECTS the request (pending -> revoked) — the child may
+      // also reject by using the revoke clause below; this clause is
+      // the same path, kept separate for clarity in tests.
+      allow update: if signedIn() && callerActive()
+        && resource.data.studentId == uid()
+        && request.resource.data.status == resource.data.status
+        && request.resource.data.diff(resource.data).affectedKeys()
+             .hasOnly(['childClassLevel', 'childDisplayName', 'childEducationType',
+                       'childDepartment', 'childProgram', 'childBoard', 'updatedAt'])
+        && isStr(request.resource.data.childDisplayName, 100)
+        && isStr(request.resource.data.childClassLevel, 100);
+      allow update: if signedIn() && callerActive()
+        && (resource.data.parentId == uid() || resource.data.studentId == uid())
+        && request.resource.data.status == 'revoked'
+        && request.resource.data.diff(resource.data).affectedKeys()
+             .hasOnly(['status', 'revokedAt', 'updatedAt']);
       allow update: if isAdmin()
-        || (signedIn() && (resource.data.parentId == uid() || resource.data.studentId == uid())
-            && request.resource.data.status == 'revoked');
+        && resource.data.status in ['pending', 'confirmed']
+        && request.resource.data.status == 'verified'
+        && request.resource.data.diff(resource.data).affectedKeys()
+             .hasOnly(['status', 'verifiedBy', 'verifiedAt', 'decidedBy', 'decisionReason', 'updatedAt'])
+        && request.resource.data.verifiedBy == uid()
+        && (request.resource.data.get('decidedBy', null) == null || request.resource.data.decidedBy == uid())
+        && isOptStr(request.resource.data.get('decisionReason', null), 500);
+      allow update: if isAdmin()
+        && resource.data.status in ['pending', 'confirmed']
+        && request.resource.data.status == 'rejected'
+        && request.resource.data.diff(resource.data).affectedKeys()
+             .hasOnly(['status', 'decidedBy', 'decisionReason', 'rejectedAt', 'updatedAt'])
+        && request.resource.data.decidedBy == uid()
+        && isStr(request.resource.data.decisionReason, 500);
+      allow update: if isAdmin()
+        && resource.data.status in ['pending', 'confirmed', 'verified']
+        && request.resource.data.status == 'revoked'
+        && request.resource.data.diff(resource.data).affectedKeys()
+             .hasOnly(['status', 'revokedAt', 'updatedAt']);
       allow delete: if isAdmin();
     }
     match /parentInvites/{inviteId} {
@@ -821,12 +1044,48 @@ service cloud.firestore {
              'user-suspend', 'user-reactivate', 'user-role-change',
              'teacher-verification-approved', 'teacher-verification-rejected',
              'teacher-verification-revoked', 'teacher-verification-reopened',
+             'teacher-change-approved', 'teacher-change-rejected',
+             'guardian-link-approved', 'guardian-link-rejected', 'guardian-link-revoked',
              'feature-enabled', 'feature-disabled',
              'backup-exported',
              'user-profile-viewed', 'user-messages-viewed',
              'support-message-sent', 'message-reported', 'message-blocked']
         && request.resource.data.keys().hasOnly(
              ['actorId', 'action', 'details', 'targetId', 'before', 'after', 'reason', 'createdAt'])
+        && request.resource.data.createdAt is timestamp;
+      // DASHBOARDS (Step 5): a user appends ONLY their own profile-change
+      // audit entry (action 'profile-changed', actorId == targetId ==
+      // their own uid), written in the SAME batch as the profile update
+      // by profile.ts — the change and its audit trail succeed or fail
+      // together. The log stays append-only: nobody may update or
+      // delete an entry, and a user can never forge another action or
+      // another user's entry.
+      allow create: if signedIn() && callerActive()
+        && request.resource.data.actorId == uid()
+        && request.resource.data.targetId == uid()
+        && request.resource.data.action == 'profile-changed'
+        && request.resource.data.keys().hasOnly(
+             ['actorId', 'action', 'details', 'targetId', 'before', 'after', 'createdAt'])
+        && request.resource.data.details is string
+        && request.resource.data.createdAt is timestamp;
+      // DASHBOARDS (Step 8): guardian-link audit entries written by the
+      // guardian / child themselves, in the SAME batch as the link
+      // change (guardian.ts) — request, child confirmation, and a
+      // guardian/child revoke each append one entry. actorId must be the
+      // caller; targetId must be the parentLinks document id
+      // (`{guardianUid}_{childUid}`), so an entry always names the link
+      // it belongs to and nobody can forge another family's entry. The
+      // admin's decision entries (approved/rejected/revoked) go through
+      // the admin clause above.
+      allow create: if signedIn() && callerActive()
+        && request.resource.data.actorId == uid()
+        && request.resource.data.action in [
+             'guardian-link-requested', 'guardian-link-confirmed', 'guardian-link-revoked']
+        && request.resource.data.targetId is string
+        && request.resource.data.targetId.matches('^[^_]+_[^_]+$')
+        && request.resource.data.keys().hasOnly(
+             ['actorId', 'action', 'details', 'targetId', 'before', 'after', 'createdAt'])
+        && request.resource.data.details is string
         && request.resource.data.createdAt is timestamp;
       allow read: if isOwnerRole();
       allow update, delete: if false;
