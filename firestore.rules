@@ -923,6 +923,101 @@ service cloud.firestore {
       allow create, update, delete: if false;
     }
 
+    // ---------- AI Chat (branch ai-chat/ui, 21 Nov 2026) ----------
+    // Real system shell — conversations + messages + usage counters.
+    // NO provider is connected: no model call exists, no API key exists.
+    // Privacy (costing plan §7.1, binding): a conversation is readable
+    // ONLY by its owner — not guardians, not teachers, not admins, not
+    // even the owner role. No routine access to private message content
+    // for ANYONE. Exceptional access is a documented, owner-approved,
+    // time-boxed, audit-logged process — never a rule.
+    // Anti-fake-AI rule: clients may create ONLY role 'user' messages.
+    // Assistant replies are written ONLY by the gateway (Admin SDK,
+    // Blaze) — so no client can plant a fake AI answer in history.
+    // Messages are immutable; delete the whole conversation instead.
+    match /aiConversations/{conversationId} {
+      allow read: if signedIn() && resource.data.ownerId == uid();
+      allow create: if signedIn() && callerActive()
+        && request.resource.data.ownerId == uid()
+        && request.resource.data.keys().hasOnly(
+             ['ownerId', 'title', 'language', 'status', 'messageCount',
+              'lastMessageAt', 'createdAt', 'updatedAt'])
+        && isStr(request.resource.data.title, 200)
+        && request.resource.data.language in ['bn', 'en']
+        && request.resource.data.status in ['active', 'archived']
+        && request.resource.data.messageCount is int
+        && request.resource.data.messageCount >= 0
+        && request.resource.data.createdAt is timestamp
+        && request.resource.data.updatedAt is timestamp;
+      allow update: if signedIn() && resource.data.ownerId == uid()
+        && request.resource.data.diff(resource.data).affectedKeys()
+             .hasOnly(['title', 'status', 'messageCount', 'lastMessageAt', 'updatedAt'])
+        && request.resource.data.ownerId == resource.data.ownerId
+        && isStr(request.resource.data.title, 200)
+        && request.resource.data.status in ['active', 'archived']
+        && request.resource.data.messageCount is int
+        && request.resource.data.messageCount >= 0
+        && request.resource.data.updatedAt is timestamp;
+      allow delete: if signedIn() && resource.data.ownerId == uid();
+    }
+    match /aiConversations/{conversationId}/messages/{messageId} {
+      // ownerId is denormalised onto each message so a list read needs
+      // no extra get() on the parent conversation.
+      allow read: if signedIn() && resource.data.ownerId == uid();
+      allow create: if signedIn() && callerActive()
+        && request.resource.data.keys().hasOnly(['role', 'senderId', 'ownerId', 'body', 'createdAt'])
+        && request.resource.data.ownerId == uid()
+        && request.resource.data.senderId == uid()
+        && request.resource.data.role == 'user'
+        && isStr(request.resource.data.body, 4000)
+        && request.resource.data.createdAt is timestamp;
+      allow update, delete: if false;
+    }
+    // ---------- AI usage counters (costing plan §5) ----------
+    // Per-user daily counters: exchanges, images, voice minutes,
+    // estimated cost in BDT. Counters only ever INCREASE — the update
+    // rule requires every new value >= the old value, so usage can
+    // never be erased or rolled back by a client. Reads are the owner
+    // or an admin (COUNTS only — never message content, which lives
+    // in aiConversations and is owner-only above).
+    match /aiUsage/{userId}/daily/{dateId} {
+      allow read: if isOwner(userId) || isAdmin();
+      allow create: if isOwner(userId) && callerActive()
+        && request.resource.data.keys().hasOnly(
+             ['userId', 'date', 'exchanges', 'images', 'voiceMinutes',
+              'estimatedCostBdt', 'inputTokens', 'outputTokens', 'updatedAt'])
+        && request.resource.data.userId == userId
+        && request.resource.data.date == dateId
+        && request.resource.data.exchanges is int && request.resource.data.exchanges >= 0
+        && request.resource.data.images is int && request.resource.data.images >= 0
+        && request.resource.data.voiceMinutes is number && request.resource.data.voiceMinutes >= 0
+        && request.resource.data.estimatedCostBdt is number && request.resource.data.estimatedCostBdt >= 0
+        && request.resource.data.updatedAt is timestamp;
+      allow update: if isOwner(userId)
+        && request.resource.data.diff(resource.data).affectedKeys()
+             .hasOnly(['exchanges', 'images', 'voiceMinutes', 'estimatedCostBdt',
+                       'inputTokens', 'outputTokens', 'updatedAt'])
+        && request.resource.data.exchanges is int
+        && request.resource.data.exchanges >= resource.data.exchanges
+        && request.resource.data.images is int
+        && request.resource.data.images >= resource.data.images
+        && request.resource.data.voiceMinutes is number
+        && request.resource.data.voiceMinutes >= resource.data.voiceMinutes
+        && request.resource.data.estimatedCostBdt is number
+        && request.resource.data.estimatedCostBdt >= resource.data.estimatedCostBdt
+        && request.resource.data.updatedAt is timestamp;
+      allow delete: if false;
+    }
+    // Platform-wide daily totals (free-tier 500-requests/day ceiling
+    // watch). Readable by any signed-in user so the UI can warn when
+    // the platform limit is nearly reached. Writable ONLY by the
+    // gateway (Admin SDK) — never by clients: a client-written total
+    // would be trivially forgeable and is not a quota.
+    match /aiUsagePlatform/daily/{dateId} {
+      allow read: if signedIn();
+      allow create, update, delete: if false;
+    }
+
     // ---------- everything else: denied ----------
     match /{document=**} {
       allow read, write: if false;

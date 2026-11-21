@@ -59,6 +59,8 @@ export default function HomePage() {
             <Link to="/directory">শিক্ষা নির্দেশিকা / Education Directory</Link>
             {' · '}
             <Link to="/progress">আমার অগ্রগতি / My Progress</Link>
+            {' · '}
+            <Link to="/ai-chat">এআই চ্যাট / AI Chat</Link>
           </p>
         </>
       ) : null}

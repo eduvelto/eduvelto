@@ -27,6 +27,7 @@ import AdminBackupPage from './pages/AdminBackupPage';
 import AdminAuditPage from './pages/AdminAuditPage';
 import { AdminGuard } from './components/AdminGuard';
 import AiTeacherPage from './pages/AiTeacherPage';
+import AiChatPage from './pages/AiChatPage';
 import ExamPage from './pages/ExamPage';
 import RoutinePage from './pages/RoutinePage';
 import ProgressPage from './pages/ProgressPage';
@@ -44,6 +45,8 @@ import ContactPage from './pages/ContactPage';
 // /social is a DESIGN PROPOSAL only (blueprint §7): no live social
 // features, no messaging, until safety + moderation are ready.
 // /ai-teacher is a scripted demonstration, not live AI (blueprint §5).
+// /ai-chat is the real AI chat shell — provider NOT connected, so it
+// shows the honest not-connected state and never generates an answer.
 // Step 1: the header reflects the auth state, and a suspended account
 // (profile isActive === false) sees only the suspended screen — Auth
 // login still succeeds, but the app cannot be used (plan Step 1).

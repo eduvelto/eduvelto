@@ -873,8 +873,8 @@ export interface FeatureFlagDef {
 export const FEATURE_FLAGS: readonly FeatureFlagDef[] = [
   {
     id: 'ai-teacher',
-    labelBn: 'AI শিক্ষক (আসল AI)',
-    labelEn: 'AI Teacher (real AI)',
+    labelBn: 'AI শিক্ষক (আসল AI — এখনো চালু নয়)',
+    labelEn: 'AI Teacher (real AI — not yet live)',
     category: 'A',
     defaultOn: false,
     noteBn: 'এখন শুধু স্ক্রিপ্ট করা ডেমো চলে। আসল AI চালু করতে পেইড API + মালিকের আলাদা অনুমোদন লাগবে।',
