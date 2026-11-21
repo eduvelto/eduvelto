@@ -209,7 +209,7 @@ export default function FounderPage() {
             }}
           />
           <div style={{ flex: '1 1 320px', minWidth: 260 }}>
-            <h1 style={{ margin: '0 0 6px', fontSize: 30, lineHeight: 1.25 }}>
+            <h1 style={{ margin: '0 0 6px', fontSize: 30, lineHeight: 1.25, color: '#fff' }}>
               Ali Hasan Mohammed Mizan
               <CeoBadge />
             </h1>
