@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { PageShell } from '../components/PageShell';
+import { AlertBox, Button, Card } from '../components/ui';
 import {
   AdminBackLink,
   ConfirmDialog,
@@ -88,14 +89,8 @@ function VerificationCard(props: {
           : `${row.fullName}-এর আবেদন আবার খুলবেন (pending-এ ফেরত)? কারণ: ${reason}`;
 
   return (
-    <li
-      style={{
-        border: '1px solid #ddd',
-        borderRadius: 8,
-        padding: '12px 14px',
-        marginBottom: 12,
-      }}
-    >
+    <li style={{ marginBottom: 12 }}>
+      <Card>
       <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, alignItems: 'center' }}>
         <strong style={{ fontSize: 16 }}>{row.fullName}</strong>
         <StatusPill
@@ -111,13 +106,13 @@ function VerificationCard(props: {
           tone={row.status === 'verified' ? 'active' : row.status === 'pending' ? 'ready' : 'muted'}
         />
       </div>
-      <p style={{ margin: '6px 0', color: '#555', fontSize: 14 }}>
+      <p style={{ margin: '6px 0', color: '#68747B', fontSize: 14 }}>
         {row.institution} · আবেদন: {formatTime(row.createdAt)}
         {row.checkedBy ? ` · সিদ্ধান্তকারী: ${row.checkedBy}` : ''}
         {row.reason ? ` · কারণ: ${row.reason}` : ''}
       </p>
       {row.extra && Object.keys(row.extra).length > 0 ? (
-        <p style={{ margin: '0 0 8px', color: '#555', fontSize: 14 }}>
+        <p style={{ margin: '0 0 8px', color: '#68747B', fontSize: 14 }}>
           {Object.entries(row.extra)
             .filter(([, v]) => typeof v === 'string' || typeof v === 'number')
             .map(([k, v]) => `${k}: ${String(v)}`)
@@ -130,7 +125,7 @@ function VerificationCard(props: {
           <h3 style={{ fontSize: 16, margin: '12px 0 4px' }}>
             অনুমোদনের আগে ৪টি যাচাই — সবগুলো টিক দিতে হবে
           </h3>
-          <p style={{ color: '#555', fontSize: 14, margin: '0 0 8px' }}>
+          <p className="ev-muted" style={{ fontSize: 14, margin: '0 0 8px' }}>
             একটিও বাদ থাকলে অনুমোদন বোতাম চালু হবে না। ভুয়া শিক্ষক যাতে ভেরিফায়েড না হয়, এজন্য।
           </p>
           {CHECK_LABELS.map((c) => (
@@ -149,148 +144,78 @@ function VerificationCard(props: {
                 type="checkbox"
                 checked={checks[c.key]}
                 onChange={(e) => setChecks((p) => ({ ...p, [c.key]: e.target.checked }))}
-                style={{ width: 24, height: 24, accentColor: '#1E7CE8', flexShrink: 0 }}
+                style={{ width: 24, height: 24, accentColor: '#12766E', flexShrink: 0 }}
               />
               <span>{c.bn}</span>
             </label>
           ))}
-          <label style={{ display: 'block', fontWeight: 700, marginTop: 8 }}>
+          <label className="ev-label" htmlFor={`evidence-${row.id}`} style={{ marginTop: 8 }}>
             প্রমাণের রেফারেন্স (ঐচ্ছিক) / Evidence reference (optional)
           </label>
           <input
+            id={`evidence-${row.id}`}
+            className="ev-input"
             type="text"
             value={checks.evidenceRef ?? ''}
             onChange={(e) => setChecks((p) => ({ ...p, evidenceRef: e.target.value }))}
             placeholder="যেমন: কলেজে ফোন করা হয়েছে, সনদ যাচাই করা হয়েছে"
-            style={{
-              width: '100%',
-              boxSizing: 'border-box',
-              padding: '10px',
-              minHeight: 48,
-              fontSize: 16,
-              borderRadius: 8,
-              border: '1px solid #888',
-              marginTop: 4,
-            }}
           />
-          <label style={{ display: 'block', fontWeight: 700, marginTop: 12 }}>
+          <label className="ev-label" htmlFor={`reason-${row.id}`} style={{ marginTop: 12 }}>
             সিদ্ধান্তের কারণ (অবশ্যই লিখুন — কমপক্ষে ১০ অক্ষর) / Reason (required)
           </label>
           <textarea
+            id={`reason-${row.id}`}
+            className="ev-textarea"
             value={reason}
             onChange={(e) => setReason(e.target.value)}
             rows={2}
             placeholder="কেন অনুমোদন/বাতিল করছেন"
-            style={{
-              width: '100%',
-              boxSizing: 'border-box',
-              padding: '10px',
-              minHeight: 48,
-              fontSize: 16,
-              borderRadius: 8,
-              border: '1px solid #888',
-              marginTop: 4,
-            }}
           />
           <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', marginTop: 12 }}>
-            <button
-              type="button"
-              disabled={busy || !reasonOk || !checksOk}
-              onClick={() => setConfirm('verified')}
-              style={{
-                padding: '12px 20px',
-                minHeight: 48,
-                fontSize: 16,
-                borderRadius: 8,
-                border: 'none',
-                background: '#0A1F44',
-                color: '#fff',
-                cursor: 'pointer',
-              }}
-            >
+            <Button disabled={busy || !reasonOk || !checksOk} onClick={() => setConfirm('verified')}>
               অনুমোদন করুন / Approve
-            </button>
-            <button
-              type="button"
+            </Button>
+            <Button
+              variant="outline"
               disabled={busy || !reasonOk}
               onClick={() => setConfirm('rejected')}
-              style={{
-                padding: '12px 20px',
-                minHeight: 48,
-                fontSize: 16,
-                borderRadius: 8,
-                border: '1px solid #b00020',
-                background: '#fff',
-                color: '#b00020',
-                cursor: 'pointer',
-              }}
+              style={{ color: '#B00020', borderColor: '#B00020' }}
             >
               বাতিল করুন / Reject
-            </button>
+            </Button>
           </div>
           {!checksOk ? (
-            <p style={{ color: '#555', fontSize: 14 }}>
+            <p className="ev-muted" style={{ fontSize: 14 }}>
               অনুমোদন বোতাম চালু হতে ৪টি যাচাই সবগুলো টিক দিতে হবে।
             </p>
           ) : null}
         </>
       ) : (
         <>
-          <label style={{ display: 'block', fontWeight: 700, marginTop: 8 }}>
+          <label className="ev-label" htmlFor={`reason2-${row.id}`} style={{ marginTop: 8 }}>
             আবার খুলতে / যাচাই বাতিল করতে কারণ লিখুন (অবশ্যই — কমপক্ষে ১০ অক্ষর)
           </label>
           <textarea
+            id={`reason2-${row.id}`}
+            className="ev-textarea"
             value={reason}
             onChange={(e) => setReason(e.target.value)}
             rows={2}
             placeholder="কেন আবার খুলছেন / যাচাই বাতিল করছেন"
-            style={{
-              width: '100%',
-              boxSizing: 'border-box',
-              padding: '10px',
-              minHeight: 48,
-              fontSize: 16,
-              borderRadius: 8,
-              border: '1px solid #888',
-              marginTop: 4,
-            }}
           />
           <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', marginTop: 12 }}>
-            <button
-              type="button"
-              disabled={busy || !reasonOk}
-              onClick={() => setConfirm('reopen')}
-              style={{
-                padding: '12px 20px',
-                minHeight: 48,
-                fontSize: 16,
-                borderRadius: 8,
-                border: '1px solid #0A1F44',
-                background: '#fff',
-                color: '#0A1F44',
-                cursor: 'pointer',
-              }}
-            >
+            <Button variant="outline" disabled={busy || !reasonOk} onClick={() => setConfirm('reopen')}>
               আবার খুলুন / Reopen
-            </button>
+            </Button>
             {row.status === 'verified' ? (
-              <button
-                type="button"
+              <Button
+                variant="outline"
                 disabled={busy || !reasonOk}
                 onClick={() => setConfirm('revoked')}
-                style={{
-                  padding: '12px 20px',
-                  minHeight: 48,
-                  fontSize: 16,
-                  borderRadius: 8,
-                  border: '1px solid #b00020',
-                  background: '#fff',
-                  color: '#b00020',
-                  cursor: 'pointer',
-                }}
+                style={{ color: '#B00020', borderColor: '#B00020' }}
               >
                 যাচাই বাতিল করুন / Revoke verification
-              </button>
+              </Button>
             ) : null}
           </div>
         </>
@@ -316,6 +241,7 @@ function VerificationCard(props: {
           onCancel={() => setConfirm(null)}
         />
       ) : null}
+      </Card>
     </li>
   );
 }
@@ -357,47 +283,17 @@ export default function AdminTeachersPage() {
         decision — no bulk approvals. Four checks are mandatory before approval, and every
         decision needs a reason.
       </p>
-      <div style={{ display: 'flex', gap: 8, marginBottom: 12 }}>
-        <button
-          type="button"
-          onClick={() => setFilter('pending')}
-          style={{
-            padding: '12px 20px',
-            minHeight: 48,
-            fontSize: 16,
-            borderRadius: 8,
-            border: 'none',
-            background: filter === 'pending' ? '#0A1F44' : '#eee',
-            color: filter === 'pending' ? '#fff' : '#0A1F44',
-            cursor: 'pointer',
-          }}
-        >
+      <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', marginBottom: 12 }}>
+        <Button variant={filter === 'pending' ? 'primary' : 'outline'} onClick={() => setFilter('pending')}>
           অপেক্ষায় ({rows.filter((r) => r.status === 'pending').length})
-        </button>
-        <button
-          type="button"
-          onClick={() => setFilter('decided')}
-          style={{
-            padding: '12px 20px',
-            minHeight: 48,
-            fontSize: 16,
-            borderRadius: 8,
-            border: 'none',
-            background: filter === 'decided' ? '#0A1F44' : '#eee',
-            color: filter === 'decided' ? '#fff' : '#0A1F44',
-            cursor: 'pointer',
-          }}
-        >
+        </Button>
+        <Button variant={filter === 'decided' ? 'primary' : 'outline'} onClick={() => setFilter('decided')}>
           সিদ্ধান্ত হয়েছে ({rows.filter((r) => r.status !== 'pending').length})
-        </button>
+        </Button>
       </div>
       {loading ? <LoadingBox /> : null}
       {error ? <ErrorBox message={error} /> : null}
-      {notice ? (
-        <p role="status" style={{ color: '#0A1F44', fontWeight: 700 }}>
-          {notice}
-        </p>
-      ) : null}
+      {notice ? <AlertBox tone="ok">{notice}</AlertBox> : null}
       {!loading && shown.length === 0 ? (
         <EmptyAdminBox
           bn={

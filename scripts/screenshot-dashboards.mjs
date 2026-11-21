@@ -225,6 +225,19 @@ try {
   await navigate(`${BASE}/teacher/register`);
   await shot('teacher-form-desktop.png', 1280, 900, false);
 
+  // Admin dashboard + users list (owner only; AdminGuard is owner-only).
+  // Added for the role-dashboards design restyle (stages 6–8).
+  console.log('== owner@shot.eduvelto /admin ==');
+  await logout();
+  await login('owner@shot.eduvelto');
+  await navigate(`${BASE}/admin`);
+  await shot('admin-dashboard-desktop.png', 1280, 900, false);
+  await shot('admin-dashboard-mobile.png', 390, 844, true);
+  console.log('== owner@shot.eduvelto /admin/users ==');
+  await navigate(`${BASE}/admin/users`);
+  await shot('admin-users-desktop.png', 1280, 900, false);
+  await shot('admin-users-mobile.png', 390, 844, true);
+
   console.log(`Done. Screenshots in ${OUT}`);
 } finally {
   child.kill('SIGKILL');

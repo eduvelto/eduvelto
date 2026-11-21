@@ -9,9 +9,10 @@
 // keeps in sync when their class changes). When the child changes
 // class, the link snapshot updates and this dashboard updates with it.
 import { useEffect, useState, type FormEvent } from 'react';
-import { Link } from 'react-router-dom';
 import { db } from '../firebase';
 import { PageShell, EmptyState } from '../components/PageShell';
+import { AlertBox, Button, Card, Chip, LinkButton, ProgressBar, Skeleton, SkeletonCards, StatCard } from '../components/ui';
+import { DashboardBookCard } from '../components/DashboardBookCard';
 import { strings } from '../i18n/strings';
 import { useAuth } from '../lib/auth';
 import { EMPTY_STATES } from '../lib/academicProfile';
@@ -31,27 +32,6 @@ import {
 import type { Book } from '../lib/content';
 import type { UserProfile } from '../lib/profile';
 import type { DocumentSnapshot } from 'firebase/firestore';
-
-const buttonStyle: React.CSSProperties = {
-  padding: '10px 16px',
-  minHeight: 44,
-  borderRadius: 6,
-  border: '1px solid #0A1F44',
-  background: '#fff',
-  color: '#0A1F44',
-  cursor: 'pointer',
-};
-
-const inputStyle: React.CSSProperties = {
-  display: 'block',
-  width: '100%',
-  boxSizing: 'border-box',
-  padding: '10px 12px',
-  margin: '6px 0 14px',
-  fontSize: 16,
-  border: '1px solid #aaa',
-  borderRadius: 6,
-};
 
 /** Map a book educationType value back to the profile enum. */
 function profileTypeForBookType(bookType: string | undefined): UserProfile['educationType'] {
@@ -182,7 +162,8 @@ export default function GuardianDashboardPage() {
   if (loading) {
     return (
       <PageShell titleBn={d.guardianTitle.bn} titleEn={d.guardianTitle.en}>
-        <p>{strings.common.loading.bn}</p>
+        <Skeleton lines={3} />
+        <SkeletonCards count={3} />
       </PageShell>
     );
   }
@@ -192,7 +173,7 @@ export default function GuardianDashboardPage() {
       <PageShell titleBn={d.guardianTitle.bn} titleEn={d.guardianTitle.en}>
         <p>{strings.profile.notSignedIn.bn}</p>
         <p>
-          <Link to="/login">{strings.auth.loginTitle.bn}</Link>
+          <LinkButton to="/login" variant="outline">{strings.auth.loginTitle.bn}</LinkButton>
         </p>
       </PageShell>
     );
@@ -203,7 +184,7 @@ export default function GuardianDashboardPage() {
       <PageShell titleBn={d.guardianTitle.bn} titleEn={d.guardianTitle.en}>
         <p>এই ড্যাশবোর্ড শুধু অভিভাবকদের জন্য।</p>
         <p>
-          <Link to="/dashboard">আপনার ড্যাশবোর্ডে যান →</Link>
+          <LinkButton to="/dashboard" variant="outline">আপনার ড্যাশবোর্ডে যান →</LinkButton>
         </p>
       </PageShell>
     );
@@ -273,31 +254,31 @@ export default function GuardianDashboardPage() {
   const weak = (summaries ?? []).filter((s) => typeof s.averagePercentage === 'number' && (s.averagePercentage as number) < 60);
   const strong = (summaries ?? []).filter((s) => typeof s.averagePercentage === 'number' && (s.averagePercentage as number) >= 80);
   const pendingLinks = (links ?? []).filter((l) => l.status === 'pending' || l.status === 'confirmed');
+  const rejectedLinks = (links ?? []).filter((l) => l.status === 'rejected');
 
   return (
     <PageShell titleBn={d.guardianTitle.bn} titleEn={d.guardianTitle.en}>
-      <p style={{ fontSize: 17 }}>👨‍👩‍👧 {profile.displayName}</p>
+      <div className="ev-dash-hero">
+        <h2>👨‍👩‍👧 {profile.displayName}</h2>
+      </div>
 
       {verifiedLinks.length === 0 ? (
         <EmptyState bn={EMPTY_STATES.guardianNoChildren.bn} en={EMPTY_STATES.guardianNoChildren.en} />
       ) : (
         <>
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, marginBottom: 12 }}>
+          <div className="ev-dash-tabs" role="tablist" aria-label="সন্তান / Children">
             {verifiedLinks.map((l) => (
               <button
                 key={l.id}
                 type="button"
+                role="tab"
+                aria-selected={selected?.id === l.id}
                 onClick={() => {
                   setSelectedId(l.id);
                   setPageIndex(0);
                   setCursors([null]);
                 }}
-                style={{
-                  ...buttonStyle,
-                  background: selected?.id === l.id ? '#0A1F44' : '#fff',
-                  color: selected?.id === l.id ? '#fff' : '#0A1F44',
-                  fontWeight: selected?.id === l.id ? 700 : 400,
-                }}
+                className={`ev-dash-tab ${selected?.id === l.id ? 'ev-dash-tab-active' : ''}`}
               >
                 {l.childDisplayName} ({l.childClassLevel})
               </button>
@@ -305,71 +286,77 @@ export default function GuardianDashboardPage() {
           </div>
           {selected ? (
             <>
-              <h2 style={{ fontSize: 19 }}>
-                {selected.childDisplayName} · {selected.childClassLevel}
-                {selected.childInstitution ? ` · ${selected.childInstitution}` : ''}
-              </h2>
-              <p style={{ color: '#555' }}>
-                অগ্রগতি: {(progress ?? []).length}টি বিষয় · বুকমার্ক: {bookmarkCount ?? '…'}টি · পরীক্ষার
-                সারসংক্ষেপ: {summaries === null ? '…' : summaries.length}টি বিষয়
-              </p>
+              <Card style={{ marginBottom: 16 }}>
+                <h2 style={{ fontSize: 20, margin: '0 0 6px' }}>
+                  {selected.childDisplayName} · {selected.childClassLevel}
+                  {selected.childInstitution ? ` · ${selected.childInstitution}` : ''}
+                </h2>
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
+                  <Chip>{selected.childClassLevel}</Chip>
+                  {selected.childInstitution ? <Chip tone="outline">{selected.childInstitution}</Chip> : null}
+                </div>
+              </Card>
+              <div className="ev-dash-stats">
+                <StatCard value={String((progress ?? []).length)} labelBn="অগ্রগতি" labelEn="Progress subjects" numeric={(progress ?? []).length} suffix="টি বিষয়" />
+                <StatCard value={bookmarkCount === null ? '…' : String(bookmarkCount)} labelBn="বুকমার্ক" labelEn="Bookmarks" numeric={bookmarkCount ?? undefined} />
+                <StatCard value={summaries === null ? '…' : String(summaries.length)} labelBn="পরীক্ষার সারসংক্ষেপ" labelEn="Exam summaries" numeric={summaries === null ? undefined : summaries.length} suffix="টি বিষয়" />
+              </div>
               {weak.length > 0 ? (
                 <>
-                  <h3 style={{ fontSize: 17 }}>{d.weakAreas.bn} / {d.weakAreas.en}</h3>
-                  <ul style={{ paddingLeft: 20 }}>
-                    {weak.map((s) => (
-                      <li key={String(s.id)}>
-                        {String(s.subject ?? '')} — {String(s.averagePercentage ?? '')}%
-                      </li>
-                    ))}
-                  </ul>
+                  <h3 className="ev-section-h2">{d.weakAreas.bn} / {d.weakAreas.en}</h3>
+                  {weak.map((s) => (
+                    <div className="ev-dash-row" key={String(s.id)}>
+                      <span className="ev-dash-row-label">{String(s.subject ?? '')}</span>
+                      <span className="ev-dash-row-bar">
+                        <ProgressBar value={Number(s.averagePercentage ?? 0)} tone="gold" label={`${String(s.subject ?? '')} ${String(s.averagePercentage ?? '')}%`} />
+                      </span>
+                      <span className="ev-dash-row-pct">{String(s.averagePercentage ?? '')}%</span>
+                    </div>
+                  ))}
                 </>
               ) : null}
               {strong.length > 0 ? (
                 <>
-                  <h3 style={{ fontSize: 17 }}>{d.strongAreas.bn} / {d.strongAreas.en}</h3>
-                  <ul style={{ paddingLeft: 20 }}>
-                    {strong.map((s) => (
-                      <li key={String(s.id)}>
-                        {String(s.subject ?? '')} — {String(s.averagePercentage ?? '')}%
-                      </li>
-                    ))}
-                  </ul>
+                  <h3 className="ev-section-h2">{d.strongAreas.bn} / {d.strongAreas.en}</h3>
+                  {strong.map((s) => (
+                    <div className="ev-dash-row" key={String(s.id)}>
+                      <span className="ev-dash-row-label">{String(s.subject ?? '')}</span>
+                      <span className="ev-dash-row-bar">
+                        <ProgressBar value={Number(s.averagePercentage ?? 0)} label={`${String(s.subject ?? '')} ${String(s.averagePercentage ?? '')}%`} />
+                      </span>
+                      <span className="ev-dash-row-pct">{String(s.averagePercentage ?? '')}%</span>
+                    </div>
+                  ))}
                 </>
               ) : null}
-              <h3 style={{ fontSize: 17 }}>{d.myBooks.bn} / {d.myBooks.en}</h3>
-              {error ? <p style={{ color: '#b00020' }}>{error}</p> : null}
-              {fetching && !booksPage ? <p>{strings.common.loading.bn}</p> : null}
+              <h3 className="ev-section-h2">{d.myBooks.bn} / {d.myBooks.en}</h3>
+              {error ? <AlertBox tone="error">{error}</AlertBox> : null}
+              {fetching && !booksPage ? <SkeletonCards count={3} /> : null}
               {booksPage && books.length === 0 && !fetching ? (
                 <EmptyState bn={EMPTY_STATES.noContent.bn} en={EMPTY_STATES.noContent.en} />
               ) : null}
               {books.length > 0 ? (
                 <>
-                  <ul style={{ paddingLeft: 20 }}>
+                  <div className="ev-dash-grid">
                     {books.map((b) => (
-                      <li key={b.id} style={{ marginBottom: 10, lineHeight: 1.5 }}>
-                        <Link to={`/library/${b.id}`}>{b.title}</Link>
-                        <span style={{ color: '#555', fontSize: 13 }}>
-                          {' '}· {b.paperCode} · {b.department} · {b.classLevel}
-                        </span>
-                      </li>
+                      <DashboardBookCard key={b.id} book={b} />
                     ))}
-                  </ul>
-                  <div style={{ display: 'flex', gap: 12, alignItems: 'center', marginTop: 16 }}>
-                    <button type="button" onClick={prevPage} disabled={pageIndex <= 0 || fetching} style={buttonStyle}>
+                  </div>
+                  <div style={{ display: 'flex', gap: 12, alignItems: 'center', marginTop: 20, flexWrap: 'wrap' }}>
+                    <Button variant="outline" onClick={prevPage} disabled={pageIndex <= 0 || fetching}>
                       ← আগের / Previous
-                    </button>
+                    </Button>
                     <span>পাতা {pageIndex + 1} / Page {pageIndex + 1}</span>
-                    <button type="button" onClick={nextPage} disabled={!booksPage?.hasMore || fetching} style={buttonStyle}>
+                    <Button variant="outline" onClick={nextPage} disabled={!booksPage?.hasMore || fetching}>
                       {fetching ? strings.common.loading.bn : 'পরের / Next →'}
-                    </button>
+                    </Button>
                   </div>
                 </>
               ) : null}
-              <p style={{ marginTop: 16 }}>
-                <button type="button" onClick={() => void onRevoke(selected.id)} disabled={revoking} style={buttonStyle}>
-                  {d.revokeLink.bn} / {d.revokeLink.en}
-                </button>
+              <p style={{ marginTop: 20 }}>
+                <Button variant="danger" onClick={() => void onRevoke(selected.id)} loading={revoking}>
+                  {revoking ? strings.common.loading.bn : `${d.revokeLink.bn} / ${d.revokeLink.en}`}
+                </Button>
               </p>
             </>
           ) : null}
@@ -378,75 +365,80 @@ export default function GuardianDashboardPage() {
 
       {pendingLinks.length > 0 ? (
         <>
-          <h2 style={{ fontSize: 19 }}>অপেক্ষমাণ সংযোগ / Pending links</h2>
-          <ul style={{ paddingLeft: 20 }}>
+          <h2 className="ev-section-h2">অপেক্ষমাণ সংযোগ / Pending links</h2>
+          <div className="ev-dash-grid">
             {pendingLinks.map((l) => (
-              <li key={l.id}>
-                {l.childDisplayName} ({l.childClassLevel}) — {l.status === 'pending' ? 'সন্তানের নিশ্চিতকরণের অপেক্ষায়' : 'অ্যাডমিন যাচাইয়ের অপেক্ষায়'}
-              </li>
+              <Card key={l.id}>
+                <strong style={{ fontSize: 16 }}>{l.childDisplayName} ({l.childClassLevel})</strong>
+                <p className="ev-muted" style={{ margin: '8px 0 0', fontSize: 14 }}>
+                  {l.status === 'pending' ? 'সন্তানের নিশ্চিতকরণের অপেক্ষায়' : 'অ্যাডমিন যাচাইয়ের অপেক্ষায়'}
+                </p>
+              </Card>
             ))}
-          </ul>
+          </div>
         </>
       ) : null}
 
-      {(links ?? []).filter((l) => l.status === 'rejected').length > 0 ? (
+      {rejectedLinks.length > 0 ? (
         <>
-          <h2 style={{ fontSize: 19 }}>{d.linkRejected.bn} / {d.linkRejected.en}</h2>
-          <ul style={{ paddingLeft: 20 }}>
-            {(links ?? [])
-              .filter((l) => l.status === 'rejected')
-              .map((l) => (
+          <h2 className="ev-section-h2">{d.linkRejected.bn} / {d.linkRejected.en}</h2>
+          <AlertBox tone="error">
+            <ul style={{ margin: 0, paddingLeft: 20 }}>
+              {rejectedLinks.map((l) => (
                 <li key={l.id}>
                   {l.childDisplayName} ({l.childClassLevel})
                   {l.decisionReason ? ` — কারণ: ${l.decisionReason}` : ''} — নতুন করে আবার অনুরোধ
                   পাঠাতে পারেন।
                 </li>
               ))}
-          </ul>
+            </ul>
+          </AlertBox>
         </>
       ) : null}
 
-      <h2 style={{ fontSize: 19 }}>{d.linkChild.bn} / {d.linkChild.en}</h2>
-      <p style={{ color: '#555' }}>{d.linkChildNote.bn}</p>
-      <p style={{ color: '#555' }}>
+      <h2 className="ev-section-h2">{d.linkChild.bn} / {d.linkChild.en}</h2>
+      <p className="ev-muted-ivory">{d.linkChildNote.bn}</p>
+      <p className="ev-muted-ivory">
         সন্তানের Eduvelto ID তার প্রোফাইল পাতায় দেখা যায় — সন্তান সেটি আপনাকে জানাবে। / Your child’s
         Eduvelto ID is shown on their profile page — they share it with you.
       </p>
-      <form onSubmit={onLinkChild}>
-        <label>
-          {d.guardianName.bn} / {d.guardianName.en}
-          <input style={inputStyle} type="text" value={guardianName} onChange={(e) => setGuardianName(e.target.value)} placeholder="যেমন: মোঃ রহিম উদ্দিন" />
-        </label>
-        <label>
-          {d.relationship.bn} / {d.relationship.en}
-          <input style={inputStyle} type="text" value={relationship} onChange={(e) => setRelationship(e.target.value)} placeholder="যেমন: বাবা / মা / অভিভাবক" />
-        </label>
-        <label>
-          {d.guardianContact.bn} / {d.guardianContact.en}
-          <input style={inputStyle} type="tel" value={guardianContact} onChange={(e) => setGuardianContact(e.target.value)} placeholder="যেমন: 01XXXXXXXXX" />
-        </label>
-        <label>
-          সন্তানের Eduvelto ID / Child’s Eduvelto ID
-          <input style={inputStyle} type="text" value={childUid} onChange={(e) => setChildUid(e.target.value)} placeholder="যেমন: AbC123xYz…" />
-        </label>
-        <label>
-          সন্তানের নাম / Child’s name
-          <input style={inputStyle} type="text" value={childName} onChange={(e) => setChildName(e.target.value)} />
-        </label>
-        <label>
-          সন্তানের শ্রেণি / Child’s class
-          <input style={inputStyle} type="text" value={childClass} onChange={(e) => setChildClass(e.target.value)} placeholder="যেমন: Class 5, SSC, 3rd Year" />
-        </label>
-        <label>
-          প্রতিষ্ঠান / Institution
-          <input style={inputStyle} type="text" value={childInstitution} onChange={(e) => setChildInstitution(e.target.value)} />
-        </label>
-        {linkError ? <p style={{ color: '#b00020' }}>{linkError}</p> : null}
-        {linkDone ? <p style={{ color: '#0A1F44' }}>{d.linkRequested.bn}</p> : null}
-        <button style={{ ...buttonStyle, background: '#0A1F44', color: '#fff' }} type="submit" disabled={linkBusy}>
-          {linkBusy ? strings.common.loading.bn : `${d.linkChild.bn} / ${d.linkChild.en}`}
-        </button>
-      </form>
+      <Card>
+        <form onSubmit={onLinkChild}>
+          <label className="ev-label" htmlFor="link-guardian-name">
+            {d.guardianName.bn} / {d.guardianName.en}
+          </label>
+          <input id="link-guardian-name" className="ev-input" style={{ marginBottom: 14 }} type="text" value={guardianName} onChange={(e) => setGuardianName(e.target.value)} placeholder="যেমন: মোঃ রহিম উদ্দিন" />
+          <label className="ev-label" htmlFor="link-relationship">
+            {d.relationship.bn} / {d.relationship.en}
+          </label>
+          <input id="link-relationship" className="ev-input" style={{ marginBottom: 14 }} type="text" value={relationship} onChange={(e) => setRelationship(e.target.value)} placeholder="যেমন: বাবা / মা / অভিভাবক" />
+          <label className="ev-label" htmlFor="link-contact">
+            {d.guardianContact.bn} / {d.guardianContact.en}
+          </label>
+          <input id="link-contact" className="ev-input" style={{ marginBottom: 14 }} type="tel" value={guardianContact} onChange={(e) => setGuardianContact(e.target.value)} placeholder="যেমন: 01XXXXXXXXX" />
+          <label className="ev-label" htmlFor="link-child-uid">
+            সন্তানের Eduvelto ID / Child’s Eduvelto ID
+          </label>
+          <input id="link-child-uid" className="ev-input" style={{ marginBottom: 14 }} type="text" value={childUid} onChange={(e) => setChildUid(e.target.value)} placeholder="যেমন: AbC123xYz…" />
+          <label className="ev-label" htmlFor="link-child-name">
+            সন্তানের নাম / Child’s name
+          </label>
+          <input id="link-child-name" className="ev-input" style={{ marginBottom: 14 }} type="text" value={childName} onChange={(e) => setChildName(e.target.value)} />
+          <label className="ev-label" htmlFor="link-child-class">
+            সন্তানের শ্রেণি / Child’s class
+          </label>
+          <input id="link-child-class" className="ev-input" style={{ marginBottom: 14 }} type="text" value={childClass} onChange={(e) => setChildClass(e.target.value)} placeholder="যেমন: Class 5, SSC, 3rd Year" />
+          <label className="ev-label" htmlFor="link-institution">
+            প্রতিষ্ঠান / Institution
+          </label>
+          <input id="link-institution" className="ev-input" style={{ marginBottom: 14 }} type="text" value={childInstitution} onChange={(e) => setChildInstitution(e.target.value)} />
+          {linkError ? <AlertBox tone="error">{linkError}</AlertBox> : null}
+          {linkDone ? <AlertBox tone="ok">{d.linkRequested.bn}</AlertBox> : null}
+          <Button type="submit" loading={linkBusy}>
+            {linkBusy ? strings.common.loading.bn : `${d.linkChild.bn} / ${d.linkChild.en}`}
+          </Button>
+        </form>
+      </Card>
     </PageShell>
   );
 }

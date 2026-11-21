@@ -17,6 +17,8 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { db } from '../firebase';
 import { PageShell } from '../components/PageShell';
+import { Button, Card } from '../components/ui';
+import { StatusPill } from '../components/AdminShared';
 import { strings } from '../i18n/strings';
 import { useAuth } from '../lib/auth';
 import {
@@ -26,33 +28,7 @@ import {
   type ParentLink,
 } from '../lib/guardian';
 
-const buttonStyle: React.CSSProperties = {
-  padding: '10px 18px',
-  fontSize: 16,
-  borderRadius: 6,
-  border: 'none',
-  background: '#0A1F44',
-  color: '#fff',
-  cursor: 'pointer',
-};
-
-const secondaryStyle: React.CSSProperties = {
-  ...buttonStyle,
-  background: '#fff',
-  color: '#111',
-  border: '1px solid #aaa',
-};
-
-const inputStyle: React.CSSProperties = {
-  display: 'block',
-  width: '100%',
-  boxSizing: 'border-box',
-  padding: '10px 12px',
-  margin: '6px 0 14px',
-  fontSize: 16,
-  border: '1px solid #aaa',
-  borderRadius: 6,
-};
+// Buttons below use the shared <Button> component (design system v2).
 
 type Decision = 'verified' | 'rejected' | 'revoked';
 
@@ -86,83 +62,102 @@ function LinkCard(props: { link: ParentLink; actorUid: string; onDone: () => voi
   const decidable = link.status === 'pending' || link.status === 'confirmed';
 
   return (
-    <li style={{ border: '1px solid #ccc', borderRadius: 8, padding: 16, marginBottom: 12, listStyle: 'none' }}>
+    <li style={{ marginBottom: 12, listStyle: 'none' }}>
+      <Card>
       <p style={{ margin: '0 0 6px', fontSize: 18 }}>
         <strong>{link.guardianDisplayName || '—'}</strong>
         {link.relationship ? ` · ${link.relationship}` : ''}
         {link.guardianContact ? ` · ${link.guardianContact}` : ''}
       </p>
-      <p style={{ margin: '0 0 6px', color: '#555' }}>
+      <p style={{ margin: '0 0 6px', color: '#68747B' }}>
         সন্তান: {link.childDisplayName} ({link.childClassLevel}
         {link.childInstitution ? ` · ${link.childInstitution}` : ''})
       </p>
-      <p style={{ margin: '0 0 6px', color: '#555' }}>
-        অবস্থা: {link.status}
-        {link.status === 'pending' ? ' — সন্তান এখনো নিশ্চিত করেনি' : ''}
-        {link.status === 'confirmed' ? ' — সন্তান নিশ্চিত করেছে' : ''}
-        {link.status === 'rejected' && link.decisionReason ? ` — কারণ: ${link.decisionReason}` : ''}
+      <p style={{ margin: '0 0 6px', color: '#68747B', display: 'flex', flexWrap: 'wrap', gap: 8, alignItems: 'center' }}>
+        <StatusPill
+          label={
+            link.status === 'pending'
+              ? 'অপেক্ষায় / Pending'
+              : link.status === 'confirmed'
+                ? 'নিশ্চিত / Confirmed'
+                : link.status === 'verified'
+                  ? 'ভেরিফায়েড / Verified'
+                  : link.status === 'rejected'
+                    ? 'বাতিল / Rejected'
+                    : 'বাতিলকৃত / Revoked'
+          }
+          tone={link.status === 'verified' ? 'active' : link.status === 'pending' || link.status === 'confirmed' ? 'ready' : 'muted'}
+        />
+        <span>
+          {link.status === 'pending' ? ' — সন্তান এখনো নিশ্চিত করেনি' : ''}
+          {link.status === 'confirmed' ? ' — সন্তান নিশ্চিত করেছে' : ''}
+          {link.status === 'rejected' && link.decisionReason ? ` — কারণ: ${link.decisionReason}` : ''}
+        </span>
       </p>
-      <p style={{ margin: '0 0 12px', color: '#555', fontSize: 13 }}>
+      <p style={{ margin: '0 0 12px', color: '#68747B', fontSize: 13 }}>
         Eduvelto ID (অভিভাবক): <code>{link.parentId}</code> · (সন্তান): <code>{link.studentId}</code>
       </p>
-      {error ? <p style={{ color: '#b00020' }}>{error}</p> : null}
+      {error ? <p style={{ color: '#B00020' }}>{error}</p> : null}
       {decidable ? (
         <>
-          <label>
+          <label className="ev-label" htmlFor={`guardian-reason-${link.id}`}>
             সিদ্ধান্তের কারণ (কমপক্ষে ১০ অক্ষর) / Reason (at least 10 characters)
-            <input
-              style={inputStyle}
-              type="text"
-              value={reason}
-              onChange={(e) => setReason(e.target.value)}
-              placeholder="যেমন: সন্তান নিশ্চিত করেছে এবং তথ্য মিলেছে"
-              maxLength={500}
-            />
           </label>
+          <input
+            id={`guardian-reason-${link.id}`}
+            className="ev-input"
+            style={{ marginBottom: 14 }}
+            type="text"
+            value={reason}
+            onChange={(e) => setReason(e.target.value)}
+            placeholder="যেমন: সন্তান নিশ্চিত করেছে এবং তথ্য মিলেছে"
+            maxLength={500}
+          />
           {decision ? (
             <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
-              <button style={buttonStyle} type="button" onClick={() => void doConfirm()} disabled={busy || !reasonOk}>
+              <Button onClick={() => void doConfirm()} loading={busy} disabled={busy || !reasonOk}>
                 {busy
                   ? strings.common.loading.bn
                   : decision === 'verified'
                     ? 'অনুমোদন নিশ্চিত করুন / Confirm approval'
                     : 'বাতিল নিশ্চিত করুন / Confirm rejection'}
-              </button>
-              <button style={secondaryStyle} type="button" onClick={() => setDecision(null)} disabled={busy}>
+              </Button>
+              <Button variant="outline" onClick={() => setDecision(null)} disabled={busy}>
                 বাতিল / Cancel
-              </button>
+              </Button>
             </div>
           ) : (
             <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
-              <button style={buttonStyle} type="button" onClick={() => setDecision('verified')}>
+              <Button onClick={() => setDecision('verified')}>
                 অনুমোদন করুন / Approve
-              </button>
-              <button style={secondaryStyle} type="button" onClick={() => setDecision('rejected')}>
+              </Button>
+              <Button variant="outline" onClick={() => setDecision('rejected')}>
                 বাতিল করুন / Reject
-              </button>
+              </Button>
             </div>
           )}
-          {!reasonOk && decision ? <p style={{ color: '#b00020' }}>কারণ কমপক্ষে ১০ অক্ষর হতে হবে।</p> : null}
+          {!reasonOk && decision ? <p style={{ color: '#B00020' }}>কারণ কমপক্ষে ১০ অক্ষর হতে হবে।</p> : null}
         </>
       ) : null}
       {link.status === 'verified' ? (
         <p style={{ marginTop: 12 }}>
           {decision === 'revoked' ? (
             <>
-              <button style={buttonStyle} type="button" onClick={() => void doConfirm()} disabled={busy}>
+              <Button onClick={() => void doConfirm()} loading={busy} disabled={busy}>
                 {busy ? strings.common.loading.bn : 'বাতিল নিশ্চিত করুন / Confirm revoke'}
-              </button>{' '}
-              <button style={secondaryStyle} type="button" onClick={() => setDecision(null)} disabled={busy}>
+              </Button>{' '}
+              <Button variant="outline" onClick={() => setDecision(null)} disabled={busy}>
                 বাতিল / Cancel
-              </button>
+              </Button>
             </>
           ) : (
-            <button style={secondaryStyle} type="button" onClick={() => setDecision('revoked')}>
+            <Button variant="outline" onClick={() => setDecision('revoked')}>
               সংযোগ বাতিল করুন / Revoke link
-            </button>
+            </Button>
           )}
         </p>
       ) : null}
+      </Card>
     </li>
   );
 }
@@ -208,18 +203,18 @@ export default function AdminGuardiansPage() {
       <p>
         <Link to="/admin">← অ্যাডমিন ড্যাশবোর্ড</Link>
       </p>
-      <p style={{ color: '#555' }}>
+      <p className="ev-muted-ivory">
         লিখিত তথ্য যাচাই করুন — অভিভাবকের নাম, সম্পর্ক, যোগাযোগ এবং সন্তানের তথ্য। কোনো কাগজপত্র, NID বা
         ফেস ভেরিফিকেশন লাগে না; সন্তান নিজে অ্যাপে নিশ্চিত করেছে কিনা সেটিই মূল প্রমাণ। / Cross-check the
         written information. No documents, NID or face verification — the child's own in-app confirmation is
         the key proof.
       </p>
 
-      <h2 style={{ fontSize: 19 }}>যাচাইয়ের অপেক্ষায় ({queue.length}) / Awaiting decision</h2>
+      <h2 className="ev-section-h2">যাচাইয়ের অপেক্ষায় ({queue.length}) / Awaiting decision</h2>
       {links === null ? (
         <p>{strings.common.loading.bn}</p>
       ) : queue.length === 0 ? (
-        <p style={{ color: '#555' }}>কোনো অপেক্ষমাণ অনুরোধ নেই। / No pending requests.</p>
+        <p className="ev-muted-ivory">কোনো অপেক্ষমাণ অনুরোধ নেই। / No pending requests.</p>
       ) : (
         <ul style={{ paddingLeft: 0 }}>
           {queue.map((l) => (
@@ -228,9 +223,9 @@ export default function AdminGuardiansPage() {
         </ul>
       )}
 
-      <h2 style={{ fontSize: 19 }}>সক্রিয় সংযোগ ({verified.length}) / Active links</h2>
+      <h2 className="ev-section-h2">সক্রিয় সংযোগ ({verified.length}) / Active links</h2>
       {verified.length === 0 ? (
-        <p style={{ color: '#555' }}>কোনো সক্রিয় সংযোগ নেই। / No active links.</p>
+        <p className="ev-muted-ivory">কোনো সক্রিয় সংযোগ নেই। / No active links.</p>
       ) : (
         <ul style={{ paddingLeft: 0 }}>
           {verified.map((l) => (
@@ -241,15 +236,18 @@ export default function AdminGuardiansPage() {
 
       {closed.length > 0 ? (
         <>
-          <h2 style={{ fontSize: 19 }}>বাতিলকৃত ({closed.length}) / Closed</h2>
-          <ul style={{ paddingLeft: 20 }}>
+          <h2 className="ev-section-h2">বাতিলকৃত ({closed.length}) / Closed</h2>
+          <div className="ev-dash-grid">
             {closed.map((l) => (
-              <li key={l.id}>
-                {l.guardianDisplayName || '—'} → {l.childDisplayName} — {l.status}
-                {l.decisionReason ? ` — ${l.decisionReason}` : ''}
-              </li>
+              <Card key={l.id}>
+                <strong>{l.guardianDisplayName || '—'} → {l.childDisplayName}</strong>
+                <p className="ev-muted" style={{ margin: '8px 0 0', fontSize: 14 }}>
+                  {l.status}
+                  {l.decisionReason ? ` — ${l.decisionReason}` : ''}
+                </p>
+              </Card>
             ))}
-          </ul>
+          </div>
         </>
       ) : null}
     </PageShell>

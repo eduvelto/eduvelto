@@ -1,5 +1,4 @@
 import type { ReactNode } from 'react';
-import { Link } from 'react-router-dom';
 import { PageShell } from './PageShell';
 import { useAuth } from '../lib/auth';
 
@@ -18,7 +17,7 @@ export function AdminGuard(props: { children: ReactNode }) {
   if (loading) {
     return (
       <PageShell titleBn="অ্যাডমিন ড্যাশবোর্ড" titleEn="Admin dashboard">
-        <p aria-live="polite" style={{ color: '#555' }}>
+        <p aria-live="polite" style={{ color: '#57616A' }}>
           লোড হচ্ছে… / Loading…
         </p>
       </PageShell>
@@ -28,11 +27,8 @@ export function AdminGuard(props: { children: ReactNode }) {
     return (
       <PageShell titleBn="অনুমতি নেই" titleEn="Access denied">
         <p>আপনার এই পাতায় যাওয়ার অনুমতি নেই। এই ড্যাশবোর্ড শুধু মালিকের জন্য।</p>
-        <p style={{ color: '#555' }}>
+        <p style={{ color: '#57616A' }}>
           You do not have permission to view this page. This dashboard is for the owner only.
-        </p>
-        <p>
-          <Link to="/">← হোম / Home</Link>
         </p>
       </PageShell>
     );

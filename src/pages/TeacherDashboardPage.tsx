@@ -12,6 +12,8 @@ import { Link } from 'react-router-dom';
 import { collection, getDocs, limit, query, where } from 'firebase/firestore';
 import { db } from '../firebase';
 import { PageShell, EmptyState } from '../components/PageShell';
+import { AlertBox, Button, Card, Chip, LinkButton, Skeleton, SkeletonCards } from '../components/ui';
+import { DashboardBookCard } from '../components/DashboardBookCard';
 import { strings } from '../i18n/strings';
 import { useAuth } from '../lib/auth';
 import { EMPTY_STATES } from '../lib/academicProfile';
@@ -23,27 +25,6 @@ import {
 } from '../lib/teacherChanges';
 import type { Book } from '../lib/content';
 import type { DocumentSnapshot } from 'firebase/firestore';
-
-const buttonStyle: React.CSSProperties = {
-  padding: '10px 16px',
-  minHeight: 44,
-  borderRadius: 6,
-  border: '1px solid #0A1F44',
-  background: '#fff',
-  color: '#0A1F44',
-  cursor: 'pointer',
-};
-
-const inputStyle: React.CSSProperties = {
-  display: 'block',
-  width: '100%',
-  boxSizing: 'border-box',
-  padding: '10px 12px',
-  margin: '6px 0 14px',
-  fontSize: 16,
-  border: '1px solid #aaa',
-  borderRadius: 6,
-};
 
 export default function TeacherDashboardPage() {
   const { user, profile, loading } = useAuth();
@@ -138,7 +119,8 @@ export default function TeacherDashboardPage() {
   if (loading) {
     return (
       <PageShell titleBn={d.teacherTitle.bn} titleEn={d.teacherTitle.en}>
-        <p>{strings.common.loading.bn}</p>
+        <Skeleton lines={3} />
+        <SkeletonCards count={3} />
       </PageShell>
     );
   }
@@ -148,7 +130,7 @@ export default function TeacherDashboardPage() {
       <PageShell titleBn={d.teacherTitle.bn} titleEn={d.teacherTitle.en}>
         <p>{strings.profile.notSignedIn.bn}</p>
         <p>
-          <Link to="/login">{strings.auth.loginTitle.bn}</Link>
+          <LinkButton to="/login" variant="outline">{strings.auth.loginTitle.bn}</LinkButton>
         </p>
       </PageShell>
     );
@@ -159,7 +141,7 @@ export default function TeacherDashboardPage() {
       <PageShell titleBn={d.teacherTitle.bn} titleEn={d.teacherTitle.en}>
         <p>এই ড্যাশবোর্ড শুধু শিক্ষকদের জন্য।</p>
         <p>
-          <Link to="/dashboard">আপনার ড্যাশবোর্ডে যান →</Link>
+          <LinkButton to="/dashboard" variant="outline">আপনার ড্যাশবোর্ডে যান →</LinkButton>
         </p>
       </PageShell>
     );
@@ -210,50 +192,64 @@ export default function TeacherDashboardPage() {
 
   return (
     <PageShell titleBn={d.teacherTitle.bn} titleEn={d.teacherTitle.en}>
-      <p style={{ fontSize: 17 }}>
-        🪪 {profile.displayName} · {strings.dashboard.verified.bn}:{' '}
-        {verified ? `✅ ${d.verified.bn}` : `⏳ ${d.verificationPending.bn}`}
-      </p>
+      <div className="ev-dash-hero">
+        <h2>🪪 {profile.displayName}</h2>
+        <p style={{ display: 'flex', flexWrap: 'wrap', gap: 8, alignItems: 'center', marginTop: 10 }}>
+          <span>{strings.dashboard.verified.bn}:</span>
+          {verified ? (
+            <Chip>✅ {d.verified.bn}</Chip>
+          ) : (
+            <Chip tone="gold">⏳ {d.verificationPending.bn}</Chip>
+          )}
+        </p>
+      </div>
       {hasApplication === false ? (
-        <p>
+        <AlertBox tone="info">
           শিক্ষক ভেরিফিকেশনের জন্য এখনো আবেদন করেননি।{' '}
           <Link to="/teacher/register">শিক্ষক রেজিস্ট্রেশন →</Link>
-        </p>
+        </AlertBox>
       ) : null}
       {!verified ? (
         <EmptyState bn={EMPTY_STATES.teacherPending.bn} en={EMPTY_STATES.teacherPending.en} />
       ) : (
         <>
-          <h2 style={{ fontSize: 19 }}>{d.mySubjects.bn} / {d.mySubjects.en}</h2>
-          <p>
-            {(approvedSubjects ?? []).join(', ') || '—'} · {(approvedClasses ?? []).join(', ') || '—'}
-          </p>
-          <h2 style={{ fontSize: 19 }}>{d.myBooks.bn} / {d.myBooks.en}</h2>
-          {error ? <p style={{ color: '#b00020' }}>{error}</p> : null}
-          {fetching && !page ? <p>{strings.common.loading.bn}</p> : null}
+          <h2 className="ev-section-h2">{d.mySubjects.bn} / {d.mySubjects.en}</h2>
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, marginBottom: 16 }}>
+            {(approvedSubjects ?? []).length > 0 ? (
+              approvedSubjects?.map((s) => <Chip key={s}>{s}</Chip>)
+            ) : (
+              <span className="ev-muted-ivory">—</span>
+            )}
+          </div>
+          <h2 className="ev-section-h2">{d.myClasses.bn} / {d.myClasses.en}</h2>
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, marginBottom: 16 }}>
+            {(approvedClasses ?? []).length > 0 ? (
+              approvedClasses?.map((c) => <Chip key={c} tone="gold">{c}</Chip>)
+            ) : (
+              <span className="ev-muted-ivory">—</span>
+            )}
+          </div>
+          <h2 className="ev-section-h2">{d.myBooks.bn} / {d.myBooks.en}</h2>
+          {error ? <AlertBox tone="error">{error}</AlertBox> : null}
+          {fetching && !page ? <SkeletonCards count={3} /> : null}
           {page && books.length === 0 && !fetching ? (
             <EmptyState bn={EMPTY_STATES.noContent.bn} en={EMPTY_STATES.noContent.en} />
           ) : null}
           {books.length > 0 ? (
             <>
-              <ul style={{ paddingLeft: 20 }}>
+              <div className="ev-dash-grid">
                 {books.map((b) => (
-                  <li key={b.id} style={{ marginBottom: 10, lineHeight: 1.5 }}>
-                    <Link to={`/library/${b.id}`}>{b.title}</Link>
-                    <span style={{ color: '#555', fontSize: 13 }}>
-                      {' '}· {b.paperCode} · {b.department} · {b.classLevel} · {b.chapterCount}টি পাঠ
-                    </span>
-                  </li>
+                  <DashboardBookCard key={b.id} book={b} />
                 ))}
-              </ul>
-              <div style={{ display: 'flex', gap: 12, alignItems: 'center', marginTop: 16 }}>
-                <button type="button" onClick={prevPage} disabled={pageIndex <= 0 || fetching} style={buttonStyle}>
+              </div>
+              <div style={{ display: 'flex', gap: 12, alignItems: 'center', marginTop: 20, flexWrap: 'wrap' }}>
+                <Button variant="outline" onClick={prevPage} disabled={pageIndex <= 0 || fetching}>
                   ← আগের / Previous
-                </button>
+                </Button>
                 <span>পাতা {pageIndex + 1} / Page {pageIndex + 1}</span>
-                <button type="button" onClick={nextPage} disabled={!page?.hasMore || fetching} style={buttonStyle}>
+                <Button variant="outline" onClick={nextPage} disabled={!page?.hasMore || fetching}>
                   {fetching ? strings.common.loading.bn : 'পরের / Next →'}
-                </button>
+                </Button>
               </div>
             </>
           ) : null}
@@ -262,61 +258,71 @@ export default function TeacherDashboardPage() {
 
       {verified ? (
         <>
-          <h2 style={{ fontSize: 19 }}>{d.changeRequestTitle.bn} / {d.changeRequestTitle.en}</h2>
-          <p style={{ color: '#555' }}>{d.changeRequestNote.bn}</p>
+          <h2 className="ev-section-h2">{d.changeRequestTitle.bn} / {d.changeRequestTitle.en}</h2>
+          <p className="ev-muted-ivory">{d.changeRequestNote.bn}</p>
           {pendingRequests.length > 0 ? (
-            <p>
+            <AlertBox tone="info">
               ⏳ {pendingRequests.length}টি অনুরোধ অনুমোদনের অপেক্ষায় আছে। / {pendingRequests.length} request(s)
               awaiting approval.
-            </p>
+            </AlertBox>
           ) : null}
-          <form onSubmit={onChangeRequest}>
-            <label>
-              {d.subjects.bn} / {d.subjects.en} (কমা দিয়ে আলাদা করুন / comma-separated)
+          <Card>
+            <form onSubmit={onChangeRequest}>
+              <label className="ev-label" htmlFor="req-subjects">
+                {d.subjects.bn} / {d.subjects.en} (কমা দিয়ে আলাদা করুন / comma-separated)
+              </label>
               <input
-                style={inputStyle}
+                id="req-subjects"
+                className="ev-input"
+                style={{ marginBottom: 14 }}
                 type="text"
                 value={reqSubjects}
                 onChange={(e) => setReqSubjects(e.target.value)}
                 placeholder="যেমন: English, Mathematics"
               />
-            </label>
-            <label>
-              {d.myClasses.bn} / {d.myClasses.en} (কমা দিয়ে আলাদা করুন / comma-separated)
+              <label className="ev-label" htmlFor="req-classes">
+                {d.myClasses.bn} / {d.myClasses.en} (কমা দিয়ে আলাদা করুন / comma-separated)
+              </label>
               <input
-                style={inputStyle}
+                id="req-classes"
+                className="ev-input"
+                style={{ marginBottom: 14 }}
                 type="text"
                 value={reqClasses}
                 onChange={(e) => setReqClasses(e.target.value)}
                 placeholder="যেমন: 3rd Year, SSC"
               />
-            </label>
-            <label>
-              {d.teachingLevel.bn} / {d.teachingLevel.en}
+              <label className="ev-label" htmlFor="req-level">
+                {d.teachingLevel.bn} / {d.teachingLevel.en}
+              </label>
               <input
-                style={inputStyle}
+                id="req-level"
+                className="ev-input"
+                style={{ marginBottom: 14 }}
                 type="text"
                 value={reqLevel}
                 onChange={(e) => setReqLevel(e.target.value)}
                 placeholder="যেমন: Honours"
               />
-            </label>
-            <label>
-              কারণ / Reason (কমপক্ষে ১০ অক্ষর / at least 10 characters)
+              <label className="ev-label" htmlFor="req-reason">
+                কারণ / Reason (কমপক্ষে ১০ অক্ষর / at least 10 characters)
+              </label>
               <input
-                style={inputStyle}
+                id="req-reason"
+                className="ev-input"
+                style={{ marginBottom: 14 }}
                 type="text"
                 value={reqReason}
                 onChange={(e) => setReqReason(e.target.value)}
                 placeholder="কেন পরিবর্তন প্রয়োজন"
               />
-            </label>
-            {reqError ? <p style={{ color: '#b00020' }}>{reqError}</p> : null}
-            {reqDone ? <p style={{ color: '#0A1F44' }}>অনুরোধ পাঠানো হয়েছে — অ্যাডমিন অনুমোদন দিলে প্রযোজ্য হবে।</p> : null}
-            <button style={{ ...buttonStyle, background: '#0A1F44', color: '#fff' }} type="submit" disabled={reqBusy}>
-              {reqBusy ? strings.common.loading.bn : 'অনুরোধ পাঠান / Send request'}
-            </button>
-          </form>
+              {reqError ? <AlertBox tone="error">{reqError}</AlertBox> : null}
+              {reqDone ? <AlertBox tone="ok">অনুরোধ পাঠানো হয়েছে — অ্যাডমিন অনুমোদন দিলে প্রযোজ্য হবে।</AlertBox> : null}
+              <Button type="submit" loading={reqBusy}>
+                {reqBusy ? strings.common.loading.bn : 'অনুরোধ পাঠান / Send request'}
+              </Button>
+            </form>
+          </Card>
         </>
       ) : null}
     </PageShell>

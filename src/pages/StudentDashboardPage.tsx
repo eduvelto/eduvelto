@@ -9,8 +9,9 @@
 // never deletes progress/bookmarks/results — they are keyed to content
 // IDs and stay saved (see the test report, case D1).
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 import { PageShell, EmptyState } from '../components/PageShell';
+import { AlertBox, Button, Chip, LinkButton, ProgressBar, Skeleton, SkeletonCards, StatCard } from '../components/ui';
+import { DashboardBookCard } from '../components/DashboardBookCard';
 import { strings } from '../i18n/strings';
 import { useAuth } from '../lib/auth';
 import { academicProfileSummary, EMPTY_STATES } from '../lib/academicProfile';
@@ -22,16 +23,6 @@ import {
 } from '../lib/dashboardContent';
 import type { Book } from '../lib/content';
 import type { DocumentSnapshot } from 'firebase/firestore';
-
-const buttonStyle: React.CSSProperties = {
-  padding: '10px 16px',
-  minHeight: 44,
-  borderRadius: 6,
-  border: '1px solid #0A1F44',
-  background: '#fff',
-  color: '#0A1F44',
-  cursor: 'pointer',
-};
 
 export default function StudentDashboardPage() {
   const { user, profile, loading } = useAuth();
@@ -91,7 +82,8 @@ export default function StudentDashboardPage() {
   if (loading) {
     return (
       <PageShell titleBn={d.studentTitle.bn} titleEn={d.studentTitle.en}>
-        <p>{strings.common.loading.bn}</p>
+        <Skeleton lines={3} />
+        <SkeletonCards count={3} />
       </PageShell>
     );
   }
@@ -101,7 +93,7 @@ export default function StudentDashboardPage() {
       <PageShell titleBn={d.studentTitle.bn} titleEn={d.studentTitle.en}>
         <p>{strings.profile.notSignedIn.bn}</p>
         <p>
-          <Link to="/login">{strings.auth.loginTitle.bn}</Link>
+          <LinkButton to="/login" variant="outline">{strings.auth.loginTitle.bn}</LinkButton>
         </p>
       </PageShell>
     );
@@ -112,7 +104,7 @@ export default function StudentDashboardPage() {
       <PageShell titleBn={d.studentTitle.bn} titleEn={d.studentTitle.en}>
         <p>এই ড্যাশবোর্ড শুধু শিক্ষার্থীদের জন্য।</p>
         <p>
-          <Link to="/dashboard">আপনার ড্যাশবোর্ডে যান →</Link>
+          <LinkButton to="/dashboard" variant="outline">আপনার ড্যাশবোর্ডে যান →</LinkButton>
         </p>
       </PageShell>
     );
@@ -132,57 +124,62 @@ export default function StudentDashboardPage() {
   const books = page?.items ?? [];
   const weak = (summaries ?? []).filter((s) => typeof s.averagePercentage === 'number' && (s.averagePercentage as number) < 60);
   const strong = (summaries ?? []).filter((s) => typeof s.averagePercentage === 'number' && (s.averagePercentage as number) >= 80);
+  const heroChips = [profile.classLevel, profile.institution, profile.department].filter(Boolean) as string[];
 
   return (
     <PageShell titleBn={d.studentTitle.bn} titleEn={d.studentTitle.en}>
-      <p style={{ fontSize: 17 }}>
-        👋 {profile.displayName} · {academicProfileSummary(profile) || '—'}
-      </p>
-      <p style={{ color: '#555' }}>
-        বুকমার্ক: {bookmarkCount ?? '…'} · পরীক্ষার সারসংক্ষেপ: {summaries === null ? '…' : summaries.length}টি বিষয়
-      </p>
-      <p>
-        <Link to="/library">লাইব্রেরি / Library</Link>
-        {' · '}
-        <Link to="/exam">পরীক্ষা / Exams</Link>
-        {' · '}
-        <Link to="/progress">আমার অগ্রগতি / My Progress</Link>
-        {' · '}
-        <Link to="/profile">প্রোফাইল সেটিংস / Profile Settings</Link>
-      </p>
+      <div className="ev-dash-hero">
+        <h2>👋 {profile.displayName}</h2>
+        <p>{academicProfileSummary(profile) || '—'}</p>
+        {heroChips.length > 0 ? (
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, marginTop: 12 }}>
+            {heroChips.map((c) => (
+              <Chip key={c}>{c}</Chip>
+            ))}
+          </div>
+        ) : null}
+      </div>
+
+      <div className="ev-dash-stats">
+        <StatCard value={String(bookmarkCount ?? '…')} labelBn="বুকমার্ক" labelEn="Bookmarks" numeric={bookmarkCount ?? undefined} />
+        <StatCard value={summaries === null ? '…' : String(summaries.length)} labelBn="পরীক্ষার সারসংক্ষেপ" labelEn="Exam summaries" numeric={summaries === null ? undefined : summaries.length} suffix="টি বিষয়" />
+        <StatCard value={String(books.length)} labelBn="এই পাতার বই" labelEn="Books on this page" numeric={books.length} />
+      </div>
+
+      <div className="ev-dash-actions">
+        <LinkButton to="/library">লাইব্রেরি / Library</LinkButton>
+        <LinkButton to="/exam" variant="outline">পরীক্ষা / Exams</LinkButton>
+        <LinkButton to="/progress" variant="outline">আমার অগ্রগতি / My Progress</LinkButton>
+        <LinkButton to="/profile" variant="outline">প্রোফাইল সেটিংস / Profile Settings</LinkButton>
+      </div>
 
       {!hasProfile ? (
         <EmptyState bn={EMPTY_STATES.noProfile.bn} en={EMPTY_STATES.noProfile.en} />
       ) : (
         <>
-          <h2 style={{ fontSize: 19 }}>{d.myBooks.bn} / {d.myBooks.en}</h2>
-          {error ? <p style={{ color: '#b00020' }}>{error}</p> : null}
-          {fetching && !page ? <p>{strings.common.loading.bn}</p> : null}
+          <h2 className="ev-section-h2">{d.myBooks.bn} / {d.myBooks.en}</h2>
+          {error ? <AlertBox tone="error">{error}</AlertBox> : null}
+          {fetching && !page ? <SkeletonCards count={3} /> : null}
           {page && books.length === 0 && !fetching ? (
             <EmptyState bn={EMPTY_STATES.noContent.bn} en={EMPTY_STATES.noContent.en} />
           ) : null}
           {books.length > 0 ? (
             <>
-              <ul style={{ paddingLeft: 20 }}>
+              <div className="ev-dash-grid">
                 {books.map((b) => (
-                  <li key={b.id} style={{ marginBottom: 10, lineHeight: 1.5 }}>
-                    <Link to={`/library/${b.id}`}>{b.title}</Link>
-                    <span style={{ color: '#555', fontSize: 13 }}>
-                      {' '}· {b.paperCode} · {b.department} · {b.classLevel} · {b.chapterCount}টি পাঠ · {b.questionCount}টি প্রশ্ন
-                    </span>
-                  </li>
+                  <DashboardBookCard key={b.id} book={b} />
                 ))}
-              </ul>
-              <div style={{ display: 'flex', gap: 12, alignItems: 'center', marginTop: 16 }}>
-                <button type="button" onClick={prevPage} disabled={pageIndex <= 0 || fetching} style={buttonStyle}>
-                  ← আগের / Previous
-                </button>
-                <span>পাতা {pageIndex + 1} / Page {pageIndex + 1}</span>
-                <button type="button" onClick={nextPage} disabled={!page?.hasMore || fetching} style={buttonStyle}>
-                  {fetching ? strings.common.loading.bn : 'পরের / Next →'}
-                </button>
               </div>
-              <p style={{ color: '#555', fontSize: 13 }}>
+              <div style={{ display: 'flex', gap: 12, alignItems: 'center', marginTop: 20, flexWrap: 'wrap' }}>
+                <Button variant="outline" onClick={prevPage} disabled={pageIndex <= 0 || fetching}>
+                  ← আগের / Previous
+                </Button>
+                <span>পাতা {pageIndex + 1} / Page {pageIndex + 1}</span>
+                <Button variant="outline" onClick={nextPage} disabled={!page?.hasMore || fetching}>
+                  {fetching ? strings.common.loading.bn : 'পরের / Next →'}
+                </Button>
+              </div>
+              <p className="ev-muted-ivory" style={{ fontSize: 13 }}>
                 এই পাতায় {books.length}টি বই · প্রতি পাতায় সর্বোচ্চ ৫০টি — প্রোফাইল অনুযায়ী ফিল্টার করা।
               </p>
             </>
@@ -192,26 +189,30 @@ export default function StudentDashboardPage() {
 
       {weak.length > 0 ? (
         <>
-          <h2 style={{ fontSize: 19 }}>{d.weakAreas.bn} / {d.weakAreas.en}</h2>
-          <ul style={{ paddingLeft: 20 }}>
-            {weak.map((s) => (
-              <li key={String(s.id)}>
-                {String(s.subject ?? '')} — {String(s.averagePercentage ?? '')}%
-              </li>
-            ))}
-          </ul>
+          <h2 className="ev-section-h2">{d.weakAreas.bn} / {d.weakAreas.en}</h2>
+          {weak.map((s) => (
+            <div className="ev-dash-row" key={String(s.id)}>
+              <span className="ev-dash-row-label">{String(s.subject ?? '')}</span>
+              <span className="ev-dash-row-bar">
+                <ProgressBar value={Number(s.averagePercentage ?? 0)} tone="gold" label={`${String(s.subject ?? '')} ${String(s.averagePercentage ?? '')}%`} />
+              </span>
+              <span className="ev-dash-row-pct">{String(s.averagePercentage ?? '')}%</span>
+            </div>
+          ))}
         </>
       ) : null}
       {strong.length > 0 ? (
         <>
-          <h2 style={{ fontSize: 19 }}>{d.strongAreas.bn} / {d.strongAreas.en}</h2>
-          <ul style={{ paddingLeft: 20 }}>
-            {strong.map((s) => (
-              <li key={String(s.id)}>
-                {String(s.subject ?? '')} — {String(s.averagePercentage ?? '')}%
-              </li>
-            ))}
-          </ul>
+          <h2 className="ev-section-h2">{d.strongAreas.bn} / {d.strongAreas.en}</h2>
+          {strong.map((s) => (
+            <div className="ev-dash-row" key={String(s.id)}>
+              <span className="ev-dash-row-label">{String(s.subject ?? '')}</span>
+              <span className="ev-dash-row-bar">
+                <ProgressBar value={Number(s.averagePercentage ?? 0)} label={`${String(s.subject ?? '')} ${String(s.averagePercentage ?? '')}%`} />
+              </span>
+              <span className="ev-dash-row-pct">{String(s.averagePercentage ?? '')}%</span>
+            </div>
+          ))}
         </>
       ) : null}
     </PageShell>

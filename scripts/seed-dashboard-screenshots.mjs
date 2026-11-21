@@ -76,6 +76,7 @@ await env.withSecurityRulesDisabled(async (ctx) => {
       role,
       language: 'bn',
       isActive: true,
+      createdAt: new Date(),
       ...extra,
     });
   await user(uid.student, 'student', {
