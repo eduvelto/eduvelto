@@ -219,11 +219,16 @@ export async function listConversations(
 
 /**
  * Send the user's question. Creates the conversation on the first
- * message (title = the question itself) and appends the message in
- * ONE batch, so a message can never exist without its conversation.
- * The AI answer is NOT produced here — the caller asks the provider
- * separately and shows the honest not-connected state when there is
- * no provider (see AiChatPage). Returns the conversation id.
+ * message (title = the question itself) and appends the message.
+ * The parent conversation is created FIRST, in its own write: the
+ * message-create rule requires the parent to exist and belong to the
+ * caller (a get() on the parent), and a rules get() cannot see a
+ * parent created in the same batch — a combined batch would deny the
+ * first message of every new conversation (found by the 21 Nov
+ * screenshot run). The AI answer is NOT produced here — the caller
+ * asks the provider separately and shows the honest not-connected
+ * state when there is no provider (see AiChatPage). Returns the
+ * conversation id.
  */
 export async function sendUserMessage(
   uid: string,
@@ -235,43 +240,42 @@ export async function sendUserMessage(
   if (error) throw new Error(`Invalid message: ${error}`);
   const firestore = requireDb();
   const body = text.trim();
-  const batch = writeBatch(firestore);
   let convId = conversationId ?? null;
-  let convRef;
+  let messageCount = 0;
   if (!convId) {
-    convRef = doc(collection(firestore, 'aiConversations'));
+    const convRef = doc(collection(firestore, 'aiConversations'));
     convId = convRef.id;
-    batch.set(convRef, {
+    await setDoc(convRef, {
       ownerId: uid,
       title: titleFromFirstMessage(body),
       language,
       status: 'active',
-      messageCount: 1,
-      lastMessageAt: serverTimestamp(),
+      messageCount: 0,
+      lastMessageAt: null,
       createdAt: serverTimestamp(),
       updatedAt: serverTimestamp(),
     });
   } else {
-    convRef = doc(firestore, 'aiConversations', convId);
+    const convRef = doc(firestore, 'aiConversations', convId);
     const existing = await getDoc(convRef);
     if (!existing.exists()) throw new Error('Conversation not found.');
     const data = existing.data();
     if (data.ownerId !== uid) throw new Error('Not your conversation.');
-    batch.update(convRef, {
-      messageCount: ((data.messageCount as number) ?? 0) + 1,
-      lastMessageAt: serverTimestamp(),
-      updatedAt: serverTimestamp(),
-    });
+    messageCount = (data.messageCount as number) ?? 0;
   }
   const msgRef = doc(collection(firestore, 'aiConversations', convId, 'messages'));
-  batch.set(msgRef, {
+  await setDoc(msgRef, {
     role: 'user',
     senderId: uid,
     ownerId: uid,
     body,
     createdAt: serverTimestamp(),
   });
-  await batch.commit();
+  await updateDoc(doc(firestore, 'aiConversations', convId), {
+    messageCount: messageCount + 1,
+    lastMessageAt: serverTimestamp(),
+    updatedAt: serverTimestamp(),
+  });
   return { conversationId: convId, messageId: msgRef.id };
 }
 

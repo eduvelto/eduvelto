@@ -275,6 +275,17 @@ describe('AI Chat security rules', () => {
       }),
     );
   });
+  it('(c7) creating a message in a non-existent conversation is DENIED (the parent-ownership get() fails)', async () => {
+    await assertFails(
+      addDoc(collection(asStudent1(), 'aiConversations', 'ai-conv-missing', 'messages'), {
+        role: 'user',
+        senderId: 'student-1',
+        ownerId: 'student-1',
+        body: 'Hello?',
+        createdAt: new Date(),
+      }),
+    );
+  });
 
   // (d) Per-user daily usage counters — monotonic, owner/admin counts only.
   it('(d1) owner reading their own daily usage is ALLOWED', async () => {
