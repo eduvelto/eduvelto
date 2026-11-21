@@ -1,22 +1,28 @@
-// Eduvelto — home (Phase 2, Step 2 + Step 3).
+// Eduvelto — home (Phase 2, Step 2 + Step 3; pagination 21 Nov 2026).
 //
-// Shows the real published library: counts + a first set of books.
+// Shows the real published library: a first set of books.
+// Uses the paginated query (first page of 50) — the home page no longer
+// downloads all 609 books just to show 6. No exact total is shown:
+// getCountFromServer fails on live Firestore right now
+// (resource-exhausted); see team/pagination-test-report.md §5.
 // When nothing is published yet, the honest empty state stays.
 
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { PageShell, EmptyState } from '../components/PageShell';
 import AdSlot from '../components/AdSlot';
-import { listPublishedBooks, type Book } from '../lib/content';
+import { listPublishedBooksPage, type Book } from '../lib/content';
+import { ALL_DEPARTMENTS } from '../lib/taxonomy';
 
 export default function HomePage() {
   const [books, setBooks] = useState<Book[] | null>(null);
 
   useEffect(() => {
     let live = true;
-    listPublishedBooks()
-      .then((b) => {
-        if (live) setBooks(b);
+    listPublishedBooksPage({}, null)
+      .then((first) => {
+        if (!live) return;
+        setBooks(first.items);
       })
       .catch(() => {
         if (live) setBooks([]);
@@ -27,7 +33,7 @@ export default function HomePage() {
   }, []);
 
   const featured = (books ?? []).slice(0, 6);
-  const subjects = [...new Set((books ?? []).map((b) => b.department))];
+  const subjects = ALL_DEPARTMENTS.length;
 
   return (
     <PageShell titleBn="হোম" titleEn="Home">
@@ -41,8 +47,7 @@ export default function HomePage() {
       {books !== null && books.length > 0 ? (
         <>
           <p style={{ fontSize: 17 }}>
-            <strong>{books.length}টি বই</strong> প্রকাশিত · {subjects.length}টি বিষয় ·{' '}
-            <Link to="/library">সব বই দেখুন / See all books</Link>
+            লাইব্রেরি — {subjects}টি বিষয় · <Link to="/library">সব বই দেখুন / See all books</Link>
           </p>
           <h2 style={{ fontSize: 19, margin: '16px 0 8px' }}>নতুন বই / New books</h2>
           <ul style={{ paddingLeft: 20 }}>

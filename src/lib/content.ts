@@ -10,10 +10,20 @@ import {
   doc,
   getDoc,
   getDocs,
+  limit,
+  orderBy,
   query,
+  startAfter,
   where,
+  documentId,
+  type DocumentData,
+  type QueryConstraint,
+  type QueryDocumentSnapshot,
 } from 'firebase/firestore';
 import { db } from '../firebase';
+
+/** Books shown per page (owner decision, 21 Nov 2026). */
+export const PAGE_SIZE = 50;
 
 export interface Book {
   id: string;
@@ -159,6 +169,159 @@ function toDirectoryRow(id: string, d: Record<string, unknown>): DirectoryRow {
   };
 }
 
+/** The Library list's sort order (class, then department, then title). */
+export function compareBooks(a: Book, b: Book): number {
+  return (
+    a.classLevel.localeCompare(b.classLevel) ||
+    a.department.localeCompare(b.department) ||
+    a.title.localeCompare(b.title)
+  );
+}
+
+export function sortBooks(books: Book[]): Book[] {
+  return [...books].sort(compareBooks);
+}
+
+/** The Directory list's sort order (class, then department, then paper title). */
+export function compareDirectoryRows(a: DirectoryRow, b: DirectoryRow): number {
+  return (
+    a.classLevel.localeCompare(b.classLevel) ||
+    a.department.localeCompare(b.department) ||
+    a.paperTitle.localeCompare(b.paperTitle)
+  );
+}
+
+export function sortDirectoryRows(rows: DirectoryRow[]): DirectoryRow[] {
+  return [...rows].sort(compareDirectoryRows);
+}
+
+export interface BookFilters {
+  educationType?: string;
+  classLevel?: string;
+  department?: string;
+}
+
+export interface DirectoryFilters {
+  type?: string;
+  board?: string;
+  program?: string;
+  classLevel?: string;
+  department?: string;
+}
+
+export interface PageResult<T> {
+  items: T[];
+  /** Last document snapshot of this page — the cursor for the next page. Null on an empty page. */
+  lastDoc: QueryDocumentSnapshot<DocumentData> | null;
+  /** True when this page was full, so a next page may exist. */
+  hasMore: boolean;
+}
+
+function bookConstraints(filters: BookFilters): QueryConstraint[] {
+  const cs: QueryConstraint[] = [where('reviewStatus', '==', 'Published')];
+  if (filters.educationType) cs.push(where('educationType', '==', filters.educationType));
+  if (filters.classLevel) cs.push(where('classLevel', '==', filters.classLevel));
+  if (filters.department) cs.push(where('department', '==', filters.department));
+  return cs;
+}
+
+function directoryConstraints(filters: DirectoryFilters): QueryConstraint[] {
+  const cs: QueryConstraint[] = [where('reviewStatus', '==', 'Published')];
+  if (filters.type) cs.push(where('type', '==', filters.type));
+  if (filters.board) cs.push(where('board', '==', filters.board));
+  if (filters.program) cs.push(where('program', '==', filters.program));
+  if (filters.classLevel) cs.push(where('classLevel', '==', filters.classLevel));
+  if (filters.department) cs.push(where('department', '==', filters.department));
+  return cs;
+}
+
+/**
+ * One page of Published books, server-side (50 reads at most).
+ *
+ * The query orders by DOCUMENT ID — the only orderBy shape that works
+ * with the equality filters on live Firestore WITHOUT a composite index.
+ * Verified against LIVE Firestore, read-only, 21 Nov 2026 (scripts
+ * probe-live-queries.mjs + the inline F1–F4 probes): equality filters
+ * (up to 3) + orderBy(documentId()) + limit(50) + startAfter all pass.
+ * The shape the first draft used — orderBy('reviewStatus') with filters
+ * — FAILS live with failed-precondition (composite index required);
+ * the emulator does NOT enforce that, so the emulator run hid it.
+ * All Published books share reviewStatus, so the effective order is
+ * document ID order; each page is re-sorted client-side with
+ * compareBooks so the books ON a page appear in the Library's usual
+ * order. The GLOBAL order across pages is document-ID order, not the
+ * old class/department/title order — restoring the old global order
+ * needs a composite index (books: reviewStatus, classLevel, department,
+ * title), which is a follow-up for the owner's approval, not built here.
+ *
+ * NO count() here: getCountFromServer FAILS on live Firestore right now
+ * (resource-exhausted / Quota exceeded, reproducible 21 Nov 2026 even
+ * as the first call of the day — see team/pagination-test-report.md
+ * §5). The pages therefore show no exact total, only "showing X–Y"
+ * and Previous/Next. Restoring totals needs either the count quota
+ * fixed or a loader-maintained stats doc (owner follow-up).
+ */
+export async function listPublishedBooksPage(
+  filters: BookFilters,
+  cursor: QueryDocumentSnapshot<DocumentData> | null,
+): Promise<PageResult<Book>> {
+  if (!db) return { items: [], lastDoc: null, hasMore: false };
+  const constraints: QueryConstraint[] = [
+    ...bookConstraints(filters),
+    orderBy(documentId()),
+    limit(PAGE_SIZE),
+  ];
+  if (cursor) constraints.push(startAfter(cursor));
+  const snap = await getDocs(query(collection(db, 'books'), ...constraints));
+  const books = snap.docs.map((s) => toBook(s.id, s.data()));
+  books.sort(compareBooks);
+  return {
+    items: books,
+    lastDoc: snap.docs[snap.docs.length - 1] ?? null,
+    hasMore: snap.size === PAGE_SIZE,
+  };
+}
+
+/** One page of Published directory rows, server-side (50 reads at most). Same index note as listPublishedBooksPage. */
+export async function listPublishedDirectoryPage(
+  filters: DirectoryFilters,
+  cursor: QueryDocumentSnapshot<DocumentData> | null,
+): Promise<PageResult<DirectoryRow>> {
+  if (!db) return { items: [], lastDoc: null, hasMore: false };
+  const constraints: QueryConstraint[] = [
+    ...directoryConstraints(filters),
+    orderBy(documentId()),
+    limit(PAGE_SIZE),
+  ];
+  if (cursor) constraints.push(startAfter(cursor));
+  const snap = await getDocs(query(collection(db, 'educationDirectory'), ...constraints));
+  const rows = snap.docs.map((s) => toDirectoryRow(s.id, s.data()));
+  rows.sort(compareDirectoryRows);
+  return {
+    items: rows,
+    lastDoc: snap.docs[snap.docs.length - 1] ?? null,
+    hasMore: snap.size === PAGE_SIZE,
+  };
+}
+
+// ---- session caches for the search path only ---------------------------------
+// Substring search cannot run server-side in Firestore, so a search loads the
+// full Published list ONCE per session and searches it client-side (exactly
+// the old behaviour, but only when the user actually searches — plain
+// browsing and filtering never touch this cache). The cache is module-level
+// so navigating away and back does not re-pay the 609 reads.
+let allBooksCache: Promise<Book[]> | null = null;
+export function getAllPublishedBooksCached(): Promise<Book[]> {
+  if (!allBooksCache) allBooksCache = listPublishedBooks();
+  return allBooksCache;
+}
+
+let allDirectoryCache: Promise<DirectoryRow[]> | null = null;
+export function getAllPublishedDirectoryCached(): Promise<DirectoryRow[]> {
+  if (!allDirectoryCache) allDirectoryCache = listPublishedDirectory();
+  return allDirectoryCache;
+}
+
 /** All Published books, sorted by year then department then title. */
 export async function listPublishedBooks(): Promise<Book[]> {
   if (!db) return [];
@@ -166,12 +329,7 @@ export async function listPublishedBooks(): Promise<Book[]> {
     query(collection(db, 'books'), where('reviewStatus', '==', 'Published')),
   );
   const books = snap.docs.map((s) => toBook(s.id, s.data()));
-  books.sort(
-    (a, b) =>
-      a.classLevel.localeCompare(b.classLevel) ||
-      a.department.localeCompare(b.department) ||
-      a.title.localeCompare(b.title),
-  );
+  books.sort(compareBooks);
   return books;
 }
 
