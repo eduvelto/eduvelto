@@ -9,9 +9,13 @@
 //   No age is stated anywhere (age changes over time).
 // - Birthplace NOT approved: removed from the facts box and from the
 //   Person JSON-LD (no birthPlace field) until separately approved.
-//   The approved biography prose (decision 5) still says "From Cox's
-//   Bazar" — that wording is part of the approved bio text itself and
-//   is flagged in the preview report for the owner to confirm.
+//   ROUND 2 (owner 21 Nov 07:50): the phrase "From Cox's Bazar" is ALSO
+//   removed from the biography prose itself (EN + BN) — the owner
+//   ordered a revised preview. "Cox's Bazar City College" stays: it is
+//   the college's name, a verified fact, not the birthplace phrase.
+// - AI Teacher is PLANNED and demo-only: ROUND 2 (owner 21 Nov 07:50)
+//   the biography now presents it as a FUTURE PLAN in both languages,
+//   matching the showcase's "Planned — demo only, not live AI" label.
 // - Contact: official business email ahmmizan23@gmail.com is shown.
 //   Personal phone number is NOT shown. The Contact page is unchanged.
 // - LinkedIn: no account exists; LinkedIn appears nowhere here.
@@ -266,27 +270,27 @@ export default function FounderPage() {
         {/* Biography */}
         <h2 style={sectionH2}>জীবনী / Biography</h2>
         <p style={bodyP}>
-          Ali Hasan Mohammed Mizan is the Founder and Owner of Eduvelto. From Cox&apos;s Bazar,
-          Bangladesh, he has taught English at Tahsinul Ummah International Madrasa since 2023,
-          and is currently in his third year of Honours in English at the National University. He
-          completed his SSC in Science in 2020 and his HSC in Science in 2022 at Cox&apos;s Bazar
-          City College. Alongside his studies, he helps look after his father&apos;s business. He
-          founded Eduvelto with a simple belief: quality education should be free and within reach
-          of every student in Bangladesh — in Bangla and in English. Eduvelto brings together
-          lessons, exams, a personal AI teacher, a digital library and smart study planning, so
-          that a student anywhere in the country can learn, grow and achieve, without cost
-          standing in the way.
+          Ali Hasan Mohammed Mizan is the Founder and Owner of Eduvelto. He has taught English
+          at Tahsinul Ummah International Madrasa since 2023, and is currently in his third year
+          of Honours in English at the National University. He completed his SSC in Science in
+          2020 and his HSC in Science in 2022 at Cox&apos;s Bazar City College. Alongside his
+          studies, he helps look after his father&apos;s business. He founded Eduvelto with a
+          simple belief: quality education should be free and within reach of every student in
+          Bangladesh — in Bangla and in English. Eduvelto brings together lessons, exams, a
+          digital library and smart study planning — with a personal AI teacher planned for the
+          future — so that a student anywhere in the country can learn, grow and achieve,
+          without cost standing in the way.
         </p>
         <p style={bodyP}>
-          আলী হাসান মোহাম্মদ মিজান Eduvelto-র প্রতিষ্ঠাতা ও মালিক। কক্সবাজার থেকে আসা তিনি ২০২৩
-          সাল থেকে তাহসিনুল উম্মাহ ইন্টারন্যাশনাল মাদ্রাসায় ইংরেজি পড়াচ্ছেন। তিনি জাতীয়
+          আলী হাসান মোহাম্মদ মিজান Eduvelto-র প্রতিষ্ঠাতা ও মালিক। তিনি ২০২৩ সাল থেকে
+          তাহসিনুল উম্মাহ ইন্টারন্যাশনাল মাদ্রাসায় ইংরেজি পড়াচ্ছেন। তিনি জাতীয়
           বিশ্ববিদ্যালয়ে ইংরেজি বিষয়ে অনার্স তৃতীয় বর্ষের শিক্ষার্থী। ২০২০ সালে বিজ্ঞান বিভাগে
           এসএসসি এবং ২০২২ সালে বিজ্ঞান বিভাগ থেকে কক্সবাজার সিটি কলেজ থেকে এইচএসসি সম্পন্ন করেন।
           পড়ালেখার পাশাপাশি তিনি বাবার ব্যবসা দেখাশোনা করেন। তাঁর বিশ্বাস — মানসম্মত শিক্ষা
           বাংলাদেশের প্রত্যেক শিক্ষার্থীর জন্য বিনামূল্যে পৌঁছে দেওয়া উচিত, বাংলায় ও ইংরেজিতে।
-          সেই লক্ষ্যেই তিনি Eduvelto গড়েছেন — পাঠ, পরীক্ষা, ব্যক্তিগত AI শিক্ষক, ডিজিটাল লাইব্রেরি
-          ও স্মার্ট পড়ার পরিকল্পনা এক জায়গায়, যাতে দেশের যেকোনো প্রান্তের শিক্ষার্থী শিখতে,
-          এগিয়ে যেতে ও স্বপ্ন গড়তে পারে।
+          সেই লক্ষ্যেই তিনি Eduvelto গড়েছেন — পাঠ, পরীক্ষা, ডিজিটাল লাইব্রেরি ও স্মার্ট পড়ার
+          পরিকল্পনা এক জায়গায়, ভবিষ্যতে ব্যক্তিগত AI শিক্ষকসহ, যাতে দেশের যেকোনো প্রান্তের
+          শিক্ষার্থী শিখতে, এগিয়ে যেতে ও স্বপ্ন গড়তে পারে।
         </p>
 
         {/* Founder story */}
