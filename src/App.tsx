@@ -4,6 +4,7 @@ import { strings } from './i18n/strings';
 import { useAuth } from './lib/auth';
 import { isBottomBannerAllowed, adsEnabled, BOTTOM_BANNER_RESERVE_PX } from './lib/ads';
 import AdSlot from './components/AdSlot';
+import Footer from './components/Footer';
 import InstallAppPrompt from './components/InstallAppPrompt';
 import HomePage from './pages/HomePage';
 import RegisterPage from './pages/RegisterPage';
@@ -95,7 +96,7 @@ export default function App() {
           <NavLink to="/about" className={({ isActive }) => `ev-navlink${isActive ? ' ev-navlink-active' : ''}`}>{nav.about.bn}</NavLink>
           <NavLink to="/contact" className={({ isActive }) => `ev-navlink${isActive ? ' ev-navlink-active' : ''}`}>{nav.contact.bn}</NavLink>
           {profile?.role === 'owner' ? (
-            <NavLink to="/admin" className={({ isActive }) => `ev-navlink${isActive ? ' ev-navlink-active' : ''}`} style={{ color: '#F1B308', fontWeight: 700 }}>{nav.admin.bn}</NavLink>
+            <NavLink to="/admin" className={({ isActive }) => `ev-navlink${isActive ? ' ev-navlink-active' : ''}`} style={{ color: '#D9A441', fontWeight: 700 }}>{nav.admin.bn}</NavLink>
           ) : null}
           {loading ? null : user ? (
             <>
@@ -139,7 +140,7 @@ export default function App() {
             <button
               type="button"
               onClick={() => void signOut()}
-              style={{ padding: '10px 18px', minHeight: 48, fontSize: 16, borderRadius: 6, border: 'none', background: '#0A1F44', color: '#fff', cursor: 'pointer' }}
+              style={{ padding: '10px 18px', minHeight: 48, fontSize: 16, borderRadius: 6, border: 'none', background: '#142B3B', color: '#fff', cursor: 'pointer' }}
             >
               {nav.logout.bn} / {nav.logout.en}
             </button>
@@ -185,6 +186,7 @@ export default function App() {
         <Route path="/contact" element={<ContactPage />} />
         <Route path="*" element={<HomePage />} />
         </Routes>
+        <Footer />
         {showBottomBanner ? <AdSlot placement="bottom-banner" /> : null}
         </>
       )}

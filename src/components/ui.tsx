@@ -68,7 +68,7 @@ export function Reveal(props: { children: ReactNode; delayMs?: number; className
   );
 }
 
-type ButtonVariant = 'primary' | 'accent' | 'gold' | 'outline' | 'danger' | 'ghost';
+type ButtonVariant = 'primary' | 'accent' | 'gold' | 'outline' | 'outline-light' | 'danger' | 'ghost';
 type ButtonSize = 'sm' | 'md' | 'lg';
 
 const variantClass: Record<ButtonVariant, string> = {
@@ -76,6 +76,7 @@ const variantClass: Record<ButtonVariant, string> = {
   accent: 'ev-btn-accent',
   gold: 'ev-btn-gold',
   outline: 'ev-btn-outline',
+  'outline-light': 'ev-btn-outline-light',
   danger: 'ev-btn-danger',
   ghost: 'ev-btn-ghost',
 };
@@ -202,7 +203,7 @@ export function StatCard(props: { value: string; labelBn: string; labelEn: strin
           fontSize: 30,
           fontWeight: 800,
           lineHeight: 1.2,
-          color: props.tone === 'gold' ? '#F5A623' : '#0A1F44',
+          color: props.tone === 'gold' ? '#8A6100' : '#142B3B',
         }}
       >
         {props.numeric !== undefined ? (
@@ -214,8 +215,8 @@ export function StatCard(props: { value: string; labelBn: string; labelEn: strin
           props.value
         )}
       </div>
-      <div style={{ fontWeight: 600, color: '#0A1F44', marginTop: 2 }}>{props.labelBn}</div>
-      <div style={{ fontSize: 13, color: '#5A6478' }}>{props.labelEn}</div>
+      <div style={{ fontWeight: 600, color: '#142B3B', marginTop: 2 }}>{props.labelBn}</div>
+      <div style={{ fontSize: 13, color: '#68747B' }}>{props.labelEn}</div>
     </div>
   );
 }

@@ -7,7 +7,7 @@
 // (ui/premium-polish: filter card, book cards, skeletons, retry on error.)
 
 import { useEffect, useMemo, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import { PageShell, EmptyState } from '../components/PageShell';
 import { AlertBox, Button, Card, Chip, SkeletonCards } from '../components/ui';
 import AdSlot from '../components/AdSlot';
@@ -18,10 +18,14 @@ const PAGE_SIZE = 20;
 export default function LibraryPage() {
   const [books, setBooks] = useState<Book[] | null>(null);
   const [error, setError] = useState(false);
-  const [query, setQuery] = useState('');
+  // Deep links from the homepage (search box, subject + level chips):
+  // ?q= text search, ?class= class/level, ?dept= department. Absent
+  // params behave exactly as before (empty filters).
+  const [params] = useSearchParams();
+  const [query, setQuery] = useState(() => params.get('q') ?? '');
   const [typeFilter, setTypeFilter] = useState('');
-  const [classFilter, setClassFilter] = useState('');
-  const [deptFilter, setDeptFilter] = useState('');
+  const [classFilter, setClassFilter] = useState(() => params.get('class') ?? '');
+  const [deptFilter, setDeptFilter] = useState(() => params.get('dept') ?? '');
   const [page, setPage] = useState(1);
 
   function load() {
