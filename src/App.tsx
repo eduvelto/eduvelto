@@ -1,4 +1,4 @@
-import { Link, Route, Routes, useLocation } from 'react-router-dom';
+import { Link, Navigate, Route, Routes, useLocation } from 'react-router-dom';
 import { strings } from './i18n/strings';
 import { useAuth } from './lib/auth';
 import { isBottomBannerAllowed, adsEnabled, BOTTOM_BANNER_RESERVE_PX } from './lib/ads';
@@ -8,6 +8,10 @@ import HomePage from './pages/HomePage';
 import RegisterPage from './pages/RegisterPage';
 import LoginPage from './pages/LoginPage';
 import ProfilePage from './pages/ProfilePage';
+import RoleSetupPage from './pages/RoleSetupPage';
+import StudentDashboardPage from './pages/StudentDashboardPage';
+import TeacherDashboardPage from './pages/TeacherDashboardPage';
+import GuardianDashboardPage from './pages/GuardianDashboardPage';
 import TeacherRegisterPage from './pages/TeacherRegisterPage';
 import DirectoryPage from './pages/DirectoryPage';
 import SubjectPage from './pages/SubjectPage';
@@ -39,6 +43,25 @@ import HealthHospitalsPage from './pages/HealthHospitalsPage';
 import HealthReportPage from './pages/HealthReportPage';
 import AboutPage from './pages/AboutPage';
 import ContactPage from './pages/ContactPage';
+
+// Step 5 — role-based dashboards: /dashboard routes by the signed-in
+// user's role. Owner/admin/moderator go to the Owner Admin Dashboard
+// (/admin); student → /student, teacher → /teacher, guardian →
+// /guardian. A signed-in user with NO profile yet (Google sign-in
+// mid-role-setup) goes to /register/role; a signed-out visitor goes
+// to /login.
+function DashboardRedirect() {
+  const { user, profile, loading } = useAuth();
+  if (loading) return null;
+  if (!user) return <Navigate to="/login" replace />;
+  if (!profile) return <Navigate to="/register/role" replace />;
+  if (profile.role === 'owner' || profile.role === 'admin' || profile.role === 'moderator') {
+    return <Navigate to="/admin" replace />;
+  }
+  if (profile.role === 'teacher') return <Navigate to="/teacher" replace />;
+  if (profile.role === 'parent') return <Navigate to="/guardian" replace />;
+  return <Navigate to="/student" replace />;
+}
 
 // Routes mirror page-map.md + the Phase 2 route list.
 // /social is a DESIGN PROPOSAL only (blueprint §7): no live social
@@ -92,6 +115,7 @@ export default function App() {
           ) : null}
           {loading ? null : user ? (
             <>
+              <Link to="/dashboard" style={{ color: '#fff', padding: '10px 6px' }}>{nav.dashboard.bn}</Link>
               <Link to="/profile" style={{ color: '#fff', padding: '10px 6px' }}>
                 {profile?.displayName ?? nav.profile.bn}
               </Link>
@@ -144,8 +168,13 @@ export default function App() {
         <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/register" element={<RegisterPage />} />
+        <Route path="/register/role" element={<RoleSetupPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/profile" element={<ProfilePage />} />
+        <Route path="/dashboard" element={<DashboardRedirect />} />
+        <Route path="/student" element={<StudentDashboardPage />} />
+        <Route path="/teacher" element={<TeacherDashboardPage />} />
+        <Route path="/guardian" element={<GuardianDashboardPage />} />
         <Route path="/teacher/register" element={<TeacherRegisterPage />} />
         <Route path="/directory" element={<DirectoryPage />} />
         <Route path="/subjects/:subjectId" element={<SubjectPage />} />

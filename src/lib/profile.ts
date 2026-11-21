@@ -6,17 +6,31 @@
 // allow the owner to write:
 //
 // - CREATE (first sign-in): displayName (non-empty, <=100), email,
-//   role == 'student', language in ['bn','en'], createdAt / updatedAt /
-//   lastActiveAt. The rules DENY create when `isActive` or
+//   role in ['student', 'teacher', 'parent'] (Step 5 role-based
+//   accounts — NEVER 'admin'/'moderator'/'owner' at creation; the rules
+//   deny those), language in ['bn','en'], createdAt / updatedAt /
+//   lastActiveAt, plus the academic fields the user chose at
+//   registration (educationType, board, institution, academicYear,
+//   program, department, classLevel, semester, academicSession,
+//   curriculum, phone, teachingLevel, subjects, qualifications,
+//   experienceYears). The rules DENY create when `isActive` or
 //   `verificationStatus` is present in the document — so this module does
 //   NOT write either of them. (The plan Step 1 text and the schema example
 //   show `isActive: true` at creation, but the committed rule forbids it;
 //   the rule wins. The app treats a MISSING isActive as active — an
 //   account is suspended only when isActive is explicitly `false`.)
+//   A teacher created here is UNVERIFIED (verificationStatus is set only
+//   by the Admin decision in admin.ts, never at registration).
 // - UPDATE (owner): only displayName, educationType, board, institution,
-//   academicYear, program, department, classLevel, language, lastActiveAt,
+//   academicYear, program, department, classLevel, semester,
+//   academicSession, curriculum, phone, teachingLevel, subjects,
+//   qualifications, experienceYears, language, lastActiveAt,
 //   updatedAt. Role, verificationStatus and isActive can never be changed
 //   by the owner — only Admin/Owner (see firestore.rules).
+//   Changing class/subject NEVER deletes progress, bookmarks, results or
+//   learning history: progress is keyed to content IDs (book/chapter/
+//   lesson), not to the profile — the profile only decides what is
+//   SHOWN, never what is KEPT.
 
 import { FirebaseError } from 'firebase/app';
 import type { User } from 'firebase/auth';
@@ -34,6 +48,10 @@ export type EducationType = 'general' | 'madrasa' | 'technical' | 'higher' | 'ot
 
 export type UserRole = 'owner' | 'admin' | 'moderator' | 'teacher' | 'student' | 'parent';
 
+/** Verification state of a teacher (admin-set only, mirrored from the
+ * teacherVerifications decision). 'pending' = registered, not approved. */
+export type VerificationStatus = 'pending' | 'verified' | 'rejected' | 'revoked';
+
 export interface UserProfile {
   displayName: string;
   email: string;
@@ -45,6 +63,23 @@ export interface UserProfile {
   program?: string | null;
   department?: string | null;
   classLevel?: string | null;
+  /** Honours / semester-based programmes: '1st Semester', '2nd Semester', … */
+  semester?: string | null;
+  /** Academic session, e.g. '2025-26'. Profile-only: books carry no session. */
+  academicSession?: string | null;
+  /** Curriculum / syllabus, e.g. 'NCTB 2023', 'NU 2013-14'. */
+  curriculum?: string | null;
+  /** Guardian-required phone (guardian accounts). Owner-editable by self. */
+  phone?: string | null;
+  /** Teacher-only: teaching level, e.g. 'SSC', 'HSC', 'Honours'. */
+  teachingLevel?: string | null;
+  /** Teacher-only: subjects the teacher teaches (the REQUEST — approval
+   * lives in the teacherVerifications record, not here). */
+  subjects?: string[] | null;
+  /** Teacher-only: qualifications, free text. */
+  qualifications?: string | null;
+  /** Teacher-only: years of teaching experience. */
+  experienceYears?: number | null;
   language: 'bn' | 'en';
   createdAt?: Timestamp | null;
   updatedAt?: Timestamp | null;
@@ -55,6 +90,10 @@ export interface UserProfile {
   suspendedReason?: string;
   /** Admin-set only; the client never writes this field. */
   verificationStatus?: string;
+  /** Admin-set only: uid of the admin who verified this teacher. */
+  verifiedBy?: string | null;
+  /** Admin-set only: when the teacher was verified. */
+  verifiedAt?: Timestamp | null;
 }
 
 /** Fields the owner may edit on their own profile (rules allowlist). */
@@ -67,6 +106,14 @@ export interface ProfileEdit {
   program?: string | null;
   department?: string | null;
   classLevel?: string | null;
+  semester?: string | null;
+  academicSession?: string | null;
+  curriculum?: string | null;
+  phone?: string | null;
+  teachingLevel?: string | null;
+  subjects?: string[] | null;
+  qualifications?: string | null;
+  experienceYears?: number | null;
   language?: 'bn' | 'en';
 }
 
@@ -79,6 +126,14 @@ const EDITABLE_KEYS: (keyof ProfileEdit)[] = [
   'program',
   'department',
   'classLevel',
+  'semester',
+  'academicSession',
+  'curriculum',
+  'phone',
+  'teachingLevel',
+  'subjects',
+  'qualifications',
+  'experienceYears',
   'language',
 ];
 
@@ -112,6 +167,16 @@ export async function getUserProfile(db: Firestore, uid: string): Promise<UserPr
   return data;
 }
 
+export interface EnsureProfileOptions {
+  /** Role chosen at registration. Defaults to 'student'. Admin /
+   * moderator / owner are rejected here (and by the rules) — they are
+   * never a registration choice. */
+  role?: 'student' | 'teacher' | 'parent';
+  /** Academic fields chosen at registration (only the rules-allowlisted
+   * ones are written; anything else is dropped silently). */
+  fields?: Partial<ProfileEdit>;
+}
+
 /**
  * Create the `users/{uid}` document on first sign-in, or return the
  * existing one. `preferredDisplayName` (typed at registration) wins over
@@ -123,6 +188,7 @@ export async function ensureUserProfile(
   db: Firestore,
   user: User,
   preferredDisplayName?: string,
+  options?: EnsureProfileOptions,
 ): Promise<{ profile: UserProfile; created: boolean }> {
   const existing = await getUserProfile(db, user.uid);
   if (existing) return { profile: existing, created: false };
@@ -130,15 +196,35 @@ export async function ensureUserProfile(
   const displayName = (preferredDisplayName ?? user.displayName ?? '').trim() || fallbackDisplayName(user);
   // NOTE: no `isActive`, no `verificationStatus` — the security rules deny
   // create when either is present (see the module header).
-  const data = {
+  const role = options?.role ?? 'student';
+  const data: Record<string, unknown> = {
     displayName: displayName.slice(0, 100),
     email: user.email ?? '',
-    role: 'student' as const,
+    role,
     language: 'bn' as const,
     createdAt: serverTimestamp(),
     updatedAt: serverTimestamp(),
     lastActiveAt: serverTimestamp(),
   };
+  // Registration-time academic fields (allowlisted only).
+  const f = options?.fields;
+  if (f) {
+    for (const key of EDITABLE_KEYS) {
+      if (key === 'displayName' || key === 'language') continue;
+      const v = f[key];
+      if (v === undefined) continue;
+      if (key === 'subjects') {
+        if (Array.isArray(v)) data[key] = v.slice(0, 20).map((s) => String(s).slice(0, 100));
+        continue;
+      }
+      if (key === 'experienceYears') {
+        if (typeof v === 'number' && Number.isFinite(v)) data[key] = Math.max(0, Math.min(60, Math.floor(v)));
+        continue;
+      }
+      data[key] = v === '' ? null : v;
+    }
+    if (f.language) data.language = f.language;
+  }
   await setDoc(doc(db, 'users', user.uid), data);
   const created = await getUserProfile(db, user.uid);
   if (!created) throw new Error('profile-create-failed');
