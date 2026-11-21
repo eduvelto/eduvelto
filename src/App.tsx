@@ -25,6 +25,7 @@ import AdminTeachersPage from './pages/AdminTeachersPage';
 import AdminFeaturesPage from './pages/AdminFeaturesPage';
 import AdminBackupPage from './pages/AdminBackupPage';
 import AdminAuditPage from './pages/AdminAuditPage';
+import AdminTeamPage from './pages/AdminTeamPage';
 import { AdminGuard } from './components/AdminGuard';
 import AiTeacherPage from './pages/AiTeacherPage';
 import ExamPage from './pages/ExamPage';
@@ -165,6 +166,7 @@ export default function App() {
         <Route path="/admin/features" element={<AdminGuard><AdminFeaturesPage /></AdminGuard>} />
         <Route path="/admin/backup" element={<AdminGuard><AdminBackupPage /></AdminGuard>} />
         <Route path="/admin/audit" element={<AdminGuard><AdminAuditPage /></AdminGuard>} />
+        <Route path="/admin/team" element={<AdminGuard><AdminTeamPage /></AdminGuard>} />
         <Route path="/ai-teacher" element={<AiTeacherPage />} />
         <Route path="/exam" element={<ExamPage />} />
         <Route path="/routine" element={<RoutinePage />} />

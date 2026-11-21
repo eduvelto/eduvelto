@@ -150,12 +150,12 @@ export default function AdminPage() {
     },
     {
       id: 'roles',
-      titleBn: 'অ্যাডমিন + স্টাফের ভূমিকা',
-      titleEn: 'Admin + staff roles',
-      descBn: 'কার কী ভূমিকা — ব্যবহারকারী পাতা থেকে বদলান।',
-      descEn: 'Who has which role — change it from the Users page.',
+      titleBn: 'অ্যাডমিন + স্টাফের দল',
+      titleEn: 'Admin + staff team',
+      descBn: 'বিশ্বস্ত ব্যক্তিদের সেক্টর + অনুমতি দিন — সম্পূর্ণ নিয়ন্ত্রণ আপনার।',
+      descEn: 'Give trusted people sectors + permissions — full control stays with you.',
       status: 'working',
-      to: '/admin/users',
+      to: '/admin/team',
     },
     {
       id: 'backup',

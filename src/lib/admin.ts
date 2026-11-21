@@ -297,6 +297,19 @@ export const AUDIT_ACTION_LABELS: Record<string, { bn: string; en: string }> = {
   'support-message-sent': { bn: 'সাপোর্ট মেসেজ পাঠানো', en: 'Support message sent' },
   'message-reported': { bn: 'মেসেজ রিপোর্ট', en: 'Message reported' },
   'message-blocked': { bn: 'মেসেজ ব্লক', en: 'Message blocked' },
+  // Admin & Management Team System (owner brief 21 Nov 08:31).
+  'admin-assigned': { bn: 'অ্যাডমিন নিয়োগ', en: 'Admin assigned' },
+  'admin-permissions-changed': { bn: 'অ্যাডমিন অনুমতি পরিবর্তন', en: 'Admin permissions changed' },
+  'admin-suspended': { bn: 'অ্যাডমিন স্থগিত', en: 'Admin suspended' },
+  'admin-reactivated': { bn: 'অ্যাডমিন আবার চালু', en: 'Admin reactivated' },
+  'admin-removed': { bn: 'অ্যাডমিন অপসারণ', en: 'Admin removed' },
+  'admin-access-revoked-all': { bn: 'সব প্রতিনিধি-অ্যাক্সেস বাতিল', en: 'All delegated access revoked' },
+  'admin-temporary-access-granted': { bn: 'অস্থায়ী অ্যাক্সেস দেওয়া', en: 'Temporary access granted' },
+  'moderation-approved': { bn: 'পোস্ট অনুমোদন', en: 'Post approved' },
+  'moderation-rejected': { bn: 'পোস্ট ফেরত', en: 'Post sent back' },
+  'moderation-removed': { bn: 'পোস্ট সরানো', en: 'Post removed' },
+  'content-published': { bn: 'কনটেন্ট প্রকাশ', en: 'Content published' },
+  'content-unpublished': { bn: 'কনটেন্ট অপ্রকাশিত', en: 'Content unpublished' },
 };
 
 export function auditActionLabel(action: string): { bn: string; en: string } {
@@ -313,7 +326,12 @@ export interface AuditEntryOptions {
   reason?: string;
 }
 
-function auditEntryData(
+/**
+ * Build one audit-log entry. Exported for adminTeam.ts so a team action
+ * and its audit entry are written in ONE batch (an action must never
+ * happen with no audit trail — same pattern as setUserActive/setUserRole).
+ */
+export function auditEntryData(
   actorUid: string,
   action: string,
   details: string,
