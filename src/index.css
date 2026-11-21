@@ -1,0 +1,414 @@
+/* Eduvelto premium design system — ui/premium-polish.
+ *
+ * Approved palette (brand guide 20 Nov 2026, exact):
+ *   Deep Navy #0A1F44 · Dark Navy #041742 · Bright Blue #1E7CE8
+ *   Orange/Gold #F5A623 · Star Gold #F1B308 · White #FFFFFF — NO GREEN.
+ * Typography: Poppins (English headings) + Hind Siliguri (Bangla),
+ * loaded via <link> in index.html with system fallbacks, so the app still
+ * renders offline (PWA) when the font CDN is unreachable.
+ */
+
+:root {
+  --navy: #0a1f44;
+  --navy-dark: #041742;
+  --blue: #1e7ce8;
+  --blue-soft: #e8effa;
+  --blue-softer: #eef3fb;
+  --gold: #f5a623;
+  --star: #f1b308;
+  --gold-soft: #fdf3d0;
+  --ink: #1c2333;
+  --muted: #5a6478;
+  --line: #e3e8f0;
+  --line-strong: #c9d2e0;
+  --bg: #f7f9fc;
+  --card: #ffffff;
+  --error: #b00020;
+  --error-bg: #fdf0f0;
+  --ok-blue: #1e7ce8;
+  --ok-blue-bg: #e8effa;
+  --radius: 12px;
+  --radius-sm: 8px;
+  --shadow-sm: 0 1px 2px rgba(4, 23, 66, 0.06), 0 1px 3px rgba(4, 23, 66, 0.08);
+  --shadow-md: 0 4px 12px rgba(4, 23, 66, 0.1), 0 2px 4px rgba(4, 23, 66, 0.08);
+  --shadow-lg: 0 12px 32px rgba(4, 23, 66, 0.16);
+  --font-head: 'Poppins', 'Hind Siliguri', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-body: 'Hind Siliguri', 'Noto Sans Bengali', system-ui, -apple-system, 'Segoe UI', sans-serif;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--ink);
+  background: var(--bg);
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-head);
+  line-height: 1.35;
+  color: var(--navy);
+}
+
+a {
+  color: var(--blue);
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+
+/* ---- Page enter animation (lightweight, skipped for reduced motion) ---- */
+@keyframes ev-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.ev-page {
+  animation: ev-fade-up 240ms ease-out;
+}
+
+/* ---- Skeleton shimmer ---- */
+@keyframes ev-shimmer {
+  from {
+    background-position: 200% 0;
+  }
+  to {
+    background-position: -200% 0;
+  }
+}
+.ev-skeleton {
+  border-radius: var(--radius-sm);
+  background: linear-gradient(90deg, #edf1f7 25%, #f7f9fc 50%, #edf1f7 75%);
+  background-size: 200% 100%;
+  animation: ev-shimmer 1.4s ease-in-out infinite;
+}
+
+/* ---- Buttons ---- */
+.ev-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 10px 20px;
+  border-radius: 10px;
+  border: 1px solid transparent;
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.4;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background-color 120ms ease, border-color 120ms ease, box-shadow 120ms ease,
+    transform 80ms ease;
+  -webkit-tap-highlight-color: transparent;
+}
+.ev-btn:hover {
+  text-decoration: none;
+}
+.ev-btn:active {
+  transform: translateY(1px);
+}
+.ev-btn:focus-visible {
+  outline: 3px solid var(--star);
+  outline-offset: 2px;
+}
+.ev-btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  transform: none;
+}
+.ev-btn-primary {
+  background: var(--navy);
+  color: #fff;
+}
+.ev-btn-primary:hover {
+  background: var(--navy-dark);
+  box-shadow: var(--shadow-sm);
+}
+.ev-btn-accent {
+  background: var(--blue);
+  color: #fff;
+}
+.ev-btn-accent:hover {
+  background: #1668c4;
+  box-shadow: var(--shadow-sm);
+}
+.ev-btn-gold {
+  background: var(--gold);
+  color: var(--navy-dark);
+}
+.ev-btn-gold:hover {
+  background: #e0951a;
+  box-shadow: var(--shadow-sm);
+}
+.ev-btn-outline {
+  background: #fff;
+  border-color: var(--navy);
+  color: var(--navy);
+}
+.ev-btn-outline:hover {
+  background: var(--blue-softer);
+}
+.ev-btn-danger {
+  background: var(--error);
+  color: #fff;
+}
+.ev-btn-danger:hover {
+  background: #8f001a;
+}
+.ev-btn-ghost {
+  background: transparent;
+  color: var(--navy);
+}
+.ev-btn-ghost:hover {
+  background: var(--blue-softer);
+}
+.ev-btn-sm {
+  min-height: 40px;
+  padding: 8px 14px;
+  font-size: 14px;
+}
+.ev-btn-lg {
+  min-height: 52px;
+  padding: 12px 28px;
+  font-size: 16px;
+}
+.ev-btn-block {
+  width: 100%;
+}
+
+/* Small spinner used inside loading buttons. */
+@keyframes ev-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+.ev-spinner {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.45);
+  border-top-color: #fff;
+  animation: ev-spin 700ms linear infinite;
+  flex: none;
+}
+.ev-spinner-dark {
+  border-color: rgba(10, 31, 68, 0.25);
+  border-top-color: var(--navy);
+}
+
+/* ---- Cards ---- */
+.ev-card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+  padding: 16px;
+}
+.ev-card-hover {
+  transition: box-shadow 150ms ease, transform 150ms ease, border-color 150ms ease;
+}
+.ev-card-hover:hover {
+  box-shadow: var(--shadow-md);
+  border-color: var(--line-strong);
+  transform: translateY(-1px);
+}
+
+/* ---- Form controls ---- */
+.ev-input,
+.ev-select,
+.ev-textarea {
+  width: 100%;
+  min-height: 44px;
+  padding: 10px 12px;
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--ink);
+  background: #fff;
+  border: 1px solid var(--line-strong);
+  border-radius: 10px;
+  transition: border-color 120ms ease, box-shadow 120ms ease;
+}
+.ev-input:focus,
+.ev-select:focus,
+.ev-textarea:focus {
+  border-color: var(--blue);
+  box-shadow: 0 0 0 3px rgba(30, 124, 232, 0.18);
+  outline: none;
+}
+.ev-input::placeholder,
+.ev-textarea::placeholder {
+  color: #8a94a8;
+}
+.ev-textarea {
+  min-height: 110px;
+  resize: vertical;
+}
+.ev-label {
+  display: block;
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--navy);
+  margin-bottom: 6px;
+}
+
+/* ---- Chips / badges ---- */
+.ev-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.5;
+  background: var(--blue-soft);
+  color: var(--navy);
+  white-space: nowrap;
+}
+.ev-chip-gold {
+  background: var(--gold-soft);
+  color: #7a5200;
+}
+.ev-chip-navy {
+  background: var(--navy);
+  color: #fff;
+}
+.ev-chip-outline {
+  background: #fff;
+  border: 1px solid var(--line-strong);
+  color: var(--muted);
+}
+
+/* ---- Alerts ---- */
+.ev-alert {
+  border-radius: var(--radius-sm);
+  padding: 12px 14px;
+  font-size: 15px;
+  line-height: 1.55;
+  margin: 0 0 16px;
+}
+.ev-alert-error {
+  background: var(--error-bg);
+  border: 1px solid #f3c1c8;
+  color: #7a0013;
+}
+.ev-alert-ok {
+  background: var(--ok-blue-bg);
+  border: 1px solid #bcd7f7;
+  color: var(--navy);
+}
+.ev-alert-info {
+  background: var(--blue-softer);
+  border: 1px solid #d3e2f7;
+  color: var(--navy);
+}
+
+/* ---- Progress bar ---- */
+.ev-progress {
+  height: 8px;
+  border-radius: 999px;
+  background: #e6ebf2;
+  overflow: hidden;
+}
+.ev-progress > span {
+  display: block;
+  height: 100%;
+  border-radius: 999px;
+  background: var(--blue);
+  transition: width 400ms ease;
+}
+.ev-progress-gold > span {
+  background: var(--gold);
+}
+
+/* ---- Header nav link ---- */
+.ev-navlink {
+  color: #fff;
+  padding: 10px 8px;
+  border-radius: 8px;
+  font-size: 15px;
+  text-decoration: none;
+  transition: background-color 120ms ease;
+  white-space: nowrap;
+}
+.ev-navlink:hover {
+  background: rgba(255, 255, 255, 0.12);
+  text-decoration: none;
+}
+.ev-navlink-active {
+  background: rgba(255, 255, 255, 0.16);
+  box-shadow: inset 0 -3px 0 var(--star);
+}
+
+/* ---- App header (navy) ---- */
+.ev-header {
+  background: #0a1f44;
+  color: #fff;
+  padding: 10px 16px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 16px;
+  align-items: center;
+  box-shadow: 0 2px 8px rgba(4, 23, 66, 0.25);
+}
+.ev-header-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px 4px;
+  margin-left: auto;
+  align-items: center;
+}
+.ev-btn-header {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.65);
+  color: #fff;
+}
+.ev-btn-header:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: #fff;
+}
+@media (max-width: 560px) {
+  .ev-header {
+    padding: 10px 12px;
+    gap: 8px 12px;
+  }
+  .ev-header-nav {
+    margin-left: 0;
+  }
+}
+
+/* ---- Reduced motion: respect the OS setting everywhere ---- */
+@media (prefers-reduced-motion: reduce) {
+  .ev-page,
+  .ev-skeleton,
+  .ev-spinner,
+  .ev-progress > span,
+  .ev-card-hover,
+  .ev-btn {
+    animation: none !important;
+    transition: none !important;
+  }
+}

@@ -6,6 +6,7 @@
 import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { PageShell } from '../components/PageShell';
+import { AlertBox, Skeleton } from '../components/ui';
 import LessonReader from '../components/LessonReader';
 import {
   getPublishedBook,
@@ -52,12 +53,12 @@ export default function ChapterPage() {
 
   return (
     <PageShell titleBn={lesson ? lesson.title : 'পাঠ'} titleEn={lesson ? 'Lesson' : 'Lesson'}>
-      {!loaded ? <p>লোড হচ্ছে… / Loading…</p> : null}
+      {!loaded ? <Skeleton lines={5} /> : null}
       {error ? (
-        <p style={{ color: '#b00020' }}>
+        <AlertBox tone="error">
           {error}{' '}
           {bookId ? <Link to={`/library/${bookId}`}>← বইয়ে ফিরুন / Back to the book</Link> : null}
-        </p>
+        </AlertBox>
       ) : null}
       {lesson && book ? (
         <LessonReader

@@ -48,42 +48,46 @@ export default function AboutPage() {
         স্মার্ট পড়ার পরিকল্পনা এক জায়গায় — বাংলায় ও ইংরেজিতে — যাতে দেশের যেকোনো প্রান্তের
         শিক্ষার্থী শিখতে, এগিয়ে যেতে ও স্বপ্ন গড়তে পারে।
       </p>
-      <h2 style={{ fontSize: 19, margin: '24px 0 8px' }}>যা যা আছে / What Eduvelto offers</h2>
-      <ul style={{ lineHeight: 1.8 }}>
-        <li>
-          <Link to="/library">ডিজিটাল লাইব্রেরি / Digital Library</Link> — বই, প্রশ্নোত্তর ও সহজ
-          ব্যাখ্যাসহ পরীক্ষার প্রস্তুতি (অনার্স, আলিম, এইচএসসি, এসএসসি ও কারিগরি)।
-        </li>
-        <li>
-          <Link to="/directory">শিক্ষা নির্দেশিকা / Education Directory</Link> — ধাপে ধাপে বিষয়
-          ও বই খুঁজুন: শিক্ষার ধারা → বোর্ড → প্রোগ্রাম → শ্রেণি → বিষয়।
-        </li>
-        <li>
-          <Link to="/exam">পরীক্ষা / Exams</Link> — বিনামূল্যে পরীক্ষা ও ফলাফল।
-        </li>
-        <li>
-          <Link to="/routine">রুটিন / Study Routine</Link> — স্মার্ট পড়ার পরিকল্পনা।
-        </li>
-        <li>ব্যক্তিগত AI শিক্ষক — শিগগিরই আসছে। / Personal AI Teacher — coming soon.</li>
-      </ul>
+      <h2 style={{ fontFamily: "'Poppins','Hind Siliguri',system-ui,sans-serif", fontSize: 20, color: '#0A1F44', margin: '28px 0 12px' }}>যা যা আছে / What Eduvelto offers</h2>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(240px, 1fr))', gap: 12 }}>
+        <div className="ev-card ev-card-hover">
+          <Link to="/library" style={{ fontWeight: 700, color: '#0A1F44' }}>ডিজিটাল লাইব্রেরি / Digital Library</Link>
+          <p style={{ margin: '6px 0 0', color: '#5A6478', fontSize: 14 }}>বই, প্রশ্নোত্তর ও সহজ ব্যাখ্যাসহ পরীক্ষার প্রস্তুতি (অনার্স, আলিম, এইচএসসি, এসএসসি ও কারিগরি)।</p>
+        </div>
+        <div className="ev-card ev-card-hover">
+          <Link to="/directory" style={{ fontWeight: 700, color: '#0A1F44' }}>শিক্ষা নির্দেশিকা / Education Directory</Link>
+          <p style={{ margin: '6px 0 0', color: '#5A6478', fontSize: 14 }}>ধাপে ধাপে বিষয় ও বই খুঁজুন: শিক্ষার ধারা → বোর্ড → প্রোগ্রাম → শ্রেণি → বিষয়।</p>
+        </div>
+        <div className="ev-card ev-card-hover">
+          <Link to="/exam" style={{ fontWeight: 700, color: '#0A1F44' }}>পরীক্ষা / Exams</Link>
+          <p style={{ margin: '6px 0 0', color: '#5A6478', fontSize: 14 }}>বিনামূল্যে পরীক্ষা ও ফলাফল।</p>
+        </div>
+        <div className="ev-card ev-card-hover">
+          <Link to="/routine" style={{ fontWeight: 700, color: '#0A1F44' }}>রুটিন / Study Routine</Link>
+          <p style={{ margin: '6px 0 0', color: '#5A6478', fontSize: 14 }}>স্মার্ট পড়ার পরিকল্পনা — শীঘ্রই আসছে। / Coming soon.</p>
+        </div>
+        <div className="ev-card">
+          <strong style={{ color: '#0A1F44' }}>ব্যক্তিগত AI শিক্ষক / Personal AI Teacher</strong>
+          <p style={{ margin: '6px 0 0', color: '#5A6478', fontSize: 14 }}>শিগগিরই আসছে। / Coming soon.</p>
+        </div>
+      </div>
 
-      <h2 style={{ fontSize: 19, margin: '28px 0 12px' }}>প্রতিষ্ঠাতা / Founder</h2>
+      <h2 style={{ fontFamily: "'Poppins','Hind Siliguri',system-ui,sans-serif", fontSize: 20, color: '#0A1F44', margin: '28px 0 12px' }}>প্রতিষ্ঠাতা / Founder</h2>
       <section
+        className="ev-card"
         style={{
           display: 'flex',
           gap: 20,
           flexWrap: 'wrap',
           alignItems: 'flex-start',
-          border: '1px solid #ddd',
-          borderRadius: 10,
           padding: 20,
-          background: '#f8f9fc',
+          background: '#F7F9FC',
         }}
       >
         <img
           src="/founder-photo.jpg"
           alt="Ali Hasan Mohammed Mizan, Founder & CEO, Eduvelto"
-          style={{ width: 160, height: 160, objectFit: 'cover', borderRadius: '50%' }}
+          style={{ width: 160, height: 160, objectFit: 'cover', borderRadius: '50%', border: '3px solid #F1B308' }}
         />
         <div style={{ flex: '1 1 320px', minWidth: 260 }}>
           <h3 style={{ margin: '0 0 4px', fontSize: 20 }}>

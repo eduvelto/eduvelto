@@ -4,47 +4,35 @@
 // class/year, department) and 20 books per page. One-time read (one
 // query); drafts are invisible by the rules. Search/filter/pagination
 // run client-side over that one fetch, so no composite index is needed.
+// (ui/premium-polish: filter card, book cards, skeletons, retry on error.)
 
 import { useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { PageShell, EmptyState } from '../components/PageShell';
+import { AlertBox, Button, Card, Chip, SkeletonCards } from '../components/ui';
 import AdSlot from '../components/AdSlot';
 import { listPublishedBooks, type Book } from '../lib/content';
 
 const PAGE_SIZE = 20;
 
-const selectStyle: React.CSSProperties = {
-  padding: '8px 10px',
-  minHeight: 44,
-  fontSize: 15,
-  border: '1px solid #999',
-  borderRadius: 6,
-  fontFamily: 'inherit',
-  background: '#fff',
-};
-
 export default function LibraryPage() {
   const [books, setBooks] = useState<Book[] | null>(null);
-  const [error, setError] = useState('');
+  const [error, setError] = useState(false);
   const [query, setQuery] = useState('');
   const [typeFilter, setTypeFilter] = useState('');
   const [classFilter, setClassFilter] = useState('');
   const [deptFilter, setDeptFilter] = useState('');
   const [page, setPage] = useState(1);
 
-  useEffect(() => {
-    let live = true;
+  function load() {
+    setError(false);
+    setBooks(null);
     listPublishedBooks()
-      .then((b) => {
-        if (live) setBooks(b);
-      })
-      .catch(() => {
-        if (live) setError('লাইব্রেরি লোড করা যায়নি — আবার চেষ্টা করুন। / Could not load the library — please try again.');
-      });
-    return () => {
-      live = false;
-    };
-  }, []);
+      .then((b) => setBooks(b))
+      .catch(() => setError(true));
+  }
+
+  useEffect(load, []);
 
   const types = useMemo(
     () => [...new Set((books ?? []).map((b) => b.educationType).filter(Boolean))].sort(),
@@ -84,124 +72,131 @@ export default function LibraryPage() {
   }
 
   return (
-    <PageShell titleBn="ডিজিটাল লাইব্রেরি" titleEn="Digital Library">
-      {error ? <p style={{ color: '#b00020' }}>{error}</p> : null}
-      {books === null && !error ? <p>লোড হচ্ছে… / Loading…</p> : null}
+    <PageShell titleBn="ডিজিটাল লাইব্রেরি" titleEn="Digital Library" wide>
+      {error ? (
+        <AlertBox tone="error" onRetry={load}>
+          লাইব্রেরি লোড করা যায়নি — আবার চেষ্টা করুন। / Could not load the library — please try again.
+        </AlertBox>
+      ) : null}
+      {books === null && !error ? <SkeletonCards count={4} /> : null}
       {books !== null && books.length === 0 ? (
         <EmptyState bn="এখনো কোনো বই প্রকাশিত হয়নি। কনটেন্ট প্রকাশিত হলে এখানে দেখা যাবে।" en="No books published yet. Content will appear here once it is published." />
       ) : null}
       {books !== null && books.length > 0 ? (
         <>
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, marginBottom: 12 }}>
-            <input
-              type="search"
-              value={query}
-              onChange={(e) => {
-                setQuery(e.target.value);
-                resetPage();
-              }}
-              placeholder="খুঁজুন — বইয়ের নাম, কোড বা বিষয় / Search title, code or subject"
-              aria-label="বই খুঁজুন / Search books"
-              style={{ ...selectStyle, flex: '1 1 240px' }}
-            />
-            <select
-              value={typeFilter}
-              onChange={(e) => {
-                setTypeFilter(e.target.value);
-                setClassFilter('');
-                setDeptFilter('');
-                resetPage();
-              }}
-              aria-label="শিক্ষার ধারা / Education type"
-              style={selectStyle}
-            >
-              <option value="">সব ধারা / All types</option>
-              {types.map((t) => (
-                <option key={t} value={t}>
-                  {t}
-                </option>
-              ))}
-            </select>
-            <select
-              value={classFilter}
-              onChange={(e) => {
-                setClassFilter(e.target.value);
-                setDeptFilter('');
-                resetPage();
-              }}
-              aria-label="শ্রেণি / Class"
-              style={selectStyle}
-            >
-              <option value="">সব শ্রেণি / All classes</option>
-              {classes.map((c) => (
-                <option key={c} value={c}>
-                  {c}
-                </option>
-              ))}
-            </select>
-            <select
-              value={deptFilter}
-              onChange={(e) => {
-                setDeptFilter(e.target.value);
-                resetPage();
-              }}
-              aria-label="বিষয় / Department"
-              style={selectStyle}
-            >
-              <option value="">সব বিষয় / All subjects</option>
-              {departments.map((d) => (
-                <option key={d} value={d}>
-                  {d}
-                </option>
-              ))}
-            </select>
-          </div>
-          <p style={{ color: '#555', margin: '0 0 12px' }}>
+          <Card style={{ marginBottom: 16 }}>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
+              <input
+                type="search"
+                value={query}
+                onChange={(e) => {
+                  setQuery(e.target.value);
+                  resetPage();
+                }}
+                placeholder="খুঁজুন — বইয়ের নাম, কোড বা বিষয় / Search title, code or subject"
+                aria-label="বই খুঁজুন / Search books"
+                className="ev-input"
+                style={{ flex: '1 1 240px' }}
+              />
+              <select
+                value={typeFilter}
+                onChange={(e) => {
+                  setTypeFilter(e.target.value);
+                  setClassFilter('');
+                  setDeptFilter('');
+                  resetPage();
+                }}
+                aria-label="শিক্ষার ধারা / Education type"
+                className="ev-select"
+                style={{ flex: '1 1 160px' }}
+              >
+                <option value="">সব ধারা / All types</option>
+                {types.map((t) => (
+                  <option key={t} value={t}>
+                    {t}
+                  </option>
+                ))}
+              </select>
+              <select
+                value={classFilter}
+                onChange={(e) => {
+                  setClassFilter(e.target.value);
+                  setDeptFilter('');
+                  resetPage();
+                }}
+                aria-label="শ্রেণি / Class"
+                className="ev-select"
+                style={{ flex: '1 1 160px' }}
+              >
+                <option value="">সব শ্রেণি / All classes</option>
+                {classes.map((c) => (
+                  <option key={c} value={c}>
+                    {c}
+                  </option>
+                ))}
+              </select>
+              <select
+                value={deptFilter}
+                onChange={(e) => {
+                  setDeptFilter(e.target.value);
+                  resetPage();
+                }}
+                aria-label="বিষয় / Department"
+                className="ev-select"
+                style={{ flex: '1 1 160px' }}
+              >
+                <option value="">সব বিষয় / All subjects</option>
+                {departments.map((d) => (
+                  <option key={d} value={d}>
+                    {d}
+                  </option>
+                ))}
+              </select>
+            </div>
+          </Card>
+          <p style={{ color: '#5A6478', margin: '0 0 12px' }}>
             {filtered.length}টি বই পাওয়া গেছে / {filtered.length} books found
             {filtered.length !== books.length ? ` (মোট ${books.length}টি প্রকাশিত / of ${books.length} published)` : ''}
           </p>
           {filtered.length === 0 ? (
             <p>এই খোঁজে কোনো বই পাওয়া যায়নি — ফিল্টার বদলে আবার চেষ্টা করুন। / No books match — try different filters.</p>
           ) : null}
-          <ul style={{ margin: 0, paddingLeft: 20 }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: 12 }}>
             {pageBooks.map((b) => (
-              <li key={b.id} style={{ marginBottom: 10, lineHeight: 1.5 }}>
-                <Link to={`/library/${b.id}`}>{b.title}</Link>
-                <span style={{ color: '#555', fontSize: 13 }}>
-                  {' '}· {b.paperCode} · {b.department} · {b.classLevel} · {b.chapterCount}টি পাঠ · {b.questionCount}টি প্রশ্ন
+              <Card key={b.id} hover>
+                <Link to={`/library/${b.id}`} style={{ fontWeight: 700, fontSize: 16, color: '#0A1F44', lineHeight: 1.5 }}>
+                  {b.title}
+                </Link>
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, marginTop: 10 }}>
+                  <Chip>{b.department}</Chip>
+                  <Chip tone="outline">{b.classLevel}</Chip>
+                  {b.paperCode ? <Chip tone="outline">কোড {b.paperCode}</Chip> : null}
+                </div>
+                <p style={{ margin: '10px 0 0', color: '#5A6478', fontSize: 14 }}>
+                  {b.chapterCount}টি পাঠ · {b.questionCount}টি প্রশ্ন
                   {b.bilingual ? ' · বাংলা উত্তরসহ' : ''}
-                </span>
-              </li>
+                </p>
+              </Card>
             ))}
-          </ul>
+          </div>
           {pageCount > 1 ? (
-            <div style={{ display: 'flex', gap: 12, alignItems: 'center', marginTop: 16 }}>
-              <button
-                type="button"
-                onClick={() => setPage((p) => Math.max(1, p - 1))}
-                disabled={safePage <= 1}
-                style={{ padding: '10px 16px', minHeight: 44, borderRadius: 6, border: '1px solid #0A1F44', background: '#fff', color: '#0A1F44', cursor: 'pointer' }}
-              >
+            <div style={{ display: 'flex', gap: 12, alignItems: 'center', marginTop: 20, flexWrap: 'wrap' }}>
+              <Button variant="outline" onClick={() => setPage((p) => Math.max(1, p - 1))} disabled={safePage <= 1}>
                 ← আগের / Previous
-              </button>
+              </Button>
               <span>
                 পাতা {safePage} / {pageCount} / Page {safePage} of {pageCount}
               </span>
-              <button
-                type="button"
-                onClick={() => setPage((p) => Math.min(pageCount, p + 1))}
-                disabled={safePage >= pageCount}
-                style={{ padding: '10px 16px', minHeight: 44, borderRadius: 6, border: '1px solid #0A1F44', background: '#fff', color: '#0A1F44', cursor: 'pointer' }}
-              >
+              <Button variant="outline" onClick={() => setPage((p) => Math.min(pageCount, p + 1))} disabled={safePage >= pageCount}>
                 পরের / Next →
-              </button>
+              </Button>
             </div>
           ) : null}
         </>
       ) : null}
       {/* First in-feed ad slot (library list page). Renders nothing until AdSense is configured. */}
       <AdSlot placement="in-feed" />
-      <p style={{ marginTop: 16 }}>
+      <p style={{ marginTop: 16, color: '#5A6478', fontSize: 14 }}>
         লাইব্রেরিতে বই, নোট ও প্রশ্নোত্তর যোগ করা হবে — নিচে স্ক্রল করলে আরও দেখা যাবে। / Books,
         notes and Q&A will be added to the library — scroll down to see more.
       </p>
