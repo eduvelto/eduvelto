@@ -34,7 +34,7 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useLanguage } from '../i18n/LanguageContext';
 import { Card, LinkButton, ProgressBar, SkeletonCards } from '../components/ui';
-import { EmptyAdminBox, ErrorBox, StatusPill, requireDb } from '../components/AdminShared';
+import { EmptyAdminBox, ErrorBox, requireDb } from '../components/AdminShared';
 import {
   auditActionLabel,
   domainDaysLeft,
