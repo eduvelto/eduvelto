@@ -102,12 +102,16 @@ export default function GuardianLinksPage() {
     );
   }
 
+  // `user` is narrowed non-null by the guards above; capture the uid
+  // once so the `act` closure below never sees a possibly-null user.
+  const uid = user.uid;
+
   async function act(linkId: string, fn: (db2: NonNullable<typeof db>, id: string, uid: string) => Promise<void>, next: ParentLink['status']): Promise<void> {
     if (!db) return;
     setBusy(linkId);
     setError(null);
     try {
-      await fn(db, linkId, user.uid);
+      await fn(db, linkId, uid);
       setLinks((ls) => (ls ?? []).map((l) => (l.id === linkId ? { ...l, status: next } : l)));
     } catch (err) {
       setError(err instanceof Error ? err.message : 'কাজটি করা যায়নি। / Could not complete this action.');

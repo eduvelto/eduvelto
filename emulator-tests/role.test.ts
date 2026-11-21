@@ -26,6 +26,11 @@
  *             yes; users doc / quizAttempts / unlinked / revoked no)
  *  (r51–r53) profile-filtered content queries (only matching books;
  *             wrong-class books never returned; drafts hidden)
+ *  (r54–r66) verification implementation (guardian info required;
+ *             admin reject with reason; child reject; admin revoke;
+ *             guardian-link audit entries; teacher-change audit enum;
+ *             teacher re-application with post + institutionContact)
+ *  (r67)     missing-doc read (first-time teacher, no application yet)
  */
 import { describe, it, beforeAll, afterAll } from 'vitest';
 import {
@@ -639,6 +644,9 @@ describe('Eduvelto role-based dashboards rules', () => {
         parentId: 'guardian-2',
         studentId: 'student-2',
         status: 'pending',
+        guardianDisplayName: 'Guardian Two',
+        relationship: 'Mother',
+        guardianContact: '01700000002',
         childDisplayName: 'Student Two',
         childClassLevel: 'Class 5',
         childInstitution: 'Test School',
@@ -651,6 +659,8 @@ describe('Eduvelto role-based dashboards rules', () => {
         parentId: 'guardian-2',
         studentId: 'student-2',
         status: 'pending',
+        guardianDisplayName: 'Guardian Two',
+        relationship: 'Mother',
         childDisplayName: 'Student Two',
         childClassLevel: 'Class 5',
       }),
@@ -662,6 +672,8 @@ describe('Eduvelto role-based dashboards rules', () => {
         parentId: 'guardian-1',
         studentId: 'student-2',
         status: 'pending',
+        guardianDisplayName: 'Guardian Two',
+        relationship: 'Mother',
         childDisplayName: 'Student Two',
         childClassLevel: 'Class 5',
       }),
@@ -673,6 +685,8 @@ describe('Eduvelto role-based dashboards rules', () => {
         parentId: 'guardian-2',
         studentId: 'guardian-2',
         status: 'pending',
+        guardianDisplayName: 'Guardian Two',
+        relationship: 'Mother',
         childDisplayName: 'Self',
         childClassLevel: 'Class 5',
       }),
@@ -828,5 +842,197 @@ describe('Eduvelto role-based dashboards rules', () => {
   it('(r53) unauthenticated read of a Published book is ALLOWED; draft is DENIED', async () => {
     await assertSucceeds(getDoc(doc(unauth(), 'books', 'book-higher-eng-1')));
     await assertFails(getDoc(doc(unauth(), 'books', 'book-draft')));
+  });
+
+  // ---- verification implementation (r54–r66, owner order 21 Nov 07:36) ----
+  // Guardian request must carry the guardian's own name + relationship.
+  it('(r54) link request WITHOUT the guardian name is DENIED', async () => {
+    await assertFails(
+      setDoc(doc(as('guardian-2'), 'parentLinks', 'guardian-2_child-1'), {
+        parentId: 'guardian-2',
+        studentId: 'child-1',
+        status: 'pending',
+        relationship: 'Mother',
+        childDisplayName: 'Child One',
+        childClassLevel: 'Class 6',
+      }),
+    );
+  });
+  it('(r55) link request WITHOUT the relationship is DENIED', async () => {
+    await assertFails(
+      setDoc(doc(as('guardian-2'), 'parentLinks', 'guardian-2_child-1'), {
+        parentId: 'guardian-2',
+        studentId: 'child-1',
+        status: 'pending',
+        guardianDisplayName: 'Guardian Two',
+        childDisplayName: 'Child One',
+        childClassLevel: 'Class 6',
+      }),
+    );
+  });
+  // Admin reject: (r41) left guardian-2_student-1 pending.
+  it('(r56) ADMIN rejects a pending link with a reason — ALLOWED', async () => {
+    await assertSucceeds(
+      updateDoc(doc(as('admin-1'), 'parentLinks', 'guardian-2_student-1'), {
+        status: 'rejected',
+        decidedBy: 'admin-1',
+        decisionReason: 'Information did not match the school record.',
+        rejectedAt: new Date(),
+        updatedAt: new Date(),
+      }),
+    );
+  });
+  // (r31) left guardian-2_student-2 pending.
+  it('(r57) ADMIN rejecting WITHOUT a reason is DENIED', async () => {
+    await assertFails(
+      updateDoc(doc(as('admin-1'), 'parentLinks', 'guardian-2_student-2'), {
+        status: 'rejected',
+        decidedBy: 'admin-1',
+        rejectedAt: new Date(),
+        updatedAt: new Date(),
+      }),
+    );
+  });
+  it('(r58) CHILD rejects a pending link (pending -> revoked) — ALLOWED', async () => {
+    await assertSucceeds(
+      updateDoc(doc(as('student-2'), 'parentLinks', 'guardian-2_student-2'), {
+        status: 'revoked',
+        revokedAt: new Date(),
+        updatedAt: new Date(),
+      }),
+    );
+  });
+  it('(r59) ADMIN revokes a VERIFIED link — ALLOWED', async () => {
+    await assertSucceeds(
+      updateDoc(doc(as('admin-1'), 'parentLinks', 'guardian-1_child-1'), {
+        status: 'revoked',
+        revokedAt: new Date(),
+        updatedAt: new Date(),
+      }),
+    );
+  });
+  // Guardian-link audit entries (self-service clause).
+  it('(r60) GUARDIAN writes a guardian-link-requested audit entry — ALLOWED', async () => {
+    await assertSucceeds(
+      addDoc(collection(as('guardian-1'), 'adminActions'), {
+        actorId: 'guardian-1',
+        action: 'guardian-link-requested',
+        details: 'Guardian One (Father) → Child One (Class 6)',
+        targetId: 'guardian-1_child-1',
+        before: 'none',
+        after: 'pending',
+        createdAt: new Date(),
+      }),
+    );
+  });
+  it('(r61) CHILD writes a guardian-link-confirmed audit entry — ALLOWED', async () => {
+    await assertSucceeds(
+      addDoc(collection(as('child-1'), 'adminActions'), {
+        actorId: 'child-1',
+        action: 'guardian-link-confirmed',
+        details: 'Child confirmed guardian link guardian-1_child-1',
+        targetId: 'guardian-1_child-1',
+        before: 'pending',
+        after: 'confirmed',
+        createdAt: new Date(),
+      }),
+    );
+  });
+  it('(r62) a forged audit action by a student is DENIED', async () => {
+    await assertFails(
+      addDoc(collection(as('student-1'), 'adminActions'), {
+        actorId: 'student-1',
+        action: 'user-role-change',
+        details: 'forged',
+        targetId: 'guardian-1_child-1',
+        before: 'student',
+        after: 'admin',
+        createdAt: new Date(),
+      }),
+    );
+  });
+  it('(r63) an audit entry with a malformed link targetId is DENIED', async () => {
+    await assertFails(
+      addDoc(collection(as('guardian-1'), 'adminActions'), {
+        actorId: 'guardian-1',
+        action: 'guardian-link-requested',
+        details: 'malformed target',
+        targetId: 'not-a-link-id',
+        before: 'none',
+        after: 'pending',
+        createdAt: new Date(),
+      }),
+    );
+  });
+  // The teacher-change audit enum fix: decideTeacherChangeRequest writes
+  // these actions — before the fix the whole decide batch was denied.
+  it('(r64) ADMIN writes a teacher-change-approved audit entry — ALLOWED', async () => {
+    await assertSucceeds(
+      addDoc(collection(as('admin-1'), 'adminActions'), {
+        actorId: 'admin-1',
+        action: 'teacher-change-approved',
+        details: 'teacher-1 — approved by admin',
+        targetId: 'tcr-1',
+        before: 'pending',
+        after: 'approved',
+        reason: 'Subjects match the institution record.',
+        createdAt: new Date(),
+      }),
+    );
+  });
+  it('(r65) ADMIN writes a guardian-link-approved audit entry — ALLOWED', async () => {
+    await assertSucceeds(
+      addDoc(collection(as('admin-1'), 'adminActions'), {
+        actorId: 'admin-1',
+        action: 'guardian-link-approved',
+        details: 'Guardian One → Child One — information matches.',
+        targetId: 'guardian-1_child-1',
+        before: 'confirmed',
+        after: 'verified',
+        reason: 'Information matches the school record.',
+        createdAt: new Date(),
+      }),
+    );
+  });
+  // Teacher application with the new post + institutionContact fields:
+  // (r21) already re-applied teacher-3's record (status is now
+  // 'pending'), so reset it to 'rejected' with rules disabled first —
+  // the reset is test setup; the updateDoc below is what is tested.
+  it('(r66) teacher re-application WITH post + institutionContact — ALLOWED', async () => {
+    await env.withSecurityRulesDisabled(async (ctx) => {
+      await updateDoc(doc(ctx.firestore(), 'teacherVerifications', 'tv_teacher-3'), {
+        status: 'rejected',
+        verificationStatus: 'rejected',
+      });
+    });
+    await assertSucceeds(
+      updateDoc(doc(as('teacher-3'), 'teacherVerifications', 'tv_teacher-3'), {
+        teachingLevel: 'Honours',
+        subjects: ['Physics'],
+        classes: ['HSC'],
+        institution: 'Test College',
+        post: 'Assistant Teacher',
+        institutionContact: '01700000009',
+        qualifications: 'M.Sc. Physics',
+        experienceYears: 3,
+        verificationReason: 'I teach Physics at Test College.',
+        evidenceRef: '',
+        status: 'pending',
+        verificationStatus: 'pending',
+        submittedAt: new Date(),
+        updatedAt: new Date(),
+      }),
+    );
+  });
+  // Missing-doc reads: a first-time teacher has NO application record;
+  // the form must read that absence (null) instead of a permission
+  // error (the rules guard `resource == null` — without it,
+  // `resource.data.userId` on a missing doc throws and the read is
+  // denied, so a first application could never be filed via the lib).
+  it('(r67) reading a NON-EXISTENT teacher application returns not-found — ALLOWED', async () => {
+    // tv_teacher-9 is never created in this suite — the read must return
+    // "not found" (not a permission error) for any signed-in teacher.
+    const snap = await assertSucceeds(getDoc(doc(as('teacher-4'), 'teacherVerifications', 'tv_teacher-9')));
+    if (snap.exists()) throw new Error('expected tv_teacher-9 to be absent');
   });
 });

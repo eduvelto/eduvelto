@@ -496,7 +496,13 @@ service cloud.firestore {
     //   explicit path with its own reason — decided records cannot be
     //   silently flipped back and forth.
     match /teacherVerifications/{recordId} {
-      allow read: if signedIn() && (resource.data.userId == uid() || isModerator());
+      // `resource == null` first: a first-time applicant has NO record
+      // yet, and the form/lib must be able to read that absence
+      // (getMyTeacherApplication returns null). Without the guard,
+      // `resource.data.userId` on a missing doc throws a Null value
+      // error and the read is DENIED — no data leaks either way, since
+      // a missing doc returns nothing.
+      allow read: if signedIn() && (resource == null || resource.data.userId == uid() || isModerator());
       allow create: if signedIn() && callerActive()
         && recordId == 'tv_' + uid()
         && request.resource.data.userId == uid()
@@ -899,8 +905,11 @@ service cloud.firestore {
     //   this collection — the snapshot carries only name + academic
     //   fields, and the rules tests prove the users-doc read is denied.
     match /parentLinks/{linkId} {
+      // `resource == null` first: reading a link that does not exist
+      // (e.g. a stale id) must return "not found", not a permission
+      // error — same Null-value guard as teacherVerifications above.
       allow read: if signedIn()
-        && (resource.data.parentId == uid() || resource.data.studentId == uid() || isAdmin());
+        && (resource == null || resource.data.parentId == uid() || resource.data.studentId == uid() || isAdmin());
       allow create: if signedIn() && callerActive()
         && linkId == uid() + '_' + request.resource.data.studentId
         && request.resource.data.parentId == uid()

@@ -191,7 +191,7 @@ export default function AdminGuardiansPage() {
   if (!user || !profile || (profile.role !== 'admin' && profile.role !== 'owner')) {
     return (
       <PageShell titleBn={d.adminGuardiansTitle.bn} titleEn={d.adminGuardiansTitle.en}>
-        <p>{strings.admin.noPermission.bn}</p>
+        <p>{strings.admin.accessDenied.bn}</p>
         <p>
           <Link to="/admin">অ্যাডমিন ড্যাশবোর্ডে ফিরে যান →</Link>
         </p>
