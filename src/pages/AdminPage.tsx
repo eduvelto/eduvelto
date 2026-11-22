@@ -109,6 +109,15 @@ export default function AdminPage() {
       to: '/admin/guardians',
     },
     {
+      id: 'nu-admissions',
+      titleBn: 'ভর্তি প্রস্তুতি (NU) — কাঠামোর সীড',
+      titleEn: 'Admission preparation (NU) — structure seed',
+      descBn: 'জাতীয় বিশ্ববিদ্যালয়ের প্রতিষ্ঠান, শাখা, পরীক্ষার কনফিগ ও বিজ্ঞপ্তি-কনফিগ Firestore-এ প্রয়োগ করুন ও মিল যাচাই করুন।',
+      descEn: 'Apply and verify National University institution, group, exam-config and circular-config documents in Firestore.',
+      status: 'working',
+      to: '/admin/admissions/structure',
+    },
+    {
       id: 'content',
       titleBn: 'কনটেন্ট / ভিডিও / লাইব্রেরি',
       titleEn: 'Content / Video / Library',

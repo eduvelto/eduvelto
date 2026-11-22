@@ -82,7 +82,10 @@ export default function ComingSoonPage(props: { section: Section }) {
       <p style={{ marginTop: 20, color: '#57616A' }}>
         {t({ bn: 'এই সময়ে যা করতে পারেন —', en: 'What you can do in the meantime —' })}
       </p>
-      <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10 }}>
+      {/* NU-5: NuOnboarding moved to the NU hub Home tab
+          (/admissions/national-university). /admissions is now the hub
+          index, so this page no longer serves admissions at all. */}
+      <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10, marginTop: 20 }}>
         <LinkButton to="/library" variant="primary">
           {t({ bn: 'লাইব্রেরি দেখুন', en: 'Browse library' })}
         </LinkButton>
