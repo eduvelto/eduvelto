@@ -9,6 +9,7 @@ import HeaderNav from './components/HeaderNav';
 import Footer from './components/Footer';
 import InstallAppPrompt from './components/InstallAppPrompt';
 import { AdminGuard } from './components/AdminGuard';
+import { NuQuestionWorkbenchGuard } from './components/NuQuestionWorkbenchGuard';
 import { T, useLanguage } from './i18n/LanguageContext';
 // SCALE (10k users): route-level code splitting. Before this change the
 // first visit downloaded ALL 35 pages in one 909 kB bundle (admin pages
@@ -52,6 +53,7 @@ const AdminBackupPage = lazy(() => import('./pages/AdminBackupPage'));
 const AdminAuditPage = lazy(() => import('./pages/AdminAuditPage'));
 const AdminNuStructurePage = lazy(() => import('./pages/AdminNuStructurePage'));
 const AdminNuSyllabusPage = lazy(() => import('./pages/AdminNuSyllabusPage'));
+const AdminNuQuestionsPage = lazy(() => import('./pages/AdminNuQuestionsPage'));
 // NU-5: National University admission hub (design §5) — index, hub +
 // 8 tabs, group pages, candidate dashboard. Static group routes rank
 // above the hub's `:tab` route, so the two never collide.
@@ -251,6 +253,7 @@ export default function App() {
           <Route path="admissions" element={<AdminAdmissionsPage />} />
           <Route path="admissions/structure" element={<AdminNuStructurePage />} />
           <Route path="admissions/syllabus" element={<AdminNuSyllabusPage />} />
+          <Route path="admissions/questions" element={<NuQuestionWorkbenchGuard><AdminNuQuestionsPage /></NuQuestionWorkbenchGuard>} />
           <Route path="analytics" element={<AdminAnalyticsPage />} />
           <Route path="settings" element={<AdminSettingsPage />} />
           <Route path="content" element={<AdminContentPage />} />

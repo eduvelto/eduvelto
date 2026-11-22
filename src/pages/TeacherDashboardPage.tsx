@@ -215,6 +215,18 @@ export default function TeacherDashboardPage() {
         <EmptyState bn={EMPTY_STATES.teacherPending.bn} en={EMPTY_STATES.teacherPending.en} />
       ) : (
         <>
+          <h2 className="ev-section-h2"><T bn="NU প্রশ্নব্যাংক" en="NU question bank" /></h2>
+          <Card>
+            <p className="ev-muted-ivory">
+              <T
+                bn="জাতীয় বিশ্ববিদ্যালয় ভর্তির প্রশ্ন লিখুন ও পর্যালোচনা করুন — খসড়া → পর্যালোচনা → প্রকাশনা। ব্যাংক এখনো শূন্য।"
+                en="Write and review National University admission questions — draft → review → publish. The bank is still empty."
+              />
+            </p>
+            <Link to="/admin/admissions/questions">
+              <T bn="প্রশ্নব্যাংক কর্মশালা →" en="Question bank workbench →" />
+            </Link>
+          </Card>
           <h2 className="ev-section-h2"><T bn={d.mySubjects.bn} en={d.mySubjects.en} /></h2>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, marginBottom: 16 }}>
             {(approvedSubjects ?? []).length > 0 ? (

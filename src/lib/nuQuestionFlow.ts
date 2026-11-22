@@ -48,7 +48,7 @@ import {
 } from 'firebase/firestore';
 import { Timestamp } from 'firebase/firestore';
 import { NU_CIRCULAR_VERSION } from './nuExamConfig';
-import { isNuGroupSlug } from './nuProfile';
+import { isNuGroupSlug, type NuGroupSlug } from './nuProfile';
 import type { UserProfile } from './profile';
 import {
   buildNuQuestionBundle,
@@ -63,6 +63,7 @@ import {
   validateNuQuestionDraftKey,
   validateNuReviewDoc,
   type NuQuestionBundleDoc,
+  type NuQuestionSourceType,
   type NuQuestionDoc,
   type NuQuestionKeyDoc,
   type NuQuestionStatus,
@@ -207,13 +208,13 @@ export interface NuQuestionDraftInput {
   subjectId: string;
   chapterId: string;
   topicId: string;
-  groupIds: string[];
+  groupIds: NuGroupSlug[];
   questionText: string;
   questionLang: 'bn' | 'en';
   options: [string, string, string, string];
   difficulty: 'easy' | 'medium' | 'hard';
   explanation: string;
-  sourceType: 'original_practice' | 'official_previous_year' | 'board_question' | 'textbook_based';
+  sourceType: NuQuestionSourceType;
   provenance: string;
   examYear?: number;
 }
@@ -611,7 +612,7 @@ export async function previewNuTopicBundle(
 
 /** Mock bundle preview (100 published questions, one group) — same
  * in-memory-only rule as the topic preview. */
-export async function previewNuMockBundle(db: Firestore, groupId: string): Promise<NuBundlePreview> {
+export async function previewNuMockBundle(db: Firestore, groupId: NuGroupSlug): Promise<NuBundlePreview> {
   const snap = await getDocs(
     query(
       collection(db, 'nuQuestions'),
