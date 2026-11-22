@@ -31,6 +31,8 @@ import {
   doc,
   getDoc,
   getDocs,
+  limit,
+  orderBy,
   query,
   setDoc,
   updateDoc,
@@ -378,6 +380,36 @@ export async function loadJobAttempt(
   const snap = await getDoc(doc(firestore, 'users', ownerUid, 'jobAttempts', attemptId));
   if (!snap.exists()) return null;
   return snap.data() as Record<string, unknown>;
+}
+
+/** A stored practice attempt with its doc ID attached (the
+ * result page loads by this ID; the analysis history renders
+ * from these fields — the score is the stored
+ * client-calculated one, always labelled "অনুশীলন ফলাফল"). */
+export type PracticeAttemptWithId = Record<string, unknown> & { docId: string };
+
+/** The student's practice attempts, newest first (kind
+ * 'practice' + submittedAt desc — the jobAttempts composite
+ * index in firestore.indexes.json, same shape as
+ * listMockAttempts on jobExamAttempts). No new rule is needed:
+ * the jobAttempts match already allows the owner to read
+ * (isOwner(userId)), so the list query is covered; the rules
+ * tests prove the owner list succeeds and another user is
+ * denied (emulator-tests/rules-step10-result-analysis.test.ts). */
+export async function listJobAttempts(
+  uid: string,
+  maxResults = 50,
+): Promise<PracticeAttemptWithId[]> {
+  const firestore = requireDb();
+  const snap = await getDocs(
+    query(
+      collection(firestore, 'users', uid, 'jobAttempts'),
+      where('kind', '==', 'practice'),
+      orderBy('submittedAt', 'desc'),
+      limit(maxResults),
+    ),
+  );
+  return snap.docs.map((d) => ({ ...(d.data() as Record<string, unknown>), docId: d.id }));
 }
 
 /** Load one session (same ID as its attempt) — for the result

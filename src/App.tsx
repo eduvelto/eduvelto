@@ -30,6 +30,7 @@ const JobsCommonPage = lazy(() => import('./pages/JobsCommonPage'));
 const JobPracticePage = lazy(() => import('./pages/JobPracticePage'));
 const JobMockPage = lazy(() => import('./pages/JobMockPage'));
 const JobResultPage = lazy(() => import('./pages/JobResultPage'));
+const JobAnalysisPage = lazy(() => import('./pages/JobAnalysisPage'));
 const JobSeekerDashboardPage = lazy(() => import('./pages/JobSeekerDashboardPage'));
 const RegisterPage = lazy(() => import('./pages/RegisterPage'));
 const RoleSetupPage = lazy(() => import('./pages/RoleSetupPage'));
@@ -240,6 +241,9 @@ export default function App() {
             :exam='mock'. */}
         <Route path="/jobs/mock/:mockId" element={<JobMockPage />} />
         <Route path="/jobs/result/:attemptId" element={<JobResultPage />} />
+        {/* Step 10: analysis MUST come before /jobs/:exam/:tab
+            — otherwise '/jobs/analysis' matches :exam='analysis'. */}
+        <Route path="/jobs/analysis" element={<JobAnalysisPage />} />
         <Route path="/jobs/:exam/:tab" element={<JobHubPage />} />
         <Route path="/jobs/:exam" element={<JobHubPage />} />
         <Route path="/register" element={<RegisterPage />} />
