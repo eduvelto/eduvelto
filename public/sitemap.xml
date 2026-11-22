@@ -1,14 +1,88 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Eduvelto sitemap — founder page added 21 Nov 2026 (identity/founder-profile, staging).
-     To deploy: copy to phase2-project/public/sitemap.xml, rebuild, deploy hosting.
-     Then it lives at https://eduvelto.com/sitemap.xml (only after the domain connects).
-     All URLs are canonical eduvelto.com URLs. Only public pages are listed.
-     /admin, /login, /register are intentionally excluded. -->
+<!-- Eduvelto sitemap — REWRITTEN 22 Nov 2026 (feature/seo-visibility).
+     The 20 Nov version listed 8 routes that do NOT exist
+     (/features, /teachers-institutions, /parents-students, /career,
+     /videos, /community, /life, /eduvelto-id) — the SPA catch-all
+     served the homepage at those URLs, i.e. duplicate content — and
+     omitted the real Job + Admission routes. This version lists ONLY
+     routes that exist as real pages. All URLs are canonical
+     eduvelto.com URLs. /admin, /ceo, /login, /register, dashboards
+     and app-internal routes are intentionally excluded. -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://eduvelto.com/</loc>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/why-eduvelto</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/jobs</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/jobs/bcs</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/jobs/bank</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/jobs/primary-teacher</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/jobs/ntrca</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/jobs/common</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/admissions</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/admissions/national-university</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/admissions/national-university/humanities</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/admissions/national-university/science</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/admissions/national-university/business</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/library</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/class</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://eduvelto.com/about</loc>
@@ -21,29 +95,14 @@
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://eduvelto.com/features</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://eduvelto.com/ai-teacher</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://eduvelto.com/library</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://eduvelto.com/teachers-institutions</loc>
+    <loc>https://eduvelto.com/contact</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://eduvelto.com/parents-students</loc>
+    <loc>https://eduvelto.com/privacy</loc>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.5</priority>
   </url>
   <url>
     <loc>https://eduvelto.com/health</loc>
@@ -51,33 +110,8 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://eduvelto.com/career</loc>
+    <loc>https://eduvelto.com/ai-teacher</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://eduvelto.com/videos</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://eduvelto.com/community</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://eduvelto.com/life</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://eduvelto.com/eduvelto-id</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://eduvelto.com/contact</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
   </url>
 </urlset>

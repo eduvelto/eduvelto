@@ -1,29 +1,38 @@
-# Eduvelto robots.txt — PREPARED 20 Nov 2026, NOT deployed.
-# To deploy: copy to phase2-project/public/robots.txt, rebuild, deploy hosting.
-# Then it lives at https://eduvelto.com/robots.txt (only after the domain connects).
-# Public pages are crawlable. Admin, login, register and app-internal routes are not.
+# Eduvelto robots.txt — REWRITTEN 22 Nov 2026 (feature/seo-visibility).
+# The 20 Nov version allowed 8 routes that do NOT exist
+# (/features, /teachers-institutions, /parents-students, /career,
+# /videos, /community, /life, /eduvelto-id) and missed the real Job +
+# Admission routes. This version allows only routes that exist.
+# Public pages are crawlable. Admin, CEO, login, register, dashboards
+# and app-internal routes are not.
 
 User-agent: *
 Allow: /
+Allow: /why-eduvelto
+Allow: /jobs
+Allow: /admissions
+Allow: /library
+Allow: /class
 Allow: /about
 Allow: /founder
-Allow: /features
-Allow: /ai-teacher
-Allow: /library
-Allow: /teachers-institutions
-Allow: /parents-students
-Allow: /health
-Allow: /career
-Allow: /videos
-Allow: /community
-Allow: /life
-Allow: /eduvelto-id
 Allow: /contact
+Allow: /privacy
+Allow: /health
+Allow: /ai-teacher
 Disallow: /admin
+Disallow: /ceo
 Disallow: /login
 Disallow: /register
 Disallow: /profile
-Disallow: /teacher/register
+Disallow: /dashboard
+Disallow: /student
+Disallow: /teacher
+Disallow: /guardian
+Disallow: /jobs/dashboard
+Disallow: /admissions/dashboard
+Disallow: /exam
+Disallow: /routine
+Disallow: /progress
 Disallow: /directory
 Disallow: /quiz/
 Disallow: /books/

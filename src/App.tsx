@@ -9,6 +9,7 @@ import HeaderNav from './components/HeaderNav';
 import Footer from './components/Footer';
 import InstallAppPrompt from './components/InstallAppPrompt';
 import { AdminGuard } from './components/AdminGuard';
+import { RouteSeo } from './components/RouteSeo';
 import { NuQuestionWorkbenchGuard } from './components/NuQuestionWorkbenchGuard';
 import { T, useLanguage } from './i18n/LanguageContext';
 // SCALE (10k users): route-level code splitting. Before this change the
@@ -92,6 +93,7 @@ const ContactPage = lazy(() => import('./pages/ContactPage'));
 // main 054c230 + the live site do, so the route is restored here.
 const FounderPage = lazy(() => import('./pages/FounderPage'));
 const PrivacyPage = lazy(() => import('./pages/PrivacyPage'));
+const WhyEduveltoPage = lazy(() => import('./pages/WhyEduveltoPage'));
 const AdmissionsIndexPage = lazy(() => import('./pages/AdmissionsIndexPage'));
 const NuHubPage = lazy(() => import('./pages/NuHubPage'));
 const NuGroupPage = lazy(() => import('./pages/NuGroupPage'));
@@ -156,6 +158,10 @@ export default function App() {
           See components/HeaderNav.tsx. Hidden on /admin* and /ceo* —
           those panels render their own shell. */}
       {isAdminShell ? null : <HeaderNav />}
+      {/* Route-level SEO (22 Nov 2026, feature/seo-visibility): title,
+          meta description, Open Graph, canonical + JSON-LD per public
+          route. Renders nothing on auth/admin/founder routes. */}
+      <RouteSeo />
       {suspended ? (
         <main style={{ maxWidth: 720, margin: '0 auto', padding: '24px 16px', fontFamily: 'system-ui, sans-serif' }}>
           <div style={{ border: '1px solid #b00020', borderRadius: 8, padding: '20px 16px', background: '#fdf0f0' }}>
@@ -285,6 +291,7 @@ export default function App() {
         <Route path="/health/hospitals" element={<HealthHospitalsPage />} />
         <Route path="/health/report" element={<HealthReportPage />} />
         <Route path="/about" element={<AboutPage />} />
+        <Route path="/why-eduvelto" element={<WhyEduveltoPage />} />
         <Route path="/founder" element={<FounderPage />} />
         <Route path="/contact" element={<ContactPage />} />
         <Route path="/privacy" element={<PrivacyPage />} />

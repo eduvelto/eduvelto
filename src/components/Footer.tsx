@@ -30,6 +30,7 @@ export default function Footer() {
         <div>
           <h3>{t({ bn: 'প্ল্যাটফর্ম', en: 'Platform' })}</h3>
           <Link to="/about">{t({ bn: 'আমাদের সম্পর্কে', en: 'About' })}</Link>
+          <Link to="/why-eduvelto">{t({ bn: 'কেন Eduvelto', en: 'Why Eduvelto' })}</Link>
           <Link to="/privacy">{t({ bn: 'গোপনীয়তা নীতি', en: 'Privacy Policy' })}</Link>
           <Link to="/contact">{t({ bn: 'যোগাযোগ', en: 'Contact' })}</Link>
           <Link to="/health">{t({ bn: 'স্বাস্থ্য', en: 'Health' })}</Link>
