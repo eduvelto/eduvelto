@@ -1605,6 +1605,15 @@ a:hover {
   }
 }
 
+/* No top Menu button ≤768px — the bottom nav's Menu sheet opens the
+   same four sections (owner: Menu in two places, 22 Nov 2026). The
+   button stays at 769–860px, where there is no bottom nav. */
+@media (max-width: 768px) {
+  .ev-menu-btn {
+    display: none;
+  }
+}
+
 /* Homepage: mobile search bar (≤768px only). */
 .ev-home-msearch {
   display: none;

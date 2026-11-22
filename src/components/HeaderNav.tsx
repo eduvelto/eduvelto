@@ -8,7 +8,10 @@
 // (signed out) or profile + Dashboard + Log out (signed in).
 // Mobile (≤860px): logo + notification bell + avatar (signed in) +
 // hamburger opening the full menu (sections as accordions + secondary
-// links). The header is shared chrome, so the new nav appears on every
+// links). At ≤768px the hamburger is HIDDEN — the bottom nav's Menu
+// sheet opens the same sections (owner: Menu in two places, 22 Nov
+// 2026); the hamburger stays at 769–860px, where there is no bottom
+// nav. The header is shared chrome, so the new nav appears on every
 // page, not only the homepage.
 //
 // HONESTY: there is NO dark-mode theme system and NO notifications
