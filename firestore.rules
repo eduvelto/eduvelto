@@ -1387,7 +1387,7 @@ service cloud.firestore {
              'teacher-change-approved', 'teacher-change-rejected',
              'guardian-link-approved', 'guardian-link-rejected', 'guardian-link-revoked',
              'feature-enabled', 'feature-disabled',
-             'backup-exported', 'nu-structure-applied',
+             'backup-exported', 'nu-structure-applied', 'nu-syllabus-applied',
              'user-profile-viewed', 'user-messages-viewed',
              'support-message-sent', 'message-reported', 'message-blocked']
         && request.resource.data.keys().hasOnly(
