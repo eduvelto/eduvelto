@@ -9,7 +9,10 @@ stylesheet, so NO webfont loaded and headings fell back to system serif
 (which still looked "stylish serif", hiding the bug). Parent-verified from
 the live response header 22 Nov ~14:30.
 
-## Fix (branch `fix/csp-google-fonts`, HEAD 001820a, off origin/main 9495cdf)
+## Fix (branch `fix/csp-google-fonts`, HEAD 14fa451, rebased onto origin/main 7fe7f40)
+(origin/main moved 9495cdf → 7fe7f40 mid-task when the /jobs-grid deploy
+landed; rebase was clean, zero conflicts, and the preview was re-deployed
+from the rebased HEAD — CSP header re-verified after redeploy.)
 `firebase.json` ONLY — one token added to `style-src`:
 
 ```diff
