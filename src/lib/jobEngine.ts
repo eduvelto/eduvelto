@@ -192,6 +192,55 @@ export function jobExamPattern(examSlug: string): JobExamPattern | null {
   return JOB_EXAM_PATTERNS[examSlug] ?? null;
 }
 
+/** Build an exam pattern from a mock's rulesSnapshot (Step 9).
+ * The snapshot is the AUTHORITY for this mock — a later
+ * rulesConfig change never re-scores it. The snapshot's
+ * negativeMarking may be null (Bank — unverified): the pattern
+ * then carries 0 (disabled), exactly like the live config path
+ * (buildJobExamPattern). Throws unless the snapshot is a complete,
+ * well-formed pattern (never guess a penalty or a duration). */
+export function patternFromRulesSnapshot(
+  examSlug: string,
+  snapshot: {
+    questionCount: number;
+    timeMinutes: number;
+    marksPerQuestion: number;
+    negativeMarking: number | null;
+    negativeMarkingVerified: boolean;
+    passPercent: number | null;
+    scoringConfigVersion: string;
+  },
+): JobExamPattern {
+  if (!Number.isInteger(snapshot.questionCount) || snapshot.questionCount < 1 || snapshot.questionCount > 200) {
+    throw new Error(`patternFromRulesSnapshot: snapshot questionCount ${String(snapshot.questionCount)} must be 1–200`);
+  }
+  if (!Number.isInteger(snapshot.timeMinutes) || snapshot.timeMinutes < 1 || snapshot.timeMinutes > 600) {
+    throw new Error(`patternFromRulesSnapshot: snapshot timeMinutes ${String(snapshot.timeMinutes)} must be 1–600`);
+  }
+  if (snapshot.marksPerQuestion !== 1) {
+    throw new Error('patternFromRulesSnapshot: snapshot marksPerQuestion must be 1');
+  }
+  const rawNegative = snapshot.negativeMarking ?? 0;
+  if (rawNegative !== 0 && rawNegative !== 0.25 && rawNegative !== 0.5) {
+    throw new Error(`patternFromRulesSnapshot: snapshot negativeMarking ${String(rawNegative)} must be 0, 0.25 or 0.5`);
+  }
+  if (typeof snapshot.scoringConfigVersion !== 'string' || snapshot.scoringConfigVersion.length === 0) {
+    throw new Error('patternFromRulesSnapshot: snapshot scoringConfigVersion is required');
+  }
+  const label = JOB_EXAM_PATTERN_LABELS[examSlug] ?? 'যাচাইকৃত ধরন';
+  return {
+    examSlug,
+    questionCount: snapshot.questionCount,
+    timeMinutes: snapshot.timeMinutes,
+    marksPerQuestion: 1,
+    negativeMarking: rawNegative,
+    negativeMarkingVerified: snapshot.negativeMarkingVerified,
+    scoringConfigVersion: snapshot.scoringConfigVersion,
+    passPercent: snapshot.passPercent,
+    patternLabel: label,
+  };
+}
+
 /* ------------------------------------------------------------------ */
 /* Practice session (Step 3 §2.12 — jobSessions doc shape)            */
 /* ------------------------------------------------------------------ */
@@ -286,6 +335,247 @@ export function createPracticeSession(
     updatedAt: serverTimestamp(),
     revision: 1,
   };
+}
+
+/* ------------------------------------------------------------------ */
+/* Mock session (Step 9 — Step 3 §2.12, kind 'mock')                  */
+/* ------------------------------------------------------------------ */
+
+/** A mock session doc (`users/{uid}/jobSessions/{sessionId}`).
+ * Same shape as practice, except: `kind` is 'mock', `mockId` is
+ * the bare mock key (never null), `endsAt` starts null and is set
+ * ONCE after read-back (Step 3 §5.3 — the stored deadline, never
+ * reset), and `clientEndsAtMillis` is the client-computed deadline
+ * (set at creation, so the timer runs even before the read-back
+ * lands or while offline). The questionRefs order is ALWAYS the
+ * bundle order for a mock — a timed mock runs in its published
+ * order, never in a mode order (Beginner/Advanced ordering is
+ * practice-only). Timestamps are `unknown` (sentinels at build
+ * time, real timestamps after read-back). */
+export interface JobMockSessionDoc {
+  kind: 'mock';
+  mockId: string;
+  bundleId: string;
+  examSlug: string;
+  status: 'in-progress' | 'submitted' | 'abandoned';
+  startedAt: unknown;
+  endsAt: unknown;
+  questionRefs: Array<{ bundleId: string; n: number; questionId: string }>;
+  answers: Record<number, JobSessionAnswer>;
+  currentQuestion: number;
+  lastSyncedAt: unknown;
+  clientEndsAtMillis: number | null;
+  submittedAt: unknown;
+  createdAt: unknown;
+  updatedAt: unknown;
+  revision: number;
+}
+
+export interface CreateMockSessionInput {
+  /** Doc ID — the caller uses this as the jobSessions doc ID (and
+   * later as the jobAttempts doc ID); it is NOT a field inside the
+   * doc (Step 3 §2.12 has no sessionId field). */
+  sessionId: string;
+  /** Bare mock key (daily: YYYY-MM-DD; weekly: YYYY-Www; full:
+   * full__{examSlug}__{n}) — must equal the bundle's mockId. */
+  mockId: string;
+  bundleId: string;
+  examSlug: string;
+  /** Bundle order (NOT mode order — see the type comment). */
+  questionRefs: Array<{ bundleId: string; n: number; questionId: string }>;
+  /** Mock duration in minutes (from the mock's rulesSnapshot —
+   * the snapshot is the authority, never the live config). */
+  timeMinutes: number;
+  /** Client clock at creation (Date.now()) — the offline timer's
+   * base. The server deadline (endsAt) is set after read-back. */
+  clientNowMillis: number;
+}
+
+/** Create a mock session doc (pure — no Firestore write here; the
+ * caller writes it with setDoc). Every question starts unanswered,
+ * unmarked, 0 seconds. The deadline is stored, never reset: endsAt
+ * is null here and set ONCE after read-back (see
+ * buildMockDeadlineUpdate); clientEndsAtMillis is set NOW so the
+ * timer never waits on the network. */
+export function createMockSession(input: CreateMockSessionInput): JobMockSessionDoc {
+  const answers: Record<number, JobSessionAnswer> = {};
+  for (const ref of input.questionRefs) {
+    answers[ref.n] = { selected: null, markedForReview: false, timeSpentSeconds: 0 };
+  }
+  return {
+    kind: 'mock',
+    mockId: input.mockId,
+    bundleId: input.bundleId,
+    examSlug: input.examSlug,
+    status: 'in-progress',
+    startedAt: serverTimestamp(),
+    endsAt: null,
+    questionRefs: input.questionRefs.map((r) => ({
+      bundleId: r.bundleId,
+      n: r.n,
+      questionId: r.questionId,
+    })),
+    answers,
+    // Mock order is the bundle order: the first question is the
+    // first ref, never a mode-ordered one.
+    currentQuestion: input.questionRefs[0]?.n ?? 1,
+    lastSyncedAt: serverTimestamp(),
+    clientEndsAtMillis: input.clientNowMillis + input.timeMinutes * 60 * 1000,
+    submittedAt: null,
+    createdAt: serverTimestamp(),
+    updatedAt: serverTimestamp(),
+    revision: 1,
+  };
+}
+
+/** Best-effort millis from a Firestore timestamp value (a real
+ * Timestamp after read-back, a Date, or {seconds}). A
+ * serverTimestamp() sentinel (plain object, no toMillis/seconds)
+ * returns null — the caller falls back to clientEndsAtMillis. */
+function timestampToMillis(t: unknown): number | null {
+  if (t === null || t === undefined) return null;
+  const v = t as { toMillis?: unknown; seconds?: unknown };
+  if (typeof v.toMillis === 'function') return (v.toMillis as () => number)();
+  if (typeof v.seconds === 'number') return v.seconds * 1000;
+  if (t instanceof Date) return t.getTime();
+  return null;
+}
+
+/** The stored deadline of a mock session in millis (Step 9 timer
+ * rule, ChatGPT finding #10): the SERVER endsAt when it exists
+ * (after read-back), else the client-computed clientEndsAtMillis.
+ * Returns null when neither exists (a mock session always sets
+ * clientEndsAtMillis at creation — null means a malformed doc). */
+export function mockDeadlineMillis(session: JobMockSessionDoc): number | null {
+  const endsAtMillis = timestampToMillis(session.endsAt);
+  if (endsAtMillis !== null) return endsAtMillis;
+  if (typeof session.clientEndsAtMillis === 'number' && Number.isFinite(session.clientEndsAtMillis)) {
+    return session.clientEndsAtMillis;
+  }
+  return null;
+}
+
+/** Milliseconds left on a mock session (null when no deadline is
+ * stored). Raw difference (negative when expired — callers must
+ * not clamp it to 0, or the expired state is lost). */
+export function mockRemainingMillis(session: JobMockSessionDoc, nowMillis: number): number | null {
+  const deadline = mockDeadlineMillis(session);
+  if (deadline === null) return null;
+  return deadline - nowMillis;
+}
+
+/** True when the stored deadline has passed (Step 9: the page
+ * auto-submits exactly once when this flips true). */
+export function isMockExpired(session: JobMockSessionDoc, nowMillis: number): boolean {
+  const remaining = mockRemainingMillis(session, nowMillis);
+  return remaining !== null && remaining <= 0;
+}
+
+/** The exact Firestore update payload for the ONCE-only endsAt
+ * write (Step 3 §5.3): endsAt (server deadline) + the matching
+ * clientEndsAtMillis + sync timestamps + revision exactly
+ * stored + 1. The rules allow endsAt to move null → timestamp
+ * exactly once; a second write is denied. The caller passes the
+ * STORED revision (fresh-read, never local state) and the endsAt
+ * Timestamp (startedAt + timeMinutes, from the read-back). */
+export function buildMockDeadlineUpdate(
+  storedRevision: number,
+  endsAt: unknown,
+  clientEndsAtMillis: number | null,
+): {
+  endsAt: unknown;
+  clientEndsAtMillis: number | null;
+  lastSyncedAt: unknown;
+  updatedAt: unknown;
+  revision: number;
+} {
+  return {
+    endsAt,
+    clientEndsAtMillis,
+    lastSyncedAt: serverTimestamp(),
+    updatedAt: serverTimestamp(),
+    revision: storedRevision + 1,
+  };
+}
+
+/** The exact Firestore update payload for mock autosave — the
+ * same five fields as practice (answers, currentQuestion,
+ * lastSyncedAt, updatedAt, revision exactly stored + 1). Never
+ * status, never endsAt, never the question list. The caller
+ * throttles the writes (Step 2 §4.6); this function only builds
+ * the payload. */
+export function buildMockAutosavePatch(session: JobMockSessionDoc): {
+  answers: Record<number, JobSessionAnswer>;
+  currentQuestion: number;
+  lastSyncedAt: unknown;
+  updatedAt: unknown;
+  revision: number;
+} {
+  return {
+    answers: session.answers,
+    currentQuestion: session.currentQuestion,
+    lastSyncedAt: serverTimestamp(),
+    updatedAt: serverTimestamp(),
+    revision: session.revision + 1,
+  };
+}
+
+/** The exact Firestore update payload for the mock SUBMIT
+ * transition (Step 9, Design G step 2): session → 'submitted'
+ * as a STANDALONE update — NOT batched with the attempt, because
+ * the receipt (step 3) can only be created once the session is
+ * already submitted (the Step 7 receipt gate anchors to a
+ * submitted record). The caller passes the STORED revision
+ * (fresh-read, never local state); the rules require exactly
+ * stored + 1 and a submittedAt timestamp. `lastSyncedAt` is NOT
+ * touched — the merged doc keeps the stored value, which the
+ * rules accept (it is already a timestamp). */
+export function buildMockSessionSubmitUpdate(storedRevision: number): {
+  status: 'submitted';
+  submittedAt: unknown;
+  updatedAt: unknown;
+  revision: number;
+} {
+  return {
+    status: 'submitted',
+    submittedAt: serverTimestamp(),
+    updatedAt: serverTimestamp(),
+    revision: storedRevision + 1,
+  };
+}
+
+/** The exact Firestore update payload for the mock ABANDON
+ * transition (time expired, or the student quits): session →
+ * 'abandoned' as a standalone update. submittedAt stays null
+ * (the rules deny abandoning WITH a submittedAt); the doc is
+ * then frozen — the audit trail of an unfinished mock. */
+export function buildMockSessionAbandonUpdate(storedRevision: number): {
+  status: 'abandoned';
+  updatedAt: unknown;
+  revision: number;
+} {
+  return {
+    status: 'abandoned',
+    updatedAt: serverTimestamp(),
+    revision: storedRevision + 1,
+  };
+}
+
+/** The server deadline for a mock session (pure): startedAt
+ * (server time, millis) + the mock's duration in minutes. The
+ * Firestore layer (jobMock.ts) uses this to set endsAt ONCE
+ * after read-back; the RULES bound the stored value to exactly
+ * this (audit M1 — endsAt may never exceed startedAt + the
+ * mock's rulesSnapshot.timeMinutes). Throws on bad inputs —
+ * never guess a deadline. */
+export function mockDeadlineForSession(startedAtMillis: number, timeMinutes: number): number {
+  if (!Number.isFinite(startedAtMillis) || startedAtMillis <= 0) {
+    throw new Error('mockDeadlineForSession: startedAtMillis must be a positive number');
+  }
+  if (!Number.isInteger(timeMinutes) || timeMinutes < 1 || timeMinutes > 600) {
+    throw new Error(`mockDeadlineForSession: timeMinutes ${String(timeMinutes)} must be 1–600`);
+  }
+  return startedAtMillis + timeMinutes * 60 * 1000;
 }
 
 function sessionQuestionCount(session: JobPracticeSessionDoc): number {
@@ -529,7 +819,6 @@ export function scorePracticeAttempt(
   let wrongCount = 0;
   let unansweredCount = 0;
   const wrongQuestionIds: string[] = [];
-  const topicStats = new Map<string, { wrong: number; total: number }>();
 
   for (const q of bundle.questions) {
     const keyAnswer = keyByN.get(q.n);
@@ -555,10 +844,6 @@ export function scorePracticeAttempt(
       wrongCount += 1;
       wrongQuestionIds.push(q.questionId);
     } else unansweredCount += 1;
-    const stat = topicStats.get(q.topicId) ?? { wrong: 0, total: 0 };
-    stat.total += 1;
-    if (answered && !correct) stat.wrong += 1;
-    topicStats.set(q.topicId, stat);
     answers.push({
       n: q.n,
       questionId: q.questionId,
@@ -582,9 +867,7 @@ export function scorePracticeAttempt(
     0,
     Math.round((input.submittedAtMillis - input.startedAtMillis) / 1000),
   );
-  const weakTopics: JobWeakTopic[] = [...topicStats.entries()]
-    .map(([topicId, s]) => ({ topicId, wrong: s.wrong, total: s.total }))
-    .sort((a, b) => b.wrong - a.wrong || b.total - a.total || (a.topicId < b.topicId ? -1 : 1));
+  const weakTopics = weakTopicsFromAttemptAnswers(answers);
 
   return {
     score,
@@ -605,12 +888,79 @@ export function scorePracticeAttempt(
   };
 }
 
+/** Weak-topic analysis from scored answers (shared by the
+ * scorer and by the result rebuild from a stored attempt):
+ * per topic, wrong answers (unanswered do NOT count as wrong)
+ * over total questions; sorted by wrong desc, then total desc,
+ * then topicId asc (deterministic). */
+export function weakTopicsFromAttemptAnswers(answers: JobAttemptAnswer[]): JobWeakTopic[] {
+  const stats = new Map<string, { wrong: number; total: number }>();
+  for (const a of answers) {
+    const stat = stats.get(a.topicId) ?? { wrong: 0, total: 0 };
+    stat.total += 1;
+    if (a.selected !== null && !a.correct) stat.wrong += 1;
+    stats.set(a.topicId, stat);
+  }
+  return [...stats.entries()]
+    .map(([topicId, s]) => ({ topicId, wrong: s.wrong, total: s.total }))
+    .sort((a, b) => b.wrong - a.wrong || b.total - a.total || (a.topicId < b.topicId ? -1 : 1));
+}
+
+export interface ScoreMockAttemptInput {
+  bundle: JobQuestionBundle;
+  /** The answer key — read through the session-anchored receipt
+   * (Design G). NULL IS AN ERROR, exactly like practice: a mock
+   * is never scored by guessing. */
+  key: JobQuestionKey | null;
+  answers: Array<{
+    n: number;
+    questionId: string;
+    selected: JobSessionAnswerSelection;
+    timeSpentSeconds?: number;
+  }>;
+  /** The mock's rulesSnapshot — the AUTHORITY for this mock's
+   * pattern (never the live rulesConfig). */
+  rulesSnapshot: {
+    questionCount: number;
+    timeMinutes: number;
+    marksPerQuestion: number;
+    negativeMarking: number | null;
+    negativeMarkingVerified: boolean;
+    passPercent: number | null;
+    scoringConfigVersion: string;
+  };
+  examSlug: string;
+  startedAtMillis: number;
+  submittedAtMillis: number;
+}
+
+/** Score a mock attempt (Step 9): the pattern comes from the
+ * mock's rulesSnapshot via patternFromRulesSnapshot, then the
+ * scoring is exactly scorePracticeAttempt (same marks, same
+ * negative marking, same weak-topic analysis). The snapshot —
+ * not the live config — is what the attempt records as its
+ * markingSchemeVersion, so a later config change can never
+ * silently re-score an old mock. Throws when the key is null
+ * or the snapshot is not a complete pattern. */
+export function scoreMockAttempt(input: ScoreMockAttemptInput): JobAttemptResult {
+  const pattern = patternFromRulesSnapshot(input.examSlug, input.rulesSnapshot);
+  return scorePracticeAttempt({
+    bundle: input.bundle,
+    key: input.key,
+    answers: input.answers,
+    pattern,
+    startedAtMillis: input.startedAtMillis,
+    submittedAtMillis: input.submittedAtMillis,
+  });
+}
+
 /* ------------------------------------------------------------------ */
 /* Attempt doc (Step 3 §2.11 — users/{uid}/jobAttempts/{sessionId})   */
 /* ------------------------------------------------------------------ */
 
 /**
- * Build the jobAttempts doc for a submitted practice attempt.
+ * Build the jobAttempts doc for a submitted practice or mock
+ * attempt.
  *
  * Step 3 §2.11 field table (pasted verbatim — this function must
  * match it; any deviation is listed below the table):
@@ -666,6 +1016,11 @@ export function scorePracticeAttempt(
  *       bundle generation — so a later config change can never
  *       silently reinterpret an old result, and the rules can bind
  *       the deduction to the declared marking scheme.
+ *   (f) Step 9 (mock): `kind` may be 'mock' with `mockId` the bare
+ *       mock key (never null for a mock; null for practice) and
+ *       `subjectId`/`topicId` null (a mock covers the whole exam).
+ *       The attempt is scored from the mock's rulesSnapshot
+ *       pattern, never the live config.
  *
  * RULES NOTE: the Step 8 rules draft (rules agent's uncommitted
  * working copy, checked 22 Nov) replaces the Step 7 minimal
@@ -677,13 +1032,16 @@ export function scorePracticeAttempt(
  */
 export function buildJobAttemptDoc(input: {
   sessionId: string;
-  session: JobPracticeSessionDoc;
+  session: JobPracticeSessionDoc | JobMockSessionDoc;
   result: JobAttemptResult;
   bundleId: string;
   examSlug: string;
   subjectId: string | null;
   topicId: string | null;
-  kind: 'practice';
+  kind: 'practice' | 'mock';
+  /** Bare mock key for kind 'mock' (daily: YYYY-MM-DD; weekly:
+   * YYYY-Www; full: full__{examSlug}__{n}); null for practice. */
+  mockId?: string | null;
   /** The bundle's version (Step 8 fold-in, finding 5): the attempt
    * is bound to the exact bundle generation it was scored against
    * (rules: attempt.bundleVersion == bundle.bundleVersion). */
@@ -695,7 +1053,7 @@ export function buildJobAttemptDoc(input: {
 }): Record<string, unknown> {
   return {
     kind: input.kind,
-    mockId: null,
+    mockId: input.mockId ?? null,
     bundleId: input.bundleId,
     examSlug: input.examSlug,
     subjectId: input.subjectId,
@@ -731,6 +1089,98 @@ export function buildJobAttemptDoc(input: {
     }),
     sessionId: input.sessionId,
     userId: input.userId ?? null,
+  };
+}
+
+/** Rebuild a JobAttemptResult from a STORED attempt doc (the
+ * shape buildJobAttemptDoc produces). Used by the mock submit's
+ * idempotent recovery (the attempt already exists — return the
+ * STORED result, never a freshly computed one that could come
+ * from a republished bundle) and by the result page. weakTopics
+ * and wrongQuestionIds are NOT stored on the attempt — they are
+ * re-derived from the stored answers (same derivation as the
+ * scorer). Returns null when the doc is malformed (missing or
+ * mistyped result fields, or answers that fail validation) —
+ * the caller shows the honest error instead of a guessed
+ * result. */
+export function jobAttemptResultFromStoredDoc(doc: unknown): JobAttemptResult | null {
+  if (typeof doc !== 'object' || doc === null || Array.isArray(doc)) return null;
+  const d = doc as Record<string, unknown>;
+  const num = (v: unknown): number | null =>
+    typeof v === 'number' && Number.isFinite(v) ? v : null;
+  const score = num(d.score);
+  const totalMarks = num(d.totalMarks);
+  const negativeDeduction = num(d.negativeDeduction);
+  const negativeMarkingUsed = num(d.negativeMarkingUsed);
+  const correctCount = num(d.correctCount);
+  const wrongCount = num(d.wrongCount);
+  const unansweredCount = num(d.unansweredCount);
+  const accuracy = num(d.accuracy);
+  const percentage = num(d.percentage);
+  const timeSpentSeconds = num(d.timeSpentSeconds);
+  if (
+    score === null || totalMarks === null || negativeDeduction === null
+    || negativeMarkingUsed === null || correctCount === null || wrongCount === null
+    || unansweredCount === null || accuracy === null || percentage === null
+    || timeSpentSeconds === null
+    || typeof d.markingSchemeVersion !== 'string'
+    || !Array.isArray(d.answers) || d.answers.length === 0
+  ) {
+    return null;
+  }
+  const answers = d.answers as JobAttemptAnswer[];
+  // The stored answers must be well-formed — reuse the attempt
+  // validator's per-answer checks by validating a rebuilt doc
+  // shape (validateAttemptResult needs the full doc; here the
+  // cheap structural check is enough — malformed answers fail
+  // the counts check below or the field checks).
+  for (const a of answers) {
+    if (
+      typeof a !== 'object' || a === null
+      || !Number.isInteger(a.n)
+      || typeof a.questionId !== 'string'
+      || typeof a.topicId !== 'string'
+      || typeof a.subjectId !== 'string'
+      || (a.selected !== null && !['A', 'B', 'C', 'D'].includes(a.selected))
+      || typeof a.correct !== 'boolean'
+      || typeof a.marks !== 'number' || !Number.isFinite(a.marks)
+      || (a.correctText !== null && typeof a.correctText !== 'string')
+      || typeof a.timeSpentSeconds !== 'number' || !Number.isFinite(a.timeSpentSeconds)
+    ) {
+      return null;
+    }
+  }
+  let correct = 0;
+  let wrong = 0;
+  let unanswered = 0;
+  const wrongQuestionIds: string[] = [];
+  for (const a of answers) {
+    if (a.selected === null) unanswered += 1;
+    else if (a.correct) correct += 1;
+    else {
+      wrong += 1;
+      wrongQuestionIds.push(a.questionId);
+    }
+  }
+  if (correct !== correctCount || wrong !== wrongCount || unanswered !== unansweredCount) {
+    return null;
+  }
+  return {
+    score,
+    clientCalculatedScore: score,
+    totalMarks,
+    negativeDeduction,
+    negativeMarkingUsed,
+    markingSchemeVersion: d.markingSchemeVersion,
+    correctCount,
+    wrongCount,
+    unansweredCount,
+    accuracy,
+    percentage,
+    timeSpentSeconds,
+    answers,
+    wrongQuestionIds,
+    weakTopics: weakTopicsFromAttemptAnswers(answers),
   };
 }
 
@@ -972,6 +1422,134 @@ export function validatePracticeSession(doc: unknown): string[] {
   return problems;
 }
 
+const JOB_MOCK_SESSION_KEYS = [
+  'kind',
+  'mockId',
+  'bundleId',
+  'examSlug',
+  'status',
+  'startedAt',
+  'endsAt',
+  'questionRefs',
+  'answers',
+  'currentQuestion',
+  'lastSyncedAt',
+  'clientEndsAtMillis',
+  'submittedAt',
+  'createdAt',
+  'updatedAt',
+  'revision',
+] as const;
+
+/** Validate a mock session doc. Returns problem strings; empty =
+ * valid. Mirrors the Step 3 §2.12 shape + the Step 8 rules
+ * (kind 'mock', mockId the bare key, endsAt null-or-timestamp —
+ * set ONCE after read-back, never reset — clientEndsAtMillis a
+ * number-or-null). The deadline itself is checked by
+ * mockDeadlineMillis / isMockExpired, not here: a session whose
+ * endsAt is still null is VALID (the read-back has not landed
+ * yet) and runs on clientEndsAtMillis. */
+export function validateMockSession(doc: unknown): string[] {
+  const problems: string[] = [];
+  const label = 'jobSessions(mock)';
+  if (typeof doc !== 'object' || doc === null || Array.isArray(doc)) {
+    return [`${label}: doc must be an object`];
+  }
+  const d = doc as Record<string, unknown>;
+  for (const k of Object.keys(d)) {
+    if (!(JOB_MOCK_SESSION_KEYS as readonly string[]).includes(k)) {
+      problems.push(`${label}: unknown field '${k}'`);
+    }
+  }
+  if (d.kind !== 'mock') problems.push(`${label}: kind must be 'mock'`);
+  if (!isNonEmptyString(d.mockId, 200)) {
+    problems.push(`${label}: mockId must be a non-empty string ≤200 chars`);
+  }
+  if (!Number.isInteger(d.revision) || (d.revision as number) < 1) {
+    problems.push(`${label}: revision must be an integer ≥1`);
+  }
+  if (!isNonEmptyString(d.bundleId, 200)) {
+    problems.push(`${label}: bundleId must be a non-empty string ≤200 chars`);
+  }
+  if (!isNonEmptyString(d.examSlug, 100)) {
+    problems.push(`${label}: examSlug must be a non-empty string ≤100 chars`);
+  }
+  if (!['in-progress', 'submitted', 'abandoned'].includes(String(d.status))) {
+    problems.push(`${label}: status must be in-progress/submitted/abandoned`);
+  }
+  for (const f of ['startedAt', 'createdAt', 'updatedAt', 'lastSyncedAt']) {
+    if (!isTimestampLike(d[f])) problems.push(`${label}: ${f} must be a timestamp`);
+  }
+  // The stored deadline: null until the read-back sets it once,
+  // then a timestamp forever (the rules freeze it — a second
+  // write is denied, so a reset is impossible server-side too).
+  if (d.endsAt !== null && !isTimestampLike(d.endsAt)) {
+    problems.push(`${label}: endsAt must be null or a timestamp`);
+  }
+  if (d.clientEndsAtMillis !== null
+    && (typeof d.clientEndsAtMillis !== 'number' || !Number.isFinite(d.clientEndsAtMillis))) {
+    problems.push(`${label}: clientEndsAtMillis must be null or a finite number`);
+  }
+  if (d.status === 'submitted') {
+    if (!isTimestampLike(d.submittedAt)) {
+      problems.push(`${label}: submittedAt must be a timestamp when status is submitted`);
+    }
+  } else if (d.submittedAt !== null) {
+    problems.push(`${label}: submittedAt must be null unless status is submitted`);
+  }
+  if (!Array.isArray(d.questionRefs) || d.questionRefs.length === 0) {
+    problems.push(`${label}: questionRefs must be a non-empty list`);
+    return problems;
+  }
+  const ns: number[] = [];
+  d.questionRefs.forEach((r, i) => {
+    const ref = r as Record<string, unknown>;
+    if (typeof ref !== 'object' || ref === null
+      || !isNonEmptyString(ref.bundleId, 200)
+      || !Number.isInteger(ref.n) || (ref.n as number) < 1
+      || !isNonEmptyString(ref.questionId, 200)) {
+      problems.push(`${label}: questionRefs[${i}] is malformed (bundleId/n/questionId required)`);
+    } else {
+      ns.push(ref.n as number);
+    }
+  });
+  const sorted = [...ns].sort((a, b) => a - b);
+  if (sorted.join(',') !== Array.from({ length: ns.length }, (_, i) => i + 1).join(',')) {
+    problems.push(`${label}: questionRefs n values must be exactly 1..${ns.length}`);
+  }
+  if (!Number.isInteger(d.currentQuestion)
+    || (d.currentQuestion as number) < 1
+    || (d.currentQuestion as number) > d.questionRefs.length) {
+    problems.push(`${label}: currentQuestion must be 1..${d.questionRefs.length}`);
+  }
+  if (typeof d.answers !== 'object' || d.answers === null || Array.isArray(d.answers)) {
+    problems.push(`${label}: answers must be a map`);
+    return problems;
+  }
+  const answers = d.answers as Record<string, unknown>;
+  const answerKeys = Object.keys(answers).map(Number).sort((a, b) => a - b);
+  if (answerKeys.join(',') !== sorted.join(',')) {
+    problems.push(`${label}: answers keys must match questionRefs n values exactly`);
+  }
+  for (const [k, v] of Object.entries(answers)) {
+    const a = v as Record<string, unknown>;
+    if (typeof a !== 'object' || a === null) {
+      problems.push(`${label}: answers[${k}] must be an object`);
+      continue;
+    }
+    if (a.selected !== null && !['A', 'B', 'C', 'D'].includes(String(a.selected))) {
+      problems.push(`${label}: answers[${k}].selected must be A/B/C/D or null`);
+    }
+    if (typeof a.markedForReview !== 'boolean') {
+      problems.push(`${label}: answers[${k}].markedForReview must be a boolean`);
+    }
+    if (typeof a.timeSpentSeconds !== 'number' || !Number.isFinite(a.timeSpentSeconds) || a.timeSpentSeconds < 0) {
+      problems.push(`${label}: answers[${k}].timeSpentSeconds must be a number ≥0`);
+    }
+  }
+  return problems;
+}
+
 const JOB_ATTEMPT_RESULT_KEYS = [
   'kind',
   'mockId',
@@ -1032,6 +1610,9 @@ export function validateAttemptResult(result: unknown): string[] {
   }
   if (d.kind === 'practice' && d.mockId !== null) {
     problems.push(`${label}: mockId must be null for practice`);
+  }
+  if (d.kind === 'mock' && !isNonEmptyString(d.mockId, 200)) {
+    problems.push(`${label}: mockId must be a non-empty string ≤200 chars for mock`);
   }
   if (!isNonEmptyString(d.bundleId, 200)) {
     problems.push(`${label}: bundleId must be a non-empty string ≤200 chars`);
