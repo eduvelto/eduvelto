@@ -365,6 +365,11 @@ service cloud.firestore {
         && (d.get('slug', null) == null
             || (d.get('slug', null) is string && d.get('slug', null).matches('^[a-z0-9-]+$')))
         && (d.get('applicableCycle', null) == null || d.get('applicableCycle', null) is string)
+        // Step 6 fold-in, ChatGPT P2-02: configVersion is an optional
+        // string when present (the seed stamps it; a rules-created
+        // subject may carry it too). It is outside every update
+        // rule's affected-keys allowlist, so it is immutable once set.
+        && (d.get('configVersion', null) == null || d.get('configVersion', null) is string)
         && d.get('status', null) in ['draft', 'published']
         && isJobContentReviewState(d.get('reviewStatus', null))
         && jobContentStatesConsistent(d);

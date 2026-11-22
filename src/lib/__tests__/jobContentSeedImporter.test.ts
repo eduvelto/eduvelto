@@ -8,10 +8,14 @@
  *      fail (Published subject, verified subject, subject under
  *      it-professional, subject under a null-config exam, doc id
  *      mismatch, duplicate slug, marks sum mismatch, order gap,
- *      missing syllabusSource, non-empty chapters);
+ *      missing syllabusSource, non-empty chapters, missing
+ *      _meta.version, configVersion drift/missing);
  *  (2) planContentSeedApply — empty DB ⇒ 23 toCreate; exact DB ⇒ 23
  *      unchanged (idempotent); one changed doc ⇒ 1 toUpdate; the
  *      empty collections contribute no docs.
+ *  (3) emulatorTargetProblem (Step 6 fold-in, P1-06) — loopback
+ *      targets accepted; production hosts, LAN addresses and empty /
+ *      malformed targets refused.
  *
  * Runs under plain node: `npm run test:unit`.
  */
@@ -22,6 +26,7 @@ import {
   validateContentSeed,
   planContentSeedApply,
 } from '../../../scripts/apply-job-content-seed.mjs';
+import { emulatorTargetProblem } from '../../../scripts/apply-job-seed.mjs';
 
 const SEED_PATH = fileURLToPath(
   new URL('../../../team/job-content-seed.json', import.meta.url),
@@ -160,6 +165,61 @@ describe('validateContentSeed (Step 6)', () => {
     expect(validateContentSeed(bad)).toEqual(
       expect.arrayContaining([expect.stringMatching(/expected 23 jobSubjects, found 22/)]),
     );
+  });
+
+  // Step 6 fold-in, ChatGPT P2-02: the seed names the config version
+  // it was derived from, and every subject doc must carry the same
+  // version — drift is rejected before any write.
+  it('rejects a seed with no _meta.version', () => {
+    const bad = cloneSeed() as Record<string, unknown>;
+    delete (bad._meta as Record<string, unknown>).version;
+    expect(validateContentSeed(bad)).toEqual(
+      expect.arrayContaining([expect.stringMatching(/_meta\.version missing/)]),
+    );
+  });
+
+  it('rejects a subject whose configVersion differs from the seed version', () => {
+    const bad = cloneSeed();
+    bad.jobSubjects['bcs__bangla'].configVersion = '2026-11-21.9';
+    expect(validateContentSeed(bad)).toEqual(
+      expect.arrayContaining([
+        expect.stringMatching(/bcs__bangla.*configVersion '2026-11-21\.9' != seed version '2026-11-22\.1'/),
+      ]),
+    );
+  });
+
+  it('rejects a subject with no configVersion at all', () => {
+    const bad = cloneSeed();
+    delete bad.jobSubjects['bank__math'].configVersion;
+    expect(validateContentSeed(bad)).toEqual(
+      expect.arrayContaining([expect.stringMatching(/bank__math.*configVersion 'undefined'/) ]),
+    );
+  });
+});
+
+describe('emulatorTargetProblem (Step 6 fold-in, ChatGPT P1-06)', () => {
+  it('accepts the loopback forms', () => {
+    expect(emulatorTargetProblem('127.0.0.1:8080')).toBeNull();
+    expect(emulatorTargetProblem('127.0.0.1:8081')).toBeNull();
+    expect(emulatorTargetProblem('localhost:8080')).toBeNull();
+    expect(emulatorTargetProblem('[::1]:8080')).toBeNull();
+    expect(emulatorTargetProblem('127.0.0.1')).toBeNull();
+  });
+
+  it('refuses a production Firestore host', () => {
+    expect(emulatorTargetProblem('firestore.googleapis.com:443')).toMatch(/REFUSED.*production/);
+    expect(emulatorTargetProblem('firestore.googleapis.com')).toMatch(/REFUSED/);
+  });
+
+  it('refuses any non-loopback address', () => {
+    expect(emulatorTargetProblem('10.0.0.5:8080')).toMatch(/REFUSED.*not a loopback/);
+    expect(emulatorTargetProblem('192.168.1.2:8080')).toMatch(/REFUSED.*not a loopback/);
+    expect(emulatorTargetProblem('example.com:8080')).toMatch(/REFUSED.*not a loopback/);
+  });
+
+  it('refuses an empty or malformed target', () => {
+    expect(emulatorTargetProblem('')).toMatch(/empty/);
+    expect(emulatorTargetProblem('[::1:8080')).toMatch(/not a valid host:port/);
   });
 });
 

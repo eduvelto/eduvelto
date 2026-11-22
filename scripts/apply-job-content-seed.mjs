@@ -19,16 +19,31 @@
  *     (`{examSlug}__{subjectSlug}` — no duplicates);
  *   - idempotent: re-running a completed apply reports every doc
  *     'unchanged' and writes nothing;
+ *   - fail-closed emulator guard (Step 6 fold-in, ChatGPT P1-06):
+ *     the target must be a loopback address AND answer like a
+ *     Firestore emulator before any read or write — a --emulator
+ *     value pointing elsewhere is refused, never attempted;
+ *   - config version (Step 6 fold-in, ChatGPT P2-02): the seed's
+ *     `_meta.version` names the verified rulesConfig version the 23
+ *     subjects were derived from; every subject doc carries the same
+ *     `configVersion`, and the validator rejects any mismatch, so a
+ *     stale seed can never be applied against a newer config (or
+ *     vice versa); the version is recorded in the audit manifest
+ *     (P2-04) together with the seed file's sha256;
  *   - existing-document detection: a doc that already exists is
  *     never blindly overwritten — modified docs need --allow-modify,
  *     and even then createdAt is PRESERVED from the existing doc
- *     (content docs carry no rulesConfigHistory — there is no config
- *     here to version);
+ *     (content docs carry no rulesConfigHistory — the config version
+ *     lives in each doc's `configVersion` field, immutable after
+ *     creation: it is outside every update rule's affected-keys
+ *     allowlist);
  *   - schema + referential-integrity validation BEFORE any write
  *     (every subject's examSlug is one of the 4 verified exams; the
  *     doc ID matches examSlug + slug; orders 1..N contiguous per
  *     exam; marks sum to the exam's questionCount; every subject
- *     carries a syllabusSource);
+ *     carries a syllabusSource); the seed's `_meta.version` must be
+ *     present and every subject's `configVersion` must equal it
+ *     (P2-02 drift check);
  *   - ISO-string timestamps are converted to real Firestore
  *     Timestamps (createdAt set once, never overwritten on reseed;
  *     updatedAt refreshed on every real change);
@@ -56,9 +71,10 @@
  * the library loader uses; the live OAuth path is NOT present here).
  */
 import { readFileSync, writeFileSync } from 'node:fs';
+import { createHash } from 'node:crypto';
 import { resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { canon, compareDoc, seedDocFields } from './apply-job-seed.mjs';
+import { canon, compareDoc, seedDocFields, emulatorTargetProblem, probeEmulator } from './apply-job-seed.mjs';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const PROJECT_ID = 'eduvelto';
@@ -84,10 +100,19 @@ export const JOB_CONTENT_COLLECTIONS = ['jobSubjects', 'jobChapters', 'jobTopics
 /* ------------------------------------------------------------------ */
 
 /** Validate the whole content seed (schema + referential integrity +
- * the all-draft guard). Returns problem strings; empty = valid. */
+ * the all-draft guard + the config-version drift check). Returns
+ * problem strings; empty = valid. */
 export function validateContentSeed(seed) {
   const problems = [];
   if (!seed || typeof seed !== 'object') return ['seed is not an object'];
+  // Step 6 fold-in, ChatGPT P2-02: the seed names the verified
+  // rulesConfig version it was derived from, and every subject doc
+  // must carry the same version — a stale seed against a newer config
+  // (or a hand-edited doc) is rejected before any write.
+  const seedVersion = seed._meta?.version;
+  if (typeof seedVersion !== 'string' || seedVersion.length === 0) {
+    problems.push('_meta.version missing: the seed must name the rulesConfig version it was derived from');
+  }
   const subjects = seed.jobSubjects ?? {};
   if (typeof subjects !== 'object' || Array.isArray(subjects)) {
     return ['jobSubjects must be a map of doc id -> doc'];
@@ -125,6 +150,12 @@ export function validateContentSeed(seed) {
     if (!Number.isInteger(doc.marks) || doc.marks < 1) problems.push(`${label}: marks must be a positive integer`);
     if (typeof doc.syllabusSource !== 'string' || doc.syllabusSource.length === 0) {
       problems.push(`${label}: syllabusSource missing (every subject needs its official source)`);
+    }
+    // Step 6 fold-in, ChatGPT P2-02: the doc's config version must
+    // match the seed version — a doc from another config generation
+    // is drift, not data.
+    if (typeof seedVersion === 'string' && doc.configVersion !== seedVersion) {
+      problems.push(`${label}: configVersion '${doc.configVersion}' != seed version '${seedVersion}'`);
     }
     // All-draft guard: the seed must NEVER create a Published or
     // verified subject (0 verified teachers — teacher review first).
@@ -286,6 +317,13 @@ async function main(argv) {
     return 2;
   }
   const emuHost = args[emuIdx + 1] && !args[emuIdx + 1].startsWith('--') ? args[emuIdx + 1] : '127.0.0.1:8080';
+  // Step 6 fold-in, ChatGPT P1-06: fail closed unless the target is a
+  // loopback emulator address (never trust the --emulator flag alone).
+  const targetProblem = emulatorTargetProblem(emuHost);
+  if (targetProblem) {
+    console.error(targetProblem);
+    return 2;
+  }
   const rest = `http://${emuHost}/v1/projects/${PROJECT_ID}/databases/(default)/documents`;
   const seedIdx = args.indexOf('--seed');
   const seedPath = seedIdx >= 0 ? resolve(args[seedIdx + 1]) : SEED_PATH;
@@ -301,6 +339,14 @@ async function main(argv) {
     console.error('Seed validation FAILED — nothing was written:');
     for (const p of problems) console.error('  - ' + p);
     return 1;
+  }
+
+  // Step 6 fold-in, ChatGPT P1-06: prove the target IS an emulator
+  // before any read or write (a loopback address alone does not prove
+  // an emulator is listening there).
+  if (!(await probeEmulator(rest))) {
+    console.error(`REFUSED: ${emuHost} did not answer like a Firestore emulator (expected HTTP 200 on a collection list). Is the emulator running on that port?`);
+    return 2;
   }
 
   // Read existing docs (emulator).
@@ -368,11 +414,19 @@ async function main(argv) {
     }
   }
 
+  // Step 6 fold-in, ChatGPT P2-04: the audit manifest records the
+  // seed provenance — seed version, config version, and the seed
+  // file's sha256 — so any later apply can be traced to the exact
+  // file and config generation it came from.
+  const seedBytes = readFileSync(seedPath);
   const audit = {
     tool: 'scripts/apply-job-content-seed.mjs',
     target: `emulator ${emuHost}`,
     at: now.toISOString(),
     seed: seedPath,
+    seedVersion: seed._meta?.version ?? null,
+    configVersion: seed._meta?.version ?? null,
+    seedSha256: createHash('sha256').update(seedBytes).digest('hex'),
     plan: {
       toCreate: plan.toCreate.map((c) => `${c.collection}/${c.id}`),
       toUpdate: plan.toUpdate.map((u) => `${u.collection}/${u.id}`),

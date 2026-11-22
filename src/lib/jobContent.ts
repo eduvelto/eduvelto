@@ -113,6 +113,17 @@ function buildSubjects(examSlug: string): JobSubjectDef[] {
  * it-professional are absent (their rulesConfig is null / their scope
  * is undecided, so Step 6 defines no subjects for them).
  */
+
+/**
+ * Config version (Step 6 fold-in, ChatGPT P2-02): the version of the
+ * verified JOB_RULES_CONFIGS this subject list was derived from.
+ * Bump it whenever a verified exam pattern changes and the subjects
+ * are re-derived. The seed JSON's `_meta.version` and every subject
+ * doc's `configVersion` must equal this value (pinned by unit test);
+ * the importer rejects any mismatch, so a stale seed can never be
+ * applied against a newer config.
+ */
+export const JOB_CONTENT_CONFIG_VERSION = '2026-11-22.1';
 export const JOB_SUBJECTS: Record<string, JobSubjectDef[]> = Object.fromEntries(
   Object.keys(JOB_SUBJECT_SLUGS).map((examSlug) => [examSlug, buildSubjects(examSlug)]),
 );

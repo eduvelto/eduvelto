@@ -7,7 +7,9 @@
     "status": "DISK ONLY — never applied to the live database. The app still reads the hardcoded canonical config; this seed is the Firestore-ready form for the future read-path switch + admin UI. Apply only with separate approval, via scripts/apply-job-content-seed.mjs (emulator only; ISO timestamps become Firestore Timestamps on apply).",
     "step6": "Step 6 defines SUBJECTS ONLY. Every doc is a draft (status draft, reviewStatus Not Started) with authorId/verifiedBy/verifiedAt null — nothing is Published and nothing is verified without teacher review (0 verified teachers today). NTRCA subjects carry applicableCycle 18th (last verified pattern); all others null.",
     "title": "Eduvelto Job Preparation — jobSubjects seed (Step 6)",
-    "verifiedFiguresOnly": "Subjects exist ONLY for the 4 verified exams (BCS, Bank, Primary, NTRCA 18th). The other 10 exams have a null rulesConfig and it-professional has scope_pending (owner decision 13.8) — Step 6 defines NO subjects for them. Subject marks sum to each exam questionCount (BCS 200, Bank 100, Primary 90, NTRCA 100)."
+    "verifiedFiguresOnly": "Subjects exist ONLY for the 4 verified exams (BCS, Bank, Primary, NTRCA 18th). The other 10 exams have a null rulesConfig and it-professional has scope_pending (owner decision 13.8) — Step 6 defines NO subjects for them. Subject marks sum to each exam questionCount (BCS 200, Bank 100, Primary 90, NTRCA 100).",
+    "version": "2026-11-22.1",
+    "configVersion": "2026-11-22.1"
   },
   "jobChapters": [],
   "jobLessons": [],
@@ -28,7 +30,8 @@
       "syllabusSource": "BSCS বিজ্ঞপ্তি",
       "updatedAt": "2026-11-22T00:00:00.000Z",
       "verifiedAt": null,
-      "verifiedBy": null
+      "verifiedBy": null,
+      "configVersion": "2026-11-22.1"
     },
     "bank__computer": {
       "applicableCycle": null,
@@ -46,7 +49,8 @@
       "syllabusSource": "BSCS বিজ্ঞপ্তি",
       "updatedAt": "2026-11-22T00:00:00.000Z",
       "verifiedAt": null,
-      "verifiedBy": null
+      "verifiedBy": null,
+      "configVersion": "2026-11-22.1"
     },
     "bank__english": {
       "applicableCycle": null,
@@ -64,7 +68,8 @@
       "syllabusSource": "BSCS বিজ্ঞপ্তি",
       "updatedAt": "2026-11-22T00:00:00.000Z",
       "verifiedAt": null,
-      "verifiedBy": null
+      "verifiedBy": null,
+      "configVersion": "2026-11-22.1"
     },
     "bank__general-knowledge": {
       "applicableCycle": null,
@@ -82,7 +87,8 @@
       "syllabusSource": "BSCS বিজ্ঞপ্তি",
       "updatedAt": "2026-11-22T00:00:00.000Z",
       "verifiedAt": null,
-      "verifiedBy": null
+      "verifiedBy": null,
+      "configVersion": "2026-11-22.1"
     },
     "bank__math": {
       "applicableCycle": null,
@@ -100,7 +106,8 @@
       "syllabusSource": "BSCS বিজ্ঞপ্তি",
       "updatedAt": "2026-11-22T00:00:00.000Z",
       "verifiedAt": null,
-      "verifiedBy": null
+      "verifiedBy": null,
+      "configVersion": "2026-11-22.1"
     },
     "bcs__bangla": {
       "applicableCycle": null,
@@ -118,7 +125,8 @@
       "syllabusSource": "BPSC বিজ্ঞপ্তি",
       "updatedAt": "2026-11-22T00:00:00.000Z",
       "verifiedAt": null,
-      "verifiedBy": null
+      "verifiedBy": null,
+      "configVersion": "2026-11-22.1"
     },
     "bcs__bangladesh-affairs": {
       "applicableCycle": null,
@@ -136,7 +144,8 @@
       "syllabusSource": "BPSC বিজ্ঞপ্তি",
       "updatedAt": "2026-11-22T00:00:00.000Z",
       "verifiedAt": null,
-      "verifiedBy": null
+      "verifiedBy": null,
+      "configVersion": "2026-11-22.1"
     },
     "bcs__computer-ict": {
       "applicableCycle": null,
@@ -154,7 +163,8 @@
       "syllabusSource": "BPSC বিজ্ঞপ্তি",
       "updatedAt": "2026-11-22T00:00:00.000Z",
       "verifiedAt": null,
-      "verifiedBy": null
+      "verifiedBy": null,
+      "configVersion": "2026-11-22.1"
     },
     "bcs__english": {
       "applicableCycle": null,
@@ -172,7 +182,8 @@
       "syllabusSource": "BPSC বিজ্ঞপ্তি",
       "updatedAt": "2026-11-22T00:00:00.000Z",
       "verifiedAt": null,
-      "verifiedBy": null
+      "verifiedBy": null,
+      "configVersion": "2026-11-22.1"
     },
     "bcs__ethics": {
       "applicableCycle": null,
@@ -190,7 +201,8 @@
       "syllabusSource": "BPSC বিজ্ঞপ্তি",
       "updatedAt": "2026-11-22T00:00:00.000Z",
       "verifiedAt": null,
-      "verifiedBy": null
+      "verifiedBy": null,
+      "configVersion": "2026-11-22.1"
     },
     "bcs__general-science": {
       "applicableCycle": null,
@@ -208,7 +220,8 @@
       "syllabusSource": "BPSC বিজ্ঞপ্তি",
       "updatedAt": "2026-11-22T00:00:00.000Z",
       "verifiedAt": null,
-      "verifiedBy": null
+      "verifiedBy": null,
+      "configVersion": "2026-11-22.1"
     },
     "bcs__geography": {
       "applicableCycle": null,
@@ -226,7 +239,8 @@
       "syllabusSource": "BPSC বিজ্ঞপ্তি",
       "updatedAt": "2026-11-22T00:00:00.000Z",
       "verifiedAt": null,
-      "verifiedBy": null
+      "verifiedBy": null,
+      "configVersion": "2026-11-22.1"
     },
     "bcs__international-affairs": {
       "applicableCycle": null,
@@ -244,7 +258,8 @@
       "syllabusSource": "BPSC বিজ্ঞপ্তি",
       "updatedAt": "2026-11-22T00:00:00.000Z",
       "verifiedAt": null,
-      "verifiedBy": null
+      "verifiedBy": null,
+      "configVersion": "2026-11-22.1"
     },
     "bcs__mathematical-reasoning": {
       "applicableCycle": null,
@@ -262,7 +277,8 @@
       "syllabusSource": "BPSC বিজ্ঞপ্তি",
       "updatedAt": "2026-11-22T00:00:00.000Z",
       "verifiedAt": null,
-      "verifiedBy": null
+      "verifiedBy": null,
+      "configVersion": "2026-11-22.1"
     },
     "bcs__mental-ability": {
       "applicableCycle": null,
@@ -280,7 +296,8 @@
       "syllabusSource": "BPSC বিজ্ঞপ্তি",
       "updatedAt": "2026-11-22T00:00:00.000Z",
       "verifiedAt": null,
-      "verifiedBy": null
+      "verifiedBy": null,
+      "configVersion": "2026-11-22.1"
     },
     "ntrca__bangla": {
       "applicableCycle": "18th",
@@ -298,7 +315,8 @@
       "syllabusSource": "NTRCA ১৮তম পরীক্ষার বিজ্ঞপ্তি",
       "updatedAt": "2026-11-22T00:00:00.000Z",
       "verifiedAt": null,
-      "verifiedBy": null
+      "verifiedBy": null,
+      "configVersion": "2026-11-22.1"
     },
     "ntrca__english": {
       "applicableCycle": "18th",
@@ -316,7 +334,8 @@
       "syllabusSource": "NTRCA ১৮তম পরীক্ষার বিজ্ঞপ্তি",
       "updatedAt": "2026-11-22T00:00:00.000Z",
       "verifiedAt": null,
-      "verifiedBy": null
+      "verifiedBy": null,
+      "configVersion": "2026-11-22.1"
     },
     "ntrca__general-knowledge": {
       "applicableCycle": "18th",
@@ -334,7 +353,8 @@
       "syllabusSource": "NTRCA ১৮তম পরীক্ষার বিজ্ঞপ্তি",
       "updatedAt": "2026-11-22T00:00:00.000Z",
       "verifiedAt": null,
-      "verifiedBy": null
+      "verifiedBy": null,
+      "configVersion": "2026-11-22.1"
     },
     "ntrca__math": {
       "applicableCycle": "18th",
@@ -352,7 +372,8 @@
       "syllabusSource": "NTRCA ১৮তম পরীক্ষার বিজ্ঞপ্তি",
       "updatedAt": "2026-11-22T00:00:00.000Z",
       "verifiedAt": null,
-      "verifiedBy": null
+      "verifiedBy": null,
+      "configVersion": "2026-11-22.1"
     },
     "primary-teacher__bangla": {
       "applicableCycle": null,
@@ -370,7 +391,8 @@
       "syllabusSource": "সরকারি প্রাথমিক বিদ্যালয় শিক্ষক নিয়োগ বিধিমালা ২০২৫, ২৮ আগস্ট ২০২৫",
       "updatedAt": "2026-11-22T00:00:00.000Z",
       "verifiedAt": null,
-      "verifiedBy": null
+      "verifiedBy": null,
+      "configVersion": "2026-11-22.1"
     },
     "primary-teacher__english": {
       "applicableCycle": null,
@@ -388,7 +410,8 @@
       "syllabusSource": "সরকারি প্রাথমিক বিদ্যালয় শিক্ষক নিয়োগ বিধিমালা ২০২৫, ২৮ আগস্ট ২০২৫",
       "updatedAt": "2026-11-22T00:00:00.000Z",
       "verifiedAt": null,
-      "verifiedBy": null
+      "verifiedBy": null,
+      "configVersion": "2026-11-22.1"
     },
     "primary-teacher__general-knowledge": {
       "applicableCycle": null,
@@ -406,7 +429,8 @@
       "syllabusSource": "সরকারি প্রাথমিক বিদ্যালয় শিক্ষক নিয়োগ বিধিমালা ২০২৫, ২৮ আগস্ট ২০২৫",
       "updatedAt": "2026-11-22T00:00:00.000Z",
       "verifiedAt": null,
-      "verifiedBy": null
+      "verifiedBy": null,
+      "configVersion": "2026-11-22.1"
     },
     "primary-teacher__math-science": {
       "applicableCycle": null,
@@ -424,7 +448,8 @@
       "syllabusSource": "সরকারি প্রাথমিক বিদ্যালয় শিক্ষক নিয়োগ বিধিমালা ২০২৫, ২৮ আগস্ট ২০২৫",
       "updatedAt": "2026-11-22T00:00:00.000Z",
       "verifiedAt": null,
-      "verifiedBy": null
+      "verifiedBy": null,
+      "configVersion": "2026-11-22.1"
     }
   },
   "jobTopics": []

@@ -22,7 +22,8 @@
  *  (7) the Firestore seed (team/job-content-seed.json) — 23 subject
  *      docs deep-matched against JOB_SUBJECTS (seed and code cannot
  *      drift apart), all draft / Not Started, no chapters / topics /
- *      lessons, every marks value matching the rulesConfig source.
+ *      lessons, every marks value matching the rulesConfig source,
+ *      every doc stamped with the config version (P2-02).
  *
  * Runs under plain node: `npm run test:unit`.
  */
@@ -37,6 +38,7 @@ import {
 import {
   JOB_SUBJECTS,
   JOB_CONTENT_COLLECTIONS,
+  JOB_CONTENT_CONFIG_VERSION,
   JOB_CONTENT_REVIEW_STATES,
   JOB_STEP6_LESSON_TYPES,
   jobSubjectsForExam,
@@ -400,8 +402,16 @@ describe('content seed (team/job-content-seed.json)', () => {
     }
   });
 
-  it('every marks value matches the rulesConfig source', () => {
-    for (const [examSlug, list] of Object.entries(JOB_SUBJECTS)) {
+  it('every seed doc carries the config version (Step 6 fold-in, P2-02)', () => {
+    expect(JOB_CONTENT_CONFIG_VERSION).toMatch(/^\d{4}-\d{2}-\d{2}\.\d+$/);
+    expect(SEED._meta.version).toBe(JOB_CONTENT_CONFIG_VERSION);
+    expect(SEED._meta.configVersion).toBe(JOB_CONTENT_CONFIG_VERSION);
+    for (const doc of Object.values(SEED.jobSubjects)) {
+      expect(doc.configVersion).toBe(JOB_CONTENT_CONFIG_VERSION);
+    }
+  });
+
+  it('every marks value matches the rulesConfig source', () => {    for (const [examSlug, list] of Object.entries(JOB_SUBJECTS)) {
       const config = JOB_RULES_CONFIGS[examSlug];
       for (const s of list) {
         const doc = SEED.jobSubjects[`${examSlug}__${s.slug}`];

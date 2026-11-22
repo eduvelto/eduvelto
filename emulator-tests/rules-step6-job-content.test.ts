@@ -675,6 +675,29 @@ describe('Field validations', () => {
       }),
     );
   });
+  // Step 6 fold-in, ChatGPT P2-02: configVersion is an optional
+  // string on a subject — a non-string value is denied, a string is
+  // accepted (the seed stamps every doc with the config version).
+  it('(v18) subject configVersion 123 (non-string) is DENIED', async () => {
+    await assertFails(
+      setDoc(doc(asAdmin(), 'jobSubjects', 'primary-teacher__bangla'), {
+        ...VALID_SUBJECT,
+        examSlug: 'primary-teacher',
+        authorId: 'admin-1',
+        configVersion: 123,
+      }),
+    );
+  });
+  it("(v19) subject configVersion '2026-11-22.1' is ALLOWED", async () => {
+    await assertSucceeds(
+      setDoc(doc(asAdmin(), 'jobSubjects', 'bank__math'), {
+        ...VALID_SUBJECT,
+        examSlug: 'bank',
+        authorId: 'admin-1',
+        configVersion: '2026-11-22.1',
+      }),
+    );
+  });
 });
 
 describe('isCommon rule, lessonType gate, body limit', () => {
@@ -1198,6 +1221,11 @@ describe('Moderator/Admin content updates, student/anonymous writes', () => {
   it("(u6) teacher (non-author) updating a draft is DENIED", async () => {
     await assertFails(
       updateDoc(doc(asTeacher2(), 'jobSubjects', 'bcs__gk'), { nameBn: 'অন্য শিক্ষকের সম্পাদনা' }),
+    );
+  });
+  it('(u7) admin changing configVersion on update is DENIED (P2-02: the version is immutable once set)', async () => {
+    await assertFails(
+      updateDoc(doc(asAdmin(), 'jobSubjects', 'bcs__gk'), { configVersion: '2099-01-01.1' }),
     );
   });
 });

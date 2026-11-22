@@ -252,6 +252,60 @@ export function seedHistoryEntry({ before, after, now }) {
 }
 
 /* ------------------------------------------------------------------ */
+/* Emulator target guard (Step 6 fold-in, ChatGPT P1-06)              */
+/* ------------------------------------------------------------------ */
+
+/** Pure check: is `hostPort` a loopback emulator address? Returns a
+ * problem string, or null when the target is safe. The importers
+ * refuse ANY non-loopback target — a --emulator value pointing at a
+ * production host (or any LAN/WAN address) is a live-write attempt,
+ * not an emulator run. The old behaviour (any host:port accepted as
+ * long as --emulator was passed) was a real foot-gun: the REST URL
+ * is plain http://host/v1/projects/... and nothing verified the host
+ * was an emulator at all. */
+export function emulatorTargetProblem(hostPort) {
+  if (typeof hostPort !== 'string' || hostPort.trim().length === 0) {
+    return 'emulator target is empty — pass --emulator host:port';
+  }
+  let host = hostPort.trim();
+  // IPv6 bracket form: [::1]:8080
+  if (host.startsWith('[')) {
+    const end = host.indexOf(']');
+    if (end < 0) return `emulator target '${hostPort}' is not a valid host:port`;
+    host = host.slice(1, end);
+  } else {
+    host = host.split(':')[0];
+  }
+  const lower = host.toLowerCase();
+  if (lower === 'localhost' || lower === '::1') return null;
+  if (/^127\.\d{1,3}\.\d{1,3}\.\d{1,3}$/.test(lower)) return null;
+  if (lower.endsWith('googleapis.com') || lower.includes('firestore')) {
+    return `REFUSED: '${hostPort}' looks like a production Firestore endpoint, not a local emulator`;
+  }
+  return `REFUSED: emulator target '${hostPort}' is not a loopback address — the importer writes only to a local emulator (127.0.0.1 / localhost / ::1)`;
+}
+
+/** Live probe: does `rest` answer like a Firestore emulator? Lists
+ * the jobCategories collection with the emulator's admin bypass
+ * (Bearer 'owner'): the emulator answers 200; a production endpoint
+ * answers 401 (the token is not a real credential) and a dead port
+ * throws. Fails closed — a probe failure refuses the run before any
+ * read or write. NOTE: the probe lists a REAL collection, not the
+ * database root or a made-up name — the emulator 404s the root and
+ * 400s unknown collections even with the bypass, while a real
+ * collection list is 200 when empty. */
+export async function probeEmulator(rest) {
+  try {
+    const res = await fetch(`${rest}/jobCategories?pageSize=1`, {
+      headers: { Authorization: 'Bearer owner' },
+    });
+    return res.ok;
+  } catch {
+    return false;
+  }
+}
+
+/* ------------------------------------------------------------------ */
 /* REST (emulator only — same pattern as load-library-content.mjs)     */
 /* ------------------------------------------------------------------ */
 
@@ -348,6 +402,13 @@ async function main(argv) {
     return 2;
   }
   const emuHost = args[emuIdx + 1] && !args[emuIdx + 1].startsWith('--') ? args[emuIdx + 1] : '127.0.0.1:8080';
+  // Step 6 fold-in, ChatGPT P1-06: fail closed unless the target is a
+  // loopback emulator address (never trust the --emulator flag alone).
+  const targetProblem = emulatorTargetProblem(emuHost);
+  if (targetProblem) {
+    console.error(targetProblem);
+    return 2;
+  }
   const rest = `http://${emuHost}/v1/projects/${PROJECT_ID}/databases/(default)/documents`;
   const seedIdx = args.indexOf('--seed');
   const seedPath = seedIdx >= 0 ? resolve(args[seedIdx + 1]) : SEED_PATH;
@@ -363,6 +424,14 @@ async function main(argv) {
     console.error('Seed validation FAILED — nothing was written:');
     for (const p of problems) console.error('  - ' + p);
     return 1;
+  }
+
+  // Step 6 fold-in, ChatGPT P1-06: prove the target IS an emulator
+  // before any read or write (a loopback address alone does not prove
+  // an emulator is listening there).
+  if (!(await probeEmulator(rest))) {
+    console.error(`REFUSED: ${emuHost} did not answer like a Firestore emulator (expected HTTP 200 on a collection list). Is the emulator running on that port?`);
+    return 2;
   }
 
   // Read existing docs (emulator).
