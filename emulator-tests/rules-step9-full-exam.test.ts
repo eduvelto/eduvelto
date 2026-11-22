@@ -25,6 +25,15 @@
  * all). e46 must run BEFORE e43 creates student-1's receipt for
  * mock__full__bcs__2.
  *
+ * Step 9 closure (e60–e72, appended last): e60–e66 operate on
+ * student-1's BUNDLE_ID receipt (created by e37 with the session
+ * anchor 'sess-rec-ok') — e60 re-issues it to the attempt anchor
+ * 'sess-att-ok-1' (created by e24), e61–e65 deny bad re-issues
+ * (each denied update leaves the doc unchanged, so order among
+ * them does not matter), e66a–e66c create + re-issue the
+ * practice_review receipt for the topic bundle. e67–e72 use fresh
+ * audit-log docs under users/student-1/jobExamAuditLogs.
+ *
  * Run with `npm run test:rules` (whole emulator-tests/ directory).
  */
 import { describe, it, beforeAll, afterAll } from 'vitest';
@@ -39,6 +48,7 @@ import {
   setDoc,
   getDoc,
   updateDoc,
+  deleteDoc,
   writeBatch,
   serverTimestamp,
 } from 'firebase/firestore';
@@ -277,6 +287,7 @@ async function seed() {
       ['student-2', 'student'],
       ['student-3', 'student'],
       ['moderator-1', 'moderator'],
+      ['admin-1', 'admin'],
     ] as const) {
       await setDoc(doc(db, 'users', uid), {
         displayName: uid,
@@ -782,6 +793,7 @@ const asStudent1 = () => env.authenticatedContext('student-1').firestore();
 const asStudent2 = () => env.authenticatedContext('student-2').firestore();
 const asStudent3 = () => env.authenticatedContext('student-3').firestore();
 const asModerator = () => env.authenticatedContext('moderator-1').firestore();
+const asAdmin = () => env.authenticatedContext('admin-1').firestore();
 
 describe('Step 9 — exam session create (timer + manifest + lock)', () => {
   it('(e1) session + lock batch SUCCEEDS (startedAt == request.time)', async () => {
@@ -1470,5 +1482,208 @@ describe('Step 9 — definitions, manifests, locks (H.8)', () => {
       updatedAt: serverTimestamp(),
     } as unknown as Record<string, unknown>);
     await assertSucceeds(batch.commit());
+  });
+});
+
+describe('Step 9 closure — anchored receipt re-issue (open question 1)', () => {
+  // e37 created student-1's BUNDLE_ID receipt (session anchor
+  // 'sess-rec-ok'); e24 created the submitted attempt
+  // 'sess-att-ok-1' for the same bundle. The re-issue tests below
+  // all operate on that ONE receipt doc, in order: e60 re-issues
+  // it to the attempt anchor, e61–e65 deny bad re-issues (each
+  // denied update leaves the doc unchanged).
+  it('(e60) re-issue to a NEWLY submitted attempt anchor SUCCEEDS', async () => {
+    await assertSucceeds(setDoc(
+      doc(asStudent1(), 'jobReceipts', `student-1_${BUNDLE_ID}`),
+      {
+        userId: 'student-1',
+        bundleId: BUNDLE_ID,
+        attemptId: 'sess-att-ok-1',
+        createdAt: new Date(),
+        purpose: 'exam_review',
+        bundleVersion: 1,
+      },
+    ));
+    const readBack = await assertSucceeds(getDoc(doc(asStudent1(), 'jobReceipts', `student-1_${BUNDLE_ID}`)));
+    if ((readBack.data() as Record<string, unknown>).attemptId !== 'sess-att-ok-1') {
+      throw new Error('receipt did not re-anchor to the new attempt');
+    }
+  });
+
+  it('(e61) re-issue anchored to an IN-PROGRESS session is DENIED', async () => {
+    await assertFails(setDoc(
+      doc(asStudent1(), 'jobReceipts', `student-1_${BUNDLE_ID}`),
+      {
+        userId: 'student-1',
+        bundleId: BUNDLE_ID,
+        attemptId: 'sess-rec-inprog',
+        createdAt: new Date(),
+        purpose: 'exam_review',
+        bundleVersion: 1,
+      },
+    ));
+  });
+
+  it('(e62) re-issue that MOVES the receipt to another bundle is DENIED', async () => {
+    await assertFails(setDoc(
+      doc(asStudent1(), 'jobReceipts', `student-1_${BUNDLE_ID}`),
+      {
+        userId: 'student-1',
+        bundleId: BUNDLE_ID_2,
+        attemptId: 'sess-att-ok-2',
+        createdAt: new Date(),
+        purpose: 'exam_review',
+        bundleVersion: 1,
+      },
+    ));
+  });
+
+  it('(e63) re-issue with a STALE createdAt is DENIED', async () => {
+    await assertFails(setDoc(
+      doc(asStudent1(), 'jobReceipts', `student-1_${BUNDLE_ID}`),
+      {
+        userId: 'student-1',
+        bundleId: BUNDLE_ID,
+        attemptId: 'sess-att-ok-1',
+        createdAt: STALE_30M,
+        purpose: 'exam_review',
+        bundleVersion: 1,
+      },
+    ));
+  });
+
+  it('(e64) re-issue with a FUTURE createdAt is DENIED', async () => {
+    await assertFails(setDoc(
+      doc(asStudent1(), 'jobReceipts', `student-1_${BUNDLE_ID}`),
+      {
+        userId: 'student-1',
+        bundleId: BUNDLE_ID,
+        attemptId: 'sess-att-ok-1',
+        createdAt: new Date(Date.now() + 60 * 60 * 1000),
+        purpose: 'exam_review',
+        bundleVersion: 1,
+      },
+    ));
+  });
+
+  it('(e65) re-issue by ANOTHER student is DENIED', async () => {
+    await assertFails(setDoc(
+      doc(asStudent2(), 'jobReceipts', `student-1_${BUNDLE_ID}`),
+      {
+        userId: 'student-2',
+        bundleId: BUNDLE_ID,
+        attemptId: 'sess-rec-ok-2',
+        createdAt: new Date(),
+        purpose: 'exam_review',
+        bundleVersion: 1,
+      },
+    ));
+  });
+
+  it('(e66a) practice_review receipt CREATE still SUCCEEDS (refactor guard)', async () => {
+    await assertSucceeds(setDoc(
+      doc(asStudent1(), 'jobReceipts', `student-1_${TOPIC_BUNDLE_ID}`),
+      {
+        userId: 'student-1',
+        bundleId: TOPIC_BUNDLE_ID,
+        attemptId: 'attempt-practice-1',
+        createdAt: new Date(),
+        purpose: 'practice_review',
+        bundleVersion: 1,
+      },
+    ));
+  });
+
+  it('(e66b) practice_review receipt RE-ISSUE SUCCEEDS', async () => {
+    await assertSucceeds(setDoc(
+      doc(asStudent1(), 'jobReceipts', `student-1_${TOPIC_BUNDLE_ID}`),
+      {
+        userId: 'student-1',
+        bundleId: TOPIC_BUNDLE_ID,
+        attemptId: 'attempt-practice-1',
+        createdAt: new Date(),
+        purpose: 'practice_review',
+        bundleVersion: 1,
+      },
+    ));
+  });
+
+  it('(e66c) practice re-issue anchored to an EXAM session is DENIED', async () => {
+    await assertFails(setDoc(
+      doc(asStudent1(), 'jobReceipts', `student-1_${TOPIC_BUNDLE_ID}`),
+      {
+        userId: 'student-1',
+        bundleId: TOPIC_BUNDLE_ID,
+        attemptId: 'sess-rec-ok',
+        createdAt: new Date(),
+        purpose: 'practice_review',
+        bundleVersion: 1,
+      },
+    ));
+  });
+});
+
+describe('Step 9 closure — mock-exam audit log (checklist item 11)', () => {
+  const validLog = (overrides: Record<string, unknown> = {}) => ({
+    uid: 'student-1',
+    event: 'mock_started',
+    examSlug: 'bcs',
+    mockId: 'full__bcs__1',
+    sessionId: 'sess-rec-ok',
+    bundleId: BUNDLE_ID,
+    createdAt: new Date(),
+    detail: null,
+    ...overrides,
+  });
+
+  it('(e67) owner creates a valid audit entry — SUCCEEDS', async () => {
+    await assertSucceeds(setDoc(
+      doc(asStudent1(), 'users', 'student-1', 'jobExamAuditLogs', 'log-e67'),
+      validLog(),
+    ));
+  });
+
+  it('(e68) audit entry with an UNKNOWN event is DENIED', async () => {
+    await assertFails(setDoc(
+      doc(asStudent1(), 'users', 'student-1', 'jobExamAuditLogs', 'log-e68'),
+      validLog({ event: 'exam_started' }),
+    ));
+  });
+
+  it('(e69) audit entry with a >500-char detail is DENIED', async () => {
+    await assertFails(setDoc(
+      doc(asStudent1(), 'users', 'student-1', 'jobExamAuditLogs', 'log-e69'),
+      validLog({ detail: 'x'.repeat(501) }),
+    ));
+  });
+
+  it('(e70) ANOTHER student cannot write into the owner’s audit log — DENIED', async () => {
+    await assertFails(setDoc(
+      doc(asStudent2(), 'users', 'student-1', 'jobExamAuditLogs', 'log-e70'),
+      validLog({ uid: 'student-2' }),
+    ));
+  });
+
+  it('(e71) audit entry UPDATE is DENIED; ADMIN delete SUCCEEDS', async () => {
+    await assertFails(updateDoc(
+      doc(asStudent1(), 'users', 'student-1', 'jobExamAuditLogs', 'log-e67'),
+      { detail: 'tampered' },
+    ));
+    await assertFails(deleteDoc(
+      doc(asStudent1(), 'users', 'student-1', 'jobExamAuditLogs', 'log-e67'),
+    ));
+    await assertSucceeds(deleteDoc(
+      doc(asAdmin(), 'users', 'student-1', 'jobExamAuditLogs', 'log-e67'),
+    ));
+  });
+
+  it('(e72) audit entry reads: owner + moderator SUCCEED, another student DENIED', async () => {
+    await assertSucceeds(setDoc(
+      doc(asStudent1(), 'users', 'student-1', 'jobExamAuditLogs', 'log-e72'),
+      validLog({ event: 'mock_submitted' }),
+    ));
+    await assertSucceeds(getDoc(doc(asStudent1(), 'users', 'student-1', 'jobExamAuditLogs', 'log-e72')));
+    await assertSucceeds(getDoc(doc(asModerator(), 'users', 'student-1', 'jobExamAuditLogs', 'log-e72')));
+    await assertFails(getDoc(doc(asStudent2(), 'users', 'student-1', 'jobExamAuditLogs', 'log-e72')));
   });
 });

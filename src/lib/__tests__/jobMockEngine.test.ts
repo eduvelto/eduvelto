@@ -40,6 +40,7 @@ import {
   buildMockReceiptDoc,
   examLockId,
   isExamLockLive,
+  isMockSessionExpired,
   validateExamManifest,
 } from '../jobMock';
 
@@ -310,6 +311,49 @@ describe('scoreMockAttempt', () => {
         examSlug: 'bcs', startedAtMillis: 1_000_000, submittedAtMillis: 1_050_000,
       }),
     ).toThrow(/key is null/);
+  });
+
+  it('clamps per-answer timeSpentSeconds to mock duration + 60s (never throws)', () => {
+    const { bundle, key } = makeMockBundle();
+    const r = scoreMockAttempt({
+      bundle, key,
+      answers: [
+        { n: 1, questionId: 'q1', selected: 'A', timeSpentSeconds: 99999 },
+        { n: 2, questionId: 'q2', selected: 'A', timeSpentSeconds: -5 },
+        { n: 3, questionId: 'q3', selected: null, timeSpentSeconds: 30 },
+      ],
+      rulesSnapshot: BCS_SNAPSHOT, examSlug: 'bcs',
+      startedAtMillis: 1_000_000, submittedAtMillis: 1_050_000,
+    });
+    // BCS_SNAPSHOT timeMinutes 5 → cap 5*60+60 = 360s.
+    expect(r.answers[0].timeSpentSeconds).toBe(360);
+    expect(r.answers[1].timeSpentSeconds).toBe(0);
+    expect(r.answers[2].timeSpentSeconds).toBe(30);
+    // The TOTAL is wall-clock (submittedAt − startedAt), not the
+    // sum of per-answer times — the clamp touches only analytics.
+    expect(r.timeSpentSeconds).toBe(50);
+    expect(r.score).toBe(0.5); // scoring unchanged by the clamp
+  });
+});
+
+describe('isMockSessionExpired (Step 9 closure, N4)', () => {
+  it('expired when the client deadline has passed, live before it', () => {
+    const session = makeSession(); // clientEndsAtMillis 1_000_000 + 5min
+    expect(isMockSessionExpired(session, 1_299_999)).toBe(false);
+    expect(isMockSessionExpired(session, 1_300_000)).toBe(true);
+  });
+
+  it('the STORED endsAt wins over the client estimate', () => {
+    const session = {
+      ...makeSession(),
+      endsAt: { toMillis: () => 2_000_000 },
+    } as unknown as JobMockSessionDoc;
+    expect(isMockSessionExpired(session, 1_500_000)).toBe(false);
+    expect(isMockSessionExpired(session, 2_000_000)).toBe(true);
+  });
+
+  it('a session with no deadline at all is kept (unknown, not past)', () => {
+    expect(isMockSessionExpired({ ...makeSession(), endsAt: null, clientEndsAtMillis: null })).toBe(false);
   });
 });
 

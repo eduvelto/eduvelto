@@ -392,13 +392,14 @@ async function runMockSubmitFlow(
   await assertSucceeds(batch.commit());
   // Design G step 3: receipt — BEST-EFFORT, exactly like the
   // lib's submitMockAttempt. The receipt doc-ID is
-  // {uid}_{bundleId}: ONE window per student per bundle, and
-  // nobody updates a receipt. A retake on the same bundle
-  // cannot mint a second receipt — this create is DENIED and
-  // the key read below reuses the first receipt while it is
-  // still fresh (10 min). After the window closes, a retake
-  // cannot score — that is the open retake question recorded
-  // in the Step 9 report, not a bug in this flow.
+  // {uid}_{bundleId}. Step 9 closure (open question 1): a retake
+  // on the same bundle RE-ISSUES the receipt — the setDoc is an
+  // UPDATE, allowed only as an anchored re-issue to the NEWLY
+  // submitted session with a fresh createdAt — so the second
+  // submit opens a NEW 10-minute window and the key read below
+  // works on the retake. (Before the closure fix this create was
+  // DENIED and a retake could never score after the first window
+  // closed; see i9.)
   try {
     await setDoc(
       doc(db, 'jobReceipts', `student-1_${setup.bundleId}`),
@@ -569,5 +570,23 @@ describe('Step 9 engine↔rules integration (lib builders → emulator)', () => 
     if (data.negativeDeduction !== 0) throw new Error(`expected deduction 0, got ${String(data.negativeDeduction)}`);
     if (data.negativeMarkingUsed !== 0) throw new Error(`expected penalty 0, got ${String(data.negativeMarkingUsed)}`);
     if (data.wrongCount !== 1) throw new Error('wrongCount wrong');
+  });
+
+  it('(i9) RETAKE on the same bundle: the second submit re-issues the receipt and scores', async () => {
+    // First mock: full flow, correct answer.
+    const first = await runMockSubmitFlow('sess-i9-a', 'B', BCS);
+    if (first.score !== 1) throw new Error(`first mock score ${first.score}, expected 1`);
+    // Retake: a NEW session on the same bundle. The receipt setDoc
+    // inside the flow is now an ANCHORED RE-ISSUE (Step 9 closure,
+    // open question 1) — it must SUCCEED, and the key read +
+    // scoring must work on the new session.
+    const second = await runMockSubmitFlow('sess-i9-b', 'B', BCS);
+    if (second.score !== 1) throw new Error(`retake mock score ${second.score}, expected 1`);
+    if (second.sessionId !== 'sess-i9-b') throw new Error('retake attempt is not the new session');
+    // The receipt now anchors to the RETAKE session (not the first).
+    const receipt = await assertSucceeds(getDoc(doc(asStudent(), 'jobReceipts', `student-1_${BCS.bundleId}`)));
+    if ((receipt.data() as Record<string, unknown>).attemptId !== 'sess-i9-b') {
+      throw new Error('receipt did not re-anchor to the retake session');
+    }
   });
 });

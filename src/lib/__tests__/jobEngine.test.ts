@@ -22,6 +22,7 @@ import {
   createPracticeSession,
   goToQuestion,
   jobExamPattern,
+  jobTopicLabelBn,
   orderQuestionsForMode,
   remainingMillis,
   scorePracticeAttempt,
@@ -916,5 +917,20 @@ describe('validators', () => {
       expect.arrayContaining([expect.stringContaining('revision must be an integer')]),
     );
     expect(validatePracticeSession({ ...makeSession(), revision: 3 })).toEqual([]);
+  });
+});
+
+describe('jobTopicLabelBn (Step 9 closure, D7)', () => {
+  it('humanizes a 4-segment topic ID into subject — chapter — topic', () => {
+    expect(jobTopicLabelBn('bcs__english__grammar__tense')).toBe('English — Grammar — Tense');
+    expect(jobTopicLabelBn('bank__math__arithmetic__percentage')).toBe('Math — Arithmetic — Percentage');
+  });
+
+  it('falls back gracefully for shorter IDs and never shows the raw slug', () => {
+    expect(jobTopicLabelBn('bcs__english__grammar')).toBe('English — Grammar');
+    expect(jobTopicLabelBn('bcs__english')).toBe('English');
+    expect(jobTopicLabelBn('bcs')).toBe('Bcs');
+    expect(jobTopicLabelBn('')).toBe('অজানা টপিক');
+    expect(jobTopicLabelBn('____')).toBe('অজানা টপিক');
   });
 });
