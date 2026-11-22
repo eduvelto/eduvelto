@@ -127,6 +127,15 @@ export default function AdminPage() {
       to: '/admin/admissions/syllabus',
     },
     {
+      id: 'nu-admissions-questions',
+      titleBn: 'ভর্তি প্রস্তুতি (NU) — প্রশ্নব্যাংক ও যাচাই',
+      titleEn: 'Admission preparation (NU) — question bank & verification',
+      descBn: 'NU প্রশ্ন লিখুন, পর্যালোচনা করুন ও প্রকাশ করুন — খসড়া → পর্যালোচনা → প্রকাশনা। ব্যাংক এখনো শূন্য।',
+      descEn: 'Write, review and publish NU questions — draft → review → publish. The bank is still empty.',
+      status: 'working',
+      to: '/admin/admissions/questions',
+    },
+    {
       id: 'content',
       titleBn: 'কনটেন্ট / ভিডিও / লাইব্রেরি',
       titleEn: 'Content / Video / Library',

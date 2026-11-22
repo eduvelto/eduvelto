@@ -150,6 +150,7 @@ export interface NuQuestionDoc {
    * version + 1 pointing back at the doc it corrects. */
   previousQuestionId?: string | null;
   createdAt?: Timestamp | null;
+  updatedAt?: Timestamp | null;
 }
 
 /** The draft answer key (NEW in NU-7 — see module header). One per
