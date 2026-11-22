@@ -111,6 +111,14 @@ function HomeIcon() {
     </svg>
   );
 }
+function UserIcon() {
+  return (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+      <circle cx="12" cy="7" r="4" />
+    </svg>
+  );
+}
 
 const MENUS: Menu[] = [
   {
@@ -235,7 +243,10 @@ export default function HeaderNav() {
         <img src="/logo.png" alt="Eduvelto" style={{ height: 44, width: 'auto', display: 'block' }} />
       </Link>
 
-      {/* Mobile-only: bell (Coming Soon) + avatar (signed in). */}
+      {/* Mobile-only: bell (Coming Soon) + profile icon (always visible).
+          Signed in → avatar letter → /profile. Signed out → person icon
+          → /login (owner 22 Nov 2026: the profile spot must show the
+          login page before login, not disappear). */}
       <span className="ev-header-mobile-actions">
         <span style={{ position: 'relative' }}>
           <button
@@ -260,7 +271,11 @@ export default function HeaderNav() {
           <Link to="/profile" className="ev-header-avatar" aria-label={t({ bn: 'প্রোফাইল', en: 'Profile' })}>
             {initial}
           </Link>
-        ) : null}
+        ) : (
+          <Link to="/login" className="ev-header-avatar" aria-label={t({ bn: 'লগইন', en: 'Log in' })}>
+            <UserIcon />
+          </Link>
+        )}
       </span>
 
       <button
