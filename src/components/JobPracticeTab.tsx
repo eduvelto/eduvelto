@@ -10,7 +10,7 @@
 
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Card, Chip, LinkButton, Reveal } from './ui';
+import { Card, LinkButton, Reveal } from './ui';
 import { useAuth } from '../lib/auth';
 import { listPublishedPracticeBundles, type PracticeBundleWithId } from '../lib/jobPractice';
 import type { JobExamDef } from '../lib/jobExams';
@@ -100,7 +100,9 @@ export default function JobPracticeTab({ def }: { def: JobExamDef }) {
             অনুশীলনে প্রতিটি প্রশ্নের পরেই সঠিক/ভুল ও ব্যাখ্যা দেখাবে। ফলাফলে লেখা থাকবে “অনুশীলন ফলাফল — নিয়োগ পরীক্ষার ফল নয়”।
           </p>
           <p style={{ margin: '12px 0 0' }}>
-            <Chip tone="gold">শীঘ্রই আসছে: মক টেস্ট</Chip>
+            <Link to={`/jobs/${def.slug}/mocks`} style={{ fontWeight: 600 }}>
+              মক টেস্ট দেখুন →
+            </Link>
           </p>
         </Card>
       </Reveal>

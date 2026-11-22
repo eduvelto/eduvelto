@@ -29,7 +29,9 @@ import {
   loadPracticeBundle,
   type PracticeBundleWithId,
 } from '../lib/jobPractice';
-import type { JobPracticeSessionDoc } from '../lib/jobEngine';
+import { loadMock, loadMockAttempt, loadMockBundle, loadMockKey, loadMockSession } from '../lib/jobMock';
+import type { JobMockWithId } from '../lib/jobMocks';
+import type { JobMockSessionDoc, JobPracticeSessionDoc } from '../lib/jobEngine';
 import type { JobQuestionKey, JobBundleQuestion } from '../lib/jobQuestions';
 import { jobBundleQuestionById } from '../lib/jobQuestions';
 
@@ -59,9 +61,10 @@ export default function JobResultPage() {
   const [loading, setLoading] = useState(true);
   const [notFound, setNotFound] = useState(false);
   const [attempt, setAttempt] = useState<Record<string, unknown> | null>(null);
-  const [session, setSession] = useState<JobPracticeSessionDoc | null>(null);
+  const [session, setSession] = useState<JobPracticeSessionDoc | JobMockSessionDoc | null>(null);
   const [bundle, setBundle] = useState<PracticeBundleWithId | null>(null);
   const [key, setKey] = useState<JobQuestionKey | null>(null);
+  const [mockDef, setMockDef] = useState<JobMockWithId | null>(null);
   const [filter, setFilter] = useState<Filter>('all');
 
   const isModerator = profile?.role === 'moderator' || profile?.role === 'admin' || profile?.role === 'owner';
@@ -76,7 +79,11 @@ export default function JobResultPage() {
     let alive = true;
     (async () => {
       try {
-        const a = await loadJobAttempt(ownerUid, attemptId);
+        // Step 9: a mock attempt lives in jobExamAttempts, a
+        // practice attempt in jobAttempts — try the exam
+        // collection first, then the practice one.
+        const mockAttempt = await loadMockAttempt(ownerUid, attemptId).catch(() => null);
+        const a = mockAttempt ?? (await loadJobAttempt(ownerUid, attemptId));
         if (!alive) return;
         if (!a) {
           setNotFound(true);
@@ -84,15 +91,31 @@ export default function JobResultPage() {
           return;
         }
         setAttempt(a);
+        const isMock = a.kind === 'mock';
         const [s, b, k] = await Promise.all([
-          loadJobSession(ownerUid, attemptId).catch(() => null),
-          typeof a.bundleId === 'string' ? loadPracticeBundle(a.bundleId).catch(() => null) : Promise.resolve(null),
-          typeof a.bundleId === 'string' ? loadBundleKey(a.bundleId).catch(() => null) : Promise.resolve(null),
+          isMock
+            ? loadMockSession(ownerUid, attemptId).catch(() => null)
+            : loadJobSession(ownerUid, attemptId).catch(() => null),
+          typeof a.bundleId === 'string'
+            ? (isMock ? loadMockBundle(a.bundleId) : loadPracticeBundle(a.bundleId)).catch(() => null)
+            : Promise.resolve(null),
+          // Step 9: a mock key is receipt-gated (fresh exam_review
+          // receipt, 10 minutes after submit) — after the window
+          // it reads null, and the page renders from the STORED
+          // attempt (correctText per answer) with an honest note.
+          typeof a.bundleId === 'string'
+            ? (isMock ? loadMockKey(a.bundleId) : loadBundleKey(a.bundleId)).catch(() => null)
+            : Promise.resolve(null),
         ]);
         if (!alive) return;
         setSession(s);
         setBundle(b);
         setKey(k);
+        if (isMock && s && typeof (s as unknown as Record<string, unknown>).definitionId === 'string') {
+          const def = await loadMock((s as unknown as Record<string, unknown>).definitionId as string).catch(() => null);
+          if (!alive) return;
+          setMockDef(def);
+        }
         setLoading(false);
       } catch {
         if (!alive) return;
@@ -151,6 +174,15 @@ export default function JobResultPage() {
   const timeSpentSeconds = typeof attempt.timeSpentSeconds === 'number' ? attempt.timeSpentSeconds : 0;
   const bundleId = typeof attempt.bundleId === 'string' ? attempt.bundleId : '';
   const examSlug = typeof attempt.examSlug === 'string' ? attempt.examSlug : '';
+  // Step 9: mock attempts carry kind 'mock' and their session
+  // stores the definition doc-ID (the retake target + the
+  // passPercent source).
+  const isMockAttempt = attempt.kind === 'mock';
+  const mockDefinitionId =
+    session && 'definitionId' in session && typeof session.definitionId === 'string' ? session.definitionId : '';
+  const mockPassPercent =
+    mockDef && mockDef.rulesSnapshot.passPercent !== null ? mockDef.rulesSnapshot.passPercent : null;
+  const mockPassed = mockPassPercent !== null && percentage >= mockPassPercent;
   // Step 8 fold-in (ChatGPT finding 2): when the attempt was scored
   // with NO negative marking (Bank — penalty unverified, disabled),
   // say so on the result instead of showing a "−0" deduction as if
@@ -245,6 +277,15 @@ export default function JobResultPage() {
             )}
             <div><span style={{ fontWeight: 700 }}>সময়:</span> {Math.floor(timeSpentSeconds / 60)} মিনিট {timeSpentSeconds % 60} সেকেন্ড</div>
           </div>
+          {/* Step 9: mock pass/fail from the mock doc's passPercent
+              (a practice threshold only — never an official pass). */}
+          {isMockAttempt && mockPassPercent !== null ? (
+            <div style={{ marginTop: 12, fontWeight: 700, color: mockPassed ? CORRECT : WRONG, fontSize: 15 }}>
+              {mockPassed
+                ? `পাস করেছেন — পাস নম্বর ${mockPassPercent}% (অনুশীলন হিসাব)`
+                : `পাস হয়নি — পাস নম্বর ${mockPassPercent}% (অনুশীলন হিসাব)`}
+            </div>
+          ) : null}
           {isModerator && ownerUid !== user.uid ? (
             <p style={{ margin: '12px 0 0', fontSize: 13, color: MUTED }}>
               মডারেটর হিসেবে অন্য শিক্ষার্থীর ফলাফল দেখছেন।
@@ -268,7 +309,13 @@ export default function JobResultPage() {
             </ul>
           )}
           <div style={{ display: 'flex', gap: 8, marginTop: 16, flexWrap: 'wrap' }}>
-            {bundleId ? (
+            {/* Step 9: a mock retakes from its definition page,
+                not the practice route. */}
+            {isMockAttempt && mockDefinitionId ? (
+              <LinkButton to={`/jobs/mock/${mockDefinitionId}`} variant="accent">
+                আবার মক দিন
+              </LinkButton>
+            ) : bundleId ? (
               <LinkButton to={`/jobs/practice/${bundleId}`} variant="accent">
                 আবার অনুশীলন করুন
               </LinkButton>
@@ -285,6 +332,14 @@ export default function JobResultPage() {
       {/* Per-question review */}
       <Card style={{ marginTop: 16 }}>
         <div style={{ fontWeight: 700, color: '#142B3B', fontSize: 17, marginBottom: 8 }}>প্রশ্ন-পর্যালোচনা</div>
+        {/* Step 9: a mock key opens only within 10 minutes of
+            submit — after that the explanations hide, but the
+            stored correct answers above still show. */}
+        {isMockAttempt && !key ? (
+          <p style={{ margin: '0 0 12px', color: MUTED, fontSize: 14, lineHeight: 1.7 }}>
+            উত্তরের ব্যাখ্যা এখন দেখা যাচ্ছে না — মকের চাবি শুধু জমা দেওয়ার ১০ মিনিটের মধ্যে খোলে। সঠিক উত্তর ও নম্বর সংরক্ষিত ফলাফল থেকে দেখানো হচ্ছে।
+          </p>
+        ) : null}
         <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', marginBottom: 12 }}>
           {filterButton('all', `সব (${answers.length})`)}
           {filterButton('correct', `সঠিক (${correctCount})`)}
