@@ -221,6 +221,8 @@ service cloud.firestore {
                      .get('sourceCircular', null) == null
                     || lastHistoryEntry(newDoc.get('rulesConfigHistory', null))
                      .get('sourceCircular', null) is string)));
+    }
+
     // NU-6 (§19.2.3, §19.3.4): syllabus-structure validators — mirrors
     // of lib/nuSyllabus.ts validateNuSyllabus*Doc. Every doc: status
     // draft/published, circularVersion + createdBy non-empty strings.
