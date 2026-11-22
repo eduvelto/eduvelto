@@ -306,13 +306,14 @@ service cloud.firestore {
         && data.options.toSet().size() == 4
         && data.difficulty in ['easy', 'medium', 'hard']
         && data.explanation is string && data.explanation.size() > 0
-        && data.sourceType in ['original_practice', 'official_previous_year', 'board_question', 'textbook_based']
+        && data.sourceType in ['original_practice', 'official_previous_year', 'adapted_hsc', 'unverified_source', 'imported_academic']
         && data.provenance is string && data.provenance.size() > 0
         && data.circularVersion is string && data.circularVersion.size() > 0
         && data.version is int && data.version >= 1
         && data.status in ['draft', 'submitted_for_review', 'under_review', 'approved', 'published', 'rejected', 'changes_requested', 'withdrawn']
         && !('correctOptionIndex' in data)
         && (!('examYear' in data) || (data.examYear is int && data.examYear >= 1900 && data.examYear <= 2100))
+        && (data.sourceType == 'official_previous_year' || !('examYear' in data))
         && (data.sourceType != 'official_previous_year' || ('examYear' in data && data.examYear is int));
     }
 
@@ -2166,7 +2167,11 @@ service cloud.firestore {
     // only be created while its question is a draft, and only
     // changed while the question is still a draft. Never deleted.
     match /nuQuestionDraftKeys/{questionId} {
-      allow read: if isAdmin() || (isVerifiedTeacher() && resource.data.createdBy == uid());
+      allow read: if isAdmin() || (isVerifiedTeacher() && resource.data.createdBy == uid())
+        || (isVerifiedTeacher()
+            && exists(/databases/$(database)/documents/nuQuestions/$(questionId))
+            && get(/databases/$(database)/documents/nuQuestions/$(questionId)).data.status == 'under_review'
+            && get(/databases/$(database)/documents/nuQuestions/$(questionId)).data.reviewedBy == uid());
       allow create: if (isAdmin() || isVerifiedTeacher())
         && request.resource.data.questionId == questionId
         && request.resource.data.createdBy == uid()
@@ -2344,9 +2349,9 @@ service cloud.firestore {
         && exists(/databases/$(database)/documents/nuQuestions/$(request.resource.data.questionId))
         && request.resource.data.questionVersion == get(/databases/$(database)/documents/nuQuestions/$(request.resource.data.questionId)).data.version
         && ((request.resource.data.action == 'published'
-             && get(/databases/$(database)/documents/nuQuestions/$(request.resource.data.questionId)).data.status == 'approved')
+             && get(/databases/$(database)/documents/nuQuestions/$(request.resource.data.questionId)).data.status == 'published')
             || (request.resource.data.action == 'withdrawn'
-             && get(/databases/$(database)/documents/nuQuestions/$(request.resource.data.questionId)).data.status == 'published'));
+             && get(/databases/$(database)/documents/nuQuestions/$(request.resource.data.questionId)).data.status == 'withdrawn'));
       allow update, delete: if false;
     }
 

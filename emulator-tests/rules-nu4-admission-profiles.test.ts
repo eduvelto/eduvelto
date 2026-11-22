@@ -160,6 +160,8 @@ async function seed() {
       provenance: 'test seed',
       groupIds: ['humanities'],
       subjectId: 'bangla',
+      chapterId: 'nu-ch-bangla-prose',
+      topicId: 'nu-tp-bangla-prose-01',
       questionText: 'Test question?',
       questionLang: 'bn',
       options: ['ক', 'খ', 'গ', 'ঘ'],
@@ -533,7 +535,9 @@ describe('NU-4 rules — question bank, bundles, keys (NU-T3…T6, T16, T17)', (
         sourceType: 'original_practice',
         provenance: 'test',
         groupIds: ['science'],
-        subjectId: 'physics',
+        subjectId: 'bangla',
+        chapterId: 'nu-ch-bangla-prose',
+        topicId: 'nu-tp-bangla-prose-01',
         questionText: 'New?',
         questionLang: 'bn',
         options: ['ক', 'খ', 'গ', 'ঘ'],
@@ -541,6 +545,7 @@ describe('NU-4 rules — question bank, bundles, keys (NU-T3…T6, T16, T17)', (
         explanation: 'Because.',
         circularVersion: 'nu-2025-26-v1',
         createdBy: 'teacher-verified',
+        createdAt: serverTimestamp(),
       }),
     );
   });
@@ -552,7 +557,9 @@ describe('NU-4 rules — question bank, bundles, keys (NU-T3…T6, T16, T17)', (
         sourceType: 'original_practice',
         provenance: 'test',
         groupIds: ['science'],
-        subjectId: 'physics',
+        subjectId: 'bangla',
+        chapterId: 'nu-ch-bangla-prose',
+        topicId: 'nu-tp-bangla-prose-01',
         questionText: 'New?',
         questionLang: 'bn',
         options: ['ক', 'খ', 'গ', 'ঘ'],
@@ -560,6 +567,7 @@ describe('NU-4 rules — question bank, bundles, keys (NU-T3…T6, T16, T17)', (
         explanation: 'Because.',
         circularVersion: 'nu-2025-26-v1',
         createdBy: 'teacher-unverified',
+        createdAt: serverTimestamp(),
       }),
     );
   });
@@ -571,7 +579,9 @@ describe('NU-4 rules — question bank, bundles, keys (NU-T3…T6, T16, T17)', (
         sourceType: 'original_practice',
         provenance: 'test',
         groupIds: ['science'],
-        subjectId: 'physics',
+        subjectId: 'bangla',
+        chapterId: 'nu-ch-bangla-prose',
+        topicId: 'nu-tp-bangla-prose-01',
         questionText: 'New?',
         questionLang: 'bn',
         options: ['ক', 'খ', 'গ', 'ঘ'],
@@ -579,6 +589,7 @@ describe('NU-4 rules — question bank, bundles, keys (NU-T3…T6, T16, T17)', (
         explanation: 'Because.',
         circularVersion: 'nu-2025-26-v1',
         createdBy: 'student-1',
+        createdAt: serverTimestamp(),
       }),
     );
   });
@@ -590,7 +601,9 @@ describe('NU-4 rules — question bank, bundles, keys (NU-T3…T6, T16, T17)', (
         sourceType: 'original_practice',
         provenance: 'test',
         groupIds: ['science'],
-        subjectId: 'physics',
+        subjectId: 'bangla',
+        chapterId: 'nu-ch-bangla-prose',
+        topicId: 'nu-tp-bangla-prose-01',
         questionText: 'New?',
         questionLang: 'bn',
         options: ['ক', 'খ', 'গ', 'ঘ'],
@@ -599,6 +612,7 @@ describe('NU-4 rules — question bank, bundles, keys (NU-T3…T6, T16, T17)', (
         explanation: 'Because.',
         circularVersion: 'nu-2025-26-v1',
         createdBy: 'admin-1',
+        createdAt: serverTimestamp(),
       }),
     );
   });
