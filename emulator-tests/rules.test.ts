@@ -391,41 +391,72 @@ describe('Eduvelto security rules', () => {
   });
 
   // (e) quizAttempts: create own ALLOWED, update after submit DENIED.
+  // C1/H1 (security audit 22 Nov 2026): creates are BOUND to the quiz
+  // (quiz1: 1 question, totalMarks 1) and carry status/userId/scored;
+  // the owner may update ONLY the unscored → scored transition.
   it('(e1) student creating their own quizAttempt is ALLOWED', async () => {
     const db = asStudent1();
     await assertSucceeds(
       addDoc(collection(db, 'users', 'student-1', 'quizAttempts'), {
         quizId: 'quiz1',
-        answers: [0, 1],
-        score: 1,
-        totalMarks: 2,
-        percentage: 50,
+        kind: 'mcq',
+        answers: [{ n: 1, topic: 'Drama', selected: 'B', correct: false, marks: 0, correctText: null }],
+        score: 0,
+        totalMarks: 1,
+        percentage: 0,
+        markingStatus: 'auto',
+        scored: false,
+        status: 'submitted',
+        userId: 'student-1',
         startedAt: new Date(),
         submittedAt: new Date(),
       }),
     );
   });
-  it('(e2) student updating their quizAttempt after submit is DENIED', async () => {
+  it('(e2) owner unscored → scored update is ALLOWED; any further owner update of a scored attempt is DENIED', async () => {
     const db = asStudent1();
     const ref = await addDoc(collection(db, 'users', 'student-1', 'quizAttempts'), {
       quizId: 'quiz1',
-      answers: [0, 1],
-      score: 1,
-      totalMarks: 2,
-      percentage: 50,
+      kind: 'mcq',
+      answers: [{ n: 1, topic: 'Drama', selected: 'B', correct: false, marks: 0, correctText: null }],
+      score: 0,
+      totalMarks: 1,
+      percentage: 0,
+      markingStatus: 'auto',
+      scored: false,
+      status: 'submitted',
+      userId: 'student-1',
       startedAt: new Date(),
       submittedAt: new Date(),
     });
-    await assertFails(updateDoc(ref, { score: 2, percentage: 100 }));
+    // The scoring step (the app's submitMcqAttempt after reading the
+    // key): ALLOWED.
+    await assertSucceeds(
+      updateDoc(ref, {
+        answers: [{ n: 1, topic: 'Drama', selected: 'B', correct: true, marks: 1, correctText: 'Shakespeare' }],
+        score: 1,
+        percentage: 100,
+        scored: true,
+      }),
+    );
+    // Now scored: rewriting the score is DENIED.
+    await assertFails(updateDoc(ref, { score: 0, percentage: 0 }));
+    // And changing the quiz is DENIED even on the scoring step's fields.
+    await assertFails(updateDoc(ref, { quizId: 'quiz-other' }));
   });
   it('(e3) student reading another student’s quizAttempt is DENIED', async () => {
     const db1 = asStudent1();
     const ref = await addDoc(collection(db1, 'users', 'student-1', 'quizAttempts'), {
       quizId: 'quiz1',
-      answers: [0],
+      kind: 'mcq',
+      answers: [{ n: 1, topic: 'Drama', selected: 'A', correct: false, marks: 0, correctText: null }],
       score: 0,
       totalMarks: 1,
       percentage: 0,
+      markingStatus: 'auto',
+      scored: false,
+      status: 'submitted',
+      userId: 'student-1',
       startedAt: new Date(),
       submittedAt: new Date(),
     });
@@ -998,12 +1029,27 @@ describe('Eduvelto security rules', () => {
   it('(o1) student reading quizKeys WITHOUT a submission receipt is DENIED', async () => {
     await assertFails(getDoc(doc(asStudent1(), 'quizKeys', 'quiz1')));
   });
-  it('(o2) student creating their own receipt, then reading quizKeys, is ALLOWED', async () => {
+  it('(o2) student creating their own receipt AFTER submitting, then reading quizKeys, is ALLOWED', async () => {
+    // C1 (security audit 22 Nov 2026): the receipt now requires a
+    // submitted attempt to exist — create it first, unscored, exactly
+    // as the app's submitMcqAttempt does.
+    const attemptRef = await addDoc(collection(asStudent1(), 'users', 'student-1', 'quizAttempts'), {
+      quizId: 'quiz1',
+      kind: 'mcq',
+      answers: [{ n: 1, topic: 'Drama', selected: 'B', correct: false, marks: 0, correctText: null }],
+      score: 0,
+      totalMarks: 1,
+      percentage: 0,
+      markingStatus: 'auto',
+      scored: false,
+      status: 'submitted',
+      userId: 'student-1',
+    });
     await assertSucceeds(
       setDoc(doc(asStudent1(), 'quizReceipts', 'student-1_quiz1'), {
         userId: 'student-1',
         quizId: 'quiz1',
-        attemptId: 'attempt-1',
+        attemptId: attemptRef.id,
         createdAt: new Date(),
       }),
     );
@@ -1011,23 +1057,39 @@ describe('Eduvelto security rules', () => {
     await assertSucceeds(deleteDoc(doc(asStudent1(), 'quizReceipts', 'student-1_quiz1')));
   });
   it('(o3) student reading quizKeys with a STALE receipt (older than 10 minutes) is DENIED', async () => {
-    await assertSucceeds(
-      setDoc(doc(asStudent1(), 'quizReceipts', 'student-1_quiz1'), {
+    // C1: a stale receipt can no longer be CREATED via the rules (5-min
+    // create window), so seed one with rules disabled and prove the key
+    // read still fails on the 10-minute freshness check.
+    await env.withSecurityRulesDisabled(async (ctx) => {
+      const db = ctx.firestore();
+      await setDoc(doc(db, 'quizReceipts', 'student-1_quiz1'), {
         userId: 'student-1',
         quizId: 'quiz1',
         attemptId: 'attempt-1',
         createdAt: new Date(Date.now() - 60 * 60 * 1000),
-      }),
-    );
+      });
+    });
     await assertFails(getDoc(doc(asStudent1(), 'quizKeys', 'quiz1')));
     await assertSucceeds(deleteDoc(doc(asStudent1(), 'quizReceipts', 'student-1_quiz1')));
   });
   it('(o4) student reading another student’s receipt is DENIED; creating a receipt for another uid is DENIED', async () => {
+    const attemptRef = await addDoc(collection(asStudent1(), 'users', 'student-1', 'quizAttempts'), {
+      quizId: 'quiz1',
+      kind: 'mcq',
+      answers: [{ n: 1, topic: 'Drama', selected: 'B', correct: false, marks: 0, correctText: null }],
+      score: 0,
+      totalMarks: 1,
+      percentage: 0,
+      markingStatus: 'auto',
+      scored: false,
+      status: 'submitted',
+      userId: 'student-1',
+    });
     await assertSucceeds(
       setDoc(doc(asStudent1(), 'quizReceipts', 'student-1_quiz1'), {
         userId: 'student-1',
         quizId: 'quiz1',
-        attemptId: 'attempt-1',
+        attemptId: attemptRef.id,
         createdAt: new Date(),
       }),
     );
@@ -1036,7 +1098,7 @@ describe('Eduvelto security rules', () => {
       setDoc(doc(asStudent1(), 'quizReceipts', 'student-2_quiz1'), {
         userId: 'student-2',
         quizId: 'quiz1',
-        attemptId: 'attempt-1',
+        attemptId: attemptRef.id,
         createdAt: new Date(),
       }),
     );
@@ -1053,30 +1115,48 @@ describe('Eduvelto security rules', () => {
   });
   it('(o6) moderator marking a PENDING written attempt (marking fields only) is ALLOWED; rewriting an MCQ attempt or changing quizId is DENIED', async () => {
     const db1 = asStudent1();
+    // C1/H1: fixtures carry status/userId/scored and are BOUND to quiz1
+    // (1 question, totalMarks 1).
     const writtenRef = await addDoc(collection(db1, 'users', 'student-1', 'quizAttempts'), {
       quizId: 'quiz1',
       kind: 'written',
       answers: [{ n: 1, topic: 'Drama', text: 'An essay.', correct: null, marks: null }],
       score: 0,
-      totalMarks: 10,
+      totalMarks: 1,
       percentage: 0,
       markingStatus: 'pending',
+      scored: true,
+      status: 'submitted',
+      userId: 'student-1',
     });
     const mcqRef = await addDoc(collection(db1, 'users', 'student-1', 'quizAttempts'), {
       quizId: 'quiz1',
       kind: 'mcq',
-      answers: [{ n: 1, topic: 'Drama', selected: 'B', correct: true, marks: 1 }],
-      score: 1,
+      answers: [{ n: 1, topic: 'Drama', selected: 'B', correct: false, marks: 0, correctText: null }],
+      score: 0,
       totalMarks: 1,
-      percentage: 100,
+      percentage: 0,
       markingStatus: 'auto',
+      scored: false,
+      status: 'submitted',
+      userId: 'student-1',
     });
+    // Score the MCQ attempt first (the app's flow — an MCQ attempt is
+    // never created scored).
+    await assertSucceeds(
+      updateDoc(doc(db1, 'users', 'student-1', 'quizAttempts', mcqRef.id), {
+        answers: [{ n: 1, topic: 'Drama', selected: 'B', correct: true, marks: 1, correctText: 'Shakespeare' }],
+        score: 1,
+        percentage: 100,
+        scored: true,
+      }),
+    );
     // Moderator marks the pending written attempt: ALLOWED.
     await assertSucceeds(
       updateDoc(doc(asModerator(), 'users', 'student-1', 'quizAttempts', writtenRef.id), {
-        marks: [8],
-        score: 8,
-        percentage: 80,
+        marks: [1],
+        score: 1,
+        percentage: 100,
         markingStatus: 'marked',
         markedBy: 'moderator-1',
       }),
@@ -1087,9 +1167,12 @@ describe('Eduvelto security rules', () => {
       kind: 'written',
       answers: [{ n: 1, topic: 'Drama', text: 'An essay.', correct: null, marks: null }],
       score: 0,
-      totalMarks: 10,
+      totalMarks: 1,
       percentage: 0,
       markingStatus: 'pending',
+      scored: true,
+      status: 'submitted',
+      userId: 'student-1',
     });
     await assertFails(
       updateDoc(doc(asModerator(), 'users', 'student-1', 'quizAttempts', writtenRef2.id), {
@@ -1112,11 +1195,267 @@ describe('Eduvelto security rules', () => {
       kind: 'written',
       answers: [{ n: 1, topic: 'Drama', text: 'An essay.', correct: null, marks: null }],
       score: 0,
-      totalMarks: 10,
+      totalMarks: 1,
       percentage: 0,
       markingStatus: 'pending',
+      scored: true,
+      status: 'submitted',
+      userId: 'student-1',
     });
     await assertSucceeds(getDoc(doc(asModerator(), 'users', 'student-1', 'quizAttempts', ref.id)));
+  });
+
+  // (p) Security audit 22 Nov 2026 — C1 receipt gating, H1 score bounds,
+  // H2 community answers. (p10–p11 seed their fixtures in beforeAll
+  // with rules disabled, like the file's seed().)
+  describe('security audit 22 Nov 2026 — C1/H1/H2', () => {
+    beforeAll(async () => {
+      await env.withSecurityRulesDisabled(async (ctx) => {
+        const db = ctx.firestore();
+        await setDoc(doc(db, 'questions', 'q-comm-1'), {
+          authorId: 'student-1',
+          title: 'Why is the sky blue?',
+          body: 'Explain Rayleigh scattering.',
+          reviewStatus: 'Under Review',
+        });
+        await setDoc(doc(db, 'questions', 'q-comm-1', 'answers', 'a-comm-1'), {
+          authorId: 'student-1',
+          body: 'Because air scatters blue light more.',
+          reviewStatus: 'Under Review',
+          isAccepted: false,
+        });
+      });
+    });
+
+    it('(p1) C1: receipt with a FUTURE createdAt is DENIED', async () => {
+      const attemptRef = await addDoc(collection(asStudent1(), 'users', 'student-1', 'quizAttempts'), {
+        quizId: 'quiz1',
+        kind: 'mcq',
+        answers: [{ n: 1, topic: 'Drama', selected: 'B', correct: false, marks: 0, correctText: null }],
+        score: 0,
+        totalMarks: 1,
+        percentage: 0,
+        markingStatus: 'auto',
+        scored: false,
+        status: 'submitted',
+        userId: 'student-1',
+      });
+      await assertFails(
+        setDoc(doc(asStudent1(), 'quizReceipts', 'student-1_quiz1'), {
+          userId: 'student-1',
+          quizId: 'quiz1',
+          attemptId: attemptRef.id,
+          createdAt: new Date(Date.now() + 60 * 60 * 1000),
+        }),
+      );
+    });
+    it('(p2) C1: receipt naming NO existing attempt is DENIED', async () => {
+      await assertFails(
+        setDoc(doc(asStudent1(), 'quizReceipts', 'student-1_quiz1'), {
+          userId: 'student-1',
+          quizId: 'quiz1',
+          attemptId: 'attempt-does-not-exist',
+          createdAt: new Date(),
+        }),
+      );
+    });
+    it('(p3) C1: receipt for an UNSUBMITTED attempt is DENIED, and the key stays closed for it', async () => {
+      // An unsubmitted attempt cannot be created via the rules (create
+      // requires status 'submitted'), so seed one with rules disabled.
+      await env.withSecurityRulesDisabled(async (ctx) => {
+        const db = ctx.firestore();
+        await setDoc(doc(db, 'users', 'student-1', 'quizAttempts', 'attempt-unsubmitted-1'), {
+          quizId: 'quiz1',
+          kind: 'mcq',
+          answers: [{ n: 1, topic: 'Drama', selected: 'B', correct: false, marks: 0, correctText: null }],
+          score: 0,
+          totalMarks: 1,
+          percentage: 0,
+          markingStatus: 'auto',
+          scored: false,
+          status: 'in_progress',
+          userId: 'student-1',
+        });
+      });
+      await assertFails(
+        setDoc(doc(asStudent1(), 'quizReceipts', 'student-1_quiz1'), {
+          userId: 'student-1',
+          quizId: 'quiz1',
+          attemptId: 'attempt-unsubmitted-1',
+          createdAt: new Date(),
+        }),
+      );
+      // Even a seeded fresh receipt for that attempt opens nothing.
+      await env.withSecurityRulesDisabled(async (ctx) => {
+        const db = ctx.firestore();
+        await setDoc(doc(db, 'quizReceipts', 'student-1_quiz1'), {
+          userId: 'student-1',
+          quizId: 'quiz1',
+          attemptId: 'attempt-unsubmitted-1',
+          createdAt: new Date(),
+        });
+      });
+      await assertFails(getDoc(doc(asStudent1(), 'quizKeys', 'quiz1')));
+      await assertSucceeds(deleteDoc(doc(asStudent1(), 'quizReceipts', 'student-1_quiz1')));
+    });
+    it('(p4) H1: attempt with score > totalMarks is DENIED', async () => {
+      await assertFails(
+        addDoc(collection(asStudent1(), 'users', 'student-1', 'quizAttempts'), {
+          quizId: 'quiz1',
+          kind: 'mcq',
+          answers: [{ n: 1, topic: 'Drama', selected: 'B', correct: false, marks: 0, correctText: null }],
+          score: 5,
+          totalMarks: 1,
+          percentage: 100,
+          markingStatus: 'auto',
+          scored: false,
+          status: 'submitted',
+          userId: 'student-1',
+        }),
+      );
+    });
+    it('(p5) H1: attempt with percentage > 100 is DENIED', async () => {
+      await assertFails(
+        addDoc(collection(asStudent1(), 'users', 'student-1', 'quizAttempts'), {
+          quizId: 'quiz1',
+          kind: 'mcq',
+          answers: [{ n: 1, topic: 'Drama', selected: 'B', correct: false, marks: 0, correctText: null }],
+          score: 1,
+          totalMarks: 1,
+          percentage: 500,
+          markingStatus: 'auto',
+          scored: false,
+          status: 'submitted',
+          userId: 'student-1',
+        }),
+      );
+    });
+    it('(p6) H1: attempt with totalMarks != the quiz totalMarks is DENIED', async () => {
+      await assertFails(
+        addDoc(collection(asStudent1(), 'users', 'student-1', 'quizAttempts'), {
+          quizId: 'quiz1',
+          kind: 'mcq',
+          answers: [{ n: 1, topic: 'Drama', selected: 'B', correct: false, marks: 0, correctText: null }],
+          score: 1,
+          totalMarks: 100,
+          percentage: 1,
+          markingStatus: 'auto',
+          scored: false,
+          status: 'submitted',
+          userId: 'student-1',
+        }),
+      );
+    });
+    it('(p7) H1: attempt with more answers than the quiz has questions is DENIED', async () => {
+      await assertFails(
+        addDoc(collection(asStudent1(), 'users', 'student-1', 'quizAttempts'), {
+          quizId: 'quiz1',
+          kind: 'mcq',
+          answers: [
+            { n: 1, topic: 'Drama', selected: 'B', correct: false, marks: 0, correctText: null },
+            { n: 2, topic: 'Drama', selected: 'A', correct: false, marks: 0, correctText: null },
+          ],
+          score: 0,
+          totalMarks: 1,
+          percentage: 0,
+          markingStatus: 'auto',
+          scored: false,
+          status: 'submitted',
+          userId: 'student-1',
+        }),
+      );
+    });
+    it('(p8) H1: owner scoring update with score > totalMarks is DENIED', async () => {
+      const ref = await addDoc(collection(asStudent1(), 'users', 'student-1', 'quizAttempts'), {
+        quizId: 'quiz1',
+        kind: 'mcq',
+        answers: [{ n: 1, topic: 'Drama', selected: 'B', correct: false, marks: 0, correctText: null }],
+        score: 0,
+        totalMarks: 1,
+        percentage: 0,
+        markingStatus: 'auto',
+        scored: false,
+        status: 'submitted',
+        userId: 'student-1',
+      });
+      await assertFails(
+        updateDoc(ref, {
+          answers: [{ n: 1, topic: 'Drama', selected: 'B', correct: true, marks: 99, correctText: 'Shakespeare' }],
+          score: 99,
+          percentage: 100,
+          scored: true,
+        }),
+      );
+    });
+    it('(p9) H1+M4: progressSummaries with attemptsCount < 0 / > 10000 or averagePercentage > 100 is DENIED', async () => {
+      await assertFails(
+        setDoc(doc(asStudent1(), 'progressSummaries', 'student-1__english__2026-12'), {
+          userId: 'student-1',
+          subject: 'English',
+          month: '2026-12',
+          attemptsCount: -1,
+          averagePercentage: 60,
+        }),
+      );
+      await assertFails(
+        setDoc(doc(asStudent1(), 'progressSummaries', 'student-1__english__2026-12'), {
+          userId: 'student-1',
+          subject: 'English',
+          month: '2026-12',
+          attemptsCount: 10001,
+          averagePercentage: 60,
+        }),
+      );
+      await assertFails(
+        setDoc(doc(asStudent1(), 'progressSummaries', 'student-1__english__2026-12'), {
+          userId: 'student-1',
+          subject: 'English',
+          month: '2026-12',
+          attemptsCount: 2,
+          averagePercentage: 101,
+        }),
+      );
+      // In-bounds still ALLOWED.
+      await assertSucceeds(
+        setDoc(doc(asStudent1(), 'progressSummaries', 'student-1__english__2026-12'), {
+          userId: 'student-1',
+          subject: 'English',
+          month: '2026-12',
+          attemptsCount: 2,
+          averagePercentage: 60,
+        }),
+      );
+    });
+    it('(p10) H2: question author may set isAccepted only; rewriting the answer body is DENIED', async () => {
+      await assertSucceeds(
+        updateDoc(doc(asStudent1(), 'questions', 'q-comm-1', 'answers', 'a-comm-1'), {
+          isAccepted: true,
+          updatedAt: new Date(),
+        }),
+      );
+      await assertFails(
+        updateDoc(doc(asStudent1(), 'questions', 'q-comm-1', 'answers', 'a-comm-1'), {
+          body: 'Rewritten by the author.',
+        }),
+      );
+      await assertFails(
+        updateDoc(doc(asStudent1(), 'questions', 'q-comm-1', 'answers', 'a-comm-1'), {
+          upvotes: 99,
+        }),
+      );
+    });
+    it('(p11) H2: moderator may still rewrite an answer; another student may not update at all', async () => {
+      await assertSucceeds(
+        updateDoc(doc(asModerator(), 'questions', 'q-comm-1', 'answers', 'a-comm-1'), {
+          body: 'Corrected by a moderator.',
+        }),
+      );
+      await assertFails(
+        updateDoc(doc(asStudent2(), 'questions', 'q-comm-1', 'answers', 'a-comm-1'), {
+          isAccepted: true,
+        }),
+      );
+    });
   });
 
   // (sv) Student verification removal (owner decision 21 Nov 2026).
@@ -1162,10 +1501,15 @@ describe('Eduvelto security rules', () => {
     await assertSucceeds(
       addDoc(collection(db, 'users', 'sv-fresh', 'quizAttempts'), {
         quizId: 'quiz1',
-        answers: [0, 1],
-        score: 1,
-        totalMarks: 2,
-        percentage: 50,
+        kind: 'mcq',
+        answers: [{ n: 1, topic: 'Drama', selected: 'B', correct: false, marks: 0, correctText: null }],
+        score: 0,
+        totalMarks: 1,
+        percentage: 0,
+        markingStatus: 'auto',
+        scored: false,
+        status: 'submitted',
+        userId: 'sv-fresh',
         startedAt: new Date(),
         submittedAt: new Date(),
       }),

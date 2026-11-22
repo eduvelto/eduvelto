@@ -11,12 +11,15 @@
 //   quizReceipts/{uid}_{quizId}   — single-use submit receipt, created at
 //                                   submit time, deleted right after scoring.
 //
-// Submit flow (MCQ): create receipt -> read key -> score client-side ->
-// write attempt (with per-question correct flags + correct text, so the
-// result page never needs the key again) -> delete receipt.
-// Written exams: no key exists; the attempt stores typed answers with
-// markingStatus 'pending' until a moderator marks it (plan: no free
-// auto-marking of written answers — do not promise instant written results).
+// Submit flow (MCQ — C1, security audit 22 Nov 2026): the attempt is
+// WRITTEN FIRST, unscored (scored == false, score 0) — only then is the
+// receipt created (the rules require a submitted attempt to exist before
+// a receipt may be created) -> read key -> score client-side -> update
+// the attempt to scored (the rules allow the owner ONLY this
+// unscored → scored transition) -> delete receipt. Written exams: no key
+// exists; the attempt stores typed answers with markingStatus 'pending'
+// until a moderator marks it (plan: no free auto-marking of written
+// answers — do not promise instant written results).
 //
 // Attempt shape honours the Step 3 contract (src/lib/progress.ts):
 // every attempt carries `quizId` + `percentage`, and `answers` entries
@@ -109,6 +112,14 @@ export interface QuizAttempt {
   markingStatus: 'auto' | 'pending' | 'marked';
   createdAt: { toDate?: () => Date; seconds?: number } | Date | null;
   markedBy?: string | null;
+  // C1 (security audit 22 Nov 2026): an MCQ attempt is first written
+  // UNSCORED (scored == false) and scored only after the key is read
+  // with a fresh receipt; a written attempt is created scored (the
+  // moderator marks it later). Old attempts carry no `scored` field and
+  // read as scored (they were written with their final score).
+  scored?: boolean;
+  status?: string;
+  userId?: string;
 }
 
 function toQuiz(id: string, d: Record<string, unknown>): Quiz {
@@ -143,6 +154,9 @@ function toAttempt(id: string, d: Record<string, unknown>): QuizAttempt {
     markingStatus: (d.markingStatus as QuizAttempt['markingStatus']) ?? 'pending',
     createdAt: (d.createdAt as QuizAttempt['createdAt']) ?? null,
     markedBy: (d.markedBy as string) ?? null,
+    scored: (d.scored as boolean) ?? true,
+    status: (d.status as string) ?? undefined,
+    userId: (d.userId as string) ?? undefined,
   };
 }
 
@@ -241,6 +255,40 @@ export async function listPublishedQuizzesPage(
   };
 }
 
+/**
+ * All Published quizzes for ONE class (educationType + its classLevels),
+ * fetched through the paginated lister one classLevel at a time.
+ *
+ * H3 (security audit 22 Nov 2026): the class dashboard used to call the
+ * unbounded listPublishedQuizzes() — every visit read ALL 994 Published
+ * quizzes (~1,600 reads with books). This reads only this class's rows
+ * (Honours 199, HSC 47, SSC 55, Classes 1–8 0). Same index-safe shape as
+ * listPublishedQuizzesPage (equality filters + orderBy(documentId())),
+ * so no composite index is needed. Full pages are walked because the
+ * dashboard shows exact counts and client-side pagination over the
+ * class's whole list.
+ */
+export async function listQuizzesForClass(
+  educationType: string | null,
+  classLevels: string[],
+): Promise<Quiz[]> {
+  // Classes 1–5 / 6–8 have no books or quizzes (educationType null) —
+  // no query at all, not even an empty one.
+  if (!educationType || classLevels.length === 0) return [];
+  const all: Quiz[] = [];
+  for (const classLevel of classLevels) {
+    let cursor: QueryDocumentSnapshot<DocumentData> | null = null;
+    for (;;) {
+      const page = await listPublishedQuizzesPage({ educationType, classLevel }, cursor);
+      all.push(...page.items);
+      if (!page.hasMore || !page.lastDoc) break;
+      cursor = page.lastDoc;
+    }
+  }
+  all.sort(compareQuizzes);
+  return all;
+}
+
 /** One Published quiz by id; null when missing or not Published. */
 export async function getPublishedQuiz(quizId: string): Promise<Quiz | null> {
   if (!db) return null;
@@ -292,6 +340,34 @@ export async function submitMcqAttempt(
   if (!db) throw new Error('not-configured');
   const attemptRef = doc(collection(db, 'users', uid, 'quizAttempts'));
   const receiptRef = doc(db, 'quizReceipts', `${uid}_${quiz.id}`);
+  const totalMarks = quiz.totalMarks || quiz.questions.reduce((s, q) => s + q.marks, 0);
+  // C1 (security audit 22 Nov 2026): the attempt MUST be written
+  // (submitted) BEFORE the key is read — the receipt rules require a
+  // submitted attempt to exist, and the key rules require the attempt
+  // to be submitted. So: write the attempt UNSCORED first (score 0,
+  // answers carry only the student's picks, no correctness yet).
+  await setDoc(attemptRef, {
+    quizId: quiz.id,
+    kind: 'mcq',
+    subject: quiz.subject || quiz.department,
+    department: quiz.department,
+    answers: quiz.questions.map((q) => ({
+      n: q.n,
+      topic: q.topic,
+      selected: selected[q.n] ?? null,
+      correct: false,
+      marks: 0,
+      correctText: null,
+    })),
+    score: 0,
+    totalMarks,
+    percentage: 0,
+    markingStatus: 'auto',
+    scored: false,
+    status: 'submitted',
+    userId: uid,
+    createdAt: serverTimestamp(),
+  });
   // A crashed earlier submit may have left a receipt behind; remove it
   // first (receipts are single-use and update is denied by the rules).
   await deleteDoc(receiptRef).catch(() => undefined);
@@ -326,19 +402,17 @@ export async function submitMcqAttempt(
       correctText: k?.correctText ?? null,
     };
   });
-  const totalMarks = quiz.totalMarks || quiz.questions.reduce((s, q) => s + q.marks, 0);
   const percentage = totalMarks > 0 ? Math.round((score / totalMarks) * 100) : 0;
-  await setDoc(attemptRef, {
-    quizId: quiz.id,
-    kind: 'mcq',
-    subject: quiz.subject || quiz.department,
-    department: quiz.department,
+  // Score the attempt: the rules allow the owner ONLY this unscored →
+  // scored transition (answers/score/percentage/scored, nothing else).
+  // If this update fails the attempt stays unscored (score 0) in the
+  // student's history — the result page shows it as unscored.
+  await updateDoc(attemptRef, {
     answers,
     score,
-    totalMarks,
     percentage,
-    markingStatus: 'auto',
-    createdAt: serverTimestamp(),
+    scored: true,
+    updatedAt: serverTimestamp(),
   });
   return attemptRef.id;
 }
@@ -373,6 +447,12 @@ export async function submitWrittenAttempt(
     totalMarks,
     percentage: 0,
     markingStatus: 'pending',
+    // C1 (security audit 22 Nov 2026): the create rule requires the
+    // attempt to carry its owner + status, and a written attempt is
+    // created scored (the moderator marks it later).
+    scored: true,
+    status: 'submitted',
+    userId: uid,
     createdAt: serverTimestamp(),
   });
   return attemptRef.id;

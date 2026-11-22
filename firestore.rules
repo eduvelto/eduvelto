@@ -757,16 +757,63 @@ service cloud.firestore {
       // Readable by the owner, and by Moderator/Admin — a moderator must
       // be able to read a written attempt to mark it (Step 4).
       allow read: if isOwner(userId) || isModerator();
+      // H1 + C1 (security audit 22 Nov 2026): a self-asserted attempt is
+      // BOUND to the quiz it names — score ≤ totalMarks, percentage 0–100,
+      // totalMarks equal to the quiz's totalMarks (or, for a quiz doc with
+      // no totalMarks, at most 10 marks per answered question), answers no
+      // longer than the quiz's question list. The attempt is always created
+      // in status 'submitted' with its owner recorded; an MCQ attempt is
+      // created UNSCORED (scored == false) and is scored by the owner
+      // update below, a written attempt is created scored (scored == true)
+      // and is marked only by a moderator.
       allow create: if isOwner(userId) && callerActive()
         && request.resource.data.quizId is string
+        && request.resource.data.userId == uid()
+        && request.resource.data.status == 'submitted'
+        && request.resource.data.markingStatus in ['auto', 'pending']
+        && request.resource.data.scored is bool
+        && ((request.resource.data.markingStatus == 'auto' && request.resource.data.scored == false)
+            || (request.resource.data.markingStatus == 'pending' && request.resource.data.scored == true))
         && request.resource.data.answers is list
         && request.resource.data.score is number
+        && request.resource.data.score >= 0
         && request.resource.data.totalMarks is number
-        && request.resource.data.percentage is number;
+        && request.resource.data.totalMarks > 0
+        && request.resource.data.score <= request.resource.data.totalMarks
+        && request.resource.data.percentage is number
+        && request.resource.data.percentage >= 0
+        && request.resource.data.percentage <= 100
+        && exists(/databases/$(database)/documents/quizzes/$(request.resource.data.quizId))
+        && request.resource.data.answers.size() <= get(/databases/$(database)/documents/quizzes/$(request.resource.data.quizId)).data.questions.size()
+        && ((get(/databases/$(database)/documents/quizzes/$(request.resource.data.quizId)).data.totalMarks is number
+            && get(/databases/$(database)/documents/quizzes/$(request.resource.data.quizId)).data.totalMarks > 0
+            && request.resource.data.totalMarks == get(/databases/$(database)/documents/quizzes/$(request.resource.data.quizId)).data.totalMarks)
+          || (!(get(/databases/$(database)/documents/quizzes/$(request.resource.data.quizId)).data.totalMarks is number
+              && get(/databases/$(database)/documents/quizzes/$(request.resource.data.quizId)).data.totalMarks > 0)
+            && request.resource.data.totalMarks <= request.resource.data.answers.size() * 10));
       allow update: if isModerator()
         && resource.data.markingStatus == 'pending'
         && request.resource.data.diff(resource.data).affectedKeys()
-            .hasOnly(['answers', 'marks', 'score', 'percentage', 'markingStatus', 'markedBy', 'markedAt']);
+            .hasOnly(['answers', 'marks', 'score', 'percentage', 'markingStatus', 'markedBy', 'markedAt'])
+        // C1 (security audit 22 Nov 2026): the owner may update ONLY the
+        // unscored → scored transition of their own MCQ attempt — the
+        // step the app performs after reading the key with a fresh
+        // receipt. No other owner update is possible (a scored attempt
+        // can never be rewritten by its owner).
+        || (isOwner(userId) && callerActive()
+            && resource.data.markingStatus == 'auto'
+            && resource.data.scored == false
+            && request.resource.data.diff(resource.data).affectedKeys()
+                .hasOnly(['answers', 'score', 'percentage', 'scored', 'updatedAt'])
+            && request.resource.data.scored == true
+            && request.resource.data.score is number
+            && request.resource.data.score >= 0
+            && request.resource.data.score <= resource.data.totalMarks
+            && request.resource.data.percentage is number
+            && request.resource.data.percentage >= 0
+            && request.resource.data.percentage <= 100
+            && request.resource.data.answers is list
+            && request.resource.data.answers.size() == resource.data.answers.size());
       allow delete: if false;
     }
 
@@ -775,10 +822,27 @@ service cloud.firestore {
     // ONLY while a fresh submission receipt exists for them + this quiz
     // (created by the app at submit time, deleted right after scoring;
     // a receipt older than 10 minutes no longer opens the key).
+    // C1 (security audit 22 Nov 2026): a receipt opens the key ONLY
+    // while it is fresh (≤10 min old, never future-dated) AND it names a
+    // real attempt that is submitted for THIS quiz by the caller. A bare
+    // receipt (no attempt) or a receipt for an unsubmitted / other-quiz
+    // attempt opens nothing — mirroring hasFreshJobReceipt.
+    function quizReceiptData(quizId) {
+      return get(/databases/$(database)/documents/quizReceipts/$(uid() + '_' + quizId)).data;
+    }
+    function quizReceiptAttemptData(quizId) {
+      return get(/databases/$(database)/documents/users/$(uid())/quizAttempts/$(quizReceiptData(quizId).attemptId)).data;
+    }
     function hasFreshReceipt(quizId) {
       return signedIn() && callerActive()
-        && get(/databases/$(database)/documents/quizReceipts/$(uid() + '_' + quizId)).data.createdAt
-            > request.time - duration.value(10, 'm');
+        && exists(/databases/$(database)/documents/quizReceipts/$(uid() + '_' + quizId))
+        && quizReceiptData(quizId).createdAt > request.time - duration.value(10, 'm')
+        && quizReceiptData(quizId).createdAt <= request.time
+        && quizReceiptData(quizId).attemptId is string
+        && exists(/databases/$(database)/documents/users/$(uid())/quizAttempts/$(quizReceiptData(quizId).attemptId))
+        && quizReceiptAttemptData(quizId).status == 'submitted'
+        && quizReceiptAttemptData(quizId).quizId == quizId
+        && quizReceiptAttemptData(quizId).userId == uid();
     }
     match /quizKeys/{quizId} {
       allow read: if isModerator() || hasFreshReceipt(quizId);
@@ -790,12 +854,26 @@ service cloud.firestore {
     // update one (a receipt is single-use by design).
     match /quizReceipts/{receiptId} {
       allow read: if isOwner(receiptId.split('_')[0]) || isAdmin();
+      // C1 (security audit 22 Nov 2026): a receipt is single-use proof of
+      // a REAL submission — it may be created only within 5 minutes of a
+      // submitted attempt for this quiz (never future-dated, never without
+      // the attempt), mirroring the jobReceipts create rule.
       allow create: if signedIn() && callerActive()
         && receiptId == uid() + '_' + request.resource.data.quizId
+        && request.resource.data.keys().hasOnly(['userId', 'quizId', 'attemptId', 'createdAt'])
         && request.resource.data.userId == uid()
         && request.resource.data.quizId is string
+        && request.resource.data.quizId.size() <= 200
         && request.resource.data.attemptId is string
-        && request.resource.data.createdAt is timestamp;
+        && request.resource.data.attemptId.size() <= 200
+        && request.resource.data.createdAt is timestamp
+        && request.resource.data.createdAt <= request.time
+        && request.resource.data.createdAt > request.time - duration.value(5, 'm')
+        && exists(/databases/$(database)/documents/users/$(uid())/quizAttempts/$(request.resource.data.attemptId))
+        && get(/databases/$(database)/documents/users/$(uid())/quizAttempts/$(request.resource.data.attemptId)).data.status == 'submitted'
+        && get(/databases/$(database)/documents/users/$(uid())/quizAttempts/$(request.resource.data.attemptId)).data.quizId == request.resource.data.quizId
+        && get(/databases/$(database)/documents/users/$(uid())/quizAttempts/$(request.resource.data.attemptId)).data.userId == uid()
+        && exists(/databases/$(database)/documents/quizzes/$(request.resource.data.quizId));
       allow update: if false;
       allow delete: if isOwner(receiptId.split('_')[0]);
     }
@@ -812,9 +890,16 @@ service cloud.firestore {
       // linked child's summaries (weak/strong subjects, results).
       allow read: if signedIn() && (resource.data.userId == uid() || isAdmin()
         || isLinkedGuardian(resource.data.userId));
+      // H1+M4 (security audit 22 Nov 2026): self-asserted progress is
+      // BOUND — attemptsCount is a whole number 0–10000, averagePercentage
+      // is 0–100. A student can no longer claim 999 attempts or 500%.
       allow create, update: if signedIn() && callerActive() && request.resource.data.userId == uid()
-        && request.resource.data.attemptsCount is number
-        && request.resource.data.averagePercentage is number;
+        && request.resource.data.attemptsCount is int
+        && request.resource.data.attemptsCount >= 0
+        && request.resource.data.attemptsCount <= 10000
+        && request.resource.data.averagePercentage is number
+        && request.resource.data.averagePercentage >= 0
+        && request.resource.data.averagePercentage <= 100;
       allow delete: if isAdmin();
     }
 
@@ -995,8 +1080,12 @@ service cloud.firestore {
         && request.resource.data.reviewStatus == 'Under Review'
         && isStr(request.resource.data.body, 5000);
       // isAccepted may be set only by the question author or a moderator.
+      // H2 (security audit 22 Nov 2026): the author may change ONLY
+      // isAccepted (+ updatedAt) — the answer body, upvotes and every
+      // other field are immutable for the author once written.
       allow update: if isModerator()
-        || (signedIn() && callerActive() && get(/databases/$(database)/documents/questions/$(questionId)).data.authorId == uid());
+        || (signedIn() && callerActive() && get(/databases/$(database)/documents/questions/$(questionId)).data.authorId == uid()
+            && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['isAccepted', 'updatedAt']));
       allow delete: if isAdmin();
     }
 
@@ -2296,7 +2385,13 @@ service cloud.firestore {
         && request.resource.data.questionIds == resource.data.questionIds
         && request.resource.data.configSnapshot == resource.data.configSnapshot
         && (request.resource.data.status != 'submitted'
-            || request.resource.data.submittedAt == request.time);
+            || request.resource.data.submittedAt == request.time)
+        // C2 (security audit 22 Nov 2026): only the autosave / submit
+        // fields may change — deadlineAt and startedAt can NEVER be
+        // rewritten, so a mock deadline can no longer be extended.
+        && request.resource.data.diff(resource.data).affectedKeys().hasOnly(
+            ['answers', 'score', 'percentage', 'correctCount', 'wrongCount',
+             'unansweredCount', 'status', 'submittedAt', 'updatedAt']);
       allow delete: if false;
     }
 

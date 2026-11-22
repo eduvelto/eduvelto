@@ -263,10 +263,15 @@ describe('auth gating — exams (owner instruction 22 Nov 2026)', () => {
     await assertSucceeds(
       setDoc(doc(asStudent1(), 'users', 'ag-student-1', 'quizAttempts', 'ag-attempt-1'), {
         quizId: 'ag-quiz1',
+        kind: 'mcq',
         answers: [],
         score: 0,
         totalMarks: 1,
         percentage: 0,
+        markingStatus: 'auto',
+        scored: false,
+        status: 'submitted',
+        userId: 'ag-student-1',
       }),
     );
   });

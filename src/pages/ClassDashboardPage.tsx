@@ -31,8 +31,8 @@ import AdPlaceholder from '../components/AdPlaceholder';
 import { ComingSoonHero } from '../components/ComingSoon';
 import { useAuth } from '../lib/auth';
 import { useLanguage, T, TabT } from '../i18n/LanguageContext';
-import { listPublishedBooks, type Book } from '../lib/content';
-import { listMyAttempts, listPublishedQuizzes, type Quiz, type QuizAttempt } from '../lib/exams';
+import { listBooksForClass, type Book } from '../lib/content';
+import { listMyAttempts, listQuizzesForClass, type Quiz, type QuizAttempt } from '../lib/exams';
 import { listBookmarks } from '../lib/bookmarks';
 import {
   listQuizSummaries,
@@ -150,13 +150,18 @@ export default function ClassDashboardPage() {
   const [userLoading, setUserLoading] = useState(false);
 
   function load() {
+    if (!def) return;
     setError(false);
     setBooks(null);
     setQuizzes(null);
     // AUTH GATING (owner instruction 22 Nov 2026): the quiz list embeds
     // questions, so it is fetched ONLY for a signed-in user. Guests get
     // an empty quiz list (books still load — the library is public).
-    Promise.all([listPublishedBooks(), user ? listPublishedQuizzes() : Promise.resolve([] as Quiz[])])
+    // H3 (security audit 22 Nov 2026): fetch ONLY this class's books +
+    // quizzes through the paginated listers — the old unbounded
+    // listPublishedBooks()/listPublishedQuizzes() read ALL 609 books +
+    // 994 quizzes (~1,600 reads) on every dashboard visit.
+    Promise.all([listBooksForClass(def.educationType, def.classLevels), user ? listQuizzesForClass(def.educationType, def.classLevels) : Promise.resolve([] as Quiz[])])
       .then(([b, q]) => {
         setBooks(b);
         setQuizzes(q);

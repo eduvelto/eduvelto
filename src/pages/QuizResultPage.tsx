@@ -113,12 +113,21 @@ export default function QuizResultPage() {
       <Card style={{ marginBottom: 20, borderTop: '4px solid #F1B308' }}>
         <h2 style={{ fontFamily: "'Poppins','Hind Siliguri',system-ui,sans-serif", fontSize: 20, color: '#0A1F44', margin: '0 0 10px' }}>{quiz.title}</h2>
         {attempt.kind === 'mcq' ? (
-          <>
-            <p style={{ fontSize: 24, fontWeight: 800, color: '#0A1F44', margin: '0 0 10px' }}>
-              {t({ bn: `নম্বর: ${attempt.score}/${attempt.totalMarks} (${attempt.percentage}%)`, en: `Score: ${attempt.score}/${attempt.totalMarks} (${attempt.percentage}%)` })}
+          attempt.scored === false ? (
+            <p style={{ fontSize: 16, margin: 0 }}>
+              {t({ bn: 'উত্তর জমা হয়েছে, কিন্তু নম্বর গণনা সম্পূর্ণ হয়নি। পাতাটি রিফ্রেশ করুন — নম্বর না এলে আবার পরীক্ষা দিন।', en: 'Answers were submitted, but scoring did not finish. Refresh this page — if no score appears, take the quiz again.' })}
             </p>
-            <ProgressBar value={attempt.percentage} label={t({ bn: `নম্বর ${attempt.percentage}%`, en: `Score ${attempt.percentage}%` })} />
-          </>
+          ) : (
+            <>
+              <p style={{ fontSize: 24, fontWeight: 800, color: '#0A1F44', margin: '0 0 10px' }}>
+                {t({ bn: `নম্বর: ${attempt.score}/${attempt.totalMarks} (${attempt.percentage}%)`, en: `Score: ${attempt.score}/${attempt.totalMarks} (${attempt.percentage}%)` })}
+              </p>
+              <ProgressBar value={attempt.percentage} label={t({ bn: `নম্বর ${attempt.percentage}%`, en: `Score ${attempt.percentage}%` })} />
+              <p style={{ fontSize: 13, color: '#5B6B8C', margin: '10px 0 0' }}>
+                {t({ bn: 'অনুশীলন ফলাফল — এটি যাচাইকৃত বা সরকারি ফল নয়।', en: 'Practice result — this is not a verified or official result.' })}
+              </p>
+            </>
+          )
         ) : attempt.markingStatus === 'pending' ? (
           <p style={{ fontSize: 16, margin: 0 }}>
             {t({ bn: 'উত্তর জমা হয়েছে — শিক্ষক মূল্যায়ন করবেন। মূল্যায়ন শেষ হলে এখানে নম্বর দেখা যাবে।', en: 'Answers submitted — a teacher will mark them. The score will appear here once marked.' })}
@@ -129,6 +138,9 @@ export default function QuizResultPage() {
               {t({ bn: `নম্বর: ${attempt.score}/${attempt.totalMarks} (${attempt.percentage}%) · শিক্ষক মূল্যায়ন করেছেন`, en: `Score: ${attempt.score}/${attempt.totalMarks} (${attempt.percentage}%) · Marked by a teacher` })}
             </p>
             <ProgressBar value={attempt.percentage} label={t({ bn: `নম্বর ${attempt.percentage}%`, en: `Score ${attempt.percentage}%` })} />
+            <p style={{ fontSize: 13, color: '#5B6B8C', margin: '10px 0 0' }}>
+              {t({ bn: 'অনুশীলন ফলাফল — এটি যাচাইকৃত বা সরকারি ফল নয়।', en: 'Practice result — this is not a verified or official result.' })}
+            </p>
           </>
         )}
       </Card>

@@ -419,6 +419,39 @@ export async function listPublishedBooksPage(
   };
 }
 
+/**
+ * All Published books for ONE class (educationType + its classLevels),
+ * fetched through the paginated lister one classLevel at a time.
+ *
+ * H3 (security audit 22 Nov 2026): the class dashboard used to call the
+ * unbounded listPublishedBooks() — every visit read ALL 609 Published
+ * books. This reads only this class's rows (Honours 439, HSC 37, SSC 26,
+ * Classes 1–8 0). Same index-safe shape as listPublishedBooksPage
+ * (equality filters + orderBy(documentId())), so no composite index is
+ * needed. Full pages are walked because the dashboard shows exact counts
+ * and client-side pagination over the class's whole list.
+ */
+export async function listBooksForClass(
+  educationType: string | null,
+  classLevels: string[],
+): Promise<Book[]> {
+  // Classes 1–5 / 6–8 have no books or quizzes (educationType null) —
+  // no query at all, not even an empty one.
+  if (!educationType || classLevels.length === 0) return [];
+  const all: Book[] = [];
+  for (const classLevel of classLevels) {
+    let cursor: QueryDocumentSnapshot<DocumentData> | null = null;
+    for (;;) {
+      const page = await listPublishedBooksPage({ educationType, classLevel }, cursor);
+      all.push(...page.items);
+      if (!page.hasMore || !page.lastDoc) break;
+      cursor = page.lastDoc;
+    }
+  }
+  all.sort(compareBooks);
+  return all;
+}
+
 /** One page of Published directory rows, server-side (50 reads at most). Same index note as listPublishedBooksPage. */
 export async function listPublishedDirectoryPage(
   filters: DirectoryFilters,

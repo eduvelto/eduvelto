@@ -788,6 +788,35 @@ describe('NU-4 rules — attempts (NU-T9, T11…T14)', () => {
       }),
     );
   });
+  // C2 (security audit 22 Nov 2026): the mock deadline can never be
+  // rewritten — only the autosave / submit fields may change.
+  it('(n55a) C2: student rewriting deadlineAt of an in-progress attempt is DENIED', async () => {
+    await assertFails(
+      updateDoc(doc(asStudent1(), 'users', 'student-1', 'nuAttempts', 'attempt-inprogress-1'), {
+        deadlineAt: Timestamp.fromMillis(now() + 7200000),
+      }),
+    );
+  });
+  it('(n55b) C2: student rewriting startedAt of an in-progress attempt is DENIED', async () => {
+    await assertFails(
+      updateDoc(doc(asStudent1(), 'users', 'student-1', 'nuAttempts', 'attempt-inprogress-1'), {
+        startedAt: Timestamp.fromMillis(now()),
+      }),
+    );
+  });
+  it('(n55c) C2: student submitting an in-progress attempt (autosave/submit fields only) is ALLOWED', async () => {
+    await assertSucceeds(
+      updateDoc(doc(asStudent1(), 'users', 'student-1', 'nuAttempts', 'attempt-inprogress-1'), {
+        status: 'submitted',
+        submittedAt: serverTimestamp(),
+        score: 50,
+        percentage: 50,
+        correctCount: 50,
+        wrongCount: 40,
+        unansweredCount: 10,
+      }),
+    );
+  });
 });
 
 describe('NU-4 rules — reviews and publications', () => {
