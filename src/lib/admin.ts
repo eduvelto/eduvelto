@@ -66,6 +66,10 @@ export interface AdminUserRow {
   displayName: string;
   email: string;
   role: UserRole;
+  /** Public ID number (owner order 22 Nov 2026) — displayed as
+   * eduvelto0001; absent = not assigned yet. Display/lookup only,
+   * never a permission input. */
+  publicIdNumber?: number;
   /** Absent = active. Only an explicit false suspends. */
   isActive: boolean;
   suspendedReason?: string;
@@ -428,6 +432,10 @@ function toAdminUserRow(uid: string, data: DocumentData): AdminUserRow {
     displayName: typeof data.displayName === 'string' ? data.displayName : '(নাম নেই)',
     email: typeof data.email === 'string' ? data.email : '',
     role: (data.role as UserRole) ?? 'student',
+    publicIdNumber:
+      typeof data.publicIdNumber === 'number' && Number.isInteger(data.publicIdNumber) && data.publicIdNumber >= 1
+        ? data.publicIdNumber
+        : undefined,
     isActive: data.isActive !== false,
     suspendedReason:
       typeof data.suspendedReason === 'string' ? data.suspendedReason : undefined,

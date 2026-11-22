@@ -316,6 +316,11 @@ export const strings = {
       bn: 'আপনার অভিভাবক এই ID দিয়ে আপনার সাথে সংযোগ করতে পারবেন।',
       en: 'Your guardian can link with you using this ID.',
     },
+    /** Public user ID (owner order 22 Nov 2026): sequential display
+     * number, eduvelto0001 from the first registered user. Shown on
+     * the profile; the Auth UID row stays as the technical ID. */
+    publicId: { bn: 'পাবলিক আইডি', en: 'Public ID' },
+    publicIdPending: { bn: 'এখনো দেওয়া হয়নি', en: 'Not assigned yet' },
     linkConfirmTitle: { bn: 'অভিভাবক সংযোগের অনুরোধ', en: 'Guardian link requests' },
     confirmAcademicChange: { bn: 'পরিবর্তনটি নিশ্চিত করুন', en: 'Confirm this change' },
     progressPreserved: {

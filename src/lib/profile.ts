@@ -54,6 +54,7 @@ import {
   type Firestore,
   type Timestamp,
 } from 'firebase/firestore';
+import { createProfileWithPublicId } from './publicId';
 
 export type EducationType = 'general' | 'madrasa' | 'technical' | 'higher' | 'other';
 
@@ -148,6 +149,19 @@ export interface UserProfile {
   verifiedBy?: string | null;
   /** Admin-set only: when the teacher was verified. */
   verifiedAt?: Timestamp | null;
+  /**
+   * Public user ID number (owner order 22 Nov 2026: sequential from 1,
+   * displayed as eduvelto0001 — see lib/publicId.ts). A DISPLAY /
+   * LOOKUP number only: the Firebase Auth UID stays the security
+   * identity, and rules must NEVER trust this field for permissions.
+   * Allocated atomically at signup (counter transaction); never reused;
+   * never changed afterwards (the rules allowlist excludes it from
+   * self-update, and the owner may set it only when it is absent).
+   * Absent = not assigned yet (pre-feature accounts, or a signup that
+   * ran while the counter was unavailable) — the backfill script
+   * assigns it in registration order.
+   */
+  publicIdNumber?: number | null;
 }
 
 /** Fields the owner may edit on their own profile (rules allowlist). */
@@ -293,6 +307,13 @@ export async function ensureUserProfile(
   const displayName = (preferredDisplayName ?? user.displayName ?? '').trim() || fallbackDisplayName(user);
   // NOTE: no `isActive`, no `verificationStatus` — the security rules deny
   // create when either is present (see the module header).
+  // PUBLIC ID (owner order 22 Nov 2026): the profile is created WITH
+  // `publicIdNumber` (1, 2, ... — displayed as eduvelto0001) when the
+  // counter is available, in the same transaction that increments the
+  // counter (see lib/publicId.ts). The number is a display/lookup label
+  // only — the Auth UID stays the security identity. If allocation
+  // cannot happen, the profile is created without the number and the
+  // backfill script assigns it later in registration order.
   const role = options?.role ?? 'student';
   const data: Record<string, unknown> = {
     displayName: displayName.slice(0, 100),
@@ -322,7 +343,24 @@ export async function ensureUserProfile(
     }
     if (f.language) data.language = f.language;
   }
-  await setDoc(doc(db, 'users', user.uid), data);
+  // Public ID (owner order 22 Nov 2026): allocate the sequential
+  // number atomically with the profile create (counter transaction).
+  // If allocation cannot happen (counter missing, or the rules change
+  // not deployed yet), fall back to a plain create WITHOUT the number
+  // — signup must never break because of the public ID; the backfill
+  // script assigns it later in registration order.
+  let allocated: number | null = null;
+  try {
+    allocated = await createProfileWithPublicId(db, user.uid, data);
+  } catch (e) {
+    if (typeof console !== 'undefined') {
+      console.warn('[Eduvelto] public-ID allocation failed, creating profile without one:', e);
+    }
+    allocated = null;
+  }
+  if (allocated === null) {
+    await setDoc(doc(db, 'users', user.uid), data);
+  }
   const created = await getUserProfile(db, user.uid);
   if (!created) throw new Error('profile-create-failed');
   return { profile: created, created: true };
