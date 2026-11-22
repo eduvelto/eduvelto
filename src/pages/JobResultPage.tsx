@@ -18,13 +18,18 @@
 // percentage is stored as the real (possibly negative) number;
 // the display clamps at 0 — the stored value is not changed.
 //
-// "ভুল প্রশ্নগুলো আবার অনুশীলন করুন" re-runs the whole bundle
-// (a wrong-only session needs a Moderator-built bundle — Step 13).
+// Step 13: a wrong-answers session lands here with location
+// state { fromWrongAnswers, clearedCount, clearedQuestionIds }
+// — the banner below names the questions that just cleared
+// (2 consecutive correct), and the Next Steps card links back
+// to the notebook. The old "re-runs the whole bundle" note
+// above is superseded: /jobs/wrong-answers/practice/:topicId
+// now runs a real subset session.
 //
 // LANGUAGE: all UI text is Bangla (one-language rule).
 
 import { useEffect, useState } from 'react';
-import { Link, useParams, useSearchParams } from 'react-router-dom';
+import { Link, useLocation, useParams, useSearchParams } from 'react-router-dom';
 import { PageShell } from '../components/PageShell';
 import { AlertBox, Card, LinkButton, ProgressBar, Skeleton } from '../components/ui';
 import { useAuth } from '../lib/auth';
@@ -80,7 +85,15 @@ const MUTED = '#68747B';
 export default function JobResultPage() {
   const { attemptId = '' } = useParams<{ attemptId: string }>();
   const [searchParams] = useSearchParams();
+  const location = useLocation();
   const { user, profile } = useAuth();
+  // Step 13: a wrong-answers session passes
+  // { fromWrongAnswers, clearedCount, clearedQuestionIds } —
+  // the banner names the questions that just cleared the
+  // notebook (2 consecutive correct). Absent for normal
+  // practice/mock results; nothing renders then.
+  const fromWrongAnswers = (location.state as { fromWrongAnswers?: boolean; clearedCount?: number } | null)?.fromWrongAnswers === true;
+  const clearedCount = (location.state as { clearedCount?: number } | null)?.clearedCount ?? 0;
 
   const [loading, setLoading] = useState(true);
   const [notFound, setNotFound] = useState(false);
@@ -296,6 +309,16 @@ export default function JobResultPage() {
     <PageShell titleBn="ফলাফল" titleEn="ফলাফল" wide maxWidth={1240}>
       {/* BINDING label — every result page carries it. */}
       <AlertBox tone="info">{JOB_PRACTICE_RESULT_LABEL}</AlertBox>
+
+      {/* Step 13: just cleared from the wrong-answer notebook. */}
+      {fromWrongAnswers && clearedCount > 0 ? (
+        <AlertBox tone="ok">
+          নোটবুক থেকে সরানো হয়েছে — {clearedCount}টি প্রশ্ন পরপর ২ বার সঠিক হয়েছে।{' '}
+          <Link to="/jobs/wrong-answers" style={{ fontWeight: 700 }}>
+            ভুল-উত্তর নোটবুক দেখুন →
+          </Link>
+        </AlertBox>
+      ) : null}
 
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: 16, marginTop: 16, alignItems: 'start' }}>
         <Card>
@@ -572,6 +595,9 @@ export default function JobResultPage() {
               </LinkButton>
               <LinkButton to="#review" variant="outline">
                 ভুল প্রশ্নগুলো আবার দেখুন ↓
+              </LinkButton>
+              <LinkButton to="/jobs/wrong-answers" variant="outline">
+                ভুল-উত্তর নোটবুক দেখুন →
               </LinkButton>
             </div>
           </>

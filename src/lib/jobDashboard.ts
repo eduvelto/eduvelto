@@ -438,7 +438,7 @@ export function dashboardAchievements(
 }
 
 /* ------------------------------------------------------------------ */
-/* Wrong-answer notebook (Step 13 preview — count + recent only)      */
+/* Wrong-answer notebook (Step 13 — count + recent only)         */
 /* ------------------------------------------------------------------ */
 
 export interface WrongAnswerSummary {
@@ -459,8 +459,9 @@ export interface WrongAnswerSummary {
 
 /** Wrong + unanswered questions across the loaded attempts
  * (Step 10's buildWrongAnswerList, newest first, deduped by
- * questionId keeping the newest). The full re-practice flow is
- * Step 13 — this card only counts and links to result pages. */
+ * questionId keeping the newest). The full notebook +
+ * re-practice flow is Step 13 (/jobs/wrong-answers) — this
+ * card only counts and links to result pages + the notebook. */
 export function wrongAnswerSummary(attempts: JobAttemptSummary[]): WrongAnswerSummary {
   const seen = new Set<string>();
   const recent: WrongAnswerSummary['recent'] = [];

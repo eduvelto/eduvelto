@@ -248,6 +248,79 @@ export async function startPracticeSession(
   return { sessionId: ref.id, session, startedAtMillis: Date.now() };
 }
 
+/** Start a WRONG-ANSWERS re-practice session (Step 13): the
+ * same practice session shape, but the questionRefs are the
+ * PLANNED subset only (the topic's wrong questions + fresh
+ * same-topic questions, in the planned order — NOT the mode
+ * order and NOT the whole bundle). The session still anchors
+ * to the REAL published topic bundle (its docId + examSlug),
+ * so the rules see a normal practice session: the bundle
+ * exists and is published, the refs are non-empty, and the
+ * submit-time attempt binds to this session's refs size.
+ * Scoring uses the matching in-memory subset bundle + subset
+ * key (buildSubsetBundle / buildSubsetKey) — the stored
+ * attempt still carries the real bundleId + bundleVersion.
+ * NO resume: a fresh session starts every time (a resumed
+ * subset must never be confused with a full-bundle session
+ * for the same bundleId — the page abandons an unfinished
+ * session when the student leaves, see
+ * abandonPracticeSession). */
+export async function startWrongAnswersSession(
+  uid: string,
+  bundle: PracticeBundleWithId,
+  plannedQuestions: Array<{ n: number; questionId: string }>,
+): Promise<{ sessionId: string; session: JobPracticeSessionDoc; startedAtMillis: number }> {
+  if (plannedQuestions.length === 0) {
+    throw new Error('ভুল-উত্তর অনুশীলন শুরু করা যায়নি — এই টপিকে অনুশীলনের মতো কোনো প্রশ্ন নেই।');
+  }
+  const firestore = requireDb();
+  const ref = doc(collection(firestore, 'users', uid, 'jobSessions'));
+  const questionRefs = plannedQuestions.map((q) => ({ bundleId: bundle.docId, n: q.n, questionId: q.questionId }));
+  const session = createPracticeSession({
+    sessionId: ref.id,
+    bundleId: bundle.docId,
+    examSlug: bundle.examSlug,
+    questionRefs,
+  });
+  await setDoc(ref, session as unknown as Record<string, unknown>);
+  return { sessionId: ref.id, session, startedAtMillis: Date.now() };
+}
+
+/** Abandon an in-progress practice session (Step 13): the
+ * terminal in-progress → 'abandoned' transition (the audit
+ * trail stays — deletes are forbidden for everyone). The
+ * revision is fresh-read first, so a concurrent autosave
+ * cannot silently overwrite the abandon. Returns the
+ * terminal state the session is in afterwards. Throws when
+ * the session does not exist or is no longer in-progress in
+ * a way the rules would reject — the caller treats that as
+ * best-effort (the session is already terminal). */
+export async function abandonPracticeSession(
+  uid: string,
+  sessionId: string,
+): Promise<'abandoned' | 'submitted'> {
+  const firestore = requireDb();
+  const sessionRef = doc(firestore, 'users', uid, 'jobSessions', sessionId);
+  const snap = await getDoc(sessionRef);
+  if (!snap.exists()) {
+    throw new Error('সেশন পাওয়া যায়নি।');
+  }
+  const stored = snap.data() as Record<string, unknown>;
+  if (stored.status === 'submitted') return 'submitted';
+  if (stored.status === 'abandoned') return 'abandoned';
+  if (stored.status !== 'in-progress') {
+    throw new Error('এই সেশনটি আর বাতিল করা যাবে না।');
+  }
+  const storedRevision = typeof stored.revision === 'number' && stored.revision >= 1 ? stored.revision : 1;
+  await updateDoc(sessionRef, {
+    status: 'abandoned',
+    revision: storedRevision + 1,
+    lastSyncedAt: serverTimestamp(),
+    updatedAt: serverTimestamp(),
+  });
+  return 'abandoned';
+}
+
 /** Autosave one session (debounced by the caller): only the fields
  * the rules allow to change while in-progress — answers,
  * currentQuestion, lastSyncedAt, updatedAt, revision (exactly
