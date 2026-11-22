@@ -47,6 +47,7 @@ const AdminFeaturesPage = lazy(() => import('./pages/AdminFeaturesPage'));
 const AdminBackupPage = lazy(() => import('./pages/AdminBackupPage'));
 const AdminAuditPage = lazy(() => import('./pages/AdminAuditPage'));
 const AdminNuStructurePage = lazy(() => import('./pages/AdminNuStructurePage'));
+const AdminNuSyllabusPage = lazy(() => import('./pages/AdminNuSyllabusPage'));
 // NU-5: National University admission hub (design §5) — index, hub +
 // 8 tabs, group pages, candidate dashboard. Static group routes rank
 // above the hub's `:tab` route, so the two never collide.
@@ -215,6 +216,7 @@ export default function App() {
         <Route path="/admin/backup" element={<AdminGuard><AdminBackupPage /></AdminGuard>} />
         <Route path="/admin/audit" element={<AdminGuard><AdminAuditPage /></AdminGuard>} />
         <Route path="/admin/admissions/structure" element={<AdminGuard><AdminNuStructurePage /></AdminGuard>} />
+        <Route path="/admin/admissions/syllabus" element={<AdminGuard><AdminNuSyllabusPage /></AdminGuard>} />
         <Route path="/ai-teacher" element={<AiTeacherPage />} />
         <Route path="/exam" element={<ExamPage />} />
         <Route path="/routine" element={<RoutinePage />} />

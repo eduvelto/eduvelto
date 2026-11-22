@@ -118,6 +118,15 @@ export default function AdminPage() {
       to: '/admin/admissions/structure',
     },
     {
+      id: 'nu-admissions-syllabus',
+      titleBn: 'ভর্তি প্রস্তুতি (NU) — পাঠ্যসূচির সীড',
+      titleEn: 'Admission preparation (NU) — syllabus seed',
+      descBn: 'জাতীয় বিশ্ববিদ্যালয় ভর্তির বিষয়, অধ্যায়, টপিক ও পাঠ (১৭৭টি খসড়া ডকুমেন্ট) Firestore-এ প্রয়োগ করুন ও মিল যাচাই করুন।',
+      descEn: 'Apply and verify National University admission subjects, chapters, topics and lessons (177 draft documents) in Firestore.',
+      status: 'working',
+      to: '/admin/admissions/syllabus',
+    },
+    {
       id: 'content',
       titleBn: 'কনটেন্ট / ভিডিও / লাইব্রেরি',
       titleEn: 'Content / Video / Library',
