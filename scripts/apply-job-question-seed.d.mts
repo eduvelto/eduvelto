@@ -29,3 +29,8 @@ export declare function planQuestionSeedApply(
     jobQuestionKeys?: Record<string, Record<string, unknown>>;
   },
 ): QuestionSeedPlan;
+// CLI fail-closed guards (Step 7 fold-in, P1-07).
+export declare function liveFlagProblem(args: string[]): string | null;
+export declare function productionCredentialsProblem(
+  env?: Record<string, string | undefined>,
+): string | null;

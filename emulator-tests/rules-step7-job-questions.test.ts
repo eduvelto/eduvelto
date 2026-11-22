@@ -43,7 +43,11 @@
  *    Mock keys are NEVER readable before submission.
  *  jobReceipts — ID `{uid}_{bundleId}`; only the owning student
  *    creates their own receipt, anchored to a SUBMITTED attempt for
- *    that bundle; nobody updates one; the owner deletes it.
+ *    that bundle on a PUBLISHED bundle, with a trusted creation
+ *    timestamp; nobody updates one; only an Admin deletes one
+ *    (Step 7 fold-in: a student delete + recreate would mint a
+ *    fresh window forever). A receipt is a 10-minute window, NOT
+ *    one-use — repeat reads inside the window succeed by design.
  *  jobAttempts (anchor) — created in-progress on a Published
  *    bundle only, submitted exactly once, never changed or deleted
  *    after that (even Admin).
@@ -170,16 +174,23 @@ const VALID_KEY = {
       whyWrong: null,
     },
   ],
+  // P1-06: the key carries the bundle's configVersion — a stale
+  // key from an older config cannot score a newer bundle.
+  configVersion: '2026-11-22.1',
   createdAt: TS,
   updatedAt: TS,
 };
 
-/** Payload for a publish write by `verifier` (second eye). */
+/** Payload for a publish write by `verifier` (second eye).
+ * verifiedAt is stamped at write time (Step 7 fold-in, P1-01: a
+ * verification timestamp must be no later than now and no older
+ * than 5 minutes when it changes — a fixed past/future timestamp
+ * is refused). */
 const publishPayload = (verifier: string) => ({
   status: 'published',
   reviewStatus: 'Published',
   verifiedBy: verifier,
-  verifiedAt: VERIFY_TS,
+  verifiedAt: new Date(),
 });
 
 async function seed() {
@@ -606,7 +617,7 @@ describe('Update jobQuestions — Moderator/Admin (second eye + transition)', ()
   it('(q36) moderator verifying an Under Review doc SUCCEEDS', async () => {
     await assertSucceeds(
       updateDoc(doc(asModerator(), 'jobQuestions', 'q-under-review'), {
-        verifiedBy: 'moderator-1', verifiedAt: VERIFY_TS,
+        verifiedBy: 'moderator-1', verifiedAt: new Date(),
       }),
     );
   });
@@ -797,10 +808,10 @@ describe('jobQuestionKeys — receipt-gated, practice open', () => {
   it('(q70) student reading a DRAFT bundle\'s practice key is DENIED', async () => {
     await assertFails(getDoc(doc(asStudent1(), 'jobQuestionKeys', 'topic__bcs__bangla__grammar__samash')));
   });
-  it('(q71a) moderator creating a key SUCCEEDS', async () => {
+  it('(q71a) moderator creating a key for an existing bundle SUCCEEDS', async () => {
     await assertSucceeds(
-      setDoc(doc(asModerator(), 'jobQuestionKeys', 'mock__bcs-mock-01-new'), {
-        ...VALID_KEY, bundleId: 'mock__bcs-mock-01-new',
+      setDoc(doc(asModerator(), 'jobQuestionKeys', 'mock__bcs-mock-03'), {
+        ...VALID_KEY, bundleId: 'mock__bcs-mock-03',
       }),
     );
   });
@@ -860,8 +871,11 @@ describe('jobReceipts — access grants, attempt-anchored (P0-06)', () => {
       }),
     );
   });
-  it('(q78) student deleting their own receipt SUCCEEDS', async () => {
-    await assertSucceeds(deleteDoc(doc(asStudent2(), 'jobReceipts', 'student-2_mock__bcs-mock-01')));
+  it('(q78) student deleting their own receipt is DENIED (Step 7 fold-in, P0-03/P1-04: a student delete + recreate would mint a fresh 10-minute window forever — only an Admin deletes receipts)', async () => {
+    await assertFails(deleteDoc(doc(asStudent2(), 'jobReceipts', 'student-2_mock__bcs-mock-01')));
+  });
+  it('(q78b) admin deleting a receipt SUCCEEDS (cleanup)', async () => {
+    await assertSucceeds(deleteDoc(doc(asAdmin(), 'jobReceipts', 'student-2_mock__bcs-mock-01')));
   });
   it('(q79) student deleting someone else\'s receipt is DENIED', async () => {
     await assertFails(deleteDoc(doc(asStudent1(), 'jobReceipts', 'student-2_mock__bcs-mock-02')));

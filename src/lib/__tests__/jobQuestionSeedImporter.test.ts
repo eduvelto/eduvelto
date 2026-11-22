@@ -29,6 +29,8 @@ import {
   validateQuestionSeed,
   planQuestionSeedApply,
   JOB_QUESTION_CONFIG_VERSION,
+  liveFlagProblem,
+  productionCredentialsProblem,
 } from '../../../scripts/apply-job-question-seed.mjs';
 import { emulatorTargetProblem } from '../../../scripts/apply-job-seed.mjs';
 
@@ -124,6 +126,8 @@ function oneQuestionSeed() {
         whyWrong: null,
       },
     ],
+    // P1-06: the key carries the bundle's configVersion.
+    configVersion: JOB_QUESTION_CONFIG_VERSION,
     createdAt: '2026-11-22T08:00:00.000Z',
     updatedAt: '2026-11-22T08:00:00.000Z',
   };
@@ -250,6 +254,26 @@ describe('validateQuestionSeed (Step 7)', () => {
     s.jobQuestions['q-seed-1'].configVersion = '2026-11-21.9';
     expect(validateQuestionSeed(s).length).toBeGreaterThan(0);
   });
+
+  it('rejects a key with configVersion drift (P1-06)', () => {
+    const s = oneQuestionSeed();
+    s.jobQuestionKeys['topic__bcs__bangla__grammar__sandhi'].configVersion = '2026-11-21.9';
+    expect(validateQuestionSeed(s).length).toBeGreaterThan(0);
+  });
+
+  it('rejects a key answering fewer questions than its bundle (P1-06)', () => {
+    const s = oneQuestionSeed();
+    const k = s.jobQuestionKeys['topic__bcs__bangla__grammar__sandhi'];
+    (k.answers as unknown[]).push({
+      n: 2,
+      questionId: 'q-seed-1',
+      correctLetter: 'B',
+      correctText: 'দুটি ধ্বনির মিলন',
+      explanation: 'সন্ধি হলো দুটি ধ্বনির মিলন।',
+      whyWrong: null,
+    });
+    expect(validateQuestionSeed(s).length).toBeGreaterThan(0);
+  });
 });
 
 describe('planQuestionSeedApply (Step 7)', () => {
@@ -316,5 +340,29 @@ describe('emulatorTargetProblem (shared guard, Step 6 fold-in P1-06)', () => {
     expect(emulatorTargetProblem('192.168.1.5:8080')).not.toBeNull();
     expect(emulatorTargetProblem('')).not.toBeNull();
     expect(emulatorTargetProblem('eduvelto.firebaseapp.com:443')).not.toBeNull();
+  });
+});
+
+describe('CLI fail-closed guards (Step 7 fold-in, P1-07)', () => {
+  it('refuses --live / --prod / --production / --firestore flags', () => {
+    expect(liveFlagProblem(['--apply', '--live'])).not.toBeNull();
+    expect(liveFlagProblem(['--apply', '--prod'])).not.toBeNull();
+    expect(liveFlagProblem(['--apply', '--production'])).not.toBeNull();
+    expect(liveFlagProblem(['--apply', '--firestore'])).not.toBeNull();
+  });
+
+  it('accepts an emulator-only invocation (no live flag)', () => {
+    expect(liveFlagProblem(['--dry-run', '--emulator', '127.0.0.1:8080'])).toBeNull();
+  });
+
+  it('refuses when production credentials are in the environment', () => {
+    expect(
+      productionCredentialsProblem({ GOOGLE_APPLICATION_CREDENTIALS: '/home/user/key.json' }),
+    ).not.toBeNull();
+    expect(productionCredentialsProblem({ FIREBASE_CONFIG: '{"projectId":"eduvelto"}' })).not.toBeNull();
+  });
+
+  it('accepts a clean environment (no production credentials)', () => {
+    expect(productionCredentialsProblem({})).toBeNull();
   });
 });

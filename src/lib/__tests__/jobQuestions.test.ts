@@ -119,6 +119,39 @@ describe('duplicate hash', () => {
   it('(u5) hash is 16 hex chars', () => {
     expect(jobQuestionDuplicateHash('সন্ধি কাকে বলে?')).toMatch(/^[0-9a-f]{16}$/);
   });
+  it('(u51) same text in a different subject gives a different hash (P2-01 context)', () => {
+    const ctx = {
+      subjectId: 'bcs__bangla',
+      chapterId: 'bcs__bangla__grammar',
+      topicId: 'bcs__bangla__grammar__sandhi',
+      correctLetter: 'B',
+    };
+    expect(jobQuestionDuplicateHash('সন্ধি কাকে বলে?', ctx)).not.toBe(
+      jobQuestionDuplicateHash('সন্ধি কাকে বলে?', { ...ctx, subjectId: 'bcs__english' }),
+    );
+  });
+  it('(u52) same text + same context gives the same hash', () => {
+    const ctx = {
+      subjectId: 'bcs__bangla',
+      chapterId: 'bcs__bangla__grammar',
+      topicId: 'bcs__bangla__grammar__sandhi',
+      correctLetter: 'B',
+    };
+    expect(jobQuestionDuplicateHash('সন্ধি কাকে বলে?', ctx)).toBe(
+      jobQuestionDuplicateHash('সন্ধি কাকে বলে?', ctx),
+    );
+  });
+  it('(u53) same text with a different correct answer gives a different hash', () => {
+    const ctx = {
+      subjectId: 'bcs__bangla',
+      chapterId: 'bcs__bangla__grammar',
+      topicId: 'bcs__bangla__grammar__sandhi',
+      correctLetter: 'B',
+    };
+    expect(jobQuestionDuplicateHash('সন্ধি কাকে বলে?', ctx)).not.toBe(
+      jobQuestionDuplicateHash('সন্ধি কাকে বলে?', { ...ctx, correctLetter: 'C' }),
+    );
+  });
 });
 
 describe('validateJobQuestion', () => {
@@ -247,6 +280,19 @@ describe('validateJobQuestionBundle', () => {
   it('(u32) unknown kind fails', () => {
     expect(validateJobQuestionBundle({ ...BASE_BUNDLE, kind: 'surprise' }).length).toBeGreaterThan(0);
   });
+  it('(u55) questionCount 0 fails (a bundle must answer at least one question)', () => {
+    expect(validateJobQuestionBundle({ ...BASE_BUNDLE, questions: [], questionCount: 0 }).length).toBeGreaterThan(0);
+  });
+  it('(u56) questionCount 201 fails (largest verified exam: BCS 200)', () => {
+    const questions = Array.from({ length: 201 }, (_, i) => ({
+      ...(BASE_BUNDLE.questions as Array<Record<string, unknown>>)[0],
+      n: i + 1,
+      questionId: `q${i + 1}`,
+    }));
+    expect(
+      validateJobQuestionBundle({ ...BASE_BUNDLE, questions, questionCount: 201 }).length,
+    ).toBeGreaterThan(0);
+  });
 });
 
 describe('state machine', () => {
@@ -323,6 +369,12 @@ describe('buildJobBundle', () => {
     expect(jobBundleIdForDaily('2026-11-22')).toBe('daily__2026-11-22');
     expect(jobBundleIdForWeekly('2026-W47')).toBe('weekly__2026-W47');
     expect(jobBundleIdForPrevious('bcs', 2024)).toBe('previous__bcs__2024');
+  });
+  it('(u54) the built key carries the bundle configVersion (P1-06)', () => {
+    const { bundle, key } = buildJobBundle([published('q1')], meta);
+    expect(bundle.configVersion).toBe(JOB_QUESTION_CONFIG_VERSION);
+    expect(key.configVersion).toBe(JOB_QUESTION_CONFIG_VERSION);
+    expect(key.configVersion).toBe(bundle.configVersion);
   });
 });
 
