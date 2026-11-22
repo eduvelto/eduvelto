@@ -1,17 +1,38 @@
 // Eduvelto — Firebase Auth (Step 1: real authentication + student profiles).
 //
-// - Email/password sign-up + sign-in, Google sign-in (redirect), sign-out,
-//   password reset, and auth-state handling for the whole app.
-// - Google sign-in uses signInWithRedirect, NOT signInWithPopup: the
-//   popup fails on the owner's phone (21 Nov 2026 — tapping Google login
-//   errored immediately with no account chooser: the popup never opened,
-//   because the page was opened in a WebView/PWA context that does not
-//   support popups). A redirect is a plain page navigation, so it works
-//   in mobile Chrome, installed PWAs and in-app browsers alike. The
-//   redirect result is handled in AuthProvider's mount effect
+// - Email/password sign-up + sign-in, Google sign-in (popup first,
+//   redirect fallback), sign-out, password reset, and auth-state
+//   handling for the whole app.
+// - Google sign-in: signInWithPopup FIRST, signInWithRedirect as
+//   fallback when a popup cannot open (22 Nov 2026, fix/google-login-
+//   diagnosis). Why: every observed `auth/internal-error` (4+ attempts,
+//   sign-in AND link, desktop AND phone) came through the redirect
+//   flow — including one link attempt where the Google link LANDED
+//   server-side yet the app still reported internal-error. The server
+//   exchange therefore succeeded at least once while the redirect-
+//   result machinery (gapi iframe, pending-redirect storage,
+//   redirect-user lookup) reported failure. The popup flow returns the
+//   result directly and bypasses ALL of that machinery, so it is both
+//   the fix candidate and the decisive test: if popup works, the
+//   redirect delivery was the problem; if popup fails with the same
+//   internal-error, the failure is in the server-side signInWithIdp
+//   exchange itself. Popup was never tried before (21 Nov: popup
+//   failed immediately in the WhatsApp in-app browser / PWA, which is
+//   why redirect was adopted — the fallback below keeps that behaviour:
+//   popup-blocked / unsupported environment silently falls back to
+//   redirect, exactly as before). A user-closed popup is NOT a
+//   fallback case: the user cancelled, so the error is shown.
+// - The redirect result is still handled in AuthProvider's mount effect
 //   (getRedirectResult) and the normal onAuthStateChanged listener;
 //   the role-setup hold survives the reload via sessionStorage
 //   (consume-once, see ROLE_SETUP_HOLD_KEY below).
+// - Every auth failure also records a redacted diagnostic detail
+//   (code + message + customData with any token response withheld):
+//   the SDK's `auth/internal-error` message carries the server's own
+//   detail, which the old UI threw away by showing only the code.
+//   The detail is shown under the error on /login and /register so the
+//   next failure can be diagnosed from a screenshot alone. It never
+//   contains an idToken / refreshToken.
 // - Session survives a page reload: Firebase Auth uses local persistence
 //   on web by default (the user stays signed in until they sign out).
 // - On every sign-in the `users/{uid}` profile document is created if it
@@ -45,6 +66,7 @@ import {
   onAuthStateChanged,
   sendPasswordResetEmail,
   signInWithEmailAndPassword,
+  signInWithPopup,
   signInWithRedirect,
   signOut as firebaseSignOut,
   updateProfile as updateAuthProfile,
@@ -77,6 +99,13 @@ export interface AuthState {
    * shown in small text under the friendly message so a failure can be
    * diagnosed from a screenshot alone. Null when there is no error. */
   errorCode: string | null;
+  /** Redacted diagnostic detail behind `error` (code + SDK message +
+   * customData with any token response withheld), shown in a
+   * collapsible block under the error on /login and /register. The
+   * SDK message carries the server's own detail for
+   * `auth/internal-error`, which the code alone never shows. Null
+   * when there is no error. Never contains an idToken/refreshToken. */
+  errorDetail: string | null;
   signUp: (
     displayName: string,
     email: string,
@@ -173,16 +202,49 @@ export function AuthProvider(props: { children: ReactNode }) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [errorCode, setErrorCode] = useState<string | null>(null);
+  const [errorDetail, setErrorDetail] = useState<string | null>(null);
 
-  /** Record a failure: friendly Bangla message + raw Firebase code. */
+  /** Redacted diagnostic detail for an auth failure: the SDK error's
+   * code + message + customData. The message is the important part —
+   * for `auth/internal-error` the Firebase SDK puts the Identity
+   * Toolkit server's own detail in it, which the friendly message and
+   * the bare code both hide. customData._tokenResponse (which carries
+   * idToken/refreshToken on tagged errors) is NEVER included — only a
+   * marker that it was withheld. Safe to show on screen and to log. */
+  function redactErrorDetail(e: unknown): string | null {
+    if (!e || typeof e !== 'object') return null;
+    const err = e as { code?: unknown; message?: unknown; customData?: unknown };
+    const code = typeof err.code === 'string' ? err.code : authErrorCode(e);
+    const message = typeof err.message === 'string' ? err.message : String(e);
+    let customData: unknown;
+    if (err.customData && typeof err.customData === 'object') {
+      const cd = { ...(err.customData as Record<string, unknown>) };
+      if ('_tokenResponse' in cd) cd._tokenResponse = '[withheld: contains tokens]';
+      customData = cd;
+    }
+    try {
+      return JSON.stringify({ code, message, customData }, null, 2);
+    } catch {
+      return JSON.stringify({ code, message });
+    }
+  }
+
+  /** Record a failure: friendly Bangla message + raw Firebase code +
+   * redacted diagnostic detail. */
   function fail(e: unknown): void {
     setError(friendlyErrorMessage(e));
     setErrorCode(authErrorCode(e));
+    const detail = redactErrorDetail(e);
+    setErrorDetail(detail);
+    if (typeof console !== 'undefined' && detail) {
+      console.error('[Eduvelto] auth failure:', detail);
+    }
   }
 
   function clearAuthError(): void {
     setError(null);
     setErrorCode(null);
+    setErrorDetail(null);
   }
   // UID whose lastActiveAt was already written in this page session.
   const touchedUid = useRef<string | null>(null);
@@ -326,41 +388,79 @@ export function AuthProvider(props: { children: ReactNode }) {
     }
   }
 
-  /** Google sign-in via REDIRECT (not popup).
+  /** Google sign-in: POPUP first, REDIRECT fallback.
    *
    * 21 Nov 2026 — signInWithPopup failed on the owner's phone: tapping
    * "Google দিয়ে লগইন" errored immediately with no account chooser,
    * because the page was opened in a context that does not support
-   * popups (in-app WebView / installed PWA). A redirect is a plain
-   * page navigation to Google and back, so it works in mobile Chrome,
-   * installed PWAs and in-app browsers alike, and on desktop too.
+   * popups (in-app WebView / installed PWA). That is why redirect was
+   * adopted — and the fallback below preserves it.
    *
-   * Flow: this call stores the role-setup hold (if requested) in
-   * sessionStorage, then navigates away to Google. It does NOT resolve
-   * on success — the page reloads, AuthProvider's mount effect picks
-   * up the redirect result (getRedirectResult) and the auth-state
-   * listener signs the user in and creates/loads the profile, exactly
-   * as the popup path did. Callers must therefore NOT rely on this
-   * promise resolving: LoginPage/RegisterPage navigate when `user`
-   * appears (see their effects). On failure the promise rejects
-   * (e.g. redirect blocked) and the friendly message + code are set.
+   * 22 Nov 2026 — every `auth/internal-error` since (sign-in AND link,
+   * desktop AND phone) came through the redirect flow, including a
+   * link attempt where the Google link LANDED server-side yet the app
+   * still reported internal-error. The popup flow returns the result
+   * directly and bypasses the redirect-result machinery (gapi iframe,
+   * pending-redirect storage, redirect-user lookup), so popup is now
+   * tried first: if it works, the redirect delivery was the problem;
+   * if it fails with the same internal-error, the failure is in the
+   * server-side signInWithIdp exchange and needs a server-side answer
+   * (Firebase support / secret reset as a last resort — owner action).
+   *
+   * Flow: popup first. Only when the popup cannot open at all
+   * (blocked / unsupported environment / storage unsupported) fall
+   * back to redirect, exactly as before. A user-closed popup, a
+   * cancelled popup request, or any account/server error is the real
+   * answer and is surfaced — the app must NOT silently navigate the
+   * user to Google after they closed the chooser.
+   *
+   * On popup success the promise resolves with the credential; the
+   * auth-state listener signs the user in and creates/loads the
+   * profile, exactly as the redirect path did. Callers must therefore
+   * still navigate when `user` appears (see LoginPage/RegisterPage).
+   * On redirect success the page navigates away to Google and the
+   * promise never resolves — same as before.
    */
   async function signInWithGoogle(options?: { holdForRoleSetup?: boolean }): Promise<void> {
     if (!auth || !db) throw new Error('not-configured');
     clearAuthError();
     setLoading(true);
-    try {
+    const setHold = (): void => {
       if (options?.holdForRoleSetup) {
         roleSetupHold = true;
         // Survives the redirect reload; consumed once by the mount
-        // effect (see ROLE_SETUP_HOLD_KEY).
+        // effect (see ROLE_SETUP_HOLD_KEY). Harmless for popup (no
+        // reload), where the in-memory flag alone would do.
         storeHold();
       }
-      await signInWithRedirect(auth, googleProvider);
-      // Not reached on success: the page navigates away to Google.
-    } catch (e) {
+    };
+    const clearHold = (): void => {
       roleSetupHold = false;
       clearStoredHold();
+    };
+    try {
+      setHold();
+      try {
+        await signInWithPopup(auth, googleProvider);
+        return;
+      } catch (popupError) {
+        const code = authErrorCode(popupError);
+        if (
+          code === 'auth/popup-blocked' ||
+          code === 'auth/operation-not-supported-in-this-environment' ||
+          code === 'auth/web-storage-unsupported'
+        ) {
+          // Popup cannot open in this browser/context — fall back to
+          // the redirect flow (the pre-existing behaviour).
+          setHold();
+          await signInWithRedirect(auth, googleProvider);
+          // Not reached on success: the page navigates away to Google.
+          return;
+        }
+        throw popupError;
+      }
+    } catch (e) {
+      clearHold();
       fail(e);
       throw e;
     } finally {
@@ -415,6 +515,7 @@ export function AuthProvider(props: { children: ReactNode }) {
     suspended: profile?.isActive === false,
     error,
     errorCode,
+    errorDetail,
     signUp,
     signIn,
     signInWithGoogle,
@@ -424,6 +525,7 @@ export function AuthProvider(props: { children: ReactNode }) {
     clearError: () => {
       setError(null);
       setErrorCode(null);
+      setErrorDetail(null);
     },
   };
 

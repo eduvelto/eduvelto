@@ -31,7 +31,7 @@ const buttonStyle: React.CSSProperties = {
 };
 
 export default function LoginPage() {
-  const { signIn, signInWithGoogle, resetPassword, user, error, errorCode, loading } = useAuth();
+  const { signIn, signInWithGoogle, resetPassword, user, error, errorCode, errorDetail, loading } = useAuth();
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -42,9 +42,10 @@ export default function LoginPage() {
   const { t } = useLanguage();
   const s = strings.auth;
 
-  // Google sign-in is a redirect: after Google sends the user back,
-  // `user` appears via the auth listener (no promise resolves here),
-  // so navigate then. Also covers opening /login while signed in.
+  // Google sign-in is popup-first (redirect fallback): on popup
+  // success `user` appears via the auth listener, on redirect success
+  // the page reloads and `user` appears then — navigate in both cases.
+  // Also covers opening /login while signed in.
   useEffect(() => {
     if (user) navigate('/profile');
   }, [user, navigate]);
@@ -139,6 +140,12 @@ export default function LoginPage() {
         {shownError ? <p style={{ color: '#b00020' }}>{shownError}</p> : null}
         {shownError && errorCode ? (
           <p style={{ color: '#b00020', fontSize: 13, marginTop: -8 }}>ত্রুটি কোড: {errorCode}</p>
+        ) : null}
+        {error && errorDetail ? (
+          <details style={{ fontSize: 12, color: '#555', marginTop: -4, marginBottom: 12 }}>
+            <summary>ত্রুটির বিস্তারিত (সাপোর্টের জন্য)</summary>
+            <pre style={{ whiteSpace: 'pre-wrap', wordBreak: 'break-word', background: '#f6f6f6', padding: 8, borderRadius: 6 }}>{errorDetail}</pre>
+          </details>
         ) : null}
         <button style={buttonStyle} type="submit" disabled={busy || loading}>
           {busy ? <T bn={strings.common.loading.bn} en={strings.common.loading.en} /> : <T bn={s.loginButton.bn} en={s.loginButton.en} />}

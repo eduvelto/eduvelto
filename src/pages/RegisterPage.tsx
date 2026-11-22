@@ -49,7 +49,7 @@ const buttonStyle: React.CSSProperties = {
 };
 
 export default function RegisterPage() {
-  const { signUp, signInWithGoogle, user, error, errorCode, loading } = useAuth();
+  const { signUp, signInWithGoogle, user, error, errorCode, errorDetail, loading } = useAuth();
   const navigate = useNavigate();
   const [displayName, setDisplayName] = useState('');
   const [email, setEmail] = useState('');
@@ -74,10 +74,11 @@ export default function RegisterPage() {
   const s = strings.auth;
   const d = strings.dashboard;
 
-  // Google sign-in is a redirect: after Google sends a new user back,
-  // `user` appears via the auth listener (no promise resolves here).
-  // When the role-setup hold is set, send them to /register/role to
-  // choose their role instead of showing "already signed in".
+  // Google sign-in is popup-first (redirect fallback): on popup
+  // success `user` appears via the auth listener, on redirect success
+  // the page reloads and `user` appears then. When the role-setup hold
+  // is set, send them to /register/role to choose their role instead
+  // of showing "already signed in".
   useEffect(() => {
     if (user && isRoleSetupHoldStored()) navigate('/register/role');
   }, [user, navigate]);
@@ -324,6 +325,12 @@ export default function RegisterPage() {
         {shownError ? <p style={{ color: '#b00020' }}>{shownError}</p> : null}
         {shownError && errorCode ? (
           <p style={{ color: '#b00020', fontSize: 13, marginTop: -8 }}>ত্রুটি কোড: {errorCode}</p>
+        ) : null}
+        {error && errorDetail ? (
+          <details style={{ fontSize: 12, color: '#555', marginTop: -4, marginBottom: 12 }}>
+            <summary>ত্রুটির বিস্তারিত (সাপোর্টের জন্য)</summary>
+            <pre style={{ whiteSpace: 'pre-wrap', wordBreak: 'break-word', background: '#f6f6f6', padding: 8, borderRadius: 6 }}>{errorDetail}</pre>
+          </details>
         ) : null}
         <button style={buttonStyle} type="submit" disabled={busy || loading}>
           {busy ? <T bn={strings.common.loading.bn} en={strings.common.loading.en} /> : <T bn={s.registerButton.bn} en={s.registerButton.en} />}
