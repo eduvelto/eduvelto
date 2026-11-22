@@ -397,8 +397,8 @@ describe('NU-6 syllabus rules (design §19.3.4)', () => {
     await assertFails(getDoc(doc(toFirestoreDb(student), 'nuSubjects', 'nu-sub-bangla-draft-teacher')));
   });
 
-  it('n30: a signed-out visitor reads a published topic', async () => {
-    await assertSucceeds(getDoc(doc(toFirestoreDb(anonymous), 'nuTopics', 'nu-tp-prose-01-pub')));
+  it('n30 (NU-7, owner 22 Nov 10:33 addendum): a signed-out visitor reads a published topic — DENIED, syllabus reads are signed-in-only', async () => {
+    await assertFails(getDoc(doc(toFirestoreDb(anonymous), 'nuTopics', 'nu-tp-prose-01-pub')));
   });
 
   it('n31: a signed-out visitor cannot read a draft topic', async () => {
