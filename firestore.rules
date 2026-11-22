@@ -221,6 +221,66 @@ service cloud.firestore {
                      .get('sourceCircular', null) == null
                     || lastHistoryEntry(newDoc.get('rulesConfigHistory', null))
                      .get('sourceCircular', null) is string)));
+    // NU-6 (§19.2.3, §19.3.4): syllabus-structure validators — mirrors
+    // of lib/nuSyllabus.ts validateNuSyllabus*Doc. Every doc: status
+    // draft/published, circularVersion + createdBy non-empty strings.
+    // Subjects carry no `order` field; common subjects are 20 marks
+    // (bangla/english/general-knowledge), group-40 blocks are 40 marks
+    // (slug group-*). `&&` short-circuits, so the `.size()` / `.hasOnly()`
+    // calls below only run after the `is list` / `is string` checks.
+    function isValidNuSubject(data) {
+      return data.slug is string && data.slug.size() > 0
+        && data.nameBn is string && data.nameBn.size() > 0
+        && data.syllabusSource is string && data.syllabusSource.size() > 0
+        && data.status in ['draft', 'published']
+        && data.circularVersion is string && data.circularVersion.size() > 0
+        && data.createdBy is string && data.createdBy.size() > 0
+        && data.groupIds is list
+        && data.groupIds.size() >= 1 && data.groupIds.size() <= 3
+        && data.groupIds.hasOnly(['humanities', 'science', 'business'])
+        && data.marks is int
+        && data.isGroupBlock is bool
+        && !('order' in data)
+        && ((data.isGroupBlock == true && data.marks == 40
+            && data.slug in ['group-humanities', 'group-science', 'group-business'])
+          || (data.isGroupBlock == false && data.marks == 20
+            && data.slug in ['bangla', 'english', 'general-knowledge']));
+    }
+    function isValidNuChapter(data) {
+      return data.subjectId is string && data.subjectId.size() > 0
+        && data.slug is string && data.slug.size() > 0
+        && data.nameBn is string && data.nameBn.size() > 0
+        && data.order is int && data.order >= 1
+        && data.syllabusSource is string && data.syllabusSource.size() > 0
+        && data.syllabusVerified is bool
+        && data.status in ['draft', 'published']
+        && data.circularVersion is string && data.circularVersion.size() > 0
+        && data.createdBy is string && data.createdBy.size() > 0;
+    }
+    function isValidNuTopic(data) {
+      return data.subjectId is string && data.subjectId.size() > 0
+        && data.chapterId is string && data.chapterId.size() > 0
+        && data.slug is string && data.slug.size() > 0
+        && data.nameBn is string && data.nameBn.size() > 0
+        && data.detailBn is string && data.detailBn.size() > 0
+        && data.order is int && data.order >= 1
+        && data.syllabusSource is string && data.syllabusSource.size() > 0
+        && data.syllabusVerified is bool
+        && data.status in ['draft', 'published']
+        && data.circularVersion is string && data.circularVersion.size() > 0
+        && data.createdBy is string && data.createdBy.size() > 0;
+    }
+    function isValidNuLesson(data) {
+      return data.subjectId is string && data.subjectId.size() > 0
+        && data.chapterId is string && data.chapterId.size() > 0
+        && data.topicId is string && data.topicId.size() > 0
+        && data.slug is string && data.slug.size() > 0
+        && data.titleBn is string && data.titleBn.size() > 0
+        && data.bodyBn is string && data.bodyBn.size() > 0
+        && data.order is int && data.order >= 1
+        && data.status in ['draft', 'published']
+        && data.circularVersion is string && data.circularVersion.size() > 0
+        && data.createdBy is string && data.createdBy.size() > 0;
     }
 
     // ---------- users.verificationStatus ----------
@@ -1862,6 +1922,67 @@ service cloud.firestore {
         && request.resource.data.institutionId is string
         && request.resource.data.examConfigId is string
         && request.resource.data.circularVersion is string;
+      allow delete: if false;
+    }
+
+    // nuSubjects / nuChapters / nuTopics / nuLessons (§19.2.3,
+    // §19.3.4; NU-6): the syllabus structure. Read — Published for
+    // everyone; a verified teacher may also read a draft they created.
+    // Write — Owner/Admin or a verified teacher (own Draft only, and
+    // createdBy must be their own uid). Publish (draft → published) —
+    // Owner/Admin only. Published docs are never edited in place (a
+    // correction is a new version, NU-7). Field checks mirror
+    // lib/nuSyllabus.ts — the group-40 block stays ONE doc per group.
+    match /nuSubjects/{subjectId} {
+      allow read: if resource.data.status == 'published' || isAdmin()
+        || (isVerifiedTeacher() && resource.data.createdBy == uid());
+      allow create: if (isAdmin() || (isVerifiedTeacher() && request.resource.data.createdBy == uid()))
+        && request.resource.data.status == 'draft'
+        && isValidNuSubject(request.resource.data);
+      allow update: if (isAdmin() || (isVerifiedTeacher() && resource.data.createdBy == uid()))
+        && resource.data.status != 'published'
+        && !(request.resource.data.status == 'published' && !isAdmin())
+        && request.resource.data.createdBy == resource.data.createdBy
+        && isValidNuSubject(request.resource.data);
+      allow delete: if false;
+    }
+    match /nuChapters/{chapterId} {
+      allow read: if resource.data.status == 'published' || isAdmin()
+        || (isVerifiedTeacher() && resource.data.createdBy == uid());
+      allow create: if (isAdmin() || (isVerifiedTeacher() && request.resource.data.createdBy == uid()))
+        && request.resource.data.status == 'draft'
+        && isValidNuChapter(request.resource.data);
+      allow update: if (isAdmin() || (isVerifiedTeacher() && resource.data.createdBy == uid()))
+        && resource.data.status != 'published'
+        && !(request.resource.data.status == 'published' && !isAdmin())
+        && request.resource.data.createdBy == resource.data.createdBy
+        && isValidNuChapter(request.resource.data);
+      allow delete: if false;
+    }
+    match /nuTopics/{topicId} {
+      allow read: if resource.data.status == 'published' || isAdmin()
+        || (isVerifiedTeacher() && resource.data.createdBy == uid());
+      allow create: if (isAdmin() || (isVerifiedTeacher() && request.resource.data.createdBy == uid()))
+        && request.resource.data.status == 'draft'
+        && isValidNuTopic(request.resource.data);
+      allow update: if (isAdmin() || (isVerifiedTeacher() && resource.data.createdBy == uid()))
+        && resource.data.status != 'published'
+        && !(request.resource.data.status == 'published' && !isAdmin())
+        && request.resource.data.createdBy == resource.data.createdBy
+        && isValidNuTopic(request.resource.data);
+      allow delete: if false;
+    }
+    match /nuLessons/{lessonId} {
+      allow read: if resource.data.status == 'published' || isAdmin()
+        || (isVerifiedTeacher() && resource.data.createdBy == uid());
+      allow create: if (isAdmin() || (isVerifiedTeacher() && request.resource.data.createdBy == uid()))
+        && request.resource.data.status == 'draft'
+        && isValidNuLesson(request.resource.data);
+      allow update: if (isAdmin() || (isVerifiedTeacher() && resource.data.createdBy == uid()))
+        && resource.data.status != 'published'
+        && !(request.resource.data.status == 'published' && !isAdmin())
+        && request.resource.data.createdBy == resource.data.createdBy
+        && isValidNuLesson(request.resource.data);
       allow delete: if false;
     }
 
