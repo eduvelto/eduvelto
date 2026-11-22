@@ -9,7 +9,10 @@
 // Mobile (≤860px): logo + notification bell + avatar (signed in) +
 // hamburger opening the full menu (sections as accordions + secondary
 // links). The header is shared chrome, so the new nav appears on every
-// page, not only the homepage.
+// page, not only the homepage. A language toggle button (globe icon +
+// "EN"/"বাং") sits at the top-right beside the profile on desktop and
+// mobile alike — it switches ONLY the navigation tab labels (owner
+// rule 22 Nov 2026); everything else stays Bangla.
 //
 // HONESTY: there is NO dark-mode theme system and NO notifications
 // system in this codebase — the moon icon and the bell open a small
@@ -23,6 +26,7 @@ import { useEffect, useRef, useState } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import { useAuth } from '../lib/auth';
 import { useLanguage } from '../i18n/LanguageContext';
+import type { Lang } from '../i18n/strings';
 
 type MenuItem = { to: string; bn: string; en: string; soon?: boolean };
 type Menu = { id: string; bn: string; en: string; icon: React.ReactNode; items: MenuItem[] };
@@ -108,6 +112,42 @@ function HomeIcon() {
     </svg>
   );
 }
+function LanguageIcon() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <circle cx="12" cy="12" r="9" />
+      <path d="M3 12h18" />
+      <path d="M12 3a13.5 13.5 0 0 1 3.5 9 13.5 13.5 0 0 1-3.5 9 13.5 13.5 0 0 1-3.5-9A13.5 13.5 0 0 1 12 3z" />
+    </svg>
+  );
+}
+
+/**
+ * Header language toggle (owner rule 22 Nov 2026): an icon button at the
+ * top-right, beside the profile, that switches ONLY the navigation tab
+ * labels between Bangla and English. The visible label is the TARGET
+ * language (EN when tabs are Bangla, বাং when tabs are English); the
+ * button itself and everything else stays Bangla. It reads/writes the
+ * same `tabLang` as the Settings language selector, so the two stay
+ * in sync. Rendered twice (desktop actions + mobile actions) — CSS
+ * shows exactly one per viewport.
+ */
+function LangToggleButton() {
+  const { tabLang, setLanguage, t } = useLanguage();
+  const next: Lang = tabLang === 'bn' ? 'en' : 'bn';
+  return (
+    <button
+      type="button"
+      className="ev-header-lang-btn"
+      aria-label={t({ bn: 'ট্যাবের ভাষা বদলান', en: 'Change tab language' })}
+      title={t({ bn: 'ট্যাবের ভাষা বদলান', en: 'Change tab language' })}
+      onClick={() => setLanguage(next)}
+    >
+      <LanguageIcon />
+      <span>{tabLang === 'bn' ? 'EN' : 'বাং'}</span>
+    </button>
+  );
+}
 
 const MENUS: Menu[] = [
   {
@@ -182,7 +222,7 @@ const SECONDARY: MenuItem[] = [
 ];
 
 export default function HeaderNav() {
-  const { t } = useLanguage();
+  const { t, tTab } = useLanguage();
   const { user, profile, loading, signOut } = useAuth();
   const location = useLocation();
   const [menuOpen, setMenuOpen] = useState(false);
@@ -253,6 +293,8 @@ export default function HeaderNav() {
             </span>
           ) : null}
         </span>
+        {/* Language toggle — top-right, beside the profile (owner rule 22 Nov 2026). */}
+        <LangToggleButton />
         {loading ? null : user ? (
           <Link to="/profile" className="ev-header-avatar" aria-label={t({ bn: 'প্রোফাইল', en: 'Profile' })}>
             {initial}
@@ -273,7 +315,7 @@ export default function HeaderNav() {
 
       <nav aria-label={t({ bn: 'প্রধান মেনু', en: 'Main menu' })} id="ev-main-nav" className={`ev-header-nav${menuOpen ? ' ev-header-nav-open' : ''}`}>
         <NavLink to="/" end className={({ isActive }) => `ev-hnav-home${isActive ? ' ev-hnav-home-active' : ''}`}>
-          <HomeIcon /> {t({ bn: 'হোম', en: 'Home' })}
+          <HomeIcon /> {tTab({ bn: 'হোম', en: 'Home' })}
         </NavLink>
         {MENUS.map((menu) => {
           const open = openMenu === menu.id;
@@ -286,7 +328,7 @@ export default function HeaderNav() {
                 aria-haspopup="true"
                 onClick={() => setOpenMenu(open ? null : menu.id)}
               >
-                {menu.icon} {t({ bn: menu.bn, en: menu.en })} <ChevronIcon open={open} />
+                {menu.icon} {tTab({ bn: menu.bn, en: menu.en })} <ChevronIcon open={open} />
               </button>
               {open ? (
                 <div className="ev-hnav-panel" role="menu">
@@ -307,12 +349,12 @@ export default function HeaderNav() {
         <span className="ev-hnav-secondary">
           {SECONDARY.map((item) => (
             <NavLink key={item.to} to={item.to} className={({ isActive }) => `ev-navlink${isActive ? ' ev-navlink-active' : ''}`}>
-              {t({ bn: item.bn, en: item.en })}
+              {tTab({ bn: item.bn, en: item.en })}
             </NavLink>
           ))}
           {profile?.role === 'owner' ? (
             <NavLink to="/admin" className={({ isActive }) => `ev-navlink${isActive ? ' ev-navlink-active' : ''}`} style={{ color: '#8A6100', fontWeight: 700 }}>
-              {t({ bn: 'অ্যাডমিন', en: 'Admin' })}
+              {tTab({ bn: 'অ্যাডমিন', en: 'Admin' })}
             </NavLink>
           ) : null}
         </span>
@@ -340,13 +382,15 @@ export default function HeaderNav() {
               </span>
             ) : null}
           </span>
+          {/* Language toggle — top-right, beside the profile (owner rule 22 Nov 2026). */}
+          <LangToggleButton />
           {loading ? null : user ? (
             <>
               <NavLink to="/dashboard" className={({ isActive }) => `ev-navlink${isActive ? ' ev-navlink-active' : ''}`}>
-                {t({ bn: 'ড্যাশবোর্ড', en: 'Dashboard' })}
+                {tTab({ bn: 'ড্যাশবোর্ড', en: 'Dashboard' })}
               </NavLink>
               <NavLink to="/profile" className={({ isActive }) => `ev-navlink${isActive ? ' ev-navlink-active' : ''}`}>
-                {profile?.displayName ?? t({ bn: 'প্রোফাইল', en: 'Profile' })}
+                {profile?.displayName ?? tTab({ bn: 'প্রোফাইল', en: 'Profile' })}
               </NavLink>
               <button type="button" onClick={() => void signOut()} className="ev-btn ev-btn-sm ev-header-btn-outline">
                 {t({ bn: 'লগআউট', en: 'Log out' })}

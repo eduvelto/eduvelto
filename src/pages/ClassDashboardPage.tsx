@@ -30,7 +30,7 @@ import { AlertBox, Card, Chip, LinkButton, ProgressBar, Reveal, SkeletonCards } 
 import AdPlaceholder from '../components/AdPlaceholder';
 import { ComingSoonHero } from '../components/ComingSoon';
 import { useAuth } from '../lib/auth';
-import { useLanguage, T } from '../i18n/LanguageContext';
+import { useLanguage, T, TabT } from '../i18n/LanguageContext';
 import { listPublishedBooks, type Book } from '../lib/content';
 import { listMyAttempts, listPublishedQuizzes, type Quiz, type QuizAttempt } from '../lib/exams';
 import { listBookmarks } from '../lib/bookmarks';
@@ -348,7 +348,9 @@ export default function ClassDashboardPage() {
                 fontWeight: active ? 700 : 500,
               }}
             >
-              <T bn={t.bn} en={t.en} />
+              {/* Tab bar — labels follow the selected language (TabT);
+                  everything else on the page stays Bangla. */}
+              <TabT bn={t.bn} en={t.en} />
             </Link>
           );
         })}
