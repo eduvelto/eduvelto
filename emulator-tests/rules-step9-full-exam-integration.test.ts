@@ -1,0 +1,573 @@
+/**
+ * Eduvelto Firestore security-rules tests — Job Preparation Step 9
+ * (engine↔rules INTEGRATION: the lib builders produce docs the
+ * rules accept, 22 Nov 2026).
+ *
+ * The rules tests (rules-step9-full-exam.test.ts) build docs by
+ * hand; the unit tests (jobMockEngine.test.ts) never touch
+ * Firestore. This file closes the gap: it runs the REAL UI flow
+ * through the emulator using the REAL lib builders —
+ * createMockSession, buildMockDeadlineUpdate,
+ * buildMockAutosavePatch, buildMockSessionSubmitUpdate,
+ * buildMockReceiptDoc, scoreMockAttempt, buildJobAttemptDoc,
+ * validateAttemptResult, jobAttemptResultFromStoredDoc — against
+ * the REAL rules:
+ *   session + lock batch → deadline set (EXACT, nanos-preserved)
+ *   → autosave → session submitted + lock released (ONE batch)
+ *   → receipt → key read → score → attempt create (same doc-ID)
+ *   → read back.
+ * A tampered attempt must fail the lib validator AND the rules.
+ *
+ * NOTE: the Firestore-touching functions in jobMock.ts
+ * (startMockSession / ensureMockDeadline / submitMockAttempt)
+ * use the app's db (requireDb), not the test env's — so this
+ * file mirrors their steps with the pure builders + the test
+ * env's db, exactly like the Step 8 integration test does for
+ * the practice engine.
+ *
+ * Seed: one Published 1-question BCS full mock + one Published
+ * 1-question Bank full mock (negative marking DISABLED — the
+ * snapshot carries null), each with definition + manifest +
+ * bundle + key. No real questions are fabricated beyond the
+ * single seeded fixture question per mock.
+ *
+ * Run with `npm run test:rules` (whole emulator-tests/ directory).
+ */
+import { describe, it, beforeAll, afterAll } from 'vitest';
+import {
+  initializeTestEnvironment,
+  assertSucceeds,
+  assertFails,
+  type RulesTestEnvironment,
+} from '@firebase/rules-unit-testing';
+import {
+  doc,
+  setDoc,
+  getDoc,
+  updateDoc,
+  writeBatch,
+  serverTimestamp,
+  Timestamp,
+} from 'firebase/firestore';
+import { readFileSync } from 'node:fs';
+import { resolve } from 'node:path';
+import {
+  buildJobAttemptDoc,
+  buildMockAutosavePatch,
+  buildMockDeadlineUpdate,
+  buildMockSessionSubmitUpdate,
+  createMockSession,
+  jobAttemptResultFromStoredDoc,
+  scoreMockAttempt,
+  validateAttemptResult,
+  type JobAttemptResult,
+  type JobMockSessionDoc,
+} from '../src/lib/jobEngine';
+import {
+  buildExamLockDoc,
+  buildMockReceiptDoc,
+  examLockId,
+  normalizeMockSessionDoc,
+} from '../src/lib/jobMock';
+import type { JobQuestionBundle, JobQuestionKey, JobQuestionOption } from '../src/lib/jobQuestions';
+
+const PROJECT_ID = 'eduvelto-rules-test-step9-integration';
+let env: RulesTestEnvironment;
+
+const RULES_PATH = resolve(__dirname, '../firestore.rules');
+const RULES_TEXT = readFileSync(RULES_PATH, 'utf8');
+if (!RULES_TEXT.includes('jobExamSessions')) {
+  throw new Error(`firestore.rules at ${RULES_PATH} does not contain the Step 9 jobExamSessions match.`);
+}
+
+const TS = new Date('2026-11-22T08:00:00.000Z');
+const OPTIONS: JobQuestionOption[] = [
+  { letter: 'A', text: 'দুটি স্বরের মিলন' },
+  { letter: 'B', text: 'দুটি ধ্বনির মিলন' },
+  { letter: 'C', text: 'দুটি শব্দের মিলন' },
+  { letter: 'D', text: 'দুটি বাক্যের মিলন' },
+];
+
+function makeBundle(mockId: string, examSlug: string, questionId: string): JobQuestionBundle {
+  return {
+    kind: 'mock',
+    examSlug,
+    topicId: null,
+    mockId,
+    titleBn: `${examSlug} পূর্ণ মক ১`,
+    titleEn: `${examSlug} Full Mock 1`,
+    questions: [
+      {
+        n: 1,
+        questionId,
+        topicId: `${examSlug}__bangla__grammar__sandhi`,
+        subjectId: `${examSlug}__bangla`,
+        questionText: 'সন্ধি কাকে বলে?',
+        options: OPTIONS,
+        difficulty: 'easy',
+      },
+    ],
+    questionCount: 1,
+    bundleVersion: 1,
+    status: 'published',
+    reviewStatus: 'Published',
+    sourceQuestionIds: [questionId],
+    configVersion: '1',
+    createdAt: TS,
+    updatedAt: TS,
+  };
+}
+
+function makeKey(bundleId: string, questionId: string): JobQuestionKey {
+  return {
+    bundleId,
+    answers: [
+      {
+        n: 1,
+        questionId,
+        correctLetter: 'B',
+        correctText: 'দুটি ধ্বনির মিলন',
+        explanation: 'সন্ধি হলো দুটি ধ্বনির মিলন।',
+        whyWrong: null,
+      },
+    ],
+    configVersion: '1',
+    createdAt: TS,
+    updatedAt: TS,
+  };
+}
+
+const BCS_BUNDLE_ID = 'mock__full__bcs__1';
+const BANK_BUNDLE_ID = 'mock__full__bank__1';
+const BCS_BUNDLE = makeBundle('full__bcs__1', 'bcs', 'q-seed-1');
+const BANK_BUNDLE = makeBundle('full__bank__1', 'bank', 'q-bank-1');
+const BCS_KEY = makeKey(BCS_BUNDLE_ID, 'q-seed-1');
+const BANK_KEY = makeKey(BANK_BUNDLE_ID, 'q-bank-1');
+
+const BCS_SNAPSHOT: MockSnapshot = {
+  questionCount: 1,
+  timeMinutes: 120,
+  marksPerQuestion: 1,
+  negativeMarking: 0.5,
+  negativeMarkingVerified: true,
+  passPercent: null,
+  scoringConfigVersion: 'v1',
+};
+const BANK_SNAPSHOT: MockSnapshot = {
+  questionCount: 1,
+  timeMinutes: 60,
+  marksPerQuestion: 1,
+  negativeMarking: null,
+  negativeMarkingVerified: false,
+  passPercent: null,
+  scoringConfigVersion: 'v0-provisional',
+};
+
+interface MockSnapshot {
+  questionCount: number;
+  timeMinutes: number;
+  marksPerQuestion: number;
+  negativeMarking: number | null;
+  negativeMarkingVerified: boolean;
+  passPercent: number | null;
+  scoringConfigVersion: string;
+}
+
+interface MockSetup {
+  examSlug: string;
+  mockId: string;
+  bundleId: string;
+  definitionId: string;
+  questionSetId: string;
+  bundle: JobQuestionBundle;
+  key: JobQuestionKey;
+  snapshot: MockSnapshot;
+  ref: { bundleId: string; n: number; questionId: string };
+}
+
+const BCS: MockSetup = {
+  examSlug: 'bcs',
+  mockId: 'full__bcs__1',
+  bundleId: BCS_BUNDLE_ID,
+  definitionId: 'full__bcs__1',
+  questionSetId: 'full__bcs__1_v1',
+  bundle: BCS_BUNDLE,
+  key: BCS_KEY,
+  snapshot: BCS_SNAPSHOT,
+  ref: { bundleId: BCS_BUNDLE_ID, n: 1, questionId: 'q-seed-1' },
+};
+const BANK: MockSetup = {
+  examSlug: 'bank',
+  mockId: 'full__bank__1',
+  bundleId: BANK_BUNDLE_ID,
+  definitionId: 'full__bank__1',
+  questionSetId: 'full__bank__1_v1',
+  bundle: BANK_BUNDLE,
+  key: BANK_KEY,
+  snapshot: BANK_SNAPSHOT,
+  ref: { bundleId: BANK_BUNDLE_ID, n: 1, questionId: 'q-bank-1' },
+};
+
+async function seed() {
+  await env.withSecurityRulesDisabled(async (ctx) => {
+    const db = ctx.firestore();
+    await setDoc(doc(db, 'users', 'student-1'), {
+      displayName: 'student-1',
+      email: 'student-1@example.com',
+      role: 'student',
+      language: 'bn',
+      isActive: true,
+    });
+    for (const setup of [BCS, BANK]) {
+      await setDoc(doc(db, 'jobQuestionBundles', setup.bundleId), { ...setup.bundle });
+      await setDoc(doc(db, 'jobQuestionKeys', setup.bundleId), { ...setup.key });
+      await setDoc(doc(db, 'jobExamDefinitions', setup.definitionId), {
+        examSlug: setup.examSlug,
+        titleBn: setup.bundle.titleBn,
+        titleEn: setup.bundle.titleEn,
+        kind: 'full',
+        bundleId: setup.bundleId,
+        questionSetId: setup.questionSetId,
+        rulesSnapshot: { ...setup.snapshot },
+        scheduleDate: null,
+        examSlugCycle: null,
+        status: 'published',
+        retakeAllowed: true,
+        maxAttempts: null,
+        publishedAt: TS,
+        publishedBy: 'moderator-1',
+        createdAt: TS,
+        updatedAt: TS,
+      });
+      await setDoc(doc(db, 'jobQuestionSetManifests', setup.questionSetId), {
+        examSlug: setup.examSlug,
+        mockId: setup.mockId,
+        version: 1,
+        questionCount: 1,
+        questionRefs: [setup.ref],
+        markingSchemeVersion: setup.snapshot.scoringConfigVersion,
+        status: 'published',
+        publishedAt: TS,
+        publishedBy: 'moderator-1',
+        createdAt: TS,
+        updatedAt: TS,
+      });
+    }
+  });
+}
+
+beforeAll(async () => {
+  env = await initializeTestEnvironment({
+    projectId: PROJECT_ID,
+    firestore: { rules: RULES_TEXT, host: '127.0.0.1', port: Number(process.env.FIRESTORE_EMULATOR_PORT ?? 8080) },
+  });
+  await seed();
+}, 120000);
+
+afterAll(async () => {
+  await env?.clearFirestore();
+  await env?.cleanup();
+});
+
+const asStudent = () => env.authenticatedContext('student-1').firestore();
+
+/** Read a session back and normalize it (the lib's own
+ * normalizer — the source of truth for stored fields). */
+async function readSession(sessionId: string): Promise<JobMockSessionDoc> {
+  const snap = await assertSucceeds(getDoc(doc(asStudent(), 'users', 'student-1', 'jobExamSessions', sessionId)));
+  if (!snap.exists()) throw new Error(`session ${sessionId} missing`);
+  return normalizeMockSessionDoc(snap.data() as Record<string, unknown>);
+}
+
+function millisOf(t: unknown): number | null {
+  const v = t as { toMillis?: () => number; seconds?: number } | null;
+  if (v && typeof v.toMillis === 'function') return v.toMillis();
+  if (v && typeof v.seconds === 'number') return v.seconds * 1000;
+  if (t instanceof Date) return t.getTime();
+  return null;
+}
+
+/** The deadline write exactly as ensureMockDeadline does it:
+ * endsAt built from the stored startedAt's own seconds +
+ * nanoseconds (exact equality in the rules), never from
+ * truncated millis. */
+async function setDeadline(sessionId: string, timeMinutes: number): Promise<number> {
+  const stored = await readSession(sessionId);
+  const startedAt = stored.startedAt as Timestamp | null;
+  if (!startedAt || typeof startedAt.seconds !== 'number') {
+    throw new Error('stored startedAt is not a Timestamp');
+  }
+  const startedAtMillis = millisOf(startedAt);
+  if (startedAtMillis === null) throw new Error('no startedAt millis');
+  const endsAt = new Timestamp(startedAt.seconds + timeMinutes * 60, startedAt.nanoseconds);
+  const deadlineMillis = startedAtMillis + timeMinutes * 60 * 1000;
+  await assertSucceeds(updateDoc(
+    doc(asStudent(), 'users', 'student-1', 'jobExamSessions', sessionId),
+    buildMockDeadlineUpdate(stored.revision, endsAt, deadlineMillis),
+  ));
+  const after = await readSession(sessionId);
+  if (millisOf(after.endsAt) !== deadlineMillis) {
+    throw new Error('endsAt did not land on startedAt + duration');
+  }
+  return startedAtMillis;
+}
+
+/** Create a mock session + lock (ONE batch, lib builders). */
+async function createSession(sessionId: string, setup: MockSetup): Promise<JobMockSessionDoc> {
+  const db = asStudent();
+  const session = createMockSession({
+    sessionId,
+    mockId: setup.mockId,
+    bundleId: setup.bundleId,
+    examSlug: setup.examSlug,
+    definitionId: setup.definitionId,
+    questionSetId: setup.questionSetId,
+    bundleVersion: setup.bundle.bundleVersion,
+    questionRefs: [setup.ref],
+    timeMinutes: setup.snapshot.timeMinutes,
+    clientNowMillis: Date.now(),
+  });
+  const batch = writeBatch(db);
+  batch.set(doc(db, 'users', 'student-1', 'jobExamSessions', sessionId), session as unknown as Record<string, unknown>);
+  batch.set(doc(db, 'jobExamUserLocks', examLockId('student-1', setup.examSlug)), buildExamLockDoc({
+    uid: 'student-1',
+    examSlug: setup.examSlug,
+    mockId: setup.mockId,
+    definitionId: setup.definitionId,
+    activeSessionId: sessionId,
+    durationSeconds: setup.snapshot.timeMinutes * 60,
+  }) as unknown as Record<string, unknown>);
+  await assertSucceeds(batch.commit());
+  return session;
+}
+
+/** Abandon a session + release its lock (ONE batch). */
+async function abandonSession(sessionId: string, setup: MockSetup): Promise<void> {
+  const db = asStudent();
+  const stored = await readSession(sessionId);
+  const batch = writeBatch(db);
+  batch.update(doc(db, 'users', 'student-1', 'jobExamSessions', sessionId), {
+    status: 'abandoned',
+    updatedAt: serverTimestamp(),
+    revision: stored.revision + 1,
+  });
+  batch.update(doc(db, 'jobExamUserLocks', examLockId('student-1', setup.examSlug)), {
+    status: 'terminal',
+    updatedAt: serverTimestamp(),
+  });
+  await assertSucceeds(batch.commit());
+}
+
+/** Run the full Design G submit flow with the lib builders,
+ * answering `letter` to question 1. Returns the attempt doc
+ * read back. */
+async function runMockSubmitFlow(
+  sessionId: string,
+  letter: 'A' | 'B' | 'C' | 'D' | null,
+  setup: MockSetup,
+): Promise<Record<string, unknown>> {
+  const db = asStudent();
+  await createSession(sessionId, setup);
+  const startedAtMillis = await setDeadline(sessionId, setup.snapshot.timeMinutes);
+  // Autosave the answer (fresh-read first — the local session
+  // lags the deadline write).
+  const storedForAutosave = await readSession(sessionId);
+  const answered: JobMockSessionDoc = {
+    ...storedForAutosave,
+    answers: { 1: { selected: letter, markedForReview: false, timeSpentSeconds: 45 } },
+  };
+  await assertSucceeds(updateDoc(
+    doc(db, 'users', 'student-1', 'jobExamSessions', sessionId),
+    buildMockAutosavePatch(answered),
+  ));
+  // Design G step 2: session → submitted + lock → terminal,
+  // ONE batch (fresh-read revision).
+  const stored = await readSession(sessionId);
+  const batch = writeBatch(db);
+  batch.update(doc(db, 'users', 'student-1', 'jobExamSessions', sessionId), buildMockSessionSubmitUpdate(stored.revision));
+  batch.update(doc(db, 'jobExamUserLocks', examLockId('student-1', setup.examSlug)), {
+    status: 'terminal',
+    updatedAt: serverTimestamp(),
+  });
+  await assertSucceeds(batch.commit());
+  // Design G step 3: receipt — BEST-EFFORT, exactly like the
+  // lib's submitMockAttempt. The receipt doc-ID is
+  // {uid}_{bundleId}: ONE window per student per bundle, and
+  // nobody updates a receipt. A retake on the same bundle
+  // cannot mint a second receipt — this create is DENIED and
+  // the key read below reuses the first receipt while it is
+  // still fresh (10 min). After the window closes, a retake
+  // cannot score — that is the open retake question recorded
+  // in the Step 9 report, not a bug in this flow.
+  try {
+    await setDoc(
+      doc(db, 'jobReceipts', `student-1_${setup.bundleId}`),
+      buildMockReceiptDoc('student-1', setup.bundleId, sessionId, setup.bundle.bundleVersion),
+    );
+  } catch {
+    // Retake: the receipt already exists — proceed; the key
+    // read uses whatever fresh receipt the rules accept.
+  }
+  // Step 4: key read (rules gate it on the fresh receipt).
+  const keySnap = await assertSucceeds(getDoc(doc(db, 'jobQuestionKeys', setup.bundleId)));
+  if (!keySnap.exists()) throw new Error('key doc missing');
+  const key = keySnap.data() as JobQuestionKey;
+  // Step 5–6: score + build + validate the attempt.
+  const result: JobAttemptResult = scoreMockAttempt({
+    bundle: setup.bundle,
+    key,
+    answers: [{ n: 1, questionId: setup.ref.questionId, selected: letter, timeSpentSeconds: 45 }],
+    rulesSnapshot: setup.snapshot,
+    examSlug: setup.examSlug,
+    startedAtMillis,
+    submittedAtMillis: Date.now(),
+  });
+  const attemptDoc = buildJobAttemptDoc({
+    sessionId,
+    session: stored,
+    result,
+    bundleId: setup.bundleId,
+    examSlug: setup.examSlug,
+    subjectId: null,
+    topicId: null,
+    kind: 'mock',
+    mockId: setup.mockId,
+    questionSetId: setup.questionSetId,
+    bundleVersion: setup.bundle.bundleVersion,
+    userId: 'student-1',
+  });
+  const problems = validateAttemptResult(attemptDoc);
+  if (problems.length > 0) throw new Error(`lib validator rejected its own doc: ${problems.join('; ')}`);
+  // Step 8: attempt create (same doc-ID as the session).
+  await assertSucceeds(setDoc(
+    doc(db, 'users', 'student-1', 'jobExamAttempts', sessionId),
+    attemptDoc as unknown as Record<string, unknown>,
+  ));
+  const readBack = await assertSucceeds(getDoc(doc(db, 'users', 'student-1', 'jobExamAttempts', sessionId)));
+  return readBack.data() as Record<string, unknown>;
+}
+
+describe('Step 9 engine↔rules integration (lib builders → emulator)', () => {
+  it('(i1) lib-built session + lock batch SUCCEEDS; abandon releases the lock', async () => {
+    const db = asStudent();
+    await createSession('sess-i1', BCS);
+    const lock = await assertSucceeds(getDoc(doc(db, 'jobExamUserLocks', 'student-1_bcs')));
+    if ((lock.data() as Record<string, unknown>).status !== 'in_progress') {
+      throw new Error('lock not in_progress after create');
+    }
+    await abandonSession('sess-i1', BCS);
+    const released = await assertSucceeds(getDoc(doc(db, 'jobExamUserLocks', 'student-1_bcs')));
+    if ((released.data() as Record<string, unknown>).status !== 'terminal') {
+      throw new Error('lock not terminal after abandon');
+    }
+  });
+
+  it('(i2) lib-built deadline lands EXACTLY on startedAt + 120min', async () => {
+    await createSession('sess-i2', BCS);
+    const startedAtMillis = await setDeadline('sess-i2', 120);
+    const stored = await readSession('sess-i2');
+    const endsAtMillis = millisOf(stored.endsAt);
+    if (endsAtMillis !== startedAtMillis + 120 * 60 * 1000) {
+      throw new Error(`endsAt ${endsAtMillis} != startedAt + 120min`);
+    }
+    await abandonSession('sess-i2', BCS);
+  });
+
+  it('(i3) full flow, correct answer: score 1, attempt readable, labels practice/unverified', async () => {
+    const data = await runMockSubmitFlow('sess-i3', 'B', BCS);
+    if (data.score !== 1) throw new Error(`expected score 1, got ${String(data.score)}`);
+    if (data.correctCount !== 1 || data.wrongCount !== 0) throw new Error('counts wrong');
+    if (data.resultLabel !== 'practice' || data.trustLevel !== 'unverified') {
+      throw new Error('result labels wrong');
+    }
+    if (data.submissionIntegrity !== 'client_calculated') throw new Error('submissionIntegrity wrong');
+    if (data.questionSetId !== 'full__bcs__1_v1') throw new Error('questionSetId wrong');
+    if (data.sessionId !== 'sess-i3') throw new Error('sessionId != doc-ID');
+  });
+
+  it('(i4) full flow, wrong answer: negative marking −0.50 (BCS)', async () => {
+    const data = await runMockSubmitFlow('sess-i4', 'A', BCS);
+    if (data.score !== -0.5) throw new Error(`expected score -0.5, got ${String(data.score)}`);
+    if (data.negativeDeduction !== 0.5) throw new Error(`expected deduction 0.5, got ${String(data.negativeDeduction)}`);
+    if (data.percentage !== -50) throw new Error(`expected percentage -50, got ${String(data.percentage)}`);
+  });
+
+  it('(i5) tampered attempt: lib validator AND rules both refuse', async () => {
+    const db = asStudent();
+    const sessionId = 'sess-i5';
+    await createSession(sessionId, BCS);
+    const startedAtMillis = await setDeadline(sessionId, 120);
+    const stored = await readSession(sessionId);
+    const batch = writeBatch(db);
+    batch.update(doc(db, 'users', 'student-1', 'jobExamSessions', sessionId), buildMockSessionSubmitUpdate(stored.revision));
+    batch.update(doc(db, 'jobExamUserLocks', 'student-1_bcs'), {
+      status: 'terminal',
+      updatedAt: serverTimestamp(),
+    });
+    await assertSucceeds(batch.commit());
+    const result = scoreMockAttempt({
+      bundle: BCS_BUNDLE,
+      key: BCS_KEY,
+      answers: [{ n: 1, questionId: 'q-seed-1', selected: 'B', timeSpentSeconds: 45 }],
+      rulesSnapshot: BCS_SNAPSHOT,
+      examSlug: 'bcs',
+      startedAtMillis,
+      submittedAtMillis: Date.now(),
+    });
+    const attemptDoc = buildJobAttemptDoc({
+      sessionId,
+      session: stored,
+      result,
+      bundleId: BCS_BUNDLE_ID,
+      examSlug: 'bcs',
+      subjectId: null,
+      topicId: null,
+      kind: 'mock',
+      mockId: 'full__bcs__1',
+      questionSetId: 'full__bcs__1_v1',
+      bundleVersion: 1,
+      userId: 'student-1',
+    });
+    // Tamper: claim a perfect score the answers do not support.
+    (attemptDoc as Record<string, unknown>).score = 99;
+    (attemptDoc as Record<string, unknown>).clientCalculatedScore = 99;
+    const problems = validateAttemptResult(attemptDoc);
+    if (problems.length === 0) throw new Error('lib validator ACCEPTED a tampered doc');
+    await assertFails(setDoc(
+      doc(db, 'users', 'student-1', 'jobExamAttempts', sessionId),
+      attemptDoc as unknown as Record<string, unknown>,
+    ));
+  });
+
+  it('(i6) double submit DENIED (second setDoc = update)', async () => {
+    const db = asStudent();
+    await runMockSubmitFlow('sess-i6', 'B', BCS);
+    const readBack = await assertSucceeds(getDoc(doc(db, 'users', 'student-1', 'jobExamAttempts', 'sess-i6')));
+    await assertFails(setDoc(
+      doc(db, 'users', 'student-1', 'jobExamAttempts', 'sess-i6'),
+      readBack.data() as Record<string, unknown>,
+    ));
+  });
+
+  it('(i7) idempotent retry returns the STORED attempt (never a recomputation)', async () => {
+    const db = asStudent();
+    const first = await runMockSubmitFlow('sess-i7', 'B', BCS);
+    // The retry path (submitMockAttempt step 7): read the existing
+    // attempt first and rebuild the result from the STORED doc.
+    const readBack = await assertSucceeds(getDoc(doc(db, 'users', 'student-1', 'jobExamAttempts', 'sess-i7')));
+    const recovered = jobAttemptResultFromStoredDoc(readBack.data());
+    if (recovered === null) throw new Error('stored attempt did not rebuild');
+    if (recovered.score !== 1 || recovered.correctCount !== 1) {
+      throw new Error('recovered result differs from the stored attempt');
+    }
+    if (recovered.score !== first.score) throw new Error('retry result != first result');
+  });
+
+  it('(i8) Bank flow, wrong answer: negative marking DISABLED (score 0)', async () => {
+    const data = await runMockSubmitFlow('sess-i8', 'A', BANK);
+    if (data.score !== 0) throw new Error(`expected score 0, got ${String(data.score)}`);
+    if (data.negativeDeduction !== 0) throw new Error(`expected deduction 0, got ${String(data.negativeDeduction)}`);
+    if (data.negativeMarkingUsed !== 0) throw new Error(`expected penalty 0, got ${String(data.negativeMarkingUsed)}`);
+    if (data.wrongCount !== 1) throw new Error('wrongCount wrong');
+  });
+});

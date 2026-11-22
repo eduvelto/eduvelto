@@ -584,10 +584,29 @@ export async function ensureMockDeadline(
     return { deadlineMillis: session.clientEndsAtMillis, stored: false };
   }
   const deadlineMillis = mockDeadlineForSession(startedAtMillis, timeMinutes);
+  // EXACTNESS (Step 9, production): the rules require endsAt ==
+  // startedAt + duration to the NANOSECOND. startedAt is a
+  // server timestamp and carries sub-millisecond nanos, which
+  // toMillis() drops — Timestamp.fromMillis(deadlineMillis)
+  // would then miss the stored startedAt by those nanos and the
+  // rules would DENY the write in production (the emulator's
+  // serverTimestamp is millis-precise, so the fromMillis form
+  // passes here and hides the bug). Build endsAt from the
+  // stored startedAt's own seconds + nanoseconds instead, so
+  // the equality holds at any server precision. The millis form
+  // stays as the fallback for Date/seconds-only values, and
+  // deadlineMillis (millis) is what the UI timer displays.
+  const startedAtTs = session.startedAt as FirestoreTimestamp | null;
+  const endsAt =
+    startedAtTs !== null
+    && typeof startedAtTs.seconds === 'number'
+    && typeof startedAtTs.nanoseconds === 'number'
+      ? new Timestamp(startedAtTs.seconds + timeMinutes * 60, startedAtTs.nanoseconds)
+      : Timestamp.fromMillis(deadlineMillis);
   try {
     await updateDoc(
       sessionRef,
-      buildMockDeadlineUpdate(session.revision, Timestamp.fromMillis(deadlineMillis), deadlineMillis),
+      buildMockDeadlineUpdate(session.revision, endsAt, deadlineMillis),
     );
   } catch (err) {
     // Another tab may have set it first (stale revision) — re-read
