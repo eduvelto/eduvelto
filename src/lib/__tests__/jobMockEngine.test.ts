@@ -50,6 +50,7 @@ function makeMockBundle(): { bundle: JobQuestionBundle; key: JobQuestionKey } {
     questions: [
       {
         n: 1, questionId: 'q1', topicId: 't1', subjectId: 'bcs__bangla',
+        difficulty: 'easy' as const,
         questionText: 'Q1?', options: [
           { letter: 'A' as const, text: 'a1' }, { letter: 'B' as const, text: 'b1' },
           { letter: 'C' as const, text: 'c1' }, { letter: 'D' as const, text: 'd1' },
@@ -57,6 +58,7 @@ function makeMockBundle(): { bundle: JobQuestionBundle; key: JobQuestionKey } {
       },
       {
         n: 2, questionId: 'q2', topicId: 't1', subjectId: 'bcs__bangla',
+        difficulty: 'medium' as const,
         questionText: 'Q2?', options: [
           { letter: 'A' as const, text: 'a2' }, { letter: 'B' as const, text: 'b2' },
           { letter: 'C' as const, text: 'c2' }, { letter: 'D' as const, text: 'd2' },
@@ -64,19 +66,26 @@ function makeMockBundle(): { bundle: JobQuestionBundle; key: JobQuestionKey } {
       },
       {
         n: 3, questionId: 'q3', topicId: 't2', subjectId: 'bcs__english',
+        difficulty: 'hard' as const,
         questionText: 'Q3?', options: [
           { letter: 'A' as const, text: 'a3' }, { letter: 'B' as const, text: 'b3' },
           { letter: 'C' as const, text: 'c3' }, { letter: 'D' as const, text: 'd3' },
         ],
       },
     ],
+    questionCount: 3,
+    bundleVersion: 1,
+    status: 'published',
+    reviewStatus: 'Published',
+    sourceQuestionIds: ['q1', 'q2', 'q3'],
+    configVersion: 'v1',
   };
   const key: JobQuestionKey = {
     bundleId: 'mock__full__bcs__1',
     answers: [
-      { n: 1, questionId: 'q1', correctLetter: 'A', correctText: 'উত্তর ১' },
-      { n: 2, questionId: 'q2', correctLetter: 'B', correctText: 'উত্তর ২' },
-      { n: 3, questionId: 'q3', correctLetter: 'A', correctText: 'উত্তর ৩' },
+      { n: 1, questionId: 'q1', correctLetter: 'A', correctText: 'উত্তর ১', explanation: 'কারণ ১', whyWrong: null },
+      { n: 2, questionId: 'q2', correctLetter: 'B', correctText: 'উত্তর ২', explanation: 'কারণ ২', whyWrong: null },
+      { n: 3, questionId: 'q3', correctLetter: 'A', correctText: 'উত্তর ৩', explanation: 'কারণ ৩', whyWrong: null },
     ],
     configVersion: 'v1',
     createdAt: null,
