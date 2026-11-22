@@ -5,7 +5,8 @@
     "source": "Step 3 §2.1/§2.2 schema; values copied from src/lib/jobProfile.ts (JOB_CATEGORIES) and src/lib/jobExams.ts (JOB_EXAMS, JOB_RULES_CONFIGS). No new facts invented.",
     "status": "DISK ONLY — never applied to the live database. The app still reads the hardcoded canonical config; this seed is the Firestore-ready form for the future read-path switch + admin UI. Apply only with separate approval, via an admin script (convert createdAt/updatedAt to serverTimestamp on apply; patternVerifiedAt stays null until a verification date is recorded).",
     "title": "Eduvelto Job Preparation — jobCategories + jobExams seed (Step 5)",
-    "verifiedFiguresOnly": "rulesConfig exists ONLY for the 4 verified exams (BCS, Bank, Primary, NTRCA 18th). All other exams have rulesConfig null. BCS viva marks are NEVER written; NTRCA 19th is NEVER written."
+    "verifiedFiguresOnly": "rulesConfig exists ONLY for the 4 verified exams (BCS, Bank, Primary, NTRCA 18th). All other exams have rulesConfig null. Bank's penalty is NOT verified: negativeMarking is null and the provisional 0.25 sits in provisionalNegativeMarking (never drives a score). patternStatus explains every null config (not_verified, or scope_pending for IT). BCS viva marks are NEVER written; NTRCA 19th is NEVER written.",
+    "step5Closure": "Step 5 closure (ChatGPT review, 22 Nov 2026): rulesConfig/rulesConfigHistory/status/authorId are Admin-gated in firestore.rules (Moderator edits content fields only, never publishes); patternStatus/applicableCycle/scopeStatus added; it-professional is not a selectable target until its scope is defined (owner decision 13.8)."
   },
   "jobCategories": {
     "autonomous": {
@@ -207,7 +208,10 @@
       "stepsEn": "As per circular",
       "syllabusSource": null,
       "tier": 3,
-      "updatedAt": "2026-11-22T00:00:00.000Z"
+      "updatedAt": "2026-11-22T00:00:00.000Z",
+      "patternStatus": "not_verified",
+      "applicableCycle": null,
+      "scopeStatus": "defined"
     },
     "bank": {
       "accent": "#1D4ED8",
@@ -226,7 +230,7 @@
       "reviewStatus": "Not Started",
       "rulesConfig": {
         "marksPerQuestion": 1,
-        "negativeMarking": 0.25,
+        "negativeMarking": null,
         "negativeMarkingVerified": false,
         "passMark": null,
         "passPercent": null,
@@ -261,7 +265,10 @@
             "nameEn": "Basic Computer Knowledge"
           }
         ],
-        "timeMinutes": 60
+        "timeMinutes": 60,
+        "provisionalNegativeMarking": 0.25,
+        "patternStatus": "not_verified",
+        "applicableCycle": null
       },
       "rulesConfigHistory": [],
       "slug": "bank",
@@ -270,7 +277,10 @@
       "stepsEn": "Preliminary → Written → Viva",
       "syllabusSource": null,
       "tier": 1,
-      "updatedAt": "2026-11-22T00:00:00.000Z"
+      "updatedAt": "2026-11-22T00:00:00.000Z",
+      "patternStatus": "not_verified",
+      "applicableCycle": null,
+      "scopeStatus": "defined"
     },
     "bcs": {
       "accent": "#12766E",
@@ -349,7 +359,10 @@
             "nameEn": "Ethics, Values & Good Governance"
           }
         ],
-        "timeMinutes": 120
+        "timeMinutes": 120,
+        "provisionalNegativeMarking": null,
+        "patternStatus": "verified",
+        "applicableCycle": null
       },
       "rulesConfigHistory": [],
       "slug": "bcs",
@@ -358,7 +371,10 @@
       "stepsEn": "Preliminary → Written → Viva",
       "syllabusSource": null,
       "tier": 1,
-      "updatedAt": "2026-11-22T00:00:00.000Z"
+      "updatedAt": "2026-11-22T00:00:00.000Z",
+      "patternStatus": "verified",
+      "applicableCycle": null,
+      "scopeStatus": "defined"
     },
     "bfsa": {
       "accent": "#1E40AF",
@@ -383,7 +399,10 @@
       "stepsEn": "MCQ → Written → Viva",
       "syllabusSource": null,
       "tier": 3,
-      "updatedAt": "2026-11-22T00:00:00.000Z"
+      "updatedAt": "2026-11-22T00:00:00.000Z",
+      "patternStatus": "not_verified",
+      "applicableCycle": null,
+      "scopeStatus": "defined"
     },
     "bpsc-non-cadre": {
       "accent": "#9D174D",
@@ -408,7 +427,10 @@
       "stepsEn": "Application screening → Written/Practical → Viva",
       "syllabusSource": null,
       "tier": 2,
-      "updatedAt": "2026-11-22T00:00:00.000Z"
+      "updatedAt": "2026-11-22T00:00:00.000Z",
+      "patternStatus": "not_verified",
+      "applicableCycle": null,
+      "scopeStatus": "defined"
     },
     "cag": {
       "accent": "#92400E",
@@ -433,7 +455,10 @@
       "stepsEn": "Written/MCQ → Typing/Practical → Viva",
       "syllabusSource": null,
       "tier": 3,
-      "updatedAt": "2026-11-22T00:00:00.000Z"
+      "updatedAt": "2026-11-22T00:00:00.000Z",
+      "patternStatus": "not_verified",
+      "applicableCycle": null,
+      "scopeStatus": "defined"
     },
     "defence": {
       "accent": "#B91C1C",
@@ -458,7 +483,10 @@
       "stepsEn": "As per circular",
       "syllabusSource": null,
       "tier": 3,
-      "updatedAt": "2026-11-22T00:00:00.000Z"
+      "updatedAt": "2026-11-22T00:00:00.000Z",
+      "patternStatus": "not_verified",
+      "applicableCycle": null,
+      "scopeStatus": "defined"
     },
     "dgfood": {
       "accent": "#C2410C",
@@ -483,7 +511,10 @@
       "stepsEn": "MCQ → Written → Viva",
       "syllabusSource": null,
       "tier": 2,
-      "updatedAt": "2026-11-22T00:00:00.000Z"
+      "updatedAt": "2026-11-22T00:00:00.000Z",
+      "patternStatus": "not_verified",
+      "applicableCycle": null,
+      "scopeStatus": "defined"
     },
     "it-professional": {
       "accent": "#1E3A5F",
@@ -508,7 +539,10 @@
       "stepsEn": "As per circular",
       "syllabusSource": null,
       "tier": 3,
-      "updatedAt": "2026-11-22T00:00:00.000Z"
+      "updatedAt": "2026-11-22T00:00:00.000Z",
+      "patternStatus": "scope_pending",
+      "applicableCycle": null,
+      "scopeStatus": "scope_pending"
     },
     "ministries": {
       "accent": "#3730A3",
@@ -533,7 +567,10 @@
       "stepsEn": "As per circular",
       "syllabusSource": null,
       "tier": 3,
-      "updatedAt": "2026-11-22T00:00:00.000Z"
+      "updatedAt": "2026-11-22T00:00:00.000Z",
+      "patternStatus": "not_verified",
+      "applicableCycle": null,
+      "scopeStatus": "defined"
     },
     "ntrca": {
       "accent": "#7E22CE",
@@ -582,7 +619,10 @@
             "nameEn": "General Knowledge"
           }
         ],
-        "timeMinutes": 60
+        "timeMinutes": 60,
+        "provisionalNegativeMarking": null,
+        "patternStatus": "last_verified",
+        "applicableCycle": "18th"
       },
       "rulesConfigHistory": [],
       "slug": "ntrca",
@@ -591,7 +631,10 @@
       "stepsEn": "Preliminary → Written → Viva",
       "syllabusSource": null,
       "tier": 2,
-      "updatedAt": "2026-11-22T00:00:00.000Z"
+      "updatedAt": "2026-11-22T00:00:00.000Z",
+      "patternStatus": "last_verified",
+      "applicableCycle": "18th",
+      "scopeStatus": "defined"
     },
     "others": {
       "accent": "#57534E",
@@ -616,7 +659,10 @@
       "stepsEn": "As per circular",
       "syllabusSource": null,
       "tier": 3,
-      "updatedAt": "2026-11-22T00:00:00.000Z"
+      "updatedAt": "2026-11-22T00:00:00.000Z",
+      "patternStatus": "not_verified",
+      "applicableCycle": null,
+      "scopeStatus": "defined"
     },
     "primary-teacher": {
       "accent": "#15803D",
@@ -665,7 +711,10 @@
             "nameEn": "General Knowledge (Bangladesh & International)"
           }
         ],
-        "timeMinutes": 90
+        "timeMinutes": 90,
+        "provisionalNegativeMarking": null,
+        "patternStatus": "verified",
+        "applicableCycle": null
       },
       "rulesConfigHistory": [],
       "slug": "primary-teacher",
@@ -674,7 +723,10 @@
       "stepsEn": "Written (MCQ) → Viva",
       "syllabusSource": null,
       "tier": 1,
-      "updatedAt": "2026-11-22T00:00:00.000Z"
+      "updatedAt": "2026-11-22T00:00:00.000Z",
+      "patternStatus": "verified",
+      "applicableCycle": null,
+      "scopeStatus": "defined"
     },
     "private-ngo": {
       "accent": "#A21CAF",
@@ -699,7 +751,10 @@
       "stepsEn": "As per organisation",
       "syllabusSource": null,
       "tier": 3,
-      "updatedAt": "2026-11-22T00:00:00.000Z"
+      "updatedAt": "2026-11-22T00:00:00.000Z",
+      "patternStatus": "not_verified",
+      "applicableCycle": null,
+      "scopeStatus": "defined"
     }
   }
 }

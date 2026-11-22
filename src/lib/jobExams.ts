@@ -48,6 +48,12 @@ export interface JobExamDef {
   officialUrl: string | null;
   /** Tier from the job analysis: 1 = main exams, 2 = DGFood/NTRCA/non-cadre, 3 = CAG/BFSA/others + the expanded categories (ministries, defence, autonomous, private & NGO). */
   tier: 1 | 2 | 3;
+  /** Readiness of this exam's scope (Step 5 closure, P1-5): 'defined'
+   * means the exam's scope is settled and Step 6 may build its
+   * subject structure; 'scope_pending' means the scope is UNDECIDED
+   * (owner decision 13.8 — only it-professional today) and Step 6
+   * must NOT generate any syllabus for it. */
+  scopeStatus: 'defined' | 'scope_pending';
   /** Card/header background (white text on it is AA). */
   accent: string;
   /** Soft tint for chips/tiles on light surfaces. */
@@ -69,6 +75,7 @@ export const JOB_EXAMS: JobExamDef[] = [
     stepsEn: 'Preliminary → Written → Viva',
     officialUrl: 'https://bpsc.gov.bd',
     tier: 1,
+    scopeStatus: 'defined',
     accent: '#12766E',
     accentSoft: '#E3F2F0',
     accentDeep: '#0F5E57',
@@ -85,6 +92,7 @@ export const JOB_EXAMS: JobExamDef[] = [
     stepsEn: 'Preliminary → Written → Viva',
     officialUrl: 'https://erecruitment.bb.org.bd',
     tier: 1,
+    scopeStatus: 'defined',
     accent: '#1D4ED8',
     accentSoft: '#E7EDFC',
     accentDeep: '#1E3A8A',
@@ -101,6 +109,7 @@ export const JOB_EXAMS: JobExamDef[] = [
     stepsEn: 'Written (MCQ) → Viva',
     officialUrl: 'https://dpe.gov.bd',
     tier: 1,
+    scopeStatus: 'defined',
     accent: '#15803D',
     accentSoft: '#E7F4EB',
     accentDeep: '#14532D',
@@ -117,6 +126,7 @@ export const JOB_EXAMS: JobExamDef[] = [
     stepsEn: 'Preliminary → Written → Viva',
     officialUrl: 'https://ntrca.gov.bd',
     tier: 2,
+    scopeStatus: 'defined',
     accent: '#7E22CE',
     accentSoft: '#F3E8FB',
     accentDeep: '#581C87',
@@ -133,6 +143,7 @@ export const JOB_EXAMS: JobExamDef[] = [
     stepsEn: 'MCQ → Written → Viva',
     officialUrl: 'https://dgfood.gov.bd',
     tier: 2,
+    scopeStatus: 'defined',
     accent: '#C2410C',
     accentSoft: '#FBEDE7',
     accentDeep: '#7C2D12',
@@ -149,6 +160,7 @@ export const JOB_EXAMS: JobExamDef[] = [
     stepsEn: 'Application screening → Written/Practical → Viva',
     officialUrl: 'https://bpsc.gov.bd',
     tier: 2,
+    scopeStatus: 'defined',
     accent: '#9D174D',
     accentSoft: '#FBE8F0',
     accentDeep: '#831843',
@@ -165,6 +177,7 @@ export const JOB_EXAMS: JobExamDef[] = [
     stepsEn: 'Written/MCQ → Typing/Practical → Viva',
     officialUrl: 'https://cag.gov.bd',
     tier: 3,
+    scopeStatus: 'defined',
     accent: '#92400E',
     accentSoft: '#FBF0E2',
     accentDeep: '#78350F',
@@ -181,6 +194,7 @@ export const JOB_EXAMS: JobExamDef[] = [
     stepsEn: 'MCQ → Written → Viva',
     officialUrl: 'https://bfsa.gov.bd',
     tier: 3,
+    scopeStatus: 'defined',
     accent: '#1E40AF',
     accentSoft: '#E7EBFB',
     accentDeep: '#1E3A8A',
@@ -197,6 +211,7 @@ export const JOB_EXAMS: JobExamDef[] = [
     stepsEn: 'As per circular',
     officialUrl: 'https://bangladesh.gov.bd',
     tier: 3,
+    scopeStatus: 'defined',
     accent: '#57534E',
     accentSoft: '#F0EFEA',
     accentDeep: '#44403C',
@@ -217,6 +232,7 @@ export const JOB_EXAMS: JobExamDef[] = [
     stepsEn: 'As per circular',
     officialUrl: 'https://bangladesh.gov.bd',
     tier: 3,
+    scopeStatus: 'defined',
     accent: '#3730A3',
     accentSoft: '#E8E9FB',
     accentDeep: '#312E81',
@@ -233,6 +249,7 @@ export const JOB_EXAMS: JobExamDef[] = [
     stepsEn: 'As per circular',
     officialUrl: 'https://bangladesh.gov.bd',
     tier: 3,
+    scopeStatus: 'defined',
     accent: '#B91C1C',
     accentSoft: '#FDECEC',
     accentDeep: '#7F1D1D',
@@ -249,6 +266,7 @@ export const JOB_EXAMS: JobExamDef[] = [
     stepsEn: 'As per circular',
     officialUrl: 'https://bangladesh.gov.bd',
     tier: 3,
+    scopeStatus: 'defined',
     accent: '#0E7490',
     accentSoft: '#E2F2F5',
     accentDeep: '#155E75',
@@ -265,6 +283,7 @@ export const JOB_EXAMS: JobExamDef[] = [
     stepsEn: 'As per organisation',
     officialUrl: null,
     tier: 3,
+    scopeStatus: 'defined',
     accent: '#A21CAF',
     accentSoft: '#FBE9F7',
     accentDeep: '#701A75',
@@ -289,6 +308,7 @@ export const JOB_EXAMS: JobExamDef[] = [
     stepsEn: 'As per circular',
     officialUrl: null,
     tier: 3,
+    scopeStatus: 'scope_pending',
     accent: '#1E3A5F',
     accentSoft: '#E8EDF3',
     accentDeep: '#152A45',
@@ -422,9 +442,10 @@ export const EXAM_PATTERNS: Partial<Record<string, ExamPattern>> = {
  * EXAM_PATTERNS above (subject marks converted from Bangla digits to
  * numbers; the unit test asserts each subject list sums to
  * questionCount, so a transcription slip is caught). Nothing here is a
- * new claim: BCS 200/2h/−0.50, Bank 100/1h/−0.25 (negative marking
- * NOT verified — circular-dependent, hence negativeMarkingVerified
- * false), Primary 90/90min/−0.25/pass 50% (45) DPE 2025, NTRCA 18th
+ * new claim: BCS 200/2h/−0.50, Bank 100/1h (penalty NOT verified —
+ * circular-dependent, so negativeMarking is null and the provisional
+ * 0.25 sits in provisionalNegativeMarking, never driving a score),
+ * Primary 90/90min/−0.25/pass 50% (45) DPE 2025, NTRCA 18th
  * 100/1h/−0.25/pass 40. BCS viva marks are NEVER written; NTRCA 19th
  * is NEVER written. The same shape is the Firestore seed
  * (team/job-categories-exams-seed.json) and the rules' type checks.
@@ -439,7 +460,16 @@ export interface JobRulesConfig {
   questionCount: number | null;
   timeMinutes: number | null;
   marksPerQuestion: number | null;
+  /** Verified penalty (marks deducted per wrong answer), or null when
+   * there is no verified penalty. An UNVERIFIED penalty must NEVER sit
+   * here — it lives in `provisionalNegativeMarking` (Bank) so no
+   * score computed from this config can look official (Step 5
+   * closure, P1-4). */
   negativeMarking: number | null;
+  /** Provisional (circular-dependent) penalty, kept SEPARATE from the
+   * verified scoring config. Display must label it provisional; the
+   * exam engine must never score from it. */
+  provisionalNegativeMarking: number | null;
   negativeMarkingVerified: boolean;
   passMark: number | null;
   passPercent: number | null;
@@ -448,6 +478,84 @@ export interface JobRulesConfig {
   /** ISO date string when the pattern was verified, or null (none recorded yet). */
   patternVerifiedAt: string | null;
   patternLabel: 'verified' | 'last-verified-18th' | 'circular-based';
+  /** Verification state of the machine config as a whole (Step 5
+   * closure, P1-3 — null used to mean five different things):
+   * 'verified' = the whole config may drive scored exams;
+   * 'last_verified' = verified for a past cycle, not automatically
+   * current (see applicableCycle); 'not_verified' = no verified
+   * config; 'not_applicable' = the exam has no conventional MCQ
+   * pattern; 'scope_pending' = the exam's scope is undecided. */
+  patternStatus: JobPatternStatus;
+  /** The exam cycle this pattern applies to (e.g. NTRCA '18th'), or
+   * null when the pattern is not tied to a numbered cycle (Step 5
+   * closure, P1-8). A historical pattern is never presented as
+   * automatically current. */
+  applicableCycle: string | null;
+}
+
+/** Pattern-verification states (Step 5 closure, P1-3). */
+export type JobPatternStatus =
+  | 'verified'
+  | 'last_verified'
+  | 'not_verified'
+  | 'not_applicable'
+  | 'scope_pending';
+
+/** Pattern status for the 10 exams with NO machine config
+ * (jobRulesConfig() returns null for them): the null is explained
+ * here instead of silently meaning "unknown". IT is 'scope_pending'
+ * (owner decision 13.8); the other 9 are 'not_verified'. */
+export const JOB_PATTERN_STATUS: Record<string, { patternStatus: JobPatternStatus; applicableCycle: string | null }> = {
+  dgfood: { patternStatus: 'not_verified', applicableCycle: null },
+  'bpsc-non-cadre': { patternStatus: 'not_verified', applicableCycle: null },
+  cag: { patternStatus: 'not_verified', applicableCycle: null },
+  bfsa: { patternStatus: 'not_verified', applicableCycle: null },
+  others: { patternStatus: 'not_verified', applicableCycle: null },
+  ministries: { patternStatus: 'not_verified', applicableCycle: null },
+  defence: { patternStatus: 'not_verified', applicableCycle: null },
+  autonomous: { patternStatus: 'not_verified', applicableCycle: null },
+  'private-ngo': { patternStatus: 'not_verified', applicableCycle: null },
+  'it-professional': { patternStatus: 'scope_pending', applicableCycle: null },
+};
+
+/** Pattern-verification status of any exam hub (config first, then the
+ * no-config map; unknown slugs are 'not_verified' — never 'verified'
+ * by default). */
+export function jobPatternStatus(slug: string): JobPatternStatus {
+  return JOB_RULES_CONFIGS[slug]?.patternStatus
+    ?? JOB_PATTERN_STATUS[slug]?.patternStatus
+    ?? 'not_verified';
+}
+
+/** The exam cycle a hub's pattern applies to (NTRCA '18th'), or null. */
+export function jobApplicableCycle(slug: string): string | null {
+  return JOB_RULES_CONFIGS[slug]?.applicableCycle
+    ?? JOB_PATTERN_STATUS[slug]?.applicableCycle
+    ?? null;
+}
+
+/** Review-workflow states (Step 3 §2.2). `status` is the publication
+ * state ('draft' | 'published', Admin-owned); `reviewStatus` is the
+ * review workflow. The two are NOT the same field — a doc is a draft
+ * when reviewStatus is one of these three AND status is 'draft'
+ * (firestore.rules enforces published ⟺ reviewStatus 'Published').
+ * Mirrors firestore.rules isDraftStatus; the rules are authoritative.
+ * Note the §3.3 draft's literal 'draft' is NOT a review state — it is
+ * rejected here and by the rules. */
+export const JOB_DRAFT_REVIEW_STATES = ['Not Started', 'In Progress', 'Under Review'] as const;
+export const JOB_REVIEW_STATES = [...JOB_DRAFT_REVIEW_STATES, 'Published'] as const;
+
+export function isDraftJobReviewStatus(value: unknown): value is (typeof JOB_DRAFT_REVIEW_STATES)[number] {
+  return (
+    typeof value === 'string' &&
+    (JOB_DRAFT_REVIEW_STATES as readonly string[]).includes(value)
+  );
+}
+
+/** Step 6 guard (P1-5 / Step 6 handover #4): only exams whose scope
+ * is defined may get a subject/chapter/topic/lesson structure. */
+export function jobExamSyllabusReady(slug: string): boolean {
+  return jobExamBySlug(slug)?.scopeStatus === 'defined';
 }
 
 export const JOB_RULES_CONFIGS: Record<string, JobRulesConfig> = {
@@ -456,6 +564,7 @@ export const JOB_RULES_CONFIGS: Record<string, JobRulesConfig> = {
     timeMinutes: 120,
     marksPerQuestion: 1,
     negativeMarking: 0.5,
+    provisionalNegativeMarking: null,
     negativeMarkingVerified: true,
     passMark: null,
     passPercent: null,
@@ -474,12 +583,18 @@ export const JOB_RULES_CONFIGS: Record<string, JobRulesConfig> = {
     patternSource: 'BPSC বিজ্ঞপ্তি',
     patternVerifiedAt: null,
     patternLabel: 'verified',
+    patternStatus: 'verified',
+    applicableCycle: null,
   },
   bank: {
     questionCount: 100,
     timeMinutes: 60,
     marksPerQuestion: 1,
-    negativeMarking: 0.25,
+    // Step 5 closure, P1-4: the penalty is NOT verified, so it must
+    // NOT sit in `negativeMarking` (which drives scoring). The
+    // provisional 0.25 lives separately, clearly labelled provisional.
+    negativeMarking: null,
+    provisionalNegativeMarking: 0.25,
     // Circular-dependent: "usually 0.25" — the circular/admit card is
     // authoritative, so the flag stays false even though the pattern
     // itself is verified (Step 3 §2.2).
@@ -496,12 +611,17 @@ export const JOB_RULES_CONFIGS: Record<string, JobRulesConfig> = {
     patternSource: 'BSCS বিজ্ঞপ্তি',
     patternVerifiedAt: null,
     patternLabel: 'verified',
+    // The subject pattern is verified, but the config as a whole is
+    // NOT authoritative for scoring until the penalty is verified.
+    patternStatus: 'not_verified',
+    applicableCycle: null,
   },
   'primary-teacher': {
     questionCount: 90,
     timeMinutes: 90,
     marksPerQuestion: 1,
     negativeMarking: 0.25,
+    provisionalNegativeMarking: null,
     negativeMarkingVerified: true,
     passMark: 45,
     passPercent: 50,
@@ -514,12 +634,15 @@ export const JOB_RULES_CONFIGS: Record<string, JobRulesConfig> = {
     patternSource: 'সরকারি প্রাথমিক বিদ্যালয় শিক্ষক নিয়োগ বিধিমালা ২০২৫, ২৮ আগস্ট ২০২৫',
     patternVerifiedAt: null,
     patternLabel: 'verified',
+    patternStatus: 'verified',
+    applicableCycle: null,
   },
   ntrca: {
     questionCount: 100,
     timeMinutes: 60,
     marksPerQuestion: 1,
     negativeMarking: 0.25,
+    provisionalNegativeMarking: null,
     negativeMarkingVerified: true,
     passMark: 40,
     passPercent: 40,
@@ -532,6 +655,8 @@ export const JOB_RULES_CONFIGS: Record<string, JobRulesConfig> = {
     patternSource: 'NTRCA ১৮তম পরীক্ষার বিজ্ঞপ্তি',
     patternVerifiedAt: null,
     patternLabel: 'last-verified-18th',
+    patternStatus: 'last_verified',
+    applicableCycle: '18th',
   },
 };
 

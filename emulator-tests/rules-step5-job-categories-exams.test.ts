@@ -4,14 +4,16 @@
  *
  * jobCategories: public read; Admin-only write; never deleted.
  * jobExams: students read Published only; moderators read drafts and
- * write (draft-only create, type-checked rulesConfig on update);
- * delete is Admin-only. The §3.3 draft's create literal
- * reviewStatus == 'draft' contradicts §2.2's enum ('Not Started' |
- * 'In Progress' | 'Under Review' | 'Published'), so draft-only
- * creation is enforced with isDraftStatus instead (pinned by n7).
- * The seed (team/job-categories-exams-seed.json) is loaded into the
- * emulator here, so read tests run against the real seed shape.
- * Same conventions as rules-step4b-chatgpt-fixes.test.ts.
+ * write CONTENT fields only (draft-only create, draft-only update);
+ * rulesConfig / rulesConfigHistory / status / authorId are Admin-only
+ * (Step 5 closure, P0-1/P0-2/P0-4/P0-6 — a Moderator setting
+ * rulesConfig is DENIED, n11); delete is Admin-only. The §3.3 draft's
+ * create literal reviewStatus == 'draft' contradicts §2.2's enum
+ * ('Not Started' | 'In Progress' | 'Under Review' | 'Published'), so
+ * draft-only creation is enforced with isDraftStatus instead (pinned
+ * by n7). The seed (team/job-categories-exams-seed.json) is loaded
+ * into the emulator here, so read tests run against the real seed
+ * shape. Same conventions as rules-step4b-chatgpt-fixes.test.ts.
  * Run with `npm run test:rules` (whole emulator-tests/ directory).
  */
 import { describe, it, beforeAll, afterAll } from 'vitest';
@@ -41,6 +43,20 @@ const SEED = JSON.parse(
   jobExams: Record<string, Record<string, unknown>>;
 };
 
+/** The seed JSON carries ISO-string timestamps; real docs carry
+ * Firestore Timestamps (the importer converts them, the app writes
+ * serverTimestamp()). The jobExams update rules check
+ * `updatedAt is timestamp`, so the seed must be converted here —
+ * otherwise every update on a seeded doc would fail on the timestamp
+ * type instead of the rule under test. */
+function withTimestamps(doc: Record<string, unknown>): Record<string, unknown> {
+  const out = { ...doc };
+  for (const k of ['createdAt', 'updatedAt'] as const) {
+    if (typeof out[k] === 'string') out[k] = new Date(out[k] as string);
+  }
+  return out;
+}
+
 async function seed() {
   await env.withSecurityRulesDisabled(async (ctx) => {
     const db = ctx.firestore();
@@ -60,10 +76,10 @@ async function seed() {
       });
     }
     for (const [id, data] of Object.entries(SEED.jobCategories)) {
-      await setDoc(doc(db, 'jobCategories', id), data);
+      await setDoc(doc(db, 'jobCategories', id), withTimestamps(data));
     }
     for (const [id, data] of Object.entries(SEED.jobExams)) {
-      await setDoc(doc(db, 'jobExams', id), data);
+      await setDoc(doc(db, 'jobExams', id), withTimestamps(data));
     }
     // A Published exam (student-readable) and an author-owned draft.
     await setDoc(doc(db, 'jobExams', 'published-exam'), {
@@ -126,6 +142,11 @@ const VALID_EXAM = {
   reviewStatus: 'Not Started',
   status: 'draft',
   rulesConfig: null,
+  // Step 5 closure: patternStatus is REQUIRED on create (P1-3);
+  // scopeStatus defaults to 'defined' in the rules.
+  patternStatus: 'not_verified',
+  applicableCycle: null,
+  scopeStatus: 'defined',
 };
 
 const BCS_RULES_CONFIG = {
@@ -261,8 +282,8 @@ describe('Step 5 rules — jobExams', () => {
       }),
     );
   });
-  it('(n11) moderator setting a valid rulesConfig is ALLOWED', async () => {
-    await assertSucceeds(
+  it('(n11) moderator setting a valid rulesConfig is DENIED (Step 5 closure, P0-1 — rulesConfig is Admin-only; the Step 5 core version of this test ALLOWED it)', async () => {
+    await assertFails(
       updateDoc(doc(asModerator(), 'jobExams', 'bcs'), { rulesConfig: BCS_RULES_CONFIG }),
     );
   });

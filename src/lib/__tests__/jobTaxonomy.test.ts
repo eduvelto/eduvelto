@@ -8,7 +8,8 @@
  *  (1) one canonical taxonomy — JOB_CATEGORIES (10) / TARGET_EXAM_SLUGS
  *      (14 incl. it-professional) / JOB_EXAMS (14 hubs — the
  *      it-professional hub was added in Step 5) / SELECTABLE_TARGET_EXAMS
- *      (14);
+ *      (13 — it-professional EXCLUDED in the Step 5 closure, P1-5,
+ *      until its scope is defined, owner decision 13.8);
  *  (2) localStorage account isolation — there is NO authenticated
  *      localStorage cache at all (signed-in students use Firestore
  *      only); the ONLY browser keys are the three anonymous ones
@@ -33,9 +34,11 @@ import {
   jobCategoryHubs,
   sanitizeEnrolledCategories,
   isTargetExamSlug,
+  isSelectableTargetExamSlug,
   profileJobPreferences,
   draftImportCandidates,
   validateJobTaxonomy,
+  validateJobTaxonomyAgainst,
   writeAnonymousJobDraft,
   readAnonymousJobDraft,
   clearAnonymousJobDraft,
@@ -156,14 +159,35 @@ describe('canonical taxonomy (ChatGPT P1 — one source of truth)', () => {
     }
   });
 
-  it('selectable target exams are all 14 hubs (it-professional selectable since Step 5)', () => {
-    expect(SELECTABLE_TARGET_EXAMS).toHaveLength(14);
-    expect(SELECTABLE_TARGET_EXAMS).toContain('it-professional');
+  it('selectable target exams are 13 hubs — it-professional EXCLUDED (Step 5 closure, P1-5: scope undecided, owner decision 13.8)', () => {
+    expect(SELECTABLE_TARGET_EXAMS).toHaveLength(13);
+    expect(SELECTABLE_TARGET_EXAMS).not.toContain('it-professional');
     expect([...SELECTABLE_TARGET_EXAMS].sort()).toEqual(
-      JOB_EXAMS.map((e) => e.slug).sort(),
+      JOB_EXAMS.map((e) => e.slug)
+        .filter((s) => s !== 'it-professional')
+        .sort(),
     );
+    // Known hub, but not selectable: the hub stays discoverable, only
+    // target selection is off.
     expect(isTargetExamSlug('it-professional')).toBe(true);
+    expect(isSelectableTargetExamSlug('it-professional')).toBe(false);
+    expect(isSelectableTargetExamSlug('bcs')).toBe(true);
+    expect(isSelectableTargetExamSlug('nasa-exam')).toBe(false);
     expect(isTargetExamSlug('nasa-exam')).toBe(false);
+  });
+
+  it('a profile holding it-professional reads back as undecided (Step 5 closure, P1-5)', () => {
+    const prefs = profileJobPreferences(makeProfile({ targetExam: 'it-professional' }));
+    expect(prefs.targetExam).toBeNull();
+    expect(profileJobPreferences(makeProfile({ targetExam: 'bcs' })).targetExam).toBe('bcs');
+  });
+
+  it('an anonymous draft with it-professional as target is dropped, never stored', () => {
+    writeAnonymousJobDraft({ targetExam: 'it-professional' });
+    expect(readAnonymousJobDraft()?.targetExam).toBeNull();
+    expect(storage.keys()).toEqual([]);
+    writeAnonymousJobDraft({ targetExam: 'bcs' });
+    expect(readAnonymousJobDraft()?.targetExam).toBe('bcs');
   });
 
   it('every category accent has AA contrast (≥ 4.5:1) against white text', () => {
@@ -183,6 +207,103 @@ describe('canonical taxonomy (ChatGPT P1 — one source of truth)', () => {
 
   it('validateJobTaxonomy reports no problems (the Step 5 hub closed the it-professional gap)', () => {
     expect(validateJobTaxonomy()).toEqual([]);
+  });
+
+  it('validateJobTaxonomyAgainst fails on a tampered taxonomy (Step 5 closure, P1-6)', () => {
+    const base = {
+      categories: JOB_CATEGORIES,
+      examSlugs: JOB_EXAMS.map((e) => e.slug),
+      targetExamSlugs: TARGET_EXAM_SLUGS,
+      selectableTargetExams: SELECTABLE_TARGET_EXAMS,
+    };
+    const has = (problems: string[], re: RegExp) =>
+      problems.some((p) => re.test(p));
+    // Unknown hub in a category.
+    expect(
+      has(
+        validateJobTaxonomyAgainst({
+          ...base,
+          categories: JOB_CATEGORIES.map((c) =>
+            c.slug === 'bank' ? { ...c, hubSlugs: ['bank', 'nasa-exam'] } : c,
+          ),
+        }),
+        /unknown hub 'nasa-exam'/,
+      ),
+    ).toBe(true);
+    // Missing category.
+    expect(
+      has(
+        validateJobTaxonomyAgainst({
+          ...base,
+          categories: JOB_CATEGORIES.filter((c) => c.slug !== 'bank'),
+        }),
+        /category 'bank' has no definition/,
+      ),
+    ).toBe(true);
+    // Exam in two categories.
+    expect(
+      has(
+        validateJobTaxonomyAgainst({
+          ...base,
+          categories: JOB_CATEGORIES.map((c) =>
+            c.slug === 'govt' ? { ...c, hubSlugs: [...c.hubSlugs, 'bank'] } : c,
+          ),
+        }),
+        /exam 'bank' belongs to 2 categories/,
+      ),
+    ).toBe(true);
+    // Omitted exam (hub exists, no category claims it).
+    expect(
+      has(
+        validateJobTaxonomyAgainst({
+          ...base,
+          categories: JOB_CATEGORIES.map((c) =>
+            c.slug === 'bank' ? { ...c, hubSlugs: [] } : c,
+          ),
+        }),
+        /exam 'bank' belongs to no category/,
+      ),
+    ).toBe(true);
+    // Invalid category order.
+    expect(
+      has(
+        validateJobTaxonomyAgainst({
+          ...base,
+          categories: [...JOB_CATEGORIES].reverse(),
+        }),
+        /category order differs/,
+      ),
+    ).toBe(true);
+    // Duplicate exam hub slug.
+    expect(
+      has(
+        validateJobTaxonomyAgainst({
+          ...base,
+          examSlugs: [...JOB_EXAMS.map((e) => e.slug), 'bcs'],
+        }),
+        /duplicate exam hub slug/,
+      ),
+    ).toBe(true);
+    // it-professional selectable while its scope is undecided.
+    expect(
+      has(
+        validateJobTaxonomyAgainst({
+          ...base,
+          selectableTargetExams: [...SELECTABLE_TARGET_EXAMS, 'it-professional'],
+        }),
+        /it-professional.*scope is undecided/,
+      ),
+    ).toBe(true);
+    // Selectable target that is not a known exam.
+    expect(
+      has(
+        validateJobTaxonomyAgainst({
+          ...base,
+          selectableTargetExams: [...SELECTABLE_TARGET_EXAMS, 'nasa-exam'],
+        }),
+        /selectable target 'nasa-exam' is not a known exam/,
+      ),
+    ).toBe(true);
   });
 });
 

@@ -211,9 +211,10 @@ export const JOB_CATEGORIES: JobCategoryDef[] = [
   },
 ];
 
-/** The 14 hub slugs `targetExam` may hold (Step 3 §3.1 — includes
- * 'it-professional', whose hub arrives in Step 5; the rules accept it
- * already, the UI lists it once the hub exists). */
+/** The 14 hub slugs `targetExam` may hold as a KNOWN exam (Step 3
+ * §3.1 — includes 'it-professional', whose hub exists since Step 5).
+ * Being a known hub is NOT the same as being selectable: see
+ * SELECTABLE_TARGET_EXAMS. */
 export const TARGET_EXAM_SLUGS = [
   'bcs',
   'bank',
@@ -234,12 +235,29 @@ export const TARGET_EXAM_SLUGS = [
 export type TargetExamSlug = (typeof TARGET_EXAM_SLUGS)[number];
 
 /**
- * Exams the student may actually PICK as a target today: all 14 hubs.
- * 'it-professional' became selectable in Step 5 when its hub was built
- * (before Step 5 it was rules-accepted but not selectable — the
- * exclusion lived here until the hub existed).
+ * Exams the student may actually PICK as a target today: 13 of the 14
+ * hubs. 'it-professional' is EXCLUDED (Step 5 closure, P1-5 — ChatGPT
+ * review): its scope is undecided (owner decision 13.8), so selecting
+ * it as a target would imply a learning pathway Eduvelto cannot map
+ * yet. The hub stays discoverable (it-professional remains in
+ * TARGET_EXAM_SLUGS and JOB_EXAMS); only target selection is off
+ * until the owner defines the scope. firestore.rules enforces the
+ * same exclusion on targetExam writes, so a direct write cannot
+ * re-select it either. A profile that already holds it-professional
+ * reads back as undecided (profileJobPreferences) until the student
+ * picks a selectable target.
  */
-export const SELECTABLE_TARGET_EXAMS: readonly string[] = TARGET_EXAM_SLUGS;
+export const SELECTABLE_TARGET_EXAMS: readonly string[] = TARGET_EXAM_SLUGS.filter(
+  (s) => s !== 'it-professional',
+);
+
+/** Is this slug a target the student may pick today (13, not 14)? */
+export function isSelectableTargetExamSlug(value: unknown): value is TargetExamSlug {
+  return (
+    typeof value === 'string' &&
+    (SELECTABLE_TARGET_EXAMS as readonly string[]).includes(value)
+  );
+}
 
 export function isJobCategorySlug(value: unknown): value is JobCategorySlug {
   return typeof value === 'string' && (JOB_CATEGORY_SLUGS as readonly string[]).includes(value);
@@ -288,39 +306,80 @@ export function jobCategoryGroups(): JobCategoryGroup[] {
 }
 
 /**
- * Taxonomy self-check (ChatGPT review P1). Returns every inconsistency
- * between the canonical config and the built hubs — empty means the
- * taxonomy is consistent. The unit test pins the expected 10 categories
- * and 14 exam slugs against an independently maintained list, so an
- * accidental omission in EITHER place is caught.
+ * Taxonomy self-check (ChatGPT review P1 — one source of truth).
+ * Parameterized so tampered taxonomies can be tested directly: the
+ * checks fail on an unknown category, a missing category, an exam in
+ * two categories, an omitted exam, an unknown hub, a duplicate slug,
+ * an invalid category order, a selectable target that is not a known
+ * exam, and it-professional being selectable while its scope is
+ * undecided (Step 5 closure, P1-5). Returns every inconsistency —
+ * empty means the taxonomy is consistent.
  */
-export function validateJobTaxonomy(): string[] {
+export interface JobTaxonomyInput {
+  categories: Pick<JobCategoryDef, 'slug' | 'hubSlugs'>[];
+  examSlugs: string[];
+  targetExamSlugs: readonly string[];
+  selectableTargetExams: readonly string[];
+}
+
+export function validateJobTaxonomyAgainst(input: JobTaxonomyInput): string[] {
   const problems: string[] = [];
-  const examSlugs = JOB_EXAMS.map((e) => e.slug);
-  for (const slug of TARGET_EXAM_SLUGS) {
-    const owners = JOB_CATEGORIES.filter((c) => c.hubSlugs.includes(slug));
-    if (owners.length === 0) problems.push(`exam '${slug}' belongs to no category`);
-    if (owners.length > 1) problems.push(`exam '${slug}' belongs to ${owners.length} categories`);
-    if (!examSlugs.includes(slug)) problems.push(`exam '${slug}' has no hub in JOB_EXAMS`);
+  const { categories, examSlugs, targetExamSlugs, selectableTargetExams } = input;
+  // Category order IS the display order 1–10: it must match the
+  // canonical JOB_CATEGORY_SLUGS sequence exactly.
+  if (categories.map((c) => c.slug).join(',') !== JOB_CATEGORY_SLUGS.join(',')) {
+    problems.push('category order differs from the canonical JOB_CATEGORY_SLUGS order');
   }
-  for (const exam of JOB_EXAMS) {
-    if (!(TARGET_EXAM_SLUGS as readonly string[]).includes(exam.slug)) {
-      problems.push(`hub '${exam.slug}' is not in TARGET_EXAM_SLUGS`);
+  const catSlugs = categories.map((c) => c.slug);
+  if (new Set(catSlugs).size !== catSlugs.length) problems.push('duplicate category slug');
+  for (const slug of JOB_CATEGORY_SLUGS) {
+    if (!catSlugs.includes(slug)) {
+      problems.push(`category '${slug}' has no definition in JOB_CATEGORIES`);
     }
   }
-  for (const cat of JOB_CATEGORIES) {
+  for (const cat of categories) {
+    if (cat.hubSlugs.length === 0) problems.push(`category '${cat.slug}' lists no hubs`);
     for (const hub of cat.hubSlugs) {
-      if (!(TARGET_EXAM_SLUGS as readonly string[]).includes(hub)) {
+      if (!(targetExamSlugs as readonly string[]).includes(hub)) {
         problems.push(`category '${cat.slug}' lists unknown hub '${hub}'`);
       }
     }
   }
-  for (const slug of JOB_CATEGORY_SLUGS) {
-    if (!JOB_CATEGORIES.some((c) => c.slug === slug)) {
-      problems.push(`category '${slug}' has no definition in JOB_CATEGORIES`);
+  for (const slug of targetExamSlugs) {
+    const owners = categories.filter((c) => c.hubSlugs.includes(slug));
+    if (owners.length === 0) problems.push(`exam '${slug}' belongs to no category`);
+    if (owners.length > 1) problems.push(`exam '${slug}' belongs to ${owners.length} categories`);
+    if (!examSlugs.includes(slug)) problems.push(`exam '${slug}' has no hub in JOB_EXAMS`);
+  }
+  for (const slug of examSlugs) {
+    if (!(targetExamSlugs as readonly string[]).includes(slug)) {
+      problems.push(`hub '${slug}' is not in TARGET_EXAM_SLUGS`);
     }
   }
+  if (new Set(examSlugs).size !== examSlugs.length) problems.push('duplicate exam hub slug');
+  for (const slug of selectableTargetExams) {
+    if (!(targetExamSlugs as readonly string[]).includes(slug)) {
+      problems.push(`selectable target '${slug}' is not a known exam`);
+    }
+  }
+  // Step 5 closure, P1-5: it-professional must NOT be selectable
+  // until the owner defines its scope (decision 13.8).
+  if ((selectableTargetExams as readonly string[]).includes('it-professional')) {
+    problems.push(
+      `'it-professional' is selectable as a target exam but its scope is undecided (13.8)`,
+    );
+  }
   return problems;
+}
+
+/** Self-check of the canonical taxonomy (empty = consistent). */
+export function validateJobTaxonomy(): string[] {
+  return validateJobTaxonomyAgainst({
+    categories: JOB_CATEGORIES,
+    examSlugs: JOB_EXAMS.map((e) => e.slug),
+    targetExamSlugs: TARGET_EXAM_SLUGS,
+    selectableTargetExams: SELECTABLE_TARGET_EXAMS,
+  });
 }
 
 /** Keep only valid category slugs, de-duplicated, at most 10. */
@@ -398,7 +457,10 @@ export function readAnonymousJobDraft(): JobLocalDraft {
       JSON.parse(window.localStorage.getItem(ANON_CATEGORIES_KEY) ?? '[]'),
     );
     const targetRaw = window.localStorage.getItem(ANON_TARGET_EXAM_KEY);
-    const targetExam = isTargetExamSlug(targetRaw) ? targetRaw : null;
+    // Selectable only (Step 5 closure, P1-5): an anonymous draft must
+    // never offer it-professional as a target — saving it would fail
+    // the rules, so it is dropped here, not at save time.
+    const targetExam = isSelectableTargetExamSlug(targetRaw) ? targetRaw : null;
     let dailyGoalQuestions: number | null = null;
     let dailyGoalMinutes: number | null = null;
     try {
@@ -428,7 +490,7 @@ export function writeAnonymousJobDraft(draft: Partial<JobLocalDraft>): void {
       );
     }
     if (draft.targetExam !== undefined) {
-      if (isTargetExamSlug(draft.targetExam)) {
+      if (isSelectableTargetExamSlug(draft.targetExam)) {
         window.localStorage.setItem(ANON_TARGET_EXAM_KEY, draft.targetExam);
       } else {
         window.localStorage.removeItem(ANON_TARGET_EXAM_KEY);
@@ -468,8 +530,13 @@ export function profileJobPreferences(profile: UserProfile | null): JobLocalDraf
   if (!profile) return { ...EMPTY_JOB_DRAFT };
   return {
     enrolledCategories: sanitizeEnrolledCategories(profile.enrolledCategories ?? []),
+    // Selectable only (Step 5 closure, P1-5): a profile that still
+    // holds it-professional (written before the exclusion) reads back
+    // as undecided until the student picks a selectable target.
     targetExam:
-      profile.targetExam != null && isTargetExamSlug(profile.targetExam) ? profile.targetExam : null,
+      profile.targetExam != null && isSelectableTargetExamSlug(profile.targetExam)
+        ? profile.targetExam
+        : null,
     dailyGoalQuestions: clampDailyGoalQuestions(profile.dailyGoalQuestions),
     dailyGoalMinutes: clampDailyGoalMinutes(profile.dailyGoalMinutes),
   };

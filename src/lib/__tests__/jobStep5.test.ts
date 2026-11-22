@@ -23,11 +23,19 @@ import {
   JOB_EXAMS,
   EXAM_PATTERNS,
   JOB_RULES_CONFIGS,
+  JOB_PATTERN_STATUS,
   jobRulesConfig,
   jobExamBySlug,
+  jobPatternStatus,
+  jobApplicableCycle,
+  jobExamSyllabusReady,
+  isDraftJobReviewStatus,
+  JOB_DRAFT_REVIEW_STATES,
+  JOB_REVIEW_STATES,
 } from '../jobExams';
 import {
   JOB_CATEGORIES,
+  SELECTABLE_TARGET_EXAMS,
   jobCategoryOfExam,
   jobCategoryGroups,
 } from '../jobProfile';
@@ -96,42 +104,67 @@ describe('rulesConfig (Step 5 — Step 3 §2.2, verified figures only)', () => {
       timeMinutes: 120,
       marksPerQuestion: 1,
       negativeMarking: 0.5,
+      provisionalNegativeMarking: null,
       negativeMarkingVerified: true,
       passMark: null,
       passPercent: null,
       patternLabel: 'verified',
+      patternStatus: 'verified',
+      applicableCycle: null,
     });
     expect(JOB_RULES_CONFIGS.bank).toMatchObject({
       questionCount: 100,
       timeMinutes: 60,
       marksPerQuestion: 1,
-      negativeMarking: 0.25,
+      // Step 5 closure, P1-4: the penalty is NOT verified, so it must
+      // NOT sit in negativeMarking — it lives in provisionalNegativeMarking.
+      negativeMarking: null,
+      provisionalNegativeMarking: 0.25,
       // Circular-dependent: "usually 0.25" — flag stays false.
       negativeMarkingVerified: false,
       passMark: null,
       passPercent: null,
       patternLabel: 'verified',
+      patternStatus: 'not_verified',
+      applicableCycle: null,
     });
     expect(JOB_RULES_CONFIGS['primary-teacher']).toMatchObject({
       questionCount: 90,
       timeMinutes: 90,
       marksPerQuestion: 1,
       negativeMarking: 0.25,
+      provisionalNegativeMarking: null,
       negativeMarkingVerified: true,
       passMark: 45,
       passPercent: 50,
       patternLabel: 'verified',
+      patternStatus: 'verified',
+      applicableCycle: null,
     });
     expect(JOB_RULES_CONFIGS.ntrca).toMatchObject({
       questionCount: 100,
       timeMinutes: 60,
       marksPerQuestion: 1,
       negativeMarking: 0.25,
+      provisionalNegativeMarking: null,
       negativeMarkingVerified: true,
       passMark: 40,
       passPercent: 40,
       patternLabel: 'last-verified-18th',
+      patternStatus: 'last_verified',
+      applicableCycle: '18th',
     });
+  });
+
+  it('a verified config never carries an unverified penalty in negativeMarking (P1-4)', () => {
+    for (const cfg of Object.values(JOB_RULES_CONFIGS)) {
+      if (cfg.negativeMarkingVerified === false) {
+        expect(cfg.negativeMarking).toBeNull();
+      }
+      if (cfg.patternStatus === 'verified') {
+        expect(cfg.negativeMarkingVerified).toBe(true);
+      }
+    }
   });
 
   it('every subject list sums to questionCount', () => {
@@ -173,6 +206,78 @@ describe('IT hub def (Step 5 — Step 2 §2.9, scope undecided)', () => {
     expect(EXAM_PATTERNS['it-professional']).toBeUndefined();
     expect(jobRulesConfig('it-professional')).toBeNull();
     expect(jobCategoryOfExam('it-professional')).toBe('it-professional');
+  });
+
+  it('is scope_pending, not selectable, and NOT syllabus-ready (Step 5 closure, P1-5)', () => {
+    const def = jobExamBySlug('it-professional')!;
+    expect(def.scopeStatus).toBe('scope_pending');
+    expect(jobPatternStatus('it-professional')).toBe('scope_pending');
+    expect(jobApplicableCycle('it-professional')).toBeNull();
+    expect(SELECTABLE_TARGET_EXAMS).not.toContain('it-professional');
+    expect(jobExamSyllabusReady('it-professional')).toBe(false);
+  });
+});
+
+describe('pattern status + applicable cycle (Step 5 closure, P1-3/P1-8)', () => {
+  it('every exam has exactly one pattern status; null configs are explained, never silent', () => {
+    expect(jobPatternStatus('bcs')).toBe('verified');
+    expect(jobPatternStatus('bank')).toBe('not_verified');
+    expect(jobPatternStatus('primary-teacher')).toBe('verified');
+    expect(jobPatternStatus('ntrca')).toBe('last_verified');
+    expect(jobPatternStatus('it-professional')).toBe('scope_pending');
+    for (const slug of ['dgfood', 'bpsc-non-cadre', 'cag', 'bfsa', 'others', 'ministries', 'defence', 'autonomous', 'private-ngo']) {
+      expect(jobPatternStatus(slug)).toBe('not_verified');
+    }
+    // Unknown slugs fail closed — never 'verified' by default.
+    expect(jobPatternStatus('nasa-exam')).toBe('not_verified');
+    // The no-config map covers exactly the 10 exams without a config.
+    expect(Object.keys(JOB_PATTERN_STATUS).sort()).toEqual(
+      JOB_EXAMS.map((e) => e.slug)
+        .filter((s) => jobRulesConfig(s) === null)
+        .sort(),
+    );
+  });
+
+  it('applicableCycle is set only where the pattern is tied to a cycle (NTRCA 18th)', () => {
+    expect(jobApplicableCycle('ntrca')).toBe('18th');
+    for (const slug of JOB_EXAMS.map((e) => e.slug).filter((s) => s !== 'ntrca')) {
+      expect(jobApplicableCycle(slug)).toBeNull();
+    }
+  });
+
+  it('scopeStatus is defined for 13 exams, scope_pending for IT only', () => {
+    const defined = JOB_EXAMS.filter((e) => e.scopeStatus === 'defined');
+    expect(defined).toHaveLength(13);
+    expect(JOB_EXAMS.filter((e) => e.scopeStatus === 'scope_pending').map((e) => e.slug)).toEqual([
+      'it-professional',
+    ]);
+    for (const def of defined) expect(jobExamSyllabusReady(def.slug)).toBe(true);
+  });
+});
+
+describe('status vs reviewStatus (Step 5 closure, P1-1)', () => {
+  it('isDraftJobReviewStatus accepts exactly the three draft workflow states', () => {
+    expect(JOB_DRAFT_REVIEW_STATES).toEqual(['Not Started', 'In Progress', 'Under Review']);
+    expect(JOB_REVIEW_STATES).toEqual([
+      'Not Started',
+      'In Progress',
+      'Under Review',
+      'Published',
+    ]);
+    for (const state of JOB_REVIEW_STATES) {
+      expect(isDraftJobReviewStatus(state)).toBe(state !== 'Published');
+    }
+  });
+
+  it('rejects Published, unknown, missing and non-string states', () => {
+    expect(isDraftJobReviewStatus('Published')).toBe(false);
+    expect(isDraftJobReviewStatus('draft')).toBe(false); // the §3.3 literal — no such enum value
+    expect(isDraftJobReviewStatus('')).toBe(false);
+    expect(isDraftJobReviewStatus('not started')).toBe(false);
+    expect(isDraftJobReviewStatus(undefined)).toBe(false);
+    expect(isDraftJobReviewStatus(null)).toBe(false);
+    expect(isDraftJobReviewStatus(0)).toBe(false);
+    expect(isDraftJobReviewStatus({})).toBe(false);
   });
 });
 
@@ -227,8 +332,21 @@ describe('seed JSON (Step 5 — team/job-categories-exams-seed.json, disk only)'
         reviewStatus: 'Not Started',
         rulesConfigHistory: [],
         syllabusSource: null,
+        // Step 5 closure, P1-3/P1-5/P1-8: every null config is
+        // explained by patternStatus; IT is scope_pending.
+        patternStatus: jobPatternStatus(def.slug),
+        applicableCycle: jobApplicableCycle(def.slug),
+        scopeStatus: def.scopeStatus,
       });
     }
+  });
+
+  it('seed Bank config keeps the provisional penalty out of negativeMarking (P1-4)', () => {
+    const bank = SEED.jobExams.bank.rulesConfig as Record<string, unknown>;
+    expect(bank.negativeMarking).toBeNull();
+    expect(bank.provisionalNegativeMarking).toBe(0.25);
+    expect(bank.negativeMarkingVerified).toBe(false);
+    expect(bank.patternStatus).toBe('not_verified');
   });
 
   it('seed rulesConfig equals JOB_RULES_CONFIGS for the 4 verified exams, null for the rest', () => {

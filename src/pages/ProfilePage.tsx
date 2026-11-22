@@ -703,10 +703,11 @@ export default function ProfilePage() {
             <option value="">
               {t({ bn: '— ঠিক হয়নি —', en: '— Undecided —' })}
             </option>
-            {/* The 13 built hubs (jobExams.ts) — the canonical selectable
+            {/* The 13 selectable hubs — the canonical selectable
                 list (jobProfile.ts SELECTABLE_TARGET_EXAMS).
-                'it-professional' joins in Step 5 when its hub is built;
-                the rules already accept it as a targetExam value. */}
+                'it-professional' is NOT selectable (Step 5 closure,
+                P1-5): its scope is undecided (owner decision 13.8),
+                and the rules reject it as a targetExam value. */}
             {JOB_EXAMS.filter((exam) => SELECTABLE_TARGET_EXAMS.includes(exam.slug)).map((exam) => (
               <option key={exam.slug} value={exam.slug}>
                 {t({ bn: exam.bn, en: exam.en })}

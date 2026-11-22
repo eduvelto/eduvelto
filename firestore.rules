@@ -44,7 +44,10 @@ service cloud.firestore {
       return get(/databases/$(database)/documents/users/$(uid())).data.get('isActive', true) != false;
     }
     function isAdmin() {
-      return signedIn() && callerActive() && (callerRole() == 'admin' || callerRole() == 'owner');
+      // One callerRole() call (not two ==): every get() on the users
+      // doc costs expression budget, and the jobExams Admin rule was
+      // already near Firestore's 1000-expression limit (22 Nov 2026).
+      return signedIn() && callerActive() && callerRole() in ['admin', 'owner'];
     }
     // The Owner is the highest role (spec §3). isAdmin()/isModerator()/
     // isTeacher() already include 'owner' — the owner bypasses every admin
@@ -77,6 +80,139 @@ service cloud.firestore {
     function isOptStr(v, max) { return v == null || (v is string && v.size() <= max); }
     function isDraftStatus(s) { return s in ['Not Started', 'In Progress', 'Under Review']; }
     function isPublished(d) { return d.get('reviewStatus', '') == 'Published'; }
+
+    // ---------- Job exams (Step 5 closure — ChatGPT review P0/P1) ----------
+    // The 10 canonical Job categories (same list as jobProfile.ts
+    // JOB_CATEGORY_SLUGS and the users enrolledCategories allowlist —
+    // rules cannot import TypeScript; keep the three in sync, pinned
+    // by the taxonomy unit test).
+    function jobCategoryIds() {
+      return ['bcs-bpsc', 'govt', 'bank', 'primary-teacher',
+              'ntrca-teacher', 'defence-police', 'autonomous',
+              'ngo-private', 'it-professional', 'other-competitive'];
+    }
+    // The 14 exam hub slugs (same list as jobProfile.ts
+    // TARGET_EXAM_SLUGS).
+    function jobExamSlugs() {
+      return ['bcs', 'bank', 'primary-teacher', 'ntrca', 'dgfood',
+              'bpsc-non-cadre', 'cag', 'bfsa', 'others', 'ministries',
+              'defence', 'autonomous', 'private-ngo', 'it-professional'];
+    }
+    function isJobExamReviewState(s) {
+      return s in ['Not Started', 'In Progress', 'Under Review', 'Published'];
+    }
+    // STATUS vs REVIEWSTATUS (Step 3 §2.2, clarified in Step 5):
+    // `status` is the PUBLICATION state ('draft' | 'published',
+    // Admin-owned); `reviewStatus` is the REVIEW WORKFLOW
+    // ('Not Started' | 'In Progress' | 'Under Review' | 'Published').
+    // They are two fields for one fact, so the rules enforce that they
+    // agree: published ⟺ reviewStatus 'Published'. A doc that says
+    // one thing in one field and another in the other is denied.
+    function jobExamStatesConsistent(d) {
+      return (d.get('status', '') == 'published') == (d.get('reviewStatus', '') == 'Published');
+    }
+    // Pattern-verification states (Step 5 closure, P1-3): null used to
+    // mean five different things; patternStatus says which one.
+    function jobPatternStatuses() {
+      return ['verified', 'last_verified', 'not_verified', 'not_applicable', 'scope_pending'];
+    }
+    // Full rulesConfig validation (Step 5 closure, P0-1 + P1-3/P1-4):
+    // types AND semantics. An unverified penalty may NEVER sit in
+    // `negativeMarking` — it lives in `provisionalNegativeMarking`
+    // (Bank) — so a config whose patternStatus is 'verified' cannot
+    // carry negativeMarkingVerified == false.
+    function validJobRulesConfig(c) {
+      return c == null || (c is map
+        && (c.get('questionCount', null) == null
+            || (c.get('questionCount', null) is int && c.get('questionCount', null) >= 1))
+        && (c.get('timeMinutes', null) == null
+            || (c.get('timeMinutes', null) is int && c.get('timeMinutes', null) >= 1))
+        && (c.get('marksPerQuestion', null) == null
+            || (c.get('marksPerQuestion', null) is int && c.get('marksPerQuestion', null) >= 1))
+        && (c.get('negativeMarking', null) == null
+            || (c.get('negativeMarking', null) is number && c.get('negativeMarking', null) >= 0
+                && (c.get('marksPerQuestion', null) == null
+                    || c.get('negativeMarking', null) < c.get('marksPerQuestion', null))))
+        && (c.get('provisionalNegativeMarking', null) == null
+            || (c.get('provisionalNegativeMarking', null) is number
+                && c.get('provisionalNegativeMarking', null) >= 0))
+        && (c.get('negativeMarkingVerified', null) == null
+            || c.get('negativeMarkingVerified', null) is bool)
+        && (c.get('negativeMarkingVerified', null) != false
+            || c.get('negativeMarking', null) == null)
+        && (c.get('passMark', null) == null
+            || (c.get('passMark', null) is int && c.get('passMark', null) >= 0))
+        && (c.get('passPercent', null) == null
+            || (c.get('passPercent', null) is int && c.get('passPercent', null) >= 0
+                && c.get('passPercent', null) <= 100))
+        && (c.get('subjects', null) == null || c.get('subjects', null) is list)
+        && (c.get('patternLabel', null) == null
+            || c.get('patternLabel', null) in ['verified', 'last-verified-18th', 'circular-based'])
+        && (c.get('patternStatus', null) == null
+            || c.get('patternStatus', null) in jobPatternStatuses())
+        && (c.get('patternStatus', null) != 'verified'
+            || c.get('negativeMarkingVerified', null) != false)
+        && (c.get('applicableCycle', null) == null || c.get('applicableCycle', null) is string)
+        && (c.get('patternSource', null) == null || c.get('patternSource', null) is string)
+        && (c.get('patternVerifiedAt', null) == null || c.get('patternVerifiedAt', null) is timestamp));
+    }
+    // rulesConfigHistory integrity (Step 5 closure, P0-2 — this is the
+    // fix for the Step 3 draft's "history enforced in admin-UI code"
+    // gap: a Moderator could bypass the UI and rewrite rulesConfig +
+    // clear the history with a direct write. Now the RULES enforce it:
+    // config unchanged → history byte-identical; config changed →
+    // exactly ONE entry appended (old entries all still present, new
+    // entry links before→after, actor is the caller, timestamp +
+    // reason recorded). History is never edited in place.
+    //
+    // Two Firestore-rules facts shape this function (22 Nov 2026,
+    // rules tests a3/b6):
+    //   * `list + list` is NOT a supported operation — the first
+    //     version's `newHist == oldHist + [last]` raised
+    //     "Unsupported operation error. Received: list + list", so the
+    //     old entries are proven intact with a SET check instead:
+    //     newHist.toSet().hasAll(oldHist.toSet()) (every old entry is
+    //     still present, as a set member) plus the size check
+    //     (exactly one entry added). Reordering is the only thing the
+    //     set check cannot see — entries keep their timestamps, so a
+    //     reorder changes nothing a reader can act on.
+    //   * The 1000-expression budget: the first version repeated the
+    //     `history[size - 1]` index chain nine times; this version
+    //     reads the last entry through a helper so the index is
+    //     computed once per call, and branch 1 checks the HISTORY
+    //     first (for a config change the histories differ in size,
+    //     so it fails in ~2 expressions instead of paying for a deep
+    //     config comparison). The size check runs before any
+    //     last-entry call, so an empty new history fails cleanly
+    //     instead of indexing -1. (A `let`-bound version was tried
+    //     first: this rules compiler rejects chained `let`s.)
+    function lastHistoryEntry(hist) {
+      return hist[hist.size() - 1];
+    }
+    function validJobRulesConfigHistoryChange(oldDoc, newDoc) {
+      return newDoc.get('rulesConfigHistory', null) is list
+        && ((newDoc.get('rulesConfigHistory', null) == oldDoc.get('rulesConfigHistory', null)
+              && newDoc.get('rulesConfig', null) == oldDoc.get('rulesConfig', null))
+            || (newDoc.get('rulesConfigHistory', null).size()
+                  == oldDoc.get('rulesConfigHistory', []).size() + 1
+                && newDoc.get('rulesConfigHistory', null).toSet()
+                     .hasAll(oldDoc.get('rulesConfigHistory', []).toSet())
+                && lastHistoryEntry(newDoc.get('rulesConfigHistory', null)) is map
+                && lastHistoryEntry(newDoc.get('rulesConfigHistory', null))
+                     .get('changedAt', null) is timestamp
+                && lastHistoryEntry(newDoc.get('rulesConfigHistory', null))
+                     .get('changedBy', null) == uid()
+                && lastHistoryEntry(newDoc.get('rulesConfigHistory', null))
+                     .get('reason', null) is string
+                && lastHistoryEntry(newDoc.get('rulesConfigHistory', null))
+                     .get('before', null) == oldDoc.get('rulesConfig', null)
+                && lastHistoryEntry(newDoc.get('rulesConfigHistory', null))
+                     .get('after', null) == newDoc.get('rulesConfig', null)
+                && (lastHistoryEntry(newDoc.get('rulesConfigHistory', null))
+                     .get('sourceCircular', null) == null
+                    || lastHistoryEntry(newDoc.get('rulesConfigHistory', null))
+                     .get('sourceCircular', null) is string)));
+    }
 
     // ---------- users.verificationStatus ----------
     // OWNER DECISION 21 Nov 2026 — student identity verification is
@@ -188,7 +324,7 @@ service cloud.firestore {
             || request.resource.data.targetExam in
                ['bcs', 'bank', 'primary-teacher', 'ntrca', 'dgfood',
                 'bpsc-non-cadre', 'cag', 'bfsa', 'others', 'ministries',
-                'defence', 'autonomous', 'private-ngo', 'it-professional'])
+                'defence', 'autonomous', 'private-ngo'])
         && (!('dailyGoalQuestions' in request.resource.data)
             || request.resource.data.dailyGoalQuestions == null
             || (request.resource.data.dailyGoalQuestions is int
@@ -255,7 +391,7 @@ service cloud.firestore {
             || request.resource.data.targetExam in
                ['bcs', 'bank', 'primary-teacher', 'ntrca', 'dgfood',
                 'bpsc-non-cadre', 'cag', 'bfsa', 'others', 'ministries',
-                'defence', 'autonomous', 'private-ngo', 'it-professional'])
+                'defence', 'autonomous', 'private-ngo'])
         && (!('dailyGoalQuestions' in request.resource.data)
             || request.resource.data.dailyGoalQuestions == null
             || (request.resource.data.dailyGoalQuestions is int
@@ -367,7 +503,7 @@ service cloud.firestore {
             || request.resource.data.targetExam in
                ['bcs', 'bank', 'primary-teacher', 'ntrca', 'dgfood',
                 'bpsc-non-cadre', 'cag', 'bfsa', 'others', 'ministries',
-                'defence', 'autonomous', 'private-ngo', 'it-professional'])
+                'defence', 'autonomous', 'private-ngo'])
         && (!('dailyGoalQuestions' in request.resource.data)
             || request.resource.data.dailyGoalQuestions == null
             || (request.resource.data.dailyGoalQuestions is int
@@ -1360,6 +1496,10 @@ service cloud.firestore {
         && request.resource.data.order >= 1
         && request.resource.data.order <= 10
         && request.resource.data.hubSlugs is list
+        && request.resource.data.hubSlugs.size() >= 1
+        // P1-6: every listed hub must be a real exam slug — a category
+        // can never point at an unknown exam.
+        && request.resource.data.hubSlugs.toSet().hasOnly(jobExamSlugs())
         && isStr(request.resource.data.accent, 20)
         && request.resource.data.status in ['active', 'inactive'];
       allow delete: if false;
@@ -1370,45 +1510,181 @@ service cloud.firestore {
     // is 'Not Started' | 'In Progress' | 'Under Review' | 'Published',
     // so the draft-only intent is enforced with isDraftStatus instead
     // of the literal 'draft', which matches no enum value). The doc ID
-    // must equal the slug (§2.2). rulesConfig is null or a map whose
-    // fields are type-checked (counts/minutes are ints — the draft's
-    // "number" is narrowed, as in Step 4's integer-only goals;
-    // negativeMarking is a decimal by nature, so it stays number).
-    // rulesConfigHistory enforcement is the ADMIN UI's job (code), not
-    // the rules' — the rules check field types only (§3.3 draft).
+    // must equal the slug (§2.2).
+    //
+    // STEP 5 CLOSURE (ChatGPT review P0 — the Step 3 draft's update
+    // rule let ANY Moderator rewrite rulesConfig, publish, wipe the
+    // history and change authorId with a direct write, because it
+    // only type-checked rulesConfig. Field permissions are now split
+    // in the rules themselves:
+    //   Moderator — CONTENT fields only (names, org, steps, accents,
+    //     description, syllabusSource, updatedAt) + advancing the
+    //     review workflow between DRAFT states. Everything else is
+    //     outside the affected-keys allowlist and therefore cannot
+    //     change here: rulesConfig, rulesConfigHistory, status,
+    //     categoryId, tier, slug, authorId, createdBy, scopeStatus,
+    //     patternStatus, applicableCycle. A Moderator can NEVER
+    //     publish (reviewStatus must stay a draft state) and can NEVER
+    //     touch a Published doc at all.
+    //   Admin — everything, WITH the history rule: a rulesConfig
+    //     change must append exactly one history entry (old entries
+    //     kept, before→after linked, actor == caller); an unchanged
+    //     config keeps the history byte-identical. Publication is an
+    //     Admin act: status and reviewStatus must agree
+    //     (published ⟺ reviewStatus 'Published').
+    //   Provenance (authorId, createdBy, createdAt) is immutable —
+    //     even for Admin. The author exception on read applies only
+    //     because create pins authorId to the creator (or leaves it
+    //     absent); a student can never create an author identity —
+    //     create requires Moderator.
     match /jobExams/{examSlug} {
-      allow read: if isPublished(resource.data) || isModerator()
-        || (signedIn() && resource.data.get('authorId', '') == uid());
+      // Read order is deliberate (22 Nov 2026 — rules test e5): the
+      // get()-free checks come first, so a list query over Published
+      // docs short-circuits before the role lookup touches the users
+      // doc at all. The published check reads `status` — the
+      // PUBLICATION state (P1-1) — NOT reviewStatus: a list query
+      // filters on status, and Firestore can only allow a query it
+      // can prove from the query's own filters; the write rules
+      // guarantee status ⟺ reviewStatus (jobExamStatesConsistent),
+      // so a doc with status 'published' IS published. The shared
+      // isPublished() helper checks reviewStatus and is correct for
+      // the other collections, whose queries filter on reviewStatus —
+      // it is the wrong check here.
+      allow read: if resource.data.get('status', '') == 'published'
+        || (signedIn() && resource.data.get('authorId', '') == uid())
+        || isModerator();
       allow create: if isModerator()
         && request.resource.data.slug == examSlug
-        && isDraftStatus(request.resource.data.reviewStatus)
-        && isStr(request.resource.data.nameBn, 100)
-        && request.resource.data.categoryId is string
-        && request.resource.data.tier in [1, 2, 3];
-      allow update: if isModerator()
-        && request.resource.data.slug == examSlug
-        && request.resource.data.categoryId is string
+        && request.resource.data.categoryId in jobCategoryIds()
         && request.resource.data.tier in [1, 2, 3]
-        && (request.resource.data.rulesConfig == null
-            || (request.resource.data.rulesConfig is map
-                && (request.resource.data.rulesConfig.get('questionCount', null) == null
-                    || request.resource.data.rulesConfig.get('questionCount', null) is int)
-                && (request.resource.data.rulesConfig.get('timeMinutes', null) == null
-                    || request.resource.data.rulesConfig.get('timeMinutes', null) is int)
-                && (request.resource.data.rulesConfig.get('marksPerQuestion', null) == null
-                    || request.resource.data.rulesConfig.get('marksPerQuestion', null) is int)
-                && (request.resource.data.rulesConfig.get('negativeMarking', null) == null
-                    || request.resource.data.rulesConfig.get('negativeMarking', null) is number)
-                && (request.resource.data.rulesConfig.get('passMark', null) == null
-                    || request.resource.data.rulesConfig.get('passMark', null) is int)
-                && (request.resource.data.rulesConfig.get('passPercent', null) == null
-                    || request.resource.data.rulesConfig.get('passPercent', null) is int)
-                && (request.resource.data.rulesConfig.get('negativeMarkingVerified', null) == null
-                    || request.resource.data.rulesConfig.get('negativeMarkingVerified', null) is bool)
-                && (request.resource.data.rulesConfig.get('subjects', null) == null
-                    || request.resource.data.rulesConfig.get('subjects', null) is list)
-                && (request.resource.data.rulesConfig.get('patternLabel', null) == null
-                    || request.resource.data.rulesConfig.get('patternLabel', null) in ['verified', 'last-verified-18th', 'circular-based'])));
+        && isDraftStatus(request.resource.data.reviewStatus)
+        && request.resource.data.status == 'draft'
+        && isStr(request.resource.data.nameBn, 100)
+        && validJobRulesConfig(request.resource.data.rulesConfig)
+        // A new draft starts with an empty history — no fabricated entries.
+        && (!('rulesConfigHistory' in request.resource.data)
+            || request.resource.data.rulesConfigHistory == [])
+        // The creator is the author (or the doc has no author yet —
+        // the seed carries createdBy 'seed' and no authorId).
+        && (!('authorId' in request.resource.data)
+            || request.resource.data.authorId == uid())
+        && (!('createdBy' in request.resource.data)
+            || request.resource.data.createdBy is string)
+        && request.resource.data.patternStatus in jobPatternStatuses()
+        && (request.resource.data.applicableCycle == null
+            || request.resource.data.applicableCycle is string)
+        && request.resource.data.get('scopeStatus', 'defined') in ['defined', 'scope_pending']
+        && (!('createdAt' in request.resource.data) || request.resource.data.createdAt is timestamp)
+        && (!('updatedAt' in request.resource.data) || request.resource.data.updatedAt is timestamp);
+      // Moderator: content fields only (see the block comment above).
+      // NO keys().hasOnly() here: checking the whole 29-key set costs
+      // ~29x29 pairwise comparisons and blows the 1000-expression
+      // budget (rules tests a3/b6, 22 Nov 2026). diff() reports only
+      // the CHANGED keys, so its hasOnly is cheap — and the draft /
+      // status pins below stop any publish or Published-doc touch.
+      allow update: if isModerator()
+        // Protected config pinned FIRST: a config-change write fails
+        // here on one equality instead of paying for a full diff()
+        // of two big docs (expression budget — rules tests a3/b6).
+        && request.resource.data.get('rulesConfig', null) == resource.data.get('rulesConfig', null)
+        && request.resource.data.get('rulesConfigHistory', null) == resource.data.get('rulesConfigHistory', null)
+        && request.resource.data.diff(resource.data).affectedKeys()
+             .hasOnly(['nameBn', 'nameEn', 'fullBn', 'fullEn', 'orgBn', 'orgEn',
+                       'stepsBn', 'stepsEn', 'officialUrl', 'accent', 'accentSoft',
+                       'accentDeep', 'descriptionBn', 'descriptionEn',
+                       'syllabusSource', 'reviewStatus', 'updatedAt'])
+        // Draft stays a draft — workflow may advance between draft
+        // states, but a Moderator can never publish, and a Published
+        // doc cannot be touched by a Moderator at all.
+        && isDraftStatus(resource.data.reviewStatus)
+        && isDraftStatus(request.resource.data.reviewStatus)
+        && request.resource.data.status == 'draft'
+        && isStr(request.resource.data.nameBn, 100)
+        && isOptStr(request.resource.data.get('nameEn', null), 100)
+        && isOptStr(request.resource.data.get('fullBn', null), 200)
+        && isOptStr(request.resource.data.get('fullEn', null), 200)
+        && isOptStr(request.resource.data.get('orgBn', null), 200)
+        && isOptStr(request.resource.data.get('orgEn', null), 200)
+        && isOptStr(request.resource.data.get('stepsBn', null), 200)
+        && isOptStr(request.resource.data.get('stepsEn', null), 200)
+        && (request.resource.data.get('officialUrl', null) == null
+            || request.resource.data.get('officialUrl', null) is string)
+        && isOptStr(request.resource.data.get('accent', null), 20)
+        && isOptStr(request.resource.data.get('accentSoft', null), 20)
+        && isOptStr(request.resource.data.get('accentDeep', null), 20)
+        && isOptStr(request.resource.data.get('descriptionBn', null), 500)
+        && isOptStr(request.resource.data.get('descriptionEn', null), 500)
+        && (request.resource.data.get('syllabusSource', null) == null
+            || request.resource.data.get('syllabusSource', null) is string)
+        && (!('updatedAt' in request.resource.data) || request.resource.data.updatedAt is timestamp);
+      // Admin, rule A — config change. A config write may change ONLY
+      // rulesConfig, rulesConfigHistory and updatedAt: status,
+      // reviewStatus, slug, category and all content fields stay exactly
+      // as they are (a publish or a content edit is a separate write,
+      // rule B below). Content fields are not re-typed here — they are
+      // pinned equal to the old doc, which was valid when written. A
+      // config can be REPLACED (with a history entry) but not cleared to
+      // null: validJobRulesConfig(null) is false, so clearing is denied;
+      // mark it not_verified via rule B instead (the old config stays in
+      // history). Splitting the Admin update in two keeps each
+      // evaluation well inside the 1000-expression budget: the
+      // config-change path pays for validJobRulesConfig + the history
+      // rule, and the content path pays for neither.
+      allow update: if isAdmin()
+        && request.resource.data.get('rulesConfig', null) != resource.data.get('rulesConfig', null)
+        && validJobRulesConfig(request.resource.data.rulesConfig)
+        && validJobRulesConfigHistoryChange(resource.data, request.resource.data)
+        && request.resource.data.get('rulesConfigHistory', null) is list
+        && request.resource.data.status == resource.data.status
+        && request.resource.data.reviewStatus == resource.data.reviewStatus
+        && request.resource.data.slug == resource.data.slug
+        && request.resource.data.categoryId == resource.data.categoryId
+        && request.resource.data.tier == resource.data.tier
+        && request.resource.data.get('authorId', null) == resource.data.get('authorId', null)
+        && request.resource.data.get('createdBy', null) == resource.data.get('createdBy', null)
+        && request.resource.data.get('createdAt', null) == resource.data.get('createdAt', null)
+        && request.resource.data.get('scopeStatus', 'defined') == resource.data.get('scopeStatus', 'defined')
+        && request.resource.data.get('patternStatus', null) == resource.data.get('patternStatus', null)
+        && request.resource.data.get('applicableCycle', null) == resource.data.get('applicableCycle', null)
+        && (!('updatedAt' in request.resource.data) || request.resource.data.updatedAt is timestamp);
+      // Admin, rule B — content / status change. Config and history are
+      // pinned unchanged here; a config change goes through rule A with
+      // its history entry. Provenance stays immutable.
+      allow update: if isAdmin()
+        && request.resource.data.get('rulesConfig', null) == resource.data.get('rulesConfig', null)
+        && request.resource.data.get('rulesConfigHistory', null) == resource.data.get('rulesConfigHistory', null)
+        && request.resource.data.slug == examSlug
+        && request.resource.data.categoryId in jobCategoryIds()
+        && request.resource.data.tier in [1, 2, 3]
+        && isJobExamReviewState(request.resource.data.reviewStatus)
+        && request.resource.data.status in ['draft', 'published']
+        && jobExamStatesConsistent(request.resource.data)
+        && request.resource.data.get('authorId', null) == resource.data.get('authorId', null)
+        && request.resource.data.get('createdBy', null) == resource.data.get('createdBy', null)
+        && request.resource.data.get('createdAt', null) == resource.data.get('createdAt', null)
+        && (!('patternStatus' in request.resource.data)
+            || request.resource.data.patternStatus in jobPatternStatuses())
+        && (request.resource.data.get('applicableCycle', null) == null
+            || request.resource.data.get('applicableCycle', null) is string)
+        && request.resource.data.get('scopeStatus', 'defined') in ['defined', 'scope_pending']
+        && isStr(request.resource.data.nameBn, 100)
+        && isOptStr(request.resource.data.get('nameEn', null), 100)
+        && isOptStr(request.resource.data.get('fullBn', null), 200)
+        && isOptStr(request.resource.data.get('fullEn', null), 200)
+        && isOptStr(request.resource.data.get('orgBn', null), 200)
+        && isOptStr(request.resource.data.get('orgEn', null), 200)
+        && isOptStr(request.resource.data.get('stepsBn', null), 200)
+        && isOptStr(request.resource.data.get('stepsEn', null), 200)
+        && (request.resource.data.get('officialUrl', null) == null
+            || request.resource.data.get('officialUrl', null) is string)
+        && isOptStr(request.resource.data.get('accent', null), 20)
+        && isOptStr(request.resource.data.get('accentSoft', null), 20)
+        && isOptStr(request.resource.data.get('accentDeep', null), 20)
+        && isOptStr(request.resource.data.get('descriptionBn', null), 500)
+        && isOptStr(request.resource.data.get('descriptionEn', null), 500)
+        && (request.resource.data.get('syllabusSource', null) == null
+            || request.resource.data.get('syllabusSource', null) is string)
+        && (!('updatedAt' in request.resource.data) || request.resource.data.updatedAt is timestamp);
       allow delete: if isAdmin();
     }
 
