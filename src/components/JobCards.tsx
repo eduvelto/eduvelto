@@ -59,13 +59,13 @@ export function JobCategoryGroups() {
     display: 'grid',
     gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))',
     gap: 12,
-    marginBottom: 24,
+    marginBottom: 12,
   };
   return (
     <>
       {groups.map((g, gi) => (
         <div key={g.category.slug}>
-          <p style={{ color: '#142B3B', margin: '0 0 10px', fontSize: 16, fontWeight: 700 }}>
+          <p style={{ color: '#142B3B', margin: '0 0 6px', fontSize: 16, fontWeight: 700 }}>
             <span style={{ color: g.category.accent }}>{bnNum(gi + 1)}</span>
             {' · '}
             <T bn={g.category.bn} en={g.category.en} />
@@ -392,7 +392,7 @@ export function JobsSection() {
     display: 'grid',
     gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))',
     gap: 12,
-    marginBottom: 24,
+    marginBottom: 12,
   };
   return (
     <section id="jobs" style={{ scrollMarginTop: 76 }}>

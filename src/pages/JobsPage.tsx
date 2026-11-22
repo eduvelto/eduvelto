@@ -25,7 +25,7 @@ export default function JobsPage() {
     // auto-fit: the single common-preparation card fills its row.
     gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))',
     gap: 12,
-    marginBottom: 24,
+    marginBottom: 12,
   };
 
   return (
