@@ -15,12 +15,13 @@
 
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Button, Card, Chip, LinkButton, ProgressBar } from '../components/ui';
+import { Button, Card, Chip, LinkButton, ProgressBar, SkeletonCards } from '../components/ui';
 import { EmptyState } from '../components/PageShell';
 import AdPlaceholder from '../components/AdPlaceholder';
 import { ComingSoonCompact } from '../components/ComingSoon';
 import type { Book } from '../lib/content';
 import { bookTitleOf, type Quiz, type QuizAttempt } from '../lib/exams';
+import type { ClassSubjectStats } from '../lib/classStats';
 import type { QuizSummary, SubjectProgress } from '../lib/progress';
 import type { UserProfile } from '../lib/profile';
 import type { ClassLevelDef } from '../lib/classLevels';
@@ -28,18 +29,31 @@ import { useLanguage } from '../i18n/LanguageContext';
 
 export interface ClassTabData {
   def: ClassLevelDef;
-  /** Live Published books of this class (empty for levels with no books). */
+  /** Books of the CURRENT page (server-paged mode) or the full class list (fallback mode). */
   books: Book[];
-  /** Live Published quizzes of this class. */
+  /** Quizzes of the CURRENT Tests page (server-paged mode) or the full class list (fallback mode). */
   quizzes: Quiz[];
   /** Live distinct departments of this class's books. */
   subjects: string[];
+  /** Per-subject aggregates from the stats doc (null in fallback mode — computed from `books` then). */
+  subjectStats: ClassSubjectStats[] | null;
+  /** Exact totals — from the stats doc, or the loaded list lengths in fallback mode. */
+  bookTotal: number;
+  quizTotal: number;
+  /** Books-tab server paging (stats mode only). */
+  bookPage: number;
+  bookPageCount: number;
+  serverPaged: boolean;
+  onBooksPage: (n: number) => void;
+  /** True once the Tests-tab quiz page has loaded (stats mode). */
+  quizzesLoaded: boolean;
   totalQuestions: number;
   totalChapters: number;
   signedIn: boolean;
   /** User's quiz attempts in THIS class only (joined by quizId). */
   attempts: QuizAttempt[];
-  quizById: Map<string, Quiz>;
+  /** quizId -> display title, from the stats doc (stats mode) or the loaded quizzes (fallback). */
+  quizTitleById: Map<string, string>;
   /** User's bookmarked books in THIS class only. */
   myBooks: Book[];
   /** User's lesson progress rows for this class's subjects. */
@@ -100,17 +114,29 @@ const BOOKS_PAGE_SIZE = 20;
 
 export function BooksTab({ data }: { data: ClassTabData }) {
   const { t } = useLanguage();
-  const [page, setPage] = useState(1);
-  const pageCount = Math.max(1, Math.ceil(data.books.length / BOOKS_PAGE_SIZE));
-  const safePage = Math.min(page, pageCount);
-  const pageBooks = data.books.slice((safePage - 1) * BOOKS_PAGE_SIZE, safePage * BOOKS_PAGE_SIZE);
-  if (data.books.length === 0) {
+  // SERVER-PAGED mode (stats doc present): `books` is already the current
+  // server page (20 reads); the pager fetches the next page on demand.
+  // FALLBACK mode: `books` is the full class list — the old client-side
+  // pager over it, exactly as before.
+  const [clientPage, setClientPage] = useState(1);
+  const pageCount = data.serverPaged
+    ? data.bookPageCount
+    : Math.max(1, Math.ceil(data.books.length / BOOKS_PAGE_SIZE));
+  const safePage = data.serverPaged ? data.bookPage : Math.min(clientPage, pageCount);
+  const pageBooks = data.serverPaged
+    ? data.books
+    : data.books.slice((safePage - 1) * BOOKS_PAGE_SIZE, safePage * BOOKS_PAGE_SIZE);
+  const goPage = (n: number) => {
+    if (data.serverPaged) data.onBooksPage(n);
+    else setClientPage(n);
+  };
+  if (data.bookTotal === 0) {
     return <ComingSoonCompact def={data.def} whatBn="বই" whatEn="Books" />;
   }
   return (
     <>
       <p style={{ color: '#57616A', margin: '0 0 12px' }}>
-        {t({ bn: `${data.books.length}টি বই · এই শ্রেণির শুধুমাত্র`, en: `${data.books.length} books · this class only` })}
+        {t({ bn: `${data.bookTotal}টি বই · এই শ্রেণির শুধুমাত্র`, en: `${data.bookTotal} books · this class only` })}
       </p>
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: 12 }}>
         {pageBooks.map((b, i) => (
@@ -122,13 +148,13 @@ export function BooksTab({ data }: { data: ClassTabData }) {
       </div>
       {pageCount > 1 ? (
         <div style={{ display: 'flex', gap: 12, alignItems: 'center', marginTop: 20, flexWrap: 'wrap' }}>
-          <Button variant="outline" onClick={() => setPage((p) => Math.max(1, p - 1))} disabled={safePage <= 1}>
+          <Button variant="outline" onClick={() => goPage(Math.max(1, safePage - 1))} disabled={safePage <= 1}>
             {t({ bn: '← আগের', en: '← Previous' })}
           </Button>
           <span>
             {t({ bn: `পাতা ${safePage} / ${pageCount}`, en: `Page ${safePage} of ${pageCount}` })}
           </span>
-          <Button variant="outline" onClick={() => setPage((p) => Math.min(pageCount, p + 1))} disabled={safePage >= pageCount}>
+          <Button variant="outline" onClick={() => goPage(Math.min(pageCount, safePage + 1))} disabled={safePage >= pageCount}>
             {t({ bn: 'পরের →', en: 'Next →' })}
           </Button>
         </div>
@@ -142,25 +168,40 @@ export function SubjectsTab({ data }: { data: ClassTabData }) {
   if (data.subjects.length === 0) {
     return <ComingSoonCompact def={data.def} whatBn="বিষয়" whatEn="Subjects" />;
   }
+  // STATS mode: per-subject counts come from the stats doc — no book list
+  // needed. FALLBACK mode: computed from the loaded books, as before.
+  const rows = data.subjectStats
+    ? data.subjectStats.map((s) => ({
+        name: s.name,
+        books: s.bookCount,
+        questions: s.questionCount,
+        chapters: s.chapterCount,
+      }))
+    : data.subjects.map((s) => {
+        const books = data.books.filter((b) => b.department === s);
+        return {
+          name: s,
+          books: books.length,
+          questions: books.reduce((n, b) => n + (b.questionCount ?? 0), 0),
+          chapters: books.reduce((n, b) => n + (b.chapterCount ?? 0), 0),
+        };
+      });
   return (
     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(240px, 1fr))', gap: 12 }}>
-      {data.subjects.map((s) => {
-        const books = data.books.filter((b) => b.department === s);
-        const questions = books.reduce((n, b) => n + (b.questionCount ?? 0), 0);
-        const chapters = books.reduce((n, b) => n + (b.chapterCount ?? 0), 0);
+      {rows.map((r) => {
         return (
-          <Card key={s} hover>
+          <Card key={r.name} hover>
             <Link
-              to={`/class/${data.def.slug}/subjects/${encodeURIComponent(s)}`}
+              to={`/class/${data.def.slug}/subjects/${encodeURIComponent(r.name)}`}
               style={{ fontWeight: 700, fontSize: 17, color: '#142B3B' }}
             >
-              {s}
+              {r.name}
             </Link>
             <p style={{ margin: '8px 0 0', color: '#68747B', fontSize: 14 }}>
-              {t({ bn: `${books.length}টি বই · ${chapters}টি পাঠ · ${questions}টি প্রশ্ন`, en: `${books.length} books · ${chapters} lessons · ${questions} questions` })}
+              {t({ bn: `${r.books}টি বই · ${r.chapters}টি পাঠ · ${r.questions}টি প্রশ্ন`, en: `${r.books} books · ${r.chapters} lessons · ${r.questions} questions` })}
             </p>
             <p style={{ margin: '10px 0 0' }}>
-              <Link to={`/class/${data.def.slug}/subjects/${encodeURIComponent(s)}`} style={{ fontWeight: 600 }}>
+              <Link to={`/class/${data.def.slug}/subjects/${encodeURIComponent(r.name)}`} style={{ fontWeight: 600 }}>
                 {t({ bn: 'বিষয়টি দেখুন →', en: 'See this subject →' })}
               </Link>
             </p>
@@ -173,7 +214,7 @@ export function SubjectsTab({ data }: { data: ClassTabData }) {
 
 export function PracticeTab({ data }: { data: ClassTabData }) {
   const { t } = useLanguage();
-  if (data.books.length === 0) {
+  if (data.bookTotal === 0) {
     return <ComingSoonCompact def={data.def} whatBn="অনুশীলন প্রশ্ন" whatEn="Practice questions" />;
   }
   return (
@@ -198,10 +239,10 @@ export function PracticeTab({ data }: { data: ClassTabData }) {
           </Card>
         ))}
       </div>
-      {data.books.length > 20 ? (
+      {data.bookTotal > 20 ? (
         <p style={{ marginTop: 16 }}>
           <Link to={`/class/${data.def.slug}/books`} style={{ fontWeight: 600 }}>
-            {t({ bn: `সব ${data.books.length}টি বই দেখুন →`, en: `See all ${data.books.length} books →` })}
+            {t({ bn: `সব ${data.bookTotal}টি বই দেখুন →`, en: `See all ${data.bookTotal} books →` })}
           </Link>
         </p>
       ) : null}
@@ -211,10 +252,37 @@ export function PracticeTab({ data }: { data: ClassTabData }) {
 
 export function TestsTab({ data }: { data: ClassTabData }) {
   const { t } = useLanguage();
-  if (data.quizzes.length === 0) {
+  // STATS mode, guest: the quiz COUNT is public (stats doc) but the LIST
+  // stays signed-in-only — show the count + a sign-in prompt, never an
+  // empty "no tests" state for a class that has tests.
+  if (!data.signedIn && data.serverPaged) {
+    if (data.quizTotal === 0) {
+      return data.bookTotal === 0 ? (
+        <ComingSoonCompact def={data.def} whatBn="পরীক্ষা" whatEn="Tests" />
+      ) : (
+        <EmptyState
+          bn="এই শ্রেণির কোনো পরীক্ষা এখনো তৈরি হয়নি — শীঘ্রই আসছে।"
+          en="No tests for this class yet — coming soon."
+        />
+      );
+    }
+    return (
+      <>
+        <p style={{ color: '#57616A', margin: '0 0 12px' }}>
+          {t({ bn: `${data.quizTotal}টি পরীক্ষা · এই শ্রেণির শুধুমাত্র`, en: `${data.quizTotal} tests · this class only` })}
+        </p>
+        <SignInPrompt what={{ bn: 'পরীক্ষা', en: 'tests' }} />
+      </>
+    );
+  }
+  // STATS mode, signed-in, quiz page still loading.
+  if (data.serverPaged && !data.quizzesLoaded) {
+    return <SkeletonCards count={3} />;
+  }
+  if (data.quizTotal === 0) {
     // Class with no books at all → the friendly Coming Soon state.
     // Class WITH books but no quizzes yet → the plain "no tests yet" state.
-    if (data.books.length === 0) {
+    if (data.bookTotal === 0) {
       return <ComingSoonCompact def={data.def} whatBn="পরীক্ষা" whatEn="Tests" />;
     }
     return (
@@ -227,7 +295,7 @@ export function TestsTab({ data }: { data: ClassTabData }) {
   return (
     <>
       <p style={{ color: '#57616A', margin: '0 0 12px' }}>
-        {t({ bn: `${data.quizzes.length}টি পরীক্ষা · এই শ্রেণির শুধুমাত্র`, en: `${data.quizzes.length} tests · this class only` })}
+        {t({ bn: `${data.quizTotal}টি পরীক্ষা · এই শ্রেণির শুধুমাত্র`, en: `${data.quizTotal} tests · this class only` })}
       </p>
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: 12 }}>
         {data.quizzes.slice(0, 20).map((q) => (
@@ -251,9 +319,9 @@ export function TestsTab({ data }: { data: ClassTabData }) {
           </Card>
         ))}
       </div>
-      {data.quizzes.length > 20 ? (
+      {data.quizTotal > 20 ? (
         <p style={{ marginTop: 16, color: '#57616A' }}>
-          {t({ bn: `আরও ${data.quizzes.length - 20}টি পরীক্ষা আছে — সব দেখতে`, en: `${data.quizzes.length - 20} more tests — see them all on the` })}{' '}
+          {t({ bn: `আরও ${data.quizTotal - 20}টি পরীক্ষা আছে — সব দেখতে`, en: `${data.quizTotal - 20} more tests — see them all on the` })}{' '}
           <Link to="/exam" style={{ fontWeight: 600 }}>
             {t({ bn: 'পরীক্ষার পাতায় যান →', en: 'exams page →' })}
           </Link>
@@ -289,12 +357,12 @@ export function ResultsTab({ data }: { data: ClassTabData }) {
   return (
     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: 12 }}>
       {sorted.slice(0, 20).map((a) => {
-        const q = data.quizById.get(a.quizId);
+        const title = data.quizTitleById.get(a.quizId);
         const d = attemptDate(a);
         return (
           <Card key={a.id} hover>
             <div style={{ fontWeight: 700, color: '#142B3B', fontSize: 16, lineHeight: 1.5 }}>
-              {q ? bookTitleOf(q) : a.subject || t({ bn: 'পরীক্ষা', en: 'Test' })}
+              {title ?? a.subject ?? t({ bn: 'পরীক্ষা', en: 'Test' })}
             </div>
             <div style={{ display: 'flex', alignItems: 'baseline', gap: 8, marginTop: 8 }}>
               <span style={{ fontFamily: "'Poppins','Hind Siliguri',system-ui,sans-serif", fontSize: 26, fontWeight: 800, color: '#12766E' }}>

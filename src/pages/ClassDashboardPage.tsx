@@ -31,8 +31,9 @@ import AdPlaceholder from '../components/AdPlaceholder';
 import { ComingSoonHero } from '../components/ComingSoon';
 import { useAuth } from '../lib/auth';
 import { useLanguage, T, TabT } from '../i18n/LanguageContext';
-import { listBooksForClass, type Book } from '../lib/content';
-import { listMyAttempts, listQuizzesForClass, type Quiz, type QuizAttempt } from '../lib/exams';
+import { listBooksForClass, listBooksForClassPage, getPublishedBook, type Book, type ClassListCursor } from '../lib/content';
+import { listMyAttempts, listQuizzesForClass, listQuizzesForClassPage, bookTitleOf, type Quiz, type QuizAttempt } from '../lib/exams';
+import { getClassStats, type ClassStats, type ClassSubjectStats } from '../lib/classStats';
 import { listBookmarks } from '../lib/bookmarks';
 import {
   listQuizSummaries,
@@ -140,38 +141,120 @@ export default function ClassDashboardPage() {
   const activeTab: TabSlug = isTabSlug(tab) ? tab : 'home';
   const { user, profile, signOut } = useAuth();
 
+  // READ BUDGET (fix/read-usage, 22 Nov 2026): the dashboard NO LONGER
+  // fetches the class's whole book + quiz lists on mount. It reads ONE
+  // loader-maintained stats doc (1 read, cached per session) for every
+  // count/total, plus the FIRST PAGE of books (20 reads) for the Home /
+  // Books / Practice tabs. The quiz list (20 reads) loads LAZILY, only
+  // when the Tests tab opens — the Home tab never pays for it.
+  // Signed-in Honours Home visit: 1 stats + 20 books + the user's own
+  // subcollections (attempts/bookmarks/progress/summaries, small N) —
+  // ~25–30 reads instead of 638. When the stats doc does not exist yet
+  // (before the first loader run that writes it), the page falls back to
+  // the old full-list fetch — same reads as before, never a zero.
+  const [stats, setStats] = useState<ClassStats | null | undefined>(undefined);
   const [books, setBooks] = useState<Book[] | null>(null);
+  const [booksPage, setBooksPage] = useState(1);
+  const [booksCursors, setBooksCursors] = useState<Array<ClassListCursor | null>>([null]);
   const [quizzes, setQuizzes] = useState<Quiz[] | null>(null);
+  const [quizzesLoaded, setQuizzesLoaded] = useState(false);
   const [error, setError] = useState(false);
   const [attempts, setAttempts] = useState<QuizAttempt[]>([]);
   const [bookmarkBookIds, setBookmarkBookIds] = useState<Set<string>>(new Set());
+  const [myBooksExtra, setMyBooksExtra] = useState<Book[]>([]);
   const [subjectProgress, setSubjectProgress] = useState<SubjectProgress[]>([]);
   const [quizSummaries, setQuizSummaries] = useState<QuizSummary[]>([]);
   const [userLoading, setUserLoading] = useState(false);
 
-  function load() {
+  async function load() {
     if (!def) return;
     setError(false);
+    setStats(undefined);
     setBooks(null);
+    setBooksPage(1);
+    setBooksCursors([null]);
     setQuizzes(null);
-    // AUTH GATING (owner instruction 22 Nov 2026): the quiz list embeds
-    // questions, so it is fetched ONLY for a signed-in user. Guests get
-    // an empty quiz list (books still load — the library is public).
-    // H3 (security audit 22 Nov 2026): fetch ONLY this class's books +
-    // quizzes through the paginated listers — the old unbounded
-    // listPublishedBooks()/listPublishedQuizzes() read ALL 609 books +
-    // 994 quizzes (~1,600 reads) on every dashboard visit.
-    Promise.all([listBooksForClass(def.educationType, def.classLevels), user ? listQuizzesForClass(def.educationType, def.classLevels) : Promise.resolve([] as Quiz[])])
-      .then(([b, q]) => {
+    setQuizzesLoaded(false);
+    setMyBooksExtra([]);
+    try {
+      const s = await getClassStats(def.slug);
+      if (!s) {
+        // FALLBACK (stats not written yet): the old full-list fetch.
+        // Same reads as before tonight — never show a zero.
+        setStats(null);
+        const [b, q] = await Promise.all([
+          listBooksForClass(def.educationType, def.classLevels),
+          // AUTH GATING (owner instruction 22 Nov 2026): the quiz list
+          // embeds questions, so it is fetched ONLY for a signed-in
+          // user. Guests get an empty quiz list (books still load —
+          // the library is public).
+          user ? listQuizzesForClass(def.educationType, def.classLevels) : Promise.resolve([] as Quiz[]),
+        ]);
         setBooks(b);
         setQuizzes(q);
-      })
-      .catch(() => setError(true));
+        setQuizzesLoaded(true);
+        return;
+      }
+      setStats(s);
+      // Stats mode: first page of books covers Home (first 6), Books
+      // tab page 1 and Practice (first 20) — one 20-read fetch.
+      const bp = await listBooksForClassPage(def.educationType, def.classLevels, { pageSize: 20 });
+      setBooks(bp.items);
+      if (bp.nextCursor) setBooksCursors([null, bp.nextCursor]);
+    } catch {
+      setError(true);
+    }
   }
   // Re-run when auth resolves: at mount the user is often still null
   // while the session restores; a signed-in user must not be stuck with
-  // the guest's empty quiz list.
-  useEffect(load, [user]);
+  // the guest's empty quiz list. Re-runs cost ~0 extra reads — the stats
+  // doc and the book/quiz pages are cached per session. Also re-run when
+  // the class slug changes (same component, new class).
+  useEffect(() => {
+    void load();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user, slug]);
+
+  // LAZY quiz list: only the Tests tab needs quiz docs, so it fetches
+  // the first page (20 reads, cached per session) when that tab opens.
+  // Guests never fetch it — they get a sign-in prompt with the count.
+  useEffect(() => {
+    if (!def || !stats || activeTab !== 'tests' || !user || quizzesLoaded) return;
+    let live = true;
+    listQuizzesForClassPage(def.educationType, def.classLevels, { pageSize: 20 })
+      .then((res) => {
+        if (live) {
+          setQuizzes(res.items);
+          setQuizzesLoaded(true);
+        }
+      })
+      .catch(() => {
+        /* Tests tab shows its empty state — the dashboard still renders */
+      });
+    return () => {
+      live = false;
+    };
+  }, [activeTab, stats, user, def, quizzesLoaded]);
+
+  async function goBooksPage(next: number) {
+    if (!def || !stats || next < 1) return;
+    const cursor = booksCursors[next - 1] ?? null;
+    // Page 1's cursor is null; deeper pages use the stored chain. Every
+    // page fetch is cached per session, so Previous costs 0 reads.
+    const res = await listBooksForClassPage(def.educationType, def.classLevels, {
+      cursor,
+      pageSize: 20,
+    });
+    setBooks(res.items);
+    setBooksPage(next);
+    if (res.nextCursor) {
+      setBooksCursors((prev) => {
+        const nextCursors = [...prev];
+        nextCursors[next] = res.nextCursor;
+        return nextCursors;
+      });
+    }
+  }
 
   useEffect(() => {
     if (!user) {
@@ -207,16 +290,78 @@ export default function ClassDashboardPage() {
     };
   }, [user]);
 
+  // In STATS mode the loaded `books` are only the current page (20) —
+  // a bookmarked book on a later page would vanish from "My Books".
+  // Fetch bookmarked books by id (1 read each, small N) when they are
+  // not in the loaded page. Fallback mode loads the full list, so
+  // nothing extra is needed there.
+  useEffect(() => {
+    if (!def || !stats || bookmarkBookIds.size === 0) {
+      setMyBooksExtra([]);
+      return;
+    }
+    const loadedIds = new Set((books ?? []).map((b) => b.id));
+    const missing = [...bookmarkBookIds].filter((id) => !loadedIds.has(id));
+    if (missing.length === 0) {
+      setMyBooksExtra([]);
+      return;
+    }
+    let live = true;
+    Promise.all(missing.map((id) => getPublishedBook(id)))
+      .then((found) => {
+        if (!live) return;
+        setMyBooksExtra(
+          found.filter(
+            (b): b is Book =>
+              !!b && b.educationType === def.educationType && def.classLevels.includes(b.classLevel),
+          ),
+        );
+      })
+      .catch(() => {
+        /* My Books falls back to the loaded page — dashboard still renders */
+      });
+    return () => {
+      live = false;
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [stats, bookmarkBookIds, def]);
+
+  // In STATS mode `books`/`quizzes` are already class-scoped pages (the
+  // query filters by educationType + classLevel); in FALLBACK mode they
+  // are the full class lists. Either way the memos below need no
+  // re-filtering — booksForClass/quizzesForClass are identity here and
+  // stay only as a safety net.
   const classBooks = useMemo(() => (def && books ? booksForClass(books, def) : []), [books, def]);
   const classQuizzes = useMemo(() => (def && quizzes ? quizzesForClass(quizzes, def) : []), [quizzes, def]);
-  const classSubjects = useMemo(() => (books && def ? subjectsForClass(books, def) : []), [books, def]);
-  const totalQuestions = useMemo(() => classBooks.reduce((s, b) => s + (b.questionCount ?? 0), 0), [classBooks]);
-  const totalChapters = useMemo(() => classBooks.reduce((s, b) => s + (b.chapterCount ?? 0), 0), [classBooks]);
+  const classSubjects = useMemo(
+    () => (stats ? stats.subjects.map((s) => s.name) : books && def ? subjectsForClass(books, def) : []),
+    [stats, books, def],
+  );
+  const subjectStats: ClassSubjectStats[] | null = stats ? stats.subjects : null;
+  const bookTotal = stats ? stats.bookCount : classBooks.length;
+  const quizTotal = stats ? stats.quizCount : classQuizzes.length;
+  const totalQuestions = useMemo(
+    () => (stats ? stats.totalQuestions : classBooks.reduce((s, b) => s + (b.questionCount ?? 0), 0)),
+    [stats, classBooks],
+  );
+  const totalChapters = useMemo(
+    () => (stats ? stats.totalChapters : classBooks.reduce((s, b) => s + (b.chapterCount ?? 0), 0)),
+    [stats, classBooks],
+  );
 
-  const quizById = useMemo(() => new Map((quizzes ?? []).map((q) => [q.id, q])), [quizzes]);
-  const classQuizIds = useMemo(() => new Set(classQuizzes.map((q) => q.id)), [classQuizzes]);
+  // Results tab needs quiz TITLES only — from the stats doc in stats
+  // mode, from the loaded quiz docs in fallback mode.
+  const quizTitleById = useMemo(() => {
+    if (stats) return new Map(Object.entries(stats.quizTitles));
+    return new Map((quizzes ?? []).map((q) => [q.id, bookTitleOf(q)]));
+  }, [stats, quizzes]);
+  const classQuizIds = useMemo(() => new Set(quizTitleById.keys()), [quizTitleById]);
   const classAttempts = useMemo(() => attempts.filter((a) => classQuizIds.has(a.quizId)), [attempts, classQuizIds]);
-  const myBooks = useMemo(() => classBooks.filter((b) => bookmarkBookIds.has(b.id)), [classBooks, bookmarkBookIds]);
+  const myBooks = useMemo(() => {
+    const mine = classBooks.filter((b) => bookmarkBookIds.has(b.id));
+    const extra = myBooksExtra.filter((b) => bookmarkBookIds.has(b.id) && !mine.some((m) => m.id === b.id));
+    return [...mine, ...extra];
+  }, [classBooks, myBooksExtra, bookmarkBookIds]);
   const subjectNames = useMemo(() => {
     const s = new Set(classSubjects);
     classBooks.forEach((b) => {
@@ -246,7 +391,7 @@ export default function ClassDashboardPage() {
     );
   }
 
-  const ready = classBooks.length > 0;
+  const ready = bookTotal > 0;
   const avgPct =
     classAttempts.length > 0
       ? Math.round(classAttempts.reduce((s, a) => s + (a.percentage ?? 0), 0) / classAttempts.length)
@@ -257,11 +402,19 @@ export default function ClassDashboardPage() {
     books: classBooks,
     quizzes: classQuizzes,
     subjects: classSubjects,
+    subjectStats,
+    bookTotal,
+    bookPage: booksPage,
+    bookPageCount: Math.max(1, Math.ceil(bookTotal / 20)),
+    serverPaged: !!stats,
+    onBooksPage: (n: number) => void goBooksPage(n),
+    quizTotal,
+    quizzesLoaded,
     totalQuestions,
     totalChapters,
     signedIn: !!user,
     attempts: classAttempts,
-    quizById,
+    quizTitleById,
     myBooks,
     subjectProgress: classSubjectProgress,
     quizSummaries: classQuizSummaries,
@@ -315,10 +468,10 @@ export default function ClassDashboardPage() {
             {t({ bn: def.tagBn, en: def.tagEn })}
           </p>
         </div>
-        {books === null || quizzes === null ? null : ready ? (
+        {books === null || stats === undefined ? null : ready ? (
           <div className="ev-class-hero-stats">
             <span>
-              <strong>{classBooks.length}</strong>{t({ bn: 'টি বই', en: ' books' })}
+              <strong>{bookTotal}</strong>{t({ bn: 'টি বই', en: ' books' })}
             </span>
             <span>
               <strong>{classSubjects.length}</strong>{t({ bn: 'টি বিষয়', en: ' subjects' })}
@@ -327,7 +480,7 @@ export default function ClassDashboardPage() {
               <strong>{totalQuestions}</strong>{t({ bn: 'টি প্রশ্ন', en: ' questions' })}
             </span>
             <span>
-              <strong>{classQuizzes.length}</strong>{t({ bn: 'টি পরীক্ষা', en: ' tests' })}
+              <strong>{quizTotal}</strong>{t({ bn: 'টি পরীক্ষা', en: ' tests' })}
             </span>
           </div>
         ) : (
@@ -363,14 +516,14 @@ export default function ClassDashboardPage() {
 
       <div className="ev-rail-grid">
         <div>
-          {books === null || quizzes === null ? <SkeletonCards count={3} /> : null}
+          {books === null || stats === undefined ? <SkeletonCards count={3} /> : null}
           {error ? (
             <AlertBox tone="error" onRetry={load}>
               {t({ bn: 'শ্রেণির তথ্য লোড করা যায়নি — আবার চেষ্টা করুন।', en: 'Could not load this class — please try again.' })}
             </AlertBox>
           ) : null}
 
-          {books !== null && quizzes !== null ? (
+          {books !== null && stats !== undefined ? (
             <>
           {activeTab === 'home' ? (
             <>
@@ -470,7 +623,7 @@ export default function ClassDashboardPage() {
                   </div>
                   <p style={{ margin: '12px 0 24px' }}>
                     <Link to={tabHref('books')} style={{ fontWeight: 600 }}>
-                      {t({ bn: `সব ${classBooks.length}টি বই দেখুন →`, en: `See all ${classBooks.length} books →` })}
+                      {t({ bn: `সব ${bookTotal}টি বই দেখুন →`, en: `See all ${bookTotal} books →` })}
                     </Link>
                   </p>
 
