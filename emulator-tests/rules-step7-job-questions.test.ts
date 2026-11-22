@@ -48,9 +48,13 @@
  *    (Step 7 fold-in: a student delete + recreate would mint a
  *    fresh window forever). A receipt is a 10-minute window, NOT
  *    one-use — repeat reads inside the window succeed by design.
- *  jobAttempts (anchor) — created in-progress on a Published
- *    bundle only, submitted exactly once, never changed or deleted
- *    after that (even Admin).
+ *  jobAttempts (full submit-created attempt, Step 8) — created
+ *    ONCE at submit with status 'submitted' and the full fields
+ *    (Step 3 §2.11); the in-progress lifecycle lives in jobSessions.
+ *    The Step 7 minimal anchor (create in-progress, update once to
+ *    submitted) is REPLACED: a second submit is an update and is
+ *    denied, deletes are denied even for Admin. An attempt may only
+ *    be created when its session is already 'submitted'.
  *
  * Same conventions as rules-step6-job-content.test.ts (numbered
  * cases, VALID_* fixtures, seed via withSecurityRulesDisabled).
@@ -193,6 +197,82 @@ const publishPayload = (verifier: string) => ({
   verifiedAt: new Date(),
 });
 
+/** Step 8 — a valid FULL submitted attempt (Step 3 §2.11). The doc
+ * ID is the session ID: the caller passes the same `sessionId` the
+ * doc is stored under. `overrides` replace top-level fields (use
+ * `answers` + counts + score together — they must stay consistent).
+ * Practice by default (1 correct answer on the published topic
+ * bundle); pass kind 'mock' + mockId + a mock bundleId for a mock. */
+const validSubmittedAttempt = (sessionId: string, overrides: Record<string, unknown> = {}) => ({
+  userId: 'student-1',
+  kind: 'practice',
+  mockId: null,
+  bundleId: 'topic__bcs__bangla__grammar__sandhi',
+  examSlug: 'bcs',
+  subjectId: 'bcs__bangla',
+  topicId: 'bcs__bangla__grammar__sandhi',
+  answers: [
+    {
+      n: 1,
+      questionId: 'q-published-b',
+      topicId: 'bcs__bangla__grammar__sandhi',
+      subjectId: 'bcs__bangla',
+      selected: 'B',
+      correct: true,
+      marks: 1,
+      correctText: 'দুটি ধ্বনির মিলন',
+      timeSpentSeconds: 45,
+    },
+  ],
+  score: 1,
+  totalMarks: 1,
+  negativeDeduction: 0,
+  correctCount: 1,
+  wrongCount: 0,
+  unansweredCount: 0,
+  accuracy: 100,
+  percentage: 100,
+  timeSpentSeconds: 45,
+  startedAt: TS,
+  submittedAt: VERIFY_TS,
+  status: 'submitted',
+  markingStatus: 'auto',
+  resultLabel: 'practice',
+  clientCalculatedScore: 1,
+  serverVerifiedScore: null,
+  trustLevel: 'unverified',
+  resultType: 'practice',
+  sessionId,
+  audit: null,
+  answerHashes: null,
+  anomalyFlags: null,
+  ...overrides,
+});
+
+/** Step 8 — a valid session (Step 3 §2.12). `overrides` replace
+ * top-level fields. Practice by default (no timer: endsAt and
+ * clientEndsAtMillis null, submittedAt null while in-progress). */
+const validSession = (overrides: Record<string, unknown> = {}) => ({
+  kind: 'practice',
+  mockId: null,
+  bundleId: 'topic__bcs__bangla__grammar__sandhi',
+  examSlug: 'bcs',
+  status: 'in-progress',
+  startedAt: TS,
+  endsAt: null,
+  questionRefs: [
+    { bundleId: 'topic__bcs__bangla__grammar__sandhi', n: 1, questionId: 'q-published-b' },
+  ],
+  answers: {},
+  currentQuestion: 1,
+  lastSyncedAt: TS,
+  clientEndsAtMillis: null,
+  submittedAt: null,
+  createdAt: TS,
+  updatedAt: TS,
+  ...overrides,
+});
+
 async function seed() {
   await env.withSecurityRulesDisabled(async (ctx) => {
     const db = ctx.firestore();
@@ -305,47 +385,98 @@ async function seed() {
     for (const [id, data] of keys) {
       await setDoc(doc(db, 'jobQuestionKeys', id), data);
     }
-    // ---- users/{uid}/jobAttempts (anchor only) ----
+    // ---- users/{uid}/jobAttempts (FULL submitted attempts, Step 8) ----
+    // Every seeded attempt is a full valid submitted attempt (built
+    // by validSubmittedAttempt); the in-progress lifecycle lives in
+    // jobSessions below — there is NO in-progress jobAttempts doc in
+    // the Step 8 model (such a doc can never be created through the
+    // rules). The session gate is create-only, so seeded attempts do
+    // not need a matching session for the receipt/key reads — but the
+    // submitted attempts that anchor receipts DO have matching
+    // submitted sessions seeded, to mirror the real submit flow.
     const attempts: Array<[string, string, Record<string, unknown>]> = [
-      ['student-1', 'attempt-submitted', {
-        userId: 'student-1', bundleId: 'mock__bcs-mock-01', kind: 'mock',
-        status: 'submitted', startedAt: TS, submittedAt: VERIFY_TS,
-      }],
-      ['student-1', 'attempt-inprogress', {
-        userId: 'student-1', bundleId: 'mock__bcs-mock-01', kind: 'mock',
-        status: 'in-progress', startedAt: TS, submittedAt: null,
-      }],
-      ['student-1', 'attempt-submitted-2', {
-        userId: 'student-1', bundleId: 'mock__bcs-mock-02', kind: 'mock',
-        status: 'submitted', startedAt: TS, submittedAt: VERIFY_TS,
-      }],
-      ['student-1', 'attempt-inprogress-2', {
-        userId: 'student-1', bundleId: 'mock__bcs-mock-02', kind: 'mock',
-        status: 'in-progress', startedAt: TS, submittedAt: null,
-      }],
-      ['student-2', 'attempt-submitted', {
-        userId: 'student-2', bundleId: 'mock__bcs-mock-01', kind: 'mock',
-        status: 'submitted', startedAt: TS, submittedAt: VERIFY_TS,
-      }],
-      ['student-2', 'attempt-inprogress-2b', {
-        userId: 'student-2', bundleId: 'mock__bcs-mock-02', kind: 'mock',
-        status: 'in-progress', startedAt: TS, submittedAt: null,
-      }],
-      ['student-2', 'attempt-other-2', {
-        userId: 'student-2', bundleId: 'mock__bcs-mock-02', kind: 'mock',
-        status: 'submitted', startedAt: TS, submittedAt: VERIFY_TS,
-      }],
-      ['student-1', 'attempt-inprogress-3', {
-        userId: 'student-1', bundleId: 'mock__bcs-mock-03', kind: 'mock',
-        status: 'in-progress', startedAt: TS, submittedAt: null,
-      }],
-      ['student-2', 'attempt-other-3', {
-        userId: 'student-2', bundleId: 'mock__bcs-mock-03', kind: 'mock',
-        status: 'submitted', startedAt: TS, submittedAt: VERIFY_TS,
-      }],
+      ['student-1', 'attempt-submitted', validSubmittedAttempt('attempt-submitted', {
+        kind: 'mock', mockId: 'bcs-mock-01', bundleId: 'mock__bcs-mock-01',
+        subjectId: null, topicId: null,
+      })],
+      ['student-1', 'attempt-submitted-2', validSubmittedAttempt('attempt-submitted-2', {
+        kind: 'mock', mockId: 'bcs-mock-02', bundleId: 'mock__bcs-mock-02',
+        subjectId: null, topicId: null,
+      })],
+      ['student-2', 'attempt-submitted', validSubmittedAttempt('attempt-submitted', {
+        userId: 'student-2', kind: 'mock', mockId: 'bcs-mock-01',
+        bundleId: 'mock__bcs-mock-01', subjectId: null, topicId: null,
+      })],
+      ['student-2', 'attempt-other-2', validSubmittedAttempt('attempt-other-2', {
+        userId: 'student-2', kind: 'mock', mockId: 'bcs-mock-02',
+        bundleId: 'mock__bcs-mock-02', subjectId: null, topicId: null,
+      })],
+      ['student-2', 'attempt-other-3', validSubmittedAttempt('attempt-other-3', {
+        userId: 'student-2', kind: 'mock', mockId: 'bcs-mock-03',
+        bundleId: 'mock__bcs-mock-03', subjectId: null, topicId: null,
+      })],
     ];
     for (const [uid, id, data] of attempts) {
       await setDoc(doc(db, 'users', uid, 'jobAttempts', id), data);
+    }
+    // ---- users/{uid}/jobSessions (Step 8) ----
+    // Submitted sessions that back the seeded submitted attempts
+    // above (same doc-ID, same bundle/kind), plus the in-progress
+    // sessions the rewritten q66/q75/q88 tests anchor to. There is
+    // deliberately NO in-progress jobAttempts doc anywhere: the
+    // in-progress state lives ONLY here.
+    const sessions: Array<[string, string, Record<string, unknown>]> = [
+      ['student-1', 'attempt-submitted', validSession({
+        kind: 'mock', mockId: 'bcs-mock-01', bundleId: 'mock__bcs-mock-01',
+        status: 'submitted', submittedAt: VERIFY_TS,
+        questionRefs: [{ bundleId: 'mock__bcs-mock-01', n: 1, questionId: 'q-published-b' }],
+      })],
+      ['student-1', 'attempt-submitted-2', validSession({
+        kind: 'mock', mockId: 'bcs-mock-02', bundleId: 'mock__bcs-mock-02',
+        status: 'submitted', submittedAt: VERIFY_TS,
+        questionRefs: [{ bundleId: 'mock__bcs-mock-02', n: 1, questionId: 'q-published-b' }],
+      })],
+      ['student-2', 'attempt-submitted', validSession({
+        kind: 'mock', mockId: 'bcs-mock-01', bundleId: 'mock__bcs-mock-01',
+        status: 'submitted', submittedAt: VERIFY_TS,
+        questionRefs: [{ bundleId: 'mock__bcs-mock-01', n: 1, questionId: 'q-published-b' }],
+      })],
+      ['student-2', 'attempt-other-2', validSession({
+        kind: 'mock', mockId: 'bcs-mock-02', bundleId: 'mock__bcs-mock-02',
+        status: 'submitted', submittedAt: VERIFY_TS,
+        questionRefs: [{ bundleId: 'mock__bcs-mock-02', n: 1, questionId: 'q-published-b' }],
+      })],
+      ['student-2', 'attempt-other-3', validSession({
+        kind: 'mock', mockId: 'bcs-mock-03', bundleId: 'mock__bcs-mock-03',
+        status: 'submitted', submittedAt: VERIFY_TS,
+        questionRefs: [{ bundleId: 'mock__bcs-mock-03', n: 1, questionId: 'q-published-b' }],
+      })],
+      // In-progress sessions (no attempt exists for these IDs).
+      ['student-2', 'sess-inprogress-2b', validSession({
+        kind: 'mock', mockId: 'bcs-mock-02', bundleId: 'mock__bcs-mock-02',
+        questionRefs: [{ bundleId: 'mock__bcs-mock-02', n: 1, questionId: 'q-published-b' }],
+      })],
+      ['student-1', 'sess-inprogress-3', validSession({
+        kind: 'mock', mockId: 'bcs-mock-03', bundleId: 'mock__bcs-mock-03',
+        questionRefs: [{ bundleId: 'mock__bcs-mock-03', n: 1, questionId: 'q-published-b' }],
+      })],
+      ['student-1', 'sess-q80', validSession({
+        status: 'submitted', submittedAt: VERIFY_TS,
+      })],
+      ['student-1', 'sess-q81', validSession({
+        bundleId: 'topic__bcs__bangla__grammar__samash',
+        status: 'submitted', submittedAt: VERIFY_TS,
+        questionRefs: [{ bundleId: 'topic__bcs__bangla__grammar__samash', n: 1, questionId: 'q-published-b' }],
+      })],
+      ['student-1', 'sess-q85', validSession({
+        kind: 'mock', mockId: 'bcs-mock-01', bundleId: 'mock__bcs-mock-01',
+        status: 'submitted', submittedAt: VERIFY_TS,
+        questionRefs: [{ bundleId: 'mock__bcs-mock-01', n: 1, questionId: 'q-published-b' }],
+      })],
+      ['student-1', 'sess-q88', validSession()],
+    ];
+    for (const [uid, id, data] of sessions) {
+      await setDoc(doc(db, 'users', uid, 'jobSessions', id), data);
     }
     // ---- jobReceipts ----
     const receipts: Array<[string, Record<string, unknown>]> = [
@@ -359,11 +490,13 @@ async function seed() {
         userId: 'student-2', bundleId: 'mock__bcs-mock-01',
         attemptId: 'attempt-submitted', createdAt: STALE_TS,
       }],
-      // Fresh receipt, but anchored to an IN-PROGRESS attempt
-      // (P0-06: the anchor must be a SUBMISSION).
+      // Fresh receipt, but anchored to an IN-PROGRESS SESSION id —
+      // no submitted attempt exists for it (Step 8: the in-progress
+      // state lives in jobSessions, not in jobAttempts, so a receipt
+      // pointing at a live session is not a submission — P0-06).
       ['student-2_mock__bcs-mock-02', {
         userId: 'student-2', bundleId: 'mock__bcs-mock-02',
-        attemptId: 'attempt-inprogress-2b', createdAt: FRESH_TS,
+        attemptId: 'sess-inprogress-2b', createdAt: FRESH_TS,
       }],
     ];
     for (const [id, data] of receipts) {
@@ -793,7 +926,7 @@ describe('jobQuestionKeys — receipt-gated, practice open', () => {
   it('(q65) student with a STALE receipt reads a mock key is DENIED', async () => {
     await assertFails(getDoc(doc(asStudent2(), 'jobQuestionKeys', 'mock__bcs-mock-01')));
   });
-  it('(q66) student with a receipt anchored to an IN-PROGRESS attempt is DENIED (P0-06)', async () => {
+  it('(q66) student with a receipt anchored to an IN-PROGRESS SESSION (no submitted attempt) is DENIED (P0-06)', async () => {
     await assertFails(getDoc(doc(asStudent2(), 'jobQuestionKeys', 'mock__bcs-mock-02')));
   });
   it('(q67) student with NO receipt reads a mock key is DENIED', async () => {
@@ -848,11 +981,11 @@ describe('jobReceipts — access grants, attempt-anchored (P0-06)', () => {
       }),
     );
   });
-  it('(q75) student creating a receipt anchored to an IN-PROGRESS attempt is DENIED', async () => {
+  it('(q75) student creating a receipt anchored to an IN-PROGRESS SESSION id (no submitted attempt) is DENIED', async () => {
     await assertFails(
       setDoc(doc(asStudent1(), 'jobReceipts', 'student-1_mock__bcs-mock-03'), {
         userId: 'student-1', bundleId: 'mock__bcs-mock-03',
-        attemptId: 'attempt-inprogress-3', createdAt: new Date(),
+        attemptId: 'sess-inprogress-3', createdAt: new Date(),
       }),
     );
   });
@@ -882,52 +1015,57 @@ describe('jobReceipts — access grants, attempt-anchored (P0-06)', () => {
   });
 });
 
-describe('jobAttempts — minimal anchor (Step 7 only)', () => {
-  it('(q80) student creating an in-progress attempt on a Published bundle SUCCEEDS', async () => {
+describe('jobAttempts — FULL submit-created attempt (Step 8, Step 3 §2.11)', () => {
+  it('(q80) student creating a valid SUBMITTED practice attempt on a submitted session SUCCEEDS', async () => {
+    // startedAt must be <= submittedAt (<= now): the fixed seed TS
+    // (08:00Z) is AFTER the runner's wall clock in this session, so
+    // the created attempt stamps startedAt a minute in the past.
     await assertSucceeds(
-      setDoc(doc(asStudent1(), 'users', 'student-1', 'jobAttempts', 'q80-attempt'), {
-        userId: 'student-1', bundleId: 'mock__bcs-mock-01', kind: 'mock',
-        status: 'in-progress', startedAt: new Date(), submittedAt: null,
-      }),
+      setDoc(doc(asStudent1(), 'users', 'student-1', 'jobAttempts', 'sess-q80'),
+        validSubmittedAttempt('sess-q80', {
+          startedAt: new Date(Date.now() - 60 * 1000),
+          submittedAt: new Date(),
+        })),
     );
   });
   it('(q81) student creating an attempt on a DRAFT bundle is DENIED', async () => {
     await assertFails(
-      setDoc(doc(asStudent1(), 'users', 'student-1', 'jobAttempts', 'q81-attempt'), {
-        userId: 'student-1', bundleId: 'topic__bcs__bangla__grammar__samash', kind: 'topic',
-        status: 'in-progress', startedAt: new Date(), submittedAt: null,
-      }),
+      setDoc(doc(asStudent1(), 'users', 'student-1', 'jobAttempts', 'sess-q81'),
+        validSubmittedAttempt('sess-q81', {
+          bundleId: 'topic__bcs__bangla__grammar__samash',
+          topicId: 'bcs__bangla__grammar__samash',
+          submittedAt: new Date(),
+        })),
     );
   });
-  it('(q82) student creating an attempt already submitted is DENIED', async () => {
+  it('(q82) student creating an attempt over an ALREADY-SUBMITTED doc id is DENIED (second submit is an update)', async () => {
     await assertFails(
-      setDoc(doc(asStudent1(), 'users', 'student-1', 'jobAttempts', 'q82-attempt'), {
-        userId: 'student-1', bundleId: 'mock__bcs-mock-01', kind: 'mock',
-        status: 'submitted', startedAt: TS, submittedAt: VERIFY_TS,
-      }),
+      setDoc(doc(asStudent1(), 'users', 'student-1', 'jobAttempts', 'attempt-submitted'),
+        validSubmittedAttempt('attempt-submitted', {
+          kind: 'mock', mockId: 'bcs-mock-01', bundleId: 'mock__bcs-mock-01',
+          subjectId: null, topicId: null, submittedAt: new Date(),
+        })),
     );
   });
   it('(q83) student creating an attempt for another user is DENIED', async () => {
     await assertFails(
-      setDoc(doc(asStudent1(), 'users', 'student-2', 'jobAttempts', 'q83-attempt'), {
-        userId: 'student-2', bundleId: 'mock__bcs-mock-01', kind: 'mock',
-        status: 'in-progress', startedAt: new Date(), submittedAt: null,
-      }),
+      setDoc(doc(asStudent1(), 'users', 'student-2', 'jobAttempts', 'q83-attempt'),
+        validSubmittedAttempt('q83-attempt', { userId: 'student-2', submittedAt: new Date() })),
     );
   });
   it('(q84) signed-out creating an attempt is DENIED', async () => {
     await assertFails(
-      setDoc(doc(asSignedOut(), 'users', 'student-1', 'jobAttempts', 'q84-attempt'), {
-        userId: 'student-1', bundleId: 'mock__bcs-mock-01', kind: 'mock',
-        status: 'in-progress', startedAt: new Date(), submittedAt: null,
-      }),
+      setDoc(doc(asSignedOut(), 'users', 'student-1', 'jobAttempts', 'q84-attempt'),
+        validSubmittedAttempt('q84-attempt', { submittedAt: new Date() })),
     );
   });
-  it('(q85) student submitting their in-progress attempt SUCCEEDS', async () => {
-    await assertSucceeds(
-      updateDoc(doc(asStudent1(), 'users', 'student-1', 'jobAttempts', 'attempt-inprogress'), {
-        status: 'submitted', submittedAt: new Date(),
-      }),
+  it('(q85) student creating an attempt whose bundle differs from its session\'s bundle is DENIED (session gate)', async () => {
+    await assertFails(
+      setDoc(doc(asStudent1(), 'users', 'student-1', 'jobAttempts', 'sess-q85'),
+        validSubmittedAttempt('sess-q85', {
+          kind: 'mock', mockId: 'bcs-mock-02', bundleId: 'mock__bcs-mock-02',
+          subjectId: null, topicId: null, submittedAt: new Date(),
+        })),
     );
   });
   it('(q86) student re-submitting an already-submitted attempt is DENIED', async () => {
@@ -944,11 +1082,10 @@ describe('jobAttempts — minimal anchor (Step 7 only)', () => {
       }),
     );
   });
-  it('(q88) student changing bundleId on an in-progress attempt is DENIED', async () => {
+  it('(q88) student creating an attempt on an IN-PROGRESS session is DENIED (session must be submitted first)', async () => {
     await assertFails(
-      updateDoc(doc(asStudent1(), 'users', 'student-1', 'jobAttempts', 'attempt-inprogress-2'), {
-        bundleId: 'mock__bcs-mock-01',
-      }),
+      setDoc(doc(asStudent1(), 'users', 'student-1', 'jobAttempts', 'sess-q88'),
+        validSubmittedAttempt('sess-q88', { submittedAt: new Date() })),
     );
   });
   it('(q89) moderator reading a student\'s attempt SUCCEEDS', async () => {

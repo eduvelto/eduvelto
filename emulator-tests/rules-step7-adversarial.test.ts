@@ -12,10 +12,14 @@
  * TWO tests in this file assert that an attack SUCCEEDS — they are
  * DOCUMENTED LIMITATIONS, not security passes, and are labelled as
  * such in their names:
- *   (a5) a fabricated submitted attempt: a student can create an
- *        in-progress attempt, submit it without answering, mint a
- *        receipt and read a mock key. The rules CANNOT distinguish
- *        that from a genuine attempt (no trusted server on Spark).
+ *   (a5) a fabricated submitted attempt: a student can fabricate a
+ *        WELL-FORMED submitted attempt (submitted session + full
+ *        fields + consistent counts) without answering genuinely,
+ *        mint a receipt and read a mock key. Step 8 raises the bar
+ *        vs Step 7 — an empty submit is now DENIED (answers must be
+ *        non-empty, counts must sum, the session must be submitted)
+ *        — but the rules CANNOT distinguish a well-formed forgery
+ *        from a genuine attempt (no trusted server on Spark).
  *        Accepted because scores are client-computed practice
  *        results, NEVER shown as "Verified" (Step 3 §4.4).
  *   (a9) receipt reuse inside the window: a fresh receipt opens a
@@ -154,6 +158,76 @@ const publishPayload = (verifier: string) => ({
   verifiedAt: new Date(),
 });
 
+/** Step 8 — a valid FULL submitted attempt (Step 3 §2.11); see
+ * rules-step7-job-questions.test.ts for the same builder. */
+const validSubmittedAttempt = (sessionId: string, overrides: Record<string, unknown> = {}) => ({
+  userId: 'student-1',
+  kind: 'practice',
+  mockId: null,
+  bundleId: 'topic__bcs__bangla__grammar__sandhi',
+  examSlug: 'bcs',
+  subjectId: 'bcs__bangla',
+  topicId: 'bcs__bangla__grammar__sandhi',
+  answers: [
+    {
+      n: 1,
+      questionId: 'q-published-b',
+      topicId: 'bcs__bangla__grammar__sandhi',
+      subjectId: 'bcs__bangla',
+      selected: 'B',
+      correct: true,
+      marks: 1,
+      correctText: 'দুটি ধ্বনির মিলন',
+      timeSpentSeconds: 45,
+    },
+  ],
+  score: 1,
+  totalMarks: 1,
+  negativeDeduction: 0,
+  correctCount: 1,
+  wrongCount: 0,
+  unansweredCount: 0,
+  accuracy: 100,
+  percentage: 100,
+  timeSpentSeconds: 45,
+  startedAt: TS,
+  submittedAt: VERIFY_TS,
+  status: 'submitted',
+  markingStatus: 'auto',
+  resultLabel: 'practice',
+  clientCalculatedScore: 1,
+  serverVerifiedScore: null,
+  trustLevel: 'unverified',
+  resultType: 'practice',
+  sessionId,
+  audit: null,
+  answerHashes: null,
+  anomalyFlags: null,
+  ...overrides,
+});
+
+/** Step 8 — a valid session (Step 3 §2.12). */
+const validSession = (overrides: Record<string, unknown> = {}) => ({
+  kind: 'practice',
+  mockId: null,
+  bundleId: 'topic__bcs__bangla__grammar__sandhi',
+  examSlug: 'bcs',
+  status: 'in-progress',
+  startedAt: TS,
+  endsAt: null,
+  questionRefs: [
+    { bundleId: 'topic__bcs__bangla__grammar__sandhi', n: 1, questionId: 'q-published-b' },
+  ],
+  answers: {},
+  currentQuestion: 1,
+  lastSyncedAt: TS,
+  clientEndsAtMillis: null,
+  submittedAt: null,
+  createdAt: TS,
+  updatedAt: TS,
+  ...overrides,
+});
+
 async function seed() {
   await env.withSecurityRulesDisabled(async (ctx) => {
     const db = ctx.firestore();
@@ -250,40 +324,72 @@ async function seed() {
     for (const [id, data] of keys) {
       await setDoc(doc(db, 'jobQuestionKeys', id), data);
     }
+    // ---- users/{uid}/jobAttempts (FULL submitted attempts, Step 8) ----
+    // No in-progress attempt doc exists anywhere in the Step 8 model
+    // — the in-progress state lives in jobSessions (seeded below).
     const attempts: Array<[string, string, Record<string, unknown>]> = [
-      ['student-1', 'attempt-submitted', {
-        userId: 'student-1', bundleId: 'mock__bcs-mock-01', kind: 'mock',
-        status: 'submitted', startedAt: TS, submittedAt: VERIFY_TS,
-      }],
-      ['student-1', 'attempt-submitted-2', {
-        userId: 'student-1', bundleId: 'mock__bcs-mock-02', kind: 'mock',
-        status: 'submitted', startedAt: TS, submittedAt: VERIFY_TS,
-      }],
-      ['student-1', 'attempt-inprogress', {
-        userId: 'student-1', bundleId: 'mock__bcs-mock-01', kind: 'mock',
-        status: 'in-progress', startedAt: TS, submittedAt: null,
-      }],
-      ['student-2', 'attempt-submitted', {
-        userId: 'student-2', bundleId: 'mock__bcs-mock-01', kind: 'mock',
-        status: 'submitted', startedAt: TS, submittedAt: VERIFY_TS,
-      }],
-      ['student-2', 'attempt-submitted-3', {
-        userId: 'student-2', bundleId: 'mock__bcs-mock-03', kind: 'mock',
-        status: 'submitted', startedAt: TS, submittedAt: VERIFY_TS,
-      }],
-      ['student-2', 'attempt-inprogress-2b', {
-        userId: 'student-2', bundleId: 'mock__bcs-mock-02', kind: 'mock',
-        status: 'in-progress', startedAt: TS, submittedAt: null,
-      }],
+      ['student-1', 'attempt-submitted', validSubmittedAttempt('attempt-submitted', {
+        kind: 'mock', mockId: 'bcs-mock-01', bundleId: 'mock__bcs-mock-01',
+        subjectId: null, topicId: null,
+      })],
+      ['student-1', 'attempt-submitted-2', validSubmittedAttempt('attempt-submitted-2', {
+        kind: 'mock', mockId: 'bcs-mock-02', bundleId: 'mock__bcs-mock-02',
+        subjectId: null, topicId: null,
+      })],
+      ['student-2', 'attempt-submitted', validSubmittedAttempt('attempt-submitted', {
+        userId: 'student-2', kind: 'mock', mockId: 'bcs-mock-01',
+        bundleId: 'mock__bcs-mock-01', subjectId: null, topicId: null,
+      })],
+      ['student-2', 'attempt-submitted-3', validSubmittedAttempt('attempt-submitted-3', {
+        userId: 'student-2', kind: 'mock', mockId: 'bcs-mock-03',
+        bundleId: 'mock__bcs-mock-03', subjectId: null, topicId: null,
+      })],
       // student-3 has a submitted attempt on mock-02 but NO receipt
       // for it (used by a10: a future-dated receipt creation).
-      ['student-3', 'attempt-submitted-mock02', {
-        userId: 'student-3', bundleId: 'mock__bcs-mock-02', kind: 'mock',
-        status: 'submitted', startedAt: TS, submittedAt: VERIFY_TS,
-      }],
+      ['student-3', 'attempt-submitted-mock02', validSubmittedAttempt('attempt-submitted-mock02', {
+        userId: 'student-3', kind: 'mock', mockId: 'bcs-mock-02',
+        bundleId: 'mock__bcs-mock-02', subjectId: null, topicId: null,
+      })],
     ];
     for (const [uid, id, data] of attempts) {
       await setDoc(doc(db, 'users', uid, 'jobAttempts', id), data);
+    }
+    // ---- users/{uid}/jobSessions (Step 8) ----
+    const sessions: Array<[string, string, Record<string, unknown>]> = [
+      ['student-1', 'attempt-submitted', validSession({
+        kind: 'mock', mockId: 'bcs-mock-01', bundleId: 'mock__bcs-mock-01',
+        status: 'submitted', submittedAt: VERIFY_TS,
+        questionRefs: [{ bundleId: 'mock__bcs-mock-01', n: 1, questionId: 'q-published-b' }],
+      })],
+      ['student-1', 'attempt-submitted-2', validSession({
+        kind: 'mock', mockId: 'bcs-mock-02', bundleId: 'mock__bcs-mock-02',
+        status: 'submitted', submittedAt: VERIFY_TS,
+        questionRefs: [{ bundleId: 'mock__bcs-mock-02', n: 1, questionId: 'q-published-b' }],
+      })],
+      ['student-2', 'attempt-submitted', validSession({
+        kind: 'mock', mockId: 'bcs-mock-01', bundleId: 'mock__bcs-mock-01',
+        status: 'submitted', submittedAt: VERIFY_TS,
+        questionRefs: [{ bundleId: 'mock__bcs-mock-01', n: 1, questionId: 'q-published-b' }],
+      })],
+      ['student-2', 'attempt-submitted-3', validSession({
+        kind: 'mock', mockId: 'bcs-mock-03', bundleId: 'mock__bcs-mock-03',
+        status: 'submitted', submittedAt: VERIFY_TS,
+        questionRefs: [{ bundleId: 'mock__bcs-mock-03', n: 1, questionId: 'q-published-b' }],
+      })],
+      ['student-3', 'attempt-submitted-mock02', validSession({
+        kind: 'mock', mockId: 'bcs-mock-02', bundleId: 'mock__bcs-mock-02',
+        status: 'submitted', submittedAt: VERIFY_TS,
+        questionRefs: [{ bundleId: 'mock__bcs-mock-02', n: 1, questionId: 'q-published-b' }],
+      })],
+      // In-progress session (no attempt exists for this ID) — the
+      // anchor of the seeded student-2 receipt below.
+      ['student-2', 'sess-inprogress-2b', validSession({
+        kind: 'mock', mockId: 'bcs-mock-02', bundleId: 'mock__bcs-mock-02',
+        questionRefs: [{ bundleId: 'mock__bcs-mock-02', n: 1, questionId: 'q-published-b' }],
+      })],
+    ];
+    for (const [uid, id, data] of sessions) {
+      await setDoc(doc(db, 'users', uid, 'jobSessions', id), data);
     }
     const receipts: Array<[string, Record<string, unknown>]> = [
       ['student-1_mock__bcs-mock-01', {
@@ -294,9 +400,11 @@ async function seed() {
         userId: 'student-2', bundleId: 'mock__bcs-mock-01',
         attemptId: 'attempt-submitted', createdAt: STALE_TS,
       }],
+      // Anchored to an IN-PROGRESS SESSION id — no submitted attempt
+      // exists for it (Step 8 model), so this receipt opens nothing.
       ['student-2_mock__bcs-mock-02', {
         userId: 'student-2', bundleId: 'mock__bcs-mock-02',
-        attemptId: 'attempt-inprogress-2b', createdAt: FRESH_TS,
+        attemptId: 'sess-inprogress-2b', createdAt: FRESH_TS,
       }],
       ['student-2_mock__bcs-mock-03', {
         userId: 'student-2', bundleId: 'mock__bcs-mock-03',
@@ -367,28 +475,42 @@ describe('Adversarial checklist — creation paths (a1–a4)', () => {
 });
 
 describe('Adversarial checklist — fabricated attempt (a5, DOCUMENTED LIMITATION)', () => {
-  it('(a5-DOCUMENTED-LIMITATION) Student fabricates a submitted attempt, mints a receipt and reads a mock key — SUCCEEDS (proves the client-trust limit; NOT a security pass — submitted is client-attested, scores are never Verified)', async () => {
-    // 1. Create an in-progress attempt on a Published bundle.
+  it('(a5-DOCUMENTED-LIMITATION) Student fabricates a WELL-FORMED submitted attempt, mints a receipt and reads a mock key — SUCCEEDS (proves the client-trust limit; NOT a security pass — submitted is client-attested, scores are never Verified)', async () => {
+    // 1. Create a session on a Published bundle (in-progress).
     await assertSucceeds(
-      setDoc(doc(asStudent3(), 'users', 'student-3', 'jobAttempts', 'attempt-fabricated'), {
-        userId: 'student-3', bundleId: 'mock__bcs-mock-01', kind: 'mock',
-        status: 'in-progress', startedAt: new Date(), submittedAt: null,
-      }),
+      setDoc(doc(asStudent3(), 'users', 'student-3', 'jobSessions', 'attempt-fabricated'), validSession({
+        kind: 'mock', mockId: 'bcs-mock-01', bundleId: 'mock__bcs-mock-01',
+        questionRefs: [{ bundleId: 'mock__bcs-mock-01', n: 1, questionId: 'q-published-b' }],
+      })),
     );
-    // 2. Submit it WITHOUT answering anything.
+    // 2. Mark the session submitted (the Step 8 submit flow).
     await assertSucceeds(
-      updateDoc(doc(asStudent3(), 'users', 'student-3', 'jobAttempts', 'attempt-fabricated'), {
+      updateDoc(doc(asStudent3(), 'users', 'student-3', 'jobSessions', 'attempt-fabricated'), {
         status: 'submitted', submittedAt: new Date(),
       }),
     );
-    // 3. Mint a receipt on the fabricated submission.
+    // 3. Create a WELL-FORMED submitted attempt — one answered
+    // question, consistent counts — WITHOUT genuinely answering.
+    // (Step 8 improvement over Step 7: an EMPTY submit is now
+    // DENIED by the rules; only a well-formed forgery passes.)
+    await assertSucceeds(
+      setDoc(doc(asStudent3(), 'users', 'student-3', 'jobAttempts', 'attempt-fabricated'),
+        validSubmittedAttempt('attempt-fabricated', {
+          userId: 'student-3',
+          kind: 'mock', mockId: 'bcs-mock-01', bundleId: 'mock__bcs-mock-01',
+          subjectId: null, topicId: null,
+          startedAt: new Date(Date.now() - 60 * 1000),
+          submittedAt: new Date(),
+        })),
+    );
+    // 4. Mint a receipt on the fabricated submission.
     await assertSucceeds(
       setDoc(doc(asStudent3(), 'jobReceipts', 'student-3_mock__bcs-mock-01'), {
         userId: 'student-3', bundleId: 'mock__bcs-mock-01',
         attemptId: 'attempt-fabricated', createdAt: new Date(),
       }),
     );
-    // 4. Read the mock key — the rules cannot tell this apart
+    // 5. Read the mock key — the rules cannot tell this apart
     // from a genuine attempt. This is the accepted limitation.
     await assertSucceeds(getDoc(doc(asStudent3(), 'jobQuestionKeys', 'mock__bcs-mock-01')));
   });

@@ -699,6 +699,220 @@ service cloud.firestore {
         && jobReceiptAttemptData(bundleId).userId == uid();
     }
 
+    // ---------- Step 8: practice engine (jobAttempts + jobSessions) ----------
+    // Helpers for the Step 8 validators below. Same no-`let` shape as
+    // the Step 7 helpers: each call is a fresh get(); the exists()
+    // guards in the validators run first, so a missing doc never
+    // errors the rule into a deny-by-exception.
+    function jobBundleData(bundleId) {
+      return get(/databases/$(database)/documents/jobQuestionBundles/$(bundleId)).data;
+    }
+    function jobSessionData(userId, sessionId) {
+      return get(/databases/$(database)/documents/users/$(userId)/jobSessions/$(sessionId)).data;
+    }
+    // Bundle-kind consistency (Step 8 decision): a practice attempt /
+    // session runs on a topic bundle (or a previous-year set, which is
+    // practised topic-style); a mock runs on a mock / daily / weekly
+    // bundle. A daily/weekly bundle is a mock-type bundle (its ID is
+    // daily__{mockId} / weekly__{mockId}).
+    function jobBundleKindFitsAttemptKind(bundleKind, kind) {
+      return (kind == 'practice' && bundleKind in ['topic', 'previous'])
+        || (kind == 'mock' && bundleKind in ['mock', 'daily', 'weekly']);
+    }
+    // Full-attempt create validation (Step 3 §2.11 + §3.8, Step 8).
+    // The attempt doc is created ONCE at submit with status
+    // 'submitted' and the full fields (Step 8 design decision: the
+    // Step 7 minimal anchor's create-in-progress + update-to-submit
+    // lifecycle is GONE — a second submit is an update, and updates
+    // are denied, so the doc-ID stays the idempotency key and no
+    // orphan in-progress attempt can ever be stranded, since deletes
+    // are forbidden for everyone including Admin).
+    // HONEST LIMITS — what the rules CANNOT check, and why:
+    //  - Per-answer shape: rules have NO list indexing, so the
+    //    per-answer {topicId, subjectId, correct, marks, ...} shape
+    //    cannot be validated here (Step 7 decision #7 stands). The
+    //    per-answer topicId + correct mandate is enforced by the
+    //    engine lib validator (jobEngine.ts, Step 8 UI agent); the
+    //    rules enforce the aggregates instead: counts sum to
+    //    answers.size(), answers non-empty and <= the bundle's
+    //    questionCount, and the marks/counts sanity checks below.
+    //  - Exact score formula: score == correct*marksPerQuestion -
+    //    wrong*negativeMarking needs the exam pattern, which the
+    //    rules do NOT look up (no jobExams read — keeps the rule
+    //    inside the get() budget). Enforceable approximation:
+    //    negativeDeduction == wrongCount*0.25 OR wrongCount*0.5
+    //    (the only two verified negative values: primary/NTRCA/bank
+    //    0.25, BCS 0.50; 0.25/0.5 steps are exact in doubles), plus
+    //    score == clientCalculatedScore and the loose bound
+    //    -totalMarks <= score <= totalMarks (holds while
+    //    marksPerQuestion >= 1 and negative <= 0.5 — true for every
+    //    verified pattern). The exact formula is lib-level.
+    //  - Float division: accuracy/percentage formulas cannot be
+    //    verified (rules cannot reliably check float division), so
+    //    only ranges are enforced (accuracy 0..100, percentage
+    //    -100..100); the values are client-computed + range-checked.
+    //  - examSlug allowlist is the canonical 14 hub slugs from
+    //    jobExamSlugs() (same list as jobProfile.ts
+    //    TARGET_EXAM_SLUGS). 'common' is NOT in it: /jobs/common is
+    //    a cross-exam hub/route, not an exam — common-topic practice
+    //    carries the underlying exam's slug.
+    //  - Session gate: the attempt may only be created when the
+    //    session with the same doc-ID exists and is already
+    //    'submitted' (the client marks the session submitted in the
+    //    same submit flow, then creates the attempt). Kind /
+    //    examSlug / mockId equality between session and attempt is
+    //    NOT re-checked here: it follows transitively, because both
+    //    the session create and the attempt create bind kind +
+    //    examSlug + mockId to the SAME bundle (a mock session cannot
+    //    exist on a topic bundle, and vice versa).
+    function validJobAttemptCreate(d, userId, attemptId) {
+      return d.keys().hasOnly(['userId', 'kind', 'mockId', 'bundleId',
+             'examSlug', 'subjectId', 'topicId', 'answers', 'score',
+             'totalMarks', 'negativeDeduction', 'correctCount',
+             'wrongCount', 'unansweredCount', 'accuracy', 'percentage',
+             'timeSpentSeconds', 'startedAt', 'submittedAt', 'status',
+             'markingStatus', 'resultLabel', 'clientCalculatedScore',
+             'serverVerifiedScore', 'trustLevel', 'resultType',
+             'sessionId', 'audit', 'answerHashes', 'anomalyFlags'])
+        && d.keys().hasAll(['userId', 'kind', 'mockId', 'bundleId',
+             'examSlug', 'subjectId', 'topicId', 'answers', 'score',
+             'totalMarks', 'negativeDeduction', 'correctCount',
+             'wrongCount', 'unansweredCount', 'accuracy', 'percentage',
+             'timeSpentSeconds', 'startedAt', 'submittedAt', 'status',
+             'markingStatus', 'resultLabel', 'clientCalculatedScore',
+             'trustLevel', 'resultType', 'sessionId'])
+        && d.get('userId', '') == userId
+        && d.get('kind', null) in ['practice', 'mock']
+        && ((d.get('kind', null) == 'mock' && d.get('mockId', null) is string
+              && d.get('mockId', '').size() > 0)
+            || (d.get('kind', null) == 'practice' && d.get('mockId', null) == null))
+        && d.get('bundleId', null) is string
+        && d.get('examSlug', null) in jobExamSlugs()
+        && (d.get('subjectId', null) == null || d.get('subjectId', null) is string)
+        && (d.get('topicId', null) == null || d.get('topicId', null) is string)
+        && d.get('answers', null) is list
+        && d.get('answers', []).size() >= 1
+        && d.get('score', null) is number
+        && d.get('totalMarks', null) is number && d.get('totalMarks', 0) > 0
+        && d.get('score', 0) <= d.get('totalMarks', 0)
+        && d.get('score', 0) >= -d.get('totalMarks', 0)
+        && d.get('clientCalculatedScore', null) == d.get('score', null)
+        && d.get('negativeDeduction', null) is number
+        && d.get('negativeDeduction', -1) >= 0
+        && d.get('correctCount', null) is int && d.get('correctCount', -1) >= 0
+        && d.get('wrongCount', null) is int && d.get('wrongCount', -1) >= 0
+        && d.get('unansweredCount', null) is int && d.get('unansweredCount', -1) >= 0
+        && d.get('correctCount', 0) + d.get('wrongCount', 0) + d.get('unansweredCount', 0)
+             == d.get('answers', []).size()
+        && (d.get('negativeDeduction', -1) == d.get('wrongCount', 0) * 0.25
+            || d.get('negativeDeduction', -1) == d.get('wrongCount', 0) * 0.5)
+        && d.get('accuracy', null) is number
+        && d.get('accuracy', -1) >= 0 && d.get('accuracy', 101) <= 100
+        && d.get('percentage', null) is number
+        && d.get('percentage', -101) >= -100 && d.get('percentage', 101) <= 100
+        && d.get('timeSpentSeconds', null) is number
+        && d.get('timeSpentSeconds', -1) >= 0
+        && d.get('startedAt', null) is timestamp
+        && d.get('submittedAt', null) is timestamp
+        && d.get('startedAt', null) <= d.get('submittedAt', null)
+        && d.get('submittedAt', null) <= request.time
+        && d.get('status', '') == 'submitted'
+        && d.get('markingStatus', '') == 'auto'
+        && d.get('resultLabel', '') == 'practice'
+        && d.get('trustLevel', '') == 'unverified'
+        && d.get('resultType', '') == 'practice'
+        // serverVerifiedScore: the student can NEVER write it — it
+        // must be absent or null (a future server scorer writes it).
+        && d.get('serverVerifiedScore', null) == null
+        // Optional audit-only fields (proposals, §2.11): type-checked
+        // when present, never trusted as proof (rules cannot
+        // recompute hashes — see §4.4 / AQ-13).
+        && (d.get('audit', null) == null || d.get('audit', null) is map)
+        && (d.get('answerHashes', null) == null || d.get('answerHashes', null) is list)
+        && (d.get('anomalyFlags', null) == null || d.get('anomalyFlags', null) is list)
+        && d.get('sessionId', '') == attemptId
+        // The bundle must exist, be Published, and match the attempt
+        // (same exam, fitting kind, same mock when a mock).
+        && exists(/databases/$(database)/documents/jobQuestionBundles/$(d.get('bundleId', '')))
+        && jobBundleData(d.get('bundleId', '')).status == 'published'
+        && jobBundleData(d.get('bundleId', '')).examSlug == d.get('examSlug', null)
+        && jobBundleKindFitsAttemptKind(jobBundleData(d.get('bundleId', '')).kind, d.get('kind', null))
+        && (d.get('kind', null) == 'practice'
+            || jobBundleData(d.get('bundleId', '')).mockId == d.get('mockId', null))
+        && d.get('answers', []).size() <= jobBundleData(d.get('bundleId', '')).questionCount
+        // Session gate (Step 8 decision): the session with the same
+        // ID must exist and already be 'submitted' for this bundle.
+        // An in-progress or abandoned session — or no session —
+        // cannot anchor an attempt.
+        && exists(/databases/$(database)/documents/users/$(userId)/jobSessions/$(attemptId))
+        && jobSessionData(userId, attemptId).status == 'submitted'
+        && jobSessionData(userId, attemptId).bundleId == d.get('bundleId', '');
+    }
+    // Session create validation (Step 3 §2.12). A session starts
+    // 'in-progress' with endsAt null — for a mock, endsAt is set ONCE
+    // after read-back (see validJobSessionUpdate); practice never has
+    // endsAt or clientEndsAtMillis (no timer). PAUSED is NOT a
+    // session-doc status: it exists only as a client-side practice
+    // state (Step 2 §4.5), so it is deliberately absent here.
+    function validJobSessionCreate(d) {
+      return d.keys().hasOnly(['kind', 'mockId', 'bundleId', 'examSlug',
+             'status', 'startedAt', 'endsAt', 'questionRefs', 'answers',
+             'currentQuestion', 'lastSyncedAt', 'clientEndsAtMillis',
+             'submittedAt', 'createdAt', 'updatedAt'])
+        && d.keys().hasAll(['kind', 'mockId', 'bundleId', 'examSlug',
+             'status', 'startedAt', 'endsAt', 'questionRefs', 'answers',
+             'currentQuestion', 'lastSyncedAt', 'clientEndsAtMillis',
+             'submittedAt', 'createdAt', 'updatedAt'])
+        && d.get('kind', null) in ['practice', 'mock']
+        && ((d.get('kind', null) == 'mock' && d.get('mockId', null) is string
+              && d.get('mockId', '').size() > 0)
+            || (d.get('kind', null) == 'practice' && d.get('mockId', null) == null))
+        && d.get('bundleId', null) is string
+        && d.get('examSlug', null) in jobExamSlugs()
+        && d.get('status', '') == 'in-progress'
+        && d.get('startedAt', null) is timestamp
+        && d.get('endsAt', null) == null
+        && d.get('questionRefs', null) is list
+        && d.get('questionRefs', []).size() >= 1
+        && d.get('answers', null) is map
+        && d.get('currentQuestion', null) is int && d.get('currentQuestion', 0) >= 1
+        && d.get('lastSyncedAt', null) is timestamp
+        && ((d.get('kind', null) == 'practice' && d.get('clientEndsAtMillis', null) == null)
+            || (d.get('kind', null) == 'mock'
+                && (d.get('clientEndsAtMillis', null) == null || d.get('clientEndsAtMillis', null) is number)))
+        && d.get('submittedAt', null) == null
+        && d.get('createdAt', null) is timestamp
+        && d.get('updatedAt', null) is timestamp
+        && exists(/databases/$(database)/documents/jobQuestionBundles/$(d.get('bundleId', '')))
+        && jobBundleData(d.get('bundleId', '')).status == 'published'
+        && jobBundleData(d.get('bundleId', '')).examSlug == d.get('examSlug', null)
+        && jobBundleKindFitsAttemptKind(jobBundleData(d.get('bundleId', '')).kind, d.get('kind', null))
+        && (d.get('kind', null) == 'practice'
+            || jobBundleData(d.get('bundleId', '')).mockId == d.get('mockId', null));
+    }
+    // Session update validation (d = new doc, old = existing doc).
+    // Only called while old.status == 'in-progress' (enforced in the
+    // match) and only for the autosave/transition keys (enforced by
+    // affectedKeys in the match). submittedAt is set exactly on the
+    // in-progress -> submitted transition; endsAt is set ONCE from
+    // null and never changed after; practice never gets an endsAt.
+    function validJobSessionUpdate(d, old) {
+      return d.get('status', '') in ['in-progress', 'submitted', 'abandoned']
+        && ((d.get('status', '') == 'submitted' && d.get('submittedAt', null) is timestamp)
+            || (d.get('status', '') != 'submitted' && d.get('submittedAt', null) == null))
+        && d.get('answers', null) is map
+        && d.get('currentQuestion', null) is int && d.get('currentQuestion', 0) >= 1
+        && d.get('lastSyncedAt', null) is timestamp
+        && d.get('updatedAt', null) is timestamp
+        && ((old.get('endsAt', null) == null
+              && (d.get('endsAt', null) == null || d.get('endsAt', null) is timestamp))
+            || (old.get('endsAt', null) != null && d.get('endsAt', null) == old.get('endsAt', null)))
+        && (old.get('kind', '') != 'practice' || d.get('endsAt', null) == null)
+        && ((old.get('kind', '') == 'practice' && d.get('clientEndsAtMillis', null) == null)
+            || (old.get('kind', '') == 'mock'
+                && (d.get('clientEndsAtMillis', null) == null || d.get('clientEndsAtMillis', null) is number)));
+    }
+
     // ---------- users.verificationStatus ----------
     // OWNER DECISION 21 Nov 2026 — student identity verification is
     // REMOVED entirely. `users.verificationStatus` is ONLY the mirror of
@@ -2603,32 +2817,42 @@ service cloud.firestore {
       allow update: if false;
       allow delete: if isAdmin();
     }
-    // users/{uid}/jobAttempts — the minimal attempt anchor (Step 7
-    // ONLY, for the receipt gate). The full attempt engine (answers,
-    // timing, scoring) is Steps 8/9, which EXTEND these rules, never
-    // replace them. An attempt is created in-progress, submitted
-    // exactly once, and never changed or deleted after that (§4.4:
-    // submitted attempts are immutable, even for Admin).
+    // users/{uid}/jobAttempts — FULL attempt (Step 8, Step 3 §2.11).
+    // Created ONCE at submit with status 'submitted' and the full
+    // fields; the in-progress lifecycle lives in jobSessions (below).
+    // The Step 7 minimal anchor (create in-progress, update once to
+    // submitted) is REPLACED, not extended: a second submit is an
+    // update, and updates are denied, so the doc-ID (= session ID)
+    // stays the idempotency key and no orphan in-progress attempt can
+    // ever be stranded (deletes are forbidden for everyone, even
+    // Admin — submitted attempts are immutable, §4.4). An attempt may
+    // only be created when its session is already 'submitted' (the
+    // session gate in validJobAttemptCreate).
     match /users/{userId}/jobAttempts/{attemptId} {
       allow read: if isOwner(userId) || isModerator();
       allow create: if isOwner(userId) && callerActive()
-        && request.resource.data.keys().hasOnly(['userId', 'bundleId',
-             'kind', 'status', 'startedAt', 'submittedAt', 'updatedAt'])
-        && request.resource.data.get('userId', '') == userId
-        && request.resource.data.get('status', '') == 'in-progress'
-        && request.resource.data.get('bundleId', null) is string
-        && request.resource.data.get('bundleId', '').size() <= 200
-        && request.resource.data.get('kind', null) in ['topic', 'mock', 'daily', 'weekly', 'previous']
-        && request.resource.data.get('startedAt', null) is timestamp
-        // No attempts on drafts: the bundle must exist and be Published.
-        && exists(/databases/$(database)/documents/jobQuestionBundles/$(request.resource.data.get('bundleId', '')))
-        && get(/databases/$(database)/documents/jobQuestionBundles/$(request.resource.data.get('bundleId', ''))).data.status == 'published';
+        && validJobAttemptCreate(request.resource.data, userId, attemptId);
+      allow update, delete: if false;
+    }
+
+    // users/{uid}/jobSessions — live session (Step 8, Step 3 §2.12).
+    // Created in-progress, autosaved while in-progress, then exactly
+    // one terminal transition (submitted or abandoned) — after that
+    // the doc is frozen. Deletes are forbidden for everyone, even
+    // Admin: an abandoned session is the audit trail (a student who
+    // abandons a mock leaves a record; the attempt is simply never
+    // created for it).
+    match /users/{userId}/jobSessions/{sessionId} {
+      allow read: if isOwner(userId) || isModerator();
+      allow create: if isOwner(userId) && callerActive()
+        && validJobSessionCreate(request.resource.data);
       allow update: if isOwner(userId) && callerActive()
         && resource.data.get('status', '') == 'in-progress'
-        && request.resource.data.get('status', '') == 'submitted'
-        && request.resource.data.get('submittedAt', null) is timestamp
         && request.resource.data.diff(resource.data).affectedKeys()
-             .hasOnly(['status', 'submittedAt', 'updatedAt']);
+             .hasOnly(['answers', 'currentQuestion', 'lastSyncedAt',
+                       'updatedAt', 'endsAt', 'clientEndsAtMillis',
+                       'status', 'submittedAt'])
+        && validJobSessionUpdate(request.resource.data, resource.data);
       allow delete: if false;
     }
 
