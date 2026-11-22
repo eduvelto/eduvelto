@@ -227,7 +227,11 @@ export function patternFromRulesSnapshot(
   if (typeof snapshot.scoringConfigVersion !== 'string' || snapshot.scoringConfigVersion.length === 0) {
     throw new Error('patternFromRulesSnapshot: snapshot scoringConfigVersion is required');
   }
-  const label = JOB_EXAM_PATTERN_LABELS[examSlug] ?? 'যাচাইকৃত ধরন';
+  // Unmapped slug: never claim a verified pattern — the label must
+  // say the pattern is unverified (SF4, 22 Nov 2026: the old
+  // 'যাচাইকৃত ধরন' default would have mislabelled a future mock
+  // for dgfood/cag/etc.).
+  const label = JOB_EXAM_PATTERN_LABELS[examSlug] ?? 'ধরন যাচাই বাকি';
   return {
     examSlug,
     questionCount: snapshot.questionCount,

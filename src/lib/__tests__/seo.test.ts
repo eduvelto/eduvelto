@@ -15,10 +15,19 @@
  *      any mention must carry "শীঘ্রই আসছে" (22 Nov 2026, current
  *      plan: no practice UI on live); per-exam descriptions state the
  *      verified pattern honestly (Bank penalty unverified, NTRCA
- *      last-verified 18th, the rest unverified / scope pending).
+ *      last-verified 18th, Primary verified per Recruitment Rules
+ *      2025, the rest unverified / scope pending).
  *  (7) Organization JSON-LD names the founder (owner 22 Nov 18:24)
  *      with no private details (no DOB/address/phone).
  *  (8) sitemap.xml lists exactly the SITEMAP_URLS (no drift).
+ *  (9) A "যাচাইকৃত ধরন" claim is gated on patternStatus (SF1/SF2/
+ *      SF3, 22 Nov 2026): a per-exam description may say it only when
+ *      jobPatternStatus(slug) is 'verified' (BCS, Primary Teacher —
+ *      the latter per Recruitment Rules 2025, 28 Aug 2025) or
+ *      'last_verified' (NTRCA, always with the "শেষ" qualifier);
+ *      collective descriptions (/jobs, /admissions,
+ *      /admissions/national-university) never claim a verified
+ *      pattern, because they also cover Bank (not_verified) and NU.
  *
  * Runs under plain node: resolveRouteSeo is pure (jobExams.ts has no
  * imports). Run with `npm run test:unit`.
@@ -27,6 +36,7 @@ import { describe, it, expect } from 'vitest';
 import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { resolveRouteSeo, ORGANIZATION_JSON_LD, SITE_URL } from '../seo';
+import { jobPatternStatus } from '../jobExams';
 
 const FORBIDDEN_RANK_CLAIM = /(^|[^ক])১ নম্বর|#1|number 1|নম্বর ১|নাম্বার ১|নাম্বার ওয়ান/i;
 
@@ -171,10 +181,57 @@ describe('resolveRouteSeo — public routes', () => {
     expect(ntrca.description).toContain('১৮তম');
     const primary = resolveRouteSeo('/jobs/primary-teacher')!;
     expect(primary.description).toContain('৯০ MCQ');
+    // SF3 (22 Nov 2026): Primary KEEPS the verified label — its
+    // pattern is verified against the Recruitment Rules 2025
+    // (jobExams.ts patternStatus 'verified', negativeMarkingVerified).
+    expect(primary.description).toContain('যাচাইকৃত ধরন');
     const dgfood = resolveRouteSeo('/jobs/dgfood')!;
     expect(dgfood.description).toContain('যাচাই বাকি');
     const it = resolveRouteSeo('/jobs/it-professional')!;
     expect(it.description).toContain('পরিধি নির্ধারণ বাকি');
+  });
+
+  it('a "যাচাইকৃত ধরন" claim appears only for a verified pattern', () => {
+    // SF1/SF2 (22 Nov 2026): the collective /jobs description once
+    // claimed a verified pattern for Bank too, and the NU
+    // descriptions claimed one for admissions. Collective copy covers
+    // exams whose patterns are NOT verified, so it may never use the
+    // word "যাচাইকৃত" at all.
+    for (const path of ['/jobs', '/admissions', '/admissions/national-university']) {
+      const seo = resolveRouteSeo(path)!;
+      expect(seo.description, path).not.toContain('যাচাইকৃত');
+    }
+    // Per-exam copy: "যাচাইকৃত ধরন" only when the patternStatus is
+    // 'verified' (BCS, Primary Teacher) or 'last_verified' (NTRCA,
+    // always with the "শেষ" qualifier). Anything else — Bank
+    // (not_verified as a whole config), the circular-based exams,
+    // IT (scope pending) — must not carry it.
+    for (const slug of [
+      'bcs',
+      'bank',
+      'primary-teacher',
+      'ntrca',
+      'dgfood',
+      'bpsc-non-cadre',
+      'cag',
+      'bfsa',
+      'others',
+      'ministries',
+      'defence',
+      'autonomous',
+      'private-ngo',
+      'it-professional',
+    ]) {
+      const seo = resolveRouteSeo(`/jobs/${slug}`)!;
+      const status = jobPatternStatus(slug);
+      if (status === 'verified' || status === 'last_verified') {
+        if (status === 'last_verified') {
+          expect(seo.description, slug).toContain('শেষ যাচাইকৃত');
+        }
+      } else {
+        expect(seo.description, slug).not.toContain('যাচাইকৃত ধরন');
+      }
+    }
   });
 
   it('/skills resolves to an honest coming-soon entry', () => {

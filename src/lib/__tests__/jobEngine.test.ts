@@ -24,6 +24,7 @@ import {
   jobExamPattern,
   jobTopicLabelBn,
   orderQuestionsForMode,
+  patternFromRulesSnapshot,
   remainingMillis,
   scorePracticeAttempt,
   sessionProgress,
@@ -169,6 +170,25 @@ describe('exam patterns', () => {
 
   it('p7: the result label is the binding practice label', () => {
     expect(JOB_PRACTICE_RESULT_LABEL).toBe('অনুশীলন ফলাফল — নিয়োগ পরীক্ষার ফল নয়');
+  });
+
+  it('p8: patternFromRulesSnapshot defaults an unmapped slug to an honest unverified label', () => {
+    // SF4 (22 Nov 2026): the old fallback claimed 'যাচাইকৃত ধরন'
+    // for any slug missing from the label map — a future mock for
+    // dgfood/cag/etc. would have been mislabelled. The fallback must
+    // say the pattern is unverified.
+    const p = patternFromRulesSnapshot('dgfood', {
+      questionCount: 100,
+      timeMinutes: 60,
+      marksPerQuestion: 1,
+      negativeMarking: 0.25,
+      negativeMarkingVerified: false,
+      passPercent: null,
+      scoringConfigVersion: 'test-v1',
+    });
+    expect(p.patternLabel).toBe('ধরন যাচাই বাকি');
+    expect(p.questionCount).toBe(100);
+    expect(p.timeMinutes).toBe(60);
   });
 });
 
