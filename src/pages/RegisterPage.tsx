@@ -1,13 +1,13 @@
 // Eduvelto — registration (Steps 1 + 5).
-// Email/password sign-up + Google sign-in. The user picks ONE role
+// Email/password sign-up ONLY. The user picks ONE role
 // (student / teacher / guardian) and fills that role's academic fields
 // BEFORE the account is created. Email sign-up creates the profile
-// with the chosen role in one step; Google sign-in holds profile
-// creation and sends the user to /register/role to choose (see
-// lib/auth.tsx — role-setup hold). Registering never grants a
-// "verified" badge: teachers are 'pending' until an Admin verifies
-// them in the admin dashboard, and guardian links need child
-// confirmation + Admin activation.
+// with the chosen role in one step. Google sign-in REMOVED 22 Nov 2026
+// by owner decision (it kept failing; everyone registers with
+// email/password). Registering never grants a "verified" badge:
+// teachers are 'pending' until an Admin verifies them in the admin
+// dashboard, and guardian links need child confirmation + Admin
+// activation.
 import { useEffect, useState, type FormEvent } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { PageShell } from '../components/PageShell';
@@ -49,7 +49,7 @@ const buttonStyle: React.CSSProperties = {
 };
 
 export default function RegisterPage() {
-  const { signUp, signInWithGoogle, user, error, errorCode, loading } = useAuth();
+  const { signUp, user, error, errorCode, loading } = useAuth();
   const navigate = useNavigate();
   const [displayName, setDisplayName] = useState('');
   const [email, setEmail] = useState('');
@@ -74,10 +74,9 @@ export default function RegisterPage() {
   const s = strings.auth;
   const d = strings.dashboard;
 
-  // Google sign-in is a redirect: after Google sends a new user back,
-  // `user` appears via the auth listener (no promise resolves here).
-  // When the role-setup hold is set, send them to /register/role to
-  // choose their role instead of showing "already signed in".
+  // Role-setup hold (legacy, from the removed Google sign-in): if a hold
+  // is stored, send the user to /register/role to choose their role
+  // instead of showing "already signed in". No new hold is ever set now.
   useEffect(() => {
     if (user && isRoleSetupHoldStored()) navigate('/register/role');
   }, [user, navigate]);
@@ -148,20 +147,6 @@ export default function RegisterPage() {
       navigate(role === 'teacher' ? '/teacher/register' : '/dashboard');
     } catch {
       // The friendly message is already in `error` from the AuthProvider.
-    } finally {
-      setBusy(false);
-    }
-  }
-
-  async function onGoogle(): Promise<void> {
-    setLocalError(null);
-    setBusy(true);
-    try {
-      // Hold profile creation: /register/role creates it with the role.
-      await signInWithGoogle({ holdForRoleSetup: true });
-      navigate('/register/role');
-    } catch {
-      // Friendly message is in `error`.
     } finally {
       setBusy(false);
     }
@@ -329,15 +314,6 @@ export default function RegisterPage() {
           {busy ? <T bn={strings.common.loading.bn} en={strings.common.loading.en} /> : <T bn={s.registerButton.bn} en={s.registerButton.en} />}
         </button>
       </form>
-      <p style={{ margin: '16px 0' }}>{t({ bn: '— অথবা —', en: '— or —' })}</p>
-      <button
-        style={{ ...buttonStyle, background: '#fff', color: '#111', border: '1px solid #aaa' }}
-        type="button"
-        onClick={() => void onGoogle()}
-        disabled={busy || loading}
-      >
-        <T bn={s.loginWithGoogle.bn} en={s.loginWithGoogle.en} />
-      </button>
       <p style={{ marginTop: 20 }}>
         {t(s.haveAccount)} <Link to="/login">{t(s.loginTitle)}</Link>
       </p>

@@ -1,6 +1,10 @@
 // Eduvelto — sign-in (Step 1).
-// Email/password sign-in + Google sign-in + password reset. The session
+// Email/password sign-in + password reset. The session
 // survives a page reload (Firebase Auth local persistence).
+// Google sign-in REMOVED 22 Nov 2026 by owner decision (it kept failing;
+// everyone registers with email/password). The button is gone; the
+// Google provider stays enabled in the console so the change is
+// reversible and existing linked accounts are not destroyed.
 import { useEffect, useState, type FormEvent } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { PageShell } from '../components/PageShell';
@@ -31,7 +35,7 @@ const buttonStyle: React.CSSProperties = {
 };
 
 export default function LoginPage() {
-  const { signIn, signInWithGoogle, resetPassword, user, error, errorCode, loading } = useAuth();
+  const { signIn, resetPassword, user, error, errorCode, loading } = useAuth();
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -42,9 +46,7 @@ export default function LoginPage() {
   const { t } = useLanguage();
   const s = strings.auth;
 
-  // Google sign-in is a redirect: after Google sends the user back,
-  // `user` appears via the auth listener (no promise resolves here),
-  // so navigate then. Also covers opening /login while signed in.
+  // Opening /login while already signed in goes to the profile.
   useEffect(() => {
     if (user) navigate('/profile');
   }, [user, navigate]);
@@ -77,19 +79,6 @@ export default function LoginPage() {
       navigate('/profile');
     } catch {
       // The friendly message is already in `error` from the AuthProvider.
-    } finally {
-      setBusy(false);
-    }
-  }
-
-  async function onGoogle(): Promise<void> {
-    setLocalError(null);
-    setBusy(true);
-    try {
-      await signInWithGoogle();
-      navigate('/profile');
-    } catch {
-      // Friendly message is in `error`.
     } finally {
       setBusy(false);
     }
@@ -144,15 +133,6 @@ export default function LoginPage() {
           {busy ? <T bn={strings.common.loading.bn} en={strings.common.loading.en} /> : <T bn={s.loginButton.bn} en={s.loginButton.en} />}
         </button>
       </form>
-      <p style={{ margin: '16px 0' }}>{t({ bn: '— অথবা —', en: '— or —' })}</p>
-      <button
-        style={{ ...buttonStyle, background: '#fff', color: '#111', border: '1px solid #aaa' }}
-        type="button"
-        onClick={() => void onGoogle()}
-        disabled={busy || loading}
-      >
-        <T bn={s.loginWithGoogle.bn} en={s.loginWithGoogle.en} />
-      </button>
       <p style={{ marginTop: 20 }}>
         {t(s.noAccount)} <Link to="/register">{t(s.registerTitle)}</Link>
       </p>
