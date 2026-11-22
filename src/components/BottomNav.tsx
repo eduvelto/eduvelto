@@ -101,7 +101,7 @@ const MENU_SECTIONS = [
 ];
 
 export default function BottomNav(props: { bottomOffsetPx: number }) {
-  const { t } = useLanguage();
+  const { t, tTab } = useLanguage();
   const { user, profile, signOut } = useAuth();
   const location = useLocation();
   const [sheet, setSheet] = useState<Sheet>(null);
@@ -125,15 +125,15 @@ export default function BottomNav(props: { bottomOffsetPx: number }) {
       <nav className="ev-bottom-nav" style={{ bottom: props.bottomOffsetPx }} aria-label={t({ bn: 'মোবাইল মেনু', en: 'Mobile menu' })}>
         <NavLink to="/" end className={({ isActive }) => `ev-bottom-nav-link${isActive ? ' ev-bottom-nav-link-active' : ''}`}>
           <HomeIcon active={location.pathname === '/'} />
-          <span>{t({ bn: 'হোম', en: 'Home' })}</span>
+          <span>{tTab({ bn: 'হোম', en: 'Home' })}</span>
         </NavLink>
         <NavLink to="/library" className={({ isActive }) => `ev-bottom-nav-link${isActive ? ' ev-bottom-nav-link-active' : ''}`}>
           <CoursesIcon active={location.pathname.startsWith('/library') || location.pathname.startsWith('/book')} />
-          <span>{t({ bn: 'আমার কোর্স', en: 'My Courses' })}</span>
+          <span>{tTab({ bn: 'আমার কোর্স', en: 'My Courses' })}</span>
         </NavLink>
         <NavLink to="/progress" className={({ isActive }) => `ev-bottom-nav-link${isActive ? ' ev-bottom-nav-link-active' : ''}`}>
           <ProgressIcon active={location.pathname.startsWith('/progress')} />
-          <span>{t({ bn: 'প্রগ্রেস', en: 'Progress' })}</span>
+          <span>{tTab({ bn: 'প্রগ্রেস', en: 'Progress' })}</span>
         </NavLink>
         <button
           type="button"
@@ -142,7 +142,7 @@ export default function BottomNav(props: { bottomOffsetPx: number }) {
           onClick={() => setSheet(sheet === 'more' ? null : 'more')}
         >
           <GridIcon />
-          <span>{t({ bn: 'বেশি কিছু', en: 'More' })}</span>
+          <span>{tTab({ bn: 'বেশি কিছু', en: 'More' })}</span>
         </button>
         <button
           type="button"
@@ -151,7 +151,7 @@ export default function BottomNav(props: { bottomOffsetPx: number }) {
           onClick={() => setSheet(sheet === 'menu' ? null : 'menu')}
         >
           <MenuIcon />
-          <span>{t({ bn: 'মেনু', en: 'Menu' })}</span>
+          <span>{tTab({ bn: 'মেনু', en: 'Menu' })}</span>
         </button>
       </nav>
 

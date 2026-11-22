@@ -182,7 +182,7 @@ const SECONDARY: MenuItem[] = [
 ];
 
 export default function HeaderNav() {
-  const { t } = useLanguage();
+  const { t, tTab } = useLanguage();
   const { user, profile, loading, signOut } = useAuth();
   const location = useLocation();
   const [menuOpen, setMenuOpen] = useState(false);
@@ -273,7 +273,7 @@ export default function HeaderNav() {
 
       <nav aria-label={t({ bn: 'প্রধান মেনু', en: 'Main menu' })} id="ev-main-nav" className={`ev-header-nav${menuOpen ? ' ev-header-nav-open' : ''}`}>
         <NavLink to="/" end className={({ isActive }) => `ev-hnav-home${isActive ? ' ev-hnav-home-active' : ''}`}>
-          <HomeIcon /> {t({ bn: 'হোম', en: 'Home' })}
+          <HomeIcon /> {tTab({ bn: 'হোম', en: 'Home' })}
         </NavLink>
         {MENUS.map((menu) => {
           const open = openMenu === menu.id;
@@ -286,7 +286,7 @@ export default function HeaderNav() {
                 aria-haspopup="true"
                 onClick={() => setOpenMenu(open ? null : menu.id)}
               >
-                {menu.icon} {t({ bn: menu.bn, en: menu.en })} <ChevronIcon open={open} />
+                {menu.icon} {tTab({ bn: menu.bn, en: menu.en })} <ChevronIcon open={open} />
               </button>
               {open ? (
                 <div className="ev-hnav-panel" role="menu">
@@ -307,12 +307,12 @@ export default function HeaderNav() {
         <span className="ev-hnav-secondary">
           {SECONDARY.map((item) => (
             <NavLink key={item.to} to={item.to} className={({ isActive }) => `ev-navlink${isActive ? ' ev-navlink-active' : ''}`}>
-              {t({ bn: item.bn, en: item.en })}
+              {tTab({ bn: item.bn, en: item.en })}
             </NavLink>
           ))}
           {profile?.role === 'owner' ? (
             <NavLink to="/admin" className={({ isActive }) => `ev-navlink${isActive ? ' ev-navlink-active' : ''}`} style={{ color: '#8A6100', fontWeight: 700 }}>
-              {t({ bn: 'অ্যাডমিন', en: 'Admin' })}
+              {tTab({ bn: 'অ্যাডমিন', en: 'Admin' })}
             </NavLink>
           ) : null}
         </span>
@@ -343,10 +343,10 @@ export default function HeaderNav() {
           {loading ? null : user ? (
             <>
               <NavLink to="/dashboard" className={({ isActive }) => `ev-navlink${isActive ? ' ev-navlink-active' : ''}`}>
-                {t({ bn: 'ড্যাশবোর্ড', en: 'Dashboard' })}
+                {tTab({ bn: 'ড্যাশবোর্ড', en: 'Dashboard' })}
               </NavLink>
               <NavLink to="/profile" className={({ isActive }) => `ev-navlink${isActive ? ' ev-navlink-active' : ''}`}>
-                {profile?.displayName ?? t({ bn: 'প্রোফাইল', en: 'Profile' })}
+                {profile?.displayName ?? tTab({ bn: 'প্রোফাইল', en: 'Profile' })}
               </NavLink>
               <button type="button" onClick={() => void signOut()} className="ev-btn ev-btn-sm ev-header-btn-outline">
                 {t({ bn: 'লগআউট', en: 'Log out' })}
