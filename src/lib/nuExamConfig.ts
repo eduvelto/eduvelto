@@ -109,6 +109,35 @@ export function nuFullMockConfigSeed(): NuExamConfig {
   };
 }
 
+/** The daily small-mock config (SEED ONLY — `status: 'draft'`).
+ * 25 MCQ / 25 minutes / no negative marking. Mirrors
+ * `team/nu-exam-config-seed-2026-11-22.json` (`nu-daily-2025-26-v1`).
+ * Draft until the owner decides the daily publish time (NU-Q11). */
+export function nuDailyMockConfigSeed(): NuExamConfig {
+  return {
+    configId: 'nu-daily-2025-26-v1',
+    examType: 'NU_DAILY',
+    questionMode: 'MCQ',
+    totalQuestions: 25,
+    durationSeconds: 1500,
+    marking: { correct: 1, incorrect: 0, unanswered: 0, negativeMarking: false },
+    passMark: { value: 35, displayOnly: true },
+    sections: {
+      bangla: 5,
+      english: 5,
+      generalKnowledge: 5,
+      groupSubjects: 10,
+      groupSubjectsDetail: null,
+    },
+    meritCalculationEnabled: false,
+    officialRankEnabled: false,
+    vivaEnabled: false,
+    circularVersion: NU_CIRCULAR_VERSION,
+    configVersion: 1,
+    status: 'draft',
+  };
+}
+
 /** The verified 2025-26 circular config, as a Firestore document
  * payload (SEED ONLY). `examDate` is null — never announced. */
 export function nuCircularConfigSeed(): NuCircularConfig {

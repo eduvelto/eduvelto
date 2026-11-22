@@ -334,6 +334,7 @@ export const AUDIT_ACTION_LABELS: Record<string, { bn: string; en: string }> = {
   'feature-enabled': { bn: 'ফিচার চালু', en: 'Feature enabled' },
   'feature-disabled': { bn: 'ফিচার বন্ধ', en: 'Feature disabled' },
   'backup-exported': { bn: 'ব্যাকআপ সংরক্ষণ', en: 'Backup exported' },
+  'nu-structure-applied': { bn: 'NU কাঠামোর সীড প্রয়োগ', en: 'NU structure seed applied' },
   'user-profile-viewed': { bn: 'প্রোফাইল দেখা', en: 'Profile viewed' },
   'support-thread-viewed': { bn: 'সাপোর্ট থ্রেড দেখা', en: 'Support thread viewed' },
   'support-message-sent': { bn: 'সাপোর্ট মেসেজ পাঠানো', en: 'Support message sent' },
