@@ -20,6 +20,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { PageShell, EmptyState } from '../components/PageShell';
 import { AlertBox, Card, Chip, LinkButton, SkeletonCards, StatCard } from '../components/ui';
+import LoginWall from '../components/LoginWall';
 import { useAuth } from '../lib/auth';
 import { useLanguage } from '../i18n/LanguageContext';
 import {
@@ -79,7 +80,7 @@ function formatDate(a: QuizAttempt, lang: 'bn' | 'en'): string {
 }
 
 export default function ExamPage() {
-  const { user } = useAuth();
+  const { user, loading: authLoading } = useAuth();
   const { lang, t } = useLanguage();
   const [pages, setPages] = useState<QuizPageResult[]>([]);
   const [pageIndex, setPageIndex] = useState(0);
@@ -95,7 +96,14 @@ export default function ExamPage() {
     [],
   );
 
+  // AUTH GATING (owner instruction 22 Nov 2026): the exam list is
+  // fetched ONLY for a signed-in user. A quiz document embeds its
+  // questions, so loading the list for a guest would send questions to
+  // a signed-out browser. While auth is loading, the skeleton shows
+  // (never flash the wall at a signed-in user whose session is
+  // restoring).
   useEffect(() => {
+    if (authLoading || !user) return;
     let alive = true;
     setLoading(true);
     loadPage(null)
@@ -114,7 +122,7 @@ export default function ExamPage() {
     return () => {
       alive = false;
     };
-  }, [loadPage]);
+  }, [loadPage, authLoading, user]);
 
   useEffect(() => {
     if (!user) {
@@ -198,6 +206,16 @@ export default function ExamPage() {
 
   function prevPage() {
     setPageIndex((i) => Math.max(0, i - 1));
+  }
+
+  // Signed out (auth settled): the wall — the list was never fetched,
+  // so no questions reached the browser.
+  if (!authLoading && !user) {
+    return (
+      <PageShell titleBn="পরীক্ষা" titleEn="Exam" wide>
+        <LoginWall kind="exam" />
+      </PageShell>
+    );
   }
 
   return (

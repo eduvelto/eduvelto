@@ -6,21 +6,27 @@ import { Link, useParams } from 'react-router-dom';
 import { PageShell } from '../components/PageShell';
 import { AlertBox, Card, Chip, Skeleton, SkeletonCards } from '../components/ui';
 import { getPublishedBook, listPublishedChapters, type Book, type Chapter } from '../lib/content';
+import { useAuth } from '../lib/auth';
 import { useLanguage } from '../i18n/LanguageContext';
 
 export default function BookPage() {
   const { t } = useLanguage();
+  const { user, loading: authLoading } = useAuth();
   const { bookId } = useParams<{ bookId: string }>();
   const [book, setBook] = useState<Book | null>(null);
   const [chapters, setChapters] = useState<Chapter[] | null>(null);
   const [error, setError] = useState('');
 
   function load() {
-    if (!bookId) return;
+    if (!bookId || authLoading) return;
     setError('');
     setBook(null);
     setChapters(null);
-    Promise.all([getPublishedBook(bookId), listPublishedChapters(bookId)])
+    // AUTH GATING (owner instruction 22 Nov 2026): a signed-out visitor
+    // lists ONLY the book's preview chapter (isPreview). The book itself
+    // (title, info, counts) stays public. The effect re-runs when auth
+    // settles, so a signed-in user gets the full list.
+    Promise.all([getPublishedBook(bookId), listPublishedChapters(bookId, { previewOnly: !user })])
       .then(([b, ch]) => {
         setBook(b);
         setChapters(ch);
@@ -31,7 +37,7 @@ export default function BookPage() {
       });
   }
 
-  useEffect(load, [bookId]);
+  useEffect(load, [bookId, authLoading, user]);
 
   return (
     <PageShell titleBn={book ? book.title : 'বই'} titleEn={book ? book.title : 'Book'}>
@@ -65,8 +71,20 @@ export default function BookPage() {
             {t({ bn: 'পাঠসমূহ', en: 'Lessons' })} ({chapters?.length ?? 0})
           </h2>
           {chapters === null ? <SkeletonCards count={3} /> : null}
-          {chapters !== null && chapters.length === 0 ? (
+          {chapters !== null && chapters.length === 0 && user ? (
             <p>{t({ bn: 'এই বইয়ের কোনো পাঠ এখনো প্রকাশিত হয়নি।', en: 'No lessons from this book are published yet.' })}</p>
+          ) : null}
+          {chapters !== null && chapters.length === 0 && !user ? (
+            <Card style={{ borderTop: '4px solid #F1B308' }}>
+              <p style={{ margin: '0 0 8px' }}>
+                {t({ bn: 'এই বইয়ের পাঠ পড়তে লগইন করুন। প্রতিটি বইয়ের প্রথম পাঠটি অতিথি হিসেবে পড়া যায়।', en: 'Sign in to read this book. The first lesson of each book can be read as a guest.' })}
+              </p>
+              <p style={{ margin: 0 }}>
+                <Link to="/login" style={{ fontWeight: 600 }}>{t({ bn: 'লগইন করুন', en: 'Sign in' })}</Link>
+                {' · '}
+                <Link to="/register" style={{ fontWeight: 600 }}>{t({ bn: 'রেজিস্ট্রেশন করুন', en: 'Register' })}</Link>
+              </p>
+            </Card>
           ) : null}
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: 12 }}>
             {(chapters ?? []).map((c: Chapter, i: number) => (
@@ -79,6 +97,18 @@ export default function BookPage() {
               </Card>
             ))}
           </div>
+          {chapters !== null && !user && chapters.length > 0 && book.chapterCount > chapters.length ? (
+            <Card style={{ marginTop: 16, borderTop: '4px solid #F1B308' }}>
+              <p style={{ margin: '0 0 8px' }}>
+                {t({ bn: `এই বইয়ের ${book.chapterCount - chapters.length}টি পাঠ পড়তে লগইন করুন। প্রথম পাঠটি অতিথি হিসেবে পড়া যায়।`, en: `Sign in to read the other ${book.chapterCount - chapters.length} lessons of this book. The first lesson can be read as a guest.` })}
+              </p>
+              <p style={{ margin: 0 }}>
+                <Link to="/login" style={{ fontWeight: 600 }}>{t({ bn: 'লগইন করুন', en: 'Sign in' })}</Link>
+                {' · '}
+                <Link to="/register" style={{ fontWeight: 600 }}>{t({ bn: 'রেজিস্ট্রেশন করুন', en: 'Register' })}</Link>
+              </p>
+            </Card>
+          ) : null}
         </>
       ) : null}
     </PageShell>

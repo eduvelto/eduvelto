@@ -8,9 +8,10 @@
 // attempt and deletes the receipt (see src/lib/exams.ts).
 
 import { useEffect, useRef, useState } from 'react';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { PageShell, EmptyState } from '../components/PageShell';
 import { AlertBox, Button, Card, ProgressBar, Skeleton } from '../components/ui';
+import LoginWall from '../components/LoginWall';
 import { useAuth } from '../lib/auth';
 import { useLanguage } from '../i18n/LanguageContext';
 import {
@@ -32,8 +33,8 @@ function formatTime(totalSeconds: number): string {
 
 export default function QuizPage() {
   const { quizId } = useParams<{ quizId: string }>();
-  const { user } = useAuth();
-  const { lang, t } = useLanguage();
+  const { user, loading } = useAuth();
+  const { t } = useLanguage();
   const navigate = useNavigate();
   const [quiz, setQuiz] = useState<Quiz | null>(null);
   const [notFound, setNotFound] = useState(false);
@@ -45,8 +46,13 @@ export default function QuizPage() {
   const [error, setError] = useState('');
   const submitRef = useRef<(() => void) | null>(null);
 
+  // AUTH GATING (owner instruction 22 Nov 2026): the quiz is fetched
+  // ONLY for a signed-in user. A signed-out visitor never receives the
+  // questions — not even to hide them afterwards. While auth is still
+  // loading, show a skeleton (never flash the wall at a signed-in user
+  // whose session is restoring).
   useEffect(() => {
-    if (!quizId) return;
+    if (!quizId || loading || !user) return;
     let alive = true;
     getPublishedQuiz(quizId)
       .then((q) => {
@@ -61,7 +67,7 @@ export default function QuizPage() {
     return () => {
       alive = false;
     };
-  }, [quizId]);
+  }, [quizId, loading, user]);
 
   const doSubmit = async () => {
     if (!quiz || !user || submitting) return;
@@ -92,6 +98,17 @@ export default function QuizPage() {
     return () => clearTimeout(t);
   }, [secondsLeft]);
 
+  // Signed out (auth settled): the wall — the quiz was never fetched,
+  // so there is nothing to hide. Signed in mid-exam (sign-out) shows
+  // the wall too; the timer cannot submit without a user (doSubmit
+  // guards on user).
+  if (!loading && !user) {
+    return (
+      <PageShell titleBn="পরীক্ষা" titleEn="Exam">
+        <LoginWall kind="exam" />
+      </PageShell>
+    );
+  }
   if (notFound) {
     return (
       <PageShell titleBn="কুইজ" titleEn="Quiz">
@@ -103,19 +120,6 @@ export default function QuizPage() {
     return (
       <PageShell titleBn="কুইজ" titleEn="Quiz">
         <Skeleton lines={5} />
-      </PageShell>
-    );
-  }
-  if (!user) {
-    return (
-      <PageShell titleBn={quiz.title} titleEn="Quiz">
-        <p>
-          {lang === 'bn' ? (
-            <>পরীক্ষা দিতে প্রথমে <Link to="/login">লগইন করুন</Link>।</>
-          ) : (
-            <>Please <Link to="/login">sign in</Link> to take this exam.</>
-          )}
-        </p>
       </PageShell>
     );
   }

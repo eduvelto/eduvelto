@@ -66,6 +66,14 @@ export interface Chapter {
   order: number;
   questionCount: number;
   reviewStatus: string;
+  /**
+   * Auth gating (owner instruction 22 Nov 2026): the FIRST chapter of
+   * each book is the guest preview (`isPreview: true`, set by the
+   * loader). Guests may read preview chapters only; every other
+   * chapter requires login. Missing on live rows until the loader
+   * re-runs — missing means NOT a preview.
+   */
+  isPreview: boolean;
 }
 
 export interface LessonQuestion {
@@ -93,6 +101,13 @@ export interface Lesson {
   questions: LessonQuestion[];
   questionCount: number;
   reviewStatus: string;
+  /**
+   * Auth gating (owner instruction 22 Nov 2026): mirrors its chapter's
+   * isPreview — a lesson is guest-readable only when its chapter is the
+   * book's preview chapter. Missing on live rows until the loader
+   * re-runs — missing means NOT a preview.
+   */
+  isPreview: boolean;
 }
 
 export interface DirectoryRow {
@@ -151,6 +166,9 @@ function toChapter(id: string, d: Record<string, unknown>): Chapter {
     order: (d.order as number) ?? 0,
     questionCount: (d.questionCount as number) ?? 0,
     reviewStatus: (d.reviewStatus as string) ?? '',
+    // Strict: only an explicit true counts (live rows lack the field
+    // until the loader re-runs — they are NOT previews).
+    isPreview: d.isPreview === true,
   };
 }
 
@@ -166,6 +184,8 @@ function toLesson(id: string, d: Record<string, unknown>): Lesson {
     questions: (d.questions as LessonQuestion[]) ?? [],
     questionCount: (d.questionCount as number) ?? 0,
     reviewStatus: (d.reviewStatus as string) ?? '',
+    // Strict: only an explicit true counts (see toChapter).
+    isPreview: d.isPreview === true,
   };
 }
 
@@ -459,25 +479,36 @@ export async function getPublishedBook(bookId: string): Promise<Book | null> {
   return book.reviewStatus === 'Published' ? book : null;
 }
 
-/** Published chapters of one book, in part order (A, B, C, then set 2…). */
+/** Published chapters of one book, in part order (A, B, C, then set 2…).
+ *
+ * Auth gating (owner instruction 22 Nov 2026): a signed-out visitor may
+ * read ONLY the book's preview chapter. Pass `previewOnly: true` for
+ * guests — the query then filters `isPreview == true`, so the rules can
+ * allow it (a query without that filter would be denied outright
+ * whenever the book has a non-preview chapter, because rules never
+ * filter — they allow or deny the whole query). Three equality filters
+ * need no composite index (zigzag merge join), same as the existing
+ * two-filter shape. */
 // The reviewStatus filter is REQUIRED, not just cosmetic: live Firestore
 // rules allow public reads only where reviewStatus == "Published", and a
 // query without that constraint is rejected (permission-denied) whenever
 // the book has any non-Published chapter — which is why /library/:id
 // failed to load at all. Every other public list query (books, directory,
 // quizzes) already carries this filter; chapters was the only one missing
-// it (found by the phase-2 probe, 21 Nov 2026). Two equality filters need
+// it (found by the phase-2 probe, 21 Nov 2026). Equality filters need
 // no composite index (zigzag merge join). The client-side filter stays as
 // a second layer.
-export async function listPublishedChapters(bookId: string): Promise<Chapter[]> {
+export async function listPublishedChapters(
+  bookId: string,
+  opts?: { previewOnly?: boolean },
+): Promise<Chapter[]> {
   if (!db) return [];
-  const snap = await getDocs(
-    query(
-      collection(db, 'chapters'),
-      where('bookId', '==', bookId),
-      where('reviewStatus', '==', 'Published'),
-    ),
-  );
+  const constraints = [
+    where('bookId', '==', bookId),
+    where('reviewStatus', '==', 'Published'),
+  ];
+  if (opts?.previewOnly) constraints.push(where('isPreview', '==', true));
+  const snap = await getDocs(query(collection(db, 'chapters'), ...constraints));
   const chapters = snap.docs
     .map((s) => toChapter(s.id, s.data()))
     .filter((c) => c.reviewStatus === 'Published');
