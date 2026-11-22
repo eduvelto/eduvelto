@@ -321,6 +321,24 @@ async function seed() {
     for (const [id, data] of bundles) {
       await setDoc(doc(db, 'jobQuestionBundles', id), data);
     }
+    // ---- jobMocks (Step 9 audit M1-a) ---- The (a) bound resolves
+    // a mock session's deadline through its mock doc
+    // (rulesSnapshot.timeMinutes). Same fixture caveat as the
+    // Step 8 file: 'bcs-mock-01' is a Step 8 fixture ID, not a
+    // Step 9-shaped mockId — the chain derives the doc-ID from the
+    // bundle's mockId, so this is what the bound reads.
+    await setDoc(doc(db, 'jobMocks', 'bcs-mock-01'), {
+      examSlug: 'bcs', titleBn: 'বিসিএস মডেল টেস্ট ১', titleEn: 'BCS Model Test 1',
+      kind: 'full', bundleId: 'mock__bcs-mock-01',
+      rulesSnapshot: {
+        questionCount: 1, timeMinutes: 120, marksPerQuestion: 1,
+        negativeMarking: 0.5, negativeMarkingVerified: true,
+        passPercent: null, scoringConfigVersion: 'v1',
+      },
+      scheduleDate: null, examSlugCycle: null, status: 'published',
+      retakeAllowed: true, maxAttempts: null,
+      publishedAt: null, publishedBy: null, createdAt: null, updatedAt: null,
+    });
     const keys: Array<[string, Record<string, unknown>]> = [
       ['topic__bcs__bangla__grammar__sandhi', { ...VALID_KEY }],
       ['mock__bcs-mock-01', { ...VALID_KEY, bundleId: 'mock__bcs-mock-01' }],
@@ -482,17 +500,34 @@ describe('Adversarial checklist — creation paths (a1–a4)', () => {
 describe('Adversarial checklist — fabricated attempt (a5, DOCUMENTED LIMITATION)', () => {
   it('(a5-DOCUMENTED-LIMITATION) Student fabricates a WELL-FORMED submitted attempt, mints a receipt and reads a mock key — SUCCEEDS (proves the client-trust limit; NOT a security pass — submitted is client-attested, scores are never Verified)', async () => {
     // 1. Create a session on a Published bundle (in-progress).
+    // Live startedAt (Step 9 audit M1): the forgery must carry a
+    // stored deadline within startedAt + 120min, and the attempt's
+    // submittedAt (now) must be ≤ that deadline — a fixed 08:00
+    // start would already be hours past.
+    const liveStart = new Date(Date.now() - 60 * 1000);
     await assertSucceeds(
       setDoc(doc(asStudent3(), 'users', 'student-3', 'jobSessions', 'attempt-fabricated'), validSession({
         kind: 'mock', mockId: 'bcs-mock-01', bundleId: 'mock__bcs-mock-01',
+        startedAt: liveStart,
         questionRefs: [{ bundleId: 'mock__bcs-mock-01', n: 1, questionId: 'q-published-b' }],
       })),
+    );
+    // 1b. Set the stored deadline ONCE (startedAt + 60min — well
+    // inside the 120-minute M1-a bound; the forger CAN do this:
+    // the bound only stops an UNBOUNDED deadline, not a
+    // well-formed one).
+    await assertSucceeds(
+      updateDoc(doc(asStudent3(), 'users', 'student-3', 'jobSessions', 'attempt-fabricated'), {
+        endsAt: new Date(Date.now() + 60 * 60 * 1000),
+        updatedAt: new Date(),
+        revision: 2,
+      }),
     );
     // 2. Mark the session submitted (the Step 8 submit flow).
     await assertSucceeds(
       updateDoc(doc(asStudent3(), 'users', 'student-3', 'jobSessions', 'attempt-fabricated'), {
         status: 'submitted', submittedAt: new Date(),
-        revision: 2,
+        revision: 3,
       }),
     );
     // 3. Create a WELL-FORMED submitted attempt — one answered

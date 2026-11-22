@@ -674,8 +674,10 @@ service cloud.firestore {
     // jobReceipts; never claim one-use again. A receipt opens a
     // key ONLY if it is ≤10 minutes old AND not from the future
     // AND it anchors to a real SUBMITTED attempt owned by the
-    // caller for this bundle. A bare/forged receipt without a
-    // submission opens nothing. Honest residual limit (Step 3
+    // caller for this bundle — OR (Step 9, Design G) to a real
+    // SUBMITTED mock SESSION for this bundle (the scoring window:
+    // session submitted, attempt not yet created). A bare/forged
+    // receipt without a submission opens nothing. Honest residual limit (Step 3
     // §4.3, stands): a determined student can still forge a
     // submitted attempt + receipt in the console and read a key —
     // on Spark this cannot be fully closed; scores are therefore
@@ -693,16 +695,30 @@ service cloud.firestore {
     function jobReceiptAttemptData(bundleId) {
       return get(/databases/$(database)/documents/users/$(uid())/jobAttempts/$(jobReceiptData(bundleId).attemptId)).data;
     }
+    // Step 9 (Design G): the receipt may ALSO anchor to a
+    // SUBMITTED mock SESSION (same doc-ID as the future attempt).
+    // The session anchor is what makes honest mock scoring
+    // possible at all: the key is read AFTER the session is
+    // submitted (answers frozen, terminal) but BEFORE the attempt
+    // exists. An in-progress session anchors NOTHING (q66/q75
+    // still deny it) — the P0-06 hole stays closed.
+    function jobReceiptSessionData(bundleId) {
+      return get(/databases/$(database)/documents/users/$(uid())/jobSessions/$(jobReceiptData(bundleId).attemptId)).data;
+    }
     function hasFreshJobReceipt(bundleId) {
       return signedIn() && callerActive()
         && exists(/databases/$(database)/documents/jobReceipts/$(uid() + '_' + bundleId))
         && jobReceiptData(bundleId).createdAt > request.time - duration.value(10, 'm')
         && jobReceiptData(bundleId).createdAt <= request.time
         && jobReceiptData(bundleId).attemptId is string
-        && exists(/databases/$(database)/documents/users/$(uid())/jobAttempts/$(jobReceiptData(bundleId).attemptId))
-        && jobReceiptAttemptData(bundleId).status == 'submitted'
-        && jobReceiptAttemptData(bundleId).bundleId == bundleId
-        && jobReceiptAttemptData(bundleId).userId == uid();
+        && ((exists(/databases/$(database)/documents/users/$(uid())/jobAttempts/$(jobReceiptData(bundleId).attemptId))
+              && jobReceiptAttemptData(bundleId).status == 'submitted'
+              && jobReceiptAttemptData(bundleId).bundleId == bundleId
+              && jobReceiptAttemptData(bundleId).userId == uid())
+            || (exists(/databases/$(database)/documents/users/$(uid())/jobSessions/$(jobReceiptData(bundleId).attemptId))
+              && jobReceiptSessionData(bundleId).status == 'submitted'
+              && jobReceiptSessionData(bundleId).bundleId == bundleId
+              && jobReceiptSessionData(bundleId).kind == 'mock'));
     }
 
     // ---------- Step 8: practice engine (jobAttempts + jobSessions) ----------
@@ -887,7 +903,30 @@ service cloud.firestore {
         && jobSessionDataAfter(userId, attemptId).kind == d.get('kind', null)
         && jobSessionDataAfter(userId, attemptId).examSlug == d.get('examSlug', null)
         && jobSessionDataAfter(userId, attemptId).mockId == d.get('mockId', null)
-        && jobSessionDataAfter(userId, attemptId).questionRefs.size() == d.get('answers', []).size();
+        && jobSessionDataAfter(userId, attemptId).questionRefs.size() == d.get('answers', []).size()
+        // Step 9 (audit M1-b): a TIMED mock cannot run forever —
+        // the attempt's submittedAt must be ≤ the session's STORED
+        // deadline (endsAt). Practice has no deadline (endsAt is
+        // always null) and skips this check. endsAt must be a real
+        // timestamp: a mock whose deadline was never stored cannot
+        // be submitted at all (the client must set it once after
+        // read-back — the M1-a bound). submittedAt is a
+        // serverTimestamp sentinel, so this compares server time
+        // against the stored server deadline — a client clock trick
+        // cannot stretch the exam.
+        // ONE call site, via get() (not getAfter): the submit batch
+        // never changes endsAt, so the stored value IS the
+        // post-write value. The attempt validator is already near
+        // the 1000-expression budget (a batched submit evaluates
+        // the session update + the attempt create in one request),
+        // so this check must not add a second session read. When
+        // endsAt is null (deadline never stored) the comparison
+        // errors and the allow denies — which is the correct
+        // outcome. The session's existence is already established
+        // by the gate above, so the get() cannot error on a
+        // missing doc.
+        && (d.get('kind', null) == 'practice'
+            || d.get('submittedAt', null) <= get(/databases/$(database)/documents/users/$(userId)/jobSessions/$(attemptId)).data.get('endsAt', null));
     }
     // Session create validation (Step 3 §2.12). A session starts
     // 'in-progress' with endsAt null — for a mock, endsAt is set ONCE
@@ -948,6 +987,38 @@ service cloud.firestore {
     // affectedKeys in the match). submittedAt is set exactly on the
     // in-progress -> submitted transition; endsAt is set ONCE from
     // null and never changed after; practice never gets an endsAt.
+    // Step 9 (audit M1-a): the stored mock deadline is BOUNDED.
+    // endsAt may only move null → timestamp when it lands in
+    // (startedAt, startedAt + the mock's rulesSnapshot.timeMinutes]
+    // — the duration comes from the mock doc (jobMocks), reached
+    // via the bundle (kind 'mock' → doc-ID is the bundle's mockId;
+    // daily/weekly → doc-ID is the bundleId itself). The chain runs
+    // ONLY when endsAt is actually being set (short-circuit: an
+    // autosave, or the already-set case, never evaluates it), so
+    // the extra gets cost nothing on the hot path. Practice never
+    // sets endsAt (enforced by the clause below). If the mock doc
+    // is gone, the deadline cannot be verified and the set is
+    // denied — a running mock whose definition vanished cannot be
+    // submitted either (M1-b needs a stored endsAt).
+    function jobMockDocId(bundleId) {
+      return jobBundleData(bundleId).kind == 'mock'
+        ? jobBundleData(bundleId).mockId
+        : bundleId;
+    }
+    function jobMockDocData(bundleId) {
+      return get(/databases/$(database)/documents/jobMocks/$(jobMockDocId(bundleId))).data;
+    }
+    function jobMockEndsAtWithinBound(old, d) {
+      return exists(/databases/$(database)/documents/jobQuestionBundles/$(old.get('bundleId', '')))
+        && exists(/databases/$(database)/documents/jobMocks/$(jobMockDocId(old.get('bundleId', ''))))
+        && jobMockDocData(old.get('bundleId', '')).get('rulesSnapshot', null) is map
+        && jobMockDocData(old.get('bundleId', '')).rulesSnapshot.get('timeMinutes', null) is int
+        && d.get('endsAt', null) is timestamp
+        && old.get('startedAt', null) is timestamp
+        && d.get('endsAt', null) > old.get('startedAt', null)
+        && d.get('endsAt', null) <= old.get('startedAt', null)
+             + duration.value(jobMockDocData(old.get('bundleId', '')).rulesSnapshot.timeMinutes * 60, 's');
+    }
     function validJobSessionUpdate(d, old) {
       return d.get('status', '') in ['in-progress', 'submitted', 'abandoned']
         && ((d.get('status', '') == 'submitted' && d.get('submittedAt', null) is timestamp)
@@ -973,7 +1044,7 @@ service cloud.firestore {
         && d.get('lastSyncedAt', null) is timestamp
         && d.get('updatedAt', null) is timestamp
         && ((old.get('endsAt', null) == null
-              && (d.get('endsAt', null) == null || d.get('endsAt', null) is timestamp))
+              && (d.get('endsAt', null) == null || jobMockEndsAtWithinBound(old, d)))
             || (old.get('endsAt', null) != null && d.get('endsAt', null) == old.get('endsAt', null)))
         && (old.get('kind', '') != 'practice' || d.get('endsAt', null) == null)
         && ((old.get('kind', '') == 'practice' && d.get('clientEndsAtMillis', null) == null)
@@ -2947,8 +3018,9 @@ service cloud.firestore {
     // is an access grant, never a payment record). ID is
     // `{uid}_{bundleId}`. Only the owning student creates their own
     // receipt, and only when it anchors to a real SUBMITTED attempt
-    // for that bundle on a PUBLISHED bundle (P0-06 + Step 7
-    // fold-in, ChatGPT P0-03). The receipt is a 10-minute window,
+    // for that bundle — or (Step 9, Design G) to a real SUBMITTED
+    // mock session for that bundle (the scoring window) — on a
+    // PUBLISHED bundle (P0-06 + Step 7 fold-in, ChatGPT P0-03). The receipt is a 10-minute window,
     // NOT one-use (P0-01 Option A) — and the window cannot be
     // refreshed: nobody updates a receipt, and only an Admin
     // deletes one (a student delete + recreate would mint a fresh
@@ -2973,10 +3045,20 @@ service cloud.firestore {
         && request.resource.data.get('createdAt', null) is timestamp
         && request.resource.data.get('createdAt', null) <= request.time
         && request.resource.data.get('createdAt', null) > request.time - duration.value(5, 'm')
-        && exists(/databases/$(database)/documents/users/$(uid())/jobAttempts/$(request.resource.data.get('attemptId', '')))
-        && get(/databases/$(database)/documents/users/$(uid())/jobAttempts/$(request.resource.data.get('attemptId', ''))).data.status == 'submitted'
-        && get(/databases/$(database)/documents/users/$(uid())/jobAttempts/$(request.resource.data.get('attemptId', ''))).data.bundleId == request.resource.data.get('bundleId', '')
-        && get(/databases/$(database)/documents/users/$(uid())/jobAttempts/$(request.resource.data.get('attemptId', ''))).data.userId == uid()
+        // Anchor (Step 7 P0-06 + Step 9 Design G): a SUBMITTED
+        // attempt for this bundle — OR a SUBMITTED mock session
+        // for this bundle (the scoring window: the session is
+        // submitted, answers frozen, and the attempt does not exist
+        // yet — the receipt's attemptId IS the session ID). An
+        // in-progress session anchors nothing.
+        && ((exists(/databases/$(database)/documents/users/$(uid())/jobAttempts/$(request.resource.data.get('attemptId', '')))
+              && get(/databases/$(database)/documents/users/$(uid())/jobAttempts/$(request.resource.data.get('attemptId', ''))).data.status == 'submitted'
+              && get(/databases/$(database)/documents/users/$(uid())/jobAttempts/$(request.resource.data.get('attemptId', ''))).data.bundleId == request.resource.data.get('bundleId', '')
+              && get(/databases/$(database)/documents/users/$(uid())/jobAttempts/$(request.resource.data.get('attemptId', ''))).data.userId == uid())
+            || (exists(/databases/$(database)/documents/users/$(uid())/jobSessions/$(request.resource.data.get('attemptId', '')))
+              && get(/databases/$(database)/documents/users/$(uid())/jobSessions/$(request.resource.data.get('attemptId', ''))).data.status == 'submitted'
+              && get(/databases/$(database)/documents/users/$(uid())/jobSessions/$(request.resource.data.get('attemptId', ''))).data.bundleId == request.resource.data.get('bundleId', '')
+              && get(/databases/$(database)/documents/users/$(uid())/jobSessions/$(request.resource.data.get('attemptId', ''))).data.kind == 'mock'))
         && exists(/databases/$(database)/documents/jobQuestionBundles/$(request.resource.data.get('bundleId', '')))
         && get(/databases/$(database)/documents/jobQuestionBundles/$(request.resource.data.get('bundleId', ''))).data.status == 'published';
       allow update: if false;

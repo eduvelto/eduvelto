@@ -88,6 +88,12 @@ const TS = new Date('2026-11-22T08:00:00.000Z');
 // for created docs).
 const NOW = new Date();
 const STARTED = new Date(Date.now() - 60 * 1000);
+// Live FUTURE deadline for the seeded mock sessions: the Step 9
+// audit-M1(b) rule requires a mock attempt's submittedAt to be ≤
+// the session's stored endsAt, so the fixtures that back
+// SUCCEEDING mock submits carry a deadline 2h ahead (never the
+// fixed 08:00 TS, which is already past at run time).
+const ENDS_FUTURE = new Date(Date.now() + 2 * 3600 * 1000);
 
 const OPTIONS = [
   { letter: 'A', text: 'দুটি স্বরের মিলন' },
@@ -296,6 +302,44 @@ async function seed() {
     for (const [id, data] of bundles) {
       await setDoc(doc(db, 'jobQuestionBundles', id), data);
     }
+    // ---- jobMocks (Step 9 audit M1-a) ----
+    // The (a) bound resolves a mock session's deadline through its
+    // mock doc (rulesSnapshot.timeMinutes). NOTE the doc-IDs: these
+    // are Step 8 fixture IDs ('bcs-mock-01'), NOT Step 9-shaped
+    // mockIds ('full__bcs__1') — the seed bypasses the rules, and
+    // the chain derives the doc-ID from the bundle's mockId, so
+    // this is exactly what the bound reads. 120 minutes = the BCS
+    // pattern duration; questionCount 1 matches the 1-question
+    // fixture bundle.
+    const mocks: Array<[string, Record<string, unknown>]> = [
+      ['bcs-mock-01', {
+        examSlug: 'bcs', titleBn: 'বিসিএস মডেল টেস্ট ১', titleEn: 'BCS Model Test 1',
+        kind: 'full', bundleId: 'mock__bcs-mock-01',
+        rulesSnapshot: {
+          questionCount: 1, timeMinutes: 120, marksPerQuestion: 1,
+          negativeMarking: 0.5, negativeMarkingVerified: true,
+          passPercent: null, scoringConfigVersion: 'v1',
+        },
+        scheduleDate: null, examSlugCycle: null, status: 'published',
+        retakeAllowed: true, maxAttempts: null,
+        publishedAt: null, publishedBy: null, createdAt: null, updatedAt: null,
+      }],
+      ['bcs-mock-02', {
+        examSlug: 'bcs', titleBn: 'বিসিএস মডেল টেস্ট ২', titleEn: 'BCS Model Test 2',
+        kind: 'full', bundleId: 'mock__bcs-mock-02',
+        rulesSnapshot: {
+          questionCount: 1, timeMinutes: 120, marksPerQuestion: 1,
+          negativeMarking: 0.5, negativeMarkingVerified: true,
+          passPercent: null, scoringConfigVersion: 'v1',
+        },
+        scheduleDate: null, examSlugCycle: null, status: 'published',
+        retakeAllowed: true, maxAttempts: null,
+        publishedAt: null, publishedBy: null, createdAt: null, updatedAt: null,
+      }],
+    ];
+    for (const [id, data] of mocks) {
+      await setDoc(doc(db, 'jobMocks', id), data);
+    }
     // ---- users/{uid}/jobSessions ----
     // One submitted session per SUCCEEDING attempt create (the doc-ID
     // is consumed by the attempt); 'sess-deny' is reused by every
@@ -324,17 +368,17 @@ async function seed() {
       })],
       ['student-1', 'sess-mock-ok-1', validSession({
         kind: 'mock', mockId: 'bcs-mock-01', bundleId: 'mock__bcs-mock-01',
-        status: 'submitted', submittedAt: TS, endsAt: TS,
+        status: 'submitted', submittedAt: TS, endsAt: ENDS_FUTURE,
         questionRefs: [{ bundleId: 'mock__bcs-mock-01', n: 1, questionId: 'q-published-b' }],
       })],
       ['student-1', 'sess-mock-ok-2', validSession({
         kind: 'mock', mockId: 'bcs-mock-01', bundleId: 'mock__bcs-mock-01',
-        status: 'submitted', submittedAt: TS, endsAt: TS,
+        status: 'submitted', submittedAt: TS, endsAt: ENDS_FUTURE,
         questionRefs: [{ bundleId: 'mock__bcs-mock-01', n: 1, questionId: 'q-published-b' }],
       })],
       ['student-1', 'sess-mock-ok-3', validSession({
         kind: 'mock', mockId: 'bcs-mock-01', bundleId: 'mock__bcs-mock-01',
-        status: 'submitted', submittedAt: TS, endsAt: TS,
+        status: 'submitted', submittedAt: TS, endsAt: ENDS_FUTURE,
         questionRefs: [{ bundleId: 'mock__bcs-mock-01', n: 1, questionId: 'q-published-b' }],
       })],
       // Reused by DENIED mock creates (s22/s34/s35): a submitted mock
@@ -342,7 +386,7 @@ async function seed() {
       // comes from the field under test, not the gate.
       ['student-1', 'sess-mock-deny', validSession({
         kind: 'mock', mockId: 'bcs-mock-01', bundleId: 'mock__bcs-mock-01',
-        status: 'submitted', submittedAt: TS, endsAt: TS,
+        status: 'submitted', submittedAt: TS, endsAt: ENDS_FUTURE,
         questionRefs: [{ bundleId: 'mock__bcs-mock-01', n: 1, questionId: 'q-published-b' }],
       })],
       ['student-1', 'sess-deny', validSession({ status: 'submitted', submittedAt: TS })],
@@ -365,6 +409,10 @@ async function seed() {
       ['student-1', 'sess-inprogress-2', validSession()],
       ['student-1', 'sess-mock-inprogress', validSession({
         kind: 'mock', mockId: 'bcs-mock-01', bundleId: 'mock__bcs-mock-01',
+        // Live start (Step 9 audit M1-a): s56 sets endsAt to NOW,
+        // which must land within startedAt + 120min — the fixed
+        // 08:00 TS would already be 7h past.
+        startedAt: STARTED,
         questionRefs: [{ bundleId: 'mock__bcs-mock-01', n: 1, questionId: 'q-published-b' }],
       })],
       ['student-1', 'sess-abandoned', validSession({ status: 'abandoned' })],
