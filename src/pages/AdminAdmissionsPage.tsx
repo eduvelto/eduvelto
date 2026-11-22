@@ -69,6 +69,18 @@ export default function AdminAdmissionsPage() {
         </LinkButton>
       </div>
 
+      <div style={{ marginTop: 12 }}>
+        <LinkButton to="/admin/admissions/syllabus" variant="outline">
+          {t({ bn: 'NU পাঠ্যসূচির সীড — বিষয়, অধ্যায়, টপিক ও পাঠ', en: 'NU syllabus seed — subjects, chapters, topics and lessons' })} →
+        </LinkButton>
+      </div>
+
+      <div style={{ marginTop: 12 }}>
+        <LinkButton to="/admin/admissions/questions" variant="outline">
+          {t({ bn: 'NU প্রশ্নব্যাংক ও যাচাই — খসড়া → পর্যালোচনা → প্রকাশনা', en: 'NU question bank & verification — draft → review → publish' })} →
+        </LinkButton>
+      </div>
+
       <div className="ev-ceo-tabs" role="tablist" aria-label={t({ bn: 'ভর্তির ধরন', en: 'Admission type' })}>
         {TABS.map((tb) => (
           <button
