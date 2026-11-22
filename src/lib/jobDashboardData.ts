@@ -68,7 +68,7 @@ export async function loadPublishedBundlesForExams(
         slug,
         bundles
           .filter((b) => b.questionCount > 0)
-          .map((b) => ({ docId: b.docId, topicId: b.topicId ?? null, questionCount: b.questionCount })),
+          .map((b) => ({ docId: b.docId, topicId: b.topicId ?? null, questionCount: b.questionCount, titleBn: b.titleBn })),
       );
     }),
   );
