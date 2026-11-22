@@ -179,6 +179,16 @@ async function seed() {
       status: 'draft',
       createdBy: 'admin-1',
     });
+    // Under review, claimed by the verified teacher — the only
+    // question a review record may be written for (NU-7 rule:
+    // status under_review + reviewedBy == reviewer).
+    await setDoc(doc(db, 'nuQuestions', 'q-admin-under-review'), {
+      ...questionBase,
+      status: 'under_review',
+      createdBy: 'admin-1',
+      reviewedBy: 'teacher-verified',
+      reviewedAt: new Date('2026-11-22T05:10:00Z'),
+    });
     await setDoc(doc(db, 'nuQuestions', 'q-pub-1'), {
       ...questionBase,
       status: 'published',
@@ -796,11 +806,11 @@ describe('NU-4 rules — reviews and publications', () => {
   it('(n57) verified teacher reviews another teacher/admin question: ALLOWED', async () => {
     await assertSucceeds(
       setDoc(doc(asTeacherVerified(), 'nuReviews', 'review-other'), {
-        questionId: 'q-admin-1',
+        questionId: 'q-admin-under-review',
         questionVersion: 1,
         reviewerId: 'teacher-verified',
         decision: 'approved',
-        checks: { questionOk: true, answerOk: true, explanationOk: true, sourceOk: true },
+        checks: { questionCorrect: true, correctAnswerCorrect: true, explanationCorrect: true, sourceCorrect: true },
         reviewedAt: serverTimestamp(),
       }),
     );

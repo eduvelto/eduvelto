@@ -2309,10 +2309,12 @@ service cloud.firestore {
     // state machine (draft → submitted_for_review → under_review →
     // approved → published; rejected / changes_requested /
     // withdrawn). Immutable once written; a reviewer can never review
-    // their own question; a rejection / return needs a reason
-    // (≥10 chars). The state transitions themselves are enforced by
-    // the Admin/teacher flow in code (NU-7); the rules pin who may
-    // write the records and that they can never change.
+    // their own question, and can only review a question they claimed
+    // (reviewedBy == uid) while it is under_review; a rejection /
+    // return needs a reason (≥10 chars). The state transitions
+    // themselves are enforced by the question update Rule B (NU-7);
+    // the rules below pin who may write the records and that they
+    // can never change.
     match /nuReviews/{reviewId} {
       allow read: if isAdmin() || (signedIn() && resource.data.reviewerId == uid());
       allow create: if (isAdmin() || isVerifiedTeacher())
@@ -2328,6 +2330,7 @@ service cloud.firestore {
         && request.resource.data.questionVersion is int
         && request.resource.data.questionVersion == get(/databases/$(database)/documents/nuQuestions/$(request.resource.data.questionId)).data.version
         && get(/databases/$(database)/documents/nuQuestions/$(request.resource.data.questionId)).data.status == 'under_review'
+        && get(/databases/$(database)/documents/nuQuestions/$(request.resource.data.questionId)).data.reviewedBy == uid()
         && request.resource.data.checks is map
         && request.resource.data.checks.questionCorrect is bool
         && request.resource.data.checks.correctAnswerCorrect is bool

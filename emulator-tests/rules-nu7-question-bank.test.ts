@@ -56,6 +56,7 @@ let admin: RulesTestContext;
 let student: RulesTestContext;
 let teacherVerified: RulesTestContext;
 let teacherVerified2: RulesTestContext;
+let teacherVerified3: RulesTestContext;
 let teacherPending: RulesTestContext;
 let anonymous: RulesTestContext;
 
@@ -127,6 +128,7 @@ describe('NU-7 question bank rules (design §19.6, §19.2.4–§19.2.6)', () => 
         { uid: 'student-2', role: 'student', isActive: true },
         { uid: 'teacher-verified', role: 'teacher', verificationStatus: 'verified', isActive: true },
         { uid: 'teacher-verified-2', role: 'teacher', verificationStatus: 'verified', isActive: true },
+        { uid: 'teacher-verified-3', role: 'teacher', verificationStatus: 'verified', isActive: true },
         { uid: 'teacher-pending', role: 'teacher', verificationStatus: 'pending', isActive: true },
       ]) {
         await setDoc(doc(db, 'users', u.uid), u);
@@ -239,6 +241,7 @@ describe('NU-7 question bank rules (design §19.6, §19.2.4–§19.2.6)', () => 
     student = env.authenticatedContext('student-1');
     teacherVerified = env.authenticatedContext('teacher-verified');
     teacherVerified2 = env.authenticatedContext('teacher-verified-2');
+    teacherVerified3 = env.authenticatedContext('teacher-verified-3');
     teacherPending = env.authenticatedContext('teacher-pending');
     anonymous = env.unauthenticatedContext();
   }, 300000);
@@ -902,6 +905,6 @@ describe('NU-7 question bank rules (design §19.6, §19.2.4–§19.2.6)', () => 
     await assertSucceeds(getDoc(doc(toFirestoreDb(teacherVerified2), 'nuQuestionDraftKeys', 'q-under-review-2')));
   });
   it('n70: a NON-claiming reviewer reads the draft key: DENIED', async () => {
-    await assertFails(getDoc(doc(toFirestoreDb(teacherVerified), 'nuQuestionDraftKeys', 'q-under-review-2')));
+    await assertFails(getDoc(doc(toFirestoreDb(teacherVerified3), 'nuQuestionDraftKeys', 'q-under-review-2')));
   });
 });
