@@ -285,7 +285,12 @@ service cloud.firestore {
              'academicSession', 'curriculum', 'phone', 'teachingLevel',
              'subjects', 'qualifications', 'experienceYears', 'jobMode',
              'enrolledCategories', 'targetExam', 'dailyGoalQuestions',
-             'dailyGoalMinutes', 'jobOnboarded'])
+             'dailyGoalMinutes', 'jobOnboarded',
+             // NU-4 (§19.2.15): the four NU profile fields — a create
+             // carrying them must pass the allowlist (their values are
+             // pinned by the clauses below).
+             'admissionTargetInstitution', 'admissionTargetGroup',
+             'admissionMode', 'admissionOnboarded'])
         // 'verificationStatus' is in the allowlist because teacher /
         // guardian registration writes it — but its VALUE is pinned by
         // the clause below: absent, or teacher/parent + 'pending' only.
