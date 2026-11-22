@@ -126,7 +126,7 @@
 
 ## ৭. মালিকের পরীক্ষা (নির্ণায়ক — ফোনে, ~২ মিনিট)
 
-Preview: *(deploy-এর পর এখানে লিংক বসানো হবে)*
+Preview: https://eduvelto--google-login-fix-sygkjkl4.web.app (মেয়াদ ২৯ নভে ১০:৪৭ Dhaka)
 
 1. ফোনে **Chrome** খুলে preview-র `/login`-এ যান (লগইন করা থাকলে আগে লগআউট করুন)।
 2. **"Google দিয়ে লগইন"** চাপুন → chooser-এ **bindoora23** বাছুন।
