@@ -11,7 +11,7 @@
 import { useJobMode, type JobMode } from '../lib/jobMode';
 import { useLanguage } from '../i18n/LanguageContext';
 
-const MODE_COPY: Record<JobMode, { bn: string; en: string; descBn: string; descEn: string }> = {
+export const MODE_COPY: Record<JobMode, { bn: string; en: string; descBn: string; descEn: string }> = {
   beginner: {
     bn: 'নতুনদের জন্য',
     en: 'Beginner',

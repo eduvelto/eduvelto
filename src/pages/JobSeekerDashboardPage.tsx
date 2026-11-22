@@ -12,10 +12,12 @@
 // dashboard. No ads on this page: it is all practice / exam / result
 // space (design plan §1.4).
 
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { PageShell } from '../components/PageShell';
 import { Card, Chip, LinkButton, Reveal, Skeleton, SkeletonCards } from '../components/ui';
 import JobModeSwitch from '../components/JobModeSwitch';
+import JobOnboarding from '../components/JobOnboarding';
 import { strings } from '../i18n/strings';
 import { useAuth } from '../lib/auth';
 import { useJobMode } from '../lib/jobMode';
@@ -26,7 +28,11 @@ export default function JobSeekerDashboardPage() {
   const { user, profile, loading } = useAuth();
   const { t } = useLanguage();
   const { mode } = useJobMode();
+  // Re-open the first-time mode-choice screen on demand (Step 2 §1.8).
+  const [showOnboarding, setShowOnboarding] = useState(false);
   const cycle = WEEKLY_MOCK_CYCLE.map((s) => jobExamBySlug(s)!).filter(Boolean);
+  // Step 4: the target exam now lives on the profile (targetExam).
+  const targetExamDef = profile?.targetExam ? jobExamBySlug(profile.targetExam) : undefined;
 
   if (loading) {
     return (
@@ -85,6 +91,10 @@ export default function JobSeekerDashboardPage() {
         </p>
       </section>
 
+      {/* First-time mode choice (Step 2 §1.8, Step 4): shown once to
+          signed-in users who have not seen it; never blocks the page. */}
+      <JobOnboarding forceOpen={showOnboarding} onClose={() => setShowOnboarding(false)} />
+
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: 12, marginBottom: 20 }}>
         {/* My mode — Beginner / Advanced (owner decision 22 Nov 2026).
             Shows the current mode; the switch below changes it any time
@@ -101,24 +111,60 @@ export default function JobSeekerDashboardPage() {
               })}
             </p>
             <JobModeSwitch />
+            <p style={{ margin: '8px 0 0' }}>
+              <button
+                type="button"
+                onClick={() => setShowOnboarding(true)}
+                style={{ background: 'none', border: 'none', padding: 0, color: '#12766E', fontWeight: 600, fontSize: 14, cursor: 'pointer', textDecoration: 'underline' }}
+              >
+                {t({ bn: 'মোড পছন্দ আবার দেখুন', en: 'Show the mode choice again' })}
+              </button>
+            </p>
           </Card>
         </Reveal>
 
-        {/* Target exam — no target is stored yet (no such field exists). */}
+        {/* Target exam — read from the profile (Step 4: targetExam).
+            Change it in /profile. */}
         <Reveal delayMs={0}>
           <Card>
             <div style={{ fontWeight: 700, color: '#142B3B', fontSize: 17 }}>
               {t({ bn: 'আমার লক্ষ্য পরীক্ষা', en: 'My target exam' })}
             </div>
-            <p style={{ margin: '8px 0 10px', color: '#68747B', fontSize: 14, lineHeight: 1.7 }}>
-              {t({
-                bn: 'এখনো কোনো লক্ষ্য পরীক্ষা বেছে নেওয়া হয়নি। যে পরীক্ষার প্রস্তুতি নিতে চান, সেটি বেছে নিন।',
-                en: 'No target exam has been picked yet. Pick the exam you want to prepare for.',
-              })}
-            </p>
-            <LinkButton to="/jobs" variant="accent">
-              {t({ bn: 'পরীক্ষা বেছে নিন →', en: 'Pick an exam →' })}
-            </LinkButton>
+            {targetExamDef ? (
+              <>
+                <p style={{ margin: '8px 0 10px', color: '#57616A', fontSize: 14, lineHeight: 1.7 }}>
+                  <Link to={`/jobs/${targetExamDef.slug}`} style={{ fontWeight: 700 }}>
+                    {t({ bn: targetExamDef.bn, en: targetExamDef.en })}
+                  </Link>
+                  {' — '}
+                  {t({ bn: targetExamDef.fullBn, en: targetExamDef.fullEn })}
+                </p>
+                <LinkButton to="/profile" variant="outline">
+                  {t({ bn: 'লক্ষ্য বদলান →', en: 'Change target →' })}
+                </LinkButton>
+              </>
+            ) : profile?.targetExam ? (
+              <>
+                <p style={{ margin: '8px 0 10px', color: '#57616A', fontSize: 14, lineHeight: 1.7 }}>
+                  {profile.targetExam}
+                </p>
+                <LinkButton to="/profile" variant="outline">
+                  {t({ bn: 'লক্ষ্য বদলান →', en: 'Change target →' })}
+                </LinkButton>
+              </>
+            ) : (
+              <>
+                <p style={{ margin: '8px 0 10px', color: '#68747B', fontSize: 14, lineHeight: 1.7 }}>
+                  {t({
+                    bn: 'এখনো কোনো লক্ষ্য পরীক্ষা বেছে নেওয়া হয়নি। যে পরীক্ষার প্রস্তুতি নিতে চান, সেটি বেছে নিন।',
+                    en: 'No target exam has been picked yet. Pick the exam you want to prepare for.',
+                  })}
+                </p>
+                <LinkButton to="/profile" variant="accent">
+                  {t({ bn: 'লক্ষ্য পরীক্ষা বেছে নিন →', en: 'Pick a target exam →' })}
+                </LinkButton>
+              </>
+            )}
           </Card>
         </Reveal>
 

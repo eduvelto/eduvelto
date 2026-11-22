@@ -146,6 +146,34 @@ service cloud.firestore {
         && isOptStr(request.resource.data.get('qualifications', null), 500)
         && (!('jobMode' in request.resource.data)
             || request.resource.data.jobMode in ['beginner', 'advanced'])
+        // Step 4 — Job profile fields (Step 3 §2.25/§3.1): same
+        // validations as the self-update rule below, so no invalid
+        // value can sneak in at creation either.
+        && (!('enrolledCategories' in request.resource.data)
+            || (request.resource.data.enrolledCategories is list
+                && request.resource.data.enrolledCategories.size() <= 10
+                && request.resource.data.enrolledCategories.toSet().hasOnly(
+                     ['bcs-bpsc', 'govt', 'bank', 'primary-teacher',
+                      'ntrca-teacher', 'defence-police', 'autonomous',
+                      'ngo-private', 'it-professional', 'other-competitive'])))
+        && (!('targetExam' in request.resource.data)
+            || request.resource.data.targetExam == null
+            || request.resource.data.targetExam in
+               ['bcs', 'bank', 'primary-teacher', 'ntrca', 'dgfood',
+                'bpsc-non-cadre', 'cag', 'bfsa', 'others', 'ministries',
+                'defence', 'autonomous', 'private-ngo', 'it-professional'])
+        && (!('dailyGoalQuestions' in request.resource.data)
+            || request.resource.data.dailyGoalQuestions == null
+            || (request.resource.data.dailyGoalQuestions is number
+                && request.resource.data.dailyGoalQuestions >= 0
+                && request.resource.data.dailyGoalQuestions <= 500))
+        && (!('dailyGoalMinutes' in request.resource.data)
+            || request.resource.data.dailyGoalMinutes == null
+            || (request.resource.data.dailyGoalMinutes is number
+                && request.resource.data.dailyGoalMinutes >= 0
+                && request.resource.data.dailyGoalMinutes <= 600))
+        && (!('jobOnboarded' in request.resource.data)
+            || request.resource.data.jobOnboarded is bool)
         && (!('subjects' in request.resource.data)
             || (request.resource.data.subjects is list
                 && request.resource.data.subjects.size() <= 20))
@@ -167,11 +195,44 @@ service cloud.firestore {
                        'academicYear', 'academicSession', 'curriculum',
                        'program', 'department', 'classLevel', 'semester',
                        'phone', 'experienceYears', 'jobMode',
+                       'enrolledCategories', 'targetExam',
+                       'dailyGoalQuestions', 'dailyGoalMinutes', 'jobOnboarded',
                        'language', 'lastActiveAt', 'updatedAt'])
         && isOptStr(request.resource.data.displayName, 100)
         && isOptStr(request.resource.data.get('phone', null), 20)
         && (!('jobMode' in request.resource.data)
             || request.resource.data.jobMode in ['beginner', 'advanced'])
+        // Step 4 — Job profile fields (Step 3 §3.1, exact spec):
+        // enrolledCategories ≤10 slugs from the 10-category enum;
+        // targetExam null or one of the 14 hub slugs; daily goals
+        // null or in range; jobOnboarded bool. role /
+        // verificationStatus / isActive are NOT in this allowlist —
+        // they stay Admin/Owner-only.
+        && (!('enrolledCategories' in request.resource.data)
+            || (request.resource.data.enrolledCategories is list
+                && request.resource.data.enrolledCategories.size() <= 10
+                && request.resource.data.enrolledCategories.toSet().hasOnly(
+                     ['bcs-bpsc', 'govt', 'bank', 'primary-teacher',
+                      'ntrca-teacher', 'defence-police', 'autonomous',
+                      'ngo-private', 'it-professional', 'other-competitive'])))
+        && (!('targetExam' in request.resource.data)
+            || request.resource.data.targetExam == null
+            || request.resource.data.targetExam in
+               ['bcs', 'bank', 'primary-teacher', 'ntrca', 'dgfood',
+                'bpsc-non-cadre', 'cag', 'bfsa', 'others', 'ministries',
+                'defence', 'autonomous', 'private-ngo', 'it-professional'])
+        && (!('dailyGoalQuestions' in request.resource.data)
+            || request.resource.data.dailyGoalQuestions == null
+            || (request.resource.data.dailyGoalQuestions is number
+                && request.resource.data.dailyGoalQuestions >= 0
+                && request.resource.data.dailyGoalQuestions <= 500))
+        && (!('dailyGoalMinutes' in request.resource.data)
+            || request.resource.data.dailyGoalMinutes == null
+            || (request.resource.data.dailyGoalMinutes is number
+                && request.resource.data.dailyGoalMinutes >= 0
+                && request.resource.data.dailyGoalMinutes <= 600))
+        && (!('jobOnboarded' in request.resource.data)
+            || request.resource.data.jobOnboarded is bool)
         && (!('experienceYears' in request.resource.data)
             || (request.resource.data.experienceYears is number
                 && request.resource.data.experienceYears >= 0
@@ -237,7 +298,9 @@ service cloud.firestore {
                        'academicYear', 'program', 'department', 'classLevel',
                        'language', 'lastActiveAt', 'role', 'verificationStatus',
                        'isActive', 'suspendedReason', 'verifiedBy', 'verifiedAt',
-                       'jobMode', 'updatedAt'])
+                       'jobMode', 'enrolledCategories', 'targetExam',
+                       'dailyGoalQuestions', 'dailyGoalMinutes', 'jobOnboarded',
+                       'updatedAt'])
         // Role may NEVER be *changed to* 'owner' — but the owner's own doc
         // already carries role 'owner', and request.resource.data is the
         // FULL post-update document, so 'role' in request.resource.data is
@@ -249,7 +312,34 @@ service cloud.firestore {
             || request.resource.data.verificationStatus in ['pending', 'verified', 'rejected', 'revoked'])
         && validVerificationTransition()
         && (!('isActive' in request.resource.data) || request.resource.data.isActive is bool)
-        && isOptStr(request.resource.data.displayName, 100);
+        && isOptStr(request.resource.data.displayName, 100)
+        // Step 4 — the owner may set a user's Job fields too, under the
+        // same §3.1 validations as the self-update rule.
+        && (!('enrolledCategories' in request.resource.data)
+            || (request.resource.data.enrolledCategories is list
+                && request.resource.data.enrolledCategories.size() <= 10
+                && request.resource.data.enrolledCategories.toSet().hasOnly(
+                     ['bcs-bpsc', 'govt', 'bank', 'primary-teacher',
+                      'ntrca-teacher', 'defence-police', 'autonomous',
+                      'ngo-private', 'it-professional', 'other-competitive'])))
+        && (!('targetExam' in request.resource.data)
+            || request.resource.data.targetExam == null
+            || request.resource.data.targetExam in
+               ['bcs', 'bank', 'primary-teacher', 'ntrca', 'dgfood',
+                'bpsc-non-cadre', 'cag', 'bfsa', 'others', 'ministries',
+                'defence', 'autonomous', 'private-ngo', 'it-professional'])
+        && (!('dailyGoalQuestions' in request.resource.data)
+            || request.resource.data.dailyGoalQuestions == null
+            || (request.resource.data.dailyGoalQuestions is number
+                && request.resource.data.dailyGoalQuestions >= 0
+                && request.resource.data.dailyGoalQuestions <= 500))
+        && (!('dailyGoalMinutes' in request.resource.data)
+            || request.resource.data.dailyGoalMinutes == null
+            || (request.resource.data.dailyGoalMinutes is number
+                && request.resource.data.dailyGoalMinutes >= 0
+                && request.resource.data.dailyGoalMinutes <= 600))
+        && (!('jobOnboarded' in request.resource.data)
+            || request.resource.data.jobOnboarded is bool);
       allow delete: if false; // accounts are suspended (isActive=false), never deleted by clients
     }
 

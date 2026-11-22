@@ -32,9 +32,11 @@
 // - UPDATE (owner): only displayName, educationType, board, institution,
 //   academicYear, program, department, classLevel, semester,
 //   academicSession, curriculum, phone, teachingLevel, subjects,
-//   qualifications, experienceYears, jobMode, language, lastActiveAt,
-//   updatedAt. Role, verificationStatus and isActive can never be changed
-//   by the owner — only Admin/Owner (see firestore.rules).
+//   qualifications, experienceYears, jobMode, enrolledCategories,
+//   targetExam, dailyGoalQuestions, dailyGoalMinutes, jobOnboarded,
+//   language, lastActiveAt, updatedAt. Role, verificationStatus and
+//   isActive can never be changed by the owner — only Admin/Owner (see
+//   firestore.rules).
 //   Changing class/subject NEVER deletes progress, bookmarks, results or
 //   learning history: progress is keyed to content IDs (book/chapter/
 //   lesson), not to the profile — the profile only decides what is
@@ -95,6 +97,17 @@ export interface UserProfile {
    * questions, timed exams, full model tests, competitive prep).
    * Absent = 'beginner'. Owner-editable by self; switchable any time. */
   jobMode?: 'beginner' | 'advanced' | null;
+  /** Job Preparation — enrolled categories (10 slugs max, see
+   * jobProfile.ts). Removing one never deletes progress. */
+  enrolledCategories?: string[] | null;
+  /** Job Preparation — target exam hub slug, or null = undecided. */
+  targetExam?: string | null;
+  /** Job Preparation — daily goal, questions (0–500) or null. */
+  dailyGoalQuestions?: number | null;
+  /** Job Preparation — daily goal, minutes (0–600) or null. */
+  dailyGoalMinutes?: number | null;
+  /** Job Preparation — first-time mode-choice screen shown. */
+  jobOnboarded?: boolean | null;
   language: 'bn' | 'en';
   createdAt?: Timestamp | null;
   updatedAt?: Timestamp | null;
@@ -139,6 +152,28 @@ export interface ProfileEdit {
   experienceYears?: number | null;
   /** Job Preparation mode — see UserProfile.jobMode. */
   jobMode?: 'beginner' | 'advanced' | null;
+  /** Job Preparation — enrolled categories (Step 4, Step 3 §2.25):
+   * the 10 category slugs the student is preparing for
+   * (jobProfile.ts JOB_CATEGORY_SLUGS). Removing a category NEVER
+   * deletes progress — progress is keyed to content IDs, the profile
+   * only decides what is SHOWN. Absent/empty = none enrolled yet. */
+  enrolledCategories?: string[] | null;
+  /** Job Preparation — target exam hub slug (Step 3 §2.25/§3.1), one
+   * of the 14 hub slugs (jobProfile.ts TARGET_EXAM_SLUGS).
+   * null/absent = undecided. */
+  targetExam?: string | null;
+  /** Job Preparation — daily goal, questions (0–500). null/absent =
+   * undecided — NEVER a fake default goal (Step 3 §12.3 item 5; the
+   * Step 2 §13.4 default of 30 is still an open owner decision). */
+  dailyGoalQuestions?: number | null;
+  /** Job Preparation — daily goal, minutes (0–600). null/absent =
+   * undecided (same rule as dailyGoalQuestions). */
+  dailyGoalMinutes?: number | null;
+  /** Job Preparation — first-time mode-choice screen shown (Step 2
+   * §1.8). false/absent = not shown yet. Set to true when the student
+   * picks a mode or dismisses the screen ("পরে ঠিক করব"); never
+   * forced again after that. */
+  jobOnboarded?: boolean | null;
   language?: 'bn' | 'en';
 }
 
@@ -160,6 +195,11 @@ const EDITABLE_KEYS: (keyof ProfileEdit)[] = [
   'qualifications',
   'experienceYears',
   'jobMode',
+  'enrolledCategories',
+  'targetExam',
+  'dailyGoalQuestions',
+  'dailyGoalMinutes',
+  'jobOnboarded',
   'language',
 ];
 

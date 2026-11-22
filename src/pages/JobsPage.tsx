@@ -7,16 +7,21 @@
 // start. No question counts, no mock counts — no content is published
 // yet. Tier 2/3 cards honestly say "Coming soon".
 
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { PageShell } from '../components/PageShell';
 import { Card, LinkButton, Reveal } from '../components/ui';
 import { CommonPrepCard, JobCard } from '../components/JobCards';
 import JobModeSwitch from '../components/JobModeSwitch';
+import JobOnboarding from '../components/JobOnboarding';
 import { useLanguage } from '../i18n/LanguageContext';
 import { JOB_EXAMS } from '../lib/jobExams';
 
 export default function JobsPage() {
   const { t } = useLanguage();
+  // Re-open the first-time mode-choice screen on demand (Step 2 §1.8:
+  // reachable again from /jobs after it was dismissed once).
+  const [showOnboarding, setShowOnboarding] = useState(false);
   const tier1 = JOB_EXAMS.filter((e) => e.tier === 1);
   const tier2 = JOB_EXAMS.filter((e) => e.tier === 2);
   const tier3 = JOB_EXAMS.filter((e) => e.tier === 3);
@@ -60,11 +65,24 @@ export default function JobsPage() {
         </p>
       </section>
 
+      {/* First-time mode choice (Step 2 §1.8, Step 4): shown once to
+          signed-in users who have not seen it; never blocks the page. */}
+      <JobOnboarding forceOpen={showOnboarding} onClose={() => setShowOnboarding(false)} />
+
       {/* Preparation mode — Beginner / Advanced, switchable any time
           (owner decision 22 Nov 2026). Stored on the user's own profile
           when signed in, localStorage fallback when signed out. */}
       <div style={{ margin: '0 0 20px' }}>
         <JobModeSwitch />
+        <p style={{ margin: '8px 0 0' }}>
+          <button
+            type="button"
+            onClick={() => setShowOnboarding(true)}
+            style={{ background: 'none', border: 'none', padding: 0, color: '#12766E', fontWeight: 600, fontSize: 14, cursor: 'pointer', textDecoration: 'underline' }}
+          >
+            {t({ bn: 'মোড পছন্দ আবার দেখুন', en: 'Show the mode choice again' })}
+          </button>
+        </p>
       </div>
 
       <p style={{ margin: '0 0 20px' }}>
