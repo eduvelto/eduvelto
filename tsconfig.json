@@ -25,6 +25,8 @@
     "src",
     "vite.config.ts",
     "emulator-tests",
-    "scripts/apply-job-seed.d.mts"
+    "scripts/apply-job-seed.d.mts",
+    "scripts/apply-job-content-seed.d.mts",
+    "scripts/apply-job-question-seed.d.mts"
   ]
 }

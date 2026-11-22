@@ -4,15 +4,17 @@
 // daily mock, this week's full mock, my results, weak topics, study
 // routine and progress.
 //
-// STRUCTURE ONLY. No job-progress data store exists yet and no mock
-// has ever run, so every section is an honest empty / Coming Soon
-// state — NO invented counts, scores, streaks or ranks. The dashboard
-// is open to any signed-in user (a teacher can also prepare for BCS);
-// signed-out visitors get the login prompt, same as the student
-// dashboard. No ads on this page: it is all practice / exam / result
-// space (design plan §1.4).
+// Step 9 closure (D3/D4): the daily/weekly mock cards and the
+// results/weak-topics cards are DATA-DRIVEN (published mocks +
+// the student's own attempts) — the honest empty / Coming Soon copy
+// shows only when the data is truly empty. The study routine and
+// progress sections are still Coming Soon (Steps 11–12 own them).
+// The dashboard is open to any signed-in user (a teacher can also
+// prepare for BCS); signed-out visitors get the login prompt, same
+// as the student dashboard. No ads on this page: it is all practice
+// / exam / result space (design plan §1.4).
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { PageShell } from '../components/PageShell';
 import { Card, Chip, LinkButton, Reveal, Skeleton, SkeletonCards } from '../components/ui';
@@ -23,6 +25,9 @@ import { useAuth } from '../lib/auth';
 import { useJobMode } from '../lib/jobMode';
 import { useLanguage } from '../i18n/LanguageContext';
 import { DAILY_MOCK, WEEKLY_MOCK_CYCLE, jobExamBySlug } from '../lib/jobExams';
+import { listMockAttempts, loadThisWeekWeeklyMock, loadTodayDailyMock, type MockAttemptWithId } from '../lib/jobMock';
+import { jobMockPatternSummaryBn, type JobMockWithId } from '../lib/jobMocks';
+import { jobTopicLabelBn, weakTopicsFromAttemptAnswers, type JobAttemptAnswer } from '../lib/jobEngine';
 
 export default function JobSeekerDashboardPage() {
   const { user, profile, loading } = useAuth();
@@ -33,6 +38,46 @@ export default function JobSeekerDashboardPage() {
   const cycle = WEEKLY_MOCK_CYCLE.map((s) => jobExamBySlug(s)!).filter(Boolean);
   // Step 4: the target exam now lives on the profile (targetExam).
   const targetExamDef = profile?.targetExam ? jobExamBySlug(profile.targetExam) : undefined;
+  // Step 9 closure (D3/D4): live daily/weekly mocks + the student's
+  // own mock attempts, for the data-driven cards below. null = not
+  // loaded yet. (Hooks stay above the early returns below.)
+  const [daily, setDaily] = useState<JobMockWithId | null>(null);
+  const [weekly, setWeekly] = useState<JobMockWithId | null>(null);
+  const [mocksLoaded, setMocksLoaded] = useState(false);
+  const [attempts, setAttempts] = useState<MockAttemptWithId[] | null>(null);
+  useEffect(() => {
+    let alive = true;
+    Promise.all([loadTodayDailyMock(), loadThisWeekWeeklyMock()])
+      .then(([d, w]) => {
+        if (!alive) return;
+        setDaily(d);
+        setWeekly(w);
+        setMocksLoaded(true);
+      })
+      .catch(() => {
+        if (alive) setMocksLoaded(true);
+      });
+    if (user) {
+      listMockAttempts(user.uid, 10)
+        .then((list) => {
+          if (alive) setAttempts(list);
+        })
+        .catch(() => {
+          if (alive) setAttempts([]);
+        });
+    } else {
+      setAttempts([]);
+    }
+    return () => {
+      alive = false;
+    };
+  }, [user?.uid]);
+  // Weak topics aggregated across the student's mock attempts
+  // (same resolver as the result page, D7).
+  const dashAnswers: JobAttemptAnswer[] =
+    attempts?.flatMap((a) => (Array.isArray(a.answers) ? (a.answers as JobAttemptAnswer[]) : [])) ?? [];
+  const dashWeakTopics = weakTopicsFromAttemptAnswers(dashAnswers).slice(0, 3);
+  const dashLatest = attempts && attempts.length > 0 ? attempts[0] : null;
 
   if (loading) {
     return (
@@ -210,40 +255,54 @@ export default function JobSeekerDashboardPage() {
           </Card>
         </Reveal>
 
-        {/* Today's daily mock — Coming Soon. */}
+        {/* Today's daily mock — LIVE (Step 9, D3): today's published
+            mock with a start link, or the honest not-yet state. No
+            "coming soon" claim while mocks can exist. */}
         <Reveal delayMs={80}>
           <Card>
             <div style={{ fontWeight: 700, color: '#142B3B', fontSize: 17 }}>
               {t({ bn: 'দৈনিক মক', en: 'Daily mock' })}
             </div>
-            <p style={{ margin: '8px 0' }}>
-              <Chip tone="gold">{t({ bn: 'শীঘ্রই আসছে', en: 'Coming soon' })}</Chip>
-            </p>
             <p style={{ margin: '8px 0', color: '#57616A', fontSize: 14, lineHeight: 1.7 }}>
               {t({ bn: DAILY_MOCK.sizeBn, en: DAILY_MOCK.sizeEn })} · {t({ bn: DAILY_MOCK.timeBn, en: DAILY_MOCK.timeEn })}
             </p>
-            <p style={{ margin: '0', color: '#68747B', fontSize: 14, lineHeight: 1.7 }}>
-              {t({
-                bn: 'প্রতিদিন ভিন্ন কমন টপিক — দৈনিক মক চালু হলে এখানেই দিতে পারবেন।',
-                en: 'A different common topic every day — once the daily mock runs, you can take it right here.',
-              })}
-            </p>
+            {!mocksLoaded ? (
+              <p style={{ margin: 0, color: '#68747B', fontSize: 14 }}>লোড হচ্ছে…</p>
+            ) : daily ? (
+              <>
+                <p style={{ margin: '0 0 10px', color: '#57616A', fontSize: 14, lineHeight: 1.7 }}>
+                  {daily.titleBn} · {jobMockPatternSummaryBn(daily.rulesSnapshot)}
+                </p>
+                <LinkButton to={`/jobs/mock/${daily.docId}`} variant="accent">
+                  {t({ bn: 'আজকের মক শুরু করুন →', en: "Start today's mock →" })}
+                </LinkButton>
+              </>
+            ) : (
+              <>
+                <p style={{ margin: '0 0 10px', color: '#68747B', fontSize: 14, lineHeight: 1.7 }}>
+                  {t({
+                    bn: 'প্রতিদিন ভিন্ন কমন টপিক — আজকের মক এখনো প্রকাশিত হয়নি।',
+                    en: 'A different common topic every day — today’s mock is not published yet.',
+                  })}
+                </p>
+                <LinkButton to="/jobs/common" variant="outline">
+                  {t({ bn: 'কমন প্রস্তুতি দেখুন →', en: 'See common preparation →' })}
+                </LinkButton>
+              </>
+            )}
           </Card>
         </Reveal>
 
-        {/* This week's full mock — weekly cycle, Coming Soon. */}
+        {/* This week's full mock — LIVE (Step 9, D3), same pattern. */}
         <Reveal delayMs={160}>
           <Card>
             <div style={{ fontWeight: 700, color: '#142B3B', fontSize: 17 }}>
               {t({ bn: 'সাপ্তাহিক পূর্ণ মক', en: 'Weekly full mock' })}
             </div>
-            <p style={{ margin: '8px 0' }}>
-              <Chip tone="gold">{t({ bn: 'শীঘ্রই আসছে', en: 'Coming soon' })}</Chip>
-            </p>
-            <p style={{ margin: '8px 0', color: '#57616A', fontSize: 14, lineHeight: 1.7 }}>
+            <p style={{ margin: '8px 0 10px', color: '#57616A', fontSize: 14, lineHeight: 1.7 }}>
               {t({ bn: 'পরিকল্পনা: প্রতি সপ্তাহে ১টি পূর্ণ মক — চক্রাকারে:', en: 'Plan: one full mock every week — rotating:' })}
             </p>
-            <p style={{ margin: '0', color: '#57616A', fontSize: 14, lineHeight: 1.9 }}>
+            <p style={{ margin: '0 0 10px', color: '#57616A', fontSize: 14, lineHeight: 1.9 }}>
               {cycle.map((def, i) => (
                 <span key={def.slug}>
                   {i > 0 ? ' → ' : ''}
@@ -253,40 +312,109 @@ export default function JobSeekerDashboardPage() {
                 </span>
               ))}
             </p>
+            {!mocksLoaded ? (
+              <p style={{ margin: 0, color: '#68747B', fontSize: 14 }}>লোড হচ্ছে…</p>
+            ) : weekly ? (
+              <>
+                <p style={{ margin: '0 0 10px', color: '#57616A', fontSize: 14, lineHeight: 1.7 }}>
+                  {weekly.titleBn} · {jobMockPatternSummaryBn(weekly.rulesSnapshot)}
+                </p>
+                <LinkButton to={`/jobs/mock/${weekly.docId}`} variant="accent">
+                  {t({ bn: 'এই সপ্তাহের মক শুরু করুন →', en: "Start this week's mock →" })}
+                </LinkButton>
+              </>
+            ) : (
+              <>
+                <p style={{ margin: '0 0 10px', color: '#68747B', fontSize: 14, lineHeight: 1.7 }}>
+                  {t({
+                    bn: 'এই সপ্তাহের মক এখনো প্রকাশিত হয়নি।',
+                    en: 'This week’s mock is not published yet.',
+                  })}
+                </p>
+                <LinkButton to="/jobs/common" variant="outline">
+                  {t({ bn: 'কমন প্রস্তুতি দেখুন →', en: 'See common preparation →' })}
+                </LinkButton>
+              </>
+            )}
           </Card>
         </Reveal>
 
-        {/* My results — empty until a mock is taken. */}
+        {/* My results — data-driven (D4): real history when the
+            student has taken mocks; the "no mock taken yet" copy
+            only when they truly have taken none. */}
         <Reveal delayMs={0}>
           <Card>
             <div style={{ fontWeight: 700, color: '#142B3B', fontSize: 17 }}>
               {t({ bn: 'আমার ফলাফল', en: 'My results' })}
             </div>
-            <p style={{ margin: '8px 0 10px', color: '#68747B', fontSize: 14, lineHeight: 1.7 }}>
-              {t({
-                bn: 'এখনো কোনো মক টেস্ট দেওয়া হয়নি — মক চালু হলে ফলাফল ও বিষয়ভিত্তিক নম্বর এখানে দেখাবে।',
-                en: 'No mock test has been taken yet — once mocks run, results and subject-wise marks will show here.',
-              })}
-            </p>
-            <LinkButton to="/jobs/common" variant="outline">
-              {t({ bn: 'কমন প্রস্তুতি দেখুন →', en: 'See common preparation →' })}
-            </LinkButton>
+            {attempts === null ? (
+              <p style={{ margin: '8px 0 0', color: '#68747B', fontSize: 14 }}>লোড হচ্ছে…</p>
+            ) : attempts.length === 0 ? (
+              <>
+                <p style={{ margin: '8px 0 10px', color: '#68747B', fontSize: 14, lineHeight: 1.7 }}>
+                  {t({
+                    bn: 'এখনো কোনো মক টেস্ট দেওয়া হয়নি — মক দিলে ফলাফল ও বিষয়ভিত্তিক নম্বর এখানে দেখাবে।',
+                    en: 'No mock test has been taken yet — once you take a mock, results and subject-wise marks will show here.',
+                  })}
+                </p>
+                <LinkButton to="/jobs/common" variant="outline">
+                  {t({ bn: 'কমন প্রস্তুতি দেখুন →', en: 'See common preparation →' })}
+                </LinkButton>
+              </>
+            ) : (
+              <>
+                <p style={{ margin: '8px 0 10px', color: '#57616A', fontSize: 14, lineHeight: 1.7 }}>
+                  {t({ bn: `মোট ${attempts.length}টি মক দেওয়া হয়েছে`, en: `${attempts.length} mock(s) taken` })}
+                  {dashLatest && typeof dashLatest.score === 'number' && typeof dashLatest.totalMarks === 'number'
+                    ? t({ bn: ` · সর্বশেষ: ${dashLatest.score}/${dashLatest.totalMarks} নম্বর`, en: ` · Latest: ${dashLatest.score}/${dashLatest.totalMarks}` })
+                    : ''}
+                </p>
+                {dashLatest ? (
+                  <LinkButton to={`/jobs/result/${dashLatest.docId}`} variant="accent">
+                    {t({ bn: 'সর্বশেষ ফলাফল দেখুন →', en: 'See the latest result →' })}
+                  </LinkButton>
+                ) : null}
+              </>
+            )}
           </Card>
         </Reveal>
 
-        {/* Weak topics — empty until mocks run. */}
+        {/* Weak topics — data-driven (D4, same staleness class):
+            real weak topics from the student's attempts; the empty
+            copy only when no attempt exists. */}
         <Reveal delayMs={80}>
           <Card>
             <div style={{ fontWeight: 700, color: '#142B3B', fontSize: 17 }}>
               {t({ bn: 'দুর্বল টপিক', en: 'Weak topics' })}
             </div>
-            <p style={{ margin: '8px 0 10px', color: '#68747B', fontSize: 14, lineHeight: 1.7 }}>
-              {t({
-                bn: 'মক টেস্টের ফলাফল এলে কোন টপিকে দুর্বল, কী আবার পড়তে হবে — তা এখানে দেখাবে। এখনো কোনো তথ্য নেই।',
-                en: 'Once mock results exist, this will show which topics are weak and what to revise. There is no data yet.',
-              })}
-            </p>
-            <Chip tone="gold">{t({ bn: 'মকের পরে দেখাবে', en: 'Shows after mocks' })}</Chip>
+            {attempts === null ? (
+              <p style={{ margin: '8px 0 0', color: '#68747B', fontSize: 14 }}>লোড হচ্ছে…</p>
+            ) : attempts.length === 0 ? (
+              <>
+                <p style={{ margin: '8px 0 10px', color: '#68747B', fontSize: 14, lineHeight: 1.7 }}>
+                  {t({
+                    bn: 'মক টেস্টের ফলাফল এলে কোন টপিকে দুর্বল, কী আবার পড়তে হবে — তা এখানে দেখাবে। এখনো কোনো তথ্য নেই।',
+                    en: 'Once mock results exist, this will show which topics are weak and what to revise. There is no data yet.',
+                  })}
+                </p>
+                <Chip tone="gold">{t({ bn: 'মকের পরে দেখাবে', en: 'Shows after mocks' })}</Chip>
+              </>
+            ) : dashWeakTopics.length === 0 ? (
+              <p style={{ margin: '8px 0 0', color: '#68747B', fontSize: 14, lineHeight: 1.7 }}>
+                {t({
+                  bn: 'কোনো ভুল উত্তর নেই — দুর্বল টপিক পাওয়া যায়নি।',
+                  en: 'No wrong answers — no weak topics found.',
+                })}
+              </p>
+            ) : (
+              <ul style={{ margin: '8px 0 0', paddingLeft: 20, fontSize: 14, lineHeight: 1.9, color: '#142B3B' }}>
+                {dashWeakTopics.map((w) => (
+                  <li key={w.topicId}>
+                    {jobTopicLabelBn(w.topicId)} — {w.wrong}/{w.total}টি ভুল
+                  </li>
+                ))}
+              </ul>
+            )}
           </Card>
         </Reveal>
 

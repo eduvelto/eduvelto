@@ -9,6 +9,8 @@ export declare const DRAFT_REVIEW_STATES: string[];
 export declare const PATTERN_STATUSES: string[];
 export declare function validateRulesConfig(cfg: unknown, label: string): string[];
 export declare function validateSeed(seed: unknown): string[];
+export declare function emulatorTargetProblem(hostPort: string): string | null;
+export declare function probeEmulator(rest: string): Promise<boolean>;
 export declare function canon(v: unknown): string;
 export declare function compareDoc(
   existing: Record<string, unknown>,

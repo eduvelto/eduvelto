@@ -71,6 +71,25 @@ service cloud.firestore {
       return signedIn() && callerActive() && callerRole() == 'teacher'
         && get(/databases/$(database)/documents/users/$(uid())).data.get('verificationStatus', '') == 'verified';
     }
+    // Verified-teacher gate (Step 7, bank only): a teacher may author
+    // bank questions ONLY while their verificationStatus is
+    // 'verified' (Step 3 §2.7 — Owner + approved Admin/Verified
+    // Teacher only). Admin/Moderator/Owner are verified by role.
+    // This is STRICTER than Step 6's isTeacher() content authoring
+    // (a deliberate difference: the bank carries answers, so the
+    // author gate is tighter; aligning Step 6 is a Step 17
+    // security-testing candidate, NOT changed silently here). A
+    // teacher whose verification lapses keeps READ on their own
+    // drafts (isTeacher read rule) but can no longer edit them; a
+    // Moderator may still verify/reject/publish the draft.
+    function callerVerificationStatus() {
+      return get(/databases/$(database)/documents/users/$(uid())).data.get('verificationStatus', '');
+    }
+    function isVerifiedJobBankAuthor() {
+      return signedIn() && callerActive()
+        && (callerRole() in ['admin', 'moderator', 'owner']
+            || (callerRole() == 'teacher' && callerVerificationStatus() == 'verified'));
+    }
     // DASHBOARDS (Step 5/8, branch draft — NOT deployed): a guardian may
     // read a linked child's progress/bookmarks/results ONLY while the
     // parentLink is 'verified'. The link id is deterministic
@@ -106,6 +125,27 @@ service cloud.firestore {
       return ['bcs', 'bank', 'primary-teacher', 'ntrca', 'dgfood',
               'bpsc-non-cadre', 'cag', 'bfsa', 'others', 'ministries',
               'defence', 'autonomous', 'private-ngo', 'it-professional'];
+    }
+    // The 23 CANONICAL subject doc IDs (Step 6 fold-in, ChatGPT P1-02):
+    // subjects are derived from the verified rulesConfig, never
+    // invented — so the rules allowlist the exact 23 IDs (same list as
+    // JOB_SUBJECTS in src/lib/jobContent.ts; pinned by the jobContent
+    // unit test that reads this function). A teacher or moderator can
+    // never create a subject; only Admin/Owner can, and only one of
+    // these 23. The seed (Admin SDK) bypasses rules.
+    function canonicalJobSubjectIds() {
+      return ['bcs__bangla', 'bcs__english', 'bcs__bangladesh-affairs',
+              'bcs__international-affairs', 'bcs__geography',
+              'bcs__general-science', 'bcs__computer-ict',
+              'bcs__mathematical-reasoning', 'bcs__mental-ability',
+              'bcs__ethics',
+              'bank__bangla', 'bank__english', 'bank__math',
+              'bank__general-knowledge', 'bank__computer',
+              'primary-teacher__bangla', 'primary-teacher__english',
+              'primary-teacher__math-science',
+              'primary-teacher__general-knowledge',
+              'ntrca__bangla', 'ntrca__english', 'ntrca__math',
+              'ntrca__general-knowledge'];
     }
     function isJobExamReviewState(s) {
       return s in ['Not Started', 'In Progress', 'Under Review', 'Published'];
@@ -402,6 +442,1131 @@ service cloud.firestore {
             && request.resource.data.reviewedBy == uid())
         || (to == 'published' && isAdmin())
         || (to == 'withdrawn' && isAdmin());
+    }
+    // ---------- Job content: subjects / chapters / topics / lessons (Step 6) ----------
+    // Step 3 §2.3–§2.6 + §3.2/§3.4, as OVERRIDDEN by the Step 6 spec
+    // (parent coordinator, 22 Nov 2026). Deviations from the draft are
+    // recorded in the match-block comment below; the big ones:
+    //   * reviewStatus vocabulary is 'Not Started' | 'In Progress' |
+    //     'Under Review' | 'Published' (Step 5 P1-1). The draft's
+    //     'draft' / 'in-review' / 'verified' / 'published' values do
+    //     NOT exist — the draft's isJobDraftStatus() / jobContentRead()
+    //     / jobContentCreate() / jobContentUpdate() helpers are NOT
+    //     reused here (their names would collide with the Step 5
+    //     meanings, so new names are used throughout).
+    //   * publication is gated on `status` (P1-1 / e5 lesson), not
+    //     reviewStatus — a list query filters on status, and Firestore
+    //     can only allow a query it can prove from the query's own
+    //     filters.
+    //   * the author MAY edit their own draft (the draft's
+    //     jobContentUpdate allowed it; Step 5's jobExams rule did NOT
+    //     — content collections follow the draft here, not jobExams).
+    //   * Moderator AND Admin may publish/return (Step 5's Admin-only
+    //     publish was about protecting rulesConfig, which these
+    //     collections do not have). The second-eye rule is the guard
+    //     instead: the verifier is never the author.
+    //   * 'it-professional' is excluded: scopeStatus 'scope_pending'
+    //     (Step 5 P1-5) + Step 6 handover constraint 4 — no syllabus
+    //     may be built from it until the owner fixes its scope.
+    function jobContentStatesConsistent(d) {
+      return (d.get('status', '') == 'published') == (d.get('reviewStatus', '') == 'Published');
+    }
+    function isJobContentReviewState(s) {
+      return s in ['Not Started', 'In Progress', 'Under Review', 'Published'];
+    }
+    // Shared create-time facts: draft-only start, author pinned to
+    // the caller (or absent), no verifier yet (a new draft has never
+    // been verified — verifiedBy/verifiedAt must be absent or null,
+    // so a creator cannot bake in a self-verification), timestamps
+    // absent or real timestamps.
+    function jobContentCreateCommon(d) {
+      return d.get('status', '') == 'draft'
+        && d.get('reviewStatus', '') == 'Not Started'
+        && (d.get('authorId', null) == null || d.get('authorId', null) == uid())
+        && d.get('verifiedBy', null) == null
+        && d.get('verifiedAt', null) == null
+        // Step 6 fold-in, ChatGPT P1-04: createdBy is provenance — it
+        // may be absent or the caller, never someone else (a teacher
+        // must not forge createdBy 'seed' or another UID). The seed
+        // itself is applied via the Admin SDK, which bypasses rules.
+        && (d.get('createdBy', null) == null || d.get('createdBy', null) == uid())
+        // Step 6 fold-in, ChatGPT P1-05: publication metadata may
+        // never be baked into a new draft — publishedAt / publishedBy
+        // do not exist in the Step 6 schema at all.
+        && !('publishedAt' in d)
+        && !('publishedBy' in d)
+        && (d.get('createdAt', null) == null || d.get('createdAt', null) is timestamp)
+        && (d.get('updatedAt', null) == null || d.get('updatedAt', null) is timestamp);
+    }
+    // SECOND-EYE RULE (Step 3 §2.7 / §3.4): the verifier is never the
+    // author. verifiedBy may stay as it is, be cleared (a return), or
+    // be set to the CALLER — and only when the caller is not the
+    // author. Publishing additionally requires a real verifier (a
+    // non-null verifiedBy that is not the author) plus a verification
+    // timestamp: nothing is Published without a second eye on it.
+    // NOTE: the rule constrains the VERIFIER, not the publisher — an
+    // Admin/Moderator who authored a doc may still publish it once a
+    // DIFFERENT person has verified it (verifiedBy != authorId).
+    function jobContentSecondEye(oldDoc, newDoc) {
+      return (newDoc.get('verifiedBy', null) == oldDoc.get('verifiedBy', null)
+          || newDoc.get('verifiedBy', null) == null
+          || (newDoc.get('verifiedBy', null) == uid()
+              && uid() != oldDoc.get('authorId', '')))
+        && (newDoc.get('status', '') != 'published'
+            || (newDoc.get('verifiedBy', null) is string
+                && newDoc.get('verifiedBy', null) != oldDoc.get('authorId', '')
+                && newDoc.get('verifiedAt', null) is timestamp));
+    }
+    // PUBLISH-TRANSITION GUARD (Step 6 fold-in, ChatGPT P1-03): the
+    // publication fields (status / reviewStatus / verifiedBy /
+    // verifiedAt) may change only on a draft, or when the doc LEAVES
+    // published (unpublish / return). On a doc that STAYS published
+    // they are frozen: a verifier cannot be silently swapped on a
+    // live doc — unpublish, re-verify, re-publish instead. Content
+    // fixes on a published doc (Admin typo fix, Step 6 decision 10)
+    // are unaffected: they change content fields only.
+    function jobContentPublishTransition(oldDoc, newDoc) {
+      return oldDoc.get('status', '') != 'published'
+        || newDoc.get('status', '') != 'published'
+        || (newDoc.get('status', '') == oldDoc.get('status', '')
+            && newDoc.get('reviewStatus', '') == oldDoc.get('reviewStatus', '')
+            && newDoc.get('verifiedBy', null) == oldDoc.get('verifiedBy', null)
+            && newDoc.get('verifiedAt', null) == oldDoc.get('verifiedAt', null));
+    }
+    // Slug shapes (Step 3 §2.3–§2.5 doc IDs). Parent references must
+    // look like the doc IDs they point at, so a chapter cannot claim a
+    // parent subject that could never exist. Parent EXISTENCE is not
+    // checked here (that would cost a get() per write; Step 5 P1-6 did
+    // reference validation in the taxonomy code, not in the rules).
+    function isJobSubjectId(s) {
+      return s is string && s.matches('^[a-z0-9-]+__[a-z0-9-]+$');
+    }
+    function isJobChapterId(s) {
+      return s is string && s.matches('^[a-z0-9-]+__[a-z0-9-]+__[a-z0-9-]+$');
+    }
+    // Topic doc IDs extend their chapter (Step 6 fold-in — resolves a
+    // Step 6 core inconsistency: the Step 3 draft §2.5 and the Step 6
+    // report wrote `{exam}__{subject}__{topic}`, but the implemented
+    // create rule + tests pin the 4-segment form
+    // `{exam}__{subject}__{chapter}__{topic}`. The 4-segment form
+    // stands: it follows the ID-extends-parent pattern and lets two
+    // chapters hold same-slug topics.
+    function isJobTopicId(s) {
+      return s is string && s.matches('^[a-z0-9-]+__[a-z0-9-]+__[a-z0-9-]+__[a-z0-9-]+$');
+    }
+    // Full new-doc validation, shared by create and both update rules
+    // (the update rules pin the unchangeable fields with affectedKeys,
+    // so re-validating the whole new doc is safe: pinned fields are
+    // unchanged from an already-valid doc).
+    function validJobSubject(d) {
+      return d.get('examSlug', null) in jobExamSlugs()
+        && d.get('examSlug', null) != 'it-professional'
+        && isStr(d.get('nameBn', null), 100)
+        && isStr(d.get('nameEn', null), 100)
+        && d.get('order', null) is int && d.get('order', null) >= 1
+        && (d.get('marks', null) == null
+            || (d.get('marks', null) is int && d.get('marks', null) >= 0))
+        && isOptStr(d.get('syllabusSource', null), 500)
+        // Step 6 fold-in: the seed carries `slug` and `applicableCycle`
+        // — validate them instead of ignoring them (a slug that is not
+        // kebab, or an applicableCycle that is not a string, is denied).
+        && (d.get('slug', null) == null
+            || (d.get('slug', null) is string && d.get('slug', null).matches('^[a-z0-9-]+$')))
+        && (d.get('applicableCycle', null) == null || d.get('applicableCycle', null) is string)
+        // Step 6 fold-in, ChatGPT P2-02: configVersion is an optional
+        // string when present (the seed stamps it; a rules-created
+        // subject may carry it too). It is outside every update
+        // rule's affected-keys allowlist, so it is immutable once set.
+        && (d.get('configVersion', null) == null || d.get('configVersion', null) is string)
+        && d.get('status', null) in ['draft', 'published']
+        && isJobContentReviewState(d.get('reviewStatus', null))
+        && jobContentStatesConsistent(d);
+    }
+    function validJobChapter(d) {
+      return d.get('examSlug', null) in jobExamSlugs()
+        && d.get('examSlug', null) != 'it-professional'
+        && isJobSubjectId(d.get('subjectId', null))
+        && isStr(d.get('nameBn', null), 200)
+        && isStr(d.get('nameEn', null), 200)
+        && isOptStr(d.get('descriptionBn', null), 1000)
+        && isOptStr(d.get('descriptionEn', null), 1000)
+        && d.get('order', null) is int && d.get('order', null) >= 1
+        && d.get('status', null) in ['draft', 'published']
+        && isJobContentReviewState(d.get('reviewStatus', null))
+        && jobContentStatesConsistent(d);
+    }
+    function validJobTopic(d) {
+      return d.get('examSlug', null) in jobExamSlugs()
+        && d.get('examSlug', null) != 'it-professional'
+        && isJobSubjectId(d.get('subjectId', null))
+        && isJobChapterId(d.get('chapterId', null))
+        && isStr(d.get('nameBn', null), 200)
+        && isStr(d.get('nameEn', null), 200)
+        && d.get('order', null) is int && d.get('order', null) >= 1
+        && d.get('isCommon', null) is bool
+        && (d.get('commonExams', null) == null
+            || (d.get('commonExams', null) is list
+                && d.get('commonExams', null).toSet().hasOnly(jobExamSlugs())))
+        // BINDING (Step 3 §2.5): common means in at least 3 of the 4
+        // Tier-1 exams — counted on DISTINCT slugs, so
+        // ['bcs', 'bcs', 'bcs'] does not pass.
+        && (d.get('isCommon', null) != true
+            || (d.get('commonExams', null) is list
+                && d.get('commonExams', null).toSet().size() >= 3))
+        && d.get('commonStatus', null) in ['preliminary', 'verified']
+        && (d.get('questionTarget', null) == null
+            || (d.get('questionTarget', null) is int && d.get('questionTarget', null) >= 0))
+        && d.get('publishedQuestionCount', null) is int
+        && d.get('publishedQuestionCount', null) >= 0
+        && d.get('status', null) in ['draft', 'published']
+        && isJobContentReviewState(d.get('reviewStatus', null))
+        && jobContentStatesConsistent(d);
+    }
+    function validJobLesson(d) {
+      return d.get('examSlug', null) in jobExamSlugs()
+        && d.get('examSlug', null) != 'it-professional'
+        && d.get('lessonType', null) in ['lesson', 'viva-question', 'viva-guide',
+                                          'career-guide', 'cv-guide']
+        // A 'lesson' lives under a topic: all three parent refs are
+        // required. Viva/career/CV guides (Step 16) sit under the exam
+        // instead, so their refs stay string-or-null (checked below).
+        // Step 6 fold-in, ChatGPT P0-04: for a 'lesson' the refs are
+        // not free strings — they must be well-formed parent IDs
+        // (subject 2 segments, chapter 3, topic 4); the prefix chain
+        // itself is pinned in the create rule.
+        && (d.get('lessonType', null) != 'lesson'
+            || (isJobSubjectId(d.get('subjectId', null))
+                && isJobChapterId(d.get('chapterId', null))
+                && isJobTopicId(d.get('topicId', null))))
+        && (d.get('subjectId', null) == null || d.get('subjectId', null) is string)
+        && (d.get('chapterId', null) == null || d.get('chapterId', null) is string)
+        && (d.get('topicId', null) == null || d.get('topicId', null) is string)
+        && isStr(d.get('titleBn', null), 200)
+        && isStr(d.get('titleEn', null), 200)
+        && isStr(d.get('body', null), 100000)
+        && isOptStr(d.get('bodyEn', null), 100000)
+        && d.get('order', null) is int && d.get('order', null) >= 1
+        && d.get('status', null) in ['draft', 'published']
+        && isJobContentReviewState(d.get('reviewStatus', null))
+        && jobContentStatesConsistent(d);
+    }
+
+    // ---------- Step 7: question bank + verification ----------
+    // Two-tier bank (Step 3 §2.7–§2.9, §4): jobQuestions (bank
+    // record, correct answer + explanation + verification history)
+    // is NEVER readable by a student; jobQuestionBundles (student
+    // tier, questions + options ONLY) is readable when Published;
+    // jobQuestionKeys (answer key) is receipt-gated (§4.2) with the
+    // Step 6 fold-in P0-06 anchor: a receipt alone proves nothing —
+    // it must reference a real SUBMITTED attempt (users/{uid}/
+    // jobAttempts/{attemptId}) for the same bundle and UID.
+    function isJobQuestionReviewState(s) {
+      return s in ['Not Started', 'In Progress', 'Under Review',
+                   'Published', 'Rejected', 'Archived'];
+    }
+    // Publication state machine: status published ⟺ reviewStatus
+    // 'Published'. 'Rejected'/'Archived' extend the Step 5/6
+    // two-field vocabulary for the bank (see lib jobQuestions.ts).
+    function jobQuestionStatesConsistent(d) {
+      return (d.get('status', '') == 'published')
+          == (d.get('reviewStatus', '') == 'Published');
+    }
+    // Facts every new bank question carries: created as a draft in
+    // 'Not Started', no verifier, no rejection, no publish fields,
+    // author is the caller when present.
+    function jobQuestionCreateCommon(d) {
+      return d.get('status', '') == 'draft'
+        && d.get('reviewStatus', '') == 'Not Started'
+        && (d.get('authorId', null) == null || d.get('authorId', null) == uid())
+        && (d.get('createdBy', null) == null || d.get('createdBy', null) == uid())
+        && d.get('verifiedBy', null) == null
+        && d.get('verifiedAt', null) == null
+        && d.get('reviewerId', null) == null
+        && d.get('rejectionReason', null) == null
+        && !('publishedAt' in d)
+        && !('publishedBy' in d)
+        && (d.get('createdAt', null) == null || d.get('createdAt', null) is timestamp)
+        && (d.get('updatedAt', null) == null || d.get('updatedAt', null) is timestamp);
+    }
+    // Second-eye rule (Step 7 fold-in, ChatGPT P1-01): a
+    // publisher/verifier is never the author, AND the publisher
+    // IS the verifier — verifiedBy must be the caller on
+    // publication (a prior verification by another moderator does
+    // not publish; the publisher re-verifies in the same update).
+    // verifiedAt is an audit timestamp, not an access proof: when
+    // it changes it must be a real timestamp no later than now and
+    // no older than 5 minutes (a moderator cannot backdate last
+    // week's verification into a publish, nor future-date one).
+    // Backdating inside the window stays possible — the timestamp
+    // is audit evidence only; the access decision is verifiedBy
+    // != author.
+    function jobQuestionSecondEye(oldDoc, newDoc) {
+      return (newDoc.get('verifiedBy', null) == oldDoc.get('verifiedBy', null)
+          || newDoc.get('verifiedBy', null) == null
+          || (newDoc.get('verifiedBy', null) == uid()
+              && uid() != oldDoc.get('authorId', '')))
+        && (newDoc.get('verifiedAt', null) == oldDoc.get('verifiedAt', null)
+            || (newDoc.get('verifiedAt', null) is timestamp
+                && newDoc.get('verifiedAt', null) <= request.time
+                && newDoc.get('verifiedAt', null) > request.time - duration.value(5, 'm')))
+        && (newDoc.get('status', '') != 'published'
+            || (newDoc.get('verifiedBy', null) == uid()
+                && newDoc.get('verifiedBy', null) != oldDoc.get('authorId', '')
+                && newDoc.get('verifiedAt', null) is timestamp
+                && newDoc.get('verifiedAt', null) <= request.time));
+    }
+    // Allowed reviewStatus moves (Moderator/Admin). Same-state is
+    // a content-only edit. Publish only from 'Under Review' — a
+    // draft never jumps to published. Reject needs a reason ≥10
+    // chars. Version: +1 exactly when a Published doc returns to
+    // draft (Not Started); unchanged on every other update.
+    function jobQuestionTransition(oldDoc, newDoc) {
+      return (newDoc.get('reviewStatus', '') == oldDoc.get('reviewStatus', '')
+          || (oldDoc.get('reviewStatus', '') in ['Not Started', 'In Progress']
+              && newDoc.get('reviewStatus', '') in ['Under Review', 'Rejected', 'Archived'])
+          || (oldDoc.get('reviewStatus', '') == 'Under Review'
+              && newDoc.get('reviewStatus', '') in ['Published', 'Rejected', 'Archived', 'Not Started'])
+          || (oldDoc.get('reviewStatus', '') == 'Published'
+              && newDoc.get('reviewStatus', '') in ['Not Started', 'Archived'])
+          || (oldDoc.get('reviewStatus', '') == 'Rejected'
+              && newDoc.get('reviewStatus', '') in ['Not Started', 'Archived'])
+          || (oldDoc.get('reviewStatus', '') == 'Archived'
+              && newDoc.get('reviewStatus', '') == 'Not Started'))
+        && (newDoc.get('reviewStatus', '') != 'Published'
+            || oldDoc.get('reviewStatus', '') == 'Under Review')
+        && (newDoc.get('reviewStatus', '') != 'Rejected'
+            || (newDoc.get('rejectionReason', null) is string
+                && newDoc.get('rejectionReason', '').size() >= 10))
+        && (oldDoc.get('status', '') != 'published'
+            || newDoc.get('status', '') != 'draft'
+            || newDoc.get('version', 0) == oldDoc.get('version', 0) + 1)
+        && ((oldDoc.get('status', '') == 'published' && newDoc.get('status', '') == 'draft')
+            || newDoc.get('version', 0) == oldDoc.get('version', 0));
+    }
+    // Field-shape of a bank question. Per-item option checks (each
+    // option's letter + text) are NOT possible in rules — lists have
+    // no indexing — so rules enforce the 4-option count and the lib
+    // validator (jobQuestions.ts) enforces the rest. Previous-year
+    // questions need exam + year + source proof (Step 3 §2.7).
+    function validJobQuestion(d) {
+      return d.get('examSlug', null) in jobExamSlugs()
+        && d.get('examSlug', null) != 'it-professional'
+        && isJobSubjectId(d.get('subjectId', null))
+        && isJobChapterId(d.get('chapterId', null))
+        && isJobTopicId(d.get('topicId', null))
+        && d.get('subjectId', '').matches('^' + d.get('examSlug', '') + '__[a-z0-9-]+$')
+        && d.get('chapterId', '').matches('^' + d.get('subjectId', '') + '__[a-z0-9-]+$')
+        && d.get('topicId', '').matches('^' + d.get('chapterId', '') + '__[a-z0-9-]+$')
+        && isStr(d.get('questionText', null), 2000)
+        && d.get('options', null) is list && d.get('options', null).size() == 4
+        && d.get('correctLetter', null) in ['A', 'B', 'C', 'D']
+        && isStr(d.get('explanation', null), 2000)
+        && (d.get('whyWrong', null) == null || d.get('whyWrong', null) is map)
+        && d.get('difficulty', null) in ['easy', 'medium', 'hard']
+        && d.get('isPreviousYear', null) is bool
+        && (d.get('isPreviousYear', null) != true
+            || (d.get('examYear', null) is int
+                && d.get('examYear', null) >= 1900 && d.get('examYear', null) <= 2100
+                && d.get('sourceUrl', null) is string))
+        && isStr(d.get('source', null), 500)
+        && (d.get('sourceUrl', null) == null || d.get('sourceUrl', null) is string)
+        && d.get('status', null) in ['draft', 'published']
+        && isJobQuestionReviewState(d.get('reviewStatus', null))
+        && jobQuestionStatesConsistent(d)
+        && isStr(d.get('duplicateHash', null), 200)
+        && d.get('version', null) is int && d.get('version', null) >= 1
+        && (d.get('rejectionReason', null) == null || d.get('rejectionReason', null) is string)
+        && (d.get('reviewerId', null) == null || d.get('reviewerId', null) is string)
+        && (d.get('configVersion', null) == null || d.get('configVersion', null) is string)
+        && (d.get('bundleId', null) == null || d.get('bundleId', null) is string)
+        && (d.get('duplicateOf', null) == null || d.get('duplicateOf', null) is string);
+    }
+    // Field-shape of a student bundle. The key-leak ban (no
+    // correctLetter/explanation/correctText anywhere in the doc) is
+    // enforced in the match rule — the validator checks shape only.
+    // Per-item key-leak checks inside `questions` are NOT possible
+    // in rules (no list indexing); buildJobBundle() in the lib is
+    // the constructor, and only Moderators build bundles — a
+    // Moderator can already read keys, so the student threat model
+    // is unaffected.
+    function validJobQuestionBundle(d) {
+      return d.get('kind', null) in ['topic', 'mock', 'daily', 'weekly', 'previous']
+        && d.get('examSlug', null) in jobExamSlugs()
+        && d.get('examSlug', null) != 'it-professional'
+        && (d.get('kind', null) != 'topic' || d.get('topicId', null) is string)
+        && (d.get('kind', null) != 'mock' || d.get('mockId', null) is string)
+        && (d.get('kind', null) != 'daily' || d.get('mockId', null) is string)
+        && (d.get('kind', null) != 'weekly' || d.get('mockId', null) is string)
+        && (d.get('kind', null) != 'previous' || d.get('year', null) is int)
+        && isStr(d.get('titleBn', null), 200)
+        && isStr(d.get('titleEn', null), 200)
+        && d.get('questions', null) is list
+        && d.get('questions', null).size() <= 200
+        && d.get('questionCount', null) is int
+        && d.get('questionCount', null) >= 1
+        && d.get('questionCount', null) <= 200
+        && d.get('questionCount', null) == d.get('questions', null).size()
+        && d.get('sourceQuestionIds', null) is list
+        && d.get('status', null) in ['draft', 'published']
+        && isJobQuestionReviewState(d.get('reviewStatus', null))
+        && jobQuestionStatesConsistent(d)
+        && (d.get('configVersion', null) == null || d.get('configVersion', null) is string)
+        // Step 8 fold-in (finding 5): the bundle generation an
+        // attempt binds to — optional here (older bundles may lack
+        // it) but validated when present; the ATTEMPT rule requires
+        // the bundle to carry it and match.
+        && (d.get('bundleVersion', null) == null
+            || (d.get('bundleVersion', null) is int && d.get('bundleVersion', null) >= 1));
+    }
+    // Field-shape of an answer key. Per-answer checks are NOT
+    // possible in rules (no list indexing); buildJobBundle() in the
+    // lib is the constructor. The bundleId must equal the doc ID.
+    // The key must answer at least one question (an empty key opens
+    // nothing and scores nothing).
+    function validJobQuestionKey(d, bundleId) {
+      return d.get('bundleId', null) == bundleId
+        && d.get('answers', null) is list
+        && d.get('answers', null).size() >= 1
+        && d.get('answers', null).size() <= 200
+        && (d.get('configVersion', null) == null || d.get('configVersion', null) is string)
+        && (d.get('createdAt', null) == null || d.get('createdAt', null) is timestamp)
+        && (d.get('updatedAt', null) == null || d.get('updatedAt', null) is timestamp);
+    }
+    // Key↔bundle consistency (Step 7 fold-in, ChatGPT P1-06): a
+    // key is valid only against its own bundle — the key answers
+    // exactly the bundle's questions (same count) and carries the
+    // same configVersion (a stale key from an older config cannot
+    // score a newer bundle). The bundle must exist.
+    function jobKeyMatchesBundle(d, bundleId) {
+      return exists(/databases/$(database)/documents/jobQuestionBundles/$(bundleId))
+        && get(/databases/$(database)/documents/jobQuestionBundles/$(bundleId)).data.questionCount == d.get('answers', []).size()
+        && d.get('configVersion', null) is string
+        && get(/databases/$(database)/documents/jobQuestionBundles/$(bundleId)).data.get('configVersion', null) == d.get('configVersion', null);
+    }
+    // A practice (topic) bundle's key is readable signed-in for
+    // immediate feedback — but ONLY when the bundle is Published
+    // (Step 3 §3.6 draft let anyone read any topic key; adapted).
+    function isPracticeJobBundle(bundleId) {
+      return signedIn() && callerActive()
+        && exists(/databases/$(database)/documents/jobQuestionBundles/$(bundleId))
+        && get(/databases/$(database)/documents/jobQuestionBundles/$(bundleId)).data.kind == 'topic'
+        && get(/databases/$(database)/documents/jobQuestionBundles/$(bundleId)).data.status == 'published';
+    }
+    // Fresh-receipt key access (Step 3 §4.2 + Step 6 fold-in P0-06
+    // + Step 7 fold-in, ChatGPT P0-01 Option A): a receipt is a
+    // TEN-MINUTE, ATTEMPT-BOUND AUTHORIZATION WINDOW — it is NOT
+    // one-use. Firestore read rules cannot atomically consume a
+    // receipt as a side effect of a read, so repeat reads inside
+    // the window are possible BY DESIGN (same browser, another
+    // session — all succeed while the window is open). The old
+    // "single-use" claim is REMOVED everywhere it described
+    // jobReceipts; never claim one-use again. A receipt opens a
+    // key ONLY if it is ≤10 minutes old AND not from the future
+    // AND it anchors to a real SUBMITTED attempt owned by the
+    // caller for this bundle — OR (Step 9, Design G) to a real
+    // SUBMITTED mock SESSION for this bundle (the scoring window:
+    // session submitted, attempt not yet created). A bare/forged
+    // receipt without a submission opens nothing. Honest residual limit (Step 3
+    // §4.3, stands): a determined student can still forge a
+    // submitted attempt + receipt in the console and read a key —
+    // on Spark this cannot be fully closed; scores are therefore
+    // NEVER shown as "Verified" (every result page is labelled
+    // "অনুশীলন ফলাফল"). The window CAN be re-issued, but only by
+    // an anchored re-issue (Step 9 closure, open question 1): a new
+    // submission re-anchors the receipt with a fresh createdAt;
+    // without a new submission the window never refreshes.
+    // NOTE: rules have no `let` — the receipt/attempt docs are
+    // fetched through these two helpers (each call is a fresh
+    // get(); the exists() guards run first, so a missing doc never
+    // errors the rule into a deny-by-exception).
+    function jobReceiptData(bundleId) {
+      return get(/databases/$(database)/documents/jobReceipts/$(uid() + '_' + bundleId)).data;
+    }
+    function jobReceiptAttemptData(bundleId) {
+      return get(/databases/$(database)/documents/users/$(uid())/jobAttempts/$(jobReceiptData(bundleId).attemptId)).data;
+    }
+    // Step 9 (Design G): the receipt may ALSO anchor to a
+    // SUBMITTED mock SESSION (same doc-ID as the future attempt).
+    // The session anchor is what makes honest mock scoring
+    // possible at all: the key is read AFTER the session is
+    // submitted (answers frozen, terminal) but BEFORE the attempt
+    // exists. An in-progress session anchors NOTHING (q66/q75
+    // still deny it) — the P0-06 hole stays closed.
+    // ChatGPT fold-in (H.1, CRITICAL): the receipt carries a
+    // PURPOSE — 'practice_review' or 'exam_review' — and the key
+    // read checks the purpose against the bundle's kind, so a
+    // practice receipt can NEVER unlock an exam key (and vice
+    // versa). The purpose is bound at receipt CREATE (see the
+    // jobReceipts match below): practice_review anchors to a
+    // submitted PRACTICE attempt; exam_review anchors to a
+    // submitted EXAM session (the scoring window, Design G) or a
+    // submitted EXAM attempt. The exam anchors live in the
+    // SEPARATE exam collections (H.2) — jobExamSessions /
+    // jobExamAttempts — never in jobSessions / jobAttempts.
+    function jobReceiptExamAttemptData(bundleId) {
+      return get(/databases/$(database)/documents/users/$(uid())/jobExamAttempts/$(jobReceiptData(bundleId).attemptId)).data;
+    }
+    function jobReceiptExamSessionData(bundleId) {
+      return get(/databases/$(database)/documents/users/$(uid())/jobExamSessions/$(jobReceiptData(bundleId).attemptId)).data;
+    }
+    function hasFreshJobReceipt(bundleId) {
+      return signedIn() && callerActive()
+        && exists(/databases/$(database)/documents/jobReceipts/$(uid() + '_' + bundleId))
+        && jobReceiptData(bundleId).createdAt > request.time - duration.value(10, 'm')
+        // Upper bound with a 5-minute skew tolerance (Step 9
+        // fold-in, a5 debug 22 Nov): the receipt must not be
+        // dated more than 5 minutes in the future. A bare
+        // `createdAt <= request.time` BREAKS legitimate fresh
+        // receipts — the emulator's request.time lags the minting
+        // clock by seconds (a receipt minted 2.25s before the
+        // read still failed it), and in production a device clock
+        // ahead of the server would do the same. The strict upper
+        // bound still lives at CREATE (P0-03); this read-time
+        // tolerance only weakens the defense-in-depth against a
+        // SEEDED future-dated receipt by 5 minutes (a10b's +1h
+        // receipt still denies) — such a receipt cannot be minted
+        // through the rules at all.
+        && jobReceiptData(bundleId).createdAt <= request.time + duration.value(5, 'm')
+        && jobReceiptData(bundleId).attemptId is string
+        && exists(/databases/$(database)/documents/jobQuestionBundles/$(bundleId))
+        && ((jobBundleData(bundleId).kind in ['mock', 'daily', 'weekly']
+              && jobReceiptData(bundleId).purpose == 'exam_review'
+              && ((exists(/databases/$(database)/documents/users/$(uid())/jobExamAttempts/$(jobReceiptData(bundleId).attemptId))
+                    && jobReceiptExamAttemptData(bundleId).status == 'submitted'
+                    && jobReceiptExamAttemptData(bundleId).bundleId == bundleId
+                    && jobReceiptExamAttemptData(bundleId).userId == uid()
+                    && jobReceiptExamAttemptData(bundleId).kind == 'mock')
+                  || (exists(/databases/$(database)/documents/users/$(uid())/jobExamSessions/$(jobReceiptData(bundleId).attemptId))
+                    && jobReceiptExamSessionData(bundleId).status == 'submitted'
+                    && jobReceiptExamSessionData(bundleId).bundleId == bundleId
+                    && jobReceiptExamSessionData(bundleId).kind == 'mock')))
+            || (jobBundleData(bundleId).kind in ['topic', 'previous']
+              && jobReceiptData(bundleId).purpose == 'practice_review'
+              && exists(/databases/$(database)/documents/users/$(uid())/jobAttempts/$(jobReceiptData(bundleId).attemptId))
+              && jobReceiptAttemptData(bundleId).status == 'submitted'
+              && jobReceiptAttemptData(bundleId).bundleId == bundleId
+              && jobReceiptAttemptData(bundleId).userId == uid()
+              && jobReceiptAttemptData(bundleId).kind == 'practice'));
+    }
+
+    // Step 9 closure (open question 1 — anchored receipt RE-ISSUE):
+    // the anchor check for a receipt doc, shared by create and by
+    // the re-issue update. The purpose decides the anchor.
+    // practice_review: a SUBMITTED practice attempt for this bundle
+    // (kind 'practice', matching generation). exam_review: a
+    // SUBMITTED exam attempt for this bundle (kind 'mock') — OR a
+    // SUBMITTED exam session for this bundle (the scoring window:
+    // the session is submitted, answers frozen, and the attempt
+    // does not exist yet — the receipt's attemptId IS the session
+    // ID; the session carries the bundle generation). An
+    // in-progress session anchors nothing. `data` is the WOULD-BE
+    // doc (request.resource.data on create and on update); the
+    // caller checks the shape, freshness and identity separately.
+    // A re-issue does NOT extend a window silently: the new doc
+    // must re-anchor to a NEWLY submitted session/attempt and carry
+    // a fresh createdAt, so each submission opens exactly one new
+    // 10-minute window.
+    function validJobReceiptAnchor(data) {
+      return (((data.get('purpose', '') == 'practice_review')
+              && exists(/databases/$(database)/documents/users/$(uid())/jobAttempts/$(data.get('attemptId', '')))
+              && get(/databases/$(database)/documents/users/$(uid())/jobAttempts/$(data.get('attemptId', ''))).data.status == 'submitted'
+              && get(/databases/$(database)/documents/users/$(uid())/jobAttempts/$(data.get('attemptId', ''))).data.bundleId == data.get('bundleId', '')
+              && get(/databases/$(database)/documents/users/$(uid())/jobAttempts/$(data.get('attemptId', ''))).data.userId == uid()
+              && get(/databases/$(database)/documents/users/$(uid())/jobAttempts/$(data.get('attemptId', ''))).data.kind == 'practice'
+              && get(/databases/$(database)/documents/users/$(uid())/jobAttempts/$(data.get('attemptId', ''))).data.bundleVersion == data.get('bundleVersion', null))
+            || ((data.get('purpose', '') == 'exam_review')
+              && ((exists(/databases/$(database)/documents/users/$(uid())/jobExamAttempts/$(data.get('attemptId', '')))
+                    && get(/databases/$(database)/documents/users/$(uid())/jobExamAttempts/$(data.get('attemptId', ''))).data.status == 'submitted'
+                    && get(/databases/$(database)/documents/users/$(uid())/jobExamAttempts/$(data.get('attemptId', ''))).data.bundleId == data.get('bundleId', '')
+                    && get(/databases/$(database)/documents/users/$(uid())/jobExamAttempts/$(data.get('attemptId', ''))).data.userId == uid()
+                    && get(/databases/$(database)/documents/users/$(uid())/jobExamAttempts/$(data.get('attemptId', ''))).data.kind == 'mock'
+                    && get(/databases/$(database)/documents/users/$(uid())/jobExamAttempts/$(data.get('attemptId', ''))).data.bundleVersion == data.get('bundleVersion', null))
+                  || (exists(/databases/$(database)/documents/users/$(uid())/jobExamSessions/$(data.get('attemptId', '')))
+                    && get(/databases/$(database)/documents/users/$(uid())/jobExamSessions/$(data.get('attemptId', ''))).data.status == 'submitted'
+                    && get(/databases/$(database)/documents/users/$(uid())/jobExamSessions/$(data.get('attemptId', ''))).data.bundleId == data.get('bundleId', '')
+                    && get(/databases/$(database)/documents/users/$(uid())/jobExamSessions/$(data.get('attemptId', ''))).data.kind == 'mock'
+                    && get(/databases/$(database)/documents/users/$(uid())/jobExamSessions/$(data.get('attemptId', ''))).data.bundleVersion == data.get('bundleVersion', null)))));
+    }
+
+    // ---------- Step 8: practice engine (jobAttempts + jobSessions) ----------
+    // Helpers for the Step 8 validators below. Same no-`let` shape as
+    // the Step 7 helpers: each call is a fresh get(); the exists()
+    // guards in the validators run first, so a missing doc never
+    // errors the rule into a deny-by-exception.
+    function jobBundleData(bundleId) {
+      return get(/databases/$(database)/documents/jobQuestionBundles/$(bundleId)).data;
+    }
+    // Post-write session state (Step 8 fold-in, ChatGPT finding 1):
+    // getAfter() reads the session AS WRITTEN BY THIS BATCH — so a
+    // batched submit (session → submitted + attempt create together)
+    // validates against the submitted state, not the pre-batch
+    // in-progress one. When the session is NOT in the batch,
+    // getAfter() reads the stored doc, so the old sequential flow
+    // (submit session, then create attempt) still passes the gate.
+    function jobSessionDataAfter(userId, sessionId) {
+      return getAfter(/databases/$(database)/documents/users/$(userId)/jobSessions/$(sessionId)).data;
+    }
+    // Bundle-kind consistency (Step 8 decision, narrowed by the
+    // Step 9 ChatGPT fold-in H.2): a practice attempt / session runs
+    // on a topic bundle (or a previous-year set, which is practised
+    // topic-style) and NOTHING else. Mock bundles (mock / daily /
+    // weekly) belong to the SEPARATE exam collections
+    // (jobExamSessions / jobExamAttempts) — a practice attempt can
+    // never ride on a mock bundle, and the mock branch that used to
+    // live here is gone.
+    function jobBundleKindFitsAttemptKind(bundleKind, kind) {
+      return kind == 'practice' && bundleKind in ['topic', 'previous'];
+    }
+    // ---------- Step 9: full-exam engine (jobExamSessions / jobExamAttempts) ----------
+    // Helpers for the exam validators below. Same no-`let` shape:
+    // each call is a fresh get(); the exists() guards run first.
+    // The exam definition (jobExamDefinitions) doc-ID is derived
+    // from the bundle kind + the session's bare mockId: a full mock
+    // carries its doc-ID as its mockId, a daily/weekly mock carries
+    // the bare date/week key.
+    function jobExamDefinitionId(bundleKind, mockId) {
+      return bundleKind == 'mock' ? mockId : bundleKind + '__' + mockId;
+    }
+    function jobExamDefinitionData(definitionId) {
+      return get(/databases/$(database)/documents/jobExamDefinitions/$(definitionId)).data;
+    }
+    function jobManifestData(questionSetId) {
+      return get(/databases/$(database)/documents/jobQuestionSetManifests/$(questionSetId)).data;
+    }
+    function jobExamSessionDataAfter(userId, sessionId) {
+      return getAfter(/databases/$(database)/documents/users/$(userId)/jobExamSessions/$(sessionId)).data;
+    }
+    // Full-attempt create validation (Step 3 §2.11 + §3.8, Step 8).
+    // The attempt doc is created ONCE at submit with status
+    // 'submitted' and the full fields (Step 8 design decision: the
+    // Step 7 minimal anchor's create-in-progress + update-to-submit
+    // lifecycle is GONE — a second submit is an update, and updates
+    // are denied, so the doc-ID stays the idempotency key and no
+    // orphan in-progress attempt can ever be stranded, since deletes
+    // are forbidden for everyone including Admin).
+    // HONEST LIMITS — what the rules CANNOT check, and why:
+    //  - Per-answer shape: rules have NO list indexing, so the
+    //    per-answer {topicId, subjectId, correct, marks, ...} shape
+    //    cannot be validated here (Step 7 decision #7 stands). The
+    //    per-answer topicId + correct mandate is enforced by the
+    //    engine lib validator (jobEngine.ts, Step 8 UI agent); the
+    //    rules enforce the aggregates instead: counts sum to
+    //    answers.size(), answers non-empty and <= the bundle's
+    //    questionCount, and the marks/counts sanity checks below.
+    //  - Exact score formula: score == correct*marksPerQuestion -
+    //    wrong*negativeMarking needs the exam pattern, which the
+    //    rules do NOT look up (no jobExams read — keeps the rule
+    //    inside the get() budget). Enforceable binding (Step 8
+    //    fold-in, findings 2/5): the attempt DECLARES the marking
+    //    it was scored under (`negativeMarkingUsed` in {0, 0.25,
+    //    0.5} + `markingSchemeVersion`), and the rule enforces
+    //    negativeDeduction == wrongCount * negativeMarkingUsed —
+    //    so a claimed deduction always matches a declared scheme
+    //    (Bank: 0 — its penalty is unverified and disabled, never
+    //    the provisional 0.25). The exact formula is lib-level.
+    //  - Float division: accuracy/percentage formulas cannot be
+    //    verified (rules cannot reliably check float division), so
+    //    only ranges are enforced (accuracy 0..100, percentage
+    //    -100..100); the values are client-computed + range-checked.
+    //  - examSlug allowlist is the canonical 14 hub slugs from
+    //    jobExamSlugs() (same list as jobProfile.ts
+    //    TARGET_EXAM_SLUGS). 'common' is NOT in it: /jobs/common is
+    //    a cross-exam hub/route, not an exam — common-topic practice
+    //    carries the underlying exam's slug.
+    //  - Session gate: the attempt may only be created when the
+    //    session with the same doc-ID exists and is already
+    //    'submitted' (the client marks the session submitted in the
+    //    same submit flow, then creates the attempt). Kind /
+    //    examSlug / mockId equality between session and attempt is
+    //    NOT re-checked here: it follows transitively, because both
+    //    the session create and the attempt create bind kind +
+    //    examSlug + mockId to the SAME bundle (a mock session cannot
+    //    exist on a topic bundle, and vice versa).
+    function validJobAttemptCreate(d, userId, attemptId) {
+      return d.keys().hasOnly(['userId', 'kind', 'mockId', 'bundleId',
+             'examSlug', 'subjectId', 'topicId', 'answers', 'score',
+             'totalMarks', 'negativeDeduction', 'negativeMarkingUsed',
+             'markingSchemeVersion', 'bundleVersion', 'correctCount',
+             'wrongCount', 'unansweredCount', 'accuracy', 'percentage',
+             'timeSpentSeconds', 'startedAt', 'submittedAt', 'status',
+             'markingStatus', 'resultLabel', 'clientCalculatedScore',
+             'serverVerifiedScore', 'trustLevel', 'resultType',
+             'sessionId', 'audit', 'answerHashes', 'anomalyFlags',
+             'submissionIntegrity'])
+        && d.keys().hasAll(['userId', 'kind', 'mockId', 'bundleId',
+             'examSlug', 'subjectId', 'topicId', 'answers', 'score',
+             'totalMarks', 'negativeDeduction', 'negativeMarkingUsed',
+             'markingSchemeVersion', 'bundleVersion', 'correctCount',
+             'wrongCount', 'unansweredCount', 'accuracy', 'percentage',
+             'timeSpentSeconds', 'startedAt', 'submittedAt', 'status',
+             'markingStatus', 'resultLabel', 'clientCalculatedScore',
+             'trustLevel', 'resultType', 'sessionId',
+             'submissionIntegrity'])
+        && d.get('userId', '') == userId
+        // Step 9 (ChatGPT fold-in, H.2): practice attempts live
+        // ONLY here (jobAttempts). A mock attempt belongs to
+        // jobExamAttempts (validJobExamAttemptCreate) — kind 'mock'
+        // is no longer valid in this collection.
+        && d.get('kind', null) == 'practice'
+        && d.get('mockId', null) == null
+        && d.get('bundleId', null) is string
+        && d.get('examSlug', null) in jobExamSlugs()
+        && (d.get('subjectId', null) == null
+            || (d.get('subjectId', null) is string && d.get('subjectId', '').size() <= 200))
+        && (d.get('topicId', null) == null
+            || (d.get('topicId', null) is string && d.get('topicId', '').size() <= 200))
+        && d.get('answers', null) is list
+        && d.get('answers', []).size() >= 1
+        && d.get('score', null) is number
+        && d.get('totalMarks', null) is number && d.get('totalMarks', 0) > 0
+        && d.get('score', 0) <= d.get('totalMarks', 0)
+        && d.get('score', 0) >= -d.get('totalMarks', 0)
+        && d.get('clientCalculatedScore', null) == d.get('score', null)
+        && d.get('negativeDeduction', null) is number
+        && d.get('negativeDeduction', -1) >= 0
+        // Step 8 fold-in (findings 2/5/9): the deduction is bound
+        // to the DECLARED marking scheme — wrongCount × the penalty
+        // the attempt says was applied (0 for Bank, whose penalty
+        // is unverified and disabled). The scheme version pins the
+        // config generation; the bundle version pins the bundle.
+        && d.get('negativeMarkingUsed', null) is number
+        && (d.get('negativeMarkingUsed', -1) == 0
+            || d.get('negativeMarkingUsed', -1) == 0.25
+            || d.get('negativeMarkingUsed', -1) == 0.5)
+        && d.get('negativeDeduction', -1)
+             == d.get('wrongCount', 0) * d.get('negativeMarkingUsed', -1)
+        && isStr(d.get('markingSchemeVersion', null), 100)
+        && d.get('bundleVersion', null) is int && d.get('bundleVersion', 0) >= 1
+        && d.get('correctCount', null) is int && d.get('correctCount', -1) >= 0
+        && d.get('wrongCount', null) is int && d.get('wrongCount', -1) >= 0
+        && d.get('unansweredCount', null) is int && d.get('unansweredCount', -1) >= 0
+        && d.get('correctCount', 0) + d.get('wrongCount', 0) + d.get('unansweredCount', 0)
+             == d.get('answers', []).size()
+        && d.get('accuracy', null) is number
+        && d.get('accuracy', -1) >= 0 && d.get('accuracy', 101) <= 100
+        && d.get('percentage', null) is number
+        && d.get('percentage', -101) >= -100 && d.get('percentage', 101) <= 100
+        && d.get('timeSpentSeconds', null) is number
+        && d.get('timeSpentSeconds', -1) >= 0
+        && d.get('startedAt', null) is timestamp
+        && d.get('submittedAt', null) is timestamp
+        && d.get('startedAt', null) <= d.get('submittedAt', null)
+        && d.get('submittedAt', null) <= request.time
+        && d.get('status', '') == 'submitted'
+        && d.get('markingStatus', '') == 'auto'
+        && d.get('resultLabel', '') == 'practice'
+        && d.get('trustLevel', '') == 'unverified'
+        && d.get('resultType', '') == 'practice'
+        // Step 9 (ChatGPT fold-in, H.3): immutable does NOT mean
+        // truthful — the score is client-calculated, and the
+        // attempt says so explicitly. No student can ever write a
+        // 'server_verified' integrity label (a future server
+        // scorer would be the only writer of that value).
+        && d.get('submissionIntegrity', '') == 'client_calculated'
+        // serverVerifiedScore: the student can NEVER write it — it
+        // must be absent or null (a future server scorer writes it).
+        && d.get('serverVerifiedScore', null) == null
+        // Optional audit-only fields (proposals, §2.11): type-checked
+        // when present, never trusted as proof (rules cannot
+        // recompute hashes — see §4.4 / AQ-13).
+        && (d.get('audit', null) == null || d.get('audit', null) is map)
+        && (d.get('answerHashes', null) == null || d.get('answerHashes', null) is list)
+        && (d.get('anomalyFlags', null) == null || d.get('anomalyFlags', null) is list)
+        && d.get('sessionId', '') == attemptId
+        // The bundle must exist, be Published, and match the attempt
+        // (same exam, fitting kind, same mock when a mock) — and the
+        // attempt must be bound to the bundle's CURRENT generation
+        // (Step 8 fold-in, finding 5: a republished bundle cannot
+        // silently reinterpret an old attempt).
+        && exists(/databases/$(database)/documents/jobQuestionBundles/$(d.get('bundleId', '')))
+        && jobBundleData(d.get('bundleId', '')).status == 'published'
+        && jobBundleData(d.get('bundleId', '')).examSlug == d.get('examSlug', null)
+        && jobBundleKindFitsAttemptKind(jobBundleData(d.get('bundleId', '')).kind, d.get('kind', null))
+        && d.get('answers', []).size() <= jobBundleData(d.get('bundleId', '')).questionCount
+        && jobBundleData(d.get('bundleId', '')).get('bundleVersion', null) == d.get('bundleVersion', null)
+        // Session gate (Step 8 decision, strengthened by the fold-in,
+        // ChatGPT finding 1): the session with the same ID must exist
+        // and be 'submitted' AFTER this write (getAfter — the batched
+        // submit's own transition counts). An in-progress or abandoned
+        // session — or no session — cannot anchor an attempt. The
+        // attempt is also bound to the session's IDENTITY: same kind,
+        // exam, mock, bundle, and the same number of questions as the
+        // session's stored order — so a forged attempt cannot ride on
+        // an unrelated session.
+        && exists(/databases/$(database)/documents/users/$(userId)/jobSessions/$(attemptId))
+        && jobSessionDataAfter(userId, attemptId).status == 'submitted'
+        && jobSessionDataAfter(userId, attemptId).bundleId == d.get('bundleId', '')
+        && jobSessionDataAfter(userId, attemptId).kind == d.get('kind', null)
+        && jobSessionDataAfter(userId, attemptId).examSlug == d.get('examSlug', null)
+        && jobSessionDataAfter(userId, attemptId).mockId == d.get('mockId', null)
+        && jobSessionDataAfter(userId, attemptId).questionRefs.size() == d.get('answers', []).size();
+    }
+    // Session create validation (Step 3 §2.12). A PRACTICE session
+    // starts 'in-progress' with endsAt null — practice never has a
+    // timer (no endsAt, no clientEndsAtMillis). PAUSED is NOT a
+    // session-doc status: it exists only as a client-side practice
+    // state (Step 2 §4.5), so it is deliberately absent here.
+    // Step 9 (ChatGPT fold-in, H.2): this validator is PRACTICE
+    // ONLY. A mock session belongs to jobExamSessions
+    // (validJobExamSessionCreate) — kind 'mock' is no longer valid
+    // in this collection.
+    function validJobSessionCreate(d) {
+      return d.keys().hasOnly(['kind', 'mockId', 'bundleId', 'examSlug',
+             'status', 'startedAt', 'endsAt', 'questionRefs', 'answers',
+             'currentQuestion', 'lastSyncedAt', 'clientEndsAtMillis',
+             'submittedAt', 'createdAt', 'updatedAt', 'revision'])
+        && d.keys().hasAll(['kind', 'mockId', 'bundleId', 'examSlug',
+             'status', 'startedAt', 'endsAt', 'questionRefs', 'answers',
+             'currentQuestion', 'lastSyncedAt', 'clientEndsAtMillis',
+             'submittedAt', 'createdAt', 'updatedAt', 'revision'])
+        && d.get('kind', null) == 'practice'
+        && d.get('mockId', null) == null
+        && d.get('bundleId', null) is string
+        && d.get('examSlug', null) in jobExamSlugs()
+        && d.get('status', '') == 'in-progress'
+        && d.get('startedAt', null) is timestamp
+        && d.get('endsAt', null) == null
+        && d.get('questionRefs', null) is list
+        && d.get('questionRefs', []).size() >= 1
+        && d.get('answers', null) is map
+        // Step 8 fold-in (finding 6): the answers map is exactly one
+        // entry per stored question (keys = questionRefs n values);
+        // currentQuestion is inside the stored order.
+        && d.get('answers', {}).size() == d.get('questionRefs', []).size()
+        && d.get('currentQuestion', null) is int && d.get('currentQuestion', 0) >= 1
+        && d.get('currentQuestion', 0) <= d.get('questionRefs', []).size()
+        && d.get('lastSyncedAt', null) is timestamp
+        // Step 8 fold-in (finding 6): revision starts at 1 and is
+        // bumped by exactly 1 per write (see validJobSessionUpdate)
+        // — a stale client write is rejected, so two tabs/devices
+        // cannot silently overwrite each other's answers.
+        && d.get('revision', null) is int && d.get('revision', 0) == 1
+        && d.get('lastSyncedAt', null) is timestamp
+        && d.get('clientEndsAtMillis', null) == null
+        && d.get('submittedAt', null) == null
+        && d.get('createdAt', null) is timestamp
+        && d.get('updatedAt', null) is timestamp
+        && exists(/databases/$(database)/documents/jobQuestionBundles/$(d.get('bundleId', '')))
+        && jobBundleData(d.get('bundleId', '')).status == 'published'
+        && jobBundleData(d.get('bundleId', '')).examSlug == d.get('examSlug', null)
+        && jobBundleKindFitsAttemptKind(jobBundleData(d.get('bundleId', '')).kind, d.get('kind', null));
+    }
+    // Session update validation (d = new doc, old = existing doc).
+    // PRACTICE ONLY (H.2). Only called while old.status ==
+    // 'in-progress' (enforced in the match) and only for the
+    // autosave/transition keys (enforced by affectedKeys in the
+    // match). submittedAt is set exactly on the in-progress ->
+    // submitted transition; endsAt NEVER exists on a practice
+    // session (a practice update that sets one is denied).
+    function validJobSessionUpdate(d, old) {
+      return d.get('status', '') in ['in-progress', 'submitted', 'abandoned']
+        && ((d.get('status', '') == 'submitted' && d.get('submittedAt', null) is timestamp)
+            || (d.get('status', '') != 'submitted' && d.get('submittedAt', null) == null))
+        && d.get('answers', null) is map
+        // Step 8 fold-in (finding 6): autosave fields are bounded —
+        // the answers map never grows past the stored question list,
+        // currentQuestion stays inside it, and the write is rejected
+        // unless it carries exactly old.revision + 1 (stale autosaves
+        // and double-submits are denied; the client reloads and
+        // retries from the stored revision). Counters are NOT stored
+        // on the session — progress is derived from `answers`
+        // client-side, so there is nothing to keep consistent.
+        // RATE LIMITING: the rules CANNOT rate-limit writes — a
+        // client can still autosave as fast as it likes; throttling
+        // (30s / 5 changes / page-hide, Step 2 §4.6) is client-side
+        // only, and quota abuse is an admin/monitoring concern.
+        && d.get('answers', {}).size() <= old.get('questionRefs', []).size()
+        && d.get('currentQuestion', null) is int && d.get('currentQuestion', 0) >= 1
+        && d.get('currentQuestion', 0) <= old.get('questionRefs', []).size()
+        && d.get('revision', null) is int
+        && d.get('revision', -1) == old.get('revision', 0) + 1
+        && d.get('lastSyncedAt', null) is timestamp
+        && d.get('updatedAt', null) is timestamp
+        && d.get('endsAt', null) == null
+        && d.get('clientEndsAtMillis', null) == null;
+    }
+
+    // ---------- Step 9: full-exam sessions + attempts ----------
+    // Exam session create (Step 9, ChatGPT fold-in §1(a)/§1(b)/
+    // H.2/H.6/H.7). The exam session lives in jobExamSessions — a
+    // SEPARATE collection from practice sessions, with exam-only
+    // rules. The timer is server-time-derived:
+    //  - startedAt MUST be the server timestamp (== request.time —
+    //    a literal client Date is a few ms off and fails, so the
+    //    client must write the serverTimestamp sentinel; verified
+    //    in the emulator, scratch test 22 Nov 2026).
+    //  - endsAt starts null and is set ONCE by a later update to
+    //    EXACTLY startedAt + the definition's frozen duration
+    //    (see validJobExamSessionUpdate) — the client cannot
+    //    compute request.time + duration at create (it does not
+    //    know the server time until it reads back startedAt), so
+    //    the exact-equality check lives on the update, not here.
+    //  - the question set is FROZEN by whole-equality against the
+    //    published manifest (jobQuestionSetManifests): the
+    //    session's questionRefs must BE the manifest's refs, and
+    //    the manifest must be the definition's CURRENT one.
+    //  - one active session per user per exam pattern (H.7): the
+    //    create is a batch with the lock doc jobExamUserLocks/
+    //    {uid}_{examSlug} — the rule requires the post-batch lock
+    //    to exist and point at this session (getAfter).
+    // Budget note (Step 9 fold-in, H.6 + the M1 lesson): Firestore
+    // rules have NO let bindings and a 1000-expression budget PER
+    // REQUEST — a batched session+lock create evaluates BOTH
+    // validators together. Every referenced doc is therefore
+    // fetched ONCE, in the match below, and passed in as a plain
+    // map (bundle / manifest / def / lockAfter). Re-reading the
+    // same doc at several call sites (the original shape) blew the
+    // budget on the batch (verified 22 Nov, scratch a5–a5h).
+    function validJobExamSessionCreate(d, sessionId, bundle, manifest, def, lockAfter) {
+      return d.keys().hasOnly(['kind', 'mockId', 'bundleId', 'examSlug',
+             'definitionId', 'questionSetId', 'bundleVersion', 'status',
+             'startedAt', 'endsAt', 'questionRefs', 'answers',
+             'currentQuestion', 'lastSyncedAt', 'clientEndsAtMillis',
+             'submittedAt', 'createdAt', 'updatedAt', 'revision'])
+        && d.keys().hasAll(['kind', 'mockId', 'bundleId', 'examSlug',
+             'definitionId', 'questionSetId', 'bundleVersion', 'status',
+             'startedAt', 'endsAt', 'questionRefs', 'answers',
+             'currentQuestion', 'lastSyncedAt', 'clientEndsAtMillis',
+             'submittedAt', 'createdAt', 'updatedAt', 'revision'])
+        && d.get('kind', null) == 'mock'
+        && d.get('mockId', null) is string && d.get('mockId', '').size() > 0
+        && d.get('bundleId', null) is string
+        && d.get('examSlug', null) in jobExamSlugs()
+        && d.get('definitionId', null) is string && d.get('definitionId', '').size() > 0
+        && d.get('questionSetId', null) is string && d.get('questionSetId', '').size() > 0
+        && d.get('bundleVersion', null) is int && d.get('bundleVersion', 0) >= 1
+        && d.get('status', '') == 'in-progress'
+        && d.get('startedAt', null) == request.time
+        && d.get('endsAt', null) == null
+        && d.get('questionRefs', null) is list
+        && d.get('questionRefs', []).size() >= 1
+        && d.get('answers', null) is map
+        && d.get('answers', {}).size() == d.get('questionRefs', []).size()
+        && d.get('currentQuestion', null) is int && d.get('currentQuestion', 0) >= 1
+        && d.get('currentQuestion', 0) <= d.get('questionRefs', []).size()
+        && d.get('revision', null) is int && d.get('revision', 0) == 1
+        && d.get('lastSyncedAt', null) is timestamp
+        && (d.get('clientEndsAtMillis', null) == null || d.get('clientEndsAtMillis', null) is number)
+        && d.get('submittedAt', null) == null
+        && d.get('createdAt', null) is timestamp
+        && d.get('updatedAt', null) is timestamp
+        // The bundle must be Published and match the session
+        // (same exam, mock-type kind, same mock) — and the
+        // session runs the bundle's CURRENT generation.
+        && bundle.get('status', null) == 'published'
+        && bundle.get('examSlug', null) == d.get('examSlug', null)
+        && bundle.get('kind', null) in ['mock', 'daily', 'weekly']
+        && bundle.get('mockId', null) == d.get('mockId', null)
+        && bundle.get('bundleVersion', null) == d.get('bundleVersion', null)
+        // The manifest must be Published, belong to this mock,
+        // and BE the session's question set — whole-equality (the
+        // only loop-free way to validate 200 refs in rules).
+        && manifest.get('status', null) == 'published'
+        && manifest.get('mockId', null) == d.get('mockId', null)
+        && manifest.get('examSlug', null) == d.get('examSlug', null)
+        && manifest.get('questionRefs', null) == d.get('questionRefs', null)
+        && manifest.get('questionCount', null) == d.get('questionRefs', []).size()
+        // The definition must be Published, point at this bundle
+        // AND at this manifest (the session runs the definition's
+        // CURRENT question set — resume reads the session's stored
+        // questionSetId, never the definition).
+        && def.get('status', null) == 'published'
+        && def.get('bundleId', null) == d.get('bundleId', '')
+        && def.get('questionSetId', null) == d.get('questionSetId', '')
+        && def.get('examSlug', null) == d.get('examSlug', null)
+        // The lock (H.7): the post-batch lock must exist, belong
+        // to this user + pattern, be in_progress, and point at
+        // this session. A session created without its lock (a
+        // single write, no batch) reads the STORED lock via
+        // getAfter — absent — and is denied.
+        && lockAfter.get('activeSessionId', '') == sessionId
+        && lockAfter.get('status', '') == 'in_progress'
+        && lockAfter.get('definitionId', '') == d.get('definitionId', '');
+    }
+    // Exam session update (d = new doc, old = existing doc). Only
+    // called while old.status == 'in-progress' (match) and only
+    // for the autosave/transition keys (affectedKeys in the match).
+    // Timer (ChatGPT §1(a) A.2 + audit M1, tightened to EXACT):
+    //  - endsAt is set ONCE, from null, to EXACTLY startedAt +
+    //    the definition's frozen duration (rulesSnapshot.
+    //    timeMinutes) — not a range: a shorter deadline would let
+    //    a client shorten its own exam, a longer one would stretch
+    //    it. The chain runs ONLY when endsAt is actually being
+    //    set (short-circuit), so autosaves never pay for it.
+    //  - answers may change ONLY while the exam is still running:
+    //    if the answers map changed, the stored deadline must be
+    //    unset (not yet stored) or still in the future. The
+    //    submit transition after the deadline (timeout path) must
+    //    carry NO answer changes; the manual submit (before the
+    //    deadline) may carry a final snapshot.
+    //  - startedAt / definitionId / questionSetId / bundleVersion /
+    //    bundleId / examSlug / mockId / questionRefs / kind are
+    //    immutable — they are not in the match's affectedKeys.
+    function jobExamEndsAtIsExact(old, d) {
+      return exists(/databases/$(database)/documents/jobQuestionBundles/$(old.get('bundleId', '')))
+        && exists(/databases/$(database)/documents/jobExamDefinitions/$(old.get('definitionId', '')))
+        && jobExamDefinitionData(old.get('definitionId', '')).get('rulesSnapshot', null) is map
+        && jobExamDefinitionData(old.get('definitionId', '')).rulesSnapshot.get('timeMinutes', null) is int
+        && d.get('endsAt', null) is timestamp
+        && old.get('startedAt', null) is timestamp
+        && d.get('endsAt', null) == old.get('startedAt', null)
+             + duration.value(jobExamDefinitionData(old.get('definitionId', '')).rulesSnapshot.timeMinutes * 60, 's');
+    }
+    function validJobExamSessionUpdate(d, old) {
+      return d.get('status', '') in ['in-progress', 'submitted', 'abandoned']
+        && ((d.get('status', '') == 'submitted' && d.get('submittedAt', null) is timestamp)
+            || (d.get('status', '') != 'submitted' && d.get('submittedAt', null) == null))
+        && d.get('answers', null) is map
+        && d.get('answers', {}).size() <= old.get('questionRefs', []).size()
+        && d.get('currentQuestion', null) is int && d.get('currentQuestion', 0) >= 1
+        && d.get('currentQuestion', 0) <= old.get('questionRefs', []).size()
+        && d.get('revision', null) is int
+        && d.get('revision', -1) == old.get('revision', 0) + 1
+        && d.get('lastSyncedAt', null) is timestamp
+        && d.get('updatedAt', null) is timestamp
+        && ((old.get('endsAt', null) == null
+              && (d.get('endsAt', null) == null || jobExamEndsAtIsExact(old, d)))
+            || (old.get('endsAt', null) != null && d.get('endsAt', null) == old.get('endsAt', null)))
+        && (d.get('answers', {}) == old.get('answers', {})
+            || old.get('endsAt', null) == null
+            || request.time < old.get('endsAt', null))
+        && (d.get('clientEndsAtMillis', null) == null || d.get('clientEndsAtMillis', null) is number);
+    }
+    // Exam attempt create (Step 9, Design G + ChatGPT fold-in
+    // §1(c)/§1(e)/H.3/H.4). Created ONCE at submit with status
+    // 'submitted' and the full fields; the in-progress lifecycle
+    // lives in jobExamSessions. The doc-ID (= session ID) is the
+    // idempotency key; updates and deletes are denied. The attempt
+    // is bound to the submitted exam session (gate below) AND to
+    // the stored deadline (audit M1-b): submittedAt must be ≤ the
+    // session's STORED endsAt — a mock whose deadline was never
+    // stored cannot be submitted at all. The attempt carries the
+    // session's bundleVersion + questionSetId, so a forged attempt
+    // cannot ride on an unrelated session.
+    // HONEST LIMITS (same as practice, §4.4): per-answer shape
+    // cannot be validated in rules (no list indexing — Step 7
+    // decision #7 stands); the exact score formula is lib-level
+    // (the rules bind the deduction to the DECLARED scheme);
+    // accuracy/percentage are range-checked only; and the
+    // attempt's answers cannot be compared element-wise with the
+    // session's answers (list vs map shapes) — the lib builds the
+    // attempt from the fresh-read session, and the counts + size
+    // checks below are the enforceable part.
+    // Budget note (same as validJobExamSessionCreate): the bundle
+    // + the post-write session are fetched ONCE in the match below
+    // and passed in as plain maps (bundle / sessAfter). The
+    // original shape re-read the session at NINE getAfter call
+    // sites and the bundle at SIX get() sites, which blew the
+    // 1000-expression budget on the attempt create (verified 22
+    // Nov, a5). The M1-b deadline check reads sessAfter.endsAt:
+    // the submit never changes endsAt, so the post-write value IS
+    // the stored deadline (no separate get() call site needed).
+    function validJobExamAttemptCreate(d, userId, attemptId, bundle, sessAfter) {
+      return d.keys().hasOnly(['userId', 'kind', 'mockId', 'bundleId',
+             'examSlug', 'subjectId', 'topicId', 'questionSetId',
+             'answers', 'score', 'totalMarks', 'negativeDeduction',
+             'negativeMarkingUsed', 'markingSchemeVersion',
+             'bundleVersion', 'correctCount', 'wrongCount',
+             'unansweredCount', 'accuracy', 'percentage',
+             'timeSpentSeconds', 'startedAt', 'submittedAt', 'status',
+             'markingStatus', 'resultLabel', 'clientCalculatedScore',
+             'serverVerifiedScore', 'trustLevel', 'resultType',
+             'sessionId', 'audit', 'answerHashes', 'anomalyFlags',
+             'submissionIntegrity'])
+        && d.keys().hasAll(['userId', 'kind', 'mockId', 'bundleId',
+             'examSlug', 'subjectId', 'topicId', 'questionSetId',
+             'answers', 'score', 'totalMarks', 'negativeDeduction',
+             'negativeMarkingUsed', 'markingSchemeVersion',
+             'bundleVersion', 'correctCount', 'wrongCount',
+             'unansweredCount', 'accuracy', 'percentage',
+             'timeSpentSeconds', 'startedAt', 'submittedAt', 'status',
+             'markingStatus', 'resultLabel', 'clientCalculatedScore',
+             'serverVerifiedScore', 'trustLevel', 'resultType', 'sessionId',
+             'submissionIntegrity'])
+        && d.get('userId', '') == userId
+        && d.get('kind', null) == 'mock'
+        && d.get('mockId', null) is string && d.get('mockId', '').size() > 0
+        && d.get('bundleId', null) is string
+        && d.get('examSlug', null) in jobExamSlugs()
+        && d.get('subjectId', null) == null
+        && d.get('topicId', null) == null
+        && d.get('questionSetId', null) is string && d.get('questionSetId', '').size() > 0
+        && d.get('answers', null) is list
+        && d.get('answers', []).size() >= 1
+        && d.get('score', null) is number
+        && d.get('totalMarks', null) is number && d.get('totalMarks', 0) > 0
+        && d.get('score', 0) <= d.get('totalMarks', 0)
+        && d.get('score', 0) >= -d.get('totalMarks', 0)
+        && d.get('clientCalculatedScore', null) == d.get('score', null)
+        && d.get('negativeDeduction', null) is number
+        && d.get('negativeDeduction', -1) >= 0
+        && d.get('negativeMarkingUsed', null) is number
+        && (d.get('negativeMarkingUsed', -1) == 0
+            || d.get('negativeMarkingUsed', -1) == 0.25
+            || d.get('negativeMarkingUsed', -1) == 0.5)
+        && d.get('negativeDeduction', -1)
+             == d.get('wrongCount', 0) * d.get('negativeMarkingUsed', -1)
+        && isStr(d.get('markingSchemeVersion', null), 100)
+        && d.get('bundleVersion', null) is int && d.get('bundleVersion', 0) >= 1
+        && d.get('correctCount', null) is int && d.get('correctCount', -1) >= 0
+        && d.get('wrongCount', null) is int && d.get('wrongCount', -1) >= 0
+        && d.get('unansweredCount', null) is int && d.get('unansweredCount', -1) >= 0
+        && d.get('correctCount', 0) + d.get('wrongCount', 0) + d.get('unansweredCount', 0)
+             == d.get('answers', []).size()
+        && d.get('accuracy', null) is number
+        && d.get('accuracy', -1) >= 0 && d.get('accuracy', 101) <= 100
+        && d.get('percentage', null) is number
+        && d.get('percentage', -101) >= -100 && d.get('percentage', 101) <= 100
+        && d.get('timeSpentSeconds', null) is number
+        && d.get('timeSpentSeconds', -1) >= 0
+        && d.get('startedAt', null) is timestamp
+        && d.get('submittedAt', null) is timestamp
+        && d.get('startedAt', null) <= d.get('submittedAt', null)
+        && d.get('submittedAt', null) <= request.time
+        && d.get('status', '') == 'submitted'
+        && d.get('markingStatus', '') == 'auto'
+        && d.get('resultLabel', '') == 'practice'
+        && d.get('trustLevel', '') == 'unverified'
+        && d.get('resultType', '') == 'practice'
+        // H.3: immutable does NOT mean truthful — the score is
+        // client-calculated, and the attempt says so explicitly.
+        && d.get('submissionIntegrity', '') == 'client_calculated'
+        && d.get('serverVerifiedScore', null) == null
+        && (d.get('audit', null) == null || d.get('audit', null) is map)
+        && (d.get('answerHashes', null) == null || d.get('answerHashes', null) is list)
+        && (d.get('anomalyFlags', null) == null || d.get('anomalyFlags', null) is list)
+        && d.get('sessionId', '') == attemptId
+        && bundle.get('status', null) == 'published'
+        && bundle.get('examSlug', null) == d.get('examSlug', null)
+        && bundle.get('kind', null) in ['mock', 'daily', 'weekly']
+        && bundle.get('mockId', null) == d.get('mockId', null)
+        && d.get('answers', []).size() <= bundle.get('questionCount', 0)
+        && bundle.get('bundleVersion', null) == d.get('bundleVersion', null)
+        // Session gate: the exam session with the same ID must
+        // exist and be 'submitted' AFTER this write (getAfter —
+        // the batched submit's own transition counts; in the
+        // sequential Design G flow getAfter reads the stored,
+        // already-submitted session). The attempt is bound to the
+        // session's IDENTITY: same mock, exam, bundle, question
+        // set, bundle generation, start time, and the same number
+        // of questions as the session's stored order.
+        && sessAfter.get('status', '') == 'submitted'
+        && sessAfter.get('bundleId', '') == d.get('bundleId', '')
+        && sessAfter.get('kind', null) == d.get('kind', null)
+        && sessAfter.get('examSlug', null) == d.get('examSlug', null)
+        && sessAfter.get('mockId', null) == d.get('mockId', null)
+        && sessAfter.get('questionSetId', null) == d.get('questionSetId', null)
+        && sessAfter.get('bundleVersion', null) == d.get('bundleVersion', null)
+        && sessAfter.get('startedAt', null) == d.get('startedAt', null)
+        && sessAfter.get('questionRefs', []).size() == d.get('answers', []).size()
+        // Audit M1-b (moved here from the practice validator by
+        // the H.2 split): submittedAt must be ≤ the session's
+        // STORED deadline (endsAt) — read from sessAfter (the
+        // submit never changes endsAt, so post-write == stored).
+        // When endsAt is null (deadline never stored) the
+        // comparison errors and the allow denies — which is the
+        // correct outcome.
+        && d.get('submittedAt', null) <= sessAfter.get('endsAt', null);
     }
 
     // ---------- users.verificationStatus ----------
@@ -1659,6 +2824,12 @@ service cloud.firestore {
              'feature-enabled', 'feature-disabled',
              'backup-exported', 'nu-structure-applied', 'nu-syllabus-applied',
              'nu-question-published', 'nu-question-withdrawn',
+             // Step 6 fold-in, ChatGPT P2-01: content publish / verify
+             // audit actions — the Step 15 admin UI (and Step 7 flows)
+             // must append one of these on every publish / unpublish /
+             // verify / return of a Job content doc.
+             'job-content-published', 'job-content-unpublished',
+             'job-content-verified', 'job-content-returned',
              'user-profile-viewed', 'user-messages-viewed',
              'support-message-sent', 'message-reported', 'message-blocked']
         && request.resource.data.keys().hasOnly(
@@ -2511,6 +3682,895 @@ service cloud.firestore {
     // (NU-12 planner, NU-13 wrong-answers/favourites, NU-15 admin).
     // Until then the deny-all catch below denies them: no student data
     // is readable or writable there by accident.
+    // ---------- Job Preparation — subjects / chapters / topics / lessons (Step 6, Step 3 §2.3–§2.6 + §3.4) ----------
+    // Shared pattern for all four collections (deviations from the
+    // Step 3 draft are called out inline):
+    //   READ — signed-in ONLY (owner instruction 22 Nov 2026 ~10:33,
+    //     BINDING — no exam / no extensive reading without login):
+    //     `signedIn() && status == 'published'` first (e5 lesson: a
+    //     list query filters on status, so the published check must be
+    //     provable from the query's own filters — it is get()-free and
+    //     comes before the role lookup), OR the author reads their own
+    //     draft, OR a Moderator reads anything. Students read Published
+    //     only; ANONYMOUS READS NOTHING — not even Published docs
+    //     (this partially revokes Step 5 P2-2, which had allowed
+    //     anonymous reads of published content; the published
+    //     METADATA of jobCategories/jobExams stays anonymous-readable,
+    //     but these four content collections do not).
+    //   CREATE — isTeacher() only (role in teacher/admin/moderator/
+    //     owner + active; students can NEVER create). Draft-only:
+    //     status 'draft' + reviewStatus 'Not Started' (the draft's
+    //     literal 'draft' reviewStatus is REJECTED — no such enum
+    //     value, Step 5 P1-1). authorId pinned to the caller or
+    //     absent; no verifier yet. Doc ID must extend the parent
+    //     (subject `{examSlug}__{subjectSlug}`, chapter appends
+    //     `__{chapterSlug}`, topic appends `__{topicSlug}`); lessons
+    //     are auto-ID. Chapter names must be real syllabus chapter
+    //     names — the rules CANNOT check that; it is a content rule
+    //     for the admin/teacher flow (Step 3 §2.4).
+    //   UPDATE, author — the author edits ONLY their own draft, and
+    //     moves reviewStatus only within draft states. They can NEVER
+    //     publish (status stays 'draft'), NEVER touch a Published doc
+    //     (old reviewStatus must be a draft state), and NEVER touch
+    //     verifiedBy/verifiedAt, parent refs, lessonType, or the
+    //     published-question counter. The author rule ALSO checks
+    //     isTeacher() (not just signedIn + active): a teacher whose
+    //     role was revoked to student loses the author-edit right too
+    //     — the Step 3 draft's author rule checked authorId only, but
+    //     Step 5's live-role-check convention governs here (coordinator
+    //     hardening, 22 Nov 2026, test o13).
+    //   UPDATE, Moderator/Admin — content + status/reviewStatus
+    //     (publish/return/reject) + the verifier fields, under the
+    //     second-eye rule (jobContentSecondEye): verifiedBy is never
+    //     the author, and publishing requires a real verifier plus a
+    //     verification timestamp. Unlike jobExams there is no
+    //     rulesConfig to protect, so no Rule A / Rule B split for the
+    //     EXPRESSION budget was needed — a single Moderator/Admin
+    //     update rule stays well inside it (measured by the Step 6
+    //     rules tests). The split that DOES exist is a PERMISSION
+    //     split, mirroring Step 5 P0-4: a Moderator may return or
+    //     unpublish a Published doc (status/reviewStatus/verifier
+    //     fields only) but may NOT silently edit its content; an
+    //     Admin may edit published content too.
+    //   Provenance (authorId / createdBy / createdAt) is immutable —
+    //     even for Admin: it is outside all update rules'
+    //     affected-keys allowlists. Parent refs and (for lessons)
+    //     lessonType are pinned the same way.
+    //   DELETE — Admin only.
+    //   Lesson types (Step 3 §2.6): the enum has five values, but
+    //     Step 6 create allows ONLY 'lesson' — viva-question /
+    //     viva-guide / career-guide / cv-guide content is Step 16.
+    //     lessonType is pinned on update, so a 'lesson' doc cannot be
+    //     converted into Step 16 content by an update either.
+    match /jobSubjects/{subjectId} {
+      allow read: if signedIn() && resource.data.get('status', '') == 'published'
+        || (signedIn() && resource.data.get('authorId', '') == uid())
+        || isModerator();
+      // Step 6 fold-in, ChatGPT P1-02: subjects are canonical metadata
+      // derived from the verified rulesConfig — teachers and moderators
+      // NEVER create subjects (the 23 come from the seed, Admin SDK).
+      // Only Admin/Owner, and only one of the 23 canonical IDs. A
+      // `slug` field, when present, must agree with the doc ID.
+      allow create: if isAdmin()
+        && jobContentCreateCommon(request.resource.data)
+        && validJobSubject(request.resource.data)
+        && subjectId in canonicalJobSubjectIds()
+        && subjectId.matches('^' + request.resource.data.get('examSlug', '') + '__[a-z0-9-]+$')
+        && (request.resource.data.get('slug', null) == null
+            || subjectId == request.resource.data.get('examSlug', '') + '__' + request.resource.data.get('slug', ''));
+      allow update: if isTeacher()
+        && resource.data.get('authorId', '') == uid()
+        && isDraftStatus(resource.data.get('reviewStatus', ''))
+        && isDraftStatus(request.resource.data.get('reviewStatus', ''))
+        && resource.data.get('status', '') == 'draft'
+        && request.resource.data.get('status', '') == 'draft'
+        && request.resource.data.diff(resource.data).affectedKeys()
+             .hasOnly(['nameBn', 'nameEn', 'order', 'marks', 'syllabusSource',
+                       'reviewStatus', 'updatedAt'])
+        && validJobSubject(request.resource.data);
+      allow update: if isModerator()
+        && request.resource.data.diff(resource.data).affectedKeys()
+             .hasOnly(['nameBn', 'nameEn', 'order', 'marks', 'syllabusSource',
+                       'status', 'reviewStatus', 'verifiedBy', 'verifiedAt', 'updatedAt'])
+        // Step 5 P0-4, adapted: a Moderator may return/unpublish a
+        // Published doc, but may NOT silently edit its content — on a
+        // Published doc only the status/verifier fields may change.
+        && (resource.data.get('status', '') != 'published'
+            || request.resource.data.diff(resource.data).affectedKeys()
+                 .hasOnly(['status', 'reviewStatus', 'verifiedBy', 'verifiedAt', 'updatedAt']))
+        && jobContentSecondEye(resource.data, request.resource.data)
+        && jobContentPublishTransition(resource.data, request.resource.data)
+        && validJobSubject(request.resource.data);
+      // Admin: same fields as the Moderator rule, but without the
+      // published-content guard — an Admin may fix a typo in a
+      // Published doc without unpublishing it first.
+      allow update: if isAdmin()
+        && request.resource.data.diff(resource.data).affectedKeys()
+             .hasOnly(['nameBn', 'nameEn', 'order', 'marks', 'syllabusSource',
+                       'status', 'reviewStatus', 'verifiedBy', 'verifiedAt', 'updatedAt'])
+        && jobContentSecondEye(resource.data, request.resource.data)
+        && jobContentPublishTransition(resource.data, request.resource.data)
+        && validJobSubject(request.resource.data);
+      allow delete: if isAdmin();
+    }
+    match /jobChapters/{chapterId} {
+      allow read: if signedIn() && resource.data.get('status', '') == 'published'
+        || (signedIn() && resource.data.get('authorId', '') == uid())
+        || isModerator();
+      allow create: if isTeacher()
+        && jobContentCreateCommon(request.resource.data)
+        && validJobChapter(request.resource.data)
+        && chapterId.matches('^' + request.resource.data.get('subjectId', '') + '__[a-z0-9-]+$')
+        // Step 6 fold-in, ChatGPT P0-04: the parent subject must belong
+        // to the same exam (no cross-exam reference) and must EXIST.
+        && request.resource.data.get('subjectId', '').matches('^' + request.resource.data.get('examSlug', '') + '__[a-z0-9-]+$')
+        && exists(/databases/$(database)/documents/jobSubjects/$(request.resource.data.get('subjectId', '')));
+      allow update: if isTeacher()
+        && resource.data.get('authorId', '') == uid()
+        && isDraftStatus(resource.data.get('reviewStatus', ''))
+        && isDraftStatus(request.resource.data.get('reviewStatus', ''))
+        && resource.data.get('status', '') == 'draft'
+        && request.resource.data.get('status', '') == 'draft'
+        && request.resource.data.diff(resource.data).affectedKeys()
+             .hasOnly(['nameBn', 'nameEn', 'descriptionBn', 'descriptionEn',
+                       'order', 'reviewStatus', 'updatedAt'])
+        && validJobChapter(request.resource.data);
+      allow update: if isModerator()
+        && request.resource.data.diff(resource.data).affectedKeys()
+             .hasOnly(['nameBn', 'nameEn', 'descriptionBn', 'descriptionEn',
+                       'order', 'status', 'reviewStatus', 'verifiedBy', 'verifiedAt', 'updatedAt'])
+        && (resource.data.get('status', '') != 'published'
+            || request.resource.data.diff(resource.data).affectedKeys()
+                 .hasOnly(['status', 'reviewStatus', 'verifiedBy', 'verifiedAt', 'updatedAt']))
+        && jobContentSecondEye(resource.data, request.resource.data)
+        && jobContentPublishTransition(resource.data, request.resource.data)
+        && validJobChapter(request.resource.data);
+      allow update: if isAdmin()
+        && request.resource.data.diff(resource.data).affectedKeys()
+             .hasOnly(['nameBn', 'nameEn', 'descriptionBn', 'descriptionEn',
+                       'order', 'status', 'reviewStatus', 'verifiedBy', 'verifiedAt', 'updatedAt'])
+        && jobContentSecondEye(resource.data, request.resource.data)
+        && jobContentPublishTransition(resource.data, request.resource.data)
+        && validJobChapter(request.resource.data);
+      allow delete: if isAdmin();
+    }
+    match /jobTopics/{topicId} {
+      allow read: if signedIn() && resource.data.get('status', '') == 'published'
+        || (signedIn() && resource.data.get('authorId', '') == uid())
+        || isModerator();
+      allow create: if isTeacher()
+        && jobContentCreateCommon(request.resource.data)
+        && validJobTopic(request.resource.data)
+        && topicId.matches('^' + request.resource.data.get('chapterId', '') + '__[a-z0-9-]+$')
+        // Step 6 fold-in, ChatGPT P0-04: the parent chapter must belong
+        // to the same subject (no cross-subject reference), the subject
+        // to the same exam, and the chapter must EXIST.
+        && request.resource.data.get('subjectId', '').matches('^' + request.resource.data.get('examSlug', '') + '__[a-z0-9-]+$')
+        && request.resource.data.get('chapterId', '').matches('^' + request.resource.data.get('subjectId', '') + '__[a-z0-9-]+$')
+        && exists(/databases/$(database)/documents/jobChapters/$(request.resource.data.get('chapterId', '')));
+      allow update: if isTeacher()
+        && resource.data.get('authorId', '') == uid()
+        && isDraftStatus(resource.data.get('reviewStatus', ''))
+        && isDraftStatus(request.resource.data.get('reviewStatus', ''))
+        && resource.data.get('status', '') == 'draft'
+        && request.resource.data.get('status', '') == 'draft'
+        && request.resource.data.diff(resource.data).affectedKeys()
+             .hasOnly(['nameBn', 'nameEn', 'order', 'isCommon', 'commonExams',
+                       'commonStatus', 'questionTarget', 'reviewStatus', 'updatedAt'])
+        && validJobTopic(request.resource.data);
+      allow update: if isModerator()
+        && request.resource.data.diff(resource.data).affectedKeys()
+             .hasOnly(['nameBn', 'nameEn', 'order', 'isCommon', 'commonExams',
+                       'commonStatus', 'questionTarget', 'publishedQuestionCount',
+                       'status', 'reviewStatus', 'verifiedBy', 'verifiedAt', 'updatedAt'])
+        && (resource.data.get('status', '') != 'published'
+            || request.resource.data.diff(resource.data).affectedKeys()
+                 .hasOnly(['status', 'reviewStatus', 'verifiedBy', 'verifiedAt', 'updatedAt']))
+        && jobContentSecondEye(resource.data, request.resource.data)
+        && jobContentPublishTransition(resource.data, request.resource.data)
+        && validJobTopic(request.resource.data);
+      allow update: if isAdmin()
+        && request.resource.data.diff(resource.data).affectedKeys()
+             .hasOnly(['nameBn', 'nameEn', 'order', 'isCommon', 'commonExams',
+                       'commonStatus', 'questionTarget', 'publishedQuestionCount',
+                       'status', 'reviewStatus', 'verifiedBy', 'verifiedAt', 'updatedAt'])
+        && jobContentSecondEye(resource.data, request.resource.data)
+        && jobContentPublishTransition(resource.data, request.resource.data)
+        && validJobTopic(request.resource.data);
+      allow delete: if isAdmin();
+    }
+    match /jobLessons/{lessonId} {
+      allow read: if signedIn() && resource.data.get('status', '') == 'published'
+        || (signedIn() && resource.data.get('authorId', '') == uid())
+        || isModerator();
+      allow create: if isTeacher()
+        && jobContentCreateCommon(request.resource.data)
+        && request.resource.data.get('lessonType', '') == 'lesson'
+        && validJobLesson(request.resource.data)
+        // Step 6 fold-in, ChatGPT P0-04: the parent chain must be
+        // consistent (subject under this exam, chapter under this
+        // subject, topic under this chapter) and the topic must EXIST.
+        // The lesson doc ID stays auto-generated by design.
+        && request.resource.data.get('subjectId', '').matches('^' + request.resource.data.get('examSlug', '') + '__[a-z0-9-]+$')
+        && request.resource.data.get('chapterId', '').matches('^' + request.resource.data.get('subjectId', '') + '__[a-z0-9-]+$')
+        && request.resource.data.get('topicId', '').matches('^' + request.resource.data.get('chapterId', '') + '__[a-z0-9-]+$')
+        && exists(/databases/$(database)/documents/jobTopics/$(request.resource.data.get('topicId', '')));
+      allow update: if isTeacher()
+        && resource.data.get('authorId', '') == uid()
+        && isDraftStatus(resource.data.get('reviewStatus', ''))
+        && isDraftStatus(request.resource.data.get('reviewStatus', ''))
+        && resource.data.get('status', '') == 'draft'
+        && request.resource.data.get('status', '') == 'draft'
+        && request.resource.data.diff(resource.data).affectedKeys()
+             .hasOnly(['titleBn', 'titleEn', 'body', 'bodyEn', 'order',
+                       'reviewStatus', 'updatedAt'])
+        && validJobLesson(request.resource.data);
+      allow update: if isModerator()
+        && request.resource.data.diff(resource.data).affectedKeys()
+             .hasOnly(['titleBn', 'titleEn', 'body', 'bodyEn', 'order',
+                       'status', 'reviewStatus', 'verifiedBy', 'verifiedAt', 'updatedAt'])
+        && (resource.data.get('status', '') != 'published'
+            || request.resource.data.diff(resource.data).affectedKeys()
+                 .hasOnly(['status', 'reviewStatus', 'verifiedBy', 'verifiedAt', 'updatedAt']))
+        && jobContentSecondEye(resource.data, request.resource.data)
+        && jobContentPublishTransition(resource.data, request.resource.data)
+        && validJobLesson(request.resource.data);
+      allow update: if isAdmin()
+        && request.resource.data.diff(resource.data).affectedKeys()
+             .hasOnly(['titleBn', 'titleEn', 'body', 'bodyEn', 'order',
+                       'status', 'reviewStatus', 'verifiedBy', 'verifiedAt', 'updatedAt'])
+        && jobContentSecondEye(resource.data, request.resource.data)
+        && jobContentPublishTransition(resource.data, request.resource.data)
+        && validJobLesson(request.resource.data);
+      allow delete: if isAdmin();
+    }
+
+    // ---------- Step 9: full exam + model tests (jobExamDefinitions) ----------
+    // jobExamDefinitions — the mock definition (Step 3 §2.10's
+    // `jobMocks`, renamed by the ChatGPT fold-in to ChatGPT's
+    // jobExamDefinitions name). One doc per mock event: full
+    // (doc-ID `full__{examSlug}__{n}`), daily (doc-ID
+    // `daily__{YYYY-MM-DD}`), weekly (doc-ID `weekly__{YYYY-Www}`).
+    // The rulesSnapshot is the exam-pattern copy taken at creation —
+    // a later rulesConfig change never changes a running mock's
+    // rules, and a published mock's snapshot is frozen (correct it
+    // by unpublishing first, or make a new mock). Published mocks
+    // are PUBLIC catalog metadata (anyone may read them — title /
+    // schedule / pattern, no answers), like the Step 6 decision that
+    // subject names + marks stay public; STARTING a mock still needs
+    // sign-in (the session/attempt rules). No get() calls here.
+    // Doc-ID patterns (enforced at create): daily == 'daily__' +
+    // scheduleDate; weekly matches ^weekly__YYYY-Www$; full matches
+    // ^full__{examSlug}__N$. The bare mockId a session/attempt
+    // carries is the date / weekId / full__{examSlug}__{n} (see
+    // jobMocks.ts) — the bundle's mockId must equal it (Step 8
+    // rule: bundle.mockId == attempt.mockId).
+    // Daily standard (ChatGPT §1(d) + the Step 9 brief): a daily
+    // mock is 20–30 MCQ in 20–30 minutes (editorial standard 25Q /
+    // 25min); the weekly mock is the FULL length of the rotated
+    // pattern (BCS 200Q/120min, Bank 100Q/60min, Primary 90Q/90min,
+    // NTRCA 100Q/60min). The definition points at its CURRENT
+    // question-set manifest (questionSetId) — new sessions use it;
+    // running sessions keep their stored questionSetId.
+    function validJobExamDefinitionRulesSnapshot(s, kind) {
+      return s is map
+        && s.get('questionCount', null) is int
+        && s.get('questionCount', 0) >= 1 && s.get('questionCount', 0) <= 200
+        && s.get('timeMinutes', null) is int
+        && s.get('timeMinutes', 0) >= 1 && s.get('timeMinutes', 0) <= 600
+        && (kind != 'daily'
+            || (s.get('questionCount', 0) >= 20 && s.get('questionCount', 0) <= 30
+                && s.get('timeMinutes', 0) >= 20 && s.get('timeMinutes', 0) <= 30))
+        && s.get('marksPerQuestion', null) == 1
+        && (s.get('negativeMarking', null) == null
+            || s.get('negativeMarking', null) == 0
+            || s.get('negativeMarking', null) == 0.25
+            || s.get('negativeMarking', null) == 0.5)
+        && s.get('negativeMarkingVerified', null) is bool
+        && (s.get('passPercent', null) == null
+            || (s.get('passPercent', null) is number
+                && s.get('passPercent', 0) >= 0 && s.get('passPercent', 0) <= 100))
+        && isStr(s.get('scoringConfigVersion', null), 100);
+    }
+    function validJobExamDefinition(d, mockId) {
+      return d.get('examSlug', null) in jobExamSlugs()
+        && d.get('examSlug', null) != 'it-professional'
+        && isStr(d.get('titleBn', null), 200)
+        && isStr(d.get('titleEn', null), 200)
+        && d.get('kind', null) in ['daily', 'weekly', 'full']
+        && isStr(d.get('bundleId', null), 200)
+        && isStr(d.get('questionSetId', null), 200)
+        && validJobExamDefinitionRulesSnapshot(d.get('rulesSnapshot', null), d.get('kind', null))
+        && ((d.get('kind', null) == 'daily'
+              && d.get('scheduleDate', null) is string
+              && mockId == 'daily__' + d.get('scheduleDate', ''))
+            || (d.get('kind', null) == 'weekly'
+              && d.get('scheduleDate', null) is string
+              && mockId.matches('^weekly__[0-9]{4}-W[0-9]{2}$'))
+            || (d.get('kind', null) == 'full'
+              && d.get('scheduleDate', null) == null
+              && mockId.matches('^full__' + d.get('examSlug', '') + '__[0-9]+$')))
+        && ((d.get('kind', null) == 'weekly'
+              && d.get('examSlugCycle', null) in ['bcs', 'bank', 'primary-teacher', 'ntrca'])
+            || (d.get('kind', null) != 'weekly' && d.get('examSlugCycle', null) == null))
+        && d.get('status', null) in ['draft', 'published', 'archived']
+        && d.get('retakeAllowed', null) is bool
+        && (d.get('maxAttempts', null) == null
+            || (d.get('maxAttempts', null) is int && d.get('maxAttempts', 0) >= 1))
+        && (d.get('publishedAt', null) == null || d.get('publishedAt', null) is timestamp)
+        && (d.get('publishedBy', null) == null || d.get('publishedBy', null) is string)
+        && (d.get('createdAt', null) == null || d.get('createdAt', null) is timestamp)
+        && (d.get('updatedAt', null) == null || d.get('updatedAt', null) is timestamp);
+    }
+    match /jobExamDefinitions/{mockId} {
+      allow read: if resource.data.get('status', '') == 'published' || isModerator();
+      allow create: if isModerator()
+        && request.resource.data.keys().hasOnly(['examSlug', 'titleBn', 'titleEn',
+             'kind', 'bundleId', 'questionSetId', 'rulesSnapshot', 'scheduleDate', 'examSlugCycle',
+             'status', 'retakeAllowed', 'maxAttempts', 'publishedAt', 'publishedBy',
+             'createdAt', 'updatedAt'])
+        && request.resource.data.get('status', '') == 'draft'
+        && validJobExamDefinition(request.resource.data, mockId);
+      // Update: a DRAFT mock edits freely (same validity as create);
+      // a PUBLISHED mock's rules are frozen — only titles, status,
+      // retake policy, the CURRENT manifest pointer (questionSetId)
+      // and publish metadata move (a correction needs unpublish
+      // first, or a new mock — and a manifest change only affects
+      // NEW sessions; running sessions keep their stored
+      // questionSetId); an ARCHIVED mock reopens only back to
+      // draft. Status moves: draft -> published / archived;
+      // published -> archived; archived -> draft.
+      allow update: if isModerator()
+        && request.resource.data.keys().hasOnly(['examSlug', 'titleBn', 'titleEn',
+             'kind', 'bundleId', 'questionSetId', 'rulesSnapshot', 'scheduleDate', 'examSlugCycle',
+             'status', 'retakeAllowed', 'maxAttempts', 'publishedAt', 'publishedBy',
+             'createdAt', 'updatedAt'])
+        && validJobExamDefinition(request.resource.data, mockId)
+        && ((resource.data.get('status', '') == 'draft'
+              && request.resource.data.get('status', '') in ['draft', 'published', 'archived'])
+            || (resource.data.get('status', '') == 'published'
+              && request.resource.data.get('status', '') in ['published', 'archived']
+              && request.resource.data.diff(resource.data).affectedKeys()
+                   .hasOnly(['titleBn', 'titleEn', 'status', 'retakeAllowed',
+                             'maxAttempts', 'questionSetId', 'publishedAt', 'publishedBy', 'updatedAt']))
+            || (resource.data.get('status', '') == 'archived'
+              && request.resource.data.get('status', '') in ['archived', 'draft']));
+      allow delete: if isAdmin();
+    }
+    // ---------- Step 9: question-set manifests (jobQuestionSetManifests) ----------
+    // The frozen question set for one mock generation (ChatGPT
+    // §1(f)). One doc per manifest version: questionSetId, e.g.
+    // `full__bcs__1_v1`. It carries ONLY the question references
+    // (bundleId + n + questionId, in exam order) — the same shape
+    // the exam session stores — so the session-create rule can
+    // validate the whole set by whole-equality (the only loop-free
+    // way to check 200 refs in rules). The BUNDLE holds the
+    // question text/options for display; the MANIFEST is the
+    // rules' authority for what the exam contains. A published
+    // manifest is immutable: to correct it, unpublish, edit as a
+    // draft, republish as a NEW version (new questionSetId), and
+    // point the definition at it — running sessions keep their
+    // stored questionSetId and are unaffected.
+    function validJobQuestionSetManifest(d, questionSetId) {
+      return d.get('examSlug', null) in jobExamSlugs()
+        && d.get('examSlug', null) != 'it-professional'
+        && isStr(d.get('mockId', null), 200)
+        && d.get('version', null) is int && d.get('version', 0) >= 1
+        && d.get('questionCount', null) is int
+        && d.get('questionCount', 0) >= 1 && d.get('questionCount', 0) <= 200
+        && d.get('questionRefs', null) is list
+        && d.get('questionRefs', []).size() == d.get('questionCount', 0)
+        && isStr(d.get('markingSchemeVersion', null), 100)
+        && d.get('status', null) in ['draft', 'published', 'archived']
+        && (d.get('publishedAt', null) == null || d.get('publishedAt', null) is timestamp)
+        && (d.get('publishedBy', null) == null || d.get('publishedBy', null) is string)
+        && (d.get('createdAt', null) == null || d.get('createdAt', null) is timestamp)
+        && (d.get('updatedAt', null) == null || d.get('updatedAt', null) is timestamp);
+    }
+    match /jobQuestionSetManifests/{questionSetId} {
+      allow read: if resource.data.get('status', '') == 'published' || isModerator();
+      allow create: if isModerator()
+        && request.resource.data.keys().hasOnly(['examSlug', 'mockId', 'version',
+             'questionCount', 'questionRefs', 'markingSchemeVersion', 'status',
+             'publishedAt', 'publishedBy', 'createdAt', 'updatedAt'])
+        && request.resource.data.get('status', '') == 'draft'
+        && validJobQuestionSetManifest(request.resource.data, questionSetId);
+      allow update: if isModerator()
+        && request.resource.data.keys().hasOnly(['examSlug', 'mockId', 'version',
+             'questionCount', 'questionRefs', 'markingSchemeVersion', 'status',
+             'publishedAt', 'publishedBy', 'createdAt', 'updatedAt'])
+        && validJobQuestionSetManifest(request.resource.data, questionSetId)
+        && ((resource.data.get('status', '') == 'draft'
+              && request.resource.data.get('status', '') in ['draft', 'published', 'archived'])
+            || (resource.data.get('status', '') == 'published'
+              && request.resource.data.get('status', '') in ['published', 'archived']
+              && request.resource.data.diff(resource.data).affectedKeys()
+                   .hasOnly(['status', 'publishedAt', 'publishedBy', 'updatedAt']))
+            || (resource.data.get('status', '') == 'archived'
+              && request.resource.data.get('status', '') in ['archived', 'draft']));
+      allow delete: if isAdmin();
+    }
+    // ---------- Step 9: exam user locks (jobExamUserLocks) ----------
+    // One active exam session per user per exam pattern (ChatGPT
+    // H.7). Doc-ID `{uid}_{examSlug}`. The lock is created
+    // ATOMICALLY with the exam session (one client batch) and
+    // released ATOMICALLY with the session's terminal transition
+    // (submit/abandon batch). A second session while one is active
+    // is denied (the stored lock is in_progress and fresh); a new
+    // session after submit/abandon is allowed (lock terminal); a
+    // crashed session's lock goes STALE 15 minutes after the exam's
+    // deadline (createdAt + durationSeconds + 900s) — staleness is
+    // the crash backstop, so a student is never locked out forever
+    // by a tab that died mid-exam. durationSeconds is verified
+    // against the definition's frozen duration (the lock carries
+    // the definitionId) — a client cannot shorten its own lock to
+    // go stale early. The lock does NOT rate-limit globally and
+    // does NOT prove one attempt per exam per student (a student
+    // who finishes one exam may start another — retakes are a
+    // policy of the definition's retakeAllowed/maxAttempts, not
+    // of the lock).
+    // Budget note (same as validJobExamSessionCreate): the
+    // definition is fetched ONCE in the match below and passed in
+    // as a plain map (def). The lock create does NOT verify the
+    // session: the rules engine cannot read a session doc's fields
+    // from a lock-create evaluation (verified empirically 22 Nov,
+    // scratch a5–a5v — the same getAfter read SUCCEEDS from the
+    // lock-update and session-create evaluations, but ERRORS from
+    // the lock-create one). The binding is enforced where it
+    // matters instead — the SESSION create (validJobExamSession-
+    // Create) requires the post-batch lock to point at it — and a
+    // lock without a session only strands its own creator until
+    // the stale-lock recovery below.
+    function validJobExamUserLock(d, lockId, def) {
+      return d.keys().hasOnly(['uid', 'examSlug', 'mockId', 'definitionId',
+             'activeSessionId', 'status', 'durationSeconds', 'createdAt', 'updatedAt'])
+        && d.keys().hasAll(['uid', 'examSlug', 'mockId', 'definitionId',
+             'activeSessionId', 'status', 'durationSeconds', 'createdAt', 'updatedAt'])
+        && d.get('uid', '') == uid()
+        && lockId == uid() + '_' + d.get('examSlug', '')
+        && d.get('examSlug', null) in jobExamSlugs()
+        && d.get('mockId', null) is string && d.get('mockId', '').size() > 0
+        && d.get('definitionId', null) is string && d.get('definitionId', '').size() > 0
+        && d.get('activeSessionId', null) is string && d.get('activeSessionId', '').size() > 0
+        && d.get('status', '') == 'in_progress'
+        && d.get('durationSeconds', null) is int
+        && d.get('durationSeconds', 0) >= 60 && d.get('durationSeconds', 0) <= 7200
+        && d.get('createdAt', null) is timestamp
+        && d.get('createdAt', null) <= request.time
+        && d.get('createdAt', null) > request.time - duration.value(5, 'm')
+        && d.get('updatedAt', null) is timestamp
+        && def.get('status', null) == 'published'
+        && def.get('rulesSnapshot', null) is map
+        && def.get('rulesSnapshot', null).get('timeMinutes', null) is int
+        && d.get('durationSeconds', 0)
+             == def.rulesSnapshot.timeMinutes * 60
+        && def.get('examSlug', null) == d.get('examSlug', null);
+    }
+    match /jobExamUserLocks/{lockId} {
+      allow read: if (signedIn() && resource.data.get('uid', '') == uid()) || isModerator();
+      // The definition is fetched ONCE here and passed in
+      // (budget note on validJobExamUserLock): the exists-guard
+      // short-circuits before the definition get(), so a missing
+      // definition denies cleanly.
+      allow create: if signedIn() && callerActive()
+        && exists(/databases/$(database)/documents/jobExamDefinitions/$(request.resource.data.get('definitionId', '')))
+        && validJobExamUserLock(request.resource.data, lockId,
+             jobExamDefinitionData(request.resource.data.get('definitionId', '')))
+        // No live lock may already exist for this pattern: the
+        // stored lock must be absent, terminal, or stale
+        // (past createdAt + duration + 15 min grace).
+        && (!exists(/databases/$(database)/documents/jobExamUserLocks/$(lockId))
+            || get(/databases/$(database)/documents/jobExamUserLocks/$(lockId)).data.status == 'terminal'
+            || request.time > get(/databases/$(database)/documents/jobExamUserLocks/$(lockId)).data.createdAt
+                 + duration.value(get(/databases/$(database)/documents/jobExamUserLocks/$(lockId)).data.durationSeconds, 's')
+                 + duration.value(15, 'm'));
+      // Release: in_progress -> terminal ONLY, and ONLY together
+      // with the session's terminal transition (the post-batch
+      // session must be submitted or abandoned — a lock released
+      // while its session is still in progress would let the
+      // student start a second concurrent exam).
+      // Re-arm (Step 9 fold-in fix, 22 Nov): a TERMINAL lock — or
+      // a STALE in_progress lock (past createdAt + duration +
+      // 15 min grace) — may be re-armed for a NEW session. Without
+      // this, setDoc on the existing lock doc is an UPDATE, and
+      // the student could never start a second exam for the
+      // pattern (the create rule's stale escape only applies when
+      // the doc does not exist at all). The new doc must pass the
+      // FULL lock validator (fresh createdAt, duration ==
+      // definition duration, published definition); a LIVE
+      // in_progress lock can never be re-armed. The session
+      // binding is enforced at session create (the post-batch
+      // lock must point at the new session).
+      allow update: if signedIn() && callerActive()
+        && resource.data.get('uid', '') == uid()
+        && ((request.resource.data.diff(resource.data).affectedKeys().hasOnly(['status', 'updatedAt'])
+             && resource.data.get('status', '') == 'in_progress'
+             && request.resource.data.get('status', '') == 'terminal'
+             && getAfter(/databases/$(database)/documents/users/$(uid())/jobExamSessions/$(resource.data.get('activeSessionId', ''))).data.status in ['submitted', 'abandoned'])
+            || ((resource.data.get('status', '') == 'terminal'
+                 || (resource.data.get('status', '') == 'in_progress'
+                     && resource.data.get('createdAt', null) is timestamp
+                     && resource.data.get('durationSeconds', null) is int
+                     && request.time > resource.data.get('createdAt', null)
+                          + duration.value(resource.data.get('durationSeconds', 0), 's')
+                          + duration.value(15, 'm')))
+                && exists(/databases/$(database)/documents/jobExamDefinitions/$(request.resource.data.get('definitionId', '')))
+                && validJobExamUserLock(request.resource.data, lockId,
+                     jobExamDefinitionData(request.resource.data.get('definitionId', '')))));
+      allow delete: if false;
+    }
+
+    // ---------- Step 7: question bank + verification ----------
+    // jobQuestions — the bank record. Students can NEVER read it:
+    // there is deliberately NO student read rule here, so a UI bug
+    // cannot leak correct answers or explanations. A verified
+    // teacher reads only their OWN questions; Moderator/Admin read
+    // all. The verification queue is a query (reviewStatus ==
+    // 'Under Review'), not a collection — see lib
+    // jobReviewQueueConstraints() (no admin UI until Step 15).
+    match /jobQuestions/{questionId} {
+      allow read: if isModerator()
+        || (isTeacher() && resource.data.get('authorId', '') == uid());
+      // Create: verified teacher only, draft only — and ONLY the
+      // 29 fields the app writes (Step 7 fold-in, ChatGPT P1-03:
+      // no smuggled privileged/junk fields at creation).
+      allow create: if isVerifiedJobBankAuthor()
+        && request.resource.data.keys().hasOnly(['examSlug', 'subjectId',
+             'chapterId', 'topicId', 'questionText', 'options',
+             'correctLetter', 'explanation', 'whyWrong', 'difficulty',
+             'isPreviousYear', 'examYear', 'source', 'sourceUrl',
+             'status', 'reviewStatus', 'reviewerId', 'verifiedBy',
+             'verifiedAt', 'rejectionReason', 'duplicateHash',
+             'duplicateOf', 'bundleId', 'version', 'configVersion',
+             'authorId', 'createdBy', 'createdAt', 'updatedAt'])
+        && jobQuestionCreateCommon(request.resource.data)
+        && validJobQuestion(request.resource.data);
+      // Author: own draft only, content fields only, may submit
+      // (Not Started/In Progress -> Under Review). Never publish,
+      // never verify, never touch a non-draft doc.
+      allow update: if isVerifiedJobBankAuthor()
+        && resource.data.get('authorId', '') == uid()
+        && resource.data.get('status', '') == 'draft'
+        && request.resource.data.get('status', '') == 'draft'
+        && resource.data.get('reviewStatus', '') in ['Not Started', 'In Progress']
+        && request.resource.data.get('reviewStatus', '') in ['Not Started', 'In Progress', 'Under Review']
+        && request.resource.data.diff(resource.data).affectedKeys()
+             .hasOnly(['questionText', 'options', 'correctLetter',
+                       'explanation', 'whyWrong', 'difficulty', 'source',
+                       'sourceUrl', 'examYear', 'isPreviousYear',
+                       'duplicateHash', 'duplicateOf', 'reviewStatus', 'updatedAt'])
+        && request.resource.data.get('version', 0) == resource.data.get('version', 0)
+        && validJobQuestion(request.resource.data);
+      // Moderator/Admin: verification + publication under the
+      // second-eye rule + the transition guard (no direct draft ->
+      // published, rejection needs a reason, version +1 on
+      // published -> draft return).
+      allow update: if isModerator()
+        && request.resource.data.diff(resource.data).affectedKeys()
+             .hasOnly(['questionText', 'options', 'correctLetter',
+                       'explanation', 'whyWrong', 'difficulty', 'source',
+                       'sourceUrl', 'examYear', 'isPreviousYear',
+                       'duplicateHash', 'duplicateOf', 'bundleId',
+                       'status', 'reviewStatus', 'reviewerId',
+                       'verifiedBy', 'verifiedAt', 'rejectionReason',
+                       'version', 'updatedAt'])
+        && jobQuestionSecondEye(resource.data, request.resource.data)
+        && jobQuestionTransition(resource.data, request.resource.data)
+        && validJobQuestion(request.resource.data);
+      allow delete: if isAdmin();
+    }
+    // jobQuestionBundles — the student tier: questions + options
+    // ONLY. Any key material (correctLetter / explanation /
+    // correctText) in the doc is refused outright, at the top level
+    // (§3.6). Bundle IDs are deterministic: topic__{topicId} /
+    // mock__{mockId} / daily__{date} / weekly__{weekId} /
+    // previous__{examSlug}__{year}; the topic/mock/daily/weekly
+    // patterns are enforced here, 'previous' in the lib (rules
+    // cannot convert the year int to a string).
+    match /jobQuestionBundles/{bundleId} {
+      allow read: if (signedIn() && resource.data.get('status', '') == 'published')
+        || isModerator();
+      allow create: if isModerator()
+        && !('correctLetter' in request.resource.data)
+        && !('explanation' in request.resource.data)
+        && !('correctText' in request.resource.data)
+        && (request.resource.data.get('kind', '') != 'topic'
+            || bundleId == 'topic__' + request.resource.data.get('topicId', ''))
+        && (request.resource.data.get('kind', '') != 'mock'
+            || bundleId == 'mock__' + request.resource.data.get('mockId', ''))
+        && (request.resource.data.get('kind', '') != 'daily'
+            || bundleId == 'daily__' + request.resource.data.get('mockId', ''))
+        && (request.resource.data.get('kind', '') != 'weekly'
+            || bundleId == 'weekly__' + request.resource.data.get('mockId', ''))
+        && request.resource.data.keys().hasOnly(['kind', 'examSlug',
+             'topicId', 'mockId', 'year', 'titleBn', 'titleEn',
+             'questions', 'questionCount', 'status', 'reviewStatus',
+             'publishedAt', 'publishedBy', 'sourceQuestionIds',
+             'configVersion', 'bundleVersion', 'createdAt', 'updatedAt'])
+        && validJobQuestionBundle(request.resource.data);
+      // Update: a PUBLISHED bundle is content-frozen (Step 7
+      // fold-in, ChatGPT P1-06) — its questions are the snapshot
+      // live attempts were scored against, so questions /
+      // sourceQuestionIds / questionCount / kind / examSlug /
+      // topicId / mockId / year / configVersion cannot change while
+      // published; only titles, status/reviewStatus and publish
+      // metadata move. To correct a published bundle, unpublish it
+      // first (status draft), edit as a draft, republish. A draft
+      // bundle edits freely (same conditions as create).
+      allow update: if isModerator()
+        && !('correctLetter' in request.resource.data)
+        && !('explanation' in request.resource.data)
+        && !('correctText' in request.resource.data)
+        && (request.resource.data.get('kind', '') != 'topic'
+            || bundleId == 'topic__' + request.resource.data.get('topicId', ''))
+        && (request.resource.data.get('kind', '') != 'mock'
+            || bundleId == 'mock__' + request.resource.data.get('mockId', ''))
+        && (request.resource.data.get('kind', '') != 'daily'
+            || bundleId == 'daily__' + request.resource.data.get('mockId', ''))
+        && (request.resource.data.get('kind', '') != 'weekly'
+            || bundleId == 'weekly__' + request.resource.data.get('mockId', ''))
+        && validJobQuestionBundle(request.resource.data)
+        && (resource.data.get('status', '') != 'published'
+            || request.resource.data.diff(resource.data).affectedKeys()
+                 .hasOnly(['titleBn', 'titleEn', 'status', 'reviewStatus',
+                           'publishedAt', 'publishedBy', 'updatedAt']));
+      allow delete: if isAdmin();
+    }
+    // jobQuestionKeys — the answer key, one doc per bundle.
+    // Moderator/Admin any time; a student only with a fresh
+    // receipt anchored to a submitted attempt (hasFreshJobReceipt,
+    // P0-06 — a 10-minute window, NOT one-use, see above) or for a
+    // Published practice (topic) bundle (isPracticeJobBundle).
+    // Mock keys are NEVER readable before submission.
+    match /jobQuestionKeys/{bundleId} {
+      allow read: if isModerator()
+        || (signedIn() && callerActive()
+            && (hasFreshJobReceipt(bundleId) || isPracticeJobBundle(bundleId)));
+      // Create: Moderator only, and only against its own bundle
+      // (Step 7 fold-in, ChatGPT P1-06 — the key answers exactly
+      // the bundle's questions, same count and same configVersion,
+      // so a key can never score a different bundle generation).
+      allow create: if isModerator()
+        && request.resource.data.keys().hasOnly(['bundleId', 'answers',
+             'configVersion', 'createdAt', 'updatedAt'])
+        && validJobQuestionKey(request.resource.data, bundleId)
+        && jobKeyMatchesBundle(request.resource.data, bundleId);
+      // Update: NEVER — a key is an immutable snapshot of its
+      // bundle's answers. To correct a key, an Admin deletes it
+      // and a Moderator recreates it (the bundle is republished
+      // from the corrected question in the same flow).
+      allow update: if false;
+      allow delete: if isAdmin();
+    }
+    // jobReceipts — access grants (Eduvelto is 100% FREE; a receipt
+    // is an access grant, never a payment record). ID is
+    // `{uid}_{bundleId}`. Only the owning student creates their own
+    // receipt, and only when it anchors to a real SUBMITTED attempt
+    // for that bundle — or (Step 9, Design G) to a real SUBMITTED
+    // mock session for that bundle (the scoring window) — on a
+    // PUBLISHED bundle (P0-06 + Step 7 fold-in, ChatGPT P0-03). The receipt is a 10-minute window,
+    // NOT one-use (P0-01 Option A). Step 9 closure (open question 1
+    // — retakes): the window CAN be re-issued, but ONLY as an
+    // anchored re-issue — an update whose new doc re-anchors to a
+    // NEWLY submitted session/attempt for the SAME bundle with a
+    // fresh createdAt. A student can never extend a window without
+    // a new submission, and can never move a receipt to another
+    // bundle or another student. Only an Admin deletes a receipt.
+    // After a window closes with no new submission, the key stays
+    // unreadable for that bundle. Stale receipts are harmless —
+    // they simply stop opening keys.
+    // ChatGPT fold-in (H.1, CRITICAL): the receipt carries a
+    // PURPOSE — 'practice_review' or 'exam_review' — and a
+    // bundleVersion bound to the anchor's generation. A practice
+    // receipt anchors ONLY to a submitted PRACTICE attempt; an
+    // exam receipt anchors ONLY to a submitted EXAM session (the
+    // scoring window) or a submitted EXAM attempt. The key-read
+    // rule (hasFreshJobReceipt) checks the purpose against the
+    // bundle's kind, so a practice receipt can never unlock an
+    // exam key. Never issue an exam receipt while the exam is in
+    // progress: both exam anchors require status 'submitted'.
+    match /jobReceipts/{receiptId} {
+      allow read: if (signedIn() && resource.data.get('userId', '') == uid()) || isAdmin();
+      allow create: if signedIn() && callerActive()
+        && receiptId == uid() + '_' + request.resource.data.get('bundleId', '')
+        && request.resource.data.keys().hasOnly(['userId', 'bundleId',
+             'attemptId', 'createdAt', 'purpose', 'bundleVersion'])
+        && request.resource.data.get('userId', '') == uid()
+        && request.resource.data.get('bundleId', null) is string
+        && request.resource.data.get('bundleId', '').size() <= 200
+        && request.resource.data.get('attemptId', null) is string
+        && request.resource.data.get('attemptId', '').size() <= 200
+        && request.resource.data.get('purpose', null) in ['practice_review', 'exam_review']
+        && request.resource.data.get('bundleVersion', null) is int
+        && request.resource.data.get('bundleVersion', 0) >= 1
+        // Trusted timestamp (P0-03): createdAt must be a real
+        // timestamp no later than now and no older than 5 minutes
+        // — a client cannot future-date a receipt to stretch its
+        // window, nor backdate one to hide its age.
+        && request.resource.data.get('createdAt', null) is timestamp
+        && request.resource.data.get('createdAt', null) <= request.time
+        && request.resource.data.get('createdAt', null) > request.time - duration.value(5, 'm')
+        // Anchor (Step 7 P0-06 + Step 9 Design G + H.1): the
+        // purpose decides the anchor — see validJobReceiptAnchor
+        // (shared by create and by the re-issue update below).
+        && validJobReceiptAnchor(request.resource.data)
+        && exists(/databases/$(database)/documents/jobQuestionBundles/$(request.resource.data.get('bundleId', '')))
+        && get(/databases/$(database)/documents/jobQuestionBundles/$(request.resource.data.get('bundleId', ''))).data.status == 'published';
+      // Anchored re-issue (Step 9 closure, open question 1): a
+      // retake's setDoc on the existing receipt doc-ID is an UPDATE
+      // — allowed only when the new doc re-anchors to a newly
+      // submitted session/attempt for the SAME bundle, with a fresh
+      // createdAt. userId and bundleId are immutable (the receipt
+      // can never change owner or bundle); attemptId, purpose,
+      // bundleVersion and createdAt move with the new submission.
+      allow update: if signedIn() && callerActive()
+        && receiptId == uid() + '_' + request.resource.data.get('bundleId', '')
+        && request.resource.data.get('userId', '') == uid()
+        && resource.data.get('userId', '') == uid()
+        && resource.data.get('bundleId', '') == request.resource.data.get('bundleId', '')
+        && request.resource.data.keys().hasOnly(['userId', 'bundleId',
+             'attemptId', 'createdAt', 'purpose', 'bundleVersion'])
+        && request.resource.data.get('bundleId', null) is string
+        && request.resource.data.get('bundleId', '').size() <= 200
+        && request.resource.data.get('attemptId', null) is string
+        && request.resource.data.get('attemptId', '').size() <= 200
+        && request.resource.data.get('purpose', null) in ['practice_review', 'exam_review']
+        && request.resource.data.get('bundleVersion', null) is int
+        && request.resource.data.get('bundleVersion', 0) >= 1
+        // Trusted timestamp (P0-03, same as create): the re-issued
+        // receipt must carry a fresh createdAt — an old timestamp
+        // re-issued would reopen an expired window.
+        && request.resource.data.get('createdAt', null) is timestamp
+        && request.resource.data.get('createdAt', null) <= request.time
+        && request.resource.data.get('createdAt', null) > request.time - duration.value(5, 'm')
+        && validJobReceiptAnchor(request.resource.data)
+        && exists(/databases/$(database)/documents/jobQuestionBundles/$(request.resource.data.get('bundleId', '')))
+        && get(/databases/$(database)/documents/jobQuestionBundles/$(request.resource.data.get('bundleId', ''))).data.status == 'published';
+      allow delete: if isAdmin();
+    }
+    // users/{uid}/jobAttempts — FULL attempt (Step 8, Step 3 §2.11).
+    // Created ONCE at submit with status 'submitted' and the full
+    // fields; the in-progress lifecycle lives in jobSessions (below).
+    // The Step 7 minimal anchor (create in-progress, update once to
+    // submitted) is REPLACED, not extended: a second submit is an
+    // update, and updates are denied, so the doc-ID (= session ID)
+    // stays the idempotency key and no orphan in-progress attempt can
+    // ever be stranded (deletes are forbidden for everyone, even
+    // Admin — submitted attempts are immutable, §4.4). An attempt may
+    // only be created when its session is already 'submitted' (the
+    // session gate in validJobAttemptCreate).
+    match /users/{userId}/jobAttempts/{attemptId} {
+      allow read: if isOwner(userId) || isModerator();
+      allow create: if isOwner(userId) && callerActive()
+        && validJobAttemptCreate(request.resource.data, userId, attemptId);
+      allow update, delete: if false;
+    }
+
+    // users/{uid}/jobSessions — live session (Step 8, Step 3 §2.12).
+    // Created in-progress, autosaved while in-progress, then exactly
+    // one terminal transition (submitted or abandoned) — after that
+    // the doc is frozen. Deletes are forbidden for everyone, even
+    // Admin: an abandoned session is the audit trail (a student who
+    // abandons a mock leaves a record; the attempt is simply never
+    // created for it).
+    match /users/{userId}/jobSessions/{sessionId} {
+      allow read: if isOwner(userId) || isModerator();
+      allow create: if isOwner(userId) && callerActive()
+        && validJobSessionCreate(request.resource.data);
+      allow update: if isOwner(userId) && callerActive()
+        && resource.data.get('status', '') == 'in-progress'
+        && request.resource.data.diff(resource.data).affectedKeys()
+             .hasOnly(['answers', 'currentQuestion', 'lastSyncedAt',
+                       'updatedAt', 'status', 'submittedAt', 'revision'])
+        && validJobSessionUpdate(request.resource.data, resource.data);
+      allow delete: if false;
+    }
+
+    // users/{uid}/jobExamAttempts — FULL exam attempt (Step 9,
+    // ChatGPT fold-in H.2). Created ONCE at submit with status
+    // 'submitted' and the full fields; the in-progress lifecycle
+    // lives in jobExamSessions. The doc-ID (= session ID) is the
+    // idempotency key; a second submit is an update, and updates
+    // are denied. Deletes are forbidden for everyone, even Admin —
+    // submitted attempts are immutable, §4.4. An attempt may only
+    // be created when its exam session is already 'submitted'
+    // (the session gate in validJobExamAttemptCreate).
+    match /users/{userId}/jobExamAttempts/{attemptId} {
+      allow read: if isOwner(userId) || isModerator();
+      // The bundle + the post-write session are fetched ONCE
+      // here and passed in (budget note on
+      // validJobExamAttemptCreate): the exists-guards
+      // short-circuit before any get(), so a missing doc denies
+      // cleanly instead of erroring the get.
+      allow create: if isOwner(userId) && callerActive()
+        && exists(/databases/$(database)/documents/jobQuestionBundles/$(request.resource.data.get('bundleId', '')))
+        && exists(/databases/$(database)/documents/users/$(userId)/jobExamSessions/$(attemptId))
+        && validJobExamAttemptCreate(request.resource.data, userId, attemptId,
+             jobBundleData(request.resource.data.get('bundleId', '')),
+             jobExamSessionDataAfter(userId, attemptId));
+      allow update, delete: if false;
+    }
+
+    // users/{uid}/jobExamSessions — live exam session (Step 9).
+    // Created in-progress (with its lock), autosaved while
+    // in-progress and before the stored deadline, then exactly
+    // one terminal transition (submitted or abandoned) — after
+    // that the doc is frozen. The deadline (endsAt) is set ONCE
+    // after read-back to exactly startedAt + the definition's
+    // duration. Deletes are forbidden for everyone, even Admin:
+    // an abandoned session is the audit trail.
+    match /users/{userId}/jobExamSessions/{sessionId} {
+      allow read: if isOwner(userId) || isModerator();
+      // Each referenced doc is fetched ONCE here and passed in
+      // (budget note on validJobExamSessionCreate above): the
+      // exists-guards short-circuit before any get(), so a
+      // missing doc denies cleanly instead of erroring the get.
+      allow create: if isOwner(userId) && callerActive()
+        && exists(/databases/$(database)/documents/jobQuestionBundles/$(request.resource.data.get('bundleId', '')))
+        && exists(/databases/$(database)/documents/jobQuestionSetManifests/$(request.resource.data.get('questionSetId', '')))
+        && exists(/databases/$(database)/documents/jobExamDefinitions/$(request.resource.data.get('definitionId', '')))
+        && validJobExamSessionCreate(request.resource.data, sessionId,
+             jobBundleData(request.resource.data.get('bundleId', '')),
+             jobManifestData(request.resource.data.get('questionSetId', '')),
+             jobExamDefinitionData(request.resource.data.get('definitionId', '')),
+             getAfter(/databases/$(database)/documents/jobExamUserLocks/$(uid() + '_' + request.resource.data.get('examSlug', ''))).data);
+      allow update: if isOwner(userId) && callerActive()
+        && resource.data.get('status', '') == 'in-progress'
+        && request.resource.data.diff(resource.data).affectedKeys()
+             .hasOnly(['answers', 'currentQuestion', 'lastSyncedAt',
+                       'updatedAt', 'endsAt', 'clientEndsAtMillis',
+                       'status', 'submittedAt', 'revision'])
+        && validJobExamSessionUpdate(request.resource.data, resource.data);
+      allow delete: if false;
+    }
+
+    // users/{uid}/jobExamAuditLogs — mock-exam audit trail (Step 9
+    // closure, checklist item 11). One best-effort entry per mock
+    // lifecycle transition (started / submitted / abandoned /
+    // submit-failed), written by the student's own client next to
+    // the transition — never blocking it. The rules bound the SHAPE
+    // (owner only, fixed fields, trusted timestamp) so the trail
+    // cannot be rewritten into another student's record, backdated,
+    // or padded with free text; they do NOT make the trail
+    // tamper-proof — a determined client can write a false entry,
+    // exactly as it can forge an attempt (§4.3 residual limit).
+    // The trail is operational (who took which mock, when, and
+    // whether the submit failed) for the owner/Moderator — never a
+    // basis for a "Verified" score. Entries are immutable: no
+    // update, Admin-only delete.
+    function validJobExamAuditLog(d, userId) {
+      return d.keys().hasOnly(['uid', 'event', 'examSlug', 'mockId',
+              'sessionId', 'bundleId', 'createdAt', 'detail'])
+        && d.get('uid', '') == userId
+        && d.get('event', '') in ['mock_started', 'mock_submitted',
+             'mock_abandoned', 'mock_submit_failed']
+        && d.get('examSlug', null) is string
+        && d.get('examSlug', '').size() > 0
+        && d.get('examSlug', '').size() <= 200
+        && d.get('mockId', null) is string
+        && d.get('mockId', '').size() > 0
+        && d.get('mockId', '').size() <= 200
+        && d.get('sessionId', null) is string
+        && d.get('sessionId', '').size() > 0
+        && d.get('sessionId', '').size() <= 200
+        && d.get('bundleId', null) is string
+        && d.get('bundleId', '').size() > 0
+        && d.get('bundleId', '').size() <= 200
+        && (d.get('detail', null) == null
+            || (d.get('detail', null) is string
+                && d.get('detail', '').size() <= 500))
+        // Trusted timestamp (P0-03): no future-dating, no backdating.
+        && d.get('createdAt', null) is timestamp
+        && d.get('createdAt', null) <= request.time
+        && d.get('createdAt', null) > request.time - duration.value(5, 'm');
+    }
+    match /users/{userId}/jobExamAuditLogs/{logId} {
+      allow read: if isOwner(userId) || isModerator();
+      allow create: if isOwner(userId) && callerActive()
+        && validJobExamAuditLog(request.resource.data, userId);
+      allow update: if false;
+      allow delete: if isAdmin();
+    }
 
     // ---------- everything else: denied ----------
     match /{document=**} {

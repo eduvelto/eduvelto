@@ -24,7 +24,12 @@ const ClassDashboardPage = lazy(() => import('./pages/ClassDashboardPage'));
 const ClassSubjectPage = lazy(() => import('./pages/ClassSubjectPage'));
 const JobsPage = lazy(() => import('./pages/JobsPage'));
 const JobHubPage = lazy(() => import('./pages/JobHubPage'));
+const JobSubjectPage = lazy(() => import('./pages/JobSubjectPage'));
+const JobTopicPage = lazy(() => import('./pages/JobTopicPage'));
 const JobsCommonPage = lazy(() => import('./pages/JobsCommonPage'));
+const JobPracticePage = lazy(() => import('./pages/JobPracticePage'));
+const JobMockPage = lazy(() => import('./pages/JobMockPage'));
+const JobResultPage = lazy(() => import('./pages/JobResultPage'));
 const JobSeekerDashboardPage = lazy(() => import('./pages/JobSeekerDashboardPage'));
 const RegisterPage = lazy(() => import('./pages/RegisterPage'));
 const RoleSetupPage = lazy(() => import('./pages/RoleSetupPage'));
@@ -221,10 +226,20 @@ export default function App() {
         <Route path="/class/:slug/subjects/:dept" element={<ClassSubjectPage />} />
         <Route path="/class/:slug/:tab" element={<ClassDashboardPage />} />
         <Route path="/class/:slug" element={<ClassDashboardPage />} />
-        {/* Job Preparation (B-1.3): /jobs → hub index, /jobs/common, /jobs/dashboard, /jobs/:exam[/:tab]. /jobs/common and /jobs/dashboard must come before /jobs/:exam. */}
+        {/* Job Preparation (B-1.3): /jobs → hub index, /jobs/common, /jobs/dashboard, /jobs/:exam[/:tab]. /jobs/common and /jobs/dashboard must come before /jobs/:exam. Step 6 subject/topic pages are 4- and 5-segment routes (/jobs/:exam/subjects/:subject[/:topic]) — they cannot match the 3-segment /jobs/:exam/:tab route. */}
         <Route path="/jobs" element={<JobsPage />} />
         <Route path="/jobs/common" element={<JobsCommonPage />} />
         <Route path="/jobs/dashboard" element={<JobSeekerDashboardPage />} />
+        <Route path="/jobs/:exam/subjects/:subject" element={<JobSubjectPage />} />
+        <Route path="/jobs/:exam/subjects/:subject/:topic" element={<JobTopicPage />} />
+        {/* Step 8: practice + result MUST come before /jobs/:exam/:tab
+            — otherwise '/jobs/practice/:scope' matches :exam='practice'. */}
+        <Route path="/jobs/practice/:scope" element={<JobPracticePage />} />
+        {/* Step 9: mock MUST come before /jobs/:exam/:tab for the
+            same reason — otherwise '/jobs/mock/:mockId' matches
+            :exam='mock'. */}
+        <Route path="/jobs/mock/:mockId" element={<JobMockPage />} />
+        <Route path="/jobs/result/:attemptId" element={<JobResultPage />} />
         <Route path="/jobs/:exam/:tab" element={<JobHubPage />} />
         <Route path="/jobs/:exam" element={<JobHubPage />} />
         <Route path="/register" element={<RegisterPage />} />

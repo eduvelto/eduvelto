@@ -238,6 +238,7 @@
         "patternSource": "BSCS বিজ্ঞপ্তি",
         "patternVerifiedAt": null,
         "questionCount": 100,
+        "scoringConfigVersion": "v0-provisional",
         "subjects": [
           {
             "marks": 25,
@@ -307,6 +308,7 @@
         "patternSource": "BPSC বিজ্ঞপ্তি",
         "patternVerifiedAt": null,
         "questionCount": 200,
+        "scoringConfigVersion": "v1",
         "subjects": [
           {
             "marks": 35,
@@ -597,6 +599,7 @@
         "patternSource": "NTRCA ১৮তম পরীক্ষার বিজ্ঞপ্তি",
         "patternVerifiedAt": null,
         "questionCount": 100,
+        "scoringConfigVersion": "18th-v1",
         "subjects": [
           {
             "marks": 25,
@@ -689,6 +692,7 @@
         "patternSource": "সরকারি প্রাথমিক বিদ্যালয় শিক্ষক নিয়োগ বিধিমালা ২০২৫, ২৮ আগস্ট ২০২৫",
         "patternVerifiedAt": null,
         "questionCount": 90,
+        "scoringConfigVersion": "v1",
         "subjects": [
           {
             "marks": 25,
