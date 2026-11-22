@@ -56,6 +56,10 @@ export const strings = {
       bn: 'রেজিস্টার করলে শিক্ষার্থী অ্যাকাউন্ট তৈরি হয় এবং পরপরই ড্যাশবোর্ড ব্যবহার করা যায় — কোনো যাচাইয়ের অপেক্ষা নেই। শিক্ষক ভেরিফিকেশন আলাদা প্রক্রিয়া (Step 5) — রেজিস্টার করলেই "ভেরিফায়েড" ব্যাজ পাওয়া যায় না।',
       en: 'Registering creates a student account that works immediately — no verification wait. Teacher verification is a separate process (Step 5) — registering does not grant a "verified" badge.',
     },
+    guardianNote: {
+      bn: 'রেজিস্টার করলে অভিভাবক অ্যাকাউন্ট তৈরি হয় — এরপর আপনার সন্তানের অ্যাকাউন্ট যুক্ত করে তার অগ্রগতি, ফলাফল ও রুটিন দেখতে পারবেন।',
+      en: 'Registering creates a guardian account — afterwards you can link your child’s account and follow their progress, results and routine.',
+    },
     notConfigured: {
       bn: 'Firebase এখনো যুক্ত হয়নি। প্রকল্প সেটআপ সম্পূর্ণ হলে লগইন চালু হবে।',
       en: 'Firebase is not connected yet. Sign-in will work once the project setup is complete.',
