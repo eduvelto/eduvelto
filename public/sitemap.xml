@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Eduvelto sitemap — REWRITTEN 22 Nov 2026 (feature/seo-visibility).
+<!-- Eduvelto sitemap — REWRITTEN 22 Nov 2026 (feature/seo-visibility),
+     EXTENDED 22 Nov 2026 (feature/seo-plan-alignment): now 31 URLs.
      The 20 Nov version listed 8 routes that do NOT exist
      (/features, /teachers-institutions, /parents-students, /career,
      /videos, /community, /life, /eduvelto-id) — the SPA catch-all
@@ -7,7 +8,11 @@
      omitted the real Job + Admission routes. This version lists ONLY
      routes that exist as real pages. All URLs are canonical
      eduvelto.com URLs. /admin, /ceo, /login, /register, dashboards
-     and app-internal routes are intentionally excluded. -->
+     and app-internal routes are intentionally excluded. The 10 extra
+     Job exam hubs (dgfood … it-professional) are real pages with
+     honest SEO (pattern unverified / scope pending where true) at
+     priority 0.6; the 4 priority exams (BCS/Bank/Primary/NTRCA)
+     stay 0.8. /skills is a coming-soon placeholder — not listed. -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://eduvelto.com/</loc>
@@ -48,6 +53,56 @@
     <loc>https://eduvelto.com/jobs/common</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/jobs/dgfood</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/jobs/bpsc-non-cadre</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/jobs/cag</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/jobs/bfsa</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/jobs/others</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/jobs/ministries</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/jobs/defence</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/jobs/autonomous</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/jobs/private-ngo</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/jobs/it-professional</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://eduvelto.com/admissions</loc>

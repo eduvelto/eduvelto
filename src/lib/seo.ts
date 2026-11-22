@@ -23,9 +23,19 @@
 //  - Content language is always Bangla (owner rule 22 Nov 2026), so
 //    titles/descriptions are Bangla-only; the language toggle changes
 //    navigation tab labels only.
+//  - Founder name in structured data (owner 22 Nov 18:24): the
+//    Organization JSON-LD names Ali Hasan Mohammed Mizan, Founder &
+//    CEO (the Person on /founder carries the full profile incl. the
+//    approved DOB). No private detail (no DOB, address, phone) in the
+//    homepage JSON-LD.
+//  - Plans in SEO (owner 22 Nov 18:24): copy reflects the plans
+//    running NOW (Job Preparation + University Admission, NU first).
+//    Future plans enter the SEO only when they launch — never
+//    described as live before then. Adding a plan = one STATIC_ROUTES
+//    (or jobExamEntry) record + one sitemap <url> + one test line.
 
 import { useEffect } from 'react';
-import { JOB_TABS, jobExamBySlug } from './jobExams';
+import { JOB_TABS, jobExamBySlug, jobPatternStatus, jobRulesConfig } from './jobExams';
 
 export type SeoData = {
   title: string;
@@ -61,7 +71,21 @@ export const ORGANIZATION_JSON_LD = {
     '@type': 'Place',
     address: { '@type': 'PostalAddress', addressCountry: 'BD', addressLocality: "Cox's Bazar" },
   },
-  founder: { '@id': 'https://eduvelto.com/founder#person' },
+  founder: {
+    '@type': 'Person',
+    '@id': 'https://eduvelto.com/founder#person',
+    name: 'Ali Hasan Mohammed Mizan',
+    jobTitle: 'Founder & CEO',
+  },
+  areaServed: { '@type': 'Country', name: 'Bangladesh' },
+  knowsAbout: [
+    'Free education in Bangladesh',
+    'BCS preparation',
+    'Bank job preparation',
+    'Primary teacher recruitment preparation',
+    'NTRCA teacher registration preparation',
+    'National University admission preparation',
+  ],
   sameAs: [] as string[],
 };
 
@@ -165,43 +189,43 @@ const STATIC_ROUTES: Record<string, RouteSeoEntry> = {
   '/jobs': {
     title: 'চাকরি প্রস্তুতি — BCS, ব্যাংক, প্রাথমিক শিক্ষক, NTRCA | Eduvelto',
     description:
-      'BCS, ব্যাংক, প্রাথমিক শিক্ষক ও NTRCA পরীক্ষার বিনামূল্যে প্রস্তুতি — MCQ অনুশীলন, মক টেস্ট ও প্রশ্নব্যাংক। Eduvelto — সম্পূর্ণ ফ্রি।',
+      'BCS, ব্যাংক, প্রাথমিক শিক্ষক ও NTRCA পরীক্ষার প্রস্তুতির কাঠামো — যাচাইকৃত পরীক্ষার ধরন, সিলেবাস ও বিষয়ভিত্তিক প্রস্তুতি। MCQ অনুশীলন ও মক টেস্ট শীঘ্রই আসছে। Eduvelto — সম্পূর্ণ ফ্রি।',
     crumb: 'চাকরি প্রস্তুতি',
   },
   '/jobs/common': {
     title: 'কমন বিষয় — চাকরি প্রস্তুতি | Eduvelto',
     description:
-      'চাকরি পরীক্ষার কমন বিষয় — বাংলা, ইংরেজি, গণিত ও সাধারণ জ্ঞানের বিনামূল্যে MCQ অনুশীলন। Eduvelto।',
+      'চাকরি পরীক্ষার কমন বিষয় — বাংলা, ইংরেজি, গণিত ও সাধারণ জ্ঞানের প্রস্তুতির কাঠামো। MCQ অনুশীলন শীঘ্রই আসছে। Eduvelto।',
     crumb: 'কমন বিষয়',
   },
   '/admissions': {
     title: 'ভর্তি প্রস্তুতি — বিশ্ববিদ্যালয় ভর্তি | Eduvelto',
     description:
-      'বিশ্ববিদ্যালয় ভর্তি পরীক্ষার বিনামূল্যে প্রস্তুতি — জাতীয় বিশ্ববিদ্যালয় অনার্সসহ MCQ অনুশীলন, মক টেস্ট ও ফলাফল। Eduvelto — সম্পূর্ণ ফ্রি।',
+      'বিশ্ববিদ্যালয় ভর্তি পরীক্ষার প্রস্তুতির কাঠামো — জাতীয় বিশ্ববিদ্যালয় অনার্সসহ যাচাইকৃত পরীক্ষার ধরন ও সিলেবাস। MCQ অনুশীলন ও মক টেস্ট শীঘ্রই আসছে। Eduvelto — সম্পূর্ণ ফ্রি।',
     crumb: 'ভর্তি প্রস্তুতি',
   },
   '/admissions/national-university': {
     title: 'জাতীয় বিশ্ববিদ্যালয় ভর্তি প্রস্তুতি — অনার্স ১ম বর্ষ | Eduvelto',
     description:
-      'জাতীয় বিশ্ববিদ্যালয় অনার্স ১ম বর্ষ ভর্তি পরীক্ষার বিনামূল্যে প্রস্তুতি — বাংলা, ইংরেজি, সাধারণ জ্ঞান ও গ্রুপভিত্তিক MCQ অনুশীলন। Eduvelto।',
+      'জাতীয় বিশ্ববিদ্যালয় অনার্স ১ম বর্ষ ভর্তি পরীক্ষার প্রস্তুতির কাঠামো — যাচাইকৃত ধরন: ১০০ MCQ, ১ ঘণ্টা, নেগেটিভ মার্কিং নেই; বাংলা, ইংরেজি, সাধারণ জ্ঞান ও গ্রুপভিত্তিক সিলেবাস। MCQ অনুশীলন শীঘ্রই আসছে। Eduvelto।',
     crumb: 'জাতীয় বিশ্ববিদ্যালয়',
   },
   '/admissions/national-university/humanities': {
     title: 'মানবিক শাখা — জাতীয় বিশ্ববিদ্যালয় ভর্তি প্রস্তুতি | Eduvelto',
     description:
-      'জাতীয় বিশ্ববিদ্যালয় ভর্তি পরীক্ষার মানবিক শাখার বিনামূল্যে প্রস্তুতি — বাংলা, ইংরেজি, সাধারণ জ্ঞান ও মানবিক গ্রুপের MCQ অনুশীলন। Eduvelto।',
+      'জাতীয় বিশ্ববিদ্যালয় ভর্তি পরীক্ষার মানবিক শাখার প্রস্তুতির কাঠামো — বাংলা, ইংরেজি, সাধারণ জ্ঞান ও মানবিক গ্রুপের সিলেবাস। MCQ অনুশীলন শীঘ্রই আসছে। Eduvelto।',
     crumb: 'মানবিক শাখা',
   },
   '/admissions/national-university/science': {
     title: 'বিজ্ঞান শাখা — জাতীয় বিশ্ববিদ্যালয় ভর্তি প্রস্তুতি | Eduvelto',
     description:
-      'জাতীয় বিশ্ববিদ্যালয় ভর্তি পরীক্ষার বিজ্ঞান শাখার বিনামূল্যে প্রস্তুতি — বাংলা, ইংরেজি, সাধারণ জ্ঞান ও বিজ্ঞান গ্রুপের MCQ অনুশীলন। Eduvelto।',
+      'জাতীয় বিশ্ববিদ্যালয় ভর্তি পরীক্ষার বিজ্ঞান শাখার প্রস্তুতির কাঠামো — বাংলা, ইংরেজি, সাধারণ জ্ঞান ও বিজ্ঞান গ্রুপের সিলেবাস। MCQ অনুশীলন শীঘ্রই আসছে। Eduvelto।',
     crumb: 'বিজ্ঞান শাখা',
   },
   '/admissions/national-university/business': {
     title: 'ব্যবসায় শিক্ষা শাখা — জাতীয় বিশ্ববিদ্যালয় ভর্তি প্রস্তুতি | Eduvelto',
     description:
-      'জাতীয় বিশ্ববিদ্যালয় ভর্তি পরীক্ষার ব্যবসায় শিক্ষা শাখার বিনামূল্যে প্রস্তুতি — বাংলা, ইংরেজি, সাধারণ জ্ঞান ও ব্যবসায় গ্রুপের MCQ অনুশীলন। Eduvelto।',
+      'জাতীয় বিশ্ববিদ্যালয় ভর্তি পরীক্ষার ব্যবসায় শিক্ষা শাখার প্রস্তুতির কাঠামো — বাংলা, ইংরেজি, সাধারণ জ্ঞান ও ব্যবসায় গ্রুপের সিলেবাস। MCQ অনুশীলন শীঘ্রই আসছে। Eduvelto।',
     crumb: 'ব্যবসায় শিক্ষা শাখা',
   },
   '/library': {
@@ -219,7 +243,7 @@ const STATIC_ROUTES: Record<string, RouteSeoEntry> = {
   '/about': {
     title: 'Eduvelto সম্পর্কে — বাংলাদেশের ফ্রি শিক্ষা প্ল্যাটফর্ম',
     description:
-      'Eduvelto বাংলাদেশের শিক্ষার্থীদের জন্য একটি বিনামূল্যের ডিজিটাল শিক্ষা প্ল্যাটফর্ম — পাঠ, পরীক্ষা, ডিজিটাল লাইব্রেরি ও স্মার্ট পড়ার পরিকল্পনা এক জায়গায়।',
+      'Eduvelto বাংলাদেশের শিক্ষার্থীদের জন্য একটি বিনামূল্যের ডিজিটাল শিক্ষা প্ল্যাটফর্ম — পাঠ, পরীক্ষা ও ডিজিটাল লাইব্রেরি এক জায়গায়।',
     crumb: 'আমাদের সম্পর্কে',
   },
   '/contact': {
@@ -236,7 +260,7 @@ const STATIC_ROUTES: Record<string, RouteSeoEntry> = {
   '/health': {
     title: 'স্বাস্থ্য — সচেতনতামূলক তথ্য | Eduvelto',
     description:
-      'স্বাস্থ্য সচেতনতামূলক তথ্য — ঔষধ, রোগ, চিকিৎসক ও হাসপাতালের তথ্য। Eduvelto।',
+      'স্বাস্থ্য সচেতনতামূলক তথ্য — ঔষধ, রোগ ও হাসপাতালের তথ্য। Eduvelto।',
     crumb: 'স্বাস্থ্য',
   },
   '/ai-teacher': {
@@ -245,7 +269,26 @@ const STATIC_ROUTES: Record<string, RouteSeoEntry> = {
       'Eduvelto-র ব্যক্তিগত AI শিক্ষক শীঘ্রই আসছে। আপাতত বিনামূল্যে MCQ পরীক্ষা, লাইব্রেরি ও চাকরি-ভর্তি প্রস্তুতি ব্যবহার করুন।',
     crumb: 'AI শিক্ষক',
   },
+  '/skills': {
+    title: 'পেশাগত দক্ষতা — শীঘ্রই আসছে | Eduvelto',
+    description:
+      'Eduvelto-র পেশাগত দক্ষতা বিভাগ শীঘ্রই আসছে। আপাতত চাকরি ও ভর্তি প্রস্তুতি ব্যবহার করুন — সম্পূর্ণ বিনামূল্যে।',
+    crumb: 'পেশাগত দক্ষতা',
+  },
 };
+
+// Bangla digits, e.g. 200 -> '২০০', 0.5 -> '০.৫'.
+function bnDigits(n: number | string): string {
+  return String(n).replace(/\d/g, (d) => '০১২৩৪৫৬৭৮৯'[Number(d)]);
+}
+
+function timeBn(minutes: number): string {
+  if (minutes % 60 === 0) {
+    const h = minutes / 60;
+    return h === 1 ? '১ ঘণ্টা' : `${bnDigits(h)} ঘণ্টা`;
+  }
+  return `${bnDigits(minutes)} মিনিট`;
+}
 
 function jobExamEntry(slug: string, tab?: string): RouteSeoEntry | null {
   const exam = jobExamBySlug(slug);
@@ -254,9 +297,46 @@ function jobExamEntry(slug: string, tab?: string): RouteSeoEntry | null {
   // falls back to the plain exam title (never a raw English slug).
   const tabBn = tab ? JOB_TABS.find((t) => t.slug === tab)?.bn : undefined;
   const tabSuffix = tabBn ? ` — ${tabBn}` : '';
+
+  // Honest per-exam description (22 Nov 2026, current plan): practice
+  // and mocks are NOT live — the UI says "শীঘ্রই আসছে" — so no
+  // description may present them as available. Verified pattern facts
+  // come from jobRulesConfig; anything unverified says so plainly.
+  const cfg = jobRulesConfig(slug);
+  const status = jobPatternStatus(slug);
+  let body: string;
+  if (slug === 'bank' && cfg && cfg.questionCount !== null && cfg.timeMinutes !== null) {
+    // Subject pattern verified, penalty NOT verified (Step 5 closure):
+    // the config as a whole is not authoritative for scoring.
+    body = `ব্যাংক প্রিলিমিনারি পরীক্ষার প্রস্তুতির কাঠামো — যাচাইকৃত বিষয়বণ্টন: ${bnDigits(cfg.questionCount)} MCQ, ${timeBn(cfg.timeMinutes)} (অফিসার, ক্যাশ); নেগেটিভ মার্কিং অযাচাইকৃত — বিজ্ঞপ্তি/প্রবেশপত্রে লেখা হারই চূড়ান্ত।`;
+  } else if (
+    cfg &&
+    cfg.questionCount !== null &&
+    cfg.timeMinutes !== null &&
+    (status === 'verified' || status === 'last_verified')
+  ) {
+    const pattern =
+      status === 'last_verified'
+        ? 'শেষ যাচাইকৃত ধরন (১৮তম পরীক্ষা)'
+        : 'যাচাইকৃত ধরন';
+    const neg =
+      cfg.negativeMarking === null || cfg.negativeMarking === undefined
+        ? 'নেগেটিভ মার্কিং নেই'
+        : `নেগেটিভ মার্কিং −${bnDigits(Math.abs(cfg.negativeMarking).toFixed(2))}`;
+    const pass =
+      cfg.passMark !== null && cfg.passMark !== undefined
+        ? `, পাস ${bnDigits(cfg.passMark)} নম্বর`
+        : '';
+    body = `${exam.fullBn} পরীক্ষার প্রস্তুতির কাঠামো — ${pattern}: ${bnDigits(cfg.questionCount)} MCQ, ${timeBn(cfg.timeMinutes)}, ${neg}${pass}; বিষয়ভিত্তিক সিলেবাস।`;
+  } else if (slug === 'it-professional') {
+    // Scope undecided (owner decision 13.8) — Step 6 builds no syllabus.
+    body = `${exam.fullBn} প্রস্তুতির কাঠামো — পরিধি নির্ধারণ বাকি।`;
+  } else {
+    body = `${exam.fullBn} পরীক্ষার প্রস্তুতির কাঠামো — পরীক্ষার ধরন যাচাই বাকি (সর্বশেষ বিজ্ঞপ্তি দেখে নিন)।`;
+  }
   return {
     title: `${exam.bn} প্রস্তুতি — ${exam.fullBn}${tabSuffix} | Eduvelto`,
-    description: `${exam.fullBn} পরীক্ষার বিনামূল্যে প্রস্তুতি — MCQ অনুশীলন, মক টেস্ট ও ফলাফল বিশ্লেষণ। Eduvelto-তে সম্পূর্ণ ফ্রি।`,
+    description: `${body} MCQ অনুশীলন ও মক টেস্ট শীঘ্রই আসছে। Eduvelto-তে সম্পূর্ণ ফ্রি।`,
     crumb: exam.bn,
   };
 }
