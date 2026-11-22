@@ -78,6 +78,11 @@ const AdminNuQuestionsPage = lazy(() => import('./pages/AdminNuQuestionsPage'));
 // above the hub's `:tab` route, so the two never collide.
 const AdminLayout = lazy(() => import('./components/AdminLayout'));
 const AdminJobsPage = lazy(() => import('./pages/AdminJobsPage'));
+const AdminJobCircularsPage = lazy(() => import('./pages/AdminJobCircularsPage'));
+const AdminJobCircularEditPage = lazy(() => import('./pages/AdminJobCircularEditPage'));
+const AdminJobReportsPage = lazy(() => import('./pages/AdminJobReportsPage'));
+const AdminJobCorrectionsPage = lazy(() => import('./pages/AdminJobCorrectionsPage'));
+const AdminJobDomainsPage = lazy(() => import('./pages/AdminJobDomainsPage'));
 const AdminAdmissionsPage = lazy(() => import('./pages/AdminAdmissionsPage'));
 const AdminAnalyticsPage = lazy(() => import('./pages/AdminAnalyticsPage'));
 const AdminSettingsPage = lazy(() => import('./pages/AdminSettingsPage'));
@@ -313,6 +318,12 @@ export default function App() {
           <Route path="backup" element={<AdminBackupPage />} />
           <Route path="audit" element={<AdminAuditPage />} />
           <Route path="jobs" element={<AdminJobsPage />} />
+          <Route path="jobs/circulars" element={<AdminJobCircularsPage />} />
+          <Route path="jobs/circulars/new" element={<AdminJobCircularEditPage />} />
+          <Route path="jobs/circulars/:circularId" element={<AdminJobCircularEditPage />} />
+          <Route path="jobs/reports" element={<AdminJobReportsPage />} />
+          <Route path="jobs/corrections" element={<AdminJobCorrectionsPage />} />
+          <Route path="jobs/domains" element={<AdminJobDomainsPage />} />
           <Route path="admissions" element={<AdminAdmissionsPage />} />
           <Route path="admissions/structure" element={<AdminNuStructurePage />} />
           <Route path="admissions/syllabus" element={<AdminNuSyllabusPage />} />

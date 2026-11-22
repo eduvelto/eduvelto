@@ -2804,6 +2804,12 @@ service cloud.firestore {
              // verify / return of a Job content doc.
              'job-content-published', 'job-content-unpublished',
              'job-content-verified', 'job-content-returned',
+             // Step 15: circular deletes are Admin-only and must
+             // leave an audit entry (a delete without a trail would
+             // be invisible). Probe-measured with the circulars
+             // delete line + 3 keys: +125 stripped bytes total,
+             // release-create PASSES.
+             'job-content-deleted',
              'user-profile-viewed', 'user-messages-viewed',
              'support-message-sent', 'message-reported', 'message-blocked']
         && request.resource.data.keys().hasOnly(
@@ -4322,11 +4328,122 @@ service cloud.firestore {
     // No jobNotifications collection ships: the margin fits ONE
     // minimal block — notifications are derived client-side from
     // published circulars + mocks (src/lib/jobNotifications.ts).
+    //
+    // Step 15: delete lands here (Admin only — a wrongly created
+    // doc is removed by the Admin, never by an editor; moderators
+    // unpublish via reviewStatus='rejected'). Three new allowlist
+    // keys: 'verificationChecklist' (one map — the 7 verification
+    // checklist results + notes + checkedBy + checkedAt; shape is
+    // enforced by the client validator, as with every other field
+    // in this block), 'reviewNote' (the verifier's return reason, readable
+    // by the editor on the doc — adminActions is owner-read-only,
+    // so the note cannot live there), 'lastEditedBy' (who last
+    // edited the doc — the no-self-approval check needs it).
+    // Measured by release-create probe 23 Nov ~02:30: delete +
+    // these 3 keys = +89 stripped bytes, PASSES (compiled margin
+    // after them ≈ 100 bytes). The four new Step 15 collections
+    // below are DEPLOY-BLOCKED on the same margin — see the note
+    // above match /jobReports.
     match /circulars/{circularId} {
       allow read: if resource.data.get('reviewStatus', '') == 'published' || isModerator();
       allow create, update: if isModerator()
-        && request.resource.data.keys().hasOnly(['examSlug', 'postTitleBn', 'postTitleEn', 'circularNumber', 'publishedDate', 'applicationDeadline', 'deadlinePrecision', 'totalPosts', 'eligibilitySummaryBn', 'eligibilitySummaryEn', 'officialUrl', 'applyUrl', 'copyStatus', 'copyTextExcerpt', 'reviewStatus', 'verifiedBy', 'verifiedAt', 'examDate', 'applicationStartDate', 'authorId', 'createdAt', 'updatedAt'])
+        && request.resource.data.keys().hasOnly(['examSlug', 'postTitleBn', 'postTitleEn', 'circularNumber', 'publishedDate', 'applicationDeadline', 'deadlinePrecision', 'totalPosts', 'eligibilitySummaryBn', 'eligibilitySummaryEn', 'officialUrl', 'applyUrl', 'copyStatus', 'copyTextExcerpt', 'reviewStatus', 'verifiedBy', 'verifiedAt', 'examDate', 'applicationStartDate', 'authorId', 'createdAt', 'updatedAt', 'verificationChecklist', 'reviewNote', 'lastEditedBy'])
         && request.resource.data.get('reviewStatus', '') in ['draft', 'in-review', 'verified', 'published', 'rejected'];
+      allow delete: if isAdmin();
+    }
+
+    // ---------- Step 15 admin collections — DEPLOY-BLOCKED ----------
+    // These four blocks are WRITTEN and EMULATOR-VERIFIED in this
+    // branch, but they CANNOT be deployed yet: release-create
+    // probes 23 Nov ~02:24 measured each one OVER the 256,000-byte
+    // compiled limit on its own (jobReports 257,315; jobCorrections
+    // 257,507; circularHistory 256,671; approvedDomains 256,328;
+    // all four + the circulars delete = 260,502, i.e. 4,502 over).
+    // Baseline compiled ≈ 255,791 (margin ≈ 209 bytes).
+    // DO NOT deploy these rules until the public-ID rules refactor
+    // (feature/public-user-ids, scheduled for the 23 Nov 14:30
+    // cron) lands on main and frees ~4,992 compiled bytes: the
+    // deploy coordinator must rebase this branch onto that main,
+    // re-run the release-create probe
+    // (~/workspace/eduorbit/step15-rules-size-probe.mjs), and only
+    // then deploy rules + hosting TOGETHER. A hosting-only deploy
+    // before that would ship admin/report UI whose writes the live
+    // rules deny. The circulars admin UI that works under the
+    // Step 14 rules (queue, checklist, create/edit/verify/archive,
+    // duplicate warnings, domain check) is unaffected — it needs
+    // only the delete line + 3 keys above, which already passed
+    // the probe.
+    match /jobReports/{reportId} {
+      allow read: if signedIn() && (resource.data.reporterId == uid() || isModerator());
+      allow create: if signedIn() && callerActive()
+        && request.resource.data.reporterId == uid()
+        && request.resource.data.status == 'open'
+        && request.resource.data.reason in ['wrong-answer', 'wrong-explanation', 'wrong-info', 'wrong-deadline', 'wrong-post-count', 'broken-link', 'new-extension', 'wrong-organization', 'duplicate', 'other']
+        && request.resource.data.targetType in ['jobQuestion', 'jobLesson', 'jobCircular', 'jobMock']
+        && request.resource.data.targetId is string
+        && request.resource.data.targetAuthorId is string
+        && isOptStr(request.resource.data.details, 2000)
+        && request.resource.data.keys().hasOnly(['reporterId', 'targetType', 'targetId', 'targetAuthorId', 'reason', 'details', 'suggestedValue', 'evidenceUrl', 'status', 'priority', 'resolvedBy', 'resolvedAt', 'resolutionNote', 'createdAt', 'updatedAt']);
+      allow update: if isModerator()
+        && request.resource.data.status in ['open', 'investigating', 'resolved', 'dismissed'];
+      allow delete: if false;
+    }
+    match /jobCorrections/{correctionId} {
+      allow read: if signedIn() && (resource.data.requesterId == uid() || isModerator());
+      allow create: if signedIn() && callerActive()
+        && request.resource.data.requesterId == uid()
+        && request.resource.data.status == 'pending'
+        && request.resource.data.targetType in ['jobQuestion', 'jobLesson', 'jobCircular', 'jobMock']
+        && isStr(request.resource.data.whatsWrong, 2000)
+        && isStr(request.resource.data.proposedFix, 2000)
+        && isStr(request.resource.data.source, 500)
+        && request.resource.data.keys().hasOnly(['requesterId', 'targetType', 'targetId', 'whatsWrong', 'proposedFix', 'source', 'status', 'decidedBy', 'decidedAt', 'decisionReason', 'createdAt', 'updatedAt']);
+      allow update: if isModerator()
+        && resource.data.status == 'pending'
+        && request.resource.data.status in ['accepted', 'rejected']
+        && request.resource.data.decidedBy == uid()
+        && request.resource.data.decisionReason is string
+        && request.resource.data.decisionReason.size() >= 10;
+      allow delete: if false;
+    }
+    // Per-field audit trail for circulars (ChatGPT circularHistory):
+    // one doc per sensitive change — never updated, never deleted.
+    // The admin-action audit (who approved/published) already
+    // lives in adminActions (job-content-* actions, zero new
+    // rules); this collection is the FIELD-level trail a verifier
+    // reads on the circular (what changed, old → new, from which
+    // source). Gemini's subcollection jobCirculars/{id}/auditLogs
+    // is ADAPTED to this top-level collection so the admin queue
+    // can read recent changes across ALL circulars in one query.
+    match /circularHistory/{historyId} {
+      allow read: if isModerator();
+      allow create: if isModerator()
+        && request.resource.data.keys().hasOnly(['circularId', 'fieldChanged', 'previousValue', 'newValue', 'sourceId', 'changedBy', 'changedAt', 'note'])
+        && request.resource.data.fieldChanged in ['applicationDeadline', 'officialUrl', 'applyUrl', 'totalPosts', 'reviewStatus', 'examDate', 'applicationStartDate', 'duplicateOf', 'correctionOf', 'extensionOf', 'relatedTo']
+        && request.resource.data.changedBy == uid()
+        && request.resource.data.circularId is string
+        && request.resource.data.changedAt is timestamp;
+      allow update, delete: if false;
+    }
+    // Admin-managed approved official domains (ChatGPT; Gemini's
+    // config/officialDomains single doc is ADAPTED to one doc per
+    // domain so a domain can be added/deprecated without rewriting
+    // a shared doc — the read cost is the same for the admin UI,
+    // which loads the list once).
+    match /approvedDomains/{domainId} {
+      allow read: if isModerator();
+      allow create, update: if isAdmin()
+        && request.resource.data.keys().hasOnly(['domain', 'organization', 'examSlugs', 'addedBy', 'createdAt', 'updatedAt', 'status'])
+        && isStr(request.resource.data.domain, 200)
+        && isStr(request.resource.data.organization, 200)
+        // 'status' is optional on create (defaults to active);
+        // setApprovedDomainStatus writes it on update (suspend =
+        // soft action — history preserved, never hard-deleted).
+        // The pre-compaction block omitted 'status' from hasOnly,
+        // which would have denied every status write; fixed here
+        // (Step 15 build, 23 Nov ~03:00) and re-measured.
+        && request.resource.data.get('status', 'active') in ['active', 'watch', 'deprecated'];
+      allow delete: if isAdmin();
     }
 
     // jobQuestionKeys — the answer key, one doc per bundle.

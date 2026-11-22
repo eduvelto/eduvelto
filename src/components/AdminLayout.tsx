@@ -54,6 +54,10 @@ const NAV_SECTIONS: NavSection[] = [
     icon: 'briefcase',
     items: [
       { to: '/admin/jobs', bn: 'চাকরি প্রস্তুতি', en: 'Job Preparation' },
+      { to: '/admin/jobs/circulars', bn: 'সার্কুলার যাচাই', en: 'Circular Verification' },
+      { to: '/admin/jobs/reports', bn: 'ছাত্রদের রিপোর্ট', en: 'Student Reports' },
+      { to: '/admin/jobs/corrections', bn: 'সংশোধনের প্রস্তাব', en: 'Correction Proposals' },
+      { to: '/admin/jobs/domains', bn: 'অফিসিয়াল ডোমেইন', en: 'Official Domains' },
       { to: '/admin/admissions', bn: 'ভর্তি প্রস্তুতি', en: 'Admission Preparation' },
     ],
   },

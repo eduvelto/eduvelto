@@ -76,6 +76,140 @@ export interface JobCircular {
   authorId: string;
   createdAtMillis: number | null;
   updatedAtMillis: number | null;
+  /** Verification checklist (Step 15): the 7 ticks the verifier
+   * made before approving, + who checked and when. Null when the
+   * circular has never been through the checklist. The checklist
+   * is enforced in the admin UI at approve time; the rules allow
+   * the key but do not re-check the ticks (compiled-rules margin
+   * ≈ 100 bytes after the Step 15 delta — a rules-side checklist
+   * check is a post-refactor follow-up). */
+  verificationChecklist: VerificationChecklist | null;
+  /** Verifier's return reason when a circular is sent back to
+   * draft (needs-review). Shown to the editor on the admin page.
+   * Lives on the doc because adminActions is owner-read-only. */
+  reviewNote: string | null;
+  /** UID of the last editor — the no-self-approval check needs
+   * it (a verifier may not approve their own edit). */
+  lastEditedBy: string | null;
+}
+
+/** Step 15 verification checklist — the 7 items from the Step 14
+ * report (ChatGPT's checklist, adapted to our fields).
+ *
+ * Evidence-based, not bare checkboxes (ChatGPT): each item stores
+ * a RESULT, not a boolean — 'pass' (checked and matches the
+ * source), 'fail' (contradicts the source), 'uncertain' (cannot
+ * be confirmed from the evidence), 'na' (the circular genuinely
+ * does not state it — e.g. no opening date — with a note; never
+ * invented). An unchecked item is NEVER a pass. Approval requires
+ * every item 'pass' or 'na'; any 'fail'/'uncertain' blocks it.
+ * Gemini's booleans are ADAPTED to this richer model (same 7
+ * items, same blocking semantics, plus the na case Gemini did
+ * not cover). */
+export const VERIFICATION_CHECKLIST_ITEMS = [
+  'orgConfirmed',
+  'sourceOpened',
+  'postCountChecked',
+  'openingDateChecked',
+  'deadlineChecked',
+  'applyLinkChecked',
+  'amendmentsChecked',
+] as const;
+export type VerificationChecklistItem = (typeof VERIFICATION_CHECKLIST_ITEMS)[number];
+
+export type ChecklistResult = 'pass' | 'fail' | 'uncertain' | 'na';
+
+export const CHECKLIST_RESULTS: ChecklistResult[] = ['pass', 'fail', 'uncertain', 'na'];
+
+export const VERIFICATION_CHECKLIST_BN: Record<VerificationChecklistItem, string> = {
+  orgConfirmed: 'প্রকাশক সংস্থা নিশ্চিত (অফিসিয়াল ডোমেইন মিলেছে)',
+  sourceOpened: 'মূল বিজ্ঞপ্তি খুলে দেখা হয়েছে',
+  postCountChecked: 'পদসংখ্যা যাচাই (না থাকলে “উল্লেখ নেই” বাছাই)',
+  openingDateChecked: 'আবেদন শুরুর তারিখ যাচাই',
+  deadlineChecked: 'আবেদনের শেষ তারিখ যাচাই (এশিয়া/ঢাকা)',
+  applyLinkChecked: 'অফিসিয়াল আবেদন-লিংক যাচাই',
+  amendmentsChecked: 'সংশোধনী / সময়-বৃদ্ধি যাচাই',
+};
+
+export const CHECKLIST_RESULT_BN: Record<ChecklistResult, string> = {
+  pass: 'উত্তীর্ণ',
+  fail: 'ব্যর্থ',
+  uncertain: 'অনিশ্চিত',
+  na: 'প্রযোজ্য নয়',
+};
+
+export interface VerificationChecklist {
+  orgConfirmed: ChecklistResult | null;
+  sourceOpened: ChecklistResult | null;
+  postCountChecked: ChecklistResult | null;
+  openingDateChecked: ChecklistResult | null;
+  deadlineChecked: ChecklistResult | null;
+  applyLinkChecked: ChecklistResult | null;
+  amendmentsChecked: ChecklistResult | null;
+  /** Per-item notes (why na / why uncertain / evidence hint). */
+  notes: Partial<Record<VerificationChecklistItem, string>>;
+  checkedBy: string | null;
+  checkedAtMillis: number | null;
+}
+
+export function emptyVerificationChecklist(): VerificationChecklist {
+  return {
+    orgConfirmed: null,
+    sourceOpened: null,
+    postCountChecked: null,
+    openingDateChecked: null,
+    deadlineChecked: null,
+    applyLinkChecked: null,
+    amendmentsChecked: null,
+    notes: {},
+    checkedBy: null,
+    checkedAtMillis: null,
+  };
+}
+
+/** Approval-ready: every item is 'pass' or an explicitly
+ * justified 'na'. Null / 'fail' / 'uncertain' block approval. */
+export function isVerificationChecklistComplete(c: VerificationChecklist): boolean {
+  return VERIFICATION_CHECKLIST_ITEMS.every((k) => c[k] === 'pass' || c[k] === 'na');
+}
+
+/** The first blocking item, if any (for the UI to explain why
+ * Approve is disabled). */
+export function firstBlockingChecklistItem(c: VerificationChecklist): VerificationChecklistItem | null {
+  for (const k of VERIFICATION_CHECKLIST_ITEMS) {
+    if (c[k] !== 'pass' && c[k] !== 'na') return k;
+  }
+  return null;
+}
+
+export function verificationChecklistFromStored(v: unknown): VerificationChecklist | null {
+  if (v === null || v === undefined) return null;
+  if (typeof v !== 'object') return null;
+  const o = v as Record<string, unknown>;
+  const out = emptyVerificationChecklist();
+  for (const k of VERIFICATION_CHECKLIST_ITEMS) {
+    const val = o[k];
+    if (val === null || val === undefined) {
+      out[k] = null;
+    } else if (typeof val === 'string' && CHECKLIST_RESULTS.includes(val as ChecklistResult)) {
+      out[k] = val as ChecklistResult;
+    } else if (typeof val === 'boolean') {
+      // Back-compat with the boolean draft written before the
+      // ChatGPT fold-in (true = pass, false = unchecked).
+      out[k] = val ? 'pass' : null;
+    } else {
+      return null;
+    }
+  }
+  if (typeof o.notes === 'object' && o.notes !== null) {
+    const notes = o.notes as Record<string, unknown>;
+    for (const k of VERIFICATION_CHECKLIST_ITEMS) {
+      if (typeof notes[k] === 'string') out.notes[k] = (notes[k] as string).slice(0, 500);
+    }
+  }
+  out.checkedBy = typeof o.checkedBy === 'string' ? (o.checkedBy as string) : null;
+  out.checkedAtMillis = circularTimestampToMillis(o.checkedAt);
+  return out;
 }
 
 export const CIRCULAR_REVIEW_STATUSES: CircularReviewStatus[] = [
@@ -114,6 +248,12 @@ export const CIRCULAR_ALLOWED_KEYS: string[] = [
   'authorId',
   'createdAt',
   'updatedAt',
+  // Step 15: verification checklist map, verifier return note,
+  // last editor (no-self-approval). Rules allow the keys; the
+  // client validator below enforces the checklist shape.
+  'verificationChecklist',
+  'reviewNote',
+  'lastEditedBy',
 ];
 
 /** Closing-soon threshold: 3 Dhaka calendar days. Both AIs
@@ -191,6 +331,20 @@ export function validateCircular(data: Record<string, unknown>, docId: string): 
     }
   }
   if (!isNonEmptyString(data.authorId)) problems.push(`${label}: authorId must be a non-empty string`);
+  if (data.verificationChecklist !== null && data.verificationChecklist !== undefined) {
+    if (verificationChecklistFromStored(data.verificationChecklist) === null) {
+      problems.push(`${label}: verificationChecklist must be a map of 7 booleans (+ checkedBy/checkedAt)`);
+    }
+  }
+  if (data.reviewNote !== null && data.reviewNote !== undefined && typeof data.reviewNote !== 'string') {
+    problems.push(`${label}: reviewNote must be a string or null`);
+  }
+  if (typeof data.reviewNote === 'string' && (data.reviewNote as string).length > 1000) {
+    problems.push(`${label}: reviewNote must be at most 1000 characters`);
+  }
+  if (data.lastEditedBy !== null && data.lastEditedBy !== undefined && typeof data.lastEditedBy !== 'string') {
+    problems.push(`${label}: lastEditedBy must be a string or null`);
+  }
   return problems;
 }
 
@@ -222,6 +376,9 @@ export function circularFromStored(docId: string, data: Record<string, unknown>)
     authorId: data.authorId as string,
     createdAtMillis: circularTimestampToMillis(data.createdAt),
     updatedAtMillis: circularTimestampToMillis(data.updatedAt),
+    verificationChecklist: verificationChecklistFromStored(data.verificationChecklist),
+    reviewNote: (data.reviewNote as string | null) ?? null,
+    lastEditedBy: (data.lastEditedBy as string | null) ?? null,
   };
 }
 

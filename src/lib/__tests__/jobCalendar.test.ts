@@ -44,6 +44,9 @@ function makeCircular(overrides: Partial<JobCircular> = {}): JobCircular {
     authorId: 'moderator-1',
     createdAtMillis: dhaka(2026, 11, 20),
     updatedAtMillis: dhaka(2026, 11, 21),
+    verificationChecklist: null,
+    reviewNote: null,
+    lastEditedBy: 'moderator-1',
     ...overrides,
   };
 }
