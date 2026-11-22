@@ -71,8 +71,8 @@
 | Unit tests (`src/lib/__tests__/nuAdmission.test.ts` + `nuProfile.test.ts`) | **38/38 PASS** (24 + 14) — স্কোরিং, মেধা, যোগ্যতা (meets/does-not-meet/cannot-determine), কনফিগ-ভ্যালিডেটর (৮০ প্রশ্ন / নেগেটিভ / ভাইভা / sub-split / displayOnly ধরা পড়ে), প্রোফাইল-sanitizer, onboarding ম্যাট্রিক্স, draft-import (field presence) |
 | Firestore rules tests — NU-4 ফাইল (`emulator-tests/rules-nu4-admission-profiles.test.ts`, n1…n60) | **60/60 PASS** |
 | Firestore rules tests — সম্পূর্ণ স্যুট (`npm run test:rules`, ৮ ফাইল) | **240/240 PASS** (আগের ৭ ফাইলে কোনো রিগ্রেশন নেই) |
-| Preview channel | `https://eduvelto--nu-auth-profiles-XXXX.web.app` — নিচে দেখুন |
-| Preview রুট | `/`, `/admissions`, `/profile`, `/login` — 200 (নিচে দেখুন) |
+| Preview channel | `https://eduvelto--nu-auth-profiles-r8bra620.web.app` (expires 29 Nov 2026 03:43 UTC) |
+| Preview রুট | `/`, `/admissions`, `/profile`, `/login`, `/library` — **5/5 → 200**; served JS bundle 200 ও `admissionTargetGroup` ধারণ করে (NU কোড বান্ডেলে আছে) |
 
 **পরীক্ষায় ধরা পড়া নিজের ২টি ভুল (ঠিক করা হয়েছে, লুকানো হয়নি):** (১) মেধা-পরীক্ষায় আমার প্রত্যাশাই ভুল ছিল — ৮০+৪০+৬০ = ১৮০, ২০০ নয় (২০০ হয় পূর্ণ ১০০ নম্বরে); (২) নিয়ম-পরীক্ষায় `serverTimestamp()` অ্যারের ভেতরে সমর্থিত নয় — `Timestamp.fromMillis()` ব্যবহার করা হয়েছে। দুটোই পরীক্ষার ভুল ছিল, কোডের নয় — তবে প্রথমটি দেখায় কেন স্কোরিং/মেধার প্রতিটি সংখ্যা পরীক্ষায় পিন করা দরকার।
 
