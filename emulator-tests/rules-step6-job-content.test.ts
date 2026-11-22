@@ -664,8 +664,8 @@ describe('Draft isolation — reads AND queries', () => {
   it('(e2) student direct-reading a PUBLISHED subject is ALLOWED', async () => {
     await assertSucceeds(getDoc(doc(asStudent1(), 'jobSubjects', 'bcs__bangla')));
   });
-  it('(e3) signed-out direct-reading a PUBLISHED subject is ALLOWED', async () => {
-    await assertSucceeds(getDoc(doc(asSignedOut(), 'jobSubjects', 'bcs__bangla')));
+  it('(e3) signed-out direct-reading a PUBLISHED subject is DENIED (auth-gating, owner 22 Nov ~10:33)', async () => {
+    await assertFails(getDoc(doc(asSignedOut(), 'jobSubjects', 'bcs__bangla')));
   });
   it('(e4) signed-out direct-reading a draft subject is DENIED', async () => {
     await assertFails(getDoc(doc(asSignedOut(), 'jobSubjects', 'bcs__gk')));
@@ -684,8 +684,8 @@ describe('Draft isolation — reads AND queries', () => {
       ),
     );
   });
-  it('(e7) signed-out QUERYING for published subjects is ALLOWED', async () => {
-    await assertSucceeds(
+  it('(e7) signed-out QUERYING for published subjects is DENIED (auth-gating, owner 22 Nov ~10:33)', async () => {
+    await assertFails(
       getDocs(
         query(collection(asSignedOut(), 'jobSubjects'), where('status', '==', 'published')),
       ),
@@ -717,6 +717,40 @@ describe('Draft isolation — reads AND queries', () => {
     await assertFails(
       getDocs(
         query(collection(asStudent1(), 'jobTopics'), where('status', '==', 'draft')),
+      ),
+    );
+  });
+  // Auth-gating (owner instruction 22 Nov 2026 ~10:33, BINDING):
+  // anonymous reads NOTHING in these four collections — not even
+  // Published docs. e3/e7 (subjects) were flipped above; e15–e20
+  // pin the same for chapters, topics and lessons (direct + query).
+  it('(e15) signed-out direct-reading a PUBLISHED chapter is DENIED', async () => {
+    await assertFails(getDoc(doc(asSignedOut(), 'jobChapters', 'bcs__bangla__grammar')));
+  });
+  it('(e16) signed-out direct-reading a PUBLISHED topic is DENIED', async () => {
+    await assertFails(getDoc(doc(asSignedOut(), 'jobTopics', 'bcs__bangla__sandhi')));
+  });
+  it('(e17) signed-out direct-reading a PUBLISHED lesson is DENIED', async () => {
+    await assertFails(getDoc(doc(asSignedOut(), 'jobLessons', 'lesson-published-1')));
+  });
+  it('(e18) signed-out QUERYING for published chapters is DENIED', async () => {
+    await assertFails(
+      getDocs(
+        query(collection(asSignedOut(), 'jobChapters'), where('status', '==', 'published')),
+      ),
+    );
+  });
+  it('(e19) signed-out QUERYING for published topics is DENIED', async () => {
+    await assertFails(
+      getDocs(
+        query(collection(asSignedOut(), 'jobTopics'), where('status', '==', 'published')),
+      ),
+    );
+  });
+  it('(e20) signed-out QUERYING for published lessons is DENIED', async () => {
+    await assertFails(
+      getDocs(
+        query(collection(asSignedOut(), 'jobLessons'), where('status', '==', 'published')),
       ),
     );
   });

@@ -1848,12 +1848,18 @@ service cloud.firestore {
     // ---------- Job Preparation — subjects / chapters / topics / lessons (Step 6, Step 3 §2.3–§2.6 + §3.4) ----------
     // Shared pattern for all four collections (deviations from the
     // Step 3 draft are called out inline):
-    //   READ — `status == 'published'` first (e5 lesson: a list query
-    //     filters on status, so the published check must be provable
-    //     from the query's own filters — it is get()-free and comes
-    //     before the role lookup), OR the author reads their own
+    //   READ — signed-in ONLY (owner instruction 22 Nov 2026 ~10:33,
+    //     BINDING — no exam / no extensive reading without login):
+    //     `signedIn() && status == 'published'` first (e5 lesson: a
+    //     list query filters on status, so the published check must be
+    //     provable from the query's own filters — it is get()-free and
+    //     comes before the role lookup), OR the author reads their own
     //     draft, OR a Moderator reads anything. Students read Published
-    //     only; anonymous reads Published only.
+    //     only; ANONYMOUS READS NOTHING — not even Published docs
+    //     (this partially revokes Step 5 P2-2, which had allowed
+    //     anonymous reads of published content; the published
+    //     METADATA of jobCategories/jobExams stays anonymous-readable,
+    //     but these four content collections do not).
     //   CREATE — isTeacher() only (role in teacher/admin/moderator/
     //     owner + active; students can NEVER create). Draft-only:
     //     status 'draft' + reviewStatus 'Not Started' (the draft's
@@ -1900,7 +1906,7 @@ service cloud.firestore {
     //     lessonType is pinned on update, so a 'lesson' doc cannot be
     //     converted into Step 16 content by an update either.
     match /jobSubjects/{subjectId} {
-      allow read: if resource.data.get('status', '') == 'published'
+      allow read: if signedIn() && resource.data.get('status', '') == 'published'
         || (signedIn() && resource.data.get('authorId', '') == uid())
         || isModerator();
       allow create: if isTeacher()
@@ -1941,7 +1947,7 @@ service cloud.firestore {
       allow delete: if isAdmin();
     }
     match /jobChapters/{chapterId} {
-      allow read: if resource.data.get('status', '') == 'published'
+      allow read: if signedIn() && resource.data.get('status', '') == 'published'
         || (signedIn() && resource.data.get('authorId', '') == uid())
         || isModerator();
       allow create: if isTeacher()
@@ -1976,7 +1982,7 @@ service cloud.firestore {
       allow delete: if isAdmin();
     }
     match /jobTopics/{topicId} {
-      allow read: if resource.data.get('status', '') == 'published'
+      allow read: if signedIn() && resource.data.get('status', '') == 'published'
         || (signedIn() && resource.data.get('authorId', '') == uid())
         || isModerator();
       allow create: if isTeacher()
@@ -2013,7 +2019,7 @@ service cloud.firestore {
       allow delete: if isAdmin();
     }
     match /jobLessons/{lessonId} {
-      allow read: if resource.data.get('status', '') == 'published'
+      allow read: if signedIn() && resource.data.get('status', '') == 'published'
         || (signedIn() && resource.data.get('authorId', '') == uid())
         || isModerator();
       allow create: if isTeacher()
