@@ -121,3 +121,66 @@ grep -rn "tTab\|TabT\|tabLang" src/
 - The context's `setLanguage` is kept (same persistence behaviour) even
   though no component currently calls it directly — ProfilePage saves the
   choice via `saveProfile`, and the provider adopts `profile.language`.
+
+## Addendum — production deploy (22 Nov 2026, owner approved "daw" 13:28)
+
+**Branch rebased:** `i18n/tabs-only-english` rebased onto `origin/main`
+`a5f9ed7` (the /jobs Coming Soon fix) — **clean, zero conflicts**.
+New HEADs: `a0b66d8` (rebased tabs-only commit) + `a90aeef` (header
+button + fonts, below). The /jobs fix survived the rebase: `src/App.tsx`
+has exactly one `/jobs` route → `<JobsPage />` (line 187), no
+ComingSoon `/jobs` route.
+
+### New in this deploy (owner requirements 13:30–13:34)
+
+1. **Header language toggle button** (22 Nov 13:30–13:31): globe icon +
+   target-language label (`EN` / `বাং`), top-right beside the profile.
+   Rendered in BOTH the desktop header actions and the mobile header
+   actions (CSS shows exactly one per viewport); the PWA and the web
+   share this header, so the button is in both. Tapping it toggles
+   `tabLang` only — the same state as the Profile → Settings selector,
+   so the two stay in sync. Everything else stays Bangla.
+   Files: `src/components/HeaderNav.tsx` (`LanguageIcon` +
+   `LangToggleButton`), `src/index.css` (`.ev-header-lang-btn`).
+2. **Stylish Bangla fonts** (22 Nov 13:34): headings now use
+   **Noto Serif Bengali 600/700** (Google Fonts, `display=swap`, only
+   the two heading weights); body stays clean **Hind Siliguri**
+   (400/500/600/700, unchanged). `--font-head` updated in
+   `src/index.css`; the hero wordmark stays Poppins (Latin brand text).
+   The family is a real Google Fonts variable font (weights 100–900,
+   Bengali + Latin), so `wght@600;700` is valid. Per-character fallback
+   renders Bangla in the serif and Latin in Poppins.
+   Files: `index.html` (fonts link), `src/index.css` (`--font-head`).
+
+### Verification (rebased branch, HEAD a90aeef)
+
+- `npm run build` — **PASS** (exit 0; rebuilt after the button + fonts).
+- `npm run test:unit` — **131/131 PASS** (6 files).
+- `npm run test:rules` — **415/415 PASS** (13 files, sequential
+  `--fileParallelism=false`). NOTE: the first parallel run died
+  mid-suite (3 files ✓, 0 failures, then the process vanished — the
+  known cross-file emulator interference); the sequential re-run
+  completed clean. A plain `vitest` binary is not on PATH inside
+  `emulators:exec` (exit 127) — the working invocation is
+  `./node_modules/.bin/vitest run emulator-tests/ --fileParallelism=false`.
+  Log: `~/workspace/i18n-rules3.log`.
+- **Runtime behaviour test** (server-render, real `LanguageProvider`,
+  auth stubbed, `localStorage` seeded; scratch test extended for the
+  header): logs `~/workspace/i18n-render-bn2.log`,
+  `~/workspace/i18n-render-en2.log`.
+  - Bangla mode: header renders the language button ×2 (desktop +
+    mobile copies, globe icon, label `EN`), tab labels Bangla
+    (হোম, চাকরি প্রস্তুতি), Login stays `লগইন`.
+  - English mode: button ×2, label `বাং`, tab labels English
+    (Home, Job Preparation), everything else still Bangla (`লগইন`).
+  - DOM order: mobile bell → language button → avatar; desktop
+    search/moon → language button → Login/Profile. The button sits
+    immediately beside the profile in both viewports.
+  - The click-toggle itself is not exercised by server rendering; it
+    calls the same `setLanguage` the Settings selector uses. The
+    owner should tap it once on the preview (mobile + desktop) to see
+    the tabs switch.
+- **Preview channel** — (see below).
+- **Screenshots — not obtained** (headless Chrome blocked by the
+  sandbox egress proxy, as before). The server-render test + the
+  owner's phone check are the visual proof.
