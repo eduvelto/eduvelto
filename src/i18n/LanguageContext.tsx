@@ -17,7 +17,9 @@
 //   field, so NO rules change was needed) + this browser's localStorage
 //   (`eduvelto-language`) as the logged-out-visitor fallback; when a
 //   user logs in, their account preference is adopted (cross-device).
-// - ONLY the tab-label path reads `tabLang`: `tTab()` and `<TabT>`.
+// - ONLY the tab-label path reads `tabLang`: `tTab()` and `<TabT>`,
+//   plus the header language toggle (it reads `tabLang` to show the
+//   target language and calls `setLanguage` to switch it).
 //   The complete English surface of the site is therefore the list of
 //   `tTab` / `<TabT>` call sites — audit it with:
 //   `grep -rn "tTab\|TabT\|tabLang" src/`
