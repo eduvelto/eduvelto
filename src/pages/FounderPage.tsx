@@ -104,12 +104,18 @@ export const ORGANIZATION_JSON_LD = {
   },
   founder: { '@id': 'https://eduvelto.com/founder#person' },
   // sameAs lists the Eduvelto organization's own profiles ONLY —
-  // the YouTube channel @EduveltoBD (created 22 Nov 2026). Keep in
-  // sync with src/lib/seo.ts ORGANIZATION_JSON_LD (guarded by
+  // YouTube @EduveltoBD, LinkedIn linkedin.com/company/eduvelto
+  // (created by the owner 22 Nov 2026), and Facebook
+  // facebook.com/EduveltoBD (verified 22 Nov 2026). Keep in sync
+  // with src/lib/seo.ts ORGANIZATION_JSON_LD (guarded by
   // founderJsonLd.test.ts). The founder's personal profiles
   // (facebook.com/ahmmmizan etc.) belong to the Person block above,
   // not to the Organization, so they are NOT listed here.
-  sameAs: ['https://www.youtube.com/@EduveltoBD'],
+  sameAs: [
+    'https://www.youtube.com/@EduveltoBD',
+    'https://www.linkedin.com/company/eduvelto',
+    'https://www.facebook.com/EduveltoBD',
+  ],
 };
 
 const BREADCRUMB_JSON_LD = {
