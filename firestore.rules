@@ -1239,9 +1239,15 @@ service cloud.firestore {
         // Step 8 fold-in (finding 6): the answers map is exactly one
         // entry per stored question (keys = questionRefs n values);
         // currentQuestion is inside the stored order.
+        // Step 13: the bound is MEMBERSHIP in the answers keys,
+        // not `<= refs.size()` — a subset session's first n can
+        // exceed the subset size (e.g. a 1-question subset of
+        // bundle n=9), and the old proxy rejected it. The answers
+        // keys ARE the refs' n values (see the size check above),
+        // so membership is exactly "inside the stored order".
         && d.get('answers', {}).size() == d.get('questionRefs', []).size()
         && d.get('currentQuestion', null) is int && d.get('currentQuestion', 0) >= 1
-        && d.get('currentQuestion', 0) <= d.get('questionRefs', []).size()
+        && string(d.get('currentQuestion', 0)) in d.get('answers', {}).keys()
         && d.get('lastSyncedAt', null) is timestamp
         // Step 8 fold-in (finding 6): revision starts at 1 and is
         // bumped by exactly 1 per write (see validJobSessionUpdate)
@@ -1272,6 +1278,9 @@ service cloud.firestore {
     // checks stay in each caller. The autosave bound (finding 6)
     // lives here: answers never grow past the stored question list
     // and a write carries exactly old.revision + 1.
+    // Step 13: currentQuestion is MEMBERSHIP in the new answers
+    // keys, not `<= old refs.size()` — a subset session's n can
+    // exceed the subset size (see validJobSessionCreate).
     function validJobSessionUpdateCore(d, old) {
       return d.get('status', '') in ['in-progress', 'submitted', 'abandoned']
         && ((d.get('status', '') == 'submitted' && d.get('submittedAt', null) is timestamp)
@@ -1279,7 +1288,7 @@ service cloud.firestore {
         && d.get('answers', null) is map
         && d.get('answers', {}).size() <= old.get('questionRefs', []).size()
         && d.get('currentQuestion', null) is int && d.get('currentQuestion', 0) >= 1
-        && d.get('currentQuestion', 0) <= old.get('questionRefs', []).size()
+        && string(d.get('currentQuestion', 0)) in d.get('answers', {}).keys()
         && d.get('revision', null) is int
         && d.get('revision', -1) == old.get('revision', 0) + 1
         && d.get('lastSyncedAt', null) is timestamp

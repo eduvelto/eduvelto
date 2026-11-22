@@ -21,8 +21,9 @@
 // questionRefs sequence is the mode order (beginner easy→hard,
 // advanced medium→hard→easy) and the palette + prev/next follow
 // that sequence, while every question keeps its bundle `n`.
-// "ভুল প্রশ্নগুলো আবার অনুশীলন করুন" re-runs the whole bundle
-// (a wrong-only session needs a Moderator-built bundle — Step 13).
+// "ভুল প্রশ্নগুলো আবার অনুশীলন করুন" re-runs the whole bundle;
+// a wrong-only session is Step 13's /jobs/wrong-answers
+// re-practice flow (a real subset session, not a rebuild).
 //
 // LANGUAGE: all UI text is Bangla (one-language rule).
 

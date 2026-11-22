@@ -526,15 +526,16 @@ export function timeManagementSummary(attempts: JobAttemptSummary[]): TimeManage
 }
 
 /* ------------------------------------------------------------------ */
-/* 7. Wrong-answer notebook hook (Step 13 — PREPARE ONLY)             */
+/* 7. Wrong-answer notebook hook (Step 13 — WIRED)                    */
 /* ------------------------------------------------------------------ */
 
-/** Step 13 hook — PREPARE ONLY. Derives the wrong + unanswered
- * answers from a STORED attempt so a future notebook can offer
- * them for re-practice. No UI, no new collection, no write path:
- * Step 13 builds the notebook on top of this list. "Wrong" and
- * "unanswered" stay separate — they need different fixes (a
- * rushed wrong vs a skipped question are not the same weakness;
+/** Step 13 hook — WIRED. Derives the wrong + unanswered answers
+ * from a STORED attempt; JobWrongAnswersPage builds the
+ * notebook from this list (via deriveNotebook) and
+ * /jobs/wrong-answers/practice/:topicId re-practices them.
+ * No new collection, no write path. "Wrong" and "unanswered"
+ * stay separate — they need different fixes (a rushed wrong
+ * vs a skipped question are not the same weakness;
  * Gemini #2). */
 export interface WrongAnswerEntry {
   n: number;

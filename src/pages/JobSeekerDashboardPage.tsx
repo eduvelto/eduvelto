@@ -35,7 +35,9 @@
 // re-practice flow + favourites (Step 13); circulars + calendar
 // (Step 14). Step 12 WIRED the planner + revision schedule
 // cards to the real planner (/jobs/planner) — see the P4
-// section below.
+// section below. Step 13 WIRED the wrong-answer notebook +
+// re-practice flow (/jobs/wrong-answers); favourites is still
+// a placeholder (its own step — it needs a storage decision).
 
 import { useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
@@ -949,8 +951,9 @@ export default function JobSeekerDashboardPage() {
 
       {/* ============ P4 — দ্রুত প্রবেশ ============ */}
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: 12, marginBottom: 20, marginTop: 12 }}>
-        {/* Wrong-answer notebook (design #11; full re-practice is
-            Step 13 — this card counts + links to result pages). */}
+        {/* Wrong-answer notebook (design #11; Step 13 built the
+            notebook + its re-practice flow — this card counts +
+            links to result pages and to the notebook). */}
         <Reveal delayMs={0}>
           <Card>
             <div style={{ fontWeight: 700, color: 'var(--heading)', fontSize: 17 }}>
@@ -985,13 +988,19 @@ export default function JobSeekerDashboardPage() {
                     </li>
                   ))}
                 </ul>
-                <Chip tone="gold">{t({ bn: 'শুধু ভুলগুলো দিয়ে আবার অনুশীলন — Step 13-এ আসছে', en: 'Re-practice only the wrong ones — coming in Step 13' })}</Chip>
+                <p style={{ margin: '10px 0 0' }}>
+                  <LinkButton to="/jobs/wrong-answers" variant="accent">
+                    {t({ bn: 'ভুল-উত্তর নোটবুক দেখুন →', en: 'Open the wrong-answer notebook →' })}
+                  </LinkButton>
+                </p>
               </>
             )}
           </Card>
         </Reveal>
 
-        {/* Favourites (design #12) — Step 13 owns it. */}
+        {/* Favourites (design #12) — NOT built in Step 13 (the
+            step built the notebook only); needs its own step +
+            storage decision. */}
         <Reveal delayMs={80}>
           <Card>
             <div style={{ fontWeight: 700, color: 'var(--heading)', fontSize: 17 }}>
@@ -999,8 +1008,8 @@ export default function JobSeekerDashboardPage() {
             </div>
             <p style={{ margin: '8px 0 10px', color: 'var(--muted)', fontSize: 14, lineHeight: 1.7 }}>
               {t({
-                bn: 'প্রশ্ন, টপিক ও মক ফেভারিট করে রাখা যাবে — Step 13-এ আসছে।',
-                en: 'You will be able to favourite questions, topics and mocks — coming in Step 13.',
+                bn: 'প্রশ্ন, টপিক ও মক ফেভারিট করে রাখা যাবে — শীঘ্রই আসছে।',
+                en: 'You will be able to favourite questions, topics and mocks — coming soon.',
               })}
             </p>
             <Chip tone="gold">{t({ bn: 'শীঘ্রই আসছে', en: 'Coming soon' })}</Chip>
