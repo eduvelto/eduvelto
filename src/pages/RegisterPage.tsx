@@ -123,18 +123,24 @@ export default function RegisterPage() {
       setLocalError(t({ bn: 'শিক্ষকের কমপক্ষে একটি বিষয় ও একটি যোগ্যতা লাগবে।', en: 'A teacher needs at least one subject and one qualification.' }));
       return;
     }
-    const fields: ProfileEdit = {
-      educationType,
-      board: board.trim() || null,
-      institution: institution.trim() || null,
-      academicSession: academicSession.trim() || null,
-      curriculum: curriculum.trim() || null,
-      classLevel: classLevel.trim() || null,
-      department: department.trim() || null,
-      semester: semester.trim() || null,
-    };
+    // Each role answers DIFFERENT questions (owner 22 Nov 2026: the same
+    // student questions were asked of teacher + guardian). Only store the
+    // fields the role actually saw — never a default 'general' for a
+    // teacher/guardian who never picked it.
+    const fields: ProfileEdit = {};
+    if (role === 'student') {
+      fields.educationType = educationType;
+      fields.board = board.trim() || null;
+      fields.institution = institution.trim() || null;
+      fields.academicSession = academicSession.trim() || null;
+      fields.curriculum = curriculum.trim() || null;
+      fields.classLevel = classLevel.trim() || null;
+      fields.department = department.trim() || null;
+      fields.semester = semester.trim() || null;
+    }
     if (role === 'parent') fields.phone = phone.trim();
     if (role === 'teacher') {
+      fields.institution = institution.trim() || null;
       fields.teachingLevel = teachingLevel.trim() || null;
       fields.subjects = subjects.split(',').map((x) => x.trim()).filter(Boolean);
       fields.qualifications = qualifications.trim() || null;
@@ -156,7 +162,9 @@ export default function RegisterPage() {
 
   return (
     <PageShell titleBn={s.registerTitle.bn} titleEn={s.registerTitle.en}>
-      <p style={{ color: '#555' }}>{t(s.studentNote)}</p>
+      <p style={{ color: '#555' }}>
+        {role === 'teacher' ? t(s.teacherRegisterNote) : role === 'parent' ? t(s.guardianNote) : t(s.studentNote)}
+      </p>
       <form onSubmit={onSubmit}>
         <label>
           <T bn={s.displayName.bn} en={s.displayName.en} />
@@ -236,6 +244,11 @@ export default function RegisterPage() {
           <p style={{ color: '#555', fontSize: 14, margin: '0 0 12px' }}>
             <T bn="ভূমিকা পরে নিজে বদলানো যায় না।" en="The role cannot be changed yourself later." />
           </p>
+          {/* Each role answers DIFFERENT questions (owner 22 Nov 2026):
+              student: full academic details; teacher: institution + what
+              they teach; guardian: phone only. */}
+          {role === 'student' ? (
+            <>
           <label>
             <T bn={strings.profile.educationType.bn} en={strings.profile.educationType.en} />
             <select
@@ -254,10 +267,16 @@ export default function RegisterPage() {
             <T bn={strings.profile.board.bn} en={strings.profile.board.en} />
             <input style={inputStyle} type="text" value={board} onChange={(e) => setBoard(e.target.value)} placeholder={t({ bn: 'যেমন: National University', en: 'e.g.: National University' })} />
           </label>
+            </>
+          ) : null}
+          {role !== 'parent' ? (
           <label>
             <T bn={strings.profile.institution.bn} en={strings.profile.institution.en} />
             <input style={inputStyle} type="text" value={institution} onChange={(e) => setInstitution(e.target.value)} />
           </label>
+          ) : null}
+          {role === 'student' ? (
+            <>
           <label>
             <T bn={d.academicSession.bn} en={d.academicSession.en} />
             <input style={inputStyle} type="text" value={academicSession} onChange={(e) => setAcademicSession(e.target.value)} placeholder={t({ bn: 'যেমন: 2025-26', en: 'e.g.: 2025-26' })} />
@@ -280,6 +299,8 @@ export default function RegisterPage() {
               <input style={inputStyle} type="text" value={semester} onChange={(e) => setSemester(e.target.value)} placeholder={t({ bn: 'যেমন: 1st Semester', en: 'e.g.: 1st Semester' })} />
             </label>
           ) : null}
+            </>
+          ) : null}
           {role === 'parent' ? (
             <label>
               <T bn={d.phone.bn} en={d.phone.en} /> *
@@ -300,9 +321,6 @@ export default function RegisterPage() {
                 <T bn={d.qualifications.bn} en={d.qualifications.en} /> *
                 <input style={inputStyle} type="text" value={qualifications} onChange={(e) => setQualifications(e.target.value)} placeholder={t({ bn: 'যেমন: M.A. in English', en: 'e.g.: M.A. in English' })} />
               </label>
-              <p style={{ color: '#555', fontSize: 14 }}>
-                <T bn={s.teacherRegisterNote.bn} en={s.teacherRegisterNote.en} />
-              </p>
             </>
           ) : null}
         </fieldset>
