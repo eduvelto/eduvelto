@@ -43,9 +43,10 @@ export interface JobExamDef {
   stepsBn: string;
   /** Exam stages, English. */
   stepsEn: string;
-  /** Official site — every hub links here for the latest circular. */
-  officialUrl: string;
-  /** Tier from the job analysis: 1 = main exams, 2 = DGFood/NTRCA/non-cadre, 3 = CAG/BFSA/others. */
+  /** Official site — every hub links here for the latest circular.
+      null when no single official site exists (Private & NGO jobs). */
+  officialUrl: string | null;
+  /** Tier from the job analysis: 1 = main exams, 2 = DGFood/NTRCA/non-cadre, 3 = CAG/BFSA/others + the expanded categories (ministries, defence, autonomous, private & NGO). */
   tier: 1 | 2 | 3;
   /** Card/header background (white text on it is AA). */
   accent: string;
@@ -200,11 +201,194 @@ export const JOB_EXAMS: JobExamDef[] = [
     accentSoft: '#F0EFEA',
     accentDeep: '#44403C',
   },
+  // Expanded categories (owner's 19 Nov 2026 four-section brief — Job
+  // Preparation = highest priority). All circular-based: no pattern,
+  // no posts, no dates are invented for them; each hub is structure
+  // with honest Coming Soon states until a circular is verified.
+  {
+    slug: 'ministries',
+    bn: 'মন্ত্রণালয় ও অধিদপ্তর',
+    en: 'Ministries & Directorates',
+    fullBn: 'মন্ত্রণালয় ও অধিদপ্তরের নিয়োগ পরীক্ষা',
+    fullEn: 'Ministries & Directorates Recruitment Exams',
+    orgBn: 'বিভিন্ন মন্ত্রণালয় ও অধিদপ্তর',
+    orgEn: 'Various ministries and directorates',
+    stepsBn: 'বিজ্ঞপ্তি অনুযায়ী',
+    stepsEn: 'As per circular',
+    officialUrl: 'https://bangladesh.gov.bd',
+    tier: 3,
+    accent: '#3730A3',
+    accentSoft: '#E8E9FB',
+    accentDeep: '#312E81',
+  },
+  {
+    slug: 'defence',
+    bn: 'প্রতিরক্ষা',
+    en: 'Defence',
+    fullBn: 'প্রতিরক্ষা: পুলিশ / সেনা / নৌ / বিমান বাহিনী নিয়োগ পরীক্ষা',
+    fullEn: 'Defence: Police / Army / Navy / Air Force Recruitment Exams',
+    orgBn: 'বাংলাদেশ পুলিশ, সেনাবাহিনী, নৌবাহিনী ও বিমান বাহিনী',
+    orgEn: 'Bangladesh Police, Army, Navy and Air Force',
+    stepsBn: 'বিজ্ঞপ্তি অনুযায়ী',
+    stepsEn: 'As per circular',
+    officialUrl: 'https://bangladesh.gov.bd',
+    tier: 3,
+    accent: '#B91C1C',
+    accentSoft: '#FDECEC',
+    accentDeep: '#7F1D1D',
+  },
+  {
+    slug: 'autonomous',
+    bn: 'স্বায়ত্তশাসিত প্রতিষ্ঠান',
+    en: 'Autonomous Institutions',
+    fullBn: 'স্বায়ত্তশাসিত প্রতিষ্ঠান ও কর্পোরেশনের নিয়োগ পরীক্ষা',
+    fullEn: 'Autonomous Institutions & Corporations Recruitment Exams',
+    orgBn: 'বিভিন্ন স্বায়ত্তশাসিত প্রতিষ্ঠান ও কর্পোরেশন',
+    orgEn: 'Various autonomous institutions and corporations',
+    stepsBn: 'বিজ্ঞপ্তি অনুযায়ী',
+    stepsEn: 'As per circular',
+    officialUrl: 'https://bangladesh.gov.bd',
+    tier: 3,
+    accent: '#0E7490',
+    accentSoft: '#E2F2F5',
+    accentDeep: '#155E75',
+  },
+  {
+    slug: 'private-ngo',
+    bn: 'বেসরকারি ও এনজিও',
+    en: 'Private & NGO Jobs',
+    fullBn: 'বেসরকারি প্রতিষ্ঠান ও এনজিওর চাকরির প্রস্তুতি',
+    fullEn: 'Private & NGO Job Preparation',
+    orgBn: 'বেসরকারি প্রতিষ্ঠান ও এনজিও',
+    orgEn: 'Private organisations and NGOs',
+    stepsBn: 'প্রতিষ্ঠান অনুযায়ী',
+    stepsEn: 'As per organisation',
+    officialUrl: null,
+    tier: 3,
+    accent: '#A21CAF',
+    accentSoft: '#FBE9F7',
+    accentDeep: '#701A75',
+  },
 ];
 
 export function jobExamBySlug(slug: string): JobExamDef | undefined {
   return JOB_EXAMS.find((e) => e.slug === slug);
 }
+
+/**
+ * Verified exam pattern for the 4 main exams — job analysis §8.1
+ * (read 21 Nov 2026) / design plan §2. ONLY these figures are written:
+ * the MCQ-stage subject breakdown, total, time and negative marking.
+ * Age limits, fees and exam dates are NEVER written (they change with
+ * every circular). BCS viva marks are NEVER written (200 vs 100
+ * disputed). NTRCA is labelled "last verified pattern (18th)" — the
+ * 19th pattern is NOT written (contradictory claims). Every pattern
+ * carries the "verify against the latest circular" caveat on the page.
+ * Exams without a verified pattern are circular-based: their hubs show
+ * an honest "circular-based" state instead of a table.
+ */
+export interface ExamPatternRow {
+  subjectBn: string;
+  subjectEn: string;
+  marks: string;
+}
+
+export interface ExamPattern {
+  /** e.g. 'প্রিলিমিনারি — যাচাইকৃত ধরন'. */
+  titleBn: string;
+  titleEn: string;
+  rows: ExamPatternRow[];
+  totalBn: string;
+  totalEn: string;
+  timeBn: string;
+  timeEn: string;
+  negativeBn: string;
+  negativeEn: string;
+  noteBn?: string;
+  noteEn?: string;
+}
+
+export const EXAM_PATTERNS: Partial<Record<string, ExamPattern>> = {
+  bcs: {
+    titleBn: 'প্রিলিমিনারি — যাচাইকৃত ধরন',
+    titleEn: 'Preliminary — verified pattern',
+    rows: [
+      { subjectBn: 'বাংলা ভাষা ও সাহিত্য', subjectEn: 'Bangla Language & Literature', marks: '৩৫' },
+      { subjectBn: 'ইংরেজি ভাষা ও সাহিত্য', subjectEn: 'English Language & Literature', marks: '৩৫' },
+      { subjectBn: 'বাংলাদেশ বিষয়াবলি', subjectEn: 'Bangladesh Affairs', marks: '৩০' },
+      { subjectBn: 'আন্তর্জাতিক বিষয়াবলি', subjectEn: 'International Affairs', marks: '২০' },
+      { subjectBn: 'ভূগোল, পরিবেশ ও দুর্যোগ ব্যবস্থাপনা', subjectEn: 'Geography, Environment & Disaster Management', marks: '১০' },
+      { subjectBn: 'সাধারণ বিজ্ঞান', subjectEn: 'General Science', marks: '১৫' },
+      { subjectBn: 'কম্পিউটার ও তথ্যপ্রযুক্তি', subjectEn: 'Computer & ICT', marks: '১৫' },
+      { subjectBn: 'গাণিতিক যুক্তি', subjectEn: 'Mathematical Reasoning', marks: '১৫' },
+      { subjectBn: 'মানসিক দক্ষতা', subjectEn: 'Mental Ability', marks: '১৫' },
+      { subjectBn: 'নৈতিকতা, মূল্যবোধ ও সুশাসন', subjectEn: 'Ethics, Values & Good Governance', marks: '১০' },
+    ],
+    totalBn: 'মোট ২০০ নম্বর',
+    totalEn: 'Total 200 marks',
+    timeBn: '২ ঘণ্টা',
+    timeEn: '2 hours',
+    negativeBn: 'ভুল উত্তরে ০.৫০ নম্বর কাটা যায়',
+    negativeEn: '0.50 deducted per wrong answer',
+    noteBn: 'প্রিলিমিনারি শুধু বাছাই — এর নম্বর চূড়ান্ত নম্বরে যোগ হয় না। লিখিত: সাধারণ ক্যাডার ৯০০, টেকনিক্যাল/প্রফেশনাল ক্যাডার ১,১০০ নম্বর। ভাইভার নম্বর এখানে লেখা হয়নি — সূত্রে দ্বন্দ্ব আছে (২০০ বনাম ১০০); সর্বশেষ BPSC বিজ্ঞপ্তি দিয়ে যাচাই করে লেখা হবে।',
+    noteEn: 'Preliminary is screening only — its marks do not count toward the final total. Written: 900 (general cadre), 1,100 (technical/professional cadre). Viva marks are not written here — sources disagree (200 vs 100); they will be written after verification from the latest BPSC circular.',
+  },
+  bank: {
+    titleBn: 'প্রিলিমিনারি — যাচাইকৃত ধরন (অফিসার, ক্যাশ)',
+    titleEn: 'Preliminary — verified pattern (Officer, Cash)',
+    rows: [
+      { subjectBn: 'বাংলা', subjectEn: 'Bangla', marks: '২৫' },
+      { subjectBn: 'ইংরেজি', subjectEn: 'English', marks: '২৫' },
+      { subjectBn: 'সাধারণ গণিত ও পরিমাণগত দক্ষতা', subjectEn: 'General Math & Quantitative Aptitude', marks: '২০' },
+      { subjectBn: 'সাধারণ জ্ঞান', subjectEn: 'General Knowledge', marks: '২০' },
+      { subjectBn: 'কম্পিউটারের মৌলিক জ্ঞান', subjectEn: 'Basic Computer Knowledge', marks: '১০' },
+    ],
+    totalBn: 'মোট ১০০ নম্বর',
+    totalEn: 'Total 100 marks',
+    timeBn: '১ ঘণ্টা',
+    timeEn: '1 hour',
+    negativeBn: 'ভুল উত্তরে সাধারণত ০.২৫ নম্বর কাটা যায় — বিজ্ঞপ্তি/প্রবেশপত্রে লেখা থাকে',
+    negativeEn: 'Usually 0.25 deducted per wrong answer — stated in the circular / admit card',
+    noteBn: 'পদভেদে ধরন ভিন্ন — সহকারী পরিচালকসহ কিছু পদের প্রিলিমিনারিতে ৪টি বিষয়ে ২৫ করে থাকে। প্রতিটি পদের পাতায় তার বিজ্ঞপ্তির ধরন লিখতে হবে। লিখিত: ২০০ নম্বর, ২ ঘণ্টা। ভাইভা: সাধারণত ২৫ নম্বর — বিজ্ঞপ্তি দিয়ে যাচাই করতে হবে।',
+    noteEn: 'The pattern differs by post — some posts (e.g. Assistant Director) have 4 subjects of 25 each. Each post’s page must show its own circular’s pattern. Written: 200 marks, 2 hours. Viva: usually 25 marks — to be verified per circular.',
+  },
+  'primary-teacher': {
+    titleBn: 'লিখিত (MCQ) — বর্তমান ধরন (DPE ২০২৫ বিধি)',
+    titleEn: 'Written (MCQ) — current pattern (DPE 2025 Rules)',
+    rows: [
+      { subjectBn: 'বাংলা', subjectEn: 'Bangla', marks: '২৫' },
+      { subjectBn: 'ইংরেজি', subjectEn: 'English', marks: '২৫' },
+      { subjectBn: 'গণিত ও দৈনন্দিন বিজ্ঞান', subjectEn: 'Math & Everyday Science', marks: '২০' },
+      { subjectBn: 'সাধারণ জ্ঞান (বাংলাদেশ ও আন্তর্জাতিক)', subjectEn: 'General Knowledge (Bangladesh & International)', marks: '২০' },
+    ],
+    totalBn: 'মোট ৯০ নম্বর',
+    totalEn: 'Total 90 marks',
+    timeBn: '৯০ মিনিট',
+    timeEn: '90 minutes',
+    negativeBn: 'ভুল উত্তরে ০.২৫ নম্বর কাটা যায়',
+    negativeEn: '0.25 deducted per wrong answer',
+    noteBn: 'পাস নম্বর ৫০% (৪৫)। ভাইভা ১০ নম্বর, পাস ৫০% (৫)। পুরোনো ধরন (৮০ MCQ + ২০ ভাইভা) বাতিল — এখন ৯০+১০ ধরনই বর্তমান। উৎস: সরকারি প্রাথমিক বিদ্যালয় শিক্ষক নিয়োগ বিধিমালা ২০২৫, ২৮ আগস্ট ২০২৫।',
+    noteEn: 'Pass mark 50% (45). Viva 10 marks, pass 50% (5). The old pattern (80 MCQ + 20 viva) is retired — the 90+10 pattern is current. Source: Government Primary School Teacher Recruitment Rules 2025, 28 August 2025.',
+  },
+  ntrca: {
+    titleBn: 'শেষ যাচাইকৃত ধরন (১৮তম পরীক্ষা) — "বর্তমান ধরন" নয়',
+    titleEn: 'Last verified pattern (18th exam) — not "current pattern"',
+    rows: [
+      { subjectBn: 'বাংলা', subjectEn: 'Bangla', marks: '২৫' },
+      { subjectBn: 'ইংরেজি', subjectEn: 'English', marks: '২৫' },
+      { subjectBn: 'সাধারণ গণিত', subjectEn: 'General Math', marks: '২৫' },
+      { subjectBn: 'সাধারণ জ্ঞান', subjectEn: 'General Knowledge', marks: '২৫' },
+    ],
+    totalBn: 'মোট ১০০ নম্বর',
+    totalEn: 'Total 100 marks',
+    timeBn: '১ ঘণ্টা',
+    timeEn: '1 hour',
+    negativeBn: 'ভুল উত্তরে ০.২৫ নম্বর কাটা যায়',
+    negativeEn: '0.25 deducted per wrong answer',
+    noteBn: 'প্রিলিমিনারি পাস নম্বর ৪০। লিখিত (বিষয়ভিত্তিক): ১০০ নম্বর, ৩ ঘণ্টা, পাস ৪০। ভাইভা: ২০ নম্বর (শিক্ষাগত ফল ১২ + মৌখিক ৮), পাস ৮। ১৯তম পরীক্ষার ধরন এখানে লেখা হয়নি — পরস্পরবিরোধী দাবি আছে; ১৯তম বিজ্ঞপ্তি না আসা পর্যন্ত কিছু লেখা হবে না।',
+    noteEn: 'Preliminary pass mark 40. Written (subject-based): 100 marks, 3 hours, pass 40. Viva: 20 marks (academic results 12 + oral 8), pass 8. The 19th exam’s pattern is not written here — claims conflict; nothing will be written until the 19th circular arrives.',
+  },
+};
 
 /** The 8 hub tabs (design plan §1.4 — same pattern as class dashboards). */
 export const JOB_TABS = [

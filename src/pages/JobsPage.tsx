@@ -2,13 +2,14 @@
 //
 // /jobs: the section's front door. Hero + exam cards by tier (Tier 1
 // first: BCS, Bank, Primary Teacher; Tier 2: NTRCA, DGFood, BPSC
-// Non-Cadre; Tier 3: CAG, BFSA, Others) + the common-preparation
-// card + how to start. No question counts, no mock counts — no
-// content is published yet. Tier 2/3 cards honestly say "Coming soon".
+// Non-Cadre; Tier 3: CAG, BFSA, Others + ministries, defence,
+// autonomous, private & NGO) + the common-preparation card + how to
+// start. No question counts, no mock counts — no content is published
+// yet. Tier 2/3 cards honestly say "Coming soon".
 
 import { Link } from 'react-router-dom';
 import { PageShell } from '../components/PageShell';
-import { Card, Reveal } from '../components/ui';
+import { Card, LinkButton, Reveal } from '../components/ui';
 import { CommonPrepCard, JobCard } from '../components/JobCards';
 import { useLanguage } from '../i18n/LanguageContext';
 import { JOB_EXAMS } from '../lib/jobExams';
@@ -57,6 +58,12 @@ export default function JobsPage() {
           })}
         </p>
       </section>
+
+      <p style={{ margin: '0 0 20px' }}>
+        <LinkButton to="/jobs/dashboard" variant="accent">
+          {t({ bn: 'আমার চাকরির ড্যাশবোর্ড →', en: 'My Job Dashboard →' })}
+        </LinkButton>
+      </p>
 
       <p style={groupLabel}>{t({ bn: 'প্রধান পরীক্ষা', en: 'Main exams' })}</p>
       <div style={grid}>

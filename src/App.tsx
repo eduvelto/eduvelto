@@ -20,6 +20,7 @@ const ClassSubjectPage = lazy(() => import('./pages/ClassSubjectPage'));
 const JobsPage = lazy(() => import('./pages/JobsPage'));
 const JobHubPage = lazy(() => import('./pages/JobHubPage'));
 const JobsCommonPage = lazy(() => import('./pages/JobsCommonPage'));
+const JobSeekerDashboardPage = lazy(() => import('./pages/JobSeekerDashboardPage'));
 const RegisterPage = lazy(() => import('./pages/RegisterPage'));
 const RoleSetupPage = lazy(() => import('./pages/RoleSetupPage'));
 const LoginPage = lazy(() => import('./pages/LoginPage'));
@@ -203,9 +204,10 @@ export default function App() {
         <Route path="/class/:slug/subjects/:dept" element={<ClassSubjectPage />} />
         <Route path="/class/:slug/:tab" element={<ClassDashboardPage />} />
         <Route path="/class/:slug" element={<ClassDashboardPage />} />
-        {/* Job Preparation (B-1.3): /jobs → hub index, /jobs/common, /jobs/:exam[/:tab]. /jobs/common must come before /jobs/:exam. */}
+        {/* Job Preparation (B-1.3): /jobs → hub index, /jobs/common, /jobs/dashboard, /jobs/:exam[/:tab]. /jobs/common and /jobs/dashboard must come before /jobs/:exam. */}
         <Route path="/jobs" element={<JobsPage />} />
         <Route path="/jobs/common" element={<JobsCommonPage />} />
+        <Route path="/jobs/dashboard" element={<JobSeekerDashboardPage />} />
         <Route path="/jobs/:exam/:tab" element={<JobHubPage />} />
         <Route path="/jobs/:exam" element={<JobHubPage />} />
         <Route path="/register" element={<RegisterPage />} />

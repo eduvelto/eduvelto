@@ -93,6 +93,38 @@ function ExamIcon({ slug }: { slug: string }) {
           <path d="M9 12l2 2 4-4" />
         </svg>
       );
+    case 'ministries': // government building
+      return (
+        <svg {...common}>
+          <path d="M3 21h18" />
+          <path d="M5 21v-9M9.5 21v-9M14.5 21v-9M19 21v-9" />
+          <path d="M2 12l10-7 10 7H2z" />
+          <path d="M12 2v3" />
+        </svg>
+      );
+    case 'defence': // star
+      return (
+        <svg {...common}>
+          <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+        </svg>
+      );
+    case 'autonomous': // layers
+      return (
+        <svg {...common}>
+          <path d="M12 2L2 7l10 5 10-5-10-5z" />
+          <path d="M2 17l10 5 10-5" />
+          <path d="M2 12l10 5 10-5" />
+        </svg>
+      );
+    case 'private-ngo': // people
+      return (
+        <svg {...common}>
+          <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+          <circle cx="9" cy="7" r="4" />
+          <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+          <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+        </svg>
+      );
     default: // dots — other govt jobs
       return (
         <svg {...common}>

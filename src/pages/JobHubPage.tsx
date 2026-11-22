@@ -5,12 +5,16 @@
 // design plan §1.4, same pattern as the class dashboards).
 //
 // STRUCTURE ONLY: the Home tab shows the exam's identity (recruiting
-// body, stages, official-site link) and the 7 "100% preparation"
-// elements as Coming Soon. Every content tab shows an honest empty
-// state — NO syllabus tables (B-2.1), NO questions (B-2.2), NO mocks
-// (B-2.3), NO previous questions (B-6.1) until teacher review.
-// Marks, times, age limits and fees are never written here — they
-// change with every circular; the hub links to the official site.
+// body, stages, official-site link), the VERIFIED exam pattern for the
+// 4 main exams (EXAM_PATTERNS — MCQ-stage subject breakdown, total,
+// time, negative marking; source: job analysis 21 Nov 2026, with the
+// "verify against the latest circular" caveat) and the 7 "100%
+// preparation" elements as Coming Soon. Every content tab shows an
+// honest empty state — NO syllabus tables (B-2.1), NO questions
+// (B-2.2), NO mocks (B-2.3), NO previous questions (B-6.1) until
+// teacher review. Age limits, fees and exam dates are never written
+// here — they change with every circular. BCS viva marks are never
+// written (200 vs 100 disputed); NTRCA 19th pattern is never written.
 // No ads on this page: the hub is all practice / exam / result space
 // (design plan §1.4).
 
@@ -19,6 +23,7 @@ import { PageShell, EmptyState } from '../components/PageShell';
 import { Card, Chip, LinkButton, Reveal } from '../components/ui';
 import { useLanguage, T } from '../i18n/LanguageContext';
 import {
+  EXAM_PATTERNS,
   JOB_ELEMENTS,
   JOB_TABS,
   isJobTabSlug,
@@ -77,6 +82,7 @@ export default function JobHubPage() {
   const { exam = '', tab } = useParams<{ exam: string; tab?: string }>();
   const def = jobExamBySlug(exam);
   const activeTab: JobTabSlug = isJobTabSlug(tab) ? tab : 'home';
+  const pattern = def ? EXAM_PATTERNS[def.slug] : undefined;
 
   if (!def) {
     return (
@@ -151,7 +157,8 @@ export default function JobHubPage() {
 
       {activeTab === 'home' ? (
         <>
-          {/* Exam identity — official source, never hard-coded numbers. */}
+          {/* Exam identity — official source; age limits, fees and exam
+              dates are never written here. */}
           <Reveal>
             <Card style={{ marginBottom: 20 }}>
               <div style={{ fontWeight: 700, color: '#142B3B', fontSize: 17 }}>
@@ -159,14 +166,92 @@ export default function JobHubPage() {
               </div>
               <p style={{ margin: '8px 0 0', color: '#57616A', fontSize: 14, lineHeight: 1.8 }}>
                 {t({
-                  bn: 'নম্বর, সময়, বয়সসীমা ও ফি প্রতিটি বিজ্ঞপ্তিতে বদলাতে পারে — এখানে স্থায়ী সংখ্যা লেখা হয় না। সর্বশেষ বিজ্ঞপ্তি অফিসিয়াল সাইটে দেখুন।',
-                  en: 'Marks, time, age limit and fees change with every circular — no fixed numbers are written here. See the latest circular on the official site.',
+                  bn: 'নম্বর, সময়, বয়সসীমা ও ফি প্রতিটি বিজ্ঞপ্তিতে বদলাতে পারে। বয়সসীমা, ফি ও পরীক্ষার তারিখ এখানে কখনো লেখা হয় না — সর্বশেষ বিজ্ঞপ্তি অফিসিয়াল সাইটে দেখুন।',
+                  en: 'Marks, time, age limit and fees change with every circular. Age limit, fees and exam dates are never written here — see the latest circular on the official site.',
                 })}
               </p>
-              <p style={{ margin: '12px 0 0' }}>
-                <a href={def.officialUrl} target="_blank" rel="noreferrer" style={{ fontWeight: 600 }}>
-                  {t({ bn: 'সর্বশেষ বিজ্ঞপ্তি দেখুন →', en: 'See the latest circular →' })}
-                </a>
+              {def.officialUrl ? (
+                <p style={{ margin: '12px 0 0' }}>
+                  <a href={def.officialUrl} target="_blank" rel="noreferrer" style={{ fontWeight: 600 }}>
+                    {t({ bn: 'সর্বশেষ বিজ্ঞপ্তি দেখুন →', en: 'See the latest circular →' })}
+                  </a>
+                </p>
+              ) : (
+                <p style={{ margin: '12px 0 0', color: '#57616A', fontSize: 14 }}>
+                  {t({
+                    bn: 'কোনো একক অফিসিয়াল সাইট নেই — প্রতিটি নিয়োগ বিজ্ঞপ্তি সংশ্লিষ্ট প্রতিষ্ঠানের নিজের সাইটে দেখুন।',
+                    en: 'There is no single official site — see each recruitment circular on the hiring organisation’s own site.',
+                  })}
+                </p>
+              )}
+            </Card>
+          </Reveal>
+
+          {/* Verified exam pattern (4 main exams) or an honest
+              circular-based state (all other exams). */}
+          <Reveal>
+            <Card style={{ marginBottom: 20 }}>
+              <div style={{ fontWeight: 700, color: '#142B3B', fontSize: 17 }}>
+                {pattern
+                  ? t({ bn: pattern.titleBn, en: pattern.titleEn })
+                  : t({ bn: 'পরীক্ষার ধরন — বিজ্ঞপ্তি-ভিত্তিক', en: 'Exam pattern — circular-based' })}
+              </div>
+              {pattern ? (
+                <>
+                  <table style={{ width: '100%', borderCollapse: 'collapse', marginTop: 12, fontSize: 14 }}>
+                    <thead>
+                      <tr>
+                        <th style={{ textAlign: 'left', padding: '8px 4px', borderBottom: '2px solid #142B3B', color: '#142B3B' }}>
+                          {t({ bn: 'বিষয়', en: 'Subject' })}
+                        </th>
+                        <th style={{ textAlign: 'right', padding: '8px 4px', borderBottom: '2px solid #142B3B', color: '#142B3B' }}>
+                          {t({ bn: 'নম্বর', en: 'Marks' })}
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {pattern.rows.map((r) => (
+                        <tr key={r.subjectEn}>
+                          <td style={{ padding: '8px 4px', borderBottom: '1px solid #E5E7EB', color: '#374151' }}>
+                            {t({ bn: r.subjectBn, en: r.subjectEn })}
+                          </td>
+                          <td style={{ padding: '8px 4px', borderBottom: '1px solid #E5E7EB', color: '#142B3B', textAlign: 'right', fontWeight: 700 }}>
+                            {r.marks}
+                          </td>
+                        </tr>
+                      ))}
+                      <tr>
+                        <td style={{ padding: '8px 4px', color: '#142B3B', fontWeight: 700 }}>
+                          {t({ bn: pattern.totalBn, en: pattern.totalEn })}
+                        </td>
+                        <td style={{ padding: '8px 4px', textAlign: 'right', color: '#68747B', fontWeight: 600 }}>
+                          {t({ bn: pattern.timeBn, en: pattern.timeEn })}
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <p style={{ margin: '12px 0 0', color: '#57616A', fontSize: 14, lineHeight: 1.7 }}>
+                    {t({ bn: pattern.negativeBn, en: pattern.negativeEn })}
+                  </p>
+                  {pattern.noteBn ? (
+                    <p style={{ margin: '8px 0 0', color: '#57616A', fontSize: 14, lineHeight: 1.7 }}>
+                      {t({ bn: pattern.noteBn, en: pattern.noteEn ?? '' })}
+                    </p>
+                  ) : null}
+                </>
+              ) : (
+                <p style={{ margin: '8px 0 0', color: '#57616A', fontSize: 14, lineHeight: 1.8 }}>
+                  {t({
+                    bn: 'এই পরীক্ষার নম্বর, সময় ও ধাপ প্রতিটি বিজ্ঞপ্তিতে বদলাতে পারে — এখানে কোনো ধরন লেখা হয়নি। প্রতিটি পদের ধরন তার বিজ্ঞপ্তি থেকে যাচাই করে লেখা হবে।',
+                    en: 'This exam’s marks, time and stages change with every circular — no pattern is written here. Each post’s pattern will be written after verification from its circular.',
+                  })}
+                </p>
+              )}
+              <p style={{ margin: '12px 0 0', color: '#68747B', fontSize: 13 }}>
+                {t({
+                  bn: 'উৎস: চাকরির পরীক্ষা বিশ্লেষণ, ২১ নভেম্বর ২০২৬। সর্বশেষ বিজ্ঞপ্তি দিয়ে পুনঃযাচাই করুন।',
+                  en: 'Source: job exam analysis, 21 November 2026. Verify against the latest circular.',
+                })}
               </p>
             </Card>
           </Reveal>
