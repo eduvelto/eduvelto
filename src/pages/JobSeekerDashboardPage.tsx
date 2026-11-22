@@ -17,7 +17,11 @@
 // with no published set shows no practice link. Time is shown
 // as completed sessions + questions, never as invented "study
 // minutes": the engine records wall-clock question-open time
-// with no inactivity pause (see jobDashboard.ts).
+// with no inactivity pause (see jobDashboard.ts). Step 12
+// adds the active-time pause to the engines (src/lib/
+// activeStudyTime.ts) — future recordings count active time
+// only; historical values are untouched, and the dashboard
+// still shows sessions + questions, never invented minutes.
 //
 // The dashboard is open to any signed-in user (a teacher can also
 // prepare for BCS); signed-out visitors get the login prompt, same
@@ -27,9 +31,11 @@
 // Deferred, recorded honestly (see
 // team/job-step11-dashboard-2026-11-22.md): the jobNotifications
 // collection + rules (Step 14, with circulars — the compiled-rules
-// margin on this branch is 1,138 bytes); the planner + revision
-// schedule (Step 12); the wrong-answer re-practice flow +
-// favourites (Step 13); circulars + calendar (Step 14).
+// margin on this branch is 1,138 bytes); the wrong-answer
+// re-practice flow + favourites (Step 13); circulars + calendar
+// (Step 14). Step 12 WIRED the planner + revision schedule
+// cards to the real planner (/jobs/planner) — see the P4
+// section below.
 
 import { useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
@@ -67,6 +73,7 @@ import {
   verifyMockRetry,
   verifyPracticeBundle,
 } from '../lib/jobDashboardData';
+import { revisionQueue, topicHealth, weeklyPlan } from '../lib/jobPlanner';
 
 function formatDateBn(millis: number | null): string {
   if (millis === null) return '—';
@@ -202,6 +209,35 @@ export default function JobSeekerDashboardPage() {
     [weakTopics, publishedByExam, profile?.targetExam],
   );
   const latestAttempt = attempts && attempts.length > 0 ? attempts[0] : null;
+  // Step 12 — the planner cards (P4) are wired to the real
+  // planner now: the revision queue + the 7-day week, derived
+  // from the SAME loaded attempts + published bundles (no
+  // extra reads). The dashboard never invents a plan item.
+  const plannerHealth = useMemo(() => (attempts ? topicHealth(attempts, nowMs) : []), [attempts]);
+  const plannerQueue = useMemo(
+    () =>
+      revisionQueue({
+        health: plannerHealth,
+        publishedByExam,
+        targetExamSlug: profile?.targetExam ?? null,
+        nowMs,
+      }),
+    [plannerHealth, publishedByExam, profile?.targetExam],
+  );
+  const plannerWeek = useMemo(
+    () =>
+      weeklyPlan({
+        attempts: attempts ?? [],
+        health: plannerHealth,
+        queue: plannerQueue,
+        publishedByExam,
+        targetExamSlug: profile?.targetExam ?? null,
+        dailyGoalQuestions: profile?.dailyGoalQuestions ?? null,
+        dailyMockDocId: daily?.docId ?? null,
+        nowMs,
+      }),
+    [attempts, plannerHealth, plannerQueue, publishedByExam, profile?.targetExam, profile?.dailyGoalQuestions, daily],
+  );
   const mockAttempts = useMemo(() => (attempts ?? []).filter((a) => a.kind === 'mock'), [attempts]);
   const mockTrends = useMemo(() => groupAttemptsByExam(mockAttempts), [mockAttempts]);
   const totalQuestions = (attempts ?? []).reduce((sum, a) => sum + a.answers.length, 0);
@@ -971,18 +1007,43 @@ export default function JobSeekerDashboardPage() {
           </Card>
         </Reveal>
 
-        {/* Revision schedule (design #13) — Step 12 owns it. */}
+        {/* Revision schedule (design #13) — Step 12 wires it to
+            the real planner: the next due revision + the count
+            due today, linked to /jobs/planner#revision. */}
         <Reveal delayMs={160}>
           <Card>
             <div style={{ fontWeight: 700, color: 'var(--heading)', fontSize: 17 }}>
               {t({ bn: 'রিভিশন সময়সূচি', en: 'Revision schedule' })}
             </div>
-            <p style={{ margin: '8px 0 10px', color: 'var(--muted)', fontSize: 14, lineHeight: 1.7 }}>
-              {t({
-                bn: 'দুর্বল টপিকের পুনরাবৃত্তির সময়সূচি প্ল্যানারে থাকবে — Step 12-এ আসছে।',
-                en: 'The repeat schedule for weak topics will live in the planner — coming in Step 12.',
-              })}
-            </p>
+            {attempts === null ? (
+              <p style={{ margin: '8px 0 0', color: 'var(--muted)', fontSize: 14 }}>লোড হচ্ছে…</p>
+            ) : plannerQueue.length === 0 ? (
+              <p style={{ margin: '8px 0 10px', color: 'var(--muted)', fontSize: 14, lineHeight: 1.7 }}>
+                {attempts.length === 0
+                  ? t({
+                      bn: 'এখনো কোনো অনুশীলন করেননি — প্রথম অনুশীলনের পর রিভিশন তালিকা তৈরি হবে।',
+                      en: 'You have not practised yet — the revision list will appear after your first practice.',
+                    })
+                  : t({
+                      bn: 'রিভিশনের মতো দুর্বল টপিক এখন নেই — নতুন টপিকের অনুশীলন চালিয়ে যান।',
+                      en: 'No weak topics need revision right now — keep practising new topics.',
+                    })}
+              </p>
+            ) : (
+              <>
+                <p style={{ margin: '8px 0 10px', color: 'var(--muted-ivory)', fontSize: 14, lineHeight: 1.7 }}>
+                  {t({
+                    bn: `আজ ${plannerQueue.filter((q) => q.dueBucket === 'today').length}টি রিভিশন বাকি — পরেরটি: ${plannerQueue[0].label} (${t({ bn: `সঠিক উত্তরের হার ${plannerQueue[0].accuracy}%`, en: `accuracy ${plannerQueue[0].accuracy}%` })})।`,
+                    en: `${plannerQueue.filter((q) => q.dueBucket === 'today').length} revision(s) due today — next: ${plannerQueue[0].label} (accuracy ${plannerQueue[0].accuracy}%).`,
+                  })}
+                </p>
+                <p style={{ margin: '0 0 10px' }}>
+                  <Link to="/jobs/planner#revision" style={{ fontWeight: 600, fontSize: 14 }}>
+                    {t({ bn: 'রিভিশন দেখুন →', en: 'See revision →' })}
+                  </Link>
+                </p>
+              </>
+            )}
             <p style={{ margin: 0 }}>
               <a href="#weak-topics" style={{ fontWeight: 600, fontSize: 14 }}>
                 {t({ bn: 'দুর্বল টপিক দেখুন →', en: 'See weak topics →' })}
@@ -991,19 +1052,31 @@ export default function JobSeekerDashboardPage() {
           </Card>
         </Reveal>
 
-        {/* Planner (design #6) — Step 12 owns it. */}
+        {/* Planner (design #6) — Step 12 wires it to the real
+            planner: today + the next 2 days, then the full
+            planner page. */}
         <Reveal delayMs={0}>
           <Card>
             <div style={{ fontWeight: 700, color: 'var(--heading)', fontSize: 17 }}>
               {t({ bn: 'প্ল্যানার', en: 'Planner' })}
             </div>
-            <p style={{ margin: '8px 0 10px', color: 'var(--muted)', fontSize: 14, lineHeight: 1.7 }}>
-              {t({
-                bn: 'সপ্তাহের পড়ার পরিকল্পনা এখানে থাকবে — Step 12-এ আসছে।',
-                en: 'Your weekly study plan will live here — coming in Step 12.',
-              })}
-            </p>
-            <Chip tone="gold">{t({ bn: 'শীঘ্রই আসছে', en: 'Coming soon' })}</Chip>
+            {attempts === null ? (
+              <p style={{ margin: '8px 0 0', color: 'var(--muted)', fontSize: 14 }}>লোড হচ্ছে…</p>
+            ) : (
+              <>
+                <p style={{ margin: '8px 0 10px', color: 'var(--muted-ivory)', fontSize: 14, lineHeight: 1.7 }}>
+                  {t({
+                    bn: `আজ: ${plannerWeek.days[0]?.items.length ?? 0}টি কাজ · আগামীকাল: ${plannerWeek.days[1]?.items.length ?? 0}টি কাজ · পরশু: ${plannerWeek.days[2]?.items.length ?? 0}টি কাজ।`,
+                    en: `Today: ${plannerWeek.days[0]?.items.length ?? 0} items · Tomorrow: ${plannerWeek.days[1]?.items.length ?? 0} items · Day after: ${plannerWeek.days[2]?.items.length ?? 0} items.`,
+                  })}
+                </p>
+                <p style={{ margin: 0 }}>
+                  <Link to="/jobs/planner" style={{ fontWeight: 600, fontSize: 14 }}>
+                    {t({ bn: 'পূর্ণ প্ল্যানার দেখুন →', en: 'See the full planner →' })}
+                  </Link>
+                </p>
+              </>
+            )}
           </Card>
         </Reveal>
 

@@ -52,6 +52,7 @@ import {
 } from '../lib/jobPractice';
 import type { JobQuestionKey } from '../lib/jobQuestions';
 import { useJobMode } from '../lib/jobMode';
+import { useActiveClock } from '../lib/activeStudyTime';
 
 type Phase = 'loading' | 'signed-out' | 'error' | 'ready';
 type SaveState = 'saved' | 'saving' | 'error';
@@ -85,10 +86,15 @@ export default function JobPracticePage() {
   const [submitError, setSubmitError] = useState('');
   const [saveState, setSaveState] = useState<SaveState>('saved');
 
-  // Per-question time: accumulated seconds per n + the clock for
-  // the currently open question. Flushed into the session on
-  // navigation and on submit (time is informational).
-  const timeRef = useRef<{ current: number; startedAt: number }>({ current: 1, startedAt: Date.now() });
+  // Per-question time: ACTIVE seconds only (Step 12). The old
+  // wall-clock flush counted idle-tab time as study time; the
+  // active clock (src/lib/activeStudyTime.ts) pauses on tab-hide
+  // / window-blur and after 90s without interaction, and flushes
+  // into the session on navigation and on submit (time is
+  // informational). questionRef holds the currently open
+  // question number — the clock itself owns only time.
+  const questionRef = useRef<number>(1);
+  const activeClock = useActiveClock();
   const startedRef = useRef(false);
 
   // Latest session, readable from plain (non-updater) code — the
@@ -147,7 +153,8 @@ export default function JobPracticePage() {
           setSession(resumed.session);
           writtenRevisionRef.current = resumed.session.revision;
           setStartedAtMillis(resumed.startedAtMillis);
-          timeRef.current = { current: resumed.session.currentQuestion, startedAt: Date.now() };
+          questionRef.current = resumed.session.currentQuestion;
+          activeClock.start(Date.now());
           const rev: Record<number, boolean> = {};
           for (const [n, a] of Object.entries(resumed.session.answers)) {
             if (a.selected !== null) rev[Number(n)] = true;
@@ -162,7 +169,8 @@ export default function JobPracticePage() {
           setSession(started.session);
           writtenRevisionRef.current = started.session.revision;
           setStartedAtMillis(started.startedAtMillis);
-          timeRef.current = { current: started.session.currentQuestion, startedAt: Date.now() };
+          questionRef.current = started.session.currentQuestion;
+          activeClock.start(Date.now());
         }
         setPhase('ready');
       } catch (e) {
@@ -270,11 +278,14 @@ export default function JobPracticePage() {
   const isRevealed = revealed[currentQ.n] === true;
   const isCorrect = isRevealed && currentAnswer.selected !== null && keyAnswer !== undefined && currentAnswer.selected === keyAnswer.correctLetter;
 
+  // Flush the ACTIVE seconds for the open question into the
+  // session (Step 12: idle-tab time is never recorded). flush()
+  // restarts the clock when active, so goTo needs no explicit
+  // start; a click resumes an idle-parked clock first
+  // (pointerdown fires before click).
   function flushTime(): { n: number; elapsed: number } {
-    const now = Date.now();
-    const elapsed = Math.max(0, Math.round((now - timeRef.current.startedAt) / 1000));
-    const n = timeRef.current.current;
-    timeRef.current = { current: n, startedAt: now };
+    const elapsed = activeClock.flush(Date.now());
+    const n = questionRef.current;
     setSession((prev) => {
       if (!prev) return prev;
       const prevEntry = prev.answers[n];
@@ -290,7 +301,7 @@ export default function JobPracticePage() {
   function goTo(n: number) {
     if (n < 1 || n > total) return;
     flushTime();
-    timeRef.current = { current: n, startedAt: Date.now() };
+    questionRef.current = n;
     setSession((prev) => (prev ? goToQuestion(prev, n) : prev));
   }
 

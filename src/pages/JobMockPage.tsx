@@ -48,6 +48,7 @@ import {
 import { jobMockIdFromDocId, jobMockPatternSummaryBn, type JobMockWithId } from '../lib/jobMocks';
 import { jobExamBySlug } from '../lib/jobExams';
 import type { PracticeBundleWithId } from '../lib/jobPractice';
+import { useActiveClock } from '../lib/activeStudyTime';
 
 type Phase = 'loading' | 'signed-out' | 'error' | 'intro' | 'ready' | 'expired';
 type SaveState = 'saved' | 'saving' | 'retrying' | 'error';
@@ -106,7 +107,14 @@ export default function JobMockPage() {
   // startedAt at start/resume. serverNow = Date.now() + offset.
   const offsetRef = useRef(0);
   const autoSubmittedRef = useRef(false);
-  const timeRef = useRef<{ current: number; startedAt: number }>({ current: 1, startedAt: Date.now() });
+  // Per-question time: ACTIVE seconds only (Step 12 — same
+  // clock as practice). The EXAM DEADLINE NEVER pauses: it is
+  // server-authoritative and keeps running while the student is
+  // away (design §3.5 flow 7). Only this informational
+  // per-question clock pauses (tab hidden / window blurred /
+  // 90s without interaction).
+  const questionRef = useRef<number>(1);
+  const activeClock = useActiveClock();
 
   // Load the mock + bundle, then look for a resumable session.
   useEffect(() => {
@@ -165,7 +173,8 @@ export default function JobMockPage() {
     setSession(sess);
     setStartedAtMillis(serverStarted);
     setDeadlineMillis(dl ?? sess.clientEndsAtMillis);
-    timeRef.current = { current: sess.currentQuestion, startedAt: Date.now() };
+    questionRef.current = sess.currentQuestion;
+    activeClock.start(Date.now());
     autoSubmittedRef.current = false;
     setPhase('ready');
   }
@@ -463,11 +472,12 @@ export default function JobMockPage() {
           : 'সংরক্ষিত';
   const timerUrgent = remaining !== null && remaining <= 5 * 60 * 1000;
 
+  // Flush the ACTIVE seconds for the open question into the
+  // session (Step 12 — idle-tab time is never recorded). The
+  // exam deadline is untouched by this clock.
   function flushTime(): { n: number; elapsed: number } {
-    const nowMs = Date.now();
-    const elapsed = Math.max(0, Math.round((nowMs - timeRef.current.startedAt) / 1000));
-    const n = timeRef.current.current;
-    timeRef.current = { current: n, startedAt: nowMs };
+    const elapsed = activeClock.flush(Date.now());
+    const n = questionRef.current;
     setSession((prev) => {
       if (!prev) return prev;
       const prevEntry = prev.answers[n];
@@ -483,7 +493,7 @@ export default function JobMockPage() {
   function goTo(n: number) {
     if (n < 1 || n > total) return;
     flushTime();
-    timeRef.current = { current: n, startedAt: Date.now() };
+    questionRef.current = n;
     setSession((prev) => (prev ? { ...prev, currentQuestion: n } : prev));
   }
 

@@ -23,12 +23,15 @@
 //    activity. Without a defensible completion formula it is
 //    called "Practice activity", never "exam preparation %".
 //  - Time is NOT summed into "study minutes" here: the engine
-//    records per-question time from wall-clock flushes with no
-//    inactivity pause (JobPracticePage/JobMockPage flushTime),
-//    so stored timeSpentSeconds includes idle-tab time. The page
-//    shows completed sessions + questions instead of invented
-//    time (ChatGPT fallback); a real active-time pause is an
-//    engine follow-up (Step 12), not this step.
+//    used to record per-question time from wall-clock flushes
+//    with no inactivity pause (JobPracticePage/JobMockPage
+//    flushTime), so stored timeSpentSeconds includes idle-tab
+//    time. The page shows completed sessions + questions
+//    instead of invented time (ChatGPT fallback). Step 12
+//    fixed the recording going forward (src/lib/
+//    activeStudyTime.ts — visibility + 90s idle pause); the
+//    historical values are untouched, so the page keeps
+//    showing sessions + questions, never minutes.
 //  - A streak is computed from real attempt dates only, shown
 //    only when it is at least 2 days, and only for the student's
 //    own viewing — never a competition, never invented.
@@ -172,6 +175,10 @@ export interface PublishedBundleRef {
   docId: string;
   topicId: string | null;
   questionCount: number;
+  /** Bundle title (Step 12: the planner's new-practice items
+   * show it; absent in older callers — the topic label is the
+   * fallback). */
+  titleBn?: string;
 }
 
 export interface ExamProgress {
