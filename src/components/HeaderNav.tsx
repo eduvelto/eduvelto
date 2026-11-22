@@ -11,10 +11,11 @@
 // links). The header is shared chrome, so the new nav appears on every
 // page, not only the homepage.
 //
-// HONESTY: there is NO dark-mode theme system and NO notifications
-// system in this codebase — the moon icon and the bell open a small
-// "শীঘ্রই আসছে / Coming soon" note instead of pretending to work.
-// The bell shows NO count badge (no real notification count exists).
+// HONESTY: there is NO notifications system in this codebase — the bell
+// opens a small "শীঘ্রই আসছে / Coming soon" note instead of pretending
+// to work. The bell shows NO count badge (no real notification count
+// exists). Dark mode IS real since 22 Nov 2026 (lib/theme.tsx): the
+// moon icon toggles the theme and the choice persists per device.
 // Dropdown items that lead to unbuilt sections (/jobs, /admissions,
 // /skills) carry a "শীঘ্রই আসছে" chip and land on the shared
 // Coming Soon page; items that lead to working pages have no chip.
@@ -22,6 +23,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import { useAuth } from '../lib/auth';
+import { useTheme } from '../lib/theme';
 import { useLanguage } from '../i18n/LanguageContext';
 
 type MenuItem = { to: string; bn: string; en: string; soon?: boolean };
@@ -90,6 +92,14 @@ function MoonIcon() {
   return (
     <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
       <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+    </svg>
+  );
+}
+function SunIcon() {
+  return (
+    <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <circle cx="12" cy="12" r="4" />
+      <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41" />
     </svg>
   );
 }
@@ -184,10 +194,10 @@ const SECONDARY: MenuItem[] = [
 export default function HeaderNav() {
   const { t } = useLanguage();
   const { user, profile, loading, signOut } = useAuth();
+  const { theme, toggleTheme } = useTheme();
   const location = useLocation();
   const [menuOpen, setMenuOpen] = useState(false);
   const [openMenu, setOpenMenu] = useState<string | null>(null);
-  const [darkNote, setDarkNote] = useState(false);
   const [bellNote, setBellNote] = useState(false);
   const navRef = useRef<HTMLElement | null>(null);
 
@@ -195,24 +205,21 @@ export default function HeaderNav() {
   useEffect(() => {
     setMenuOpen(false);
     setOpenMenu(null);
-    setDarkNote(false);
     setBellNote(false);
   }, [location.pathname]);
 
   // Close dropdowns on Escape / outside click.
   useEffect(() => {
-    if (!openMenu && !darkNote && !bellNote) return;
+    if (!openMenu && !bellNote) return;
     function onKey(e: KeyboardEvent) {
       if (e.key === 'Escape') {
         setOpenMenu(null);
-        setDarkNote(false);
         setBellNote(false);
       }
     }
     function onClick(e: MouseEvent) {
       if (navRef.current && !navRef.current.contains(e.target as Node)) {
         setOpenMenu(null);
-        setDarkNote(false);
         setBellNote(false);
       }
     }
@@ -222,7 +229,7 @@ export default function HeaderNav() {
       document.removeEventListener('keydown', onKey);
       document.removeEventListener('mousedown', onClick);
     };
-  }, [openMenu, darkNote, bellNote]);
+  }, [openMenu, bellNote]);
 
   const initial = (profile?.displayName ?? user?.email ?? '?').trim().charAt(0).toUpperCase() || '?';
 
@@ -232,8 +239,17 @@ export default function HeaderNav() {
         <img src="/logo.png" alt="Eduvelto" style={{ height: 44, width: 'auto', display: 'block' }} />
       </Link>
 
-      {/* Mobile-only: bell (Coming Soon) + avatar (signed in). */}
+      {/* Mobile-only: theme toggle + bell (Coming Soon) + avatar (signed in). */}
       <span className="ev-header-mobile-actions">
+        <button
+          type="button"
+          className="ev-header-icon-btn"
+          aria-label={theme === 'dark' ? t({ bn: 'লাইট মোড', en: 'Light mode' }) : t({ bn: 'ডার্ক মোড', en: 'Dark mode' })}
+          aria-pressed={theme === 'dark'}
+          onClick={toggleTheme}
+        >
+          {theme === 'dark' ? <SunIcon /> : <MoonIcon />}
+        </button>
         <span style={{ position: 'relative' }}>
           <button
             type="button"
@@ -242,7 +258,6 @@ export default function HeaderNav() {
             aria-expanded={bellNote}
             onClick={() => {
               setBellNote((v) => !v);
-              setDarkNote(false);
             }}
           >
             <BellIcon />
@@ -321,25 +336,19 @@ export default function HeaderNav() {
           <Link to="/library" className="ev-header-icon-btn" aria-label={t({ bn: 'খুঁজুন', en: 'Search' })}>
             <SearchIcon />
           </Link>
-          <span style={{ position: 'relative' }}>
-            <button
-              type="button"
-              className="ev-header-icon-btn"
-              aria-label={t({ bn: 'ডার্ক মোড', en: 'Dark mode' })}
-              aria-expanded={darkNote}
-              onClick={() => {
-                setDarkNote((v) => !v);
-                setBellNote(false);
-              }}
-            >
-              <MoonIcon />
-            </button>
-            {darkNote ? (
-              <span className="ev-header-note" role="status">
-                {t({ bn: 'ডার্ক মোড শীঘ্রই আসছে', en: 'Dark mode coming soon' })}
-              </span>
-            ) : null}
-          </span>
+          <button
+            type="button"
+            className="ev-header-icon-btn"
+            aria-label={theme === 'dark' ? t({ bn: 'লাইট মোড', en: 'Light mode' }) : t({ bn: 'ডার্ক মোড', en: 'Dark mode' })}
+            aria-pressed={theme === 'dark'}
+            title={theme === 'dark' ? t({ bn: 'লাইট মোড', en: 'Light mode' }) : t({ bn: 'ডার্ক মোড', en: 'Dark mode' })}
+            onClick={() => {
+              toggleTheme();
+              setBellNote(false);
+            }}
+          >
+            {theme === 'dark' ? <SunIcon /> : <MoonIcon />}
+          </button>
           {loading ? null : user ? (
             <>
               <NavLink to="/dashboard" className={({ isActive }) => `ev-navlink${isActive ? ' ev-navlink-active' : ''}`}>

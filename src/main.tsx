@@ -5,14 +5,17 @@ import './index.css';
 import App from './App';
 import { AuthProvider } from './lib/auth';
 import { LanguageProvider } from './i18n/LanguageContext';
+import { ThemeProvider } from './lib/theme';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <BrowserRouter>
       <AuthProvider>
-        <LanguageProvider>
-          <App />
-        </LanguageProvider>
+        <ThemeProvider>
+          <LanguageProvider>
+            <App />
+          </LanguageProvider>
+        </ThemeProvider>
       </AuthProvider>
     </BrowserRouter>
   </React.StrictMode>,

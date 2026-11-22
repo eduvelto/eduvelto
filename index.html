@@ -34,6 +34,22 @@
   </head>
   <body>
     <div id="root"></div>
+    <script>
+      /* Dark mode: set data-theme before React loads so the first paint
+         already uses the saved (or OS) theme — no white flash. Mirrors
+         src/lib/theme.tsx (localStorage key 'eduvelto-theme'). */
+      try {
+        var t = localStorage.getItem('eduvelto-theme');
+        if (t !== 'light' && t !== 'dark') {
+          t = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        }
+        document.documentElement.dataset.theme = t;
+        var m = document.querySelector('meta[name="theme-color"]');
+        if (m) m.setAttribute('content', t === 'dark' ? '#0f1b24' : '#142b3b');
+      } catch (e) {
+        document.documentElement.dataset.theme = 'light';
+      }
+    </script>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

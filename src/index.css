@@ -57,6 +57,89 @@
   --shadow-lg: 0 12px 32px rgba(20, 43, 59, 0.16);
   --font-head: 'Poppins', 'Hind Siliguri', system-ui, -apple-system, 'Segoe UI', sans-serif;
   --font-body: 'Hind Siliguri', 'Noto Sans Bengali', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  /* Dark-mode tokens (22 Nov 2026): every value below has a dark twin
+     in html[data-theme="dark"]; components use these names, never raw
+     hex, so light mode is pixel-identical to before. */
+  --heading: #142b3b;
+  --teal-text: #12766e;
+  --link: #1d4ed8;
+  --link-deep: #1e40af;
+  --hover: #eaf3fb;
+  --track: #e9e7de;
+  --num-bg: #f2f4f2;
+  --soon-bg: #fdf3d7;
+  --ink-soft: #3a444b;
+  --success: #15803d;
+  --purple: #7b1fa2;
+  --card-subtle: #f8fafb;
+  --error-text: #7a0013;
+  --error-border: #f3c1c8;
+  --ok-border: #bfe3df;
+  --home-tint-green: #e8f5e9;
+  --home-tint-green-border: #c8e6c9;
+  --home-tint-blue: #e3f2fd;
+  --home-tint-blue-border: #bbdefb;
+  --home-tint-purple: #f3e5f5;
+  --home-tint-purple-border: #e1bee7;
+  --home-tint-amber: #fff3e0;
+  --home-tint-amber-border: #ffe0b2;
+  --skeleton-a: #eae6db;
+  --skeleton-b: #f4f1e9;
+}
+
+/* ---- Dark mode (22 Nov 2026, owner: "dark mode ta o tik kore daw") ----
+   Forest Navy #142b3b stays the dark surface/button colour; the page
+   background goes darker (#0f1b24), cards lift to #1a2b38, text to
+   #e8eef2, and accent colours brighten so text on dark stays readable
+   (AA on the new backgrounds). Light mode is unchanged: every light
+   value above equals the old hardcoded value. */
+html[data-theme="dark"] {
+  --bg: #0f1b24;
+  --card: #1a2b38;
+  --card-subtle: #22394a;
+  --ink: #e8eef2;
+  --heading: #dce8ef;
+  --muted: #9fb0ba;
+  --muted-ivory: #aab9c2;
+  --ink-soft: #b9c6cf;
+  --line: #2e4252;
+  --line-strong: #43586a;
+  --teal: #2fb3a6;
+  --teal-text: #5cc8b8;
+  --teal-soft: #17393a;
+  --teal-softer: #122a2c;
+  --amber: #e8b64c;
+  --amber-deep: #eec46a;
+  --amber-soft: #3a2f14;
+  --amber-dark-text: #f0cd7a;
+  --link: #8ab4f8;
+  --link-deep: #a8c7fa;
+  --hover: #22394a;
+  --track: #2e4252;
+  --num-bg: #22394a;
+  --soon-bg: #3a2f14;
+  --success: #4ade80;
+  --purple: #c084fc;
+  --error: #ff9a92;
+  --error-bg: #3d1a1a;
+  --error-text: #ffb4ab;
+  --error-border: #5c2b2b;
+  --ok-border: #2a4a47;
+  --ok-teal: #5cc8b8;
+  --ok-teal-bg: #17393a;
+  --home-tint-green: #173329;
+  --home-tint-green-border: #2a4a33;
+  --home-tint-blue: #16283a;
+  --home-tint-blue-border: #274a6b;
+  --home-tint-purple: #2b2140;
+  --home-tint-purple-border: #4a3670;
+  --home-tint-amber: #33270f;
+  --home-tint-amber-border: #5c4517;
+  --skeleton-a: #22394a;
+  --skeleton-b: #1a2b38;
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.35);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 12px 28px rgba(0, 0, 0, 0.5);
 }
 
 *,
@@ -84,11 +167,11 @@ h3,
 h4 {
   font-family: var(--font-head);
   line-height: 1.35;
-  color: var(--forest);
+  color: var(--heading);
 }
 
 a {
-  color: var(--teal-deep);
+  color: var(--teal-text);
   text-decoration: none;
 }
 a:hover {
@@ -99,7 +182,7 @@ a:hover {
 .ev-section-h2 {
   font-family: var(--font-head);
   font-size: 20px;
-  color: var(--forest);
+  color: var(--heading);
   margin: 0 0 12px;
 }
 
@@ -154,12 +237,12 @@ a:hover {
   font-family: var(--font-body);
   font-size: 15px;
   color: var(--ink);
-  background: #fff;
+  background: var(--card);
   border: 1px solid rgba(255, 255, 255, 0.4);
   border-radius: 10px;
 }
 .ev-hero-search input::placeholder {
-  color: #8a94a8;
+  color: var(--muted);
 }
 .ev-hero-search input:focus {
   border-color: var(--amber);
@@ -176,7 +259,7 @@ a:hover {
   height: 36px;
   border-radius: 50%;
   background: var(--amber);
-  color: var(--forest);
+  color: var(--heading);
   font-family: var(--font-head);
   font-size: 17px;
   font-weight: 800;
@@ -192,7 +275,7 @@ a:hover {
   height: 44px;
   border-radius: 12px;
   background: var(--teal-soft);
-  color: var(--teal-deep);
+  color: var(--teal-text);
   margin-bottom: 10px;
 }
 .ev-icon-tile-amber {
@@ -226,7 +309,7 @@ a:hover {
 }
 .ev-skeleton {
   border-radius: var(--radius-sm);
-  background: linear-gradient(90deg, #eae6db 25%, #f4f1e9 50%, #eae6db 75%);
+  background: linear-gradient(90deg, var(--skeleton-a) 25%, var(--skeleton-b) 50%, var(--skeleton-a) 75%);
   background-size: 200% 100%;
   animation: ev-shimmer 1.4s ease-in-out infinite;
 }
@@ -258,7 +341,7 @@ a:hover {
   transform: translateY(1px);
 }
 .ev-btn:focus-visible {
-  outline: 3px solid var(--teal-deep);
+  outline: 3px solid var(--teal-text);
   outline-offset: 2px;
 }
 .ev-btn:disabled {
@@ -284,16 +367,16 @@ a:hover {
 }
 .ev-btn-gold {
   background: var(--amber);
-  color: var(--forest);
+  color: var(--heading);
 }
 .ev-btn-gold:hover {
   background: #c99336;
   box-shadow: var(--shadow-sm);
 }
 .ev-btn-outline {
-  background: #fff;
-  border-color: var(--forest);
-  color: var(--forest);
+  background: var(--card);
+  border-color: var(--heading);
+  color: var(--heading);
 }
 .ev-btn-outline:hover {
   background: var(--teal-softer);
@@ -319,7 +402,7 @@ a:hover {
 }
 .ev-btn-ghost {
   background: transparent;
-  color: var(--forest);
+  color: var(--heading);
 }
 .ev-btn-ghost:hover {
   background: var(--teal-softer);
@@ -386,7 +469,7 @@ a:hover {
   font-size: 15px;
   line-height: 1.5;
   color: var(--ink);
-  background: #fff;
+  background: var(--card);
   border: 1px solid var(--line-strong);
   border-radius: 10px;
   transition: border-color 120ms ease, box-shadow 120ms ease;
@@ -394,13 +477,13 @@ a:hover {
 .ev-input:focus,
 .ev-select:focus,
 .ev-textarea:focus {
-  border-color: var(--teal-deep);
+  border-color: var(--teal-text);
   box-shadow: 0 0 0 3px rgba(18, 118, 110, 0.18);
   outline: none;
 }
 .ev-input::placeholder,
 .ev-textarea::placeholder {
-  color: #8a94a8;
+  color: var(--muted);
 }
 .ev-textarea {
   min-height: 110px;
@@ -410,7 +493,7 @@ a:hover {
   display: block;
   font-weight: 600;
   font-size: 14px;
-  color: var(--forest);
+  color: var(--heading);
   margin-bottom: 6px;
 }
 
@@ -425,7 +508,7 @@ a:hover {
   font-weight: 600;
   line-height: 1.5;
   background: var(--teal-soft);
-  color: var(--forest);
+  color: var(--heading);
   white-space: nowrap;
 }
 .ev-chip-gold {
@@ -437,7 +520,7 @@ a:hover {
   color: #fff;
 }
 .ev-chip-outline {
-  background: #fff;
+  background: var(--card);
   border: 1px solid var(--line-strong);
   color: var(--muted);
 }
@@ -452,25 +535,25 @@ a:hover {
 }
 .ev-alert-error {
   background: var(--error-bg);
-  border: 1px solid #f3c1c8;
-  color: #7a0013;
+  border: 1px solid var(--error-border);
+  color: var(--error-text);
 }
 .ev-alert-ok {
   background: var(--ok-teal-bg);
-  border: 1px solid #bfe3df;
-  color: var(--forest);
+  border: 1px solid var(--ok-border);
+  color: var(--heading);
 }
 .ev-alert-info {
   background: var(--teal-softer);
-  border: 1px solid #cfe7e4;
-  color: var(--forest);
+  border: 1px solid var(--ok-border);
+  color: var(--heading);
 }
 
 /* ---- Progress bar ---- */
 .ev-progress {
   height: 8px;
   border-radius: 999px;
-  background: #e9e7de;
+  background: var(--track);
   overflow: hidden;
 }
 .ev-progress > span {
@@ -486,7 +569,7 @@ a:hover {
 
 /* ---- Header nav link (light header: forest text) ---- */
 .ev-navlink {
-  color: var(--forest);
+  color: var(--heading);
   padding: 10px 8px;
   border-radius: 8px;
   font-size: 15px;
@@ -495,11 +578,11 @@ a:hover {
   white-space: nowrap;
 }
 .ev-navlink:hover {
-  background: #eaf3fb;
+  background: var(--hover);
   text-decoration: none;
 }
 .ev-navlink-active {
-  background: #eaf3fb;
+  background: var(--hover);
   box-shadow: inset 0 -3px 0 var(--teal);
 }
 
@@ -510,14 +593,14 @@ a:hover {
   position: sticky;
   top: 0;
   z-index: 50;
-  background: #fff;
-  color: var(--forest);
+  background: var(--card);
+  color: var(--heading);
   padding: 10px 16px;
   display: flex;
   flex-wrap: wrap;
   gap: 12px 16px;
   align-items: center;
-  border-bottom: 1px solid #e3e7ea;
+  border-bottom: 1px solid var(--line);
   box-shadow: 0 2px 8px rgba(13, 30, 41, 0.08);
 }
 .ev-header-nav {
@@ -536,17 +619,17 @@ a:hover {
   min-width: 44px;
   min-height: 44px;
   padding: 8px 12px;
-  border: 1px solid rgba(20, 43, 59, 0.4);
+  border: 1px solid var(--line-strong);
   border-radius: 10px;
   background: transparent;
-  color: var(--forest);
+  color: var(--heading);
   font-family: var(--font-body);
   font-size: 15px;
   font-weight: 600;
   cursor: pointer;
 }
 .ev-menu-btn:hover {
-  background: #eaf3fb;
+  background: var(--hover);
 }
 .ev-menu-btn:focus-visible {
   outline: 3px solid var(--amber);
@@ -580,7 +663,7 @@ a:hover {
     margin-left: 0;
     gap: 2px;
     padding-top: 4px;
-    border-top: 1px solid rgba(20, 43, 59, 0.12);
+    border-top: 1px solid var(--line);
   }
   .ev-header-nav-open {
     display: flex;
@@ -715,7 +798,7 @@ a:hover {
     text-decoration: none;
   }
   .ev-bottom-nav-item-active {
-    color: #d9a441;
+    color: var(--amber);
     font-weight: 700;
     box-shadow: inset 0 3px 0 #d9a441;
   }
@@ -794,7 +877,7 @@ a:hover {
 }
 .ev-class-tab:hover {
   text-decoration: none;
-  color: var(--forest);
+  color: var(--heading);
 }
 
 /* Quick Access tiles (class dashboard Home tab). */
@@ -810,13 +893,13 @@ a:hover {
   align-items: center;
   gap: 6px;
   padding: 14px 8px 12px;
-  background: #fff;
+  background: var(--card);
   border: 1px solid var(--line);
   border-radius: 12px;
   box-shadow: var(--shadow-sm);
   font-size: 13px;
   font-weight: 600;
-  color: var(--forest);
+  color: var(--heading);
   text-align: center;
   text-decoration: none;
 }
@@ -837,7 +920,7 @@ a:hover {
   font-style: italic;
   font-weight: 700;
   font-size: 20px;
-  color: #d9a441;
+  color: var(--amber);
   margin: 0 0 16px;
 }
 @media (max-width: 768px) {
@@ -860,7 +943,7 @@ a:hover {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
-  background: #fff;
+  background: var(--card);
   border: 1px solid var(--line);
   border-radius: 12px;
   box-shadow: var(--shadow-sm);
@@ -881,7 +964,7 @@ a:hover {
   margin-bottom: 24px;
 }
 .ev-app-tile {
-  background: #fff;
+  background: var(--card);
   border: 1px solid var(--line);
   border-radius: 12px;
   box-shadow: var(--shadow-sm);
@@ -925,7 +1008,7 @@ a:hover {
    medium rectangle, mobile 320×50. NO ad code, NO SDK, NO activation. */
 .ev-ad {
   position: relative;
-  border: 2px dashed #c9cfcb;
+  border: 2px dashed var(--line-strong);
   border-radius: 12px;
   background: linear-gradient(135deg, #fdf9ef 0%, #eff7f6 100%);
   padding: 14px;
@@ -949,7 +1032,7 @@ a:hover {
 }
 .ev-ad-icon {
   flex: none;
-  color: #8a6100;
+  color: var(--amber-deep);
 }
 .ev-ad-text {
   flex: 1;
@@ -958,12 +1041,12 @@ a:hover {
 .ev-ad-text strong {
   display: block;
   font-size: 16px;
-  color: #142b3b;
+  color: var(--heading);
 }
 .ev-ad-text span {
   display: block;
   font-size: 13px;
-  color: #68747b;
+  color: var(--muted);
 }
 .ev-ad-cta {
   flex: none;
@@ -1081,14 +1164,14 @@ a:hover {
 .ev-ad-bottom-banner .ev-ad-text span {
   font-size: 15px;
   font-weight: 700;
-  color: #142b3b;
+  color: var(--heading);
 }
 
 /* Coming Soon — Class 1–5 / Class 6–8 (owner briefs 21 Nov 13:14 + 13:20).
    Student-friendly honest empty state: soft class-tint card, dotted
    pattern, "what is coming" chips. Never shows fake books/counts. */
 .ev-coming-soon-hero {
-  border: 1px solid #e5e8e5;
+  border: 1px solid var(--line);
   border-radius: 16px;
   padding: 30px 22px 26px;
   text-align: center;
@@ -1103,20 +1186,20 @@ a:hover {
   margin-top: 16px;
 }
 .ev-coming-soon-chip {
-  background: #fff;
-  border: 1px solid #e5e8e5;
+  background: var(--card);
+  border: 1px solid var(--line);
   border-radius: 999px;
   padding: 6px 12px;
   font-size: 14px;
   font-weight: 600;
-  color: #142b3b;
+  color: var(--heading);
 }
 .ev-coming-soon-chip-soon {
-  color: #8a6100;
+  color: var(--amber-deep);
   font-weight: 700;
 }
 .ev-coming-soon-compact {
-  border: 1px solid #e5e8e5;
+  border: 1px solid var(--line);
   border-radius: 12px;
   padding: 18px;
   display: flex;
@@ -1201,9 +1284,9 @@ a:hover {
   min-height: 44px;
   padding: 10px 18px;
   border-radius: 999px;
-  border: 1px solid var(--forest);
-  background: #fff;
-  color: var(--forest);
+  border: 1px solid var(--heading);
+  background: var(--card);
+  color: var(--heading);
   font-family: var(--font-body);
   font-size: 15px;
   font-weight: 600;
@@ -1221,7 +1304,7 @@ a:hover {
   background: var(--forest-deep);
 }
 .ev-dash-tab:focus-visible {
-  outline: 3px solid var(--teal-deep);
+  outline: 3px solid var(--teal-text);
   outline-offset: 2px;
 }
 
@@ -1237,7 +1320,7 @@ a:hover {
   flex: 1 1 auto;
   min-width: 0;
   font-weight: 600;
-  color: var(--forest);
+  color: var(--heading);
 }
 .ev-dash-row-bar {
   flex: 2 1 100px;
@@ -1246,7 +1329,7 @@ a:hover {
 .ev-dash-row-pct {
   flex: none;
   font-weight: 700;
-  color: var(--forest);
+  color: var(--heading);
   font-variant-numeric: tabular-nums;
 }
 /* ≤560px: the bar drops to its own full-width line so long labels
@@ -1291,7 +1374,7 @@ a:hover {
   padding: 6px 12px 6px 6px;
   border: 1px solid var(--line);
   border-radius: 999px;
-  background: #fff;
+  background: var(--card);
   font-size: 13px;
   color: var(--muted);
   white-space: nowrap;
@@ -1302,7 +1385,7 @@ a:hover {
   width: 22px;
   height: 22px;
   border-radius: 50%;
-  background: #f2f4f2;
+  background: var(--num-bg);
   color: var(--muted);
   font-size: 12px;
   font-weight: 700;
@@ -1312,27 +1395,27 @@ a:hover {
   font-weight: 600;
 }
 .ev-cascade-step__sep {
-  color: #c6cbc6;
+  color: var(--muted);
   font-weight: 700;
   margin-left: 2px;
 }
 .ev-cascade-step--active {
-  border-color: var(--teal-deep);
+  border-color: var(--teal-text);
   background: var(--teal-soft);
-  color: var(--forest);
+  color: var(--heading);
 }
 .ev-cascade-step--active .ev-cascade-step__num {
   background: var(--teal-deep);
   color: #fff;
 }
 .ev-cascade-step--done {
-  border-color: var(--teal-deep);
+  border-color: var(--teal-text);
   background: var(--teal-deep);
   color: #fff;
 }
 .ev-cascade-step--done .ev-cascade-step__num {
-  background: #fff;
-  color: var(--teal-deep);
+  background: var(--card);
+  color: var(--teal-text);
 }
 .ev-cascade-step--done .ev-cascade-step__sep {
   color: rgba(255, 255, 255, 0.7);
@@ -1353,12 +1436,12 @@ a:hover {
   display: block;
   font-size: 13px;
   font-weight: 700;
-  color: var(--forest);
+  color: var(--heading);
   margin: 0 0 6px;
 }
 .ev-cascade-field .ev-select:disabled {
-  background: #f2f4f2;
-  color: #9aa3a7;
+  background: var(--num-bg);
+  color: var(--muted);
   cursor: not-allowed;
 }
 
@@ -1371,7 +1454,7 @@ a:hover {
   gap: 6px;
   padding: 8px 16px;
   border-radius: 999px;
-  background: #1d4ed8;
+  background: var(--link);
   color: #fff;
   font-size: 15px;
   font-weight: 700;
@@ -1379,7 +1462,7 @@ a:hover {
   white-space: nowrap;
 }
 .ev-hnav-home:hover {
-  background: #1e40af;
+  background: var(--link-deep);
   color: #fff;
   text-decoration: none;
 }
@@ -1398,7 +1481,7 @@ a:hover {
   border: 0;
   border-radius: 8px;
   background: transparent;
-  color: var(--forest);
+  color: var(--heading);
   font-family: var(--font-body);
   font-size: 15px;
   font-weight: 600;
@@ -1406,10 +1489,10 @@ a:hover {
   cursor: pointer;
 }
 .ev-hnav-drop-btn:hover {
-  background: #eaf3fb;
+  background: var(--hover);
 }
 .ev-hnav-drop-btn-open {
-  background: #eaf3fb;
+  background: var(--hover);
   box-shadow: inset 0 -3px 0 var(--teal);
 }
 .ev-hnav-panel {
@@ -1418,9 +1501,9 @@ a:hover {
   left: 0;
   min-width: 240px;
   padding: 6px;
-  border: 1px solid #e3e7ea;
+  border: 1px solid var(--line);
   border-radius: 12px;
-  background: #fff;
+  background: var(--card);
   box-shadow: 0 8px 24px rgba(13, 30, 41, 0.16);
   z-index: 60;
 }
@@ -1431,21 +1514,21 @@ a:hover {
   gap: 8px;
   padding: 10px 12px;
   border-radius: 8px;
-  color: var(--forest);
+  color: var(--heading);
   font-size: 15px;
   text-decoration: none;
   white-space: nowrap;
 }
 .ev-hnav-panel-link:hover {
-  background: #eaf3fb;
+  background: var(--hover);
   text-decoration: none;
 }
 .ev-hnav-soon {
   flex: none;
   padding: 2px 8px;
   border-radius: 999px;
-  background: #fdf3d7;
-  color: #8a6100;
+  background: var(--soon-bg);
+  color: var(--amber-deep);
   font-size: 12px;
   font-weight: 700;
   white-space: nowrap;
@@ -1469,44 +1552,44 @@ a:hover {
   border: 0;
   border-radius: 50%;
   background: transparent;
-  color: var(--forest);
+  color: var(--heading);
   text-decoration: none;
   cursor: pointer;
 }
 .ev-header-icon-btn:hover {
-  background: #eaf3fb;
+  background: var(--hover);
   text-decoration: none;
 }
 .ev-header-btn-login {
-  background: #1d4ed8;
-  border-color: #1d4ed8;
+  background: var(--link);
+  border-color: var(--link);
   color: #fff;
   text-decoration: none;
 }
 .ev-header-btn-login:hover {
-  background: #1e40af;
+  background: var(--link-deep);
   border-color: #1e40af;
   color: #fff;
   text-decoration: none;
 }
 .ev-header-btn-register {
-  background: #fff;
-  border-color: #1d4ed8;
-  color: #1d4ed8;
+  background: var(--card);
+  border-color: var(--link);
+  color: var(--link);
   text-decoration: none;
 }
 .ev-header-btn-register:hover {
-  background: #eaf3fb;
-  color: #1d4ed8;
+  background: var(--hover);
+  color: var(--link);
   text-decoration: none;
 }
 .ev-header-btn-outline {
-  background: #fff;
-  border-color: rgba(20, 43, 59, 0.4);
-  color: var(--forest);
+  background: var(--card);
+  border-color: var(--line-strong);
+  color: var(--heading);
 }
 .ev-header-btn-outline:hover {
-  background: #eaf3fb;
+  background: var(--hover);
 }
 .ev-header-note {
   position: absolute;
@@ -1515,11 +1598,11 @@ a:hover {
   z-index: 70;
   min-width: 200px;
   padding: 10px 12px;
-  border: 1px solid #e3e7ea;
+  border: 1px solid var(--line);
   border-radius: 10px;
-  background: #fff;
+  background: var(--card);
   box-shadow: 0 8px 24px rgba(13, 30, 41, 0.16);
-  color: var(--forest);
+  color: var(--heading);
   font-size: 14px;
   line-height: 1.5;
   white-space: normal;
@@ -1586,7 +1669,7 @@ a:hover {
   .ev-hnav-secondary {
     display: flex;
     flex-direction: column;
-    border-top: 1px solid rgba(20, 43, 59, 0.12);
+    border-top: 1px solid var(--line);
     margin-top: 6px;
     padding-top: 6px;
   }
@@ -1616,9 +1699,9 @@ a:hover {
     gap: 8px;
     margin: 4px 0 14px;
     padding: 10px 12px;
-    border: 1px solid #d7dee3;
+    border: 1px solid var(--line);
     border-radius: 12px;
-    background: #fff;
+    background: var(--card);
     box-shadow: 0 2px 6px rgba(13, 30, 41, 0.06);
   }
   .ev-home-msearch input {
@@ -1628,7 +1711,7 @@ a:hover {
     outline: none;
     font-family: var(--font-body);
     font-size: 15px;
-    color: var(--forest);
+    color: var(--heading);
     background: transparent;
   }
   .ev-home-msearch button {
@@ -1640,8 +1723,8 @@ a:hover {
     height: 36px;
     border: 0;
     border-radius: 8px;
-    background: #eaf3fb;
-    color: var(--forest);
+    background: var(--hover);
+    color: var(--heading);
     cursor: pointer;
   }
 }
@@ -1654,7 +1737,7 @@ a:hover {
   padding: 36px 32px 32px;
   margin-bottom: 22px;
   background: linear-gradient(120deg, #eaf3fb 0%, #fdf8ec 55%, #eaf6f3 100%);
-  border: 1px solid #e3e7ea;
+  border: 1px solid var(--line);
   box-shadow: 0 4px 12px rgba(13, 30, 41, 0.06);
 }
 .ev-home-hero::before,
@@ -1682,7 +1765,7 @@ a:hover {
   margin: 0 0 10px;
   font-size: 17px;
   font-weight: 600;
-  color: #3a444b;
+  color: var(--ink-soft);
 }
 .ev-home-hero-eyebrow span {
   border-bottom: 3px solid var(--amber);
@@ -1697,10 +1780,10 @@ a:hover {
   letter-spacing: -0.02em;
 }
 .ev-home-wordmark-edu {
-  color: #1d4ed8;
+  color: var(--link);
 }
 .ev-home-wordmark-velto {
-  color: #15803d;
+  color: var(--success);
 }
 .ev-home-wordmark-tag {
   display: inline-block;
@@ -1708,7 +1791,7 @@ a:hover {
   margin-left: 14px;
   padding: 6px 14px;
   border-radius: 999px;
-  background: #1d4ed8;
+  background: var(--link);
   color: #fff;
   font-size: 15px;
   font-weight: 700;
@@ -1718,7 +1801,7 @@ a:hover {
   margin: 0 0 12px;
   font-size: 19px;
   font-weight: 700;
-  color: var(--forest);
+  color: var(--heading);
 }
 .ev-home-hero-badge {
   display: inline-block;
@@ -1756,33 +1839,33 @@ a:hover {
   }
   .ev-home-slide-job {
     background: linear-gradient(135deg, #e8f5e9, #f1f8e9);
-    border: 1px solid #c8e6c9;
+    border: 1px solid var(--home-tint-green-border);
   }
   .ev-home-slide-admissions {
     background: linear-gradient(135deg, #e3f2fd, #e8eaf6);
-    border: 1px solid #bbdefb;
+    border: 1px solid var(--home-tint-blue-border);
   }
   .ev-home-slide-academic {
     background: linear-gradient(135deg, #f3e5f5, #ede7f6);
-    border: 1px solid #e1bee7;
+    border: 1px solid var(--home-tint-purple-border);
   }
   .ev-home-slide h2 {
     margin: 0 0 6px;
     font-size: 21px;
-    color: var(--forest);
+    color: var(--heading);
   }
   .ev-home-slide p {
     margin: 0 0 14px;
-    color: #3a444b;
+    color: var(--ink-soft);
     font-size: 15px;
   }
   .ev-home-slide-cta {
-    background: #1d4ed8;
-    border-color: #1d4ed8;
+    background: var(--link);
+    border-color: var(--link);
     color: #fff;
   }
   .ev-home-slide-cta:hover {
-    background: #1e40af;
+    background: var(--link-deep);
     color: #fff;
   }
   .ev-home-dots {
@@ -1797,11 +1880,11 @@ a:hover {
     padding: 0;
     border: 0;
     border-radius: 50%;
-    background: #c9d2d8;
+    background: var(--line-strong);
     cursor: pointer;
   }
   .ev-home-dot-active {
-    background: #1d4ed8;
+    background: var(--link);
     width: 22px;
     border-radius: 999px;
   }
@@ -1826,20 +1909,20 @@ a:hover {
   box-shadow: 0 4px 12px rgba(13, 30, 41, 0.08), 0 2px 4px rgba(13, 30, 41, 0.05);
 }
 .ev-home-card-job {
-  background: #e8f5e9;
-  border: 1px solid #c8e6c9;
+  background: var(--home-tint-green);
+  border: 1px solid var(--home-tint-green-border);
 }
 .ev-home-card-admissions {
-  background: #e3f2fd;
-  border: 1px solid #bbdefb;
+  background: var(--home-tint-blue);
+  border: 1px solid var(--home-tint-blue-border);
 }
 .ev-home-card-academic {
-  background: #f3e5f5;
-  border: 1px solid #e1bee7;
+  background: var(--home-tint-purple);
+  border: 1px solid var(--home-tint-purple-border);
 }
 .ev-home-card-skills {
-  background: #fff3e0;
-  border: 1px solid #ffe0b2;
+  background: var(--home-tint-amber);
+  border: 1px solid var(--home-tint-amber-border);
 }
 .ev-home-card-badge {
   position: absolute;
@@ -1884,11 +1967,11 @@ a:hover {
 .ev-home-card h2 {
   margin: 0 0 6px;
   font-size: 19px;
-  color: var(--forest);
+  color: var(--heading);
 }
 .ev-home-card p {
   margin: 0 0 14px;
-  color: #3a444b;
+  color: var(--ink-soft);
   font-size: 14px;
   line-height: 1.6;
   flex: 1;
@@ -1962,9 +2045,9 @@ a:hover {
   align-items: center;
   margin-bottom: 22px;
   padding: 14px;
-  border: 1px solid #e3e7ea;
+  border: 1px solid var(--line);
   border-radius: 14px;
-  background: #fff;
+  background: var(--card);
 }
 .ev-home-strip-item {
   flex: 1 1 auto;
@@ -1975,38 +2058,38 @@ a:hover {
   gap: 8px;
   padding: 8px 10px;
   border-radius: 10px;
-  color: var(--forest);
+  color: var(--heading);
   font-size: 14px;
   font-weight: 600;
   text-decoration: none;
   white-space: nowrap;
 }
 a.ev-home-strip-link:hover {
-  background: #eaf3fb;
+  background: var(--hover);
   text-decoration: none;
 }
 .ev-home-strip-link svg {
-  color: var(--teal-deep);
+  color: var(--teal-text);
   flex: none;
 }
 .ev-home-strip-soon .ev-home-strip-link {
-  color: #68747b;
+  color: var(--muted);
   cursor: default;
 }
 .ev-home-strip-soon .ev-home-strip-link svg {
-  color: #9aa5ab;
+  color: var(--muted);
 }
 .ev-home-strip-more {
   flex: none;
 }
 .ev-home-strip-more .ev-home-strip-link {
-  color: #1d4ed8;
+  color: var(--link);
 }
 .ev-home-soon-chip {
   padding: 2px 8px;
   border-radius: 999px;
-  background: #fdf3d7;
-  color: #8a6100;
+  background: var(--soon-bg);
+  color: var(--amber-deep);
   font-size: 11px;
   font-weight: 700;
   white-space: nowrap;
@@ -2028,9 +2111,9 @@ a.ev-home-strip-link:hover {
     gap: 10px;
   }
   .ev-home-quick-tile {
-    border: 1px solid #e3e7ea;
+    border: 1px solid var(--line);
     border-radius: 12px;
-    background: #fff;
+    background: var(--card);
     box-shadow: 0 2px 6px rgba(13, 30, 41, 0.05);
     min-width: 0;
   }
@@ -2040,7 +2123,7 @@ a.ev-home-strip-link:hover {
     align-items: center;
     gap: 6px;
     padding: 14px 6px 12px;
-    color: var(--forest);
+    color: var(--heading);
     font-size: 13px;
     font-weight: 600;
     text-align: center;
@@ -2050,13 +2133,13 @@ a.ev-home-strip-link:hover {
     text-decoration: none;
   }
   .ev-home-quick-link svg {
-    color: var(--teal-deep);
+    color: var(--teal-text);
   }
   .ev-home-quick-soon .ev-home-quick-link {
-    color: #68747b;
+    color: var(--muted);
   }
   .ev-home-quick-soon .ev-home-quick-link svg {
-    color: #9aa5ab;
+    color: var(--muted);
   }
 }
 
@@ -2068,9 +2151,9 @@ a.ev-home-strip-link:hover {
   margin-bottom: 22px;
 }
 .ev-home-panel {
-  border: 1px solid #e3e7ea;
+  border: 1px solid var(--line);
   border-radius: 14px;
-  background: #fff;
+  background: var(--card);
   padding: 18px;
   box-shadow: 0 2px 6px rgba(13, 30, 41, 0.05);
   /* Grid item: must be allowed to shrink below its content width, or
@@ -2088,7 +2171,7 @@ a.ev-home-strip-link:hover {
 .ev-home-panel-head h2 {
   margin: 0;
   font-size: 17px;
-  color: var(--forest);
+  color: var(--heading);
   display: inline-flex;
   align-items: center;
   gap: 6px;
@@ -2120,17 +2203,17 @@ a.ev-home-strip-link:hover {
 .ev-home-popular-tile {
   display: block;
   padding: 10px 6px;
-  border: 1px solid #e3e7ea;
+  border: 1px solid var(--line);
   border-radius: 10px;
-  background: #f8fafb;
-  color: var(--forest);
+  background: var(--card-subtle);
+  color: var(--heading);
   font-size: 14px;
   font-weight: 600;
   text-align: center;
   text-decoration: none;
 }
 .ev-home-popular-tile:hover {
-  background: #eaf3fb;
+  background: var(--hover);
   text-decoration: none;
 }
 .ev-home-progress-body {
@@ -2151,15 +2234,15 @@ a.ev-home-strip-link:hover {
   justify-content: space-between;
   gap: 10px;
   padding: 8px 0;
-  border-bottom: 1px solid #eef1f3;
+  border-bottom: 1px solid var(--line);
   font-size: 14px;
-  color: #3a444b;
+  color: var(--ink-soft);
 }
 .ev-home-progress-rows li:last-child {
   border-bottom: 0;
 }
 .ev-home-progress-rows strong {
-  color: var(--forest);
+  color: var(--heading);
   white-space: nowrap;
 }
 @media (max-width: 1023px) {
@@ -2260,7 +2343,7 @@ a.ev-home-strip-link:hover {
     text-decoration: none;
   }
   .ev-bottom-nav-link-active {
-    color: #d9a441;
+    color: var(--amber);
     font-weight: 700;
     box-shadow: inset 0 3px 0 #d9a441;
   }
@@ -2282,7 +2365,7 @@ a.ev-home-strip-link:hover {
   max-height: 70vh;
   overflow-y: auto;
   border-radius: 18px 18px 0 0;
-  background: #fff;
+  background: var(--card);
   padding: 18px 18px calc(20px + env(safe-area-inset-bottom, 0px));
   box-shadow: 0 -8px 32px rgba(13, 30, 41, 0.25);
 }
@@ -2293,11 +2376,49 @@ a.ev-home-strip-link:hover {
   gap: 8px;
   padding: 11px 10px;
   border-radius: 8px;
-  color: var(--forest);
+  color: var(--heading);
   font-size: 15px;
   text-decoration: none;
 }
 .ev-sheet-link:hover {
-  background: #eaf3fb;
+  background: var(--hover);
   text-decoration: none;
+}
+
+/* ---- Dark-mode overrides (22 Nov 2026) ----
+   Things a variable swap cannot express: light gradients, the dotted
+   Coming-Soon pattern, the dark spinner, the focus-ring colour, the
+   progress-bar fill (dark teal is too dim on a dark track), and the
+   header shadow. Everything else switches via the variables above. */
+html[data-theme="dark"] .ev-home-hero {
+  background: linear-gradient(120deg, #16283a 0%, #1c2a20 55%, #12292b 100%);
+}
+html[data-theme="dark"] .ev-home-slide-job {
+  background: linear-gradient(135deg, #173329, #1c2a20);
+}
+html[data-theme="dark"] .ev-home-slide-admissions {
+  background: linear-gradient(135deg, #16283a, #1a2333);
+}
+html[data-theme="dark"] .ev-home-slide-academic {
+  background: linear-gradient(135deg, #2b2140, #241d38);
+}
+html[data-theme="dark"] .ev-ad {
+  background: linear-gradient(135deg, #1c2a20, #12292b);
+}
+html[data-theme="dark"] .ev-coming-soon-hero,
+html[data-theme="dark"] .ev-coming-soon-compact {
+  background-image: radial-gradient(rgba(255, 255, 255, 0.08) 1.2px, transparent 1.2px);
+}
+html[data-theme="dark"] .ev-spinner-dark {
+  border-color: rgba(255, 255, 255, 0.25);
+  border-top-color: var(--heading);
+}
+html[data-theme="dark"] .ev-progress > span {
+  background: var(--teal);
+}
+html[data-theme="dark"] :focus-visible {
+  outline-color: var(--amber);
+}
+html[data-theme="dark"] .ev-header {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
 }
