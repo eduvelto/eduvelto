@@ -27,7 +27,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { PageShell, EmptyState } from '../components/PageShell';
 import { AlertBox, Card, Chip, LinkButton, ProgressBar, Reveal, SkeletonCards } from '../components/ui';
-import AdPlaceholder from '../components/AdPlaceholder';
+import AdSlot from '../components/AdSlot';
 import { ComingSoonHero } from '../components/ComingSoon';
 import { useAuth } from '../lib/auth';
 import { useLanguage, T, TabT } from '../i18n/LanguageContext';
@@ -443,8 +443,9 @@ export default function ClassDashboardPage() {
         </Link>
       </p>
 
-      {/* Mobile Ad — top of the dashboard on small screens only. */}
-      <AdPlaceholder variant="mobile" />
+      {/* Mobile Ad — top of the dashboard on small screens only
+          (ads placement plan 22 Nov 2026). */}
+      <AdSlot placement="mobile" />
 
       {/* Class header band — colour identity + real counts. */}
       <section
@@ -595,8 +596,10 @@ export default function ClassDashboardPage() {
                     ))}
                   </div>
 
-                  {/* In-App Ad — mobile only, Home tab. */}
-                  <AdPlaceholder variant="in-app" />
+                  {/* (No in-app ad here — ads placement plan 22 Nov 2026:
+                      one dashboard page carries at most mobile-top +
+                      sidebar + one in-content slot; a fourth slot would
+                      crowd the Home tab.) */}
 
                   {/* Books preview */}
                   <Reveal>
@@ -691,7 +694,7 @@ export default function ClassDashboardPage() {
             </>
           ) : null}
         </div>
-        <AdPlaceholder variant="side" />
+        <AdSlot placement="sidebar" />
       </div>
     </PageShell>
   );

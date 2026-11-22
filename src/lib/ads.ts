@@ -23,7 +23,14 @@
 //   "this browser only" until then. The bottom banner is NEVER a
 //   toggle: it is mandatory (owner brief 20 Nov 21:52) and
 //   adsEnabled('bottom-banner') below ignores any toggle value.
-//
+// - PAGE POLICY lives in ./adsConfig.ts (owner brief 22 Nov 10:43):
+//   which page gets which banner (incl. the exam SMALL banner,
+//   owner 22 Nov 10:45) and which in-page slots each page type may
+//   carry. This file only holds the AdSense integration (IDs, the
+//   <ins> unit, toggles) — it does not decide page policy.
+//   isBottomBannerAllowed() was removed for that reason: App.tsx now
+//   asks adsConfig.getBannerPlacementForPath() instead.
+
 // SUPERSESSION (owner brief 20 Nov 21:52, MANDATORY — persistent bottom
 // banner): the bottom banner is now required on ALL eligible pages,
 // including lessons, quizzes, exams and the AI Teacher. This SUPERSEDES
@@ -34,11 +41,15 @@
 // essential controls. When no ad is available the slot collapses to zero
 // height — no fake ads, no empty placeholder boxes.
 
-export type AdPlacement = 'bottom-banner' | 'in-feed' | 'in-feed-2';
+export type AdPlacement = 'bottom-banner' | 'bottom-banner-small' | 'top-banner' | 'sidebar' | 'in-content' | 'in-feed' | 'in-feed-2' | 'mobile';
 
 // Placement layout (owner brief 20 Nov 22:06): 1 persistent bottom banner
 // (always) + 2 in-feed slots in the middle of list pages, revealed on
 // scroll — the second in-feed slot sits lower down the list than the first.
+// Extended 22 Nov 2026 (ads placement plan): top banner (home), sidebar
+// + mobile + in-content (class dashboard), in-content (directory), and
+// the exam small banner (bottom-banner-small, shares the bottom banner's
+// unit — see AD_SLOT_IDS below).
 
 export interface AdPlacementDef {
   id: AdPlacement;
@@ -59,6 +70,38 @@ export const AD_PLACEMENTS: readonly AdPlacementDef[] = [
     format: 'banner',
   },
   {
+    id: 'bottom-banner-small',
+    labelBn: 'পরীক্ষার ছোট ব্যানার (সর্বোচ্চ ৫০px)',
+    labelEn: 'Exam small banner (max 50px)',
+    whereBn: 'শুধু পরীক্ষা ও ফলাফল পাতায় — মালিকের নির্দেশ ২২ নভেম্বর ২০২৬, ১০:৪৫ ("akdom cuto"); নিচের ব্যানারের unit-ই ব্যবহার করে',
+    whereEn: 'Exam and result pages only — owner rule 22 Nov 2026, 10:45 ("akdom cuto"); shares the bottom banner unit',
+    format: 'banner',
+  },
+  {
+    id: 'top-banner',
+    labelBn: 'উপরের ব্যানার',
+    labelEn: 'Top banner',
+    whereBn: 'হোম পাতায় হিরোর নিচে — ৭২৮×৯০ (মোবাইলে ছোট responsive)',
+    whereEn: 'Home page, below the hero — 728×90 (smaller responsive on mobile)',
+    format: 'banner',
+  },
+  {
+    id: 'sidebar',
+    labelBn: 'সাইডবার',
+    labelEn: 'Sidebar',
+    whereBn: 'ক্লাস ড্যাশবোর্ডে — শুধু ডেস্কটপে (≥১২৮০px), ৩০০×২৫০',
+    whereEn: 'Class dashboard — desktop only (≥1280px), 300×250',
+    format: 'in-feed',
+  },
+  {
+    id: 'in-content',
+    labelBn: 'কনটেন্টের ভেতরের বিজ্ঞাপন',
+    labelEn: 'In-content slot',
+    whereBn: 'তালিকার ১০ম আইটেমের পর (ক্লাস ড্যাশবোর্ডের Books ট্যাব, ডিরেক্টরি) — ৩০০×২৫০',
+    whereEn: 'After the 10th list item (class dashboard Books tab, directory) — 300×250',
+    format: 'in-feed',
+  },
+  {
     id: 'in-feed',
     labelBn: 'তালিকার ভেতরের বিজ্ঞাপন',
     labelEn: 'In-feed slot',
@@ -72,6 +115,14 @@ export const AD_PLACEMENTS: readonly AdPlacementDef[] = [
     labelEn: 'Second in-feed slot',
     whereBn: 'হোম ও লাইব্রেরি তালিকার নিচের দিকে — স্ক্রল করলে দেখা যায়; পাঠ, কুইজ, পরীক্ষার ভেতরে নয়',
     whereEn: 'Lower down the home and library lists — revealed on scroll; never inside lessons, quizzes or exams',
+    format: 'in-feed',
+  },
+  {
+    id: 'mobile',
+    labelBn: 'মোবাইল ব্যানার',
+    labelEn: 'Mobile banner',
+    whereBn: 'ক্লাস ড্যাশবোর্ডের উপরে — শুধু মোবাইলে (≤৭৬৮px), ৩২০×৫০',
+    whereEn: 'Top of the class dashboard — mobile only (≤768px), 320×50',
     format: 'in-feed',
   },
 ];
@@ -97,12 +148,27 @@ function readEnv(name: string): string {
 export const ADSENSE_CLIENT_ID: string = readEnv('VITE_ADSENSE_CLIENT_ID');
 
 /** AdSense slot IDs, one per placement. Set via build-time variables after
- *  AdSense approval — never invent one. Empty until approved. */
+ *  AdSense approval — never invent one. Empty until approved.
+ *  TODO-AD-UNIT: 'bottom-banner-small' SHARES the bottom banner's unit
+ *  (same env var on purpose — the exam banner is the same unit rendered
+ *  smaller, not a second unit). Every other new placement has its own
+ *  env var, all empty until the owner creates the units. */
 export const AD_SLOT_IDS: Record<AdPlacement, string> = {
   'bottom-banner': readEnv('VITE_ADSENSE_SLOT_BOTTOM_BANNER'),
+  'bottom-banner-small': readEnv('VITE_ADSENSE_SLOT_BOTTOM_BANNER'),
+  'top-banner': readEnv('VITE_ADSENSE_SLOT_TOP_BANNER'),
+  sidebar: readEnv('VITE_ADSENSE_SLOT_SIDEBAR'),
+  'in-content': readEnv('VITE_ADSENSE_SLOT_IN_CONTENT'),
   'in-feed': readEnv('VITE_ADSENSE_SLOT_IN_FEED'),
   'in-feed-2': readEnv('VITE_ADSENSE_SLOT_IN_FEED_2'),
+  mobile: readEnv('VITE_ADSENSE_SLOT_MOBILE'),
 };
+
+/** True for the two layout-level banner placements (full-size + exam-small).
+ *  Both are mandatory with NO toggle — see getPlacementEnabled() below. */
+export function isBannerPlacement(placement: AdPlacement): boolean {
+  return placement === 'bottom-banner' || placement === 'bottom-banner-small';
+}
 
 /** Non-personalised ads only, ALWAYS (child safety). Never set to true. */
 export const PERSONALISED_ADS = false;
@@ -131,14 +197,17 @@ export const ADS_CHILD_SAFETY = {
  */
 export const BOTTOM_BANNER_RESERVE_PX = 96;
 
-/** Pages the persistent bottom banner appears on (owner brief 20 Nov 21:52). */
+/** Pages the persistent bottom banner appears on (owner brief 20 Nov 21:52).
+ *  'Exams' means the SMALL banner (max 50px — owner rule 22 Nov 2026,
+ *  10:45). Login/register + admin pages are NOT in this list: the banner
+ *  never appears there (enforced by adsConfig.getBannerPlacementForPath()). */
 export const BOTTOM_BANNER_ELIGIBLE_PAGES: readonly string[] = [
   'Home',
   'Library',
   'Lessons',
   'Books',
   'Quizzes',
-  'Exams',
+  'Exams (ছোট ব্যানার — সর্বোচ্চ ৫০px)',
   'AI Teacher',
   'Profiles',
   'Directory',
@@ -146,18 +215,10 @@ export const BOTTOM_BANNER_ELIGIBLE_PAGES: readonly string[] = [
   'Routine',
 ];
 
-/**
- * Whether the bottom banner may appear on this route. Since the owner
- * brief of 20 Nov 21:52 the answer is ALWAYS true: the persistent banner
- * is required on all eligible pages, including lessons, quizzes, exams
- * and the AI Teacher. The old route exclusion list was retired by that
- * brief (kept here as a function so callers keep one allowlist check).
- * The only screen without the banner is the suspended-account screen,
- * which replaces the whole app (App.tsx) and never reaches the banner.
- */
-export function isBottomBannerAllowed(_pathname: string): boolean {
-  return true;
-}
+// NOTE (22 Nov 2026): isBottomBannerAllowed() was REMOVED — page policy
+// (which banner, if any, on which route — incl. the exam small banner
+// and the login/admin exclusions) now lives in ./adsConfig.ts
+// (getBannerPlacementForPath). App.tsx asks adsConfig, not this file.
 
 const PLACEMENT_TOGGLES_KEY = 'eduvelto-ads-placements-v1';
 
@@ -177,17 +238,19 @@ function readToggles(): PlacementToggles {
 }
 
 /** Admin toggle for a placement. Default ON: a placement is ready the moment its IDs are configured (it still renders nothing until then — see adsEnabled).
- *  The bottom banner has NO toggle (owner brief 20 Nov 21:52 — mandatory):
+ *  The bottom banner (full-size AND exam-small) has NO toggle (owner brief 20 Nov 21:52 — mandatory):
  *  it is always enabled, and setPlacementEnabled() ignores it. */
 export function getPlacementEnabled(placement: AdPlacement): boolean {
-  if (placement === 'bottom-banner') return true;
+  if (isBannerPlacement(placement)) return true;
   return readToggles()[placement] ?? true;
 }
 
 export function setPlacementEnabled(placement: AdPlacement, enabled: boolean): void {
   // The mandatory bottom banner cannot be turned off — not even by an
   // admin tap (review 20 Nov 2026, ads B1: the one-click off-switch).
-  if (placement === 'bottom-banner') return;
+  // This covers the exam small banner too: it is the same mandatory
+  // banner, rendered smaller.
+  if (isBannerPlacement(placement)) return;
   if (typeof localStorage === 'undefined') return;
   const toggles = readToggles();
   toggles[placement] = enabled;
@@ -206,15 +269,18 @@ export type AdPlacementStatus = 'not-configured' | 'ready' | 'active';
 
 export function placementStatus(placement: AdPlacement): AdPlacementStatus {
   if (!isPlacementConfigured(placement)) return 'not-configured';
-  // The bottom banner is never "ready" (off-but-configured): once its
+  // A banner placement is never "ready" (off-but-configured): once its
   // IDs exist it is live — there is no off state for it.
-  if (placement === 'bottom-banner') return 'active';
+  if (isBannerPlacement(placement)) return 'active';
   return getPlacementEnabled(placement) ? 'active' : 'ready';
 }
 
 /** True only when the placement has real AdSense IDs AND its toggle is on.
- *  The bottom banner ignores the toggle entirely: configured = live. */
+ *  A banner placement ignores the toggle entirely: configured = live.
+ *  NOTE: this is the "configured" gate only — the master activation
+ *  switch lives in ./adsConfig.ts (adsActive). AdSlot and the app shell
+ *  must use adsActive(), not this function. */
 export function adsEnabled(placement: AdPlacement): boolean {
-  if (placement === 'bottom-banner') return isPlacementConfigured(placement);
+  if (isBannerPlacement(placement)) return isPlacementConfigured(placement);
   return isPlacementConfigured(placement) && getPlacementEnabled(placement);
 }

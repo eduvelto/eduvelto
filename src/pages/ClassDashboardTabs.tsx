@@ -17,7 +17,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Button, Card, Chip, LinkButton, ProgressBar, SkeletonCards } from '../components/ui';
 import { EmptyState } from '../components/PageShell';
-import AdPlaceholder from '../components/AdPlaceholder';
+import AdSlot from '../components/AdSlot';
 import { ComingSoonCompact } from '../components/ComingSoon';
 import type { Book } from '../lib/content';
 import { bookTitleOf, type Quiz, type QuizAttempt } from '../lib/exams';
@@ -141,7 +141,7 @@ export function BooksTab({ data }: { data: ClassTabData }) {
         {pageBooks.map((b, i) => (
           <div key={b.id} style={{ display: 'contents' }}>
             <BookCard book={b} />
-            {safePage === 1 && i === 9 ? <AdPlaceholder variant="in-content" /> : null}
+            {safePage === 1 && i === 9 ? <AdSlot placement="in-content" /> : null}
           </div>
         ))}
       </div>

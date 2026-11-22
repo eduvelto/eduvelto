@@ -2,7 +2,12 @@ import { Suspense, lazy } from 'react';
 import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
 import { strings } from './i18n/strings';
 import { useAuth } from './lib/auth';
-import { isBottomBannerAllowed, adsEnabled, BOTTOM_BANNER_RESERVE_PX } from './lib/ads';
+import {
+  adsActive,
+  getBannerPlacementForPath,
+  getBannerReservePx,
+  isPreviewHost,
+} from './lib/adsConfig';
 import AdSlot from './components/AdSlot';
 import BottomNav from './components/BottomNav';
 import HeaderNav from './components/HeaderNav';
@@ -137,16 +142,27 @@ export default function App() {
   const { t } = useLanguage();
   const { profile, suspended, signOut } = useAuth();
   const location = useLocation();
-  // Persistent bottom banner (owner brief 20 Nov 21:52): fixed to the
-  // viewport bottom, outside the router outlet, on all eligible pages
-  // (including lessons, quizzes, exams, AI Teacher). It renders nothing
-  // until AdSense is configured, so the banner is live only when
-  // adsEnabled('bottom-banner') is true. While live, the page reserves
-  // the banner's height (+ safe-area inset) as bottom padding, so the
-  // fixed banner never covers content, buttons or essential controls.
-  // When ads are not configured there is no reservation and no gap.
-  const showBottomBanner = isBottomBannerAllowed(location.pathname);
-  const bannerLive = showBottomBanner && adsEnabled('bottom-banner');
+  // Persistent bottom banner (ads placement plan 22 Nov 2026 — see
+  // team/ads-placement-plan-2026-11-22.md and lib/adsConfig.ts).
+  // getBannerPlacementForPath() decides the variant per route:
+  // - null: NO banner at all (login/register + admin pages).
+  // - 'bottom-banner-small': exam pages ONLY — max 50px high, 56px
+  //   reserved (owner rule 22 Nov 2026 10:45, "akdom cuto").
+  // - 'bottom-banner': every other page (mandatory, no off-switch).
+  // The banner renders nothing until AdSense is configured AND the
+  // master switch is on (adsActive). While live — or while its labelled
+  // preview placeholder shows on a preview host — the page reserves the
+  // banner's height (+ safe-area inset) as bottom padding, so the fixed
+  // banner never covers content, buttons or essential controls. When
+  // ads are not configured there is no reservation and no gap.
+  const bannerPlacement = getBannerPlacementForPath(location.pathname);
+  const bannerLive = bannerPlacement !== null && adsActive(bannerPlacement);
+  const bannerReservePx =
+    bannerPlacement !== null ? getBannerReservePx(bannerPlacement) : 0;
+  // The preview placeholder (labelled, preview host only) also needs
+  // its reserved space, or it would cover content in the preview.
+  const bannerVisible =
+    bannerPlacement !== null && (bannerLive || isPreviewHost());
   // Admin + CEO panels render their own shell (sidebar/top bar/bottom
   // nav) — the public header, footer and BottomNav are hidden there.
   const isAdminShell = location.pathname.startsWith('/admin') || location.pathname.startsWith('/ceo');
@@ -154,8 +170,8 @@ export default function App() {
     <div
       className="ev-app-shell"
       style={
-        bannerLive
-          ? ({ '--ev-banner': `${BOTTOM_BANNER_RESERVE_PX}px` } as React.CSSProperties)
+        bannerVisible
+          ? ({ '--ev-banner': `${bannerReservePx}px` } as React.CSSProperties)
           : undefined
       }
     >
@@ -322,9 +338,9 @@ export default function App() {
             হোম / আমার কোর্স / প্রগ্রেস / বেশি কিছু / মেনু, ≤768px. Sits
             above the bottom ad banner when one is live. Hidden on /admin* and /ceo* routes — the Admin Panel and CEO Panel render their own bottom nav. */}
         {isAdminShell ? null : (
-          <BottomNav bottomOffsetPx={bannerLive ? BOTTOM_BANNER_RESERVE_PX : 0} />
+          <BottomNav bottomOffsetPx={bannerVisible ? bannerReservePx : 0} />
         )}
-        {showBottomBanner ? <AdSlot placement="bottom-banner" /> : null}
+        {bannerPlacement ? <AdSlot placement={bannerPlacement} /> : null}
         </>
       )}
     </div>
