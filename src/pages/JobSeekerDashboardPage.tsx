@@ -38,6 +38,12 @@
 // section below. Step 13 WIRED the wrong-answer notebook +
 // re-practice flow (/jobs/wrong-answers); favourites is still
 // a placeholder (its own step — it needs a storage decision).
+// Step 14 WIRED the P5 circulars + calendar + notifications
+// cards below: circulars from the published collection,
+// the calendar from verified circular dates + published
+// mocks, notifications derived in-app (no collection —
+// Spark free has no Cloud Functions and the rules margin
+// fits one minimal block only).
 
 import { useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
@@ -76,6 +82,23 @@ import {
   verifyPracticeBundle,
 } from '../lib/jobDashboardData';
 import { revisionQueue, topicHealth, weeklyPlan } from '../lib/jobPlanner';
+import {
+  circularDeadlineLine,
+  formatDhakaDate,
+  sortCirculars,
+  toBanglaDigits,
+  type JobCircular,
+} from '../lib/jobCirculars';
+import { listPublishedCirculars } from '../lib/jobCircularsData';
+import { buildCalendarEvents, daysUntilEvent, nextConfirmedEvent } from '../lib/jobCalendar';
+import {
+  deriveJobNotifications,
+  EMPTY_NOTIFICATION_LOCAL_STATE,
+  isNotificationRead,
+  parseNotificationLocalState,
+  unreadNotificationCount,
+  visibleNotifications,
+} from '../lib/jobNotifications';
 
 function formatDateBn(millis: number | null): string {
   if (millis === null) return '—';
@@ -86,7 +109,7 @@ function formatDateBn(millis: number | null): string {
 
 export default function JobSeekerDashboardPage() {
   const { user, profile, loading } = useAuth();
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
   const { mode } = useJobMode();
   // Re-open the first-time mode-choice screen on demand (Step 2 §1.8).
   const [showOnboarding, setShowOnboarding] = useState(false);
@@ -111,6 +134,10 @@ export default function JobSeekerDashboardPage() {
   // catalog (null = not checked yet; 'unavailable' = the set is
   // no longer published, so only the result link shows).
   const [continueRetry, setContinueRetry] = useState<{ to: string } | 'unavailable' | null>(null);
+  // Step 14: published circulars (public read, newest first
+  // after the client sort) — shared by the P5 circulars,
+  // calendar and notifications cards (one query, 15 docs).
+  const [circulars, setCirculars] = useState<JobCircular[] | null>(null);
 
   useEffect(() => {
     let alive = true;
@@ -125,6 +152,15 @@ export default function JobSeekerDashboardPage() {
       })
       .catch(() => {
         if (alive) setMocksLoaded(true);
+      });
+    // Step 14: published circulars — public, so this runs
+    // whether or not the visitor is signed in.
+    listPublishedCirculars({ pageSize: 15 })
+      .then((page) => {
+        if (alive) setCirculars(page.items);
+      })
+      .catch(() => {
+        if (alive) setCirculars([]);
       });
     if (user) {
       (async () => {
@@ -211,6 +247,64 @@ export default function JobSeekerDashboardPage() {
     [weakTopics, publishedByExam, profile?.targetExam],
   );
   const latestAttempt = attempts && attempts.length > 0 ? attempts[0] : null;
+  // ---- Step 14 — P5 derived values (pure, from the loaded
+  // circulars + mocks + attempts; no extra reads). ----
+  const examSlugs = useMemo(() => {
+    const slugs = new Set<string>();
+    if (profile?.targetExam) slugs.add(profile.targetExam);
+    for (const s of profile?.enrolledCategories ?? []) slugs.add(s);
+    return [...slugs];
+  }, [profile?.targetExam, profile?.enrolledCategories]);
+  const topCirculars = useMemo(
+    () => (circulars ? sortCirculars(circulars).slice(0, 3) : null),
+    [circulars],
+  );
+  const calendarEvents = useMemo(
+    () =>
+      circulars
+        ? buildCalendarEvents({
+            circulars,
+            mocks: [daily, weekly].filter((m): m is JobMockWithId => m !== null),
+          })
+        : [],
+    [circulars, daily, weekly],
+  );
+  const nextEvent = useMemo(
+    () => (circulars ? nextConfirmedEvent(calendarEvents, nowMs) : null),
+    [circulars, calendarEvents, nowMs],
+  );
+  const dashboardNotifications = useMemo(
+    () =>
+      circulars && attempts
+        ? deriveJobNotifications({
+            circulars,
+            todayDailyMock: daily,
+            thisWeekWeeklyMock: weekly,
+            attempts,
+            examSlugs,
+          })
+        : [],
+    [circulars, attempts, daily, weekly, examSlugs],
+  );
+  const notificationLocalState = useMemo(() => {
+    if (!user) return EMPTY_NOTIFICATION_LOCAL_STATE;
+    try {
+      return parseNotificationLocalState(localStorage.getItem(`eduvelto:job-notifications:${user.uid}`));
+    } catch {
+      return EMPTY_NOTIFICATION_LOCAL_STATE;
+    }
+  }, [user, dashboardNotifications]);
+  const unreadNotifications = useMemo(
+    () => unreadNotificationCount(dashboardNotifications, notificationLocalState),
+    [dashboardNotifications, notificationLocalState],
+  );
+  const topUnreadNotifications = useMemo(
+    () =>
+      visibleNotifications(dashboardNotifications, notificationLocalState)
+        .filter((i) => !isNotificationRead(notificationLocalState, i.id))
+        .slice(0, 3),
+    [dashboardNotifications, notificationLocalState],
+  );
   // Step 12 — the planner cards (P4) are wired to the real
   // planner now: the revision queue + the 7-day week, derived
   // from the SAME loaded attempts + published bundles (no
@@ -1259,71 +1353,147 @@ export default function JobSeekerDashboardPage() {
 
       {/* ============ P5 — আসন্ন পরীক্ষা ============ */}
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: 12, marginBottom: 20 }}>
-        {/* Circulars (design #15) — Step 14 owns the collection.
-            Until then, the target exam's official site is the
-            honest place for the latest circular. */}
+        {/* Circulars (design #15) — Step 14: the latest 3
+            published circulars (verified first, then newest).
+            No circular is ever shown without its official
+            source; when none is published, the honest empty
+            state + the target exam's official site stay. */}
         <Reveal delayMs={0}>
           <Card>
             <div style={{ fontWeight: 700, color: 'var(--heading)', fontSize: 17 }}>
               {t({ bn: 'সার্কুলার', en: 'Circulars' })}
             </div>
-            <p style={{ margin: '8px 0 10px', color: 'var(--muted)', fontSize: 14, lineHeight: 1.7 }}>
-              {t({
-                bn: 'সার্কুলার সংরক্ষণ Step 14-এ আসছে — এখনো কোনো বিজ্ঞপ্তি সংরক্ষিত হয়নি।',
-                en: 'Saving circulars is coming in Step 14 — no circular is saved yet.',
-              })}
-            </p>
-            {targetExamDef?.officialUrl ? (
-              <p style={{ margin: 0 }}>
-                <a href={targetExamDef.officialUrl} target="_blank" rel="noreferrer" style={{ fontWeight: 600, fontSize: 14 }}>
-                  {t({ bn: targetExamDef.officialLinkBn ?? 'সর্বশেষ বিজ্ঞপ্তি দেখুন →', en: targetExamDef.officialLinkEn ?? 'See the latest circular →' })}
-                </a>
-              </p>
+            {topCirculars === null ? (
+              <Skeleton height={72} />
+            ) : topCirculars.length === 0 ? (
+              <>
+                <p style={{ margin: '8px 0 10px', color: 'var(--muted)', fontSize: 14, lineHeight: 1.7 }}>
+                  {t({
+                    bn: 'এখনো কোনো বিজ্ঞপ্তি সংরক্ষিত হয়নি — অফিসিয়াল বিজ্ঞপ্তি এলে এখানে আসবে।',
+                    en: 'No circular is saved yet — when an official circular arrives, it will appear here.',
+                  })}
+                </p>
+                {targetExamDef?.officialUrl ? (
+                  <p style={{ margin: 0 }}>
+                    <a href={targetExamDef.officialUrl} target="_blank" rel="noreferrer" style={{ fontWeight: 600, fontSize: 14 }}>
+                      {t({ bn: targetExamDef.officialLinkBn ?? 'সর্বশেষ বিজ্ঞপ্তি দেখুন →', en: targetExamDef.officialLinkEn ?? 'See the latest circular →' })}
+                    </a>
+                  </p>
+                ) : (
+                  <p style={{ margin: 0, color: 'var(--muted)', fontSize: 14, lineHeight: 1.7 }}>
+                    {t({
+                      bn: 'লক্ষ্য পরীক্ষা বেছে নিলে তার সর্বশেষ বিজ্ঞপ্তির লিংক এখানে দেখাবে।',
+                      en: 'Pick a target exam and its latest circular link will show here.',
+                    })}
+                  </p>
+                )}
+              </>
             ) : (
-              <p style={{ margin: 0, color: 'var(--muted)', fontSize: 14, lineHeight: 1.7 }}>
-                {t({
-                  bn: 'লক্ষ্য পরীক্ষা বেছে নিলে তার সর্বশেষ বিজ্ঞপ্তির লিংক এখানে দেখাবে।',
-                  en: 'Pick a target exam and its latest circular link will show here.',
-                })}
-              </p>
+              <>
+                <div style={{ display: 'grid', gap: 8, marginTop: 8 }}>
+                  {topCirculars.map((c) => (
+                    <div key={c.docId} style={{ fontSize: 14, lineHeight: 1.6 }}>
+                      <Link to={`/jobs/circulars/${c.docId}`} style={{ fontWeight: 700 }}>
+                        {t({ bn: c.postTitleBn, en: c.postTitleEn })}
+                      </Link>
+                      <div style={{ color: 'var(--muted)', fontSize: 13 }}>
+                        {t({ bn: circularDeadlineLine(c, nowMs).bn, en: circularDeadlineLine(c, nowMs).en })}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+                <p style={{ margin: '10px 0 0' }}>
+                  <LinkButton to="/jobs/circulars" variant="outline">
+                    {t({ bn: 'সব বিজ্ঞপ্তি দেখুন →', en: 'See all circulars →' })}
+                  </LinkButton>
+                </p>
+              </>
             )}
           </Card>
         </Reveal>
 
-        {/* Calendar (design #16) — Step 14 owns it. No date is
-            ever shown as confirmed until a circular verifies it. */}
+        {/* Calendar (design #16) — Step 14: the next CONFIRMED
+            date from verified circulars + published mocks.
+            No date is ever shown as confirmed until a circular
+            verifies it. */}
         <Reveal delayMs={80}>
           <Card>
             <div style={{ fontWeight: 700, color: 'var(--heading)', fontSize: 17 }}>
               {t({ bn: 'পরীক্ষার ক্যালেন্ডার', en: 'Exam calendar' })}
             </div>
-            <p style={{ margin: '8px 0 10px', color: 'var(--muted)', fontSize: 14, lineHeight: 1.7 }}>
-              {t({
-                bn: 'আবেদনের শেষ তারিখ ও পরীক্ষার তারিখের ক্যালেন্ডার Step 14-এ আসছে — কোনো তারিখ অনুমান করে দেখানো হয় না।',
-                en: 'The calendar of application deadlines and exam dates is coming in Step 14 — no date is ever shown as a guess.',
-              })}
-            </p>
-            <Chip tone="gold">{t({ bn: 'শীঘ্রই আসছে', en: 'Coming soon' })}</Chip>
+            {circulars === null ? (
+              <Skeleton height={72} />
+            ) : nextEvent === null ? (
+              <p style={{ margin: '8px 0 10px', color: 'var(--muted)', fontSize: 14, lineHeight: 1.7 }}>
+                {t({
+                  bn: 'এখনো কোনো নিশ্চিত তারিখ নেই — সরকারি বিজ্ঞপ্তি প্রকাশিত হলে এখানে আসবে।',
+                  en: 'No confirmed date yet — when an official circular is published, it will appear here.',
+                })}
+              </p>
+            ) : (
+              <>
+                <p style={{ margin: '8px 0 4px', fontSize: 14, lineHeight: 1.6 }}>
+                  <Link to={nextEvent.link} style={{ fontWeight: 700 }}>
+                    {t({ bn: nextEvent.titleBn, en: nextEvent.titleEn })}
+                  </Link>
+                </p>
+                <p style={{ margin: '0 0 10px', color: 'var(--muted)', fontSize: 14 }}>
+                  {formatDhakaDate(nextEvent.dateMillis, lang, nextEvent.type === 'application-deadline' || nextEvent.type === 'exam-date')}
+                  {' · '}
+                  {daysUntilEvent(nextEvent, nowMs) === 0
+                    ? t({ bn: 'আজ', en: 'Today' })
+                    : t({
+                        bn: `আর ${toBanglaDigits(daysUntilEvent(nextEvent, nowMs))} দিন বাকি`,
+                        en: `${daysUntilEvent(nextEvent, nowMs)} day${daysUntilEvent(nextEvent, nowMs) === 1 ? '' : 's'} left`,
+                      })}
+                </p>
+              </>
+            )}
+            <LinkButton to="/jobs/calendar" variant="outline">
+              {t({ bn: 'ক্যালেন্ডার দেখুন →', en: 'See the calendar →' })}
+            </LinkButton>
           </Card>
         </Reveal>
 
-        {/* Notifications (design #17): the jobNotifications
-            collection is deferred to Step 14 with circulars (the
-            compiled-rules margin on this branch is 1,138 bytes —
-            a new match block would breach 256,000). Until then
-            this card honestly shows that none exist yet. */}
+        {/* Notifications (design #17) — Step 14: derived in-app
+            (deadline reminders, new mocks, result-ready) from
+            published records + the student's own attempts.
+            No collection, no push — Spark free. Read state is
+            local per device. */}
         <Reveal delayMs={160}>
           <Card>
-            <div style={{ fontWeight: 700, color: 'var(--heading)', fontSize: 17 }}>
+            <div style={{ fontWeight: 700, color: 'var(--heading)', fontSize: 17, display: 'flex', alignItems: 'center', gap: 8 }}>
               {t({ bn: 'নোটিফিকেশন', en: 'Notifications' })}
+              {unreadNotifications > 0 && <Chip tone="blue">{t({ bn: `${unreadNotifications}টি নতুন`, en: `${unreadNotifications} new` })}</Chip>}
             </div>
-            <p style={{ margin: '8px 0 10px', color: 'var(--muted)', fontSize: 14, lineHeight: 1.7 }}>
-              {t({
-                bn: 'কোনো নোটিফিকেশন নেই। নোটিফিকেশন Step 14-এ আসছে — সাপ্তাহিক মক প্রকাশিত হলে এখানে জানানো হবে।',
-                en: 'No notifications. Notifications are coming in Step 14 — when a weekly mock is published, it will be announced here.',
-              })}
+            {circulars === null || attempts === null ? (
+              <Skeleton height={72} />
+            ) : topUnreadNotifications.length === 0 ? (
+              <p style={{ margin: '8px 0 10px', color: 'var(--muted)', fontSize: 14, lineHeight: 1.7 }}>
+                {t({
+                  bn: 'কোনো নতুন নোটিফিকেশন নেই। যাচাই করা সার্কুলারের সময়সীমা এগিয়ে এলে, নতুন মক প্রকাশিত হলে বা ফলাফল তৈরি হলে এখানে আসবে।',
+                  en: 'No new notifications. When a verified circular deadline approaches, a new mock is published, or a result is ready, it will appear here.',
+                })}
+              </p>
+            ) : (
+              <div style={{ display: 'grid', gap: 8, marginTop: 8 }}>
+                {topUnreadNotifications.map((n) => (
+                  <div key={n.id} style={{ fontSize: 14, lineHeight: 1.6 }}>
+                    <Link to={n.link} style={{ fontWeight: 700 }}>
+                      {t({ bn: n.titleBn, en: n.titleEn })}
+                    </Link>
+                    <div style={{ color: 'var(--muted)', fontSize: 13 }}>
+                      {t({ bn: n.bodyBn, en: n.bodyEn })}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+            <p style={{ margin: '10px 0 0' }}>
+              <LinkButton to="/jobs/notifications" variant="outline">
+                {t({ bn: 'সব নোটিফিকেশন দেখুন →', en: 'See all notifications →' })}
+              </LinkButton>
             </p>
-            <Chip tone="gold">{t({ bn: 'শীঘ্রই আসছে', en: 'Coming soon' })}</Chip>
           </Card>
         </Reveal>
       </div>

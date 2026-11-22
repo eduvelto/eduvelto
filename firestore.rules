@@ -4298,6 +4298,38 @@ service cloud.firestore {
                            'publishedAt', 'publishedBy', 'updatedAt']));
       allow delete: if isAdmin();
     }
+
+    // ---------- job circulars (Step 14) ----------
+    // Public read of PUBLISHED circulars only (lowercase
+    // 'published' — the Job convention; do NOT use isPublished(),
+    // which checks capital-'Published'); moderators read drafts
+    // too. Moderators create/update within the §2.18 key
+    // allowlist; reviewStatus is an enum, so a draft can never
+    // read as published. applicationStatus is NOT stored — it is
+    // computed client-side from applicationDeadline (§2.18 note).
+    // applyUrl is the SEPARATE official application-portal link
+    // (a circular PDF is not necessarily the apply destination —
+    // no Apply button without a confirmed apply link).
+    // deadlinePrecision 'date_only' | 'datetime' stops the UI
+    // inventing a closing time when the notice gives only a date
+    // (conservative: date-only deadlines close at end of day,
+    // Asia/Dhaka).
+    // Size trims (measured: the compiled-rules margin is ~1,132
+    // bytes, and this block must fit inside it): no copyStatus
+    // enum (UI falls back to 'link-only' for unknown values),
+    // no lastCheckedAt (updatedAt is the last-checked display),
+    // no delete rule — a wrong circular is unpublished via
+    // reviewStatus='rejected'; delete comes with Step 15 admin.
+    // No jobNotifications collection ships: the margin fits ONE
+    // minimal block — notifications are derived client-side from
+    // published circulars + mocks (src/lib/jobNotifications.ts).
+    match /circulars/{circularId} {
+      allow read: if resource.data.get('reviewStatus', '') == 'published' || isModerator();
+      allow create, update: if isModerator()
+        && request.resource.data.keys().hasOnly(['examSlug', 'postTitleBn', 'postTitleEn', 'circularNumber', 'publishedDate', 'applicationDeadline', 'deadlinePrecision', 'totalPosts', 'eligibilitySummaryBn', 'eligibilitySummaryEn', 'officialUrl', 'applyUrl', 'copyStatus', 'copyTextExcerpt', 'reviewStatus', 'verifiedBy', 'verifiedAt', 'examDate', 'applicationStartDate', 'authorId', 'createdAt', 'updatedAt'])
+        && request.resource.data.get('reviewStatus', '') in ['draft', 'in-review', 'verified', 'published', 'rejected'];
+    }
+
     // jobQuestionKeys — the answer key, one doc per bundle.
     // Moderator/Admin any time; a student only with a fresh
     // receipt anchored to a submitted attempt (hasFreshJobReceipt,

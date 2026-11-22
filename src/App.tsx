@@ -40,6 +40,10 @@ const JobSeekerDashboardPage = lazy(() => import('./pages/JobSeekerDashboardPage
 const JobPlannerPage = lazy(() => import('./pages/JobPlannerPage'));
 const JobWrongAnswersPage = lazy(() => import('./pages/JobWrongAnswersPage'));
 const JobWrongAnswersPracticePage = lazy(() => import('./pages/JobWrongAnswersPracticePage'));
+const JobCircularsPage = lazy(() => import('./pages/JobCircularsPage'));
+const JobCircularDetailPage = lazy(() => import('./pages/JobCircularDetailPage'));
+const JobCalendarPage = lazy(() => import('./pages/JobCalendarPage'));
+const JobNotificationsPage = lazy(() => import('./pages/JobNotificationsPage'));
 const RegisterPage = lazy(() => import('./pages/RegisterPage'));
 const RoleSetupPage = lazy(() => import('./pages/RoleSetupPage'));
 const LoginPage = lazy(() => import('./pages/LoginPage'));
@@ -271,6 +275,13 @@ export default function App() {
             '/jobs/wrong-answers' matches :exam='wrong-answers'. */}
         <Route path="/jobs/wrong-answers" element={<JobWrongAnswersPage />} />
         <Route path="/jobs/wrong-answers/practice/:topicId" element={<JobWrongAnswersPracticePage />} />
+        {/* Step 14: circulars + calendar + notifications MUST come
+            before /jobs/:exam/:tab — otherwise '/jobs/circulars'
+            matches :exam='circulars'. */}
+        <Route path="/jobs/circulars" element={<JobCircularsPage />} />
+        <Route path="/jobs/circulars/:circularId" element={<JobCircularDetailPage />} />
+        <Route path="/jobs/calendar" element={<JobCalendarPage />} />
+        <Route path="/jobs/notifications" element={<JobNotificationsPage />} />
         <Route path="/jobs/:exam/:tab" element={<JobHubPage />} />
         <Route path="/jobs/:exam" element={<JobHubPage />} />
         <Route path="/register" element={<RegisterPage />} />

@@ -154,6 +154,9 @@ export const BACKUP_COLLECTIONS: string[] = [
   'giftRedemptions',
   'partnerships',
   'rewardBalances',
+  // Added 23 Nov 2026 (Step 14: the circulars collection must be
+  // in every backup, or the published circulars are lost).
+  'circulars',
 ];
 
 /** Firestore values do not survive JSON as-is — mark them so restore can revive them. */
