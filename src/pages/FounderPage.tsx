@@ -103,11 +103,13 @@ export const ORGANIZATION_JSON_LD = {
     address: { '@type': 'PostalAddress', addressCountry: 'BD', addressLocality: "Cox's Bazar" },
   },
   founder: { '@id': 'https://eduvelto.com/founder#person' },
-  // sameAs is EMPTY by design — no Eduvelto organization profiles exist
-  // yet (see src/lib/seo.ts ORGANIZATION_JSON_LD). The founder's personal
-  // profiles (facebook.com/ahmmmizan etc.) belong to the Person block
-  // above, not to the Organization, so they are NOT listed here.
-  sameAs: [] as string[],
+  // sameAs lists the Eduvelto organization's own profiles ONLY —
+  // the YouTube channel @EduveltoBD (created 22 Nov 2026). Keep in
+  // sync with src/lib/seo.ts ORGANIZATION_JSON_LD (guarded by
+  // founderJsonLd.test.ts). The founder's personal profiles
+  // (facebook.com/ahmmmizan etc.) belong to the Person block above,
+  // not to the Organization, so they are NOT listed here.
+  sameAs: ['https://www.youtube.com/@EduveltoBD'],
 };
 
 const BREADCRUMB_JSON_LD = {

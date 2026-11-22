@@ -226,7 +226,7 @@ describe('resolveRouteSeo — public routes', () => {
     const types = (seo!.jsonLd as Array<Record<string, unknown>>).map((o) => o['@type']);
     expect(types).toEqual(['Organization', 'WebSite', 'WebPage', 'BreadcrumbList']);
     const org = seo!.jsonLd![0] as Record<string, unknown>;
-    expect(org['sameAs']).toEqual([]);
+    expect(org['sameAs']).toEqual(['https://www.youtube.com/@EduveltoBD']);
     const crumb = seo!.jsonLd![3] as Record<string, unknown>;
     const items = crumb['itemListElement'] as Array<Record<string, unknown>>;
     expect(items.map((i) => i['name'])).toEqual(['হোম', 'চাকরি প্রস্তুতি', 'বিসিএস']);
@@ -242,7 +242,7 @@ describe('resolveRouteSeo — public routes', () => {
     expect(founder['name']).toBe('Ali Hasan Mohammed Mizan');
     expect(founder['jobTitle']).toBe('Founder & CEO');
     expect(founder['@id']).toBe('https://eduvelto.com/founder#person');
-    expect(org['sameAs']).toEqual([]);
+    expect(org['sameAs']).toEqual(['https://www.youtube.com/@EduveltoBD']);
     expect((org['areaServed'] as Record<string, unknown>)['name']).toBe('Bangladesh');
     const flat = JSON.stringify(ORGANIZATION_JSON_LD);
     expect(flat).not.toContain('2005');
