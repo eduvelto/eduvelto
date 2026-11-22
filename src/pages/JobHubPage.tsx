@@ -22,6 +22,7 @@ import { Link, useParams } from 'react-router-dom';
 import { PageShell, EmptyState } from '../components/PageShell';
 import { Card, Chip, LinkButton, Reveal } from '../components/ui';
 import { JobNonAffiliationNote } from '../components/JobCards';
+import JobPracticeTab from '../components/JobPracticeTab';
 import JobModeSwitch from '../components/JobModeSwitch';
 import { useLanguage, T } from '../i18n/LanguageContext';
 import { useJobMode } from '../lib/jobMode';
@@ -565,6 +566,8 @@ export default function JobHubPage() {
             </Card>
           </Reveal>
         </>
+      ) : activeTab === 'practice' ? (
+        <JobPracticeTab def={def} />
       ) : activeTab === 'subjects' && (subjects.length > 0 || def.slug === 'it-professional') ? (
         <JobSubjectsTab def={def} />
       ) : (

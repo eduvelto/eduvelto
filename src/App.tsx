@@ -22,6 +22,8 @@ const JobHubPage = lazy(() => import('./pages/JobHubPage'));
 const JobSubjectPage = lazy(() => import('./pages/JobSubjectPage'));
 const JobTopicPage = lazy(() => import('./pages/JobTopicPage'));
 const JobsCommonPage = lazy(() => import('./pages/JobsCommonPage'));
+const JobPracticePage = lazy(() => import('./pages/JobPracticePage'));
+const JobResultPage = lazy(() => import('./pages/JobResultPage'));
 const JobSeekerDashboardPage = lazy(() => import('./pages/JobSeekerDashboardPage'));
 const RegisterPage = lazy(() => import('./pages/RegisterPage'));
 const RoleSetupPage = lazy(() => import('./pages/RoleSetupPage'));
@@ -212,6 +214,10 @@ export default function App() {
         <Route path="/jobs/dashboard" element={<JobSeekerDashboardPage />} />
         <Route path="/jobs/:exam/subjects/:subject" element={<JobSubjectPage />} />
         <Route path="/jobs/:exam/subjects/:subject/:topic" element={<JobTopicPage />} />
+        {/* Step 8: practice + result MUST come before /jobs/:exam/:tab
+            — otherwise '/jobs/practice/:scope' matches :exam='practice'. */}
+        <Route path="/jobs/practice/:scope" element={<JobPracticePage />} />
+        <Route path="/jobs/result/:attemptId" element={<JobResultPage />} />
         <Route path="/jobs/:exam/:tab" element={<JobHubPage />} />
         <Route path="/jobs/:exam" element={<JobHubPage />} />
         <Route path="/register" element={<RegisterPage />} />
