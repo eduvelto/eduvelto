@@ -95,6 +95,48 @@ export default function JobSeekerDashboardPage() {
           signed-in users who have not seen it; never blocks the page. */}
       <JobOnboarding forceOpen={showOnboarding} onClose={() => setShowOnboarding(false)} />
 
+      {/* ChatGPT Step 4 review (P2) — compact profile-completion
+          prompts, not persistent banners: one small card listing only
+          the preferences still unset, each with a link to /profile.
+          Worded as preferences to complete — never as "content is
+          ready" (0 verified teachers: picking a category does not
+          imply verified questions exist yet). Hidden entirely once
+          all three are set. */}
+      {(!profile.enrolledCategories || profile.enrolledCategories.length === 0) ||
+      !profile.targetExam ||
+      (profile.dailyGoalQuestions == null && profile.dailyGoalMinutes == null) ? (
+        <Reveal>
+          <Card>
+            <div style={{ fontWeight: 700, color: '#142B3B', fontSize: 16 }}>
+              {t({ bn: 'প্রোফাইল সম্পূর্ণ করুন', en: 'Complete your profile' })}
+            </div>
+            <ul style={{ margin: '8px 0 0', paddingLeft: 20, color: '#57616A', fontSize: 14, lineHeight: 2 }}>
+              {(!profile.enrolledCategories || profile.enrolledCategories.length === 0) ? (
+                <li>
+                  <Link to="/profile" style={{ fontWeight: 600 }}>
+                    {t({ bn: 'পছন্দের প্রস্তুতির বিভাগ নির্বাচন করুন', en: 'Pick your preparation categories' })}
+                  </Link>
+                </li>
+              ) : null}
+              {!profile.targetExam ? (
+                <li>
+                  <Link to="/profile" style={{ fontWeight: 600 }}>
+                    {t({ bn: 'লক্ষ্য পরীক্ষা বেছে নিন', en: 'Pick a target exam' })}
+                  </Link>
+                </li>
+              ) : null}
+              {profile.dailyGoalQuestions == null && profile.dailyGoalMinutes == null ? (
+                <li>
+                  <Link to="/profile" style={{ fontWeight: 600 }}>
+                    {t({ bn: 'দৈনিক লক্ষ্য ঠিক করুন', en: 'Set a daily goal' })}
+                  </Link>
+                </li>
+              ) : null}
+            </ul>
+          </Card>
+        </Reveal>
+      ) : null}
+
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: 12, marginBottom: 20 }}>
         {/* My mode — Beginner / Advanced (owner decision 22 Nov 2026).
             Shows the current mode; the switch below changes it any time

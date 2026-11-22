@@ -1,4 +1,5 @@
-// Eduvelto — Job Preparation student-profile fields (Step 4, 22 Nov 2026).
+// Eduvelto — Job Preparation student-profile fields (Step 4, 22 Nov 2026;
+// ChatGPT-review fold-in, Step 4 closure, 22 Nov 2026).
 //
 // The five Job fields on `users/{uid}` (Step 3 §2.25, §3.1):
 //   enrolledCategories, targetExam, dailyGoalQuestions, dailyGoalMinutes,
@@ -7,26 +8,50 @@
 //   questions / 30 minutes — is still an open owner decision, so the
 //   code stores null until the student picks a goal).
 //
-// Removing a category NEVER deletes progress: progress is keyed to
-// content IDs, not to the profile — the profile only decides what is
-// SHOWN, never what is KEPT (same invariant as profile.ts).
+// NULL-vs-0 (ChatGPT review — BINDING semantics, rules + UI agree):
+//   * dailyGoalQuestions / dailyGoalMinutes: null/absent = NOT
+//     configured; 0 = the student EXPLICITLY set a zero goal; a positive
+//     integer = the daily target. The form and the dashboard must never
+//     turn a 0 into "undecided" or a null into a fake goal.
+//   * targetExam: null/absent = undecided; a slug = the student's
+//     PRIMARY target exam (single target accepted temporarily — it does
+//     NOT represent every category's target; Step 5 must not assume so).
+//   * enrolledCategories: absent or [] = none enrolled yet; removing a
+//     category NEVER deletes progress (progress is keyed to content IDs,
+//     not to the profile — the profile only decides what is SHOWN).
+//   * jobOnboarded: absent/false = the mode-choice screen has not been
+//     handled yet; true = handled (picked a mode OR "decide later").
+//     It says NOTHING about profile completion or learning progress.
 //
-// SIGNED-OUT LOCAL FALLBACK (Step 3 §12.3 item 4 — Step 4 decision,
-// recorded in team/job-auth-profiles-step4.md):
-//   * jobMode: already local (jobMode.ts) — unchanged.
-//   * enrolledCategories / targetExam / dailyGoalQuestions /
-//     dailyGoalMinutes: kept as a LOCAL DRAFT in localStorage while
-//     signed out (same pattern as jobMode.ts: the profile wins on
-//     sign-in, the local value is never read over it, and the local
-//     draft is never auto-uploaded to the profile).
-//   * jobOnboarded: NO local fallback — it records that the signed-in
-//     onboarding screen was shown; signed-out visitors never see that
-//     screen, so there is nothing to record locally.
-//   * While signed in, ProfilePage also writes the saved job values to
-//     the local draft, so this browser's fallback stays in sync (again
-//     the jobMode.ts pattern) for a later signed-out visit.
+// LOCAL STORAGE — ACCOUNT ISOLATION (ChatGPT review P0 — the old global
+// keys `eduvelto-job-categories` / `eduvelto-job-target-exam` /
+// `eduvelto-job-daily-goal` let one student's saved values prefill
+// ANOTHER student's ProfilePage on a shared browser; that bug is fixed
+// here and must never come back):
+//   * ANONYMOUS drafts only: `eduvelto-job-anonymous-*` — written and
+//     read ONLY while signed out. A signed-in student's profile is the
+//     ONLY source of truth; nothing is ever written to localStorage
+//     from a signed-in save, and the anonymous draft is NEVER read over
+//     a signed-in profile.
+//   * NO authenticated localStorage cache at all (the simpler arrangement
+//     ChatGPT favoured): signed-in students use the Firestore profile.
+//   * An anonymous draft becomes profile data ONLY through an EXPLICIT
+//     import decision (draftImportCandidates + the ProfilePage prompt):
+//     the student reviews the draft values and saves them through the
+//     normal profile flow, or declines — the draft is cleared after
+//     either resolution. Never auto-merge, never auto-restore stale
+//     drafts. The import offer appears ONLY for profile fields that
+//     are ABSENT from the document (field presence, not truthiness —
+//     an explicitly-cleared [] or null still wins and is never offered
+//     an import for that field).
+//   * The same isolation applies to the mode fallback (jobMode.ts):
+//     anonymous key `eduvelto-job-anonymous-mode` only; the legacy
+//     global key `eduvelto-job-mode` is no longer read or written
+//     (signed-out visitors see Beginner once, until they pick a mode;
+//     every signed-in user's real choice still lives on the profile).
 
 import type { UserProfile } from './profile';
+import { JOB_EXAMS } from './jobExams';
 
 /** The 10 Job categories (Step 2 §0.4) — the only values
  * `enrolledCategories` may hold (enforced in firestore.rules §3.1). */
@@ -45,17 +70,145 @@ export const JOB_CATEGORY_SLUGS = [
 
 export type JobCategorySlug = (typeof JOB_CATEGORY_SLUGS)[number];
 
-export const JOB_CATEGORIES: { slug: JobCategorySlug; bn: string; en: string }[] = [
-  { slug: 'bcs-bpsc', bn: 'BCS ও BPSC', en: 'BCS & BPSC' },
-  { slug: 'govt', bn: 'সরকারি চাকরি', en: 'Government Jobs' },
-  { slug: 'bank', bn: 'ব্যাংক', en: 'Bank' },
-  { slug: 'primary-teacher', bn: 'প্রাথমিক শিক্ষক', en: 'Primary Teacher' },
-  { slug: 'ntrca-teacher', bn: 'NTRCA ও শিক্ষক নিয়োগ', en: 'NTRCA & Teacher Recruitment' },
-  { slug: 'defence-police', bn: 'সেনা/নৌ/বিমান বাহিনী ও পুলিশ', en: 'Defence & Police' },
-  { slug: 'autonomous', bn: 'স্বায়ত্তশাসিত ও বিশেষায়িত প্রতিষ্ঠান', en: 'Autonomous & Specialised Institutions' },
-  { slug: 'ngo-private', bn: 'NGO ও বেসরকারি', en: 'NGO & Private' },
-  { slug: 'it-professional', bn: 'IT ও পেশাগত চাকরি', en: 'IT & Professional Jobs' },
-  { slug: 'other-competitive', bn: 'অন্যান্য প্রতিযোগিতামূলক নিয়োগ পরীক্ষা', en: 'Other Competitive Exams' },
+/**
+ * CANONICAL CATEGORY → HUB MAPPING (ChatGPT review P1 — Step 5
+ * taxonomy centralization). This is the ONE place that says which hubs
+ * belong to which category (Step 2 §0.4). Checkboxes, dropdowns,
+ * dashboard labels, filtering and validation must all derive from
+ * here (jobCategoryOfExam / jobCategoryHubs) — never from a second
+ * hand-maintained list. firestore.rules keeps its own allowlists
+ * (rules cannot import TypeScript) — that is a deliberate sync
+ * responsibility, pinned by the taxonomy unit test
+ * (src/lib/__tests__/jobTaxonomy.test.ts).
+ *
+ * Accents are copied from the category's primary hub (jobExams.ts);
+ * white text on each accent passes WCAG AA (measured 21 Nov 2026 —
+ * the IT accent #1E3A5F is pinned by the same unit test).
+ */
+export interface JobCategoryDef {
+  slug: JobCategorySlug;
+  bn: string;
+  en: string;
+  /** Hub slugs in this category (Step 2 §0.4). */
+  hubSlugs: string[];
+  accent: string;
+  accentSoft: string;
+  accentDeep: string;
+  descriptionBn: string;
+  descriptionEn: string;
+}
+
+export const JOB_CATEGORIES: JobCategoryDef[] = [
+  {
+    slug: 'bcs-bpsc',
+    bn: 'BCS ও BPSC',
+    en: 'BCS & BPSC',
+    hubSlugs: ['bcs', 'bpsc-non-cadre'],
+    accent: '#12766E',
+    accentSoft: '#E3F2F0',
+    accentDeep: '#0F5E57',
+    descriptionBn: 'বিসিএস ও BPSC-র অন্যান্য নিয়োগ পরীক্ষা।',
+    descriptionEn: 'BCS and other BPSC recruitment exams.',
+  },
+  {
+    slug: 'govt',
+    bn: 'সরকারি চাকরি',
+    en: 'Government Jobs',
+    hubSlugs: ['ministries', 'dgfood', 'cag', 'bfsa'],
+    accent: '#3730A3',
+    accentSoft: '#E8E9FB',
+    accentDeep: '#312E81',
+    descriptionBn: 'মন্ত্রণালয়, অধিদপ্তর ও সরকারি সংস্থার নিয়োগ পরীক্ষা।',
+    descriptionEn: 'Recruitment exams for ministries, directorates and government bodies.',
+  },
+  {
+    slug: 'bank',
+    bn: 'ব্যাংক',
+    en: 'Bank',
+    hubSlugs: ['bank'],
+    accent: '#1D4ED8',
+    accentSoft: '#E7EDFC',
+    accentDeep: '#1E3A8A',
+    descriptionBn: 'বাংলাদেশ ব্যাংক ও অন্যান্য ব্যাংকের নিয়োগ পরীক্ষা।',
+    descriptionEn: 'Recruitment exams for Bangladesh Bank and other banks.',
+  },
+  {
+    slug: 'primary-teacher',
+    bn: 'প্রাথমিক শিক্ষক',
+    en: 'Primary Teacher',
+    hubSlugs: ['primary-teacher'],
+    accent: '#15803D',
+    accentSoft: '#E7F4EB',
+    accentDeep: '#14532D',
+    descriptionBn: 'সরকারি প্রাথমিক বিদ্যালয়ের সহকারী শিক্ষক নিয়োগ।',
+    descriptionEn: 'Government primary school assistant teacher recruitment.',
+  },
+  {
+    slug: 'ntrca-teacher',
+    bn: 'NTRCA ও শিক্ষক নিয়োগ',
+    en: 'NTRCA & Teacher Recruitment',
+    hubSlugs: ['ntrca'],
+    accent: '#7E22CE',
+    accentSoft: '#F3E8FB',
+    accentDeep: '#581C87',
+    descriptionBn: 'বেসরকারি শিক্ষক নিবন্ধন ও অন্যান্য শিক্ষক নিয়োগ।',
+    descriptionEn: 'Non-government teacher registration and other teacher recruitment.',
+  },
+  {
+    slug: 'defence-police',
+    bn: 'সেনা/নৌ/বিমান বাহিনী ও পুলিশ',
+    en: 'Defence & Police',
+    hubSlugs: ['defence'],
+    accent: '#B91C1C',
+    accentSoft: '#FDECEC',
+    accentDeep: '#7F1D1D',
+    descriptionBn: 'সশস্ত্র বাহিনী ও পুলিশের নিয়োগ পরীক্ষা।',
+    descriptionEn: 'Recruitment exams for the armed forces and police.',
+  },
+  {
+    slug: 'autonomous',
+    bn: 'স্বায়ত্তশাসিত ও বিশেষায়িত প্রতিষ্ঠান',
+    en: 'Autonomous & Specialised Institutions',
+    hubSlugs: ['autonomous'],
+    accent: '#0E7490',
+    accentSoft: '#E2F2F5',
+    accentDeep: '#155E75',
+    descriptionBn: 'স্বায়ত্তশাসিত ও বিশেষায়িত প্রতিষ্ঠানের নিয়োগ পরীক্ষা।',
+    descriptionEn: 'Recruitment exams for autonomous and specialised institutions.',
+  },
+  {
+    slug: 'ngo-private',
+    bn: 'NGO ও বেসরকারি',
+    en: 'NGO & Private',
+    hubSlugs: ['private-ngo'],
+    accent: '#A21CAF',
+    accentSoft: '#FBE9F7',
+    accentDeep: '#701A75',
+    descriptionBn: 'NGO ও বেসরকারি প্রতিষ্ঠানের চাকরির পরীক্ষা।',
+    descriptionEn: 'Job exams for NGOs and private organisations.',
+  },
+  {
+    slug: 'it-professional',
+    bn: 'IT ও পেশাগত চাকরি',
+    en: 'IT & Professional Jobs',
+    hubSlugs: ['it-professional'],
+    accent: '#1E3A5F',
+    accentSoft: '#E8EDF3',
+    accentDeep: '#152A45',
+    descriptionBn: 'IT ও পেশাগত চাকরির প্রস্তুতি — পরিসর ঠিক হচ্ছে (Step 5)।',
+    descriptionEn: 'IT and professional job preparation — scope being decided (Step 5).',
+  },
+  {
+    slug: 'other-competitive',
+    bn: 'অন্যান্য প্রতিযোগিতামূলক নিয়োগ পরীক্ষা',
+    en: 'Other Competitive Exams',
+    hubSlugs: ['others'],
+    accent: '#57534E',
+    accentSoft: '#F0EFEA',
+    accentDeep: '#44403C',
+    descriptionBn: 'উপরের ক্যাটাগরির বাইরের অন্যান্য নিয়োগ পরীক্ষা।',
+    descriptionEn: 'Other recruitment exams outside the categories above.',
+  },
 ];
 
 /** The 14 hub slugs `targetExam` may hold (Step 3 §3.1 — includes
@@ -80,12 +233,72 @@ export const TARGET_EXAM_SLUGS = [
 
 export type TargetExamSlug = (typeof TARGET_EXAM_SLUGS)[number];
 
+/**
+ * Exams the student may actually PICK as a target today: the 13 built
+ * hubs. 'it-professional' stays accepted by the rules but is NOT
+ * selectable until Step 5 builds its hub (ChatGPT review (e)1). When
+ * Step 5 lands the hub, move the slug here by deleting this exclusion
+ * — and update the taxonomy test with it.
+ */
+export const SELECTABLE_TARGET_EXAMS: readonly string[] = TARGET_EXAM_SLUGS.filter(
+  (s) => s !== 'it-professional',
+);
+
 export function isJobCategorySlug(value: unknown): value is JobCategorySlug {
   return typeof value === 'string' && (JOB_CATEGORY_SLUGS as readonly string[]).includes(value);
 }
 
 export function isTargetExamSlug(value: unknown): value is TargetExamSlug {
   return typeof value === 'string' && (TARGET_EXAM_SLUGS as readonly string[]).includes(value);
+}
+
+/** Which category does this exam belong to? Derived from the canonical
+ * JOB_CATEGORIES.hubSlugs — never a second list. */
+export function jobCategoryOfExam(examSlug: string): JobCategorySlug | undefined {
+  const found = JOB_CATEGORIES.find((c) => c.hubSlugs.includes(examSlug));
+  return found?.slug;
+}
+
+/** Hub slugs of one category, in display order. */
+export function jobCategoryHubs(categorySlug: string): string[] {
+  const found = JOB_CATEGORIES.find((c) => c.slug === categorySlug);
+  return found ? [...found.hubSlugs] : [];
+}
+
+/**
+ * Taxonomy self-check (ChatGPT review P1). Returns every inconsistency
+ * between the canonical config and the built hubs — empty means the
+ * taxonomy is consistent. The unit test pins the expected 10 categories
+ * and 14 exam slugs against an independently maintained list, so an
+ * accidental omission in EITHER place is caught.
+ */
+export function validateJobTaxonomy(): string[] {
+  const problems: string[] = [];
+  const examSlugs = JOB_EXAMS.map((e) => e.slug);
+  for (const slug of TARGET_EXAM_SLUGS) {
+    const owners = JOB_CATEGORIES.filter((c) => c.hubSlugs.includes(slug));
+    if (owners.length === 0) problems.push(`exam '${slug}' belongs to no category`);
+    if (owners.length > 1) problems.push(`exam '${slug}' belongs to ${owners.length} categories`);
+    if (!examSlugs.includes(slug)) problems.push(`exam '${slug}' has no hub in JOB_EXAMS`);
+  }
+  for (const exam of JOB_EXAMS) {
+    if (!(TARGET_EXAM_SLUGS as readonly string[]).includes(exam.slug)) {
+      problems.push(`hub '${exam.slug}' is not in TARGET_EXAM_SLUGS`);
+    }
+  }
+  for (const cat of JOB_CATEGORIES) {
+    for (const hub of cat.hubSlugs) {
+      if (!(TARGET_EXAM_SLUGS as readonly string[]).includes(hub)) {
+        problems.push(`category '${cat.slug}' lists unknown hub '${hub}'`);
+      }
+    }
+  }
+  for (const slug of JOB_CATEGORY_SLUGS) {
+    if (!JOB_CATEGORIES.some((c) => c.slug === slug)) {
+      problems.push(`category '${slug}' has no definition in JOB_CATEGORIES`);
+    }
+  }
+  return problems;
 }
 
 /** Keep only valid category slugs, de-duplicated, at most 10. */
@@ -98,26 +311,47 @@ export function sanitizeEnrolledCategories(value: unknown): string[] {
   return [...seen].slice(0, 10);
 }
 
-/** Daily-goal bounds (Step 3 §3.1): questions 0–500, minutes 0–600.
- * Anything outside the range or not a finite number reads as null
- * (undecided) — never silently clamped into a fake goal. */
+/**
+ * Daily-goal bounds (Step 3 §3.1): questions 0–500, minutes 0–600.
+ * INTEGERS ONLY (ChatGPT review P0 — the old version floored 12.5 to
+ * 12; a non-integer, a string, a boolean or an out-of-range value now
+ * reads as null = undecided, never silently clamped or floored into a
+ * fake goal). 0 stays 0 — an explicit zero goal, never "unset".
+ */
 export function clampDailyGoalQuestions(value: unknown): number | null {
-  if (typeof value !== 'number' || !Number.isFinite(value)) return null;
-  const n = Math.floor(value);
-  return n >= 0 && n <= 500 ? n : null;
+  if (typeof value !== 'number' || !Number.isInteger(value)) return null;
+  return value >= 0 && value <= 500 ? value : null;
 }
 
 export function clampDailyGoalMinutes(value: unknown): number | null {
-  if (typeof value !== 'number' || !Number.isFinite(value)) return null;
-  const n = Math.floor(value);
-  return n >= 0 && n <= 600 ? n : null;
+  if (typeof value !== 'number' || !Number.isInteger(value)) return null;
+  return value >= 0 && value <= 600 ? value : null;
 }
 
-// ---------- signed-out local draft (Step 3 §12.3 item 4) ----------
+/** Whether the first-time mode-choice screen should show (ChatGPT
+ * review (e)4 — the mode/onboarding matrix, pinned by unit test):
+ *   jobMode missing + jobOnboarded missing → show (default Beginner)
+ *   jobMode missing + jobOnboarded true   → hide (default Beginner)
+ *   Beginner + true → hide, Beginner selected
+ *   Advanced + true → hide, Advanced selected
+ *   Advanced + false → SHOW, with the existing Advanced preference
+ *     intact — reopening must NEVER silently reset the mode.
+ * forceOpen (the "show again" button) always shows. Signed-out
+ * visitors never see it (profile null → false). */
+export function shouldShowJobOnboarding(
+  profile: { jobMode?: 'beginner' | 'advanced' | null; jobOnboarded?: boolean | null } | null,
+  forceOpen: boolean,
+): boolean {
+  if (!profile) return false;
+  if (forceOpen) return true;
+  return profile.jobOnboarded !== true;
+}
 
-const LOCAL_CATEGORIES_KEY = 'eduvelto-job-categories';
-const LOCAL_TARGET_EXAM_KEY = 'eduvelto-job-target-exam';
-const LOCAL_DAILY_GOAL_KEY = 'eduvelto-job-daily-goal';
+// ---------- anonymous local draft (signed-out visitors only) ----------
+
+const ANON_CATEGORIES_KEY = 'eduvelto-job-anonymous-categories';
+const ANON_TARGET_EXAM_KEY = 'eduvelto-job-anonymous-target-exam';
+const ANON_DAILY_GOAL_KEY = 'eduvelto-job-anonymous-daily-goal';
 
 export interface JobLocalDraft {
   enrolledCategories: string[];
@@ -133,20 +367,20 @@ export const EMPTY_JOB_DRAFT: JobLocalDraft = {
   dailyGoalMinutes: null,
 };
 
-/** Read the signed-out draft. Every value is re-validated on read, so
- * a hand-edited or stale localStorage entry can never inject a bad
- * slug or an out-of-range goal. */
-export function readLocalJobDraft(): JobLocalDraft {
+/** Read the ANONYMOUS draft (signed-out visitors only). Every value is
+ * re-validated on read, so a hand-edited or stale localStorage entry
+ * can never inject a bad slug or an out-of-range goal. */
+export function readAnonymousJobDraft(): JobLocalDraft {
   try {
     const categories = sanitizeEnrolledCategories(
-      JSON.parse(window.localStorage.getItem(LOCAL_CATEGORIES_KEY) ?? '[]'),
+      JSON.parse(window.localStorage.getItem(ANON_CATEGORIES_KEY) ?? '[]'),
     );
-    const targetRaw = window.localStorage.getItem(LOCAL_TARGET_EXAM_KEY);
+    const targetRaw = window.localStorage.getItem(ANON_TARGET_EXAM_KEY);
     const targetExam = isTargetExamSlug(targetRaw) ? targetRaw : null;
     let dailyGoalQuestions: number | null = null;
     let dailyGoalMinutes: number | null = null;
     try {
-      const goal = JSON.parse(window.localStorage.getItem(LOCAL_DAILY_GOAL_KEY) ?? 'null');
+      const goal = JSON.parse(window.localStorage.getItem(ANON_DAILY_GOAL_KEY) ?? 'null');
       if (goal && typeof goal === 'object') {
         dailyGoalQuestions = clampDailyGoalQuestions(goal.questions);
         dailyGoalMinutes = clampDailyGoalMinutes(goal.minutes);
@@ -160,65 +394,98 @@ export function readLocalJobDraft(): JobLocalDraft {
   }
 }
 
-/** Write the signed-out draft (or the signed-in fallback sync — see
- * the module header). Invalid values are dropped, never stored. */
-export function writeLocalJobDraft(draft: Partial<JobLocalDraft>): void {
+/** Write the ANONYMOUS draft. Callers must ensure this runs ONLY while
+ * signed out (ProfilePage never calls it while signed in). Invalid
+ * values are dropped, never stored. */
+export function writeAnonymousJobDraft(draft: Partial<JobLocalDraft>): void {
   try {
     if (draft.enrolledCategories !== undefined) {
       window.localStorage.setItem(
-        LOCAL_CATEGORIES_KEY,
+        ANON_CATEGORIES_KEY,
         JSON.stringify(sanitizeEnrolledCategories(draft.enrolledCategories)),
       );
     }
     if (draft.targetExam !== undefined) {
       if (isTargetExamSlug(draft.targetExam)) {
-        window.localStorage.setItem(LOCAL_TARGET_EXAM_KEY, draft.targetExam);
+        window.localStorage.setItem(ANON_TARGET_EXAM_KEY, draft.targetExam);
       } else {
-        window.localStorage.removeItem(LOCAL_TARGET_EXAM_KEY);
+        window.localStorage.removeItem(ANON_TARGET_EXAM_KEY);
       }
     }
     if (draft.dailyGoalQuestions !== undefined || draft.dailyGoalMinutes !== undefined) {
-      const current = readLocalJobDraft();
+      const current = readAnonymousJobDraft();
       const questions = clampDailyGoalQuestions(
         draft.dailyGoalQuestions !== undefined ? draft.dailyGoalQuestions : current.dailyGoalQuestions,
       );
       const minutes = clampDailyGoalMinutes(
         draft.dailyGoalMinutes !== undefined ? draft.dailyGoalMinutes : current.dailyGoalMinutes,
       );
-      window.localStorage.setItem(
-        LOCAL_DAILY_GOAL_KEY,
-        JSON.stringify({ questions, minutes }),
-      );
+      window.localStorage.setItem(ANON_DAILY_GOAL_KEY, JSON.stringify({ questions, minutes }));
     }
   } catch {
-    // Storage unavailable — the profile (when signed in) still holds
-    // the choice; the local draft is a fallback only.
+    // Storage unavailable — the anonymous draft is a convenience only.
   }
 }
 
-/** Effective Job preferences for this browser: the signed-in profile
- * wins; signed-out visitors get their local draft. Used by the
- * ProfilePage Job section to prefill empty profile fields from a
- * draft made on this browser. */
-export function effectiveJobPreferences(profile: UserProfile | null): JobLocalDraft {
-  if (!profile) return readLocalJobDraft();
-  const draft = readLocalJobDraft();
+/** Clear the anonymous draft — after an import is saved, or after the
+ * student declines the import. Never leave a resolved draft behind. */
+export function clearAnonymousJobDraft(): void {
+  try {
+    window.localStorage.removeItem(ANON_CATEGORIES_KEY);
+    window.localStorage.removeItem(ANON_TARGET_EXAM_KEY);
+    window.localStorage.removeItem(ANON_DAILY_GOAL_KEY);
+  } catch {
+    // Storage unavailable — nothing to clear.
+  }
+}
+
+/** The signed-in profile's Job values, sanitized. NO draft is ever
+ * mixed in here — the profile is the only source of truth for a
+ * signed-in student. */
+export function profileJobPreferences(profile: UserProfile | null): JobLocalDraft {
+  if (!profile) return { ...EMPTY_JOB_DRAFT };
   return {
-    enrolledCategories:
-      Array.isArray(profile.enrolledCategories) && profile.enrolledCategories.length > 0
-        ? sanitizeEnrolledCategories(profile.enrolledCategories)
-        : draft.enrolledCategories,
+    enrolledCategories: sanitizeEnrolledCategories(profile.enrolledCategories ?? []),
     targetExam:
-      profile.targetExam != null && isTargetExamSlug(profile.targetExam)
-        ? profile.targetExam
-        : draft.targetExam,
-    dailyGoalQuestions:
-      profile.dailyGoalQuestions != null
-        ? clampDailyGoalQuestions(profile.dailyGoalQuestions)
-        : draft.dailyGoalQuestions,
-    dailyGoalMinutes:
-      profile.dailyGoalMinutes != null
-        ? clampDailyGoalMinutes(profile.dailyGoalMinutes)
-        : draft.dailyGoalMinutes,
+      profile.targetExam != null && isTargetExamSlug(profile.targetExam) ? profile.targetExam : null,
+    dailyGoalQuestions: clampDailyGoalQuestions(profile.dailyGoalQuestions),
+    dailyGoalMinutes: clampDailyGoalMinutes(profile.dailyGoalMinutes),
   };
+}
+
+/**
+ * Explicit draft-import candidates (ChatGPT review P0). For each Job
+ * field that is ABSENT from the signed-in profile document AND has a
+ * value in the anonymous draft, the draft value is a candidate for
+ * import. A field that is PRESENT in the profile — even as [] or null
+ * (an explicit "none yet" / "cleared") — is never a candidate: the
+ * profile wins, and the student is never offered a stale value for a
+ * field they already decided. Returns null when there is nothing to
+ * import. The ProfilePage prompt shows these values for review; the
+ * import itself goes through the normal profile save flow.
+ */
+export function draftImportCandidates(
+  profile: UserProfile | null,
+  draft: JobLocalDraft,
+): JobLocalDraft | null {
+  if (!profile) return null;
+  const out: JobLocalDraft = { ...EMPTY_JOB_DRAFT };
+  let any = false;
+  if (!('enrolledCategories' in profile) && draft.enrolledCategories.length > 0) {
+    out.enrolledCategories = [...draft.enrolledCategories];
+    any = true;
+  }
+  if (!('targetExam' in profile) && draft.targetExam != null) {
+    out.targetExam = draft.targetExam;
+    any = true;
+  }
+  if (!('dailyGoalQuestions' in profile) && draft.dailyGoalQuestions != null) {
+    out.dailyGoalQuestions = draft.dailyGoalQuestions;
+    any = true;
+  }
+  if (!('dailyGoalMinutes' in profile) && draft.dailyGoalMinutes != null) {
+    out.dailyGoalMinutes = draft.dailyGoalMinutes;
+    any = true;
+  }
+  return any ? out : null;
 }

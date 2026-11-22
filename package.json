@@ -9,6 +9,7 @@
     "build": "tsc -b && vite build",
     "preview": "vite preview",
     "test:rules": "JAVA_TOOL_OPTIONS=\"-Djava.net.preferIPv4Stack=true\" firebase emulators:exec --only firestore,auth \"vitest run emulator-tests/\"",
+    "test:unit": "vitest run src/lib/__tests__/ --environment node",
     "emulators": "JAVA_TOOL_OPTIONS=\"-Djava.net.preferIPv4Stack=true\" firebase emulators:start --only firestore,auth"
   },
   "dependencies": {

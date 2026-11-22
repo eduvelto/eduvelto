@@ -126,6 +126,24 @@ service cloud.firestore {
       // — owner decision 21 Nov 06:53 + 07:02, 100% free, manual only).
       // isActive is still never set at creation (missing = active).
       allow create: if isOwner(userId)
+        // CHATGPT STEP 4 REVIEW (P0 — permitted-key allowlist): the
+        // create rule previously validated known fields but did not
+        // restrict the key set — a student could smuggle arbitrary
+        // fields (e.g. verifiedBy, suspendedReason, junk) into their
+        // own new document. Only the keys the app legitimately writes
+        // at creation (profile.ts ensureUserProfile) are allowed.
+        && request.resource.data.keys().hasOnly(['displayName', 'email',
+             'role', 'verificationStatus', 'language', 'createdAt', 'updatedAt',
+             'lastActiveAt',
+             'educationType', 'board', 'institution', 'academicYear',
+             'program', 'department', 'classLevel', 'semester',
+             'academicSession', 'curriculum', 'phone', 'teachingLevel',
+             'subjects', 'qualifications', 'experienceYears', 'jobMode',
+             'enrolledCategories', 'targetExam', 'dailyGoalQuestions',
+             'dailyGoalMinutes', 'jobOnboarded'])
+        // 'verificationStatus' is in the allowlist because teacher /
+        // guardian registration writes it — but its VALUE is pinned by
+        // the clause below: absent, or teacher/parent + 'pending' only.
         && request.resource.data.role in ['student', 'teacher', 'parent']
         && (!('verificationStatus' in request.resource.data)
             || (request.resource.data.role in ['teacher', 'parent']
@@ -149,9 +167,18 @@ service cloud.firestore {
         // Step 4 — Job profile fields (Step 3 §2.25/§3.1): same
         // validations as the self-update rule below, so no invalid
         // value can sneak in at creation either.
+        // CHATGPT STEP 4 REVIEW (P0): uniqueness — a list of
+        // duplicates (["bank","bank",...]) must fail; integers only —
+        // 12.5 / "30" / true must fail (rules `is int`, not `is number`).
+        // MISSING-vs-NULL (deliberate, all five fields): optional on
+        // create; absent or null = undecided; removable (delete → absent
+        // = undecided); 0 is an EXPLICIT zero goal, never "unset".
         && (!('enrolledCategories' in request.resource.data)
+            || request.resource.data.enrolledCategories == null
             || (request.resource.data.enrolledCategories is list
                 && request.resource.data.enrolledCategories.size() <= 10
+                && request.resource.data.enrolledCategories.toSet().size()
+                     == request.resource.data.enrolledCategories.size()
                 && request.resource.data.enrolledCategories.toSet().hasOnly(
                      ['bcs-bpsc', 'govt', 'bank', 'primary-teacher',
                       'ntrca-teacher', 'defence-police', 'autonomous',
@@ -164,15 +191,16 @@ service cloud.firestore {
                 'defence', 'autonomous', 'private-ngo', 'it-professional'])
         && (!('dailyGoalQuestions' in request.resource.data)
             || request.resource.data.dailyGoalQuestions == null
-            || (request.resource.data.dailyGoalQuestions is number
+            || (request.resource.data.dailyGoalQuestions is int
                 && request.resource.data.dailyGoalQuestions >= 0
                 && request.resource.data.dailyGoalQuestions <= 500))
         && (!('dailyGoalMinutes' in request.resource.data)
             || request.resource.data.dailyGoalMinutes == null
-            || (request.resource.data.dailyGoalMinutes is number
+            || (request.resource.data.dailyGoalMinutes is int
                 && request.resource.data.dailyGoalMinutes >= 0
                 && request.resource.data.dailyGoalMinutes <= 600))
         && (!('jobOnboarded' in request.resource.data)
+            || request.resource.data.jobOnboarded == null
             || request.resource.data.jobOnboarded is bool)
         && (!('subjects' in request.resource.data)
             || (request.resource.data.subjects is list
@@ -203,14 +231,21 @@ service cloud.firestore {
         && (!('jobMode' in request.resource.data)
             || request.resource.data.jobMode in ['beginner', 'advanced'])
         // Step 4 — Job profile fields (Step 3 §3.1, exact spec):
-        // enrolledCategories ≤10 slugs from the 10-category enum;
-        // targetExam null or one of the 14 hub slugs; daily goals
-        // null or in range; jobOnboarded bool. role /
-        // verificationStatus / isActive are NOT in this allowlist —
-        // they stay Admin/Owner-only.
+        // enrolledCategories ≤10 UNIQUE slugs from the 10-category
+        // enum (duplicates fail); targetExam null or one of the 14 hub
+        // slugs; daily goals null or an INTEGER in range (12.5 / "30" /
+        // true fail); jobOnboarded bool. role / verificationStatus /
+        // isActive are NOT in this allowlist — they stay
+        // Admin/Owner-only. The update may touch ONLY the allowlisted
+        // fields (affectedKeys().hasOnly, above) — no unexpected field
+        // can ride in on a Job update. MISSING-vs-NULL: all five
+        // fields optional, nullable, removable; 0 = explicit zero goal.
         && (!('enrolledCategories' in request.resource.data)
+            || request.resource.data.enrolledCategories == null
             || (request.resource.data.enrolledCategories is list
                 && request.resource.data.enrolledCategories.size() <= 10
+                && request.resource.data.enrolledCategories.toSet().size()
+                     == request.resource.data.enrolledCategories.size()
                 && request.resource.data.enrolledCategories.toSet().hasOnly(
                      ['bcs-bpsc', 'govt', 'bank', 'primary-teacher',
                       'ntrca-teacher', 'defence-police', 'autonomous',
@@ -223,15 +258,16 @@ service cloud.firestore {
                 'defence', 'autonomous', 'private-ngo', 'it-professional'])
         && (!('dailyGoalQuestions' in request.resource.data)
             || request.resource.data.dailyGoalQuestions == null
-            || (request.resource.data.dailyGoalQuestions is number
+            || (request.resource.data.dailyGoalQuestions is int
                 && request.resource.data.dailyGoalQuestions >= 0
                 && request.resource.data.dailyGoalQuestions <= 500))
         && (!('dailyGoalMinutes' in request.resource.data)
             || request.resource.data.dailyGoalMinutes == null
-            || (request.resource.data.dailyGoalMinutes is number
+            || (request.resource.data.dailyGoalMinutes is int
                 && request.resource.data.dailyGoalMinutes >= 0
                 && request.resource.data.dailyGoalMinutes <= 600))
         && (!('jobOnboarded' in request.resource.data)
+            || request.resource.data.jobOnboarded == null
             || request.resource.data.jobOnboarded is bool)
         && (!('experienceYears' in request.resource.data)
             || (request.resource.data.experienceYears is number
@@ -314,10 +350,14 @@ service cloud.firestore {
         && (!('isActive' in request.resource.data) || request.resource.data.isActive is bool)
         && isOptStr(request.resource.data.displayName, 100)
         // Step 4 — the owner may set a user's Job fields too, under the
-        // same §3.1 validations as the self-update rule.
+        // same §3.1 validations as the self-update rule (unique
+        // categories, integer-only goals — ChatGPT Step 4 review P0).
         && (!('enrolledCategories' in request.resource.data)
+            || request.resource.data.enrolledCategories == null
             || (request.resource.data.enrolledCategories is list
                 && request.resource.data.enrolledCategories.size() <= 10
+                && request.resource.data.enrolledCategories.toSet().size()
+                     == request.resource.data.enrolledCategories.size()
                 && request.resource.data.enrolledCategories.toSet().hasOnly(
                      ['bcs-bpsc', 'govt', 'bank', 'primary-teacher',
                       'ntrca-teacher', 'defence-police', 'autonomous',
@@ -330,15 +370,16 @@ service cloud.firestore {
                 'defence', 'autonomous', 'private-ngo', 'it-professional'])
         && (!('dailyGoalQuestions' in request.resource.data)
             || request.resource.data.dailyGoalQuestions == null
-            || (request.resource.data.dailyGoalQuestions is number
+            || (request.resource.data.dailyGoalQuestions is int
                 && request.resource.data.dailyGoalQuestions >= 0
                 && request.resource.data.dailyGoalQuestions <= 500))
         && (!('dailyGoalMinutes' in request.resource.data)
             || request.resource.data.dailyGoalMinutes == null
-            || (request.resource.data.dailyGoalMinutes is number
+            || (request.resource.data.dailyGoalMinutes is int
                 && request.resource.data.dailyGoalMinutes >= 0
                 && request.resource.data.dailyGoalMinutes <= 600))
         && (!('jobOnboarded' in request.resource.data)
+            || request.resource.data.jobOnboarded == null
             || request.resource.data.jobOnboarded is bool);
       allow delete: if false; // accounts are suspended (isActive=false), never deleted by clients
     }

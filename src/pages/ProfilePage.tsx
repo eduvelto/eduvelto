@@ -26,12 +26,17 @@ import { useAuth } from '../lib/auth';
 import type { EducationType, ProfileEdit } from '../lib/profile';
 import {
   JOB_CATEGORIES,
+  SELECTABLE_TARGET_EXAMS,
   clampDailyGoalMinutes,
   clampDailyGoalQuestions,
-  effectiveJobPreferences,
+  clearAnonymousJobDraft,
+  draftImportCandidates,
   isTargetExamSlug,
+  jobCategoryOfExam,
+  profileJobPreferences,
+  readAnonymousJobDraft,
   sanitizeEnrolledCategories,
-  writeLocalJobDraft,
+  type JobLocalDraft,
 } from '../lib/jobProfile';
 import { JOB_EXAMS } from '../lib/jobExams';
 import { db, isFirebaseConfigured } from '../firebase';
@@ -83,8 +88,11 @@ export default function ProfilePage() {
   const [classLevel, setClassLevel] = useState('');
   const [semester, setSemester] = useState('');
   const [phone, setPhone] = useState('');
-  // Step 4 — Job Preparation fields (profile wins; a signed-out local
-  // draft prefills empty profile fields — see effectiveJobPreferences).
+  // Step 4 — Job Preparation fields. PROFILE VALUES ONLY (ChatGPT
+  // Step 4 review P0): a signed-out anonymous draft never prefills
+  // the form by itself — absent profile fields are offered through
+  // the explicit import prompt (draftImportCandidates), never
+  // auto-merged, and cleared after the student decides.
   const [enrolledCategories, setEnrolledCategories] = useState<string[]>([]);
   const [targetExam, setTargetExam] = useState('');
   const [dailyGoalQuestions, setDailyGoalQuestions] = useState('');
@@ -94,6 +102,24 @@ export default function ProfilePage() {
   const [localError, setLocalError] = useState<string | null>(null);
   /** Two-step confirmation for academic-profile changes (Step 5). */
   const [confirming, setConfirming] = useState<ProfileEdit | null>(null);
+  /** ChatGPT Step 4 review (P0) — explicit anonymous-draft import:
+   * values this browser saved while signed out, offered ONLY for
+   * profile fields that are ABSENT from the document. Null until the
+   * profile loads and the offer is computed (once per profile load). */
+  const [draftOffer, setDraftOffer] = useState<JobLocalDraft | null>(null);
+  const [draftOfferResolved, setDraftOfferResolved] = useState(false);
+  /** ChatGPT Step 4 review (P1) — removing the category of the
+   * current target exam needs an explicit decision, never a silent
+   * invalid combination. */
+  const [categoryRemoval, setCategoryRemoval] = useState<{
+    category: string;
+    exam: string;
+  } | null>(null);
+  /** Note shown when picking a target exam auto-adds its category. */
+  const [categoryAddedNote, setCategoryAddedNote] = useState<string | null>(null);
+  /** True once the student imported the anonymous draft into the form
+   * (doSave then clears the draft — only after the import is saved). */
+  const [importedDraft, setImportedDraft] = useState(false);
   /** Guardian-link requests waiting for this student's confirmation. */
   const [childLinks, setChildLinks] = useState<ParentLink[] | null>(null);
   const { lang, t } = useLanguage();
@@ -124,14 +150,22 @@ export default function ProfilePage() {
     setClassLevel(profile.classLevel ?? '');
     setSemester(profile.semester ?? '');
     setPhone(profile.phone ?? '');
-    // Job fields: profile values; where the profile has none yet, a
-    // local draft from this browser prefills the form (saved only when
-    // the student presses Save — nothing is auto-uploaded).
-    const job = effectiveJobPreferences(profile);
+    // Job fields: PROFILE VALUES ONLY (ChatGPT Step 4 review P0 —
+    // account isolation: a signed-in student never sees another
+    // student's values, and an anonymous draft never prefills the
+    // form by itself — see the import prompt below).
+    const job = profileJobPreferences(profile);
     setEnrolledCategories(job.enrolledCategories);
     setTargetExam(job.targetExam ?? '');
     setDailyGoalQuestions(job.dailyGoalQuestions != null ? String(job.dailyGoalQuestions) : '');
     setDailyGoalMinutes(job.dailyGoalMinutes != null ? String(job.dailyGoalMinutes) : '');
+    // Explicit draft import (P0): offer the anonymous draft ONLY for
+    // profile fields ABSENT from the document. Computed once per
+    // profile load; resolved (import/decline) clears the draft, so the
+    // offer never reappears for the same draft.
+    if (!draftOfferResolved) {
+      setDraftOffer(draftImportCandidates(profile, readAnonymousJobDraft()));
+    }
   }, [profile]);
 
   // Guardian-link requests for this student (confirm step).
@@ -257,11 +291,14 @@ export default function ProfilePage() {
     // Step 4 — Job Preparation fields (any role: a teacher may also
     // prepare for a job exam). Empty goal = null (undecided), never a
     // fake default. Out-of-range goals are a form error, not a silent
-    // clamp.
+    // clamp. Decimals are REJECTED, not floored (ChatGPT Step 4
+    // review P0 — the rules require integers, and "12.5" must fail
+    // loudly instead of silently becoming 12).
     const parseGoal = (raw: string): number | null | undefined => {
       const s = raw.trim();
       if (s === '') return null;
-      const n = Math.floor(Number(s));
+      if (!/^-?\d+$/.test(s)) return undefined;
+      const n = Number(s);
       return Number.isFinite(n) ? n : undefined;
     };
     const goalQ = parseGoal(dailyGoalQuestions);
@@ -276,10 +313,19 @@ export default function ProfilePage() {
     }
     const cleanCategories = sanitizeEnrolledCategories(enrolledCategories);
     const profileCategories = sanitizeEnrolledCategories(profile.enrolledCategories ?? []);
+    const cleanTarget = targetExam !== '' && isTargetExamSlug(targetExam) ? targetExam : null;
+    // ChatGPT Step 4 review (P1) — category-to-exam consistency:
+    // a target exam must belong to an enrolled category. The UI
+    // enforces this at selection time (picking an exam auto-adds its
+    // category; removing that category asks first); this is the
+    // backstop so a saved profile can never hold an inconsistent pair.
+    if (cleanTarget) {
+      const cat = jobCategoryOfExam(cleanTarget);
+      if (cat && !cleanCategories.includes(cat)) cleanCategories.push(cat);
+    }
     if (cleanCategories.slice().sort().join(',') !== profileCategories.slice().sort().join(',')) {
       fields.enrolledCategories = cleanCategories;
     }
-    const cleanTarget = targetExam !== '' && isTargetExamSlug(targetExam) ? targetExam : null;
     if (cleanTarget !== (profile.targetExam ?? null)) fields.targetExam = cleanTarget;
     if (goalQ !== (profile.dailyGoalQuestions ?? null)) fields.dailyGoalQuestions = goalQ;
     if (goalM !== (profile.dailyGoalMinutes ?? null)) fields.dailyGoalMinutes = goalM;
@@ -303,24 +349,18 @@ export default function ProfilePage() {
     setBusy(true);
     try {
       await saveProfile(fields);
-      // Step 4 — keep this browser's signed-out fallback in sync with
-      // the saved Job values (the jobMode.ts pattern: profile wins on
-      // sign-in, local is only the fallback).
-      const jobKeys: (keyof ProfileEdit)[] = [
-        'enrolledCategories',
-        'targetExam',
-        'dailyGoalQuestions',
-        'dailyGoalMinutes',
-      ];
-      if (jobKeys.some((k) => k in fields)) {
-        writeLocalJobDraft({
-          enrolledCategories: fields.enrolledCategories ?? profile.enrolledCategories ?? [],
-          targetExam: fields.targetExam !== undefined ? fields.targetExam : (profile.targetExam ?? null),
-          dailyGoalQuestions:
-            fields.dailyGoalQuestions !== undefined ? fields.dailyGoalQuestions : (profile.dailyGoalQuestions ?? null),
-          dailyGoalMinutes:
-            fields.dailyGoalMinutes !== undefined ? fields.dailyGoalMinutes : (profile.dailyGoalMinutes ?? null),
-        });
+      // ChatGPT Step 4 review (P0): NO localStorage sync from a
+      // signed-in save — the profile is the only source of truth, and
+      // writing profile values into a browser-global draft let one
+      // student's values leak into another student's form. If this
+      // save carried an imported anonymous draft, the draft is cleared
+      // now (its values live on the profile); if the student saved
+      // without importing, the draft stays for a later decision.
+      if (importedDraft) {
+        clearAnonymousJobDraft();
+        setDraftOffer(null);
+        setDraftOfferResolved(true);
+        setImportedDraft(false);
       }
       // Student class/profile change → keep every guardian link's
       // snapshot in sync, so the guardian dashboard updates automatically.
@@ -349,6 +389,67 @@ export default function ProfilePage() {
     } finally {
       setBusy(false);
     }
+  }
+
+  /** ChatGPT Step 4 review (P0) — explicit draft import: fill the
+   * form from the offered draft values (reviewed below in the prompt);
+   * nothing is saved until the student presses Save, and the draft is
+   * cleared only after that save succeeds (see doSave). */
+  function importDraft(): void {
+    if (!draftOffer) return;
+    if (draftOffer.enrolledCategories.length > 0) {
+      setEnrolledCategories(sanitizeEnrolledCategories(draftOffer.enrolledCategories));
+    }
+    if (draftOffer.targetExam) setTargetExam(draftOffer.targetExam);
+    if (draftOffer.dailyGoalQuestions != null) {
+      setDailyGoalQuestions(String(draftOffer.dailyGoalQuestions));
+    }
+    if (draftOffer.dailyGoalMinutes != null) {
+      setDailyGoalMinutes(String(draftOffer.dailyGoalMinutes));
+    }
+    setImportedDraft(true);
+    setDraftOffer(null);
+    setDraftOfferResolved(true);
+  }
+
+  /** Decline the import — the anonymous draft is cleared at once so a
+   * stale draft can never reappear for this or another student. */
+  function declineDraft(): void {
+    clearAnonymousJobDraft();
+    setDraftOffer(null);
+    setDraftOfferResolved(true);
+  }
+
+  /** ChatGPT Step 4 review (P1) — picking a target exam auto-adds its
+   * category (with a visible note); the exam can never sit in a
+   * category the student has not enrolled in. */
+  function onTargetExamChange(next: string): void {
+    setTargetExam(next);
+    setCategoryAddedNote(null);
+    if (next !== '' && isTargetExamSlug(next)) {
+      const cat = jobCategoryOfExam(next);
+      if (cat && !enrolledCategories.includes(cat)) {
+        setEnrolledCategories((prev) => [...prev, cat]);
+        const catDef = JOB_CATEGORIES.find((c) => c.slug === cat);
+        setCategoryAddedNote(catDef ? catDef.bn : cat);
+      }
+    }
+  }
+
+  /** ChatGPT Step 4 review (P1) — unchecking a category: if it is the
+   * current target exam's category, ask first — never silently leave
+   * an invalid combination. */
+  function onCategoryToggle(slug: string, checked: boolean): void {
+    if (!checked) {
+      const examCat = targetExam !== '' ? jobCategoryOfExam(targetExam) : undefined;
+      if (examCat === slug) {
+        setCategoryRemoval({ category: slug, exam: targetExam });
+        return;
+      }
+    }
+    setEnrolledCategories((prev) =>
+      checked ? [...prev, slug] : prev.filter((s) => s !== slug),
+    );
   }
 
   const shownError = localError ?? error;
@@ -468,6 +569,61 @@ export default function ProfilePage() {
             })}
           </p>
         ) : null}
+        {/* ChatGPT Step 4 review (P0) — explicit anonymous-draft import.
+            Shown ONLY when this browser holds a signed-out draft for
+            profile fields that are absent from the document. The
+            student reviews the values, imports them into the form
+            (saved only on Save), or declines — the draft is cleared
+            after either resolution. Never auto-merged. */}
+        {draftOffer ? (
+          <div style={{ border: '2px solid #12766E', borderRadius: 8, padding: '14px', margin: '0 0 20px', background: '#EFF7F6' }}>
+            <div style={{ fontWeight: 700, color: '#142B3B', fontSize: 16 }}>
+              {t({ bn: 'আগে সংরক্ষিত কিছু পছন্দ পাওয়া গেছে', en: 'Some previously saved choices were found' })}
+            </div>
+            <p style={{ margin: '6px 0 10px', color: '#57616A', fontSize: 14, lineHeight: 1.7 }}>
+              {t({
+                bn: 'আপনি সাইন-ইন করার আগে এই ব্রাউজারে কিছু প্রস্তুতির পছন্দ বেছে রেখেছিলেন। প্রোফাইলে যুক্ত করতে চাইলে নিচের মানগুলো দেখে আমদানি করুন — না চাইলে প্রোফাইল যেমন আছে থাকবে।',
+                en: 'Before signing in, you picked some preparation choices in this browser. Review them below and import them into your profile if you want — or keep your profile as it is.',
+              })}
+            </p>
+            <ul style={{ margin: '0 0 12px', paddingLeft: 20, color: '#374151', fontSize: 14, lineHeight: 1.8 }}>
+              {draftOffer.enrolledCategories.length > 0 ? (
+                <li>
+                  {t({ bn: 'ক্যাটাগরি: ', en: 'Categories: ' })}
+                  {draftOffer.enrolledCategories
+                    .map((s) => JOB_CATEGORIES.find((c) => c.slug === s)?.bn ?? s)
+                    .join(', ')}
+                </li>
+              ) : null}
+              {draftOffer.targetExam ? (
+                <li>
+                  {t({ bn: 'লক্ষ্য পরীক্ষা: ', en: 'Target exam: ' })}
+                  {JOB_EXAMS.find((e) => e.slug === draftOffer.targetExam)?.bn ?? draftOffer.targetExam}
+                </li>
+              ) : null}
+              {draftOffer.dailyGoalQuestions != null || draftOffer.dailyGoalMinutes != null ? (
+                <li>
+                  {t({ bn: 'দৈনিক লক্ষ্য: ', en: 'Daily goal: ' })}
+                  {draftOffer.dailyGoalQuestions != null ? `${draftOffer.dailyGoalQuestions} প্রশ্ন` : '—'}
+                  {' · '}
+                  {draftOffer.dailyGoalMinutes != null ? `${draftOffer.dailyGoalMinutes} মিনিট` : '—'}
+                </li>
+              ) : null}
+            </ul>
+            <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
+              <button style={buttonStyle} type="button" onClick={importDraft}>
+                {t({ bn: 'আমদানি করুন', en: 'Import' })}
+              </button>
+              <button
+                style={{ ...buttonStyle, background: '#fff', color: '#111', border: '1px solid #aaa' }}
+                type="button"
+                onClick={declineDraft}
+              >
+                {t({ bn: 'প্রোফাইল যেমন আছে থাকুক', en: 'Keep profile unchanged' })}
+              </button>
+            </div>
+          </div>
+        ) : null}
         {/* Step 4 — Job Preparation (Step 3 §2.25, Step 2 §1.8/§5).
             Mode, enrolled categories, target exam, daily goals. */}
         <h2 style={{ fontSize: 20, marginTop: 28 }}>
@@ -496,38 +652,76 @@ export default function ProfilePage() {
                 <input
                   type="checkbox"
                   checked={checked}
-                  onChange={() =>
-                    setEnrolledCategories((prev) =>
-                      checked ? prev.filter((s) => s !== c.slug) : [...prev, c.slug],
-                    )
-                  }
+                  onChange={() => onCategoryToggle(c.slug, !checked)}
                   style={{ marginRight: 8 }}
                 />
                 <T bn={c.bn} en={c.en} />
               </label>
             );
           })}
+          {/* ChatGPT Step 4 review (P1) — removing the category of the
+              current target exam asks first: remove the exam too, or
+              keep the category. Never a silent invalid combination. */}
+          {categoryRemoval ? (
+            <div style={{ border: '1px solid #B45309', borderRadius: 8, padding: '12px', marginTop: 10, background: '#FFFBEB' }}>
+              <p style={{ margin: '0 0 10px', color: '#374151', fontSize: 14, lineHeight: 1.7 }}>
+                {t({
+                  bn: `আপনি “${JOB_CATEGORIES.find((c) => c.slug === categoryRemoval.category)?.bn ?? categoryRemoval.category}” বিভাগটি সরিয়েছেন — আপনার নির্বাচিত পরীক্ষা “${JOB_EXAMS.find((e) => e.slug === categoryRemoval.exam)?.bn ?? categoryRemoval.exam}” সেই বিভাগের। পরীক্ষাটি কি সরিয়ে দিতে চান?`,
+                  en: `You removed the “${JOB_CATEGORIES.find((c) => c.slug === categoryRemoval.category)?.en ?? categoryRemoval.category}” category — your selected exam “${JOB_EXAMS.find((e) => e.slug === categoryRemoval.exam)?.en ?? categoryRemoval.exam}” belongs to it. Do you want to remove the exam too?`,
+                })}
+              </p>
+              <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
+                <button
+                  style={buttonStyle}
+                  type="button"
+                  onClick={() => {
+                    setEnrolledCategories((prev) => prev.filter((s) => s !== categoryRemoval.category));
+                    setTargetExam('');
+                    setCategoryRemoval(null);
+                  }}
+                >
+                  {t({ bn: 'পরীক্ষাটি সরান', en: 'Remove the exam' })}
+                </button>
+                <button
+                  style={{ ...buttonStyle, background: '#fff', color: '#111', border: '1px solid #aaa' }}
+                  type="button"
+                  onClick={() => setCategoryRemoval(null)}
+                >
+                  {t({ bn: 'বিভাগটি রাখুন', en: 'Keep the category' })}
+                </button>
+              </div>
+            </div>
+          ) : null}
         </fieldset>
         <label>
           <T bn="লক্ষ্য পরীক্ষা" en="Target exam" />
           <select
             style={inputStyle}
             value={targetExam}
-            onChange={(e) => setTargetExam(e.target.value)}
+            onChange={(e) => onTargetExamChange(e.target.value)}
           >
             <option value="">
               {t({ bn: '— ঠিক হয়নি —', en: '— Undecided —' })}
             </option>
-            {/* The 13 built hubs (jobExams.ts). 'it-professional' joins
-                this list in Step 5 when its hub is built; the rules
-                already accept it as a targetExam value. */}
-            {JOB_EXAMS.map((exam) => (
+            {/* The 13 built hubs (jobExams.ts) — the canonical selectable
+                list (jobProfile.ts SELECTABLE_TARGET_EXAMS).
+                'it-professional' joins in Step 5 when its hub is built;
+                the rules already accept it as a targetExam value. */}
+            {JOB_EXAMS.filter((exam) => SELECTABLE_TARGET_EXAMS.includes(exam.slug)).map((exam) => (
               <option key={exam.slug} value={exam.slug}>
                 {t({ bn: exam.bn, en: exam.en })}
               </option>
             ))}
           </select>
         </label>
+        {categoryAddedNote ? (
+          <p style={{ margin: '-6px 0 14px', color: '#12766E', fontSize: 13 }}>
+            {t({
+              bn: `“${categoryAddedNote}” বিভাগটি যুক্ত করা হয়েছে — এই পরীক্ষাটি সেই বিভাগের।`,
+              en: `The “${JOB_CATEGORIES.find((c) => c.bn === categoryAddedNote)?.en ?? categoryAddedNote}” category was added — this exam belongs to it.`,
+            })}
+          </p>
+        ) : null}
         <label>
           <T bn="দৈনিক লক্ষ্য — প্রশ্ন" en="Daily goal — questions" />
           <input
@@ -556,8 +750,8 @@ export default function ProfilePage() {
         </label>
         <p style={{ margin: '-6px 0 14px', color: '#57616A', fontSize: 13 }}>
           {t({
-            bn: 'দৈনিক লক্ষ্য ০–৫০০ প্রশ্ন / ০–৬০০ মিনিটের মধ্যে; খালি রাখলে লক্ষ্য ঠিক হয়নি।',
-            en: 'Daily goal within 0–500 questions / 0–600 minutes; leave empty for no goal yet.',
+            bn: 'দৈনিক লক্ষ্য ০–৫০০ প্রশ্ন / ০–৬০০ মিনিটের মধ্যে; খালি রাখলে লক্ষ্য ঠিক হয়নি, আর ০ মানে স্পষ্টভাবে শূন্য লক্ষ্য। দশমিক সংখ্যা চলবে না।',
+            en: 'Daily goal within 0–500 questions / 0–600 minutes; empty means no goal yet, and 0 means an explicitly zero goal. Decimals are not allowed.',
           })}
         </p>
         {shownError ? <p style={{ color: '#b00020' }}>{shownError}</p> : null}
