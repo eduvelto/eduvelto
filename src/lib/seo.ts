@@ -51,13 +51,13 @@ export const SITE_URL = 'https://eduvelto.com';
 export const LOGO_URL = 'https://eduvelto.com/logo.png';
 
 /** Shared Organization structured data (visible on every public page).
- *  sameAs lists the Eduvelto organization's own profiles ONLY — the
- *  YouTube channel @EduveltoBD (created 22 Nov 2026,
- *  https://www.youtube.com/@EduveltoBD). The Facebook page
- *  (@EduveltoBD) is NOT verified to exist yet, so it is NOT listed.
- *  The founder's personal profiles (facebook.com/ahmmmizan etc.)
- *  belong to the Person, not to the Organization, so they are NOT
- *  listed here. */
+ *  sameAs lists the Eduvelto organization's own profiles ONLY:
+ *  YouTube @EduveltoBD (created 22 Nov 2026), LinkedIn
+ *  linkedin.com/company/eduvelto (created by the owner 22 Nov 2026),
+ *  and Facebook facebook.com/EduveltoBD (verified to exist
+ *  22 Nov 2026). The founder's personal profiles
+ *  (facebook.com/ahmmmizan etc.) belong to the Person, not to the
+ *  Organization, so they are NOT listed here. */
 export const ORGANIZATION_JSON_LD = {
   '@context': 'https://schema.org',
   '@type': 'Organization',
@@ -89,7 +89,11 @@ export const ORGANIZATION_JSON_LD = {
     'NTRCA teacher registration preparation',
     'National University admission preparation',
   ],
-  sameAs: ['https://www.youtube.com/@EduveltoBD'],
+  sameAs: [
+    'https://www.youtube.com/@EduveltoBD',
+    'https://www.linkedin.com/company/eduvelto',
+    'https://www.facebook.com/EduveltoBD',
+  ],
 };
 
 /** Shared WebSite structured data. No SearchAction — the site has no
