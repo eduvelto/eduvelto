@@ -15,16 +15,16 @@ import { useLanguage } from '../i18n/LanguageContext';
 // reviews it (see lib/health.ts + firestore.rules).
 
 const DISCLAIMER_STYLE: React.CSSProperties = {
-  border: '1px solid #b00020',
+  border: '1px solid var(--error)',
   borderRadius: 8,
   padding: '14px 16px',
-  background: '#fdf0f0',
+  background: 'var(--error-bg)',
   marginBottom: 20,
 };
 
 const ACCURACY_STYLE: React.CSSProperties = {
   borderLeft: '4px solid #F1B308',
-  background: '#fff8e1',
+  background: 'var(--soon-bg)',
   borderRadius: 4,
   padding: '10px 12px',
   marginTop: 10,
@@ -37,7 +37,7 @@ export function HealthDisclaimer() {
   const { t } = useLanguage();
   return (
     <div style={DISCLAIMER_STYLE} role="note">
-      <p style={{ margin: '0 0 8px', fontWeight: 700, color: '#b00020' }}>{t(d)}</p>
+      <p style={{ margin: '0 0 8px', fontWeight: 700, color: 'var(--error)' }}>{t(d)}</p>
       <p style={{ margin: 0 }}>
         <strong>{t(e)}</strong>
       </p>

@@ -75,17 +75,17 @@ export default function JobOnboarding({
     <section
       aria-label={t({ bn: 'প্রস্তুতির মোড বেছে নিন', en: 'Choose your preparation mode' })}
       style={{
-        border: '2px solid #12766E',
+        border: '2px solid var(--teal-text)',
         borderRadius: 12,
-        background: '#EFF7F6',
+        background: 'var(--teal-softer)',
         padding: '20px 16px',
         margin: '0 0 20px',
       }}
     >
-      <h2 style={{ margin: '0 0 6px', fontSize: 20, color: '#142B3B' }}>
+      <h2 style={{ margin: '0 0 6px', fontSize: 20, color: 'var(--heading)' }}>
         {t({ bn: 'কীভাবে প্রস্তুতি নিতে চান?', en: 'How do you want to prepare?' })}
       </h2>
-      <p style={{ margin: '0 0 16px', color: '#57616A', fontSize: 15, lineHeight: 1.7 }}>
+      <p style={{ margin: '0 0 16px', color: 'var(--muted-ivory)', fontSize: 15, lineHeight: 1.7 }}>
         {t({
           bn: 'একবার বেছে নিন — পরে যেকোনো সময় বদলানো যায়। এই পছন্দ আপনার প্রোফাইলে সংরক্ষিত হবে।',
           en: 'Pick once — you can change it any time later. This choice is saved on your profile.',
@@ -108,16 +108,16 @@ export default function JobOnboarding({
               textAlign: 'left',
               padding: '16px',
               borderRadius: 10,
-              border: '1px solid #12766E',
-              background: '#fff',
+              border: '1px solid var(--teal-text)',
+              background: 'var(--card)',
               cursor: busy ? 'wait' : 'pointer',
               fontFamily: "'Poppins','Hind Siliguri',system-ui,sans-serif",
             }}
           >
-            <span style={{ display: 'block', fontWeight: 700, fontSize: 17, color: '#142B3B' }}>
+            <span style={{ display: 'block', fontWeight: 700, fontSize: 17, color: 'var(--heading)' }}>
               {t({ bn: MODE_COPY[m].bn, en: MODE_COPY[m].en })}
             </span>
-            <span style={{ display: 'block', marginTop: 6, fontSize: 14, lineHeight: 1.7, color: '#57616A' }}>
+            <span style={{ display: 'block', marginTop: 6, fontSize: 14, lineHeight: 1.7, color: 'var(--muted-ivory)' }}>
               {t({ bn: MODE_COPY[m].descBn, en: MODE_COPY[m].descEn })}
             </span>
           </button>
@@ -132,9 +132,9 @@ export default function JobOnboarding({
             padding: '10px 18px',
             minHeight: 44,
             borderRadius: 8,
-            border: '1px solid #12766E',
-            background: '#fff',
-            color: '#12766E',
+            border: '1px solid var(--teal-text)',
+            background: 'var(--card)',
+            color: 'var(--teal-text)',
             fontWeight: 600,
             fontSize: 15,
             cursor: busy ? 'wait' : 'pointer',
@@ -144,7 +144,7 @@ export default function JobOnboarding({
         </button>
       </p>
       {failed ? (
-        <p style={{ margin: '10px 0 0', color: '#B00020', fontSize: 14 }}>
+        <p style={{ margin: '10px 0 0', color: 'var(--error)', fontSize: 14 }}>
           {t({
             bn: 'সংরক্ষণ করা যায়নি — সংযোগ দেখে আবার চেষ্টা করুন।',
             en: 'Could not save — check your connection and try again.',

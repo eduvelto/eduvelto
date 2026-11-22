@@ -236,8 +236,7 @@ export default function AdminPage() {
             nextBn="দেখার সংখ্যা গোনা শুরু হলে এখানে আসল তালিকা দেখা যাবে।"
             nextEn="The real ranking will appear here once views are tracked."
           />
-        </section>
-      </div>
+        </section>      </div>
 
       <div className="ev-admin-grid-3">
         <section className="ev-ceo-card">
@@ -383,7 +382,7 @@ export default function AdminPage() {
           key={item.id}
           style={{
             marginBottom: 12,
-            border: item.id === 'domain' && days <= 30 ? '2px solid #B00020' : undefined,
+            border: item.id === 'domain' && days <= 30 ? '2px solid var(--error)' : undefined,
           }}
         >
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, alignItems: 'center' }}>
@@ -392,7 +391,7 @@ export default function AdminPage() {
               style={{
                 marginLeft: 'auto',
                 fontSize: 14,
-                color: item.id === 'domain' && days <= 30 ? '#B00020' : '#12766E',
+                color: item.id === 'domain' && days <= 30 ? 'var(--error)' : 'var(--teal-text)',
                 fontWeight: 700,
               }}
             >

@@ -49,7 +49,7 @@ export default function HealthDoctorsPage() {
             <h2 style={{ margin: '0 0 8px', fontSize: 20 }}>
               {lang === 'bn' ? d.titleBn : d.title}
             </h2>
-            <p style={{ margin: '0 0 6px', color: '#1E7CE8', fontWeight: 700 }}>
+            <p style={{ margin: '0 0 6px', color: 'var(--link)', fontWeight: 700 }}>
               ✓ <T bn={h.verified.bn} en={h.verified.en} />
             </p>
             <p style={{ margin: '0 0 6px' }}>{lang === 'bn' ? d.qualificationBn : d.qualificationEn}</p>

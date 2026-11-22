@@ -110,7 +110,7 @@ export default function AdminAuditPage() {
           en: 'The log of all admin actions — who, what, when, before, after, why. Entries can never be edited or deleted.',
         })}
       </p>
-      <p style={{ color: '#555', fontSize: 14 }}>
+      <p style={{ color: 'var(--ink-soft)', fontSize: 14 }}>
         {t({
           bn: `সর্বশেষ ${formatBnNumber(100)}টি দেখানো হচ্ছে — তার আগের লগ দেখতে Firebase console-এ adminActions সংগ্রহ খুলুন।`,
           en: 'Showing the latest 100 — for older entries, open the adminActions collection in the Firebase console.',
@@ -129,8 +129,8 @@ export default function AdminAuditPage() {
               fontSize: 14,
               borderRadius: 999,
               border: 'none',
-              background: filter === f ? '#0A1F44' : '#eee',
-              color: filter === f ? '#fff' : '#0A1F44',
+              background: filter === f ? '#0A1F44' : 'var(--card-subtle)',
+              color: filter === f ? '#fff' : 'var(--heading)',
               cursor: 'pointer',
             }}
           >
@@ -138,7 +138,7 @@ export default function AdminAuditPage() {
           </button>
         ))}
       </div>
-      <p style={{ color: '#555', fontSize: 14 }}>
+      <p style={{ color: 'var(--ink-soft)', fontSize: 14 }}>
         {t({
           bn: `মোট ${formatBnNumber(rows.length)}টি — দেখানো হচ্ছে ${formatBnNumber(shown.length)}টি`,
           en: `Total ${rows.length} — showing ${shown.length}`,
@@ -158,7 +158,7 @@ export default function AdminAuditPage() {
 
       {grouped.map(([day, list]) => (
         <div key={day}>
-          <h2 style={{ fontSize: 16, margin: '20px 0 8px', color: '#0A1F44' }}>{day}</h2>
+          <h2 style={{ fontSize: 16, margin: '20px 0 8px', color: 'var(--heading)' }}>{day}</h2>
           <ul style={{ listStyle: 'none', padding: 0 }}>
             {list.map((row) => {
               const label = auditActionLabel(row.action);
@@ -166,7 +166,7 @@ export default function AdminAuditPage() {
                 <li
                   key={row.id}
                   style={{
-                    border: '1px solid #eee',
+                    border: '1px solid var(--line)',
                     borderRadius: 8,
                     padding: '10px 12px',
                     marginBottom: 8,
@@ -176,18 +176,18 @@ export default function AdminAuditPage() {
                   <p style={{ margin: '4px 0', fontSize: 15 }}>
                     {row.details ?? ''}
                   </p>
-                  <p style={{ margin: '0 0 4px', color: '#555', fontSize: 14 }}>
+                  <p style={{ margin: '0 0 4px', color: 'var(--ink-soft)', fontSize: 14 }}>
                     {formatTime(row.createdAt, lang)}
                     {row.before !== undefined || row.after !== undefined
                       ? ` · ${t({ bn: 'আগে', en: 'Before' })}: ${row.before ?? '—'} → ${t({ bn: 'পরে', en: 'After' })}: ${row.after ?? '—'}`
                       : ''}
                   </p>
                   {row.reason ? (
-                    <p style={{ margin: '0 0 4px', color: '#555', fontSize: 14 }}>
+                    <p style={{ margin: '0 0 4px', color: 'var(--ink-soft)', fontSize: 14 }}>
                       {t({ bn: 'কারণ', en: 'Reason' })}: {row.reason}
                     </p>
                   ) : null}
-                  <p style={{ margin: 0, color: '#999', fontSize: 13 }}>
+                  <p style={{ margin: 0, color: 'var(--muted)', fontSize: 13 }}>
                     <span lang="en">{row.actorId.slice(0, 8)}…</span>
                     {row.targetId ? (
                       <>
@@ -213,9 +213,9 @@ export default function AdminAuditPage() {
             minHeight: 48,
             fontSize: 16,
             borderRadius: 8,
-            border: '1px solid #0A1F44',
-            background: '#fff',
-            color: '#0A1F44',
+            border: '1px solid var(--heading)',
+            background: 'var(--card)',
+            color: 'var(--heading)',
             cursor: 'pointer',
           }}
         >

@@ -52,7 +52,7 @@ const inputStyle: React.CSSProperties = {
   padding: '10px 12px',
   margin: '6px 0 14px',
   fontSize: 16,
-  border: '1px solid #aaa',
+  border: '1px solid var(--line-strong)',
   borderRadius: 6,
 };
 
@@ -228,8 +228,8 @@ export default function ProfilePage() {
   if (suspended) {
     return (
       <PageShell titleBn="প্রোফাইল" titleEn="Profile">
-        <div style={{ border: '1px solid #b00020', borderRadius: 8, padding: '20px 16px', background: '#fdf0f0' }}>
-          <h2 style={{ marginTop: 0, color: '#b00020' }}>{t(p.suspendedTitle)}</h2>
+        <div style={{ border: '1px solid var(--error)', borderRadius: 8, padding: '20px 16px', background: 'var(--error-bg)' }}>
+          <h2 style={{ marginTop: 0, color: 'var(--error)' }}>{t(p.suspendedTitle)}</h2>
           <p>{t(p.suspendedBody)}</p>
         </div>
         <p style={{ marginTop: 20 }}>
@@ -245,7 +245,7 @@ export default function ProfilePage() {
     return (
       <PageShell titleBn="প্রোফাইল" titleEn="Profile">
         <p>{t({ bn: 'প্রোফাইল লোড করা যায়নি।', en: 'Could not load profile.' })}</p>
-        {error ? <p style={{ color: '#b00020' }}>{error}</p> : null}
+        {error ? <p style={{ color: 'var(--error)' }}>{error}</p> : null}
         <p>
           <button style={buttonStyle} type="button" onClick={() => void signOut()}>
             <T bn={strings.nav.logout.bn} en={strings.nav.logout.en} />
@@ -484,26 +484,26 @@ export default function ProfilePage() {
   return (
     <PageShell titleBn="প্রোফাইল" titleEn="Profile">
       <dl style={{ display: 'grid', gridTemplateColumns: '140px 1fr', gap: '6px 12px', margin: '0 0 20px' }}>
-        <dt style={{ color: '#555' }}>{t(p.email)}</dt>
+        <dt style={{ color: 'var(--ink-soft)' }}>{t(p.email)}</dt>
         <dd style={{ margin: 0 }}>{profile.email}</dd>
-        <dt style={{ color: '#555' }}>{t(p.role)}</dt>
+        <dt style={{ color: 'var(--ink-soft)' }}>{t(p.role)}</dt>
         <dd style={{ margin: 0 }}>{profile.role === 'student' ? t(d.roleStudent) : profile.role === 'teacher' ? t(d.roleTeacher) : profile.role === 'parent' ? t(d.roleGuardian) : profile.role}</dd>
-        <dt style={{ color: '#555' }}>Eduvelto ID</dt>
+        <dt style={{ color: 'var(--ink-soft)' }}>Eduvelto ID</dt>
         <dd style={{ margin: 0 }}>
           <code style={{ wordBreak: 'break-all' }}>{user.uid}</code>
-          <span style={{ color: '#555', fontSize: 13, display: 'block' }}>
+          <span style={{ color: 'var(--ink-soft)', fontSize: 13, display: 'block' }}>
             <T bn={d.eduveltoIdNote.bn} en={d.eduveltoIdNote.en} />
           </span>
         </dd>
         {profile.verificationStatus ? (
           <>
-            <dt style={{ color: '#555' }}>{t({ bn: 'ভেরিফিকেশন', en: 'Verification' })}</dt>
+            <dt style={{ color: 'var(--ink-soft)' }}>{t({ bn: 'ভেরিফিকেশন', en: 'Verification' })}</dt>
             <dd style={{ margin: 0 }}>{profile.verificationStatus === 'verified' ? t(d.verified) : profile.verificationStatus === 'pending' ? t(d.verificationPending) : profile.verificationStatus === 'rejected' ? t({ bn: 'প্রত্যাখ্যাত', en: 'Rejected' }) : profile.verificationStatus}</dd>
           </>
         ) : null}
         {createdAt ? (
           <>
-            <dt style={{ color: '#555' }}>{t(p.memberSince)}</dt>
+            <dt style={{ color: 'var(--ink-soft)' }}>{t(p.memberSince)}</dt>
             <dd style={{ margin: 0 }}>{createdAt.toLocaleDateString(lang === 'bn' ? 'bn-BD' : 'en-GB')}</dd>
           </>
         ) : null}
@@ -590,7 +590,7 @@ export default function ProfilePage() {
         <h3 style={{ fontSize: 18, marginTop: 28 }}>
           <T bn="জাতীয় বিশ্ববিদ্যালয় ভর্তি প্রস্তুতি" en="National University Admission Preparation" />
         </h3>
-        <p style={{ color: '#555', fontSize: 14, lineHeight: 1.7 }}>
+        <p style={{ color: 'var(--ink-soft)', fontSize: 14, lineHeight: 1.7 }}>
           {t({
             bn: 'ভর্তি প্রস্তুতির লক্ষ্য প্রতিষ্ঠান ও শাখা বেছে নিন। লক্ষ্য বদলালে আপনার অগ্রগতি, ফলাফল বা ইতিহাস মুছে যাবে না।',
             en: 'Choose your target institution and group for admission preparation. Changing your target never deletes your progress, results or history.',
@@ -633,7 +633,7 @@ export default function ProfilePage() {
           <AdmissionModeSwitch />
         </div>
         {profile.role === 'teacher' ? (
-          <p style={{ color: '#555' }}>
+          <p style={{ color: 'var(--ink-soft)' }}>
             {t({
               bn: 'বিষয় ও শ্রেণি পরিবর্তন করতে শিক্ষক ড্যাশবোর্ডের পরিবর্তন-অনুরোধ ব্যবহার করুন — প্রোফাইলে লেখা বিষয় অনুমোদিত বিষয় নয়।',
               en: 'To change subjects or classes, use the change request on the Teacher Dashboard — subjects written here are not your approved subjects.',
@@ -647,17 +647,17 @@ export default function ProfilePage() {
             (saved only on Save), or declines — the draft is cleared
             after either resolution. Never auto-merged. */}
         {draftOffer ? (
-          <div style={{ border: '2px solid #12766E', borderRadius: 8, padding: '14px', margin: '0 0 20px', background: '#EFF7F6' }}>
-            <div style={{ fontWeight: 700, color: '#142B3B', fontSize: 16 }}>
+          <div style={{ border: '2px solid var(--teal-text)', borderRadius: 8, padding: '14px', margin: '0 0 20px', background: 'var(--teal-softer)' }}>
+            <div style={{ fontWeight: 700, color: 'var(--heading)', fontSize: 16 }}>
               {t({ bn: 'আগে সংরক্ষিত কিছু পছন্দ পাওয়া গেছে', en: 'Some previously saved choices were found' })}
             </div>
-            <p style={{ margin: '6px 0 10px', color: '#57616A', fontSize: 14, lineHeight: 1.7 }}>
+            <p style={{ margin: '6px 0 10px', color: 'var(--muted-ivory)', fontSize: 14, lineHeight: 1.7 }}>
               {t({
                 bn: 'আপনি সাইন-ইন করার আগে এই ব্রাউজারে কিছু প্রস্তুতির পছন্দ বেছে রেখেছিলেন। প্রোফাইলে যুক্ত করতে চাইলে নিচের মানগুলো দেখে আমদানি করুন — না চাইলে প্রোফাইল যেমন আছে থাকবে।',
                 en: 'Before signing in, you picked some preparation choices in this browser. Review them below and import them into your profile if you want — or keep your profile as it is.',
               })}
             </p>
-            <ul style={{ margin: '0 0 12px', paddingLeft: 20, color: '#374151', fontSize: 14, lineHeight: 1.8 }}>
+            <ul style={{ margin: '0 0 12px', paddingLeft: 20, color: 'var(--ink-soft)', fontSize: 14, lineHeight: 1.8 }}>
               {draftOffer.enrolledCategories.length > 0 ? (
                 <li>
                   {t({ bn: 'ক্যাটাগরি: ', en: 'Categories: ' })}
@@ -686,7 +686,7 @@ export default function ProfilePage() {
                 {t({ bn: 'আমদানি করুন', en: 'Import' })}
               </button>
               <button
-                style={{ ...buttonStyle, background: '#fff', color: '#111', border: '1px solid #aaa' }}
+                style={{ ...buttonStyle, background: 'var(--card)', color: 'var(--ink)', border: '1px solid var(--line-strong)' }}
                 type="button"
                 onClick={declineDraft}
               >
@@ -706,11 +706,11 @@ export default function ProfilePage() {
           </div>
           <JobModeSwitch />
         </div>
-        <fieldset style={{ border: '1px solid #ccc', borderRadius: 6, padding: '12px', margin: '0 0 14px' }}>
+        <fieldset style={{ border: '1px solid var(--line-strong)', borderRadius: 6, padding: '12px', margin: '0 0 14px' }}>
           <legend style={{ fontWeight: 600, padding: '0 6px' }}>
             <T bn="ভর্তি হওয়া ক্যাটাগরি" en="Enrolled categories" />
           </legend>
-          <p style={{ margin: '0 0 10px', color: '#57616A', fontSize: 14 }}>
+          <p style={{ margin: '0 0 10px', color: 'var(--muted-ivory)', fontSize: 14 }}>
             {t({
               bn: 'যেসব ক্যাটাগরিতে প্রস্তুতি নিচ্ছেন, সেগুলো বেছে নিন। ক্যাটাগরি সরালে অগ্রগতি মোছে না — শুধু তালিকা থেকে সরে।',
               en: 'Pick the categories you are preparing for. Removing a category never deletes your progress — it only leaves the list.',
@@ -734,8 +734,8 @@ export default function ProfilePage() {
               current target exam asks first: remove the exam too, or
               keep the category. Never a silent invalid combination. */}
           {categoryRemoval ? (
-            <div style={{ border: '1px solid #B45309', borderRadius: 8, padding: '12px', marginTop: 10, background: '#FFFBEB' }}>
-              <p style={{ margin: '0 0 10px', color: '#374151', fontSize: 14, lineHeight: 1.7 }}>
+            <div style={{ border: '1px solid var(--amber-deep)', borderRadius: 8, padding: '12px', marginTop: 10, background: 'var(--soon-bg)' }}>
+              <p style={{ margin: '0 0 10px', color: 'var(--ink-soft)', fontSize: 14, lineHeight: 1.7 }}>
                 {t({
                   bn: `আপনি “${JOB_CATEGORIES.find((c) => c.slug === categoryRemoval.category)?.bn ?? categoryRemoval.category}” বিভাগটি সরিয়েছেন — আপনার নির্বাচিত পরীক্ষা “${JOB_EXAMS.find((e) => e.slug === categoryRemoval.exam)?.bn ?? categoryRemoval.exam}” সেই বিভাগের। পরীক্ষাটি কি সরিয়ে দিতে চান?`,
                   en: `You removed the “${JOB_CATEGORIES.find((c) => c.slug === categoryRemoval.category)?.en ?? categoryRemoval.category}” category — your selected exam “${JOB_EXAMS.find((e) => e.slug === categoryRemoval.exam)?.en ?? categoryRemoval.exam}” belongs to it. Do you want to remove the exam too?`,
@@ -754,7 +754,7 @@ export default function ProfilePage() {
                   {t({ bn: 'পরীক্ষাটি সরান', en: 'Remove the exam' })}
                 </button>
                 <button
-                  style={{ ...buttonStyle, background: '#fff', color: '#111', border: '1px solid #aaa' }}
+                  style={{ ...buttonStyle, background: 'var(--card)', color: 'var(--ink)', border: '1px solid var(--line-strong)' }}
                   type="button"
                   onClick={() => setCategoryRemoval(null)}
                 >
@@ -787,7 +787,7 @@ export default function ProfilePage() {
           </select>
         </label>
         {categoryAddedNote ? (
-          <p style={{ margin: '-6px 0 14px', color: '#12766E', fontSize: 13 }}>
+          <p style={{ margin: '-6px 0 14px', color: 'var(--teal-text)', fontSize: 13 }}>
             {t({
               bn: `“${categoryAddedNote}” বিভাগটি যুক্ত করা হয়েছে — এই পরীক্ষাটি সেই বিভাগের।`,
               en: `The “${JOB_CATEGORIES.find((c) => c.bn === categoryAddedNote)?.en ?? categoryAddedNote}” category was added — this exam belongs to it.`,
@@ -820,20 +820,20 @@ export default function ProfilePage() {
             placeholder={t({ bn: 'যেমন: 30', en: 'e.g.: 30' })}
           />
         </label>
-        <p style={{ margin: '-6px 0 14px', color: '#57616A', fontSize: 13 }}>
+        <p style={{ margin: '-6px 0 14px', color: 'var(--muted-ivory)', fontSize: 13 }}>
           {t({
             bn: 'দৈনিক লক্ষ্য ০–৫০০ প্রশ্ন / ০–৬০০ মিনিটের মধ্যে; খালি রাখলে লক্ষ্য ঠিক হয়নি, আর ০ মানে স্পষ্টভাবে শূন্য লক্ষ্য। দশমিক সংখ্যা চলবে না।',
             en: 'Daily goal within 0–500 questions / 0–600 minutes; empty means no goal yet, and 0 means an explicitly zero goal. Decimals are not allowed.',
           })}
         </p>
-        {shownError ? <p style={{ color: '#b00020' }}>{shownError}</p> : null}
-        {saved ? <p style={{ color: '#0A1F44' }}>{t(p.saved)}</p> : null}
+        {shownError ? <p style={{ color: 'var(--error)' }}>{shownError}</p> : null}
+        {saved ? <p style={{ color: 'var(--heading)' }}>{t(p.saved)}</p> : null}
         <button style={buttonStyle} type="submit" disabled={busy}>
           {busy ? <T bn={strings.common.loading.bn} en={strings.common.loading.en} /> : <T bn={strings.common.save.bn} en={strings.common.save.en} />}
         </button>
       </form>
       {confirming ? (
-        <div style={{ border: '2px solid #0A1F44', borderRadius: 8, padding: '16px', marginTop: 20, background: '#f2f6ff' }}>
+        <div style={{ border: '2px solid var(--heading)', borderRadius: 8, padding: '16px', marginTop: 20, background: 'var(--hover)' }}>
           <h3 style={{ marginTop: 0 }}><T bn={d.confirmAcademicChange.bn} en={d.confirmAcademicChange.en} /></h3>
           <ul style={{ paddingLeft: 20 }}>
             {Object.entries(confirming).map(([key, value]) => (
@@ -848,7 +848,7 @@ export default function ProfilePage() {
               {busy ? <T bn={strings.common.loading.bn} en={strings.common.loading.en} /> : <T bn="নিশ্চিত করুন" en="Confirm" />}
             </button>
             <button
-              style={{ ...buttonStyle, background: '#fff', color: '#111', border: '1px solid #aaa' }}
+              style={{ ...buttonStyle, background: 'var(--card)', color: 'var(--ink)', border: '1px solid var(--line-strong)' }}
               type="button"
               onClick={() => setConfirming(null)}
               disabled={busy}
@@ -869,7 +869,7 @@ export default function ProfilePage() {
               })}
             </p>
           ) : (
-            <p style={{ color: '#555' }}>{t({ bn: 'কোনো নতুন অনুরোধ নেই।', en: 'No new requests.' })}</p>
+            <p style={{ color: 'var(--ink-soft)' }}>{t({ bn: 'কোনো নতুন অনুরোধ নেই।', en: 'No new requests.' })}</p>
           )}
           <p>
             <Link to="/profile/guardian-links">{t({ bn: 'অনুরোধগুলো দেখুন →', en: 'See the requests →' })}</Link>
@@ -878,7 +878,7 @@ export default function ProfilePage() {
       ) : null}
       <p style={{ marginTop: 24 }}>
         <button
-          style={{ ...buttonStyle, background: '#fff', color: '#111', border: '1px solid #aaa' }}
+          style={{ ...buttonStyle, background: 'var(--card)', color: 'var(--ink)', border: '1px solid var(--line-strong)' }}
           type="button"
           onClick={() => void signOut()}
         >

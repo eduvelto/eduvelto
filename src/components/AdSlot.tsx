@@ -96,8 +96,8 @@ export default function AdSlot(props: { placement: AdPlacement; format?: 'auto' 
               right: 0,
               bottom: 0,
               zIndex: 10,
-              background: '#fff',
-              borderTop: '1px solid #ddd',
+              background: 'var(--card)',
+              borderTop: '1px solid var(--line-strong)',
               paddingBottom: 'env(safe-area-inset-bottom, 0px)',
               textAlign: 'center',
             }

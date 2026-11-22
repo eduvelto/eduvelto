@@ -268,7 +268,7 @@ function ProgressRing({ percent, label }: { percent: number; label: string }) {
           {percent}%
         </text>
       </svg>
-      <div style={{ fontSize: 13, color: '#57616A', marginTop: 6 }}>{label}</div>
+      <div style={{ fontSize: 13, color: 'var(--muted-ivory)', marginTop: 6 }}>{label}</div>
     </div>
   );
 }
@@ -376,7 +376,7 @@ export default function HomePage() {
           <Link to={user ? '/dashboard' : '/register'} className="ev-btn ev-btn-gold" style={{ textDecoration: 'none' }}>
             {t({ bn: 'এখনই শুরু করুন →', en: 'Start now →' })}
           </Link>
-          <Link to="/library" className="ev-btn" style={{ textDecoration: 'none', background: '#fff', borderColor: '#C9D2D8' }}>
+          <Link to="/library" className="ev-btn" style={{ textDecoration: 'none', background: 'var(--card)', borderColor: 'var(--line-strong)' }}>
             {t({ bn: 'লাইব্রেরি দেখুন', en: 'Browse library' })}
           </Link>
         </div>
@@ -506,7 +506,7 @@ export default function HomePage() {
               <StarIcon size={18} /> {t({ bn: 'সাম্প্রতিক আপডেট', en: 'Recent Updates' })}
             </h2>
           </div>
-          <p style={{ color: '#57616A', margin: '6px 0 0', fontSize: 14, lineHeight: 1.7 }}>
+          <p style={{ color: 'var(--muted-ivory)', margin: '6px 0 0', fontSize: 14, lineHeight: 1.7 }}>
             {t({ bn: 'এখনো কোনো আপডেট নেই। নতুন নিয়োগ ও ভর্তি বিজ্ঞপ্তি প্রকাশিত হলে এখানে দেখা যাবে।', en: 'No updates yet. New job and admission circulars will appear here once published.' })}
           </p>
         </div>
@@ -519,7 +519,7 @@ export default function HomePage() {
           </div>
           {!user ? (
             <div>
-              <p style={{ color: '#57616A', margin: '6px 0 12px', fontSize: 14, lineHeight: 1.7 }}>
+              <p style={{ color: 'var(--muted-ivory)', margin: '6px 0 12px', fontSize: 14, lineHeight: 1.7 }}>
                 {t({ bn: 'লগইন করলে আপনার পড়াশোনার অগ্রগতি এখানে দেখা যাবে।', en: 'Log in to see your study progress here.' })}
               </p>
               <Link to="/login" className="ev-btn ev-btn-primary ev-btn-sm">
@@ -527,14 +527,14 @@ export default function HomePage() {
               </Link>
             </div>
           ) : progressLoading ? (
-            <p style={{ color: '#57616A', margin: '6px 0 0', fontSize: 14 }}>{t({ bn: 'অগ্রগতি লোড হচ্ছে…', en: 'Loading progress…' })}</p>
+            <p style={{ color: 'var(--muted-ivory)', margin: '6px 0 0', fontSize: 14 }}>{t({ bn: 'অগ্রগতি লোড হচ্ছে…', en: 'Loading progress…' })}</p>
           ) : progressError ? (
-            <p style={{ color: '#B00020', margin: '6px 0 0', fontSize: 14 }}>
+            <p style={{ color: 'var(--error)', margin: '6px 0 0', fontSize: 14 }}>
               {t({ bn: 'অগ্রগতি লোড করা যায়নি — পাতাটি রিফ্রেশ করে আবার চেষ্টা করুন।', en: 'Could not load progress — please refresh and try again.' })}
             </p>
           ) : !hasProgress ? (
             <div>
-              <p style={{ color: '#57616A', margin: '6px 0 12px', fontSize: 14, lineHeight: 1.7 }}>
+              <p style={{ color: 'var(--muted-ivory)', margin: '6px 0 12px', fontSize: 14, lineHeight: 1.7 }}>
                 {t({ bn: 'এখনো কোনো অগ্রগতি নেই — পাঠ পড়ে বা কুইজ দিয়ে শুরু করুন।', en: 'No progress yet — start by reading a lesson or taking a quiz.' })}
               </p>
               <Link to="/library" className="ev-btn ev-btn-primary ev-btn-sm">
@@ -598,7 +598,7 @@ export default function HomePage() {
 
       {/* Footer banner (mockup). */}
       <section className="ev-home-banner" aria-label={t({ bn: 'Eduvelto', en: 'Eduvelto' })}>
-        <span aria-hidden="true" style={{ color: '#D9A441' }}>
+        <span aria-hidden="true" style={{ color: 'var(--amber)' }}>
           <TrophyIcon size={34} />
         </span>
         <div>

@@ -117,8 +117,8 @@ export default function ClassSubjectPage() {
           {t({ bn: `← ${def.bn} — সব বিষয়`, en: `← ${def.en} — All subjects` })}
         </Link>
       </p>
-      <h2 style={{ color: '#142B3B', fontSize: 24, margin: '0 0 4px' }}>{subject}</h2>
-      <p style={{ color: '#57616A', margin: '0 0 20px' }}>
+      <h2 style={{ color: 'var(--heading)', fontSize: 24, margin: '0 0 4px' }}>{subject}</h2>
+      <p style={{ color: 'var(--muted-ivory)', margin: '0 0 20px' }}>
         {t({ bn: `${def.bn} — এই বিষয়ের শুধুমাত্র এই শ্রেণির বই`, en: `${def.en} — only this class's books for this subject` })}
       </p>
       {books === null ? <SkeletonCards count={3} /> : null}
@@ -135,14 +135,13 @@ export default function ClassSubjectPage() {
       ) : null}
       {subjectBooks.length > 0 ? (
         <>
-          <p style={{ color: '#57616A', margin: '0 0 12px' }}>
-            {t({ bn: `${totalBooks}টি বই · ${totalChapters}টি পাঠ · ${totalQuestions}টি প্রশ্ন`, en: `${totalBooks} books · ${totalChapters} lessons · ${totalQuestions} questions` })}
-          </p>
+          <p style={{ color: 'var(--muted-ivory)', margin: '0 0 12px' }}>
+            {t({ bn: `${totalBooks}টি বই · ${totalChapters}টি পাঠ · ${totalQuestions}টি প্রশ্ন`, en: `${totalBooks} books · ${totalChapters} lessons · ${totalQuestions} questions` })}          </p>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: 12 }}>
             {subjectBooks.map((b, i) => (
               <Reveal key={b.id} delayMs={Math.min(i, 3) * 60}>
                 <Card hover>
-                  <Link to={`/library/${b.id}`} style={{ fontWeight: 700, fontSize: 16, color: '#142B3B', lineHeight: 1.5 }}>
+                  <Link to={`/library/${b.id}`} style={{ fontWeight: 700, fontSize: 16, color: 'var(--heading)', lineHeight: 1.5 }}>
                     {b.title}
                   </Link>
                   <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, marginTop: 10 }}>
@@ -150,7 +149,7 @@ export default function ClassSubjectPage() {
                     <Chip tone="outline">{b.classLevel}</Chip>
                     <Chip tone="gold">{t({ bn: `${b.questionCount}টি প্রশ্ন`, en: `${b.questionCount} questions` })}</Chip>
                   </div>
-                  <p style={{ margin: '10px 0 0', color: '#68747B', fontSize: 14 }}>
+                  <p style={{ margin: '10px 0 0', color: 'var(--muted)', fontSize: 14 }}>
                     {t({ bn: `${b.chapterCount}টি পাঠ — বই খুলে অধ্যায় দেখুন`, en: `${b.chapterCount} lessons — open the book to see chapters` })}
                   </p>
                   <p style={{ margin: '10px 0 0' }}>
@@ -162,7 +161,7 @@ export default function ClassSubjectPage() {
               </Reveal>
             ))}
           </div>
-          <p style={{ marginTop: 16, color: '#68747B', fontSize: 14 }}>
+          <p style={{ marginTop: 16, color: 'var(--muted)', fontSize: 14 }}>
             {t({ bn: 'প্রতিটি বইয়ের ভেতরে অধ্যায়ভিত্তিক পাঠ আছে — বই খুলে অধ্যায় ও পাঠ দেখুন।', en: 'Each book contains chapter-wise lessons — open a book to see its chapters and lessons.' })}
           </p>
           {statsMode && pageCount > 1 ? (

@@ -127,7 +127,7 @@ export default function ContactPage() {
           </Button>
         </form>
       )}
-      <p style={{ marginTop: 20, color: '#555', fontSize: 14, lineHeight: 1.6 }}>
+      <p style={{ marginTop: 20, color: 'var(--ink-soft)', fontSize: 14, lineHeight: 1.6 }}>
         {t({
           bn: 'আপনার বার্তা শুধুমাত্র Eduvelto-র মালিক ও অ্যাডমিনরা দেখতে পান।',
           en: 'Your message is visible only to Eduvelto’s owner and admins.',

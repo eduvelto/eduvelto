@@ -73,7 +73,7 @@ export default function JobsPage() {
           <button
             type="button"
             onClick={() => setShowOnboarding(true)}
-            style={{ background: 'none', border: 'none', padding: 0, color: '#12766E', fontWeight: 600, fontSize: 14, cursor: 'pointer', textDecoration: 'underline' }}
+            style={{ background: 'none', border: 'none', padding: 0, color: 'var(--teal-text)', fontWeight: 600, fontSize: 14, cursor: 'pointer', textDecoration: 'underline' }}
           >
             {t({ bn: 'মোড পছন্দ আবার দেখুন', en: 'Show the mode choice again' })}
           </button>
@@ -103,10 +103,10 @@ export default function JobsPage() {
         <Reveal delayMs={0}>
           <Card>
             <span className="ev-step-num" aria-hidden="true">{t({ bn: '১', en: '1' })}</span>
-            <div style={{ fontWeight: 700, color: '#142B3B', marginTop: 10 }}>
+            <div style={{ fontWeight: 700, color: 'var(--heading)', marginTop: 10 }}>
               {t({ bn: 'পরীক্ষা বেছে নিন', en: 'Pick your exam' })}
             </div>
-            <p style={{ margin: '6px 0 0', color: '#68747B', fontSize: 14 }}>
+            <p style={{ margin: '6px 0 0', color: 'var(--muted)', fontSize: 14 }}>
               {t({ bn: 'যে পরীক্ষার প্রস্তুতি নিতে চান, তার কার্ডে চাপুন।', en: 'Tap the card of the exam you want to prepare for.' })}
             </p>
           </Card>
@@ -114,10 +114,10 @@ export default function JobsPage() {
         <Reveal delayMs={80}>
           <Card>
             <span className="ev-step-num" aria-hidden="true">{t({ bn: '২', en: '2' })}</span>
-            <div style={{ fontWeight: 700, color: '#142B3B', marginTop: 10 }}>
+            <div style={{ fontWeight: 700, color: 'var(--heading)', marginTop: 10 }}>
               {t({ bn: 'কাঠামো দেখুন', en: 'See the structure' })}
             </div>
-            <p style={{ margin: '6px 0 0', color: '#68747B', fontSize: 14 }}>
+            <p style={{ margin: '6px 0 0', color: 'var(--muted)', fontSize: 14 }}>
               {t({ bn: 'প্রতিটি পরীক্ষার হাবে সিলেবাস, অনুশীলন, মক টেস্ট ও ভাইভা প্রস্তুতির জায়গা দেখুন।', en: 'Each exam hub shows where the syllabus, practice, mock tests and viva preparation will live.' })}
             </p>
           </Card>
@@ -125,10 +125,10 @@ export default function JobsPage() {
         <Reveal delayMs={160}>
           <Card>
             <span className="ev-step-num" aria-hidden="true">{t({ bn: '৩', en: '3' })}</span>
-            <div style={{ fontWeight: 700, color: '#142B3B', marginTop: 10 }}>
+            <div style={{ fontWeight: 700, color: 'var(--heading)', marginTop: 10 }}>
               {t({ bn: 'কনটেন্ট আসছে', en: 'Content is coming' })}
             </div>
-            <p style={{ margin: '6px 0 0', color: '#68747B', fontSize: 14 }}>
+            <p style={{ margin: '6px 0 0', color: 'var(--muted)', fontSize: 14 }}>
               {t({ bn: 'সিলেবাস, প্রশ্ন ও মক টেস্ট শিক্ষক যাচাইয়ের পর প্রকাশিত হবে — তখন এখানেই অনুশীলন করতে পারবেন।', en: 'Syllabus, questions and mock tests will be published after teacher review — then you can practise right here.' })}
             </p>
           </Card>
@@ -137,7 +137,7 @@ export default function JobsPage() {
 
       <Reveal>
         <Card>
-          <p style={{ margin: 0, color: '#68747B', fontSize: 14, lineHeight: 1.7 }}>
+          <p style={{ margin: 0, color: 'var(--muted)', fontSize: 14, lineHeight: 1.7 }}>
             {t({
               bn: 'এখানে "পাশ করবেন / চাকরি পাবেন" — এমন কোনো গ্যারান্টি দেওয়া হয় না। প্রস্তুতির উপকরণ দেওয়া হয়; ফল নির্ভর করে আপনার পড়াশোনা ও পরীক্ষার ওপর।',
               en: 'No "you will pass / you will get the job" guarantee is given here. Preparation material is provided; the result depends on your study and the exam.',

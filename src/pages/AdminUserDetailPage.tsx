@@ -134,7 +134,7 @@ export default function AdminUserDetailPage() {
   return (
     <PageShell titleBn="ব্যবহারকারীর প্রোফাইল" titleEn="User profile">
       <AdminBackLink />
-      <p style={{ color: '#555', fontSize: 14 }}>
+      <p style={{ color: 'var(--ink-soft)', fontSize: 14 }}>
         {t({
           bn: 'মালিকের তদারকি: এই পাতা খোলা অডিট লগে লেখা হয়েছে (কে, কাকে, কখন)।',
           en: 'Owner oversight: opening this page was written to the audit log (who, whom, when).',
@@ -143,21 +143,21 @@ export default function AdminUserDetailPage() {
       {loading ? <LoadingBox /> : null}
       {error ? <ErrorBox message={error} /> : null}
       {notice ? (
-        <p role="status" style={{ color: '#0A1F44', fontWeight: 700 }}>
+        <p role="status" style={{ color: 'var(--heading)', fontWeight: 700 }}>
           {notice}
         </p>
       ) : null}
 
       {user ? (
         <>
-          <div style={{ border: '1px solid #ddd', borderRadius: 8, padding: '14px', marginBottom: 12 }}>
+          <div style={{ border: '1px solid var(--line-strong)', borderRadius: 8, padding: '14px', marginBottom: 12 }}>
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, alignItems: 'center' }}>
               <strong style={{ fontSize: 18 }}>{user.displayName}</strong>
               {isOwner ? (
                 <span
                   style={{
                     background: '#F1B308',
-                    color: '#041742',
+                    color: 'var(--heading)',
                     fontWeight: 700,
                     borderRadius: 999,
                     padding: '2px 10px',
@@ -176,19 +176,19 @@ export default function AdminUserDetailPage() {
             <p style={{ margin: '8px 0' }}>
               {t({ bn: 'ইমেইল', en: 'Email' })}: <span lang="en">{user.email}</span>
             </p>
-            <p style={{ margin: '4px 0', color: '#555', fontSize: 14 }}>
+            <p style={{ margin: '4px 0', color: 'var(--ink-soft)', fontSize: 14 }}>
               {user.educationType ? `${t({ bn: 'ধারা', en: 'Stream' })}: ${user.educationType} · ` : ''}
               {user.institution ? `${t({ bn: 'প্রতিষ্ঠান', en: 'Institution' })}: ${user.institution} · ` : ''}
               {user.program ? `${t({ bn: 'প্রোগ্রাম', en: 'Programme' })}: ${user.program} · ` : ''}
               {user.department ? `${t({ bn: 'বিভাগ', en: 'Department' })}: ${user.department} · ` : ''}
               {user.classLevel ? `${t({ bn: 'শ্রেণি', en: 'Class' })}: ${user.classLevel}` : ''}
             </p>
-            <p style={{ margin: '4px 0', color: '#555', fontSize: 14 }}>
+            <p style={{ margin: '4px 0', color: 'var(--ink-soft)', fontSize: 14 }}>
               {t({ bn: 'সদস্য', en: 'Member since' })}: {formatTime(user.createdAt, lang)}
               {user.verificationStatus ? ` · ${t({ bn: 'শিক্ষক যাচাই', en: 'Teacher verification' })}: ${user.verificationStatus}` : ''}
             </p>
             {!user.isActive && user.suspendedReason ? (
-              <p style={{ margin: '4px 0', color: '#b00020' }}>
+              <p style={{ margin: '4px 0', color: 'var(--error)' }}>
                 {t({ bn: 'স্থগিতের কারণ', en: 'Suspension reason' })}: {user.suspendedReason}
               </p>
             ) : null}
@@ -200,7 +200,7 @@ export default function AdminUserDetailPage() {
               en="This is the Owner account — it can never be suspended or have its role changed."
             />
           ) : (
-            <div style={{ border: '1px solid #ddd', borderRadius: 8, padding: '14px', marginBottom: 12 }}>
+            <div style={{ border: '1px solid var(--line-strong)', borderRadius: 8, padding: '14px', marginBottom: 12 }}>
               <h2 style={{ fontSize: 17, marginTop: 0 }}>{t({ bn: 'পদক্ষেপ', en: 'Actions' })}</h2>
               <label style={{ display: 'block', fontWeight: 700, marginBottom: 4 }}>
                 {t({ bn: 'কারণ (অবশ্যই লিখুন — কমপক্ষে ১০ অক্ষর)', en: 'Reason (required — at least 10 characters)' })}
@@ -316,7 +316,7 @@ export default function AdminUserDetailPage() {
                   </span>
                 </label>
               ) : null}
-              <p style={{ color: '#555', fontSize: 14 }}>
+              <p style={{ color: 'var(--ink-soft)', fontSize: 14 }}>
                 {t({
                   bn: 'স্থগিত করলে ব্যবহারকারী আর লগইন করে অ্যাপ ব্যবহার করতে পারবেন না (নিয়মেও আটকানো আছে)। ভূমিকা বদলালে আগের ভূমিকা অডিট লগে থাকবে।',
                   en: 'Suspending blocks the account in the app and in the rules. A role change keeps the old role in the audit log.',
@@ -327,21 +327,21 @@ export default function AdminUserDetailPage() {
 
           <h2 style={{ fontSize: 18 }}>{t({ bn: 'এই ব্যবহারকারীর লেখা', en: 'Their posts & questions' })}</h2>
           {detail && detail.posts.length === 0 && detail.questions.length === 0 ? (
-            <p style={{ color: '#555' }}>{t({ bn: 'কিছু লেখেননি এখনো।', en: 'Nothing written yet.' })}</p>
+            <p style={{ color: 'var(--ink-soft)' }}>{t({ bn: 'কিছু লেখেননি এখনো।', en: 'Nothing written yet.' })}</p>
           ) : null}
           <ul style={{ listStyle: 'none', padding: 0 }}>
             {detail?.posts.map((p) => (
-              <li key={p.id} style={{ border: '1px solid #eee', borderRadius: 8, padding: '10px 12px', marginBottom: 8 }}>
+              <li key={p.id} style={{ border: '1px solid var(--line)', borderRadius: 8, padding: '10px 12px', marginBottom: 8 }}>
                 <strong>{t({ bn: 'পোস্ট', en: 'Post' })}: {p.title}</strong>
-                <p style={{ margin: '4px 0', color: '#555', fontSize: 14 }}>
+                <p style={{ margin: '4px 0', color: 'var(--ink-soft)', fontSize: 14 }}>
                   {p.body.slice(0, 200)} · {p.reviewStatus ?? ''} · {formatTime(p.createdAt, lang)}
                 </p>
               </li>
             ))}
             {detail?.questions.map((q) => (
-              <li key={q.id} style={{ border: '1px solid #eee', borderRadius: 8, padding: '10px 12px', marginBottom: 8 }}>
+              <li key={q.id} style={{ border: '1px solid var(--line)', borderRadius: 8, padding: '10px 12px', marginBottom: 8 }}>
                 <strong>{t({ bn: 'প্রশ্ন', en: 'Question' })}: {q.title}</strong>
-                <p style={{ margin: '4px 0', color: '#555', fontSize: 14 }}>
+                <p style={{ margin: '4px 0', color: 'var(--ink-soft)', fontSize: 14 }}>
                   {q.body.slice(0, 200)} · {q.reviewStatus ?? ''} · {formatTime(q.createdAt, lang)}
                 </p>
               </li>
@@ -350,17 +350,17 @@ export default function AdminUserDetailPage() {
 
           <h2 style={{ fontSize: 18 }}>{t({ bn: 'সাপোর্ট মেসেজ', en: 'Support messages' })}</h2>
           {detail && detail.supportThreads.length === 0 ? (
-            <p style={{ color: '#555' }}>
+            <p style={{ color: 'var(--ink-soft)' }}>
               {t({ bn: 'কোনো সাপোর্ট কথোপকথন নেই।', en: 'No support conversations.' })}
             </p>
           ) : null}
           <ul style={{ listStyle: 'none', padding: 0 }}>
             {detail?.supportThreads.map((thread) => (
-              <li key={thread.id} style={{ border: '1px solid #eee', borderRadius: 8, padding: '10px 12px', marginBottom: 8 }}>
+              <li key={thread.id} style={{ border: '1px solid var(--line)', borderRadius: 8, padding: '10px 12px', marginBottom: 8 }}>
                 <div style={{ display: 'flex', gap: 8, alignItems: 'center', flexWrap: 'wrap' }}>
                   <strong>{t({ bn: 'সাপোর্ট থ্রেড', en: 'Support thread' })}</strong>
                   <StatusPill label={thread.status === 'open' ? t({ bn: 'খোলা', en: 'Open' }) : t({ bn: 'বন্ধ', en: 'Closed' })} tone={thread.status === 'open' ? 'active' : 'muted'} />
-                  <span style={{ color: '#555', fontSize: 14 }}>{formatTime(thread.createdAt, lang)}</span>
+                  <span style={{ color: 'var(--ink-soft)', fontSize: 14 }}>{formatTime(thread.createdAt, lang)}</span>
                   <button
                     type="button"
                     onClick={() => void openThread(thread.id)}
@@ -369,9 +369,9 @@ export default function AdminUserDetailPage() {
                       padding: '10px 14px',
                       minHeight: 44,
                       borderRadius: 8,
-                      border: '1px solid #0A1F44',
-                      background: '#fff',
-                      color: '#0A1F44',
+                      border: '1px solid var(--heading)',
+                      background: 'var(--card)',
+                      color: 'var(--heading)',
                       cursor: 'pointer',
                     }}
                   >
@@ -382,13 +382,13 @@ export default function AdminUserDetailPage() {
                   threadLoading ? (
                     <LoadingBox />
                   ) : threadMessages.length === 0 ? (
-                    <p style={{ color: '#555' }}>{t({ bn: 'এই থ্রেডে কোনো মেসেজ নেই।', en: 'No messages in this thread.' })}</p>
+                    <p style={{ color: 'var(--ink-soft)' }}>{t({ bn: 'এই থ্রেডে কোনো মেসেজ নেই।', en: 'No messages in this thread.' })}</p>
                   ) : (
                     <ul style={{ listStyle: 'none', padding: 0, marginTop: 8 }}>
                       {threadMessages.map((m) => (
-                        <li key={m.id} style={{ borderTop: '1px solid #eee', padding: '8px 0' }}>
+                        <li key={m.id} style={{ borderTop: '1px solid var(--line)', padding: '8px 0' }}>
                           <p style={{ margin: 0 }}>{m.body}</p>
-                          <p style={{ margin: '4px 0 0', color: '#555', fontSize: 14 }}>
+                          <p style={{ margin: '4px 0 0', color: 'var(--ink-soft)', fontSize: 14 }}>
                             {m.senderId === user.uid ? t({ bn: 'ব্যবহারকারী', en: 'User' }) : t({ bn: 'অ্যাডমিন', en: 'Admin' })} ·{' '}
                             {formatTime(m.createdAt, lang)}
                           </p>
@@ -403,15 +403,15 @@ export default function AdminUserDetailPage() {
 
           <h2 style={{ fontSize: 18 }}>{t({ bn: 'এই ব্যবহারকারী সম্পর্কে রিপোর্ট', en: 'Reports about this user' })}</h2>
           {detail && detail.reportsAbout.length === 0 ? (
-            <p style={{ color: '#555' }}>{t({ bn: 'কোনো রিপোর্ট নেই।', en: 'No reports.' })}</p>
+            <p style={{ color: 'var(--ink-soft)' }}>{t({ bn: 'কোনো রিপোর্ট নেই।', en: 'No reports.' })}</p>
           ) : null}
           <ul style={{ listStyle: 'none', padding: 0 }}>
             {detail?.reportsAbout.map((r) => (
-              <li key={r.id} style={{ border: '1px solid #eee', borderRadius: 8, padding: '10px 12px', marginBottom: 8 }}>
+              <li key={r.id} style={{ border: '1px solid var(--line)', borderRadius: 8, padding: '10px 12px', marginBottom: 8 }}>
                 <strong>
                   {r.reason} · {r.status}
                 </strong>
-                <p style={{ margin: '4px 0', color: '#555', fontSize: 14 }}>
+                <p style={{ margin: '4px 0', color: 'var(--ink-soft)', fontSize: 14 }}>
                   {r.targetType ?? ''} {r.details ? `— ${r.details}` : ''} · {formatTime(r.createdAt, lang)}
                 </p>
               </li>

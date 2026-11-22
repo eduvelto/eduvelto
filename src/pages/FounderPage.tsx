@@ -34,9 +34,7 @@ import { Link } from 'react-router-dom';
 import { useSeo } from '../lib/seo';
 import { useLanguage } from '../i18n/LanguageContext';
 
-const NAVY = '#0A1F44';
 const DARK_NAVY = '#041742';
-const BLUE = '#1E7CE8';
 const GOLD = '#F5A623';
 const STAR_GOLD = '#F1B308';
 
@@ -150,8 +148,8 @@ function CeoBadge() {
 }
 
 function StatusChip({ label, kind }: { label: string; kind: 'live' | 'planned' | 'review' }) {
-  const bg = kind === 'live' ? '#e6f4ea' : kind === 'review' ? '#fff4e0' : '#eef2fb';
-  const fg = kind === 'live' ? '#137333' : kind === 'review' ? '#7a4d00' : '#0A1F44';
+  const bg = kind === 'live' ? 'var(--home-tint-green)' : kind === 'review' ? 'var(--soon-bg)' : 'var(--hover)';
+  const fg = kind === 'live' ? 'var(--success)' : kind === 'review' ? 'var(--amber-dark-text)' : 'var(--heading)';
   return (
     <span
       style={{
@@ -170,7 +168,7 @@ function StatusChip({ label, kind }: { label: string; kind: 'live' | 'planned' |
   );
 }
 
-const sectionH2: React.CSSProperties = { fontSize: 20, margin: '32px 0 10px', color: NAVY };
+const sectionH2: React.CSSProperties = { fontSize: 20, margin: '32px 0 10px', color: 'var(--heading)' };
 const bodyP: React.CSSProperties = { lineHeight: 1.8, margin: '0 0 12px' };
 
 export default function FounderPage() {
@@ -251,10 +249,10 @@ export default function FounderPage() {
             border: `1px solid #dfe4f0`,
             borderRadius: 12,
             padding: '18px 20px',
-            background: '#f8f9fc',
+            background: 'var(--card)',
           }}
         >
-          <h2 style={{ fontSize: 17, margin: '0 0 10px', color: NAVY }}>{t({ bn: 'এক নজরে', en: 'At a glance' })}</h2>
+          <h2 style={{ fontSize: 17, margin: '0 0 10px', color: 'var(--heading)' }}>{t({ bn: 'এক নজরে', en: 'At a glance' })}</h2>
           <dl style={{ margin: 0, display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '8px 24px', lineHeight: 1.7 }}>
             <div>
               <dt style={{ fontWeight: 700, display: 'inline' }}>{t({ bn: 'জন্ম:', en: 'Born:' })} </dt>
@@ -342,7 +340,7 @@ export default function FounderPage() {
             en: 'Eduvelto is a free digital education platform for Bangladesh — lessons, exams, a digital library and study planning, for students from Class 1 to Honours. It is free for students, teachers and guardians: no registration fee and no verification fee, ever.',
           })}
         </p>
-        <h3 style={{ fontSize: 16, margin: '20px 0 8px', color: NAVY }}>
+        <h3 style={{ fontSize: 16, margin: '20px 0 8px', color: 'var(--heading)' }}>
           {t({ bn: 'উপলব্ধ এখন', en: 'Available now' })}
         </h3>
         <ul style={{ lineHeight: 2, paddingLeft: 20, margin: '0 0 12px' }}>
@@ -372,8 +370,7 @@ export default function FounderPage() {
             <StatusChip label={t({ bn: 'উপলব্ধ এখন — সব কনটেন্ট পর্যালোচনাধীন', en: 'Available now — all content under review' })} kind="review" />
           </li>
         </ul>
-        <h3 style={{ fontSize: 16, margin: '20px 0 8px', color: NAVY }}>
-          {t({ bn: 'পরিকল্পিত', en: 'Planned' })}
+        <h3 style={{ fontSize: 16, margin: '20px 0 8px', color: 'var(--heading)' }}>          {t({ bn: 'পরিকল্পিত', en: 'Planned' })}
         </h3>
         <ul style={{ lineHeight: 2, paddingLeft: 20, margin: '0 0 12px' }}>
           <li>
@@ -440,7 +437,7 @@ export default function FounderPage() {
             </a>
           </li>
         </ul>
-        <p style={{ ...bodyP, color: '#555', fontSize: 15 }}>
+        <p style={{ ...bodyP, color: 'var(--ink-soft)', fontSize: 15 }}>
           {t({ bn: 'এখানে কোনো পুরস্কার বা আনুষ্ঠানিক সম্মান দাবি করা হয়নি — শুধু যাচাইকৃত মাইলফলকই তালিকাভুক্ত।', en: 'No awards or formal honours are claimed here — only verified milestones are listed.' })}
         </p>
 
@@ -448,27 +445,27 @@ export default function FounderPage() {
         <h2 style={sectionH2}>{t({ bn: 'অফিসিয়াল লিংক', en: 'Official links' })}</h2>
         <ul style={{ lineHeight: 2.2, paddingLeft: 20, margin: '0 0 12px', listStyle: 'none', paddingInlineStart: 0 }}>
           <li>
-            <a href="https://www.facebook.com/ahmmmizan" target="_blank" rel="noopener noreferrer" style={{ color: BLUE }}>
+            <a href="https://www.facebook.com/ahmmmizan" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--link)' }}>
               {t({ bn: 'ফেসবুক পেজ — আলী হাসান মোহাম্মদ মিজান', en: 'Facebook Page — Ali Hasan Mohammed Mizan' })}
             </a>
           </li>
           <li>
-            <a href="https://www.youtube.com/@alihasanmdmizan" target="_blank" rel="noopener noreferrer" style={{ color: BLUE }}>
+            <a href="https://www.youtube.com/@alihasanmdmizan" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--link)' }}>
               {t({ bn: 'ইউটিউব — আলী হাসান মোহাম্মদ মিজান', en: 'YouTube — Ali Hasan Mohammed Mizan' })}
             </a>
           </li>
           <li>
-            <a href="https://www.instagram.com/ahmmmizan" target="_blank" rel="noopener noreferrer" style={{ color: BLUE }}>
+            <a href="https://www.instagram.com/ahmmmizan" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--link)' }}>
               {t({ bn: 'ইনস্টাগ্রাম — @ahmmmizan', en: 'Instagram — @ahmmmizan' })}
             </a>
           </li>
           <li>
-            <a href="https://www.tiktok.com/@ahmmizan" target="_blank" rel="noopener noreferrer" style={{ color: BLUE }}>
+            <a href="https://www.tiktok.com/@ahmmizan" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--link)' }}>
               {t({ bn: 'টিকটক — @ahmmizan', en: 'TikTok — @ahmmizan' })}
             </a>
           </li>
           <li>
-            <Link to="/" style={{ color: BLUE }}>Eduvelto — eduvelto.com</Link>
+            <Link to="/" style={{ color: 'var(--link)' }}>Eduvelto — eduvelto.com</Link>
           </li>
         </ul>
 
@@ -476,7 +473,7 @@ export default function FounderPage() {
         <h2 style={sectionH2}>{t({ bn: 'যোগাযোগ', en: 'Contact' })}</h2>
         <p style={bodyP}>
           {t({ bn: 'অফিসিয়াল ব্যবসায়িক ইমেইল:', en: 'Official business email:' })}{' '}
-          <a href="mailto:ahmmizan23@gmail.com" style={{ color: BLUE }}>
+          <a href="mailto:ahmmizan23@gmail.com" style={{ color: 'var(--link)' }}>
             ahmmizan23@gmail.com
           </a>
         </p>

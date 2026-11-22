@@ -70,12 +70,12 @@ export default function ClassIndexPage() {
 
   return (
     <PageShell titleBn="শিক্ষা কার্যক্রম" titleEn="Academic Learning" maxWidth={1240}>
-      <p style={{ color: '#57616A', margin: '-8px 0 14px', fontSize: 15 }}>
+      <p style={{ color: 'var(--muted-ivory)', margin: '-8px 0 14px', fontSize: 15 }}>
         {t({ bn: 'প্রথমে আপনার শ্রেণি বেছে নিন, তারপর সেই শ্রেণির বই, বিষয়, পাঠ ও পরীক্ষা দেখুন।', en: 'First pick your class, then see its books, subjects, lessons and exams.' })}
       </p>
       {!loaded ? <SkeletonCards count={3} /> : null}
       {error ? (
-        <p style={{ color: '#B00020', margin: '0 0 16px' }}>
+        <p style={{ color: 'var(--error)', margin: '0 0 16px' }}>
           {t({ bn: 'বইয়ের তালিকা লোড করা যায়নি — পাতাটি রিফ্রেশ করে আবার চেষ্টা করুন।', en: 'Could not load the book list — please refresh and try again.' })}
         </p>
       ) : null}

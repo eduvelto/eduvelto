@@ -152,10 +152,10 @@ export default function JobSeekerDashboardPage() {
       (profile.dailyGoalQuestions == null && profile.dailyGoalMinutes == null) ? (
         <Reveal>
           <Card>
-            <div style={{ fontWeight: 700, color: '#142B3B', fontSize: 16 }}>
+            <div style={{ fontWeight: 700, color: 'var(--heading)', fontSize: 16 }}>
               {t({ bn: 'প্রোফাইল সম্পূর্ণ করুন', en: 'Complete your profile' })}
             </div>
-            <ul style={{ margin: '8px 0 0', paddingLeft: 20, color: '#57616A', fontSize: 14, lineHeight: 2 }}>
+            <ul style={{ margin: '8px 0 0', paddingLeft: 20, color: 'var(--muted-ivory)', fontSize: 14, lineHeight: 2 }}>
               {(!profile.enrolledCategories || profile.enrolledCategories.length === 0) ? (
                 <li>
                   <Link to="/profile" style={{ fontWeight: 600 }}>
@@ -188,10 +188,10 @@ export default function JobSeekerDashboardPage() {
             (stored on the user's own profile when signed in). */}
         <Reveal delayMs={0}>
           <Card>
-            <div style={{ fontWeight: 700, color: '#142B3B', fontSize: 17 }}>
+            <div style={{ fontWeight: 700, color: 'var(--heading)', fontSize: 17 }}>
               {t({ bn: 'আমার মোড', en: 'My mode' })}
             </div>
-            <p style={{ margin: '8px 0 10px', color: '#57616A', fontSize: 14, lineHeight: 1.7 }}>
+            <p style={{ margin: '8px 0 10px', color: 'var(--muted-ivory)', fontSize: 14, lineHeight: 1.7 }}>
               {t({
                 bn: `বর্তমান মোড: ${mode === 'beginner' ? 'নতুনদের জন্য' : 'অভিজ্ঞদের জন্য'}`,
                 en: `Current mode: ${mode === 'beginner' ? 'Beginner' : 'Advanced'}`,
@@ -202,7 +202,7 @@ export default function JobSeekerDashboardPage() {
               <button
                 type="button"
                 onClick={() => setShowOnboarding(true)}
-                style={{ background: 'none', border: 'none', padding: 0, color: '#12766E', fontWeight: 600, fontSize: 14, cursor: 'pointer', textDecoration: 'underline' }}
+                style={{ background: 'none', border: 'none', padding: 0, color: 'var(--teal-text)', fontWeight: 600, fontSize: 14, cursor: 'pointer', textDecoration: 'underline' }}
               >
                 {t({ bn: 'মোড পছন্দ আবার দেখুন', en: 'Show the mode choice again' })}
               </button>
@@ -214,12 +214,12 @@ export default function JobSeekerDashboardPage() {
             Change it in /profile. */}
         <Reveal delayMs={0}>
           <Card>
-            <div style={{ fontWeight: 700, color: '#142B3B', fontSize: 17 }}>
+            <div style={{ fontWeight: 700, color: 'var(--heading)', fontSize: 17 }}>
               {t({ bn: 'আমার লক্ষ্য পরীক্ষা', en: 'My target exam' })}
             </div>
             {targetExamDef ? (
               <>
-                <p style={{ margin: '8px 0 10px', color: '#57616A', fontSize: 14, lineHeight: 1.7 }}>
+                <p style={{ margin: '8px 0 10px', color: 'var(--muted-ivory)', fontSize: 14, lineHeight: 1.7 }}>
                   <Link to={`/jobs/${targetExamDef.slug}`} style={{ fontWeight: 700 }}>
                     {t({ bn: targetExamDef.bn, en: targetExamDef.en })}
                   </Link>
@@ -232,7 +232,7 @@ export default function JobSeekerDashboardPage() {
               </>
             ) : profile?.targetExam ? (
               <>
-                <p style={{ margin: '8px 0 10px', color: '#57616A', fontSize: 14, lineHeight: 1.7 }}>
+                <p style={{ margin: '8px 0 10px', color: 'var(--muted-ivory)', fontSize: 14, lineHeight: 1.7 }}>
                   {profile.targetExam}
                 </p>
                 <LinkButton to="/profile" variant="outline">
@@ -241,7 +241,7 @@ export default function JobSeekerDashboardPage() {
               </>
             ) : (
               <>
-                <p style={{ margin: '8px 0 10px', color: '#68747B', fontSize: 14, lineHeight: 1.7 }}>
+                <p style={{ margin: '8px 0 10px', color: 'var(--muted)', fontSize: 14, lineHeight: 1.7 }}>
                   {t({
                     bn: 'এখনো কোনো লক্ষ্য পরীক্ষা বেছে নেওয়া হয়নি। যে পরীক্ষার প্রস্তুতি নিতে চান, সেটি বেছে নিন।',
                     en: 'No target exam has been picked yet. Pick the exam you want to prepare for.',
@@ -260,17 +260,17 @@ export default function JobSeekerDashboardPage() {
             "coming soon" claim while mocks can exist. */}
         <Reveal delayMs={80}>
           <Card>
-            <div style={{ fontWeight: 700, color: '#142B3B', fontSize: 17 }}>
+            <div style={{ fontWeight: 700, color: 'var(--heading)', fontSize: 17 }}>
               {t({ bn: 'দৈনিক মক', en: 'Daily mock' })}
             </div>
-            <p style={{ margin: '8px 0', color: '#57616A', fontSize: 14, lineHeight: 1.7 }}>
+            <p style={{ margin: '8px 0', color: 'var(--muted-ivory)', fontSize: 14, lineHeight: 1.7 }}>
               {t({ bn: DAILY_MOCK.sizeBn, en: DAILY_MOCK.sizeEn })} · {t({ bn: DAILY_MOCK.timeBn, en: DAILY_MOCK.timeEn })}
             </p>
             {!mocksLoaded ? (
-              <p style={{ margin: 0, color: '#68747B', fontSize: 14 }}>লোড হচ্ছে…</p>
+              <p style={{ margin: 0, color: 'var(--muted)', fontSize: 14 }}>লোড হচ্ছে…</p>
             ) : daily ? (
               <>
-                <p style={{ margin: '0 0 10px', color: '#57616A', fontSize: 14, lineHeight: 1.7 }}>
+                <p style={{ margin: '0 0 10px', color: 'var(--muted-ivory)', fontSize: 14, lineHeight: 1.7 }}>
                   {daily.titleBn} · {jobMockPatternSummaryBn(daily.rulesSnapshot)}
                 </p>
                 <LinkButton to={`/jobs/mock/${daily.docId}`} variant="accent">
@@ -279,7 +279,7 @@ export default function JobSeekerDashboardPage() {
               </>
             ) : (
               <>
-                <p style={{ margin: '0 0 10px', color: '#68747B', fontSize: 14, lineHeight: 1.7 }}>
+                <p style={{ margin: '0 0 10px', color: 'var(--muted)', fontSize: 14, lineHeight: 1.7 }}>
                   {t({
                     bn: 'প্রতিদিন ভিন্ন কমন টপিক — আজকের মক এখনো প্রকাশিত হয়নি।',
                     en: 'A different common topic every day — today’s mock is not published yet.',
@@ -289,20 +289,18 @@ export default function JobSeekerDashboardPage() {
                   {t({ bn: 'কমন প্রস্তুতি দেখুন →', en: 'See common preparation →' })}
                 </LinkButton>
               </>
-            )}
-          </Card>
+            )}          </Card>
         </Reveal>
 
         {/* This week's full mock — LIVE (Step 9, D3), same pattern. */}
         <Reveal delayMs={160}>
           <Card>
-            <div style={{ fontWeight: 700, color: '#142B3B', fontSize: 17 }}>
+            <div style={{ fontWeight: 700, color: 'var(--heading)', fontSize: 17 }}>
               {t({ bn: 'সাপ্তাহিক পূর্ণ মক', en: 'Weekly full mock' })}
             </div>
-            <p style={{ margin: '8px 0 10px', color: '#57616A', fontSize: 14, lineHeight: 1.7 }}>
-              {t({ bn: 'পরিকল্পনা: প্রতি সপ্তাহে ১টি পূর্ণ মক — চক্রাকারে:', en: 'Plan: one full mock every week — rotating:' })}
-            </p>
-            <p style={{ margin: '0 0 10px', color: '#57616A', fontSize: 14, lineHeight: 1.9 }}>
+            <p style={{ margin: '8px 0 10px', color: 'var(--muted-ivory)', fontSize: 14, lineHeight: 1.7 }}>
+              {t({ bn: 'পরিকল্পনা: প্রতি সপ্তাহে ১টি পূর্ণ মক — চক্রাকারে:', en: 'Plan: one full mock every week — rotating:' })}            </p>
+            <p style={{ margin: '0 0 10px', color: 'var(--muted-ivory)', fontSize: 14, lineHeight: 1.9 }}>
               {cycle.map((def, i) => (
                 <span key={def.slug}>
                   {i > 0 ? ' → ' : ''}
@@ -344,14 +342,14 @@ export default function JobSeekerDashboardPage() {
             only when they truly have taken none. */}
         <Reveal delayMs={0}>
           <Card>
-            <div style={{ fontWeight: 700, color: '#142B3B', fontSize: 17 }}>
+            <div style={{ fontWeight: 700, color: 'var(--heading)', fontSize: 17 }}>
               {t({ bn: 'আমার ফলাফল', en: 'My results' })}
             </div>
             {attempts === null ? (
-              <p style={{ margin: '8px 0 0', color: '#68747B', fontSize: 14 }}>লোড হচ্ছে…</p>
+              <p style={{ margin: '8px 0 0', color: 'var(--muted)', fontSize: 14 }}>লোড হচ্ছে…</p>
             ) : attempts.length === 0 ? (
               <>
-                <p style={{ margin: '8px 0 10px', color: '#68747B', fontSize: 14, lineHeight: 1.7 }}>
+                <p style={{ margin: '8px 0 10px', color: 'var(--muted)', fontSize: 14, lineHeight: 1.7 }}>
                   {t({
                     bn: 'এখনো কোনো মক টেস্ট দেওয়া হয়নি — মক দিলে ফলাফল ও বিষয়ভিত্তিক নম্বর এখানে দেখাবে।',
                     en: 'No mock test has been taken yet — once you take a mock, results and subject-wise marks will show here.',
@@ -363,7 +361,7 @@ export default function JobSeekerDashboardPage() {
               </>
             ) : (
               <>
-                <p style={{ margin: '8px 0 10px', color: '#57616A', fontSize: 14, lineHeight: 1.7 }}>
+                <p style={{ margin: '8px 0 10px', color: 'var(--muted-ivory)', fontSize: 14, lineHeight: 1.7 }}>
                   {t({ bn: `মোট ${attempts.length}টি মক দেওয়া হয়েছে`, en: `${attempts.length} mock(s) taken` })}
                   {dashLatest && typeof dashLatest.score === 'number' && typeof dashLatest.totalMarks === 'number'
                     ? t({ bn: ` · সর্বশেষ: ${dashLatest.score}/${dashLatest.totalMarks} নম্বর`, en: ` · Latest: ${dashLatest.score}/${dashLatest.totalMarks}` })
@@ -381,8 +379,7 @@ export default function JobSeekerDashboardPage() {
                   {t({ bn: 'সব ফলাফল ও বিশ্লেষণ দেখুন →', en: 'See all results and analysis →' })}
                 </LinkButton>
               </>
-            )}
-          </Card>
+            )}          </Card>
         </Reveal>
 
         {/* Weak topics — data-driven (D4, same staleness class):
@@ -390,14 +387,14 @@ export default function JobSeekerDashboardPage() {
             copy only when no attempt exists. */}
         <Reveal delayMs={80}>
           <Card>
-            <div style={{ fontWeight: 700, color: '#142B3B', fontSize: 17 }}>
+            <div style={{ fontWeight: 700, color: 'var(--heading)', fontSize: 17 }}>
               {t({ bn: 'দুর্বল টপিক', en: 'Weak topics' })}
             </div>
             {attempts === null ? (
-              <p style={{ margin: '8px 0 0', color: '#68747B', fontSize: 14 }}>লোড হচ্ছে…</p>
+              <p style={{ margin: '8px 0 0', color: 'var(--muted)', fontSize: 14 }}>লোড হচ্ছে…</p>
             ) : attempts.length === 0 ? (
               <>
-                <p style={{ margin: '8px 0 10px', color: '#68747B', fontSize: 14, lineHeight: 1.7 }}>
+                <p style={{ margin: '8px 0 10px', color: 'var(--muted)', fontSize: 14, lineHeight: 1.7 }}>
                   {t({
                     bn: 'মক টেস্টের ফলাফল এলে কোন টপিকে দুর্বল, কী আবার পড়তে হবে — তা এখানে দেখাবে। এখনো কোনো তথ্য নেই।',
                     en: 'Once mock results exist, this will show which topics are weak and what to revise. There is no data yet.',
@@ -406,31 +403,30 @@ export default function JobSeekerDashboardPage() {
                 <Chip tone="gold">{t({ bn: 'মকের পরে দেখাবে', en: 'Shows after mocks' })}</Chip>
               </>
             ) : dashWeakTopics.length === 0 ? (
-              <p style={{ margin: '8px 0 0', color: '#68747B', fontSize: 14, lineHeight: 1.7 }}>
+              <p style={{ margin: '8px 0 0', color: 'var(--muted)', fontSize: 14, lineHeight: 1.7 }}>
                 {t({
                   bn: 'কোনো ভুল উত্তর নেই — দুর্বল টপিক পাওয়া যায়নি।',
                   en: 'No wrong answers — no weak topics found.',
                 })}
               </p>
             ) : (
-              <ul style={{ margin: '8px 0 0', paddingLeft: 20, fontSize: 14, lineHeight: 1.9, color: '#142B3B' }}>
+              <ul style={{ margin: '8px 0 0', paddingLeft: 20, fontSize: 14, lineHeight: 1.9, color: 'var(--heading)' }}>
                 {dashWeakTopics.map((w) => (
                   <li key={w.topicId}>
                     {jobTopicLabelBn(w.topicId)} — {w.wrong}/{w.total}টি ভুল
                   </li>
                 ))}
               </ul>
-            )}
-          </Card>
+            )}          </Card>
         </Reveal>
 
         {/* Study routine — Coming Soon. */}
         <Reveal delayMs={160}>
           <Card>
-            <div style={{ fontWeight: 700, color: '#142B3B', fontSize: 17 }}>
+            <div style={{ fontWeight: 700, color: 'var(--heading)', fontSize: 17 }}>
               {t({ bn: 'আমার পড়ার রুটিন', en: 'My study routine' })}
             </div>
-            <p style={{ margin: '8px 0 10px', color: '#68747B', fontSize: 14, lineHeight: 1.7 }}>
+            <p style={{ margin: '8px 0 10px', color: 'var(--muted)', fontSize: 14, lineHeight: 1.7 }}>
               {t({
                 bn: 'লক্ষ্য পরীক্ষার সিলেবাস অনুযায়ী ব্যক্তিগত পড়ার রুটিন এখানে থাকবে — পরীক্ষা ও মক চালু হলে।',
                 en: 'A personal study routine based on your target exam’s syllabus will live here — once exams and mocks run.',
@@ -443,10 +439,10 @@ export default function JobSeekerDashboardPage() {
         {/* My progress — empty until practice starts. */}
         <Reveal delayMs={0}>
           <Card>
-            <div style={{ fontWeight: 700, color: '#142B3B', fontSize: 17 }}>
+            <div style={{ fontWeight: 700, color: 'var(--heading)', fontSize: 17 }}>
               {t({ bn: 'আমার অগ্রগতি', en: 'My progress' })}
             </div>
-            <p style={{ margin: '8px 0 10px', color: '#68747B', fontSize: 14, lineHeight: 1.7 }}>
+            <p style={{ margin: '8px 0 10px', color: 'var(--muted)', fontSize: 14, lineHeight: 1.7 }}>
               {t({
                 bn: 'অনুশীলন ও মক শুরু করলে পরীক্ষার ইতিহাস ও বিষয়ভিত্তিক অগ্রগতি এখানে দেখাবে। এখনো কোনো অগ্রগতি নেই।',
                 en: 'Once you start practising and taking mocks, exam history and subject-wise progress will show here. There is no progress yet.',
@@ -459,7 +455,7 @@ export default function JobSeekerDashboardPage() {
 
       <Reveal>
         <Card>
-          <p style={{ margin: 0, color: '#68747B', fontSize: 14, lineHeight: 1.7 }}>
+          <p style={{ margin: 0, color: 'var(--muted)', fontSize: 14, lineHeight: 1.7 }}>
             {t({
               bn: 'এখানে "পাশ করবেন / চাকরি পাবেন" — এমন কোনো গ্যারান্টি দেওয়া হয় না। প্রস্তুতির উপকরণ দেওয়া হয়; ফল নির্ভর করে আপনার পড়াশোনা ও পরীক্ষার ওপর।',
               en: 'No "you will pass / you will get the job" guarantee is given here. Preparation material is provided; the result depends on your study and the exam.',

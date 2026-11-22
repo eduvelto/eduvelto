@@ -141,14 +141,12 @@ export default function JobsCommonPage() {
             today's mock is published, honest "not yet" otherwise. */}
         <Reveal delayMs={0}>
           <Card>
-            <div style={{ fontWeight: 700, color: '#142B3B', fontSize: 17 }}>
-              {t({ bn: 'দৈনিক মক', en: 'Daily mock' })}
-            </div>
-            <p style={{ margin: '8px 0', color: '#57616A', fontSize: 14, lineHeight: 1.7 }}>
+            <div style={{ fontWeight: 700, color: 'var(--heading)', fontSize: 17 }}>
+              {t({ bn: 'দৈনিক মক', en: 'Daily mock' })}            </div>
+            <p style={{ margin: '8px 0', color: 'var(--muted-ivory)', fontSize: 14, lineHeight: 1.7 }}>
               {t({ bn: DAILY_MOCK.sizeBn, en: DAILY_MOCK.sizeEn })} · {t({ bn: DAILY_MOCK.timeBn, en: DAILY_MOCK.timeEn })}
             </p>
-            <p style={{ margin: '0', color: '#68747B', fontSize: 14, lineHeight: 1.7 }}>
-              {t({
+            <p style={{ margin: '0', color: 'var(--muted)', fontSize: 14, lineHeight: 1.7 }}>              {t({
                 // D5: the Bank day was omitted from the negative-marking
                 // sentence, and the rotation is ~9 days for 9 topics,
                 // not "in a week" (front-ends audit, same finding).
@@ -184,16 +182,15 @@ export default function JobsCommonPage() {
         {/* This week's full mock — weekly cycle, live (Step 9). */}
         <Reveal delayMs={80}>
           <Card>
-            <div style={{ fontWeight: 700, color: '#142B3B', fontSize: 17 }}>
+            <div style={{ fontWeight: 700, color: 'var(--heading)', fontSize: 17 }}>
               {t({ bn: 'সাপ্তাহিক পূর্ণ মক', en: 'Weekly full mock' })}
             </div>
-            <p style={{ margin: '8px 0', color: '#57616A', fontSize: 14, lineHeight: 1.7 }}>
+            <p style={{ margin: '8px 0', color: 'var(--muted-ivory)', fontSize: 14, lineHeight: 1.7 }}>
               {t({ bn: 'পরিকল্পনা: প্রতি সপ্তাহে ১টি পূর্ণ মক — চক্রাকারে:', en: 'Plan: one full mock every week — rotating:' })}
             </p>
-            <ul style={{ margin: '0', paddingLeft: 20, color: '#57616A', fontSize: 14, lineHeight: 1.9 }}>
-              {cycle.map((def) => (
+            <ul style={{ margin: '0', paddingLeft: 20, color: 'var(--muted-ivory)', fontSize: 14, lineHeight: 1.9 }}>              {cycle.map((def) => (
                 <li key={def.slug}>
-                  <strong style={{ color: '#142B3B' }}>{lang === 'bn' ? def.bn : def.en}</strong> —{' '}
+                  <strong style={{ color: 'var(--heading)' }}>{lang === 'bn' ? def.bn : def.en}</strong> —{' '}
                   {t({ bn: WEEKLY_PATTERN[def.slug].bn, en: WEEKLY_PATTERN[def.slug].en })}
                 </li>
               ))}
@@ -228,7 +225,7 @@ export default function JobsCommonPage() {
             only when they truly have taken none. */}
         <Reveal delayMs={160}>
           <Card>
-            <div style={{ fontWeight: 700, color: '#142B3B', fontSize: 17 }}>
+            <div style={{ fontWeight: 700, color: 'var(--heading)', fontSize: 17 }}>
               {t({ bn: 'আমার অগ্রগতি', en: 'My progress' })}
             </div>
             {!user ? (
@@ -238,10 +235,10 @@ export default function JobsCommonPage() {
                 </Link>
               </p>
             ) : attempts === null ? (
-              <p style={{ margin: '8px 0 0', color: '#68747B', fontSize: 14 }}>লোড হচ্ছে…</p>
+              <p style={{ margin: '8px 0 0', color: 'var(--muted)', fontSize: 14 }}>লোড হচ্ছে…</p>
             ) : attempts.length === 0 ? (
               <>
-                <p style={{ margin: '8px 0 10px', color: '#68747B', fontSize: 14, lineHeight: 1.7 }}>
+                <p style={{ margin: '8px 0 10px', color: 'var(--muted)', fontSize: 14, lineHeight: 1.7 }}>
                   {t({
                     bn: 'এখনো কোনো দৈনিক বা সাপ্তাহিক মক দেওয়া হয়নি — মক দিলে ইতিহাস, দুর্বল টপিক ও ধারাবাহিকতা এখানে দেখাবে।',
                     en: 'No daily or weekly mock has been taken yet — once you take a mock, history, weak topics and streak will show here.',
@@ -251,14 +248,14 @@ export default function JobsCommonPage() {
               </>
             ) : (
               <>
-                <p style={{ margin: '8px 0 10px', color: '#57616A', fontSize: 14, lineHeight: 1.7 }}>
+                <p style={{ margin: '8px 0 10px', color: 'var(--muted-ivory)', fontSize: 14, lineHeight: 1.7 }}>
                   {t({ bn: `মোট ${attempts.length}টি মক দেওয়া হয়েছে`, en: `${attempts.length} mock(s) taken` })}
                   {latestAttempt && typeof latestAttempt.score === 'number' && typeof latestAttempt.totalMarks === 'number'
                     ? t({ bn: ` · সর্বশেষ: ${latestAttempt.score}/${latestAttempt.totalMarks} নম্বর`, en: ` · Latest: ${latestAttempt.score}/${latestAttempt.totalMarks}` })
                     : ''}
                 </p>
                 {weakTopics.length > 0 ? (
-                  <p style={{ margin: '0 0 10px', color: '#68747B', fontSize: 14, lineHeight: 1.7 }}>
+                  <p style={{ margin: '0 0 10px', color: 'var(--muted)', fontSize: 14, lineHeight: 1.7 }}>
                     {t({ bn: 'দুর্বল টপিক: ', en: 'Weak topics: ' })}
                     {weakTopics.map((w) => `${jobTopicLabelBn(w.topicId)} (${w.wrong}/${w.total} ভুল)`).join(' · ')}
                   </p>
@@ -271,8 +268,7 @@ export default function JobsCommonPage() {
                   </p>
                 ) : null}
               </>
-            )}
-          </Card>
+            )}          </Card>
         </Reveal>
       </div>
 
@@ -280,7 +276,7 @@ export default function JobsCommonPage() {
       <Reveal>
         <h3 className="ev-section-h2">{t({ bn: 'কমন টপিক', en: 'Common topics' })}</h3>
       </Reveal>
-      <p style={{ color: '#57616A', margin: '-8px 0 14px', fontSize: 14, lineHeight: 1.7 }}>
+      <p style={{ color: 'var(--muted-ivory)', margin: '-8px 0 14px', fontSize: 14, lineHeight: 1.7 }}>
         {t({
           bn: 'প্রাথমিক তালিকা — ৪টি পরীক্ষার অফিসিয়াল সিলেবাস মিলিয়ে চূড়ান্ত হবে। প্রতি টপিকে লক্ষ্য ~৫০টি প্রশ্ন। কমন টপিকের কোনো প্রশ্ন এখনো প্রকাশিত হয়নি।',
           en: 'Preliminary list — to be finalised against the 4 exams’ official syllabuses. Target ~50 questions per topic. No common-topic questions are published yet.',
@@ -290,12 +286,12 @@ export default function JobsCommonPage() {
         {COMMON_TOPICS.map((topic, i) => (
           <Reveal key={topic.bn} delayMs={Math.min(i, 5) * 60}>
             <Card>
-              <div style={{ fontWeight: 700, color: '#142B3B', fontSize: 16 }}>{t({ bn: topic.bn, en: topic.en })}</div>
-              <p style={{ margin: '6px 0 0', color: '#68747B', fontSize: 14 }}>
+              <div style={{ fontWeight: 700, color: 'var(--heading)', fontSize: 16 }}>{t({ bn: topic.bn, en: topic.en })}</div>
+              <p style={{ margin: '6px 0 0', color: 'var(--muted)', fontSize: 14 }}>
                 {t({ bn: `৪টি প্রধান পরীক্ষার মধ্যে: ${topic.exams}`, en: `In ${topic.exams} of the 4 main exams` })}
               </p>
               {topic.noteBn ? (
-                <p style={{ margin: '6px 0 0', color: '#68747B', fontSize: 13 }}>
+                <p style={{ margin: '6px 0 0', color: 'var(--muted)', fontSize: 13 }}>
                   {t({ bn: topic.noteBn, en: topic.noteEn ?? '' })}
                 </p>
               ) : null}
@@ -313,7 +309,7 @@ export default function JobsCommonPage() {
 
       <Reveal>
         <Card>
-          <p style={{ margin: 0, color: '#68747B', fontSize: 14, lineHeight: 1.7 }}>
+          <p style={{ margin: 0, color: 'var(--muted)', fontSize: 14, lineHeight: 1.7 }}>
             {t({
               bn: 'কমন টপিকের প্রশ্ন শিক্ষক যাচাইয়ের পর প্রকাশিত হবে। প্রতিটি প্রশ্নে ট্যাগ থাকবে — কোন কোন পরীক্ষায় প্রযোজ্য।',
               en: 'Common-topic questions will be published after teacher review. Every question will be tagged with the exams it applies to.',

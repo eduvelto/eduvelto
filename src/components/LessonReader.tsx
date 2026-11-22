@@ -189,7 +189,7 @@ export default function LessonReader(props: {
         <Link to={`/library/${lesson.bookId}`}>{bookTitle}</Link>
       </p>
       <h2 style={{ fontSize: 22, margin: '0 0 4px' }}>{lesson.title}</h2>
-      <p style={{ color: '#555', margin: '0 0 16px' }}>
+      <p style={{ color: 'var(--ink-soft)', margin: '0 0 16px' }}>
         {t({ bn: `${lesson.questionCount}টি প্রশ্ন${lesson.part ? ` · পার্ট ${lesson.part}` : ''}${lesson.set > 1 ? ` · সেট ${lesson.set}` : ''}`, en: `${lesson.questionCount} questions${lesson.part ? ` · Part ${lesson.part}` : ''}${lesson.set > 1 ? ` · Set ${lesson.set}` : ''}` })}
       </p>
 
@@ -218,7 +218,7 @@ export default function LessonReader(props: {
         )}
       </div>
       {noBanglaVoice ? (
-        <p style={{ color: '#555', fontSize: 14 }}>
+        <p style={{ color: 'var(--ink-soft)', fontSize: 14 }}>
           {t({ bn: 'আপনার ডিভাইসে বাংলা কণ্ঠ পাওয়া যায়নি, তাই ডিফল্ট কণ্ঠে পড়া হচ্ছে।', en: 'No Bangla voice was found on this device, so the default voice is used.' })}
         </p>
       ) : null}
@@ -233,7 +233,7 @@ export default function LessonReader(props: {
       ) : null}
 
       <h3 style={{ fontSize: 19, margin: '24px 0 4px' }}>{t({ bn: 'প্রশ্ন ও সহজ উত্তর', en: 'Questions & simple answers' })}</h3>
-      <p style={{ color: '#555', fontSize: 14, margin: '0 0 16px' }}>
+      <p style={{ color: 'var(--ink-soft)', fontSize: 14, margin: '0 0 16px' }}>
         {t({ bn: 'এই প্রশ্নগুলো Eduvelto-র নিজস্ব অনুশীলনী প্রশ্ন — বোর্ড বা বিশ্ববিদ্যালয়ের পরীক্ষার প্রশ্ন নয়।', en: 'These are Eduvelto’s own original practice questions — not board or university exam questions.' })}
       </p>
 
@@ -250,7 +250,7 @@ export default function LessonReader(props: {
               <li key={q.label} style={{ marginBottom: 20 }}>
                 <p style={{ margin: '0 0 8px', lineHeight: 1.6 }}>
                   <strong>{q.label}.</strong> {stripMd(q.question)}
-                  {q.topic ? <span style={{ color: '#555', fontSize: 13 }}> ({q.topic})</span> : null}
+                  {q.topic ? <span style={{ color: 'var(--ink-soft)', fontSize: 13 }}> ({q.topic})</span> : null}
                 </p>
                 {isMcq ? (
                   <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
@@ -270,7 +270,7 @@ export default function LessonReader(props: {
                           type="button"
                           disabled={pick !== undefined}
                           onClick={() => setPicked((p) => ({ ...p, [q.label]: opt.letter }))}
-                          style={{ textAlign: 'left', padding: '10px 12px', minHeight: 44, borderRadius: 6, border: `1px solid ${isPicked ? '#0A1F44' : '#ccc'}`, background: bg, cursor: pick !== undefined ? 'default' : 'pointer', fontSize: 15 }}
+                          style={{ textAlign: 'left', padding: '10px 12px', minHeight: 44, borderRadius: 6, border: `1px solid ${isPicked ? 'var(--heading)' : 'var(--line-strong)'}`, background: bg, cursor: pick !== undefined ? 'default' : 'pointer', fontSize: 15 }}
                         >
                           {opt.letter}) {opt.text}
                           {pick !== undefined && isCorrect ? ' ✓' : ''}
@@ -282,7 +282,7 @@ export default function LessonReader(props: {
                       <p style={{ margin: '4px 0 0', fontSize: 14 }}>
                         {q.correctLetter !== '' ? (
                           pick === q.correctLetter ? (
-                            <span style={{ color: '#1E7CE8', fontWeight: 700 }}>{t({ bn: 'সঠিক!', en: 'Correct!' })}</span>
+                            <span style={{ color: 'var(--link)', fontWeight: 700 }}>{t({ bn: 'সঠিক!', en: 'Correct!' })}</span>
                           ) : (
                             <span>
                               {t({ bn: 'সঠিক উত্তর', en: 'Correct answer' })}: <strong>{q.correctLetter}) {q.correctText}</strong>
@@ -290,7 +290,7 @@ export default function LessonReader(props: {
                           )
                         ) : null}
                         {q.answerBn ? <span style={{ display: 'block', marginTop: 4 }}>{q.answerBn}</span> : null}
-                        {q.explanation ? <span style={{ display: 'block', marginTop: 4, color: '#555' }}>{q.explanation}</span> : null}
+                        {q.explanation ? <span style={{ display: 'block', marginTop: 4, color: 'var(--ink-soft)' }}>{q.explanation}</span> : null}
                       </p>
                     ) : null}
                   </div>
@@ -303,9 +303,9 @@ export default function LessonReader(props: {
                       {show ? t({ bn: 'উত্তর লুকান', en: 'Hide answer' }) : t({ bn: 'সহজ উত্তর দেখুন', en: 'Show simple answer' })}
                     </Button>
                     {show ? (
-                      <div style={{ marginTop: 8, padding: '12px', background: '#f7f9fc', borderRadius: 6, lineHeight: 1.7 }}>
+                      <div style={{ marginTop: 8, padding: '12px', background: 'var(--card)', borderRadius: 6, lineHeight: 1.7 }}>
                         {answerText ? <p style={{ margin: '0 0 8px' }}>{answerText}</p> : null}
-                        {q.explanation ? <p style={{ margin: 0, color: '#555' }}>{q.explanation}</p> : null}
+                        {q.explanation ? <p style={{ margin: 0, color: 'var(--ink-soft)' }}>{q.explanation}</p> : null}
                         {!answerText && !q.explanation ? <p style={{ margin: 0 }}>{t({ bn: 'উত্তর যোগ করা হয়নি।', en: 'No answer added yet.' })}</p> : null}
                       </div>
                     ) : null}
@@ -317,10 +317,10 @@ export default function LessonReader(props: {
         </ol>
       )}
 
-      <div className="ev-card" style={{ marginTop: 28, background: '#F7F9FC' }}>
+      <div className="ev-card" style={{ marginTop: 28, background: 'var(--card)' }}>
         {user ? (
           completed ? (
-            <p style={{ margin: 0, color: '#1E7CE8', fontWeight: 700 }}>
+            <p style={{ margin: 0, color: 'var(--link)', fontWeight: 700 }}>
               {t({ bn: '✓ পড়া শেষ হিসেবে সংরক্ষণ করা হয়েছে — আপনার অগ্রগতি পাতায় দেখা যাবে।', en: '✓ Saved as read — see your Progress page.' })}
             </p>
           ) : (

@@ -181,7 +181,7 @@ export default function BottomNav(props: { bottomOffsetPx: number }) {
                   </Link>
                 ))}
                 {profile?.role === 'owner' ? (
-                  <Link to="/admin" className="ev-sheet-link" style={{ color: '#8A6100', fontWeight: 700 }}>
+                  <Link to="/admin" className="ev-sheet-link" style={{ color: 'var(--amber-deep)', fontWeight: 700 }}>
                     {t({ bn: 'অ্যাডমিন', en: 'Admin' })}
                   </Link>
                 ) : null}

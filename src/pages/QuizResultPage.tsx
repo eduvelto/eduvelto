@@ -111,15 +111,14 @@ export default function QuizResultPage() {
   return (
     <PageShell titleBn="কুইজের ফলাফল" titleEn="Quiz result">
       <Card style={{ marginBottom: 20, borderTop: '4px solid #F1B308' }}>
-        <h2 style={{ fontFamily: "'Poppins','Hind Siliguri',system-ui,sans-serif", fontSize: 20, color: '#0A1F44', margin: '0 0 10px' }}>{quiz.title}</h2>
+        <h2 style={{ fontFamily: "'Poppins','Hind Siliguri',system-ui,sans-serif", fontSize: 20, color: 'var(--heading)', margin: '0 0 10px' }}>{quiz.title}</h2>
         {attempt.kind === 'mcq' ? (
           attempt.scored === false ? (
             <p style={{ fontSize: 16, margin: 0 }}>
-              {t({ bn: 'উত্তর জমা হয়েছে, কিন্তু নম্বর গণনা সম্পূর্ণ হয়নি। পাতাটি রিফ্রেশ করুন — নম্বর না এলে আবার পরীক্ষা দিন।', en: 'Answers were submitted, but scoring did not finish. Refresh this page — if no score appears, take the quiz again.' })}
-            </p>
+              {t({ bn: 'উত্তর জমা হয়েছে, কিন্তু নম্বর গণনা সম্পূর্ণ হয়নি। পাতাটি রিফ্রেশ করুন — নম্বর না এলে আবার পরীক্ষা দিন।', en: 'Answers were submitted, but scoring did not finish. Refresh this page — if no score appears, take the quiz again.' })}            </p>
           ) : (
             <>
-              <p style={{ fontSize: 24, fontWeight: 800, color: '#0A1F44', margin: '0 0 10px' }}>
+              <p style={{ fontSize: 24, fontWeight: 800, color: 'var(--heading)', margin: '0 0 10px' }}>
                 {t({ bn: `নম্বর: ${attempt.score}/${attempt.totalMarks} (${attempt.percentage}%)`, en: `Score: ${attempt.score}/${attempt.totalMarks} (${attempt.percentage}%)` })}
               </p>
               <ProgressBar value={attempt.percentage} label={t({ bn: `নম্বর ${attempt.percentage}%`, en: `Score ${attempt.percentage}%` })} />
@@ -134,7 +133,7 @@ export default function QuizResultPage() {
           </p>
         ) : (
           <>
-            <p style={{ fontSize: 24, fontWeight: 800, color: '#0A1F44', margin: '0 0 10px' }}>
+            <p style={{ fontSize: 24, fontWeight: 800, color: 'var(--heading)', margin: '0 0 10px' }}>
               {t({ bn: `নম্বর: ${attempt.score}/${attempt.totalMarks} (${attempt.percentage}%) · শিক্ষক মূল্যায়ন করেছেন`, en: `Score: ${attempt.score}/${attempt.totalMarks} (${attempt.percentage}%) · Marked by a teacher` })}
             </p>
             <ProgressBar value={attempt.percentage} label={t({ bn: `নম্বর ${attempt.percentage}%`, en: `Score ${attempt.percentage}%` })} />
@@ -149,7 +148,7 @@ export default function QuizResultPage() {
         const q = questionByN.get(a.n);
         return (
           <Card key={a.n} style={{ marginBottom: 16 }}>
-            <h3 style={{ fontFamily: "'Poppins','Hind Siliguri',system-ui,sans-serif", fontSize: 16, color: '#0A1F44', margin: '0 0 8px' }}>
+            <h3 style={{ fontFamily: "'Poppins','Hind Siliguri',system-ui,sans-serif", fontSize: 16, color: 'var(--heading)', margin: '0 0 8px' }}>
               {i + 1}. {q?.question ?? ''}
             </h3>
             {attempt.kind === 'mcq' ? (
@@ -159,7 +158,7 @@ export default function QuizResultPage() {
                   {a.correct ? (
                     <Chip>{t({ bn: '✓ সঠিক', en: '✓ Correct' })}</Chip>
                   ) : (
-                    <Chip tone="outline"><span style={{ color: '#B00020' }}>{t({ bn: '✗ ভুল', en: '✗ Incorrect' })}</span></Chip>
+                    <Chip tone="outline"><span style={{ color: 'var(--error)' }}>{t({ bn: '✗ ভুল', en: '✗ Incorrect' })}</span></Chip>
                   )}
                 </p>
                 {!a.correct ? (
@@ -171,7 +170,7 @@ export default function QuizResultPage() {
             ) : (
               <>
                 <p style={{ margin: '4px 0', whiteSpace: 'pre-wrap' }}>{a.text || '—'}</p>
-                <p style={{ margin: '4px 0', color: '#5A6478', fontSize: 14 }}>
+                <p style={{ margin: '4px 0', color: 'var(--muted)', fontSize: 14 }}>
                   {attempt.markingStatus === 'marked'
                     ? t({ bn: `প্রাপ্ত নম্বর: ${a.marks ?? 0}/${q?.marks ?? 0}`, en: `Marks obtained: ${a.marks ?? 0}/${q?.marks ?? 0}` })
                     : t({ bn: `পূর্ণ নম্বর: ${q?.marks ?? 0}`, en: `Full marks: ${q?.marks ?? 0}` })}

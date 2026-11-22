@@ -19,7 +19,7 @@ export function AdminGuard(props: { children: ReactNode }) {
   if (loading) {
     return (
       <PageShell titleBn="অ্যাডমিন ড্যাশবোর্ড" titleEn="Admin dashboard">
-        <p aria-live="polite" style={{ color: '#57616A' }}>
+        <p aria-live="polite" style={{ color: 'var(--muted-ivory)' }}>
           {t({ bn: 'লোড হচ্ছে…', en: 'Loading…' })}
         </p>
       </PageShell>

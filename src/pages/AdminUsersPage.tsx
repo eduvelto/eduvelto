@@ -219,7 +219,7 @@ export default function AdminUsersPage() {
                 <span
                   style={{
                     background: '#D9A441',
-                    color: '#142B3B',
+                    color: 'var(--heading)',
                     fontWeight: 700,
                     borderRadius: 999,
                     padding: '2px 10px',
@@ -234,13 +234,13 @@ export default function AdminUsersPage() {
                 tone={row.isActive ? 'active' : 'ready'}
               />
             </div>
-            <p style={{ margin: '6px 0', color: '#68747B', fontSize: 14 }}>
+            <p style={{ margin: '6px 0', color: 'var(--muted)', fontSize: 14 }}>
               <span lang="en">{row.email}</span>
               {row.institution ? ` · ${row.institution}` : ''}
               {row.classLevel ? ` · ${row.classLevel}` : ''}
               {row.verificationStatus ? ` · ${t({ bn: 'শিক্ষক যাচাই', en: 'Teacher verification' })}: ${row.verificationStatus}` : ''}
             </p>
-            <p style={{ margin: '0 0 6px', color: '#68747B', fontSize: 14 }}>
+            <p style={{ margin: '0 0 6px', color: 'var(--muted)', fontSize: 14 }}>
               {t({ bn: 'সদস্য', en: 'Member since' })}: {formatTime(row.createdAt, lang)}
             </p>
             <Link to={`/admin/users/${row.uid}`}>{t({ bn: 'প্রোফাইল খুলুন', en: 'Open profile' })} →</Link>

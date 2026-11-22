@@ -80,7 +80,7 @@ export default function HealthMedicinesPage() {
           <p style={{ margin: '0 0 6px' }}>
             <strong>{t(h.warnings)}:</strong> {lang === 'bn' ? m.warningsBn : m.warningsEn}
           </p>
-          <p style={{ margin: '0 0 6px', fontSize: 14, color: '#555' }}>
+          <p style={{ margin: '0 0 6px', fontSize: 14, color: 'var(--ink-soft)' }}>
             {t(h.source)}: {m.source}
           </p>
           <AccuracyNote />

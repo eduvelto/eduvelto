@@ -134,7 +134,7 @@ export default function QuizPage() {
     <PageShell titleBn={quiz.title} titleEn={quiz.kind === 'mcq' ? 'MCQ exam' : 'Written exam'}>
       <Card style={{ marginBottom: 20 }}>
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, alignItems: 'center', justifyContent: 'space-between' }}>
-          <p style={{ color: '#5A6478', margin: 0 }}>
+          <p style={{ color: 'var(--muted)', margin: 0 }}>
             {t({ bn: `${quiz.questionCount}টি প্রশ্ন · ${quiz.totalMarks} নম্বর · সময় ${quiz.timeLimitMinutes} মিনিট`, en: `${quiz.questionCount} questions · ${quiz.totalMarks} marks · ${quiz.timeLimitMinutes} minutes` })}
           </p>
           {secondsLeft !== null ? (
@@ -145,7 +145,7 @@ export default function QuizPage() {
         </div>
         <div style={{ marginTop: 12 }}>
           <ProgressBar value={(answeredCount / quiz.questionCount) * 100} label={t({ bn: `উত্তর দেওয়া হয়েছে ${answeredCount}/${quiz.questionCount}`, en: `Answered ${answeredCount} of ${quiz.questionCount}` })} />
-          <p style={{ color: '#5A6478', margin: '6px 0 0', fontSize: 14 }}>
+          <p style={{ color: 'var(--muted)', margin: '6px 0 0', fontSize: 14 }}>
             {t({ bn: `উত্তর দেওয়া হয়েছে: ${answeredCount}/${quiz.questionCount}`, en: `Answered: ${answeredCount}/${quiz.questionCount}` })}
           </p>
         </div>
@@ -153,10 +153,10 @@ export default function QuizPage() {
 
       {quiz.questions.map((q, i) => (
         <Card key={q.n} style={{ marginBottom: 16 }}>
-          <h2 style={{ fontFamily: "'Poppins','Hind Siliguri',system-ui,sans-serif", fontSize: 17, color: '#0A1F44', margin: '0 0 4px' }}>
+          <h2 style={{ fontFamily: "'Poppins','Hind Siliguri',system-ui,sans-serif", fontSize: 17, color: 'var(--heading)', margin: '0 0 4px' }}>
             {i + 1}. {q.question}
           </h2>
-          <p style={{ margin: '0 0 12px', color: '#5A6478', fontSize: 14 }}>
+          <p style={{ margin: '0 0 12px', color: 'var(--muted)', fontSize: 14 }}>
             {t({ bn: `${q.marks} নম্বর`, en: `${q.marks} marks` })}
             {q.topic ? ` · ${q.topic}` : ''}
           </p>
@@ -200,7 +200,7 @@ export default function QuizPage() {
       ))}
 
       {quiz.kind === 'written' ? (
-        <p style={{ color: '#5A6478' }}>
+        <p style={{ color: 'var(--muted)' }}>
           {t({ bn: 'লিখিত উত্তর শিক্ষক মূল্যায়ন করবেন — জমা দেওয়ার পর তাৎক্ষণিক নম্বর দেখানো হবে না।', en: 'Written answers are marked by a teacher — no instant score after submitting.' })}
         </p>
       ) : null}
@@ -210,7 +210,7 @@ export default function QuizPage() {
           {t({ bn: 'জমা দিন', en: 'Submit' })}
         </Button>
       ) : (
-        <div className="ev-card" style={{ background: '#FDF0F0', borderColor: '#F3C1C8' }}>
+        <div className="ev-card" style={{ background: 'var(--error-bg)', borderColor: 'var(--error-border)' }}>
           <p style={{ marginTop: 0 }}>
             {t({ bn: 'নিশ্চিত করুন — জমা দেওয়ার পর উত্তর বদলানো যাবে না।', en: 'Confirm — answers cannot be changed after submitting.' })}
           </p>

@@ -50,7 +50,7 @@ function LoginPrompt() {
       <LinkButton to="/login" variant="primary">
         {t({ bn: 'লগইন করুন', en: 'Sign in' })}
       </LinkButton>{' '}
-      <span style={{ color: '#57616A', fontSize: 14 }}>
+      <span style={{ color: 'var(--muted-ivory)', fontSize: 14 }}>
         {t({
           bn: 'অনুশীলন, মক, ফলাফল ও অগ্রগতি দেখতে লগইন করুন।',
           en: 'Sign in to see practice, mocks, results and progress.',
@@ -91,8 +91,8 @@ export default function NuHubPage() {
             display: 'inline-block',
             padding: '4px 10px',
             borderRadius: 999,
-            background: '#FDF3D7',
-            color: '#8A6100',
+            background: 'var(--soon-bg)',
+            color: 'var(--amber-deep)',
             fontSize: 13,
             fontWeight: 700,
           }}
@@ -130,10 +130,10 @@ export default function NuHubPage() {
         <div style={{ display: 'grid', gap: 16, marginTop: 16 }}>
           <NuOnboarding />
           <Card>
-            <h3 style={{ marginTop: 0, fontSize: 18, color: '#142B3B' }}>
+            <h3 style={{ marginTop: 0, fontSize: 18, color: 'var(--heading)' }}>
               {t({ bn: 'ভর্তি সম্পর্কে', en: 'About admission' })}
             </h3>
-            <ul style={{ margin: 0, paddingLeft: 20, lineHeight: 2, color: '#3A444B' }}>
+            <ul style={{ margin: 0, paddingLeft: 20, lineHeight: 2, color: 'var(--ink-soft)' }}>
               <li>{t({ bn: 'পরীক্ষার ধরন: ১০০ নম্বরের MCQ — ১০০টি প্রশ্ন, প্রতিটি ১ নম্বর।', en: 'Exam type: 100-mark MCQ — 100 questions, 1 mark each.' })}</li>
               <li>{t({ bn: 'সময়: ১ ঘণ্টা। ভুল উত্তরে নম্বর কাটা হয় না।', en: 'Time: 1 hour. No marks are cut for wrong answers.' })}</li>
               <li>{t({ bn: 'পাস নম্বর ৩৫ — তুলনার জন্য মাত্র, ফলাফলের রায় নয়।', en: 'Pass mark 35 — for comparison only, not a verdict on a result.' })}</li>
@@ -150,7 +150,7 @@ export default function NuHubPage() {
               <a href={NU_VERIFIED_NOTICE.officialUrl} target="_blank" rel="noreferrer" style={{ fontWeight: 700 }}>
                 {t({ bn: 'সর্বশেষ বিজ্ঞপ্তি দেখুন →', en: 'See the latest notice →' })}
               </a>{' '}
-              <span style={{ color: '#57616A', fontSize: 14 }}>(nu.ac.bd/admissions)</span>
+              <span style={{ color: 'var(--muted-ivory)', fontSize: 14 }}>(nu.ac.bd/admissions)</span>
             </p>
           </Card>
 
@@ -158,10 +158,10 @@ export default function NuHubPage() {
 
           {mode === 'beginner' ? (
             <Card>
-              <h3 style={{ marginTop: 0, fontSize: 18, color: '#142B3B' }}>
+              <h3 style={{ marginTop: 0, fontSize: 18, color: 'var(--heading)' }}>
                 {t({ bn: 'শুরু থেকে প্রস্তুতি — ৩ ধাপের পথ', en: 'Beginner preparation — a 3-step path' })}
               </h3>
-              <ol style={{ margin: 0, paddingLeft: 20, lineHeight: 2, color: '#3A444B' }}>
+              <ol style={{ margin: 0, paddingLeft: 20, lineHeight: 2, color: 'var(--ink-soft)' }}>
                 <li>{t({ bn: 'আপনার শাখা বেছে নিন — মানবিক, বিজ্ঞান বা ব্যবসায় শিক্ষা।', en: 'Choose your group — Humanities, Science or Business Studies.' })}</li>
                 <li>{t({ bn: 'সহজ ব্যাখ্যাসহ বিষয়ভিত্তিক অনুশীলন দিয়ে শুরু করুন।', en: 'Start with subject-wise practice with easy explanations.' })}</li>
                 <li>{t({ bn: 'প্রস্তুতি এগোলে পূর্ণ মক দিন — সময়ভিত্তিক, ১০০ প্রশ্নের।', en: 'When ready, take a full mock — timed, 100 questions.' })}</li>
@@ -169,10 +169,10 @@ export default function NuHubPage() {
             </Card>
           ) : (
             <Card>
-              <h3 style={{ marginTop: 0, fontSize: 18, color: '#142B3B' }}>
+              <h3 style={{ marginTop: 0, fontSize: 18, color: 'var(--heading)' }}>
                 {t({ bn: 'প্রতিযোগিতামূলক প্রস্তুতি', en: 'Competitive preparation' })}
               </h3>
-              <p style={{ color: '#444', lineHeight: 1.8, margin: 0 }}>
+              <p style={{ color: 'var(--ink-soft)', lineHeight: 1.8, margin: 0 }}>
                 {t({
                   bn: 'সময়ভিত্তিক পূর্ণ মক (১০০ প্রশ্ন, ১ ঘণ্টা) ও দৈনিক ছোট মক — প্রশ্ন তৈরি হলে এখানেই আসবে। কোনো র‍্যাংক বা লিডারবোর্ড নেই — ফলাফল শুধু আপনার নিজের অগ্রগতির জন্য।',
                   en: 'Timed full mocks (100 questions, 1 hour) and daily short mocks — they will appear here once the questions are ready. There is no rank or leaderboard — results are only for your own progress.',
@@ -182,19 +182,19 @@ export default function NuHubPage() {
           )}
 
           <Card>
-            <h3 style={{ marginTop: 0, fontSize: 18, color: '#142B3B' }}>
+            <h3 style={{ marginTop: 0, fontSize: 18, color: 'var(--heading)' }}>
               {t({ bn: 'মানবণ্টন — যাচাইকৃত (বিজ্ঞপ্তি থেকে)', en: 'Marks distribution — verified (from the circular)' })}
             </h3>
             <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 15 }}>
               <thead>
-                <tr style={{ textAlign: 'left', borderBottom: '2px solid #D9DEE2' }}>
+                <tr style={{ textAlign: 'left', borderBottom: '2px solid var(--line)' }}>
                   <th style={{ padding: '8px 4px' }}>{t({ bn: 'অংশ', en: 'Part' })}</th>
                   <th style={{ padding: '8px 4px' }}>{t({ bn: 'নম্বর', en: 'Marks' })}</th>
                 </tr>
               </thead>
               <tbody>
                 {pattern.sections.map((s) => (
-                  <tr key={s.bn} style={{ borderBottom: '1px solid #E5E8E5' }}>
+                  <tr key={s.bn} style={{ borderBottom: '1px solid var(--line)' }}>
                     <td style={{ padding: '8px 4px' }}>{t({ bn: s.bn, en: s.en })}</td>
                     <td style={{ padding: '8px 4px', fontWeight: 700 }}>{s.marks}</td>
                   </tr>
@@ -205,7 +205,7 @@ export default function NuHubPage() {
                 </tr>
               </tbody>
             </table>
-            <p style={{ margin: '10px 0 0', color: '#57616A', fontSize: 14, lineHeight: 1.7 }}>
+            <p style={{ margin: '10px 0 0', color: 'var(--muted-ivory)', fontSize: 14, lineHeight: 1.7 }}>
               {t({
                 bn: 'শাখা-ভিত্তিক ৪০ নম্বরের ভেতরের বিভাজন Guideline-এ নিশ্চিত হলে এখানে আসবে — এখন শুধু ৪০ নম্বরের ব্লক হিসেবেই দেখানো হয়।',
                 en: 'The inner split of the 40 group-subject marks will appear here once the Guideline confirms it — for now it is shown only as a 40-mark block.',
@@ -215,8 +215,8 @@ export default function NuHubPage() {
 
           <MeritExplainer />
 
-          <div style={{ border: '1px solid #D9A441', borderRadius: 10, padding: '14px 16px', background: '#FDF8EC' }}>
-            <p style={{ margin: 0, color: '#5C4A12', lineHeight: 1.8, fontSize: 14 }}>
+          <div style={{ border: '1px solid #D9A441', borderRadius: 10, padding: '14px 16px', background: 'var(--amber-soft)' }}>
+            <p style={{ margin: 0, color: 'var(--amber-dark-text)', lineHeight: 1.8, fontSize: 14 }}>
               {t({
                 bn: 'কোনো গ্যারান্টি নয়: "১০০% প্রস্তুতি" মানে সিলেবাস কভারেজ + অনুশীলন + মক — ভর্তির নিশ্চয়তা নয়। মেধাতালিকার অবস্থান অনুমান করে দেখানো হয় না।',
                 en: 'No guarantee: "100% preparation" means syllabus coverage + practice + mocks — not a guarantee of admission. Merit-list position is never estimated.',
@@ -231,14 +231,14 @@ export default function NuHubPage() {
           {NU_GROUPS.map((g) => (
             <Card key={g.slug}>
               <div style={{ borderLeft: `5px solid ${g.accent}`, paddingLeft: 12 }}>
-                <strong style={{ fontSize: 17, color: '#142B3B' }}>{t({ bn: g.bn, en: g.en })}</strong>
-                <p style={{ color: '#444', lineHeight: 1.8, margin: '8px 0', fontSize: 14 }}>
+                <strong style={{ fontSize: 17, color: 'var(--heading)' }}>{t({ bn: g.bn, en: g.en })}</strong>
+                <p style={{ color: 'var(--ink-soft)', lineHeight: 1.8, margin: '8px 0', fontSize: 14 }}>
                   {t({ bn: g.descriptionBn, en: g.descriptionEn })}
                 </p>
-                <p style={{ color: '#57616A', fontSize: 14, margin: '0 0 8px' }}>
+                <p style={{ color: 'var(--muted-ivory)', fontSize: 14, margin: '0 0 8px' }}>
                   {t({ bn: 'মানবণ্টন: বাংলা ২০, ইংরেজি ২০, সাধারণ জ্ঞান ২০, শাখা-ভিত্তিক ৪০', en: 'Distribution: Bangla 20, English 20, General Knowledge 20, Group subjects 40' })}
                 </p>
-                <p style={{ color: '#57616A', fontSize: 14, margin: '0 0 12px' }}>
+                <p style={{ color: 'var(--muted-ivory)', fontSize: 14, margin: '0 0 12px' }}>
                   {t({ bn: 'যোগ্যতা: ', en: 'Eligibility: ' })}
                   {g.slug === 'science'
                     ? 'SSC GPA ২.২৫+, HSC GPA ২.০+, মোট GPA ৪.৭৫+'
@@ -260,7 +260,7 @@ export default function NuHubPage() {
             en="No practice questions yet. Questions are being prepared — no question is published without a verified teacher's review."
           />
           {!user ? <LoginPrompt /> : null}
-          <p style={{ color: '#57616A', fontSize: 14, lineHeight: 1.8 }}>
+          <p style={{ color: 'var(--muted-ivory)', fontSize: 14, lineHeight: 1.8 }}>
             {t({
               bn: 'বিষয়ভিত্তিক অনুশীলন শাখার পাতা থেকে শুরু হবে — প্রথমে আপনার শাখা বেছে নিন।',
               en: 'Subject-wise practice will start from the group pages — choose your group first.',
@@ -284,14 +284,12 @@ export default function NuHubPage() {
           <div style={{ display: 'grid', gap: 12, gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', marginTop: 12 }}>
             <Card>
               <strong>{t({ bn: 'সাপ্তাহিক পূর্ণ মক', en: 'Weekly full mock' })}</strong>
-              <p style={{ color: '#57616A', fontSize: 14, lineHeight: 1.8, margin: '8px 0 0' }}>
-                {t({ bn: '১০০ MCQ · ১ ঘণ্টা · নেগেটিভ মার্কিং নেই · পাস ৩৫ (তুলনার জন্য) — শীঘ্রই আসছে।', en: '100 MCQ · 1 hour · no negative marking · pass 35 (for comparison) — coming soon.' })}
+              <p style={{ color: 'var(--muted-ivory)', fontSize: 14, lineHeight: 1.8, margin: '8px 0 0' }}>                {t({ bn: '১০০ MCQ · ১ ঘণ্টা · নেগেটিভ মার্কিং নেই · পাস ৩৫ (তুলনার জন্য) — শীঘ্রই আসছে।', en: '100 MCQ · 1 hour · no negative marking · pass 35 (for comparison) — coming soon.' })}
               </p>
             </Card>
             <Card>
               <strong>{t({ bn: 'দৈনিক মক', en: 'Daily mock' })}</strong>
-              <p style={{ color: '#57616A', fontSize: 14, lineHeight: 1.8, margin: '8px 0 0' }}>
-                {t({ bn: '২০–৩০ MCQ · ২০–৩০ মিনিট — প্রকাশের সময় এখনো ঠিক হয়নি।', en: '20–30 MCQ · 20–30 minutes — the publish time is not decided yet.' })}
+              <p style={{ color: 'var(--muted-ivory)', fontSize: 14, lineHeight: 1.8, margin: '8px 0 0' }}>                {t({ bn: '২০–৩০ MCQ · ২০–৩০ মিনিট — প্রকাশের সময় এখনো ঠিক হয়নি।', en: '20–30 MCQ · 20–30 minutes — the publish time is not decided yet.' })}
               </p>
             </Card>
           </div>
@@ -304,7 +302,7 @@ export default function NuHubPage() {
             bn="বিগত প্রশ্ন সংগ্রহ চলছে — NU প্রশ্নপত্র আনুষ্ঠানিকভাবে প্রকাশ করে কি না, তা যাচাই করা হচ্ছে।"
             en="Previous questions are being collected — it is being verified whether NU officially publishes the question paper."
           />
-          <p style={{ color: '#57616A', fontSize: 14, lineHeight: 1.8 }}>
+          <p style={{ color: 'var(--muted-ivory)', fontSize: 14, lineHeight: 1.8 }}>
             {t({
               bn: 'দুটি বিগত পরীক্ষা আছে — ৩১ মে ২০২৫ (২০২৪-২৫ সেশন) ও ২৫ এপ্রিল ২০২৬ (২০২৫-২৬ সেশন)। যাচাইকৃত প্রশ্নপত্র পাওয়া গেলে এখানে আসবে — শাখা + সাল + উৎসসহ। HSC প্যাকের অনুশীলনী প্রশ্ন কখনো "বিগত প্রশ্ন" নয়।',
               en: 'There are two previous exams — 31 May 2025 (2024-25 session) and 25 April 2026 (2025-26 session). Their verified question papers will appear here — with group + year + source — once verified copies are found. HSC-pack practice questions are never "previous questions".',
@@ -319,7 +317,7 @@ export default function NuHubPage() {
             bn="এখনো কোনো ফলাফল নেই। মক দিলে ফলাফল এখানে দেখাবে।"
             en="No results yet. Results will appear here once you take a mock."
           />
-          <p style={{ color: '#57616A', fontSize: 14 }}>
+          <p style={{ color: 'var(--muted-ivory)', fontSize: 14 }}>
             {t({ bn: 'অনুশীলন ফলাফল — ভর্তি পরীক্ষার ফল নয়।', en: 'Practice results — not admission exam results.' })}
           </p>
           {!user ? <LoginPrompt /> : null}
@@ -339,7 +337,7 @@ export default function NuHubPage() {
       {activeTab === 'notices' ? (
         <div style={{ display: 'grid', gap: 16, marginTop: 16 }}>
           <NuNoticeCard notice={NU_VERIFIED_NOTICE} />
-          <p style={{ color: '#57616A', fontSize: 14, lineHeight: 1.8, margin: 0 }}>
+          <p style={{ color: 'var(--muted-ivory)', fontSize: 14, lineHeight: 1.8, margin: 0 }}>
             {t({
               bn: 'নতুন বিজ্ঞপ্তি এলে এখানে আসবে। পরবর্তী বিজ্ঞপ্তি (২০২৬-২৭) এখনো যাচাই হয়নি — ' + NU_NEXT_CYCLE_BN,
               en: 'New notices will appear here. The next circular (2026-27) has not been verified yet — the latest verified circular is for the 2025–26 academic year.',

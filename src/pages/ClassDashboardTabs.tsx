@@ -75,8 +75,8 @@ function SignInPrompt({ what }: { what: { bn: string; en: string } }) {
   const { t } = useLanguage();
   return (
     <Card>
-      <div style={{ fontWeight: 700, color: '#142B3B', marginBottom: 6 }}>{t({ bn: 'লগইন করুন', en: 'Log in' })}</div>
-      <p style={{ margin: '0 0 12px', color: '#68747B', fontSize: 14 }}>
+      <div style={{ fontWeight: 700, color: 'var(--heading)', marginBottom: 6 }}>{t({ bn: 'লগইন করুন', en: 'Log in' })}</div>
+      <p style={{ margin: '0 0 12px', color: 'var(--muted)', fontSize: 14 }}>
         {t({ bn: `${t(what)} দেখতে লগইন করুন — আপনার তথ্য শুধু আপনিই দেখতে পাবেন।`, en: `Log in to see ${t(what)} — only you can see your information.` })}
       </p>
       <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
@@ -95,7 +95,7 @@ function BookCard({ book }: { book: Book }) {
   const { t } = useLanguage();
   return (
     <Card hover>
-      <Link to={`/library/${book.id}`} style={{ fontWeight: 700, fontSize: 16, color: '#142B3B', lineHeight: 1.5 }}>
+      <Link to={`/library/${book.id}`} style={{ fontWeight: 700, fontSize: 16, color: 'var(--heading)', lineHeight: 1.5 }}>
         {book.title}
       </Link>
       <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, marginTop: 10 }}>
@@ -103,7 +103,7 @@ function BookCard({ book }: { book: Book }) {
         <Chip tone="outline">{book.classLevel}</Chip>
         <Chip tone="gold">{t({ bn: `${book.questionCount}টি প্রশ্ন`, en: `${book.questionCount} questions` })}</Chip>
       </div>
-      <p style={{ margin: '10px 0 0', color: '#68747B', fontSize: 14 }}>
+      <p style={{ margin: '10px 0 0', color: 'var(--muted)', fontSize: 14 }}>
         {t({ bn: `${book.chapterCount}টি পাঠ · ${book.paperCode ? `কোড ${book.paperCode}` : 'কোড নেই'}`, en: `${book.chapterCount} lessons · ${book.paperCode ? `Code ${book.paperCode}` : 'No code'}` })}
       </p>
     </Card>
@@ -135,9 +135,8 @@ export function BooksTab({ data }: { data: ClassTabData }) {
   }
   return (
     <>
-      <p style={{ color: '#57616A', margin: '0 0 12px' }}>
-        {t({ bn: `${data.bookTotal}টি বই · এই শ্রেণির শুধুমাত্র`, en: `${data.bookTotal} books · this class only` })}
-      </p>
+      <p style={{ color: 'var(--muted-ivory)', margin: '0 0 12px' }}>
+        {t({ bn: `${data.bookTotal}টি বই · এই শ্রেণির শুধুমাত্র`, en: `${data.bookTotal} books · this class only` })}      </p>
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: 12 }}>
         {pageBooks.map((b, i) => (
           <div key={b.id} style={{ display: 'contents' }}>
@@ -193,13 +192,11 @@ export function SubjectsTab({ data }: { data: ClassTabData }) {
           <Card key={r.name} hover>
             <Link
               to={`/class/${data.def.slug}/subjects/${encodeURIComponent(r.name)}`}
-              style={{ fontWeight: 700, fontSize: 17, color: '#142B3B' }}
-            >
+              style={{ fontWeight: 700, fontSize: 17, color: 'var(--heading)' }}            >
               {r.name}
             </Link>
-            <p style={{ margin: '8px 0 0', color: '#68747B', fontSize: 14 }}>
-              {t({ bn: `${r.books}টি বই · ${r.chapters}টি পাঠ · ${r.questions}টি প্রশ্ন`, en: `${r.books} books · ${r.chapters} lessons · ${r.questions} questions` })}
-            </p>
+            <p style={{ margin: '8px 0 0', color: 'var(--muted)', fontSize: 14 }}>
+              {t({ bn: `${r.books}টি বই · ${r.chapters}টি পাঠ · ${r.questions}টি প্রশ্ন`, en: `${r.books} books · ${r.chapters} lessons · ${r.questions} questions` })}            </p>
             <p style={{ margin: '10px 0 0' }}>
               <Link to={`/class/${data.def.slug}/subjects/${encodeURIComponent(r.name)}`} style={{ fontWeight: 600 }}>
                 {t({ bn: 'বিষয়টি দেখুন →', en: 'See this subject →' })}
@@ -219,16 +216,16 @@ export function PracticeTab({ data }: { data: ClassTabData }) {
   }
   return (
     <>
-      <p style={{ color: '#57616A', margin: '0 0 12px' }}>
+      <p style={{ color: 'var(--muted-ivory)', margin: '0 0 12px' }}>
         {t({ bn: `মোট ${data.totalQuestions}টি অনুশীলন প্রশ্ন · প্রতিটি বইয়ের ভেতরে অধ্যায়ভিত্তিক পাঠ ও প্রশ্ন আছে।`, en: `${data.totalQuestions} practice questions in total · each book has chapter-wise lessons and questions.` })}
       </p>
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: 12 }}>
         {data.books.slice(0, 20).map((b) => (
           <Card key={b.id} hover>
-            <Link to={`/library/${b.id}`} style={{ fontWeight: 700, fontSize: 16, color: '#142B3B', lineHeight: 1.5 }}>
+            <Link to={`/library/${b.id}`} style={{ fontWeight: 700, fontSize: 16, color: 'var(--heading)', lineHeight: 1.5 }}>
               {b.title}
             </Link>
-            <p style={{ margin: '8px 0 0', color: '#68747B', fontSize: 14 }}>
+            <p style={{ margin: '8px 0 0', color: 'var(--muted)', fontSize: 14 }}>
               {t({ bn: `${b.questionCount}টি প্রশ্ন · ${b.chapterCount}টি পাঠ`, en: `${b.questionCount} questions · ${b.chapterCount} lessons` })}
             </p>
             <p style={{ margin: '10px 0 0' }}>
@@ -294,13 +291,12 @@ export function TestsTab({ data }: { data: ClassTabData }) {
   }
   return (
     <>
-      <p style={{ color: '#57616A', margin: '0 0 12px' }}>
-        {t({ bn: `${data.quizTotal}টি পরীক্ষা · এই শ্রেণির শুধুমাত্র`, en: `${data.quizTotal} tests · this class only` })}
-      </p>
+      <p style={{ color: 'var(--muted-ivory)', margin: '0 0 12px' }}>
+        {t({ bn: `${data.quizTotal}টি পরীক্ষা · এই শ্রেণির শুধুমাত্র`, en: `${data.quizTotal} tests · this class only` })}      </p>
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: 12 }}>
         {data.quizzes.slice(0, 20).map((q) => (
           <Card key={q.id} hover>
-            <Link to={`/quiz/${q.id}`} style={{ fontWeight: 700, fontSize: 16, color: '#142B3B', lineHeight: 1.5 }}>
+            <Link to={`/quiz/${q.id}`} style={{ fontWeight: 700, fontSize: 16, color: 'var(--heading)', lineHeight: 1.5 }}>
               {bookTitleOf(q)}
             </Link>
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, marginTop: 10 }}>
@@ -308,7 +304,7 @@ export function TestsTab({ data }: { data: ClassTabData }) {
               <Chip tone="outline">{q.department}</Chip>
               <Chip tone="gold">{t({ bn: `${q.questionCount}টি প্রশ্ন`, en: `${q.questionCount} questions` })}</Chip>
             </div>
-            <p style={{ margin: '10px 0 0', color: '#68747B', fontSize: 14 }}>
+            <p style={{ margin: '10px 0 0', color: 'var(--muted)', fontSize: 14 }}>
               {t({ bn: `মোট ${q.totalMarks} নম্বর${q.timeLimitMinutes ? ` · ${q.timeLimitMinutes} মিনিট` : ''}`, en: `${q.totalMarks} marks in total${q.timeLimitMinutes ? ` · ${q.timeLimitMinutes} minutes` : ''}` })}
             </p>
             <p style={{ margin: '10px 0 0' }}>
@@ -320,9 +316,8 @@ export function TestsTab({ data }: { data: ClassTabData }) {
         ))}
       </div>
       {data.quizTotal > 20 ? (
-        <p style={{ marginTop: 16, color: '#57616A' }}>
-          {t({ bn: `আরও ${data.quizTotal - 20}টি পরীক্ষা আছে — সব দেখতে`, en: `${data.quizTotal - 20} more tests — see them all on the` })}{' '}
-          <Link to="/exam" style={{ fontWeight: 600 }}>
+        <p style={{ marginTop: 16, color: 'var(--muted-ivory)' }}>
+          {t({ bn: `আরও ${data.quizTotal - 20}টি পরীক্ষা আছে — সব দেখতে`, en: `${data.quizTotal - 20} more tests — see them all on the` })}{' '}          <Link to="/exam" style={{ fontWeight: 600 }}>
             {t({ bn: 'পরীক্ষার পাতায় যান →', en: 'exams page →' })}
           </Link>
         </p>
@@ -361,18 +356,17 @@ export function ResultsTab({ data }: { data: ClassTabData }) {
         const d = attemptDate(a);
         return (
           <Card key={a.id} hover>
-            <div style={{ fontWeight: 700, color: '#142B3B', fontSize: 16, lineHeight: 1.5 }}>
-              {title ?? a.subject ?? t({ bn: 'পরীক্ষা', en: 'Test' })}
-            </div>
+            <div style={{ fontWeight: 700, color: 'var(--heading)', fontSize: 16, lineHeight: 1.5 }}>
+              {title ?? a.subject ?? t({ bn: 'পরীক্ষা', en: 'Test' })}            </div>
             <div style={{ display: 'flex', alignItems: 'baseline', gap: 8, marginTop: 8 }}>
-              <span style={{ fontFamily: "'Poppins','Hind Siliguri',system-ui,sans-serif", fontSize: 26, fontWeight: 800, color: '#12766E' }}>
+              <span style={{ fontFamily: "'Poppins','Hind Siliguri',system-ui,sans-serif", fontSize: 26, fontWeight: 800, color: 'var(--teal-text)' }}>
                 {a.percentage}%
               </span>
-              <span style={{ color: '#68747B', fontSize: 14 }}>
+              <span style={{ color: 'var(--muted)', fontSize: 14 }}>
                 {t({ bn: `${a.score}/${a.totalMarks} নম্বর`, en: `${a.score}/${a.totalMarks} marks` })}
               </span>
             </div>
-            <p style={{ margin: '8px 0 0', color: '#68747B', fontSize: 14 }}>
+            <p style={{ margin: '8px 0 0', color: 'var(--muted)', fontSize: 14 }}>
               {t(a.markingStatus === 'auto' ? { bn: 'স্বয়ংক্রিয় মূল্যায়ন', en: 'Auto-marked' } : a.markingStatus === 'marked' ? { bn: 'মূল্যায়ন সম্পন্ন', en: 'Marking complete' } : { bn: 'মূল্যায়ন বাকি', en: 'Marking pending' })}
               {d ? ` · ${d.toLocaleDateString(lang === 'bn' ? 'bn-BD' : 'en-GB', { day: 'numeric', month: 'short', year: 'numeric' })}` : ''}
             </p>
@@ -416,43 +410,43 @@ export function ProgressTab({ data }: { data: ClassTabData }) {
     <>
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))', gap: 12, marginBottom: 20 }}>
         <Card>
-          <div style={{ fontFamily: "'Poppins','Hind Siliguri',system-ui,sans-serif", fontSize: 26, fontWeight: 800, color: '#142B3B' }}>{attempts.length}</div>
-          <div style={{ color: '#68747B', fontSize: 14 }}>{t({ bn: 'পরীক্ষা দিয়েছেন', en: 'Tests taken' })}</div>
+          <div style={{ fontFamily: "'Poppins','Hind Siliguri',system-ui,sans-serif", fontSize: 26, fontWeight: 800, color: 'var(--heading)' }}>{attempts.length}</div>
+          <div style={{ color: 'var(--muted)', fontSize: 14 }}>{t({ bn: 'পরীক্ষা দিয়েছেন', en: 'Tests taken' })}</div>
         </Card>
         <Card>
-          <div style={{ fontFamily: "'Poppins','Hind Siliguri',system-ui,sans-serif", fontSize: 26, fontWeight: 800, color: '#142B3B' }}>{avg !== null ? `${avg}%` : '—'}</div>
-          <div style={{ color: '#68747B', fontSize: 14 }}>{t({ bn: 'গড় নম্বর', en: 'Average score' })}</div>
+          <div style={{ fontFamily: "'Poppins','Hind Siliguri',system-ui,sans-serif", fontSize: 26, fontWeight: 800, color: 'var(--heading)' }}>{avg !== null ? `${avg}%` : '—'}</div>
+          <div style={{ color: 'var(--muted)', fontSize: 14 }}>{t({ bn: 'গড় নম্বর', en: 'Average score' })}</div>
           {avg !== null ? <ProgressBar value={avg} /> : null}
         </Card>
         <Card>
-          <div style={{ fontFamily: "'Poppins','Hind Siliguri',system-ui,sans-serif", fontSize: 26, fontWeight: 800, color: '#142B3B' }}>{best !== null ? `${best}%` : '—'}</div>
-          <div style={{ color: '#68747B', fontSize: 14 }}>{t({ bn: 'সেরা ফলাফল', en: 'Best result' })}</div>
+          <div style={{ fontFamily: "'Poppins','Hind Siliguri',system-ui,sans-serif", fontSize: 26, fontWeight: 800, color: 'var(--heading)' }}>{best !== null ? `${best}%` : '—'}</div>
+          <div style={{ color: 'var(--muted)', fontSize: 14 }}>{t({ bn: 'সেরা ফলাফল', en: 'Best result' })}</div>
         </Card>
         <Card>
-          <div style={{ fontFamily: "'Poppins','Hind Siliguri',system-ui,sans-serif", fontSize: 26, fontWeight: 800, color: '#142B3B' }}>{lessonsRead}</div>
-          <div style={{ color: '#68747B', fontSize: 14 }}>{t({ bn: 'পাঠ পড়েছেন', en: 'Lessons read' })}</div>
+          <div style={{ fontFamily: "'Poppins','Hind Siliguri',system-ui,sans-serif", fontSize: 26, fontWeight: 800, color: 'var(--heading)' }}>{lessonsRead}</div>
+          <div style={{ color: 'var(--muted)', fontSize: 14 }}>{t({ bn: 'পাঠ পড়েছেন', en: 'Lessons read' })}</div>
         </Card>
         <Card>
-          <div style={{ fontFamily: "'Poppins','Hind Siliguri',system-ui,sans-serif", fontSize: 26, fontWeight: 800, color: '#142B3B' }}>
+          <div style={{ fontFamily: "'Poppins','Hind Siliguri',system-ui,sans-serif", fontSize: 26, fontWeight: 800, color: 'var(--heading)' }}>
             {qAttempted > 0 ? `${qCorrect}/${qAttempted}` : '—'}
           </div>
-          <div style={{ color: '#68747B', fontSize: 14 }}>{t({ bn: 'সঠিক প্রশ্নোত্তর', en: 'Correct answers' })}</div>
+          <div style={{ color: 'var(--muted)', fontSize: 14 }}>{t({ bn: 'সঠিক প্রশ্নোত্তর', en: 'Correct answers' })}</div>
         </Card>
       </div>
       {data.quizSummaries.length > 0 ? (
         <>
-          <h3 style={{ color: '#142B3B', fontSize: 17, margin: '0 0 10px' }}>{t({ bn: 'মাসিক সারাংশ', en: 'Monthly summaries' })}</h3>
+          <h3 style={{ color: 'var(--heading)', fontSize: 17, margin: '0 0 10px' }}>{t({ bn: 'মাসিক সারাংশ', en: 'Monthly summaries' })}</h3>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))', gap: 12 }}>
             {data.quizSummaries.map((s) => (
               <Card key={s.id}>
-                <div style={{ fontWeight: 700, color: '#142B3B' }}>
+                <div style={{ fontWeight: 700, color: 'var(--heading)' }}>
                   {s.subject} · {s.month}
                 </div>
-                <p style={{ margin: '8px 0 0', color: '#68747B', fontSize: 14 }}>
+                <p style={{ margin: '8px 0 0', color: 'var(--muted)', fontSize: 14 }}>
                   {t({ bn: `${s.attemptsCount}টি চেষ্টা · গড় ${s.averagePercentage}% · সেরা ${s.bestPercentage}%`, en: `${s.attemptsCount} attempts · average ${s.averagePercentage}% · best ${s.bestPercentage}%` })}
                 </p>
                 {s.weakChapters.length > 0 ? (
-                  <p style={{ margin: '8px 0 0', color: '#68747B', fontSize: 14 }}>
+                  <p style={{ margin: '8px 0 0', color: 'var(--muted)', fontSize: 14 }}>
                     {t({ bn: `দুর্বল: ${s.weakChapters.slice(0, 3).join(', ')}`, en: `Weak: ${s.weakChapters.slice(0, 3).join(', ')}` })}
                   </p>
                 ) : null}
@@ -520,8 +514,8 @@ export function ProfileTab({
             {(profile.displayName ?? '?').trim().charAt(0) || '?'}
           </span>
           <div>
-            <div style={{ fontWeight: 700, fontSize: 18, color: '#142B3B' }}>{profile.displayName ?? '—'}</div>
-            <div style={{ color: '#68747B', fontSize: 14 }}>
+            <div style={{ fontWeight: 700, fontSize: 18, color: 'var(--heading)' }}>{profile.displayName ?? '—'}</div>
+            <div style={{ color: 'var(--muted)', fontSize: 14 }}>
               {t({ bn: `${data.def.bn} ড্যাশবোর্ডে আছেন`, en: `Viewing ${data.def.en} dashboard` })}
             </div>
           </div>
@@ -529,8 +523,8 @@ export function ProfileTab({
         <dl style={{ margin: '16px 0 0', display: 'grid', gap: 8 }}>
           {rows.map(([k, v]) => (
             <div key={k} style={{ display: 'flex', gap: 10, fontSize: 15 }}>
-              <dt style={{ color: '#68747B', minWidth: 130 }}>{k}</dt>
-              <dd style={{ margin: 0, color: '#202B33', fontWeight: 600 }}>{v}</dd>
+              <dt style={{ color: 'var(--muted)', minWidth: 130 }}>{k}</dt>
+              <dd style={{ margin: 0, color: 'var(--ink)', fontWeight: 600 }}>{v}</dd>
             </div>
           ))}
         </dl>
@@ -543,7 +537,7 @@ export function ProfileTab({
           </Button>
         </div>
       </Card>
-      <p style={{ marginTop: 14, color: '#68747B', fontSize: 14 }}>
+      <p style={{ marginTop: 14, color: 'var(--muted)', fontSize: 14 }}>
         {t({ bn: 'আপনার তথ্য শুধু আপনিই দেখতে পাবেন — অন্য শিক্ষার্থী বা শিক্ষক আপনার ব্যক্তিগত তথ্য দেখতে পায় না।', en: 'Only you can see your information — other students and teachers cannot see your personal details.' })}
       </p>
     </>

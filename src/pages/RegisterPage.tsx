@@ -34,7 +34,7 @@ const inputStyle: React.CSSProperties = {
   padding: '10px 12px',
   margin: '6px 0 14px',
   fontSize: 16,
-  border: '1px solid #aaa',
+  border: '1px solid var(--line-strong)',
   borderRadius: 6,
 };
 
@@ -162,7 +162,7 @@ export default function RegisterPage() {
 
   return (
     <PageShell titleBn={s.registerTitle.bn} titleEn={s.registerTitle.en}>
-      <p style={{ color: '#555' }}>
+      <p style={{ color: 'var(--ink-soft)' }}>
         {role === 'teacher' ? t(s.teacherRegisterNote) : role === 'parent' ? t(s.guardianNote) : t(s.studentNote)}
       </p>
       <form onSubmit={onSubmit}>
@@ -213,7 +213,7 @@ export default function RegisterPage() {
             minLength={6}
           />
         </label>
-        <fieldset style={{ border: '1px solid #aaa', borderRadius: 6, padding: '12px', margin: '6px 0 14px' }}>
+        <fieldset style={{ border: '1px solid var(--line-strong)', borderRadius: 6, padding: '12px', margin: '6px 0 14px' }}>
           <legend style={{ fontWeight: 700 }}><T bn={d.rolePickerTitle.bn} en={d.rolePickerTitle.en} /></legend>
           <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', marginBottom: 12 }}>
             {(
@@ -231,7 +231,7 @@ export default function RegisterPage() {
                   padding: '10px 16px',
                   minHeight: 44,
                   borderRadius: 6,
-                  border: '1px solid #0A1F44',
+                  border: '1px solid var(--heading)',
                   background: role === value ? '#0A1F44' : '#fff',
                   color: role === value ? '#fff' : '#0A1F44',
                   cursor: 'pointer',
@@ -241,7 +241,7 @@ export default function RegisterPage() {
               </button>
             ))}
           </div>
-          <p style={{ color: '#555', fontSize: 14, margin: '0 0 12px' }}>
+          <p style={{ color: 'var(--ink-soft)', fontSize: 14, margin: '0 0 12px' }}>
             <T bn="ভূমিকা পরে নিজে বদলানো যায় না।" en="The role cannot be changed yourself later." />
           </p>
           {/* Each role answers DIFFERENT questions (owner 22 Nov 2026):
@@ -324,9 +324,9 @@ export default function RegisterPage() {
             </>
           ) : null}
         </fieldset>
-        {shownError ? <p style={{ color: '#b00020' }}>{shownError}</p> : null}
+        {shownError ? <p style={{ color: 'var(--error)' }}>{shownError}</p> : null}
         {shownError && errorCode ? (
-          <p style={{ color: '#b00020', fontSize: 13, marginTop: -8 }}>ত্রুটি কোড: {errorCode}</p>
+          <p style={{ color: 'var(--error)', fontSize: 13, marginTop: -8 }}>ত্রুটি কোড: {errorCode}</p>
         ) : null}
         <button style={buttonStyle} type="submit" disabled={busy || loading}>
           {busy ? <T bn={strings.common.loading.bn} en={strings.common.loading.en} /> : <T bn={s.registerButton.bn} en={s.registerButton.en} />}

@@ -42,9 +42,9 @@ const STATUS_LABEL: Record<AdPlacementStatus, { bn: string; en: string }> = {
 
 const STATUS_STYLE: Record<AdPlacementStatus, { background: string; color: string }> = {
   // Brand palette only — NO green (review 20 Nov 2026, a11y B2).
-  active: { background: '#E8EFFA', color: '#0A1F44' },
-  ready: { background: '#FDF3D0', color: '#041742' },
-  'not-configured': { background: '#F1F1F1', color: '#444' },
+  active: { background: 'var(--hover)', color: 'var(--heading)' },
+  ready: { background: 'var(--soon-bg)', color: 'var(--heading)' },
+  'not-configured': { background: 'var(--hover)', color: 'var(--ink-soft)' },
 };
 
 function StatusPill(props: { status: AdPlacementStatus }) {
@@ -77,14 +77,14 @@ function ReportRows() {
   ];
   return (
     <table style={{ borderCollapse: 'collapse', width: '100%', marginTop: 8 }}>
-      <caption style={{ textAlign: 'left', color: '#555', fontSize: 14, paddingBottom: 4 }}>
+      <caption style={{ textAlign: 'left', color: 'var(--ink-soft)', fontSize: 14, paddingBottom: 4 }}>
         {t({ bn: 'রিপোর্ট দেখতে AdSense সংযুক্ত করুন', en: 'Connect AdSense to see reports' })}
       </caption>
       <tbody>
         {rows.map((row) => (
-          <tr key={row.en} style={{ borderBottom: '1px solid #eee' }}>
+          <tr key={row.en} style={{ borderBottom: '1px solid var(--line)' }}>
             <td style={{ padding: '6px 0' }}>{t(row)}</td>
-            <td style={{ padding: '6px 0', textAlign: 'right', color: '#555' }}>—</td>
+            <td style={{ padding: '6px 0', textAlign: 'right', color: 'var(--ink-soft)' }}>—</td>
           </tr>
         ))}
       </tbody>
@@ -119,7 +119,7 @@ export default function AdminAds() {
           border: '1px solid #F1B308',
           borderRadius: 8,
           padding: '12px 14px',
-          background: '#FDF3D0',
+          background: 'var(--soon-bg)',
           marginTop: 16,
         }}
       >
@@ -145,15 +145,15 @@ export default function AdminAds() {
           <strong>{t({ bn: 'সেট করা আছে', en: 'Set' })}</strong>
         )}
       </p>
-      <p style={{ color: '#555', fontSize: 14 }}>
+      <p style={{ color: 'var(--ink-soft)', fontSize: 14 }}>
         {t({ bn: 'অনুমোদনের জন্য যা যা লাগবে (চেকলিস্ট):', en: 'Approval checklist:' })}
       </p>
-      <ul style={{ color: '#333', fontSize: 15 }}>
+      <ul style={{ color: 'var(--ink)', fontSize: 15 }}>
         <li>{t({ bn: '✗ সাইট eduvelto.com-এ লাইভ — এখনো নয় (ডোমেইন সংযোগ চলছে)', en: '✗ Site live on eduvelto.com — not yet (domain connection in progress)' })}</li>
         <li>{t({ bn: '✗ আসল কনটেন্ট (পাঠ, বই, পরীক্ষা) — এখনো নয় (শুধু লগইন/প্রোফাইল তৈরি হয়েছে)', en: '✗ Real content (lessons, books, exams) — not yet (only login/profile built so far)' })}</li>
         <li>{t({ bn: '✗ গোপনীয়তা নীতি (Privacy Policy) — এখনো লেখা হয়নি', en: '✗ Privacy Policy — not written yet' })}</li>
       </ul>
-      <p style={{ color: '#555', fontSize: 14 }}>
+      <p style={{ color: 'var(--ink-soft)', fontSize: 14 }}>
         {t({
           bn: 'অনুমোদন পেলে Publisher ID ও ৩টি Slot ID ডেভেলপার (Muse) ডেপ্লয়মেন্ট সেটিংসে বসাবে ও সাইট আবার ডেপ্লয় করবে — এই পাতা থেকে ID বসানো যায় না। অনুমোদন পেলে ID গুলো Muse-কে পাঠান।',
           en: 'After approval, the developer (Muse) enters the publisher ID and 3 slot IDs in deployment settings and redeploys — IDs cannot be entered from this page. Send the IDs to Muse when approved.',
@@ -168,7 +168,7 @@ export default function AdminAds() {
           en: 'the bottom banner is persistent on all eligible pages — home, library, lessons, books, quizzes, exams, Eduvelto AI Teacher, profiles. Per the owner’s 20 Nov 2026, 21:52 brief it supersedes the earlier "no ads during AI lessons or active exams" rule; reserved space is the reconciliation. Users have no off switch — and neither does the owner on this page.',
         })}
       </p>
-      <div style={{ border: '1px solid #ddd', borderRadius: 8, padding: '12px 14px', marginBottom: 12 }}>
+      <div style={{ border: '1px solid var(--line-strong)', borderRadius: 8, padding: '12px 14px', marginBottom: 12 }}>
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: 12, alignItems: 'center' }}>
           <strong>{t({ bn: 'নিচের ব্যানার — সবসময় চালু', en: 'Bottom banner — always on' })}</strong>
           <StatusPill status={placementStatus('bottom-banner')} />
@@ -179,7 +179,7 @@ export default function AdminAds() {
             en: '🔒 Always on — cannot be turned off (owner brief 20 Nov 2026, 21:52).',
           })}
         </p>
-        <p style={{ margin: '8px 0 0', color: '#555', fontSize: 14 }}>
+        <p style={{ margin: '8px 0 0', color: 'var(--ink-soft)', fontSize: 14 }}>
           {t({ bn: 'দর্শকরা এখন বিজ্ঞাপন দেখছে:', en: 'Visitors are seeing ads now:' })}{' '}
           {isPlacementConfigured('bottom-banner') ? (
             <strong>{t({ bn: 'হ্যাঁ — AdSense ID বসানো আছে', en: 'Yes — AdSense IDs are set' })}</strong>
@@ -187,10 +187,10 @@ export default function AdminAds() {
             <strong>{t({ bn: 'না — AdSense অনুমোদন হয়নি, ID বসানো হয়নি', en: 'No — AdSense is not approved, no IDs set' })}</strong>
           )}
         </p>
-        <p style={{ margin: '10px 0 0', color: '#555', fontSize: 14 }}>
+        <p style={{ margin: '10px 0 0', color: 'var(--ink-soft)', fontSize: 14 }}>
           {t({ bn: 'যোগ্য পাতা:', en: 'Eligible pages:' })} {BOTTOM_BANNER_ELIGIBLE_PAGES.join(' · ')}
         </p>
-        <p style={{ margin: '6px 0 0', color: '#555', fontSize: 14 }}>
+        <p style={{ margin: '6px 0 0', color: 'var(--ink-soft)', fontSize: 14 }}>
           {t({
             bn: 'কনটেন্টের নিচে জায়গা রিজার্ভ থাকে (+ মোবাইলের safe-area) — ব্যানার কনটেন্ট, বোতাম বা কুইজের উত্তর ঢাকে না। বিজ্ঞাপন না থাকলে ব্যানার শূন্য উচ্চতায় গুটিয়ে যায় — কোনো ভুয়া বিজ্ঞাপন বা খালি বাক্স নেই।',
             en: 'Space is reserved below the content (+ mobile safe-area), so the banner never covers content, buttons or quiz answers. With no ad available the slot collapses to zero height — no fake ads, no empty boxes.',
@@ -206,7 +206,7 @@ export default function AdminAds() {
         return (
           <div
             key={p.id}
-            style={{ border: '1px solid #ddd', borderRadius: 8, padding: '12px 14px', marginBottom: 12 }}
+            style={{ border: '1px solid var(--line-strong)', borderRadius: 8, padding: '12px 14px', marginBottom: 12 }}
           >
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: 12, alignItems: 'center' }}>
               <strong>
@@ -214,7 +214,7 @@ export default function AdminAds() {
               </strong>
               <StatusPill status={status} />
             </div>
-            <p style={{ margin: '8px 0', color: '#555', fontSize: 14 }}>
+            <p style={{ margin: '8px 0', color: 'var(--ink-soft)', fontSize: 14 }}>
               {lang === 'bn' ? p.whereBn : p.whereEn}
             </p>
             <p style={{ margin: '8px 0', fontSize: 15 }}>
@@ -230,7 +230,7 @@ export default function AdminAds() {
               )}
             </p>
             {p.id === 'bottom-banner' ? (
-              <p style={{ margin: 0, color: '#555', fontSize: 14 }}>
+              <p style={{ margin: 0, color: 'var(--ink-soft)', fontSize: 14 }}>
                 {t({
                   bn: 'এই জায়গাটি ওপরের "স্থায়ী নিচের ব্যানার" সেটিং দিয়ে চলে — এখানে কোনো টগল নেই।',
                   en: 'This placement follows the "Persistent bottom banner" setting above — there is no toggle here.',
@@ -255,7 +255,7 @@ export default function AdminAds() {
                   onChange={(e) => onToggle(p.id, e.target.checked)}
                 />
                 {t({ bn: 'চালু', en: 'Enabled' })}
-                <span style={{ color: '#555', fontSize: 14 }}>
+                <span style={{ color: 'var(--ink-soft)', fontSize: 14 }}>
                   {t({ bn: '— এই ব্রাউজারে মাত্র', en: '— This browser only' })}
                   {!configured ? t({ bn: ' — AdSense ID না বসা পর্যন্ত টগল বন্ধ থাকে', en: ' — toggle stays off until AdSense IDs are set' }) : ''}
                 </span>
@@ -269,7 +269,7 @@ export default function AdminAds() {
       <h3 style={{ fontSize: 16 }}>{t({ bn: 'ওয়েবসাইট (AdSense)', en: 'Website (AdSense)' })}</h3>
       <ReportRows />
       <h3 style={{ fontSize: 16, marginTop: 20 }}>{t({ bn: 'অ্যাপ (AdMob)', en: 'Apps (AdMob)' })}</h3>
-      <p style={{ color: '#555', fontSize: 14 }}>
+      <p style={{ color: 'var(--ink-soft)', fontSize: 14 }}>
         {t({
           bn: 'AdMob রিপোর্ট শুধু AdMob কনসোলে / অ্যাপে দেখা যায়, এখানে নয়।',
           en: 'AdMob reports are seen only in the AdMob console / apps, never here.',
@@ -277,7 +277,7 @@ export default function AdminAds() {
       </p>
 
       <h2 style={{ fontSize: 18, marginTop: 24 }}>{t({ bn: 'শিশু সুরক্ষা', en: 'Child safety' })}</h2>
-      <ul style={{ color: '#333' }}>
+      <ul style={{ color: 'var(--ink)' }}>
         <li>
           {t({ bn: 'ব্যক্তিগতকৃত বিজ্ঞাপন:', en: 'Personalised ads:' })}{' '}
           {ADS_CHILD_SAFETY.personalisedAds

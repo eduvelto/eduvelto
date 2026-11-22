@@ -71,11 +71,11 @@ function LinkCard(props: { link: ParentLink; actorUid: string; onDone: () => voi
         {link.relationship ? ` · ${link.relationship}` : ''}
         {link.guardianContact ? ` · ${link.guardianContact}` : ''}
       </p>
-      <p style={{ margin: '0 0 6px', color: '#68747B' }}>
+      <p style={{ margin: '0 0 6px', color: 'var(--muted)' }}>
         {t({ bn: 'সন্তান', en: 'Child' })}: {link.childDisplayName} ({link.childClassLevel}
         {link.childInstitution ? ` · ${link.childInstitution}` : ''})
       </p>
-      <p style={{ margin: '0 0 6px', color: '#68747B', display: 'flex', flexWrap: 'wrap', gap: 8, alignItems: 'center' }}>
+      <p style={{ margin: '0 0 6px', color: 'var(--muted)', display: 'flex', flexWrap: 'wrap', gap: 8, alignItems: 'center' }}>
         <StatusPill
           label={
             link.status === 'pending'
@@ -96,10 +96,10 @@ function LinkCard(props: { link: ParentLink; actorUid: string; onDone: () => voi
           {link.status === 'rejected' && link.decisionReason ? ` — ${t({ bn: 'কারণ', en: 'Reason' })}: ${link.decisionReason}` : ''}
         </span>
       </p>
-      <p style={{ margin: '0 0 12px', color: '#68747B', fontSize: 13 }}>
+      <p style={{ margin: '0 0 12px', color: 'var(--muted)', fontSize: 13 }}>
         Eduvelto ID ({t({ bn: 'অভিভাবক', en: 'Guardian' })}): <code>{link.parentId}</code> · ({t({ bn: 'সন্তান', en: 'Child' })}): <code>{link.studentId}</code>
       </p>
-      {error ? <p style={{ color: '#B00020' }}>{error}</p> : null}
+      {error ? <p style={{ color: 'var(--error)' }}>{error}</p> : null}
       {decidable ? (
         <>
           <label className="ev-label" htmlFor={`guardian-reason-${link.id}`}>
@@ -138,7 +138,7 @@ function LinkCard(props: { link: ParentLink; actorUid: string; onDone: () => voi
               </Button>
             </div>
           )}
-          {!reasonOk && decision ? <p style={{ color: '#B00020' }}>{t({ bn: 'কারণ কমপক্ষে ১০ অক্ষর হতে হবে।', en: 'The reason must be at least 10 characters.' })}</p> : null}
+          {!reasonOk && decision ? <p style={{ color: 'var(--error)' }}>{t({ bn: 'কারণ কমপক্ষে ১০ অক্ষর হতে হবে।', en: 'The reason must be at least 10 characters.' })}</p> : null}
         </>
       ) : null}
       {link.status === 'verified' ? (

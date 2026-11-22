@@ -38,9 +38,9 @@ const buttonStyle: React.CSSProperties = {
 
 const secondaryStyle: React.CSSProperties = {
   ...buttonStyle,
-  background: '#fff',
-  color: '#111',
-  border: '1px solid #aaa',
+  background: 'var(--card)',
+  color: 'var(--ink)',
+  border: '1px solid var(--line-strong)',
 };
 
 const STATUS: Record<ParentLink['status'], { bn: string; en: string }> = {
@@ -128,36 +128,36 @@ export default function GuardianLinksPage() {
 
   return (
     <PageShell titleBn={d.linkConfirmTitle.bn} titleEn={d.linkConfirmTitle.en}>
-      <p style={{ color: '#555' }}>
+      <p style={{ color: 'var(--ink-soft)' }}>
         {t({
           bn: 'একজন অভিভাবক আপনার সাথে সংযোগ চাইছেন — নিশ্চিত করলে তিনি আপনার অগ্রগতি দেখতে পারবেন, আপনার মেসেজ নয়।',
           en: 'A guardian is asking to link with you — confirming lets them see your progress, never your messages.',
         })}
       </p>
 
-      {error ? <p style={{ color: '#b00020' }}>{error}</p> : null}
+      {error ? <p style={{ color: 'var(--error)' }}>{error}</p> : null}
 
       <h2 style={{ fontSize: 19 }}>{t({ bn: 'নতুন অনুরোধ', en: 'New requests' })}</h2>
       {links === null ? (
         <p>{t(strings.common.loading)}</p>
       ) : pending.length === 0 ? (
-        <p style={{ color: '#555' }}>{t({ bn: 'কোনো নতুন অনুরোধ নেই।', en: 'No new requests.' })}</p>
+        <p style={{ color: 'var(--ink-soft)' }}>{t({ bn: 'কোনো নতুন অনুরোধ নেই।', en: 'No new requests.' })}</p>
       ) : (
         <ul style={{ paddingLeft: 0, listStyle: 'none' }}>
           {pending.map((l) => (
-            <li key={l.id} style={{ border: '1px solid #ccc', borderRadius: 8, padding: 16, marginBottom: 12 }}>
+            <li key={l.id} style={{ border: '1px solid var(--line-strong)', borderRadius: 8, padding: 16, marginBottom: 12 }}>
               <p style={{ margin: '0 0 6px', fontSize: 18 }}>
                 <strong>{l.guardianDisplayName || '—'}</strong>
                 {l.relationship ? ` · ${l.relationship}` : ''}
               </p>
-              <p style={{ margin: '0 0 6px', color: '#555' }}>
+              <p style={{ margin: '0 0 6px', color: 'var(--ink-soft)' }}>
                 {l.guardianContact ? t({ bn: `যোগাযোগ: ${l.guardianContact} · `, en: `Contact: ${l.guardianContact} · ` }) : ''}
                 {t({
                   bn: `আপনার নাম হিসেবে লিখেছেন: ${l.childDisplayName} (${l.childClassLevel}${l.childInstitution ? ` · ${l.childInstitution}` : ''})`,
                   en: `They entered your name as: ${l.childDisplayName} (${l.childClassLevel}${l.childInstitution ? ` · ${l.childInstitution}` : ''})`,
                 })}
               </p>
-              <p style={{ margin: '0 0 12px', color: '#555' }}>{t(d.confirmLinkNote)}</p>
+              <p style={{ margin: '0 0 12px', color: 'var(--ink-soft)' }}>{t(d.confirmLinkNote)}</p>
               <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
                 <button
                   style={buttonStyle}
@@ -183,7 +183,7 @@ export default function GuardianLinksPage() {
 
       <h2 style={{ fontSize: 19 }}>{t({ bn: 'সক্রিয় সংযোগ', en: 'Active links' })}</h2>
       {active.length === 0 ? (
-        <p style={{ color: '#555' }}>{t({ bn: 'কোনো সক্রিয় সংযোগ নেই।', en: 'No active links.' })}</p>
+        <p style={{ color: 'var(--ink-soft)' }}>{t({ bn: 'কোনো সক্রিয় সংযোগ নেই।', en: 'No active links.' })}</p>
       ) : (
         <ul style={{ paddingLeft: 20 }}>
           {active.map((l) => (

@@ -11,6 +11,11 @@
 // empty states of a class with no books. (A class WITH books but zero
 // quizzes keeps its own "no tests yet" message — that is a different
 // state and is NOT replaced by this component.)
+//
+// NOTE (dark mode, 22 Nov 2026): the hero/compact sit on a
+// data-driven accentSoft tint (classLevels.ts) that is LIGHT in both
+// themes, so their text stays hardcoded dark — theme-aware vars would
+// turn light-on-light in dark mode. Same for .ev-coming-soon-chip.
 
 import { Link } from 'react-router-dom';
 import { LinkButton } from './ui';
@@ -88,7 +93,7 @@ export function ComingSoonHero({ def }: { def: ClassLevelDef }) {
             fontSize: 14,
             lineHeight: 1.7,
             background: 'rgba(255,255,255,0.65)',
-            border: '1px solid #E5E8E5',
+            border: '1px solid var(--line)',
             borderRadius: 10,
             padding: '10px 14px',
           }}
@@ -133,7 +138,7 @@ export function ComingSoonCompact({
         <p style={{ margin: '6px 0 10px', color: '#57616A', fontSize: 14, lineHeight: 1.7 }}>
           {t({ bn: `এই শ্রেণির ${whatBn} এখনো প্রকাশিত হয়নি — তৈরি হচ্ছে, প্রকাশিত হলেই এখানে দেখাবে।`, en: `${whatEn} for this class is not published yet.` })}
         </p>
-        <Link to="/library" style={{ fontWeight: 600 }}>
+        <Link to="/library" style={{ fontWeight: 600, color: '#12766E' }}>
           {t({ bn: 'লাইব্রেরি দেখুন →', en: 'Browse library →' })}
         </Link>
       </div>

@@ -170,15 +170,15 @@ export default function App() {
       <RouteSeo />
       {suspended ? (
         <main style={{ maxWidth: 720, margin: '0 auto', padding: '24px 16px', fontFamily: 'system-ui, sans-serif' }}>
-          <div style={{ border: '1px solid #b00020', borderRadius: 8, padding: '20px 16px', background: '#fdf0f0' }}>
-            <h1 style={{ marginTop: 0, color: '#b00020', fontSize: 24 }}>{t(strings.profile.suspendedTitle)}</h1>
+          <div style={{ border: '1px solid var(--error)', borderRadius: 8, padding: '20px 16px', background: 'var(--error-bg)' }}>
+            <h1 style={{ marginTop: 0, color: 'var(--error)', fontSize: 24 }}>{t(strings.profile.suspendedTitle)}</h1>
             <p>{t(strings.profile.suspendedBody)}</p>
             {profile?.suspendedReason ? (
               <p>
                 <strong>{t({ bn: 'স্থগিতের কারণ', en: 'Reason' })}:</strong> {profile.suspendedReason}
               </p>
             ) : null}
-            <p style={{ color: '#555', fontSize: 14 }}>
+            <p style={{ color: 'var(--ink-soft)', fontSize: 14 }}>
               {t({ bn: 'আপিল করতে অ্যাডমিনের সঙ্গে যোগাযোগ করুন (সাপোর্ট পাতা / ইমেইল)। আপনি মালিক হলে: Firebase console → Firestore → users → আপনার ডকুমেন্ট → isActive ফিল্ডটি মুছে দিন (শুধু মালিকের অ্যাকাউন্টের ক্ষেত্রে)।', en: 'To appeal, contact an admin (support page / email). If you are the owner: Firebase console → Firestore → users → your document → delete the isActive field.' })}
             </p>
             <button

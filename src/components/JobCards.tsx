@@ -34,7 +34,7 @@ function bnNum(n: number): string {
 export function JobNonAffiliationNote() {
   const { t } = useLanguage();
   return (
-    <p style={{ margin: '0 0 20px', color: '#57616A', fontSize: 13, lineHeight: 1.7 }}>
+    <p style={{ margin: '0 0 20px', color: 'var(--muted-ivory)', fontSize: 13, lineHeight: 1.7 }}>
       {t({
         bn: 'Eduvelto BPSC, বাংলাদেশ ব্যাংক, DPE বা NTRCA-র সঙ্গে যুক্ত নয়। সর্বশেষ তথ্য সবসময় অফিসিয়াল সাইটের বিজ্ঞপ্তিতে যাচাই করুন।',
         en: 'Eduvelto is not affiliated with BPSC, Bangladesh Bank, DPE or NTRCA. Always verify the latest information in the official circular.',
@@ -66,8 +66,8 @@ export function JobCategoryGroups() {
     <>
       {groups.map((g, gi) => (
         <div key={g.category.slug}>
-          <p style={{ color: '#142B3B', margin: '0 0 10px', fontSize: 16, fontWeight: 700 }}>
-            <span style={{ color: g.category.accent }}>{bnNum(gi + 1)}</span>
+          <p style={{ color: 'var(--heading)', margin: '0 0 10px', fontSize: 16, fontWeight: 700 }}>
+            <span style={{ color: 'var(--heading)' }}>{bnNum(gi + 1)}</span>
             {' · '}
             <T bn={g.category.bn} en={g.category.en} />
           </p>
@@ -275,8 +275,8 @@ export function JobCard({ def, delayMs = 0 }: { def: JobExamDef; delayMs?: numbe
               display: 'inline-flex',
               alignItems: 'center',
               gap: 6,
-              background: '#fff',
-              color: def.accentDeep,
+              background: 'var(--card)',
+              color: 'var(--heading)',
               fontWeight: 700,
               fontSize: 14,
               padding: '9px 16px',
@@ -358,8 +358,8 @@ export function CommonPrepCard({ delayMs = 0 }: { delayMs?: number }) {
               display: 'inline-flex',
               alignItems: 'center',
               gap: 6,
-              background: '#fff',
-              color: '#8A6100',
+              background: 'var(--card)',
+              color: 'var(--amber-deep)',
               fontWeight: 700,
               fontSize: 14,
               padding: '9px 16px',
@@ -396,9 +396,8 @@ export function JobsSection() {
       <Reveal>
         <h2 className="ev-section-h2">{t({ bn: 'চাকরির প্রস্তুতি', en: 'Job Preparation' })}</h2>
       </Reveal>
-      <p style={{ color: '#57616A', margin: '-8px 0 14px', fontSize: 14 }}>
-        {t({ bn: 'চাকরির পরীক্ষার প্রস্তুতি — সিলেবাস, MCQ ব্যাংক, মক টেস্ট ও ভাইভা প্রস্তুতি এক জায়গায় থাকবে। কনটেন্ট শিক্ষক যাচাইয়ের পর প্রকাশিত হবে।', en: 'Preparation for job exams — syllabus, MCQ bank, mock tests and viva preparation will be in one place. Content is published only after teacher review.' })}
-      </p>
+      <p style={{ color: 'var(--muted-ivory)', margin: '-8px 0 14px', fontSize: 14 }}>
+        {t({ bn: 'চাকরির পরীক্ষার প্রস্তুতি — সিলেবাস, MCQ ব্যাংক, মক টেস্ট ও ভাইভা প্রস্তুতি এক জায়গায় থাকবে। কনটেন্ট শিক্ষক যাচাইয়ের পর প্রকাশিত হবে।', en: 'Preparation for job exams — syllabus, MCQ bank, mock tests and viva preparation will be in one place. Content is published only after teacher review.' })}      </p>
       <JobCategoryGroups />
       <div style={grid}>
         <CommonPrepCard />

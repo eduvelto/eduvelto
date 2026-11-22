@@ -44,7 +44,7 @@ export default function AdmissionModeSwitch() {
         aria-label={t({ bn: 'ভর্তি প্রস্তুতির মোড', en: 'Admission preparation mode' })}
         style={{
           display: 'inline-flex',
-          border: '1px solid #1E3A5F',
+          border: '1px solid var(--heading)',
           borderRadius: 8,
           overflow: 'hidden',
         }}
@@ -61,8 +61,8 @@ export default function AdmissionModeSwitch() {
                 padding: '10px 18px',
                 minHeight: 44,
                 border: 'none',
-                background: active ? '#1E3A5F' : '#fff',
-                color: active ? '#fff' : '#1E3A5F',
+                background: active ? '#1E3A5F' : 'var(--card)',
+                color: active ? '#fff' : 'var(--heading)',
                 fontWeight: active ? 700 : 500,
                 fontSize: 15,
                 cursor: 'pointer',
@@ -74,10 +74,10 @@ export default function AdmissionModeSwitch() {
           );
         })}
       </div>
-      <p style={{ margin: '8px 0 0', color: '#57616A', fontSize: 14, lineHeight: 1.7 }}>
+      <p style={{ margin: '8px 0 0', color: 'var(--muted-ivory)', fontSize: 14, lineHeight: 1.7 }}>
         {t({ bn: NU_MODE_COPY[mode].descBn, en: NU_MODE_COPY[mode].descEn })}
       </p>
-      <p style={{ margin: '4px 0 0', color: '#68747B', fontSize: 13 }}>
+      <p style={{ margin: '4px 0 0', color: 'var(--muted)', fontSize: 13 }}>
         {t({ bn: 'মোড যেকোনো সময় বদলানো যায় — অগ্রগতি মুছে যাবে না।', en: 'You can switch mode any time — your progress is kept.' })}
       </p>
     </div>

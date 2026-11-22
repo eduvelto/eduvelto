@@ -72,7 +72,7 @@ export default function HealthDiseasesPage() {
           <p style={{ margin: '0 0 6px' }}>
             <strong>{t(h.seeDoctorWhen)}:</strong> {lang === 'bn' ? d.seeDoctorBn : d.seeDoctorEn}
           </p>
-          <p style={{ margin: '0 0 6px', fontSize: 14, color: '#555' }}>
+          <p style={{ margin: '0 0 6px', fontSize: 14, color: 'var(--ink-soft)' }}>
             {t(h.source)}: {d.source}
           </p>
           <AccuracyNote />

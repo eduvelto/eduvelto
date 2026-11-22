@@ -26,7 +26,7 @@ const inputStyle: React.CSSProperties = {
   padding: '10px 12px',
   margin: '6px 0 14px',
   fontSize: 16,
-  border: '1px solid #aaa',
+  border: '1px solid var(--line-strong)',
   borderRadius: 6,
 };
 
@@ -210,7 +210,7 @@ export default function TeacherRegisterPage() {
         en: 'Teacher verification is a human check. Registering does not grant a “verified” badge. There is no fee and no document upload — just provide the written information.',
       })}</p>
       {existing?.status === 'rejected' ? (
-        <p style={{ color: '#b00020' }}>
+        <p style={{ color: 'var(--error)' }}>
           {t({
             bn: `আপনার আগের আবেদন প্রত্যাখ্যাত হয়েছে${existing.reason ? ` — কারণ: ${existing.reason}` : ''}। সংশোধন করে আবার আবেদন করতে পারেন।`,
             en: `Your previous application was rejected${existing.reason ? ` — reason: ${existing.reason}` : ''}. You can correct it and apply again.`,
@@ -265,9 +265,9 @@ export default function TeacherRegisterPage() {
           <T bn="প্রমাণের রেফারেন্স" en="Evidence reference" /> <T bn="(ঐচ্ছিক)" en="(optional)" />
           <input style={inputStyle} type="text" value={evidenceRef} onChange={(e) => setEvidenceRef(e.target.value)} placeholder={t({ bn: 'যেমন: সনদের লিংক বা নম্বর', en: 'e.g.: certificate link or number' })} />
         </label>
-        {error ? <p style={{ color: '#b00020' }}>{error}</p> : null}
+        {error ? <p style={{ color: 'var(--error)' }}>{error}</p> : null}
         {done ? (
-          <p style={{ color: '#0A1F44' }}>
+          <p style={{ color: 'var(--heading)' }}>
             {t({ bn: 'আবেদন জমা হয়েছে — অ্যাডমিন যাচাই করছেন।', en: 'Application submitted — an admin is reviewing it.' })}{' '}
             <Link to="/teacher">{t({ bn: 'শিক্ষক ড্যাশবোর্ড →', en: 'Teacher Dashboard →' })}</Link>
           </p>

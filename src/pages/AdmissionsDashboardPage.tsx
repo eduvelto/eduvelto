@@ -63,7 +63,7 @@ export default function AdmissionsDashboardPage() {
         </div>
       ) : (
         <div>
-          <p style={{ fontSize: 16, lineHeight: 1.8, color: '#3A444B' }}>
+          <p style={{ fontSize: 16, lineHeight: 1.8, color: 'var(--ink-soft)' }}>
             {t({
               bn: `স্বাগতম${profile?.displayName ? `, ${profile.displayName}` : ''} — আপনার ভর্তি ড্যাশবোর্ড তৈরি হচ্ছে।`,
               en: `Welcome${profile?.displayName ? `, ${profile.displayName}` : ''} — your admission dashboard is being built.`,
@@ -83,21 +83,21 @@ export default function AdmissionsDashboardPage() {
           </p>
         </div>
       )}
-      <h2 style={{ fontSize: 19, color: '#142B3B', marginTop: 28 }}>
+      <h2 style={{ fontSize: 19, color: 'var(--heading)', marginTop: 28 }}>
         {t({ bn: 'ড্যাশবোর্ডে যা আসবে (১৭টি আইটেম — পরিকল্পনায়)', en: 'What the dashboard will have (17 items — planned)' })}
       </h2>
       <div style={{ display: 'grid', gap: 10, gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))' }}>
         {PLANNED_ITEMS.map((item, i) => (
           <Card key={item.bn} style={{ opacity: 0.85 }}>
-            <span style={{ color: '#68747B', fontSize: 13 }}>{i + 1}.</span>{' '}
+            <span style={{ color: 'var(--muted)', fontSize: 13 }}>{i + 1}.</span>{' '}
             <strong style={{ fontSize: 15 }}>{t({ bn: item.bn, en: item.en })}</strong>
-            <p style={{ margin: '6px 0 0', color: '#57616A', fontSize: 13 }}>
+            <p style={{ margin: '6px 0 0', color: 'var(--muted-ivory)', fontSize: 13 }}>
               {t({ bn: 'শীঘ্রই আসছে — NU-১১-এ', en: 'Coming soon — in NU-11' })}
             </p>
           </Card>
         ))}
       </div>
-      <p style={{ marginTop: 20, color: '#57616A', fontSize: 14, lineHeight: 1.8 }}>
+      <p style={{ marginTop: 20, color: 'var(--muted-ivory)', fontSize: 14, lineHeight: 1.8 }}>
         {t({
           bn: 'প্রথম রিলিজে শুধু চালিয়ে যান, অনুশীলন-ইতিহাস, সাম্প্রতিক ফলাফল, ভর্তি-তথ্য ও আসন্ন বিজ্ঞপ্তি থাকবে — বাকি ধাপে ধাপে (ডিজাইন §৮)।',
           en: 'The first release will have only continue-learning, practice history, recent results, admission information and upcoming notices — the rest step by step (design §8).',

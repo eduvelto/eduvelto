@@ -243,12 +243,12 @@ export default function ExamPage() {
             <StatCard value={String(pageQuizzes.length)} labelBn="পরীক্ষা" labelEn="Exams" />
             <StatCard value={String(pageQuestions)} labelBn="প্রশ্ন" labelEn="Questions" tone="gold" />
           </div>
-          <p style={{ color: '#555', marginTop: 0 }}>
+          <p style={{ color: 'var(--ink-soft)', marginTop: 0 }}>
             {t({ bn: `এই পাতায় ${groups.length}টি বই · ${pageQuizzes.length}টি পরীক্ষা · ${pageQuestions}টি প্রশ্ন (দেখাচ্ছি ${shownFrom}–${shownTo})`, en: `This page: ${groups.length} books · ${pageQuizzes.length} exams · ${pageQuestions} questions (showing ${shownFrom}–${shownTo})` })}
           </p>
           {groups.map((g) => (
             <Card key={g.bookId} style={{ marginBottom: 16 }}>
-              <h2 style={{ fontFamily: "'Poppins','Hind Siliguri',system-ui,sans-serif", margin: '0 0 6px', fontSize: 18, color: '#0A1F44' }}>{g.title}</h2>
+              <h2 style={{ fontFamily: "'Poppins','Hind Siliguri',system-ui,sans-serif", margin: '0 0 6px', fontSize: 18, color: 'var(--heading)' }}>{g.title}</h2>
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, marginBottom: 12 }}>
                 {[g.subject, g.department, g.classLevel].filter(Boolean).map((t) => (
                   <Chip key={t} tone="outline">{t}</Chip>
@@ -261,12 +261,12 @@ export default function ExamPage() {
                 >
                   <div>
                     <strong>{q.kind === 'mcq' ? t({ bn: 'MCQ পরীক্ষা', en: 'MCQ exam' }) : t({ bn: 'লিখিত পরীক্ষা', en: 'Written exam' })}</strong>
-                    <span style={{ color: '#5A6478', fontSize: 14 }}>
+                    <span style={{ color: 'var(--muted)', fontSize: 14 }}>
                       {' '}
                       {t({ bn: `· ${q.questionCount}টি প্রশ্ন · ${q.totalMarks} নম্বর · ${q.timeLimitMinutes} মিনিট`, en: `· ${q.questionCount} questions · ${q.totalMarks} marks · ${q.timeLimitMinutes} minutes` })}
                     </span>
                     {q.kind === 'written' ? (
-                      <span style={{ color: '#5A6478', fontSize: 14 }}> {t({ bn: '· শিক্ষক মূল্যায়ন করবেন', en: '· Marked by a teacher' })}</span>
+                      <span style={{ color: 'var(--muted)', fontSize: 14 }}> {t({ bn: '· শিক্ষক মূল্যায়ন করবেন', en: '· Marked by a teacher' })}</span>
                     ) : null}
                   </div>
                   {user ? (
@@ -288,7 +288,7 @@ export default function ExamPage() {
                 type="button"
                 onClick={prevPage}
                 disabled={pageIndex <= 0}
-                style={{ padding: '10px 16px', minHeight: 44, borderRadius: 6, border: '1px solid #0A1F44', background: '#fff', color: '#0A1F44', cursor: 'pointer' }}
+                style={{ padding: '10px 16px', minHeight: 44, borderRadius: 6, border: '1px solid var(--heading)', background: 'var(--card)', color: 'var(--heading)', cursor: 'pointer' }}
               >
                 {t({ bn: '← আগের', en: '← Previous' })}
               </button>
@@ -299,7 +299,7 @@ export default function ExamPage() {
                 type="button"
                 onClick={nextPage}
                 disabled={!currentPage?.hasMore || loading}
-                style={{ padding: '10px 16px', minHeight: 44, borderRadius: 6, border: '1px solid #0A1F44', background: '#fff', color: '#0A1F44', cursor: 'pointer' }}
+                style={{ padding: '10px 16px', minHeight: 44, borderRadius: 6, border: '1px solid var(--heading)', background: 'var(--card)', color: 'var(--heading)', cursor: 'pointer' }}
               >
                 {t({ bn: 'পরের →', en: 'Next →' })}
               </button>
@@ -308,7 +308,7 @@ export default function ExamPage() {
         </>
       )}
 
-      <h2 style={{ fontFamily: "'Poppins','Hind Siliguri',system-ui,sans-serif", fontSize: 20, color: '#0A1F44', margin: '28px 0 12px' }}>{t({ bn: 'আমার ফলাফল', en: 'My results' })}</h2>
+      <h2 style={{ fontFamily: "'Poppins','Hind Siliguri',system-ui,sans-serif", fontSize: 20, color: 'var(--heading)', margin: '28px 0 12px' }}>{t({ bn: 'আমার ফলাফল', en: 'My results' })}</h2>
       {!user ? (
         <p>
           {lang === 'bn' ? (
@@ -320,7 +320,7 @@ export default function ExamPage() {
       ) : attempts === null ? (
         <SkeletonCards count={2} />
       ) : attempts.length === 0 ? (
-        <p style={{ color: '#5A6478' }}>{t({ bn: 'এখনো কোনো পরীক্ষা দেননি।', en: 'You have not taken any exam yet.' })}</p>
+        <p style={{ color: 'var(--muted)' }}>{t({ bn: 'এখনো কোনো পরীক্ষা দেননি।', en: 'You have not taken any exam yet.' })}</p>
       ) : (
         <div style={{ display: 'grid', gap: 10 }}>
           {attempts.slice(0, 20).map((a) => {
@@ -329,14 +329,14 @@ export default function ExamPage() {
             return (
               <Card key={a.id} hover>
                 <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, alignItems: 'center', justifyContent: 'space-between' }}>
-                  <Link to={`/quiz/${a.quizId}/result/${a.id}`} style={{ fontWeight: 700, color: '#0A1F44' }}>
+                  <Link to={`/quiz/${a.quizId}/result/${a.id}`} style={{ fontWeight: 700, color: 'var(--heading)' }}>
                     {q ? bookTitleOf(q) : a.quizId} — {a.kind === 'mcq' ? 'MCQ' : t({ bn: 'লিখিত', en: 'Written' })}
                   </Link>
                   <Chip tone={pending ? 'gold' : 'blue'}>
                     {pending ? t({ bn: 'মূল্যায়নের অপেক্ষায়', en: 'Awaiting marking' }) : `${a.score}/${a.totalMarks} (${a.percentage}%)`}
                   </Chip>
                 </div>
-                <p style={{ margin: '6px 0 0', color: '#5A6478', fontSize: 14 }}>{formatDate(a, lang)}</p>
+                <p style={{ margin: '6px 0 0', color: 'var(--muted)', fontSize: 14 }}>{formatDate(a, lang)}</p>
               </Card>
             );
           })}

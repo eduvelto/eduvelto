@@ -131,7 +131,7 @@ export default function AdminBackupPage() {
           border: '1px solid #F1B308',
           borderRadius: 8,
           padding: '12px 14px',
-          background: '#FDF3D0',
+          background: 'var(--soon-bg)',
           marginBottom: 12,
         }}
       >
@@ -149,14 +149,14 @@ export default function AdminBackupPage() {
       </div>
 
       <h2 style={{ fontSize: 18 }}>{t({ bn: 'ধাপ ১ — খরচ দেখুন', en: 'Step 1 — see the cost' })}</h2>
-      <p style={{ color: '#555', fontSize: 14 }}>
+      <p style={{ color: 'var(--ink-soft)', fontSize: 14 }}>
         {t({
           bn: 'Export করলে প্রতিটি ডকুমেন্ট পড়তে হয় — আজকের ৫০,০০০ পড়ার কোটা থেকে কাটে। আগে খরচ দেখুন, তারপর সিদ্ধান্ত নিন।',
           en: 'Exporting reads every document — it counts against today’s 50,000-read quota. See the cost first.',
         })}
       </p>
       <h3 style={{ fontSize: 16 }}>{t({ bn: 'কোন সংগ্রহগুলো থাকবে?', en: 'Which collections?' })}</h3>
-      <p style={{ color: '#555', fontSize: 14 }}>
+      <p style={{ color: 'var(--ink-soft)', fontSize: 14 }}>
         {t({
           bn: 'users ও progressSummaries সবচেয়ে বড় — তাই ডিফল্টে বন্ধ থাকে; চাইলে টিক দিন।',
           en: 'users and progressSummaries are the biggest — off by default; tick to include them.',
@@ -172,7 +172,7 @@ export default function AdminBackupPage() {
               alignItems: 'center',
               minHeight: 44,
               padding: '6px 10px',
-              border: '1px solid #ddd',
+              border: '1px solid var(--line-strong)',
               borderRadius: 8,
               cursor: 'pointer',
               fontSize: 14,
@@ -216,7 +216,7 @@ export default function AdminBackupPage() {
               en: `This export will read ${preflight.total} documents — ${preflight.readsPercent.toFixed(1)}% of today’s quota.`,
             })}
           </p>
-          <ul style={{ color: '#555', fontSize: 14 }}>
+          <ul style={{ color: 'var(--ink-soft)', fontSize: 14 }}>
             {preflight.perCollection
               .filter((c) => c.count > 0)
               .map((c) => (
@@ -225,7 +225,7 @@ export default function AdminBackupPage() {
                 </li>
               ))}
           </ul>
-          <p style={{ color: '#555', fontSize: 14 }}>
+          <p style={{ color: 'var(--ink-soft)', fontSize: 14 }}>
             {t({
               bn: `আজ ইতিমধ্যে এই ব্রাউজার থেকে পড়া হয়েছে (আনুমানিক): ${formatBnNumber(usage.firestoreReads)} / ${formatBnNumber(QUOTAS.firestoreReadsPerDay)}`,
               en: `Already read from this browser today (estimate): ${usage.firestoreReads} / ${QUOTAS.firestoreReadsPerDay}`,
@@ -234,14 +234,14 @@ export default function AdminBackupPage() {
           {overHalf ? (
             <div
               style={{
-                border: '1px solid #b00020',
+                border: '1px solid var(--error)',
                 borderRadius: 8,
                 padding: '12px 14px',
-                background: '#fdf0f0',
+                background: 'var(--error-bg)',
                 marginBottom: 12,
               }}
             >
-              <strong style={{ color: '#b00020' }}>
+              <strong style={{ color: 'var(--error)' }}>
                 {t({ bn: 'সতর্কতা: এই Export আজকের কোটার অর্ধেকের বেশি খরচ করবে।', en: 'Warning: this export will use more than half of today’s quota.' })}
               </strong>
               <p style={{ margin: '6px 0' }}>
@@ -286,7 +286,7 @@ export default function AdminBackupPage() {
             {exporting ? t({ bn: 'সংরক্ষণ হচ্ছে…', en: 'Saving…' }) : t({ bn: 'ধাপ ৩ — ব্যাকআপ সংরক্ষণ করুন', en: 'Step 3 — Export backup' })}
           </button>
           {progress ? (
-            <p aria-live="polite" style={{ color: '#555' }}>
+            <p aria-live="polite" style={{ color: 'var(--ink-soft)' }}>
               {progress}
             </p>
           ) : null}
@@ -296,25 +296,25 @@ export default function AdminBackupPage() {
       {loading ? <LoadingBox /> : null}
       {error ? <ErrorBox message={error} /> : null}
       {notice ? (
-        <p role="status" style={{ color: '#0A1F44', fontWeight: 700 }}>
+        <p role="status" style={{ color: 'var(--heading)', fontWeight: 700 }}>
           {notice}
         </p>
       ) : null}
       {doneFile ? (
-        <div style={{ border: '1px solid #ddd', borderRadius: 8, padding: '12px 14px', marginTop: 12 }}>
+        <div style={{ border: '1px solid var(--line-strong)', borderRadius: 8, padding: '12px 14px', marginTop: 12 }}>
           <p style={{ margin: '0 0 6px' }}>
             {t({
               bn: `ফাইল সংরক্ষিত হয়েছে — ${formatTime(doneFile.metadata.exportedAt, lang)}`,
               en: `File saved — ${formatTime(doneFile.metadata.exportedAt, lang)}`,
             })}
           </p>
-          <p style={{ margin: 0, color: '#b00020' }}>
+          <p style={{ margin: 0, color: 'var(--error)' }}>
             {t({
               bn: 'এই ফাইলে সব শিক্ষার্থী ও শিক্ষকের তথ্য আছে। নিরাপদে রাখুন, কখনো কাউকে পাঠাবেন না, দ্বিতীয় কপি রাখুন।',
               en: 'This file contains all student and teacher data. Store it safely, never share it, keep a second copy.',
             })}
           </p>
-          <p style={{ margin: '6px 0 0', color: '#555', fontSize: 14 }}>
+          <p style={{ margin: '6px 0 0', color: 'var(--ink-soft)', fontSize: 14 }}>
             {t({
               bn: 'এই ব্যাকআপে সাব-সংগ্রহ (কুইজের উত্তর, মন্তব্য, অর্জন) নেই — শুধু মূল সংগ্রহগুলো আছে। সম্পূর্ণ কপির জন্য Firebase console export ব্যবহার করুন।',
               en: 'Sub-collections (quiz attempts, comments, achievements) are NOT in this file — top-level collections only. Use the Firebase console export for a complete copy.',
@@ -352,7 +352,7 @@ export default function AdminBackupPage() {
           {t({ bn: 'মনে রাখবেন: পুরনো ব্যাকআপ ফেরত আনলে তার পরের নতুন তথ্য মুছে যেতে পারে — Restore-এর আগে ভাবুন।', en: 'Remember: restoring an old backup can delete newer data added after it — think before you restore.' })}
         </li>
       </ol>
-      <p style={{ color: '#555', fontSize: 14 }}>
+      <p style={{ color: 'var(--ink-soft)', fontSize: 14 }}>
         {t({
           bn: 'লঞ্চের আগে ব্যাকআপ + ফেরত আনার পরীক্ষা (test) করে নিতে হবে — পরীক্ষার তথ্য দিয়ে, আসল তথ্য দিয়ে নয়।',
           en: 'Backup + restore must be TESTED before launch — on test data, never on real data.',
