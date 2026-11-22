@@ -32,7 +32,7 @@
 // - UPDATE (owner): only displayName, educationType, board, institution,
 //   academicYear, program, department, classLevel, semester,
 //   academicSession, curriculum, phone, teachingLevel, subjects,
-//   qualifications, experienceYears, language, lastActiveAt,
+//   qualifications, experienceYears, jobMode, language, lastActiveAt,
 //   updatedAt. Role, verificationStatus and isActive can never be changed
 //   by the owner — only Admin/Owner (see firestore.rules).
 //   Changing class/subject NEVER deletes progress, bookmarks, results or
@@ -89,6 +89,12 @@ export interface UserProfile {
   qualifications?: string | null;
   /** Teacher-only: years of teaching experience. */
   experienceYears?: number | null;
+  /** Job Preparation mode (owner decision 22 Nov 2026): 'beginner' =
+   * brand-new students (easy explanations, basic practice, step by
+   * step, no timers); 'advanced' = experienced candidates (hard
+   * questions, timed exams, full model tests, competitive prep).
+   * Absent = 'beginner'. Owner-editable by self; switchable any time. */
+  jobMode?: 'beginner' | 'advanced' | null;
   language: 'bn' | 'en';
   createdAt?: Timestamp | null;
   updatedAt?: Timestamp | null;
@@ -131,6 +137,8 @@ export interface ProfileEdit {
   subjects?: string[] | null;
   qualifications?: string | null;
   experienceYears?: number | null;
+  /** Job Preparation mode — see UserProfile.jobMode. */
+  jobMode?: 'beginner' | 'advanced' | null;
   language?: 'bn' | 'en';
 }
 
@@ -151,6 +159,7 @@ const EDITABLE_KEYS: (keyof ProfileEdit)[] = [
   'subjects',
   'qualifications',
   'experienceYears',
+  'jobMode',
   'language',
 ];
 

@@ -144,6 +144,8 @@ service cloud.firestore {
         && isOptStr(request.resource.data.get('phone', null), 20)
         && isOptStr(request.resource.data.get('teachingLevel', null), 100)
         && isOptStr(request.resource.data.get('qualifications', null), 500)
+        && (!('jobMode' in request.resource.data)
+            || request.resource.data.jobMode in ['beginner', 'advanced'])
         && (!('subjects' in request.resource.data)
             || (request.resource.data.subjects is list
                 && request.resource.data.subjects.size() <= 20))
@@ -164,10 +166,12 @@ service cloud.firestore {
              .hasOnly(['displayName', 'educationType', 'board', 'institution',
                        'academicYear', 'academicSession', 'curriculum',
                        'program', 'department', 'classLevel', 'semester',
-                       'phone', 'experienceYears',
+                       'phone', 'experienceYears', 'jobMode',
                        'language', 'lastActiveAt', 'updatedAt'])
         && isOptStr(request.resource.data.displayName, 100)
         && isOptStr(request.resource.data.get('phone', null), 20)
+        && (!('jobMode' in request.resource.data)
+            || request.resource.data.jobMode in ['beginner', 'advanced'])
         && (!('experienceYears' in request.resource.data)
             || (request.resource.data.experienceYears is number
                 && request.resource.data.experienceYears >= 0
@@ -233,7 +237,7 @@ service cloud.firestore {
                        'academicYear', 'program', 'department', 'classLevel',
                        'language', 'lastActiveAt', 'role', 'verificationStatus',
                        'isActive', 'suspendedReason', 'verifiedBy', 'verifiedAt',
-                       'updatedAt'])
+                       'jobMode', 'updatedAt'])
         // Role may NEVER be *changed to* 'owner' — but the owner's own doc
         // already carries role 'owner', and request.resource.data is the
         // FULL post-update document, so 'role' in request.resource.data is

@@ -15,14 +15,17 @@
 import { Link } from 'react-router-dom';
 import { PageShell } from '../components/PageShell';
 import { Card, Chip, LinkButton, Reveal, Skeleton, SkeletonCards } from '../components/ui';
+import JobModeSwitch from '../components/JobModeSwitch';
 import { strings } from '../i18n/strings';
 import { useAuth } from '../lib/auth';
+import { useJobMode } from '../lib/jobMode';
 import { useLanguage } from '../i18n/LanguageContext';
 import { DAILY_MOCK, WEEKLY_MOCK_CYCLE, jobExamBySlug } from '../lib/jobExams';
 
 export default function JobSeekerDashboardPage() {
   const { user, profile, loading } = useAuth();
   const { t } = useLanguage();
+  const { mode } = useJobMode();
   const cycle = WEEKLY_MOCK_CYCLE.map((s) => jobExamBySlug(s)!).filter(Boolean);
 
   if (loading) {
@@ -83,6 +86,24 @@ export default function JobSeekerDashboardPage() {
       </section>
 
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: 12, marginBottom: 20 }}>
+        {/* My mode — Beginner / Advanced (owner decision 22 Nov 2026).
+            Shows the current mode; the switch below changes it any time
+            (stored on the user's own profile when signed in). */}
+        <Reveal delayMs={0}>
+          <Card>
+            <div style={{ fontWeight: 700, color: '#142B3B', fontSize: 17 }}>
+              {t({ bn: 'আমার মোড', en: 'My mode' })}
+            </div>
+            <p style={{ margin: '8px 0 10px', color: '#57616A', fontSize: 14, lineHeight: 1.7 }}>
+              {t({
+                bn: `বর্তমান মোড: ${mode === 'beginner' ? 'নতুনদের জন্য' : 'অভিজ্ঞদের জন্য'}`,
+                en: `Current mode: ${mode === 'beginner' ? 'Beginner' : 'Advanced'}`,
+              })}
+            </p>
+            <JobModeSwitch />
+          </Card>
+        </Reveal>
+
         {/* Target exam — no target is stored yet (no such field exists). */}
         <Reveal delayMs={0}>
           <Card>

@@ -11,6 +11,7 @@ import { Link } from 'react-router-dom';
 import { PageShell } from '../components/PageShell';
 import { Card, LinkButton, Reveal } from '../components/ui';
 import { CommonPrepCard, JobCard } from '../components/JobCards';
+import JobModeSwitch from '../components/JobModeSwitch';
 import { useLanguage } from '../i18n/LanguageContext';
 import { JOB_EXAMS } from '../lib/jobExams';
 
@@ -58,6 +59,13 @@ export default function JobsPage() {
           })}
         </p>
       </section>
+
+      {/* Preparation mode — Beginner / Advanced, switchable any time
+          (owner decision 22 Nov 2026). Stored on the user's own profile
+          when signed in, localStorage fallback when signed out. */}
+      <div style={{ margin: '0 0 20px' }}>
+        <JobModeSwitch />
+      </div>
 
       <p style={{ margin: '0 0 20px' }}>
         <LinkButton to="/jobs/dashboard" variant="accent">

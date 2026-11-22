@@ -21,11 +21,14 @@
 import { Link, useParams } from 'react-router-dom';
 import { PageShell, EmptyState } from '../components/PageShell';
 import { Card, Chip, LinkButton, Reveal } from '../components/ui';
+import JobModeSwitch from '../components/JobModeSwitch';
 import { useLanguage, T } from '../i18n/LanguageContext';
+import { useJobMode } from '../lib/jobMode';
 import {
   EXAM_PATTERNS,
   JOB_ELEMENTS,
   JOB_TABS,
+  WEEKLY_MOCK_CYCLE,
   isJobTabSlug,
   jobExamBySlug,
   type JobTabSlug,
@@ -79,6 +82,7 @@ const TAB_EMPTY: Record<Exclude<JobTabSlug, 'home'>, { bn: string; en: string; n
 
 export default function JobHubPage() {
   const { t } = useLanguage();
+  const { mode } = useJobMode();
   const { exam = '', tab } = useParams<{ exam: string; tab?: string }>();
   const def = jobExamBySlug(exam);
   const activeTab: JobTabSlug = isJobTabSlug(tab) ? tab : 'home';
@@ -155,6 +159,13 @@ export default function JobHubPage() {
         })}
       </nav>
 
+      {/* Preparation mode — visible on every hub tab (owner decision
+          22 Nov 2026). The home tab below renders the Beginner or the
+          Advanced view for this exam. */}
+      <div style={{ margin: '0 0 20px' }}>
+        <JobModeSwitch />
+      </div>
+
       {activeTab === 'home' ? (
         <>
           {/* Exam identity — official source; age limits, fees and exam
@@ -186,6 +197,153 @@ export default function JobHubPage() {
               )}
             </Card>
           </Reveal>
+
+          {/* Mode view — Beginner or Advanced (owner decision 22 Nov
+              2026). STRUCTURE ONLY: every practice/mock entry below is
+              an honest empty state — 0 questions exist in the database,
+              so nothing here pretends a test can be taken yet. */}
+          {mode === 'beginner' ? (
+            <>
+              {/* Easy explanation — what this exam is, in plain words. */}
+              <Reveal>
+                <Card style={{ marginBottom: 20 }}>
+                  <div style={{ fontWeight: 700, color: '#142B3B', fontSize: 17 }}>
+                    {t({ bn: 'সহজ ব্যাখ্যা — এই পরীক্ষাটি কী', en: 'Easy explanation — what this exam is' })}
+                  </div>
+                  <p style={{ margin: '8px 0 0', color: '#57616A', fontSize: 14, lineHeight: 1.8 }}>
+                    {t({
+                      bn: `${def.fullBn} — ${def.orgBn} নেয়। ধাপগুলো হলো: ${def.stepsBn}। প্রথমে সহজ বিষয়গুলো দিয়ে শুরু করুন — এক ধাপ শেষ করে পরের ধাপে যান। তাড়াহুড়ো নেই, টাইমার নেই।`,
+                      en: `${def.fullEn} — run by ${def.orgEn}. The stages are: ${def.stepsEn}. Start with the easy subjects — finish one step, then move to the next. No rush, no timer.`,
+                    })}
+                  </p>
+                </Card>
+              </Reveal>
+
+              {/* Step-by-step basic practice path: subject → topic →
+                  easy questions. Each step links to its tab, which shows
+                  the honest empty state until content is published. */}
+              <Reveal>
+                <h3 className="ev-section-h2">{t({ bn: 'ধাপে ধাপে শুরু করুন', en: 'Start step by step' })}</h3>
+              </Reveal>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))', gap: 12, marginBottom: 20 }}>
+                <Reveal delayMs={0}>
+                  <Card>
+                    <span className="ev-step-num" aria-hidden="true">{t({ bn: '১', en: '1' })}</span>
+                    <div style={{ fontWeight: 700, color: '#142B3B', marginTop: 10 }}>
+                      {t({ bn: 'বিষয় দেখুন', en: 'See the subjects' })}
+                    </div>
+                    <p style={{ margin: '6px 0 10px', color: '#68747B', fontSize: 14, lineHeight: 1.7 }}>
+                      {t({ bn: 'এই পরীক্ষায় কোন কোন বিষয় আছে, তা আগে দেখে নিন।', en: 'First see which subjects this exam covers.' })}
+                    </p>
+                    <Link to={tabHref('subjects')} style={{ fontWeight: 600 }}>
+                      {t({ bn: 'বিষয় দেখুন →', en: 'See subjects →' })}
+                    </Link>
+                  </Card>
+                </Reveal>
+                <Reveal delayMs={80}>
+                  <Card>
+                    <span className="ev-step-num" aria-hidden="true">{t({ bn: '২', en: '2' })}</span>
+                    <div style={{ fontWeight: 700, color: '#142B3B', marginTop: 10 }}>
+                      {t({ bn: 'টপিক ধরে বেসিক অনুশীলন', en: 'Basic practice, topic by topic' })}
+                    </div>
+                    <p style={{ margin: '6px 0 10px', color: '#68747B', fontSize: 14, lineHeight: 1.7 }}>
+                      {t({ bn: 'একটি টপিক শেষ করে পরেরটিতে যান — সহজ প্রশ্ন দিয়ে শুরু হবে।', en: 'Finish one topic, then move to the next — starting with easy questions.' })}
+                    </p>
+                    <Link to={tabHref('practice')} style={{ fontWeight: 600 }}>
+                      {t({ bn: 'অনুশীলন দেখুন →', en: 'See practice →' })}
+                    </Link>
+                  </Card>
+                </Reveal>
+                <Reveal delayMs={160}>
+                  <Card>
+                    <span className="ev-step-num" aria-hidden="true">{t({ bn: '৩', en: '3' })}</span>
+                    <div style={{ fontWeight: 700, color: '#142B3B', marginTop: 10 }}>
+                      {t({ bn: 'সহজ প্রশ্ন দিয়ে শুরু', en: 'Start with easy questions' })}
+                    </div>
+                    <p style={{ margin: '6px 0 10px', color: '#68747B', fontSize: 14, lineHeight: 1.7 }}>
+                      {t({ bn: 'বেসিক প্রশ্ন (উত্তর ও ব্যাখ্যাসহ) শিক্ষক যাচাইয়ের পর এখানে আসবে — এখনো কোনো প্রশ্ন তৈরি হয়নি।', en: 'Basic questions (with answer and explanation) will come here after teacher review — no questions exist yet.' })}
+                    </p>
+                    <Chip tone="gold">{t({ bn: 'শীঘ্রই আসছে', en: 'Coming soon' })}</Chip>
+                  </Card>
+                </Reveal>
+              </div>
+            </>
+          ) : (
+            <>
+              {/* Timed-mock entry — real pattern time + negative marking
+                  where verified; circular-based note otherwise. No mock
+                  can run yet: the mocks tab shows the honest empty state. */}
+              <Reveal>
+                <h3 className="ev-section-h2">{t({ bn: 'সময়ভিত্তিক প্রস্তুতি', en: 'Timed preparation' })}</h3>
+              </Reveal>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: 12, marginBottom: 20 }}>
+                <Reveal delayMs={0}>
+                  <Card>
+                    <div style={{ fontWeight: 700, color: '#142B3B', fontSize: 16 }}>
+                      {t({ bn: 'সময়ভিত্তিক মক টেস্ট', en: 'Timed mock test' })}
+                    </div>
+                    <p style={{ margin: '6px 0 10px', color: '#68747B', fontSize: 14, lineHeight: 1.7 }}>
+                      {pattern
+                        ? t({ bn: `${pattern.timeBn} · ${pattern.negativeBn}`, en: `${pattern.timeEn} · ${pattern.negativeEn}` })
+                        : t({ bn: 'সময় ও নেগেটিভ মার্কিং বিজ্ঞপ্তি অনুযায়ী হবে।', en: 'Time and negative marking follow the circular.' })}
+                    </p>
+                    <p style={{ margin: '0 0 10px', color: '#68747B', fontSize: 14, lineHeight: 1.7 }}>
+                      {t({ bn: 'এখনো কোনো মক তৈরি হয়নি — প্রশ্ন ব্যাংক প্রস্তুত হলে আসল ধরনে মক দেওয়া যাবে।', en: 'No mock exists yet — once the question bank is ready, mocks will run in the real pattern.' })}
+                    </p>
+                    <Link to={tabHref('mocks')} style={{ fontWeight: 600 }}>
+                      {t({ bn: 'মক টেস্ট দেখুন →', en: 'See mock tests →' })}
+                    </Link>
+                  </Card>
+                </Reveal>
+                <Reveal delayMs={80}>
+                  <Card>
+                    <div style={{ fontWeight: 700, color: '#142B3B', fontSize: 16 }}>
+                      {t({ bn: 'পূর্ণাঙ্গ মডেল টেস্ট', en: 'Full model test' })}
+                    </div>
+                    <p style={{ margin: '6px 0 10px', color: '#68747B', fontSize: 14, lineHeight: 1.7 }}>
+                      {pattern
+                        ? t({ bn: `${pattern.totalBn} · ${pattern.timeBn} — আসল ধরনে পূর্ণ পরীক্ষা।`, en: `${pattern.totalEn} · ${pattern.timeEn} — a full exam in the real pattern.` })
+                        : t({ bn: 'আসল ধরনে পূর্ণ পরীক্ষা — নম্বর ও সময় বিজ্ঞপ্তি অনুযায়ী।', en: 'A full exam in the real pattern — marks and time follow the circular.' })}
+                    </p>
+                    <p style={{ margin: '0 0 10px', color: '#68747B', fontSize: 14, lineHeight: 1.7 }}>
+                      {t({ bn: 'মডেল টেস্ট এখনো তৈরি হয়নি।', en: 'No model test has been prepared yet.' })}
+                    </p>
+                    <Chip tone="gold">{t({ bn: 'শীঘ্রই আসছে', en: 'Coming soon' })}</Chip>
+                  </Card>
+                </Reveal>
+                <Reveal delayMs={160}>
+                  <Card>
+                    <div style={{ fontWeight: 700, color: '#142B3B', fontSize: 16 }}>
+                      {t({ bn: 'প্রতিযোগিতামূলক প্রস্তুতি', en: 'Competitive preparation' })}
+                    </div>
+                    <p style={{ margin: '6px 0 10px', color: '#68747B', fontSize: 14, lineHeight: 1.7 }}>
+                      {t({ bn: 'প্রতি সপ্তাহে ১টি পূর্ণ মক — চক্রাকারে:', en: 'One full mock every week — rotating:' })}
+                    </p>
+                    <p style={{ margin: '0 0 10px', color: '#57616A', fontSize: 14, lineHeight: 1.9 }}>
+                      {WEEKLY_MOCK_CYCLE.map((s, i) => {
+                        const cyc = jobExamBySlug(s);
+                        if (!cyc) return null;
+                        return (
+                          <span key={cyc.slug}>
+                            {i > 0 ? ' → ' : ''}
+                            <Link to={`/jobs/${cyc.slug}`} style={{ fontWeight: 600 }}>
+                              {t({ bn: cyc.bn, en: cyc.en })}
+                            </Link>
+                          </span>
+                        );
+                      })}
+                    </p>
+                    <p style={{ margin: '0 0 10px', color: '#68747B', fontSize: 14, lineHeight: 1.7 }}>
+                      {t({ bn: 'মক চালু হলে ফলাফল ও দুর্বল টপিকের বিশ্লেষণ দেখাবে। কোনো র‍্যাংক বা লিডারবোর্ড নেই — সার্ভার-যাচাই ছাড়া প্রতিযোগিতার নম্বর দেখানো হয় না।', en: 'Once mocks run, results and weak-topic analysis will show. There is no rank or leaderboard — competitive scores are never shown without server-side verification.' })}
+                    </p>
+                    <Link to="/jobs/common" style={{ fontWeight: 600 }}>
+                      {t({ bn: 'কমন প্রস্তুতি দেখুন →', en: 'See common preparation →' })}
+                    </Link>
+                  </Card>
+                </Reveal>
+              </div>
+            </>
+          )}
 
           {/* Verified exam pattern (4 main exams) or an honest
               circular-based state (all other exams). */}
