@@ -44,6 +44,7 @@ const JobCircularsPage = lazy(() => import('./pages/JobCircularsPage'));
 const JobCircularDetailPage = lazy(() => import('./pages/JobCircularDetailPage'));
 const JobCalendarPage = lazy(() => import('./pages/JobCalendarPage'));
 const JobNotificationsPage = lazy(() => import('./pages/JobNotificationsPage'));
+const JobGuidePage = lazy(() => import('./pages/JobGuidePage'));
 const RegisterPage = lazy(() => import('./pages/RegisterPage'));
 const RoleSetupPage = lazy(() => import('./pages/RoleSetupPage'));
 const LoginPage = lazy(() => import('./pages/LoginPage'));
@@ -282,6 +283,11 @@ export default function App() {
         <Route path="/jobs/circulars/:circularId" element={<JobCircularDetailPage />} />
         <Route path="/jobs/calendar" element={<JobCalendarPage />} />
         <Route path="/jobs/notifications" element={<JobNotificationsPage />} />
+        {/* Step 16: guide pages MUST come before /jobs/:exam/:tab —
+            otherwise '/jobs/viva' matches :exam='viva'. */}
+        <Route path="/jobs/viva" element={<JobGuidePage kind="viva" />} />
+        <Route path="/jobs/career" element={<JobGuidePage kind="career" />} />
+        <Route path="/jobs/cv" element={<JobGuidePage kind="cv" />} />
         <Route path="/jobs/:exam/:tab" element={<JobHubPage />} />
         <Route path="/jobs/:exam" element={<JobHubPage />} />
         <Route path="/register" element={<RegisterPage />} />

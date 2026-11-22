@@ -95,6 +95,65 @@ export default function JobsPage() {
         <CommonPrepCard />
       </div>
 
+      {/* Step 16 — viva / career / CV reading pages (reading material
+          only; no quiz, mock, scoring or simulator). */}
+      <Reveal>
+        <h3 className="ev-section-h2">{t({ bn: 'ভাইভা, ক্যারিয়ার ও CV', en: 'Viva, Career & CV' })}</h3>
+      </Reveal>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))', gap: 12, marginBottom: 24 }}>
+        <Reveal delayMs={0}>
+          <Card>
+            <div style={{ fontWeight: 700, color: 'var(--heading)', fontSize: 16 }}>
+              {t({ bn: 'ভাইভা ও ইন্টারভিউ', en: 'Viva & Interview' })}
+            </div>
+            <p style={{ margin: '6px 0 10px', color: 'var(--muted)', fontSize: 14, lineHeight: 1.7 }}>
+              {t({ bn: '৬টি পাঠ — নিজের পরিচয়, সাধারণ প্রশ্ন, আচরণ ও শেষ প্রস্তুতি।', en: '6 lessons — self-introduction, common questions, conduct, and final preparation.' })}
+            </p>
+            <p style={{ margin: 0 }}>
+              <LinkButton to="/jobs/viva" variant="accent">
+                {t({ bn: 'পড়ুন →', en: 'Read →' })}
+              </LinkButton>
+            </p>
+          </Card>
+        </Reveal>
+        <Reveal delayMs={60}>
+          <Card>
+            <div style={{ fontWeight: 700, color: 'var(--heading)', fontSize: 16 }}>
+              {t({ bn: 'ক্যারিয়ার গাইডলাইন', en: 'Career Guidance' })}
+            </div>
+            <p style={{ margin: '6px 0 10px', color: 'var(--muted)', fontSize: 14, lineHeight: 1.7 }}>
+              {t({ bn: '৫টি পাঠ — কোন পথে এগোবেন, দক্ষতা তৈরি, চাকরি খোঁজা ও আবেদন।', en: '5 lessons — which path to take, building skills, finding jobs, and applying.' })}
+            </p>
+            <p style={{ margin: 0 }}>
+              <LinkButton to="/jobs/career" variant="accent">
+                {t({ bn: 'পড়ুন →', en: 'Read →' })}
+              </LinkButton>
+            </p>
+          </Card>
+        </Reveal>
+        <Reveal delayMs={120}>
+          <Card>
+            <div style={{ fontWeight: 700, color: 'var(--heading)', fontSize: 16 }}>
+              {t({ bn: 'সিভি ও রিজিউমে', en: 'CV & Resume' })}
+            </div>
+            <p style={{ margin: '6px 0 10px', color: 'var(--muted)', fontSize: 14, lineHeight: 1.7 }}>
+              {t({ bn: '৪টি পাঠ — সিভির কাঠামো, অভিজ্ঞতা লেখা, সাধারণ ভুল ও শেষ যাচাই।', en: '4 lessons — CV structure, writing experience, common mistakes, and the final check.' })}
+            </p>
+            <p style={{ margin: 0 }}>
+              <LinkButton to="/jobs/cv" variant="accent">
+                {t({ bn: 'পড়ুন →', en: 'Read →' })}
+              </LinkButton>
+            </p>
+          </Card>
+        </Reveal>
+      </div>
+      <p style={{ margin: '-12px 0 24px', color: 'var(--muted)', fontSize: 13 }}>
+        {t({
+          bn: 'সাধারণ প্রস্তুতিমূলক নির্দেশনা — অফিসিয়াল সিলেবাস, প্রশ্নপ্যাটার্ন বা বিজ্ঞপ্তির বিকল্প নয়।',
+          en: 'General preparatory guidance — not a substitute for an official syllabus, question pattern, or circular.',
+        })}
+      </p>
+
       {/* How to start — honest about the state of the section. */}
       <Reveal>
         <h3 className="ev-section-h2">{t({ bn: 'কীভাবে শুরু করবেন', en: 'How to start' })}</h3>

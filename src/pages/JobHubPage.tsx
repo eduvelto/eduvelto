@@ -691,9 +691,11 @@ export default function JobHubPage() {
             </Card>
           </Reveal>
 
-          {/* The 7 "100% preparation" elements — all Coming Soon for now. */}
+          {/* The 7 "100% preparation" elements — the viva element is
+              live since Step 16 (reading pages); the other 6 are still
+              Coming Soon. */}
           <Reveal>
-            <h3 className="ev-section-h2">{t({ bn: 'প্রস্তুতির ৭টি উপাদান (তৈরি হচ্ছে)', en: 'The 7 elements of preparation (being prepared)' })}</h3>
+            <h3 className="ev-section-h2">{t({ bn: 'প্রস্তুতির ৭টি উপাদান', en: 'The 7 elements of preparation' })}</h3>
           </Reveal>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: 12, marginBottom: 20 }}>
             {JOB_ELEMENTS.map((el, i) => (
@@ -703,7 +705,15 @@ export default function JobHubPage() {
                   <p style={{ margin: '6px 0 10px', color: 'var(--muted)', fontSize: 14, lineHeight: 1.7 }}>
                     {t({ bn: el.descBn, en: el.descEn })}
                   </p>
-                  <Chip tone="gold">{t({ bn: 'শীঘ্রই আসছে', en: 'Coming soon' })}</Chip>
+                  {el.bn === 'ভাইভা প্রস্তুতি' ? (
+                    <p style={{ margin: 0 }}>
+                      <LinkButton to="/jobs/viva" variant="accent">
+                        {t({ bn: 'ভাইভা প্রস্তুতি পড়ুন →', en: 'Read viva preparation →' })}
+                      </LinkButton>
+                    </p>
+                  ) : (
+                    <Chip tone="gold">{t({ bn: 'শীঘ্রই আসছে', en: 'Coming soon' })}</Chip>
+                  )}
                   {el.bn === 'ভাইভা প্রস্তুতি' ? (
                     <p style={{ margin: '10px 0 0', color: 'var(--muted)', fontSize: 13 }}>
                       {t({ bn: 'প্রস্তুতির উপকরণ — অনলাইন পরীক্ষা নয়।', en: 'Preparation material — not an online exam.' })}
