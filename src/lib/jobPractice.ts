@@ -6,16 +6,23 @@
 // attempt create/read). No lib in this file guesses answers —
 // scoring always goes through scorePracticeAttempt (key required).
 //
-// RULES CONTRACT (Step 8, team/job-rules-step8.md):
-//   session create (in-progress, endsAt null) → autosave while
-//   in-progress (answers/currentQuestion/lastSyncedAt/updatedAt
-//   only) → session submitted FIRST → attempt create (same doc-ID,
-//   status 'submitted', full fields) → receipt (mock keys, Step 9).
-// Practice (topic/previous) bundle keys are readable by a signed-in
-// student directly — no receipt is needed for practice results
-// (the attempt stores correctText, so the result page never
-// re-reads the key). The submit flow below therefore does NOT
-// create a receipt — that is the Step 9 mock path, not practice.
+// RULES CONTRACT (Step 8, team/job-rules-step8.md, fold-in M2):
+//   session create (in-progress, endsAt null, revision 1) →
+//   autosave while in-progress (answers/currentQuestion/
+//   lastSyncedAt/updatedAt/revision only, revision exactly
+//   stored + 1 — stale patches are rejected, the client reloads)
+//   → ONE batched write: session → 'submitted' (revision + 1) +
+//   attempt create (same doc-ID, status 'submitted') → receipt
+//   (mock keys, Step 9). The attempt rule validates the POST-write
+//   session state with getAfter() and binds kind/examSlug/mockId/
+//   question-count to the session. Practice (topic/previous) bundle
+//   keys are readable by a signed-in student directly — no receipt
+//   is needed for practice results (the attempt stores correctText,
+//   so the result page never re-reads the key). The submit flow
+//   below therefore does NOT create a receipt — that is the Step 9
+//   mock path, not practice. Submit is IDEMPOTENT: an already-
+//   existing attempt is returned, never re-written; an already-
+//   submitted session with no attempt gets the attempt alone.
 //
 // LANGUAGE: all UI-facing messages are Bangla (one-language rule).
 
@@ -28,6 +35,7 @@ import {
   setDoc,
   updateDoc,
   where,
+  writeBatch,
   serverTimestamp,
   type Timestamp,
 } from 'firebase/firestore';
@@ -163,6 +171,10 @@ export function normalizeSessionDoc(data: Record<string, unknown>): JobPracticeS
     submittedAt: data.submittedAt ?? null,
     createdAt: data.createdAt ?? null,
     updatedAt: data.updatedAt ?? null,
+    // Legacy docs (pre-revision) read as 1 — the first write after
+    // a resume then bumps to 2. No such docs exist in production
+    // (Step 8 is not live yet); this is a read-back default only.
+    revision: typeof data.revision === 'number' && data.revision >= 1 ? data.revision : 1,
   };
 }
 
@@ -223,12 +235,15 @@ export async function startPracticeSession(
   return { sessionId: ref.id, session, startedAtMillis: Date.now() };
 }
 
-/** Autosave one session (debounced by the caller): only the four
- * fields the rules allow to change while in-progress. */
+/** Autosave one session (debounced by the caller): only the fields
+ * the rules allow to change while in-progress — answers,
+ * currentQuestion, lastSyncedAt, updatedAt, revision (exactly
+ * stored + 1; a stale patch is rejected by the rules and the
+ * caller reloads). */
 export async function autosaveSession(
   uid: string,
   sessionId: string,
-  patch: { answers: Record<number, unknown>; currentQuestion: number; lastSyncedAt: unknown; updatedAt: unknown },
+  patch: { answers: Record<number, unknown>; currentQuestion: number; lastSyncedAt: unknown; updatedAt: unknown; revision: number },
 ): Promise<void> {
   const firestore = requireDb();
   await updateDoc(doc(firestore, 'users', uid, 'jobSessions', sessionId), {
@@ -236,6 +251,7 @@ export async function autosaveSession(
     currentQuestion: patch.currentQuestion,
     lastSyncedAt: patch.lastSyncedAt,
     updatedAt: patch.updatedAt,
+    revision: patch.revision,
   });
 }
 
@@ -254,12 +270,21 @@ export interface SubmitPracticeInput {
 }
 
 /**
- * Submit a practice attempt — the full Step 8 flow in the order
- * the rules enforce:
+ * Submit a practice attempt — the full Step 8 flow (Step 8
+ * fold-in, ChatGPT findings 1/6/7):
  *   1. score (key required — never guessed),
  *   2. build + validate the attempt doc (lib mirror of the rules),
- *   3. session → 'submitted' FIRST (session gate),
- *   4. attempt create (same doc-ID, status 'submitted').
+ *   3. IDEMPOTENT RECOVERY: if the attempt doc already exists (a
+ *      previous submit committed but the client never saw the
+ *      success), return it — never write twice,
+ *   4. fresh-read the session (local state may be stale — autosaves
+ *      in flight, another tab) and write session → 'submitted' +
+ *      attempt create in ONE batched write (atomic: either both
+ *      land or neither does). The session update bumps revision by
+ *      exactly 1 from the STORED revision.
+ *   4b. ORPHAN RECOVERY: if the session is already 'submitted' but
+ *      no attempt exists (an older sequential submit, or a crash
+ *      between the two writes), create the attempt alone.
  * No receipt is created (practice keys need none — see header).
  * Returns the attempt ID (= session ID) + the result.
  */
@@ -296,17 +321,38 @@ export async function submitPracticeAttempt(
   if (problems.length > 0) {
     throw new Error(`জমা দেওয়া যায়নি — ${problems[0]}`);
   }
-  // Session gate: the session must be 'submitted' BEFORE the
-  // attempt is created (rules enforce this order).
-  await updateDoc(doc(firestore, 'users', input.uid, 'jobSessions', input.sessionId), {
+  const sessionRef = doc(firestore, 'users', input.uid, 'jobSessions', input.sessionId);
+  const attemptRef = doc(firestore, 'users', input.uid, 'jobAttempts', input.sessionId);
+  // 3. Idempotent recovery — the attempt already exists.
+  const existingAttempt = await getDoc(attemptRef);
+  if (existingAttempt.exists()) {
+    return { attemptId: input.sessionId, result };
+  }
+  // 4. Fresh-read the session: the stored revision is the only safe
+  // base for the transition bump (local state may lag autosaves).
+  const sessionSnap = await getDoc(sessionRef);
+  if (!sessionSnap.exists()) {
+    throw new Error('সেশন পাওয়া যায়নি — আবার অনুশীলন শুরু করুন।');
+  }
+  const stored = sessionSnap.data() as Record<string, unknown>;
+  if (stored.status === 'submitted') {
+    // 4b. Orphan recovery — session submitted, attempt missing.
+    await setDoc(attemptRef, attemptDoc as unknown as Record<string, unknown>);
+    return { attemptId: input.sessionId, result };
+  }
+  if (stored.status !== 'in-progress') {
+    throw new Error('এই সেশনটি আর জমা দেওয়া যাবে না।');
+  }
+  const storedRevision = typeof stored.revision === 'number' && stored.revision >= 1 ? stored.revision : 1;
+  const batch = writeBatch(firestore);
+  batch.update(sessionRef, {
     status: 'submitted',
     submittedAt: serverTimestamp(),
     updatedAt: serverTimestamp(),
+    revision: storedRevision + 1,
   });
-  await setDoc(
-    doc(firestore, 'users', input.uid, 'jobAttempts', input.sessionId),
-    attemptDoc as unknown as Record<string, unknown>,
-  );
+  batch.set(attemptRef, attemptDoc as unknown as Record<string, unknown>);
+  await batch.commit();
   return { attemptId: input.sessionId, result };
 }
 

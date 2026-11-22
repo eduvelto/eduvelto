@@ -33,6 +33,7 @@ import {
   setDoc,
   getDoc,
   updateDoc,
+  writeBatch,
 } from 'firebase/firestore';
 import { serverTimestamp } from 'firebase/firestore';
 import { readFileSync } from 'node:fs';
@@ -177,12 +178,23 @@ async function runSubmitFlow(sessionId: string, letter: 'A' | 'B' | 'C' | 'D' | 
   });
   const problems = validateAttemptResult(attemptDoc);
   if (problems.length > 0) throw new Error(`lib validator rejected its own doc: ${problems.join('; ')}`);
-  await assertSucceeds(updateDoc(doc(db, 'users', 'student-1', 'jobSessions', sessionId), {
+  // Step 8 fold-in (findings 1/7): the submit is ONE batched write
+  // (session → submitted + attempt create together). The transition
+  // bumps revision from the STORED revision — the local session
+  // object lags the autosave that just landed (stored 2, local 1),
+  // so the flow fresh-reads the session, exactly like the lib's
+  // submitPracticeAttempt does.
+  const storedSession = await assertSucceeds(getDoc(doc(db, 'users', 'student-1', 'jobSessions', sessionId)));
+  const storedRevision = (storedSession.data() as Record<string, unknown>).revision as number;
+  const batch = writeBatch(db);
+  batch.update(doc(db, 'users', 'student-1', 'jobSessions', sessionId), {
     status: 'submitted',
     submittedAt: serverTimestamp(),
     updatedAt: serverTimestamp(),
-  }));
-  await assertSucceeds(setDoc(doc(db, 'users', 'student-1', 'jobAttempts', sessionId), attemptDoc as unknown as Record<string, unknown>));
+    revision: storedRevision + 1,
+  });
+  batch.set(doc(db, 'users', 'student-1', 'jobAttempts', sessionId), attemptDoc as unknown as Record<string, unknown>);
+  await assertSucceeds(batch.commit());
   const readBack = await assertSucceeds(getDoc(doc(db, 'users', 'student-1', 'jobAttempts', sessionId)));
   return readBack.data() as Record<string, unknown>;
 }
@@ -274,6 +286,7 @@ describe('Step 8 engine↔rules integration (lib builders → emulator)', () => 
       status: 'submitted',
       submittedAt: serverTimestamp(),
       updatedAt: serverTimestamp(),
+      revision: 2,
     }));
     await assertFails(setDoc(doc(db, 'users', 'student-1', 'jobAttempts', 'sess-i5'), attemptDoc as unknown as Record<string, unknown>));
   });

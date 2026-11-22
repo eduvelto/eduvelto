@@ -70,18 +70,22 @@
  * (score ±totalMarks, deduction = wrong × negativeMarkingUsed,
  * percentage −100..100, counts sum) hold for every score this
  * engine produces, and the autosave patch's fields are exactly the
- * session-update `affectedKeys` subset for autosave (now five
- * fields: the four Step 8 fields + `revision`). ONE deliberate
- * alignment: the session doc carries NO `subjectId`/`topicId`
- * (§2.12 has none; the rules allowlist has none). If the rules
- * change, the coordinator re-checks this lib against the committed
- * rules — do not assume this note is still true then. The UI flow
- * the rules require: the session must be 'submitted' BEFORE the
- * attempt doc is created (session gate), and the attempt is
- * created once as 'submitted' (no in-progress attempt doc). The
- * fold-in submission flow writes both in ONE batched write
- * (session → submitted + attempt create) and the rules validate
- * the post-write session state with getAfter().
+ * session-update `affectedKeys` subset for autosave (five fields:
+ * the four Step 8 fields + `revision` — the revision is bumped by
+ * exactly 1 per write and the rules reject a stale one). ONE
+ * deliberate alignment: the session doc carries NO
+ * `subjectId`/`topicId` (§2.12 has none; the rules allowlist has
+ * none). If the rules change, the coordinator re-checks this lib
+ * against the committed rules — do not assume this note is still
+ * true then. The UI flow the rules require: the session and the
+ * attempt are written in ONE batched write (session → submitted +
+ * attempt create) and the attempt rule validates the POST-write
+ * session state with getAfter() — the batch is for ATOMICITY
+ * (either both land or neither does), not for the gate:
+ * getAfter() reads the stored doc when the session is NOT in the
+ * batch, so the old sequential flow (submit session, then create
+ * attempt) still passes. The attempt is created once as
+ * 'submitted' (no in-progress attempt doc).
  */
 
 import { serverTimestamp } from 'firebase/firestore';
@@ -229,6 +233,12 @@ export interface JobPracticeSessionDoc {
   submittedAt: unknown;
   createdAt: unknown;
   updatedAt: unknown;
+  /** Monotonic write counter (Step 8 fold-in, finding 6): 1 at
+   * create, +1 on EVERY write (autosave and submit alike). The
+   * rules reject a write that does not carry exactly stored + 1,
+   * so a stale tab/device cannot silently overwrite newer
+   * answers — the client reloads from the stored revision. */
+  revision: number;
 }
 
 export interface CreatePracticeSessionInput {
@@ -271,6 +281,7 @@ export function createPracticeSession(
     submittedAt: null,
     createdAt: serverTimestamp(),
     updatedAt: serverTimestamp(),
+    revision: 1,
   };
 }
 
@@ -372,23 +383,26 @@ export function sessionProgress(session: JobPracticeSessionDoc): {
 /** The exact Firestore update payload for autosave (Step 2 §4.6 /
  * Step 3 §2.12): ONLY the fields that may change while a session is
  * in-progress — `answers`, `currentQuestion`, `lastSyncedAt`,
- * `updatedAt`. Nothing else (never status, never endsAt, never the
- * question list). The caller throttles the writes (Step 2 §4.6:
- * 30s / 5 changes / page-hide / submit); this function only builds
- * the payload. (The Step 8 rules draft allows exactly these four
- * fields plus the transition fields on session update — checked
- * against the rules agent's uncommitted draft, 22 Nov.) */
+ * `updatedAt`, plus `revision` (Step 8 fold-in, finding 6: exactly
+ * session.revision + 1 — the rules reject a stale patch, so the
+ * caller must track the last WRITTEN revision, not the last edit:
+ * see JobPracticePage's writtenRevisionRef). Nothing else (never
+ * status, never endsAt, never the question list). The caller
+ * throttles the writes (Step 2 §4.6: 30s / 5 changes / page-hide /
+ * submit); this function only builds the payload. */
 export function buildAutosavePatch(session: JobPracticeSessionDoc): {
   answers: Record<number, JobSessionAnswer>;
   currentQuestion: number;
   lastSyncedAt: unknown;
   updatedAt: unknown;
+  revision: number;
 } {
   return {
     answers: session.answers,
     currentQuestion: session.currentQuestion,
     lastSyncedAt: serverTimestamp(),
     updatedAt: serverTimestamp(),
+    revision: session.revision + 1,
   };
 }
 
@@ -850,6 +864,7 @@ const JOB_PRACTICE_SESSION_KEYS = [
   'submittedAt',
   'createdAt',
   'updatedAt',
+  'revision',
 ] as const;
 
 /** Validate a practice session doc. Returns problem strings; empty
@@ -870,6 +885,12 @@ export function validatePracticeSession(doc: unknown): string[] {
   }
   if (d.kind !== 'practice') problems.push(`${label}: kind must be 'practice'`);
   if (d.mockId !== null) problems.push(`${label}: mockId must be null for practice`);
+  // Step 8 fold-in (finding 6): the monotonic write counter — 1 at
+  // create, +1 per write. The validator checks the shape only;
+  // staleness (stored revision vs patch revision) is a rules check.
+  if (!Number.isInteger(d.revision) || (d.revision as number) < 1) {
+    problems.push(`${label}: revision must be an integer ≥1`);
+  }
   if (!isNonEmptyString(d.bundleId, 200)) {
     problems.push(`${label}: bundleId must be a non-empty string ≤200 chars`);
   }

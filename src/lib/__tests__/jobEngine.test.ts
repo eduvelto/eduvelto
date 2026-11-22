@@ -206,6 +206,10 @@ describe('practice session creation', () => {
   it('s4: the created session passes its own validator', () => {
     expect(validatePracticeSession(makeSession())).toEqual([]);
   });
+
+  it('s5: revision starts at 1 (Step 8 fold-in, finding 6)', () => {
+    expect(makeSession().revision).toBe(1);
+  });
 });
 
 describe('answer / mark-for-review / navigation', () => {
@@ -259,12 +263,13 @@ describe('answer / mark-for-review / navigation', () => {
 });
 
 describe('autosave patch', () => {
-  it('u1: only the four allowed fields', () => {
+  it('u1: only the five allowed fields (four Step 8 fields + revision)', () => {
     const patch = buildAutosavePatch(makeSession());
     expect(Object.keys(patch).sort()).toEqual([
       'answers',
       'currentQuestion',
       'lastSyncedAt',
+      'revision',
       'updatedAt',
     ]);
   });
@@ -278,6 +283,12 @@ describe('autosave patch', () => {
     expect(patch.currentQuestion).toBe(2);
     expect(patch.lastSyncedAt).not.toBeNull();
     expect(patch.updatedAt).not.toBeNull();
+  });
+
+  it('u3: patch revision is exactly session.revision + 1 (Step 8 fold-in, finding 6)', () => {
+    const s = makeSession();
+    expect(buildAutosavePatch(s).revision).toBe(2);
+    expect(buildAutosavePatch({ ...s, revision: 4 }).revision).toBe(5);
   });
 });
 
@@ -874,5 +885,16 @@ describe('validators', () => {
     expect(validateAttemptResult({ ...doc, markingSchemeVersion: '' })).toEqual(
       expect.arrayContaining([expect.stringContaining('markingSchemeVersion')]),
     );
+  });
+
+  it('v13: session revision 0 / missing fails validation (Step 8 fold-in, finding 6)', () => {
+    expect(validatePracticeSession({ ...makeSession(), revision: 0 })).toEqual(
+      expect.arrayContaining([expect.stringContaining('revision must be an integer')]),
+    );
+    const { revision: _r, ...noRevision } = makeSession();
+    expect(validatePracticeSession(noRevision)).toEqual(
+      expect.arrayContaining([expect.stringContaining('revision must be an integer')]),
+    );
+    expect(validatePracticeSession({ ...makeSession(), revision: 3 })).toEqual([]);
   });
 });

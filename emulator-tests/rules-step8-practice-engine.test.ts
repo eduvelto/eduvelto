@@ -12,18 +12,23 @@
  *
  *  jobAttempts — created ONCE at submit, status 'submitted', full
  *    fields. Only the owner creates; doc-ID == sessionId; the
- *    session with that ID must already be 'submitted' for the same
- *    bundle (session gate); bundle must exist + be Published, with
- *    matching examSlug, fitting kind (practice -> topic/previous,
- *    mock -> mock/daily/weekly) and matching mockId for mocks;
- *    score == clientCalculatedScore; negativeDeduction ==
- *    wrongCount*0.25 OR wrongCount*0.5; counts sum to
- *    answers.size(); answers non-empty and <= the bundle's
- *    questionCount; accuracy 0..100, percentage -100..100;
- *    resultLabel 'practice', trustLevel 'unverified', resultType
- *    'practice', markingStatus 'auto', status 'submitted';
- *    serverVerifiedScore absent-or-null (a student can never write
- *    it). Update/delete: NEVER, even Admin.
+ *    session with that ID must be 'submitted' AFTER the write
+ *    (getAfter — the batched submit's own transition counts) for
+ *    the same bundle (session gate), AND the attempt is bound to
+ *    the session's identity (kind, examSlug, mockId, and
+ *    questionRefs.size() == answers.size()); bundle must exist +
+ *    be Published, with matching examSlug, fitting kind (practice
+ *    -> topic/previous, mock -> mock/daily/weekly) and matching
+ *    mockId for mocks; score == clientCalculatedScore;
+ *    negativeDeduction == wrongCount * negativeMarkingUsed (the
+ *    penalty the attempt declares, 0 / 0.25 / 0.5) and the attempt
+ *    carries markingSchemeVersion + bundleVersion == the bundle's
+ *    current generation; counts sum to answers.size(); answers
+ *    non-empty and <= the bundle's questionCount; accuracy 0..100,
+ *    percentage -100..100; resultLabel 'practice', trustLevel
+ *    'unverified', resultType 'practice', markingStatus 'auto',
+ *    status 'submitted'; serverVerifiedScore absent-or-null (a
+ *    student can never write it). Update/delete: NEVER, even Admin.
  *    HONEST RULE LIMITS (tested only as far as the rules go):
  *    per-answer shape (topicId/correct/marks per answer) CANNOT be
  *    validated by rules — no list indexing — so it is enforced by
@@ -32,12 +37,17 @@
  *    division (accuracy/percentage formulas) is range-checked only.
  *  jobSessions — created in-progress by the owner on a Published
  *    bundle (mockId required iff mock; endsAt null at create;
- *    practice never has endsAt/clientEndsAtMillis); autosave while
- *    in-progress (answers/currentQuestion/lastSyncedAt/updatedAt
- *    + endsAt set ONCE from null); exactly one terminal transition
- *    (submitted + submittedAt, or abandoned), then frozen; delete
- *    NEVER, even Admin (abandoned sessions are the audit trail).
- *    PAUSED is client-side only — NOT a session-doc status.
+ *    practice never has endsAt/clientEndsAtMillis; revision 1;
+ *    answers exactly one entry per questionRef, currentQuestion
+ *    inside the stored order); autosave while in-progress
+ *    (answers/currentQuestion/lastSyncedAt/updatedAt/revision —
+ *    revision exactly stored + 1, stale writes DENIED; answers
+ *    never grows past the stored question list); exactly one
+ *    terminal transition (submitted + submittedAt, or abandoned),
+ *    then frozen; delete NEVER, even Admin (abandoned sessions
+ *    are the audit trail). PAUSED is client-side only — NOT a
+ *    session-doc status. The rules CANNOT rate-limit autosaves —
+ *    throttling is client-side only (Step 2 §4.6).
  *
  * Same conventions as rules-step7-job-questions.test.ts (numbered
  * cases, VALID_* fixtures, seed via withSecurityRulesDisabled).
@@ -56,6 +66,7 @@ import {
   getDoc,
   updateDoc,
   deleteDoc,
+  writeBatch,
 } from 'firebase/firestore';
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
@@ -175,13 +186,14 @@ const validSession = (overrides: Record<string, unknown> = {}) => ({
   questionRefs: [
     { bundleId: 'topic__bcs__bangla__grammar__sandhi', n: 1, questionId: 'q-published-b' },
   ],
-  answers: {},
+  answers: { '1': { selected: null, markedForReview: false, timeSpentSeconds: 0 } },
   currentQuestion: 1,
   lastSyncedAt: TS,
   clientEndsAtMillis: null,
   submittedAt: null,
   createdAt: TS,
   updatedAt: TS,
+  revision: 1,
   ...overrides,
 });
 
@@ -457,6 +469,9 @@ describe('jobAttempts — create: valid submits SUCCEED', () => {
           answers: [
             { ...THREE_ANSWERS[1], n: 1, questionId: 'q-published-b', topicId: 'bcs__bangla__grammar__sandhi' },
             THREE_ANSWERS[1],
+            // Q3 left unanswered — a well-formed attempt carries one
+            // entry per stored question (fold-in count binding).
+            THREE_ANSWERS[2],
           ],
           score: -0.5,
           totalMarks: 3,
@@ -464,7 +479,7 @@ describe('jobAttempts — create: valid submits SUCCEED', () => {
           negativeMarkingUsed: 0.25,
           correctCount: 0,
           wrongCount: 2,
-          unansweredCount: 0,
+          unansweredCount: 1,
           accuracy: 0,
           percentage: -16.67,
           timeSpentSeconds: 60,
@@ -842,6 +857,7 @@ describe('jobSessions — update: autosave, endsAt-once, terminal transitions, f
         currentQuestion: 1,
         lastSyncedAt: new Date(),
         updatedAt: new Date(),
+        revision: 2,
       }),
     );
   });
@@ -857,12 +873,14 @@ describe('jobSessions — update: autosave, endsAt-once, terminal transitions, f
       updateDoc(doc(asStudent1(), 'users', 'student-1', 'jobSessions', 'sess-mock-inprogress'), {
         endsAt: new Date(),
         updatedAt: new Date(),
+        revision: 2,
       }),
     );
     await assertFails(
       updateDoc(doc(asStudent1(), 'users', 'student-1', 'jobSessions', 'sess-mock-inprogress'), {
         endsAt: new Date(Date.now() + 3600 * 1000),
         updatedAt: new Date(),
+        revision: 3,
       }),
     );
   });
@@ -870,6 +888,7 @@ describe('jobSessions — update: autosave, endsAt-once, terminal transitions, f
     await assertSucceeds(
       updateDoc(doc(asStudent1(), 'users', 'student-1', 'jobSessions', 'sess-inprogress'), {
         status: 'submitted', submittedAt: new Date(), updatedAt: new Date(),
+        revision: 3,
       }),
     );
     await assertFails(
@@ -882,6 +901,7 @@ describe('jobSessions — update: autosave, endsAt-once, terminal transitions, f
     await assertSucceeds(
       updateDoc(doc(asStudent1(), 'users', 'student-1', 'jobSessions', 'sess-inprogress-2'), {
         status: 'abandoned', updatedAt: new Date(),
+        revision: 2,
       }),
     );
     await assertFails(
@@ -894,6 +914,7 @@ describe('jobSessions — update: autosave, endsAt-once, terminal transitions, f
     await assertFails(
       updateDoc(doc(asStudent1(), 'users', 'student-1', 'jobSessions', 'sess-mock-inprogress'), {
         status: 'submitted',
+        revision: 3,
       }),
     );
   });
@@ -901,6 +922,7 @@ describe('jobSessions — update: autosave, endsAt-once, terminal transitions, f
     await assertFails(
       updateDoc(doc(asStudent1(), 'users', 'student-1', 'jobSessions', 'sess-mock-inprogress'), {
         status: 'abandoned', submittedAt: new Date(),
+        revision: 3,
       }),
     );
   });
@@ -1013,5 +1035,183 @@ describe('jobAttempts — create: Step 8 fold-in marking/bundle binding', () => 
           clientCalculatedScore: -0.25,
         })),
     );
+  });
+});
+
+/* ------------------------------------------------------------------ */
+/* Step 8 fold-in (ChatGPT findings 1/6/7): revision-based autosave  */
+/* + getAfter session binding + atomic batched submit.                */
+/* ------------------------------------------------------------------ */
+describe('jobSessions — update: revision-based autosave (fold-in)', () => {
+  it('(s71) autosave with revision exactly stored + 1 SUCCEEDS', async () => {
+    await assertSucceeds(
+      setDoc(doc(asStudent1(), 'users', 'student-1', 'jobSessions', 'sess-rev-ok'),
+        validSession()),
+    );
+    await assertSucceeds(
+      updateDoc(doc(asStudent1(), 'users', 'student-1', 'jobSessions', 'sess-rev-ok'), {
+        answers: { '1': { selected: 'B', markedForReview: false, timeSpentSeconds: 30 } },
+        currentQuestion: 1,
+        lastSyncedAt: new Date(),
+        updatedAt: new Date(),
+        revision: 2,
+      }),
+    );
+  });
+  it('(s72) STALE autosave (same revision twice) is DENIED', async () => {
+    await assertSucceeds(
+      setDoc(doc(asStudent1(), 'users', 'student-1', 'jobSessions', 'sess-rev-stale'),
+        validSession()),
+    );
+    await assertSucceeds(
+      updateDoc(doc(asStudent1(), 'users', 'student-1', 'jobSessions', 'sess-rev-stale'), {
+        answers: { '1': { selected: 'B', markedForReview: false, timeSpentSeconds: 30 } },
+        currentQuestion: 1,
+        lastSyncedAt: new Date(),
+        updatedAt: new Date(),
+        revision: 2,
+      }),
+    );
+    // A second write built from the same base revision (a stale tab
+    // retrying its old patch) must not land.
+    await assertFails(
+      updateDoc(doc(asStudent1(), 'users', 'student-1', 'jobSessions', 'sess-rev-stale'), {
+        answers: { '1': { selected: 'C', markedForReview: false, timeSpentSeconds: 40 } },
+        currentQuestion: 1,
+        lastSyncedAt: new Date(),
+        updatedAt: new Date(),
+        revision: 2,
+      }),
+    );
+  });
+  it('(s73) autosave SKIPPING a revision (stored + 2) is DENIED', async () => {
+    await assertSucceeds(
+      setDoc(doc(asStudent1(), 'users', 'student-1', 'jobSessions', 'sess-rev-skip'),
+        validSession()),
+    );
+    await assertFails(
+      updateDoc(doc(asStudent1(), 'users', 'student-1', 'jobSessions', 'sess-rev-skip'), {
+        answers: { '1': { selected: 'B', markedForReview: false, timeSpentSeconds: 30 } },
+        currentQuestion: 1,
+        lastSyncedAt: new Date(),
+        updatedAt: new Date(),
+        revision: 3,
+      }),
+    );
+  });
+  it('(s74) autosave with MORE answers than stored questions is DENIED', async () => {
+    await assertSucceeds(
+      setDoc(doc(asStudent1(), 'users', 'student-1', 'jobSessions', 'sess-rev-big'),
+        validSession()),
+    );
+    await assertFails(
+      updateDoc(doc(asStudent1(), 'users', 'student-1', 'jobSessions', 'sess-rev-big'), {
+        answers: {
+          '1': { selected: 'B', markedForReview: false, timeSpentSeconds: 30 },
+          '2': { selected: 'A', markedForReview: false, timeSpentSeconds: 10 },
+        },
+        currentQuestion: 1,
+        lastSyncedAt: new Date(),
+        updatedAt: new Date(),
+        revision: 2,
+      }),
+    );
+  });
+  it('(s75) autosave with currentQuestion outside the stored order is DENIED', async () => {
+    await assertSucceeds(
+      setDoc(doc(asStudent1(), 'users', 'student-1', 'jobSessions', 'sess-rev-cq'),
+        validSession()),
+    );
+    await assertFails(
+      updateDoc(doc(asStudent1(), 'users', 'student-1', 'jobSessions', 'sess-rev-cq'), {
+        currentQuestion: 2,
+        lastSyncedAt: new Date(),
+        updatedAt: new Date(),
+        revision: 2,
+      }),
+    );
+  });
+});
+
+describe('jobAttempts — create: getAfter session binding + atomic batch (fold-in)', () => {
+  it('(s76) attempt with MORE answers than the session\'s stored order is DENIED (getAfter count binding)', async () => {
+    // A submitted session on the 3-question karok bundle with only
+    // ONE stored question ref; the attempt answers all 3. The
+    // bundle allows 3 answers, so the ONLY failing check is the
+    // session's stored order — the attempt cannot ride on a session
+    // that did not ask those questions.
+    await assertSucceeds(
+      setDoc(doc(asStudent1(), 'users', 'student-1', 'jobSessions', 'sess-count-deny'),
+        validSession({
+          bundleId: 'topic__bcs__bangla__grammar__karok',
+          questionRefs: [{ bundleId: 'topic__bcs__bangla__grammar__karok', n: 1, questionId: 'q-published-b' }],
+        })),
+    );
+    await assertSucceeds(
+      updateDoc(doc(asStudent1(), 'users', 'student-1', 'jobSessions', 'sess-count-deny'), {
+        status: 'submitted',
+        submittedAt: new Date(),
+        updatedAt: new Date(),
+        revision: 2,
+      }),
+    );
+    await assertFails(
+      setDoc(doc(asStudent1(), 'users', 'student-1', 'jobAttempts', 'sess-count-deny'),
+        validSubmittedAttempt('sess-count-deny', {
+          bundleId: 'topic__bcs__bangla__grammar__karok',
+          topicId: 'bcs__bangla__grammar__karok',
+          answers: THREE_ANSWERS,
+          score: 0.75,
+          totalMarks: 3,
+          negativeDeduction: 0.25,
+          negativeMarkingUsed: 0.25,
+          correctCount: 1,
+          wrongCount: 1,
+          unansweredCount: 1,
+          accuracy: 50,
+          percentage: 25,
+          timeSpentSeconds: 120,
+          clientCalculatedScore: 0.75,
+        })),
+    );
+  });
+  it('(s77) BATCHED submit (session -> submitted + attempt create in ONE batch) SUCCEEDS', async () => {
+    const db = asStudent1();
+    await assertSucceeds(
+      setDoc(doc(db, 'users', 'student-1', 'jobSessions', 'sess-batch-ok'),
+        validSession()),
+    );
+    const batch = writeBatch(db);
+    batch.update(doc(db, 'users', 'student-1', 'jobSessions', 'sess-batch-ok'), {
+      status: 'submitted',
+      submittedAt: new Date(),
+      updatedAt: new Date(),
+      revision: 2,
+    });
+    batch.set(doc(db, 'users', 'student-1', 'jobAttempts', 'sess-batch-ok'),
+      validSubmittedAttempt('sess-batch-ok'));
+    await assertSucceeds(batch.commit());
+    const readBack = await assertSucceeds(getDoc(doc(db, 'users', 'student-1', 'jobAttempts', 'sess-batch-ok')));
+    if (!readBack.exists()) throw new Error('batched attempt was not created');
+  });
+  it('(s78) BATCHED submit with a STALE revision is DENIED atomically (no attempt is created)', async () => {
+    const db = asStudent1();
+    await assertSucceeds(
+      setDoc(doc(db, 'users', 'student-1', 'jobSessions', 'sess-batch-stale'),
+        validSession()),
+    );
+    const batch = writeBatch(db);
+    batch.update(doc(db, 'users', 'student-1', 'jobSessions', 'sess-batch-stale'), {
+      status: 'submitted',
+      submittedAt: new Date(),
+      updatedAt: new Date(),
+      revision: 1,
+    });
+    batch.set(doc(db, 'users', 'student-1', 'jobAttempts', 'sess-batch-stale'),
+      validSubmittedAttempt('sess-batch-stale'));
+    await assertFails(batch.commit());
+    // Atomicity: the failed batch must not have created the attempt.
+    const readBack = await assertSucceeds(getDoc(doc(db, 'users', 'student-1', 'jobAttempts', 'sess-batch-stale')));
+    if (readBack.exists()) throw new Error('failed batch still created the attempt');
   });
 });

@@ -137,6 +137,7 @@ export default function JobPracticePage() {
           setKey(k);
           setSessionId(resumed.sessionId);
           setSession(resumed.session);
+          writtenRevisionRef.current = resumed.session.revision;
           setStartedAtMillis(resumed.startedAtMillis);
           timeRef.current = { current: resumed.session.currentQuestion, startedAt: Date.now() };
           const rev: Record<number, boolean> = {};
@@ -151,6 +152,7 @@ export default function JobPracticePage() {
           setKey(k);
           setSessionId(started.sessionId);
           setSession(started.session);
+          writtenRevisionRef.current = started.session.revision;
           setStartedAtMillis(started.startedAtMillis);
           timeRef.current = { current: 1, startedAt: Date.now() };
         }
@@ -169,6 +171,16 @@ export default function JobPracticePage() {
   // Debounced autosave: only the fields the rules allow to change
   // while in-progress. The just-created session is skipped (it
   // was already written by setDoc).
+  // Revision tracking (Step 8 fold-in, finding 6): the rules accept
+  // an autosave ONLY at exactly stored revision + 1, and the local
+  // session object does NOT advance on every edit — so the last
+  // WRITTEN revision lives in this ref, not in state. It is set
+  // when the session loads (new: 1, resumed: stored revision) and
+  // advanced ONLY on a successful write; a failed write keeps the
+  // old value so the next attempt retries with the same revision.
+  // The ref is never written into state, so a successful save does
+  // not retrigger this effect.
+  const writtenRevisionRef = useRef<number | null>(null);
   const firstSaveRef = useRef(true);
   useEffect(() => {
     if (!session || !user || phase !== 'ready') return;
@@ -178,8 +190,13 @@ export default function JobPracticePage() {
     }
     setSaveState('saving');
     const t = setTimeout(() => {
-      autosaveSession(user.uid, sessionId, buildAutosavePatch(session))
-        .then(() => setSaveState('saved'))
+      const base = writtenRevisionRef.current ?? session.revision;
+      const patch = { ...buildAutosavePatch(session), revision: base + 1 };
+      autosaveSession(user.uid, sessionId, patch)
+        .then(() => {
+          writtenRevisionRef.current = patch.revision;
+          setSaveState('saved');
+        })
         .catch(() => setSaveState('error'));
     }, 1200);
     return () => clearTimeout(t);

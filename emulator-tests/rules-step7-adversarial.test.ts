@@ -222,13 +222,14 @@ const validSession = (overrides: Record<string, unknown> = {}) => ({
   questionRefs: [
     { bundleId: 'topic__bcs__bangla__grammar__sandhi', n: 1, questionId: 'q-published-b' },
   ],
-  answers: {},
+  answers: { '1': { selected: null, markedForReview: false, timeSpentSeconds: 0 } },
   currentQuestion: 1,
   lastSyncedAt: TS,
   clientEndsAtMillis: null,
   submittedAt: null,
   createdAt: TS,
   updatedAt: TS,
+  revision: 1,
   ...overrides,
 });
 
@@ -491,6 +492,7 @@ describe('Adversarial checklist — fabricated attempt (a5, DOCUMENTED LIMITATIO
     await assertSucceeds(
       updateDoc(doc(asStudent3(), 'users', 'student-3', 'jobSessions', 'attempt-fabricated'), {
         status: 'submitted', submittedAt: new Date(),
+        revision: 2,
       }),
     );
     // 3. Create a WELL-FORMED submitted attempt — one answered

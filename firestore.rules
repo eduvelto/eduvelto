@@ -713,8 +713,15 @@ service cloud.firestore {
     function jobBundleData(bundleId) {
       return get(/databases/$(database)/documents/jobQuestionBundles/$(bundleId)).data;
     }
-    function jobSessionData(userId, sessionId) {
-      return get(/databases/$(database)/documents/users/$(userId)/jobSessions/$(sessionId)).data;
+    // Post-write session state (Step 8 fold-in, ChatGPT finding 1):
+    // getAfter() reads the session AS WRITTEN BY THIS BATCH — so a
+    // batched submit (session → submitted + attempt create together)
+    // validates against the submitted state, not the pre-batch
+    // in-progress one. When the session is NOT in the batch,
+    // getAfter() reads the stored doc, so the old sequential flow
+    // (submit session, then create attempt) still passes the gate.
+    function jobSessionDataAfter(userId, sessionId) {
+      return getAfter(/databases/$(database)/documents/users/$(userId)/jobSessions/$(sessionId)).data;
     }
     // Bundle-kind consistency (Step 8 decision): a practice attempt /
     // session runs on a topic bundle (or a previous-year set, which is
@@ -865,13 +872,22 @@ service cloud.firestore {
             || jobBundleData(d.get('bundleId', '')).mockId == d.get('mockId', null))
         && d.get('answers', []).size() <= jobBundleData(d.get('bundleId', '')).questionCount
         && jobBundleData(d.get('bundleId', '')).get('bundleVersion', null) == d.get('bundleVersion', null)
-        // Session gate (Step 8 decision): the session with the same
-        // ID must exist and already be 'submitted' for this bundle.
-        // An in-progress or abandoned session — or no session —
-        // cannot anchor an attempt.
+        // Session gate (Step 8 decision, strengthened by the fold-in,
+        // ChatGPT finding 1): the session with the same ID must exist
+        // and be 'submitted' AFTER this write (getAfter — the batched
+        // submit's own transition counts). An in-progress or abandoned
+        // session — or no session — cannot anchor an attempt. The
+        // attempt is also bound to the session's IDENTITY: same kind,
+        // exam, mock, bundle, and the same number of questions as the
+        // session's stored order — so a forged attempt cannot ride on
+        // an unrelated session.
         && exists(/databases/$(database)/documents/users/$(userId)/jobSessions/$(attemptId))
-        && jobSessionData(userId, attemptId).status == 'submitted'
-        && jobSessionData(userId, attemptId).bundleId == d.get('bundleId', '');
+        && jobSessionDataAfter(userId, attemptId).status == 'submitted'
+        && jobSessionDataAfter(userId, attemptId).bundleId == d.get('bundleId', '')
+        && jobSessionDataAfter(userId, attemptId).kind == d.get('kind', null)
+        && jobSessionDataAfter(userId, attemptId).examSlug == d.get('examSlug', null)
+        && jobSessionDataAfter(userId, attemptId).mockId == d.get('mockId', null)
+        && jobSessionDataAfter(userId, attemptId).questionRefs.size() == d.get('answers', []).size();
     }
     // Session create validation (Step 3 §2.12). A session starts
     // 'in-progress' with endsAt null — for a mock, endsAt is set ONCE
@@ -883,11 +899,11 @@ service cloud.firestore {
       return d.keys().hasOnly(['kind', 'mockId', 'bundleId', 'examSlug',
              'status', 'startedAt', 'endsAt', 'questionRefs', 'answers',
              'currentQuestion', 'lastSyncedAt', 'clientEndsAtMillis',
-             'submittedAt', 'createdAt', 'updatedAt'])
+             'submittedAt', 'createdAt', 'updatedAt', 'revision'])
         && d.keys().hasAll(['kind', 'mockId', 'bundleId', 'examSlug',
              'status', 'startedAt', 'endsAt', 'questionRefs', 'answers',
              'currentQuestion', 'lastSyncedAt', 'clientEndsAtMillis',
-             'submittedAt', 'createdAt', 'updatedAt'])
+             'submittedAt', 'createdAt', 'updatedAt', 'revision'])
         && d.get('kind', null) in ['practice', 'mock']
         && ((d.get('kind', null) == 'mock' && d.get('mockId', null) is string
               && d.get('mockId', '').size() > 0)
@@ -900,7 +916,18 @@ service cloud.firestore {
         && d.get('questionRefs', null) is list
         && d.get('questionRefs', []).size() >= 1
         && d.get('answers', null) is map
+        // Step 8 fold-in (finding 6): the answers map is exactly one
+        // entry per stored question (keys = questionRefs n values);
+        // currentQuestion is inside the stored order.
+        && d.get('answers', {}).size() == d.get('questionRefs', []).size()
         && d.get('currentQuestion', null) is int && d.get('currentQuestion', 0) >= 1
+        && d.get('currentQuestion', 0) <= d.get('questionRefs', []).size()
+        && d.get('lastSyncedAt', null) is timestamp
+        // Step 8 fold-in (finding 6): revision starts at 1 and is
+        // bumped by exactly 1 per write (see validJobSessionUpdate)
+        // — a stale client write is rejected, so two tabs/devices
+        // cannot silently overwrite each other's answers.
+        && d.get('revision', null) is int && d.get('revision', 0) == 1
         && d.get('lastSyncedAt', null) is timestamp
         && ((d.get('kind', null) == 'practice' && d.get('clientEndsAtMillis', null) == null)
             || (d.get('kind', null) == 'mock'
@@ -926,7 +953,23 @@ service cloud.firestore {
         && ((d.get('status', '') == 'submitted' && d.get('submittedAt', null) is timestamp)
             || (d.get('status', '') != 'submitted' && d.get('submittedAt', null) == null))
         && d.get('answers', null) is map
+        // Step 8 fold-in (finding 6): autosave fields are bounded —
+        // the answers map never grows past the stored question list,
+        // currentQuestion stays inside it, and the write is rejected
+        // unless it carries exactly old.revision + 1 (stale autosaves
+        // and double-submits are denied; the client reloads and
+        // retries from the stored revision). Counters are NOT stored
+        // on the session — progress is derived from `answers`
+        // client-side, so there is nothing to keep consistent.
+        // RATE LIMITING: the rules CANNOT rate-limit writes — a
+        // client can still autosave as fast as it likes; throttling
+        // (30s / 5 changes / page-hide, Step 2 §4.6) is client-side
+        // only, and quota abuse is an admin/monitoring concern.
+        && d.get('answers', {}).size() <= old.get('questionRefs', []).size()
         && d.get('currentQuestion', null) is int && d.get('currentQuestion', 0) >= 1
+        && d.get('currentQuestion', 0) <= old.get('questionRefs', []).size()
+        && d.get('revision', null) is int
+        && d.get('revision', -1) == old.get('revision', 0) + 1
         && d.get('lastSyncedAt', null) is timestamp
         && d.get('updatedAt', null) is timestamp
         && ((old.get('endsAt', null) == null
@@ -2876,7 +2919,7 @@ service cloud.firestore {
         && request.resource.data.diff(resource.data).affectedKeys()
              .hasOnly(['answers', 'currentQuestion', 'lastSyncedAt',
                        'updatedAt', 'endsAt', 'clientEndsAtMillis',
-                       'status', 'submittedAt'])
+                       'status', 'submittedAt', 'revision'])
         && validJobSessionUpdate(request.resource.data, resource.data);
       allow delete: if false;
     }
