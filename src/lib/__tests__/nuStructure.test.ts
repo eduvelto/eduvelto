@@ -182,12 +182,24 @@ describe('NU-5 prohibited wording (design §15.1)', () => {
     expect(NU_VERIFIED_NOTICE.applicationEndBn).toContain('৩১ ডিসেম্বর ২০২৫');
   });
 
-  it('the calendar has only historical events — no exam-date event', () => {
-    expect(NU_CALENDAR_EVENTS).toHaveLength(2);
+  it('the calendar lists the 2025-26 cycle as history — including the verified 25 Apr 2026 exam', () => {
+    expect(NU_CALENDAR_EVENTS).toHaveLength(3);
     for (const e of NU_CALENDAR_EVENTS) {
       expect(e.stateBn).toContain('ইতিহাস');
     }
-    expect(JSON.stringify(NU_CALENDAR_EVENTS)).not.toContain('২৫ এপ্রিল');
+    const exam = NU_CALENDAR_EVENTS.find((e) => e.dateBn === '২৫ এপ্রিল ২০২৬');
+    expect(exam).toBeDefined();
+    expect(exam?.labelBn).toContain('ভর্তি পরীক্ষা');
+    expect(exam?.stateBn).toContain('ইতিহাস');
+    // No 2026-27 event exists anywhere in the list.
+    expect(JSON.stringify(NU_CALENDAR_EVENTS)).not.toContain('২০২৬-২৭');
+  });
+
+  it('the verified notice memo is 2026/3348 — read from the PDF itself (NU-6)', () => {
+    expect(NU_VERIFIED_NOTICE.memoNo).toContain('2026/3348');
+    expect(NU_VERIFIED_NOTICE.officialPdfUrl).toBe(
+      'https://www.nu.ac.bd/uploads/notices/notice_3348_pub_date_23112025.pdf',
+    );
   });
 });
 

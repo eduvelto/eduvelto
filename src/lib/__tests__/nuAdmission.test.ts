@@ -145,6 +145,45 @@ describe('validateAdmissionEligibility (NU-4, §2.2)', () => {
     expect(r.status).toBe('meets');
   });
 
+  // NU-6 follow-up (a) — clause ১(ক) per-exam minimums, verified from
+  // the circular PDF itself (memo 2026/3348). The code already encoded
+  // them in NU-4; these tests pin them so a later change cannot
+  // silently drop a minimum while the combined total still passes.
+  it('humanities does-not-meet when SSC GPA is below the 2.0 minimum (combined 6.9 still passes)', () => {
+    const r = validateAdmissionEligibility({
+      group: 'humanities',
+      sscYear: 2022,
+      sscGpa: 1.9,
+      hscYear: 2024,
+      hscGpa: 5.0,
+    });
+    expect(r.status).toBe('does-not-meet');
+    expect(r.reasons.join(' ')).toContain('SSC GPA');
+  });
+
+  it('humanities does-not-meet when HSC GPA is below the 2.0 minimum (combined 6.9 still passes)', () => {
+    const r = validateAdmissionEligibility({
+      group: 'humanities',
+      sscYear: 2022,
+      sscGpa: 5.0,
+      hscYear: 2024,
+      hscGpa: 1.9,
+    });
+    expect(r.status).toBe('does-not-meet');
+    expect(r.reasons.join(' ')).toContain('HSC GPA');
+  });
+
+  it('humanities meets at the exact per-exam minimums: SSC 2.0 + HSC 2.5 = 4.50', () => {
+    const r = validateAdmissionEligibility({
+      group: 'humanities',
+      sscYear: 2023,
+      sscGpa: 2.0,
+      hscYear: 2025,
+      hscGpa: 2.5,
+    });
+    expect(r.status).toBe('meets');
+  });
+
   it('cannot-determine when the SSC year is outside 2022/2023', () => {
     const r = validateAdmissionEligibility({
       group: 'humanities',
