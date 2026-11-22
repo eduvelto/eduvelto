@@ -251,9 +251,11 @@ export const NU_VERIFIED_NOTICE: NuVerifiedNotice = {
 };
 
 /** Calendar dates list (design §10.3 — dates list only in Phase A,
- * no full calendar grid). Verified events are HISTORY (both dates
- * have passed); there is NO exam-date event — the date was never
- * announced. The unverified "২৫ এপ্রিল ২০২৬" date never appears. */
+ * no full calendar grid). All events are HISTORY for the 2025-26
+ * cycle (all dates have passed). The 25 Apr 2026 exam date is
+ * VERIFIED history (exam notice memo 2026/3456, 07/04/2026 + press
+ * release 24/04/2026 — §3.1, NU-6). There is NO 2026-27 exam-date
+ * event — that date has never been announced. */
 export interface NuCalendarEvent {
   labelBn: string;
   dateBn: string;
@@ -271,6 +273,11 @@ export const NU_CALENDAR_EVENTS: NuCalendarEvent[] = [
     dateBn: '০৪ জানুয়ারি ২০২৬',
     stateBn: 'ইতিহাস — পেরিয়ে গেছে',
   },
+  {
+    labelBn: 'ভর্তি পরীক্ষা (২০২৫-২৬)',
+    dateBn: '২৫ এপ্রিল ২০২৬',
+    stateBn: 'ইতিহাস — পরীক্ষা সম্পন্ন হয়েছে',
+  },
 ];
 
 // ---------- date/status copy (prohibited-wording guarded) ----------
@@ -280,7 +287,9 @@ export const NU_CALENDAR_EVENTS: NuCalendarEvent[] = [
 export const NU_WINDOW_STATUS_BN =
   '২০২৫-২০২৬ আবেদন শেষ: ৩১ ডিসেম্বর ২০২৫ — ২০২৬-২০২৭ বিজ্ঞপ্তি এখনো যাচাই হয়নি';
 
-/** Exam-date line — the date was never announced (§3 #1). */
+/** Exam-date line (2026-27 cycle) — that date was never announced
+ * (§3 #1). The 2025-26 exam (25 Apr 2026) is history — see
+ * NU_CALENDAR_EVENTS. */
 export const NU_EXAM_DATE_BN = 'পরীক্ষার তারিখ এখনো ঘোষণা হয়নি — পৃথক বিজ্ঞপ্তিতে আসবে';
 
 /** Phase A wording for the next cycle (§15.1). */
