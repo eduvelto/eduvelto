@@ -30,7 +30,8 @@ import {
   type PracticeBundleWithId,
 } from '../lib/jobPractice';
 import type { JobPracticeSessionDoc } from '../lib/jobEngine';
-import type { JobQuestionKey } from '../lib/jobQuestions';
+import type { JobQuestionKey, JobBundleQuestion } from '../lib/jobQuestions';
+import { jobBundleQuestionById } from '../lib/jobQuestions';
 
 type Filter = 'all' | 'correct' | 'wrong' | 'unanswered';
 
@@ -178,9 +179,15 @@ export default function JobResultPage() {
     return true;
   });
 
-  const questionText = (n: number): string => {
-    const q = bundle?.questions.find((x) => x.n === n);
-    return q?.questionText ?? `প্রশ্ন ${n}`;
+  // Step 8 fold-in (finding 5): the question text comes from the
+  // ATTEMPT's own answer snapshot (its questionId), never from a
+  // bundle position — a mode-ordered session's n is not the bundle
+  // order, and a rebuilt bundle must never rewrite history.
+  const questionText = (a: { n: number; questionId: string }): string => {
+    const q: JobBundleQuestion | undefined = bundle
+      ? jobBundleQuestionById(bundle.questions, a.questionId)
+      : undefined;
+    return q?.questionText ?? `প্রশ্ন ${a.n}`;
   };
 
   const markedSet = new Set<number>();
@@ -302,7 +309,7 @@ export default function JobResultPage() {
                     {` · ${a.marks > 0 ? `+${a.marks}` : a.marks} নম্বর`}
                   </span>
                 </div>
-                <p style={{ margin: '8px 0', fontSize: 15, lineHeight: 1.7, color: '#142B3B' }}>{questionText(a.n)}</p>
+                <p style={{ margin: '8px 0', fontSize: 15, lineHeight: 1.7, color: '#142B3B' }}>{questionText(a)}</p>
                 <p style={{ margin: '4px 0', fontSize: 14, color: MUTED }}>
                   আপনার উত্তর: {a.selected === null ? '—' : `${a.selected}`}
                   {' · '}সঠিক উত্তর: {a.correctText ?? '—'}

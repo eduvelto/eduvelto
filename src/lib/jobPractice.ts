@@ -44,12 +44,14 @@ import {
   buildJobAttemptDoc,
   createPracticeSession,
   jobExamPattern,
+  orderQuestionsForMode,
   scorePracticeAttempt,
   validateAttemptResult,
   validatePracticeSession,
   type JobAttemptResult,
   type JobPracticeSessionDoc,
 } from './jobEngine';
+import type { JobMode } from './jobMode';
 import type { JobQuestionBundle, JobQuestionKey } from './jobQuestions';
 
 /** Firestore not configured (gate G1) — pages show the honest
@@ -218,13 +220,22 @@ export async function findResumableSession(
 /** Start a new practice session: auto-ID, engine-built doc, one
  * setDoc. Returns the session ID + the local session object +
  * the client-side start time (Date.now at creation). */
+/** Start a practice session. Step 8 fold-in (finding 3): the
+ * questionRefs SEQUENCE is the mode order — beginner easy→medium
+ * →hard, advanced medium→hard→easy (orderQuestionsForMode,
+ * stable inside each band) — while every ref keeps its bundle
+ * `n` (scoring and the page both key by `n`, never by position).
+ * The stored sequence is deterministic: a resume re-reads it,
+ * it is never re-sorted client-side. */
 export async function startPracticeSession(
   uid: string,
   bundle: PracticeBundleWithId,
+  mode: JobMode = 'beginner',
 ): Promise<{ sessionId: string; session: JobPracticeSessionDoc; startedAtMillis: number }> {
   const firestore = requireDb();
   const ref = doc(collection(firestore, 'users', uid, 'jobSessions'));
-  const questionRefs = bundle.questions.map((q) => ({ bundleId: bundle.docId, n: q.n, questionId: q.questionId }));
+  const ordered = orderQuestionsForMode(bundle.questions, mode);
+  const questionRefs = ordered.map((q) => ({ bundleId: bundle.docId, n: q.n, questionId: q.questionId }));
   const session = createPracticeSession({
     sessionId: ref.id,
     bundleId: bundle.docId,

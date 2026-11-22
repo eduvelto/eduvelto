@@ -24,6 +24,7 @@ import {
   jobBundleIdForDaily,
   jobBundleIdForWeekly,
   jobBundleIdForPrevious,
+  jobBundleQuestionById,
   isJobReceiptFresh,
   jobReviewQueueConstraints,
   type JobQuestion,
@@ -85,6 +86,7 @@ const BASE_BUNDLE: Record<string, unknown> = {
         { letter: 'C', text: 'দুটি শব্দের মিলন' },
         { letter: 'D', text: 'দুটি বাক্যের মিলন' },
       ],
+      difficulty: 'medium',
     },
   ],
   questionCount: 1,
@@ -383,6 +385,27 @@ describe('buildJobBundle', () => {
     const { bundleVersion: _v, ...noVersion } = BASE_BUNDLE;
     expect(validateJobQuestionBundle(noVersion).length).toBeGreaterThan(0);
     expect(validateJobQuestionBundle(BASE_BUNDLE)).toEqual([]);
+  });
+  it('(u58) the builder denormalizes difficulty into the bundle (Step 8 fold-in, finding 3)', () => {
+    const { bundle } = buildJobBundle([
+      { ...published('q1'), difficulty: 'hard' as const },
+      { ...published('q2'), difficulty: 'easy' as const },
+    ], meta);
+    expect(bundle.questions[0].difficulty).toBe('hard');
+    expect(bundle.questions[1].difficulty).toBe('easy');
+    expect(validateJobQuestionBundle(bundle as unknown as Record<string, unknown>)).toEqual([]);
+  });
+  it('(u59) a bundle question without a valid difficulty fails validation', () => {
+    const { bundle } = buildJobBundle([published('q1')], meta);
+    const noDiff = { ...bundle, questions: [{ ...bundle.questions[0], difficulty: undefined }] };
+    expect(validateJobQuestionBundle(noDiff as unknown as Record<string, unknown>).length).toBeGreaterThan(0);
+    const badDiff = { ...bundle, questions: [{ ...bundle.questions[0], difficulty: 'extreme' }] };
+    expect(validateJobQuestionBundle(badDiff as unknown as Record<string, unknown>).length).toBeGreaterThan(0);
+  });
+  it('(u60) jobBundleQuestionById finds by questionId, not by position', () => {
+    const { bundle } = buildJobBundle([published('q1'), published('q2')], meta);
+    expect(jobBundleQuestionById(bundle.questions, 'q2')?.n).toBe(2);
+    expect(jobBundleQuestionById(bundle.questions, 'q-missing')).toBeUndefined();
   });
 });
 

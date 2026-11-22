@@ -136,6 +136,22 @@ export interface JobBundleQuestion {
   subjectId: string;
   questionText: string;
   options: JobQuestionOption[];
+  // Step 8 fold-in (finding 3): difficulty DENORMALIZED into the
+  // bundle at build time — the practice engine orders questions by
+  // difficulty (beginner easy→hard, advanced hard-first) without
+  // ever reading the bank. Minimal metadata only.
+  difficulty: 'easy' | 'medium' | 'hard';
+}
+
+/** Find one bundle question by its bank questionId — the result
+ * page uses this (attempt snapshot's own questionId), never the
+ * bundle position, so a mode-ordered session still shows the
+ * right text for each answer. */
+export function jobBundleQuestionById(
+  questions: JobBundleQuestion[],
+  questionId: string,
+): JobBundleQuestion | undefined {
+  return questions.find((q) => q.questionId === questionId);
 }
 
 export interface JobQuestionBundle {
@@ -404,8 +420,9 @@ export function validateJobQuestionBundle(doc: Record<string, unknown>): string[
     doc.questions.forEach((q, i) => {
       const r = q as Record<string, unknown>;
       if (!Number.isInteger(r.n) || typeof r.questionId !== 'string' || typeof r.questionText !== 'string'
-        || !Array.isArray(r.options) || r.options.length !== 4) {
-        problems.push(`${label}: questions[${i}] is malformed (n/questionId/questionText/4 options required)`);
+        || !Array.isArray(r.options) || r.options.length !== 4
+        || (r.difficulty !== 'easy' && r.difficulty !== 'medium' && r.difficulty !== 'hard')) {
+        problems.push(`${label}: questions[${i}] is malformed (n/questionId/questionText/4 options/difficulty easy|medium|hard required)`);
       }
     });
   }
@@ -493,6 +510,7 @@ export function buildJobBundle(
     subjectId: q.subjectId,
     questionText: q.questionText,
     options: q.options.map((o) => ({ letter: o.letter, text: o.text })),
+    difficulty: q.difficulty,
   }));
   const bundle: JobQuestionBundle = {
     kind: meta.kind,

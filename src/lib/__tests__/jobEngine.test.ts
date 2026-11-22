@@ -57,6 +57,9 @@ function makeBundle(count: number, topics: string[]): { bundle: JobQuestionBundl
         { letter: 'C' as const, text: 'opt C' },
         { letter: 'D' as const, text: 'opt D' },
       ],
+      // Step 8 fold-in M3: mixed difficulties so mode-ordering
+      // has material (n1 easy, n2 medium, n3 hard, then repeats).
+      difficulty: (['easy', 'medium', 'hard'] as const)[i % 3],
     })),
     questionCount: count,
     bundleVersion: 1,
@@ -209,6 +212,21 @@ describe('practice session creation', () => {
 
   it('s5: revision starts at 1 (Step 8 fold-in, finding 6)', () => {
     expect(makeSession().revision).toBe(1);
+  });
+
+  it('s6: currentQuestion is the FIRST ref\'s n when refs are mode-ordered (Step 8 fold-in, finding 3)', () => {
+    const s = createPracticeSession({
+      sessionId: 'sess-1',
+      bundleId: 'topic__t1',
+      examSlug: 'bcs',
+      questionRefs: [
+        { bundleId: 'topic__t1', n: 2, questionId: 'q2' },
+        { bundleId: 'topic__t1', n: 3, questionId: 'q3' },
+        { bundleId: 'topic__t1', n: 1, questionId: 'q1' },
+      ],
+    });
+    expect(s.currentQuestion).toBe(2);
+    expect(validatePracticeSession(s)).toEqual([]);
   });
 });
 

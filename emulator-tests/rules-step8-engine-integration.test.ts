@@ -83,6 +83,7 @@ const BUNDLE: JobQuestionBundle = {
       subjectId: 'bcs__bangla',
       questionText: 'সন্ধি কাকে বলে?',
       options: OPTIONS,
+      difficulty: 'easy',
     },
   ],
   questionCount: 1,

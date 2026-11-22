@@ -10,16 +10,17 @@
 // (debounced), submit → result page.
 //
 // Submit order (rules-enforced, team/job-rules-step8.md):
-//   session → 'submitted' FIRST → attempt create (same doc-ID)
-//   → /jobs/result/:attemptId. No receipt is created (practice
-//   keys need none — see src/lib/jobPractice.ts header).
+//   ONE batched write — session → 'submitted' + attempt create
+//   (same doc-ID) together → /jobs/result/:attemptId. Idempotent:
+//   an existing attempt is returned, never re-written. No receipt
+//   is created (practice keys need none — see
+//   src/lib/jobPractice.ts header).
 //
-// LIMITS (honest, Step 8): difficulty ordering is bundle order —
-// the bundle carries no difficulty per question (it lives on the
-// jobQuestions doc, which students can never read), so
-// Beginner-easy-first / Advanced-hard-first ordering cannot run
-// yet (needs difficulty denormalized into the bundle at build
-// time — Step 9/15 note). Mode is therefore not wired here.
+// Step 8 fold-in (finding 3): difficulty IS denormalized into
+// the bundle at build time, so the mode order runs — the stored
+// questionRefs sequence is the mode order (beginner easy→hard,
+// advanced medium→hard→easy) and the palette + prev/next follow
+// that sequence, while every question keeps its bundle `n`.
 // "ভুল প্রশ্নগুলো আবার অনুশীলন করুন" re-runs the whole bundle
 // (a wrong-only session needs a Moderator-built bundle — Step 13).
 //
@@ -50,6 +51,7 @@ import {
   type PracticeBundleWithId,
 } from '../lib/jobPractice';
 import type { JobQuestionKey } from '../lib/jobQuestions';
+import { useJobMode } from '../lib/jobMode';
 
 type Phase = 'loading' | 'signed-out' | 'error' | 'ready';
 type SaveState = 'saved' | 'saving' | 'error';
@@ -62,6 +64,12 @@ const MARKED = '#8A6100';
 export default function JobPracticePage() {
   const { scope = '' } = useParams<{ scope: string }>();
   const { user } = useAuth();
+  // Step 8 fold-in (finding 3): the mode decides the stored
+  // question order at session start (beginner easy-first,
+  // advanced medium-first). The mode is read once here — a
+  // resumed session re-reads its STORED order, it is never
+  // re-sorted, so a mid-session mode switch cannot scramble it.
+  const { mode } = useJobMode();
   const navigate = useNavigate();
 
   const [phase, setPhase] = useState<Phase>('loading');
@@ -146,7 +154,7 @@ export default function JobPracticePage() {
           }
           setRevealed(rev);
         } else {
-          const started = await startPracticeSession(user.uid, b);
+          const started = await startPracticeSession(user.uid, b, mode);
           if (!alive) return;
           setBundle(b);
           setKey(k);
@@ -154,7 +162,7 @@ export default function JobPracticePage() {
           setSession(started.session);
           writtenRevisionRef.current = started.session.revision;
           setStartedAtMillis(started.startedAtMillis);
-          timeRef.current = { current: 1, startedAt: Date.now() };
+          timeRef.current = { current: started.session.currentQuestion, startedAt: Date.now() };
         }
         setPhase('ready');
       } catch (e) {
@@ -246,6 +254,16 @@ export default function JobPracticePage() {
       ? 'এই পরীক্ষার নেগেটিভ মার্কিং এখনো বিজ্ঞপ্তি থেকে যাচাই হয়নি — তাই ভুল উত্তরে নম্বর কাটা হচ্ছে না। এই স্কোর অফিসিয়াল ধরনের স্কোর নয়।'
       : null;
   const currentN = session.currentQuestion;
+  // Step 8 fold-in (finding 3): navigation follows the STORED
+  // questionRefs sequence (mode order), not bundle position.
+  // Legacy sessions without a matching refs sequence fall back
+  // to bundle order; `n` values are bundle numbers throughout.
+  const orderedNs =
+    session.questionRefs.length === total
+    && session.questionRefs.every((r) => bundle.questions.some((q) => q.n === r.n))
+      ? session.questionRefs.map((r) => r.n)
+      : bundle.questions.map((q) => q.n);
+  const currentIdx = Math.max(0, orderedNs.indexOf(currentN));
   const currentQ = bundle.questions.find((q) => q.n === currentN) ?? bundle.questions[0];
   const currentAnswer = session.answers[currentQ.n];
   const keyAnswer = key.answers.find((a) => a.n === currentQ.n);
@@ -439,10 +457,10 @@ export default function JobPracticePage() {
 
           {/* Sticky bottom bar: prev / palette jump / next / submit. */}
           <div style={{ position: 'sticky', bottom: 0, zIndex: 5, background: '#fff', padding: '12px 0', borderTop: '1px solid #E3E8EF', marginTop: 16, display: 'flex', gap: 8, flexWrap: 'wrap' }}>
-            <Button variant="outline" disabled={currentN <= 1} onClick={() => goTo(currentN - 1)}>
+            <Button variant="outline" disabled={currentIdx <= 0} onClick={() => goTo(orderedNs[currentIdx - 1])}>
               ← আগেরটি
             </Button>
-            <Button variant="outline" disabled={currentN >= total} onClick={() => goTo(currentN + 1)}>
+            <Button variant="outline" disabled={currentIdx >= total - 1} onClick={() => goTo(orderedNs[currentIdx + 1])}>
               পরেরটি →
             </Button>
             <span style={{ flex: 1 }} />
@@ -485,7 +503,8 @@ export default function JobPracticePage() {
               সবুজ = সঠিক · লাল = ভুল · ধূসর = উত্তর দেওয়া হয়নি · হলুদ চিহ্ন = পরে দেখব
             </p>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(44px, 1fr))', gap: 8 }}>
-              {bundle.questions.map((q) => {
+              {orderedNs.map((n) => {
+                const q = bundle.questions.find((x) => x.n === n) ?? bundle.questions[0];
                 const a = session.answers[q.n];
                 const k = key.answers.find((x) => x.n === q.n);
                 const answered = a?.selected !== null;

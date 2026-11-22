@@ -275,7 +275,10 @@ export function createPracticeSession(
       questionId: r.questionId,
     })),
     answers,
-    currentQuestion: 1,
+    // Step 8 fold-in (finding 3): the FIRST question is the first
+    // ref of the stored (mode-ordered) sequence, not bundle n=1 —
+    // advanced mode starts on a medium question.
+    currentQuestion: input.questionRefs[0]?.n ?? 1,
     lastSyncedAt: serverTimestamp(),
     clientEndsAtMillis: null,
     submittedAt: null,
