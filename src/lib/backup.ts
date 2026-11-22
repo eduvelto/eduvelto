@@ -34,8 +34,13 @@
  *     and reports per-document failures.
  *
  * WHAT IS IN THE FILE — and what is NOT:
- *   - Included: every top-level collection (45, incl. adminActions and
- *     settings — the audit log and the feature flags ARE backed up).
+ *   - Included: every top-level collection the owner can list-read
+ *     (76 — see BACKUP_COLLECTIONS; the count changed in Step 18).
+ *     `settings` is read doc-by-doc (features + ads) because the rules
+ *     have no collection-level match for it (Step 18, F-2).
+ *   - NOT included: `follows` + `directMessages` — the owner cannot
+ *     list-read them under the rules, so only the scripted/REST export
+ *     and the console export see them (Step 18, F-3 + exclusions).
  *   - NOT included: sub-collections (users/{uid}/quizAttempts,
  *     posts/{id}/comments, questions/{id}/answers, ...). They are
  *     listed in the file's metadata so the owner is never misled.
@@ -63,6 +68,7 @@ import {
   collection,
   doc,
   getCountFromServer,
+  getDoc,
   getDocs,
   limit,
   orderBy,
@@ -144,7 +150,6 @@ export const BACKUP_COLLECTIONS: string[] = [
   'settings',
   'socialProfiles',
   'friendships',
-  'follows',
   'groupMemberships',
   'competitions',
   'leaderboardSnapshots',
@@ -157,7 +162,105 @@ export const BACKUP_COLLECTIONS: string[] = [
   // Added 23 Nov 2026 (Step 14: the circulars collection must be
   // in every backup, or the published circulars are lost).
   'circulars',
+  // Added 23 Nov 2026 (Step 18: the Job taxonomy + mock-definition
+  // collections were silently missing from every backup. Empty live
+  // today, but the next published exam/subject/lesson/mock would be
+  // lost — the same MF1 hole, one step later).
+  'jobCategories',
+  'jobExams',
+  'jobSubjects',
+  'jobChapters',
+  'jobTopics',
+  'jobLessons',
+  'jobExamDefinitions',
+  'jobQuestionSetManifests',
+  // Added 23 Nov 2026 (Step 18: the NU admission content store.
+  // Empty live today (the NU seed was never applied), but the same
+  // silent-loss risk the moment a moderator publishes NU content).
+  'nuSubjects',
+  'nuChapters',
+  'nuTopics',
+  'nuLessons',
+  'nuQuestions',
+  'nuQuestionBundles',
+  'nuQuestionKeys',
+  'nuQuestionDraftKeys',
+  'nuExamConfigs',
+  'nuCircularConfigs',
+  'nuCalendarEvents',
+  'nuFacts',
+  'nuGroups',
+  'nuInstitutions',
+  'nuNotices',
+  'nuPublications',
+  'nuCorrections',
+  'nuReports',
+  'nuReviews',
+  // Added 23 Nov 2026 (Step 18: admin/contact/health records that
+  // hold real user data and were missing from every backup).
+  'teacherChangeRequests',
+  'contactMessages',
+  'doctors',
+  'supportMessages',
 ];
+
+/**
+ * Root collections DELIBERATELY excluded from backups (Step 18).
+ * Every top-level collection in firestore.rules must be in
+ * BACKUP_COLLECTIONS or here — the drift test in
+ * src/lib/__tests__/backup.test.ts enforces it, so a new collection
+ * cannot silently fall outside coverage. An exclusion needs a reason,
+ * not just a name.
+ */
+export const BACKUP_EXCLUSIONS: Record<string, string> = {
+  // 10-minute authorization tokens: worthless after expiry, and the
+  // same facts live in the attempt doc. Backing them up would only
+  // preserve dead keys.
+  jobReceipts: 'Ephemeral 10-minute answer-key authorization token; content duplicated in the attempt doc.',
+  quizReceipts: 'Ephemeral 10-minute answer-key authorization token; content duplicated in the attempt doc.',
+  nuReceipts: 'Ephemeral 10-minute answer-key authorization token; content duplicated in the attempt doc.',
+  // Transient per-exam lock, recreated on demand; holds no user data.
+  jobExamUserLocks: 'Transient exam lock, recreated on demand; holds no user content.',
+  // The owner CANNOT list-read this collection under the rules
+  // (participant-only read). A client export is impossible — the only
+  // complete path is the console export or the Admin-SDK/REST script.
+  directMessages: 'Owner cannot list-read under the rules (participant-only); client export impossible — console/Admin-SDK only.',
+  // F-3 (Step 18, emulator-proved): the follows read rule is
+  // follower-only — `allow read: if signedIn() &&
+  // resource.data.followerId == uid()` — with no staff tail, so an
+  // owner list/count query is denied and a client export throws.
+  // Granting the owner read over everyone's follow graph is a privacy
+  // decision for the owner, NOT a testing step to take silently — so
+  // follows stays out of the client list until he decides (a rules
+  // tail `|| isAdmin()` is the one-line fix, if he wants it). The
+  // data is NOT lost: the scripted/REST export reads it fine.
+  follows: 'Owner cannot list-read under the rules (follower-only read, no staff tail); client export impossible — console/Admin-SDK only.',
+};
+
+/**
+ * Collections the CLIENT cannot list-read, which the scripted REST
+ * exporter still covers (it reads with the owner CLI token, bypassing
+ * the rules). The parity test asserts the script exports exactly
+ * BACKUP_COLLECTIONS + these — no more, no less.
+ */
+export const BACKUP_CLIENT_UNREADABLE: string[] = ['directMessages', 'follows'];
+
+/**
+ * Collections that WILL exist soon, on other branches — NOT in this
+ * list yet, because adding one before its rules match exists would
+ * BREAK the export (a list query on an unmatched collection is
+ * denied, and buildBackup throws on the first denied collection).
+ * The drift test asserts these are still absent, so the note cannot
+ * go stale: whoever merges the branch must move the name into
+ * BACKUP_COLLECTIONS and delete it here, or the suite goes red.
+ */
+export const BACKUP_KNOWN_PENDING: Record<string, string> = {
+  jobReports: 'Step 15 admin (jobs/step15-admin) — adds the rules match + list entry on merge.',
+  jobCorrections: 'Step 15 admin (jobs/step15-admin) — adds the rules match + list entry on merge.',
+  circularHistory: 'Step 15 admin (jobs/step15-admin) — adds the rules match + list entry on merge.',
+  approvedDomains: 'Step 15 admin (jobs/step15-admin) — adds the rules match + list entry on merge.',
+  counters: 'Public user IDs (feature/public-user-ids, merges in the 23 Nov 14:30 cron) — holds the ID counter; MUST join BACKUP_COLLECTIONS at merge time (losing it means duplicate public IDs).',
+};
 
 /** Firestore values do not survive JSON as-is — mark them so restore can revive them. */
 function serialiseValue(v: unknown): unknown {
@@ -195,6 +298,29 @@ function reviveValue(v: unknown): unknown {
     return out;
   }
   return v;
+}
+
+/**
+ * settings is a special case (Step 18, finding F-2, emulator-proved):
+ * the rules have only single-doc matches (/settings/features and
+ * /settings/ads) — no collection-level match — so a list/count query
+ * over the settings collection is DENIED even for the owner, and a
+ * plain buildBackup() throws on it. The two docs are therefore read
+ * by ID. If a third settings doc ever ships, add its ID here AND a
+ * rules match for it, or the export silently omits it.
+ */
+export const SETTINGS_DOC_IDS: string[] = ['features', 'ads'];
+
+async function readSettingsDocs(db: Firestore): Promise<DocumentData[]> {
+  const docs: DocumentData[] = [];
+  for (const id of SETTINGS_DOC_IDS) {
+    const snap = await getDoc(doc(db, 'settings', id));
+    if (!snap.exists()) continue;
+    const data: Record<string, unknown> = {};
+    for (const [k, v] of Object.entries(snap.data())) data[k] = serialiseValue(v);
+    docs.push({ id: snap.id, ...data });
+  }
+  return docs;
 }
 
 async function readCollectionPaged(
@@ -245,6 +371,14 @@ export async function getBackupPreflight(
   const perCollection: Array<{ path: string; count: number }> = [];
   let total = 0;
   for (const path of collections) {
+    if (path === 'settings') {
+      // No collection-level match exists for settings (F-2): count by
+      // reading the known docs, never by a denied count query.
+      const docs = await readSettingsDocs(db);
+      perCollection.push({ path, count: docs.length });
+      total += docs.length;
+      continue;
+    }
     const snap = await getCountFromServer(collection(db, path));
     const count = snap.data().count;
     perCollection.push({ path, count });
@@ -264,10 +398,14 @@ export async function buildBackup(
   const data: Record<string, DocumentData[]> = {};
   const counts: Record<string, number> = {};
   for (const path of collections) {
-    const docs = await readCollectionPaged(db, path, (n) => {
-      recordReads(n);
-      onProgress?.(path, n);
-    });
+    const docs =
+      path === 'settings'
+        ? await readSettingsDocs(db)
+        : await readCollectionPaged(db, path, (n) => {
+            recordReads(n);
+            onProgress?.(path, n);
+          });
+    if (path === 'settings') recordReads(docs.length);
     data[path] = docs;
     counts[path] = docs.length;
   }
