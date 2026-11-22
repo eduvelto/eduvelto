@@ -56,8 +56,12 @@ async function seed() {
     await setDoc(doc(db, 'books', 'book-draft'), { ...draft, sourceUrl: 'https://example.com' });
     await setDoc(doc(db, 'chapters', 'chapter-published'), { ...published, bookId: 'book-published' });
     await setDoc(doc(db, 'chapters', 'chapter-draft'), { ...draft, bookId: 'book-published' });
+    // AUTH GATING (owner instruction 22 Nov 2026): only the preview chapter
+    // is readable without sign-in — see rules-auth-gating.test.ts.
+    await setDoc(doc(db, 'chapters', 'chapter-preview'), { ...published, bookId: 'book-published', isPreview: true });
     await setDoc(doc(db, 'lessons', 'lesson-published'), { ...published, bookId: 'book-published', chapterId: 'chapter-published', body: 'Body.' });
     await setDoc(doc(db, 'lessons', 'lesson-draft'), { ...draft, bookId: 'book-published', chapterId: 'chapter-draft', body: 'Draft body.' });
+    await setDoc(doc(db, 'lessons', 'lesson-preview'), { ...published, bookId: 'book-published', chapterId: 'chapter-preview', body: 'Preview body.', isPreview: true });
     await setDoc(doc(db, 'educationDirectory', 'dir-published'), { ...published, bookId: 'book-published' });
     await setDoc(doc(db, 'educationDirectory', 'dir-draft'), { ...draft, bookId: 'book-published' });
     await setDoc(doc(db, 'contactMessages', 'msg-1'), {
@@ -136,12 +140,16 @@ describe('Step 2 rules — books / chapters / lessons / directory', () => {
   it('admin delete of a book is ALLOWED', async () => {
     await assertSucceeds(deleteDoc(doc(asAdmin(), 'books', 'book-published')));
   });
-  it('unauthenticated read of a Published chapter is ALLOWED, draft DENIED', async () => {
-    await assertSucceeds(getDoc(doc(unauth(), 'chapters', 'chapter-published')));
+  // AUTH GATING (owner instruction 22 Nov 2026): a Published chapter/lesson
+  // is readable without sign-in ONLY when it is the preview (isPreview).
+  it('unauthenticated read of a Published chapter: preview ALLOWED, non-preview DENIED, draft DENIED', async () => {
+    await assertSucceeds(getDoc(doc(unauth(), 'chapters', 'chapter-preview')));
+    await assertFails(getDoc(doc(unauth(), 'chapters', 'chapter-published')));
     await assertFails(getDoc(doc(unauth(), 'chapters', 'chapter-draft')));
   });
-  it('unauthenticated read of a Published lesson is ALLOWED, draft DENIED', async () => {
-    await assertSucceeds(getDoc(doc(unauth(), 'lessons', 'lesson-published')));
+  it('unauthenticated read of a Published lesson: preview ALLOWED, non-preview DENIED, draft DENIED', async () => {
+    await assertSucceeds(getDoc(doc(unauth(), 'lessons', 'lesson-preview')));
+    await assertFails(getDoc(doc(unauth(), 'lessons', 'lesson-published')));
     await assertFails(getDoc(doc(unauth(), 'lessons', 'lesson-draft')));
   });
   it('student create of a lesson is DENIED', async () => {

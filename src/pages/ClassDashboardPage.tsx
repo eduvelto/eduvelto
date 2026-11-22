@@ -153,14 +153,20 @@ export default function ClassDashboardPage() {
     setError(false);
     setBooks(null);
     setQuizzes(null);
-    Promise.all([listPublishedBooks(), listPublishedQuizzes()])
+    // AUTH GATING (owner instruction 22 Nov 2026): the quiz list embeds
+    // questions, so it is fetched ONLY for a signed-in user. Guests get
+    // an empty quiz list (books still load — the library is public).
+    Promise.all([listPublishedBooks(), user ? listPublishedQuizzes() : Promise.resolve([] as Quiz[])])
       .then(([b, q]) => {
         setBooks(b);
         setQuizzes(q);
       })
       .catch(() => setError(true));
   }
-  useEffect(load, []);
+  // Re-run when auth resolves: at mount the user is often still null
+  // while the session restores; a signed-in user must not be stuck with
+  // the guest's empty quiz list.
+  useEffect(load, [user]);
 
   useEffect(() => {
     if (!user) {

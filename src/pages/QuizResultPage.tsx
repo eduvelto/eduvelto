@@ -14,6 +14,7 @@ import { useEffect, useState } from 'react';
 import { Link, useParams, useSearchParams } from 'react-router-dom';
 import { PageShell, EmptyState } from '../components/PageShell';
 import { AlertBox, Button, Card, Chip, ProgressBar, Skeleton } from '../components/ui';
+import LoginWall from '../components/LoginWall';
 import { useAuth } from '../lib/auth';
 import { useLanguage } from '../i18n/LanguageContext';
 import {
@@ -28,7 +29,7 @@ export default function QuizResultPage() {
   const { quizId, attemptId } = useParams<{ quizId: string; attemptId: string }>();
   const [searchParams] = useSearchParams();
   const { user, profile } = useAuth();
-  const { lang, t } = useLanguage();
+  const { t } = useLanguage();
   const [quiz, setQuiz] = useState<Quiz | null>(null);
   const [attempt, setAttempt] = useState<QuizAttempt | null>(null);
   const [notFound, setNotFound] = useState(false);
@@ -58,16 +59,13 @@ export default function QuizResultPage() {
     };
   }, [quizId, attemptId, ownerUid]);
 
+  // AUTH GATING (owner instruction 22 Nov 2026): results are
+  // signed-in only. The fetch effect above already returns early for
+  // guests (ownerUid is ''), so no attempt or quiz is fetched here.
   if (!user) {
     return (
       <PageShell titleBn="কুইজের ফলাফল" titleEn="Quiz result">
-        <p>
-          {lang === 'bn' ? (
-            <>ফলাফল দেখতে <Link to="/login">লগইন করুন</Link>।</>
-          ) : (
-            <>Please <Link to="/login">sign in</Link> to see the result.</>
-          )}
-        </p>
+        <LoginWall kind="result" />
       </PageShell>
     );
   }

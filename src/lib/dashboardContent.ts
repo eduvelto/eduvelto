@@ -94,6 +94,7 @@ function toChapter(id: string, d: Record<string, unknown>): Chapter {
     order: (d.order as number) ?? 0,
     questionCount: (d.questionCount as number) ?? 0,
     reviewStatus: (d.reviewStatus as string) ?? '',
+    isPreview: d.isPreview === true,
   };
 }
 

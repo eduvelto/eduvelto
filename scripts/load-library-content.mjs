@@ -611,14 +611,24 @@ async function writeBook(book, log) {
   const res1 = await upsertPublished('books', book.bookId, bookFields, true);
   log.books[book.bookId] = { title: book.title, code: book.code, departments: book.departments, questionCount: book.questionCount, chapters: book.chapterCount, cascade: { stream: cascade.stream, level: cascade.level, group: cascade.group, fallback: !!cascade._fallback }, write: res1 };
 
+  // AUTH GATING: exactly one preview chapter per book (the first
+  // published one) — see the loop below.
+  let previewMarked = false;
   for (const { pack, part, setNo } of book.chapters) {
     const isDraftPart = pack.file === DRAFT_PACK_FILE;
     const chapterId = `${book.bookId}--part-${part.letter.toLowerCase()}${setNo > 1 ? `-set${setNo}` : ''}`;
     const title = setNo > 1 ? `${part.heading} — সেট ${setNo}` : part.heading;
+    // AUTH GATING (owner instruction 22 Nov 2026): the FIRST published
+    // chapter of each book is the guest preview — guests read this one
+    // chapter/lesson without login; every other chapter requires login.
+    // A draft part can never be the preview (it is not Published).
+    const isPreviewChapter = !isDraftPart && !previewMarked;
+    if (isPreviewChapter) previewMarked = true;
     const chapterFields = {
       bookId: book.bookId, title, part: part.letter, set: setNo,
       order: (part.letter.charCodeAt(0) - 64) + (setNo - 1) * 10,
       questionCount: part.questions.length,
+      isPreview: isPreviewChapter,
       reviewStatus: 'Under Review', createdAt: now, updatedAt: now,
     };
     await upsertPublished('chapters', chapterId, chapterFields, !isDraftPart);
@@ -627,10 +637,11 @@ async function writeBook(book, log) {
       body: part.body.slice(0, 95000),
       questions: part.questions,
       questionCount: part.questions.length,
+      isPreview: isPreviewChapter,
       reviewStatus: 'Under Review', createdAt: now, updatedAt: now,
     };
     await upsertPublished('lessons', chapterId, lessonFields, !isDraftPart);
-    log.chapters[chapterId] = { bookId: book.bookId, title, questions: part.questions.length, status: isDraftPart ? 'Draft (Under Review)' : 'Published' };
+    log.chapters[chapterId] = { bookId: book.bookId, title, questions: part.questions.length, isPreview: isPreviewChapter, status: isDraftPart ? 'Draft (Under Review)' : 'Published' };
   }
 
   const dirFields = {

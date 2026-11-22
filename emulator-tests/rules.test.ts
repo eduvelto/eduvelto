@@ -179,6 +179,20 @@ async function seed() {
       authorId: 'admin-1',
       reviewStatus: 'Published',
     });
+    // AUTH GATING (owner instruction 22 Nov 2026): the preview lesson is
+    // the only lesson readable without sign-in.
+    await setDoc(doc(db, 'lessons', 'lesson-preview'), {
+      chapterId: 'ch1',
+      bookId: 'book1',
+      educationDirectoryId: 'dir1',
+      lessonNumber: 1,
+      title: 'Preview lesson',
+      body: 'Preview explanation.',
+      language: 'bn',
+      authorId: 'admin-1',
+      reviewStatus: 'Published',
+      isPreview: true,
+    });
     await setDoc(doc(db, 'lessons', 'lesson-draft'), {
       chapterId: 'ch1',
       bookId: 'book1',
@@ -315,9 +329,12 @@ async function createTvRecord(uid: 'student-1' | 'moderator-1'): Promise<string>
 }
 
 describe('Eduvelto security rules', () => {
-  // (a) Public reads: Published lesson ALLOWED, draft lesson DENIED.
-  it('(a1) unauthenticated read of a Published lesson is ALLOWED', async () => {
-    await assertSucceeds(getDoc(doc(unauth(), 'lessons', 'lesson-published')));
+  // (a) Public reads: AUTH GATING (owner instruction 22 Nov 2026) — a
+  // Published lesson is readable without sign-in ONLY when it is the
+  // preview (isPreview); a non-preview Published lesson is DENIED.
+  it('(a1) unauthenticated read of a preview lesson is ALLOWED, non-preview Published lesson DENIED', async () => {
+    await assertSucceeds(getDoc(doc(unauth(), 'lessons', 'lesson-preview')));
+    await assertFails(getDoc(doc(unauth(), 'lessons', 'lesson-published')));
   });
   it('(a2) unauthenticated read of a draft lesson is DENIED', async () => {
     await assertFails(getDoc(doc(unauth(), 'lessons', 'lesson-draft')));

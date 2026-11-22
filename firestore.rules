@@ -670,6 +670,20 @@ service cloud.firestore {
     // Public reads ONLY where reviewStatus == "Published". Teachers/Admins
     // may read their own drafts; moderators read all. Teachers create
     // drafts only; only Moderator/Admin can publish / remove / send back.
+    //
+    // AUTH GATING (owner instruction 22 Nov 2026 ~10:33, BINDING — this
+    // overrides the Step 5 anonymous-access adoption for exams/reading,
+    // see the addendum in team/job-categories-exams-step5.md):
+    //   - quizzes: SIGNED-IN ONLY. A quiz document embeds its questions,
+    //     so any anonymous read would send questions to a signed-out
+    //     browser. Guests never list, open, or submit exams.
+    //   - chapters/lessons: SIGNED-IN, except a Published chapter/lesson
+    //     flagged isPreview == true (the book's first chapter, set by
+    //     the loader) is public — the guest preview. Missing isPreview
+    //     means NOT a preview (live rows lack the field until the loader
+    //     re-runs, so guests read no chapters at all until then).
+    //   - books + educationDirectory stay public metadata (titles,
+    //     descriptions, book info) — guests browse the library.
     function contentRead(d) {
       return isPublished(d)
         || isModerator()
@@ -693,6 +707,15 @@ service cloud.firestore {
             && isDraftStatus(request.resource.data.reviewStatus));
     }
 
+    // AUTH GATING (owner instruction 22 Nov 2026): a guest reads a
+    // chapter ONLY when it is Published AND the book's preview
+    // (isPreview == true). Signed-in readers keep the old rule
+    // (Published, or own draft, or moderator).
+    function isPreviewContent(d) { return d.get('isPreview', false) == true; }
+    function gatedContentRead(d) {
+      return contentRead(d) && (signedIn() || isPreviewContent(d));
+    }
+
     match /educationDirectory/{docId} {
       allow read: if contentRead(resource.data);
       allow create: if isTeacher() && isDraftStatus(request.resource.data.reviewStatus);
@@ -706,19 +729,23 @@ service cloud.firestore {
       allow delete: if isAdmin();
     }
     match /chapters/{chapterId} {
-      allow read: if contentRead(resource.data);
+      allow read: if gatedContentRead(resource.data);
       allow create: if contentCreate();
       allow update: if contentUpdate(resource.data);
       allow delete: if isAdmin();
     }
     match /lessons/{lessonId} {
-      allow read: if contentRead(resource.data);
+      allow read: if gatedContentRead(resource.data);
       allow create: if contentCreate() && isStr(request.resource.data.body, 100000);
       allow update: if contentUpdate(resource.data);
       allow delete: if isAdmin();
     }
     match /quizzes/{quizId} {
-      allow read: if contentRead(resource.data);
+      // AUTH GATING (owner instruction 22 Nov 2026): quizzes are
+      // SIGNED-IN ONLY — the doc embeds its questions, so no anonymous
+      // read of any kind (single doc or list query) is allowed. The
+      // staff paths (moderator, own draft) are all signed-in already.
+      allow read: if contentRead(resource.data) && signedIn();
       allow create: if contentCreate() && request.resource.data.questions is list;
       allow update: if contentUpdate(resource.data);
       allow delete: if isAdmin();
