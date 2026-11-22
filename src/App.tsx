@@ -71,6 +71,8 @@ const PrivacyPage = lazy(() => import('./pages/PrivacyPage'));
 const AdmissionsIndexPage = lazy(() => import('./pages/AdmissionsIndexPage'));
 const NuHubPage = lazy(() => import('./pages/NuHubPage'));
 const NuGroupPage = lazy(() => import('./pages/NuGroupPage'));
+const NuSubjectPage = lazy(() => import('./pages/NuSubjectPage'));
+const NuTopicPage = lazy(() => import('./pages/NuTopicPage'));
 const AdmissionsDashboardPage = lazy(() => import('./pages/AdmissionsDashboardPage'));
 
 // Step 5 — role-based dashboards: /dashboard routes by the signed-in
@@ -174,6 +176,12 @@ export default function App() {
         <Route path="/admissions/national-university/humanities" element={<NuGroupPage group="humanities" />} />
         <Route path="/admissions/national-university/science" element={<NuGroupPage group="science" />} />
         <Route path="/admissions/national-university/business" element={<NuGroupPage group="business" />} />
+        {/* NU-6 (design §5.4): subject → chapter → topic pages. Five
+            segments, so they never match the hub's 3-segment `:tab`
+            route; a wrong group/subject/topic slug shows the page's
+            own honest "not found" card. */}
+        <Route path="/admissions/national-university/:group/subjects/:subject" element={<NuSubjectPage />} />
+        <Route path="/admissions/national-university/:group/subjects/:subject/:topic" element={<NuTopicPage />} />
         <Route path="/admissions/national-university/:tab" element={<NuHubPage />} />
         {/* Class-wise navigation (stage 3): Select Class → Class Dashboard → Tab → Subject → Book → Chapter. */}
         <Route path="/class/:slug/subjects/:dept" element={<ClassSubjectPage />} />
