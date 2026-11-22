@@ -36,6 +36,7 @@ import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { PageShell } from '../components/PageShell';
 import { useAuth } from '../lib/auth';
+import { JobsSection } from '../components/JobCards';
 import { useLanguage } from '../i18n/LanguageContext';
 import { listQuizAttempts, listSubjectProgress } from '../lib/progress';
 
@@ -485,6 +486,13 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+      {/* Job Preparation — Step 5 regrouping (10 categories, tier
+          grouping removed) ported onto the redesigned homepage:
+          the old homepage's class-cards section is gone, so the
+          Jobs section sits here, after the feature strip and
+          before the panels. */}
+      <JobsSection />
 
       {/* Three panels (desktop) / stacked panels (mobile). */}
       <section className="ev-home-panels" aria-label={t({ bn: 'আপডেট, অগ্রগতি ও জনপ্রিয়', en: 'Updates, progress and popular' })}>

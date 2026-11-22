@@ -359,6 +359,19 @@ describe('Eduvelto security rules', () => {
       updateDoc(doc(asStudent1(), 'users', 'student-1'), { displayName: 'Student One Renamed' }),
     );
   });
+  // (d4/d5) Job Preparation mode (owner decision 22 Nov 2026): the owner
+  // may set their own jobMode to 'beginner'/'advanced' — any other value
+  // is denied by the rules.
+  it('(d4) student setting own jobMode=advanced is ALLOWED', async () => {
+    await assertSucceeds(
+      updateDoc(doc(asStudent1(), 'users', 'student-1'), { jobMode: 'advanced' }),
+    );
+  });
+  it('(d5) student setting own jobMode to an invalid value is DENIED', async () => {
+    await assertFails(
+      updateDoc(doc(asStudent1(), 'users', 'student-1'), { jobMode: 'expert' }),
+    );
+  });
 
   // (e) quizAttempts: create own ALLOWED, update after submit DENIED.
   it('(e1) student creating their own quizAttempt is ALLOWED', async () => {
