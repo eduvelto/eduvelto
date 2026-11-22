@@ -360,13 +360,17 @@ export interface NuGroupSubject {
   nameBn: string;
   detailBn: string;
   isGroupBlock: boolean;
+  /** Subject-page slug (lib/nuSyllabus.ts) — null for the group-40
+   * block, which has no subject page until the Guideline confirms
+   * its split (Blocker B). */
+  slug: 'bangla' | 'english' | 'general-knowledge' | null;
 }
 
 export function nuGroupSubjects(group: NuGroupSlug): NuGroupSubject[] {
   const common: NuGroupSubject[] = [
-    { nameBn: 'বাংলা', detailBn: '২০ নম্বর — বিজ্ঞপ্তি থেকে যাচাইকৃত', isGroupBlock: false },
-    { nameBn: 'ইংরেজি', detailBn: '২০ নম্বর — বিজ্ঞপ্তি থেকে যাচাইকৃত', isGroupBlock: false },
-    { nameBn: 'সাধারণ জ্ঞান', detailBn: '২০ নম্বর — বিজ্ঞপ্তি থেকে যাচাইকৃত', isGroupBlock: false },
+    { nameBn: 'বাংলা', detailBn: '২০ নম্বর — বিজ্ঞপ্তি থেকে যাচাইকৃত', isGroupBlock: false, slug: 'bangla' },
+    { nameBn: 'ইংরেজি', detailBn: '২০ নম্বর — বিজ্ঞপ্তি থেকে যাচাইকৃত', isGroupBlock: false, slug: 'english' },
+    { nameBn: 'সাধারণ জ্ঞান', detailBn: '২০ নম্বর — বিজ্ঞপ্তি থেকে যাচাইকৃত', isGroupBlock: false, slug: 'general-knowledge' },
   ];
   const block: NuGroupSubject =
     group === 'science'
@@ -375,6 +379,7 @@ export function nuGroupSubjects(group: NuGroupSlug): NuGroupSubject[] {
           detailBn:
             'বিজ্ঞান শাখার ৪০ নম্বর একটি ব্লক হিসেবে — ভেতরের বিভাজন (পদার্থবিজ্ঞান/রসায়ন/গণিত/জীববিজ্ঞান) Guideline-এ নিশ্চিত হলে এখানে আসবে।',
           isGroupBlock: true,
+          slug: null,
         }
       : group === 'humanities'
         ? {
@@ -382,12 +387,14 @@ export function nuGroupSubjects(group: NuGroupSlug): NuGroupSubject[] {
             detailBn:
               'মানবিক শাখার ৪০ নম্বর একটি ব্লক হিসেবে — কোন চারটি HSC বিষয় থেকে আসবে, তা Guideline-এ নিশ্চিত হলে এখানে আসবে।',
             isGroupBlock: true,
+            slug: null,
           }
         : {
             nameBn: 'শাখা-ভিত্তিক প্রশ্ন (৪০)',
             detailBn:
               'ব্যবসায় শিক্ষা শাখার ৪০ নম্বর একটি ব্লক হিসেবে — ভেতরের বিভাজন Guideline-এ নিশ্চিত হলে এখানে আসবে।',
             isGroupBlock: true,
+            slug: null,
           };
   return [...common, block];
 }

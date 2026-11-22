@@ -11,19 +11,22 @@
 // block's inner split is unverified until the Guideline arrives
 // (Blocker B), so no subject list is invented for it. Mock card
 // (100 MCQ / 1 hour / pass 35 comparison-only), eligibility card
-// (verified GPA limits from the circular). 0 topics = honest empty
-// state. A signed-in student can set this group as their target
+// (verified GPA limits from the circular). The three common subjects
+// link to their subject pages (NU-6) — chapter/topic lists there
+// are DRAFT (teacher verification pending). A signed-in student can
+// set this group as their target
 // (profile: admissionTargetInstitution + admissionTargetGroup);
 // switching the target never deletes progress.
 
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
-import { PageShell, EmptyState } from '../components/PageShell';
+import { PageShell } from '../components/PageShell';
 import { Card, LinkButton } from '../components/ui';
 import { useLanguage } from '../i18n/LanguageContext';
 import { useAuth } from '../lib/auth';
 import { NU_GROUPS, profileNuPreferences, type NuGroupSlug } from '../lib/nuProfile';
 import { NU_HUB_ROUTE, nuExamPattern, nuGroupSubjects } from '../lib/nuStructure';
+import { nuSubjectRoute } from '../lib/nuSyllabus';
 
 export default function NuGroupPage(props: { group: NuGroupSlug }) {
   const { t } = useLanguage();
@@ -117,8 +120,21 @@ export default function NuGroupPage(props: { group: NuGroupSlug }) {
       <div style={{ display: 'grid', gap: 12, gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))' }}>
         {subjects.map((s) => (
           <Card key={s.nameBn} style={s.isGroupBlock ? { border: '1px dashed #9AA5AD', background: '#F8F9F9' } : undefined}>
-            <strong style={{ fontSize: 16, color: '#142B3B' }}>{s.nameBn}</strong>
+            {s.slug ? (
+              <Link to={nuSubjectRoute(props.group, s.slug)} style={{ fontWeight: 700, fontSize: 16, color: '#142B3B', textDecoration: 'none' }}>
+                {s.nameBn}
+              </Link>
+            ) : (
+              <strong style={{ fontSize: 16, color: '#142B3B' }}>{s.nameBn}</strong>
+            )}
             <p style={{ color: '#57616A', fontSize: 14, lineHeight: 1.8, margin: '8px 0 0' }}>{s.detailBn}</p>
+            {s.slug ? (
+              <p style={{ margin: '8px 0 0', fontSize: 14 }}>
+                <Link to={nuSubjectRoute(props.group, s.slug)} style={{ fontWeight: 600 }}>
+                  {t({ bn: 'অধ্যায় ও টপিক দেখুন →', en: 'See chapters and topics →' })}
+                </Link>
+              </p>
+            ) : null}
             {s.isGroupBlock ? (
               <p style={{ color: '#57616A', fontSize: 14, lineHeight: 1.8, margin: '8px 0 0' }}>
                 {t({
@@ -130,12 +146,12 @@ export default function NuGroupPage(props: { group: NuGroupSlug }) {
           </Card>
         ))}
       </div>
-      <div style={{ marginTop: 16 }}>
-        <EmptyState
-          bn="এই শাখার টপিকের তালিকা এখনো তৈরি হয়নি — সিলেবাস যাচাই চলছে।"
-          en="This group’s topic list is not ready yet — the syllabus is being verified."
-        />
-      </div>
+      <p style={{ marginTop: 16, color: '#57616A', fontSize: 14, lineHeight: 1.8 }}>
+        {t({
+          bn: 'বিষয়ে চাপ দিলে অধ্যায় ও টপিকের খসড়া তালিকা দেখতে পাবেন — তালিকাটি HSC পাঠ্যবই থেকে নেওয়া, শিক্ষক যাচাই চলছে। এটি NU-র অফিসিয়াল সিলেবাস নয়।',
+          en: 'Tap a subject to see its draft chapter and topic list — taken from the HSC textbooks, teacher verification pending. It is not NU’s official syllabus.',
+        })}
+      </p>
 
       <div style={{ display: 'grid', gap: 12, gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', marginTop: 16 }}>
         <Card>
