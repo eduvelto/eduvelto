@@ -26,9 +26,11 @@
 //  - "ভিডিও লেসন" and "সার্টিফিকেট" do not exist yet → rendered as
 //    Coming Soon (disabled), not as working features. "র‍্যাংকিং" also
 //    does not exist yet → Coming Soon.
-//  - Section cards link to /jobs, /admissions, /class, /skills. /class
-//    is real (class index); the other three land on ONE shared Coming
-//    Soon page until the sections are built.
+//  - Section cards link to /jobs, /admissions, /class, /skills. /jobs
+//    (Job Preparation) and /admissions (Admission Preparation) are real
+//    sections, live since 22 Nov 2026; /class is real (class index);
+//    only /skills still lands on the shared Coming Soon page until it
+//    is built.
 //  - No ad placeholders on this homepage (the global bottom banner in
 //    App.tsx still applies). No invented counts anywhere.
 
@@ -209,7 +211,7 @@ const FEATURES = [
   { icon: <BookIcon size={22} />, bn: 'প্রশ্নব্যাংক', en: 'Question Bank', to: '/library', soon: false },
   { icon: <QuizIcon />, bn: 'মডেল টেস্ট', en: 'Model Tests', to: '/exam', soon: false },
   { icon: <ChartIcon />, bn: 'ফলাফল বিশ্লেষণ', en: 'Result Analysis', to: '/progress', soon: false },
-  { icon: <CalendarIcon />, bn: 'পড়ার রুটিন', en: 'Study Routine', to: '/routine', soon: false },
+  { icon: <CalendarIcon />, bn: 'পড়ার রুটিন', en: 'Study Routine', to: '/routine', soon: true },
   { icon: <TrophyIcon />, bn: 'র‍্যাংকিং', en: 'Ranking', to: null, soon: true },
   { icon: <StarIcon />, bn: 'সার্টিফিকেট', en: 'Certificate', to: null, soon: true },
 ];

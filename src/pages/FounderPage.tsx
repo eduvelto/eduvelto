@@ -358,7 +358,8 @@ export default function FounderPage() {
             {t({ bn: 'পাঠ, বুকমার্ক ও অগ্রগতি', en: 'Lessons, bookmarks and progress' })} <StatusChip label={t({ bn: 'উপলব্ধ এখন', en: 'Available now' })} kind="live" />
           </li>
           <li>
-            {t({ bn: 'পড়ার রুটিন', en: 'Study routine' })} <StatusChip label={t({ bn: 'উপলব্ধ এখন', en: 'Available now' })} kind="live" />
+            {t({ bn: 'শিক্ষার্থী, শিক্ষক ও অভিভাবক ড্যাশবোর্ড', en: 'Student, Teacher and Guardian dashboards' })}{' '}
+            <StatusChip label={t({ bn: 'উপলব্ধ এখন', en: 'Available now' })} kind="live" />
           </li>
           <li>
             {t({ bn: 'PWA — ইনস্টল করা যায় এমন অ্যাপ, অফলাইনে চলে', en: 'PWA — installable app, works offline' })} <StatusChip label={t({ bn: 'উপলব্ধ এখন', en: 'Available now' })} kind="live" />
@@ -372,18 +373,12 @@ export default function FounderPage() {
           </li>
         </ul>
         <h3 style={{ fontSize: 16, margin: '20px 0 8px', color: NAVY }}>
-          {t({ bn: 'উন্নয়নাধীন', en: 'In development' })}
-        </h3>
-        <ul style={{ lineHeight: 2, paddingLeft: 20, margin: '0 0 12px' }}>
-          <li>
-            {t({ bn: 'শিক্ষার্থী, শিক্ষক ও অভিভাবক ড্যাশবোর্ড', en: 'Student, Teacher and Guardian dashboards' })}{' '}
-            <StatusChip label={t({ bn: 'উন্নয়নাধীন (স্টেজিং)', en: 'In development (staging)' })} kind="planned" />
-          </li>
-        </ul>
-        <h3 style={{ fontSize: 16, margin: '20px 0 8px', color: NAVY }}>
           {t({ bn: 'পরিকল্পিত', en: 'Planned' })}
         </h3>
         <ul style={{ lineHeight: 2, paddingLeft: 20, margin: '0 0 12px' }}>
+          <li>
+            {t({ bn: 'পড়ার রুটিন', en: 'Study routine' })} <StatusChip label={t({ bn: 'পরিকল্পিত — তৈরি হয়নি', en: 'Planned — not built yet' })} kind="planned" />
+          </li>
           <li>
             <Link to="/ai-teacher">{t({ bn: 'AI শিক্ষক', en: 'AI Teacher' })}</Link>{' '}
             <StatusChip label={t({ bn: 'পরিকল্পিত — শুধু ডেমো, আসল AI নয়', en: 'Planned — demo only, not live AI' })} kind="planned" />

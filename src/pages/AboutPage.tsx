@@ -49,12 +49,20 @@ export default function AboutPage() {
       </p>
       <p style={{ lineHeight: 1.7 }}>
         {t({
-          bn: 'Eduvelto বাংলাদেশের শিক্ষার্থীদের জন্য একটি বিনামূল্যের ডিজিটাল শিক্ষা প্ল্যাটফর্ম। এখানে পাঠ, পরীক্ষা, ডিজিটাল লাইব্রেরি ও স্মার্ট পড়ার পরিকল্পনা এক জায়গায় — ভবিষ্যতে ব্যক্তিগত AI শিক্ষকসহ — বাংলায় ও ইংরেজিতে — যাতে দেশের যেকোনো প্রান্তের শিক্ষার্থী শিখতে, এগিয়ে যেতে ও স্বপ্ন গড়তে পারে.',
-          en: 'Eduvelto is a free digital education platform for Bangladesh. It brings together lessons, exams, a digital library and smart study planning — with a personal AI teacher planned for the future — in Bangla and in English — so that a student anywhere in the country can learn, grow and achieve, without cost standing in the way.',
+          bn: 'Eduvelto বাংলাদেশের শিক্ষার্থীদের জন্য একটি বিনামূল্যের ডিজিটাল শিক্ষা প্ল্যাটফর্ম। এখানে পাঠ, পরীক্ষা ও ডিজিটাল লাইব্রেরি এক জায়গায় — ভবিষ্যতে স্মার্ট পড়ার পরিকল্পনা ও ব্যক্তিগত AI শিক্ষকসহ — বাংলায় ও ইংরেজিতে — যাতে দেশের যেকোনো প্রান্তের শিক্ষার্থী শিখতে, এগিয়ে যেতে ও স্বপ্ন গড়তে পারে.',
+          en: 'Eduvelto is a free digital education platform for Bangladesh. It brings together lessons, exams and a digital library in one place — with smart study planning and a personal AI teacher planned for the future — in Bangla and in English — so that a student anywhere in the country can learn, grow and achieve, without cost standing in the way.',
         })}
       </p>
       <h2 style={{ fontFamily: "'Poppins','Hind Siliguri',system-ui,sans-serif", fontSize: 20, color: '#0A1F44', margin: '28px 0 12px' }}>{t({ bn: 'যা যা আছে', en: 'What Eduvelto offers' })}</h2>
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(240px, 1fr))', gap: 12 }}>
+        <div className="ev-card ev-card-hover">
+          <Link to="/jobs" style={{ fontWeight: 700, color: '#0A1F44' }}>{t({ bn: 'চাকরি প্রস্তুতি', en: 'Job Preparation' })}</Link>
+          <p style={{ margin: '6px 0 0', color: '#5A6478', fontSize: 14 }}>{t({ bn: 'বিসিএস, ব্যাংক, প্রাথমিক শিক্ষক, NTRCA ও অন্যান্য চাকরির পরীক্ষার প্রস্তুতি।', en: 'Preparation for BCS, bank, primary teacher, NTRCA and other job exams.' })}</p>
+        </div>
+        <div className="ev-card ev-card-hover">
+          <Link to="/admissions" style={{ fontWeight: 700, color: '#0A1F44' }}>{t({ bn: 'ভর্তি প্রস্তুতি', en: 'Admission Preparation' })}</Link>
+          <p style={{ margin: '6px 0 0', color: '#5A6478', fontSize: 14 }}>{t({ bn: 'জাতীয় বিশ্ববিদ্যালয়সহ বিশ্ববিদ্যালয় ভর্তি পরীক্ষার প্রস্তুতি।', en: 'University admission preparation, including National University.' })}</p>
+        </div>
         <div className="ev-card ev-card-hover">
           <Link to="/library" style={{ fontWeight: 700, color: '#0A1F44' }}>{t({ bn: 'ডিজিটাল লাইব্রেরি', en: 'Digital Library' })}</Link>
           <p style={{ margin: '6px 0 0', color: '#5A6478', fontSize: 14 }}>{t({ bn: 'বই, প্রশ্নোত্তর ও সহজ ব্যাখ্যাসহ পরীক্ষার প্রস্তুতি (অনার্স, আলিম, এইচএসসি, এসএসসি ও কারিগরি)।', en: 'Exam preparation with books, Q&A and simple explanations (Honours, Alim, HSC, SSC and Technical).' })}</p>
