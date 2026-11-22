@@ -8,6 +8,7 @@
 
 import { useState } from 'react';
 import { useLanguage } from '../i18n/LanguageContext';
+import { LinkButton } from '../components/ui';
 import { EmptyAdminBox } from '../components/AdminShared';
 
 type Tab = 'all' | 'university' | 'medical' | 'engineering';
@@ -61,6 +62,12 @@ export default function AdminAdmissionsPage() {
           en: 'The Admission Preparation section is not built yet — the categories below are the planned list. No category has any exams or questions yet.',
         })}
       </p>
+
+      <div style={{ marginTop: 12 }}>
+        <LinkButton to="/admin/admissions/structure" variant="outline">
+          {t({ bn: 'NU কাঠামোর সীড — প্রতিষ্ঠান, শাখা ও পরীক্ষার কনফিগ', en: 'NU structure seed — institutions, groups and exam config' })} →
+        </LinkButton>
+      </div>
 
       <div className="ev-ceo-tabs" role="tablist" aria-label={t({ bn: 'ভর্তির ধরন', en: 'Admission type' })}>
         {TABS.map((tb) => (
