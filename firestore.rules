@@ -223,6 +223,187 @@ service cloud.firestore {
                      .get('sourceCircular', null) is string)));
     }
 
+    // NU-6 (§19.2.3, §19.3.4): syllabus-structure validators — mirrors
+    // of lib/nuSyllabus.ts validateNuSyllabus*Doc. Every doc: status
+    // draft/published, circularVersion + createdBy non-empty strings.
+    // Subjects carry no `order` field; common subjects are 20 marks
+    // (bangla/english/general-knowledge), group-40 blocks are 40 marks
+    // (slug group-*). `&&` short-circuits, so the `.size()` / `.hasOnly()`
+    // calls below only run after the `is list` / `is string` checks.
+    function isValidNuSubject(data) {
+      return data.slug is string && data.slug.size() > 0
+        && data.nameBn is string && data.nameBn.size() > 0
+        && data.syllabusSource is string && data.syllabusSource.size() > 0
+        && data.status in ['draft', 'published']
+        && data.circularVersion is string && data.circularVersion.size() > 0
+        && data.createdBy is string && data.createdBy.size() > 0
+        && data.groupIds is list
+        && data.groupIds.size() >= 1 && data.groupIds.size() <= 3
+        && data.groupIds.hasOnly(['humanities', 'science', 'business'])
+        && data.marks is int
+        && data.isGroupBlock is bool
+        && !('order' in data)
+        && ((data.isGroupBlock == true && data.marks == 40
+            && data.slug in ['group-humanities', 'group-science', 'group-business'])
+          || (data.isGroupBlock == false && data.marks == 20
+            && data.slug in ['bangla', 'english', 'general-knowledge']));
+    }
+    function isValidNuChapter(data) {
+      return data.subjectId is string && data.subjectId.size() > 0
+        && data.slug is string && data.slug.size() > 0
+        && data.nameBn is string && data.nameBn.size() > 0
+        && data.order is int && data.order >= 1
+        && data.syllabusSource is string && data.syllabusSource.size() > 0
+        && data.syllabusVerified is bool
+        && data.status in ['draft', 'published']
+        && data.circularVersion is string && data.circularVersion.size() > 0
+        && data.createdBy is string && data.createdBy.size() > 0;
+    }
+    function isValidNuTopic(data) {
+      return data.subjectId is string && data.subjectId.size() > 0
+        && data.chapterId is string && data.chapterId.size() > 0
+        && data.slug is string && data.slug.size() > 0
+        && data.nameBn is string && data.nameBn.size() > 0
+        && data.detailBn is string && data.detailBn.size() > 0
+        && data.order is int && data.order >= 1
+        && data.syllabusSource is string && data.syllabusSource.size() > 0
+        && data.syllabusVerified is bool
+        && data.status in ['draft', 'published']
+        && data.circularVersion is string && data.circularVersion.size() > 0
+        && data.createdBy is string && data.createdBy.size() > 0;
+    }
+    function isValidNuLesson(data) {
+      return data.subjectId is string && data.subjectId.size() > 0
+        && data.chapterId is string && data.chapterId.size() > 0
+        && data.topicId is string && data.topicId.size() > 0
+        && data.slug is string && data.slug.size() > 0
+        && data.titleBn is string && data.titleBn.size() > 0
+        && data.bodyBn is string && data.bodyBn.size() > 0
+        && data.order is int && data.order >= 1
+        && data.status in ['draft', 'published']
+        && data.circularVersion is string && data.circularVersion.size() > 0
+        && data.createdBy is string && data.createdBy.size() > 0;
+    }
+
+    // NU-7 (§11.2, §19.2.4, §19.6.1): the question shape. Mirrors
+    // lib/nuQuestions.ts validateNuQuestionDoc. The correct answer is
+    // NEVER in this doc (it lives in nuQuestionDraftKeys). Only the 3
+    // common subjects may carry questions — a group-40 block subject
+    // (group-*) is rejected (Blocker B: no chapters exist for it).
+    // examYear is required ONLY for official_previous_year.
+    function isValidNuQuestion(data) {
+      return data.subjectId in ['bangla', 'english', 'general-knowledge']
+        && data.chapterId is string && data.chapterId.size() > 0
+        && data.topicId is string && data.topicId.size() > 0
+        && data.groupIds is list && data.groupIds.size() >= 1 && data.groupIds.size() <= 3
+        && data.groupIds.toSet().size() == data.groupIds.size()
+        && data.groupIds.toSet().hasOnly(['humanities', 'science', 'business'])
+        && data.questionText is string && data.questionText.size() > 0 && data.questionText.size() <= 2000
+        && data.questionLang in ['bn', 'en']
+        && data.options is list && data.options.size() == 4
+        && data.options[0] is string && data.options[0].size() > 0
+        && data.options[1] is string && data.options[1].size() > 0
+        && data.options[2] is string && data.options[2].size() > 0
+        && data.options[3] is string && data.options[3].size() > 0
+        && data.options.toSet().size() == 4
+        && data.difficulty in ['easy', 'medium', 'hard']
+        && data.explanation is string && data.explanation.size() > 0
+        && data.sourceType in ['original_practice', 'official_previous_year', 'adapted_hsc', 'unverified_source', 'imported_academic']
+        && data.provenance is string && data.provenance.size() > 0
+        && data.circularVersion is string && data.circularVersion.size() > 0
+        && data.version is int && data.version >= 1
+        && data.status in ['draft', 'submitted_for_review', 'under_review', 'approved', 'published', 'rejected', 'changes_requested', 'withdrawn']
+        && !('correctOptionIndex' in data)
+        && (!('examYear' in data) || (data.examYear is int && data.examYear >= 1900 && data.examYear <= 2100))
+        && (data.sourceType == 'official_previous_year' || !('examYear' in data))
+        && (data.sourceType != 'official_previous_year' || ('examYear' in data && data.examYear is int));
+    }
+
+    // NU-7 (§19.2.6): the draft correct answer. One doc per question
+    // (id == questionId), version-locked to the question's version.
+    function isValidNuQuestionDraftKey(data) {
+      return data.questionId is string && data.questionId.size() > 0
+        && data.version is int && data.version >= 1
+        && data.correctOptionIndex is int
+        && data.correctOptionIndex >= 0 && data.correctOptionIndex <= 3
+        && data.createdBy is string && data.createdBy.size() > 0
+        && data.subjectId in ['bangla', 'english', 'general-knowledge']
+        && data.groupIds is list && data.groupIds.size() >= 1
+        && data.groupIds.toSet().hasOnly(['humanities', 'science', 'business']);
+    }
+
+    // NU-7 (§19.2.5): the bundle shape. The per-kind config snapshot
+    // pins the NU marking (correct 1 / incorrect 0 / unanswered 0 /
+    // NO negative marking) and the sizes (mock exactly 100Q / 3600s /
+    // pass 35; daily 20–30Q / 1200–1800s; topic = questionCount).
+    // Per-entry validation (every question's id/version/text/options)
+    // is code-level (lib validateNuQuestionBundleDoc) — rules cannot
+    // iterate a list, so they check size, count, the first entry, and
+    // the config snapshot.
+    function isValidNuBundle(data) {
+      return data.kind in ['topic', 'mock', 'daily']
+        && data.groupId in ['humanities', 'science', 'business']
+        && data.questions is list && data.questions.size() >= 1
+        && data.questionCount is int && data.questionCount == data.questions.size()
+        && data.questions[0] is map
+        && data.questions[0].questionId is string
+        && data.questions[0].version is int && data.questions[0].version >= 1
+        && data.questions[0].options is list && data.questions[0].options.size() == 4
+        && data.configSnapshot is map
+        && data.configSnapshot.marking is map
+        && data.configSnapshot.marking.correct == 1
+        && data.configSnapshot.marking.incorrect == 0
+        && data.configSnapshot.marking.unanswered == 0
+        && data.configSnapshot.marking.negativeMarking == false
+        && data.configSnapshot.totalQuestions is int
+        && data.configSnapshot.totalQuestions == data.questionCount
+        && data.status in ['draft', 'published', 'withdrawn']
+        && data.version is int && data.version >= 1
+        && data.sourceQuestionIds is list && data.sourceQuestionIds.size() == data.questionCount
+        && ((data.kind == 'mock'
+            && data.configSnapshot.totalQuestions == 100
+            && data.configSnapshot.durationSeconds == 3600
+            && data.configSnapshot.passMark == 35)
+          || (data.kind == 'daily'
+            && data.configSnapshot.totalQuestions >= 20
+            && data.configSnapshot.totalQuestions <= 30
+            && data.configSnapshot.durationSeconds is int
+            && data.configSnapshot.durationSeconds >= 1200
+            && data.configSnapshot.durationSeconds <= 1800)
+          || (data.kind == 'topic'
+            && data.configSnapshot.get('durationSeconds', null) == null
+            && data.configSnapshot.get('passMark', null) == null));
+    }
+
+    // NU-7 (§19.6.1): the publication state machine. Rejected and
+    // withdrawn are terminal; approved publishes only through the
+    // publish gate; a draft may be withdrawn by an Admin.
+    function isNuQuestionTransitionAllowed(from, to) {
+      return (from == 'draft' && to in ['submitted_for_review', 'withdrawn'])
+        || (from == 'submitted_for_review' && to == 'under_review')
+        || (from == 'under_review' && to in ['approved', 'rejected', 'changes_requested'])
+        || (from == 'changes_requested' && to == 'submitted_for_review')
+        || (from == 'approved' && to == 'published')
+        || (from == 'published' && to == 'withdrawn');
+    }
+
+    // NU-7 (§19.6.1): who may take each edge. Submit = the author (or
+    // an Admin); claim + decide = a reviewer who is NOT the author,
+    // and a decision may only be taken by the reviewer who claimed
+    // the question (reviewedBy == uid); publish / withdraw = Admin.
+    function isNuQuestionTransitionActorOk(from, to) {
+      return (to == 'submitted_for_review' && (isAdmin() || resource.data.createdBy == uid()))
+        || (to == 'under_review' && (isAdmin() || isVerifiedTeacher())
+            && resource.data.createdBy != uid()
+            && request.resource.data.reviewedBy == uid())
+        || (to in ['approved', 'rejected', 'changes_requested'] && (isAdmin() || isVerifiedTeacher())
+            && resource.data.createdBy != uid()
+            && resource.data.reviewedBy == uid()
+            && request.resource.data.reviewedBy == uid())
+        || (to == 'published' && isAdmin())
+        || (to == 'withdrawn' && isAdmin());
+    }
+
     // ---------- users.verificationStatus ----------
     // OWNER DECISION 21 Nov 2026 — student identity verification is
     // REMOVED entirely. `users.verificationStatus` is ONLY the mirror of
@@ -1387,7 +1568,8 @@ service cloud.firestore {
              'teacher-change-approved', 'teacher-change-rejected',
              'guardian-link-approved', 'guardian-link-rejected', 'guardian-link-revoked',
              'feature-enabled', 'feature-disabled',
-             'backup-exported', 'nu-structure-applied',
+             'backup-exported', 'nu-structure-applied', 'nu-syllabus-applied',
+             'nu-question-published', 'nu-question-withdrawn',
              'user-profile-viewed', 'user-messages-viewed',
              'support-message-sent', 'message-reported', 'message-blocked']
         && request.resource.data.keys().hasOnly(
@@ -1865,6 +2047,67 @@ service cloud.firestore {
       allow delete: if false;
     }
 
+    // nuSubjects / nuChapters / nuTopics / nuLessons (§19.2.3,
+    // §19.3.4; NU-6): the syllabus structure. Read — Published for
+    // everyone; a verified teacher may also read a draft they created.
+    // Write — Owner/Admin or a verified teacher (own Draft only, and
+    // createdBy must be their own uid). Publish (draft → published) —
+    // Owner/Admin only. Published docs are never edited in place (a
+    // correction is a new version, NU-7). Field checks mirror
+    // lib/nuSyllabus.ts — the group-40 block stays ONE doc per group.
+    match /nuSubjects/{subjectId} {
+      allow read: if signedIn() && (resource.data.status == 'published' || isAdmin()
+        || (isVerifiedTeacher() && resource.data.createdBy == uid()));
+      allow create: if (isAdmin() || (isVerifiedTeacher() && request.resource.data.createdBy == uid()))
+        && request.resource.data.status == 'draft'
+        && isValidNuSubject(request.resource.data);
+      allow update: if (isAdmin() || (isVerifiedTeacher() && resource.data.createdBy == uid()))
+        && resource.data.status != 'published'
+        && !(request.resource.data.status == 'published' && !isAdmin())
+        && request.resource.data.createdBy == resource.data.createdBy
+        && isValidNuSubject(request.resource.data);
+      allow delete: if false;
+    }
+    match /nuChapters/{chapterId} {
+      allow read: if signedIn() && (resource.data.status == 'published' || isAdmin()
+        || (isVerifiedTeacher() && resource.data.createdBy == uid()));
+      allow create: if (isAdmin() || (isVerifiedTeacher() && request.resource.data.createdBy == uid()))
+        && request.resource.data.status == 'draft'
+        && isValidNuChapter(request.resource.data);
+      allow update: if (isAdmin() || (isVerifiedTeacher() && resource.data.createdBy == uid()))
+        && resource.data.status != 'published'
+        && !(request.resource.data.status == 'published' && !isAdmin())
+        && request.resource.data.createdBy == resource.data.createdBy
+        && isValidNuChapter(request.resource.data);
+      allow delete: if false;
+    }
+    match /nuTopics/{topicId} {
+      allow read: if signedIn() && (resource.data.status == 'published' || isAdmin()
+        || (isVerifiedTeacher() && resource.data.createdBy == uid()));
+      allow create: if (isAdmin() || (isVerifiedTeacher() && request.resource.data.createdBy == uid()))
+        && request.resource.data.status == 'draft'
+        && isValidNuTopic(request.resource.data);
+      allow update: if (isAdmin() || (isVerifiedTeacher() && resource.data.createdBy == uid()))
+        && resource.data.status != 'published'
+        && !(request.resource.data.status == 'published' && !isAdmin())
+        && request.resource.data.createdBy == resource.data.createdBy
+        && isValidNuTopic(request.resource.data);
+      allow delete: if false;
+    }
+    match /nuLessons/{lessonId} {
+      allow read: if signedIn() && (resource.data.status == 'published' || isAdmin()
+        || (isVerifiedTeacher() && resource.data.createdBy == uid()));
+      allow create: if (isAdmin() || (isVerifiedTeacher() && request.resource.data.createdBy == uid()))
+        && request.resource.data.status == 'draft'
+        && isValidNuLesson(request.resource.data);
+      allow update: if (isAdmin() || (isVerifiedTeacher() && resource.data.createdBy == uid()))
+        && resource.data.status != 'published'
+        && !(request.resource.data.status == 'published' && !isAdmin())
+        && request.resource.data.createdBy == resource.data.createdBy
+        && isValidNuLesson(request.resource.data);
+      allow delete: if false;
+    }
+
     // nuQuestions (§19.3.2): the bank. Students cannot even READ it.
     // The correct answer is NEVER in this document (it lives in
     // nuQuestionKeys). Published questions are never edited in place —
@@ -1874,14 +2117,78 @@ service cloud.firestore {
       allow create: if (isAdmin() || isVerifiedTeacher())
         && request.resource.data.status == 'draft'
         && request.resource.data.version == 1
-        && request.resource.data.explanation is string
-        && request.resource.data.questionText is string
-        && request.resource.data.options is list
-        && request.resource.data.options.size() == 4
-        && !('correctOptionIndex' in request.resource.data);
+        && request.resource.data.createdBy == uid()
+        && request.resource.data.createdAt is timestamp
+        && request.resource.data.createdAt == request.time
+        && isValidNuQuestion(request.resource.data);
+      // (A) Content edit — author-or-Admin, only while draft or
+      // changes_requested, status + version + author unchanged, and
+      // only content keys may change. The state machine lives in (B).
       allow update: if (isAdmin() || (isVerifiedTeacher() && resource.data.createdBy == uid()))
-        && resource.data.status != 'published'
-        && request.resource.data.version == resource.data.version;
+        && resource.data.status in ['draft', 'changes_requested']
+        && request.resource.data.status == resource.data.status
+        && request.resource.data.version == resource.data.version
+        && request.resource.data.createdBy == resource.data.createdBy
+        && request.resource.data.diff(resource.data).affectedKeys().hasOnly(
+             ['questionText', 'questionLang', 'options', 'difficulty',
+              'explanation', 'sourceType', 'provenance', 'examYear',
+              'groupIds', 'subjectId', 'chapterId', 'topicId',
+              'circularVersion', 'updatedAt'])
+        && isValidNuQuestion(request.resource.data);
+      // (B) State transition — graph edges only (§19.6.1), actor per
+      // edge, only status + review/publish bookkeeping keys change.
+      // Submit additionally requires the draft key to exist and match
+      // the question version (1 rules read); publish additionally
+      // requires the full publish gate (reviewer + review time +
+      // valid shape — an unverified question can never publish).
+      allow update: if isNuQuestionTransitionAllowed(resource.data.status, request.resource.data.status)
+        && isNuQuestionTransitionActorOk(resource.data.status, request.resource.data.status)
+        && request.resource.data.version == resource.data.version
+        && request.resource.data.createdBy == resource.data.createdBy
+        && request.resource.data.diff(resource.data).affectedKeys().hasOnly(
+             ['status', 'reviewedBy', 'reviewedAt', 'publishedAt', 'updatedAt'])
+        && (request.resource.data.status != 'submitted_for_review'
+            || (exists(/databases/$(database)/documents/nuQuestionDraftKeys/$(questionId))
+                && get(/databases/$(database)/documents/nuQuestionDraftKeys/$(questionId)).data.version == resource.data.version))
+        && (request.resource.data.status != 'under_review'
+            || (request.resource.data.reviewedBy == uid() && request.resource.data.reviewedAt is timestamp))
+        && (request.resource.data.status != 'published'
+            || (isValidNuQuestion(request.resource.data)
+                && request.resource.data.reviewedBy is string
+                && request.resource.data.reviewedAt is timestamp));
+      allow delete: if false;
+    }
+
+    // nuQuestionDraftKeys (NU-7, §19.2.6): the draft correct answer.
+    // One doc per question (id == questionId), version-locked to the
+    // question. Readable only by Admins and the question's author —
+    // a reviewer reads it while the question is under review only
+    // through the Admin path (subject-scoped key reads are the
+    // §19.3.8 honest limit: `subjects` on the teacher profile is
+    // free text, rules have no string-case functions). A key can
+    // only be created while its question is a draft, and only
+    // changed while the question is still a draft. Never deleted.
+    match /nuQuestionDraftKeys/{questionId} {
+      allow read: if isAdmin() || (isVerifiedTeacher() && resource.data.createdBy == uid())
+        || (isVerifiedTeacher()
+            && exists(/databases/$(database)/documents/nuQuestions/$(questionId))
+            && get(/databases/$(database)/documents/nuQuestions/$(questionId)).data.status == 'under_review'
+            && get(/databases/$(database)/documents/nuQuestions/$(questionId)).data.reviewedBy == uid());
+      allow create: if (isAdmin() || isVerifiedTeacher())
+        && request.resource.data.questionId == questionId
+        && request.resource.data.createdBy == uid()
+        && isValidNuQuestionDraftKey(request.resource.data)
+        && exists(/databases/$(database)/documents/nuQuestions/$(questionId))
+        && get(/databases/$(database)/documents/nuQuestions/$(questionId)).data.status == 'draft'
+        && get(/databases/$(database)/documents/nuQuestions/$(questionId)).data.version == request.resource.data.version;
+      allow update: if (isAdmin() || (isVerifiedTeacher() && resource.data.createdBy == uid()))
+        && request.resource.data.questionId == questionId
+        && request.resource.data.version == resource.data.version
+        && request.resource.data.createdBy == resource.data.createdBy
+        && isValidNuQuestionDraftKey(request.resource.data)
+        && exists(/databases/$(database)/documents/nuQuestions/$(questionId))
+        && get(/databases/$(database)/documents/nuQuestions/$(questionId)).data.status == 'draft'
+        && get(/databases/$(database)/documents/nuQuestions/$(questionId)).data.version == request.resource.data.version;
       allow delete: if false;
     }
 
@@ -1890,8 +2197,10 @@ service cloud.firestore {
     // published bundles are readable; drafts are Admin-only so an
     // Admin can read what they are about to publish.
     match /nuQuestionBundles/{bundleId} {
-      allow read: if resource.data.status == 'published' || isAdmin();
-      allow create, update: if isAdmin();
+      allow read: if (signedIn() && resource.data.status == 'published') || isAdmin();
+      allow create, update: if isAdmin()
+        && request.resource.data.bundleId == bundleId
+        && isValidNuBundle(request.resource.data);
       allow delete: if false;
     }
 
@@ -1904,9 +2213,19 @@ service cloud.firestore {
     // NU-7 adds subject scoping.
     match /nuQuestionKeys/{bundleId} {
       allow read: if isAdmin()
-        || isPracticeNuBundle(bundleId)
-        || hasFreshNuReceipt(bundleId);
-      allow create, update: if isAdmin();
+        || (signedIn() && isPracticeNuBundle(bundleId))
+        || (signedIn() && hasFreshNuReceipt(bundleId));
+      allow create, update: if isAdmin()
+        && request.resource.data.bundleId == bundleId
+        && request.resource.data.questionVersion is int && request.resource.data.questionVersion >= 1
+        && request.resource.data.keys is list && request.resource.data.keys.size() >= 1
+        && request.resource.data.keys[0] is map
+        && request.resource.data.keys[0].questionId is string
+        && request.resource.data.keys[0].version is int && request.resource.data.keys[0].version >= 1
+        && request.resource.data.keys[0].correctOptionIndex is int
+        && request.resource.data.keys[0].correctOptionIndex >= 0 && request.resource.data.keys[0].correctOptionIndex <= 3
+        && exists(/databases/$(database)/documents/nuQuestionBundles/$(bundleId))
+        && request.resource.data.questionVersion == get(/databases/$(database)/documents/nuQuestionBundles/$(bundleId)).data.version;
       allow delete: if false;
     }
 
@@ -1992,10 +2311,12 @@ service cloud.firestore {
     // state machine (draft → submitted_for_review → under_review →
     // approved → published; rejected / changes_requested /
     // withdrawn). Immutable once written; a reviewer can never review
-    // their own question; a rejection / return needs a reason
-    // (≥10 chars). The state transitions themselves are enforced by
-    // the Admin/teacher flow in code (NU-7); the rules pin who may
-    // write the records and that they can never change.
+    // their own question, and can only review a question they claimed
+    // (reviewedBy == uid) while it is under_review; a rejection /
+    // return needs a reason (≥10 chars). The state transitions
+    // themselves are enforced by the question update Rule B (NU-7);
+    // the rules below pin who may write the records and that they
+    // can never change.
     match /nuReviews/{reviewId} {
       allow read: if isAdmin() || (signedIn() && resource.data.reviewerId == uid());
       allow create: if (isAdmin() || isVerifiedTeacher())
@@ -2007,13 +2328,35 @@ service cloud.firestore {
         && (request.resource.data.decision == 'approved'
             || request.resource.data.get('reason', '').size() >= 10)
         && exists(/databases/$(database)/documents/nuQuestions/$(request.resource.data.questionId))
-        && get(/databases/$(database)/documents/nuQuestions/$(request.resource.data.questionId)).data.createdBy != uid();
+        && get(/databases/$(database)/documents/nuQuestions/$(request.resource.data.questionId)).data.createdBy != uid()
+        && request.resource.data.questionVersion is int
+        && request.resource.data.questionVersion == get(/databases/$(database)/documents/nuQuestions/$(request.resource.data.questionId)).data.version
+        && get(/databases/$(database)/documents/nuQuestions/$(request.resource.data.questionId)).data.status == 'under_review'
+        && get(/databases/$(database)/documents/nuQuestions/$(request.resource.data.questionId)).data.reviewedBy == uid()
+        && request.resource.data.checks is map
+        && request.resource.data.checks.questionCorrect is bool
+        && request.resource.data.checks.correctAnswerCorrect is bool
+        && request.resource.data.checks.explanationCorrect is bool
+        && request.resource.data.checks.sourceCorrect is bool
+        && request.resource.data.reviewedAt is timestamp
+        && request.resource.data.reviewedAt == request.time;
       allow update, delete: if false;
     }
     match /nuPublications/{publicationId} {
       allow read: if isAdmin();
       allow create: if isAdmin()
-        && request.resource.data.action in ['published', 'withdrawn'];
+        && request.resource.data.action in ['published', 'withdrawn']
+        && request.resource.data.actorId == uid()
+        && request.resource.data.createdAt is timestamp
+        && request.resource.data.createdAt == request.time
+        && request.resource.data.questionId is string
+        && request.resource.data.questionVersion is int
+        && exists(/databases/$(database)/documents/nuQuestions/$(request.resource.data.questionId))
+        && request.resource.data.questionVersion == get(/databases/$(database)/documents/nuQuestions/$(request.resource.data.questionId)).data.version
+        && ((request.resource.data.action == 'published'
+             && get(/databases/$(database)/documents/nuQuestions/$(request.resource.data.questionId)).data.status == 'published')
+            || (request.resource.data.action == 'withdrawn'
+             && get(/databases/$(database)/documents/nuQuestions/$(request.resource.data.questionId)).data.status == 'withdrawn'));
       allow update, delete: if false;
     }
 

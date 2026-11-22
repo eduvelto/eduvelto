@@ -9,6 +9,7 @@ import HeaderNav from './components/HeaderNav';
 import Footer from './components/Footer';
 import InstallAppPrompt from './components/InstallAppPrompt';
 import { AdminGuard } from './components/AdminGuard';
+import { NuQuestionWorkbenchGuard } from './components/NuQuestionWorkbenchGuard';
 import { T, useLanguage } from './i18n/LanguageContext';
 // SCALE (10k users): route-level code splitting. Before this change the
 // first visit downloaded ALL 35 pages in one 909 kB bundle (admin pages
@@ -51,6 +52,8 @@ const AdminFeaturesPage = lazy(() => import('./pages/AdminFeaturesPage'));
 const AdminBackupPage = lazy(() => import('./pages/AdminBackupPage'));
 const AdminAuditPage = lazy(() => import('./pages/AdminAuditPage'));
 const AdminNuStructurePage = lazy(() => import('./pages/AdminNuStructurePage'));
+const AdminNuSyllabusPage = lazy(() => import('./pages/AdminNuSyllabusPage'));
+const AdminNuQuestionsPage = lazy(() => import('./pages/AdminNuQuestionsPage'));
 // NU-5: National University admission hub (design §5) — index, hub +
 // 8 tabs, group pages, candidate dashboard. Static group routes rank
 // above the hub's `:tab` route, so the two never collide.
@@ -92,6 +95,8 @@ const PrivacyPage = lazy(() => import('./pages/PrivacyPage'));
 const AdmissionsIndexPage = lazy(() => import('./pages/AdmissionsIndexPage'));
 const NuHubPage = lazy(() => import('./pages/NuHubPage'));
 const NuGroupPage = lazy(() => import('./pages/NuGroupPage'));
+const NuSubjectPage = lazy(() => import('./pages/NuSubjectPage'));
+const NuTopicPage = lazy(() => import('./pages/NuTopicPage'));
 const AdmissionsDashboardPage = lazy(() => import('./pages/AdmissionsDashboardPage'));
 
 // Step 5 — role-based dashboards: /dashboard routes by the signed-in
@@ -199,6 +204,12 @@ export default function App() {
         <Route path="/admissions/national-university/humanities" element={<NuGroupPage group="humanities" />} />
         <Route path="/admissions/national-university/science" element={<NuGroupPage group="science" />} />
         <Route path="/admissions/national-university/business" element={<NuGroupPage group="business" />} />
+        {/* NU-6 (design §5.4): subject → chapter → topic pages. Five
+            segments, so they never match the hub's 3-segment `:tab`
+            route; a wrong group/subject/topic slug shows the page's
+            own honest "not found" card. */}
+        <Route path="/admissions/national-university/:group/subjects/:subject" element={<NuSubjectPage />} />
+        <Route path="/admissions/national-university/:group/subjects/:subject/:topic" element={<NuTopicPage />} />
         <Route path="/admissions/national-university/:tab" element={<NuHubPage />} />
         {/* Class-wise navigation (stage 3): Select Class → Class Dashboard → Tab → Subject → Book → Chapter. */}
         <Route path="/class/:slug/subjects/:dept" element={<ClassSubjectPage />} />
@@ -241,6 +252,8 @@ export default function App() {
           <Route path="jobs" element={<AdminJobsPage />} />
           <Route path="admissions" element={<AdminAdmissionsPage />} />
           <Route path="admissions/structure" element={<AdminNuStructurePage />} />
+          <Route path="admissions/syllabus" element={<AdminNuSyllabusPage />} />
+          <Route path="admissions/questions" element={<NuQuestionWorkbenchGuard><AdminNuQuestionsPage /></NuQuestionWorkbenchGuard>} />
           <Route path="analytics" element={<AdminAnalyticsPage />} />
           <Route path="settings" element={<AdminSettingsPage />} />
           <Route path="content" element={<AdminContentPage />} />

@@ -160,6 +160,8 @@ async function seed() {
       provenance: 'test seed',
       groupIds: ['humanities'],
       subjectId: 'bangla',
+      chapterId: 'nu-ch-bangla-prose',
+      topicId: 'nu-tp-bangla-prose-01',
       questionText: 'Test question?',
       questionLang: 'bn',
       options: ['ক', 'খ', 'গ', 'ঘ'],
@@ -176,6 +178,16 @@ async function seed() {
       ...questionBase,
       status: 'draft',
       createdBy: 'admin-1',
+    });
+    // Under review, claimed by the verified teacher — the only
+    // question a review record may be written for (NU-7 rule:
+    // status under_review + reviewedBy == reviewer).
+    await setDoc(doc(db, 'nuQuestions', 'q-admin-under-review'), {
+      ...questionBase,
+      status: 'under_review',
+      createdBy: 'admin-1',
+      reviewedBy: 'teacher-verified',
+      reviewedAt: new Date('2026-11-22T05:10:00Z'),
     });
     await setDoc(doc(db, 'nuQuestions', 'q-pub-1'), {
       ...questionBase,
@@ -533,7 +545,9 @@ describe('NU-4 rules — question bank, bundles, keys (NU-T3…T6, T16, T17)', (
         sourceType: 'original_practice',
         provenance: 'test',
         groupIds: ['science'],
-        subjectId: 'physics',
+        subjectId: 'bangla',
+        chapterId: 'nu-ch-bangla-prose',
+        topicId: 'nu-tp-bangla-prose-01',
         questionText: 'New?',
         questionLang: 'bn',
         options: ['ক', 'খ', 'গ', 'ঘ'],
@@ -541,6 +555,7 @@ describe('NU-4 rules — question bank, bundles, keys (NU-T3…T6, T16, T17)', (
         explanation: 'Because.',
         circularVersion: 'nu-2025-26-v1',
         createdBy: 'teacher-verified',
+        createdAt: serverTimestamp(),
       }),
     );
   });
@@ -552,7 +567,9 @@ describe('NU-4 rules — question bank, bundles, keys (NU-T3…T6, T16, T17)', (
         sourceType: 'original_practice',
         provenance: 'test',
         groupIds: ['science'],
-        subjectId: 'physics',
+        subjectId: 'bangla',
+        chapterId: 'nu-ch-bangla-prose',
+        topicId: 'nu-tp-bangla-prose-01',
         questionText: 'New?',
         questionLang: 'bn',
         options: ['ক', 'খ', 'গ', 'ঘ'],
@@ -560,6 +577,7 @@ describe('NU-4 rules — question bank, bundles, keys (NU-T3…T6, T16, T17)', (
         explanation: 'Because.',
         circularVersion: 'nu-2025-26-v1',
         createdBy: 'teacher-unverified',
+        createdAt: serverTimestamp(),
       }),
     );
   });
@@ -571,7 +589,9 @@ describe('NU-4 rules — question bank, bundles, keys (NU-T3…T6, T16, T17)', (
         sourceType: 'original_practice',
         provenance: 'test',
         groupIds: ['science'],
-        subjectId: 'physics',
+        subjectId: 'bangla',
+        chapterId: 'nu-ch-bangla-prose',
+        topicId: 'nu-tp-bangla-prose-01',
         questionText: 'New?',
         questionLang: 'bn',
         options: ['ক', 'খ', 'গ', 'ঘ'],
@@ -579,6 +599,7 @@ describe('NU-4 rules — question bank, bundles, keys (NU-T3…T6, T16, T17)', (
         explanation: 'Because.',
         circularVersion: 'nu-2025-26-v1',
         createdBy: 'student-1',
+        createdAt: serverTimestamp(),
       }),
     );
   });
@@ -590,7 +611,9 @@ describe('NU-4 rules — question bank, bundles, keys (NU-T3…T6, T16, T17)', (
         sourceType: 'original_practice',
         provenance: 'test',
         groupIds: ['science'],
-        subjectId: 'physics',
+        subjectId: 'bangla',
+        chapterId: 'nu-ch-bangla-prose',
+        topicId: 'nu-tp-bangla-prose-01',
         questionText: 'New?',
         questionLang: 'bn',
         options: ['ক', 'খ', 'গ', 'ঘ'],
@@ -599,6 +622,7 @@ describe('NU-4 rules — question bank, bundles, keys (NU-T3…T6, T16, T17)', (
         explanation: 'Because.',
         circularVersion: 'nu-2025-26-v1',
         createdBy: 'admin-1',
+        createdAt: serverTimestamp(),
       }),
     );
   });
@@ -782,11 +806,11 @@ describe('NU-4 rules — reviews and publications', () => {
   it('(n57) verified teacher reviews another teacher/admin question: ALLOWED', async () => {
     await assertSucceeds(
       setDoc(doc(asTeacherVerified(), 'nuReviews', 'review-other'), {
-        questionId: 'q-admin-1',
+        questionId: 'q-admin-under-review',
         questionVersion: 1,
         reviewerId: 'teacher-verified',
         decision: 'approved',
-        checks: { questionOk: true, answerOk: true, explanationOk: true, sourceOk: true },
+        checks: { questionCorrect: true, correctAnswerCorrect: true, explanationCorrect: true, sourceCorrect: true },
         reviewedAt: serverTimestamp(),
       }),
     );
