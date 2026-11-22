@@ -184,3 +184,41 @@ ComingSoon `/jobs` route.
 - **Screenshots — not obtained** (headless Chrome blocked by the
   sandbox egress proxy, as before). The server-render test + the
   owner's phone check are the visual proof.
+
+### Second rebase — auth-gating landed on main first (22 Nov ~14:00)
+
+While the first preview was being verified, `origin/main` moved:
+`671d32c` (merge of `feature/auth-gating-exams-reading`) landed. The
+branch was rebased a second time onto `671d32c` — **clean, zero
+conflicts** — new HEAD `53a2977` (commits `da137c8` + `0514fba` +
+`53a2977` on top of `671d32c`). Verified after the rebase: single
+`/jobs` route → `<JobsPage />` (App.tsx line 187) AND the auth-gating
+code present (`পরীক্ষা দিতে লগইন করুন` in `src/lib/gating.ts` +
+`ExamPage.tsx`, `isPreview` in `src/lib/content.ts`). Rebuilt +
+re-verified on the rebased HEAD: build PASS, unit **131/131 PASS**,
+rules **434/434 PASS** (14 files, sequential — see below), preview
+re-deployed to the same channel (new bundle hash
+`index-gIYds9XO.js`; button, fonts link, font in CSS, and the
+auth-gating `LoginWall` chunk all confirmed served). Merging this
+branch therefore ships the i18n changes **together with** the
+auth-gating changes already on main — the production hosting deploy
+cannot serve i18n without auth-gating.
+
+### Rules-suite flake (documented, not a product issue)
+
+- First full run on the rebased tree (`i18n-rules5.log`): 432/434 —
+  2 failures, both in `rules-step2.test.ts` (teacher draft-create of
+  a book / a lesson, `PERMISSION_DENIED` evaluation error inside
+  `contentCreate()`). **This branch changes no rules and no tests**
+  (`git diff 671d32c HEAD -- firestore.rules emulator-tests/` is
+  empty), so the failure cannot be from this branch.
+- Isolated re-run of that one file (`i18n-rules-step2-only.log`):
+  **25/25 PASS**, exit 0.
+- Full re-run (`i18n-rules6.log`): **14 files, 434/434 PASS**,
+  exit 0. The pair is a flaky emulator failure in the full-suite run,
+  not a rules regression. (An earlier rules run also failed once with
+  exit 127 because `java` was not on PATH in the fresh shell — the
+  bundled JRE `~/workspace/eduorbit/tools/jdk-17.0.21.1+2-jre/bin`
+  must be prepended; the `npm run test:rules` script's bare `vitest`
+  also fails with 127 under `emulators:exec` — use the explicit
+  `./node_modules/.bin/vitest` path.)
