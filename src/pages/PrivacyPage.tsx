@@ -5,10 +5,15 @@
 // platform for Bangladesh. It states what is collected (account +
 // learning progress), that student data is NEVER sold, the child-safety
 // and guardian rules, and that ads are non-personalised only.
-// Contact: ahmmizan23@gmail.com. Last updated 21 November 2026.
-// NOTE: ads are NOT active on the site yet — the ad slots are placeholders
-// (Launch step 6). This policy already covers how ads will work when they
-// launch, so no policy change is needed at launch.
+// Contact: ahmmizan23@gmail.com. Last updated 22 November 2026.
+// NOTE: ads are NOT active on the site yet — the AdSense verification
+// script loads (index.html), but no ad unit renders until activation is
+// separately approved (Launch step 6). This policy already covers how ads
+// will work when they launch, so no policy change is needed at launch.
+// EXAM ADS (binding, owner brief 20 Nov 21:52): the persistent bottom
+// banner appears on ALL eligible pages INCLUDING exams — the old
+// "no ads during exams" wording was removed 22 Nov 2026; exam pages
+// show ONLY the very small bottom banner, never any other ad.
 
 import { PageShell } from '../components/PageShell';
 import { Card } from '../components/ui';
@@ -29,7 +34,7 @@ export default function PrivacyPage() {
   return (
     <PageShell titleBn="গোপনীয়তা নীতি" titleEn="Privacy Policy — Eduvelto" wide>
       <p style={{ color: '#57616A', margin: '0 0 20px', lineHeight: 1.7 }}>
-        {t({ bn: 'সর্বশেষ হালনাগাদ: ২১ নভেম্বর ২০২৬।', en: 'Last updated: 21 November 2026.' })} Eduvelto বাংলাদেশের
+        {t({ bn: 'সর্বশেষ হালনাগাদ: ২২ নভেম্বর ২০২৬।', en: 'Last updated: 22 November 2026.' })} Eduvelto বাংলাদেশের
         শিক্ষার্থীদের জন্য একটি সম্পূর্ণ বিনামূল্যের শিক্ষা প্ল্যাটফর্ম। এই নীতিতে বলা আছে আমরা
         কী তথ্য সংগ্রহ করি, কেন করি, আর আপনার তথ্য কীভাবে সুরক্ষিত থাকে।
       </p>
@@ -109,14 +114,20 @@ export default function PrivacyPage() {
           </li>
           <li>বিজ্ঞাপনের জন্য শিক্ষার্থীদের আলাদাভাবে ট্র্যাক করা হয় না।</li>
           <li>
-            পরীক্ষা চলাকালীন কোনো বিজ্ঞাপন দেখানো হয় না; পড়া, অধ্যায় শেখা, অনুশীলন, ফলাফল বা
-            লগইন পাতায় বিজ্ঞাপন পড়া/শেখায় বাধা দেয় না।
+            <strong>পরীক্ষার পাতায় শুধু নিচের ছোট ব্যানার:</strong> পরীক্ষা চলাকালীন নিচে
+            একটি খুব ছোট ব্যানার বিজ্ঞাপন দেখানো হয় (মোবাইলে প্রায় ৫০ পিক্সেল) — এর বেশি
+            আর কোনো বিজ্ঞাপন নয়, আর ব্যানারটি কখনো প্রশ্ন, উত্তর বা বোতাম ঢাকে না।
+          </li>
+          <li>
+            তালিকার ভেতরের বিজ্ঞাপন শুধু হোম ও লাইব্রেরির তালিকায় থাকে — পাঠ, কুইজ বা
+            পরীক্ষার ভেতরে কখনো নয়।
           </li>
         </ul>
         <p style={{ margin: '10px 0 0' }}>
           <em>
-            দ্রষ্টব্য: সাইটে এখনো বিজ্ঞাপন চালু হয়নি — বিজ্ঞাপনের জায়গাগুলো শুধু placeholder হিসেবে
-            দেখানো হচ্ছে। বিজ্ঞাপন চালু হলেও এই নীতিই প্রযোজ্য থাকবে।
+            দ্রষ্টব্য: সাইটে এখনো বিজ্ঞাপন চালু হয়নি — Google AdSense-এর যাচাইকরণ কোড
+            আছে, কিন্তু কোনো বিজ্ঞাপন দেখানো হয় না। বিজ্ঞাপন চালু হলেও এই নীতিই
+            প্রযোজ্য থাকবে।
           </em>
         </p>
       </Section>
@@ -132,8 +143,12 @@ export default function PrivacyPage() {
 
       <Section bn="৭. কুকি" en="7. Cookies">
         <p style={{ margin: 0 }}>
-          সাইটটি শুধু লগইন সেশন ও আপনার পছন্দ (যেমন ভাষা) সংরক্ষণের জন্য কুকি ব্যবহার করে।
-          বিজ্ঞাপন চালু না থাকায় এখন কোনো বিজ্ঞাপন-কুকি বা তৃতীয় পক্ষের ট্র্যাকার নেই।
+          সাইটটি শুধু লগইন সেশন ও আপনার পছন্দ (যেমন ভাষা ও থিম) সংরক্ষণের জন্য কুকি
+          ও লোকাল স্টোরেজ ব্যবহার করে। Google AdSense-এর যাচাইকরণ কোড সাইটে লোড
+          হয়, কিন্তু এখনো কোনো বিজ্ঞাপন দেখানো হয় না, তাই বিজ্ঞাপন-কুকি দিয়ে
+          আপনাকে ট্র্যাক করা হয় না। বিজ্ঞাপন চালু হলে Google AdSense কুকি ব্যবহার
+          করতে পারে — তবে বিজ্ঞাপন হবে নন-পার্সোনালাইজড, আপনার তথ্য দিয়ে টার্গেট
+          করা হবে না।
         </p>
       </Section>
 

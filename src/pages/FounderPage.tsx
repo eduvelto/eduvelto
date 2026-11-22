@@ -42,7 +42,7 @@ const STAR_GOLD = '#F1B308';
 
 const CANONICAL = 'https://eduvelto.com/founder';
 
-const PERSON_JSON_LD = {
+export const PERSON_JSON_LD = {
   '@context': 'https://schema.org',
   '@type': 'Person',
   '@id': 'https://eduvelto.com/founder#person',
@@ -86,7 +86,7 @@ const PROFILE_PAGE_JSON_LD = {
   isPartOf: { '@type': 'WebSite', name: 'Eduvelto', url: 'https://eduvelto.com' },
 };
 
-const ORGANIZATION_JSON_LD = {
+export const ORGANIZATION_JSON_LD = {
   '@context': 'https://schema.org',
   '@type': 'Organization',
   '@id': 'https://eduvelto.com#organization',
@@ -103,12 +103,11 @@ const ORGANIZATION_JSON_LD = {
     address: { '@type': 'PostalAddress', addressCountry: 'BD', addressLocality: "Cox's Bazar" },
   },
   founder: { '@id': 'https://eduvelto.com/founder#person' },
-  sameAs: [
-    'https://www.facebook.com/ahmmmizan',
-    'https://www.youtube.com/@alihasanmdmizan',
-    'https://www.instagram.com/ahmmmizan',
-    'https://www.tiktok.com/@ahmmizan',
-  ],
+  // sameAs is EMPTY by design — no Eduvelto organization profiles exist
+  // yet (see src/lib/seo.ts ORGANIZATION_JSON_LD). The founder's personal
+  // profiles (facebook.com/ahmmmizan etc.) belong to the Person block
+  // above, not to the Organization, so they are NOT listed here.
+  sameAs: [] as string[],
 };
 
 const BREADCRUMB_JSON_LD = {
