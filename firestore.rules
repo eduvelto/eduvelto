@@ -633,17 +633,25 @@ service cloud.firestore {
     // receipt in the console and read a key — on Spark this cannot
     // be fully closed; scores are therefore NEVER shown as
     // "Verified" (every result page is labelled "অনুশীলন ফলাফল").
+    // NOTE: rules have no `let` — the receipt/attempt docs are
+    // fetched through these two helpers (each call is a fresh
+    // get(); the exists() guards run first, so a missing doc never
+    // errors the rule into a deny-by-exception).
+    function jobReceiptData(bundleId) {
+      return get(/databases/$(database)/documents/jobReceipts/$(uid() + '_' + bundleId)).data;
+    }
+    function jobReceiptAttemptData(bundleId) {
+      return get(/databases/$(database)/documents/users/$(uid())/jobAttempts/$(jobReceiptData(bundleId).attemptId)).data;
+    }
     function hasFreshJobReceipt(bundleId) {
       return signedIn() && callerActive()
         && exists(/databases/$(database)/documents/jobReceipts/$(uid() + '_' + bundleId))
-        && (let receipt = get(/databases/$(database)/documents/jobReceipts/$(uid() + '_' + bundleId)).data;
-            receipt.createdAt > request.time - duration.value(10, 'm')
-            && receipt.attemptId is string
-            && exists(/databases/$(database)/documents/users/$(uid())/jobAttempts/$(receipt.attemptId))
-            && (let attempt = get(/databases/$(database)/documents/users/$(uid())/jobAttempts/$(receipt.attemptId)).data;
-                attempt.status == 'submitted'
-                && attempt.bundleId == bundleId
-                && attempt.userId == uid()));
+        && jobReceiptData(bundleId).createdAt > request.time - duration.value(10, 'm')
+        && jobReceiptData(bundleId).attemptId is string
+        && exists(/databases/$(database)/documents/users/$(uid())/jobAttempts/$(jobReceiptData(bundleId).attemptId))
+        && jobReceiptAttemptData(bundleId).status == 'submitted'
+        && jobReceiptAttemptData(bundleId).bundleId == bundleId
+        && jobReceiptAttemptData(bundleId).userId == uid();
     }
 
     // ---------- users.verificationStatus ----------
@@ -2472,10 +2480,9 @@ service cloud.firestore {
         && request.resource.data.get('attemptId', null) is string
         && request.resource.data.get('createdAt', null) is timestamp
         && exists(/databases/$(database)/documents/users/$(uid())/jobAttempts/$(request.resource.data.get('attemptId', '')))
-        && (let attempt = get(/databases/$(database)/documents/users/$(uid())/jobAttempts/$(request.resource.data.get('attemptId', ''))).data;
-            attempt.status == 'submitted'
-            && attempt.bundleId == request.resource.data.get('bundleId', '')
-            && attempt.userId == uid());
+        && get(/databases/$(database)/documents/users/$(uid())/jobAttempts/$(request.resource.data.get('attemptId', ''))).data.status == 'submitted'
+        && get(/databases/$(database)/documents/users/$(uid())/jobAttempts/$(request.resource.data.get('attemptId', ''))).data.bundleId == request.resource.data.get('bundleId', '')
+        && get(/databases/$(database)/documents/users/$(uid())/jobAttempts/$(request.resource.data.get('attemptId', ''))).data.userId == uid();
       allow update: if false;
       allow delete: if signedIn() && resource.data.get('userId', '') == uid();
     }
