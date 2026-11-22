@@ -4,7 +4,7 @@
 **পরিসর:** Job Preparation সেকশন ONLY · **ব্রাঞ্চ:** `jobs/section-structure`
 **ভিত্তি:** `team/job-architecture-schema-step3.md` §২.১১, §২.১২, §৩.৮, §৪, §৫ · Step 7 রিপোর্ট (`team/job-question-bank-step7.md`, CLOSED) · Step 7 ফোল্ড-ইন (রসিদ = ১০-মিনিটের attempt-বাঁধা উইন্ডো, "জমা দেওয়া" = client-attested)
 **বাজেট:** ৳০ — কোনো পেইড সার্ভিস নয় · **মার্জ/প্রোডাকশন ডেপ্লয়:** হয়নি · **লাইভ ডাটাবেস:** ছোঁয়া হয়নি (শুধু এমুলেটর)
-**অবস্থা:** **Step 8 নিয়ম সম্পূর্ণ** — পূর্ণ নিয়ম-স্যুট ৬৭৬/৬৭৬ PASS (নিচে §যাচাই-প্রমাণ)
+**অবস্থা:** **Step 8 নিয়ম সম্পূর্ণ + ChatGPT ফোল্ড-ইন সম্পূর্ণ** — পূর্ণ নিয়ম-স্যুট ৬৯৬/৬৯৬ PASS (নিচে §যাচাই-প্রমাণ) · ফোল্ড-ইন: USED ৮ / ADAPTED ২ / REJECTED ১ (finding #৮ খোলা কনটেন্ট-ব্লকার — Step 8 বন্ধ হয়নি)
 
 ---
 
@@ -12,7 +12,7 @@
 
 Step 7-এর সর্বনিম্ন attempt-নোঙরকে **পূর্ণ attempt**-এ বদলানো হয়েছে (Step 3 §২.১১) আর **নতুন `users/{uid}/jobSessions`** সাবকালেকশন যোগ করা হয়েছে (Step 3 §২.১২) — অনুশীলন + মক, এক ইঞ্জিন, এক নিয়ম-সেট। attempt ডক তৈরি হয় **জমার মুহূর্তে একবার**, `status: 'submitted'` + পূর্ণ ক্ষেত্রসহ; চলমান অবস্থা (অটোসেভ/পুনরুদ্ধার) থাকে সেশনে। রসিদ/চাবির নিয়ম (Step 7) আচরণে **অপরিবর্তিত** — রসিদ এখনো ১০-মিনিটের attempt-বাঁধা উইন্ডো, নোঙর এখনো জমা-দেওয়া attempt; শুধু নোঙরের আকৃতি বদলেছে (নিচে §Step 7 থেকে যা বদলেছে)। **ব্যাংক এখনো খালি — ০টি প্রশ্ন, ০টি বান্ডল, ০টি চাবি, ০ যাচাইকৃত শিক্ষক।** এই ধাপে কোনো lib/UI লেখা হয়নি — `src/lib/jobEngine.ts` + UI অন্য এজেন্টের (এই রিপোর্ট শুধু নিয়ম + পরীক্ষা)।
 
-**যা করা হয়েছে:** `firestore.rules` (+~২২৪ লাইন নিট): `jobAttempts` ম্যাচ সম্পূর্ণ পুনর্লিখন + `jobSessions` ম্যাচ নতুন + ৬টি হেল্পার (`jobBundleData`, `jobSessionData`, `jobBundleKindFitsAttemptKind`, `validJobAttemptCreate`, `validJobSessionCreate`, `validJobSessionUpdate`)। পরীক্ষা: নতুন ফাইল `emulator-tests/rules-step8-practice-engine.test.ts` (**৬৪টি কেস s1–s64**) + Step 7-এর দুটি পরীক্ষা-ফাইল নতুন মডেলে পুনর্লিখন (q66, q75, q80–q92; a5)।
+**যা করা হয়েছে:** `firestore.rules` (+~২২৪ লাইন নিট core + ফোল্ড-ইন ~৬৫ লাইন): `jobAttempts` ম্যাচ সম্পূর্ণ পুনর্লিখন + `jobSessions` ম্যাচ নতুন + ৬টি হেল্পার (`jobBundleData`, `jobSessionDataAfter`, `jobBundleKindFitsAttemptKind`, `validJobAttemptCreate`, `validJobSessionCreate`, `validJobSessionUpdate`)। পরীক্ষা: নতুন ফাইল `emulator-tests/rules-step8-practice-engine.test.ts` (**৭৮টি কেস s1–s78** — core ৬৪ + ফোল্ড-ইন ১৪) + Step 7-এর দুটি পরীক্ষা-ফাইল নতুন মডেলে পুনর্লিখন (q66, q75, q80–q92; a5)।
 
 ---
 
@@ -26,12 +26,12 @@ Step 7-এ attempt তৈরি হতো `in-progress` অবস্থায়
 - **Step 3 §২.১১-এর সঙ্গে সঙ্গতি:** "doc-ID = session ID = idempotency key: একই ID-তে দ্বিতীয় জমা নিয়মে `update` হিসেবে গণ্য হয় ও নিষিদ্ধ" — নতুন মডেলে এটাই আক্ষরিক সত্য (create-মাত্র, update কখনো নয়)।
 - **রসিদ-গেট অপরিবর্তিত:** রসিদ তৈরির নিয়ম এখনো `status == 'submitted'` attempt চায় — শুধু সেই attempt-এর আকৃতি এখন পূর্ণ। q64/q65/q73/q75/q76-এর নিরাপত্তা-অভিপ্রায় একই আছে, পরীক্ষাগুলো নতুন আকৃতিতে পুনর্লিখিত হয়েছে।
 
-### ২. সেশন-গেট — attempt তৈরিতে সেশন `submitted` হতেই হবে
+### ২. সেশন-গেট — attempt তৈরিতে সেশন `submitted` হতেই হবে (ফোল্ড-ইন M2: `getAfter()` + identity-বাঁধা)
 
-Step 3 §৩.৮-এর খসড়া attempt তৈরিতে সেশন `in-progress` + সময়সীমা-গ্রেস চেয়েছিল। Step 8 তার **উল্টো** সিদ্ধান্ত নিয়েছে: attempt তৈরি হতে হলে **একই doc-ID-র সেশনটি ইতিমধ্যে `submitted`** হতে হবে, একই bundle-এর জন্য। কারণ:
+Step 3 §৩.৮-এর খসড়া attempt তৈরিতে সেশন `in-progress` + সময়সীমা-গ্রেস চেয়েছিল। Step 8 তার **উল্টো** সিদ্ধান্ত নিয়েছে: attempt তৈরি হতে হলে **একই doc-ID-র সেশনটি ইতিমধ্যে `submitted`** হতে হবে, একই bundle-এর জন্য। ফোল্ড-ইন M2-এ গেটটি আরও কঠোর হয়েছে: attempt-নিয়ম `getAfter()` দিয়ে সেশনের **জমা-পরবর্তী** অবস্থা পড়ে — অর্থাৎ একই batched write-এ সেশন submitted + attempt তৈরি একসঙ্গে যাচাই হয় (ক্রমিক প্রবাহও চলে: `getAfter()` ব্যাচে না-থাকা সেশনে সংরক্ষিত ডকই পড়ে)। গেট বাঁধে: `status == 'submitted'` + `bundleId` + `kind` + `examSlug` + `mockId` + `questionRefs.size() == answers.size()` — attempt সেশনের চেয়ে বেশি/কম প্রশ্নের উত্তর বয়ে আনতে পারে না (পরীক্ষা s76)। কারণ:
 
-- **জমার ক্রম একটাই:** ক্লায়েন্ট জমার প্রবাহে প্রথমে সেশন `submitted` করে (`submittedAt` সহ), তারপর attempt তৈরি করে, তারপর রসিদ তৈরি করে। সেশন-গেট সেই ক্রমকে নিয়মে বাঁধে — সেশন ছাড়া, চলমান সেশনে, বা বাতিল সেশনে attempt তৈরি হয় না (পরীক্ষা s30/s31/s32)।
-- **kind/examSlug/mockId সেশনের সঙ্গে আলাদা করে মেলানো হয়নি** — তা transitively আসে: সেশন-তৈরি আর attempt-তৈরি দুটোই kind + examSlug + mockId-কে **একই বান্ডলের** সঙ্গে বাঁধে (বান্ডলের `kind`/`examSlug`/`mockId`-র বিরুদ্ধে যাচাই)। মক-সেশন টপিক-বান্ডলে থাকতে পারে না, অনুশীলন-সেশন মক-বান্ডলে থাকতে পারে না — তাই একই bundle-এর `submitted` সেশন মানেই সঙ্গতিপূর্ণ সেশন (নিয়মে লেখা যুক্তি; `validJobAttemptCreate`-এর মন্তব্য দেখুন)।
+- **জমার ক্রম একটাই:** ক্লায়েন্ট জমার প্রবাহে এক batched write-এ সেশন `submitted` করে (`submittedAt` + `revision` +১ সহ) আর attempt তৈরি করে, তারপর রসিদ তৈরি করে। সেশন-গেট সেই ক্রমকে নিয়মে বাঁধে — সেশন ছাড়া, চলমান সেশনে, বা বাতিল সেশনে attempt তৈরি হয় না (পরীক্ষা s30/s31/s32)।
+- **kind/examSlug/mockId আর transitive নয়** — M2-এর আগে তা transitively আসত (একই বান্ডলের সঙ্গে বাঁধা বলে); এখন নিয়ম সরাসরি সেশনের সঙ্গে মেলায় (পরীক্ষা s77/s78 — batched জমা SUCCEEDS, stale revision-সহ batched জমা atomically DENIED, কোনো attempt তৈরি হয় না)।
 - **মক-দেরির গ্রেস নেই:** খসড়ার ১৫-মিনিটের endsAt-গ্রেস বাদ দেওয়া হয়েছে — গ্রেস যাচাই করতে সেশনের `endsAt` পড়তে হতো, আর সেশন `submitted` হওয়ার মুহূর্তটাই ক্লায়েন্ট ঠিক করে। দেরিতে জমা দেওয়া মক (গ্রেস পেরিয়ে) ক্লায়েন্ট `abandoned` হিসেবে চিহ্নিত করে, আর বাতিল সেশনে attempt তৈরি হয় না। এটি client-trust সীমারই অংশ (§সৎ ফাঁক)।
 
 ### ৩. examSlug — প্রামাণিক ১৪টি হাব-স্লাগ; `'common'` নেই
@@ -42,13 +42,14 @@ Step 3 §৩.৮-এর খসড়া attempt তৈরিতে সেশন 
 
 attempt ও সেশন — দুটোতেই: `kind: 'practice'` হলে বান্ডলের `kind` হতে হবে `'topic'` বা `'previous'` (বিগত-বছরের সেট টপিক-ধাঁচে অনুশীলন করা হয়); `kind: 'mock'` হলে `'mock'`/`'daily'`/`'weekly'` (দৈনিক/সাপ্তাহিক বান্ডল মক-ধরনের — ID `daily__{mockId}`/`weekly__{mockId}`)। মকে বান্ডলের `mockId` == attempt/session-এর `mockId` বাধ্য। এটি Step 3-এ স্পষ্ট লেখা ছিল না — Step 8-এর নতুন সিদ্ধান্ত; পরীক্ষা s34/s35/s49 পিন করে।
 
-### ৫. নেগেটিভ-ডিডাকশন — প্রয়োগযোগ্য আসন্ন মান (exact formula নয়)
+### ৫. নেগেটিভ-ডিডাকশন — exact সূত্র (ফোল্ড-ইন M1: `negativeMarkingUsed`-এর বিরুদ্ধে)
 
-`score == correctCount*marksPerQuestion − wrongCount*negativeMarking` — এই exact formula নিয়মে যাচাই করা **যায় না**: `marksPerQuestion`/`negativeMarking` attempt-এ সংরক্ষিত নয়, আর নিয়ম `jobExams`-এর `rulesConfig` পড়ে না (get()-বাজেটের কারণে — নিচে #৭)। প্রয়োগযোগ্য আসন্ন মান:
+`score == correctCount*marksPerQuestion − wrongCount*negativeMarking` — এই exact formula নিয়মে যাচাই করা **যায় না**: `marksPerQuestion`/`negativeMarking` attempt-এ সংরক্ষিত নয়, আর নিয়ম `jobExams`-এর `rulesConfig` পড়ে না (get()-বাজেটের কারণে — নিচে #৮)। ফোল্ড-ইন M1-এ যা বলবৎ হয়:
 
-- `negativeDeduction == wrongCount*0.25` **অথবা** `wrongCount*0.5` (যাচাইকৃত দুটি মানই: প্রাথমিক/NTRCA/ব্যাংক ০.২৫, BCS ০.৫০; ০.২৫/০.৫ ধাপ double-এ exact)।
+- `negativeMarkingUsed ∈ {0, 0.25, 0.5}` (attempt-এ সংরক্ষিত, যে হার প্রয়োগ হয়েছে) + `markingSchemeVersion` non-empty (≤১০০ অক্ষর) + `bundleVersion` int ≥ ১।
+- **`negativeDeduction == wrongCount * negativeMarkingUsed`** — exact, আর আসন্ন মান নয় (আগের `wrongCount*0.25 বা *0.5` বাতিল)। ব্যাংকে `negativeMarkingUsed == 0` বলে deduction ০-ই হতে হবে — ব্যাংক ০.২৫ দাবি করলে নিয়ম প্রত্যাখ্যান করে (পরীক্ষা s65–s70)।
 - `score == clientCalculatedScore` + আলগা সীমা `−totalMarks ≤ score ≤ totalMarks` (marksPerQuestion ≥ ১ ও negative ≤ ০.৫ ধরে — সব যাচাইকৃত ধরনে সত্য)।
-- exact formula lib-স্তরে (`jobEngine.ts` — অন্য এজেন্ট) — নিয়মে নয়।
+- per-answer marks-চিহ্নের exact যাচাই lib-স্তরে (`jobEngine.ts` — ভ্যালিডেটর v9–v12: সঠিক == ১, ভুল == −negativeMarkingUsed) — নিয়মে নয়।
 
 ### ৬. Float সীমা — accuracy/percentage শুধু পরিসর-যাচাই
 
@@ -58,17 +59,29 @@ attempt ও সেশন — দুটোতেই: `kind: 'practice'` হলে
 
 Firestore নিয়মে তালিকার ইনডেক্সিং নেই — প্রতি উত্তরের `{topicId, subjectId, correct, marks, ...}` আকৃতি নিয়ম যাচাই **করতে পারে না**। প্রতি উত্তরে `topicId` + `correct` বাধ্যতামূলক — এই Step 3 চুক্তি তাই **lib-ভ্যালিডেটরে** (`jobEngine.ts`) বলবৎ হবে, নিয়মে নয়। নিয়ম বলবৎ করে aggregate-গুলো: `answers` non-empty ও `≤ bundle.questionCount`; `correctCount+wrongCount+unansweredCount == answers.size()`; marks-সঙ্গতি (সঠিক ⇒ marks ≥ ০, ভুল-উত্তর ⇒ marks ≤ ০, অনুত্তরিত ⇒ marks == ০) — **এই শেষটি বাস্তবায়িত হয়নি**: marks-চিহ্ন যাচাইয়ের জন্য প্রতিটি উত্তরে পৌঁছতে হয়, যা নিয়মে অসম্ভব (একই কারণ)। সৎভাবে রেকর্ড করা হলো: marks-চিহ্ন যাচাই lib-স্তরেই থাকবে; নিয়মে শুধু aggregate + negativeDeduction-আসন্ন মান। (হস্তান্তরের "correct==true ⇒ marks>=0 ..." শর্তটি নিয়মে লেখা যায়নি — per-answer অ্যাক্সেস নেই বলেই।)
 
-### ৮. get()-বাজেট — attempt create ঠিক ১০টি get()/exists() কল
+### ৮. get()-বাজেট — attempt create ৩টি ভিন্ন ডক পড়ে (ফোল্ড-ইন M2-এ সংশোধিত গণনা)
 
-Firestore-এর নথিভুক্ত সীমা (প্রতি অনুরোধে ১০টি get()/exists() কল) মাথায় রেখে attempt create-কে **ঠিক ১০টি** কলে সাজানো হয়েছে: `callerActive()` ১টি (users ডক) + বান্ডল ৬টি (exists + status + examSlug + kind + mockId + questionCount) + সেশন ৩টি (exists + status + bundleId) — তিনটি আলাদা ডক। সেশন-kind/examSlug/mockId আলাদা করে না-পড়ার কারণ #২-এ লেখা (transitive)। লক্ষণীয়: Step 7-এর চাবি-পড়ার পথে ইতিমধ্যে ~১২টি কল-এক্সপ্রেশন আছে (একই ৩টি ডকে বারবার get) আর এমুলেটরে তা চলে — তাই বারবার get একই পাথে সমস্যা নয় বলেই মনে হয়; তবু Step 8 নতুন পথটিকে ১০-এর ভেতরে রেখেছে। সেশন create ৬টি কল, সেশন update ১টি।
+Firestore-এর নথিভুক্ত সীমা (প্রতি অনুরোধে ১০টি get()/exists() কল) — একই ডকে বারবার get() ক্যাশ হয় ও একবার গণনা করা হয়, তাই গণনা **ভিন্ন ডক** দিয়ে: attempt create পড়ে **৩টি** ডক — কলারের `users/{uid}` (ভূমিকা + সক্রিয়তা), বান্ডল `jobQuestionBundles/{bundleId}` (exists + status/examSlug/kind/mockId/questionCount/bundleVersion), সেশন `users/{uid}/jobSessions/{attemptId}` (exists + `getAfter()`-এ জমা-পরবর্তী অবস্থা)। সেশন create ৬টি কলের ভেতরে, সেশন update ১টি। পুরনো "ঠিক ১০টি" গণনাটি প্রতিটি get()-এক্সপ্রেশনকে আলাদা কল ধরে ভুল ছিল — একই ডকের ৬টি `jobBundleData()` এক্সপ্রেশন ৬টি কল নয়; স্যুট পাস করাই (৬৯৬/৬৯৬, batched জমা s77/s78-সহ) এর প্রমাণ। সেশন-kind/examSlug/mockId আর transitive নয় — M2-এ সরাসরি মেলানো হয় (#২ দেখুন)। লক্ষণীয়: Step 7-এর চাবি-পড়ার পথে ইতিমধ্যে ~১২টি কল-এক্সপ্রেশন আছে (একই ৩টি ডকে বারবার get) আর এমুলেটরে তা চলে — তাই বারবার get একই পাথে সমস্যা নয় বলেই মনে হয়; তবু Step 8 নতুন পথটিকে ৩টি ভিন্ন ডকের ভেতরে রেখেছে।
 
-### ৯. সেশন-মোছা নিষেধ — বাতিল সেশনই অডিট-ট্রেইল
+### ৯. সেশন-মোছা — এই নিয়ম-সেটে কোনো `allow` নেই (ফোল্ড-ইন M4, ChatGPT finding #১১ — সঠিক বক্তব্য)
 
-`jobSessions` মোছা **কখনো নয় — Admin-ও নয়**। বাতিল সেশন মুছে ফেললে "পরীক্ষা শুরু করে শেষ করেনি" — এই তথ্যই হারিয়ে যেত; attempt তৈরি না-হওয়াই বাতিলের পরিণতি, সেশন-ডক রেখে দেওয়াই অডিট-ট্রেইল। (attempt-মোছা নিষেধ Step 7 থেকেই বহাল।)
+`jobSessions` মোছার **এই নিয়ম-সেটে কোনো `allow` নেই** — কোনো ক্লায়েন্ট (Owner/Admin/Moderator/ছাত্র) তা করতে পারে না। আগের বক্তব্য ("মোছা কখনো নয় — Admin-ও নয়") ভুল ছিল: নিয়ম-পরিবর্তন বা Admin SDK (যা নিয়ম এড়িয়ে চলে) ডক বদলাতে/মুছতে পারে — নিয়ম শুধু ক্লায়েন্ট-পথ বন্ধ করে। বাতিল সেশন মুছে ফেললে "পরীক্ষা শুরু করে শেষ করেনি" — এই তথ্যই হারিয়ে যেত; attempt তৈরি না-হওয়াই বাতিলের পরিণতি, সেশন-ডক রেখে দেওয়াই অডিট-ট্রেইল। (attempt-এর update/delete-তেও এই নিয়ম-সেটে কোনো `allow` নেই — একই সীমা।)
 
 ### ১০. PAUSED সেশন-ডকে নেই
 
 Step 2 §৪.৫-এর `PAUSED` শুধু অনুশীলনে **ক্লায়েন্ট-সাইড** অবস্থা (`IN_PROGRESS → PAUSED → IN_PROGRESS`) — সেশন-ডকের `status` কখনো `'paused'` হয় না; সার্ভারে সেশন `in-progress`-ই থাকে। নিয়মে `paused` যোগ করা হয়নি (পরীক্ষায় সরাসরি পিন করা হয়নি — সেশন create-এ `status == 'in-progress'` বাধ্য বলেই অন্য মান প্রত্যাখ্যাত হয়; s52 `'submitted'`-দিয়ে-তৈরি নিষেধের পরীক্ষা একই পথের প্রমাণ)।
+
+### ১১. Revision-ভিত্তিক অটোসেভ concurrency (ফোল্ড-ইন M2, ChatGPT finding #৬)
+
+সেশনে `revision` — তৈরি ১, প্রতি লেখায় ঠিক +১। নিয়ম বাঁধে: তৈরি `revision == 1`; হালনাগাদ `revision == old.revision + 1` (stale বা skip — দুটোই DENIED, পরীক্ষা s72/s73); জমা-দেওয়া/বাতিল সেশনে আর কোনো লেখাই হয় না (terminal-পরিবর্তনের পর update-নিয়মের `old.status == 'in-progress'` শর্তই ব্যর্থ হয় — জমা-দেওয়া সেশনে অটোসেভ নিষেধ, s61)। অটোসেভ-ক্ষেত্রে আকার/ধরন-সীমা: `answers.size() <= old.questionRefs.size()`, `currentQuestion <= old.questionRefs.size()`; কাউন্টার উত্তর থেকে হিসাব হয় (সেশনে আলাদা কাউন্টার-ক্ষেত্র নেই)। **নিয়ম rate-limit করতে পারে না** — Step 2 §৪.৬-এর throttling (৩০ সেকেন্ড / ৫ পরিবর্তন / পাতা-লুকানো) ক্লায়েন্ট-মাত্র; একটানা লেখা নিয়মে আটকানো যায় না — নথিভুক্ত সীমা।
+
+### ১২. অনুশীলন-চাবির সাইন-ইন পাঠ = ইচ্ছাকৃত সীমা (ফোল্ড-ইন M4, ChatGPT finding #৪)
+
+Published অনুশীলন-বান্ডলের চাবি সাইন-ইন থাকা ছাত্র সরাসরি পড়তে পারে (তাৎক্ষণিক ফিডব্যাক) — এটি নকশার সিদ্ধান্ত, ভুল নয়। চাবি প্রশ্ন-ডক থেকে আলাদা ডকে থাকে; খসড়া/বাতিল/অপ্রকাশিত চাবি অপাঠ্য (নিয়মে বাঁধা); প্রকাশিত সেট সংস্করণ-বাঁধা (`configVersion` মিলতে হবে — Step 7 P1-06); মক-চাবি অনুশীলন-পথে কখনো খোলে না — মক-চাবি রসিদ-পথেই (Step 9)। সীমা: একজন দৃঢ়প্রতিজ্ঞ ছাত্র সুগঠিত জাল attempt + রসিদ দিয়ে চাবি পড়তে পারে (a5 বহাল) — তাই ফলাফল কখনো Verified নয়।
+
+### ১৩. Step 9 টাইমার-নকশার নোট (ফোল্ড-ইন M4, ChatGPT finding #১০ — নোট মাত্র)
+
+মক-টাইমার সংরক্ষিত deadline (`endsAt` / `clientEndsAtMillis`) থেকে চলবে — reload-এ কখনো reset নয়; deadline client-attested (Spark-এ সার্ভার নেই বলে নিয়ম তা যাচাই করতে পারে না)। এই ধাপে মক টাইমার বানানো হয়নি — Step 9-এর হস্তান্তরে নথিভুক্ত।
 
 ---
 
@@ -80,16 +93,17 @@ Step 2 §৪.৫-এর `PAUSED` শুধু অনুশীলনে **ক্�
 |---|---|
 | পড়া | শুধু মালিক বা Moderator (`isOwner \|\| isModerator`) |
 | তৈরি | শুধু মালিক + সক্রিয় (`isOwner && callerActive()`); `validJobAttemptCreate()` |
-| হালনাগাদ / মোছা | **কখনো নয়** (`if false`) — Admin-ও নয় |
+| হালনাগাদ / মোছা | এই নিয়ম-সেটে কোনো `allow` নেই (`if false`) — কোনো ক্লায়েন্ট (Owner/Admin-সহ) তা করতে পারে না (নিয়ম-পরিবর্তন বা Admin SDK আলাদা পথ — §সিদ্ধান্ত #৯) |
 
 **Create-যাচাই (`validJobAttemptCreate`, `d = request.resource.data`):**
 
-- কী-সেট: ঠিক অনুমোদিত ৩০টি কী-র ভেতরে (`hasOnly`) + ২৬টি বাধ্য কী উপস্থিত (`hasAll` — `serverVerifiedScore`/`audit`/`answerHashes`/`anomalyFlags` ঐচ্ছিক)।
+- কী-সেট: ঠিক অনুমোদিত ৩৩টি কী-র ভেতরে (`hasOnly`) + ২৯টি বাধ্য কী উপস্থিত (`hasAll` — `serverVerifiedScore`/`audit`/`answerHashes`/`anomalyFlags` ঐচ্ছিক)।
 - `userId == <path uid>`; `kind ∈ ['practice','mock']`; `mockId` — mock হলে non-empty string, practice হলে `null`।
-- `bundleId` string; `examSlug ∈ jobExamSlugs()` (১৪টি); `subjectId`/`topicId` string-বা-null।
+- `bundleId` string; `examSlug ∈ jobExamSlugs()` (১৪টি); `subjectId`/`topicId` string-বা-null (≤২০০ অক্ষর)।
 - `answers` list, `size ≥ 1`, `size ≤ bundle.questionCount`।
 - `score` number; `totalMarks` number > ০; `−totalMarks ≤ score ≤ totalMarks`; `clientCalculatedScore == score`।
-- `negativeDeduction ≥ ০` এবং `== wrongCount*0.25` বা `== wrongCount*0.5`।
+- `negativeDeduction ≥ ০` এবং `== wrongCount * negativeMarkingUsed` (exact — ফোল্ড-ইন M1)।
+- `negativeMarkingUsed ∈ {0, 0.25, 0.5}`; `markingSchemeVersion` non-empty (≤১০০); `bundleVersion` int ≥ ১, বান্ডলের `bundleVersion`-এর সঙ্গে মিলতে হবে।
 - `correctCount`/`wrongCount`/`unansweredCount` int ≥ ০; তিনটির যোগ `== answers.size()`।
 - `accuracy` ০–১০০; `percentage` −১০০–১০০; `timeSpentSeconds ≥ ০`।
 - `startedAt`/`submittedAt` timestamp; `startedAt ≤ submittedAt ≤ request.time` (ভবিষ্যতে জমা নয়)।
@@ -97,8 +111,8 @@ Step 2 §৪.৫-এর `PAUSED` শুধু অনুশীলনে **ক্�
 - `serverVerifiedScore` অনুপস্থিত বা `null` (ছাত্র কখনো লিখতে পারে না — ভবিষ্যৎ সার্ভার-স্কোরারের জন্য)।
 - ঐচ্ছিক অডিট-ক্ষেত্র (উপস্থিত থাকলে ধরন-যাচাই মাত্র, প্রমাণ নয়): `audit` map, `answerHashes` list, `anomalyFlags` list।
 - `sessionId == <doc-ID>`।
-- বান্ডল: exists + `status == 'published'` + `examSlug` মেলে + kind-সঙ্গতি (#৪) + mock হলে `bundle.mockId == mockId`।
-- **সেশন-গেট:** `users/{uid}/jobSessions/{attemptId}` exists + `status == 'submitted'` + `bundleId` মেলে।
+- বান্ডল: exists + `status == 'published'` + `examSlug` মেলে + kind-সঙ্গতি (#৪) + mock হলে `bundle.mockId == mockId` + `bundle.bundleVersion == attempt.bundleVersion`।
+- **সেশন-গেট (`getAfter()` — ফোল্ড-ইন M2):** `users/{uid}/jobSessions/{attemptId}` exists + জমা-পরবর্তী `status == 'submitted'` + `bundleId`/`kind`/`examSlug`/`mockId` মেলে + `questionRefs.size() == answers.size()`।
 
 ### `users/{uid}/jobSessions` — চলমান সেশন (Step 3 §২.১২)
 
@@ -106,16 +120,16 @@ Step 2 §৪.৫-এর `PAUSED` শুধু অনুশীলনে **ক্�
 |---|---|
 | পড়া | শুধু মালিক বা Moderator |
 | তৈরি | শুধু মালিক + সক্রিয়; `validJobSessionCreate()` |
-| হালনাগাদ | শুধু মালিক + সক্রিয়, শুধু `status == 'in-progress'` থেকে, শুধু autosave/transition কী (`answers`, `currentQuestion`, `lastSyncedAt`, `updatedAt`, `endsAt`, `clientEndsAtMillis`, `status`, `submittedAt`); `validJobSessionUpdate()` |
-| মোছা | **কখনো নয়** — Admin-ও নয় |
+| হালনাগাদ | শুধু মালিক + সক্রিয়, শুধু `status == 'in-progress'` থেকে, শুধু autosave/transition কী (`answers`, `currentQuestion`, `lastSyncedAt`, `updatedAt`, `endsAt`, `clientEndsAtMillis`, `status`, `submittedAt`, `revision`); `validJobSessionUpdate()` |
+| মোছা | এই নিয়ম-সেটে কোনো `allow` নেই — কোনো ক্লায়েন্ট তা করতে পারে না (§সিদ্ধান্ত #৯) |
 
-**Create-যাচাই:** ১৫টি কী-ই বাধ্য (`hasOnly` + `hasAll`); `kind ∈ ['practice','mock']`; `mockId` — mock হলে string, practice হলে `null`; `bundleId` string; `examSlug ∈ jobExamSlugs()`; `status == 'in-progress'`; `startedAt` timestamp; **`endsAt == null`** (mock-এও — read-back-এর পর একবার বসে); `questionRefs` list, `size ≥ 1`; `answers` map; `currentQuestion` int ≥ ১; `lastSyncedAt` timestamp; `clientEndsAtMillis` — practice হলে `null`, mock হলে `null` বা number; `submittedAt == null`; `createdAt`/`updatedAt` timestamp; বান্ডল exists + Published + examSlug মেলে + kind-সঙ্গতি + mock হলে mockId মেলে।
+**Create-যাচাই:** ১৬টি কী-ই বাধ্য (`hasOnly` + `hasAll`); `kind ∈ ['practice','mock']`; `mockId` — mock হলে string, practice হলে `null`; `bundleId` string; `examSlug ∈ jobExamSlugs()`; `status == 'in-progress'`; `startedAt` timestamp; **`endsAt == null`** (mock-এও — read-back-এর পর একবার বসে); `questionRefs` list, `size ≥ 1` (সংরক্ষিত ক্রম মোড-অনুযায়ী — lib-এ সাজানো হয়, নিয়ম ক্রম যাচাই করে না); `answers` map, `size == questionRefs.size()`; `currentQuestion` int ≥ ১, `≤ questionRefs.size()`; `revision == 1`; `lastSyncedAt` timestamp; `clientEndsAtMillis` — practice হলে `null`, mock হলে `null` বা number; `submittedAt == null`; `createdAt`/`updatedAt` timestamp; বান্ডল exists + Published + examSlug মেলে + kind-সঙ্গতি + mock হলে mockId মেলে।
 
-**Update-যাচাই:** নতুন `status ∈ ['in-progress','submitted','abandoned']`; `submitted` হলে `submittedAt` timestamp বাধ্য, অন্য অবস্থায় `submittedAt == null`; `answers` map; `currentQuestion` int ≥ ১; `lastSyncedAt`/`updatedAt` timestamp; `endsAt` — `null` থেকে **একবার** timestamp-এ বসানো যায়, তারপর আর বদলানো যায় না; practice-এ `endsAt` চিরকাল `null`; `clientEndsAtMillis` — practice-এ চিরকাল `null`, mock-এ `null` বা number। `kind`/`mockId`/`bundleId`/`examSlug`/`questionRefs`/`startedAt`/`createdAt` — `affectedKeys` থেকে বাদ থাকায় কখনো বদলায় না।
+**Update-যাচাই:** নতুন `status ∈ ['in-progress','submitted','abandoned']`; `submitted` হলে `submittedAt` timestamp বাধ্য, অন্য অবস্থায় `submittedAt == null`; `answers` map, `size ≤ old.questionRefs.size()`; `currentQuestion` int ≥ ১, `≤ old.questionRefs.size()`; `revision == old.revision + 1`; `lastSyncedAt`/`updatedAt` timestamp; `endsAt` — `null` থেকে **একবার** timestamp-এ বসানো যায়, তারপর আর বদলানো যায় না; practice-এ `endsAt` চিরকাল `null`; `clientEndsAtMillis` — practice-এ চিরকাল `null`, mock-এ `null` বা number। `kind`/`mockId`/`bundleId`/`examSlug`/`questionRefs`/`startedAt`/`createdAt` — `affectedKeys` থেকে বাদ থাকায় কখনো বদলায় না।
 
-### অপরিবর্তিত (Step 7)
+### অপরিবর্তিত (Step 7 — ফোল্ড-ইন M1-এর একটিমাত্র ব্যতিক্রমসহ)
 
-`jobQuestions` / `jobQuestionBundles` / `jobQuestionKeys` / `jobReceipts`-এর নিয়মে **একটি অক্ষরও বদলানো হয়নি** — রসিদ = ১০-মিনিটের attempt-বাঁধা উইন্ডো (Option A, একবার-ব্যবহার নয়); "জমা দেওয়া" = client-attested; ফলাফল কখনো Verified নয়। শুধু রসিদ-নোঙরের attempt-ডকের **আকৃতি** বদলেছে (পূর্ণ attempt) — গেটের যুক্তি একই।
+`jobQuestions` / `jobQuestionKeys` / `jobReceipts`-এর নিয়মে **একটি অক্ষরও বদলানো হয়নি** — রসিদ = ১০-মিনিটের attempt-বাঁধা উইন্ডো (Option A, একবার-ব্যবহার নয়); "জমা দেওয়া" = client-attested; ফলাফল কখনো Verified নয়। শুধু রসিদ-নোঙরের attempt-ডকের **আকৃতি** বদলেছে (পূর্ণ attempt) — গেটের যুক্তি একই। **ব্যতিক্রম (ফোল্ড-ইন M1):** `jobQuestionBundles`-এর নিয়মে `bundleVersion` যোগ হয়েছে — উপস্থিত থাকলে int ≥ ১ হতে হবে (পুরনো বান্ডলে নাও থাকতে পারে); attempt-নিয়ম বান্ডলের `bundleVersion` attempt-এর সঙ্গে মেলায়।
 
 ---
 
@@ -127,7 +141,7 @@ Step 2 §৪.৫-এর `PAUSED` শুধু অনুশীলনে **ক্�
 
 ---
 
-## নতুন পরীক্ষা — Step 8 (s1–s64, ৬৪টি কেস)
+## নতুন পরীক্ষা — Step 8 (s1–s78, ৭৮টি কেস)
 
 `emulator-tests/rules-step8-practice-engine.test.ts` — নতুন ফাইল:
 
@@ -139,6 +153,8 @@ Step 2 §৪.৫-এর `PAUSED` শুধু অনুশীলনে **ক্�
 | attempt — পড়া/হালনাগাদ/মোছা | s38–s41 (৪) | দ্বিতীয় জমা (update) নিষেধ; মোছা নিষেধ (ছাত্র + Admin); Moderator-পড়া; অন্য ছাত্রের পড়া নিষেধ |
 | session create | s42–s53 (১২) | বৈধ অনুশীলন; বৈধ মক (endsAt null); খসড়া বান্ডল; mockId ছাড়া মক; practice-এ endsAt; practice-এ clientEndsAtMillis; create-এ endsAt বসানো; mockId-অমিল; examSlug-অমিল; খালি questionRefs; `'submitted'`-দিয়ে তৈরি; অন্যের পাথে তৈরি |
 | session update | s54–s64 (১১) | অটোসেভ SUCCEEDS; অপরিবর্তনীয় ক্ষেত্র (bundleId) নিষেধ; endsAt একবার-সেট SUCCEEDS তারপর বদল নিষেধ; submit-পরিবর্তন SUCCEEDS তারপর frozen; abandoned-পরিবর্তন SUCCEEDS তারপর frozen; submittedAt ছাড়া submit নিষেধ; submittedAt-সহ abandoned নিষেধ; জমা-দেওয়া সেশনে অটোসেভ নিষেধ; অন্য ছাত্রের হালনাগাদ নিষেধ; মোছা নিষেধ (ছাত্র + Admin); Moderator-পড়া / অন্য ছাত্রের পড়া নিষেধ |
+| ফোল্ড-ইন M1 — ব্যাংক + bundle বাঁধা | s65–s70 (৬) | ব্যাংক `negativeMarkingUsed: 0`-তে জমা SUCCEEDS; `bundleVersion` অমিল DENIED; `negativeMarkingUsed: 0.3` DENIED; খালি `markingSchemeVersion` DENIED; `bundleVersion` ছাড়া DENIED; ব্যাংক ০.২৫ deduction দাবি + used ০ DENIED |
+| ফোল্ড-ইন M2 — revision + getAfter + atomic ব্যাচ | s71–s78 (৮) | অটোসেভ stored+১-এ SUCCEEDS; stale একই-revision দুবার DENIED; revision skip DENIED; সেশনের প্রশ্নের চেয়ে বেশি উত্তর DENIED; `currentQuestion` ক্রমের বাইরে DENIED; সেশনের ১ ref-এর বিপরীতে ৩ উত্তরের attempt DENIED (getAfter সংখ্যা-বাঁধা); batched জমা (সেশন submitted + attempt একসঙ্গে) SUCCEEDS + attempt পড়া যায়; stale revision-সহ batched জমা atomically DENIED, কোনো attempt তৈরি হয় না |
 
 ---
 
@@ -146,12 +162,12 @@ Step 2 §৪.৫-এর `PAUSED` শুধু অনুশীলনে **ক্�
 
 | পরীক্ষা | ফলাফল |
 |---|---|
-| পূর্ণ নিয়ম-স্যুট (sequential, `--fileParallelism=false`, alt-পোর্ট 8081/9098, JDK 17, IPv4) | **৬৭৬/৬৭৬ PASS** (১৫ ফাইল; Step 7-এর ৬১২ + Step 8-এর নতুন ৬৪) |
-| Step 8 নিয়ম-ফাইল একা | **৬৪/৬৪ PASS** (s1–s64) |
+| পূর্ণ নিয়ম-স্যুট (sequential, `--fileParallelism=false`, JDK 17, IPv4) | **৬৯৬/৬৯৬ PASS** (১৬ ফাইল; core-এর ৬৮২ + ফোল্ড-ইন s65–s78 = ১৪টি নতুন কেস) — প্রথম রানে ২টি Step 2 teacher-draft ব্যর্থতা দেখা গিয়েছিল (এমুলেটর-ফ্লেক — একা চালালে ২৫/২৫ PASS, পূর্ণ পুনঃচালনায় ৬৯৬/৬৯৬) |
+| Step 8 নিয়ম-ফাইল একা | **৭৮/৭৮ PASS** (s1–s78) |
 | Step 7 q-ফাইল একা (পুনর্লিখিত) | **৯৫/৯৫ PASS** (q1–q92 + q62a/b, q71a/b, q78b) |
 | আক্রমণাত্মক ফাইল একা (পুনর্লিখিত a5-সহ) | **৩৮/৩৮ PASS** (a1–a33 + বিভক্ত কেস) |
-| কমিট/পুশ | **হয়নি** — নির্দেশ অনুযায়ী কাজ uncommitted রাখা হয়েছে; সমন্বয়কারী যাচাইয়ের পর কমিট করবেন |
-| ব্রাঞ্চ | `jobs/section-structure` (main ছোঁয়া হয়নি; প্রোডাকশন ডেপ্লয় হয়নি; লাইভ Firestore ছোঁয়া হয়নি) |
+| ইঞ্জিন↔নিয়ম ইন্টিগ্রেশন একা | **৬/৬ PASS** (i1–i6 — batched জমা-প্রবাহে পুনর্লিখিত) |
+| কমিট | M1 `79296d1` + `0d11d01` · M2 `f4e6e0d` · M3 `a5d0597` · M4 এই রিপোর্ট-আপডেটসহ কমিট — ব্রাঞ্চ `jobs/section-structure` (main ছোঁয়া হয়নি; প্রোডাকশন ডেপ্লয় হয়নি; লাইভ Firestore ছোঁয়া হয়নি) |
 
 **চালানো কমান্ড (সবগুলো একই ধাঁচে):** `FIRESTORE_EMULATOR_PORT=8081 JAVA_TOOL_OPTIONS="-Djava.net.preferIPv4Stack=true" ./node_modules/.bin/firebase emulators:exec --config firebase.alt-ports.json --only firestore,auth "./node_modules/.bin/vitest run <file|emulator-tests/> --fileParallelism=false"` — JDK `~/workspace/eduorbit/tools/jdk-17.0.21.1+2-jre/bin` PATH-এ। আউটপুট `/tmp/step8-test1.log` (Step 8 একা), `/tmp/step7-test1.log` (q-ফাইল), `/tmp/step7adv-test1.log` (আক্রমণাত্মক), `/tmp/step8-full.log` (পূর্ণ স্যুট)।
 
@@ -164,13 +180,15 @@ Step 2 §৪.৫-এর `PAUSED` শুধু অনুশীলনে **ক্�
 ## সৎ ফাঁক (Honest gaps — Step 8-এ যা হয়নি)
 
 1. **Per-answer আকৃতি নিয়মে নেই** (§সিদ্ধান্ত #৭): প্রতি উত্তরের topicId/correct/marks-যাচাই lib-ভ্যালিডেটরের উপর নির্ভরশীল — lib-এ বাগ থাকলে ভুল-আকৃতির উত্তর ঢুকতে পারে (aggregate-গুলো তবু নিয়মে ধরা পড়বে)।
-2. **Exact স্কোর-সূত্র নিয়মে নেই** (#৫): স্কোরের exact যাচাই lib-স্তরে; নিয়ম শুধু আসন্ন মান + সীমা ধরে।
+2. **Exact স্কোর-সূত্র নিয়মে নেই** (#৫): স্কোরের exact যাচাই lib-স্তরে; নিয়ম শুধু `negativeDeduction == wrongCount * negativeMarkingUsed` + সীমা ধরে।
 3. **"জমা দেওয়া" এখনো client-attested** (Step 7 P0-02 বহাল): সুগঠিত জাল attempt + রসিদ দিয়ে চাবি পড়া যায় — a5 প্রমাণ করে। ফলাফল কখনো Verified নয়; সার্ভার-সাইড স্কোরিংয়ে Blaze দরকার (অনুমোদন নেই, ৳০ বাজেট)।
 4. **মক-দেরির গ্রেস নেই** (#২): সময় পেরিয়ে জমা দেওয়া মক ক্লায়েন্টের `abandoned` চিহ্নের উপর নির্ভরশীল — নিয়ম তা যাচাই করে না।
 5. **App Check স্থগিত** (Step 7 P2-03 বহাল): Step 17 নিরাপত্তা-পরীক্ষার প্রার্থী।
 6. **অগ্রগতি-প্রসার Steps 10–11-এর; ভুল-উত্তর নোটবুক UI Step 13-এর** — এই ধাপে attempt/session-ডক শুধু সংরক্ষিত হয়, অগ্রগতিতে যোগ হয় না।
 7. **সাবকালেকশন ব্যাকআপ সীমা বহাল** (Step 3 §৯.৩): `jobAttempts`/`jobSessions` ক্লায়েন্ট-এক্সপোর্টে আসে না — সম্পূর্ণ এক্সপোর্টে Firebase কনসোল বা Admin-SDK লাগে।
 8. **`previous` বান্ডলের practice-সঙ্গতি (#৪) একটি সিদ্ধান্ত, যাচাইকৃত ব্যবহার নয়** — বিগত-বছরের সেট practice-ধাঁচে চলবে ধরে নেওয়া হয়েছে; মক-ধাঁচে চালাতে চাইলে নিয়ম বদলাতে হবে।
+9. **নিয়ম rate-limit করতে পারে না** (#১১): অটোসেভ-throttling ক্লায়েন্ট-মাত্র — একটানা লেখা নিয়মে আটকানো যায় না।
+10. **বান্ডল-প্রশ্নের ভেতরের ক্ষেত্র (difficulty সহ) নিয়মে যাচাই হয় না** — তালিকার ইনডেক্সিং নেই বলে per-item যাচাই অসম্ভব; `buildJobBundle` + lib-ভ্যালিডেটরই বলবৎ করে (চাবি-ফাঁস নিষেধের মতো একই সীমা)।
 
 ---
 
@@ -178,11 +196,10 @@ Step 2 §৪.৫-এর `PAUSED` শুধু অনুশীলনে **ক্�
 
 জমার প্রবাহ (ক্রম বাধ্য — নিয়মে বলবৎ):
 
-1. **সেশন তৈরি** — `users/{uid}/jobSessions/{newId}` (`status: 'in-progress'`, `endsAt: null`; মকে `endsAt` পরে read-back করে **একবার** বসাতে হয়)।
-2. **অটোসেভ** (ঐচ্ছিক, চলাকালীন) — শুধু `answers`/`currentQuestion`/`lastSyncedAt`/`updatedAt` (+ মকে `endsAt` একবার)।
-3. **সেশন submitted করো** — `update({status: 'submitted', submittedAt: serverTimestamp()})`।
-4. **attempt তৈরি করো** — `users/{uid}/jobAttempts/{sameId}` (doc-ID == session-ID), নিচের আকৃতিতে।
-5. **রসিদ তৈরি করো** — `jobReceipts/{uid}_{bundleId}` (`attemptId` = attempt-ডকের ID) — তারপর ১০ মিনিটের ভেতরে চাবি পড়া যায়।
+1. **সেশন তৈরি** — `users/{uid}/jobSessions/{newId}` (`status: 'in-progress'`, `endsAt: null`, `revision: 1`; মকে `endsAt` পরে read-back করে **একবার** বসাতে হয়)। `questionRefs` ক্রম মোড-অনুযায়ী সংরক্ষিত হয় (Beginner easy-first, Advanced medium-first) — lib সাজায়, নিয়ম ক্রম যাচাই করে না।
+2. **অটোসেভ** (ঐচ্ছিক, চলাকালীন) — শুধু `answers`/`currentQuestion`/`lastSyncedAt`/`updatedAt`/`revision` (+ মকে `endsAt` একবার); প্রতি লেখায় `revision` ঠিক stored+১, নইলে DENIED।
+3. **এক batched write-এ জমা** — সেশন → `'submitted'` (`submittedAt` + `revision` +১) **+** attempt তৈরি (একই doc-ID) একসঙ্গে। ক্রমিক প্রবাহও চলে (সেশন submitted, তারপর attempt) — নিয়ম `getAfter()` দিয়ে জমা-পরবর্তী সেশন যাচাই করে। **Idempotent:** থাকা attempt থাকলে তা ফিরিয়ে দাও, আবার লিখো না।
+4. **রসিদ তৈরি করো** — `jobReceipts/{uid}_{bundleId}` (`attemptId` = attempt-ডকের ID) — তারপর ১০ মিনিটের ভেতরে চাবি পড়া যায়।
 
 ```ts
 // users/{uid}/jobAttempts/{sessionId} — create-মাত্র, status সবসময় 'submitted'
@@ -207,7 +224,10 @@ Step 2 §৪.৫-এর `PAUSED` শুধু অনুশীলনে **ক্�
   }],
   score: number,             // == clientCalculatedScore; -totalMarks <= score <= totalMarks
   totalMarks: number,        // > 0
-  negativeDeduction: number, // == wrongCount*0.25 অথবা wrongCount*0.5
+  negativeDeduction: number, // == wrongCount * negativeMarkingUsed (exact)
+  negativeMarkingUsed: number, // 0 | 0.25 | 0.5 — যে হার প্রয়োগ হয়েছে (ব্যাংকে 0 — বিজ্ঞপ্তি যাচাই বাকি)
+  markingSchemeVersion: string, // non-empty, <= 100 — যেমন 'v1', ব্যাংকে 'v0-provisional'
+  bundleVersion: number,     // int >= 1 — বান্ডলের bundleVersion-এর সঙ্গে মিলতে হবে
   correctCount: number,      // int >= 0
   wrongCount: number,        // int >= 0
   unansweredCount: number,   // int >= 0
@@ -241,10 +261,11 @@ Step 2 §৪.৫-এর `PAUSED` শুধু অনুশীলনে **ক্�
   status: 'in-progress' | 'submitted' | 'abandoned',  // তৈরি 'in-progress' দিয়ে; PAUSED এখানে নেই
   startedAt: Timestamp,      // serverTimestamp
   endsAt: Timestamp | null,  // practice: সবসময় null; mock: তৈরি null, পরে একবার বসে, আর বদলায় না
-  questionRefs: [{ bundleId: string, n: number, questionId: string }],  // non-empty
+  questionRefs: [{ bundleId: string, n: number, questionId: string }],  // non-empty; সংরক্ষিত ক্রম মোড-অনুযায়ী (n অপরিবর্তিত)
   answers: { [n: string]: { selected: 'A'|'B'|'C'|'D'|null, markedForReview: boolean, timeSpentSeconds: number } },
-  currentQuestion: number,   // >= 1
+  currentQuestion: number,   // >= 1, <= questionRefs.size(); প্রথম প্রশ্ন = প্রথম ref-এর n
   lastSyncedAt: Timestamp,
+  revision: number,          // তৈরি 1, প্রতি লেখায় ঠিক +1 (stale/skip DENIED)
   clientEndsAtMillis: number | null,  // practice: সবসময় null; mock: অফলাইন-টাইমারের জন্য
   submittedAt: Timestamp | null,      // 'submitted' হলেই বসে
   createdAt: Timestamp,
@@ -252,7 +273,7 @@ Step 2 §৪.৫-এর `PAUSED` শুধু অনুশীলনে **ক্�
 }
 ```
 
-**ইঞ্জিন-এজেন্টের জন্য সতর্কতা:** (ক) attempt তৈরির আগে সেশন `submitted` করতেই হবে — উল্টো ক্রম নিয়মে ব্যর্থ হয়; (খ) `serverVerifiedScore` কখনো লিখো না; (গ) প্রতি উত্তরে `topicId` + `correct` + marks-চিহ্ন lib-ভ্যালিডেটরে বলবৎ করো — নিয়ম তা দেখতে পায় না; (ঘ) ফলাফল-পাতায় সবসময় "অনুশীলন ফলাফল — নিয়োগ পরীক্ষার ফল নয়" লেবেল বাধ্য; (ঙ) বাতিল (`abandoned`) সেশনে attempt তৈরি করো না — নিয়ম তা প্রত্যাখ্যান করে, ছাত্রকে "আবার দিন" (নতুন সেশন) দিতে হয়।
+**ইঞ্জিন-এজেন্টের জন্য সতর্কতা:** (ক) জমা **এক batched write-এ** করো (সেশন submitted + attempt তৈরি একসঙ্গে) — ক্রমিক প্রবাহও চলে, কিন্তু ব্যাচই প্রামাণিক; থাকা attempt থাকলে তা ফিরিয়ে দাও, আবার লিখো না; (খ) `serverVerifiedScore` কখনো লিখো না; (গ) প্রতি উত্তরে `topicId` + `correct` + marks-চিহ্ন lib-ভ্যালিডেটরে বলবৎ করো — নিয়ম তা দেখতে পায় না; (ঘ) ফলাফল-পাতায় সবসময় "অনুশীলন ফলাফল — নিয়োগ পরীক্ষার ফল নয়" লেবেল বাধ্য, আর প্রশ্নের লেখা attempt-এর নিজের `questionId` দিয়ে খুঁজো (বান্ডল-অবস্থান দিয়ে নয়); (ঙ) বাতিল (`abandoned`) সেশনে attempt তৈরি করো না — নিয়ম তা প্রত্যাখ্যান করে, ছাত্রকে "আবার দিন" (নতুন সেশন) দিতে হয়; (চ) ব্যাংকে `negativeMarkingUsed: 0` লিখো — ০.২৫ দাবি করলে নিয়ম প্রত্যাখ্যান করে, আর UI-তে "নেগেটিভ মার্কিং: বন্ধ — বিজ্ঞপ্তি যাচাই বাকি" দেখাও।
 
 ---
 
@@ -261,7 +282,7 @@ Step 2 §৪.৫-এর `PAUSED` শুধু অনুশীলনে **ক্�
 | ফাইল | পরিবর্তন |
 |---|---|
 | `firestore.rules` | `jobAttempts` ম্যাচ পুনর্লিখন + `jobSessions` ম্যাচ নতুন + ৬টি হেল্পার (net +~২২৪ লাইন; ২৬৪০ → ২৮৬৪ লাইন) |
-| `emulator-tests/rules-step8-practice-engine.test.ts` | **নতুন** — ৬৪টি কেস (s1–s64) |
+| `emulator-tests/rules-step8-practice-engine.test.ts` | **নতুন** — ৭৮টি কেস (s1–s78: core ৬৪ + ফোল্ড-ইন s65–s78) |
 | `emulator-tests/rules-step7-job-questions.test.ts` | পুনর্লিখন — নতুন মডেলের হেল্পার/সিড + q66/q75/q80–q92 (৯৫টি কেস, সংখ্যা একই) |
 | `emulator-tests/rules-step7-adversarial.test.ts` | পুনর্লিখন — নতুন মডেলের হেল্পার/সিড + a5 (৩৮টি কেস, সংখ্যা একই) |
 | `team/job-rules-step8.md` | **নতুন** — এই রিপোর্ট |
