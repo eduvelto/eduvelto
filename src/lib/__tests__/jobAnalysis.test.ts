@@ -15,15 +15,19 @@ import {
   attemptSummaryFromStored,
   buildWrongAnswerList,
   classifyAnswerTime,
+  correctVsWrongTime,
   displayPercentage,
   formatDurationBn,
+  groupAttemptsByExam,
   isSlowAnswer,
   marksPerQuestion,
   negativeMarkingExplanation,
   perSubjectTime,
   perTopicAccuracy,
+  resultObservation,
   timeManagementSummary,
   topicActionBadge,
+  topicLevel,
   topicMasteryOverTime,
   attemptTrend,
   weakTopicPracticeLink,
@@ -368,6 +372,75 @@ describe('weakTopicPracticeLink', () => {
     );
     expect(link.to).toBe('/jobs');
     expect(link.to).not.toContain('topic__');
+  });
+});
+
+describe('topicLevel (ChatGPT §2A/§3)', () => {
+  it('three text levels, never a permanent ability label', () => {
+    expect(topicLevel(85, 10)).toBe('good');
+    expect(topicLevel(55, 10)).toBe('medium');
+    expect(topicLevel(20, 10)).toBe('weak');
+    expect(topicLevel(70, 10)).toBe('good');
+    expect(topicLevel(40, 10)).toBe('medium');
+  });
+
+  it('a tiny sample is never judged (1/2 = 50% is not 10/20 = 50%)', () => {
+    expect(topicLevel(50, 2)).toBe('small-sample');
+    expect(topicLevel(100, 1)).toBe('small-sample');
+    expect(topicLevel(50, 3)).toBe('medium');
+  });
+});
+
+describe('correctVsWrongTime (ChatGPT §2B)', () => {
+  it('averages time separately for correct and wrong answers', () => {
+    const s = correctVsWrongTime([
+      answer(1, { correct: true, timeSpentSeconds: 30 }),
+      answer(2, { correct: true, timeSpentSeconds: 50 }),
+      answer(3, { correct: false, timeSpentSeconds: 90 }),
+      answer(4, { correct: false, timeSpentSeconds: 110 }),
+      answer(5, { selected: null, correct: false, timeSpentSeconds: 0 }),
+    ]);
+    expect(s.avgCorrectSeconds).toBe(40);
+    expect(s.avgWrongSeconds).toBe(100);
+    expect(s.correctCount).toBe(2);
+    expect(s.wrongCount).toBe(2);
+  });
+
+  it('zero counts give zero averages, never NaN', () => {
+    const s = correctVsWrongTime([answer(1, { correct: true, timeSpentSeconds: 30 })]);
+    expect(s.avgWrongSeconds).toBe(0);
+    expect(s.wrongCount).toBe(0);
+  });
+});
+
+describe('resultObservation (ChatGPT §3)', () => {
+  it('names the weakest topic + the marking cost, from real data only', () => {
+    const o = resultObservation(attempt());
+    expect(o).toContain('English — Grammar — Tense');
+    expect(o).toContain('2/3 সঠিক');
+    expect(o).toContain('১ম অগ্রাধিকার');
+    expect(o).toContain('0.5 নম্বর কাটা গেছে');
+  });
+
+  it('all-correct and all-unanswered have their own honest lines', () => {
+    expect(resultObservation(attempt({ wrongCount: 0, answers: [answer(1, { correct: true })] }))).toContain('কোনো ভুল উত্তর নেই');
+    expect(
+      resultObservation(attempt({ unansweredCount: 2, wrongCount: 0, answers: [answer(1, { selected: null, correct: false }), answer(2, { selected: null, correct: false })] })),
+    ).toContain('কোনো প্রশ্নের উত্তর দেওয়া হয়নি');
+  });
+});
+
+describe('groupAttemptsByExam (ChatGPT §2D)', () => {
+  it('groups by exam so unlike tests are never trended together', () => {
+    const groups = groupAttemptsByExam([
+      attempt({ docId: 'a', examSlug: 'bcs' }),
+      attempt({ docId: 'b', examSlug: 'bank' }),
+      attempt({ docId: 'c', examSlug: 'bcs' }),
+    ]);
+    expect(groups).toHaveLength(2);
+    expect(groups[0].examSlug).toBe('bcs');
+    expect(groups[0].attempts).toHaveLength(2);
+    expect(groups[1].examSlug).toBe('bank');
   });
 });
 

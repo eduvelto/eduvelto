@@ -32,14 +32,18 @@ import { JOB_PRACTICE_RESULT_LABEL, jobTopicLabelBn } from '../lib/jobEngine';
 import {
   ANSWER_TIME_BUCKET_BN,
   TOPIC_ACTION_BADGE_BN,
+  TOPIC_LEVEL_BN,
   attemptSummaryFromStored,
   classifyAnswerTime,
+  correctVsWrongTime,
   formatDurationBn,
   isSlowAnswer,
   negativeMarkingExplanation,
   perSubjectTime,
   perTopicAccuracy,
+  resultObservation,
   topicActionBadge,
+  topicLevel,
   weakTopicPracticeLink,
 } from '../lib/jobAnalysis';
 import {
@@ -219,6 +223,12 @@ export default function JobResultPage() {
   const marking = negativeMarkingExplanation(summary);
   const topicStats = perTopicAccuracy(answers);
   const subjectTimes = perSubjectTime(answers);
+  const cwTime = correctVsWrongTime(answers);
+  // ChatGPT §2A/§3: weakest first — lead with the first
+  // priority, not the biggest topic.
+  const topicStatsWeakestFirst = [...topicStats].sort(
+    (a, b) => a.accuracy - b.accuracy || b.wrong - a.wrong || (a.topicId < b.topicId ? -1 : 1),
+  );
   const perAnswerAvgSeconds =
     answers.length > 0
       ? answers.reduce((s, a) => s + (typeof a.timeSpentSeconds === 'number' ? a.timeSpentSeconds : 0), 0) / answers.length
@@ -231,6 +241,9 @@ export default function JobResultPage() {
 
   // Weak topics: from the stored answers (wrong per topic).
   const weakTopics = topicStats.filter((t) => t.wrong > 0);
+  // 1st priority = the weakest topic by accuracy (not the
+  // biggest topic with a wrong answer).
+  const weakestTopic = topicStatsWeakestFirst.find((t) => t.wrong > 0) ?? null;
 
   const filtered = answers.filter((a) => {
     if (topicFilter !== 'all' && a.topicId !== topicFilter) return false;
@@ -317,6 +330,15 @@ export default function JobResultPage() {
             <div style={{ fontWeight: 700, color: '#142B3B' }}>নম্বর ভাঙন</div>
             <div>{marking.formula}</div>
             {marking.costLine ? <div style={{ color: WRONG, fontWeight: 600 }}>{marking.costLine}</div> : null}
+            {/* ChatGPT §1: never show one percentage unexplained —
+                the marks % is after negative marking; the accuracy
+                % is correct ÷ attempted. */}
+            <div style={{ color: MUTED }}>
+              নম্বর = নেগেটিভ মার্কিংয়ের পরের চূড়ান্ত নম্বর; সঠিক উত্তরের হার ({accuracy}%) = সঠিক ÷ উত্তর দেওয়া প্রশ্ন।
+            </div>
+            {/* ChatGPT §3: the three-second summary, generated
+                from this attempt's actual data. */}
+            <div style={{ color: '#142B3B', fontWeight: 600 }}>{resultObservation(summary)}</div>
             {negativeMarkingDisabled ? (
               <div style={{ color: MUTED }}>নেগেটিভ মার্কিং বন্ধ — বিজ্ঞপ্তি যাচাই বাকি, তাই ভুল উত্তরে নম্বর কাটা হয়নি।</div>
             ) : null}
@@ -400,7 +422,10 @@ export default function JobResultPage() {
         </Card>
       </div>
 
-      {/* Step 10: per-topic accuracy table + time per subject. */}
+      {/* Step 10: per-topic accuracy table + time per subject.
+          ChatGPT §2A: weakest first, counts AND % together, and
+          a text level (ভালো / মাঝারি / এই পরীক্ষায় দুর্বল) —
+          never colour alone, never a permanent ability label. */}
       <Card style={{ marginTop: 16 }}>
         <div style={{ fontWeight: 700, color: '#142B3B', fontSize: 17, marginBottom: 8 }}>টপিক অনুযায়ী ফলাফল</div>
         {topicStats.length === 0 ? (
@@ -413,15 +438,17 @@ export default function JobResultPage() {
                   <th style={{ padding: '6px 8px' }}>টপিক</th>
                   <th style={{ padding: '6px 8px' }}>সঠিক</th>
                   <th style={{ padding: '6px 8px' }}>নির্ভুলতা</th>
+                  <th style={{ padding: '6px 8px' }}>স্তর</th>
                   <th style={{ padding: '6px 8px' }}>সময়</th>
                 </tr>
               </thead>
               <tbody>
-                {topicStats.map((t) => (
+                {topicStatsWeakestFirst.map((t) => (
                   <tr key={t.topicId} style={{ borderBottom: '1px solid #EEF1F5' }}>
                     <td style={{ padding: '6px 8px', fontWeight: 600, color: '#142B3B' }}>{t.label}</td>
                     <td style={{ padding: '6px 8px' }}>{t.correct}/{t.total}</td>
                     <td style={{ padding: '6px 8px' }}>{t.accuracy}%</td>
+                    <td style={{ padding: '6px 8px' }}>{TOPIC_LEVEL_BN[topicLevel(t.accuracy, t.total)]}</td>
                     <td style={{ padding: '6px 8px' }}>{formatDurationBn(t.timeSeconds)}</td>
                   </tr>
                 ))}
@@ -434,6 +461,14 @@ export default function JobResultPage() {
       {subjectTimes.length > 1 ? (
         <Card style={{ marginTop: 16 }}>
           <div style={{ fontWeight: 700, color: '#142B3B', fontSize: 17, marginBottom: 8 }}>বিষয় অনুযায়ী সময়</div>
+          {/* ChatGPT §2B: time on correct vs wrong answers — with
+              the caveat that time alone is no judgement (a hard
+              question honestly takes longer than an easy one). */}
+          {cwTime.wrongCount > 0 && cwTime.correctCount > 0 ? (
+            <p style={{ margin: '0 0 8px', color: '#142B3B', fontSize: 14, lineHeight: 1.7 }}>
+              ভুল উত্তরে গড়ে {Math.round(cwTime.avgWrongSeconds)} সেকেন্ড, সঠিক উত্তরে গড়ে {Math.round(cwTime.avgCorrectSeconds)} সেকেন্ড — তবে সময় একা বিচার নয়, কঠিন প্রশ্নে সময় বেশি লাগা স্বাভাবিক।
+            </p>
+          ) : null}
           <ul style={{ margin: 0, paddingLeft: 20, fontSize: 14, lineHeight: 1.9, color: '#142B3B' }}>
             {subjectTimes.map((s) => (
               <li key={s.subjectId}>
@@ -445,6 +480,7 @@ export default function JobResultPage() {
       ) : null}
 
       {/* Per-question review */}
+      <div id="review">
       <Card style={{ marginTop: 16 }}>
         <div style={{ fontWeight: 700, color: '#142B3B', fontSize: 17, marginBottom: 8 }}>প্রশ্ন-পর্যালোচনা</div>
         {/* Step 9: a mock key opens only within 10 minutes of
@@ -513,6 +549,36 @@ export default function JobResultPage() {
               );
             })}
           </div>
+        )}
+      </Card>
+      </div>
+
+      {/* ChatGPT §2E/§7: the next action — concrete, linked, and
+          last in the mobile order (RESULT → SUMMARY → TOPIC →
+          TIME → REVIEW → PROGRESS → NEXT ACTION). The 1st
+          priority is the weakest topic from THIS attempt's data;
+          the wrong questions are one anchor away, not a new
+          feature (the Step 13 notebook owns the collection). */}
+      <Card style={{ marginTop: 16 }}>
+        <div style={{ fontWeight: 700, color: '#142B3B', fontSize: 17, marginBottom: 8 }}>পরবর্তী পদক্ষেপ</div>
+        {weakestTopic ? (
+          <>
+            <p style={{ margin: '0 0 8px', color: '#142B3B', fontSize: 14, lineHeight: 1.7 }}>
+              ১ম অগ্রাধিকার: {weakestTopic.label} — {weakestTopic.wrong}/{weakestTopic.total}টি ভুল।
+            </p>
+            <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
+              <LinkButton to={weakTopicPracticeLink(summary, weakestTopic.topicId).to} variant="accent">
+                এই টপিক অনুশীলন করুন →
+              </LinkButton>
+              <LinkButton to="#review" variant="outline">
+                ভুল প্রশ্নগুলো আবার দেখুন ↓
+              </LinkButton>
+            </div>
+          </>
+        ) : (
+          <p style={{ margin: 0, color: MUTED, fontSize: 14, lineHeight: 1.7 }}>
+            এই পরীক্ষায় কোনো ভুল উত্তর নেই — পরের মক/অনুশীলনে নতুন টপিকে এগিয়ে যান।
+          </p>
         )}
       </Card>
 

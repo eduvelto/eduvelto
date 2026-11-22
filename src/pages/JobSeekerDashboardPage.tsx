@@ -374,6 +374,12 @@ export default function JobSeekerDashboardPage() {
                     {t({ bn: 'সর্বশেষ ফলাফল দেখুন →', en: 'See the latest result →' })}
                   </LinkButton>
                 ) : null}
+                {/* Step 10: the full analysis page — history,
+                    trends, topic mastery and time, own attempts
+                    only. */}
+                <LinkButton to="/jobs/analysis" variant="outline">
+                  {t({ bn: 'সব ফলাফল ও বিশ্লেষণ দেখুন →', en: 'See all results and analysis →' })}
+                </LinkButton>
               </>
             )}
           </Card>

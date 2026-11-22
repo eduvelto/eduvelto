@@ -558,6 +558,110 @@ export function buildWrongAnswerList(attempt: JobAttemptSummary): WrongAnswerEnt
 }
 
 /* ------------------------------------------------------------------ */
+/* 9. ChatGPT fold-in (Step 10): topic levels, correct-vs-wrong     */
+/*    time, the three-second observation, per-exam grouping          */
+/* ------------------------------------------------------------------ */
+
+/** Topic level for the result table (ChatGPT §2A/§3): three
+ * text levels — never colour alone, and never a permanent
+ * ability label ("এই পরীক্ষায় দুর্বল", not "আপনি গণিতে
+ * দুর্বল"). A topic with fewer than 3 questions is too small
+ * a sample to judge (ChatGPT §4: ১/২ = ৫০% ≠ ১০/২০ = ৫০%). */
+export type TopicLevel = 'good' | 'medium' | 'weak' | 'small-sample';
+
+export const TOPIC_LEVEL_BN: Record<TopicLevel, string> = {
+  good: 'ভালো',
+  medium: 'মাঝারি',
+  weak: 'এই পরীক্ষায় দুর্বল',
+  'small-sample': 'নমুনা ছোট — সিদ্ধান্ত নয়',
+};
+
+export function topicLevel(accuracy: number, total: number): TopicLevel {
+  if (total < 3) return 'small-sample';
+  if (accuracy >= 70) return 'good';
+  if (accuracy >= 40) return 'medium';
+  return 'weak';
+}
+
+/** Average time on correct vs wrong answers (ChatGPT §2B).
+ * The insight pattern is "ভুল উত্তরে গড়ে X সেকেন্ড, সঠিক
+ * উত্তরে Y সেকেন্ড" — but time alone is never a judgement:
+ * a hard question honestly takes longer than an easy one, so
+ * the page pairs the numbers with that caveat. */
+export interface CorrectVsWrongTime {
+  avgCorrectSeconds: number;
+  avgWrongSeconds: number;
+  correctCount: number;
+  wrongCount: number;
+}
+
+export function correctVsWrongTime(answers: JobAttemptAnswer[]): CorrectVsWrongTime {
+  let correctTime = 0;
+  let wrongTime = 0;
+  let correctCount = 0;
+  let wrongCount = 0;
+  for (const a of answers) {
+    if (a.selected === null) continue;
+    const t = typeof a.timeSpentSeconds === 'number' && a.timeSpentSeconds >= 0 ? a.timeSpentSeconds : 0;
+    if (a.correct) {
+      correctCount += 1;
+      correctTime += t;
+    } else {
+      wrongCount += 1;
+      wrongTime += t;
+    }
+  }
+  return {
+    avgCorrectSeconds: correctCount > 0 ? correctTime / correctCount : 0,
+    avgWrongSeconds: wrongCount > 0 ? wrongTime / wrongCount : 0,
+    correctCount,
+    wrongCount,
+  };
+}
+
+/** The three-second summary (ChatGPT §3): one personalized
+ * observation generated from THIS attempt's actual data — the
+ * weakest topic + what the wrong answers cost. Never a generic
+ * motivational template, never an invented benchmark. */
+export function resultObservation(attempt: JobAttemptSummary): string {
+  if (attempt.answers.length === 0 || attempt.unansweredCount === attempt.answers.length) {
+    return 'কোনো প্রশ্নের উত্তর দেওয়া হয়নি — পরেরবার অন্তত কিছু প্রশ্নের উত্তর দেওয়ার চেষ্টা করুন।';
+  }
+  if (attempt.wrongCount === 0) {
+    return 'কোনো ভুল উত্তর নেই — সব প্রশ্নের উত্তর সঠিক হয়েছে।';
+  }
+  const stats = perTopicAccuracy(attempt.answers).filter((s) => s.wrong > 0 && s.total >= 2);
+  const weakest = stats.length > 0
+    ? [...stats].sort((a, b) => a.accuracy - b.accuracy || b.wrong - a.wrong)[0]
+    : null;
+  const cost = attempt.negativeDeduction > 0
+    ? ` ভুল উত্তরে ${attempt.negativeDeduction} নম্বর কাটা গেছে।`
+    : '';
+  if (!weakest) {
+    return `মোট ${attempt.wrongCount}টি ভুল উত্তর।${cost}`;
+  }
+  return `সবচেয়ে দুর্বল টপিক ${weakest.label} (${weakest.correct}/${weakest.total} সঠিক) — এটাই ১ম অগ্রাধিকার।${cost}`;
+}
+
+/** Group attempts by exam (ChatGPT §2D): progress is only ever
+ * compared between SIMILAR tests — a 100-question BCS mock is
+ * never trended against a 20-question practice bundle. Groups
+ * are sorted by attempt count desc, then exam slug. */
+export function groupAttemptsByExam(
+  attempts: JobAttemptSummary[],
+): Array<{ examSlug: string; attempts: JobAttemptSummary[] }> {
+  const map = new Map<string, JobAttemptSummary[]>();
+  for (const a of attempts) {
+    const list = map.get(a.examSlug) ?? [];
+    list.push(a);
+    map.set(a.examSlug, list);
+  }
+  return [...map.entries()]
+    .map(([examSlug, list]) => ({ examSlug, attempts: list }))
+    .sort((a, b) => b.attempts.length - a.attempts.length || (a.examSlug < b.examSlug ? -1 : 1));
+}
+
+/* ------------------------------------------------------------------ */
 /* 8. Weak-topic practice link                                         */
 /* ------------------------------------------------------------------ */
 
