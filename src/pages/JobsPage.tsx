@@ -3,8 +3,9 @@
 // /jobs: the section's front door. Hero + exam cards grouped by the 10
 // categories (Step 5 — Step 2 §0.4/§2.1; was tier-grouped before) +
 // the common-preparation card + how to start. No question counts, no
-// mock counts — no content is published yet. Tier 2/3 cards honestly
-// say "Coming soon".
+// mock counts — the live hub has no practice UI yet (the first verified
+// bank batch — 35 BCS English questions — is served once practice
+// ships). Tier 2/3 cards honestly say "Coming soon".
 
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
@@ -49,8 +50,8 @@ export default function JobsPage() {
         </h2>
         <p style={{ margin: 0, color: 'rgba(255,255,255,0.92)', fontSize: 15, lineHeight: 1.7 }}>
           {t({
-            bn: 'চাকরির পরীক্ষার সিলেবাস, MCQ ব্যাংক, মক টেস্ট, বিগত প্রশ্ন ও ভাইভা প্রস্তুতি — সব এক জায়গায়। কনটেন্ট যাচাইকৃত শিক্ষকের যাচাইয়ের পর প্রকাশিত হবে।',
-            en: 'Syllabus, MCQ bank, mock tests, previous questions and viva preparation for job exams — all in one place. Content is published only after verified-teacher review.',
+            bn: 'চাকরির পরীক্ষার সিলেবাস, MCQ ব্যাংক, মক টেস্ট, বিগত প্রশ্ন ও ভাইভা প্রস্তুতি — সব এক জায়গায় থাকবে। কনটেন্ট যাচাইকৃত শিক্ষকের যাচাইয়ের পর প্রকাশিত হবে।',
+            en: 'Syllabus, MCQ bank, mock tests, previous questions and viva preparation for job exams — will all be in one place. Content is published only after verified-teacher review.',
           })}
         </p>
       </section>

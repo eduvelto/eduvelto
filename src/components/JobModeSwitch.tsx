@@ -6,7 +6,8 @@
 // in localStorage when signed out (see lib/jobMode.ts). The toggle shows
 // a one-line description of the active mode — Beginner: easy
 // explanations, basic practice, step by step, no timers; Advanced: hard
-// questions, timed exams, full model tests, competitive preparation.
+// questions, timed exams, full model tests, competitive preparation —
+// all coming soon (no live practice/mock yet).
 
 import { useJobMode, type JobMode } from '../lib/jobMode';
 import { useLanguage } from '../i18n/LanguageContext';
@@ -21,8 +22,8 @@ export const MODE_COPY: Record<JobMode, { bn: string; en: string; descBn: string
   advanced: {
     bn: 'অভিজ্ঞদের জন্য',
     en: 'Advanced',
-    descBn: 'অভিজ্ঞ পরীক্ষার্থীদের জন্য — কঠিন প্রশ্ন, সময়ভিত্তিক পরীক্ষা, পূর্ণাঙ্গ মডেল টেস্ট ও প্রতিযোগিতামূলক প্রস্তুতি।',
-    descEn: 'For experienced candidates — hard questions, timed exams, full model tests and competitive preparation.',
+    descBn: 'অভিজ্ঞ পরীক্ষার্থীদের জন্য — আসছে: কঠিন প্রশ্ন, সময়ভিত্তিক পরীক্ষা, পূর্ণাঙ্গ মডেল টেস্ট ও প্রতিযোগিতামূলক প্রস্তুতি।',
+    descEn: 'For experienced candidates — coming soon: hard questions, timed exams, full model tests and competitive preparation.',
   },
 };
 

@@ -214,18 +214,20 @@ export default function JobSeekerDashboardPage() {
         <Reveal delayMs={80}>
           <Card>
             <div style={{ fontWeight: 700, color: '#142B3B', fontSize: 17 }}>
-              {t({ bn: 'আজকের দৈনিক মক', en: "Today's daily mock" })}
+              {t({ bn: 'দৈনিক মক', en: 'Daily mock' })}
             </div>
-            <p style={{ margin: '8px 0 10px', color: '#57616A', fontSize: 14, lineHeight: 1.7 }}>
+            <p style={{ margin: '8px 0' }}>
+              <Chip tone="gold">{t({ bn: 'শীঘ্রই আসছে', en: 'Coming soon' })}</Chip>
+            </p>
+            <p style={{ margin: '8px 0', color: '#57616A', fontSize: 14, lineHeight: 1.7 }}>
               {t({ bn: DAILY_MOCK.sizeBn, en: DAILY_MOCK.sizeEn })} · {t({ bn: DAILY_MOCK.timeBn, en: DAILY_MOCK.timeEn })}
             </p>
-            <p style={{ margin: '0 0 10px', color: '#68747B', fontSize: 14, lineHeight: 1.7 }}>
+            <p style={{ margin: '0', color: '#68747B', fontSize: 14, lineHeight: 1.7 }}>
               {t({
                 bn: 'প্রতিদিন ভিন্ন কমন টপিক — দৈনিক মক চালু হলে এখানেই দিতে পারবেন।',
                 en: 'A different common topic every day — once the daily mock runs, you can take it right here.',
               })}
             </p>
-            <Chip tone="gold">{t({ bn: 'শীঘ্রই আসছে', en: 'Coming soon' })}</Chip>
           </Card>
         </Reveal>
 
@@ -233,12 +235,15 @@ export default function JobSeekerDashboardPage() {
         <Reveal delayMs={160}>
           <Card>
             <div style={{ fontWeight: 700, color: '#142B3B', fontSize: 17 }}>
-              {t({ bn: 'এই সপ্তাহের পূর্ণ মক', en: "This week's full mock" })}
+              {t({ bn: 'সাপ্তাহিক পূর্ণ মক', en: 'Weekly full mock' })}
             </div>
-            <p style={{ margin: '8px 0 10px', color: '#57616A', fontSize: 14, lineHeight: 1.7 }}>
-              {t({ bn: 'প্রতি সপ্তাহে ১টি পূর্ণ মক — চক্রাকারে:', en: 'One full mock every week — rotating:' })}
+            <p style={{ margin: '8px 0' }}>
+              <Chip tone="gold">{t({ bn: 'শীঘ্রই আসছে', en: 'Coming soon' })}</Chip>
             </p>
-            <p style={{ margin: '0 0 10px', color: '#57616A', fontSize: 14, lineHeight: 1.9 }}>
+            <p style={{ margin: '8px 0', color: '#57616A', fontSize: 14, lineHeight: 1.7 }}>
+              {t({ bn: 'পরিকল্পনা: প্রতি সপ্তাহে ১টি পূর্ণ মক — চক্রাকারে:', en: 'Plan: one full mock every week — rotating:' })}
+            </p>
+            <p style={{ margin: '0', color: '#57616A', fontSize: 14, lineHeight: 1.9 }}>
               {cycle.map((def, i) => (
                 <span key={def.slug}>
                   {i > 0 ? ' → ' : ''}
@@ -248,7 +253,6 @@ export default function JobSeekerDashboardPage() {
                 </span>
               ))}
             </p>
-            <Chip tone="gold">{t({ bn: 'শীঘ্রই আসছে', en: 'Coming soon' })}</Chip>
           </Card>
         </Reveal>
 

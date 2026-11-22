@@ -2,18 +2,22 @@
 //
 // /jobs/common: the shared preparation space for the 4 main exams
 // (BCS, Bank, Primary Teacher, NTRCA). Four cards, all Coming Soon:
-// today's daily short mock, this week's full mock (cycle), the common
-// topic list, and my progress. NO questions, NO live mocks — the
-// cards describe what will run, with the design rules from the plan.
+// the daily short mock, the weekly full mock (cycle), the common
+// topic list, and my progress. NO common-topic questions, NO live
+// mocks — the cards describe what will run, with the design rules
+// from the plan.
 //
 // Design rules shown (design plan §4, proposed defaults for §7.3/§7.4):
 // daily mock 20–30 MCQ in 20–30 minutes, topic rotation, negative
 // marking follows that day's cycle exam (BCS day −0.50, Primary/NTRCA
-// day −0.25); weekly full mock cycles BCS → Bank → Primary → NTRCA,
-// each in its exam's real pattern. The daily mock's publish time is
-// NOT decided yet — the card says so. The topic map is PRELIMINARY
-// (B-10.1 finalises it); the ~50 per topic is a TARGET, not a count —
-// 0 questions are published today.
+// day −0.25; Bank day: negative marking off — circular verification
+// pending, matching the Step 8 engine decision); weekly full mock
+// Bank → Primary → NTRCA, each in its exam's real pattern. The daily
+// mock's publish time is NOT decided yet — the card says so. The topic
+// map is PRELIMINARY (B-10.1 finalises it); the ~50 per topic is a
+// TARGET, not a count — no common-topic questions are published yet
+// (the first bank batch is 35 BCS English questions, served once
+// practice ships).
 
 import { Link } from 'react-router-dom';
 import { PageShell } from '../components/PageShell';
@@ -77,18 +81,20 @@ export default function JobsCommonPage() {
         <Reveal delayMs={0}>
           <Card>
             <div style={{ fontWeight: 700, color: '#142B3B', fontSize: 17 }}>
-              {t({ bn: 'আজকের দৈনিক মক', en: "Today's daily mock" })}
+              {t({ bn: 'দৈনিক মক', en: 'Daily mock' })}
             </div>
+            <p style={{ margin: '8px 0' }}>
+              <Chip tone="gold">{t({ bn: 'শীঘ্রই আসছে', en: 'Coming soon' })}</Chip>
+            </p>
             <p style={{ margin: '8px 0', color: '#57616A', fontSize: 14, lineHeight: 1.7 }}>
               {t({ bn: DAILY_MOCK.sizeBn, en: DAILY_MOCK.sizeEn })} · {t({ bn: DAILY_MOCK.timeBn, en: DAILY_MOCK.timeEn })}
             </p>
-            <p style={{ margin: '0 0 10px', color: '#68747B', fontSize: 14, lineHeight: 1.7 }}>
+            <p style={{ margin: '0', color: '#68747B', fontSize: 14, lineHeight: 1.7 }}>
               {t({
-                bn: 'প্রতিদিন ভিন্ন টপিক — এক সপ্তাহে সব কমন টপিক ঘুরে আসে। নেগেটিভ মার্কিং ওই দিনের চক্রের পরীক্ষার নিয়মে হবে (BCS-র দিনে −০.৫০, প্রাথমিক/NTRCA-র দিনে −০.২৫)। প্রকাশের সময় এখনো ঠিক হয়নি।',
-                en: 'A different topic every day — all common topics rotate through in a week. Negative marking follows that day’s cycle exam (BCS day −0.50, Primary/NTRCA day −0.25). The publish time is not decided yet.',
+                bn: 'প্রতিদিন ভিন্ন টপিক — ৯টি কমন টপিক প্রায় ৯ দিনে ঘুরে আসে। নেগেটিভ মার্কিং ওই দিনের চক্রের পরীক্ষার নিয়মে হবে (BCS-র দিনে −০.৫০, প্রাথমিক/NTRCA-র দিনে −০.২৫; ব্যাংকের দিনে নেগেটিভ মার্কিং বন্ধ — বিজ্ঞপ্তি যাচাই বাকি)। প্রকাশের সময় এখনো ঠিক হয়নি।',
+                en: 'A different topic every day — the 9 common topics rotate through in about 9 days. Negative marking follows that day’s cycle exam (BCS day −0.50, Primary/NTRCA day −0.25; Bank day: negative marking off — circular verification pending). The publish time is not decided yet.',
               })}
             </p>
-            <Chip tone="gold">{t({ bn: 'শীঘ্রই আসছে', en: 'Coming soon' })}</Chip>
           </Card>
         </Reveal>
 
@@ -96,12 +102,15 @@ export default function JobsCommonPage() {
         <Reveal delayMs={80}>
           <Card>
             <div style={{ fontWeight: 700, color: '#142B3B', fontSize: 17 }}>
-              {t({ bn: 'এই সপ্তাহের পূর্ণ মক', en: "This week's full mock" })}
+              {t({ bn: 'সাপ্তাহিক পূর্ণ মক', en: 'Weekly full mock' })}
             </div>
-            <p style={{ margin: '8px 0', color: '#57616A', fontSize: 14, lineHeight: 1.7 }}>
-              {t({ bn: 'প্রতি সপ্তাহে ১টি পূর্ণ মক — চক্রাকারে:', en: 'One full mock every week — rotating:' })}
+            <p style={{ margin: '8px 0' }}>
+              <Chip tone="gold">{t({ bn: 'শীঘ্রই আসছে', en: 'Coming soon' })}</Chip>
             </p>
-            <ul style={{ margin: '0 0 10px', paddingLeft: 20, color: '#57616A', fontSize: 14, lineHeight: 1.9 }}>
+            <p style={{ margin: '8px 0', color: '#57616A', fontSize: 14, lineHeight: 1.7 }}>
+              {t({ bn: 'পরিকল্পনা: প্রতি সপ্তাহে ১টি পূর্ণ মক — চক্রাকারে:', en: 'Plan: one full mock every week — rotating:' })}
+            </p>
+            <ul style={{ margin: '0', paddingLeft: 20, color: '#57616A', fontSize: 14, lineHeight: 1.9 }}>
               {cycle.map((def) => (
                 <li key={def.slug}>
                   <strong style={{ color: '#142B3B' }}>{lang === 'bn' ? def.bn : def.en}</strong> —{' '}
@@ -109,7 +118,6 @@ export default function JobsCommonPage() {
                 </li>
               ))}
             </ul>
-            <Chip tone="gold">{t({ bn: 'শীঘ্রই আসছে', en: 'Coming soon' })}</Chip>
           </Card>
         </Reveal>
 
@@ -130,14 +138,14 @@ export default function JobsCommonPage() {
         </Reveal>
       </div>
 
-      {/* Common topics — preliminary map, target only, 0 questions published. */}
+      {/* Common topics — preliminary map, target only, 0 common-topic questions published. */}
       <Reveal>
         <h3 className="ev-section-h2">{t({ bn: 'কমন টপিক', en: 'Common topics' })}</h3>
       </Reveal>
       <p style={{ color: '#57616A', margin: '-8px 0 14px', fontSize: 14, lineHeight: 1.7 }}>
         {t({
-          bn: 'প্রাথমিক তালিকা — ৪টি পরীক্ষার অফিসিয়াল সিলেবাস মিলিয়ে চূড়ান্ত হবে। প্রতি টপিকে লক্ষ্য ~৫০টি প্রশ্ন। এখনো কোনো প্রশ্ন প্রকাশিত হয়নি।',
-          en: 'Preliminary list — to be finalised against the 4 exams’ official syllabuses. Target ~50 questions per topic. No questions are published yet.',
+          bn: 'প্রাথমিক তালিকা — ৪টি পরীক্ষার অফিসিয়াল সিলেবাস মিলিয়ে চূড়ান্ত হবে। প্রতি টপিকে লক্ষ্য ~৫০টি প্রশ্ন। কমন টপিকের কোনো প্রশ্ন এখনো প্রকাশিত হয়নি।',
+          en: 'Preliminary list — to be finalised against the 4 exams’ official syllabuses. Target ~50 questions per topic. No common-topic questions are published yet.',
         })}
       </p>
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: 12, marginBottom: 20 }}>
@@ -154,6 +162,7 @@ export default function JobsCommonPage() {
                 </p>
               ) : null}
               <p style={{ margin: '10px 0 0' }}>
+                <Chip>{t({ bn: 'প্রাথমিক তালিকা', en: 'Preliminary list' })}</Chip>{' '}
                 <Chip tone="gold">
                   {t({ bn: `লক্ষ্য: ~${COMMON_TOPIC_QUESTION_TARGET}টি প্রশ্ন`, en: `Target: ~${COMMON_TOPIC_QUESTION_TARGET} questions` })}
                 </Chip>{' '}

@@ -8,22 +8,26 @@
 // body, stages, official-site link), the VERIFIED exam pattern for the
 // 4 main exams (EXAM_PATTERNS — MCQ-stage subject breakdown, total,
 // time, negative marking; source: job analysis 21 Nov 2026, with the
-// "verify against the latest circular" caveat) and the 7 "100%
-// preparation" elements as Coming Soon. Every content tab shows an
-// honest empty state — NO syllabus tables (B-2.1), NO questions
-// (B-2.2), NO mocks (B-2.3), NO previous questions (B-6.1) until
-// teacher review. Age limits, fees and exam dates are never written
+// "verify against the latest circular" caveat) and the 7 preparation
+// elements as Coming Soon. Every content tab shows an honest empty
+// state — NO syllabus tables (B-2.1), NO live practice (B-2.2), NO
+// live mocks (B-2.3), NO previous questions (B-6.1) until the practice
+// engine ships; the first verified bank batch (35 BCS English
+// questions) is already in the database. Age limits, fees and exam
+// dates are never written
 // here — they change with every circular. BCS viva marks are never
 // written (200 vs 100 disputed); NTRCA 19th pattern is never written.
 // No ads on this page: the hub is all practice / exam / result space
 // (design plan §1.4).
 
-import { Link, useParams } from 'react-router-dom';
+import { Link, Navigate, useParams } from 'react-router-dom';
 import { PageShell, EmptyState } from '../components/PageShell';
 import { Card, Chip, LinkButton, Reveal } from '../components/ui';
 import { JobNonAffiliationNote } from '../components/JobCards';
 import JobModeSwitch from '../components/JobModeSwitch';
+import LoginWall from '../components/LoginWall';
 import { useLanguage, T } from '../i18n/LanguageContext';
+import { useAuth } from '../lib/auth';
 import { useJobMode } from '../lib/jobMode';
 import {
   EXAM_PATTERNS,
@@ -46,14 +50,14 @@ const TAB_EMPTY: Record<Exclude<JobTabSlug, 'home'>, { bn: string; en: string; n
   practice: {
     bn: 'অনুশীলন প্রশ্ন তৈরি হচ্ছে',
     en: 'Practice questions are being prepared',
-    noteBn: 'টপিকভিত্তিক MCQ (উত্তর ও ব্যাখ্যাসহ) শিক্ষক যাচাইয়ের পর প্রকাশিত হবে।',
-    noteEn: 'Topic-wise MCQs (with answer and explanation) will be published after teacher review.',
+    noteBn: 'টপিকভিত্তিক MCQ (উত্তর ও ব্যাখ্যাসহ) অনুশীলন চালু হলে এখানে আসবে।',
+    noteEn: 'Topic-wise MCQs (with answer and explanation) will appear here once practice runs.',
   },
   mocks: {
     bn: 'মক টেস্ট তৈরি হচ্ছে',
     en: 'Mock tests are being prepared',
-    noteBn: 'প্রশ্ন ব্যাংক প্রস্তুত হলে আসল ধরনে (নম্বর, সময়, নেগেটিভ মার্কিংসহ) মক দেওয়া যাবে।',
-    noteEn: 'Once the question bank is ready, mocks will run in the real pattern (marks, time, negative marking).',
+    noteBn: 'মক চালু হলে আসল ধরনে (নম্বর, সময়, নেগেটিভ মার্কিংসহ) মক দেওয়া যাবে।',
+    noteEn: 'Once mocks run, they will follow the real pattern (marks, time, negative marking).',
   },
   previous: {
     bn: 'যাচাইকৃত বিগত প্রশ্ন এখনো সংগ্রহ হয়নি',
@@ -84,6 +88,7 @@ const TAB_EMPTY: Record<Exclude<JobTabSlug, 'home'>, { bn: string; en: string; n
 export default function JobHubPage() {
   const { t } = useLanguage();
   const { mode } = useJobMode();
+  const { user } = useAuth();
   const { exam = '', tab } = useParams<{ exam: string; tab?: string }>();
   const def = jobExamBySlug(exam);
   const activeTab: JobTabSlug = isJobTabSlug(tab) ? tab : 'home';
@@ -100,6 +105,12 @@ export default function JobHubPage() {
         </p>
       </PageShell>
     );
+  }
+
+  // Unknown tab slug redirects to the hub home instead of silently
+  // rendering Home (same behaviour as the NU hub).
+  if (tab !== undefined && !isJobTabSlug(tab)) {
+    return <Navigate to={`/jobs/${def.slug}`} replace />;
   }
 
   const tabHref = (s: JobTabSlug) => (s === 'home' ? `/jobs/${def.slug}` : `/jobs/${def.slug}/${s}`);
@@ -189,7 +200,7 @@ export default function JobHubPage() {
               {def.officialUrl ? (
                 <p style={{ margin: '12px 0 0' }}>
                   <a href={def.officialUrl} target="_blank" rel="noreferrer" style={{ fontWeight: 600 }}>
-                    {t({ bn: 'সর্বশেষ বিজ্ঞপ্তি দেখুন →', en: 'See the latest circular →' })}
+                    {t({ bn: def.officialLinkBn ?? 'সর্বশেষ বিজ্ঞপ্তি দেখুন →', en: def.officialLinkEn ?? 'See the latest circular →' })}
                   </a>
                 </p>
               ) : (
@@ -227,8 +238,10 @@ export default function JobHubPage() {
 
           {/* Mode view — Beginner or Advanced (owner decision 22 Nov
               2026). STRUCTURE ONLY: every practice/mock entry below is
-              an honest empty state — 0 questions exist in the database,
-              so nothing here pretends a test can be taken yet. */}
+              an honest empty state — the live hub has no practice UI
+              yet (the first verified bank batch, 35 BCS English
+              questions, is served once practice ships), so nothing here
+              pretends a test can be taken yet. */}
           {mode === 'beginner' ? (
             <>
               {/* Easy explanation — what this exam is, in plain words. */}
@@ -288,7 +301,7 @@ export default function JobHubPage() {
                       {t({ bn: 'সহজ প্রশ্ন দিয়ে শুরু', en: 'Start with easy questions' })}
                     </div>
                     <p style={{ margin: '6px 0 10px', color: '#68747B', fontSize: 14, lineHeight: 1.7 }}>
-                      {t({ bn: 'বেসিক প্রশ্ন (উত্তর ও ব্যাখ্যাসহ) শিক্ষক যাচাইয়ের পর এখানে আসবে — এখনো কোনো প্রশ্ন তৈরি হয়নি।', en: 'Basic questions (with answer and explanation) will come here after teacher review — no questions exist yet.' })}
+                      {t({ bn: 'বেসিক প্রশ্ন (উত্তর ও ব্যাখ্যাসহ) অনুশীলন চালু হলে এখানে আসবে।', en: 'Basic questions (with answer and explanation) will appear here once practice runs.' })}
                     </p>
                     <Chip tone="gold">{t({ bn: 'শীঘ্রই আসছে', en: 'Coming soon' })}</Chip>
                   </Card>
@@ -315,7 +328,7 @@ export default function JobHubPage() {
                         : t({ bn: 'সময় ও নেগেটিভ মার্কিং বিজ্ঞপ্তি অনুযায়ী হবে।', en: 'Time and negative marking follow the circular.' })}
                     </p>
                     <p style={{ margin: '0 0 10px', color: '#68747B', fontSize: 14, lineHeight: 1.7 }}>
-                      {t({ bn: 'এখনো কোনো মক তৈরি হয়নি — প্রশ্ন ব্যাংক প্রস্তুত হলে আসল ধরনে মক দেওয়া যাবে।', en: 'No mock exists yet — once the question bank is ready, mocks will run in the real pattern.' })}
+                      {t({ bn: 'মক এখনো চালু হয়নি — চালু হলে আসল ধরনে মক দেওয়া যাবে।', en: 'Mocks have not started yet — once they run, they will follow the real pattern.' })}
                     </p>
                     <Link to={tabHref('mocks')} style={{ fontWeight: 600 }}>
                       {t({ bn: 'মক টেস্ট দেখুন →', en: 'See mock tests →' })}
@@ -344,7 +357,7 @@ export default function JobHubPage() {
                       {t({ bn: 'প্রতিযোগিতামূলক প্রস্তুতি', en: 'Competitive preparation' })}
                     </div>
                     <p style={{ margin: '6px 0 10px', color: '#68747B', fontSize: 14, lineHeight: 1.7 }}>
-                      {t({ bn: 'প্রতি সপ্তাহে ১টি পূর্ণ মক — চক্রাকারে:', en: 'One full mock every week — rotating:' })}
+                      {t({ bn: 'পরিকল্পনা: প্রতি সপ্তাহে ১টি পূর্ণ মক — চক্রাকারে:', en: 'Plan: one full mock every week — rotating:' })}
                     </p>
                     <p style={{ margin: '0 0 10px', color: '#57616A', fontSize: 14, lineHeight: 1.9 }}>
                       {WEEKLY_MOCK_CYCLE.map((s, i) => {
@@ -369,6 +382,21 @@ export default function JobHubPage() {
                   </Card>
                 </Reveal>
               </div>
+              {/* Timed mocks and model tests run behind sign-in — guests
+                  meet the login wall on the mocks tab, so this hint
+                  tells them up front instead of letting the cards
+                  promise a test they cannot take yet. */}
+              {!user ? (
+                <p style={{ margin: '0 0 20px', color: '#57616A', fontSize: 14 }}>
+                  {t({
+                    bn: 'সময়ভিত্তিক মক ও মডেল টেস্ট দিতে লগইন করতে হবে — ',
+                    en: 'You need to sign in to take timed mocks and model tests — ',
+                  })}
+                  <Link to="/login" style={{ fontWeight: 600 }}>
+                    {t({ bn: 'লগইন করুন →', en: 'Sign in →' })}
+                  </Link>
+                </p>
+              ) : null}
             </>
           )}
 
@@ -443,7 +471,7 @@ export default function JobHubPage() {
 
           {/* The 7 "100% preparation" elements — all Coming Soon for now. */}
           <Reveal>
-            <h3 className="ev-section-h2">{t({ bn: '১০০% প্রস্তুতির ৭টি উপাদান', en: 'The 7 elements of 100% preparation' })}</h3>
+            <h3 className="ev-section-h2">{t({ bn: 'প্রস্তুতির ৭টি উপাদান (তৈরি হচ্ছে)', en: 'The 7 elements of preparation (being prepared)' })}</h3>
           </Reveal>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: 12, marginBottom: 20 }}>
             {JOB_ELEMENTS.map((el, i) => (
@@ -468,8 +496,8 @@ export default function JobHubPage() {
             <Card>
               <p style={{ margin: 0, color: '#68747B', fontSize: 14, lineHeight: 1.7 }}>
                 {t({
-                  bn: 'এই পরীক্ষার সিলেবাস, প্রশ্ন ও মক টেস্ট এখন তৈরি হচ্ছে — যাচাইকৃত শিক্ষক যাচাই করলে তবেই প্রকাশিত হবে। এখানে "পাশ করবেন / চাকরি পাবেন" — এমন কোনো গ্যারান্টি দেওয়া হয় না।',
-                  en: 'This exam’s syllabus, questions and mock tests are being prepared — they will be published only after verified-teacher review. No "you will pass / you will get the job" guarantee is given here.',
+                  bn: 'এই পরীক্ষার সিলেবাস, অনুশীলন ও মক টেস্ট তৈরি হচ্ছে — চালু হলে এখানেই পাবেন। এখানে "পাশ করবেন / চাকরি পাবেন" — এমন কোনো গ্যারান্টি দেওয়া হয় না।',
+                  en: 'This exam’s syllabus, practice and mock tests are being prepared — you will find them here once they run. No "you will pass / you will get the job" guarantee is given here.',
                 })}
               </p>
               <p style={{ margin: '12px 0 0' }}>
@@ -480,6 +508,12 @@ export default function JobHubPage() {
             </Card>
           </Reveal>
         </>
+      ) : !user && (activeTab === 'practice' || activeTab === 'mocks' || activeTab === 'results' || activeTab === 'progress') ? (
+        // Exam data lives behind sign-in (auth-gating, live since
+        // 22 Nov 2026): guests see the login wall here, never the
+        // empty state — so the moment practice/mocks ship, guests
+        // cannot reach them through these tabs.
+        <LoginWall kind="exam" />
       ) : (
         <Reveal>
           <Card>

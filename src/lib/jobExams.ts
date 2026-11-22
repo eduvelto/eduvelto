@@ -46,6 +46,11 @@ export interface JobExamDef {
   /** Official site — every hub links here for the latest circular.
       null when no single official site exists (Private & NGO jobs). */
   officialUrl: string | null;
+  /** Optional link-label override — used when the URL is a generic
+      portal (bangladesh.gov.bd), not the exam's own circular page,
+      so the link never promises "the latest circular". */
+  officialLinkBn?: string;
+  officialLinkEn?: string;
   /** Tier from the job analysis: 1 = main exams, 2 = DGFood/NTRCA/non-cadre, 3 = CAG/BFSA/others + the expanded categories (ministries, defence, autonomous, private & NGO). */
   tier: 1 | 2 | 3;
   /** Readiness of this exam's scope (Step 5 closure, P1-5): 'defined'
@@ -210,6 +215,8 @@ export const JOB_EXAMS: JobExamDef[] = [
     stepsBn: 'বিজ্ঞপ্তি অনুযায়ী',
     stepsEn: 'As per circular',
     officialUrl: 'https://bangladesh.gov.bd',
+    officialLinkBn: 'সরকারি পোর্টাল দেখুন →',
+    officialLinkEn: 'See the government portal →',
     tier: 3,
     scopeStatus: 'defined',
     accent: '#57534E',
@@ -231,6 +238,8 @@ export const JOB_EXAMS: JobExamDef[] = [
     stepsBn: 'বিজ্ঞপ্তি অনুযায়ী',
     stepsEn: 'As per circular',
     officialUrl: 'https://bangladesh.gov.bd',
+    officialLinkBn: 'সরকারি পোর্টাল দেখুন →',
+    officialLinkEn: 'See the government portal →',
     tier: 3,
     scopeStatus: 'defined',
     accent: '#3730A3',
@@ -248,6 +257,8 @@ export const JOB_EXAMS: JobExamDef[] = [
     stepsBn: 'বিজ্ঞপ্তি অনুযায়ী',
     stepsEn: 'As per circular',
     officialUrl: 'https://bangladesh.gov.bd',
+    officialLinkBn: 'সরকারি পোর্টাল দেখুন →',
+    officialLinkEn: 'See the government portal →',
     tier: 3,
     scopeStatus: 'defined',
     accent: '#B91C1C',
@@ -265,6 +276,8 @@ export const JOB_EXAMS: JobExamDef[] = [
     stepsBn: 'বিজ্ঞপ্তি অনুযায়ী',
     stepsEn: 'As per circular',
     officialUrl: 'https://bangladesh.gov.bd',
+    officialLinkBn: 'সরকারি পোর্টাল দেখুন →',
+    officialLinkEn: 'See the government portal →',
     tier: 3,
     scopeStatus: 'defined',
     accent: '#0E7490',
@@ -378,8 +391,8 @@ export const EXAM_PATTERNS: Partial<Record<string, ExamPattern>> = {
     noteEn: 'Preliminary is screening only — its marks do not count toward the final total. Written: 900 (general cadre), 1,100 (technical/professional cadre). Viva marks are not written here — sources disagree (200 vs 100); they will be written after verification from the latest BPSC circular.',
   },
   bank: {
-    titleBn: 'প্রিলিমিনারি — যাচাইকৃত ধরন (অফিসার, ক্যাশ)',
-    titleEn: 'Preliminary — verified pattern (Officer, Cash)',
+    titleBn: 'প্রিলিমিনারি — যাচাইকৃত বিষয়বণ্টন (অফিসার, ক্যাশ) · নেগেটিভ মার্কিং অযাচাইকৃত',
+    titleEn: 'Preliminary — verified subject split (Officer, Cash) · negative marking unverified',
     rows: [
       { subjectBn: 'বাংলা', subjectEn: 'Bangla', marks: '২৫' },
       { subjectBn: 'ইংরেজি', subjectEn: 'English', marks: '২৫' },
@@ -391,10 +404,10 @@ export const EXAM_PATTERNS: Partial<Record<string, ExamPattern>> = {
     totalEn: 'Total 100 marks',
     timeBn: '১ ঘণ্টা',
     timeEn: '1 hour',
-    negativeBn: 'ভুল উত্তরে সাধারণত ০.২৫ নম্বর কাটা যায় — বিজ্ঞপ্তি/প্রবেশপত্রে লেখা থাকে',
-    negativeEn: 'Usually 0.25 deducted per wrong answer — stated in the circular / admit card',
-    noteBn: 'পদভেদে ধরন ভিন্ন — সহকারী পরিচালকসহ কিছু পদের প্রিলিমিনারিতে ৪টি বিষয়ে ২৫ করে থাকে। প্রতিটি পদের পাতায় তার বিজ্ঞপ্তির ধরন লিখতে হবে। লিখিত: ২০০ নম্বর, ২ ঘণ্টা। ভাইভা: সাধারণত ২৫ নম্বর — বিজ্ঞপ্তি দিয়ে যাচাই করতে হবে।',
-    noteEn: 'The pattern differs by post — some posts (e.g. Assistant Director) have 4 subjects of 25 each. Each post’s page must show its own circular’s pattern. Written: 200 marks, 2 hours. Viva: usually 25 marks — to be verified per circular.',
+    negativeBn: 'নেগেটিভ মার্কিং অযাচাইকৃত — বিজ্ঞপ্তি/প্রবেশপত্রে লেখা হারই চূড়ান্ত',
+    negativeEn: 'Negative marking unverified — the rate in the circular / admit card is final',
+    noteBn: 'পদভেদে ধরন ভিন্ন — সহকারী পরিচালকসহ কিছু পদের প্রিলিমিনারিতে ৪টি বিষয়ে ২৫ করে থাকে। প্রতিটি পদের পাতায় তার বিজ্ঞপ্তির ধরন লিখতে হবে। লিখিত: ২০০ নম্বর, ২ ঘণ্টা। ভাইভা: সাধারণত ২৫ নম্বর — বিজ্ঞপ্তি দিয়ে যাচাই করতে হবে। নেগেটিভ মার্কিং সাধারণত ০.২৫ ধরা হয়, তবে তা যাচাই হয়নি।',
+    noteEn: 'The pattern differs by post — some posts (e.g. Assistant Director) have 4 subjects of 25 each. Each post’s page must show its own circular’s pattern. Written: 200 marks, 2 hours. Viva: usually 25 marks — to be verified per circular. Negative marking is usually taken as 0.25, but that is not verified.',
   },
   'primary-teacher': {
     titleBn: 'লিখিত (MCQ) — বর্তমান ধরন (DPE ২০২৫ বিধি)',

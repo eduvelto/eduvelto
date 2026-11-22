@@ -84,7 +84,7 @@ export default function NuHubPage() {
           {t({ bn: 'জাতীয় বিশ্ববিদ্যালয় ভর্তি', en: 'National University Admission' })}
         </h2>
         <p style={{ margin: '0 0 10px', opacity: 0.92, lineHeight: 1.7 }}>
-          {t({ bn: 'অনার্স ১ম বর্ষ — সেশন ২০২৫-২০২৬', en: 'Honours 1st year — Session 2025-2026' })}
+          {t({ bn: 'অনার্স ১ম বর্ষ — সর্বশেষ যাচাইকৃত বিজ্ঞপ্তি: সেশন ২০২৫-২০২৬ (সমাপ্ত)', en: 'Honours 1st year — latest verified circular: session 2025-2026 (complete)' })}
         </p>
         <span
           style={{
@@ -283,13 +283,13 @@ export default function NuHubPage() {
           {!user ? <LoginPrompt /> : null}
           <div style={{ display: 'grid', gap: 12, gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', marginTop: 12 }}>
             <Card>
-              <strong>{t({ bn: 'এই সপ্তাহের পূর্ণ মক', en: 'This week’s full mock' })}</strong>
+              <strong>{t({ bn: 'সাপ্তাহিক পূর্ণ মক', en: 'Weekly full mock' })}</strong>
               <p style={{ color: '#57616A', fontSize: 14, lineHeight: 1.8, margin: '8px 0 0' }}>
                 {t({ bn: '১০০ MCQ · ১ ঘণ্টা · নেগেটিভ মার্কিং নেই · পাস ৩৫ (তুলনার জন্য) — শীঘ্রই আসছে।', en: '100 MCQ · 1 hour · no negative marking · pass 35 (for comparison) — coming soon.' })}
               </p>
             </Card>
             <Card>
-              <strong>{t({ bn: 'আজকের দৈনিক মক', en: 'Today’s daily mock' })}</strong>
+              <strong>{t({ bn: 'দৈনিক মক', en: 'Daily mock' })}</strong>
               <p style={{ color: '#57616A', fontSize: 14, lineHeight: 1.8, margin: '8px 0 0' }}>
                 {t({ bn: '২০–৩০ MCQ · ২০–৩০ মিনিট — প্রকাশের সময় এখনো ঠিক হয়নি।', en: '20–30 MCQ · 20–30 minutes — the publish time is not decided yet.' })}
               </p>
@@ -306,8 +306,8 @@ export default function NuHubPage() {
           />
           <p style={{ color: '#57616A', fontSize: 14, lineHeight: 1.8 }}>
             {t({
-              bn: 'একটিমাত্র বিগত পরীক্ষা আছে — ৩১ মে ২০২৫ (তিন শাখার তিনটি ভ্যারিয়েন্ট)। তার প্রশ্নপত্রের যাচাইকৃত কপি পাওয়া গেলে এখানে আসবে — শাখা + সাল + উৎসসহ। HSC প্যাকের অনুশীলনী প্রশ্ন কখনো "বিগত প্রশ্ন" নয়।',
-              en: 'There is only one previous exam — 31 May 2025 (three variants, one per group). Its verified question paper will appear here — with group + year + source — once a verified copy is found. HSC-pack practice questions are never "previous questions".',
+              bn: 'দুটি বিগত পরীক্ষা আছে — ৩১ মে ২০২৫ (২০২৪-২৫ সেশন) ও ২৫ এপ্রিল ২০২৬ (২০২৫-২৬ সেশন)। যাচাইকৃত প্রশ্নপত্র পাওয়া গেলে এখানে আসবে — শাখা + সাল + উৎসসহ। HSC প্যাকের অনুশীলনী প্রশ্ন কখনো "বিগত প্রশ্ন" নয়।',
+              en: 'There are two previous exams — 31 May 2025 (2024-25 session) and 25 April 2026 (2025-26 session). Their verified question papers will appear here — with group + year + source — once verified copies are found. HSC-pack practice questions are never "previous questions".',
             })}
           </p>
         </div>

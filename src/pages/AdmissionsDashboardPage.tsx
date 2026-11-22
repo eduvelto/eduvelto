@@ -20,7 +20,7 @@ import { useAuth } from '../lib/auth';
 import { NU_HUB_ROUTE } from '../lib/nuStructure';
 
 const PLANNED_ITEMS: { bn: string; en: string }[] = [
-  { bn: 'প্রোফাইল — লক্ষ্য প্রতিষ্ঠান ও শাখা', en: 'Profile — target institution and group' },
+  { bn: 'প্রোফাইল', en: 'Profile' },
   { bn: 'মোড (Beginner / Advanced)', en: 'Mode (Beginner / Advanced)' },
   { bn: 'লক্ষ্য প্রতিষ্ঠান ও শাখা', en: 'Target institution and group' },
   { bn: 'শেখার অগ্রগতি', en: 'Learning progress' },

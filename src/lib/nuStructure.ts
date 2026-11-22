@@ -377,7 +377,7 @@ export function nuGroupSubjects(group: NuGroupSlug): NuGroupSubject[] {
       ? {
           nameBn: 'শাখা-ভিত্তিক প্রশ্ন (৪০)',
           detailBn:
-            'বিজ্ঞান শাখার ৪০ নম্বর একটি ব্লক হিসেবে — ভেতরের বিভাজন (পদার্থবিজ্ঞান/রসায়ন/গণিত/জীববিজ্ঞান) Guideline-এ নিশ্চিত হলে এখানে আসবে।',
+            'বিজ্ঞান শাখার ৪০ নম্বর একটি ব্লক হিসেবে — ভেতরের বিভাজন Guideline-এ নিশ্চিত হলে এখানে আসবে।',
           isGroupBlock: true,
           slug: null,
         }

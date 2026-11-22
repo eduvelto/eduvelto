@@ -2,14 +2,15 @@
 //
 // One card per job exam (same visual language as the class cards:
 // colour identity, inline SVG icon only — no photos, no paid assets —
-// exam name, recruiting body, exam stages). Tier 1 cards get a
-// "Start preparation" button; Tier 2/3 cards carry an honest
-// "Coming soon" chip and a "View structure" button — the hub exists
-// as structure, but no content is ready yet, so nothing is shown as
+// exam name, recruiting body, exam stages). Every card carries an
+// honest "Coming soon" chip and a "View structure" button — no exam
+// has runnable practice/mock on live yet, so nothing is shown as
 // working. The common-preparation card links to /jobs/common.
 //
 // HONESTY: no question counts, no mock counts, no "most popular"
-// badge — no usage data exists and no content is published yet.
+// badge — no usage data exists, and the live hub has no practice UI
+// yet (the first verified bank batch — 35 BCS English questions —
+// sits in the database, served once practice ships).
 
 import { Link } from 'react-router-dom';
 import { Reveal } from './ui';
@@ -211,17 +212,17 @@ function ExamIcon({ slug }: { slug: string }) {
 
 export function JobCard({ def, delayMs = 0 }: { def: JobExamDef; delayMs?: number }) {
   const { lang, t } = useLanguage();
-  // Tier 1 hubs have their structure ready to explore; Tier 2/3 hubs
-  // exist as structure too, but their content is not ready — the chip
-  // says so plainly instead of a fake "start" promise.
-  const tier1 = def.tier === 1;
+  // No exam has runnable practice/mock on live yet, so every card
+  // says "View structure" + "Coming soon" instead of a fake "start"
+  // promise. Restore "প্রস্তুতি শুরু করুন" per exam once that exam
+  // has runnable practice/mock.
   return (
     <Reveal delayMs={delayMs}>
       <Link
         to={`/jobs/${def.slug}`}
         className="ev-class-card"
         style={{ background: def.accent, textDecoration: 'none' }}
-        aria-label={t({ bn: `${def.bn}. ${tier1 ? 'প্রস্তুতি শুরু করুন' : 'শীঘ্রই আসছে'}`, en: `${def.en}. ${tier1 ? 'Start preparation' : 'Coming soon'}` })}
+        aria-label={t({ bn: `${def.bn}. কাঠামো দেখুন`, en: `${def.en}. View structure` })}
       >
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: 8 }}>
           <div>
@@ -253,23 +254,21 @@ export function JobCard({ def, delayMs = 0 }: { def: JobExamDef; delayMs?: numbe
           {lang === 'bn' ? def.stepsBn : def.stepsEn}
         </p>
         <div style={{ marginTop: 'auto' }}>
-          {!tier1 ? (
-            <p style={{ margin: '0 0 10px' }}>
-              <span
-                style={{
-                  display: 'inline-block',
-                  background: 'rgba(255,255,255,0.22)',
-                  color: '#fff',
-                  fontSize: 13,
-                  fontWeight: 600,
-                  padding: '4px 10px',
-                  borderRadius: 999,
-                }}
-              >
-                {t({ bn: 'শীঘ্রই আসছে', en: 'Coming soon' })}
-              </span>
-            </p>
-          ) : null}
+          <p style={{ margin: '0 0 10px' }}>
+            <span
+              style={{
+                display: 'inline-block',
+                background: 'rgba(255,255,255,0.22)',
+                color: '#fff',
+                fontSize: 13,
+                fontWeight: 600,
+                padding: '4px 10px',
+                borderRadius: 999,
+              }}
+            >
+              {t({ bn: 'শীঘ্রই আসছে', en: 'Coming soon' })}
+            </span>
+          </p>
           <span
             aria-hidden="true"
             style={{
@@ -285,9 +284,7 @@ export function JobCard({ def, delayMs = 0 }: { def: JobExamDef; delayMs?: numbe
               minHeight: 40,
             }}
           >
-            {tier1
-              ? t({ bn: 'প্রস্তুতি শুরু করুন →', en: 'Start preparation →' })
-              : t({ bn: 'কাঠামো দেখুন →', en: 'View structure →' })}
+            {t({ bn: 'কাঠামো দেখুন →', en: 'View structure →' })}
           </span>
         </div>
       </Link>
@@ -400,7 +397,7 @@ export function JobsSection() {
         <h2 className="ev-section-h2">{t({ bn: 'চাকরির প্রস্তুতি', en: 'Job Preparation' })}</h2>
       </Reveal>
       <p style={{ color: '#57616A', margin: '-8px 0 14px', fontSize: 14 }}>
-        {t({ bn: 'চাকরির পরীক্ষার প্রস্তুতি — সিলেবাস, MCQ ব্যাংক, মক টেস্ট ও ভাইভা প্রস্তুতি এক জায়গায়। কনটেন্ট শিক্ষক যাচাইয়ের পর প্রকাশিত হবে।', en: 'Preparation for job exams — syllabus, MCQ bank, mock tests and viva preparation in one place. Content is published only after teacher review.' })}
+        {t({ bn: 'চাকরির পরীক্ষার প্রস্তুতি — সিলেবাস, MCQ ব্যাংক, মক টেস্ট ও ভাইভা প্রস্তুতি এক জায়গায় থাকবে। কনটেন্ট শিক্ষক যাচাইয়ের পর প্রকাশিত হবে।', en: 'Preparation for job exams — syllabus, MCQ bank, mock tests and viva preparation will be in one place. Content is published only after teacher review.' })}
       </p>
       <JobCategoryGroups />
       <div style={grid}>
