@@ -126,6 +126,7 @@ const VALID_BUNDLE = {
   titleEn: 'Sandhi — Practice',
   questions: BUNDLE_QUESTIONS,
   questionCount: 1,
+  bundleVersion: 1,
   status: 'published',
   reviewStatus: 'Published',
   sourceQuestionIds: ['q-published-b'],

@@ -289,6 +289,7 @@ export async function submitPracticeAttempt(
     subjectId,
     topicId: input.bundle.topicId ?? null,
     kind: 'practice',
+    bundleVersion: input.bundle.bundleVersion,
     userId: input.uid,
   });
   const problems = validateAttemptResult(attemptDoc);

@@ -149,6 +149,13 @@ export interface JobQuestionBundle {
   titleEn: string;
   questions: JobBundleQuestion[];
   questionCount: number;
+  /** Bundle generation (Step 8 fold-in, finding 5): 1 for the
+   * first generation; an attempt stores the bundleVersion it was
+   * scored against (rules: attempt.bundleVersion ==
+   * bundle.bundleVersion), so a republished bundle can never
+   * silently reinterpret an old attempt. Bumped when the question
+   * set changes (republish from corrected questions). */
+  bundleVersion: number;
   status: 'draft' | 'published';
   reviewStatus: JobQuestionReviewState;
   publishedAt?: unknown;
@@ -384,6 +391,11 @@ export function validateJobQuestionBundle(doc: Record<string, unknown>): string[
     if (!Number.isInteger(doc.questionCount) || (doc.questionCount as number) < 1 || (doc.questionCount as number) > 200) {
       problems.push(`${label}: questionCount must be 1–200 (largest verified exam: BCS 200)`);
     }
+    // Step 8 fold-in (finding 5): the bundle generation an attempt
+    // binds to — required on every bundle the constructor builds.
+    if (!Number.isInteger(doc.bundleVersion) || (doc.bundleVersion as number) < 1) {
+      problems.push(`${label}: bundleVersion must be an integer ≥1`);
+    }
     // The key-leak ban: no answer material anywhere in the bundle.
     const flat = JSON.stringify(doc.questions);
     for (const banned of ['correctLetter', 'explanation', 'correctText']) {
@@ -492,6 +504,7 @@ export function buildJobBundle(
     titleEn: meta.titleEn,
     questions: bundleQuestions,
     questionCount: bundleQuestions.length,
+    bundleVersion: 1,
     status: 'published',
     reviewStatus: 'Published',
     sourceQuestionIds: questions.map((q) => q.id),

@@ -59,6 +59,7 @@ function makeBundle(count: number, topics: string[]): { bundle: JobQuestionBundl
       ],
     })),
     questionCount: count,
+    bundleVersion: 1,
     status: 'published',
     reviewStatus: 'Published',
     sourceQuestionIds: Array.from({ length: count }, (_, i) => `q${i + 1}`),
@@ -114,15 +115,16 @@ describe('exam patterns', () => {
     expect(p!.patternLabel).toBe('যাচাইকৃত ধরন');
   });
 
-  it('p2: Bank is 100 MCQ / 1h / −0.25 NOT verified, no pass percent', () => {
+  it('p2: Bank is 100 MCQ / 1h / negative marking DISABLED (0, unverified), no pass percent', () => {
     const p = jobExamPattern('bank');
     expect(p).not.toBeNull();
     expect(p!.questionCount).toBe(100);
     expect(p!.timeMinutes).toBe(60);
-    expect(p!.negativeMarking).toBe(0.25);
+    expect(p!.negativeMarking).toBe(0);
     expect(p!.negativeMarkingVerified).toBe(false);
+    expect(p!.scoringConfigVersion).toBe('v0-provisional');
     expect(p!.passPercent).toBeNull();
-    expect(p!.patternLabel).toBe('সাধারণত −০.২৫ — বিজ্ঞপ্তি-নির্ভর');
+    expect(p!.patternLabel).toBe('নেগেটিভ মার্কিং বন্ধ — বিজ্ঞপ্তি যাচাই বাকি');
   });
 
   it('p3: Primary is 90 MCQ / 90 min / −0.25 verified, pass 50%', () => {
@@ -304,7 +306,30 @@ describe('scoring', () => {
     expect(r.answers[0]).toMatchObject({ n: 1, selected: 'A', correct: true, marks: 1, correctText: 'opt A' });
   });
 
-  it('c2: all-wrong with −0.25 — deduction, negative percentage kept', () => {
+  it('c2: all-wrong with −0.25 (Primary, verified) — deduction, negative percentage kept', () => {
+    const { bundle, key } = makeBundle(2, ['t1']);
+    const r = scorePracticeAttempt({
+      bundle,
+      key,
+      answers: [
+        { n: 1, questionId: 'q1', selected: 'C' as const },
+        { n: 2, questionId: 'q2', selected: 'C' as const },
+      ],
+      pattern: jobExamPattern('primary-teacher')!,
+      startedAtMillis: 0,
+      submittedAtMillis: 60000,
+    });
+    expect(r.score).toBe(-0.5);
+    expect(r.negativeDeduction).toBe(0.5);
+    expect(r.negativeMarkingUsed).toBe(0.25);
+    expect(r.markingSchemeVersion).toBe('v1');
+    expect(r.correctCount).toBe(0);
+    expect(r.wrongCount).toBe(2);
+    expect(r.accuracy).toBe(0);
+    expect(r.percentage).toBe(-25);
+  });
+
+  it('c2b: Bank all-wrong — negative marking DISABLED, no deduction (Step 8 fold-in, finding 2)', () => {
     const { bundle, key } = makeBundle(2, ['t1']);
     const r = scorePracticeAttempt({
       bundle,
@@ -317,12 +342,12 @@ describe('scoring', () => {
       startedAtMillis: 0,
       submittedAtMillis: 60000,
     });
-    expect(r.score).toBe(-0.5);
-    expect(r.negativeDeduction).toBe(0.5);
-    expect(r.correctCount).toBe(0);
+    expect(r.score).toBe(0);
+    expect(r.negativeDeduction).toBe(0);
+    expect(r.negativeMarkingUsed).toBe(0);
+    expect(r.markingSchemeVersion).toBe('v0-provisional');
     expect(r.wrongCount).toBe(2);
-    expect(r.accuracy).toBe(0);
-    expect(r.percentage).toBe(-25);
+    expect(r.percentage).toBe(0);
   });
 
   it('c3: all-wrong with −0.50 (BCS) — deduction is 0.5 per wrong', () => {
@@ -361,7 +386,7 @@ describe('scoring', () => {
     expect(r.correctCount).toBe(2);
     expect(r.wrongCount).toBe(1);
     expect(r.unansweredCount).toBe(1);
-    expect(r.score).toBe(1.75);
+    expect(r.score).toBe(2);
     expect(r.answers[3]).toMatchObject({ selected: null, correct: false, marks: 0 });
   });
 
@@ -381,7 +406,7 @@ describe('scoring', () => {
       submittedAtMillis: 60000,
     });
     expect(r.accuracy).toBeCloseTo(66.67, 2);
-    expect(r.percentage).toBe(43.75);
+    expect(r.percentage).toBe(50);
   });
 
   it('c6: wrongQuestionIds + weakTopics ordered by wrong desc', () => {
@@ -499,6 +524,7 @@ describe('attempt doc', () => {
       subjectId: 'bcs__bangla',
       topicId: 't1',
       kind: 'practice',
+      bundleVersion: 1,
       userId: 'user-1',
     });
   }
@@ -507,8 +533,9 @@ describe('attempt doc', () => {
     expect(Object.keys(makeAttemptDoc()).sort()).toEqual(
       [
         'accuracy', 'anomalyFlags', 'answerHashes', 'answers', 'audit',
-        'bundleId', 'clientCalculatedScore', 'correctCount', 'examSlug',
-        'markingStatus', 'mockId', 'negativeDeduction', 'percentage',
+        'bundleId', 'bundleVersion', 'clientCalculatedScore', 'correctCount', 'examSlug',
+        'markingSchemeVersion', 'markingStatus', 'mockId', 'negativeDeduction',
+        'negativeMarkingUsed', 'percentage',
         'resultLabel', 'resultType', 'score', 'serverVerifiedScore',
         'sessionId', 'startedAt', 'status', 'subjectId', 'submittedAt',
         'timeSpentSeconds', 'topicId', 'totalMarks', 'trustLevel',
@@ -677,7 +704,7 @@ describe('validators', () => {
     const doc = buildJobAttemptDoc({
       sessionId: 'sess-1', session, result, bundleId: 'topic__t1',
       examSlug: 'bcs', subjectId: 'bcs__bangla', topicId: 't1',
-      kind: 'practice', userId: 'user-1',
+      kind: 'practice', bundleVersion: 1, userId: 'user-1',
     });
     expect(validateAttemptResult({ ...doc, resultLabel: 'verified' })).toEqual(
       expect.arrayContaining([expect.stringContaining("resultLabel must be 'practice'")]),
@@ -694,7 +721,7 @@ describe('validators', () => {
     const doc = buildJobAttemptDoc({
       sessionId: 'sess-1', session, result, bundleId: 'topic__t1',
       examSlug: 'bcs', subjectId: 'bcs__bangla', topicId: 't1',
-      kind: 'practice', userId: 'user-1',
+      kind: 'practice', bundleVersion: 1, userId: 'user-1',
     });
     expect(validateAttemptResult({ ...doc, clientCalculatedScore: 99 })).toEqual(
       expect.arrayContaining([expect.stringContaining('clientCalculatedScore')]),
@@ -714,7 +741,7 @@ describe('validators', () => {
     const doc = buildJobAttemptDoc({
       sessionId: 'sess-1', session, result, bundleId: 'topic__t1',
       examSlug: 'bcs', subjectId: 'bcs__bangla', topicId: 't1',
-      kind: 'practice', userId: 'user-1',
+      kind: 'practice', bundleVersion: 1, userId: 'user-1',
     });
     expect(validateAttemptResult({ ...doc, correctCount: 1 })).toEqual(
       expect.arrayContaining([expect.stringContaining('correctCount')]),
@@ -734,7 +761,7 @@ describe('validators', () => {
     const doc = buildJobAttemptDoc({
       sessionId: 'sess-1', session, result, bundleId: 'topic__t1',
       examSlug: 'bcs', subjectId: 'bcs__bangla', topicId: 't1',
-      kind: 'practice',
+      kind: 'practice', bundleVersion: 1,
     });
     expect(validateAttemptResult(doc)).toEqual(
       expect.arrayContaining([expect.stringContaining('userId is required')]),
@@ -746,5 +773,106 @@ describe('validators', () => {
     expect(validatePracticeSession('nope')).toHaveLength(1);
     expect(validateAttemptResult(null)).toHaveLength(1);
     expect(validateAttemptResult([])).toHaveLength(1);
+  });
+
+  // Step 8 fold-in (ChatGPT findings 2/5/9): the attempt's declared
+  // marking scheme must be present, consistent, and bound to the
+  // bundle generation.
+  it('v9: missing negativeMarkingUsed / markingSchemeVersion / bundleVersion fail', () => {
+    const session = makeSession(2);
+    const { bundle, key } = makeBundle(2, ['t1']);
+    const result = scorePracticeAttempt({
+      bundle, key, answers: allCorrect(2), pattern: jobExamPattern('bcs')!,
+      startedAtMillis: 0, submittedAtMillis: 60000,
+    });
+    const doc = buildJobAttemptDoc({
+      sessionId: 'sess-1', session, result, bundleId: 'topic__t1',
+      examSlug: 'bcs', subjectId: 'bcs__bangla', topicId: 't1',
+      kind: 'practice', bundleVersion: 1, userId: 'user-1',
+    });
+    const { negativeMarkingUsed: _u, ...noUsed } = doc;
+    expect(validateAttemptResult(noUsed)).toEqual(
+      expect.arrayContaining([expect.stringContaining('negativeMarkingUsed')]),
+    );
+    const { markingSchemeVersion: _m, ...noScheme } = doc;
+    expect(validateAttemptResult(noScheme)).toEqual(
+      expect.arrayContaining([expect.stringContaining('markingSchemeVersion')]),
+    );
+    const { bundleVersion: _b, ...noBundle } = doc;
+    expect(validateAttemptResult(noBundle)).toEqual(
+      expect.arrayContaining([expect.stringContaining('bundleVersion')]),
+    );
+  });
+
+  it('v10: negativeDeduction != wrongCount * negativeMarkingUsed fails', () => {
+    const session = makeSession(2);
+    const { bundle, key } = makeBundle(2, ['t1']);
+    const result = scorePracticeAttempt({
+      bundle, key,
+      answers: [
+        { n: 1, questionId: 'q1', selected: 'A' as const },
+        { n: 2, questionId: 'q2', selected: 'C' as const },
+      ],
+      pattern: jobExamPattern('bcs')!,
+      startedAtMillis: 0, submittedAtMillis: 60000,
+    });
+    const doc = buildJobAttemptDoc({
+      sessionId: 'sess-1', session, result, bundleId: 'topic__t1',
+      examSlug: 'bcs', subjectId: 'bcs__bangla', topicId: 't1',
+      kind: 'practice', bundleVersion: 1, userId: 'user-1',
+    });
+    expect(validateAttemptResult(doc)).toEqual([]);
+    // Bank-style fabrication: claim a 0.25 deduction on a 0.5 scheme.
+    expect(validateAttemptResult({ ...doc, negativeDeduction: 0.25 })).toEqual(
+      expect.arrayContaining([expect.stringContaining('negativeDeduction')]),
+    );
+  });
+
+  it('v11: wrong-answer marks must equal -negativeMarkingUsed', () => {
+    const session = makeSession(2);
+    const { bundle, key } = makeBundle(2, ['t1']);
+    const result = scorePracticeAttempt({
+      bundle, key,
+      answers: [
+        { n: 1, questionId: 'q1', selected: 'A' as const },
+        { n: 2, questionId: 'q2', selected: 'C' as const },
+      ],
+      pattern: jobExamPattern('bcs')!,
+      startedAtMillis: 0, submittedAtMillis: 60000,
+    });
+    const doc = buildJobAttemptDoc({
+      sessionId: 'sess-1', session, result, bundleId: 'topic__t1',
+      examSlug: 'bcs', subjectId: 'bcs__bangla', topicId: 't1',
+      kind: 'practice', bundleVersion: 1, userId: 'user-1',
+    });
+    const tampered = {
+      ...doc,
+      answers: (doc.answers as Array<Record<string, unknown>>).map((a) =>
+        a.correct === false ? { ...a, marks: -0.25 } : a,
+      ),
+    };
+    expect(validateAttemptResult(tampered)).toEqual(
+      expect.arrayContaining([expect.stringContaining('marks == -negativeMarkingUsed')]),
+    );
+  });
+
+  it('v12: bundleVersion 0 / empty markingSchemeVersion fail', () => {
+    const session = makeSession(2);
+    const { bundle, key } = makeBundle(2, ['t1']);
+    const result = scorePracticeAttempt({
+      bundle, key, answers: allCorrect(2), pattern: jobExamPattern('bcs')!,
+      startedAtMillis: 0, submittedAtMillis: 60000,
+    });
+    const doc = buildJobAttemptDoc({
+      sessionId: 'sess-1', session, result, bundleId: 'topic__t1',
+      examSlug: 'bcs', subjectId: 'bcs__bangla', topicId: 't1',
+      kind: 'practice', bundleVersion: 1, userId: 'user-1',
+    });
+    expect(validateAttemptResult({ ...doc, bundleVersion: 0 })).toEqual(
+      expect.arrayContaining([expect.stringContaining('bundleVersion')]),
+    );
+    expect(validateAttemptResult({ ...doc, markingSchemeVersion: '' })).toEqual(
+      expect.arrayContaining([expect.stringContaining('markingSchemeVersion')]),
+    );
   });
 });

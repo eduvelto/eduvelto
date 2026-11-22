@@ -621,7 +621,13 @@ service cloud.firestore {
         && d.get('status', null) in ['draft', 'published']
         && isJobQuestionReviewState(d.get('reviewStatus', null))
         && jobQuestionStatesConsistent(d)
-        && (d.get('configVersion', null) == null || d.get('configVersion', null) is string);
+        && (d.get('configVersion', null) == null || d.get('configVersion', null) is string)
+        // Step 8 fold-in (finding 5): the bundle generation an
+        // attempt binds to — optional here (older bundles may lack
+        // it) but validated when present; the ATTEMPT rule requires
+        // the bundle to carry it and match.
+        && (d.get('bundleVersion', null) == null
+            || (d.get('bundleVersion', null) is int && d.get('bundleVersion', null) >= 1));
     }
     // Field-shape of an answer key. Per-answer checks are NOT
     // possible in rules (no list indexing); buildJobBundle() in the
@@ -739,14 +745,14 @@ service cloud.firestore {
     //  - Exact score formula: score == correct*marksPerQuestion -
     //    wrong*negativeMarking needs the exam pattern, which the
     //    rules do NOT look up (no jobExams read — keeps the rule
-    //    inside the get() budget). Enforceable approximation:
-    //    negativeDeduction == wrongCount*0.25 OR wrongCount*0.5
-    //    (the only two verified negative values: primary/NTRCA/bank
-    //    0.25, BCS 0.50; 0.25/0.5 steps are exact in doubles), plus
-    //    score == clientCalculatedScore and the loose bound
-    //    -totalMarks <= score <= totalMarks (holds while
-    //    marksPerQuestion >= 1 and negative <= 0.5 — true for every
-    //    verified pattern). The exact formula is lib-level.
+    //    inside the get() budget). Enforceable binding (Step 8
+    //    fold-in, findings 2/5): the attempt DECLARES the marking
+    //    it was scored under (`negativeMarkingUsed` in {0, 0.25,
+    //    0.5} + `markingSchemeVersion`), and the rule enforces
+    //    negativeDeduction == wrongCount * negativeMarkingUsed —
+    //    so a claimed deduction always matches a declared scheme
+    //    (Bank: 0 — its penalty is unverified and disabled, never
+    //    the provisional 0.25). The exact formula is lib-level.
     //  - Float division: accuracy/percentage formulas cannot be
     //    verified (rules cannot reliably check float division), so
     //    only ranges are enforced (accuracy 0..100, percentage
@@ -768,7 +774,8 @@ service cloud.firestore {
     function validJobAttemptCreate(d, userId, attemptId) {
       return d.keys().hasOnly(['userId', 'kind', 'mockId', 'bundleId',
              'examSlug', 'subjectId', 'topicId', 'answers', 'score',
-             'totalMarks', 'negativeDeduction', 'correctCount',
+             'totalMarks', 'negativeDeduction', 'negativeMarkingUsed',
+             'markingSchemeVersion', 'bundleVersion', 'correctCount',
              'wrongCount', 'unansweredCount', 'accuracy', 'percentage',
              'timeSpentSeconds', 'startedAt', 'submittedAt', 'status',
              'markingStatus', 'resultLabel', 'clientCalculatedScore',
@@ -776,7 +783,8 @@ service cloud.firestore {
              'sessionId', 'audit', 'answerHashes', 'anomalyFlags'])
         && d.keys().hasAll(['userId', 'kind', 'mockId', 'bundleId',
              'examSlug', 'subjectId', 'topicId', 'answers', 'score',
-             'totalMarks', 'negativeDeduction', 'correctCount',
+             'totalMarks', 'negativeDeduction', 'negativeMarkingUsed',
+             'markingSchemeVersion', 'bundleVersion', 'correctCount',
              'wrongCount', 'unansweredCount', 'accuracy', 'percentage',
              'timeSpentSeconds', 'startedAt', 'submittedAt', 'status',
              'markingStatus', 'resultLabel', 'clientCalculatedScore',
@@ -788,8 +796,10 @@ service cloud.firestore {
             || (d.get('kind', null) == 'practice' && d.get('mockId', null) == null))
         && d.get('bundleId', null) is string
         && d.get('examSlug', null) in jobExamSlugs()
-        && (d.get('subjectId', null) == null || d.get('subjectId', null) is string)
-        && (d.get('topicId', null) == null || d.get('topicId', null) is string)
+        && (d.get('subjectId', null) == null
+            || (d.get('subjectId', null) is string && d.get('subjectId', '').size() <= 200))
+        && (d.get('topicId', null) == null
+            || (d.get('topicId', null) is string && d.get('topicId', '').size() <= 200))
         && d.get('answers', null) is list
         && d.get('answers', []).size() >= 1
         && d.get('score', null) is number
@@ -799,13 +809,24 @@ service cloud.firestore {
         && d.get('clientCalculatedScore', null) == d.get('score', null)
         && d.get('negativeDeduction', null) is number
         && d.get('negativeDeduction', -1) >= 0
+        // Step 8 fold-in (findings 2/5/9): the deduction is bound
+        // to the DECLARED marking scheme — wrongCount × the penalty
+        // the attempt says was applied (0 for Bank, whose penalty
+        // is unverified and disabled). The scheme version pins the
+        // config generation; the bundle version pins the bundle.
+        && d.get('negativeMarkingUsed', null) is number
+        && (d.get('negativeMarkingUsed', -1) == 0
+            || d.get('negativeMarkingUsed', -1) == 0.25
+            || d.get('negativeMarkingUsed', -1) == 0.5)
+        && d.get('negativeDeduction', -1)
+             == d.get('wrongCount', 0) * d.get('negativeMarkingUsed', -1)
+        && isStr(d.get('markingSchemeVersion', null), 100)
+        && d.get('bundleVersion', null) is int && d.get('bundleVersion', 0) >= 1
         && d.get('correctCount', null) is int && d.get('correctCount', -1) >= 0
         && d.get('wrongCount', null) is int && d.get('wrongCount', -1) >= 0
         && d.get('unansweredCount', null) is int && d.get('unansweredCount', -1) >= 0
         && d.get('correctCount', 0) + d.get('wrongCount', 0) + d.get('unansweredCount', 0)
              == d.get('answers', []).size()
-        && (d.get('negativeDeduction', -1) == d.get('wrongCount', 0) * 0.25
-            || d.get('negativeDeduction', -1) == d.get('wrongCount', 0) * 0.5)
         && d.get('accuracy', null) is number
         && d.get('accuracy', -1) >= 0 && d.get('accuracy', 101) <= 100
         && d.get('percentage', null) is number
@@ -832,7 +853,10 @@ service cloud.firestore {
         && (d.get('anomalyFlags', null) == null || d.get('anomalyFlags', null) is list)
         && d.get('sessionId', '') == attemptId
         // The bundle must exist, be Published, and match the attempt
-        // (same exam, fitting kind, same mock when a mock).
+        // (same exam, fitting kind, same mock when a mock) — and the
+        // attempt must be bound to the bundle's CURRENT generation
+        // (Step 8 fold-in, finding 5: a republished bundle cannot
+        // silently reinterpret an old attempt).
         && exists(/databases/$(database)/documents/jobQuestionBundles/$(d.get('bundleId', '')))
         && jobBundleData(d.get('bundleId', '')).status == 'published'
         && jobBundleData(d.get('bundleId', '')).examSlug == d.get('examSlug', null)
@@ -840,6 +864,7 @@ service cloud.firestore {
         && (d.get('kind', null) == 'practice'
             || jobBundleData(d.get('bundleId', '')).mockId == d.get('mockId', null))
         && d.get('answers', []).size() <= jobBundleData(d.get('bundleId', '')).questionCount
+        && jobBundleData(d.get('bundleId', '')).get('bundleVersion', null) == d.get('bundleVersion', null)
         // Session gate (Step 8 decision): the session with the same
         // ID must exist and already be 'submitted' for this bundle.
         // An in-progress or abandoned session — or no session —
@@ -2722,7 +2747,7 @@ service cloud.firestore {
              'topicId', 'mockId', 'year', 'titleBn', 'titleEn',
              'questions', 'questionCount', 'status', 'reviewStatus',
              'publishedAt', 'publishedBy', 'sourceQuestionIds',
-             'configVersion', 'createdAt', 'updatedAt'])
+             'configVersion', 'bundleVersion', 'createdAt', 'updatedAt'])
         && validJobQuestionBundle(request.resource.data);
       // Update: a PUBLISHED bundle is content-frozen (Step 7
       // fold-in, ChatGPT P1-06) — its questions are the snapshot

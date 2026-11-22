@@ -150,6 +150,13 @@ export default function JobResultPage() {
   const timeSpentSeconds = typeof attempt.timeSpentSeconds === 'number' ? attempt.timeSpentSeconds : 0;
   const bundleId = typeof attempt.bundleId === 'string' ? attempt.bundleId : '';
   const examSlug = typeof attempt.examSlug === 'string' ? attempt.examSlug : '';
+  // Step 8 fold-in (ChatGPT finding 2): when the attempt was scored
+  // with NO negative marking (Bank — penalty unverified, disabled),
+  // say so on the result instead of showing a "−0" deduction as if
+  // a penalty had applied. Older attempts without the field render
+  // the old deduction line (defensive fallback).
+  const negativeMarkingUsed = typeof attempt.negativeMarkingUsed === 'number' ? attempt.negativeMarkingUsed : null;
+  const negativeMarkingDisabled = negativeMarkingUsed === 0;
 
   // Weak topics: from the stored answers (wrong per topic).
   const weakMap = new Map<string, { wrong: number; total: number }>();
@@ -224,7 +231,11 @@ export default function JobResultPage() {
             <div><span style={{ color: WRONG, fontWeight: 700 }}>✗ ভুল:</span> {wrongCount}টি</div>
             <div><span style={{ color: MUTED, fontWeight: 700 }}>○ উত্তর দেওয়া হয়নি:</span> {unansweredCount}টি</div>
             <div><span style={{ fontWeight: 700 }}>নির্ভুলতা:</span> {accuracy}%</div>
-            <div><span style={{ fontWeight: 700 }}>নেগেটিভ মার্কিংয়ে কাটা:</span> −{negativeDeduction}</div>
+            {negativeMarkingDisabled ? (
+              <div><span style={{ fontWeight: 700 }}>নেগেটিভ মার্কিং:</span> বন্ধ — বিজ্ঞপ্তি যাচাই বাকি</div>
+            ) : (
+              <div><span style={{ fontWeight: 700 }}>নেগেটিভ মার্কিংয়ে কাটা:</span> −{negativeDeduction}</div>
+            )}
             <div><span style={{ fontWeight: 700 }}>সময়:</span> {Math.floor(timeSpentSeconds / 60)} মিনিট {timeSpentSeconds % 60} সেকেন্ড</div>
           </div>
           {isModerator && ownerUid !== user.uid ? (

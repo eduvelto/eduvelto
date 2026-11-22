@@ -88,6 +88,7 @@ const BASE_BUNDLE: Record<string, unknown> = {
     },
   ],
   questionCount: 1,
+  bundleVersion: 1,
   status: 'published',
   reviewStatus: 'Published',
   sourceQuestionIds: ['q1'],
@@ -341,6 +342,7 @@ describe('buildJobBundle', () => {
   it('(u40) builds a bundle + key from Published questions', () => {
     const { bundle, key } = buildJobBundle([published('q1'), published('q2')], meta);
     expect(bundle.questionCount).toBe(2);
+    expect(bundle.bundleVersion).toBe(1);
     expect(bundle.questions[0].n).toBe(1);
     expect(bundle.questions[1].n).toBe(2);
     expect(key.bundleId).toBe(meta.bundleId);
@@ -375,6 +377,12 @@ describe('buildJobBundle', () => {
     expect(bundle.configVersion).toBe(JOB_QUESTION_CONFIG_VERSION);
     expect(key.configVersion).toBe(JOB_QUESTION_CONFIG_VERSION);
     expect(key.configVersion).toBe(bundle.configVersion);
+  });
+  it('(u57) bundleVersion 0 / missing fails validation (Step 8 fold-in, finding 5)', () => {
+    expect(validateJobQuestionBundle({ ...BASE_BUNDLE, bundleVersion: 0 }).length).toBeGreaterThan(0);
+    const { bundleVersion: _v, ...noVersion } = BASE_BUNDLE;
+    expect(validateJobQuestionBundle(noVersion).length).toBeGreaterThan(0);
+    expect(validateJobQuestionBundle(BASE_BUNDLE)).toEqual([]);
   });
 });
 

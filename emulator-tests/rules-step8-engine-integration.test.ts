@@ -47,7 +47,7 @@ import {
   validateAttemptResult,
   type JobPracticeSessionDoc,
 } from '../src/lib/jobEngine';
-import type { JobQuestionBundle, JobQuestionKey } from '../src/lib/jobQuestions';
+import type { JobQuestionBundle, JobQuestionKey, JobQuestionOption } from '../src/lib/jobQuestions';
 
 const PROJECT_ID = 'eduvelto-rules-test-step8-integration';
 let env: RulesTestEnvironment;
@@ -59,7 +59,7 @@ if (!RULES_TEXT.includes('jobSessions')) {
 }
 
 const TS = new Date('2026-11-22T08:00:00.000Z');
-const OPTIONS = [
+const OPTIONS: JobQuestionOption[] = [
   { letter: 'A', text: 'দুটি স্বরের মিলন' },
   { letter: 'B', text: 'দুটি ধ্বনির মিলন' },
   { letter: 'C', text: 'দুটি শব্দের মিলন' },
@@ -85,6 +85,7 @@ const BUNDLE: JobQuestionBundle = {
     },
   ],
   questionCount: 1,
+  bundleVersion: 1,
   status: 'published',
   reviewStatus: 'Published',
   sourceQuestionIds: ['q-seed-1'],
@@ -171,6 +172,7 @@ async function runSubmitFlow(sessionId: string, letter: 'A' | 'B' | 'C' | 'D' | 
     subjectId: 'bcs__bangla',
     topicId: 'bcs__bangla__grammar__sandhi',
     kind: 'practice',
+    bundleVersion: BUNDLE.bundleVersion,
     userId: 'student-1',
   });
   const problems = validateAttemptResult(attemptDoc);
@@ -260,6 +262,7 @@ describe('Step 8 engine↔rules integration (lib builders → emulator)', () => 
       subjectId: 'bcs__bangla',
       topicId: 'bcs__bangla__grammar__sandhi',
       kind: 'practice',
+      bundleVersion: BUNDLE.bundleVersion,
       userId: 'student-1',
     });
     // Tamper: claim a perfect score the answers do not support.

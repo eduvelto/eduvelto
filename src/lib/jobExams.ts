@@ -471,6 +471,13 @@ export interface JobRulesConfig {
    * exam engine must never score from it. */
   provisionalNegativeMarking: number | null;
   negativeMarkingVerified: boolean;
+  /** Scoring-config version (Step 8 fold-in, ChatGPT finding 9):
+   * identifies the exact marking scheme an attempt was scored
+   * under — the attempt stores this version, so a later config
+   * change can never silently reinterpret an old result.
+   * 'v1' = first verified config; 'v0-provisional' = no verified
+   * config yet (Bank); '18th-v1' = NTRCA 18th-cycle config. */
+  scoringConfigVersion: string;
   passMark: number | null;
   passPercent: number | null;
   subjects: JobRulesSubject[];
@@ -566,6 +573,7 @@ export const JOB_RULES_CONFIGS: Record<string, JobRulesConfig> = {
     negativeMarking: 0.5,
     provisionalNegativeMarking: null,
     negativeMarkingVerified: true,
+    scoringConfigVersion: 'v1',
     passMark: null,
     passPercent: null,
     subjects: [
@@ -599,6 +607,7 @@ export const JOB_RULES_CONFIGS: Record<string, JobRulesConfig> = {
     // authoritative, so the flag stays false even though the pattern
     // itself is verified (Step 3 §2.2).
     negativeMarkingVerified: false,
+    scoringConfigVersion: 'v0-provisional',
     passMark: null,
     passPercent: null,
     subjects: [
@@ -623,6 +632,7 @@ export const JOB_RULES_CONFIGS: Record<string, JobRulesConfig> = {
     negativeMarking: 0.25,
     provisionalNegativeMarking: null,
     negativeMarkingVerified: true,
+    scoringConfigVersion: 'v1',
     passMark: 45,
     passPercent: 50,
     subjects: [
@@ -644,6 +654,7 @@ export const JOB_RULES_CONFIGS: Record<string, JobRulesConfig> = {
     negativeMarking: 0.25,
     provisionalNegativeMarking: null,
     negativeMarkingVerified: true,
+    scoringConfigVersion: '18th-v1',
     passMark: 40,
     passPercent: 40,
     subjects: [

@@ -34,6 +34,7 @@ import {
   answerSessionQuestion,
   buildAutosavePatch,
   goToQuestion,
+  jobExamPattern,
   sessionProgress,
   toggleMarkForReview,
   type JobPracticeSessionDoc,
@@ -219,6 +220,14 @@ export default function JobPracticePage() {
 
   const total = bundle.questions.length;
   const progress = sessionProgress(session);
+  // Step 8 fold-in (ChatGPT finding 2, preferred option): Bank
+  // negative marking is DISABLED until the circular verifies it —
+  // say so explicitly BEFORE the session, not just on the result.
+  const pattern = jobExamPattern(bundle.examSlug);
+  const scoringNotice =
+    pattern && !pattern.negativeMarkingVerified
+      ? 'এই পরীক্ষার নেগেটিভ মার্কিং এখনো বিজ্ঞপ্তি থেকে যাচাই হয়নি — তাই ভুল উত্তরে নম্বর কাটা হচ্ছে না। এই স্কোর অফিসিয়াল ধরনের স্কোর নয়।'
+      : null;
   const currentN = session.currentQuestion;
   const currentQ = bundle.questions.find((q) => q.n === currentN) ?? bundle.questions[0];
   const currentAnswer = session.answers[currentQ.n];
@@ -325,6 +334,10 @@ export default function JobPracticePage() {
           </div>
         </div>
       </div>
+
+      {scoringNotice ? (
+        <AlertBox tone="info">{scoringNotice}</AlertBox>
+      ) : null}
 
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: 16, alignItems: 'start' }}>
         {/* Question column */}

@@ -33,38 +33,55 @@
  * is preliminary topics only, no numbers), so there is no 'common'
  * pattern. Unknown slugs return null — never a guessed pattern.
  *
- * BANK PENALTY WARNING: the Bank `negativeMarking` in the rulesConfig
- * is null (NOT verified — circular-dependent). The 0.25 used here
- * comes from `provisionalNegativeMarking`, and the pattern carries
- * `negativeMarkingVerified: false` + the label
- * 'সাধারণত −০.২৫ — বিজ্ঞপ্তি-নির্ভর' so the UI must display it as
- * provisional. Step 5 said the engine must never score from the
- * provisional value; Step 8 (this file) scores Bank practice at
- * −0.25 anyway because the Step 8 task explicitly requires the Bank
- * pattern to carry 0.25 — the provisional flag + label are the
- * honesty mechanism, and the score stays client-calculated and
- * unverified. If the owner later rules the provisional penalty must
- * not drive scores, Bank scoring must change here (one place).
+ * BANK PENALTY — DISABLED (Step 8 fold-in, ChatGPT findings 2 + 9,
+ * preferred option): the Bank `negativeMarking` in the rulesConfig
+ * is null (NOT verified — circular-dependent), so Bank practice
+ * scores with NO negative marking at all (`negativeMarking: 0`,
+ * `negativeMarkingVerified: false`, label 'নেগেটিভ মার্কিং বন্ধ —
+ * বিজ্ঞপ্তি যাচাই বাকি'). The provisional 0.25 in
+ * `provisionalNegativeMarking` is NEVER used for scoring — an
+ * unverified marking scheme must never drive an authoritative-looking
+ * score, and a disclaimer does not fix a wrong deduction. The UI
+ * must say explicitly that Bank scoring awaits verification
+ * (practice page before the session, result page with the result).
+ * The attempt stores the marking actually applied
+ * (`negativeMarkingUsed` + `markingSchemeVersion`) so a later
+ * config change can never silently reinterpret an old result.
+ * When the Bank circular is verified, set `negativeMarking: 0.25`
+ * in the rulesConfig (and bump `scoringConfigVersion`) — this file
+ * needs no other change.
  *
- * RULES NOTE (checked 22 Nov, against the rules agent's
- * UNCOMMITTED working copy — not mine, not verified by me): the
- * Step 8 rules draft replaces the Step 7 minimal attempt anchor
- * with the full §2.11 attempt (create-once as 'submitted', no
- * updates) and adds a `jobSessions` match block. This lib was
- * checked field-by-field against that draft: the attempt doc's
- * 30 keys match its `hasOnly` list exactly, its score bounds
- * (score ±totalMarks, deduction = wrong×0.25|0.5, percentage
- * −100..100, counts sum) hold for every score this engine
- * produces, and the autosave patch's four fields are exactly the
- * session-update `affectedKeys` subset for autosave. ONE
- * deliberate alignment: the session doc carries NO
- * `subjectId`/`topicId` (§2.12 has none; the draft allowlist has
- * none). If the rules draft changes before commit, the
- * coordinator re-checks this lib against the committed rules —
- * do not assume this note is still true then. The UI flow the
- * draft requires: the session must be 'submitted' BEFORE the
+ * MARKING-SCHEME VERSIONING (Step 8 fold-in): every pattern carries
+ * `scoringConfigVersion` (from the rulesConfig); every scored
+ * result and every attempt doc stores `negativeMarkingUsed` +
+ * `markingSchemeVersion`. The rules enforce
+ * `negativeDeduction == wrongCount * negativeMarkingUsed` with
+ * `negativeMarkingUsed` in {0, 0.25, 0.5} — so the deduction a
+ * student claims is always tied to a declared marking scheme.
+ *
+ * RULES NOTE (Step 8 fold-in — re-checked against the committed
+ * rules in this worktree): the Step 8 rules replace the Step 7
+ * minimal attempt anchor with the full §2.11 attempt (create-once
+ * as 'submitted', no updates) and add a `jobSessions` match block.
+ * This lib was checked field-by-field against those rules: the
+ * attempt doc's keys match its `hasOnly` list exactly (now 33 keys:
+ * the 30 Step 8 keys + `negativeMarkingUsed` +
+ * `markingSchemeVersion` + `bundleVersion`), its score bounds
+ * (score ±totalMarks, deduction = wrong × negativeMarkingUsed,
+ * percentage −100..100, counts sum) hold for every score this
+ * engine produces, and the autosave patch's fields are exactly the
+ * session-update `affectedKeys` subset for autosave (now five
+ * fields: the four Step 8 fields + `revision`). ONE deliberate
+ * alignment: the session doc carries NO `subjectId`/`topicId`
+ * (§2.12 has none; the rules allowlist has none). If the rules
+ * change, the coordinator re-checks this lib against the committed
+ * rules — do not assume this note is still true then. The UI flow
+ * the rules require: the session must be 'submitted' BEFORE the
  * attempt doc is created (session gate), and the attempt is
- * created once as 'submitted' (no in-progress attempt doc).
+ * created once as 'submitted' (no in-progress attempt doc). The
+ * fold-in submission flow writes both in ONE batched write
+ * (session → submitted + attempt create) and the rules validate
+ * the post-write session state with getAfter().
  */
 
 import { serverTimestamp } from 'firebase/firestore';
@@ -90,9 +107,15 @@ export interface JobExamPattern {
   timeMinutes: number;
   /** Always 1 in the four verified patterns (1 mark per MCQ). */
   marksPerQuestion: 1;
-  negativeMarking: 0.5 | 0.25;
-  /** False ONLY for Bank (provisional 0.25 — see header warning). */
+  /** 0 = no negative marking (Bank — unverified penalty disabled,
+   * Step 8 fold-in). 0.25 / 0.5 = the verified penalty. */
+  negativeMarking: 0 | 0.25 | 0.5;
+  /** False ONLY for Bank (penalty unverified — disabled, not
+   * provisional-scored; see the header note). */
   negativeMarkingVerified: boolean;
+  /** The scoring-config version this pattern was built from
+   * (Step 8 fold-in, finding 9) — stored on every attempt. */
+  scoringConfigVersion: string;
   /** Null when the exam has no fixed pass percent (BCS: cutoff
    * varies; Bank: no verified pass percent). */
   passPercent: number | null;
@@ -100,11 +123,12 @@ export interface JobExamPattern {
 }
 
 /** Bangla pattern labels — one per verified exam. Bank's label says
- * the penalty is circular-dependent; NTRCA's says 18th is the LAST
- * verified pattern, not the current one. */
+ * negative marking is OFF until the circular verifies it (Step 8
+ * fold-in — the provisional 0.25 is never scored); NTRCA's says
+ * 18th is the LAST verified pattern, not the current one. */
 const JOB_EXAM_PATTERN_LABELS: Record<string, string> = {
   bcs: 'যাচাইকৃত ধরন',
-  bank: 'সাধারণত −০.২৫ — বিজ্ঞপ্তি-নির্ভর',
+  bank: 'নেগেটিভ মার্কিং বন্ধ — বিজ্ঞপ্তি যাচাই বাকি',
   'primary-teacher': 'যাচাইকৃত ধরন',
   ntrca: '১৮তম ধরন — শেষ যাচাইকৃত ধরন',
 };
@@ -127,10 +151,12 @@ function buildJobExamPattern(examSlug: string): JobExamPattern | null {
   ) {
     return null;
   }
-  // Bank: verified penalty is null — the provisional 0.25 is used
-  // with negativeMarkingVerified: false (see header warning).
-  const negative = cfg.negativeMarking ?? cfg.provisionalNegativeMarking;
-  if (negative !== 0.5 && negative !== 0.25) return null;
+  // Bank: verified penalty is null — negative marking is DISABLED
+  // (0), never the provisional 0.25 (Step 8 fold-in, ChatGPT
+  // findings 2 + 9: an unverified scheme must never drive a score).
+  const rawNegative = cfg.negativeMarking ?? 0;
+  if (rawNegative !== 0 && rawNegative !== 0.25 && rawNegative !== 0.5) return null;
+  const negative: 0 | 0.25 | 0.5 = rawNegative;
   const label = JOB_EXAM_PATTERN_LABELS[examSlug];
   if (!label) return null;
   return {
@@ -140,6 +166,7 @@ function buildJobExamPattern(examSlug: string): JobExamPattern | null {
     marksPerQuestion: 1,
     negativeMarking: negative,
     negativeMarkingVerified: cfg.negativeMarkingVerified,
+    scoringConfigVersion: cfg.scoringConfigVersion,
     passPercent: cfg.passPercent,
     patternLabel: label,
   };
@@ -403,6 +430,13 @@ export interface JobAttemptResult {
   clientCalculatedScore: number;
   totalMarks: number;
   negativeDeduction: number;
+  /** The penalty actually applied per wrong answer (0 for Bank —
+   * disabled until verified). The rules enforce
+   * negativeDeduction == wrongCount * negativeMarkingUsed. */
+  negativeMarkingUsed: number;
+  /** The scoring-config version the score was computed under
+   * (pattern.scoringConfigVersion) — stored on the attempt doc. */
+  markingSchemeVersion: string;
   correctCount: number;
   wrongCount: number;
   unansweredCount: number;
@@ -540,6 +574,8 @@ export function scorePracticeAttempt(
     clientCalculatedScore: score,
     totalMarks,
     negativeDeduction,
+    negativeMarkingUsed: pattern.negativeMarking,
+    markingSchemeVersion: pattern.scoringConfigVersion,
     correctCount,
     wrongCount,
     unansweredCount,
@@ -606,6 +642,13 @@ export function scorePracticeAttempt(
  *   (d) `startedAt` is copied from the session (the session's
  *       `serverTimestamp()` sentinel, resolved by Firestore at
  *       write); `submittedAt` is a fresh `serverTimestamp()`.
+ *   (e) `negativeMarkingUsed`, `markingSchemeVersion` and
+ *       `bundleVersion` are ADDED (Step 8 fold-in, findings 2/5/9):
+ *       the attempt records the penalty actually applied, the
+ *       scoring-config version it was scored under, and the exact
+ *       bundle generation — so a later config change can never
+ *       silently reinterpret an old result, and the rules can bind
+ *       the deduction to the declared marking scheme.
  *
  * RULES NOTE: the Step 8 rules draft (rules agent's uncommitted
  * working copy, checked 22 Nov) replaces the Step 7 minimal
@@ -624,6 +667,10 @@ export function buildJobAttemptDoc(input: {
   subjectId: string | null;
   topicId: string | null;
   kind: 'practice';
+  /** The bundle's version (Step 8 fold-in, finding 5): the attempt
+   * is bound to the exact bundle generation it was scored against
+   * (rules: attempt.bundleVersion == bundle.bundleVersion). */
+  bundleVersion: number;
   /** Signed-in uid — REQUIRED in practice (see deviation (a)
    * above); optional in the type only so unit tests can build a
    * doc without a user. Never omit it in production code. */
@@ -640,6 +687,9 @@ export function buildJobAttemptDoc(input: {
     score: input.result.score,
     totalMarks: input.result.totalMarks,
     negativeDeduction: input.result.negativeDeduction,
+    negativeMarkingUsed: input.result.negativeMarkingUsed,
+    markingSchemeVersion: input.result.markingSchemeVersion,
+    bundleVersion: input.bundleVersion,
     correctCount: input.result.correctCount,
     wrongCount: input.result.wrongCount,
     unansweredCount: input.result.unansweredCount,
@@ -909,6 +959,9 @@ const JOB_ATTEMPT_RESULT_KEYS = [
   'score',
   'totalMarks',
   'negativeDeduction',
+  'negativeMarkingUsed',
+  'markingSchemeVersion',
+  'bundleVersion',
   'correctCount',
   'wrongCount',
   'unansweredCount',
@@ -994,6 +1047,20 @@ export function validateAttemptResult(result: unknown): string[] {
   if (typeof d.negativeDeduction !== 'number' || !Number.isFinite(d.negativeDeduction) || d.negativeDeduction < 0) {
     problems.push(`${label}: negativeDeduction must be a number ≥0`);
   }
+  // Step 8 fold-in (findings 2/5/9): the deduction is tied to the
+  // DECLARED marking scheme — a wrong answer deducts exactly the
+  // penalty the attempt says was applied (0 for Bank, whose
+  // penalty is unverified and disabled). markingSchemeVersion pins
+  // the config generation; bundleVersion pins the bundle.
+  if (d.negativeMarkingUsed !== 0 && d.negativeMarkingUsed !== 0.25 && d.negativeMarkingUsed !== 0.5) {
+    problems.push(`${label}: negativeMarkingUsed must be 0, 0.25 or 0.5`);
+  }
+  if (!isNonEmptyString(d.markingSchemeVersion, 100)) {
+    problems.push(`${label}: markingSchemeVersion must be a non-empty string ≤100 chars`);
+  }
+  if (!Number.isInteger(d.bundleVersion) || (d.bundleVersion as number) < 1) {
+    problems.push(`${label}: bundleVersion must be an integer ≥1`);
+  }
   for (const f of ['correctCount', 'wrongCount', 'unansweredCount']) {
     if (!Number.isInteger(d[f]) || (d[f] as number) < 0) {
       problems.push(`${label}: ${f} must be an integer ≥0`);
@@ -1052,11 +1119,15 @@ export function validateAttemptResult(result: unknown): string[] {
       if (a.selected === null && (a.correct !== false || a.marks !== 0)) {
         problems.push(`${label}: answers[${i}] unanswered must have correct=false and marks=0`);
       }
-      if (a.selected !== null && a.correct === true && a.marks <= 0) {
-        problems.push(`${label}: answers[${i}] correct must have marks > 0`);
+      // marksPerQuestion is always 1 in the four verified patterns,
+      // so a correct answer is worth exactly 1; a wrong answer
+      // deducts exactly the declared penalty (0 when negative
+      // marking is disabled, e.g. Bank).
+      if (a.selected !== null && a.correct === true && a.marks !== 1) {
+        problems.push(`${label}: answers[${i}] correct must have marks == 1`);
       }
-      if (a.selected !== null && a.correct === false && a.marks >= 0) {
-        problems.push(`${label}: answers[${i}] wrong must have marks < 0`);
+      if (a.selected !== null && a.correct === false && a.marks !== -(d.negativeMarkingUsed as number)) {
+        problems.push(`${label}: answers[${i}] wrong must have marks == -negativeMarkingUsed`);
       }
     }
     if (a.correctText !== null && typeof a.correctText !== 'string') {
@@ -1080,6 +1151,10 @@ export function validateAttemptResult(result: unknown): string[] {
   }
   if ((d.correctCount as number) + (d.wrongCount as number) + (d.unansweredCount as number) !== d.answers.length) {
     problems.push(`${label}: correct+wrong+unanswered != answers.length`);
+  }
+  if (typeof d.negativeDeduction === 'number' && typeof d.negativeMarkingUsed === 'number'
+    && Math.abs(round2((d.wrongCount as number) * d.negativeMarkingUsed) - d.negativeDeduction) > 0.001) {
+    problems.push(`${label}: negativeDeduction (${String(d.negativeDeduction)}) != wrongCount * negativeMarkingUsed`);
   }
   if (typeof d.score === 'number' && Math.abs(round2(marksSum) - d.score) > 0.001) {
     problems.push(`${label}: score (${String(d.score)}) != sum of answer marks (${round2(marksSum)})`);

@@ -138,6 +138,9 @@ const validSubmittedAttempt = (sessionId: string, overrides: Record<string, unkn
   score: 1,
   totalMarks: 1,
   negativeDeduction: 0,
+  negativeMarkingUsed: 0.5,
+  markingSchemeVersion: 'v1',
+  bundleVersion: 1,
   correctCount: 1,
   wrongCount: 0,
   unansweredCount: 0,
@@ -201,6 +204,7 @@ const VALID_BUNDLE = {
     },
   ],
   questionCount: 1,
+  bundleVersion: 1,
   status: 'published',
   reviewStatus: 'Published',
   sourceQuestionIds: ['q-published-b'],
@@ -268,6 +272,14 @@ async function seed() {
         titleBn: 'সমাস — খসড়া', titleEn: 'Samash — Draft',
         status: 'draft', reviewStatus: 'Not Started',
       }],
+      // Bank topic bundle (Step 8 fold-in: negative marking
+      // DISABLED — attempts on it must declare used 0).
+      ['topic__bank__math__arithmetic', {
+        ...VALID_BUNDLE,
+        examSlug: 'bank',
+        topicId: 'bank__math__arithmetic',
+        titleBn: 'পাটিগণিত — অনুশীলন', titleEn: 'Arithmetic — Practice',
+      }],
     ];
     for (const [id, data] of bundles) {
       await setDoc(doc(db, 'jobQuestionBundles', id), data);
@@ -322,6 +334,21 @@ async function seed() {
         questionRefs: [{ bundleId: 'mock__bcs-mock-01', n: 1, questionId: 'q-published-b' }],
       })],
       ['student-1', 'sess-deny', validSession({ status: 'submitted', submittedAt: TS })],
+      ['student-1', 'sess-bank-ok', validSession({
+        bundleId: 'topic__bank__math__arithmetic',
+        examSlug: 'bank',
+        status: 'submitted', submittedAt: TS,
+        questionRefs: [{ bundleId: 'topic__bank__math__arithmetic', n: 1, questionId: 'q-published-b' }],
+      })],
+      // Reused by the DENIED Bank create (s70): a submitted Bank
+      // session, so the session gate passes and the denial comes
+      // from the deduction binding, not the gate.
+      ['student-1', 'sess-bank-deny', validSession({
+        bundleId: 'topic__bank__math__arithmetic',
+        examSlug: 'bank',
+        status: 'submitted', submittedAt: TS,
+        questionRefs: [{ bundleId: 'topic__bank__math__arithmetic', n: 1, questionId: 'q-published-b' }],
+      })],
       ['student-1', 'sess-inprogress', validSession()],
       ['student-1', 'sess-inprogress-2', validSession()],
       ['student-1', 'sess-mock-inprogress', validSession({
@@ -410,6 +437,7 @@ describe('jobAttempts — create: valid submits SUCCEED', () => {
           score: 0.75,
           totalMarks: 3,
           negativeDeduction: 0.25,
+          negativeMarkingUsed: 0.25,
           correctCount: 1,
           wrongCount: 1,
           unansweredCount: 1,
@@ -433,6 +461,7 @@ describe('jobAttempts — create: valid submits SUCCEED', () => {
           score: -0.5,
           totalMarks: 3,
           negativeDeduction: 0.5,
+          negativeMarkingUsed: 0.25,
           correctCount: 0,
           wrongCount: 2,
           unansweredCount: 0,
@@ -541,7 +570,7 @@ describe('jobAttempts — create: field/label validation DENIES', () => {
         })),
     );
   });
-  it('(s18) negativeDeduction 0.30 for 1 wrong answer is DENIED (only 0.25 / 0.5)', async () => {
+  it('(s18) negativeDeduction != wrongCount * negativeMarkingUsed is DENIED (deduction must match the declared scheme)', async () => {
     await assertFails(
       setDoc(doc(asStudent1(), 'users', 'student-1', 'jobAttempts', 'sess-deny'),
         validSubmittedAttempt('sess-deny', {
@@ -896,5 +925,93 @@ describe('jobSessions — update: autosave, endsAt-once, terminal transitions, f
   it('(s64) moderator reading a student\'s session SUCCEEDS; another student reading it is DENIED', async () => {
     await assertSucceeds(getDoc(doc(asModerator(), 'users', 'student-1', 'jobSessions', 'sess-ok-1')));
     await assertFails(getDoc(doc(asStudent2(), 'users', 'student-1', 'jobSessions', 'sess-ok-1')));
+  });
+});
+
+/* ------------------------------------------------------------------ */
+/* Step 8 fold-in (ChatGPT findings 2/5/9): marking-scheme + bundle   */
+/* binding on attempts — the attempt must declare the penalty it     */
+/* was scored under, and bind to the bundle's current generation.     */
+/* ------------------------------------------------------------------ */
+describe('jobAttempts — create: Step 8 fold-in marking/bundle binding', () => {
+  it('(s65) Bank submit with negativeMarkingUsed 0 + deduction 0 SUCCEEDS (penalty disabled until verified)', async () => {
+    await assertSucceeds(
+      setDoc(doc(asStudent1(), 'users', 'student-1', 'jobAttempts', 'sess-bank-ok'),
+        validSubmittedAttempt('sess-bank-ok', {
+          bundleId: 'topic__bank__math__arithmetic',
+          examSlug: 'bank',
+          subjectId: 'bank__math',
+          topicId: 'bank__math__arithmetic',
+          answers: [{
+            n: 1, questionId: 'q-published-b',
+            topicId: 'bank__math__arithmetic', subjectId: 'bank__math',
+            selected: 'A', correct: false, marks: 0,
+            correctText: 'দুটি ধ্বনির মিলন', timeSpentSeconds: 30,
+          }],
+          score: 0,
+          totalMarks: 1,
+          negativeDeduction: 0,
+          negativeMarkingUsed: 0,
+          markingSchemeVersion: 'v0-provisional',
+          correctCount: 0,
+          wrongCount: 1,
+          unansweredCount: 0,
+          accuracy: 0,
+          percentage: 0,
+          clientCalculatedScore: 0,
+        })),
+    );
+  });
+  it('(s66) attempt with bundleVersion 2 (bundle is v1) is DENIED', async () => {
+    await assertFails(
+      setDoc(doc(asStudent1(), 'users', 'student-1', 'jobAttempts', 'sess-deny'),
+        validSubmittedAttempt('sess-deny', { bundleVersion: 2 })),
+    );
+  });
+  it('(s67) attempt with negativeMarkingUsed 0.3 is DENIED (only 0 / 0.25 / 0.5)', async () => {
+    await assertFails(
+      setDoc(doc(asStudent1(), 'users', 'student-1', 'jobAttempts', 'sess-deny'),
+        validSubmittedAttempt('sess-deny', { negativeMarkingUsed: 0.3 })),
+    );
+  });
+  it('(s68) attempt with an empty markingSchemeVersion is DENIED', async () => {
+    await assertFails(
+      setDoc(doc(asStudent1(), 'users', 'student-1', 'jobAttempts', 'sess-deny'),
+        validSubmittedAttempt('sess-deny', { markingSchemeVersion: '' })),
+    );
+  });
+  it('(s69) attempt with bundleVersion MISSING is DENIED', async () => {
+    const { bundleVersion: _dropped, ...withoutVersion } = validSubmittedAttempt('sess-deny');
+    await assertFails(
+      setDoc(doc(asStudent1(), 'users', 'student-1', 'jobAttempts', 'sess-deny'), withoutVersion),
+    );
+  });
+  it('(s70) Bank attempt claiming a 0.25 deduction with used 0 is DENIED (provisional penalty is never scored)', async () => {
+    await assertFails(
+      setDoc(doc(asStudent1(), 'users', 'student-1', 'jobAttempts', 'sess-bank-deny'),
+        validSubmittedAttempt('sess-bank-deny', {
+          bundleId: 'topic__bank__math__arithmetic',
+          examSlug: 'bank',
+          subjectId: 'bank__math',
+          topicId: 'bank__math__arithmetic',
+          answers: [{
+            n: 1, questionId: 'q-published-b',
+            topicId: 'bank__math__arithmetic', subjectId: 'bank__math',
+            selected: 'A', correct: false, marks: -0.25,
+            correctText: 'দুটি ধ্বনির মিলন', timeSpentSeconds: 30,
+          }],
+          score: -0.25,
+          totalMarks: 1,
+          negativeDeduction: 0.25,
+          negativeMarkingUsed: 0,
+          markingSchemeVersion: 'v0-provisional',
+          correctCount: 0,
+          wrongCount: 1,
+          unansweredCount: 0,
+          accuracy: 0,
+          percentage: -25,
+          clientCalculatedScore: -0.25,
+        })),
+    );
   });
 });
