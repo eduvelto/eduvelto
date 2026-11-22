@@ -702,23 +702,61 @@ service cloud.firestore {
     // submitted (answers frozen, terminal) but BEFORE the attempt
     // exists. An in-progress session anchors NOTHING (q66/q75
     // still deny it) — the P0-06 hole stays closed.
-    function jobReceiptSessionData(bundleId) {
-      return get(/databases/$(database)/documents/users/$(uid())/jobSessions/$(jobReceiptData(bundleId).attemptId)).data;
+    // ChatGPT fold-in (H.1, CRITICAL): the receipt carries a
+    // PURPOSE — 'practice_review' or 'exam_review' — and the key
+    // read checks the purpose against the bundle's kind, so a
+    // practice receipt can NEVER unlock an exam key (and vice
+    // versa). The purpose is bound at receipt CREATE (see the
+    // jobReceipts match below): practice_review anchors to a
+    // submitted PRACTICE attempt; exam_review anchors to a
+    // submitted EXAM session (the scoring window, Design G) or a
+    // submitted EXAM attempt. The exam anchors live in the
+    // SEPARATE exam collections (H.2) — jobExamSessions /
+    // jobExamAttempts — never in jobSessions / jobAttempts.
+    function jobReceiptExamAttemptData(bundleId) {
+      return get(/databases/$(database)/documents/users/$(uid())/jobExamAttempts/$(jobReceiptData(bundleId).attemptId)).data;
+    }
+    function jobReceiptExamSessionData(bundleId) {
+      return get(/databases/$(database)/documents/users/$(uid())/jobExamSessions/$(jobReceiptData(bundleId).attemptId)).data;
     }
     function hasFreshJobReceipt(bundleId) {
       return signedIn() && callerActive()
         && exists(/databases/$(database)/documents/jobReceipts/$(uid() + '_' + bundleId))
         && jobReceiptData(bundleId).createdAt > request.time - duration.value(10, 'm')
-        && jobReceiptData(bundleId).createdAt <= request.time
+        // Upper bound with a 5-minute skew tolerance (Step 9
+        // fold-in, a5 debug 22 Nov): the receipt must not be
+        // dated more than 5 minutes in the future. A bare
+        // `createdAt <= request.time` BREAKS legitimate fresh
+        // receipts — the emulator's request.time lags the minting
+        // clock by seconds (a receipt minted 2.25s before the
+        // read still failed it), and in production a device clock
+        // ahead of the server would do the same. The strict upper
+        // bound still lives at CREATE (P0-03); this read-time
+        // tolerance only weakens the defense-in-depth against a
+        // SEEDED future-dated receipt by 5 minutes (a10b's +1h
+        // receipt still denies) — such a receipt cannot be minted
+        // through the rules at all.
+        && jobReceiptData(bundleId).createdAt <= request.time + duration.value(5, 'm')
         && jobReceiptData(bundleId).attemptId is string
-        && ((exists(/databases/$(database)/documents/users/$(uid())/jobAttempts/$(jobReceiptData(bundleId).attemptId))
+        && exists(/databases/$(database)/documents/jobQuestionBundles/$(bundleId))
+        && ((jobBundleData(bundleId).kind in ['mock', 'daily', 'weekly']
+              && jobReceiptData(bundleId).purpose == 'exam_review'
+              && ((exists(/databases/$(database)/documents/users/$(uid())/jobExamAttempts/$(jobReceiptData(bundleId).attemptId))
+                    && jobReceiptExamAttemptData(bundleId).status == 'submitted'
+                    && jobReceiptExamAttemptData(bundleId).bundleId == bundleId
+                    && jobReceiptExamAttemptData(bundleId).userId == uid()
+                    && jobReceiptExamAttemptData(bundleId).kind == 'mock')
+                  || (exists(/databases/$(database)/documents/users/$(uid())/jobExamSessions/$(jobReceiptData(bundleId).attemptId))
+                    && jobReceiptExamSessionData(bundleId).status == 'submitted'
+                    && jobReceiptExamSessionData(bundleId).bundleId == bundleId
+                    && jobReceiptExamSessionData(bundleId).kind == 'mock')))
+            || (jobBundleData(bundleId).kind in ['topic', 'previous']
+              && jobReceiptData(bundleId).purpose == 'practice_review'
+              && exists(/databases/$(database)/documents/users/$(uid())/jobAttempts/$(jobReceiptData(bundleId).attemptId))
               && jobReceiptAttemptData(bundleId).status == 'submitted'
               && jobReceiptAttemptData(bundleId).bundleId == bundleId
-              && jobReceiptAttemptData(bundleId).userId == uid())
-            || (exists(/databases/$(database)/documents/users/$(uid())/jobSessions/$(jobReceiptData(bundleId).attemptId))
-              && jobReceiptSessionData(bundleId).status == 'submitted'
-              && jobReceiptSessionData(bundleId).bundleId == bundleId
-              && jobReceiptSessionData(bundleId).kind == 'mock'));
+              && jobReceiptAttemptData(bundleId).userId == uid()
+              && jobReceiptAttemptData(bundleId).kind == 'practice'));
     }
 
     // ---------- Step 8: practice engine (jobAttempts + jobSessions) ----------
@@ -739,14 +777,35 @@ service cloud.firestore {
     function jobSessionDataAfter(userId, sessionId) {
       return getAfter(/databases/$(database)/documents/users/$(userId)/jobSessions/$(sessionId)).data;
     }
-    // Bundle-kind consistency (Step 8 decision): a practice attempt /
-    // session runs on a topic bundle (or a previous-year set, which is
-    // practised topic-style); a mock runs on a mock / daily / weekly
-    // bundle. A daily/weekly bundle is a mock-type bundle (its ID is
-    // daily__{mockId} / weekly__{mockId}).
+    // Bundle-kind consistency (Step 8 decision, narrowed by the
+    // Step 9 ChatGPT fold-in H.2): a practice attempt / session runs
+    // on a topic bundle (or a previous-year set, which is practised
+    // topic-style) and NOTHING else. Mock bundles (mock / daily /
+    // weekly) belong to the SEPARATE exam collections
+    // (jobExamSessions / jobExamAttempts) — a practice attempt can
+    // never ride on a mock bundle, and the mock branch that used to
+    // live here is gone.
     function jobBundleKindFitsAttemptKind(bundleKind, kind) {
-      return (kind == 'practice' && bundleKind in ['topic', 'previous'])
-        || (kind == 'mock' && bundleKind in ['mock', 'daily', 'weekly']);
+      return kind == 'practice' && bundleKind in ['topic', 'previous'];
+    }
+    // ---------- Step 9: full-exam engine (jobExamSessions / jobExamAttempts) ----------
+    // Helpers for the exam validators below. Same no-`let` shape:
+    // each call is a fresh get(); the exists() guards run first.
+    // The exam definition (jobExamDefinitions) doc-ID is derived
+    // from the bundle kind + the session's bare mockId: a full mock
+    // carries its doc-ID as its mockId, a daily/weekly mock carries
+    // the bare date/week key.
+    function jobExamDefinitionId(bundleKind, mockId) {
+      return bundleKind == 'mock' ? mockId : bundleKind + '__' + mockId;
+    }
+    function jobExamDefinitionData(definitionId) {
+      return get(/databases/$(database)/documents/jobExamDefinitions/$(definitionId)).data;
+    }
+    function jobManifestData(questionSetId) {
+      return get(/databases/$(database)/documents/jobQuestionSetManifests/$(questionSetId)).data;
+    }
+    function jobExamSessionDataAfter(userId, sessionId) {
+      return getAfter(/databases/$(database)/documents/users/$(userId)/jobExamSessions/$(sessionId)).data;
     }
     // Full-attempt create validation (Step 3 §2.11 + §3.8, Step 8).
     // The attempt doc is created ONCE at submit with status
@@ -803,7 +862,8 @@ service cloud.firestore {
              'timeSpentSeconds', 'startedAt', 'submittedAt', 'status',
              'markingStatus', 'resultLabel', 'clientCalculatedScore',
              'serverVerifiedScore', 'trustLevel', 'resultType',
-             'sessionId', 'audit', 'answerHashes', 'anomalyFlags'])
+             'sessionId', 'audit', 'answerHashes', 'anomalyFlags',
+             'submissionIntegrity'])
         && d.keys().hasAll(['userId', 'kind', 'mockId', 'bundleId',
              'examSlug', 'subjectId', 'topicId', 'answers', 'score',
              'totalMarks', 'negativeDeduction', 'negativeMarkingUsed',
@@ -811,12 +871,15 @@ service cloud.firestore {
              'wrongCount', 'unansweredCount', 'accuracy', 'percentage',
              'timeSpentSeconds', 'startedAt', 'submittedAt', 'status',
              'markingStatus', 'resultLabel', 'clientCalculatedScore',
-             'trustLevel', 'resultType', 'sessionId'])
+             'trustLevel', 'resultType', 'sessionId',
+             'submissionIntegrity'])
         && d.get('userId', '') == userId
-        && d.get('kind', null) in ['practice', 'mock']
-        && ((d.get('kind', null) == 'mock' && d.get('mockId', null) is string
-              && d.get('mockId', '').size() > 0)
-            || (d.get('kind', null) == 'practice' && d.get('mockId', null) == null))
+        // Step 9 (ChatGPT fold-in, H.2): practice attempts live
+        // ONLY here (jobAttempts). A mock attempt belongs to
+        // jobExamAttempts (validJobExamAttemptCreate) — kind 'mock'
+        // is no longer valid in this collection.
+        && d.get('kind', null) == 'practice'
+        && d.get('mockId', null) == null
         && d.get('bundleId', null) is string
         && d.get('examSlug', null) in jobExamSlugs()
         && (d.get('subjectId', null) == null
@@ -865,6 +928,12 @@ service cloud.firestore {
         && d.get('resultLabel', '') == 'practice'
         && d.get('trustLevel', '') == 'unverified'
         && d.get('resultType', '') == 'practice'
+        // Step 9 (ChatGPT fold-in, H.3): immutable does NOT mean
+        // truthful — the score is client-calculated, and the
+        // attempt says so explicitly. No student can ever write a
+        // 'server_verified' integrity label (a future server
+        // scorer would be the only writer of that value).
+        && d.get('submissionIntegrity', '') == 'client_calculated'
         // serverVerifiedScore: the student can NEVER write it — it
         // must be absent or null (a future server scorer writes it).
         && d.get('serverVerifiedScore', null) == null
@@ -884,8 +953,6 @@ service cloud.firestore {
         && jobBundleData(d.get('bundleId', '')).status == 'published'
         && jobBundleData(d.get('bundleId', '')).examSlug == d.get('examSlug', null)
         && jobBundleKindFitsAttemptKind(jobBundleData(d.get('bundleId', '')).kind, d.get('kind', null))
-        && (d.get('kind', null) == 'practice'
-            || jobBundleData(d.get('bundleId', '')).mockId == d.get('mockId', null))
         && d.get('answers', []).size() <= jobBundleData(d.get('bundleId', '')).questionCount
         && jobBundleData(d.get('bundleId', '')).get('bundleVersion', null) == d.get('bundleVersion', null)
         // Session gate (Step 8 decision, strengthened by the fold-in,
@@ -903,37 +970,17 @@ service cloud.firestore {
         && jobSessionDataAfter(userId, attemptId).kind == d.get('kind', null)
         && jobSessionDataAfter(userId, attemptId).examSlug == d.get('examSlug', null)
         && jobSessionDataAfter(userId, attemptId).mockId == d.get('mockId', null)
-        && jobSessionDataAfter(userId, attemptId).questionRefs.size() == d.get('answers', []).size()
-        // Step 9 (audit M1-b): a TIMED mock cannot run forever —
-        // the attempt's submittedAt must be ≤ the session's STORED
-        // deadline (endsAt). Practice has no deadline (endsAt is
-        // always null) and skips this check. endsAt must be a real
-        // timestamp: a mock whose deadline was never stored cannot
-        // be submitted at all (the client must set it once after
-        // read-back — the M1-a bound). submittedAt is a
-        // serverTimestamp sentinel, so this compares server time
-        // against the stored server deadline — a client clock trick
-        // cannot stretch the exam.
-        // ONE call site, via get() (not getAfter): the submit batch
-        // never changes endsAt, so the stored value IS the
-        // post-write value. The attempt validator is already near
-        // the 1000-expression budget (a batched submit evaluates
-        // the session update + the attempt create in one request),
-        // so this check must not add a second session read. When
-        // endsAt is null (deadline never stored) the comparison
-        // errors and the allow denies — which is the correct
-        // outcome. The session's existence is already established
-        // by the gate above, so the get() cannot error on a
-        // missing doc.
-        && (d.get('kind', null) == 'practice'
-            || d.get('submittedAt', null) <= get(/databases/$(database)/documents/users/$(userId)/jobSessions/$(attemptId)).data.get('endsAt', null));
+        && jobSessionDataAfter(userId, attemptId).questionRefs.size() == d.get('answers', []).size();
     }
-    // Session create validation (Step 3 §2.12). A session starts
-    // 'in-progress' with endsAt null — for a mock, endsAt is set ONCE
-    // after read-back (see validJobSessionUpdate); practice never has
-    // endsAt or clientEndsAtMillis (no timer). PAUSED is NOT a
+    // Session create validation (Step 3 §2.12). A PRACTICE session
+    // starts 'in-progress' with endsAt null — practice never has a
+    // timer (no endsAt, no clientEndsAtMillis). PAUSED is NOT a
     // session-doc status: it exists only as a client-side practice
     // state (Step 2 §4.5), so it is deliberately absent here.
+    // Step 9 (ChatGPT fold-in, H.2): this validator is PRACTICE
+    // ONLY. A mock session belongs to jobExamSessions
+    // (validJobExamSessionCreate) — kind 'mock' is no longer valid
+    // in this collection.
     function validJobSessionCreate(d) {
       return d.keys().hasOnly(['kind', 'mockId', 'bundleId', 'examSlug',
              'status', 'startedAt', 'endsAt', 'questionRefs', 'answers',
@@ -943,10 +990,8 @@ service cloud.firestore {
              'status', 'startedAt', 'endsAt', 'questionRefs', 'answers',
              'currentQuestion', 'lastSyncedAt', 'clientEndsAtMillis',
              'submittedAt', 'createdAt', 'updatedAt', 'revision'])
-        && d.get('kind', null) in ['practice', 'mock']
-        && ((d.get('kind', null) == 'mock' && d.get('mockId', null) is string
-              && d.get('mockId', '').size() > 0)
-            || (d.get('kind', null) == 'practice' && d.get('mockId', null) == null))
+        && d.get('kind', null) == 'practice'
+        && d.get('mockId', null) == null
         && d.get('bundleId', null) is string
         && d.get('examSlug', null) in jobExamSlugs()
         && d.get('status', '') == 'in-progress'
@@ -968,57 +1013,22 @@ service cloud.firestore {
         // cannot silently overwrite each other's answers.
         && d.get('revision', null) is int && d.get('revision', 0) == 1
         && d.get('lastSyncedAt', null) is timestamp
-        && ((d.get('kind', null) == 'practice' && d.get('clientEndsAtMillis', null) == null)
-            || (d.get('kind', null) == 'mock'
-                && (d.get('clientEndsAtMillis', null) == null || d.get('clientEndsAtMillis', null) is number)))
+        && d.get('clientEndsAtMillis', null) == null
         && d.get('submittedAt', null) == null
         && d.get('createdAt', null) is timestamp
         && d.get('updatedAt', null) is timestamp
         && exists(/databases/$(database)/documents/jobQuestionBundles/$(d.get('bundleId', '')))
         && jobBundleData(d.get('bundleId', '')).status == 'published'
         && jobBundleData(d.get('bundleId', '')).examSlug == d.get('examSlug', null)
-        && jobBundleKindFitsAttemptKind(jobBundleData(d.get('bundleId', '')).kind, d.get('kind', null))
-        && (d.get('kind', null) == 'practice'
-            || jobBundleData(d.get('bundleId', '')).mockId == d.get('mockId', null));
+        && jobBundleKindFitsAttemptKind(jobBundleData(d.get('bundleId', '')).kind, d.get('kind', null));
     }
     // Session update validation (d = new doc, old = existing doc).
-    // Only called while old.status == 'in-progress' (enforced in the
-    // match) and only for the autosave/transition keys (enforced by
-    // affectedKeys in the match). submittedAt is set exactly on the
-    // in-progress -> submitted transition; endsAt is set ONCE from
-    // null and never changed after; practice never gets an endsAt.
-    // Step 9 (audit M1-a): the stored mock deadline is BOUNDED.
-    // endsAt may only move null → timestamp when it lands in
-    // (startedAt, startedAt + the mock's rulesSnapshot.timeMinutes]
-    // — the duration comes from the mock doc (jobMocks), reached
-    // via the bundle (kind 'mock' → doc-ID is the bundle's mockId;
-    // daily/weekly → doc-ID is the bundleId itself). The chain runs
-    // ONLY when endsAt is actually being set (short-circuit: an
-    // autosave, or the already-set case, never evaluates it), so
-    // the extra gets cost nothing on the hot path. Practice never
-    // sets endsAt (enforced by the clause below). If the mock doc
-    // is gone, the deadline cannot be verified and the set is
-    // denied — a running mock whose definition vanished cannot be
-    // submitted either (M1-b needs a stored endsAt).
-    function jobMockDocId(bundleId) {
-      return jobBundleData(bundleId).kind == 'mock'
-        ? jobBundleData(bundleId).mockId
-        : bundleId;
-    }
-    function jobMockDocData(bundleId) {
-      return get(/databases/$(database)/documents/jobMocks/$(jobMockDocId(bundleId))).data;
-    }
-    function jobMockEndsAtWithinBound(old, d) {
-      return exists(/databases/$(database)/documents/jobQuestionBundles/$(old.get('bundleId', '')))
-        && exists(/databases/$(database)/documents/jobMocks/$(jobMockDocId(old.get('bundleId', ''))))
-        && jobMockDocData(old.get('bundleId', '')).get('rulesSnapshot', null) is map
-        && jobMockDocData(old.get('bundleId', '')).rulesSnapshot.get('timeMinutes', null) is int
-        && d.get('endsAt', null) is timestamp
-        && old.get('startedAt', null) is timestamp
-        && d.get('endsAt', null) > old.get('startedAt', null)
-        && d.get('endsAt', null) <= old.get('startedAt', null)
-             + duration.value(jobMockDocData(old.get('bundleId', '')).rulesSnapshot.timeMinutes * 60, 's');
-    }
+    // PRACTICE ONLY (H.2). Only called while old.status ==
+    // 'in-progress' (enforced in the match) and only for the
+    // autosave/transition keys (enforced by affectedKeys in the
+    // match). submittedAt is set exactly on the in-progress ->
+    // submitted transition; endsAt NEVER exists on a practice
+    // session (a practice update that sets one is denied).
     function validJobSessionUpdate(d, old) {
       return d.get('status', '') in ['in-progress', 'submitted', 'abandoned']
         && ((d.get('status', '') == 'submitted' && d.get('submittedAt', null) is timestamp)
@@ -1043,13 +1053,291 @@ service cloud.firestore {
         && d.get('revision', -1) == old.get('revision', 0) + 1
         && d.get('lastSyncedAt', null) is timestamp
         && d.get('updatedAt', null) is timestamp
+        && d.get('endsAt', null) == null
+        && d.get('clientEndsAtMillis', null) == null;
+    }
+
+    // ---------- Step 9: full-exam sessions + attempts ----------
+    // Exam session create (Step 9, ChatGPT fold-in §1(a)/§1(b)/
+    // H.2/H.6/H.7). The exam session lives in jobExamSessions — a
+    // SEPARATE collection from practice sessions, with exam-only
+    // rules. The timer is server-time-derived:
+    //  - startedAt MUST be the server timestamp (== request.time —
+    //    a literal client Date is a few ms off and fails, so the
+    //    client must write the serverTimestamp sentinel; verified
+    //    in the emulator, scratch test 22 Nov 2026).
+    //  - endsAt starts null and is set ONCE by a later update to
+    //    EXACTLY startedAt + the definition's frozen duration
+    //    (see validJobExamSessionUpdate) — the client cannot
+    //    compute request.time + duration at create (it does not
+    //    know the server time until it reads back startedAt), so
+    //    the exact-equality check lives on the update, not here.
+    //  - the question set is FROZEN by whole-equality against the
+    //    published manifest (jobQuestionSetManifests): the
+    //    session's questionRefs must BE the manifest's refs, and
+    //    the manifest must be the definition's CURRENT one.
+    //  - one active session per user per exam pattern (H.7): the
+    //    create is a batch with the lock doc jobExamUserLocks/
+    //    {uid}_{examSlug} — the rule requires the post-batch lock
+    //    to exist and point at this session (getAfter).
+    // Budget note (Step 9 fold-in, H.6 + the M1 lesson): Firestore
+    // rules have NO let bindings and a 1000-expression budget PER
+    // REQUEST — a batched session+lock create evaluates BOTH
+    // validators together. Every referenced doc is therefore
+    // fetched ONCE, in the match below, and passed in as a plain
+    // map (bundle / manifest / def / lockAfter). Re-reading the
+    // same doc at several call sites (the original shape) blew the
+    // budget on the batch (verified 22 Nov, scratch a5–a5h).
+    function validJobExamSessionCreate(d, sessionId, bundle, manifest, def, lockAfter) {
+      return d.keys().hasOnly(['kind', 'mockId', 'bundleId', 'examSlug',
+             'definitionId', 'questionSetId', 'bundleVersion', 'status',
+             'startedAt', 'endsAt', 'questionRefs', 'answers',
+             'currentQuestion', 'lastSyncedAt', 'clientEndsAtMillis',
+             'submittedAt', 'createdAt', 'updatedAt', 'revision'])
+        && d.keys().hasAll(['kind', 'mockId', 'bundleId', 'examSlug',
+             'definitionId', 'questionSetId', 'bundleVersion', 'status',
+             'startedAt', 'endsAt', 'questionRefs', 'answers',
+             'currentQuestion', 'lastSyncedAt', 'clientEndsAtMillis',
+             'submittedAt', 'createdAt', 'updatedAt', 'revision'])
+        && d.get('kind', null) == 'mock'
+        && d.get('mockId', null) is string && d.get('mockId', '').size() > 0
+        && d.get('bundleId', null) is string
+        && d.get('examSlug', null) in jobExamSlugs()
+        && d.get('definitionId', null) is string && d.get('definitionId', '').size() > 0
+        && d.get('questionSetId', null) is string && d.get('questionSetId', '').size() > 0
+        && d.get('bundleVersion', null) is int && d.get('bundleVersion', 0) >= 1
+        && d.get('status', '') == 'in-progress'
+        && d.get('startedAt', null) == request.time
+        && d.get('endsAt', null) == null
+        && d.get('questionRefs', null) is list
+        && d.get('questionRefs', []).size() >= 1
+        && d.get('answers', null) is map
+        && d.get('answers', {}).size() == d.get('questionRefs', []).size()
+        && d.get('currentQuestion', null) is int && d.get('currentQuestion', 0) >= 1
+        && d.get('currentQuestion', 0) <= d.get('questionRefs', []).size()
+        && d.get('revision', null) is int && d.get('revision', 0) == 1
+        && d.get('lastSyncedAt', null) is timestamp
+        && (d.get('clientEndsAtMillis', null) == null || d.get('clientEndsAtMillis', null) is number)
+        && d.get('submittedAt', null) == null
+        && d.get('createdAt', null) is timestamp
+        && d.get('updatedAt', null) is timestamp
+        // The bundle must be Published and match the session
+        // (same exam, mock-type kind, same mock) — and the
+        // session runs the bundle's CURRENT generation.
+        && bundle.get('status', null) == 'published'
+        && bundle.get('examSlug', null) == d.get('examSlug', null)
+        && bundle.get('kind', null) in ['mock', 'daily', 'weekly']
+        && bundle.get('mockId', null) == d.get('mockId', null)
+        && bundle.get('bundleVersion', null) == d.get('bundleVersion', null)
+        // The manifest must be Published, belong to this mock,
+        // and BE the session's question set — whole-equality (the
+        // only loop-free way to validate 200 refs in rules).
+        && manifest.get('status', null) == 'published'
+        && manifest.get('mockId', null) == d.get('mockId', null)
+        && manifest.get('examSlug', null) == d.get('examSlug', null)
+        && manifest.get('questionRefs', null) == d.get('questionRefs', null)
+        && manifest.get('questionCount', null) == d.get('questionRefs', []).size()
+        // The definition must be Published, point at this bundle
+        // AND at this manifest (the session runs the definition's
+        // CURRENT question set — resume reads the session's stored
+        // questionSetId, never the definition).
+        && def.get('status', null) == 'published'
+        && def.get('bundleId', null) == d.get('bundleId', '')
+        && def.get('questionSetId', null) == d.get('questionSetId', '')
+        && def.get('examSlug', null) == d.get('examSlug', null)
+        // The lock (H.7): the post-batch lock must exist, belong
+        // to this user + pattern, be in_progress, and point at
+        // this session. A session created without its lock (a
+        // single write, no batch) reads the STORED lock via
+        // getAfter — absent — and is denied.
+        && lockAfter.get('activeSessionId', '') == sessionId
+        && lockAfter.get('status', '') == 'in_progress'
+        && lockAfter.get('definitionId', '') == d.get('definitionId', '');
+    }
+    // Exam session update (d = new doc, old = existing doc). Only
+    // called while old.status == 'in-progress' (match) and only
+    // for the autosave/transition keys (affectedKeys in the match).
+    // Timer (ChatGPT §1(a) A.2 + audit M1, tightened to EXACT):
+    //  - endsAt is set ONCE, from null, to EXACTLY startedAt +
+    //    the definition's frozen duration (rulesSnapshot.
+    //    timeMinutes) — not a range: a shorter deadline would let
+    //    a client shorten its own exam, a longer one would stretch
+    //    it. The chain runs ONLY when endsAt is actually being
+    //    set (short-circuit), so autosaves never pay for it.
+    //  - answers may change ONLY while the exam is still running:
+    //    if the answers map changed, the stored deadline must be
+    //    unset (not yet stored) or still in the future. The
+    //    submit transition after the deadline (timeout path) must
+    //    carry NO answer changes; the manual submit (before the
+    //    deadline) may carry a final snapshot.
+    //  - startedAt / definitionId / questionSetId / bundleVersion /
+    //    bundleId / examSlug / mockId / questionRefs / kind are
+    //    immutable — they are not in the match's affectedKeys.
+    function jobExamEndsAtIsExact(old, d) {
+      return exists(/databases/$(database)/documents/jobQuestionBundles/$(old.get('bundleId', '')))
+        && exists(/databases/$(database)/documents/jobExamDefinitions/$(old.get('definitionId', '')))
+        && jobExamDefinitionData(old.get('definitionId', '')).get('rulesSnapshot', null) is map
+        && jobExamDefinitionData(old.get('definitionId', '')).rulesSnapshot.get('timeMinutes', null) is int
+        && d.get('endsAt', null) is timestamp
+        && old.get('startedAt', null) is timestamp
+        && d.get('endsAt', null) == old.get('startedAt', null)
+             + duration.value(jobExamDefinitionData(old.get('definitionId', '')).rulesSnapshot.timeMinutes * 60, 's');
+    }
+    function validJobExamSessionUpdate(d, old) {
+      return d.get('status', '') in ['in-progress', 'submitted', 'abandoned']
+        && ((d.get('status', '') == 'submitted' && d.get('submittedAt', null) is timestamp)
+            || (d.get('status', '') != 'submitted' && d.get('submittedAt', null) == null))
+        && d.get('answers', null) is map
+        && d.get('answers', {}).size() <= old.get('questionRefs', []).size()
+        && d.get('currentQuestion', null) is int && d.get('currentQuestion', 0) >= 1
+        && d.get('currentQuestion', 0) <= old.get('questionRefs', []).size()
+        && d.get('revision', null) is int
+        && d.get('revision', -1) == old.get('revision', 0) + 1
+        && d.get('lastSyncedAt', null) is timestamp
+        && d.get('updatedAt', null) is timestamp
         && ((old.get('endsAt', null) == null
-              && (d.get('endsAt', null) == null || jobMockEndsAtWithinBound(old, d)))
+              && (d.get('endsAt', null) == null || jobExamEndsAtIsExact(old, d)))
             || (old.get('endsAt', null) != null && d.get('endsAt', null) == old.get('endsAt', null)))
-        && (old.get('kind', '') != 'practice' || d.get('endsAt', null) == null)
-        && ((old.get('kind', '') == 'practice' && d.get('clientEndsAtMillis', null) == null)
-            || (old.get('kind', '') == 'mock'
-                && (d.get('clientEndsAtMillis', null) == null || d.get('clientEndsAtMillis', null) is number)));
+        && (d.get('answers', {}) == old.get('answers', {})
+            || old.get('endsAt', null) == null
+            || request.time < old.get('endsAt', null))
+        && (d.get('clientEndsAtMillis', null) == null || d.get('clientEndsAtMillis', null) is number);
+    }
+    // Exam attempt create (Step 9, Design G + ChatGPT fold-in
+    // §1(c)/§1(e)/H.3/H.4). Created ONCE at submit with status
+    // 'submitted' and the full fields; the in-progress lifecycle
+    // lives in jobExamSessions. The doc-ID (= session ID) is the
+    // idempotency key; updates and deletes are denied. The attempt
+    // is bound to the submitted exam session (gate below) AND to
+    // the stored deadline (audit M1-b): submittedAt must be ≤ the
+    // session's STORED endsAt — a mock whose deadline was never
+    // stored cannot be submitted at all. The attempt carries the
+    // session's bundleVersion + questionSetId, so a forged attempt
+    // cannot ride on an unrelated session.
+    // HONEST LIMITS (same as practice, §4.4): per-answer shape
+    // cannot be validated in rules (no list indexing — Step 7
+    // decision #7 stands); the exact score formula is lib-level
+    // (the rules bind the deduction to the DECLARED scheme);
+    // accuracy/percentage are range-checked only; and the
+    // attempt's answers cannot be compared element-wise with the
+    // session's answers (list vs map shapes) — the lib builds the
+    // attempt from the fresh-read session, and the counts + size
+    // checks below are the enforceable part.
+    // Budget note (same as validJobExamSessionCreate): the bundle
+    // + the post-write session are fetched ONCE in the match below
+    // and passed in as plain maps (bundle / sessAfter). The
+    // original shape re-read the session at NINE getAfter call
+    // sites and the bundle at SIX get() sites, which blew the
+    // 1000-expression budget on the attempt create (verified 22
+    // Nov, a5). The M1-b deadline check reads sessAfter.endsAt:
+    // the submit never changes endsAt, so the post-write value IS
+    // the stored deadline (no separate get() call site needed).
+    function validJobExamAttemptCreate(d, userId, attemptId, bundle, sessAfter) {
+      return d.keys().hasOnly(['userId', 'kind', 'mockId', 'bundleId',
+             'examSlug', 'subjectId', 'topicId', 'questionSetId',
+             'answers', 'score', 'totalMarks', 'negativeDeduction',
+             'negativeMarkingUsed', 'markingSchemeVersion',
+             'bundleVersion', 'correctCount', 'wrongCount',
+             'unansweredCount', 'accuracy', 'percentage',
+             'timeSpentSeconds', 'startedAt', 'submittedAt', 'status',
+             'markingStatus', 'resultLabel', 'clientCalculatedScore',
+             'serverVerifiedScore', 'trustLevel', 'resultType',
+             'sessionId', 'audit', 'answerHashes', 'anomalyFlags',
+             'submissionIntegrity'])
+        && d.keys().hasAll(['userId', 'kind', 'mockId', 'bundleId',
+             'examSlug', 'subjectId', 'topicId', 'questionSetId',
+             'answers', 'score', 'totalMarks', 'negativeDeduction',
+             'negativeMarkingUsed', 'markingSchemeVersion',
+             'bundleVersion', 'correctCount', 'wrongCount',
+             'unansweredCount', 'accuracy', 'percentage',
+             'timeSpentSeconds', 'startedAt', 'submittedAt', 'status',
+             'markingStatus', 'resultLabel', 'clientCalculatedScore',
+             'serverVerifiedScore', 'trustLevel', 'resultType', 'sessionId',
+             'submissionIntegrity'])
+        && d.get('userId', '') == userId
+        && d.get('kind', null) == 'mock'
+        && d.get('mockId', null) is string && d.get('mockId', '').size() > 0
+        && d.get('bundleId', null) is string
+        && d.get('examSlug', null) in jobExamSlugs()
+        && d.get('subjectId', null) == null
+        && d.get('topicId', null) == null
+        && d.get('questionSetId', null) is string && d.get('questionSetId', '').size() > 0
+        && d.get('answers', null) is list
+        && d.get('answers', []).size() >= 1
+        && d.get('score', null) is number
+        && d.get('totalMarks', null) is number && d.get('totalMarks', 0) > 0
+        && d.get('score', 0) <= d.get('totalMarks', 0)
+        && d.get('score', 0) >= -d.get('totalMarks', 0)
+        && d.get('clientCalculatedScore', null) == d.get('score', null)
+        && d.get('negativeDeduction', null) is number
+        && d.get('negativeDeduction', -1) >= 0
+        && d.get('negativeMarkingUsed', null) is number
+        && (d.get('negativeMarkingUsed', -1) == 0
+            || d.get('negativeMarkingUsed', -1) == 0.25
+            || d.get('negativeMarkingUsed', -1) == 0.5)
+        && d.get('negativeDeduction', -1)
+             == d.get('wrongCount', 0) * d.get('negativeMarkingUsed', -1)
+        && isStr(d.get('markingSchemeVersion', null), 100)
+        && d.get('bundleVersion', null) is int && d.get('bundleVersion', 0) >= 1
+        && d.get('correctCount', null) is int && d.get('correctCount', -1) >= 0
+        && d.get('wrongCount', null) is int && d.get('wrongCount', -1) >= 0
+        && d.get('unansweredCount', null) is int && d.get('unansweredCount', -1) >= 0
+        && d.get('correctCount', 0) + d.get('wrongCount', 0) + d.get('unansweredCount', 0)
+             == d.get('answers', []).size()
+        && d.get('accuracy', null) is number
+        && d.get('accuracy', -1) >= 0 && d.get('accuracy', 101) <= 100
+        && d.get('percentage', null) is number
+        && d.get('percentage', -101) >= -100 && d.get('percentage', 101) <= 100
+        && d.get('timeSpentSeconds', null) is number
+        && d.get('timeSpentSeconds', -1) >= 0
+        && d.get('startedAt', null) is timestamp
+        && d.get('submittedAt', null) is timestamp
+        && d.get('startedAt', null) <= d.get('submittedAt', null)
+        && d.get('submittedAt', null) <= request.time
+        && d.get('status', '') == 'submitted'
+        && d.get('markingStatus', '') == 'auto'
+        && d.get('resultLabel', '') == 'practice'
+        && d.get('trustLevel', '') == 'unverified'
+        && d.get('resultType', '') == 'practice'
+        // H.3: immutable does NOT mean truthful — the score is
+        // client-calculated, and the attempt says so explicitly.
+        && d.get('submissionIntegrity', '') == 'client_calculated'
+        && d.get('serverVerifiedScore', null) == null
+        && (d.get('audit', null) == null || d.get('audit', null) is map)
+        && (d.get('answerHashes', null) == null || d.get('answerHashes', null) is list)
+        && (d.get('anomalyFlags', null) == null || d.get('anomalyFlags', null) is list)
+        && d.get('sessionId', '') == attemptId
+        && bundle.get('status', null) == 'published'
+        && bundle.get('examSlug', null) == d.get('examSlug', null)
+        && bundle.get('kind', null) in ['mock', 'daily', 'weekly']
+        && bundle.get('mockId', null) == d.get('mockId', null)
+        && d.get('answers', []).size() <= bundle.get('questionCount', 0)
+        && bundle.get('bundleVersion', null) == d.get('bundleVersion', null)
+        // Session gate: the exam session with the same ID must
+        // exist and be 'submitted' AFTER this write (getAfter —
+        // the batched submit's own transition counts; in the
+        // sequential Design G flow getAfter reads the stored,
+        // already-submitted session). The attempt is bound to the
+        // session's IDENTITY: same mock, exam, bundle, question
+        // set, bundle generation, start time, and the same number
+        // of questions as the session's stored order.
+        && sessAfter.get('status', '') == 'submitted'
+        && sessAfter.get('bundleId', '') == d.get('bundleId', '')
+        && sessAfter.get('kind', null) == d.get('kind', null)
+        && sessAfter.get('examSlug', null) == d.get('examSlug', null)
+        && sessAfter.get('mockId', null) == d.get('mockId', null)
+        && sessAfter.get('questionSetId', null) == d.get('questionSetId', null)
+        && sessAfter.get('bundleVersion', null) == d.get('bundleVersion', null)
+        && sessAfter.get('startedAt', null) == d.get('startedAt', null)
+        && sessAfter.get('questionRefs', []).size() == d.get('answers', []).size()
+        // Audit M1-b (moved here from the practice validator by
+        // the H.2 split): submittedAt must be ≤ the session's
+        // STORED deadline (endsAt) — read from sessAfter (the
+        // submit never changes endsAt, so post-write == stored).
+        // When endsAt is null (deadline never stored) the
+        // comparison errors and the allow denies — which is the
+        // correct outcome.
+        && d.get('submittedAt', null) <= sessAfter.get('endsAt', null);
     }
 
     // ---------- users.verificationStatus ----------
@@ -2775,9 +3063,11 @@ service cloud.firestore {
       allow delete: if isAdmin();
     }
 
-    // ---------- Step 9: full exam + model tests (jobMocks) ----------
-    // jobMocks — the mock definition (Step 3 §2.10). One doc per mock
-    // event: full (doc-ID `full__{examSlug}__{n}`), daily (doc-ID
+    // ---------- Step 9: full exam + model tests (jobExamDefinitions) ----------
+    // jobExamDefinitions — the mock definition (Step 3 §2.10's
+    // `jobMocks`, renamed by the ChatGPT fold-in to ChatGPT's
+    // jobExamDefinitions name). One doc per mock event: full
+    // (doc-ID `full__{examSlug}__{n}`), daily (doc-ID
     // `daily__{YYYY-MM-DD}`), weekly (doc-ID `weekly__{YYYY-Www}`).
     // The rulesSnapshot is the exam-pattern copy taken at creation —
     // a later rulesConfig change never changes a running mock's
@@ -2793,12 +3083,22 @@ service cloud.firestore {
     // carries is the date / weekId / full__{examSlug}__{n} (see
     // jobMocks.ts) — the bundle's mockId must equal it (Step 8
     // rule: bundle.mockId == attempt.mockId).
-    function validJobMockRulesSnapshot(s) {
+    // Daily standard (ChatGPT §1(d) + the Step 9 brief): a daily
+    // mock is 20–30 MCQ in 20–30 minutes (editorial standard 25Q /
+    // 25min); the weekly mock is the FULL length of the rotated
+    // pattern (BCS 200Q/120min, Bank 100Q/60min, Primary 90Q/90min,
+    // NTRCA 100Q/60min). The definition points at its CURRENT
+    // question-set manifest (questionSetId) — new sessions use it;
+    // running sessions keep their stored questionSetId.
+    function validJobExamDefinitionRulesSnapshot(s, kind) {
       return s is map
         && s.get('questionCount', null) is int
         && s.get('questionCount', 0) >= 1 && s.get('questionCount', 0) <= 200
         && s.get('timeMinutes', null) is int
         && s.get('timeMinutes', 0) >= 1 && s.get('timeMinutes', 0) <= 600
+        && (kind != 'daily'
+            || (s.get('questionCount', 0) >= 20 && s.get('questionCount', 0) <= 30
+                && s.get('timeMinutes', 0) >= 20 && s.get('timeMinutes', 0) <= 30))
         && s.get('marksPerQuestion', null) == 1
         && (s.get('negativeMarking', null) == null
             || s.get('negativeMarking', null) == 0
@@ -2810,14 +3110,15 @@ service cloud.firestore {
                 && s.get('passPercent', 0) >= 0 && s.get('passPercent', 0) <= 100))
         && isStr(s.get('scoringConfigVersion', null), 100);
     }
-    function validJobMock(d, mockId) {
+    function validJobExamDefinition(d, mockId) {
       return d.get('examSlug', null) in jobExamSlugs()
         && d.get('examSlug', null) != 'it-professional'
         && isStr(d.get('titleBn', null), 200)
         && isStr(d.get('titleEn', null), 200)
         && d.get('kind', null) in ['daily', 'weekly', 'full']
         && isStr(d.get('bundleId', null), 200)
-        && validJobMockRulesSnapshot(d.get('rulesSnapshot', null))
+        && isStr(d.get('questionSetId', null), 200)
+        && validJobExamDefinitionRulesSnapshot(d.get('rulesSnapshot', null), d.get('kind', null))
         && ((d.get('kind', null) == 'daily'
               && d.get('scheduleDate', null) is string
               && mockId == 'daily__' + d.get('scheduleDate', ''))
@@ -2839,37 +3140,180 @@ service cloud.firestore {
         && (d.get('createdAt', null) == null || d.get('createdAt', null) is timestamp)
         && (d.get('updatedAt', null) == null || d.get('updatedAt', null) is timestamp);
     }
-    match /jobMocks/{mockId} {
+    match /jobExamDefinitions/{mockId} {
       allow read: if resource.data.get('status', '') == 'published' || isModerator();
       allow create: if isModerator()
         && request.resource.data.keys().hasOnly(['examSlug', 'titleBn', 'titleEn',
-             'kind', 'bundleId', 'rulesSnapshot', 'scheduleDate', 'examSlugCycle',
+             'kind', 'bundleId', 'questionSetId', 'rulesSnapshot', 'scheduleDate', 'examSlugCycle',
              'status', 'retakeAllowed', 'maxAttempts', 'publishedAt', 'publishedBy',
              'createdAt', 'updatedAt'])
         && request.resource.data.get('status', '') == 'draft'
-        && validJobMock(request.resource.data, mockId);
+        && validJobExamDefinition(request.resource.data, mockId);
       // Update: a DRAFT mock edits freely (same validity as create);
       // a PUBLISHED mock's rules are frozen — only titles, status,
-      // retake policy and publish metadata move (a correction needs
-      // unpublish first, or a new mock); an ARCHIVED mock reopens
-      // only back to draft. Status moves: draft -> published /
-      // archived; published -> archived; archived -> draft.
+      // retake policy, the CURRENT manifest pointer (questionSetId)
+      // and publish metadata move (a correction needs unpublish
+      // first, or a new mock — and a manifest change only affects
+      // NEW sessions; running sessions keep their stored
+      // questionSetId); an ARCHIVED mock reopens only back to
+      // draft. Status moves: draft -> published / archived;
+      // published -> archived; archived -> draft.
       allow update: if isModerator()
         && request.resource.data.keys().hasOnly(['examSlug', 'titleBn', 'titleEn',
-             'kind', 'bundleId', 'rulesSnapshot', 'scheduleDate', 'examSlugCycle',
+             'kind', 'bundleId', 'questionSetId', 'rulesSnapshot', 'scheduleDate', 'examSlugCycle',
              'status', 'retakeAllowed', 'maxAttempts', 'publishedAt', 'publishedBy',
              'createdAt', 'updatedAt'])
-        && validJobMock(request.resource.data, mockId)
+        && validJobExamDefinition(request.resource.data, mockId)
         && ((resource.data.get('status', '') == 'draft'
               && request.resource.data.get('status', '') in ['draft', 'published', 'archived'])
             || (resource.data.get('status', '') == 'published'
               && request.resource.data.get('status', '') in ['published', 'archived']
               && request.resource.data.diff(resource.data).affectedKeys()
                    .hasOnly(['titleBn', 'titleEn', 'status', 'retakeAllowed',
-                             'maxAttempts', 'publishedAt', 'publishedBy', 'updatedAt']))
+                             'maxAttempts', 'questionSetId', 'publishedAt', 'publishedBy', 'updatedAt']))
             || (resource.data.get('status', '') == 'archived'
               && request.resource.data.get('status', '') in ['archived', 'draft']));
       allow delete: if isAdmin();
+    }
+    // ---------- Step 9: question-set manifests (jobQuestionSetManifests) ----------
+    // The frozen question set for one mock generation (ChatGPT
+    // §1(f)). One doc per manifest version: questionSetId, e.g.
+    // `full__bcs__1_v1`. It carries ONLY the question references
+    // (bundleId + n + questionId, in exam order) — the same shape
+    // the exam session stores — so the session-create rule can
+    // validate the whole set by whole-equality (the only loop-free
+    // way to check 200 refs in rules). The BUNDLE holds the
+    // question text/options for display; the MANIFEST is the
+    // rules' authority for what the exam contains. A published
+    // manifest is immutable: to correct it, unpublish, edit as a
+    // draft, republish as a NEW version (new questionSetId), and
+    // point the definition at it — running sessions keep their
+    // stored questionSetId and are unaffected.
+    function validJobQuestionSetManifest(d, questionSetId) {
+      return d.get('examSlug', null) in jobExamSlugs()
+        && d.get('examSlug', null) != 'it-professional'
+        && isStr(d.get('mockId', null), 200)
+        && d.get('version', null) is int && d.get('version', 0) >= 1
+        && d.get('questionCount', null) is int
+        && d.get('questionCount', 0) >= 1 && d.get('questionCount', 0) <= 200
+        && d.get('questionRefs', null) is list
+        && d.get('questionRefs', []).size() == d.get('questionCount', 0)
+        && isStr(d.get('markingSchemeVersion', null), 100)
+        && d.get('status', null) in ['draft', 'published', 'archived']
+        && (d.get('publishedAt', null) == null || d.get('publishedAt', null) is timestamp)
+        && (d.get('publishedBy', null) == null || d.get('publishedBy', null) is string)
+        && (d.get('createdAt', null) == null || d.get('createdAt', null) is timestamp)
+        && (d.get('updatedAt', null) == null || d.get('updatedAt', null) is timestamp);
+    }
+    match /jobQuestionSetManifests/{questionSetId} {
+      allow read: if resource.data.get('status', '') == 'published' || isModerator();
+      allow create: if isModerator()
+        && request.resource.data.keys().hasOnly(['examSlug', 'mockId', 'version',
+             'questionCount', 'questionRefs', 'markingSchemeVersion', 'status',
+             'publishedAt', 'publishedBy', 'createdAt', 'updatedAt'])
+        && request.resource.data.get('status', '') == 'draft'
+        && validJobQuestionSetManifest(request.resource.data, questionSetId);
+      allow update: if isModerator()
+        && request.resource.data.keys().hasOnly(['examSlug', 'mockId', 'version',
+             'questionCount', 'questionRefs', 'markingSchemeVersion', 'status',
+             'publishedAt', 'publishedBy', 'createdAt', 'updatedAt'])
+        && validJobQuestionSetManifest(request.resource.data, questionSetId)
+        && ((resource.data.get('status', '') == 'draft'
+              && request.resource.data.get('status', '') in ['draft', 'published', 'archived'])
+            || (resource.data.get('status', '') == 'published'
+              && request.resource.data.get('status', '') in ['published', 'archived']
+              && request.resource.data.diff(resource.data).affectedKeys()
+                   .hasOnly(['status', 'publishedAt', 'publishedBy', 'updatedAt']))
+            || (resource.data.get('status', '') == 'archived'
+              && request.resource.data.get('status', '') in ['archived', 'draft']));
+      allow delete: if isAdmin();
+    }
+    // ---------- Step 9: exam user locks (jobExamUserLocks) ----------
+    // One active exam session per user per exam pattern (ChatGPT
+    // H.7). Doc-ID `{uid}_{examSlug}`. The lock is created
+    // ATOMICALLY with the exam session (one client batch) and
+    // released ATOMICALLY with the session's terminal transition
+    // (submit/abandon batch). A second session while one is active
+    // is denied (the stored lock is in_progress and fresh); a new
+    // session after submit/abandon is allowed (lock terminal); a
+    // crashed session's lock goes STALE 15 minutes after the exam's
+    // deadline (createdAt + durationSeconds + 900s) — staleness is
+    // the crash backstop, so a student is never locked out forever
+    // by a tab that died mid-exam. durationSeconds is verified
+    // against the definition's frozen duration (the lock carries
+    // the definitionId) — a client cannot shorten its own lock to
+    // go stale early. The lock does NOT rate-limit globally and
+    // does NOT prove one attempt per exam per student (a student
+    // who finishes one exam may start another — retakes are a
+    // policy of the definition's retakeAllowed/maxAttempts, not
+    // of the lock).
+    // Budget note (same as validJobExamSessionCreate): the
+    // definition is fetched ONCE in the match below and passed in
+    // as a plain map (def). The lock create does NOT verify the
+    // session: the rules engine cannot read a session doc's fields
+    // from a lock-create evaluation (verified empirically 22 Nov,
+    // scratch a5–a5v — the same getAfter read SUCCEEDS from the
+    // lock-update and session-create evaluations, but ERRORS from
+    // the lock-create one). The binding is enforced where it
+    // matters instead — the SESSION create (validJobExamSession-
+    // Create) requires the post-batch lock to point at it — and a
+    // lock without a session only strands its own creator until
+    // the stale-lock recovery below.
+    function validJobExamUserLock(d, lockId, def) {
+      return d.keys().hasOnly(['uid', 'examSlug', 'mockId', 'definitionId',
+             'activeSessionId', 'status', 'durationSeconds', 'createdAt', 'updatedAt'])
+        && d.keys().hasAll(['uid', 'examSlug', 'mockId', 'definitionId',
+             'activeSessionId', 'status', 'durationSeconds', 'createdAt', 'updatedAt'])
+        && d.get('uid', '') == uid()
+        && lockId == uid() + '_' + d.get('examSlug', '')
+        && d.get('examSlug', null) in jobExamSlugs()
+        && d.get('mockId', null) is string && d.get('mockId', '').size() > 0
+        && d.get('definitionId', null) is string && d.get('definitionId', '').size() > 0
+        && d.get('activeSessionId', null) is string && d.get('activeSessionId', '').size() > 0
+        && d.get('status', '') == 'in_progress'
+        && d.get('durationSeconds', null) is int
+        && d.get('durationSeconds', 0) >= 60 && d.get('durationSeconds', 0) <= 7200
+        && d.get('createdAt', null) is timestamp
+        && d.get('createdAt', null) <= request.time
+        && d.get('createdAt', null) > request.time - duration.value(5, 'm')
+        && d.get('updatedAt', null) is timestamp
+        && def.get('status', null) == 'published'
+        && def.get('rulesSnapshot', null) is map
+        && def.get('rulesSnapshot', null).get('timeMinutes', null) is int
+        && d.get('durationSeconds', 0)
+             == def.rulesSnapshot.timeMinutes * 60
+        && def.get('examSlug', null) == d.get('examSlug', null);
+    }
+    match /jobExamUserLocks/{lockId} {
+      allow read: if (signedIn() && resource.data.get('uid', '') == uid()) || isModerator();
+      // The definition is fetched ONCE here and passed in
+      // (budget note on validJobExamUserLock): the exists-guard
+      // short-circuits before the definition get(), so a missing
+      // definition denies cleanly.
+      allow create: if signedIn() && callerActive()
+        && exists(/databases/$(database)/documents/jobExamDefinitions/$(request.resource.data.get('definitionId', '')))
+        && validJobExamUserLock(request.resource.data, lockId,
+             jobExamDefinitionData(request.resource.data.get('definitionId', '')))
+        // No live lock may already exist for this pattern: the
+        // stored lock must be absent, terminal, or stale
+        // (past createdAt + duration + 15 min grace).
+        && (!exists(/databases/$(database)/documents/jobExamUserLocks/$(lockId))
+            || get(/databases/$(database)/documents/jobExamUserLocks/$(lockId)).data.status == 'terminal'
+            || request.time > get(/databases/$(database)/documents/jobExamUserLocks/$(lockId)).data.createdAt
+                 + duration.value(get(/databases/$(database)/documents/jobExamUserLocks/$(lockId)).data.durationSeconds, 's')
+                 + duration.value(15, 'm'));
+      // Release: in_progress -> terminal ONLY, and ONLY together
+      // with the session's terminal transition (the post-batch
+      // session must be submitted or abandoned — a lock released
+      // while its session is still in progress would let the
+      // student start a second concurrent exam).
+      allow update: if signedIn() && callerActive()
+        && resource.data.get('uid', '') == uid()
+        && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['status', 'updatedAt'])
+        && resource.data.get('status', '') == 'in_progress'
+        && request.resource.data.get('status', '') == 'terminal'
+        && getAfter(/databases/$(database)/documents/users/$(uid())/jobExamSessions/$(resource.data.get('activeSessionId', ''))).data.status in ['submitted', 'abandoned'];
+      allow delete: if false;
     }
 
     // ---------- Step 7: question bank + verification ----------
@@ -3027,17 +3471,30 @@ service cloud.firestore {
     // window forever). One window per student per bundle; after it
     // closes the key stays unreadable for that bundle. Stale
     // receipts are harmless — they simply stop opening keys.
+    // ChatGPT fold-in (H.1, CRITICAL): the receipt carries a
+    // PURPOSE — 'practice_review' or 'exam_review' — and a
+    // bundleVersion bound to the anchor's generation. A practice
+    // receipt anchors ONLY to a submitted PRACTICE attempt; an
+    // exam receipt anchors ONLY to a submitted EXAM session (the
+    // scoring window) or a submitted EXAM attempt. The key-read
+    // rule (hasFreshJobReceipt) checks the purpose against the
+    // bundle's kind, so a practice receipt can never unlock an
+    // exam key. Never issue an exam receipt while the exam is in
+    // progress: both exam anchors require status 'submitted'.
     match /jobReceipts/{receiptId} {
       allow read: if (signedIn() && resource.data.get('userId', '') == uid()) || isAdmin();
       allow create: if signedIn() && callerActive()
         && receiptId == uid() + '_' + request.resource.data.get('bundleId', '')
         && request.resource.data.keys().hasOnly(['userId', 'bundleId',
-             'attemptId', 'createdAt'])
+             'attemptId', 'createdAt', 'purpose', 'bundleVersion'])
         && request.resource.data.get('userId', '') == uid()
         && request.resource.data.get('bundleId', null) is string
         && request.resource.data.get('bundleId', '').size() <= 200
         && request.resource.data.get('attemptId', null) is string
         && request.resource.data.get('attemptId', '').size() <= 200
+        && request.resource.data.get('purpose', null) in ['practice_review', 'exam_review']
+        && request.resource.data.get('bundleVersion', null) is int
+        && request.resource.data.get('bundleVersion', 0) >= 1
         // Trusted timestamp (P0-03): createdAt must be a real
         // timestamp no later than now and no older than 5 minutes
         // — a client cannot future-date a receipt to stretch its
@@ -3045,20 +3502,35 @@ service cloud.firestore {
         && request.resource.data.get('createdAt', null) is timestamp
         && request.resource.data.get('createdAt', null) <= request.time
         && request.resource.data.get('createdAt', null) > request.time - duration.value(5, 'm')
-        // Anchor (Step 7 P0-06 + Step 9 Design G): a SUBMITTED
-        // attempt for this bundle — OR a SUBMITTED mock session
-        // for this bundle (the scoring window: the session is
-        // submitted, answers frozen, and the attempt does not exist
-        // yet — the receipt's attemptId IS the session ID). An
-        // in-progress session anchors nothing.
-        && ((exists(/databases/$(database)/documents/users/$(uid())/jobAttempts/$(request.resource.data.get('attemptId', '')))
+        // Anchor (Step 7 P0-06 + Step 9 Design G + H.1): the
+        // purpose decides the anchor. practice_review: a SUBMITTED
+        // practice attempt for this bundle (kind 'practice',
+        // matching generation). exam_review: a SUBMITTED exam
+        // attempt for this bundle (kind 'mock') — OR a SUBMITTED
+        // exam session for this bundle (the scoring window: the
+        // session is submitted, answers frozen, and the attempt
+        // does not exist yet — the receipt's attemptId IS the
+        // session ID; the session carries the bundle generation).
+        // An in-progress session anchors nothing.
+        && (((request.resource.data.get('purpose', '') == 'practice_review')
+              && exists(/databases/$(database)/documents/users/$(uid())/jobAttempts/$(request.resource.data.get('attemptId', '')))
               && get(/databases/$(database)/documents/users/$(uid())/jobAttempts/$(request.resource.data.get('attemptId', ''))).data.status == 'submitted'
               && get(/databases/$(database)/documents/users/$(uid())/jobAttempts/$(request.resource.data.get('attemptId', ''))).data.bundleId == request.resource.data.get('bundleId', '')
-              && get(/databases/$(database)/documents/users/$(uid())/jobAttempts/$(request.resource.data.get('attemptId', ''))).data.userId == uid())
-            || (exists(/databases/$(database)/documents/users/$(uid())/jobSessions/$(request.resource.data.get('attemptId', '')))
-              && get(/databases/$(database)/documents/users/$(uid())/jobSessions/$(request.resource.data.get('attemptId', ''))).data.status == 'submitted'
-              && get(/databases/$(database)/documents/users/$(uid())/jobSessions/$(request.resource.data.get('attemptId', ''))).data.bundleId == request.resource.data.get('bundleId', '')
-              && get(/databases/$(database)/documents/users/$(uid())/jobSessions/$(request.resource.data.get('attemptId', ''))).data.kind == 'mock'))
+              && get(/databases/$(database)/documents/users/$(uid())/jobAttempts/$(request.resource.data.get('attemptId', ''))).data.userId == uid()
+              && get(/databases/$(database)/documents/users/$(uid())/jobAttempts/$(request.resource.data.get('attemptId', ''))).data.kind == 'practice'
+              && get(/databases/$(database)/documents/users/$(uid())/jobAttempts/$(request.resource.data.get('attemptId', ''))).data.bundleVersion == request.resource.data.get('bundleVersion', null))
+            || ((request.resource.data.get('purpose', '') == 'exam_review')
+              && ((exists(/databases/$(database)/documents/users/$(uid())/jobExamAttempts/$(request.resource.data.get('attemptId', '')))
+                    && get(/databases/$(database)/documents/users/$(uid())/jobExamAttempts/$(request.resource.data.get('attemptId', ''))).data.status == 'submitted'
+                    && get(/databases/$(database)/documents/users/$(uid())/jobExamAttempts/$(request.resource.data.get('attemptId', ''))).data.bundleId == request.resource.data.get('bundleId', '')
+                    && get(/databases/$(database)/documents/users/$(uid())/jobExamAttempts/$(request.resource.data.get('attemptId', ''))).data.userId == uid()
+                    && get(/databases/$(database)/documents/users/$(uid())/jobExamAttempts/$(request.resource.data.get('attemptId', ''))).data.kind == 'mock'
+                    && get(/databases/$(database)/documents/users/$(uid())/jobExamAttempts/$(request.resource.data.get('attemptId', ''))).data.bundleVersion == request.resource.data.get('bundleVersion', null))
+                  || (exists(/databases/$(database)/documents/users/$(uid())/jobExamSessions/$(request.resource.data.get('attemptId', '')))
+                    && get(/databases/$(database)/documents/users/$(uid())/jobExamSessions/$(request.resource.data.get('attemptId', ''))).data.status == 'submitted'
+                    && get(/databases/$(database)/documents/users/$(uid())/jobExamSessions/$(request.resource.data.get('attemptId', ''))).data.bundleId == request.resource.data.get('bundleId', '')
+                    && get(/databases/$(database)/documents/users/$(uid())/jobExamSessions/$(request.resource.data.get('attemptId', ''))).data.kind == 'mock'
+                    && get(/databases/$(database)/documents/users/$(uid())/jobExamSessions/$(request.resource.data.get('attemptId', ''))).data.bundleVersion == request.resource.data.get('bundleVersion', null)))))
         && exists(/databases/$(database)/documents/jobQuestionBundles/$(request.resource.data.get('bundleId', '')))
         && get(/databases/$(database)/documents/jobQuestionBundles/$(request.resource.data.get('bundleId', ''))).data.status == 'published';
       allow update: if false;
@@ -3097,9 +3569,66 @@ service cloud.firestore {
         && resource.data.get('status', '') == 'in-progress'
         && request.resource.data.diff(resource.data).affectedKeys()
              .hasOnly(['answers', 'currentQuestion', 'lastSyncedAt',
+                       'updatedAt', 'status', 'submittedAt', 'revision'])
+        && validJobSessionUpdate(request.resource.data, resource.data);
+      allow delete: if false;
+    }
+
+    // users/{uid}/jobExamAttempts — FULL exam attempt (Step 9,
+    // ChatGPT fold-in H.2). Created ONCE at submit with status
+    // 'submitted' and the full fields; the in-progress lifecycle
+    // lives in jobExamSessions. The doc-ID (= session ID) is the
+    // idempotency key; a second submit is an update, and updates
+    // are denied. Deletes are forbidden for everyone, even Admin —
+    // submitted attempts are immutable, §4.4. An attempt may only
+    // be created when its exam session is already 'submitted'
+    // (the session gate in validJobExamAttemptCreate).
+    match /users/{userId}/jobExamAttempts/{attemptId} {
+      allow read: if isOwner(userId) || isModerator();
+      // The bundle + the post-write session are fetched ONCE
+      // here and passed in (budget note on
+      // validJobExamAttemptCreate): the exists-guards
+      // short-circuit before any get(), so a missing doc denies
+      // cleanly instead of erroring the get.
+      allow create: if isOwner(userId) && callerActive()
+        && exists(/databases/$(database)/documents/jobQuestionBundles/$(request.resource.data.get('bundleId', '')))
+        && exists(/databases/$(database)/documents/users/$(userId)/jobExamSessions/$(attemptId))
+        && validJobExamAttemptCreate(request.resource.data, userId, attemptId,
+             jobBundleData(request.resource.data.get('bundleId', '')),
+             jobExamSessionDataAfter(userId, attemptId));
+      allow update, delete: if false;
+    }
+
+    // users/{uid}/jobExamSessions — live exam session (Step 9).
+    // Created in-progress (with its lock), autosaved while
+    // in-progress and before the stored deadline, then exactly
+    // one terminal transition (submitted or abandoned) — after
+    // that the doc is frozen. The deadline (endsAt) is set ONCE
+    // after read-back to exactly startedAt + the definition's
+    // duration. Deletes are forbidden for everyone, even Admin:
+    // an abandoned session is the audit trail.
+    match /users/{userId}/jobExamSessions/{sessionId} {
+      allow read: if isOwner(userId) || isModerator();
+      // Each referenced doc is fetched ONCE here and passed in
+      // (budget note on validJobExamSessionCreate above): the
+      // exists-guards short-circuit before any get(), so a
+      // missing doc denies cleanly instead of erroring the get.
+      allow create: if isOwner(userId) && callerActive()
+        && exists(/databases/$(database)/documents/jobQuestionBundles/$(request.resource.data.get('bundleId', '')))
+        && exists(/databases/$(database)/documents/jobQuestionSetManifests/$(request.resource.data.get('questionSetId', '')))
+        && exists(/databases/$(database)/documents/jobExamDefinitions/$(request.resource.data.get('definitionId', '')))
+        && validJobExamSessionCreate(request.resource.data, sessionId,
+             jobBundleData(request.resource.data.get('bundleId', '')),
+             jobManifestData(request.resource.data.get('questionSetId', '')),
+             jobExamDefinitionData(request.resource.data.get('definitionId', '')),
+             getAfter(/databases/$(database)/documents/jobExamUserLocks/$(uid() + '_' + request.resource.data.get('examSlug', ''))).data);
+      allow update: if isOwner(userId) && callerActive()
+        && resource.data.get('status', '') == 'in-progress'
+        && request.resource.data.diff(resource.data).affectedKeys()
+             .hasOnly(['answers', 'currentQuestion', 'lastSyncedAt',
                        'updatedAt', 'endsAt', 'clientEndsAtMillis',
                        'status', 'submittedAt', 'revision'])
-        && validJobSessionUpdate(request.resource.data, resource.data);
+        && validJobExamSessionUpdate(request.resource.data, resource.data);
       allow delete: if false;
     }
 
