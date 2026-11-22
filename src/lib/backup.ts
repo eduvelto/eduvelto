@@ -34,7 +34,7 @@
  *     and reports per-document failures.
  *
  * WHAT IS IN THE FILE — and what is NOT:
- *   - Included: every top-level collection (36, incl. adminActions and
+ *   - Included: every top-level collection (45, incl. adminActions and
  *     settings — the audit log and the feature flags ARE backed up).
  *   - NOT included: sub-collections (users/{uid}/quizAttempts,
  *     posts/{id}/comments, questions/{id}/answers, ...). They are
@@ -109,11 +109,21 @@ export const BACKUP_COLLECTIONS: string[] = [
   'quizzes',
   'posts',
   'questions',
+  // Added 22 Nov 2026 (pre-export full check: the whole Job question
+  // bank + quiz keys were silently missing from every backup).
+  'jobQuestions',
+  'jobQuestionBundles',
+  'jobQuestionKeys',
+  'quizKeys',
   'reports',
   'moderationQueue',
   'teacherVerifications',
   'studyPlans',
   'progressSummaries',
+  // Added 22 Nov 2026 (pre-export full check: user bookmarks + progress
+  // were silently missing from every backup).
+  'bookmarks',
+  'progress',
   'socialPosts',
   'studyGroups',
   'institutionPages',
@@ -123,6 +133,11 @@ export const BACKUP_COLLECTIONS: string[] = [
   'certificates',
   'opportunities',
   'careerPaths',
+  // Added 22 Nov 2026 (pre-export full check: the health directory
+  // collections were silently missing from every backup).
+  'diseases',
+  'facilities',
+  'medicines',
   // Added 20 Nov 2026 (review: the audit log + settings + social +
   // rewards data were silently missing from every backup).
   'adminActions',
@@ -218,7 +233,7 @@ export interface BackupPreflight {
 
 /**
  * Count first, export second (review cost F2): show the owner the cost
- * before a single document is read. 22 count queries ≈ 22 reads.
+ * before a single document is read. 45 count queries ≈ 45 reads.
  */
 export async function getBackupPreflight(
   db: Firestore,
