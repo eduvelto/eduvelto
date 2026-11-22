@@ -2704,6 +2704,103 @@ service cloud.firestore {
       allow delete: if isAdmin();
     }
 
+    // ---------- Step 9: full exam + model tests (jobMocks) ----------
+    // jobMocks — the mock definition (Step 3 §2.10). One doc per mock
+    // event: full (doc-ID `full__{examSlug}__{n}`), daily (doc-ID
+    // `daily__{YYYY-MM-DD}`), weekly (doc-ID `weekly__{YYYY-Www}`).
+    // The rulesSnapshot is the exam-pattern copy taken at creation —
+    // a later rulesConfig change never changes a running mock's
+    // rules, and a published mock's snapshot is frozen (correct it
+    // by unpublishing first, or make a new mock). Published mocks
+    // are PUBLIC catalog metadata (anyone may read them — title /
+    // schedule / pattern, no answers), like the Step 6 decision that
+    // subject names + marks stay public; STARTING a mock still needs
+    // sign-in (the session/attempt rules). No get() calls here.
+    // Doc-ID patterns (enforced at create): daily == 'daily__' +
+    // scheduleDate; weekly matches ^weekly__YYYY-Www$; full matches
+    // ^full__{examSlug}__N$. The bare mockId a session/attempt
+    // carries is the date / weekId / full__{examSlug}__{n} (see
+    // jobMocks.ts) — the bundle's mockId must equal it (Step 8
+    // rule: bundle.mockId == attempt.mockId).
+    function validJobMockRulesSnapshot(s) {
+      return s is map
+        && s.get('questionCount', null) is int
+        && s.get('questionCount', 0) >= 1 && s.get('questionCount', 0) <= 200
+        && s.get('timeMinutes', null) is int
+        && s.get('timeMinutes', 0) >= 1 && s.get('timeMinutes', 0) <= 600
+        && s.get('marksPerQuestion', null) == 1
+        && (s.get('negativeMarking', null) == null
+            || s.get('negativeMarking', null) == 0
+            || s.get('negativeMarking', null) == 0.25
+            || s.get('negativeMarking', null) == 0.5)
+        && s.get('negativeMarkingVerified', null) is bool
+        && (s.get('passPercent', null) == null
+            || (s.get('passPercent', null) is number
+                && s.get('passPercent', 0) >= 0 && s.get('passPercent', 0) <= 100))
+        && isStr(s.get('scoringConfigVersion', null), 100);
+    }
+    function validJobMock(d, mockId) {
+      return d.get('examSlug', null) in jobExamSlugs()
+        && d.get('examSlug', null) != 'it-professional'
+        && isStr(d.get('titleBn', null), 200)
+        && isStr(d.get('titleEn', null), 200)
+        && d.get('kind', null) in ['daily', 'weekly', 'full']
+        && isStr(d.get('bundleId', null), 200)
+        && validJobMockRulesSnapshot(d.get('rulesSnapshot', null))
+        && ((d.get('kind', null) == 'daily'
+              && d.get('scheduleDate', null) is string
+              && mockId == 'daily__' + d.get('scheduleDate', ''))
+            || (d.get('kind', null) == 'weekly'
+              && d.get('scheduleDate', null) is string
+              && mockId.matches('^weekly__[0-9]{4}-W[0-9]{2}$'))
+            || (d.get('kind', null) == 'full'
+              && d.get('scheduleDate', null) == null
+              && mockId.matches('^full__' + d.get('examSlug', '') + '__[0-9]+$')))
+        && ((d.get('kind', null) == 'weekly'
+              && d.get('examSlugCycle', null) in ['bcs', 'bank', 'primary-teacher', 'ntrca'])
+            || (d.get('kind', null) != 'weekly' && d.get('examSlugCycle', null) == null))
+        && d.get('status', null) in ['draft', 'published', 'archived']
+        && d.get('retakeAllowed', null) is bool
+        && (d.get('maxAttempts', null) == null
+            || (d.get('maxAttempts', null) is int && d.get('maxAttempts', 0) >= 1))
+        && (d.get('publishedAt', null) == null || d.get('publishedAt', null) is timestamp)
+        && (d.get('publishedBy', null) == null || d.get('publishedBy', null) is string)
+        && (d.get('createdAt', null) == null || d.get('createdAt', null) is timestamp)
+        && (d.get('updatedAt', null) == null || d.get('updatedAt', null) is timestamp);
+    }
+    match /jobMocks/{mockId} {
+      allow read: if resource.data.get('status', '') == 'published' || isModerator();
+      allow create: if isModerator()
+        && request.resource.data.keys().hasOnly(['examSlug', 'titleBn', 'titleEn',
+             'kind', 'bundleId', 'rulesSnapshot', 'scheduleDate', 'examSlugCycle',
+             'status', 'retakeAllowed', 'maxAttempts', 'publishedAt', 'publishedBy',
+             'createdAt', 'updatedAt'])
+        && request.resource.data.get('status', '') == 'draft'
+        && validJobMock(request.resource.data, mockId);
+      // Update: a DRAFT mock edits freely (same validity as create);
+      // a PUBLISHED mock's rules are frozen — only titles, status,
+      // retake policy and publish metadata move (a correction needs
+      // unpublish first, or a new mock); an ARCHIVED mock reopens
+      // only back to draft. Status moves: draft -> published /
+      // archived; published -> archived; archived -> draft.
+      allow update: if isModerator()
+        && request.resource.data.keys().hasOnly(['examSlug', 'titleBn', 'titleEn',
+             'kind', 'bundleId', 'rulesSnapshot', 'scheduleDate', 'examSlugCycle',
+             'status', 'retakeAllowed', 'maxAttempts', 'publishedAt', 'publishedBy',
+             'createdAt', 'updatedAt'])
+        && validJobMock(request.resource.data, mockId)
+        && ((resource.data.get('status', '') == 'draft'
+              && request.resource.data.get('status', '') in ['draft', 'published', 'archived'])
+            || (resource.data.get('status', '') == 'published'
+              && request.resource.data.get('status', '') in ['published', 'archived']
+              && request.resource.data.diff(resource.data).affectedKeys()
+                   .hasOnly(['titleBn', 'titleEn', 'status', 'retakeAllowed',
+                             'maxAttempts', 'publishedAt', 'publishedBy', 'updatedAt']))
+            || (resource.data.get('status', '') == 'archived'
+              && request.resource.data.get('status', '') in ['archived', 'draft']));
+      allow delete: if isAdmin();
+    }
+
     // ---------- Step 7: question bank + verification ----------
     // jobQuestions — the bank record. Students can NEVER read it:
     // there is deliberately NO student read rule here, so a UI bug
