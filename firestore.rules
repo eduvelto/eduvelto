@@ -682,9 +682,10 @@ service cloud.firestore {
     // submitted attempt + receipt in the console and read a key —
     // on Spark this cannot be fully closed; scores are therefore
     // NEVER shown as "Verified" (every result page is labelled
-    // "অনুশীলন ফলাফল"). The window cannot be refreshed: receipts
-    // are never updated, and only an Admin deletes one — so one
-    // window per student per bundle.
+    // "অনুশীলন ফলাফল"). The window CAN be re-issued, but only by
+    // an anchored re-issue (Step 9 closure, open question 1): a new
+    // submission re-anchors the receipt with a fresh createdAt;
+    // without a new submission the window never refreshes.
     // NOTE: rules have no `let` — the receipt/attempt docs are
     // fetched through these two helpers (each call is a fresh
     // get(); the exists() guards run first, so a missing doc never
@@ -757,6 +758,45 @@ service cloud.firestore {
               && jobReceiptAttemptData(bundleId).bundleId == bundleId
               && jobReceiptAttemptData(bundleId).userId == uid()
               && jobReceiptAttemptData(bundleId).kind == 'practice'));
+    }
+
+    // Step 9 closure (open question 1 — anchored receipt RE-ISSUE):
+    // the anchor check for a receipt doc, shared by create and by
+    // the re-issue update. The purpose decides the anchor.
+    // practice_review: a SUBMITTED practice attempt for this bundle
+    // (kind 'practice', matching generation). exam_review: a
+    // SUBMITTED exam attempt for this bundle (kind 'mock') — OR a
+    // SUBMITTED exam session for this bundle (the scoring window:
+    // the session is submitted, answers frozen, and the attempt
+    // does not exist yet — the receipt's attemptId IS the session
+    // ID; the session carries the bundle generation). An
+    // in-progress session anchors nothing. `data` is the WOULD-BE
+    // doc (request.resource.data on create and on update); the
+    // caller checks the shape, freshness and identity separately.
+    // A re-issue does NOT extend a window silently: the new doc
+    // must re-anchor to a NEWLY submitted session/attempt and carry
+    // a fresh createdAt, so each submission opens exactly one new
+    // 10-minute window.
+    function validJobReceiptAnchor(data) {
+      return (((data.get('purpose', '') == 'practice_review')
+              && exists(/databases/$(database)/documents/users/$(uid())/jobAttempts/$(data.get('attemptId', '')))
+              && get(/databases/$(database)/documents/users/$(uid())/jobAttempts/$(data.get('attemptId', ''))).data.status == 'submitted'
+              && get(/databases/$(database)/documents/users/$(uid())/jobAttempts/$(data.get('attemptId', ''))).data.bundleId == data.get('bundleId', '')
+              && get(/databases/$(database)/documents/users/$(uid())/jobAttempts/$(data.get('attemptId', ''))).data.userId == uid()
+              && get(/databases/$(database)/documents/users/$(uid())/jobAttempts/$(data.get('attemptId', ''))).data.kind == 'practice'
+              && get(/databases/$(database)/documents/users/$(uid())/jobAttempts/$(data.get('attemptId', ''))).data.bundleVersion == data.get('bundleVersion', null))
+            || ((data.get('purpose', '') == 'exam_review')
+              && ((exists(/databases/$(database)/documents/users/$(uid())/jobExamAttempts/$(data.get('attemptId', '')))
+                    && get(/databases/$(database)/documents/users/$(uid())/jobExamAttempts/$(data.get('attemptId', ''))).data.status == 'submitted'
+                    && get(/databases/$(database)/documents/users/$(uid())/jobExamAttempts/$(data.get('attemptId', ''))).data.bundleId == data.get('bundleId', '')
+                    && get(/databases/$(database)/documents/users/$(uid())/jobExamAttempts/$(data.get('attemptId', ''))).data.userId == uid()
+                    && get(/databases/$(database)/documents/users/$(uid())/jobExamAttempts/$(data.get('attemptId', ''))).data.kind == 'mock'
+                    && get(/databases/$(database)/documents/users/$(uid())/jobExamAttempts/$(data.get('attemptId', ''))).data.bundleVersion == data.get('bundleVersion', null))
+                  || (exists(/databases/$(database)/documents/users/$(uid())/jobExamSessions/$(data.get('attemptId', '')))
+                    && get(/databases/$(database)/documents/users/$(uid())/jobExamSessions/$(data.get('attemptId', ''))).data.status == 'submitted'
+                    && get(/databases/$(database)/documents/users/$(uid())/jobExamSessions/$(data.get('attemptId', ''))).data.bundleId == data.get('bundleId', '')
+                    && get(/databases/$(database)/documents/users/$(uid())/jobExamSessions/$(data.get('attemptId', ''))).data.kind == 'mock'
+                    && get(/databases/$(database)/documents/users/$(uid())/jobExamSessions/$(data.get('attemptId', ''))).data.bundleVersion == data.get('bundleVersion', null)))));
     }
 
     // ---------- Step 8: practice engine (jobAttempts + jobSessions) ----------
@@ -3487,12 +3527,16 @@ service cloud.firestore {
     // for that bundle — or (Step 9, Design G) to a real SUBMITTED
     // mock session for that bundle (the scoring window) — on a
     // PUBLISHED bundle (P0-06 + Step 7 fold-in, ChatGPT P0-03). The receipt is a 10-minute window,
-    // NOT one-use (P0-01 Option A) — and the window cannot be
-    // refreshed: nobody updates a receipt, and only an Admin
-    // deletes one (a student delete + recreate would mint a fresh
-    // window forever). One window per student per bundle; after it
-    // closes the key stays unreadable for that bundle. Stale
-    // receipts are harmless — they simply stop opening keys.
+    // NOT one-use (P0-01 Option A). Step 9 closure (open question 1
+    // — retakes): the window CAN be re-issued, but ONLY as an
+    // anchored re-issue — an update whose new doc re-anchors to a
+    // NEWLY submitted session/attempt for the SAME bundle with a
+    // fresh createdAt. A student can never extend a window without
+    // a new submission, and can never move a receipt to another
+    // bundle or another student. Only an Admin deletes a receipt.
+    // After a window closes with no new submission, the key stays
+    // unreadable for that bundle. Stale receipts are harmless —
+    // they simply stop opening keys.
     // ChatGPT fold-in (H.1, CRITICAL): the receipt carries a
     // PURPOSE — 'practice_review' or 'exam_review' — and a
     // bundleVersion bound to the anchor's generation. A practice
@@ -3525,37 +3569,41 @@ service cloud.firestore {
         && request.resource.data.get('createdAt', null) <= request.time
         && request.resource.data.get('createdAt', null) > request.time - duration.value(5, 'm')
         // Anchor (Step 7 P0-06 + Step 9 Design G + H.1): the
-        // purpose decides the anchor. practice_review: a SUBMITTED
-        // practice attempt for this bundle (kind 'practice',
-        // matching generation). exam_review: a SUBMITTED exam
-        // attempt for this bundle (kind 'mock') — OR a SUBMITTED
-        // exam session for this bundle (the scoring window: the
-        // session is submitted, answers frozen, and the attempt
-        // does not exist yet — the receipt's attemptId IS the
-        // session ID; the session carries the bundle generation).
-        // An in-progress session anchors nothing.
-        && (((request.resource.data.get('purpose', '') == 'practice_review')
-              && exists(/databases/$(database)/documents/users/$(uid())/jobAttempts/$(request.resource.data.get('attemptId', '')))
-              && get(/databases/$(database)/documents/users/$(uid())/jobAttempts/$(request.resource.data.get('attemptId', ''))).data.status == 'submitted'
-              && get(/databases/$(database)/documents/users/$(uid())/jobAttempts/$(request.resource.data.get('attemptId', ''))).data.bundleId == request.resource.data.get('bundleId', '')
-              && get(/databases/$(database)/documents/users/$(uid())/jobAttempts/$(request.resource.data.get('attemptId', ''))).data.userId == uid()
-              && get(/databases/$(database)/documents/users/$(uid())/jobAttempts/$(request.resource.data.get('attemptId', ''))).data.kind == 'practice'
-              && get(/databases/$(database)/documents/users/$(uid())/jobAttempts/$(request.resource.data.get('attemptId', ''))).data.bundleVersion == request.resource.data.get('bundleVersion', null))
-            || ((request.resource.data.get('purpose', '') == 'exam_review')
-              && ((exists(/databases/$(database)/documents/users/$(uid())/jobExamAttempts/$(request.resource.data.get('attemptId', '')))
-                    && get(/databases/$(database)/documents/users/$(uid())/jobExamAttempts/$(request.resource.data.get('attemptId', ''))).data.status == 'submitted'
-                    && get(/databases/$(database)/documents/users/$(uid())/jobExamAttempts/$(request.resource.data.get('attemptId', ''))).data.bundleId == request.resource.data.get('bundleId', '')
-                    && get(/databases/$(database)/documents/users/$(uid())/jobExamAttempts/$(request.resource.data.get('attemptId', ''))).data.userId == uid()
-                    && get(/databases/$(database)/documents/users/$(uid())/jobExamAttempts/$(request.resource.data.get('attemptId', ''))).data.kind == 'mock'
-                    && get(/databases/$(database)/documents/users/$(uid())/jobExamAttempts/$(request.resource.data.get('attemptId', ''))).data.bundleVersion == request.resource.data.get('bundleVersion', null))
-                  || (exists(/databases/$(database)/documents/users/$(uid())/jobExamSessions/$(request.resource.data.get('attemptId', '')))
-                    && get(/databases/$(database)/documents/users/$(uid())/jobExamSessions/$(request.resource.data.get('attemptId', ''))).data.status == 'submitted'
-                    && get(/databases/$(database)/documents/users/$(uid())/jobExamSessions/$(request.resource.data.get('attemptId', ''))).data.bundleId == request.resource.data.get('bundleId', '')
-                    && get(/databases/$(database)/documents/users/$(uid())/jobExamSessions/$(request.resource.data.get('attemptId', ''))).data.kind == 'mock'
-                    && get(/databases/$(database)/documents/users/$(uid())/jobExamSessions/$(request.resource.data.get('attemptId', ''))).data.bundleVersion == request.resource.data.get('bundleVersion', null)))))
+        // purpose decides the anchor — see validJobReceiptAnchor
+        // (shared by create and by the re-issue update below).
+        && validJobReceiptAnchor(request.resource.data)
         && exists(/databases/$(database)/documents/jobQuestionBundles/$(request.resource.data.get('bundleId', '')))
         && get(/databases/$(database)/documents/jobQuestionBundles/$(request.resource.data.get('bundleId', ''))).data.status == 'published';
-      allow update: if false;
+      // Anchored re-issue (Step 9 closure, open question 1): a
+      // retake's setDoc on the existing receipt doc-ID is an UPDATE
+      // — allowed only when the new doc re-anchors to a newly
+      // submitted session/attempt for the SAME bundle, with a fresh
+      // createdAt. userId and bundleId are immutable (the receipt
+      // can never change owner or bundle); attemptId, purpose,
+      // bundleVersion and createdAt move with the new submission.
+      allow update: if signedIn() && callerActive()
+        && receiptId == uid() + '_' + request.resource.data.get('bundleId', '')
+        && request.resource.data.get('userId', '') == uid()
+        && resource.data.get('userId', '') == uid()
+        && resource.data.get('bundleId', '') == request.resource.data.get('bundleId', '')
+        && request.resource.data.keys().hasOnly(['userId', 'bundleId',
+             'attemptId', 'createdAt', 'purpose', 'bundleVersion'])
+        && request.resource.data.get('bundleId', null) is string
+        && request.resource.data.get('bundleId', '').size() <= 200
+        && request.resource.data.get('attemptId', null) is string
+        && request.resource.data.get('attemptId', '').size() <= 200
+        && request.resource.data.get('purpose', null) in ['practice_review', 'exam_review']
+        && request.resource.data.get('bundleVersion', null) is int
+        && request.resource.data.get('bundleVersion', 0) >= 1
+        // Trusted timestamp (P0-03, same as create): the re-issued
+        // receipt must carry a fresh createdAt — an old timestamp
+        // re-issued would reopen an expired window.
+        && request.resource.data.get('createdAt', null) is timestamp
+        && request.resource.data.get('createdAt', null) <= request.time
+        && request.resource.data.get('createdAt', null) > request.time - duration.value(5, 'm')
+        && validJobReceiptAnchor(request.resource.data)
+        && exists(/databases/$(database)/documents/jobQuestionBundles/$(request.resource.data.get('bundleId', '')))
+        && get(/databases/$(database)/documents/jobQuestionBundles/$(request.resource.data.get('bundleId', ''))).data.status == 'published';
       allow delete: if isAdmin();
     }
     // users/{uid}/jobAttempts — FULL attempt (Step 8, Step 3 §2.11).
@@ -3652,6 +3700,54 @@ service cloud.firestore {
                        'status', 'submittedAt', 'revision'])
         && validJobExamSessionUpdate(request.resource.data, resource.data);
       allow delete: if false;
+    }
+
+    // users/{uid}/jobExamAuditLogs — mock-exam audit trail (Step 9
+    // closure, checklist item 11). One best-effort entry per mock
+    // lifecycle transition (started / submitted / abandoned /
+    // submit-failed), written by the student's own client next to
+    // the transition — never blocking it. The rules bound the SHAPE
+    // (owner only, fixed fields, trusted timestamp) so the trail
+    // cannot be rewritten into another student's record, backdated,
+    // or padded with free text; they do NOT make the trail
+    // tamper-proof — a determined client can write a false entry,
+    // exactly as it can forge an attempt (§4.3 residual limit).
+    // The trail is operational (who took which mock, when, and
+    // whether the submit failed) for the owner/Moderator — never a
+    // basis for a "Verified" score. Entries are immutable: no
+    // update, Admin-only delete.
+    function validJobExamAuditLog(d, userId) {
+      return d.keys().hasOnly(['uid', 'event', 'examSlug', 'mockId',
+              'sessionId', 'bundleId', 'createdAt', 'detail'])
+        && d.get('uid', '') == userId
+        && d.get('event', '') in ['mock_started', 'mock_submitted',
+             'mock_abandoned', 'mock_submit_failed']
+        && d.get('examSlug', null) is string
+        && d.get('examSlug', '').size() > 0
+        && d.get('examSlug', '').size() <= 200
+        && d.get('mockId', null) is string
+        && d.get('mockId', '').size() > 0
+        && d.get('mockId', '').size() <= 200
+        && d.get('sessionId', null) is string
+        && d.get('sessionId', '').size() > 0
+        && d.get('sessionId', '').size() <= 200
+        && d.get('bundleId', null) is string
+        && d.get('bundleId', '').size() > 0
+        && d.get('bundleId', '').size() <= 200
+        && (d.get('detail', null) == null
+            || (d.get('detail', null) is string
+                && d.get('detail', '').size() <= 500))
+        // Trusted timestamp (P0-03): no future-dating, no backdating.
+        && d.get('createdAt', null) is timestamp
+        && d.get('createdAt', null) <= request.time
+        && d.get('createdAt', null) > request.time - duration.value(5, 'm');
+    }
+    match /users/{userId}/jobExamAuditLogs/{logId} {
+      allow read: if isOwner(userId) || isModerator();
+      allow create: if isOwner(userId) && callerActive()
+        && validJobExamAuditLog(request.resource.data, userId);
+      allow update: if false;
+      allow delete: if isAdmin();
     }
 
     // ---------- everything else: denied ----------

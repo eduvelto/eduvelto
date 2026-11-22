@@ -34,11 +34,13 @@
 //   1. fresh-read the exam session (local state may be stale),
 //   2. session → 'submitted' + lock → 'terminal' in ONE batch
 //      (answers frozen; the receipt can only anchor to this now),
-//   3. receipt create (jobReceipts/{uid}_{bundleId}, attemptId =
-//      sessionId, purpose 'exam_review', bundleVersion = the
-//      session's stored generation — best-effort: a retake's
-//      receipt may already exist, in which case the old fresh
-//      receipt is reused),
+//   3. receipt create/re-issue (jobReceipts/{uid}_{bundleId},
+//      attemptId = sessionId, purpose 'exam_review', bundleVersion =
+//      the session's stored generation — best-effort: a retake
+//      RE-ISSUES the receipt (Step 9 closure, open question 1 —
+//      the rules allow an anchored re-issue, so a new submission
+//      opens a new 10-minute window; the old window is replaced,
+//      never silently extended),
 //   4. key read (rules: fresh exam_review receipt + SUBMITTED
 //      exam session/attempt anchor for this bundle),
 //   5. score from the mock's rulesSnapshot (never live config),
@@ -108,6 +110,7 @@ import {
   type JobMockWithId,
 } from './jobMocks';
 import { loadBundleKey, loadPracticeBundle, type PracticeBundleWithId } from './jobPractice';
+import { logMockAuditEvent } from './jobExamAudit';
 import type { JobQuestionKey, JobReceipt } from './jobQuestions';
 
 /** Firestore not configured (gate G1) — pages show the honest
@@ -423,7 +426,6 @@ export async function listPublishedMocks(filters?: {
 export async function loadMockBundle(bundleId: string): Promise<PracticeBundleWithId | null> {
   return loadPracticeBundle(bundleId);
 }
-
 /** Bundle doc-ID for a mock (re-exported for the pages: the
  * mock doc stores bundleId already, so this is only needed
  * when deriving it from a mockId + kind). */
@@ -444,13 +446,33 @@ export async function loadMockKey(bundleId: string): Promise<JobQuestionKey | nu
 /* Mock sessions: start / resume / deadline / autosave / abandon      */
 /* ------------------------------------------------------------------ */
 
+/** True when a stored mock session's deadline has already passed
+ * (Step 9 closure, N4): an expired in-progress session can never
+ * resume into a submittable exam — the rules deny any submit after
+ * endsAt — so offering it for resume is a dead end. The deadline is
+ * the stored endsAt, else the client-side estimate; a session with
+ * neither is kept (its deadline is unknown, not necessarily past).
+ * Pure and unit-tested; `nowMillis` defaults to Date.now(). */
+export function isMockSessionExpired(
+  session: JobMockSessionDoc,
+  nowMillis: number = Date.now(),
+): boolean {
+  const deadlineMillis =
+    timestampToMillis(session.endsAt) ?? session.clientEndsAtMillis ?? null;
+  if (deadlineMillis === null) return false;
+  return deadlineMillis <= nowMillis;
+}
+
 /** Find the student's latest in-progress mock session for a
  * bundle (refresh-restore). Two == filters — no composite index;
  * the latest is picked client-side. Returns null when there is
- * none. */
+ * none. EXPIRED sessions are skipped (N4 — see
+ * isMockSessionExpired): their deadline has passed, so resume
+ * would land in the honest expired state instead of an exam. */
 export async function findResumableMockSession(
   uid: string,
   bundleId: string,
+  nowMillis: number = Date.now(),
 ): Promise<{ sessionId: string; session: JobMockSessionDoc; startedAtMillis: number } | null> {
   const firestore = requireDb();
   const snap = await getDocs(
@@ -465,6 +487,7 @@ export async function findResumableMockSession(
     const session = normalizeMockSessionDoc(d.data() as Record<string, unknown>);
     if (session.kind !== 'mock') continue;
     if (validateMockSession(session).length > 0) continue;
+    if (isMockSessionExpired(session, nowMillis)) continue;
     const startedAtMillis = timestampToMillis(session.startedAt) ?? 0;
     if (!best || startedAtMillis > best.startedAtMillis) {
       best = { sessionId: d.id, session, startedAtMillis };
@@ -505,6 +528,17 @@ export async function startMockSession(
   }
   if (manifest.mockId !== mockId || manifest.examSlug !== mock.examSlug) {
     throw new Error('এই মকের প্রশ্নসেট মকের সঙ্গে মিলছে না — মক শুরু করা যাবে না।');
+  }
+  // Step 9 closure (open question 4 — definition vs manifest
+  // questionCount): the definition's snapshot count and the frozen
+  // manifest's count must agree, or the intro would promise N
+  // questions and the exam would run M. The rules do NOT
+  // cross-check this (definition and manifest are created in either
+  // order by a Moderator, so neither create can demand the other
+  // exists) — the check lives here, at start time, and fails fast
+  // with an honest error instead of starting a half-built exam.
+  if (manifest.questionCount !== mock.rulesSnapshot.questionCount) {
+    throw new Error('এই মকের প্রশ্ন-সংখ্যা মকের বিবরণের সঙ্গে মিলছে না — মক শুরু করা যাবে না।');
   }
   const bundleByKey = new Map(bundle.questions.map((q) => [`${q.n}:${q.questionId}`, q]));
   for (const ref of manifest.questionRefs) {
@@ -551,6 +585,14 @@ export async function startMockSession(
     }) as unknown as Record<string, unknown>,
   );
   await batch.commit();
+  // Audit (Step 9 closure, item 11): best-effort, never blocks.
+  void logMockAuditEvent(uid, {
+    event: 'mock_started',
+    examSlug: mock.examSlug,
+    mockId,
+    sessionId: sessionRef.id,
+    bundleId: bundle.docId,
+  });
   return { sessionId: sessionRef.id, session, startedAtMillis: Date.now() };
 }
 
@@ -698,6 +740,14 @@ export async function abandonMockSession(
     }
   }
   await batch.commit();
+  // Audit (Step 9 closure, item 11): best-effort, never blocks.
+  void logMockAuditEvent(uid, {
+    event: 'mock_abandoned',
+    examSlug,
+    mockId: String(stored.mockId ?? ''),
+    sessionId,
+    bundleId: String(stored.bundleId ?? ''),
+  });
   return 'abandoned';
 }
 
@@ -788,25 +838,46 @@ export async function submitMockAttempt(
   // Used both for the fresh submit and for the orphan recovery
   // (session already submitted, attempt missing).
   const scoreAndCreateAttempt = async (): Promise<{ attemptId: string; result: JobAttemptResult }> => {
-    // 3. Receipt (best-effort — see header).
+    // 3. Receipt (best-effort — see header). A retake RE-ISSUES
+    // the receipt (Step 9 closure, open question 1): the receipt
+    // doc-ID is {uid}_{bundleId}, so setDoc on an existing receipt
+    // is an UPDATE — allowed only as an anchored re-issue (new
+    // submitted session, fresh createdAt). The old window is
+    // replaced, never extended silently.
     try {
       await setDoc(
         doc(firestore, 'jobReceipts', `${input.uid}_${bundleId}`),
         buildMockReceiptDoc(input.uid, bundleId, input.sessionId, storedBundleVersion),
       );
     } catch {
-      // A retake's receipt already exists, or the create was denied
-      // — the key read below uses whatever fresh receipt the rules
-      // accept; if none is fresh, it throws the honest error.
+      // The re-issue was denied (anchor not submitted, or stale
+      // data) — the key read below uses whatever fresh receipt the
+      // rules accept; if none is fresh, it throws the honest error.
     }
     // 4. Key read (the rules gate it on the fresh receipt).
     let key: JobQuestionKey | null;
     try {
       key = await loadMockKey(bundleId);
     } catch {
+      void logMockAuditEvent(input.uid, {
+        event: 'mock_submit_failed',
+        examSlug: input.mock.examSlug,
+        mockId,
+        sessionId: input.sessionId,
+        bundleId,
+        detail: 'key-unreadable',
+      });
       throw new Error('উত্তরের চাবি পড়া যায়নি — জমার অনুমতির মেয়াদ শেষ হতে পারে। নতুন করে মক শুরু করুন।');
     }
     if (key === null) {
+      void logMockAuditEvent(input.uid, {
+        event: 'mock_submit_failed',
+        examSlug: input.mock.examSlug,
+        mockId,
+        sessionId: input.sessionId,
+        bundleId,
+        detail: 'key-missing',
+      });
       throw new Error('উত্তরের চাবি পাওয়া যায়নি — জমা দেওয়া যায়নি।');
     }
     // 5. Score from the snapshot.
@@ -896,7 +967,16 @@ export async function submitMockAttempt(
       }
     }
   }
-  return scoreAndCreateAttempt();
+  const submitted = await scoreAndCreateAttempt();
+  // Audit (Step 9 closure, item 11): best-effort, never blocks.
+  void logMockAuditEvent(input.uid, {
+    event: 'mock_submitted',
+    examSlug: input.mock.examSlug,
+    mockId,
+    sessionId: input.sessionId,
+    bundleId,
+  });
+  return submitted;
 }
 
 /* ------------------------------------------------------------------ */

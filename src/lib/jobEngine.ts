@@ -931,6 +931,35 @@ export function weakTopicsFromAttemptAnswers(answers: JobAttemptAnswer[]): JobWe
     .sort((a, b) => b.wrong - a.wrong || b.total - a.total || (a.topicId < b.topicId ? -1 : 1));
 }
 
+/** Human-readable label for a job topic ID (Step 9 closure, D7).
+ * Topic IDs are segmented keys (`{exam}__{subject}__{chapter}__{leaf}`,
+ * e.g. `bcs__english__grammar__tense`) — rendering one verbatim on a
+ * result page is a raw slug, not a label. The subject, chapter and
+ * leaf are humanized (`right-form-of-verbs` → `Right Form of Verbs`)
+ * and joined so two exams' same-named topics stay distinct in
+ * context. There is no jobTopics name source to read instead (Step 6
+ * seeded 0 topic docs — only 23 draft subjects); when
+ * Moderator-built topic docs with Bangla names exist, this should
+ * read them. Malformed IDs fall back to the humanized last segment,
+ * never to the raw slug; an empty ID is labelled unknown. */
+export function jobTopicLabelBn(topicId: string): string {
+  const humanize = (s: string): string =>
+    s
+      .split('-')
+      .filter((w) => w.length > 0)
+      .map((w) => w[0].toUpperCase() + w.slice(1))
+      .join(' ');
+  const parts = topicId
+    .split('__')
+    .map((p) => p.trim())
+    .filter((p) => p.length > 0);
+  if (parts.length >= 4) return `${humanize(parts[1])} — ${humanize(parts[2])} — ${humanize(parts[3])}`;
+  if (parts.length === 3) return `${humanize(parts[1])} — ${humanize(parts[2])}`;
+  if (parts.length === 2) return humanize(parts[1]);
+  if (parts.length === 1) return humanize(parts[0]);
+  return 'অজানা টপিক';
+}
+
 export interface ScoreMockAttemptInput {
   bundle: JobQuestionBundle;
   /** The answer key — read through the session-anchored receipt
@@ -969,10 +998,24 @@ export interface ScoreMockAttemptInput {
  * or the snapshot is not a complete pattern. */
 export function scoreMockAttempt(input: ScoreMockAttemptInput): JobAttemptResult {
   const pattern = patternFromRulesSnapshot(input.examSlug, input.rulesSnapshot);
+  // Step 9 closure (open question 3 — timeSpentSeconds bound):
+  // per-answer time is analytics only — the TOTAL comes from the
+  // wall clock (submittedAt − startedAt) and time never changes the
+  // score — but an inflated per-answer value would poison time
+  // analytics. A mock is deadline-bounded, so one question can never
+  // honestly take longer than the whole mock (+60s skew grace):
+  // clamp, never throw — a clamp can never block a submit. (Practice
+  // has no deadline, so no clamp applies there; the rules keep ≥ 0
+  // only, which is the documented residual limit.)
+  const maxPerAnswer = input.rulesSnapshot.timeMinutes * 60 + 60;
+  const answers = input.answers.map((a) => ({
+    ...a,
+    timeSpentSeconds: Math.min(Math.max(0, a.timeSpentSeconds ?? 0), maxPerAnswer),
+  }));
   return scorePracticeAttempt({
     bundle: input.bundle,
     key: input.key,
-    answers: input.answers,
+    answers,
     pattern,
     startedAtMillis: input.startedAtMillis,
     submittedAtMillis: input.submittedAtMillis,
