@@ -159,11 +159,11 @@ export default function App() {
         <Routes>
         <Route path="/" element={<HomePage />} />
         {/* Four main sections (homepage redesign, 21 Nov 2026): /class is
-            the real class index; /jobs and /skills land on ONE shared
-            Coming Soon page until the sections are built. /admissions
-            is now the hub index (NU-5) — see the NU routes below. */}
+            the real class index; /skills lands on the shared Coming Soon
+            page until it is built (22 Nov 2026: /jobs moved to the real
+            JobsPage below — the old /jobs Coming Soon route shadowed it).
+            /admissions is now the hub index (NU-5) — see the NU routes below. */}
         <Route path="/class" element={<ClassIndexPage />} />
-        <Route path="/jobs" element={<ComingSoonPage section="jobs" />} />
         <Route path="/skills" element={<ComingSoonPage section="skills" />} />
         {/* NU admission (NU-5, design §5): index → NU hub (8 tabs) →
             group pages → candidate dashboard. The dashboard and the
