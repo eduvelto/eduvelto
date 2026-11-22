@@ -1212,7 +1212,7 @@ export async function updateAppVersionConfig(
 ): Promise<void> {
   const latest = values.latestVersion.trim();
   const min = values.minVersion.trim();
-  const downloadUrl = values.downloadUrl.trim() || DEFAULT_APP_DOWNLOAD_URL;
+  const downloadUrl = values.downloadUrl.trim() || DEFAULT_DOWNLOAD_URL;
   if (!isValidVersion(latest) || !isValidVersion(min)) throw new Error('invalid-version');
   if (compareVersions(min, latest) > 0) throw new Error('min-version-above-latest');
   if (!(downloadUrl.startsWith('/') || downloadUrl.startsWith('https://'))) {

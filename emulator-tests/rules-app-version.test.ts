@@ -7,7 +7,7 @@
  * The emulator loads firestore.rules from firebase.json at startup — no
  * `rules:` option (see emulator-tests/rules.test.ts header for why).
  */
-import { describe, it, beforeAll, afterAll, expect } from 'vitest';
+import { describe, it, beforeAll, afterAll } from 'vitest';
 import {
   initializeTestEnvironment,
   assertSucceeds,
@@ -149,7 +149,6 @@ describe('config/appVersion rules', () => {
   it('av8: admin CANNOT write an extra key', async () => {
     await assertFails(
       updateDoc(doc(asAdmin(), 'config', 'appVersion'), {
-        // @ts-expect-error — deliberately invalid payload for the rules test
         hacked: true,
         updatedAt: serverTimestamp(),
       }),

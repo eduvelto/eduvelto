@@ -42,6 +42,23 @@ async function seedConfig(latestVersion: string, minVersion: string): Promise<vo
   });
 }
 
+/**
+ * Fetch until the server reports the seeded latestVersion (or give up
+ * after ~15s). The sandbox runs several emulators at once on 1.5 shared
+ * CPUs, so a read immediately after a write can briefly return the
+ * previous value — polling makes the test assert the decision, not the
+ * emulator's propagation lag.
+ */
+async function fetchFresh(latestVersion: string) {
+  const deadline = Date.now() + 15000;
+  for (;;) {
+    const cfg = await fetchAppVersionConfig(rawDb);
+    if (cfg?.latestVersion === latestVersion) return cfg;
+    if (Date.now() > deadline) return cfg;
+    await new Promise((r) => setTimeout(r, 500));
+  }
+}
+
 beforeAll(async () => {
   env = await initializeTestEnvironment({
     projectId: PROJECT_ID,
@@ -60,22 +77,22 @@ afterAll(async () => {
 describe('app version gate (real SDK read)', () => {
   it('g1: minVersion ABOVE the bundled version → blocked, download is /install', async () => {
     await seedConfig('9.9.9', '9.9.9');
-    const cfg = await fetchAppVersionConfig(rawDb);
+    const cfg = await fetchFresh('9.9.9');
     expect(cfg).not.toBeNull();
     expect(cfg?.latestVersion).toBe('9.9.9');
     expect(cfg?.downloadUrl).toBe('/install');
     expect(checkAppVersion(cfg, APP_VERSION)).toBe('blocked');
-  });
+  }, 120000);
 
   it('g2: latest newer but minVersion met → update-available', async () => {
     await seedConfig('0.2.0', '0.1.0');
-    const cfg = await fetchAppVersionConfig(rawDb);
+    const cfg = await fetchFresh('0.2.0');
     expect(checkAppVersion(cfg, APP_VERSION)).toBe('update-available');
-  });
+  }, 120000);
 
   it('g3: bundled version meets latest → current', async () => {
     await seedConfig('0.1.0', '0.1.0');
-    const cfg = await fetchAppVersionConfig(rawDb);
+    const cfg = await fetchFresh('0.1.0');
     expect(checkAppVersion(cfg, APP_VERSION)).toBe('current');
-  });
+  }, 120000);
 });

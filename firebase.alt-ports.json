@@ -1,1 +1,1 @@
-{"emulators":{"auth":{"port":9098},"firestore":{"port":8081},"hub":{"port":4402},"logging":{"port":4502},"singleProjectMode":true,"ui":{"enabled":false}},"firestore":{"indexes":"firestore.indexes.json","rules":"firestore.rules"}}
+{"emulators":{"auth":{"port":9096},"firestore":{"port":8084},"hub":{"port":4404},"logging":{"port":4504},"singleProjectMode":true,"ui":{"enabled":false}},"firestore":{"indexes":"firestore.indexes.json","rules":"firestore.rules"}}
