@@ -499,18 +499,32 @@ service cloud.firestore {
         && (d.get('createdAt', null) == null || d.get('createdAt', null) is timestamp)
         && (d.get('updatedAt', null) == null || d.get('updatedAt', null) is timestamp);
     }
-    // Second-eye rule: a publisher/verifier is never the author.
-    // A published doc must carry a real verifier (non-author) and a
-    // verification timestamp.
+    // Second-eye rule (Step 7 fold-in, ChatGPT P1-01): a
+    // publisher/verifier is never the author, AND the publisher
+    // IS the verifier — verifiedBy must be the caller on
+    // publication (a prior verification by another moderator does
+    // not publish; the publisher re-verifies in the same update).
+    // verifiedAt is an audit timestamp, not an access proof: when
+    // it changes it must be a real timestamp no later than now and
+    // no older than 5 minutes (a moderator cannot backdate last
+    // week's verification into a publish, nor future-date one).
+    // Backdating inside the window stays possible — the timestamp
+    // is audit evidence only; the access decision is verifiedBy
+    // != author.
     function jobQuestionSecondEye(oldDoc, newDoc) {
       return (newDoc.get('verifiedBy', null) == oldDoc.get('verifiedBy', null)
           || newDoc.get('verifiedBy', null) == null
           || (newDoc.get('verifiedBy', null) == uid()
               && uid() != oldDoc.get('authorId', '')))
+        && (newDoc.get('verifiedAt', null) == oldDoc.get('verifiedAt', null)
+            || (newDoc.get('verifiedAt', null) is timestamp
+                && newDoc.get('verifiedAt', null) <= request.time
+                && newDoc.get('verifiedAt', null) > request.time - duration.value(5, 'm')))
         && (newDoc.get('status', '') != 'published'
-            || (newDoc.get('verifiedBy', null) is string
+            || (newDoc.get('verifiedBy', null) == uid()
                 && newDoc.get('verifiedBy', null) != oldDoc.get('authorId', '')
-                && newDoc.get('verifiedAt', null) is timestamp));
+                && newDoc.get('verifiedAt', null) is timestamp
+                && newDoc.get('verifiedAt', null) <= request.time));
     }
     // Allowed reviewStatus moves (Moderator/Admin). Same-state is
     // a content-only edit. Publish only from 'Under Review' — a
@@ -598,7 +612,10 @@ service cloud.firestore {
         && isStr(d.get('titleBn', null), 200)
         && isStr(d.get('titleEn', null), 200)
         && d.get('questions', null) is list
+        && d.get('questions', null).size() <= 200
         && d.get('questionCount', null) is int
+        && d.get('questionCount', null) >= 1
+        && d.get('questionCount', null) <= 200
         && d.get('questionCount', null) == d.get('questions', null).size()
         && d.get('sourceQuestionIds', null) is list
         && d.get('status', null) in ['draft', 'published']
@@ -609,11 +626,27 @@ service cloud.firestore {
     // Field-shape of an answer key. Per-answer checks are NOT
     // possible in rules (no list indexing); buildJobBundle() in the
     // lib is the constructor. The bundleId must equal the doc ID.
+    // The key must answer at least one question (an empty key opens
+    // nothing and scores nothing).
     function validJobQuestionKey(d, bundleId) {
       return d.get('bundleId', null) == bundleId
         && d.get('answers', null) is list
+        && d.get('answers', null).size() >= 1
+        && d.get('answers', null).size() <= 200
+        && (d.get('configVersion', null) == null || d.get('configVersion', null) is string)
         && (d.get('createdAt', null) == null || d.get('createdAt', null) is timestamp)
         && (d.get('updatedAt', null) == null || d.get('updatedAt', null) is timestamp);
+    }
+    // Key↔bundle consistency (Step 7 fold-in, ChatGPT P1-06): a
+    // key is valid only against its own bundle — the key answers
+    // exactly the bundle's questions (same count) and carries the
+    // same configVersion (a stale key from an older config cannot
+    // score a newer bundle). The bundle must exist.
+    function jobKeyMatchesBundle(d, bundleId) {
+      return exists(/databases/$(database)/documents/jobQuestionBundles/$(bundleId))
+        && get(/databases/$(database)/documents/jobQuestionBundles/$(bundleId)).data.questionCount == d.get('answers', []).size()
+        && d.get('configVersion', null) is string
+        && get(/databases/$(database)/documents/jobQuestionBundles/$(bundleId)).data.get('configVersion', null) == d.get('configVersion', null);
     }
     // A practice (topic) bundle's key is readable signed-in for
     // immediate feedback — but ONLY when the bundle is Published
@@ -624,15 +657,26 @@ service cloud.firestore {
         && get(/databases/$(database)/documents/jobQuestionBundles/$(bundleId)).data.kind == 'topic'
         && get(/databases/$(database)/documents/jobQuestionBundles/$(bundleId)).data.status == 'published';
     }
-    // Fresh-receipt key access (Step 3 §4.2 + Step 6 fold-in P0-06):
-    // a receipt opens a key ONLY if it is ≤10 minutes old AND it
-    // anchors to a real SUBMITTED attempt owned by the caller for
-    // this bundle. A bare/forged receipt without a submission opens
-    // nothing. Honest residual limit (Step 3 §4.3, stands): a
-    // determined student can still forge a submitted attempt +
-    // receipt in the console and read a key — on Spark this cannot
-    // be fully closed; scores are therefore NEVER shown as
-    // "Verified" (every result page is labelled "অনুশীলন ফলাফল").
+    // Fresh-receipt key access (Step 3 §4.2 + Step 6 fold-in P0-06
+    // + Step 7 fold-in, ChatGPT P0-01 Option A): a receipt is a
+    // TEN-MINUTE, ATTEMPT-BOUND AUTHORIZATION WINDOW — it is NOT
+    // one-use. Firestore read rules cannot atomically consume a
+    // receipt as a side effect of a read, so repeat reads inside
+    // the window are possible BY DESIGN (same browser, another
+    // session — all succeed while the window is open). The old
+    // "single-use" claim is REMOVED everywhere it described
+    // jobReceipts; never claim one-use again. A receipt opens a
+    // key ONLY if it is ≤10 minutes old AND not from the future
+    // AND it anchors to a real SUBMITTED attempt owned by the
+    // caller for this bundle. A bare/forged receipt without a
+    // submission opens nothing. Honest residual limit (Step 3
+    // §4.3, stands): a determined student can still forge a
+    // submitted attempt + receipt in the console and read a key —
+    // on Spark this cannot be fully closed; scores are therefore
+    // NEVER shown as "Verified" (every result page is labelled
+    // "অনুশীলন ফলাফল"). The window cannot be refreshed: receipts
+    // are never updated, and only an Admin deletes one — so one
+    // window per student per bundle.
     // NOTE: rules have no `let` — the receipt/attempt docs are
     // fetched through these two helpers (each call is a fresh
     // get(); the exists() guards run first, so a missing doc never
@@ -647,6 +691,7 @@ service cloud.firestore {
       return signedIn() && callerActive()
         && exists(/databases/$(database)/documents/jobReceipts/$(uid() + '_' + bundleId))
         && jobReceiptData(bundleId).createdAt > request.time - duration.value(10, 'm')
+        && jobReceiptData(bundleId).createdAt <= request.time
         && jobReceiptData(bundleId).attemptId is string
         && exists(/databases/$(database)/documents/users/$(uid())/jobAttempts/$(jobReceiptData(bundleId).attemptId))
         && jobReceiptAttemptData(bundleId).status == 'submitted'
@@ -2388,7 +2433,18 @@ service cloud.firestore {
     match /jobQuestions/{questionId} {
       allow read: if isModerator()
         || (isTeacher() && resource.data.get('authorId', '') == uid());
+      // Create: verified teacher only, draft only — and ONLY the
+      // 29 fields the app writes (Step 7 fold-in, ChatGPT P1-03:
+      // no smuggled privileged/junk fields at creation).
       allow create: if isVerifiedTeacher()
+        && request.resource.data.keys().hasOnly(['examSlug', 'subjectId',
+             'chapterId', 'topicId', 'questionText', 'options',
+             'correctLetter', 'explanation', 'whyWrong', 'difficulty',
+             'isPreviousYear', 'examYear', 'source', 'sourceUrl',
+             'status', 'reviewStatus', 'reviewerId', 'verifiedBy',
+             'verifiedAt', 'rejectionReason', 'duplicateHash',
+             'duplicateOf', 'bundleId', 'version', 'configVersion',
+             'authorId', 'createdBy', 'createdAt', 'updatedAt'])
         && jobQuestionCreateCommon(request.resource.data)
         && validJobQuestion(request.resource.data);
       // Author: own draft only, content fields only, may submit
@@ -2436,7 +2492,7 @@ service cloud.firestore {
     match /jobQuestionBundles/{bundleId} {
       allow read: if (signedIn() && resource.data.get('status', '') == 'published')
         || isModerator();
-      allow create, update: if isModerator()
+      allow create: if isModerator()
         && !('correctLetter' in request.resource.data)
         && !('explanation' in request.resource.data)
         && !('correctText' in request.resource.data)
@@ -2448,43 +2504,104 @@ service cloud.firestore {
             || bundleId == 'daily__' + request.resource.data.get('mockId', ''))
         && (request.resource.data.get('kind', '') != 'weekly'
             || bundleId == 'weekly__' + request.resource.data.get('mockId', ''))
+        && request.resource.data.keys().hasOnly(['kind', 'examSlug',
+             'topicId', 'mockId', 'year', 'titleBn', 'titleEn',
+             'questions', 'questionCount', 'status', 'reviewStatus',
+             'publishedAt', 'publishedBy', 'sourceQuestionIds',
+             'configVersion', 'createdAt', 'updatedAt'])
         && validJobQuestionBundle(request.resource.data);
+      // Update: a PUBLISHED bundle is content-frozen (Step 7
+      // fold-in, ChatGPT P1-06) — its questions are the snapshot
+      // live attempts were scored against, so questions /
+      // sourceQuestionIds / questionCount / kind / examSlug /
+      // topicId / mockId / year / configVersion cannot change while
+      // published; only titles, status/reviewStatus and publish
+      // metadata move. To correct a published bundle, unpublish it
+      // first (status draft), edit as a draft, republish. A draft
+      // bundle edits freely (same conditions as create).
+      allow update: if isModerator()
+        && !('correctLetter' in request.resource.data)
+        && !('explanation' in request.resource.data)
+        && !('correctText' in request.resource.data)
+        && (request.resource.data.get('kind', '') != 'topic'
+            || bundleId == 'topic__' + request.resource.data.get('topicId', ''))
+        && (request.resource.data.get('kind', '') != 'mock'
+            || bundleId == 'mock__' + request.resource.data.get('mockId', ''))
+        && (request.resource.data.get('kind', '') != 'daily'
+            || bundleId == 'daily__' + request.resource.data.get('mockId', ''))
+        && (request.resource.data.get('kind', '') != 'weekly'
+            || bundleId == 'weekly__' + request.resource.data.get('mockId', ''))
+        && validJobQuestionBundle(request.resource.data)
+        && (resource.data.get('status', '') != 'published'
+            || request.resource.data.diff(resource.data).affectedKeys()
+                 .hasOnly(['titleBn', 'titleEn', 'status', 'reviewStatus',
+                           'publishedAt', 'publishedBy', 'updatedAt']));
       allow delete: if isAdmin();
     }
     // jobQuestionKeys — the answer key, one doc per bundle.
     // Moderator/Admin any time; a student only with a fresh
     // receipt anchored to a submitted attempt (hasFreshJobReceipt,
-    // P0-06) or for a Published practice (topic) bundle
-    // (isPracticeJobBundle). Mock keys are NEVER readable before
-    // submission.
+    // P0-06 — a 10-minute window, NOT one-use, see above) or for a
+    // Published practice (topic) bundle (isPracticeJobBundle).
+    // Mock keys are NEVER readable before submission.
     match /jobQuestionKeys/{bundleId} {
       allow read: if isModerator()
         || (signedIn() && callerActive()
             && (hasFreshJobReceipt(bundleId) || isPracticeJobBundle(bundleId)));
-      allow create, update: if isModerator()
-        && validJobQuestionKey(request.resource.data, bundleId);
+      // Create: Moderator only, and only against its own bundle
+      // (Step 7 fold-in, ChatGPT P1-06 — the key answers exactly
+      // the bundle's questions, same count and same configVersion,
+      // so a key can never score a different bundle generation).
+      allow create: if isModerator()
+        && request.resource.data.keys().hasOnly(['bundleId', 'answers',
+             'configVersion', 'createdAt', 'updatedAt'])
+        && validJobQuestionKey(request.resource.data, bundleId)
+        && jobKeyMatchesBundle(request.resource.data, bundleId);
+      // Update: NEVER — a key is an immutable snapshot of its
+      // bundle's answers. To correct a key, an Admin deletes it
+      // and a Moderator recreates it (the bundle is republished
+      // from the corrected question in the same flow).
+      allow update: if false;
       allow delete: if isAdmin();
     }
     // jobReceipts — access grants (Eduvelto is 100% FREE; a receipt
     // is an access grant, never a payment record). ID is
     // `{uid}_{bundleId}`. Only the owning student creates their own
     // receipt, and only when it anchors to a real SUBMITTED attempt
-    // for that bundle (P0-06). Nobody updates a receipt (single-use
-    // by design); the owner deletes it after scoring.
+    // for that bundle on a PUBLISHED bundle (P0-06 + Step 7
+    // fold-in, ChatGPT P0-03). The receipt is a 10-minute window,
+    // NOT one-use (P0-01 Option A) — and the window cannot be
+    // refreshed: nobody updates a receipt, and only an Admin
+    // deletes one (a student delete + recreate would mint a fresh
+    // window forever). One window per student per bundle; after it
+    // closes the key stays unreadable for that bundle. Stale
+    // receipts are harmless — they simply stop opening keys.
     match /jobReceipts/{receiptId} {
       allow read: if (signedIn() && resource.data.get('userId', '') == uid()) || isAdmin();
       allow create: if signedIn() && callerActive()
         && receiptId == uid() + '_' + request.resource.data.get('bundleId', '')
+        && request.resource.data.keys().hasOnly(['userId', 'bundleId',
+             'attemptId', 'createdAt'])
         && request.resource.data.get('userId', '') == uid()
         && request.resource.data.get('bundleId', null) is string
+        && request.resource.data.get('bundleId', '').size() <= 200
         && request.resource.data.get('attemptId', null) is string
+        && request.resource.data.get('attemptId', '').size() <= 200
+        // Trusted timestamp (P0-03): createdAt must be a real
+        // timestamp no later than now and no older than 5 minutes
+        // — a client cannot future-date a receipt to stretch its
+        // window, nor backdate one to hide its age.
         && request.resource.data.get('createdAt', null) is timestamp
+        && request.resource.data.get('createdAt', null) <= request.time
+        && request.resource.data.get('createdAt', null) > request.time - duration.value(5, 'm')
         && exists(/databases/$(database)/documents/users/$(uid())/jobAttempts/$(request.resource.data.get('attemptId', '')))
         && get(/databases/$(database)/documents/users/$(uid())/jobAttempts/$(request.resource.data.get('attemptId', ''))).data.status == 'submitted'
         && get(/databases/$(database)/documents/users/$(uid())/jobAttempts/$(request.resource.data.get('attemptId', ''))).data.bundleId == request.resource.data.get('bundleId', '')
-        && get(/databases/$(database)/documents/users/$(uid())/jobAttempts/$(request.resource.data.get('attemptId', ''))).data.userId == uid();
+        && get(/databases/$(database)/documents/users/$(uid())/jobAttempts/$(request.resource.data.get('attemptId', ''))).data.userId == uid()
+        && exists(/databases/$(database)/documents/jobQuestionBundles/$(request.resource.data.get('bundleId', '')))
+        && get(/databases/$(database)/documents/jobQuestionBundles/$(request.resource.data.get('bundleId', ''))).data.status == 'published';
       allow update: if false;
-      allow delete: if signedIn() && resource.data.get('userId', '') == uid();
+      allow delete: if isAdmin();
     }
     // users/{uid}/jobAttempts — the minimal attempt anchor (Step 7
     // ONLY, for the receipt gate). The full attempt engine (answers,
@@ -2495,9 +2612,12 @@ service cloud.firestore {
     match /users/{userId}/jobAttempts/{attemptId} {
       allow read: if isOwner(userId) || isModerator();
       allow create: if isOwner(userId) && callerActive()
+        && request.resource.data.keys().hasOnly(['userId', 'bundleId',
+             'kind', 'status', 'startedAt', 'submittedAt', 'updatedAt'])
         && request.resource.data.get('userId', '') == userId
         && request.resource.data.get('status', '') == 'in-progress'
         && request.resource.data.get('bundleId', null) is string
+        && request.resource.data.get('bundleId', '').size() <= 200
         && request.resource.data.get('kind', null) in ['topic', 'mock', 'daily', 'weekly', 'previous']
         && request.resource.data.get('startedAt', null) is timestamp
         // No attempts on drafts: the bundle must exist and be Published.
