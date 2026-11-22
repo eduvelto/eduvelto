@@ -18,6 +18,8 @@ import { PageShell } from '../components/PageShell';
 import { strings } from '../i18n/strings';
 import { useAuth } from '../lib/auth';
 import type { EducationType, ProfileEdit } from '../lib/profile';
+import { NU_GROUPS, isNuGroupSlug, isNuInstitutionSlug } from '../lib/nuProfile';
+import AdmissionModeSwitch from '../components/AdmissionModeSwitch';
 import { db, isFirebaseConfigured } from '../firebase';
 import { listLinksForChild, updateLinkChildClass, type ParentLink } from '../lib/guardian';
 import { T, useLanguage } from '../i18n/LanguageContext';
@@ -67,6 +69,11 @@ export default function ProfilePage() {
   const [classLevel, setClassLevel] = useState('');
   const [semester, setSemester] = useState('');
   const [phone, setPhone] = useState('');
+  /** NU admission target (NU-4): institution + group. The mode switch
+   * below saves itself directly (AdmissionModeSwitch) — it is not part
+   * of this form. */
+  const [admissionTargetInstitution, setAdmissionTargetInstitution] = useState('');
+  const [admissionTargetGroup, setAdmissionTargetGroup] = useState('');
   const [busy, setBusy] = useState(false);
   const [saved, setSaved] = useState(false);
   const [localError, setLocalError] = useState<string | null>(null);
@@ -102,6 +109,12 @@ export default function ProfilePage() {
     setClassLevel(profile.classLevel ?? '');
     setSemester(profile.semester ?? '');
     setPhone(profile.phone ?? '');
+    setAdmissionTargetInstitution(
+      isNuInstitutionSlug(profile.admissionTargetInstitution) ? profile.admissionTargetInstitution : '',
+    );
+    setAdmissionTargetGroup(
+      isNuGroupSlug(profile.admissionTargetGroup) ? profile.admissionTargetGroup : '',
+    );
   }, [profile]);
 
   // Guardian-link requests for this student (confirm step).
@@ -223,6 +236,19 @@ export default function ProfilePage() {
     if (norm(classLevel) !== (profile.classLevel ?? null)) fields.classLevel = norm(classLevel);
     if (norm(semester) !== (profile.semester ?? null)) fields.semester = norm(semester);
     if (profile.role === 'parent' && phone.trim() !== (profile.phone ?? '')) fields.phone = phone.trim();
+    // NU admission target (NU-4): app-level consistency — clearing the
+    // institution clears the group too (a group without an institution
+    // is invalid; the rules enforce only the per-field allowlists).
+    // Changing the target NEVER deletes progress (same invariant as the
+    // academic fields — progress is keyed to content, not the profile).
+    const nuInst = admissionTargetInstitution === '' ? null : admissionTargetInstitution;
+    const nuGroup = nuInst === null ? null : admissionTargetGroup === '' ? null : admissionTargetGroup;
+    if (nuInst !== (profile.admissionTargetInstitution ?? null)) {
+      fields.admissionTargetInstitution = nuInst;
+    }
+    if (nuGroup !== (profile.admissionTargetGroup ?? null)) {
+      fields.admissionTargetGroup = nuGroup;
+    }
 
     if (Object.keys(fields).length === 0) {
       setSaved(true);
@@ -381,6 +407,51 @@ export default function ProfilePage() {
             <input style={inputStyle} type="tel" value={phone} onChange={(e) => setPhone(e.target.value)} placeholder={t({ bn: 'যেমন: 01XXXXXXXXX', en: 'e.g.: 01XXXXXXXXX' })} />
           </label>
         ) : null}
+        <h3 style={{ fontSize: 18, marginTop: 28 }}>
+          <T bn="জাতীয় বিশ্ববিদ্যালয় ভর্তি প্রস্তুতি" en="National University Admission Preparation" />
+        </h3>
+        <p style={{ color: '#555', fontSize: 14, lineHeight: 1.7 }}>
+          {t({
+            bn: 'ভর্তি প্রস্তুতির লক্ষ্য প্রতিষ্ঠান ও শাখা বেছে নিন। লক্ষ্য বদলালে আপনার অগ্রগতি, ফলাফল বা ইতিহাস মুছে যাবে না।',
+            en: 'Choose your target institution and group for admission preparation. Changing your target never deletes your progress, results or history.',
+          })}
+        </p>
+        <label>
+          <T bn="লক্ষ্য প্রতিষ্ঠান" en="Target institution" />
+          <select
+            style={inputStyle}
+            value={admissionTargetInstitution}
+            onChange={(e) => {
+              setAdmissionTargetInstitution(e.target.value);
+              if (e.target.value === '') setAdmissionTargetGroup('');
+            }}
+          >
+            <option value="">{t({ bn: '— বাছাই করুন —', en: '— Choose —' })}</option>
+            <option value="national-university">{t({ bn: 'জাতীয় বিশ্ববিদ্যালয়', en: 'National University' })}</option>
+          </select>
+        </label>
+        <label>
+          <T bn="লক্ষ্য শাখা" en="Target group" />
+          <select
+            style={inputStyle}
+            value={admissionTargetGroup}
+            onChange={(e) => setAdmissionTargetGroup(e.target.value)}
+            disabled={admissionTargetInstitution === ''}
+          >
+            <option value="">{t({ bn: '— বাছাই করুন —', en: '— Choose —' })}</option>
+            {NU_GROUPS.map((g) => (
+              <option key={g.slug} value={g.slug}>
+                {t({ bn: g.bn, en: g.en })}
+              </option>
+            ))}
+          </select>
+        </label>
+        <div style={{ margin: '6px 0 14px' }}>
+          <p style={{ margin: '0 0 8px', fontWeight: 600 }}>
+            <T bn="ভর্তি প্রস্তুতির মোড" en="Admission preparation mode" />
+          </p>
+          <AdmissionModeSwitch />
+        </div>
         {profile.role === 'teacher' ? (
           <p style={{ color: '#555' }}>
             {t({

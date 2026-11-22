@@ -93,6 +93,24 @@ export interface UserProfile {
   createdAt?: Timestamp | null;
   updatedAt?: Timestamp | null;
   lastActiveAt?: Timestamp | null;
+  /** National University admission (NU-4, 22 Nov 2026 — design §12.3,
+   * §19.2.15): target institution — null or 'national-university'
+   * (the only institution in this release; the allowlist grows when
+   * new institutions are added, never free text). */
+  admissionTargetInstitution?: string | null;
+  /** NU admission target group — null or one of 'humanities' /
+   * 'science' / 'business'. Institution↔group consistency is
+   * app-level (nuProfile.ts validateNuProfileConsistency), not
+   * rules-level (Job Step 4 precedent). */
+  admissionTargetGroup?: string | null;
+  /** NU admission mode — 'beginner' | 'advanced', absent = beginner.
+   * A SEPARATE field from Job's jobMode (NU-Q5): a student can be
+   * Advanced in Job and Beginner in NU admission. */
+  admissionMode?: 'beginner' | 'advanced';
+  /** NU mode-choice handled (picked a mode OR "decide later").
+   * Absent/false = the first-time card has not been handled yet.
+   * Says NOTHING about profile completion or learning progress. */
+  admissionOnboarded?: boolean;
   /** Absent = active. Only an explicit `false` (set by Admin) suspends. */
   isActive?: boolean;
   /** Reason for suspension, shown to the user on the suspended screen. Admin-set only. */
@@ -132,6 +150,12 @@ export interface ProfileEdit {
   qualifications?: string | null;
   experienceYears?: number | null;
   language?: 'bn' | 'en';
+  /** NU admission (NU-4): null = undecided; 'national-university' = NU. */
+  admissionTargetInstitution?: string | null;
+  /** NU admission (NU-4): null = undecided; one of the 3 group slugs. */
+  admissionTargetGroup?: string | null;
+  admissionMode?: 'beginner' | 'advanced';
+  admissionOnboarded?: boolean;
 }
 
 const EDITABLE_KEYS: (keyof ProfileEdit)[] = [
@@ -152,6 +176,13 @@ const EDITABLE_KEYS: (keyof ProfileEdit)[] = [
   'qualifications',
   'experienceYears',
   'language',
+  // NU admission (NU-4): the four NU fields are owner-editable, like
+  // the academic fields — role / verificationStatus / isActive stay
+  // admin-only (the rules enforce the same allowlist).
+  'admissionTargetInstitution',
+  'admissionTargetGroup',
+  'admissionMode',
+  'admissionOnboarded',
 ];
 
 function isUserProfile(data: unknown): data is UserProfile {

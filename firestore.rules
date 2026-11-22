@@ -59,6 +59,15 @@ service cloud.firestore {
     function isTeacher() {
       return signedIn() && callerActive() && (callerRole() in ['teacher', 'admin', 'moderator', 'owner']);
     }
+    // NU-4 (§19.3): a VERIFIED teacher — the CURRENT verificationStatus,
+    // not the role alone. A teacher who loses verification loses these
+    // powers immediately (NU-T20). Role 'teacher' without
+    // verificationStatus 'verified' (pending / rejected / revoked) is
+    // NOT a verified teacher. Never used for a student access decision.
+    function isVerifiedTeacher() {
+      return signedIn() && callerActive() && callerRole() == 'teacher'
+        && get(/databases/$(database)/documents/users/$(uid())).data.get('verificationStatus', '') == 'verified';
+    }
     // DASHBOARDS (Step 5/8, branch draft — NOT deployed): a guardian may
     // read a linked child's progress/bookmarks/results ONLY while the
     // parentLink is 'verified'. The link id is deterministic
@@ -150,7 +159,21 @@ service cloud.firestore {
         && (!('experienceYears' in request.resource.data)
             || (request.resource.data.experienceYears is number
                 && request.resource.data.experienceYears >= 0
-                && request.resource.data.experienceYears <= 60));
+                && request.resource.data.experienceYears <= 60))
+        // NU-4 (§19.2.15, §12.3): the four NU profile fields. Each is
+        // optional; a present value must be in its allowlist. role /
+        // verificationStatus / isActive stay excluded (above) — an NU
+        // field can never smuggle a role escalation in (NU-T1/T2).
+        && (!('admissionTargetInstitution' in request.resource.data)
+            || request.resource.data.admissionTargetInstitution == null
+            || request.resource.data.admissionTargetInstitution == 'national-university')
+        && (!('admissionTargetGroup' in request.resource.data)
+            || request.resource.data.admissionTargetGroup == null
+            || request.resource.data.admissionTargetGroup in ['humanities', 'science', 'business'])
+        && (!('admissionMode' in request.resource.data)
+            || request.resource.data.admissionMode in ['beginner', 'advanced'])
+        && (!('admissionOnboarded' in request.resource.data)
+            || request.resource.data.admissionOnboarded is bool);
       allow update: if isOwner(userId)
         // The update may touch ONLY these fields; role, verificationStatus
         // and isActive are excluded, so they cannot change here.
@@ -165,13 +188,27 @@ service cloud.firestore {
                        'academicYear', 'academicSession', 'curriculum',
                        'program', 'department', 'classLevel', 'semester',
                        'phone', 'experienceYears',
-                       'language', 'lastActiveAt', 'updatedAt'])
+                       'language', 'lastActiveAt', 'updatedAt',
+                       // NU-4 (§19.2.15): the four NU profile fields.
+                       'admissionTargetInstitution', 'admissionTargetGroup',
+                       'admissionMode', 'admissionOnboarded'])
         && isOptStr(request.resource.data.displayName, 100)
         && isOptStr(request.resource.data.get('phone', null), 20)
         && (!('experienceYears' in request.resource.data)
             || (request.resource.data.experienceYears is number
                 && request.resource.data.experienceYears >= 0
-                && request.resource.data.experienceYears <= 60));
+                && request.resource.data.experienceYears <= 60))
+        // NU-4: per-field allowlists on self-update (same as create).
+        && (!('admissionTargetInstitution' in request.resource.data)
+            || request.resource.data.admissionTargetInstitution == null
+            || request.resource.data.admissionTargetInstitution == 'national-university')
+        && (!('admissionTargetGroup' in request.resource.data)
+            || request.resource.data.admissionTargetGroup == null
+            || request.resource.data.admissionTargetGroup in ['humanities', 'science', 'business'])
+        && (!('admissionMode' in request.resource.data)
+            || request.resource.data.admissionMode in ['beginner', 'advanced'])
+        && (!('admissionOnboarded' in request.resource.data)
+            || request.resource.data.admissionOnboarded is bool);
       // Admin/Owner change role / verificationStatus / isActive, and only
       // they may do so — and only to valid enum values.
       // OWNER PROTECTION (spec §3): a users doc whose role is 'owner' is
@@ -1211,6 +1248,323 @@ service cloud.firestore {
         && uid() in get(/databases/$(database)/documents/directMessages/$(threadId)).data.get('participants', []);
       allow create, update, delete: if false;
     }
+
+    // ---------- National University admission (NU-4, §19.3) ----------
+    // Shared engine + explicit NU config layer: the NU collections below
+    // are separate from Job's (no `if (isNU)` branches in shared code).
+    // Students can NEVER create/submit/edit/publish questions or
+    // answers — only Owner + approved Admin / Verified Teacher.
+    // NO `verified: true` flag can be written by any client (§19.4):
+    // a verified result exists only through a reviewer's separate,
+    // access-controlled process (Release 3+), so no match below allows
+    // a client to write one.
+    //
+    // SPEC CORRECTION (NU-4): §19.3.3 wrote the receipt-owner check as
+    // `receiptId.split('_')[0]` — Firestore rules have NO String.split,
+    // so that expression cannot compile. The checks below use the
+    // receipt document's `userId` field (and `uid() + '_' + bundleId`
+    // equality on create) instead. Same enforcement, valid rules.
+    function isPracticeNuBundle(bundleId) {
+      return exists(/databases/$(database)/documents/nuQuestionBundles/$(bundleId))
+        && get(/databases/$(database)/documents/nuQuestionBundles/$(bundleId)).data.get('kind', '') == 'topic';
+    }
+    // The 7 receipt conditions (§18 (b)-2, §19.3.3): own receipt, a
+    // real attempt that belongs to the caller, submitted (once),
+    // attemptId matches, server timestamp present, fresh (10 min),
+    // bundleId matches the attempt. Honest limit (§19.3.8): the
+    // receipt proves a submission record exists — it does NOT prove
+    // the score was independently calculated (§19.4).
+    function hasFreshNuReceipt(bundleId) {
+      return exists(/databases/$(database)/documents/nuReceipts/$(uid() + '_' + bundleId))
+        && get(/databases/$(database)/documents/nuReceipts/$(uid() + '_' + bundleId)).data.userId == uid()
+        && get(/databases/$(database)/documents/nuReceipts/$(uid() + '_' + bundleId)).data.attemptId is string
+        && exists(/databases/$(database)/documents/users/$(uid())/nuAttempts/$(get(/databases/$(database)/documents/nuReceipts/$(uid() + '_' + bundleId)).data.attemptId))
+        && get(/databases/$(database)/documents/users/$(uid())/nuAttempts/$(get(/databases/$(database)/documents/nuReceipts/$(uid() + '_' + bundleId)).data.attemptId)).data.status == 'submitted'
+        && get(/databases/$(database)/documents/users/$(uid())/nuAttempts/$(get(/databases/$(database)/documents/nuReceipts/$(uid() + '_' + bundleId)).data.attemptId)).data.bundleId == bundleId
+        && get(/databases/$(database)/documents/users/$(uid())/nuAttempts/$(get(/databases/$(database)/documents/nuReceipts/$(uid() + '_' + bundleId)).data.attemptId)).data.userId == uid()
+        && get(/databases/$(database)/documents/nuReceipts/$(uid() + '_' + bundleId)).data.createdAt is timestamp
+        && request.time < get(/databases/$(database)/documents/nuReceipts/$(uid() + '_' + bundleId)).data.createdAt + duration.value(10, 'm');
+    }
+
+    // nuExamConfigs (§19.1.2, §19.3.4): versioned, rules-validated.
+    // The verified values (100 MCQ / 60 min / no negative marking /
+    // pass 35 display-only / sections 20+20+20+40 / no viva / no rank)
+    // are enforced here so a wrong config can never be published by a
+    // direct write. Students read published configs only.
+    match /nuExamConfigs/{configId} {
+      allow read: if resource.data.status == 'published' || isAdmin();
+      allow create, update: if isAdmin()
+        && request.resource.data.examType in ['NU_ADMISSION', 'NU_DAILY']
+        && request.resource.data.questionMode == 'MCQ'
+        && request.resource.data.marking is map
+        && request.resource.data.marking.correct == 1
+        && request.resource.data.marking.incorrect == 0
+        && request.resource.data.marking.unanswered == 0
+        && request.resource.data.marking.negativeMarking == false
+        && request.resource.data.vivaEnabled == false
+        && request.resource.data.officialRankEnabled == false
+        && request.resource.data.configVersion is int
+        && request.resource.data.configVersion >= 1
+        && request.resource.data.circularVersion is string
+        && request.resource.data.status in ['draft', 'published', 'withdrawn']
+        && ((request.resource.data.examType == 'NU_ADMISSION'
+            && request.resource.data.totalQuestions == 100
+            && request.resource.data.durationSeconds == 3600
+            && request.resource.data.sections is map
+            && request.resource.data.sections.bangla == 20
+            && request.resource.data.sections.english == 20
+            && request.resource.data.sections.generalKnowledge == 20
+            && request.resource.data.sections.groupSubjects == 40
+            && request.resource.data.sections.groupSubjectsDetail == null)
+          || (request.resource.data.examType == 'NU_DAILY'
+            && request.resource.data.totalQuestions is int
+            && request.resource.data.totalQuestions >= 20
+            && request.resource.data.totalQuestions <= 30
+            && request.resource.data.durationSeconds is int
+            && request.resource.data.durationSeconds >= 1200
+            && request.resource.data.durationSeconds <= 1800));
+      allow delete: if false;
+    }
+
+    // nuCircularConfigs (§19.2.1): a new circular never overwrites an
+    // old one — the old doc becomes 'superseded', never deleted.
+    // The 2025-26 doc is 'historical' today (window closed 31 Dec
+    // 2025); no 2026-27 doc exists until that circular is verified.
+    match /nuCircularConfigs/{admissionId} {
+      allow read: if resource.data.status in ['published', 'historical', 'superseded'] || isAdmin();
+      allow create, update: if isAdmin()
+        && request.resource.data.status in ['draft', 'verified', 'published', 'historical', 'superseded']
+        && request.resource.data.academicSession is string
+        && request.resource.data.sourceType == 'official_circular';
+      allow delete: if false;
+    }
+
+    // nuInstitutions / nuGroups (§19.2.2): public reference data.
+    match /nuInstitutions/{institutionId} {
+      allow read: if resource.data.status == 'active' || isAdmin();
+      allow create, update: if isAdmin()
+        && request.resource.data.slug is string
+        && request.resource.data.officialUrl is string;
+      allow delete: if false;
+    }
+    match /nuGroups/{groupId} {
+      allow read: if resource.data.status == 'published' || isAdmin();
+      allow create, update: if isAdmin()
+        && request.resource.data.slug in ['humanities', 'science', 'business']
+        && request.resource.data.institutionId is string
+        && request.resource.data.examConfigId is string
+        && request.resource.data.circularVersion is string;
+      allow delete: if false;
+    }
+
+    // nuQuestions (§19.3.2): the bank. Students cannot even READ it.
+    // The correct answer is NEVER in this document (it lives in
+    // nuQuestionKeys). Published questions are never edited in place —
+    // a correction is a new version (NU-7).
+    match /nuQuestions/{questionId} {
+      allow read: if isAdmin() || (isVerifiedTeacher() && resource.data.createdBy == uid());
+      allow create: if (isAdmin() || isVerifiedTeacher())
+        && request.resource.data.status == 'draft'
+        && request.resource.data.version == 1
+        && request.resource.data.explanation is string
+        && request.resource.data.questionText is string
+        && request.resource.data.options is list
+        && request.resource.data.options.size() == 4
+        && !('correctOptionIndex' in request.resource.data);
+      allow update: if (isAdmin() || (isVerifiedTeacher() && resource.data.createdBy == uid()))
+        && resource.data.status != 'published'
+        && request.resource.data.version == resource.data.version;
+      allow delete: if false;
+    }
+
+    // nuQuestionBundles (§19.3.3): the student-facing layer (questions
+    // + options only — no correct answers, no explanations). Only
+    // published bundles are readable; drafts are Admin-only so an
+    // Admin can read what they are about to publish.
+    match /nuQuestionBundles/{bundleId} {
+      allow read: if resource.data.status == 'published' || isAdmin();
+      allow create, update: if isAdmin();
+      allow delete: if false;
+    }
+
+    // nuQuestionKeys (§19.3.3): receipt-gated. Practice ('topic')
+    // bundles are readable without a receipt (learning); mock/daily
+    // bundles need a fresh receipt (hasFreshNuReceipt, 7 conditions).
+    // NOTE (NU-7 gap): the key doc carries no subjectId, so the
+    // matrix's "verified teacher reads own-subject keys" cannot be
+    // enforced yet — teachers read keys only via the Admin path until
+    // NU-7 adds subject scoping.
+    match /nuQuestionKeys/{bundleId} {
+      allow read: if isAdmin()
+        || isPracticeNuBundle(bundleId)
+        || hasFreshNuReceipt(bundleId);
+      allow create, update: if isAdmin();
+      allow delete: if false;
+    }
+
+    // nuReceipts (§19.3.3): one-use, 10 minutes, immutable. Created
+    // only at submit time; a broken/expired receipt is deleted first
+    // and a new one created. The receipt id is `{uid}_{bundleId}`.
+    match /nuReceipts/{receiptId} {
+      allow read: if (signedIn() && resource.data.userId == uid()) || isAdmin();
+      allow create: if receiptId == uid() + '_' + request.resource.data.bundleId
+        && request.resource.data.userId == uid()
+        && request.resource.data.attemptId is string
+        && request.resource.data.bundleId is string
+        && !exists(/databases/$(database)/documents/nuReceipts/$(receiptId));
+      allow update: if false;
+      allow delete: if resource.data.userId == uid();
+    }
+
+    // users/{uid}/nuAttempts (§19.3.5): the attempt is immutable once
+    // submitted; late writes (after deadlineAt) are rejected; the
+    // question set and config snapshot can never change mid-attempt.
+    // Full mock = 100 questions / 3600s; daily = 20–30 questions /
+    // 1200–1800s; practice = 1–100 questions (no fixed config).
+    // startedAt must be the server timestamp (request.time) — a
+    // client clock can never anchor a deadline.
+    match /users/{uid}/nuAttempts/{attemptId} {
+      allow read: if isOwner(uid) || isAdmin();
+      allow create: if isOwner(uid)
+        && request.resource.data.userId == uid
+        && request.resource.data.status == 'not_started'
+        && request.resource.data.kind in ['practice', 'mock', 'daily']
+        && request.resource.data.questionIds is list
+        && request.resource.data.startedAt == request.time
+        && request.resource.data.configSnapshot is map
+        && ((request.resource.data.kind == 'mock'
+            && request.resource.data.questionIds.size() == 100
+            && request.resource.data.configSnapshot.totalQuestions == 100
+            && request.resource.data.configSnapshot.durationSeconds == 3600
+            // NU-4 correction to the §19.3.5 sketch: deadlineAt CANNOT
+            // be required to equal request.time + 3600s exactly — a
+            // client can never know request.time to the millisecond, so
+            // exact equality would fail legitimate creates. The deadline
+            // is BOUNDED instead: after now, at most the config
+            // duration. (The update rule still rejects any write after
+            // deadlineAt, so a forged longer deadline buys nothing —
+            // the attempt simply cannot be written to after the
+            // deadline the student themself set... see the honest-limit
+            // note in the NU-4 report: a client-set deadline is
+            // enforced only as an upper bound by the rules.)
+            && request.resource.data.deadlineAt is timestamp
+            && request.resource.data.deadlineAt > request.time
+            && request.resource.data.deadlineAt <= request.time + duration.value(3600, 's'))
+          || (request.resource.data.kind == 'daily'
+            && request.resource.data.questionIds.size() >= 20
+            && request.resource.data.questionIds.size() <= 30
+            && request.resource.data.configSnapshot.totalQuestions >= 20
+            && request.resource.data.configSnapshot.totalQuestions <= 30
+            && request.resource.data.configSnapshot.durationSeconds >= 1200
+            && request.resource.data.configSnapshot.durationSeconds <= 1800
+            && request.resource.data.deadlineAt is timestamp
+            && request.resource.data.deadlineAt > request.time
+            && request.resource.data.deadlineAt <= request.time + duration.value(request.resource.data.configSnapshot.durationSeconds, 's'))
+          || (request.resource.data.kind == 'practice'
+            && request.resource.data.questionIds.size() >= 1
+            && request.resource.data.questionIds.size() <= 100));
+      allow update: if isOwner(uid)
+        && resource.data.status != 'submitted'
+        && request.time <= resource.data.deadlineAt
+        && request.resource.data.questionIds == resource.data.questionIds
+        && request.resource.data.configSnapshot == resource.data.configSnapshot
+        && (request.resource.data.status != 'submitted'
+            || request.resource.data.submittedAt == request.time);
+      allow delete: if false;
+    }
+
+    // users/{uid}/nuSessions (§19.2.9): the running-exam state
+    // (autosave / recovery copy). Only the owner; deleted after submit.
+    match /users/{uid}/nuSessions/{sessionId} {
+      allow read, create, update: if isOwner(uid);
+      allow delete: if isOwner(uid) && resource.data.status == 'submitted';
+    }
+
+    // nuReviews / nuPublications (§19.2.11, §19.6.1): the publication
+    // state machine (draft → submitted_for_review → under_review →
+    // approved → published; rejected / changes_requested /
+    // withdrawn). Immutable once written; a reviewer can never review
+    // their own question; a rejection / return needs a reason
+    // (≥10 chars). The state transitions themselves are enforced by
+    // the Admin/teacher flow in code (NU-7); the rules pin who may
+    // write the records and that they can never change.
+    match /nuReviews/{reviewId} {
+      allow read: if isAdmin() || (signedIn() && resource.data.reviewerId == uid());
+      allow create: if (isAdmin() || isVerifiedTeacher())
+        && request.resource.data.reviewerId == uid()
+        && request.resource.data.questionId is string
+        && request.resource.data.decision in ['approved', 'rejected', 'changes_requested']
+        && (!('reason' in request.resource.data)
+            || request.resource.data.reason is string)
+        && (request.resource.data.decision == 'approved'
+            || request.resource.data.get('reason', '').size() >= 10)
+        && exists(/databases/$(database)/documents/nuQuestions/$(request.resource.data.questionId))
+        && get(/databases/$(database)/documents/nuQuestions/$(request.resource.data.questionId)).data.createdBy != uid();
+      allow update, delete: if false;
+    }
+    match /nuPublications/{publicationId} {
+      allow read: if isAdmin();
+      allow create: if isAdmin()
+        && request.resource.data.action in ['published', 'withdrawn'];
+      allow update, delete: if false;
+    }
+
+    // nuNotices / nuCalendarEvents (§19.2.12): published notices only.
+    // An event with no verified date is never created (NU-14).
+    match /nuNotices/{noticeId} {
+      allow read: if resource.data.status == 'published' || isAdmin();
+      allow create, update: if isAdmin();
+      allow delete: if false;
+    }
+    match /nuCalendarEvents/{eventId} {
+      allow read: if resource.data.status == 'published' || isAdmin();
+      allow create, update: if isAdmin()
+        && request.resource.data.eventDate is timestamp;
+      allow delete: if false;
+    }
+
+    // nuFacts (§19.2.14): the fact records behind every important
+    // admission fact (pass mark, fee, thresholds, distribution).
+    // Public read — the verificationStatus field on each doc says
+    // whether the fact is verified; the UI shows verified facts only.
+    match /nuFacts/{factId} {
+      allow read: if true;
+      allow create, update: if isAdmin();
+      allow delete: if false;
+    }
+
+    // nuReports / nuCorrections (§19.2.13): a student reports a wrong
+    // answer / explanation / fact, or asks for a correction. Own
+    // reports only; status changes are Admin-only.
+    match /nuReports/{reportId} {
+      allow read: if (signedIn() && resource.data.userId == uid()) || isAdmin();
+      allow create: if signedIn()
+        && request.resource.data.userId == uid()
+        && request.resource.data.status == 'open';
+      allow update: if isAdmin()
+        && request.resource.data.diff(resource.data).affectedKeys()
+             .hasOnly(['status', 'resolvedNote', 'updatedAt'])
+        && request.resource.data.status in ['open', 'investigating', 'resolved', 'dismissed'];
+      allow delete: if false;
+    }
+    match /nuCorrections/{correctionId} {
+      allow read: if (signedIn() && resource.data.userId == uid()) || isAdmin();
+      allow create: if signedIn()
+        && request.resource.data.userId == uid()
+        && request.resource.data.status == 'open';
+      allow update: if isAdmin()
+        && request.resource.data.diff(resource.data).affectedKeys()
+             .hasOnly(['status', 'updatedAt'])
+        && request.resource.data.status in ['open', 'approved', 'rejected'];
+      allow delete: if false;
+    }
+    // NOTE (NU-12/NU-13): nuNotifications, nuWrongAnswers, nuFavorites,
+    // nuPlanner, nuRevisionSchedule and nuAnalyticsAggregates are
+    // specified in §19.2.13/§19.2.15 but their document paths are not
+    // fixed in §19 — their rules land with the step that builds them
+    // (NU-12 planner, NU-13 wrong-answers/favourites, NU-15 admin).
+    // Until then the deny-all catch below denies them: no student data
+    // is readable or writable there by accident.
 
     // ---------- everything else: denied ----------
     match /{document=**} {
