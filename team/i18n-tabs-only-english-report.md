@@ -222,3 +222,41 @@ cannot serve i18n without auth-gating.
   must be prepended; the `npm run test:rules` script's bare `vitest`
   also fails with 127 under `emulators:exec` — use the explicit
   `./node_modules/.bin/vitest` path.)
+
+### Merge + production deploy (22 Nov ~14:10–14:20)
+
+- Branch pushed (`git push --force-with-lease` — the earlier remote
+  copy predated the two rebases). Merged in the deploy worktree
+  (`phase2-project-deploy-main`, on main): merge commit **`bf7cb22`**
+  (`--no-ff`), 7 files, +382/−48. Pushed `origin/main`:
+  `671d32c..bf7cb22`. (Note: `main` cannot be checked out in the
+  i18n worktree — it is already used by the deploy worktree; the
+  merge was done there.)
+- Production build from main `bf7cb22`: **PASS** (exit 0).
+  `firebase deploy --only hosting`: **exit 0, release complete**
+  (`i18n-prod-deploy.log`). Hosting-only deploy; no rules deploy —
+  the live rules are byte-identical to main (this branch changes no
+  rules) and were already deployed by the auth-gating deploy.
+- **Live verification by content** (bundle-level, via curl):
+  - `https://eduvelto.com` 200 — serves the new bundle
+    `index-gIYds9XO.js` (same hash as the preview-verified build);
+    `index.html` carries the Noto Serif Bengali fonts link;
+    live bundle contains `ev-header-lang-btn` and
+    `ট্যাবের ভাষা বদলান`; live CSS contains `Noto Serif Bengali`.
+  - `https://eduvelto.com/jobs` 200 — live `JobsPage` chunk
+    (`JobsPage-6uJ6QF3a.js`) renders `titleBn:"চাকরির প্রস্তুতি"`
+    and imports JobCards / JobModeSwitch / JobOnboarding /
+    jobExams; **0 `ComingSoon` in the Jobs chunk** — the real Job
+    Preparation page, not Coming Soon.
+  - `https://eduvelto.com/admissions` 200,
+    `https://eduvelto.web.app` 200.
+  - The live tree is the same merged build already verified on
+    preview (server-render behaviour test + bundle checks); the
+    signed-out exam wall was separately confirmed live earlier in
+    the day.
+- **NOT verified by this task (needs a live browser — parent):**
+  visual render on mobile + desktop (header button beside the
+  profile, tap toggles ONLY tab labels, headings in Noto Serif
+  Bengali, body in Hind Siliguri), and the owner tapping the button
+  on his phone. Screenshots were not obtained (headless Chrome
+  blocked by the sandbox egress proxy).
