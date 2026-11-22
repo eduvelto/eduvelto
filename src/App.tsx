@@ -8,6 +8,12 @@ import BottomNav from './components/BottomNav';
 import HeaderNav from './components/HeaderNav';
 import Footer from './components/Footer';
 import InstallAppPrompt from './components/InstallAppPrompt';
+import {
+  AppVersionBlockedScreen,
+  AppVersionUpdateBar,
+  isGateExemptPath,
+  useAppVersionGate,
+} from './components/AppVersionGate';
 import { AdminGuard } from './components/AdminGuard';
 import { T, useLanguage } from './i18n/LanguageContext';
 // SCALE (10k users): route-level code splitting. Before this change the
@@ -46,6 +52,8 @@ const AdminGuardiansPage = lazy(() => import('./pages/AdminGuardiansPage'));
 const AdminFeaturesPage = lazy(() => import('./pages/AdminFeaturesPage'));
 const AdminBackupPage = lazy(() => import('./pages/AdminBackupPage'));
 const AdminAuditPage = lazy(() => import('./pages/AdminAuditPage'));
+const AdminAppVersionPage = lazy(() => import('./pages/AdminAppVersionPage'));
+const InstallPage = lazy(() => import('./pages/InstallPage'));
 const AiTeacherPage = lazy(() => import('./pages/AiTeacherPage'));
 const ExamPage = lazy(() => import('./pages/ExamPage'));
 const RoutinePage = lazy(() => import('./pages/RoutinePage'));
@@ -95,6 +103,17 @@ export default function App() {
   const { t } = useLanguage();
   const { profile, suspended, signOut } = useAuth();
   const location = useLocation();
+  // FORCED APP UPDATE (owner brief 22 Nov 2026): on every app load the
+  // gate fetches config/appVersion from the server (no cache). If this
+  // bundled version is below minVersion, the WHOLE shell is replaced by
+  // the block screen — no header, nav, footer or routes are usable.
+  // /install, /login and /admin/* are exempt (see AppVersionGate), so the
+  // owner can always reach the fix. While 'checking'/'unknown' (offline)
+  // the app renders normally — fail open, never block on a slow check.
+  const { status: appVersionStatus, config: appVersionConfig } = useAppVersionGate();
+  if (appVersionStatus === 'blocked' && !isGateExemptPath(location.pathname)) {
+    return <AppVersionBlockedScreen config={appVersionConfig} />;
+  }
   // Persistent bottom banner (owner brief 20 Nov 21:52): fixed to the
   // viewport bottom, outside the router outlet, on all eligible pages
   // (including lessons, quizzes, exams, AI Teacher). It renders nothing
@@ -143,6 +162,9 @@ export default function App() {
       ) : (
         <>
         <InstallAppPrompt />
+        {appVersionStatus === 'update-available' ? (
+          <AppVersionUpdateBar config={appVersionConfig} />
+        ) : null}
         <Suspense fallback={<main style={{ maxWidth: 720, margin: '0 auto', padding: '24px 16px' }}><p>{t(strings.common.loading)}</p></main>}>
         <Routes>
         <Route path="/" element={<HomePage />} />
@@ -184,6 +206,8 @@ export default function App() {
         <Route path="/admin/features" element={<AdminGuard><AdminFeaturesPage /></AdminGuard>} />
         <Route path="/admin/backup" element={<AdminGuard><AdminBackupPage /></AdminGuard>} />
         <Route path="/admin/audit" element={<AdminGuard><AdminAuditPage /></AdminGuard>} />
+        <Route path="/admin/app-version" element={<AdminGuard><AdminAppVersionPage /></AdminGuard>} />
+        <Route path="/install" element={<InstallPage />} />
         <Route path="/ai-teacher" element={<AiTeacherPage />} />
         <Route path="/exam" element={<ExamPage />} />
         <Route path="/routine" element={<RoutinePage />} />

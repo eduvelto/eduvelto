@@ -1,6 +1,7 @@
 // Eduvelto footer — global navigation + brand (design system v2, stage 2).
 // Deep forest navy, ivory text. Links only to routes that exist in this
-// branch (no /install here — that route lives on the PWA branch).
+// branch — /install is the app download + update tab (forced app update,
+// 22 Nov 2026).
 
 import { Link } from 'react-router-dom';
 import { useLanguage } from '../i18n/LanguageContext';
@@ -32,6 +33,7 @@ export default function Footer() {
           <Link to="/about">{t({ bn: 'আমাদের সম্পর্কে', en: 'About' })}</Link>
           <Link to="/privacy">{t({ bn: 'গোপনীয়তা নীতি', en: 'Privacy Policy' })}</Link>
           <Link to="/contact">{t({ bn: 'যোগাযোগ', en: 'Contact' })}</Link>
+          <Link to="/install">{t({ bn: 'অ্যাপ ইনস্টল / আপডেট', en: 'Install / update app' })}</Link>
           <Link to="/health">{t({ bn: 'স্বাস্থ্য', en: 'Health' })}</Link>
           <Link to="/ai-teacher">{t({ bn: 'AI Teacher (পরিকল্পনায় আছে)', en: 'AI Teacher (planned)' })}</Link>
         </div>

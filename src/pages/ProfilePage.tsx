@@ -15,6 +15,7 @@
 import { useEffect, useState, type FormEvent } from 'react';
 import { Link } from 'react-router-dom';
 import { PageShell } from '../components/PageShell';
+import AppUpdateSection from '../components/AppUpdateSection';
 import { strings } from '../i18n/strings';
 import { useAuth } from '../lib/auth';
 import type { EducationType, ProfileEdit } from '../lib/profile';
@@ -302,6 +303,9 @@ export default function ProfilePage() {
           </>
         ) : null}
       </dl>
+
+      {/* অ্যাপ আপডেট (owner brief 22 Nov 2026): current + latest version + download link. */}
+      <AppUpdateSection />
 
       <h2 style={{ fontSize: 20 }}><T bn={p.editTitle.bn} en={p.editTitle.en} /></h2>
       <form onSubmit={onSubmit}>

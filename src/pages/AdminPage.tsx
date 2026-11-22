@@ -125,6 +125,15 @@ export default function AdminPage() {
       status: 'soon',
     },
     {
+      id: 'app-version',
+      titleBn: 'অ্যাপ আপডেট (ভার্সন)',
+      titleEn: 'App update (version)',
+      descBn: 'নতুন ভার্সন প্রকাশ, পুরোনো ভার্সন ব্লক — কোড ছাড়াই।',
+      descEn: 'Publish a new version, block old versions — no code needed.',
+      status: 'working',
+      to: '/admin/app-version',
+    },
+    {
       id: 'ads',
       titleBn: 'বিজ্ঞাপন',
       titleEn: 'Advertising',
