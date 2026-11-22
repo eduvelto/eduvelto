@@ -3307,12 +3307,34 @@ service cloud.firestore {
       // session must be submitted or abandoned — a lock released
       // while its session is still in progress would let the
       // student start a second concurrent exam).
+      // Re-arm (Step 9 fold-in fix, 22 Nov): a TERMINAL lock — or
+      // a STALE in_progress lock (past createdAt + duration +
+      // 15 min grace) — may be re-armed for a NEW session. Without
+      // this, setDoc on the existing lock doc is an UPDATE, and
+      // the student could never start a second exam for the
+      // pattern (the create rule's stale escape only applies when
+      // the doc does not exist at all). The new doc must pass the
+      // FULL lock validator (fresh createdAt, duration ==
+      // definition duration, published definition); a LIVE
+      // in_progress lock can never be re-armed. The session
+      // binding is enforced at session create (the post-batch
+      // lock must point at the new session).
       allow update: if signedIn() && callerActive()
         && resource.data.get('uid', '') == uid()
-        && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['status', 'updatedAt'])
-        && resource.data.get('status', '') == 'in_progress'
-        && request.resource.data.get('status', '') == 'terminal'
-        && getAfter(/databases/$(database)/documents/users/$(uid())/jobExamSessions/$(resource.data.get('activeSessionId', ''))).data.status in ['submitted', 'abandoned'];
+        && ((request.resource.data.diff(resource.data).affectedKeys().hasOnly(['status', 'updatedAt'])
+             && resource.data.get('status', '') == 'in_progress'
+             && request.resource.data.get('status', '') == 'terminal'
+             && getAfter(/databases/$(database)/documents/users/$(uid())/jobExamSessions/$(resource.data.get('activeSessionId', ''))).data.status in ['submitted', 'abandoned'])
+            || ((resource.data.get('status', '') == 'terminal'
+                 || (resource.data.get('status', '') == 'in_progress'
+                     && resource.data.get('createdAt', null) is timestamp
+                     && resource.data.get('durationSeconds', null) is int
+                     && request.time > resource.data.get('createdAt', null)
+                          + duration.value(resource.data.get('durationSeconds', 0), 's')
+                          + duration.value(15, 'm')))
+                && exists(/databases/$(database)/documents/jobExamDefinitions/$(request.resource.data.get('definitionId', '')))
+                && validJobExamUserLock(request.resource.data, lockId,
+                     jobExamDefinitionData(request.resource.data.get('definitionId', '')))));
       allow delete: if false;
     }
 

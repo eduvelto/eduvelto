@@ -1,42 +1,68 @@
 // Eduvelto — Job Preparation full exam + model tests: Firestore
-// operations (Step 9).
+// operations (Step 9, ChatGPT fold-in).
 //
 // Thin Firestore layer for the mock engine UI. Pure scoring /
 // session-shape logic lives in ./jobEngine.ts; mock definitions
 // live in ./jobMocks.ts; this file only talks to Firestore
-// (mock + bundle + key reads, session create/deadline/autosave/
-// abandon/submit, attempt + history reads). No lib in this file
-// guesses answers — scoring always goes through scoreMockAttempt
-// (key required).
+// (definition + manifest + bundle + key reads, exam session
+// create/deadline/autosave/abandon/submit, exam attempt +
+// history reads). No lib in this file guesses answers — scoring
+// always goes through scoreMockAttempt (key required).
+//
+// COLLECTIONS (H.2 — practice and exam are SEPARATE, never
+// interchangeable): exam sessions live in
+// users/{uid}/jobExamSessions, exam attempts in
+// users/{uid}/jobExamAttempts, definitions in
+// jobExamDefinitions, frozen question sets in
+// jobQuestionSetManifests, one-active-session locks in
+// jobExamUserLocks. The old jobSessions / jobAttempts / jobMocks
+// paths are PRACTICE-only now — this file never touches them.
+//
+// START FLOW (H.7 + §1(f)): the session is created ATOMICALLY
+// with its lock (one batch: exam session + jobExamUserLocks
+// {uid}_{examSlug}); the session's questionRefs come from the
+// MANIFEST (the frozen set), never from the bundle's current
+// order — resume reads the same manifest. startedAt is a
+// serverTimestamp (the rules require startedAt == request.time);
+// endsAt is set ONCE after read-back to EXACTLY startedAt +
+// definition duration (audit M1, tightened to exact).
 //
 // SUBMIT FLOW — Design G (Step 3 §4.2, adapted to the Step 7
-// receipt gate, P0-06): the key is receipt-gated behind a
-// SUBMITTED record, so the receipt can never be created BEFORE
-// the answers are frozen. The order is therefore:
-//   1. session → 'submitted' (standalone update — answers frozen,
-//      terminal; the receipt can only anchor to this now),
-//   2. receipt create (jobReceipts/{uid}_{bundleId}, attemptId =
-//      sessionId — best-effort: a retake's receipt may already
-//      exist, in which case the old fresh receipt is reused),
-//   3. key read (rules: fresh receipt + SUBMITTED session anchor
-//      for this bundle — the Step 9 rules extension),
-//   4. score from the mock's rulesSnapshot (never live config),
-//   5. attempt create (same doc-ID as the session; idempotent —
-//      an existing attempt is returned, never re-written).
+// receipt gate, P0-06, + H.1 purpose receipts): the key is
+// receipt-gated behind a SUBMITTED record, so the receipt can
+// never be created BEFORE the answers are frozen. The order is:
+//   1. fresh-read the exam session (local state may be stale),
+//   2. session → 'submitted' + lock → 'terminal' in ONE batch
+//      (answers frozen; the receipt can only anchor to this now),
+//   3. receipt create (jobReceipts/{uid}_{bundleId}, attemptId =
+//      sessionId, purpose 'exam_review', bundleVersion = the
+//      session's stored generation — best-effort: a retake's
+//      receipt may already exist, in which case the old fresh
+//      receipt is reused),
+//   4. key read (rules: fresh exam_review receipt + SUBMITTED
+//      exam session/attempt anchor for this bundle),
+//   5. score from the mock's rulesSnapshot (never live config),
+//   6. build + validate the attempt doc (lib mirror of the rules
+//      — questionSetId from the STORED session, never the
+//      definition's current pointer),
+//   7. IDEMPOTENT RECOVERY: an already-existing exam attempt is
+//      returned (its STORED result — never a recomputation that
+//      could come from a republished bundle),
+//   8. attempt create (same doc-ID as the session).
 // The receipt is NOT deleted by the student (rules: Admin-only
 // delete) — it expires by rule after 10 minutes. A crash between
-// steps 1 and 5 strands the session as submitted-without-attempt:
-// the retry re-runs from step 2 inside the receipt window; after
+// steps 2 and 8 strands the session as submitted-without-attempt:
+// the retry re-runs from step 3 inside the receipt window; after
 // the window closes the student starts a NEW session (retake).
 // Side-writes (§4.2 step 6: progress / wrong answers) are NOT
 // here — Step 8's submit does not do them either; Steps 10/12/13
 // own them.
 //
-// TIMER (audit M1): the stored deadline (endsAt) is set ONCE
-// after read-back to startedAt + rulesSnapshot.timeMinutes, and
-// the rules bound it to exactly that and deny any attempt with
-// submittedAt > endsAt. The client timer runs on endsAt when
-// known, else clientEndsAtMillis (set at creation).
+// TIMER (audit M1, exact): the stored deadline (endsAt) is set
+// ONCE after read-back to startedAt + rulesSnapshot.timeMinutes,
+// and the rules bound it to EXACTLY that and deny any attempt
+// with submittedAt > endsAt. The client timer runs on endsAt
+// when known, else clientEndsAtMillis (set at creation).
 //
 // LANGUAGE: all UI-facing messages are Bangla (one-language rule).
 
@@ -52,6 +78,7 @@ import {
   Timestamp,
   updateDoc,
   where,
+  writeBatch,
   serverTimestamp,
   type Timestamp as FirestoreTimestamp,
 } from 'firebase/firestore';
@@ -80,7 +107,7 @@ import {
   type JobMockKind,
   type JobMockWithId,
 } from './jobMocks';
-import { autosaveSession, loadBundleKey, loadPracticeBundle, type PracticeBundleWithId } from './jobPractice';
+import { loadBundleKey, loadPracticeBundle, type PracticeBundleWithId } from './jobPractice';
 import type { JobQuestionKey, JobReceipt } from './jobQuestions';
 
 /** Firestore not configured (gate G1) — pages show the honest
@@ -98,6 +125,167 @@ function timestampToMillis(t: unknown): number | null {
   if (t instanceof Date) return t.getTime();
   return null;
 }
+
+/* ------------------------------------------------------------------ */
+/* Exam manifests (jobQuestionSetManifests) — the frozen set          */
+/* ------------------------------------------------------------------ */
+
+/** A jobQuestionSetManifests doc (ChatGPT §1(f)): the frozen
+ * question references for one mock generation — question IDs +
+ * order + count + marking scheme + version. The bundle holds
+ * the question text/options for display; the MANIFEST is the
+ * rules' authority for what the exam contains. */
+export interface JobExamManifest {
+  examSlug: string;
+  mockId: string;
+  version: number;
+  questionCount: number;
+  questionRefs: Array<{ bundleId: string; n: number; questionId: string }>;
+  markingSchemeVersion: string;
+  status: 'draft' | 'published' | 'archived';
+}
+
+/** Light lib-side validation of a manifest (mirrors
+ * validJobQuestionSetManifest in the rules — the rules are the
+ * authority; this only keeps malformed docs from crashing the
+ * page). Returns problem strings; empty = valid. */
+export function validateExamManifest(doc: unknown): string[] {
+  const problems: string[] = [];
+  const label = 'jobQuestionSetManifests';
+  if (typeof doc !== 'object' || doc === null || Array.isArray(doc)) {
+    return [`${label}: doc must be an object`];
+  }
+  const d = doc as Record<string, unknown>;
+  if (typeof d.examSlug !== 'string' || d.examSlug.length === 0) {
+    problems.push(`${label}: examSlug must be a non-empty string`);
+  }
+  if (typeof d.mockId !== 'string' || d.mockId.length === 0) {
+    problems.push(`${label}: mockId must be a non-empty string`);
+  }
+  if (!Number.isInteger(d.version) || (d.version as number) < 1) {
+    problems.push(`${label}: version must be an integer ≥1`);
+  }
+  if (!Number.isInteger(d.questionCount) || (d.questionCount as number) < 1 || (d.questionCount as number) > 200) {
+    problems.push(`${label}: questionCount must be an integer 1–200`);
+  }
+  if (!Array.isArray(d.questionRefs)) {
+    problems.push(`${label}: questionRefs must be a list`);
+  } else if (d.questionRefs.length !== d.questionCount) {
+    problems.push(`${label}: questionRefs size must equal questionCount`);
+  } else {
+    d.questionRefs.forEach((r, i) => {
+      const ref = r as Record<string, unknown>;
+      if (typeof ref !== 'object' || ref === null
+        || typeof ref.bundleId !== 'string' || ref.bundleId.length === 0
+        || !Number.isInteger(ref.n) || (ref.n as number) < 1
+        || typeof ref.questionId !== 'string' || ref.questionId.length === 0) {
+        problems.push(`${label}: questionRefs[${i}] is malformed (bundleId/n/questionId required)`);
+      }
+    });
+  }
+  if (typeof d.markingSchemeVersion !== 'string' || d.markingSchemeVersion.length === 0) {
+    problems.push(`${label}: markingSchemeVersion must be a non-empty string`);
+  }
+  if (d.status !== 'draft' && d.status !== 'published' && d.status !== 'archived') {
+    problems.push(`${label}: status must be draft/published/archived`);
+  }
+  return problems;
+}
+
+/** Load one manifest by questionSetId (any status — the caller
+ * checks .status). Returns null when missing or invalid. */
+export async function loadExamManifest(questionSetId: string): Promise<JobExamManifest | null> {
+  const firestore = requireDb();
+  const snap = await getDoc(doc(firestore, 'jobQuestionSetManifests', questionSetId));
+  if (!snap.exists()) return null;
+  const data = snap.data() as Record<string, unknown>;
+  if (validateExamManifest(data).length > 0) return null;
+  return data as unknown as JobExamManifest;
+}
+
+/** Load one PUBLISHED manifest. Returns null when missing,
+ * invalid, or not published (a draft manifest never starts). */
+export async function loadPublishedExamManifest(questionSetId: string): Promise<JobExamManifest | null> {
+  const manifest = await loadExamManifest(questionSetId);
+  if (!manifest || manifest.status !== 'published') return null;
+  return manifest;
+}
+
+/* ------------------------------------------------------------------ */
+/* Exam user locks (jobExamUserLocks) — one active session per exam   */
+/* ------------------------------------------------------------------ */
+
+/** Lock doc-ID: `{uid}_{examSlug}` (H.7). */
+export function examLockId(uid: string, examSlug: string): string {
+  return `${uid}_${examSlug}`;
+}
+
+/** A jobExamUserLocks doc. */
+export interface JobExamLock {
+  uid: string;
+  examSlug: string;
+  mockId: string;
+  definitionId: string;
+  activeSessionId: string;
+  status: 'in_progress' | 'terminal';
+  durationSeconds: number;
+  createdAt: unknown;
+  updatedAt: unknown;
+}
+
+/** Build a fresh lock doc for a new exam session (H.7): the lock
+ * is created ATOMICALLY with the session (one batch) and
+ * released ATOMICALLY with the session's terminal transition.
+ * durationSeconds is the definition's frozen duration — a client
+ * cannot shorten its own lock to go stale early. */
+export function buildExamLockDoc(input: {
+  uid: string;
+  examSlug: string;
+  mockId: string;
+  definitionId: string;
+  activeSessionId: string;
+  durationSeconds: number;
+}): JobExamLock {
+  return {
+    uid: input.uid,
+    examSlug: input.examSlug,
+    mockId: input.mockId,
+    definitionId: input.definitionId,
+    activeSessionId: input.activeSessionId,
+    status: 'in_progress',
+    durationSeconds: input.durationSeconds,
+    createdAt: serverTimestamp(),
+    updatedAt: serverTimestamp(),
+  };
+}
+
+/** Read the student's lock for an exam pattern. Returns null
+ * when there is none (no exam ever started for the pattern). */
+export async function loadExamLock(uid: string, examSlug: string): Promise<JobExamLock | null> {
+  const firestore = requireDb();
+  const snap = await getDoc(doc(firestore, 'jobExamUserLocks', examLockId(uid, examSlug)));
+  if (!snap.exists()) return null;
+  return snap.data() as unknown as JobExamLock;
+}
+
+/** True when a stored lock is STILL LIVE (in_progress and not
+ * yet stale: createdAt + duration + 15 min grace — the crash
+ * backstop). A live lock means another exam session is running
+ * for this pattern; a stale/terminal lock does not block a new
+ * session (the rules re-arm it). `nowMillis` defaults to
+ * Date.now(); pass the read-back createdAt when the lock was
+ * just written (serverTimestamp sentinel → null → not live). */
+export function isExamLockLive(lock: JobExamLock | null, nowMillis: number = Date.now()): boolean {
+  if (!lock || lock.status !== 'in_progress') return false;
+  const createdAtMillis = timestampToMillis(lock.createdAt);
+  if (createdAtMillis === null) return false;
+  if (!Number.isInteger(lock.durationSeconds) || lock.durationSeconds < 60) return false;
+  return nowMillis < createdAtMillis + lock.durationSeconds * 1000 + 15 * 60 * 1000;
+}
+
+/* ------------------------------------------------------------------ */
+/* Session normalization                                               */
+/* ------------------------------------------------------------------ */
 
 /** Normalize a mock session doc read back from Firestore: answers-map
  * keys arrive as strings ('1','2'); the engine works with numeric
@@ -120,6 +308,9 @@ export function normalizeMockSessionDoc(data: Record<string, unknown>): JobMockS
     mockId: String(data.mockId ?? ''),
     bundleId: String(data.bundleId ?? ''),
     examSlug: String(data.examSlug ?? ''),
+    definitionId: String(data.definitionId ?? ''),
+    questionSetId: String(data.questionSetId ?? ''),
+    bundleVersion: typeof data.bundleVersion === 'number' && data.bundleVersion >= 1 ? data.bundleVersion : 1,
     status: data.status === 'submitted' || data.status === 'abandoned' ? data.status : 'in-progress',
     startedAt: data.startedAt ?? null,
     endsAt: data.endsAt ?? null,
@@ -137,37 +328,48 @@ export function normalizeMockSessionDoc(data: Record<string, unknown>): JobMockS
   };
 }
 
-/** The receipt doc for a mock submit (Design G step 2): the
+/** The receipt doc for a mock submit (Design G step 3): the
  * attemptId is the SESSION id (the attempt doc will carry the
- * same ID when it is created in step 5). createdAt is a server
+ * same ID when it is created in step 8). createdAt is a server
  * timestamp — the rules require it to be ≤ now and < 5 minutes
- * old (P0-03 trusted timestamp). */
-export function buildMockReceiptDoc(uid: string, bundleId: string, sessionId: string): JobReceipt {
+ * old (P0-03 trusted timestamp). purpose is 'exam_review' (H.1)
+ * and bundleVersion binds the receipt to the session's stored
+ * bundle generation. */
+export function buildMockReceiptDoc(
+  uid: string,
+  bundleId: string,
+  sessionId: string,
+  bundleVersion: number,
+): JobReceipt {
   return {
     userId: uid,
     bundleId,
     attemptId: sessionId,
     createdAt: serverTimestamp(),
+    purpose: 'exam_review',
+    bundleVersion,
   };
 }
 
 /* ------------------------------------------------------------------ */
-/* Mock + bundle + key reads                                           */
+/* Mock definition + bundle + key reads                                */
 /* ------------------------------------------------------------------ */
 
-/** Load one mock by doc-ID (any status — the caller checks
- * .status). Returns null when missing or failing validation. */
+/** Load one mock definition by doc-ID (any status — the caller
+ * checks .status). Returns null when missing or failing
+ * validation. */
 export async function loadMock(mockDocId: string): Promise<JobMockWithId | null> {
   const firestore = requireDb();
-  const snap = await getDoc(doc(firestore, 'jobMocks', mockDocId));
+  const snap = await getDoc(doc(firestore, 'jobExamDefinitions', mockDocId));
   if (!snap.exists()) return null;
   const data = snap.data() as Record<string, unknown>;
   if (validateJobMock(data, snap.id).length > 0) return null;
   return { ...(data as unknown as JobMockWithId), docId: snap.id };
 }
 
-/** Load one PUBLISHED mock by doc-ID. Returns null when missing,
- * invalid, or not published (draft/archived mocks never start). */
+/** Load one PUBLISHED mock definition by doc-ID. Returns null
+ * when missing, invalid, or not published (draft/archived mocks
+ * never start). */
 export async function loadPublishedMock(mockDocId: string): Promise<JobMockWithId | null> {
   const mock = await loadMock(mockDocId);
   if (!mock || mock.status !== 'published') return null;
@@ -186,16 +388,17 @@ export async function loadThisWeekWeeklyMock(nowMs: number = Date.now()): Promis
   return loadPublishedMock(`weekly__${jobThisWeekWeeklyMockId(nowMs)}`);
 }
 
-/** Published mocks, optionally filtered by exam and/or kind.
- * One == filter (status) + client-side filtering — no composite
- * index needed. Sorted daily → weekly → full, then Bangla title. */
+/** Published mock definitions, optionally filtered by exam and/or
+ * kind. One == filter (status) + client-side filtering — no
+ * composite index needed. Sorted daily → weekly → full, then
+ * Bangla title. */
 export async function listPublishedMocks(filters?: {
   examSlug?: string;
   kind?: JobMockKind;
 }): Promise<JobMockWithId[]> {
   const firestore = requireDb();
   const snap = await getDocs(
-    query(collection(firestore, 'jobMocks'), where('status', '==', 'published')),
+    query(collection(firestore, 'jobExamDefinitions'), where('status', '==', 'published')),
   );
   const out: JobMockWithId[] = [];
   for (const d of snap.docs) {
@@ -230,9 +433,9 @@ export function mockBundleIdFor(mockId: string, kind: JobMockKind): string {
 
 /** Load the answer key for a mock bundle. Returns null when
  * missing or unusable — the rules decide readability (fresh
- * session-anchored receipt after submit; a read before that
- * throws permission-denied, which the caller turns into the
- * honest "not yet" state — see submitMockAttempt). */
+ * session-anchored exam_review receipt after submit; a read
+ * before that throws permission-denied, which the caller turns
+ * into the honest "not yet" state — see submitMockAttempt). */
 export async function loadMockKey(bundleId: string): Promise<JobQuestionKey | null> {
   return loadBundleKey(bundleId);
 }
@@ -252,7 +455,7 @@ export async function findResumableMockSession(
   const firestore = requireDb();
   const snap = await getDocs(
     query(
-      collection(firestore, 'users', uid, 'jobSessions'),
+      collection(firestore, 'users', uid, 'jobExamSessions'),
       where('bundleId', '==', bundleId),
       where('status', '==', 'in-progress'),
     ),
@@ -270,40 +473,89 @@ export async function findResumableMockSession(
   return best;
 }
 
-/** Start a new mock session: auto-ID, engine-built doc (bundle
- * order — a timed mock never runs in mode order), one setDoc.
- * The deadline is NOT set here (startedAt is a server timestamp
- * the client cannot know yet) — call ensureMockDeadline right
- * after, which sets endsAt ONCE from the read-back. The timer
- * runs on clientEndsAtMillis until then. Returns the session ID
- * + the local session + the client-side start time. */
+/** Start a new mock session: auto-ID, engine-built doc (MANIFEST
+ * order — a timed mock never runs in mode order, and never in
+ * the bundle's current order when the manifest differs), one
+ * atomic batch (exam session + its lock). The deadline is NOT
+ * set here (startedAt is a server timestamp the client cannot
+ * know yet) — call ensureMockDeadline right after, which sets
+ * endsAt ONCE from the read-back. The timer runs on
+ * clientEndsAtMillis until then. Throws an honest error when
+ * another exam session is already live for this pattern (the
+ * rules deny the batch too — this pre-check only makes the
+ * message readable). Returns the session ID + the local session
+ * + the client-side start time. */
 export async function startMockSession(
   uid: string,
   mock: JobMockWithId,
   bundle: PracticeBundleWithId,
 ): Promise<{ sessionId: string; session: JobMockSessionDoc; startedAtMillis: number }> {
   const firestore = requireDb();
-  const ref = doc(collection(firestore, 'users', uid, 'jobSessions'));
   const mockId = jobMockIdFromDocId(mock.docId, mock.kind);
   if (mockId === null) {
     throw new Error('মকের পরিচয় (mockId) পাওয়া যায়নি — মক শুরু করা যাবে না।');
   }
-  const questionRefs = bundle.questions.map((q) => ({ bundleId: bundle.docId, n: q.n, questionId: q.questionId }));
+  // The manifest is the frozen set: the session runs ITS refs,
+  // and every ref must exist in the bundle (the bundle holds the
+  // question text/options). A manifest/bundle mismatch is an
+  // admin data error — never start a half-built exam.
+  const manifest = await loadPublishedExamManifest(mock.questionSetId);
+  if (!manifest) {
+    throw new Error('এই মকের প্রশ্নসেট (manifest) প্রকাশিত হয়নি — মক শুরু করা যাবে না।');
+  }
+  if (manifest.mockId !== mockId || manifest.examSlug !== mock.examSlug) {
+    throw new Error('এই মকের প্রশ্নসেট মকের সঙ্গে মিলছে না — মক শুরু করা যাবে না।');
+  }
+  const bundleByKey = new Map(bundle.questions.map((q) => [`${q.n}:${q.questionId}`, q]));
+  for (const ref of manifest.questionRefs) {
+    if (ref.bundleId !== bundle.docId || !bundleByKey.has(`${ref.n}:${ref.questionId}`)) {
+      throw new Error('এই মকের প্রশ্নসেট বান্ডেলের সঙ্গে মিলছে না — মক শুরু করা যাবে না।');
+    }
+  }
+  // One live exam per pattern (H.7): a live lock means another
+  // session is running — the rules deny the batch too; this
+  // pre-check only makes the message readable.
+  const existingLock = await loadExamLock(uid, mock.examSlug);
+  if (isExamLockLive(existingLock)) {
+    throw new Error('এই পরীক্ষার আরেকটি মক ইতিমধ্যে চলছে — আগেরটি শেষ করে আবার শুরু করুন।');
+  }
+  const sessionRef = doc(collection(firestore, 'users', uid, 'jobExamSessions'));
+  const questionRefs = manifest.questionRefs.map((r) => ({
+    bundleId: r.bundleId,
+    n: r.n,
+    questionId: r.questionId,
+  }));
   const session = createMockSession({
-    sessionId: ref.id,
+    sessionId: sessionRef.id,
     mockId,
     bundleId: bundle.docId,
     examSlug: mock.examSlug,
+    definitionId: mock.docId,
+    questionSetId: mock.questionSetId,
+    bundleVersion: bundle.bundleVersion,
     questionRefs,
     timeMinutes: mock.rulesSnapshot.timeMinutes,
     clientNowMillis: Date.now(),
   });
-  await setDoc(ref, session as unknown as Record<string, unknown>);
-  return { sessionId: ref.id, session, startedAtMillis: Date.now() };
+  const batch = writeBatch(firestore);
+  batch.set(sessionRef, session as unknown as Record<string, unknown>);
+  batch.set(
+    doc(firestore, 'jobExamUserLocks', examLockId(uid, mock.examSlug)),
+    buildExamLockDoc({
+      uid,
+      examSlug: mock.examSlug,
+      mockId,
+      definitionId: mock.docId,
+      activeSessionId: sessionRef.id,
+      durationSeconds: mock.rulesSnapshot.timeMinutes * 60,
+    }) as unknown as Record<string, unknown>,
+  );
+  await batch.commit();
+  return { sessionId: sessionRef.id, session, startedAtMillis: Date.now() };
 }
 
-/** Set the stored deadline ONCE (audit M1): endsAt = startedAt
- * (server time, from the read-back) + the mock's
+/** Set the stored deadline ONCE (audit M1, exact): endsAt =
+ * startedAt (server time, from the read-back) + the mock's
  * rulesSnapshot.timeMinutes. Safe to call after start AND on
  * every resume while endsAt is still null — it fresh-reads first
  * and returns the stored deadline when it already exists.
@@ -317,7 +569,7 @@ export async function ensureMockDeadline(
   timeMinutes: number,
 ): Promise<{ deadlineMillis: number | null; stored: boolean }> {
   const firestore = requireDb();
-  const sessionRef = doc(firestore, 'users', uid, 'jobSessions', sessionId);
+  const sessionRef = doc(firestore, 'users', uid, 'jobExamSessions', sessionId);
   const snap = await getDoc(sessionRef);
   if (!snap.exists()) {
     throw new Error('সেশন পাওয়া যায়নি — আবার মক শুরু করুন।');
@@ -359,7 +611,7 @@ export async function loadMockSession(
   sessionId: string,
 ): Promise<JobMockSessionDoc | null> {
   const firestore = requireDb();
-  const snap = await getDoc(doc(firestore, 'users', uid, 'jobSessions', sessionId));
+  const snap = await getDoc(doc(firestore, 'users', uid, 'jobExamSessions', sessionId));
   if (!snap.exists()) return null;
   return normalizeMockSessionDoc(snap.data() as Record<string, unknown>);
 }
@@ -368,25 +620,36 @@ export async function loadMockSession(
  * fields the rules allow to change while in-progress — answers,
  * currentQuestion, lastSyncedAt, updatedAt, revision (exactly
  * stored + 1; a stale patch is rejected by the rules and the
- * caller reloads). Same shape as practice (shared helper). */
+ * caller reloads). Same field shape as practice, but the EXAM
+ * collection (jobExamSessions — the practice helper writes to
+ * jobSessions and must never be used here). */
 export async function autosaveMockSession(
   uid: string,
   sessionId: string,
   patch: { answers: Record<number, unknown>; currentQuestion: number; lastSyncedAt: unknown; updatedAt: unknown; revision: number },
 ): Promise<void> {
-  await autosaveSession(uid, sessionId, patch);
+  const firestore = requireDb();
+  await updateDoc(doc(firestore, 'users', uid, 'jobExamSessions', sessionId), {
+    answers: patch.answers,
+    currentQuestion: patch.currentQuestion,
+    lastSyncedAt: patch.lastSyncedAt,
+    updatedAt: patch.updatedAt,
+    revision: patch.revision,
+  });
 }
 
 /** Abandon a mock session (time expired, or the student quits):
  * in-progress → 'abandoned' (terminal, frozen — the audit trail
- * of an unfinished mock). Returns the final status: 'abandoned',
- * or 'submitted' when another tab already submitted it. */
+ * of an unfinished mock) + the lock → 'terminal' in ONE batch,
+ * so a new exam can start for the pattern. Returns the final
+ * status: 'abandoned', or 'submitted' when another tab already
+ * submitted it. */
 export async function abandonMockSession(
   uid: string,
   sessionId: string,
 ): Promise<'abandoned' | 'submitted'> {
   const firestore = requireDb();
-  const sessionRef = doc(firestore, 'users', uid, 'jobSessions', sessionId);
+  const sessionRef = doc(firestore, 'users', uid, 'jobExamSessions', sessionId);
   const snap = await getDoc(sessionRef);
   if (!snap.exists()) {
     throw new Error('সেশন পাওয়া যায়নি।');
@@ -398,7 +661,24 @@ export async function abandonMockSession(
     throw new Error('এই সেশনটি আর বাতিল করা যাবে না।');
   }
   const storedRevision = typeof stored.revision === 'number' && stored.revision >= 1 ? stored.revision : 1;
-  await updateDoc(sessionRef, buildMockSessionAbandonUpdate(storedRevision));
+  const batch = writeBatch(firestore);
+  batch.update(sessionRef, buildMockSessionAbandonUpdate(storedRevision));
+  // Release the lock with the session (the rules require the
+  // post-batch session to be submitted/abandoned — this batch
+  // makes it abandoned). A missing lock (never happens for a
+  // session created by this lib — start is atomic) is skipped,
+  // never fatal.
+  const examSlug = String(stored.examSlug ?? '');
+  if (examSlug.length > 0) {
+    const lockSnap = await getDoc(doc(firestore, 'jobExamUserLocks', examLockId(uid, examSlug)));
+    if (lockSnap.exists() && (lockSnap.data() as Record<string, unknown>).status === 'in_progress') {
+      batch.update(doc(firestore, 'jobExamUserLocks', examLockId(uid, examSlug)), {
+        status: 'terminal',
+        updatedAt: serverTimestamp(),
+      });
+    }
+  }
+  await batch.commit();
   return 'abandoned';
 }
 
@@ -410,7 +690,8 @@ export interface SubmitMockInput {
   uid: string;
   sessionId: string;
   /** Local session (answers come from here — the fresh-read only
-   * supplies the revision + server startedAt). */
+   * supplies the revision + server startedAt + stored
+   * questionSetId/bundleVersion). */
   session: JobMockSessionDoc;
   mock: JobMockWithId;
   bundle: PracticeBundleWithId;
@@ -422,18 +703,24 @@ export interface SubmitMockInput {
 }
 
 /**
- * Submit a mock attempt — Design G:
- *   1. fresh-read the session (local state may be stale); it must
- *      be in-progress (or already submitted → orphan recovery),
- *   2. session → 'submitted' (standalone update — answers frozen;
- *      the receipt can only anchor to this now),
- *   3. receipt create, best-effort (a retake's receipt may already
- *      exist — the old fresh receipt is then reused; a failure
- *      here never blocks the key read, the rules decide),
- *   4. key read (fresh session-anchored receipt),
+ * Submit a mock attempt — Design G, exam collections:
+ *   1. fresh-read the exam session (local state may be stale);
+ *      it must be in-progress (or already submitted → orphan
+ *      recovery),
+ *   2. session → 'submitted' + lock → 'terminal' in ONE batch
+ *      (answers frozen; the receipt can only anchor to this now),
+ *   3. receipt create, best-effort (purpose 'exam_review',
+ *      bundleVersion = the session's STORED generation — a
+ *      retake's receipt may already exist; the old fresh receipt
+ *      is then reused; a failure here never blocks the key read,
+ *      the rules decide),
+ *   4. key read (fresh exam_review receipt + submitted exam
+ *      session anchor),
  *   5. score from the mock's rulesSnapshot (never live config),
- *   6. build + validate the attempt doc (lib mirror of the rules),
- *   7. IDEMPOTENT RECOVERY: an already-existing attempt is
+ *   6. build + validate the attempt doc (lib mirror of the rules
+ *      — questionSetId + bundleVersion from the STORED session,
+ *      never the definition's current pointer),
+ *   7. IDEMPOTENT RECOVERY: an already-existing exam attempt is
  *      returned (its STORED result — never a recomputation that
  *      could come from a republished bundle),
  *   8. attempt create (same doc-ID as the session).
@@ -450,12 +737,14 @@ export async function submitMockAttempt(
   if (mockId === null) {
     throw new Error('মকের পরিচয় (mockId) পাওয়া যায়নি — জমা দেওয়া যাবে না।');
   }
-  const sessionRef = doc(firestore, 'users', input.uid, 'jobSessions', input.sessionId);
-  const attemptRef = doc(firestore, 'users', input.uid, 'jobAttempts', input.sessionId);
+  const sessionRef = doc(firestore, 'users', input.uid, 'jobExamSessions', input.sessionId);
+  const attemptRef = doc(firestore, 'users', input.uid, 'jobExamAttempts', input.sessionId);
   const bundleId = input.bundle.docId;
 
   // 1. Fresh-read the session: the stored revision is the only safe
-  // base for the submit transition (local state may lag autosaves).
+  // base for the submit transition (local state may lag autosaves);
+  // the stored questionSetId/bundleVersion are the freeze values
+  // the attempt is bound to.
   const sessionSnap = await getDoc(sessionRef);
   if (!sessionSnap.exists()) {
     throw new Error('সেশন পাওয়া যায়নি — আবার মক শুরু করুন।');
@@ -469,6 +758,12 @@ export async function submitMockAttempt(
   }
   const storedRevision = typeof stored.revision === 'number' && stored.revision >= 1 ? stored.revision : 1;
   const startedAtMillis = timestampToMillis(stored.startedAt) ?? input.startedAtMillis;
+  const storedQuestionSetId = typeof stored.questionSetId === 'string' && stored.questionSetId.length > 0
+    ? stored.questionSetId
+    : input.mock.questionSetId;
+  const storedBundleVersion = typeof stored.bundleVersion === 'number' && stored.bundleVersion >= 1
+    ? stored.bundleVersion
+    : input.bundle.bundleVersion;
 
   // Helper: score + build + validate + create-or-recover the attempt.
   // Used both for the fresh submit and for the orphan recovery
@@ -478,7 +773,7 @@ export async function submitMockAttempt(
     try {
       await setDoc(
         doc(firestore, 'jobReceipts', `${input.uid}_${bundleId}`),
-        buildMockReceiptDoc(input.uid, bundleId, input.sessionId),
+        buildMockReceiptDoc(input.uid, bundleId, input.sessionId, storedBundleVersion),
       );
     } catch {
       // A retake's receipt already exists, or the create was denied
@@ -512,6 +807,8 @@ export async function submitMockAttempt(
     const sessionForAttempt: JobMockSessionDoc = {
       ...input.session,
       startedAt: stored.startedAt ?? input.session.startedAt,
+      questionSetId: storedQuestionSetId,
+      bundleVersion: storedBundleVersion,
     };
     const attemptDoc = buildJobAttemptDoc({
       sessionId: input.sessionId,
@@ -523,7 +820,8 @@ export async function submitMockAttempt(
       topicId: null,
       kind: 'mock',
       mockId,
-      bundleVersion: input.bundle.bundleVersion,
+      questionSetId: storedQuestionSetId,
+      bundleVersion: storedBundleVersion,
       userId: input.uid,
     });
     const problems = validateAttemptResult(attemptDoc);
@@ -554,11 +852,24 @@ export async function submitMockAttempt(
     return { attemptId: input.sessionId, result };
   };
 
-  // 2. Session → 'submitted' (skip when already submitted —
-  // orphan recovery: the attempt is created alone).
+  // 2. Session → 'submitted' + lock → 'terminal' in ONE batch
+  // (skip when already submitted — orphan recovery: the attempt
+  // is created alone, and the lock is already terminal).
   if (stored.status === 'in-progress') {
+    const batch = writeBatch(firestore);
+    batch.update(sessionRef, buildMockSessionSubmitUpdate(storedRevision));
+    const examSlug = String(stored.examSlug ?? '');
+    if (examSlug.length > 0) {
+      const lockSnap = await getDoc(doc(firestore, 'jobExamUserLocks', examLockId(input.uid, examSlug)));
+      if (lockSnap.exists() && (lockSnap.data() as Record<string, unknown>).status === 'in_progress') {
+        batch.update(doc(firestore, 'jobExamUserLocks', examLockId(input.uid, examSlug)), {
+          status: 'terminal',
+          updatedAt: serverTimestamp(),
+        });
+      }
+    }
     try {
-      await updateDoc(sessionRef, buildMockSessionSubmitUpdate(storedRevision));
+      await batch.commit();
     } catch {
       const retry = await getDoc(sessionRef);
       if (!retry.exists() || (retry.data() as Record<string, unknown>).status !== 'submitted') {
@@ -580,9 +891,9 @@ export async function submitMockAttempt(
 export type MockAttemptWithId = Record<string, unknown> & { docId: string };
 
 /** The student's mock attempts, newest first (kind 'mock' +
- * submittedAt desc — the M1 history index). The mockId filter
- * is client-side: a second composite index is not worth it for
- * a per-student history list. */
+ * submittedAt desc — the M1 history index, now on
+ * jobExamAttempts). The mockId filter is client-side: a second
+ * composite index is not worth it for a per-student history list. */
 export async function listMockAttempts(
   uid: string,
   maxResults = 20,
@@ -590,7 +901,7 @@ export async function listMockAttempts(
   const firestore = requireDb();
   const snap = await getDocs(
     query(
-      collection(firestore, 'users', uid, 'jobAttempts'),
+      collection(firestore, 'users', uid, 'jobExamAttempts'),
       where('kind', '==', 'mock'),
       orderBy('submittedAt', 'desc'),
       limit(maxResults),
@@ -618,7 +929,7 @@ export async function loadMockAttempt(
   attemptId: string,
 ): Promise<Record<string, unknown> | null> {
   const firestore = requireDb();
-  const snap = await getDoc(doc(firestore, 'users', uid, 'jobAttempts', attemptId));
+  const snap = await getDoc(doc(firestore, 'users', uid, 'jobExamAttempts', attemptId));
   if (!snap.exists()) return null;
   return snap.data() as Record<string, unknown>;
 }

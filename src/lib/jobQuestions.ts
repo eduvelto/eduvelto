@@ -201,11 +201,24 @@ export interface JobQuestionKey {
   updatedAt?: unknown;
 }
 
+/** A jobReceipts doc (Step 7 P0-03/P0-06 + Step 9 fold-in H.1):
+ * a 10-minute, attempt-bound key-read grant. `purpose` separates
+ * exam review from practice review — an exam_review receipt
+ * anchors to a SUBMITTED exam session/attempt, a practice_review
+ * receipt to a SUBMITTED practice attempt; the purpose is bound
+ * at CREATE and the key read checks it against the bundle kind,
+ * so a practice receipt can never unlock an exam key.
+ * `bundleVersion` binds the receipt to the exact bundle
+ * generation its anchor ran. */
 export interface JobReceipt {
   userId: string;
   bundleId: string;
   attemptId: string;
   createdAt: unknown;
+  /** 'practice_review' | 'exam_review' (Step 9 H.1). */
+  purpose: 'practice_review' | 'exam_review';
+  /** The bundle generation the anchor ran. */
+  bundleVersion: number;
 }
 
 /** Minimal attempt anchor (Step 7 only — the receipt anchor).

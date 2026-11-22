@@ -35,6 +35,13 @@ import {
 } from '../jobEngine';
 import type { JobQuestionBundle, JobQuestionKey } from '../jobQuestions';
 import type { JobMockRulesSnapshot } from '../jobMocks';
+import {
+  buildExamLockDoc,
+  buildMockReceiptDoc,
+  examLockId,
+  isExamLockLive,
+  validateExamManifest,
+} from '../jobMock';
 
 /* Fixtures: a 3-question mock bundle + key. Correct letters A/B/A
  * so "all A" is 2 correct + 1 wrong. Topics t1 (2Q) + t2 (1Q). */
@@ -117,6 +124,9 @@ function makeSession(): JobMockSessionDoc {
     mockId: 'full__bcs__1',
     bundleId: 'mock__full__bcs__1',
     examSlug: 'bcs',
+    definitionId: 'full__bcs__1',
+    questionSetId: 'full__bcs__1_v1',
+    bundleVersion: 1,
     questionRefs: bundle.questions.map((q) => ({ bundleId: 'mock__full__bcs__1', n: q.n, questionId: q.questionId })),
     timeMinutes: 5,
     clientNowMillis: 1_000_000,
@@ -204,14 +214,21 @@ describe('mock update builders', () => {
 });
 
 describe('validateMockSession', () => {
-  it('a created mock session validates', () => {
+  it('a created mock session validates (definition + manifest + bundle generation bound)', () => {
     expect(validateMockSession(makeSession())).toEqual([]);
+    const s = makeSession();
+    expect(s.definitionId).toBe('full__bcs__1');
+    expect(s.questionSetId).toBe('full__bcs__1_v1');
+    expect(s.bundleVersion).toBe(1);
   });
 
   it('rejects wrong kind, missing mockId, bad endsAt, bad currentQuestion, answers mismatch', () => {
     const s = makeSession();
     expect(validateMockSession({ ...s, kind: 'practice' }).length).toBeGreaterThan(0);
     expect(validateMockSession({ ...s, mockId: '' }).length).toBeGreaterThan(0);
+    expect(validateMockSession({ ...s, definitionId: '' }).length).toBeGreaterThan(0);
+    expect(validateMockSession({ ...s, questionSetId: '' }).length).toBeGreaterThan(0);
+    expect(validateMockSession({ ...s, bundleVersion: 0 }).length).toBeGreaterThan(0);
     expect(validateMockSession({ ...s, endsAt: 'soon' }).length).toBeGreaterThan(0);
     expect(validateMockSession({ ...s, currentQuestion: 4 }).length).toBeGreaterThan(0);
     expect(validateMockSession({ ...s, answers: { '1': s.answers[1] } }).length).toBeGreaterThan(0);
@@ -329,9 +346,12 @@ describe('jobAttemptResultFromStoredDoc', () => {
       sessionId: 'sess-1', session, result,
       bundleId: 'mock__full__bcs__1', examSlug: 'bcs',
       subjectId: null, topicId: null, kind: 'mock', mockId: 'full__bcs__1',
+      questionSetId: 'full__bcs__1_v1',
       bundleVersion: 1, userId: 'student-1',
     });
     expect(validateAttemptResult(doc)).toEqual([]);
+    expect(doc.submissionIntegrity).toBe('client_calculated');
+    expect(doc.questionSetId).toBe('full__bcs__1_v1');
     const rebuilt = jobAttemptResultFromStoredDoc(doc);
     expect(rebuilt).not.toBeNull();
     expect(rebuilt!.score).toBe(result.score);
@@ -360,10 +380,91 @@ describe('jobAttemptResultFromStoredDoc', () => {
       sessionId: 'sess-1', session: makeSession(), result: full,
       bundleId: 'mock__full__bcs__1', examSlug: 'bcs',
       subjectId: null, topicId: null, kind: 'mock', mockId: 'full__bcs__1',
+      questionSetId: 'full__bcs__1_v1',
       bundleVersion: 1, userId: 'student-1',
     });
     expect(jobAttemptResultFromStoredDoc({ ...doc, score: undefined })).toBeNull();
     expect(jobAttemptResultFromStoredDoc({ ...doc, correctCount: 99 })).toBeNull();
     expect(jobAttemptResultFromStoredDoc({ ...doc, answers: [] })).toBeNull();
+  });
+});
+
+describe('exam lock + receipt + manifest (jobMock.ts pure helpers)', () => {
+  it('examLockId is {uid}_{examSlug}; buildExamLockDoc carries the frozen duration', () => {
+    expect(examLockId('student-1', 'bcs')).toBe('student-1_bcs');
+    const lock = buildExamLockDoc({
+      uid: 'student-1', examSlug: 'bcs', mockId: 'full__bcs__1',
+      definitionId: 'full__bcs__1', activeSessionId: 'sess-1', durationSeconds: 7200,
+    });
+    expect(lock.status).toBe('in_progress');
+    expect(lock.durationSeconds).toBe(7200);
+    expect(lock.activeSessionId).toBe('sess-1');
+    expect(lock.createdAt).toBeDefined();
+  });
+
+  it('isExamLockLive: live while in_progress and fresh, dead when terminal or stale', () => {
+    const base = buildExamLockDoc({
+      uid: 'student-1', examSlug: 'bcs', mockId: 'full__bcs__1',
+      definitionId: 'full__bcs__1', activeSessionId: 'sess-1', durationSeconds: 7200,
+    });
+    const live = { ...base, createdAt: { toMillis: () => 1_000_000 } };
+    expect(isExamLockLive(live, 1_000_000 + 60 * 1000)).toBe(true);
+    expect(isExamLockLive({ ...live, status: 'terminal' }, 1_000_000 + 60 * 1000)).toBe(false);
+    // Stale: createdAt + 7200s + 15min grace = 1_000_000 + 8_100_000.
+    expect(isExamLockLive(live, 1_000_000 + 8_100_000)).toBe(false);
+    expect(isExamLockLive(live, 1_000_000 + 8_099_000)).toBe(true);
+    expect(isExamLockLive(null)).toBe(false);
+  });
+
+  it('buildMockReceiptDoc carries purpose exam_review + the stored bundleVersion', () => {
+    const r = buildMockReceiptDoc('student-1', 'mock__full__bcs__1', 'sess-1', 2);
+    expect(r.purpose).toBe('exam_review');
+    expect(r.bundleVersion).toBe(2);
+    expect(r.attemptId).toBe('sess-1');
+    expect(r.userId).toBe('student-1');
+  });
+
+  it('validateExamManifest: refs size must equal questionCount; version ≥ 1', () => {
+    const good = {
+      examSlug: 'bcs', mockId: 'full__bcs__1', version: 1, questionCount: 2,
+      questionRefs: [
+        { bundleId: 'mock__full__bcs__1', n: 1, questionId: 'q1' },
+        { bundleId: 'mock__full__bcs__1', n: 2, questionId: 'q2' },
+      ],
+      markingSchemeVersion: 'v1', status: 'published',
+    };
+    expect(validateExamManifest(good)).toEqual([]);
+    expect(validateExamManifest({ ...good, questionCount: 3 }).length).toBeGreaterThan(0);
+    expect(validateExamManifest({ ...good, version: 0 }).length).toBeGreaterThan(0);
+    expect(validateExamManifest({ ...good, questionRefs: [{ bundleId: 'x', n: 0, questionId: '' }] }).length).toBeGreaterThan(0);
+    expect(validateExamManifest(null).length).toBeGreaterThan(0);
+  });
+
+  it('buildJobAttemptDoc throws without questionSetId for mock, and with it for practice', () => {
+    const { bundle, key } = makeMockBundle();
+    const result = scoreMockAttempt({
+      bundle, key,
+      answers: [
+        { n: 1, questionId: 'q1', selected: 'A', timeSpentSeconds: 1 },
+        { n: 2, questionId: 'q2', selected: 'B', timeSpentSeconds: 1 },
+        { n: 3, questionId: 'q3', selected: 'A', timeSpentSeconds: 1 },
+      ],
+      rulesSnapshot: BCS_SNAPSHOT, examSlug: 'bcs',
+      startedAtMillis: 1_000_000, submittedAtMillis: 1_003_000,
+    });
+    const session = makeSession();
+    expect(() => buildJobAttemptDoc({
+      sessionId: 'sess-1', session, result,
+      bundleId: 'mock__full__bcs__1', examSlug: 'bcs',
+      subjectId: null, topicId: null, kind: 'mock', mockId: 'full__bcs__1',
+      bundleVersion: 1, userId: 'student-1',
+    })).toThrow(/questionSetId/);
+    expect(() => buildJobAttemptDoc({
+      sessionId: 'sess-1', session, result,
+      bundleId: 'mock__full__bcs__1', examSlug: 'bcs',
+      subjectId: 'bcs__bangla', topicId: 't1', kind: 'practice',
+      questionSetId: 'full__bcs__1_v1',
+      bundleVersion: 1, userId: 'student-1',
+    })).toThrow(/questionSetId/);
   });
 });

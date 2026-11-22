@@ -2,10 +2,14 @@
  * Eduvelto Job Preparation — Full Exam + Model Tests: mock
  * definitions (Step 9).
  *
- * `jobMocks/{docId}` is the mock EVENT (Step 3 §2.10): which exam,
- * which bundle, which pattern snapshot, when it runs, whether it
- * may be retaken. The question SET lives in the bundle
- * (`jobQuestionBundles`); the mock doc only points at it.
+ * `jobExamDefinitions/{docId}` is the mock EVENT (Step 3 §2.10,
+ * ChatGPT fold-in: renamed from `jobMocks` — the definition is
+ * the ADMIN-published exam event): which exam, which bundle,
+ * which pattern snapshot, when it runs, whether it may be
+ * retaken. The question SET lives in the bundle
+ * (`jobQuestionBundles`) and its FROZEN order lives in the
+ * manifest (`jobQuestionSetManifests/{questionSetId}`); the
+ * definition only points at them.
  *
  * MOCK-ID SCHEME (the bare key a session/attempt carries):
  *   daily  → `YYYY-MM-DD` (the Dhaka date)
@@ -65,15 +69,20 @@ export interface JobMockRulesSnapshot {
   scoringConfigVersion: string;
 }
 
-/** A jobMocks doc (Step 3 §2.10). Timestamps are `unknown` —
- * serverTimestamp() sentinels at creation, real timestamps after
- * read-back (jobQuestions.ts style). */
+/** A jobExamDefinitions doc (Step 3 §2.10). Timestamps are
+ * `unknown` — serverTimestamp() sentinels at creation, real
+ * timestamps after read-back (jobQuestions.ts style). */
 export interface JobMockDoc {
   examSlug: string;
   titleBn: string;
   titleEn: string;
   kind: JobMockKind;
   bundleId: string;
+  /** The CURRENT question-set manifest for this mock
+   * (jobQuestionSetManifests doc-ID — ChatGPT §1(f)). Sessions
+   * store the questionSetId they started with; a later repoint
+   * only affects NEW sessions. */
+  questionSetId: string;
   rulesSnapshot: JobMockRulesSnapshot;
   /** Daily: the YYYY-MM-DD date (= the bare mockId). Weekly: the
    * week's start date (Monday, YYYY-MM-DD). Full: null. */
@@ -115,15 +124,17 @@ export function jobMockIdForFull(examSlug: string, n: number): string {
   return `full__${examSlug}__${n}`;
 }
 
-/** jobMocks doc-ID for a bare mockId + kind (Step 3 §2.10). */
+/** jobExamDefinitions doc-ID for a bare mockId + kind (Step 3
+ * §2.10). */
 export function jobMockDocId(mockId: string, kind: JobMockKind): string {
   if (kind === 'full') return mockId;
   return `${kind}__${mockId}`;
 }
 
-/** Bare mockId from a jobMocks doc-ID + kind (inverse of
- * jobMockDocId). Returns null when the doc-ID does not match the
- * kind's shape — the caller shows the honest not-found state. */
+/** Bare mockId from a jobExamDefinitions doc-ID + kind (inverse
+ * of jobMockDocId). Returns null when the doc-ID does not match
+ * the kind's shape — the caller shows the honest not-found
+ * state. */
 export function jobMockIdFromDocId(docId: string, kind: JobMockKind): string | null {
   if (kind === 'full') {
     return docId.startsWith('full__') ? docId : null;
@@ -227,6 +238,7 @@ export function jobThisWeekCycleExam(nowMs: number = Date.now()): string {
 export function buildJobMockRulesSnapshot(
   examSlug: string,
   overrides?: { questionCount?: number; timeMinutes?: number },
+  kind?: JobMockKind,
 ): JobMockRulesSnapshot {
   const cfg = jobRulesConfig(examSlug);
   if (!cfg) {
@@ -242,6 +254,10 @@ export function buildJobMockRulesSnapshot(
   }
   if (!Number.isInteger(timeMinutes) || timeMinutes < 1 || timeMinutes > 600) {
     throw new Error(`buildJobMockRulesSnapshot: timeMinutes ${String(timeMinutes)} must be 1–600`);
+  }
+  // Daily mocks are short by design (rules: 20–30Q / 20–30min).
+  if (kind === 'daily' && (questionCount < 20 || questionCount > 30 || timeMinutes < 20 || timeMinutes > 30)) {
+    throw new Error('buildJobMockRulesSnapshot: daily mocks must be 20–30 questions in 20–30 minutes');
   }
   return {
     questionCount,
@@ -274,6 +290,7 @@ const JOB_MOCK_KEYS = [
   'titleEn',
   'kind',
   'bundleId',
+  'questionSetId',
   'rulesSnapshot',
   'scheduleDate',
   'examSlugCycle',
@@ -288,13 +305,14 @@ const JOB_MOCK_KEYS = [
 
 const JOB_MOCK_CYCLE_EXAMS = ['bcs', 'bank', 'primary-teacher', 'ntrca'] as const;
 
-/** Validate a jobMocks doc. Returns problem strings; empty =
- * valid. Mirrors `validJobMock()` in firestore.rules — including
- * the doc-ID patterns (pass the doc ID as `mockId`… the second
- * argument is the DOC ID, not the bare key). */
+/** Validate a jobExamDefinitions doc. Returns problem strings;
+ * empty = valid. Mirrors `validJobExamDefinition()` in
+ * firestore.rules — including the doc-ID patterns (pass the doc
+ * ID as `mockId`… the second argument is the DOC ID, not the
+ * bare key). */
 export function validateJobMock(doc: unknown, docId: string): string[] {
   const problems: string[] = [];
-  const label = 'jobMocks';
+  const label = 'jobExamDefinitions';
   if (typeof doc !== 'object' || doc === null || Array.isArray(doc)) {
     return [`${label}: doc must be an object`];
   }
@@ -318,6 +336,9 @@ export function validateJobMock(doc: unknown, docId: string): string[] {
   if (!isNonEmptyString(d.bundleId, 200)) {
     problems.push(`${label}: bundleId must be a non-empty string ≤200 chars`);
   }
+  if (!isNonEmptyString(d.questionSetId, 200)) {
+    problems.push(`${label}: questionSetId must be a non-empty string ≤200 chars (the manifest version)`);
+  }
   // Rules snapshot.
   const s = d.rulesSnapshot as Record<string, unknown> | null;
   if (typeof s !== 'object' || s === null || Array.isArray(s)) {
@@ -328,6 +349,14 @@ export function validateJobMock(doc: unknown, docId: string): string[] {
     }
     if (!Number.isInteger(s.timeMinutes) || (s.timeMinutes as number) < 1 || (s.timeMinutes as number) > 600) {
       problems.push(`${label}: rulesSnapshot.timeMinutes must be an integer 1–600`);
+    }
+    // Daily mocks are short by design (ChatGPT §1(d) / rules):
+    // 20–30 questions in 20–30 minutes (editorial standard
+    // 25Q/25min).
+    if (d.kind === 'daily'
+      && (typeof s.questionCount !== 'number' || s.questionCount < 20 || s.questionCount > 30
+        || typeof s.timeMinutes !== 'number' || s.timeMinutes < 20 || s.timeMinutes > 30)) {
+      problems.push(`${label}: daily rulesSnapshot must be 20–30 questions in 20–30 minutes`);
     }
     if (s.marksPerQuestion !== 1) {
       problems.push(`${label}: rulesSnapshot.marksPerQuestion must be 1`);

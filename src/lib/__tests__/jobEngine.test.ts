@@ -558,7 +558,7 @@ describe('attempt doc', () => {
     });
   }
 
-  it('d1: exact field set (Step 3 §2.11 + userId)', () => {
+  it('d1: exact field set (Step 3 §2.11 + userId + H.3 submissionIntegrity)', () => {
     expect(Object.keys(makeAttemptDoc()).sort()).toEqual(
       [
         'accuracy', 'anomalyFlags', 'answerHashes', 'answers', 'audit',
@@ -567,10 +567,12 @@ describe('attempt doc', () => {
         'negativeMarkingUsed', 'percentage',
         'resultLabel', 'resultType', 'score', 'serverVerifiedScore',
         'sessionId', 'startedAt', 'status', 'subjectId', 'submittedAt',
+        'submissionIntegrity',
         'timeSpentSeconds', 'topicId', 'totalMarks', 'trustLevel',
         'unansweredCount', 'userId', 'wrongCount', 'kind',
       ].sort(),
     );
+    expect(makeAttemptDoc().submissionIntegrity).toBe('client_calculated');
   });
 
   it('d2: forced values — submitted / auto / practice / unverified', () => {

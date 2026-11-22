@@ -357,6 +357,17 @@ export interface JobMockSessionDoc {
   mockId: string;
   bundleId: string;
   examSlug: string;
+  /** The exam definition this session runs
+   * (jobExamDefinitions doc-ID — Step 9 fold-in, H.2). */
+  definitionId: string;
+  /** The frozen question-set manifest this session runs
+   * (jobQuestionSetManifests doc-ID — ChatGPT §1(f)). Resume
+   * reads THIS manifest, never the definition's current one. */
+  questionSetId: string;
+  /** The bundle generation this session runs (must equal the
+   * bundle's bundleVersion at create; the attempt is bound to
+   * it — a republished bundle cannot reinterpret this session). */
+  bundleVersion: number;
   status: 'in-progress' | 'submitted' | 'abandoned';
   startedAt: unknown;
   endsAt: unknown;
@@ -372,15 +383,26 @@ export interface JobMockSessionDoc {
 }
 
 export interface CreateMockSessionInput {
-  /** Doc ID — the caller uses this as the jobSessions doc ID (and
-   * later as the jobAttempts doc ID); it is NOT a field inside the
-   * doc (Step 3 §2.12 has no sessionId field). */
+  /** Doc ID — the caller uses this as the jobExamSessions doc ID
+   * (and later as the jobExamAttempts doc ID); it is NOT a field
+   * inside the doc (Step 3 §2.12 has no sessionId field). */
   sessionId: string;
   /** Bare mock key (daily: YYYY-MM-DD; weekly: YYYY-Www; full:
    * full__{examSlug}__{n}) — must equal the bundle's mockId. */
   mockId: string;
   bundleId: string;
   examSlug: string;
+  /** The exam definition this session runs (jobExamDefinitions
+   * doc-ID — the mock doc's own ID). */
+  definitionId: string;
+  /** The frozen manifest this session runs
+   * (jobQuestionSetManifests doc-ID — the mock doc's
+   * questionSetId). The session's questionRefs MUST equal the
+   * manifest's refs (whole-equality in the rules). */
+  questionSetId: string;
+  /** The bundle generation this session runs (the bundle's
+   * bundleVersion at create — the attempt is bound to it). */
+  bundleVersion: number;
   /** Bundle order (NOT mode order — see the type comment). */
   questionRefs: Array<{ bundleId: string; n: number; questionId: string }>;
   /** Mock duration in minutes (from the mock's rulesSnapshot —
@@ -407,6 +429,9 @@ export function createMockSession(input: CreateMockSessionInput): JobMockSession
     mockId: input.mockId,
     bundleId: input.bundleId,
     examSlug: input.examSlug,
+    definitionId: input.definitionId,
+    questionSetId: input.questionSetId,
+    bundleVersion: input.bundleVersion,
     status: 'in-progress',
     startedAt: serverTimestamp(),
     endsAt: null,
@@ -1021,6 +1046,15 @@ export function scoreMockAttempt(input: ScoreMockAttemptInput): JobAttemptResult
  *       `subjectId`/`topicId` null (a mock covers the whole exam).
  *       The attempt is scored from the mock's rulesSnapshot
  *       pattern, never the live config.
+ *   (g) Step 9 fold-in (ChatGPT H.3): `submissionIntegrity` is
+ *       ALWAYS `'client_calculated'` (both kinds) — immutable does
+ *       not mean truthful; the attempt says so explicitly. The
+ *       practice validator requires it too (added by the same
+ *       fold-in) — a doc without it is denied by the rules.
+ *   (h) Step 9 (mock, H.2): a mock attempt carries
+ *       `questionSetId` (the manifest version it ran); a practice
+ *       attempt carries NO `questionSetId` field at all (the
+ *       practice validator's hasOnly list excludes it).
  *
  * RULES NOTE: the Step 8 rules draft (rules agent's uncommitted
  * working copy, checked 22 Nov) replaces the Step 7 minimal
@@ -1042,6 +1076,11 @@ export function buildJobAttemptDoc(input: {
   /** Bare mock key for kind 'mock' (daily: YYYY-MM-DD; weekly:
    * YYYY-Www; full: full__{examSlug}__{n}); null for practice. */
   mockId?: string | null;
+  /** The question-set manifest version the mock ran
+   * (jobQuestionSetManifests doc-ID) — REQUIRED for kind 'mock',
+   * FORBIDDEN for kind 'practice' (the practice validator's
+   * hasOnly list has no such field). */
+  questionSetId?: string | null;
   /** The bundle's version (Step 8 fold-in, finding 5): the attempt
    * is bound to the exact bundle generation it was scored against
    * (rules: attempt.bundleVersion == bundle.bundleVersion). */
@@ -1051,7 +1090,13 @@ export function buildJobAttemptDoc(input: {
    * doc without a user. Never omit it in production code. */
   userId?: string;
 }): Record<string, unknown> {
-  return {
+  if (input.kind === 'mock' && !input.questionSetId) {
+    throw new Error('buildJobAttemptDoc: a mock attempt needs questionSetId (the manifest version it ran)');
+  }
+  if (input.kind === 'practice' && input.questionSetId) {
+    throw new Error('buildJobAttemptDoc: a practice attempt must not carry questionSetId');
+  }
+  const doc: Record<string, unknown> = {
     kind: input.kind,
     mockId: input.mockId ?? null,
     bundleId: input.bundleId,
@@ -1089,7 +1134,16 @@ export function buildJobAttemptDoc(input: {
     }),
     sessionId: input.sessionId,
     userId: input.userId ?? null,
+    // Step 9 fold-in (H.3): the score is client-calculated and
+    // the attempt says so explicitly — both kinds.
+    submissionIntegrity: 'client_calculated',
   };
+  // Step 9 (H.2): mock attempts carry the manifest version;
+  // practice attempts carry no such field at all.
+  if (input.kind === 'mock') {
+    doc.questionSetId = input.questionSetId;
+  }
+  return doc;
 }
 
 /** Rebuild a JobAttemptResult from a STORED attempt doc (the
@@ -1427,6 +1481,9 @@ const JOB_MOCK_SESSION_KEYS = [
   'mockId',
   'bundleId',
   'examSlug',
+  'definitionId',
+  'questionSetId',
+  'bundleVersion',
   'status',
   'startedAt',
   'endsAt',
@@ -1451,7 +1508,7 @@ const JOB_MOCK_SESSION_KEYS = [
  * yet) and runs on clientEndsAtMillis. */
 export function validateMockSession(doc: unknown): string[] {
   const problems: string[] = [];
-  const label = 'jobSessions(mock)';
+  const label = 'jobExamSessions(mock)';
   if (typeof doc !== 'object' || doc === null || Array.isArray(doc)) {
     return [`${label}: doc must be an object`];
   }
@@ -1473,6 +1530,15 @@ export function validateMockSession(doc: unknown): string[] {
   }
   if (!isNonEmptyString(d.examSlug, 100)) {
     problems.push(`${label}: examSlug must be a non-empty string ≤100 chars`);
+  }
+  if (!isNonEmptyString(d.definitionId, 200)) {
+    problems.push(`${label}: definitionId must be a non-empty string ≤200 chars`);
+  }
+  if (!isNonEmptyString(d.questionSetId, 200)) {
+    problems.push(`${label}: questionSetId must be a non-empty string ≤200 chars`);
+  }
+  if (!Number.isInteger(d.bundleVersion) || (d.bundleVersion as number) < 1) {
+    problems.push(`${label}: bundleVersion must be an integer ≥1`);
   }
   if (!['in-progress', 'submitted', 'abandoned'].includes(String(d.status))) {
     problems.push(`${label}: status must be in-progress/submitted/abandoned`);
@@ -1584,6 +1650,11 @@ const JOB_ATTEMPT_RESULT_KEYS = [
   'anomalyFlags',
   'sessionId',
   'userId',
+  // Step 9 fold-in (H.3): every attempt declares its integrity
+  // ('client_calculated'); mock attempts also carry the manifest
+  // version they ran (questionSetId — forbidden on practice).
+  'submissionIntegrity',
+  'questionSetId',
 ] as const;
 
 /** Validate a jobAttempts doc (the shape `buildJobAttemptDoc`
@@ -1613,6 +1684,19 @@ export function validateAttemptResult(result: unknown): string[] {
   }
   if (d.kind === 'mock' && !isNonEmptyString(d.mockId, 200)) {
     problems.push(`${label}: mockId must be a non-empty string ≤200 chars for mock`);
+  }
+  // Step 9 fold-in (H.2/H.3): mock attempts carry the manifest
+  // version (questionSetId, required); practice attempts carry
+  // none. Every attempt declares submissionIntegrity ==
+  // 'client_calculated' (immutable does not mean truthful).
+  if (d.kind === 'mock' && !isNonEmptyString(d.questionSetId, 200)) {
+    problems.push(`${label}: questionSetId must be a non-empty string ≤200 chars for mock`);
+  }
+  if (d.kind === 'practice' && d.questionSetId !== undefined) {
+    problems.push(`${label}: questionSetId must be absent for practice`);
+  }
+  if (d.submissionIntegrity !== 'client_calculated') {
+    problems.push(`${label}: submissionIntegrity must be 'client_calculated'`);
   }
   if (!isNonEmptyString(d.bundleId, 200)) {
     problems.push(`${label}: bundleId must be a non-empty string ≤200 chars`);

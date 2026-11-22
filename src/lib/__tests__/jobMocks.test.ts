@@ -37,6 +37,7 @@ function validMockDoc(overrides: Record<string, unknown> = {}): { doc: JobMockDo
       titleEn: 'BCS Full Mock 1',
       kind: 'full',
       bundleId: 'mock__full__bcs__1',
+      questionSetId: 'full__bcs__1_v1',
       rulesSnapshot: {
         questionCount: 200,
         timeMinutes: 120,
@@ -185,6 +186,13 @@ describe('rules-snapshot builder', () => {
     expect(() => buildJobMockRulesSnapshot('bcs', { questionCount: 201 })).toThrow();
     expect(() => buildJobMockRulesSnapshot('bcs', { timeMinutes: 0 })).toThrow();
   });
+
+  it('daily kind enforces 20–30Q / 20–30min (editorial standard 25/25)', () => {
+    expect(buildJobMockRulesSnapshot('bcs', { questionCount: 25, timeMinutes: 25 }, 'daily').questionCount).toBe(25);
+    expect(() => buildJobMockRulesSnapshot('bcs', { questionCount: 10, timeMinutes: 25 }, 'daily')).toThrow();
+    expect(() => buildJobMockRulesSnapshot('bcs', { questionCount: 25, timeMinutes: 10 }, 'daily')).toThrow();
+    expect(() => buildJobMockRulesSnapshot('bcs', { questionCount: 31, timeMinutes: 25 }, 'daily')).toThrow();
+  });
 });
 
 describe('validateJobMock', () => {
@@ -207,6 +215,20 @@ describe('validateJobMock', () => {
     expect(validateJobMock(doc, 'daily__2026-11-22')).toEqual([]);
   });
 
+  it('a daily mock with a 10-question snapshot is rejected (daily is 20–30Q)', () => {
+    const { doc } = validMockDoc({
+      kind: 'daily',
+      bundleId: 'daily__2026-11-22',
+      scheduleDate: '2026-11-22',
+      rulesSnapshot: {
+        questionCount: 10, timeMinutes: 25, marksPerQuestion: 1,
+        negativeMarking: 0.5, negativeMarkingVerified: true,
+        passPercent: null, scoringConfigVersion: 'v1',
+      },
+    });
+    expect(validateJobMock(doc, 'daily__2026-11-22').length).toBeGreaterThan(0);
+  });
+
   it('a valid weekly mock passes (cycle exam required)', () => {
     const { doc } = validMockDoc({
       kind: 'weekly',
@@ -227,6 +249,8 @@ describe('validateJobMock', () => {
     const { doc } = validMockDoc();
     expect(validateJobMock(doc, 'full__bcs__x').length).toBeGreaterThan(0);
     expect(validateJobMock(doc, 'full__bank__1').length).toBeGreaterThan(0);
+    expect(validateJobMock({ ...doc, questionSetId: '' }, 'full__bcs__1').length).toBeGreaterThan(0);
+    expect(validateJobMock({ ...doc, questionSetId: undefined }, 'full__bcs__1').length).toBeGreaterThan(0);
     const daily = validMockDoc({ kind: 'daily', bundleId: 'daily__2026-11-22', scheduleDate: null }).doc;
     expect(validateJobMock(daily, 'daily__2026-11-22').length).toBeGreaterThan(0);
     const weekly = validMockDoc({
