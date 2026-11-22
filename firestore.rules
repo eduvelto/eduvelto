@@ -98,6 +98,27 @@ service cloud.firestore {
               'bpsc-non-cadre', 'cag', 'bfsa', 'others', 'ministries',
               'defence', 'autonomous', 'private-ngo', 'it-professional'];
     }
+    // The 23 CANONICAL subject doc IDs (Step 6 fold-in, ChatGPT P1-02):
+    // subjects are derived from the verified rulesConfig, never
+    // invented — so the rules allowlist the exact 23 IDs (same list as
+    // JOB_SUBJECTS in src/lib/jobContent.ts; pinned by the jobContent
+    // unit test that reads this function). A teacher or moderator can
+    // never create a subject; only Admin/Owner can, and only one of
+    // these 23. The seed (Admin SDK) bypasses rules.
+    function canonicalJobSubjectIds() {
+      return ['bcs__bangla', 'bcs__english', 'bcs__bangladesh-affairs',
+              'bcs__international-affairs', 'bcs__geography',
+              'bcs__general-science', 'bcs__computer-ict',
+              'bcs__mathematical-reasoning', 'bcs__mental-ability',
+              'bcs__ethics',
+              'bank__bangla', 'bank__english', 'bank__math',
+              'bank__general-knowledge', 'bank__computer',
+              'primary-teacher__bangla', 'primary-teacher__english',
+              'primary-teacher__math-science',
+              'primary-teacher__general-knowledge',
+              'ntrca__bangla', 'ntrca__english', 'ntrca__math',
+              'ntrca__general-knowledge'];
+    }
     function isJobExamReviewState(s) {
       return s in ['Not Started', 'In Progress', 'Under Review', 'Published'];
     }
@@ -256,6 +277,16 @@ service cloud.firestore {
         && (d.get('authorId', null) == null || d.get('authorId', null) == uid())
         && d.get('verifiedBy', null) == null
         && d.get('verifiedAt', null) == null
+        // Step 6 fold-in, ChatGPT P1-04: createdBy is provenance — it
+        // may be absent or the caller, never someone else (a teacher
+        // must not forge createdBy 'seed' or another UID). The seed
+        // itself is applied via the Admin SDK, which bypasses rules.
+        && (d.get('createdBy', null) == null || d.get('createdBy', null) == uid())
+        // Step 6 fold-in, ChatGPT P1-05: publication metadata may
+        // never be baked into a new draft — publishedAt / publishedBy
+        // do not exist in the Step 6 schema at all.
+        && !('publishedAt' in d)
+        && !('publishedBy' in d)
         && (d.get('createdAt', null) == null || d.get('createdAt', null) is timestamp)
         && (d.get('updatedAt', null) == null || d.get('updatedAt', null) is timestamp);
     }
@@ -278,6 +309,22 @@ service cloud.firestore {
                 && newDoc.get('verifiedBy', null) != oldDoc.get('authorId', '')
                 && newDoc.get('verifiedAt', null) is timestamp));
     }
+    // PUBLISH-TRANSITION GUARD (Step 6 fold-in, ChatGPT P1-03): the
+    // publication fields (status / reviewStatus / verifiedBy /
+    // verifiedAt) may change only on a draft, or when the doc LEAVES
+    // published (unpublish / return). On a doc that STAYS published
+    // they are frozen: a verifier cannot be silently swapped on a
+    // live doc — unpublish, re-verify, re-publish instead. Content
+    // fixes on a published doc (Admin typo fix, Step 6 decision 10)
+    // are unaffected: they change content fields only.
+    function jobContentPublishTransition(oldDoc, newDoc) {
+      return oldDoc.get('status', '') != 'published'
+        || newDoc.get('status', '') != 'published'
+        || (newDoc.get('status', '') == oldDoc.get('status', '')
+            && newDoc.get('reviewStatus', '') == oldDoc.get('reviewStatus', '')
+            && newDoc.get('verifiedBy', null) == oldDoc.get('verifiedBy', null)
+            && newDoc.get('verifiedAt', null) == oldDoc.get('verifiedAt', null));
+    }
     // Slug shapes (Step 3 §2.3–§2.5 doc IDs). Parent references must
     // look like the doc IDs they point at, so a chapter cannot claim a
     // parent subject that could never exist. Parent EXISTENCE is not
@@ -288,6 +335,16 @@ service cloud.firestore {
     }
     function isJobChapterId(s) {
       return s is string && s.matches('^[a-z0-9-]+__[a-z0-9-]+__[a-z0-9-]+$');
+    }
+    // Topic doc IDs extend their chapter (Step 6 fold-in — resolves a
+    // Step 6 core inconsistency: the Step 3 draft §2.5 and the Step 6
+    // report wrote `{exam}__{subject}__{topic}`, but the implemented
+    // create rule + tests pin the 4-segment form
+    // `{exam}__{subject}__{chapter}__{topic}`. The 4-segment form
+    // stands: it follows the ID-extends-parent pattern and lets two
+    // chapters hold same-slug topics.
+    function isJobTopicId(s) {
+      return s is string && s.matches('^[a-z0-9-]+__[a-z0-9-]+__[a-z0-9-]+__[a-z0-9-]+$');
     }
     // Full new-doc validation, shared by create and both update rules
     // (the update rules pin the unchangeable fields with affectedKeys,
@@ -302,6 +359,12 @@ service cloud.firestore {
         && (d.get('marks', null) == null
             || (d.get('marks', null) is int && d.get('marks', null) >= 0))
         && isOptStr(d.get('syllabusSource', null), 500)
+        // Step 6 fold-in: the seed carries `slug` and `applicableCycle`
+        // — validate them instead of ignoring them (a slug that is not
+        // kebab, or an applicableCycle that is not a string, is denied).
+        && (d.get('slug', null) == null
+            || (d.get('slug', null) is string && d.get('slug', null).matches('^[a-z0-9-]+$')))
+        && (d.get('applicableCycle', null) == null || d.get('applicableCycle', null) is string)
         && d.get('status', null) in ['draft', 'published']
         && isJobContentReviewState(d.get('reviewStatus', null))
         && jobContentStatesConsistent(d);
@@ -354,10 +417,14 @@ service cloud.firestore {
         // A 'lesson' lives under a topic: all three parent refs are
         // required. Viva/career/CV guides (Step 16) sit under the exam
         // instead, so their refs stay string-or-null (checked below).
+        // Step 6 fold-in, ChatGPT P0-04: for a 'lesson' the refs are
+        // not free strings — they must be well-formed parent IDs
+        // (subject 2 segments, chapter 3, topic 4); the prefix chain
+        // itself is pinned in the create rule.
         && (d.get('lessonType', null) != 'lesson'
-            || (isStr(d.get('subjectId', null), 200)
-                && isStr(d.get('chapterId', null), 200)
-                && isStr(d.get('topicId', null), 200)))
+            || (isJobSubjectId(d.get('subjectId', null))
+                && isJobChapterId(d.get('chapterId', null))
+                && isJobTopicId(d.get('topicId', null))))
         && (d.get('subjectId', null) == null || d.get('subjectId', null) is string)
         && (d.get('chapterId', null) == null || d.get('chapterId', null) is string)
         && (d.get('topicId', null) == null || d.get('topicId', null) is string)
@@ -1476,6 +1543,12 @@ service cloud.firestore {
              'guardian-link-approved', 'guardian-link-rejected', 'guardian-link-revoked',
              'feature-enabled', 'feature-disabled',
              'backup-exported',
+             // Step 6 fold-in, ChatGPT P2-01: content publish / verify
+             // audit actions — the Step 15 admin UI (and Step 7 flows)
+             // must append one of these on every publish / unpublish /
+             // verify / return of a Job content doc.
+             'job-content-published', 'job-content-unpublished',
+             'job-content-verified', 'job-content-returned',
              'user-profile-viewed', 'user-messages-viewed',
              'support-message-sent', 'message-reported', 'message-blocked']
         && request.resource.data.keys().hasOnly(
@@ -1909,10 +1982,18 @@ service cloud.firestore {
       allow read: if signedIn() && resource.data.get('status', '') == 'published'
         || (signedIn() && resource.data.get('authorId', '') == uid())
         || isModerator();
-      allow create: if isTeacher()
+      // Step 6 fold-in, ChatGPT P1-02: subjects are canonical metadata
+      // derived from the verified rulesConfig — teachers and moderators
+      // NEVER create subjects (the 23 come from the seed, Admin SDK).
+      // Only Admin/Owner, and only one of the 23 canonical IDs. A
+      // `slug` field, when present, must agree with the doc ID.
+      allow create: if isAdmin()
         && jobContentCreateCommon(request.resource.data)
         && validJobSubject(request.resource.data)
-        && subjectId.matches('^' + request.resource.data.get('examSlug', '') + '__[a-z0-9-]+$');
+        && subjectId in canonicalJobSubjectIds()
+        && subjectId.matches('^' + request.resource.data.get('examSlug', '') + '__[a-z0-9-]+$')
+        && (request.resource.data.get('slug', null) == null
+            || subjectId == request.resource.data.get('examSlug', '') + '__' + request.resource.data.get('slug', ''));
       allow update: if isTeacher()
         && resource.data.get('authorId', '') == uid()
         && isDraftStatus(resource.data.get('reviewStatus', ''))
@@ -1934,6 +2015,7 @@ service cloud.firestore {
             || request.resource.data.diff(resource.data).affectedKeys()
                  .hasOnly(['status', 'reviewStatus', 'verifiedBy', 'verifiedAt', 'updatedAt']))
         && jobContentSecondEye(resource.data, request.resource.data)
+        && jobContentPublishTransition(resource.data, request.resource.data)
         && validJobSubject(request.resource.data);
       // Admin: same fields as the Moderator rule, but without the
       // published-content guard — an Admin may fix a typo in a
@@ -1943,6 +2025,7 @@ service cloud.firestore {
              .hasOnly(['nameBn', 'nameEn', 'order', 'marks', 'syllabusSource',
                        'status', 'reviewStatus', 'verifiedBy', 'verifiedAt', 'updatedAt'])
         && jobContentSecondEye(resource.data, request.resource.data)
+        && jobContentPublishTransition(resource.data, request.resource.data)
         && validJobSubject(request.resource.data);
       allow delete: if isAdmin();
     }
@@ -1953,7 +2036,11 @@ service cloud.firestore {
       allow create: if isTeacher()
         && jobContentCreateCommon(request.resource.data)
         && validJobChapter(request.resource.data)
-        && chapterId.matches('^' + request.resource.data.get('subjectId', '') + '__[a-z0-9-]+$');
+        && chapterId.matches('^' + request.resource.data.get('subjectId', '') + '__[a-z0-9-]+$')
+        // Step 6 fold-in, ChatGPT P0-04: the parent subject must belong
+        // to the same exam (no cross-exam reference) and must EXIST.
+        && request.resource.data.get('subjectId', '').matches('^' + request.resource.data.get('examSlug', '') + '__[a-z0-9-]+$')
+        && exists(/databases/$(database)/documents/jobSubjects/$(request.resource.data.get('subjectId', '')));
       allow update: if isTeacher()
         && resource.data.get('authorId', '') == uid()
         && isDraftStatus(resource.data.get('reviewStatus', ''))
@@ -1972,12 +2059,14 @@ service cloud.firestore {
             || request.resource.data.diff(resource.data).affectedKeys()
                  .hasOnly(['status', 'reviewStatus', 'verifiedBy', 'verifiedAt', 'updatedAt']))
         && jobContentSecondEye(resource.data, request.resource.data)
+        && jobContentPublishTransition(resource.data, request.resource.data)
         && validJobChapter(request.resource.data);
       allow update: if isAdmin()
         && request.resource.data.diff(resource.data).affectedKeys()
              .hasOnly(['nameBn', 'nameEn', 'descriptionBn', 'descriptionEn',
                        'order', 'status', 'reviewStatus', 'verifiedBy', 'verifiedAt', 'updatedAt'])
         && jobContentSecondEye(resource.data, request.resource.data)
+        && jobContentPublishTransition(resource.data, request.resource.data)
         && validJobChapter(request.resource.data);
       allow delete: if isAdmin();
     }
@@ -1988,7 +2077,13 @@ service cloud.firestore {
       allow create: if isTeacher()
         && jobContentCreateCommon(request.resource.data)
         && validJobTopic(request.resource.data)
-        && topicId.matches('^' + request.resource.data.get('chapterId', '') + '__[a-z0-9-]+$');
+        && topicId.matches('^' + request.resource.data.get('chapterId', '') + '__[a-z0-9-]+$')
+        // Step 6 fold-in, ChatGPT P0-04: the parent chapter must belong
+        // to the same subject (no cross-subject reference), the subject
+        // to the same exam, and the chapter must EXIST.
+        && request.resource.data.get('subjectId', '').matches('^' + request.resource.data.get('examSlug', '') + '__[a-z0-9-]+$')
+        && request.resource.data.get('chapterId', '').matches('^' + request.resource.data.get('subjectId', '') + '__[a-z0-9-]+$')
+        && exists(/databases/$(database)/documents/jobChapters/$(request.resource.data.get('chapterId', '')));
       allow update: if isTeacher()
         && resource.data.get('authorId', '') == uid()
         && isDraftStatus(resource.data.get('reviewStatus', ''))
@@ -2008,6 +2103,7 @@ service cloud.firestore {
             || request.resource.data.diff(resource.data).affectedKeys()
                  .hasOnly(['status', 'reviewStatus', 'verifiedBy', 'verifiedAt', 'updatedAt']))
         && jobContentSecondEye(resource.data, request.resource.data)
+        && jobContentPublishTransition(resource.data, request.resource.data)
         && validJobTopic(request.resource.data);
       allow update: if isAdmin()
         && request.resource.data.diff(resource.data).affectedKeys()
@@ -2015,6 +2111,7 @@ service cloud.firestore {
                        'commonStatus', 'questionTarget', 'publishedQuestionCount',
                        'status', 'reviewStatus', 'verifiedBy', 'verifiedAt', 'updatedAt'])
         && jobContentSecondEye(resource.data, request.resource.data)
+        && jobContentPublishTransition(resource.data, request.resource.data)
         && validJobTopic(request.resource.data);
       allow delete: if isAdmin();
     }
@@ -2025,7 +2122,15 @@ service cloud.firestore {
       allow create: if isTeacher()
         && jobContentCreateCommon(request.resource.data)
         && request.resource.data.get('lessonType', '') == 'lesson'
-        && validJobLesson(request.resource.data);
+        && validJobLesson(request.resource.data)
+        // Step 6 fold-in, ChatGPT P0-04: the parent chain must be
+        // consistent (subject under this exam, chapter under this
+        // subject, topic under this chapter) and the topic must EXIST.
+        // The lesson doc ID stays auto-generated by design.
+        && request.resource.data.get('subjectId', '').matches('^' + request.resource.data.get('examSlug', '') + '__[a-z0-9-]+$')
+        && request.resource.data.get('chapterId', '').matches('^' + request.resource.data.get('subjectId', '') + '__[a-z0-9-]+$')
+        && request.resource.data.get('topicId', '').matches('^' + request.resource.data.get('chapterId', '') + '__[a-z0-9-]+$')
+        && exists(/databases/$(database)/documents/jobTopics/$(request.resource.data.get('topicId', '')));
       allow update: if isTeacher()
         && resource.data.get('authorId', '') == uid()
         && isDraftStatus(resource.data.get('reviewStatus', ''))
@@ -2044,12 +2149,14 @@ service cloud.firestore {
             || request.resource.data.diff(resource.data).affectedKeys()
                  .hasOnly(['status', 'reviewStatus', 'verifiedBy', 'verifiedAt', 'updatedAt']))
         && jobContentSecondEye(resource.data, request.resource.data)
+        && jobContentPublishTransition(resource.data, request.resource.data)
         && validJobLesson(request.resource.data);
       allow update: if isAdmin()
         && request.resource.data.diff(resource.data).affectedKeys()
              .hasOnly(['titleBn', 'titleEn', 'body', 'bodyEn', 'order',
                        'status', 'reviewStatus', 'verifiedBy', 'verifiedAt', 'updatedAt'])
         && jobContentSecondEye(resource.data, request.resource.data)
+        && jobContentPublishTransition(resource.data, request.resource.data)
         && validJobLesson(request.resource.data);
       allow delete: if isAdmin();
     }

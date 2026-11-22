@@ -9,11 +9,22 @@
  * it):
  *
  *  READ — status 'published' OR the author OR a Moderator. Students
- *    read Published only; anonymous reads Published only.
- *  CREATE — isTeacher() only; draft-only (status 'draft' +
- *    reviewStatus 'Not Started'); authorId pinned to the caller or
- *    absent; no verifier yet; doc ID must extend the parent slug
- *    (subjects `{examSlug}__{subjectSlug}` etc.; lessons auto-ID).
+ *    read Published only; ANONYMOUS READS NOTHING (auth-gating,
+ *    owner instruction 22 Nov ~10:33).
+ *  CREATE — isTeacher() only (SUBJECTS: Admin/Owner only, Step 6
+ *    fold-in P1-02 — subjects are canonical, only the 23 IDs);
+ *    draft-only (status 'draft' + reviewStatus 'Not Started');
+ *    authorId pinned to the caller or absent; createdBy pinned to
+ *    the caller or absent (P1-04); no verifier yet; no publication
+ *    metadata baked in (P1-05); doc ID must extend the parent slug
+ *    (subjects `{examSlug}__{subjectSlug}` etc.; lessons auto-ID);
+ *    parent refs must be consistent AND the parent must EXIST
+ *    (P0-04); topic IDs are 4-segment
+ *    `{exam}__{subject}__{chapter}__{topic}` (fold-in correction of
+ *    the Step 6 report's 3-segment line).
+ *  UPDATE, Moderator/Admin — under the SECOND-EYE rule AND the
+ *    publish-transition guard (P1-03): publication fields are frozen
+ *    on a doc that stays published.
  *  UPDATE, author — own draft only, reviewStatus moves only within
  *    draft states; never publish, never touch a Published doc.
  *  UPDATE, Moderator/Admin — content + status/reviewStatus
@@ -49,6 +60,7 @@ import {
   updateDoc,
   deleteDoc,
   collection,
+  collectionGroup,
   query,
   where,
   getDocs,
@@ -126,7 +138,7 @@ const VALID_LESSON = {
   examSlug: 'bcs',
   subjectId: 'bcs__bangla',
   chapterId: 'bcs__bangla__grammar',
-  topicId: 'bcs__bangla__sandhi',
+  topicId: 'bcs__bangla__grammar__sandhi',
   lessonType: 'lesson',
   titleBn: 'সন্ধির নিয়ম',
   titleEn: 'Rules of Sandhi',
@@ -215,7 +227,7 @@ async function seed() {
     }
     // ---- jobTopics ----
     const topics: Array<[string, Record<string, unknown>]> = [
-      ['bcs__bangla__sandhi', {
+      ['bcs__bangla__grammar__sandhi', {
         ...VALID_TOPIC,
         reviewStatus: 'Published',
         status: 'published',
@@ -226,9 +238,9 @@ async function seed() {
         verifiedBy: 'moderator-1',
         verifiedAt: VERIFY_TS,
       }],
-      ['bcs__bangla__samash', { ...VALID_TOPIC, nameBn: 'সমাস', nameEn: 'Samash', order: 2, reviewStatus: 'In Progress' }],
-      ['bcs__bangla__karok', { ...VALID_TOPIC, nameBn: 'কারক', nameEn: 'Karok', order: 3, chapterId: 'bcs__bangla__grammar', authorId: 'moderator-1' }],
-      ['bcs__bangla__delete-me', { ...VALID_TOPIC, nameBn: 'মুছে ফেলার টপিক', nameEn: 'Delete Me Topic', order: 4 }],
+      ['bcs__bangla__grammar__samash', { ...VALID_TOPIC, nameBn: 'সমাস', nameEn: 'Samash', order: 2, reviewStatus: 'In Progress' }],
+      ['bcs__bangla__grammar__karok', { ...VALID_TOPIC, nameBn: 'কারক', nameEn: 'Karok', order: 3, chapterId: 'bcs__bangla__grammar', authorId: 'moderator-1' }],
+      ['bcs__bangla__grammar__delete-me', { ...VALID_TOPIC, nameBn: 'মুছে ফেলার টপিক', nameEn: 'Delete Me Topic', order: 4 }],
     ];
     for (const [id, data] of topics) {
       await setDoc(doc(db, 'jobTopics', id), data);
@@ -283,46 +295,53 @@ describe('Create by role', () => {
       setDoc(doc(asSignedOut(), 'jobSubjects', 'bcs__c2-subject'), VALID_SUBJECT),
     );
   });
-  it('(c3) teacher creating a draft subject is ALLOWED', async () => {
-    await assertSucceeds(
-      setDoc(doc(asTeacher1(), 'jobSubjects', 'bcs__c3-subject'), VALID_SUBJECT),
+  it('(c3) teacher creating a draft subject is DENIED (Step 6 fold-in, P1-02: subjects are canonical metadata — Admin/Owner only)', async () => {
+    await assertFails(
+      setDoc(doc(asTeacher1(), 'jobSubjects', 'bcs__ethics'), VALID_SUBJECT),
     );
   });
-  it('(c4) teacher creating with status published is DENIED (draft-only create)', async () => {
+  it('(c4) admin creating with status published is DENIED (draft-only create)', async () => {
     await assertFails(
-      setDoc(doc(asTeacher1(), 'jobSubjects', 'bcs__c4-subject'), {
+      setDoc(doc(asAdmin(), 'jobSubjects', 'bank__computer'), {
         ...VALID_SUBJECT,
+        examSlug: 'bank',
+        authorId: 'admin-1',
         status: 'published',
       }),
     );
   });
-  it('(c5) teacher creating with reviewStatus Published is DENIED (states must agree)', async () => {
+  it('(c5) admin creating with reviewStatus Published is DENIED (states must agree)', async () => {
     await assertFails(
-      setDoc(doc(asTeacher1(), 'jobSubjects', 'bcs__c5-subject'), {
+      setDoc(doc(asAdmin(), 'jobSubjects', 'ntrca__math'), {
         ...VALID_SUBJECT,
+        examSlug: 'ntrca',
+        authorId: 'admin-1',
         reviewStatus: 'Published',
       }),
     );
   });
-  it("(c6) teacher creating with the §3.3 literal reviewStatus 'draft' is DENIED (no such enum value)", async () => {
+  it("(c6) admin creating with the §3.3 literal reviewStatus 'draft' is DENIED (no such enum value)", async () => {
     await assertFails(
-      setDoc(doc(asTeacher1(), 'jobSubjects', 'bcs__c6-subject'), {
+      setDoc(doc(asAdmin(), 'jobSubjects', 'primary-teacher__math-science'), {
         ...VALID_SUBJECT,
+        examSlug: 'primary-teacher',
+        authorId: 'admin-1',
         reviewStatus: 'draft',
       }),
     );
   });
-  it('(c7) moderator creating a draft subject is ALLOWED', async () => {
-    await assertSucceeds(
-      setDoc(doc(asModerator(), 'jobSubjects', 'bcs__c7-subject'), {
+  it('(c7) moderator creating a draft subject is DENIED (Step 6 fold-in, P1-02: Admin/Owner only)', async () => {
+    await assertFails(
+      setDoc(doc(asModerator(), 'jobSubjects', 'bank__computer'), {
         ...VALID_SUBJECT,
+        examSlug: 'bank',
         authorId: 'moderator-1',
       }),
     );
   });
-  it('(c8) admin creating a draft subject is ALLOWED', async () => {
+  it('(c8) admin creating a CANONICAL draft subject is ALLOWED', async () => {
     await assertSucceeds(
-      setDoc(doc(asAdmin(), 'jobSubjects', 'bcs__c8-subject'), {
+      setDoc(doc(asAdmin(), 'jobSubjects', 'bcs__ethics'), {
         ...VALID_SUBJECT,
         authorId: 'admin-1',
       }),
@@ -343,49 +362,54 @@ describe('Create by role', () => {
       setDoc(doc(asTeacher1(), 'jobLessons', 'c11-lesson'), VALID_LESSON),
     );
   });
-  it('(c12) teacher creating with authorId = SOMEONE ELSE is DENIED', async () => {
+  it('(c12) admin creating with authorId = SOMEONE ELSE is DENIED', async () => {
     await assertFails(
-      setDoc(doc(asTeacher1(), 'jobSubjects', 'bcs__c12-subject'), {
+      setDoc(doc(asAdmin(), 'jobSubjects', 'primary-teacher__general-knowledge'), {
         ...VALID_SUBJECT,
+        examSlug: 'primary-teacher',
         authorId: 'teacher-2',
       }),
     );
   });
-  it('(c13) teacher creating with authorId ABSENT is ALLOWED', async () => {
-    const noAuthor = { ...VALID_SUBJECT } as Record<string, unknown>;
+  it('(c13) admin creating with authorId ABSENT is ALLOWED', async () => {
+    const noAuthor = { ...VALID_SUBJECT, examSlug: 'bank' } as Record<string, unknown>;
     delete noAuthor.authorId;
     await assertSucceeds(
-      setDoc(doc(asTeacher1(), 'jobSubjects', 'bcs__c13-subject'), noAuthor),
+      setDoc(doc(asAdmin(), 'jobSubjects', 'bank__english'), noAuthor),
     );
   });
-  it('(c14) teacher creating with verifiedBy already set is DENIED (no baked-in self-verification)', async () => {
+  it('(c14) admin creating with verifiedBy already set is DENIED (no baked-in self-verification)', async () => {
     await assertFails(
-      setDoc(doc(asTeacher1(), 'jobSubjects', 'bcs__c14-subject'), {
+      setDoc(doc(asAdmin(), 'jobSubjects', 'ntrca__bangla'), {
         ...VALID_SUBJECT,
+        examSlug: 'ntrca',
+        authorId: 'admin-1',
         verifiedBy: 'moderator-1',
         verifiedAt: VERIFY_TS,
       }),
     );
   });
-  it('(c15) teacher creating a subject under an UNKNOWN exam is DENIED', async () => {
+  it('(c15) admin creating a subject under an UNKNOWN exam is DENIED', async () => {
     await assertFails(
-      setDoc(doc(asTeacher1(), 'jobSubjects', 'unknown-exam__c15-subject'), {
+      setDoc(doc(asAdmin(), 'jobSubjects', 'unknown-exam__c15-subject'), {
         ...VALID_SUBJECT,
         examSlug: 'unknown-exam',
+        authorId: 'admin-1',
       }),
     );
   });
-  it('(c16) teacher creating a subject under it-professional is DENIED (scope pending, handover constraint 4)', async () => {
+  it('(c16) admin creating a subject under it-professional is DENIED (scope pending, handover constraint 4)', async () => {
     await assertFails(
-      setDoc(doc(asTeacher1(), 'jobSubjects', 'it-professional__c16-subject'), {
+      setDoc(doc(asAdmin(), 'jobSubjects', 'it-professional__c16-subject'), {
         ...VALID_SUBJECT,
         examSlug: 'it-professional',
+        authorId: 'admin-1',
       }),
     );
   });
-  it('(c17) teacher creating a subject whose doc ID does not start with the exam slug is DENIED', async () => {
+  it('(c17) admin creating a subject whose doc ID does not start with the exam slug is DENIED', async () => {
     await assertFails(
-      setDoc(doc(asTeacher1(), 'jobSubjects', 'bank__c17-subject'), VALID_SUBJECT),
+      setDoc(doc(asAdmin(), 'jobSubjects', 'bank__c17-subject'), { ...VALID_SUBJECT, authorId: 'admin-1' }),
     );
   });
   it('(c18) teacher creating a chapter whose doc ID does not extend its subjectId is DENIED', async () => {
@@ -401,21 +425,136 @@ describe('Create by role', () => {
       }),
     );
   });
-  it('(c20) teacher creating a subject in the exact SEED shape (slug + createdBy + applicableCycle) is ALLOWED', async () => {
-    // Coordinator-added (22 Nov 2026): the Step 6 seed carries three
-    // fields beyond the schema list — slug, createdBy 'seed' and
-    // applicableCycle. The rules validate named fields only (no
-    // whole-doc allowlist), so a seed-shaped doc must pass create.
-    // This pins seed↔rules compatibility. NOTE: the doc ID must NOT
-    // collide with the beforeAll seed (bcs__bangla etc.) — a setDoc
-    // on an existing doc is evaluated as an UPDATE, not a create.
+  it('(c20) admin creating a subject in the exact SEED shape (slug + applicableCycle, no createdBy) is ALLOWED', async () => {
+    // Step 6 fold-in (P1-04): the old c20 pinned createdBy 'seed' as
+    // ALLOWED for a teacher — that pinned a provenance hole. The seed
+    // is applied via the Admin SDK (rules bypassed), so no rules-level
+    // create ever needs createdBy 'seed'; createdBy must now be absent
+    // or the caller (see c24/c25). The seed-shape fields slug +
+    // applicableCycle remain allowed.
     await assertSucceeds(
-      setDoc(doc(asTeacher1(), 'jobSubjects', 'bcs__c20-seed-shape'), {
+      setDoc(doc(asAdmin(), 'jobSubjects', 'bcs__geography'), {
         ...VALID_SUBJECT,
         authorId: null,
-        slug: 'c20-seed-shape',
-        createdBy: 'seed',
+        slug: 'geography',
         applicableCycle: null,
+      }),
+    );
+  });
+  it('(c21) teacher creating a CANONICAL subject is DENIED (P1-02: Admin/Owner only)', async () => {
+    await assertFails(
+      setDoc(doc(asTeacher1(), 'jobSubjects', 'bcs__general-science'), VALID_SUBJECT),
+    );
+  });
+  it('(c22) moderator creating a CANONICAL subject is DENIED (P1-02: Admin/Owner only)', async () => {
+    await assertFails(
+      setDoc(doc(asModerator(), 'jobSubjects', 'bcs__computer-ict'), {
+        ...VALID_SUBJECT,
+        authorId: 'moderator-1',
+      }),
+    );
+  });
+  it('(c23) admin creating a NON-canonical subject is DENIED (P1-02: only the 23 canonical IDs)', async () => {
+    await assertFails(
+      setDoc(doc(asAdmin(), 'jobSubjects', 'bcs__astrology'), {
+        ...VALID_SUBJECT,
+        authorId: 'admin-1',
+      }),
+    );
+  });
+  it("(c24) admin creating with createdBy 'seed' is DENIED (P1-04: provenance cannot be forged)", async () => {
+    await assertFails(
+      setDoc(doc(asAdmin(), 'jobSubjects', 'bcs__international-affairs'), {
+        ...VALID_SUBJECT,
+        authorId: 'admin-1',
+        createdBy: 'seed',
+      }),
+    );
+  });
+  it('(c25) admin creating with createdBy = own UID is ALLOWED', async () => {
+    await assertSucceeds(
+      setDoc(doc(asAdmin(), 'jobSubjects', 'bcs__mathematical-reasoning'), {
+        ...VALID_SUBJECT,
+        authorId: 'admin-1',
+        createdBy: 'admin-1',
+      }),
+    );
+  });
+  it('(c26) admin creating with publishedAt baked in is DENIED (P1-05: no publication metadata at create)', async () => {
+    await assertFails(
+      setDoc(doc(asAdmin(), 'jobSubjects', 'bcs__mental-ability'), {
+        ...VALID_SUBJECT,
+        authorId: 'admin-1',
+        publishedAt: TS,
+      }),
+    );
+  });
+  it('(c27) teacher creating a chapter whose subject belongs to ANOTHER exam is DENIED (P0-04: no cross-exam reference)', async () => {
+    await assertFails(
+      setDoc(doc(asTeacher1(), 'jobChapters', 'bank__bangla__c27-chapter'), {
+        ...VALID_CHAPTER,
+        subjectId: 'bank__bangla',
+      }),
+    );
+  });
+  it('(c28) teacher creating a chapter whose parent subject does NOT EXIST is DENIED (P0-04)', async () => {
+    await assertFails(
+      setDoc(doc(asTeacher1(), 'jobChapters', 'bcs__nonexistent__c28-chapter'), {
+        ...VALID_CHAPTER,
+        subjectId: 'bcs__nonexistent',
+      }),
+    );
+  });
+  it('(c29) teacher creating a topic whose chapter belongs to ANOTHER subject is DENIED (P0-04: no cross-subject reference)', async () => {
+    await assertFails(
+      setDoc(doc(asTeacher1(), 'jobTopics', 'bcs__bangla__vocabulary__c29-topic'), {
+        ...VALID_TOPIC,
+        subjectId: 'bcs__english',
+        chapterId: 'bcs__bangla__vocabulary',
+      }),
+    );
+  });
+  it('(c30) teacher creating a topic whose parent chapter does NOT EXIST is DENIED (P0-04)', async () => {
+    await assertFails(
+      setDoc(doc(asTeacher1(), 'jobTopics', 'bcs__bangla__nonexistent__c30-topic'), {
+        ...VALID_TOPIC,
+        chapterId: 'bcs__bangla__nonexistent',
+      }),
+    );
+  });
+  it('(c31) teacher creating a lesson whose topic belongs to ANOTHER chapter is DENIED (P0-04)', async () => {
+    await assertFails(
+      setDoc(doc(asTeacher1(), 'jobLessons', 'c31-lesson'), {
+        ...VALID_LESSON,
+        topicId: 'bcs__bangla__vocabulary__sandhi',
+      }),
+    );
+  });
+  it('(c32) teacher creating a lesson whose parent topic does NOT EXIST is DENIED (P0-04)', async () => {
+    await assertFails(
+      setDoc(doc(asTeacher1(), 'jobLessons', 'c32-lesson'), {
+        ...VALID_LESSON,
+        topicId: 'bcs__bangla__grammar__nonexistent',
+      }),
+    );
+  });
+  it('(c33) teacher creating a lesson whose subject belongs to ANOTHER exam is DENIED (P0-04)', async () => {
+    await assertFails(
+      setDoc(doc(asTeacher1(), 'jobLessons', 'c33-lesson'), {
+        ...VALID_LESSON,
+        subjectId: 'bank__bangla',
+        chapterId: 'bank__bangla__grammar',
+        topicId: 'bank__bangla__grammar__sandhi',
+      }),
+    );
+  });
+  it('(c34) admin creating a subject whose slug field disagrees with the doc ID is DENIED', async () => {
+    await assertFails(
+      setDoc(doc(asAdmin(), 'jobSubjects', 'bank__general-knowledge'), {
+        ...VALID_SUBJECT,
+        examSlug: 'bank',
+        authorId: 'admin-1',
+        slug: 'general-knowledge-wrong',
       }),
     );
   });
@@ -424,28 +563,29 @@ describe('Create by role', () => {
 describe('Field validations', () => {
   it('(v1) subject order 0 is DENIED', async () => {
     await assertFails(
-      setDoc(doc(asTeacher1(), 'jobSubjects', 'bcs__v1-subject'), { ...VALID_SUBJECT, order: 0 }),
+      setDoc(doc(asAdmin(), 'jobSubjects', 'bcs__bangladesh-affairs'), { ...VALID_SUBJECT, authorId: 'admin-1', order: 0 }),
     );
   });
   it('(v2) subject order 1.5 (non-int) is DENIED', async () => {
     await assertFails(
-      setDoc(doc(asTeacher1(), 'jobSubjects', 'bcs__v2-subject'), { ...VALID_SUBJECT, order: 1.5 }),
+      setDoc(doc(asAdmin(), 'jobSubjects', 'bcs__international-affairs'), { ...VALID_SUBJECT, authorId: 'admin-1', order: 1.5 }),
     );
   });
   it('(v3) subject marks -1 is DENIED', async () => {
     await assertFails(
-      setDoc(doc(asTeacher1(), 'jobSubjects', 'bcs__v3-subject'), { ...VALID_SUBJECT, marks: -1 }),
+      setDoc(doc(asAdmin(), 'jobSubjects', 'bcs__general-science'), { ...VALID_SUBJECT, authorId: 'admin-1', marks: -1 }),
     );
   });
   it('(v4) subject marks null is ALLOWED', async () => {
     await assertSucceeds(
-      setDoc(doc(asTeacher1(), 'jobSubjects', 'bcs__v4-subject'), { ...VALID_SUBJECT, marks: null }),
+      setDoc(doc(asAdmin(), 'jobSubjects', 'bank__general-knowledge'), { ...VALID_SUBJECT, examSlug: 'bank', authorId: 'admin-1', marks: null }),
     );
   });
   it('(v5) subject nameBn of 101 chars is DENIED', async () => {
     await assertFails(
-      setDoc(doc(asTeacher1(), 'jobSubjects', 'bcs__v5-subject'), {
+      setDoc(doc(asAdmin(), 'jobSubjects', 'bcs__computer-ict'), {
         ...VALID_SUBJECT,
+        authorId: 'admin-1',
         nameBn: 'x'.repeat(101),
       }),
     );
@@ -454,7 +594,7 @@ describe('Field validations', () => {
     const noNameEn = { ...VALID_SUBJECT } as Record<string, unknown>;
     delete noNameEn.nameEn;
     await assertFails(
-      setDoc(doc(asTeacher1(), 'jobSubjects', 'bcs__v6-subject'), noNameEn),
+      setDoc(doc(asAdmin(), 'jobSubjects', 'bcs__mental-ability'), { ...noNameEn, authorId: 'admin-1' }),
     );
   });
   it('(v7) chapter descriptionBn of 1001 chars is DENIED', async () => {
@@ -642,7 +782,7 @@ describe('isCommon rule, lessonType gate, body limit', () => {
   });
   it('(t13) author updating own draft topic to isCommon true with 2 exams is DENIED', async () => {
     await assertFails(
-      updateDoc(doc(asTeacher1(), 'jobTopics', 'bcs__bangla__samash'), {
+      updateDoc(doc(asTeacher1(), 'jobTopics', 'bcs__bangla__grammar__samash'), {
         isCommon: true,
         commonExams: ['bcs', 'bank'],
       }),
@@ -650,7 +790,7 @@ describe('isCommon rule, lessonType gate, body limit', () => {
   });
   it('(t14) moderator updating a draft topic publishedQuestionCount (counter) is ALLOWED', async () => {
     await assertSucceeds(
-      updateDoc(doc(asModerator(), 'jobTopics', 'bcs__bangla__samash'), {
+      updateDoc(doc(asModerator(), 'jobTopics', 'bcs__bangla__grammar__samash'), {
         publishedQuestionCount: 5,
       }),
     );
@@ -728,7 +868,7 @@ describe('Draft isolation — reads AND queries', () => {
     await assertFails(getDoc(doc(asSignedOut(), 'jobChapters', 'bcs__bangla__grammar')));
   });
   it('(e16) signed-out direct-reading a PUBLISHED topic is DENIED', async () => {
-    await assertFails(getDoc(doc(asSignedOut(), 'jobTopics', 'bcs__bangla__sandhi')));
+    await assertFails(getDoc(doc(asSignedOut(), 'jobTopics', 'bcs__bangla__grammar__sandhi')));
   });
   it('(e17) signed-out direct-reading a PUBLISHED lesson is DENIED', async () => {
     await assertFails(getDoc(doc(asSignedOut(), 'jobLessons', 'lesson-published-1')));
@@ -753,6 +893,37 @@ describe('Draft isolation — reads AND queries', () => {
         query(collection(asSignedOut(), 'jobLessons'), where('status', '==', 'published')),
       ),
     );
+  });
+  it('(e21) signed-out COLLECTION-GROUP query on jobLessons is DENIED (P0-07: no anonymous path, incl. collection-group)', async () => {
+    await assertFails(
+      getDocs(
+        query(
+          collectionGroup(asSignedOut(), 'jobLessons'),
+          where('status', '==', 'published'),
+        ),
+      ),
+    );
+  });
+  it('(e22) student COLLECTION-GROUP query on jobLessons is DENIED (P0-07: collection-group queries never match the top-level-only patterns — reads are per-collection with parent filters; a recursive match would open nested paths, so this denial is structural, not a gap)', async () => {
+    await assertFails(
+      getDocs(
+        query(
+          collectionGroup(asStudent1(), 'jobLessons'),
+          where('status', '==', 'published'),
+        ),
+      ),
+    );
+  });
+  it('(e25) moderator COLLECTION-GROUP query on jobLessons is DENIED too (structural — even the unconditional moderator read does not match a collection-group query)', async () => {
+    await assertFails(getDocs(collectionGroup(asModerator(), 'jobLessons')));
+  });
+  it('(e23) student reading a NESTED subcollection doc under a published subject is DENIED (P1-08: default-deny)', async () => {
+    await assertFails(
+      getDoc(doc(asStudent1(), 'jobSubjects', 'bcs__bangla', 'answers', 'a1')),
+    );
+  });
+  it('(e24) student reading an UNKNOWN top-level collection is DENIED (P1-08: default-deny)', async () => {
+    await assertFails(getDoc(doc(asStudent1(), 'jobAnswers', 'x1')));
   });
 });
 
@@ -831,7 +1002,7 @@ describe('Author ownership', () => {
   });
   it('(o13) author changing publishedQuestionCount on their own draft topic is DENIED (counter, not author content)', async () => {
     await assertFails(
-      updateDoc(doc(asTeacher1(), 'jobTopics', 'bcs__bangla__samash'), {
+      updateDoc(doc(asTeacher1(), 'jobTopics', 'bcs__bangla__grammar__samash'), {
         publishedQuestionCount: 9,
       }),
     );
@@ -934,7 +1105,7 @@ describe('Publish gates — the second-eye rule', () => {
   it("(p14) moderator publishing another teacher's topic is ALLOWED", async () => {
     await assertSucceeds(
       updateDoc(
-        doc(asModerator(), 'jobTopics', 'bcs__bangla__samash'),
+        doc(asModerator(), 'jobTopics', 'bcs__bangla__grammar__samash'),
         publishPayload('moderator-1'),
       ),
     );
@@ -942,7 +1113,7 @@ describe('Publish gates — the second-eye rule', () => {
   it('(p15) moderator publishing their OWN topic is DENIED', async () => {
     await assertFails(
       updateDoc(
-        doc(asModerator(), 'jobTopics', 'bcs__bangla__karok'),
+        doc(asModerator(), 'jobTopics', 'bcs__bangla__grammar__karok'),
         publishPayload('moderator-1'),
       ),
     );
@@ -1051,7 +1222,7 @@ describe('Delete', () => {
     await assertSucceeds(deleteDoc(doc(asAdmin(), 'jobChapters', 'bcs__bangla__delete-me')));
   });
   it('(d7) admin deleting a topic is ALLOWED', async () => {
-    await assertSucceeds(deleteDoc(doc(asAdmin(), 'jobTopics', 'bcs__bangla__delete-me')));
+    await assertSucceeds(deleteDoc(doc(asAdmin(), 'jobTopics', 'bcs__bangla__grammar__delete-me')));
   });
   it('(d8) admin deleting a lesson is ALLOWED', async () => {
     await assertSucceeds(deleteDoc(doc(asAdmin(), 'jobLessons', 'lesson-delete-me')));
@@ -1092,6 +1263,79 @@ describe('status / reviewStatus consistency', () => {
       updateDoc(doc(asModerator(), 'jobSubjects', 'bcs__gk'), {
         reviewStatus: 'Under Review',
       }),
+    );
+  });
+});
+
+describe('Publish transitions (Step 6 fold-in, P1-03)', () => {
+  it('(g1) admin swapping verifiedBy on a PUBLISHED chapter (staying published) is DENIED', async () => {
+    // Without the guard this passes the second-eye rule (verifiedBy
+    // becomes the caller, who is not the author) — a silent verifier
+    // swap on a live doc. The guard freezes publication fields while
+    // the doc stays published.
+    await assertFails(
+      updateDoc(doc(asAdmin(), 'jobChapters', 'bcs__bangla__grammar'), {
+        verifiedBy: 'admin-1',
+        verifiedAt: VERIFY_TS,
+      }),
+    );
+  });
+  it('(g2) admin fixing a typo on a PUBLISHED chapter is ALLOWED (content-only, publication fields frozen)', async () => {
+    await assertSucceeds(
+      updateDoc(doc(asAdmin(), 'jobChapters', 'bcs__bangla__grammar'), {
+        nameBn: 'ব্যাকরণ (সংশোধিত)',
+      }),
+    );
+  });
+  it('(g3) admin unpublishing then re-publishing with a new verifier is ALLOWED (the correct re-review path)', async () => {
+    await assertSucceeds(
+      updateDoc(doc(asAdmin(), 'jobChapters', 'bcs__bangla__grammar'), {
+        status: 'draft',
+        reviewStatus: 'Under Review',
+      }),
+    );
+    await assertSucceeds(
+      updateDoc(
+        doc(asAdmin(), 'jobChapters', 'bcs__bangla__grammar'),
+        publishPayload('admin-1'),
+      ),
+    );
+  });
+});
+
+describe('Content audit actions (Step 6 fold-in, P2-01)', () => {
+  const auditEntry = (action: string) => ({
+    actorId: 'admin-1',
+    action,
+    details: 'job content audit (Step 6 fold-in test)',
+    targetId: 'bcs__bangla',
+    before: null,
+    after: null,
+    reason: 'test',
+    createdAt: TS,
+  });
+  it("(a1) admin appending a 'job-content-published' audit entry is ALLOWED", async () => {
+    await assertSucceeds(
+      setDoc(doc(asAdmin(), 'adminActions', 'a1-published'), auditEntry('job-content-published')),
+    );
+  });
+  it("(a2) admin appending a 'job-content-verified' audit entry is ALLOWED", async () => {
+    await assertSucceeds(
+      setDoc(doc(asAdmin(), 'adminActions', 'a2-verified'), auditEntry('job-content-verified')),
+    );
+  });
+  it("(a3) student appending a 'job-content-published' audit entry is DENIED", async () => {
+    await assertFails(
+      setDoc(doc(asStudent1(), 'adminActions', 'a3-published'), {
+        ...auditEntry('job-content-published'),
+        actorId: 'student-1',
+        targetId: 'student-1',
+      }),
+    );
+  });
+  it("(a4) admin appending an UNKNOWN content audit action is DENIED", async () => {
+    await assertFails(
+      setDoc(doc(asAdmin(), 'adminActions', 'a4-unknown'), auditEntry('job-content-hacked')),
     );
   });
 });
