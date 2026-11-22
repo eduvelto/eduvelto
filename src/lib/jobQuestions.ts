@@ -18,6 +18,27 @@
  *       feedback. Scores are client-computed and NEVER shown as
  *       "Verified" (Step 3 §4.4 BINDING).
  *
+ * TRUST BOUNDARY (Step 7 fold-in, ChatGPT P0-01/P0-02 — read this
+ * before touching receipts or attempts):
+ *   (1) A receipt is a TEN-MINUTE, ATTEMPT-BOUND AUTHORIZATION
+ *       WINDOW, not one-use. Firestore read rules cannot consume a
+ *       receipt as a side effect of a read, so repeat reads inside
+ *       the window are possible BY DESIGN. Never claim one-use.
+ *       The window cannot be refreshed (receipts are never updated
+ *       and only an Admin deletes one) — one window per student per
+ *       bundle.
+ *   (2) A "submitted" attempt is CLIENT-ATTESTED, not verified.
+ *       The student controls the browser, so a determined student
+ *       can create an in-progress attempt, submit it without
+ *       answering, mint a receipt and read a mock key — the rules
+ *       CANNOT distinguish that from a genuine attempt. "Submitted"
+ *       means "a client submitted an attempt record"; it is never
+ *       proof of genuine completion and never produces a "Verified"
+ *       score. Server-side verification would need a trusted
+ *       backend (Blaze — no approval, ৳0 budget). The rules +
+ *       tests document this limitation instead of pretending it
+ *       away (see the a5 documented-limitation test).
+ *
  * State machine (Step 3 §2.7, ADAPTED to the Step 5/6 two-field
  * model — status + reviewStatus — instead of the draft's single
  * `reviewStatus` enum; see the Step 7 report §Decisions):
@@ -150,6 +171,9 @@ export interface JobQuestionKeyAnswer {
 export interface JobQuestionKey {
   bundleId: string;
   answers: JobQuestionKeyAnswer[];
+  /** Must equal the bundle's configVersion (P1-06) — a stale key
+   * from an older config cannot score a newer bundle. */
+  configVersion?: string | null;
   createdAt?: unknown;
   updatedAt?: unknown;
 }
@@ -191,9 +215,26 @@ export function normalizeJobQuestionText(text: string): string {
  * commitment: the admin verification queue is the real duplicate
  * gate (Step 3 §2.7 asked for SHA-based hashing — adapted: SHA-256
  * needs async subtle-crypto in the browser form flow, so the sync
- * hash is used here; the queue check is unchanged). */
-export function jobQuestionDuplicateHash(questionText: string): string {
-  const str = normalizeJobQuestionText(questionText);
+ * hash is used here; the queue check is unchanged).
+ *
+ * `context` (Step 7 fold-in, ChatGPT P2-01): the same wording in a
+ * different subject/chapter/topic, or with a different correct
+ * answer, is a DIFFERENT question for duplicate purposes — pass
+ * the context when it is known so those do not collide. Without a
+ * context the hash covers the text alone (backwards compatible). */
+export function jobQuestionDuplicateHash(
+  questionText: string,
+  context?: {
+    subjectId?: string;
+    chapterId?: string;
+    topicId?: string;
+    correctLetter?: string;
+  },
+): string {
+  const str = normalizeJobQuestionText(questionText)
+    + (context
+      ? `|${context.subjectId ?? ''}|${context.chapterId ?? ''}|${context.topicId ?? ''}|${context.correctLetter ?? ''}`
+      : '');
   let h1 = 0xdeadbeef;
   let h2 = 0x41c6ce57;
   for (let i = 0; i < str.length; i++) {
@@ -340,6 +381,9 @@ export function validateJobQuestionBundle(doc: Record<string, unknown>): string[
     if (doc.questionCount !== doc.questions.length) {
       problems.push(`${label}: questionCount (${String(doc.questionCount)}) != questions.length (${doc.questions.length})`);
     }
+    if (!Number.isInteger(doc.questionCount) || (doc.questionCount as number) < 1 || (doc.questionCount as number) > 200) {
+      problems.push(`${label}: questionCount must be 1–200 (largest verified exam: BCS 200)`);
+    }
     // The key-leak ban: no answer material anywhere in the bundle.
     const flat = JSON.stringify(doc.questions);
     for (const banned of ['correctLetter', 'explanation', 'correctText']) {
@@ -463,6 +507,7 @@ export function buildJobBundle(
       explanation: q.explanation,
       whyWrong: q.whyWrong ?? null,
     })),
+    configVersion: JOB_QUESTION_CONFIG_VERSION,
   };
   return { bundle, key };
 }
@@ -485,7 +530,10 @@ export function jobBundleIdForPrevious(examSlug: string, year: number): string {
 }
 
 /** Receipt freshness (Step 3 §4.2): created within the last 10
- * minutes of `nowMs` (default: now). `createdAtMs` is epoch ms. */
+ * minutes of `nowMs` (default: now). `createdAtMs` is epoch ms.
+ * This is a WINDOW check, not one-use: a fresh receipt may be
+ * used for repeat reads inside the window (Step 7 fold-in,
+ * ChatGPT P0-01 Option A). */
 export function isJobReceiptFresh(createdAtMs: number, nowMs: number = Date.now()): boolean {
   return nowMs - createdAtMs <= JOB_RECEIPT_WINDOW_MINUTES * 60 * 1000 && nowMs >= createdAtMs;
 }

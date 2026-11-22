@@ -31,6 +31,12 @@
  *     the target must be a loopback address AND answer like a
  *     Firestore emulator before any read or write — a --emulator
  *     value pointing elsewhere is refused, never attempted;
+ *   - fail-closed CLI guards (Step 7 fold-in, ChatGPT P1-07): a
+ *     --live/--prod/--production/--firestore flag is refused
+ *     outright; production credentials in the environment
+ *     (GOOGLE_APPLICATION_CREDENTIALS / FIREBASE_CONFIG) refuse
+ *     the run; the emulator is re-probed immediately before the
+ *     first write, not just before the reads;
  *   - config version (Step 6 fold-in, ChatGPT P2-02): the seed's
  *     `_meta.version` names the verified rulesConfig version the
  *     seed was derived from; every doc carries the same
@@ -271,6 +277,11 @@ function validateKey(id, doc, bundles, problems) {
   if (doc.bundleId !== id) {
     problems.push(`${label}: bundleId '${doc.bundleId}' != doc id '${id}'`);
   }
+  // P1-06: the key must carry the same configVersion as the seed
+  // (a stale key from an older config cannot score a newer bundle).
+  if (doc.configVersion !== JOB_QUESTION_CONFIG_VERSION) {
+    problems.push(`${label}: configVersion '${doc.configVersion}' != seed version '${JOB_QUESTION_CONFIG_VERSION}' (drift)`);
+  }
   if (!Array.isArray(doc.answers) || doc.answers.length === 0) {
     problems.push(`${label}: answers must be a non-empty list`);
     return;
@@ -279,6 +290,11 @@ function validateKey(id, doc, bundles, problems) {
   if (!bundle) {
     problems.push(`${label}: no bundle '${id}' in the seed — a key without its bundle is orphaned`);
     return;
+  }
+  // P1-06: the key must answer exactly the bundle's questions —
+  // no more, no fewer (the rules enforce the same equality).
+  if (doc.answers.length !== (bundle.questions ?? []).length) {
+    problems.push(`${label}: answers.length (${doc.answers.length}) != bundle questions.length (${(bundle.questions ?? []).length})`);
   }
   const bundleQuestionIds = new Set((bundle.questions ?? []).map((q) => q.questionId));
   doc.answers.forEach((a, i) => {
@@ -405,6 +421,36 @@ async function patchDoc(rest, collection, id, fields) {
 }
 
 /* ------------------------------------------------------------------ */
+/* CLI guards (pure — unit-tested). P1-07: the importer must stay    */
+/* incapable of becoming an accidental production write tool, even   */
+/* after future modifications.                                       */
+/* ------------------------------------------------------------------ */
+
+/** Refusal when a live/production flag is passed: there is no live
+ * mode, and a future --live flag must fail closed, never silently
+ * become a production target. */
+export function liveFlagProblem(args) {
+  for (const a of args) {
+    if (a === '--live' || a === '--prod' || a === '--production' || a === '--firestore') {
+      return `REFUSED: '${a}' is not a mode of this script — it writes to a Firestore EMULATOR only (pass --emulator [host:port]). There is no live target.`;
+    }
+  }
+  return null;
+}
+
+/** Refusal when production credentials are present in the
+ * environment: the importer talks to the emulator with the
+ * emulator's owner bypass only, and must never run in an
+ * environment where real credentials could be picked up. */
+export function productionCredentialsProblem(env = process.env) {
+  const present = [];
+  if (env.GOOGLE_APPLICATION_CREDENTIALS) present.push('GOOGLE_APPLICATION_CREDENTIALS');
+  if (env.FIREBASE_CONFIG) present.push('FIREBASE_CONFIG');
+  if (present.length === 0) return null;
+  return `REFUSED: production credential(s) present in the environment (${present.join(', ')}) — unset them before running this emulator-only importer.`;
+}
+
+/* ------------------------------------------------------------------ */
 /* CLI                                                                 */
 /* ------------------------------------------------------------------ */
 
@@ -423,6 +469,19 @@ async function main(argv) {
   if (args.includes('--help') || args.includes('-h')) {
     console.log(usage());
     return 0;
+  }
+  // Step 7 fold-in, ChatGPT P1-07: a live flag fails closed, and
+  // production credentials in the environment refuse the run —
+  // before anything else is read or probed.
+  const liveProblem = liveFlagProblem(args);
+  if (liveProblem) {
+    console.error(liveProblem);
+    return 2;
+  }
+  const credProblem = productionCredentialsProblem();
+  if (credProblem) {
+    console.error(credProblem);
+    return 2;
   }
   const dryRun = args.includes('--dry-run');
   const apply = args.includes('--apply');
@@ -490,6 +549,15 @@ async function main(argv) {
   }
   if (plan.toUpdate.length > 0 && !allowModify) {
     console.error(`REFUSED: ${plan.toUpdate.length} doc(s) would be modified. Re-run with --allow-modify (createdAt is preserved; no history field exists for question docs).`);
+    return 2;
+  }
+
+  // Step 7 fold-in, ChatGPT P1-07: validate the target AGAIN
+  // right before the first write (the probe above ran before the
+  // reads — a target that stopped being an emulator since then
+  // must not receive writes).
+  if (!(await probeEmulator(rest))) {
+    console.error(`REFUSED: ${emuHost} stopped answering like a Firestore emulator before the write phase — nothing was written.`);
     return 2;
   }
 
