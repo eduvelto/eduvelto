@@ -51,7 +51,7 @@
 //     every signed-in user's real choice still lives on the profile).
 
 import type { UserProfile } from './profile';
-import { JOB_EXAMS } from './jobExams';
+import { JOB_EXAMS, type JobExamDef } from './jobExams';
 
 /** The 10 Job categories (Step 2 §0.4) — the only values
  * `enrolledCategories` may hold (enforced in firestore.rules §3.1). */
@@ -234,15 +234,12 @@ export const TARGET_EXAM_SLUGS = [
 export type TargetExamSlug = (typeof TARGET_EXAM_SLUGS)[number];
 
 /**
- * Exams the student may actually PICK as a target today: the 13 built
- * hubs. 'it-professional' stays accepted by the rules but is NOT
- * selectable until Step 5 builds its hub (ChatGPT review (e)1). When
- * Step 5 lands the hub, move the slug here by deleting this exclusion
- * — and update the taxonomy test with it.
+ * Exams the student may actually PICK as a target today: all 14 hubs.
+ * 'it-professional' became selectable in Step 5 when its hub was built
+ * (before Step 5 it was rules-accepted but not selectable — the
+ * exclusion lived here until the hub existed).
  */
-export const SELECTABLE_TARGET_EXAMS: readonly string[] = TARGET_EXAM_SLUGS.filter(
-  (s) => s !== 'it-professional',
-);
+export const SELECTABLE_TARGET_EXAMS: readonly string[] = TARGET_EXAM_SLUGS;
 
 export function isJobCategorySlug(value: unknown): value is JobCategorySlug {
   return typeof value === 'string' && (JOB_CATEGORY_SLUGS as readonly string[]).includes(value);
@@ -263,6 +260,31 @@ export function jobCategoryOfExam(examSlug: string): JobCategorySlug | undefined
 export function jobCategoryHubs(categorySlug: string): string[] {
   const found = JOB_CATEGORIES.find((c) => c.slug === categorySlug);
   return found ? [...found.hubSlugs] : [];
+}
+
+/**
+ * The 10 category groups for /jobs + the homepage Jobs section
+ * (Step 5 — Step 2 §0.4/§2.1: the section is grouped BY CATEGORY,
+ * not by tier). One entry per category, in order 1–10, each with its
+ * hubs in hubSlugs order. Every exam appears in exactly one group
+ * (pinned by the Step 5 unit test). Tier is NOT a grouping here — the
+ * cards themselves still carry the tier-2/3 "Coming soon" chip.
+ */
+export interface JobCategoryGroup {
+  category: JobCategoryDef;
+  exams: JobExamDef[];
+}
+
+export function jobCategoryGroups(): JobCategoryGroup[] {
+  return JOB_CATEGORIES.map((category) => ({
+    category,
+    // In the category's hubSlugs order (the canonical display order),
+    // not JOB_EXAMS order — e.g. govt shows ministries first.
+    exams: category.hubSlugs.flatMap((slug) => {
+      const def = JOB_EXAMS.find((exam) => exam.slug === slug);
+      return def ? [def] : [];
+    }),
+  }));
 }
 
 /**

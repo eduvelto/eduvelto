@@ -13,8 +13,70 @@
 
 import { Link } from 'react-router-dom';
 import { Reveal } from './ui';
-import { useLanguage } from '../i18n/LanguageContext';
-import { JOB_EXAMS, type JobExamDef } from '../lib/jobExams';
+import { T, useLanguage } from '../i18n/LanguageContext';
+import { type JobExamDef } from '../lib/jobExams';
+import { jobCategoryGroups } from '../lib/jobProfile';
+
+/** Bangla digits for group numbers ("১ · BCS ও BPSC"). */
+function bnNum(n: number): string {
+  return String(n)
+    .split('')
+    .map((d) => '০১২৩৪৫৬৭৮৯'[Number(d)])
+    .join('');
+}
+
+/**
+ * Non-affiliation disclaimer (Step 5 — research lesson: explicit
+ * non-affiliation). Shown on /jobs and on every hub page. One line,
+ * Bangla-first: Eduvelto is not affiliated with any recruiting body.
+ */
+export function JobNonAffiliationNote() {
+  const { t } = useLanguage();
+  return (
+    <p style={{ margin: '0 0 20px', color: '#57616A', fontSize: 13, lineHeight: 1.7 }}>
+      {t({
+        bn: 'Eduvelto BPSC, বাংলাদেশ ব্যাংক, DPE বা NTRCA-র সঙ্গে যুক্ত নয়। সর্বশেষ তথ্য সবসময় অফিসিয়াল সাইটের বিজ্ঞপ্তিতে যাচাই করুন।',
+        en: 'Eduvelto is not affiliated with BPSC, Bangladesh Bank, DPE or NTRCA. Always verify the latest information in the official circular.',
+      })}
+    </p>
+  );
+}
+
+/**
+ * The 10 category groups (Step 5 — Step 2 §0.4/§2.1): /jobs and the
+ * homepage Jobs section group exam cards BY CATEGORY (1–10), not by
+ * tier. Driven by the canonical jobCategoryGroups() — one source of
+ * truth; the cards themselves still carry the tier-2/3 "Coming soon"
+ * chip. Group headings use the canonical category name with its
+ * number ("১ · BCS ও BPSC").
+ */
+export function JobCategoryGroups() {
+  const groups = jobCategoryGroups();
+  const grid: React.CSSProperties = {
+    display: 'grid',
+    gridTemplateColumns: 'repeat(auto-fill, minmax(160px, 1fr))',
+    gap: 12,
+    marginBottom: 24,
+  };
+  return (
+    <>
+      {groups.map((g, gi) => (
+        <div key={g.category.slug}>
+          <p style={{ color: '#142B3B', margin: '0 0 10px', fontSize: 16, fontWeight: 700 }}>
+            <span style={{ color: g.category.accent }}>{bnNum(gi + 1)}</span>
+            {' · '}
+            <T bn={g.category.bn} en={g.category.en} />
+          </p>
+          <div style={grid}>
+            {g.exams.map((def, i) => (
+              <JobCard key={def.slug} def={def} delayMs={Math.min(i, 4) * 60} />
+            ))}
+          </div>
+        </div>
+      ))}
+    </>
+  );
+}
 
 /** Small line icon per exam (inline SVG, currentColor) — no emoji. */
 function ExamIcon({ slug }: { slug: string }) {
@@ -123,6 +185,14 @@ function ExamIcon({ slug }: { slug: string }) {
           <circle cx="9" cy="7" r="4" />
           <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
           <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+        </svg>
+      );
+    case 'it-professional': // laptop
+      return (
+        <svg {...common}>
+          <rect x="3" y="4" width="18" height="12" rx="2" />
+          <path d="M2 20h20" />
+          <path d="M9 9h.01M13 9h.01M9 12h6" />
         </svg>
       );
     default: // dots — other govt jobs
@@ -308,26 +378,16 @@ export function CommonPrepCard({ delayMs = 0 }: { delayMs?: number }) {
 /**
  * The homepage "চাকরির প্রস্তুতি" section — directly AFTER the class
  * cards (design plan §1.3, proposed default for open question §7.1).
- * Tier 1 first (BCS, Bank, Primary Teacher), then Tier 2 (NTRCA,
- * DGFood, BPSC Non-Cadre), then Tier 3 (CAG, BFSA, Others), then the
- * common-preparation card.
+ * Step 5: grouped by the 10 categories (same JobCategoryGroups as
+ * /jobs), then the common-preparation card.
  */
 export function JobsSection() {
   const { t } = useLanguage();
-  const tier1 = JOB_EXAMS.filter((e) => e.tier === 1);
-  const tier2 = JOB_EXAMS.filter((e) => e.tier === 2);
-  const tier3 = JOB_EXAMS.filter((e) => e.tier === 3);
   const grid: React.CSSProperties = {
     display: 'grid',
     gridTemplateColumns: 'repeat(auto-fill, minmax(160px, 1fr))',
     gap: 12,
     marginBottom: 24,
-  };
-  const groupLabel: React.CSSProperties = {
-    color: '#57616A',
-    margin: '0 0 10px',
-    fontSize: 14,
-    fontWeight: 600,
   };
   return (
     <section id="jobs" style={{ scrollMarginTop: 76 }}>
@@ -335,23 +395,9 @@ export function JobsSection() {
         <h2 className="ev-section-h2">{t({ bn: 'চাকরির প্রস্তুতি', en: 'Job Preparation' })}</h2>
       </Reveal>
       <p style={{ color: '#57616A', margin: '-8px 0 14px', fontSize: 14 }}>
-        {t({ bn: 'সরকারি চাকরির পরীক্ষার প্রস্তুতি — সিলেবাস, MCQ ব্যাংক, মক টেস্ট ও ভাইভা প্রস্তুতি এক জায়গায়। কনটেন্ট শিক্ষক যাচাইয়ের পর প্রকাশিত হবে।', en: 'Preparation for government job exams — syllabus, MCQ bank, mock tests and viva preparation in one place. Content is published only after teacher review.' })}
+        {t({ bn: 'চাকরির পরীক্ষার প্রস্তুতি — সিলেবাস, MCQ ব্যাংক, মক টেস্ট ও ভাইভা প্রস্তুতি এক জায়গায়। কনটেন্ট শিক্ষক যাচাইয়ের পর প্রকাশিত হবে।', en: 'Preparation for job exams — syllabus, MCQ bank, mock tests and viva preparation in one place. Content is published only after teacher review.' })}
       </p>
-      <p style={groupLabel}>{t({ bn: 'প্রধান পরীক্ষা', en: 'Main exams' })}</p>
-      <div style={grid}>
-        {tier1.map((def, i) => (
-          <JobCard key={def.slug} def={def} delayMs={Math.min(i, 4) * 60} />
-        ))}
-      </div>
-      <p style={groupLabel}>{t({ bn: 'আরও পরীক্ষা — কনটেন্ট আসছে', en: 'More exams — content coming' })}</p>
-      <div style={grid}>
-        {tier2.map((def, i) => (
-          <JobCard key={def.slug} def={def} delayMs={Math.min(i, 4) * 60} />
-        ))}
-        {tier3.map((def, i) => (
-          <JobCard key={def.slug} def={def} delayMs={Math.min(i + 3, 4) * 60} />
-        ))}
-      </div>
+      <JobCategoryGroups />
       <div style={grid}>
         <CommonPrepCard />
       </div>

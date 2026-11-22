@@ -6,9 +6,9 @@
  * REAL APIs in jobProfile.ts / jobMode.ts (read 22 Nov 2026 — do not
  * assume the summary's paraphrase):
  *  (1) one canonical taxonomy — JOB_CATEGORIES (10) / TARGET_EXAM_SLUGS
- *      (14 incl. it-professional) / JOB_EXAMS (13 built hubs — the
- *      it-professional hub arrives in Step 5) / SELECTABLE_TARGET_EXAMS
- *      (13);
+ *      (14 incl. it-professional) / JOB_EXAMS (14 hubs — the
+ *      it-professional hub was added in Step 5) / SELECTABLE_TARGET_EXAMS
+ *      (14);
  *  (2) localStorage account isolation — there is NO authenticated
  *      localStorage cache at all (signed-in students use Firestore
  *      only); the ONLY browser keys are the three anonymous ones
@@ -134,11 +134,11 @@ describe('canonical taxonomy (ChatGPT P1 — one source of truth)', () => {
     expect(TARGET_EXAM_SLUGS).toContain('ntrca');
   });
 
-  it('JOB_EXAMS has the 13 built hubs — it-professional is NOT built yet (Step 5)', () => {
-    expect(JOB_EXAMS).toHaveLength(13);
+  it('JOB_EXAMS has the 14 hubs — it-professional built in Step 5', () => {
+    expect(JOB_EXAMS).toHaveLength(14);
     const slugs = JOB_EXAMS.map((e) => e.slug);
-    expect(new Set(slugs).size).toBe(13);
-    expect(slugs).not.toContain('it-professional');
+    expect(new Set(slugs).size).toBe(14);
+    expect(slugs).toContain('it-professional');
     for (const slug of slugs) {
       expect((TARGET_EXAM_SLUGS as readonly string[]).includes(slug)).toBe(true);
     }
@@ -156,9 +156,9 @@ describe('canonical taxonomy (ChatGPT P1 — one source of truth)', () => {
     }
   });
 
-  it('selectable target exams are the 13 built hubs (it-professional excluded until Step 5)', () => {
-    expect(SELECTABLE_TARGET_EXAMS).toHaveLength(13);
-    expect(SELECTABLE_TARGET_EXAMS).not.toContain('it-professional');
+  it('selectable target exams are all 14 hubs (it-professional selectable since Step 5)', () => {
+    expect(SELECTABLE_TARGET_EXAMS).toHaveLength(14);
+    expect(SELECTABLE_TARGET_EXAMS).toContain('it-professional');
     expect([...SELECTABLE_TARGET_EXAMS].sort()).toEqual(
       JOB_EXAMS.map((e) => e.slug).sort(),
     );
@@ -181,10 +181,8 @@ describe('canonical taxonomy (ChatGPT P1 — one source of truth)', () => {
     expect(jobCategoryHubs('nope')).toEqual([]);
   });
 
-  it('validateJobTaxonomy reports ONLY the known Step 5 gap (it-professional hub not built)', () => {
-    expect(validateJobTaxonomy()).toEqual([
-      "exam 'it-professional' has no hub in JOB_EXAMS",
-    ]);
+  it('validateJobTaxonomy reports no problems (the Step 5 hub closed the it-professional gap)', () => {
+    expect(validateJobTaxonomy()).toEqual([]);
   });
 });
 

@@ -1347,6 +1347,71 @@ service cloud.firestore {
       allow create, update, delete: if false;
     }
 
+    // ---------- Job Preparation — categories + exams (Step 5, Step 3 §3.3) ----------
+    // jobCategories: public structure (anyone reads the category list);
+    // only Admin writes; NEVER deleted (historical data) — only
+    // deactivated via status 'inactive' (Step 3 §2.1).
+    match /jobCategories/{categoryId} {
+      allow read: if true;
+      allow create, update: if isAdmin()
+        && isStr(request.resource.data.nameBn, 100)
+        && isStr(request.resource.data.nameEn, 100)
+        && request.resource.data.order is int
+        && request.resource.data.order >= 1
+        && request.resource.data.order <= 10
+        && request.resource.data.hubSlugs is list
+        && isStr(request.resource.data.accent, 20)
+        && request.resource.data.status in ['active', 'inactive'];
+      allow delete: if false;
+    }
+    // jobExams: students read Published docs only; moderators read
+    // drafts; the author reads their own draft. Create is draft-only
+    // (Step 3 §3.3 draft says reviewStatus == 'draft' — but §2.2's enum
+    // is 'Not Started' | 'In Progress' | 'Under Review' | 'Published',
+    // so the draft-only intent is enforced with isDraftStatus instead
+    // of the literal 'draft', which matches no enum value). The doc ID
+    // must equal the slug (§2.2). rulesConfig is null or a map whose
+    // fields are type-checked (counts/minutes are ints — the draft's
+    // "number" is narrowed, as in Step 4's integer-only goals;
+    // negativeMarking is a decimal by nature, so it stays number).
+    // rulesConfigHistory enforcement is the ADMIN UI's job (code), not
+    // the rules' — the rules check field types only (§3.3 draft).
+    match /jobExams/{examSlug} {
+      allow read: if isPublished(resource.data) || isModerator()
+        || (signedIn() && resource.data.get('authorId', '') == uid());
+      allow create: if isModerator()
+        && request.resource.data.slug == examSlug
+        && isDraftStatus(request.resource.data.reviewStatus)
+        && isStr(request.resource.data.nameBn, 100)
+        && request.resource.data.categoryId is string
+        && request.resource.data.tier in [1, 2, 3];
+      allow update: if isModerator()
+        && request.resource.data.slug == examSlug
+        && request.resource.data.categoryId is string
+        && request.resource.data.tier in [1, 2, 3]
+        && (request.resource.data.rulesConfig == null
+            || (request.resource.data.rulesConfig is map
+                && (request.resource.data.rulesConfig.get('questionCount', null) == null
+                    || request.resource.data.rulesConfig.get('questionCount', null) is int)
+                && (request.resource.data.rulesConfig.get('timeMinutes', null) == null
+                    || request.resource.data.rulesConfig.get('timeMinutes', null) is int)
+                && (request.resource.data.rulesConfig.get('marksPerQuestion', null) == null
+                    || request.resource.data.rulesConfig.get('marksPerQuestion', null) is int)
+                && (request.resource.data.rulesConfig.get('negativeMarking', null) == null
+                    || request.resource.data.rulesConfig.get('negativeMarking', null) is number)
+                && (request.resource.data.rulesConfig.get('passMark', null) == null
+                    || request.resource.data.rulesConfig.get('passMark', null) is int)
+                && (request.resource.data.rulesConfig.get('passPercent', null) == null
+                    || request.resource.data.rulesConfig.get('passPercent', null) is int)
+                && (request.resource.data.rulesConfig.get('negativeMarkingVerified', null) == null
+                    || request.resource.data.rulesConfig.get('negativeMarkingVerified', null) is bool)
+                && (request.resource.data.rulesConfig.get('subjects', null) == null
+                    || request.resource.data.rulesConfig.get('subjects', null) is list)
+                && (request.resource.data.rulesConfig.get('patternLabel', null) == null
+                    || request.resource.data.rulesConfig.get('patternLabel', null) in ['verified', 'last-verified-18th', 'circular-based'])));
+      allow delete: if isAdmin();
+    }
+
     // ---------- everything else: denied ----------
     match /{document=**} {
       allow read, write: if false;

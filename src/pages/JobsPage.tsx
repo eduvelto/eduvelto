@@ -1,41 +1,30 @@
 // Eduvelto — Job Preparation index (master plan B-1.3, structure only).
 //
-// /jobs: the section's front door. Hero + exam cards by tier (Tier 1
-// first: BCS, Bank, Primary Teacher; Tier 2: NTRCA, DGFood, BPSC
-// Non-Cadre; Tier 3: CAG, BFSA, Others + ministries, defence,
-// autonomous, private & NGO) + the common-preparation card + how to
-// start. No question counts, no mock counts — no content is published
-// yet. Tier 2/3 cards honestly say "Coming soon".
+// /jobs: the section's front door. Hero + exam cards grouped by the 10
+// categories (Step 5 — Step 2 §0.4/§2.1; was tier-grouped before) +
+// the common-preparation card + how to start. No question counts, no
+// mock counts — no content is published yet. Tier 2/3 cards honestly
+// say "Coming soon".
 
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { PageShell } from '../components/PageShell';
 import { Card, LinkButton, Reveal } from '../components/ui';
-import { CommonPrepCard, JobCard } from '../components/JobCards';
+import { CommonPrepCard, JobCategoryGroups, JobNonAffiliationNote } from '../components/JobCards';
 import JobModeSwitch from '../components/JobModeSwitch';
 import JobOnboarding from '../components/JobOnboarding';
 import { useLanguage } from '../i18n/LanguageContext';
-import { JOB_EXAMS } from '../lib/jobExams';
 
 export default function JobsPage() {
   const { t } = useLanguage();
   // Re-open the first-time mode-choice screen on demand (Step 2 §1.8:
   // reachable again from /jobs after it was dismissed once).
   const [showOnboarding, setShowOnboarding] = useState(false);
-  const tier1 = JOB_EXAMS.filter((e) => e.tier === 1);
-  const tier2 = JOB_EXAMS.filter((e) => e.tier === 2);
-  const tier3 = JOB_EXAMS.filter((e) => e.tier === 3);
   const grid: React.CSSProperties = {
     display: 'grid',
     gridTemplateColumns: 'repeat(auto-fill, minmax(160px, 1fr))',
     gap: 12,
     marginBottom: 24,
-  };
-  const groupLabel: React.CSSProperties = {
-    color: '#57616A',
-    margin: '0 0 10px',
-    fontSize: 14,
-    fontWeight: 600,
   };
 
   return (
@@ -59,11 +48,15 @@ export default function JobsPage() {
         </h2>
         <p style={{ margin: 0, color: 'rgba(255,255,255,0.92)', fontSize: 15, lineHeight: 1.7 }}>
           {t({
-            bn: 'সরকারি চাকরির পরীক্ষার সিলেবাস, MCQ ব্যাংক, মক টেস্ট, বিগত প্রশ্ন ও ভাইভা প্রস্তুতি — সব এক জায়গায়। কনটেন্ট যাচাইকৃত শিক্ষকের যাচাইয়ের পর প্রকাশিত হবে।',
-            en: 'Syllabus, MCQ bank, mock tests, previous questions and viva preparation for government job exams — all in one place. Content is published only after verified-teacher review.',
+            bn: 'চাকরির পরীক্ষার সিলেবাস, MCQ ব্যাংক, মক টেস্ট, বিগত প্রশ্ন ও ভাইভা প্রস্তুতি — সব এক জায়গায়। কনটেন্ট যাচাইকৃত শিক্ষকের যাচাইয়ের পর প্রকাশিত হবে।',
+            en: 'Syllabus, MCQ bank, mock tests, previous questions and viva preparation for job exams — all in one place. Content is published only after verified-teacher review.',
           })}
         </p>
       </section>
+
+      {/* Non-affiliation (Step 5): Eduvelto is not affiliated with any
+          recruiting body — verify in the official circular. */}
+      <JobNonAffiliationNote />
 
       {/* First-time mode choice (Step 2 §1.8, Step 4): shown once to
           signed-in users who have not seen it; never blocks the page. */}
@@ -91,22 +84,10 @@ export default function JobsPage() {
         </LinkButton>
       </p>
 
-      <p style={groupLabel}>{t({ bn: 'প্রধান পরীক্ষা', en: 'Main exams' })}</p>
-      <div style={grid}>
-        {tier1.map((def, i) => (
-          <JobCard key={def.slug} def={def} delayMs={Math.min(i, 4) * 60} />
-        ))}
-      </div>
-
-      <p style={groupLabel}>{t({ bn: 'আরও পরীক্ষা — কনটেন্ট আসছে', en: 'More exams — content coming' })}</p>
-      <div style={grid}>
-        {tier2.map((def, i) => (
-          <JobCard key={def.slug} def={def} delayMs={Math.min(i, 4) * 60} />
-        ))}
-        {tier3.map((def, i) => (
-          <JobCard key={def.slug} def={def} delayMs={Math.min(i + 3, 4) * 60} />
-        ))}
-      </div>
+      {/* Step 5 — exam cards grouped by the 10 categories (Step 2
+          §0.4/§2.1), not by tier. Same groups as the homepage Jobs
+          section (JobCategoryGroups, one source of truth). */}
+      <JobCategoryGroups />
 
       <div style={grid}>
         <CommonPrepCard />

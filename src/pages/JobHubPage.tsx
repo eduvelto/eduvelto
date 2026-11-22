@@ -21,6 +21,7 @@
 import { Link, useParams } from 'react-router-dom';
 import { PageShell, EmptyState } from '../components/PageShell';
 import { Card, Chip, LinkButton, Reveal } from '../components/ui';
+import { JobNonAffiliationNote } from '../components/JobCards';
 import JobModeSwitch from '../components/JobModeSwitch';
 import { useLanguage, T } from '../i18n/LanguageContext';
 import { useJobMode } from '../lib/jobMode';
@@ -137,6 +138,10 @@ export default function JobHubPage() {
         </p>
       </section>
 
+      {/* Non-affiliation (Step 5): Eduvelto is not affiliated with any
+          recruiting body — verify in the official circular. */}
+      <JobNonAffiliationNote />
+
       {/* Tab bar — Home, Subjects, Practice, Mock Tests, Previous Questions, Results, Progress, Current Affairs. */}
       <nav className="ev-class-tabs" aria-label={t({ bn: `${def.bn} — ট্যাব`, en: `${def.en} — tabs` })}>
         {JOB_TABS.map((tb) => {
@@ -197,6 +202,28 @@ export default function JobHubPage() {
               )}
             </Card>
           </Reveal>
+
+          {/* Step 5 — IT hub scope note (Step 2 §2.9/§13.8): the scope
+              is UNDECIDED (owner decision), so this hub is structure +
+              honest empty state only. No pattern, marks or post counts
+              are guessed — the open question (government IT posts?
+              private IT jobs? professional certificates?) is quoted
+              as a question, not answered. */}
+          {def.slug === 'it-professional' ? (
+            <Reveal>
+              <Card style={{ marginBottom: 20 }}>
+                <div style={{ fontWeight: 700, color: '#142B3B', fontSize: 17 }}>
+                  {t({ bn: 'পরিসর ঠিক হচ্ছে', en: 'Scope being decided' })}
+                </div>
+                <p style={{ margin: '8px 0 0', color: '#57616A', fontSize: 14, lineHeight: 1.8 }}>
+                  {t({
+                    bn: 'কোন পদগুলো এর ভেতরে থাকবে, তা ঠিক হচ্ছে — সরকারি IT পদ, বেসরকারি IT চাকরি, নাকি পেশাগত সনদ? সিদ্ধান্ত হলে বিজ্ঞপ্তি যাচাই করে তবে ধরন লেখা হবে। এখানে কোনো ধরন, মানবণ্টন বা পদসংখ্যা অনুমান করে লেখা হয়নি।',
+                    en: 'Which posts belong here is being decided — government IT posts, private IT jobs, or professional certificates? Once decided, the pattern will be written only after verification from the circular. No pattern, mark distribution or post count is guessed here.',
+                  })}
+                </p>
+              </Card>
+            </Reveal>
+          ) : null}
 
           {/* Mode view — Beginner or Advanced (owner decision 22 Nov
               2026). STRUCTURE ONLY: every practice/mock entry below is

@@ -269,6 +269,30 @@ export const JOB_EXAMS: JobExamDef[] = [
     accentSoft: '#FBE9F7',
     accentDeep: '#701A75',
   },
+  // Step 5 — IT & Professional Jobs (Step 2 §2.9, owner brief category 9).
+  // Scope UNDECIDED (Step 2 §13.8 — owner decision): which posts/exams
+  // belong here (government IT posts? private IT jobs? professional
+  // certificates?) is not decided, so this hub is STRUCTURE + honest
+  // empty state only — no pattern, no marks, no post counts guessed.
+  // Accent #1E3A5F (Step 2 §2.9 proposal, §13.10 — AA verified, white
+  // text 11.6:1, same triple as the category in jobProfile.ts).
+  // officialUrl null: no single official site (like private-ngo).
+  {
+    slug: 'it-professional',
+    bn: 'IT ও পেশাগত চাকরি',
+    en: 'IT & Professional Jobs',
+    fullBn: 'IT ও পেশাগত চাকরির প্রস্তুতি',
+    fullEn: 'IT & Professional Job Preparation',
+    orgBn: 'বিভিন্ন IT ও পেশাগত প্রতিষ্ঠান',
+    orgEn: 'Various IT and professional organisations',
+    stepsBn: 'বিজ্ঞপ্তি অনুযায়ী',
+    stepsEn: 'As per circular',
+    officialUrl: null,
+    tier: 3,
+    accent: '#1E3A5F',
+    accentSoft: '#E8EDF3',
+    accentDeep: '#152A45',
+  },
 ];
 
 export function jobExamBySlug(slug: string): JobExamDef | undefined {
@@ -389,6 +413,132 @@ export const EXAM_PATTERNS: Partial<Record<string, ExamPattern>> = {
     noteEn: 'Preliminary pass mark 40. Written (subject-based): 100 marks, 3 hours, pass 40. Viva: 20 marks (academic results 12 + oral 8), pass 8. The 19th exam’s pattern is not written here — claims conflict; nothing will be written until the 19th circular arrives.',
   },
 };
+
+/**
+ * Machine-readable exam rules (Step 5 — Step 3 §2.2 `jobExams.rulesConfig`).
+ * ONLY the 4 verified exams have a config; every other exam returns
+ * null from jobRulesConfig() ("unknown — verify against the circular").
+ * Figures are the Step 3 §2.2 verified values, copied from
+ * EXAM_PATTERNS above (subject marks converted from Bangla digits to
+ * numbers; the unit test asserts each subject list sums to
+ * questionCount, so a transcription slip is caught). Nothing here is a
+ * new claim: BCS 200/2h/−0.50, Bank 100/1h/−0.25 (negative marking
+ * NOT verified — circular-dependent, hence negativeMarkingVerified
+ * false), Primary 90/90min/−0.25/pass 50% (45) DPE 2025, NTRCA 18th
+ * 100/1h/−0.25/pass 40. BCS viva marks are NEVER written; NTRCA 19th
+ * is NEVER written. The same shape is the Firestore seed
+ * (team/job-categories-exams-seed.json) and the rules' type checks.
+ */
+export interface JobRulesSubject {
+  nameBn: string;
+  nameEn: string;
+  marks: number;
+}
+
+export interface JobRulesConfig {
+  questionCount: number | null;
+  timeMinutes: number | null;
+  marksPerQuestion: number | null;
+  negativeMarking: number | null;
+  negativeMarkingVerified: boolean;
+  passMark: number | null;
+  passPercent: number | null;
+  subjects: JobRulesSubject[];
+  patternSource: string;
+  /** ISO date string when the pattern was verified, or null (none recorded yet). */
+  patternVerifiedAt: string | null;
+  patternLabel: 'verified' | 'last-verified-18th' | 'circular-based';
+}
+
+export const JOB_RULES_CONFIGS: Record<string, JobRulesConfig> = {
+  bcs: {
+    questionCount: 200,
+    timeMinutes: 120,
+    marksPerQuestion: 1,
+    negativeMarking: 0.5,
+    negativeMarkingVerified: true,
+    passMark: null,
+    passPercent: null,
+    subjects: [
+      { nameBn: 'বাংলা ভাষা ও সাহিত্য', nameEn: 'Bangla Language & Literature', marks: 35 },
+      { nameBn: 'ইংরেজি ভাষা ও সাহিত্য', nameEn: 'English Language & Literature', marks: 35 },
+      { nameBn: 'বাংলাদেশ বিষয়াবলি', nameEn: 'Bangladesh Affairs', marks: 30 },
+      { nameBn: 'আন্তর্জাতিক বিষয়াবলি', nameEn: 'International Affairs', marks: 20 },
+      { nameBn: 'ভূগোল, পরিবেশ ও দুর্যোগ ব্যবস্থাপনা', nameEn: 'Geography, Environment & Disaster Management', marks: 10 },
+      { nameBn: 'সাধারণ বিজ্ঞান', nameEn: 'General Science', marks: 15 },
+      { nameBn: 'কম্পিউটার ও তথ্যপ্রযুক্তি', nameEn: 'Computer & ICT', marks: 15 },
+      { nameBn: 'গাণিতিক যুক্তি', nameEn: 'Mathematical Reasoning', marks: 15 },
+      { nameBn: 'মানসিক দক্ষতা', nameEn: 'Mental Ability', marks: 15 },
+      { nameBn: 'নৈতিকতা, মূল্যবোধ ও সুশাসন', nameEn: 'Ethics, Values & Good Governance', marks: 10 },
+    ],
+    patternSource: 'BPSC বিজ্ঞপ্তি',
+    patternVerifiedAt: null,
+    patternLabel: 'verified',
+  },
+  bank: {
+    questionCount: 100,
+    timeMinutes: 60,
+    marksPerQuestion: 1,
+    negativeMarking: 0.25,
+    // Circular-dependent: "usually 0.25" — the circular/admit card is
+    // authoritative, so the flag stays false even though the pattern
+    // itself is verified (Step 3 §2.2).
+    negativeMarkingVerified: false,
+    passMark: null,
+    passPercent: null,
+    subjects: [
+      { nameBn: 'বাংলা', nameEn: 'Bangla', marks: 25 },
+      { nameBn: 'ইংরেজি', nameEn: 'English', marks: 25 },
+      { nameBn: 'সাধারণ গণিত ও পরিমাণগত দক্ষতা', nameEn: 'General Math & Quantitative Aptitude', marks: 20 },
+      { nameBn: 'সাধারণ জ্ঞান', nameEn: 'General Knowledge', marks: 20 },
+      { nameBn: 'কম্পিউটারের মৌলিক জ্ঞান', nameEn: 'Basic Computer Knowledge', marks: 10 },
+    ],
+    patternSource: 'BSCS বিজ্ঞপ্তি',
+    patternVerifiedAt: null,
+    patternLabel: 'verified',
+  },
+  'primary-teacher': {
+    questionCount: 90,
+    timeMinutes: 90,
+    marksPerQuestion: 1,
+    negativeMarking: 0.25,
+    negativeMarkingVerified: true,
+    passMark: 45,
+    passPercent: 50,
+    subjects: [
+      { nameBn: 'বাংলা', nameEn: 'Bangla', marks: 25 },
+      { nameBn: 'ইংরেজি', nameEn: 'English', marks: 25 },
+      { nameBn: 'গণিত ও দৈনন্দিন বিজ্ঞান', nameEn: 'Math & Everyday Science', marks: 20 },
+      { nameBn: 'সাধারণ জ্ঞান (বাংলাদেশ ও আন্তর্জাতিক)', nameEn: 'General Knowledge (Bangladesh & International)', marks: 20 },
+    ],
+    patternSource: 'সরকারি প্রাথমিক বিদ্যালয় শিক্ষক নিয়োগ বিধিমালা ২০২৫, ২৮ আগস্ট ২০২৫',
+    patternVerifiedAt: null,
+    patternLabel: 'verified',
+  },
+  ntrca: {
+    questionCount: 100,
+    timeMinutes: 60,
+    marksPerQuestion: 1,
+    negativeMarking: 0.25,
+    negativeMarkingVerified: true,
+    passMark: 40,
+    passPercent: 40,
+    subjects: [
+      { nameBn: 'বাংলা', nameEn: 'Bangla', marks: 25 },
+      { nameBn: 'ইংরেজি', nameEn: 'English', marks: 25 },
+      { nameBn: 'সাধারণ গণিত', nameEn: 'General Math', marks: 25 },
+      { nameBn: 'সাধারণ জ্ঞান', nameEn: 'General Knowledge', marks: 25 },
+    ],
+    patternSource: 'NTRCA ১৮তম পরীক্ষার বিজ্ঞপ্তি',
+    patternVerifiedAt: null,
+    patternLabel: 'last-verified-18th',
+  },
+};
+
+/** The verified rules config for an exam, or null (unverified — "unknown, verify against the circular"). */
+export function jobRulesConfig(slug: string): JobRulesConfig | null {
+  return JOB_RULES_CONFIGS[slug] ?? null;
+}
 
 /** The 8 hub tabs (design plan §1.4 — same pattern as class dashboards). */
 export const JOB_TABS = [
