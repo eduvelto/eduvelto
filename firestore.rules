@@ -85,10 +85,20 @@ service cloud.firestore {
     function callerVerificationStatus() {
       return get(/databases/$(database)/documents/users/$(uid())).data.get('verificationStatus', '');
     }
+    // Single-get form (Step 17, 23 Nov 2026): callerActive() +
+    // callerRole() + callerVerificationStatus() each fetch the users
+    // doc separately (4 gets), which pushed the jobTopics/jobLessons
+    // creates over Firestore's 1000-expression evaluation limit.
+    // One fetch, then pure field reads — cheaper than the old
+    // isTeacher() gate (2 gets).
     function isVerifiedJobBankAuthor() {
-      return signedIn() && callerActive()
-        && (callerRole() in ['admin', 'moderator', 'owner']
-            || (callerRole() == 'teacher' && callerVerificationStatus() == 'verified'));
+      return signedIn()
+        && isVerifiedJobBankAuthorFor(get(/databases/$(database)/documents/users/$(uid())).data);
+    }
+    function isVerifiedJobBankAuthorFor(d) {
+      return d.get('isActive', true) != false
+        && (d.get('role', '') in ['admin', 'moderator', 'owner']
+            || (d.get('role', '') == 'teacher' && d.get('verificationStatus', '') == 'verified'));
     }
     // DASHBOARDS (Step 5/8, branch draft — NOT deployed): a guardian may
     // read a linked child's progress/bookmarks/results ONLY while the
@@ -1773,6 +1783,11 @@ service cloud.firestore {
       // admin.ts sets it) — an admin cannot silently verify anyone.
       allow update: if isAdmin()
         && resource.data.role != 'owner'
+        // L4 (Step 17, 23 Nov 2026): an admin could update a FELLOW
+        // admin's doc — demote them, suspend them. Staff docs are
+        // now owner-only: an admin manages students / teachers /
+        // parents, never another admin or moderator.
+        && (!(resource.data.role in ['admin', 'moderator']) || isOwnerRole())
         && request.resource.data.diff(resource.data).affectedKeys()
              .hasOnly(['role', 'verificationStatus', 'isActive', 'suspendedReason',
                        'verifiedBy', 'verifiedAt', 'updatedAt'])
@@ -2096,8 +2111,16 @@ service cloud.firestore {
         || (signedIn() && callerActive() && d.get('authorId', '') == uid())
         || (signedIn() && callerActive() && d.get('createdBy', '') == uid());
     }
+    // M2 (Step 17, security testing 23 Nov 2026): a PENDING teacher
+    // could author drafts — isTeacher() admits ANY teacher-role user,
+    // including one whose verification is still pending. The bank's
+    // gate is reused (staff, or a teacher whose verificationStatus
+    // is 'verified'); same semantics, zero new helpers — the compiled
+    // rules margin is ~80 bytes. This function is shared by books,
+    // chapters, lessons, quizzes and games: the same hole existed in
+    // each, and the fix applies uniformly.
     function contentCreate() {
-      return isTeacher()
+      return isVerifiedJobBankAuthor()
         && isDraftStatus(request.resource.data.reviewStatus)
         && isStr(request.resource.data.title, 200);
     }
@@ -2124,7 +2147,7 @@ service cloud.firestore {
 
     match /educationDirectory/{docId} {
       allow read: if contentRead(resource.data);
-      allow create: if isTeacher() && isDraftStatus(request.resource.data.reviewStatus);
+      allow create: if isVerifiedJobBankAuthor() && isDraftStatus(request.resource.data.reviewStatus);
       allow update: if contentUpdate(resource.data);
       allow delete: if isAdmin();
     }
@@ -2294,7 +2317,18 @@ service cloud.firestore {
         && isStr(request.resource.data.fullName, 100)
         && isStr(request.resource.data.institution, 200)
         && isOptStr(request.resource.data.get('post', null), 100)
-        && isOptStr(request.resource.data.get('institutionContact', null), 100);
+        && isOptStr(request.resource.data.get('institutionContact', null), 100)
+        // L1 (Step 17, 23 Nov 2026): the create had NO key allowlist,
+        // so a forged application could smuggle `checks`, `verifiedAt`
+        // or `decision` past the form. Exactly the 18 keys admin.ts
+        // submitTeacherApplication writes (createdAt only on first
+        // filing; the re-apply merge path is covered by the update
+        // rule below). The decision fields (checkedBy, reason, checks)
+        // are written only by the admin update path.
+        && request.resource.data.keys().hasOnly(['id', 'userId', 'fullName', 'teachingLevel',
+             'subjects', 'classes', 'institution', 'post', 'institutionContact',
+             'qualifications', 'experienceYears', 'verificationReason', 'evidenceRef',
+             'status', 'verificationStatus', 'submittedAt', 'updatedAt', 'createdAt']);
       // DASHBOARDS (Step 5): a REJECTED teacher may re-apply — the
       // applicant re-files their own record as 'pending' again (same
       // deterministic id). Only the application fields may change, and
@@ -2656,7 +2690,7 @@ service cloud.firestore {
     // ---------- career / opportunities (Phase 4) ----------
     match /careerPaths/{pathId} {
       allow read: if isPublished(resource.data) || isModerator();
-      allow create: if isTeacher() && isDraftStatus(request.resource.data.reviewStatus);
+      allow create: if isVerifiedJobBankAuthor() && isDraftStatus(request.resource.data.reviewStatus);
       allow update: if contentUpdate(resource.data);
       allow delete: if isAdmin();
     }
@@ -2805,6 +2839,12 @@ service cloud.firestore {
              // verify / return of a Job content doc.
              'job-content-published', 'job-content-unpublished',
              'job-content-verified', 'job-content-returned',
+             // Step 15: circular deletes are Admin-only and must
+             // leave an audit entry (a delete without a trail would
+             // be invisible). Probe-measured with the circulars
+             // delete line + 3 keys: +125 stripped bytes total,
+             // release-create PASSES.
+             'job-content-deleted',
              'user-profile-viewed', 'user-messages-viewed',
              'support-message-sent', 'message-reported', 'message-blocked']
         && request.resource.data.keys().hasOnly(
@@ -3208,6 +3248,10 @@ service cloud.firestore {
         && get(/databases/$(database)/documents/users/$(uid())/nuAttempts/$(get(/databases/$(database)/documents/nuReceipts/$(uid() + '_' + bundleId)).data.attemptId)).data.bundleId == bundleId
         && get(/databases/$(database)/documents/users/$(uid())/nuAttempts/$(get(/databases/$(database)/documents/nuReceipts/$(uid() + '_' + bundleId)).data.attemptId)).data.userId == uid()
         && get(/databases/$(database)/documents/nuReceipts/$(uid() + '_' + bundleId)).data.createdAt is timestamp
+        // L2 (Step 17, 23 Nov 2026): the read gate had NO lower bound
+        // on createdAt — a future-dated receipt opened the key for a
+        // year. Mirrors hasFreshReceipt (createdAt <= request.time).
+        && get(/databases/$(database)/documents/nuReceipts/$(uid() + '_' + bundleId)).data.createdAt <= request.time
         && request.time < get(/databases/$(database)/documents/nuReceipts/$(uid() + '_' + bundleId)).data.createdAt + duration.value(10, 'm');
     }
 
@@ -3469,10 +3513,32 @@ service cloud.firestore {
     // and a new one created. The receipt id is `{uid}_{bundleId}`.
     match /nuReceipts/{receiptId} {
       allow read: if (signedIn() && resource.data.userId == uid()) || isAdmin();
-      allow create: if receiptId == uid() + '_' + request.resource.data.bundleId
+      // L2 (Step 17, 23 Nov 2026): the create was the weak copy — no
+      // signedIn/callerActive, no key allowlist, no createdAt bounds,
+      // no attempt check at all (a receipt for a nonexistent or
+      // unsubmitted attempt passed). Now mirrors jobReceipts: the
+      // anchor attempt must exist, be submitted, and match this
+      // bundle and this user; createdAt within 5 minutes, never in
+      // the future. Single-use is kept (!exists on the id).
+      allow create: if signedIn() && callerActive()
+        && receiptId == uid() + '_' + request.resource.data.bundleId
+        && request.resource.data.keys().hasOnly(['userId', 'bundleId', 'attemptId', 'createdAt'])
         && request.resource.data.userId == uid()
-        && request.resource.data.attemptId is string
         && request.resource.data.bundleId is string
+        && request.resource.data.bundleId.size() <= 200
+        && request.resource.data.attemptId is string
+        && request.resource.data.attemptId.size() <= 200
+        && request.resource.data.createdAt is timestamp
+        && request.resource.data.createdAt <= request.time
+        && request.resource.data.createdAt > request.time - duration.value(5, 'm')
+        && exists(/databases/$(database)/documents/users/$(uid())/nuAttempts/$(request.resource.data.attemptId))
+        && get(/databases/$(database)/documents/users/$(uid())/nuAttempts/$(request.resource.data.attemptId)).data.status == 'submitted'
+        && get(/databases/$(database)/documents/users/$(uid())/nuAttempts/$(request.resource.data.attemptId)).data.bundleId == request.resource.data.bundleId
+        // NOTE: no separate attempt.userId == uid() check — the attempt
+        // is fetched from the CALLER's own subcollection
+        // (/users/$(uid())/nuAttempts/...), so the path itself enforces
+        // ownership; a redundant field check would only cost compiled
+        // bytes (the rules margin is ~80 bytes before the refactor).
         && !exists(/databases/$(database)/documents/nuReceipts/$(receiptId));
       allow update: if false;
       allow delete: if resource.data.userId == uid();
@@ -3543,8 +3609,31 @@ service cloud.firestore {
 
     // users/{uid}/nuSessions (§19.2.9): the running-exam state
     // (autosave / recovery copy). Only the owner; deleted after submit.
+    // L3 (Step 17, 23 Nov 2026): the match had NO field restrictions
+    // at all — any owner could smuggle `score`, rewrite attemptId /
+    // startedAt / deadlineAt, or invent fields. Create now allows
+    // exactly the design-doc fields (attemptId, status, startedAt,
+    // deadlineAt, lastSavedAt, answers, deviceInfo, updatedAt) with
+    // a status enum and timestamp types; updates may touch only the
+    // autosave fields — attemptId, startedAt and deadlineAt are
+    // frozen. The session is NOT tied to an existing attempt here:
+    // no client writes nuSessions yet (NU-8 engine not built) and
+    // the create order (attempt-first vs session-first) is undecided
+    // — that linkage is a post-NU-8 follow-up, not a silent break.
     match /users/{uid}/nuSessions/{sessionId} {
-      allow read, create, update: if isOwner(uid);
+      allow read: if isOwner(uid);
+      allow create: if isOwner(uid)
+        && request.resource.data.keys().hasOnly(['attemptId', 'status', 'startedAt',
+             'deadlineAt', 'lastSavedAt', 'answers', 'deviceInfo', 'updatedAt'])
+        && request.resource.data.attemptId is string
+        && request.resource.data.status in ['in_progress', 'submitted']
+        && request.resource.data.startedAt is timestamp
+        && request.resource.data.deadlineAt is timestamp
+        && request.resource.data.updatedAt is timestamp;
+      allow update: if isOwner(uid)
+        && request.resource.data.diff(resource.data).affectedKeys()
+             .hasOnly(['status', 'lastSavedAt', 'answers', 'deviceInfo', 'updatedAt'])
+        && request.resource.data.status in ['in_progress', 'submitted'];
       allow delete: if isOwner(uid) && resource.data.status == 'submitted';
     }
 
@@ -3772,7 +3861,7 @@ service cloud.firestore {
       allow read: if signedIn() && resource.data.get('status', '') == 'published'
         || (signedIn() && resource.data.get('authorId', '') == uid())
         || isModerator();
-      allow create: if isTeacher()
+      allow create: if isVerifiedJobBankAuthor()
         && jobContentCreateCommon(request.resource.data)
         && validJobChapter(request.resource.data)
         && chapterId.matches('^' + request.resource.data.get('subjectId', '') + '__[a-z0-9-]+$')
@@ -3813,7 +3902,7 @@ service cloud.firestore {
       allow read: if signedIn() && resource.data.get('status', '') == 'published'
         || (signedIn() && resource.data.get('authorId', '') == uid())
         || isModerator();
-      allow create: if isTeacher()
+      allow create: if isVerifiedJobBankAuthor()
         && jobContentCreateCommon(request.resource.data)
         && validJobTopic(request.resource.data)
         && topicId.matches('^' + request.resource.data.get('chapterId', '') + '__[a-z0-9-]+$')
@@ -3858,7 +3947,7 @@ service cloud.firestore {
       allow read: if signedIn() && resource.data.get('status', '') == 'published'
         || (signedIn() && resource.data.get('authorId', '') == uid())
         || isModerator();
-      allow create: if isTeacher()
+      allow create: if isVerifiedJobBankAuthor()
         && jobContentCreateCommon(request.resource.data)
         && request.resource.data.get('lessonType', '') == 'lesson'
         && validJobLesson(request.resource.data)
@@ -4323,11 +4412,134 @@ service cloud.firestore {
     // No jobNotifications collection ships: the margin fits ONE
     // minimal block — notifications are derived client-side from
     // published circulars + mocks (src/lib/jobNotifications.ts).
+    //
+    // Step 15: delete lands here (Admin only — a wrongly created
+    // doc is removed by the Admin, never by an editor; moderators
+    // unpublish via reviewStatus='rejected'). Three new allowlist
+    // keys: 'verificationChecklist' (one map — the 7 verification
+    // checklist results + notes + checkedBy + checkedAt; shape is
+    // enforced by the client validator, as with every other field
+    // in this block), 'reviewNote' (the verifier's return reason, readable
+    // by the editor on the doc — adminActions is owner-read-only,
+    // so the note cannot live there), 'lastEditedBy' (who last
+    // edited the doc — the no-self-approval check needs it).
+    // Measured by release-create probe 23 Nov ~02:30: delete +
+    // these 3 keys = +89 stripped bytes, PASSES (compiled margin
+    // after them ≈ 100 bytes). The four new Step 15 collections
+    // below are DEPLOY-BLOCKED on the same margin — see the note
+    // above match /jobReports.
     match /circulars/{circularId} {
       allow read: if resource.data.get('reviewStatus', '') == 'published' || isModerator();
       allow create, update: if isModerator()
-        && request.resource.data.keys().hasOnly(['examSlug', 'postTitleBn', 'postTitleEn', 'circularNumber', 'publishedDate', 'applicationDeadline', 'deadlinePrecision', 'totalPosts', 'eligibilitySummaryBn', 'eligibilitySummaryEn', 'officialUrl', 'applyUrl', 'copyStatus', 'copyTextExcerpt', 'reviewStatus', 'verifiedBy', 'verifiedAt', 'examDate', 'applicationStartDate', 'authorId', 'createdAt', 'updatedAt'])
+        && request.resource.data.keys().hasOnly(['examSlug', 'postTitleBn', 'postTitleEn', 'circularNumber', 'publishedDate', 'applicationDeadline', 'deadlinePrecision', 'totalPosts', 'eligibilitySummaryBn', 'eligibilitySummaryEn', 'officialUrl', 'applyUrl', 'copyStatus', 'copyTextExcerpt', 'reviewStatus', 'verifiedBy', 'verifiedAt', 'examDate', 'applicationStartDate', 'authorId', 'createdAt', 'updatedAt', 'verificationChecklist', 'reviewNote', 'lastEditedBy'])
         && request.resource.data.get('reviewStatus', '') in ['draft', 'in-review', 'verified', 'published', 'rejected'];
+      allow delete: if isAdmin();
+    }
+
+    // ---------- Step 15 admin collections — DEPLOY-BLOCKED ----------
+    // These four blocks are WRITTEN and EMULATOR-VERIFIED in this
+    // branch, but they CANNOT be deployed yet: release-create
+    // probes 23 Nov ~02:24 measured each one OVER the 256,000-byte
+    // compiled limit on its own (jobReports 257,315; jobCorrections
+    // 257,507; circularHistory 256,671; approvedDomains 256,328;
+    // all four + the circulars delete = 260,502, i.e. 4,502 over).
+    // Baseline compiled ≈ 255,791 (margin ≈ 209 bytes).
+    // DO NOT deploy these rules until the public-ID rules refactor
+    // (feature/public-user-ids, scheduled for the 23 Nov 14:30
+    // cron) lands on main and frees ~4,992 compiled bytes: the
+    // deploy coordinator must rebase this branch onto that main,
+    // re-run the release-create probe
+    // (~/workspace/eduorbit/step15-rules-size-probe.mjs), and only
+    // then deploy rules + hosting TOGETHER. A hosting-only deploy
+    // before that would ship admin/report UI whose writes the live
+    // rules deny. The circulars admin UI that works under the
+    // Step 14 rules (queue, checklist, create/edit/verify/archive,
+    // duplicate warnings, domain check) is unaffected — it needs
+    // only the delete line + 3 keys above, which already passed
+    // the probe.
+    match /jobReports/{reportId} {
+      allow read: if signedIn() && (resource.data.reporterId == uid() || isModerator());
+      allow create: if signedIn() && callerActive()
+        && request.resource.data.reporterId == uid()
+        && request.resource.data.status == 'open'
+        && request.resource.data.reason in ['wrong-answer', 'wrong-explanation', 'wrong-info', 'wrong-deadline', 'wrong-post-count', 'broken-link', 'new-extension', 'wrong-organization', 'duplicate', 'other']
+        && request.resource.data.targetType in ['jobQuestion', 'jobLesson', 'jobCircular', 'jobMock']
+        && request.resource.data.targetId is string
+        && request.resource.data.targetAuthorId is string
+        && isOptStr(request.resource.data.details, 2000)
+        && request.resource.data.keys().hasOnly(['reporterId', 'targetType', 'targetId', 'targetAuthorId', 'reason', 'details', 'suggestedValue', 'evidenceUrl', 'status', 'priority', 'resolvedBy', 'resolvedAt', 'resolutionNote', 'createdAt', 'updatedAt']);
+      allow update: if isModerator()
+        // k15a (Step 17, 23 Nov 2026): the decide update had NO
+        // affectedKeys — a moderator deciding a report could rewrite
+        // reporterId / targetId / targetAuthorId along the way.
+        // Only the decide fields may change.
+        && request.resource.data.diff(resource.data).affectedKeys()
+             .hasOnly(['status', 'priority', 'resolvedBy', 'resolvedAt', 'resolutionNote', 'updatedAt'])
+        && request.resource.data.status in ['open', 'investigating', 'resolved', 'dismissed'];
+      allow delete: if false;
+    }
+    match /jobCorrections/{correctionId} {
+      allow read: if signedIn() && (resource.data.requesterId == uid() || isModerator());
+      allow create: if signedIn() && callerActive()
+        && request.resource.data.requesterId == uid()
+        && request.resource.data.status == 'pending'
+        && request.resource.data.targetType in ['jobQuestion', 'jobLesson', 'jobCircular', 'jobMock']
+        && isStr(request.resource.data.whatsWrong, 2000)
+        && isStr(request.resource.data.proposedFix, 2000)
+        && isStr(request.resource.data.source, 500)
+        && request.resource.data.keys().hasOnly(['requesterId', 'targetType', 'targetId', 'whatsWrong', 'proposedFix', 'source', 'status', 'decidedBy', 'decidedAt', 'decisionReason', 'createdAt', 'updatedAt']);
+      allow update: if isModerator()
+        && resource.data.status == 'pending'
+        && request.resource.data.status in ['accepted', 'rejected']
+        // k15b (Step 17, 23 Nov 2026): the decide update had NO
+        // affectedKeys — a moderator deciding a correction could
+        // rewrite whatsWrong / proposedFix / source along the way.
+        // Only the decide fields may change.
+        && request.resource.data.diff(resource.data).affectedKeys()
+             .hasOnly(['status', 'decidedBy', 'decidedAt', 'decisionReason', 'updatedAt'])
+        && request.resource.data.decidedBy == uid()
+        && request.resource.data.decisionReason is string
+        && request.resource.data.decisionReason.size() >= 10;
+      allow delete: if false;
+    }
+    // Per-field audit trail for circulars (ChatGPT circularHistory):
+    // one doc per sensitive change — never updated, never deleted.
+    // The admin-action audit (who approved/published) already
+    // lives in adminActions (job-content-* actions, zero new
+    // rules); this collection is the FIELD-level trail a verifier
+    // reads on the circular (what changed, old → new, from which
+    // source). Gemini's subcollection jobCirculars/{id}/auditLogs
+    // is ADAPTED to this top-level collection so the admin queue
+    // can read recent changes across ALL circulars in one query.
+    match /circularHistory/{historyId} {
+      allow read: if isModerator();
+      allow create: if isModerator()
+        && request.resource.data.keys().hasOnly(['circularId', 'fieldChanged', 'previousValue', 'newValue', 'sourceId', 'changedBy', 'changedAt', 'note'])
+        && request.resource.data.fieldChanged in ['applicationDeadline', 'officialUrl', 'applyUrl', 'totalPosts', 'reviewStatus', 'examDate', 'applicationStartDate', 'duplicateOf', 'correctionOf', 'extensionOf', 'relatedTo']
+        && request.resource.data.changedBy == uid()
+        && request.resource.data.circularId is string
+        && request.resource.data.changedAt is timestamp;
+      allow update, delete: if false;
+    }
+    // Admin-managed approved official domains (ChatGPT; Gemini's
+    // config/officialDomains single doc is ADAPTED to one doc per
+    // domain so a domain can be added/deprecated without rewriting
+    // a shared doc — the read cost is the same for the admin UI,
+    // which loads the list once).
+    match /approvedDomains/{domainId} {
+      allow read: if isModerator();
+      allow create, update: if isAdmin()
+        && request.resource.data.keys().hasOnly(['domain', 'organization', 'examSlugs', 'addedBy', 'createdAt', 'updatedAt', 'status'])
+        && isStr(request.resource.data.domain, 200)
+        && isStr(request.resource.data.organization, 200)
+        // 'status' is optional on create (defaults to active);
+        // setApprovedDomainStatus writes it on update (suspend =
+        // soft action — history preserved, never hard-deleted).
+        // The pre-compaction block omitted 'status' from hasOnly,
+        // which would have denied every status write; fixed here
+        // (Step 15 build, 23 Nov ~03:00) and re-measured.
+        && request.resource.data.get('status', 'active') in ['active', 'watch', 'deprecated'];
+      allow delete: if isAdmin();
     }
 
     // jobQuestionKeys — the answer key, one doc per bundle.

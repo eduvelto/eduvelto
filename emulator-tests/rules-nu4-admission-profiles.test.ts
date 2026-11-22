@@ -662,8 +662,14 @@ describe('NU-4 rules — receipts and keys (NU-T7, T8)', () => {
       }),
     );
   });
-  it('(n45) student creates a receipt for their own new attempt id: ALLOWED (create is field-checked; key read still enforces the 7 conditions)', async () => {
-    await assertSucceeds(
+  // Step 17 (L2 fix, 23 Nov 2026): the OLD test asserted a receipt for
+  // an in-progress attempt could be CREATED (the create was field-only
+  // — no attempt check at all). That was the L2 hole: the create now
+  // mirrors jobReceipts and requires a real SUBMITTED attempt. The
+  // honest path (submitted attempt → receipt → key read) is proven in
+  // rules-step17-security.test.ts (l2d).
+  it('(n45) student creates a receipt for an IN-PROGRESS attempt: DENIED (Step 17 L2 — create requires a submitted attempt)', async () => {
+    await assertFails(
       setDoc(doc(asStudent1(), 'nuReceipts', 'student-1_bundle-mock-draft'), {
         userId: 'student-1',
         bundleId: 'bundle-mock-draft',

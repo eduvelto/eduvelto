@@ -169,8 +169,13 @@ async function seed() {
       ['admin-1', 'admin', {}],
       ['owner-1', 'owner', {}],
       ['moderator-1', 'moderator', {}],
-      ['teacher-1', 'teacher', { verificationStatus: 'pending' }],
-      ['teacher-2', 'teacher', { verificationStatus: 'pending' }],
+      // Step 17 (M2 fix, 23 Nov 2026): the content-authoring gate is
+      // now isVerifiedJobBankAuthor() — a PENDING teacher can no longer
+      // create drafts. The suite's author fixtures are therefore
+      // VERIFIED teachers; the pending-teacher denial is proven in
+      // rules-step17-security.test.ts (m2a–m2e).
+      ['teacher-1', 'teacher', { verificationStatus: 'verified' }],
+      ['teacher-2', 'teacher', { verificationStatus: 'verified' }],
       ['student-1', 'student', {}],
       ['student-2', 'student', {}],
     ] as const) {
