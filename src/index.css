@@ -118,6 +118,12 @@ a:hover {
 .ev-reveal > .ev-card {
   flex: 1;
 }
+/* Same for colour-identity cards (JobCards / ClassCards): without this
+   the card keeps its content height and rows look ragged — the /jobs
+   grid showed uneven card heights (22 Nov 2026 owner screenshot). */
+.ev-reveal > .ev-class-card {
+  flex: 1;
+}
 .ev-reveal-visible {
   opacity: 1;
   transform: translateY(0);

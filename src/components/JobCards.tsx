@@ -52,9 +52,12 @@ export function JobNonAffiliationNote() {
  */
 export function JobCategoryGroups() {
   const groups = jobCategoryGroups();
+  // auto-fit (not auto-fill): empty tracks collapse, so a group with a
+  // single exam (Bank, Primary Teacher, NTRCA…) fills its row instead
+  // of leaving a blank area beside one narrow card (22 Nov 2026).
   const grid: React.CSSProperties = {
     display: 'grid',
-    gridTemplateColumns: 'repeat(auto-fill, minmax(160px, 1fr))',
+    gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))',
     gap: 12,
     marginBottom: 24,
   };
@@ -383,9 +386,11 @@ export function CommonPrepCard({ delayMs = 0 }: { delayMs?: number }) {
  */
 export function JobsSection() {
   const { t } = useLanguage();
+  // auto-fit: the single common-preparation card fills its row (see
+  // JobCategoryGroups above — auto-fill left a blank area beside it).
   const grid: React.CSSProperties = {
     display: 'grid',
-    gridTemplateColumns: 'repeat(auto-fill, minmax(160px, 1fr))',
+    gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))',
     gap: 12,
     marginBottom: 24,
   };
