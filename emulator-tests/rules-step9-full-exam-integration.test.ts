@@ -183,6 +183,9 @@ interface MockSetup {
   key: JobQuestionKey;
   snapshot: MockSnapshot;
   ref: { bundleId: string; n: number; questionId: string };
+  /** Multi-question setups list every ref here; single-question
+   * setups keep using `ref`. */
+  refs?: Array<{ bundleId: string; n: number; questionId: string }>;
 }
 
 const BCS: MockSetup = {
@@ -208,6 +211,93 @@ const BANK: MockSetup = {
   ref: { bundleId: BANK_BUNDLE_ID, n: 1, questionId: 'q-bank-1' },
 };
 
+/* Real-content E2E (Step 9 closure, Step 8 finding #8): three
+ * VERBATIM questions from the live BCS English batch 1 —
+ * team/job-questions-bcs-english-draft-2026-11-22.json
+ * (bcs-eng-001/002/003, all Published live 22 Nov, audit
+ * team/bcs-english-batch1-import-audit-2026-11-22.json). No
+ * question is invented here: question text, options, correct
+ * letters and explanations are copied from that draft. The
+ * bundle/key/definition/manifest are the TEST FIXTURE (a 3-question
+ * mock) — live has no published mock definition/manifest yet, so
+ * a real student mock still cannot run on production; this is the
+ * closest E2E the engine↔rules path allows. */
+const REAL_BUNDLE_ID = 'mock__full__bcs__e2e';
+const REAL_BUNDLE: JobQuestionBundle = {
+  kind: 'mock',
+  examSlug: 'bcs',
+  topicId: null,
+  mockId: 'full__bcs__e2e',
+  titleBn: 'বিসিএস পূর্ণ মক (বাস্তব প্রশ্ন)',
+  titleEn: 'BCS Full Mock (real questions)',
+  questions: [
+    {
+      n: 1, questionId: 'bcs-eng-001', topicId: 'bcs__english__grammar__tense',
+      subjectId: 'bcs__english', questionText: 'Choose the correct sentence.',
+      options: [
+        { letter: 'A', text: 'He go to school every day.' },
+        { letter: 'B', text: 'He going to school every day.' },
+        { letter: 'C', text: 'He goes to school every day.' },
+        { letter: 'D', text: 'He gone to school every day.' },
+      ],
+      difficulty: 'easy',
+    },
+    {
+      n: 2, questionId: 'bcs-eng-002', topicId: 'bcs__english__grammar__tense',
+      subjectId: 'bcs__english', questionText: 'By the time you arrive, I ___ my homework.',
+      options: [
+        { letter: 'A', text: 'will have finished' },
+        { letter: 'B', text: 'will finish' },
+        { letter: 'C', text: 'finish' },
+        { letter: 'D', text: 'have finished' },
+      ],
+      difficulty: 'medium',
+    },
+    {
+      n: 3, questionId: 'bcs-eng-003', topicId: 'bcs__english__grammar__tense',
+      subjectId: 'bcs__english', questionText: 'She ___ in Dhaka since 2015.',
+      options: [
+        { letter: 'A', text: 'lives' },
+        { letter: 'B', text: 'is living' },
+        { letter: 'C', text: 'lived' },
+        { letter: 'D', text: 'has been living' },
+      ],
+      difficulty: 'medium',
+    },
+  ],
+  questionCount: 3,
+  bundleVersion: 1,
+  status: 'published',
+  reviewStatus: 'Published',
+  sourceQuestionIds: ['bcs-eng-001', 'bcs-eng-002', 'bcs-eng-003'],
+  configVersion: '1',
+  createdAt: TS,
+  updatedAt: TS,
+};
+const REAL_KEY: JobQuestionKey = {
+  bundleId: REAL_BUNDLE_ID,
+  answers: [
+    { n: 1, questionId: 'bcs-eng-001', correctLetter: 'C', correctText: 'He goes to school every day.', explanation: 'he third person singular, তাই present simple-এ verb-এর শেষে -s/-es বসে — goes সঠিক।', whyWrong: null },
+    { n: 2, questionId: 'bcs-eng-002', correctLetter: 'A', correctText: 'will have finished', explanation: "'By the time you arrive' — ভবিষ্যতের একটা সময়ের আগেই কাজ শেষ হয়ে যাবে, তাই future perfect (will have + past participle) হয়।", whyWrong: null },
+    { n: 3, questionId: 'bcs-eng-003', correctLetter: 'D', correctText: 'has been living', explanation: "'since 2015' — অতীত থেকে এখন পর্যন্ত চলছে, তাই present perfect continuous (has/have been + verb-ing) হয়।", whyWrong: null },
+  ],
+  configVersion: '1',
+  createdAt: TS,
+  updatedAt: TS,
+};
+const REAL_SNAPSHOT: MockSnapshot = {
+  questionCount: 3, timeMinutes: 120, marksPerQuestion: 1,
+  negativeMarking: 0.5, negativeMarkingVerified: true,
+  passPercent: null, scoringConfigVersion: 'v1',
+};
+const REAL: MockSetup = {
+  examSlug: 'bcs', mockId: 'full__bcs__e2e', bundleId: REAL_BUNDLE_ID,
+  definitionId: 'full__bcs__e2e', questionSetId: 'full__bcs__e2e_v1',
+  bundle: REAL_BUNDLE, key: REAL_KEY, snapshot: REAL_SNAPSHOT,
+  ref: { bundleId: REAL_BUNDLE_ID, n: 1, questionId: 'bcs-eng-001' },
+  refs: [1, 2, 3].map((n) => ({ bundleId: REAL_BUNDLE_ID, n, questionId: `bcs-eng-00${n}` })),
+};
+
 async function seed() {
   await env.withSecurityRulesDisabled(async (ctx) => {
     const db = ctx.firestore();
@@ -218,7 +308,7 @@ async function seed() {
       language: 'bn',
       isActive: true,
     });
-    for (const setup of [BCS, BANK]) {
+    for (const setup of [BCS, BANK, REAL]) {
       await setDoc(doc(db, 'jobQuestionBundles', setup.bundleId), { ...setup.bundle });
       await setDoc(doc(db, 'jobQuestionKeys', setup.bundleId), { ...setup.key });
       await setDoc(doc(db, 'jobExamDefinitions', setup.definitionId), {
@@ -243,8 +333,8 @@ async function seed() {
         examSlug: setup.examSlug,
         mockId: setup.mockId,
         version: 1,
-        questionCount: 1,
-        questionRefs: [setup.ref],
+        questionCount: setup.snapshot.questionCount,
+        questionRefs: setup.refs ?? [setup.ref],
         markingSchemeVersion: setup.snapshot.scoringConfigVersion,
         status: 'published',
         publishedAt: TS,
@@ -323,7 +413,7 @@ async function createSession(sessionId: string, setup: MockSetup): Promise<JobMo
     definitionId: setup.definitionId,
     questionSetId: setup.questionSetId,
     bundleVersion: setup.bundle.bundleVersion,
-    questionRefs: [setup.ref],
+    questionRefs: setup.refs ?? [setup.ref],
     timeMinutes: setup.snapshot.timeMinutes,
     clientNowMillis: Date.now(),
   });
@@ -359,22 +449,28 @@ async function abandonSession(sessionId: string, setup: MockSetup): Promise<void
 }
 
 /** Run the full Design G submit flow with the lib builders,
- * answering `letter` to question 1. Returns the attempt doc
+ * answering `letter` (one letter, or one per question for a
+ * multi-question mock) to every question. Returns the attempt doc
  * read back. */
 async function runMockSubmitFlow(
   sessionId: string,
-  letter: 'A' | 'B' | 'C' | 'D' | null,
+  letter: 'A' | 'B' | 'C' | 'D' | null | Array<'A' | 'B' | 'C' | 'D' | null>,
   setup: MockSetup,
 ): Promise<Record<string, unknown>> {
+  const letters = (Array.isArray(letter) ? letter : [letter]) as Array<'A' | 'B' | 'C' | 'D' | null>;
   const db = asStudent();
   await createSession(sessionId, setup);
   const startedAtMillis = await setDeadline(sessionId, setup.snapshot.timeMinutes);
-  // Autosave the answer (fresh-read first — the local session
+  // Autosave the answers (fresh-read first — the local session
   // lags the deadline write).
   const storedForAutosave = await readSession(sessionId);
+  const answersMap: Record<number, { selected: 'A' | 'B' | 'C' | 'D' | null; markedForReview: boolean; timeSpentSeconds: number }> = {};
+  letters.forEach((sel, i) => {
+    answersMap[i + 1] = { selected: sel, markedForReview: false, timeSpentSeconds: 45 };
+  });
   const answered: JobMockSessionDoc = {
     ...storedForAutosave,
-    answers: { 1: { selected: letter, markedForReview: false, timeSpentSeconds: 45 } },
+    answers: answersMap,
   };
   await assertSucceeds(updateDoc(
     doc(db, 'users', 'student-1', 'jobExamSessions', sessionId),
@@ -417,7 +513,9 @@ async function runMockSubmitFlow(
   const result: JobAttemptResult = scoreMockAttempt({
     bundle: setup.bundle,
     key,
-    answers: [{ n: 1, questionId: setup.ref.questionId, selected: letter, timeSpentSeconds: 45 }],
+    answers: setup.bundle.questions.map((q, i) => ({
+      n: q.n, questionId: q.questionId, selected: letters[i] ?? null, timeSpentSeconds: 45,
+    })),
     rulesSnapshot: setup.snapshot,
     examSlug: setup.examSlug,
     startedAtMillis,
@@ -588,5 +686,33 @@ describe('Step 9 engine↔rules integration (lib builders → emulator)', () => 
     if ((receipt.data() as Record<string, unknown>).attemptId !== 'sess-i9-b') {
       throw new Error('receipt did not re-anchor to the retake session');
     }
+  });
+
+  it('(i10) REAL-CONTENT E2E: 3 verbatim BCS English questions score end-to-end', async () => {
+    // Answers: Q1 C (correct), Q2 A (correct), Q3 B (wrong —
+    // correct is D). BCS pattern: 2 − 0.50 = 1.5.
+    const data = await runMockSubmitFlow('sess-i10', ['C', 'A', 'B'], REAL);
+    if (data.score !== 1.5) throw new Error(`expected score 1.5, got ${String(data.score)}`);
+    if (data.correctCount !== 2 || data.wrongCount !== 1) throw new Error('counts wrong');
+    if (data.negativeDeduction !== 0.5) throw new Error('deduction wrong');
+    if (data.resultLabel !== 'practice' || data.trustLevel !== 'unverified') {
+      throw new Error('result labels wrong');
+    }
+    if (data.questionSetId !== 'full__bcs__e2e_v1') throw new Error('questionSetId wrong');
+    if (data.sessionId !== 'sess-i10') throw new Error('sessionId != doc-ID');
+    // weakTopics are NOT stored on the attempt — they are
+    // re-derived from the stored answers (same derivation as the
+    // scorer); rebuild the result from the stored doc first.
+    const rebuilt = jobAttemptResultFromStoredDoc(data);
+    if (rebuilt === null) throw new Error('stored attempt did not rebuild');
+    if (rebuilt.score !== 1.5) throw new Error('rebuilt score wrong');
+    const weak = rebuilt.weakTopics;
+    if (weak.length !== 1 || weak[0].topicId !== 'bcs__english__grammar__tense' || weak[0].wrong !== 1 || weak[0].total !== 3) {
+      throw new Error(`weak topics wrong: ${JSON.stringify(weak)}`);
+    }
+    const storedAnswers = data.answers as Array<{ questionId: string; selected: string | null; correct: boolean }>;
+    if (storedAnswers.length !== 3) throw new Error('stored answers wrong');
+    if (storedAnswers[0].questionId !== 'bcs-eng-001' || storedAnswers[0].correct !== true) throw new Error('Q1 answer wrong');
+    if (storedAnswers[2].questionId !== 'bcs-eng-003' || storedAnswers[2].correct !== false) throw new Error('Q3 answer wrong');
   });
 });
