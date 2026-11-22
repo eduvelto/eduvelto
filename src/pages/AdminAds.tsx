@@ -7,12 +7,14 @@ import {
   ADS_CHILD_SAFETY,
   BOTTOM_BANNER_ELIGIBLE_PAGES,
   getPlacementEnabled,
+  isBannerPlacement,
   isPlacementConfigured,
   placementStatus,
   setPlacementEnabled,
   type AdPlacement,
   type AdPlacementStatus,
 } from '../lib/ads';
+import { ADS_MASTER_ENABLED } from '../lib/adsConfig';
 
 // Eduvelto — Admin advertising page (/admin/ads).
 //
@@ -94,11 +96,11 @@ function ReportRows() {
 
 export default function AdminAds() {
   const { lang, t } = useLanguage();
-  const [toggles, setToggles] = useState<Record<AdPlacement, boolean>>(() => ({
-    'bottom-banner': getPlacementEnabled('bottom-banner'),
-    'in-feed': getPlacementEnabled('in-feed'),
-    'in-feed-2': getPlacementEnabled('in-feed-2'),
-  }));
+  const [toggles, setToggles] = useState<Record<AdPlacement, boolean>>(() =>
+    Object.fromEntries(
+      AD_PLACEMENTS.map((p) => [p.id, getPlacementEnabled(p.id)]),
+    ) as Record<AdPlacement, boolean>,
+  );
 
   function onToggle(placement: AdPlacement, enabled: boolean): void {
     setPlacementEnabled(placement, enabled);
@@ -136,6 +138,14 @@ export default function AdminAds() {
 
       <h2 style={{ fontSize: 18, marginTop: 24 }}>{t({ bn: 'AdSense স্থিতি', en: 'AdSense status' })}</h2>
       <p>
+        {t({ bn: 'মাস্টার সুইচ:', en: 'Master switch:' })}{' '}
+        <strong>
+          {ADS_MASTER_ENABLED
+            ? t({ bn: 'চালু', en: 'ON' })
+            : t({ bn: 'বন্ধ (ডিফল্ট) — AdSense অনুমোদন + unit ID-র পর চালু করা হবে', en: 'OFF (default) — turned on after AdSense approval + unit IDs' })}
+        </strong>
+      </p>
+      <p>
         Publisher ID:{' '}
         {ADSENSE_CLIENT_ID === '' ? (
           <strong>
@@ -149,14 +159,15 @@ export default function AdminAds() {
         {t({ bn: 'অনুমোদনের জন্য যা যা লাগবে (চেকলিস্ট):', en: 'Approval checklist:' })}
       </p>
       <ul style={{ color: '#333', fontSize: 15 }}>
-        <li>{t({ bn: '✗ সাইট eduvelto.com-এ লাইভ — এখনো নয় (ডোমেইন সংযোগ চলছে)', en: '✗ Site live on eduvelto.com — not yet (domain connection in progress)' })}</li>
-        <li>{t({ bn: '✗ আসল কনটেন্ট (পাঠ, বই, পরীক্ষা) — এখনো নয় (শুধু লগইন/প্রোফাইল তৈরি হয়েছে)', en: '✗ Real content (lessons, books, exams) — not yet (only login/profile built so far)' })}</li>
-        <li>{t({ bn: '✗ গোপনীয়তা নীতি (Privacy Policy) — এখনো লেখা হয়নি', en: '✗ Privacy Policy — not written yet' })}</li>
+        <li>{t({ bn: '✓ সাইট eduvelto.com-এ লাইভ — হ্যাঁ (২১ নভেম্বর ২০২৬ থেকে Connected)', en: '✓ Site live on eduvelto.com — yes (Connected since 21 Nov 2026)' })}</li>
+        <li>{t({ bn: '✓ আসল কনটেন্ট (পাঠ, বই, পরীক্ষা) — হ্যাঁ (৬০৯ বই, ২১২ পরীক্ষা লাইভ)', en: '✓ Real content (lessons, books, exams) — yes (609 books, 212 exams live)' })}</li>
+        <li>{t({ bn: '✓ গোপনীয়তা নীতি (Privacy Policy) — লাইভ', en: '✓ Privacy Policy — live' })}</li>
+        <li>{t({ bn: '… সাইট Google-এর রিভিউতে আছে (২২ নভেম্বর ০৭:৪১ থেকে) — ফলাফলের অপেক্ষায়', en: '… Site is in Google review (since 22 Nov 07:41) — awaiting the result' })}</li>
       </ul>
       <p style={{ color: '#555', fontSize: 14 }}>
         {t({
-          bn: 'অনুমোদন পেলে Publisher ID ও ৩টি Slot ID ডেভেলপার (Muse) ডেপ্লয়মেন্ট সেটিংসে বসাবে ও সাইট আবার ডেপ্লয় করবে — এই পাতা থেকে ID বসানো যায় না। অনুমোদন পেলে ID গুলো Muse-কে পাঠান।',
-          en: 'After approval, the developer (Muse) enters the publisher ID and 3 slot IDs in deployment settings and redeploys — IDs cannot be entered from this page. Send the IDs to Muse when approved.',
+          bn: 'অনুমোদন পেলে Publisher ID ও ৭টি Slot ID (নিচের ব্যানার, টপ ব্যানার, সাইডবার, ইন-কনটেন্ট, ইন-ফিড, ইন-ফিড ২, মোবাইল — ছোট পরীক্ষা-ব্যানার নিচের ব্যানারের unit-ই ব্যবহার করে) ডেভেলপার (Muse) ডেপ্লয়মেন্ট সেটিংসে বসাবে, মাস্টার সুইচ চালু করবে ও সাইট আবার ডেপ্লয় করবে — এই পাতা থেকে ID বসানো যায় না। অনুমোদন পেলে ID গুলো Muse-কে পাঠান।',
+          en: 'After approval, the developer (Muse) enters the publisher ID and 7 slot IDs (bottom banner, top banner, sidebar, in-content, in-feed, in-feed 2, mobile — the small exam banner shares the bottom banner unit) in deployment settings, flips the master switch and redeploys — IDs cannot be entered from this page. Send the IDs to Muse when approved.',
         })}
       </p>
 
@@ -181,11 +192,21 @@ export default function AdminAds() {
         </p>
         <p style={{ margin: '8px 0 0', color: '#555', fontSize: 14 }}>
           {t({ bn: 'দর্শকরা এখন বিজ্ঞাপন দেখছে:', en: 'Visitors are seeing ads now:' })}{' '}
-          {isPlacementConfigured('bottom-banner') ? (
+          {isPlacementConfigured('bottom-banner') && ADS_MASTER_ENABLED ? (
             <strong>{t({ bn: 'হ্যাঁ — AdSense ID বসানো আছে', en: 'Yes — AdSense IDs are set' })}</strong>
           ) : (
-            <strong>{t({ bn: 'না — AdSense অনুমোদন হয়নি, ID বসানো হয়নি', en: 'No — AdSense is not approved, no IDs set' })}</strong>
+            <strong>
+              {!isPlacementConfigured('bottom-banner')
+                ? t({ bn: 'না — AdSense অনুমোদন হয়নি, ID বসানো হয়নি', en: 'No — AdSense is not approved, no IDs set' })
+                : t({ bn: 'না — মাস্টার সুইচ বন্ধ আছে', en: 'No — the master switch is off' })}
+            </strong>
           )}
+        </p>
+        <p style={{ margin: '10px 0 0', color: '#555', fontSize: 14 }}>
+          {t({
+            bn: 'পরীক্ষার পাতায় ব্যানার একদম ছোট (সর্বোচ্চ ৫০px) — মালিকের নির্দেশ ২২ নভেম্বর ২০২৬, ১০:৪৫। লগইন/রেজিস্টার ও অ্যাডমিন পাতায় কোনো ব্যানার নেই।',
+            en: 'On exam pages the banner is extra small (max 50px) — owner rule 22 Nov 2026, 10:45. No banner on login/register or admin pages.',
+          })}
         </p>
         <p style={{ margin: '10px 0 0', color: '#555', fontSize: 14 }}>
           {t({ bn: 'যোগ্য পাতা:', en: 'Eligible pages:' })} {BOTTOM_BANNER_ELIGIBLE_PAGES.join(' · ')}
@@ -202,7 +223,9 @@ export default function AdminAds() {
       {AD_PLACEMENTS.map((p) => {
         const status = placementStatus(p.id);
         const configured = isPlacementConfigured(p.id);
-        const visitorsSeeAds = p.id === 'bottom-banner' ? configured : configured && toggles[p.id];
+        const visitorsSeeAds = isBannerPlacement(p.id)
+          ? configured && ADS_MASTER_ENABLED
+          : configured && toggles[p.id] && ADS_MASTER_ENABLED;
         return (
           <div
             key={p.id}
@@ -223,13 +246,15 @@ export default function AdminAds() {
                 <strong>{t({ bn: 'হ্যাঁ', en: 'Yes' })}</strong>
               ) : (
                 <strong>
-                  {configured
-                    ? t({ bn: 'না — এই ব্রাউজারে টগল বন্ধ আছে', en: 'No — the toggle is off in this browser' })
-                    : t({ bn: 'না — AdSense ID বসানো হয়নি', en: 'No — no AdSense IDs set' })}
+                  {!configured
+                    ? t({ bn: 'না — AdSense ID বসানো হয়নি', en: 'No — no AdSense IDs set' })
+                    : !ADS_MASTER_ENABLED
+                      ? t({ bn: 'না — মাস্টার সুইচ বন্ধ আছে', en: 'No — the master switch is off' })
+                      : t({ bn: 'না — এই ব্রাউজারে টগল বন্ধ আছে', en: 'No — the toggle is off in this browser' })}
                 </strong>
               )}
             </p>
-            {p.id === 'bottom-banner' ? (
+            {isBannerPlacement(p.id) ? (
               <p style={{ margin: 0, color: '#555', fontSize: 14 }}>
                 {t({
                   bn: 'এই জায়গাটি ওপরের "স্থায়ী নিচের ব্যানার" সেটিং দিয়ে চলে — এখানে কোনো টগল নেই।',

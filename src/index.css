@@ -1084,6 +1084,32 @@ a:hover {
   color: #142b3b;
 }
 
+/* Real AdSense slots (see components/AdSlot.tsx + lib/adsConfig.ts).
+   Same visibility rules as the placeholders above: the sidebar slot
+   only exists on wide desktop (≥1280px, sticky rail), the mobile slot
+   only on small screens (≤768px). The placeholder boxes inside these
+   wrappers inherit the same hiding — a preview never shows a slot
+   where the real ad would not appear. */
+.ev-ad-slot-sidebar {
+  display: none;
+}
+@media (min-width: 1280px) {
+  .ev-ad-slot-sidebar {
+    display: block;
+    width: 300px;
+    position: sticky;
+    top: 76px;
+  }
+}
+.ev-ad-slot-mobile {
+  display: none;
+}
+@media (max-width: 768px) {
+  .ev-ad-slot-mobile {
+    display: block;
+  }
+}
+
 /* Coming Soon — Class 1–5 / Class 6–8 (owner briefs 21 Nov 13:14 + 13:20).
    Student-friendly honest empty state: soft class-tint card, dotted
    pattern, "what is coming" chips. Never shows fake books/counts. */

@@ -29,9 +29,10 @@
 // `level:` coming-soon trigger (a class-dropdown option with no data)
 // is removed with it.
 
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState, Fragment } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import { PageShell, EmptyState } from '../components/PageShell';
+import AdSlot from '../components/AdSlot';
 import { AlertBox, Button, Card, Chip, SkeletonCards } from '../components/ui';
 import { CascadeSteps, type CascadeStep } from '../components/CascadeSteps';
 import {
@@ -508,22 +509,28 @@ export default function DirectoryPage() {
             </p>
           ) : null}
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: 12 }}>
-            {pageRows.map((r) => (
-              <Card key={r.id} hover>
-                <Link to={`/library/${r.bookId}`} style={{ fontWeight: 700, fontSize: 16, color: '#0A1F44', lineHeight: 1.5 }}>
-                  {r.paperTitle}
-                </Link>
-                <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, marginTop: 10 }}>
-                  <Chip>{r.department}</Chip>
-                  <Chip tone="outline">{r.classLevel}</Chip>
-                  <Chip tone="outline">
-                    <T bn={`কোড ${r.paperCode}`} en={`Code ${r.paperCode}`} />
-                  </Chip>
-                </div>
-                <p style={{ margin: '10px 0 0', color: '#5A6478', fontSize: 14 }}>
-                  {r.type} · {r.program}
-                </p>
-              </Card>
+            {pageRows.map((r, i) => (
+              <Fragment key={r.id}>
+                <Card hover>
+                  <Link to={`/library/${r.bookId}`} style={{ fontWeight: 700, fontSize: 16, color: '#0A1F44', lineHeight: 1.5 }}>
+                    {r.paperTitle}
+                  </Link>
+                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, marginTop: 10 }}>
+                    <Chip>{r.department}</Chip>
+                    <Chip tone="outline">{r.classLevel}</Chip>
+                    <Chip tone="outline">
+                      <T bn={`কোড ${r.paperCode}`} en={`Code ${r.paperCode}`} />
+                    </Chip>
+                  </div>
+                  <p style={{ margin: '10px 0 0', color: '#5A6478', fontSize: 14 }}>
+                    {r.type} · {r.program}
+                  </p>
+                </Card>
+                {/* In-content ad — after the 10th card, first page only
+                    (ads placement plan 22 Nov 2026; same pattern as the
+                    Books tab). Search-result lists stay ad-free. */}
+                {pageIndex === 0 && i === 9 ? <AdSlot placement="in-content" /> : null}
+              </Fragment>
             ))}
           </div>
           {currentPage?.hasMore || pageIndex > 0 ? (

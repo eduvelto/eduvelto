@@ -29,12 +29,14 @@
 //  - Section cards link to /jobs, /admissions, /class, /skills. /class
 //    is real (class index); the other three land on ONE shared Coming
 //    Soon page until the sections are built.
-//  - No ad placeholders on this homepage (the global bottom banner in
-//    App.tsx still applies). No invented counts anywhere.
+//  - One top-banner ad slot below the hero (ads placement plan 22 Nov
+//    2026). It renders nothing until AdSense is configured; the global
+//    bottom banner in App.tsx still applies. No invented counts anywhere.
 
 import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { PageShell } from '../components/PageShell';
+import AdSlot from '../components/AdSlot';
 import { useAuth } from '../lib/auth';
 import { useLanguage } from '../i18n/LanguageContext';
 import { listQuizAttempts, listSubjectProgress } from '../lib/progress';
@@ -410,6 +412,11 @@ export default function HomePage() {
           ))}
         </div>
       </section>
+
+      {/* Top banner ad — home only (ads placement plan 22 Nov 2026).
+          Renders nothing until AdSense is configured; in preview it
+          shows a labelled placeholder. */}
+      <AdSlot placement="top-banner" />
 
       {/* Four section cards (mockup). */}
       <section aria-label={t({ bn: 'প্রধান বিভাগ', en: 'Main sections' })}>
