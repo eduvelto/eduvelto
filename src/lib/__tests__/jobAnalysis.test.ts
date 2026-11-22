@@ -59,6 +59,7 @@ function attempt(overrides: Partial<JobAttemptSummary> = {}): JobAttemptSummary 
     kind: 'mock',
     examSlug: 'bcs',
     bundleId: 'mock__full__bcs__1',
+    mockId: 'full__bcs__1',
     score: 1.5,
     totalMarks: 3,
     percentage: 50,

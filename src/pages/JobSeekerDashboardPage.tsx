@@ -4,17 +4,34 @@
 // daily mock, this week's full mock, my results, weak topics, study
 // routine and progress.
 //
-// Step 9 closure (D3/D4): the daily/weekly mock cards and the
-// results/weak-topics cards are DATA-DRIVEN (published mocks +
-// the student's own attempts) — the honest empty / Coming Soon copy
-// shows only when the data is truly empty. The study routine and
-// progress sections are still Coming Soon (Steps 11–12 own them).
+// Step 11 (22 Nov 2026): the 8-card structure expands to the 17
+// items of the UI/UX design §5, in the P1–P5 priority order
+// (P1 today's preparation → P2 summary numbers → P3 weak topics →
+// P4 quick entry → P5 upcoming exams). Every card is data-driven
+// from the student's OWN attempts (Step 10 analysis lib +
+// jobDashboard helpers) or an honest empty / Coming Soon state.
+// No number is invented: no readiness %, no pass probability,
+// no peer comparison, no combined-across-exams score, no fake
+// streak, no "syllabus %". Practice links go only to bundles
+// that are verified published (jobDashboardData) — a weak topic
+// with no published set shows no practice link. Time is shown
+// as completed sessions + questions, never as invented "study
+// minutes": the engine records wall-clock question-open time
+// with no inactivity pause (see jobDashboard.ts).
+//
 // The dashboard is open to any signed-in user (a teacher can also
 // prepare for BCS); signed-out visitors get the login prompt, same
 // as the student dashboard. No ads on this page: it is all practice
 // / exam / result space (design plan §1.4).
+//
+// Deferred, recorded honestly (see
+// team/job-step11-dashboard-2026-11-22.md): the jobNotifications
+// collection + rules (Step 14, with circulars — the compiled-rules
+// margin on this branch is 1,138 bytes); the planner + revision
+// schedule (Step 12); the wrong-answer re-practice flow +
+// favourites (Step 13); circulars + calendar (Step 14).
 
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { PageShell } from '../components/PageShell';
 import { Card, Chip, LinkButton, Reveal, Skeleton, SkeletonCards } from '../components/ui';
@@ -25,9 +42,38 @@ import { useAuth } from '../lib/auth';
 import { useJobMode } from '../lib/jobMode';
 import { useLanguage } from '../i18n/LanguageContext';
 import { DAILY_MOCK, WEEKLY_MOCK_CYCLE, jobExamBySlug } from '../lib/jobExams';
-import { listMockAttempts, loadThisWeekWeeklyMock, loadTodayDailyMock, type MockAttemptWithId } from '../lib/jobMock';
+import { JOB_CATEGORIES } from '../lib/jobProfile';
+import { loadThisWeekWeeklyMock, loadTodayDailyMock } from '../lib/jobMock';
 import { jobMockPatternSummaryBn, type JobMockWithId } from '../lib/jobMocks';
-import { jobTopicLabelBn, weakTopicsFromAttemptAnswers, type JobAttemptAnswer } from '../lib/jobEngine';
+import { jobTopicLabelBn } from '../lib/jobEngine';
+import { attemptTrend, groupAttemptsByExam, type JobAttemptSummary } from '../lib/jobAnalysis';
+import {
+  accuracyOrNull,
+  computeStreakDays,
+  dashboardAchievements,
+  dashboardWeakTopics,
+  perExamProgress,
+  pickRecommendation,
+  recentAttempts,
+  todayStats,
+  weekActivity,
+  wrongAnswerSummary,
+  type PublishedBundleRef,
+} from '../lib/jobDashboard';
+import {
+  awardMissingJobAchievements,
+  loadDashboardAttempts,
+  loadPublishedBundlesForExams,
+  verifyMockRetry,
+  verifyPracticeBundle,
+} from '../lib/jobDashboardData';
+
+function formatDateBn(millis: number | null): string {
+  if (millis === null) return '—';
+  return new Intl.DateTimeFormat('bn-BD', { day: 'numeric', month: 'short', year: 'numeric' }).format(
+    new Date(millis),
+  );
+}
 
 export default function JobSeekerDashboardPage() {
   const { user, profile, loading } = useAuth();
@@ -44,9 +90,23 @@ export default function JobSeekerDashboardPage() {
   const [daily, setDaily] = useState<JobMockWithId | null>(null);
   const [weekly, setWeekly] = useState<JobMockWithId | null>(null);
   const [mocksLoaded, setMocksLoaded] = useState(false);
-  const [attempts, setAttempts] = useState<MockAttemptWithId[] | null>(null);
+  // Step 11: the student's own attempts (practice + mock, newest
+  // first, capped at 20 + 20) + the published bundles that guard
+  // every practice link on this page.
+  const [attempts, setAttempts] = useState<JobAttemptSummary[] | null>(null);
+  const [capped, setCapped] = useState(false);
+  const [publishedByExam, setPublishedByExam] = useState<Map<string, PublishedBundleRef[]>>(new Map());
+  const [dataError, setDataError] = useState(false);
+  const [retryNonce, setRetryNonce] = useState(0);
+  // "Continue learning" retry link, verified against the live
+  // catalog (null = not checked yet; 'unavailable' = the set is
+  // no longer published, so only the result link shows).
+  const [continueRetry, setContinueRetry] = useState<{ to: string } | 'unavailable' | null>(null);
+
   useEffect(() => {
     let alive = true;
+    setDataError(false);
+    setContinueRetry(null);
     Promise.all([loadTodayDailyMock(), loadThisWeekWeeklyMock()])
       .then(([d, w]) => {
         if (!alive) return;
@@ -58,26 +118,111 @@ export default function JobSeekerDashboardPage() {
         if (alive) setMocksLoaded(true);
       });
     if (user) {
-      listMockAttempts(user.uid, 10)
-        .then((list) => {
-          if (alive) setAttempts(list);
-        })
-        .catch(() => {
-          if (alive) setAttempts([]);
-        });
+      (async () => {
+        try {
+          const { attempts: loaded, capped: wasCapped } = await loadDashboardAttempts(user.uid);
+          if (!alive) return;
+          setAttempts(loaded);
+          setCapped(wasCapped);
+          // Bundles only for exams the student touches (attempts
+          // + target exam) — never the whole catalog.
+          const exams = [...new Set([...loaded.map((a) => a.examSlug), profile?.targetExam].filter(Boolean))] as string[];
+          const bundles = await loadPublishedBundlesForExams(exams);
+          if (!alive) return;
+          setPublishedByExam(bundles);
+          // Achievements: derive from the same attempts, persist
+          // the missing ones (best-effort, never blocks the page).
+          const streak = computeStreakDays(loaded, Date.now());
+          const earned = dashboardAchievements(loaded, streak);
+          if (earned.length > 0) {
+            void awardMissingJobAchievements(
+              user.uid,
+              earned.map((a) => a.key),
+            );
+          }
+          // "Continue learning": the newest attempt's own set,
+          // verified still published before any retry link renders.
+          const latest = loaded[0];
+          if (latest) {
+            if (latest.kind === 'practice' && latest.bundleId) {
+              const ok = await verifyPracticeBundle(latest.bundleId);
+              if (!alive) return;
+              setContinueRetry(ok ? { to: `/jobs/practice/${latest.bundleId}` } : 'unavailable');
+            } else if (latest.kind === 'mock' && latest.mockId) {
+              const ok = await verifyMockRetry(latest.mockId);
+              if (!alive) return;
+              setContinueRetry(ok ? { to: `/jobs/mock/${ok.docId}` } : 'unavailable');
+            } else {
+              setContinueRetry('unavailable');
+            }
+          }
+        } catch {
+          if (alive) {
+            setAttempts([]);
+            setDataError(true);
+          }
+        }
+      })();
     } else {
       setAttempts([]);
     }
     return () => {
       alive = false;
     };
-  }, [user?.uid]);
-  // Weak topics aggregated across the student's mock attempts
-  // (same resolver as the result page, D7).
-  const dashAnswers: JobAttemptAnswer[] =
-    attempts?.flatMap((a) => (Array.isArray(a.answers) ? (a.answers as JobAttemptAnswer[]) : [])) ?? [];
-  const dashWeakTopics = weakTopicsFromAttemptAnswers(dashAnswers).slice(0, 3);
-  const dashLatest = attempts && attempts.length > 0 ? attempts[0] : null;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user?.uid, profile?.targetExam, retryNonce]);
+
+  // ---- Step 11 derived values (pure, from the loaded attempts) ----
+  const nowMs = Date.now();
+  const streakDays = useMemo(
+    () => (attempts ? computeStreakDays(attempts, nowMs) : 0),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [attempts],
+  );
+  const today = useMemo(() => (attempts ? todayStats(attempts, nowMs) : null), [attempts, nowMs]);
+  const week = useMemo(() => (attempts ? weekActivity(attempts, nowMs) : null), [attempts, nowMs]);
+  const weakTopics = useMemo(() => (attempts ? dashboardWeakTopics(attempts) : []), [attempts]);
+  const examProgress = useMemo(
+    () => (attempts ? perExamProgress(attempts, publishedByExam) : []),
+    [attempts, publishedByExam],
+  );
+  const recent = useMemo(() => (attempts ? recentAttempts(attempts, 5) : []), [attempts]);
+  const wrongSummary = useMemo(() => (attempts ? wrongAnswerSummary(attempts) : null), [attempts]);
+  const achievements = useMemo(
+    () => (attempts ? dashboardAchievements(attempts, streakDays) : []),
+    [attempts, streakDays],
+  );
+  const recommendation = useMemo(
+    () =>
+      pickRecommendation({
+        weakTopics,
+        publishedByExam,
+        targetExamSlug: profile?.targetExam ?? null,
+      }),
+    [weakTopics, publishedByExam, profile?.targetExam],
+  );
+  const latestAttempt = attempts && attempts.length > 0 ? attempts[0] : null;
+  const mockAttempts = useMemo(() => (attempts ?? []).filter((a) => a.kind === 'mock'), [attempts]);
+  const mockTrends = useMemo(() => groupAttemptsByExam(mockAttempts), [mockAttempts]);
+  const totalQuestions = (attempts ?? []).reduce((sum, a) => sum + a.answers.length, 0);
+  const totalCorrect = (attempts ?? []).reduce((sum, a) => sum + a.correctCount, 0);
+  const mockAccuracy = accuracyOrNull(
+    mockAttempts.reduce((sum, a) => sum + a.correctCount, 0),
+    mockAttempts.reduce((sum, a) => sum + a.answers.length, 0),
+  );
+  const topicsPracticedCount = useMemo(
+    () => new Set((attempts ?? []).flatMap((a) => a.answers.map((ans) => ans.topicId))).size,
+    [attempts],
+  );
+  // Published bundle for a weak topic (the ONLY practice link a
+  // weak-topic row ever gets — no bundle, no link).
+  const bundleForTopic = (topicId: string): PublishedBundleRef | undefined => {
+    for (const bundles of publishedByExam.values()) {
+      const found = bundles.find((b) => b.topicId === topicId && b.questionCount > 0);
+      if (found) return found;
+    }
+    return undefined;
+  };
 
   if (loading) {
     return (
@@ -100,6 +245,9 @@ export default function JobSeekerDashboardPage() {
   }
 
   const name = profile.displayName?.trim();
+  const enrolledDefs = (profile.enrolledCategories ?? [])
+    .map((slug) => JOB_CATEGORIES.find((c) => c.slug === slug))
+    .filter((c): c is (typeof JOB_CATEGORIES)[number] => Boolean(c));
 
   return (
     <PageShell titleBn="আমার চাকরির ড্যাশবোর্ড" titleEn="My Job Dashboard" wide hideTitle maxWidth={1240}>
@@ -139,6 +287,31 @@ export default function JobSeekerDashboardPage() {
       {/* First-time mode choice (Step 2 §1.8, Step 4): shown once to
           signed-in users who have not seen it; never blocks the page. */}
       <JobOnboarding forceOpen={showOnboarding} onClose={() => setShowOnboarding(false)} />
+
+      {/* Data-load error (Step 11): an error is shown as an error
+          with a retry — never as a fake "no data" empty state. */}
+      {dataError ? (
+        <Reveal>
+          <Card>
+            <div style={{ fontWeight: 700, color: 'var(--heading)', fontSize: 17 }}>
+              {t({ bn: 'তথ্য লোড হয়নি', en: 'Data did not load' })}
+            </div>
+            <p style={{ margin: '8px 0 10px', color: 'var(--muted-ivory)', fontSize: 14, lineHeight: 1.7 }}>
+              {t({
+                bn: 'ড্যাশবোর্ডের তথ্য লোড করা যায়নি — ইন্টারনেট সংযোগ দেখে আবার চেষ্টা করুন।',
+                en: 'The dashboard data could not be loaded — check your connection and try again.',
+              })}
+            </p>
+            <button
+              type="button"
+              onClick={() => setRetryNonce((n) => n + 1)}
+              style={{ background: 'var(--teal)', color: '#fff', border: 'none', borderRadius: 8, padding: '10px 16px', fontWeight: 700, fontSize: 14, cursor: 'pointer', minHeight: 44 }}
+            >
+              {t({ bn: 'আবার চেষ্টা করুন', en: 'Try again' })}
+            </button>
+          </Card>
+        </Reveal>
+      ) : null}
 
       {/* ChatGPT Step 4 review (P2) — compact profile-completion
           prompts, not persistent banners: one small card listing only
@@ -182,73 +355,185 @@ export default function JobSeekerDashboardPage() {
         </Reveal>
       ) : null}
 
+      {/* ============ P1 — আজকের প্রস্তুতি ============ */}
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: 12, marginBottom: 20 }}>
-        {/* My mode — Beginner / Advanced (owner decision 22 Nov 2026).
-            Shows the current mode; the switch below changes it any time
-            (stored on the user's own profile when signed in). */}
+        {/* Next practice (Gemini #1 + ChatGPT #7): the weakest
+            topic WITH a published set — or the honest fallback.
+            The recommendation is never invented: pickRecommendation
+            returns null unless a real published bundle exists. */}
         <Reveal delayMs={0}>
           <Card>
             <div style={{ fontWeight: 700, color: 'var(--heading)', fontSize: 17 }}>
-              {t({ bn: 'আমার মোড', en: 'My mode' })}
+              {t({ bn: 'পরবর্তী অনুশীলন', en: 'Next practice' })}
             </div>
-            <p style={{ margin: '8px 0 10px', color: 'var(--muted-ivory)', fontSize: 14, lineHeight: 1.7 }}>
-              {t({
-                bn: `বর্তমান মোড: ${mode === 'beginner' ? 'নতুনদের জন্য' : 'অভিজ্ঞদের জন্য'}`,
-                en: `Current mode: ${mode === 'beginner' ? 'Beginner' : 'Advanced'}`,
-              })}
-            </p>
-            <JobModeSwitch />
-            <p style={{ margin: '8px 0 0' }}>
-              <button
-                type="button"
-                onClick={() => setShowOnboarding(true)}
-                style={{ background: 'none', border: 'none', padding: 0, color: 'var(--teal-text)', fontWeight: 600, fontSize: 14, cursor: 'pointer', textDecoration: 'underline' }}
-              >
-                {t({ bn: 'মোড পছন্দ আবার দেখুন', en: 'Show the mode choice again' })}
-              </button>
-            </p>
-          </Card>
-        </Reveal>
-
-        {/* Target exam — read from the profile (Step 4: targetExam).
-            Change it in /profile. */}
-        <Reveal delayMs={0}>
-          <Card>
-            <div style={{ fontWeight: 700, color: 'var(--heading)', fontSize: 17 }}>
-              {t({ bn: 'আমার লক্ষ্য পরীক্ষা', en: 'My target exam' })}
-            </div>
-            {targetExamDef ? (
+            {attempts === null ? (
+              <p style={{ margin: '8px 0 0', color: 'var(--muted)', fontSize: 14 }}>লোড হচ্ছে…</p>
+            ) : recommendation ? (
               <>
                 <p style={{ margin: '8px 0 10px', color: 'var(--muted-ivory)', fontSize: 14, lineHeight: 1.7 }}>
-                  <Link to={`/jobs/${targetExamDef.slug}`} style={{ fontWeight: 700 }}>
-                    {t({ bn: targetExamDef.bn, en: targetExamDef.en })}
-                  </Link>
-                  {' — '}
-                  {t({ bn: targetExamDef.fullBn, en: targetExamDef.fullEn })}
+                  {t({
+                    bn: `${recommendation.topicLabel} — আপনার সঠিক উত্তরের হার ${recommendation.topicAccuracy}% (${recommendation.topicTotal}টি প্রশ্নের মধ্যে${recommendation.sample === 'signal' ? ', ১০+ প্রশ্নের ভিত্তিতে' : ', প্রাথমিক ইঙ্গিত — ৫–৯টি প্রশ্নের ভিত্তিতে'})।`,
+                    en: `${recommendation.topicLabel} — your accuracy is ${recommendation.topicAccuracy}% (of ${recommendation.topicTotal} questions${recommendation.sample === 'signal' ? ', based on 10+ questions' : ', an early indication — based on 5–9 questions'}).`,
+                  })}
                 </p>
-                <LinkButton to="/profile" variant="outline">
-                  {t({ bn: 'লক্ষ্য বদলান →', en: 'Change target →' })}
+                <LinkButton to={`/jobs/practice/${recommendation.bundleDocId}`} variant="accent">
+                  {t({ bn: 'অনুশীলন শুরু করুন →', en: 'Start practising →' })}
                 </LinkButton>
               </>
-            ) : profile?.targetExam ? (
+            ) : attempts.length === 0 ? (
+              <>
+                <p style={{ margin: '8px 0 10px', color: 'var(--muted)', fontSize: 14, lineHeight: 1.7 }}>
+                  {t({
+                    bn: 'আপনি এখনো কোনো অনুশীলন করেননি। আপনার প্রথম অনুশীলন শুরু করুন।',
+                    en: 'You have not practised yet. Start your first practice.',
+                  })}
+                </p>
+                <LinkButton to="/jobs/common" variant="accent">
+                  {t({ bn: 'প্রথম অনুশীলন শুরু করুন →', en: 'Start your first practice →' })}
+                </LinkButton>
+              </>
+            ) : daily ? (
               <>
                 <p style={{ margin: '8px 0 10px', color: 'var(--muted-ivory)', fontSize: 14, lineHeight: 1.7 }}>
-                  {profile.targetExam}
+                  {t({
+                    bn: 'দুর্বল টপিকের জন্য প্রকাশিত অনুশীলন সেট এখনো নেই — আজকের দৈনিক মক দিয়ে শুরু করুন।',
+                    en: 'No published practice set exists for the weak topics yet — start with today’s daily mock.',
+                  })}
                 </p>
-                <LinkButton to="/profile" variant="outline">
-                  {t({ bn: 'লক্ষ্য বদলান →', en: 'Change target →' })}
+                <LinkButton to={`/jobs/mock/${daily.docId}`} variant="accent">
+                  {t({ bn: 'আজকের মক শুরু করুন →', en: "Start today's mock →" })}
                 </LinkButton>
               </>
             ) : (
               <>
                 <p style={{ margin: '8px 0 10px', color: 'var(--muted)', fontSize: 14, lineHeight: 1.7 }}>
                   {t({
-                    bn: 'এখনো কোনো লক্ষ্য পরীক্ষা বেছে নেওয়া হয়নি। যে পরীক্ষার প্রস্তুতি নিতে চান, সেটি বেছে নিন।',
-                    en: 'No target exam has been picked yet. Pick the exam you want to prepare for.',
+                    bn: 'দুর্বল টপিকের জন্য প্রকাশিত অনুশীলন সেট এখনো নেই। কমন প্রস্তুতি থেকে শুরু করুন।',
+                    en: 'No published practice set exists for the weak topics yet. Start from common preparation.',
                   })}
                 </p>
-                <LinkButton to="/profile" variant="accent">
-                  {t({ bn: 'লক্ষ্য পরীক্ষা বেছে নিন →', en: 'Pick a target exam →' })}
+                <LinkButton to="/jobs/common" variant="outline">
+                  {t({ bn: 'কমন প্রস্তুতি দেখুন →', en: 'See common preparation →' })}
+                </LinkButton>
+              </>
+            )}
+          </Card>
+        </Reveal>
+
+        {/* Continue learning (design #7, ChatGPT #3): the newest
+            attempt's own set — the retry link renders only after
+            the set is verified still published. */}
+        <Reveal delayMs={80}>
+          <Card>
+            <div style={{ fontWeight: 700, color: 'var(--heading)', fontSize: 17 }}>
+              {t({ bn: 'চালিয়ে যান', en: 'Continue learning' })}
+            </div>
+            {attempts === null ? (
+              <p style={{ margin: '8px 0 0', color: 'var(--muted)', fontSize: 14 }}>লোড হচ্ছে…</p>
+            ) : !latestAttempt ? (
+              <>
+                <p style={{ margin: '8px 0 10px', color: 'var(--muted)', fontSize: 14, lineHeight: 1.7 }}>
+                  {t({
+                    bn: 'এখনো কিছু শুরু করা হয়নি — প্রথম অনুশীলন শুরু করলে সেটি এখানে দেখাবে।',
+                    en: 'Nothing started yet — once you start your first practice, it will show here.',
+                  })}
+                </p>
+                <LinkButton to="/jobs/common" variant="outline">
+                  {t({ bn: 'কমন প্রস্তুতি দেখুন →', en: 'See common preparation →' })}
+                </LinkButton>
+              </>
+            ) : (
+              <>
+                <p style={{ margin: '8px 0 10px', color: 'var(--muted-ivory)', fontSize: 14, lineHeight: 1.7 }}>
+                  {t({
+                    bn: `সর্বশেষ: ${latestAttempt.kind === 'mock' ? 'মক' : 'অনুশীলন'} — ${jobExamBySlug(latestAttempt.examSlug)?.bn ?? latestAttempt.examSlug} · ${latestAttempt.score}/${latestAttempt.totalMarks} নম্বর · ${formatDateBn(latestAttempt.submittedAtMillis)}`,
+                    en: `Latest: ${latestAttempt.kind === 'mock' ? 'mock' : 'practice'} — ${jobExamBySlug(latestAttempt.examSlug)?.en ?? latestAttempt.examSlug} · ${latestAttempt.score}/${latestAttempt.totalMarks} · ${formatDateBn(latestAttempt.submittedAtMillis)}`,
+                  })}
+                </p>
+                <LinkButton to={`/jobs/result/${latestAttempt.docId}`} variant="outline">
+                  {t({ bn: 'ফলাফল দেখুন →', en: 'See the result →' })}
+                </LinkButton>
+                {continueRetry === null ? (
+                  <p style={{ margin: '8px 0 0', color: 'var(--muted)', fontSize: 14 }}>লোড হচ্ছে…</p>
+                ) : continueRetry === 'unavailable' ? (
+                  <p style={{ margin: '8px 0 0', color: 'var(--muted)', fontSize: 14, lineHeight: 1.7 }}>
+                    {t({
+                      bn: 'এই সেটটি এখন আর প্রকাশিত নেই, তাই আবার দেওয়া যাবে না।',
+                      en: 'This set is no longer published, so it cannot be retaken.',
+                    })}
+                  </p>
+                ) : (
+                  <LinkButton to={continueRetry.to} variant="accent">
+                    {t({ bn: 'আবার অনুশীলন করুন →', en: 'Practise again →' })}
+                  </LinkButton>
+                )}
+              </>
+            )}
+          </Card>
+        </Reveal>
+
+        {/* Daily goal (design #5): the student's own goal from
+            /profile; progress from today's real attempts. No red
+            mark, no punishment for missing it. A minutes-only goal
+            cannot be measured reliably yet (see the activity card)
+            — sessions are shown instead. */}
+        <Reveal delayMs={160}>
+          <Card>
+            <div style={{ fontWeight: 700, color: 'var(--heading)', fontSize: 17 }}>
+              {t({ bn: 'দৈনিক লক্ষ্য', en: 'Daily goal' })}
+            </div>
+            {profile.dailyGoalQuestions == null && profile.dailyGoalMinutes == null ? (
+              <>
+                <p style={{ margin: '8px 0 10px', color: 'var(--muted)', fontSize: 14, lineHeight: 1.7 }}>
+                  {t({
+                    bn: 'দৈনিক লক্ষ্য এখনো ঠিক করা হয়নি — প্রশ্নের সংখ্যা বা মিনিট ঠিক করুন।',
+                    en: 'No daily goal set yet — set a question count or minutes.',
+                  })}
+                </p>
+                <LinkButton to="/profile" variant="outline">
+                  {t({ bn: 'লক্ষ্য ঠিক করুন →', en: 'Set a goal →' })}
+                </LinkButton>
+              </>
+            ) : profile.dailyGoalQuestions != null ? (
+              <>
+                <p style={{ margin: '8px 0 6px', color: 'var(--muted-ivory)', fontSize: 14, lineHeight: 1.7 }}>
+                  {t({
+                    bn: `আজ ${today?.questionsToday ?? 0}/${profile.dailyGoalQuestions}টি প্রশ্ন`,
+                    en: `Today ${today?.questionsToday ?? 0}/${profile.dailyGoalQuestions} questions`,
+                  })}
+                </p>
+                <div
+                  role="progressbar"
+                  aria-valuenow={Math.min(100, Math.round(((today?.questionsToday ?? 0) / profile.dailyGoalQuestions) * 100))}
+                  aria-valuemin={0}
+                  aria-valuemax={100}
+                  aria-label={t({ bn: 'দৈনিক লক্ষ্যের অগ্রগতি', en: 'Daily goal progress' })}
+                  style={{ height: 8, borderRadius: 4, background: 'var(--surface-muted)', overflow: 'hidden' }}
+                >
+                  <div
+                    style={{
+                      height: '100%',
+                      width: `${Math.min(100, ((today?.questionsToday ?? 0) / profile.dailyGoalQuestions) * 100)}%`,
+                      background: 'var(--teal)',
+                    }}
+                  />
+                </div>
+                <p style={{ margin: '10px 0 0' }}>
+                  <Link to="/profile" style={{ fontWeight: 600, fontSize: 14 }}>
+                    {t({ bn: 'লক্ষ্য বদলান →', en: 'Change goal →' })}
+                  </Link>
+                </p>
+              </>
+            ) : (
+              <>
+                <p style={{ margin: '8px 0 10px', color: 'var(--muted-ivory)', fontSize: 14, lineHeight: 1.7 }}>
+                  {t({
+                    bn: `মিনিটের লক্ষ্য: ${profile.dailyGoalMinutes} মিনিট। মিনিটের নির্ভরযোগ্য হিসাব এখনো নেই — আজ ${today?.sessionsToday ?? 0}টি সেশন সম্পন্ন হয়েছে।`,
+                    en: `Minutes goal: ${profile.dailyGoalMinutes} minutes. Reliable minute tracking is not available yet — ${today?.sessionsToday ?? 0} session(s) completed today.`,
+                  })}
+                </p>
+                <LinkButton to="/profile" variant="outline">
+                  {t({ bn: 'লক্ষ্য বদলান →', en: 'Change goal →' })}
                 </LinkButton>
               </>
             )}
@@ -258,7 +543,7 @@ export default function JobSeekerDashboardPage() {
         {/* Today's daily mock — LIVE (Step 9, D3): today's published
             mock with a start link, or the honest not-yet state. No
             "coming soon" claim while mocks can exist. */}
-        <Reveal delayMs={80}>
+        <Reveal delayMs={0}>
           <Card>
             <div style={{ fontWeight: 700, color: 'var(--heading)', fontSize: 17 }}>
               {t({ bn: 'দৈনিক মক', en: 'Daily mock' })}
@@ -293,7 +578,7 @@ export default function JobSeekerDashboardPage() {
         </Reveal>
 
         {/* This week's full mock — LIVE (Step 9, D3), same pattern. */}
-        <Reveal delayMs={160}>
+        <Reveal delayMs={80}>
           <Card>
             <div style={{ fontWeight: 700, color: 'var(--heading)', fontSize: 17 }}>
               {t({ bn: 'সাপ্তাহিক পূর্ণ মক', en: 'Weekly full mock' })}
@@ -336,18 +621,133 @@ export default function JobSeekerDashboardPage() {
             )}
           </Card>
         </Reveal>
+      </div>
 
-        {/* My results — data-driven (D4): real history when the
-            student has taken mocks; the "no mock taken yet" copy
-            only when they truly have taken none. */}
+      {/* ============ P2 — সারাংশের সংখ্যা ============ */}
+      <Reveal>
+        <Card>
+          <div style={{ fontWeight: 700, color: 'var(--heading)', fontSize: 17 }}>
+            {t({ bn: 'আমার অগ্রগতি — সাম্প্রতিক কার্যকলাপ', en: 'My progress — recent activity' })}
+          </div>
+          {attempts === null ? (
+            <p style={{ margin: '8px 0 0', color: 'var(--muted)', fontSize: 14 }}>লোড হচ্ছে…</p>
+          ) : attempts.length === 0 ? (
+            <p style={{ margin: '8px 0 0', color: 'var(--muted)', fontSize: 14, lineHeight: 1.7 }}>
+              {t({
+                bn: 'এখনো কোনো অগ্রগতি নেই। অনুশীলন শুরু হলে এখানে আপনার অগ্রগতি দেখা যাবে।',
+                en: 'No progress yet. Once you start practising, your progress will show here.',
+              })}
+            </p>
+          ) : (
+            <>
+              <p style={{ margin: '8px 0 10px', color: 'var(--muted-ivory)', fontSize: 14, lineHeight: 1.9 }}>
+                {t({ bn: `মোট ${totalQuestions}টি প্রশ্ন · ${totalCorrect}টি সঠিক`, en: `${totalQuestions} questions · ${totalCorrect} correct` })}
+                {' · '}
+                {t({ bn: `মোট ${mockAttempts.length}টি মক`, en: `${mockAttempts.length} mock(s)` })}
+                {' · '}
+                {mockAccuracy === null
+                  ? t({ bn: 'মকে সঠিক উত্তরের হার — তথ্য নেই', en: 'Mock accuracy — no data' })
+                  : t({ bn: `মকে সঠিক উত্তরের হার ${mockAccuracy}%`, en: `Mock accuracy ${mockAccuracy}%` })}
+                {' · '}
+                {t({ bn: `${topicsPracticedCount}টি টপিকে অনুশীলন`, en: `${topicsPracticedCount} topic(s) practised` })}
+              </p>
+              {examProgress.map((p) => {
+                const def = jobExamBySlug(p.examSlug);
+                return (
+                  <div key={p.examSlug} style={{ borderTop: '1px solid var(--border)', padding: '10px 0' }}>
+                    <div style={{ fontWeight: 700, color: 'var(--heading)', fontSize: 15 }}>
+                      <Link to={`/jobs/${p.examSlug}`}>
+                        {t({ bn: def?.bn ?? p.examSlug, en: def?.en ?? p.examSlug })}
+                      </Link>
+                    </div>
+                    <p style={{ margin: '4px 0 0', color: 'var(--muted-ivory)', fontSize: 14, lineHeight: 1.8 }}>
+                      {t({ bn: `${p.questions}টি প্রশ্ন · ${p.correct}টি সঠিক`, en: `${p.questions} questions · ${p.correct} correct` })}
+                      {' · '}
+                      {p.accuracy === null
+                        ? t({ bn: 'সঠিক উত্তরের হার — তথ্য নেই', en: 'Accuracy — no data' })
+                        : t({ bn: `সঠিক উত্তরের হার ${p.accuracy}%`, en: `Accuracy ${p.accuracy}%` })}
+                      {' · '}
+                      {t({ bn: `${p.topicsPracticed.length}টি টপিকে অনুশীলন`, en: `${p.topicsPracticed.length} topic(s) practised` })}
+                      {' · '}
+                      {t({ bn: `সেট ${p.setsCompleted}/${p.setsAvailable}টি সম্পন্ন`, en: `Sets ${p.setsCompleted}/${p.setsAvailable} completed` })}
+                      {' · '}
+                      {t({ bn: `সর্বশেষ কার্যকলাপ ${formatDateBn(p.lastActivityMillis)}`, en: `Last activity ${formatDateBn(p.lastActivityMillis)}` })}
+                    </p>
+                  </div>
+                );
+              })}
+              {capped ? (
+                <p style={{ margin: '10px 0 0', color: 'var(--muted)', fontSize: 13, lineHeight: 1.7 }}>
+                  {t({
+                    bn: 'সর্বশেষ ২০টি অনুশীলন ও ২০টি মকের ভিত্তিতে হিসাব করা হয়েছে — পুরো ইতিহাস দেখতে বিশ্লেষণ পাতা দেখুন।',
+                    en: 'Calculated from the latest 20 practices and 20 mocks — see the analysis page for the full history.',
+                  })}
+                </p>
+              ) : null}
+              <p style={{ margin: '10px 0 0' }}>
+                <LinkButton to="/jobs/analysis" variant="outline">
+                  {t({ bn: 'বিস্তারিত বিশ্লেষণ দেখুন →', en: 'See detailed analysis →' })}
+                </LinkButton>
+              </p>
+            </>
+          )}
+        </Card>
+      </Reveal>
+
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: 12, marginBottom: 20, marginTop: 12 }}>
+        {/* Recent attempts (ChatGPT #4, Gemini #4): the last 5,
+            each with exam, kind, score/total, date and a link to
+            its own result page. Never a placeholder row. */}
         <Reveal delayMs={0}>
+          <Card>
+            <div style={{ fontWeight: 700, color: 'var(--heading)', fontSize: 17 }}>
+              {t({ bn: 'সাম্প্রতিক অনুশীলন', en: 'Recent practice' })}
+            </div>
+            {attempts === null ? (
+              <p style={{ margin: '8px 0 0', color: 'var(--muted)', fontSize: 14 }}>লোড হচ্ছে…</p>
+            ) : recent.length === 0 ? (
+              <>
+                <p style={{ margin: '8px 0 10px', color: 'var(--muted)', fontSize: 14, lineHeight: 1.7 }}>
+                  {t({
+                    bn: 'এখনো কোনো অনুশীলন বা মক দেওয়া হয়নি — শুরু করলে সর্বশেষ ৫টি এখানে দেখাবে।',
+                    en: 'No practice or mock taken yet — once you start, the latest 5 will show here.',
+                  })}
+                </p>
+                <LinkButton to="/jobs/common" variant="outline">
+                  {t({ bn: 'কমন প্রস্তুতি দেখুন →', en: 'See common preparation →' })}
+                </LinkButton>
+              </>
+            ) : (
+              <ul style={{ margin: '8px 0 0', paddingLeft: 0, listStyle: 'none', fontSize: 14, lineHeight: 1.9 }}>
+                {recent.map((a) => (
+                  <li key={a.docId} style={{ borderTop: '1px solid var(--border)', padding: '6px 0' }}>
+                    <Link to={`/jobs/result/${a.docId}`} style={{ fontWeight: 600 }}>
+                      {t({
+                        bn: `${jobExamBySlug(a.examSlug)?.bn ?? a.examSlug} · ${a.kind === 'mock' ? 'মক' : 'অনুশীলন'} · ${a.score}/${a.totalMarks} নম্বর`,
+                        en: `${jobExamBySlug(a.examSlug)?.en ?? a.examSlug} · ${a.kind === 'mock' ? 'mock' : 'practice'} · ${a.score}/${a.totalMarks}`,
+                      })}
+                    </Link>
+                    <span style={{ color: 'var(--muted)', fontSize: 13 }}>
+                      {' · '}
+                      {formatDateBn(a.submittedAtMillis)}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </Card>
+        </Reveal>
+
+        {/* My results — data-driven (D4): best vs latest per exam
+            for mocks (never mixed, never averaged). */}
+        <Reveal delayMs={80}>
           <Card>
             <div style={{ fontWeight: 700, color: 'var(--heading)', fontSize: 17 }}>
               {t({ bn: 'আমার ফলাফল', en: 'My results' })}
             </div>
             {attempts === null ? (
               <p style={{ margin: '8px 0 0', color: 'var(--muted)', fontSize: 14 }}>লোড হচ্ছে…</p>
-            ) : attempts.length === 0 ? (
+            ) : mockAttempts.length === 0 ? (
               <>
                 <p style={{ margin: '8px 0 10px', color: 'var(--muted)', fontSize: 14, lineHeight: 1.7 }}>
                   {t({
@@ -361,14 +761,27 @@ export default function JobSeekerDashboardPage() {
               </>
             ) : (
               <>
-                <p style={{ margin: '8px 0 10px', color: 'var(--muted-ivory)', fontSize: 14, lineHeight: 1.7 }}>
-                  {t({ bn: `মোট ${attempts.length}টি মক দেওয়া হয়েছে`, en: `${attempts.length} mock(s) taken` })}
-                  {dashLatest && typeof dashLatest.score === 'number' && typeof dashLatest.totalMarks === 'number'
-                    ? t({ bn: ` · সর্বশেষ: ${dashLatest.score}/${dashLatest.totalMarks} নম্বর`, en: ` · Latest: ${dashLatest.score}/${dashLatest.totalMarks}` })
-                    : ''}
-                </p>
-                {dashLatest ? (
-                  <LinkButton to={`/jobs/result/${dashLatest.docId}`} variant="accent">
+                <ul style={{ margin: '8px 0 10px', paddingLeft: 0, listStyle: 'none', fontSize: 14, lineHeight: 1.9 }}>
+                  {mockTrends.map((g) => {
+                    const trend = attemptTrend(g.attempts, 'মক');
+                    const def = jobExamBySlug(g.examSlug);
+                    return (
+                      <li key={g.examSlug} style={{ borderTop: '1px solid var(--border)', padding: '6px 0' }}>
+                        <span style={{ fontWeight: 700, color: 'var(--heading)' }}>
+                          {t({ bn: def?.bn ?? g.examSlug, en: def?.en ?? g.examSlug })}
+                        </span>
+                        {' — '}
+                        <span style={{ color: 'var(--muted-ivory)' }}>
+                          {trend.bestPercent === null || trend.latestPercent === null
+                            ? t({ bn: 'ফলাফল — তথ্য নেই', en: 'Result — no data' })
+                            : t({ bn: `সেরা ${trend.bestPercent}% · সর্বশেষ ${trend.latestPercent}%`, en: `Best ${trend.bestPercent}% · Latest ${trend.latestPercent}%` })}
+                        </span>
+                      </li>
+                    );
+                  })}
+                </ul>
+                {latestAttempt && latestAttempt.kind === 'mock' ? (
+                  <LinkButton to={`/jobs/result/${latestAttempt.docId}`} variant="accent">
                     {t({ bn: 'সর্বশেষ ফলাফল দেখুন →', en: 'See the latest result →' })}
                   </LinkButton>
                 ) : null}
@@ -382,70 +795,450 @@ export default function JobSeekerDashboardPage() {
             )}          </Card>
         </Reveal>
 
-        {/* Weak topics — data-driven (D4, same staleness class):
-            real weak topics from the student's attempts; the empty
-            copy only when no attempt exists. */}
-        <Reveal delayMs={80}>
-          <Card>
-            <div style={{ fontWeight: 700, color: 'var(--heading)', fontSize: 17 }}>
-              {t({ bn: 'দুর্বল টপিক', en: 'Weak topics' })}
-            </div>
-            {attempts === null ? (
-              <p style={{ margin: '8px 0 0', color: 'var(--muted)', fontSize: 14 }}>লোড হচ্ছে…</p>
-            ) : attempts.length === 0 ? (
-              <>
-                <p style={{ margin: '8px 0 10px', color: 'var(--muted)', fontSize: 14, lineHeight: 1.7 }}>
-                  {t({
-                    bn: 'মক টেস্টের ফলাফল এলে কোন টপিকে দুর্বল, কী আবার পড়তে হবে — তা এখানে দেখাবে। এখনো কোনো তথ্য নেই।',
-                    en: 'Once mock results exist, this will show which topics are weak and what to revise. There is no data yet.',
-                  })}
-                </p>
-                <Chip tone="gold">{t({ bn: 'মকের পরে দেখাবে', en: 'Shows after mocks' })}</Chip>
-              </>
-            ) : dashWeakTopics.length === 0 ? (
-              <p style={{ margin: '8px 0 0', color: 'var(--muted)', fontSize: 14, lineHeight: 1.7 }}>
-                {t({
-                  bn: 'কোনো ভুল উত্তর নেই — দুর্বল টপিক পাওয়া যায়নি।',
-                  en: 'No wrong answers — no weak topics found.',
-                })}
-              </p>
-            ) : (
-              <ul style={{ margin: '8px 0 0', paddingLeft: 20, fontSize: 14, lineHeight: 1.9, color: 'var(--heading)' }}>
-                {dashWeakTopics.map((w) => (
-                  <li key={w.topicId}>
-                    {jobTopicLabelBn(w.topicId)} — {w.wrong}/{w.total}টি ভুল
-                  </li>
-                ))}
-              </ul>
-            )}          </Card>
-        </Reveal>
-
-        {/* Study routine — Coming Soon. */}
+        {/* Study activity (Gemini #5, ChatGPT #6, adapted): sessions
+            + questions, never invented minutes — see jobDashboard.ts. */}
         <Reveal delayMs={160}>
           <Card>
             <div style={{ fontWeight: 700, color: 'var(--heading)', fontSize: 17 }}>
-              {t({ bn: 'আমার পড়ার রুটিন', en: 'My study routine' })}
+              {t({ bn: 'পড়াশোনার কার্যকলাপ', en: 'Study activity' })}
+            </div>
+            {attempts === null || !week || !today ? (
+              <p style={{ margin: '8px 0 0', color: 'var(--muted)', fontSize: 14 }}>লোড হচ্ছে…</p>
+            ) : attempts.length === 0 ? (
+              <p style={{ margin: '8px 0 0', color: 'var(--muted)', fontSize: 14, lineHeight: 1.7 }}>
+                {t({
+                  bn: 'এখনো কোনো সেশন সম্পন্ন হয়নি — অনুশীলন বা মক শেষ করলে কার্যকলাপ এখানে দেখাবে।',
+                  en: 'No session completed yet — once you finish a practice or mock, activity will show here.',
+                })}
+              </p>
+            ) : (
+              <>
+                <p style={{ margin: '8px 0 10px', color: 'var(--muted-ivory)', fontSize: 14, lineHeight: 1.8 }}>
+                  {t({ bn: `আজ: ${today.sessionsToday}টি সেশন · ${today.questionsToday}টি প্রশ্ন`, en: `Today: ${today.sessionsToday} session(s) · ${today.questionsToday} question(s)` })}
+                  <br />
+                  {t({ bn: `গত ৭ দিন: ${week.totalSessions}টি সেশন · ${week.totalQuestions}টি প্রশ্ন`, en: `Last 7 days: ${week.totalSessions} session(s) · ${week.totalQuestions} question(s)` })}
+                  {streakDays >= 2 ? (
+                    <>
+                      <br />
+                      {t({ bn: `টানা ${streakDays} দিন অনুশীলন — শুধু আপনার নিজের দেখার জন্য।`, en: `${streakDays}-day streak — for your own viewing only.` })}
+                    </>
+                  ) : null}
+                </p>
+                <ul style={{ margin: '0 0 10px', paddingLeft: 0, listStyle: 'none', fontSize: 13, lineHeight: 1.9, color: 'var(--muted-ivory)' }}>
+                  {week.days.map((d) => (
+                    <li key={d.dayKey} style={{ display: 'flex', justifyContent: 'space-between', borderTop: '1px solid var(--border)', padding: '3px 0' }}>
+                      <span>{d.labelBn}</span>
+                      <span>{t({ bn: `${d.sessions}টি সেশন · ${d.questions}টি প্রশ্ন`, en: `${d.sessions} session(s) · ${d.questions} question(s)` })}</span>
+                    </li>
+                  ))}
+                </ul>
+                <p style={{ margin: 0, color: 'var(--muted)', fontSize: 13, lineHeight: 1.7 }}>
+                  {t({
+                    bn: 'মিনিটের হিসাব দেখানো হয় না — প্রশ্ন খোলা থাকা সময় টাইমারে ধরা হয়, ট্যাব বদলালে থামে না।',
+                    en: 'Minutes are not shown — question-open time is counted by the timer, and it does not pause when you switch tabs.',
+                  })}
+                </p>
+              </>
+            )}
+          </Card>
+        </Reveal>
+      </div>
+
+      {/* ============ P3 — দুর্বল টপিক ============ */}
+      <Reveal>
+        <Card>
+          <div id="weak-topics" style={{ fontWeight: 700, color: 'var(--heading)', fontSize: 17 }}>
+            {t({ bn: 'দুর্বল টপিক', en: 'Weak topics' })}
+          </div>
+          {attempts === null ? (
+            <p style={{ margin: '8px 0 0', color: 'var(--muted)', fontSize: 14 }}>লোড হচ্ছে…</p>
+          ) : attempts.length === 0 ? (
+            <p style={{ margin: '8px 0 0', color: 'var(--muted)', fontSize: 14, lineHeight: 1.7 }}>
+              {t({
+                bn: 'মক টেস্টের ফলাফল এলে কোন টপিকে দুর্বল, কী আবার পড়তে হবে — তা এখানে দেখাবে। এখনো কোনো তথ্য নেই।',
+                en: 'Once mock results exist, this will show which topics are weak and what to revise. There is no data yet.',
+              })}
+            </p>
+          ) : weakTopics.length === 0 ? (
+            <p style={{ margin: '8px 0 0', color: 'var(--muted)', fontSize: 14, lineHeight: 1.7 }}>
+              {t({
+                bn: 'কোনো টপিকেই দুর্বলতার যথেষ্ট তথ্য নেই — কমপক্ষে ৫টি প্রশ্নের উত্তর দিলে টপিক এখানে আসবে।',
+                en: 'No topic has enough data to call weak yet — answer at least 5 questions in a topic for it to appear here.',
+              })}
+            </p>
+          ) : (
+            <>
+              <p style={{ margin: '8px 0 10px', color: 'var(--muted)', fontSize: 13, lineHeight: 1.7 }}>
+                {t({
+                  bn: 'নিয়ম: ৫–৯টি প্রশ্নে "প্রাথমিক ইঙ্গিত", ১০+ প্রশ্নে দুর্বলতার সংকেত। সঠিক উত্তরের হার ৫০%-এর নিচে হলেই টপিক এখানে আসে।',
+                  en: 'Rule: 5–9 questions is an “early indication”, 10+ is a weakness signal. A topic appears here only when accuracy is below 50%.',
+                })}
+              </p>
+              <ul style={{ margin: 0, paddingLeft: 0, listStyle: 'none', fontSize: 14, lineHeight: 1.9 }}>
+                {weakTopics.map((w) => {
+                  const bundle = bundleForTopic(w.topicId);
+                  return (
+                    <li key={w.topicId} style={{ borderTop: '1px solid var(--border)', padding: '8px 0' }}>
+                      <div style={{ fontWeight: 700, color: 'var(--heading)' }}>
+                        {jobTopicLabelBn(w.topicId)}
+                        {' — '}
+                        <span style={{ fontWeight: 400, color: 'var(--muted-ivory)' }}>
+                          {w.correct}/{w.total}টি সঠিক · {w.accuracy}%
+                          {' · '}
+                          {w.sample === 'signal'
+                            ? t({ bn: 'দুর্বলতার সংকেত', en: 'Weakness signal' })
+                            : t({ bn: 'প্রাথমিক ইঙ্গিত', en: 'Early indication' })}
+                        </span>
+                      </div>
+                      {bundle ? (
+                        <LinkButton to={`/jobs/practice/${bundle.docId}`} variant="outline">
+                          {t({ bn: 'এই টপিকের অনুশীলন করুন →', en: 'Practise this topic →' })}
+                        </LinkButton>
+                      ) : (
+                        <p style={{ margin: '4px 0 0', color: 'var(--muted)', fontSize: 13, lineHeight: 1.7 }}>
+                          {t({
+                            bn: 'এই টপিকের অনুশীলন সেট এখনো তৈরি হয়নি।',
+                            en: 'No practice set exists for this topic yet.',
+                          })}
+                        </p>
+                      )}
+                    </li>
+                  );
+                })}
+              </ul>
+            </>
+          )}
+        </Card>
+      </Reveal>
+
+      {/* ============ P4 — দ্রুত প্রবেশ ============ */}
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: 12, marginBottom: 20, marginTop: 12 }}>
+        {/* Wrong-answer notebook (design #11; full re-practice is
+            Step 13 — this card counts + links to result pages). */}
+        <Reveal delayMs={0}>
+          <Card>
+            <div style={{ fontWeight: 700, color: 'var(--heading)', fontSize: 17 }}>
+              {t({ bn: 'ভুল-উত্তর নোটবুক', en: 'Wrong-answer notebook' })}
+            </div>
+            {attempts === null || !wrongSummary ? (
+              <p style={{ margin: '8px 0 0', color: 'var(--muted)', fontSize: 14 }}>লোড হচ্ছে…</p>
+            ) : wrongSummary.distinctWrongQuestions === 0 ? (
+              <p style={{ margin: '8px 0 0', color: 'var(--muted)', fontSize: 14, lineHeight: 1.7 }}>
+                {t({
+                  bn: 'কোনো ভুল উত্তর নেই — ভুল হলে প্রশ্নগুলো এখানে জমা হবে।',
+                  en: 'No wrong answers — wrong questions will collect here.',
+                })}
+              </p>
+            ) : (
+              <>
+                <p style={{ margin: '8px 0 10px', color: 'var(--muted-ivory)', fontSize: 14, lineHeight: 1.7 }}>
+                  {t({ bn: `${wrongSummary.distinctWrongQuestions}টি ভিন্ন প্রশ্নে ভুল হয়েছে।`, en: `${wrongSummary.distinctWrongQuestions} different question(s) answered wrong.` })}
+                </p>
+                <ul style={{ margin: '0 0 10px', paddingLeft: 0, listStyle: 'none', fontSize: 14, lineHeight: 1.9 }}>
+                  {wrongSummary.recent.map((r) => (
+                    <li key={r.questionId} style={{ borderTop: '1px solid var(--border)', padding: '6px 0' }}>
+                      <Link to={`/jobs/result/${r.attemptDocId}`} style={{ fontWeight: 600 }}>
+                        {jobTopicLabelBn(r.topicId)}
+                      </Link>
+                      <span style={{ color: 'var(--muted)', fontSize: 13 }}>
+                        {' · '}
+                        {r.status === 'wrong'
+                          ? t({ bn: 'ভুল উত্তর', en: 'Wrong answer' })
+                          : t({ bn: 'উত্তর দেওয়া হয়নি', en: 'Unanswered' })}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+                <Chip tone="gold">{t({ bn: 'শুধু ভুলগুলো দিয়ে আবার অনুশীলন — Step 13-এ আসছে', en: 'Re-practice only the wrong ones — coming in Step 13' })}</Chip>
+              </>
+            )}
+          </Card>
+        </Reveal>
+
+        {/* Favourites (design #12) — Step 13 owns it. */}
+        <Reveal delayMs={80}>
+          <Card>
+            <div style={{ fontWeight: 700, color: 'var(--heading)', fontSize: 17 }}>
+              {t({ bn: 'ফেভারিট', en: 'Favourites' })}
             </div>
             <p style={{ margin: '8px 0 10px', color: 'var(--muted)', fontSize: 14, lineHeight: 1.7 }}>
               {t({
-                bn: 'লক্ষ্য পরীক্ষার সিলেবাস অনুযায়ী ব্যক্তিগত পড়ার রুটিন এখানে থাকবে — পরীক্ষা ও মক চালু হলে।',
-                en: 'A personal study routine based on your target exam’s syllabus will live here — once exams and mocks run.',
+                bn: 'প্রশ্ন, টপিক ও মক ফেভারিট করে রাখা যাবে — Step 13-এ আসছে।',
+                en: 'You will be able to favourite questions, topics and mocks — coming in Step 13.',
               })}
             </p>
             <Chip tone="gold">{t({ bn: 'শীঘ্রই আসছে', en: 'Coming soon' })}</Chip>
           </Card>
         </Reveal>
 
-        {/* My progress — empty until practice starts. */}
-        <Reveal delayMs={0}>
+        {/* Revision schedule (design #13) — Step 12 owns it. */}
+        <Reveal delayMs={160}>
           <Card>
             <div style={{ fontWeight: 700, color: 'var(--heading)', fontSize: 17 }}>
-              {t({ bn: 'আমার অগ্রগতি', en: 'My progress' })}
+              {t({ bn: 'রিভিশন সময়সূচি', en: 'Revision schedule' })}
             </div>
             <p style={{ margin: '8px 0 10px', color: 'var(--muted)', fontSize: 14, lineHeight: 1.7 }}>
               {t({
-                bn: 'অনুশীলন ও মক শুরু করলে পরীক্ষার ইতিহাস ও বিষয়ভিত্তিক অগ্রগতি এখানে দেখাবে। এখনো কোনো অগ্রগতি নেই।',
-                en: 'Once you start practising and taking mocks, exam history and subject-wise progress will show here. There is no progress yet.',
+                bn: 'দুর্বল টপিকের পুনরাবৃত্তির সময়সূচি প্ল্যানারে থাকবে — Step 12-এ আসছে।',
+                en: 'The repeat schedule for weak topics will live in the planner — coming in Step 12.',
+              })}
+            </p>
+            <p style={{ margin: 0 }}>
+              <a href="#weak-topics" style={{ fontWeight: 600, fontSize: 14 }}>
+                {t({ bn: 'দুর্বল টপিক দেখুন →', en: 'See weak topics →' })}
+              </a>
+            </p>
+          </Card>
+        </Reveal>
+
+        {/* Planner (design #6) — Step 12 owns it. */}
+        <Reveal delayMs={0}>
+          <Card>
+            <div style={{ fontWeight: 700, color: 'var(--heading)', fontSize: 17 }}>
+              {t({ bn: 'প্ল্যানার', en: 'Planner' })}
+            </div>
+            <p style={{ margin: '8px 0 10px', color: 'var(--muted)', fontSize: 14, lineHeight: 1.7 }}>
+              {t({
+                bn: 'সপ্তাহের পড়ার পরিকল্পনা এখানে থাকবে — Step 12-এ আসছে।',
+                en: 'Your weekly study plan will live here — coming in Step 12.',
+              })}
+            </p>
+            <Chip tone="gold">{t({ bn: 'শীঘ্রই আসছে', en: 'Coming soon' })}</Chip>
+          </Card>
+        </Reveal>
+
+        {/* Achievements (design #14): only real work earns one;
+            the rule is shown on the card. */}
+        <Reveal delayMs={80}>
+          <Card>
+            <div style={{ fontWeight: 700, color: 'var(--heading)', fontSize: 17 }}>
+              {t({ bn: 'অর্জন', en: 'Achievements' })}
+            </div>
+            {attempts === null ? (
+              <p style={{ margin: '8px 0 0', color: 'var(--muted)', fontSize: 14 }}>লোড হচ্ছে…</p>
+            ) : achievements.length === 0 ? (
+              <p style={{ margin: '8px 0 0', color: 'var(--muted)', fontSize: 14, lineHeight: 1.7 }}>
+                {t({
+                  bn: 'এখনো কোনো অর্জন নেই — প্রথম অনুশীলন বা মক শেষ করলে অর্জন এখানে দেখাবে। কোনো সার্টিফিকেট নয়।',
+                  en: 'No achievements yet — finish your first practice or mock and it will show here. Not a certificate.',
+                })}
+              </p>
+            ) : (
+              <ul style={{ margin: '8px 0 0', paddingLeft: 20, fontSize: 14, lineHeight: 1.9, color: 'var(--heading)' }}>
+                {achievements.map((a) => (
+                  <li key={a.key}>
+                    {a.labelBn}
+                    <span style={{ color: 'var(--muted)', fontSize: 13 }}> — {a.ruleBn}</span>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </Card>
+        </Reveal>
+      </div>
+
+      {/* ============ Supporting cards: profile, mode, target, enrolled ============ */}
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: 12, marginBottom: 20 }}>
+        {/* Profile (design #1). */}
+        <Reveal delayMs={0}>
+          <Card>
+            <div style={{ fontWeight: 700, color: 'var(--heading)', fontSize: 17 }}>
+              {t({ bn: 'আমার প্রোফাইল', en: 'My profile' })}
+            </div>
+            <p style={{ margin: '8px 0 10px', color: 'var(--muted-ivory)', fontSize: 14, lineHeight: 1.7 }}>
+              <span
+                aria-hidden
+                style={{
+                  display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
+                  width: 40, height: 40, borderRadius: '50%', background: '#12766E',
+                  color: '#fff', fontWeight: 700, fontSize: 18, marginRight: 8, verticalAlign: 'middle',
+                }}
+              >
+                {name ? name.charAt(0) : 'শি'}
+              </span>
+              {name ?? t({ bn: 'শিক্ষার্থী', en: 'Student' })}
+            </p>
+            <LinkButton to="/profile" variant="outline">
+              {t({ bn: 'প্রোফাইল দেখুন →', en: 'See profile →' })}
+            </LinkButton>
+          </Card>
+        </Reveal>
+
+        {/* My mode — Beginner / Advanced (owner decision 22 Nov 2026).
+            Shows the current mode; the switch below changes it any time
+            (stored on the user's own profile when signed in). */}
+        <Reveal delayMs={80}>
+          <Card>
+            <div style={{ fontWeight: 700, color: 'var(--heading)', fontSize: 17 }}>
+              {t({ bn: 'আমার মোড', en: 'My mode' })}
+            </div>
+            <p style={{ margin: '8px 0 10px', color: 'var(--muted-ivory)', fontSize: 14, lineHeight: 1.7 }}>
+              {t({
+                bn: `বর্তমান মোড: ${mode === 'beginner' ? 'নতুনদের জন্য' : 'অভিজ্ঞদের জন্য'}`,
+                en: `Current mode: ${mode === 'beginner' ? 'Beginner' : 'Advanced'}`,
+              })}
+            </p>
+            <JobModeSwitch />
+            <p style={{ margin: '8px 0 0' }}>
+              <button
+                type="button"
+                onClick={() => setShowOnboarding(true)}
+                style={{ background: 'none', border: 'none', padding: 0, color: 'var(--teal-text)', fontWeight: 600, fontSize: 14, cursor: 'pointer', textDecoration: 'underline' }}
+              >
+                {t({ bn: 'মোড পছন্দ আবার দেখুন', en: 'Show the mode choice again' })}
+              </button>
+            </p>
+          </Card>
+        </Reveal>
+
+        {/* Target exam — read from the profile (Step 4: targetExam).
+            Change it in /profile. */}
+        <Reveal delayMs={160}>
+          <Card>
+            <div style={{ fontWeight: 700, color: 'var(--heading)', fontSize: 17 }}>
+              {t({ bn: 'আমার লক্ষ্য পরীক্ষা', en: 'My target exam' })}
+            </div>
+            {targetExamDef ? (
+              <>
+                <p style={{ margin: '8px 0 10px', color: 'var(--muted-ivory)', fontSize: 14, lineHeight: 1.7 }}>
+                  <Link to={`/jobs/${targetExamDef.slug}`} style={{ fontWeight: 700 }}>
+                    {t({ bn: targetExamDef.bn, en: targetExamDef.en })}
+                  </Link>
+                  {' — '}
+                  {t({ bn: targetExamDef.fullBn, en: targetExamDef.fullEn })}
+                </p>
+                <LinkButton to="/profile" variant="outline">
+                  {t({ bn: 'লক্ষ্য বদলান →', en: 'Change target →' })}
+                </LinkButton>
+              </>
+            ) : profile?.targetExam ? (
+              <>
+                <p style={{ margin: '8px 0 10px', color: 'var(--muted-ivory)', fontSize: 14, lineHeight: 1.7 }}>
+                  {profile.targetExam}
+                </p>
+                <LinkButton to="/profile" variant="outline">
+                  {t({ bn: 'লক্ষ্য বদলান →', en: 'Change target →' })}
+                </LinkButton>
+              </>
+            ) : (
+              <>
+                <p style={{ margin: '8px 0 10px', color: 'var(--muted)', fontSize: 14, lineHeight: 1.7 }}>
+                  {t({
+                    bn: 'এখনো কোনো লক্ষ্য পরীক্ষা বেছে নেওয়া হয়নি। যে পরীক্ষার প্রস্তুতি নিতে চান, সেটি বেছে নিন।',
+                    en: 'No target exam has been picked yet. Pick the exam you want to prepare for.',
+                  })}
+                </p>
+                <LinkButton to="/profile" variant="accent">
+                  {t({ bn: 'লক্ষ্য পরীক্ষা বেছে নিন →', en: 'Pick a target exam →' })}
+                </LinkButton>
+              </>
+            )}
+          </Card>
+        </Reveal>
+
+        {/* Enrolled categories (design #3): the categories the
+            student added in /profile. "Enrolled" means "added to
+            my preparation list" — not a course enrolment. Removing
+            one never deletes progress. */}
+        <Reveal delayMs={0}>
+          <Card>
+            <div style={{ fontWeight: 700, color: 'var(--heading)', fontSize: 17 }}>
+              {t({ bn: 'আমার প্রস্তুতির বিভাগ', en: 'My preparation categories' })}
+            </div>
+            {enrolledDefs.length === 0 ? (
+              <>
+                <p style={{ margin: '8px 0 10px', color: 'var(--muted)', fontSize: 14, lineHeight: 1.7 }}>
+                  {t({
+                    bn: 'এখনো কোনো বিভাগ যোগ করা হয়নি — পছন্দের পরীক্ষার বিভাগ যোগ করুন।',
+                    en: 'No category added yet — add the exam categories you want to prepare for.',
+                  })}
+                </p>
+                <LinkButton to="/profile" variant="outline">
+                  {t({ bn: 'বিভাগ যোগ করুন →', en: 'Add categories →' })}
+                </LinkButton>
+              </>
+            ) : (
+              <>
+                <p style={{ margin: '8px 0 10px', display: 'flex', flexWrap: 'wrap', gap: 8 }}>
+                  {enrolledDefs.map((c) => (
+                    <Link key={c.slug} to={`/jobs/${c.hubSlugs[0]}`}>
+                      <Chip tone="gold">{t({ bn: c.bn, en: c.en })}</Chip>
+                    </Link>
+                  ))}
+                </p>
+                <LinkButton to="/profile" variant="outline">
+                  {t({ bn: 'বিভাগ বদলান →', en: 'Change categories →' })}
+                </LinkButton>
+              </>
+            )}
+          </Card>
+        </Reveal>
+      </div>
+
+      {/* ============ P5 — আসন্ন পরীক্ষা ============ */}
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: 12, marginBottom: 20 }}>
+        {/* Circulars (design #15) — Step 14 owns the collection.
+            Until then, the target exam's official site is the
+            honest place for the latest circular. */}
+        <Reveal delayMs={0}>
+          <Card>
+            <div style={{ fontWeight: 700, color: 'var(--heading)', fontSize: 17 }}>
+              {t({ bn: 'সার্কুলার', en: 'Circulars' })}
+            </div>
+            <p style={{ margin: '8px 0 10px', color: 'var(--muted)', fontSize: 14, lineHeight: 1.7 }}>
+              {t({
+                bn: 'সার্কুলার সংরক্ষণ Step 14-এ আসছে — এখনো কোনো বিজ্ঞপ্তি সংরক্ষিত হয়নি।',
+                en: 'Saving circulars is coming in Step 14 — no circular is saved yet.',
+              })}
+            </p>
+            {targetExamDef?.officialUrl ? (
+              <p style={{ margin: 0 }}>
+                <a href={targetExamDef.officialUrl} target="_blank" rel="noreferrer" style={{ fontWeight: 600, fontSize: 14 }}>
+                  {t({ bn: targetExamDef.officialLinkBn ?? 'সর্বশেষ বিজ্ঞপ্তি দেখুন →', en: targetExamDef.officialLinkEn ?? 'See the latest circular →' })}
+                </a>
+              </p>
+            ) : (
+              <p style={{ margin: 0, color: 'var(--muted)', fontSize: 14, lineHeight: 1.7 }}>
+                {t({
+                  bn: 'লক্ষ্য পরীক্ষা বেছে নিলে তার সর্বশেষ বিজ্ঞপ্তির লিংক এখানে দেখাবে।',
+                  en: 'Pick a target exam and its latest circular link will show here.',
+                })}
+              </p>
+            )}
+          </Card>
+        </Reveal>
+
+        {/* Calendar (design #16) — Step 14 owns it. No date is
+            ever shown as confirmed until a circular verifies it. */}
+        <Reveal delayMs={80}>
+          <Card>
+            <div style={{ fontWeight: 700, color: 'var(--heading)', fontSize: 17 }}>
+              {t({ bn: 'পরীক্ষার ক্যালেন্ডার', en: 'Exam calendar' })}
+            </div>
+            <p style={{ margin: '8px 0 10px', color: 'var(--muted)', fontSize: 14, lineHeight: 1.7 }}>
+              {t({
+                bn: 'আবেদনের শেষ তারিখ ও পরীক্ষার তারিখের ক্যালেন্ডার Step 14-এ আসছে — কোনো তারিখ অনুমান করে দেখানো হয় না।',
+                en: 'The calendar of application deadlines and exam dates is coming in Step 14 — no date is ever shown as a guess.',
+              })}
+            </p>
+            <Chip tone="gold">{t({ bn: 'শীঘ্রই আসছে', en: 'Coming soon' })}</Chip>
+          </Card>
+        </Reveal>
+
+        {/* Notifications (design #17): the jobNotifications
+            collection is deferred to Step 14 with circulars (the
+            compiled-rules margin on this branch is 1,138 bytes —
+            a new match block would breach 256,000). Until then
+            this card honestly shows that none exist yet. */}
+        <Reveal delayMs={160}>
+          <Card>
+            <div style={{ fontWeight: 700, color: 'var(--heading)', fontSize: 17 }}>
+              {t({ bn: 'নোটিফিকেশন', en: 'Notifications' })}
+            </div>
+            <p style={{ margin: '8px 0 10px', color: 'var(--muted)', fontSize: 14, lineHeight: 1.7 }}>
+              {t({
+                bn: 'কোনো নোটিফিকেশন নেই। নোটিফিকেশন Step 14-এ আসছে — সাপ্তাহিক মক প্রকাশিত হলে এখানে জানানো হবে।',
+                en: 'No notifications. Notifications are coming in Step 14 — when a weekly mock is published, it will be announced here.',
               })}
             </p>
             <Chip tone="gold">{t({ bn: 'শীঘ্রই আসছে', en: 'Coming soon' })}</Chip>

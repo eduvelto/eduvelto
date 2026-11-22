@@ -46,6 +46,11 @@ export interface JobAttemptSummary {
   kind: 'practice' | 'mock';
   examSlug: string;
   bundleId: string;
+  /** Bare mock key for kind 'mock' (daily: YYYY-MM-DD; weekly:
+   * YYYY-Www; full: full__{examSlug}__{n}); null for practice.
+   * Step 11: the dashboard needs it to verify a mock retry link
+   * against the live catalog before rendering it. */
+  mockId: string | null;
   score: number;
   totalMarks: number;
   /** Stored percentage (may be negative); display clamps at 0. */
@@ -98,6 +103,7 @@ export function attemptSummaryFromStored(
     kind: data.kind === 'mock' ? 'mock' : 'practice',
     examSlug: typeof data.examSlug === 'string' ? data.examSlug : '',
     bundleId: typeof data.bundleId === 'string' ? data.bundleId : '',
+    mockId: typeof data.mockId === 'string' ? data.mockId : null,
     score: num(data.score),
     totalMarks: num(data.totalMarks),
     percentage: num(data.percentage),
