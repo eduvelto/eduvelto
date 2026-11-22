@@ -21,7 +21,7 @@ import { Link, useParams, useSearchParams } from 'react-router-dom';
 import { PageShell } from '../components/PageShell';
 import { AlertBox, Card, LinkButton, ProgressBar, Skeleton } from '../components/ui';
 import { useAuth } from '../lib/auth';
-import { JOB_PRACTICE_RESULT_LABEL } from '../lib/jobEngine';
+import { JOB_PRACTICE_RESULT_LABEL, jobTopicLabelBn } from '../lib/jobEngine';
 import {
   loadBundleKey,
   loadJobAttempt,
@@ -297,13 +297,20 @@ export default function JobResultPage() {
           <div style={{ fontWeight: 700, color: '#142B3B', fontSize: 17 }}>দুর্বল টপিক</div>
           {weakTopics.length === 0 ? (
             <p style={{ margin: '8px 0 0', color: MUTED, fontSize: 14, lineHeight: 1.7 }}>
-              কোনো ভুল উত্তর নেই — সব প্রশ্নের উত্তর সঠিক হয়েছে, বা কোনো প্রশ্নের উত্তর দেওয়া হয়নি।
+              {/* N5: the old copy led with "all correct" even for a
+                  zero-answer attempt — distinguish the two cases. */}
+              {unansweredCount === answers.length
+                ? 'কোনো প্রশ্নের উত্তর দেওয়া হয়নি — দুর্বল টপিক নির্ণয় করা যায়নি।'
+                : 'কোনো ভুল উত্তর নেই — সব প্রশ্নের উত্তর সঠিক হয়েছে।'}
             </p>
           ) : (
             <ul style={{ margin: '8px 0 0', paddingLeft: 20, fontSize: 14, lineHeight: 1.9, color: '#142B3B' }}>
               {weakTopics.map((t) => (
                 <li key={t.topicId}>
-                  {t.topicId} — {t.wrong}/{t.total}টি ভুল
+                  {/* D7: never render the raw topic-ID slug — the
+                      label resolver turns bcs__english__grammar__tense
+                      into "English — Grammar — Tense". */}
+                  {jobTopicLabelBn(t.topicId)} — {t.wrong}/{t.total}টি ভুল
                 </li>
               ))}
             </ul>

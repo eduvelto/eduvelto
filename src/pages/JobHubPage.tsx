@@ -9,15 +9,18 @@
 // 4 main exams (EXAM_PATTERNS — MCQ-stage subject breakdown, total,
 // time, negative marking; source: job analysis 21 Nov 2026, with the
 // "verify against the latest circular" caveat) and the 7 "100%
-// preparation" elements as Coming Soon. Every content tab shows an
-// honest empty state — NO syllabus tables (B-2.1), NO questions
-// (B-2.2), NO mocks (B-2.3), NO previous questions (B-6.1) until
-// teacher review. Age limits, fees and exam dates are never written
+// preparation" elements as Coming Soon. Content tabs show an honest
+// empty state until their content is published — NO syllabus tables
+// (B-2.1), NO live practice (B-2.2), NO live mocks (B-2.3), NO
+// previous questions (B-6.1); the mocks and results tabs are
+// data-driven (Step 9) and show real published mocks / real attempts
+// when they exist. Age limits, fees and exam dates are never written
 // here — they change with every circular. BCS viva marks are never
 // written (200 vs 100 disputed); NTRCA 19th pattern is never written.
 // No ads on this page: the hub is all practice / exam / result space
 // (design plan §1.4).
 
+import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { PageShell, EmptyState } from '../components/PageShell';
 import { Card, Chip, LinkButton, Reveal } from '../components/ui';
@@ -26,7 +29,10 @@ import JobPracticeTab from '../components/JobPracticeTab';
 import JobMockTab from '../components/JobMockTab';
 import JobModeSwitch from '../components/JobModeSwitch';
 import { useLanguage, T } from '../i18n/LanguageContext';
+import { useAuth } from '../lib/auth';
 import { useJobMode } from '../lib/jobMode';
+import { listMockAttempts, listPublishedMocks, type MockAttemptWithId } from '../lib/jobMock';
+import type { JobMockWithId } from '../lib/jobMocks';
 import {
   EXAM_PATTERNS,
   JOB_ELEMENTS,
@@ -56,8 +62,8 @@ const TAB_EMPTY: Record<Exclude<JobTabSlug, 'home'>, { bn: string; en: string; n
   mocks: {
     bn: 'মক টেস্ট তৈরি হচ্ছে',
     en: 'Mock tests are being prepared',
-    noteBn: 'প্রশ্ন ব্যাংক প্রস্তুত হলে আসল ধরনে (নম্বর, সময়, নেগেটিভ মার্কিংসহ) মক দেওয়া যাবে।',
-    noteEn: 'Once the question bank is ready, mocks will run in the real pattern (marks, time, negative marking).',
+    noteBn: 'মক চালু হলে আসল ধরনে (নম্বর, সময়, নেগেটিভ মার্কিংসহ) মক দেওয়া যাবে।',
+    noteEn: 'Once mocks run, they will follow the real pattern (marks, time, negative marking).',
   },
   previous: {
     bn: 'যাচাইকৃত বিগত প্রশ্ন এখনো সংগ্রহ হয়নি',
@@ -164,6 +170,99 @@ function JobSubjectsTab({ def }: { def: JobExamDef }) {
   );
 }
 
+/** Hub results tab (Step 9 closure, D3): the student's mock
+ * attempts for THIS exam, newest first — real history when they
+ * have taken mocks; the honest empty note only when they truly
+ * have taken none. Signed-out visitors get the login prompt. */
+function JobHubResultsTab({ def }: { def: JobExamDef }) {
+  const { user } = useAuth();
+  const [attempts, setAttempts] = useState<MockAttemptWithId[] | null>(null);
+  useEffect(() => {
+    if (!user) {
+      setAttempts([]);
+      return;
+    }
+    let alive = true;
+    listMockAttempts(user.uid, 50)
+      .then((list) => {
+        if (alive) setAttempts(list.filter((a) => a.examSlug === def.slug).slice(0, 5));
+      })
+      .catch(() => {
+        if (alive) setAttempts([]);
+      });
+    return () => {
+      alive = false;
+    };
+  }, [user, def.slug]);
+
+  if (!user) {
+    return (
+      <Reveal>
+        <Card>
+          <div style={{ fontWeight: 700, color: '#142B3B', fontSize: 17 }}>ফলাফল দেখতে লগইন করুন</div>
+          <p style={{ margin: '8px 0 12px', color: '#68747B', fontSize: 14, lineHeight: 1.7 }}>
+            ফলাফল শুধু লগইন করা শিক্ষার্থীরা দেখতে পারে।
+          </p>
+          <p style={{ margin: 0 }}>
+            <Link to="/login" style={{ fontWeight: 600 }}>
+              লগইন করুন →
+            </Link>
+          </p>
+        </Card>
+      </Reveal>
+    );
+  }
+
+  if (attempts === null) {
+    return (
+      <Reveal>
+        <Card>
+          <p style={{ margin: 0, color: '#68747B', fontSize: 14 }}>লোড হচ্ছে…</p>
+        </Card>
+      </Reveal>
+    );
+  }
+
+  if (attempts.length === 0) {
+    return (
+      <Reveal>
+        <Card>
+          <div style={{ fontWeight: 700, color: '#142B3B', fontSize: 17 }}>এখনো কোনো ফলাফল নেই</div>
+          <p style={{ margin: '8px 0 12px', color: '#68747B', fontSize: 14, lineHeight: 1.7 }}>
+            এখনো কোনো মক টেস্ট দেওয়া হয়নি — মক দিলে ফলাফল ও দুর্বল টপিকের বিশ্লেষণ এখানে দেখাবে।
+          </p>
+          <p style={{ margin: 0 }}>
+            <Link to="/jobs/common" style={{ fontWeight: 600 }}>
+              কমন প্রস্তুতি দেখুন →
+            </Link>
+          </p>
+        </Card>
+      </Reveal>
+    );
+  }
+
+  return (
+    <div style={{ display: 'grid', gap: 12 }}>
+      {attempts.map((a) => (
+        <Reveal key={a.docId}>
+          <Card>
+            <div style={{ display: 'flex', justifyContent: 'space-between', gap: 8, flexWrap: 'wrap', fontSize: 14 }}>
+              <span>
+                {typeof a.score === 'number' ? a.score : 0} / {typeof a.totalMarks === 'number' ? a.totalMarks : 0} নম্বর ·{' '}
+                {typeof a.correctCount === 'number' ? a.correctCount : 0}টি সঠিক ·{' '}
+                {typeof a.wrongCount === 'number' ? a.wrongCount : 0}টি ভুল
+              </span>
+              <Link to={`/jobs/result/${a.docId}`} style={{ fontWeight: 600 }}>
+                ফলাফল দেখুন →
+              </Link>
+            </div>
+          </Card>
+        </Reveal>
+      ))}
+    </div>
+  );
+}
+
 export default function JobHubPage() {
   const { t } = useLanguage();
   const { mode } = useJobMode();
@@ -175,6 +274,27 @@ export default function JobHubPage() {
   // def.slug): the lib returns [] — never throws — for unknown slugs,
   // and this line runs before the !def early return below.
   const subjects = jobSubjectsForExam(exam);
+  // Step 9 closure (D3): the exam's published full mocks, for the
+  // home-tab mock/model-test cards. Loads for everyone (published
+  // definitions are readable signed-out); null = still loading.
+  const [publishedMocks, setPublishedMocks] = useState<JobMockWithId[] | null>(null);
+  useEffect(() => {
+    if (!def) {
+      setPublishedMocks([]);
+      return;
+    }
+    let alive = true;
+    listPublishedMocks({ examSlug: def.slug, kind: 'full' })
+      .then((list) => {
+        if (alive) setPublishedMocks(list);
+      })
+      .catch(() => {
+        if (alive) setPublishedMocks([]);
+      });
+    return () => {
+      alive = false;
+    };
+  }, [def?.slug]);
 
   if (!def) {
     return (
@@ -313,9 +433,10 @@ export default function JobHubPage() {
           ) : null}
 
           {/* Mode view — Beginner or Advanced (owner decision 22 Nov
-              2026). STRUCTURE ONLY: every practice/mock entry below is
-              an honest empty state — 0 questions exist in the database,
-              so nothing here pretends a test can be taken yet. */}
+              2026). The entries below are data-driven where Step 9
+              ships (published mocks, real results) and honest empty
+              states elsewhere — nothing here pretends a test can be
+              taken before it is published. */}
           {mode === 'beginner' ? (
             <>
               {/* Easy explanation — what this exam is, in plain words. */}
@@ -375,7 +496,7 @@ export default function JobHubPage() {
                       {t({ bn: 'সহজ প্রশ্ন দিয়ে শুরু', en: 'Start with easy questions' })}
                     </div>
                     <p style={{ margin: '6px 0 10px', color: '#68747B', fontSize: 14, lineHeight: 1.7 }}>
-                      {t({ bn: 'বেসিক প্রশ্ন (উত্তর ও ব্যাখ্যাসহ) শিক্ষক যাচাইয়ের পর এখানে আসবে — এখনো কোনো প্রশ্ন তৈরি হয়নি।', en: 'Basic questions (with answer and explanation) will come here after teacher review — no questions exist yet.' })}
+                      {t({ bn: 'বেসিক প্রশ্ন (উত্তর ও ব্যাখ্যাসহ) অনুশীলন চালু হলে এখানে আসবে।', en: 'Basic questions (with answer and explanation) will appear here once practice runs.' })}
                     </p>
                     <Chip tone="gold">{t({ bn: 'শীঘ্রই আসছে', en: 'Coming soon' })}</Chip>
                   </Card>
@@ -385,8 +506,10 @@ export default function JobHubPage() {
           ) : (
             <>
               {/* Timed-mock entry — real pattern time + negative marking
-                  where verified; circular-based note otherwise. No mock
-                  can run yet: the mocks tab shows the honest empty state. */}
+                  where verified; circular-based note otherwise. The
+                  cards below are data-driven (D3): published mocks
+                  show their count, unpublished show the honest
+                  not-yet state. */}
               <Reveal>
                 <h3 className="ev-section-h2">{t({ bn: 'সময়ভিত্তিক প্রস্তুতি', en: 'Timed preparation' })}</h3>
               </Reveal>
@@ -401,8 +524,14 @@ export default function JobHubPage() {
                         ? t({ bn: `${pattern.timeBn} · ${pattern.negativeBn}`, en: `${pattern.timeEn} · ${pattern.negativeEn}` })
                         : t({ bn: 'সময় ও নেগেটিভ মার্কিং বিজ্ঞপ্তি অনুযায়ী হবে।', en: 'Time and negative marking follow the circular.' })}
                     </p>
+                    {/* D3: data-driven — the mocks tab lists published
+                        mocks, so this card must not claim none exist. */}
                     <p style={{ margin: '0 0 10px', color: '#68747B', fontSize: 14, lineHeight: 1.7 }}>
-                      {t({ bn: 'এখনো কোনো মক তৈরি হয়নি — প্রশ্ন ব্যাংক প্রস্তুত হলে আসল ধরনে মক দেওয়া যাবে।', en: 'No mock exists yet — once the question bank is ready, mocks will run in the real pattern.' })}
+                      {publishedMocks === null
+                        ? t({ bn: 'মক তালিকা লোড হচ্ছে…', en: 'Loading the mock list…' })
+                        : publishedMocks.length > 0
+                          ? t({ bn: `${publishedMocks.length}টি মক প্রকাশিত হয়েছে — আসল ধরনে মক দেওয়া যাবে।`, en: `${publishedMocks.length} mock(s) published — take them in the real pattern.` })
+                          : t({ bn: 'এখনো কোনো মক প্রকাশিত হয়নি — মক চালু হলে আসল ধরনে মক দেওয়া যাবে।', en: 'No mock is published yet — once mocks run, they will follow the real pattern.' })}
                     </p>
                     <Link to={tabHref('mocks')} style={{ fontWeight: 600 }}>
                       {t({ bn: 'মক টেস্ট দেখুন →', en: 'See mock tests →' })}
@@ -419,10 +548,22 @@ export default function JobHubPage() {
                         ? t({ bn: `${pattern.totalBn} · ${pattern.timeBn} — আসল ধরনে পূর্ণ পরীক্ষা।`, en: `${pattern.totalEn} · ${pattern.timeEn} — a full exam in the real pattern.` })
                         : t({ bn: 'আসল ধরনে পূর্ণ পরীক্ষা — নম্বর ও সময় বিজ্ঞপ্তি অনুযায়ী।', en: 'A full exam in the real pattern — marks and time follow the circular.' })}
                     </p>
+                    {/* D3: a full model test IS a published full mock —
+                        same data as the card above. */}
                     <p style={{ margin: '0 0 10px', color: '#68747B', fontSize: 14, lineHeight: 1.7 }}>
-                      {t({ bn: 'মডেল টেস্ট এখনো তৈরি হয়নি।', en: 'No model test has been prepared yet.' })}
+                      {publishedMocks === null
+                        ? t({ bn: 'মক তালিকা লোড হচ্ছে…', en: 'Loading the mock list…' })
+                        : publishedMocks.length > 0
+                          ? t({ bn: `${publishedMocks.length}টি পূর্ণ মক প্রকাশিত হয়েছে — আসল ধরনে দেওয়া যাবে।`, en: `${publishedMocks.length} full mock(s) published — take them in the real pattern.` })
+                          : t({ bn: 'এখনো কোনো মডেল টেস্ট প্রকাশিত হয়নি।', en: 'No model test is published yet.' })}
                     </p>
-                    <Chip tone="gold">{t({ bn: 'শীঘ্রই আসছে', en: 'Coming soon' })}</Chip>
+                    {publishedMocks !== null && publishedMocks.length > 0 ? (
+                      <Link to={tabHref('mocks')} style={{ fontWeight: 600 }}>
+                        {t({ bn: 'মক টেস্ট দেখুন →', en: 'See mock tests →' })}
+                      </Link>
+                    ) : (
+                      <Chip tone="gold">{t({ bn: 'শীঘ্রই আসছে', en: 'Coming soon' })}</Chip>
+                    )}
                   </Card>
                 </Reveal>
                 <Reveal delayMs={160}>
@@ -431,7 +572,7 @@ export default function JobHubPage() {
                       {t({ bn: 'প্রতিযোগিতামূলক প্রস্তুতি', en: 'Competitive preparation' })}
                     </div>
                     <p style={{ margin: '6px 0 10px', color: '#68747B', fontSize: 14, lineHeight: 1.7 }}>
-                      {t({ bn: 'প্রতি সপ্তাহে ১টি পূর্ণ মক — চক্রাকারে:', en: 'One full mock every week — rotating:' })}
+                      {t({ bn: 'পরিকল্পনা: প্রতি সপ্তাহে ১টি পূর্ণ মক — চক্রাকারে:', en: 'Plan: one full mock every week — rotating:' })}
                     </p>
                     <p style={{ margin: '0 0 10px', color: '#57616A', fontSize: 14, lineHeight: 1.9 }}>
                       {WEEKLY_MOCK_CYCLE.map((s, i) => {
@@ -573,6 +714,8 @@ export default function JobHubPage() {
         <JobMockTab def={def} />
       ) : activeTab === 'subjects' && (subjects.length > 0 || def.slug === 'it-professional') ? (
         <JobSubjectsTab def={def} />
+      ) : activeTab === 'results' ? (
+        <JobHubResultsTab def={def} />
       ) : (
         <Reveal>
           <Card>

@@ -46,10 +46,11 @@ import {
   type MockAttemptWithId,
 } from '../lib/jobMock';
 import { jobMockIdFromDocId, jobMockPatternSummaryBn, type JobMockWithId } from '../lib/jobMocks';
+import { jobExamBySlug } from '../lib/jobExams';
 import type { PracticeBundleWithId } from '../lib/jobPractice';
 
 type Phase = 'loading' | 'signed-out' | 'error' | 'intro' | 'ready' | 'expired';
-type SaveState = 'saved' | 'saving' | 'error';
+type SaveState = 'saved' | 'saving' | 'retrying' | 'error';
 
 const MUTED = '#68747B';
 
@@ -78,10 +79,22 @@ export default function JobMockPage() {
   const [starting, setStarting] = useState(false);
   const [startError, setStartError] = useState('');
   const [confirming, setConfirming] = useState(false);
+  // D1: abandon-then-start confirm state (the intro "new start"
+  // button used to call startMockSession, which ALWAYS throws while
+  // a resumable session holds a live lock — the button could never
+  // succeed. It now abandons the old session behind a confirm,
+  // then starts).
+  const [confirmingAbandon, setConfirmingAbandon] = useState(false);
+  const [abandoningIntro, setAbandoningIntro] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState('');
   const [abandoning, setAbandoning] = useState(false);
   const [saveState, setSaveState] = useState<SaveState>('saved');
+  // D8: autosave retry — the old label promised "আবার চেষ্টা করা
+  // হবে" but the code never retried. A failed save now retries
+  // twice (5s apart); the label says so only while a retry is
+  // actually pending.
+  const [retryNonce, setRetryNonce] = useState(0);
   const [now, setNow] = useState(() => Date.now());
 
   const startedRef = useRef(false);
@@ -182,15 +195,48 @@ export default function JobMockPage() {
     }
   }
 
+  // D1: abandon the resumable session (behind a confirm — its
+  // answers are lost), then start fresh. The old "নতুন করে শুরু
+  // করুন" button called doStart() directly, which startMockSession
+  // always denies while a live lock exists — a dead end with no
+  // path forward. This is the path: resume, or abandon-then-start.
+  async function doAbandonAndStart() {
+    if (!user || !resumable) return;
+    setAbandoningIntro(true);
+    setStartError('');
+    try {
+      await abandonMockSession(user.uid, resumable.sessionId);
+      setResumable(null);
+      setConfirmingAbandon(false);
+      setAbandoningIntro(false);
+      await doStart();
+    } catch (e) {
+      setStartError(e instanceof Error ? e.message : 'আগের মক বাতিল করা যায়নি — আবার চেষ্টা করুন।');
+      setAbandoningIntro(false);
+    }
+  }
+
   // Debounced autosave (same revision discipline as practice:
   // the last WRITTEN revision lives in the ref, never in state).
+  // D8: a failed save retries twice, 5s apart — the retry is real
+  // (the effect re-runs on retryNonce with the same revision base,
+  // because a failed write never advances writtenRevisionRef).
   const writtenRevisionRef = useRef<number | null>(null);
   const firstSaveRef = useRef(true);
+  const retryCountRef = useRef(0);
+  const prevRetryNonceRef = useRef(0);
   useEffect(() => {
     if (!session || !user || phase !== 'ready') return;
     if (firstSaveRef.current) {
       firstSaveRef.current = false;
       return;
+    }
+    // A fresh save cycle (new answers) resets the retry budget;
+    // a retry run keeps it.
+    if (prevRetryNonceRef.current !== retryNonce) {
+      prevRetryNonceRef.current = retryNonce;
+    } else {
+      retryCountRef.current = 0;
     }
     setSaveState('saving');
     const t = setTimeout(() => {
@@ -199,12 +245,21 @@ export default function JobMockPage() {
       autosaveMockSession(user.uid, sessionId, patch)
         .then(() => {
           writtenRevisionRef.current = patch.revision;
+          retryCountRef.current = 0;
           setSaveState('saved');
         })
-        .catch(() => setSaveState('error'));
+        .catch(() => {
+          if (retryCountRef.current < 2) {
+            retryCountRef.current += 1;
+            setSaveState('retrying');
+            setTimeout(() => setRetryNonce((n) => n + 1), 5000);
+          } else {
+            setSaveState('error');
+          }
+        });
     }, 1200);
     return () => clearTimeout(t);
-  }, [session, user, sessionId, phase]);
+  }, [session, user, sessionId, phase, retryNonce]);
 
   // 1s timer tick (server time = client time + measured offset).
   useEffect(() => {
@@ -276,12 +331,21 @@ export default function JobMockPage() {
   }
 
   if (phase === 'intro') {
-    const patternSummary = jobMockPatternSummaryBn(mock.rulesSnapshot);
+    // N3: the pattern line shows the count the student will
+    // actually face — the bundle's real length, not the snapshot's
+    // declared count (the manifest is the authority; the snapshot
+    // can go stale when a definition is republished).
+    const patternSummary = jobMockPatternSummaryBn(mock.rulesSnapshot, bundle.questions.length);
     const negative = mock.rulesSnapshot.negativeMarking;
     const scoringNotice =
       negative === null
         ? 'এই পরীক্ষার নেগেটিভ মার্কিং এখনো বিজ্ঞপ্তি থেকে যাচাই হয়নি — তাই ভুল উত্তরে নম্বর কাটা হচ্ছে না। এই স্কোর অফিসিয়াল ধরনের স্কোর নয়।'
         : null;
+    // N2: the resumable line must not assert saved answers when
+    // zero were answered — count what is actually stored.
+    const resumableAnsweredCount = resumable
+      ? Object.values(resumable.session.answers).filter((a) => a.selected !== null).length
+      : 0;
     return (
       <PageShell titleBn={mock.titleBn} titleEn={mock.titleBn} wide maxWidth={1240}>
         <Card>
@@ -300,16 +364,35 @@ export default function JobMockPage() {
             <div style={{ marginTop: 12 }}>
               <div style={{ fontWeight: 700, color: '#142B3B' }}>চলমান মক আছে — আগের সেশনটি ফিরে পাবেন</div>
               <p style={{ margin: '6px 0 12px', color: MUTED, fontSize: 14 }}>
-                {resumable.session.questionRefs.length}টি প্রশ্ন · আগের উত্তরগুলো সংরক্ষিত আছে
+                {resumable.session.questionRefs.length}টি প্রশ্ন ·{' '}
+                {resumableAnsweredCount > 0
+                  ? `${resumableAnsweredCount}টি উত্তর সংরক্ষিত আছে`
+                  : 'এখনো কোনো উত্তর দেওয়া হয়নি'}
               </p>
-              <Button variant="accent" disabled={starting} onClick={() => void doResume()}>
-                {starting ? 'ফেরানো হচ্ছে…' : 'আগের মক চালিয়ে যান →'}
+              <Button variant="accent" disabled={starting || abandoningIntro} onClick={() => void doResume()}>
+                {starting && !abandoningIntro ? 'ফেরানো হচ্ছে…' : 'আগের মক চালিয়ে যান →'}
               </Button>
               <span style={{ marginLeft: 8 }}>
-                <Button variant="outline" disabled={starting} onClick={() => void doStart()}>
-                  নতুন করে শুরু করুন
+                <Button variant="outline" disabled={starting || abandoningIntro} onClick={() => setConfirmingAbandon(true)}>
+                  আগেরটি বাতিল করে নতুন শুরু করুন
                 </Button>
               </span>
+              {confirmingAbandon ? (
+                <Card style={{ marginTop: 12 }}>
+                  <div style={{ fontWeight: 700, color: '#142B3B', fontSize: 15 }}>আগের মকটি বাতিল করবেন?</div>
+                  <p style={{ margin: '8px 0 12px', color: MUTED, fontSize: 14, lineHeight: 1.7 }}>
+                    আগের সেশনের উত্তরগুলো মুছে যাবে — সেটি আর ফেরানো যাবে না। বাতিল করলে নতুন মক শুরু হবে।
+                  </p>
+                  <div style={{ display: 'flex', gap: 8 }}>
+                    <Button variant="accent" disabled={abandoningIntro} onClick={() => void doAbandonAndStart()}>
+                      {abandoningIntro ? 'বাতিল হচ্ছে…' : 'হ্যাঁ, বাতিল করে নতুন শুরু করুন'}
+                    </Button>
+                    <Button variant="outline" disabled={abandoningIntro} onClick={() => setConfirmingAbandon(false)}>
+                      ফিরে যান
+                    </Button>
+                  </div>
+                </Card>
+              ) : null}
             </div>
           ) : (
             <div style={{ marginTop: 12 }}>
@@ -357,6 +440,9 @@ export default function JobMockPage() {
 
   const total = bundle.questions.length;
   const answeredCount = Object.values(session.answers).filter((a) => a.selected !== null).length;
+  // N1: the footer used to render the raw exam slug (e.g. 'bcs')
+  // — show the Bangla exam name instead.
+  const examNameBn = jobExamBySlug(mock.examSlug)?.bn ?? mock.examSlug;
   const markedCount = Object.values(session.answers).filter((a) => a.markedForReview).length;
   const orderedNs = session.questionRefs.map((r) => r.n);
   const currentN = session.currentQuestion;
@@ -368,7 +454,13 @@ export default function JobMockPage() {
     timeSpentSeconds: 0,
   };
   const saveLabel =
-    saveState === 'saving' ? 'সংরক্ষণ হচ্ছে…' : saveState === 'error' ? 'সংরক্ষণ হয়নি — আবার চেষ্টা করা হবে' : 'সংরক্ষিত';
+    saveState === 'saving'
+      ? 'সংরক্ষণ হচ্ছে…'
+      : saveState === 'retrying'
+        ? 'সংরক্ষণ হয়নি — আবার চেষ্টা করা হচ্ছে…'
+        : saveState === 'error'
+          ? 'সংরক্ষণ হয়নি — উত্তর বদলালে আবার চেষ্টা হবে'
+          : 'সংরক্ষিত';
   const timerUrgent = remaining !== null && remaining <= 5 * 60 * 1000;
 
   function flushTime(): { n: number; elapsed: number } {
@@ -598,7 +690,7 @@ export default function JobMockPage() {
           ) : null}
 
           <p style={{ marginTop: 16, color: MUTED, fontSize: 13 }}>
-            <Link to={`/jobs/${mock.examSlug}`} style={{ fontWeight: 600 }}>← {mock.examSlug} হাবে ফিরুন</Link>
+            <Link to={`/jobs/${mock.examSlug}`} style={{ fontWeight: 600 }}>← {examNameBn} হাবে ফিরুন</Link>
             {' · '}অগ্রগতি স্বয়ংক্রিয়ভাবে সংরক্ষিত হয় — মাঝপথে চলে গেলে পরে এসে এই মকেই আবার শুরু করলে আগের সেশনটি ফিরে পাবেন।
           </p>
         </div>

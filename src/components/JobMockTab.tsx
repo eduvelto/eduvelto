@@ -3,8 +3,9 @@
 // Lists the exam's Published full mock definitions (kind full)
 // with "মক শুরু করুন" → /jobs/mock/:docId. Empty bank ⇒ the
 // same honest empty copy the hub showed before (no fake
-// readiness). Signed-out visitors see the honest copy too —
-// definitions are readable only when published (Step 9 rules).
+// readiness). Signed-out visitors see the LIST too — published
+// definitions are readable without sign-in (Step 9 rules) — with
+// "লগইন করে মক দিন" buttons instead of start buttons (D2).
 //
 // LANGUAGE: all UI text is Bangla (one-language rule).
 
@@ -21,11 +22,11 @@ export default function JobMockTab({ def }: { def: JobExamDef }) {
   const [loading, setLoading] = useState(true);
   const [mocks, setMocks] = useState<JobMockWithId[]>([]);
 
+  // D2: the list loads for EVERYONE — published definitions are
+  // readable signed-out (Step 9 rules: read when published), so a
+  // signed-out visitor must see a published mock instead of being
+  // told "no mocks yet". Only STARTING a mock needs sign-in.
   useEffect(() => {
-    if (!user) {
-      setLoading(false);
-      return;
-    }
     let alive = true;
     listPublishedMocks({ examSlug: def.slug, kind: 'full' })
       .then((list) => {
@@ -40,7 +41,7 @@ export default function JobMockTab({ def }: { def: JobExamDef }) {
     return () => {
       alive = false;
     };
-  }, [user, def.slug]);
+  }, [def.slug]);
 
   if (loading) {
     return (
@@ -52,7 +53,7 @@ export default function JobMockTab({ def }: { def: JobExamDef }) {
     );
   }
 
-  if (!user || mocks.length === 0) {
+  if (mocks.length === 0) {
     return (
       <Reveal>
         <Card>
@@ -89,9 +90,15 @@ export default function JobMockTab({ def }: { def: JobExamDef }) {
                 {jobMockPatternSummaryBn(m.rulesSnapshot)}
                 {m.rulesSnapshot.passPercent !== null ? ` · পাস ${m.rulesSnapshot.passPercent}%` : ''}
               </p>
-              <LinkButton to={`/jobs/mock/${m.docId}`} variant="accent">
-                মক শুরু করুন →
-              </LinkButton>
+              {user ? (
+                <LinkButton to={`/jobs/mock/${m.docId}`} variant="accent">
+                  মক শুরু করুন →
+                </LinkButton>
+              ) : (
+                <LinkButton to="/login" variant="accent">
+                  লগইন করে মক দিন →
+                </LinkButton>
+              )}
             </Card>
           </Reveal>
         ))}

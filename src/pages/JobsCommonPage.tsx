@@ -9,10 +9,14 @@
 // Design rules shown (design plan §4, proposed defaults for §7.3/§7.4):
 // daily mock 20–30 MCQ in 20–30 minutes, topic rotation, negative
 // marking follows that day's cycle exam (BCS day −0.50, Primary/NTRCA
-// day −0.25); weekly full mock cycles BCS → Bank → Primary → NTRCA,
-// each in its exam's real pattern. The topic map is PRELIMINARY
-// (B-10.1 finalises it); the ~50 per topic is a TARGET, not a count —
-// 0 questions are published today.
+// day −0.25; Bank day: negative marking off — circular verification
+// pending, matching the Step 8 engine decision); weekly full mock
+// cycles BCS → Bank → Primary → NTRCA, each in its exam's real
+// pattern. The 9 common topics rotate in ~9 days, not in a week.
+// The topic map is PRELIMINARY (B-10.1 finalises it); the ~50 per
+// topic is a TARGET, not a count — no common-topic questions are
+// published yet (the first bank batch is 35 BCS English questions,
+// served once practice ships).
 //
 // Step 9: the daily + weekly cards are LIVE — they read today's
 // daily mock and this week's weekly mock (date-derived doc-IDs)
@@ -33,8 +37,9 @@ import {
   WEEKLY_MOCK_CYCLE,
   jobExamBySlug,
 } from '../lib/jobExams';
-import { loadThisWeekWeeklyMock, loadTodayDailyMock } from '../lib/jobMock';
+import { loadThisWeekWeeklyMock, loadTodayDailyMock, listMockAttempts, type MockAttemptWithId } from '../lib/jobMock';
 import { jobMockPatternSummaryBn, type JobMockWithId } from '../lib/jobMocks';
+import { jobTopicLabelBn, weakTopicsFromAttemptAnswers, type JobAttemptAnswer } from '../lib/jobEngine';
 
 /** Weekly full-mock pattern per cycle exam (design plan §4.2). */
 const WEEKLY_PATTERN: Record<string, { bn: string; en: string }> = {
@@ -51,11 +56,16 @@ export default function JobsCommonPage() {
 
   // Step 9: today's daily + this week's weekly mock, live.
   // Null = never published (honest "not yet", never a substitute).
+  // D2: these load for EVERYONE — a signed-out visitor must see
+  // that today's mock exists (with a login link), not a login wall
+  // that hides it. Only starting needs sign-in.
   const [daily, setDaily] = useState<JobMockWithId | null>(null);
   const [weekly, setWeekly] = useState<JobMockWithId | null>(null);
   const [mocksLoaded, setMocksLoaded] = useState(false);
+  // D6: the student's own mock history, for the progress card.
+  // null = not loaded yet (signed-in only — attempts are private).
+  const [attempts, setAttempts] = useState<MockAttemptWithId[] | null>(null);
   useEffect(() => {
-    if (!user) return;
     let alive = true;
     Promise.all([loadTodayDailyMock(), loadThisWeekWeeklyMock()])
       .then(([d, w]) => {
@@ -67,10 +77,29 @@ export default function JobsCommonPage() {
       .catch(() => {
         if (alive) setMocksLoaded(true);
       });
+    if (user) {
+      listMockAttempts(user.uid, 10)
+        .then((list) => {
+          if (alive) setAttempts(list);
+        })
+        .catch(() => {
+          if (alive) setAttempts([]);
+        });
+    } else {
+      setAttempts([]);
+    }
     return () => {
       alive = false;
     };
   }, [user]);
+
+  // D6: progress from the student's own attempts (loaded above).
+  // Weak topics aggregate across their mock attempts; the labels
+  // use the same resolver as the result page (D7).
+  const allAttemptAnswers: JobAttemptAnswer[] =
+    attempts?.flatMap((a) => (Array.isArray(a.answers) ? (a.answers as JobAttemptAnswer[]) : [])) ?? [];
+  const weakTopics = weakTopicsFromAttemptAnswers(allAttemptAnswers).slice(0, 2);
+  const latestAttempt = attempts && attempts.length > 0 ? attempts[0] : null;
 
   return (
     <PageShell titleBn="কমন প্রস্তুতি" titleEn="Common Preparation" wide hideTitle maxWidth={1240}>
@@ -118,26 +147,31 @@ export default function JobsCommonPage() {
             </p>
             <p style={{ margin: '0 0 10px', color: '#68747B', fontSize: 14, lineHeight: 1.7 }}>
               {t({
-                bn: 'প্রতিদিন ভিন্ন টপিক — এক সপ্তাহে সব কমন টপিক ঘুরে আসে। নেগেটিভ মার্কিং ওই দিনের চক্রের পরীক্ষার নিয়মে হবে (BCS-র দিনে −০.৫০, প্রাথমিক/NTRCA-র দিনে −০.২৫)।',
-                en: 'A different topic every day — all common topics rotate through in a week. Negative marking follows that day’s cycle exam (BCS day −0.50, Primary/NTRCA day −0.25).',
+                // D5: the Bank day was omitted from the negative-marking
+                // sentence, and the rotation is ~9 days for 9 topics,
+                // not "in a week" (front-ends audit, same finding).
+                bn: 'প্রতিদিন ভিন্ন টপিক — ৯টি কমন টপিক প্রায় ৯ দিনে ঘুরে আসে। নেগেটিভ মার্কিং ওই দিনের চক্রের পরীক্ষার নিয়মে হবে (BCS-র দিনে −০.৫০, প্রাথমিক/NTRCA-র দিনে −০.২৫; ব্যাংকের দিনে নেগেটিভ মার্কিং বন্ধ — বিজ্ঞপ্তি যাচাই বাকি)।',
+                en: 'A different topic every day — the 9 common topics rotate through in about 9 days. Negative marking follows that day’s cycle exam (BCS day −0.50, Primary/NTRCA day −0.25; Bank day: negative marking off — circular verification pending).',
               })}
             </p>
-            {!user ? (
-              <p style={{ margin: 0 }}>
-                <Link to="/login" style={{ fontWeight: 600 }}>
-                  {t({ bn: 'লগইন করুন →', en: 'Log in →' })}
-                </Link>
-              </p>
-            ) : !mocksLoaded ? (
+            {!mocksLoaded ? (
               <p style={{ margin: 0, color: '#68747B', fontSize: 14 }}>লোড হচ্ছে…</p>
             ) : daily ? (
               <>
                 <p style={{ margin: '0 0 10px', color: '#57616A', fontSize: 14, lineHeight: 1.7 }}>
                   {daily.titleBn} · {jobMockPatternSummaryBn(daily.rulesSnapshot)}
                 </p>
-                <LinkButton to={`/jobs/mock/${daily.docId}`} variant="accent">
-                  {t({ bn: 'আজকের মক শুরু করুন →', en: "Start today's mock →" })}
-                </LinkButton>
+                {user ? (
+                  <LinkButton to={`/jobs/mock/${daily.docId}`} variant="accent">
+                    {t({ bn: 'আজকের মক শুরু করুন →', en: "Start today's mock →" })}
+                  </LinkButton>
+                ) : (
+                  <p style={{ margin: 0 }}>
+                    <Link to="/login" style={{ fontWeight: 600 }}>
+                      {t({ bn: 'লগইন করে মক দিন →', en: 'Log in to take the mock →' })}
+                    </Link>
+                  </p>
+                )}
               </>
             ) : (
               <Chip tone="gold">{t({ bn: 'আজকের মক এখনো প্রকাশিত হয়নি', en: "Today's mock is not published yet" })}</Chip>
@@ -162,22 +196,24 @@ export default function JobsCommonPage() {
                 </li>
               ))}
             </ul>
-            {!user ? (
-              <p style={{ margin: 0 }}>
-                <Link to="/login" style={{ fontWeight: 600 }}>
-                  {t({ bn: 'লগইন করুন →', en: 'Log in →' })}
-                </Link>
-              </p>
-            ) : !mocksLoaded ? (
+            {!mocksLoaded ? (
               <p style={{ margin: 0, color: '#68747B', fontSize: 14 }}>লোড হচ্ছে…</p>
             ) : weekly ? (
               <>
                 <p style={{ margin: '0 0 10px', color: '#57616A', fontSize: 14, lineHeight: 1.7 }}>
                   {weekly.titleBn} · {jobMockPatternSummaryBn(weekly.rulesSnapshot)}
                 </p>
-                <LinkButton to={`/jobs/mock/${weekly.docId}`} variant="accent">
-                  {t({ bn: 'এই সপ্তাহের মক শুরু করুন →', en: "Start this week's mock →" })}
-                </LinkButton>
+                {user ? (
+                  <LinkButton to={`/jobs/mock/${weekly.docId}`} variant="accent">
+                    {t({ bn: 'এই সপ্তাহের মক শুরু করুন →', en: "Start this week's mock →" })}
+                  </LinkButton>
+                ) : (
+                  <p style={{ margin: 0 }}>
+                    <Link to="/login" style={{ fontWeight: 600 }}>
+                      {t({ bn: 'লগইন করে মক দিন →', en: 'Log in to take the mock →' })}
+                    </Link>
+                  </p>
+                )}
               </>
             ) : (
               <Chip tone="gold">{t({ bn: 'এই সপ্তাহের মক এখনো প্রকাশিত হয়নি', en: "This week's mock is not published yet" })}</Chip>
@@ -185,19 +221,55 @@ export default function JobsCommonPage() {
           </Card>
         </Reveal>
 
-        {/* My progress — empty until mocks run. */}
+        {/* My progress — data-driven (D6): real history when the
+            student has taken mocks; the honest "no mock yet" copy
+            only when they truly have taken none. */}
         <Reveal delayMs={160}>
           <Card>
             <div style={{ fontWeight: 700, color: '#142B3B', fontSize: 17 }}>
               {t({ bn: 'আমার অগ্রগতি', en: 'My progress' })}
             </div>
-            <p style={{ margin: '8px 0 10px', color: '#68747B', fontSize: 14, lineHeight: 1.7 }}>
-              {t({
-                bn: 'এখনো কোনো দৈনিক বা সাপ্তাহিক মক দেওয়া হয়নি — মক চালু হলে ইতিহাস, দুর্বল টপিক ও ধারাবাহিকতা এখানে দেখাবে।',
-                en: 'No daily or weekly mock has been taken yet — once mocks run, history, weak topics and streak will show here.',
-              })}
-            </p>
-            <Chip tone="gold">{t({ bn: 'শীঘ্রই আসছে', en: 'Coming soon' })}</Chip>
+            {!user ? (
+              <p style={{ margin: '8px 0 0' }}>
+                <Link to="/login" style={{ fontWeight: 600 }}>
+                  {t({ bn: 'লগইন করে অগ্রগতি দেখুন →', en: 'Log in to see your progress →' })}
+                </Link>
+              </p>
+            ) : attempts === null ? (
+              <p style={{ margin: '8px 0 0', color: '#68747B', fontSize: 14 }}>লোড হচ্ছে…</p>
+            ) : attempts.length === 0 ? (
+              <>
+                <p style={{ margin: '8px 0 10px', color: '#68747B', fontSize: 14, lineHeight: 1.7 }}>
+                  {t({
+                    bn: 'এখনো কোনো দৈনিক বা সাপ্তাহিক মক দেওয়া হয়নি — মক দিলে ইতিহাস, দুর্বল টপিক ও ধারাবাহিকতা এখানে দেখাবে।',
+                    en: 'No daily or weekly mock has been taken yet — once you take a mock, history, weak topics and streak will show here.',
+                  })}
+                </p>
+                <Chip tone="gold">{t({ bn: 'শীঘ্রই আসছে', en: 'Coming soon' })}</Chip>
+              </>
+            ) : (
+              <>
+                <p style={{ margin: '8px 0 10px', color: '#57616A', fontSize: 14, lineHeight: 1.7 }}>
+                  {t({ bn: `মোট ${attempts.length}টি মক দেওয়া হয়েছে`, en: `${attempts.length} mock(s) taken` })}
+                  {latestAttempt && typeof latestAttempt.score === 'number' && typeof latestAttempt.totalMarks === 'number'
+                    ? t({ bn: ` · সর্বশেষ: ${latestAttempt.score}/${latestAttempt.totalMarks} নম্বর`, en: ` · Latest: ${latestAttempt.score}/${latestAttempt.totalMarks}` })
+                    : ''}
+                </p>
+                {weakTopics.length > 0 ? (
+                  <p style={{ margin: '0 0 10px', color: '#68747B', fontSize: 14, lineHeight: 1.7 }}>
+                    {t({ bn: 'দুর্বল টপিক: ', en: 'Weak topics: ' })}
+                    {weakTopics.map((w) => `${jobTopicLabelBn(w.topicId)} (${w.wrong}/${w.total} ভুল)`).join(' · ')}
+                  </p>
+                ) : null}
+                {latestAttempt ? (
+                  <p style={{ margin: 0 }}>
+                    <Link to={`/jobs/result/${latestAttempt.docId}`} style={{ fontWeight: 600 }}>
+                      {t({ bn: 'সর্বশেষ ফলাফল দেখুন →', en: 'See the latest result →' })}
+                    </Link>
+                  </p>
+                ) : null}
+              </>
+            )}
           </Card>
         </Reveal>
       </div>
@@ -208,8 +280,8 @@ export default function JobsCommonPage() {
       </Reveal>
       <p style={{ color: '#57616A', margin: '-8px 0 14px', fontSize: 14, lineHeight: 1.7 }}>
         {t({
-          bn: 'প্রাথমিক তালিকা — ৪টি পরীক্ষার অফিসিয়াল সিলেবাস মিলিয়ে চূড়ান্ত হবে। প্রতি টপিকে লক্ষ্য ~৫০টি প্রশ্ন। এখনো কোনো প্রশ্ন প্রকাশিত হয়নি।',
-          en: 'Preliminary list — to be finalised against the 4 exams’ official syllabuses. Target ~50 questions per topic. No questions are published yet.',
+          bn: 'প্রাথমিক তালিকা — ৪টি পরীক্ষার অফিসিয়াল সিলেবাস মিলিয়ে চূড়ান্ত হবে। প্রতি টপিকে লক্ষ্য ~৫০টি প্রশ্ন। কমন টপিকের কোনো প্রশ্ন এখনো প্রকাশিত হয়নি।',
+          en: 'Preliminary list — to be finalised against the 4 exams’ official syllabuses. Target ~50 questions per topic. No common-topic questions are published yet.',
         })}
       </p>
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: 12, marginBottom: 20 }}>
