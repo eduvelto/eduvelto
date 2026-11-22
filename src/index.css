@@ -2275,7 +2275,7 @@ a.ev-home-strip-link:hover {
   }
 }
 
-/* Bottom sheets (বেশি কিছু / মেনু) — slide up above the bottom nav. */
+/* Bottom sheet (বেশি কিছু) — slides up above the bottom nav. */
 .ev-sheet-backdrop {
   position: fixed;
   inset: 0;
@@ -2309,4 +2309,35 @@ a.ev-home-strip-link:hover {
 .ev-sheet-link:hover {
   background: #eaf3fb;
   text-decoration: none;
+}
+
+/* Menu side drawer — slides in from the right (owner: Menu opens on the
+   side, not from the bottom, 22 Nov 2026). "বেশি কিছু" keeps the bottom
+   sheet above. */
+.ev-sheet-backdrop-side {
+  align-items: stretch;
+  justify-content: flex-end;
+}
+.ev-drawer {
+  width: min(320px, 85vw);
+  max-width: none;
+  max-height: none;
+  height: 100%;
+  border-radius: 0;
+  padding: 18px 18px calc(20px + env(safe-area-inset-bottom, 0px));
+  box-shadow: -8px 0 32px rgba(13, 30, 41, 0.25);
+  animation: ev-drawer-in 180ms ease-out;
+}
+@keyframes ev-drawer-in {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ev-drawer {
+    animation: none;
+  }
 }

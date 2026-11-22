@@ -5,13 +5,13 @@
 // Profile). It is rendered on every page at ≤768px (see App.tsx) and the
 // 60px bottom clearance in App.tsx / index.css keeps it from covering
 // content. The bar sits above the bottom ad banner when one is live
-// (bottomOffsetPx, same pattern as before). "বেশি কিছু" and "মেনু" open
-// bottom sheets instead of routing:
+// (bottomOffsetPx, same pattern as before). "বেশি কিছু" opens a bottom
+// sheet and "মেনু" opens a SIDE drawer (right) instead of routing:
 //  - বেশি কিছু = secondary pages (Directory, Exams, Health, About,
 //    Founder, Contact, Privacy) + auth / Dashboard.
 //  - মেনু = the four main sections (Job / Admission / Academic / Skills)
 //    with their key destinations.
-// Sheets close on backdrop tap, Close button, or navigation.
+// Sheet/drawer close on backdrop tap, Close button, or navigation.
 
 import { useEffect, useState } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
@@ -156,9 +156,12 @@ export default function BottomNav(props: { bottomOffsetPx: number }) {
       </nav>
 
       {sheet ? (
-        <div className="ev-sheet-backdrop" onClick={() => setSheet(null)}>
+        <div
+          className={sheet === 'menu' ? 'ev-sheet-backdrop ev-sheet-backdrop-side' : 'ev-sheet-backdrop'}
+          onClick={() => setSheet(null)}
+        >
           <div
-            className="ev-sheet"
+            className={sheet === 'menu' ? 'ev-sheet ev-drawer' : 'ev-sheet'}
             role="dialog"
             aria-modal="true"
             aria-label={sheet === 'more' ? t({ bn: 'বেশি কিছু', en: 'More' }) : t({ bn: 'মেনু', en: 'Menu' })}
