@@ -46,6 +46,10 @@ const AdminGuardiansPage = lazy(() => import('./pages/AdminGuardiansPage'));
 const AdminFeaturesPage = lazy(() => import('./pages/AdminFeaturesPage'));
 const AdminBackupPage = lazy(() => import('./pages/AdminBackupPage'));
 const AdminAuditPage = lazy(() => import('./pages/AdminAuditPage'));
+const AdminNuStructurePage = lazy(() => import('./pages/AdminNuStructurePage'));
+// NU-5: National University admission hub (design §5) — index, hub +
+// 8 tabs, group pages, candidate dashboard. Static group routes rank
+// above the hub's `:tab` route, so the two never collide.
 const AiTeacherPage = lazy(() => import('./pages/AiTeacherPage'));
 const ExamPage = lazy(() => import('./pages/ExamPage'));
 const RoutinePage = lazy(() => import('./pages/RoutinePage'));
@@ -64,6 +68,10 @@ const ContactPage = lazy(() => import('./pages/ContactPage'));
 // main 054c230 + the live site do, so the route is restored here.
 const FounderPage = lazy(() => import('./pages/FounderPage'));
 const PrivacyPage = lazy(() => import('./pages/PrivacyPage'));
+const AdmissionsIndexPage = lazy(() => import('./pages/AdmissionsIndexPage'));
+const NuHubPage = lazy(() => import('./pages/NuHubPage'));
+const NuGroupPage = lazy(() => import('./pages/NuGroupPage'));
+const AdmissionsDashboardPage = lazy(() => import('./pages/AdmissionsDashboardPage'));
 
 // Step 5 — role-based dashboards: /dashboard routes by the signed-in
 // user's role. Owner/admin/moderator go to the Owner Admin Dashboard
@@ -147,12 +155,26 @@ export default function App() {
         <Routes>
         <Route path="/" element={<HomePage />} />
         {/* Four main sections (homepage redesign, 21 Nov 2026): /class is
-            the real class index; /jobs, /admissions and /skills land on
-            ONE shared Coming Soon page until the sections are built. */}
+            the real class index; /jobs and /skills land on ONE shared
+            Coming Soon page until the sections are built. /admissions
+            is now the hub index (NU-5) — see the NU routes below. */}
         <Route path="/class" element={<ClassIndexPage />} />
         <Route path="/jobs" element={<ComingSoonPage section="jobs" />} />
-        <Route path="/admissions" element={<ComingSoonPage section="admissions" />} />
         <Route path="/skills" element={<ComingSoonPage section="skills" />} />
+        {/* NU admission (NU-5, design §5): index → NU hub (8 tabs) →
+            group pages → candidate dashboard. The dashboard and the
+            three STATIC group routes sit above the hub's `:tab` route
+            (React Router ranks static above dynamic), so
+            `/admissions/national-university/science` is the Science
+            group page, never the "science" tab. NU-Q6 (final):
+            the dashboard is `/admissions/dashboard`. */}
+        <Route path="/admissions" element={<AdmissionsIndexPage />} />
+        <Route path="/admissions/dashboard" element={<AdmissionsDashboardPage />} />
+        <Route path="/admissions/national-university" element={<NuHubPage />} />
+        <Route path="/admissions/national-university/humanities" element={<NuGroupPage group="humanities" />} />
+        <Route path="/admissions/national-university/science" element={<NuGroupPage group="science" />} />
+        <Route path="/admissions/national-university/business" element={<NuGroupPage group="business" />} />
+        <Route path="/admissions/national-university/:tab" element={<NuHubPage />} />
         {/* Class-wise navigation (stage 3): Select Class → Class Dashboard → Tab → Subject → Book → Chapter. */}
         <Route path="/class/:slug/subjects/:dept" element={<ClassSubjectPage />} />
         <Route path="/class/:slug/:tab" element={<ClassDashboardPage />} />
@@ -184,6 +206,7 @@ export default function App() {
         <Route path="/admin/features" element={<AdminGuard><AdminFeaturesPage /></AdminGuard>} />
         <Route path="/admin/backup" element={<AdminGuard><AdminBackupPage /></AdminGuard>} />
         <Route path="/admin/audit" element={<AdminGuard><AdminAuditPage /></AdminGuard>} />
+        <Route path="/admin/admissions/structure" element={<AdminGuard><AdminNuStructurePage /></AdminGuard>} />
         <Route path="/ai-teacher" element={<AiTeacherPage />} />
         <Route path="/exam" element={<ExamPage />} />
         <Route path="/routine" element={<RoutinePage />} />

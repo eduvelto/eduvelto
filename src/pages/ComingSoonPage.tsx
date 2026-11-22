@@ -11,7 +11,6 @@ import { Link } from 'react-router-dom';
 import { PageShell } from '../components/PageShell';
 import { LinkButton } from '../components/ui';
 import { useLanguage } from '../i18n/LanguageContext';
-import NuOnboarding from '../components/NuOnboarding';
 
 type Section = 'jobs' | 'admissions' | 'skills';
 
@@ -83,12 +82,9 @@ export default function ComingSoonPage(props: { section: Section }) {
       <p style={{ marginTop: 20, color: '#57616A' }}>
         {t({ bn: 'এই সময়ে যা করতে পারেন —', en: 'What you can do in the meantime —' })}
       </p>
-      {/* NU-4: first-time NU mode-choice card — admissions only, signed-in
-          students only (NuOnboarding renders nothing otherwise). NU-5
-          moves it to the NU hub Home tab. The page still says honestly
-          that the section is being built; the card is about the mode
-          only and promises no content that does not exist yet. */}
-      {props.section === 'admissions' ? <NuOnboarding /> : null}
+      {/* NU-5: NuOnboarding moved to the NU hub Home tab
+          (/admissions/national-university). /admissions is now the hub
+          index, so this page no longer serves admissions at all. */}
       <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10, marginTop: 20 }}>
         <LinkButton to="/library" variant="primary">
           {t({ bn: 'লাইব্রেরি দেখুন', en: 'Browse library' })}
