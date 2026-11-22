@@ -289,6 +289,96 @@ export async function listQuizzesForClass(
   return all;
 }
 
+/**
+ * One page of Published quizzes for ONE class, server-side
+ * (fix/read-usage). Same cursor + session-cache design as
+ * listBooksForClassPage in lib/content.ts (level walk, document-ID
+ * cursor). Same order note as books: global order across pages is
+ * document-ID order; within a page the docs are re-sorted with
+ * compareQuizzes.
+ *
+ * NOTE on size: each quiz doc still carries its full `questions` array
+ * — one page of 20 is ~85 KB live. Reads are what the quota counts,
+ * and this cuts the Tests tab from 199 reads to 20. A metadata-only
+ * quiz collection (no `questions` array) would cut the BYTES too — a
+ * data-model follow-up, not built here.
+ */
+export interface ClassQuizPageResult {
+  items: Quiz[];
+  nextCursor: ClassListCursor | null;
+  hasMore: boolean;
+}
+
+export interface ClassListCursor {
+  levelIdx: number;
+  lastDocId: string | null;
+}
+
+export async function listPublishedQuizzesPageById(
+  filters: QuizFilters,
+  lastDocId: string | null,
+  pageSize: number,
+): Promise<{ items: Quiz[]; lastDocId: string | null }> {
+  if (!db) return { items: [], lastDocId: null };
+  const constraints: QueryConstraint[] = [
+    ...quizConstraints(filters),
+    orderBy(documentId()),
+    limit(pageSize),
+  ];
+  if (lastDocId) constraints.push(startAfter(lastDocId));
+  const snap = await getDocs(query(collection(db, 'quizzes'), ...constraints));
+  const quizzes = snap.docs.map((s) => toQuiz(s.id, s.data()));
+  quizzes.sort(compareQuizzes);
+  return {
+    items: quizzes,
+    lastDocId: snap.docs[snap.docs.length - 1]?.id ?? null,
+  };
+}
+
+const classQuizzesPageCache = new Map<string, Promise<ClassQuizPageResult>>();
+
+export function listQuizzesForClassPage(
+  educationType: string | null,
+  classLevels: string[],
+  opts?: { cursor?: ClassListCursor | null; pageSize?: number },
+): Promise<ClassQuizPageResult> {
+  if (!educationType || classLevels.length === 0) {
+    return Promise.resolve({ items: [], nextCursor: null, hasMore: false });
+  }
+  const pageSize = opts?.pageSize ?? 20;
+  const key = JSON.stringify({
+    c: 'quizzes',
+    educationType,
+    classLevels,
+    cursor: opts?.cursor ?? null,
+    pageSize,
+  });
+  const cached = classQuizzesPageCache.get(key);
+  if (cached) return cached;
+  const p = (async (): Promise<ClassQuizPageResult> => {
+    const items: Quiz[] = [];
+    let levelIdx = opts?.cursor?.levelIdx ?? 0;
+    let lastDocId: string | null = opts?.cursor?.lastDocId ?? null;
+    while (items.length < pageSize && levelIdx < classLevels.length) {
+      const remaining = pageSize - items.length;
+      const page = await listPublishedQuizzesPageById(
+        { educationType, classLevel: classLevels[levelIdx] },
+        lastDocId,
+        remaining,
+      );
+      items.push(...page.items);
+      if (page.items.length === remaining) {
+        return { items, nextCursor: { levelIdx, lastDocId: page.lastDocId }, hasMore: true };
+      }
+      levelIdx += 1;
+      lastDocId = null;
+    }
+    return { items, nextCursor: null, hasMore: false };
+  })();
+  classQuizzesPageCache.set(key, p);
+  return p;
+}
+
 /** One Published quiz by id; null when missing or not Published. */
 export async function getPublishedQuiz(quizId: string): Promise<Quiz | null> {
   if (!db) return null;

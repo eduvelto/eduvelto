@@ -1,1 +1,11 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><circle cx="32" cy="32" r="30" fill="#0b5e3f"/><text x="32" y="42" font-size="30" text-anchor="middle" fill="#f5c542" font-family="sans-serif" font-weight="bold">E</text></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600">
+<!-- Eduvelto favicon: approved emblem (white open-book E + rising orbit + gold star) on Deep Navy. Palette #0A1F44 / #1E7CE8 / #F1B308 — NO green. Replaces the green-circle placeholder (22 Nov 2026). Symbol geometry from brand-assets/final/eduvelto-logo-white.svg. -->
+<rect width="600" height="600" rx="120" fill="#0A1F44"/>
+<g transform="translate(45,45) scale(0.85)">
+<circle cx="300" cy="300" r="262" fill="none" stroke="#1E7CE8" stroke-width="26" stroke-dasharray="1280 365" transform="rotate(-72 300 300)" stroke-linecap="round"/>
+<path d="M60,58 L240,74 L420,58 L420,150 L240,166 L60,150 Z" fill="#FFFFFF"/>
+<path d="M60,252 L240,268 L420,252 L420,344 L240,360 L60,344 Z" fill="#FFFFFF"/>
+<path d="M60,446 L240,462 L420,446 L420,538 L240,554 L60,538 Z" fill="#FFFFFF"/>
+<polygon points="465,42 482,78 520,78 489,101 500,138 465,116 430,138 441,101 410,78 448,78" fill="#F1B308"/>
+</g>
+</svg>

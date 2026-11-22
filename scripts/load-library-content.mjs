@@ -39,6 +39,7 @@ import { homedir } from 'node:os';
 import { join, dirname, basename } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { createHash } from 'node:crypto';
+import { aggregateClassStats, writeStatsHalf } from './build-class-stats.mjs';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const CONTENT_ROOT = '/home/hatch/workspace/eduorbit/content';
@@ -733,6 +734,34 @@ async function main() {
   console.log(`DONE: ${done} books written, ${failed} failed, ${((Date.now() - t0) / 1000).toFixed(0)}s elapsed.`);
   writeFileSync(LOG_PATH, JSON.stringify(log, null, 2));
   console.log(`LOG: ${LOG_PATH}`);
+
+  // CLASS STATS (fix/read-usage): the dashboard + class index read ONE
+  // stats doc per level instead of the whole book/quiz lists. This is the
+  // BOOK half only — the quiz loader owns the quiz half (merge semantics
+  // in writeStatsHalf). SKIPPED on partial runs (--only / --limit): a
+  // stats doc written from a partial plan would publish wrong totals.
+  if (!ONLY_FOLDER && LIMIT === Infinity) {
+    try {
+      const stats = aggregateClassStats(
+        limited.map((b) => ({
+          educationType: b.eduType,
+          classLevel: b.yearLabel,
+          department: b.department,
+          questionCount: b.questionCount,
+          chapterCount: b.chapterCount,
+        })),
+        [],
+      );
+      for (const stat of stats) {
+        const r = await writeStatsHalf({ fsFetch, enc, dec }, stat, 'book');
+        console.log(`STATS: ${stat.slug} book half ${r} (books=${stat.bookCount}, Q=${stat.totalQuestions})`);
+      }
+    } catch (e) {
+      console.error(`STATS FAILED: ${e.message} — books are live; stats stay stale until the next full run.`);
+    }
+  } else {
+    console.log('STATS SKIPPED: partial run (--only / --limit) — stats need a full run.');
+  }
 }
 
 main().catch((e) => { console.error('FATAL:', e.message); process.exit(1); });

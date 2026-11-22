@@ -452,6 +452,105 @@ export async function listBooksForClass(
   return all;
 }
 
+/**
+ * One page of Published books for ONE class, server-side (fix/read-usage).
+ *
+ * Cursor = { levelIdx, lastDocId } — a plain JSON-able token (no snapshot
+ * objects), because paging walks the class's levels in order and each
+ * level is ordered by documentId(): startAfter(lastDocId) resumes exactly
+ * where the previous page ended. ORDER NOTE (same accepted trade-off as
+ * LibraryPage/ExamPage): the GLOBAL order across pages is document-ID
+ * order, not the old (classLevel, department, title) order — the page's
+ * 20 docs are re-sorted with compareBooks, so the order WITHIN a page
+ * matches the old order, but which 20 books land on page 1 follows the
+ * document IDs. The SET of books is identical; restoring the old global
+ * order needs a composite index (owner follow-up, not built here).
+ *
+ * Page results are cached per session (module-level, same pattern as the
+ * search-path caches below): revisiting a page costs 0 extra reads.
+ * `department` narrows to one subject (ClassSubjectPage) — same query
+ * shape, one extra equality filter, still no composite index.
+ */
+export interface ClassListCursor {
+  levelIdx: number;
+  lastDocId: string | null;
+}
+
+export interface ClassPageResult<T> {
+  items: T[];
+  /** Cursor for the next page; null when this was the last page. */
+  nextCursor: ClassListCursor | null;
+  hasMore: boolean;
+}
+
+/** One page of Published books with a document-ID cursor (startAfter by id works with orderBy(documentId())). */
+export async function listPublishedBooksPageById(
+  filters: BookFilters,
+  lastDocId: string | null,
+  pageSize: number,
+): Promise<{ items: Book[]; lastDocId: string | null }> {
+  if (!db) return { items: [], lastDocId: null };
+  const constraints: QueryConstraint[] = [
+    ...bookConstraints(filters),
+    orderBy(documentId()),
+    limit(pageSize),
+  ];
+  if (lastDocId) constraints.push(startAfter(lastDocId));
+  const snap = await getDocs(query(collection(db, 'books'), ...constraints));
+  const books = snap.docs.map((s) => toBook(s.id, s.data()));
+  books.sort(compareBooks);
+  return {
+    items: books,
+    lastDocId: snap.docs[snap.docs.length - 1]?.id ?? null,
+  };
+}
+
+const classBooksPageCache = new Map<string, Promise<ClassPageResult<Book>>>();
+
+export function listBooksForClassPage(
+  educationType: string | null,
+  classLevels: string[],
+  opts?: { department?: string; cursor?: ClassListCursor | null; pageSize?: number },
+): Promise<ClassPageResult<Book>> {
+  if (!educationType || classLevels.length === 0) {
+    return Promise.resolve({ items: [], nextCursor: null, hasMore: false });
+  }
+  const pageSize = opts?.pageSize ?? 20;
+  const key = JSON.stringify({
+    c: 'books',
+    educationType,
+    classLevels,
+    department: opts?.department ?? '',
+    cursor: opts?.cursor ?? null,
+    pageSize,
+  });
+  const cached = classBooksPageCache.get(key);
+  if (cached) return cached;
+  const p = (async (): Promise<ClassPageResult<Book>> => {
+    const items: Book[] = [];
+    let levelIdx = opts?.cursor?.levelIdx ?? 0;
+    let lastDocId: string | null = opts?.cursor?.lastDocId ?? null;
+    while (items.length < pageSize && levelIdx < classLevels.length) {
+      const remaining = pageSize - items.length;
+      const page = await listPublishedBooksPageById(
+        { educationType, classLevel: classLevels[levelIdx], department: opts?.department },
+        lastDocId,
+        remaining,
+      );
+      items.push(...page.items);
+      if (page.items.length === remaining) {
+        return { items, nextCursor: { levelIdx, lastDocId: page.lastDocId }, hasMore: true };
+      }
+      // Level exhausted — move to the next level.
+      levelIdx += 1;
+      lastDocId = null;
+    }
+    return { items, nextCursor: null, hasMore: false };
+  })();
+  classBooksPageCache.set(key, p);
+  return p;
+}
+
 /** One page of Published directory rows, server-side (50 reads at most). Same index note as listPublishedBooksPage. */
 export async function listPublishedDirectoryPage(
   filters: DirectoryFilters,

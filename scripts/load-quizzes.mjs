@@ -43,6 +43,7 @@ import { homedir } from 'node:os';
 import { createRequire } from 'node:module';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { aggregateClassStats, writeStatsHalf } from './build-class-stats.mjs';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const PROJECT_ID = 'eduvelto';
@@ -333,6 +334,36 @@ async function main() {
   };
   writeFileSync(LOG_PATH, JSON.stringify(summary, null, 2));
   console.log(JSON.stringify(summary, null, 2));
+
+  // CLASS STATS (fix/read-usage): the QUIZ half of the per-level stats
+  // docs (the library loader owns the book half). SKIPPED on --only
+  // runs: a stats doc written from one book would publish wrong totals.
+  if (!ONLY_BOOK) {
+    try {
+      const stats = aggregateClassStats(
+        [],
+        plan.map((p) => {
+          const book = books.get(p.bookId) ?? {};
+          return {
+            id: p.quizId,
+            title: p.kind === 'mcq' ? `${book.title ?? p.bookId} — MCQ পরীক্ষা` : `${book.title ?? p.bookId} — লিখিত পরীক্ষা`,
+            educationType: book.educationType ?? '',
+            classLevel: book.classLevel ?? '',
+            department: book.department ?? '',
+            questionCount: p.questions.length,
+          };
+        }),
+      );
+      for (const stat of stats) {
+        const r = await writeStatsHalf({ fsFetch, enc, dec }, stat, 'quiz');
+        console.log(`STATS: ${stat.slug} quiz half ${r} (quizzes=${stat.quizCount})`);
+      }
+    } catch (e) {
+      console.error(`STATS FAILED: ${e.message} — quizzes are live; stats stay stale until the next full run.`);
+    }
+  } else {
+    console.log('STATS SKIPPED: partial run (--only) — stats need a full run.');
+  }
 }
 
 main().catch((e) => { console.error('FATAL:', e.message); process.exit(1); });

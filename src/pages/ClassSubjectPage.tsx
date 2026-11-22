@@ -9,8 +9,9 @@
 import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { PageShell, EmptyState } from '../components/PageShell';
-import { AlertBox, Card, Chip, Reveal, SkeletonCards } from '../components/ui';
-import { listPublishedBooks, type Book } from '../lib/content';
+import { AlertBox, Button, Card, Chip, Reveal, SkeletonCards } from '../components/ui';
+import { listPublishedBooks, listBooksForClassPage, type Book, type ClassListCursor } from '../lib/content';
+import { getClassStats, type ClassStats } from '../lib/classStats';
 import { booksForClass, classLevelBySlug } from '../lib/classLevels';
 import { useLanguage } from '../i18n/LanguageContext';
 
@@ -20,16 +21,62 @@ export default function ClassSubjectPage() {
   const def = classLevelBySlug(slug);
   const subject = decodeURIComponent(dept);
   const [books, setBooks] = useState<Book[] | null>(null);
+  const [stats, setStats] = useState<ClassStats | null | undefined>(undefined);
+  const [page, setPage] = useState(1);
+  const [cursors, setCursors] = useState<Array<ClassListCursor | null>>([null]);
   const [error, setError] = useState('');
 
-  function load() {
+  // READ BUDGET (fix/read-usage): this page used to read ALL 609
+  // Published books to show one subject. Now it reads the stats doc
+  // (1 read, cached) for the totals + one server page (20 reads) of
+  // this subject's books in this class. Fallback when stats are not
+  // written yet: the old full-list fetch (same reads as before).
+  async function load() {
+    if (!def) return;
     setError('');
     setBooks(null);
-    listPublishedBooks()
-      .then((b) => setBooks(b))
-      .catch(() => setError(t({ bn: 'বইয়ের তালিকা লোড করা যায়নি — আবার চেষ্টা করুন।', en: 'Could not load the books — please try again.' })));
+    setPage(1);
+    setCursors([null]);
+    try {
+      const s = await getClassStats(def.slug);
+      setStats(s);
+      if (s) {
+        const res = await listBooksForClassPage(def.educationType, def.classLevels, {
+          department: subject,
+          pageSize: 20,
+        });
+        setBooks(res.items);
+        if (res.nextCursor) setCursors([null, res.nextCursor]);
+        return;
+      }
+      const b = await listPublishedBooks();
+      setBooks(b);
+    } catch {
+      setError(t({ bn: 'বইয়ের তালিকা লোড করা যায়নি — আবার চেষ্টা করুন।', en: 'Could not load the books — please try again.' }));
+    }
   }
-  useEffect(load, []);
+  useEffect(() => {
+    void load();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [slug, subject]);
+
+  async function goPage(next: number) {
+    if (!def || !stats || next < 1) return;
+    const res = await listBooksForClassPage(def.educationType, def.classLevels, {
+      department: subject,
+      cursor: cursors[next - 1] ?? null,
+      pageSize: 20,
+    });
+    setBooks(res.items);
+    setPage(next);
+    if (res.nextCursor) {
+      setCursors((prev) => {
+        const nextCursors = [...prev];
+        nextCursors[next] = res.nextCursor;
+        return nextCursors;
+      });
+    }
+  }
 
   if (!def) {
     return (
@@ -44,10 +91,24 @@ export default function ClassSubjectPage() {
     );
   }
 
+  // STATS mode: `books` is already this subject's current page (the
+  // query filters by department + class); totals come from the stats
+  // doc. FALLBACK mode: `books` is the full Published list — filter it
+  // down, exactly as before.
+  const statsMode = !!stats;
+  const subjectStat = stats?.subjects.find((s) => s.name === subject);
   const classBooks = books ? booksForClass(books, def) : [];
-  const subjectBooks = classBooks.filter((b) => b.department === subject);
-  const totalChapters = subjectBooks.reduce((s, b) => s + (b.chapterCount ?? 0), 0);
-  const totalQuestions = subjectBooks.reduce((s, b) => s + (b.questionCount ?? 0), 0);
+  const subjectBooks = statsMode
+    ? (books ?? [])
+    : classBooks.filter((b) => b.department === subject);
+  const totalBooks = statsMode ? (subjectStat?.bookCount ?? 0) : subjectBooks.length;
+  const totalChapters = statsMode
+    ? (subjectStat?.chapterCount ?? 0)
+    : subjectBooks.reduce((s, b) => s + (b.chapterCount ?? 0), 0);
+  const totalQuestions = statsMode
+    ? (subjectStat?.questionCount ?? 0)
+    : subjectBooks.reduce((s, b) => s + (b.questionCount ?? 0), 0);
+  const pageCount = statsMode ? Math.max(1, Math.ceil(totalBooks / 20)) : 1;
 
   return (
     <PageShell titleBn={subject} titleEn={subject} wide>
@@ -75,7 +136,7 @@ export default function ClassSubjectPage() {
       {subjectBooks.length > 0 ? (
         <>
           <p style={{ color: '#57616A', margin: '0 0 12px' }}>
-            {t({ bn: `${subjectBooks.length}টি বই · ${totalChapters}টি পাঠ · ${totalQuestions}টি প্রশ্ন`, en: `${subjectBooks.length} books · ${totalChapters} lessons · ${totalQuestions} questions` })}
+            {t({ bn: `${totalBooks}টি বই · ${totalChapters}টি পাঠ · ${totalQuestions}টি প্রশ্ন`, en: `${totalBooks} books · ${totalChapters} lessons · ${totalQuestions} questions` })}
           </p>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: 12 }}>
             {subjectBooks.map((b, i) => (
@@ -104,6 +165,19 @@ export default function ClassSubjectPage() {
           <p style={{ marginTop: 16, color: '#68747B', fontSize: 14 }}>
             {t({ bn: 'প্রতিটি বইয়ের ভেতরে অধ্যায়ভিত্তিক পাঠ আছে — বই খুলে অধ্যায় ও পাঠ দেখুন।', en: 'Each book contains chapter-wise lessons — open a book to see its chapters and lessons.' })}
           </p>
+          {statsMode && pageCount > 1 ? (
+            <div style={{ display: 'flex', gap: 12, alignItems: 'center', marginTop: 20, flexWrap: 'wrap' }}>
+              <Button variant="outline" onClick={() => void goPage(Math.max(1, page - 1))} disabled={page <= 1}>
+                {t({ bn: '← আগের', en: '← Previous' })}
+              </Button>
+              <span>
+                {t({ bn: `পাতা ${page} / ${pageCount}`, en: `Page ${page} of ${pageCount}` })}
+              </span>
+              <Button variant="outline" onClick={() => void goPage(Math.min(pageCount, page + 1))} disabled={page >= pageCount}>
+                {t({ bn: 'পরের →', en: 'Next →' })}
+              </Button>
+            </div>
+          ) : null}
         </>
       ) : null}
     </PageShell>
