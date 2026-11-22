@@ -32,8 +32,10 @@ import {
   WEEKLY_MOCK_CYCLE,
   isJobTabSlug,
   jobExamBySlug,
+  type JobExamDef,
   type JobTabSlug,
 } from '../lib/jobExams';
+import { jobSubjectsForExam } from '../lib/jobContent';
 
 /** Honest empty copy per content tab — no fake readiness anywhere. */
 const TAB_EMPTY: Record<Exclude<JobTabSlug, 'home'>, { bn: string; en: string; noteBn: string; noteEn: string }> = {
@@ -81,6 +83,85 @@ const TAB_EMPTY: Record<Exclude<JobTabSlug, 'home'>, { bn: string; en: string; n
   },
 };
 
+/** Bangla digits for marks / counts ("৩৫ নম্বর"). Same helper as JobCards. */
+function bnNum(n: number): string {
+  return String(n)
+    .split('')
+    .map((d) => '০১২৩৪৫৬৭৮৯'[Number(d)])
+    .join('');
+}
+
+/**
+ * Subjects tab (Step 6): the exam's verified subject list from the
+ * canonical lib (jobContent.ts), as a card grid — one card per subject
+ * with its Bangla name, verified marks and a "শীঘ্রই আসছে" chip for
+ * topics (the topic count is 0 for every subject today — no topics
+ * exist yet — so it is shown as the chip, never as a fake count).
+ * Each card links to the subject page (/jobs/:exam/subjects/:subject).
+ *
+ * IT (scope undecided) gets the scope note instead of a subject list.
+ * The other exams with no subjects are NOT rendered here — the hub
+ * falls through to the generic TAB_EMPTY card below, which carries the
+ * "বিষয় তালিকা তৈরি হচ্ছে" copy.
+ */
+function JobSubjectsTab({ def }: { def: JobExamDef }) {
+  const subjects = jobSubjectsForExam(def.slug);
+  const source = subjects[0]?.syllabusSource ?? null;
+
+  if (def.slug === 'it-professional') {
+    return (
+      <Reveal>
+        <Card>
+          <div style={{ fontWeight: 700, color: '#142B3B', fontSize: 17 }}>পরিসর ঠিক হচ্ছে</div>
+          <p style={{ margin: '8px 0 0', color: '#57616A', fontSize: 14, lineHeight: 1.8 }}>
+            কোন পদগুলো এর ভেতরে থাকবে, তা ঠিক হচ্ছে — সরকারি IT পদ, বেসরকারি IT চাকরি, নাকি পেশাগত সনদ? সিদ্ধান্ত হলে
+            বিজ্ঞপ্তি যাচাই করে তবে বিষয় তালিকা লেখা হবে। এখানে কোনো বিষয় তালিকা লেখা হয়নি।
+          </p>
+        </Card>
+      </Reveal>
+    );
+  }
+
+  return (
+    <>
+      <Reveal>
+        <h3 className="ev-section-h2">বিষয়</h3>
+      </Reveal>
+      {source ? (
+        <p style={{ color: '#68747B', margin: '0 0 16px', fontSize: 13 }}>উৎস: {source}</p>
+      ) : null}
+      <div
+        style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))',
+          gap: 12,
+          marginBottom: 20,
+        }}
+      >
+        {subjects.map((s, i) => (
+          <Reveal key={s.slug} delayMs={Math.min(i, 5) * 60}>
+            <Card>
+              <div style={{ fontWeight: 700, color: '#142B3B', fontSize: 17 }}>{s.nameBn}</div>
+              <p style={{ margin: '6px 0 10px', color: '#68747B', fontSize: 14 }}>
+                {s.marks !== null ? `${bnNum(s.marks)} নম্বর` : 'নম্বর যাচাই হয়নি'}
+              </p>
+              <p style={{ margin: '0 0 10px' }}>
+                <span style={{ color: '#68747B', fontSize: 14 }}>টপিক: </span>
+                <Chip tone="gold">শীঘ্রই আসছে</Chip>
+              </p>
+              <p style={{ margin: 0 }}>
+                <Link to={`/jobs/${def.slug}/subjects/${s.slug}`} style={{ fontWeight: 600 }}>
+                  বিষয়টি দেখুন →
+                </Link>
+              </p>
+            </Card>
+          </Reveal>
+        ))}
+      </div>
+    </>
+  );
+}
+
 export default function JobHubPage() {
   const { t } = useLanguage();
   const { mode } = useJobMode();
@@ -88,6 +169,10 @@ export default function JobHubPage() {
   const def = jobExamBySlug(exam);
   const activeTab: JobTabSlug = isJobTabSlug(tab) ? tab : 'home';
   const pattern = def ? EXAM_PATTERNS[def.slug] : undefined;
+  // Step 6 — canonical subject list. Takes the raw param (not
+  // def.slug): the lib returns [] — never throws — for unknown slugs,
+  // and this line runs before the !def early return below.
+  const subjects = jobSubjectsForExam(exam);
 
   if (!def) {
     return (
@@ -480,6 +565,8 @@ export default function JobHubPage() {
             </Card>
           </Reveal>
         </>
+      ) : activeTab === 'subjects' && (subjects.length > 0 || def.slug === 'it-professional') ? (
+        <JobSubjectsTab def={def} />
       ) : (
         <Reveal>
           <Card>

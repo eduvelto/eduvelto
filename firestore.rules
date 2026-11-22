@@ -214,6 +214,163 @@ service cloud.firestore {
                      .get('sourceCircular', null) is string)));
     }
 
+    // ---------- Job content: subjects / chapters / topics / lessons (Step 6) ----------
+    // Step 3 §2.3–§2.6 + §3.2/§3.4, as OVERRIDDEN by the Step 6 spec
+    // (parent coordinator, 22 Nov 2026). Deviations from the draft are
+    // recorded in the match-block comment below; the big ones:
+    //   * reviewStatus vocabulary is 'Not Started' | 'In Progress' |
+    //     'Under Review' | 'Published' (Step 5 P1-1). The draft's
+    //     'draft' / 'in-review' / 'verified' / 'published' values do
+    //     NOT exist — the draft's isJobDraftStatus() / jobContentRead()
+    //     / jobContentCreate() / jobContentUpdate() helpers are NOT
+    //     reused here (their names would collide with the Step 5
+    //     meanings, so new names are used throughout).
+    //   * publication is gated on `status` (P1-1 / e5 lesson), not
+    //     reviewStatus — a list query filters on status, and Firestore
+    //     can only allow a query it can prove from the query's own
+    //     filters.
+    //   * the author MAY edit their own draft (the draft's
+    //     jobContentUpdate allowed it; Step 5's jobExams rule did NOT
+    //     — content collections follow the draft here, not jobExams).
+    //   * Moderator AND Admin may publish/return (Step 5's Admin-only
+    //     publish was about protecting rulesConfig, which these
+    //     collections do not have). The second-eye rule is the guard
+    //     instead: the verifier is never the author.
+    //   * 'it-professional' is excluded: scopeStatus 'scope_pending'
+    //     (Step 5 P1-5) + Step 6 handover constraint 4 — no syllabus
+    //     may be built from it until the owner fixes its scope.
+    function jobContentStatesConsistent(d) {
+      return (d.get('status', '') == 'published') == (d.get('reviewStatus', '') == 'Published');
+    }
+    function isJobContentReviewState(s) {
+      return s in ['Not Started', 'In Progress', 'Under Review', 'Published'];
+    }
+    // Shared create-time facts: draft-only start, author pinned to
+    // the caller (or absent), no verifier yet (a new draft has never
+    // been verified — verifiedBy/verifiedAt must be absent or null,
+    // so a creator cannot bake in a self-verification), timestamps
+    // absent or real timestamps.
+    function jobContentCreateCommon(d) {
+      return d.get('status', '') == 'draft'
+        && d.get('reviewStatus', '') == 'Not Started'
+        && (d.get('authorId', null) == null || d.get('authorId', null) == uid())
+        && d.get('verifiedBy', null) == null
+        && d.get('verifiedAt', null) == null
+        && (d.get('createdAt', null) == null || d.get('createdAt', null) is timestamp)
+        && (d.get('updatedAt', null) == null || d.get('updatedAt', null) is timestamp);
+    }
+    // SECOND-EYE RULE (Step 3 §2.7 / §3.4): the verifier is never the
+    // author. verifiedBy may stay as it is, be cleared (a return), or
+    // be set to the CALLER — and only when the caller is not the
+    // author. Publishing additionally requires a real verifier (a
+    // non-null verifiedBy that is not the author) plus a verification
+    // timestamp: nothing is Published without a second eye on it.
+    // NOTE: the rule constrains the VERIFIER, not the publisher — an
+    // Admin/Moderator who authored a doc may still publish it once a
+    // DIFFERENT person has verified it (verifiedBy != authorId).
+    function jobContentSecondEye(oldDoc, newDoc) {
+      return (newDoc.get('verifiedBy', null) == oldDoc.get('verifiedBy', null)
+          || newDoc.get('verifiedBy', null) == null
+          || (newDoc.get('verifiedBy', null) == uid()
+              && uid() != oldDoc.get('authorId', '')))
+        && (newDoc.get('status', '') != 'published'
+            || (newDoc.get('verifiedBy', null) is string
+                && newDoc.get('verifiedBy', null) != oldDoc.get('authorId', '')
+                && newDoc.get('verifiedAt', null) is timestamp));
+    }
+    // Slug shapes (Step 3 §2.3–§2.5 doc IDs). Parent references must
+    // look like the doc IDs they point at, so a chapter cannot claim a
+    // parent subject that could never exist. Parent EXISTENCE is not
+    // checked here (that would cost a get() per write; Step 5 P1-6 did
+    // reference validation in the taxonomy code, not in the rules).
+    function isJobSubjectId(s) {
+      return s is string && s.matches('^[a-z0-9-]+__[a-z0-9-]+$');
+    }
+    function isJobChapterId(s) {
+      return s is string && s.matches('^[a-z0-9-]+__[a-z0-9-]+__[a-z0-9-]+$');
+    }
+    // Full new-doc validation, shared by create and both update rules
+    // (the update rules pin the unchangeable fields with affectedKeys,
+    // so re-validating the whole new doc is safe: pinned fields are
+    // unchanged from an already-valid doc).
+    function validJobSubject(d) {
+      return d.get('examSlug', null) in jobExamSlugs()
+        && d.get('examSlug', null) != 'it-professional'
+        && isStr(d.get('nameBn', null), 100)
+        && isStr(d.get('nameEn', null), 100)
+        && d.get('order', null) is int && d.get('order', null) >= 1
+        && (d.get('marks', null) == null
+            || (d.get('marks', null) is int && d.get('marks', null) >= 0))
+        && isOptStr(d.get('syllabusSource', null), 500)
+        && d.get('status', null) in ['draft', 'published']
+        && isJobContentReviewState(d.get('reviewStatus', null))
+        && jobContentStatesConsistent(d);
+    }
+    function validJobChapter(d) {
+      return d.get('examSlug', null) in jobExamSlugs()
+        && d.get('examSlug', null) != 'it-professional'
+        && isJobSubjectId(d.get('subjectId', null))
+        && isStr(d.get('nameBn', null), 200)
+        && isStr(d.get('nameEn', null), 200)
+        && isOptStr(d.get('descriptionBn', null), 1000)
+        && isOptStr(d.get('descriptionEn', null), 1000)
+        && d.get('order', null) is int && d.get('order', null) >= 1
+        && d.get('status', null) in ['draft', 'published']
+        && isJobContentReviewState(d.get('reviewStatus', null))
+        && jobContentStatesConsistent(d);
+    }
+    function validJobTopic(d) {
+      return d.get('examSlug', null) in jobExamSlugs()
+        && d.get('examSlug', null) != 'it-professional'
+        && isJobSubjectId(d.get('subjectId', null))
+        && isJobChapterId(d.get('chapterId', null))
+        && isStr(d.get('nameBn', null), 200)
+        && isStr(d.get('nameEn', null), 200)
+        && d.get('order', null) is int && d.get('order', null) >= 1
+        && d.get('isCommon', null) is bool
+        && (d.get('commonExams', null) == null
+            || (d.get('commonExams', null) is list
+                && d.get('commonExams', null).toSet().hasOnly(jobExamSlugs())))
+        // BINDING (Step 3 §2.5): common means in at least 3 of the 4
+        // Tier-1 exams — counted on DISTINCT slugs, so
+        // ['bcs', 'bcs', 'bcs'] does not pass.
+        && (d.get('isCommon', null) != true
+            || (d.get('commonExams', null) is list
+                && d.get('commonExams', null).toSet().size() >= 3))
+        && d.get('commonStatus', null) in ['preliminary', 'verified']
+        && (d.get('questionTarget', null) == null
+            || (d.get('questionTarget', null) is int && d.get('questionTarget', null) >= 0))
+        && d.get('publishedQuestionCount', null) is int
+        && d.get('publishedQuestionCount', null) >= 0
+        && d.get('status', null) in ['draft', 'published']
+        && isJobContentReviewState(d.get('reviewStatus', null))
+        && jobContentStatesConsistent(d);
+    }
+    function validJobLesson(d) {
+      return d.get('examSlug', null) in jobExamSlugs()
+        && d.get('examSlug', null) != 'it-professional'
+        && d.get('lessonType', null) in ['lesson', 'viva-question', 'viva-guide',
+                                          'career-guide', 'cv-guide']
+        // A 'lesson' lives under a topic: all three parent refs are
+        // required. Viva/career/CV guides (Step 16) sit under the exam
+        // instead, so their refs stay string-or-null (checked below).
+        && (d.get('lessonType', null) != 'lesson'
+            || (isStr(d.get('subjectId', null), 200)
+                && isStr(d.get('chapterId', null), 200)
+                && isStr(d.get('topicId', null), 200)))
+        && (d.get('subjectId', null) == null || d.get('subjectId', null) is string)
+        && (d.get('chapterId', null) == null || d.get('chapterId', null) is string)
+        && (d.get('topicId', null) == null || d.get('topicId', null) is string)
+        && isStr(d.get('titleBn', null), 200)
+        && isStr(d.get('titleEn', null), 200)
+        && isStr(d.get('body', null), 100000)
+        && isOptStr(d.get('bodyEn', null), 100000)
+        && d.get('order', null) is int && d.get('order', null) >= 1
+        && d.get('status', null) in ['draft', 'published']
+        && isJobContentReviewState(d.get('reviewStatus', null))
+        && jobContentStatesConsistent(d);
+    }
+
     // ---------- users.verificationStatus ----------
     // OWNER DECISION 21 Nov 2026 — student identity verification is
     // REMOVED entirely. `users.verificationStatus` is ONLY the mirror of
@@ -1685,6 +1842,209 @@ service cloud.firestore {
         && (request.resource.data.get('syllabusSource', null) == null
             || request.resource.data.get('syllabusSource', null) is string)
         && (!('updatedAt' in request.resource.data) || request.resource.data.updatedAt is timestamp);
+      allow delete: if isAdmin();
+    }
+
+    // ---------- Job Preparation — subjects / chapters / topics / lessons (Step 6, Step 3 §2.3–§2.6 + §3.4) ----------
+    // Shared pattern for all four collections (deviations from the
+    // Step 3 draft are called out inline):
+    //   READ — `status == 'published'` first (e5 lesson: a list query
+    //     filters on status, so the published check must be provable
+    //     from the query's own filters — it is get()-free and comes
+    //     before the role lookup), OR the author reads their own
+    //     draft, OR a Moderator reads anything. Students read Published
+    //     only; anonymous reads Published only.
+    //   CREATE — isTeacher() only (role in teacher/admin/moderator/
+    //     owner + active; students can NEVER create). Draft-only:
+    //     status 'draft' + reviewStatus 'Not Started' (the draft's
+    //     literal 'draft' reviewStatus is REJECTED — no such enum
+    //     value, Step 5 P1-1). authorId pinned to the caller or
+    //     absent; no verifier yet. Doc ID must extend the parent
+    //     (subject `{examSlug}__{subjectSlug}`, chapter appends
+    //     `__{chapterSlug}`, topic appends `__{topicSlug}`); lessons
+    //     are auto-ID. Chapter names must be real syllabus chapter
+    //     names — the rules CANNOT check that; it is a content rule
+    //     for the admin/teacher flow (Step 3 §2.4).
+    //   UPDATE, author — the author edits ONLY their own draft, and
+    //     moves reviewStatus only within draft states. They can NEVER
+    //     publish (status stays 'draft'), NEVER touch a Published doc
+    //     (old reviewStatus must be a draft state), and NEVER touch
+    //     verifiedBy/verifiedAt, parent refs, lessonType, or the
+    //     published-question counter. The author rule ALSO checks
+    //     isTeacher() (not just signedIn + active): a teacher whose
+    //     role was revoked to student loses the author-edit right too
+    //     — the Step 3 draft's author rule checked authorId only, but
+    //     Step 5's live-role-check convention governs here (coordinator
+    //     hardening, 22 Nov 2026, test o13).
+    //   UPDATE, Moderator/Admin — content + status/reviewStatus
+    //     (publish/return/reject) + the verifier fields, under the
+    //     second-eye rule (jobContentSecondEye): verifiedBy is never
+    //     the author, and publishing requires a real verifier plus a
+    //     verification timestamp. Unlike jobExams there is no
+    //     rulesConfig to protect, so no Rule A / Rule B split for the
+    //     EXPRESSION budget was needed — a single Moderator/Admin
+    //     update rule stays well inside it (measured by the Step 6
+    //     rules tests). The split that DOES exist is a PERMISSION
+    //     split, mirroring Step 5 P0-4: a Moderator may return or
+    //     unpublish a Published doc (status/reviewStatus/verifier
+    //     fields only) but may NOT silently edit its content; an
+    //     Admin may edit published content too.
+    //   Provenance (authorId / createdBy / createdAt) is immutable —
+    //     even for Admin: it is outside all update rules'
+    //     affected-keys allowlists. Parent refs and (for lessons)
+    //     lessonType are pinned the same way.
+    //   DELETE — Admin only.
+    //   Lesson types (Step 3 §2.6): the enum has five values, but
+    //     Step 6 create allows ONLY 'lesson' — viva-question /
+    //     viva-guide / career-guide / cv-guide content is Step 16.
+    //     lessonType is pinned on update, so a 'lesson' doc cannot be
+    //     converted into Step 16 content by an update either.
+    match /jobSubjects/{subjectId} {
+      allow read: if resource.data.get('status', '') == 'published'
+        || (signedIn() && resource.data.get('authorId', '') == uid())
+        || isModerator();
+      allow create: if isTeacher()
+        && jobContentCreateCommon(request.resource.data)
+        && validJobSubject(request.resource.data)
+        && subjectId.matches('^' + request.resource.data.get('examSlug', '') + '__[a-z0-9-]+$');
+      allow update: if isTeacher()
+        && resource.data.get('authorId', '') == uid()
+        && isDraftStatus(resource.data.get('reviewStatus', ''))
+        && isDraftStatus(request.resource.data.get('reviewStatus', ''))
+        && resource.data.get('status', '') == 'draft'
+        && request.resource.data.get('status', '') == 'draft'
+        && request.resource.data.diff(resource.data).affectedKeys()
+             .hasOnly(['nameBn', 'nameEn', 'order', 'marks', 'syllabusSource',
+                       'reviewStatus', 'updatedAt'])
+        && validJobSubject(request.resource.data);
+      allow update: if isModerator()
+        && request.resource.data.diff(resource.data).affectedKeys()
+             .hasOnly(['nameBn', 'nameEn', 'order', 'marks', 'syllabusSource',
+                       'status', 'reviewStatus', 'verifiedBy', 'verifiedAt', 'updatedAt'])
+        // Step 5 P0-4, adapted: a Moderator may return/unpublish a
+        // Published doc, but may NOT silently edit its content — on a
+        // Published doc only the status/verifier fields may change.
+        && (resource.data.get('status', '') != 'published'
+            || request.resource.data.diff(resource.data).affectedKeys()
+                 .hasOnly(['status', 'reviewStatus', 'verifiedBy', 'verifiedAt', 'updatedAt']))
+        && jobContentSecondEye(resource.data, request.resource.data)
+        && validJobSubject(request.resource.data);
+      // Admin: same fields as the Moderator rule, but without the
+      // published-content guard — an Admin may fix a typo in a
+      // Published doc without unpublishing it first.
+      allow update: if isAdmin()
+        && request.resource.data.diff(resource.data).affectedKeys()
+             .hasOnly(['nameBn', 'nameEn', 'order', 'marks', 'syllabusSource',
+                       'status', 'reviewStatus', 'verifiedBy', 'verifiedAt', 'updatedAt'])
+        && jobContentSecondEye(resource.data, request.resource.data)
+        && validJobSubject(request.resource.data);
+      allow delete: if isAdmin();
+    }
+    match /jobChapters/{chapterId} {
+      allow read: if resource.data.get('status', '') == 'published'
+        || (signedIn() && resource.data.get('authorId', '') == uid())
+        || isModerator();
+      allow create: if isTeacher()
+        && jobContentCreateCommon(request.resource.data)
+        && validJobChapter(request.resource.data)
+        && chapterId.matches('^' + request.resource.data.get('subjectId', '') + '__[a-z0-9-]+$');
+      allow update: if isTeacher()
+        && resource.data.get('authorId', '') == uid()
+        && isDraftStatus(resource.data.get('reviewStatus', ''))
+        && isDraftStatus(request.resource.data.get('reviewStatus', ''))
+        && resource.data.get('status', '') == 'draft'
+        && request.resource.data.get('status', '') == 'draft'
+        && request.resource.data.diff(resource.data).affectedKeys()
+             .hasOnly(['nameBn', 'nameEn', 'descriptionBn', 'descriptionEn',
+                       'order', 'reviewStatus', 'updatedAt'])
+        && validJobChapter(request.resource.data);
+      allow update: if isModerator()
+        && request.resource.data.diff(resource.data).affectedKeys()
+             .hasOnly(['nameBn', 'nameEn', 'descriptionBn', 'descriptionEn',
+                       'order', 'status', 'reviewStatus', 'verifiedBy', 'verifiedAt', 'updatedAt'])
+        && (resource.data.get('status', '') != 'published'
+            || request.resource.data.diff(resource.data).affectedKeys()
+                 .hasOnly(['status', 'reviewStatus', 'verifiedBy', 'verifiedAt', 'updatedAt']))
+        && jobContentSecondEye(resource.data, request.resource.data)
+        && validJobChapter(request.resource.data);
+      allow update: if isAdmin()
+        && request.resource.data.diff(resource.data).affectedKeys()
+             .hasOnly(['nameBn', 'nameEn', 'descriptionBn', 'descriptionEn',
+                       'order', 'status', 'reviewStatus', 'verifiedBy', 'verifiedAt', 'updatedAt'])
+        && jobContentSecondEye(resource.data, request.resource.data)
+        && validJobChapter(request.resource.data);
+      allow delete: if isAdmin();
+    }
+    match /jobTopics/{topicId} {
+      allow read: if resource.data.get('status', '') == 'published'
+        || (signedIn() && resource.data.get('authorId', '') == uid())
+        || isModerator();
+      allow create: if isTeacher()
+        && jobContentCreateCommon(request.resource.data)
+        && validJobTopic(request.resource.data)
+        && topicId.matches('^' + request.resource.data.get('chapterId', '') + '__[a-z0-9-]+$');
+      allow update: if isTeacher()
+        && resource.data.get('authorId', '') == uid()
+        && isDraftStatus(resource.data.get('reviewStatus', ''))
+        && isDraftStatus(request.resource.data.get('reviewStatus', ''))
+        && resource.data.get('status', '') == 'draft'
+        && request.resource.data.get('status', '') == 'draft'
+        && request.resource.data.diff(resource.data).affectedKeys()
+             .hasOnly(['nameBn', 'nameEn', 'order', 'isCommon', 'commonExams',
+                       'commonStatus', 'questionTarget', 'reviewStatus', 'updatedAt'])
+        && validJobTopic(request.resource.data);
+      allow update: if isModerator()
+        && request.resource.data.diff(resource.data).affectedKeys()
+             .hasOnly(['nameBn', 'nameEn', 'order', 'isCommon', 'commonExams',
+                       'commonStatus', 'questionTarget', 'publishedQuestionCount',
+                       'status', 'reviewStatus', 'verifiedBy', 'verifiedAt', 'updatedAt'])
+        && (resource.data.get('status', '') != 'published'
+            || request.resource.data.diff(resource.data).affectedKeys()
+                 .hasOnly(['status', 'reviewStatus', 'verifiedBy', 'verifiedAt', 'updatedAt']))
+        && jobContentSecondEye(resource.data, request.resource.data)
+        && validJobTopic(request.resource.data);
+      allow update: if isAdmin()
+        && request.resource.data.diff(resource.data).affectedKeys()
+             .hasOnly(['nameBn', 'nameEn', 'order', 'isCommon', 'commonExams',
+                       'commonStatus', 'questionTarget', 'publishedQuestionCount',
+                       'status', 'reviewStatus', 'verifiedBy', 'verifiedAt', 'updatedAt'])
+        && jobContentSecondEye(resource.data, request.resource.data)
+        && validJobTopic(request.resource.data);
+      allow delete: if isAdmin();
+    }
+    match /jobLessons/{lessonId} {
+      allow read: if resource.data.get('status', '') == 'published'
+        || (signedIn() && resource.data.get('authorId', '') == uid())
+        || isModerator();
+      allow create: if isTeacher()
+        && jobContentCreateCommon(request.resource.data)
+        && request.resource.data.get('lessonType', '') == 'lesson'
+        && validJobLesson(request.resource.data);
+      allow update: if isTeacher()
+        && resource.data.get('authorId', '') == uid()
+        && isDraftStatus(resource.data.get('reviewStatus', ''))
+        && isDraftStatus(request.resource.data.get('reviewStatus', ''))
+        && resource.data.get('status', '') == 'draft'
+        && request.resource.data.get('status', '') == 'draft'
+        && request.resource.data.diff(resource.data).affectedKeys()
+             .hasOnly(['titleBn', 'titleEn', 'body', 'bodyEn', 'order',
+                       'reviewStatus', 'updatedAt'])
+        && validJobLesson(request.resource.data);
+      allow update: if isModerator()
+        && request.resource.data.diff(resource.data).affectedKeys()
+             .hasOnly(['titleBn', 'titleEn', 'body', 'bodyEn', 'order',
+                       'status', 'reviewStatus', 'verifiedBy', 'verifiedAt', 'updatedAt'])
+        && (resource.data.get('status', '') != 'published'
+            || request.resource.data.diff(resource.data).affectedKeys()
+                 .hasOnly(['status', 'reviewStatus', 'verifiedBy', 'verifiedAt', 'updatedAt']))
+        && jobContentSecondEye(resource.data, request.resource.data)
+        && validJobLesson(request.resource.data);
+      allow update: if isAdmin()
+        && request.resource.data.diff(resource.data).affectedKeys()
+             .hasOnly(['titleBn', 'titleEn', 'body', 'bodyEn', 'order',
+                       'status', 'reviewStatus', 'verifiedBy', 'verifiedAt', 'updatedAt'])
+        && jobContentSecondEye(resource.data, request.resource.data)
+        && validJobLesson(request.resource.data);
       allow delete: if isAdmin();
     }
 
