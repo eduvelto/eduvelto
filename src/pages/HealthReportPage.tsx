@@ -61,7 +61,7 @@ function TestCard({ test, value }: { test: ReportTest; value?: string }) {
       ) : null}
       <p style={{ margin: '0 0 6px' }}>{t(h.noDiagnosis)}</p>
       <p style={{ margin: '0 0 6px' }}>{t(h.reportAskDoctor)}</p>
-      <p style={{ margin: '0 0 6px', fontSize: 14, color: '#555' }}>{t(h.reportSource)}</p>
+      <p style={{ margin: '0 0 6px', fontSize: 14, color: 'var(--ink-soft)' }}>{t(h.reportSource)}</p>
       <AccuracyNote />
     </article>
   );
@@ -87,7 +87,7 @@ export default function HealthReportPage() {
     <PageShell titleBn={h.reportTitle.bn} titleEn={h.reportTitle.en}>
       <HealthDisclaimer />
       <p>{t(h.reportIntro)}</p>
-      <p style={{ fontSize: 14, color: '#555' }}>{t(h.reportNoStorage)}</p>
+      <p style={{ fontSize: 14, color: 'var(--ink-soft)' }}>{t(h.reportNoStorage)}</p>
       <AccuracyNote />
 
       <h2 style={{ marginTop: 24 }}>{t(h.reportPickTest)}</h2>

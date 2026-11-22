@@ -78,7 +78,7 @@ export default function HealthPage() {
             key={c.to}
             to={c.to}
             className="ev-card ev-card-hover"
-            style={{ display: 'block', textDecoration: 'none', color: '#0A1F44' }}
+            style={{ display: 'block', textDecoration: 'none', color: 'var(--heading)' }}
           >
             <span
               aria-hidden="true"
@@ -89,8 +89,8 @@ export default function HealthPage() {
                 width: 44,
                 height: 44,
                 borderRadius: 12,
-                background: '#E8EFFA',
-                color: '#1E7CE8',
+                background: 'var(--hover)',
+                color: 'var(--link)',
                 fontSize: 22,
                 fontWeight: 700,
                 marginBottom: 10,
@@ -99,7 +99,7 @@ export default function HealthPage() {
               {c.icon}
             </span>
             <strong style={{ display: 'block', fontSize: 16 }}>{t(h[c.key])}</strong>
-            <span style={{ display: 'block', color: '#5A6478', fontSize: 14, marginTop: 8 }}>
+            <span style={{ display: 'block', color: 'var(--muted)', fontSize: 14, marginTop: 8 }}>
               {lang === 'bn' ? c.desc : c.descEn}
             </span>
           </Link>

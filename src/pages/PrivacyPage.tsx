@@ -18,8 +18,8 @@ function Section({ bn, en, children }: { bn: string; en: string; children: React
   const { lang } = useLanguage();
   return (
     <Card style={{ marginBottom: 14 }}>
-      <h2 style={{ fontSize: 18, color: '#142B3B', margin: '0 0 10px' }}>{lang === 'bn' ? bn : en}</h2>
-      <div style={{ fontSize: 15, lineHeight: 1.75, color: '#202B33' }}>{children}</div>
+      <h2 style={{ fontSize: 18, color: 'var(--heading)', margin: '0 0 10px' }}>{lang === 'bn' ? bn : en}</h2>
+      <div style={{ fontSize: 15, lineHeight: 1.75, color: 'var(--ink)' }}>{children}</div>
     </Card>
   );
 }
@@ -28,7 +28,7 @@ export default function PrivacyPage() {
   const { t } = useLanguage();
   return (
     <PageShell titleBn="গোপনীয়তা নীতি" titleEn="Privacy Policy — Eduvelto" wide>
-      <p style={{ color: '#57616A', margin: '0 0 20px', lineHeight: 1.7 }}>
+      <p style={{ color: 'var(--muted-ivory)', margin: '0 0 20px', lineHeight: 1.7 }}>
         {t({ bn: 'সর্বশেষ হালনাগাদ: ২১ নভেম্বর ২০২৬।', en: 'Last updated: 21 November 2026.' })} Eduvelto বাংলাদেশের
         শিক্ষার্থীদের জন্য একটি সম্পূর্ণ বিনামূল্যের শিক্ষা প্ল্যাটফর্ম। এই নীতিতে বলা আছে আমরা
         কী তথ্য সংগ্রহ করি, কেন করি, আর আপনার তথ্য কীভাবে সুরক্ষিত থাকে।

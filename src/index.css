@@ -1186,13 +1186,16 @@ a:hover {
   margin-top: 16px;
 }
 .ev-coming-soon-chip {
-  background: var(--card);
-  border: 1px solid var(--line);
+  /* Deliberately hardcoded light (dark-mode note, 22 Nov 2026): the
+     chip only ever renders on a light accentSoft tint card, so its
+     text must stay dark in both themes. */
+  background: #fff;
+  border: 1px solid #e5e8e5;
   border-radius: 999px;
   padding: 6px 12px;
   font-size: 14px;
   font-weight: 600;
-  color: var(--heading);
+  color: #142b3b;
 }
 .ev-coming-soon-chip-soon {
   color: var(--amber-deep);

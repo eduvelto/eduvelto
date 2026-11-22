@@ -72,7 +72,7 @@ export default function AdminFeaturesPage() {
           en: 'Which features are on — change them here. Under each feature it says what actually happens if you turn it on today.',
         })}
       </p>
-      <p style={{ color: '#555', fontSize: 14 }}>
+      <p style={{ color: 'var(--ink-soft)', fontSize: 14 }}>
         {t({
           bn: 'সীমাবদ্ধ ফিচার (তালাবদ্ধ) কখনো চালু করা যায় না — মালিকের আলাদা অনুমোদন লাগবে।',
           en: 'Restricted features (locked) can never be enabled — they need the owner’s separate approval.',
@@ -81,7 +81,7 @@ export default function AdminFeaturesPage() {
       {loading ? <LoadingBox /> : null}
       {error ? <ErrorBox message={error} /> : null}
       {notice ? (
-        <p role="status" style={{ color: '#0A1F44', fontWeight: 700 }}>
+        <p role="status" style={{ color: 'var(--heading)', fontWeight: 700 }}>
           {notice}
         </p>
       ) : null}
@@ -93,7 +93,7 @@ export default function AdminFeaturesPage() {
             <li
               key={def.id}
               style={{
-                border: '1px solid #ddd',
+                border: '1px solid var(--line-strong)',
                 borderRadius: 8,
                 padding: '12px 14px',
                 marginBottom: 12,
@@ -108,7 +108,7 @@ export default function AdminFeaturesPage() {
                   <StatusPill label={on ? t({ bn: 'চালু', en: 'On' }) : t({ bn: 'বন্ধ', en: 'Off' })} tone={on ? 'active' : 'muted'} />
                 )}
               </div>
-              <p style={{ margin: '6px 0', color: '#555', fontSize: 14 }}>
+              <p style={{ margin: '6px 0', color: 'var(--ink-soft)', fontSize: 14 }}>
                 {lang === 'bn' ? def.noteBn : def.noteEn}
               </p>
               <p style={{ margin: '0 0 8px', fontSize: 15 }}>
@@ -116,7 +116,7 @@ export default function AdminFeaturesPage() {
                 <strong>{lang === 'bn' ? def.effectBn : def.effectEn}</strong>
               </p>
               {locked ? (
-                <p style={{ margin: 0, color: '#555', fontSize: 14 }}>
+                <p style={{ margin: 0, color: 'var(--ink-soft)', fontSize: 14 }}>
                   {t({
                     bn: 'এই ফিচার চালু করতে মালিকের আলাদা অনুমোদন লাগবে — ড্যাশবোর্ড থেকে চালু করা যায় না।',
                     en: 'Enabling this needs the owner’s separate approval — it cannot be enabled from the dashboard.',

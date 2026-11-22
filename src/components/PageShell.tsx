@@ -42,7 +42,7 @@ export function PageShell(props: {
               fontFamily: "'Poppins','Hind Siliguri',system-ui,sans-serif",
               fontSize: 28,
               fontWeight: 700,
-              color: '#142B3B',
+              color: 'var(--heading)',
               margin: '0 0 4px',
               lineHeight: 1.3,
             }}
@@ -57,7 +57,7 @@ export function PageShell(props: {
       )}
       {props.children}
       {props.hideHomeLink ? null : (
-        <p style={{ marginTop: 36, paddingTop: 16, borderTop: '1px solid #E5E8E5' }}>
+        <p style={{ marginTop: 36, paddingTop: 16, borderTop: '1px solid var(--line)' }}>
           <Link to="/" style={{ fontWeight: 600 }}>
             {t({ bn: '← হোম', en: '← Home' })}
           </Link>
@@ -72,20 +72,20 @@ export function EmptyState(props: { bn: string; en: string }) {
   return (
     <div
       style={{
-        border: '1px solid #E5E8E5',
+        border: '1px solid var(--line)',
         borderRadius: 12,
         padding: '24px 18px',
-        background: '#E3F2F0',
+        background: 'var(--teal-soft)',
         textAlign: 'center',
       }}
     >
-      <div aria-hidden="true" style={{ marginBottom: 10, color: '#12766E' }}>
+      <div aria-hidden="true" style={{ marginBottom: 10, color: 'var(--teal-text)' }}>
         <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
           <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
           <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />
         </svg>
       </div>
-      <p style={{ margin: 0, fontWeight: 600, color: '#142B3B', fontSize: 16 }}>
+      <p style={{ margin: 0, fontWeight: 600, color: 'var(--heading)', fontSize: 16 }}>
         {lang === 'bn' ? props.bn : props.en}
       </p>
     </div>

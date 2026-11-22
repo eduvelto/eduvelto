@@ -58,8 +58,8 @@ export default function ComingSoonPage(props: { section: Section }) {
   const c = CONTENT[props.section];
   return (
     <PageShell titleBn={c.titleBn} titleEn={c.titleEn} maxWidth={760} hideHomeLink>
-      <p style={{ fontSize: 16, lineHeight: 1.8, color: '#3A444B' }}>{t({ bn: c.bodyBn, en: c.bodyEn })}</p>
-      <ul style={{ lineHeight: 1.9, color: '#3A444B' }}>
+      <p style={{ fontSize: 16, lineHeight: 1.8, color: 'var(--ink-soft)' }}>{t({ bn: c.bodyBn, en: c.bodyEn })}</p>
+      <ul style={{ lineHeight: 1.9, color: 'var(--ink-soft)' }}>
         {c.items.map((item) => (
           <li key={item.bn}>{t({ bn: item.bn, en: item.en })}</li>
         ))}
@@ -70,8 +70,8 @@ export default function ComingSoonPage(props: { section: Section }) {
             display: 'inline-block',
             padding: '4px 10px',
             borderRadius: 999,
-            background: '#FDF3D7',
-            color: '#8A6100',
+            background: 'var(--soon-bg)',
+            color: 'var(--amber-deep)',
             fontSize: 13,
             fontWeight: 700,
           }}
@@ -79,7 +79,7 @@ export default function ComingSoonPage(props: { section: Section }) {
           {t({ bn: 'শীঘ্রই আসছে', en: 'Coming soon' })}
         </span>
       </p>
-      <p style={{ marginTop: 20, color: '#57616A' }}>
+      <p style={{ marginTop: 20, color: 'var(--muted-ivory)' }}>
         {t({ bn: 'এই সময়ে যা করতে পারেন —', en: 'What you can do in the meantime —' })}
       </p>
       {/* NU-5: NuOnboarding moved to the NU hub Home tab

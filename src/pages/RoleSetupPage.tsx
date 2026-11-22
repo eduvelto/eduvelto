@@ -25,7 +25,7 @@ const inputStyle: React.CSSProperties = {
   padding: '10px 12px',
   margin: '6px 0 14px',
   fontSize: 16,
-  border: '1px solid #aaa',
+  border: '1px solid var(--line-strong)',
   borderRadius: 6,
 };
 
@@ -150,7 +150,7 @@ export default function RoleSetupPage() {
 
   return (
     <PageShell titleBn={d.rolePickerTitle.bn} titleEn={d.rolePickerTitle.en}>
-      <p style={{ color: '#555' }}>
+      <p style={{ color: 'var(--ink-soft)' }}>
         {t({
           bn: 'একটি ভূমিকা বাছাই করুন — পরে এটি নিজে বদলানো যায় না।',
           en: 'Choose one role — you cannot change it yourself later.',
@@ -173,7 +173,7 @@ export default function RoleSetupPage() {
                 ...buttonStyle,
                 background: role === value ? '#0A1F44' : '#fff',
                 color: role === value ? '#fff' : '#0A1F44',
-                border: '1px solid #0A1F44',
+                border: '1px solid var(--heading)',
               }}
             >
               {t(label)}
@@ -244,12 +244,12 @@ export default function RoleSetupPage() {
               <T bn={d.qualifications.bn} en={d.qualifications.en} /> *
               <input style={inputStyle} type="text" value={qualifications} onChange={(e) => setQualifications(e.target.value)} placeholder={t({ bn: 'যেমন: M.A. in English', en: 'e.g.: M.A. in English' })} />
             </label>
-            <p style={{ color: '#555' }}>
+            <p style={{ color: 'var(--ink-soft)' }}>
               <T bn={strings.auth.teacherRegisterNote.bn} en={strings.auth.teacherRegisterNote.en} />
             </p>
           </>
         ) : null}
-        {error ? <p style={{ color: '#b00020' }}>{error}</p> : null}
+        {error ? <p style={{ color: 'var(--error)' }}>{error}</p> : null}
         <button style={buttonStyle} type="submit" disabled={busy}>
           {busy ? <T bn={strings.common.loading.bn} en={strings.common.loading.en} /> : <T bn={strings.common.save.bn} en={strings.common.save.en} />}
         </button>

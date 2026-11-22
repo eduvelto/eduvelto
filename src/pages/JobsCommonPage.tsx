@@ -76,13 +76,13 @@ export default function JobsCommonPage() {
         {/* Today's daily short mock — Coming Soon (publish time undecided, §7.3). */}
         <Reveal delayMs={0}>
           <Card>
-            <div style={{ fontWeight: 700, color: '#142B3B', fontSize: 17 }}>
+            <div style={{ fontWeight: 700, color: 'var(--heading)', fontSize: 17 }}>
               {t({ bn: 'আজকের দৈনিক মক', en: "Today's daily mock" })}
             </div>
-            <p style={{ margin: '8px 0', color: '#57616A', fontSize: 14, lineHeight: 1.7 }}>
+            <p style={{ margin: '8px 0', color: 'var(--muted-ivory)', fontSize: 14, lineHeight: 1.7 }}>
               {t({ bn: DAILY_MOCK.sizeBn, en: DAILY_MOCK.sizeEn })} · {t({ bn: DAILY_MOCK.timeBn, en: DAILY_MOCK.timeEn })}
             </p>
-            <p style={{ margin: '0 0 10px', color: '#68747B', fontSize: 14, lineHeight: 1.7 }}>
+            <p style={{ margin: '0 0 10px', color: 'var(--muted)', fontSize: 14, lineHeight: 1.7 }}>
               {t({
                 bn: 'প্রতিদিন ভিন্ন টপিক — এক সপ্তাহে সব কমন টপিক ঘুরে আসে। নেগেটিভ মার্কিং ওই দিনের চক্রের পরীক্ষার নিয়মে হবে (BCS-র দিনে −০.৫০, প্রাথমিক/NTRCA-র দিনে −০.২৫)। প্রকাশের সময় এখনো ঠিক হয়নি।',
                 en: 'A different topic every day — all common topics rotate through in a week. Negative marking follows that day’s cycle exam (BCS day −0.50, Primary/NTRCA day −0.25). The publish time is not decided yet.',
@@ -95,16 +95,16 @@ export default function JobsCommonPage() {
         {/* This week's full mock — weekly cycle, Coming Soon. */}
         <Reveal delayMs={80}>
           <Card>
-            <div style={{ fontWeight: 700, color: '#142B3B', fontSize: 17 }}>
+            <div style={{ fontWeight: 700, color: 'var(--heading)', fontSize: 17 }}>
               {t({ bn: 'এই সপ্তাহের পূর্ণ মক', en: "This week's full mock" })}
             </div>
-            <p style={{ margin: '8px 0', color: '#57616A', fontSize: 14, lineHeight: 1.7 }}>
+            <p style={{ margin: '8px 0', color: 'var(--muted-ivory)', fontSize: 14, lineHeight: 1.7 }}>
               {t({ bn: 'প্রতি সপ্তাহে ১টি পূর্ণ মক — চক্রাকারে:', en: 'One full mock every week — rotating:' })}
             </p>
-            <ul style={{ margin: '0 0 10px', paddingLeft: 20, color: '#57616A', fontSize: 14, lineHeight: 1.9 }}>
+            <ul style={{ margin: '0 0 10px', paddingLeft: 20, color: 'var(--muted-ivory)', fontSize: 14, lineHeight: 1.9 }}>
               {cycle.map((def) => (
                 <li key={def.slug}>
-                  <strong style={{ color: '#142B3B' }}>{lang === 'bn' ? def.bn : def.en}</strong> —{' '}
+                  <strong style={{ color: 'var(--heading)' }}>{lang === 'bn' ? def.bn : def.en}</strong> —{' '}
                   {t({ bn: WEEKLY_PATTERN[def.slug].bn, en: WEEKLY_PATTERN[def.slug].en })}
                 </li>
               ))}
@@ -116,10 +116,10 @@ export default function JobsCommonPage() {
         {/* My progress — empty until mocks run. */}
         <Reveal delayMs={160}>
           <Card>
-            <div style={{ fontWeight: 700, color: '#142B3B', fontSize: 17 }}>
+            <div style={{ fontWeight: 700, color: 'var(--heading)', fontSize: 17 }}>
               {t({ bn: 'আমার অগ্রগতি', en: 'My progress' })}
             </div>
-            <p style={{ margin: '8px 0 10px', color: '#68747B', fontSize: 14, lineHeight: 1.7 }}>
+            <p style={{ margin: '8px 0 10px', color: 'var(--muted)', fontSize: 14, lineHeight: 1.7 }}>
               {t({
                 bn: 'এখনো কোনো দৈনিক বা সাপ্তাহিক মক দেওয়া হয়নি — মক চালু হলে ইতিহাস, দুর্বল টপিক ও ধারাবাহিকতা এখানে দেখাবে।',
                 en: 'No daily or weekly mock has been taken yet — once mocks run, history, weak topics and streak will show here.',
@@ -134,7 +134,7 @@ export default function JobsCommonPage() {
       <Reveal>
         <h3 className="ev-section-h2">{t({ bn: 'কমন টপিক', en: 'Common topics' })}</h3>
       </Reveal>
-      <p style={{ color: '#57616A', margin: '-8px 0 14px', fontSize: 14, lineHeight: 1.7 }}>
+      <p style={{ color: 'var(--muted-ivory)', margin: '-8px 0 14px', fontSize: 14, lineHeight: 1.7 }}>
         {t({
           bn: 'প্রাথমিক তালিকা — ৪টি পরীক্ষার অফিসিয়াল সিলেবাস মিলিয়ে চূড়ান্ত হবে। প্রতি টপিকে লক্ষ্য ~৫০টি প্রশ্ন। এখনো কোনো প্রশ্ন প্রকাশিত হয়নি।',
           en: 'Preliminary list — to be finalised against the 4 exams’ official syllabuses. Target ~50 questions per topic. No questions are published yet.',
@@ -144,12 +144,12 @@ export default function JobsCommonPage() {
         {COMMON_TOPICS.map((topic, i) => (
           <Reveal key={topic.bn} delayMs={Math.min(i, 5) * 60}>
             <Card>
-              <div style={{ fontWeight: 700, color: '#142B3B', fontSize: 16 }}>{t({ bn: topic.bn, en: topic.en })}</div>
-              <p style={{ margin: '6px 0 0', color: '#68747B', fontSize: 14 }}>
+              <div style={{ fontWeight: 700, color: 'var(--heading)', fontSize: 16 }}>{t({ bn: topic.bn, en: topic.en })}</div>
+              <p style={{ margin: '6px 0 0', color: 'var(--muted)', fontSize: 14 }}>
                 {t({ bn: `৪টি প্রধান পরীক্ষার মধ্যে: ${topic.exams}`, en: `In ${topic.exams} of the 4 main exams` })}
               </p>
               {topic.noteBn ? (
-                <p style={{ margin: '6px 0 0', color: '#68747B', fontSize: 13 }}>
+                <p style={{ margin: '6px 0 0', color: 'var(--muted)', fontSize: 13 }}>
                   {t({ bn: topic.noteBn, en: topic.noteEn ?? '' })}
                 </p>
               ) : null}
@@ -166,7 +166,7 @@ export default function JobsCommonPage() {
 
       <Reveal>
         <Card>
-          <p style={{ margin: 0, color: '#68747B', fontSize: 14, lineHeight: 1.7 }}>
+          <p style={{ margin: 0, color: 'var(--muted)', fontSize: 14, lineHeight: 1.7 }}>
             {t({
               bn: 'কমন টপিকের প্রশ্ন শিক্ষক যাচাইয়ের পর প্রকাশিত হবে। প্রতিটি প্রশ্নে ট্যাগ থাকবে — কোন কোন পরীক্ষায় প্রযোজ্য।',
               en: 'Common-topic questions will be published after teacher review. Every question will be tagged with the exams it applies to.',

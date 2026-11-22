@@ -318,10 +318,10 @@ export default function LibraryPage() {
           </Card>
           {levelEmpty && selectedLevel ? (
             <Card>
-              <div style={{ fontWeight: 700, color: '#142B3B', fontSize: 17 }}>
+              <div style={{ fontWeight: 700, color: 'var(--heading)', fontSize: 17 }}>
                 {t({ bn: `${selectedLevel.bn} — শীঘ্রই আসছে!`, en: `${selectedLevel.en} — Coming soon!` })}
               </div>
-              <p style={{ margin: '8px 0 12px', color: '#68747B', fontSize: 15, lineHeight: 1.7 }}>
+              <p style={{ margin: '8px 0 12px', color: 'var(--muted)', fontSize: 15, lineHeight: 1.7 }}>
                 {t({ bn: `${selectedLevel.bn}-এর বই এখনো লাইব্রেরিতে প্রকাশিত হয়নি — বই, পাঠ ও প্রশ্ন তৈরি হচ্ছে। প্রকাশিত হলেই এখানে দেখতে পাবে।`, en: `No books for ${selectedLevel.en} are published yet — books, lessons and questions are being prepared.` })}
               </p>
               <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
@@ -343,7 +343,7 @@ export default function LibraryPage() {
             </Card>
           ) : searching ? (
             <>
-              <p style={{ color: '#555', margin: '0 0 12px' }}>
+              <p style={{ color: 'var(--ink-soft)', margin: '0 0 12px' }}>
                 {t({ bn: `খোঁজে ${searchFiltered.length}টি বই পাওয়া গেছে${searchBooks === null ? ' — খুঁজছি…' : ''}`, en: `${searchFiltered.length} books found${searchBooks === null ? ' — searching…' : ''}` })}
               </p>
               {searchBooks !== null && searchFiltered.length === 0 ? (
@@ -352,7 +352,7 @@ export default function LibraryPage() {
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: 12 }}>
                 {searchPageBooks.map((b) => (
                   <Card key={b.id} hover>
-                    <Link to={`/library/${b.id}`} style={{ fontWeight: 700, fontSize: 16, color: '#0A1F44', lineHeight: 1.5 }}>
+                    <Link to={`/library/${b.id}`} style={{ fontWeight: 700, fontSize: 16, color: 'var(--heading)', lineHeight: 1.5 }}>
                       {b.title}
                     </Link>
                     <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, marginTop: 10 }}>
@@ -360,7 +360,7 @@ export default function LibraryPage() {
                       <Chip tone="outline">{b.classLevel}</Chip>
                       {b.paperCode ? <Chip tone="outline">{t({ bn: `কোড ${b.paperCode}`, en: `Code ${b.paperCode}` })}</Chip> : null}
                     </div>
-                    <p style={{ margin: '10px 0 0', color: '#5A6478', fontSize: 14 }}>
+                    <p style={{ margin: '10px 0 0', color: 'var(--muted)', fontSize: 14 }}>
                       {t({ bn: `${b.chapterCount}টি পাঠ · ${b.questionCount}টি প্রশ্ন${b.bilingual ? ' · বাংলা উত্তরসহ' : ''}`, en: `${b.chapterCount} lessons · ${b.questionCount} questions${b.bilingual ? ' · with Bangla answers' : ''}` })}
                     </p>
                   </Card>
@@ -382,13 +382,13 @@ export default function LibraryPage() {
             </>
           ) : (
             <>
-              <p style={{ color: '#555', margin: '0 0 12px' }}>
+              <p style={{ color: 'var(--ink-soft)', margin: '0 0 12px' }}>
                 {t({ bn: `দেখাচ্ছি ${shownFrom}–${shownTo}`, en: `Showing ${shownFrom}–${shownTo}` })}
               </p>
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: 12 }}>
                 {pageBooks.map((b) => (
                   <Card key={b.id} hover>
-                    <Link to={`/library/${b.id}`} style={{ fontWeight: 700, fontSize: 16, color: '#0A1F44', lineHeight: 1.5 }}>
+                    <Link to={`/library/${b.id}`} style={{ fontWeight: 700, fontSize: 16, color: 'var(--heading)', lineHeight: 1.5 }}>
                       {b.title}
                     </Link>
                     <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, marginTop: 10 }}>
@@ -396,7 +396,7 @@ export default function LibraryPage() {
                       <Chip tone="outline">{b.classLevel}</Chip>
                       {b.paperCode ? <Chip tone="outline">{t({ bn: `কোড ${b.paperCode}`, en: `Code ${b.paperCode}` })}</Chip> : null}
                     </div>
-                    <p style={{ margin: '10px 0 0', color: '#5A6478', fontSize: 14 }}>
+                    <p style={{ margin: '10px 0 0', color: 'var(--muted)', fontSize: 14 }}>
                       {t({ bn: `${b.chapterCount}টি পাঠ · ${b.questionCount}টি প্রশ্ন${b.bilingual ? ' · বাংলা উত্তরসহ' : ''}`, en: `${b.chapterCount} lessons · ${b.questionCount} questions${b.bilingual ? ' · with Bangla answers' : ''}` })}
                     </p>
                   </Card>
@@ -421,7 +421,7 @@ export default function LibraryPage() {
       ) : null}
       {/* First in-feed ad slot (library list page). Renders nothing until AdSense is configured. */}
       <AdSlot placement="in-feed" />
-      <p style={{ marginTop: 16, color: '#5A6478', fontSize: 14 }}>
+      <p style={{ marginTop: 16, color: 'var(--muted)', fontSize: 14 }}>
         {t({ bn: 'লাইব্রেরিতে বই, নোট ও প্রশ্নোত্তর যোগ করা হবে — নিচে স্ক্রল করলে আরও দেখা যাবে।', en: 'Books, notes and Q&A will be added to the library — scroll down to see more.' })}
       </p>
       {/* Second in-feed ad slot, lower down the list — revealed on scroll. Renders nothing until AdSense is configured. */}

@@ -16,9 +16,9 @@ export default function NuNoticeCard(props: { notice: NuVerifiedNotice }) {
   const n = props.notice;
   return (
     <Card>
-      <h3 style={{ marginTop: 0, fontSize: 17, color: '#142B3B', lineHeight: 1.5 }}>{n.institutionBn}</h3>
-      <p style={{ margin: '0 0 8px', fontWeight: 600, color: '#1E3A5F' }}>{n.titleBn}</p>
-      <dl style={{ margin: 0, fontSize: 14, lineHeight: 1.9, color: '#3A444B' }}>
+      <h3 style={{ marginTop: 0, fontSize: 17, color: 'var(--heading)', lineHeight: 1.5 }}>{n.institutionBn}</h3>
+      <p style={{ margin: '0 0 8px', fontWeight: 600, color: 'var(--heading)' }}>{n.titleBn}</p>
+      <dl style={{ margin: 0, fontSize: 14, lineHeight: 1.9, color: 'var(--ink-soft)' }}>
         <div>
           <dt style={{ display: 'inline', fontWeight: 700 }}>{t({ bn: 'বিজ্ঞপ্তি নম্বর: ', en: 'Notice no.: ' })}</dt>
           <dd style={{ display: 'inline', margin: 0 }}>{n.memoNo}</dd>
@@ -54,7 +54,7 @@ export default function NuNoticeCard(props: { notice: NuVerifiedNotice }) {
           {t({ bn: 'ভর্তি-বিষয়ক ওয়েবসাইট →', en: 'Admissions website →' })}
         </a>
       </p>
-      <p style={{ margin: '8px 0 0', color: '#57616A', fontSize: 13 }}>
+      <p style={{ margin: '8px 0 0', color: 'var(--muted-ivory)', fontSize: 13 }}>
         {t({
           bn: 'বিজ্ঞপ্তির কপি সংরক্ষিত আছে — অফিসিয়াল PDF-এর লিংক উপরে। পরীক্ষার তারিখ বিজ্ঞপ্তিতে নেই বলে এখানে কোনো তারিখ লেখা হয়নি।',
           en: 'The notice copy is preserved — the official PDF link is above. No exam date is written here because the circular has none.',

@@ -326,7 +326,7 @@ export default function HeaderNav() {
             </NavLink>
           ))}
           {profile?.role === 'owner' ? (
-            <NavLink to="/admin" className={({ isActive }) => `ev-navlink${isActive ? ' ev-navlink-active' : ''}`} style={{ color: '#8A6100', fontWeight: 700 }}>
+            <NavLink to="/admin" className={({ isActive }) => `ev-navlink${isActive ? ' ev-navlink-active' : ''}`} style={{ color: 'var(--amber-deep)', fontWeight: 700 }}>
               {t({ bn: 'অ্যাডমিন', en: 'Admin' })}
             </NavLink>
           ) : null}

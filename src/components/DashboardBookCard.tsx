@@ -12,7 +12,7 @@ export function DashboardBookCard({ book }: { book: Book }) {
     <Card hover>
       <Link
         to={`/library/${book.id}`}
-        style={{ fontWeight: 700, fontSize: 16, color: '#142B3B', lineHeight: 1.5 }}
+        style={{ fontWeight: 700, fontSize: 16, color: 'var(--heading)', lineHeight: 1.5 }}
       >
         {book.title}
       </Link>
@@ -21,7 +21,7 @@ export function DashboardBookCard({ book }: { book: Book }) {
         {book.department ? <Chip tone="outline">{book.department}</Chip> : null}
         {book.classLevel ? <Chip tone="gold">{book.classLevel}</Chip> : null}
       </div>
-      <p style={{ margin: '10px 0 0', color: '#68747B', fontSize: 14 }}>
+      <p style={{ margin: '10px 0 0', color: 'var(--muted)', fontSize: 14 }}>
         {book.chapterCount}টি পাঠ · {book.questionCount}টি প্রশ্ন
       </p>
     </Card>

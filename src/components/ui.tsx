@@ -209,7 +209,7 @@ export function StatCard(props: { value: string; labelBn: string; labelEn: strin
           fontSize: 30,
           fontWeight: 800,
           lineHeight: 1.2,
-          color: props.tone === 'gold' ? '#8A6100' : '#142B3B',
+          color: props.tone === 'gold' ? 'var(--amber-deep)' : 'var(--heading)',
         }}
       >
         {props.numeric !== undefined ? (
@@ -221,7 +221,7 @@ export function StatCard(props: { value: string; labelBn: string; labelEn: strin
           props.value
         )}
       </div>
-      <div style={{ fontWeight: 600, color: '#142B3B', marginTop: 2 }}>
+      <div style={{ fontWeight: 600, color: 'var(--heading)', marginTop: 2 }}>
         {lang === 'bn' ? props.labelBn : props.labelEn}
       </div>
     </div>

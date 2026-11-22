@@ -56,37 +56,37 @@ export default function ApplicationChecklist() {
   const { t } = useLanguage();
   return (
     <Card>
-      <h3 style={{ marginTop: 0, fontSize: 18, color: '#142B3B' }}>
+      <h3 style={{ marginTop: 0, fontSize: 18, color: 'var(--heading)' }}>
         {t({ bn: 'আবেদনের ধাপ — ২০২৫-২০২৬ (ইতিহাস)', en: 'Application steps — 2025-26 (history)' })}
       </h3>
-      <p style={{ color: '#444', lineHeight: 1.8, margin: '0 0 12px' }}>
+      <p style={{ color: 'var(--ink-soft)', lineHeight: 1.8, margin: '0 0 12px' }}>
         {t({ bn: NU_NEXT_CYCLE_BN, en: 'The latest verified circular is for the 2025–26 academic year. The new circular has not been verified yet — the information will be updated once the next circular is published.' })}
       </p>
-      <ol style={{ margin: 0, paddingLeft: 20, lineHeight: 1.9, color: '#3A444B' }}>
+      <ol style={{ margin: 0, paddingLeft: 20, lineHeight: 1.9, color: 'var(--ink-soft)' }}>
         {steps.map((s) => (
           <li key={s.bn} style={{ marginBottom: 8 }}>
-            <span style={{ fontWeight: 600, color: '#142B3B' }}>{t({ bn: s.bn, en: s.en })}</span>
+            <span style={{ fontWeight: 600, color: 'var(--heading)' }}>{t({ bn: s.bn, en: s.en })}</span>
             <br />
-            <span style={{ fontSize: 14, color: '#57616A' }}>{t({ bn: s.stateBn, en: s.stateEn })}</span>{' '}
+            <span style={{ fontSize: 14, color: 'var(--muted-ivory)' }}>{t({ bn: s.stateBn, en: s.stateEn })}</span>{' '}
             <Chip tone={s.done ? 'navy' : 'gold'}>
               {t({ bn: s.done ? 'শেষ' : 'অপেক্ষায়', en: s.done ? 'Done' : 'Waiting' })}
             </Chip>
           </li>
         ))}
       </ol>
-      <p style={{ margin: '12px 0 0', color: '#57616A', fontSize: 14, lineHeight: 1.8 }}>
+      <p style={{ margin: '12px 0 0', color: 'var(--muted-ivory)', fontSize: 14, lineHeight: 1.8 }}>
         {t({
           bn: `উৎস: ${NU_VERIFIED_NOTICE.memoNo} · ${NU_VERIFIED_NOTICE.publishedBn}। Eduvelto কারো পক্ষে আবেদন করে দেয় না — আবেদন করতে হয় অফিসিয়াল সাইটে (nu.ac.bd/admissions)।`,
           en: `Source: ${NU_VERIFIED_NOTICE.memoNo} · Published: 20 November 2025. Eduvelto never applies on anyone's behalf — applications go through the official site (nu.ac.bd/admissions).`,
         })}
       </p>
-      <p style={{ margin: '8px 0 0', color: '#57616A', fontSize: 14 }}>
+      <p style={{ margin: '8px 0 0', color: 'var(--muted-ivory)', fontSize: 14 }}>
         {t({
           bn: 'নিশ্চিত তারিখের তালিকা:',
           en: 'List of confirmed dates:',
         })}
       </p>
-      <ul style={{ margin: '4px 0 0', paddingLeft: 20, lineHeight: 1.9, color: '#3A444B', fontSize: 14 }}>
+      <ul style={{ margin: '4px 0 0', paddingLeft: 20, lineHeight: 1.9, color: 'var(--ink-soft)', fontSize: 14 }}>
         {NU_CALENDAR_EVENTS.map((e) => (
           <li key={e.labelBn}>
             {e.labelBn}: {e.dateBn} — {e.stateBn}

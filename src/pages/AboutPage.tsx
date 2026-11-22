@@ -24,7 +24,7 @@ function CeoBadge() {
       style={{
         display: 'inline-block',
         background: '#F1B308',
-        color: '#041742',
+        color: 'var(--heading)',
         fontWeight: 800,
         fontSize: 13,
         letterSpacing: 1,
@@ -53,31 +53,31 @@ export default function AboutPage() {
           en: 'Eduvelto is a free digital education platform for Bangladesh. It brings together lessons, exams, a digital library and smart study planning — with a personal AI teacher planned for the future — in Bangla and in English — so that a student anywhere in the country can learn, grow and achieve, without cost standing in the way.',
         })}
       </p>
-      <h2 style={{ fontFamily: "'Poppins','Hind Siliguri',system-ui,sans-serif", fontSize: 20, color: '#0A1F44', margin: '28px 0 12px' }}>{t({ bn: 'যা যা আছে', en: 'What Eduvelto offers' })}</h2>
+      <h2 style={{ fontFamily: "'Poppins','Hind Siliguri',system-ui,sans-serif", fontSize: 20, color: 'var(--heading)', margin: '28px 0 12px' }}>{t({ bn: 'যা যা আছে', en: 'What Eduvelto offers' })}</h2>
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(240px, 1fr))', gap: 12 }}>
         <div className="ev-card ev-card-hover">
-          <Link to="/library" style={{ fontWeight: 700, color: '#0A1F44' }}>{t({ bn: 'ডিজিটাল লাইব্রেরি', en: 'Digital Library' })}</Link>
-          <p style={{ margin: '6px 0 0', color: '#5A6478', fontSize: 14 }}>{t({ bn: 'বই, প্রশ্নোত্তর ও সহজ ব্যাখ্যাসহ পরীক্ষার প্রস্তুতি (অনার্স, আলিম, এইচএসসি, এসএসসি ও কারিগরি)।', en: 'Exam preparation with books, Q&A and simple explanations (Honours, Alim, HSC, SSC and Technical).' })}</p>
+          <Link to="/library" style={{ fontWeight: 700, color: 'var(--heading)' }}>{t({ bn: 'ডিজিটাল লাইব্রেরি', en: 'Digital Library' })}</Link>
+          <p style={{ margin: '6px 0 0', color: 'var(--muted)', fontSize: 14 }}>{t({ bn: 'বই, প্রশ্নোত্তর ও সহজ ব্যাখ্যাসহ পরীক্ষার প্রস্তুতি (অনার্স, আলিম, এইচএসসি, এসএসসি ও কারিগরি)।', en: 'Exam preparation with books, Q&A and simple explanations (Honours, Alim, HSC, SSC and Technical).' })}</p>
         </div>
         <div className="ev-card ev-card-hover">
-          <Link to="/directory" style={{ fontWeight: 700, color: '#0A1F44' }}>{t({ bn: 'শিক্ষা নির্দেশিকা', en: 'Education Directory' })}</Link>
-          <p style={{ margin: '6px 0 0', color: '#5A6478', fontSize: 14 }}>{t({ bn: 'ধাপে ধাপে বিষয় ও বই খুঁজুন: শিক্ষার ধারা → বোর্ড → প্রোগ্রাম → শ্রেণি → বিষয়।', en: 'Find subjects and books step by step: education stream → board → programme → class → subject.' })}</p>
+          <Link to="/directory" style={{ fontWeight: 700, color: 'var(--heading)' }}>{t({ bn: 'শিক্ষা নির্দেশিকা', en: 'Education Directory' })}</Link>
+          <p style={{ margin: '6px 0 0', color: 'var(--muted)', fontSize: 14 }}>{t({ bn: 'ধাপে ধাপে বিষয় ও বই খুঁজুন: শিক্ষার ধারা → বোর্ড → প্রোগ্রাম → শ্রেণি → বিষয়।', en: 'Find subjects and books step by step: education stream → board → programme → class → subject.' })}</p>
         </div>
         <div className="ev-card ev-card-hover">
-          <Link to="/exam" style={{ fontWeight: 700, color: '#0A1F44' }}>{t({ bn: 'পরীক্ষা', en: 'Exams' })}</Link>
-          <p style={{ margin: '6px 0 0', color: '#5A6478', fontSize: 14 }}>{t({ bn: 'বিনামূল্যে পরীক্ষা ও ফলাফল।', en: 'Free exams and results.' })}</p>
+          <Link to="/exam" style={{ fontWeight: 700, color: 'var(--heading)' }}>{t({ bn: 'পরীক্ষা', en: 'Exams' })}</Link>
+          <p style={{ margin: '6px 0 0', color: 'var(--muted)', fontSize: 14 }}>{t({ bn: 'বিনামূল্যে পরীক্ষা ও ফলাফল।', en: 'Free exams and results.' })}</p>
         </div>
         <div className="ev-card ev-card-hover">
-          <Link to="/routine" style={{ fontWeight: 700, color: '#0A1F44' }}>{t({ bn: 'রুটিন', en: 'Study Routine' })}</Link>
-          <p style={{ margin: '6px 0 0', color: '#5A6478', fontSize: 14 }}>{t({ bn: 'স্মার্ট পড়ার পরিকল্পনা — শীঘ্রই আসছে।', en: 'Smart study planning — coming soon.' })}</p>
+          <Link to="/routine" style={{ fontWeight: 700, color: 'var(--heading)' }}>{t({ bn: 'রুটিন', en: 'Study Routine' })}</Link>
+          <p style={{ margin: '6px 0 0', color: 'var(--muted)', fontSize: 14 }}>{t({ bn: 'স্মার্ট পড়ার পরিকল্পনা — শীঘ্রই আসছে।', en: 'Smart study planning — coming soon.' })}</p>
         </div>
         <div className="ev-card">
-          <strong style={{ color: '#0A1F44' }}>{t({ bn: 'ব্যক্তিগত AI শিক্ষক', en: 'Personal AI Teacher' })}</strong>
-          <p style={{ margin: '6px 0 0', color: '#5A6478', fontSize: 14 }}>{t({ bn: 'শিগগিরই আসছে।', en: 'Coming soon.' })}</p>
+          <strong style={{ color: 'var(--heading)' }}>{t({ bn: 'ব্যক্তিগত AI শিক্ষক', en: 'Personal AI Teacher' })}</strong>
+          <p style={{ margin: '6px 0 0', color: 'var(--muted)', fontSize: 14 }}>{t({ bn: 'শিগগিরই আসছে।', en: 'Coming soon.' })}</p>
         </div>
       </div>
 
-      <h2 style={{ fontFamily: "'Poppins','Hind Siliguri',system-ui,sans-serif", fontSize: 20, color: '#0A1F44', margin: '28px 0 12px' }}>{t({ bn: 'প্রতিষ্ঠাতা', en: 'Founder' })}</h2>
+      <h2 style={{ fontFamily: "'Poppins','Hind Siliguri',system-ui,sans-serif", fontSize: 20, color: 'var(--heading)', margin: '28px 0 12px' }}>{t({ bn: 'প্রতিষ্ঠাতা', en: 'Founder' })}</h2>
       <section
         className="ev-card"
         style={{
@@ -86,7 +86,7 @@ export default function AboutPage() {
           flexWrap: 'wrap',
           alignItems: 'flex-start',
           padding: 20,
-          background: '#F7F9FC',
+          background: 'var(--card)',
         }}
       >
         <img
@@ -99,12 +99,12 @@ export default function AboutPage() {
             Ali Hasan Mohammed Mizan
             <CeoBadge />
           </h3>
-          <p style={{ margin: '0 0 12px', color: '#0A1F44', fontWeight: 600 }}>
+          <p style={{ margin: '0 0 12px', color: 'var(--heading)', fontWeight: 600 }}>
             {t({ bn: 'প্রতিষ্ঠাতা ও CEO, Eduvelto', en: 'Founder & CEO, Eduvelto' })}
           </p>
           {/* DOB shown per the owner's 21 Nov 07:24 decision (factual date only, no age).
               Birthplace is NOT shown — not approved for the public profile. */}
-          <p style={{ margin: '0 0 12px', color: '#5A6478', fontSize: 14 }}>
+          <p style={{ margin: '0 0 12px', color: 'var(--muted)', fontSize: 14 }}>
             {t({ bn: 'জন্ম: ২১ ফেব্রুয়ারি ২০০৫', en: 'Born: 21 February 2005' })}
           </p>
           {lang === 'bn' ? (

@@ -12,10 +12,10 @@ export default function RoutinePage() {
   return (
     <PageShell titleBn="পড়ার রুটিন" titleEn="Study Routine">
       <Card style={{ textAlign: 'center', padding: '28px 20px' }}>
-        <h2 style={{ fontFamily: "'Poppins','Hind Siliguri',system-ui,sans-serif", fontSize: 20, color: '#0A1F44', margin: '0 0 8px' }}>
+        <h2 style={{ fontFamily: "'Poppins','Hind Siliguri',system-ui,sans-serif", fontSize: 20, color: 'var(--heading)', margin: '0 0 8px' }}>
           {t({ bn: 'পড়ার রুটিন শীঘ্রই আসছে', en: 'Study routine coming soon' })}
         </h2>
-        <p style={{ color: '#5A6478', margin: '0 0 20px', lineHeight: 1.7 }}>
+        <p style={{ color: 'var(--muted)', margin: '0 0 20px', lineHeight: 1.7 }}>
           {t({ bn: 'স্মার্ট পড়ার পরিকল্পনা তৈরি হচ্ছে — আপনার ক্লাস, বিষয় ও অগ্রগতি অনুযায়ী রুটিন সাজাবে। ততদিন নিচের পাতাগুলো ব্যবহার করুন।', en: 'A smart study plan is being built — it will arrange your routine according to your class, subjects and progress. Until then, use the pages below.' })}
         </p>
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10, justifyContent: 'center' }}>

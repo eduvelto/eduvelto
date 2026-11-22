@@ -24,11 +24,11 @@ import { NU_MODE_COPY } from './AdmissionModeSwitch';
 import type { AdmissionMode } from '../lib/nuProfile';
 
 const cardStyle: React.CSSProperties = {
-  border: '1px solid #1E3A5F',
+  border: '1px solid var(--heading)',
   borderRadius: 10,
   padding: '16px',
   textAlign: 'left',
-  background: '#fff',
+  background: 'var(--card)',
   cursor: 'pointer',
   fontFamily: "'Poppins','Hind Siliguri',system-ui,sans-serif",
 };
@@ -69,7 +69,7 @@ export default function NuOnboarding(props: { forceOpen?: boolean }) {
 
   if (savedMode) {
     return (
-      <div style={{ border: '1px solid #12766E', borderRadius: 10, padding: '16px', background: '#E3F2F0', marginTop: 20 }}>
+      <div style={{ border: '1px solid var(--teal-text)', borderRadius: 10, padding: '16px', background: 'var(--teal-soft)', marginTop: 20 }}>
         <p style={{ margin: 0 }}>
           {t({
             bn: `আপনার ভর্তি প্রস্তুতির মোড বেছে নেওয়া হয়েছে: ${NU_MODE_COPY[savedMode].bn}। যেকোনো সময় প্রোফাইল থেকে বদলাতে পারবেন।`,
@@ -81,11 +81,11 @@ export default function NuOnboarding(props: { forceOpen?: boolean }) {
   }
 
   return (
-    <div style={{ border: '2px solid #1E3A5F', borderRadius: 12, padding: '20px 16px', background: '#F4F7FA', marginTop: 20 }}>
+    <div style={{ border: '2px solid var(--heading)', borderRadius: 12, padding: '20px 16px', background: 'var(--card)', marginTop: 20 }}>
       <h2 style={{ marginTop: 0, fontSize: 19 }}>
         {t({ bn: 'জাতীয় বিশ্ববিদ্যালয় ভর্তি প্রস্তুতি — কীভাবে শুরু করবেন?', en: 'National University admission preparation — how do you want to start?' })}
       </h2>
-      <p style={{ color: '#444', lineHeight: 1.7 }}>
+      <p style={{ color: 'var(--ink-soft)', lineHeight: 1.7 }}>
         {t({
           bn: 'আপনার প্রস্তুতির ধরন বেছে নিন। মোড যেকোনো সময় বদলানো যায় — অগ্রগতি মুছে যাবে না।',
           en: 'Choose how you want to prepare. You can switch mode any time — your progress is kept.',
@@ -94,10 +94,10 @@ export default function NuOnboarding(props: { forceOpen?: boolean }) {
       <div style={{ display: 'grid', gap: 12, gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))' }}>
         {(['beginner', 'advanced'] as const).map((m) => (
           <button key={m} type="button" style={cardStyle} onClick={() => void pick(m)} disabled={busy}>
-            <strong style={{ display: 'block', fontSize: 16, color: '#1E3A5F', marginBottom: 6 }}>
+            <strong style={{ display: 'block', fontSize: 16, color: 'var(--heading)', marginBottom: 6 }}>
               {t({ bn: NU_MODE_COPY[m].bn, en: NU_MODE_COPY[m].en })}
             </strong>
-            <span style={{ color: '#444', fontSize: 14, lineHeight: 1.7 }}>
+            <span style={{ color: 'var(--ink-soft)', fontSize: 14, lineHeight: 1.7 }}>
               {t({ bn: NU_MODE_COPY[m].descBn, en: NU_MODE_COPY[m].descEn })}
             </span>
           </button>
@@ -112,8 +112,8 @@ export default function NuOnboarding(props: { forceOpen?: boolean }) {
             padding: '10px 18px',
             minHeight: 44,
             borderRadius: 6,
-            border: '1px solid #aaa',
-            background: '#fff',
+            border: '1px solid var(--line-strong)',
+            background: 'var(--card)',
             cursor: 'pointer',
             fontSize: 15,
             fontFamily: "'Poppins','Hind Siliguri',system-ui,sans-serif",

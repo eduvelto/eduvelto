@@ -57,11 +57,11 @@ export default function BookPage() {
               {book.marks ? <Chip tone="gold">{t({ bn: `নম্বর ${book.marks}`, en: `Marks ${book.marks}` })}</Chip> : null}
               {book.bilingual ? <Chip tone="gold">{t({ bn: 'বাংলা উত্তরসহ', en: 'With Bangla answers' })}</Chip> : null}
             </div>
-            <p style={{ margin: '12px 0 0', color: '#5A6478' }}>
+            <p style={{ margin: '12px 0 0', color: 'var(--muted)' }}>
               {t({ bn: `${book.chapterCount}টি পাঠ · ${book.questionCount}টি প্রশ্ন`, en: `${book.chapterCount} lessons · ${book.questionCount} questions` })}
             </p>
           </Card>
-          <h2 style={{ fontFamily: "'Poppins','Hind Siliguri',system-ui,sans-serif", fontSize: 20, color: '#0A1F44', margin: '0 0 12px' }}>
+          <h2 style={{ fontFamily: "'Poppins','Hind Siliguri',system-ui,sans-serif", fontSize: 20, color: 'var(--heading)', margin: '0 0 12px' }}>
             {t({ bn: 'পাঠসমূহ', en: 'Lessons' })} ({chapters?.length ?? 0})
           </h2>
           {chapters === null ? <SkeletonCards count={3} /> : null}
@@ -71,11 +71,11 @@ export default function BookPage() {
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: 12 }}>
             {(chapters ?? []).map((c: Chapter, i: number) => (
               <Card key={c.id} hover>
-                <Link to={`/books/${book.id}/chapters/${c.id}`} style={{ fontWeight: 700, fontSize: 16, color: '#0A1F44', lineHeight: 1.5 }}>
-                  <span style={{ color: '#1E7CE8', marginRight: 6 }}>{i + 1}.</span>
+                <Link to={`/books/${book.id}/chapters/${c.id}`} style={{ fontWeight: 700, fontSize: 16, color: 'var(--heading)', lineHeight: 1.5 }}>
+                  <span style={{ color: 'var(--link)', marginRight: 6 }}>{i + 1}.</span>
                   {c.title}
                 </Link>
-                <p style={{ margin: '8px 0 0', color: '#5A6478', fontSize: 14 }}>{t({ bn: `${c.questionCount}টি প্রশ্ন`, en: `${c.questionCount} questions` })}</p>
+                <p style={{ margin: '8px 0 0', color: 'var(--muted)', fontSize: 14 }}>{t({ bn: `${c.questionCount}টি প্রশ্ন`, en: `${c.questionCount} questions` })}</p>
               </Card>
             ))}
           </div>

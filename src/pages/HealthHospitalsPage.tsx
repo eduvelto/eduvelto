@@ -72,8 +72,8 @@ export default function HealthHospitalsPage() {
             <strong>{t(f.kind === 'pharmacy' ? h.pharmacy : h.hospital)}:</strong>{' '}
             {lang === 'bn' ? f.areaBn : f.areaEn}
           </p>
-          <p style={{ margin: '0 0 6px', color: '#555' }}>{lang === 'bn' ? f.addressBn : f.addressEn}</p>
-          <p style={{ margin: '0 0 6px', fontSize: 14, color: '#555' }}>
+          <p style={{ margin: '0 0 6px', color: 'var(--ink-soft)' }}>{lang === 'bn' ? f.addressBn : f.addressEn}</p>
+          <p style={{ margin: '0 0 6px', fontSize: 14, color: 'var(--ink-soft)' }}>
             {t(h.source)}: {f.source}
           </p>
           <AccuracyNote />

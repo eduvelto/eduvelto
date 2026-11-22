@@ -94,7 +94,7 @@ export default function SubjectPage() {
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: 12 }}>
         {shown.map((r) => (
           <Card key={r.id} hover>
-            <Link to={`/library/${r.bookId}`} style={{ fontWeight: 700, fontSize: 16, color: '#0A1F44', lineHeight: 1.5 }}>
+            <Link to={`/library/${r.bookId}`} style={{ fontWeight: 700, fontSize: 16, color: 'var(--heading)', lineHeight: 1.5 }}>
               {r.paperTitle}
             </Link>
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, marginTop: 10 }}>
@@ -109,7 +109,7 @@ export default function SubjectPage() {
           type="button"
           onClick={loadMore}
           disabled={loadingMore}
-          style={{ padding: '10px 16px', minHeight: 44, borderRadius: 6, border: '1px solid #0A1F44', background: '#fff', color: '#0A1F44', cursor: 'pointer', marginTop: 8 }}
+          style={{ padding: '10px 16px', minHeight: 44, borderRadius: 6, border: '1px solid var(--heading)', background: 'var(--card)', color: 'var(--heading)', cursor: 'pointer', marginTop: 8 }}
         >
           {loadingMore ? t({ bn: 'লোড হচ্ছে…', en: 'Loading…' }) : t({ bn: 'আরও দেখুন', en: 'Load more' })}
         </button>

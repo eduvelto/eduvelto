@@ -116,13 +116,13 @@ function VerificationCard(props: {
           tone={row.status === 'verified' ? 'active' : row.status === 'pending' ? 'ready' : 'muted'}
         />
       </div>
-      <p style={{ margin: '6px 0', color: '#68747B', fontSize: 14 }}>
+      <p style={{ margin: '6px 0', color: 'var(--muted)', fontSize: 14 }}>
         {row.institution} · {t({ bn: 'আবেদন', en: 'Applied' })}: {formatTime(row.createdAt, lang)}
         {row.checkedBy ? ` · ${t({ bn: 'সিদ্ধান্তকারী', en: 'Decided by' })}: ${row.checkedBy}` : ''}
         {row.reason ? ` · ${t({ bn: 'কারণ', en: 'Reason' })}: ${row.reason}` : ''}
       </p>
       {row.extra && Object.keys(row.extra).length > 0 ? (
-        <p style={{ margin: '0 0 8px', color: '#68747B', fontSize: 14 }}>
+        <p style={{ margin: '0 0 8px', color: 'var(--muted)', fontSize: 14 }}>
           {Object.entries(row.extra)
             .filter(([, v]) => typeof v === 'string' || typeof v === 'number')
             .map(([k, v]) => `${k}: ${String(v)}`)
@@ -189,7 +189,7 @@ function VerificationCard(props: {
               variant="outline"
               disabled={busy || !reasonOk}
               onClick={() => setConfirm('rejected')}
-              style={{ color: '#B00020', borderColor: '#B00020' }}
+              style={{ color: 'var(--error)', borderColor: 'var(--error)' }}
             >
               {t({ bn: 'বাতিল করুন', en: 'Reject' })}
             </Button>
@@ -222,7 +222,7 @@ function VerificationCard(props: {
                 variant="outline"
                 disabled={busy || !reasonOk}
                 onClick={() => setConfirm('revoked')}
-                style={{ color: '#B00020', borderColor: '#B00020' }}
+                style={{ color: 'var(--error)', borderColor: 'var(--error)' }}
               >
                 {t({ bn: 'যাচাই বাতিল করুন', en: 'Revoke verification' })}
               </Button>

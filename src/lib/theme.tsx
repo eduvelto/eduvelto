@@ -51,7 +51,7 @@ export function resolveInitialTheme(stored: Theme | null, prefersDark: boolean):
 /** Pure helper (unit-tested): apply a theme to a document-like object. */
 export function applyThemeToDocument(
   theme: Theme,
-  doc: { documentElement: { dataset: Record<string, string> }; querySelector: (sel: string) => { setAttribute: (k: string, v: string) => void } | null },
+  doc: { documentElement: { dataset: Record<string, string | undefined> }; querySelector: (sel: string) => { setAttribute: (k: string, v: string) => void } | null },
 ): void {
   doc.documentElement.dataset.theme = theme;
   const meta = doc.querySelector('meta[name="theme-color"]');

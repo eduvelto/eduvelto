@@ -83,13 +83,13 @@ export default function AdminNuStructurePage() {
 
   return (
     <PageShell titleBn="NU কাঠামো — সীড ডকুমেন্ট" titleEn="NU structure — seed documents" wide>
-      <p style={{ color: '#444', lineHeight: 1.8 }}>
+      <p style={{ color: 'var(--ink-soft)', lineHeight: 1.8 }}>
         {t({
           bn: 'জাতীয় বিশ্ববিদ্যালয়ের প্রতিষ্ঠান, শাখা, পরীক্ষার কনফিগ ও বিজ্ঞপ্তি-কনফিগ — Firestore ডকুমেন্ট হিসেবে। শুধু Owner/Admin প্রয়োগ করতে পারেন। প্রয়োগের আগে সব ডকুমেন্ট যাচাই করা হয়; প্রয়োগের পরে প্রতিটি ডকুমেন্ট পড়ে সীডের সঙ্গে মিলিয়ে দেখা হয়; প্রতিটি প্রয়োগ অডিট লগে লেখা হয়।',
           en: 'National University institution, groups, exam configs and circular config — as Firestore documents. Only Owner/Admin can apply them. Every document is validated before applying; after applying, each document is read back and compared to the seed; every application is written to the audit log.',
         })}
       </p>
-      <p style={{ color: '#57616A', fontSize: 14, lineHeight: 1.8 }}>
+      <p style={{ color: 'var(--muted-ivory)', fontSize: 14, lineHeight: 1.8 }}>
         {t({
           bn: 'সতর্কতা: সীড প্রয়োগ করলেই হাবের পড়ার পথ Firestore-এ বদলে যায় না — হাব এখনো যাচাইকৃত তথ্য কোড থেকে দেখায়। পড়ার পথ বদলানো পরের ধাপের আলাদা সিদ্ধান্ত।',
           en: 'Note: applying the seed does not switch the hub’s read path to Firestore — the hub still shows the verified information from code. Switching the read path is a separate later decision.',
@@ -110,7 +110,7 @@ export default function AdminNuStructurePage() {
         </h3>
         <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 14 }}>
           <thead>
-            <tr style={{ textAlign: 'left', borderBottom: '2px solid #D9DEE2' }}>
+            <tr style={{ textAlign: 'left', borderBottom: '2px solid var(--line)' }}>
               <th style={{ padding: '8px 4px' }}>{t({ bn: 'কালেকশন', en: 'Collection' })}</th>
               <th style={{ padding: '8px 4px' }}>{t({ bn: 'ডকুমেন্ট', en: 'Document' })}</th>
               <th style={{ padding: '8px 4px' }}>{t({ bn: 'স্থিতি', en: 'Status' })}</th>
@@ -120,7 +120,7 @@ export default function AdminNuStructurePage() {
             {seeds.map((s) => {
               const row = rows?.find((r) => r.collection === s.collection && r.docId === s.docId);
               return (
-                <tr key={`${s.collection}/${s.docId}`} style={{ borderBottom: '1px solid #E5E8E5' }}>
+                <tr key={`${s.collection}/${s.docId}`} style={{ borderBottom: '1px solid var(--line)' }}>
                   <td style={{ padding: '8px 4px' }}>{s.collection}</td>
                   <td style={{ padding: '8px 4px', fontWeight: 600 }}>{s.docId}</td>
                   <td style={{ padding: '8px 4px' }}>
@@ -139,7 +139,7 @@ export default function AdminNuStructurePage() {
           <summary style={{ cursor: 'pointer', fontWeight: 600 }}>
             {t({ bn: 'সীডের মান দেখুন (যাচাইকৃত বিজ্ঞপ্তি থেকে)', en: 'See the seed values (from the verified circular)' })}
           </summary>
-          <ul style={{ lineHeight: 1.9, color: '#3A444B', fontSize: 14 }}>
+          <ul style={{ lineHeight: 1.9, color: 'var(--ink-soft)', fontSize: 14 }}>
             <li>{t({ bn: 'পূর্ণ মক: ১০০ MCQ · ৬০ মিনিট · নেগেটিভ মার্কিং নেই · পাস ৩৫ (তুলনার জন্য) · বাংলা ২০ / ইংরেজি ২০ / সাধারণ জ্ঞান ২০ / শাখা ৪০ · শাখা-৪০-এর বিভাজন: null', en: 'Full mock: 100 MCQ · 60 minutes · no negative marking · pass 35 (for comparison) · Bangla 20 / English 20 / General Knowledge 20 / Group 40 · group-40 split: null' })}</li>
             <li>{t({ bn: 'দৈনিক মক (খসড়া): ২৫ MCQ · ২৫ মিনিট · নেগেটিভ মার্কিং নেই', en: 'Daily mock (draft): 25 MCQ · 25 minutes · no negative marking' })}</li>
             <li>{t({ bn: 'বিজ্ঞপ্তি ২০২৫-২৬: স্থিতি historical (আবেদন শেষ ৩১ ডিসেম্বর ২০২৫) · পরীক্ষার তারিখ: null', en: 'Circular 2025-26: status historical (application ended 31 Dec 2025) · exam date: null' })}</li>
@@ -163,12 +163,12 @@ export default function AdminNuStructurePage() {
           type="button"
           onClick={() => void load()}
           disabled={busy || loading}
-          style={{ padding: '12px 22px', minHeight: 48, borderRadius: 6, border: '1px solid #1E3A5F', background: '#fff', color: '#1E3A5F', fontWeight: 700, cursor: 'pointer', fontSize: 15 }}
+          style={{ padding: '12px 22px', minHeight: 48, borderRadius: 6, border: '1px solid var(--heading)', background: 'var(--card)', color: 'var(--heading)', fontWeight: 700, cursor: 'pointer', fontSize: 15 }}
         >
           {t({ bn: 'স্থিতি আবার পড়ুন', en: 'Re-read status' })}
         </button>
       </p>
-      <p style={{ color: '#57616A', fontSize: 14, lineHeight: 1.8 }}>
+      <p style={{ color: 'var(--muted-ivory)', fontSize: 14, lineHeight: 1.8 }}>
         {t({
           bn: 'প্রয়োগের আগে সব ডকুমেন্ট যাচাই করা হয় — একটিও ভুল হলে কিছুই লেখা হয় না। লেখা ডকুমেন্ট কখনো মোছা যায় না (নিয়মে delete নিষিদ্ধ) — ভুল হলে নতুন সংস্করণে সংশোধন করতে হয়।',
           en: 'All documents are validated before applying — if even one is wrong, nothing is written. Written documents can never be deleted (delete is forbidden in the rules) — a mistake is fixed in a new version.',

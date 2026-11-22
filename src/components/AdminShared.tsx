@@ -24,9 +24,9 @@ export function requireDb(): Firestore {
   if (!db) throw new Error('not-configured');
   return db;
 }
-export const PILL_ACTIVE = { background: '#E3F2F0', color: '#12766E' };
-export const PILL_READY = { background: '#FBF3E2', color: '#8A6100' };
-export const PILL_MUTED = { background: '#F1F1F1', color: '#444' };
+export const PILL_ACTIVE = { background: 'var(--teal-soft)', color: 'var(--teal-text)' };
+export const PILL_READY = { background: 'var(--amber-soft)', color: 'var(--amber-deep)' };
+export const PILL_MUTED = { background: 'var(--hover)', color: 'var(--ink-soft)' };
 
 export function StatusPill(props: { label: string; tone: 'active' | 'ready' | 'muted' }) {
   const style =
@@ -59,7 +59,7 @@ export function ErrorBox(props: { message: string }) {
 export function LoadingBox(props: { label?: string }) {
   const { t } = useLanguage();
   return (
-    <p aria-live="polite" style={{ color: '#57616A' }}>
+    <p aria-live="polite" style={{ color: 'var(--muted-ivory)' }}>
       {props.label ?? t({ bn: 'লোড হচ্ছে…', en: 'Loading…' })}
     </p>
   );
@@ -71,15 +71,15 @@ export function EmptyAdminBox(props: { bn: string; en: string; nextBn?: string; 
   return (
     <div
       style={{
-        border: '1px solid #E5E8E5',
+        border: '1px solid var(--line)',
         borderRadius: 12,
         padding: '20px 16px',
-        background: '#E3F2F0',
+        background: 'var(--teal-soft)',
       }}
     >
-      <p style={{ margin: 0, fontWeight: 600, color: '#142B3B' }}>{lang === 'bn' ? props.bn : props.en}</p>
+      <p style={{ margin: 0, fontWeight: 600, color: 'var(--heading)' }}>{lang === 'bn' ? props.bn : props.en}</p>
       {next ? (
-        <p style={{ margin: '8px 0 0', color: '#68747B' }}>
+        <p style={{ margin: '8px 0 0', color: 'var(--muted)' }}>
           {t({ bn: 'পরবর্তী পদক্ষেপ: ', en: 'Next step: ' })}
           {next}
         </p>
@@ -96,7 +96,7 @@ export function AdminBackLink() {
       style={{
         position: 'sticky',
         top: 0,
-        background: '#F4F1E9',
+        background: 'var(--bg)',
         padding: '8px 0',
         margin: '0 0 8px',
         zIndex: 1,
@@ -164,7 +164,7 @@ export function ConfirmDialog(props: ConfirmDialogProps) {
     >
       <div
         style={{
-          background: '#fff',
+          background: 'var(--card)',
           borderRadius: 12,
           padding: '20px 18px',
           maxWidth: 480,
@@ -173,7 +173,7 @@ export function ConfirmDialog(props: ConfirmDialogProps) {
         }}
         onClick={(e) => e.stopPropagation()}
       >
-        <h2 style={{ margin: '0 0 8px', fontSize: 20, color: NAVY }}>{title}</h2>
+        <h2 style={{ margin: '0 0 8px', fontSize: 20, color: 'var(--heading)' }}>{title}</h2>
         <p style={{ margin: '0 0 16px' }}>{body}</p>
         <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
           <button
@@ -201,9 +201,9 @@ export function ConfirmDialog(props: ConfirmDialogProps) {
               minHeight: 48,
               fontSize: 16,
               borderRadius: 8,
-              border: `1px solid ${NAVY}`,
-              background: '#fff',
-              color: NAVY,
+              border: `1px solid var(--heading)`,
+              background: 'var(--card)',
+              color: 'var(--heading)',
               cursor: 'pointer',
             }}
           >

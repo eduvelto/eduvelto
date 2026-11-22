@@ -37,7 +37,7 @@ export default function JobModeSwitch() {
         aria-label={t({ bn: 'প্রস্তুতির মোড', en: 'Preparation mode' })}
         style={{
           display: 'inline-flex',
-          border: '1px solid #12766E',
+          border: '1px solid var(--teal-text)',
           borderRadius: 8,
           overflow: 'hidden',
         }}
@@ -54,8 +54,8 @@ export default function JobModeSwitch() {
                 padding: '10px 18px',
                 minHeight: 44,
                 border: 'none',
-                background: active ? '#12766E' : '#fff',
-                color: active ? '#fff' : '#12766E',
+                background: active ? '#12766E' : 'var(--card)',
+                color: active ? '#fff' : 'var(--teal-text)',
                 fontWeight: active ? 700 : 500,
                 fontSize: 15,
                 cursor: 'pointer',
@@ -67,10 +67,10 @@ export default function JobModeSwitch() {
           );
         })}
       </div>
-      <p style={{ margin: '8px 0 0', color: '#57616A', fontSize: 14, lineHeight: 1.7 }}>
+      <p style={{ margin: '8px 0 0', color: 'var(--muted-ivory)', fontSize: 14, lineHeight: 1.7 }}>
         {t({ bn: MODE_COPY[mode].descBn, en: MODE_COPY[mode].descEn })}
       </p>
-      <p style={{ margin: '4px 0 0', color: '#68747B', fontSize: 13 }}>
+      <p style={{ margin: '4px 0 0', color: 'var(--muted)', fontSize: 13 }}>
         {t({ bn: 'মোড যেকোনো সময় বদলানো যায়।', en: 'You can switch mode any time.' })}
       </p>
     </div>

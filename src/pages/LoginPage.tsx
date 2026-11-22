@@ -16,7 +16,7 @@ const inputStyle: React.CSSProperties = {
   padding: '10px 12px',
   margin: '6px 0 14px',
   fontSize: 16,
-  border: '1px solid #aaa',
+  border: '1px solid var(--line-strong)',
   borderRadius: 6,
 };
 
@@ -136,9 +136,9 @@ export default function LoginPage() {
             required
           />
         </label>
-        {shownError ? <p style={{ color: '#b00020' }}>{shownError}</p> : null}
+        {shownError ? <p style={{ color: 'var(--error)' }}>{shownError}</p> : null}
         {shownError && errorCode ? (
-          <p style={{ color: '#b00020', fontSize: 13, marginTop: -8 }}>ত্রুটি কোড: {errorCode}</p>
+          <p style={{ color: 'var(--error)', fontSize: 13, marginTop: -8 }}>ত্রুটি কোড: {errorCode}</p>
         ) : null}
         <button style={buttonStyle} type="submit" disabled={busy || loading}>
           {busy ? <T bn={strings.common.loading.bn} en={strings.common.loading.en} /> : <T bn={s.loginButton.bn} en={s.loginButton.en} />}
@@ -146,7 +146,7 @@ export default function LoginPage() {
       </form>
       <p style={{ margin: '16px 0' }}>{t({ bn: '— অথবা —', en: '— or —' })}</p>
       <button
-        style={{ ...buttonStyle, background: '#fff', color: '#111', border: '1px solid #aaa' }}
+        style={{ ...buttonStyle, background: 'var(--card)', color: 'var(--ink)', border: '1px solid var(--line-strong)' }}
         type="button"
         onClick={() => void onGoogle()}
         disabled={busy || loading}
@@ -163,15 +163,15 @@ export default function LoginPage() {
             setShowReset((v) => !v);
             setResetSent(false);
           }}
-          style={{ background: 'none', border: 'none', padding: 0, color: '#0A1F44', cursor: 'pointer', fontSize: 16, textDecoration: 'underline' }}
+          style={{ background: 'none', border: 'none', padding: 0, color: 'var(--heading)', cursor: 'pointer', fontSize: 16, textDecoration: 'underline' }}
         >
           {t(s.forgotPassword)}
         </button>
       </p>
       {showReset ? (
-        <form onSubmit={onReset} style={{ border: '1px solid #ddd', borderRadius: 8, padding: 16, background: '#fafafa' }}>
+        <form onSubmit={onReset} style={{ border: '1px solid var(--line-strong)', borderRadius: 8, padding: 16, background: 'var(--card)' }}>
           {resetSent ? (
-            <p style={{ color: '#0A1F44' }}>{t(s.resetSent)}</p>
+            <p style={{ color: 'var(--heading)' }}>{t(s.resetSent)}</p>
           ) : (
             <>
               <p style={{ marginTop: 0 }}>{t({ bn: 'রিসেট লিংক পেতে আপনার ইমেইল দিন।', en: 'Enter your email to receive a reset link.' })}</p>

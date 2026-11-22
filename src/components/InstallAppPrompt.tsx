@@ -103,9 +103,9 @@ export default function InstallAppPrompt() {
       role="region"
       aria-label={t({ bn: 'অ্যাপ ইনস্টল', en: 'Install app' })}
       style={{
-        background: '#FFF6D6',
+        background: 'var(--soon-bg)',
         borderBottom: '2px solid #D9A441',
-        color: '#142B3B',
+        color: 'var(--heading)',
         padding: '10px 16px',
         display: 'flex',
         flexWrap: 'wrap',

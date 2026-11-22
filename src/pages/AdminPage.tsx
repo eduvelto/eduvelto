@@ -264,10 +264,10 @@ export default function AdminPage() {
                 tone={a.status === 'working' ? 'active' : 'muted'}
               />
               {a.countBn ? (
-                <span style={{ marginLeft: 'auto', color: '#57616A', fontSize: 14 }}>{lang === 'bn' ? a.countBn : a.countEn}</span>
+                <span style={{ marginLeft: 'auto', color: 'var(--muted-ivory)', fontSize: 14 }}>{lang === 'bn' ? a.countBn : a.countEn}</span>
               ) : null}
             </div>
-            <p style={{ margin: '8px 0 12px', color: '#68747B', fontSize: 14 }}>{lang === 'bn' ? a.descBn : a.descEn}</p>
+            <p style={{ margin: '8px 0 12px', color: 'var(--muted)', fontSize: 14 }}>{lang === 'bn' ? a.descBn : a.descEn}</p>
             {a.to ? (
               <LinkButton to={a.to} variant="outline" size="sm">{t({ bn: 'খুলুন', en: 'Open' })} →</LinkButton>
             ) : (
@@ -293,7 +293,7 @@ export default function AdminPage() {
           key={item.id}
           style={{
             marginBottom: 12,
-            border: item.id === 'domain' && days <= 30 ? '2px solid #B00020' : undefined,
+            border: item.id === 'domain' && days <= 30 ? '2px solid var(--error)' : undefined,
           }}
         >
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, alignItems: 'center' }}>
@@ -302,7 +302,7 @@ export default function AdminPage() {
               style={{
                 marginLeft: 'auto',
                 fontSize: 14,
-                color: item.id === 'domain' && days <= 30 ? '#B00020' : '#12766E',
+                color: item.id === 'domain' && days <= 30 ? 'var(--error)' : 'var(--teal-text)',
                 fontWeight: 700,
               }}
             >

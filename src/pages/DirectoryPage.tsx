@@ -322,7 +322,7 @@ export default function DirectoryPage() {
       ) : null}
       {loading && pages.length === 0 && !error ? <SkeletonCards count={4} /> : null}
 
-      <p style={{ color: '#5A6478', margin: '0 0 12px' }}>
+      <p style={{ color: 'var(--muted)', margin: '0 0 12px' }}>
         <T
           bn="প্রতিটি শিক্ষা ধারা, প্রোগ্রাম ও শ্রেণির বই এক জায়গায়। ধাপে ধাপে বেছে নাও — তারপর বইয়ের নাম, বিষয় বা কোড লিখে খুঁজো। বইয়ের বিস্তারিত দেখতে নামের উপর চাপ দাও।"
           en="Every stream, program and class in one place. Pick step by step — then search by book title, subject or code. Tap a title for the book's details."
@@ -447,7 +447,7 @@ export default function DirectoryPage() {
 
       {searching ? (
         <>
-          <p style={{ color: '#555', margin: '0 0 12px' }}>
+          <p style={{ color: 'var(--ink-soft)', margin: '0 0 12px' }}>
             <T
               bn={`খুঁজছি: “${query.trim()}” — দেখাচ্ছি ${searchShownFrom}–${searchShownTo}`}
               en={`Searching: “${query.trim()}” — showing ${searchShownFrom}–${searchShownTo}`}
@@ -464,7 +464,7 @@ export default function DirectoryPage() {
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: 12 }}>
             {searchPageRows.map((r) => (
               <Card key={r.id} hover>
-                <Link to={`/library/${r.bookId}`} style={{ fontWeight: 700, fontSize: 16, color: '#0A1F44', lineHeight: 1.5 }}>
+                <Link to={`/library/${r.bookId}`} style={{ fontWeight: 700, fontSize: 16, color: 'var(--heading)', lineHeight: 1.5 }}>
                   {r.paperTitle}
                 </Link>
                 <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, marginTop: 10 }}>
@@ -474,7 +474,7 @@ export default function DirectoryPage() {
                     <T bn={`কোড ${r.paperCode}`} en={`Code ${r.paperCode}`} />
                   </Chip>
                 </div>
-                <p style={{ margin: '10px 0 0', color: '#5A6478', fontSize: 14 }}>
+                <p style={{ margin: '10px 0 0', color: 'var(--muted)', fontSize: 14 }}>
                   {r.type} · {r.program}
                 </p>
               </Card>
@@ -503,14 +503,14 @@ export default function DirectoryPage() {
             />
           ) : null}
           {pages.length > 0 ? (
-            <p style={{ color: '#555', margin: '0 0 12px' }}>
+            <p style={{ color: 'var(--ink-soft)', margin: '0 0 12px' }}>
               <T bn={`দেখাচ্ছি ${shownFrom}–${shownTo}`} en={`Showing ${shownFrom}–${shownTo}`} />
             </p>
           ) : null}
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: 12 }}>
             {pageRows.map((r) => (
               <Card key={r.id} hover>
-                <Link to={`/library/${r.bookId}`} style={{ fontWeight: 700, fontSize: 16, color: '#0A1F44', lineHeight: 1.5 }}>
+                <Link to={`/library/${r.bookId}`} style={{ fontWeight: 700, fontSize: 16, color: 'var(--heading)', lineHeight: 1.5 }}>
                   {r.paperTitle}
                 </Link>
                 <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, marginTop: 10 }}>
@@ -520,7 +520,7 @@ export default function DirectoryPage() {
                     <T bn={`কোড ${r.paperCode}`} en={`Code ${r.paperCode}`} />
                   </Chip>
                 </div>
-                <p style={{ margin: '10px 0 0', color: '#5A6478', fontSize: 14 }}>
+                <p style={{ margin: '10px 0 0', color: 'var(--muted)', fontSize: 14 }}>
                   {r.type} · {r.program}
                 </p>
               </Card>
