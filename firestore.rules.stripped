@@ -1,0 +1,3036 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function signedIn() { return request.auth != null; }
+    function uid() { return request.auth.uid; }
+    function isOwner(id) { return signedIn() && uid() == id; }
+    function callerRole() {
+      return get(/databases/$(database)/documents/users/$(uid())).data.get('role', '');
+    }
+    function callerActive() {
+      return get(/databases/$(database)/documents/users/$(uid())).data.get('isActive', true) != false;
+    }
+    function isAdmin() {
+      return signedIn() && callerActive() && callerRole() in ['admin', 'owner'];
+    }
+    function isOwnerRole() {
+      return signedIn() && callerRole() == 'owner';
+    }
+    function isModerator() {
+      return signedIn() && callerActive() && (callerRole() in ['moderator', 'admin', 'owner']);
+    }
+    function isTeacher() {
+      return signedIn() && callerActive() && (callerRole() in ['teacher', 'admin', 'moderator', 'owner']);
+    }
+    function isVerifiedTeacher() {
+      return signedIn() && callerActive() && callerRole() == 'teacher'
+        && get(/databases/$(database)/documents/users/$(uid())).data.get('verificationStatus', '') == 'verified';
+    }
+    function callerVerificationStatus() {
+      return get(/databases/$(database)/documents/users/$(uid())).data.get('verificationStatus', '');
+    }
+    function isVerifiedJobBankAuthor() {
+      return signedIn()
+        && isVerifiedJobBankAuthorFor(get(/databases/$(database)/documents/users/$(uid())).data);
+    }
+    function isVerifiedJobBankAuthorFor(d) {
+      return d.get('isActive', true) != false
+        && (d.get('role', '') in ['admin', 'moderator', 'owner']
+            || (d.get('role', '') == 'teacher' && d.get('verificationStatus', '') == 'verified'));
+    }
+    function isLinkedGuardian(studentId) {
+      return signedIn() && callerActive()
+        && exists(/databases/$(database)/documents/parentLinks/$(uid() + '_' + studentId))
+        && get(/databases/$(database)/documents/parentLinks/$(uid() + '_' + studentId)).data.status == 'verified';
+    }
+    function isStr(v, max) { return v is string && v.size() > 0 && v.size() <= max; }
+    function isOptStr(v, max) { return v == null || (v is string && v.size() <= max); }
+    function changedKeys() { return request.resource.data.diff(resource.data).affectedKeys(); }
+    function onlyKeys(keys) { return request.resource.data.keys().hasOnly(keys); }
+    function reqBundleExists() { return exists(/databases/$(database)/documents/jobQuestionBundles/$(request.resource.data.get('bundleId', ''))); }
+    function isOptTs(d, f) { return d.get(f, null) == null || d.get(f, null) is timestamp; }
+    function isOptStrNoMax(d, f) { return d.get(f, null) == null || d.get(f, null) is string; }
+    function sameCreator() { return request.resource.data.createdBy == resource.data.createdBy; }
+    function adminOrOwnTeacher() { return isAdmin() || (isVerifiedTeacher() && resource.data.createdBy == uid()); }
+    function ownCreate() { return signedIn() && callerActive() && request.resource.data.userId == uid(); }
+    function ownExisting() { return signedIn() && callerActive() && resource.data.userId == uid(); }
+    function reviewKeys() { return ['status', 'reviewStatus', 'verifiedBy', 'verifiedAt', 'updatedAt']; }
+    function isDraftStatus(s) { return s in ['Not Started', 'In Progress', 'Under Review']; }
+    function isPublished(d) { return d.get('reviewStatus', '') == 'Published'; }
+    function jobCategoryIds() {
+      return ['bcs-bpsc', 'govt', 'bank', 'primary-teacher',
+              'ntrca-teacher', 'defence-police', 'autonomous',
+              'ngo-private', 'it-professional', 'other-competitive'];
+    }
+    function jobExamSlugs() {
+      return ['bcs', 'bank', 'primary-teacher', 'ntrca', 'dgfood',
+              'bpsc-non-cadre', 'cag', 'bfsa', 'others', 'ministries',
+              'defence', 'autonomous', 'private-ngo', 'it-professional'];
+    }
+    function canonicalJobSubjectIds() {
+      return ['bcs__bangla', 'bcs__english', 'bcs__bangladesh-affairs',
+              'bcs__international-affairs', 'bcs__geography',
+              'bcs__general-science', 'bcs__computer-ict',
+              'bcs__mathematical-reasoning', 'bcs__mental-ability',
+              'bcs__ethics',
+              'bank__bangla', 'bank__english', 'bank__math',
+              'bank__general-knowledge', 'bank__computer',
+              'primary-teacher__bangla', 'primary-teacher__english',
+              'primary-teacher__math-science',
+              'primary-teacher__general-knowledge',
+              'ntrca__bangla', 'ntrca__english', 'ntrca__math',
+              'ntrca__general-knowledge'];
+    }
+    function isJobExamReviewState(s) {
+      return s in ['Not Started', 'In Progress', 'Under Review', 'Published'];
+    }
+    function jobExamStatesConsistent(d) {
+      return (d.get('status', '') == 'published') == (d.get('reviewStatus', '') == 'Published');
+    }
+    function jobPatternStatuses() {
+      return ['verified', 'last_verified', 'not_verified', 'not_applicable', 'scope_pending'];
+    }
+    function validJobRulesConfig(c) {
+      return c == null || (c is map
+        && (c.get('questionCount', null) == null
+            || (c.get('questionCount', null) is int && c.get('questionCount', null) >= 1))
+        && (c.get('timeMinutes', null) == null
+            || (c.get('timeMinutes', null) is int && c.get('timeMinutes', null) >= 1))
+        && (c.get('marksPerQuestion', null) == null
+            || (c.get('marksPerQuestion', null) is int && c.get('marksPerQuestion', null) >= 1))
+        && (c.get('negativeMarking', null) == null
+            || (c.get('negativeMarking', null) is number && c.get('negativeMarking', null) >= 0
+                && (c.get('marksPerQuestion', null) == null
+                    || c.get('negativeMarking', null) < c.get('marksPerQuestion', null))))
+        && (c.get('provisionalNegativeMarking', null) == null
+            || (c.get('provisionalNegativeMarking', null) is number
+                && c.get('provisionalNegativeMarking', null) >= 0))
+        && (c.get('negativeMarkingVerified', null) == null
+            || c.get('negativeMarkingVerified', null) is bool)
+        && (c.get('negativeMarkingVerified', null) != false
+            || c.get('negativeMarking', null) == null)
+        && (c.get('passMark', null) == null
+            || (c.get('passMark', null) is int && c.get('passMark', null) >= 0))
+        && (c.get('passPercent', null) == null
+            || (c.get('passPercent', null) is int && c.get('passPercent', null) >= 0
+                && c.get('passPercent', null) <= 100))
+        && (c.get('subjects', null) == null || c.get('subjects', null) is list)
+        && (c.get('patternLabel', null) == null
+            || c.get('patternLabel', null) in ['verified', 'last-verified-18th', 'circular-based'])
+        && (c.get('patternStatus', null) == null
+            || c.get('patternStatus', null) in jobPatternStatuses())
+        && (c.get('patternStatus', null) != 'verified'
+            || c.get('negativeMarkingVerified', null) != false)
+        && (c.get('applicableCycle', null) == null || c.get('applicableCycle', null) is string)
+        && (c.get('patternSource', null) == null || c.get('patternSource', null) is string)
+        && (c.get('patternVerifiedAt', null) == null || c.get('patternVerifiedAt', null) is timestamp));
+    }
+    function lastHistoryEntry(hist) {
+      return hist[hist.size() - 1];
+    }
+    function validJobRulesConfigHistoryChange(oldDoc, newDoc) {
+      return newDoc.get('rulesConfigHistory', null) is list
+        && ((newDoc.get('rulesConfigHistory', null) == oldDoc.get('rulesConfigHistory', null)
+              && newDoc.get('rulesConfig', null) == oldDoc.get('rulesConfig', null))
+            || (newDoc.get('rulesConfigHistory', null).size()
+                  == oldDoc.get('rulesConfigHistory', []).size() + 1
+                && newDoc.get('rulesConfigHistory', null).toSet()
+                     .hasAll(oldDoc.get('rulesConfigHistory', []).toSet())
+                && lastHistoryEntry(newDoc.get('rulesConfigHistory', null)) is map
+                && lastHistoryEntry(newDoc.get('rulesConfigHistory', null))
+                     .get('changedAt', null) is timestamp
+                && lastHistoryEntry(newDoc.get('rulesConfigHistory', null))
+                     .get('changedBy', null) == uid()
+                && lastHistoryEntry(newDoc.get('rulesConfigHistory', null))
+                     .get('reason', null) is string
+                && lastHistoryEntry(newDoc.get('rulesConfigHistory', null))
+                     .get('before', null) == oldDoc.get('rulesConfig', null)
+                && lastHistoryEntry(newDoc.get('rulesConfigHistory', null))
+                     .get('after', null) == newDoc.get('rulesConfig', null)
+                && (lastHistoryEntry(newDoc.get('rulesConfigHistory', null))
+                     .get('sourceCircular', null) == null
+                    || lastHistoryEntry(newDoc.get('rulesConfigHistory', null))
+                     .get('sourceCircular', null) is string)));
+    }
+    function isValidNuSubject(data) {
+      return data.slug is string && data.slug.size() > 0
+        && data.nameBn is string && data.nameBn.size() > 0
+        && data.syllabusSource is string && data.syllabusSource.size() > 0
+        && data.status in ['draft', 'published']
+        && data.circularVersion is string && data.circularVersion.size() > 0
+        && data.createdBy is string && data.createdBy.size() > 0
+        && data.groupIds is list
+        && data.groupIds.size() >= 1 && data.groupIds.size() <= 3
+        && data.groupIds.hasOnly(['humanities', 'science', 'business'])
+        && data.marks is int
+        && data.isGroupBlock is bool
+        && !('order' in data)
+        && ((data.isGroupBlock == true && data.marks == 40
+            && data.slug in ['group-humanities', 'group-science', 'group-business'])
+          || (data.isGroupBlock == false && data.marks == 20
+            && data.slug in ['bangla', 'english', 'general-knowledge']));
+    }
+    function isValidNuChapter(data) {
+      return data.subjectId is string && data.subjectId.size() > 0
+        && data.slug is string && data.slug.size() > 0
+        && data.nameBn is string && data.nameBn.size() > 0
+        && data.order is int && data.order >= 1
+        && data.syllabusSource is string && data.syllabusSource.size() > 0
+        && data.syllabusVerified is bool
+        && data.status in ['draft', 'published']
+        && data.circularVersion is string && data.circularVersion.size() > 0
+        && data.createdBy is string && data.createdBy.size() > 0;
+    }
+    function isValidNuTopic(data) {
+      return data.subjectId is string && data.subjectId.size() > 0
+        && data.chapterId is string && data.chapterId.size() > 0
+        && data.slug is string && data.slug.size() > 0
+        && data.nameBn is string && data.nameBn.size() > 0
+        && data.detailBn is string && data.detailBn.size() > 0
+        && data.order is int && data.order >= 1
+        && data.syllabusSource is string && data.syllabusSource.size() > 0
+        && data.syllabusVerified is bool
+        && data.status in ['draft', 'published']
+        && data.circularVersion is string && data.circularVersion.size() > 0
+        && data.createdBy is string && data.createdBy.size() > 0;
+    }
+    function isValidNuLesson(data) {
+      return data.subjectId is string && data.subjectId.size() > 0
+        && data.chapterId is string && data.chapterId.size() > 0
+        && data.topicId is string && data.topicId.size() > 0
+        && data.slug is string && data.slug.size() > 0
+        && data.titleBn is string && data.titleBn.size() > 0
+        && data.bodyBn is string && data.bodyBn.size() > 0
+        && data.order is int && data.order >= 1
+        && data.status in ['draft', 'published']
+        && data.circularVersion is string && data.circularVersion.size() > 0
+        && data.createdBy is string && data.createdBy.size() > 0;
+    }
+    function isValidNuQuestion(data) {
+      return data.subjectId in ['bangla', 'english', 'general-knowledge']
+        && data.chapterId is string && data.chapterId.size() > 0
+        && data.topicId is string && data.topicId.size() > 0
+        && data.groupIds is list && data.groupIds.size() >= 1 && data.groupIds.size() <= 3
+        && data.groupIds.toSet().size() == data.groupIds.size()
+        && data.groupIds.toSet().hasOnly(['humanities', 'science', 'business'])
+        && data.questionText is string && data.questionText.size() > 0 && data.questionText.size() <= 2000
+        && data.questionLang in ['bn', 'en']
+        && data.options is list && data.options.size() == 4
+        && data.options[0] is string && data.options[0].size() > 0
+        && data.options[1] is string && data.options[1].size() > 0
+        && data.options[2] is string && data.options[2].size() > 0
+        && data.options[3] is string && data.options[3].size() > 0
+        && data.options.toSet().size() == 4
+        && data.difficulty in ['easy', 'medium', 'hard']
+        && data.explanation is string && data.explanation.size() > 0
+        && data.sourceType in ['original_practice', 'official_previous_year', 'adapted_hsc', 'unverified_source', 'imported_academic']
+        && data.provenance is string && data.provenance.size() > 0
+        && data.circularVersion is string && data.circularVersion.size() > 0
+        && data.version is int && data.version >= 1
+        && data.status in ['draft', 'submitted_for_review', 'under_review', 'approved', 'published', 'rejected', 'changes_requested', 'withdrawn']
+        && !('correctOptionIndex' in data)
+        && (!('examYear' in data) || (data.examYear is int && data.examYear >= 1900 && data.examYear <= 2100))
+        && (data.sourceType == 'official_previous_year' || !('examYear' in data))
+        && (data.sourceType != 'official_previous_year' || ('examYear' in data && data.examYear is int));
+    }
+    function isValidNuQuestionDraftKey(data) {
+      return data.questionId is string && data.questionId.size() > 0
+        && data.version is int && data.version >= 1
+        && data.correctOptionIndex is int
+        && data.correctOptionIndex >= 0 && data.correctOptionIndex <= 3
+        && data.createdBy is string && data.createdBy.size() > 0
+        && data.subjectId in ['bangla', 'english', 'general-knowledge']
+        && data.groupIds is list && data.groupIds.size() >= 1
+        && data.groupIds.toSet().hasOnly(['humanities', 'science', 'business']);
+    }
+    function isValidNuBundle(data) {
+      return data.kind in ['topic', 'mock', 'daily']
+        && data.groupId in ['humanities', 'science', 'business']
+        && data.questions is list && data.questions.size() >= 1
+        && data.questionCount is int && data.questionCount == data.questions.size()
+        && data.questions[0] is map
+        && data.questions[0].questionId is string
+        && data.questions[0].version is int && data.questions[0].version >= 1
+        && data.questions[0].options is list && data.questions[0].options.size() == 4
+        && data.configSnapshot is map
+        && data.configSnapshot.marking is map
+        && data.configSnapshot.marking.correct == 1
+        && data.configSnapshot.marking.incorrect == 0
+        && data.configSnapshot.marking.unanswered == 0
+        && data.configSnapshot.marking.negativeMarking == false
+        && data.configSnapshot.totalQuestions is int
+        && data.configSnapshot.totalQuestions == data.questionCount
+        && data.status in ['draft', 'published', 'withdrawn']
+        && data.version is int && data.version >= 1
+        && data.sourceQuestionIds is list && data.sourceQuestionIds.size() == data.questionCount
+        && ((data.kind == 'mock'
+            && data.configSnapshot.totalQuestions == 100
+            && data.configSnapshot.durationSeconds == 3600
+            && data.configSnapshot.passMark == 35)
+          || (data.kind == 'daily'
+            && data.configSnapshot.totalQuestions >= 20
+            && data.configSnapshot.totalQuestions <= 30
+            && data.configSnapshot.durationSeconds is int
+            && data.configSnapshot.durationSeconds >= 1200
+            && data.configSnapshot.durationSeconds <= 1800)
+          || (data.kind == 'topic'
+            && data.configSnapshot.get('durationSeconds', null) == null
+            && data.configSnapshot.get('passMark', null) == null));
+    }
+    function isNuQuestionTransitionAllowed(from, to) {
+      return (from == 'draft' && to in ['submitted_for_review', 'withdrawn'])
+        || (from == 'submitted_for_review' && to == 'under_review')
+        || (from == 'under_review' && to in ['approved', 'rejected', 'changes_requested'])
+        || (from == 'changes_requested' && to == 'submitted_for_review')
+        || (from == 'approved' && to == 'published')
+        || (from == 'published' && to == 'withdrawn');
+    }
+    function isNuQuestionTransitionActorOk(to) {
+      return (to == 'submitted_for_review' && (isAdmin() || resource.data.createdBy == uid()))
+        || (to == 'under_review' && (isAdmin() || isVerifiedTeacher())
+            && resource.data.createdBy != uid()
+            && request.resource.data.reviewedBy == uid())
+        || (to in ['approved', 'rejected', 'changes_requested'] && (isAdmin() || isVerifiedTeacher())
+            && resource.data.createdBy != uid()
+            && resource.data.reviewedBy == uid()
+            && request.resource.data.reviewedBy == uid())
+        || (to == 'published' && isAdmin())
+        || (to == 'withdrawn' && isAdmin());
+    }
+    function jobContentStatesConsistent(d) {
+      return (d.get('status', '') == 'published') == (d.get('reviewStatus', '') == 'Published');
+    }
+    function isJobContentReviewState(s) {
+      return s in ['Not Started', 'In Progress', 'Under Review', 'Published'];
+    }
+    function jobContentCreateCommon(d) {
+      return d.get('status', '') == 'draft'
+        && d.get('reviewStatus', '') == 'Not Started'
+        && (d.get('authorId', null) == null || d.get('authorId', null) == uid())
+        && d.get('verifiedBy', null) == null
+        && d.get('verifiedAt', null) == null
+        && (d.get('createdBy', null) == null || d.get('createdBy', null) == uid())
+        && !('publishedAt' in d)
+        && !('publishedBy' in d)
+        && (isOptTs(d, 'createdAt'))
+        && (isOptTs(d, 'updatedAt'));
+    }
+    function jobContentSecondEye(oldDoc, newDoc) {
+      return (newDoc.get('verifiedBy', null) == oldDoc.get('verifiedBy', null)
+          || newDoc.get('verifiedBy', null) == null
+          || (newDoc.get('verifiedBy', null) == uid()
+              && uid() != oldDoc.get('authorId', '')))
+        && (newDoc.get('status', '') != 'published'
+            || (newDoc.get('verifiedBy', null) is string
+                && newDoc.get('verifiedBy', null) != oldDoc.get('authorId', '')
+                && newDoc.get('verifiedAt', null) is timestamp));
+    }
+    function jobContentPublishTransition(oldDoc, newDoc) {
+      return oldDoc.get('status', '') != 'published'
+        || newDoc.get('status', '') != 'published'
+        || (newDoc.get('status', '') == oldDoc.get('status', '')
+            && newDoc.get('reviewStatus', '') == oldDoc.get('reviewStatus', '')
+            && newDoc.get('verifiedBy', null) == oldDoc.get('verifiedBy', null)
+            && newDoc.get('verifiedAt', null) == oldDoc.get('verifiedAt', null));
+    }
+    function isJobSubjectId(s) {
+      return s is string && s.matches('^[a-z0-9-]+__[a-z0-9-]+$');
+    }
+    function isJobChapterId(s) {
+      return s is string && s.matches('^[a-z0-9-]+__[a-z0-9-]+__[a-z0-9-]+$');
+    }
+    function isJobTopicId(s) {
+      return s is string && s.matches('^[a-z0-9-]+__[a-z0-9-]+__[a-z0-9-]+__[a-z0-9-]+$');
+    }
+    function validJobSubject(d) {
+      return d.get('examSlug', null) in jobExamSlugs()
+        && d.get('examSlug', null) != 'it-professional'
+        && isStr(d.get('nameBn', null), 100)
+        && isStr(d.get('nameEn', null), 100)
+        && d.get('order', null) is int && d.get('order', null) >= 1
+        && (d.get('marks', null) == null
+            || (d.get('marks', null) is int && d.get('marks', null) >= 0))
+        && isOptStr(d.get('syllabusSource', null), 500)
+        && (d.get('slug', null) == null
+            || (d.get('slug', null) is string && d.get('slug', null).matches('^[a-z0-9-]+$')))
+        && (isOptStrNoMax(d, 'applicableCycle'))
+        && (isOptStrNoMax(d, 'configVersion'))
+        && d.get('status', null) in ['draft', 'published']
+        && isJobContentReviewState(d.get('reviewStatus', null))
+        && jobContentStatesConsistent(d);
+    }
+    function validJobChapter(d) {
+      return d.get('examSlug', null) in jobExamSlugs()
+        && d.get('examSlug', null) != 'it-professional'
+        && isJobSubjectId(d.get('subjectId', null))
+        && isStr(d.get('nameBn', null), 200)
+        && isStr(d.get('nameEn', null), 200)
+        && isOptStr(d.get('descriptionBn', null), 1000)
+        && isOptStr(d.get('descriptionEn', null), 1000)
+        && d.get('order', null) is int && d.get('order', null) >= 1
+        && d.get('status', null) in ['draft', 'published']
+        && isJobContentReviewState(d.get('reviewStatus', null))
+        && jobContentStatesConsistent(d);
+    }
+    function validJobTopic(d) {
+      return d.get('examSlug', null) in jobExamSlugs()
+        && d.get('examSlug', null) != 'it-professional'
+        && isJobSubjectId(d.get('subjectId', null))
+        && isJobChapterId(d.get('chapterId', null))
+        && isStr(d.get('nameBn', null), 200)
+        && isStr(d.get('nameEn', null), 200)
+        && d.get('order', null) is int && d.get('order', null) >= 1
+        && d.get('isCommon', null) is bool
+        && (d.get('commonExams', null) == null
+            || (d.get('commonExams', null) is list
+                && d.get('commonExams', null).toSet().hasOnly(jobExamSlugs())))
+        && (d.get('isCommon', null) != true
+            || (d.get('commonExams', null) is list
+                && d.get('commonExams', null).toSet().size() >= 3))
+        && d.get('commonStatus', null) in ['preliminary', 'verified']
+        && (d.get('questionTarget', null) == null
+            || (d.get('questionTarget', null) is int && d.get('questionTarget', null) >= 0))
+        && d.get('publishedQuestionCount', null) is int
+        && d.get('publishedQuestionCount', null) >= 0
+        && d.get('status', null) in ['draft', 'published']
+        && isJobContentReviewState(d.get('reviewStatus', null))
+        && jobContentStatesConsistent(d);
+    }
+    function validJobLesson(d) {
+      return d.get('examSlug', null) in jobExamSlugs()
+        && d.get('examSlug', null) != 'it-professional'
+        && d.get('lessonType', null) in ['lesson', 'viva-question', 'viva-guide',
+                                          'career-guide', 'cv-guide']
+        && (d.get('lessonType', null) != 'lesson'
+            || (isJobSubjectId(d.get('subjectId', null))
+                && isJobChapterId(d.get('chapterId', null))
+                && isJobTopicId(d.get('topicId', null))))
+        && (isOptStrNoMax(d, 'subjectId'))
+        && (isOptStrNoMax(d, 'chapterId'))
+        && (isOptStrNoMax(d, 'topicId'))
+        && isStr(d.get('titleBn', null), 200)
+        && isStr(d.get('titleEn', null), 200)
+        && isStr(d.get('body', null), 100000)
+        && isOptStr(d.get('bodyEn', null), 100000)
+        && d.get('order', null) is int && d.get('order', null) >= 1
+        && d.get('status', null) in ['draft', 'published']
+        && isJobContentReviewState(d.get('reviewStatus', null))
+        && jobContentStatesConsistent(d);
+    }
+    function isJobQuestionReviewState(s) {
+      return s in ['Not Started', 'In Progress', 'Under Review',
+                   'Published', 'Rejected', 'Archived'];
+    }
+    function jobQuestionStatesConsistent(d) {
+      return (d.get('status', '') == 'published')
+          == (d.get('reviewStatus', '') == 'Published');
+    }
+    function jobQuestionCreateCommon(d) {
+      return d.get('status', '') == 'draft'
+        && d.get('reviewStatus', '') == 'Not Started'
+        && (d.get('authorId', null) == null || d.get('authorId', null) == uid())
+        && (d.get('createdBy', null) == null || d.get('createdBy', null) == uid())
+        && d.get('verifiedBy', null) == null
+        && d.get('verifiedAt', null) == null
+        && d.get('reviewerId', null) == null
+        && d.get('rejectionReason', null) == null
+        && !('publishedAt' in d)
+        && !('publishedBy' in d)
+        && (isOptTs(d, 'createdAt'))
+        && (isOptTs(d, 'updatedAt'));
+    }
+    function jobQuestionSecondEye(oldDoc, newDoc) {
+      return (newDoc.get('verifiedBy', null) == oldDoc.get('verifiedBy', null)
+          || newDoc.get('verifiedBy', null) == null
+          || (newDoc.get('verifiedBy', null) == uid()
+              && uid() != oldDoc.get('authorId', '')))
+        && (newDoc.get('verifiedAt', null) == oldDoc.get('verifiedAt', null)
+            || (newDoc.get('verifiedAt', null) is timestamp
+                && newDoc.get('verifiedAt', null) <= request.time
+                && newDoc.get('verifiedAt', null) > request.time - duration.value(5, 'm')))
+        && (newDoc.get('status', '') != 'published'
+            || (newDoc.get('verifiedBy', null) == uid()
+                && newDoc.get('verifiedBy', null) != oldDoc.get('authorId', '')
+                && newDoc.get('verifiedAt', null) is timestamp
+                && newDoc.get('verifiedAt', null) <= request.time));
+    }
+    function jobQuestionTransition(oldDoc, newDoc) {
+      return (newDoc.get('reviewStatus', '') == oldDoc.get('reviewStatus', '')
+          || (oldDoc.get('reviewStatus', '') in ['Not Started', 'In Progress']
+              && newDoc.get('reviewStatus', '') in ['Under Review', 'Rejected', 'Archived'])
+          || (oldDoc.get('reviewStatus', '') == 'Under Review'
+              && newDoc.get('reviewStatus', '') in ['Published', 'Rejected', 'Archived', 'Not Started'])
+          || (oldDoc.get('reviewStatus', '') == 'Published'
+              && newDoc.get('reviewStatus', '') in ['Not Started', 'Archived'])
+          || (oldDoc.get('reviewStatus', '') == 'Rejected'
+              && newDoc.get('reviewStatus', '') in ['Not Started', 'Archived'])
+          || (oldDoc.get('reviewStatus', '') == 'Archived'
+              && newDoc.get('reviewStatus', '') == 'Not Started'))
+        && (newDoc.get('reviewStatus', '') != 'Published'
+            || oldDoc.get('reviewStatus', '') == 'Under Review')
+        && (newDoc.get('reviewStatus', '') != 'Rejected'
+            || (newDoc.get('rejectionReason', null) is string
+                && newDoc.get('rejectionReason', '').size() >= 10))
+        && (oldDoc.get('status', '') != 'published'
+            || newDoc.get('status', '') != 'draft'
+            || newDoc.get('version', 0) == oldDoc.get('version', 0) + 1)
+        && ((oldDoc.get('status', '') == 'published' && newDoc.get('status', '') == 'draft')
+            || newDoc.get('version', 0) == oldDoc.get('version', 0));
+    }
+    function validJobQuestion(d) {
+      return d.get('examSlug', null) in jobExamSlugs()
+        && d.get('examSlug', null) != 'it-professional'
+        && isJobSubjectId(d.get('subjectId', null))
+        && isJobChapterId(d.get('chapterId', null))
+        && isJobTopicId(d.get('topicId', null))
+        && d.get('subjectId', '').matches('^' + d.get('examSlug', '') + '__[a-z0-9-]+$')
+        && d.get('chapterId', '').matches('^' + d.get('subjectId', '') + '__[a-z0-9-]+$')
+        && d.get('topicId', '').matches('^' + d.get('chapterId', '') + '__[a-z0-9-]+$')
+        && isStr(d.get('questionText', null), 2000)
+        && d.get('options', null) is list && d.get('options', null).size() == 4
+        && d.get('correctLetter', null) in ['A', 'B', 'C', 'D']
+        && isStr(d.get('explanation', null), 2000)
+        && (d.get('whyWrong', null) == null || d.get('whyWrong', null) is map)
+        && d.get('difficulty', null) in ['easy', 'medium', 'hard']
+        && d.get('isPreviousYear', null) is bool
+        && (d.get('isPreviousYear', null) != true
+            || (d.get('examYear', null) is int
+                && d.get('examYear', null) >= 1900 && d.get('examYear', null) <= 2100
+                && d.get('sourceUrl', null) is string))
+        && isStr(d.get('source', null), 500)
+        && (isOptStrNoMax(d, 'sourceUrl'))
+        && d.get('status', null) in ['draft', 'published']
+        && isJobQuestionReviewState(d.get('reviewStatus', null))
+        && jobQuestionStatesConsistent(d)
+        && isStr(d.get('duplicateHash', null), 200)
+        && d.get('version', null) is int && d.get('version', null) >= 1
+        && (isOptStrNoMax(d, 'rejectionReason'))
+        && (isOptStrNoMax(d, 'reviewerId'))
+        && (isOptStrNoMax(d, 'configVersion'))
+        && (isOptStrNoMax(d, 'bundleId'))
+        && (isOptStrNoMax(d, 'duplicateOf'));
+    }
+    function validJobQuestionBundle(d) {
+      return d.get('kind', null) in ['topic', 'mock', 'daily', 'weekly', 'previous']
+        && d.get('examSlug', null) in jobExamSlugs()
+        && d.get('examSlug', null) != 'it-professional'
+        && (d.get('kind', null) != 'topic' || d.get('topicId', null) is string)
+        && (d.get('kind', null) != 'mock' || d.get('mockId', null) is string)
+        && (d.get('kind', null) != 'daily' || d.get('mockId', null) is string)
+        && (d.get('kind', null) != 'weekly' || d.get('mockId', null) is string)
+        && (d.get('kind', null) != 'previous' || d.get('year', null) is int)
+        && isStr(d.get('titleBn', null), 200)
+        && isStr(d.get('titleEn', null), 200)
+        && d.get('questions', null) is list
+        && d.get('questions', null).size() <= 200
+        && d.get('questionCount', null) is int
+        && d.get('questionCount', null) >= 1
+        && d.get('questionCount', null) <= 200
+        && d.get('questionCount', null) == d.get('questions', null).size()
+        && d.get('sourceQuestionIds', null) is list
+        && d.get('status', null) in ['draft', 'published']
+        && isJobQuestionReviewState(d.get('reviewStatus', null))
+        && jobQuestionStatesConsistent(d)
+        && (isOptStrNoMax(d, 'configVersion'))
+        && (d.get('bundleVersion', null) == null
+            || (d.get('bundleVersion', null) is int && d.get('bundleVersion', null) >= 1));
+    }
+    function validJobQuestionKey(d, bundleId) {
+      return d.get('bundleId', null) == bundleId
+        && d.get('answers', null) is list
+        && d.get('answers', null).size() >= 1
+        && d.get('answers', null).size() <= 200
+        && (isOptStrNoMax(d, 'configVersion'))
+        && (isOptTs(d, 'createdAt'))
+        && (isOptTs(d, 'updatedAt'));
+    }
+    function jobKeyMatchesBundle(d, bundleId, bundle) {
+      return bundle.questionCount == d.get('answers', []).size()
+        && d.get('configVersion', null) is string
+        && bundle.get('configVersion', null) == d.get('configVersion', null);
+    }
+    function isPracticeJobBundle(bundle) {
+      return signedIn() && callerActive()
+        && bundle.kind == 'topic'
+        && bundle.status == 'published';
+    }
+    function jobReceiptData(bundleId) {
+      return get(/databases/$(database)/documents/jobReceipts/$(uid() + '_' + bundleId)).data;
+    }
+    function jobReceiptAttemptData(attemptId) {
+      return get(/databases/$(database)/documents/users/$(uid())/jobAttempts/$(attemptId)).data;
+    }
+    function jobReceiptExamAttemptData(attemptId) {
+      return get(/databases/$(database)/documents/users/$(uid())/jobExamAttempts/$(attemptId)).data;
+    }
+    function jobReceiptExamSessionData(attemptId) {
+      return get(/databases/$(database)/documents/users/$(uid())/jobExamSessions/$(attemptId)).data;
+    }
+    function hasFreshJobReceipt(bundleId, receipt, bundle) {
+      return signedIn() && callerActive()
+        && receipt.createdAt > request.time - duration.value(10, 'm')
+        && receipt.createdAt <= request.time + duration.value(5, 'm')
+        && receipt.attemptId is string
+        && ((bundle.kind in ['mock', 'daily', 'weekly']
+              && receipt.purpose == 'exam_review'
+              && ((exists(/databases/$(database)/documents/users/$(uid())/jobExamAttempts/$(receipt.attemptId))
+                    && jobReceiptExamAttemptData(receipt.attemptId).status == 'submitted'
+                    && jobReceiptExamAttemptData(receipt.attemptId).bundleId == bundleId
+                    && jobReceiptExamAttemptData(receipt.attemptId).userId == uid()
+                    && jobReceiptExamAttemptData(receipt.attemptId).kind == 'mock')
+                  || (exists(/databases/$(database)/documents/users/$(uid())/jobExamSessions/$(receipt.attemptId))
+                    && jobReceiptExamSessionData(receipt.attemptId).status == 'submitted'
+                    && jobReceiptExamSessionData(receipt.attemptId).bundleId == bundleId
+                    && jobReceiptExamSessionData(receipt.attemptId).kind == 'mock')))
+            || (bundle.kind in ['topic', 'previous']
+              && receipt.purpose == 'practice_review'
+              && exists(/databases/$(database)/documents/users/$(uid())/jobAttempts/$(receipt.attemptId))
+              && jobReceiptAttemptData(receipt.attemptId).status == 'submitted'
+              && jobReceiptAttemptData(receipt.attemptId).bundleId == bundleId
+              && jobReceiptAttemptData(receipt.attemptId).userId == uid()
+              && jobReceiptAttemptData(receipt.attemptId).kind == 'practice'));
+    }
+    function validJobPracticeAttemptAnchor(data, a) {
+      return a.status == 'submitted'
+        && a.bundleId == data.get('bundleId', '')
+        && a.userId == uid()
+        && a.kind == 'practice'
+        && a.bundleVersion == data.get('bundleVersion', null);
+    }
+    function validJobExamAttemptAnchor(data, a) {
+      return a.status == 'submitted'
+        && a.bundleId == data.get('bundleId', '')
+        && a.userId == uid()
+        && a.kind == 'mock'
+        && a.bundleVersion == data.get('bundleVersion', null);
+    }
+    function validJobExamSessionAnchor(data, s) {
+      return s.status == 'submitted'
+        && s.bundleId == data.get('bundleId', '')
+        && s.kind == 'mock'
+        && s.bundleVersion == data.get('bundleVersion', null);
+    }
+    function validJobReceiptAnchor(data) {
+      return (((data.get('purpose', '') == 'practice_review')
+              && exists(/databases/$(database)/documents/users/$(uid())/jobAttempts/$(data.get('attemptId', '')))
+              && validJobPracticeAttemptAnchor(data, get(/databases/$(database)/documents/users/$(uid())/jobAttempts/$(data.get('attemptId', ''))).data))
+            || ((data.get('purpose', '') == 'exam_review')
+              && ((exists(/databases/$(database)/documents/users/$(uid())/jobExamAttempts/$(data.get('attemptId', '')))
+                    && validJobExamAttemptAnchor(data, get(/databases/$(database)/documents/users/$(uid())/jobExamAttempts/$(data.get('attemptId', ''))).data))
+                  || (exists(/databases/$(database)/documents/users/$(uid())/jobExamSessions/$(data.get('attemptId', '')))
+                    && validJobExamSessionAnchor(data, get(/databases/$(database)/documents/users/$(uid())/jobExamSessions/$(data.get('attemptId', ''))).data)))));
+    }
+    function jobBundleData(bundleId) {
+      return get(/databases/$(database)/documents/jobQuestionBundles/$(bundleId)).data;
+    }
+    function jobSessionDataAfter(userId, sessionId) {
+      return getAfter(/databases/$(database)/documents/users/$(userId)/jobSessions/$(sessionId)).data;
+    }
+    function jobBundleKindFitsAttemptKind(bundleKind, kind) {
+      return kind == 'practice' && bundleKind in ['topic', 'previous'];
+    }
+    function jobExamDefinitionData(definitionId) {
+      return get(/databases/$(database)/documents/jobExamDefinitions/$(definitionId)).data;
+    }
+    function jobManifestData(questionSetId) {
+      return get(/databases/$(database)/documents/jobQuestionSetManifests/$(questionSetId)).data;
+    }
+    function jobExamSessionDataAfter(userId, sessionId) {
+      return getAfter(/databases/$(database)/documents/users/$(userId)/jobExamSessions/$(sessionId)).data;
+    }
+    function validJobAttemptCore(d, attemptId) {
+        return d.get('answers', null) is list
+        && d.get('answers', []).size() >= 1
+        && d.get('score', null) is number
+        && d.get('totalMarks', null) is number && d.get('totalMarks', 0) > 0
+        && d.get('score', 0) <= d.get('totalMarks', 0)
+        && d.get('score', 0) >= -d.get('totalMarks', 0)
+        && d.get('clientCalculatedScore', null) == d.get('score', null)
+        && d.get('negativeDeduction', null) is number
+        && d.get('negativeDeduction', -1) >= 0
+        && d.get('negativeMarkingUsed', null) is number
+        && (d.get('negativeMarkingUsed', -1) == 0
+            || d.get('negativeMarkingUsed', -1) == 0.25
+            || d.get('negativeMarkingUsed', -1) == 0.5)
+        && d.get('negativeDeduction', -1)
+             == d.get('wrongCount', 0) * d.get('negativeMarkingUsed', -1)
+        && isStr(d.get('markingSchemeVersion', null), 100)
+        && d.get('bundleVersion', null) is int && d.get('bundleVersion', 0) >= 1
+        && d.get('correctCount', null) is int && d.get('correctCount', -1) >= 0
+        && d.get('wrongCount', null) is int && d.get('wrongCount', -1) >= 0
+        && d.get('unansweredCount', null) is int && d.get('unansweredCount', -1) >= 0
+        && d.get('correctCount', 0) + d.get('wrongCount', 0) + d.get('unansweredCount', 0)
+             == d.get('answers', []).size()
+        && d.get('accuracy', null) is number
+        && d.get('accuracy', -1) >= 0 && d.get('accuracy', 101) <= 100
+        && d.get('percentage', null) is number
+        && d.get('percentage', -101) >= -100 && d.get('percentage', 101) <= 100
+        && d.get('timeSpentSeconds', null) is number
+        && d.get('timeSpentSeconds', -1) >= 0
+        && d.get('startedAt', null) is timestamp
+        && d.get('submittedAt', null) is timestamp
+        && d.get('startedAt', null) <= d.get('submittedAt', null)
+        && d.get('submittedAt', null) <= request.time
+        && d.get('status', '') == 'submitted'
+        && d.get('markingStatus', '') == 'auto'
+        && d.get('resultLabel', '') == 'practice'
+        && d.get('trustLevel', '') == 'unverified'
+        && d.get('resultType', '') == 'practice'
+        && d.get('submissionIntegrity', '') == 'client_calculated'
+        && d.get('serverVerifiedScore', null) == null
+        && (d.get('audit', null) == null || d.get('audit', null) is map)
+        && (d.get('answerHashes', null) == null || d.get('answerHashes', null) is list)
+        && (d.get('anomalyFlags', null) == null || d.get('anomalyFlags', null) is list)
+        && d.get('sessionId', '') == attemptId;
+    }
+    function validJobAttemptCreate(d, userId, attemptId, bundle, sessAfter) {
+      return d.keys().hasOnly(['userId', 'kind', 'mockId', 'bundleId',
+             'examSlug', 'subjectId', 'topicId', 'answers', 'score',
+             'totalMarks', 'negativeDeduction', 'negativeMarkingUsed',
+             'markingSchemeVersion', 'bundleVersion', 'correctCount',
+             'wrongCount', 'unansweredCount', 'accuracy', 'percentage',
+             'timeSpentSeconds', 'startedAt', 'submittedAt', 'status',
+             'markingStatus', 'resultLabel', 'clientCalculatedScore',
+             'serverVerifiedScore', 'trustLevel', 'resultType',
+             'sessionId', 'audit', 'answerHashes', 'anomalyFlags',
+             'submissionIntegrity'])
+        && d.keys().hasAll(['userId', 'kind', 'mockId', 'bundleId',
+             'examSlug', 'subjectId', 'topicId', 'answers', 'score',
+             'totalMarks', 'negativeDeduction', 'negativeMarkingUsed',
+             'markingSchemeVersion', 'bundleVersion', 'correctCount',
+             'wrongCount', 'unansweredCount', 'accuracy', 'percentage',
+             'timeSpentSeconds', 'startedAt', 'submittedAt', 'status',
+             'markingStatus', 'resultLabel', 'clientCalculatedScore',
+             'trustLevel', 'resultType', 'sessionId',
+             'submissionIntegrity'])
+        && d.get('userId', '') == userId
+        && d.get('kind', null) == 'practice'
+        && d.get('mockId', null) == null
+        && d.get('bundleId', null) is string
+        && (d.get('subjectId', null) == null
+            || (d.get('subjectId', null) is string && d.get('subjectId', '').size() <= 200))
+        && (d.get('topicId', null) == null
+            || (d.get('topicId', null) is string && d.get('topicId', '').size() <= 200))
+                && validJobAttemptCore(d, attemptId)
+        && bundle.status == 'published'
+        && bundle.examSlug == d.get('examSlug', null)
+        && jobBundleKindFitsAttemptKind(bundle.kind, d.get('kind', null))
+        && d.get('answers', []).size() <= bundle.questionCount
+        && bundle.get('bundleVersion', null) == d.get('bundleVersion', null)
+        && sessAfter.status == 'submitted'
+        && sessAfter.bundleId == d.get('bundleId', '')
+        && sessAfter.kind == d.get('kind', null)
+        && sessAfter.examSlug == d.get('examSlug', null)
+        && sessAfter.mockId == d.get('mockId', null)
+        && sessAfter.questionRefs.size() == d.get('answers', []).size();
+    }
+    function validJobSessionCreate(d, bundle) {
+      return d.keys().hasOnly(['kind', 'mockId', 'bundleId', 'examSlug',
+             'status', 'startedAt', 'endsAt', 'questionRefs', 'answers',
+             'currentQuestion', 'lastSyncedAt', 'clientEndsAtMillis',
+             'submittedAt', 'createdAt', 'updatedAt', 'revision'])
+        && d.keys().hasAll(['kind', 'mockId', 'bundleId', 'examSlug',
+             'status', 'startedAt', 'endsAt', 'questionRefs', 'answers',
+             'currentQuestion', 'lastSyncedAt', 'clientEndsAtMillis',
+             'submittedAt', 'createdAt', 'updatedAt', 'revision'])
+        && d.get('kind', null) == 'practice'
+        && d.get('mockId', null) == null
+        && d.get('bundleId', null) is string
+        && d.get('status', '') == 'in-progress'
+        && d.get('startedAt', null) is timestamp
+        && d.get('endsAt', null) == null
+        && d.get('questionRefs', null) is list
+        && d.get('questionRefs', []).size() >= 1
+        && d.get('answers', null) is map
+        && d.get('answers', {}).size() == d.get('questionRefs', []).size()
+        && d.get('currentQuestion', null) is int && d.get('currentQuestion', 0) >= 1
+        && string(d.get('currentQuestion', 0)) in d.get('answers', {}).keys()
+        && d.get('lastSyncedAt', null) is timestamp
+        && d.get('revision', null) is int && d.get('revision', 0) == 1
+        && d.get('lastSyncedAt', null) is timestamp
+        && d.get('clientEndsAtMillis', null) == null
+        && d.get('submittedAt', null) == null
+        && d.get('createdAt', null) is timestamp
+        && d.get('updatedAt', null) is timestamp
+        && bundle.status == 'published'
+        && bundle.examSlug == d.get('examSlug', null)
+        && jobBundleKindFitsAttemptKind(bundle.kind, d.get('kind', null));
+    }
+    function validJobSessionUpdateCore(d, old) {
+      return d.get('status', '') in ['in-progress', 'submitted', 'abandoned']
+        && ((d.get('status', '') == 'submitted' && d.get('submittedAt', null) is timestamp)
+            || (d.get('status', '') != 'submitted' && d.get('submittedAt', null) == null))
+        && d.get('answers', null) is map
+        && d.get('answers', {}).size() <= old.get('questionRefs', []).size()
+        && d.get('currentQuestion', null) is int && d.get('currentQuestion', 0) >= 1
+        && string(d.get('currentQuestion', 0)) in d.get('answers', {}).keys()
+        && d.get('revision', null) is int
+        && d.get('revision', -1) == old.get('revision', 0) + 1
+        && d.get('lastSyncedAt', null) is timestamp
+        && d.get('updatedAt', null) is timestamp;
+    }
+    function validJobSessionUpdate(d, old) {
+      return validJobSessionUpdateCore(d, old)
+        && d.get('endsAt', null) == null
+        && d.get('clientEndsAtMillis', null) == null;
+    }
+    function validJobExamSessionCreate(d, sessionId, bundle, manifest, def, lockAfter) {
+      return d.keys().hasOnly(['kind', 'mockId', 'bundleId', 'examSlug',
+             'definitionId', 'questionSetId', 'bundleVersion', 'status',
+             'startedAt', 'endsAt', 'questionRefs', 'answers',
+             'currentQuestion', 'lastSyncedAt', 'clientEndsAtMillis',
+             'submittedAt', 'createdAt', 'updatedAt', 'revision'])
+        && d.keys().hasAll(['kind', 'mockId', 'bundleId', 'examSlug',
+             'definitionId', 'questionSetId', 'bundleVersion', 'status',
+             'startedAt', 'endsAt', 'questionRefs', 'answers',
+             'currentQuestion', 'lastSyncedAt', 'clientEndsAtMillis',
+             'submittedAt', 'createdAt', 'updatedAt', 'revision'])
+        && d.get('kind', null) == 'mock'
+        && d.get('mockId', null) is string && d.get('mockId', '').size() > 0
+        && d.get('bundleId', null) is string
+        && d.get('definitionId', null) is string && d.get('definitionId', '').size() > 0
+        && d.get('questionSetId', null) is string && d.get('questionSetId', '').size() > 0
+        && d.get('bundleVersion', null) is int && d.get('bundleVersion', 0) >= 1
+        && d.get('status', '') == 'in-progress'
+        && d.get('startedAt', null) == request.time
+        && d.get('endsAt', null) == null
+        && d.get('questionRefs', null) is list
+        && d.get('questionRefs', []).size() >= 1
+        && d.get('answers', null) is map
+        && d.get('answers', {}).size() == d.get('questionRefs', []).size()
+        && d.get('currentQuestion', null) is int && d.get('currentQuestion', 0) >= 1
+        && d.get('currentQuestion', 0) <= d.get('questionRefs', []).size()
+        && d.get('revision', null) is int && d.get('revision', 0) == 1
+        && d.get('lastSyncedAt', null) is timestamp
+        && (d.get('clientEndsAtMillis', null) == null || d.get('clientEndsAtMillis', null) is number)
+        && d.get('submittedAt', null) == null
+        && d.get('createdAt', null) is timestamp
+        && d.get('updatedAt', null) is timestamp
+        && bundle.get('status', null) == 'published'
+        && bundle.get('examSlug', null) == d.get('examSlug', null)
+        && bundle.get('kind', null) in ['mock', 'daily', 'weekly']
+        && bundle.get('mockId', null) == d.get('mockId', null)
+        && bundle.get('bundleVersion', null) == d.get('bundleVersion', null)
+        && manifest.get('status', null) == 'published'
+        && manifest.get('mockId', null) == d.get('mockId', null)
+        && manifest.get('examSlug', null) == d.get('examSlug', null)
+        && manifest.get('questionRefs', null) == d.get('questionRefs', null)
+        && manifest.get('questionCount', null) == d.get('questionRefs', []).size()
+        && def.get('status', null) == 'published'
+        && def.get('bundleId', null) == d.get('bundleId', '')
+        && def.get('questionSetId', null) == d.get('questionSetId', '')
+        && def.get('examSlug', null) == d.get('examSlug', null)
+        && lockAfter.get('activeSessionId', '') == sessionId
+        && lockAfter.get('status', '') == 'in_progress'
+        && lockAfter.get('definitionId', '') == d.get('definitionId', '');
+    }
+    function jobExamEndsAtIsExact(old, d, def) {
+      return def.get('rulesSnapshot', null) is map
+        && def.rulesSnapshot.get('timeMinutes', null) is int
+        && d.get('endsAt', null) is timestamp
+        && old.get('startedAt', null) is timestamp
+        && d.get('endsAt', null) == old.get('startedAt', null)
+             + duration.value(def.rulesSnapshot.timeMinutes * 60, 's');
+    }
+    function validJobExamSessionUpdate(d, old) {
+      return validJobSessionUpdateCore(d, old)
+        && ((old.get('endsAt', null) == null
+              && (d.get('endsAt', null) == null
+                  || (exists(/databases/$(database)/documents/jobQuestionBundles/$(old.get('bundleId', '')))
+                      && exists(/databases/$(database)/documents/jobExamDefinitions/$(old.get('definitionId', '')))
+                      && jobExamEndsAtIsExact(old, d, jobExamDefinitionData(old.get('definitionId', ''))))))
+            || (old.get('endsAt', null) != null && d.get('endsAt', null) == old.get('endsAt', null)))
+        && (d.get('answers', {}) == old.get('answers', {})
+            || old.get('endsAt', null) == null
+            || request.time < old.get('endsAt', null))
+        && (d.get('clientEndsAtMillis', null) == null || d.get('clientEndsAtMillis', null) is number);
+    }
+    function validJobExamAttemptCreate(d, userId, attemptId, bundle, sessAfter) {
+      return d.keys().hasOnly(['userId', 'kind', 'mockId', 'bundleId',
+             'examSlug', 'subjectId', 'topicId', 'questionSetId',
+             'answers', 'score', 'totalMarks', 'negativeDeduction',
+             'negativeMarkingUsed', 'markingSchemeVersion',
+             'bundleVersion', 'correctCount', 'wrongCount',
+             'unansweredCount', 'accuracy', 'percentage',
+             'timeSpentSeconds', 'startedAt', 'submittedAt', 'status',
+             'markingStatus', 'resultLabel', 'clientCalculatedScore',
+             'serverVerifiedScore', 'trustLevel', 'resultType',
+             'sessionId', 'audit', 'answerHashes', 'anomalyFlags',
+             'submissionIntegrity'])
+        && d.keys().hasAll(['userId', 'kind', 'mockId', 'bundleId',
+             'examSlug', 'subjectId', 'topicId', 'questionSetId',
+             'answers', 'score', 'totalMarks', 'negativeDeduction',
+             'negativeMarkingUsed', 'markingSchemeVersion',
+             'bundleVersion', 'correctCount', 'wrongCount',
+             'unansweredCount', 'accuracy', 'percentage',
+             'timeSpentSeconds', 'startedAt', 'submittedAt', 'status',
+             'markingStatus', 'resultLabel', 'clientCalculatedScore',
+             'serverVerifiedScore', 'trustLevel', 'resultType', 'sessionId',
+             'submissionIntegrity'])
+        && d.get('userId', '') == userId
+        && d.get('kind', null) == 'mock'
+        && d.get('mockId', null) is string && d.get('mockId', '').size() > 0
+        && d.get('bundleId', null) is string
+        && d.get('subjectId', null) == null
+        && d.get('topicId', null) == null
+        && d.get('questionSetId', null) is string && d.get('questionSetId', '').size() > 0
+                && validJobAttemptCore(d, attemptId)
+        && bundle.get('status', null) == 'published'
+        && bundle.get('examSlug', null) == d.get('examSlug', null)
+        && bundle.get('kind', null) in ['mock', 'daily', 'weekly']
+        && bundle.get('mockId', null) == d.get('mockId', null)
+        && d.get('answers', []).size() <= bundle.get('questionCount', 0)
+        && bundle.get('bundleVersion', null) == d.get('bundleVersion', null)
+        && sessAfter.get('status', '') == 'submitted'
+        && sessAfter.get('bundleId', '') == d.get('bundleId', '')
+        && sessAfter.get('kind', null) == d.get('kind', null)
+        && sessAfter.get('examSlug', null) == d.get('examSlug', null)
+        && sessAfter.get('mockId', null) == d.get('mockId', null)
+        && sessAfter.get('questionSetId', null) == d.get('questionSetId', null)
+        && sessAfter.get('bundleVersion', null) == d.get('bundleVersion', null)
+        && sessAfter.get('startedAt', null) == d.get('startedAt', null)
+        && sessAfter.get('questionRefs', []).size() == d.get('answers', []).size()
+        && d.get('submittedAt', null) <= sessAfter.get('endsAt', null);
+    }
+    function validVerificationTransition() {
+      return !('verificationStatus' in changedKeys())
+        || (request.resource.data.verificationStatus == 'verified'
+            && request.resource.data.role == 'teacher')
+        || (request.resource.data.verificationStatus == 'pending'
+            && (request.resource.data.role == 'teacher'
+                || resource.data.get('verificationStatus', '') in ['rejected', 'revoked', 'verified']))
+        || (request.resource.data.verificationStatus == 'rejected'
+            && resource.data.get('verificationStatus', '') in ['pending', ''])
+        || (request.resource.data.verificationStatus == 'revoked'
+            && resource.data.get('verificationStatus', '') == 'verified');
+    }
+    match /users/{userId} {
+      allow read: if isOwner(userId) || isAdmin();
+      allow create: if isOwner(userId)
+        && onlyKeys(['displayName', 'email',
+             'role', 'verificationStatus', 'language', 'createdAt', 'updatedAt',
+             'lastActiveAt',
+             'educationType', 'board', 'institution', 'academicYear',
+             'program', 'department', 'classLevel', 'semester',
+             'academicSession', 'curriculum', 'phone', 'teachingLevel',
+             'subjects', 'qualifications', 'experienceYears', 'jobMode',
+             'enrolledCategories', 'targetExam', 'dailyGoalQuestions',
+             'dailyGoalMinutes', 'jobOnboarded',
+             'admissionTargetInstitution', 'admissionTargetGroup',
+             'admissionMode', 'admissionOnboarded'])
+        && request.resource.data.role in ['student', 'teacher', 'parent']
+        && (!('verificationStatus' in request.resource.data)
+            || (request.resource.data.role in ['teacher', 'parent']
+                && request.resource.data.verificationStatus == 'pending'))
+        && !('isActive' in request.resource.data)
+        && isStr(request.resource.data.displayName, 100)
+        && request.resource.data.email is string
+        && request.resource.data.language in ['bn', 'en']
+        && isOptStr(request.resource.data.get('board', null), 200)
+        && isOptStr(request.resource.data.get('institution', null), 200)
+        && isOptStr(request.resource.data.get('academicSession', null), 50)
+        && isOptStr(request.resource.data.get('curriculum', null), 200)
+        && isOptStr(request.resource.data.get('classLevel', null), 100)
+        && isOptStr(request.resource.data.get('department', null), 100)
+        && isOptStr(request.resource.data.get('semester', null), 50)
+        && isOptStr(request.resource.data.get('phone', null), 20)
+        && isOptStr(request.resource.data.get('teachingLevel', null), 100)
+        && isOptStr(request.resource.data.get('qualifications', null), 500)
+        && (!('jobMode' in request.resource.data)
+            || request.resource.data.jobMode in ['beginner', 'advanced'])
+        && (!('enrolledCategories' in request.resource.data)
+            || request.resource.data.enrolledCategories == null
+            || (request.resource.data.enrolledCategories is list
+                && request.resource.data.enrolledCategories.size() <= 10
+                && request.resource.data.enrolledCategories.toSet().size()
+                     == request.resource.data.enrolledCategories.size()
+                && request.resource.data.enrolledCategories.toSet().hasOnly(
+                     ['bcs-bpsc', 'govt', 'bank', 'primary-teacher',
+                      'ntrca-teacher', 'defence-police', 'autonomous',
+                      'ngo-private', 'it-professional', 'other-competitive'])))
+        && (!('targetExam' in request.resource.data)
+            || request.resource.data.targetExam == null
+            || request.resource.data.targetExam in
+               ['bcs', 'bank', 'primary-teacher', 'ntrca', 'dgfood',
+                'bpsc-non-cadre', 'cag', 'bfsa', 'others', 'ministries',
+                'defence', 'autonomous', 'private-ngo'])
+        && (!('dailyGoalQuestions' in request.resource.data)
+            || request.resource.data.dailyGoalQuestions == null
+            || (request.resource.data.dailyGoalQuestions is int
+                && request.resource.data.dailyGoalQuestions >= 0
+                && request.resource.data.dailyGoalQuestions <= 500))
+        && (!('dailyGoalMinutes' in request.resource.data)
+            || request.resource.data.dailyGoalMinutes == null
+            || (request.resource.data.dailyGoalMinutes is int
+                && request.resource.data.dailyGoalMinutes >= 0
+                && request.resource.data.dailyGoalMinutes <= 600))
+        && (!('jobOnboarded' in request.resource.data)
+            || request.resource.data.jobOnboarded == null
+            || request.resource.data.jobOnboarded is bool)
+        && (!('subjects' in request.resource.data)
+            || (request.resource.data.subjects is list
+                && request.resource.data.subjects.size() <= 20))
+        && (!('experienceYears' in request.resource.data)
+            || (request.resource.data.experienceYears is number
+                && request.resource.data.experienceYears >= 0
+                && request.resource.data.experienceYears <= 60))
+        && (!('admissionTargetInstitution' in request.resource.data)
+            || request.resource.data.admissionTargetInstitution == null
+            || request.resource.data.admissionTargetInstitution == 'national-university')
+        && (!('admissionTargetGroup' in request.resource.data)
+            || request.resource.data.admissionTargetGroup == null
+            || request.resource.data.admissionTargetGroup in ['humanities', 'science', 'business'])
+        && (!('admissionMode' in request.resource.data)
+            || request.resource.data.admissionMode in ['beginner', 'advanced'])
+        && (!('admissionOnboarded' in request.resource.data)
+            || request.resource.data.admissionOnboarded is bool);
+      allow update: if isOwner(userId)
+        && changedKeys()
+             .hasOnly(['displayName', 'educationType', 'board', 'institution',
+                       'academicYear', 'academicSession', 'curriculum',
+                       'program', 'department', 'classLevel', 'semester',
+                       'phone', 'experienceYears', 'jobMode',
+                       'enrolledCategories', 'targetExam',
+                       'dailyGoalQuestions', 'dailyGoalMinutes', 'jobOnboarded',
+                       'admissionTargetInstitution', 'admissionTargetGroup',
+                       'admissionMode', 'admissionOnboarded',
+                       'language', 'lastActiveAt', 'updatedAt'])
+        && isOptStr(request.resource.data.displayName, 100)
+        && isOptStr(request.resource.data.get('phone', null), 20)
+        && (!('jobMode' in request.resource.data)
+            || request.resource.data.jobMode in ['beginner', 'advanced'])
+        && (!('enrolledCategories' in request.resource.data)
+            || request.resource.data.enrolledCategories == null
+            || (request.resource.data.enrolledCategories is list
+                && request.resource.data.enrolledCategories.size() <= 10
+                && request.resource.data.enrolledCategories.toSet().size()
+                     == request.resource.data.enrolledCategories.size()
+                && request.resource.data.enrolledCategories.toSet().hasOnly(
+                     ['bcs-bpsc', 'govt', 'bank', 'primary-teacher',
+                      'ntrca-teacher', 'defence-police', 'autonomous',
+                      'ngo-private', 'it-professional', 'other-competitive'])))
+        && (!('targetExam' in request.resource.data)
+            || request.resource.data.targetExam == null
+            || request.resource.data.targetExam in
+               ['bcs', 'bank', 'primary-teacher', 'ntrca', 'dgfood',
+                'bpsc-non-cadre', 'cag', 'bfsa', 'others', 'ministries',
+                'defence', 'autonomous', 'private-ngo'])
+        && (!('dailyGoalQuestions' in request.resource.data)
+            || request.resource.data.dailyGoalQuestions == null
+            || (request.resource.data.dailyGoalQuestions is int
+                && request.resource.data.dailyGoalQuestions >= 0
+                && request.resource.data.dailyGoalQuestions <= 500))
+        && (!('dailyGoalMinutes' in request.resource.data)
+            || request.resource.data.dailyGoalMinutes == null
+            || (request.resource.data.dailyGoalMinutes is int
+                && request.resource.data.dailyGoalMinutes >= 0
+                && request.resource.data.dailyGoalMinutes <= 600))
+        && (!('jobOnboarded' in request.resource.data)
+            || request.resource.data.jobOnboarded == null
+            || request.resource.data.jobOnboarded is bool)
+        && (!('experienceYears' in request.resource.data)
+            || (request.resource.data.experienceYears is number
+                && request.resource.data.experienceYears >= 0
+                && request.resource.data.experienceYears <= 60))
+        && (!('admissionTargetInstitution' in request.resource.data)
+            || request.resource.data.admissionTargetInstitution == null
+            || request.resource.data.admissionTargetInstitution == 'national-university')
+        && (!('admissionTargetGroup' in request.resource.data)
+            || request.resource.data.admissionTargetGroup == null
+            || request.resource.data.admissionTargetGroup in ['humanities', 'science', 'business'])
+        && (!('admissionMode' in request.resource.data)
+            || request.resource.data.admissionMode in ['beginner', 'advanced'])
+        && (!('admissionOnboarded' in request.resource.data)
+            || request.resource.data.admissionOnboarded is bool);
+      allow update: if isAdmin()
+        && resource.data.role != 'owner'
+        && (!(resource.data.role in ['admin', 'moderator']) || isOwnerRole())
+        && changedKeys()
+             .hasOnly(['role', 'verificationStatus', 'isActive', 'suspendedReason',
+                       'verifiedBy', 'verifiedAt', 'updatedAt'])
+        && (!('role' in request.resource.data)
+            || request.resource.data.role in ['admin', 'moderator', 'teacher', 'student', 'parent'])
+        && (!('verificationStatus' in request.resource.data)
+            || request.resource.data.verificationStatus in ['pending', 'verified', 'rejected', 'revoked'])
+        && validVerificationTransition()
+        && (!('isActive' in request.resource.data) || request.resource.data.isActive is bool)
+        && (!('suspendedReason' in request.resource.data)
+            || request.resource.data.suspendedReason is string
+            || request.resource.data.suspendedReason == null)
+        && (!('verificationStatus' in changedKeys())
+            || request.resource.data.verifiedBy == uid());
+      allow update: if isAdmin()
+        && resource.data.role == 'teacher'
+        && changedKeys()
+             .hasOnly(['subjects', 'teachingLevel', 'classLevel', 'updatedAt'])
+        && (!('subjects' in request.resource.data)
+            || (request.resource.data.subjects is list
+                && request.resource.data.subjects.size() > 0
+                && request.resource.data.subjects.size() <= 20))
+        && isOptStr(request.resource.data.get('teachingLevel', null), 100)
+        && isOptStr(request.resource.data.get('classLevel', null), 100);
+      allow update: if isOwnerRole()
+        && changedKeys()
+             .hasOnly(['displayName', 'educationType', 'board', 'institution',
+                       'academicYear', 'program', 'department', 'classLevel',
+                       'language', 'lastActiveAt', 'role', 'verificationStatus',
+                       'isActive', 'suspendedReason', 'verifiedBy', 'verifiedAt',
+                       'jobMode', 'enrolledCategories', 'targetExam',
+                       'dailyGoalQuestions', 'dailyGoalMinutes', 'jobOnboarded',
+                       'updatedAt'])
+        && (!('role' in changedKeys())
+            || request.resource.data.role in ['admin', 'moderator', 'teacher', 'student', 'parent'])
+        && (!('verificationStatus' in changedKeys())
+            || request.resource.data.verificationStatus in ['pending', 'verified', 'rejected', 'revoked'])
+        && validVerificationTransition()
+        && (!('isActive' in request.resource.data) || request.resource.data.isActive is bool)
+        && isOptStr(request.resource.data.displayName, 100)
+        && (!('enrolledCategories' in request.resource.data)
+            || request.resource.data.enrolledCategories == null
+            || (request.resource.data.enrolledCategories is list
+                && request.resource.data.enrolledCategories.size() <= 10
+                && request.resource.data.enrolledCategories.toSet().size()
+                     == request.resource.data.enrolledCategories.size()
+                && request.resource.data.enrolledCategories.toSet().hasOnly(
+                     ['bcs-bpsc', 'govt', 'bank', 'primary-teacher',
+                      'ntrca-teacher', 'defence-police', 'autonomous',
+                      'ngo-private', 'it-professional', 'other-competitive'])))
+        && (!('targetExam' in request.resource.data)
+            || request.resource.data.targetExam == null
+            || request.resource.data.targetExam in
+               ['bcs', 'bank', 'primary-teacher', 'ntrca', 'dgfood',
+                'bpsc-non-cadre', 'cag', 'bfsa', 'others', 'ministries',
+                'defence', 'autonomous', 'private-ngo'])
+        && (!('dailyGoalQuestions' in request.resource.data)
+            || request.resource.data.dailyGoalQuestions == null
+            || (request.resource.data.dailyGoalQuestions is int
+                && request.resource.data.dailyGoalQuestions >= 0
+                && request.resource.data.dailyGoalQuestions <= 500))
+        && (!('dailyGoalMinutes' in request.resource.data)
+            || request.resource.data.dailyGoalMinutes == null
+            || (request.resource.data.dailyGoalMinutes is int
+                && request.resource.data.dailyGoalMinutes >= 0
+                && request.resource.data.dailyGoalMinutes <= 600))
+        && (!('jobOnboarded' in request.resource.data)
+            || request.resource.data.jobOnboarded == null
+            || request.resource.data.jobOnboarded is bool);
+      allow delete: if false;
+    }
+    match /users/{userId}/quizAttempts/{attemptId} {
+      allow read: if isOwner(userId) || isModerator();
+      allow create: if isOwner(userId) && callerActive()
+        && request.resource.data.quizId is string
+        && request.resource.data.userId == uid()
+        && request.resource.data.status == 'submitted'
+        && request.resource.data.markingStatus in ['auto', 'pending']
+        && request.resource.data.scored is bool
+        && ((request.resource.data.markingStatus == 'auto' && request.resource.data.scored == false)
+            || (request.resource.data.markingStatus == 'pending' && request.resource.data.scored == true))
+        && request.resource.data.answers is list
+        && request.resource.data.score is number
+        && request.resource.data.score >= 0
+        && request.resource.data.totalMarks is number
+        && request.resource.data.totalMarks > 0
+        && request.resource.data.score <= request.resource.data.totalMarks
+        && request.resource.data.percentage is number
+        && request.resource.data.percentage >= 0
+        && request.resource.data.percentage <= 100
+        && exists(/databases/$(database)/documents/quizzes/$(request.resource.data.quizId))
+        && request.resource.data.answers.size() <= get(/databases/$(database)/documents/quizzes/$(request.resource.data.quizId)).data.questions.size()
+        && ((get(/databases/$(database)/documents/quizzes/$(request.resource.data.quizId)).data.totalMarks is number
+            && get(/databases/$(database)/documents/quizzes/$(request.resource.data.quizId)).data.totalMarks > 0
+            && request.resource.data.totalMarks == get(/databases/$(database)/documents/quizzes/$(request.resource.data.quizId)).data.totalMarks)
+          || (!(get(/databases/$(database)/documents/quizzes/$(request.resource.data.quizId)).data.totalMarks is number
+              && get(/databases/$(database)/documents/quizzes/$(request.resource.data.quizId)).data.totalMarks > 0)
+            && request.resource.data.totalMarks <= request.resource.data.answers.size() * 10));
+      allow update: if isModerator()
+        && resource.data.markingStatus == 'pending'
+        && changedKeys()
+            .hasOnly(['answers', 'marks', 'score', 'percentage', 'markingStatus', 'markedBy', 'markedAt'])
+        || (isOwner(userId) && callerActive()
+            && resource.data.markingStatus == 'auto'
+            && resource.data.scored == false
+            && changedKeys()
+                .hasOnly(['answers', 'score', 'percentage', 'scored', 'updatedAt'])
+            && request.resource.data.scored == true
+            && request.resource.data.score is number
+            && request.resource.data.score >= 0
+            && request.resource.data.score <= resource.data.totalMarks
+            && request.resource.data.percentage is number
+            && request.resource.data.percentage >= 0
+            && request.resource.data.percentage <= 100
+            && request.resource.data.answers is list
+            && request.resource.data.answers.size() == resource.data.answers.size());
+      allow delete: if false;
+    }
+    function quizReceiptData(quizId) {
+      return get(/databases/$(database)/documents/quizReceipts/$(uid() + '_' + quizId)).data;
+    }
+    function quizReceiptAttemptData(attemptId) {
+      return get(/databases/$(database)/documents/users/$(uid())/quizAttempts/$(attemptId)).data;
+    }
+    function hasFreshReceipt(quizId, receipt) {
+      return signedIn() && callerActive()
+        && receipt.createdAt > request.time - duration.value(10, 'm')
+        && receipt.createdAt <= request.time
+        && receipt.attemptId is string
+        && exists(/databases/$(database)/documents/users/$(uid())/quizAttempts/$(receipt.attemptId))
+        && quizReceiptAttemptData(receipt.attemptId).status == 'submitted'
+        && quizReceiptAttemptData(receipt.attemptId).quizId == quizId
+        && quizReceiptAttemptData(receipt.attemptId).userId == uid();
+    }
+    match /quizKeys/{quizId} {
+      allow read: if isModerator()
+        || (signedIn() && callerActive()
+            && exists(/databases/$(database)/documents/quizReceipts/$(uid() + '_' + quizId))
+            && hasFreshReceipt(quizId, quizReceiptData(quizId)));
+      allow create, update: if isModerator();
+      allow delete: if isAdmin();
+    }
+    function quizReceiptAttemptMatches(data, a) {
+      return a.status == 'submitted'
+        && a.quizId == data.get('quizId', '')
+        && a.userId == uid();
+    }
+    match /quizReceipts/{receiptId} {
+      allow read: if isOwner(receiptId.split('_')[0]) || isAdmin();
+      allow create: if signedIn() && callerActive()
+        && receiptId == uid() + '_' + request.resource.data.quizId
+        && onlyKeys(['userId', 'quizId', 'attemptId', 'createdAt'])
+        && request.resource.data.userId == uid()
+        && request.resource.data.quizId is string
+        && request.resource.data.quizId.size() <= 200
+        && request.resource.data.attemptId is string
+        && request.resource.data.attemptId.size() <= 200
+        && request.resource.data.createdAt is timestamp
+        && request.resource.data.createdAt <= request.time
+        && request.resource.data.createdAt > request.time - duration.value(5, 'm')
+        && exists(/databases/$(database)/documents/users/$(uid())/quizAttempts/$(request.resource.data.attemptId))
+        && quizReceiptAttemptMatches(request.resource.data, get(/databases/$(database)/documents/users/$(uid())/quizAttempts/$(request.resource.data.attemptId)).data)
+        && exists(/databases/$(database)/documents/quizzes/$(request.resource.data.quizId));
+      allow update: if false;
+      allow delete: if isOwner(receiptId.split('_')[0]);
+    }
+    match /studyPlans/{planId} {
+      allow read: if signedIn() && (resource.data.userId == uid() || isAdmin());
+      allow create: if ownCreate()
+        && isStr(request.resource.data.title, 200);
+      allow update, delete: if ownExisting();
+    }
+    match /progressSummaries/{summaryId} {
+      allow read: if signedIn() && (resource.data.userId == uid() || isAdmin()
+        || isLinkedGuardian(resource.data.userId));
+      allow create, update: if ownCreate()
+        && request.resource.data.attemptsCount is int
+        && request.resource.data.attemptsCount >= 0
+        && request.resource.data.attemptsCount <= 10000
+        && request.resource.data.averagePercentage is number
+        && request.resource.data.averagePercentage >= 0
+        && request.resource.data.averagePercentage <= 100;
+      allow delete: if isAdmin();
+    }
+    match /bookmarks/{bookmarkId} {
+      allow read: if signedIn() && (resource.data.userId == uid() || isAdmin()
+        || isLinkedGuardian(resource.data.userId));
+      allow create: if ownCreate()
+        && isStr(request.resource.data.lessonId, 200)
+        && isStr(request.resource.data.title, 200);
+      allow update: if ownExisting()
+        && request.resource.data.userId == uid();
+      allow delete: if ownExisting();
+    }
+    match /progress/{progressId} {
+      allow read: if signedIn() && (resource.data.userId == uid() || isAdmin()
+        || isLinkedGuardian(resource.data.userId));
+      allow create: if ownCreate()
+        && isStr(request.resource.data.subject, 100);
+      allow update: if ownExisting()
+        && request.resource.data.userId == uid();
+      allow delete: if isAdmin();
+    }
+    function contentRead(d) {
+      return isPublished(d)
+        || isModerator()
+        || (signedIn() && callerActive() && d.get('authorId', '') == uid())
+        || (signedIn() && callerActive() && d.get('createdBy', '') == uid());
+    }
+    function contentCreate() {
+      return isVerifiedJobBankAuthor()
+        && isDraftStatus(request.resource.data.reviewStatus)
+        && isStr(request.resource.data.title, 200);
+    }
+    function contentUpdate(d) {
+      return isModerator()
+        || (signedIn() && callerActive() && d.get('authorId', '') == uid()
+            && isDraftStatus(d.reviewStatus)
+            && isDraftStatus(request.resource.data.reviewStatus))
+        || (signedIn() && callerActive() && d.get('createdBy', '') == uid()
+            && isDraftStatus(d.reviewStatus)
+            && isDraftStatus(request.resource.data.reviewStatus));
+    }
+    function isPreviewContent(d) { return d.get('isPreview', false) == true; }
+    function gatedContentRead(d) {
+      return contentRead(d) && (signedIn() || isPreviewContent(d));
+    }
+    match /educationDirectory/{docId} {
+      allow read: if contentRead(resource.data);
+      allow create: if isVerifiedJobBankAuthor() && isDraftStatus(request.resource.data.reviewStatus);
+      allow update: if contentUpdate(resource.data);
+      allow delete: if isAdmin();
+    }
+    match /books/{bookId} {
+      allow read: if contentRead(resource.data);
+      allow create: if contentCreate() && isStr(request.resource.data.sourceUrl, 2000);
+      allow update: if contentUpdate(resource.data);
+      allow delete: if isAdmin();
+    }
+    match /chapters/{chapterId} {
+      allow read: if gatedContentRead(resource.data);
+      allow create: if contentCreate();
+      allow update: if contentUpdate(resource.data);
+      allow delete: if isAdmin();
+    }
+    match /lessons/{lessonId} {
+      allow read: if gatedContentRead(resource.data);
+      allow create: if contentCreate() && isStr(request.resource.data.body, 100000);
+      allow update: if contentUpdate(resource.data);
+      allow delete: if isAdmin();
+    }
+    match /quizzes/{quizId} {
+      allow read: if contentRead(resource.data) && signedIn();
+      allow create: if contentCreate() && request.resource.data.questions is list;
+      allow update: if contentUpdate(resource.data);
+      allow delete: if isAdmin();
+    }
+    match /contactMessages/{messageId} {
+      allow read: if isAdmin();
+      allow create: if signedIn() && callerActive()
+        && request.resource.data.userId == uid()
+        && isStr(request.resource.data.name, 100)
+        && isStr(request.resource.data.message, 5000)
+        && isOptStr(request.resource.data.email, 200);
+      allow update, delete: if false;
+    }
+    match /posts/{postId} {
+      allow read: if isPublished(resource.data) || isModerator()
+        || (signedIn() && resource.data.authorId == uid());
+      allow create: if signedIn() && callerActive()
+        && request.resource.data.authorId == uid()
+        && request.resource.data.reviewStatus == 'Under Review'
+        && isStr(request.resource.data.title, 200)
+        && isStr(request.resource.data.body, 5000);
+      allow update: if isModerator()
+        || (signedIn() && callerActive() && resource.data.authorId == uid()
+            && resource.data.reviewStatus == 'Under Review'
+            && request.resource.data.reviewStatus == 'Under Review');
+      allow delete: if isAdmin();
+    }
+    match /posts/{postId}/comments/{commentId} {
+      allow read: if isPublished(resource.data) || isModerator()
+        || (signedIn() && resource.data.authorId == uid());
+      allow create: if signedIn() && callerActive()
+        && request.resource.data.authorId == uid()
+        && request.resource.data.reviewStatus == 'Under Review'
+        && isStr(request.resource.data.body, 1000);
+      allow update, delete: if isModerator();
+    }
+    match /questions/{questionId} {
+      allow read: if isPublished(resource.data) || isModerator()
+        || (signedIn() && resource.data.authorId == uid());
+      allow create: if signedIn() && callerActive()
+        && request.resource.data.authorId == uid()
+        && request.resource.data.reviewStatus == 'Under Review'
+        && isStr(request.resource.data.title, 200)
+        && isStr(request.resource.data.body, 5000);
+      allow update: if isModerator()
+        || (signedIn() && callerActive() && resource.data.authorId == uid()
+            && resource.data.reviewStatus == 'Under Review'
+            && request.resource.data.reviewStatus == 'Under Review');
+      allow delete: if isAdmin();
+    }
+    match /questions/{questionId}/answers/{answerId} {
+      allow read: if isPublished(resource.data) || isModerator()
+        || (signedIn() && resource.data.authorId == uid());
+      allow create: if signedIn() && callerActive()
+        && request.resource.data.authorId == uid()
+        && request.resource.data.reviewStatus == 'Under Review'
+        && isStr(request.resource.data.body, 5000);
+      allow update: if isModerator()
+        || (signedIn() && callerActive() && get(/databases/$(database)/documents/questions/$(questionId)).data.authorId == uid()
+            && changedKeys().hasOnly(['isAccepted', 'updatedAt']));
+      allow delete: if isAdmin();
+    }
+    match /reports/{reportId} {
+      allow read: if signedIn() && (resource.data.reporterId == uid() || isModerator());
+      allow create: if signedIn() && callerActive()
+        && request.resource.data.reporterId == uid()
+        && request.resource.data.status == 'open'
+        && request.resource.data.reason in ['spam', 'abuse', 'copyright', 'personal-info', 'other']
+        && request.resource.data.targetType in ['post', 'comment', 'socialPost', 'user', 'message']
+        && request.resource.data.targetId is string
+        && request.resource.data.targetAuthorId is string
+        && isOptStr(request.resource.data.details, 2000);
+      allow update: if isModerator();
+      allow delete: if false;
+    }
+    match /moderationQueue/{itemId} {
+      allow read: if isModerator();
+      allow create: if isModerator()
+        && request.resource.data.reportId is string
+        && request.resource.data.status in ['open', 'reviewing', 'resolved', 'dismissed'];
+      allow update: if isModerator()
+        && request.resource.data.reportId is string
+        && request.resource.data.status in ['open', 'reviewing', 'resolved', 'dismissed'];
+      allow delete: if false;
+    }
+    match /teacherVerifications/{recordId} {
+      allow read: if signedIn() && (resource == null || resource.data.userId == uid() || isModerator());
+      allow create: if signedIn() && callerActive()
+        && recordId == 'tv_' + uid()
+        && request.resource.data.userId == uid()
+        && request.resource.data.status == 'pending'
+        && isStr(request.resource.data.fullName, 100)
+        && isStr(request.resource.data.institution, 200)
+        && isOptStr(request.resource.data.get('post', null), 100)
+        && isOptStr(request.resource.data.get('institutionContact', null), 100)
+        && onlyKeys(['id', 'userId', 'fullName', 'teachingLevel',
+             'subjects', 'classes', 'institution', 'post', 'institutionContact',
+             'qualifications', 'experienceYears', 'verificationReason', 'evidenceRef',
+             'status', 'verificationStatus', 'submittedAt', 'updatedAt', 'createdAt']);
+      allow update: if signedIn() && callerActive()
+        && resource.data.userId == uid()
+        && resource.data.status == 'rejected'
+        && request.resource.data.status == 'pending'
+        && changedKeys()
+             .hasOnly(['teachingLevel', 'subjects', 'classes', 'institution',
+                       'post', 'institutionContact',
+                       'qualifications', 'experienceYears', 'verificationReason',
+                       'evidenceRef', 'status', 'verificationStatus',
+                       'submittedAt', 'updatedAt'])
+        && isStr(request.resource.data.fullName, 100)
+        && isStr(request.resource.data.institution, 200);
+      allow update: if isAdmin()
+        && resource.data.status == 'pending'
+        && resource.data.userId != uid()
+        && changedKeys()
+             .hasOnly(['status', 'checkedBy', 'checkedAt', 'reason', 'checks', 'updatedAt'])
+        && request.resource.data.status in ['pending', 'verified', 'rejected', 'revoked']
+        && request.resource.data.checkedBy == uid()
+        && request.resource.data.reason is string
+        && request.resource.data.reason.size() >= 10
+        && (request.resource.data.status != 'verified'
+            || (request.resource.data.checks is map
+                && request.resource.data.checks.get('identity', false) == true
+                && request.resource.data.checks.get('institution', false) == true
+                && request.resource.data.checks.get('subject', false) == true
+                && request.resource.data.checks.get('adult', false) == true));
+      allow update: if isAdmin()
+        && resource.data.status == 'verified'
+        && resource.data.userId != uid()
+        && request.resource.data.status == 'revoked'
+        && changedKeys()
+             .hasOnly(['status', 'checkedBy', 'checkedAt', 'reason', 'updatedAt'])
+        && request.resource.data.checkedBy == uid()
+        && request.resource.data.reason is string
+        && request.resource.data.reason.size() >= 10;
+      allow update: if isAdmin()
+        && resource.data.status in ['verified', 'rejected', 'revoked']
+        && resource.data.userId != uid()
+        && request.resource.data.status == 'pending'
+        && changedKeys()
+             .hasOnly(['status', 'checkedBy', 'checkedAt', 'reason', 'updatedAt'])
+        && request.resource.data.checkedBy == uid()
+        && request.resource.data.reason is string
+        && request.resource.data.reason.size() >= 10;
+      allow delete: if isAdmin();
+    }
+    match /teacherChangeRequests/{requestId} {
+      allow read: if signedIn() && (resource.data.teacherUid == uid() || isAdmin());
+      allow create: if signedIn() && callerActive()
+        && request.resource.data.teacherUid == uid()
+        && request.resource.data.status == 'pending'
+        && request.resource.data.requestedSubjects is list
+        && request.resource.data.requestedSubjects.size() > 0
+        && request.resource.data.requestedSubjects.size() <= 20
+        && request.resource.data.requestedClasses is list
+        && request.resource.data.requestedClasses.size() > 0
+        && request.resource.data.requestedClasses.size() <= 20
+        && isOptStr(request.resource.data.get('requestedTeachingLevel', null), 100)
+        && request.resource.data.reason is string
+        && request.resource.data.reason.size() >= 10;
+      allow update: if isAdmin()
+        && resource.data.status == 'pending'
+        && resource.data.teacherUid != uid()
+        && request.resource.data.status in ['approved', 'rejected']
+        && changedKeys()
+             .hasOnly(['status', 'decidedBy', 'decidedAt', 'decisionReason', 'updatedAt'])
+        && request.resource.data.decidedBy == uid()
+        && request.resource.data.decisionReason is string
+        && request.resource.data.decisionReason.size() >= 10;
+      allow delete: if false;
+    }
+    function healthRead(d) {
+      return isPublished(d) || isModerator();
+    }
+    function healthDraftCreate() {
+      return isModerator() && isDraftStatus(request.resource.data.reviewStatus);
+    }
+    function healthUpdate(d) {
+      return (isModerator()
+              && isDraftStatus(d.reviewStatus)
+              && isDraftStatus(request.resource.data.reviewStatus))
+        || isAdmin();
+    }
+    function noDosage() { return !('dosage' in request.resource.data); }
+    match /medicines/{medicineId} {
+      allow read: if healthRead(resource.data);
+      allow create: if healthDraftCreate() && noDosage()
+        && isStr(request.resource.data.title, 100)
+        && isStr(request.resource.data.titleBn, 100)
+        && isStr(request.resource.data.useBn, 2000)
+        && isStr(request.resource.data.useEn, 2000)
+        && isStr(request.resource.data.formBn, 200)
+        && isStr(request.resource.data.formEn, 200)
+        && isStr(request.resource.data.sideEffectsBn, 2000)
+        && isStr(request.resource.data.sideEffectsEn, 2000)
+        && isStr(request.resource.data.warningsBn, 2000)
+        && isStr(request.resource.data.warningsEn, 2000)
+        && isStr(request.resource.data.source, 200)
+        && request.resource.data.prescriptionOnly is bool;
+      allow update: if healthUpdate(resource.data) && noDosage();
+      allow delete: if isAdmin();
+    }
+    match /diseases/{diseaseId} {
+      allow read: if healthRead(resource.data);
+      allow create: if healthDraftCreate()
+        && isStr(request.resource.data.title, 100)
+        && isStr(request.resource.data.titleBn, 100)
+        && isStr(request.resource.data.symptomsBn, 2000)
+        && isStr(request.resource.data.symptomsEn, 2000)
+        && isStr(request.resource.data.preventionBn, 2000)
+        && isStr(request.resource.data.preventionEn, 2000)
+        && isStr(request.resource.data.seeDoctorBn, 2000)
+        && isStr(request.resource.data.seeDoctorEn, 2000)
+        && isStr(request.resource.data.source, 200);
+      allow update: if healthUpdate(resource.data);
+      allow delete: if isAdmin();
+    }
+    match /facilities/{facilityId} {
+      allow read: if healthRead(resource.data);
+      allow create: if healthDraftCreate()
+        && isStr(request.resource.data.title, 200)
+        && isStr(request.resource.data.titleBn, 200)
+        && request.resource.data.kind in ['hospital', 'clinic', 'pharmacy']
+        && isStr(request.resource.data.areaBn, 100)
+        && isStr(request.resource.data.areaEn, 100)
+        && isStr(request.resource.data.source, 200);
+      allow update: if healthUpdate(resource.data);
+      allow delete: if isAdmin();
+    }
+    match /doctors/{doctorId} {
+      allow read: if (isPublished(resource.data)
+              && resource.data.verificationStatus == 'verified')
+        || isModerator();
+      allow create: if healthDraftCreate()
+        && request.resource.data.verificationStatus == 'pending'
+        && isStr(request.resource.data.title, 100)
+        && isStr(request.resource.data.titleBn, 100)
+        && isStr(request.resource.data.qualificationBn, 500)
+        && isStr(request.resource.data.qualificationEn, 500)
+        && isStr(request.resource.data.specialityBn, 200)
+        && isStr(request.resource.data.specialityEn, 200)
+        && isStr(request.resource.data.workplaceBn, 200)
+        && isStr(request.resource.data.workplaceEn, 200);
+      allow update: if isModerator()
+        && resource.data.verificationStatus == 'pending'
+        && request.resource.data.verificationStatus == 'pending'
+        && isDraftStatus(resource.data.reviewStatus)
+        && isDraftStatus(request.resource.data.reviewStatus);
+      allow update: if isAdmin()
+        && resource.data.verificationStatus == 'pending'
+        && resource.data.get('userId', '') != uid()
+        && changedKeys()
+             .hasOnly(['verificationStatus', 'verifiedBy', 'verifiedAt', 'reason', 'checks', 'updatedAt'])
+        && request.resource.data.verificationStatus in ['verified', 'rejected']
+        && request.resource.data.verifiedBy == uid()
+        && request.resource.data.reason is string
+        && request.resource.data.reason.size() >= 10
+        && (request.resource.data.verificationStatus != 'verified'
+            || (request.resource.data.checks is map
+                && request.resource.data.checks.get('identity', false) == true
+                && request.resource.data.checks.get('qualification', false) == true
+                && request.resource.data.checks.get('adult', false) == true));
+      allow update: if isAdmin()
+        && resource.data.verificationStatus == 'verified'
+        && resource.data.get('userId', '') != uid()
+        && request.resource.data.verificationStatus == 'revoked'
+        && changedKeys()
+             .hasOnly(['verificationStatus', 'verifiedBy', 'verifiedAt', 'reason', 'updatedAt'])
+        && request.resource.data.verifiedBy == uid()
+        && request.resource.data.reason is string
+        && request.resource.data.reason.size() >= 10;
+      allow update: if isAdmin()
+        && !('verificationStatus' in changedKeys());
+      allow delete: if isAdmin();
+    }
+    match /socialProfiles/{userId} {
+      allow read: if isOwner(userId) || isModerator()
+        || (resource.data.isPublic == true && isPublished(resource.data));
+      allow create, update: if isOwner(userId)
+        && isOptStr(request.resource.data.bio, 300)
+        && request.resource.data.isPublic == false;
+      allow delete: if isAdmin();
+    }
+    match /friendships/{pairId} {
+      allow read: if signedIn()
+        && (resource.data.userA == uid() || resource.data.userB == uid() || isModerator());
+      allow create: if signedIn() && callerActive()
+        && (request.resource.data.userA == uid() || request.resource.data.userB == uid())
+        && request.resource.data.status == 'pending'
+        && request.resource.data.guardianApproved == false;
+      allow update: if isModerator()
+        || (signedIn() && callerActive() && resource.data.userB == uid()
+            && request.resource.data.status in ['accepted', 'declined', 'blocked']
+            && request.resource.data.guardianApproved == resource.data.guardianApproved);
+      allow delete: if false;
+    }
+    match /follows/{followId} {
+      allow read: if signedIn() && resource.data.followerId == uid();
+      allow create: if signedIn() && callerActive() && request.resource.data.followerId == uid();
+      allow delete: if signedIn() && resource.data.followerId == uid();
+      allow update: if false;
+    }
+    match /socialPosts/{postId} {
+      allow read: if isPublished(resource.data) || isModerator()
+        || (signedIn() && resource.data.authorId == uid());
+      allow create: if signedIn() && callerActive()
+        && request.resource.data.authorId == uid()
+        && request.resource.data.reviewStatus == 'Under Review'
+        && isStr(request.resource.data.body, 1000);
+      allow update: if isModerator()
+        || (signedIn() && callerActive() && resource.data.authorId == uid()
+            && resource.data.reviewStatus == 'Under Review'
+            && request.resource.data.reviewStatus == 'Under Review');
+      allow delete: if isAdmin();
+    }
+    match /socialPosts/{postId}/comments/{commentId} {
+      allow read: if isPublished(resource.data) || isModerator();
+      allow create: if signedIn() && callerActive()
+        && request.resource.data.authorId == uid()
+        && request.resource.data.reviewStatus == 'Under Review'
+        && isStr(request.resource.data.body, 500);
+      allow update, delete: if isModerator();
+    }
+    match /studyGroups/{groupId} {
+      allow read: if isPublished(resource.data) || isModerator();
+      allow create: if signedIn() && callerActive() && request.resource.data.reviewStatus == 'Under Review'
+        && isStr(request.resource.data.name, 100) && isStr(request.resource.data.description, 500);
+      allow update: if isModerator();
+      allow delete: if isAdmin();
+    }
+    match /groupMemberships/{membershipId} {
+      allow read: if signedIn() && (resource.data.userId == uid() || isModerator());
+      allow create: if ownCreate()
+        && request.resource.data.status == 'pending';
+      allow update: if isModerator();
+      allow delete: if isAdmin();
+    }
+    match /institutionPages/{pageId} {
+      allow read: if isPublished(resource.data) || isModerator();
+      allow create, update: if isAdmin();
+      allow delete: if isAdmin();
+    }
+    match /notices/{noticeId} {
+      allow read: if isPublished(resource.data) || isModerator();
+      allow create: if isModerator()
+        && request.resource.data.reviewStatus == 'Under Review'
+        && isStr(request.resource.data.title, 200) && isStr(request.resource.data.body, 2000);
+      allow update: if isModerator();
+      allow delete: if isAdmin();
+    }
+    match /games/{gameId} {
+      allow read: if isPublished(resource.data) || isModerator();
+      allow create: if contentCreate();
+      allow update: if contentUpdate(resource.data);
+      allow delete: if isAdmin();
+    }
+    match /users/{userId}/gameAttempts/{attemptId} {
+      allow read: if isOwner(userId) || isAdmin();
+      allow create: if isOwner(userId) && callerActive() && request.resource.data.gameId is string
+        && request.resource.data.score is number;
+      allow update, delete: if false;
+    }
+    match /competitions/{competitionId} {
+      allow read: if isPublished(resource.data) || isModerator();
+      allow create: if isModerator();
+      allow update: if isModerator();
+      allow delete: if isAdmin();
+    }
+    match /competitions/{competitionId}/entries/{userId} {
+      allow read: if isOwner(userId) || isModerator();
+      allow create: if isOwner(userId) && callerActive() && request.resource.data.score is number;
+      allow update, delete: if false;
+    }
+    match /leaderboardSnapshots/{snapshotId} {
+      allow read: if true;
+      allow write: if isModerator();
+    }
+    match /rewardBalances/{userId} {
+      allow read: if isOwner(userId) || isAdmin();
+      allow write: if false;
+    }
+    match /achievements/{key} {
+      allow read: if isPublished(resource.data) || isModerator();
+      allow write: if isAdmin();
+    }
+    match /users/{userId}/userAchievements/{key} {
+      allow read: if isOwner(userId) || isAdmin();
+      allow create: if isOwner(userId) && callerActive();
+      allow update, delete: if false;
+    }
+    match /certificates/{certId} {
+      allow read: if signedIn() && (resource.data.userId == uid() || isAdmin());
+      allow write: if isModerator();
+    }
+    match /users/{userId}/passportEntries/{entryId} {
+      allow read: if isOwner(userId) || isAdmin();
+      allow create: if isOwner(userId) && callerActive();
+      allow update, delete: if false;
+    }
+    match /careerPaths/{pathId} {
+      allow read: if isPublished(resource.data) || isModerator();
+      allow create: if isVerifiedJobBankAuthor() && isDraftStatus(request.resource.data.reviewStatus);
+      allow update: if contentUpdate(resource.data);
+      allow delete: if isAdmin();
+    }
+    match /opportunities/{oppId} {
+      allow read: if isPublished(resource.data) || isModerator();
+      allow create: if isModerator() && isDraftStatus(request.resource.data.reviewStatus);
+      allow update: if isModerator();
+      allow delete: if isAdmin();
+    }
+    match /parentLinks/{linkId} {
+      allow read: if signedIn()
+        && (resource == null || resource.data.parentId == uid() || resource.data.studentId == uid() || isAdmin());
+      allow create: if signedIn() && callerActive()
+        && linkId == uid() + '_' + request.resource.data.studentId
+        && request.resource.data.parentId == uid()
+        && request.resource.data.studentId is string
+        && request.resource.data.studentId != uid()
+        && request.resource.data.status == 'pending'
+        && isStr(request.resource.data.guardianDisplayName, 100)
+        && isStr(request.resource.data.relationship, 50)
+        && isOptStr(request.resource.data.get('guardianContact', null), 20)
+        && isStr(request.resource.data.childDisplayName, 100)
+        && isStr(request.resource.data.childClassLevel, 100)
+        && isOptStr(request.resource.data.get('childInstitution', null), 200)
+        && isOptStr(request.resource.data.get('childEducationType', null), 50)
+        && isOptStr(request.resource.data.get('childDepartment', null), 100)
+        && isOptStr(request.resource.data.get('childProgram', null), 100)
+        && isOptStr(request.resource.data.get('childBoard', null), 200);
+      allow update: if signedIn() && callerActive()
+        && resource.data.studentId == uid()
+        && resource.data.status == 'pending'
+        && request.resource.data.status == 'confirmed'
+        && changedKeys()
+             .hasOnly(['status', 'confirmedAt', 'updatedAt']);
+      allow update: if signedIn() && callerActive()
+        && resource.data.studentId == uid()
+        && request.resource.data.status == resource.data.status
+        && changedKeys()
+             .hasOnly(['childClassLevel', 'childDisplayName', 'childEducationType',
+                       'childDepartment', 'childProgram', 'childBoard', 'updatedAt'])
+        && isStr(request.resource.data.childDisplayName, 100)
+        && isStr(request.resource.data.childClassLevel, 100);
+      allow update: if signedIn() && callerActive()
+        && (resource.data.parentId == uid() || resource.data.studentId == uid())
+        && request.resource.data.status == 'revoked'
+        && changedKeys()
+             .hasOnly(['status', 'revokedAt', 'updatedAt']);
+      allow update: if isAdmin()
+        && resource.data.status in ['pending', 'confirmed']
+        && request.resource.data.status == 'verified'
+        && changedKeys()
+             .hasOnly(['status', 'verifiedBy', 'verifiedAt', 'decidedBy', 'decisionReason', 'updatedAt'])
+        && request.resource.data.verifiedBy == uid()
+        && (request.resource.data.get('decidedBy', null) == null || request.resource.data.decidedBy == uid())
+        && isOptStr(request.resource.data.get('decisionReason', null), 500);
+      allow update: if isAdmin()
+        && resource.data.status in ['pending', 'confirmed']
+        && request.resource.data.status == 'rejected'
+        && changedKeys()
+             .hasOnly(['status', 'decidedBy', 'decisionReason', 'rejectedAt', 'updatedAt'])
+        && request.resource.data.decidedBy == uid()
+        && isStr(request.resource.data.decisionReason, 500);
+      allow update: if isAdmin()
+        && resource.data.status in ['pending', 'confirmed', 'verified']
+        && request.resource.data.status == 'revoked'
+        && changedKeys()
+             .hasOnly(['status', 'revokedAt', 'updatedAt']);
+      allow delete: if isAdmin();
+    }
+    match /parentInvites/{inviteId} {
+      allow read: if signedIn() && (resource.data.studentId == uid() || isAdmin());
+      allow create: if signedIn() && callerActive() && request.resource.data.studentId == uid()
+        && request.resource.data.status == 'sent';
+      allow update: if isAdmin();
+      allow delete: if isAdmin();
+    }
+    match /giftCatalogue/{giftId} {
+      allow read: if resource.data.status == 'available' || isAdmin();
+      allow write: if isAdmin();
+    }
+    match /giftRedemptions/{redemptionId} {
+      allow read: if signedIn() && (resource.data.userId == uid() || isAdmin());
+      allow create: if ownCreate()
+        && request.resource.data.status == 'requested';
+      allow update: if isAdmin();
+      allow delete: if false;
+    }
+    match /partnerships/{partnerId} {
+      allow read, write: if isAdmin();
+    }
+    match /adminActions/{actionId} {
+      allow create: if isAdmin()
+        && request.resource.data.actorId == uid()
+        && request.resource.data.action in [
+             'user-suspend', 'user-reactivate', 'user-role-change',
+             'teacher-verification-approved', 'teacher-verification-rejected',
+             'teacher-verification-revoked', 'teacher-verification-reopened',
+             'teacher-change-approved', 'teacher-change-rejected',
+             'guardian-link-approved', 'guardian-link-rejected', 'guardian-link-revoked',
+             'feature-enabled', 'feature-disabled',
+             'backup-exported', 'nu-structure-applied', 'nu-syllabus-applied',
+             'nu-question-published', 'nu-question-withdrawn',
+             'job-content-published', 'job-content-unpublished',
+             'job-content-verified', 'job-content-returned',
+             'job-content-deleted',
+             'user-profile-viewed', 'user-messages-viewed',
+             'support-message-sent', 'message-reported', 'message-blocked']
+        && onlyKeys(
+             ['actorId', 'action', 'details', 'targetId', 'before', 'after', 'reason', 'createdAt'])
+        && request.resource.data.createdAt is timestamp;
+      allow create: if signedIn() && callerActive()
+        && request.resource.data.actorId == uid()
+        && request.resource.data.targetId == uid()
+        && request.resource.data.action == 'profile-changed'
+        && onlyKeys(
+             ['actorId', 'action', 'details', 'targetId', 'before', 'after', 'createdAt'])
+        && request.resource.data.details is string
+        && request.resource.data.createdAt is timestamp;
+      allow create: if signedIn() && callerActive()
+        && request.resource.data.actorId == uid()
+        && request.resource.data.action in [
+             'guardian-link-requested', 'guardian-link-confirmed', 'guardian-link-revoked']
+        && request.resource.data.targetId is string
+        && request.resource.data.targetId.matches('^[^_]+_[^_]+$')
+        && onlyKeys(
+             ['actorId', 'action', 'details', 'targetId', 'before', 'after', 'createdAt'])
+        && request.resource.data.details is string
+        && request.resource.data.createdAt is timestamp;
+      allow read: if isOwnerRole();
+      allow update, delete: if false;
+    }
+    match /settings/features {
+      allow read: if signedIn();
+      allow create: if isOwnerRole()
+        && request.resource.data.keys().toSet().hasOnly(
+             ['ai-teacher', 'video-uploads', 'comments', 'social', 'games',
+              'health', 'career', 'offline-downloads', 'live-classes',
+              'video-ads', 'paid-subscriptions', 'updatedAt'])
+        && request.resource.data.get('ai-teacher', false) is bool
+        && request.resource.data.get('video-uploads', false) is bool
+        && request.resource.data.get('comments', false) is bool
+        && request.resource.data.get('social', false) is bool
+        && request.resource.data.get('games', false) is bool
+        && request.resource.data.get('health', false) is bool
+        && request.resource.data.get('career', false) is bool
+        && request.resource.data.get('offline-downloads', false) is bool
+        && request.resource.data.get('live-classes', false) is bool
+        && request.resource.data.get('video-ads', false) is bool
+        && request.resource.data.get('paid-subscriptions', false) is bool
+        && request.resource.data.updatedAt is timestamp;
+      allow update: if isOwnerRole()
+        && changedKeys()
+             .hasOnly(['ai-teacher', 'video-uploads', 'comments', 'social', 'games',
+                       'health', 'career', 'offline-downloads', 'live-classes',
+                       'video-ads', 'paid-subscriptions', 'updatedAt'])
+        && request.resource.data.get('ai-teacher', false) is bool
+        && request.resource.data.get('video-uploads', false) is bool
+        && request.resource.data.get('comments', false) is bool
+        && request.resource.data.get('social', false) is bool
+        && request.resource.data.get('games', false) is bool
+        && request.resource.data.get('health', false) is bool
+        && request.resource.data.get('career', false) is bool
+        && request.resource.data.get('offline-downloads', false) is bool
+        && request.resource.data.get('live-classes', false) is bool
+        && request.resource.data.get('video-ads', false) is bool
+        && request.resource.data.get('paid-subscriptions', false) is bool;
+      allow delete: if false;
+    }
+    match /settings/ads {
+      allow read: if signedIn();
+      allow create, update: if isOwnerRole()
+        && request.resource.data.keys().toSet().hasOnly(['in-feed', 'in-feed-2', 'updatedAt'])
+        && request.resource.data.get('in-feed', true) is bool
+        && request.resource.data.get('in-feed-2', true) is bool;
+      allow delete: if false;
+    }
+    match /supportMessages/{threadId} {
+      allow read: if signedIn() && (resource.data.userId == uid() || isAdmin());
+      allow create: if signedIn() && callerActive()
+        && request.resource.data.userId == uid()
+        && request.resource.data.status in ['open', 'closed'];
+      allow update: if isAdmin()
+        && changedKeys().hasOnly(['status', 'updatedAt'])
+        && request.resource.data.status in ['open', 'closed'];
+      allow delete: if false;
+    }
+    match /supportMessages/{threadId}/messages/{messageId} {
+      allow read: if signedIn()
+        && (get(/databases/$(database)/documents/supportMessages/$(threadId)).data.userId == uid() || isAdmin());
+      allow create: if signedIn() && callerActive()
+        && request.resource.data.senderId == uid()
+        && request.resource.data.kind == 'text'
+        && isStr(request.resource.data.body, 2000);
+      allow update, delete: if false;
+    }
+    match /directMessages/{threadId} {
+      allow read: if signedIn() && uid() in resource.data.get('participants', []);
+      allow create, update, delete: if false;
+    }
+    match /directMessages/{threadId}/messages/{messageId} {
+      allow read: if signedIn()
+        && uid() in get(/databases/$(database)/documents/directMessages/$(threadId)).data.get('participants', []);
+      allow create, update, delete: if false;
+    }
+    match /jobCategories/{categoryId} {
+      allow read: if true;
+      allow create, update: if isAdmin()
+        && isStr(request.resource.data.nameBn, 100)
+        && isStr(request.resource.data.nameEn, 100)
+        && request.resource.data.order is int
+        && request.resource.data.order >= 1
+        && request.resource.data.order <= 10
+        && request.resource.data.hubSlugs is list
+        && request.resource.data.hubSlugs.size() >= 1
+        && request.resource.data.hubSlugs.toSet().hasOnly(jobExamSlugs())
+        && isStr(request.resource.data.accent, 20)
+        && request.resource.data.status in ['active', 'inactive'];
+      allow delete: if false;
+    }
+    match /jobExams/{examSlug} {
+      allow read: if resource.data.get('status', '') == 'published'
+        || (signedIn() && resource.data.get('authorId', '') == uid())
+        || isModerator();
+      allow create: if isModerator()
+        && request.resource.data.slug == examSlug
+        && request.resource.data.categoryId in jobCategoryIds()
+        && request.resource.data.tier in [1, 2, 3]
+        && isDraftStatus(request.resource.data.reviewStatus)
+        && request.resource.data.status == 'draft'
+        && isStr(request.resource.data.nameBn, 100)
+        && validJobRulesConfig(request.resource.data.rulesConfig)
+        && (!('rulesConfigHistory' in request.resource.data)
+            || request.resource.data.rulesConfigHistory == [])
+        && (!('authorId' in request.resource.data)
+            || request.resource.data.authorId == uid())
+        && (!('createdBy' in request.resource.data)
+            || request.resource.data.createdBy is string)
+        && request.resource.data.patternStatus in jobPatternStatuses()
+        && (request.resource.data.applicableCycle == null
+            || request.resource.data.applicableCycle is string)
+        && request.resource.data.get('scopeStatus', 'defined') in ['defined', 'scope_pending']
+        && (!('createdAt' in request.resource.data) || request.resource.data.createdAt is timestamp)
+        && (!('updatedAt' in request.resource.data) || request.resource.data.updatedAt is timestamp);
+      allow update: if isModerator()
+        && request.resource.data.get('rulesConfig', null) == resource.data.get('rulesConfig', null)
+        && request.resource.data.get('rulesConfigHistory', null) == resource.data.get('rulesConfigHistory', null)
+        && changedKeys()
+             .hasOnly(['nameBn', 'nameEn', 'fullBn', 'fullEn', 'orgBn', 'orgEn',
+                       'stepsBn', 'stepsEn', 'officialUrl', 'accent', 'accentSoft',
+                       'accentDeep', 'descriptionBn', 'descriptionEn',
+                       'syllabusSource', 'reviewStatus', 'updatedAt'])
+        && isDraftStatus(resource.data.reviewStatus)
+        && isDraftStatus(request.resource.data.reviewStatus)
+        && request.resource.data.status == 'draft'
+        && isStr(request.resource.data.nameBn, 100)
+        && isOptStr(request.resource.data.get('nameEn', null), 100)
+        && isOptStr(request.resource.data.get('fullBn', null), 200)
+        && isOptStr(request.resource.data.get('fullEn', null), 200)
+        && isOptStr(request.resource.data.get('orgBn', null), 200)
+        && isOptStr(request.resource.data.get('orgEn', null), 200)
+        && isOptStr(request.resource.data.get('stepsBn', null), 200)
+        && isOptStr(request.resource.data.get('stepsEn', null), 200)
+        && (request.resource.data.get('officialUrl', null) == null
+            || request.resource.data.get('officialUrl', null) is string)
+        && isOptStr(request.resource.data.get('accent', null), 20)
+        && isOptStr(request.resource.data.get('accentSoft', null), 20)
+        && isOptStr(request.resource.data.get('accentDeep', null), 20)
+        && isOptStr(request.resource.data.get('descriptionBn', null), 500)
+        && isOptStr(request.resource.data.get('descriptionEn', null), 500)
+        && (request.resource.data.get('syllabusSource', null) == null
+            || request.resource.data.get('syllabusSource', null) is string)
+        && (!('updatedAt' in request.resource.data) || request.resource.data.updatedAt is timestamp);
+      allow update: if isAdmin()
+        && request.resource.data.get('rulesConfig', null) != resource.data.get('rulesConfig', null)
+        && validJobRulesConfig(request.resource.data.rulesConfig)
+        && validJobRulesConfigHistoryChange(resource.data, request.resource.data)
+        && request.resource.data.get('rulesConfigHistory', null) is list
+        && request.resource.data.status == resource.data.status
+        && request.resource.data.reviewStatus == resource.data.reviewStatus
+        && request.resource.data.slug == resource.data.slug
+        && request.resource.data.categoryId == resource.data.categoryId
+        && request.resource.data.tier == resource.data.tier
+        && request.resource.data.get('authorId', null) == resource.data.get('authorId', null)
+        && request.resource.data.get('createdBy', null) == resource.data.get('createdBy', null)
+        && request.resource.data.get('createdAt', null) == resource.data.get('createdAt', null)
+        && request.resource.data.get('scopeStatus', 'defined') == resource.data.get('scopeStatus', 'defined')
+        && request.resource.data.get('patternStatus', null) == resource.data.get('patternStatus', null)
+        && request.resource.data.get('applicableCycle', null) == resource.data.get('applicableCycle', null)
+        && (!('updatedAt' in request.resource.data) || request.resource.data.updatedAt is timestamp);
+      allow update: if isAdmin()
+        && request.resource.data.get('rulesConfig', null) == resource.data.get('rulesConfig', null)
+        && request.resource.data.get('rulesConfigHistory', null) == resource.data.get('rulesConfigHistory', null)
+        && request.resource.data.slug == examSlug
+        && request.resource.data.categoryId in jobCategoryIds()
+        && request.resource.data.tier in [1, 2, 3]
+        && isJobExamReviewState(request.resource.data.reviewStatus)
+        && request.resource.data.status in ['draft', 'published']
+        && jobExamStatesConsistent(request.resource.data)
+        && request.resource.data.get('authorId', null) == resource.data.get('authorId', null)
+        && request.resource.data.get('createdBy', null) == resource.data.get('createdBy', null)
+        && request.resource.data.get('createdAt', null) == resource.data.get('createdAt', null)
+        && (!('patternStatus' in request.resource.data)
+            || request.resource.data.patternStatus in jobPatternStatuses())
+        && (request.resource.data.get('applicableCycle', null) == null
+            || request.resource.data.get('applicableCycle', null) is string)
+        && request.resource.data.get('scopeStatus', 'defined') in ['defined', 'scope_pending']
+        && isStr(request.resource.data.nameBn, 100)
+        && isOptStr(request.resource.data.get('nameEn', null), 100)
+        && isOptStr(request.resource.data.get('fullBn', null), 200)
+        && isOptStr(request.resource.data.get('fullEn', null), 200)
+        && isOptStr(request.resource.data.get('orgBn', null), 200)
+        && isOptStr(request.resource.data.get('orgEn', null), 200)
+        && isOptStr(request.resource.data.get('stepsBn', null), 200)
+        && isOptStr(request.resource.data.get('stepsEn', null), 200)
+        && (request.resource.data.get('officialUrl', null) == null
+            || request.resource.data.get('officialUrl', null) is string)
+        && isOptStr(request.resource.data.get('accent', null), 20)
+        && isOptStr(request.resource.data.get('accentSoft', null), 20)
+        && isOptStr(request.resource.data.get('accentDeep', null), 20)
+        && isOptStr(request.resource.data.get('descriptionBn', null), 500)
+        && isOptStr(request.resource.data.get('descriptionEn', null), 500)
+        && (request.resource.data.get('syllabusSource', null) == null
+            || request.resource.data.get('syllabusSource', null) is string)
+        && (!('updatedAt' in request.resource.data) || request.resource.data.updatedAt is timestamp);
+      allow delete: if isAdmin();
+    }
+    function isPracticeNuBundle(bundleId) {
+      return exists(/databases/$(database)/documents/nuQuestionBundles/$(bundleId))
+        && get(/databases/$(database)/documents/nuQuestionBundles/$(bundleId)).data.get('kind', '') == 'topic';
+    }
+    function hasFreshNuReceipt(bundleId) {
+      return exists(/databases/$(database)/documents/nuReceipts/$(uid() + '_' + bundleId))
+        && get(/databases/$(database)/documents/nuReceipts/$(uid() + '_' + bundleId)).data.userId == uid()
+        && get(/databases/$(database)/documents/nuReceipts/$(uid() + '_' + bundleId)).data.attemptId is string
+        && exists(/databases/$(database)/documents/users/$(uid())/nuAttempts/$(get(/databases/$(database)/documents/nuReceipts/$(uid() + '_' + bundleId)).data.attemptId))
+        && get(/databases/$(database)/documents/users/$(uid())/nuAttempts/$(get(/databases/$(database)/documents/nuReceipts/$(uid() + '_' + bundleId)).data.attemptId)).data.status == 'submitted'
+        && get(/databases/$(database)/documents/users/$(uid())/nuAttempts/$(get(/databases/$(database)/documents/nuReceipts/$(uid() + '_' + bundleId)).data.attemptId)).data.bundleId == bundleId
+        && get(/databases/$(database)/documents/users/$(uid())/nuAttempts/$(get(/databases/$(database)/documents/nuReceipts/$(uid() + '_' + bundleId)).data.attemptId)).data.userId == uid()
+        && get(/databases/$(database)/documents/nuReceipts/$(uid() + '_' + bundleId)).data.createdAt is timestamp
+        && get(/databases/$(database)/documents/nuReceipts/$(uid() + '_' + bundleId)).data.createdAt <= request.time
+        && request.time < get(/databases/$(database)/documents/nuReceipts/$(uid() + '_' + bundleId)).data.createdAt + duration.value(10, 'm');
+    }
+    match /nuExamConfigs/{configId} {
+      allow read: if resource.data.status == 'published' || isAdmin();
+      allow create, update: if isAdmin()
+        && request.resource.data.examType in ['NU_ADMISSION', 'NU_DAILY']
+        && request.resource.data.questionMode == 'MCQ'
+        && request.resource.data.marking is map
+        && request.resource.data.marking.correct == 1
+        && request.resource.data.marking.incorrect == 0
+        && request.resource.data.marking.unanswered == 0
+        && request.resource.data.marking.negativeMarking == false
+        && request.resource.data.vivaEnabled == false
+        && request.resource.data.officialRankEnabled == false
+        && request.resource.data.configVersion is int
+        && request.resource.data.configVersion >= 1
+        && request.resource.data.circularVersion is string
+        && request.resource.data.status in ['draft', 'published', 'withdrawn']
+        && ((request.resource.data.examType == 'NU_ADMISSION'
+            && request.resource.data.totalQuestions == 100
+            && request.resource.data.durationSeconds == 3600
+            && request.resource.data.sections is map
+            && request.resource.data.sections.bangla == 20
+            && request.resource.data.sections.english == 20
+            && request.resource.data.sections.generalKnowledge == 20
+            && request.resource.data.sections.groupSubjects == 40
+            && request.resource.data.sections.groupSubjectsDetail == null)
+          || (request.resource.data.examType == 'NU_DAILY'
+            && request.resource.data.totalQuestions is int
+            && request.resource.data.totalQuestions >= 20
+            && request.resource.data.totalQuestions <= 30
+            && request.resource.data.durationSeconds is int
+            && request.resource.data.durationSeconds >= 1200
+            && request.resource.data.durationSeconds <= 1800));
+      allow delete: if false;
+    }
+    match /nuCircularConfigs/{admissionId} {
+      allow read: if resource.data.status in ['published', 'historical', 'superseded'] || isAdmin();
+      allow create, update: if isAdmin()
+        && request.resource.data.status in ['draft', 'verified', 'published', 'historical', 'superseded']
+        && request.resource.data.academicSession is string
+        && request.resource.data.sourceType == 'official_circular';
+      allow delete: if false;
+    }
+    match /nuInstitutions/{institutionId} {
+      allow read: if resource.data.status == 'active' || isAdmin();
+      allow create, update: if isAdmin()
+        && request.resource.data.slug is string
+        && request.resource.data.officialUrl is string;
+      allow delete: if false;
+    }
+    match /nuGroups/{groupId} {
+      allow read: if resource.data.status == 'published' || isAdmin();
+      allow create, update: if isAdmin()
+        && request.resource.data.slug in ['humanities', 'science', 'business']
+        && request.resource.data.institutionId is string
+        && request.resource.data.examConfigId is string
+        && request.resource.data.circularVersion is string;
+      allow delete: if false;
+    }
+    match /nuSubjects/{subjectId} {
+      allow read: if signedIn() && (resource.data.status == 'published' || isAdmin()
+        || (isVerifiedTeacher() && resource.data.createdBy == uid()));
+      allow create: if (isAdmin() || (isVerifiedTeacher() && request.resource.data.createdBy == uid()))
+        && request.resource.data.status == 'draft'
+        && isValidNuSubject(request.resource.data);
+      allow update: if adminOrOwnTeacher()
+        && resource.data.status != 'published'
+        && !(request.resource.data.status == 'published' && !isAdmin())
+        && sameCreator()
+        && isValidNuSubject(request.resource.data);
+      allow delete: if false;
+    }
+    match /nuChapters/{chapterId} {
+      allow read: if signedIn() && (resource.data.status == 'published' || isAdmin()
+        || (isVerifiedTeacher() && resource.data.createdBy == uid()));
+      allow create: if (isAdmin() || (isVerifiedTeacher() && request.resource.data.createdBy == uid()))
+        && request.resource.data.status == 'draft'
+        && isValidNuChapter(request.resource.data);
+      allow update: if adminOrOwnTeacher()
+        && resource.data.status != 'published'
+        && !(request.resource.data.status == 'published' && !isAdmin())
+        && sameCreator()
+        && isValidNuChapter(request.resource.data);
+      allow delete: if false;
+    }
+    match /nuTopics/{topicId} {
+      allow read: if signedIn() && (resource.data.status == 'published' || isAdmin()
+        || (isVerifiedTeacher() && resource.data.createdBy == uid()));
+      allow create: if (isAdmin() || (isVerifiedTeacher() && request.resource.data.createdBy == uid()))
+        && request.resource.data.status == 'draft'
+        && isValidNuTopic(request.resource.data);
+      allow update: if adminOrOwnTeacher()
+        && resource.data.status != 'published'
+        && !(request.resource.data.status == 'published' && !isAdmin())
+        && sameCreator()
+        && isValidNuTopic(request.resource.data);
+      allow delete: if false;
+    }
+    match /nuLessons/{lessonId} {
+      allow read: if signedIn() && (resource.data.status == 'published' || isAdmin()
+        || (isVerifiedTeacher() && resource.data.createdBy == uid()));
+      allow create: if (isAdmin() || (isVerifiedTeacher() && request.resource.data.createdBy == uid()))
+        && request.resource.data.status == 'draft'
+        && isValidNuLesson(request.resource.data);
+      allow update: if adminOrOwnTeacher()
+        && resource.data.status != 'published'
+        && !(request.resource.data.status == 'published' && !isAdmin())
+        && sameCreator()
+        && isValidNuLesson(request.resource.data);
+      allow delete: if false;
+    }
+    match /nuQuestions/{questionId} {
+      allow read: if isAdmin() || (isVerifiedTeacher() && resource.data.createdBy == uid());
+      allow create: if (isAdmin() || isVerifiedTeacher())
+        && request.resource.data.status == 'draft'
+        && request.resource.data.version == 1
+        && request.resource.data.createdBy == uid()
+        && request.resource.data.createdAt is timestamp
+        && request.resource.data.createdAt == request.time
+        && isValidNuQuestion(request.resource.data);
+      allow update: if adminOrOwnTeacher()
+        && resource.data.status in ['draft', 'changes_requested']
+        && request.resource.data.status == resource.data.status
+        && request.resource.data.version == resource.data.version
+        && sameCreator()
+        && changedKeys().hasOnly(
+             ['questionText', 'questionLang', 'options', 'difficulty',
+              'explanation', 'sourceType', 'provenance', 'examYear',
+              'groupIds', 'subjectId', 'chapterId', 'topicId',
+              'circularVersion', 'updatedAt'])
+        && isValidNuQuestion(request.resource.data);
+      allow update: if isNuQuestionTransitionAllowed(resource.data.status, request.resource.data.status)
+        && isNuQuestionTransitionActorOk(request.resource.data.status)
+        && request.resource.data.version == resource.data.version
+        && sameCreator()
+        && changedKeys().hasOnly(
+             ['status', 'reviewedBy', 'reviewedAt', 'publishedAt', 'updatedAt'])
+        && (request.resource.data.status != 'submitted_for_review'
+            || (exists(/databases/$(database)/documents/nuQuestionDraftKeys/$(questionId))
+                && get(/databases/$(database)/documents/nuQuestionDraftKeys/$(questionId)).data.version == resource.data.version))
+        && (request.resource.data.status != 'under_review'
+            || (request.resource.data.reviewedBy == uid() && request.resource.data.reviewedAt is timestamp))
+        && (request.resource.data.status != 'published'
+            || (isValidNuQuestion(request.resource.data)
+                && request.resource.data.reviewedBy is string
+                && request.resource.data.reviewedAt is timestamp));
+      allow delete: if false;
+    }
+    match /nuQuestionDraftKeys/{questionId} {
+      allow read: if isAdmin() || (isVerifiedTeacher() && resource.data.createdBy == uid())
+        || (isVerifiedTeacher()
+            && exists(/databases/$(database)/documents/nuQuestions/$(questionId))
+            && get(/databases/$(database)/documents/nuQuestions/$(questionId)).data.status == 'under_review'
+            && get(/databases/$(database)/documents/nuQuestions/$(questionId)).data.reviewedBy == uid());
+      allow create: if (isAdmin() || isVerifiedTeacher())
+        && request.resource.data.questionId == questionId
+        && request.resource.data.createdBy == uid()
+        && isValidNuQuestionDraftKey(request.resource.data)
+        && exists(/databases/$(database)/documents/nuQuestions/$(questionId))
+        && get(/databases/$(database)/documents/nuQuestions/$(questionId)).data.status == 'draft'
+        && get(/databases/$(database)/documents/nuQuestions/$(questionId)).data.version == request.resource.data.version;
+      allow update: if adminOrOwnTeacher()
+        && request.resource.data.questionId == questionId
+        && request.resource.data.version == resource.data.version
+        && sameCreator()
+        && isValidNuQuestionDraftKey(request.resource.data)
+        && exists(/databases/$(database)/documents/nuQuestions/$(questionId))
+        && get(/databases/$(database)/documents/nuQuestions/$(questionId)).data.status == 'draft'
+        && get(/databases/$(database)/documents/nuQuestions/$(questionId)).data.version == request.resource.data.version;
+      allow delete: if false;
+    }
+    match /nuQuestionBundles/{bundleId} {
+      allow read: if (signedIn() && resource.data.status == 'published') || isAdmin();
+      allow create, update: if isAdmin()
+        && request.resource.data.bundleId == bundleId
+        && isValidNuBundle(request.resource.data);
+      allow delete: if false;
+    }
+    match /nuQuestionKeys/{bundleId} {
+      allow read: if isAdmin()
+        || (signedIn() && isPracticeNuBundle(bundleId))
+        || (signedIn() && hasFreshNuReceipt(bundleId));
+      allow create, update: if isAdmin()
+        && request.resource.data.bundleId == bundleId
+        && request.resource.data.questionVersion is int && request.resource.data.questionVersion >= 1
+        && request.resource.data.keys is list && request.resource.data.keys.size() >= 1
+        && request.resource.data.keys[0] is map
+        && request.resource.data.keys[0].questionId is string
+        && request.resource.data.keys[0].version is int && request.resource.data.keys[0].version >= 1
+        && request.resource.data.keys[0].correctOptionIndex is int
+        && request.resource.data.keys[0].correctOptionIndex >= 0 && request.resource.data.keys[0].correctOptionIndex <= 3
+        && exists(/databases/$(database)/documents/nuQuestionBundles/$(bundleId))
+        && request.resource.data.questionVersion == get(/databases/$(database)/documents/nuQuestionBundles/$(bundleId)).data.version;
+      allow delete: if false;
+    }
+    match /nuReceipts/{receiptId} {
+      allow read: if (signedIn() && resource.data.userId == uid()) || isAdmin();
+      allow create: if signedIn() && callerActive()
+        && receiptId == uid() + '_' + request.resource.data.bundleId
+        && onlyKeys(['userId', 'bundleId', 'attemptId', 'createdAt'])
+        && request.resource.data.userId == uid()
+        && request.resource.data.bundleId is string
+        && request.resource.data.bundleId.size() <= 200
+        && request.resource.data.attemptId is string
+        && request.resource.data.attemptId.size() <= 200
+        && request.resource.data.createdAt is timestamp
+        && request.resource.data.createdAt <= request.time
+        && request.resource.data.createdAt > request.time - duration.value(5, 'm')
+        && exists(/databases/$(database)/documents/users/$(uid())/nuAttempts/$(request.resource.data.attemptId))
+        && get(/databases/$(database)/documents/users/$(uid())/nuAttempts/$(request.resource.data.attemptId)).data.status == 'submitted'
+        && get(/databases/$(database)/documents/users/$(uid())/nuAttempts/$(request.resource.data.attemptId)).data.bundleId == request.resource.data.bundleId
+        && !exists(/databases/$(database)/documents/nuReceipts/$(receiptId));
+      allow update: if false;
+      allow delete: if resource.data.userId == uid();
+    }
+    match /users/{uid}/nuAttempts/{attemptId} {
+      allow read: if isOwner(uid) || isAdmin();
+      allow create: if isOwner(uid)
+        && request.resource.data.userId == uid
+        && request.resource.data.status == 'not_started'
+        && request.resource.data.kind in ['practice', 'mock', 'daily']
+        && request.resource.data.questionIds is list
+        && request.resource.data.startedAt == request.time
+        && request.resource.data.configSnapshot is map
+        && ((request.resource.data.kind == 'mock'
+            && request.resource.data.questionIds.size() == 100
+            && request.resource.data.configSnapshot.totalQuestions == 100
+            && request.resource.data.configSnapshot.durationSeconds == 3600
+            && request.resource.data.deadlineAt is timestamp
+            && request.resource.data.deadlineAt > request.time
+            && request.resource.data.deadlineAt <= request.time + duration.value(3600, 's'))
+          || (request.resource.data.kind == 'daily'
+            && request.resource.data.questionIds.size() >= 20
+            && request.resource.data.questionIds.size() <= 30
+            && request.resource.data.configSnapshot.totalQuestions >= 20
+            && request.resource.data.configSnapshot.totalQuestions <= 30
+            && request.resource.data.configSnapshot.durationSeconds >= 1200
+            && request.resource.data.configSnapshot.durationSeconds <= 1800
+            && request.resource.data.deadlineAt is timestamp
+            && request.resource.data.deadlineAt > request.time
+            && request.resource.data.deadlineAt <= request.time + duration.value(request.resource.data.configSnapshot.durationSeconds, 's'))
+          || (request.resource.data.kind == 'practice'
+            && request.resource.data.questionIds.size() >= 1
+            && request.resource.data.questionIds.size() <= 100));
+      allow update: if isOwner(uid)
+        && resource.data.status != 'submitted'
+        && request.time <= resource.data.deadlineAt
+        && request.resource.data.questionIds == resource.data.questionIds
+        && request.resource.data.configSnapshot == resource.data.configSnapshot
+        && (request.resource.data.status != 'submitted'
+            || request.resource.data.submittedAt == request.time)
+        && changedKeys().hasOnly(
+            ['answers', 'score', 'percentage', 'correctCount', 'wrongCount',
+             'unansweredCount', 'status', 'submittedAt', 'updatedAt']);
+      allow delete: if false;
+    }
+    match /users/{uid}/nuSessions/{sessionId} {
+      allow read: if isOwner(uid);
+      allow create: if isOwner(uid)
+        && onlyKeys(['attemptId', 'status', 'startedAt',
+             'deadlineAt', 'lastSavedAt', 'answers', 'deviceInfo', 'updatedAt'])
+        && request.resource.data.attemptId is string
+        && request.resource.data.status in ['in_progress', 'submitted']
+        && request.resource.data.startedAt is timestamp
+        && request.resource.data.deadlineAt is timestamp
+        && request.resource.data.updatedAt is timestamp;
+      allow update: if isOwner(uid)
+        && changedKeys()
+             .hasOnly(['status', 'lastSavedAt', 'answers', 'deviceInfo', 'updatedAt'])
+        && request.resource.data.status in ['in_progress', 'submitted'];
+      allow delete: if isOwner(uid) && resource.data.status == 'submitted';
+    }
+    match /nuReviews/{reviewId} {
+      allow read: if isAdmin() || (signedIn() && resource.data.reviewerId == uid());
+      allow create: if (isAdmin() || isVerifiedTeacher())
+        && request.resource.data.reviewerId == uid()
+        && request.resource.data.questionId is string
+        && request.resource.data.decision in ['approved', 'rejected', 'changes_requested']
+        && (!('reason' in request.resource.data)
+            || request.resource.data.reason is string)
+        && (request.resource.data.decision == 'approved'
+            || request.resource.data.get('reason', '').size() >= 10)
+        && exists(/databases/$(database)/documents/nuQuestions/$(request.resource.data.questionId))
+        && get(/databases/$(database)/documents/nuQuestions/$(request.resource.data.questionId)).data.createdBy != uid()
+        && request.resource.data.questionVersion is int
+        && request.resource.data.questionVersion == get(/databases/$(database)/documents/nuQuestions/$(request.resource.data.questionId)).data.version
+        && get(/databases/$(database)/documents/nuQuestions/$(request.resource.data.questionId)).data.status == 'under_review'
+        && get(/databases/$(database)/documents/nuQuestions/$(request.resource.data.questionId)).data.reviewedBy == uid()
+        && request.resource.data.checks is map
+        && request.resource.data.checks.questionCorrect is bool
+        && request.resource.data.checks.correctAnswerCorrect is bool
+        && request.resource.data.checks.explanationCorrect is bool
+        && request.resource.data.checks.sourceCorrect is bool
+        && request.resource.data.reviewedAt is timestamp
+        && request.resource.data.reviewedAt == request.time;
+      allow update, delete: if false;
+    }
+    match /nuPublications/{publicationId} {
+      allow read: if isAdmin();
+      allow create: if isAdmin()
+        && request.resource.data.action in ['published', 'withdrawn']
+        && request.resource.data.actorId == uid()
+        && request.resource.data.createdAt is timestamp
+        && request.resource.data.createdAt == request.time
+        && request.resource.data.questionId is string
+        && request.resource.data.questionVersion is int
+        && exists(/databases/$(database)/documents/nuQuestions/$(request.resource.data.questionId))
+        && request.resource.data.questionVersion == get(/databases/$(database)/documents/nuQuestions/$(request.resource.data.questionId)).data.version
+        && ((request.resource.data.action == 'published'
+             && get(/databases/$(database)/documents/nuQuestions/$(request.resource.data.questionId)).data.status == 'published')
+            || (request.resource.data.action == 'withdrawn'
+             && get(/databases/$(database)/documents/nuQuestions/$(request.resource.data.questionId)).data.status == 'withdrawn'));
+      allow update, delete: if false;
+    }
+    match /nuNotices/{noticeId} {
+      allow read: if resource.data.status == 'published' || isAdmin();
+      allow create, update: if isAdmin();
+      allow delete: if false;
+    }
+    match /nuCalendarEvents/{eventId} {
+      allow read: if resource.data.status == 'published' || isAdmin();
+      allow create, update: if isAdmin()
+        && request.resource.data.eventDate is timestamp;
+      allow delete: if false;
+    }
+    match /nuFacts/{factId} {
+      allow read: if true;
+      allow create, update: if isAdmin();
+      allow delete: if false;
+    }
+    match /nuReports/{reportId} {
+      allow read: if (signedIn() && resource.data.userId == uid()) || isAdmin();
+      allow create: if signedIn()
+        && request.resource.data.userId == uid()
+        && request.resource.data.status == 'open';
+      allow update: if isAdmin()
+        && changedKeys()
+             .hasOnly(['status', 'resolvedNote', 'updatedAt'])
+        && request.resource.data.status in ['open', 'investigating', 'resolved', 'dismissed'];
+      allow delete: if false;
+    }
+    match /nuCorrections/{correctionId} {
+      allow read: if (signedIn() && resource.data.userId == uid()) || isAdmin();
+      allow create: if signedIn()
+        && request.resource.data.userId == uid()
+        && request.resource.data.status == 'open';
+      allow update: if isAdmin()
+        && changedKeys()
+             .hasOnly(['status', 'updatedAt'])
+        && request.resource.data.status in ['open', 'approved', 'rejected'];
+      allow delete: if false;
+    }
+    match /jobSubjects/{subjectId} {
+      allow read: if signedIn() && resource.data.get('status', '') == 'published'
+        || (signedIn() && resource.data.get('authorId', '') == uid())
+        || isModerator();
+      allow create: if isAdmin()
+        && jobContentCreateCommon(request.resource.data)
+        && validJobSubject(request.resource.data)
+        && subjectId in canonicalJobSubjectIds()
+        && subjectId.matches('^' + request.resource.data.get('examSlug', '') + '__[a-z0-9-]+$')
+        && (request.resource.data.get('slug', null) == null
+            || subjectId == request.resource.data.get('examSlug', '') + '__' + request.resource.data.get('slug', ''));
+      allow update: if isTeacher()
+        && resource.data.get('authorId', '') == uid()
+        && isDraftStatus(resource.data.get('reviewStatus', ''))
+        && isDraftStatus(request.resource.data.get('reviewStatus', ''))
+        && resource.data.get('status', '') == 'draft'
+        && request.resource.data.get('status', '') == 'draft'
+        && changedKeys()
+             .hasOnly(['nameBn', 'nameEn', 'order', 'marks', 'syllabusSource',
+                       'reviewStatus', 'updatedAt'])
+        && validJobSubject(request.resource.data);
+      allow update: if isModerator()
+        && changedKeys()
+             .hasOnly(['nameBn', 'nameEn', 'order', 'marks', 'syllabusSource',
+                       'status', 'reviewStatus', 'verifiedBy', 'verifiedAt', 'updatedAt'])
+        && (resource.data.get('status', '') != 'published'
+            || changedKeys()
+                 .hasOnly(reviewKeys()))
+        && jobContentSecondEye(resource.data, request.resource.data)
+        && jobContentPublishTransition(resource.data, request.resource.data)
+        && validJobSubject(request.resource.data);
+      allow update: if isAdmin()
+        && changedKeys()
+             .hasOnly(['nameBn', 'nameEn', 'order', 'marks', 'syllabusSource',
+                       'status', 'reviewStatus', 'verifiedBy', 'verifiedAt', 'updatedAt'])
+        && jobContentSecondEye(resource.data, request.resource.data)
+        && jobContentPublishTransition(resource.data, request.resource.data)
+        && validJobSubject(request.resource.data);
+      allow delete: if isAdmin();
+    }
+    match /jobChapters/{chapterId} {
+      allow read: if signedIn() && resource.data.get('status', '') == 'published'
+        || (signedIn() && resource.data.get('authorId', '') == uid())
+        || isModerator();
+      allow create: if isVerifiedJobBankAuthor()
+        && jobContentCreateCommon(request.resource.data)
+        && validJobChapter(request.resource.data)
+        && chapterId.matches('^' + request.resource.data.get('subjectId', '') + '__[a-z0-9-]+$')
+        && request.resource.data.get('subjectId', '').matches('^' + request.resource.data.get('examSlug', '') + '__[a-z0-9-]+$')
+        && exists(/databases/$(database)/documents/jobSubjects/$(request.resource.data.get('subjectId', '')));
+      allow update: if isTeacher()
+        && resource.data.get('authorId', '') == uid()
+        && isDraftStatus(resource.data.get('reviewStatus', ''))
+        && isDraftStatus(request.resource.data.get('reviewStatus', ''))
+        && resource.data.get('status', '') == 'draft'
+        && request.resource.data.get('status', '') == 'draft'
+        && changedKeys()
+             .hasOnly(['nameBn', 'nameEn', 'descriptionBn', 'descriptionEn',
+                       'order', 'reviewStatus', 'updatedAt'])
+        && validJobChapter(request.resource.data);
+      allow update: if isModerator()
+        && changedKeys()
+             .hasOnly(['nameBn', 'nameEn', 'descriptionBn', 'descriptionEn',
+                       'order', 'status', 'reviewStatus', 'verifiedBy', 'verifiedAt', 'updatedAt'])
+        && (resource.data.get('status', '') != 'published'
+            || changedKeys()
+                 .hasOnly(reviewKeys()))
+        && jobContentSecondEye(resource.data, request.resource.data)
+        && jobContentPublishTransition(resource.data, request.resource.data)
+        && validJobChapter(request.resource.data);
+      allow update: if isAdmin()
+        && changedKeys()
+             .hasOnly(['nameBn', 'nameEn', 'descriptionBn', 'descriptionEn',
+                       'order', 'status', 'reviewStatus', 'verifiedBy', 'verifiedAt', 'updatedAt'])
+        && jobContentSecondEye(resource.data, request.resource.data)
+        && jobContentPublishTransition(resource.data, request.resource.data)
+        && validJobChapter(request.resource.data);
+      allow delete: if isAdmin();
+    }
+    match /jobTopics/{topicId} {
+      allow read: if signedIn() && resource.data.get('status', '') == 'published'
+        || (signedIn() && resource.data.get('authorId', '') == uid())
+        || isModerator();
+      allow create: if isVerifiedJobBankAuthor()
+        && jobContentCreateCommon(request.resource.data)
+        && validJobTopic(request.resource.data)
+        && topicId.matches('^' + request.resource.data.get('chapterId', '') + '__[a-z0-9-]+$')
+        && request.resource.data.get('subjectId', '').matches('^' + request.resource.data.get('examSlug', '') + '__[a-z0-9-]+$')
+        && request.resource.data.get('chapterId', '').matches('^' + request.resource.data.get('subjectId', '') + '__[a-z0-9-]+$')
+        && exists(/databases/$(database)/documents/jobChapters/$(request.resource.data.get('chapterId', '')));
+      allow update: if isTeacher()
+        && resource.data.get('authorId', '') == uid()
+        && isDraftStatus(resource.data.get('reviewStatus', ''))
+        && isDraftStatus(request.resource.data.get('reviewStatus', ''))
+        && resource.data.get('status', '') == 'draft'
+        && request.resource.data.get('status', '') == 'draft'
+        && changedKeys()
+             .hasOnly(['nameBn', 'nameEn', 'order', 'isCommon', 'commonExams',
+                       'commonStatus', 'questionTarget', 'reviewStatus', 'updatedAt'])
+        && validJobTopic(request.resource.data);
+      allow update: if isModerator()
+        && changedKeys()
+             .hasOnly(['nameBn', 'nameEn', 'order', 'isCommon', 'commonExams',
+                       'commonStatus', 'questionTarget', 'publishedQuestionCount',
+                       'status', 'reviewStatus', 'verifiedBy', 'verifiedAt', 'updatedAt'])
+        && (resource.data.get('status', '') != 'published'
+            || changedKeys()
+                 .hasOnly(reviewKeys()))
+        && jobContentSecondEye(resource.data, request.resource.data)
+        && jobContentPublishTransition(resource.data, request.resource.data)
+        && validJobTopic(request.resource.data);
+      allow update: if isAdmin()
+        && changedKeys()
+             .hasOnly(['nameBn', 'nameEn', 'order', 'isCommon', 'commonExams',
+                       'commonStatus', 'questionTarget', 'publishedQuestionCount',
+                       'status', 'reviewStatus', 'verifiedBy', 'verifiedAt', 'updatedAt'])
+        && jobContentSecondEye(resource.data, request.resource.data)
+        && jobContentPublishTransition(resource.data, request.resource.data)
+        && validJobTopic(request.resource.data);
+      allow delete: if isAdmin();
+    }
+    match /jobLessons/{lessonId} {
+      allow read: if signedIn() && resource.data.get('status', '') == 'published'
+        || (signedIn() && resource.data.get('authorId', '') == uid())
+        || isModerator();
+      allow create: if isVerifiedJobBankAuthor()
+        && jobContentCreateCommon(request.resource.data)
+        && request.resource.data.get('lessonType', '') == 'lesson'
+        && validJobLesson(request.resource.data)
+        && request.resource.data.get('subjectId', '').matches('^' + request.resource.data.get('examSlug', '') + '__[a-z0-9-]+$')
+        && request.resource.data.get('chapterId', '').matches('^' + request.resource.data.get('subjectId', '') + '__[a-z0-9-]+$')
+        && request.resource.data.get('topicId', '').matches('^' + request.resource.data.get('chapterId', '') + '__[a-z0-9-]+$')
+        && exists(/databases/$(database)/documents/jobTopics/$(request.resource.data.get('topicId', '')));
+      allow update: if isTeacher()
+        && resource.data.get('authorId', '') == uid()
+        && isDraftStatus(resource.data.get('reviewStatus', ''))
+        && isDraftStatus(request.resource.data.get('reviewStatus', ''))
+        && resource.data.get('status', '') == 'draft'
+        && request.resource.data.get('status', '') == 'draft'
+        && changedKeys()
+             .hasOnly(['titleBn', 'titleEn', 'body', 'bodyEn', 'order',
+                       'reviewStatus', 'updatedAt'])
+        && validJobLesson(request.resource.data);
+      allow update: if isModerator()
+        && changedKeys()
+             .hasOnly(['titleBn', 'titleEn', 'body', 'bodyEn', 'order',
+                       'status', 'reviewStatus', 'verifiedBy', 'verifiedAt', 'updatedAt'])
+        && (resource.data.get('status', '') != 'published'
+            || changedKeys()
+                 .hasOnly(reviewKeys()))
+        && jobContentSecondEye(resource.data, request.resource.data)
+        && jobContentPublishTransition(resource.data, request.resource.data)
+        && validJobLesson(request.resource.data);
+      allow update: if isAdmin()
+        && changedKeys()
+             .hasOnly(['titleBn', 'titleEn', 'body', 'bodyEn', 'order',
+                       'status', 'reviewStatus', 'verifiedBy', 'verifiedAt', 'updatedAt'])
+        && jobContentSecondEye(resource.data, request.resource.data)
+        && jobContentPublishTransition(resource.data, request.resource.data)
+        && validJobLesson(request.resource.data);
+      allow delete: if isAdmin();
+    }
+    function validJobExamDefinitionRulesSnapshot(s, kind) {
+      return s is map
+        && s.get('questionCount', null) is int
+        && s.get('questionCount', 0) >= 1 && s.get('questionCount', 0) <= 200
+        && s.get('timeMinutes', null) is int
+        && s.get('timeMinutes', 0) >= 1 && s.get('timeMinutes', 0) <= 600
+        && (kind != 'daily'
+            || (s.get('questionCount', 0) >= 20 && s.get('questionCount', 0) <= 30
+                && s.get('timeMinutes', 0) >= 20 && s.get('timeMinutes', 0) <= 30))
+        && s.get('marksPerQuestion', null) == 1
+        && (s.get('negativeMarking', null) == null
+            || s.get('negativeMarking', null) == 0
+            || s.get('negativeMarking', null) == 0.25
+            || s.get('negativeMarking', null) == 0.5)
+        && s.get('negativeMarkingVerified', null) is bool
+        && (s.get('passPercent', null) == null
+            || (s.get('passPercent', null) is number
+                && s.get('passPercent', 0) >= 0 && s.get('passPercent', 0) <= 100))
+        && isStr(s.get('scoringConfigVersion', null), 100);
+    }
+    function validJobExamDefinition(d, mockId) {
+      return d.get('examSlug', null) in jobExamSlugs()
+        && d.get('examSlug', null) != 'it-professional'
+        && isStr(d.get('titleBn', null), 200)
+        && isStr(d.get('titleEn', null), 200)
+        && d.get('kind', null) in ['daily', 'weekly', 'full']
+        && isStr(d.get('bundleId', null), 200)
+        && isStr(d.get('questionSetId', null), 200)
+        && validJobExamDefinitionRulesSnapshot(d.get('rulesSnapshot', null), d.get('kind', null))
+        && ((d.get('kind', null) == 'daily'
+              && d.get('scheduleDate', null) is string
+              && mockId == 'daily__' + d.get('scheduleDate', ''))
+            || (d.get('kind', null) == 'weekly'
+              && d.get('scheduleDate', null) is string
+              && mockId.matches('^weekly__[0-9]{4}-W[0-9]{2}$'))
+            || (d.get('kind', null) == 'full'
+              && d.get('scheduleDate', null) == null
+              && mockId.matches('^full__' + d.get('examSlug', '') + '__[0-9]+$')))
+        && ((d.get('kind', null) == 'weekly'
+              && d.get('examSlugCycle', null) in ['bcs', 'bank', 'primary-teacher', 'ntrca'])
+            || (d.get('kind', null) != 'weekly' && d.get('examSlugCycle', null) == null))
+        && d.get('status', null) in ['draft', 'published', 'archived']
+        && d.get('retakeAllowed', null) is bool
+        && (d.get('maxAttempts', null) == null
+            || (d.get('maxAttempts', null) is int && d.get('maxAttempts', 0) >= 1))
+        && (isOptTs(d, 'publishedAt'))
+        && (isOptStrNoMax(d, 'publishedBy'))
+        && (isOptTs(d, 'createdAt'))
+        && (isOptTs(d, 'updatedAt'));
+    }
+    match /jobExamDefinitions/{mockId} {
+      allow read: if resource.data.get('status', '') == 'published' || isModerator();
+      allow create: if isModerator()
+        && onlyKeys(['examSlug', 'titleBn', 'titleEn',
+             'kind', 'bundleId', 'questionSetId', 'rulesSnapshot', 'scheduleDate', 'examSlugCycle',
+             'status', 'retakeAllowed', 'maxAttempts', 'publishedAt', 'publishedBy',
+             'createdAt', 'updatedAt'])
+        && request.resource.data.get('status', '') == 'draft'
+        && validJobExamDefinition(request.resource.data, mockId);
+      allow update: if isModerator()
+        && onlyKeys(['examSlug', 'titleBn', 'titleEn',
+             'kind', 'bundleId', 'questionSetId', 'rulesSnapshot', 'scheduleDate', 'examSlugCycle',
+             'status', 'retakeAllowed', 'maxAttempts', 'publishedAt', 'publishedBy',
+             'createdAt', 'updatedAt'])
+        && validJobExamDefinition(request.resource.data, mockId)
+        && ((resource.data.get('status', '') == 'draft'
+              && request.resource.data.get('status', '') in ['draft', 'published', 'archived'])
+            || (resource.data.get('status', '') == 'published'
+              && request.resource.data.get('status', '') in ['published', 'archived']
+              && changedKeys()
+                   .hasOnly(['titleBn', 'titleEn', 'status', 'retakeAllowed',
+                             'maxAttempts', 'questionSetId', 'publishedAt', 'publishedBy', 'updatedAt']))
+            || (resource.data.get('status', '') == 'archived'
+              && request.resource.data.get('status', '') in ['archived', 'draft']));
+      allow delete: if isAdmin();
+    }
+    function validJobQuestionSetManifest(d) {
+      return d.get('examSlug', null) in jobExamSlugs()
+        && d.get('examSlug', null) != 'it-professional'
+        && isStr(d.get('mockId', null), 200)
+        && d.get('version', null) is int && d.get('version', 0) >= 1
+        && d.get('questionCount', null) is int
+        && d.get('questionCount', 0) >= 1 && d.get('questionCount', 0) <= 200
+        && d.get('questionRefs', null) is list
+        && d.get('questionRefs', []).size() == d.get('questionCount', 0)
+        && isStr(d.get('markingSchemeVersion', null), 100)
+        && d.get('status', null) in ['draft', 'published', 'archived']
+        && (isOptTs(d, 'publishedAt'))
+        && (isOptStrNoMax(d, 'publishedBy'))
+        && (isOptTs(d, 'createdAt'))
+        && (isOptTs(d, 'updatedAt'));
+    }
+    match /jobQuestionSetManifests/{questionSetId} {
+      allow read: if resource.data.get('status', '') == 'published' || isModerator();
+      allow create: if isModerator()
+        && onlyKeys(['examSlug', 'mockId', 'version',
+             'questionCount', 'questionRefs', 'markingSchemeVersion', 'status',
+             'publishedAt', 'publishedBy', 'createdAt', 'updatedAt'])
+        && request.resource.data.get('status', '') == 'draft'
+        && validJobQuestionSetManifest(request.resource.data);
+      allow update: if isModerator()
+        && onlyKeys(['examSlug', 'mockId', 'version',
+             'questionCount', 'questionRefs', 'markingSchemeVersion', 'status',
+             'publishedAt', 'publishedBy', 'createdAt', 'updatedAt'])
+        && validJobQuestionSetManifest(request.resource.data)
+        && ((resource.data.get('status', '') == 'draft'
+              && request.resource.data.get('status', '') in ['draft', 'published', 'archived'])
+            || (resource.data.get('status', '') == 'published'
+              && request.resource.data.get('status', '') in ['published', 'archived']
+              && changedKeys()
+                   .hasOnly(['status', 'publishedAt', 'publishedBy', 'updatedAt']))
+            || (resource.data.get('status', '') == 'archived'
+              && request.resource.data.get('status', '') in ['archived', 'draft']));
+      allow delete: if isAdmin();
+    }
+    function validJobExamUserLock(d, lockId, def) {
+      return d.keys().hasOnly(['uid', 'examSlug', 'mockId', 'definitionId',
+             'activeSessionId', 'status', 'durationSeconds', 'createdAt', 'updatedAt'])
+        && d.keys().hasAll(['uid', 'examSlug', 'mockId', 'definitionId',
+             'activeSessionId', 'status', 'durationSeconds', 'createdAt', 'updatedAt'])
+        && d.get('uid', '') == uid()
+        && lockId == uid() + '_' + d.get('examSlug', '')
+        && d.get('examSlug', null) in jobExamSlugs()
+        && d.get('mockId', null) is string && d.get('mockId', '').size() > 0
+        && d.get('definitionId', null) is string && d.get('definitionId', '').size() > 0
+        && d.get('activeSessionId', null) is string && d.get('activeSessionId', '').size() > 0
+        && d.get('status', '') == 'in_progress'
+        && d.get('durationSeconds', null) is int
+        && d.get('durationSeconds', 0) >= 60 && d.get('durationSeconds', 0) <= 7200
+        && d.get('createdAt', null) is timestamp
+        && d.get('createdAt', null) <= request.time
+        && d.get('createdAt', null) > request.time - duration.value(5, 'm')
+        && d.get('updatedAt', null) is timestamp
+        && def.get('status', null) == 'published'
+        && def.get('rulesSnapshot', null) is map
+        && def.get('rulesSnapshot', null).get('timeMinutes', null) is int
+        && d.get('durationSeconds', 0)
+             == def.rulesSnapshot.timeMinutes * 60
+        && def.get('examSlug', null) == d.get('examSlug', null);
+    }
+    function jobExamUserLockIsReleasable(lock) {
+      return lock.status == 'terminal'
+        || request.time > lock.createdAt
+             + duration.value(lock.durationSeconds, 's')
+             + duration.value(15, 'm');
+    }
+    match /jobExamUserLocks/{lockId} {
+      allow read: if (signedIn() && resource.data.get('uid', '') == uid()) || isModerator();
+      allow create: if signedIn() && callerActive()
+        && exists(/databases/$(database)/documents/jobExamDefinitions/$(request.resource.data.get('definitionId', '')))
+        && validJobExamUserLock(request.resource.data, lockId,
+             jobExamDefinitionData(request.resource.data.get('definitionId', '')))
+        && (!exists(/databases/$(database)/documents/jobExamUserLocks/$(lockId))
+            || jobExamUserLockIsReleasable(get(/databases/$(database)/documents/jobExamUserLocks/$(lockId)).data));
+      allow update: if signedIn() && callerActive()
+        && resource.data.get('uid', '') == uid()
+        && ((changedKeys().hasOnly(['status', 'updatedAt'])
+             && resource.data.get('status', '') == 'in_progress'
+             && request.resource.data.get('status', '') == 'terminal'
+             && getAfter(/databases/$(database)/documents/users/$(uid())/jobExamSessions/$(resource.data.get('activeSessionId', ''))).data.status in ['submitted', 'abandoned'])
+            || ((resource.data.get('status', '') == 'terminal'
+                 || (resource.data.get('status', '') == 'in_progress'
+                     && resource.data.get('createdAt', null) is timestamp
+                     && resource.data.get('durationSeconds', null) is int
+                     && request.time > resource.data.get('createdAt', null)
+                          + duration.value(resource.data.get('durationSeconds', 0), 's')
+                          + duration.value(15, 'm')))
+                && exists(/databases/$(database)/documents/jobExamDefinitions/$(request.resource.data.get('definitionId', '')))
+                && validJobExamUserLock(request.resource.data, lockId,
+                     jobExamDefinitionData(request.resource.data.get('definitionId', '')))));
+      allow delete: if false;
+    }
+    match /jobQuestions/{questionId} {
+      allow read: if isModerator()
+        || (isTeacher() && resource.data.get('authorId', '') == uid());
+      allow create: if isVerifiedJobBankAuthor()
+        && onlyKeys(['examSlug', 'subjectId',
+             'chapterId', 'topicId', 'questionText', 'options',
+             'correctLetter', 'explanation', 'whyWrong', 'difficulty',
+             'isPreviousYear', 'examYear', 'source', 'sourceUrl',
+             'status', 'reviewStatus', 'reviewerId', 'verifiedBy',
+             'verifiedAt', 'rejectionReason', 'duplicateHash',
+             'duplicateOf', 'bundleId', 'version', 'configVersion',
+             'authorId', 'createdBy', 'createdAt', 'updatedAt'])
+        && jobQuestionCreateCommon(request.resource.data)
+        && validJobQuestion(request.resource.data);
+      allow update: if isVerifiedJobBankAuthor()
+        && resource.data.get('authorId', '') == uid()
+        && resource.data.get('status', '') == 'draft'
+        && request.resource.data.get('status', '') == 'draft'
+        && resource.data.get('reviewStatus', '') in ['Not Started', 'In Progress']
+        && request.resource.data.get('reviewStatus', '') in ['Not Started', 'In Progress', 'Under Review']
+        && changedKeys()
+             .hasOnly(['questionText', 'options', 'correctLetter',
+                       'explanation', 'whyWrong', 'difficulty', 'source',
+                       'sourceUrl', 'examYear', 'isPreviousYear',
+                       'duplicateHash', 'duplicateOf', 'reviewStatus', 'updatedAt'])
+        && request.resource.data.get('version', 0) == resource.data.get('version', 0)
+        && validJobQuestion(request.resource.data);
+      allow update: if isModerator()
+        && changedKeys()
+             .hasOnly(['questionText', 'options', 'correctLetter',
+                       'explanation', 'whyWrong', 'difficulty', 'source',
+                       'sourceUrl', 'examYear', 'isPreviousYear',
+                       'duplicateHash', 'duplicateOf', 'bundleId',
+                       'status', 'reviewStatus', 'reviewerId',
+                       'verifiedBy', 'verifiedAt', 'rejectionReason',
+                       'version', 'updatedAt'])
+        && jobQuestionSecondEye(resource.data, request.resource.data)
+        && jobQuestionTransition(resource.data, request.resource.data)
+        && validJobQuestion(request.resource.data);
+      allow delete: if isAdmin();
+    }
+    match /jobQuestionBundles/{bundleId} {
+      allow read: if (signedIn() && resource.data.get('status', '') == 'published')
+        || isModerator();
+      allow create: if isModerator()
+        && !('correctLetter' in request.resource.data)
+        && !('explanation' in request.resource.data)
+        && !('correctText' in request.resource.data)
+        && (request.resource.data.get('kind', '') != 'topic'
+            || bundleId == 'topic__' + request.resource.data.get('topicId', ''))
+        && (request.resource.data.get('kind', '') != 'mock'
+            || bundleId == 'mock__' + request.resource.data.get('mockId', ''))
+        && (request.resource.data.get('kind', '') != 'daily'
+            || bundleId == 'daily__' + request.resource.data.get('mockId', ''))
+        && (request.resource.data.get('kind', '') != 'weekly'
+            || bundleId == 'weekly__' + request.resource.data.get('mockId', ''))
+        && onlyKeys(['kind', 'examSlug',
+             'topicId', 'mockId', 'year', 'titleBn', 'titleEn',
+             'questions', 'questionCount', 'status', 'reviewStatus',
+             'publishedAt', 'publishedBy', 'sourceQuestionIds',
+             'configVersion', 'bundleVersion', 'createdAt', 'updatedAt'])
+        && validJobQuestionBundle(request.resource.data);
+      allow update: if isModerator()
+        && !('correctLetter' in request.resource.data)
+        && !('explanation' in request.resource.data)
+        && !('correctText' in request.resource.data)
+        && (request.resource.data.get('kind', '') != 'topic'
+            || bundleId == 'topic__' + request.resource.data.get('topicId', ''))
+        && (request.resource.data.get('kind', '') != 'mock'
+            || bundleId == 'mock__' + request.resource.data.get('mockId', ''))
+        && (request.resource.data.get('kind', '') != 'daily'
+            || bundleId == 'daily__' + request.resource.data.get('mockId', ''))
+        && (request.resource.data.get('kind', '') != 'weekly'
+            || bundleId == 'weekly__' + request.resource.data.get('mockId', ''))
+        && validJobQuestionBundle(request.resource.data)
+        && (resource.data.get('status', '') != 'published'
+            || changedKeys()
+                 .hasOnly(['titleBn', 'titleEn', 'status', 'reviewStatus',
+                           'publishedAt', 'publishedBy', 'updatedAt']));
+      allow delete: if isAdmin();
+    }
+    match /circulars/{circularId} {
+      allow read: if resource.data.get('reviewStatus', '') == 'published' || isModerator();
+      allow create: if isModerator()
+        && onlyKeys(['examSlug', 'postTitleBn', 'postTitleEn', 'circularNumber', 'publishedDate', 'applicationDeadline', 'deadlinePrecision', 'totalPosts', 'eligibilitySummaryBn', 'eligibilitySummaryEn', 'officialUrl', 'applyUrl', 'copyStatus', 'copyTextExcerpt', 'reviewStatus', 'verifiedBy', 'verifiedAt', 'examDate', 'applicationStartDate', 'authorId', 'createdAt', 'updatedAt', 'verificationChecklist', 'reviewNote', 'lastEditedBy'])
+        && request.resource.data.get('reviewStatus', '') in ['draft', 'in-review', 'verified', 'rejected'];
+      allow update: if isModerator()
+        && onlyKeys(['examSlug', 'postTitleBn', 'postTitleEn', 'circularNumber', 'publishedDate', 'applicationDeadline', 'deadlinePrecision', 'totalPosts', 'eligibilitySummaryBn', 'eligibilitySummaryEn', 'officialUrl', 'applyUrl', 'copyStatus', 'copyTextExcerpt', 'reviewStatus', 'verifiedBy', 'verifiedAt', 'examDate', 'applicationStartDate', 'authorId', 'createdAt', 'updatedAt', 'verificationChecklist', 'reviewNote', 'lastEditedBy'])
+        && request.resource.data.get('reviewStatus', '') in ['draft', 'in-review', 'verified', 'published', 'rejected']
+        && (request.resource.data.get('reviewStatus', '') != 'published'
+          || resource.data.get('reviewStatus', '') == 'published'
+          || resource.data.get('reviewStatus', '') == 'verified'
+            && resource.data.get('authorId', '') != ''
+            && resource.data.get('authorId', '') != uid()
+            && request.resource.data.get('authorId', '') == resource.data.get('authorId', '')
+            && request.resource.data.get('verifiedBy', null) == resource.data.get('verifiedBy', null)
+            && request.resource.data.get('verifiedAt', null) == resource.data.get('verifiedAt', null)
+            && request.resource.data.get('verificationChecklist', null) == resource.data.get('verificationChecklist', null));
+      allow delete: if isAdmin();
+    }
+    match /jobReports/{reportId} {
+      allow read: if signedIn() && (resource.data.reporterId == uid() || isModerator());
+      allow create: if signedIn() && callerActive()
+        && request.resource.data.reporterId == uid()
+        && request.resource.data.status == 'open'
+        && request.resource.data.reason in ['wrong-answer', 'wrong-explanation', 'wrong-info', 'wrong-deadline', 'wrong-post-count', 'broken-link', 'new-extension', 'wrong-organization', 'duplicate', 'other']
+        && request.resource.data.targetType in ['jobQuestion', 'jobLesson', 'jobCircular', 'jobMock']
+        && request.resource.data.targetId is string
+        && request.resource.data.targetAuthorId is string
+        && isOptStr(request.resource.data.details, 2000)
+        && onlyKeys(['reporterId', 'targetType', 'targetId', 'targetAuthorId', 'reason', 'details', 'suggestedValue', 'evidenceUrl', 'status', 'priority', 'resolvedBy', 'resolvedAt', 'resolutionNote', 'createdAt', 'updatedAt']);
+      allow update: if isModerator()
+        && changedKeys()
+             .hasOnly(['status', 'priority', 'resolvedBy', 'resolvedAt', 'resolutionNote', 'updatedAt'])
+        && request.resource.data.status in ['open', 'investigating', 'resolved', 'dismissed'];
+      allow delete: if false;
+    }
+    match /jobCorrections/{correctionId} {
+      allow read: if signedIn() && (resource.data.requesterId == uid() || isModerator());
+      allow create: if signedIn() && callerActive()
+        && request.resource.data.requesterId == uid()
+        && request.resource.data.status == 'pending'
+        && request.resource.data.targetType in ['jobQuestion', 'jobLesson', 'jobCircular', 'jobMock']
+        && isStr(request.resource.data.whatsWrong, 2000)
+        && isStr(request.resource.data.proposedFix, 2000)
+        && isStr(request.resource.data.source, 500)
+        && onlyKeys(['requesterId', 'targetType', 'targetId', 'whatsWrong', 'proposedFix', 'source', 'status', 'decidedBy', 'decidedAt', 'decisionReason', 'createdAt', 'updatedAt']);
+      allow update: if isModerator()
+        && resource.data.status == 'pending'
+        && request.resource.data.status in ['accepted', 'rejected']
+        && changedKeys()
+             .hasOnly(['status', 'decidedBy', 'decidedAt', 'decisionReason', 'updatedAt'])
+        && request.resource.data.decidedBy == uid()
+        && request.resource.data.decisionReason is string
+        && request.resource.data.decisionReason.size() >= 10;
+      allow delete: if false;
+    }
+    match /circularHistory/{historyId} {
+      allow read: if isModerator();
+      allow create: if isModerator()
+        && onlyKeys(['circularId', 'fieldChanged', 'previousValue', 'newValue', 'sourceId', 'changedBy', 'changedAt', 'note'])
+        && request.resource.data.fieldChanged in ['applicationDeadline', 'officialUrl', 'applyUrl', 'totalPosts', 'reviewStatus', 'examDate', 'applicationStartDate', 'duplicateOf', 'correctionOf', 'extensionOf', 'relatedTo']
+        && request.resource.data.changedBy == uid()
+        && request.resource.data.circularId is string
+        && request.resource.data.changedAt is timestamp;
+      allow update, delete: if false;
+    }
+    match /approvedDomains/{domainId} {
+      allow read: if isModerator();
+      allow create, update: if isAdmin()
+        && onlyKeys(['domain', 'organization', 'examSlugs', 'addedBy', 'createdAt', 'updatedAt', 'status'])
+        && isStr(request.resource.data.domain, 200)
+        && isStr(request.resource.data.organization, 200)
+        && request.resource.data.get('status', 'active') in ['active', 'watch', 'deprecated'];
+      allow delete: if isAdmin();
+    }
+    match /jobQuestionKeys/{bundleId} {
+      allow read: if isModerator()
+        || (signedIn() && callerActive()
+            && ((exists(/databases/$(database)/documents/jobReceipts/$(uid() + '_' + bundleId))
+                 && exists(/databases/$(database)/documents/jobQuestionBundles/$(bundleId))
+                 && hasFreshJobReceipt(bundleId, jobReceiptData(bundleId), jobBundleData(bundleId)))
+                || (exists(/databases/$(database)/documents/jobQuestionBundles/$(bundleId))
+                 && isPracticeJobBundle(jobBundleData(bundleId)))));
+      allow create: if isModerator()
+        && onlyKeys(['bundleId', 'answers',
+             'configVersion', 'createdAt', 'updatedAt'])
+        && validJobQuestionKey(request.resource.data, bundleId)
+        && exists(/databases/$(database)/documents/jobQuestionBundles/$(bundleId))
+        && jobKeyMatchesBundle(request.resource.data, bundleId,
+             jobBundleData(bundleId));
+      allow update: if false;
+      allow delete: if isAdmin();
+    }
+    match /jobReceipts/{receiptId} {
+      allow read: if (signedIn() && resource.data.get('userId', '') == uid()) || isAdmin();
+      allow create: if signedIn() && callerActive()
+        && receiptId == uid() + '_' + request.resource.data.get('bundleId', '')
+        && onlyKeys(['userId', 'bundleId',
+             'attemptId', 'createdAt', 'purpose', 'bundleVersion'])
+        && request.resource.data.get('userId', '') == uid()
+        && request.resource.data.get('bundleId', null) is string
+        && request.resource.data.get('bundleId', '').size() <= 200
+        && request.resource.data.get('attemptId', null) is string
+        && request.resource.data.get('attemptId', '').size() <= 200
+        && request.resource.data.get('purpose', null) in ['practice_review', 'exam_review']
+        && request.resource.data.get('bundleVersion', null) is int
+        && request.resource.data.get('bundleVersion', 0) >= 1
+        && request.resource.data.get('createdAt', null) is timestamp
+        && request.resource.data.get('createdAt', null) <= request.time
+        && request.resource.data.get('createdAt', null) > request.time - duration.value(5, 'm')
+        && validJobReceiptAnchor(request.resource.data)
+        && reqBundleExists()
+        && get(/databases/$(database)/documents/jobQuestionBundles/$(request.resource.data.get('bundleId', ''))).data.status == 'published';
+      allow update: if signedIn() && callerActive()
+        && receiptId == uid() + '_' + request.resource.data.get('bundleId', '')
+        && request.resource.data.get('userId', '') == uid()
+        && resource.data.get('userId', '') == uid()
+        && resource.data.get('bundleId', '') == request.resource.data.get('bundleId', '')
+        && onlyKeys(['userId', 'bundleId',
+             'attemptId', 'createdAt', 'purpose', 'bundleVersion'])
+        && request.resource.data.get('bundleId', null) is string
+        && request.resource.data.get('bundleId', '').size() <= 200
+        && request.resource.data.get('attemptId', null) is string
+        && request.resource.data.get('attemptId', '').size() <= 200
+        && request.resource.data.get('purpose', null) in ['practice_review', 'exam_review']
+        && request.resource.data.get('bundleVersion', null) is int
+        && request.resource.data.get('bundleVersion', 0) >= 1
+        && request.resource.data.get('createdAt', null) is timestamp
+        && request.resource.data.get('createdAt', null) <= request.time
+        && request.resource.data.get('createdAt', null) > request.time - duration.value(5, 'm')
+        && validJobReceiptAnchor(request.resource.data)
+        && reqBundleExists()
+        && get(/databases/$(database)/documents/jobQuestionBundles/$(request.resource.data.get('bundleId', ''))).data.status == 'published';
+      allow delete: if isAdmin();
+    }
+    match /users/{userId}/jobAttempts/{attemptId} {
+      allow read: if isOwner(userId) || isModerator();
+      allow create: if isOwner(userId) && callerActive()
+        && reqBundleExists()
+        && exists(/databases/$(database)/documents/users/$(userId)/jobSessions/$(attemptId))
+        && validJobAttemptCreate(request.resource.data, userId, attemptId,
+             jobBundleData(request.resource.data.get('bundleId', '')),
+             jobSessionDataAfter(userId, attemptId));
+      allow update, delete: if false;
+    }
+    match /users/{userId}/jobSessions/{sessionId} {
+      allow read: if isOwner(userId) || isModerator();
+      allow create: if isOwner(userId) && callerActive()
+        && reqBundleExists()
+        && validJobSessionCreate(request.resource.data,
+             jobBundleData(request.resource.data.get('bundleId', '')));
+      allow update: if isOwner(userId) && callerActive()
+        && resource.data.get('status', '') == 'in-progress'
+        && changedKeys()
+             .hasOnly(['answers', 'currentQuestion', 'lastSyncedAt',
+                       'updatedAt', 'status', 'submittedAt', 'revision'])
+        && validJobSessionUpdate(request.resource.data, resource.data);
+      allow delete: if false;
+    }
+    match /users/{userId}/jobExamAttempts/{attemptId} {
+      allow read: if isOwner(userId) || isModerator();
+      allow create: if isOwner(userId) && callerActive()
+        && reqBundleExists()
+        && exists(/databases/$(database)/documents/users/$(userId)/jobExamSessions/$(attemptId))
+        && validJobExamAttemptCreate(request.resource.data, userId, attemptId,
+             jobBundleData(request.resource.data.get('bundleId', '')),
+             jobExamSessionDataAfter(userId, attemptId));
+      allow update, delete: if false;
+    }
+    match /users/{userId}/jobExamSessions/{sessionId} {
+      allow read: if isOwner(userId) || isModerator();
+      allow create: if isOwner(userId) && callerActive()
+        && reqBundleExists()
+        && exists(/databases/$(database)/documents/jobQuestionSetManifests/$(request.resource.data.get('questionSetId', '')))
+        && exists(/databases/$(database)/documents/jobExamDefinitions/$(request.resource.data.get('definitionId', '')))
+        && validJobExamSessionCreate(request.resource.data, sessionId,
+             jobBundleData(request.resource.data.get('bundleId', '')),
+             jobManifestData(request.resource.data.get('questionSetId', '')),
+             jobExamDefinitionData(request.resource.data.get('definitionId', '')),
+             getAfter(/databases/$(database)/documents/jobExamUserLocks/$(uid() + '_' + request.resource.data.get('examSlug', ''))).data);
+      allow update: if isOwner(userId) && callerActive()
+        && resource.data.get('status', '') == 'in-progress'
+        && changedKeys()
+             .hasOnly(['answers', 'currentQuestion', 'lastSyncedAt',
+                       'updatedAt', 'endsAt', 'clientEndsAtMillis',
+                       'status', 'submittedAt', 'revision'])
+        && validJobExamSessionUpdate(request.resource.data, resource.data);
+      allow delete: if false;
+    }
+    function validJobExamAuditLog(d, userId) {
+      return d.keys().hasOnly(['uid', 'event', 'examSlug', 'mockId',
+              'sessionId', 'bundleId', 'createdAt', 'detail'])
+        && d.get('uid', '') == userId
+        && d.get('event', '') in ['mock_started', 'mock_submitted',
+             'mock_abandoned', 'mock_submit_failed']
+        && d.get('examSlug', null) is string
+        && d.get('examSlug', '').size() > 0
+        && d.get('examSlug', '').size() <= 200
+        && d.get('mockId', null) is string
+        && d.get('mockId', '').size() > 0
+        && d.get('mockId', '').size() <= 200
+        && d.get('sessionId', null) is string
+        && d.get('sessionId', '').size() > 0
+        && d.get('sessionId', '').size() <= 200
+        && d.get('bundleId', null) is string
+        && d.get('bundleId', '').size() > 0
+        && d.get('bundleId', '').size() <= 200
+        && (d.get('detail', null) == null
+            || (d.get('detail', null) is string
+                && d.get('detail', '').size() <= 500))
+        && d.get('createdAt', null) is timestamp
+        && d.get('createdAt', null) <= request.time
+        && d.get('createdAt', null) > request.time - duration.value(5, 'm');
+    }
+    match /users/{userId}/jobExamAuditLogs/{logId} {
+      allow read: if isOwner(userId) || isModerator();
+      allow create: if isOwner(userId) && callerActive()
+        && validJobExamAuditLog(request.resource.data, userId);
+      allow update: if false;
+      allow delete: if isAdmin();
+    }
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

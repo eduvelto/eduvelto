@@ -51,10 +51,11 @@
 //   rewriting reporterId/targetId, correction decide rewriting
 //   whatsWrong, a report filed against a DRAFT circular
 //   (DOCUMENTED-LIMITATION — no target check, low), and the
-//   no-self-approval RULES gap (DOCUMENTED-LIMITATION — the
-//   guard is client-side until the post-refactor rules
-//   follow-up; the rules allow a moderator to publish their
-//   own draft circular).
+//   no-self-publication rules gap — FIXED in rules 23 Nov 2026
+//   (multi-AI fold-in USED #3): the publish transition now
+//   requires a 'verified' source, a publisher who is not the
+//   author, and no protected-field change in the same update;
+//   k15d tests are assertFails + honest-path pairs.
 // - (g) Guest / auth boundaries NOT covered elsewhere: guest quiz
 //   read, guest chapter read (preview vs non-preview), cross-user
 //   attempt + users-doc reads, settings/adminActions writes/reads,
@@ -394,6 +395,12 @@ async function seed() {
     await setDoc(doc(db, 'circulars', 'circ-draft'), validCircular({
       postTitleBn: 'খসড়া বিজ্ঞপ্তি', postTitleEn: 'Draft circular',
       reviewStatus: 'draft', verifiedBy: null, verifiedAt: null,
+    }));
+    // Verified circular for the k15d no-self-publication tests:
+    // authored by moderator-1, verified by moderator-2.
+    await setDoc(doc(db, 'circulars', 'circ-verified'), validCircular({
+      postTitleBn: 'যাচাইকৃত বিজ্ঞপ্তি', postTitleEn: 'Verified circular',
+      reviewStatus: 'verified', verifiedBy: 'moderator-2', verifiedAt: NOW_TS,
     }));
     // Job subject parent for the M2 jobChapters test.
     await setDoc(doc(db, 'jobSubjects', 'bcs__bangla'), VALID_SUBJECT);
@@ -962,19 +969,95 @@ describe('Step 17 — Step 15 admin gaps (k15, FIXED where rules can)', () => {
     );
   });
 
-  it('(k15d) DOCUMENTED-LIMITATION: a moderator CAN publish their own draft circular by rules (no-self-approval is client-enforced via canApproveCircular until the post-refactor rules follow-up). This test records the behaviour — it must become assertFails once that follow-up lands.', async () => {
-    // moderator-1 authored circ-draft; the rules allow a moderator to
-    // flip its reviewStatus to published. The client refuses.
-    await assertSucceeds(
+  it('(k15d) a moderator CANNOT publish their own DRAFT circular (no self-publication — multi-AI fold-in USED #3, FIXED in rules)', async () => {
+    // moderator-1 authored circ-draft; publishing it is denied
+    // even though the update also names them as verifier.
+    await assertFails(
       updateDoc(doc(asUser('moderator-1'), 'circulars', 'circ-draft'), {
         reviewStatus: 'published', verifiedBy: 'moderator-1', verifiedAt: NOW_TS, updatedAt: NOW_TS,
       }),
     );
-    // Restore the draft state for the rest of the suite.
+  });
+
+  it('(k15d-b) a moderator CANNOT publish their own VERIFIED circular either', async () => {
+    // circ-verified is authored by moderator-1; the author
+    // publishing it is denied even from the eligible state.
+    await assertFails(
+      updateDoc(doc(asUser('moderator-1'), 'circulars', 'circ-verified'), {
+        reviewStatus: 'published', updatedAt: NOW_TS,
+      }),
+    );
+  });
+
+  it('(k15d-c) a DIFFERENT moderator CANNOT publish a DRAFT directly (publish only from verified)', async () => {
+    // moderator-2 is not the author, but a draft is not an
+    // eligible publish source — drafts must go through verification.
+    await assertFails(
+      updateDoc(doc(asUser('moderator-2'), 'circulars', 'circ-draft'), {
+        reviewStatus: 'published', verifiedBy: 'moderator-2', verifiedAt: NOW_TS, updatedAt: NOW_TS,
+      }),
+    );
+  });
+
+  it('(k15d-d) HONEST: a different moderator CAN publish a verified circular', async () => {
+    // moderator-2 is not the author of circ-verified (moderator-1
+    // is); the publish transition verified -> published succeeds.
+    await assertSucceeds(
+      updateDoc(doc(asUser('moderator-2'), 'circulars', 'circ-verified'), {
+        reviewStatus: 'published', lastEditedBy: 'moderator-2', updatedAt: NOW_TS,
+      }),
+    );
+    // Restore the verified state for the rest of the suite.
     await env.withSecurityRulesDisabled(async (ctx) => {
-      await updateDoc(doc(ctx.firestore(), 'circulars', 'circ-draft'), {
-        reviewStatus: 'draft', verifiedBy: null, verifiedAt: null,
+      await updateDoc(doc(ctx.firestore(), 'circulars', 'circ-verified'), {
+        reviewStatus: 'verified',
       });
+    });
+  });
+
+  it('(k15d-e) a publisher CANNOT rewrite protected fields in the publish update', async () => {
+    // Rewriting authorId to a third party in the same update.
+    await assertFails(
+      updateDoc(doc(asUser('moderator-2'), 'circulars', 'circ-verified'), {
+        reviewStatus: 'published', authorId: 'admin-1', updatedAt: NOW_TS,
+      }),
+    );
+    // Rewriting verifiedBy (the approval record) in the same update.
+    await assertFails(
+      updateDoc(doc(asUser('moderator-2'), 'circulars', 'circ-verified'), {
+        reviewStatus: 'published', verifiedBy: 'moderator-1', updatedAt: NOW_TS,
+      }),
+    );
+  });
+
+  it('(k15d-f) HONEST: editing an already-published circular stays allowed (update-published-facts flow)', async () => {
+    // circ-pub is authored by moderator-1 and already published;
+    // a facts edit that keeps it published is not a publish
+    // transition and is unaffected by the k15d guard.
+    await assertSucceeds(
+      updateDoc(doc(asUser('moderator-1'), 'circulars', 'circ-pub'), {
+        totalPosts: 101, updatedAt: NOW_TS,
+      }),
+    );
+    // Restore.
+    await env.withSecurityRulesDisabled(async (ctx) => {
+      await updateDoc(doc(ctx.firestore(), 'circulars', 'circ-pub'), { totalPosts: 100 });
+    });
+  });
+
+  it('(k15d-g) creating a circular already PUBLISHED is DENIED; creating a draft SUCCEEDS', async () => {
+    await assertFails(
+      setDoc(doc(asUser('moderator-1'), 'circulars', 'circ-new-pub'), validCircular({})),
+    );
+    await assertSucceeds(
+      setDoc(doc(asUser('moderator-1'), 'circulars', 'circ-new-draft'), validCircular({
+        postTitleBn: 'নতুন খসড়া', postTitleEn: 'New draft',
+        reviewStatus: 'draft', verifiedBy: null, verifiedAt: null,
+      })),
+    );
+    // Clean up the created draft so no later test sees it.
+    await env.withSecurityRulesDisabled(async (ctx) => {
+      await deleteDoc(doc(ctx.firestore(), 'circulars', 'circ-new-draft'));
     });
   });
 });

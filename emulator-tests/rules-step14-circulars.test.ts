@@ -100,6 +100,7 @@ async function seed() {
     for (const [uid, role] of [
       ['student-1', 'student'],
       ['moderator-1', 'moderator'],
+      ['moderator-2', 'moderator'],
     ] as const) {
       await setDoc(doc(db, 'users', uid), {
         displayName: uid,
@@ -120,6 +121,24 @@ async function seed() {
         verifiedBy: null,
         verifiedAt: null,
         officialUrl: 'https://example-bank.gov.bd/circular/draft',
+        applyUrl: null,
+      }),
+    );
+    // Verified (not published) circular for r7: authored by
+    // moderator-1, verified by moderator-2. r7 publishes it via
+    // the honest path, then unpublishes it. Seeded 'verified' so
+    // the r1/i15 published-list assertions (exactly 2 published
+    // docs) are unaffected.
+    await setDoc(
+      doc(db, 'circulars', 'circ-r7'),
+      circularDoc({
+        examSlug: 'bank',
+        postTitleBn: 'ব্যাংক অফিসার — যাচাইকৃত',
+        postTitleEn: 'Bank Officer — verified',
+        reviewStatus: 'verified',
+        verifiedBy: 'moderator-2',
+        verifiedAt: TS(Date.UTC(2026, 11, 5, 6, 0, 0)),
+        officialUrl: 'https://example-bank.gov.bd/circular/verified',
         applyUrl: null,
       }),
     );
@@ -213,8 +232,16 @@ describe('Step 14 circulars write rules (r3–r8)', () => {
   });
 
   it('r7: a moderator unpublishes (reviewStatus=rejected) and the guest can no longer read it', async () => {
+    // Publish first via the honest path: circ-r7 is verified and
+    // authored by moderator-1, so moderator-2 (not the author)
+    // publishes it. Creating it already-published through the
+    // rules is denied since the k15d no-self-publication fix, so
+    // the setup can no longer use a direct published create.
+    await assertSucceeds(
+      updateDoc(doc(asModerator('moderator-2'), 'circulars', 'circ-r7'), { reviewStatus: 'published' }),
+    );
+    await assertSucceeds(getDoc(doc(asGuest(), 'circulars', 'circ-r7')));
     const db = asModerator();
-    await assertSucceeds(setDoc(doc(db, 'circulars', 'circ-r7'), circularDoc({})));
     await assertSucceeds(updateDoc(doc(db, 'circulars', 'circ-r7'), { reviewStatus: 'rejected' }));
     await assertFails(getDoc(doc(asGuest(), 'circulars', 'circ-r7')));
   });

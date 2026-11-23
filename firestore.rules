@@ -4453,9 +4453,40 @@ service cloud.firestore {
     // above match /jobReports.
     match /circulars/{circularId} {
       allow read: if resource.data.get('reviewStatus', '') == 'published' || isModerator();
-      allow create, update: if isModerator()
+      // k15d (multi-AI fold-in USED #3, 23 Nov 2026): no
+      // self-publication. Create and update are SPLIT (not one
+      // combined allow) so the publish guard can reference
+      // `resource` — on create `resource` is null and any
+      // `resource.data` reference errors instead of denying
+      // cleanly. Create already-'published' is denied outright
+      // (the client creates drafts). A transition INTO
+      // 'published' is allowed only from 'verified' (the client
+      // publish flow: verified -> published) and only by a
+      // moderator who is not the author; authorId, verifiedBy,
+      // verifiedAt and verificationChecklist must not change in
+      // that update. Editing an already-published circular
+      // (staying published) is unaffected. NOTE: the client
+      // approve-time owner override (canApproveCircular) has no
+      // on-doc marker, so it is NOT expressed here — an
+      // owner-authored circular must be published by a different
+      // moderator. Last-editor is deliberately NOT checked: the
+      // verifier may publish (client allows it), so a
+      // lastEditedBy check would break the honest path.
+      allow create: if isModerator()
         && onlyKeys(['examSlug', 'postTitleBn', 'postTitleEn', 'circularNumber', 'publishedDate', 'applicationDeadline', 'deadlinePrecision', 'totalPosts', 'eligibilitySummaryBn', 'eligibilitySummaryEn', 'officialUrl', 'applyUrl', 'copyStatus', 'copyTextExcerpt', 'reviewStatus', 'verifiedBy', 'verifiedAt', 'examDate', 'applicationStartDate', 'authorId', 'createdAt', 'updatedAt', 'verificationChecklist', 'reviewNote', 'lastEditedBy'])
-        && request.resource.data.get('reviewStatus', '') in ['draft', 'in-review', 'verified', 'published', 'rejected'];
+        && request.resource.data.get('reviewStatus', '') in ['draft', 'in-review', 'verified', 'rejected'];
+      allow update: if isModerator()
+        && onlyKeys(['examSlug', 'postTitleBn', 'postTitleEn', 'circularNumber', 'publishedDate', 'applicationDeadline', 'deadlinePrecision', 'totalPosts', 'eligibilitySummaryBn', 'eligibilitySummaryEn', 'officialUrl', 'applyUrl', 'copyStatus', 'copyTextExcerpt', 'reviewStatus', 'verifiedBy', 'verifiedAt', 'examDate', 'applicationStartDate', 'authorId', 'createdAt', 'updatedAt', 'verificationChecklist', 'reviewNote', 'lastEditedBy'])
+        && request.resource.data.get('reviewStatus', '') in ['draft', 'in-review', 'verified', 'published', 'rejected']
+        && (request.resource.data.get('reviewStatus', '') != 'published'
+          || resource.data.get('reviewStatus', '') == 'published'
+          || resource.data.get('reviewStatus', '') == 'verified'
+            && resource.data.get('authorId', '') != ''
+            && resource.data.get('authorId', '') != uid()
+            && request.resource.data.get('authorId', '') == resource.data.get('authorId', '')
+            && request.resource.data.get('verifiedBy', null) == resource.data.get('verifiedBy', null)
+            && request.resource.data.get('verifiedAt', null) == resource.data.get('verifiedAt', null)
+            && request.resource.data.get('verificationChecklist', null) == resource.data.get('verificationChecklist', null));
       allow delete: if isAdmin();
     }
 
