@@ -108,6 +108,14 @@ service cloud.firestore {
     function isOptStr(v, max) { return v == null || (v is string && v.size() <= max); }
     function isDraftStatus(s) { return s in ['Not Started', 'In Progress', 'Under Review']; }
     function isPublished(d) { return d.get('reviewStatus', '') == 'Published'; }
+    // changedKeys(): the set of fields an update touches — used by
+    // every update allowlist so the long diff() expression is written
+    // once (59 call sites) instead of 59 times. Pure substitution of
+    // the identical expression; no behaviour change. Probe-verified
+    // 23 Nov 2026: this cut the compiled size from 256,056 (over the
+    // 256,000 limit) to under it — the compiler does NOT re-inline
+    // the helper body at every call site for size purposes.
+    function changedKeys() { return request.resource.data.diff(resource.data).affectedKeys(); }
 
     // ---------- Job exams (Step 5 closure — ChatGPT review P0/P1) ----------
     // The 10 canonical Job categories (same list as jobProfile.ts
@@ -1544,7 +1552,7 @@ service cloud.firestore {
     // gated by a verification state again. Called from both the admin
     // and the owner update rules on /users/{userId} below.
     function validVerificationTransition() {
-      return !('verificationStatus' in request.resource.data.diff(resource.data).affectedKeys())
+      return !('verificationStatus' in changedKeys())
         || (request.resource.data.verificationStatus == 'verified'
             && request.resource.data.role == 'teacher')
         || (request.resource.data.verificationStatus == 'pending'
@@ -1718,7 +1726,7 @@ service cloud.firestore {
         // absent: a teacher's approved subjects change ONLY through the
         // admin-decided change request (teacherChangeRequests) — a
         // teacher must never silently rewrite their own approved set.
-        && request.resource.data.diff(resource.data).affectedKeys()
+        && changedKeys()
              .hasOnly(['displayName', 'educationType', 'board', 'institution',
                        'academicYear', 'academicSession', 'curriculum',
                        'program', 'department', 'classLevel', 'semester',
@@ -1767,7 +1775,7 @@ service cloud.firestore {
       // admin.ts sets it) — an admin cannot silently verify anyone.
       allow update: if isAdmin()
         && resource.data.role != 'owner'
-        && request.resource.data.diff(resource.data).affectedKeys()
+        && changedKeys()
              .hasOnly(['role', 'verificationStatus', 'isActive', 'suspendedReason',
                        'verifiedBy', 'verifiedAt', 'updatedAt'])
         && (!('role' in request.resource.data)
@@ -1779,7 +1787,7 @@ service cloud.firestore {
         && (!('suspendedReason' in request.resource.data)
             || request.resource.data.suspendedReason is string
             || request.resource.data.suspendedReason == null)
-        && (!('verificationStatus' in request.resource.data.diff(resource.data).affectedKeys())
+        && (!('verificationStatus' in changedKeys())
             || request.resource.data.verifiedBy == uid());
       // DASHBOARDS (Step 7, branch draft): applying an APPROVED teacher
       // change request. An Admin may set a teacher's approved subjects /
@@ -1791,7 +1799,7 @@ service cloud.firestore {
       // themselves (the self-update allowlist excludes them).
       allow update: if isAdmin()
         && resource.data.role == 'teacher'
-        && request.resource.data.diff(resource.data).affectedKeys()
+        && changedKeys()
              .hasOnly(['subjects', 'teachingLevel', 'classLevel', 'updatedAt'])
         && (!('subjects' in request.resource.data)
             || (request.resource.data.subjects is list
@@ -1806,7 +1814,7 @@ service cloud.firestore {
       // Owner exists; a second owner is created only in the Firebase
       // console by the owner himself, never by a client rule.
       allow update: if isOwnerRole()
-        && request.resource.data.diff(resource.data).affectedKeys()
+        && changedKeys()
              .hasOnly(['displayName', 'educationType', 'board', 'institution',
                        'academicYear', 'program', 'department', 'classLevel',
                        'language', 'lastActiveAt', 'role', 'verificationStatus',
@@ -1822,9 +1830,9 @@ service cloud.firestore {
         // FULL post-update document, so 'role' in request.resource.data is
         // always true. Only check the enum when role is actually in the
         // affected keys (i.e. being changed). Same for verificationStatus.
-        && (!('role' in request.resource.data.diff(resource.data).affectedKeys())
+        && (!('role' in changedKeys())
             || request.resource.data.role in ['admin', 'moderator', 'teacher', 'student', 'parent'])
-        && (!('verificationStatus' in request.resource.data.diff(resource.data).affectedKeys())
+        && (!('verificationStatus' in changedKeys())
             || request.resource.data.verificationStatus in ['pending', 'verified', 'rejected', 'revoked'])
         && validVerificationTransition()
         && (!('isActive' in request.resource.data) || request.resource.data.isActive is bool)
@@ -1832,7 +1840,7 @@ service cloud.firestore {
         // Public user IDs (owner order 22 Nov 2026): the owner may set
         // publicIdNumber ONLY on a doc that lacks it (the backfill) —
         // an existing number is never changed.
-        && (!('publicIdNumber' in request.resource.data.diff(resource.data).affectedKeys())
+        && (!('publicIdNumber' in changedKeys())
             || (request.resource.data.publicIdNumber is int
                 && request.resource.data.publicIdNumber >= 1
                 && !('publicIdNumber' in resource.data)))
@@ -1859,7 +1867,7 @@ service cloud.firestore {
         && request.resource.data.next >= 1;
       allow update: if signedIn()
         && counterId == 'publicUserIds'
-        && request.resource.data.diff(resource.data).affectedKeys()
+        && changedKeys()
              .hasOnly(['next', 'updatedAt'])
         && request.resource.data.next is int
         && request.resource.data.next == resource.data.next + 1;
@@ -1916,7 +1924,7 @@ service cloud.firestore {
             && request.resource.data.totalMarks <= request.resource.data.answers.size() * 10));
       allow update: if isModerator()
         && resource.data.markingStatus == 'pending'
-        && request.resource.data.diff(resource.data).affectedKeys()
+        && changedKeys()
             .hasOnly(['answers', 'marks', 'score', 'percentage', 'markingStatus', 'markedBy', 'markedAt'])
         // C1 (security audit 22 Nov 2026): the owner may update ONLY the
         // unscored → scored transition of their own MCQ attempt — the
@@ -1926,7 +1934,7 @@ service cloud.firestore {
         || (isOwner(userId) && callerActive()
             && resource.data.markingStatus == 'auto'
             && resource.data.scored == false
-            && request.resource.data.diff(resource.data).affectedKeys()
+            && changedKeys()
                 .hasOnly(['answers', 'score', 'percentage', 'scored', 'updatedAt'])
             && request.resource.data.scored == true
             && request.resource.data.score is number
@@ -2224,7 +2232,7 @@ service cloud.firestore {
       // other field are immutable for the author once written.
       allow update: if isModerator()
         || (signedIn() && callerActive() && get(/databases/$(database)/documents/questions/$(questionId)).data.authorId == uid()
-            && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['isAccepted', 'updatedAt']));
+            && changedKeys().hasOnly(['isAccepted', 'updatedAt']));
       allow delete: if isAdmin();
     }
 
@@ -2302,7 +2310,7 @@ service cloud.firestore {
         && resource.data.userId == uid()
         && resource.data.status == 'rejected'
         && request.resource.data.status == 'pending'
-        && request.resource.data.diff(resource.data).affectedKeys()
+        && changedKeys()
              .hasOnly(['teachingLevel', 'subjects', 'classes', 'institution',
                        'post', 'institutionContact',
                        'qualifications', 'experienceYears', 'verificationReason',
@@ -2313,7 +2321,7 @@ service cloud.firestore {
       allow update: if isAdmin()
         && resource.data.status == 'pending'
         && resource.data.userId != uid()
-        && request.resource.data.diff(resource.data).affectedKeys()
+        && changedKeys()
              .hasOnly(['status', 'checkedBy', 'checkedAt', 'reason', 'checks', 'updatedAt'])
         && request.resource.data.status in ['pending', 'verified', 'rejected', 'revoked']
         && request.resource.data.checkedBy == uid()
@@ -2329,7 +2337,7 @@ service cloud.firestore {
         && resource.data.status == 'verified'
         && resource.data.userId != uid()
         && request.resource.data.status == 'revoked'
-        && request.resource.data.diff(resource.data).affectedKeys()
+        && changedKeys()
              .hasOnly(['status', 'checkedBy', 'checkedAt', 'reason', 'updatedAt'])
         && request.resource.data.checkedBy == uid()
         && request.resource.data.reason is string
@@ -2338,7 +2346,7 @@ service cloud.firestore {
         && resource.data.status in ['verified', 'rejected', 'revoked']
         && resource.data.userId != uid()
         && request.resource.data.status == 'pending'
-        && request.resource.data.diff(resource.data).affectedKeys()
+        && changedKeys()
              .hasOnly(['status', 'checkedBy', 'checkedAt', 'reason', 'updatedAt'])
         && request.resource.data.checkedBy == uid()
         && request.resource.data.reason is string
@@ -2376,7 +2384,7 @@ service cloud.firestore {
         && resource.data.status == 'pending'
         && resource.data.teacherUid != uid()
         && request.resource.data.status in ['approved', 'rejected']
-        && request.resource.data.diff(resource.data).affectedKeys()
+        && changedKeys()
              .hasOnly(['status', 'decidedBy', 'decidedAt', 'decisionReason', 'updatedAt'])
         && request.resource.data.decidedBy == uid()
         && request.resource.data.decisionReason is string
@@ -2487,7 +2495,7 @@ service cloud.firestore {
       allow update: if isAdmin()
         && resource.data.verificationStatus == 'pending'
         && resource.data.get('userId', '') != uid()
-        && request.resource.data.diff(resource.data).affectedKeys()
+        && changedKeys()
              .hasOnly(['verificationStatus', 'verifiedBy', 'verifiedAt', 'reason', 'checks', 'updatedAt'])
         && request.resource.data.verificationStatus in ['verified', 'rejected']
         && request.resource.data.verifiedBy == uid()
@@ -2503,14 +2511,14 @@ service cloud.firestore {
         && resource.data.verificationStatus == 'verified'
         && resource.data.get('userId', '') != uid()
         && request.resource.data.verificationStatus == 'revoked'
-        && request.resource.data.diff(resource.data).affectedKeys()
+        && changedKeys()
              .hasOnly(['verificationStatus', 'verifiedBy', 'verifiedAt', 'reason', 'updatedAt'])
         && request.resource.data.verifiedBy == uid()
         && request.resource.data.reason is string
         && request.resource.data.reason.size() >= 10;
       // Admin general edit + publish (verification untouched here).
       allow update: if isAdmin()
-        && !('verificationStatus' in request.resource.data.diff(resource.data).affectedKeys());
+        && !('verificationStatus' in changedKeys());
       allow delete: if isAdmin();
     }
 
@@ -2713,7 +2721,7 @@ service cloud.firestore {
         && resource.data.studentId == uid()
         && resource.data.status == 'pending'
         && request.resource.data.status == 'confirmed'
-        && request.resource.data.diff(resource.data).affectedKeys()
+        && changedKeys()
              .hasOnly(['status', 'confirmedAt', 'updatedAt']);
       // Child REJECTS the request (pending -> revoked) — the child may
       // also reject by using the revoke clause below; this clause is
@@ -2721,7 +2729,7 @@ service cloud.firestore {
       allow update: if signedIn() && callerActive()
         && resource.data.studentId == uid()
         && request.resource.data.status == resource.data.status
-        && request.resource.data.diff(resource.data).affectedKeys()
+        && changedKeys()
              .hasOnly(['childClassLevel', 'childDisplayName', 'childEducationType',
                        'childDepartment', 'childProgram', 'childBoard', 'updatedAt'])
         && isStr(request.resource.data.childDisplayName, 100)
@@ -2729,12 +2737,12 @@ service cloud.firestore {
       allow update: if signedIn() && callerActive()
         && (resource.data.parentId == uid() || resource.data.studentId == uid())
         && request.resource.data.status == 'revoked'
-        && request.resource.data.diff(resource.data).affectedKeys()
+        && changedKeys()
              .hasOnly(['status', 'revokedAt', 'updatedAt']);
       allow update: if isAdmin()
         && resource.data.status in ['pending', 'confirmed']
         && request.resource.data.status == 'verified'
-        && request.resource.data.diff(resource.data).affectedKeys()
+        && changedKeys()
              .hasOnly(['status', 'verifiedBy', 'verifiedAt', 'decidedBy', 'decisionReason', 'updatedAt'])
         && request.resource.data.verifiedBy == uid()
         && (request.resource.data.get('decidedBy', null) == null || request.resource.data.decidedBy == uid())
@@ -2742,14 +2750,14 @@ service cloud.firestore {
       allow update: if isAdmin()
         && resource.data.status in ['pending', 'confirmed']
         && request.resource.data.status == 'rejected'
-        && request.resource.data.diff(resource.data).affectedKeys()
+        && changedKeys()
              .hasOnly(['status', 'decidedBy', 'decisionReason', 'rejectedAt', 'updatedAt'])
         && request.resource.data.decidedBy == uid()
         && isStr(request.resource.data.decisionReason, 500);
       allow update: if isAdmin()
         && resource.data.status in ['pending', 'confirmed', 'verified']
         && request.resource.data.status == 'revoked'
-        && request.resource.data.diff(resource.data).affectedKeys()
+        && changedKeys()
              .hasOnly(['status', 'revokedAt', 'updatedAt']);
       allow delete: if isAdmin();
     }
@@ -2890,7 +2898,7 @@ service cloud.firestore {
         && request.resource.data.get('paid-subscriptions', false) is bool
         && request.resource.data.updatedAt is timestamp;
       allow update: if isOwnerRole()
-        && request.resource.data.diff(resource.data).affectedKeys()
+        && changedKeys()
              .hasOnly(['ai-teacher', 'video-uploads', 'comments', 'social', 'games',
                        'health', 'career', 'offline-downloads', 'live-classes',
                        'video-ads', 'paid-subscriptions', 'updatedAt'])
@@ -2929,7 +2937,7 @@ service cloud.firestore {
         && request.resource.data.userId == uid()
         && request.resource.data.status in ['open', 'closed'];
       allow update: if isAdmin()
-        && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['status', 'updatedAt'])
+        && changedKeys().hasOnly(['status', 'updatedAt'])
         && request.resource.data.status in ['open', 'closed'];
       allow delete: if false;
     }
@@ -3079,7 +3087,7 @@ service cloud.firestore {
         // of two big docs (expression budget — rules tests a3/b6).
         && request.resource.data.get('rulesConfig', null) == resource.data.get('rulesConfig', null)
         && request.resource.data.get('rulesConfigHistory', null) == resource.data.get('rulesConfigHistory', null)
-        && request.resource.data.diff(resource.data).affectedKeys()
+        && changedKeys()
              .hasOnly(['nameBn', 'nameEn', 'fullBn', 'fullEn', 'orgBn', 'orgEn',
                        'stepsBn', 'stepsEn', 'officialUrl', 'accent', 'accentSoft',
                        'accentDeep', 'descriptionBn', 'descriptionEn',
@@ -3369,7 +3377,7 @@ service cloud.firestore {
         && request.resource.data.status == resource.data.status
         && request.resource.data.version == resource.data.version
         && request.resource.data.createdBy == resource.data.createdBy
-        && request.resource.data.diff(resource.data).affectedKeys().hasOnly(
+        && changedKeys().hasOnly(
              ['questionText', 'questionLang', 'options', 'difficulty',
               'explanation', 'sourceType', 'provenance', 'examYear',
               'groupIds', 'subjectId', 'chapterId', 'topicId',
@@ -3385,7 +3393,7 @@ service cloud.firestore {
         && isNuQuestionTransitionActorOk(request.resource.data.status)
         && request.resource.data.version == resource.data.version
         && request.resource.data.createdBy == resource.data.createdBy
-        && request.resource.data.diff(resource.data).affectedKeys().hasOnly(
+        && changedKeys().hasOnly(
              ['status', 'reviewedBy', 'reviewedAt', 'publishedAt', 'updatedAt'])
         && (request.resource.data.status != 'submitted_for_review'
             || (exists(/databases/$(database)/documents/nuQuestionDraftKeys/$(questionId))
@@ -3540,7 +3548,7 @@ service cloud.firestore {
         // C2 (security audit 22 Nov 2026): only the autosave / submit
         // fields may change — deadlineAt and startedAt can NEVER be
         // rewritten, so a mock deadline can no longer be extended.
-        && request.resource.data.diff(resource.data).affectedKeys().hasOnly(
+        && changedKeys().hasOnly(
             ['answers', 'score', 'percentage', 'correctCount', 'wrongCount',
              'unansweredCount', 'status', 'submittedAt', 'updatedAt']);
       allow delete: if false;
@@ -3639,7 +3647,7 @@ service cloud.firestore {
         && request.resource.data.userId == uid()
         && request.resource.data.status == 'open';
       allow update: if isAdmin()
-        && request.resource.data.diff(resource.data).affectedKeys()
+        && changedKeys()
              .hasOnly(['status', 'resolvedNote', 'updatedAt'])
         && request.resource.data.status in ['open', 'investigating', 'resolved', 'dismissed'];
       allow delete: if false;
@@ -3650,7 +3658,7 @@ service cloud.firestore {
         && request.resource.data.userId == uid()
         && request.resource.data.status == 'open';
       allow update: if isAdmin()
-        && request.resource.data.diff(resource.data).affectedKeys()
+        && changedKeys()
              .hasOnly(['status', 'updatedAt'])
         && request.resource.data.status in ['open', 'approved', 'rejected'];
       allow delete: if false;
@@ -3744,19 +3752,19 @@ service cloud.firestore {
         && isDraftStatus(request.resource.data.get('reviewStatus', ''))
         && resource.data.get('status', '') == 'draft'
         && request.resource.data.get('status', '') == 'draft'
-        && request.resource.data.diff(resource.data).affectedKeys()
+        && changedKeys()
              .hasOnly(['nameBn', 'nameEn', 'order', 'marks', 'syllabusSource',
                        'reviewStatus', 'updatedAt'])
         && validJobSubject(request.resource.data);
       allow update: if isModerator()
-        && request.resource.data.diff(resource.data).affectedKeys()
+        && changedKeys()
              .hasOnly(['nameBn', 'nameEn', 'order', 'marks', 'syllabusSource',
                        'status', 'reviewStatus', 'verifiedBy', 'verifiedAt', 'updatedAt'])
         // Step 5 P0-4, adapted: a Moderator may return/unpublish a
         // Published doc, but may NOT silently edit its content — on a
         // Published doc only the status/verifier fields may change.
         && (resource.data.get('status', '') != 'published'
-            || request.resource.data.diff(resource.data).affectedKeys()
+            || changedKeys()
                  .hasOnly(['status', 'reviewStatus', 'verifiedBy', 'verifiedAt', 'updatedAt']))
         && jobContentSecondEye(resource.data, request.resource.data)
         && jobContentPublishTransition(resource.data, request.resource.data)
@@ -3765,7 +3773,7 @@ service cloud.firestore {
       // published-content guard — an Admin may fix a typo in a
       // Published doc without unpublishing it first.
       allow update: if isAdmin()
-        && request.resource.data.diff(resource.data).affectedKeys()
+        && changedKeys()
              .hasOnly(['nameBn', 'nameEn', 'order', 'marks', 'syllabusSource',
                        'status', 'reviewStatus', 'verifiedBy', 'verifiedAt', 'updatedAt'])
         && jobContentSecondEye(resource.data, request.resource.data)
@@ -3791,22 +3799,22 @@ service cloud.firestore {
         && isDraftStatus(request.resource.data.get('reviewStatus', ''))
         && resource.data.get('status', '') == 'draft'
         && request.resource.data.get('status', '') == 'draft'
-        && request.resource.data.diff(resource.data).affectedKeys()
+        && changedKeys()
              .hasOnly(['nameBn', 'nameEn', 'descriptionBn', 'descriptionEn',
                        'order', 'reviewStatus', 'updatedAt'])
         && validJobChapter(request.resource.data);
       allow update: if isModerator()
-        && request.resource.data.diff(resource.data).affectedKeys()
+        && changedKeys()
              .hasOnly(['nameBn', 'nameEn', 'descriptionBn', 'descriptionEn',
                        'order', 'status', 'reviewStatus', 'verifiedBy', 'verifiedAt', 'updatedAt'])
         && (resource.data.get('status', '') != 'published'
-            || request.resource.data.diff(resource.data).affectedKeys()
+            || changedKeys()
                  .hasOnly(['status', 'reviewStatus', 'verifiedBy', 'verifiedAt', 'updatedAt']))
         && jobContentSecondEye(resource.data, request.resource.data)
         && jobContentPublishTransition(resource.data, request.resource.data)
         && validJobChapter(request.resource.data);
       allow update: if isAdmin()
-        && request.resource.data.diff(resource.data).affectedKeys()
+        && changedKeys()
              .hasOnly(['nameBn', 'nameEn', 'descriptionBn', 'descriptionEn',
                        'order', 'status', 'reviewStatus', 'verifiedBy', 'verifiedAt', 'updatedAt'])
         && jobContentSecondEye(resource.data, request.resource.data)
@@ -3834,23 +3842,23 @@ service cloud.firestore {
         && isDraftStatus(request.resource.data.get('reviewStatus', ''))
         && resource.data.get('status', '') == 'draft'
         && request.resource.data.get('status', '') == 'draft'
-        && request.resource.data.diff(resource.data).affectedKeys()
+        && changedKeys()
              .hasOnly(['nameBn', 'nameEn', 'order', 'isCommon', 'commonExams',
                        'commonStatus', 'questionTarget', 'reviewStatus', 'updatedAt'])
         && validJobTopic(request.resource.data);
       allow update: if isModerator()
-        && request.resource.data.diff(resource.data).affectedKeys()
+        && changedKeys()
              .hasOnly(['nameBn', 'nameEn', 'order', 'isCommon', 'commonExams',
                        'commonStatus', 'questionTarget', 'publishedQuestionCount',
                        'status', 'reviewStatus', 'verifiedBy', 'verifiedAt', 'updatedAt'])
         && (resource.data.get('status', '') != 'published'
-            || request.resource.data.diff(resource.data).affectedKeys()
+            || changedKeys()
                  .hasOnly(['status', 'reviewStatus', 'verifiedBy', 'verifiedAt', 'updatedAt']))
         && jobContentSecondEye(resource.data, request.resource.data)
         && jobContentPublishTransition(resource.data, request.resource.data)
         && validJobTopic(request.resource.data);
       allow update: if isAdmin()
-        && request.resource.data.diff(resource.data).affectedKeys()
+        && changedKeys()
              .hasOnly(['nameBn', 'nameEn', 'order', 'isCommon', 'commonExams',
                        'commonStatus', 'questionTarget', 'publishedQuestionCount',
                        'status', 'reviewStatus', 'verifiedBy', 'verifiedAt', 'updatedAt'])
@@ -3881,22 +3889,22 @@ service cloud.firestore {
         && isDraftStatus(request.resource.data.get('reviewStatus', ''))
         && resource.data.get('status', '') == 'draft'
         && request.resource.data.get('status', '') == 'draft'
-        && request.resource.data.diff(resource.data).affectedKeys()
+        && changedKeys()
              .hasOnly(['titleBn', 'titleEn', 'body', 'bodyEn', 'order',
                        'reviewStatus', 'updatedAt'])
         && validJobLesson(request.resource.data);
       allow update: if isModerator()
-        && request.resource.data.diff(resource.data).affectedKeys()
+        && changedKeys()
              .hasOnly(['titleBn', 'titleEn', 'body', 'bodyEn', 'order',
                        'status', 'reviewStatus', 'verifiedBy', 'verifiedAt', 'updatedAt'])
         && (resource.data.get('status', '') != 'published'
-            || request.resource.data.diff(resource.data).affectedKeys()
+            || changedKeys()
                  .hasOnly(['status', 'reviewStatus', 'verifiedBy', 'verifiedAt', 'updatedAt']))
         && jobContentSecondEye(resource.data, request.resource.data)
         && jobContentPublishTransition(resource.data, request.resource.data)
         && validJobLesson(request.resource.data);
       allow update: if isAdmin()
-        && request.resource.data.diff(resource.data).affectedKeys()
+        && changedKeys()
              .hasOnly(['titleBn', 'titleEn', 'body', 'bodyEn', 'order',
                        'status', 'reviewStatus', 'verifiedBy', 'verifiedAt', 'updatedAt'])
         && jobContentSecondEye(resource.data, request.resource.data)
@@ -4010,7 +4018,7 @@ service cloud.firestore {
               && request.resource.data.get('status', '') in ['draft', 'published', 'archived'])
             || (resource.data.get('status', '') == 'published'
               && request.resource.data.get('status', '') in ['published', 'archived']
-              && request.resource.data.diff(resource.data).affectedKeys()
+              && changedKeys()
                    .hasOnly(['titleBn', 'titleEn', 'status', 'retakeAllowed',
                              'maxAttempts', 'questionSetId', 'publishedAt', 'publishedBy', 'updatedAt']))
             || (resource.data.get('status', '') == 'archived'
@@ -4064,7 +4072,7 @@ service cloud.firestore {
               && request.resource.data.get('status', '') in ['draft', 'published', 'archived'])
             || (resource.data.get('status', '') == 'published'
               && request.resource.data.get('status', '') in ['published', 'archived']
-              && request.resource.data.diff(resource.data).affectedKeys()
+              && changedKeys()
                    .hasOnly(['status', 'publishedAt', 'publishedBy', 'updatedAt']))
             || (resource.data.get('status', '') == 'archived'
               && request.resource.data.get('status', '') in ['archived', 'draft']));
@@ -4170,7 +4178,7 @@ service cloud.firestore {
       // lock must point at the new session).
       allow update: if signedIn() && callerActive()
         && resource.data.get('uid', '') == uid()
-        && ((request.resource.data.diff(resource.data).affectedKeys().hasOnly(['status', 'updatedAt'])
+        && ((changedKeys().hasOnly(['status', 'updatedAt'])
              && resource.data.get('status', '') == 'in_progress'
              && request.resource.data.get('status', '') == 'terminal'
              && getAfter(/databases/$(database)/documents/users/$(uid())/jobExamSessions/$(resource.data.get('activeSessionId', ''))).data.status in ['submitted', 'abandoned'])
@@ -4221,7 +4229,7 @@ service cloud.firestore {
         && request.resource.data.get('status', '') == 'draft'
         && resource.data.get('reviewStatus', '') in ['Not Started', 'In Progress']
         && request.resource.data.get('reviewStatus', '') in ['Not Started', 'In Progress', 'Under Review']
-        && request.resource.data.diff(resource.data).affectedKeys()
+        && changedKeys()
              .hasOnly(['questionText', 'options', 'correctLetter',
                        'explanation', 'whyWrong', 'difficulty', 'source',
                        'sourceUrl', 'examYear', 'isPreviousYear',
@@ -4233,7 +4241,7 @@ service cloud.firestore {
       // published, rejection needs a reason, version +1 on
       // published -> draft return).
       allow update: if isModerator()
-        && request.resource.data.diff(resource.data).affectedKeys()
+        && changedKeys()
              .hasOnly(['questionText', 'options', 'correctLetter',
                        'explanation', 'whyWrong', 'difficulty', 'source',
                        'sourceUrl', 'examYear', 'isPreviousYear',
@@ -4298,7 +4306,7 @@ service cloud.firestore {
             || bundleId == 'weekly__' + request.resource.data.get('mockId', ''))
         && validJobQuestionBundle(request.resource.data)
         && (resource.data.get('status', '') != 'published'
-            || request.resource.data.diff(resource.data).affectedKeys()
+            || changedKeys()
                  .hasOnly(['titleBn', 'titleEn', 'status', 'reviewStatus',
                            'publishedAt', 'publishedBy', 'updatedAt']));
       allow delete: if isAdmin();
@@ -4610,7 +4618,7 @@ service cloud.firestore {
              jobBundleData(request.resource.data.get('bundleId', '')));
       allow update: if isOwner(userId) && callerActive()
         && resource.data.get('status', '') == 'in-progress'
-        && request.resource.data.diff(resource.data).affectedKeys()
+        && changedKeys()
              .hasOnly(['answers', 'currentQuestion', 'lastSyncedAt',
                        'updatedAt', 'status', 'submittedAt', 'revision'])
         && validJobSessionUpdate(request.resource.data, resource.data);
@@ -4667,7 +4675,7 @@ service cloud.firestore {
              getAfter(/databases/$(database)/documents/jobExamUserLocks/$(uid() + '_' + request.resource.data.get('examSlug', ''))).data);
       allow update: if isOwner(userId) && callerActive()
         && resource.data.get('status', '') == 'in-progress'
-        && request.resource.data.diff(resource.data).affectedKeys()
+        && changedKeys()
              .hasOnly(['answers', 'currentQuestion', 'lastSyncedAt',
                        'updatedAt', 'endsAt', 'clientEndsAtMillis',
                        'status', 'submittedAt', 'revision'])
