@@ -14,6 +14,7 @@
 
 import { Link } from 'react-router-dom';
 import { PageShell } from '../components/PageShell';
+import { Breadcrumb } from '../components/Breadcrumb';
 import { AlertBox, Card } from '../components/ui';
 import { useLanguage } from '../i18n/LanguageContext';
 import {
@@ -44,6 +45,8 @@ export default function OpportunityGuidePage({ kind }: { kind: OpportunityGuideK
 
   return (
     <PageShell titleBn={meta?.titleBn ?? 'গাইড'} titleEn={meta?.titleEn ?? 'Guide'} wide>
+      {/* Visible breadcrumb (24 Nov 2026 SEO pass) — labels match the BreadcrumbList JSON-LD in lib/seo.ts. */}
+      <Breadcrumb items={[{ label: 'সুযোগ হাব', to: '/opportunities' }, { label: meta?.titleBn ?? 'গাইড' }]} />
       <AlertBox tone="info">{lang === 'bn' ? DISCLAIMER_BN : DISCLAIMER_EN}</AlertBox>
       <p style={{ margin: '12px 0 16px', color: 'var(--muted)', fontSize: 14, lineHeight: 1.7 }}>
         {t({

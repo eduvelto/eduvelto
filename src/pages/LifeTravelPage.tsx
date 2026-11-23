@@ -1,5 +1,6 @@
 import { useLanguage } from '../i18n/LanguageContext';
 import { PageShell } from '../components/PageShell';
+import { Breadcrumb } from '../components/Breadcrumb';
 import { EMERGENCY_NUMBERS, LIFE_SOURCES } from '../lib/lifeContent';
 
 // Everyday Life Services (§3C) — Travel + daily needs in Bangladesh.
@@ -16,6 +17,8 @@ export default function LifeTravelPage() {
 
   return (
     <PageShell titleBn="ভ্রমণ ও দৈনন্দিন প্রয়োজন" titleEn="Travel & Daily Needs">
+      {/* Visible breadcrumb (24 Nov 2026 SEO pass) — labels match the BreadcrumbList JSON-LD in lib/seo.ts. */}
+      <Breadcrumb items={[{ label: 'জীবন সেবা', to: '/life' }, { label: 'ভ্রমণ তথ্য' }]} />
       <p>
         {t({
           bn: 'বাংলাদেশে ভ্রমণের আগে জরুরি নম্বরগুলো ফোনে সংরক্ষণ করুন। এই পাতায় কোনো ট্রেন বা বিমানের সময়সূচি ও ভাড়া দেওয়া হয়নি — তা অফিসিয়াল সাইটে যাচাই করে নিন।',

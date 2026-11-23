@@ -3,6 +3,7 @@ import { jsPDF } from 'jspdf';
 import { PDFDocument } from 'pdf-lib';
 import { useLanguage } from '../i18n/LanguageContext';
 import { PageShell } from '../components/PageShell';
+import { Breadcrumb } from '../components/Breadcrumb';
 
 // Eduvelto PDF Tools (§3C) — genuinely working client-side PDF tools.
 // No server is involved: text-to-PDF and merge-PDF both run entirely in
@@ -224,6 +225,8 @@ export default function LifePdfToolsPage() {
 
   return (
     <PageShell titleBn="PDF টুলস" titleEn="PDF Tools" wide>
+      {/* Visible breadcrumb (24 Nov 2026 SEO pass) — labels match the BreadcrumbList JSON-LD in lib/seo.ts. */}
+      <Breadcrumb items={[{ label: 'জীবন সেবা', to: '/life' }, { label: 'PDF টুলস' }]} />
       <p style={{ color: 'var(--muted)' }}>
         {t({
           bn: 'দুটো ছোট PDF টুল — সব কাজ আপনার ব্রাউজারেই হয়। আপনার ফাইল বা লেখা কোথাও আপলোড হয় না, কোনো সার্ভারে যায় না।',

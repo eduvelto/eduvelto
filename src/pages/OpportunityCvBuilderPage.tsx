@@ -14,6 +14,7 @@
 import { useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { PageShell } from '../components/PageShell';
+import { Breadcrumb } from '../components/Breadcrumb';
 import { AlertBox, Button, Card } from '../components/ui';
 import { useLanguage } from '../i18n/LanguageContext';
 
@@ -261,6 +262,8 @@ export default function OpportunityCvBuilderPage() {
 
   return (
     <PageShell titleBn="সিভি ও কভার লেটার তৈরি" titleEn="CV & Cover Letter Builder" wide>
+      {/* Visible breadcrumb (24 Nov 2026 SEO pass) — labels match the BreadcrumbList JSON-LD in lib/seo.ts. */}
+      <Breadcrumb items={[{ label: 'সুযোগ হাব', to: '/opportunities' }, { label: 'সিভি তৈরি' }]} />
       <style>{`@media print { body * { visibility: hidden !important; } .ev-cv-print, .ev-cv-print * { visibility: visible !important; } .ev-cv-print { position: absolute; left: 0; top: 0; width: 100%; border: none !important; } }`}</style>
       <p style={{ margin: '0 0 12px', color: 'var(--muted)', fontSize: 14, lineHeight: 1.7 }}>
         {t({

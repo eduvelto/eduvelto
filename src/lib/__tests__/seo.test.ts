@@ -86,6 +86,8 @@ import { JOB_SUBJECTS, jobSubjectsForExam } from '../jobContent';
 import { NU_SYLLABUS_COMMON_SLUGS, nuSyllabusSubjectBySlug } from '../nuSyllabus';
 import { NU_GROUPS } from '../nuProfile';
 import { CLASS_LEVELS } from '../classLevels';
+import { OPPORTUNITY_SEED } from '../opportunitySeed';
+import { isPublished } from '../opportunities';
 
 const FORBIDDEN_RANK_CLAIM = /(^|[^ক])১ নম্বর|#1|number 1|নম্বর ১|নাম্বার ১|নাম্বার ওয়ান/i;
 
@@ -851,6 +853,117 @@ describe('resolveRouteSeo — AdSense Part 1 noindex + BCS English practice (23 
     // And the collective pages still never claim a verified pattern.
     for (const path of ['/jobs', '/admissions', '/admissions/national-university']) {
       expect(resolveRouteSeo(path)!.description, path).not.toContain('যাচাইকৃত');
+    }
+  });
+});
+
+describe('resolveRouteSeo — SEO pass 24 Nov 2026 (owner order "SEO korba ajk 100")', () => {
+  function itemListOf(seo: ResolvedSeo): Record<string, unknown> {
+    const list = (seo.jsonLd as Array<Record<string, unknown>>).find(
+      (o) => o['@type'] === 'ItemList',
+    );
+    expect(list, 'no ItemList in JSON-LD').toBeDefined();
+    return list!;
+  }
+
+  it('lesson pages say plainly they are drafts awaiting teacher review, and carry Article JSON-LD', () => {
+    for (const path of ['/learn/bcs-english-tense', '/learn/bcs-english-preposition']) {
+      const seo = resolveRouteSeo(path)!;
+      expect(seo.description, path).toContain('খসড়া পাঠ');
+      expect(seo.description, path).toContain('শিক্ষক যাচাইয়ের অপেক্ষায়');
+      expect(seo.description, path).not.toContain('যাচাইকৃত');
+      expect(jsonLdTypes(seo)).toContain('Article');
+      const article = (seo.jsonLd as Array<Record<string, unknown>>).find(
+        (o) => o['@type'] === 'Article',
+      )!;
+      expect(article['headline']).toBe(seo.title);
+      expect(article['datePublished']).toBe('2026-11-23');
+      expect(article['inLanguage']).toBe('bn');
+    }
+  });
+
+  it('/learn hub emits an ItemList of its 2 lessons + the practice hub', () => {
+    const seo = resolveRouteSeo('/learn')!;
+    const items = itemListOf(seo)['itemListElement'] as Array<Record<string, unknown>>;
+    expect(items.map((i) => i['url'])).toEqual([
+      `${SITE_URL}/learn/bcs-english-tense`,
+      `${SITE_URL}/learn/bcs-english-preposition`,
+      `${SITE_URL}/jobs/bcs/practice/english`,
+    ]);
+  });
+
+  it('/opportunities hub emits an ItemList of exactly the published seed listings', () => {
+    const published = OPPORTUNITY_SEED.filter((o) => isPublished(o));
+    expect(published.length).toBe(7);
+    const seo = resolveRouteSeo('/opportunities')!;
+    const items = itemListOf(seo)['itemListElement'] as Array<Record<string, unknown>>;
+    expect(items.map((i) => i['url'])).toEqual(
+      published.map((o) => `${SITE_URL}/opportunities/${o.docId}`),
+    );
+    expect(items.map((i) => i['name'])).toEqual(published.map((o) => o.titleBn));
+  });
+
+  it('all 7 opportunity detail pages + 5 guide pages resolve with real Bangla breadcrumbs', () => {
+    for (const o of OPPORTUNITY_SEED.filter((x) => isPublished(x))) {
+      const seo = resolveRouteSeo(`/opportunities/${o.docId}`);
+      expect(seo, o.docId).not.toBeNull();
+      expect(seo!.robots, o.docId).toBeUndefined();
+      expect(breadcrumbNames(seo!)).toEqual(['হোম', 'সুযোগ হাব', o.titleBn]);
+    }
+    expect(breadcrumbNames(resolveRouteSeo('/opportunities/cv-builder')!)).toEqual([
+      'হোম',
+      'সুযোগ হাব',
+      'সিভি তৈরি',
+    ]);
+    expect(breadcrumbNames(resolveRouteSeo('/opportunities/interview-prep')!)).toEqual([
+      'হোম',
+      'সুযোগ হাব',
+      'ইন্টারভিউ প্রস্তুতি',
+    ]);
+    expect(breadcrumbNames(resolveRouteSeo('/opportunities/income')!)).toEqual([
+      'হোম',
+      'সুযোগ হাব',
+      'বৈধ অনলাইন আয়',
+    ]);
+  });
+
+  it('unpublished/unknown opportunity details resolve to null (never indexable)', () => {
+    expect(resolveRouteSeo('/opportunities/not-a-listing')).toBeNull();
+  });
+
+  it('/life hub + long life titles fit search-result length (title <= 60, description <= 160)', () => {
+    const hub = resolveRouteSeo('/life')!;
+    expect(hub.title.length).toBeLessThanOrEqual(60);
+    expect(hub.description.length).toBeLessThanOrEqual(160);
+    expect(hub.description).toContain('Eduvelto');
+    for (const path of ['/life/health', '/life/government']) {
+      expect(resolveRouteSeo(path)!.title.length, path).toBeLessThanOrEqual(60);
+    }
+  });
+
+  it('new-section breadcrumbs never use raw slugs', () => {
+    for (const path of [
+      '/life/budget',
+      '/life/calculators',
+      '/life/converters',
+      '/life/planner',
+      '/life/pdf-tools',
+      '/life/health',
+      '/life/government',
+      '/life/travel',
+      '/life/services',
+      '/opportunities',
+      '/opportunities/cv-builder',
+      '/opportunities/interview-prep',
+      '/opportunities/career-guidance',
+      '/opportunities/entrepreneurship',
+      '/opportunities/income',
+    ]) {
+      const names = breadcrumbNames(resolveRouteSeo(path)!);
+      expect(names[0]).toBe('হোম');
+      for (const name of names) {
+        expect(name, path).not.toMatch(/^[a-z-]+$/);
+      }
     }
   });
 });

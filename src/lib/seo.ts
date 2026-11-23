@@ -426,9 +426,12 @@ const STATIC_ROUTES: Record<string, RouteSeoEntry> = {
   // Personal entries (budget, planner) stay in the browser's
   // localStorage only — nothing is sent to a server.
   '/life': {
-    title: 'দৈনন্দিন জীবন সেবা — বাজেট, ক্যালকুলেটর, প্ল্যানার ও গাইড | Eduvelto',
+    // Title/description tightened 24 Nov 2026 (SEO pass): the old
+    // title (68 chars) and description (180 chars) truncated in
+    // search results; same meaning, shorter wording.
+    title: 'দৈনন্দিন জীবন সেবা — বাজেট, ক্যালকুলেটর ও গাইড | Eduvelto',
     description:
-      'প্রতিদিনের প্রয়োজনে বিনামূল্যের টুল — বাজেট প্ল্যানার, EMI ও সুদের ক্যালকুলেটর, মুদ্রা ও একক কনভার্টার, দৈনিক প্ল্যানার, PDF টুলস, স্বাস্থ্য সচেতনতা ও সরকারি সেবার গাইড। Eduvelto।',
+      'প্রতিদিনের বিনামূল্যের টুল — বাজেট, EMI ও সুদের হিসাব, মুদ্রা ও একক রূপান্তর, প্ল্যানার, PDF টুলস, স্বাস্থ্য ও সরকারি সেবার গাইড। Eduvelto।',
     crumb: 'জীবন সেবা',
   },
   '/life/budget': {
@@ -462,13 +465,13 @@ const STATIC_ROUTES: Record<string, RouteSeoEntry> = {
     crumb: 'PDF টুলস',
   },
   '/life/health': {
-    title: 'স্বাস্থ্য সচেতনতা — খাবার, ব্যায়াম, ঘুম ও পরিচ্ছন্নতা | Eduvelto',
+    title: 'স্বাস্থ্য সচেতনতা — খাবার, ব্যায়াম ও ঘুম | Eduvelto',
     description:
       'স্বাস্থ্য সচেতনতামূলক সাধারণ তথ্য — সুষম খাবার, শারীরিক পরিশ্রম, ঘুম ও হাত ধোয়া, কখন ডাক্তার দেখাবেন। সাধারণ তথ্য, চিকিৎসকের বিকল্প নয়। Eduvelto।',
     crumb: 'স্বাস্থ্য সচেতনতা',
   },
   '/life/government': {
-    title: 'সরকারি সেবা গাইড — NID, পাসপোর্ট, জন্ম নিবন্ধন, লাইসেন্স | Eduvelto',
+    title: 'সরকারি সেবা গাইড — NID, পাসপোর্ট, জন্ম নিবন্ধন | Eduvelto',
     description:
       'জাতীয় পরিচয়পত্র, ই-পাসপোর্ট, জন্ম নিবন্ধন ও ড্রাইভিং লাইসেন্স — আবেদনের ধাপ, প্রয়োজনীয় কাগজপত্র ও অফিসিয়াল পোর্টালের লিংক। Eduvelto।',
     crumb: 'সরকারি সেবা',
@@ -531,13 +534,13 @@ const STATIC_ROUTES: Record<string, RouteSeoEntry> = {
   '/learn/bcs-english-tense': {
     title: 'বিসিএস ইংরেজি টেন্স — পাঠ | Eduvelto',
     description:
-      'বিসিএস ইংরেজি প্রস্তুতির জন্য টেন্সের পাঠ — সম্পূর্ণ বিনামূল্যে। Eduvelto।',
+      'বিসিএস ইংরেজি প্রস্তুতির জন্য টেন্সের খসড়া পাঠ — শিক্ষক যাচাইয়ের অপেক্ষায়। সম্পূর্ণ বিনামূল্যে। Eduvelto।',
     crumb: 'টেন্স',
   },
   '/learn/bcs-english-preposition': {
     title: 'বিসিএস ইংরেজি প্রিপোজিশন — পাঠ | Eduvelto',
     description:
-      'বিসিএস ইংরেজি প্রস্তুতির জন্য প্রিপোজিশনের পাঠ — সম্পূর্ণ বিনামূল্যে। Eduvelto।',
+      'বিসিএস ইংরেজি প্রস্তুতির জন্য প্রিপোজিশনের খসড়া পাঠ — শিক্ষক যাচাইয়ের অপেক্ষায়। সম্পূর্ণ বিনামূল্যে। Eduvelto।',
     crumb: 'প্রিপোজিশন',
   },
   // AdSense Part 1 (integration): /learn hub — the breadcrumb target
@@ -931,6 +934,73 @@ export function resolveRouteSeo(pathname: string): SeoData | null {
           url: `${SITE_URL}/jobs/bcs/practice/english/reading`,
         },
       ],
+    });
+  }
+  if (path === '/learn') {
+    // ItemList (24 Nov 2026, SEO pass): the hub lists the two real
+    // lessons plus the BCS English practice hub — the same three
+    // links the page renders, in the same order.
+    jsonLd.push({
+      '@context': 'https://schema.org',
+      '@type': 'ItemList',
+      name: 'বিসিএস ইংরেজি পাঠ',
+      itemListElement: [
+        {
+          '@type': 'ListItem',
+          position: 1,
+          name: 'টেন্স — পাঠ',
+          url: `${SITE_URL}/learn/bcs-english-tense`,
+        },
+        {
+          '@type': 'ListItem',
+          position: 2,
+          name: 'প্রিপোজিশন — পাঠ',
+          url: `${SITE_URL}/learn/bcs-english-preposition`,
+        },
+        {
+          '@type': 'ListItem',
+          position: 3,
+          name: 'বিসিএস ইংরেজি অনুশীলন',
+          url: `${SITE_URL}/jobs/bcs/practice/english`,
+        },
+      ],
+    });
+  }
+  if (path === '/opportunities') {
+    // ItemList (24 Nov 2026, SEO pass): the hub renders exactly the
+    // published seed listings — build the list from the same seed
+    // the detail resolver uses, so the JSON-LD never lists an
+    // unpublished opportunity. (Firestore Published docs take
+    // precedence on the page itself; the seed is the v1 source of
+    // truth and the only list this resolver can see.)
+    jsonLd.push({
+      '@context': 'https://schema.org',
+      '@type': 'ItemList',
+      name: 'যাচাইকৃত সুযোগ',
+      itemListElement: OPPORTUNITY_SEED.filter((o) => isPublished(o)).map((o, i) => ({
+        '@type': 'ListItem',
+        position: i + 1,
+        name: o.titleBn,
+        url: `${SITE_URL}/opportunities/${o.docId}`,
+      })),
+    });
+  }
+  if (path === '/learn/bcs-english-tense' || path === '/learn/bcs-english-preposition') {
+    // Article (24 Nov 2026, SEO pass): the two lesson pages are real
+    // article-length texts. datePublished is the real publish date
+    // (AdSense Part 1 merged 23 Nov 2026). The pages themselves
+    // label the lessons drafts awaiting teacher review, and the meta
+    // description says so too — the markup never claims review.
+    jsonLd.push({
+      '@context': 'https://schema.org',
+      '@type': 'Article',
+      headline: entry.title,
+      description: entry.description,
+      inLanguage: 'bn',
+      datePublished: '2026-11-23',
+      author: { '@id': 'https://eduvelto.com#organization' },
+      publisher: { '@id': 'https://eduvelto.com#organization' },
+      mainEntityOfPage: { '@id': `${canonical}#webpage` },
     });
   }
   return {

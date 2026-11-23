@@ -10,6 +10,7 @@
 import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { PageShell } from '../components/PageShell';
+import { Breadcrumb } from '../components/Breadcrumb';
 import { AlertBox, Card, Chip, LinkButton, Skeleton } from '../components/ui';
 import { useLanguage } from '../i18n/LanguageContext';
 import {
@@ -90,6 +91,8 @@ export default function OpportunityDetailPage() {
 
   return (
     <PageShell titleBn={o.titleBn} titleEn={o.titleEn} wide>
+      {/* Visible breadcrumb (24 Nov 2026 SEO pass) — labels match the BreadcrumbList JSON-LD in lib/seo.ts. */}
+      <Breadcrumb items={[{ label: 'সুযোগ হাব', to: '/opportunities' }, { label: o.titleBn }]} />
       <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, alignItems: 'center', marginBottom: 12 }}>
         <Chip tone={status === 'closed' ? 'outline' : status === 'closing-soon' ? 'gold' : 'blue'}>
           {t({ bn: OPPORTUNITY_STATUS_BN[status], en: OPPORTUNITY_STATUS_EN[status] })}

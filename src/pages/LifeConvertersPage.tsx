@@ -7,6 +7,7 @@
 import { useMemo, useState, type CSSProperties } from 'react';
 import { useLanguage } from '../i18n/LanguageContext';
 import { PageShell } from '../components/PageShell';
+import { Breadcrumb } from '../components/Breadcrumb';
 import {
   CURRENCY_NAMES,
   CURRENCY_RATES_AS_OF,
@@ -348,6 +349,8 @@ export default function LifeConvertersPage() {
   const { t } = useLanguage();
   return (
     <PageShell titleBn="রূপান্তরকারী" titleEn="Converters">
+      {/* Visible breadcrumb (24 Nov 2026 SEO pass) — labels match the BreadcrumbList JSON-LD in lib/seo.ts. */}
+      <Breadcrumb items={[{ label: 'জীবন সেবা', to: '/life' }, { label: 'কনভার্টার' }]} />
       <p style={{ color: 'var(--muted)', margin: '0 0 8px' }}>
         {t({
           bn: 'মুদ্রা ও একক রূপান্তর — সব হিসাব আপনার ডিভাইসেই হয়, কোনো তথ্য কোথাও পাঠানো হয় না।',
