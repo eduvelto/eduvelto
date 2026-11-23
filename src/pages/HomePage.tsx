@@ -603,6 +603,37 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* Founder message — founder-profile brand item (23 Nov 2026).
+          Copy is the owner-approved draft; photo + /founder link mirror
+          the About page founder section. No DOB/age, no private-tuition
+          line, no mock/AI-teacher claims. */}
+      <section
+        className="ev-card"
+        aria-label={t({ bn: 'প্রতিষ্ঠাতার বার্তা', en: "Founder's message" })}
+        style={{ display: 'flex', gap: 20, flexWrap: 'wrap', alignItems: 'flex-start', padding: 20, marginTop: 24, background: 'var(--card)' }}
+      >
+        <img
+          src="/founder-photo.jpg"
+          alt="Ali Hasan Mohammed Mizan, Founder & CEO, Eduvelto"
+          style={{ width: 120, height: 120, objectFit: 'cover', borderRadius: '50%', border: '3px solid #F1B308' }}
+        />
+        <div style={{ flex: '1 1 320px', minWidth: 260 }}>
+          <h2 style={{ margin: '0 0 8px', fontSize: 20 }}>{t({ bn: 'প্রতিষ্ঠাতার বার্তা', en: "Founder's message" })}</h2>
+          <p style={{ lineHeight: 1.7, margin: 0 }}>
+            {t({
+              bn: 'আমি Eduvelto গড়েছি একটাই বিশ্বাস থেকে — মানসম্মত শিক্ষা বাংলাদেশের প্রত্যেক শিক্ষার্থীর জন্য বিনামূল্যে পৌঁছে দেওয়া উচিত। আমি নিজে একজন শিক্ষক ও শিক্ষার্থী — আমি জানি, ভালো পড়ার সুযোগ পেতে অনেকের কত কষ্ট হয়। তাই পাঠ, পরীক্ষা, ডিজিটাল লাইব্রেরি আর পড়ার পরিকল্পনা — সব এক জায়গায়, সম্পূর্ণ বিনামূল্যে। শেখো, এগিয়ে যাও, স্বপ্ন গড়ো।',
+              en: 'I built Eduvelto from a single belief: quality education should be free and within reach of every student in Bangladesh. I am a teacher and a student myself — I know how hard it can be to get a fair chance to learn. So lessons, exams, a digital library and smart study planning — all in one place, completely free. Learn, grow, achieve.',
+            })}
+          </p>
+          <p style={{ margin: '12px 0 0', fontWeight: 600 }}>
+            {t({ bn: '— আলী হাসান মোহাম্মদ মিজান, প্রতিষ্ঠাতা ও CEO, Eduvelto', en: '— Ali Hasan Mohammed Mizan, Founder & CEO, Eduvelto' })}
+          </p>
+          <p style={{ margin: '8px 0 0' }}>
+            <Link to="/founder">{t({ bn: 'সম্পূর্ণ প্রতিষ্ঠাতা প্রোফাইল →', en: 'Full founder profile →' })}</Link>
+          </p>
+        </div>
+      </section>
+
       {/* Footer banner (mockup). */}
       <section className="ev-home-banner" aria-label={t({ bn: 'Eduvelto', en: 'Eduvelto' })}>
         <span aria-hidden="true" style={{ color: 'var(--amber)' }}>
