@@ -28,6 +28,30 @@
  *      collective descriptions (/jobs, /admissions,
  *      /admissions/national-university) never claim a verified
  *      pattern, because they also cover Bank (not_verified) and NU.
+ *  (10) SEO 50–100 pages (23 Nov 2026, feature/seo-50-100-pages):
+ *      all 23 job subject pages resolve (BCS 10, Bank 5, Primary
+ *      Teacher 4, NTRCA 4) with verified marks in Bangla digits and
+ *      "শীঘ্রই আসছে"; cross-exam / unknown slugs resolve to null.
+ *  (11) all 9 NU subject pages resolve (3 common subjects × 3
+ *      groups) with the group name in the title and "বিজ্ঞপ্তি থেকে
+ *      যাচাইকৃত" + "খসড়া" in the description; group-block slugs
+ *      (group-*) and unknown subjects resolve to null.
+ *  (12) all 5 class pages resolve with slugs matching CLASS_LEVELS
+ *      exactly; Class 1–5 / 6–8 honestly say content has not arrived
+ *      yet, the other three never claim that.
+ *  (13) resolveFallbackSeo noindexes junk URLs with the home
+ *      title/description/canonical, and is null for /founder;
+ *      resolveRouteSeo still returns null for unknown slugs.
+ *  (14) every sitemap <url> carries a <lastmod> (audit SEO-007).
+ *  (15) forbidden-claim sweep over every sitemap URL + all 23 job +
+ *      9 NU subject pages: no "#1" claim; practice/mock mentions
+ *      carry "শীঘ্রই আসছে"; no live "প্রশ্নব্যাংক" / "AI শিক্ষক";
+ *      "যাচাইকৃত ধরন" only for a verified pattern — subject pages
+ *      may say "যাচাইকৃত সিলেবাসে", never "যাচাইকৃত ধরন".
+ *  (16) /jobs emits an ItemList of exactly the 14 exam hubs;
+ *      /jobs/bcs keeps the 4 JSON-LD types without an ItemList.
+ *  (17) OG constants are the 1200×630 social image
+ *      (OG_IMAGE_URL / WIDTH / HEIGHT).
  *
  * Runs under plain node: resolveRouteSeo is pure (jobExams.ts has no
  * imports). Run with `npm run test:unit`.
@@ -35,8 +59,20 @@
 import { describe, it, expect } from 'vitest';
 import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
-import { resolveRouteSeo, ORGANIZATION_JSON_LD, SITE_URL } from '../seo';
-import { jobPatternStatus } from '../jobExams';
+import {
+  resolveRouteSeo,
+  resolveFallbackSeo,
+  ORGANIZATION_JSON_LD,
+  SITE_URL,
+  OG_IMAGE_URL,
+  OG_IMAGE_WIDTH,
+  OG_IMAGE_HEIGHT,
+} from '../seo';
+import { JOB_EXAMS, jobExamBySlug, jobPatternStatus } from '../jobExams';
+import { JOB_SUBJECTS, jobSubjectsForExam } from '../jobContent';
+import { NU_SYLLABUS_COMMON_SLUGS, nuSyllabusSubjectBySlug } from '../nuSyllabus';
+import { NU_GROUPS } from '../nuProfile';
+import { CLASS_LEVELS } from '../classLevels';
 
 const FORBIDDEN_RANK_CLAIM = /(^|[^ক])১ নম্বর|#1|number 1|নম্বর ১|নাম্বার ১|নাম্বার ওয়ান/i;
 
@@ -49,6 +85,8 @@ const SITEMAP_URLS = [
   '/jobs/primary-teacher',
   '/jobs/ntrca',
   '/jobs/common',
+  '/jobs/circulars',
+  '/jobs/calendar',
   '/jobs/dgfood',
   '/jobs/bpsc-non-cadre',
   '/jobs/cag',
@@ -59,18 +97,63 @@ const SITEMAP_URLS = [
   '/jobs/autonomous',
   '/jobs/private-ngo',
   '/jobs/it-professional',
+  '/jobs/bcs/subjects',
+  '/jobs/bank/subjects',
+  '/jobs/primary-teacher/subjects',
+  '/jobs/ntrca/subjects',
+  '/jobs/bcs/subjects/bangla',
+  '/jobs/bcs/subjects/english',
+  '/jobs/bcs/subjects/bangladesh-affairs',
+  '/jobs/bcs/subjects/international-affairs',
+  '/jobs/bcs/subjects/geography',
+  '/jobs/bcs/subjects/general-science',
+  '/jobs/bcs/subjects/computer-ict',
+  '/jobs/bcs/subjects/mathematical-reasoning',
+  '/jobs/bcs/subjects/mental-ability',
+  '/jobs/bcs/subjects/ethics',
+  '/jobs/bank/subjects/bangla',
+  '/jobs/bank/subjects/english',
+  '/jobs/bank/subjects/math',
+  '/jobs/bank/subjects/general-knowledge',
+  '/jobs/bank/subjects/computer',
+  '/jobs/primary-teacher/subjects/bangla',
+  '/jobs/primary-teacher/subjects/english',
+  '/jobs/primary-teacher/subjects/math-science',
+  '/jobs/primary-teacher/subjects/general-knowledge',
+  '/jobs/ntrca/subjects/bangla',
+  '/jobs/ntrca/subjects/english',
+  '/jobs/ntrca/subjects/math',
+  '/jobs/ntrca/subjects/general-knowledge',
   '/admissions',
   '/admissions/national-university',
   '/admissions/national-university/humanities',
   '/admissions/national-university/science',
   '/admissions/national-university/business',
+  '/admissions/national-university/humanities/subjects/bangla',
+  '/admissions/national-university/humanities/subjects/english',
+  '/admissions/national-university/humanities/subjects/general-knowledge',
+  '/admissions/national-university/science/subjects/bangla',
+  '/admissions/national-university/science/subjects/english',
+  '/admissions/national-university/science/subjects/general-knowledge',
+  '/admissions/national-university/business/subjects/bangla',
+  '/admissions/national-university/business/subjects/english',
+  '/admissions/national-university/business/subjects/general-knowledge',
   '/library',
   '/class',
+  '/class/class-1-5',
+  '/class/class-6-8',
+  '/class/class-9-10',
+  '/class/hsc',
+  '/class/honours-masters',
   '/about',
   '/founder',
   '/contact',
   '/privacy',
   '/health',
+  '/health/medicines',
+  '/health/diseases',
+  '/health/doctors',
+  '/health/hospitals',
   '/ai-teacher',
 ];
 
@@ -91,8 +174,19 @@ describe('resolveRouteSeo — public routes', () => {
       expect(seo!.canonical).toBe(`${SITE_URL}${path === '/' ? '/' : path}`);
       expect(seo!.title.length).toBeGreaterThan(10);
       expect(seo!.description.length).toBeGreaterThan(40);
-      expect(seo!.ogImage).toBe(`${SITE_URL}/logo.png`);
+      expect(seo!.ogImage).toBe(`${SITE_URL}/og-image.jpg`);
     }
+  });
+
+  it('every sitemap title is unique', () => {
+    const titles = new Map<string, string>();
+    for (const path of SITEMAP_URLS) {
+      if (path === '/founder') continue;
+      const seo = resolveRouteSeo(path)!;
+      expect(titles.has(seo.title), `duplicate title "${seo.title}" at ${path}`).toBe(false);
+      titles.set(seo.title, path);
+    }
+    expect(titles.size).toBe(SITEMAP_URLS.length - 1);
   });
 
   it('no title or description claims a verified #1 rank', () => {
@@ -318,6 +412,246 @@ describe('resolveRouteSeo — public routes', () => {
     // foundingLocation (city-level, Cox's Bazar) stays: it shipped with
     // the 22 Nov SEO deploy and is the organisation's location, not a
     // personal address. No street address is ever added here.
+  });
+});
+
+/** Bangla digits, e.g. 200 -> '২০০' (mirrors bnDigits in seo.ts). */
+function bnDigits(n: number): string {
+  return String(n).replace(/\d/g, (d) => '০১২৩৪৫৬৭৮৯'[Number(d)]);
+}
+
+type ResolvedSeo = NonNullable<ReturnType<typeof resolveRouteSeo>>;
+
+function jsonLdTypes(seo: ResolvedSeo): unknown[] {
+  return (seo.jsonLd as Array<Record<string, unknown>>).map((o) => o['@type']);
+}
+
+function breadcrumbNames(seo: ResolvedSeo): string[] {
+  const crumb = (seo.jsonLd as Array<Record<string, unknown>>).find(
+    (o) => o['@type'] === 'BreadcrumbList',
+  ) as Record<string, unknown> | undefined;
+  expect(crumb, 'no BreadcrumbList in JSON-LD').toBeDefined();
+  const items = crumb!['itemListElement'] as Array<Record<string, unknown>>;
+  return items.map((i) => i['name'] as string);
+}
+
+/** The 23 job subject pages, derived from the canonical lib lists. */
+function allJobSubjectPaths(): Array<{ examSlug: string; subjectSlug: string; path: string }> {
+  return Object.entries(JOB_SUBJECTS).flatMap(([examSlug, subjects]) =>
+    subjects.map((s) => ({
+      examSlug,
+      subjectSlug: s.slug,
+      path: `/jobs/${examSlug}/subjects/${s.slug}`,
+    })),
+  );
+}
+
+/** The 9 NU subject pages: 3 common subjects × 3 groups. */
+function allNuSubjectPaths(): string[] {
+  return NU_GROUPS.flatMap((g) =>
+    NU_SYLLABUS_COMMON_SLUGS.map((s) => `/admissions/national-university/${g.slug}/subjects/${s}`),
+  );
+}
+
+describe('resolveRouteSeo — SEO 50–100 pages (23 Nov 2026)', () => {
+  it('all 23 job subject pages resolve with subject + exam names, verified marks, coming-soon', () => {
+    // Per-exam counts pinned to the verified Step 6 lists.
+    expect(jobSubjectsForExam('bcs').length).toBe(10);
+    expect(jobSubjectsForExam('bank').length).toBe(5);
+    expect(jobSubjectsForExam('primary-teacher').length).toBe(4);
+    expect(jobSubjectsForExam('ntrca').length).toBe(4);
+    const all = allJobSubjectPaths();
+    expect(all.length).toBe(23);
+    for (const { examSlug, subjectSlug, path } of all) {
+      const exam = jobExamBySlug(examSlug)!;
+      const subject = JOB_SUBJECTS[examSlug].find((s) => s.slug === subjectSlug)!;
+      const seo = resolveRouteSeo(path);
+      expect(seo, `no SEO for ${path}`).not.toBeNull();
+      expect(seo!.title, path).toContain(subject.nameBn);
+      expect(seo!.title, path).toContain(exam.bn);
+      expect(subject.marks, `${path} marks must be verified`).not.toBeNull();
+      expect(seo!.description, path).toContain(`${bnDigits(subject.marks!)} নম্বর`);
+      expect(seo!.description, path).toContain('শীঘ্রই আসছে');
+      expect(breadcrumbNames(seo!), path).toEqual([
+        'হোম',
+        'চাকরি প্রস্তুতি',
+        exam.bn,
+        subject.nameBn,
+      ]);
+    }
+  });
+
+  it('job subject pages reject cross-exam, unknown-exam and unknown-subject slugs', () => {
+    // Ethics is a BCS subject, not a Bank one.
+    expect(resolveRouteSeo('/jobs/bank/subjects/ethics')).toBeNull();
+    // DG Food has no verified subjects at all.
+    expect(resolveRouteSeo('/jobs/dgfood/subjects/bangla')).toBeNull();
+    expect(resolveRouteSeo('/jobs/bcs/subjects/not-a-subject')).toBeNull();
+  });
+
+  it('all 9 NU subject pages resolve with group name, verified circular wording and draft wording', () => {
+    expect(NU_SYLLABUS_COMMON_SLUGS).toEqual(['bangla', 'english', 'general-knowledge']);
+    expect(NU_GROUPS.length).toBe(3);
+    const paths = allNuSubjectPaths();
+    expect(paths.length).toBe(9);
+    for (const path of paths) {
+      // '/admissions/national-university/<group>/subjects/<subject>'
+      const [, , , groupSlug, , subjectSlug] = path.split('/');
+      const group = NU_GROUPS.find((g) => g.slug === groupSlug)!;
+      const subj = nuSyllabusSubjectBySlug(subjectSlug)!;
+      const seo = resolveRouteSeo(path);
+      expect(seo, `no SEO for ${path}`).not.toBeNull();
+      expect(seo!.title, path).toContain(group.bn);
+      expect(seo!.title, path).toContain(subj.nameBn);
+      expect(seo!.description, path).toContain('বিজ্ঞপ্তি থেকে যাচাইকৃত');
+      expect(seo!.description, path).toContain('খসড়া');
+    }
+  });
+
+  it('NU group-block slugs and unknown subjects resolve to null', () => {
+    // Group-40 blocks render the not-found card by design — not pages.
+    expect(
+      resolveRouteSeo('/admissions/national-university/science/subjects/group-science'),
+    ).toBeNull();
+    expect(
+      resolveRouteSeo('/admissions/national-university/humanities/subjects/group-humanities'),
+    ).toBeNull();
+    expect(
+      resolveRouteSeo('/admissions/national-university/business/subjects/group-business'),
+    ).toBeNull();
+    expect(
+      resolveRouteSeo('/admissions/national-university/science/subjects/not-a-subject'),
+    ).toBeNull();
+  });
+
+  it('all 5 class pages resolve and their slugs match CLASS_LEVELS exactly', () => {
+    expect(CLASS_LEVELS.length).toBe(5);
+    const sitemapClassSlugs = SITEMAP_URLS.filter((p) => p.startsWith('/class/')).map((p) =>
+      p.replace('/class/', ''),
+    );
+    expect(sitemapClassSlugs.sort()).toEqual(CLASS_LEVELS.map((c) => c.slug).sort());
+    for (const level of CLASS_LEVELS) {
+      const seo = resolveRouteSeo(`/class/${level.slug}`);
+      expect(seo, `/class/${level.slug}`).not.toBeNull();
+      expect(seo!.title, level.slug).toContain(level.bn);
+    }
+  });
+
+  it('class 1–5 / 6–8 say content has not arrived; 9–10 / HSC / honours-masters do not', () => {
+    for (const slug of ['class-1-5', 'class-6-8']) {
+      const seo = resolveRouteSeo(`/class/${slug}`)!;
+      expect(seo.description, slug).toContain('আসেনি');
+      expect(seo.description, slug).toContain('আসছে');
+      // The lib agrees: these levels have no books yet.
+      expect(CLASS_LEVELS.find((c) => c.slug === slug)!.educationType, slug).toBeNull();
+    }
+    for (const slug of ['class-9-10', 'hsc', 'honours-masters']) {
+      const seo = resolveRouteSeo(`/class/${slug}`)!;
+      expect(seo.description, slug).not.toContain('আসেনি');
+      expect(seo.description, slug).not.toContain('আসছে');
+    }
+  });
+
+  it('resolveFallbackSeo noindexes junk URLs with the home canonical, never /founder', () => {
+    const home = resolveRouteSeo('/')!;
+    const junk = resolveFallbackSeo('/jobs/primary');
+    expect(junk).not.toBeNull();
+    expect(junk!.robots).toBe('noindex, nofollow');
+    expect(junk!.canonical).toBe(`${SITE_URL}/`);
+    expect(junk!.title).toBe(home.title);
+    expect(junk!.description).toBe(home.description);
+    expect(resolveFallbackSeo('/founder')).toBeNull();
+    const login = resolveFallbackSeo('/login');
+    expect(login).not.toBeNull();
+    expect(login!.robots).toBe('noindex, nofollow');
+    // Fallback is a separate function — resolveRouteSeo still returns
+    // null for unknown slugs; do not change that behaviour.
+    expect(resolveRouteSeo('/jobs/not-an-exam')).toBeNull();
+    expect(resolveRouteSeo('/jobs/primary')).toBeNull();
+  });
+
+  it('every sitemap <url> has a <lastmod> (audit SEO-007)', () => {
+    const xml = readFileSync(
+      fileURLToPath(new URL('../../../public/sitemap.xml', import.meta.url)),
+      'utf8',
+    );
+    const blocks = [...xml.matchAll(/<url>([\s\S]*?)<\/url>/g)].map((m) => m[1]);
+    expect(blocks.length).toBe(SITEMAP_URLS.length);
+    for (const block of blocks) {
+      const loc = block.match(/<loc>([^<]+)<\/loc>/)?.[1];
+      expect(block, `no <lastmod> for ${loc}`).toContain('<lastmod>');
+      expect(block.match(/<lastmod>([^<]+)<\/lastmod>/)?.[1], loc).toBe('2026-11-23');
+    }
+  });
+
+  it('forbidden-claim sweep over every sitemap URL + all 23 job + 9 NU subject pages', () => {
+    const swept = new Set([
+      ...SITEMAP_URLS.filter((p) => p !== '/founder'),
+      ...allJobSubjectPaths().map((p) => p.path),
+      ...allNuSubjectPaths(),
+    ]);
+    // Every subject page is already in the sitemap — the sweep covers
+    // exactly the sitemap minus /founder, no more, no less.
+    expect(swept.size).toBe(SITEMAP_URLS.length - 1);
+    for (const path of swept) {
+      const seo = resolveRouteSeo(path);
+      expect(seo, `no SEO for swept path ${path}`).not.toBeNull();
+      expect(seo!.title, `title ${path}`).not.toMatch(FORBIDDEN_RANK_CLAIM);
+      expect(seo!.description, `description ${path}`).not.toMatch(FORBIDDEN_RANK_CLAIM);
+      const d = seo!.description;
+      if (d.includes('মক টেস্ট') || d.includes('MCQ অনুশীলন')) {
+        expect(d, `unqualified live-practice claim in ${path}`).toContain('শীঘ্রই আসছে');
+      }
+      expect(d, `প্রশ্নব্যাংক offered as live in ${path}`).not.toContain('প্রশ্নব্যাংক');
+      if (d.includes('AI শিক্ষক')) {
+        // The /ai-teacher page may only say it is coming soon.
+        expect(d, `AI teacher presented as live in ${path}`).toContain('শীঘ্রই আসছে');
+      }
+      // "যাচাইকৃত ধরন" gate, extended to subject pages: it may appear
+      // only on a per-exam page whose pattern is verified /
+      // last_verified (with "শেষ" for the latter). Subject pages use
+      // "যাচাইকৃত সিলেবাসে" instead — never "যাচাইকৃত ধরন".
+      if (path.includes('/subjects/')) {
+        expect(d, path).not.toContain('যাচাইকৃত ধরন');
+      }
+      if (d.includes('যাচাইকৃত ধরন')) {
+        // Per-exam pages AND their tab pages (/jobs/bcs/subjects,
+        // /jobs/bcs/mocks, …) share the exam description, so the gate
+        // allows one optional tab segment after the exam slug.
+        const m = path.match(/^\/jobs\/([^/]+)(?:\/[^/]+)?$/);
+        expect(m, `'যাচাইকৃত ধরন' outside a per-exam page: ${path}`).not.toBeNull();
+        const status = jobPatternStatus(m![1]);
+        expect(['verified', 'last_verified']).toContain(status);
+        if (status === 'last_verified') expect(d, path).toContain('শেষ');
+      }
+    }
+  });
+
+  it('/jobs emits an ItemList of exactly the 14 exam hubs; /jobs/bcs does not', () => {
+    expect(JOB_EXAMS.length).toBe(14);
+    const jobs = resolveRouteSeo('/jobs')!;
+    expect(jsonLdTypes(jobs)).toEqual([
+      'Organization',
+      'WebSite',
+      'WebPage',
+      'BreadcrumbList',
+      'ItemList',
+    ]);
+    const itemList = (jobs.jsonLd as Array<Record<string, unknown>>)[4];
+    const items = itemList['itemListElement'] as Array<Record<string, unknown>>;
+    expect(items.length).toBe(14);
+    expect(items.map((i) => i['url'])).toEqual(
+      JOB_EXAMS.map((e) => `${SITE_URL}/jobs/${e.slug}`),
+    );
+    const bcs = resolveRouteSeo('/jobs/bcs')!;
+    expect(jsonLdTypes(bcs)).toEqual(['Organization', 'WebSite', 'WebPage', 'BreadcrumbList']);
+  });
+
+  it('OG constants are the 1200x630 social image', () => {
+    expect(OG_IMAGE_URL).toBe('https://eduvelto.com/og-image.jpg');
+    expect(OG_IMAGE_URL).toBe(`${SITE_URL}/og-image.jpg`);
+    expect(OG_IMAGE_WIDTH).toBe(1200);
+    expect(OG_IMAGE_HEIGHT).toBe(630);
   });
 });
 

@@ -35,7 +35,10 @@
 //    (or jobExamEntry) record + one sitemap <url> + one test line.
 
 import { useEffect } from 'react';
-import { JOB_TABS, jobExamBySlug, jobPatternStatus, jobRulesConfig } from './jobExams';
+import { JOB_EXAMS, JOB_TABS, jobExamBySlug, jobPatternStatus, jobRulesConfig } from './jobExams';
+import { jobSubjectById } from './jobContent';
+import { nuSyllabusSubjectBySlug } from './nuSyllabus';
+import { NU_GROUPS } from './nuProfile';
 
 export type SeoData = {
   title: string;
@@ -43,12 +46,23 @@ export type SeoData = {
   canonical: string;
   ogType?: string;
   ogImage?: string;
+  /** 'noindex, nofollow' — only for pages that must not be indexed
+   *  (unknown slugs, login-gated/empty states). Absent = indexable. */
+  robots?: string;
   /** JSON-LD objects, injected as separate script tags. */
   jsonLd?: unknown[];
 };
 
 export const SITE_URL = 'https://eduvelto.com';
 export const LOGO_URL = 'https://eduvelto.com/logo.png';
+/** Purpose-built 1200x630 social preview image (23 Nov 2026,
+ *  feature/seo-50-100-pages, SEO-009): navy + approved white logo +
+ *  Bangla tagline + eduvelto.com. Replaces logo.png (2729x912,
+ *  386 KB, no dimensions) as the og:image / twitter:image. The
+ *  Organization logo stays LOGO_URL. */
+export const OG_IMAGE_URL = 'https://eduvelto.com/og-image.jpg';
+export const OG_IMAGE_WIDTH = 1200;
+export const OG_IMAGE_HEIGHT = 630;
 
 /** Shared Organization structured data (visible on every public page).
  *  sameAs lists the Eduvelto organization's own profiles ONLY:
@@ -120,6 +134,10 @@ function setMetaByName(name: string, content: string): void {
   el.setAttribute('content', content);
 }
 
+function removeMetaByName(name: string): void {
+  document.querySelector<HTMLMetaElement>(`meta[name="${name}"]`)?.remove();
+}
+
 function setMetaByProperty(property: string, content: string): void {
   let el = document.querySelector<HTMLMetaElement>(`meta[property="${property}"]`);
   if (!el) {
@@ -148,7 +166,22 @@ export function useSeo(seo: SeoData): void {
     setMetaByProperty('og:description', seo.description);
     setMetaByProperty('og:type', seo.ogType ?? 'website');
     setMetaByProperty('og:url', seo.canonical);
-    if (seo.ogImage) setMetaByProperty('og:image', seo.ogImage);
+    if (seo.ogImage) {
+      setMetaByProperty('og:image', seo.ogImage);
+      setMetaByProperty('og:image:width', String(OG_IMAGE_WIDTH));
+      setMetaByProperty('og:image:height', String(OG_IMAGE_HEIGHT));
+    }
+    // Twitter cards were static home values before (23 Nov 2026):
+    // on route change they stayed stale. Set them per route now.
+    setMetaByName('twitter:card', 'summary_large_image');
+    setMetaByName('twitter:title', seo.title);
+    setMetaByName('twitter:description', seo.description);
+    if (seo.ogImage) setMetaByName('twitter:image', seo.ogImage);
+    // Robots: set when the page must not be indexed; REMOVE on
+    // route change when the next page is indexable — a stale
+    // noindex leaking onto a real page would hide it from Google.
+    if (seo.robots) setMetaByName('robots', seo.robots);
+    else removeMetaByName('robots');
     setCanonical(seo.canonical);
 
     const scripts: HTMLScriptElement[] = [];
@@ -205,6 +238,18 @@ const STATIC_ROUTES: Record<string, RouteSeoEntry> = {
       'চাকরি পরীক্ষার কমন বিষয় — বাংলা, ইংরেজি, গণিত ও সাধারণ জ্ঞানের প্রস্তুতির কাঠামো। MCQ অনুশীলন শীঘ্রই আসছে। Eduvelto।',
     crumb: 'কমন বিষয়',
   },
+  '/jobs/circulars': {
+    title: 'চাকরির বিজ্ঞপ্তি — যাচাইকৃত সার্কুলার ও আবেদনের তারিখ | Eduvelto',
+    description:
+      'চাকরির বিজ্ঞপ্তি — যাচাইকৃত সার্কুলার, আবেদনের তারিখ ও অফিসিয়াল উৎস। নতুন বিজ্ঞপ্তি যাচাই হলে এখানে দেখাবে; অযাচাইকৃত বা অনুমান করা তারিখ কখনো দেখানো হয় না। Eduvelto।',
+    crumb: 'বিজ্ঞপ্তি',
+  },
+  '/jobs/calendar': {
+    title: 'চাকরির ক্যালেন্ডার — বিজ্ঞপ্তি ও পরীক্ষার তারিখ | Eduvelto',
+    description:
+      'যাচাইকৃত বিজ্ঞপ্তি ও মক পরীক্ষার তারিখের ক্যালেন্ডার — নিশ্চিত তারিখ এলে এখানে দেখাবে; অনুমান করা তারিখ কখনো দেখানো হয় না। Eduvelto।',
+    crumb: 'ক্যালেন্ডার',
+  },
   '/admissions': {
     title: 'ভর্তি প্রস্তুতি — বিশ্ববিদ্যালয় ভর্তি | Eduvelto',
     description:
@@ -247,6 +292,41 @@ const STATIC_ROUTES: Record<string, RouteSeoEntry> = {
       'শ্রেণি অনুযায়ী বই, পাঠ ও MCQ পরীক্ষা — সম্পূর্ণ বিনামূল্যে। Eduvelto — বাংলাদেশের ফ্রি শিক্ষা প্ল্যাটফর্ম।',
     crumb: 'শ্রেণি',
   },
+  // Class level pages (23 Nov 2026, feature/seo-50-100-pages). Slugs
+  // and names mirror CLASS_LEVELS in lib/classLevels.ts (cross-checked
+  // by unit test). HONESTY: Class 1–5 and Class 6–8 have NO books in
+  // the library yet — their descriptions say so plainly instead of
+  // implying content exists.
+  '/class/class-1-5': {
+    title: 'শ্রেণি ১–৫ — প্রাথমিক | Eduvelto',
+    description:
+      'শ্রেণি ১–৫ (প্রাথমিক) — বই, পাঠ ও পরীক্ষা এখনো লাইব্রেরিতে আসেনি, আসছে। Eduvelto — বাংলাদেশের ফ্রি শিক্ষা প্ল্যাটফর্ম।',
+    crumb: 'শ্রেণি ১–৫',
+  },
+  '/class/class-6-8': {
+    title: 'শ্রেণি ৬–৮ — নিম্ন মাধ্যমিক | Eduvelto',
+    description:
+      'শ্রেণি ৬–৮ (নিম্ন মাধ্যমিক) — বই, পাঠ ও পরীক্ষা এখনো লাইব্রেরিতে আসেনি, আসছে। Eduvelto — বাংলাদেশের ফ্রি শিক্ষা প্ল্যাটফর্ম।',
+    crumb: 'শ্রেণি ৬–৮',
+  },
+  '/class/class-9-10': {
+    title: 'শ্রেণি ৯–১০ (SSC) — বই, পাঠ ও পরীক্ষা | Eduvelto',
+    description:
+      'শ্রেণি ৯–১০ (মাধ্যমিক, SSC) — শ্রেণিভিত্তিক বই, পাঠ ও MCQ পরীক্ষা — সম্পূর্ণ বিনামূল্যে। Eduvelto।',
+    crumb: 'শ্রেণি ৯–১০',
+  },
+  '/class/hsc': {
+    title: 'HSC — বই, পাঠ ও পরীক্ষা | Eduvelto',
+    description:
+      'HSC (উচ্চ মাধ্যমিক) — শ্রেণিভিত্তিক বই, পাঠ ও MCQ পরীক্ষা — সম্পূর্ণ বিনামূল্যে। Eduvelto।',
+    crumb: 'HSC',
+  },
+  '/class/honours-masters': {
+    title: 'অনার্স ও মাস্টার্স — বই, পাঠ ও পরীক্ষা | Eduvelto',
+    description:
+      'অনার্স ও মাস্টার্স (উচ্চশিক্ষা) — শ্রেণিভিত্তিক বই, পাঠ ও MCQ পরীক্ষা — সম্পূর্ণ বিনামূল্যে। Eduvelto।',
+    crumb: 'অনার্স ও মাস্টার্স',
+  },
   '/about': {
     title: 'Eduvelto সম্পর্কে — বাংলাদেশের ফ্রি শিক্ষা প্ল্যাটফর্ম',
     description:
@@ -269,6 +349,30 @@ const STATIC_ROUTES: Record<string, RouteSeoEntry> = {
     description:
       'স্বাস্থ্য সচেতনতামূলক তথ্য — ঔষধ, রোগ ও হাসপাতালের তথ্য। Eduvelto।',
     crumb: 'স্বাস্থ্য',
+  },
+  '/health/medicines': {
+    title: 'ঔষধ নির্দেশিকা — ব্যবহার, পার্শ্বপ্রতিক্রিয়া ও সতর্কতা | Eduvelto',
+    description:
+      'সাধারণ ঔষধের ব্যবহার, ধরন, পার্শ্বপ্রতিক্রিয়া ও সতর্কতা — শুধুমাত্র যাচাইকৃত উৎস থেকে। এখানে কোনো ডোজ দেওয়া হয় না; ডোজ শুধুমাত্র ডাক্তারের পরামর্শ অনুযায়ী। Eduvelto।',
+    crumb: 'ঔষধ নির্দেশিকা',
+  },
+  '/health/diseases': {
+    title: 'রোগের তথ্য — লক্ষণ, প্রতিরোধ ও কখন ডাক্তার দেখাবেন | Eduvelto',
+    description:
+      'সাধারণ রোগের লক্ষণ, প্রতিরোধ ও কখন ডাক্তার দেখাবেন — সাধারণ তথ্য, রোগ নির্ণয় নয়। Eduvelto।',
+    crumb: 'রোগের তথ্য',
+  },
+  '/health/doctors': {
+    title: 'ডাক্তার নির্দেশিকা — যাচাইকৃত ডাক্তার | Eduvelto',
+    description:
+      'যাচাইকৃত ডাক্তারদের তালিকা — এখনো কেউ তালিকাভুক্ত হয়নি; ডাক্তার যাচাই হলে এখানে দেখা যাবে। যাচাই ছাড়া কেউ "ভেরিফায়েড" হিসেবে দেখানো হয় না। Eduvelto।',
+    crumb: 'ডাক্তার নির্দেশিকা',
+  },
+  '/health/hospitals': {
+    title: 'হাসপাতাল ও ফার্মেসি — তথ্য | Eduvelto',
+    description:
+      'হাসপাতাল ও ফার্মেসির তথ্য — ঠিকানা ও যোগাযোগ। Eduvelto।',
+    crumb: 'হাসপাতাল ও ফার্মেসি',
   },
   '/ai-teacher': {
     title: 'AI শিক্ষক — শীঘ্রই আসছে | Eduvelto',
@@ -311,6 +415,12 @@ function jobExamEntry(slug: string, tab?: string): RouteSeoEntry | null {
   // come from jobRulesConfig; anything unverified says so plainly.
   const cfg = jobRulesConfig(slug);
   const status = jobPatternStatus(slug);
+  // fullBn already ends with 'পরীক্ষা' for most exams ('…নিয়োগ
+  // পরীক্ষা') and with 'প্রস্তুতি' for IT/private-ngo — strip that
+  // trailing word before appending 'পরীক্ষার প্রস্তুতির কাঠামো', or
+  // the description reads 'পরীক্ষা পরীক্ষার' / 'প্রস্তুতি প্রস্তুতির'
+  // (copy nit found 23 Nov 2026 in the report audit).
+  const examBase = exam.fullBn.replace(/ (পরীক্ষা|প্রস্তুতি)$/, '');
   let body: string;
   if (slug === 'bank' && cfg && cfg.questionCount !== null && cfg.timeMinutes !== null) {
     // Subject pattern verified, penalty NOT verified (Step 5 closure):
@@ -334,17 +444,56 @@ function jobExamEntry(slug: string, tab?: string): RouteSeoEntry | null {
       cfg.passMark !== null && cfg.passMark !== undefined
         ? `, পাস ${bnDigits(cfg.passMark)} নম্বর`
         : '';
-    body = `${exam.fullBn} পরীক্ষার প্রস্তুতির কাঠামো — ${pattern}: ${bnDigits(cfg.questionCount)} MCQ, ${timeBn(cfg.timeMinutes)}, ${neg}${pass}; বিষয়ভিত্তিক সিলেবাস।`;
+    body = `${examBase} পরীক্ষার প্রস্তুতির কাঠামো — ${pattern}: ${bnDigits(cfg.questionCount)} MCQ, ${timeBn(cfg.timeMinutes)}, ${neg}${pass}; বিষয়ভিত্তিক সিলেবাস।`;
   } else if (slug === 'it-professional') {
     // Scope undecided (owner decision 13.8) — Step 6 builds no syllabus.
-    body = `${exam.fullBn} প্রস্তুতির কাঠামো — পরিধি নির্ধারণ বাকি।`;
+    body = `${examBase} পরীক্ষার প্রস্তুতির কাঠামো — পরিধি নির্ধারণ বাকি।`;
   } else {
-    body = `${exam.fullBn} পরীক্ষার প্রস্তুতির কাঠামো — পরীক্ষার ধরন যাচাই বাকি (সর্বশেষ বিজ্ঞপ্তি দেখে নিন)।`;
+    body = `${examBase} পরীক্ষার প্রস্তুতির কাঠামো — পরীক্ষার ধরন যাচাই বাকি (সর্বশেষ বিজ্ঞপ্তি দেখে নিন)।`;
   }
   return {
     title: `${exam.bn} প্রস্তুতি — ${exam.fullBn}${tabSuffix} | Eduvelto`,
     description: `${body} MCQ অনুশীলন ও মক টেস্ট শীঘ্রই আসছে। Eduvelto-তে সম্পূর্ণ ফ্রি।`,
     crumb: exam.bn,
+  };
+}
+
+function jobSubjectEntry(examSlug: string, subjectSlug: string): RouteSeoEntry | null {
+  const exam = jobExamBySlug(examSlug);
+  if (!exam) return null;
+  // Subjects exist ONLY for the 4 verified exams (jobContent.ts).
+  // Anything else (incl. a subject from another exam) is not a page.
+  const subj = jobSubjectById(`${examSlug}__${subjectSlug}`);
+  if (!subj) return null;
+  // marks is null only for a subject whose marks are not verified
+  // (jobContent.ts) — the description's core claim IS the verified
+  // mark count, so such a subject is not a page. All 23 subjects
+  // today carry verified marks (pinned by seo.test.ts).
+  if (subj.marks === null) return null;
+  return {
+    title: `${subj.nameBn} — ${exam.bn} প্রস্তুতি | Eduvelto`,
+    description: `${exam.fullBn} ${subj.nameBn} — যাচাইকৃত সিলেবাসে ${bnDigits(subj.marks)} নম্বর। টপিক ও অনুশীলন শীঘ্রই আসছে। Eduvelto-তে সম্পূর্ণ ফ্রি।`,
+    crumb: subj.nameBn,
+  };
+}
+
+function nuSubjectEntry(groupSlug: string, subjectSlug: string): RouteSeoEntry | null {
+  const group = NU_GROUPS.find((g) => g.slug === groupSlug);
+  if (!group) return null;
+  const subj = nuSyllabusSubjectBySlug(subjectSlug);
+  // Group-block subjects (group-*) render the not-found card by design
+  // (NuSubjectPage) — they are not pages. Only the 3 common subjects
+  // (bangla/english/general-knowledge, 20 marks each, verified from
+  // the circular) have subject pages, per group.
+  if (!subj || subj.isGroupBlock || !subj.groupIds.includes(group.slug)) return null;
+  // group.bn is 'মানবিক শাখা' / 'বিজ্ঞান শাখা' / 'ব্যবসায় শিক্ষা
+  // শাখা' — strip the trailing 'শাখা' before writing '…শাখার',
+  // or the description reads 'শাখা শাখার' (copy nit, 23 Nov 2026).
+  const groupShort = group.bn.replace(/ শাখা$/, '');
+  return {
+    title: `${subj.nameBn} — জাতীয় বিশ্ববিদ্যালয় ভর্তি প্রস্তুতি (${group.bn}) | Eduvelto`,
+    description: `${groupShort} শাখার ভর্তি পরীক্ষায় ${subj.nameBn} ${bnDigits(subj.marks)} নম্বর — বিজ্ঞপ্তি থেকে যাচাইকৃত। অধ্যায় ও টপিক খসড়া হিসেবে দেওয়া আছে। Eduvelto-তে সম্পূর্ণ ফ্রি।`,
+    crumb: subj.nameBn,
   };
 }
 
@@ -386,6 +535,35 @@ export function resolveRouteSeo(pathname: string): SeoData | null {
   let crumbs: string[] = [];
 
   if (!entry) {
+    // /jobs/:exam/subjects/:subject (Step 6 subject pages — ONLY the
+    // 4 verified exams have subjects; anything else is not a page).
+    const jobSubjectMatch = path.match(/^\/jobs\/([^/]+)\/subjects\/([^/]+)$/);
+    if (jobSubjectMatch) {
+      const exam = jobExamBySlug(jobSubjectMatch[1]);
+      entry = jobSubjectEntry(jobSubjectMatch[1], jobSubjectMatch[2]);
+      if (entry && exam) crumbs = ['চাকরি প্রস্তুতি', exam.bn, entry.crumb];
+    }
+  }
+
+  if (!entry) {
+    // /admissions/national-university/:group/subjects/:subject — ONLY
+    // the 3 common subjects per group (bangla/english/general-
+    // knowledge). Group-block slugs render the not-found card by
+    // design and must not resolve. This branch MUST come before the
+    // group-prefix branch below, whose regex would also match.
+    const nuSubjectMatch = path.match(
+      /^\/admissions\/national-university\/(humanities|science|business)\/subjects\/([^/]+)$/,
+    );
+    if (nuSubjectMatch) {
+      const group = NU_GROUPS.find((g) => g.slug === nuSubjectMatch[1]);
+      entry = nuSubjectEntry(nuSubjectMatch[1], nuSubjectMatch[2]);
+      if (entry && group) {
+        crumbs = ['ভর্তি প্রস্তুতি', 'জাতীয় বিশ্ববিদ্যালয়', group.bn, entry.crumb];
+      }
+    }
+  }
+
+  if (!entry) {
     // /jobs/:exam and /jobs/:exam/:tab (dynamic, from the real exam list).
     const jobMatch = path.match(/^\/jobs\/([^/]+)(?:\/([^/]+))?$/);
     if (jobMatch) {
@@ -398,6 +576,16 @@ export function resolveRouteSeo(pathname: string): SeoData | null {
     }
   }
   if (!entry && path.startsWith('/admissions/national-university/')) {
+    // Direct subject pages (/subjects/<slug>) were already decided by
+    // the nuSubject branch above: null there means "not a page"
+    // (group-block slug or unknown subject) — never resurrect it as
+    // group SEO (23 Nov 2026, seo.test.ts guard). Deeper paths
+    // (/subjects/<subject>/<topic>) still share the group SEO below.
+    const directSubject =
+      /^\/admissions\/national-university\/(?:humanities|science|business)\/subjects\/[^/]+$/.test(
+        path,
+      );
+    if (directSubject) return null;
     // Hub tabs (/admissions/national-university/:tab) and group subject
     // pages share the hub/group SEO — never a 404-style fallback title.
     const groupMatch = path.match(
@@ -425,12 +613,58 @@ export function resolveRouteSeo(pathname: string): SeoData | null {
     inLanguage: ['bn'],
     isPartOf: { '@id': 'https://eduvelto.com#website' },
   };
+  const jsonLd: unknown[] = [ORGANIZATION_JSON_LD, WEBSITE_JSON_LD, webPage, breadcrumbFor(path, crumbs)];
+  if (path === '/jobs') {
+    // ItemList (23 Nov 2026, Gemini fold-in): the hub renders a real
+    // card grid of all 14 exam hubs — list them with their real URLs.
+    // Only the jobs hub gets an ItemList; other hub lists are dynamic
+    // (circulars — empty live) or login-gated, so no list is emitted.
+    jsonLd.push({
+      '@context': 'https://schema.org',
+      '@type': 'ItemList',
+      name: 'চাকরি প্রস্তুতি — পরীক্ষা',
+      itemListElement: JOB_EXAMS.map((exam, i) => ({
+        '@type': 'ListItem',
+        position: i + 1,
+        name: `${exam.bn} প্রস্তুতি`,
+        url: `${SITE_URL}/jobs/${exam.slug}`,
+      })),
+    });
+  }
   return {
     title: entry.title,
     description: entry.description,
     canonical,
     ogType: 'website',
-    ogImage: LOGO_URL,
-    jsonLd: [ORGANIZATION_JSON_LD, WEBSITE_JSON_LD, webPage, breadcrumbFor(path, crumbs)],
+    ogImage: OG_IMAGE_URL,
+    jsonLd,
+  };
+}
+
+/**
+ * Fallback SEO for paths that are NOT content pages (23 Nov 2026,
+ * feature/seo-50-100-pages, Gemini fold-in — soft-404 handling).
+ *
+ * The SPA catch-all renders HomePage for ANY unknown path with HTTP
+ * 200 (WEB-001), so a junk URL like /jobs/primary or /class/class-9
+ * would otherwise keep the previous route's title/meta — or the
+ * static home tags — and look indexable. This fallback gives such a
+ * URL the HOME title/description/canonical (it IS rendering the
+ * homepage) plus robots noindex, nofollow, so Google never indexes
+ * the junk URL. RouteSeo applies it whenever resolveRouteSeo returns
+ * null, EXCEPT /founder (FounderPage owns its own SEO and must not
+ * be touched). It never changes what the user sees.
+ */
+export function resolveFallbackSeo(pathname: string): SeoData | null {
+  if (pathname.replace(/\/+$/, '') === '/founder') return null;
+  const home = STATIC_ROUTES['/'];
+  return {
+    title: home.title,
+    description: home.description,
+    canonical: `${SITE_URL}/`,
+    ogType: 'website',
+    ogImage: OG_IMAGE_URL,
+    robots: 'noindex, nofollow',
+    jsonLd: [],
   };
 }
