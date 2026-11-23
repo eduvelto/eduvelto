@@ -198,6 +198,10 @@
       },
       {
         "destination": "/index.html",
+        "source": "/install"
+      },
+      {
+        "destination": "/index.html",
         "source": "/progress"
       },
       {
