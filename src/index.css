@@ -1584,8 +1584,8 @@ a:hover {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 40px;
-  height: 40px;
+  width: 44px;
+  height: 44px;
   padding: 0;
   border: 0;
   border-radius: 50%;
@@ -1699,8 +1699,8 @@ a:hover {
     margin-left: auto;
   }
   .ev-header-mobile-actions .ev-header-icon-btn {
-    width: 40px;
-    height: 40px;
+    width: 44px;
+    height: 44px;
   }
   .ev-menu-btn {
     margin-left: 4px;
@@ -1783,8 +1783,8 @@ a:hover {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 36px;
-    height: 36px;
+    width: 44px;
+    height: 44px;
     border: 0;
     border-radius: 8px;
     background: var(--hover);
@@ -2384,6 +2384,33 @@ a.ev-home-strip-link:hover {
    বেশি কিছু / মেনু. Buttons share the link styles. */
 @media (max-width: 768px) {
   .ev-bottom-nav-link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+    min-height: 58px;
+    padding: 8px 2px 6px;
+    border: 0;
+    background: transparent;
+    color: rgba(255, 255, 255, 0.85);
+    font-family: var(--font-body);
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 1.2;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  .ev-bottom-nav-link:hover {
+    color: #fff;
+    text-decoration: none;
+  }
+  .ev-bottom-nav-link-active {
+    color: var(--amber);
+    font-weight: 700;
+    box-shadow: inset 0 3px 0 #d9a441;
+  }
+}
 
 /* ---- CEO Panel (owner-only, 21 Nov 2026) — mobile-first, phone-width
    column centred on desktop, dark-navy header, bottom nav ≤768px.
@@ -2800,11 +2827,6 @@ a.ev-ceo-list-row:hover {
   background: var(--hover);
   text-decoration: none;
 }
-
-    padding: 8px 2px calc(6px + env(safe-area-inset-bottom, 0px));
-    color: rgba(255, 255, 255, 0.85);
-    font-size: 12px;
-  }
   .ev-ceo-bottom-nav-item:hover {
     color: #fff;
     text-decoration: none;
@@ -2814,7 +2836,6 @@ a.ev-ceo-list-row:hover {
     font-weight: 700;
     box-shadow: inset 0 3px 0 var(--amber);
   }
-}
 
 /* ---- CEO Approval Center (owner brief 21 Nov 20:27 §4) ---- */
 .ev-ceo-wide-link {
