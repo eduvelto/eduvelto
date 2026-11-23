@@ -330,11 +330,15 @@ export default function HomePage() {
         </button>
       </form>
 
-      {/* Bismillah hero greeting band (owner brief 23:01 + correction
-          23:11) — right below the navigation, above the hero: the
-          Bismillah → ayah → salam cycle, same as the top greeting bar,
-          at display size. The old mobile hero carousel is removed
-          entirely (owner scribbled it out); nothing replaces it below
+      {/* Hero greeting band, v3 (owner's FORMAL revised brief 24 Nov
+          2026 00:29) — right below the navigation, above the hero:
+          Surah Al-Alaq's first ayah in THREE languages, one at a
+          time — Arabic → English → Bangla → Arabic. One line only,
+          half the old height, small gold border, deep Islamic green.
+          No Bismillah anywhere in the band. The top sticky greeting
+          bar was deleted in the same revision (the greeting appeared
+          twice); this band is the only greeting left. The old mobile
+          hero carousel is removed entirely; nothing replaces it below
           the hero, the section cards simply move up. */}
       <HeroGreeting />
 

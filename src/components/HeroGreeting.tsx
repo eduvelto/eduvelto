@@ -1,87 +1,121 @@
-// Eduvelto — homepage hero-band greeting display (owner brief 22:55 +
-// formal brief 23:01).
+// Eduvelto — homepage hero-band greeting, v3 (owner's FORMAL revised
+// brief 24 Nov 2026 00:29 — SUPERSEDES both the 23:01 brief and the
+// 00:22 no-Arabic reading; Arabic IS included).
 //
-// Replaces the auto-sliding mobile hero carousel in the band between
-// the desktop hero and the four section cards. Same Bismillah → ayah →
-// salam cycle as the top greeting bar (shared useGreetingCycle hook),
-// same Deep Navy #0A1F44 + champagne gold, shown on ALL screen sizes,
-// centred. The Bismillah here is display-size and static — no
-// animation on the letters, exactly like the bar's. Fixed-height
-// stage, so the section cards below never shift when phases change.
-// Under reduced motion the timer never starts and the band shows
-// Bismillah + the full ayah block statically.
-import {
-  AyahBlock,
-  BISMILLAH,
-  GREETING_MESSAGES,
-  useGreetingCycle,
-} from './GreetingBar';
+// The top sticky greeting bar is DELETED (App.tsx no longer mounts
+// GreetingBar; the component + CSS + tests are removed). This band,
+// directly below the Navigation Menu, is the ONLY Welcome Bar.
+//
+// The bar carries Surah Al-Alaq's first ayah in THREE languages, in
+// sequence — Arabic first, then English, then Bangla, then back to
+// Arabic. NEVER more than one language at once; exactly one language
+// and ONE LINE at a time. No Bismillah anywhere in the bar, no extra
+// Arabic text, no "Assalamu Alaikum", no rotating welcome lines.
+//
+// Strings (brief 00:29 — verbatim, never re-translate or alter the
+// Arabic):
+import { useEffect, useState } from 'react';
 
-function CrescentStar({ size = 32 }: { size?: number }) {
-  return (
-    <svg
-      width={size}
-      height={size}
-      viewBox="0 0 24 24"
-      fill="none"
-      aria-hidden="true"
-      focusable="false"
-    >
-      <path
-        d="M20.5 14.5A8.5 8.5 0 1 1 9.5 3.5a7 7 0 0 0 11 11z"
-        fill="#e9cf7e"
-      />
-      <path
-        d="M18.6 3.2l.72 1.86 1.86.72-1.86.72-.72 1.86-.72-1.86-1.86-.72 1.86-.72z"
-        fill="#f7e9b8"
-      />
-    </svg>
-  );
+export const HERO_GREETING_AR = 'اقْرَأْ بِاسْمِ رَبِّكَ الَّذِي خَلَقَ';
+export const HERO_GREETING_EN = 'Read in the name of your Lord who created.';
+export const HERO_GREETING_BN = 'পড়ো তোমার রবের নামে, যিনি সৃষ্টি করেছেন।';
+export const HERO_GREETING_ATTR = 'সূরা আলাক, আয়াত ১।';
+
+// Attribution: rendered inside the Bangla line (see the component).
+// It fits on desktop beside the Bangla sentence; on mobile (390px)
+// the Bangla sentence alone already fills the line, so the
+// attribution span is hidden there by CSS (display: none under
+// 640px) — one line is the hard requirement, and a second line is
+// never allowed. See the deploy report for the measured fit.
+
+export type HeroGreetingPhase = 'ar' | 'en' | 'bn';
+
+/**
+ * Dwell time per phase (ms). Arabic stays longest (8–10s) so the
+ * verse can be read comfortably; English/Bangla ~6s each. Slow
+ * gentle fades only (1.2s) — the Arabic letters and harakat are
+ * never distorted, bent, or broken.
+ */
+export const HERO_GREETING_PHASE_MS: Record<HeroGreetingPhase, number> = {
+  ar: 9000,
+  en: 6000,
+  bn: 6000,
+};
+
+export function getNextHeroGreetingPhase(
+  current: HeroGreetingPhase,
+): HeroGreetingPhase {
+  if (current === 'ar') return 'en';
+  if (current === 'en') return 'bn';
+  return 'ar';
+}
+
+function prefersReducedMotion(): boolean {
+  if (typeof window === 'undefined' || typeof window.matchMedia !== 'function') return false;
+  return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+}
+
+/**
+ * Three-phase machine: Arabic → English → Bangla → Arabic …
+ * Under reduced motion there is no timer: the phase is 'ar' forever,
+ * so the Arabic line is shown statically and nothing cycles.
+ */
+export function useHeroGreetingCycle(): { phase: HeroGreetingPhase } {
+  const [phase, setPhase] = useState<HeroGreetingPhase>('ar');
+
+  useEffect(() => {
+    if (prefersReducedMotion()) return;
+    const id = window.setTimeout(() => {
+      setPhase(getNextHeroGreetingPhase(phase));
+    }, HERO_GREETING_PHASE_MS[phase]);
+    return () => window.clearTimeout(id);
+  }, [phase]);
+
+  return { phase };
 }
 
 export default function HeroGreeting() {
-  const { phase, welcomeIndex } = useGreetingCycle();
+  const { phase } = useHeroGreetingCycle();
 
   return (
     <section
       className="ev-hero-greeting"
-      aria-label="Bismillah — Surah Al-Alaq, verse 1"
+      aria-label="Al-Alaq, verse 1 — in Arabic, English and Bangla"
     >
-      <div className="ev-hero-greeting-stage" data-phase={phase}>
-        {/* Bismillah row — visible in phases (a) and (b); glides up
-            when the ayah block expands below it. No animation and no
-            transform on the Bismillah letters themselves. */}
-        <div
-          className="ev-hero-greeting-bismillah-row"
-          aria-hidden={phase === 'salam'}
-        >
-          <span className="ev-hero-greeting-mark" aria-hidden="true">
-            <CrescentStar />
-          </span>
-          <span className="ev-hero-greeting-bismillah" lang="ar" dir="rtl">
-            {BISMILLAH}
-          </span>
-        </div>
-        {/* Ayah block — visible in phase (b) only. */}
-        <div
-          className="ev-hero-greeting-ayah-wrap"
-          aria-hidden={phase !== 'ayah'}
-        >
-          <AyahBlock prefix="ev-hero-greeting" />
-        </div>
-        {/* Salam + rotating welcome — visible in phase (c) only. */}
-        <div
-          className="ev-hero-greeting-salam-block"
-          aria-hidden={phase !== 'salam'}
-        >
-          <p className="ev-hero-greeting-salam">Assalamu Alaikum</p>
-          <p className="ev-hero-greeting-tagline" aria-live="polite">
-            <span key={welcomeIndex} className="ev-hero-greeting-message">
-              {GREETING_MESSAGES[welcomeIndex]}
-            </span>
-          </p>
-        </div>
-      </div>
+      {/* All three lines stay in the DOM; CSS shows only the active
+          phase (opacity + visibility), so the switch is a pure fade
+          and the band never changes height or reflows. The inactive
+          lines are aria-hidden. */}
+      <p
+        className="ev-hero-greeting-line ev-hero-greeting-line-ar"
+        data-active={phase === 'ar'}
+        aria-hidden={phase !== 'ar'}
+        lang="ar"
+        dir="rtl"
+      >
+        <span className="ev-hero-greeting-text">{HERO_GREETING_AR}</span>
+      </p>
+      <p
+        className="ev-hero-greeting-line ev-hero-greeting-line-en"
+        data-active={phase === 'en'}
+        aria-hidden={phase !== 'en'}
+        lang="en"
+      >
+        <span className="ev-hero-greeting-text">{HERO_GREETING_EN}</span>
+      </p>
+      <p
+        className="ev-hero-greeting-line ev-hero-greeting-line-bn"
+        data-active={phase === 'bn'}
+        aria-hidden={phase !== 'bn'}
+        lang="bn"
+      >
+        <span className="ev-hero-greeting-text">{HERO_GREETING_BN}</span>
+        <span className="ev-hero-greeting-attr"> — {HERO_GREETING_ATTR}</span>
+      </p>
+      {/* (c) Thin gold line along the bottom edge, sweeping slowly
+          side to side — the eye-catcher that never touches the ayah
+          text itself. Decorative only. */}
+      <span className="ev-hero-greeting-sweep" aria-hidden="true" />
     </section>
   );
 }
