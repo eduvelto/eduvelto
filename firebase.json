@@ -166,6 +166,14 @@
       },
       {
         "destination": "/index.html",
+        "source": "/learn"
+      },
+      {
+        "destination": "/index.html",
+        "source": "/learn/**"
+      },
+      {
+        "destination": "/index.html",
         "source": "/quiz/**"
       },
       {

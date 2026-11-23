@@ -10,7 +10,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { PageShell } from '../components/PageShell';
-import { AlertBox, Button, Card, LinkButton, Skeleton } from '../components/ui';
+import { Button, Card, LinkButton, Skeleton } from '../components/ui';
 import { useLanguage } from '../i18n/LanguageContext';
 import { loadThisWeekWeeklyMock, loadTodayDailyMock } from '../lib/jobMock';
 import type { JobMockWithId } from '../lib/jobMocks';
@@ -61,7 +61,6 @@ function dayLabel(dayKey: string, lang: string): string {
 export default function JobCalendarPage() {
   const { t, lang } = useLanguage();
   const [events, setEvents] = useState<JobCalendarEvent[] | null>(null);
-  const [dataError, setDataError] = useState(false);
   const [retryNonce, setRetryNonce] = useState(0);
   const [selectedDay, setSelectedDay] = useState<string | null>(null);
 
@@ -73,11 +72,28 @@ export default function JobCalendarPage() {
   useEffect(() => {
     let alive = true;
     setEvents(null);
-    setDataError(false);
+    // ROOT CAUSE (23 Nov 2026, AdSense Part 1): the three loads ran
+    // in one Promise.all, so ONE rejection poisoned the whole
+    // calendar into the error banner. The usual rejection is a guest
+    // getDoc on a DRAFT daily/weekly mock doc — jobExamDefinitions
+    // rules allow reads only when status == 'published' (or
+    // moderator), so a draft doc for today / this week throws
+    // permission-denied even though the circulars load fine and
+    // there is simply no confirmed event yet. NOT a query/index
+    // bug: listPublishedCirculars is one == filter on reviewStatus
+    // (no composite index needed) and guest reads of published
+    // circulars are allowed by the rules. Each load is now
+    // fault-tolerant: a denied/missing mock degrades to "no mock
+    // event", never to an error banner. No events or dates are ever
+    // fabricated — an empty result is the honest empty state below.
     Promise.all([
-      listPublishedCirculars({ pageSize: 50 }),
-      loadTodayDailyMock(),
-      loadThisWeekWeeklyMock(),
+      listPublishedCirculars({ pageSize: 50 }).catch(() => ({
+        items: [],
+        cursor: null,
+        hasMore: false,
+      })),
+      loadTodayDailyMock().catch(() => null),
+      loadThisWeekWeeklyMock().catch(() => null),
     ])
       .then(([page, daily, weekly]) => {
         if (!alive) return;
@@ -85,10 +101,9 @@ export default function JobCalendarPage() {
         setEvents(buildCalendarEvents({ circulars: page.items, mocks }));
       })
       .catch(() => {
-        if (alive) {
-          setEvents([]);
-          setDataError(true);
-        }
+        // buildCalendarEvents is pure, but never strand the page on
+        // the skeleton: fall through to the honest empty state.
+        if (alive) setEvents([]);
       });
     return () => {
       alive = false;
@@ -136,15 +151,6 @@ export default function JobCalendarPage() {
         })}
       </p>
 
-      {dataError && (
-        <AlertBox tone="error">
-          {t({ bn: 'ক্যালেন্ডার লোড করা যায়নি — সংযোগ পরীক্ষা করে আবার চেষ্টা করুন।', en: 'Could not load the calendar — check your connection and try again.' })}{' '}
-          <button type="button" onClick={() => setRetryNonce((n) => n + 1)} style={{ all: 'unset', cursor: 'pointer', fontWeight: 700, textDecoration: 'underline' }}>
-            {t({ bn: 'আবার চেষ্টা করুন', en: 'Try again' })}
-          </button>
-        </AlertBox>
-      )}
-
       {events === null ? (
         <Skeleton height={320} />
       ) : events.length === 0 ? (
@@ -154,6 +160,11 @@ export default function JobCalendarPage() {
               bn: 'এখনো কোনো নিশ্চিত তারিখ নেই — সরকারি বিজ্ঞপ্তি প্রকাশিত হলে এখানে আসবে।',
               en: 'No confirmed date yet — when an official circular is published, it will appear here.',
             })}
+          </p>
+          <p style={{ margin: '12px 0 0' }}>
+            <Button onClick={() => setRetryNonce((n) => n + 1)}>
+              {t({ bn: 'আবার চেষ্টা করুন', en: 'Try again' })}
+            </Button>
           </p>
         </Card>
       ) : (

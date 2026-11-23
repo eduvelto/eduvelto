@@ -5,7 +5,7 @@
 // platform for Bangladesh. It states what is collected (account +
 // learning progress), that student data is NEVER sold, the child-safety
 // and guardian rules, and that ads are non-personalised only.
-// Contact: ahmmizan23@gmail.com. Last updated 22 November 2026.
+// Contact: ahmmizan23@gmail.com. Last updated 23 November 2026.
 // NOTE: ads are NOT active on the site yet — the AdSense verification
 // script loads (index.html), but no ad unit renders until activation is
 // separately approved (Launch step 6). This policy already covers how ads
@@ -34,7 +34,7 @@ export default function PrivacyPage() {
   return (
     <PageShell titleBn="গোপনীয়তা নীতি" titleEn="Privacy Policy — Eduvelto" wide>
       <p style={{ color: 'var(--muted-ivory)', margin: '0 0 20px', lineHeight: 1.7 }}>
-        {t({ bn: 'সর্বশেষ হালনাগাদ: ২২ নভেম্বর ২০২৬।', en: 'Last updated: 22 November 2026.' })} Eduvelto বাংলাদেশের        শিক্ষার্থীদের জন্য একটি সম্পূর্ণ বিনামূল্যের শিক্ষা প্ল্যাটফর্ম। এই নীতিতে বলা আছে আমরা
+        {t({ bn: 'সর্বশেষ হালনাগাদ: ২৩ নভেম্বর ২০২৬।', en: 'Last updated: 23 November 2026.' })} Eduvelto বাংলাদেশের        শিক্ষার্থীদের জন্য একটি সম্পূর্ণ বিনামূল্যের শিক্ষা প্ল্যাটফর্ম। এই নীতিতে বলা আছে আমরা
         কী তথ্য সংগ্রহ করি, কেন করি, আর আপনার তথ্য কীভাবে সুরক্ষিত থাকে।
       </p>
 
@@ -148,6 +148,38 @@ export default function PrivacyPage() {
           আপনাকে ট্র্যাক করা হয় না। বিজ্ঞাপন চালু হলে Google AdSense কুকি ব্যবহার
           করতে পারে — তবে বিজ্ঞাপন হবে নন-পার্সোনালাইজড, আপনার তথ্য দিয়ে টার্গেট
           করা হবে না।
+        </p>
+        <p style={{ margin: '10px 0 0' }}>
+          বিজ্ঞাপন চালু হলে বিজ্ঞাপন-কুকি সম্পর্কে এই তিনটি কথা প্রযোজ্য হবে: (১)
+          Google-সহ তৃতীয় পক্ষের বিজ্ঞাপনদাতারা এই সাইটে বা অন্য সাইটে আপনার আগের
+          ভিজিটের ভিত্তিতে বিজ্ঞাপন দেখাতে কুকি ব্যবহার করে; (২) Google-এর
+          বিজ্ঞাপন-কুকির ব্যবহারের ফলে Google ও তার অংশীদাররা এই সাইট ও/অথবা অন্য
+          সাইটে আপনার ভিজিটের ভিত্তিতে বিজ্ঞাপন দেখাতে পারে; (৩) আপনি{' '}
+          <a href="https://adssettings.google.com" target="_blank" rel="noreferrer">
+            Google Ads Settings
+          </a>{' '}
+          ও{' '}
+          <a href="https://www.aboutads.info" target="_blank" rel="noreferrer">
+            www.aboutads.info
+          </a>{' '}
+          থেকে পার্সোনালাইজড বিজ্ঞাপন বন্ধ (opt out) করতে পারেন।
+        </p>
+        <p style={{ margin: '10px 0 0' }}>
+          <em>
+            In English — when ads run: (1) third-party vendors, including Google, use
+            cookies to serve ads based on a user&apos;s prior visits to this site or
+            other sites; (2) Google&apos;s use of advertising cookies enables it and
+            its partners to serve ads based on visits to this site and/or other sites;
+            (3) users may opt out of personalised advertising via{' '}
+            <a href="https://adssettings.google.com" target="_blank" rel="noreferrer">
+              Google Ads Settings
+            </a>{' '}
+            and{' '}
+            <a href="https://www.aboutads.info" target="_blank" rel="noreferrer">
+              www.aboutads.info
+            </a>
+            .
+          </em>
         </p>
       </Section>
 

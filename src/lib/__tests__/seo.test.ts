@@ -52,6 +52,19 @@
  *      /jobs/bcs keeps the 4 JSON-LD types without an ItemList.
  *  (17) OG constants are the 1200×630 social image
  *      (OG_IMAGE_URL / WIDTH / HEIGHT).
+ *  (18) AdSense Part 1 (23 Nov 2026): thin pages are noindexed and
+ *      out of the sitemap — all job subject pages except BCS
+ *      English, all 9 NU subject pages, the 5 health pages,
+ *      /jobs/circulars, /jobs/calendar (until a confirmed event
+ *      exists), /ai-teacher — while the 6 live BCS English practice
+ *      + lesson routes are indexable and in the sitemap. The (6) /
+ *      (15) "শীঘ্রই আসছে" guards are phrase-scoped to "MCQ
+ *      অনুশীলন" / "মক টেস্ট": the new honest copy says BCS English
+ *      practice is live with different words ("অনুশীলন এখন চালু",
+ *      "মক পরীক্ষা … প্রস্তুত হচ্ছে"), so the guards stay green
+ *      while the copy stays honest. The guards themselves are stale
+ *      for BCS English and need a coordinated update before any
+ *      other practice goes live.
  *
  * Runs under plain node: resolveRouteSeo is pure (jobExams.ts has no
  * imports). Run with `npm run test:unit`.
@@ -85,8 +98,6 @@ const SITEMAP_URLS = [
   '/jobs/primary-teacher',
   '/jobs/ntrca',
   '/jobs/common',
-  '/jobs/circulars',
-  '/jobs/calendar',
   '/jobs/dgfood',
   '/jobs/bpsc-non-cadre',
   '/jobs/cag',
@@ -101,43 +112,19 @@ const SITEMAP_URLS = [
   '/jobs/bank/subjects',
   '/jobs/primary-teacher/subjects',
   '/jobs/ntrca/subjects',
-  '/jobs/bcs/subjects/bangla',
   '/jobs/bcs/subjects/english',
-  '/jobs/bcs/subjects/bangladesh-affairs',
-  '/jobs/bcs/subjects/international-affairs',
-  '/jobs/bcs/subjects/geography',
-  '/jobs/bcs/subjects/general-science',
-  '/jobs/bcs/subjects/computer-ict',
-  '/jobs/bcs/subjects/mathematical-reasoning',
-  '/jobs/bcs/subjects/mental-ability',
-  '/jobs/bcs/subjects/ethics',
-  '/jobs/bank/subjects/bangla',
-  '/jobs/bank/subjects/english',
-  '/jobs/bank/subjects/math',
-  '/jobs/bank/subjects/general-knowledge',
-  '/jobs/bank/subjects/computer',
-  '/jobs/primary-teacher/subjects/bangla',
-  '/jobs/primary-teacher/subjects/english',
-  '/jobs/primary-teacher/subjects/math-science',
-  '/jobs/primary-teacher/subjects/general-knowledge',
-  '/jobs/ntrca/subjects/bangla',
-  '/jobs/ntrca/subjects/english',
-  '/jobs/ntrca/subjects/math',
-  '/jobs/ntrca/subjects/general-knowledge',
+  '/jobs/bcs/practice/english',
+  '/jobs/bcs/practice/english/grammar',
+  '/jobs/bcs/practice/english/vocabulary',
+  '/jobs/bcs/practice/english/reading',
+  '/learn/bcs-english-tense',
+  '/learn/bcs-english-preposition',
+  '/learn',
   '/admissions',
   '/admissions/national-university',
   '/admissions/national-university/humanities',
   '/admissions/national-university/science',
   '/admissions/national-university/business',
-  '/admissions/national-university/humanities/subjects/bangla',
-  '/admissions/national-university/humanities/subjects/english',
-  '/admissions/national-university/humanities/subjects/general-knowledge',
-  '/admissions/national-university/science/subjects/bangla',
-  '/admissions/national-university/science/subjects/english',
-  '/admissions/national-university/science/subjects/general-knowledge',
-  '/admissions/national-university/business/subjects/bangla',
-  '/admissions/national-university/business/subjects/english',
-  '/admissions/national-university/business/subjects/general-knowledge',
   '/library',
   '/class',
   '/class/class-1-5',
@@ -150,12 +137,6 @@ const SITEMAP_URLS = [
   '/contact',
   '/privacy',
   '/terms',
-  '/health',
-  '/health/medicines',
-  '/health/diseases',
-  '/health/doctors',
-  '/health/hospitals',
-  '/ai-teacher',
 ];
 
 describe('resolveRouteSeo — public routes', () => {
@@ -604,9 +585,12 @@ describe('resolveRouteSeo — SEO 50–100 pages (23 Nov 2026)', () => {
       ...allJobSubjectPaths().map((p) => p.path),
       ...allNuSubjectPaths(),
     ]);
-    // Every subject page is already in the sitemap — the sweep covers
-    // exactly the sitemap minus /founder, no more, no less.
-    expect(swept.size).toBe(SITEMAP_URLS.length - 1);
+    // AdSense Part 1 (23 Nov 2026): subject pages are mostly OUT of
+    // the sitemap now (noindexed thin pages) but are STILL swept —
+    // the sweep is the sitemap minus /founder, plus the 22 job
+    // subject pages and 9 NU subject pages not in the sitemap
+    // (BCS English is in both, counted once).
+    expect(swept.size).toBe(SITEMAP_URLS.length + 30);
     for (const path of swept) {
       const seo = resolveRouteSeo(path);
       expect(seo, `no SEO for swept path ${path}`).not.toBeNull();
@@ -710,6 +694,127 @@ describe('resolveRouteSeo — non-content routes resolve to null', () => {
       '/social',
     ]) {
       expect(resolveRouteSeo(path), path).toBeNull();
+    }
+  });
+});
+
+describe('resolveRouteSeo — AdSense Part 1 noindex + BCS English practice (23 Nov 2026)', () => {
+  it('thin pages are noindexed but still resolve (live for users, not deleted)', () => {
+    const noindexed = [
+      // Every job subject page except BCS English.
+      ...allJobSubjectPaths()
+        .map((p) => p.path)
+        .filter((p) => p !== '/jobs/bcs/subjects/english'),
+      // Every NU subject page.
+      ...allNuSubjectPaths(),
+      '/health',
+      '/health/medicines',
+      '/health/diseases',
+      '/health/doctors',
+      '/health/hospitals',
+      '/jobs/circulars',
+      '/jobs/calendar',
+      '/ai-teacher',
+    ];
+    expect(noindexed.length).toBe(22 + 9 + 5 + 2 + 1);
+    for (const path of noindexed) {
+      const seo = resolveRouteSeo(path);
+      expect(seo, `no SEO for ${path}`).not.toBeNull();
+      expect(seo!.robots, path).toBe('noindex, nofollow');
+      expect(SITEMAP_URLS, path).not.toContain(path);
+    }
+  });
+
+  it('BCS English subject page stays indexable and in the sitemap', () => {
+    const seo = resolveRouteSeo('/jobs/bcs/subjects/english')!;
+    expect(seo.robots).toBeUndefined();
+    expect(SITEMAP_URLS).toContain('/jobs/bcs/subjects/english');
+  });
+
+  it('the 6 new BCS English routes resolve, are indexable, and are in the sitemap', () => {
+    const paths = [
+      '/jobs/bcs/practice/english',
+      '/jobs/bcs/practice/english/grammar',
+      '/jobs/bcs/practice/english/vocabulary',
+      '/jobs/bcs/practice/english/reading',
+      '/learn/bcs-english-tense',
+      '/learn/bcs-english-preposition',
+    ];
+    for (const path of paths) {
+      const seo = resolveRouteSeo(path);
+      expect(seo, `no SEO for ${path}`).not.toBeNull();
+      expect(seo!.robots, path).toBeUndefined();
+      expect(seo!.title.length, path).toBeGreaterThan(10);
+      expect(seo!.description.length, path).toBeGreaterThan(40);
+      expect(seo!.canonical, path).toBe(`${SITE_URL}${path}`);
+      expect(SITEMAP_URLS, path).toContain(path);
+    }
+  });
+
+  it('practice hub says practice is live (35 verified questions); mocks still in preparation', () => {
+    const hub = resolveRouteSeo('/jobs/bcs/practice/english')!;
+    expect(hub.description).toContain('৩৫টি যাচাইকৃত প্রশ্ন');
+    expect(hub.description).toContain('প্রস্তুত হচ্ছে');
+  });
+
+  it('practice hub emits an ItemList of exactly its 3 child sections', () => {
+    const hub = resolveRouteSeo('/jobs/bcs/practice/english')!;
+    expect(jsonLdTypes(hub)).toEqual([
+      'Organization',
+      'WebSite',
+      'WebPage',
+      'BreadcrumbList',
+      'ItemList',
+    ]);
+    const itemList = (hub.jsonLd as Array<Record<string, unknown>>)[4];
+    const items = itemList['itemListElement'] as Array<Record<string, unknown>>;
+    expect(items.map((i) => i['url'])).toEqual([
+      `${SITE_URL}/jobs/bcs/practice/english/grammar`,
+      `${SITE_URL}/jobs/bcs/practice/english/vocabulary`,
+      `${SITE_URL}/jobs/bcs/practice/english/reading`,
+    ]);
+  });
+
+  it('new routes carry real Bangla breadcrumbs, never raw slugs', () => {
+    expect(breadcrumbNames(resolveRouteSeo('/jobs/bcs/practice/english')!)).toEqual([
+      'হোম',
+      'চাকরি প্রস্তুতি',
+      'বিসিএস',
+      'অনুশীলন',
+      'ইংরেজি',
+    ]);
+    expect(breadcrumbNames(resolveRouteSeo('/jobs/bcs/practice/english/grammar')!)).toEqual([
+      'হোম',
+      'চাকরি প্রস্তুতি',
+      'বিসিএস',
+      'অনুশীলন',
+      'ইংরেজি',
+      'ব্যাকরণ',
+    ]);
+    expect(breadcrumbNames(resolveRouteSeo('/learn/bcs-english-tense')!)).toEqual([
+      'হোম',
+      'বিসিএস ইংরেজি',
+      'টেন্স',
+    ]);
+  });
+
+  it('/jobs and /admissions copy now says BCS English practice is live; mocks still in preparation', () => {
+    for (const path of [
+      '/jobs',
+      '/jobs/common',
+      '/admissions',
+      '/admissions/national-university',
+      '/admissions/national-university/humanities',
+      '/admissions/national-university/science',
+      '/admissions/national-university/business',
+    ]) {
+      const seo = resolveRouteSeo(path)!;
+      expect(seo.description, path).toContain('বিসিএস ইংরেজি অনুশীলন এখন চালু');
+      expect(seo.description, path).toContain('মক পরীক্ষা এখনো প্রস্তুত হচ্ছে');
+    }
+    // And the collective pages still never claim a verified pattern.
+    for (const path of ['/jobs', '/admissions', '/admissions/national-university']) {
+      expect(resolveRouteSeo(path)!.description, path).not.toContain('যাচাইকৃত');
     }
   });
 });

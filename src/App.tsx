@@ -51,6 +51,11 @@ const JobCircularDetailPage = lazy(() => import('./pages/JobCircularDetailPage')
 const JobCalendarPage = lazy(() => import('./pages/JobCalendarPage'));
 const JobNotificationsPage = lazy(() => import('./pages/JobNotificationsPage'));
 const JobGuidePage = lazy(() => import('./pages/JobGuidePage'));
+/* AdSense Part 1 (public content, F1 fix): static BCS English practice
+   + sample lessons, visible WITHOUT login. No Firestore reads. */
+const PublicBcsEnglishPage = lazy(() => import('./pages/PublicBcsEnglishPage'));
+const PublicLessonPage = lazy(() => import('./pages/PublicLessonPage'));
+const LearnHubPage = lazy(() => import('./pages/LearnHubPage'));
 const RegisterPage = lazy(() => import('./pages/RegisterPage'));
 const RoleSetupPage = lazy(() => import('./pages/RoleSetupPage'));
 const LoginPage = lazy(() => import('./pages/LoginPage'));
@@ -317,6 +322,17 @@ export default function App() {
         <Route path="/jobs/viva" element={<JobGuidePage kind="viva" />} />
         <Route path="/jobs/career" element={<JobGuidePage kind="career" />} />
         <Route path="/jobs/cv" element={<JobGuidePage kind="cv" />} />
+        {/* AdSense Part 1 (public content, F1 fix): static BCS English
+            practice (hub + 3 categories) and 2 sample lessons — public,
+            no login, no Firestore. Placed with the other specific /jobs
+            routes, before /jobs/:exam/:tab, by the file's convention.
+            The :category param is validated inside PublicBcsEnglishPage;
+            unknown values show an honest not-found, never the raw slug. */}
+        <Route path="/jobs/bcs/practice/english" element={<PublicBcsEnglishPage />} />
+        <Route path="/jobs/bcs/practice/english/:category" element={<PublicBcsEnglishPage />} />
+        <Route path="/learn" element={<LearnHubPage />} />
+        <Route path="/learn/bcs-english-tense" element={<PublicLessonPage lesson="tense" />} />
+        <Route path="/learn/bcs-english-preposition" element={<PublicLessonPage lesson="preposition" />} />
         <Route path="/jobs/:exam/:tab" element={<JobHubPage />} />
         <Route path="/jobs/:exam" element={<JobHubPage />} />
         <Route path="/register" element={<RegisterPage />} />

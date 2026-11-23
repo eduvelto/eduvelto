@@ -25,6 +25,7 @@ export default function Footer() {
           <h3>{t({ bn: 'শিখুন', en: 'Learn' })}</h3>
           <Link to="/directory">{t({ bn: 'শিক্ষা নির্দেশিকা', en: 'Directory' })}</Link>
           <Link to="/library">{t({ bn: 'ডিজিটাল লাইব্রেরি', en: 'Library' })}</Link>
+          <Link to="/admissions">{t({ bn: 'ভর্তি প্রস্তুতি', en: 'Admission Preparation' })}</Link>
           <Link to="/exam">{t({ bn: 'পরীক্ষা', en: 'Exams' })}</Link>
           <Link to="/progress">{t({ bn: 'আমার অগ্রগতি', en: 'My Progress' })}</Link>
         </div>
