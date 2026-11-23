@@ -1,0 +1,24 @@
+{
+  "online_home": {
+    "status": 200,
+    "url": "https://eduvelto.com/",
+    "h1": "EduveltoLearn • Grow • Achieve",
+    "title": "Eduvelto — বাংলাদেশের সেরা ফ্রি শিক্ষা প্ল্যাটফর্ম"
+  },
+  "offline_reload_error": "Error: Page.reload: net::ERR_INTERNET_DISCONNECTED\nCall log:\n  - waiting for navigation until \"domcontentloaded\"\n",
+  "offline_reload": {
+    "url": "chrome-error://chromewebdata/",
+    "body_text_first_3000": "",
+    "bangla_offline_keywords_found": []
+  },
+  "offline_nav_error": "Error: Page.goto: net::ERR_INTERNET_DISCONNECTED at https://eduvelto.com/jobs\nCall log:\n  - navigating to \"https://eduvelto.com/jobs\", waiting until \"domcontentloaded\"\n",
+  "offline_nav_jobs": {
+    "url": "chrome-error://chromewebdata/",
+    "body_text_first_3000": "",
+    "bangla_offline_keywords_found": []
+  },
+  "back_online_jobs": {
+    "url": "https://eduvelto.com/jobs",
+    "h1": "চাকরির প্রস্তুতি — এক জায়গায়"
+  }
+}

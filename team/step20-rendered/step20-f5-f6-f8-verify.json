@@ -1,0 +1,157 @@
+{
+  "checked_at_utc": "2026-11-23T12:50:40Z",
+  "base": "https://eduvelto--step20-release-yjsbu3be.web.app",
+  "console_errors": [],
+  "console_warnings_csp": [],
+  "failed_requests": [
+    {
+      "url": "https://www.google.com/recaptcha/api2/aframe",
+      "failure": "net::ERR_ABORTED"
+    },
+    {
+      "url": "https://firestore.googleapis.com/google.firestore.v1.Firestore/Listen/channel?gsessionid=Awji5oKw5fc-kbJYJppXS3T3AGmkogjzQX7W66YKYBHSZUyFeUhylA&VER=8&database=p",
+      "failure": "net::ERR_ABORTED"
+    },
+    {
+      "url": "https://ep2.adtrafficquality.google/sodar/sodar2/257/runner.html",
+      "failure": "net::ERR_ABORTED"
+    },
+    {
+      "url": "https://firestore.googleapis.com/google.firestore.v1.Firestore/Listen/channel?gsessionid=uUCBPSd1DlyWE-fktx4lPyOUUUerHRz-VVwwtVFGHhPrDLPSahtsmg&VER=8&database=p",
+      "failure": "net::ERR_ABORTED"
+    },
+    {
+      "url": "https://firestore.googleapis.com/google.firestore.v1.Firestore/Listen/channel?gsessionid=uUCBPSd1DlyWE-fktx4lPyOUUUerHRz-VVwwtVFGHhPrDLPSahtsmg&VER=8&database=p",
+      "failure": "net::ERR_ABORTED"
+    },
+    {
+      "url": "https://firestore.googleapis.com/google.firestore.v1.Firestore/Listen/channel?gsessionid=KtRSW3ZsSSGqDLLEL6pCjMIvvbw2NmWebpANh5iRw02C7glx3KT5Xg&VER=8&database=p",
+      "failure": "net::ERR_ABORTED"
+    },
+    {
+      "url": "https://firestore.googleapis.com/google.firestore.v1.Firestore/Listen/channel?gsessionid=KtRSW3ZsSSGqDLLEL6pCjMIvvbw2NmWebpANh5iRw02C7glx3KT5Xg&VER=8&database=p",
+      "failure": "net::ERR_ABORTED"
+    }
+  ],
+  "csp_mentions_adtrafficquality": [],
+  "chips_jobs_circulars": [
+    {
+      "text": "সব",
+      "w": 24,
+      "h": 24
+    },
+    {
+      "text": "বিসিএস",
+      "w": 37,
+      "h": 24
+    },
+    {
+      "text": "ব্যাংক",
+      "w": 30,
+      "h": 24
+    },
+    {
+      "text": "প্রাথমিক শিক্ষক",
+      "w": 80,
+      "h": 24
+    },
+    {
+      "text": "NTRCA",
+      "w": 41,
+      "h": 24
+    },
+    {
+      "text": "খাদ্য অধিদপ্তর",
+      "w": 71,
+      "h": 24
+    },
+    {
+      "text": "BPSC নন-ক্যাডার",
+      "w": 90,
+      "h": 24
+    },
+    {
+      "text": "CAG",
+      "w": 26,
+      "h": 24
+    },
+    {
+      "text": "BFSA",
+      "w": 30,
+      "h": 24
+    },
+    {
+      "text": "অন্যান্য সরকারি চাকরি",
+      "w": 113,
+      "h": 24
+    },
+    {
+      "text": "মন্ত্রণালয় ও অধিদপ্তর",
+      "w": 105,
+      "h": 24
+    },
+    {
+      "text": "প্রতিরক্ষা",
+      "w": 44,
+      "h": 24
+    },
+    {
+      "text": "স্বায়ত্তশাসিত প্রতিষ্ঠান",
+      "w": 102,
+      "h": 24
+    },
+    {
+      "text": "বেসরকারি ও এনজিও",
+      "w": 101,
+      "h": 24
+    },
+    {
+      "text": "IT ও পেশাগত চাকরি",
+      "w": 99,
+      "h": 24
+    },
+    {
+      "text": "সব অবস্থা",
+      "w": 48,
+      "h": 24
+    },
+    {
+      "text": "আবেদন চলছে",
+      "w": 73,
+      "h": 24
+    },
+    {
+      "text": "শিগগির শেষ হবে",
+      "w": 82,
+      "h": 24
+    },
+    {
+      "text": "আবেদন শেষ",
+      "w": 65,
+      "h": 24
+    },
+    {
+      "text": "তথ্য পাওয়া যায়নি",
+      "w": 88,
+      "h": 24
+    },
+    {
+      "text": "শুধু যাচাইকৃত",
+      "w": 67,
+      "h": 24
+    }
+  ],
+  "chips_jobs_notifications": [],
+  "dark_ad_preview": [
+    {
+      "bg": "rgba(0, 0, 0, 0)",
+      "color": "rgb(159, 176, 186)",
+      "text": "বিজ্ঞাপনের স্থান · নমুনাউপরের ব্যানার · ৭২৮×৯০"
+    },
+    {
+      "bg": "rgba(0, 0, 0, 0)",
+      "color": "rgb(159, 176, 186)",
+      "text": "বিজ্ঞাপনের স্থান · নমুনানিচের ব্যানার · responsive"
+    }
+  ]
+}

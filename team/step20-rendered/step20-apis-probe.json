@@ -1,0 +1,11 @@
+{
+  "checked_at_utc": "2026-11-23T12:51:53Z",
+  "base": "https://eduvelto--step20-release-yjsbu3be.web.app",
+  "console_errors": [],
+  "failed_requests": [
+    {
+      "url": "https://firestore.googleapis.com/google.firestore.v1.Firestore/Listen/channel?gsessionid=dcIDAly3QpqgVkvybeQp3u4mTfCe_rwtlFi18wEOeWM0HSnRsLaxEQ&VER=8&database=projects%2Feduvelto%2",
+      "failure": "net::ERR_ABORTED"
+    }
+  ]
+}
