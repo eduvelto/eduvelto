@@ -7,9 +7,12 @@
 // TIMED (unlike practice): the deadline is the STORED endsAt
 // (startedAt + definition duration, set once after read-back);
 // the timer runs on endsAt when known, else clientEndsAtMillis.
-// The page measures the client↔server clock offset from the
-// read-back startedAt at start/resume and shows server time
-// (Date.now() + offset); the rules' stored deadline is the
+// The client↔server clock offset is measured ONLY at fresh start,
+// when startedAt ≈ now (startMockSession returns Date.now()); on
+// RESUME the offset is 0 — a historical startedAt cannot measure
+// the current skew (Step 19 F7: deriving it from the original
+// start made the displayed remaining reset to the FULL duration).
+// The stored deadline is authoritative and the rules are the
 // backstop — a late submit is DENIED there, never silently
 // accepted. Auto-submit fires once when ≤ 10s remain (online);
 // OFFLINE the page NEVER promises auto-submission, pause, or
@@ -49,6 +52,7 @@ import { jobMockIdFromDocId, jobMockPatternSummaryBn, type JobMockWithId } from 
 import { jobExamBySlug } from '../lib/jobExams';
 import type { PracticeBundleWithId } from '../lib/jobPractice';
 import { useActiveClock } from '../lib/activeStudyTime';
+import { computeRemainingMillis, resolveExamClockOffsetMillis } from '../lib/mockTimer';
 
 type Phase = 'loading' | 'signed-out' | 'error' | 'intro' | 'ready' | 'expired';
 type SaveState = 'saved' | 'saving' | 'retrying' | 'error';
@@ -103,10 +107,17 @@ export default function JobMockPage() {
   useEffect(() => {
     sessionRef.current = session;
   }, [session]);
-  // Client↔server clock offset (ms): measured from the read-back
-  // startedAt at start/resume. serverNow = Date.now() + offset.
+  // Client↔server clock offset (ms): measured ONLY at fresh start
+  // (startedAt ≈ now); 0 on resume — see src/lib/mockTimer.ts
+  // (Step 19 F7). serverNow = Date.now() + offset.
   const offsetRef = useRef(0);
   const autoSubmittedRef = useRef(false);
+  // In-flight submit guard (double-tap protection): the confirm
+  // button's disabled state alone cannot stop two taps before
+  // React re-renders. Reset on failure so auto-submit can retry.
+  // Lib-level idempotency (attempt doc-ID = session ID + rules)
+  // is untouched — this is only the UI-layer guard.
+  const submittingRef = useRef(false);
   // Per-question time: ACTIVE seconds only (Step 12 — same
   // clock as practice). The EXAM DEADLINE NEVER pauses: it is
   // server-authoritative and keeps running while the student is
@@ -163,12 +174,14 @@ export default function JobMockPage() {
     };
   }, [user, mockId]);
 
-  // Measure the clock offset from a read-back startedAt, then
-  // enter the exam. Runs at start AND resume.
-  async function enterExam(sid: string, sess: JobMockSessionDoc, startedMillis: number, timeMinutes: number) {
+  // Enter the exam. Runs at start AND resume. The clock offset
+  // is measured from startedAt ONLY at fresh start (isResume
+  // false); on resume it is 0 — the stored deadline is
+  // authoritative (src/lib/mockTimer.ts, Step 19 F7).
+  async function enterExam(sid: string, sess: JobMockSessionDoc, startedMillis: number, timeMinutes: number, isResume: boolean) {
     const { deadlineMillis: dl } = await ensureMockDeadline(user!.uid, sid, timeMinutes);
     const serverStarted = startedMillis;
-    offsetRef.current = serverStarted - Date.now();
+    offsetRef.current = resolveExamClockOffsetMillis({ startedAtMillis: serverStarted, nowMillis: Date.now(), isResume });
     setSessionId(sid);
     setSession(sess);
     setStartedAtMillis(serverStarted);
@@ -185,7 +198,7 @@ export default function JobMockPage() {
     setStartError('');
     try {
       const started = await startMockSession(user.uid, mock, bundle);
-      await enterExam(started.sessionId, started.session, started.startedAtMillis, mock.rulesSnapshot.timeMinutes);
+      await enterExam(started.sessionId, started.session, started.startedAtMillis, mock.rulesSnapshot.timeMinutes, false);
     } catch (e) {
       setStartError(e instanceof Error ? e.message : 'মক শুরু করা যায়নি — আবার চেষ্টা করুন।');
       setStarting(false);
@@ -197,7 +210,7 @@ export default function JobMockPage() {
     setStarting(true);
     setStartError('');
     try {
-      await enterExam(resumable.sessionId, resumable.session, resumable.startedAtMillis, mock.rulesSnapshot.timeMinutes);
+      await enterExam(resumable.sessionId, resumable.session, resumable.startedAtMillis, mock.rulesSnapshot.timeMinutes, true);
     } catch (e) {
       setStartError(e instanceof Error ? e.message : 'আগের মকটি ফেরানো যায়নি — আবার চেষ্টা করুন।');
       setStarting(false);
@@ -277,7 +290,26 @@ export default function JobMockPage() {
     return () => clearInterval(t);
   }, [phase]);
 
-  const remaining = deadlineMillis === null ? null : deadlineMillis - (now + offsetRef.current);
+  // Return-from-background catch-up (polish, not a fix — the math
+  // already recomputes from the absolute deadline each tick): a
+  // throttled/suspended tab can delay the interval up to ~1s, so
+  // force an immediate tick on visibility/focus instead of
+  // waiting for the next interval.
+  useEffect(() => {
+    if (phase !== 'ready') return;
+    const tickNow = () => setNow(Date.now());
+    const onVisibility = () => {
+      if (!document.hidden) tickNow();
+    };
+    document.addEventListener('visibilitychange', onVisibility);
+    window.addEventListener('focus', tickNow);
+    return () => {
+      document.removeEventListener('visibilitychange', onVisibility);
+      window.removeEventListener('focus', tickNow);
+    };
+  }, [phase]);
+
+  const remaining = computeRemainingMillis(deadlineMillis, now, offsetRef.current);
   const expired = remaining !== null && remaining <= 0;
 
   // Auto-submit once when ≤ 10s remain (online). The rules'
@@ -522,6 +554,12 @@ export default function JobMockPage() {
   async function doSubmit(auto = false) {
     const liveSession = sessionRef.current;
     if (!user || !bundle || !mock || !liveSession) return;
+    // In-flight guard: two taps (or an auto-submit racing a manual
+    // tap) before React re-renders must not both submit. Reset on
+    // failure so auto-submit can retry (autoSubmittedRef reset
+    // below); on success the page navigates away.
+    if (submittingRef.current) return;
+    submittingRef.current = true;
     if (!auto) {
       setSubmitting(true);
       setSubmitError('');
@@ -549,9 +587,13 @@ export default function JobMockPage() {
       });
       navigate(`/jobs/result/${attemptId}`);
     } catch (e) {
+      // Reset the in-flight guard FIRST: a failed submit must be
+      // retryable (auto-submit retries on the next tick while time
+      // remains); the expired branch below only changes phase.
+      submittingRef.current = false;
       // A late submit is DENIED by the rules (stored deadline) —
       // land in the honest expired state, never a silent accept.
-      const remainingNow = deadlineMillis === null ? null : deadlineMillis - (Date.now() + offsetRef.current);
+      const remainingNow = computeRemainingMillis(deadlineMillis, Date.now(), offsetRef.current);
       if (remainingNow !== null && remainingNow <= 0) {
         setPhase('expired');
         return;

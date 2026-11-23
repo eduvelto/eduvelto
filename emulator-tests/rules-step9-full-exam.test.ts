@@ -920,11 +920,24 @@ describe('Step 9 — submit paths (manual vs timeout) + autosave + abandon', () 
     ));
   });
 
-  it('(e18) timeout submit AFTER the deadline with UNCHANGED answers SUCCEEDS', async () => {
-    await assertSucceeds(updateDoc(
+  it('(e18) timeout submit AFTER the deadline with UNCHANGED answers is DENIED (F7, 23 Nov 2026)', async () => {
+    // F7 rules change (validJobExamSessionUpdate): the in-progress
+    // → submitted transition is now deadline-checked (request.time
+    // < stored endsAt, strict), so the old "timeout submit succeeds
+    // with unchanged answers" behaviour is gone — a late submit is
+    // denied and no orphan submitted session is created. (This
+    // test asserted SUCCEEDS before F7; flipped with the rules.)
+    await assertFails(updateDoc(
       doc(asStudent1(), 'users', 'student-1', 'jobExamSessions', 'sess-e18'),
       { status: 'submitted', submittedAt: new Date(), updatedAt: new Date(), revision: 3 },
     ));
+    // The session is still in-progress — not flipped to submitted.
+    const after = await assertSucceeds(getDoc(
+      doc(asStudent1(), 'users', 'student-1', 'jobExamSessions', 'sess-e18'),
+    ));
+    if ((after.data() as Record<string, unknown>).status !== 'in-progress') {
+      throw new Error('late submit denial still flipped the session');
+    }
   });
 
   it('(e19) timeout submit AFTER the deadline WITH changed answers is DENIED', async () => {

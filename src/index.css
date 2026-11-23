@@ -3666,6 +3666,21 @@ html[data-theme="dark"] .ev-home-slide-academic {
 html[data-theme="dark"] .ev-ad {
   background: linear-gradient(135deg, #1c2a20, #12292b);
 }
+/* F8 (23 Nov 2026): the AdSlot PREVIEW placeholder (AdSlot.tsx
+   placeholderStyle()) is inline-styled with the same light gradient,
+   so the CSS .ev-ad override above cannot reach it — it rendered as
+   a white strip (fixed bottom banner + top banner) in dark mode on
+   preview hosts. Scoped to [data-ad-preview="placeholder"] so it can
+   never touch a real ad (real units carry no such attribute), and
+   !important because only !important beats an inline style. Values
+   mirror the .ev-ad dark override above, so both placeholder styles
+   match; the navy label pill inside needs no change (white on navy
+   reads in both themes). */
+html[data-theme="dark"] [data-ad-preview="placeholder"] {
+  background: linear-gradient(135deg, #1c2a20, #12292b) !important;
+  border-color: var(--line-strong) !important;
+  color: var(--muted) !important;
+}
 html[data-theme="dark"] .ev-coming-soon-hero,
 html[data-theme="dark"] .ev-coming-soon-compact {
   background-image: radial-gradient(rgba(255, 255, 255, 0.08) 1.2px, transparent 1.2px);
