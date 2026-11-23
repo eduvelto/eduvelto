@@ -1442,9 +1442,27 @@ service cloud.firestore {
     //  - answers may change ONLY while the exam is still running:
     //    if the answers map changed, the stored deadline must be
     //    unset (not yet stored) or still in the future. The
-    //    submit transition after the deadline (timeout path) must
-    //    carry NO answer changes; the manual submit (before the
-    //    deadline) may carry a final snapshot.
+    //    in-progress -> submitted transition is deadline-checked
+    //    the same way (F7, 23 Nov 2026): a submit is allowed only
+    //    while request.time < the stored endsAt, so a late client
+    //    can no longer flip the session to 'submitted' while the
+    //    attempt create is denied by M1-b (orphan submitted
+    //    session). The check is folded into the answers clause
+    //    (no new top-level condition) to stay inside the
+    //    compiled-rules size budget: a non-submit update keeps
+    //    the old behaviour (answers unchanged, or deadline unset
+    //    or in the future), so abandon-after-deadline and
+    //    autosave keep working. A submit with endsAt still unset
+    //    is still allowed here — the attempt create denies it
+    //    (M1-b), so no late attempt is ever created; the residual
+    //    is only the orphan-session UX, not a security hole.
+    //    Boundary is strict `< endsAt`, matching the answer-write
+    //    gate in this function; M1-b uses `submittedAt <= endsAt`
+    //    on the attempt's server timestamp, so the session gate
+    //    is the binding one for the batched submit. No grace
+    //    window: the client already auto-submits at <=10s
+    //    remaining, and a server grace would double-count that
+    //    latency budget.
     //  - startedAt / definitionId / questionSetId / bundleVersion /
     //    bundleId / examSlug / mockId / questionRefs / kind are
     //    immutable — they are not in the match's affectedKeys.
@@ -1464,7 +1482,7 @@ service cloud.firestore {
                       && exists(/databases/$(database)/documents/jobExamDefinitions/$(old.get('definitionId', '')))
                       && jobExamEndsAtIsExact(old, d, jobExamDefinitionData(old.get('definitionId', ''))))))
             || (old.get('endsAt', null) != null && d.get('endsAt', null) == old.get('endsAt', null)))
-        && (d.get('answers', {}) == old.get('answers', {})
+        && ((d.get('status', '') != 'submitted' && d.get('answers', {}) == old.get('answers', {}))
             || old.get('endsAt', null) == null
             || request.time < old.get('endsAt', null))
         && (d.get('clientEndsAtMillis', null) == null || d.get('clientEndsAtMillis', null) is number);
