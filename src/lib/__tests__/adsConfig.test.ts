@@ -6,6 +6,7 @@ import {
   ADS_MASTER_ENABLED,
   BOTTOM_BANNER_SMALL_RESERVE_PX,
   EXAM_BANNER_MAX_HEIGHT_PX,
+  adsActive,
   getAdRenderState,
   getBannerPlacementForPath,
   getBannerReservePx,
@@ -154,6 +155,12 @@ describe('isInPageSlotAllowed', () => {
 describe('master switch', () => {
   it('is OFF by default — no ad can render until activation', () => {
     expect(ADS_MASTER_ENABLED).toBe(false);
+  });
+
+  it('adsActive() is false for every placement while the master switch is off — the AdSense script loader relies on this gate (it only runs when a slot state is "ad")', () => {
+    for (const p of ALL_PLACEMENTS) {
+      expect(adsActive(p)).toBe(false);
+    }
   });
 
   it('every placement has a definition (admin page renders all of them)', () => {

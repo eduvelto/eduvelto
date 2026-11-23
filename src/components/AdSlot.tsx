@@ -48,8 +48,20 @@ declare global {
 
 let adsenseScriptLoading = false;
 
-function loadAdsenseScript(clientId: string): void {
+/**
+ * Inject the AdSense library into <head> — exactly once, and only with
+ * a real publisher ID. Callers MUST gate on the slot state ('ad'):
+ * AdSlot's effect calls this only when getAdRenderState() is 'ad',
+ * i.e. the master switch (ADS_MASTER_ENABLED) is ON and real AdSense
+ * IDs are configured — the same gate as the banner. Never call this
+ * unconditionally and never put the <script> tag in index.html: with
+ * Auto ads ON in the AdSense account, an ungated script would serve
+ * ads the moment Google approves the site, bypassing the master flag.
+ * Exported for unit tests (adsenseScript.test.tsx).
+ */
+export function loadAdsenseScript(clientId: string): void {
   if (typeof document === 'undefined') return;
+  if (!clientId) return;
   if (
     document.querySelector(
       'script[src*="pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"]',
