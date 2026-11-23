@@ -276,7 +276,7 @@ export default function HeaderNav() {
   return (
     <header className="ev-header" ref={navRef}>
       <Link to="/" style={{ display: 'inline-flex', alignItems: 'center', textDecoration: 'none', flex: 'none' }} aria-label={t({ bn: 'Eduvelto — হোম', en: 'Eduvelto — Home' })}>
-        <img src="/logo.png" alt="Eduvelto" style={{ height: 44, width: 'auto', display: 'block' }} />
+        <img src={theme === 'dark' ? '/logo-white.png' : '/logo.png'} alt="Eduvelto" style={{ height: 44, width: 'auto', display: 'block' }} />
       </Link>
 
       {/* Mobile-only: theme toggle + bell (Coming Soon) + avatar (signed in). */}
