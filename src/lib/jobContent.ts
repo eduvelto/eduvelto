@@ -233,6 +233,33 @@ export type JobLessonType =
 /** Lesson types creatable in Step 6: 'lesson' only. */
 export const JOB_STEP6_LESSON_TYPES = ['lesson'] as const;
 
+/**
+ * Lesson types that arrive in Step 16 (viva preparation — Step 3
+ * §2.6): the four guide types. CODE-LEVEL allowlist only: the
+ * Firestore rules still allow only lessonType 'lesson' on create
+ * (firestore.rules, jobLessons match), so no guide lesson can be
+ * created in Firestore until the rules allowlist is extended — a
+ * named post-refactor follow-up (compiled-rules margin is ~80 bytes
+ * on main; see the Step 16 report). The Step 16 pages render their
+ * guidance from src/lib/jobVivaCareer.ts, shaped 1:1 on the
+ * jobLessons schema, so a future loader can swap the source
+ * without rewriting the pages.
+ */
+export const JOB_STEP16_LESSON_TYPES = [
+  'viva-question',
+  'viva-guide',
+  'career-guide',
+  'cv-guide',
+] as const;
+
+/** Is this one of the four Step 16 guide lesson types? */
+export function isJobGuideLessonType(s: unknown): s is (typeof JOB_STEP16_LESSON_TYPES)[number] {
+  return (
+    typeof s === 'string' &&
+    (JOB_STEP16_LESSON_TYPES as readonly string[]).includes(s)
+  );
+}
+
 /* ------------------------------------------------------------------ */
 /* Taxonomy validation (Step 5 P1-6 pattern, parameterized so        */
 /* tampered taxonomies can be tested directly)                        */
