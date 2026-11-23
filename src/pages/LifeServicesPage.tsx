@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { useLanguage } from '../i18n/LanguageContext';
 import { PageShell } from '../components/PageShell';
+import { Breadcrumb } from '../components/Breadcrumb';
 
 // Eduvelto Life services directory (§3C) — /life/services.
 //
@@ -109,6 +110,8 @@ export default function LifeServicesPage() {
 
   return (
     <PageShell titleBn="সেবা নির্দেশিকা" titleEn="Services Directory" wide>
+      {/* Visible breadcrumb (24 Nov 2026 SEO pass) — labels match the BreadcrumbList JSON-LD in lib/seo.ts. */}
+      <Breadcrumb items={[{ label: 'জীবন সেবা', to: '/life' }, { label: 'সেবা নির্দেশিকা' }]} />
       <p>
         {t({
           bn: 'দৈনন্দিন জীবনে দরকারি সেবাগুলোর অফিসিয়াল লিংক এক জায়গায়। কোনো ফোন নম্বর বা ঠিকানা এখানে দেওয়া হয়নি — সঠিক ও হালনাগাদ যোগাযোগের তথ্য অফিসিয়াল সাইটেই পাবেন।',

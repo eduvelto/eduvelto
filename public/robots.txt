@@ -22,6 +22,12 @@ Allow: /ai-teacher
 # New public lesson routes (23 Nov 2026, AdSense Part 1).
 # /jobs/bcs/practice/* is already allowed by "Allow: /jobs" above.
 Allow: /learn
+# New public sections (24 Nov 2026, SEO pass): Everyday Life
+# Services (live 23 Nov) and the Opportunity Hub (live 24 Nov).
+# Both are also covered by "Allow: /" above; the explicit lines
+# keep the allow-list honest about what really exists.
+Allow: /life
+Allow: /opportunities
 Disallow: /admin
 Disallow: /ceo
 Disallow: /login

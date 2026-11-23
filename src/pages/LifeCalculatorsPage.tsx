@@ -7,6 +7,7 @@
 import { useMemo, useState, type CSSProperties } from 'react';
 import { useLanguage } from '../i18n/LanguageContext';
 import { PageShell } from '../components/PageShell';
+import { Breadcrumb } from '../components/Breadcrumb';
 import {
   bmiCategoryLabel,
   calculateAge,
@@ -592,6 +593,8 @@ export default function LifeCalculatorsPage() {
   const { t } = useLanguage();
   return (
     <PageShell titleBn="ক্যালকুলেটর" titleEn="Calculators">
+      {/* Visible breadcrumb (24 Nov 2026 SEO pass) — labels match the BreadcrumbList JSON-LD in lib/seo.ts. */}
+      <Breadcrumb items={[{ label: 'জীবন সেবা', to: '/life' }, { label: 'ক্যালকুলেটর' }]} />
       <p style={{ color: 'var(--muted)', margin: '0 0 8px' }}>
         {t({
           bn: 'দৈনন্দিন হিসাব-নিকাশ — সব হিসাব আপনার ডিভাইসেই হয়, কোনো তথ্য কোথাও পাঠানো হয় না।',

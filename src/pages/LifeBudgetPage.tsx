@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState, type CSSProperties, type FormEvent } from 'react';
 import { useLanguage } from '../i18n/LanguageContext';
 import { PageShell } from '../components/PageShell';
+import { Breadcrumb } from '../components/Breadcrumb';
 import {
   EXPENSE_CATEGORIES,
   monthlySummary,
@@ -188,6 +189,8 @@ export default function LifeBudgetPage() {
 
   return (
     <PageShell titleBn="বাজেট পরিকল্পনা" titleEn="Budget Planner" wide>
+      {/* Visible breadcrumb (24 Nov 2026 SEO pass) — labels match the BreadcrumbList JSON-LD in lib/seo.ts. */}
+      <Breadcrumb items={[{ label: 'জীবন সেবা', to: '/life' }, { label: 'বাজেট প্ল্যানার' }]} />
       <p>
         {t({
           bn: 'মাসিক আয় ও ব্যয়ের হিসাব রাখুন, আর সঞ্চয়ের লক্ষ্যের অগ্রগতি দেখুন।',

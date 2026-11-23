@@ -17,6 +17,7 @@
 
 import { Link, useParams } from 'react-router-dom';
 import { PageShell, EmptyState } from '../components/PageShell';
+import { Breadcrumb } from '../components/Breadcrumb';
 import { AlertBox, Card, Chip, LinkButton } from '../components/ui';
 import { useLanguage } from '../i18n/LanguageContext';
 import {
@@ -203,6 +204,17 @@ function Hub() {
       titleEn="BCS English Practice — Batch 1"
       wide
     >
+      {/* Visible breadcrumb (24 Nov 2026 SEO pass) — labels match the
+          BreadcrumbList JSON-LD in lib/seo.ts for this route.
+          "অনুশীলন" has no distinct route of its own, so it is plain. */}
+      <Breadcrumb
+        items={[
+          { label: 'চাকরি প্রস্তুতি', to: '/jobs' },
+          { label: 'বিসিএস', to: '/jobs/bcs' },
+          { label: 'অনুশীলন' },
+          { label: 'ইংরেজি' },
+        ]}
+      />
       <p style={{ fontSize: 16, lineHeight: 1.75 }}>
         {lang === 'bn'
           ? 'বিসিএস প্রিলিমিনারি পরীক্ষায় ইংরেজি ভাষা ও সাহিত্য বিষয়ে ৩৫ নম্বর থাকে। এই পাতায় সেই প্রস্তুতির জন্য ৩৫টি অনুশীলন প্রশ্ন আছে — ব্যাকরণ ২০টি, শব্দভাণ্ডার ১২টি, পাঠ বোঝা ৩টি। প্রশ্নগুলো নতুন করে লেখা অনুশীলন প্রশ্ন — কোনোটাই বিগত বছরের প্রশ্ন নয়। প্রতিটি প্রশ্নের সঙ্গে সঠিক উত্তর ও ব্যাখ্যা দেওয়া আছে, তাই লগইন না করেই এখান থেকে পড়া যায়।'
@@ -298,12 +310,30 @@ function CategoryPage({ category }: { category: PublicBcsCategory }) {
   const { lang } = useLanguage();
   const meta = PUBLIC_BCS_CATEGORIES.find((c) => c.category === category)!;
   const qs = publicBcsQuestionsFor(category);
+  // Visible-breadcrumb labels must match the BreadcrumbList JSON-LD
+  // in lib/seo.ts ('ব্যাকরণ' / 'শব্দভাণ্ডার' / 'রিডিং'), not the
+  // page's longer display names ('ব্যাকরণ (Grammar)' …).
+  const crumbBn: Record<PublicBcsCategory, string> = {
+    grammar: 'ব্যাকরণ',
+    vocabulary: 'শব্দভাণ্ডার',
+    reading: 'রিডিং',
+  };
   return (
     <PageShell
       titleBn={`বিসিএস ইংরেজি — ${meta.nameBn}`}
       titleEn={`BCS English — ${meta.nameEn}`}
       wide
     >
+      {/* Visible breadcrumb (24 Nov 2026 SEO pass). */}
+      <Breadcrumb
+        items={[
+          { label: 'চাকরি প্রস্তুতি', to: '/jobs' },
+          { label: 'বিসিএস', to: '/jobs/bcs' },
+          { label: 'অনুশীলন' },
+          { label: 'ইংরেজি', to: '/jobs/bcs/practice/english' },
+          { label: crumbBn[category] },
+        ]}
+      />
       <p style={{ margin: '0 0 16px' }}>
         <Chip tone="gold">
           {lang === 'bn' ? VERIFIED_BADGE_BN : VERIFIED_BADGE_EN}

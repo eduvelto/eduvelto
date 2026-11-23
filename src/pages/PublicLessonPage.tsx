@@ -14,6 +14,7 @@
 
 import { Link } from 'react-router-dom';
 import { PageShell, EmptyState } from '../components/PageShell';
+import { Breadcrumb } from '../components/Breadcrumb';
 import { AlertBox, Card, LinkButton } from '../components/ui';
 import { useLanguage } from '../i18n/LanguageContext';
 import {
@@ -43,6 +44,14 @@ function LessonBody({ lesson }: { lesson: PublicLesson }) {
       titleBn={`বিসিএস ইংরেজি — ${lesson.titleBn}`}
       titleEn={`BCS English — ${lesson.titleEn}`}
     >
+      {/* Visible breadcrumb (24 Nov 2026 SEO pass) — labels match the
+          BreadcrumbList JSON-LD in lib/seo.ts for this route. */}
+      <Breadcrumb
+        items={[
+          { label: 'বিসিএস ইংরেজি', to: '/learn' },
+          { label: lesson.slug === 'tense' ? 'টেন্স' : 'প্রিপোজিশন' },
+        ]}
+      />
       <AlertBox tone="info">
         <strong>{lang === 'bn' ? DRAFT_LABEL_BN : DRAFT_LABEL_EN}</strong>
         <br />

@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useLanguage } from '../i18n/LanguageContext';
 import { PageShell } from '../components/PageShell';
+import { Breadcrumb } from '../components/Breadcrumb';
 import {
   LIFE_PLANNER_STORAGE_KEY,
   buildTask,
@@ -94,6 +95,8 @@ export default function LifePlannerPage() {
 
   return (
     <PageShell titleBn="দৈনিক পরিকল্পনা" titleEn="Daily Planner" wide>
+      {/* Visible breadcrumb (24 Nov 2026 SEO pass) — labels match the BreadcrumbList JSON-LD in lib/seo.ts. */}
+      <Breadcrumb items={[{ label: 'জীবন সেবা', to: '/life' }, { label: 'দৈনিক প্ল্যানার' }]} />
       <p style={{ color: 'var(--muted)' }}>
         {t({
           bn: 'আপনার দিনের কাজগুলো সাজান — পড়াশোনা, কাজ বা ব্যক্তিগত। কোনো লগইন লাগে না; সব তথ্য শুধু আপনার ডিভাইসেই থাকে, কোথাও পাঠানো হয় না।',

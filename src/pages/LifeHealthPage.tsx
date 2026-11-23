@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { useLanguage } from '../i18n/LanguageContext';
 import { PageShell } from '../components/PageShell';
+import { Breadcrumb } from '../components/Breadcrumb';
 import { HealthDisclaimer, AccuracyNote } from '../components/HealthDisclaimer';
 import { LIFE_SOURCES } from '../lib/lifeContent';
 
@@ -27,6 +28,8 @@ export default function LifeHealthPage() {
 
   return (
     <PageShell titleBn="স্বাস্থ্য সচেতনতা" titleEn="Health Awareness">
+      {/* Visible breadcrumb (24 Nov 2026 SEO pass) — labels match the BreadcrumbList JSON-LD in lib/seo.ts. */}
+      <Breadcrumb items={[{ label: 'জীবন সেবা', to: '/life' }, { label: 'স্বাস্থ্য সচেতনতা' }]} />
       <HealthDisclaimer />
       <p>
         {t({
