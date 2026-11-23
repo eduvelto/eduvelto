@@ -44,13 +44,14 @@ import {
 } from './ads';
 
 /**
- * Master activation switch. Default OFF — ads stay off until Google
- * approves the site AND real ad-unit IDs are set in deployment settings.
- * Flip to true ONLY after site approval + unit IDs (owner action:
- * create the units in his AdSense account and send the IDs to Muse).
+ * Master activation switch. ON since 23 Nov 2026 by the owner's order
+ * ("tumi on kore rhako auto cole moto") — ads start automatically the
+ * moment Google approves the site. Until approval, requests return
+ * unfilled and units collapse, so nothing visible shows. Real ad-unit
+ * IDs are set in deployment settings (see team/adsense-slot-ids-2026-11-23.md).
  * The IDs-empty gate in ./ads.ts stays as a second gate.
  */
-export const ADS_MASTER_ENABLED = false;
+export const ADS_MASTER_ENABLED = true;
 
 /** Height (px) the content area reserves for the exam small banner. */
 export const BOTTOM_BANNER_SMALL_RESERVE_PX = 56;

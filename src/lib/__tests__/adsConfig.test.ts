@@ -193,8 +193,8 @@ describe('isInPageSlotAllowed', () => {
 });
 
 describe('master switch', () => {
-  it('is OFF by default — no ad can render until activation', () => {
-    expect(ADS_MASTER_ENABLED).toBe(false);
+  it('is ON — ads render automatically once the site is approved and slot IDs are set (owner order 23 Nov 2026)', () => {
+    expect(ADS_MASTER_ENABLED).toBe(true);
   });
 
   it('adsActive() is false for every placement while the master switch is off — the AdSense script loader relies on this gate (it only runs when a slot state is "ad")', () => {
