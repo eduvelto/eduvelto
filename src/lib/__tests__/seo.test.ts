@@ -70,6 +70,7 @@ const SITEMAP_URLS = [
   '/founder',
   '/contact',
   '/privacy',
+  '/terms',
   '/health',
   '/ai-teacher',
 ];
@@ -239,6 +240,19 @@ describe('resolveRouteSeo — public routes', () => {
     expect(seo).not.toBeNull();
     expect(seo!.title).toContain('শীঘ্রই আসছে');
     expect(seo!.description).toContain('শীঘ্রই আসছে');
+  });
+
+  it('/terms resolves to the honest Terms entry (23 Nov 2026, Master Plan quick-wins)', () => {
+    // /terms joined SITEMAP_URLS at merge prep (owner approved the
+    // text 23 Nov 2026 06:57); sitemap.xml lists it too — the
+    // sitemap-drift test enforces the two stay in sync.
+    const seo = resolveRouteSeo('/terms');
+    expect(seo).not.toBeNull();
+    expect(seo!.title).toBe('শর্তাবলী — Eduvelto');
+    expect(seo!.canonical).toBe(`${SITE_URL}/terms`);
+    expect(seo!.description).toContain('বিনামূল্যের');
+    expect(seo!.title).not.toMatch(FORBIDDEN_RANK_CLAIM);
+    expect(seo!.description).not.toMatch(FORBIDDEN_RANK_CLAIM);
   });
 
   it('sitemap.xml lists exactly the SITEMAP_URLS (no drift)', () => {
