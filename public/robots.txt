@@ -19,6 +19,9 @@ Allow: /contact
 Allow: /privacy
 Allow: /health
 Allow: /ai-teacher
+# New public lesson routes (23 Nov 2026, AdSense Part 1).
+# /jobs/bcs/practice/* is already allowed by "Allow: /jobs" above.
+Allow: /learn
 Disallow: /admin
 Disallow: /ceo
 Disallow: /login
