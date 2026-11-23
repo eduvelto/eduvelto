@@ -178,7 +178,7 @@ export default function JobNotificationsPage() {
       <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, marginBottom: 12 }}>
         {CATEGORY_FILTERS.map((c) => (
           <Chip key={c.key ?? 'all'} tone={category === c.key ? 'navy' : 'outline'}>
-            <button type="button" onClick={() => setCategory(c.key)} style={{ all: 'unset', cursor: 'pointer' }}>
+            <button type="button" onClick={() => setCategory(c.key)} className="ev-chip-btn">
               {lang === 'bn' ? c.bn : c.en}
             </button>
           </Chip>

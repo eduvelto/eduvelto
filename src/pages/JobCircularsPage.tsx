@@ -274,14 +274,14 @@ export default function JobCircularsPage() {
           <button
             type="button"
             onClick={() => updateParams({ exam: null })}
-            style={{ all: 'unset', cursor: 'pointer' }}
+            className="ev-chip-btn"
           >
             {t({ bn: 'সব', en: 'All' })}
           </button>
         </Chip>
         {JOB_EXAMS.map((e) => (
           <Chip key={e.slug} tone={filters.examSlug === e.slug ? 'navy' : 'outline'}>
-            <button type="button" onClick={() => updateParams({ exam: e.slug })} style={{ all: 'unset', cursor: 'pointer' }}>
+            <button type="button" onClick={() => updateParams({ exam: e.slug })} className="ev-chip-btn">
               {lang === 'bn' ? e.bn : e.en}
             </button>
           </Chip>
@@ -294,7 +294,7 @@ export default function JobCircularsPage() {
             <button
               type="button"
               onClick={() => updateParams({ status: s.key })}
-              style={{ all: 'unset', cursor: 'pointer' }}
+              className="ev-chip-btn"
             >
               {lang === 'bn' ? s.bn : s.en}
             </button>
@@ -304,7 +304,7 @@ export default function JobCircularsPage() {
           <button
             type="button"
             onClick={() => updateParams({ verified: filters.verifiedOnly ? null : '1' })}
-            style={{ all: 'unset', cursor: 'pointer' }}
+            className="ev-chip-btn"
             aria-pressed={filters.verifiedOnly}
           >
             {t({ bn: 'শুধু যাচাইকৃত', en: 'Verified only' })}

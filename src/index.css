@@ -533,6 +533,15 @@ a:hover {
   border: 1px solid var(--line-strong);
   color: var(--muted);
 }
+.ev-chip-btn {
+  all: unset;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 24px;
+  min-height: 24px;
+  cursor: pointer;
+}
 
 /* ---- Alerts ---- */
 .ev-alert {
