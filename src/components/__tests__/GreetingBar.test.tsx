@@ -13,9 +13,14 @@ import React from 'react';
 import GreetingBar, {
   BISMILLAH,
   GREETING_MESSAGES,
-  GREETING_ROTATION_MS,
-  getNextGreetingIndex,
+  GREETING_PHASE_MS,
+  IQRA_ATTRIBUTION,
+  IQRA_AYAH_AR,
+  IQRA_MEANING,
+  IQRA_PRONUNCIATION,
+  getNextGreetingPhase,
 } from '../GreetingBar';
+import HeroGreeting from '../HeroGreeting';
 
 function renderBar(): string {
   return renderToString(React.createElement(GreetingBar));
@@ -52,6 +57,12 @@ describe('GreetingBar rendered HTML', () => {
     expect(html).toContain('aria-hidden="true"');
   });
 
+  it('v2: the crescent + star mark renders at the larger 26px size', () => {
+    const html = renderBar();
+    expect(html).toContain('width="26"');
+    expect(html).toContain('height="26"');
+  });
+
   it('rotation order is exactly the owner-specified five messages', () => {
     expect(GREETING_MESSAGES).toEqual([
       'Welcome to Eduvelto • Learn, Create & Grow',
@@ -60,8 +71,44 @@ describe('GreetingBar rendered HTML', () => {
       'Your World of Possibilities',
       'Knowledge Without Boundaries',
     ]);
-    expect(GREETING_ROTATION_MS).toBe(7500);
-    expect(getNextGreetingIndex(0)).toBe(1);
-    expect(getNextGreetingIndex(4)).toBe(0);
+  });
+
+  it('v2: the phase machine cycles bismillah → ayah → salam → bismillah, slowly', () => {
+    expect(getNextGreetingPhase('bismillah')).toBe('ayah');
+    expect(getNextGreetingPhase('ayah')).toBe('salam');
+    expect(getNextGreetingPhase('salam')).toBe('bismillah');
+    expect(GREETING_PHASE_MS).toEqual({ bismillah: 4000, ayah: 10000, salam: 6000 });
+  });
+
+  it('v2: the Surah Al-Alaq ayah block renders with the exact owner-specified strings', () => {
+    const html = renderBar();
+    expect(html).toContain(IQRA_AYAH_AR);
+    expect(html).toContain(IQRA_PRONUNCIATION);
+    expect(html).toContain(IQRA_MEANING);
+    expect(html).toContain(IQRA_ATTRIBUTION);
+  });
+});
+
+describe('HeroGreeting rendered HTML', () => {
+  function renderHero(): string {
+    return renderToString(React.createElement(HeroGreeting));
+  }
+
+  it('renders the Bismillah display-size and static, plus the ayah block and salam', () => {
+    const html = renderHero();
+    expect(html).toContain(BISMILLAH);
+    expect(html).toContain('class="ev-hero-greeting-bismillah"');
+    expect(html).toContain('lang="ar"');
+    expect(html).toContain(IQRA_AYAH_AR);
+    expect(html).toContain(IQRA_PRONUNCIATION);
+    expect(html).toContain(IQRA_MEANING);
+    expect(html).toContain(IQRA_ATTRIBUTION);
+    expect(html).toContain('Assalamu Alaikum');
+  });
+
+  it('uses the larger 32px crescent + star mark', () => {
+    const html = renderHero();
+    expect(html).toContain('width="32"');
+    expect(html).toContain('height="32"');
   });
 });

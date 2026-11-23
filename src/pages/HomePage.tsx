@@ -10,9 +10,9 @@
 // Layout (desktop ≥769px): hero → 4 section cards → feature strip →
 // 3 panels (সাম্প্রতিক আপডেট / আপনার পড়াশোনার অগ্রগতি / জনপ্রিয় বিভাগ)
 // → footer banner.
-// Layout (mobile ≤768px): search bar → hero carousel (3 slides, dots,
-// auto-advance) → 4 cards 2×2 → দ্রুত অ্যাক্সেস → progress panel →
-// জনপ্রিয় পরীক্ষা → footer banner; bottom nav (HeaderNav + BottomNav).
+// Layout (mobile ≤768px): search bar → Bismillah hero greeting band → hero
+// → 4 cards 2×2 → দ্রুত অ্যাক্সেস → progress panel → জনপ্রিয় পরীক্ষা →
+// footer banner; bottom nav (HeaderNav + BottomNav).
 //
 // HONESTY — the mockups contain sample/fake content; NONE of it ships:
 //  - Updates panel: NO news items at all until a real, verified circular
@@ -39,6 +39,7 @@ import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { PageShell } from '../components/PageShell';
 import AdSlot from '../components/AdSlot';
+import HeroGreeting from '../components/HeroGreeting';
 import { useAuth } from '../lib/auth';
 import { JobsSection } from '../components/JobCards';
 import { useLanguage } from '../i18n/LanguageContext';
@@ -279,8 +280,6 @@ export default function HomePage() {
   const { t, lang } = useLanguage();
   const { user } = useAuth();
   const [searchText, setSearchText] = useState('');
-  const [slide, setSlide] = useState(0);
-  const [paused, setPaused] = useState(false);
   const [progress, setProgress] = useState<ProgressData | null>(null);
   const [progressLoading, setProgressLoading] = useState(false);
   const [progressError, setProgressError] = useState(false);
@@ -318,14 +317,6 @@ export default function HomePage() {
     };
   }, [user]);
 
-  // Mobile hero carousel: 3 slides, auto-advance every 6s, pauses on
-  // hover/touch. Slides reuse the real section copy.
-  useEffect(() => {
-    if (paused) return;
-    const id = window.setInterval(() => setSlide((s) => (s + 1) % 3), 6000);
-    return () => window.clearInterval(id);
-  }, [paused]);
-
   const accuracy = progress && progress.attempted > 0 ? Math.round((progress.correct / progress.attempted) * 100) : null;
   const hasProgress = progress !== null && (progress.lessons > 0 || progress.attempted > 0 || progress.quizAttempts > 0);
 
@@ -334,12 +325,6 @@ export default function HomePage() {
     const q = searchText.trim();
     navigate(q ? `/library?q=${encodeURIComponent(q)}` : '/library');
   }
-
-  const heroSlides = [
-    { tint: 'ev-home-slide-job', titleBn: 'স্বপ্ন পূরণের পথে Eduvelto', titleEn: 'Eduvelto on the path to your dreams', subBn: 'শেখো, প্রস্তুতি নাও, সফল হও...', subEn: 'Learn, prepare, succeed...', to: '/jobs', ctaBn: 'এখনই শুরু করুন →', ctaEn: 'Start now →' },
-    { tint: 'ev-home-slide-admissions', titleBn: 'ভর্তি প্রস্তুতি', titleEn: 'Admission Preparation', subBn: 'বিশ্ববিদ্যালয়, মেডিকেল, ইঞ্জিনিয়ারিং ও অন্যান্য', subEn: 'University, Medical, Engineering & more', to: '/admissions', ctaBn: 'ভর্তি প্রস্তুতি নিন →', ctaEn: 'Prepare for admission →' },
-    { tint: 'ev-home-slide-academic', titleBn: 'শিক্ষা কার্যক্রম', titleEn: 'Academic Learning', subBn: 'Class 1–12, Madrasa, Technical, Honours & Masters', subEn: 'Class 1–12, Madrasa, Technical, Honours & Masters', to: '/class', ctaBn: 'পড়া শুরু করুন →', ctaEn: 'Start learning →' },
-  ];
 
   return (
     <PageShell titleBn="হোম" titleEn="Home" wide hideHomeLink hideTitle maxWidth={1240}>
@@ -359,6 +344,14 @@ export default function HomePage() {
           <SearchIcon />
         </button>
       </form>
+
+      {/* Bismillah hero greeting band (owner brief 23:01 + correction
+          23:11) — right below the navigation, above the hero: the
+          Bismillah → ayah → salam cycle, same as the top greeting bar,
+          at display size. The old mobile hero carousel is removed
+          entirely (owner scribbled it out); nothing replaces it below
+          the hero, the section cards simply move up. */}
+      <HeroGreeting />
 
       {/* Desktop hero (≥769px): light gradient + wordmark, NO photos. */}
       <section className="ev-home-hero" aria-label={t({ bn: 'Eduvelto', en: 'Eduvelto' })}>
@@ -381,38 +374,6 @@ export default function HomePage() {
           <Link to="/library" className="ev-btn" style={{ textDecoration: 'none', background: 'var(--card)', borderColor: 'var(--line-strong)' }}>
             {t({ bn: 'লাইব্রেরি দেখুন', en: 'Browse library' })}
           </Link>
-        </div>
-      </section>
-
-      {/* Mobile hero carousel (≤768px): 3 slides, dots, auto-advance. */}
-      <section
-        className="ev-home-hero-mobile"
-        aria-label={t({ bn: 'Eduvelto', en: 'Eduvelto' })}
-        onMouseEnter={() => setPaused(true)}
-        onMouseLeave={() => setPaused(false)}
-        onTouchStart={() => setPaused(true)}
-      >
-        {heroSlides.map((s, i) => (
-          <div key={s.to} className={`ev-home-slide ${s.tint}${i === slide ? ' ev-home-slide-active' : ''}`} aria-hidden={i !== slide}>
-            <h2>{t({ bn: s.titleBn, en: s.titleEn })}</h2>
-            <p>{t({ bn: s.subBn, en: s.subEn })}</p>
-            <Link to={s.to} className="ev-btn ev-btn-sm ev-home-slide-cta" tabIndex={i === slide ? 0 : -1}>
-              {t({ bn: s.ctaBn, en: s.ctaEn })}
-            </Link>
-          </div>
-        ))}
-        <div className="ev-home-dots" role="tablist" aria-label={t({ bn: 'স্লাইড', en: 'Slides' })}>
-          {heroSlides.map((s, i) => (
-            <button
-              key={s.to}
-              type="button"
-              role="tab"
-              aria-selected={i === slide}
-              aria-label={t({ bn: `স্লাইড ${i + 1}`, en: `Slide ${i + 1}` })}
-              className={`ev-home-dot${i === slide ? ' ev-home-dot-active' : ''}`}
-              onClick={() => setSlide(i)}
-            />
-          ))}
         </div>
       </section>
 
