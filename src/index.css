@@ -1882,78 +1882,6 @@ a:hover {
   }
 }
 
-/* Homepage: mobile hero carousel (≤768px). */
-.ev-home-hero-mobile {
-  display: none;
-}
-@media (max-width: 768px) {
-  .ev-home-hero-mobile {
-    display: block;
-    position: relative;
-    margin-bottom: 18px;
-  }
-  .ev-home-slide {
-    display: none;
-    border-radius: 16px;
-    padding: 24px 18px;
-    text-align: center;
-  }
-  .ev-home-slide-active {
-    display: block;
-  }
-  .ev-home-slide-job {
-    background: linear-gradient(135deg, #e8f5e9, #f1f8e9);
-    border: 1px solid var(--home-tint-green-border);
-  }
-  .ev-home-slide-admissions {
-    background: linear-gradient(135deg, #e3f2fd, #e8eaf6);
-    border: 1px solid var(--home-tint-blue-border);
-  }
-  .ev-home-slide-academic {
-    background: linear-gradient(135deg, #f3e5f5, #ede7f6);
-    border: 1px solid var(--home-tint-purple-border);
-  }
-  .ev-home-slide h2 {
-    margin: 0 0 6px;
-    font-size: 21px;
-    color: var(--heading);
-  }
-  .ev-home-slide p {
-    margin: 0 0 14px;
-    color: var(--ink-soft);
-    font-size: 15px;
-  }
-  .ev-home-slide-cta {
-    background: var(--link);
-    border-color: var(--link);
-    color: #fff;
-  }
-  .ev-home-slide-cta:hover {
-    background: var(--link-deep);
-    color: #fff;
-  }
-  .ev-home-dots {
-    display: flex;
-    justify-content: center;
-    gap: 8px;
-    margin-top: 10px;
-  }
-  .ev-home-dot {
-    width: 10px;
-    height: 10px;
-    padding: 0;
-    border: 0;
-    border-radius: 50%;
-    background: var(--line-strong);
-    cursor: pointer;
-  }
-  .ev-home-dot-active {
-    background: var(--link);
-    width: 22px;
-    border-radius: 999px;
-  }
-}
-
 /* Homepage: four section cards. Tints follow the mockups; button colours
    are darkened to AA contrast on white (report §3). */
 .ev-home-sections {
@@ -3675,15 +3603,6 @@ button.ev-admin-quick-item:hover {
 html[data-theme="dark"] .ev-home-hero {
   background: linear-gradient(120deg, #16283a 0%, #1c2a20 55%, #12292b 100%);
 }
-html[data-theme="dark"] .ev-home-slide-job {
-  background: linear-gradient(135deg, #173329, #1c2a20);
-}
-html[data-theme="dark"] .ev-home-slide-admissions {
-  background: linear-gradient(135deg, #16283a, #1a2333);
-}
-html[data-theme="dark"] .ev-home-slide-academic {
-  background: linear-gradient(135deg, #2b2140, #241d38);
-}
 html[data-theme="dark"] .ev-ad {
   background: linear-gradient(135deg, #1c2a20, #12292b);
 }
@@ -3721,34 +3640,70 @@ html[data-theme="dark"] .ev-header {
 }
 
 /* ------------------------------------------------------------------ */
-/* Eduvelto — premium Islamic Greeting Bar (owner brief 23 Nov 2026). */
-/* Deep Islamic Green + Champagne Gold brand signature, mounted once  */
-/* in App.tsx above HeaderNav, in normal flow (never fixed, so it     */
-/* never covers content). Slim and compact; extra small on mobile.    */
+/* Eduvelto — premium Islamic Greeting Bar (owner brief 23 Nov 2026,  */
+/* formal brief 23:01). Brand signature at the very top of the public */
+/* site: Deep Navy #0A1F44 gradient + champagne gold (owner-decided   */
+/* 22:54 — the Eduvelto brand kit). Bismillah in Amiri calligraphy,   */
+/* Surah Al-Alaq ayah 1, "Assalamu Alaikum" + a rotating welcome      */
+/* line — all HORIZONTALLY CENTERED (owner instruction 22:55).        */
+/*                                                                      */
+/* THE CYCLE (brief 23:01): (a) Bismillah alone, large, centered,     */
+/* static (~4s); (b) Bismillah shifts slightly UP as a whole line     */
+/* and the ayah block fades in below (Arabic + pronunciation +         */
+/* meaning + attribution) (~10s); (c) gentle fade to "Assalamu        */
+/* Alaikum" + one rotating welcome line (~6s); then back to (a).       */
+/* Slow fades only (1.2s) — whole lines fading/sliding as units,      */
+/* never letter-level animation.                                        */
+/*                                                                      */
+/* v2: STICKY (position: sticky, top: 0, in-flow — never a fixed       */
+/* overlay, so it can never cover page content; the header below       */
+/* scrolls away, the bar stays pinned). The stage has a FIXED height   */
+/* (the tallest phase), so the page below NEVER shifts when phases     */
+/* change — the bar grows taller than v1 on purpose (brief point 1:    */
+/* mobile legibility first), as compact as legibility allows.          */
+/* Colours live in --ev-gb-* variables on the bar itself, so a future  */
+/* palette change is a one-line edit of the three navy values.         */
 /*                                                                      */
 /* MOTION RULES (binding): slow + gentle CSS only. The Bismillah       */
-/* (.ev-greeting-bismillah) has NO animation of any kind. Under        */
-/* prefers-reduced-motion EVERY bar animation is switched off and the  */
-/* React rotation timer never starts, so the bar is fully static.      */
-/* No layout shift: fixed padding + fixed line-heights; the rotating   */
-/* line is a single nowrap line, so message length never changes the   */
-/* bar's height.                                                        */
+/* (.ev-greeting-bismillah) has NO animation of any kind — no          */
+/* animation class, no transform on the letters. Only the whole line   */
+/* moves (the flex column re-centres as blocks expand/collapse),       */
+/* exactly as the brief specifies. Under prefers-reduced-motion EVERY  */
+/* bar animation AND transition is switched off and the React timer    */
+/* never starts, so the bar shows Bismillah + the full ayah block     */
+/* statically.                                                          */
 /* ------------------------------------------------------------------ */
 .ev-greeting-bar {
-  position: relative;
+  /* Brand palette — navy gradient + champagne gold. */
+  --ev-gb-navy-1: #061733;
+  --ev-gb-navy-2: #0a1f44;
+  --ev-gb-navy-3: #123058;
+  --ev-gb-gold: #d4af37;
+  --ev-gb-gold-rgb: 212, 175, 55;
+  --ev-gb-gold-light: #e9cf7e;
+  --ev-gb-gold-light-rgb: 233, 207, 126;
+  --ev-gb-gold-pale: #f7e9b8;
+  --ev-gb-gold-text: #f0d98c;
+  --ev-gb-cream: #f7f1dd;
+  --ev-gb-cream-rgb: 247, 241, 221;
+  /* Sticky: stays pinned at the top while the page scrolls, but stays
+     in normal flow — its space is reserved, so it never covers content. */
+  position: sticky;
+  top: 0;
+  z-index: 60;
   overflow: hidden;
   background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0) 42%),
-    linear-gradient(90deg, #052e21 0%, #0b3d2e 48%, #10503d 100%);
-  border-bottom: 1px solid rgba(212, 175, 55, 0.45);
+    linear-gradient(180deg, rgba(255, 255, 255, 0.10), rgba(255, 255, 255, 0) 42%),
+    linear-gradient(90deg, var(--ev-gb-navy-1) 0%, var(--ev-gb-navy-2) 48%, var(--ev-gb-navy-3) 100%);
+  border-bottom: 1px solid rgba(var(--ev-gb-gold-rgb), 0.45);
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.16), inset 0 -1px 0 rgba(0, 0, 0, 0.28);
-  padding: 6px 12px 7px;
+  padding: 6px 14px 8px;
   text-align: center;
   animation: ev-greeting-border 6s ease-in-out infinite;
 }
 @keyframes ev-greeting-border {
-  0%, 100% { border-bottom-color: rgba(212, 175, 55, 0.28); }
-  50% { border-bottom-color: rgba(212, 175, 55, 0.72); }
+  0%, 100% { border-bottom-color: rgba(var(--ev-gb-gold-rgb), 0.28); }
+  50% { border-bottom-color: rgba(var(--ev-gb-gold-rgb), 0.72); }
 }
 /* Golden light line sweeping slowly across the whole bar. */
 .ev-greeting-sweep {
@@ -3758,7 +3713,7 @@ html[data-theme="dark"] .ev-header {
   left: 0;
   width: 38%;
   pointer-events: none;
-  background: linear-gradient(100deg, transparent 0%, rgba(233, 207, 126, 0.07) 38%, rgba(233, 207, 126, 0.22) 50%, rgba(233, 207, 126, 0.07) 62%, transparent 100%);
+  background: linear-gradient(100deg, transparent 0%, rgba(var(--ev-gb-gold-light-rgb), 0.07) 38%, rgba(var(--ev-gb-gold-light-rgb), 0.22) 50%, rgba(var(--ev-gb-gold-light-rgb), 0.07) 62%, transparent 100%);
   animation: ev-greeting-sweep 9s linear infinite;
 }
 @keyframes ev-greeting-sweep {
@@ -3771,25 +3726,71 @@ html[data-theme="dark"] .ev-header {
   width: 3px;
   height: 3px;
   border-radius: 50%;
-  background: #f7e9b8;
+  background: var(--ev-gb-gold-pale);
   opacity: 0.25;
   pointer-events: none;
   animation: ev-greeting-twinkle 5s ease-in-out infinite;
 }
-.ev-greeting-spark-1 { top: 9px; left: 12%; animation-duration: 5s; }
-.ev-greeting-spark-2 { top: 26px; right: 14%; animation-duration: 6.5s; animation-delay: 1.4s; }
-.ev-greeting-spark-3 { top: 8px; right: 30%; animation-duration: 7s; animation-delay: 2.6s; }
+.ev-greeting-spark-1 { top: 16px; left: 12%; animation-duration: 5s; }
+.ev-greeting-spark-2 { top: 100px; right: 14%; animation-duration: 6.5s; animation-delay: 1.4s; }
+.ev-greeting-spark-3 { top: 20px; right: 30%; animation-duration: 7s; animation-delay: 2.6s; }
 @keyframes ev-greeting-twinkle {
   0%, 100% { opacity: 0.12; transform: scale(0.75); }
   50% { opacity: 0.85; transform: scale(1.15); }
 }
-.ev-greeting-inner {
+/* Fixed-height stage — the bar never changes height, so the page
+   below never shifts when phases change. The stage is a flex column
+   centred on itself: as the ayah block expands below the Bismillah
+   row, the column re-centres and the whole Bismillah line glides
+   slightly upward — the transition the brief specifies. */
+.ev-greeting-stage {
+  position: relative;
+  height: 130px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+/* Phase blocks: hidden by default (collapsed + transparent). The
+   visible block for the current phase expands + fades in over 1.2s.
+   Visibility flips at the end of the fade-out so hidden blocks never
+   intercept clicks or screen-reader focus. */
+.ev-greeting-bismillah-row,
+.ev-greeting-ayah-wrap,
+.ev-greeting-salam-block {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  visibility: hidden;
+  transition: opacity 1.2s ease, max-height 1.2s ease, visibility 0s linear 1.2s;
+}
+.ev-greeting-stage[data-phase="bismillah"] .ev-greeting-bismillah-row,
+.ev-greeting-stage[data-phase="ayah"] .ev-greeting-bismillah-row {
+  max-height: 60px;
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 1.2s ease, max-height 1.2s ease, visibility 0s;
+}
+.ev-greeting-stage[data-phase="ayah"] .ev-greeting-ayah-wrap {
+  max-height: 120px;
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 1.2s ease, max-height 1.2s ease, visibility 0s;
+}
+.ev-greeting-stage[data-phase="salam"] .ev-greeting-salam-block {
+  max-height: 80px;
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 1.2s ease, max-height 1.2s ease, visibility 0s;
+}
+.ev-greeting-bismillah-row {
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
-  line-height: 1.35;
+  gap: 12px;
+  line-height: 1.3;
 }
 /* Crescent + star: soft slow glow only. */
 .ev-greeting-mark {
@@ -3798,43 +3799,97 @@ html[data-theme="dark"] .ev-header {
   animation: ev-greeting-glow 5s ease-in-out infinite;
 }
 @keyframes ev-greeting-glow {
-  0%, 100% { filter: drop-shadow(0 0 2px rgba(233, 207, 126, 0.35)); }
-  50% { filter: drop-shadow(0 0 7px rgba(233, 207, 126, 0.85)); }
+  0%, 100% { filter: drop-shadow(0 0 2px rgba(var(--ev-gb-gold-light-rgb), 0.35)); }
+  50% { filter: drop-shadow(0 0 7px rgba(var(--ev-gb-gold-light-rgb), 0.85)); }
 }
-/* Bismillah: SACRED TEXT — deliberately NO animation, NO transform. */
+/* Bismillah: SACRED TEXT — deliberately NO animation, NO transform
+   on the letters. v2: markedly larger + a static gold glow so it
+   reads clearly from a distance on the navy. The glow is static
+   (text-shadow), never animated — the no-animation rule is unchanged.
+   The whole ROW moves (flex re-centring); the letters never do. */
 .ev-greeting-bismillah {
   font-family: 'Amiri', 'Traditional Arabic', 'Noto Naskh Arabic', serif;
-  font-size: 17px;
+  font-size: 22px;
   font-weight: 700;
-  color: #f0d98c;
-  line-height: 1.35;
+  color: var(--ev-gb-gold-text);
+  line-height: 1.3;
+  white-space: nowrap;
+  text-shadow: 0 0 10px rgba(240, 217, 140, 0.5), 0 1px 2px rgba(0, 0, 0, 0.55);
+}
+/* Ayah block (phase b): Arabic + Bangla pronunciation + meaning +
+   attribution, all centred. Same static respect rules as the
+   Bismillah — no animation on the Arabic lines. */
+.ev-greeting-ayah {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  margin-top: 6px;
+}
+.ev-greeting-ayah-ar,
+.ev-greeting-ayah-bn,
+.ev-greeting-ayah-meaning,
+.ev-greeting-ayah-ref {
+  margin: 0;
+  text-align: center;
   white-space: nowrap;
 }
-.ev-greeting-dot {
-  flex: none;
-  width: 4px;
-  height: 4px;
-  border-radius: 50%;
-  background: #d4af37;
-  opacity: 0.85;
+.ev-greeting-ayah-ar {
+  font-family: 'Amiri', 'Traditional Arabic', 'Noto Naskh Arabic', serif;
+  font-size: 19px;
+  font-weight: 700;
+  color: var(--ev-gb-gold-text);
+  line-height: 1.5;
+  text-shadow: 0 0 8px rgba(240, 217, 140, 0.45), 0 1px 2px rgba(0, 0, 0, 0.55);
+}
+.ev-greeting-ayah-bn {
+  font-family: 'Hind Siliguri', 'Poppins', system-ui, sans-serif;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--ev-gb-cream);
+  line-height: 1.45;
+}
+.ev-greeting-ayah-meaning {
+  font-family: 'Hind Siliguri', 'Poppins', system-ui, sans-serif;
+  font-size: 12.5px;
+  font-weight: 500;
+  color: rgba(var(--ev-gb-cream-rgb), 0.93);
+  line-height: 1.45;
+}
+.ev-greeting-ayah-ref {
+  font-family: 'Hind Siliguri', 'Poppins', system-ui, sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--ev-gb-gold-light);
+  line-height: 1.4;
+}
+/* Salam block (phase c): greeting + one rotating welcome line. */
+.ev-greeting-salam-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
 }
 .ev-greeting-salam {
+  margin: 0;
   font-family: 'Poppins', 'Hind Siliguri', system-ui, sans-serif;
-  font-size: 13px;
-  font-weight: 600;
+  font-size: 16px;
+  font-weight: 700;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: #f7f1dd;
+  color: var(--ev-gb-cream);
   white-space: nowrap;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
 }
 .ev-greeting-tagline {
   position: relative;
-  margin-top: 1px;
+  margin: 0;
   font-family: 'Poppins', 'Hind Siliguri', system-ui, sans-serif;
-  font-size: 11.5px;
-  font-weight: 500;
+  font-size: 13.5px;
+  font-weight: 600;
   letter-spacing: 0.06em;
-  color: rgba(247, 241, 221, 0.82);
+  color: rgba(var(--ev-gb-cream-rgb), 0.93);
   line-height: 1.4;
   white-space: nowrap;
   overflow: hidden;
@@ -3848,23 +3903,217 @@ html[data-theme="dark"] .ev-header {
   from { opacity: 0; transform: translateY(3px); }
   to { opacity: 1; transform: translateY(0); }
 }
-/* Mobile: extra small and beautiful. */
+/* Mobile: extra small and beautiful — v2 sizes stay clearly larger
+   than v1 (Bismillah 19px vs 14.5px) so the text reads from afar.
+   The stage stays fixed-height (112px) so the page below never
+   shifts when phases change. */
 @media (max-width: 640px) {
-  .ev-greeting-bar { padding: 5px 10px 6px; }
-  .ev-greeting-inner { gap: 7px; }
-  .ev-greeting-bismillah { font-size: 14.5px; }
-  .ev-greeting-salam { font-size: 11px; letter-spacing: 0.1em; }
-  .ev-greeting-tagline { font-size: 10px; }
+  .ev-greeting-bar { padding: 5px 12px 7px; }
+  .ev-greeting-stage { height: 112px; }
+  .ev-greeting-bismillah-row { gap: 9px; }
+  .ev-greeting-bismillah { font-size: 19px; }
+  .ev-greeting-ayah { margin-top: 5px; gap: 2px; }
+  .ev-greeting-ayah-ar { font-size: 17px; }
+  .ev-greeting-ayah-bn,
+  .ev-greeting-ayah-meaning { font-size: 11.5px; }
+  .ev-greeting-ayah-ref { font-size: 10px; }
+  .ev-greeting-salam { font-size: 13px; letter-spacing: 0.1em; }
+  .ev-greeting-tagline { font-size: 12px; }
   .ev-greeting-spark-1 { left: 6%; }
   .ev-greeting-spark-3 { display: none; }
 }
-/* Reduced motion: the bar is fully static. The React rotation timer
-   also never starts under this setting (see GreetingBar.tsx). */
+/* Reduced motion: the bar is fully static — no animations AND no
+   transitions. The React timer also never starts under this setting
+   (see useGreetingCycle), so the bar shows Bismillah + the full ayah
+   block permanently. */
 @media (prefers-reduced-motion: reduce) {
   .ev-greeting-bar,
   .ev-greeting-bar *,
   .ev-greeting-bar::before,
   .ev-greeting-bar::after {
     animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/* Homepage hero-band greeting display (owner brief 22:55 + 23:01).    */
+/* Replaces the auto-sliding mobile hero carousel in the band between  */
+/* the desktop hero and the four section cards. Same Bismillah → ayah  */
+/* → salam cycle as the top bar (shared useGreetingCycle hook), same   */
+/* Deep Navy #0A1F44 + champagne gold palette (values mirror the       */
+/* bar's --ev-gb-* variables — keep in sync), shown on ALL screen      */
+/* sizes, centred. Fixed-height stage, so the section cards below      */
+/* never shift when phases change. The Bismillah here is display-size */
+/* and static, exactly like the bar's — no animation on the letters.   */
+/* ------------------------------------------------------------------ */
+.ev-hero-greeting {
+  overflow: hidden;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0) 45%),
+    linear-gradient(90deg, #061733 0%, #0a1f44 48%, #123058 100%);
+  border-top: 1px solid rgba(212, 175, 55, 0.45);
+  border-bottom: 1px solid rgba(212, 175, 55, 0.45);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.14), inset 0 -1px 0 rgba(0, 0, 0, 0.28);
+  padding: 14px 16px;
+  text-align: center;
+}
+.ev-hero-greeting-stage {
+  position: relative;
+  height: 154px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.ev-hero-greeting-bismillah-row,
+.ev-hero-greeting-ayah-wrap,
+.ev-hero-greeting-salam-block {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  visibility: hidden;
+  transition: opacity 1.2s ease, max-height 1.2s ease, visibility 0s linear 1.2s;
+}
+.ev-hero-greeting-stage[data-phase="bismillah"] .ev-hero-greeting-bismillah-row,
+.ev-hero-greeting-stage[data-phase="ayah"] .ev-hero-greeting-bismillah-row {
+  max-height: 70px;
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 1.2s ease, max-height 1.2s ease, visibility 0s;
+}
+.ev-hero-greeting-stage[data-phase="ayah"] .ev-hero-greeting-ayah-wrap {
+  max-height: 140px;
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 1.2s ease, max-height 1.2s ease, visibility 0s;
+}
+.ev-hero-greeting-stage[data-phase="salam"] .ev-hero-greeting-salam-block {
+  max-height: 90px;
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 1.2s ease, max-height 1.2s ease, visibility 0s;
+}
+.ev-hero-greeting-bismillah-row {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  line-height: 1.25;
+}
+.ev-hero-greeting-mark {
+  display: inline-flex;
+  flex: none;
+}
+/* Bismillah: SACRED TEXT — NO animation, NO transform on the letters. */
+.ev-hero-greeting-bismillah {
+  font-family: 'Amiri', 'Traditional Arabic', 'Noto Naskh Arabic', serif;
+  font-size: 30px;
+  font-weight: 700;
+  color: #f0d98c;
+  line-height: 1.25;
+  white-space: nowrap;
+  text-shadow: 0 0 12px rgba(240, 217, 140, 0.5), 0 1px 2px rgba(0, 0, 0, 0.55);
+}
+.ev-hero-greeting-ayah {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  margin-top: 8px;
+}
+.ev-hero-greeting-ayah-ar,
+.ev-hero-greeting-ayah-bn,
+.ev-hero-greeting-ayah-meaning,
+.ev-hero-greeting-ayah-ref {
+  margin: 0;
+  text-align: center;
+  white-space: nowrap;
+}
+.ev-hero-greeting-ayah-ar {
+  font-family: 'Amiri', 'Traditional Arabic', 'Noto Naskh Arabic', serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: #f0d98c;
+  line-height: 1.5;
+  text-shadow: 0 0 10px rgba(240, 217, 140, 0.45), 0 1px 2px rgba(0, 0, 0, 0.55);
+}
+.ev-hero-greeting-ayah-bn {
+  font-family: 'Hind Siliguri', 'Poppins', system-ui, sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: #f7f1dd;
+  line-height: 1.45;
+}
+.ev-hero-greeting-ayah-meaning {
+  font-family: 'Hind Siliguri', 'Poppins', system-ui, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: rgba(247, 241, 221, 0.93);
+  line-height: 1.45;
+}
+.ev-hero-greeting-ayah-ref {
+  font-family: 'Hind Siliguri', 'Poppins', system-ui, sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: #e9cf7e;
+  line-height: 1.4;
+}
+.ev-hero-greeting-salam-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+.ev-hero-greeting-salam {
+  margin: 0;
+  font-family: 'Poppins', 'Hind Siliguri', system-ui, sans-serif;
+  font-size: 19px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #f7f1dd;
+  white-space: nowrap;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+.ev-hero-greeting-tagline {
+  margin: 0;
+  font-family: 'Poppins', 'Hind Siliguri', system-ui, sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: rgba(247, 241, 221, 0.93);
+  line-height: 1.4;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.ev-hero-greeting-message {
+  display: inline-block;
+  animation: ev-greeting-fade 0.9s ease both;
+}
+@media (max-width: 640px) {
+  .ev-hero-greeting { padding: 12px 14px; }
+  .ev-hero-greeting-stage { height: 130px; }
+  .ev-hero-greeting-bismillah-row { gap: 10px; }
+  .ev-hero-greeting-bismillah { font-size: 24px; }
+  .ev-hero-greeting-ayah { margin-top: 6px; gap: 3px; }
+  .ev-hero-greeting-ayah-ar { font-size: 19px; }
+  .ev-hero-greeting-ayah-bn,
+  .ev-hero-greeting-ayah-meaning { font-size: 12.5px; }
+  .ev-hero-greeting-ayah-ref { font-size: 11px; }
+  .ev-hero-greeting-salam { font-size: 15px; }
+  .ev-hero-greeting-tagline { font-size: 13px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ev-hero-greeting,
+  .ev-hero-greeting *,
+  .ev-hero-greeting::before,
+  .ev-hero-greeting::after {
+    animation: none !important;
+    transition: none !important;
   }
 }
