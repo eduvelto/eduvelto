@@ -199,6 +199,10 @@
       },
       {
         "destination": "/index.html",
+        "source": "/ai-assistant"
+      },
+      {
+        "destination": "/index.html",
         "source": "/exam"
       },
       {
@@ -268,10 +272,6 @@
       {
         "destination": "/index.html",
         "source": "/search"
-      },
-      {
-        "destination": "/index.html",
-        "source": "/ai-assistant"
       }
     ]
   }

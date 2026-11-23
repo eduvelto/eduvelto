@@ -22,9 +22,9 @@
 //    count — the section says so), text cards, never fake covers.
 //  - Updates: REAL dated items only (latest verified opportunity
 //    listings); empty state when there are none. No invented news.
-//  - AI panel: /ai-teacher is a SCRIPTED DEMO, not live AI — the
-//    panel says so. No "AI Chat" as a live feature; the 10 staging
-//    tools are not on main yet.
+//  - AI panel: the WORKING /ai-assistant tools are the primary action;
+//    /ai-teacher is a SCRIPTED DEMO, not live AI — the panel says so.
+//    No "AI Chat" as a live feature.
 //  - Class 1–5 / 6–8 have NO books: their tiles/dashboards show the
 //    honest not-ready state, never wrong-class books.
 //  - Testimonials: OMITTED — no real testimonial exists.
@@ -220,8 +220,10 @@ const SECTIONS = [
 ];
 
 // The four hubs (owner brief §4 + mockups). Every destination is
-// live EXCEPT the AI hub: /ai-teacher is a scripted demo, honestly
-// labelled "প্রদর্শনী" on the card — live AI chat does not exist yet.
+// live. The AI hub opens the working /ai-assistant tools (AI Life
+// Assistant rebase, 24 Nov 2026); /ai-teacher is a scripted demo,
+// honestly labelled, linked from the assistant page and the AI panel —
+// live AI chat does not exist yet.
 const HUBS = [
   {
     id: 'education',
@@ -261,15 +263,20 @@ const HUBS = [
   },
   {
     id: 'ai',
-    to: '/ai-teacher',
+    to: '/ai-assistant',
     tint: 'ev-rd-hub-purple',
     icon: <RobotIcon />,
     titleBn: 'AI Life Assistant',
     titleEn: 'AI Life Assistant',
     descBn: 'আপনার ব্যক্তিগত AI সহকারী',
     descEn: 'Your personal AI assistant',
-    noteBn: 'প্রদর্শনী — আসল AI চ্যাট এখনো চালু হয়নি',
-    noteEn: 'Demo — live AI chat not launched yet',
+    // AI Life Assistant rebase (24 Nov 2026): the hub card now opens the
+    // WORKING tools (/ai-assistant — calculators, letters, CV, budget),
+    // not the scripted /ai-teacher demo. The demo stays one tap away
+    // from the assistant page, and live AI chat is still honestly
+    // labelled as not launched yet.
+    noteBn: 'হিসাব, চিঠি, সিভি ও দরকারি টুল — এখনই ব্যবহার করুন',
+    noteEn: 'Calculators, letters, CV and daily tools — use now',
   },
   {
     id: 'life',
@@ -765,21 +772,26 @@ export default function HomePage() {
           ) : null}
         </section>
 
-        {/* AI টুলস ও সহায়তা — honest: /ai-teacher is a scripted demo
-            (it says so on the page itself). Live AI chat is NOT
-            available yet; the panel never claims otherwise. */}
+        {/* AI টুলস ও সহায়তা — honest: the WORKING tools live at
+            /ai-assistant (calculators, letters, CV, budget — no fake AI).
+            /ai-teacher is a scripted demo (it says so on the page
+            itself). Live AI chat is NOT available yet; the panel never
+            claims otherwise. */}
         <section className="ev-rd-section" aria-label={t({ bn: 'AI টুলস ও সহায়তা', en: 'AI Tools & Assistance' })}>
           <div className="ev-rd-ai">
             <h2>{t({ bn: '🤖 AI টুলস ও সহায়তা', en: '🤖 AI Tools & Assistance' })}</h2>
             <p>
               {t({
-                bn: 'AI Teacher এখন একটি স্ক্রিপ্ট করা প্রদর্শনী — আসল AI চ্যাট এখনো চালু হয়নি। প্রদর্শনীটি দেখে নিন, আসল AI সহকারী এলে এখানেই জানানো হবে।',
-                en: 'AI Teacher is currently a scripted demo — live AI chat has not launched yet. Try the demo; when the real AI assistant arrives it will be announced here.',
+                bn: 'AI সহায়ক এখনই ব্যবহার করতে পারেন — হিসাব, চিঠি-আবেদন, সিভি, বাজেট ও দরকারি টুল। AI Teacher (পড়াশোনার জন্য) এখনো একটি স্ক্রিপ্ট করা প্রদর্শনী — আসল AI চ্যাট এখনো চালু হয়নি।',
+                en: 'You can use the AI Assistant right now — calculators, letters and applications, CV, budget and daily tools. AI Teacher (for study) is still a scripted demo — live AI chat has not launched yet.',
               })}
             </p>
             <div className="ev-rd-ai-actions">
-              <Link to="/ai-teacher" className="ev-btn ev-btn-primary">
-                {t({ bn: 'AI Teacher প্রদর্শনী দেখুন →', en: 'See the AI Teacher demo →' })}
+              <Link to="/ai-assistant" className="ev-btn ev-btn-primary">
+                {t({ bn: 'AI সহায়ক ব্যবহার করুন →', en: 'Use the AI Assistant →' })}
+              </Link>
+              <Link to="/ai-teacher" className="ev-btn" style={{ textDecoration: 'none', background: 'var(--card)', borderColor: 'var(--line-strong)' }}>
+                {t({ bn: 'AI Teacher প্রদর্শনী দেখুন', en: 'See the AI Teacher demo' })}
               </Link>
               <Link to="/jobs/bcs/practice/english" className="ev-btn" style={{ textDecoration: 'none', background: 'var(--card)', borderColor: 'var(--line-strong)' }}>
                 {t({ bn: 'বিসিএস ইংরেজি অনুশীলন (ফ্রি)', en: 'BCS English practice (free)' })}

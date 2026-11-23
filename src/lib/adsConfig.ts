@@ -30,6 +30,19 @@
 //   until Google approves the site AND real ad-unit IDs exist. The
 //   IDs-empty gate in ./ads.ts stays as a second, independent gate —
 //   both must pass before any ad renders.
+// - Bottom banner: every page EXCEPT login/register, admin, exam,
+//   profile, AI conversation pages, and the suspended-account screen.
+//   It is mandatory and has no off-switch.
+// - AI ASSISTANT RULE (directive §4, 23 Nov 2026): NO ads of any kind
+//   on AI conversation pages — /ai-assistant gets no banner at all.
+//   (ai-teacher is a scripted demo page, not a conversation — its
+//   banner behaviour is owned by the hybrid-ads stream, not this file.)
+// - EXAM RULE (owner 23 Nov 2026, BINDING): NO ads during exams at all
+//   — the 22 Nov small-banner rule is superseded. No in-content, top,
+//   or sidebar slot may ever appear on an exam page either.
+// - In-page slots (top / sidebar / in-content / in-feed / mobile) run
+//   ONLY on the page types listed in isInPageSlotAllowed() — never on
+//   exam, reading (book/chapter/lesson), auth, or admin pages.
 // - Personalised ads are ALWAYS off (./ads.ts PERSONALISED_ADS = false).
 //   Vignette + full-screen interstitials are BLOCKED (no code path
 //   renders them; Auto ads stays OFF).
@@ -93,6 +106,7 @@ export type PageAdType =
   | 'exam-result'
   | 'admin'
   | 'ai-teacher'
+  | 'ai-assistant'
   | 'routine'
   | 'progress'
   | 'social'
@@ -147,6 +161,7 @@ export function getPageAdType(pathname: string): PageAdType {
   if (seg[0] === 'books') return 'chapter';
   if (seg[0] === 'lessons') return 'lesson';
   if (path === '/ai-teacher') return 'ai-teacher';
+  if (path === '/ai-assistant') return 'ai-assistant';
   if (path === '/routine') return 'routine';
   if (path === '/progress') return 'progress';
   if (path === '/social') return 'social';
@@ -170,7 +185,8 @@ export type BannerPlacement = 'bottom-banner' | 'bottom-banner-small';
  * - null: no banner at all — auth pages, admin pages, exam pages
  *   (23 Nov 2026: NO ads during exams — the 22 Nov small-banner rule
  *   is superseded), AI Teacher pages (the whole page is a conversation
- *   surface), and profile pages.
+ *   surface), AI Assistant pages (directive §4, 23 Nov 2026 — no ads
+ *   of any kind on AI conversation pages), and profile pages.
  * - 'bottom-banner': everything else, including quiz/job RESULT pages
  *   (after the quiz ends — "quiz only AFTER the quiz ends").
  * 'bottom-banner-small' is RETAINED as a code path (type, reserve,
@@ -183,6 +199,7 @@ export function getBannerPlacementForPath(pathname: string): BannerPlacement | n
     type === 'admin' ||
     type === 'exam' ||
     type === 'ai-teacher' ||
+    type === 'ai-assistant' ||
     type === 'profile'
   ) {
     return null;

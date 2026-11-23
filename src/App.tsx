@@ -124,6 +124,7 @@ const CeoApprovalsPage = lazy(() => import('./pages/CeoApprovalsPage'));
 const AdminAppVersionPage = lazy(() => import('./pages/AdminAppVersionPage'));
 const InstallPage = lazy(() => import('./pages/InstallPage'));
 const AiTeacherPage = lazy(() => import('./pages/AiTeacherPage'));
+const AiAssistantPage = lazy(() => import('./pages/AiAssistantPage'));
 const ExamPage = lazy(() => import('./pages/ExamPage'));
 const RoutinePage = lazy(() => import('./pages/RoutinePage'));
 const ProgressPage = lazy(() => import('./pages/ProgressPage'));
@@ -521,6 +522,7 @@ export default function App() {
         </Route>
         <Route path="/install" element={<InstallPage />} />
         <Route path="/ai-teacher" element={<AiTeacherPage />} />
+        <Route path="/ai-assistant" element={<AiAssistantPage />} />
         <Route path="/exam" element={<ExamPage />} />
         <Route path="/routine" element={<RoutinePage />} />
         <Route path="/progress" element={<ProgressPage />} />

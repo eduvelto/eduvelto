@@ -54,6 +54,7 @@ describe('getPageAdType', () => {
     expect(getPageAdType('/profile')).toBe('profile');
     expect(getPageAdType('/profile/guardian-links')).toBe('profile');
     expect(getPageAdType('/ai-teacher')).toBe('ai-teacher');
+    expect(getPageAdType('/ai-assistant')).toBe('ai-assistant');
     expect(getPageAdType('/routine')).toBe('routine');
     expect(getPageAdType('/progress')).toBe('progress');
     expect(getPageAdType('/social')).toBe('social');
@@ -118,6 +119,10 @@ describe('getBannerPlacementForPath — the no-ads-during-exams enforcement poin
     expect(getBannerPlacementForPath('/ai-teacher')).toBeNull();
     expect(getBannerPlacementForPath('/profile')).toBeNull();
     expect(getBannerPlacementForPath('/profile/guardian-links')).toBeNull();
+  });
+
+  it('returns null (no ads at all) on the AI assistant page (directive §4, 23 Nov 2026)', () => {
+    expect(getBannerPlacementForPath('/ai-assistant')).toBeNull();
   });
 
   it('returns the full banner on result pages — ads only AFTER the quiz ends', () => {
