@@ -7,9 +7,10 @@
 // site rule; the language toggle changes navigation labels only).
 // Contact: ahmmizan23@gmail.com. Dated 23 November 2026.
 //
-// DRAFT: this text needs the owner's approval before it ever goes
-// live — the page carries a visible draft notice at the top until
-// he approves it. Do NOT remove the notice without his approval.
+// APPROVED by the owner 23 Nov 2026 06:57 ("onomoti dilam"), after a
+// full parent check of the text for mistakes (none found). The visible
+// draft notice was removed at merge prep; the page goes live with the
+// post-cron deploy batch.
 // Owner decisions recorded here (23 Nov 2026): an account is needed
 // to read/study ("porar jnno o login kortr hobe") and to take exams
 // ("exam dite obossoi login korte hobe"); hub/listing pages are public.
@@ -53,23 +54,6 @@ export default function TermsPage() {
   const { t } = useLanguage();
   return (
     <PageShell titleBn="শর্তাবলী" titleEn="Terms & Conditions — Eduvelto" wide>
-      <Card
-        style={{
-          marginBottom: 14,
-          border: '2px solid var(--accent, #b45309)',
-          background: 'var(--surface-muted, transparent)',
-        }}
-      >
-        <p style={{ margin: 0, fontSize: 15, lineHeight: 1.7, color: 'var(--ink)' }}>
-          <strong>
-            {t({
-              bn: 'খসড়া — এই শর্তাবলী এখনো মালিকের অনুমোদনের অপেক্ষায় আছে; মালিকের অনুমোদনের পরই এটি প্রকাশিত হবে।',
-              en: 'Draft — these terms are awaiting owner approval; they will be published only after the owner approves them.',
-            })}
-          </strong>
-        </p>
-      </Card>
-
       <p style={{ color: 'var(--muted-ivory)', margin: '0 0 20px', lineHeight: 1.7 }}>
         {t({ bn: 'তারিখ: ২৩ নভেম্বর ২০২৬।', en: 'Date: 23 November 2026.' })} Eduvelto বাংলাদেশের
         শিক্ষার্থীদের জন্য একটি সম্পূর্ণ বিনামূল্যের শিক্ষা প্ল্যাটফর্ম। এই শর্তাবলীতে বলা আছে

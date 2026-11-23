@@ -264,11 +264,10 @@ const STATIC_ROUTES: Record<string, RouteSeoEntry> = {
     description: 'Eduvelto-র গোপনীয়তা নীতি — আপনার তথ্য কীভাবে ব্যবহার হয়, তা জানুন।',
     crumb: 'গোপনীয়তা নীতি',
   },
-  // DRAFT (23 Nov 2026, Master Plan quick-wins): the /terms page text
-  // needs the owner's approval before it goes live. The SEO entry is
-  // honest either way — no claims beyond the real free offer — and
-  // /terms joins the sitemap only at merge time (SEO 50–100 workstream
-  // owns sitemap.xml; do not add it here).
+  // APPROVED by the owner 23 Nov 2026 06:57 ("onomoti dilam"), after a
+  // full parent check of the text for mistakes (none found). /terms
+  // joins the sitemap at merge time (added to sitemap.xml +
+  // SITEMAP_URLS in the same commit).
   '/terms': {
     title: 'শর্তাবলী — Eduvelto',
     description:
