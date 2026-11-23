@@ -191,7 +191,9 @@ not claim a performance pass.
 - Rendered checks: `team/step20-rendered/step20-preview-rendered.json` (18 routes),
   `step20-f5-f6-f8-verify.json`, `step20-apis-probe.json`, screenshots in the same dir
 - Independent re-verification logs (this run): `team/step20-evidence/verify-rerun-2026-11-23/`
-  (`unit.log`, `rules.log`, `rules-a1-rerun.log`, `rules-rerun2.log`, `build.log`)
+  (`unit.log`, `rules.log`, `rules-a1-rerun.log`, `rules-rerun2.log`, `build.log`) — on disk
+  in the worktree (and in the shared `~/workspace/eduorbit/team/` copy); `.log` files are
+  untracked per the repo's `*.log` gitignore, like all other suite logs in this project.
 - Live `config/appVersion` probe (read-only): `team/step20-evidence/check-appversion-live.mjs`
 - Preview: https://eduvelto--step20-release-yjsbu3be.web.app (expires 2026-11-30 12:50 UTC)
 - Branch: `jobs/step20-release` @ `a67591e` (4 files, +15/−6 vs main `5a3f90e`; rules 0-line diff)
