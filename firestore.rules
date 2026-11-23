@@ -4903,6 +4903,56 @@ service cloud.firestore {
       allow delete: if false;
     }
 
+    // ---------- ownerSecurity (owner 2FA, 23 Nov 2026, staging) ----------
+    // The owner's own security records: login history + salted
+    // backup-code hashes. OWNER-ONLY and only the owner's own doc
+    // (uid == doc id). No plaintext secret, password or backup code is
+    // ever stored here — backup codes live as salted SHA-256 hashes
+    // only (lib/ownerMfa.ts); the codes themselves live only with the
+    // owner. List on the top-level collection is denied by design (the
+    // doc id is the owner's UID — read it by ID); subcollections are
+    // listable by the owner for his own history / code count.
+    function isValidOwnerSecurityDoc(d) {
+      return onlyKeys(['lastLoginAt', 'knownDeviceIds', 'mfaEnrolledAt', 'backupCodesUpdatedAt', 'updatedAt'])
+        && isOptTs(d, 'lastLoginAt')
+        && isOptTs(d, 'mfaEnrolledAt')
+        && isOptTs(d, 'backupCodesUpdatedAt')
+        && isOptTs(d, 'updatedAt')
+        && (d.get('knownDeviceIds', null) == null || d.get('knownDeviceIds', null) is list);
+    }
+    match /ownerSecurity/{ownerId} {
+      allow get: if isOwnerRole() && isOwner(ownerId);
+      allow list: if false;
+      allow create, update: if isOwnerRole() && isOwner(ownerId)
+        && isValidOwnerSecurityDoc(request.resource.data);
+      allow delete: if isOwnerRole() && isOwner(ownerId);
+      // Append-only login history (update never: a record is written
+      // once at sign-in and never edited).
+      match /loginHistory/{entryId} {
+        allow get, list: if isOwnerRole() && isOwner(ownerId);
+        allow create: if isOwnerRole() && isOwner(ownerId)
+          && request.resource.data.keys().toSet().hasOnly(['createdAt', 'deviceId', 'userAgent', 'isNewDevice'])
+          && request.resource.data.createdAt is timestamp
+          && isStr(request.resource.data.deviceId, 40)
+          && request.resource.data.userAgent is string
+          && request.resource.data.userAgent.size() <= 300
+          && request.resource.data.isNewDevice is bool;
+        allow update: if false;
+        allow delete: if isOwnerRole() && isOwner(ownerId);
+      }
+      // Backup-code hashes: created at generation, deleted on consume
+      // or regenerate. Never updated (a hash is immutable by design).
+      match /backupCodes/{codeHash} {
+        allow get, list: if isOwnerRole() && isOwner(ownerId);
+        allow create: if isOwnerRole() && isOwner(ownerId)
+          && request.resource.data.keys().toSet().hasOnly(['salt', 'createdAt'])
+          && isStr(request.resource.data.salt, 64)
+          && request.resource.data.createdAt is timestamp;
+        allow update: if false;
+        allow delete: if isOwnerRole() && isOwner(ownerId);
+      }
+    }
+
     // ---------- everything else: denied ----------
     match /{document=**} {
       allow read, write: if false;

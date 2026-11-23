@@ -263,6 +263,17 @@ export const BACKUP_EXCLUSIONS: Record<string, string> = {
   // tail `|| isAdmin()` is the one-line fix, if he wants it). The
   // data is NOT lost: the scripted/REST export reads it fine.
   follows: 'Owner cannot list-read under the rules (follower-only read, no staff tail); client export impossible — console/Admin-SDK only.',
+  // Owner 2FA records (23 Nov 2026, staging): login history + salted
+  // backup-code hashes. The client export cannot list the collection
+  // (list denied by design — only the owner's own doc is readable, by
+  // ID) and the doc ID is the owner's UID, so it cannot join the
+  // static DOC_BY_DOC list. Subcollections are not backed up by design
+  // (subcollectionsIncluded: false), so the backup-code hashes are NOT
+  // in any backup file: after a full restore the owner regenerates
+  // backup codes (old ones stop working) — recorded in
+  // team/2fa-preparation-2026-11-23.md. No plaintext code is ever
+  // stored anywhere, so there is nothing secret to lose.
+  ownerSecurity: 'Owner-only 2FA records (login history + salted backup-code hashes). Client cannot list the collection and the doc ID is the owner UID; subcollections are not backed up by design — regenerate backup codes after a restore.',
 };
 
 /**

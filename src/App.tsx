@@ -104,6 +104,7 @@ const AdminJobDomainsPage = lazy(() => import('./pages/AdminJobDomainsPage'));
 const AdminAdmissionsPage = lazy(() => import('./pages/AdminAdmissionsPage'));
 const AdminAnalyticsPage = lazy(() => import('./pages/AdminAnalyticsPage'));
 const AdminSettingsPage = lazy(() => import('./pages/AdminSettingsPage'));
+const OwnerSecurityPage = lazy(() => import('./pages/OwnerSecurityPage'));
 const AdminContentPage = lazy(() => import('./pages/AdminContentPage'));
 const AdminExamsPage = lazy(() => import('./pages/AdminExamsPage'));
 const CeoLayout = lazy(() => import('./components/CeoLayout'));
@@ -437,6 +438,7 @@ export default function App() {
           <Route path="admissions/questions" element={<NuQuestionWorkbenchGuard><AdminNuQuestionsPage /></NuQuestionWorkbenchGuard>} />
           <Route path="analytics" element={<AdminAnalyticsPage />} />
           <Route path="settings" element={<AdminSettingsPage />} />
+          <Route path="security" element={<OwnerSecurityPage />} />
           <Route path="content" element={<AdminContentPage />} />
           <Route path="exams" element={<AdminExamsPage />} />
         </Route>
