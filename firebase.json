@@ -218,6 +218,14 @@
       },
       {
         "destination": "/index.html",
+        "source": "/life"
+      },
+      {
+        "destination": "/index.html",
+        "source": "/life/**"
+      },
+      {
+        "destination": "/index.html",
         "source": "/about"
       },
       {

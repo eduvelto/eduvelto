@@ -225,6 +225,7 @@ const SECONDARY: MenuItem[] = [
   { to: '/routine', bn: 'রুটিন', en: 'Study Routine' },
   { to: '/progress', bn: 'অগ্রগতি', en: 'Progress' },
   { to: '/health', bn: 'স্বাস্থ্য', en: 'Health' },
+  { to: '/life', bn: 'জীবন সেবা', en: 'Life Services' },
   { to: '/about', bn: 'আমাদের সম্পর্কে', en: 'About' },
   { to: '/founder', bn: 'প্রতিষ্ঠাতা', en: 'Founder' },
   { to: '/contact', bn: 'যোগাযোগ', en: 'Contact' },

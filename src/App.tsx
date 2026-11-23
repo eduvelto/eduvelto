@@ -118,6 +118,16 @@ const HealthDiseasesPage = lazy(() => import('./pages/HealthDiseasesPage'));
 const HealthDoctorsPage = lazy(() => import('./pages/HealthDoctorsPage'));
 const HealthHospitalsPage = lazy(() => import('./pages/HealthHospitalsPage'));
 const HealthReportPage = lazy(() => import('./pages/HealthReportPage'));
+const LifeHubPage = lazy(() => import('./pages/LifeHubPage'));
+const LifeBudgetPage = lazy(() => import('./pages/LifeBudgetPage'));
+const LifeCalculatorsPage = lazy(() => import('./pages/LifeCalculatorsPage'));
+const LifeConvertersPage = lazy(() => import('./pages/LifeConvertersPage'));
+const LifePlannerPage = lazy(() => import('./pages/LifePlannerPage'));
+const LifePdfToolsPage = lazy(() => import('./pages/LifePdfToolsPage'));
+const LifeHealthPage = lazy(() => import('./pages/LifeHealthPage'));
+const LifeGovernmentPage = lazy(() => import('./pages/LifeGovernmentPage'));
+const LifeTravelPage = lazy(() => import('./pages/LifeTravelPage'));
+const LifeServicesPage = lazy(() => import('./pages/LifeServicesPage'));
 const AboutPage = lazy(() => import('./pages/AboutPage'));
 const ContactPage = lazy(() => import('./pages/ContactPage'));
 // STAGING MERGE (scale #4): FounderPage added as lazy — the scale branch
@@ -390,6 +400,16 @@ export default function App() {
         <Route path="/health/doctors" element={<HealthDoctorsPage />} />
         <Route path="/health/hospitals" element={<HealthHospitalsPage />} />
         <Route path="/health/report" element={<HealthReportPage />} />
+        <Route path="/life" element={<LifeHubPage />} />
+        <Route path="/life/budget" element={<LifeBudgetPage />} />
+        <Route path="/life/calculators" element={<LifeCalculatorsPage />} />
+        <Route path="/life/converters" element={<LifeConvertersPage />} />
+        <Route path="/life/planner" element={<LifePlannerPage />} />
+        <Route path="/life/pdf-tools" element={<LifePdfToolsPage />} />
+        <Route path="/life/health" element={<LifeHealthPage />} />
+        <Route path="/life/government" element={<LifeGovernmentPage />} />
+        <Route path="/life/travel" element={<LifeTravelPage />} />
+        <Route path="/life/services" element={<LifeServicesPage />} />
         <Route path="/about" element={<AboutPage />} />
         <Route path="/why-eduvelto" element={<WhyEduveltoPage />} />
         <Route path="/founder" element={<FounderPage />} />
