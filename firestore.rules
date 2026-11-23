@@ -1556,6 +1556,59 @@ service cloud.firestore {
             && resource.data.get('verificationStatus', '') == 'verified');
     }
 
+    // validJobProfileFields — extracted 22 Nov 2026 (public-IDs rules refactor):
+    // the same field validation appeared verbatim in several users
+    // rules (CREATE / self-UPDATE / owner-UPDATE). One function,
+    // several call sites — identical semantics, far fewer bytes.
+    function validJobProfileFields(d) {
+      return (!('enrolledCategories' in d)
+            || d.enrolledCategories == null
+            || (d.enrolledCategories is list
+                && d.enrolledCategories.size() <= 10
+                && d.enrolledCategories.toSet().size()
+                     == d.enrolledCategories.size()
+                && d.enrolledCategories.toSet().hasOnly(
+                     ['bcs-bpsc', 'govt', 'bank', 'primary-teacher',
+                      'ntrca-teacher', 'defence-police', 'autonomous',
+                      'ngo-private', 'it-professional', 'other-competitive'])))
+        && (!('targetExam' in d)
+            || d.targetExam == null
+            || d.targetExam in
+               ['bcs', 'bank', 'primary-teacher', 'ntrca', 'dgfood',
+                'bpsc-non-cadre', 'cag', 'bfsa', 'others', 'ministries',
+                'defence', 'autonomous', 'private-ngo'])
+        && (!('dailyGoalQuestions' in d)
+            || d.dailyGoalQuestions == null
+            || (d.dailyGoalQuestions is int
+                && d.dailyGoalQuestions >= 0
+                && d.dailyGoalQuestions <= 500))
+        && (!('dailyGoalMinutes' in d)
+            || d.dailyGoalMinutes == null
+            || (d.dailyGoalMinutes is int
+                && d.dailyGoalMinutes >= 0
+                && d.dailyGoalMinutes <= 600))
+        && (!('jobOnboarded' in d)
+            || d.jobOnboarded == null
+            || d.jobOnboarded is bool);
+    }
+
+    // validNuProfileFields — extracted 22 Nov 2026 (public-IDs rules refactor):
+    // the same field validation appeared verbatim in the users CREATE
+    // and self-UPDATE rules. One function, two call sites — identical
+    // semantics, far fewer bytes.
+    function validNuProfileFields(d) {
+      return (!('admissionTargetInstitution' in d)
+            || d.admissionTargetInstitution == null
+            || d.admissionTargetInstitution == 'national-university')
+        && (!('admissionTargetGroup' in d)
+            || d.admissionTargetGroup == null
+            || d.admissionTargetGroup in ['humanities', 'science', 'business'])
+        && (!('admissionMode' in d)
+            || d.admissionMode in ['beginner', 'advanced'])
+        && (!('admissionOnboarded' in d)
+            || d.admissionOnboarded is bool);
+    }
+
     // ---------- users ----------
     // A user reads/writes only their own doc. Role and verificationStatus
     // can NEVER be changed by the owner of the doc — only Admin/Owner.
@@ -1585,6 +1638,10 @@ service cloud.firestore {
         && request.resource.data.keys().hasOnly(['displayName', 'email',
              'role', 'verificationStatus', 'language', 'createdAt', 'updatedAt',
              'lastActiveAt',
+             // Public user IDs (owner order 22 Nov 2026): the sequential
+             // display number, allocated by transaction against the
+             // counters/publicUserIds counter (see the binding below).
+             'publicIdNumber',
              'educationType', 'board', 'institution', 'academicYear',
              'program', 'department', 'classLevel', 'semester',
              'academicSession', 'curriculum', 'phone', 'teachingLevel',
@@ -1605,6 +1662,17 @@ service cloud.firestore {
                 && request.resource.data.verificationStatus == 'pending'))
         && !('isActive' in request.resource.data)
         && isStr(request.resource.data.displayName, 100)
+        // Public user IDs (owner order 22 Nov 2026): a profile may
+        // carry publicIdNumber ONLY equal to the counter's current
+        // `next` — the number the allocation transaction claims.
+        // Absent = fallback (no number yet); the clause short-circuits
+        // so a missing counter never blocks a plain create. A claimed
+        // number with a missing counter is denied (get() yields 0).
+        && (!('publicIdNumber' in request.resource.data)
+            || (request.resource.data.publicIdNumber is int
+                && request.resource.data.publicIdNumber >= 1
+                && request.resource.data.publicIdNumber
+                     == get(/databases/$(database)/documents/counters/publicUserIds).data.get('next', 0)))
         && request.resource.data.email is string
         && request.resource.data.language in ['bn', 'en']
         && isOptStr(request.resource.data.get('board', null), 200)
@@ -1628,35 +1696,7 @@ service cloud.firestore {
         // MISSING-vs-NULL (deliberate, all five fields): optional on
         // create; absent or null = undecided; removable (delete → absent
         // = undecided); 0 is an EXPLICIT zero goal, never "unset".
-        && (!('enrolledCategories' in request.resource.data)
-            || request.resource.data.enrolledCategories == null
-            || (request.resource.data.enrolledCategories is list
-                && request.resource.data.enrolledCategories.size() <= 10
-                && request.resource.data.enrolledCategories.toSet().size()
-                     == request.resource.data.enrolledCategories.size()
-                && request.resource.data.enrolledCategories.toSet().hasOnly(
-                     ['bcs-bpsc', 'govt', 'bank', 'primary-teacher',
-                      'ntrca-teacher', 'defence-police', 'autonomous',
-                      'ngo-private', 'it-professional', 'other-competitive'])))
-        && (!('targetExam' in request.resource.data)
-            || request.resource.data.targetExam == null
-            || request.resource.data.targetExam in
-               ['bcs', 'bank', 'primary-teacher', 'ntrca', 'dgfood',
-                'bpsc-non-cadre', 'cag', 'bfsa', 'others', 'ministries',
-                'defence', 'autonomous', 'private-ngo'])
-        && (!('dailyGoalQuestions' in request.resource.data)
-            || request.resource.data.dailyGoalQuestions == null
-            || (request.resource.data.dailyGoalQuestions is int
-                && request.resource.data.dailyGoalQuestions >= 0
-                && request.resource.data.dailyGoalQuestions <= 500))
-        && (!('dailyGoalMinutes' in request.resource.data)
-            || request.resource.data.dailyGoalMinutes == null
-            || (request.resource.data.dailyGoalMinutes is int
-                && request.resource.data.dailyGoalMinutes >= 0
-                && request.resource.data.dailyGoalMinutes <= 600))
-        && (!('jobOnboarded' in request.resource.data)
-            || request.resource.data.jobOnboarded == null
-            || request.resource.data.jobOnboarded is bool)
+        && validJobProfileFields(request.resource.data)
         && (!('subjects' in request.resource.data)
             || (request.resource.data.subjects is list
                 && request.resource.data.subjects.size() <= 20))
@@ -1668,16 +1708,7 @@ service cloud.firestore {
         // optional; a present value must be in its allowlist. role /
         // verificationStatus / isActive stay excluded (above) — an NU
         // field can never smuggle a role escalation in (NU-T1/T2).
-        && (!('admissionTargetInstitution' in request.resource.data)
-            || request.resource.data.admissionTargetInstitution == null
-            || request.resource.data.admissionTargetInstitution == 'national-university')
-        && (!('admissionTargetGroup' in request.resource.data)
-            || request.resource.data.admissionTargetGroup == null
-            || request.resource.data.admissionTargetGroup in ['humanities', 'science', 'business'])
-        && (!('admissionMode' in request.resource.data)
-            || request.resource.data.admissionMode in ['beginner', 'advanced'])
-        && (!('admissionOnboarded' in request.resource.data)
-            || request.resource.data.admissionOnboarded is bool);
+        && validNuProfileFields(request.resource.data);
       allow update: if isOwner(userId)
         // The update may touch ONLY these fields; role, verificationStatus
         // and isActive are excluded, so they cannot change here.
@@ -1712,50 +1743,13 @@ service cloud.firestore {
         // fields (affectedKeys().hasOnly, above) — no unexpected field
         // can ride in on a Job update. MISSING-vs-NULL: all five
         // fields optional, nullable, removable; 0 = explicit zero goal.
-        && (!('enrolledCategories' in request.resource.data)
-            || request.resource.data.enrolledCategories == null
-            || (request.resource.data.enrolledCategories is list
-                && request.resource.data.enrolledCategories.size() <= 10
-                && request.resource.data.enrolledCategories.toSet().size()
-                     == request.resource.data.enrolledCategories.size()
-                && request.resource.data.enrolledCategories.toSet().hasOnly(
-                     ['bcs-bpsc', 'govt', 'bank', 'primary-teacher',
-                      'ntrca-teacher', 'defence-police', 'autonomous',
-                      'ngo-private', 'it-professional', 'other-competitive'])))
-        && (!('targetExam' in request.resource.data)
-            || request.resource.data.targetExam == null
-            || request.resource.data.targetExam in
-               ['bcs', 'bank', 'primary-teacher', 'ntrca', 'dgfood',
-                'bpsc-non-cadre', 'cag', 'bfsa', 'others', 'ministries',
-                'defence', 'autonomous', 'private-ngo'])
-        && (!('dailyGoalQuestions' in request.resource.data)
-            || request.resource.data.dailyGoalQuestions == null
-            || (request.resource.data.dailyGoalQuestions is int
-                && request.resource.data.dailyGoalQuestions >= 0
-                && request.resource.data.dailyGoalQuestions <= 500))
-        && (!('dailyGoalMinutes' in request.resource.data)
-            || request.resource.data.dailyGoalMinutes == null
-            || (request.resource.data.dailyGoalMinutes is int
-                && request.resource.data.dailyGoalMinutes >= 0
-                && request.resource.data.dailyGoalMinutes <= 600))
-        && (!('jobOnboarded' in request.resource.data)
-            || request.resource.data.jobOnboarded == null
-            || request.resource.data.jobOnboarded is bool)
+        && validJobProfileFields(request.resource.data)
         && (!('experienceYears' in request.resource.data)
             || (request.resource.data.experienceYears is number
                 && request.resource.data.experienceYears >= 0
                 && request.resource.data.experienceYears <= 60))
         // NU-4: per-field allowlists on self-update (same as create).
-        && (!('admissionTargetInstitution' in request.resource.data)
-            || request.resource.data.admissionTargetInstitution == null
-            || request.resource.data.admissionTargetInstitution == 'national-university')
-        && (!('admissionTargetGroup' in request.resource.data)
-            || request.resource.data.admissionTargetGroup == null
-            || request.resource.data.admissionTargetGroup in ['humanities', 'science', 'business'])
-        && (!('admissionMode' in request.resource.data)
-            || request.resource.data.admissionMode in ['beginner', 'advanced'])
-        && (!('admissionOnboarded' in request.resource.data)
-            || request.resource.data.admissionOnboarded is bool);
+        && validNuProfileFields(request.resource.data);
       // Admin/Owner change role / verificationStatus / isActive, and only
       // they may do so — and only to valid enum values.
       // OWNER PROTECTION (spec §3): a users doc whose role is 'owner' is
@@ -1819,6 +1813,9 @@ service cloud.firestore {
                        'isActive', 'suspendedReason', 'verifiedBy', 'verifiedAt',
                        'jobMode', 'enrolledCategories', 'targetExam',
                        'dailyGoalQuestions', 'dailyGoalMinutes', 'jobOnboarded',
+                       // Public user IDs (owner order 22 Nov 2026): the
+                       // owner assigns missing numbers (the backfill).
+                       'publicIdNumber',
                        'updatedAt'])
         // Role may NEVER be *changed to* 'owner' — but the owner's own doc
         // already carries role 'owner', and request.resource.data is the
@@ -1832,39 +1829,41 @@ service cloud.firestore {
         && validVerificationTransition()
         && (!('isActive' in request.resource.data) || request.resource.data.isActive is bool)
         && isOptStr(request.resource.data.displayName, 100)
+        // Public user IDs (owner order 22 Nov 2026): the owner may set
+        // publicIdNumber ONLY on a doc that lacks it (the backfill) —
+        // an existing number is never changed.
+        && (!('publicIdNumber' in request.resource.data.diff(resource.data).affectedKeys())
+            || (request.resource.data.publicIdNumber is int
+                && request.resource.data.publicIdNumber >= 1
+                && !('publicIdNumber' in resource.data)))
         // Step 4 — the owner may set a user's Job fields too, under the
         // same §3.1 validations as the self-update rule (unique
         // categories, integer-only goals — ChatGPT Step 4 review P0).
-        && (!('enrolledCategories' in request.resource.data)
-            || request.resource.data.enrolledCategories == null
-            || (request.resource.data.enrolledCategories is list
-                && request.resource.data.enrolledCategories.size() <= 10
-                && request.resource.data.enrolledCategories.toSet().size()
-                     == request.resource.data.enrolledCategories.size()
-                && request.resource.data.enrolledCategories.toSet().hasOnly(
-                     ['bcs-bpsc', 'govt', 'bank', 'primary-teacher',
-                      'ntrca-teacher', 'defence-police', 'autonomous',
-                      'ngo-private', 'it-professional', 'other-competitive'])))
-        && (!('targetExam' in request.resource.data)
-            || request.resource.data.targetExam == null
-            || request.resource.data.targetExam in
-               ['bcs', 'bank', 'primary-teacher', 'ntrca', 'dgfood',
-                'bpsc-non-cadre', 'cag', 'bfsa', 'others', 'ministries',
-                'defence', 'autonomous', 'private-ngo'])
-        && (!('dailyGoalQuestions' in request.resource.data)
-            || request.resource.data.dailyGoalQuestions == null
-            || (request.resource.data.dailyGoalQuestions is int
-                && request.resource.data.dailyGoalQuestions >= 0
-                && request.resource.data.dailyGoalQuestions <= 500))
-        && (!('dailyGoalMinutes' in request.resource.data)
-            || request.resource.data.dailyGoalMinutes == null
-            || (request.resource.data.dailyGoalMinutes is int
-                && request.resource.data.dailyGoalMinutes >= 0
-                && request.resource.data.dailyGoalMinutes <= 600))
-        && (!('jobOnboarded' in request.resource.data)
-            || request.resource.data.jobOnboarded == null
-            || request.resource.data.jobOnboarded is bool);
+        && validJobProfileFields(request.resource.data);
       allow delete: if false; // accounts are suspended (isActive=false), never deleted by clients
+    }
+
+    // ---------- counters ----------
+    // Public user IDs (owner order 22 Nov 2026): the allocation
+    // counter `counters/publicUserIds` ({ next, updatedAt }). Any
+    // signed-in user may READ it (the value is not secret — it is
+    // only "the next number"); only the owner may CREATE it; any
+    // signed-in user may increment `next` by exactly 1 (the
+    // allocation transaction). Nothing else may touch it.
+    match /counters/{counterId} {
+      allow read: if signedIn() && counterId == 'publicUserIds';
+      allow create: if isOwnerRole()
+        && counterId == 'publicUserIds'
+        && request.resource.data.keys().hasOnly(['next', 'updatedAt'])
+        && request.resource.data.next is int
+        && request.resource.data.next >= 1;
+      allow update: if signedIn()
+        && counterId == 'publicUserIds'
+        && request.resource.data.diff(resource.data).affectedKeys()
+             .hasOnly(['next', 'updatedAt'])
+        && request.resource.data.next is int
+        && request.resource.data.next == resource.data.next + 1;
+      allow delete: if false;
     }
 
     // ---------- quizAttempts (sub-collection under the user) ----------

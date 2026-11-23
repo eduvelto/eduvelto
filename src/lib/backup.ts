@@ -157,6 +157,10 @@ export const BACKUP_COLLECTIONS: string[] = [
   // Added 23 Nov 2026 (Step 14: the circulars collection must be
   // in every backup, or the published circulars are lost).
   'circulars',
+  // Added 23 Nov 2026 (public user IDs: the allocation counter
+  // `counters/publicUserIds` must be in every backup, or a restore
+  // would re-issue already-assigned IDs).
+  'counters',
 ];
 
 /** Firestore values do not survive JSON as-is — mark them so restore can revive them. */

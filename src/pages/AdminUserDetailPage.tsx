@@ -23,6 +23,7 @@ import {
   type UserDetail,
 } from '../lib/admin';
 import type { UserRole } from '../lib/profile';
+import { formatPublicId } from '../lib/publicId';
 
 const ROLE_LABEL: Record<string, { bn: string; en: string }> = {
   owner: { bn: 'মালিক', en: 'Owner' },
@@ -175,6 +176,14 @@ export default function AdminUserDetailPage() {
             </div>
             <p style={{ margin: '8px 0' }}>
               {t({ bn: 'ইমেইল', en: 'Email' })}: <span lang="en">{user.email}</span>
+            </p>
+            <p style={{ margin: '4px 0' }}>
+              {t({ bn: 'পাবলিক আইডি', en: 'Public ID' })}:{' '}
+              {typeof user.publicIdNumber === 'number' ? (
+                <code>{formatPublicId(user.publicIdNumber)}</code>
+              ) : (
+                <span style={{ color: '#555' }}>{t({ bn: 'এখনো দেওয়া হয়নি', en: 'Not assigned yet' })}</span>
+              )}
             </p>
             <p style={{ margin: '4px 0', color: 'var(--ink-soft)', fontSize: 14 }}>
               {user.educationType ? `${t({ bn: 'ধারা', en: 'Stream' })}: ${user.educationType} · ` : ''}

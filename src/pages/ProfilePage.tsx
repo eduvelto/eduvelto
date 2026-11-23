@@ -23,6 +23,7 @@ import { PageShell } from '../components/PageShell';
 import JobModeSwitch from '../components/JobModeSwitch';
 import { strings } from '../i18n/strings';
 import { useAuth } from '../lib/auth';
+import { formatPublicId } from '../lib/publicId';
 import type { EducationType, ProfileEdit } from '../lib/profile';
 import {
   JOB_CATEGORIES,
@@ -488,6 +489,14 @@ export default function ProfilePage() {
         <dd style={{ margin: 0 }}>{profile.email}</dd>
         <dt style={{ color: 'var(--ink-soft)' }}>{t(p.role)}</dt>
         <dd style={{ margin: 0 }}>{profile.role === 'student' ? t(d.roleStudent) : profile.role === 'teacher' ? t(d.roleTeacher) : profile.role === 'parent' ? t(d.roleGuardian) : profile.role}</dd>
+        <dt style={{ color: '#555' }}>{t(d.publicId)}</dt>
+        <dd style={{ margin: 0 }}>
+          {typeof profile.publicIdNumber === 'number' ? (
+            <code>{formatPublicId(profile.publicIdNumber)}</code>
+          ) : (
+            <span style={{ color: '#555' }}>{t(d.publicIdPending)}</span>
+          )}
+        </dd>
         <dt style={{ color: 'var(--ink-soft)' }}>Eduvelto ID</dt>
         <dd style={{ margin: 0 }}>
           <code style={{ wordBreak: 'break-all' }}>{user.uid}</code>
