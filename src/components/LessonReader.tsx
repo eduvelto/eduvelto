@@ -25,6 +25,7 @@ import { useLanguage } from '../i18n/LanguageContext';
 import { addBookmark, isBookmarked, removeBookmark } from '../lib/bookmarks';
 import { markLessonComplete } from '../lib/progress';
 import type { Lesson } from '../lib/content';
+import AdSlot from './AdSlot';
 
 /** Lines before the first question marker — the lesson's own intro. */
 export function lessonIntro(body: string): string {
@@ -181,6 +182,85 @@ export default function LessonReader(props: {
 
   const intro = lessonIntro(lesson.body);
 
+  // Mid-lesson split point (Hybrid Ad Strategy, 23 Nov 2026): the
+  // in-content ad sits halfway through the questions — never before
+  // the first question and never between a question and its answer.
+  // Short lessons (< 4 questions) get no mid slot at all.
+  const midIndex = Math.floor(lesson.questions.length / 2);
+  const renderQuestion = (q: Lesson['questions'][number]) => {
+    const isMcq = q.options.length > 0;
+    const pick = picked[q.label];
+    const show = revealed[q.label] === true;
+    const answerText = q.answerBn || q.answer || q.correctText;
+    return (
+      <li key={q.label} style={{ marginBottom: 20 }}>
+        <p style={{ margin: '0 0 8px', lineHeight: 1.6 }}>
+          <strong>{q.label}.</strong> {stripMd(q.question)}
+          {q.topic ? <span style={{ color: 'var(--ink-soft)', fontSize: 13 }}> ({q.topic})</span> : null}
+        </p>
+        {isMcq ? (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
+            {q.options.map((opt) => {
+              const isCorrect = q.correctLetter !== '' && opt.letter === q.correctLetter;
+              const isPicked = pick === opt.letter;
+              const bg = pick
+                ? isCorrect
+                  ? '#E8EFFA'
+                  : isPicked
+                    ? '#fdecea'
+                    : '#fff'
+                : '#fff';
+              return (
+                <button
+                  key={opt.letter}
+                  type="button"
+                  disabled={pick !== undefined}
+                  onClick={() => setPicked((p) => ({ ...p, [q.label]: opt.letter }))}
+                  style={{ textAlign: 'left', padding: '10px 12px', minHeight: 44, borderRadius: 6, border: `1px solid ${isPicked ? 'var(--heading)' : 'var(--line-strong)'}`, background: bg, cursor: pick !== undefined ? 'default' : 'pointer', fontSize: 15 }}
+                >
+                  {opt.letter}) {opt.text}
+                  {pick !== undefined && isCorrect ? ' ✓' : ''}
+                  {pick !== undefined && isPicked && !isCorrect ? ' ✗' : ''}
+                </button>
+              );
+            })}
+            {pick !== undefined ? (
+              <p style={{ margin: '4px 0 0', fontSize: 14 }}>
+                {q.correctLetter !== '' ? (
+                  pick === q.correctLetter ? (
+                    <span style={{ color: 'var(--link)', fontWeight: 700 }}>{t({ bn: 'সঠিক!', en: 'Correct!' })}</span>
+                  ) : (
+                    <span>
+                      {t({ bn: 'সঠিক উত্তর', en: 'Correct answer' })}: <strong>{q.correctLetter}) {q.correctText}</strong>
+                    </span>
+                  )
+                ) : null}
+                {q.answerBn ? <span style={{ display: 'block', marginTop: 4 }}>{q.answerBn}</span> : null}
+                {q.explanation ? <span style={{ display: 'block', marginTop: 4, color: 'var(--ink-soft)' }}>{q.explanation}</span> : null}
+              </p>
+            ) : null}
+          </div>
+        ) : (
+          <div>
+            <Button
+              variant="outline"
+              onClick={() => setRevealed((r) => ({ ...r, [q.label]: !r[q.label] }))}
+            >
+              {show ? t({ bn: 'উত্তর লুকান', en: 'Hide answer' }) : t({ bn: 'সহজ উত্তর দেখুন', en: 'Show simple answer' })}
+            </Button>
+            {show ? (
+              <div style={{ marginTop: 8, padding: '12px', background: 'var(--card)', borderRadius: 6, lineHeight: 1.7 }}>
+                {answerText ? <p style={{ margin: '0 0 8px' }}>{answerText}</p> : null}
+                {q.explanation ? <p style={{ margin: 0, color: 'var(--ink-soft)' }}>{q.explanation}</p> : null}
+                {!answerText && !q.explanation ? <p style={{ margin: 0 }}>{t({ bn: 'উত্তর যোগ করা হয়নি।', en: 'No answer added yet.' })}</p> : null}
+              </div>
+            ) : null}
+          </div>
+        )}
+      </li>
+    );
+  };
+
   return (
     <div>
       <p style={{ margin: '0 0 12px' }}>
@@ -240,81 +320,19 @@ export default function LessonReader(props: {
       {lesson.questions.length === 0 ? (
         <p>{t({ bn: 'এই পাঠে এখনো কোনো প্রশ্ন যোগ করা হয়নি।', en: 'No questions have been added to this lesson yet.' })}</p>
       ) : (
-        <ol style={{ paddingLeft: 20 }}>
-          {lesson.questions.map((q) => {
-            const isMcq = q.options.length > 0;
-            const pick = picked[q.label];
-            const show = revealed[q.label] === true;
-            const answerText = q.answerBn || q.answer || q.correctText;
-            return (
-              <li key={q.label} style={{ marginBottom: 20 }}>
-                <p style={{ margin: '0 0 8px', lineHeight: 1.6 }}>
-                  <strong>{q.label}.</strong> {stripMd(q.question)}
-                  {q.topic ? <span style={{ color: 'var(--ink-soft)', fontSize: 13 }}> ({q.topic})</span> : null}
-                </p>
-                {isMcq ? (
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
-                    {q.options.map((opt) => {
-                      const isCorrect = q.correctLetter !== '' && opt.letter === q.correctLetter;
-                      const isPicked = pick === opt.letter;
-                      const bg = pick
-                        ? isCorrect
-                          ? '#E8EFFA'
-                          : isPicked
-                            ? '#fdecea'
-                            : '#fff'
-                        : '#fff';
-                      return (
-                        <button
-                          key={opt.letter}
-                          type="button"
-                          disabled={pick !== undefined}
-                          onClick={() => setPicked((p) => ({ ...p, [q.label]: opt.letter }))}
-                          style={{ textAlign: 'left', padding: '10px 12px', minHeight: 44, borderRadius: 6, border: `1px solid ${isPicked ? 'var(--heading)' : 'var(--line-strong)'}`, background: bg, cursor: pick !== undefined ? 'default' : 'pointer', fontSize: 15 }}
-                        >
-                          {opt.letter}) {opt.text}
-                          {pick !== undefined && isCorrect ? ' ✓' : ''}
-                          {pick !== undefined && isPicked && !isCorrect ? ' ✗' : ''}
-                        </button>
-                      );
-                    })}
-                    {pick !== undefined ? (
-                      <p style={{ margin: '4px 0 0', fontSize: 14 }}>
-                        {q.correctLetter !== '' ? (
-                          pick === q.correctLetter ? (
-                            <span style={{ color: 'var(--link)', fontWeight: 700 }}>{t({ bn: 'সঠিক!', en: 'Correct!' })}</span>
-                          ) : (
-                            <span>
-                              {t({ bn: 'সঠিক উত্তর', en: 'Correct answer' })}: <strong>{q.correctLetter}) {q.correctText}</strong>
-                            </span>
-                          )
-                        ) : null}
-                        {q.answerBn ? <span style={{ display: 'block', marginTop: 4 }}>{q.answerBn}</span> : null}
-                        {q.explanation ? <span style={{ display: 'block', marginTop: 4, color: 'var(--ink-soft)' }}>{q.explanation}</span> : null}
-                      </p>
-                    ) : null}
-                  </div>
-                ) : (
-                  <div>
-                    <Button
-                      variant="outline"
-                      onClick={() => setRevealed((r) => ({ ...r, [q.label]: !r[q.label] }))}
-                    >
-                      {show ? t({ bn: 'উত্তর লুকান', en: 'Hide answer' }) : t({ bn: 'সহজ উত্তর দেখুন', en: 'Show simple answer' })}
-                    </Button>
-                    {show ? (
-                      <div style={{ marginTop: 8, padding: '12px', background: 'var(--card)', borderRadius: 6, lineHeight: 1.7 }}>
-                        {answerText ? <p style={{ margin: '0 0 8px' }}>{answerText}</p> : null}
-                        {q.explanation ? <p style={{ margin: 0, color: 'var(--ink-soft)' }}>{q.explanation}</p> : null}
-                        {!answerText && !q.explanation ? <p style={{ margin: 0 }}>{t({ bn: 'উত্তর যোগ করা হয়নি।', en: 'No answer added yet.' })}</p> : null}
-                      </div>
-                    ) : null}
-                  </div>
-                )}
-              </li>
-            );
-          })}
-        </ol>
+        <>
+          <ol style={{ paddingLeft: 20 }}>
+            {lesson.questions.slice(0, midIndex).map(renderQuestion)}
+          </ol>
+          {/* Mid-lesson in-content ad (Hybrid Ad Strategy, 23 Nov 2026):
+              only on lessons long enough to have a real middle. Renders
+              nothing until AdSense is configured; a labelled placeholder
+              on preview hosts. */}
+          {lesson.questions.length >= 4 ? <AdSlot placement="in-content" /> : null}
+          <ol start={midIndex + 1} style={{ paddingLeft: 20 }}>
+            {lesson.questions.slice(midIndex).map(renderQuestion)}
+          </ol>
+        </>
       )}
 
       <div className="ev-card" style={{ marginTop: 28, background: 'var(--card)' }}>
@@ -347,6 +365,11 @@ export default function LessonReader(props: {
           </p>
         )}
       </div>
+      {/* End-of-lesson in-content-2 ad (Hybrid Ad Strategy, 23 Nov 2026):
+          after the lesson is finished — never between questions. Renders
+          nothing until AdSense is configured; a labelled placeholder on
+          preview hosts. */}
+      <AdSlot placement="in-content-2" />
     </div>
   );
 }

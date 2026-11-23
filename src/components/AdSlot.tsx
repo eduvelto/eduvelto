@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import {
   ADSENSE_CLIENT_ID,
   AD_SLOT_IDS,
@@ -16,26 +16,31 @@ import {
 // Three render states (see lib/adsConfig.ts getAdRenderState):
 // - 'ad': master switch ON + real AdSense IDs → the real <ins> unit,
 //   non-personalised ads requested (child safety: PERSONALISED_ADS is
-//   always false).
+//   always false). Every real ad carries a plain "বিজ্ঞাপন" label above
+//   it — clearly an ad, never styled like a Download / Next / Continue
+//   button. If AdSense reports the unit unfilled (data-ad-status), the
+//   whole slot collapses to nothing (no empty box, no blank strip).
 // - 'placeholder': not live, but this is a preview host (Firebase
 //   preview channel / localhost) → a clearly labelled "বিজ্ঞাপনের স্থান
 //   · নমুনা" box, so placements can be verified without faking an ad.
 // - 'none': not live and not a preview host → renders NOTHING (null —
 //   collapses completely, no fake ad, no placeholder box).
 //
-// Placement rules (binding — ads placement plan 22 Nov 2026, see
-// team/ads-placement-plan-2026-11-22.md):
+// Placement rules (binding — Hybrid Ad Strategy, owner brief 23 Nov
+// 2026 21:52, see team/ads-hybrid-policy-2026-11-23.md; supersedes the
+// 22 Nov 2026 plan):
 // - The bottom banner is FIXED to the viewport bottom and lives in the
 //   app layout OUTSIDE the router outlet (App.tsx), so navigation never
-//   reloads or interrupts it. It appears on all eligible pages — but
-//   NEVER on login/register or admin pages (App.tsx asks
+//   reloads or interrupts it. It appears on eligible pages ONLY — NEVER
+//   during exams, on the AI Teacher page, on profile pages, or on
+//   login/register or admin pages (App.tsx asks
 //   adsConfig.getBannerPlacementForPath() and does not mount the slot
-//   there at all).
-// - EXAM RULE (owner 22 Nov 2026 10:45, "akdom cuto"): exam pages get
-//   ONLY 'bottom-banner-small' — max 50px high, horizontal format,
-//   56px reserved. It never covers the timer, questions, answers or
-//   buttons. No in-content / top / sidebar slot is ever mounted on an
-//   exam page (enforced in adsConfig, not here).
+//   there at all). Quiz RESULT pages (after the quiz ends) do get it.
+// - In-page slots run only where adsConfig.isInPageSlotAllowed() says
+//   so: home top-banner (below the hero), library/book in-feed, chapter/
+//   lesson in-content (mid) + in-content-2 (end), class-dashboard
+//   sidebar/in-content/mobile, directory in-content. Never between quiz
+//   questions, never inside an AI answer, never on an exam page.
 // - The content area reserves the banner's height (see App.tsx), so
 //   the banner never covers content, buttons or essential navigation.
 //   When no ad is available the slot collapses to zero height.
@@ -48,8 +53,20 @@ declare global {
 
 let adsenseScriptLoading = false;
 
-function loadAdsenseScript(clientId: string): void {
+/**
+ * Inject the AdSense library into <head> — exactly once, and only with
+ * a real publisher ID. Callers MUST gate on the slot state ('ad'):
+ * AdSlot's effect calls this only when getAdRenderState() is 'ad',
+ * i.e. the master switch (ADS_MASTER_ENABLED) is ON and real AdSense
+ * IDs are configured — the same gate as the banner. Never call this
+ * unconditionally and never put the <script> tag in index.html: with
+ * Auto ads ON in the AdSense account, an ungated script would serve
+ * ads the moment Google approves the site, bypassing the master flag.
+ * Exported for unit tests (adsenseScript.test.tsx).
+ */
+export function loadAdsenseScript(clientId: string): void {
   if (typeof document === 'undefined') return;
+  if (!clientId) return;
   if (
     document.querySelector(
       'script[src*="pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"]',
@@ -73,9 +90,22 @@ const PLACEHOLDER_SIZE_LABEL: Record<AdPlacement, string> = {
   'top-banner': 'উপরের ব্যানার · ৭২৮×৯০',
   sidebar: 'সাইডবার · ৩০০×২৫০ (ডেস্কটপ)',
   'in-content': 'ইন-কনটেন্ট · ৩০০×২৫০',
+  'in-content-2': 'ইন-কনটেন্ট ২ · ৩০০×২৫০',
   'in-feed': 'ইন-ফিড · responsive',
   'in-feed-2': 'ইন-ফিড ২ · responsive',
   mobile: 'মোবাইল · ৩২০×৫০',
+};
+
+/** Plain-text "বিজ্ঞাপন" label above every REAL ad unit. Deliberately
+ *  unstyled — small muted text, no background, no border, no padding
+ *  that could read as a button. An ad must never look like a Download /
+ *  Next / Continue button (owner brief 23 Nov 2026 21:52). */
+const AD_LABEL_STYLE: React.CSSProperties = {
+  fontSize: 11,
+  lineHeight: 1.4,
+  color: 'var(--muted)',
+  textAlign: 'center',
+  marginBottom: 2,
 };
 
 function placeholderStyle(placement: AdPlacement): React.CSSProperties {
@@ -127,7 +157,7 @@ function placeholderStyle(placement: AdPlacement): React.CSSProperties {
   if (placement === 'sidebar') {
     return { ...base, width: 300, minHeight: 250 };
   }
-  if (placement === 'in-content') {
+  if (placement === 'in-content' || placement === 'in-content-2') {
     return { ...base, margin: '12px auto', maxWidth: 300, minHeight: 250 };
   }
   return { ...base, margin: '12px 0' };
@@ -136,6 +166,10 @@ function placeholderStyle(placement: AdPlacement): React.CSSProperties {
 export default function AdSlot(props: { placement: AdPlacement; format?: 'auto' | 'fluid' }) {
   const { placement } = props;
   const pushedRef = useRef(false);
+  const insRef = useRef<HTMLElement | null>(null);
+  // True once AdSense reports this unit unfilled — the whole slot
+  // (label included) collapses to nothing.
+  const [unfilled, setUnfilled] = useState(false);
 
   const state = getAdRenderState(placement);
 
@@ -152,6 +186,26 @@ export default function AdSlot(props: { placement: AdPlacement; format?: 'auto' 
     } catch {
       // AdSense not ready yet; the unit stays empty rather than faking content.
     }
+  }, [state]);
+
+  useEffect(() => {
+    if (state !== 'ad') return;
+    const ins = insRef.current;
+    if (!ins) return;
+    // AdSense writes data-ad-status="filled" | "unfilled" on the <ins>
+    // once the request resolves. Collapse the slot when it says
+    // unfilled — no empty box, no blank strip (owner brief 23 Nov 2026
+    // 21:52). The observer is the only trigger: nothing is hidden
+    // before AdSense answers, so a slow fill is never mistaken for a
+    // miss. Auto ads' own units are Google-managed and collapse
+    // themselves.
+    const check = () => {
+      if (ins.getAttribute('data-ad-status') === 'unfilled') setUnfilled(true);
+    };
+    check();
+    const obs = new MutationObserver(check);
+    obs.observe(ins, { attributes: true, attributeFilter: ['data-ad-status'] });
+    return () => obs.disconnect();
   }, [state]);
 
   // Not live and not a preview host: render nothing at all.
@@ -195,7 +249,9 @@ export default function AdSlot(props: { placement: AdPlacement; format?: 'auto' 
     return box;
   }
 
-  // Real ad (master ON + configured).
+  // Real ad (master ON + configured). Unfilled units collapse to
+  // nothing — see the observer above.
+  if (unfilled) return null;
   const isBanner = isBannerPlacement(placement);
   const isSmall = placement === 'bottom-banner-small';
 
@@ -205,6 +261,8 @@ export default function AdSlot(props: { placement: AdPlacement; format?: 'auto' 
     // Persistent banner: fixed to the viewport bottom, outside the
     // router outlet (App.tsx). The small exam banner is capped at 50px
     // and uses the horizontal format — it must never grow taller.
+    // (RETAINED code path only — no route returns the small banner
+    // since the 23 Nov 2026 exam rule: NO ads during exams.)
     wrapperStyle = {
       position: 'fixed',
       left: 0,
@@ -220,22 +278,26 @@ export default function AdSlot(props: { placement: AdPlacement; format?: 'auto' 
         : {}),
     };
   } else if (placement === 'top-banner') {
-    wrapperStyle = { margin: '12px auto', maxWidth: 728, textAlign: 'center' };
+    wrapperStyle = { margin: '12px auto', maxWidth: 728, width: '100%', textAlign: 'center' };
   } else if (placement === 'sidebar') {
     wrapperClass = 'ev-ad-slot-sidebar';
     wrapperStyle = { textAlign: 'center' };
   } else if (placement === 'mobile') {
     wrapperClass = 'ev-ad-slot-mobile';
     wrapperStyle = { margin: '12px 0', textAlign: 'center' };
-  } else if (placement === 'in-content') {
-    wrapperStyle = { margin: '12px auto', maxWidth: 300, textAlign: 'center' };
+  } else if (placement === 'in-content' || placement === 'in-content-2') {
+    wrapperStyle = { margin: '12px auto', maxWidth: 300, width: '100%', textAlign: 'center' };
   } else {
     wrapperStyle = { margin: '12px 0', textAlign: 'center' };
   }
 
   return (
-    <div className={wrapperClass} style={wrapperStyle} data-ad-placement={placement}>
+    <div className={wrapperClass} style={wrapperStyle} data-ad-placement={placement} aria-label="বিজ্ঞাপন">
+      <div style={AD_LABEL_STYLE}>বিজ্ঞাপন</div>
       <ins
+        ref={(el) => {
+          insRef.current = el;
+        }}
         className="adsbygoogle"
         style={{
           display: 'block',

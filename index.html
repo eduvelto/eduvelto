@@ -58,9 +58,17 @@
         outline-offset: 2px;
       }
     </style>
-    <!-- Google AdSense ownership verification (22 Nov 2026) — loads the library only; no ads show until ad activation is separately approved. -->
+    <!-- Google AdSense ownership verification (22 Nov 2026) — the meta
+         tag stays: it is what links this site to the AdSense account.
+         The AdSense library itself is NOT loaded here: it loads only
+         through the gated loader in src/components/AdSlot.tsx, which
+         runs only when a slot's state is 'ad' — i.e. the master switch
+         (ADS_MASTER_ENABLED, lib/adsConfig.ts) is ON and real AdSense
+         IDs are configured. A static <script> tag here would load the
+         library on every page and, with Auto ads ON in the AdSense
+         account, could serve ads the moment Google approves the site —
+         bypassing the master flag entirely. Never re-add it. -->
     <meta name="google-adsense-account" content="ca-pub-6571267788512484" />
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6571267788512484" crossorigin="anonymous"></script>
   </head>
   <body>
     <div id="root"></div>

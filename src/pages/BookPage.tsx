@@ -1,9 +1,10 @@
 // Eduvelto — one book: its published chapters (Phase 2, Step 2 + Step 3).
 // (ui/premium-polish: book hero card, chapter cards, skeletons, retry.)
 
-import { useEffect, useState } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { PageShell } from '../components/PageShell';
+import AdSlot from '../components/AdSlot';
 import { AlertBox, Card, Chip, Skeleton, SkeletonCards } from '../components/ui';
 import { getPublishedBook, listPublishedChapters, type Book, type Chapter } from '../lib/content';
 import { useAuth } from '../lib/auth';
@@ -88,15 +89,26 @@ export default function BookPage() {
           ) : null}
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: 12 }}>
             {(chapters ?? []).map((c: Chapter, i: number) => (
-              <Card key={c.id} hover>
-                <Link to={`/books/${book.id}/chapters/${c.id}`} style={{ fontWeight: 700, fontSize: 16, color: 'var(--heading)', lineHeight: 1.5 }}>
-                  <span style={{ color: 'var(--link)', marginRight: 6 }}>{i + 1}.</span>
-                  {c.title}
-                </Link>
-                <p style={{ margin: '8px 0 0', color: 'var(--muted)', fontSize: 14 }}>{t({ bn: `${c.questionCount}টি প্রশ্ন`, en: `${c.questionCount} questions` })}</p>
-              </Card>
+              <Fragment key={c.id}>
+                <Card hover>
+                  <Link to={`/books/${book.id}/chapters/${c.id}`} style={{ fontWeight: 700, fontSize: 16, color: 'var(--heading)', lineHeight: 1.5 }}>
+                    <span style={{ color: 'var(--link)', marginRight: 6 }}>{i + 1}.</span>
+                    {c.title}
+                  </Link>
+                  <p style={{ margin: '8px 0 0', color: 'var(--muted)', fontSize: 14 }}>{t({ bn: `${c.questionCount}টি প্রশ্ন`, en: `${c.questionCount} questions` })}</p>
+                </Card>
+                {/* In-list in-feed ad (Hybrid Ad Strategy, 23 Nov 2026):
+                    mid-grid, only on books with a real list (> 10
+                    chapters). Guests see only the preview chapter, so the
+                    slot stays hidden for them. Renders nothing until
+                    AdSense is configured; a labelled placeholder on
+                    preview hosts. */}
+                {i === 9 && (chapters?.length ?? 0) > 10 ? <AdSlot placement="in-feed" /> : null}
+              </Fragment>
             ))}
           </div>
+          {/* End-of-list in-feed-2 ad (Hybrid Ad Strategy, 23 Nov 2026). */}
+          {chapters !== null && chapters.length > 0 ? <AdSlot placement="in-feed-2" /> : null}
           {chapters !== null && !user && chapters.length > 0 && book.chapterCount > chapters.length ? (
             <Card style={{ marginTop: 16, borderTop: '4px solid #F1B308' }}>
               <p style={{ margin: '0 0 8px' }}>

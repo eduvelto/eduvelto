@@ -6,22 +6,30 @@
 // the <ins> unit) lives in ./ads.ts + components/AdSlot.tsx; this file
 // decides policy only, so a policy change never touches the integration.
 //
-// Decisions (recorded 22 Nov 2026 — see team/ads-placement-plan-2026-11-22.md):
+// HYBRID AD STRATEGY (owner brief 23 Nov 2026 21:52 — BINDING, this is
+// the NEWEST rule and SUPERSEDES the 22 Nov 2026 placement rules; see
+// team/ads-hybrid-policy-2026-11-23.md). What changed vs 22 Nov:
+// - EXAM: NO ads during exams — the 22 Nov small-banner rule
+//   ("akdom cuto", max 50px) is REMOVED. getBannerPlacementForPath()
+//   returns null for exam pages. The 'bottom-banner-small' placement,
+//   its reserve (56px) and its 50px cap are RETAINED as code paths
+//   only — no route returns the small banner any more.
+// - Quiz RESULT pages (after the quiz ends) DO get the normal bottom
+//   banner — "quiz only AFTER the quiz ends, never between questions".
+//   Timed mocks (/jobs/mock/:mockId) count as exams: NO ads.
+// - AI Teacher: NO ads — the whole page is a conversation surface.
+// - Profile: NO ads (was: full banner). Login/register + admin: still
+//   NO ads. Private messages: NO ads (no message routes exist yet).
+// - Homepage: LIMITED — one top-banner slot below the hero + the
+//   bottom banner, nothing above the fold.
+// - Books/library: in-feed (mid-list) + in-feed-2 (end of list).
+// - Chapter/lesson: in-content (mid-lesson) + in-content-2 (end).
+// - Articles (no article routes exist yet — /blog is a Part 1 item):
+//   top-banner + in-content + in-content-2, ready when they land.
 // - Master switch ADS_MASTER_ENABLED is OFF by default. Ads stay off
 //   until Google approves the site AND real ad-unit IDs exist. The
 //   IDs-empty gate in ./ads.ts stays as a second, independent gate —
 //   both must pass before any ad renders.
-// - Bottom banner: every page EXCEPT login/register, admin, and the
-//   suspended-account screen. It is mandatory and has no off-switch.
-// - EXAM RULE (owner 22 Nov 2026 10:45, BINDING — "akdom cuto"): exam
-//   pages get ONLY the bottom banner, in its SMALLEST form (max 50px
-//   high, 56px reserved). No in-content, top, or sidebar slot may ever
-//   appear on an exam page. getBannerPlacementForPath() is the only
-//   place that decides the banner variant, and it cannot return anything
-//   but 'bottom-banner-small' for an exam page.
-// - In-page slots (top / sidebar / in-content / in-feed / mobile) run
-//   ONLY on the page types listed in isInPageSlotAllowed() — never on
-//   exam, reading (book/chapter/lesson), auth, or admin pages.
 // - Personalised ads are ALWAYS off (./ads.ts PERSONALISED_ADS = false).
 //   Vignette + full-screen interstitials are BLOCKED (no code path
 //   renders them; Auto ads stays OFF).
@@ -52,13 +60,15 @@ export const EXAM_BANNER_MAX_HEIGHT_PX = 50;
 
 /** Ad-unit env-var name per placement (TODO-AD-UNIT — set after AdSense
  *  approval; NEVER invent a slot ID. The small exam banner shares the
- *  bottom banner's unit — no separate unit is created for it.) */
+ *  bottom banner's unit — no separate unit is created for it, and the
+ *  placement is disabled since 23 Nov 2026.) */
 export const AD_UNIT_ENV_VARS: Record<AdPlacement, string> = {
   'bottom-banner': 'VITE_ADSENSE_SLOT_BOTTOM_BANNER',
   'bottom-banner-small': 'VITE_ADSENSE_SLOT_BOTTOM_BANNER',
   'top-banner': 'VITE_ADSENSE_SLOT_TOP_BANNER',
   sidebar: 'VITE_ADSENSE_SLOT_SIDEBAR',
   'in-content': 'VITE_ADSENSE_SLOT_IN_CONTENT',
+  'in-content-2': 'VITE_ADSENSE_SLOT_IN_CONTENT_2',
   'in-feed': 'VITE_ADSENSE_SLOT_IN_FEED',
   'in-feed-2': 'VITE_ADSENSE_SLOT_IN_FEED_2',
   mobile: 'VITE_ADSENSE_SLOT_MOBILE',
@@ -77,6 +87,7 @@ export type PageAdType =
   | 'book'
   | 'chapter'
   | 'lesson'
+  | 'article'
   | 'exam'
   | 'exam-result'
   | 'admin'
@@ -108,6 +119,13 @@ export function getPageAdType(pathname: string): PageAdType {
     return seg[2] === 'result' ? 'exam-result' : 'exam';
   }
   if (path === '/exam') return 'exam';
+  // Timed job mocks are exams in progress — NO ads (23 Nov 2026 rule).
+  if (seg[0] === 'jobs' && seg[1] === 'mock') return 'exam';
+  // Job mock results are after the exam — the banner returns there.
+  if (seg[0] === 'jobs' && seg[1] === 'result') return 'exam-result';
+  // Articles (no routes exist yet — /blog is a Part 1 item). The policy
+  // is ready so a future article template only has to mount the slots.
+  if (seg[0] === 'blog' || seg[0] === 'articles') return 'article';
   if (seg[0] === 'class') {
     return seg.length === 1 ? 'section-hub' : 'class-dashboard';
   }
@@ -147,23 +165,36 @@ export type BannerPlacement = 'bottom-banner' | 'bottom-banner-small';
 
 /**
  * Which bottom banner (if any) a pathname gets. This is the ONLY place
- * that decides the banner variant — and it is the enforcement point for
- * the owner's exam rule (22 Nov 2026 10:45): an exam page can only ever
- * receive 'bottom-banner-small', never the full-size banner.
- * - null: no banner at all (auth pages + admin pages).
- * - 'bottom-banner-small': the exam flow (/quiz/*, /exam).
- * - 'bottom-banner': everything else.
+ * that decides the banner variant.
+ * - null: no banner at all — auth pages, admin pages, exam pages
+ *   (23 Nov 2026: NO ads during exams — the 22 Nov small-banner rule
+ *   is superseded), AI Teacher pages (the whole page is a conversation
+ *   surface), and profile pages.
+ * - 'bottom-banner': everything else, including quiz/job RESULT pages
+ *   (after the quiz ends — "quiz only AFTER the quiz ends").
+ * 'bottom-banner-small' is RETAINED as a code path (type, reserve,
+ * AdSlot rendering) but no route returns it any more.
  */
 export function getBannerPlacementForPath(pathname: string): BannerPlacement | null {
   const type = getPageAdType(pathname);
-  if (type === 'auth' || type === 'admin') return null;
-  if (type === 'exam' || type === 'exam-result') return 'bottom-banner-small';
+  if (
+    type === 'auth' ||
+    type === 'admin' ||
+    type === 'exam' ||
+    type === 'ai-teacher' ||
+    type === 'profile'
+  ) {
+    return null;
+  }
   return 'bottom-banner';
 }
 
-/** Reserved content height (px) for a banner placement (0 = no banner). */
+/** Reserved content height (px) for a banner placement (0 = no banner).
+ *  The full banner reserves 112px: ~90px desktop ad + the plain
+ *  "বিজ্ঞাপন" label row (~16px) + spacing. The exam small banner
+ *  reserve is RETAINED (56px) although no route returns it any more. */
 export function getBannerReservePx(placement: BannerPlacement | null): number {
-  if (placement === 'bottom-banner') return 96;
+  if (placement === 'bottom-banner') return 112;
   if (placement === 'bottom-banner-small') return BOTTOM_BANNER_SMALL_RESERVE_PX;
   return 0;
 }
@@ -173,10 +204,20 @@ export function getBannerReservePx(placement: BannerPlacement | null): number {
  * banner) may appear on a page of this type. Banner placements always
  * return false here — they are layout-level, decided by
  * getBannerPlacementForPath(), not by this function.
- * Allowed: home → top-banner; class-dashboard → sidebar/in-content/
- * mobile; library → in-feed/in-feed-2; directory → in-content.
- * Everything else (exam, reading, auth, admin, profile, dashboards,
- * health, info, ...) gets the banner only — no in-page slot, ever.
+ * Allowed (Hybrid Ad Strategy, 23 Nov 2026):
+ * - home → top-banner only (LIMITED: below the hero, nothing above
+ *   the fold);
+ * - class-dashboard → sidebar/in-content/mobile;
+ * - library → in-feed/in-feed-2; book → in-feed/in-feed-2;
+ * - chapter/lesson → in-content (mid) + in-content-2 (end);
+ * - directory → in-content;
+ * - article → top-banner/in-content/in-content-2 (no article routes
+ *   exist yet — ready when they land).
+ * Everything else (exam, exam-result, ai-teacher, profile, auth,
+ * admin, dashboards, health, info, ...) gets the banner only — no
+ * in-page slot, ever. In particular: never a slot between quiz
+ * questions, inside an AI answer, or on a page the student is being
+ * examined on.
  */
 export function isInPageSlotAllowed(pageType: PageAdType, placement: AdPlacement): boolean {
   if (placement === 'bottom-banner' || placement === 'bottom-banner-small') return false;
@@ -186,9 +227,15 @@ export function isInPageSlotAllowed(pageType: PageAdType, placement: AdPlacement
     case 'class-dashboard':
       return placement === 'sidebar' || placement === 'in-content' || placement === 'mobile';
     case 'library':
+    case 'book':
       return placement === 'in-feed' || placement === 'in-feed-2';
+    case 'chapter':
+    case 'lesson':
+      return placement === 'in-content' || placement === 'in-content-2';
     case 'directory':
       return placement === 'in-content';
+    case 'article':
+      return placement === 'top-banner' || placement === 'in-content' || placement === 'in-content-2';
     default:
       return false;
   }

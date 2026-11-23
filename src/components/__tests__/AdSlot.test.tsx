@@ -1,11 +1,13 @@
-// Eduvelto — server-rendered HTML evidence for AdSlot (owner brief
-// 22 Nov 2026 10:43 + exam rule 22 Nov 2026 10:45).
+// Eduvelto — server-rendered HTML evidence for AdSlot (Hybrid Ad
+// Strategy, owner brief 23 Nov 2026 21:52).
 //
 // renderToString runs in plain node (no jsdom): it proves what markup
-// each slot produces — the exam small banner's 50px cap, the labelled
-// preview placeholder, and that production renders NOTHING while the
-// master switch is off. The window hostname is swapped per scenario
-// with a fresh module import (the component reads it at render time).
+// each slot produces — the exam small banner's 50px cap (retained code
+// path only — no route returns it since the 23 Nov exam rule), the
+// labelled preview placeholder, and that production renders NOTHING
+// while the master switch is off. The window hostname is swapped per
+// scenario with a fresh module import (the component reads it at render
+// time).
 import { describe, expect, it, vi } from 'vitest';
 import { renderToString } from 'react-dom/server';
 import React from 'react';
@@ -59,6 +61,15 @@ describe('AdSlot rendered HTML', () => {
   it('sidebar: placeholder inside the desktop-only wrapper, on a preview host', async () => {
     const html = await renderSlot(PREVIEW_HOST, 'sidebar');
     expect(html).toContain('ev-ad-slot-sidebar');
+    expect(html).toContain('৩০০×২৫০');
+    expect(html).not.toContain('adsbygoogle');
+  });
+
+  it('in-content-2: labelled placeholder with the 300×250 size, on a preview host', async () => {
+    const html = await renderSlot(PREVIEW_HOST, 'in-content-2');
+    expect(html).toContain('data-ad-placement="in-content-2"');
+    expect(html).toContain('বিজ্ঞাপনের স্থান');
+    expect(html).toContain('ইন-কনটেন্ট ২');
     expect(html).toContain('৩০০×২৫০');
     expect(html).not.toContain('adsbygoogle');
   });
