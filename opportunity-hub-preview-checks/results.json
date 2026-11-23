@@ -1,0 +1,318 @@
+{
+  "desktop/hub": {
+    "url": "https://eduvelto--opportunity-hub-ywcto941.web.app/opportunities",
+    "title": "সুযোগ হাব — যাচাইকৃত চাকরি, স্কলারশিপ, ইন্টার্নশিপ | Eduvelto",
+    "console_errors": [
+      "Loading the script 'https://ep2.adtrafficquality.google/sodar/sodar2.js' violates the following Content Security Policy directive: \"script-src 'self' 'sha256-iBN273pplYHbAxmn4kFfm8Kys5fmJrcf/+REMOiQjWA=' https://*.googleapis.com https://*.gstatic.com https://pagead2.googlesyndication.com https://*.googlesyndication.com https://googleads.g.doubleclick.net\". Note that 'script-src-elem' was not explicitly set, so 'script-src' is used as a fallback. The action has been blocked.",
+      "Uncaught (in promise) undefined"
+    ],
+    "asserts": {
+      "h1_count": {
+        "selector": "h1",
+        "count": 1,
+        "expected": 1
+      },
+      "detail_links": {
+        "selector": "a[href^='/opportunities/bpsc'], a[href^='/opportunities/unicef'], a[href^='/opportunities/undrr'], a[href^='/opportunities/commonwealth'], a[href^='/opportunities/kaggle'], a[href^='/opportunities/google'], a[href^='/opportunities/upwork']",
+        "count": 14,
+        "expected": 7
+      },
+      "cv_builder_link": {
+        "selector": "a[href='/opportunities/cv-builder']",
+        "count": 1,
+        "expected": 1
+      },
+      "guide_links": {
+        "selector": "a[href='/opportunities/interview-prep'], a[href='/opportunities/career-guidance'], a[href='/opportunities/entrepreneurship'], a[href='/opportunities/income']",
+        "count": 4,
+        "expected": 4
+      }
+    },
+    "texts": {
+      "সুযোগ হাব": true,
+      "প্রতারণা": true,
+      "আবেদন করুন": true
+    },
+    "screenshot": "opportunity-hub-preview-checks/desktop-hub.png"
+  },
+  "desktop/detail-bpsc": {
+    "url": "https://eduvelto--opportunity-hub-ywcto941.web.app/opportunities/bpsc-non-cadre-2026",
+    "title": "বিপিএসসি নন-ক্যাডার নিয়োগ ২০২৬ — সার্কুলার (৭৮–৮২) ও (৮৩–৯৬)/২০২৬ | Eduvelto",
+    "console_errors": [
+      "Loading the script 'https://ep2.adtrafficquality.google/sodar/sodar2.js' violates the following Content Security Policy directive: \"script-src 'self' 'sha256-iBN273pplYHbAxmn4kFfm8Kys5fmJrcf/+REMOiQjWA=' https://*.googleapis.com https://*.gstatic.com https://pagead2.googlesyndication.com https://*.googlesyndication.com https://googleads.g.doubleclick.net\". Note that 'script-src-elem' was not explicitly set, so 'script-src' is used as a fallback. The action has been blocked.",
+      "Uncaught (in promise) undefined"
+    ],
+    "asserts": {
+      "h1_count": {
+        "selector": "h1",
+        "count": 1,
+        "expected": 1
+      },
+      "apply_link": {
+        "selector": "a[href='http://bpsc.teletalk.com.bd']",
+        "count": 1,
+        "expected": 1
+      },
+      "source_link": {
+        "selector": "a[href='https://www.bpsc.gov.bd']",
+        "count": 1,
+        "expected": 1
+      }
+    },
+    "texts": {
+      "যাচাইয়ের বিবরণ": true,
+      "১৩৩ বনাম ১৪৭": true,
+      "আবেদন চলছে": true
+    },
+    "screenshot": "opportunity-hub-preview-checks/desktop-detail-bpsc.png"
+  },
+  "desktop/detail-unicef": {
+    "url": "https://eduvelto--opportunity-hub-ywcto941.web.app/opportunities/unicef-writer-editor-2026",
+    "title": "রাইটার/এডিটর (কনসালট্যান্ট, রিমোট, ৫ মাস) — ইউনিসেফ বাংলাদেশ | Eduvelto",
+    "console_errors": [
+      "Loading the script 'https://ep2.adtrafficquality.google/sodar/sodar2.js' violates the following Content Security Policy directive: \"script-src 'self' 'sha256-iBN273pplYHbAxmn4kFfm8Kys5fmJrcf/+REMOiQjWA=' https://*.googleapis.com https://*.gstatic.com https://pagead2.googlesyndication.com https://*.googlesyndication.com https://googleads.g.doubleclick.net\". Note that 'script-src-elem' was not explicitly set, so 'script-src' is used as a fallback. The action has been blocked.",
+      "Uncaught (in promise) undefined"
+    ],
+    "asserts": {
+      "h1_count": {
+        "selector": "h1",
+        "count": 1,
+        "expected": 1
+      }
+    },
+    "texts": {
+      "আবেদনের সময় শেষের পথে": true,
+      "অফিসিয়াল পাতা খুলে পড়ে": true
+    },
+    "screenshot": "opportunity-hub-preview-checks/desktop-detail-unicef.png"
+  },
+  "desktop/detail-kaggle": {
+    "url": "https://eduvelto--opportunity-hub-ywcto941.web.app/opportunities/kaggle-learn",
+    "title": "Kaggle Learn — পাইথন, মেশিন লার্নিং, SQL ও আরও অনেক কিছু (বিনামূল্যে) | Eduvelto",
+    "console_errors": [
+      "Loading the script 'https://ep2.adtrafficquality.google/sodar/sodar2.js' violates the following Content Security Policy directive: \"script-src 'self' 'sha256-iBN273pplYHbAxmn4kFfm8Kys5fmJrcf/+REMOiQjWA=' https://*.googleapis.com https://*.gstatic.com https://pagead2.googlesyndication.com https://*.googlesyndication.com https://googleads.g.doubleclick.net\". Note that 'script-src-elem' was not explicitly set, so 'script-src' is used as a fallback. The action has been blocked.",
+      "Uncaught (in promise) undefined"
+    ],
+    "asserts": {
+      "h1_count": {
+        "selector": "h1",
+        "count": 1,
+        "expected": 1
+      },
+      "apply_link": {
+        "selector": "a[href='https://www.kaggle.com/learn']",
+        "count": 2,
+        "expected": 1
+      }
+    },
+    "texts": {
+      "সবসময় খোলা": true
+    },
+    "screenshot": "opportunity-hub-preview-checks/desktop-detail-kaggle.png"
+  },
+  "desktop/cv-builder": {
+    "url": "https://eduvelto--opportunity-hub-ywcto941.web.app/opportunities/cv-builder",
+    "title": "সিভি ও কভার লেটার তৈরি — ফ্রি টুল | Eduvelto",
+    "console_errors": [
+      "Loading the script 'https://ep2.adtrafficquality.google/sodar/sodar2.js' violates the following Content Security Policy directive: \"script-src 'self' 'sha256-iBN273pplYHbAxmn4kFfm8Kys5fmJrcf/+REMOiQjWA=' https://*.googleapis.com https://*.gstatic.com https://pagead2.googlesyndication.com https://*.googlesyndication.com https://googleads.g.doubleclick.net\". Note that 'script-src-elem' was not explicitly set, so 'script-src' is used as a fallback. The action has been blocked.",
+      "Uncaught (in promise) undefined"
+    ],
+    "asserts": {
+      "h1_count": {
+        "selector": "h1",
+        "count": 1,
+        "expected": 1
+      },
+      "name_input": {
+        "selector": "input",
+        "count": 13,
+        "expected": 1
+      }
+    },
+    "texts": {
+      "সিভি ও কভার লেটার তৈরি": true,
+      "প্রিভিউ": true,
+      "প্রিন্ট": true
+    },
+    "screenshot": "opportunity-hub-preview-checks/desktop-cv-builder.png"
+  },
+  "desktop/guide-interview": {
+    "url": "https://eduvelto--opportunity-hub-ywcto941.web.app/opportunities/interview-prep",
+    "title": "ইন্টারভিউ প্রস্তুতি — সাধারণ প্রশ্ন ও STAR পদ্ধতি | Eduvelto",
+    "console_errors": [
+      "Loading the script 'https://ep2.adtrafficquality.google/sodar/sodar2.js' violates the following Content Security Policy directive: \"script-src 'self' 'sha256-iBN273pplYHbAxmn4kFfm8Kys5fmJrcf/+REMOiQjWA=' https://*.googleapis.com https://*.gstatic.com https://pagead2.googlesyndication.com https://*.googlesyndication.com https://googleads.g.doubleclick.net\". Note that 'script-src-elem' was not explicitly set, so 'script-src' is used as a fallback. The action has been blocked.",
+      "Uncaught (in promise) undefined"
+    ],
+    "asserts": {
+      "h1_count": {
+        "selector": "h1",
+        "count": 1,
+        "expected": 1
+      }
+    },
+    "texts": {
+      "ইন্টারভিউ প্রস্তুতি": true,
+      "STAR": true,
+      "গুরুত্বপূর্ণ তথ্য": true
+    },
+    "screenshot": "opportunity-hub-preview-checks/desktop-guide-interview.png"
+  },
+  "mobile/hub": {
+    "url": "https://eduvelto--opportunity-hub-ywcto941.web.app/opportunities",
+    "title": "সুযোগ হাব — যাচাইকৃত চাকরি, স্কলারশিপ, ইন্টার্নশিপ | Eduvelto",
+    "console_errors": [
+      "Loading the script 'https://ep2.adtrafficquality.google/sodar/sodar2.js' violates the following Content Security Policy directive: \"script-src 'self' 'sha256-iBN273pplYHbAxmn4kFfm8Kys5fmJrcf/+REMOiQjWA=' https://*.googleapis.com https://*.gstatic.com https://pagead2.googlesyndication.com https://*.googlesyndication.com https://googleads.g.doubleclick.net\". Note that 'script-src-elem' was not explicitly set, so 'script-src' is used as a fallback. The action has been blocked.",
+      "Uncaught (in promise) undefined"
+    ],
+    "asserts": {
+      "h1_count": {
+        "selector": "h1",
+        "count": 1,
+        "expected": 1
+      },
+      "detail_links": {
+        "selector": "a[href^='/opportunities/bpsc'], a[href^='/opportunities/unicef'], a[href^='/opportunities/undrr'], a[href^='/opportunities/commonwealth'], a[href^='/opportunities/kaggle'], a[href^='/opportunities/google'], a[href^='/opportunities/upwork']",
+        "count": 14,
+        "expected": 7
+      },
+      "cv_builder_link": {
+        "selector": "a[href='/opportunities/cv-builder']",
+        "count": 1,
+        "expected": 1
+      },
+      "guide_links": {
+        "selector": "a[href='/opportunities/interview-prep'], a[href='/opportunities/career-guidance'], a[href='/opportunities/entrepreneurship'], a[href='/opportunities/income']",
+        "count": 4,
+        "expected": 4
+      }
+    },
+    "texts": {
+      "সুযোগ হাব": true,
+      "প্রতারণা": true,
+      "আবেদন করুন": true
+    },
+    "screenshot": "opportunity-hub-preview-checks/mobile-hub.png"
+  },
+  "mobile/detail-bpsc": {
+    "url": "https://eduvelto--opportunity-hub-ywcto941.web.app/opportunities/bpsc-non-cadre-2026",
+    "title": "বিপিএসসি নন-ক্যাডার নিয়োগ ২০২৬ — সার্কুলার (৭৮–৮২) ও (৮৩–৯৬)/২০২৬ | Eduvelto",
+    "console_errors": [
+      "Loading the script 'https://ep2.adtrafficquality.google/sodar/sodar2.js' violates the following Content Security Policy directive: \"script-src 'self' 'sha256-iBN273pplYHbAxmn4kFfm8Kys5fmJrcf/+REMOiQjWA=' https://*.googleapis.com https://*.gstatic.com https://pagead2.googlesyndication.com https://*.googlesyndication.com https://googleads.g.doubleclick.net\". Note that 'script-src-elem' was not explicitly set, so 'script-src' is used as a fallback. The action has been blocked.",
+      "Uncaught (in promise) undefined"
+    ],
+    "asserts": {
+      "h1_count": {
+        "selector": "h1",
+        "count": 1,
+        "expected": 1
+      },
+      "apply_link": {
+        "selector": "a[href='http://bpsc.teletalk.com.bd']",
+        "count": 1,
+        "expected": 1
+      },
+      "source_link": {
+        "selector": "a[href='https://www.bpsc.gov.bd']",
+        "count": 1,
+        "expected": 1
+      }
+    },
+    "texts": {
+      "যাচাইয়ের বিবরণ": true,
+      "১৩৩ বনাম ১৪৭": true,
+      "আবেদন চলছে": true
+    },
+    "screenshot": "opportunity-hub-preview-checks/mobile-detail-bpsc.png"
+  },
+  "mobile/detail-unicef": {
+    "url": "https://eduvelto--opportunity-hub-ywcto941.web.app/opportunities/unicef-writer-editor-2026",
+    "title": "রাইটার/এডিটর (কনসালট্যান্ট, রিমোট, ৫ মাস) — ইউনিসেফ বাংলাদেশ | Eduvelto",
+    "console_errors": [
+      "Loading the script 'https://ep2.adtrafficquality.google/sodar/sodar2.js' violates the following Content Security Policy directive: \"script-src 'self' 'sha256-iBN273pplYHbAxmn4kFfm8Kys5fmJrcf/+REMOiQjWA=' https://*.googleapis.com https://*.gstatic.com https://pagead2.googlesyndication.com https://*.googlesyndication.com https://googleads.g.doubleclick.net\". Note that 'script-src-elem' was not explicitly set, so 'script-src' is used as a fallback. The action has been blocked.",
+      "Uncaught (in promise) undefined"
+    ],
+    "asserts": {
+      "h1_count": {
+        "selector": "h1",
+        "count": 1,
+        "expected": 1
+      }
+    },
+    "texts": {
+      "আবেদনের সময় শেষের পথে": true,
+      "অফিসিয়াল পাতা খুলে পড়ে": true
+    },
+    "screenshot": "opportunity-hub-preview-checks/mobile-detail-unicef.png"
+  },
+  "mobile/detail-kaggle": {
+    "url": "https://eduvelto--opportunity-hub-ywcto941.web.app/opportunities/kaggle-learn",
+    "title": "Kaggle Learn — পাইথন, মেশিন লার্নিং, SQL ও আরও অনেক কিছু (বিনামূল্যে) | Eduvelto",
+    "console_errors": [
+      "Loading the script 'https://ep2.adtrafficquality.google/sodar/sodar2.js' violates the following Content Security Policy directive: \"script-src 'self' 'sha256-iBN273pplYHbAxmn4kFfm8Kys5fmJrcf/+REMOiQjWA=' https://*.googleapis.com https://*.gstatic.com https://pagead2.googlesyndication.com https://*.googlesyndication.com https://googleads.g.doubleclick.net\". Note that 'script-src-elem' was not explicitly set, so 'script-src' is used as a fallback. The action has been blocked.",
+      "Uncaught (in promise) undefined"
+    ],
+    "asserts": {
+      "h1_count": {
+        "selector": "h1",
+        "count": 1,
+        "expected": 1
+      },
+      "apply_link": {
+        "selector": "a[href='https://www.kaggle.com/learn']",
+        "count": 2,
+        "expected": 1
+      }
+    },
+    "texts": {
+      "সবসময় খোলা": true
+    },
+    "screenshot": "opportunity-hub-preview-checks/mobile-detail-kaggle.png"
+  },
+  "mobile/cv-builder": {
+    "url": "https://eduvelto--opportunity-hub-ywcto941.web.app/opportunities/cv-builder",
+    "title": "সিভি ও কভার লেটার তৈরি — ফ্রি টুল | Eduvelto",
+    "console_errors": [
+      "Loading the script 'https://ep2.adtrafficquality.google/sodar/sodar2.js' violates the following Content Security Policy directive: \"script-src 'self' 'sha256-iBN273pplYHbAxmn4kFfm8Kys5fmJrcf/+REMOiQjWA=' https://*.googleapis.com https://*.gstatic.com https://pagead2.googlesyndication.com https://*.googlesyndication.com https://googleads.g.doubleclick.net\". Note that 'script-src-elem' was not explicitly set, so 'script-src' is used as a fallback. The action has been blocked.",
+      "Uncaught (in promise) undefined"
+    ],
+    "asserts": {
+      "h1_count": {
+        "selector": "h1",
+        "count": 1,
+        "expected": 1
+      },
+      "name_input": {
+        "selector": "input",
+        "count": 13,
+        "expected": 1
+      }
+    },
+    "texts": {
+      "সিভি ও কভার লেটার তৈরি": true,
+      "প্রিভিউ": true,
+      "প্রিন্ট": true
+    },
+    "screenshot": "opportunity-hub-preview-checks/mobile-cv-builder.png"
+  },
+  "mobile/guide-interview": {
+    "url": "https://eduvelto--opportunity-hub-ywcto941.web.app/opportunities/interview-prep",
+    "title": "ইন্টারভিউ প্রস্তুতি — সাধারণ প্রশ্ন ও STAR পদ্ধতি | Eduvelto",
+    "console_errors": [
+      "Loading the script 'https://ep2.adtrafficquality.google/sodar/sodar2.js' violates the following Content Security Policy directive: \"script-src 'self' 'sha256-iBN273pplYHbAxmn4kFfm8Kys5fmJrcf/+REMOiQjWA=' https://*.googleapis.com https://*.gstatic.com https://pagead2.googlesyndication.com https://*.googlesyndication.com https://googleads.g.doubleclick.net\". Note that 'script-src-elem' was not explicitly set, so 'script-src' is used as a fallback. The action has been blocked.",
+      "Uncaught (in promise) undefined"
+    ],
+    "asserts": {
+      "h1_count": {
+        "selector": "h1",
+        "count": 1,
+        "expected": 1
+      }
+    },
+    "texts": {
+      "ইন্টারভিউ প্রস্তুতি": true,
+      "STAR": true,
+      "গুরুত্বপূর্ণ তথ্য": true
+    },
+    "screenshot": "opportunity-hub-preview-checks/mobile-guide-interview.png"
+  }
+}

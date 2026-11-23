@@ -51,6 +51,10 @@ const JobCircularDetailPage = lazy(() => import('./pages/JobCircularDetailPage')
 const JobCalendarPage = lazy(() => import('./pages/JobCalendarPage'));
 const JobNotificationsPage = lazy(() => import('./pages/JobNotificationsPage'));
 const JobGuidePage = lazy(() => import('./pages/JobGuidePage'));
+const OpportunityHubPage = lazy(() => import('./pages/OpportunityHubPage'));
+const OpportunityDetailPage = lazy(() => import('./pages/OpportunityDetailPage'));
+const OpportunityCvBuilderPage = lazy(() => import('./pages/OpportunityCvBuilderPage'));
+const OpportunityGuidePage = lazy(() => import('./pages/OpportunityGuidePage'));
 const RegisterPage = lazy(() => import('./pages/RegisterPage'));
 const RoleSetupPage = lazy(() => import('./pages/RoleSetupPage'));
 const LoginPage = lazy(() => import('./pages/LoginPage'));
@@ -317,6 +321,17 @@ export default function App() {
         <Route path="/jobs/viva" element={<JobGuidePage kind="viva" />} />
         <Route path="/jobs/career" element={<JobGuidePage kind="career" />} />
         <Route path="/jobs/cv" element={<JobGuidePage kind="cv" />} />
+        {/* Global Opportunity Hub (directive §3B): static guide
+            routes MUST come before /opportunities/:oppId —
+            otherwise '/opportunities/cv-builder' matches
+            :oppId='cv-builder'. */}
+        <Route path="/opportunities" element={<OpportunityHubPage />} />
+        <Route path="/opportunities/cv-builder" element={<OpportunityCvBuilderPage />} />
+        <Route path="/opportunities/interview-prep" element={<OpportunityGuidePage kind="interview-prep" />} />
+        <Route path="/opportunities/career-guidance" element={<OpportunityGuidePage kind="career-guidance" />} />
+        <Route path="/opportunities/entrepreneurship" element={<OpportunityGuidePage kind="entrepreneurship" />} />
+        <Route path="/opportunities/income" element={<OpportunityGuidePage kind="income" />} />
+        <Route path="/opportunities/:oppId" element={<OpportunityDetailPage />} />
         <Route path="/jobs/:exam/:tab" element={<JobHubPage />} />
         <Route path="/jobs/:exam" element={<JobHubPage />} />
         <Route path="/register" element={<RegisterPage />} />

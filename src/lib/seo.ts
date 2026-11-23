@@ -39,6 +39,8 @@ import { JOB_EXAMS, JOB_TABS, jobExamBySlug, jobPatternStatus, jobRulesConfig } 
 import { jobSubjectById } from './jobContent';
 import { nuSyllabusSubjectBySlug } from './nuSyllabus';
 import { NU_GROUPS } from './nuProfile';
+import { OPPORTUNITY_SEED } from './opportunitySeed';
+import { isPublished } from './opportunities';
 
 export type SeoData = {
   title: string;
@@ -243,6 +245,42 @@ const STATIC_ROUTES: Record<string, RouteSeoEntry> = {
     description:
       'চাকরির বিজ্ঞপ্তি — যাচাইকৃত সার্কুলার, আবেদনের তারিখ ও অফিসিয়াল উৎস। নতুন বিজ্ঞপ্তি যাচাই হলে এখানে দেখাবে; অযাচাইকৃত বা অনুমান করা তারিখ কখনো দেখানো হয় না। Eduvelto।',
     crumb: 'বিজ্ঞপ্তি',
+  },
+  '/opportunities': {
+    title: 'সুযোগ হাব — যাচাইকৃত চাকরি, স্কলারশিপ, ইন্টার্নশিপ | Eduvelto',
+    description:
+      'যাচাইকৃত সুযোগ — চাকরি, রিমোট কাজ, ফ্রিল্যান্সিং, ইন্টার্নশিপ, স্কলারশিপ ও বিনামূল্যে দক্ষতা উন্নয়ন। প্রতিটি সুযোগ অফিসিয়াল উৎস থেকে যাচাই করা; শেষ তারিখ না জানা থাকলে অনুমান করে দেখানো হয় না। Eduvelto।',
+    crumb: 'সুযোগ হাব',
+  },
+  '/opportunities/cv-builder': {
+    title: 'সিভি ও কভার লেটার তৈরি — ফ্রি টুল | Eduvelto',
+    description:
+      'ফরম পূরণ করে প্রিন্ট করার মতো সিভি ও কভার লেটার তৈরি করুন — সম্পূর্ণ ফ্রি, আপনার তথ্য ব্রাউজারের বাইরে যায় না, কোথাও সংরক্ষণ হয় না। Eduvelto।',
+    crumb: 'সিভি তৈরি',
+  },
+  '/opportunities/interview-prep': {
+    title: 'ইন্টারভিউ প্রস্তুতি — সাধারণ প্রশ্ন ও STAR পদ্ধতি | Eduvelto',
+    description:
+      'ইন্টারভিউ প্রস্তুতির সাধারণ নির্দেশনা — আগের প্রস্তুতি, সাধারণ প্রশ্ন, STAR পদ্ধতিতে উত্তর ও ইন্টারভিউর দিনের চেকলিস্ট। কোনো চাকরির নিশ্চয়তা নয়। Eduvelto।',
+    crumb: 'ইন্টারভিউ প্রস্তুতি',
+  },
+  '/opportunities/career-guidance': {
+    title: 'ক্যারিয়ার গাইড — পেশা বেছে নেওয়া ও দক্ষতার পথ | Eduvelto',
+    description:
+      'ক্যারিয়ার গাইড — পেশা বেছে নেওয়া, দক্ষতার পথ, সরকারি–বেসরকারি–ফ্রিল্যান্সিংয়ের সৎ তুলনা। সাধারণ নির্দেশনা, কোনো অফিসিয়াল সিলেবাস নয়। Eduvelto।',
+    crumb: 'ক্যারিয়ার গাইড',
+  },
+  '/opportunities/entrepreneurship': {
+    title: 'উদ্যোক্তা গাইড — আইডিয়া যাচাই ও হিসাব রাখা | Eduvelto',
+    description:
+      'উদ্যোক্তা গাইড — আইডিয়া যাচাই, ছোট করে শুরু, লাভ-ক্ষতির হিসাব ও অনলাইনে সৎভাবে বিক্রি। সাধারণ নির্দেশনা, আয়ের কোনো প্রতিশ্রুতি নয়। Eduvelto।',
+    crumb: 'উদ্যোক্তা গাইড',
+  },
+  '/opportunities/income': {
+    title: 'বৈধ অনলাইন আয় — বাস্তব পথ ও প্রতারণা চেনা | Eduvelto',
+    description:
+      'বৈধ অনলাইন আয় — ফ্রিল্যান্সিং, ডিজিটাল পণ্য, কনটেন্ট ও অ্যাফিলিয়েটের বাস্তব চিত্র, প্রতারণা চেনার উপায় ও শুরুর ধাপ। আয়ের কোনো প্রতিশ্রুতি নয়। Eduvelto।',
+    crumb: 'বৈধ অনলাইন আয়',
   },
   '/jobs/calendar': {
     title: 'চাকরির ক্যালেন্ডার — বিজ্ঞপ্তি ও পরীক্ষার তারিখ | Eduvelto',
@@ -583,6 +621,29 @@ export function resolveRouteSeo(pathname: string): SeoData | null {
       crumbs = ['চাকরি প্রস্তুতি', entry.crumb];
       const tabBn = tab ? JOB_TABS.find((t) => t.slug === tab)?.bn : undefined;
       if (tabBn) crumbs.push(tabBn);
+    }
+  }
+  if (!entry) {
+    // /opportunities/:oppId — ONLY the verified seed listings get
+    // real SEO (23 Nov 2026, Global Opportunity Hub). The lookup is
+    // synchronous over the static seed: a Firestore-only or
+    // unpublished doc resolves to null here and falls back to the
+    // noindex home SEO — an unknown/unpublished detail must never
+    // look indexable.
+    const oppMatch = path.match(/^\/opportunities\/([^/]+)$/);
+    if (oppMatch) {
+      const seed = OPPORTUNITY_SEED.find((o) => o.docId === oppMatch[1]);
+      if (seed && isPublished(seed)) {
+        const desc = seed.descriptionBn.length > 150 ? `${seed.descriptionBn.slice(0, 147)}…` : seed.descriptionBn;
+        entry = {
+          title: `${seed.titleBn} | Eduvelto`,
+          description: `${desc} — অফিসিয়াল উৎসে যাচাইকৃত। Eduvelto।`,
+          crumb: seed.titleBn,
+        };
+        crumbs = ['সুযোগ হাব', seed.titleBn];
+      } else {
+        return null;
+      }
     }
   }
   if (!entry && path.startsWith('/admissions/national-university/')) {

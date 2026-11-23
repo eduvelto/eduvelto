@@ -156,6 +156,19 @@ const SITEMAP_URLS = [
   '/health/doctors',
   '/health/hospitals',
   '/ai-teacher',
+  '/opportunities',
+  '/opportunities/cv-builder',
+  '/opportunities/interview-prep',
+  '/opportunities/career-guidance',
+  '/opportunities/entrepreneurship',
+  '/opportunities/income',
+  '/opportunities/bpsc-non-cadre-2026',
+  '/opportunities/unicef-writer-editor-2026',
+  '/opportunities/undrr-intern-pm-2026',
+  '/opportunities/commonwealth-shared-2027',
+  '/opportunities/kaggle-learn',
+  '/opportunities/google-skillshop',
+  '/opportunities/upwork',
 ];
 
 describe('resolveRouteSeo — public routes', () => {

@@ -239,6 +239,14 @@
       {
         "destination": "/index.html",
         "source": "/terms"
+      },
+      {
+        "destination": "/index.html",
+        "source": "/opportunities"
+      },
+      {
+        "destination": "/index.html",
+        "source": "/opportunities/**"
       }
     ]
   }
