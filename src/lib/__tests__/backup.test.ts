@@ -74,7 +74,7 @@ describe('Step 18 — BACKUP_COLLECTIONS coverage drift', () => {
   it('every list entry is a real rules collection — except settings (BRT-08)', () => {
     // settings has no collection-level match: only the single-doc
     // matches /settings/features and /settings/ads exist, so it is
-    // exported doc-by-doc (see backup.ts readSettingsDocs). Any other
+    // exported doc-by-doc (see backup.ts DOC_BY_DOC). Any other
     // stale entry here is a bug, not a feature.
     const rules = rulesCollections();
     const stale = BACKUP_COLLECTIONS.filter((c) => c !== 'settings' && !rules.has(c)).sort();

@@ -56,6 +56,12 @@ import {
   type QueryDocumentSnapshot,
 } from 'firebase/firestore';
 import type { UserRole } from './profile';
+import {
+  APP_VERSION_DOC,
+  DEFAULT_DOWNLOAD_URL,
+  compareVersions,
+  isValidVersion,
+} from './appVersion';
 
 // ---------------------------------------------------------------------------
 // Types
@@ -1190,6 +1196,62 @@ export async function setFeatureFlag(
     auditEntryData(actor, value ? 'feature-enabled' : 'feature-disabled', def.labelEn, flagId, {
       before: value ? 'off' : 'on',
       after: value ? 'on' : 'off',
+    }),
+  );
+  await batch.commit();
+}
+
+// ---------------------------------------------------------------------------
+// Forced app update (owner brief 22 Nov 2026): publish a new app version
+// from the dashboard — NO code/deploy. Writes config/appVersion in ONE
+// batch with the audit entry, so a version change can never happen with
+// no audit trail. Code-level validation mirrors the Firestore rules;
+// the rules are the real enforcement.
+// ---------------------------------------------------------------------------
+
+export interface AppVersionFormValues {
+  latestVersion: string;
+  minVersion: string;
+  releaseNotes: string;
+  downloadUrl: string;
+}
+
+export async function updateAppVersionConfig(
+  db: Firestore,
+  values: AppVersionFormValues,
+): Promise<void> {
+  const latest = values.latestVersion.trim();
+  const min = values.minVersion.trim();
+  const downloadUrl = values.downloadUrl.trim() || DEFAULT_DOWNLOAD_URL;
+  if (!isValidVersion(latest) || !isValidVersion(min)) throw new Error('invalid-version');
+  if (compareVersions(min, latest) > 0) throw new Error('min-version-above-latest');
+  if (!(downloadUrl.startsWith('/') || downloadUrl.startsWith('https://'))) {
+    throw new Error('invalid-download-url');
+  }
+  const actor = getActorUid();
+  const beforeSnap = await getDoc(doc(db, 'config', APP_VERSION_DOC));
+  const beforeData = beforeSnap.exists() ? beforeSnap.data() : null;
+  const before =
+    beforeData && typeof beforeData.latestVersion === 'string'
+      ? `latest ${beforeData.latestVersion}, min ${beforeData.minVersion ?? ''}`
+      : 'not published';
+  const batch = writeBatch(db);
+  batch.set(
+    doc(db, 'config', APP_VERSION_DOC),
+    {
+      latestVersion: latest,
+      minVersion: min,
+      releaseNotes: values.releaseNotes.slice(0, 2000),
+      downloadUrl,
+      updatedAt: serverTimestamp(),
+    },
+    { merge: true },
+  );
+  batch.set(
+    doc(collection(db, 'adminActions')),
+    auditEntryData(actor, 'app-version-change', `App version published`, 'config/appVersion', {
+      before,
+      after: `latest ${latest}, min ${min}`,
     }),
   );
   await batch.commit();

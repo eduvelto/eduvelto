@@ -18,7 +18,7 @@
 |---|---|---|
 | How it reads | Firebase client SDK, as the signed-in owner | Firestore REST, with the owner CLI token |
 | Rules apply? | **Yes** — it can only read what the owner may list-read | **No** — the token bypasses the rules |
-| Collections | 76 (see §2) | 78 (the 76 + `follows` + `directMessages`) |
+| Collections | 82 (see §2) | 84 (the 82 + `follows` + `directMessages`) |
 | Format | `BackupFile` JSON, `BACKUP_VERSION = 1` | Identical format (parity-tested, Step 18) |
 | Who runs it | The owner, in the browser | Muse, with the owner's approval, from the sandbox |
 | Quota cost | Same reads as the script (~1 read/doc + preflight counts) | Same |
@@ -61,9 +61,12 @@ under the rules — Step 18 findings F-3). If you need a file that holds
 
 ### 1.3 What is covered (Step 18 inventory)
 
-- **76 collections** in `BACKUP_COLLECTIONS` (`src/lib/backup.ts`) — the
+- **82 collections** in `BACKUP_COLLECTIONS` (`src/lib/backup.ts`) — the
   in-app export covers these. Proven exportable by the owner in the
-  emulator (Step 18 coverage test).
+  emulator (Step 18 coverage test; 82nd collection `config` joined at
+  the forced-app-update merge, 23 Nov 2026). `settings` (features +
+  ads) and `config` (`appVersion`) are read doc-by-doc — their rules
+  allow no list/count — the rest are read paginated.
 - **+2 collections** only in the scripted export: `follows`,
   `directMessages` (client-unreadable, see §1.1).
 - **6 deliberately excluded from the client list**
@@ -74,11 +77,11 @@ under the rules — Step 18 findings F-3). If you need a file that holds
   `directMessages` and `follows` (the owner cannot list-read them —
   the exclusion means "the *client* cannot export them", not "nobody
   can": the scripted export and the console export still cover both).
-- **5 pending** (`BACKUP_KNOWN_PENDING`): `jobReports`,
-  `jobCorrections`, `circularHistory`, `approvedDomains` (Step 15
-  admin — arrive when that branch merges), `counters` (public user IDs
-  — arrives with the 23 Nov 14:30 cron merge; holds the ID counter and
-  MUST join `BACKUP_COLLECTIONS` at merge time).
+- **0 pending** (`BACKUP_KNOWN_PENDING` is empty — kept as a place to
+  record future pending collections): the 5 staging-pending entries
+  (`jobReports`, `jobCorrections`, `circularHistory`, `approvedDomains`,
+  `counters`) all joined `BACKUP_COLLECTIONS` at the Step 18 merge, and
+  `config` joined at the forced-app-update merge (23 Nov 2026).
 - **17 subcollections are NEVER in a JSON backup** (by design):
   `users/{uid}/quizAttempts`, `users/{uid}/jobAttempts`,
   `users/{uid}/jobSessions`, `users/{uid}/jobExamAttempts`,
@@ -240,11 +243,14 @@ Verified by: <counts + spot-checks, §6>
    the existing artifact locally.
 2. **Build + emulator-test the Admin-SDK restore script** (§5.4) —
    the missing piece for deleted published content.
-3. **`counters` merge-time action:** when the public-ID branch merges
+3. ~~**`counters` merge-time action:** when the public-ID branch merges
    (23 Nov 14:30 cron), add `counters` to `BACKUP_COLLECTIONS` and
    remove it from `BACKUP_KNOWN_PENDING`, or the Step 18 drift test
    goes red. Same for the four Step 15 collections when that branch
-   merges.
+   merges.~~ **DONE at the Step 18 merge** (counters + the four Step 15
+   collections joined `BACKUP_COLLECTIONS`; `config` joined at the
+   forced-app-update merge, 23 Nov 2026; `BACKUP_KNOWN_PENDING` is
+   empty).
 4. **F-1 `friendlyAdminError`:** match on `error.code`, not
    `error.message` — today a real quota/permission failure shows the
    owner the generic "কিছু একটা ভুল হয়েছে।" instead of the specific

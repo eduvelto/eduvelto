@@ -68,6 +68,7 @@ const QUICK_ACTIONS: Array<{
   { id: 'add-job', bn: 'চাকরির বিজ্ঞপ্তি যোগ করুন', en: 'Add Job Circular', bg: '#FBF3E2', fg: '#8A6100', glyph: '▣' },
   { id: 'add-university', bn: 'বিশ্ববিদ্যালয় যোগ করুন', en: 'Add University', bg: '#F1EAFB', fg: '#6B4FA1', glyph: '▦' },
   { id: 'manage-users', to: '/admin/users', bn: 'ব্যবহারকারী পরিচালনা', en: 'Manage Users', bg: '#E3F2F0', fg: '#12766E', glyph: '◉' },
+  { id: 'app-version', to: '/admin/app-version', bn: 'অ্যাপ আপডেট (ভার্সন)', en: 'App Update (Version)', bg: '#E3F2F0', fg: '#12766E', glyph: '⇪' },
   { id: 'view-reports', to: '/admin/audit', bn: 'রিপোর্ট দেখুন', en: 'View Reports', bg: '#E7F6E7', fg: '#2E7D32', glyph: '↗' },
   { id: 'update-content', bn: 'কনটেন্ট হালনাগাদ', en: 'Update Content', bg: '#F1EAFB', fg: '#6B4FA1', glyph: '↻' },
   { id: 'settings', to: '/admin/settings', bn: 'সেটিংস', en: 'Settings', bg: '#FBF3E2', fg: '#8A6100', glyph: '⚙' },

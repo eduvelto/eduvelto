@@ -139,6 +139,8 @@ service cloud.firestore {
     function ownCreate() { return signedIn() && callerActive() && request.resource.data.userId == uid(); }
     function ownExisting() { return signedIn() && callerActive() && resource.data.userId == uid(); }
     function reviewKeys() { return ['status', 'reviewStatus', 'verifiedBy', 'verifiedAt', 'updatedAt']; }
+    // Semver-ish version: digits only, "x", "x.y" or "x.y.z".
+    function isVersionStr(v) { return v is string && v.matches('^[0-9]+(\\.[0-9]+){0,2}$'); }
     function isDraftStatus(s) { return s in ['Not Started', 'In Progress', 'Under Review']; }
     function isPublished(d) { return d.get('reviewStatus', '') == 'Published'; }
 
@@ -4857,6 +4859,28 @@ service cloud.firestore {
         && validJobExamAuditLog(request.resource.data, userId);
       allow update: if false;
       allow delete: if isAdmin();
+    }
+
+    // ---------- config/appVersion (forced app update, 22 Nov 2026) ----------
+    // Public read: the version gate runs on app load, BEFORE sign-in, so
+    // even a signed-out visitor must be able to read it. Writes are
+    // admin/owner only, appVersion doc only, fixed key set, semver-ish
+    // versions, downloadUrl a site path or https URL, updatedAt a real
+    // timestamp. Any other config docId is denied by the docId check.
+    match /config/{docId} {
+      allow read: if docId == 'appVersion';
+      allow create, update: if isAdmin() && docId == 'appVersion'
+        && request.resource.data.keys().toSet().hasOnly(['latestVersion', 'minVersion', 'releaseNotes', 'downloadUrl', 'updatedAt'])
+        && isVersionStr(request.resource.data.latestVersion)
+        && isVersionStr(request.resource.data.minVersion)
+        && request.resource.data.releaseNotes is string
+        && request.resource.data.releaseNotes.size() <= 2000
+        && request.resource.data.downloadUrl is string
+        && request.resource.data.downloadUrl.size() > 0
+        && request.resource.data.downloadUrl.size() <= 500
+        && request.resource.data.downloadUrl.matches('^(/|https://).*$')
+        && request.resource.data.updatedAt is timestamp;
+      allow delete: if false;
     }
 
     // ---------- everything else: denied ----------

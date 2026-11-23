@@ -35,11 +35,15 @@
  *
  * WHAT IS IN THE FILE — and what is NOT:
  *   - Included: every top-level collection the owner can list-read
- *     (81 — see BACKUP_COLLECTIONS; 76 in Step 18 staging + 5 that
+ *     (82 — see BACKUP_COLLECTIONS; 76 in Step 18 staging + 5 that
  *     joined at the Step 18 merge: counters + the four Step 15
- *     admin collections).
+ *     admin collections + `config`, which joined at the forced-app-update
+ *     merge, 23 Nov 2026).
  *     `settings` is read doc-by-doc (features + ads) because the rules
- *     have no collection-level match for it (Step 18, F-2).
+ *     have no collection-level match for it (Step 18, F-2). `config` is
+ *     read doc-by-doc too (appVersion): its read rule is
+ *     `docId == 'appVersion'`, so a list/count over the collection is
+ *     denied the same way (unbound wildcard) — see DOC_BY_DOC below.
  *   - NOT included: `follows` + `directMessages` — the owner cannot
  *     list-read them under the rules, so only the scripted/REST export
  *     and the console export see them (Step 18, F-3 + exclusions).
@@ -216,6 +220,12 @@ export const BACKUP_COLLECTIONS: string[] = [
   'contactMessages',
   'doctors',
   'supportMessages',
+  // Added 23 Nov 2026 (forced app update: the single config/appVersion
+  // doc — latest/min version — must be in every backup, or a restore
+  // would silently drop the forced-update gate. Read doc-by-doc, like
+  // settings: the read rule is `docId == 'appVersion'`, so a list/count
+  // over the collection is denied — see DOC_BY_DOC below.)
+  'config',
 ];
 
 /**
@@ -326,10 +336,28 @@ function reviveValue(v: unknown): unknown {
  */
 export const SETTINGS_DOC_IDS: string[] = ['features', 'ads'];
 
-async function readSettingsDocs(db: Firestore): Promise<DocumentData[]> {
+/**
+ * config is the same shape (forced app update, 23 Nov 2026): the rules
+ * have one match, /config/{docId}, with `allow read: if
+ * docId == 'appVersion'`. In a list/count query the {docId} wildcard is
+ * unbound (null), so `null == 'appVersion'` errors and the whole
+ * list/count is denied — the exact failure the old combined counters
+ * `allow read` had (Step 18, Option A). The single doc is therefore
+ * read by ID, like settings. Only `appVersion` can ever exist — the
+ * create/update rules restrict writes to that docId.
+ */
+export const CONFIG_DOC_IDS: string[] = ['appVersion'];
+
+/** Collections that must be read doc-by-doc (no list/count allowed under the rules). */
+const DOC_BY_DOC: Record<string, string[]> = {
+  settings: SETTINGS_DOC_IDS,
+  config: CONFIG_DOC_IDS,
+};
+
+async function readDocsById(db: Firestore, path: string, ids: string[]): Promise<DocumentData[]> {
   const docs: DocumentData[] = [];
-  for (const id of SETTINGS_DOC_IDS) {
-    const snap = await getDoc(doc(db, 'settings', id));
+  for (const id of ids) {
+    const snap = await getDoc(doc(db, path, id));
     if (!snap.exists()) continue;
     const data: Record<string, unknown> = {};
     for (const [k, v] of Object.entries(snap.data())) data[k] = serialiseValue(v);
@@ -386,10 +414,11 @@ export async function getBackupPreflight(
   const perCollection: Array<{ path: string; count: number }> = [];
   let total = 0;
   for (const path of collections) {
-    if (path === 'settings') {
-      // No collection-level match exists for settings (F-2): count by
-      // reading the known docs, never by a denied count query.
-      const docs = await readSettingsDocs(db);
+    const docIds = DOC_BY_DOC[path];
+    if (docIds) {
+      // No list/count allowed for this collection (see DOC_BY_DOC):
+      // count by reading the known docs, never by a denied count query.
+      const docs = await readDocsById(db, path, docIds);
       perCollection.push({ path, count: docs.length });
       total += docs.length;
       continue;
@@ -413,14 +442,15 @@ export async function buildBackup(
   const data: Record<string, DocumentData[]> = {};
   const counts: Record<string, number> = {};
   for (const path of collections) {
+    const docIds = DOC_BY_DOC[path];
     const docs =
-      path === 'settings'
-        ? await readSettingsDocs(db)
+      docIds !== undefined
+        ? await readDocsById(db, path, docIds)
         : await readCollectionPaged(db, path, (n) => {
             recordReads(n);
             onProgress?.(path, n);
           });
-    if (path === 'settings') recordReads(docs.length);
+    if (docIds !== undefined) recordReads(docs.length);
     data[path] = docs;
     counts[path] = docs.length;
   }

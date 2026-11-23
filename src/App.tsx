@@ -13,6 +13,12 @@ import BottomNav from './components/BottomNav';
 import HeaderNav from './components/HeaderNav';
 import Footer from './components/Footer';
 import InstallAppPrompt from './components/InstallAppPrompt';
+import {
+  AppVersionBlockedScreen,
+  AppVersionUpdateBar,
+  isGateExemptPath,
+  useAppVersionGate,
+} from './components/AppVersionGate';
 import { AdminGuard } from './components/AdminGuard';
 import { RouteSeo } from './components/RouteSeo';
 import { NuQuestionWorkbenchGuard } from './components/NuQuestionWorkbenchGuard';
@@ -99,6 +105,8 @@ const CeoContentPage = lazy(() => import('./pages/CeoContentPage'));
 const CeoGrowthPage = lazy(() => import('./pages/CeoGrowthPage'));
 const CeoSettingsPage = lazy(() => import('./pages/CeoSettingsPage'));
 const CeoApprovalsPage = lazy(() => import('./pages/CeoApprovalsPage'));
+const AdminAppVersionPage = lazy(() => import('./pages/AdminAppVersionPage'));
+const InstallPage = lazy(() => import('./pages/InstallPage'));
 const AiTeacherPage = lazy(() => import('./pages/AiTeacherPage'));
 const ExamPage = lazy(() => import('./pages/ExamPage'));
 const RoutinePage = lazy(() => import('./pages/RoutinePage'));
@@ -157,6 +165,17 @@ export default function App() {
   const { t } = useLanguage();
   const { profile, suspended, signOut } = useAuth();
   const location = useLocation();
+  // FORCED APP UPDATE (owner brief 22 Nov 2026): on every app load the
+  // gate fetches config/appVersion from the server (no cache). If this
+  // bundled version is below minVersion, the WHOLE shell is replaced by
+  // the block screen — no header, nav, footer or routes are usable.
+  // /install, /login and /admin/* are exempt (see AppVersionGate), so the
+  // owner can always reach the fix. While 'checking'/'unknown' (offline)
+  // the app renders normally — fail open, never block on a slow check.
+  const { status: appVersionStatus, config: appVersionConfig } = useAppVersionGate();
+  if (appVersionStatus === 'blocked' && !isGateExemptPath(location.pathname)) {
+    return <AppVersionBlockedScreen config={appVersionConfig} />;
+  }
   // Persistent bottom banner (ads placement plan 22 Nov 2026 — see
   // team/ads-placement-plan-2026-11-22.md and lib/adsConfig.ts).
   // getBannerPlacementForPath() decides the variant per route:
@@ -224,6 +243,9 @@ export default function App() {
       ) : (
         <>
         <InstallAppPrompt />
+        {appVersionStatus === 'update-available' ? (
+          <AppVersionUpdateBar config={appVersionConfig} />
+        ) : null}
         <Suspense fallback={<main style={{ maxWidth: 720, margin: '0 auto', padding: '24px 16px' }}><p>{t(strings.common.loading)}</p></main>}>
         <Routes>
         <Route path="/" element={<HomePage />} />
@@ -325,6 +347,7 @@ export default function App() {
           <Route path="features" element={<AdminFeaturesPage />} />
           <Route path="backup" element={<AdminBackupPage />} />
           <Route path="audit" element={<AdminAuditPage />} />
+          <Route path="app-version" element={<AdminAppVersionPage />} />
           <Route path="jobs" element={<AdminJobsPage />} />
           <Route path="jobs/circulars" element={<AdminJobCircularsPage />} />
           <Route path="jobs/circulars/new" element={<AdminJobCircularEditPage />} />
@@ -355,6 +378,7 @@ export default function App() {
           <Route path="settings" element={<CeoSettingsPage />} />
           <Route path="approvals" element={<CeoApprovalsPage />} />
         </Route>
+        <Route path="/install" element={<InstallPage />} />
         <Route path="/ai-teacher" element={<AiTeacherPage />} />
         <Route path="/exam" element={<ExamPage />} />
         <Route path="/routine" element={<RoutinePage />} />

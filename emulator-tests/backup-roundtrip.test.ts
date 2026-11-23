@@ -100,6 +100,7 @@ async function seedOnePerCollection(): Promise<void> {
     const batch = writeBatch(db);
     for (const path of BACKUP_COLLECTIONS) {
       if (path === 'settings') continue; // single-doc matches — see below
+      if (path === 'config') continue; // single-doc match — see below
       if (path === 'counters') {
         // The rules let anyone list-read ONLY counters/publicUserIds
         // (counterId == 'publicUserIds'); a seed doc under any other id
@@ -112,6 +113,16 @@ async function seedOnePerCollection(): Promise<void> {
     }
     batch.set(doc(db, 'settings', 'features'), { 'ai-teacher': false, updatedAt: TS(0) });
     batch.set(doc(db, 'settings', 'ads'), { 'in-feed': true, 'in-feed-2': true });
+    // config/appVersion is the only config doc that can ever exist
+    // (writes are restricted to that docId) — seed the real doc, like
+    // counters/publicUserIds above.
+    batch.set(doc(db, 'config', 'appVersion'), {
+      latestVersion: '1.0.0',
+      minVersion: '1.0.0',
+      releaseNotes: '',
+      downloadUrl: '/install',
+      updatedAt: TS(0),
+    });
     await batch.commit();
   });
 }
@@ -217,17 +228,41 @@ describe('Step 18 — backup / recovery (emulator)', () => {
     await assertSucceeds(getDoc(doc(db, 'settings', 'ads')));
   });
 
+  it('config: a collection list/count query is denied for the owner, single-doc read works (forced app update, same shape as F-2)', async () => {
+    await asAdmin(async (db) => {
+      await setDoc(doc(db, 'config', 'appVersion'), {
+        latestVersion: '1.0.0',
+        minVersion: '1.0.0',
+        releaseNotes: '',
+        downloadUrl: '/install',
+        updatedAt: TS(0),
+      });
+    });
+    const db = ownerDb();
+    // The /config/{docId} read rule is `docId == 'appVersion'` — in a
+    // list/count query the wildcard is unbound (null), so the whole
+    // query is denied, exactly like the old combined counters rule
+    // (Step 18, Option A). backup.ts therefore reads config doc-by-doc.
+    await assertFails(getDocs(collection(db, 'config')));
+    await assertFails(getCountFromServer(collection(db, 'config')));
+    // The single-doc read the rules DO allow keeps working.
+    const snap = await assertSucceeds(getDoc(doc(db, 'config', 'appVersion')));
+    expect(snap.exists()).toBe(true);
+    expect(snap.data()?.latestVersion).toBe('1.0.0');
+  });
+
   it('owner can export every BACKUP_COLLECTIONS entry — coverage proof (BRT-01)', async () => {
     await seedOnePerCollection();
     const db = ownerDb();
     const preflight = await getBackupPreflight(db);
-    // 80 collections x 1 doc (81 minus settings) + users x 3 (owner +
-    // student + the coverage seed doc) + settings x 2 (features + ads)
-    // = 84 docs. (Staging: 79 — the list grew by 5 at the merge:
-    // counters + the four Step 15 admin collections.)
-    expect(preflight.total).toBe(84);
+    // 80 collections x 1 doc (82 minus settings minus config) + users
+    // x 3 (owner + student + the coverage seed doc) + settings x 2
+    // (features + ads) + config x 1 (appVersion) = 85 docs.
+    // (Step 18 merge: 84 — the list grew by 1 at the forced-app-update
+    // merge: config.)
+    expect(preflight.total).toBe(85);
     expect(preflight.perCollection).toHaveLength(BACKUP_COLLECTIONS.length);
-    expect(preflight.readsPercent).toBeCloseTo(84 / 500, 5);
+    expect(preflight.readsPercent).toBeCloseTo(85 / 500, 5);
     const backup = await buildBackup(db, OWNER_UID);
     expect(validateBackup(backup).ok).toBe(true);
     expect(Object.keys(backup.data).sort()).toEqual([...BACKUP_COLLECTIONS].sort());
