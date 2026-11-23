@@ -10,6 +10,7 @@ import {
 } from './lib/adsConfig';
 import AdSlot from './components/AdSlot';
 import BottomNav from './components/BottomNav';
+import GreetingBar from './components/GreetingBar';
 import HeaderNav from './components/HeaderNav';
 import Footer from './components/Footer';
 import InstallAppPrompt from './components/InstallAppPrompt';
@@ -213,6 +214,12 @@ export default function App() {
           section dropdowns + search + dark-mode (Coming Soon) + auth.
           See components/HeaderNav.tsx. Hidden on /admin* and /ceo* —
           those panels render their own shell. */}
+      {/* Premium Islamic Greeting Bar (23 Nov 2026): permanent brand
+          signature at the very top of the public site, in normal flow
+          above the header — never a fixed overlay, so it never covers
+          content. Hidden on /admin* and /ceo* like HeaderNav — those
+          panels render their own shell. */}
+      {isAdminShell ? null : <GreetingBar />}
       {isAdminShell ? null : <HeaderNav />}
       {/* Route-level SEO (22 Nov 2026, feature/seo-visibility): title,
           meta description, Open Graph, canonical + JSON-LD per public
