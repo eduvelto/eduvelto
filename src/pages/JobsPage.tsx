@@ -37,7 +37,7 @@ export default function JobsPage() {
         style={{ background: '#12766E' }}
         aria-label={t({ bn: 'চাকরির প্রস্তুতি', en: 'Job Preparation' })}
       >
-        <h2
+        <h1
           style={{
             fontFamily: "'Poppins','Hind Siliguri',system-ui,sans-serif",
             fontSize: 26,
@@ -47,7 +47,7 @@ export default function JobsPage() {
           }}
         >
           {t({ bn: 'চাকরির প্রস্তুতি — এক জায়গায়', en: 'Job Preparation — in one place' })}
-        </h2>
+        </h1>
         <p style={{ margin: 0, color: 'rgba(255,255,255,0.92)', fontSize: 15, lineHeight: 1.7 }}>
           {t({
             bn: 'চাকরির পরীক্ষার সিলেবাস, MCQ ব্যাংক, মক টেস্ট, বিগত প্রশ্ন ও ভাইভা প্রস্তুতি — সব এক জায়গায় থাকবে। কনটেন্ট যাচাইকৃত শিক্ষকের যাচাইয়ের পর প্রকাশিত হবে।',
@@ -98,7 +98,7 @@ export default function JobsPage() {
       {/* Step 16 — viva / career / CV reading pages (reading material
           only; no quiz, mock, scoring or simulator). */}
       <Reveal>
-        <h3 className="ev-section-h2">{t({ bn: 'ভাইভা, ক্যারিয়ার ও CV', en: 'Viva, Career & CV' })}</h3>
+        <h2 className="ev-section-h2">{t({ bn: 'ভাইভা, ক্যারিয়ার ও CV', en: 'Viva, Career & CV' })}</h2>
       </Reveal>
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))', gap: 12, marginBottom: 24 }}>
         <Reveal delayMs={0}>
@@ -156,7 +156,7 @@ export default function JobsPage() {
 
       {/* How to start — honest about the state of the section. */}
       <Reveal>
-        <h3 className="ev-section-h2">{t({ bn: 'কীভাবে শুরু করবেন', en: 'How to start' })}</h3>
+        <h2 className="ev-section-h2">{t({ bn: 'কীভাবে শুরু করবেন', en: 'How to start' })}</h2>
       </Reveal>
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))', gap: 12, marginBottom: 24 }}>
         <Reveal delayMs={0}>

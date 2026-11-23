@@ -136,7 +136,7 @@ function JobSubjectsTab({ def }: { def: JobExamDef }) {
   return (
     <>
       <Reveal>
-        <h3 className="ev-section-h2">বিষয়</h3>
+        <h2 className="ev-section-h2">বিষয়</h2>
       </Reveal>
       {source ? (
         <p style={{ color: '#68747B', margin: '0 0 16px', fontSize: 13 }}>উৎস: {source}</p>
@@ -332,7 +332,7 @@ export default function JobHubPage() {
       {/* Exam header band — colour identity + recruiting body + stages. */}
       <section className="ev-class-hero" style={{ background: def.accent }} aria-label={t({ bn: def.bn, en: def.en })}>
         <div>
-          <h2
+          <h1
             style={{
               fontFamily: "'Poppins','Hind Siliguri',system-ui,sans-serif",
               fontSize: 26,
@@ -342,7 +342,7 @@ export default function JobHubPage() {
             }}
           >
             {t({ bn: def.fullBn, en: def.fullEn })}
-          </h2>
+          </h1>
           <p style={{ margin: 0, color: 'rgba(255,255,255,0.92)', fontSize: 15 }}>
             {t({ bn: def.orgBn, en: def.orgEn })}
           </p>
@@ -469,7 +469,7 @@ export default function JobHubPage() {
                   easy questions. Each step links to its tab, which shows
                   the honest empty state until content is published. */}
               <Reveal>
-                <h3 className="ev-section-h2">{t({ bn: 'ধাপে ধাপে শুরু করুন', en: 'Start step by step' })}</h3>
+                <h2 className="ev-section-h2">{t({ bn: 'ধাপে ধাপে শুরু করুন', en: 'Start step by step' })}</h2>
               </Reveal>
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))', gap: 12, marginBottom: 20 }}>
                 <Reveal delayMs={0}>
@@ -521,7 +521,7 @@ export default function JobHubPage() {
                   show their count, unpublished show the honest
                   not-yet state. */}
               <Reveal>
-                <h3 className="ev-section-h2">{t({ bn: 'সময়ভিত্তিক প্রস্তুতি', en: 'Timed preparation' })}</h3>
+                <h2 className="ev-section-h2">{t({ bn: 'সময়ভিত্তিক প্রস্তুতি', en: 'Timed preparation' })}</h2>
               </Reveal>
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: 12, marginBottom: 20 }}>
                 <Reveal delayMs={0}>
@@ -695,7 +695,7 @@ export default function JobHubPage() {
               live since Step 16 (reading pages); the other 6 are still
               Coming Soon. */}
           <Reveal>
-            <h3 className="ev-section-h2">{t({ bn: 'প্রস্তুতির ৭টি উপাদান', en: 'The 7 elements of preparation' })}</h3>
+            <h2 className="ev-section-h2">{t({ bn: 'প্রস্তুতির ৭টি উপাদান', en: 'The 7 elements of preparation' })}</h2>
           </Reveal>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: 12, marginBottom: 20 }}>
             {JOB_ELEMENTS.map((el, i) => (

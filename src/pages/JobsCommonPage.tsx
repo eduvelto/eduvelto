@@ -117,7 +117,7 @@ export default function JobsCommonPage() {
         style={{ background: '#8A6100' }}
         aria-label={t({ bn: 'কমন প্রস্তুতি', en: 'Common Preparation' })}
       >
-        <h2
+        <h1
           style={{
             fontFamily: "'Poppins','Hind Siliguri',system-ui,sans-serif",
             fontSize: 26,
@@ -127,7 +127,7 @@ export default function JobsCommonPage() {
           }}
         >
           {t({ bn: 'কমন প্রস্তুতি — একবার পড়লেই চার পরীক্ষায় কাজে লাগবে', en: 'Common Preparation — study once, use in four exams' })}
-        </h2>
+        </h1>
         <p style={{ margin: 0, color: 'rgba(255,255,255,0.92)', fontSize: 15, lineHeight: 1.7 }}>
           {t({
             bn: 'BCS, ব্যাংক, প্রাথমিক শিক্ষক ও NTRCA — এই ৪টি পরীক্ষায় যে টপিকগুলো কমন, সেগুলোর অনুশীলন ও নিয়মিত মক টেস্ট এখানে থাকবে।',
@@ -274,7 +274,7 @@ export default function JobsCommonPage() {
 
       {/* Common topics — preliminary map, target only, 0 common-topic questions published. */}
       <Reveal>
-        <h3 className="ev-section-h2">{t({ bn: 'কমন টপিক', en: 'Common topics' })}</h3>
+        <h2 className="ev-section-h2">{t({ bn: 'কমন টপিক', en: 'Common topics' })}</h2>
       </Reveal>
       <p style={{ color: 'var(--muted-ivory)', margin: '-8px 0 14px', fontSize: 14, lineHeight: 1.7 }}>
         {t({
