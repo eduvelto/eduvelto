@@ -84,16 +84,39 @@ path is retained but disabled; no route returns it any more).
 ## Verification
 
 - Build: `npx tsc -b && npx vite build` — PASS.
-- Unit tests: `npx vitest run` — see the branch report (adsConfig +
-  AdSlot tests updated for the new policy).
-- Preview ON/OFF (Firebase preview channels, Playwright via the CONNECT
-  relay): ON = temporary master-flip + real client ID
-  `ca-pub-6571267788512484` + test-only slot, flip reverted after; OFF =
-  the committed branch. Checks: script in head, `window.adsbygoogle`,
-  pagead2 requests, `<ins>` count, placeholders, console errors (ON:
-  only the expected HTTP 400 for the fake test slot), exam page zero ad
-  slots, `/ai-teacher` and `/profile` zero slots, result page
-  bottom-banner placeholder, lesson page in-content placeholders.
+- Unit tests: `npx vitest run src` — **43 files, 843 tests, all PASS**
+  (adsConfig 22, AdSlot 6, adsenseScript 5, LessonReaderAds 4).
+  NOTE: a plain `npx vitest run` (no path) also picks up
+  `emulator-tests/` and hangs without the Firestore emulator running
+  (gRPC retries to 127.0.0.1:8080 forever) — that is the pre-existing
+  `test:rules` setup, not this branch; the rules suite needs
+  `firebase emulators:exec`. No `firestore.rules` change in this task.
+- Preview OFF (committed branch, channel `adsense-hybrid-off`):
+  https://eduvelto--adsense-hybrid-off-nj1ym0u5.web.app (expires
+  30 Nov 2026). Playwright probe `hybrid-probe.py` (evidence dir):
+  home = top-banner + bottom-banner placeholders; library = in-feed +
+  in-feed-2 + bottom-banner; exam / ai-teacher / profile = ZERO ad
+  slots; quiz result = bottom-banner placeholder only; 0 console
+  errors everywhere; 0 AdSense script, 0 `<ins>`, 0 pagead2 requests.
+- Preview ON (temporary master-flip + real client ID
+  `ca-pub-6571267788512484` + test-only slot `test-only-not-a-real-unit`,
+  flip reverted after; channel `adsense-hybrid-on`):
+  https://eduvelto--adsense-hybrid-on-rx06tgtv.web.app (expires
+  30 Nov 2026). Desktop + mobile probes agree: script in `<head>`
+  exactly once on home/library/book/quiz-result, `window.adsbygoogle`
+  loaded, 1 real `<ins>` for the bottom banner; top-banner/in-feed/
+  in-feed-2 stay labelled placeholders (no slot IDs set — by design);
+  exam / ai-teacher / profile load NO script at all (0 requests, 0
+  errors) even with the master ON — the gate holds. Console errors:
+  only the expected HTTP 400 for the fake test slot, on pages where
+  the banner rendered. Unfilled-collapse observed live: the fake-slot
+  banner disappears from the DOM after AdSense answers (book page
+  screenshot shows the footer with no banner and no empty strip;
+  `data-ad-placement` gone on library/book, timing varies per page).
+  The 1 leftover `<ins>` on collapsed pages is an Auto ads insertion
+  (Google-managed, no `data-ad-placement`), not our banner.
+- LessonReader slots are proven by `LessonReaderAds.test.tsx`
+  (renderToString) rather than the preview probe — see below.
 - Live deploy follows the verified runbook
   (`team/deploy-batch-post-cron-2026-11-23.md`): real merge in a scratch
   worktree, rebuild deploy-main BEFORE the hosting deploy, dist-freshness
@@ -109,3 +132,23 @@ path is retained but disabled; no route returns it any more).
    would sit under the chat input during the conversation.
 3. **Unfilled-collapse via MutationObserver on `data-ad-status`.**
    Standard AdSense behaviour, but worth a second pair of eyes.
+
+## Known gaps found during verification (NOT caused by this branch)
+
+- **No live chapter carries `isPreview=true`.** The guest preview
+  feature exists in code (`listPublishedChapters({ previewOnly })`,
+  ChapterPage wall), but 8 probed books all show 0 chapters for
+  guests, so no guest can read any lesson and no signed-out probe can
+  reach a LessonReader or a BookPage chapter list. BookPage
+  `in-feed`/`in-feed-2` and LessonReader `in-content`/`in-content-2`
+  therefore have no rendered-preview evidence for guests; the lesson
+  slots are proven by `LessonReaderAds.test.tsx`, the book slots by
+  code review (same AdSlot component already probe-verified on
+  /library). If the owner wants guest preview chapters, some chapter
+  per book needs `isPreview=true` set in the data (separate content
+  task — the import never sets the flag).
+- **Relay flakiness:** the CONNECT relay (127.0.0.1:18099) stalls
+  intermittently on `*.web.app` hosts (curl exit 56 / probe
+  ERR_EMPTY_RESPONSE) while raw CONNECT + TLS through the same relay
+  works — transient upstream congestion, retries succeed. If a probe
+  fails this way, retry before concluding the preview is down.
