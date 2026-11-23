@@ -5,15 +5,16 @@
 // platform for Bangladesh. It states what is collected (account +
 // learning progress), that student data is NEVER sold, the child-safety
 // and guardian rules, and that ads are non-personalised only.
-// Contact: ahmmizan23@gmail.com. Last updated 22 November 2026.
+// Contact: ahmmizan23@gmail.com. Last updated 23 November 2026.
 // NOTE: ads are NOT active on the site yet — the AdSense verification
 // script loads (index.html), but no ad unit renders until activation is
 // separately approved (Launch step 6). This policy already covers how ads
 // will work when they launch, so no policy change is needed at launch.
-// EXAM ADS (binding, owner brief 20 Nov 21:52): the persistent bottom
-// banner appears on ALL eligible pages INCLUDING exams — the old
-// "no ads during exams" wording was removed 22 Nov 2026; exam pages
-// show ONLY the very small bottom banner, never any other ad.
+// EXAM ADS (binding, Hybrid Ad Strategy — owner brief 23 Nov 2026
+// 21:52): NO ads during exams — the 22 Nov small-banner rule is
+// superseded. Ads appear only AFTER a quiz/exam ends (result page
+// banner). No ads inside AI answers or student conversations, and no
+// ads on login/register, profile or admin pages.
 
 import { PageShell } from '../components/PageShell';
 import { Card } from '../components/ui';
@@ -34,7 +35,7 @@ export default function PrivacyPage() {
   return (
     <PageShell titleBn="গোপনীয়তা নীতি" titleEn="Privacy Policy — Eduvelto" wide>
       <p style={{ color: 'var(--muted-ivory)', margin: '0 0 20px', lineHeight: 1.7 }}>
-        {t({ bn: 'সর্বশেষ হালনাগাদ: ২২ নভেম্বর ২০২৬।', en: 'Last updated: 22 November 2026.' })} Eduvelto বাংলাদেশের        শিক্ষার্থীদের জন্য একটি সম্পূর্ণ বিনামূল্যের শিক্ষা প্ল্যাটফর্ম। এই নীতিতে বলা আছে আমরা
+        {t({ bn: 'সর্বশেষ হালনাগাদ: ২৩ নভেম্বর ২০২৬।', en: 'Last updated: 23 November 2026.' })} Eduvelto বাংলাদেশের        শিক্ষার্থীদের জন্য একটি সম্পূর্ণ বিনামূল্যের শিক্ষা প্ল্যাটফর্ম। এই নীতিতে বলা আছে আমরা
         কী তথ্য সংগ্রহ করি, কেন করি, আর আপনার তথ্য কীভাবে সুরক্ষিত থাকে।
       </p>
 
@@ -113,13 +114,21 @@ export default function PrivacyPage() {
           </li>
           <li>বিজ্ঞাপনের জন্য শিক্ষার্থীদের আলাদাভাবে ট্র্যাক করা হয় না।</li>
           <li>
-            <strong>পরীক্ষার পাতায় শুধু নিচের ছোট ব্যানার:</strong> পরীক্ষা চলাকালীন নিচে
-            একটি খুব ছোট ব্যানার বিজ্ঞাপন দেখানো হয় (মোবাইলে প্রায় ৫০ পিক্সেল) — এর বেশি
-            আর কোনো বিজ্ঞাপন নয়, আর ব্যানারটি কখনো প্রশ্ন, উত্তর বা বোতাম ঢাকে না।
+            <strong>পরীক্ষা চলাকালীন কোনো বিজ্ঞাপন নয়:</strong> পরীক্ষা বা কুইজ চলার সময়
+            কোনো বিজ্ঞাপন দেখানো হয় না — প্রশ্নের মাঝখানে কখনো নয়। পরীক্ষা শেষ হওয়ার
+            পর ফলাফলের পাতায় নিচের ব্যানার বিজ্ঞাপন থাকতে পারে।
           </li>
           <li>
-            তালিকার ভেতরের বিজ্ঞাপন শুধু হোম ও লাইব্রেরির তালিকায় থাকে — পাঠ, কুইজ বা
-            পরীক্ষার ভেতরে কখনো নয়।
+            <strong>কোথায় বিজ্ঞাপন থাকে:</strong> হোমপেজে উপরের ব্যানার (হিরোর নিচে) ও
+            নিচের ব্যানার; লাইব্রেরি ও বইয়ের তালিকার ভেতরে ও শেষে; পাঠের মাঝখানে ও
+            শেষে; নিবন্ধে উপরে, মাঝখানে ও শেষে। AI শিক্ষকের উত্তরের ভেতরে, লগইন/
+            রেজিস্ট্রেশন, প্রোফাইল বা অ্যাডমিন পাতায় কোনো বিজ্ঞাপন থাকে না।
+          </li>
+          <li>
+            <strong>প্রতিটি বিজ্ঞাপন স্পষ্টভাবে চেনা যায়:</strong> বিজ্ঞাপনের উপরে
+            &ldquo;বিজ্ঞাপন&rdquo; লেখা থাকে, আর কোনো বিজ্ঞাপন ডাউনলোড/পরের ধাপের
+            বোতামের মতো দেখতে হয় না। বিজ্ঞাপন না পাওয়া গেলে জায়গাটি ফাঁকা না থেকে
+            সরে যায়।
           </li>
         </ul>
         <p style={{ margin: '10px 0 0' }}>

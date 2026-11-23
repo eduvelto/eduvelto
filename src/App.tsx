@@ -179,10 +179,15 @@ export default function App() {
   // Persistent bottom banner (ads placement plan 22 Nov 2026 — see
   // team/ads-placement-plan-2026-11-22.md and lib/adsConfig.ts).
   // getBannerPlacementForPath() decides the variant per route:
-  // - null: NO banner at all (login/register + admin pages).
-  // - 'bottom-banner-small': exam pages ONLY — max 50px high, 56px
-  //   reserved (owner rule 22 Nov 2026 10:45, "akdom cuto").
-  // - 'bottom-banner': every other page (mandatory, no off-switch).
+  // - null: NO banner at all — login/register, admin, EXAM pages
+  //   (23 Nov 2026: NO ads during exams — the 22 Nov small-banner rule
+  //   is superseded), AI Teacher pages (the whole page is a conversation
+  //   surface), and profile pages.
+  // - 'bottom-banner': every other page, INCLUDING quiz/job RESULT
+  //   pages (after the quiz ends — "quiz only AFTER the quiz ends").
+  //   Mandatory, no off-switch.
+  // - 'bottom-banner-small': RETAINED as a code path only; no route
+  //   returns it any more.
   // The banner renders nothing until AdSense is configured AND the
   // master switch is on (adsActive). While live — or while its labelled
   // preview placeholder shows on a preview host — the page reserves the

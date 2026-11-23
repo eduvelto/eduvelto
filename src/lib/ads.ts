@@ -23,33 +23,39 @@
 //   "this browser only" until then. The bottom banner is NEVER a
 //   toggle: it is mandatory (owner brief 20 Nov 21:52) and
 //   adsEnabled('bottom-banner') below ignores any toggle value.
-// - PAGE POLICY lives in ./adsConfig.ts (owner brief 22 Nov 10:43):
-//   which page gets which banner (incl. the exam SMALL banner,
-//   owner 22 Nov 10:45) and which in-page slots each page type may
+// - PAGE POLICY lives in ./adsConfig.ts (owner brief 22 Nov 10:43,
+//   superseded 23 Nov 21:52 by the Hybrid Ad Strategy — see
+//   team/ads-hybrid-policy-2026-11-23.md): which page gets which
+//   banner (NO ads at all during exams — the 22 Nov exam SMALL banner
+//   rule is SUPERSEDED) and which in-page slots each page type may
 //   carry. This file only holds the AdSense integration (IDs, the
 //   <ins> unit, toggles) — it does not decide page policy.
 //   isBottomBannerAllowed() was removed for that reason: App.tsx now
 //   asks adsConfig.getBannerPlacementForPath() instead.
 
-// SUPERSESSION (owner brief 20 Nov 21:52, MANDATORY — persistent bottom
-// banner): the bottom banner is now required on ALL eligible pages,
-// including lessons, quizzes, exams and the AI Teacher. This SUPERSEDES
-// the earlier 20 Nov 13:25 rule "no ads during AI lessons or active
-// exams". The reconciliation is reserved space: the content area reserves
-// the banner's height (BOTTOM_BANNER_RESERVE_PX + safe-area inset) so
-// the banner never covers content, buttons, navigation, quiz answers or
-// essential controls. When no ad is available the slot collapses to zero
-// height — no fake ads, no empty placeholder boxes.
+// SUPERSESSION (owner brief 23 Nov 2026 21:52, Hybrid Ad Strategy —
+// BINDING, supersedes the 20 Nov 21:52 + 22 Nov 10:45 rules): NO ads
+// during exams (the exam small banner is REMOVED from exam pages —
+// the 'bottom-banner-small' code path is RETAINED but no route returns
+// it any more), NO ads on login/register, profile, admin, AI Teacher
+// or private messages, and in-content ads run inside chapter/lesson
+// pages (mid + end) and book/library lists. The bottom banner stays
+// mandatory on the remaining eligible pages, with reserved space so it
+// never covers content, buttons, navigation, quiz answers or essential
+// controls. When no ad is available the slot collapses to zero height
+// — no fake ads, no empty placeholder boxes.
 
-export type AdPlacement = 'bottom-banner' | 'bottom-banner-small' | 'top-banner' | 'sidebar' | 'in-content' | 'in-feed' | 'in-feed-2' | 'mobile';
+export type AdPlacement = 'bottom-banner' | 'bottom-banner-small' | 'top-banner' | 'sidebar' | 'in-content' | 'in-content-2' | 'in-feed' | 'in-feed-2' | 'mobile';
 
-// Placement layout (owner brief 20 Nov 22:06): 1 persistent bottom banner
-// (always) + 2 in-feed slots in the middle of list pages, revealed on
-// scroll — the second in-feed slot sits lower down the list than the first.
-// Extended 22 Nov 2026 (ads placement plan): top banner (home), sidebar
-// + mobile + in-content (class dashboard), in-content (directory), and
-// the exam small banner (bottom-banner-small, shares the bottom banner's
-// unit — see AD_SLOT_IDS below).
+// Placement layout (owner brief 23 Nov 2026 21:52, Hybrid Ad Strategy):
+// 1 persistent bottom banner (eligible pages only) + in-feed slots in
+// list pages (library/book: mid-list + end) + in-content slots inside
+// long reading pages (chapter/lesson: mid + end) + top banner on the
+// home page below the hero. 'in-content-2' is the second in-content
+// unit (end of lesson) — separate slot ID, same size as 'in-content'.
+// The exam small banner (bottom-banner-small, shares the bottom
+// banner's unit) is RETAINED as a code path only — no route returns it
+// since the 23 Nov exam rule (NO ads during exams).
 
 export interface AdPlacementDef {
   id: AdPlacement;
@@ -65,16 +71,16 @@ export const AD_PLACEMENTS: readonly AdPlacementDef[] = [
     id: 'bottom-banner',
     labelBn: 'নিচের ব্যানার (স্থায়ী)',
     labelEn: 'Bottom banner (persistent)',
-    whereBn: 'সব পাতায় — হোম, লাইব্রেরি, পাঠ, বই, কুইজ, পরীক্ষা, AI Teacher, প্রোফাইল; নিচে জায়গা রেখে দেওয়া হয়, তাই কিছু ঢাকে না',
-    whereEn: 'All pages — home, library, lessons, books, quizzes, exams, AI Teacher, profiles; space is reserved below the content so it never covers anything',
+    whereBn: 'যোগ্য পাতায় — হোম, লাইব্রেরি, পাঠ, বই, কুইজের ফলাফল, ডিরেক্টরি; পরীক্ষা চলাকালীন, AI Teacher, প্রোফাইল, লগইন/রেজিস্ট্রেশন বা অ্যাডমিন পাতায় নয়; নিচে জায়গা রেখে দেওয়া হয়, তাই কিছু ঢাকে না',
+    whereEn: 'Eligible pages — home, library, lessons, books, quiz results, directory; never during exams, AI Teacher, profile, login/register or admin pages; space is reserved below the content so it never covers anything',
     format: 'banner',
   },
   {
     id: 'bottom-banner-small',
-    labelBn: 'পরীক্ষার ছোট ব্যানার (সর্বোচ্চ ৫০px)',
-    labelEn: 'Exam small banner (max 50px)',
-    whereBn: 'শুধু পরীক্ষা ও ফলাফল পাতায় — মালিকের নির্দেশ ২২ নভেম্বর ২০২৬, ১০:৪৫ ("akdom cuto"); নিচের ব্যানারের unit-ই ব্যবহার করে',
-    whereEn: 'Exam and result pages only — owner rule 22 Nov 2026, 10:45 ("akdom cuto"); shares the bottom banner unit',
+    labelBn: 'পরীক্ষার ছোট ব্যানার (সর্বোচ্চ ৫০px) — বন্ধ আছে',
+    labelEn: 'Exam small banner (max 50px) — disabled',
+    whereBn: 'বন্ধ — ২৩ নভেম্বর ২০২৬-এর নিয়মে পরীক্ষা চলাকালীন কোনো বিজ্ঞাপন নেই; কোড পথটি রাখা হয়েছে, কোনো রুট এটি ফেরত দেয় না; নিচের ব্যানারের unit-ই ব্যবহার করত',
+    whereEn: 'Disabled — the 23 Nov 2026 rule is NO ads during exams; the code path is retained but no route returns it; it shared the bottom banner unit',
     format: 'banner',
   },
   {
@@ -97,24 +103,32 @@ export const AD_PLACEMENTS: readonly AdPlacementDef[] = [
     id: 'in-content',
     labelBn: 'কনটেন্টের ভেতরের বিজ্ঞাপন',
     labelEn: 'In-content slot',
-    whereBn: 'তালিকার ১০ম আইটেমের পর (ক্লাস ড্যাশবোর্ডের Books ট্যাব, ডিরেক্টরি) — ৩০০×২৫০',
-    whereEn: 'After the 10th list item (class dashboard Books tab, directory) — 300×250',
+    whereBn: 'তালিকার ১০ম আইটেমের পর (ক্লাস ড্যাশবোর্ডের Books ট্যাব, ডিরেক্টরি) অথবা পাঠের মাঝখানে (অধ্যায়/পাঠ) — ৩০০×২৫০',
+    whereEn: 'After the 10th list item (class dashboard Books tab, directory) or mid-lesson (chapter/lesson) — 300×250',
+    format: 'in-feed',
+  },
+  {
+    id: 'in-content-2',
+    labelBn: 'কনটেন্টের ভেতরের ২য় বিজ্ঞাপন',
+    labelEn: 'Second in-content slot',
+    whereBn: 'পাঠের শেষে — অধ্যায়/পাঠের অগ্রগতি কার্ডের পরে — ৩০০×২৫০',
+    whereEn: 'End of lesson — after the chapter/lesson progress card — 300×250',
     format: 'in-feed',
   },
   {
     id: 'in-feed',
     labelBn: 'তালিকার ভেতরের বিজ্ঞাপন',
     labelEn: 'In-feed slot',
-    whereBn: 'হোম পাতার তালিকার ভেতরে — পাঠ, কুইজ, পরীক্ষার ভেতরে নয়',
-    whereEn: 'Inside the home-page list — never inside lessons, quizzes or exams',
+    whereBn: 'লাইব্রেরি ও বইয়ের তালিকার ভেতরে — কুইজ বা পরীক্ষার ভেতরে নয়',
+    whereEn: 'Inside the library and book lists — never inside quizzes or exams',
     format: 'in-feed',
   },
   {
     id: 'in-feed-2',
     labelBn: 'তালিকার ভেতরের ২য় বিজ্ঞাপন',
     labelEn: 'Second in-feed slot',
-    whereBn: 'হোম ও লাইব্রেরি তালিকার নিচের দিকে — স্ক্রল করলে দেখা যায়; পাঠ, কুইজ, পরীক্ষার ভেতরে নয়',
-    whereEn: 'Lower down the home and library lists — revealed on scroll; never inside lessons, quizzes or exams',
+    whereBn: 'লাইব্রেরি ও বইয়ের তালিকার শেষে — স্ক্রল করলে দেখা যায়; কুইজ বা পরীক্ষার ভেতরে নয়',
+    whereEn: 'End of the library and book lists — revealed on scroll; never inside quizzes or exams',
     format: 'in-feed',
   },
   {
@@ -150,15 +164,17 @@ export const ADSENSE_CLIENT_ID: string = readEnv('VITE_ADSENSE_CLIENT_ID');
 /** AdSense slot IDs, one per placement. Set via build-time variables after
  *  AdSense approval — never invent one. Empty until approved.
  *  TODO-AD-UNIT: 'bottom-banner-small' SHARES the bottom banner's unit
- *  (same env var on purpose — the exam banner is the same unit rendered
- *  smaller, not a second unit). Every other new placement has its own
- *  env var, all empty until the owner creates the units. */
+ *  (same env var on purpose — the exam banner was the same unit rendered
+ *  smaller, not a second unit; the placement is disabled since 23 Nov
+ *  2026). Every other new placement has its own env var, all empty until
+ *  the owner creates the units. */
 export const AD_SLOT_IDS: Record<AdPlacement, string> = {
   'bottom-banner': readEnv('VITE_ADSENSE_SLOT_BOTTOM_BANNER'),
   'bottom-banner-small': readEnv('VITE_ADSENSE_SLOT_BOTTOM_BANNER'),
   'top-banner': readEnv('VITE_ADSENSE_SLOT_TOP_BANNER'),
   sidebar: readEnv('VITE_ADSENSE_SLOT_SIDEBAR'),
   'in-content': readEnv('VITE_ADSENSE_SLOT_IN_CONTENT'),
+  'in-content-2': readEnv('VITE_ADSENSE_SLOT_IN_CONTENT_2'),
   'in-feed': readEnv('VITE_ADSENSE_SLOT_IN_FEED'),
   'in-feed-2': readEnv('VITE_ADSENSE_SLOT_IN_FEED_2'),
   mobile: readEnv('VITE_ADSENSE_SLOT_MOBILE'),
@@ -174,13 +190,16 @@ export function isBannerPlacement(placement: AdPlacement): boolean {
 export const PERSONALISED_ADS = false;
 
 /** Child-safety rules for advertising (binding).
- *  NOTE (owner brief 20 Nov 21:52): the persistent bottom banner now
- *  appears on all eligible pages INCLUDING lessons, quizzes, exams and
- *  the AI Teacher — this supersedes the earlier "no ads during AI lessons
- *  or active exams" rule. The banner never covers content or controls:
- *  the content area reserves its height (see BOTTOM_BANNER_RESERVE_PX).
- *  It still never covers essential navigation (the header sits at the
- *  top; the banner is fixed to the bottom). */
+ *  NOTE (owner brief 23 Nov 2026 21:52, Hybrid Ad Strategy): NO ads
+ *  during exams, NO ads inside the AI Teacher conversation, NO ads on
+ *  login/register, profile, admin or private-message pages. The
+ *  persistent bottom banner runs only on the remaining eligible pages
+ *  and never covers content or controls: the content area reserves its
+ *  height (see BOTTOM_BANNER_RESERVE_PX). It still never covers
+ *  essential navigation (the header sits at the top; the banner is
+ *  fixed to the bottom). Every ad is clearly labelled "বিজ্ঞাপন"
+ *  (see components/AdSlot.tsx) and never looks like a Download / Next
+ *  / Continue button. */
 export const ADS_CHILD_SAFETY = {
   personalisedAds: false,
   familySafeOnly: true,
@@ -192,24 +211,23 @@ export const ADS_CHILD_SAFETY = {
  * Height (px) the content area reserves for the persistent bottom banner,
  * so the fixed banner never covers content, buttons or controls. The
  * banner itself is a standard responsive unit (~50px mobile / ~90px
- * desktop); 96px covers it plus spacing. Safe-area inset is added on
- * top of this at the call site.
+ * desktop) plus the plain "বিজ্ঞাপন" label row (~16px); 112px covers
+ * it plus spacing. Safe-area inset is added on top of this at the call
+ * site.
  */
-export const BOTTOM_BANNER_RESERVE_PX = 96;
+export const BOTTOM_BANNER_RESERVE_PX = 112;
 
-/** Pages the persistent bottom banner appears on (owner brief 20 Nov 21:52).
- *  'Exams' means the SMALL banner (max 50px — owner rule 22 Nov 2026,
- *  10:45). Login/register + admin pages are NOT in this list: the banner
- *  never appears there (enforced by adsConfig.getBannerPlacementForPath()). */
+/** Pages the persistent bottom banner appears on (owner brief 23 Nov
+ *  2026 21:52, Hybrid Ad Strategy). NO ads during exams, on the AI
+ *  Teacher page, on profile pages, or on login/register + admin pages
+ *  (enforced by adsConfig.getBannerPlacementForPath()). Quiz RESULT
+ *  pages (after the quiz ends) DO get the banner. */
 export const BOTTOM_BANNER_ELIGIBLE_PAGES: readonly string[] = [
   'Home',
   'Library',
   'Lessons',
   'Books',
-  'Quizzes',
-  'Exams (ছোট ব্যানার — সর্বোচ্চ ৫০px)',
-  'AI Teacher',
-  'Profiles',
+  'Quiz results (after the quiz ends)',
   'Directory',
   'Progress',
   'Routine',

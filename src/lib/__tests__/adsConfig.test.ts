@@ -1,5 +1,7 @@
 // Eduvelto — unit tests for the central ad placement config
-// (owner brief 22 Nov 2026 10:43 + exam rule 22 Nov 2026 10:45).
+// (Hybrid Ad Strategy, owner brief 23 Nov 2026 21:52 — supersedes the
+// 22 Nov 2026 placement plan and the 22 Nov exam small-banner rule:
+// NO ads during exams).
 // Pure functions only — no DOM, no Firebase, no network.
 import { describe, expect, it } from 'vitest';
 import {
@@ -22,6 +24,7 @@ const ALL_PLACEMENTS: AdPlacement[] = [
   'top-banner',
   'sidebar',
   'in-content',
+  'in-content-2',
   'in-feed',
   'in-feed-2',
   'mobile',
@@ -77,6 +80,19 @@ describe('getPageAdType', () => {
     expect(getPageAdType('/quiz/abc/result/xyz')).toBe('exam-result');
   });
 
+  it('classifies timed job mocks as exams and job results as exam-results', () => {
+    expect(getPageAdType('/jobs/mock/m1')).toBe('exam');
+    expect(getPageAdType('/jobs/result/a1')).toBe('exam-result');
+    // Other /jobs/* routes are NOT exams.
+    expect(getPageAdType('/jobs/bcs-english')).toBe('unknown');
+  });
+
+  it('classifies article routes (no article routes exist yet — policy is ready)', () => {
+    expect(getPageAdType('/blog')).toBe('article');
+    expect(getPageAdType('/blog/hello')).toBe('article');
+    expect(getPageAdType('/articles/hello')).toBe('article');
+  });
+
   it('ignores query strings and trailing slashes; unknown paths fall back', () => {
     expect(getPageAdType('/library?search=math')).toBe('library');
     expect(getPageAdType('/library/')).toBe('library');
@@ -84,29 +100,40 @@ describe('getPageAdType', () => {
   });
 });
 
-describe('getBannerPlacementForPath — the exam-small enforcement point', () => {
+describe('getBannerPlacementForPath — the no-ads-during-exams enforcement point', () => {
   it('returns null (no banner at all) on auth and admin pages', () => {
     for (const path of ['/login', '/register', '/register/role', '/teacher/register', '/admin', '/admin/ads']) {
       expect(getBannerPlacementForPath(path)).toBeNull();
     }
   });
 
-  it('returns ONLY the small banner on exam pages (owner rule 22 Nov 2026 10:45)', () => {
-    expect(getBannerPlacementForPath('/quiz/abc')).toBe('bottom-banner-small');
-    expect(getBannerPlacementForPath('/exam')).toBe('bottom-banner-small');
-    expect(getBannerPlacementForPath('/quiz/abc/result/xyz')).toBe('bottom-banner-small');
+  it('returns null (NO ads) on exam pages — the 22 Nov small-banner rule is superseded (23 Nov 2026)', () => {
+    expect(getBannerPlacementForPath('/quiz/abc')).toBeNull();
+    expect(getBannerPlacementForPath('/exam')).toBeNull();
+    expect(getBannerPlacementForPath('/jobs/mock/m1')).toBeNull();
+  });
+
+  it('returns null on AI Teacher and profile pages (23 Nov 2026)', () => {
+    expect(getBannerPlacementForPath('/ai-teacher')).toBeNull();
+    expect(getBannerPlacementForPath('/profile')).toBeNull();
+    expect(getBannerPlacementForPath('/profile/guardian-links')).toBeNull();
+  });
+
+  it('returns the full banner on result pages — ads only AFTER the quiz ends', () => {
+    expect(getBannerPlacementForPath('/quiz/abc/result/xyz')).toBe('bottom-banner');
+    expect(getBannerPlacementForPath('/jobs/result/a1')).toBe('bottom-banner');
   });
 
   it('returns the full banner everywhere else', () => {
-    for (const path of ['/', '/library', '/lessons/l1', '/ai-teacher', '/profile', '/about', '/directory', '/class/6']) {
+    for (const path of ['/', '/library', '/lessons/l1', '/about', '/directory', '/class/6']) {
       expect(getBannerPlacementForPath(path)).toBe('bottom-banner');
     }
   });
 });
 
 describe('getBannerReservePx', () => {
-  it('reserves 96px for the full banner, 56px for the exam small banner, 0 for none', () => {
-    expect(getBannerReservePx('bottom-banner')).toBe(96);
+  it('reserves 112px for the full banner (ad + "বিজ্ঞাপন" label row), 56px for the retained exam small banner, 0 for none', () => {
+    expect(getBannerReservePx('bottom-banner')).toBe(112);
     expect(getBannerReservePx('bottom-banner-small')).toBe(BOTTOM_BANNER_SMALL_RESERVE_PX);
     expect(BOTTOM_BANNER_SMALL_RESERVE_PX).toBe(56);
     expect(EXAM_BANNER_MAX_HEIGHT_PX).toBe(50);
@@ -125,8 +152,21 @@ describe('isInPageSlotAllowed', () => {
     expect(isInPageSlotAllowed('library', 'in-feed')).toBe(true);
     expect(isInPageSlotAllowed('library', 'in-feed-2')).toBe(true);
     expect(isInPageSlotAllowed('library', 'in-content')).toBe(false);
+    expect(isInPageSlotAllowed('book', 'in-feed')).toBe(true);
+    expect(isInPageSlotAllowed('book', 'in-feed-2')).toBe(true);
+    expect(isInPageSlotAllowed('book', 'in-content')).toBe(false);
+    expect(isInPageSlotAllowed('chapter', 'in-content')).toBe(true);
+    expect(isInPageSlotAllowed('chapter', 'in-content-2')).toBe(true);
+    expect(isInPageSlotAllowed('chapter', 'in-feed')).toBe(false);
+    expect(isInPageSlotAllowed('lesson', 'in-content')).toBe(true);
+    expect(isInPageSlotAllowed('lesson', 'in-content-2')).toBe(true);
+    expect(isInPageSlotAllowed('lesson', 'top-banner')).toBe(false);
     expect(isInPageSlotAllowed('directory', 'in-content')).toBe(true);
     expect(isInPageSlotAllowed('directory', 'sidebar')).toBe(false);
+    expect(isInPageSlotAllowed('article', 'top-banner')).toBe(true);
+    expect(isInPageSlotAllowed('article', 'in-content')).toBe(true);
+    expect(isInPageSlotAllowed('article', 'in-content-2')).toBe(true);
+    expect(isInPageSlotAllowed('article', 'in-feed')).toBe(false);
   });
 
   it('never allows an in-page slot on exam pages (any placement)', () => {
@@ -136,8 +176,8 @@ describe('isInPageSlotAllowed', () => {
     }
   });
 
-  it('never allows an in-page slot on reading, auth, or admin pages', () => {
-    for (const type of ['book', 'chapter', 'lesson', 'auth', 'admin'] as const) {
+  it('never allows an in-page slot on AI Teacher, profile, auth, or admin pages', () => {
+    for (const type of ['ai-teacher', 'profile', 'auth', 'admin'] as const) {
       for (const p of ALL_PLACEMENTS) {
         expect(isInPageSlotAllowed(type, p)).toBe(false);
       }

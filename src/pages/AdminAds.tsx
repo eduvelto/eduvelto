@@ -166,8 +166,8 @@ export default function AdminAds() {
       </ul>
       <p style={{ color: 'var(--ink-soft)', fontSize: 14 }}>
         {t({
-          bn: 'অনুমোদন পেলে Publisher ID ও ৭টি Slot ID (নিচের ব্যানার, টপ ব্যানার, সাইডবার, ইন-কনটেন্ট, ইন-ফিড, ইন-ফিড ২, মোবাইল — ছোট পরীক্ষা-ব্যানার নিচের ব্যানারের unit-ই ব্যবহার করে) ডেভেলপার (Muse) ডেপ্লয়মেন্ট সেটিংসে বসাবে, মাস্টার সুইচ চালু করবে ও সাইট আবার ডেপ্লয় করবে — এই পাতা থেকে ID বসানো যায় না। অনুমোদন পেলে ID গুলো Muse-কে পাঠান।',
-          en: 'After approval, the developer (Muse) enters the publisher ID and 7 slot IDs (bottom banner, top banner, sidebar, in-content, in-feed, in-feed 2, mobile — the small exam banner shares the bottom banner unit) in deployment settings, flips the master switch and redeploys — IDs cannot be entered from this page. Send the IDs to Muse when approved.',
+          bn: 'অনুমোদন পেলে Publisher ID ও ৮টি Slot ID (নিচের ব্যানার, টপ ব্যানার, সাইডবার, ইন-কনটেন্ট, ইন-কনটেন্ট ২, ইন-ফিড, ইন-ফিড ২, মোবাইল) ডেভেলপার (Muse) ডেপ্লয়মেন্ট সেটিংসে বসাবে, মাস্টার সুইচ চালু করবে ও সাইট আবার ডেপ্লয় করবে — এই পাতা থেকে ID বসানো যায় না। অনুমোদন পেলে ID গুলো Muse-কে পাঠান।',
+          en: 'After approval, the developer (Muse) enters the publisher ID and 8 slot IDs (bottom banner, top banner, sidebar, in-content, in-content 2, in-feed, in-feed 2, mobile) in deployment settings, flips the master switch and redeploys — IDs cannot be entered from this page. Send the IDs to Muse when approved.',
         })}
       </p>
 
@@ -175,8 +175,8 @@ export default function AdminAds() {
       <p>
         <strong>{t({ bn: 'সব পাতায় প্রযোজ্য সেটিং (global setting):', en: 'Global setting:' })}</strong>{' '}
         {t({
-          bn: 'নিচের ব্যানারটি অ্যাপের সব যোগ্য পাতায় স্থায়ীভাবে থাকে — হোম, লাইব্রেরি, পাঠ, বই, কুইজ, পরীক্ষা, এডুভেল্টো এআই শিক্ষক, প্রোফাইল। এটি ২০ নভেম্বর ২০২৬, রাত ৯:৫২-এর মালিকের নির্দেশে "AI পাঠ বা পরীক্ষার সময় বিজ্ঞাপন নয়" নিয়মের ওপরে প্রযোজ্য — ব্যানার এখন সব যোগ্য পাতায় আবশ্যক; কনটেন্টের নিচে জায়গা রেখে দেওয়া হয়, তাই ব্যানার কিছু ঢাকে না। ব্যবহারকারীদের বন্ধ করার কোনো সুইচ নেই — মালিকেরও এই পাতায় বন্ধ করার সুইচ নেই।',
-          en: 'the bottom banner is persistent on all eligible pages — home, library, lessons, books, quizzes, exams, Eduvelto AI Teacher, profiles. Per the owner’s 20 Nov 2026, 21:52 brief it supersedes the earlier "no ads during AI lessons or active exams" rule; reserved space is the reconciliation. Users have no off switch — and neither does the owner on this page.',
+          bn: 'নিচের ব্যানারটি অ্যাপের সব যোগ্য পাতায় স্থায়ীভাবে থাকে — হোম, লাইব্রেরি, পাঠ, বই, কুইজ ও ফলাফল। পরীক্ষা চলাকালীন, এডুভেল্টো এআই শিক্ষক ও প্রোফাইল পাতায় কোনো ব্যানার নেই (মালিকের ২৩ নভেম্বর ২০২৬, রাত ৯:৫২-এর Hybrid Ad Strategy নির্দেশ — আগের ২০ নভেম্বরের নির্দেশের ওপরে প্রযোজ্য)। কনটেন্টের নিচে জায়গা রেখে দেওয়া হয়, তাই ব্যানার কিছু ঢাকে না। ব্যবহারকারীদের বন্ধ করার কোনো সুইচ নেই — মালিকেরও এই পাতায় বন্ধ করার সুইচ নেই।',
+          en: 'the bottom banner is persistent on all eligible pages — home, library, lessons, books, quizzes and results. No banner during exams, on the Eduvelto AI Teacher, or on profile pages (owner brief 23 Nov 2026, 21:52, Hybrid Ad Strategy — superseding the 20 Nov brief). Reserved space is the reconciliation. Users have no off switch — and neither does the owner on this page.',
         })}
       </p>
       <div style={{ border: '1px solid var(--line-strong)', borderRadius: 8, padding: '12px 14px', marginBottom: 12 }}>
@@ -186,8 +186,8 @@ export default function AdminAds() {
         </div>
         <p style={{ margin: '10px 0 0', fontSize: 15 }}>
           {t({
-            bn: '🔒 ব্যানার সবসময় চালু — মালিকের ২০ নভেম্বর ২০২৬, রাত ৯:৫২-এর নির্দেশে বন্ধ করা যায় না।',
-            en: '🔒 Always on — cannot be turned off (owner brief 20 Nov 2026, 21:52).',
+            bn: '🔒 ব্যানার সবসময় চালু — মালিকের ২৩ নভেম্বর ২০২৬, রাত ৯:৫২-এর নির্দেশে বন্ধ করা যায় না।',
+            en: '🔒 Always on — cannot be turned off (owner brief 23 Nov 2026, 21:52).',
           })}
         </p>
         <p style={{ margin: '8px 0 0', color: 'var(--ink-soft)', fontSize: 14 }}>
@@ -204,8 +204,8 @@ export default function AdminAds() {
         </p>
         <p style={{ margin: '10px 0 0', color: 'var(--ink-soft)', fontSize: 14 }}>
           {t({
-            bn: 'পরীক্ষার পাতায় ব্যানার একদম ছোট (সর্বোচ্চ ৫০px) — মালিকের নির্দেশ ২২ নভেম্বর ২০২৬, ১০:৪৫। লগইন/রেজিস্টার ও অ্যাডমিন পাতায় কোনো ব্যানার নেই।',
-            en: 'On exam pages the banner is extra small (max 50px) — owner rule 22 Nov 2026, 10:45. No banner on login/register or admin pages.',
+            bn: 'পরীক্ষা চলাকালীন কোনো বিজ্ঞাপন নেই — মালিকের নির্দেশ ২৩ নভেম্বর ২০২৬, ২১:৫২ (আগের ছোট-ব্যানার নিয়ম বাতিল)। পরীক্ষা শেষে ফলাফলের পাতায় নিচের ব্যানার থাকে। লগইন/রেজিস্টার, প্রোফাইল, AI শিক্ষক ও অ্যাডমিন পাতায় কোনো ব্যানার নেই।',
+            en: 'No ads during exams — owner rule 23 Nov 2026, 21:52 (the earlier small-banner rule is superseded). The bottom banner returns on result pages after the exam ends. No banner on login/register, profile, AI Teacher or admin pages.',
           })}
         </p>
         <p style={{ margin: '10px 0 0', color: 'var(--ink-soft)', fontSize: 14 }}>
@@ -324,8 +324,8 @@ export default function AdminAds() {
         </li>
         <li>
           {t({
-            bn: 'নিচের ব্যানার সব যোগ্য পাতায় থাকে — পাঠ, কুইজ, পরীক্ষা ও এডুভেল্টো এআই শিক্ষক সহ (মালিকের ২০ নভেম্বর ২০২৬, রাত ৯:৫২-এর নির্দেশ; আগের "AI পাঠ বা পরীক্ষার সময় বিজ্ঞাপন নয়" নিয়মের ওপরে)। কনটেন্টের নিচে জায়গা রিজার্ভ থাকে, তাই ব্যানার কনটেন্ট, বোতাম বা কুইজের উত্তর ঢাকে না।',
-            en: 'The bottom banner appears on all eligible pages — including lessons, quizzes, exams and the Eduvelto AI Teacher (owner brief 20 Nov 2026, 21:52, superseding the earlier rule). Reserved space below the content means it never covers content, buttons or quiz answers.',
+            bn: 'নিচের ব্যানার সব যোগ্য পাতায় থাকে — পাঠ, কুইজ ও ফলাফল সহ; পরীক্ষা চলাকালীন, এডুভেল্টো এআই শিক্ষক ও প্রোফাইল পাতায় নয় (মালিকের ২৩ নভেম্বর ২০২৬, রাত ৯:৫২-এর নির্দেশ)। কনটেন্টের নিচে জায়গা রিজার্ভ থাকে, তাই ব্যানার কনটেন্ট, বোতাম বা কুইজের উত্তর ঢাকে না।',
+            en: 'The bottom banner appears on all eligible pages — including lessons, quizzes and results; never during exams, on the Eduvelto AI Teacher, or on profile pages (owner brief 23 Nov 2026, 21:52). Reserved space below the content means it never covers content, buttons or quiz answers.',
           })}
         </li>
         <li>
