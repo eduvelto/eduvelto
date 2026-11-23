@@ -35,7 +35,22 @@ actual ownership verification and stays.
    anonymous; single injection; no duplicate; no-op on empty client;
    no-op with no document. `adsConfig.test.ts`: `adsActive()` is false
    for every placement while the master switch is off.
-4. **No change** to placements, slot IDs, the exam 50px banner rule,
+4. **CSP completion (`firebase.json`)** — the F6 CSP fix allowed
+   AdSense scripts only as far as the library's first load. Running
+   the library end-to-end (ON preview) showed it also pulls
+   sub-resources from `*.adtrafficquality.google` and frames
+   `www.google.com`:
+   - script-src: `https://*.adtrafficquality.google` (was blocking
+     `ep2.adtrafficquality.google/sodar/sodar2.js`)
+   - frame-src: `https://*.adtrafficquality.google https://www.google.com`
+     (was blocking the `ep2.adtrafficquality.google` + `www.google.com`
+     frames the library creates)
+   - img-src: `https://*.adtrafficquality.google` (was blocking the
+     `ep1.adtrafficquality.google/pagead/sodar` beacon image)
+   All three are Google-owned AdSense hosts, same trust class as the
+   existing entries. After the fix the ON preview shows zero CSP
+   errors. connect-src already had `*.adtrafficquality.google`.
+5. **No change** to placements, slot IDs, the exam 50px banner rule,
    or personalised-ads (always off). No AMP code (no AMP pages).
 
 ## Gates (unchanged — both must pass before any ad renders)
@@ -58,9 +73,37 @@ actual ownership verification and stays.
   (`npm run test:unit`; baseline 791 + 1 new gate assertion; the 5
   new loader tests pass in the component suite).
 - Built `dist/index.html`: 0× `adsbygoogle`, 1× `google-adsense-account`.
-- Preview verification: see `~/workspace/eduorbit/adsense-code-evidence/`
-  (OFF preview = this branch; ON preview = temporary uncommitted
-  master-flip + real client ID + test-only slot value, reverted after).
+- Preview verification DONE — see
+  `~/workspace/eduorbit/adsense-code-evidence/` (probe.py + JSONs +
+  PNGs). Playwright real Chromium via CONNECT relay 127.0.0.1:18099.
+  Two preview channels (7-day expiry, 30 Nov 2026); two stale
+  superseded channels deleted first to stay under the 51-channel
+  quota (`step4-chatgpt-closure`, `link-google-account` — both 21–22
+  Nov one-off/step previews, long deployed live):
+  - **ON** `https://eduvelto--adsense-code-on-urs2fgbn.web.app`
+    (temporary uncommitted master-flip + real client ID +
+    `VITE_ADSENSE_SLOT_BOTTOM_BANNER=test-only-not-a-real-unit`,
+    reverted after): script in `<head>` = 1, exactly one copy,
+    `window.adsbygoogle` loaded, 9 pagead2/doubleclick requests,
+    `<ins class="adsbygoogle">` = 2 (bottom-banner unit + Auto ads'
+    own), top-banner labelled placeholder = 1. Console errors: only
+    ONE — HTTP 400 on the ad request for the test-only slot
+    (`slotname=test-only-not-a-real-unit`), because that slot does not
+    exist in AdSense; no ad rendered, as expected with a fake slot on
+    an unapproved site. CSP errors went 3 → 0 across the fix rounds
+    above (desktop + mobile both clean apart from the 400).
+  - **OFF** `https://eduvelto--adsense-code-off-83fzgw73.web.app`
+    (this branch, committed state): script in `<head>` = 0, no
+    pagead2 requests, `<ins>` = 0, `window.adsbygoogle` absent,
+    **0 console errors**, both slots show labelled preview
+    placeholders (top-banner 728×90 + bottom-banner responsive) —
+    desktop AND mobile.
+  - **Exam page** `/exam` on the OFF preview: exactly one slot,
+    `bottom-banner-small`, labelled placeholder "পরীক্ষার ছোট ব্যানার ·
+    সর্বোচ্চ ৫০px", 0 script, 0 requests, 0 console errors — the
+    50px exam rule holds at the rendered level.
+  - Served CSP header on both previews allows
+    `pagead2.googlesyndication.com` (verified with curl).
 
 ## Activation (owner-approved step, NOT part of this branch)
 
