@@ -3,7 +3,16 @@
 // published version, the update status, and the download link — even when
 // no update is forced. Fetches the published config fresh from the server
 // (one read per visit to a page that shows this section).
+//
+// IN-APP (23 Nov 2026): inside the Capacitor Android app, config/appVersion
+// is the WEB version gate — it must NOT be presented as the app's latest
+// version (there is no store listing yet, and the store is the only
+// source of app updates). In-app the section shows ONLY the bundled
+// version (v{APP_VERSION}) with no update claim, no "সর্বশেষ ভার্সন"
+// line, and no /install link, and it skips the config fetch entirely
+// (saves a read). Browser/PWA behaviour is unchanged.
 import { useEffect, useState } from 'react';
+import type { CSSProperties } from 'react';
 import { Link } from 'react-router-dom';
 import { db } from '../firebase';
 import {
@@ -13,12 +22,25 @@ import {
   type AppVersionConfig,
 } from '../lib/appVersion';
 import { LinkButton } from './ui';
+import { isNativeApp } from '../lib/isNativeApp';
+
+const sectionStyle: CSSProperties = {
+  border: '1px solid #D9A441',
+  borderRadius: 8,
+  padding: '16px',
+  margin: '20px 0',
+  background: '#FFF6D6',
+};
 
 export default function AppUpdateSection() {
   const [config, setConfig] = useState<AppVersionConfig | null>(null);
   const [failed, setFailed] = useState(false);
+  // Inside the Capacitor app the web version config is not the app's
+  // latest version — show the bundled version only (see below).
+  const inApp = isNativeApp();
 
   useEffect(() => {
+    if (inApp) return;
     if (!db) {
       setFailed(true);
       return;
@@ -34,21 +56,31 @@ export default function AppUpdateSection() {
     return () => {
       cancelled = true;
     };
-  }, []);
+  }, [inApp]);
+
+  // IN-APP: bundled version only. No config fetch happened above, so
+  // there is no "সর্বশেষ ভার্সন" to show — and the web config must never
+  // be presented as the app's latest version. No /install link either:
+  // inside the app it would only lead back to the "already using the
+  // app" view.
+  if (inApp) {
+    return (
+      <section aria-label="অ্যাপ আপডেট" style={sectionStyle}>
+        <h2 style={{ fontSize: 20, margin: '0 0 8px' }}>অ্যাপ আপডেট</h2>
+        <p style={{ margin: '0 0 4px', lineHeight: 1.7 }}>
+          আপনার ভার্সন: <strong>v{APP_VERSION}</strong>
+        </p>
+        <p style={{ margin: '0 0 8px', color: '#57616A' }}>
+          আপনি Eduvelto অ্যাপ ব্যবহার করছেন।
+        </p>
+      </section>
+    );
+  }
 
   const status = checkAppVersion(config, APP_VERSION);
 
   return (
-    <section
-      aria-label="অ্যাপ আপডেট"
-      style={{
-        border: '1px solid #D9A441',
-        borderRadius: 8,
-        padding: '16px',
-        margin: '20px 0',
-        background: '#FFF6D6',
-      }}
-    >
+    <section aria-label="অ্যাপ আপডেট" style={sectionStyle}>
       <h2 style={{ fontSize: 20, margin: '0 0 8px' }}>অ্যাপ আপডেট</h2>
       <p style={{ margin: '0 0 4px', lineHeight: 1.7 }}>
         আপনার ভার্সন: <strong>v{APP_VERSION}</strong>
