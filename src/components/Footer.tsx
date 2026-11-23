@@ -32,6 +32,7 @@ export default function Footer() {
           <Link to="/about">{t({ bn: 'আমাদের সম্পর্কে', en: 'About' })}</Link>
           <Link to="/why-eduvelto">{t({ bn: 'কেন Eduvelto', en: 'Why Eduvelto' })}</Link>
           <Link to="/privacy">{t({ bn: 'গোপনীয়তা নীতি', en: 'Privacy Policy' })}</Link>
+          <Link to="/terms">{t({ bn: 'শর্তাবলী', en: 'Terms' })}</Link>
           <Link to="/contact">{t({ bn: 'যোগাযোগ', en: 'Contact' })}</Link>
           <Link to="/health">{t({ bn: 'স্বাস্থ্য', en: 'Health' })}</Link>
           <Link to="/ai-teacher">{t({ bn: 'AI Teacher (পরিকল্পনায় আছে)', en: 'AI Teacher (planned)' })}</Link>

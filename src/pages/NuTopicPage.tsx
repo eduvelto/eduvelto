@@ -15,6 +15,7 @@ import { Link, useParams } from 'react-router-dom';
 import { PageShell, EmptyState } from '../components/PageShell';
 import { Card } from '../components/ui';
 import { useLanguage } from '../i18n/LanguageContext';
+import { useNotFoundMeta } from '../lib/useNotFoundMeta';
 import { NU_GROUPS, type NuGroupSlug } from '../lib/nuProfile';
 import { NU_HUB_ROUTE } from '../lib/nuStructure';
 import {
@@ -31,6 +32,9 @@ import {
 
 function NotFound(props: { group: NuGroupSlug; subjectSlug: string }) {
   const { t } = useLanguage();
+  // This component only renders for an unknown topic slug — keep the
+  // not-found state out of the index with a distinct title + noindex.
+  useNotFoundMeta('টপিক পাওয়া যায়নি — Eduvelto', true);
   return (
     <PageShell titleBn="টপিক পাওয়া যায়নি" titleEn="Topic not found" hideHomeLink>
       <EmptyState

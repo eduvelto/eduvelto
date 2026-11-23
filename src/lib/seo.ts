@@ -264,6 +264,17 @@ const STATIC_ROUTES: Record<string, RouteSeoEntry> = {
     description: 'Eduvelto-র গোপনীয়তা নীতি — আপনার তথ্য কীভাবে ব্যবহার হয়, তা জানুন।',
     crumb: 'গোপনীয়তা নীতি',
   },
+  // DRAFT (23 Nov 2026, Master Plan quick-wins): the /terms page text
+  // needs the owner's approval before it goes live. The SEO entry is
+  // honest either way — no claims beyond the real free offer — and
+  // /terms joins the sitemap only at merge time (SEO 50–100 workstream
+  // owns sitemap.xml; do not add it here).
+  '/terms': {
+    title: 'শর্তাবলী — Eduvelto',
+    description:
+      'Eduvelto-র শর্তাবলী — সম্পূর্ণ বিনামূল্যের শিক্ষা প্ল্যাটফর্ম ব্যবহারের নিয়ম, অ্যাকাউন্ট ও লগইন, আর গোপনীয়তা।',
+    crumb: 'শর্তাবলী',
+  },
   '/health': {
     title: 'স্বাস্থ্য — সচেতনতামূলক তথ্য | Eduvelto',
     description:

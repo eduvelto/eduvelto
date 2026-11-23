@@ -33,6 +33,7 @@ import JobModeSwitch from '../components/JobModeSwitch';
 import LoginWall from '../components/LoginWall';
 import { useLanguage, T } from '../i18n/LanguageContext';
 import { useAuth } from '../lib/auth';
+import { useNotFoundMeta } from '../lib/useNotFoundMeta';
 import { useJobMode } from '../lib/jobMode';
 import { listMockAttempts, listPublishedMocks, type MockAttemptWithId } from '../lib/jobMock';
 import type { JobMockWithId } from '../lib/jobMocks';
@@ -272,6 +273,10 @@ export default function JobHubPage() {
   const { user } = useAuth();
   const { exam = '', tab } = useParams<{ exam: string; tab?: string }>();
   const def = jobExamBySlug(exam);
+  // Unknown exam slug: the honest "not found" card below must not be
+  // indexed under the home fallback title — set a distinct title +
+  // robots noindex while it shows (shared hook, restores on unmount).
+  useNotFoundMeta('পরীক্ষা পাওয়া যায়নি — Eduvelto', !def);
   const activeTab: JobTabSlug = isJobTabSlug(tab) ? tab : 'home';
   const pattern = def ? EXAM_PATTERNS[def.slug] : undefined;
   // Step 6 — canonical subject list. Takes the raw param (not

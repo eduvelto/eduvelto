@@ -111,6 +111,8 @@ const ContactPage = lazy(() => import('./pages/ContactPage'));
 // main 054c230 + the live site do, so the route is restored here.
 const FounderPage = lazy(() => import('./pages/FounderPage'));
 const PrivacyPage = lazy(() => import('./pages/PrivacyPage'));
+const TermsPage = lazy(() => import('./pages/TermsPage'));
+const NotFoundPage = lazy(() => import('./pages/NotFoundPage'));
 const WhyEduveltoPage = lazy(() => import('./pages/WhyEduveltoPage'));
 const AdmissionsIndexPage = lazy(() => import('./pages/AdmissionsIndexPage'));
 const NuHubPage = lazy(() => import('./pages/NuHubPage'));
@@ -352,7 +354,8 @@ export default function App() {
         <Route path="/founder" element={<FounderPage />} />
         <Route path="/contact" element={<ContactPage />} />
         <Route path="/privacy" element={<PrivacyPage />} />
-        <Route path="*" element={<HomePage />} />
+        <Route path="/terms" element={<TermsPage />} />
+        <Route path="*" element={<NotFoundPage />} />
         </Routes>
         </Suspense>
         {isAdminShell ? null : <Footer />}

@@ -241,6 +241,20 @@ describe('resolveRouteSeo — public routes', () => {
     expect(seo!.description).toContain('শীঘ্রই আসছে');
   });
 
+  it('/terms resolves to the honest Terms entry (23 Nov 2026, Master Plan quick-wins)', () => {
+    // NOTE: /terms is deliberately NOT in SITEMAP_URLS above — the
+    // page text is a DRAFT awaiting owner approval, and sitemap.xml
+    // is owned by the parallel SEO 50–100 workstream. It joins the
+    // sitemap (and SITEMAP_URLS) only at merge time, after approval.
+    const seo = resolveRouteSeo('/terms');
+    expect(seo).not.toBeNull();
+    expect(seo!.title).toBe('শর্তাবলী — Eduvelto');
+    expect(seo!.canonical).toBe(`${SITE_URL}/terms`);
+    expect(seo!.description).toContain('বিনামূল্যের');
+    expect(seo!.title).not.toMatch(FORBIDDEN_RANK_CLAIM);
+    expect(seo!.description).not.toMatch(FORBIDDEN_RANK_CLAIM);
+  });
+
   it('sitemap.xml lists exactly the SITEMAP_URLS (no drift)', () => {
     const xml = readFileSync(
       fileURLToPath(new URL('../../../public/sitemap.xml', import.meta.url)),
