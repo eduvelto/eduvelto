@@ -171,6 +171,7 @@ const MENUS: Menu[] = [
       { to: '/jobs', bn: 'ব্যাংক চাকরি', en: 'Bank Jobs', soon: true },
       { to: '/jobs', bn: 'প্রাইমারি শিক্ষক', en: 'Primary Teacher', soon: true },
       { to: '/jobs', bn: 'NTRCA প্রস্তুতি', en: 'NTRCA Preparation', soon: true },
+      { to: '/opportunities', bn: 'সুযোগ হাব', en: 'Opportunity Hub' },
       { to: '/exam', bn: 'মডেল টেস্ট', en: 'Model Tests' },
     ],
   },
@@ -221,6 +222,7 @@ const MENUS: Menu[] = [
 const SECONDARY: MenuItem[] = [
   { to: '/directory', bn: 'শিক্ষা নির্দেশিকা', en: 'Education Directory' },
   { to: '/library', bn: 'লাইব্রেরি', en: 'Library' },
+  { to: '/opportunities', bn: 'সুযোগ হাব', en: 'Opportunity Hub' },
   { to: '/exam', bn: 'পরীক্ষা', en: 'Exams' },
   { to: '/routine', bn: 'রুটিন', en: 'Study Routine' },
   { to: '/progress', bn: 'অগ্রগতি', en: 'Progress' },
