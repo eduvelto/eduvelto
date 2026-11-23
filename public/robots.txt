@@ -30,6 +30,12 @@ Disallow: /teacher
 Disallow: /guardian
 Disallow: /jobs/dashboard
 Disallow: /admissions/dashboard
+# /social is a design proposal only — no live social features
+# (blueprint §7) — and /skills is a coming-soon placeholder.
+# Neither is content; keep crawlers off both (23 Nov 2026,
+# feature/seo-50-100-pages, audit SEO-008).
+Disallow: /social
+Disallow: /skills
 Disallow: /exam
 Disallow: /routine
 Disallow: /progress
