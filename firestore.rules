@@ -85,10 +85,20 @@ service cloud.firestore {
     function callerVerificationStatus() {
       return get(/databases/$(database)/documents/users/$(uid())).data.get('verificationStatus', '');
     }
+    // Single-get form (Step 17, 23 Nov 2026): callerActive() +
+    // callerRole() + callerVerificationStatus() each fetch the users
+    // doc separately (4 gets), which pushed the jobTopics/jobLessons
+    // creates over Firestore's 1000-expression evaluation limit.
+    // One fetch, then pure field reads — cheaper than the old
+    // isTeacher() gate (2 gets).
     function isVerifiedJobBankAuthor() {
-      return signedIn() && callerActive()
-        && (callerRole() in ['admin', 'moderator', 'owner']
-            || (callerRole() == 'teacher' && callerVerificationStatus() == 'verified'));
+      return signedIn()
+        && isVerifiedJobBankAuthorFor(get(/databases/$(database)/documents/users/$(uid())).data);
+    }
+    function isVerifiedJobBankAuthorFor(d) {
+      return d.get('isActive', true) != false
+        && (d.get('role', '') in ['admin', 'moderator', 'owner']
+            || (d.get('role', '') == 'teacher' && d.get('verificationStatus', '') == 'verified'));
     }
     // DASHBOARDS (Step 5/8, branch draft — NOT deployed): a guardian may
     // read a linked child's progress/bookmarks/results ONLY while the
@@ -106,16 +116,31 @@ service cloud.firestore {
     // ---------- validation helpers ----------
     function isStr(v, max) { return v is string && v.size() > 0 && v.size() <= max; }
     function isOptStr(v, max) { return v == null || (v is string && v.size() <= max); }
+    // changedKeys — extracted 23 Nov 2026 (rules-size refactor): the
+    // diff().affectedKeys() expression appeared verbatim at 62 call
+    // sites. One function, identical semantics (pure expression, no
+    // reads), far fewer compiled bytes.
+    function changedKeys() { return request.resource.data.diff(resource.data).affectedKeys(); }
+    // S2: keys().hasOnly on the incoming doc (22 call sites).
+    function onlyKeys(keys) { return request.resource.data.keys().hasOnly(keys); }
+    // S4: bundle existence for the incoming doc's bundleId (6 call sites).
+    function reqBundleExists() { return exists(/databases/$(database)/documents/jobQuestionBundles/$(request.resource.data.get('bundleId', ''))); }
+    // S3: optional timestamp field — absent/null, or a timestamp (12 call sites).
+    function isOptTs(d, f) { return d.get(f, null) == null || d.get(f, null) is timestamp; }
+    // S5: optional string field with NO length bound (15 call sites).
+    // Deliberately NOT isOptStr(v, max): that helper adds a size()
+    // <= max check, which would STRENGTHEN validation and deny
+    // previously-allowed long strings. This one is the exact
+    // null-or-string shape, factored.
+    function isOptStrNoMax(d, f) { return d.get(f, null) == null || d.get(f, null) is string; }
+    // S6: repeated allow-condition fragments, factored verbatim (27 call sites).
+    function sameCreator() { return request.resource.data.createdBy == resource.data.createdBy; }
+    function adminOrOwnTeacher() { return isAdmin() || (isVerifiedTeacher() && resource.data.createdBy == uid()); }
+    function ownCreate() { return signedIn() && callerActive() && request.resource.data.userId == uid(); }
+    function ownExisting() { return signedIn() && callerActive() && resource.data.userId == uid(); }
+    function reviewKeys() { return ['status', 'reviewStatus', 'verifiedBy', 'verifiedAt', 'updatedAt']; }
     function isDraftStatus(s) { return s in ['Not Started', 'In Progress', 'Under Review']; }
     function isPublished(d) { return d.get('reviewStatus', '') == 'Published'; }
-    // changedKeys(): the set of fields an update touches — used by
-    // every update allowlist so the long diff() expression is written
-    // once (59 call sites) instead of 59 times. Pure substitution of
-    // the identical expression; no behaviour change. Probe-verified
-    // 23 Nov 2026: this cut the compiled size from 256,056 (over the
-    // 256,000 limit) to under it — the compiler does NOT re-inline
-    // the helper body at every call site for size purposes.
-    function changedKeys() { return request.resource.data.diff(resource.data).affectedKeys(); }
 
     // ---------- Job exams (Step 5 closure — ChatGPT review P0/P1) ----------
     // The 10 canonical Job categories (same list as jobProfile.ts
@@ -503,8 +528,8 @@ service cloud.firestore {
         // do not exist in the Step 6 schema at all.
         && !('publishedAt' in d)
         && !('publishedBy' in d)
-        && (d.get('createdAt', null) == null || d.get('createdAt', null) is timestamp)
-        && (d.get('updatedAt', null) == null || d.get('updatedAt', null) is timestamp);
+        && (isOptTs(d, 'createdAt'))
+        && (isOptTs(d, 'updatedAt'));
     }
     // SECOND-EYE RULE (Step 3 §2.7 / §3.4): the verifier is never the
     // author. verifiedBy may stay as it is, be cleared (a return), or
@@ -580,12 +605,12 @@ service cloud.firestore {
         // kebab, or an applicableCycle that is not a string, is denied).
         && (d.get('slug', null) == null
             || (d.get('slug', null) is string && d.get('slug', null).matches('^[a-z0-9-]+$')))
-        && (d.get('applicableCycle', null) == null || d.get('applicableCycle', null) is string)
+        && (isOptStrNoMax(d, 'applicableCycle'))
         // Step 6 fold-in, ChatGPT P2-02: configVersion is an optional
         // string when present (the seed stamps it; a rules-created
         // subject may carry it too). It is outside every update
         // rule's affected-keys allowlist, so it is immutable once set.
-        && (d.get('configVersion', null) == null || d.get('configVersion', null) is string)
+        && (isOptStrNoMax(d, 'configVersion'))
         && d.get('status', null) in ['draft', 'published']
         && isJobContentReviewState(d.get('reviewStatus', null))
         && jobContentStatesConsistent(d);
@@ -646,9 +671,9 @@ service cloud.firestore {
             || (isJobSubjectId(d.get('subjectId', null))
                 && isJobChapterId(d.get('chapterId', null))
                 && isJobTopicId(d.get('topicId', null))))
-        && (d.get('subjectId', null) == null || d.get('subjectId', null) is string)
-        && (d.get('chapterId', null) == null || d.get('chapterId', null) is string)
-        && (d.get('topicId', null) == null || d.get('topicId', null) is string)
+        && (isOptStrNoMax(d, 'subjectId'))
+        && (isOptStrNoMax(d, 'chapterId'))
+        && (isOptStrNoMax(d, 'topicId'))
         && isStr(d.get('titleBn', null), 200)
         && isStr(d.get('titleEn', null), 200)
         && isStr(d.get('body', null), 100000)
@@ -693,8 +718,8 @@ service cloud.firestore {
         && d.get('rejectionReason', null) == null
         && !('publishedAt' in d)
         && !('publishedBy' in d)
-        && (d.get('createdAt', null) == null || d.get('createdAt', null) is timestamp)
-        && (d.get('updatedAt', null) == null || d.get('updatedAt', null) is timestamp);
+        && (isOptTs(d, 'createdAt'))
+        && (isOptTs(d, 'updatedAt'));
     }
     // Second-eye rule (Step 7 fold-in, ChatGPT P1-01): a
     // publisher/verifier is never the author, AND the publisher
@@ -777,17 +802,17 @@ service cloud.firestore {
                 && d.get('examYear', null) >= 1900 && d.get('examYear', null) <= 2100
                 && d.get('sourceUrl', null) is string))
         && isStr(d.get('source', null), 500)
-        && (d.get('sourceUrl', null) == null || d.get('sourceUrl', null) is string)
+        && (isOptStrNoMax(d, 'sourceUrl'))
         && d.get('status', null) in ['draft', 'published']
         && isJobQuestionReviewState(d.get('reviewStatus', null))
         && jobQuestionStatesConsistent(d)
         && isStr(d.get('duplicateHash', null), 200)
         && d.get('version', null) is int && d.get('version', null) >= 1
-        && (d.get('rejectionReason', null) == null || d.get('rejectionReason', null) is string)
-        && (d.get('reviewerId', null) == null || d.get('reviewerId', null) is string)
-        && (d.get('configVersion', null) == null || d.get('configVersion', null) is string)
-        && (d.get('bundleId', null) == null || d.get('bundleId', null) is string)
-        && (d.get('duplicateOf', null) == null || d.get('duplicateOf', null) is string);
+        && (isOptStrNoMax(d, 'rejectionReason'))
+        && (isOptStrNoMax(d, 'reviewerId'))
+        && (isOptStrNoMax(d, 'configVersion'))
+        && (isOptStrNoMax(d, 'bundleId'))
+        && (isOptStrNoMax(d, 'duplicateOf'));
     }
     // Field-shape of a student bundle. The key-leak ban (no
     // correctLetter/explanation/correctText anywhere in the doc) is
@@ -818,7 +843,7 @@ service cloud.firestore {
         && d.get('status', null) in ['draft', 'published']
         && isJobQuestionReviewState(d.get('reviewStatus', null))
         && jobQuestionStatesConsistent(d)
-        && (d.get('configVersion', null) == null || d.get('configVersion', null) is string)
+        && (isOptStrNoMax(d, 'configVersion'))
         // Step 8 fold-in (finding 5): the bundle generation an
         // attempt binds to — optional here (older bundles may lack
         // it) but validated when present; the ATTEMPT rule requires
@@ -836,9 +861,9 @@ service cloud.firestore {
         && d.get('answers', null) is list
         && d.get('answers', null).size() >= 1
         && d.get('answers', null).size() <= 200
-        && (d.get('configVersion', null) == null || d.get('configVersion', null) is string)
-        && (d.get('createdAt', null) == null || d.get('createdAt', null) is timestamp)
-        && (d.get('updatedAt', null) == null || d.get('updatedAt', null) is timestamp);
+        && (isOptStrNoMax(d, 'configVersion'))
+        && (isOptTs(d, 'createdAt'))
+        && (isOptTs(d, 'updatedAt'));
     }
     // Key↔bundle consistency (Step 7 fold-in, ChatGPT P1-06): a
     // key is valid only against its own bundle — the key answers
@@ -1643,7 +1668,7 @@ service cloud.firestore {
         // fields (e.g. verifiedBy, suspendedReason, junk) into their
         // own new document. Only the keys the app legitimately writes
         // at creation (profile.ts ensureUserProfile) are allowed.
-        && request.resource.data.keys().hasOnly(['displayName', 'email',
+        && onlyKeys(['displayName', 'email',
              'role', 'verificationStatus', 'language', 'createdAt', 'updatedAt',
              'lastActiveAt',
              // Public user IDs (owner order 22 Nov 2026): the sequential
@@ -1775,6 +1800,11 @@ service cloud.firestore {
       // admin.ts sets it) — an admin cannot silently verify anyone.
       allow update: if isAdmin()
         && resource.data.role != 'owner'
+        // L4 (Step 17, 23 Nov 2026): an admin could update a FELLOW
+        // admin's doc — demote them, suspend them. Staff docs are
+        // now owner-only: an admin manages students / teachers /
+        // parents, never another admin or moderator.
+        && (!(resource.data.role in ['admin', 'moderator']) || isOwnerRole())
         && changedKeys()
              .hasOnly(['role', 'verificationStatus', 'isActive', 'suspendedReason',
                        'verifiedBy', 'verifiedAt', 'updatedAt'])
@@ -2009,7 +2039,7 @@ service cloud.firestore {
       // the attempt), mirroring the jobReceipts create rule.
       allow create: if signedIn() && callerActive()
         && receiptId == uid() + '_' + request.resource.data.quizId
-        && request.resource.data.keys().hasOnly(['userId', 'quizId', 'attemptId', 'createdAt'])
+        && onlyKeys(['userId', 'quizId', 'attemptId', 'createdAt'])
         && request.resource.data.userId == uid()
         && request.resource.data.quizId is string
         && request.resource.data.quizId.size() <= 200
@@ -2028,9 +2058,9 @@ service cloud.firestore {
     // ---------- studyPlans / progressSummaries (owner only) ----------
     match /studyPlans/{planId} {
       allow read: if signedIn() && (resource.data.userId == uid() || isAdmin());
-      allow create: if signedIn() && callerActive() && request.resource.data.userId == uid()
+      allow create: if ownCreate()
         && isStr(request.resource.data.title, 200);
-      allow update, delete: if signedIn() && callerActive() && resource.data.userId == uid();
+      allow update, delete: if ownExisting();
     }
     match /progressSummaries/{summaryId} {
       // DASHBOARDS (Step 8): a guardian with a VERIFIED link reads the
@@ -2040,7 +2070,7 @@ service cloud.firestore {
       // H1+M4 (security audit 22 Nov 2026): self-asserted progress is
       // BOUND — attemptsCount is a whole number 0–10000, averagePercentage
       // is 0–100. A student can no longer claim 999 attempts or 500%.
-      allow create, update: if signedIn() && callerActive() && request.resource.data.userId == uid()
+      allow create, update: if ownCreate()
         && request.resource.data.attemptsCount is int
         && request.resource.data.attemptsCount >= 0
         && request.resource.data.attemptsCount <= 10000
@@ -2060,21 +2090,21 @@ service cloud.firestore {
       // linked child's bookmarks (learning history).
       allow read: if signedIn() && (resource.data.userId == uid() || isAdmin()
         || isLinkedGuardian(resource.data.userId));
-      allow create: if signedIn() && callerActive() && request.resource.data.userId == uid()
+      allow create: if ownCreate()
         && isStr(request.resource.data.lessonId, 200)
         && isStr(request.resource.data.title, 200);
-      allow update: if signedIn() && callerActive() && resource.data.userId == uid()
+      allow update: if ownExisting()
         && request.resource.data.userId == uid();
-      allow delete: if signedIn() && callerActive() && resource.data.userId == uid();
+      allow delete: if ownExisting();
     }
     match /progress/{progressId} {
       // DASHBOARDS (Step 8): a guardian with a VERIFIED link reads the
       // linked child's progress (lessons read, practice counts).
       allow read: if signedIn() && (resource.data.userId == uid() || isAdmin()
         || isLinkedGuardian(resource.data.userId));
-      allow create: if signedIn() && callerActive() && request.resource.data.userId == uid()
+      allow create: if ownCreate()
         && isStr(request.resource.data.subject, 100);
-      allow update: if signedIn() && callerActive() && resource.data.userId == uid()
+      allow update: if ownExisting()
         && request.resource.data.userId == uid();
       allow delete: if isAdmin();
     }
@@ -2103,8 +2133,16 @@ service cloud.firestore {
         || (signedIn() && callerActive() && d.get('authorId', '') == uid())
         || (signedIn() && callerActive() && d.get('createdBy', '') == uid());
     }
+    // M2 (Step 17, security testing 23 Nov 2026): a PENDING teacher
+    // could author drafts — isTeacher() admits ANY teacher-role user,
+    // including one whose verification is still pending. The bank's
+    // gate is reused (staff, or a teacher whose verificationStatus
+    // is 'verified'); same semantics, zero new helpers — the compiled
+    // rules margin is ~80 bytes. This function is shared by books,
+    // chapters, lessons, quizzes and games: the same hole existed in
+    // each, and the fix applies uniformly.
     function contentCreate() {
-      return isTeacher()
+      return isVerifiedJobBankAuthor()
         && isDraftStatus(request.resource.data.reviewStatus)
         && isStr(request.resource.data.title, 200);
     }
@@ -2131,7 +2169,7 @@ service cloud.firestore {
 
     match /educationDirectory/{docId} {
       allow read: if contentRead(resource.data);
-      allow create: if isTeacher() && isDraftStatus(request.resource.data.reviewStatus);
+      allow create: if isVerifiedJobBankAuthor() && isDraftStatus(request.resource.data.reviewStatus);
       allow update: if contentUpdate(resource.data);
       allow delete: if isAdmin();
     }
@@ -2301,7 +2339,18 @@ service cloud.firestore {
         && isStr(request.resource.data.fullName, 100)
         && isStr(request.resource.data.institution, 200)
         && isOptStr(request.resource.data.get('post', null), 100)
-        && isOptStr(request.resource.data.get('institutionContact', null), 100);
+        && isOptStr(request.resource.data.get('institutionContact', null), 100)
+        // L1 (Step 17, 23 Nov 2026): the create had NO key allowlist,
+        // so a forged application could smuggle `checks`, `verifiedAt`
+        // or `decision` past the form. Exactly the 18 keys admin.ts
+        // submitTeacherApplication writes (createdAt only on first
+        // filing; the re-apply merge path is covered by the update
+        // rule below). The decision fields (checkedBy, reason, checks)
+        // are written only by the admin update path.
+        && onlyKeys(['id', 'userId', 'fullName', 'teachingLevel',
+             'subjects', 'classes', 'institution', 'post', 'institutionContact',
+             'qualifications', 'experienceYears', 'verificationReason', 'evidenceRef',
+             'status', 'verificationStatus', 'submittedAt', 'updatedAt', 'createdAt']);
       // DASHBOARDS (Step 5): a REJECTED teacher may re-apply — the
       // applicant re-files their own record as 'pending' again (same
       // deterministic id). Only the application fields may change, and
@@ -2585,7 +2634,7 @@ service cloud.firestore {
     }
     match /groupMemberships/{membershipId} {
       allow read: if signedIn() && (resource.data.userId == uid() || isModerator());
-      allow create: if signedIn() && callerActive() && request.resource.data.userId == uid()
+      allow create: if ownCreate()
         && request.resource.data.status == 'pending';
       allow update: if isModerator();
       allow delete: if isAdmin();
@@ -2663,7 +2712,7 @@ service cloud.firestore {
     // ---------- career / opportunities (Phase 4) ----------
     match /careerPaths/{pathId} {
       allow read: if isPublished(resource.data) || isModerator();
-      allow create: if isTeacher() && isDraftStatus(request.resource.data.reviewStatus);
+      allow create: if isVerifiedJobBankAuthor() && isDraftStatus(request.resource.data.reviewStatus);
       allow update: if contentUpdate(resource.data);
       allow delete: if isAdmin();
     }
@@ -2776,7 +2825,7 @@ service cloud.firestore {
     }
     match /giftRedemptions/{redemptionId} {
       allow read: if signedIn() && (resource.data.userId == uid() || isAdmin());
-      allow create: if signedIn() && callerActive() && request.resource.data.userId == uid()
+      allow create: if ownCreate()
         && request.resource.data.status == 'requested';
       allow update: if isAdmin();
       allow delete: if false;
@@ -2820,7 +2869,7 @@ service cloud.firestore {
              'job-content-deleted',
              'user-profile-viewed', 'user-messages-viewed',
              'support-message-sent', 'message-reported', 'message-blocked']
-        && request.resource.data.keys().hasOnly(
+        && onlyKeys(
              ['actorId', 'action', 'details', 'targetId', 'before', 'after', 'reason', 'createdAt'])
         && request.resource.data.createdAt is timestamp;
       // DASHBOARDS (Step 5): a user appends ONLY their own profile-change
@@ -2834,7 +2883,7 @@ service cloud.firestore {
         && request.resource.data.actorId == uid()
         && request.resource.data.targetId == uid()
         && request.resource.data.action == 'profile-changed'
-        && request.resource.data.keys().hasOnly(
+        && onlyKeys(
              ['actorId', 'action', 'details', 'targetId', 'before', 'after', 'createdAt'])
         && request.resource.data.details is string
         && request.resource.data.createdAt is timestamp;
@@ -2853,7 +2902,7 @@ service cloud.firestore {
              'guardian-link-requested', 'guardian-link-confirmed', 'guardian-link-revoked']
         && request.resource.data.targetId is string
         && request.resource.data.targetId.matches('^[^_]+_[^_]+$')
-        && request.resource.data.keys().hasOnly(
+        && onlyKeys(
              ['actorId', 'action', 'details', 'targetId', 'before', 'after', 'createdAt'])
         && request.resource.data.details is string
         && request.resource.data.createdAt is timestamp;
@@ -3221,6 +3270,10 @@ service cloud.firestore {
         && get(/databases/$(database)/documents/users/$(uid())/nuAttempts/$(get(/databases/$(database)/documents/nuReceipts/$(uid() + '_' + bundleId)).data.attemptId)).data.bundleId == bundleId
         && get(/databases/$(database)/documents/users/$(uid())/nuAttempts/$(get(/databases/$(database)/documents/nuReceipts/$(uid() + '_' + bundleId)).data.attemptId)).data.userId == uid()
         && get(/databases/$(database)/documents/nuReceipts/$(uid() + '_' + bundleId)).data.createdAt is timestamp
+        // L2 (Step 17, 23 Nov 2026): the read gate had NO lower bound
+        // on createdAt — a future-dated receipt opened the key for a
+        // year. Mirrors hasFreshReceipt (createdAt <= request.time).
+        && get(/databases/$(database)/documents/nuReceipts/$(uid() + '_' + bundleId)).data.createdAt <= request.time
         && request.time < get(/databases/$(database)/documents/nuReceipts/$(uid() + '_' + bundleId)).data.createdAt + duration.value(10, 'm');
     }
 
@@ -3309,10 +3362,10 @@ service cloud.firestore {
       allow create: if (isAdmin() || (isVerifiedTeacher() && request.resource.data.createdBy == uid()))
         && request.resource.data.status == 'draft'
         && isValidNuSubject(request.resource.data);
-      allow update: if (isAdmin() || (isVerifiedTeacher() && resource.data.createdBy == uid()))
+      allow update: if adminOrOwnTeacher()
         && resource.data.status != 'published'
         && !(request.resource.data.status == 'published' && !isAdmin())
-        && request.resource.data.createdBy == resource.data.createdBy
+        && sameCreator()
         && isValidNuSubject(request.resource.data);
       allow delete: if false;
     }
@@ -3322,10 +3375,10 @@ service cloud.firestore {
       allow create: if (isAdmin() || (isVerifiedTeacher() && request.resource.data.createdBy == uid()))
         && request.resource.data.status == 'draft'
         && isValidNuChapter(request.resource.data);
-      allow update: if (isAdmin() || (isVerifiedTeacher() && resource.data.createdBy == uid()))
+      allow update: if adminOrOwnTeacher()
         && resource.data.status != 'published'
         && !(request.resource.data.status == 'published' && !isAdmin())
-        && request.resource.data.createdBy == resource.data.createdBy
+        && sameCreator()
         && isValidNuChapter(request.resource.data);
       allow delete: if false;
     }
@@ -3335,10 +3388,10 @@ service cloud.firestore {
       allow create: if (isAdmin() || (isVerifiedTeacher() && request.resource.data.createdBy == uid()))
         && request.resource.data.status == 'draft'
         && isValidNuTopic(request.resource.data);
-      allow update: if (isAdmin() || (isVerifiedTeacher() && resource.data.createdBy == uid()))
+      allow update: if adminOrOwnTeacher()
         && resource.data.status != 'published'
         && !(request.resource.data.status == 'published' && !isAdmin())
-        && request.resource.data.createdBy == resource.data.createdBy
+        && sameCreator()
         && isValidNuTopic(request.resource.data);
       allow delete: if false;
     }
@@ -3348,10 +3401,10 @@ service cloud.firestore {
       allow create: if (isAdmin() || (isVerifiedTeacher() && request.resource.data.createdBy == uid()))
         && request.resource.data.status == 'draft'
         && isValidNuLesson(request.resource.data);
-      allow update: if (isAdmin() || (isVerifiedTeacher() && resource.data.createdBy == uid()))
+      allow update: if adminOrOwnTeacher()
         && resource.data.status != 'published'
         && !(request.resource.data.status == 'published' && !isAdmin())
-        && request.resource.data.createdBy == resource.data.createdBy
+        && sameCreator()
         && isValidNuLesson(request.resource.data);
       allow delete: if false;
     }
@@ -3372,11 +3425,11 @@ service cloud.firestore {
       // (A) Content edit — author-or-Admin, only while draft or
       // changes_requested, status + version + author unchanged, and
       // only content keys may change. The state machine lives in (B).
-      allow update: if (isAdmin() || (isVerifiedTeacher() && resource.data.createdBy == uid()))
+      allow update: if adminOrOwnTeacher()
         && resource.data.status in ['draft', 'changes_requested']
         && request.resource.data.status == resource.data.status
         && request.resource.data.version == resource.data.version
-        && request.resource.data.createdBy == resource.data.createdBy
+        && sameCreator()
         && changedKeys().hasOnly(
              ['questionText', 'questionLang', 'options', 'difficulty',
               'explanation', 'sourceType', 'provenance', 'examYear',
@@ -3392,7 +3445,7 @@ service cloud.firestore {
       allow update: if isNuQuestionTransitionAllowed(resource.data.status, request.resource.data.status)
         && isNuQuestionTransitionActorOk(request.resource.data.status)
         && request.resource.data.version == resource.data.version
-        && request.resource.data.createdBy == resource.data.createdBy
+        && sameCreator()
         && changedKeys().hasOnly(
              ['status', 'reviewedBy', 'reviewedAt', 'publishedAt', 'updatedAt'])
         && (request.resource.data.status != 'submitted_for_review'
@@ -3429,10 +3482,10 @@ service cloud.firestore {
         && exists(/databases/$(database)/documents/nuQuestions/$(questionId))
         && get(/databases/$(database)/documents/nuQuestions/$(questionId)).data.status == 'draft'
         && get(/databases/$(database)/documents/nuQuestions/$(questionId)).data.version == request.resource.data.version;
-      allow update: if (isAdmin() || (isVerifiedTeacher() && resource.data.createdBy == uid()))
+      allow update: if adminOrOwnTeacher()
         && request.resource.data.questionId == questionId
         && request.resource.data.version == resource.data.version
-        && request.resource.data.createdBy == resource.data.createdBy
+        && sameCreator()
         && isValidNuQuestionDraftKey(request.resource.data)
         && exists(/databases/$(database)/documents/nuQuestions/$(questionId))
         && get(/databases/$(database)/documents/nuQuestions/$(questionId)).data.status == 'draft'
@@ -3482,10 +3535,32 @@ service cloud.firestore {
     // and a new one created. The receipt id is `{uid}_{bundleId}`.
     match /nuReceipts/{receiptId} {
       allow read: if (signedIn() && resource.data.userId == uid()) || isAdmin();
-      allow create: if receiptId == uid() + '_' + request.resource.data.bundleId
+      // L2 (Step 17, 23 Nov 2026): the create was the weak copy — no
+      // signedIn/callerActive, no key allowlist, no createdAt bounds,
+      // no attempt check at all (a receipt for a nonexistent or
+      // unsubmitted attempt passed). Now mirrors jobReceipts: the
+      // anchor attempt must exist, be submitted, and match this
+      // bundle and this user; createdAt within 5 minutes, never in
+      // the future. Single-use is kept (!exists on the id).
+      allow create: if signedIn() && callerActive()
+        && receiptId == uid() + '_' + request.resource.data.bundleId
+        && onlyKeys(['userId', 'bundleId', 'attemptId', 'createdAt'])
         && request.resource.data.userId == uid()
-        && request.resource.data.attemptId is string
         && request.resource.data.bundleId is string
+        && request.resource.data.bundleId.size() <= 200
+        && request.resource.data.attemptId is string
+        && request.resource.data.attemptId.size() <= 200
+        && request.resource.data.createdAt is timestamp
+        && request.resource.data.createdAt <= request.time
+        && request.resource.data.createdAt > request.time - duration.value(5, 'm')
+        && exists(/databases/$(database)/documents/users/$(uid())/nuAttempts/$(request.resource.data.attemptId))
+        && get(/databases/$(database)/documents/users/$(uid())/nuAttempts/$(request.resource.data.attemptId)).data.status == 'submitted'
+        && get(/databases/$(database)/documents/users/$(uid())/nuAttempts/$(request.resource.data.attemptId)).data.bundleId == request.resource.data.bundleId
+        // NOTE: no separate attempt.userId == uid() check — the attempt
+        // is fetched from the CALLER's own subcollection
+        // (/users/$(uid())/nuAttempts/...), so the path itself enforces
+        // ownership; a redundant field check would only cost compiled
+        // bytes (the rules margin is ~80 bytes before the refactor).
         && !exists(/databases/$(database)/documents/nuReceipts/$(receiptId));
       allow update: if false;
       allow delete: if resource.data.userId == uid();
@@ -3556,8 +3631,31 @@ service cloud.firestore {
 
     // users/{uid}/nuSessions (§19.2.9): the running-exam state
     // (autosave / recovery copy). Only the owner; deleted after submit.
+    // L3 (Step 17, 23 Nov 2026): the match had NO field restrictions
+    // at all — any owner could smuggle `score`, rewrite attemptId /
+    // startedAt / deadlineAt, or invent fields. Create now allows
+    // exactly the design-doc fields (attemptId, status, startedAt,
+    // deadlineAt, lastSavedAt, answers, deviceInfo, updatedAt) with
+    // a status enum and timestamp types; updates may touch only the
+    // autosave fields — attemptId, startedAt and deadlineAt are
+    // frozen. The session is NOT tied to an existing attempt here:
+    // no client writes nuSessions yet (NU-8 engine not built) and
+    // the create order (attempt-first vs session-first) is undecided
+    // — that linkage is a post-NU-8 follow-up, not a silent break.
     match /users/{uid}/nuSessions/{sessionId} {
-      allow read, create, update: if isOwner(uid);
+      allow read: if isOwner(uid);
+      allow create: if isOwner(uid)
+        && onlyKeys(['attemptId', 'status', 'startedAt',
+             'deadlineAt', 'lastSavedAt', 'answers', 'deviceInfo', 'updatedAt'])
+        && request.resource.data.attemptId is string
+        && request.resource.data.status in ['in_progress', 'submitted']
+        && request.resource.data.startedAt is timestamp
+        && request.resource.data.deadlineAt is timestamp
+        && request.resource.data.updatedAt is timestamp;
+      allow update: if isOwner(uid)
+        && changedKeys()
+             .hasOnly(['status', 'lastSavedAt', 'answers', 'deviceInfo', 'updatedAt'])
+        && request.resource.data.status in ['in_progress', 'submitted'];
       allow delete: if isOwner(uid) && resource.data.status == 'submitted';
     }
 
@@ -3765,7 +3863,7 @@ service cloud.firestore {
         // Published doc only the status/verifier fields may change.
         && (resource.data.get('status', '') != 'published'
             || changedKeys()
-                 .hasOnly(['status', 'reviewStatus', 'verifiedBy', 'verifiedAt', 'updatedAt']))
+                 .hasOnly(reviewKeys()))
         && jobContentSecondEye(resource.data, request.resource.data)
         && jobContentPublishTransition(resource.data, request.resource.data)
         && validJobSubject(request.resource.data);
@@ -3785,7 +3883,7 @@ service cloud.firestore {
       allow read: if signedIn() && resource.data.get('status', '') == 'published'
         || (signedIn() && resource.data.get('authorId', '') == uid())
         || isModerator();
-      allow create: if isTeacher()
+      allow create: if isVerifiedJobBankAuthor()
         && jobContentCreateCommon(request.resource.data)
         && validJobChapter(request.resource.data)
         && chapterId.matches('^' + request.resource.data.get('subjectId', '') + '__[a-z0-9-]+$')
@@ -3809,7 +3907,7 @@ service cloud.firestore {
                        'order', 'status', 'reviewStatus', 'verifiedBy', 'verifiedAt', 'updatedAt'])
         && (resource.data.get('status', '') != 'published'
             || changedKeys()
-                 .hasOnly(['status', 'reviewStatus', 'verifiedBy', 'verifiedAt', 'updatedAt']))
+                 .hasOnly(reviewKeys()))
         && jobContentSecondEye(resource.data, request.resource.data)
         && jobContentPublishTransition(resource.data, request.resource.data)
         && validJobChapter(request.resource.data);
@@ -3826,7 +3924,7 @@ service cloud.firestore {
       allow read: if signedIn() && resource.data.get('status', '') == 'published'
         || (signedIn() && resource.data.get('authorId', '') == uid())
         || isModerator();
-      allow create: if isTeacher()
+      allow create: if isVerifiedJobBankAuthor()
         && jobContentCreateCommon(request.resource.data)
         && validJobTopic(request.resource.data)
         && topicId.matches('^' + request.resource.data.get('chapterId', '') + '__[a-z0-9-]+$')
@@ -3853,7 +3951,7 @@ service cloud.firestore {
                        'status', 'reviewStatus', 'verifiedBy', 'verifiedAt', 'updatedAt'])
         && (resource.data.get('status', '') != 'published'
             || changedKeys()
-                 .hasOnly(['status', 'reviewStatus', 'verifiedBy', 'verifiedAt', 'updatedAt']))
+                 .hasOnly(reviewKeys()))
         && jobContentSecondEye(resource.data, request.resource.data)
         && jobContentPublishTransition(resource.data, request.resource.data)
         && validJobTopic(request.resource.data);
@@ -3871,7 +3969,7 @@ service cloud.firestore {
       allow read: if signedIn() && resource.data.get('status', '') == 'published'
         || (signedIn() && resource.data.get('authorId', '') == uid())
         || isModerator();
-      allow create: if isTeacher()
+      allow create: if isVerifiedJobBankAuthor()
         && jobContentCreateCommon(request.resource.data)
         && request.resource.data.get('lessonType', '') == 'lesson'
         && validJobLesson(request.resource.data)
@@ -3899,7 +3997,7 @@ service cloud.firestore {
                        'status', 'reviewStatus', 'verifiedBy', 'verifiedAt', 'updatedAt'])
         && (resource.data.get('status', '') != 'published'
             || changedKeys()
-                 .hasOnly(['status', 'reviewStatus', 'verifiedBy', 'verifiedAt', 'updatedAt']))
+                 .hasOnly(reviewKeys()))
         && jobContentSecondEye(resource.data, request.resource.data)
         && jobContentPublishTransition(resource.data, request.resource.data)
         && validJobLesson(request.resource.data);
@@ -3985,15 +4083,15 @@ service cloud.firestore {
         && d.get('retakeAllowed', null) is bool
         && (d.get('maxAttempts', null) == null
             || (d.get('maxAttempts', null) is int && d.get('maxAttempts', 0) >= 1))
-        && (d.get('publishedAt', null) == null || d.get('publishedAt', null) is timestamp)
-        && (d.get('publishedBy', null) == null || d.get('publishedBy', null) is string)
-        && (d.get('createdAt', null) == null || d.get('createdAt', null) is timestamp)
-        && (d.get('updatedAt', null) == null || d.get('updatedAt', null) is timestamp);
+        && (isOptTs(d, 'publishedAt'))
+        && (isOptStrNoMax(d, 'publishedBy'))
+        && (isOptTs(d, 'createdAt'))
+        && (isOptTs(d, 'updatedAt'));
     }
     match /jobExamDefinitions/{mockId} {
       allow read: if resource.data.get('status', '') == 'published' || isModerator();
       allow create: if isModerator()
-        && request.resource.data.keys().hasOnly(['examSlug', 'titleBn', 'titleEn',
+        && onlyKeys(['examSlug', 'titleBn', 'titleEn',
              'kind', 'bundleId', 'questionSetId', 'rulesSnapshot', 'scheduleDate', 'examSlugCycle',
              'status', 'retakeAllowed', 'maxAttempts', 'publishedAt', 'publishedBy',
              'createdAt', 'updatedAt'])
@@ -4009,7 +4107,7 @@ service cloud.firestore {
       // draft. Status moves: draft -> published / archived;
       // published -> archived; archived -> draft.
       allow update: if isModerator()
-        && request.resource.data.keys().hasOnly(['examSlug', 'titleBn', 'titleEn',
+        && onlyKeys(['examSlug', 'titleBn', 'titleEn',
              'kind', 'bundleId', 'questionSetId', 'rulesSnapshot', 'scheduleDate', 'examSlugCycle',
              'status', 'retakeAllowed', 'maxAttempts', 'publishedAt', 'publishedBy',
              'createdAt', 'updatedAt'])
@@ -4050,21 +4148,21 @@ service cloud.firestore {
         && d.get('questionRefs', []).size() == d.get('questionCount', 0)
         && isStr(d.get('markingSchemeVersion', null), 100)
         && d.get('status', null) in ['draft', 'published', 'archived']
-        && (d.get('publishedAt', null) == null || d.get('publishedAt', null) is timestamp)
-        && (d.get('publishedBy', null) == null || d.get('publishedBy', null) is string)
-        && (d.get('createdAt', null) == null || d.get('createdAt', null) is timestamp)
-        && (d.get('updatedAt', null) == null || d.get('updatedAt', null) is timestamp);
+        && (isOptTs(d, 'publishedAt'))
+        && (isOptStrNoMax(d, 'publishedBy'))
+        && (isOptTs(d, 'createdAt'))
+        && (isOptTs(d, 'updatedAt'));
     }
     match /jobQuestionSetManifests/{questionSetId} {
       allow read: if resource.data.get('status', '') == 'published' || isModerator();
       allow create: if isModerator()
-        && request.resource.data.keys().hasOnly(['examSlug', 'mockId', 'version',
+        && onlyKeys(['examSlug', 'mockId', 'version',
              'questionCount', 'questionRefs', 'markingSchemeVersion', 'status',
              'publishedAt', 'publishedBy', 'createdAt', 'updatedAt'])
         && request.resource.data.get('status', '') == 'draft'
         && validJobQuestionSetManifest(request.resource.data);
       allow update: if isModerator()
-        && request.resource.data.keys().hasOnly(['examSlug', 'mockId', 'version',
+        && onlyKeys(['examSlug', 'mockId', 'version',
              'questionCount', 'questionRefs', 'markingSchemeVersion', 'status',
              'publishedAt', 'publishedBy', 'createdAt', 'updatedAt'])
         && validJobQuestionSetManifest(request.resource.data)
@@ -4210,7 +4308,7 @@ service cloud.firestore {
       // 29 fields the app writes (Step 7 fold-in, ChatGPT P1-03:
       // no smuggled privileged/junk fields at creation).
       allow create: if isVerifiedJobBankAuthor()
-        && request.resource.data.keys().hasOnly(['examSlug', 'subjectId',
+        && onlyKeys(['examSlug', 'subjectId',
              'chapterId', 'topicId', 'questionText', 'options',
              'correctLetter', 'explanation', 'whyWrong', 'difficulty',
              'isPreviousYear', 'examYear', 'source', 'sourceUrl',
@@ -4277,7 +4375,7 @@ service cloud.firestore {
             || bundleId == 'daily__' + request.resource.data.get('mockId', ''))
         && (request.resource.data.get('kind', '') != 'weekly'
             || bundleId == 'weekly__' + request.resource.data.get('mockId', ''))
-        && request.resource.data.keys().hasOnly(['kind', 'examSlug',
+        && onlyKeys(['kind', 'examSlug',
              'topicId', 'mockId', 'year', 'titleBn', 'titleEn',
              'questions', 'questionCount', 'status', 'reviewStatus',
              'publishedAt', 'publishedBy', 'sourceQuestionIds',
@@ -4350,37 +4448,28 @@ service cloud.firestore {
     // Measured by release-create probe 23 Nov ~02:30: delete +
     // these 3 keys = +89 stripped bytes, PASSES (compiled margin
     // after them ≈ 100 bytes). The four new Step 15 collections
-    // below are DEPLOY-BLOCKED on the same margin — see the note
-    // above match /jobReports.
+    // below were DEPLOY-BLOCKED on that margin at the time — but
+    // the public-ID refactor has since landed and Step 15 deployed
+    // them live on 23 Nov 2026, so this note is history only.
     match /circulars/{circularId} {
       allow read: if resource.data.get('reviewStatus', '') == 'published' || isModerator();
       allow create, update: if isModerator()
-        && request.resource.data.keys().hasOnly(['examSlug', 'postTitleBn', 'postTitleEn', 'circularNumber', 'publishedDate', 'applicationDeadline', 'deadlinePrecision', 'totalPosts', 'eligibilitySummaryBn', 'eligibilitySummaryEn', 'officialUrl', 'applyUrl', 'copyStatus', 'copyTextExcerpt', 'reviewStatus', 'verifiedBy', 'verifiedAt', 'examDate', 'applicationStartDate', 'authorId', 'createdAt', 'updatedAt', 'verificationChecklist', 'reviewNote', 'lastEditedBy'])
+        && onlyKeys(['examSlug', 'postTitleBn', 'postTitleEn', 'circularNumber', 'publishedDate', 'applicationDeadline', 'deadlinePrecision', 'totalPosts', 'eligibilitySummaryBn', 'eligibilitySummaryEn', 'officialUrl', 'applyUrl', 'copyStatus', 'copyTextExcerpt', 'reviewStatus', 'verifiedBy', 'verifiedAt', 'examDate', 'applicationStartDate', 'authorId', 'createdAt', 'updatedAt', 'verificationChecklist', 'reviewNote', 'lastEditedBy'])
         && request.resource.data.get('reviewStatus', '') in ['draft', 'in-review', 'verified', 'published', 'rejected'];
       allow delete: if isAdmin();
     }
 
-    // ---------- Step 15 admin collections — DEPLOY-BLOCKED ----------
-    // These four blocks are WRITTEN and EMULATOR-VERIFIED in this
-    // branch, but they CANNOT be deployed yet: release-create
+    // ---------- Step 15 admin collections (DEPLOYED live 23 Nov 2026) ----------
+    // These four blocks were written and emulator-verified in the
+    // Step 15 branch but were deploy-blocked at the time: release-create
     // probes 23 Nov ~02:24 measured each one OVER the 256,000-byte
     // compiled limit on its own (jobReports 257,315; jobCorrections
     // 257,507; circularHistory 256,671; approvedDomains 256,328;
     // all four + the circulars delete = 260,502, i.e. 4,502 over).
-    // Baseline compiled ≈ 255,791 (margin ≈ 209 bytes).
-    // DO NOT deploy these rules until the public-ID rules refactor
-    // (feature/public-user-ids, scheduled for the 23 Nov 14:30
-    // cron) lands on main and frees ~4,992 compiled bytes: the
-    // deploy coordinator must rebase this branch onto that main,
-    // re-run the release-create probe
-    // (~/workspace/eduorbit/step15-rules-size-probe.mjs), and only
-    // then deploy rules + hosting TOGETHER. A hosting-only deploy
-    // before that would ship admin/report UI whose writes the live
-    // rules deny. The circulars admin UI that works under the
-    // Step 14 rules (queue, checklist, create/edit/verify/archive,
-    // duplicate warnings, domain check) is unaffected — it needs
-    // only the delete line + 3 keys above, which already passed
-    // the probe.
+    // Baseline compiled ≈ 255,791 (margin ≈ 209 bytes). The block
+    // lifted once the public-ID rules refactor landed on main and
+    // freed ~4,992 compiled bytes; Step 15 deployed these rules live
+    // on 23 Nov 2026 (ruleset 6c0fb8af-4451-4b06-8a4a-3c1da1690f66).
     match /jobReports/{reportId} {
       allow read: if signedIn() && (resource.data.reporterId == uid() || isModerator());
       allow create: if signedIn() && callerActive()
@@ -4391,8 +4480,14 @@ service cloud.firestore {
         && request.resource.data.targetId is string
         && request.resource.data.targetAuthorId is string
         && isOptStr(request.resource.data.details, 2000)
-        && request.resource.data.keys().hasOnly(['reporterId', 'targetType', 'targetId', 'targetAuthorId', 'reason', 'details', 'suggestedValue', 'evidenceUrl', 'status', 'priority', 'resolvedBy', 'resolvedAt', 'resolutionNote', 'createdAt', 'updatedAt']);
+        && onlyKeys(['reporterId', 'targetType', 'targetId', 'targetAuthorId', 'reason', 'details', 'suggestedValue', 'evidenceUrl', 'status', 'priority', 'resolvedBy', 'resolvedAt', 'resolutionNote', 'createdAt', 'updatedAt']);
       allow update: if isModerator()
+        // k15a (Step 17, 23 Nov 2026): the decide update had NO
+        // affectedKeys — a moderator deciding a report could rewrite
+        // reporterId / targetId / targetAuthorId along the way.
+        // Only the decide fields may change.
+        && changedKeys()
+             .hasOnly(['status', 'priority', 'resolvedBy', 'resolvedAt', 'resolutionNote', 'updatedAt'])
         && request.resource.data.status in ['open', 'investigating', 'resolved', 'dismissed'];
       allow delete: if false;
     }
@@ -4405,10 +4500,16 @@ service cloud.firestore {
         && isStr(request.resource.data.whatsWrong, 2000)
         && isStr(request.resource.data.proposedFix, 2000)
         && isStr(request.resource.data.source, 500)
-        && request.resource.data.keys().hasOnly(['requesterId', 'targetType', 'targetId', 'whatsWrong', 'proposedFix', 'source', 'status', 'decidedBy', 'decidedAt', 'decisionReason', 'createdAt', 'updatedAt']);
+        && onlyKeys(['requesterId', 'targetType', 'targetId', 'whatsWrong', 'proposedFix', 'source', 'status', 'decidedBy', 'decidedAt', 'decisionReason', 'createdAt', 'updatedAt']);
       allow update: if isModerator()
         && resource.data.status == 'pending'
         && request.resource.data.status in ['accepted', 'rejected']
+        // k15b (Step 17, 23 Nov 2026): the decide update had NO
+        // affectedKeys — a moderator deciding a correction could
+        // rewrite whatsWrong / proposedFix / source along the way.
+        // Only the decide fields may change.
+        && changedKeys()
+             .hasOnly(['status', 'decidedBy', 'decidedAt', 'decisionReason', 'updatedAt'])
         && request.resource.data.decidedBy == uid()
         && request.resource.data.decisionReason is string
         && request.resource.data.decisionReason.size() >= 10;
@@ -4426,7 +4527,7 @@ service cloud.firestore {
     match /circularHistory/{historyId} {
       allow read: if isModerator();
       allow create: if isModerator()
-        && request.resource.data.keys().hasOnly(['circularId', 'fieldChanged', 'previousValue', 'newValue', 'sourceId', 'changedBy', 'changedAt', 'note'])
+        && onlyKeys(['circularId', 'fieldChanged', 'previousValue', 'newValue', 'sourceId', 'changedBy', 'changedAt', 'note'])
         && request.resource.data.fieldChanged in ['applicationDeadline', 'officialUrl', 'applyUrl', 'totalPosts', 'reviewStatus', 'examDate', 'applicationStartDate', 'duplicateOf', 'correctionOf', 'extensionOf', 'relatedTo']
         && request.resource.data.changedBy == uid()
         && request.resource.data.circularId is string
@@ -4441,7 +4542,7 @@ service cloud.firestore {
     match /approvedDomains/{domainId} {
       allow read: if isModerator();
       allow create, update: if isAdmin()
-        && request.resource.data.keys().hasOnly(['domain', 'organization', 'examSlugs', 'addedBy', 'createdAt', 'updatedAt', 'status'])
+        && onlyKeys(['domain', 'organization', 'examSlugs', 'addedBy', 'createdAt', 'updatedAt', 'status'])
         && isStr(request.resource.data.domain, 200)
         && isStr(request.resource.data.organization, 200)
         // 'status' is optional on create (defaults to active);
@@ -4477,7 +4578,7 @@ service cloud.firestore {
       // the bundle's questions, same count and same configVersion,
       // so a key can never score a different bundle generation).
       allow create: if isModerator()
-        && request.resource.data.keys().hasOnly(['bundleId', 'answers',
+        && onlyKeys(['bundleId', 'answers',
              'configVersion', 'createdAt', 'updatedAt'])
         && validJobQuestionKey(request.resource.data, bundleId)
         && exists(/databases/$(database)/documents/jobQuestionBundles/$(bundleId))
@@ -4521,7 +4622,7 @@ service cloud.firestore {
       allow read: if (signedIn() && resource.data.get('userId', '') == uid()) || isAdmin();
       allow create: if signedIn() && callerActive()
         && receiptId == uid() + '_' + request.resource.data.get('bundleId', '')
-        && request.resource.data.keys().hasOnly(['userId', 'bundleId',
+        && onlyKeys(['userId', 'bundleId',
              'attemptId', 'createdAt', 'purpose', 'bundleVersion'])
         && request.resource.data.get('userId', '') == uid()
         && request.resource.data.get('bundleId', null) is string
@@ -4542,7 +4643,7 @@ service cloud.firestore {
         // purpose decides the anchor — see validJobReceiptAnchor
         // (shared by create and by the re-issue update below).
         && validJobReceiptAnchor(request.resource.data)
-        && exists(/databases/$(database)/documents/jobQuestionBundles/$(request.resource.data.get('bundleId', '')))
+        && reqBundleExists()
         && get(/databases/$(database)/documents/jobQuestionBundles/$(request.resource.data.get('bundleId', ''))).data.status == 'published';
       // Anchored re-issue (Step 9 closure, open question 1): a
       // retake's setDoc on the existing receipt doc-ID is an UPDATE
@@ -4556,7 +4657,7 @@ service cloud.firestore {
         && request.resource.data.get('userId', '') == uid()
         && resource.data.get('userId', '') == uid()
         && resource.data.get('bundleId', '') == request.resource.data.get('bundleId', '')
-        && request.resource.data.keys().hasOnly(['userId', 'bundleId',
+        && onlyKeys(['userId', 'bundleId',
              'attemptId', 'createdAt', 'purpose', 'bundleVersion'])
         && request.resource.data.get('bundleId', null) is string
         && request.resource.data.get('bundleId', '').size() <= 200
@@ -4572,7 +4673,7 @@ service cloud.firestore {
         && request.resource.data.get('createdAt', null) <= request.time
         && request.resource.data.get('createdAt', null) > request.time - duration.value(5, 'm')
         && validJobReceiptAnchor(request.resource.data)
-        && exists(/databases/$(database)/documents/jobQuestionBundles/$(request.resource.data.get('bundleId', '')))
+        && reqBundleExists()
         && get(/databases/$(database)/documents/jobQuestionBundles/$(request.resource.data.get('bundleId', ''))).data.status == 'published';
       allow delete: if isAdmin();
     }
@@ -4595,7 +4696,7 @@ service cloud.firestore {
         // attempt below): the exists-guards short-circuit before
         // any get(), so a missing doc denies cleanly instead of
         // erroring the get.
-        && exists(/databases/$(database)/documents/jobQuestionBundles/$(request.resource.data.get('bundleId', '')))
+        && reqBundleExists()
         && exists(/databases/$(database)/documents/users/$(userId)/jobSessions/$(attemptId))
         && validJobAttemptCreate(request.resource.data, userId, attemptId,
              jobBundleData(request.resource.data.get('bundleId', '')),
@@ -4613,7 +4714,7 @@ service cloud.firestore {
     match /users/{userId}/jobSessions/{sessionId} {
       allow read: if isOwner(userId) || isModerator();
       allow create: if isOwner(userId) && callerActive()
-        && exists(/databases/$(database)/documents/jobQuestionBundles/$(request.resource.data.get('bundleId', '')))
+        && reqBundleExists()
         && validJobSessionCreate(request.resource.data,
              jobBundleData(request.resource.data.get('bundleId', '')));
       allow update: if isOwner(userId) && callerActive()
@@ -4642,7 +4743,7 @@ service cloud.firestore {
       // short-circuit before any get(), so a missing doc denies
       // cleanly instead of erroring the get.
       allow create: if isOwner(userId) && callerActive()
-        && exists(/databases/$(database)/documents/jobQuestionBundles/$(request.resource.data.get('bundleId', '')))
+        && reqBundleExists()
         && exists(/databases/$(database)/documents/users/$(userId)/jobExamSessions/$(attemptId))
         && validJobExamAttemptCreate(request.resource.data, userId, attemptId,
              jobBundleData(request.resource.data.get('bundleId', '')),
@@ -4665,7 +4766,7 @@ service cloud.firestore {
       // exists-guards short-circuit before any get(), so a
       // missing doc denies cleanly instead of erroring the get.
       allow create: if isOwner(userId) && callerActive()
-        && exists(/databases/$(database)/documents/jobQuestionBundles/$(request.resource.data.get('bundleId', '')))
+        && reqBundleExists()
         && exists(/databases/$(database)/documents/jobQuestionSetManifests/$(request.resource.data.get('questionSetId', '')))
         && exists(/databases/$(database)/documents/jobExamDefinitions/$(request.resource.data.get('definitionId', '')))
         && validJobExamSessionCreate(request.resource.data, sessionId,

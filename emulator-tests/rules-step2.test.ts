@@ -48,6 +48,11 @@ async function seed() {
         role,
         language: 'bn',
         isActive: uid !== 'suspended-1',
+        // Step 17 (M2 fix, 23 Nov 2026): the content-authoring gate is
+        // now isVerifiedJobBankAuthor() — the suite's author fixture
+        // is a VERIFIED teacher; the pending-teacher denial is proven
+        // in rules-step17-security.test.ts (m2a–m2e).
+        ...(uid === 'teacher-1' ? { verificationStatus: 'verified' } : {}),
       });
     }
     const published = { title: 'Published item', reviewStatus: 'Published' };
