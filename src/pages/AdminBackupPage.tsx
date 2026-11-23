@@ -188,6 +188,12 @@ export default function AdminBackupPage() {
           </label>
         ))}
       </div>
+      <p style={{ color: 'var(--ink-soft)', fontSize: 14 }}>
+        {t({
+          bn: 'দুটো সংগ্রহ এখানে নেই — follows ও directMessages: নিয়ম অনুযায়ী মালিকও এগুলো তালিকা করে পড়তে পারেন না, তাই শুধু script/console export-এ আসে।',
+          en: 'Two collections are not listed here — follows and directMessages: the rules do not let even the owner list-read them, so they only come through the script/console export.',
+        })}
+      </p>
       <button
         type="button"
         onClick={() => void runPreflight()}

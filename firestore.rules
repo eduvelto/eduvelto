@@ -1889,7 +1889,16 @@ service cloud.firestore {
     // signed-in user may increment `next` by exactly 1 (the
     // allocation transaction). Nothing else may touch it.
     match /counters/{counterId} {
-      allow read: if signedIn() && counterId == 'publicUserIds';
+      // OPTION A (Step 18 deploy, 23 Nov 2026): `allow read` DENIED
+      // list/count — in list context the {counterId} wildcard is
+      // unbound (null), so `counterId == 'publicUserIds'` errors and
+      // the whole list is denied. That broke the /admin/backup
+      // in-app export preflight (one count query per collection).
+      // Split: `get` keeps the id check; `list` needs no wildcard
+      // (only `publicUserIds` can ever exist — create restricts the
+      // id — so the list returns exactly that doc).
+      allow get: if signedIn() && counterId == 'publicUserIds';
+      allow list: if signedIn();
       allow create: if isOwnerRole()
         && counterId == 'publicUserIds'
         && request.resource.data.keys().hasOnly(['next', 'updatedAt'])
