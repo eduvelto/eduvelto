@@ -65,6 +65,7 @@ const MORE_LINKS = [
   { to: '/directory', bn: 'শিক্ষা নির্দেশিকা', en: 'Education Directory' },
   { to: '/exam', bn: 'পরীক্ষা', en: 'Exams' },
   { to: '/health', bn: 'স্বাস্থ্য', en: 'Health' },
+  { to: '/life', bn: 'জীবন সেবা', en: 'Life Services' },
   { to: '/about', bn: 'আমাদের সম্পর্কে', en: 'About' },
   { to: '/founder', bn: 'প্রতিষ্ঠাতা', en: 'Founder' },
   { to: '/contact', bn: 'যোগাযোগ', en: 'Contact' },

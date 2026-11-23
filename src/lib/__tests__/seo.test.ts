@@ -155,6 +155,16 @@ const SITEMAP_URLS = [
   '/health/diseases',
   '/health/doctors',
   '/health/hospitals',
+  '/life',
+  '/life/budget',
+  '/life/calculators',
+  '/life/converters',
+  '/life/planner',
+  '/life/pdf-tools',
+  '/life/health',
+  '/life/government',
+  '/life/travel',
+  '/life/services',
   '/ai-teacher',
 ];
 

@@ -37,6 +37,7 @@ export default function Footer() {
           <Link to="/contact">{t({ bn: 'যোগাযোগ', en: 'Contact' })}</Link>
           <Link to="/install">{t({ bn: 'অ্যাপ ইনস্টল / আপডেট', en: 'Install / update app' })}</Link>
           <Link to="/health">{t({ bn: 'স্বাস্থ্য', en: 'Health' })}</Link>
+          <Link to="/life">{t({ bn: 'জীবন সেবা', en: 'Life Services' })}</Link>
           <Link to="/ai-teacher">{t({ bn: 'AI Teacher (পরিকল্পনায় আছে)', en: 'AI Teacher (planned)' })}</Link>
         </div>
       </div>
