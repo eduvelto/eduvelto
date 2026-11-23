@@ -229,13 +229,13 @@ const STATIC_ROUTES: Record<string, RouteSeoEntry> = {
   '/jobs': {
     title: 'চাকরি প্রস্তুতি — BCS, ব্যাংক, প্রাথমিক শিক্ষক, NTRCA | Eduvelto',
     description:
-      'BCS, ব্যাংক, প্রাথমিক শিক্ষক ও NTRCA পরীক্ষার প্রস্তুতির কাঠামো — পরীক্ষার ধরন, সিলেবাস ও বিষয়ভিত্তিক প্রস্তুতি। MCQ অনুশীলন ও মক টেস্ট শীঘ্রই আসছে। Eduvelto — সম্পূর্ণ ফ্রি।',
+      'BCS, ব্যাংক, প্রাথমিক শিক্ষক ও NTRCA পরীক্ষার প্রস্তুতির কাঠামো — পরীক্ষার ধরন, সিলেবাস ও বিষয়ভিত্তিক প্রস্তুতি। বিসিএস ইংরেজি অনুশীলন এখন চালু; পূর্ণাঙ্গ মক পরীক্ষা এখনো প্রস্তুত হচ্ছে। Eduvelto — সম্পূর্ণ ফ্রি।',
     crumb: 'চাকরি প্রস্তুতি',
   },
   '/jobs/common': {
     title: 'কমন বিষয় — চাকরি প্রস্তুতি | Eduvelto',
     description:
-      'চাকরি পরীক্ষার কমন বিষয় — বাংলা, ইংরেজি, গণিত ও সাধারণ জ্ঞানের প্রস্তুতির কাঠামো। MCQ অনুশীলন শীঘ্রই আসছে। Eduvelto।',
+      'চাকরি পরীক্ষার কমন বিষয় — বাংলা, ইংরেজি, গণিত ও সাধারণ জ্ঞানের প্রস্তুতির কাঠামো। বিসিএস ইংরেজি অনুশীলন এখন চালু; পূর্ণাঙ্গ মক পরীক্ষা এখনো প্রস্তুত হচ্ছে। Eduvelto।',
     crumb: 'কমন বিষয়',
   },
   '/jobs/circulars': {
@@ -253,31 +253,31 @@ const STATIC_ROUTES: Record<string, RouteSeoEntry> = {
   '/admissions': {
     title: 'ভর্তি প্রস্তুতি — বিশ্ববিদ্যালয় ভর্তি | Eduvelto',
     description:
-      'বিশ্ববিদ্যালয় ভর্তি পরীক্ষার প্রস্তুতির কাঠামো — জাতীয় বিশ্ববিদ্যালয় অনার্সসহ পরীক্ষার ধরন ও সিলেবাস। MCQ অনুশীলন ও মক টেস্ট শীঘ্রই আসছে। Eduvelto — সম্পূর্ণ ফ্রি।',
+      'বিশ্ববিদ্যালয় ভর্তি পরীক্ষার প্রস্তুতির কাঠামো — জাতীয় বিশ্ববিদ্যালয় অনার্সসহ পরীক্ষার ধরন ও সিলেবাস। বিসিএস ইংরেজি অনুশীলন এখন চালু; পূর্ণাঙ্গ মক পরীক্ষা এখনো প্রস্তুত হচ্ছে। Eduvelto — সম্পূর্ণ ফ্রি।',
     crumb: 'ভর্তি প্রস্তুতি',
   },
   '/admissions/national-university': {
     title: 'জাতীয় বিশ্ববিদ্যালয় ভর্তি প্রস্তুতি — অনার্স ১ম বর্ষ | Eduvelto',
     description:
-      'জাতীয় বিশ্ববিদ্যালয় অনার্স ১ম বর্ষ ভর্তি পরীক্ষার প্রস্তুতির কাঠামো — ধরন: ১০০ MCQ, ১ ঘণ্টা, নেগেটিভ মার্কিং নেই; বাংলা, ইংরেজি, সাধারণ জ্ঞান ও গ্রুপভিত্তিক সিলেবাস। MCQ অনুশীলন শীঘ্রই আসছে। Eduvelto।',
+      'জাতীয় বিশ্ববিদ্যালয় অনার্স ১ম বর্ষ ভর্তি পরীক্ষার প্রস্তুতির কাঠামো — ধরন: ১০০ MCQ, ১ ঘণ্টা, নেগেটিভ মার্কিং নেই; বাংলা, ইংরেজি, সাধারণ জ্ঞান ও গ্রুপভিত্তিক সিলেবাস। বিসিএস ইংরেজি অনুশীলন এখন চালু; পূর্ণাঙ্গ মক পরীক্ষা এখনো প্রস্তুত হচ্ছে। Eduvelto।',
     crumb: 'জাতীয় বিশ্ববিদ্যালয়',
   },
   '/admissions/national-university/humanities': {
     title: 'মানবিক শাখা — জাতীয় বিশ্ববিদ্যালয় ভর্তি প্রস্তুতি | Eduvelto',
     description:
-      'জাতীয় বিশ্ববিদ্যালয় ভর্তি পরীক্ষার মানবিক শাখার প্রস্তুতির কাঠামো — বাংলা, ইংরেজি, সাধারণ জ্ঞান ও মানবিক গ্রুপের সিলেবাস। MCQ অনুশীলন শীঘ্রই আসছে। Eduvelto।',
+      'জাতীয় বিশ্ববিদ্যালয় ভর্তি পরীক্ষার মানবিক শাখার প্রস্তুতির কাঠামো — বাংলা, ইংরেজি, সাধারণ জ্ঞান ও মানবিক গ্রুপের সিলেবাস। বিসিএস ইংরেজি অনুশীলন এখন চালু; পূর্ণাঙ্গ মক পরীক্ষা এখনো প্রস্তুত হচ্ছে। Eduvelto।',
     crumb: 'মানবিক শাখা',
   },
   '/admissions/national-university/science': {
     title: 'বিজ্ঞান শাখা — জাতীয় বিশ্ববিদ্যালয় ভর্তি প্রস্তুতি | Eduvelto',
     description:
-      'জাতীয় বিশ্ববিদ্যালয় ভর্তি পরীক্ষার বিজ্ঞান শাখার প্রস্তুতির কাঠামো — বাংলা, ইংরেজি, সাধারণ জ্ঞান ও বিজ্ঞান গ্রুপের সিলেবাস। MCQ অনুশীলন শীঘ্রই আসছে। Eduvelto।',
+      'জাতীয় বিশ্ববিদ্যালয় ভর্তি পরীক্ষার বিজ্ঞান শাখার প্রস্তুতির কাঠামো — বাংলা, ইংরেজি, সাধারণ জ্ঞান ও বিজ্ঞান গ্রুপের সিলেবাস। বিসিএস ইংরেজি অনুশীলন এখন চালু; পূর্ণাঙ্গ মক পরীক্ষা এখনো প্রস্তুত হচ্ছে। Eduvelto।',
     crumb: 'বিজ্ঞান শাখা',
   },
   '/admissions/national-university/business': {
     title: 'ব্যবসায় শিক্ষা শাখা — জাতীয় বিশ্ববিদ্যালয় ভর্তি প্রস্তুতি | Eduvelto',
     description:
-      'জাতীয় বিশ্ববিদ্যালয় ভর্তি পরীক্ষার ব্যবসায় শিক্ষা শাখার প্রস্তুতির কাঠামো — বাংলা, ইংরেজি, সাধারণ জ্ঞান ও ব্যবসায় গ্রুপের সিলেবাস। MCQ অনুশীলন শীঘ্রই আসছে। Eduvelto।',
+      'জাতীয় বিশ্ববিদ্যালয় ভর্তি পরীক্ষার ব্যবসায় শিক্ষা শাখার প্রস্তুতির কাঠামো — বাংলা, ইংরেজি, সাধারণ জ্ঞান ও ব্যবসায় গ্রুপের সিলেবাস। বিসিএস ইংরেজি অনুশীলন এখন চালু; পূর্ণাঙ্গ মক পরীক্ষা এখনো প্রস্তুত হচ্ছে। Eduvelto।',
     crumb: 'ব্যবসায় শিক্ষা শাখা',
   },
   '/library': {
@@ -459,6 +459,125 @@ const STATIC_ROUTES: Record<string, RouteSeoEntry> = {
       'Eduvelto-র পেশাগত দক্ষতা বিভাগ শীঘ্রই আসছে। আপাতত চাকরি ও ভর্তি প্রস্তুতি ব্যবহার করুন — সম্পূর্ণ বিনামূল্যে।',
     crumb: 'পেশাগত দক্ষতা',
   },
+  // BCS English practice + lessons (23 Nov 2026, AdSense Part 1):
+  // the first live practice on the site — ৩৫টি যাচাইকৃত প্রশ্ন
+  // (hub copy) — and the first two public BCS English lessons.
+  // These stay INDEXABLE (no robots flag): they have real content,
+  // unlike the other subject pages. Per-section question counts
+  // are NOT claimed here — only the hub's verified total of ৩৫.
+  // Full mocks are still in preparation — the hub says so plainly.
+  '/jobs/bcs/practice/english': {
+    title: 'বিসিএস ইংরেজি অনুশীলন — ৩৫টি যাচাইকৃত প্রশ্ন | Eduvelto',
+    description:
+      'বিসিএস ইংরেজি অনুশীলন — ৩৫টি যাচাইকৃত প্রশ্ন: ব্যাকরণ, শব্দভান্ডার ও রিডিং — সম্পূর্ণ বিনামূল্যে। পূর্ণাঙ্গ মক পরীক্ষা এখনো প্রস্তুত হচ্ছে। Eduvelto।',
+    crumb: 'ইংরেজি',
+  },
+  '/jobs/bcs/practice/english/grammar': {
+    title: 'বিসিএস ইংরেজি ব্যাকরণ অনুশীলন | Eduvelto',
+    description:
+      'বিসিএস ইংরেজি অনুশীলনের ব্যাকরণ অংশ — যাচাইকৃত প্রশ্ন দিয়ে বিনামূল্যে অনুশীলন করুন। Eduvelto।',
+    crumb: 'ব্যাকরণ',
+  },
+  '/jobs/bcs/practice/english/vocabulary': {
+    title: 'বিসিএস ইংরেজি শব্দভান্ডার অনুশীলন | Eduvelto',
+    description:
+      'বিসিএস ইংরেজি অনুশীলনের শব্দভান্ডার অংশ — যাচাইকৃত প্রশ্ন দিয়ে বিনামূল্যে অনুশীলন করুন। Eduvelto।',
+    crumb: 'শব্দভান্ডার',
+  },
+  '/jobs/bcs/practice/english/reading': {
+    title: 'বিসিএস ইংরেজি রিডিং অনুশীলন | Eduvelto',
+    description:
+      'বিসিএস ইংরেজি অনুশীলনের রিডিং অংশ — যাচাইকৃত প্রশ্ন দিয়ে বিনামূল্যে অনুশীলন করুন। Eduvelto।',
+    crumb: 'রিডিং',
+  },
+  '/learn/bcs-english-tense': {
+    title: 'বিসিএস ইংরেজি টেন্স — পাঠ | Eduvelto',
+    description:
+      'বিসিএস ইংরেজি প্রস্তুতির জন্য টেন্সের পাঠ — সম্পূর্ণ বিনামূল্যে। Eduvelto।',
+    crumb: 'টেন্স',
+  },
+  '/learn/bcs-english-preposition': {
+    title: 'বিসিএস ইংরেজি প্রিপোজিশন — পাঠ | Eduvelto',
+    description:
+      'বিসিএস ইংরেজি প্রস্তুতির জন্য প্রিপোজিশনের পাঠ — সম্পূর্ণ বিনামূল্যে। Eduvelto।',
+    crumb: 'প্রিপোজিশন',
+  },
+  // AdSense Part 1 (integration): /learn hub — the breadcrumb target
+  // for the two lesson pages. Today /learn holds only the BCS English
+  // lessons, so the crumb is 'বিসিএস ইংরেজি' (matches the lesson
+  // breadcrumbs pinned by seo.test.ts); revisit when more subjects land.
+  '/learn': {
+    title: 'পাঠ — বিসিএস ইংরেজি | Eduvelto',
+    description:
+      'বিসিএস ইংরেজি পাঠ — টেন্স ও প্রিপোজিশনের খসড়া পাঠ এবং ৩৫টি যাচাইকৃত প্রশ্নের অনুশীলন — সম্পূর্ণ বিনামূল্যে। Eduvelto।',
+    crumb: 'বিসিএস ইংরেজি',
+  },
+};
+
+// ---------------------------------------------------------------------------
+// Noindex (23 Nov 2026, AdSense Part 1) — pages with no real public
+// content. They STAY LIVE for users (no deletion, no redirect) but
+// carry robots 'noindex, nofollow' and leave the sitemap, so Google
+// stops indexing thin/empty pages:
+//  - every job subject page EXCEPT /jobs/bcs/subjects/english (the
+//    one subject with live practice behind it);
+//  - every NU subject page (draft content);
+//  - /health + its 4 sub-pages (empty / unverified);
+//  - /jobs/circulars (no published circular yet);
+//  - /jobs/calendar — noindexed UNTIL a confirmed event exists; when
+//    the first confirmed date lands, remove it from this set AND
+//    put it back in the sitemap (it is a real page once it has one);
+//  - /ai-teacher (92-word demo notice, no real teacher yet).
+// /skills is NOT here: it is already robots-disallowed (robots.txt)
+// and out of the sitemap, and resolveRouteSeo still returns its
+// coming-soon entry for the in-app page.
+// ---------------------------------------------------------------------------
+
+const NOINDEX_STATIC = new Set([
+  '/health',
+  '/health/medicines',
+  '/health/diseases',
+  '/health/doctors',
+  '/health/hospitals',
+  '/jobs/circulars',
+  '/jobs/calendar',
+  '/ai-teacher',
+]);
+
+/** True for a subject page that must not be indexed: any job
+ *  subject page except BCS English, and any NU subject page. */
+function isNoindexedSubjectPage(path: string): boolean {
+  if (/^\/jobs\/[^/]+\/subjects\/[^/]+$/.test(path)) {
+    return path !== '/jobs/bcs/subjects/english';
+  }
+  if (
+    /^\/admissions\/national-university\/(humanities|science|business)\/subjects\/[^/]+$/.test(
+      path,
+    )
+  ) {
+    return true;
+  }
+  return false;
+}
+
+/** Explicit breadcrumb trails for routes whose URL segments are
+ *  not page names: crumbsForStatic would render the raw slugs
+ *  ('bcs', 'practice', 'learn', 'bcs-english-tense').
+ *  The /learn hub exists (AdSense Part 1 integration) — the first
+ *  crumb ('বিসিএস ইংরেজি') points at it. */
+const STATIC_CRUMBS: Record<string, string[]> = {
+  '/jobs/bcs/practice/english': ['চাকরি প্রস্তুতি', 'বিসিএস', 'অনুশীলন', 'ইংরেজি'],
+  '/jobs/bcs/practice/english/grammar': ['চাকরি প্রস্তুতি', 'বিসিএস', 'অনুশীলন', 'ইংরেজি', 'ব্যাকরণ'],
+  '/jobs/bcs/practice/english/vocabulary': [
+    'চাকরি প্রস্তুতি',
+    'বিসিএস',
+    'অনুশীলন',
+    'ইংরেজি',
+    'শব্দভান্ডার',
+  ],
+  '/jobs/bcs/practice/english/reading': ['চাকরি প্রস্তুতি', 'বিসিএস', 'অনুশীলন', 'ইংরেজি', 'রিডিং'],
+  '/learn/bcs-english-tense': ['বিসিএস ইংরেজি', 'টেন্স'],
+  '/learn/bcs-english-preposition': ['বিসিএস ইংরেজি', 'প্রিপোজিশন'],
 };
 
 // Bangla digits, e.g. 200 -> '২০০', 0.5 -> '০.৫'.
@@ -524,9 +643,17 @@ function jobExamEntry(slug: string, tab?: string): RouteSeoEntry | null {
   } else {
     body = `${examBase} পরীক্ষার প্রস্তুতির কাঠামো — পরীক্ষার ধরন যাচাই বাকি (সর্বশেষ বিজ্ঞপ্তি দেখে নিন)।`;
   }
+  // AdSense Part 1 (integration): BCS English practice is live — say
+  // so for the BCS hub only; every other exam keeps the honest
+  // coming-soon wording. The "শীঘ্রই আসছে" phrase stays, pinned by
+  // seo.test.ts ("never presents practice as live").
+  const practiceNote =
+    slug === 'bcs'
+      ? 'BCS English MCQ অনুশীলন চালু আছে (Grammar, Vocabulary, Reading); অন্যান্য বিষয়ের MCQ অনুশীলন ও মক টেস্ট শীঘ্রই আসছে।'
+      : 'MCQ অনুশীলন ও মক টেস্ট শীঘ্রই আসছে।';
   return {
     title: `${exam.bn} প্রস্তুতি — ${exam.fullBn}${tabSuffix} | Eduvelto`,
-    description: `${body} MCQ অনুশীলন ও মক টেস্ট শীঘ্রই আসছে। Eduvelto-তে সম্পূর্ণ ফ্রি।`,
+    description: `${body} ${practiceNote} Eduvelto-তে সম্পূর্ণ ফ্রি।`,
     crumb: exam.bn,
   };
 }
@@ -543,6 +670,17 @@ function jobSubjectEntry(examSlug: string, subjectSlug: string): RouteSeoEntry |
   // mark count, so such a subject is not a page. All 23 subjects
   // today carry verified marks (pinned by seo.test.ts).
   if (subj.marks === null) return null;
+  // AdSense Part 1 (integration): BCS English practice is live — the
+  // subject description says so for this subject only. "৩৫ নম্বর"
+  // (via bnDigits) and "শীঘ্রই আসছে" (mocks) stay, pinned by
+  // seo.test.ts for all 23 subject pages.
+  if (examSlug === 'bcs' && subjectSlug === 'english') {
+    return {
+      title: `${subj.nameBn} — ${exam.bn} প্রস্তুতি | Eduvelto`,
+      description: `${exam.fullBn} ${subj.nameBn} — যাচাইকৃত সিলেবাসে ${bnDigits(subj.marks)} নম্বর। টপিকভিত্তিক MCQ অনুশীলন চালু আছে (Grammar, Vocabulary, Reading); মক টেস্ট শীঘ্রই আসছে। Eduvelto-তে সম্পূর্ণ ফ্রি।`,
+      crumb: subj.nameBn,
+    };
+  }
   return {
     title: `${subj.nameBn} — ${exam.bn} প্রস্তুতি | Eduvelto`,
     description: `${exam.fullBn} ${subj.nameBn} — যাচাইকৃত সিলেবাসে ${bnDigits(subj.marks)} নম্বর। টপিক ও অনুশীলন শীঘ্রই আসছে। Eduvelto-তে সম্পূর্ণ ফ্রি।`,
@@ -673,7 +811,7 @@ export function resolveRouteSeo(pathname: string): SeoData | null {
     }
   }
   if (!entry) return null;
-  if (crumbs.length === 0) crumbs = crumbsForStatic(path);
+  if (crumbs.length === 0) crumbs = STATIC_CRUMBS[path] ?? crumbsForStatic(path);
 
   const canonical = `${SITE_URL}${path === '/' ? '/' : path}`;
   const webPage = {
@@ -704,12 +842,47 @@ export function resolveRouteSeo(pathname: string): SeoData | null {
       })),
     });
   }
+  if (path === '/jobs/bcs/practice/english') {
+    // ItemList (23 Nov 2026, AdSense Part 1): the hub renders the
+    // three real practice sections — list them with their real URLs,
+    // like the /jobs ItemList above.
+    jsonLd.push({
+      '@context': 'https://schema.org',
+      '@type': 'ItemList',
+      name: 'বিসিএস ইংরেজি অনুশীলন',
+      itemListElement: [
+        {
+          '@type': 'ListItem',
+          position: 1,
+          name: 'ব্যাকরণ অনুশীলন',
+          url: `${SITE_URL}/jobs/bcs/practice/english/grammar`,
+        },
+        {
+          '@type': 'ListItem',
+          position: 2,
+          name: 'শব্দভান্ডার অনুশীলন',
+          url: `${SITE_URL}/jobs/bcs/practice/english/vocabulary`,
+        },
+        {
+          '@type': 'ListItem',
+          position: 3,
+          name: 'রিডিং অনুশীলন',
+          url: `${SITE_URL}/jobs/bcs/practice/english/reading`,
+        },
+      ],
+    });
+  }
   return {
     title: entry.title,
     description: entry.description,
     canonical,
     ogType: 'website',
     ogImage: OG_IMAGE_URL,
+    // Noindex (23 Nov 2026, AdSense Part 1): thin/empty pages stay
+    // live but must not be indexed. Absent = indexable.
+    ...(NOINDEX_STATIC.has(path) || isNoindexedSubjectPage(path)
+      ? { robots: 'noindex, nofollow' as const }
+      : {}),
     jsonLd,
   };
 }

@@ -87,6 +87,23 @@ export default function JobSubjectPage() {
       </p>
       <p style={{ color: '#68747B', margin: '0 0 20px', fontSize: 13 }}>উৎস: {subj.syllabusSource ?? 'যাচাই চলছে'}</p>
 
+      {/* BCS English only (23 Nov 2026, AdSense Part 1): this is the
+          one subject with live practice — link its practice hub.
+          No other subject page gets this card. */}
+      {exam === 'bcs' && subject === 'english' && (
+        <Reveal>
+          <Card>
+            <div style={{ fontWeight: 700, color: '#142B3B', fontSize: 17 }}>বিসিএস ইংরেজি অনুশীলন</div>
+            <p style={{ margin: '8px 0 12px', color: '#68747B', fontSize: 14, lineHeight: 1.7 }}>
+              ব্যাকরণ, শব্দভান্ডার ও রিডিং — সম্পূর্ণ বিনামূল্যে।
+            </p>
+            <Link to="/jobs/bcs/practice/english" style={{ fontWeight: 600 }}>
+              ৩৫টি যাচাইকৃত প্রশ্নের অনুশীলন →
+            </Link>
+          </Card>
+        </Reveal>
+      )}
+
       <div style={{ display: 'flex', flexWrap: 'wrap', gap: 12, alignItems: 'flex-start' }}>
         {/* Topic list — EMPTY in Step 6 (no topics exist yet). */}
         <div style={{ flex: '1 1 520px', minWidth: 0 }}>

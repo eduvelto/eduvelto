@@ -158,6 +158,38 @@ export default function PrivacyPage() {
           করতে পারে — তবে বিজ্ঞাপন হবে নন-পার্সোনালাইজড, আপনার তথ্য দিয়ে টার্গেট
           করা হবে না।
         </p>
+        <p style={{ margin: '10px 0 0' }}>
+          বিজ্ঞাপন চালু হলে বিজ্ঞাপন-কুকি সম্পর্কে এই তিনটি কথা প্রযোজ্য হবে: (১)
+          Google-সহ তৃতীয় পক্ষের বিজ্ঞাপনদাতারা এই সাইটে বা অন্য সাইটে আপনার আগের
+          ভিজিটের ভিত্তিতে বিজ্ঞাপন দেখাতে কুকি ব্যবহার করে; (২) Google-এর
+          বিজ্ঞাপন-কুকির ব্যবহারের ফলে Google ও তার অংশীদাররা এই সাইট ও/অথবা অন্য
+          সাইটে আপনার ভিজিটের ভিত্তিতে বিজ্ঞাপন দেখাতে পারে; (৩) আপনি{' '}
+          <a href="https://adssettings.google.com" target="_blank" rel="noreferrer">
+            Google Ads Settings
+          </a>{' '}
+          ও{' '}
+          <a href="https://www.aboutads.info" target="_blank" rel="noreferrer">
+            www.aboutads.info
+          </a>{' '}
+          থেকে পার্সোনালাইজড বিজ্ঞাপন বন্ধ (opt out) করতে পারেন।
+        </p>
+        <p style={{ margin: '10px 0 0' }}>
+          <em>
+            In English — when ads run: (1) third-party vendors, including Google, use
+            cookies to serve ads based on a user&apos;s prior visits to this site or
+            other sites; (2) Google&apos;s use of advertising cookies enables it and
+            its partners to serve ads based on visits to this site and/or other sites;
+            (3) users may opt out of personalised advertising via{' '}
+            <a href="https://adssettings.google.com" target="_blank" rel="noreferrer">
+              Google Ads Settings
+            </a>{' '}
+            and{' '}
+            <a href="https://www.aboutads.info" target="_blank" rel="noreferrer">
+              www.aboutads.info
+            </a>
+            .
+          </em>
+        </p>
       </Section>
 
       <Section bn="৮. আপনার অধিকার" en="8. Your rights">

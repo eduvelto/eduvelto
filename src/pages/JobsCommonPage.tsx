@@ -1,11 +1,13 @@
 // Eduvelto — Common preparation hub (master plan B-1.3, structure only).
 //
 // /jobs/common: the shared preparation space for the 4 main exams
-// (BCS, Bank, Primary Teacher, NTRCA). Four cards, all Coming Soon:
-// the daily short mock, the weekly full mock (cycle), the common
-// topic list, and my progress. NO common-topic questions, NO live
-// mocks — the cards describe what will run, with the design rules
-// from the plan.
+// (BCS, Bank, Primary Teacher, NTRCA). Daily + weekly mocks are LIVE
+// since Step 9 (data-driven: "মক শুরু করুন" when published, the honest
+// "not yet" state when not); my progress is data-driven too — no Coming
+// Soon chip (23 Nov 2026, AdSense cleanup): the card exists, it just
+// has no attempts yet. The common topic list is preliminary only: NO
+// common-topic questions are published yet. The cards describe what
+// runs, with the design rules from the plan.
 //
 // Design rules shown (design plan §4, proposed defaults for §7.3/§7.4):
 // daily mock 20–30 MCQ in 20–30 minutes, topic rotation, negative
@@ -237,15 +239,12 @@ export default function JobsCommonPage() {
             ) : attempts === null ? (
               <p style={{ margin: '8px 0 0', color: 'var(--muted)', fontSize: 14 }}>লোড হচ্ছে…</p>
             ) : attempts.length === 0 ? (
-              <>
-                <p style={{ margin: '8px 0 10px', color: 'var(--muted)', fontSize: 14, lineHeight: 1.7 }}>
-                  {t({
-                    bn: 'এখনো কোনো দৈনিক বা সাপ্তাহিক মক দেওয়া হয়নি — মক দিলে ইতিহাস, দুর্বল টপিক ও ধারাবাহিকতা এখানে দেখাবে।',
-                    en: 'No daily or weekly mock has been taken yet — once you take a mock, history, weak topics and streak will show here.',
-                  })}
-                </p>
-                <Chip tone="gold">{t({ bn: 'শীঘ্রই আসছে', en: 'Coming soon' })}</Chip>
-              </>
+              <p style={{ margin: '8px 0 0', color: 'var(--muted)', fontSize: 14, lineHeight: 1.7 }}>
+                {t({
+                  bn: 'এখনো কোনো দৈনিক বা সাপ্তাহিক মক দেওয়া হয়নি — মক দিলে ইতিহাস, দুর্বল টপিক ও ধারাবাহিকতা এখানে দেখাবে।',
+                  en: 'No daily or weekly mock has been taken yet — once you take a mock, history, weak topics and streak will show here.',
+                })}
+              </p>
             ) : (
               <>
                 <p style={{ margin: '8px 0 10px', color: 'var(--muted-ivory)', fontSize: 14, lineHeight: 1.7 }}>

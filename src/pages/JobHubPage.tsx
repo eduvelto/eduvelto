@@ -9,7 +9,10 @@
 // 4 main exams (EXAM_PATTERNS — MCQ-stage subject breakdown, total,
 // time, negative marking; source: job analysis 21 Nov 2026, with the
 // "verify against the latest circular" caveat) and the 7 preparation
-// elements as Coming Soon. Content tabs show an honest empty state
+// elements link to live content where it exists (viva, BCS English
+// practice, published mocks, subject lists) and carry an honest not-yet
+// line otherwise — no Coming Soon chips (23 Nov 2026, AdSense cleanup).
+// Content tabs show an honest empty state
 // until their content is published — NO syllabus tables (B-2.1),
 // NO live practice (B-2.2), NO live mocks (B-2.3), NO previous
 // questions (B-6.1); the mocks and results tabs are data-driven
@@ -25,7 +28,7 @@
 import { useEffect, useState } from 'react';
 import { Link, Navigate, useParams } from 'react-router-dom';
 import { PageShell, EmptyState } from '../components/PageShell';
-import { Card, Chip, LinkButton, Reveal } from '../components/ui';
+import { Card, LinkButton, Reveal } from '../components/ui';
 import { JobNonAffiliationNote } from '../components/JobCards';
 import JobPracticeTab from '../components/JobPracticeTab';
 import JobMockTab from '../components/JobMockTab';
@@ -106,10 +109,11 @@ function bnNum(n: number): string {
 /**
  * Subjects tab (Step 6): the exam's verified subject list from the
  * canonical lib (jobContent.ts), as a card grid — one card per subject
- * with its Bangla name, verified marks and a "শীঘ্রই আসছে" chip for
- * topics (the topic count is 0 for every subject today — no topics
- * exist yet — so it is shown as the chip, never as a fake count).
- * Each card links to the subject page (/jobs/:exam/subjects/:subject).
+ * with its Bangla name and verified marks. No topic line: the topic
+ * count is 0 for every subject today — no topics exist yet — so no
+ * topic count or Coming Soon chip is shown (23 Nov 2026, AdSense
+ * cleanup). Each card links to the subject page
+ * (/jobs/:exam/subjects/:subject).
  *
  * IT (scope undecided) gets the scope note instead of a subject list.
  * The other exams with no subjects are NOT rendered here — the hub
@@ -156,10 +160,6 @@ function JobSubjectsTab({ def }: { def: JobExamDef }) {
               <div style={{ fontWeight: 700, color: '#142B3B', fontSize: 17 }}>{s.nameBn}</div>
               <p style={{ margin: '6px 0 10px', color: '#68747B', fontSize: 14 }}>
                 {s.marks !== null ? `${bnNum(s.marks)} নম্বর` : 'নম্বর যাচাই হয়নি'}
-              </p>
-              <p style={{ margin: '0 0 10px' }}>
-                <span style={{ color: '#68747B', fontSize: 14 }}>টপিক: </span>
-                <Chip tone="gold">শীঘ্রই আসছে</Chip>
               </p>
               <p style={{ margin: 0 }}>
                 <Link to={`/jobs/${def.slug}/subjects/${s.slug}`} style={{ fontWeight: 600 }}>
@@ -512,8 +512,15 @@ export default function JobHubPage() {
                       {t({ bn: 'সহজ প্রশ্ন দিয়ে শুরু', en: 'Start with easy questions' })}
                     </div>
                     <p style={{ margin: '6px 0 10px', color: 'var(--muted)', fontSize: 14, lineHeight: 1.7 }}>
-                      {t({ bn: 'বেসিক প্রশ্ন (উত্তর ও ব্যাখ্যাসহ) অনুশীলন চালু হলে এখানে আসবে।', en: 'Basic questions (with answer and explanation) will appear here once practice runs.' })}                    </p>
-                    <Chip tone="gold">{t({ bn: 'শীঘ্রই আসছে', en: 'Coming soon' })}</Chip>
+                      {def.slug === 'bcs'
+                        ? t({ bn: 'BCS English-এর বেসিক প্রশ্ন (উত্তর ও ব্যাখ্যাসহ) অনুশীলন চালু আছে — টপিক ধরে শুরু করুন।', en: 'Basic BCS English questions (with answer and explanation) are live — start topic by topic.' })
+                        : t({ bn: 'বেসিক প্রশ্ন (উত্তর ও ব্যাখ্যাসহ) অনুশীলন চালু হলে এখানে আসবে।', en: 'Basic questions (with answer and explanation) will appear here once practice runs.' })}
+                    </p>
+                    {def.slug === 'bcs' ? (
+                      <Link to="/jobs/bcs/practice/english" style={{ fontWeight: 600 }}>
+                        {t({ bn: 'BCS English অনুশীলন দেখুন →', en: 'See BCS English practice →' })}
+                      </Link>
+                    ) : null}
                   </Card>
                 </Reveal>
               </div>
@@ -574,9 +581,7 @@ export default function JobHubPage() {
                       <Link to={tabHref('mocks')} style={{ fontWeight: 600 }}>
                         {t({ bn: 'মক টেস্ট দেখুন →', en: 'See mock tests →' })}
                       </Link>
-                    ) : (
-                      <Chip tone="gold">{t({ bn: 'শীঘ্রই আসছে', en: 'Coming soon' })}</Chip>
-                    )}
+                    ) : null}
                   </Card>
                 </Reveal>
                 <Reveal delayMs={160}>
@@ -696,9 +701,14 @@ export default function JobHubPage() {
             </Card>
           </Reveal>
 
-          {/* The 7 "100% preparation" elements — the viva element is
-              live since Step 16 (reading pages); the other 6 are still
-              Coming Soon. */}
+          {/* The 7 "100% preparation" elements — no Coming Soon chips
+              (23 Nov 2026, AdSense cleanup). Viva is live since Step 16
+              (reading pages); BCS English practice is live (the MCQ Bank
+              card links to /jobs/bcs/practice/english, scoped to English
+              only); the mock card links to the mocks tab once a full mock
+              is published; syllabus coverage links to the subjects tab
+              where a verified subject list exists. The rest carry an
+              honest "not running yet" line — never a live claim. */}
           <Reveal>
             <h2 className="ev-section-h2">{t({ bn: 'প্রস্তুতির ৭টি উপাদান', en: 'The 7 elements of preparation' })}</h2>
           </Reveal>
@@ -716,8 +726,33 @@ export default function JobHubPage() {
                         {t({ bn: 'ভাইভা প্রস্তুতি পড়ুন →', en: 'Read viva preparation →' })}
                       </LinkButton>
                     </p>
+                  ) : el.bn === 'সিলেবাস কভারেজ' && subjects.length > 0 ? (
+                    <p style={{ margin: 0 }}>
+                      <Link to={tabHref('subjects')} style={{ fontWeight: 600 }}>
+                        {t({ bn: 'বিষয় তালিকা দেখুন →', en: 'See the subject list →' })}
+                      </Link>
+                    </p>
+                  ) : el.bn === 'টপিকভিত্তিক MCQ ব্যাংক' && def.slug === 'bcs' ? (
+                    <>
+                      <p style={{ margin: 0 }}>
+                        <LinkButton to="/jobs/bcs/practice/english" variant="accent">
+                          {t({ bn: 'BCS English অনুশীলন দেখুন →', en: 'See BCS English practice →' })}
+                        </LinkButton>
+                      </p>
+                      <p style={{ margin: '10px 0 0', color: 'var(--muted)', fontSize: 13 }}>
+                        {t({ bn: 'আপাতত শুধু BCS English — Grammar, Vocabulary, Reading।', en: 'BCS English only for now — Grammar, Vocabulary, Reading.' })}
+                      </p>
+                    </>
+                  ) : el.bn === 'পূর্ণাঙ্গ মক টেস্ট' && publishedMocks !== null && publishedMocks.length > 0 ? (
+                    <p style={{ margin: 0 }}>
+                      <Link to={tabHref('mocks')} style={{ fontWeight: 600 }}>
+                        {t({ bn: 'মক টেস্ট দেখুন →', en: 'See mock tests →' })}
+                      </Link>
+                    </p>
                   ) : (
-                    <Chip tone="gold">{t({ bn: 'শীঘ্রই আসছে', en: 'Coming soon' })}</Chip>
+                    <p style={{ margin: 0, color: 'var(--muted)', fontSize: 14 }}>
+                      {t({ bn: 'এখনো চালু হয়নি — চালু হলে এখানেই পাবেন।', en: 'Not running yet — you will find it here once it runs.' })}
+                    </p>
                   )}
                   {el.bn === 'ভাইভা প্রস্তুতি' ? (
                     <p style={{ margin: '10px 0 0', color: 'var(--muted)', fontSize: 13 }}>

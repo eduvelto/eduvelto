@@ -2,6 +2,16 @@
 <!-- Eduvelto sitemap — REWRITTEN 22 Nov 2026 (feature/seo-visibility),
      EXTENDED 22 Nov 2026 (feature/seo-plan-alignment): 31 URLs.
      EXTENDED 23 Nov 2026 (feature/seo-50-100-pages): 78 URLs.
+     REVISED 23 Nov 2026 (AdSense Part 1): 46 URLs — removed the
+     39 noindexed thin/empty pages (22 job subject pages except
+     BCS English, 9 NU subject pages, 5 health pages, circulars,
+     calendar, AI Teacher) and added the 6 live BCS English
+     practice + lesson routes.
+     REVISED 23 Nov 2026 (AdSense Part 1 integration): 47 URLs —
+     added the /learn hub (breadcrumb target for the lesson pages).
+     MERGED 23 Nov 2026 (AdSense Part 1 onto main 9a65524): 57 URLs —
+     kept the 10 /life everyday-tools URLs from main; the 5 health
+     pages + /ai-teacher stay OUT (noindexed thin pages, AdSense F2).
      Lists ONLY routes that exist as real public pages with real
      content. Login-gated pages (exam practice/mocks/results/progress,
      dashboards, /jobs/dashboard, /jobs/planner, /jobs/wrong-answers,
@@ -62,18 +72,6 @@
     <lastmod>2026-11-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://eduvelto.com/jobs/circulars</loc>
-    <lastmod>2026-11-23</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://eduvelto.com/jobs/calendar</loc>
-    <lastmod>2026-11-23</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://eduvelto.com/jobs/dgfood</loc>
@@ -160,139 +158,49 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://eduvelto.com/jobs/bcs/subjects/bangla</loc>
-    <lastmod>2026-11-23</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
     <loc>https://eduvelto.com/jobs/bcs/subjects/english</loc>
     <lastmod>2026-11-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://eduvelto.com/jobs/bcs/subjects/bangladesh-affairs</loc>
+    <loc>https://eduvelto.com/jobs/bcs/practice/english</loc>
+    <lastmod>2026-11-23</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/jobs/bcs/practice/english/grammar</loc>
     <lastmod>2026-11-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://eduvelto.com/jobs/bcs/subjects/international-affairs</loc>
+    <loc>https://eduvelto.com/jobs/bcs/practice/english/vocabulary</loc>
     <lastmod>2026-11-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://eduvelto.com/jobs/bcs/subjects/geography</loc>
+    <loc>https://eduvelto.com/jobs/bcs/practice/english/reading</loc>
     <lastmod>2026-11-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://eduvelto.com/jobs/bcs/subjects/general-science</loc>
+    <loc>https://eduvelto.com/learn/bcs-english-tense</loc>
     <lastmod>2026-11-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://eduvelto.com/jobs/bcs/subjects/computer-ict</loc>
+    <loc>https://eduvelto.com/learn/bcs-english-preposition</loc>
     <lastmod>2026-11-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://eduvelto.com/jobs/bcs/subjects/mathematical-reasoning</loc>
-    <lastmod>2026-11-23</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://eduvelto.com/jobs/bcs/subjects/mental-ability</loc>
-    <lastmod>2026-11-23</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://eduvelto.com/jobs/bcs/subjects/ethics</loc>
-    <lastmod>2026-11-23</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://eduvelto.com/jobs/bank/subjects/bangla</loc>
-    <lastmod>2026-11-23</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://eduvelto.com/jobs/bank/subjects/english</loc>
-    <lastmod>2026-11-23</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://eduvelto.com/jobs/bank/subjects/math</loc>
-    <lastmod>2026-11-23</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://eduvelto.com/jobs/bank/subjects/general-knowledge</loc>
-    <lastmod>2026-11-23</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://eduvelto.com/jobs/bank/subjects/computer</loc>
-    <lastmod>2026-11-23</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://eduvelto.com/jobs/primary-teacher/subjects/bangla</loc>
-    <lastmod>2026-11-23</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://eduvelto.com/jobs/primary-teacher/subjects/english</loc>
-    <lastmod>2026-11-23</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://eduvelto.com/jobs/primary-teacher/subjects/math-science</loc>
-    <lastmod>2026-11-23</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://eduvelto.com/jobs/primary-teacher/subjects/general-knowledge</loc>
-    <lastmod>2026-11-23</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://eduvelto.com/jobs/ntrca/subjects/bangla</loc>
-    <lastmod>2026-11-23</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://eduvelto.com/jobs/ntrca/subjects/english</loc>
-    <lastmod>2026-11-23</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://eduvelto.com/jobs/ntrca/subjects/math</loc>
-    <lastmod>2026-11-23</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://eduvelto.com/jobs/ntrca/subjects/general-knowledge</loc>
+    <loc>https://eduvelto.com/learn</loc>
     <lastmod>2026-11-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -326,60 +234,6 @@
     <lastmod>2026-11-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://eduvelto.com/admissions/national-university/humanities/subjects/bangla</loc>
-    <lastmod>2026-11-23</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://eduvelto.com/admissions/national-university/humanities/subjects/english</loc>
-    <lastmod>2026-11-23</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://eduvelto.com/admissions/national-university/humanities/subjects/general-knowledge</loc>
-    <lastmod>2026-11-23</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://eduvelto.com/admissions/national-university/science/subjects/bangla</loc>
-    <lastmod>2026-11-23</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://eduvelto.com/admissions/national-university/science/subjects/english</loc>
-    <lastmod>2026-11-23</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://eduvelto.com/admissions/national-university/science/subjects/general-knowledge</loc>
-    <lastmod>2026-11-23</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://eduvelto.com/admissions/national-university/business/subjects/bangla</loc>
-    <lastmod>2026-11-23</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://eduvelto.com/admissions/national-university/business/subjects/english</loc>
-    <lastmod>2026-11-23</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://eduvelto.com/admissions/national-university/business/subjects/general-knowledge</loc>
-    <lastmod>2026-11-23</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://eduvelto.com/library</loc>
@@ -454,36 +308,6 @@
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://eduvelto.com/health</loc>
-    <lastmod>2026-11-23</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://eduvelto.com/health/medicines</loc>
-    <lastmod>2026-11-23</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://eduvelto.com/health/diseases</loc>
-    <lastmod>2026-11-23</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://eduvelto.com/health/doctors</loc>
-    <lastmod>2026-11-23</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://eduvelto.com/health/hospitals</loc>
-    <lastmod>2026-11-23</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
     <loc>https://eduvelto.com/life</loc>
     <lastmod>2026-11-23</lastmod>
     <changefreq>monthly</changefreq>
@@ -543,10 +367,5 @@
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
-  <url>
-    <loc>https://eduvelto.com/ai-teacher</loc>
-    <lastmod>2026-11-23</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
+
 </urlset>

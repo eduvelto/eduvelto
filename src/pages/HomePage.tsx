@@ -23,9 +23,11 @@
 //    Never a fake 78% / 85% / 90%.
 //  - Hero: NO stock photos from the mockups — CSS gradients + the
 //    Eduvelto wordmark only. No hotlinked images.
-//  - "ভিডিও লেসন" and "সার্টিফিকেট" do not exist yet → rendered as
-//    Coming Soon (disabled), not as working features. "র‍্যাংকিং" also
-//    does not exist yet → Coming Soon.
+//  - "ভিডিও লেসন", "সার্টিফিকেট", "র‍্যাংকিং" and "পড়ার রুটিন" do not
+//    exist yet → REMOVED from the homepage face (23 Nov 2026, AdSense
+//    cleanup), not shown as Coming Soon chips. They return when the
+//    features launch. /routine still exists as an honest placeholder
+//    page, linked from /about.
 //  - Section cards link to /jobs, /admissions, /class, /skills. /jobs
 //    (Job Preparation) and /admissions (Admission Preparation) are real
 //    sections, live since 22 Nov 2026; /class is real (class index);
@@ -86,14 +88,6 @@ function SkillsIcon({ size = 30 }: { size?: number }) {
     </svg>
   );
 }
-function VideoIcon({ size = 22 }: { size?: number }) {
-  return (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-      <rect x="2" y="5" width="15" height="14" rx="2" />
-      <path d="M17 10l5-3v10l-5-3" />
-    </svg>
-  );
-}
 function QuizIcon({ size = 22 }: { size?: number }) {
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
@@ -119,14 +113,6 @@ function TrophyIcon({ size = 22 }: { size?: number }) {
       <path d="M18 5h3a3 3 0 0 1-3 5" />
       <path d="M12 13v4" />
       <path d="M8 21h8" />
-    </svg>
-  );
-}
-function CalendarIcon({ size = 22 }: { size?: number }) {
-  return (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-      <rect x="3" y="4" width="18" height="18" rx="2" />
-      <path d="M16 2v4M8 2v4M3 10h18" />
     </svg>
   );
 }
@@ -206,17 +192,16 @@ const SECTIONS = [
   },
 ];
 
-// Feature strip (desktop) / quick access (mobile). "soon" items do not
-// exist yet — they render disabled with a Coming Soon chip, never as
-// working links.
+// Feature strip (desktop) / quick access (mobile). ONLY live features
+// appear here — not-yet-live features are removed from the homepage
+// face entirely (23 Nov 2026, AdSense cleanup), never shown as Coming
+// Soon chips. Removed: Video Lessons, Study Routine (/routine is an
+// honest placeholder page, linked from /about), Ranking, Certificate.
+// They return when the features launch.
 const FEATURES = [
-  { icon: <VideoIcon />, bn: 'ভিডিও লেসন', en: 'Video Lessons', to: null as string | null, soon: true },
-  { icon: <BookIcon size={22} />, bn: 'প্রশ্নব্যাংক', en: 'Question Bank', to: '/library', soon: false },
-  { icon: <QuizIcon />, bn: 'মডেল টেস্ট', en: 'Model Tests', to: '/exam', soon: false },
-  { icon: <ChartIcon />, bn: 'ফলাফল বিশ্লেষণ', en: 'Result Analysis', to: '/progress', soon: false },
-  { icon: <CalendarIcon />, bn: 'পড়ার রুটিন', en: 'Study Routine', to: '/routine', soon: true },
-  { icon: <TrophyIcon />, bn: 'র‍্যাংকিং', en: 'Ranking', to: null, soon: true },
-  { icon: <StarIcon />, bn: 'সার্টিফিকেট', en: 'Certificate', to: null, soon: true },
+  { icon: <BookIcon size={22} />, bn: 'প্রশ্নব্যাংক', en: 'Question Bank', to: '/library' },
+  { icon: <QuizIcon />, bn: 'মডেল টেস্ট', en: 'Model Tests', to: '/exam' },
+  { icon: <ChartIcon />, bn: 'ফলাফল বিশ্লেষণ', en: 'Result Analysis', to: '/progress' },
 ];
 
 const POPULAR = [
@@ -409,19 +394,11 @@ export default function HomePage() {
       <section aria-label={t({ bn: 'ফিচার', en: 'Features' })}>
         <div className="ev-home-strip">
           {FEATURES.map((f) => (
-            <div key={f.bn} className={`ev-home-strip-item${f.soon ? ' ev-home-strip-soon' : ''}`}>
-              {f.to ? (
-                <Link to={f.to} className="ev-home-strip-link">
-                  <span aria-hidden="true">{f.icon}</span>
-                  <span>{t({ bn: f.bn, en: f.en })}</span>
-                </Link>
-              ) : (
-                <span className="ev-home-strip-link" aria-disabled="true">
-                  <span aria-hidden="true">{f.icon}</span>
-                  <span>{t({ bn: f.bn, en: f.en })}</span>
-                  <span className="ev-home-soon-chip">{t({ bn: 'শীঘ্রই আসছে', en: 'Coming soon' })}</span>
-                </span>
-              )}
+            <div key={f.bn} className="ev-home-strip-item">
+              <Link to={f.to} className="ev-home-strip-link">
+                <span aria-hidden="true">{f.icon}</span>
+                <span>{t({ bn: f.bn, en: f.en })}</span>
+              </Link>
             </div>
           ))}
           <div className="ev-home-strip-item ev-home-strip-more">
@@ -437,20 +414,12 @@ export default function HomePage() {
             <Link to="/about">{t({ bn: 'সব দেখুন →', en: 'See all →' })}</Link>
           </div>
           <div className="ev-home-quick-grid">
-            {FEATURES.slice(0, 6).map((f) => (
-              <div key={f.bn} className={`ev-home-quick-tile${f.soon ? ' ev-home-quick-soon' : ''}`}>
-                {f.to ? (
-                  <Link to={f.to} className="ev-home-quick-link">
-                    <span aria-hidden="true">{f.icon}</span>
-                    <span>{t({ bn: f.bn, en: f.en })}</span>
-                  </Link>
-                ) : (
-                  <span className="ev-home-quick-link" aria-disabled="true">
-                    <span aria-hidden="true">{f.icon}</span>
-                    <span>{t({ bn: f.bn, en: f.en })}</span>
-                    <span className="ev-home-soon-chip">{t({ bn: 'শীঘ্রই আসছে', en: 'Coming soon' })}</span>
-                  </span>
-                )}
+            {FEATURES.map((f) => (
+              <div key={f.bn} className="ev-home-quick-tile">
+                <Link to={f.to} className="ev-home-quick-link">
+                  <span aria-hidden="true">{f.icon}</span>
+                  <span>{t({ bn: f.bn, en: f.en })}</span>
+                </Link>
               </div>
             ))}
           </div>
