@@ -255,14 +255,17 @@ describe('Step 18 — backup / recovery (emulator)', () => {
     await seedOnePerCollection();
     const db = ownerDb();
     const preflight = await getBackupPreflight(db);
-    // 80 collections x 1 doc (82 minus settings minus config) + users
-    // x 3 (owner + student + the coverage seed doc) + settings x 2
-    // (features + ads) + config x 1 (appVersion) = 85 docs.
+    // 81 collections x 1 doc (83 minus settings minus config) + users
+    // x 3 total (owner + student + the coverage seed doc; the seed doc
+    // is already counted in the 81, so +2 here) + settings x 2
+    // (features + ads) + config x 1 (appVersion) = 86 docs.
     // (Step 18 merge: 84 — the list grew by 1 at the forced-app-update
-    // merge: config.)
-    expect(preflight.total).toBe(85);
+    // merge: config. Homepage-redesign merge 24 Nov: 85 → 86 —
+    // newsletterSubscribers joined BACKUP_COLLECTIONS and the hardcoded
+    // total here was not updated with it.)
+    expect(preflight.total).toBe(86);
     expect(preflight.perCollection).toHaveLength(BACKUP_COLLECTIONS.length);
-    expect(preflight.readsPercent).toBeCloseTo(85 / 500, 5);
+    expect(preflight.readsPercent).toBeCloseTo(86 / 500, 5);
     const backup = await buildBackup(db, OWNER_UID);
     expect(validateBackup(backup).ok).toBe(true);
     expect(Object.keys(backup.data).sort()).toEqual([...BACKUP_COLLECTIONS].sort());
