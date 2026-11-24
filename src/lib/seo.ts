@@ -905,7 +905,7 @@ const STATIC_ROUTES: Record<string, RouteSeoEntry> = {
     crumb: 'বিসিএস প্রস্তুতি',
     titleEn: 'BCS Preliminary Preparation Guide | Eduvelto',
     descriptionEn:
-      'How to start preparing for the BCS Preliminary exam — the exam pattern, a study plan and common mistakes, in Eduvelto’s free guide. Draft lesson — awaiting teacher review.',
+      'How to start preparing for the BCS Preliminary exam — the exam pattern and a study plan, in Eduvelto’s free guide. Draft lesson — awaiting teacher review.',
     crumbEn: 'BCS Preparation',
   },
   '/learn/bank-job-preparation': {
@@ -923,9 +923,9 @@ const STATIC_ROUTES: Record<string, RouteSeoEntry> = {
     description:
       'প্রাথমিক সহকারী শিক্ষক নিয়োগ প্রস্তুতি কীভাবে নেবেন — পরীক্ষার ধরণ, পড়ার পরিকল্পনা ও সাধারণ ভুল। Eduvelto-র ফ্রি গাইড — খসড়া পাঠ, শিক্ষক যাচাইয়ের অপেক্ষায়।',
     crumb: 'প্রাথমিক শিক্ষক',
-    titleEn: 'Primary Assistant Teacher Recruitment Preparation Guide | Eduvelto',
+    titleEn: 'Primary Teacher Preparation Guide | Eduvelto',
     descriptionEn:
-      'How to prepare for the primary assistant teacher recruitment exam — the exam pattern, a study plan and common mistakes, in Eduvelto’s free guide. Draft lesson — awaiting teacher review.',
+      'How to prepare for the primary assistant teacher exam — the exam pattern and a study plan, in Eduvelto’s free guide. Draft lesson — awaiting teacher review.',
     crumbEn: 'Primary Teacher',
   },
   '/learn/ntrca-preparation': {
@@ -935,7 +935,7 @@ const STATIC_ROUTES: Record<string, RouteSeoEntry> = {
     crumb: 'NTRCA প্রস্তুতি',
     titleEn: 'NTRCA Teacher Registration Exam Preparation Guide | Eduvelto',
     descriptionEn:
-      'How to prepare for the NTRCA teacher registration exam — the exam pattern, a study plan and common mistakes, in Eduvelto’s free guide. Draft lesson — awaiting teacher review.',
+      'How to prepare for the NTRCA teacher registration exam — the exam pattern and a study plan, in Eduvelto’s free guide. Draft lesson — awaiting teacher review.',
     crumbEn: 'NTRCA Preparation',
   },
   '/learn/nu-admission-guide': {
@@ -945,7 +945,7 @@ const STATIC_ROUTES: Record<string, RouteSeoEntry> = {
     crumb: 'জাতীয় বিশ্ববিদ্যালয় ভর্তি',
     titleEn: 'National University Admission Guide | Eduvelto',
     descriptionEn:
-      'The National University admission exam pattern, merit list and preparation, in Eduvelto’s free guide. The 2026–27 session circular has not been published yet. Draft lesson — awaiting teacher review.',
+      'National University admission — pattern, merit list and preparation. The 2026–27 circular is not published yet. Draft lesson — awaiting teacher review.',
     crumbEn: 'National University Admission',
   },
   '/learn/english-grammar-basics': {
@@ -955,7 +955,7 @@ const STATIC_ROUTES: Record<string, RouteSeoEntry> = {
     crumb: 'ইংরেজি ব্যাকরণ',
     titleEn: 'English Grammar Basics — Parts of Speech & Tense | Eduvelto',
     descriptionEn:
-      'The basics of English grammar in simple Bangla — Parts of Speech, Tense and sentence structure, with original examples. Eduvelto’s free guide. Draft lesson — awaiting teacher review.',
+      'English grammar basics in simple Bangla — Parts of Speech, Tense and sentence structure. Draft lesson — awaiting teacher review.',
     crumbEn: 'English Grammar',
   },
   '/learn/scholarship-guide': {
@@ -963,9 +963,9 @@ const STATIC_ROUTES: Record<string, RouteSeoEntry> = {
     description:
       'স্কলারশিপ কীভাবে কাজ করে, আবেদন ও কাগজপত্র — Commonwealth Shared Scholarships-এর উদাহরণসহ Eduvelto-র ফ্রি গাইড। খসড়া পাঠ, শিক্ষক যাচাইয়ের অপেক্ষায়।',
     crumb: 'বৃত্তি গাইড',
-    titleEn: 'Scholarship Guide — Applications, Documents & Deadlines | Eduvelto',
+    titleEn: 'Scholarship Guide — Applications & Documents | Eduvelto',
     descriptionEn:
-      'How scholarships work, how to prepare an application and what documents are needed — with the Commonwealth Shared Scholarships as an example, in Eduvelto’s free guide. Draft lesson — awaiting teacher review.',
+      'How scholarships work — applications and documents, with the Commonwealth Shared Scholarships as an example. Draft lesson — awaiting teacher review.',
     crumbEn: 'Scholarship Guide',
   },
   '/learn/what-is-ai': {
@@ -973,9 +973,9 @@ const STATIC_ROUTES: Record<string, RouteSeoEntry> = {
     description:
       'AI বা কৃত্রিম বুদ্ধিমত্তা কী, পড়াশোনায় AI কীভাবে ব্যবহার করবেন, আর এর সীমা ও সততার নিয়ম — Eduvelto-র ফ্রি গাইড। খসড়া পাঠ — শিক্ষক যাচাইয়ের অপেক্ষায়।',
     crumb: 'AI কী?',
-    titleEn: 'What Is AI? A Simple Explanation & Rules of Use for Students | Eduvelto',
+    titleEn: 'What Is AI? A Simple Explanation for Students | Eduvelto',
     descriptionEn:
-      'What AI or artificial intelligence is, how to use AI in your studies, and its limits and honesty rules — Eduvelto’s free guide. Draft lesson — awaiting teacher review.',
+      'What AI is, how to use it in your studies, and its limits and honesty rules. Draft lesson — awaiting teacher review.',
     crumbEn: 'What Is AI?',
   },
   '/learn/cv-writing-guide': {
@@ -985,7 +985,7 @@ const STATIC_ROUTES: Record<string, RouteSeoEntry> = {
     crumb: 'CV লেখা',
     titleEn: 'CV Writing Guide — For Jobs in Bangladesh | Eduvelto',
     descriptionEn:
-      'How to write a good CV for jobs in Bangladesh — structure, essential information and common mistakes, in Eduvelto’s free guide. Draft lesson — awaiting teacher review.',
+      'How to write a good CV for jobs in Bangladesh — structure and essential information. Draft lesson — awaiting teacher review.',
     crumbEn: 'CV Writing',
   },
   '/learn/budget-planner-guide': {
@@ -995,7 +995,7 @@ const STATIC_ROUTES: Record<string, RouteSeoEntry> = {
     crumb: 'মাসিক বাজেট',
     titleEn: 'Student Monthly Budget Planning Guide | Eduvelto',
     descriptionEn:
-      'How to plan a month’s expenses as a student — income, essential spending and simple saving rules, in Eduvelto’s free guide. Draft lesson — awaiting teacher review.',
+      'How to plan a month’s expenses as a student — income, essential spending and saving. Draft lesson — awaiting teacher review.',
     crumbEn: 'Monthly Budget',
   },
   // Public guides, wave 2 (24 Nov 2026, brand-SEO wave 2): 7 more
@@ -1005,11 +1005,11 @@ const STATIC_ROUTES: Record<string, RouteSeoEntry> = {
   '/learn/revision-strategy': {
     title: 'পরীক্ষার আগে পুনরালোচনার কৌশল | Eduvelto',
     description:
-      'পরীক্ষার আগে পুনরালোচনা কীভাবে করবেন — পরিকল্পনা, নিজের নোট, নিজেকে যাচাই ও পরীক্ষার আগের রাতের নিয়ম নিয়ে Eduvelto-র ফ্রি গাইড। খসড়া পাঠ — শিক্ষক যাচাইয়ের অপেক্ষায়।',
+      'পরীক্ষার আগে পুনরালোচনা কীভাবে করবেন — পরিকল্পনা, নিজের নোট ও নিজেকে যাচাই নিয়ে Eduvelto-র ফ্রি গাইড। খসড়া পাঠ — শিক্ষক যাচাইয়ের অপেক্ষায়।',
     crumb: 'পুনরালোচনার কৌশল',
     titleEn: 'Revision Strategy Before Exams | Eduvelto',
     descriptionEn:
-      'How to revise before an exam — planning, your own notes, self-testing and the night-before rules, in Eduvelto’s free guide. Draft lesson — awaiting teacher review.',
+      'How to revise before an exam — planning, your own notes and self-testing. Draft lesson — awaiting teacher review.',
     crumbEn: 'Revision Strategy',
   },
   '/learn/note-taking-guide': {
@@ -1025,31 +1025,31 @@ const STATIC_ROUTES: Record<string, RouteSeoEntry> = {
   '/learn/time-management-students': {
     title: 'শিক্ষার্থীদের সময় ব্যবস্থাপনা | Eduvelto',
     description:
-      'শিক্ষার্থী হিসেবে সময় কীভাবে ব্যবস্থাপনা করবেন — রুটিন, ছোট ভাগে পড়া, ফোন থেকে দূরে থাকা ও বিশ্রাম নিয়ে Eduvelto-র ফ্রি গাইড। খসড়া পাঠ — শিক্ষক যাচাইয়ের অপেক্ষায়।',
+      'শিক্ষার্থী হিসেবে সময় কীভাবে ব্যবস্থাপনা করবেন — রুটিন, ছোট ভাগে পড়া ও বিশ্রাম নিয়ে Eduvelto-র ফ্রি গাইড। খসড়া পাঠ — শিক্ষক যাচাইয়ের অপেক্ষায়।',
     crumb: 'সময় ব্যবস্থাপনা',
     titleEn: 'Time Management for Students | Eduvelto',
     descriptionEn:
-      'How to manage time as a student — a routine, studying in short blocks, staying away from the phone and rest, in Eduvelto’s free guide. Draft lesson — awaiting teacher review.',
+      'How to manage time as a student — a routine, short study blocks and rest. Draft lesson — awaiting teacher review.',
     crumbEn: 'Time Management',
   },
   '/learn/english-writing-basics': {
     title: 'ইংরেজি লেখার মৌলিক নিয়ম | Eduvelto',
     description:
-      'ইংরেজি লেখার মৌলিক নিয়ম সহজ বাংলায় — ছোট বাক্য, Subject-Verb মিল, বড় হাতের অক্ষর, যতিচিহ্ন ও অনুচ্ছেদ, নিজের লেখা উদাহরণসহ। Eduvelto-র ফ্রি গাইড — খসড়া পাঠ, শিক্ষক যাচাইয়ের অপেক্ষায়।',
+      'ইংরেজি লেখার মৌলিক নিয়ম — ছোট বাক্য, Subject-Verb মিল ও যতিচিহ্ন, নিজের লেখা উদাহরণসহ। Eduvelto-র ফ্রি গাইড — খসড়া পাঠ, শিক্ষক যাচাইয়ের অপেক্ষায়।',
     crumb: 'ইংরেজি লেখা',
     titleEn: 'English Writing Basics | Eduvelto',
     descriptionEn:
-      'The basics of English writing in simple Bangla — short sentences, subject-verb agreement, capital letters, punctuation and paragraphs, with original examples. Eduvelto’s free guide. Draft lesson — awaiting teacher review.',
+      'English writing basics in simple Bangla — short sentences, subject-verb agreement and punctuation. Draft lesson — awaiting teacher review.',
     crumbEn: 'English Writing',
   },
   '/learn/online-safety-guide': {
     title: 'অনলাইনে নিরাপদ থাকার নিয়ম | Eduvelto',
     description:
-      'অনলাইনে নিরাপদ থাকার নিয়ম — শক্তিশালী পাসওয়ার্ড, OTP না দেওয়া, অচেনা লিংক, ব্যক্তিগত তথ্য ও ভুয়া খবর নিয়ে Eduvelto-র ফ্রি গাইড। খসড়া পাঠ — শিক্ষক যাচাইয়ের অপেক্ষায়।',
+      'অনলাইনে নিরাপদ থাকার নিয়ম — শক্তিশালী পাসওয়ার্ড, OTP না দেওয়া ও অচেনা লিংক নিয়ে Eduvelto-র ফ্রি গাইড। খসড়া পাঠ — শিক্ষক যাচাইয়ের অপেক্ষায়।',
     crumb: 'অনলাইন নিরাপত্তা',
     titleEn: 'Online Safety Guide for Students | Eduvelto',
     descriptionEn:
-      'How to stay safe online — strong passwords, never sharing OTP codes, unknown links, personal information and fake news, in Eduvelto’s free guide. Draft lesson — awaiting teacher review.',
+      'How to stay safe online — strong passwords, never sharing OTP codes and unknown links. Draft lesson — awaiting teacher review.',
     crumbEn: 'Online Safety',
   },
   '/learn/bangla-spelling-common-mistakes': {
@@ -1059,17 +1059,17 @@ const STATIC_ROUTES: Record<string, RouteSeoEntry> = {
     crumb: 'বাংলা বানান',
     titleEn: 'Common Bangla Spelling Mistakes | Eduvelto',
     descriptionEn:
-      'Common Bangla spelling mistakes and the simple rules that prevent them — question words, letter rules and modern spellings, with original examples. Eduvelto’s free guide. Draft lesson — awaiting teacher review.',
+      'Common Bangla spelling mistakes and the simple rules that prevent them. Draft lesson — awaiting teacher review.',
     crumbEn: 'Bangla Spelling',
   },
   '/learn/computer-basics-students': {
     title: 'কম্পিউটার ও ইন্টারনেটের মৌলিক ধারণা | Eduvelto',
     description:
-      'কম্পিউটার ও ইন্টারনেটের মৌলিক ধারণা — ফাইল ও ফোল্ডার, লেখালেখি, ব্রাউজার, ইমেইল ও শরীরের যত্ন নিয়ে Eduvelto-র ফ্রি গাইড। খসড়া পাঠ — শিক্ষক যাচাইয়ের অপেক্ষায়।',
+      'কম্পিউটার ও ইন্টারনেটের মৌলিক ধারণা — ফাইল ও ফোল্ডার, লেখালেখি, ব্রাউজার ও ইমেইল নিয়ে Eduvelto-র ফ্রি গাইড। খসড়া পাঠ — শিক্ষক যাচাইয়ের অপেক্ষায়।',
     crumb: 'কম্পিউটারের মৌলিক ধারণা',
     titleEn: 'Computer and Internet Basics for Students | Eduvelto',
     descriptionEn:
-      'Computer and internet basics for students — files and folders, word processing, browsers, email and looking after your body, in Eduvelto’s free guide. Draft lesson — awaiting teacher review.',
+      'Computer and internet basics for students — files and folders, word processing and browsers. Draft lesson — awaiting teacher review.',
     crumbEn: 'Computer Basics',
   },
   // Public guides, wave 3 (24 Nov 2026, brand-SEO wave 3): 6 more
@@ -1081,61 +1081,61 @@ const STATIC_ROUTES: Record<string, RouteSeoEntry> = {
   '/learn/exam-day-strategy': {
     title: 'পরীক্ষার দিনের কৌশল | Eduvelto',
     description:
-      'পরীক্ষার দিন কী করবেন — আগের রাতের প্রস্তুতি, সকালের পরিকল্পনা, হলে গিয়ে শুরু করা ও উত্তর দেওয়ার নিয়ম নিয়ে Eduvelto-র ফ্রি গাইড। খসড়া পাঠ — শিক্ষক যাচাইয়ের অপেক্ষায়।',
+      'পরীক্ষার দিন কী করবেন — আগের রাতের প্রস্তুতি, সকালের পরিকল্পনা ও উত্তর দেওয়ার নিয়ম নিয়ে Eduvelto-র ফ্রি গাইড। খসড়া পাঠ — শিক্ষক যাচাইয়ের অপেক্ষায়।',
     crumb: 'পরীক্ষার দিনের কৌশল',
     titleEn: 'Exam Day Strategy | Eduvelto',
     descriptionEn:
-      'What to do on exam day — the night-before preparation, the morning plan, starting in the hall and answering rules, in Eduvelto’s free guide. Draft lesson — awaiting teacher review.',
+      'What to do on exam day — the night-before preparation, the morning plan and answering rules. Draft lesson — awaiting teacher review.',
     crumbEn: 'Exam Day Strategy',
   },
   '/learn/mcq-answering-techniques': {
     title: 'MCQ উত্তর দেওয়ার কৌশল | Eduvelto',
     description:
-      'MCQ প্রশ্নের উত্তর দেওয়ার কৌশল — পুরো প্রশ্ন পড়া, সব অপশন দেখা, ভুল অপশন বাদ দেওয়া ও সময়ের হিসাব নিয়ে Eduvelto-র ফ্রি গাইড। খসড়া পাঠ — শিক্ষক যাচাইয়ের অপেক্ষায়।',
+      'MCQ প্রশ্নের উত্তর দেওয়ার কৌশল — পুরো প্রশ্ন পড়া, ভুল অপশন বাদ দেওয়া ও সময়ের হিসাব নিয়ে Eduvelto-র ফ্রি গাইড। খসড়া পাঠ — শিক্ষক যাচাইয়ের অপেক্ষায়।',
     crumb: 'MCQ উত্তর দেওয়ার কৌশল',
     titleEn: 'MCQ Answering Techniques | Eduvelto',
     descriptionEn:
-      'Techniques for answering MCQ questions — reading the full question, checking every option, eliminating wrong options and managing time, in Eduvelto’s free guide. Draft lesson — awaiting teacher review.',
+      'Techniques for answering MCQ questions — reading the full question, eliminating wrong options and managing time. Draft lesson — awaiting teacher review.',
     crumbEn: 'MCQ Answering Techniques',
   },
   '/learn/memory-techniques-students': {
     title: 'মনে রাখার কৌশল | Eduvelto',
     description:
-      'পড়া মনে রাখার কৌশল — বুঝে পড়া, সংযোগ তৈরি করা, নিজেকে যাচাই করা, নির্দিষ্ট সময় পর পর ঝালিয়ে নেওয়া ও অন্যকে শেখানো নিয়ে Eduvelto-র ফ্রি গাইড। খসড়া পাঠ — শিক্ষক যাচাইয়ের অপেক্ষায়।',
+      'পড়া মনে রাখার কৌশল — বুঝে পড়া, সংযোগ তৈরি করা ও নিজেকে যাচাই করা নিয়ে Eduvelto-র ফ্রি গাইড। খসড়া পাঠ — শিক্ষক যাচাইয়ের অপেক্ষায়।',
     crumb: 'মনে রাখার কৌশল',
     titleEn: 'Memory Techniques for Students | Eduvelto',
     descriptionEn:
-      'Techniques for remembering what you study — understanding first, making connections, self-testing, spaced review and teaching others, in Eduvelto’s free guide. Draft lesson — awaiting teacher review.',
+      'Techniques for remembering what you study — understanding first, making connections and self-testing. Draft lesson — awaiting teacher review.',
     crumbEn: 'Memory Techniques',
   },
   '/learn/study-routine-job-seekers': {
     title: 'চাকরিপ্রার্থীদের পড়ার রুটিন | Eduvelto',
     description:
-      'চাকরিপ্রার্থীদের পড়ার রুটিন — কাজের পাশে পড়ার সময় বের করা, সপ্তাহের পরিকল্পনা, দুর্বল বিষয় ও প্রশ্ন সমাধান নিয়ে Eduvelto-র ফ্রি গাইড। খসড়া পাঠ — শিক্ষক যাচাইয়ের অপেক্ষায়।',
+      'চাকরিপ্রার্থীদের পড়ার রুটিন — কাজের পাশে পড়ার সময় বের করা ও সপ্তাহের পরিকল্পনা নিয়ে Eduvelto-র ফ্রি গাইড। খসড়া পাঠ — শিক্ষক যাচাইয়ের অপেক্ষায়।',
     crumb: 'চাকরিপ্রার্থীদের রুটিন',
     titleEn: 'Study Routine for Job Seekers | Eduvelto',
     descriptionEn:
-      'A study routine for job seekers — finding study time beside work, a weekly plan, weak subjects and question practice, in Eduvelto’s free guide. Draft lesson — awaiting teacher review.',
+      'A study routine for job seekers — finding study time beside work and a weekly plan. Draft lesson — awaiting teacher review.',
     crumbEn: 'Job Seeker Routine',
   },
   '/learn/healthy-habits-students': {
     title: 'শিক্ষার্থীদের সুস্থ অভ্যাস | Eduvelto',
     description:
-      'শিক্ষার্থীদের সুস্থ অভ্যাস — নিয়মিত ঘুম, খাওয়া, নড়াচড়া, চোখের যত্ন, ফোনের সময় নিয়ন্ত্রণ ও মনের চাপ সামলানো নিয়ে Eduvelto-র ফ্রি গাইড। খসড়া পাঠ — শিক্ষক যাচাইয়ের অপেক্ষায়।',
+      'শিক্ষার্থীদের সুস্থ অভ্যাস — নিয়মিত ঘুম, খাওয়া, নড়াচড়া ও মনের চাপ সামলানো নিয়ে Eduvelto-র ফ্রি গাইড। খসড়া পাঠ — শিক্ষক যাচাইয়ের অপেক্ষায়।',
     crumb: 'সুস্থ অভ্যাস',
     titleEn: 'Healthy Habits for Students | Eduvelto',
     descriptionEn:
-      'Healthy habits for students — regular sleep, meals, movement, eye care, controlling phone time and handling stress, in Eduvelto’s free guide. Draft lesson — awaiting teacher review.',
+      'Healthy habits for students — regular sleep, meals, movement and handling stress. Draft lesson — awaiting teacher review.',
     crumbEn: 'Healthy Habits',
   },
   '/learn/digital-skills-basics': {
     title: 'ডিজিটাল দক্ষতার মৌলিক ধারণা | Eduvelto',
     description:
-      'ডিজিটাল দক্ষতার মৌলিক ধারণা — টাইপ করা, লেখালেখি, স্প্রেডশিটে হিসাব, তথ্য খোঁজা, ইমেইল ও অনলাইনে ফরম পূরণ নিয়ে Eduvelto-র ফ্রি গাইড। খসড়া পাঠ — শিক্ষক যাচাইয়ের অপেক্ষায়।',
+      'ডিজিটাল দক্ষতার মৌলিক ধারণা — টাইপ করা, লেখালেখি, স্প্রেডশিটে হিসাব ও তথ্য খোঁজা নিয়ে Eduvelto-র ফ্রি গাইড। খসড়া পাঠ — শিক্ষক যাচাইয়ের অপেক্ষায়।',
     crumb: 'ডিজিটাল দক্ষতা',
     titleEn: 'Digital Skills Basics for Students | Eduvelto',
     descriptionEn:
-      'Digital skills basics for students — typing, word processing, spreadsheets, searching for information, email and filling in online forms, in Eduvelto’s free guide. Draft lesson — awaiting teacher review.',
+      'Digital skills basics for students — typing, word processing, spreadsheets and searching for information. Draft lesson — awaiting teacher review.',
     crumbEn: 'Digital Skills',
   },
   '/learn/exam-anxiety-management': {
@@ -1197,6 +1197,66 @@ const STATIC_ROUTES: Record<string, RouteSeoEntry> = {
     descriptionEn:
       'Self-motivation for students — your goal, small steps, a routine and tracking progress. Draft lesson — awaiting teacher review.',
     crumbEn: 'Self-Motivation',
+  },
+  '/learn/how-to-use-free-library': {
+    title: 'ফ্রি লাইব্রেরি ব্যবহার করা | Eduvelto',
+    description:
+      'Eduvelto-র ফ্রি লাইব্রেরি কীভাবে ব্যবহার করবেন — বই খোঁজা, অধ্যায় পড়া, বুকমার্ক ও অগ্রগতি। খসড়া পাঠ — শিক্ষক যাচাইয়ের অপেক্ষায়।',
+    crumb: 'ফ্রি লাইব্রেরি',
+    titleEn: 'How to Use the Free Library | Eduvelto',
+    descriptionEn:
+      'How to use Eduvelto’s free library — finding books, reading chapters, bookmarks and progress. Draft lesson — awaiting teacher review.',
+    crumbEn: 'Free Library',
+  },
+  '/learn/how-to-use-job-practice': {
+    title: 'চাকরির অনুশীলন ব্যবহার করা | Eduvelto',
+    description:
+      'Eduvelto-তে চাকরির অনুশীলন কীভাবে করবেন — বিষয়ভিত্তিক অনুশীলন, ভুল উত্তর দেখা ও পরিকল্পনা। খসড়া পাঠ — শিক্ষক যাচাইয়ের অপেক্ষায়।',
+    crumb: 'চাকরির অনুশীলন',
+    titleEn: 'How to Use Job Practice | Eduvelto',
+    descriptionEn:
+      'How to practise for job exams on Eduvelto — subject-wise practice, reviewing wrong answers and planning. Draft lesson — awaiting teacher review.',
+    crumbEn: 'Job Practice',
+  },
+  '/learn/how-to-use-ai-assistant': {
+    title: 'AI লাইফ অ্যাসিস্ট্যান্ট ব্যবহার করা | Eduvelto',
+    description:
+      'Eduvelto-র AI লাইফ অ্যাসিস্ট্যান্ট কীভাবে ব্যবহার করবেন — হিসাব, রূপান্তর, পরিকল্পনা ও চিঠি লেখার সরঞ্জাম। খসড়া পাঠ — শিক্ষক যাচাইয়ের অপেক্ষায়।',
+    crumb: 'AI অ্যাসিস্ট্যান্ট',
+    titleEn: 'How to Use the AI Life Assistant | Eduvelto',
+    descriptionEn:
+      'How to use Eduvelto’s AI Life Assistant — calculators, converters, planners and letter-writing tools. Draft lesson — awaiting teacher review.',
+    crumbEn: 'AI Assistant',
+  },
+  '/learn/how-to-use-opportunity-hub': {
+    title: 'অপরচুনিটি হাব ব্যবহার করা | Eduvelto',
+    description:
+      'Eduvelto-র অপরচুনিটি হাব কীভাবে ব্যবহার করবেন — সুযোগ খোঁজা, CV তৈরি ও সাক্ষাৎকারের প্রস্তুতি। খসড়া পাঠ — শিক্ষক যাচাইয়ের অপেক্ষায়।',
+    crumb: 'অপরচুনিটি হাব',
+    titleEn: 'How to Use the Opportunity Hub | Eduvelto',
+    descriptionEn:
+      'How to use Eduvelto’s Opportunity Hub — finding opportunities, building a CV and preparing for interviews. Draft lesson — awaiting teacher review.',
+    crumbEn: 'Opportunity Hub',
+  },
+  '/learn/how-to-use-life-services': {
+    title: 'লাইফ সার্ভিস ব্যবহার করা | Eduvelto',
+    description:
+      'Eduvelto-র লাইফ সার্ভিস কীভাবে ব্যবহার করবেন — বাজেট, হিসাব, রূপান্তর, পরিকল্পনা ও দরকারি তথ্য। খসড়া পাঠ — শিক্ষক যাচাইয়ের অপেক্ষায়।',
+    crumb: 'লাইফ সার্ভিস',
+    titleEn: 'How to Use Everyday Life Services | Eduvelto',
+    descriptionEn:
+      'How to use Eduvelto’s Everyday Life Services — budget, calculators, converters, planning and useful information. Draft lesson — awaiting teacher review.',
+    crumbEn: 'Life Services',
+  },
+  '/learn/spoken-english-practice': {
+    title: 'ইংরেজিতে কথা বলার অনুশীলন | Eduvelto',
+    description:
+      'ইংরেজিতে কথা বলার অনুশীলন কীভাবে করবেন — প্রতিদিন বলা, আয়নার সামনে অনুশীলন ও ভুলকে ভয় না পাওয়া। খসড়া পাঠ — শিক্ষক যাচাইয়ের অপেক্ষায়।',
+    crumb: 'ইংরেজিতে কথা বলা',
+    titleEn: 'Spoken English Practice | Eduvelto',
+    descriptionEn:
+      'How to practise speaking English — speaking every day, mirror practice and not fearing mistakes. Draft lesson — awaiting teacher review.',
+    crumbEn: 'Spoken English',
   },
 };
 
@@ -1677,7 +1737,7 @@ export function resolveRouteSeo(pathname: string, lang: 'bn' | 'en' = 'bn'): Seo
   }
   if (path === '/learn') {
     // ItemList (24 Nov 2026, SEO pass; EXTENDED brand-SEO wave 1,
-    // wave 2, wave 3 and wave 4): the hub lists the 29 public guides, the
+    // wave 2, wave 3, wave 4 and wave 5): the hub lists the 35 public guides, the
     // two real lessons and the BCS English practice hub — the same
     // links the page renders, in the same order.
     jsonLd.push({
@@ -1862,18 +1922,54 @@ export function resolveRouteSeo(pathname: string, lang: 'bn' | 'en' = 'bn'): Seo
         {
           '@type': 'ListItem',
           position: 30,
+          name: lang === 'bn' ? 'ফ্রি লাইব্রেরি ব্যবহার করা' : 'How to Use the Free Library',
+          url: `${SITE_URL}/learn/how-to-use-free-library`,
+        },
+        {
+          '@type': 'ListItem',
+          position: 31,
+          name: lang === 'bn' ? 'চাকরির অনুশীলন ব্যবহার করা' : 'How to Use Job Practice',
+          url: `${SITE_URL}/learn/how-to-use-job-practice`,
+        },
+        {
+          '@type': 'ListItem',
+          position: 32,
+          name: lang === 'bn' ? 'AI লাইফ অ্যাসিস্ট্যান্ট ব্যবহার করা' : 'How to Use the AI Life Assistant',
+          url: `${SITE_URL}/learn/how-to-use-ai-assistant`,
+        },
+        {
+          '@type': 'ListItem',
+          position: 33,
+          name: lang === 'bn' ? 'অপরচুনিটি হাব ব্যবহার করা' : 'How to Use the Opportunity Hub',
+          url: `${SITE_URL}/learn/how-to-use-opportunity-hub`,
+        },
+        {
+          '@type': 'ListItem',
+          position: 34,
+          name: lang === 'bn' ? 'লাইফ সার্ভিস ব্যবহার করা' : 'How to Use Everyday Life Services',
+          url: `${SITE_URL}/learn/how-to-use-life-services`,
+        },
+        {
+          '@type': 'ListItem',
+          position: 35,
+          name: lang === 'bn' ? 'ইংরেজিতে কথা বলার অনুশীলন' : 'Spoken English Practice',
+          url: `${SITE_URL}/learn/spoken-english-practice`,
+        },
+        {
+          '@type': 'ListItem',
+          position: 36,
           name: lang === 'bn' ? 'টেন্স — পাঠ' : 'Tense — Lesson',
           url: `${SITE_URL}/learn/bcs-english-tense`,
         },
         {
           '@type': 'ListItem',
-          position: 31,
+          position: 37,
           name: lang === 'bn' ? 'প্রিপোজিশন — পাঠ' : 'Preposition — Lesson',
           url: `${SITE_URL}/learn/bcs-english-preposition`,
         },
         {
           '@type': 'ListItem',
-          position: 32,
+          position: 38,
           name: lang === 'bn' ? 'বিসিএস ইংরেজি অনুশীলন' : 'BCS English Practice',
           url: `${SITE_URL}/jobs/bcs/practice/english`,
         },
@@ -1918,8 +2014,8 @@ export function resolveRouteSeo(pathname: string, lang: 'bn' | 'en' = 'bn'): Seo
     });
   }
   if (PUBLIC_GUIDES.some((g) => g.path === path)) {
-    // Article (24 Nov 2026, brand-SEO wave 1; waves 2–4 keep the
-    // same date — the 29 guides are article-length drafts awaiting
+    // Article (24 Nov 2026, brand-SEO wave 1; waves 2–5 keep the
+    // same date — the 35 guides are article-length drafts awaiting
     // teacher review, published 24 Nov 2026. Never claims review.
     jsonLd.push({
       '@context': 'https://schema.org',
