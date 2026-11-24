@@ -45,7 +45,7 @@ function loadTasks(): PlannerTask[] {
 }
 
 export default function LifePlannerPage() {
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
   const today = useMemo(() => toDateKey(new Date()), []);
   const [tasks, setTasks] = useState<PlannerTask[]>(loadTasks);
   const [filter, setFilter] = useState<PlannerFilter>('today');
@@ -96,7 +96,7 @@ export default function LifePlannerPage() {
   return (
     <PageShell titleBn="দৈনিক পরিকল্পনা" titleEn="Daily Planner" wide>
       {/* Visible breadcrumb (24 Nov 2026 SEO pass) — labels match the BreadcrumbList JSON-LD in lib/seo.ts. */}
-      <Breadcrumb items={[{ label: 'জীবন সেবা', to: '/life' }, { label: 'দৈনিক প্ল্যানার' }]} />
+      <Breadcrumb items={[{ label: lang === 'bn' ? 'জীবন সেবা' : 'Life Services', to: '/life' }, { label: lang === 'bn' ? 'দৈনিক প্ল্যানার' : 'Daily Planner' }]} />
       <p style={{ color: 'var(--muted)' }}>
         {t({
           bn: 'আপনার দিনের কাজগুলো সাজান — পড়াশোনা, কাজ বা ব্যক্তিগত। কোনো লগইন লাগে না; সব তথ্য শুধু আপনার ডিভাইসেই থাকে, কোথাও পাঠানো হয় না।',
