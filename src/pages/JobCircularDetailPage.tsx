@@ -11,7 +11,8 @@
 // recruitment-pattern research.
 
 import { useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, useLocation } from 'react-router-dom';
+import { loginState } from '../lib/loginReturn';
 import { PageShell } from '../components/PageShell';
 import { AlertBox, Button, Card, Chip, LinkButton, Skeleton } from '../components/ui';
 import { useLanguage } from '../i18n/LanguageContext';
@@ -39,6 +40,9 @@ import {
 
 export default function JobCircularDetailPage() {
   const { circularId } = useParams<{ circularId: string }>();
+  const location = useLocation();
+  // Sections audit (24 Nov 2026): return here after sign-in.
+  const back = loginState(location.pathname + location.search);
   const { t, lang } = useLanguage();
   const { user } = useAuth();
   const [circular, setCircular] = useState<JobCircular | null | undefined>(undefined);
@@ -330,7 +334,7 @@ export default function JobCircularDetailPage() {
             </p>
             {!user ? (
               <p style={{ margin: 0, fontSize: 14 }}>
-                <Link to="/login">{t({ bn: 'লগইন করে রিপোর্ট করুন', en: 'Log in to report' })}</Link>
+                <Link to="/login" state={back}>{t({ bn: 'লগইন করে রিপোর্ট করুন', en: 'Log in to report' })}</Link>
               </p>
             ) : reportSent ? (
               <AlertBox tone="ok">

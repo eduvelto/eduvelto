@@ -24,7 +24,8 @@
 // exam, never on Book/Chapter/Lesson/Quiz pages.
 
 import { useEffect, useMemo, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, useLocation } from 'react-router-dom';
+import { loginState } from '../lib/loginReturn';
 import { PageShell, EmptyState } from '../components/PageShell';
 import { AlertBox, Card, Chip, LinkButton, ProgressBar, Reveal, SkeletonCards } from '../components/ui';
 import AdSlot from '../components/AdSlot';
@@ -136,6 +137,9 @@ function TileIcon({ kind }: { kind: string }) {
 
 export default function ClassDashboardPage() {
   const { t } = useLanguage();
+  const location = useLocation();
+  // Sections audit (24 Nov 2026): return here after sign-in.
+  const back = loginState(location.pathname + location.search);
   const { slug = '', tab } = useParams<{ slug: string; tab?: string }>();
   const def = classLevelBySlug(slug);
   const activeTab: TabSlug = isTabSlug(tab) ? tab : 'home';
@@ -572,7 +576,7 @@ export default function ClassDashboardPage() {
                         <p style={{ margin: '6px 0 12px', color: 'var(--muted)', fontSize: 14 }}>
                           {t({ bn: 'লগইন করলে আপনার পড়া, পরীক্ষা ও অগ্রগতি এখানে দেখাবে।', en: 'Log in and your lessons, tests and progress will show here.' })}
                         </p>
-                        <LinkButton to="/login" variant="primary">
+                        <LinkButton to="/login" state={back} variant="primary">
                           {t({ bn: 'লগইন', en: 'Log in' })}
                         </LinkButton>
                       </Card>

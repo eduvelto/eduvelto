@@ -8,7 +8,8 @@
 // (ui/premium-polish: stat cards, progress bars, summary cards, skeletons.)
 
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
+import { loginState } from '../lib/loginReturn';
 import { PageShell } from '../components/PageShell';
 import { AlertBox, Card, Chip, LinkButton, ProgressBar, Reveal, SkeletonCards, StatCard } from '../components/ui';
 import { useAuth } from '../lib/auth';
@@ -24,6 +25,9 @@ import {
 
 export default function ProgressPage() {
   const { user, loading } = useAuth();
+  const location = useLocation();
+  // Sections audit (24 Nov 2026): return here after sign-in.
+  const back = loginState(location.pathname + location.search);
   const { lang, t } = useLanguage();
   const [progress, setProgress] = useState<SubjectProgress[] | null>(null);
   const [bookmarks, setBookmarks] = useState<Bookmark[] | null>(null);
@@ -79,12 +83,12 @@ export default function ProgressPage() {
         <Card>
           <p style={{ margin: '0 0 14px' }}>
             {lang === 'bn' ? (
-              <>আপনার অগ্রগতি দেখতে <Link to="/login" style={{ fontWeight: 600 }}>লগইন করুন</Link>।</>
+              <>আপনার অগ্রগতি দেখতে <Link to="/login" state={back} style={{ fontWeight: 600 }}>লগইন করুন</Link>।</>
             ) : (
-              <><Link to="/login" style={{ fontWeight: 600 }}>Log in</Link> to see your progress.</>
+              <><Link to="/login" state={back} style={{ fontWeight: 600 }}>Log in</Link> to see your progress.</>
             )}
           </p>
-          <LinkButton to="/login" variant="accent">
+          <LinkButton to="/login" state={back} variant="accent">
             {t({ bn: 'লগইন করুন', en: 'Log in' })}
           </LinkButton>
         </Card>

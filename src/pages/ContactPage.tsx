@@ -8,7 +8,8 @@
 // links instead. No private-tuition line anywhere (owner rule 22:54).
 
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
+import { loginState } from '../lib/loginReturn';
 import { addDoc, collection, serverTimestamp } from 'firebase/firestore';
 import { db } from '../firebase';
 import { useAuth } from '../lib/auth';
@@ -18,6 +19,9 @@ import { useLanguage } from '../i18n/LanguageContext';
 
 export default function ContactPage() {
   const { user, profile } = useAuth();
+  const location = useLocation();
+  // Sections audit (24 Nov 2026): return here after sign-in.
+  const back = loginState(location.pathname + location.search);
   const { t } = useLanguage();
   const [name, setName] = useState(profile?.displayName ?? '');
   const [email, setEmail] = useState('');
@@ -68,7 +72,7 @@ export default function ContactPage() {
       <h2 style={{ fontSize: 19, margin: '24px 0 8px' }}>{t({ bn: 'বার্তা পাঠান', en: 'Send a message' })}</h2>
       {!user ? (
         <p>
-          {t({ bn: 'বার্তা পাঠাতে', en: 'To send a message,' })} <Link to="/login">{t({ bn: 'লগইন করুন', en: 'log in' })}</Link>
+          {t({ bn: 'বার্তা পাঠাতে', en: 'To send a message,' })} <Link to="/login" state={back}>{t({ bn: 'লগইন করুন', en: 'log in' })}</Link>
           {t({ bn: ' — অথবা উপরের ইমেইল/নম্বরে সরাসরি যোগাযোগ করুন।', en: ' — or contact us directly at the email/number above.' })}
         </p>
       ) : status === 'sent' ? (

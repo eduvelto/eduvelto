@@ -6,10 +6,11 @@
 // Google provider stays enabled in the console so the change is
 // reversible and existing linked accounts are not destroyed.
 import { useEffect, useState, type FormEvent } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { PageShell } from '../components/PageShell';
 import { strings } from '../i18n/strings';
 import { useAuth } from '../lib/auth';
+import { getReturnTo } from '../lib/loginReturn';
 import { isFirebaseConfigured } from '../firebase';
 import { T, useLanguage } from '../i18n/LanguageContext';
 
@@ -37,6 +38,11 @@ const buttonStyle: React.CSSProperties = {
 export default function LoginPage() {
   const { signIn, resetPassword, user, error, errorCode, loading, mfaPending, completeMfaSignIn, clearMfaPending } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
+  // Sections audit (24 Nov 2026): after sign-in, return to the page the
+  // user came from (a job hub, a lesson, an exam) — the login wall passes
+  // it as state { from } or ?next=. Default: /profile, as before.
+  const returnTo = getReturnTo(location) ?? '/profile';
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [busy, setBusy] = useState(false);
@@ -50,10 +56,12 @@ export default function LoginPage() {
   const { t } = useLanguage();
   const s = strings.auth;
 
-  // Opening /login while already signed in goes to the profile.
+  // Opening /login while already signed in goes back to the page the
+  // user came from (or the profile when there is none). Replace so the
+  // login page itself does not stay in the back-button history.
   useEffect(() => {
-    if (user) navigate('/profile');
-  }, [user, navigate]);
+    if (user) navigate(returnTo, { replace: true });
+  }, [user, navigate, returnTo]);
 
   if (!isFirebaseConfigured) {
     return (
@@ -100,7 +108,7 @@ export default function LoginPage() {
     setBusy(true);
     try {
       await completeMfaSignIn(mfaCode.trim(), mfaFactorUid || undefined);
-      // `user` appears → the effect above navigates to /profile.
+      // `user` appears → the effect above navigates back (or to /profile).
     } catch {
       // The friendly message is already in `error` from the AuthProvider.
     } finally {

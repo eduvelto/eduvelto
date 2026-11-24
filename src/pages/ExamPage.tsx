@@ -17,7 +17,8 @@
 // (ui/premium-polish: stat strip, group cards, result cards, skeletons, retry.)
 
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
+import { loginState } from '../lib/loginReturn';
 import { PageShell, EmptyState } from '../components/PageShell';
 import { AlertBox, Card, Chip, LinkButton, SkeletonCards, StatCard } from '../components/ui';
 import LoginWall from '../components/LoginWall';
@@ -81,6 +82,9 @@ function formatDate(a: QuizAttempt, lang: 'bn' | 'en'): string {
 
 export default function ExamPage() {
   const { user, loading: authLoading } = useAuth();
+  const location = useLocation();
+  // Sections audit (24 Nov 2026): return here after sign-in.
+  const back = loginState(location.pathname + location.search);
   const { lang, t } = useLanguage();
   const [pages, setPages] = useState<QuizPageResult[]>([]);
   const [pageIndex, setPageIndex] = useState(0);
@@ -274,7 +278,7 @@ export default function ExamPage() {
                       {t({ bn: 'পরীক্ষা দিন', en: 'Take exam' })}
                     </LinkButton>
                   ) : (
-                    <Link to="/login" style={{ fontWeight: 600 }}>
+                    <Link to="/login" state={back} style={{ fontWeight: 600 }}>
                       {t({ bn: 'পরীক্ষা দিতে লগইন করুন', en: 'Log in to take the exam' })}
                     </Link>
                   )}
@@ -312,9 +316,9 @@ export default function ExamPage() {
       {!user ? (
         <p>
           {lang === 'bn' ? (
-            <>ফলাফল দেখতে <Link to="/login" style={{ fontWeight: 600 }}>লগইন করুন</Link>।</>
+            <>ফলাফল দেখতে <Link to="/login" state={back} style={{ fontWeight: 600 }}>লগইন করুন</Link>।</>
           ) : (
-            <><Link to="/login" style={{ fontWeight: 600 }}>Sign in</Link> to see your results.</>
+            <><Link to="/login" state={back} style={{ fontWeight: 600 }}>Sign in</Link> to see your results.</>
           )}
         </p>
       ) : attempts === null ? (

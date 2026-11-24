@@ -8,7 +8,8 @@
 // change request (teacherChanges.ts) — pending until an Admin
 // approves; the old approved subjects stay visible meanwhile.
 import { useEffect, useState, type FormEvent } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
+import { loginState } from '../lib/loginReturn';
 import { collection, getDocs, limit, query, where } from 'firebase/firestore';
 import { db } from '../firebase';
 import { PageShell, EmptyState } from '../components/PageShell';
@@ -29,6 +30,9 @@ import { T, useLanguage } from '../i18n/LanguageContext';
 
 export default function TeacherDashboardPage() {
   const { user, profile, loading } = useAuth();
+  const location = useLocation();
+  // Sections audit (24 Nov 2026): return here after sign-in.
+  const back = loginState(location.pathname + location.search);
   const { t } = useLanguage();
   const d = strings.dashboard;
   const [approvedSubjects, setApprovedSubjects] = useState<string[] | null>(null);
@@ -132,7 +136,7 @@ export default function TeacherDashboardPage() {
       <PageShell titleBn={d.teacherTitle.bn} titleEn={d.teacherTitle.en}>
         <p>{t(strings.profile.notSignedIn)}</p>
         <p>
-          <LinkButton to="/login" variant="outline">{t(strings.auth.loginTitle)}</LinkButton>
+          <LinkButton to="/login" state={back} variant="outline">{t(strings.auth.loginTitle)}</LinkButton>
         </p>
       </PageShell>
     );

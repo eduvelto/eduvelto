@@ -29,7 +29,8 @@
 // here only after a Moderator publishes it.
 
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
+import { loginState } from '../lib/loginReturn';
 import { PageShell } from '../components/PageShell';
 import { Card, Chip, LinkButton, Reveal } from '../components/ui';
 import { useAuth } from '../lib/auth';
@@ -55,6 +56,9 @@ const WEEKLY_PATTERN: Record<string, { bn: string; en: string }> = {
 
 export default function JobsCommonPage() {
   const { lang, t } = useLanguage();
+  const location = useLocation();
+  // Sections audit (24 Nov 2026): return here after sign-in.
+  const back = loginState(location.pathname + location.search);
   const { user } = useAuth();
   const cycle = WEEKLY_MOCK_CYCLE.map((s) => jobExamBySlug(s)!).filter(Boolean);
 
@@ -169,7 +173,7 @@ export default function JobsCommonPage() {
                   </LinkButton>
                 ) : (
                   <p style={{ margin: 0 }}>
-                    <Link to="/login" style={{ fontWeight: 600 }}>
+                    <Link to="/login" state={back} style={{ fontWeight: 600 }}>
                       {t({ bn: 'লগইন করে মক দিন →', en: 'Log in to take the mock →' })}
                     </Link>
                   </p>
@@ -210,7 +214,7 @@ export default function JobsCommonPage() {
                   </LinkButton>
                 ) : (
                   <p style={{ margin: 0 }}>
-                    <Link to="/login" style={{ fontWeight: 600 }}>
+                    <Link to="/login" state={back} style={{ fontWeight: 600 }}>
                       {t({ bn: 'লগইন করে মক দিন →', en: 'Log in to take the mock →' })}
                     </Link>
                   </p>
@@ -232,7 +236,7 @@ export default function JobsCommonPage() {
             </div>
             {!user ? (
               <p style={{ margin: '8px 0 0' }}>
-                <Link to="/login" style={{ fontWeight: 600 }}>
+                <Link to="/login" state={back} style={{ fontWeight: 600 }}>
                   {t({ bn: 'লগইন করে অগ্রগতি দেখুন →', en: 'Log in to see your progress →' })}
                 </Link>
               </p>

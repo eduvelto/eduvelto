@@ -10,7 +10,8 @@
 // LANGUAGE: all UI text is Bangla (one-language rule).
 
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
+import { loginState } from '../lib/loginReturn';
 import { Card, LinkButton, Reveal } from './ui';
 import { useAuth } from '../lib/auth';
 import type { JobExamDef } from '../lib/jobExams';
@@ -19,6 +20,9 @@ import { jobMockPatternSummaryBn, type JobMockWithId } from '../lib/jobMocks';
 
 export default function JobMockTab({ def }: { def: JobExamDef }) {
   const { user } = useAuth();
+  const location = useLocation();
+  // Sections audit (24 Nov 2026): return here after sign-in.
+  const back = loginState(location.pathname + location.search);
   const [loading, setLoading] = useState(true);
   const [mocks, setMocks] = useState<JobMockWithId[]>([]);
 
@@ -63,7 +67,7 @@ export default function JobMockTab({ def }: { def: JobExamDef }) {
           </p>
           {!user ? (
             <p style={{ margin: 0 }}>
-              <Link to="/login" style={{ fontWeight: 600 }}>
+              <Link to="/login" state={back} style={{ fontWeight: 600 }}>
                 লগইন করুন →
               </Link>
             </p>
@@ -95,7 +99,7 @@ export default function JobMockTab({ def }: { def: JobExamDef }) {
                   মক শুরু করুন →
                 </LinkButton>
               ) : (
-                <LinkButton to="/login" variant="accent">
+                <LinkButton to="/login" state={back} variant="accent">
                   লগইন করে মক দিন →
                 </LinkButton>
               )}

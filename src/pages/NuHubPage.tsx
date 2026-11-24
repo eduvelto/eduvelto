@@ -18,7 +18,8 @@
 // in. No rank, no leaderboard, no "verified" result class, no exam
 // date, no prohibited wording (§15.1).
 
-import { Link, Navigate, useParams } from 'react-router-dom';
+import { Link, Navigate, useParams, useLocation } from 'react-router-dom';
+import { loginState } from '../lib/loginReturn';
 import { PageShell, EmptyState } from '../components/PageShell';
 import { Card, LinkButton } from '../components/ui';
 import { useLanguage, T } from '../i18n/LanguageContext';
@@ -45,9 +46,12 @@ import { NU_GROUPS, resolveAdmissionMode } from '../lib/nuProfile';
 
 function LoginPrompt() {
   const { t } = useLanguage();
+  const location = useLocation();
+  // Sections audit (24 Nov 2026): return here after sign-in.
+  const back = loginState(location.pathname + location.search);
   return (
     <p style={{ marginTop: 12 }}>
-      <LinkButton to="/login" variant="primary">
+      <LinkButton to="/login" state={back} variant="primary">
         {t({ bn: 'লগইন করুন', en: 'Sign in' })}
       </LinkButton>{' '}
       <span style={{ color: 'var(--muted-ivory)', fontSize: 14 }}>

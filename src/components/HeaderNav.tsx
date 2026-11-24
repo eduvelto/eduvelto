@@ -28,6 +28,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom';
+import { loginState } from '../lib/loginReturn';
 import { useAuth } from '../lib/auth';
 import { useTheme } from '../lib/theme';
 import { useLanguage } from '../i18n/LanguageContext';
@@ -247,6 +248,8 @@ export default function HeaderNav() {
   const { user, profile, loading, signOut } = useAuth();
   const { theme, toggleTheme } = useTheme();
   const location = useLocation();
+  // Sections audit (24 Nov 2026): return here after sign-in.
+  const back = loginState(location.pathname + location.search);
   const navigate = useNavigate();
   const [menuOpen, setMenuOpen] = useState(false);
   const [openMenu, setOpenMenu] = useState<string | null>(null);
@@ -440,10 +443,10 @@ export default function HeaderNav() {
             </>
           ) : (
             <>
-              <NavLink to="/login" className="ev-btn ev-btn-sm ev-header-btn-login">
+              <NavLink to="/login" state={back} className="ev-btn ev-btn-sm ev-header-btn-login">
                 {t({ bn: 'লগইন', en: 'Log in' })}
               </NavLink>
-              <NavLink to="/register" className="ev-btn ev-btn-sm ev-header-btn-register">
+              <NavLink to="/register" state={back} className="ev-btn ev-btn-sm ev-header-btn-register">
                 {t({ bn: 'রেজিস্টার', en: 'Register' })}
               </NavLink>
             </>

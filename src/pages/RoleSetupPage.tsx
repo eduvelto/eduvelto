@@ -9,11 +9,12 @@
 // Nobody can pick admin / moderator / owner here — those roles are not
 // offered, and the rules reject them at creation anyway.
 import { useEffect, useState, type FormEvent } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { db } from '../firebase';
 import { PageShell } from '../components/PageShell';
 import { strings } from '../i18n/strings';
 import { clearStoredRoleSetupHold, releaseProfileCreationHold, useAuth } from '../lib/auth';
+import { getReturnTo } from '../lib/loginReturn';
 import { ensureUserProfile } from '../lib/profile';
 import type { EducationType, ProfileEdit } from '../lib/profile';
 import { T, useLanguage } from '../i18n/LanguageContext';
@@ -52,6 +53,10 @@ type RoleChoice = 'student' | 'teacher' | 'parent';
 export default function RoleSetupPage() {
   const { user, profile, loading } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
+  // Sections audit (24 Nov 2026): after role setup, return to the page
+  // the user came from when one was passed along (legacy Google flow).
+  const returnTo = getReturnTo(location) ?? '/dashboard';
   const { t } = useLanguage();
   const d = strings.dashboard;
   const [role, setRole] = useState<RoleChoice>('student');
@@ -140,7 +145,7 @@ export default function RoleSetupPage() {
     try {
       await ensureUserProfile(db, user, undefined, { role, fields });
       releaseProfileCreationHold();
-      navigate('/dashboard');
+      navigate(returnTo);
     } catch (err) {
       setError(err instanceof Error ? err.message : t({ bn: 'প্রোফাইল তৈরি করা যায়নি।', en: 'Could not create the profile.' }));
     } finally {

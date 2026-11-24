@@ -19,7 +19,8 @@
 // convention); dates use Bangla digits (bn-BD locale).
 
 import { useEffect, useMemo, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
+import { loginState } from '../lib/loginReturn';
 import { PageShell } from '../components/PageShell';
 import { AlertBox, Card, LinkButton, ProgressBar, Skeleton } from '../components/ui';
 import { useAuth } from '../lib/auth';
@@ -53,6 +54,9 @@ function formatDateBn(millis: number | null): string {
 
 export default function JobAnalysisPage() {
   const { user, loading } = useAuth();
+  const location = useLocation();
+  // Sections audit (24 Nov 2026): return here after sign-in.
+  const back = loginState(location.pathname + location.search);
   const [attempts, setAttempts] = useState<JobAttemptSummary[] | null>(null);
   const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
 
@@ -110,7 +114,7 @@ export default function JobAnalysisPage() {
           <p style={{ margin: '8px 0 12px', color: MUTED, fontSize: 14, lineHeight: 1.7 }}>
             বিশ্লেষণ শুধু লগইন করা শিক্ষার্থীরা দেখতে পারে।
           </p>
-          <Link to="/login" style={{ fontWeight: 600 }}>লগইন করুন →</Link>
+          <Link to="/login" state={back} style={{ fontWeight: 600 }}>লগইন করুন →</Link>
         </Card>
       </PageShell>
     );

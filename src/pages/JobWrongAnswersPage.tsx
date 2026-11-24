@@ -24,7 +24,8 @@
 // instead — never a guessed explanation).
 
 import { useEffect, useMemo, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { loginState } from '../lib/loginReturn';
 import { PageShell } from '../components/PageShell';
 import { AlertBox, Button, Card, Chip, LinkButton, Skeleton } from '../components/ui';
 import { useAuth } from '../lib/auth';
@@ -182,6 +183,9 @@ function EntryCard(props: {
 
 export default function JobWrongAnswersPage() {
   const { user } = useAuth();
+  const location = useLocation();
+  // Sections audit (24 Nov 2026): return here after sign-in.
+  const back = loginState(location.pathname + location.search);
   const { t, lang } = useLanguage();
   const navigate = useNavigate();
 
@@ -373,7 +377,7 @@ export default function JobWrongAnswersPage() {
           <p style={{ margin: '8px 0 12px', color: 'var(--muted)', fontSize: 14, lineHeight: 1.7 }}>
             ভুল-উত্তর নোটবুক শুধু আপনার নিজের — লগইন করলে আপনার ভুল প্রশ্নগুলো এখানে জমা হবে।
           </p>
-          <Link to="/login" style={{ fontWeight: 600 }}>লগইন করুন →</Link>
+          <Link to="/login" state={back} style={{ fontWeight: 600 }}>লগইন করুন →</Link>
         </Card>
       </PageShell>
     );

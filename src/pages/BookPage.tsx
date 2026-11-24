@@ -2,7 +2,8 @@
 // (ui/premium-polish: book hero card, chapter cards, skeletons, retry.)
 
 import { Fragment, useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, useLocation } from 'react-router-dom';
+import { loginState } from '../lib/loginReturn';
 import { PageShell } from '../components/PageShell';
 import AdSlot from '../components/AdSlot';
 import { AlertBox, Card, Chip, Skeleton, SkeletonCards } from '../components/ui';
@@ -13,6 +14,9 @@ import { useLanguage } from '../i18n/LanguageContext';
 export default function BookPage() {
   const { t } = useLanguage();
   const { user, loading: authLoading } = useAuth();
+  const location = useLocation();
+  // Sections audit (24 Nov 2026): return here after sign-in.
+  const back = loginState(location.pathname + location.search);
   const { bookId } = useParams<{ bookId: string }>();
   const [book, setBook] = useState<Book | null>(null);
   const [chapters, setChapters] = useState<Chapter[] | null>(null);
@@ -81,9 +85,9 @@ export default function BookPage() {
                 {t({ bn: 'এই বইয়ের পাঠ পড়তে লগইন করুন। প্রতিটি বইয়ের প্রথম পাঠটি অতিথি হিসেবে পড়া যায়।', en: 'Sign in to read this book. The first lesson of each book can be read as a guest.' })}
               </p>
               <p style={{ margin: 0 }}>
-                <Link to="/login" style={{ fontWeight: 600 }}>{t({ bn: 'লগইন করুন', en: 'Sign in' })}</Link>
+                <Link to="/login" state={back} style={{ fontWeight: 600 }}>{t({ bn: 'লগইন করুন', en: 'Sign in' })}</Link>
                 {' · '}
-                <Link to="/register" style={{ fontWeight: 600 }}>{t({ bn: 'রেজিস্ট্রেশন করুন', en: 'Register' })}</Link>
+                <Link to="/register" state={back} style={{ fontWeight: 600 }}>{t({ bn: 'রেজিস্ট্রেশন করুন', en: 'Register' })}</Link>
               </p>
             </Card>
           ) : null}
@@ -115,9 +119,9 @@ export default function BookPage() {
                 {t({ bn: `এই বইয়ের ${book.chapterCount - chapters.length}টি পাঠ পড়তে লগইন করুন। প্রথম পাঠটি অতিথি হিসেবে পড়া যায়।`, en: `Sign in to read the other ${book.chapterCount - chapters.length} lessons of this book. The first lesson can be read as a guest.` })}
               </p>
               <p style={{ margin: 0 }}>
-                <Link to="/login" style={{ fontWeight: 600 }}>{t({ bn: 'লগইন করুন', en: 'Sign in' })}</Link>
+                <Link to="/login" state={back} style={{ fontWeight: 600 }}>{t({ bn: 'লগইন করুন', en: 'Sign in' })}</Link>
                 {' · '}
-                <Link to="/register" style={{ fontWeight: 600 }}>{t({ bn: 'রেজিস্ট্রেশন করুন', en: 'Register' })}</Link>
+                <Link to="/register" state={back} style={{ fontWeight: 600 }}>{t({ bn: 'রেজিস্ট্রেশন করুন', en: 'Register' })}</Link>
               </p>
             </Card>
           ) : null}

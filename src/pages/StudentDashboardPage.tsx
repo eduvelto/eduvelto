@@ -9,6 +9,8 @@
 // never deletes progress/bookmarks/results — they are keyed to content
 // IDs and stay saved (see the test report, case D1).
 import { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
+import { loginState } from '../lib/loginReturn';
 import { PageShell, EmptyState } from '../components/PageShell';
 import { AlertBox, Button, Chip, LinkButton, ProgressBar, Skeleton, SkeletonCards, StatCard } from '../components/ui';
 import { DashboardBookCard } from '../components/DashboardBookCard';
@@ -27,6 +29,9 @@ import { T, useLanguage } from '../i18n/LanguageContext';
 
 export default function StudentDashboardPage() {
   const { user, profile, loading } = useAuth();
+  const location = useLocation();
+  // Sections audit (24 Nov 2026): return here after sign-in.
+  const back = loginState(location.pathname + location.search);
   const { t } = useLanguage();
   const d = strings.dashboard;
   const [page, setPage] = useState<Page<Book> | null>(null);
@@ -95,7 +100,7 @@ export default function StudentDashboardPage() {
       <PageShell titleBn={d.studentTitle.bn} titleEn={d.studentTitle.en}>
         <p>{t(strings.profile.notSignedIn)}</p>
         <p>
-          <LinkButton to="/login" variant="outline">{t(strings.auth.loginTitle)}</LinkButton>
+          <LinkButton to="/login" state={back} variant="outline">{t(strings.auth.loginTitle)}</LinkButton>
         </p>
       </PageShell>
     );

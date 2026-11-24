@@ -118,13 +118,15 @@ export interface LinkButtonProps {
   size?: ButtonSize;
   children: ReactNode;
   className?: string;
+  /** Router state — e.g. { from } so /login can return after sign-in. */
+  state?: { from: string };
 }
 
 /** A router Link styled exactly like a Button (same sizes, states, touch target). */
 export function LinkButton(props: LinkButtonProps) {
-  const { to, variant = 'primary', size = 'md', children, className = '' } = props;
+  const { to, variant = 'primary', size = 'md', children, className = '', state } = props;
   return (
-    <Link to={to} className={`ev-btn ${variantClass[variant]} ${sizeClass[size]} ${className}`.trim()}>
+    <Link to={to} state={state} className={`ev-btn ${variantClass[variant]} ${sizeClass[size]} ${className}`.trim()}>
       {children}
     </Link>
   );

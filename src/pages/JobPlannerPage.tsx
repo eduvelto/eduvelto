@@ -29,7 +29,8 @@
 // Load errors show a retry card, never fake "no data".
 
 import { useEffect, useMemo, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
+import { loginState } from '../lib/loginReturn';
 import { PageShell } from '../components/PageShell';
 import { AlertBox, Card, LinkButton, Reveal, Skeleton } from '../components/ui';
 import { useAuth } from '../lib/auth';
@@ -121,6 +122,9 @@ function PlanItemRow({ item }: { item: PlanDayItem }) {
 
 export default function JobPlannerPage() {
   const { user, profile, loading } = useAuth();
+  const location = useLocation();
+  // Sections audit (24 Nov 2026): return here after sign-in.
+  const back = loginState(location.pathname + location.search);
   const { t } = useLanguage();
   const [mode, setMode] = useState<EffortMode>('standard');
   const [attempts, setAttempts] = useState<JobAttemptSummary[] | null>(null);
@@ -236,7 +240,7 @@ export default function JobPlannerPage() {
               en: 'The planner is built from your own practice, so only signed-in students can see it.',
             })}
           </p>
-          <Link to="/login" style={{ fontWeight: 600 }}>
+          <Link to="/login" state={back} style={{ fontWeight: 600 }}>
             {t({ bn: 'লগইন করুন →', en: 'Log in →' })}
           </Link>
         </Card>

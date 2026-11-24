@@ -30,6 +30,7 @@
 
 import { useEffect, useState } from 'react';
 import { Link, useLocation, useParams, useSearchParams } from 'react-router-dom';
+import { loginState } from '../lib/loginReturn';
 import { PageShell } from '../components/PageShell';
 import { AlertBox, Card, LinkButton, ProgressBar, Skeleton } from '../components/ui';
 import { useAuth } from '../lib/auth';
@@ -86,6 +87,8 @@ export default function JobResultPage() {
   const { attemptId = '' } = useParams<{ attemptId: string }>();
   const [searchParams] = useSearchParams();
   const location = useLocation();
+  // Sections audit (24 Nov 2026): return here after sign-in.
+  const back = loginState(location.pathname + location.search);
   const { user, profile } = useAuth();
   // Step 13: a wrong-answers session passes
   // { fromWrongAnswers, clearedCount, clearedQuestionIds } —
@@ -182,7 +185,7 @@ export default function JobResultPage() {
           <p style={{ margin: '8px 0 12px', color: MUTED, fontSize: 14, lineHeight: 1.7 }}>
             ফলাফল শুধু লগইন করা শিক্ষার্থীরা দেখতে পারে।
           </p>
-          <Link to="/login" style={{ fontWeight: 600 }}>লগইন করুন →</Link>
+          <Link to="/login" state={back} style={{ fontWeight: 600 }}>লগইন করুন →</Link>
         </Card>
       </PageShell>
     );

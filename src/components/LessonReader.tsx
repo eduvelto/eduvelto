@@ -18,7 +18,8 @@
 // are labelled "from your practice attempts".
 
 import { useEffect, useRef, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
+import { loginState } from '../lib/loginReturn';
 import { useAuth } from '../lib/auth';
 import { AlertBox, Button } from './ui';
 import { useLanguage } from '../i18n/LanguageContext';
@@ -54,6 +55,9 @@ export default function LessonReader(props: {
 }) {
   const { lesson, bookTitle, subject, backTo, backLabel } = props;
   const { user } = useAuth();
+  const location = useLocation();
+  // Sections audit (24 Nov 2026): return here after sign-in.
+  const back = loginState(location.pathname + location.search);
   const { lang, t } = useLanguage();
   const [picked, setPicked] = useState<Record<string, string>>({});
   const [revealed, setRevealed] = useState<Record<string, boolean>>({});
@@ -283,7 +287,7 @@ export default function LessonReader(props: {
             {bookmarked ? t({ bn: '★ বুকমার্ক করা আছে', en: '★ Bookmarked' }) : t({ bn: '☆ বুকমার্ক করুন', en: '☆ Bookmark' })}
           </Button>
         ) : (
-          <Link to="/login" className="ev-btn ev-btn-outline">
+          <Link to="/login" state={back} className="ev-btn ev-btn-outline">
             {t({ bn: 'বুকমার্ক করতে লগইন করুন', en: 'Log in to bookmark' })}
           </Link>
         )}
@@ -355,11 +359,11 @@ export default function LessonReader(props: {
           <p style={{ margin: 0 }}>
             {lang === 'bn' ? (
               <>
-                <Link to="/login">লগইন করুন</Link> — তাহলে আপনার পড়া ও অগ্রগতি সংরক্ষণ করা হবে।
+                <Link to="/login" state={back}>লগইন করুন</Link> — তাহলে আপনার পড়া ও অগ্রগতি সংরক্ষণ করা হবে।
               </>
             ) : (
               <>
-                <Link to="/login">Log in</Link> to save your reading and progress.
+                <Link to="/login" state={back}>Log in</Link> to save your reading and progress.
               </>
             )}
           </p>

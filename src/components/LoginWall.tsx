@@ -7,6 +7,8 @@
 
 import { Card, LinkButton } from './ui';
 import { useLanguage } from '../i18n/LanguageContext';
+import { useLocation } from 'react-router-dom';
+import { loginState } from '../lib/loginReturn';
 import { loginWallCopy, type LoginWallKind } from '../lib/gating';
 
 export default function LoginWall({
@@ -18,6 +20,10 @@ export default function LoginWall({
   contextTitle?: string;
 }) {
   const { t } = useLanguage();
+  const location = useLocation();
+  // Sections audit (24 Nov 2026): pass the current page so sign-in
+  // returns here instead of always landing on /profile.
+  const back = loginState(location.pathname + location.search);
   const copy = loginWallCopy(kind);
   return (
     <Card style={{ borderTop: '4px solid #F1B308', textAlign: 'center', padding: '28px 20px' }}>
@@ -38,10 +44,10 @@ export default function LoginWall({
         {t({ bn: copy.bodyBn, en: copy.bodyEn })}
       </p>
       <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10, justifyContent: 'center' }}>
-        <LinkButton to="/login" size="lg">
+        <LinkButton to="/login" state={back} size="lg">
           {t({ bn: 'লগইন করুন', en: 'Sign in' })}
         </LinkButton>
-        <LinkButton to="/register" variant="outline" size="lg">
+        <LinkButton to="/register" state={back} variant="outline" size="lg">
           {t({ bn: 'রেজিস্ট্রেশন করুন', en: 'Register' })}
         </LinkButton>
       </div>
