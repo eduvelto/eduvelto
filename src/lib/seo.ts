@@ -1138,6 +1138,66 @@ const STATIC_ROUTES: Record<string, RouteSeoEntry> = {
       'Digital skills basics for students — typing, word processing, spreadsheets, searching for information, email and filling in online forms, in Eduvelto’s free guide. Draft lesson — awaiting teacher review.',
     crumbEn: 'Digital Skills',
   },
+  '/learn/exam-anxiety-management': {
+    title: 'পরীক্ষার উদ্বেগ সামলানো | Eduvelto',
+    description:
+      'পরীক্ষার উদ্বেগ সামলানো — কারণ চেনা, প্রস্তুতি শক্ত করা ও হলে শান্ত থাকার নিয়ম নিয়ে Eduvelto-র ফ্রি গাইড। খসড়া পাঠ — শিক্ষক যাচাইয়ের অপেক্ষায়।',
+    crumb: 'পরীক্ষার উদ্বেগ',
+    titleEn: 'Exam Anxiety Management | Eduvelto',
+    descriptionEn:
+      'Exam anxiety management — causes of worry, stronger preparation, breathing habits and staying calm in the exam hall. Draft lesson — awaiting teacher review.',
+    crumbEn: 'Exam Anxiety',
+  },
+  '/learn/presentation-skills': {
+    title: 'উপস্থাপনা দক্ষতা | Eduvelto',
+    description:
+      'উপস্থাপনা দক্ষতা — বিষয় জানা, গঠন সাজানো, অনুশীলন, শরীরের ভাষা ও প্রশ্নের উত্তর নিয়ে Eduvelto-র ফ্রি গাইড। খসড়া পাঠ — শিক্ষক যাচাইয়ের অপেক্ষায়।',
+    crumb: 'উপস্থাপনা দক্ষতা',
+    titleEn: 'Presentation Skills for Students | Eduvelto',
+    descriptionEn:
+      'Presentation skills for students — topic, structure, practice, body language and answering questions. Draft lesson — awaiting teacher review.',
+    crumbEn: 'Presentation Skills',
+  },
+  '/learn/group-study-guide': {
+    title: 'দলগত পড়াশোনা | Eduvelto',
+    description:
+      'দলগত পড়াশোনা — দল গঠন, নিয়ম, একে অন্যকে শেখানো, প্রশ্নোত্তর ও মনোযোগ নিয়ে Eduvelto-র ফ্রি গাইড। খসড়া পাঠ — শিক্ষক যাচাইয়ের অপেক্ষায়।',
+    crumb: 'দলগত পড়াশোনা',
+    titleEn: 'Group Study Guide | Eduvelto',
+    descriptionEn:
+      'Group study guide — forming a group, setting rules, teaching each other and staying focused. Draft lesson — awaiting teacher review.',
+    crumbEn: 'Group Study',
+  },
+  '/learn/english-vocabulary-building': {
+    title: 'ইংরেজি শব্দভান্ডার গড়া | Eduvelto',
+    description:
+      'ইংরেজি শব্দভান্ডার গড়া — প্রতিদিন নতুন শব্দ, বাক্যে ব্যবহার, শব্দের খাতা ও ঝালিয়ে নেওয়া নিয়ে Eduvelto-র ফ্রি গাইড। খসড়া পাঠ — শিক্ষক যাচাইয়ের অপেক্ষায়।',
+    crumb: 'ইংরেজি শব্দভান্ডার',
+    titleEn: 'English Vocabulary Building | Eduvelto',
+    descriptionEn:
+      'English vocabulary building — a few new words daily, using them in sentences, a word notebook and revision. Draft lesson — awaiting teacher review.',
+    crumbEn: 'English Vocabulary',
+  },
+  '/learn/effective-reading-habits': {
+    title: 'কার্যকর পড়ার অভ্যাস | Eduvelto',
+    description:
+      'কার্যকর পড়ার অভ্যাস — উদ্দেশ্য, শান্ত পরিবেশ, নোট নেওয়া, প্রশ্ন করা ও ভাগে ভাগে পড়া নিয়ে Eduvelto-র ফ্রি গাইড। খসড়া পাঠ — শিক্ষক যাচাইয়ের অপেক্ষায়।',
+    crumb: 'পড়ার অভ্যাস',
+    titleEn: 'Effective Reading Habits | Eduvelto',
+    descriptionEn:
+      'Effective reading habits — purpose, quiet place, notes, quizzing yourself and reading in parts. Draft lesson — awaiting teacher review.',
+    crumbEn: 'Reading Habits',
+  },
+  '/learn/self-motivation-students': {
+    title: 'নিজেকে অনুপ্রাণিত রাখা | Eduvelto',
+    description:
+      'নিজেকে অনুপ্রাণিত রাখা — লক্ষ্য মনে রাখা, ছোট ধাপে ভাগ করা, রুটিন ও অগ্রগতি নিয়ে Eduvelto-র ফ্রি গাইড। খসড়া পাঠ — শিক্ষক যাচাইয়ের অপেক্ষায়।',
+    crumb: 'নিজেকে অনুপ্রাণিত রাখা',
+    titleEn: 'Self-Motivation for Students | Eduvelto',
+    descriptionEn:
+      'Self-motivation for students — your goal, small steps, a routine and tracking progress. Draft lesson — awaiting teacher review.',
+    crumbEn: 'Self-Motivation',
+  },
 };
 
 // ---------------------------------------------------------------------------
@@ -1617,7 +1677,7 @@ export function resolveRouteSeo(pathname: string, lang: 'bn' | 'en' = 'bn'): Seo
   }
   if (path === '/learn') {
     // ItemList (24 Nov 2026, SEO pass; EXTENDED brand-SEO wave 1,
-    // wave 2 and wave 3): the hub lists the 23 public guides, the
+    // wave 2, wave 3 and wave 4): the hub lists the 29 public guides, the
     // two real lessons and the BCS English practice hub — the same
     // links the page renders, in the same order.
     jsonLd.push({
@@ -1766,18 +1826,54 @@ export function resolveRouteSeo(pathname: string, lang: 'bn' | 'en' = 'bn'): Seo
         {
           '@type': 'ListItem',
           position: 24,
+          name: lang === 'bn' ? 'পরীক্ষার উদ্বেগ সামলানো' : 'Exam Anxiety Management',
+          url: `${SITE_URL}/learn/exam-anxiety-management`,
+        },
+        {
+          '@type': 'ListItem',
+          position: 25,
+          name: lang === 'bn' ? 'উপস্থাপনা দক্ষতা' : 'Presentation Skills for Students',
+          url: `${SITE_URL}/learn/presentation-skills`,
+        },
+        {
+          '@type': 'ListItem',
+          position: 26,
+          name: lang === 'bn' ? 'দলগত পড়াশোনা' : 'Group Study Guide',
+          url: `${SITE_URL}/learn/group-study-guide`,
+        },
+        {
+          '@type': 'ListItem',
+          position: 27,
+          name: lang === 'bn' ? 'ইংরেজি শব্দভান্ডার গড়া' : 'English Vocabulary Building',
+          url: `${SITE_URL}/learn/english-vocabulary-building`,
+        },
+        {
+          '@type': 'ListItem',
+          position: 28,
+          name: lang === 'bn' ? 'কার্যকর পড়ার অভ্যাস' : 'Effective Reading Habits',
+          url: `${SITE_URL}/learn/effective-reading-habits`,
+        },
+        {
+          '@type': 'ListItem',
+          position: 29,
+          name: lang === 'bn' ? 'নিজেকে অনুপ্রাণিত রাখা' : 'Self-Motivation for Students',
+          url: `${SITE_URL}/learn/self-motivation-students`,
+        },
+        {
+          '@type': 'ListItem',
+          position: 30,
           name: lang === 'bn' ? 'টেন্স — পাঠ' : 'Tense — Lesson',
           url: `${SITE_URL}/learn/bcs-english-tense`,
         },
         {
           '@type': 'ListItem',
-          position: 25,
+          position: 31,
           name: lang === 'bn' ? 'প্রিপোজিশন — পাঠ' : 'Preposition — Lesson',
           url: `${SITE_URL}/learn/bcs-english-preposition`,
         },
         {
           '@type': 'ListItem',
-          position: 26,
+          position: 32,
           name: lang === 'bn' ? 'বিসিএস ইংরেজি অনুশীলন' : 'BCS English Practice',
           url: `${SITE_URL}/jobs/bcs/practice/english`,
         },
@@ -1822,8 +1918,8 @@ export function resolveRouteSeo(pathname: string, lang: 'bn' | 'en' = 'bn'): Seo
     });
   }
   if (PUBLIC_GUIDES.some((g) => g.path === path)) {
-    // Article (24 Nov 2026, brand-SEO wave 1; waves 2–3 keep the
-    // same date — the 23 guides are article-length drafts awaiting
+    // Article (24 Nov 2026, brand-SEO wave 1; waves 2–4 keep the
+    // same date — the 29 guides are article-length drafts awaiting
     // teacher review, published 24 Nov 2026. Never claims review.
     jsonLd.push({
       '@context': 'https://schema.org',

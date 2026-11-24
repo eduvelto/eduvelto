@@ -5,7 +5,8 @@
 // public guides (src/lib/publicGuides.ts) — same static-data,
 // zero-Firestore pattern as the lessons. EXTENDED 24 Nov 2026
 // (brand-SEO wave 2): 17 guides now. EXTENDED 24 Nov 2026
-// (brand-SEO wave 3): 23 guides now. Static data only
+// (brand-SEO wave 3): 23 guides now. EXTENDED 24 Nov 2026
+// (brand-SEO wave 4): 29 guides now. Static data only
 // (publicLessons.ts + publicGuides.ts) — zero Firestore reads, no
 // login. The lessons and guides are drafts awaiting teacher review —
 // the hub says so plainly, and each page carries its own draft label.

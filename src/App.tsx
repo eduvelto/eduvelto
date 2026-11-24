@@ -457,7 +457,7 @@ export default function App() {
         <Route path="/learn/bcs-english-tense" element={<PublicLessonPage lesson="tense" />} />
         <Route path="/learn/bcs-english-preposition" element={<PublicLessonPage lesson="preposition" />} />
         {/* Brand-SEO wave 1 (24 Nov 2026) + wave 2 (24 Nov 2026) +
-            wave 3 (24 Nov 2026): 23 public guides — explicit routes,
+            wave 3 (24 Nov 2026) + wave 4 (24 Nov 2026): 29 public guides — explicit routes,
             one per guide slug (see PublicGuidePage). */}
         <Route path="/learn/bcs-preparation-guide" element={<PublicGuidePage guide="bcs-preparation-guide" />} />
         <Route path="/learn/bank-job-preparation" element={<PublicGuidePage guide="bank-job-preparation" />} />
@@ -482,6 +482,12 @@ export default function App() {
         <Route path="/learn/study-routine-job-seekers" element={<PublicGuidePage guide="study-routine-job-seekers" />} />
         <Route path="/learn/healthy-habits-students" element={<PublicGuidePage guide="healthy-habits-students" />} />
         <Route path="/learn/digital-skills-basics" element={<PublicGuidePage guide="digital-skills-basics" />} />
+        <Route path="/learn/exam-anxiety-management" element={<PublicGuidePage guide="exam-anxiety-management" />} />
+        <Route path="/learn/presentation-skills" element={<PublicGuidePage guide="presentation-skills" />} />
+        <Route path="/learn/group-study-guide" element={<PublicGuidePage guide="group-study-guide" />} />
+        <Route path="/learn/english-vocabulary-building" element={<PublicGuidePage guide="english-vocabulary-building" />} />
+        <Route path="/learn/effective-reading-habits" element={<PublicGuidePage guide="effective-reading-habits" />} />
+        <Route path="/learn/self-motivation-students" element={<PublicGuidePage guide="self-motivation-students" />} />
         {/* Global Opportunity Hub (directive §3B): static guide
             routes MUST come before /opportunities/:oppId —
             otherwise '/opportunities/cv-builder' matches
