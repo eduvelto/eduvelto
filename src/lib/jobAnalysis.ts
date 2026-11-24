@@ -404,9 +404,9 @@ export interface AttemptTrend {
   previousPercent: number | null;
   /** latest − previous, in display-% points; null with < 2. */
   deltaVsPrevious: number | null;
-  /** Plain-Bangla sentence, own-past only, e.g.
-   * "আগের মকের চেয়ে +৫%". Uses Western digits, the existing
-   * convention. */
+  /** Sentence in the requested language (see the lang param),
+   * own-past only, e.g. "আগের মকের চেয়ে +৫%". Uses Western
+   * digits, the existing convention. */
   sentence: string;
 }
 
@@ -416,7 +416,9 @@ export interface AttemptTrend {
 export function attemptTrend(
   attempts: JobAttemptSummary[],
   kindLabel: 'মক' | 'অনুশীলন',
+  lang: 'bn' | 'en' = 'bn',
 ): AttemptTrend {
+  const kindEn = kindLabel === 'মক' ? 'mock' : 'practice';
   if (attempts.length === 0) {
     return {
       count: 0,
@@ -424,7 +426,7 @@ export function attemptTrend(
       bestPercent: null,
       previousPercent: null,
       deltaVsPrevious: null,
-      sentence: `এখনো কোনো ${kindLabel} দেওয়া হয়নি — ${kindLabel} দিলে এখানে আপনার অগ্রগতি দেখাবে।`,
+      sentence: lang === 'bn' ? `এখনো কোনো ${kindLabel} দেওয়া হয়নি — ${kindLabel} দিলে এখানে আপনার অগ্রগতি দেখাবে।` : `No ${kindEn} taken yet — take one and your progress will show here.`,
     };
   }
   const percents = attempts.map((a) => displayPercentage(a.percentage));
@@ -437,7 +439,7 @@ export function attemptTrend(
       bestPercent: best,
       previousPercent: null,
       deltaVsPrevious: null,
-      sentence: `এটাই আপনার প্রথম ${kindLabel} — পরের ${kindLabel} দিলে তার সঙ্গে তুলনা এখানে দেখাবে।`,
+      sentence: lang === 'bn' ? `এটাই আপনার প্রথম ${kindLabel} — পরের ${kindLabel} দিলে তার সঙ্গে তুলনা এখানে দেখাবে।` : `This is your first ${kindEn} — the next one will be compared with it here.`,
     };
   }
   const previous = percents[1];
@@ -450,9 +452,13 @@ export function attemptTrend(
     previousPercent: previous,
     deltaVsPrevious: delta,
     sentence:
-      delta === 0
-        ? `আগের ${kindLabel}ের সমান — ${latest}%।`
-        : `আগের ${kindLabel}ের চেয়ে ${sign}${delta}% — সর্বশেষ ${latest}%, আগেরটি ${previous}%।`,
+      lang === 'en'
+        ? delta === 0
+          ? `Same as the previous ${kindEn} — ${latest}%.`
+          : `${sign}${delta}% vs the previous ${kindEn} — latest ${latest}%, previous ${previous}%.`
+        : delta === 0
+          ? `আগের ${kindLabel}ের সমান — ${latest}%।`
+          : `আগের ${kindLabel}ের চেয়ে ${sign}${delta}% — সর্বশেষ ${latest}%, আগেরটি ${previous}%।`,
   };
 }
 
@@ -463,6 +469,8 @@ export function attemptTrend(
 export interface TopicMastery {
   topicId: string;
   label: string;
+  /** English topic label (jobTopicLabel, same humanized name). */
+  labelEn: string;
   /** Accuracy on the FIRST attempt that touched this topic. */
   firstAccuracy: number;
   /** Accuracy on the LATEST attempt that touched this topic. */
@@ -511,18 +519,18 @@ export interface TimeManagementSummary {
   avgTimePerQuestion: number;
   /** Total questions answered across all attempts. */
   totalQuestions: number;
-  slowestTopic: { topicId: string; label: string; avgTimeSeconds: number } | null;
-  fastestTopic: { topicId: string; label: string; avgTimeSeconds: number } | null;
+  slowestTopic: { topicId: string; label: string; labelEn: string; avgTimeSeconds: number } | null;
+  fastestTopic: { topicId: string; label: string; labelEn: string; avgTimeSeconds: number } | null;
   /** Unanswered counts, newest first (one per attempt). */
   unansweredTrend: number[];
-  /** Plain-Bangla sentence about the unanswered trend. */
+  /** Sentence about the unanswered trend, in the requested language. */
   unansweredSentence: string;
 }
 
 /** Time summary across attempts. Slowest/fastest topics need at
  * least 2 questions in the aggregated pool, so a single odd
  * question cannot crown a topic. */
-export function timeManagementSummary(attempts: JobAttemptSummary[]): TimeManagementSummary {
+export function timeManagementSummary(attempts: JobAttemptSummary[], lang: 'bn' | 'en' = 'bn'): TimeManagementSummary {
   const allAnswers = attempts.flatMap((a) => a.answers);
   const totalQuestions = allAnswers.length;
   const totalTime = allAnswers.reduce(
@@ -535,7 +543,25 @@ export function timeManagementSummary(attempts: JobAttemptSummary[]): TimeManage
   const fastest = topicStats.length > 0 ? [...topicStats].sort((a, b) => a.avgTimeSeconds - b.avgTimeSeconds)[0] : null;
   const unansweredTrend = attempts.map((a) => a.unansweredCount);
   let unansweredSentence: string;
-  if (attempts.length === 0) {
+  if (lang === 'en') {
+    if (attempts.length === 0) {
+      unansweredSentence = 'No mock or practice taken yet — the time analysis will show here.';
+    } else if (attempts.length === 1) {
+      const n = attempts[0].unansweredCount;
+      const kindEn = attempts[0].kind === 'mock' ? 'mock' : 'practice';
+      unansweredSentence = `In this ${kindEn}, ${n} ${n === 1 ? 'question was' : 'questions were'} left unanswered.`;
+    } else {
+      const latest = unansweredTrend[0];
+      const previous = unansweredTrend[1];
+      if (latest < previous) {
+        unansweredSentence = `Unanswered questions are falling — ${previous} in the previous one, ${latest} in the latest.`;
+      } else if (latest > previous) {
+        unansweredSentence = `Unanswered questions are rising — ${previous} in the previous one, ${latest} in the latest.`;
+      } else {
+        unansweredSentence = `Unanswered questions are unchanged — ${latest}.`;
+      }
+    }
+  } else if (attempts.length === 0) {
     unansweredSentence = 'এখনো কোনো মক/অনুশীলন দেওয়া হয়নি — সময়ের বিশ্লেষণ এখানে দেখাবে।';
   } else if (attempts.length === 1) {
     unansweredSentence = `এই ${attempts[0].kind === 'mock' ? 'মকে' : 'অনুশীলনে'} ${attempts[0].unansweredCount}টি প্রশ্নের উত্তর দেওয়া হয়নি।`;
@@ -554,10 +580,10 @@ export function timeManagementSummary(attempts: JobAttemptSummary[]): TimeManage
     avgTimePerQuestion,
     totalQuestions,
     slowestTopic: slowest
-      ? { topicId: slowest.topicId, label: slowest.label, avgTimeSeconds: slowest.avgTimeSeconds }
+      ? { topicId: slowest.topicId, label: slowest.label, labelEn: slowest.labelEn, avgTimeSeconds: slowest.avgTimeSeconds }
       : null,
     fastestTopic: fastest
-      ? { topicId: fastest.topicId, label: fastest.label, avgTimeSeconds: fastest.avgTimeSeconds }
+      ? { topicId: fastest.topicId, label: fastest.label, labelEn: fastest.labelEn, avgTimeSeconds: fastest.avgTimeSeconds }
       : null,
     unansweredTrend,
     unansweredSentence,

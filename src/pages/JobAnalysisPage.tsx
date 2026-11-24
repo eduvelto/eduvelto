@@ -14,16 +14,17 @@
 // horizontal bars + summary cards only (Gemini #2 — no charts
 // that turn unreadable on budget Android).
 //
-// LANGUAGE: all UI text is Bangla (one-language rule). Scores
+// LANGUAGE: UI text is Bangla + English via useLanguage(). Scores
 // and percentages use Western digits (the existing result-page
-// convention); dates use Bangla digits (bn-BD locale).
+// convention); dates follow the selected language (bn-BD / en-GB).
 
 import { useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { PageShell } from '../components/PageShell';
 import { AlertBox, Card, LinkButton, ProgressBar, Skeleton } from '../components/ui';
 import { useAuth } from '../lib/auth';
-import { JOB_PRACTICE_RESULT_LABEL } from '../lib/jobEngine';
+import { useLanguage } from '../i18n/LanguageContext';
+import { JOB_PRACTICE_RESULT_LABEL, JOB_PRACTICE_RESULT_LABEL_EN } from '../lib/jobEngine';
 import { listJobAttempts } from '../lib/jobPractice';
 import { listMockAttempts } from '../lib/jobMock';
 import { jobExamBySlug } from '../lib/jobExams';
@@ -32,7 +33,7 @@ import {
   attemptTrend,
   correctVsWrongTime,
   displayPercentage,
-  formatDurationBn,
+  formatDuration,
   groupAttemptsByExam,
   timeManagementSummary,
   topicMasteryOverTime,
@@ -42,9 +43,9 @@ import {
 const MUTED = '#68747B';
 const PAGE_SIZE = 10;
 
-function formatDateBn(millis: number | null): string {
-  if (millis === null) return 'তারিখ নেই';
-  return new Date(millis).toLocaleDateString('bn-BD', {
+function formatDate(millis: number | null, lang: 'bn' | 'en'): string {
+  if (millis === null) return lang === 'bn' ? 'তারিখ নেই' : 'No date';
+  return new Date(millis).toLocaleDateString(lang === 'bn' ? 'bn-BD' : 'en-GB', {
     day: 'numeric',
     month: 'long',
     year: 'numeric',
@@ -53,6 +54,7 @@ function formatDateBn(millis: number | null): string {
 
 export default function JobAnalysisPage() {
   const { user, loading } = useAuth();
+  const { t, lang } = useLanguage();
   const [attempts, setAttempts] = useState<JobAttemptSummary[] | null>(null);
   const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
 
@@ -88,7 +90,7 @@ export default function JobAnalysisPage() {
   // bundle. Each exam group gets its own mock + practice trend.
   const examGroups = useMemo(() => groupAttemptsByExam(attempts ?? []), [attempts]);
   const mastery = useMemo(() => topicMasteryOverTime(attempts ?? []), [attempts]);
-  const timeSummary = useMemo(() => timeManagementSummary(attempts ?? []), [attempts]);
+  const timeSummary = useMemo(() => timeManagementSummary(attempts ?? [], lang), [attempts, lang]);
   const cwTime = useMemo(
     () => correctVsWrongTime(attempts?.flatMap((a) => a.answers) ?? []),
     [attempts],
@@ -96,7 +98,7 @@ export default function JobAnalysisPage() {
 
   if (loading) {
     return (
-      <PageShell titleBn="ফলাফল বিশ্লেষণ" titleEn="ফলাফল বিশ্লেষণ" wide>
+      <PageShell titleBn="ফলাফল বিশ্লেষণ" titleEn="Result Analysis" wide>
         <Skeleton />
       </PageShell>
     );
@@ -104,13 +106,13 @@ export default function JobAnalysisPage() {
 
   if (!user) {
     return (
-      <PageShell titleBn="ফলাফল বিশ্লেষণ" titleEn="ফলাফল বিশ্লেষণ" wide>
+      <PageShell titleBn="ফলাফল বিশ্লেষণ" titleEn="Result Analysis" wide>
         <Card>
-          <div style={{ fontWeight: 700, color: '#142B3B', fontSize: 17 }}>বিশ্লেষণ দেখতে লগইন করুন</div>
+          <div style={{ fontWeight: 700, color: '#142B3B', fontSize: 17 }}>{t({ bn: 'বিশ্লেষণ দেখতে লগইন করুন', en: 'Log in to see the analysis' })}</div>
           <p style={{ margin: '8px 0 12px', color: MUTED, fontSize: 14, lineHeight: 1.7 }}>
-            বিশ্লেষণ শুধু লগইন করা শিক্ষার্থীরা দেখতে পারে।
+            {t({ bn: 'বিশ্লেষণ শুধু লগইন করা শিক্ষার্থীরা দেখতে পারে।', en: 'Analysis is only visible to logged-in students.' })}
           </p>
-          <Link to="/login" style={{ fontWeight: 600 }}>লগইন করুন →</Link>
+          <Link to="/login" style={{ fontWeight: 600 }}>{t({ bn: 'লগইন করুন →', en: 'Log in →' })}</Link>
         </Card>
       </PageShell>
     );
@@ -120,23 +122,23 @@ export default function JobAnalysisPage() {
   const hasMore = (attempts?.length ?? 0) > visibleCount;
 
   return (
-    <PageShell titleBn="ফলাফল বিশ্লেষণ" titleEn="ফলাফল বিশ্লেষণ" wide maxWidth={1240}>
+    <PageShell titleBn="ফলাফল বিশ্লেষণ" titleEn="Result Analysis" wide maxWidth={1240}>
       {/* BINDING label — every result/analysis page carries it. */}
-      <AlertBox tone="info">{JOB_PRACTICE_RESULT_LABEL}</AlertBox>
+      <AlertBox tone="info">{lang === 'bn' ? JOB_PRACTICE_RESULT_LABEL : JOB_PRACTICE_RESULT_LABEL_EN}</AlertBox>
       <p style={{ margin: '12px 0 0', color: MUTED, fontSize: 14, lineHeight: 1.7 }}>
-        এখানে শুধু আপনার নিজের মক ও অনুশীলনের ফলাফল বিশ্লেষণ করা হয়েছে — অন্য কোনো শিক্ষার্থীর সঙ্গে তুলনা করা হয়নি।
+        {t({ bn: 'এখানে শুধু আপনার নিজের মক ও অনুশীলনের ফলাফল বিশ্লেষণ করা হয়েছে — অন্য কোনো শিক্ষার্থীর সঙ্গে তুলনা করা হয়নি।', en: 'Only your own mock and practice results are analysed here — nothing is compared with any other student.' })}
       </p>
 
       {attempts === null ? (
-        <p style={{ marginTop: 16, color: MUTED, fontSize: 14 }}>লোড হচ্ছে…</p>
+        <p style={{ marginTop: 16, color: MUTED, fontSize: 14 }}>{t({ bn: 'লোড হচ্ছে…', en: 'Loading…' })}</p>
       ) : attempts.length === 0 ? (
         <Card style={{ marginTop: 16 }}>
-          <div style={{ fontWeight: 700, color: '#142B3B', fontSize: 17 }}>এখনো কোনো মক/অনুশীলন দেওয়া হয়নি</div>
+          <div style={{ fontWeight: 700, color: '#142B3B', fontSize: 17 }}>{t({ bn: 'এখনো কোনো মক/অনুশীলন দেওয়া হয়নি', en: 'No mock or practice taken yet' })}</div>
           <p style={{ margin: '8px 0 12px', color: MUTED, fontSize: 14, lineHeight: 1.7 }}>
-            মক বা অনুশীলন দিলে এখানে আপনার ফলাফলের ইতিহাস, অগ্রগতি, টপিক অনুযায়ী দক্ষতা ও সময়ের বিশ্লেষণ দেখাবে।
+            {t({ bn: 'মক বা অনুশীলন দিলে এখানে আপনার ফলাফলের ইতিহাস, অগ্রগতি, টপিক অনুযায়ী দক্ষতা ও সময়ের বিশ্লেষণ দেখাবে।', en: 'Once you take a mock or practice, your result history, progress, per-topic mastery and time analysis will show here.' })}
           </p>
           <LinkButton to="/jobs/common" variant="accent">
-            কমন প্রস্তুতি দেখুন →
+            {t({ bn: 'কমন প্রস্তুতি দেখুন →', en: 'See common preparation →' })}
           </LinkButton>
         </Card>
       ) : (
@@ -145,13 +147,13 @@ export default function JobAnalysisPage() {
               সারাংশ / বিষয় / সময় / ইতিহাস — so the page is never
               one endless scroll on a budget phone. */}
           <nav
-            aria-label="বিশ্লেষণ বিভাগ"
+            aria-label={t({ bn: 'বিশ্লেষণ বিভাগ', en: 'Analysis sections' })}
             style={{ position: 'sticky', top: 0, zIndex: 5, background: '#fff', borderBottom: '1px solid #E3E8EF', display: 'flex', gap: 16, padding: '10px 4px', marginTop: 16, overflowX: 'auto' }}
           >
-            <a href="#summary" style={{ fontWeight: 700, whiteSpace: 'nowrap' }}>সারাংশ</a>
-            <a href="#topics" style={{ fontWeight: 700, whiteSpace: 'nowrap' }}>বিষয়</a>
-            <a href="#time" style={{ fontWeight: 700, whiteSpace: 'nowrap' }}>সময়</a>
-            <a href="#history" style={{ fontWeight: 700, whiteSpace: 'nowrap' }}>ইতিহাস</a>
+            <a href="#summary" style={{ fontWeight: 700, whiteSpace: 'nowrap' }}>{t({ bn: 'সারাংশ', en: 'Summary' })}</a>
+            <a href="#topics" style={{ fontWeight: 700, whiteSpace: 'nowrap' }}>{t({ bn: 'বিষয়', en: 'Topics' })}</a>
+            <a href="#time" style={{ fontWeight: 700, whiteSpace: 'nowrap' }}>{t({ bn: 'সময়', en: 'Time' })}</a>
+            <a href="#history" style={{ fontWeight: 700, whiteSpace: 'nowrap' }}>{t({ bn: 'ইতিহাস', en: 'History' })}</a>
           </nav>
 
           {/* Trends — best vs latest, own past only, PER EXAM. */}
@@ -159,23 +161,23 @@ export default function JobAnalysisPage() {
             {examGroups.map((group) => {
               const groupMocks = group.attempts.filter((a) => a.kind === 'mock');
               const groupPractices = group.attempts.filter((a) => a.kind === 'practice');
-              const mockTrend = attemptTrend(groupMocks, 'মক');
-              const practiceTrend = attemptTrend(groupPractices, 'অনুশীলন');
-              const examName = jobExamBySlug(group.examSlug)?.bn ?? group.examSlug;
+              const mockTrend = attemptTrend(groupMocks, 'মক', lang);
+              const practiceTrend = attemptTrend(groupPractices, 'অনুশীলন', lang);
+              const examName = lang === 'bn' ? (jobExamBySlug(group.examSlug)?.bn ?? group.examSlug) : (jobExamBySlug(group.examSlug)?.en ?? group.examSlug);
               return (
                 <Card key={group.examSlug}>
-                  <div style={{ fontWeight: 700, color: '#142B3B', fontSize: 17 }}>{examName} — অগ্রগতি</div>
+                  <div style={{ fontWeight: 700, color: '#142B3B', fontSize: 17 }}>{t({ bn: `${examName} — অগ্রগতি`, en: `${examName} — progress` })}</div>
                   {groupMocks.length > 0 ? (
                     <>
                       <p style={{ margin: '8px 0', color: '#142B3B', fontSize: 14, lineHeight: 1.7 }}>{mockTrend.sentence}</p>
                       <p style={{ margin: '0 0 8px', color: MUTED, fontSize: 14 }}>
-                        মক — সর্বশেষ {mockTrend.latestPercent}% · সেরা {mockTrend.bestPercent}% · মোট {mockTrend.count}টি
+                        {t({ bn: `মক — সর্বশেষ ${mockTrend.latestPercent}% · সেরা ${mockTrend.bestPercent}% · মোট ${mockTrend.count}টি`, en: `Mock — latest ${mockTrend.latestPercent}% · best ${mockTrend.bestPercent}% · total ${mockTrend.count}` })}
                       </p>
                       <div style={{ display: 'grid', gap: 8, marginTop: 8 }}>
                         {groupMocks.slice(0, 5).map((a) => (
                           <div key={a.docId}>
                             <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 13, color: MUTED }}>
-                              <span>{formatDateBn(a.submittedAtMillis)}</span>
+                              <span>{formatDate(a.submittedAtMillis, lang)}</span>
                               <span>{displayPercentage(a.percentage)}%</span>
                             </div>
                             <ProgressBar value={displayPercentage(a.percentage)} />
@@ -188,13 +190,13 @@ export default function JobAnalysisPage() {
                     <>
                       <p style={{ margin: '8px 0', color: '#142B3B', fontSize: 14, lineHeight: 1.7 }}>{practiceTrend.sentence}</p>
                       <p style={{ margin: '0 0 8px', color: MUTED, fontSize: 14 }}>
-                        অনুশীলন — সর্বশেষ {practiceTrend.latestPercent}% · সেরা {practiceTrend.bestPercent}% · মোট {practiceTrend.count}টি
+                        {t({ bn: `অনুশীলন — সর্বশেষ ${practiceTrend.latestPercent}% · সেরা ${practiceTrend.bestPercent}% · মোট ${practiceTrend.count}টি`, en: `Practice — latest ${practiceTrend.latestPercent}% · best ${practiceTrend.bestPercent}% · total ${practiceTrend.count}` })}
                       </p>
                       <div style={{ display: 'grid', gap: 8, marginTop: 8 }}>
                         {groupPractices.slice(0, 5).map((a) => (
                           <div key={a.docId}>
                             <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 13, color: MUTED }}>
-                              <span>{formatDateBn(a.submittedAtMillis)}</span>
+                              <span>{formatDate(a.submittedAtMillis, lang)}</span>
                               <span>{displayPercentage(a.percentage)}%</span>
                             </div>
                             <ProgressBar value={displayPercentage(a.percentage)} />
@@ -211,27 +213,27 @@ export default function JobAnalysisPage() {
           {/* Topic mastery over time — practice data only. */}
           <div id="topics">
           <Card style={{ marginTop: 16 }}>
-            <div style={{ fontWeight: 700, color: '#142B3B', fontSize: 17, marginBottom: 4 }}>টপিক অনুযায়ী দক্ষতা</div>
+            <div style={{ fontWeight: 700, color: '#142B3B', fontSize: 17, marginBottom: 4 }}>{t({ bn: 'টপিক অনুযায়ী দক্ষতা', en: 'Topic mastery' })}</div>
             <p style={{ margin: '0 0 8px', color: MUTED, fontSize: 13, lineHeight: 1.7 }}>
-              প্রথমবার বনাম সর্বশেষ — শুধু আপনার নিজের অনুশীলন ও মকের তথ্য।
+              {t({ bn: 'প্রথমবার বনাম সর্বশেষ — শুধু আপনার নিজের অনুশীলন ও মকের তথ্য।', en: 'First attempt vs latest — only your own practice and mock data.' })}
             </p>
             {mastery.length === 0 ? (
-              <p style={{ margin: 0, color: MUTED, fontSize: 14 }}>টপিক অনুযায়ী তথ্য এখনো নেই।</p>
+              <p style={{ margin: 0, color: MUTED, fontSize: 14 }}>{t({ bn: 'টপিক অনুযায়ী তথ্য এখনো নেই।', en: 'No per-topic data yet.' })}</p>
             ) : (
               <div style={{ overflowX: 'auto' }}>
                 <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 14, lineHeight: 1.7 }}>
                   <thead>
                     <tr style={{ textAlign: 'left', borderBottom: '2px solid #E3E8EF', color: MUTED }}>
-                      <th style={{ padding: '6px 8px' }}>টপিক</th>
-                      <th style={{ padding: '6px 8px' }}>প্রথম</th>
-                      <th style={{ padding: '6px 8px' }}>সর্বশেষ</th>
-                      <th style={{ padding: '6px 8px' }}>পরিবর্তন</th>
+                      <th style={{ padding: '6px 8px' }}>{t({ bn: 'টপিক', en: 'Topic' })}</th>
+                      <th style={{ padding: '6px 8px' }}>{t({ bn: 'প্রথম', en: 'First' })}</th>
+                      <th style={{ padding: '6px 8px' }}>{t({ bn: 'সর্বশেষ', en: 'Latest' })}</th>
+                      <th style={{ padding: '6px 8px' }}>{t({ bn: 'পরিবর্তন', en: 'Change' })}</th>
                     </tr>
                   </thead>
                   <tbody>
                     {mastery.map((m) => (
                       <tr key={m.topicId} style={{ borderBottom: '1px solid #EEF1F5' }}>
-                        <td style={{ padding: '6px 8px', fontWeight: 600, color: '#142B3B' }}>{m.label}</td>
+                        <td style={{ padding: '6px 8px', fontWeight: 600, color: '#142B3B' }}>{lang === 'bn' ? m.label : m.labelEn}</td>
                         <td style={{ padding: '6px 8px' }}>{m.firstAccuracy}%</td>
                         <td style={{ padding: '6px 8px' }}>{m.latestAccuracy}%</td>
                         <td style={{ padding: '6px 8px', fontWeight: 700, color: m.delta > 0 ? '#12766E' : m.delta < 0 ? '#B00020' : MUTED }}>
@@ -249,23 +251,23 @@ export default function JobAnalysisPage() {
           {/* Time management. */}
           <div id="time">
           <Card style={{ marginTop: 16 }}>
-            <div style={{ fontWeight: 700, color: '#142B3B', fontSize: 17, marginBottom: 8 }}>সময় ব্যবস্থাপনা</div>
+            <div style={{ fontWeight: 700, color: '#142B3B', fontSize: 17, marginBottom: 8 }}>{t({ bn: 'সময় ব্যবস্থাপনা', en: 'Time management' })}</div>
             <p style={{ margin: '0 0 8px', color: '#142B3B', fontSize: 14, lineHeight: 1.7 }}>
-              গড়ে প্রতি প্রশ্নে {Math.round(timeSummary.avgTimePerQuestion)} সেকেন্ড ({timeSummary.totalQuestions}টি প্রশ্নের ওপর)।
+              {t({ bn: `গড়ে প্রতি প্রশ্নে ${Math.round(timeSummary.avgTimePerQuestion)} সেকেন্ড (${timeSummary.totalQuestions}টি প্রশ্নের ওপর)।`, en: `On average ${Math.round(timeSummary.avgTimePerQuestion)} seconds per question (over ${timeSummary.totalQuestions} questions).` })}
             </p>
             {cwTime.wrongCount > 0 && cwTime.correctCount > 0 ? (
               <p style={{ margin: '0 0 8px', color: '#142B3B', fontSize: 14, lineHeight: 1.7 }}>
-                ভুল উত্তরে গড়ে {Math.round(cwTime.avgWrongSeconds)} সেকেন্ড, সঠিক উত্তরে গড়ে {Math.round(cwTime.avgCorrectSeconds)} সেকেন্ড — তবে সময় একা বিচার নয়, কঠিন প্রশ্নে সময় বেশি লাগা স্বাভাবিক।
+                {t({ bn: `ভুল উত্তরে গড়ে ${Math.round(cwTime.avgWrongSeconds)} সেকেন্ড, সঠিক উত্তরে গড়ে ${Math.round(cwTime.avgCorrectSeconds)} সেকেন্ড — তবে সময় একা বিচার নয়, কঠিন প্রশ্নে সময় বেশি লাগা স্বাভাবিক।`, en: `Wrong answers took ${Math.round(cwTime.avgWrongSeconds)} seconds on average, correct answers ${Math.round(cwTime.avgCorrectSeconds)} seconds — but time alone is not the judge; hard questions naturally take longer.` })}
               </p>
             ) : null}
             {timeSummary.slowestTopic ? (
               <p style={{ margin: '0 0 8px', color: '#142B3B', fontSize: 14, lineHeight: 1.7 }}>
-                সবচেয়ে ধীর টপিক: {timeSummary.slowestTopic.label} — গড় {Math.round(timeSummary.slowestTopic.avgTimeSeconds)} সেকেন্ড/প্রশ্ন।
+                {t({ bn: `সবচেয়ে ধীর টপিক: ${timeSummary.slowestTopic.label} — গড় ${Math.round(timeSummary.slowestTopic.avgTimeSeconds)} সেকেন্ড/প্রশ্ন।`, en: `Slowest topic: ${timeSummary.slowestTopic.labelEn} — ${Math.round(timeSummary.slowestTopic.avgTimeSeconds)} sec/question on average.` })}
               </p>
             ) : null}
             {timeSummary.fastestTopic ? (
               <p style={{ margin: '0 0 8px', color: '#142B3B', fontSize: 14, lineHeight: 1.7 }}>
-                সবচেয়ে দ্রুত টপিক: {timeSummary.fastestTopic.label} — গড় {Math.round(timeSummary.fastestTopic.avgTimeSeconds)} সেকেন্ড/প্রশ্ন।
+                {t({ bn: `সবচেয়ে দ্রুত টপিক: ${timeSummary.fastestTopic.label} — গড় ${Math.round(timeSummary.fastestTopic.avgTimeSeconds)} সেকেন্ড/প্রশ্ন।`, en: `Fastest topic: ${timeSummary.fastestTopic.labelEn} — ${Math.round(timeSummary.fastestTopic.avgTimeSeconds)} sec/question on average.` })}
               </p>
             ) : null}
             <p style={{ margin: 0, color: '#142B3B', fontSize: 14, lineHeight: 1.7 }}>{timeSummary.unansweredSentence}</p>
@@ -276,27 +278,27 @@ export default function JobAnalysisPage() {
           <div id="history">
           <Card style={{ marginTop: 16 }}>
             <div style={{ fontWeight: 700, color: '#142B3B', fontSize: 17, marginBottom: 8 }}>
-              ফলাফলের ইতিহাস ({attempts.length}টি)
+              {t({ bn: `ফলাফলের ইতিহাস (${attempts.length}টি)`, en: `Result history (${attempts.length})` })}
             </div>
             <div style={{ display: 'grid', gap: 12 }}>
               {visible.map((a) => (
                 <div key={a.docId} style={{ border: '1px solid #E3E8EF', borderRadius: 10, padding: '12px 14px' }}>
                   <div style={{ display: 'flex', justifyContent: 'space-between', gap: 8, flexWrap: 'wrap', fontSize: 14 }}>
                     <span style={{ color: '#142B3B' }}>
-                      <strong>{a.kind === 'mock' ? 'মক' : 'অনুশীলন'}</strong>
+                      <strong>{a.kind === 'mock' ? t({ bn: 'মক', en: 'Mock' }) : t({ bn: 'অনুশীলন', en: 'Practice' })}</strong>
                       {' · '}
-                      {jobExamBySlug(a.examSlug)?.bn ?? a.examSlug}
+                      {lang === 'bn' ? (jobExamBySlug(a.examSlug)?.bn ?? a.examSlug) : (jobExamBySlug(a.examSlug)?.en ?? a.examSlug)}
                       {' · '}
-                      {formatDateBn(a.submittedAtMillis)}
+                      {formatDate(a.submittedAtMillis, lang)}
                     </span>
                     <Link to={`/jobs/result/${a.docId}`} style={{ fontWeight: 600 }}>
-                      ফলাফল দেখুন →
+                      {t({ bn: 'ফলাফল দেখুন →', en: 'See result →' })}
                     </Link>
                   </div>
                   <div style={{ marginTop: 6, fontSize: 14, color: MUTED }}>
-                    {a.score} / {a.totalMarks} নম্বর · {displayPercentage(a.percentage)}% · {a.correctCount}টি সঠিক · {a.wrongCount}টি ভুল
-                    {a.unansweredCount > 0 ? ` · ${a.unansweredCount}টি উত্তর দেওয়া হয়নি` : ''}
-                    {' · '}সময় {formatDurationBn(a.timeSpentSeconds)}
+                    {t({ bn: `${a.score} / ${a.totalMarks} নম্বর · ${displayPercentage(a.percentage)}% · ${a.correctCount}টি সঠিক · ${a.wrongCount}টি ভুল`, en: `${a.score} / ${a.totalMarks} marks · ${displayPercentage(a.percentage)}% · ${a.correctCount} correct · ${a.wrongCount} wrong` })}
+                    {a.unansweredCount > 0 ? t({ bn: ` · ${a.unansweredCount}টি উত্তর দেওয়া হয়নি`, en: ` · ${a.unansweredCount} unanswered` }) : ''}
+                    {' · '}{t({ bn: 'সময়', en: 'Time' })} {formatDuration(a.timeSpentSeconds, lang)}
                   </div>
                 </div>
               ))}
@@ -307,7 +309,7 @@ export default function JobAnalysisPage() {
                 onClick={() => setVisibleCount((c) => c + PAGE_SIZE)}
                 style={{ marginTop: 12, border: '1px solid #C9D2E0', background: '#fff', borderRadius: 8, padding: '8px 16px', cursor: 'pointer', fontWeight: 600, color: '#142B3B' }}
               >
-                আরও দেখুন ({attempts.length - visibleCount}টি বাকি)
+                {t({ bn: `আরও দেখুন (${attempts.length - visibleCount}টি বাকি)`, en: `Show more (${attempts.length - visibleCount} left)` })}
               </button>
             ) : null}
           </Card>
@@ -316,7 +318,7 @@ export default function JobAnalysisPage() {
       )}
 
       <p style={{ marginTop: 20 }}>
-        <Link to="/jobs/dashboard" style={{ fontWeight: 600 }}>← আমার চাকরির ড্যাশবোর্ড</Link>
+        <Link to="/jobs/dashboard" style={{ fontWeight: 600 }}>{t({ bn: '← আমার চাকরির ড্যাশবোর্ড', en: '← My job dashboard' })}</Link>
       </p>
     </PageShell>
   );
