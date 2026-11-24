@@ -64,16 +64,33 @@ export default function ContactPage() {
       <p style={{ lineHeight: 1.8 }}>
         {t({ bn: 'অফিসিয়াল ইমেইল', en: 'Official email' })}:{' '}
         <a href="mailto:ahmmizan23@gmail.com">ahmmizan23@gmail.com</a>
-        <br />
-        {t({ bn: 'অফিসিয়াল নম্বর', en: 'Official number' })}:{' '}
-        <a href="tel:+8801538264070">+8801538264070</a>
+      </p>
+      <p style={{ lineHeight: 1.8 }}>
+        {t({ bn: 'সোশ্যাল মিডিয়া', en: 'Social media' })}:{' '}
+        <a href="https://www.youtube.com/@EduveltoBD" target="_blank" rel="noopener noreferrer">YouTube — @EduveltoBD</a>
+        {' · '}
+        <a href="https://www.facebook.com/EduveltoBD" target="_blank" rel="noopener noreferrer">Facebook — facebook.com/EduveltoBD</a>
+        {' · '}
+        <a href="https://www.linkedin.com/company/eduvelto" target="_blank" rel="noopener noreferrer">LinkedIn — linkedin.com/company/eduvelto</a>
+      </p>
+      <p style={{ lineHeight: 1.7 }}>
+        {t({
+          bn: 'কী বিষয়ে যোগাযোগ করবেন: বিষয়বস্তুতে ভুল বা সংশোধনের অনুরোধ, শিক্ষক যাচাইকরণ-সংক্রান্ত বিষয়, প্ল্যাটফর্ম নিয়ে মতামত বা পরামর্শ, কারিগরি সমস্যা (লগইন, পরীক্ষা, লাইব্রেরি)।',
+          en: 'What to write about: content errors or corrections, teacher verification, feedback or suggestions about the platform, technical problems (login, exams, library).',
+        })}
+      </p>
+      <p style={{ lineHeight: 1.7, color: 'var(--ink-soft)', fontSize: 14 }}>
+        {t({
+          bn: 'কোনো নির্দিষ্ট সময়ের মধ্যে উত্তরের প্রতিশ্রুতি দেওয়া হয় না। প্রতিটি বার্তা পড়া হয় এবং যত তাড়াতাড়ি সম্ভব উত্তর দেওয়া হয়। জরুরি বিষয় হলে ইমেইলের বিষয় (subject)-এ তা উল্লেখ করুন।',
+          en: 'No reply within a fixed time is promised. Every message is read and answered as soon as possible. For urgent matters, say so in the email subject.',
+        })}
       </p>
 
       <h2 style={{ fontSize: 19, margin: '24px 0 8px' }}>{t({ bn: 'বার্তা পাঠান', en: 'Send a message' })}</h2>
       {!user ? (
         <p>
           {t({ bn: 'বার্তা পাঠাতে', en: 'To send a message,' })} <Link to="/login" state={back}>{t({ bn: 'লগইন করুন', en: 'log in' })}</Link>
-          {t({ bn: ' — অথবা উপরের ইমেইল/নম্বরে সরাসরি যোগাযোগ করুন।', en: ' — or contact us directly at the email/number above.' })}
+          {t({ bn: ' — অথবা উপরের ইমেইলে সরাসরি যোগাযোগ করুন।', en: ' — or contact us directly at the email above.' })}
         </p>
       ) : status === 'sent' ? (
         <AlertBox tone="ok">

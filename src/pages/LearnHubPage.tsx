@@ -1,29 +1,58 @@
 // Eduvelto — AdSense Part 1 (integration): /learn hub.
 //
-// The breadcrumb target for the two public lesson pages. Today /learn
-// holds only the BCS English lessons, so the hub lists those two plus
-// the BCS English practice hub. Static data only (publicLessons.ts) —
-// zero Firestore reads, no login. The lessons are AI-drafted drafts
-// awaiting teacher review — the hub says so plainly, and each lesson
-// page carries its own draft label.
+// The breadcrumb target for the two public lesson pages. REVISED
+// 24 Nov 2026 (brand-SEO wave 1): the hub now also lists the 10
+// public guides (src/lib/publicGuides.ts) — same static-data,
+// zero-Firestore pattern as the lessons. Static data only
+// (publicLessons.ts + publicGuides.ts) — zero Firestore reads, no
+// login. The lessons and guides are drafts awaiting teacher review —
+// the hub says so plainly, and each page carries its own draft label.
 
 import { Link } from 'react-router-dom';
 import { PageShell } from '../components/PageShell';
 import { Card } from '../components/ui';
 import { useLanguage } from '../i18n/LanguageContext';
 import { PUBLIC_LESSONS } from '../lib/publicLessons';
+import { PUBLIC_GUIDES } from '../lib/publicGuides';
 
 export default function LearnHubPage() {
   const { t } = useLanguage();
   return (
-    <PageShell titleBn="পাঠ — বিসিএস ইংরেজি" titleEn="Lessons — BCS English" wide maxWidth={1240}>
+    <PageShell titleBn="পাঠ ও গাইড" titleEn="Lessons and guides" wide maxWidth={1240}>
       <p style={{ color: '#57616A', margin: '0 0 20px', fontSize: 15, lineHeight: 1.7 }}>
         {t({
-          bn: 'বিসিএস ইংরেজি প্রস্তুতির পাঠ — বিনামূল্যে পড়ুন। পাঠগুলো খসড়া হিসেবে দেওয়া আছে; শিক্ষক যাচাইয়ের পর চূড়ান্ত হবে।',
-          en: 'BCS English lessons — free to read. The lessons are drafts awaiting teacher review.',
+          bn: 'বিনামূল্যে পাঠ ও গাইড — বিসিএস, ব্যাংক, প্রাথমিক শিক্ষক, NTRCA ও জাতীয় বিশ্ববিদ্যালয় ভর্তি প্রস্তুতি, ইংরেজি ব্যাকরণ, বৃত্তি, CV ও বাজেট পরিকল্পনা। পাঠ ও গাইডগুলো খসড়া হিসেবে দেওয়া আছে; শিক্ষক যাচাইয়ের পর চূড়ান্ত হবে।',
+          en: 'Free lessons and guides — BCS, bank, primary teacher, NTRCA and National University admission preparation, English grammar, scholarships, CV writing and budget planning. The lessons and guides are drafts awaiting teacher review.',
         })}
       </p>
 
+      <h2 style={{ fontSize: 19, margin: '0 0 12px', color: '#142B3B' }}>
+        {t({ bn: 'প্রস্তুতি গাইড', en: 'Preparation guides' })}
+      </h2>
+      <div style={{ display: 'grid', gap: 12, marginBottom: 24 }}>
+        {PUBLIC_GUIDES.map((guide) => (
+          <Card key={guide.slug}>
+            <div style={{ fontWeight: 700, color: '#142B3B', fontSize: 17 }}>
+              <Link to={guide.path} style={{ fontWeight: 700 }}>
+                {guide.titleBn}
+              </Link>
+            </div>
+            <p style={{ margin: '8px 0 0', color: '#68747B', fontSize: 14, lineHeight: 1.7 }}>
+              {guide.bodyBn[0]}
+            </p>
+            <p style={{ margin: '10px 0 0', color: '#68747B', fontSize: 13 }}>
+              {t({
+                bn: 'খসড়া পাঠ — শিক্ষক যাচাইয়ের অপেক্ষায়',
+                en: 'Draft lesson — awaiting teacher review',
+              })}
+            </p>
+          </Card>
+        ))}
+      </div>
+
+      <h2 style={{ fontSize: 19, margin: '0 0 12px', color: '#142B3B' }}>
+        {t({ bn: 'বিসিএস ইংরেজি পাঠ', en: 'BCS English lessons' })}
+      </h2>
       <div style={{ display: 'grid', gap: 12 }}>
         {PUBLIC_LESSONS.map((lesson) => (
           <Card key={lesson.slug}>

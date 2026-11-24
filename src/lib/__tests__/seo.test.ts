@@ -88,6 +88,7 @@ import { NU_GROUPS } from '../nuProfile';
 import { CLASS_LEVELS } from '../classLevels';
 import { OPPORTUNITY_SEED } from '../opportunitySeed';
 import { isPublished } from '../opportunities';
+import { PUBLIC_GUIDES } from '../publicGuides';
 
 const FORBIDDEN_RANK_CLAIM = /(^|[^ক])১ নম্বর|#1|number 1|নম্বর ১|নাম্বার ১|নাম্বার ওয়ান/i;
 
@@ -121,6 +122,17 @@ const SITEMAP_URLS = [
   '/jobs/bcs/practice/english/reading',
   '/learn/bcs-english-tense',
   '/learn/bcs-english-preposition',
+  // Brand-SEO wave 1 (24 Nov 2026): 10 public guides.
+  '/learn/bcs-preparation-guide',
+  '/learn/bank-job-preparation',
+  '/learn/primary-teacher-preparation',
+  '/learn/ntrca-preparation',
+  '/learn/nu-admission-guide',
+  '/learn/english-grammar-basics',
+  '/learn/scholarship-guide',
+  '/learn/what-is-ai',
+  '/learn/cv-writing-guide',
+  '/learn/budget-planner-guide',
   '/learn',
   '/admissions',
   '/admissions/national-university',
@@ -129,8 +141,9 @@ const SITEMAP_URLS = [
   '/admissions/national-university/business',
   '/library',
   '/class',
-  '/class/class-1-5',
-  '/class/class-6-8',
+  // Brand-SEO wave 1, F-06 (24 Nov 2026): /class/class-1-5 and
+  // /class/class-6-8 are OUT of the sitemap (thin, no books yet —
+  // noindexed until Classes 1–8 have real books).
   '/class/class-9-10',
   '/class/hsc',
   '/class/honours-masters',
@@ -139,6 +152,11 @@ const SITEMAP_URLS = [
   '/contact',
   '/privacy',
   '/terms',
+  // Brand-SEO wave 1, F-08 (24 Nov 2026): 4 new trust pages.
+  '/editorial-policy',
+  '/content-accuracy',
+  '/certificate-policy',
+  '/disclaimer',
   '/life',
   '/life/budget',
   '/life/calculators',
@@ -176,11 +194,18 @@ const SITEMAP_URLS = [
 ];
 
 describe('resolveRouteSeo — public routes', () => {
-  it('home targets the owner phrase without a false #1 claim', () => {
+  it('home title/description state plainly what Eduvelto is — no superlative, no #1 claim', () => {
     const seo = resolveRouteSeo('/');
     expect(seo).not.toBeNull();
-    expect(seo!.title).toContain('সেরা ফ্রি শিক্ষা প্ল্যাটফর্ম');
-    expect(seo!.description).toContain('BCS');
+    // Exact strings (24 Nov 2026, brand-SEO wave 1, F-01): "সেরা"
+    // was removed — Google's AI Overview quoted it back as
+    // self-promotion.
+    expect(seo!.title).toBe('Eduvelto — বাংলাদেশের ফ্রি শিক্ষা প্ল্যাটফর্ম');
+    expect(seo!.description).toBe(
+      'Eduvelto — বাংলাদেশের ফ্রি শিক্ষা ও জীবনসেবা প্ল্যাটফর্ম: BCS, ব্যাংক, প্রাথমিক শিক্ষক, NTRCA ও জাতীয় বিশ্ববিদ্যালয় ভর্তি প্রস্তুতি, MCQ পরীক্ষা ও ডিজিটাল লাইব্রেরি — সম্পূর্ণ বিনামূল্যে।',
+    );
+    expect(seo!.title).not.toContain('সেরা');
+    expect(seo!.description).not.toContain('সেরা');
     expect(seo!.canonical).toBe(`${SITE_URL}/`);
   });
 
@@ -555,12 +580,16 @@ describe('resolveRouteSeo — SEO 50–100 pages (23 Nov 2026)', () => {
     ).toBeNull();
   });
 
-  it('all 5 class pages resolve and their slugs match CLASS_LEVELS exactly', () => {
+  it('all 5 class pages resolve; only the 3 with books are in the sitemap', () => {
     expect(CLASS_LEVELS.length).toBe(5);
+    // Brand-SEO wave 1, F-06: class-1-5 / class-6-8 have no books
+    // yet, so they are out of the sitemap (and noindexed) until
+    // Classes 1–8 have real books — but they still resolve, live
+    // for visitors with honest coming-soon content.
     const sitemapClassSlugs = SITEMAP_URLS.filter((p) => p.startsWith('/class/')).map((p) =>
       p.replace('/class/', ''),
     );
-    expect(sitemapClassSlugs.sort()).toEqual(CLASS_LEVELS.map((c) => c.slug).sort());
+    expect(sitemapClassSlugs.sort()).toEqual(['class-9-10', 'honours-masters', 'hsc']);
     for (const level of CLASS_LEVELS) {
       const seo = resolveRouteSeo(`/class/${level.slug}`);
       expect(seo, `/class/${level.slug}`).not.toBeNull();
@@ -638,14 +667,20 @@ describe('resolveRouteSeo — SEO 50–100 pages (23 Nov 2026)', () => {
       '/ai-teacher',
       '/jobs/circulars',
       '/jobs/calendar',
+      // Brand-SEO wave 1, F-06 (24 Nov 2026): the 2 thin class pages
+      // are out of the sitemap now but STILL swept — their copy must
+      // pass the same claim gates as sitemap pages.
+      '/class/class-1-5',
+      '/class/class-6-8',
     ]);
     // AdSense Part 1 (23 Nov 2026): subject pages are mostly OUT of
     // the sitemap now (noindexed thin pages) but are STILL swept —
     // the sweep is the sitemap minus /founder, plus the 22 job
     // subject pages and 9 NU subject pages not in the sitemap
     // (BCS English is in both, counted once), plus the 8 noindexed
-    // public pages above (none is in the sitemap or a subject path).
-    expect(swept.size).toBe(SITEMAP_URLS.length + 38);
+    // public pages above (none is in the sitemap or a subject path),
+    // plus the 2 thin class pages.
+    expect(swept.size).toBe(SITEMAP_URLS.length + 40);
     for (const path of swept) {
       const seo = resolveRouteSeo(path);
       expect(seo, `no SEO for swept path ${path}`).not.toBeNull();
@@ -899,10 +934,20 @@ describe('resolveRouteSeo — SEO pass 24 Nov 2026 (owner order "SEO korba ajk 1
     }
   });
 
-  it('/learn hub emits an ItemList of its 2 lessons + the practice hub', () => {
+  it('/learn hub emits an ItemList of its 10 guides + 2 lessons + the practice hub', () => {
     const seo = resolveRouteSeo('/learn')!;
     const items = itemListOf(seo)['itemListElement'] as Array<Record<string, unknown>>;
     expect(items.map((i) => i['url'])).toEqual([
+      `${SITE_URL}/learn/bcs-preparation-guide`,
+      `${SITE_URL}/learn/bank-job-preparation`,
+      `${SITE_URL}/learn/primary-teacher-preparation`,
+      `${SITE_URL}/learn/ntrca-preparation`,
+      `${SITE_URL}/learn/nu-admission-guide`,
+      `${SITE_URL}/learn/english-grammar-basics`,
+      `${SITE_URL}/learn/scholarship-guide`,
+      `${SITE_URL}/learn/what-is-ai`,
+      `${SITE_URL}/learn/cv-writing-guide`,
+      `${SITE_URL}/learn/budget-planner-guide`,
       `${SITE_URL}/learn/bcs-english-tense`,
       `${SITE_URL}/learn/bcs-english-preposition`,
       `${SITE_URL}/jobs/bcs/practice/english`,
@@ -981,6 +1026,89 @@ describe('resolveRouteSeo — SEO pass 24 Nov 2026 (owner order "SEO korba ajk 1
       for (const name of names) {
         expect(name, path).not.toMatch(/^[a-z-]+$/);
       }
+    }
+  });
+});
+
+describe('resolveRouteSeo — brand-SEO wave 1 (24 Nov 2026)', () => {
+  it('Organization JSON-LD no longer promises Class 1–8', () => {
+    const org = ORGANIZATION_JSON_LD as unknown as Record<string, unknown>;
+    const desc = org['description'] as string;
+    expect(desc).not.toContain('Class 1');
+    expect(desc).toContain('Class 9');
+    expect(desc).toContain('Madrasa');
+    expect(desc).toContain('free Bangladeshi digital education and life services platform');
+    expect(org['sameAs']).toEqual([
+      'https://www.youtube.com/@EduveltoBD',
+      'https://www.linkedin.com/company/eduvelto',
+      'https://www.facebook.com/EduveltoBD',
+    ]);
+  });
+
+  it('class 1–5 / 6–8 are noindexed but still resolve, with honest copy', () => {
+    for (const slug of ['class-1-5', 'class-6-8']) {
+      const seo = resolveRouteSeo(`/class/${slug}`)!;
+      expect(seo.robots, slug).toBe('noindex, nofollow');
+      expect(seo.description, slug).toContain('আসেনি');
+      expect(seo.description, slug).toContain('আসছে');
+    }
+    for (const slug of ['class-9-10', 'hsc', 'honours-masters']) {
+      expect(resolveRouteSeo(`/class/${slug}`)!.robots, slug).toBeUndefined();
+    }
+  });
+
+  it('all 10 guides resolve with draft wording and Article JSON-LD', () => {
+    expect(PUBLIC_GUIDES).toHaveLength(10);
+    for (const guide of PUBLIC_GUIDES) {
+      const seo = resolveRouteSeo(guide.path);
+      expect(seo, `no SEO for ${guide.path}`).not.toBeNull();
+      expect(seo!.description, guide.path).toContain('খসড়া পাঠ');
+      expect(seo!.description, guide.path).toContain('শিক্ষক যাচাইয়ের অপেক্ষায়');
+      expect(seo!.description, guide.path).not.toContain('যাচাইকৃত');
+      expect(seo!.robots, guide.path).toBeUndefined();
+      expect(jsonLdTypes(seo!)).toContain('Article');
+      const article = (seo!.jsonLd as Array<Record<string, unknown>>).find(
+        (o) => o['@type'] === 'Article',
+      )!;
+      expect(article['headline']).toBe(seo!.title);
+      expect(article['datePublished']).toBe('2026-11-24');
+      expect(article['inLanguage']).toBe('bn');
+      expect(breadcrumbNames(seo!)).toEqual(['হোম', 'পাঠ', guide.crumbBn]);
+    }
+  });
+
+  it('the 4 trust pages resolve with the draft titles', () => {
+    const expected: Record<string, { title: string; crumb: string }> = {
+      '/editorial-policy': { title: 'সম্পাদকীয় নীতি | Eduvelto', crumb: 'সম্পাদকীয় নীতি' },
+      '/content-accuracy': { title: 'বিষয়বস্তুর নির্ভুলতা নীতি | Eduvelto', crumb: 'বিষয়বস্তুর নির্ভুলতা' },
+      '/certificate-policy': { title: 'সার্টিফিকেট নীতি | Eduvelto', crumb: 'সার্টিফিকেট নীতি' },
+      '/disclaimer': { title: 'দায়বর্জন | Eduvelto', crumb: 'দায়বর্জন' },
+    };
+    for (const [path, { title, crumb }] of Object.entries(expected)) {
+      const seo = resolveRouteSeo(path);
+      expect(seo, `no SEO for ${path}`).not.toBeNull();
+      expect(seo!.title).toBe(title);
+      expect(seo!.robots, path).toBeUndefined();
+      expect(breadcrumbNames(seo!)).toEqual(['হোম', crumb]);
+    }
+  });
+
+  it('/why-eduvelto keeps its ambition as a goal only — no rank wording', () => {
+    const seo = resolveRouteSeo('/why-eduvelto')!;
+    expect(seo.title).toBe('কেন Eduvelto — বাংলাদেশের ফ্রি শিক্ষা প্ল্যাটফর্ম');
+    expect(seo.title).not.toContain('সেরা');
+    expect(seo.description).not.toContain('সেরা');
+    expect(seo.description).not.toMatch(FORBIDDEN_RANK_CLAIM);
+  });
+
+  it('no sitemap title or description contains "সেরা" or "best"', () => {
+    for (const path of SITEMAP_URLS) {
+      if (path === '/founder') continue;
+      const seo = resolveRouteSeo(path)!;
+      expect(seo.title, `title ${path}`).not.toContain('সেরা');
+      expect(seo.description, `description ${path}`).not.toContain('সেরা');
+      expect(seo.title, `title ${path}`).not.toMatch(/best/i);
+      expect(seo.description, `description ${path}`).not.toMatch(/best/i);
     }
   });
 });

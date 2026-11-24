@@ -2,14 +2,12 @@
 //
 // The honest landing page for the owner's order: when someone searches
 // for Bangladesh's number 1 education channel/platform, Eduvelto must
-// be findable. This page targets that search in Bangla — "বাংলাদেশের
-// সেরা ফ্রি শিক্ষা প্ল্যাটফর্ম" — WITHOUT claiming a verified #1 rank:
-//
-//  - "সেরা ফ্রি শিক্ষা প্ল্যাটফর্ম" is the ambition, backed by the
-//    real free offer (100% free, no fees ever — standing decision).
-//  - "১ নম্বর হওয়া" appears ONLY as "আমাদের লক্ষ্য" (our goal), never
-//    as a fact, award or ranking. No invented user numbers, awards,
-//    partnerships or reviews anywhere on this page.
+// be findable. This page targets that search in Bangla — but (24 Nov
+// 2026, brand-SEO wave 1, F-01) WITHOUT any "সেরা" (best) or "১ নম্বর"
+// (#1) wording anywhere: the ambition is stated ONLY as an explicit
+// goal ("আমাদের লক্ষ্য — …আস্থার প্ল্যাটফর্ম হওয়া"), never as a fact,
+// award or ranking. No invented user numbers, awards,
+// partnerships or reviews anywhere on this page.
 //  - Every feature is labelled honestly: what works NOW vs what is
 //    coming soon (কাজ চলছে / শীঘ্রই আসছে). Verified live facts only:
 //    the digital library holds 600+ books (609 live, 22 Nov 2026);
@@ -29,8 +27,8 @@ export default function WhyEduveltoPage() {
     <PageShell titleBn="কেন Eduvelto" titleEn="Why Eduvelto">
       <p style={{ fontSize: 19, lineHeight: 1.7, fontWeight: 700, color: NAVY }}>
         {t({
-          bn: 'Eduvelto — বাংলাদেশের সেরা ফ্রি শিক্ষা প্ল্যাটফর্ম।',
-          en: 'Eduvelto — the best free education platform in Bangladesh.',
+          bn: 'Eduvelto — বাংলাদেশের ফ্রি শিক্ষা প্ল্যাটফর্ম।',
+          en: 'Eduvelto — a free education platform for Bangladesh.',
         })}
       </p>
       <p style={{ lineHeight: 1.8 }}>
@@ -45,8 +43,8 @@ export default function WhyEduveltoPage() {
       </h2>
       <p style={{ lineHeight: 1.8 }}>
         {t({
-          bn: 'আমাদের লক্ষ্য — বাংলাদেশের ১ নম্বর শিক্ষা প্ল্যাটফর্ম হওয়া। এই লক্ষ্য পূরণ হবে যাচাই করা প্রশ্ন, বিনামূল্যে সুবিধা আর শিক্ষার্থীদের আস্থায় — কোনো দাবি বা পুরস্কার দিয়ে নয়। আমরা সেই পথে কাজ করছি, ধাপে ধাপে।',
-          en: 'Our goal is to become the number 1 education platform in Bangladesh. That goal will be earned through verified questions, free access and students’ trust — not through any claim or award. We are working towards it, step by step.',
+          bn: 'আমাদের লক্ষ্য — বাংলাদেশের শিক্ষার্থীদের আস্থার শিক্ষা প্ল্যাটফর্ম হওয়া। এই লক্ষ্য পূরণ হবে যাচাই করা প্রশ্ন, বিনামূল্যে সুবিধা আর শিক্ষার্থীদের আস্থায় — কোনো দাবি বা পুরস্কার দিয়ে নয়। আমরা সেই পথে কাজ করছি, ধাপে ধাপে।',
+          en: 'Our goal is to become a platform Bangladeshi students trust. That goal will be earned through verified questions, free access and students’ trust — not through any claim or award. We are working towards it, step by step.',
         })}
       </p>
 

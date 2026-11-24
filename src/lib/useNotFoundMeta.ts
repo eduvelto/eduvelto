@@ -17,7 +17,7 @@
 
 import { useEffect } from 'react';
 
-const HOME_FALLBACK_TITLE = 'Eduvelto — বাংলাদেশের সেরা ফ্রি শিক্ষা প্ল্যাটফর্ম';
+const HOME_FALLBACK_TITLE = 'Eduvelto — বাংলাদেশের ফ্রি শিক্ষা প্ল্যাটফর্ম';
 
 export function useNotFoundMeta(title: string, active: boolean): void {
   useEffect(() => {

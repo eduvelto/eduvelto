@@ -71,11 +71,17 @@ export function ComingSoonHero({ def }: { def: ClassLevelDef }) {
       aria-label={t({ bn: `${def.bn} — শীঘ্রই আসছে`, en: `${def.en} — Coming soon` })}
     >
       <BookSproutArt accent={def.accent} size={132} />
-      <h3 style={{ color: '#142B3B', fontSize: 24, margin: '14px 0 6px' }}>
+      {/* h1 (24 Nov 2026, brand-SEO wave 1, F-06): this hero renders
+          ONLY for class levels with no books (Class 1–5, Class 6–8),
+          whose dashboards otherwise had no h1 at all — PageShell
+          hides its title here. The h1 states the level + the honest
+          coming-soon status; the paragraph below says plainly that
+          no books exist yet. */}
+      <h1 style={{ color: '#142B3B', fontSize: 24, margin: '14px 0 6px' }}>
         {t({ bn: `${def.bn} — শীঘ্রই আসছে!`, en: `${def.en} — Coming soon` })}
-      </h3>
+      </h1>
       <p style={{ margin: '0 auto', maxWidth: 560, color: '#57616A', fontSize: 15, lineHeight: 1.8 }}>
-        {t({ bn: `${def.bn}-এর বই, পাঠ, অনুশীলন প্রশ্ন ও পরীক্ষা এখন তৈরি হচ্ছে। প্রকাশিত হলেই এখানে দেখতে পাবে — ততদিন একটু অপেক্ষা করো, আমরা কাজ করছি!`, en: `Books, lessons, practice questions and tests for ${def.en} are being prepared — they will appear here as soon as they are published.` })}
+        {t({ bn: `${def.bn}-এর কোনো বই এখনো লাইব্রেরিতে আসেনি — বই, পাঠ, অনুশীলন প্রশ্ন ও পরীক্ষা এখন তৈরি হচ্ছে। প্রকাশিত হলেই এখানে দেখতে পাবে — ততদিন একটু অপেক্ষা করো, আমরা কাজ করছি!`, en: `No books for ${def.en} have reached the library yet — books, lessons, practice questions and tests are being prepared. They will appear here as soon as they are published.` })}
       </p>
       <div className="ev-coming-soon-chips" aria-label={t({ bn: 'যা আসছে', en: 'What is coming' })}>
         {COMING_ITEMS.map((it) => (

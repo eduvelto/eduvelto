@@ -61,6 +61,15 @@ const JobGuidePage = lazy(() => import('./pages/JobGuidePage'));
 const PublicBcsEnglishPage = lazy(() => import('./pages/PublicBcsEnglishPage'));
 const PublicLessonPage = lazy(() => import('./pages/PublicLessonPage'));
 const LearnHubPage = lazy(() => import('./pages/LearnHubPage'));
+/* Brand-SEO wave 1 (24 Nov 2026): 10 static public guides + 4 trust
+   pages. Same pattern as PublicLessonPage — static data, no login,
+   zero Firestore reads. Each guide route is explicit (slug prop),
+   never derived from a raw URL slug. */
+const PublicGuidePage = lazy(() => import('./pages/PublicGuidePage'));
+const EditorialPolicyPage = lazy(() => import('./pages/EditorialPolicyPage'));
+const ContentAccuracyPage = lazy(() => import('./pages/ContentAccuracyPage'));
+const CertificatePolicyPage = lazy(() => import('./pages/CertificatePolicyPage'));
+const DisclaimerPage = lazy(() => import('./pages/DisclaimerPage'));
 const OpportunityHubPage = lazy(() => import('./pages/OpportunityHubPage'));
 const OpportunityDetailPage = lazy(() => import('./pages/OpportunityDetailPage'));
 const OpportunityCvBuilderPage = lazy(() => import('./pages/OpportunityCvBuilderPage'));
@@ -447,6 +456,18 @@ export default function App() {
         <Route path="/learn" element={<LearnHubPage />} />
         <Route path="/learn/bcs-english-tense" element={<PublicLessonPage lesson="tense" />} />
         <Route path="/learn/bcs-english-preposition" element={<PublicLessonPage lesson="preposition" />} />
+        {/* Brand-SEO wave 1 (24 Nov 2026): 10 public guides — explicit
+            routes, one per guide slug (see PublicGuidePage). */}
+        <Route path="/learn/bcs-preparation-guide" element={<PublicGuidePage guide="bcs-preparation-guide" />} />
+        <Route path="/learn/bank-job-preparation" element={<PublicGuidePage guide="bank-job-preparation" />} />
+        <Route path="/learn/primary-teacher-preparation" element={<PublicGuidePage guide="primary-teacher-preparation" />} />
+        <Route path="/learn/ntrca-preparation" element={<PublicGuidePage guide="ntrca-preparation" />} />
+        <Route path="/learn/nu-admission-guide" element={<PublicGuidePage guide="nu-admission-guide" />} />
+        <Route path="/learn/english-grammar-basics" element={<PublicGuidePage guide="english-grammar-basics" />} />
+        <Route path="/learn/scholarship-guide" element={<PublicGuidePage guide="scholarship-guide" />} />
+        <Route path="/learn/what-is-ai" element={<PublicGuidePage guide="what-is-ai" />} />
+        <Route path="/learn/cv-writing-guide" element={<PublicGuidePage guide="cv-writing-guide" />} />
+        <Route path="/learn/budget-planner-guide" element={<PublicGuidePage guide="budget-planner-guide" />} />
         {/* Global Opportunity Hub (directive §3B): static guide
             routes MUST come before /opportunities/:oppId —
             otherwise '/opportunities/cv-builder' matches
@@ -549,6 +570,14 @@ export default function App() {
         <Route path="/contact" element={<ContactPage />} />
         <Route path="/privacy" element={<PrivacyPage />} />
         <Route path="/terms" element={<TermsPage />} />
+        {/* Brand-SEO wave 1 (24 Nov 2026, F-08): trust/policy pages
+            Google expects — editorial policy, content accuracy,
+            certificate policy (no certificates of any kind) and
+            disclaimer. All linked from the footer. */}
+        <Route path="/editorial-policy" element={<EditorialPolicyPage />} />
+        <Route path="/content-accuracy" element={<ContentAccuracyPage />} />
+        <Route path="/certificate-policy" element={<CertificatePolicyPage />} />
+        <Route path="/disclaimer" element={<DisclaimerPage />} />
         <Route path="*" element={<NotFoundPage />} />
         </Routes>
         </Suspense>

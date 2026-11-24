@@ -26,9 +26,15 @@
      firebase.json redirect (follow-up, WEB-001). EXTENDED 24 Nov 2026
      (AI Life Assistant rebase): 75 URLs — added /ai-assistant (real
      public page, 10 working tools). /search is NOT listed (noindex,
-     robots.txt disallows it). All URLs carry
-     <lastmod> (audit SEO-007). All URLs are canonical eduvelto.com
-     URLs. -->
+     robots.txt disallows it).
+     REVISED 24 Nov 2026 (brand-SEO wave 1): 87 URLs — added the 10
+     public guides + the 4 new policy pages (editorial-policy,
+     content-accuracy, certificate-policy, disclaimer); REMOVED
+     /class/class-1-5 and /class/class-6-8 (thin, no books yet —
+     noindexed until Classes 1–8 have real books; put them back in
+     the sitemap in the same commit that removes their noindex).
+     All URLs carry <lastmod> (audit SEO-007). All URLs are
+     canonical eduvelto.com URLs. -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://eduvelto.com/</loc>
@@ -205,6 +211,66 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://eduvelto.com/learn/bcs-preparation-guide</loc>
+    <lastmod>2026-11-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/learn/bank-job-preparation</loc>
+    <lastmod>2026-11-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/learn/primary-teacher-preparation</loc>
+    <lastmod>2026-11-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/learn/ntrca-preparation</loc>
+    <lastmod>2026-11-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/learn/nu-admission-guide</loc>
+    <lastmod>2026-11-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/learn/english-grammar-basics</loc>
+    <lastmod>2026-11-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/learn/scholarship-guide</loc>
+    <lastmod>2026-11-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/learn/what-is-ai</loc>
+    <lastmod>2026-11-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/learn/cv-writing-guide</loc>
+    <lastmod>2026-11-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/learn/budget-planner-guide</loc>
+    <lastmod>2026-11-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://eduvelto.com/learn</loc>
     <lastmod>2026-11-23</lastmod>
     <changefreq>monthly</changefreq>
@@ -253,18 +319,6 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://eduvelto.com/class/class-1-5</loc>
-    <lastmod>2026-11-23</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://eduvelto.com/class/class-6-8</loc>
-    <lastmod>2026-11-23</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
     <loc>https://eduvelto.com/class/class-9-10</loc>
     <lastmod>2026-11-23</lastmod>
     <changefreq>monthly</changefreq>
@@ -309,6 +363,30 @@
   <url>
     <loc>https://eduvelto.com/terms</loc>
     <lastmod>2026-11-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/editorial-policy</loc>
+    <lastmod>2026-11-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/content-accuracy</loc>
+    <lastmod>2026-11-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/certificate-policy</loc>
+    <lastmod>2026-11-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/disclaimer</loc>
+    <lastmod>2026-11-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
