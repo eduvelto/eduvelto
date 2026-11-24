@@ -31,6 +31,7 @@ import NuNoticeCard from '../components/NuNoticeCard';
 import {
   NU_DASHBOARD_ROUTE,
   NU_EXAM_DATE_BN,
+  NU_EXAM_DATE_EN,
   NU_HUB_ROUTE,
   NU_HUB_TABS,
   NU_HUB_TAB_LABELS,
@@ -139,7 +140,7 @@ export default function NuHubPage() {
               <li>{t({ bn: 'পাস নম্বর ৩৫ — তুলনার জন্য মাত্র, ফলাফলের রায় নয়।', en: 'Pass mark 35 — for comparison only, not a verdict on a result.' })}</li>
               <li>{t({ bn: 'মেধা মোট ২০০ = পরীক্ষা ১০০ + SSC GPA ৪০ + HSC GPA ৬০।', en: 'Merit total 200 = exam 100 + SSC GPA 40 + HSC GPA 60.' })}</li>
               <li>
-                {NU_EXAM_DATE_BN}
+                {t({ bn: NU_EXAM_DATE_BN, en: NU_EXAM_DATE_EN })}
               </li>
               <li>
                 {t({ bn: 'যোগ্যতার সারাংশ: ', en: 'Eligibility summary: ' })}

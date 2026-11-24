@@ -959,7 +959,7 @@ export default function JobSeekerDashboardPage() {
                 <ul style={{ margin: '0 0 10px', paddingLeft: 0, listStyle: 'none', fontSize: 13, lineHeight: 1.9, color: 'var(--muted-ivory)' }}>
                   {week.days.map((d) => (
                     <li key={d.dayKey} style={{ display: 'flex', justifyContent: 'space-between', borderTop: '1px solid var(--border)', padding: '3px 0' }}>
-                      <span>{d.labelBn}</span>
+                      <span>{t({ bn: d.labelBn, en: d.labelEn })}</span>
                       <span>{t({ bn: `${d.sessions}টি সেশন · ${d.questions}টি প্রশ্ন`, en: `${d.sessions} session(s) · ${d.questions} question(s)` })}</span>
                     </li>
                   ))}
@@ -1203,8 +1203,8 @@ export default function JobSeekerDashboardPage() {
               <ul style={{ margin: '8px 0 0', paddingLeft: 20, fontSize: 14, lineHeight: 1.9, color: 'var(--heading)' }}>
                 {achievements.map((a) => (
                   <li key={a.key}>
-                    {a.labelBn}
-                    <span style={{ color: 'var(--muted)', fontSize: 13 }}> — {a.ruleBn}</span>
+                    {t({ bn: a.labelBn, en: a.labelEn })}
+                    <span style={{ color: 'var(--muted)', fontSize: 13 }}> — {t({ bn: a.ruleBn, en: a.ruleEn })}</span>
                   </li>
                 ))}
               </ul>

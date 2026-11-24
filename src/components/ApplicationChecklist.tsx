@@ -11,7 +11,7 @@
 // behalf (design §6.7).
 
 import { useLanguage } from '../i18n/LanguageContext';
-import { NU_CALENDAR_EVENTS, NU_EXAM_DATE_BN, NU_NEXT_CYCLE_BN, NU_VERIFIED_NOTICE } from '../lib/nuStructure';
+import { NU_CALENDAR_EVENTS, NU_EXAM_DATE_BN, NU_EXAM_DATE_EN, NU_NEXT_CYCLE_BN, NU_VERIFIED_NOTICE } from '../lib/nuStructure';
 import { Card, Chip } from './ui';
 
 const steps: { bn: string; en: string; stateBn: string; stateEn: string; done: boolean }[] = [
@@ -89,11 +89,12 @@ export default function ApplicationChecklist() {
       <ul style={{ margin: '4px 0 0', paddingLeft: 20, lineHeight: 1.9, color: 'var(--ink-soft)', fontSize: 14 }}>
         {NU_CALENDAR_EVENTS.map((e) => (
           <li key={e.labelBn}>
-            {e.labelBn}: {e.dateBn} — {e.stateBn}
+            {t({ bn: e.labelBn, en: e.labelEn })}: {t({ bn: e.dateBn, en: e.dateEn })} —{' '}
+            {t({ bn: e.stateBn, en: e.stateEn })}
           </li>
         ))}
         <li>
-          {t({ bn: 'পরীক্ষার তারিখ: কোনো ঘটনা নেই', en: 'Exam date: no event' })} — {NU_EXAM_DATE_BN}
+          {t({ bn: 'পরীক্ষার তারিখ: কোনো ঘটনা নেই', en: 'Exam date: no event' })} — {t({ bn: NU_EXAM_DATE_BN, en: NU_EXAM_DATE_EN })}
         </li>
       </ul>
     </Card>

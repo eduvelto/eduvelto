@@ -400,9 +400,9 @@ export default function JobPlannerPage() {
             <Reveal key={day.dayKey}>
               <Card>
                 <div style={{ fontWeight: 700, color: 'var(--heading)', fontSize: 16 }}>
-                  {day.labelBn}
+                  {t({ bn: day.labelBn, en: day.labelEn })}
                   {day.isToday ? (
-                    <span style={{ color: 'var(--teal)', fontSize: 13, fontWeight: 600 }}> · আজ</span>
+                    <span style={{ color: 'var(--teal)', fontSize: 13, fontWeight: 600 }}>{t({ bn: ' · আজ', en: ' · Today' })}</span>
                   ) : null}
                 </div>
                 <p style={{ margin: '6px 0 0', color: 'var(--muted)', fontSize: 13, lineHeight: 1.6 }}>

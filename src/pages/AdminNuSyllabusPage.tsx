@@ -43,7 +43,7 @@ const COLLECTION_BN: Record<string, string> = {
 };
 
 export default function AdminNuSyllabusPage() {
-  const { t } = useLanguage();
+  const { lang, t } = useLanguage();
   const [rows, setRows] = useState<NuSeedStatusRow[] | null>(null);
   const [loading, setLoading] = useState(true);
   const [busy, setBusy] = useState(false);
@@ -79,7 +79,7 @@ export default function AdminNuSyllabusPage() {
     try {
       const next = await applyNuSyllabusSeedDocs(requireDb());
       setRows(next);
-      setAppliedAt(new Date().toLocaleString('bn-BD'));
+      setAppliedAt(new Date().toLocaleString(lang === 'bn' ? 'bn-BD' : 'en-GB'));
     } catch (e) {
       setError(
         e instanceof Error

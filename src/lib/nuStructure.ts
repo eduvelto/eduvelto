@@ -260,6 +260,9 @@ export interface NuCalendarEvent {
   labelBn: string;
   dateBn: string;
   stateBn: string;
+  labelEn: string;
+  dateEn: string;
+  stateEn: string;
 }
 
 export const NU_CALENDAR_EVENTS: NuCalendarEvent[] = [
@@ -267,16 +270,25 @@ export const NU_CALENDAR_EVENTS: NuCalendarEvent[] = [
     labelBn: 'আবেদনের শেষ তারিখ (২০২৫-২৬)',
     dateBn: '৩১ ডিসেম্বর ২০২৫',
     stateBn: 'ইতিহাস — পেরিয়ে গেছে, আবেদন শেষ',
+    labelEn: 'Application deadline (2025-26)',
+    dateEn: '31 December 2025',
+    stateEn: 'History — passed, application closed',
   },
   {
     labelBn: 'আবেদন ফি জমার শেষ তারিখ (২০২৫-২৬)',
     dateBn: '০৪ জানুয়ারি ২০২৬',
     stateBn: 'ইতিহাস — পেরিয়ে গেছে',
+    labelEn: 'Application fee payment deadline (2025-26)',
+    dateEn: '04 January 2026',
+    stateEn: 'History — passed',
   },
   {
     labelBn: 'ভর্তি পরীক্ষা (২০২৫-২৬)',
     dateBn: '২৫ এপ্রিল ২০২৬',
     stateBn: 'ইতিহাস — পরীক্ষা সম্পন্ন হয়েছে',
+    labelEn: 'Admission exam (2025-26)',
+    dateEn: '25 April 2026',
+    stateEn: 'History — exam completed',
   },
 ];
 
@@ -291,6 +303,7 @@ export const NU_WINDOW_STATUS_BN =
  * (§3 #1). The 2025-26 exam (25 Apr 2026) is history — see
  * NU_CALENDAR_EVENTS. */
 export const NU_EXAM_DATE_BN = 'পরীক্ষার তারিখ এখনো ঘোষণা হয়নি — পৃথক বিজ্ঞপ্তিতে আসবে';
+export const NU_EXAM_DATE_EN = 'The exam date has not been announced yet — it will come in a separate notice';
 
 /** Phase A wording for the next cycle (§15.1). */
 export const NU_NEXT_CYCLE_BN =

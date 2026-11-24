@@ -68,6 +68,7 @@
 import { perTopicAccuracy, type JobAttemptSummary } from './jobAnalysis';
 import {
   accuracyOrNull,
+  dayLabel,
   dayLabelBn,
   dhakaDayKey,
   weekActivity,
@@ -274,6 +275,7 @@ export interface PlanDayItem {
 export interface PlanDay {
   dayKey: string;
   labelBn: string;
+  labelEn: string;
   isToday: boolean;
   items: PlanDayItem[];
   questionsDone: number;
@@ -445,6 +447,7 @@ export function weeklyPlan(args: {
     return {
       dayKey,
       labelBn: dayLabelBn(dayKey, nowMs),
+      labelEn: dayLabel(dayKey, nowMs, 'en'),
       isToday,
       items,
       questionsDone,

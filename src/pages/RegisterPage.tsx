@@ -326,7 +326,7 @@ export default function RegisterPage() {
         </fieldset>
         {shownError ? <p style={{ color: 'var(--error)' }}>{shownError}</p> : null}
         {shownError && errorCode ? (
-          <p style={{ color: 'var(--error)', fontSize: 13, marginTop: -8 }}>ত্রুটি কোড: {errorCode}</p>
+          <p style={{ color: 'var(--error)', fontSize: 13, marginTop: -8 }}>{t({ bn: 'ত্রুটি কোড: ', en: 'Error code: ' })}{errorCode}</p>
         ) : null}
         <button style={buttonStyle} type="submit" disabled={busy || loading}>
           {busy ? <T bn={strings.common.loading.bn} en={strings.common.loading.en} /> : <T bn={s.registerButton.bn} en={s.registerButton.en} />}
