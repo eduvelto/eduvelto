@@ -30,13 +30,14 @@ import { AlertBox, Button, Card, Chip, LinkButton, Skeleton } from '../component
 import { useAuth } from '../lib/auth';
 import { useLanguage } from '../i18n/LanguageContext';
 import { jobExamBySlug } from '../lib/jobExams';
-import { jobTopicLabelBn } from '../lib/jobEngine';
+import { jobTopicLabel } from '../lib/jobEngine';
 import {
   deriveNotebook,
   EMPTY_NOTEBOOK_FILTERS,
   filterNotebook,
   groupNotebookByTopic,
   NOTEBOOK_LEARNING_STATE_BN,
+  NOTEBOOK_LEARNING_STATE_EN,
   sortNotebookEntries,
   type NotebookEntry,
   type NotebookFilters,
@@ -62,8 +63,9 @@ function formatDate(millis: number | null, lang: string): string {
   });
 }
 
-function examLabel(slug: string): string {
-  return jobExamBySlug(slug)?.bn ?? slug;
+function examLabel(slug: string, lang: string): string {
+  const def = jobExamBySlug(slug);
+  return lang === 'bn' ? (def?.bn ?? slug) : (def?.en ?? slug);
 }
 
 function EntryCard(props: {
@@ -75,6 +77,7 @@ function EntryCard(props: {
   onToggleExplanation: (entry: NotebookEntry) => void;
   lang: string;
 }) {
+  const { t, lang } = useLanguage();
   const { entry, text } = props;
   const picked = entry.lastSelected !== null && text
     ? text.options.find((o) => o.letter === entry.lastSelected)
@@ -89,39 +92,39 @@ function EntryCard(props: {
           type="checkbox"
           checked={props.selected}
           onChange={() => props.onToggleSelect(entry.questionId)}
-          aria-label={`বেছে নিন: ${text?.questionText ?? entry.questionId}`}
+          aria-label={t({ bn: `বেছে নিন: ${text?.questionText ?? entry.questionId}`, en: `Select: ${text?.questionText ?? entry.questionId}` })}
           style={{ width: 20, height: 20, marginTop: 2, flexShrink: 0, cursor: 'pointer' }}
         />
         <div style={{ flex: 1, minWidth: 0 }}>
           <p style={{ margin: '0 0 8px', fontSize: 16, lineHeight: 1.8, color: 'var(--heading)', fontWeight: 600 }}>
-            {text?.questionText ?? 'প্রশ্নের লেখা পাওয়া যায়নি — সেটটি বদলে গেছে হতে পারে।'}
+            {text?.questionText ?? t({ bn: 'প্রশ্নের লেখা পাওয়া যায়নি — সেটটি বদলে গেছে হতে পারে।', en: 'The question text was not found — the set may have changed.' })}
           </p>
           <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', marginBottom: 8 }}>
             {entry.examSlugs.map((s) => (
-              <Chip key={s}>{examLabel(s)}</Chip>
+              <Chip key={s}>{examLabel(s, lang)}</Chip>
             ))}
-            <Chip tone="outline">{jobTopicLabelBn(entry.subjectId)}</Chip>
-            <Chip tone="outline">{jobTopicLabelBn(entry.topicId)}</Chip>
+            <Chip tone="outline">{jobTopicLabel(entry.subjectId, lang)}</Chip>
+            <Chip tone="outline">{jobTopicLabel(entry.topicId, lang)}</Chip>
             <Chip tone={entry.learningState === 'new' ? 'gold' : 'blue'}>
-              {NOTEBOOK_LEARNING_STATE_BN[entry.learningState]}
+              {lang === 'bn' ? NOTEBOOK_LEARNING_STATE_BN[entry.learningState] : NOTEBOOK_LEARNING_STATE_EN[entry.learningState]}
             </Chip>
-            <Chip tone="outline">পরপর সঠিক: {entry.consecutiveCorrect}/২</Chip>
+            <Chip tone="outline">{t({ bn: `পরপর সঠিক: ${entry.consecutiveCorrect}/২`, en: `Consecutive correct: ${entry.consecutiveCorrect}/2` })}</Chip>
           </div>
           <p style={{ margin: '0 0 4px', fontSize: 14, lineHeight: 1.7, color: 'var(--text)' }}>
-            আপনার উত্তর:{' '}
+            {t({ bn: 'আপনার উত্তর:', en: 'Your answer:' })}{' '}
             {entry.lastSelected === null
               ? '—'
               : `${entry.lastSelected}${picked ? ` — ${picked.text}` : ''}`}{' '}
-            · সঠিক উত্তর:{' '}
+            · {t({ bn: 'সঠিক উত্তর:', en: 'Correct answer:' })}{' '}
             {entry.lastCorrectText ?? '—'}
             {correctLetter ? ` (${correctLetter})` : ''}
           </p>
           <p style={{ margin: '0 0 8px', fontSize: 13, lineHeight: 1.7, color: 'var(--muted)' }}>
-            {entry.wrongCount} বার ভুল · শেষ ভুল {formatDate(entry.lastWrongAtMillis, props.lang)}
+            {t({ bn: `${entry.wrongCount} বার ভুল · শেষ ভুল ${formatDate(entry.lastWrongAtMillis, props.lang)}`, en: `${entry.wrongCount} wrong · last wrong ${formatDate(entry.lastWrongAtMillis, props.lang)}` })}
             {' · '}
-            {entry.lastWrongKind === 'mock' ? 'মক থেকে' : 'অনুশীলন থেকে'}{' '}
+            {entry.lastWrongKind === 'mock' ? t({ bn: 'মক থেকে', en: 'from a mock' }) : t({ bn: 'অনুশীলন থেকে', en: 'from practice' })}{' '}
             <Link to={`/jobs/result/${entry.lastWrongAttemptId}`} style={{ fontWeight: 600 }}>
-              যেখানে ভুল হয়েছিল →
+              {t({ bn: 'যেখানে ভুল হয়েছিল →', en: 'Where it went wrong →' })}
             </Link>
           </p>
           {text ? (
@@ -133,44 +136,44 @@ function EntryCard(props: {
                   disabled={props.explanation?.state === 'loading'}
                 >
                   {props.explanation?.state === 'ready'
-                    ? 'ব্যাখ্যা লুকান ↑'
+                    ? t({ bn: 'ব্যাখ্যা লুকান ↑', en: 'Hide explanation ↑' })
                     : props.explanation?.state === 'loading'
-                      ? 'ব্যাখ্যা খুলছে…'
-                      : 'ব্যাখ্যা দেখুন ↓'}
+                      ? t({ bn: 'ব্যাখ্যা খুলছে…', en: 'Opening explanation…' })
+                      : t({ bn: 'ব্যাখ্যা দেখুন ↓', en: 'See explanation ↓' })}
                 </Button>
               </p>
               {props.explanation?.state === 'ready' && props.explanation.data ? (
                 <div style={{ marginTop: 12, background: 'var(--surface-soft)', borderRadius: 10, padding: '12px 14px' }}>
                   <div style={{ fontWeight: 700, color: 'var(--heading)', marginBottom: 4 }}>
-                    সঠিক উত্তর: {props.explanation.data.correctLetter} — {props.explanation.data.correctText}
+                    {t({ bn: `সঠিক উত্তর: ${props.explanation.data.correctLetter} — ${props.explanation.data.correctText}`, en: `Correct answer: ${props.explanation.data.correctLetter} — ${props.explanation.data.correctText}` })}
                   </div>
                   <p style={{ margin: '0 0 4px', color: 'var(--text)', fontSize: 14, lineHeight: 1.7 }}>
-                    ব্যাখ্যা: {props.explanation.data.explanation}
+                    {t({ bn: 'ব্যাখ্যা:', en: 'Explanation:' })} {props.explanation.data.explanation}
                   </p>
                   {props.explanation.data.whyWrongText ? (
                     <p style={{ margin: '4px 0 0', color: 'var(--text)', fontSize: 14, lineHeight: 1.7 }}>
-                      আপনার উত্তরটি কেন ভুল: {props.explanation.data.whyWrongText}
+                      {t({ bn: 'আপনার উত্তরটি কেন ভুল:', en: 'Why your answer was wrong:' })} {props.explanation.data.whyWrongText}
                     </p>
                   ) : null}
                   <p style={{ margin: '8px 0 0', color: 'var(--muted)', fontSize: 13 }}>
-                    {props.explanation.data.sourceBn} — যাচাইকৃত শিক্ষকের ব্যাখ্যা নয়, প্রশ্ন-ব্যাংকের ব্যাখ্যা।
+                    {lang === 'bn' ? props.explanation.data.sourceBn : props.explanation.data.sourceEn} — {t({ bn: 'যাচাইকৃত শিক্ষকের ব্যাখ্যা নয়, প্রশ্ন-ব্যাংকের ব্যাখ্যা।', en: "a question-bank explanation, not a verified teacher's explanation." })}
                   </p>
                 </div>
               ) : null}
               {props.explanation?.state === 'none' ? (
                 <p style={{ margin: '8px 0 0', color: 'var(--muted)', fontSize: 13, lineHeight: 1.7 }}>
-                  এই প্রশ্নের ব্যাখ্যা এখানে খুলছে না —{' '}
+                  {t({ bn: 'এই প্রশ্নের ব্যাখ্যা এখানে খুলছে না —', en: "This question's explanation does not open here —" })}{' '}
                   <Link to={`/jobs/result/${entry.lastWrongAttemptId}`} style={{ fontWeight: 600 }}>
-                    ফলাফল পাতা থেকে দেখুন →
+                    {t({ bn: 'ফলাফল পাতা থেকে দেখুন →', en: 'See it on the result page →' })}
                   </Link>
                 </p>
               ) : null}
             </>
           ) : (
             <p style={{ margin: '8px 0 0', color: 'var(--muted)', fontSize: 13, lineHeight: 1.7 }}>
-              ব্যাখ্যা এখানে খুলছে না —{' '}
+              {t({ bn: 'ব্যাখ্যা এখানে খুলছে না —', en: 'The explanation does not open here —' })}{' '}
               <Link to={`/jobs/result/${entry.lastWrongAttemptId}`} style={{ fontWeight: 600 }}>
-                ফলাফল পাতা থেকে দেখুন →
+                {t({ bn: 'ফলাফল পাতা থেকে দেখুন →', en: 'See it on the result page →' })}
               </Link>
             </p>
           )}
@@ -221,7 +224,7 @@ export default function JobWrongAnswersPage() {
         setPhase('ready');
       } catch (e) {
         if (!alive) return;
-        setError(e instanceof Error ? e.message : 'নোটবুক খোলা যায়নি — আবার চেষ্টা করুন।');
+        setError(e instanceof Error ? e.message : t({ bn: 'নোটবুক খোলা যায়নি — আবার চেষ্টা করুন।', en: 'The notebook could not be opened — please try again.' }));
         setPhase('error');
       }
     })();
@@ -359,7 +362,7 @@ export default function JobWrongAnswersPage() {
 
   if (phase === 'loading') {
     return (
-      <PageShell titleBn="ভুল-উত্তর নোটবুক" titleEn="ভুল-উত্তর নোটবুক" wide>
+      <PageShell titleBn="ভুল-উত্তর নোটবুক" titleEn="Wrong-Answer Notebook" wide>
         <Skeleton />
       </PageShell>
     );
@@ -367,13 +370,13 @@ export default function JobWrongAnswersPage() {
 
   if (phase === 'signed-out') {
     return (
-      <PageShell titleBn="ভুল-উত্তর নোটবুক" titleEn="ভুল-উত্তর নোটবুক" wide>
+      <PageShell titleBn="ভুল-উত্তর নোটবুক" titleEn="Wrong-Answer Notebook" wide>
         <Card>
-          <div style={{ fontWeight: 700, color: 'var(--heading)', fontSize: 17 }}>নোটবুক দেখতে লগইন করুন</div>
+          <div style={{ fontWeight: 700, color: 'var(--heading)', fontSize: 17 }}>{t({ bn: 'নোটবুক দেখতে লগইন করুন', en: 'Log in to see the notebook' })}</div>
           <p style={{ margin: '8px 0 12px', color: 'var(--muted)', fontSize: 14, lineHeight: 1.7 }}>
-            ভুল-উত্তর নোটবুক শুধু আপনার নিজের — লগইন করলে আপনার ভুল প্রশ্নগুলো এখানে জমা হবে।
+            {t({ bn: 'ভুল-উত্তর নোটবুক শুধু আপনার নিজের — লগইন করলে আপনার ভুল প্রশ্নগুলো এখানে জমা হবে।', en: 'The wrong-answer notebook is only yours — log in and your wrong questions will collect here.' })}
           </p>
-          <Link to="/login" style={{ fontWeight: 600 }}>লগইন করুন →</Link>
+          <Link to="/login" style={{ fontWeight: 600 }}>{t({ bn: 'লগইন করুন →', en: 'Log in →' })}</Link>
         </Card>
       </PageShell>
     );
@@ -381,10 +384,10 @@ export default function JobWrongAnswersPage() {
 
   if (phase === 'error') {
     return (
-      <PageShell titleBn="ভুল-উত্তর নোটবুক" titleEn="ভুল-উত্তর নোটবুক" wide>
+      <PageShell titleBn="ভুল-উত্তর নোটবুক" titleEn="Wrong-Answer Notebook" wide>
         <AlertBox tone="error">{error}</AlertBox>
         <p style={{ marginTop: 16 }}>
-          <Link to="/jobs/dashboard" style={{ fontWeight: 600 }}>← ড্যাশবোর্ডে ফিরুন</Link>
+          <Link to="/jobs/dashboard" style={{ fontWeight: 600 }}>{t({ bn: '← ড্যাশবোর্ডে ফিরুন', en: '← Back to the dashboard' })}</Link>
         </p>
       </PageShell>
     );
@@ -394,7 +397,7 @@ export default function JobWrongAnswersPage() {
   const practiceTopics = groupNotebookByTopic(poolForPractice);
 
   return (
-    <PageShell titleBn="ভুল-উত্তর নোটবুক" titleEn="ভুল-উত্তর নোটবুক" wide>
+    <PageShell titleBn="ভুল-উত্তর নোটবুক" titleEn="Wrong-Answer Notebook" wide>
       <p style={{ margin: '0 0 12px', color: 'var(--muted)', fontSize: 14, lineHeight: 1.7 }}>
         {t({
           bn: 'আপনার ভুল প্রশ্নগুলো এখানে জমা হয় — শুধু আপনার নিজের অনুশীলন ও মক থেকে। একটি প্রশ্ন পরপর ২ বার সঠিক হলে তা নোটবুক থেকে সরে যায়; পরে আবার ভুল হলে ফিরে আসে। দুইবার সঠিক মানেই চিরকাল মনে থাকবে তা নয় — এটি শেখার অবস্থা, স্থায়ী দক্ষতার সনদ নয়।',
@@ -434,10 +437,10 @@ export default function JobWrongAnswersPage() {
         <>
           <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', marginBottom: 16, fontSize: 15 }}>
             <span>
-              <strong>{active.length}</strong>টি ভুল প্রশ্ন
+              <strong>{active.length}</strong>{t({ bn: 'টি ভুল প্রশ্ন', en: ' wrong questions' })}
             </span>
             <span>
-              <strong>{learned.length}</strong>টি শেখা হয়েছে
+              <strong>{learned.length}</strong>{t({ bn: 'টি শেখা হয়েছে', en: ' learned' })}
             </span>
           </div>
 
@@ -445,100 +448,100 @@ export default function JobWrongAnswersPage() {
           <Card style={{ marginBottom: 16 }}>
             <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', alignItems: 'end' }}>
               <label style={{ display: 'grid', gap: 4, fontSize: 13, fontWeight: 600, color: 'var(--heading)' }}>
-                পরীক্ষা
+                {t({ bn: 'পরীক্ষা', en: 'Exam' })}
                 <select
                   value={filters.examSlug}
                   onChange={(e) => setFilter('examSlug', e.target.value)}
-                  aria-label="পরীক্ষা অনুযায়ী দেখুন"
+                  aria-label={t({ bn: 'পরীক্ষা অনুযায়ী দেখুন', en: 'Filter by exam' })}
                   style={{ border: '1px solid #C9D2E0', borderRadius: 8, padding: '8px 10px', fontWeight: 600, background: '#fff', cursor: 'pointer' }}
                 >
-                  <option value="all">সব পরীক্ষা</option>
+                  <option value="all">{t({ bn: 'সব পরীক্ষা', en: 'All exams' })}</option>
                   {examOptions.map((s) => (
-                    <option key={s} value={s}>{examLabel(s)}</option>
+                    <option key={s} value={s}>{examLabel(s, lang)}</option>
                   ))}
                 </select>
               </label>
               <label style={{ display: 'grid', gap: 4, fontSize: 13, fontWeight: 600, color: 'var(--heading)' }}>
-                বিষয়
+                {t({ bn: 'বিষয়', en: 'Subject' })}
                 <select
                   value={filters.subjectId}
                   onChange={(e) => setFilter('subjectId', e.target.value)}
-                  aria-label="বিষয় অনুযায়ী দেখুন"
+                  aria-label={t({ bn: 'বিষয় অনুযায়ী দেখুন', en: 'Filter by subject' })}
                   style={{ border: '1px solid #C9D2E0', borderRadius: 8, padding: '8px 10px', fontWeight: 600, background: '#fff', cursor: 'pointer' }}
                 >
-                  <option value="all">সব বিষয়</option>
+                  <option value="all">{t({ bn: 'সব বিষয়', en: 'All subjects' })}</option>
                   {subjectOptions.map((s) => (
-                    <option key={s} value={s}>{jobTopicLabelBn(s)}</option>
+                    <option key={s} value={s}>{jobTopicLabel(s, lang)}</option>
                   ))}
                 </select>
               </label>
               <label style={{ display: 'grid', gap: 4, fontSize: 13, fontWeight: 600, color: 'var(--heading)' }}>
-                টপিক
+                {t({ bn: 'টপিক', en: 'Topic' })}
                 <select
                   value={filters.topicId}
                   onChange={(e) => setFilter('topicId', e.target.value)}
-                  aria-label="টপিক অনুযায়ী দেখুন"
+                  aria-label={t({ bn: 'টপিক অনুযায়ী দেখুন', en: 'Filter by topic' })}
                   style={{ border: '1px solid #C9D2E0', borderRadius: 8, padding: '8px 10px', fontWeight: 600, background: '#fff', cursor: 'pointer' }}
                 >
-                  <option value="all">সব টপিক</option>
+                  <option value="all">{t({ bn: 'সব টপিক', en: 'All topics' })}</option>
                   {topicOptions.map((s) => (
-                    <option key={s} value={s}>{jobTopicLabelBn(s)}</option>
+                    <option key={s} value={s}>{jobTopicLabel(s, lang)}</option>
                   ))}
                 </select>
               </label>
               <label style={{ display: 'grid', gap: 4, fontSize: 13, fontWeight: 600, color: 'var(--heading)' }}>
-                পরপর সঠিক
+                {t({ bn: 'পরপর সঠিক', en: 'Consecutive correct' })}
                 <select
                   value={filters.streak}
                   onChange={(e) => setFilter('streak', e.target.value as NotebookFilters['streak'])}
-                  aria-label="পরপর সঠিক অনুযায়ী দেখুন"
+                  aria-label={t({ bn: 'পরপর সঠিক অনুযায়ী দেখুন', en: 'Filter by consecutive correct' })}
                   style={{ border: '1px solid #C9D2E0', borderRadius: 8, padding: '8px 10px', fontWeight: 600, background: '#fff', cursor: 'pointer' }}
                 >
-                  <option value="all">সব</option>
-                  <option value="0">০/২ — এখনো একবারও সঠিক হয়নি</option>
-                  <option value="1">১/২ — আর একবার সঠিক হলেই সরবে</option>
+                  <option value="all">{t({ bn: 'সব', en: 'All' })}</option>
+                  <option value="0">{t({ bn: '০/২ — এখনো একবারও সঠিক হয়নি', en: '0/2 — not correct even once yet' })}</option>
+                  <option value="1">{t({ bn: '১/২ — আর একবার সঠিক হলেই সরবে', en: '1/2 — one more correct answer clears it' })}</option>
                 </select>
               </label>
               <label style={{ display: 'grid', gap: 4, fontSize: 13, fontWeight: 600, color: 'var(--heading)' }}>
-                উৎস
+                {t({ bn: 'উৎস', en: 'Source' })}
                 <select
                   value={filters.source}
                   onChange={(e) => setFilter('source', e.target.value as NotebookFilters['source'])}
-                  aria-label="উৎস অনুযায়ী দেখুন"
+                  aria-label={t({ bn: 'উৎস অনুযায়ী দেখুন', en: 'Filter by source' })}
                   style={{ border: '1px solid #C9D2E0', borderRadius: 8, padding: '8px 10px', fontWeight: 600, background: '#fff', cursor: 'pointer' }}
                 >
-                  <option value="all">সব</option>
-                  <option value="practice">অনুশীলন থেকে</option>
-                  <option value="mock">মক থেকে</option>
+                  <option value="all">{t({ bn: 'সব', en: 'All' })}</option>
+                  <option value="practice">{t({ bn: 'অনুশীলন থেকে', en: 'From practice' })}</option>
+                  <option value="mock">{t({ bn: 'মক থেকে', en: 'From a mock' })}</option>
                 </select>
               </label>
               <label style={{ display: 'grid', gap: 4, fontSize: 13, fontWeight: 600, color: 'var(--heading)' }}>
-                সর্বশেষ ফল
+                {t({ bn: 'সর্বশেষ ফল', en: 'Latest result' })}
                 <select
                   value={filters.status}
                   onChange={(e) => setFilter('status', e.target.value as NotebookFilters['status'])}
-                  aria-label="সর্বশেষ ফল অনুযায়ী দেখুন"
+                  aria-label={t({ bn: 'সর্বশেষ ফল অনুযায়ী দেখুন', en: 'Filter by latest result' })}
                   style={{ border: '1px solid #C9D2E0', borderRadius: 8, padding: '8px 10px', fontWeight: 600, background: '#fff', cursor: 'pointer' }}
                 >
-                  <option value="all">সব</option>
-                  <option value="wrong">ভুল উত্তর</option>
-                  <option value="unanswered">উত্তর দেওয়া হয়নি</option>
+                  <option value="all">{t({ bn: 'সব', en: 'All' })}</option>
+                  <option value="wrong">{t({ bn: 'ভুল উত্তর', en: 'Wrong answer' })}</option>
+                  <option value="unanswered">{t({ bn: 'উত্তর দেওয়া হয়নি', en: 'Unanswered' })}</option>
                 </select>
               </label>
               <label style={{ display: 'grid', gap: 4, fontSize: 13, fontWeight: 600, color: 'var(--heading)', flex: '1 1 180px' }}>
-                প্রশ্ন খুঁজুন
+                {t({ bn: 'প্রশ্ন খুঁজুন', en: 'Search questions' })}
                 <input
                   type="search"
                   value={filters.query}
                   onChange={(e) => setFilter('query', e.target.value)}
-                  placeholder="প্রশ্নের লেখা দিয়ে খুঁজুন…"
-                  aria-label="প্রশ্নের লেখা দিয়ে খুঁজুন"
+                  placeholder={t({ bn: 'প্রশ্নের লেখা দিয়ে খুঁজুন…', en: 'Search by question text…' })}
+                  aria-label={t({ bn: 'প্রশ্নের লেখা দিয়ে খুঁজুন', en: 'Search by question text' })}
                   style={{ border: '1px solid #C9D2E0', borderRadius: 8, padding: '8px 10px', fontWeight: 400 }}
                 />
               </label>
               {filtersActive ? (
                 <Button variant="outline" onClick={() => setFilters(EMPTY_NOTEBOOK_FILTERS)}>
-                  ফিল্টার পরিষ্কার করুন
+                  {t({ bn: 'ফিল্টার পরিষ্কার করুন', en: 'Clear filters' })}
                 </Button>
               ) : null}
             </div>
@@ -550,19 +553,19 @@ export default function JobWrongAnswersPage() {
               <div style={{ display: 'flex', gap: 12, alignItems: 'center', flexWrap: 'wrap' }}>
                 <Button variant="accent" onClick={toggleSelectAllFiltered}>
                   {filtered.every((e) => selected.has(e.questionId)) && filtered.length > 0
-                    ? 'সব বাছাই তুলে নিন'
-                    : 'এই তালিকার সব বেছে নিন'}
+                    ? t({ bn: 'সব বাছাই তুলে নিন', en: 'Deselect all' })
+                    : t({ bn: 'এই তালিকার সব বেছে নিন', en: 'Select all in this list' })}
                 </Button>
                 <Button variant="accent" onClick={startPractice}>
                   {selected.size > 0
-                    ? `বেছে নেওয়া ${selected.size}টি অনুশীলন করুন →`
-                    : 'শুধু ভুলগুলো আবার অনুশীলন করুন →'}
+                    ? t({ bn: `বেছে নেওয়া ${selected.size}টি অনুশীলন করুন →`, en: `Practise the ${selected.size} selected →` })
+                    : t({ bn: 'শুধু ভুলগুলো আবার অনুশীলন করুন →', en: 'Practise only the wrong ones again →' })}
                 </Button>
               </div>
               <p style={{ margin: '8px 0 0', color: 'var(--muted)', fontSize: 13, lineHeight: 1.7 }}>
                 {practiceTopics.length > 1
-                  ? `${practiceTopics.length}টি টপিকের প্রশ্ন আছে — প্রথমে ${practiceTopics[0].label} টপিকের সেশন শুরু হবে; বাকি টপিকগুলো নোটবুকে থাকবে, সেখান থেকে আলাদাভাবে অনুশীলন করুন।`
-                  : 'অনুশীলনে মূল ভুল প্রশ্নগুলোর সঙ্গে একই টপিকের নতুন প্রশ্নও থাকবে — একই প্রশ্ন বারবার মনে রাখা শেখা নয়, নতুন প্রশ্নে নিয়মটি প্রয়োগ করতে পারাই আসল শেখা।'}
+                  ? t({ bn: `${practiceTopics.length}টি টপিকের প্রশ্ন আছে — প্রথমে ${practiceTopics[0].label} টপিকের সেশন শুরু হবে; বাকি টপিকগুলো নোটবুকে থাকবে, সেখান থেকে আলাদাভাবে অনুশীলন করুন।`, en: `${practiceTopics.length} topics' questions are here — the session starts with the ${lang === 'bn' ? practiceTopics[0].label : practiceTopics[0].labelEn} topic; the other topics stay in the notebook, practise them separately from there.` })
+                  : t({ bn: 'অনুশীলনে মূল ভুল প্রশ্নগুলোর সঙ্গে একই টপিকের নতুন প্রশ্নও থাকবে — একই প্রশ্ন বারবার মনে রাখা শেখা নয়, নতুন প্রশ্নে নিয়মটি প্রয়োগ করতে পারাই আসল শেখা।', en: 'Practice will include new questions from the same topic alongside the original wrong ones — memorising the same question is not learning; applying the rule to a new question is real learning.' })}
               </p>
             </Card>
           ) : null}
@@ -571,7 +574,7 @@ export default function JobWrongAnswersPage() {
           {filtered.length === 0 ? (
             <Card>
               <p style={{ margin: 0, color: 'var(--muted)', fontSize: 14, lineHeight: 1.7 }}>
-                এই ফিল্টারে কোনো ভুল প্রশ্ন নেই।
+                {t({ bn: 'এই ফিল্টারে কোনো ভুল প্রশ্ন নেই।', en: 'No wrong questions match this filter.' })}
                 {filtersActive ? (
                   <>
                     {' '}
@@ -580,7 +583,7 @@ export default function JobWrongAnswersPage() {
                       onClick={() => setFilters(EMPTY_NOTEBOOK_FILTERS)}
                       style={{ background: 'none', border: 'none', color: 'var(--teal)', fontWeight: 700, cursor: 'pointer', padding: 0, fontSize: 14 }}
                     >
-                      ফিল্টার পরিষ্কার করুন
+                      {t({ bn: 'ফিল্টার পরিষ্কার করুন', en: 'Clear filters' })}
                     </button>
                   </>
                 ) : null}
@@ -591,17 +594,17 @@ export default function JobWrongAnswersPage() {
               {groups.map((g) => {
                 const bundle = topicBundle(g.topicId);
                 return (
-                  <section key={g.topicId} aria-label={g.label}>
+                  <section key={g.topicId} aria-label={lang === 'bn' ? g.label : g.labelEn}>
                     <div style={{ display: 'flex', gap: 10, alignItems: 'baseline', flexWrap: 'wrap', marginBottom: 8 }}>
-                      <h2 style={{ margin: 0, fontSize: 17, color: 'var(--heading)' }}>{g.label}</h2>
-                      <span style={{ color: 'var(--muted)', fontSize: 13 }}>{g.entries.length}টি ভুল প্রশ্ন</span>
+                      <h2 style={{ margin: 0, fontSize: 17, color: 'var(--heading)' }}>{lang === 'bn' ? g.label : g.labelEn}</h2>
+                      <span style={{ color: 'var(--muted)', fontSize: 13 }}>{t({ bn: `${g.entries.length}টি ভুল প্রশ্ন`, en: `${g.entries.length} wrong questions` })}</span>
                       <span style={{ flex: 1 }} />
                       {bundle ? (
                         <Link to={`/jobs/practice/${bundle.docId}`} style={{ fontWeight: 600, fontSize: 13 }}>
-                          এই টপিকের নতুন প্রশ্ন অনুশীলন করুন →
+                          {t({ bn: 'এই টপিকের নতুন প্রশ্ন অনুশীলন করুন →', en: 'Practise new questions on this topic →' })}
                         </Link>
                       ) : (
-                        <span style={{ color: 'var(--muted)', fontSize: 13 }}>এই টপিকের অনুশীলন সেট এখনো তৈরি হয়নি।</span>
+                        <span style={{ color: 'var(--muted)', fontSize: 13 }}>{t({ bn: 'এই টপিকের অনুশীলন সেট এখনো তৈরি হয়নি।', en: "This topic's practice set has not been created yet." })}</span>
                       )}
                     </div>
                     <div style={{ display: 'grid', gap: 12 }}>
@@ -623,7 +626,7 @@ export default function JobWrongAnswersPage() {
                         variant="outline"
                         onClick={() => startTopicPractice(g.topicId, g.entries.map((e) => e.questionId))}
                       >
-                        এই টপিকের ভুলগুলো অনুশীলন করুন →
+                        {t({ bn: 'এই টপিকের ভুলগুলো অনুশীলন করুন →', en: "Practise this topic's wrong ones →" })}
                       </Button>
                     </p>
                   </section>
@@ -634,19 +637,19 @@ export default function JobWrongAnswersPage() {
 
           {/* Learned history */}
           {learned.length > 0 ? (
-            <section aria-label="শেখা হয়েছে" style={{ marginTop: 28 }}>
-              <h2 style={{ margin: '0 0 4px', fontSize: 17, color: 'var(--heading)' }}>শেখা হয়েছে</h2>
+            <section aria-label={t({ bn: 'শেখা হয়েছে', en: 'Learned' })} style={{ marginTop: 28 }}>
+              <h2 style={{ margin: '0 0 4px', fontSize: 17, color: 'var(--heading)' }}>{t({ bn: 'শেখা হয়েছে', en: 'Learned' })}</h2>
               <p style={{ margin: '0 0 12px', color: 'var(--muted)', fontSize: 13, lineHeight: 1.7 }}>
-                পরপর ২ বার সঠিক হওয়ায় এই প্রশ্নগুলো নোটবুক থেকে সরে গেছে — পরে আবার ভুল হলে ফিরে আসবে। মোট {learned.length}টি।
+                {t({ bn: `পরপর ২ বার সঠিক হওয়ায় এই প্রশ্নগুলো নোটবুক থেকে সরে গেছে — পরে আবার ভুল হলে ফিরে আসবে। মোট ${learned.length}টি।`, en: `These questions left the notebook after 2 consecutive correct answers — a later wrong answer brings them back. Total ${learned.length}.` })}
               </p>
               <div style={{ display: 'grid', gap: 12 }}>
                 {learned.slice(0, 5).map((entry) => (
                   <Card key={entry.questionId}>
                     <p style={{ margin: '0 0 4px', fontSize: 15, lineHeight: 1.7, color: 'var(--heading)', fontWeight: 600 }}>
-                      {texts.get(entry.questionId)?.questionText ?? jobTopicLabelBn(entry.topicId)}
+                      {texts.get(entry.questionId)?.questionText ?? jobTopicLabel(entry.topicId, lang)}
                     </p>
                     <p style={{ margin: 0, color: 'var(--muted)', fontSize: 13 }}>
-                      পরপর ২ বার সঠিক · {formatDate(entry.clearedAtMillis, lang)}
+                      {t({ bn: `পরপর ২ বার সঠিক · ${formatDate(entry.clearedAtMillis, lang)}`, en: `Correct 2 times in a row · ${formatDate(entry.clearedAtMillis, lang)}` })}
                       {' · '}
                       <Link to={`/jobs/result/${entry.lastWrongAttemptId}`} style={{ fontWeight: 600 }}>
                         যেখানে ভুল হয়েছিল →
@@ -656,7 +659,7 @@ export default function JobWrongAnswersPage() {
                 ))}
                 {learned.length > 5 ? (
                   <p style={{ margin: 0, color: 'var(--muted)', fontSize: 13 }}>
-                    আরও {learned.length - 5}টি প্রশ্ন শেখা হয়েছে।
+                    {t({ bn: `আরও ${learned.length - 5}টি প্রশ্ন শেখা হয়েছে।`, en: `${learned.length - 5} more questions learned.` })}
                   </p>
                 ) : null}
               </div>
@@ -666,9 +669,9 @@ export default function JobWrongAnswersPage() {
       )}
 
       <p style={{ marginTop: 24 }}>
-        <Link to="/jobs/dashboard" style={{ fontWeight: 600 }}>← ড্যাশবোর্ডে ফিরুন</Link>
+        <Link to="/jobs/dashboard" style={{ fontWeight: 600 }}>{t({ bn: '← ড্যাশবোর্ডে ফিরুন', en: '← Back to the dashboard' })}</Link>
         {' · '}
-        <Link to="/jobs/planner" style={{ fontWeight: 600 }}>প্ল্যানার দেখুন →</Link>
+        <Link to="/jobs/planner" style={{ fontWeight: 600 }}>{t({ bn: 'প্ল্যানার দেখুন →', en: 'See the planner →' })}</Link>
       </p>
     </PageShell>
   );
