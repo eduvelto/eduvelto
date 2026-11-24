@@ -1,5 +1,6 @@
 import { Suspense, lazy, useCallback, useEffect, useState } from 'react';
 import { Navigate, Route, Routes, useLocation, useNavigate } from 'react-router-dom';
+import { loginState } from './lib/loginReturn';
 import { strings } from './i18n/strings';
 import { useAuth } from './lib/auth';
 import {
@@ -168,8 +169,11 @@ const AdmissionsDashboardPage = lazy(() => import('./pages/AdmissionsDashboardPa
 // to /login.
 function DashboardRedirect() {
   const { user, profile, loading } = useAuth();
+  const location = useLocation();
+  // Sections audit (24 Nov 2026): return to /dashboard after sign-in.
+  const back = loginState(location.pathname + location.search);
   if (loading) return <AppLoadingScreen />;
-  if (!user) return <Navigate to="/login" replace />;
+  if (!user) return <Navigate to="/login" replace state={back} />;
   if (!profile) return <Navigate to="/register/role" replace />;
   if (profile.role === 'owner' || profile.role === 'admin' || profile.role === 'moderator') {
     return <Navigate to="/admin" replace />;

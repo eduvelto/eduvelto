@@ -12,7 +12,8 @@
 // here at any time. Rejected/revoked links are shown as history, not
 // hidden — the child can see what happened to each request.
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
+import { loginState } from '../lib/loginReturn';
 import { db } from '../firebase';
 import { PageShell } from '../components/PageShell';
 import { strings } from '../i18n/strings';
@@ -53,6 +54,9 @@ const STATUS: Record<ParentLink['status'], { bn: string; en: string }> = {
 
 export default function GuardianLinksPage() {
   const { user, profile, loading } = useAuth();
+  const location = useLocation();
+  // Sections audit (24 Nov 2026): return here after sign-in.
+  const back = loginState(location.pathname + location.search);
   const { t } = useLanguage();
   const d = strings.dashboard;
   const [links, setLinks] = useState<ParentLink[] | null>(null);
@@ -87,7 +91,7 @@ export default function GuardianLinksPage() {
       <PageShell titleBn={d.linkConfirmTitle.bn} titleEn={d.linkConfirmTitle.en}>
         <p>{t(strings.profile.notSignedIn)}</p>
         <p>
-          <Link to="/login">{t(strings.auth.loginTitle)}</Link>
+          <Link to="/login" state={back}>{t(strings.auth.loginTitle)}</Link>
         </p>
       </PageShell>
     );

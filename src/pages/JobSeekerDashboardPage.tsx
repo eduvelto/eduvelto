@@ -46,7 +46,8 @@
 // fits one minimal block only).
 
 import { useEffect, useMemo, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
+import { loginState } from '../lib/loginReturn';
 import { PageShell } from '../components/PageShell';
 import { Card, Chip, LinkButton, Reveal, Skeleton, SkeletonCards } from '../components/ui';
 import JobModeSwitch from '../components/JobModeSwitch';
@@ -109,6 +110,9 @@ function formatDateBn(millis: number | null): string {
 
 export default function JobSeekerDashboardPage() {
   const { user, profile, loading } = useAuth();
+  const location = useLocation();
+  // Sections audit (24 Nov 2026): return here after sign-in.
+  const back = loginState(location.pathname + location.search);
   const { t, lang } = useLanguage();
   const { mode } = useJobMode();
   // Re-open the first-time mode-choice screen on demand (Step 2 §1.8).
@@ -370,7 +374,7 @@ export default function JobSeekerDashboardPage() {
       <PageShell titleBn="আমার চাকরির ড্যাশবোর্ড" titleEn="My Job Dashboard">
         <p>{t(strings.profile.notSignedIn)}</p>
         <p>
-          <LinkButton to="/login" variant="outline">{t(strings.auth.loginTitle)}</LinkButton>
+          <LinkButton to="/login" state={back} variant="outline">{t(strings.auth.loginTitle)}</LinkButton>
         </p>
       </PageShell>
     );

@@ -39,7 +39,8 @@
 //    bottom banner in App.tsx still applies. No ads above the fold.
 
 import { useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { loginState } from '../lib/loginReturn';
 import { PageShell } from '../components/PageShell';
 import AdSlot from '../components/AdSlot';
 import HeroGreeting from '../components/HeroGreeting';
@@ -235,6 +236,18 @@ const HUBS = [
     noteEn: '',
   },
   {
+    id: 'jobs',
+    to: '/jobs',
+    tint: 'ev-rd-hub-teal',
+    icon: <TrophyIcon size={30} />,
+    titleBn: 'চাকরি প্রস্তুতি',
+    titleEn: 'Job Preparation',
+    descBn: 'BCS, ব্যাংক, শিক্ষক নিয়োগ, সরকারি ও বেসরকারি চাকরি',
+    descEn: 'BCS, Bank, Teacher Recruitment, Government & Private Jobs',
+    noteBn: '',
+    noteEn: '',
+  },
+  {
     id: 'opportunity',
     to: '/opportunities',
     tint: 'ev-rd-hub-blue',
@@ -399,6 +412,9 @@ function ProgressRing({ percent, label }: { percent: number; label: string }) {
 export default function HomePage() {
   const { t, lang } = useLanguage();
   const { user } = useAuth();
+  const location = useLocation();
+  // Sections audit (24 Nov 2026): return here after sign-in.
+  const back = loginState(location.pathname + location.search);
   const [searchText, setSearchText] = useState('');
   const [progress, setProgress] = useState<ProgressData | null>(null);
   const [progressLoading, setProgressLoading] = useState(false);
@@ -637,11 +653,17 @@ export default function HomePage() {
           </p>
         </section>
 
-        {/* Four section cards — preserved verbatim (21 Nov redesign). */}
+        {/* Four section cards — preserved verbatim (21 Nov redesign).
+            Sections audit (24 Nov 2026): the WHOLE card is the link —
+            the owner decided 21 Nov that clicking anywhere on a big card
+            goes inside (no separate button). The old <article> + inner
+            CTA <Link> meant tapping the card body did nothing on the
+            owner's phone, so he could not reach Job Preparation from
+            here. The CTA is now a <span> styled like the button. */}
         <section className="ev-rd-section" aria-label={t({ bn: 'প্রধান বিভাগ', en: 'Main sections' })}>
           <div className="ev-home-sections">
             {SECTIONS.map((s) => (
-              <article key={s.id} className={`ev-home-card ${s.tint}`}>
+              <Link key={s.id} to={s.to} className={`ev-home-card ${s.tint}`}>
                 {s.badgeBn ? (
                   <span className={`ev-home-card-badge${s.badgeMobileOnly ? ' ev-home-card-badge-mobile' : ''}`}>
                     {t({ bn: s.badgeBn, en: s.badgeEn })}
@@ -652,10 +674,10 @@ export default function HomePage() {
                 </span>
                 <h2>{t({ bn: s.titleBn, en: s.titleEn })}</h2>
                 <p>{t({ bn: s.descBn, en: s.descEn })}</p>
-                <Link to={s.to} className="ev-btn ev-home-card-cta">
+                <span className="ev-btn ev-home-card-cta">
                   {t({ bn: s.ctaBn, en: s.ctaEn })}
-                </Link>
-              </article>
+                </span>
+              </Link>
             ))}
           </div>
         </section>
@@ -897,7 +919,7 @@ export default function HomePage() {
                 <p style={{ color: 'var(--muted-ivory)', margin: '6px 0 12px', fontSize: 14, lineHeight: 1.7 }}>
                   {t({ bn: 'লগইন করলে আপনার পড়াশোনার অগ্রগতি এখানে দেখা যাবে।', en: 'Log in to see your study progress here.' })}
                 </p>
-                <Link to="/login" className="ev-btn ev-btn-primary ev-btn-sm">
+                <Link to="/login" state={back} className="ev-btn ev-btn-primary ev-btn-sm">
                   {t({ bn: 'লগইন করুন', en: 'Log in' })}
                 </Link>
               </div>

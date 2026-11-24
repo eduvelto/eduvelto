@@ -26,7 +26,8 @@
 // LANGUAGE: all UI text is Bangla (one-language rule).
 
 import { useEffect, useRef, useState } from 'react';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams, useLocation } from 'react-router-dom';
+import { loginState } from '../lib/loginReturn';
 import { PageShell } from '../components/PageShell';
 import { AlertBox, Button, Card, Chip, ProgressBar, Skeleton } from '../components/ui';
 import { useAuth } from '../lib/auth';
@@ -68,6 +69,9 @@ function formatRemaining(ms: number): string {
 
 export default function JobMockPage() {
   const { mockId = '' } = useParams<{ mockId: string }>();
+  const location = useLocation();
+  // Sections audit (24 Nov 2026): return here after sign-in.
+  const back = loginState(location.pathname + location.search);
   const { user } = useAuth();
   const navigate = useNavigate();
 
@@ -339,7 +343,7 @@ export default function JobMockPage() {
           <p style={{ margin: '8px 0 12px', color: MUTED, fontSize: 14, lineHeight: 1.7 }}>
             মক টেস্ট শুধু লগইন করা শিক্ষার্থীদের জন্য — আপনার উত্তর ও সময় সংরক্ষিত হয়।
           </p>
-          <Link to="/login" style={{ fontWeight: 600 }}>লগইন করুন →</Link>
+          <Link to="/login" state={back} style={{ fontWeight: 600 }}>লগইন করুন →</Link>
         </Card>
       </PageShell>
     );

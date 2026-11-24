@@ -14,7 +14,8 @@
 // only — never on Practice, Tests, Results, or during an exam.
 
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
+import { loginState } from '../lib/loginReturn';
 import { Button, Card, Chip, LinkButton, ProgressBar, SkeletonCards } from '../components/ui';
 import { EmptyState } from '../components/PageShell';
 import AdSlot from '../components/AdSlot';
@@ -73,6 +74,9 @@ function attemptDate(a: QuizAttempt): Date | null {
 
 function SignInPrompt({ what }: { what: { bn: string; en: string } }) {
   const { t } = useLanguage();
+  const location = useLocation();
+  // Sections audit (24 Nov 2026): return here after sign-in.
+  const back = loginState(location.pathname + location.search);
   return (
     <Card>
       <div style={{ fontWeight: 700, color: 'var(--heading)', marginBottom: 6 }}>{t({ bn: 'লগইন করুন', en: 'Log in' })}</div>
@@ -80,10 +84,10 @@ function SignInPrompt({ what }: { what: { bn: string; en: string } }) {
         {t({ bn: `${t(what)} দেখতে লগইন করুন — আপনার তথ্য শুধু আপনিই দেখতে পাবেন।`, en: `Log in to see ${t(what)} — only you can see your information.` })}
       </p>
       <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
-        <LinkButton to="/login" variant="primary">
+        <LinkButton to="/login" state={back} variant="primary">
           {t({ bn: 'লগইন', en: 'Log in' })}
         </LinkButton>
-        <LinkButton to="/register" variant="outline">
+        <LinkButton to="/register" state={back} variant="outline">
           {t({ bn: 'ফ্রি রেজিস্টার', en: 'Register free' })}
         </LinkButton>
       </div>

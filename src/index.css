@@ -1908,6 +1908,10 @@ a:hover {
   border-radius: 16px;
   padding: 20px 18px;
   box-shadow: 0 4px 12px rgba(13, 30, 41, 0.08), 0 2px 4px rgba(13, 30, 41, 0.05);
+  /* Sections audit (24 Nov 2026): the whole card is a <Link> now, so it
+     must not look like body text — no underline, inherit the ink color. */
+  text-decoration: none;
+  color: inherit;
 }
 .ev-home-card-job {
   background: var(--home-tint-green);

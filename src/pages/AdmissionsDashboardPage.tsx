@@ -12,7 +12,8 @@
 // exists yet. It links to what DOES exist today (the NU hub, the
 // profile). It never shows a fake streak, score or rank.
 
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
+import { loginState } from '../lib/loginReturn';
 import { PageShell, EmptyState } from '../components/PageShell';
 import { Card, LinkButton } from '../components/ui';
 import { useLanguage } from '../i18n/LanguageContext';
@@ -41,6 +42,9 @@ const PLANNED_ITEMS: { bn: string; en: string }[] = [
 
 export default function AdmissionsDashboardPage() {
   const { t } = useLanguage();
+  const location = useLocation();
+  // Sections audit (24 Nov 2026): return here after sign-in.
+  const back = loginState(location.pathname + location.search);
   const { user, profile } = useAuth();
   return (
     <PageShell titleBn="আমার ভর্তি ড্যাশবোর্ড" titleEn="My Admission Dashboard" wide hideHomeLink>
@@ -56,7 +60,7 @@ export default function AdmissionsDashboardPage() {
             en="Sign in to see your admission dashboard."
           />
           <p style={{ marginTop: 12 }}>
-            <LinkButton to="/login" variant="primary">
+            <LinkButton to="/login" state={back} variant="primary">
               {t({ bn: 'লগইন করুন', en: 'Sign in' })}
             </LinkButton>
           </p>

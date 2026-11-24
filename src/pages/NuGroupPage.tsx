@@ -18,7 +18,8 @@
 // (profile: admissionTargetInstitution + admissionTargetGroup);
 // switching the target never deletes progress.
 
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
+import { loginState } from '../lib/loginReturn';
 import { useState } from 'react';
 import { PageShell } from '../components/PageShell';
 import { Card, LinkButton } from '../components/ui';
@@ -30,6 +31,9 @@ import { nuSubjectRoute } from '../lib/nuSyllabus';
 
 export default function NuGroupPage(props: { group: NuGroupSlug }) {
   const { t } = useLanguage();
+  const location = useLocation();
+  // Sections audit (24 Nov 2026): return here after sign-in.
+  const back = loginState(location.pathname + location.search);
   const { user, profile, saveProfile } = useAuth();
   const [busy, setBusy] = useState(false);
   const [saved, setSaved] = useState(false);
@@ -107,7 +111,7 @@ export default function NuGroupPage(props: { group: NuGroupSlug }) {
         </p>
       ) : (
         <p style={{ marginTop: 0 }}>
-          <LinkButton to="/login" variant="primary">
+          <LinkButton to="/login" state={back} variant="primary">
             {t({ bn: 'লগইন করুন', en: 'Sign in' })}
           </LinkButton>{' '}
           <span style={{ color: 'var(--muted-ivory)', fontSize: 14 }}>

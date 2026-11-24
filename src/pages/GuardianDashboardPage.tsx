@@ -9,6 +9,8 @@
 // keeps in sync when their class changes). When the child changes
 // class, the link snapshot updates and this dashboard updates with it.
 import { useEffect, useState, type FormEvent } from 'react';
+import { useLocation } from 'react-router-dom';
+import { loginState } from '../lib/loginReturn';
 import { db } from '../firebase';
 import { PageShell, EmptyState } from '../components/PageShell';
 import { AlertBox, Button, Card, Chip, LinkButton, ProgressBar, Skeleton, SkeletonCards, StatCard } from '../components/ui';
@@ -69,6 +71,9 @@ function childProfileFromLink(link: ParentLink): UserProfile {
 
 export default function GuardianDashboardPage() {
   const { user, profile, loading } = useAuth();
+  const location = useLocation();
+  // Sections audit (24 Nov 2026): return here after sign-in.
+  const back = loginState(location.pathname + location.search);
   const { t } = useLanguage();
   const d = strings.dashboard;
   const [links, setLinks] = useState<ParentLink[] | null>(null);
@@ -175,7 +180,7 @@ export default function GuardianDashboardPage() {
       <PageShell titleBn={d.guardianTitle.bn} titleEn={d.guardianTitle.en}>
         <p>{t(strings.profile.notSignedIn)}</p>
         <p>
-          <LinkButton to="/login" variant="outline">{t(strings.auth.loginTitle)}</LinkButton>
+          <LinkButton to="/login" state={back} variant="outline">{t(strings.auth.loginTitle)}</LinkButton>
         </p>
       </PageShell>
     );

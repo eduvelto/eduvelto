@@ -9,7 +9,8 @@
 // LANGUAGE: all UI text is Bangla (one-language rule).
 
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
+import { loginState } from '../lib/loginReturn';
 import { Card, LinkButton, Reveal } from './ui';
 import { useAuth } from '../lib/auth';
 import { listPublishedPracticeBundles, type PracticeBundleWithId } from '../lib/jobPractice';
@@ -17,6 +18,9 @@ import type { JobExamDef } from '../lib/jobExams';
 
 export default function JobPracticeTab({ def }: { def: JobExamDef }) {
   const { user } = useAuth();
+  const location = useLocation();
+  // Sections audit (24 Nov 2026): return here after sign-in.
+  const back = loginState(location.pathname + location.search);
   const [loading, setLoading] = useState(true);
   const [bundles, setBundles] = useState<PracticeBundleWithId[]>([]);
 
@@ -61,7 +65,7 @@ export default function JobPracticeTab({ def }: { def: JobExamDef }) {
           </p>
           {!user ? (
             <p style={{ margin: 0 }}>
-              <Link to="/login" style={{ fontWeight: 600 }}>
+              <Link to="/login" state={back} style={{ fontWeight: 600 }}>
                 লগইন করুন →
               </Link>
             </p>

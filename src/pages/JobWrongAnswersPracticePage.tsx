@@ -35,6 +35,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
+import { loginState } from '../lib/loginReturn';
 import { PageShell } from '../components/PageShell';
 import { AlertBox, Button, Card, Chip, ProgressBar, Skeleton } from '../components/ui';
 import { useAuth } from '../lib/auth';
@@ -83,6 +84,8 @@ export default function JobWrongAnswersPracticePage() {
   const { t } = useLanguage();
   const navigate = useNavigate();
   const location = useLocation();
+  // Sections audit (24 Nov 2026): return here after sign-in.
+  const back = loginState(location.pathname + location.search);
   const stateQuestionIds = (location.state as { questionIds?: string[] } | null)?.questionIds;
 
   const [phase, setPhase] = useState<Phase>('loading');
@@ -291,7 +294,7 @@ export default function JobWrongAnswersPracticePage() {
           <p style={{ margin: '8px 0 12px', color: 'var(--muted)', fontSize: 14, lineHeight: 1.7 }}>
             অনুশীলন শুধু লগইন করা শিক্ষার্থীদের জন্য — আপনার উত্তর ও অগ্রগতি সংরক্ষিত হয়।
           </p>
-          <Link to="/login" style={{ fontWeight: 600 }}>লগইন করুন →</Link>
+          <Link to="/login" state={back} style={{ fontWeight: 600 }}>লগইন করুন →</Link>
         </Card>
       </PageShell>
     );

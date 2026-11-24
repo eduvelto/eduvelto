@@ -16,7 +16,8 @@
 // the result-ready item never carries a score.
 
 import { useEffect, useMemo, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
+import { loginState } from '../lib/loginReturn';
 import { PageShell } from '../components/PageShell';
 import { AlertBox, Button, Card, Chip, LinkButton, Skeleton } from '../components/ui';
 import { useAuth } from '../lib/auth';
@@ -51,6 +52,9 @@ const CATEGORY_FILTERS: Array<{ key: JobNotificationKind | null; bn: string; en:
 
 export default function JobNotificationsPage() {
   const { user, profile, loading } = useAuth();
+  const location = useLocation();
+  // Sections audit (24 Nov 2026): return here after sign-in.
+  const back = loginState(location.pathname + location.search);
   const { t, lang } = useLanguage();
   const [items, setItems] = useState<JobNotificationItem[] | null>(null);
   const [dataError, setDataError] = useState(false);
@@ -141,7 +145,7 @@ export default function JobNotificationsPage() {
               en: 'Sign in to see notifications — deadline reminders for your exams, new mocks and results appear here.',
             })}
           </p>
-          <LinkButton to="/login">{t({ bn: 'লগইন করুন →', en: 'Sign in →' })}</LinkButton>
+          <LinkButton to="/login" state={back}>{t({ bn: 'লগইন করুন →', en: 'Sign in →' })}</LinkButton>
         </Card>
         <p style={{ marginTop: 16 }}>
           <LinkButton to="/jobs/circulars" variant="outline">

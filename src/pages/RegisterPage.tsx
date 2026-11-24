@@ -9,10 +9,11 @@
 // dashboard, and guardian links need child confirmation + Admin
 // activation.
 import { useEffect, useState, type FormEvent } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { PageShell } from '../components/PageShell';
 import { strings } from '../i18n/strings';
 import { isRoleSetupHoldStored, useAuth } from '../lib/auth';
+import { getReturnTo } from '../lib/loginReturn';
 import { isFirebaseConfigured } from '../firebase';
 import type { EducationType, ProfileEdit } from '../lib/profile';
 import { T, useLanguage } from '../i18n/LanguageContext';
@@ -51,6 +52,12 @@ const buttonStyle: React.CSSProperties = {
 export default function RegisterPage() {
   const { signUp, user, error, errorCode, loading } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
+  // Sections audit (24 Nov 2026): after registration, return to the
+  // page the user came from (the login wall passes it as state { from }
+  // or ?next=). Teachers still go to /teacher/register first — their
+  // verification application is a required next step.
+  const returnTo = getReturnTo(location);
   const [displayName, setDisplayName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -77,9 +84,10 @@ export default function RegisterPage() {
   // Role-setup hold (legacy, from the removed Google sign-in): if a hold
   // is stored, send the user to /register/role to choose their role
   // instead of showing "already signed in". No new hold is ever set now.
+  // The return destination travels along in state.
   useEffect(() => {
-    if (user && isRoleSetupHoldStored()) navigate('/register/role');
-  }, [user, navigate]);
+    if (user && isRoleSetupHoldStored()) navigate('/register/role', { state: { from: returnTo } });
+  }, [user, navigate, returnTo]);
 
   if (!isFirebaseConfigured) {
     return (
@@ -150,7 +158,7 @@ export default function RegisterPage() {
       await signUp(displayName.trim(), email, password, { role, fields });
       // Teachers still file their verification application next — the
       // account is created as 'pending', never 'verified'.
-      navigate(role === 'teacher' ? '/teacher/register' : '/dashboard');
+      navigate(role === 'teacher' ? '/teacher/register' : (returnTo ?? '/dashboard'));
     } catch {
       // The friendly message is already in `error` from the AuthProvider.
     } finally {

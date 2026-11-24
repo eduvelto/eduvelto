@@ -26,7 +26,8 @@
 // (design plan §1.4).
 
 import { useEffect, useState } from 'react';
-import { Link, Navigate, useParams } from 'react-router-dom';
+import { Link, Navigate, useParams, useLocation } from 'react-router-dom';
+import { loginState } from '../lib/loginReturn';
 import { PageShell, EmptyState } from '../components/PageShell';
 import { Card, LinkButton, Reveal } from '../components/ui';
 import { JobNonAffiliationNote } from '../components/JobCards';
@@ -180,6 +181,9 @@ function JobSubjectsTab({ def }: { def: JobExamDef }) {
  * have taken none. Signed-out visitors get the login prompt. */
 function JobHubResultsTab({ def }: { def: JobExamDef }) {
   const { user } = useAuth();
+  const location = useLocation();
+  // Sections audit (24 Nov 2026): return here after sign-in.
+  const back = loginState(location.pathname + location.search);
   const [attempts, setAttempts] = useState<MockAttemptWithId[] | null>(null);
   useEffect(() => {
     if (!user) {
@@ -208,7 +212,7 @@ function JobHubResultsTab({ def }: { def: JobExamDef }) {
             ফলাফল শুধু লগইন করা শিক্ষার্থীরা দেখতে পারে।
           </p>
           <p style={{ margin: 0 }}>
-            <Link to="/login" style={{ fontWeight: 600 }}>
+            <Link to="/login" state={back} style={{ fontWeight: 600 }}>
               লগইন করুন →
             </Link>
           </p>
@@ -271,6 +275,9 @@ export default function JobHubPage() {
   const { t } = useLanguage();
   const { mode } = useJobMode();
   const { user } = useAuth();
+  const location = useLocation();
+  // Sections audit (24 Nov 2026): return here after sign-in.
+  const back = loginState(location.pathname + location.search);
   const { exam = '', tab } = useParams<{ exam: string; tab?: string }>();
   const def = jobExamBySlug(exam);
   // Unknown exam slug: the honest "not found" card below must not be
@@ -624,7 +631,7 @@ export default function JobHubPage() {
                     bn: 'সময়ভিত্তিক মক ও মডেল টেস্ট দিতে লগইন করতে হবে — ',
                     en: 'You need to sign in to take timed mocks and model tests — ',
                   })}
-                  <Link to="/login" style={{ fontWeight: 600 }}>
+                  <Link to="/login" state={back} style={{ fontWeight: 600 }}>
                     {t({ bn: 'লগইন করুন →', en: 'Sign in →' })}
                   </Link>
                 </p>

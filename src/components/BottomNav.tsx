@@ -15,6 +15,7 @@
 
 import { useEffect, useState } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
+import { loginState } from '../lib/loginReturn';
 import { useAuth } from '../lib/auth';
 import { useLanguage } from '../i18n/LanguageContext';
 
@@ -109,6 +110,8 @@ export default function BottomNav(props: { bottomOffsetPx: number }) {
   const { t, tTab } = useLanguage();
   const { user, profile, signOut } = useAuth();
   const location = useLocation();
+  // Sections audit (24 Nov 2026): return here after sign-in.
+  const back = loginState(location.pathname + location.search);
   const [sheet, setSheet] = useState<Sheet>(null);
 
   useEffect(() => {
@@ -202,10 +205,10 @@ export default function BottomNav(props: { bottomOffsetPx: number }) {
                     </>
                   ) : (
                     <>
-                      <Link to="/login" className="ev-btn ev-btn-primary ev-btn-sm">
+                      <Link to="/login" state={back} className="ev-btn ev-btn-primary ev-btn-sm">
                         {t({ bn: 'লগইন', en: 'Log in' })}
                       </Link>
-                      <Link to="/register" className="ev-btn ev-btn-sm">
+                      <Link to="/register" state={back} className="ev-btn ev-btn-sm">
                         {t({ bn: 'রেজিস্টার', en: 'Register' })}
                       </Link>
                     </>

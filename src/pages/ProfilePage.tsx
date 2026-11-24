@@ -18,7 +18,8 @@
 // isActive stay out. Daily goals default to null (undecided) — never a
 // fake default (Step 3 §12.3 item 5).
 import { useEffect, useState, type FormEvent } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
+import { loginState } from '../lib/loginReturn';
 import { PageShell } from '../components/PageShell';
 import JobModeSwitch from '../components/JobModeSwitch';
 import AppUpdateSection from '../components/AppUpdateSection';
@@ -79,6 +80,9 @@ const EDUCATION_TYPES: { value: EducationType | ''; bn: string; en: string }[] =
 
 export default function ProfilePage() {
   const { user, profile, loading, suspended, error, saveProfile, signOut } = useAuth();
+  const location = useLocation();
+  // Sections audit (24 Nov 2026): return here after sign-in.
+  const back = loginState(location.pathname + location.search);
   const [displayName, setDisplayName] = useState('');
   const [language, setLanguage] = useState<'bn' | 'en'>('bn');
   const [educationType, setEducationType] = useState<EducationType | ''>('');
@@ -220,8 +224,8 @@ export default function ProfilePage() {
       <PageShell titleBn="প্রোফাইল" titleEn="Profile">
         <p>{t(p.notSignedIn)}</p>
         <p>
-          <Link to="/login">{t(strings.auth.loginTitle)}</Link> ·{' '}
-          <Link to="/register">{t(strings.auth.registerTitle)}</Link>
+          <Link to="/login" state={back}>{t(strings.auth.loginTitle)}</Link> ·{' '}
+          <Link to="/register" state={back}>{t(strings.auth.registerTitle)}</Link>
         </p>
       </PageShell>
     );
