@@ -114,6 +114,7 @@ export const PUBLIC_GUIDES: PublicGuide[] = [
       { to: '/learn', bn: 'সব পাঠ', en: 'All lessons' },
       { to: '/about', bn: 'Eduvelto সম্পর্কে', en: 'About Eduvelto' },
       { to: '/learn/how-to-use-job-practice', bn: 'চাকরির অনুশীলন ব্যবহার করা', en: 'How to use job practice' },
+      { to: '/learn/bank-job-preparation', bn: 'ব্যাংক চাকরির প্রস্তুতি গাইড', en: 'Bank Job Preparation Guide' },
     ],
   },
   {
@@ -139,6 +140,7 @@ export const PUBLIC_GUIDES: PublicGuide[] = [
       { to: '/learn', bn: 'ইংরেজি পাঠ', en: 'English lessons' },
       { to: '/opportunities', bn: 'সুযোগের তালিকা (নতুন বিজ্ঞপ্তি)', en: 'Opportunity list (new circulars)' },
       { to: '/about', bn: 'Eduvelto সম্পর্কে', en: 'About Eduvelto' },
+      { to: '/learn/bcs-preparation-guide', bn: 'বিসিএস প্রিলিমিনারি প্রস্তুতি গাইড', en: 'BCS Preliminary Preparation Guide' },
     ],
   },
   {
@@ -165,6 +167,9 @@ export const PUBLIC_GUIDES: PublicGuide[] = [
       { to: '/learn', bn: 'ইংরেজি পাঠ', en: 'English lessons' },
       { to: '/opportunities', bn: 'সুযোগের তালিকা (নতুন বিজ্ঞপ্তি)', en: 'Opportunity list (new circulars)' },
       { to: '/about', bn: 'Eduvelto সম্পর্কে', en: 'About Eduvelto' },
+      { to: '/learn/ntrca-preparation', bn: 'NTRCA শিক্ষক নিবন্ধন পরীক্ষার প্রস্তুতি গাইড', en: 'NTRCA Teacher Registration Exam Preparation Guide' },
+      { to: '/learn/bcs-preparation-guide', bn: 'বিসিএস প্রিলিমিনারি প্রস্তুতি গাইড', en: 'BCS Preliminary Preparation Guide' },
+      { to: '/learn/bank-job-preparation', bn: 'ব্যাংক চাকরির প্রস্তুতি গাইড', en: 'Bank Job Preparation Guide' },
     ],
   },
   {
@@ -192,6 +197,7 @@ export const PUBLIC_GUIDES: PublicGuide[] = [
       { to: '/learn', bn: 'ইংরেজি পাঠ', en: 'English lessons' },
       { to: '/opportunities', bn: 'সুযোগের তালিকা (নতুন বিজ্ঞপ্তি)', en: 'Opportunity list (new circulars)' },
       { to: '/about', bn: 'Eduvelto সম্পর্কে', en: 'About Eduvelto' },
+      { to: '/learn/primary-teacher-preparation', bn: 'প্রাথমিক সহকারী শিক্ষক নিয়োগ প্রস্তুতি গাইড', en: 'Primary Assistant Teacher Recruitment Preparation Guide' },
     ],
   },
   {
@@ -221,6 +227,7 @@ export const PUBLIC_GUIDES: PublicGuide[] = [
       { to: '/about', bn: 'Eduvelto সম্পর্কে', en: 'About Eduvelto' },
       { to: '/contact', bn: 'যোগাযোগ', en: 'Contact' },
       { to: '/learn/how-to-use-free-library', bn: 'ফ্রি লাইব্রেরি ব্যবহার করা', en: 'How to use the free library' },
+      { to: '/learn/scholarship-guide', bn: 'বৃত্তি (স্কলারশিপ) গাইড', en: 'Scholarship Guide' },
     ],
   },
   {
@@ -390,6 +397,8 @@ export const PUBLIC_GUIDES: PublicGuide[] = [
       { to: '/learn/english-grammar-basics', bn: 'ইংরেজি ব্যাকরণের মৌলিক বিষয়', en: 'English grammar basics' },
       { to: '/learn', bn: 'সব পাঠ', en: 'All lessons' },
       { to: '/about', bn: 'Eduvelto সম্পর্কে', en: 'About Eduvelto' },
+      { to: '/learn/reading-comprehension-strategies', bn: 'পড়া বুঝে পড়ার কৌশল', en: 'Reading Comprehension Strategies' },
+      { to: '/learn/bangla-spelling-common-mistakes', bn: 'বাংলা বানানের সাধারণ ভুল', en: 'Common Bangla Spelling Mistakes' },
     ],
   },
   {
@@ -417,6 +426,7 @@ export const PUBLIC_GUIDES: PublicGuide[] = [
       { to: '/about', bn: 'Eduvelto সম্পর্কে', en: 'About Eduvelto' },
       { to: '/learn/presentation-skills', bn: 'উপস্থাপনা দক্ষতা', en: 'Presentation skills for students' },
       { to: '/learn/staying-focused-studying', bn: 'পড়ায় মনোযোগ ধরে রাখা', en: 'Staying focused while studying' },
+      { to: '/learn/goal-setting-students', bn: 'শিক্ষার্থীদের লক্ষ্য নির্ধারণ', en: 'Goal Setting for Students' },
     ],
   },
   {
@@ -538,6 +548,7 @@ export const PUBLIC_GUIDES: PublicGuide[] = [
       { to: '/jobs', bn: 'চাকরির প্রস্তুতি', en: 'Job preparation' },
       { to: '/learn', bn: 'সব পাঠ', en: 'All lessons' },
       { to: '/learn/exam-anxiety-management', bn: 'পরীক্ষার উদ্বেগ সামলানো', en: 'Exam anxiety management' },
+      { to: '/learn/sleep-and-study', bn: 'ঘুম ও পড়াশোনা', en: 'Sleep and Study' },
     ],
   },
   {
@@ -661,6 +672,7 @@ export const PUBLIC_GUIDES: PublicGuide[] = [
       { to: '/life', bn: 'লাইফ সার্ভিস', en: 'Life services' },
       { to: '/learn', bn: 'সব পাঠ', en: 'All lessons' },
       { to: '/learn/how-to-use-ai-assistant', bn: 'AI লাইফ অ্যাসিস্ট্যান্ট ব্যবহার করা', en: 'How to use the AI Life Assistant' },
+      { to: '/learn/what-is-ai', bn: 'AI কী? শিক্ষার্থীরা কীভাবে AI ব্যবহার করবে', en: 'What Is AI? How Students Should Use It' },
     ],
   },
   {
@@ -685,6 +697,7 @@ export const PUBLIC_GUIDES: PublicGuide[] = [
       { to: '/learn/study-routine-job-seekers', bn: 'চাকরিপ্রার্থীদের পড়ার রুটিন', en: 'Study routine for job seekers' },
       { to: '/jobs', bn: 'চাকরির প্রস্তুতি', en: 'Job preparation' },
       { to: '/learn', bn: 'সব পাঠ', en: 'All lessons' },
+      { to: '/learn/staying-focused-studying', bn: 'পড়ায় মনোযোগ ধরে রাখা', en: 'Staying Focused While Studying' },
     ],
   },
   {
@@ -708,6 +721,7 @@ export const PUBLIC_GUIDES: PublicGuide[] = [
       { to: '/learn/group-study-guide', bn: 'দলগত পড়াশোনা', en: 'Group study guide' },
       { to: '/learn', bn: 'সব পাঠ', en: 'All lessons' },
       { to: '/about', bn: 'Eduvelto সম্পর্কে', en: 'About Eduvelto' },
+      { to: '/learn/asking-questions-class', bn: 'ক্লাসে প্রশ্ন করা', en: 'Asking Questions in Class' },
     ],
   },
   {
@@ -830,6 +844,7 @@ export const PUBLIC_GUIDES: PublicGuide[] = [
       { to: '/learn/effective-reading-habits', bn: 'কার্যকর পড়ার অভ্যাস', en: 'Effective reading habits' },
       { to: '/learn/time-management-students', bn: 'শিক্ষার্থীদের সময় ব্যবস্থাপনা', en: 'Time management for students' },
       { to: '/learn', bn: 'সব পাঠ', en: 'All lessons' },
+      { to: '/learn/reading-comprehension-strategies', bn: 'পড়া বুঝে পড়ার কৌশল', en: 'Reading Comprehension Strategies' },
     ],
   },
   {
@@ -855,6 +870,10 @@ export const PUBLIC_GUIDES: PublicGuide[] = [
       { to: '/learn/mcq-answering-techniques', bn: 'MCQ উত্তর দেওয়ার কৌশল', en: 'MCQ answering techniques' },
       { to: '/learn/exam-day-strategy', bn: 'পরীক্ষার দিনের কৌশল', en: 'Exam day strategy' },
       { to: '/learn', bn: 'সব পাঠ', en: 'All lessons' },
+      { to: '/learn/bcs-preparation-guide', bn: 'বিসিএস প্রিলিমিনারি প্রস্তুতি গাইড', en: 'BCS Preliminary Preparation Guide' },
+      { to: '/learn/bank-job-preparation', bn: 'ব্যাংক চাকরির প্রস্তুতি গাইড', en: 'Bank Job Preparation Guide' },
+      { to: '/learn/primary-teacher-preparation', bn: 'প্রাথমিক সহকারী শিক্ষক নিয়োগ প্রস্তুতি গাইড', en: 'Primary Assistant Teacher Recruitment Preparation Guide' },
+      { to: '/learn/ntrca-preparation', bn: 'NTRCA শিক্ষক নিবন্ধন পরীক্ষার প্রস্তুতি গাইড', en: 'NTRCA Teacher Registration Exam Preparation Guide' },
     ],
   },
   {
@@ -880,6 +899,8 @@ export const PUBLIC_GUIDES: PublicGuide[] = [
       { to: '/life/budget', bn: 'বাজেট পরিকল্পনা', en: 'Budget planner' },
       { to: '/learn/english-vocabulary-building', bn: 'ইংরেজি শব্দভান্ডার গড়া', en: 'English vocabulary building' },
       { to: '/learn', bn: 'সব পাঠ', en: 'All lessons' },
+      { to: '/learn/what-is-ai', bn: 'AI কী? শিক্ষার্থীরা কীভাবে AI ব্যবহার করবে', en: 'What Is AI? How Students Should Use It' },
+      { to: '/learn/cv-writing-guide', bn: 'CV লেখার গাইড', en: 'CV Writing Guide' },
     ],
   },
   {
@@ -905,6 +926,7 @@ export const PUBLIC_GUIDES: PublicGuide[] = [
       { to: '/opportunities/interview-prep', bn: 'সাক্ষাৎকারের প্রস্তুতি', en: 'Interview preparation' },
       { to: '/opportunities/career-guidance', bn: 'পেশা নির্দেশনা', en: 'Career guidance' },
       { to: '/learn/cv-writing-guide', bn: 'CV লেখার গাইড', en: 'CV writing guide' },
+      { to: '/learn/scholarship-guide', bn: 'বৃত্তি (স্কলারশিপ) গাইড', en: 'Scholarship Guide' },
     ],
   },
   {
@@ -931,6 +953,8 @@ export const PUBLIC_GUIDES: PublicGuide[] = [
       { to: '/life/converters', bn: 'রূপান্তর', en: 'Converters' },
       { to: '/life/planner', bn: 'দিনের পরিকল্পনা', en: 'Day planner' },
       { to: '/life/health', bn: 'স্বাস্থ্য তথ্য', en: 'Health information' },
+      { to: '/learn/budget-planner-guide', bn: 'শিক্ষার্থী হিসেবে মাসিক বাজেট পরিকল্পনা', en: 'Monthly Budget Planning for Students' },
+      { to: '/learn/healthy-habits-students', bn: 'শিক্ষার্থীদের সুস্থ অভ্যাস', en: 'Healthy Habits for Students' },
     ],
   },
   {
@@ -956,6 +980,7 @@ export const PUBLIC_GUIDES: PublicGuide[] = [
       { to: '/learn/english-grammar-basics', bn: 'ইংরেজি ব্যাকরণের মৌলিক বিষয়', en: 'English grammar basics' },
       { to: '/learn/presentation-skills', bn: 'উপস্থাপনা দক্ষতা', en: 'Presentation skills for students' },
       { to: '/learn', bn: 'সব পাঠ', en: 'All lessons' },
+      { to: '/learn/how-to-use-ai-assistant', bn: 'AI লাইফ অ্যাসিস্ট্যান্ট ব্যবহার করা', en: 'How to Use the AI Life Assistant' },
     ],
   },
   {
@@ -1005,6 +1030,7 @@ export const PUBLIC_GUIDES: PublicGuide[] = [
       { to: '/learn/learning-with-phone', bn: 'ফোন দিয়ে পড়াশোনা', en: 'Learning with Your Phone' },
       { to: '/life/planner', bn: 'দিনের পরিকল্পনা', en: 'Day planner' },
       { to: '/learn', bn: 'সব পাঠ', en: 'All lessons' },
+      { to: '/learn/goal-setting-students', bn: 'শিক্ষার্থীদের লক্ষ্য নির্ধারণ', en: 'Goal Setting for Students' },
     ],
   },
   {
@@ -1080,6 +1106,7 @@ export const PUBLIC_GUIDES: PublicGuide[] = [
       { to: '/learn/time-management-students', bn: 'শিক্ষার্থীদের সময় ব্যবস্থাপনা', en: 'Time Management for Students' },
       { to: '/learn/how-to-use-free-library', bn: 'ফ্রি লাইব্রেরি ব্যবহার করা', en: 'How to Use the Free Library' },
       { to: '/learn', bn: 'সব পাঠ', en: 'All lessons' },
+      { to: '/learn/digital-skills-basics', bn: 'ডিজিটাল দক্ষতার মৌলিক ধারণা', en: 'Digital Skills Basics for Students' },
     ],
   },
   {
