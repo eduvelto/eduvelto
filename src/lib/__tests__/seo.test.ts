@@ -465,6 +465,26 @@ describe('resolveRouteSeo — public routes', () => {
     expect(uncovered).toEqual([]);
   });
 
+  it('WEB-001: /jobs/primary 301-redirects to /jobs/primary-teacher in firebase.json (24 Nov 2026)', () => {
+    // /jobs/primary is the plausible shorthand for the Primary teacher
+    // section, but the exam key is "primary-teacher" — JobHubPage renders
+    // NotFound for :exam=primary (soft 404, HTTP 200). A hosting-level
+    // 301 is the fix: crawlers and users land on the real page.
+    const raw = readFileSync(
+      fileURLToPath(new URL('../../../firebase.json', import.meta.url)),
+      'utf8',
+    );
+    const redirects = (JSON.parse(raw).hosting.redirects ?? []) as {
+      source: string;
+      destination: string;
+      type: number;
+    }[];
+    const hit = redirects.find((r) => r.source === '/jobs/primary');
+    expect(hit).toBeDefined();
+    expect(hit!.destination).toBe('/jobs/primary-teacher');
+    expect(hit!.type).toBe(301);
+  });
+
   it('job hub tabs resolve with Bangla tab names, unknown tabs fall back', () => {
     const mocks = resolveRouteSeo('/jobs/bcs/mocks');
     expect(mocks).not.toBeNull();

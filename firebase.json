@@ -72,6 +72,18 @@
       "**/node_modules/**"
     ],
     "public": "dist",
+    "redirects": [
+      {
+        "source": "/jobs/primary",
+        "destination": "/jobs/primary-teacher",
+        "type": 301
+      },
+      {
+        "source": "/jobs/primary/",
+        "destination": "/jobs/primary-teacher",
+        "type": 301
+      }
+    ],
     "rewrites": [
       {
         "destination": "/index.html",
