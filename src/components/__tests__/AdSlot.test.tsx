@@ -7,11 +7,17 @@
 // labelled preview placeholder, and that production renders NOTHING
 // while the master switch is off. The window hostname is swapped per
 // scenario with a fresh module import (the component reads it at render
-// time).
+// time). The slot follows the selected language (24 Nov 2026 language
+// system), so renders are wrapped in LanguageProvider with a faked
+// window (same pattern as LanguageContext.test.tsx).
 import { describe, expect, it, vi } from 'vitest';
 import { renderToString } from 'react-dom/server';
 import React from 'react';
 import type { AdPlacement } from '../../lib/ads';
+
+vi.mock('../../lib/auth', () => ({
+  useAuth: () => ({ user: null, profile: null, saveProfile: vi.fn(() => Promise.resolve()) }),
+}));
 
 const PREVIEW_HOST = 'eduvelto--ads-placements-abc123.web.app';
 const PRODUCTION_HOST = 'eduvelto.web.app';
@@ -19,17 +25,37 @@ const PRODUCTION_HOST = 'eduvelto.web.app';
 async function renderSlot(
   hostname: string,
   placement: AdPlacement,
+  opts: { stored?: string | null } = {},
 ): Promise<string> {
+  const store: Record<string, string> = {};
+  if (opts.stored) store['eduvelto-language'] = opts.stored;
   (globalThis as unknown as { window: unknown }).window = {
-    location: { hostname },
+    location: { hostname, search: '', href: `https://${hostname}/` },
+    localStorage: {
+      getItem: (k: string) => store[k] ?? null,
+      setItem: (k: string, v: string) => {
+        store[k] = v;
+      },
+    },
+    history: { replaceState: () => {} },
+  };
+  (globalThis as unknown as { document: unknown }).document = {
+    documentElement: { lang: '' },
   };
   vi.resetModules();
-  const mod = await import('../AdSlot');
-  const AdSlot = mod.default;
+  const [slotMod, ctxMod] = await Promise.all([
+    import('../AdSlot'),
+    import('../../i18n/LanguageContext'),
+  ]);
+  const AdSlot = slotMod.default;
+  const { LanguageProvider } = ctxMod;
   try {
-    return renderToString(React.createElement(AdSlot, { placement }));
+    return renderToString(
+      React.createElement(LanguageProvider, null, React.createElement(AdSlot, { placement })),
+    );
   } finally {
     delete (globalThis as unknown as { window?: unknown }).window;
+    delete (globalThis as unknown as { document?: unknown }).document;
   }
 }
 
@@ -72,6 +98,14 @@ describe('AdSlot rendered HTML', () => {
     expect(html).toContain('ইন-কনটেন্ট ২');
     expect(html).toContain('৩০০×২৫০');
     expect(html).not.toContain('adsbygoogle');
+  });
+
+  it('placeholder labels follow the selected language (English)', async () => {
+    const html = await renderSlot(PREVIEW_HOST, 'top-banner', { stored: 'en' });
+    expect(html).toContain('Ad space');
+    expect(html).toContain('Top banner');
+    expect(html).toContain('728×90');
+    expect(html).not.toContain('বিজ্ঞাপনের স্থান');
   });
 
   it('renders NOTHING on the production host while the master switch is off', async () => {

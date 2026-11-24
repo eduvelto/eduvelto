@@ -21,6 +21,7 @@ import {
   fetchAppVersionConfig,
   type AppVersionConfig,
 } from '../lib/appVersion';
+import { useLanguage } from '../i18n/LanguageContext';
 import { LinkButton } from './ui';
 import { isNativeApp } from '../lib/isNativeApp';
 
@@ -33,6 +34,7 @@ const sectionStyle: CSSProperties = {
 };
 
 export default function AppUpdateSection() {
+  const { t } = useLanguage();
   const [config, setConfig] = useState<AppVersionConfig | null>(null);
   const [failed, setFailed] = useState(false);
   // Inside the Capacitor app the web version config is not the app's
@@ -80,38 +82,38 @@ export default function AppUpdateSection() {
   const status = checkAppVersion(config, APP_VERSION);
 
   return (
-    <section aria-label="অ্যাপ আপডেট" style={sectionStyle}>
-      <h2 style={{ fontSize: 20, margin: '0 0 8px' }}>অ্যাপ আপডেট</h2>
+    <section aria-label={t({ bn: 'অ্যাপ আপডেট', en: 'App update' })} style={sectionStyle}>
+      <h2 style={{ fontSize: 20, margin: '0 0 8px' }}>{t({ bn: 'অ্যাপ আপডেট', en: 'App update' })}</h2>
       <p style={{ margin: '0 0 4px', lineHeight: 1.7 }}>
-        আপনার ভার্সন: <strong>v{APP_VERSION}</strong>
+        {t({ bn: 'আপনার ভার্সন:', en: 'Your version:' })} <strong>v{APP_VERSION}</strong>
         {config ? (
           <>
-            {' · '}সর্বশেষ ভার্সন: <strong>v{config.latestVersion}</strong>
+            {' · '}{t({ bn: 'সর্বশেষ ভার্সন:', en: 'Latest version:' })} <strong>v{config.latestVersion}</strong>
           </>
         ) : null}
       </p>
       {failed ? (
         <p style={{ margin: '0 0 8px', color: '#57616A' }}>
-          সর্বশেষ ভার্সনের তথ্য এখন আনা যায়নি (অফলাইন হতে পারে) — পরে আবার দেখুন।
+          {t({ bn: 'সর্বশেষ ভার্সনের তথ্য এখন আনা যায়নি (অফলাইন হতে পারে) — পরে আবার দেখুন।', en: 'The latest version info could not be loaded right now (you may be offline) — check again later.' })}
         </p>
       ) : !config ? (
-        <p style={{ margin: '0 0 8px', color: '#57616A' }}>সর্বশেষ ভার্সনের তথ্য আনা হচ্ছে…</p>
+        <p style={{ margin: '0 0 8px', color: '#57616A' }}>{t({ bn: 'সর্বশেষ ভার্সনের তথ্য আনা হচ্ছে…', en: 'Loading the latest version info…' })}</p>
       ) : status === 'blocked' ? (
         <p style={{ margin: '0 0 8px', color: '#b00020', fontWeight: 700 }}>
-          আপনার ভার্সনটি আর ব্যবহার করা যাবে না — নতুন ভার্সন ডাউনলোড করুন।
+          {t({ bn: 'আপনার ভার্সনটি আর ব্যবহার করা যাবে না — নতুন ভার্সন ডাউনলোড করুন।', en: 'This version can no longer be used — download the new version.' })}
         </p>
       ) : status === 'update-available' ? (
         <p style={{ margin: '0 0 8px' }}>
-          নতুন ভার্সন এসেছে (v{config.latestVersion}) — আপডেট করুন।
+          {t({ bn: `নতুন ভার্সন এসেছে (v${config.latestVersion}) — আপডেট করুন।`, en: `A new version is available (v${config.latestVersion}) — update now.` })}
           {config.releaseNotes ? <span style={{ display: 'block' }}>{config.releaseNotes}</span> : null}
         </p>
       ) : (
-        <p style={{ margin: '0 0 8px' }}>আপনি সর্বশেষ ভার্সনটি ব্যবহার করছেন।</p>
+        <p style={{ margin: '0 0 8px' }}>{t({ bn: 'আপনি সর্বশেষ ভার্সনটি ব্যবহার করছেন।', en: 'You are using the latest version.' })}</p>
       )}
-      <LinkButton to="/install">অ্যাপ ডাউনলোড / আপডেট →</LinkButton>
+      <LinkButton to="/install">{t({ bn: 'অ্যাপ ডাউনলোড / আপডেট →', en: 'Download / update the app →' })}</LinkButton>
       <span style={{ display: 'block', marginTop: 8, fontSize: 13, color: '#57616A' }}>
         <Link to="/install" style={{ color: '#57616A' }}>
-          ডাউনলোডের লিংক সবসময় /install পাতায় থাকে।
+          {t({ bn: 'ডাউনলোডের লিংক সবসময় /install পাতায় থাকে।', en: 'The download link is always on the /install page.' })}
         </Link>
       </span>
     </section>

@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import { useLanguage } from '../i18n/LanguageContext';
 import {
   ADSENSE_CLIENT_ID,
   AD_SLOT_IDS,
@@ -16,7 +17,8 @@ import {
 // Three render states (see lib/adsConfig.ts getAdRenderState):
 // - 'ad': master switch ON + real AdSense IDs → the real <ins> unit,
 //   non-personalised ads requested (child safety: PERSONALISED_ADS is
-//   always false). Every real ad carries a plain "বিজ্ঞাপন" label above
+//   always false). Every real ad carries a plain "বিজ্ঞাপন" /
+//   "Advertisement" label above it (follows the selected language).
 //   it — clearly an ad, never styled like a Download / Next / Continue
 //   button. If AdSense reports the unit unfilled (data-ad-status), the
 //   whole slot collapses to nothing (no empty box, no blank strip).
@@ -84,16 +86,16 @@ export function loadAdsenseScript(clientId: string): void {
 }
 
 /** Human-readable size label shown on the preview placeholder only. */
-const PLACEHOLDER_SIZE_LABEL: Record<AdPlacement, string> = {
-  'bottom-banner': 'নিচের ব্যানার · responsive',
-  'bottom-banner-small': 'পরীক্ষার ছোট ব্যানার · সর্বোচ্চ ৫০px',
-  'top-banner': 'উপরের ব্যানার · ৭২৮×৯০',
-  sidebar: 'সাইডবার · ৩০০×২৫০ (ডেস্কটপ)',
-  'in-content': 'ইন-কনটেন্ট · ৩০০×২৫০',
-  'in-content-2': 'ইন-কনটেন্ট ২ · ৩০০×২৫০',
-  'in-feed': 'ইন-ফিড · responsive',
-  'in-feed-2': 'ইন-ফিড ২ · responsive',
-  mobile: 'মোবাইল · ৩২০×৫০',
+const PLACEHOLDER_SIZE_LABEL: Record<AdPlacement, { bn: string; en: string }> = {
+  'bottom-banner': { bn: 'নিচের ব্যানার · responsive', en: 'Bottom banner · responsive' },
+  'bottom-banner-small': { bn: 'পরীক্ষার ছোট ব্যানার · সর্বোচ্চ ৫০px', en: 'Exam small banner · max 50px' },
+  'top-banner': { bn: 'উপরের ব্যানার · ৭২৮×৯০', en: 'Top banner · 728×90' },
+  sidebar: { bn: 'সাইডবার · ৩০০×২৫০ (ডেস্কটপ)', en: 'Sidebar · 300×250 (desktop)' },
+  'in-content': { bn: 'ইন-কনটেন্ট · ৩০০×২৫০', en: 'In-content · 300×250' },
+  'in-content-2': { bn: 'ইন-কনটেন্ট ২ · ৩০০×২৫০', en: 'In-content 2 · 300×250' },
+  'in-feed': { bn: 'ইন-ফিড · responsive', en: 'In-feed · responsive' },
+  'in-feed-2': { bn: 'ইন-ফিড ২ · responsive', en: 'In-feed 2 · responsive' },
+  mobile: { bn: 'মোবাইল · ৩২০×৫০', en: 'Mobile · 320×50' },
 };
 
 /** Plain-text "বিজ্ঞাপন" label above every REAL ad unit. Deliberately
@@ -175,6 +177,7 @@ export default function AdSlot(props: {
   onUnfilled?: (unfilled: boolean) => void;
 }) {
   const { placement } = props;
+  const { t, lang } = useLanguage();
   const pushedRef = useRef(false);
   const insRef = useRef<HTMLElement | null>(null);
   // True once AdSense reports this unit unfilled — the whole slot
@@ -236,7 +239,7 @@ export default function AdSlot(props: {
         data-ad-placement={placement}
         data-ad-preview="placeholder"
         role="complementary"
-        aria-label="বিজ্ঞাপনের স্থান — নমুনা"
+        aria-label={t({ bn: 'বিজ্ঞাপনের স্থান — নমুনা', en: 'Ad space — sample' })}
         style={placeholderStyle(placement)}
       >
         <span
@@ -251,9 +254,9 @@ export default function AdSlot(props: {
             marginRight: 8,
           }}
         >
-          বিজ্ঞাপনের স্থান · নমুনা
+          {t({ bn: 'বিজ্ঞাপনের স্থান · নমুনা', en: 'Ad space · sample' })}
         </span>
-        <span>{PLACEHOLDER_SIZE_LABEL[placement]}</span>
+        <span>{PLACEHOLDER_SIZE_LABEL[placement][lang]}</span>
       </div>
     );
     if (placement === 'sidebar') {
@@ -308,8 +311,8 @@ export default function AdSlot(props: {
   }
 
   return (
-    <div className={wrapperClass} style={wrapperStyle} data-ad-placement={placement} aria-label="বিজ্ঞাপন">
-      <div style={AD_LABEL_STYLE}>বিজ্ঞাপন</div>
+    <div className={wrapperClass} style={wrapperStyle} data-ad-placement={placement} aria-label={t({ bn: 'বিজ্ঞাপন', en: 'Advertisement' })}>
+      <div style={AD_LABEL_STYLE}>{t({ bn: 'বিজ্ঞাপন', en: 'Advertisement' })}</div>
       <ins
         ref={(el) => {
           insRef.current = el;
