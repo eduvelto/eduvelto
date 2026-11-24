@@ -67,13 +67,13 @@ export default function AppUpdateSection() {
   // app" view.
   if (inApp) {
     return (
-      <section aria-label="অ্যাপ আপডেট" style={sectionStyle}>
-        <h2 style={{ fontSize: 20, margin: '0 0 8px' }}>অ্যাপ আপডেট</h2>
+      <section aria-label={t({ bn: 'অ্যাপ আপডেট', en: 'App update' })} style={sectionStyle}>
+        <h2 style={{ fontSize: 20, margin: '0 0 8px' }}>{t({ bn: 'অ্যাপ আপডেট', en: 'App update' })}</h2>
         <p style={{ margin: '0 0 4px', lineHeight: 1.7 }}>
-          আপনার ভার্সন: <strong>v{APP_VERSION}</strong>
+          {t({ bn: 'আপনার ভার্সন:', en: 'Your version:' })} <strong>v{APP_VERSION}</strong>
         </p>
         <p style={{ margin: '0 0 8px', color: '#57616A' }}>
-          আপনি Eduvelto অ্যাপ ব্যবহার করছেন।
+          {t({ bn: 'আপনি Eduvelto অ্যাপ ব্যবহার করছেন।', en: 'You are using the Eduvelto app.' })}
         </p>
       </section>
     );

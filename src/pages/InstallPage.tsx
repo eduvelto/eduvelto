@@ -106,7 +106,7 @@ export default function InstallPage() {
           })}
         </p>
         <p>
-          <LinkButton to="/">হোমে ফিরুন →</LinkButton>
+          <LinkButton to="/">{t({ bn: 'হোমে ফিরুন →', en: 'Back to home →' })}</LinkButton>
         </p>
         <AppUpdateSection />
       </PageShell>
