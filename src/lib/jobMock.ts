@@ -111,6 +111,7 @@ import {
 } from './jobMocks';
 import { loadBundleKey, loadPracticeBundle, type PracticeBundleWithId } from './jobPractice';
 import { logMockAuditEvent } from './jobExamAudit';
+import { recordExamExposure } from './jobExamHistoryData';
 import type { JobQuestionKey, JobReceipt } from './jobQuestions';
 
 /** Firestore not configured (gate G1) — pages show the honest
@@ -748,6 +749,20 @@ export async function abandonMockSession(
     sessionId,
     bundleId: String(stored.bundleId ?? ''),
   });
+  // Live Exam (§3.6(3)): an abandoned session still exposed the
+  // student to the questions — merge the committed set into the
+  // exposure history. Best-effort: a history failure must never
+  // fail an abandon (the history is a derived index,
+  // rebuildable from attempts).
+  const refs = Array.isArray(stored.questionRefs)
+    ? (stored.questionRefs as Array<Record<string, unknown>>)
+    : [];
+  const questionIds = refs
+    .map((r) => (typeof r.questionId === 'string' ? r.questionId : ''))
+    .filter((id) => id.length > 0);
+  if (examSlug.length > 0 && questionIds.length > 0) {
+    void recordExamExposure(uid, examSlug, sessionId, questionIds);
+  }
   return 'abandoned';
 }
 
@@ -976,6 +991,21 @@ export async function submitMockAttempt(
     sessionId: input.sessionId,
     bundleId,
   });
+  // Live Exam (§3.6(2)): merge the committed set into the
+  // exposure history, exactly once. Best-effort and AFTER the
+  // attempt exists (a history failure must never fail a submit
+  // — the history is a derived index, rebuildable from
+  // attempts; the merge is idempotent via the fingerprint guard
+  // in jobExamHistoryData, so a retried submit merges once).
+  const storedRefs = Array.isArray(stored.questionRefs)
+    ? (stored.questionRefs as Array<Record<string, unknown>>)
+    : [];
+  const questionIds = (storedRefs.length > 0 ? storedRefs : input.session.questionRefs)
+    .map((r) => (typeof r.questionId === 'string' ? (r.questionId as string) : ''))
+    .filter((id) => id.length > 0);
+  if (questionIds.length > 0) {
+    void recordExamExposure(input.uid, input.mock.examSlug, input.sessionId, questionIds);
+  }
   return submitted;
 }
 

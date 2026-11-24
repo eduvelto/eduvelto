@@ -38,6 +38,7 @@ import { AlertBox, Card, LinkButton, ProgressBar, Skeleton } from '../components
 import { useAuth } from '../lib/auth';
 import { useLanguage } from '../i18n/LanguageContext';
 import { JOB_PRACTICE_RESULT_LABEL, JOB_PRACTICE_RESULT_LABEL_EN, jobTopicLabel } from '../lib/jobEngine';
+import { resolveLiveExamPattern, variantIdFromMock } from '../lib/jobLiveExam';
 import {
   ANSWER_TIME_BUCKET_BN,
   ANSWER_TIME_BUCKET_EN,
@@ -262,6 +263,19 @@ export default function JobResultPage() {
   const mockAllowedMinutes =
     isMockAttempt && mockDef ? mockDef.rulesSnapshot.timeMinutes : null;
 
+  // Live Exam header (design §6 item 15): full mocks ARE the
+  // Live Exam sets in the variant-pool model — the variant number
+  // is derived from the definition's doc-ID (never stored), and a
+  // snapshot count below the verified full pattern is labelled
+  // partial so a 100Q score is never silently read as a 200Q
+  // score. Daily/weekly mocks (variantId null) show no header.
+  const liveExamVariantId = isMockAttempt && mockDef ? variantIdFromMock(mockDef) : null;
+  const liveExamPattern = isMockAttempt ? resolveLiveExamPattern(examSlug, null) : null;
+  const liveExamIsPartial =
+    liveExamVariantId !== null && liveExamPattern !== null && mockDef !== null
+      ? mockDef.rulesSnapshot.questionCount < liveExamPattern.questionCount
+      : false;
+
   // Weak topics: from the stored answers (wrong per topic).
   const weakTopics = topicStats.filter((t) => t.wrong > 0);
   // 1st priority = the weakest topic by accuracy (not the
@@ -319,6 +333,16 @@ export default function JobResultPage() {
     <PageShell titleBn="ফলাফল" titleEn="Result" wide maxWidth={1240}>
       {/* BINDING label — every result page carries it. */}
       <AlertBox tone="info">{lang === 'bn' ? JOB_PRACTICE_RESULT_LABEL : JOB_PRACTICE_RESULT_LABEL_EN}</AlertBox>
+
+      {/* Live Exam header (design §6 item 15) — full mocks only. */}
+      {liveExamVariantId !== null && mockDef && liveExamPattern ? (
+        <p style={{ margin: '12px 0 0', color: '#57616A', fontSize: 14, lineHeight: 1.7 }}>
+          {tr({
+            bn: `লাইভ পরীক্ষা — শেয়ার্ড সেট, ভ্যারিয়েন্ট ${liveExamVariantId}${liveExamIsPartial ? ` · আংশিক মক — ${mockDef.rulesSnapshot.questionCount}/${liveExamPattern.questionCount} প্রশ্ন (এই স্কোর পূর্ণাঙ্গ ${liveExamPattern.questionCount}-প্রশ্নের মকের স্কোর নয়)` : ` · পূর্ণাঙ্গ মক — ${mockDef.rulesSnapshot.questionCount} প্রশ্ন`}`,
+            en: `Live Exam — shared set, variant ${liveExamVariantId}${liveExamIsPartial ? ` · partial mock — ${mockDef.rulesSnapshot.questionCount}/${liveExamPattern.questionCount} questions (this score is not a full ${liveExamPattern.questionCount}-question mock score)` : ` · full mock — ${mockDef.rulesSnapshot.questionCount} questions`}`,
+          })}
+        </p>
+      ) : null}
 
       {/* Step 13: just cleared from the wrong-answer notebook. */}
       {fromWrongAnswers && clearedCount > 0 ? (

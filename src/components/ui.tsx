@@ -118,8 +118,10 @@ export interface LinkButtonProps {
   size?: ButtonSize;
   children: ReactNode;
   className?: string;
-  /** Router state — e.g. { from } so /login can return after sign-in. */
-  state?: { from: string };
+  /** Router state — e.g. { from } so /login can return after sign-in,
+   * or { liveExam: ... } so the mock intro can show the Live Exam
+   * context (variantId, overlap, small-bank notice). */
+  state?: unknown;
 }
 
 /** A router Link styled exactly like a Button (same sizes, states, touch target). */

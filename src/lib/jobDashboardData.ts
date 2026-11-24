@@ -33,6 +33,8 @@ import {
   loadPracticeBundle,
 } from './jobPractice';
 import { listMockAttempts, loadPublishedMock } from './jobMock';
+import { loadExamHistory } from './jobExamHistoryData';
+import type { ExposureHistory } from './jobBankSelection';
 import type { PublishedBundleRef } from './jobDashboard';
 
 /** Practice + mock attempts, newest first (one loader, one
@@ -128,4 +130,34 @@ export async function awardMissingJobAchievements(uid: string, keys: string[]): 
       // Best-effort only (see the header): ignore.
     }
   }
+}
+
+/** Live Exam attempts for ONE exam (full mocks only, newest
+ * first, bounded 20 — the same cap label as the dashboard's
+ * 20+20 window). `capped` is true when the window hit its
+ * limit, so the report never presents a capped window as a
+ * lifetime total. */
+export async function loadLiveExamAttempts(
+  uid: string,
+  examSlug: string,
+): Promise<{ attempts: JobAttemptSummary[]; capped: boolean }> {
+  const hubSlug =
+    examSlug === 'bank-senior-officer' || examSlug === 'bank-assistant-director' ? 'bank' : examSlug;
+  const prefix = `full__${hubSlug}__`;
+  const all = await listMockAttempts(uid, 50);
+  const full = all.filter((a) => typeof a.mockId === 'string' && a.mockId.startsWith(prefix));
+  return {
+    attempts: full.slice(0, 20).map((a) => attemptSummaryFromStored(a.docId, a)),
+    capped: full.length >= 20,
+  };
+}
+
+/** One exam's exposure history for the dashboard (one doc per
+ * exam, only for exams the student touches). Null on a first
+ * attempt — every candidate is unseen. */
+export async function loadExamHistoryForDashboard(
+  uid: string,
+  examSlug: string,
+): Promise<ExposureHistory | null> {
+  return loadExamHistory(uid, examSlug).catch(() => null);
 }

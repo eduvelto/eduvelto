@@ -330,3 +330,322 @@ describe('language system (24 Nov 2026) — English day labels', () => {
     expect(streak.labelEn).toBe('7-day streak');
   });
 });
+
+/* ------------------------------------------------------------------ */
+/* Live Exam additions (design-live-exam-dashboard.md §5) —          */
+/* subjectHealth, liveExamReport, arrangeNextPractice.                */
+/* ------------------------------------------------------------------ */
+
+import {
+  ARRANGE_MAX_REVISION_PER_DAY,
+  arrangeNextPractice,
+  liveExamReport,
+  subjectHealth,
+  type DashboardWeakTopic,
+} from '../jobDashboard';
+import { MAX_REVISION_PER_DAY } from '../jobPlanner';
+import type { RevisionItem } from '../jobPlanner';
+import type { NotebookEntry } from '../jobWrongAnswers';
+
+function subjAnswer(
+  n: number,
+  subjectId: string,
+  topicId: string,
+  correct: boolean,
+  questionId = `q-${subjectId}-${topicId}-${n}`,
+): JobAttemptAnswer {
+  return {
+    n,
+    questionId,
+    topicId,
+    subjectId,
+    selected: correct ? 'A' : 'B',
+    correct,
+    marks: correct ? 1 : -0.5,
+    correctText: 'correct',
+    timeSpentSeconds: 45,
+  };
+}
+
+describe('subjectHealth (§5.2)', () => {
+  it('rolls topics up by subject with the same thresholds as topics', () => {
+    // English: 10 answered across 2 topics, 4 correct (40%) → weak signal.
+    const answers = [
+      ...[1, 2, 3, 4, 5].map((n) => subjAnswer(n, 'english', 'tense', n <= 2)),
+      ...[6, 7, 8, 9, 10].map((n) => subjAnswer(n, 'english', 'voice', n <= 7)),
+    ];
+    const [row] = subjectHealth([summary({ docId: 's1', answers })]);
+    expect(row.subjectId).toBe('english');
+    expect(row.label).toBe('ইংরেজি ভাষা ও সাহিত্য');
+    expect(row.total).toBe(10);
+    expect(row.accuracy).toBe(40);
+    expect(row.topics).toBe(2);
+    expect(row.sample).toBe('signal');
+    expect(row.mastery).toBe('weak');
+    expect(row.isWeak).toBe(true);
+  });
+
+  it('never calls a subject weak from a single topic’s data', () => {
+    const answers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((n) => subjAnswer(n, 'english', 'tense', n <= 3));
+    const [row] = subjectHealth([summary({ docId: 's1', answers })]);
+    expect(row.accuracy).toBe(30);
+    expect(row.topics).toBe(1);
+    expect(row.mastery).toBe('weak');
+    expect(row.isWeak).toBe(false);
+  });
+
+  it('never calls a subject weak below 5 answered', () => {
+    const answers = [1, 2, 3, 4].map((n) => subjAnswer(n, 'english', n % 2 === 0 ? 'tense' : 'voice', false));
+    const [row] = subjectHealth([summary({ docId: 's1', answers })]);
+    expect(row.total).toBe(4);
+    expect(row.sample).toBe('not-enough-data');
+    expect(row.isWeak).toBe(false);
+  });
+
+  it('sorts weakest first and returns [] with no attempts', () => {
+    const answers = [
+      ...[1, 2, 3, 4, 5, 6].map((n) => subjAnswer(n, 'bangla', 't1', n <= 5)),
+      ...[7, 8, 9, 10, 11, 12].map((n) => subjAnswer(n, 'english', 't2', n <= 8)),
+    ];
+    const rows = subjectHealth([summary({ docId: 's1', answers })]);
+    expect(rows.map((r) => r.subjectId)).toEqual(['english', 'bangla']);
+    expect(subjectHealth([])).toEqual([]);
+  });
+});
+
+describe('liveExamReport (§5.6)', () => {
+  function mockAttempt(overrides: Partial<JobAttemptSummary> & { docId: string }): JobAttemptSummary {
+    return summary({
+      kind: 'mock',
+      examSlug: 'bcs',
+      bundleId: 'mock__full__bcs__1',
+      mockId: 'full__bcs__1',
+      score: 120,
+      totalMarks: 200,
+      percentage: 60,
+      correctCount: 130,
+      wrongCount: 20,
+      unansweredCount: 50,
+      ...overrides,
+    });
+  }
+
+  it('reports one exam’s full mocks only — no cross-exam mixing', () => {
+    const attempts = [
+      mockAttempt({ docId: 'm1', submittedAtMillis: NOW, score: 120, percentage: 60 }),
+      mockAttempt({ docId: 'm2', submittedAtMillis: NOW - DAY, score: 100, percentage: 50 }),
+      // A Bank full mock + a BCS practice attempt must not leak in.
+      mockAttempt({ docId: 'm3', examSlug: 'bank', mockId: 'full__bank__1', bundleId: 'mock__full__bank__1' }),
+      mockAttempt({ docId: 'm4', kind: 'practice', mockId: null, bundleId: 'topic__bcs__english__tense' }),
+      // A BCS daily mock must not leak in either.
+      mockAttempt({ docId: 'm5', mockId: '2026-11-22', bundleId: 'daily__2026-11-22' }),
+    ];
+    const report = liveExamReport(attempts, 'bcs');
+    expect(report.attempts).toBe(2);
+    expect(report.latestScore).toBe(120);
+    expect(report.bestScore).toBe(120);
+    expect(report.latestPercentage).toBe(60);
+    expect(report.fullTotal).toBe(200);
+    expect(report.partialAttempts).toBe(0);
+    expect(report.passPercent).toBeNull(); // BCS has no pass mark
+    expect(report.trend.count).toBe(2);
+  });
+
+  it('flags partial mocks so a 100Q score is never silently compared with a 200Q score', () => {
+    const attempts = [
+      mockAttempt({ docId: 'm1', totalMarks: 100, score: 60, percentage: 60, correctCount: 65, wrongCount: 10, unansweredCount: 25 }),
+      mockAttempt({ docId: 'm2', submittedAtMillis: NOW - DAY, totalMarks: 200, score: 120, percentage: 60 }),
+    ];
+    const report = liveExamReport(attempts, 'bcs');
+    expect(report.attempts).toBe(2);
+    expect(report.partialAttempts).toBe(1);
+    expect(report.latestTotalMarks).toBe(100);
+  });
+
+  it('shows the pattern pass mark only where the pattern defines one', () => {
+    const primary = liveExamReport(
+      [summary({ docId: 'p1', kind: 'mock', examSlug: 'primary-teacher', mockId: 'full__primary-teacher__1', bundleId: 'mock__full__primary-teacher__1', totalMarks: 90, score: 50, percentage: 55.6 })],
+      'primary-teacher',
+    );
+    expect(primary.passPercent).toBe(50);
+    expect(primary.fullTotal).toBe(90);
+  });
+
+  it('is empty-honest with no full mocks', () => {
+    const report = liveExamReport([], 'bcs');
+    expect(report.attempts).toBe(0);
+    expect(report.bestScore).toBeNull();
+    expect(report.latestScore).toBeNull();
+    expect(report.trend.count).toBe(0);
+  });
+});
+
+describe('arrangeNextPractice (§5.4)', () => {
+  const published = new Map<string, PublishedBundleRef[]>([
+    ['bcs', [
+      { docId: 'topic__tense', topicId: 'tense', questionCount: 10, titleBn: 'Tense' },
+      { docId: 'topic__voice', topicId: 'voice', questionCount: 10, titleBn: 'Voice' },
+      { docId: 'topic__narration', topicId: 'narration', questionCount: 10, titleBn: 'Narration' },
+    ]],
+  ]);
+
+  function revisionItem(overrides: Partial<RevisionItem> & { topicId: string }): RevisionItem {
+    return {
+      label: overrides.topicId,
+      labelEn: overrides.topicId,
+      mastery: 'weak',
+      accuracy: 30,
+      total: 10,
+      nextRevisionDay: '2026-11-22',
+      dueBucket: 'today',
+      examSlugs: ['bcs'],
+      bundleDocId: `topic__${overrides.topicId}`,
+      bundleExamSlug: 'bcs',
+      ...overrides,
+    };
+  }
+
+  function notebookEntry(overrides: Partial<NotebookEntry> & { questionId: string; topicId: string }): NotebookEntry {
+    return {
+      subjectId: 'bcs__english',
+      examSlugs: ['bcs'],
+      sources: ['practice'],
+      wrongCount: 1,
+      firstWrongAtMillis: NOW - 10 * DAY,
+      lastWrongAtMillis: NOW - 10 * DAY,
+      lastWrongAttemptId: 'a1',
+      lastWrongKind: 'practice',
+      lastOutcome: 'wrong',
+      consecutiveCorrect: 0,
+      clearedAtMillis: null,
+      lastSelected: 'B',
+      lastCorrectText: 'correct',
+      status: 'active',
+      learningState: 'new',
+      ...overrides,
+    } as NotebookEntry;
+  }
+
+  function weakTopic(overrides: Partial<DashboardWeakTopic> & { topicId: string }): DashboardWeakTopic {
+    return {
+      label: overrides.topicId,
+      correct: 2,
+      wrong: 8,
+      total: 10,
+      accuracy: 20,
+      sample: 'signal',
+      examSlugs: ['bcs'],
+      lastAttemptMillis: NOW - DAY,
+      ...overrides,
+    };
+  }
+
+  const baseArgs = {
+    revisionItems: [] as RevisionItem[],
+    notebook: [] as NotebookEntry[],
+    weakTopics: [] as DashboardWeakTopic[],
+    publishedByExam: published,
+    targetExamSlug: 'bcs',
+    attempts: [] as JobAttemptSummary[],
+    dailyMock: null,
+    liveExam: null,
+    nowMs: NOW,
+  };
+
+  it('orders due revision (max 2) → wrong answers → weakest topic', () => {
+    const items = arrangeNextPractice({
+      ...baseArgs,
+      revisionItems: [
+        revisionItem({ topicId: 'tense', accuracy: 20 }),
+        revisionItem({ topicId: 'voice', accuracy: 40 }),
+        revisionItem({ topicId: 'narration', accuracy: 10 }),
+      ],
+      notebook: [notebookEntry({ questionId: 'q1', topicId: 'tense', lastWrongAtMillis: NOW - DAY })],
+      weakTopics: [weakTopic({ topicId: 'voice' })],
+    });
+    const kinds = items.map((i) => i.kind);
+    expect(kinds[0]).toBe('revision');
+    expect(kinds[1]).toBe('revision');
+    expect(kinds).not.toContain('wrong-answers'); // step 1 took 2 → step 2 skipped (not stale)
+    expect(kinds).toContain('weak-topic');
+    expect(items.filter((i) => i.kind === 'revision').length).toBe(2);
+    // Weakest revision first (narration 10%, then tense 20%).
+    expect(items[0].titleBn).toContain('narration');
+    expect(items[1].titleBn).toContain('tense');
+  });
+
+  it('adds wrong-answer re-practice when step 1 took fewer than 2, or the mistake is stale', () => {
+    const stale = arrangeNextPractice({
+      ...baseArgs,
+      revisionItems: [
+        revisionItem({ topicId: 'tense', accuracy: 20 }),
+        revisionItem({ topicId: 'voice', accuracy: 40 }),
+        revisionItem({ topicId: 'narration', accuracy: 10 }),
+      ],
+      notebook: [notebookEntry({ questionId: 'q1', topicId: 'tense', lastWrongAtMillis: NOW - 8 * DAY })],
+    });
+    expect(stale.map((i) => i.kind)).toContain('wrong-answers'); // stale >7d outranks
+    const oneRevision = arrangeNextPractice({
+      ...baseArgs,
+      revisionItems: [revisionItem({ topicId: 'tense', accuracy: 20 })],
+      notebook: [notebookEntry({ questionId: 'q1', topicId: 'tense', lastWrongAtMillis: NOW - DAY })],
+    });
+    expect(oneRevision.map((i) => i.kind)).toEqual(['revision', 'wrong-answers']);
+  });
+
+  it('shows a revision WITHOUT a link when no published set exists (never a dead link)', () => {
+    const items = arrangeNextPractice({
+      ...baseArgs,
+      revisionItems: [revisionItem({ topicId: 'tense', bundleDocId: null, bundleExamSlug: null })],
+    });
+    expect(items[0].to).toBeNull();
+    expect(items[0].ctaBn).toBeNull();
+  });
+
+  it('falls to new-topic practice only when steps 1–3 produced nothing', () => {
+    const items = arrangeNextPractice({ ...baseArgs });
+    expect(items.map((i) => i.kind)).toEqual(['new-topic']);
+    expect(items[0].to).toBe('/jobs/practice/topic__narration'); // topicId ascending
+    // A weak topic with no published bundle does not invent a link.
+    const noFresh = arrangeNextPractice({
+      ...baseArgs,
+      attempts: [
+        summary({
+          docId: 'a1',
+          answers: [
+            answer(1, 'tense', true),
+            answer(2, 'voice', true),
+            answer(3, 'narration', true),
+          ],
+        }),
+      ],
+    });
+    expect(noFresh).toEqual([]);
+  });
+
+  it('appends daily mock + Live Exam as dated cards, and returns [] when nothing is eligible', () => {
+    const items = arrangeNextPractice({
+      ...baseArgs,
+      dailyMock: { docId: 'daily__2026-11-22' },
+      liveExam: { examSlug: 'bcs' },
+    });
+    expect(items.map((i) => i.kind)).toEqual(['new-topic', 'daily-mock', 'live-exam']);
+    expect(items[2].to).toBe('/jobs/live-exam/bcs');
+    const empty = arrangeNextPractice({
+      ...baseArgs,
+      targetExamSlug: null,
+      attempts: [
+        summary({
+          docId: 'a1',
+          answers: [answer(1, 'tense', true), answer(2, 'voice', true), answer(3, 'narration', true)],
+        }),
+      ],
+    });
+    expect(empty).toEqual([]);
+  });
+
+  it('the revision cap mirrors the planner constant', () => {
+    expect(ARRANGE_MAX_REVISION_PER_DAY).toBe(MAX_REVISION_PER_DAY);
+    expect(ARRANGE_MAX_REVISION_PER_DAY).toBe(2);
+  });
+});

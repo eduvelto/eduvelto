@@ -52,6 +52,7 @@ import {
 } from '../lib/jobMock';
 import { jobMockIdFromDocId, jobMockPatternSummary, type JobMockWithId } from '../lib/jobMocks';
 import { jobExamBySlug } from '../lib/jobExams';
+import { SMALL_BANK_NOTICE_BN } from '../lib/jobRepetition';
 import type { PracticeBundleWithId } from '../lib/jobPractice';
 import { useActiveClock } from '../lib/activeStudyTime';
 import { computeRemainingMillis, resolveExamClockOffsetMillis } from '../lib/mockTimer';
@@ -73,6 +74,11 @@ export default function JobMockPage() {
   const location = useLocation();
   // Sections audit (24 Nov 2026): return here after sign-in.
   const back = loginState(location.pathname + location.search);
+  // Live Exam context (design §6 item 14): the Live Exam page
+  // passes { liveExam: { variantId, overlap, smallBankNotice,
+  // setKind } } when the student arrives from a variant card.
+  // Direct loads carry no state and show neither line.
+  const liveExamState = (location.state as { liveExam?: { variantId: number | null; overlap: number; smallBankNotice: boolean; setKind: 'shared' } } | null)?.liveExam ?? null;
   const { user } = useAuth();
   const { t, lang } = useLanguage();
   const navigate = useNavigate();
@@ -404,6 +410,16 @@ export default function JobMockPage() {
             </p>
           ) : null}
           {scoringNotice ? <AlertBox tone="info">{scoringNotice}</AlertBox> : null}
+          {liveExamState ? (
+            <p style={{ margin: '8px 0', color: MUTED, fontSize: 14, lineHeight: 1.7 }}>
+              {t({ bn: `সেটের ধরন: ${liveExamState.variantId !== null ? `শেয়ার্ড সেট — ভ্যারিয়েন্ট ${liveExamState.variantId}` : 'শেয়ার্ড সেট'}${liveExamState.overlap > 0 ? ` · এই সেটের ${liveExamState.overlap}টি প্রশ্ন আপনি আগে দেখেছেন` : ' · এই সেটের কোনো প্রশ্ন আপনি আগে দেখেননি'}।`, en: `Set type: ${liveExamState.variantId !== null ? `shared set — variant ${liveExamState.variantId}` : 'shared set'}${liveExamState.overlap > 0 ? ` · you have seen ${liveExamState.overlap} question(s) in this set before` : ' · you have not seen any question in this set before'}.` })}
+            </p>
+          ) : null}
+          {liveExamState?.smallBankNotice ? (
+            <div style={{ marginTop: 12 }}>
+              <AlertBox tone="info">{SMALL_BANK_NOTICE_BN}</AlertBox>
+            </div>
+          ) : null}
           <AlertBox tone="info">
             {t({ bn: 'সময় শুরু হলে আর থামবে না — মাঝপথে চলে গেলে একই সেশন, একই সময়সীমা, একই প্রশ্নসেট নিয়ে ফিরে আসতে পারবেন। ইন্টারনেট ছাড়া জমা দেওয়া যাবে না; স্বয়ংক্রিয় জমা শুধু সংযোগ থাকলে হয়।', en: 'Once time starts it never stops — if you leave midway, you can return to the same session, the same time limit, and the same question set. You cannot submit without internet; auto-submission only happens with a connection.' })}
           </AlertBox>

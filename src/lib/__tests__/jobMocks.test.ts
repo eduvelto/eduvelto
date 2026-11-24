@@ -274,6 +274,15 @@ describe('validateJobMock', () => {
     expect(validateJobMock(doc, 'full__bcs__1').length).toBeGreaterThan(0);
     expect(validateJobMock(null, 'full__bcs__1').length).toBeGreaterThan(0);
   });
+
+  it('rejects windowStartAt / windowEndAt / setKind / variantId (Live Exam §6 item 9 — NOT storable: the rules onlyKeys for jobExamDefinitions forbids them, so a doc carrying them would fail validation on READ and vanish from every mock list; the window + set kind are derived, see jobLiveExam.ts)', () => {
+    const { doc } = validMockDoc();
+    for (const field of ['windowStartAt', 'windowEndAt', 'setKind', 'variantId']) {
+      expect(validateJobMock({ ...doc, [field]: field === 'setKind' ? 'shared' : 1 }, 'full__bcs__1')).toEqual(
+        expect.arrayContaining([expect.stringContaining(`unknown field '${field}'`)]),
+      );
+    }
+  });
 });
 
 describe('display helpers', () => {

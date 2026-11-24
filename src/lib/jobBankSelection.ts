@@ -248,6 +248,11 @@ function poolIdFor(
   return `pool__${examId}__${poolKind}__${subjectId}__${topicId}__${difficulty}__${chunkIndex}`;
 }
 
+/** Exported for the Live Exam pool loader (`jobQuestionPools.ts`)
+ * — ONE ID scheme: the variant builder, the pool loader and the
+ * migration script must all derive the same pool doc-ID. */
+export { poolIdFor as examQuestionPoolIdFor };
+
 /**
  * Build the pool docs for one exam from the bank. Pure function of
  * (bank + mappings + selection rules): one pool per (subject, topic,

@@ -125,18 +125,29 @@ export interface JobExamPattern {
 }
 
 /** Bangla pattern labels — one per verified exam. NTRCA's says
- * 18th is the LAST verified pattern, not the current one. */
+ * 18th is the LAST verified pattern, not the current one. The
+ * Bank post-level slugs share the 'যাচাইকৃত ধরন' label: their
+ * patterns are verified from the 2025–26 circulars (b90d697) —
+ * they are config choices of the Bank exam, not separate hubs. */
 const JOB_EXAM_PATTERN_LABELS: Record<string, string> = {
   bcs: 'যাচাইকৃত ধরন',
   bank: 'যাচাইকৃত ধরন',
+  'bank-senior-officer': 'যাচাইকৃত ধরন',
+  'bank-assistant-director': 'যাচাইকৃত ধরন',
   'primary-teacher': 'যাচাইকৃত ধরন',
   ntrca: '১৮তম ধরন — শেষ যাচাইকৃত ধরন',
 };
 
-/** The four verified exam slugs, in syllabus order. */
+/** The verified exam slugs, in syllabus order — the four hub
+ * exams plus the two post-level Bank configs (Live Exam §0.1:
+ * Officer/Cash vs Senior Officer vs Assistant Director are
+ * separate patterns; one shared "Bank" pattern would give SO/AD
+ * candidates the WRONG subject split). */
 export const JOB_EXAM_PATTERN_SLUGS = [
   'bcs',
   'bank',
+  'bank-senior-officer',
+  'bank-assistant-director',
   'primary-teacher',
   'ntrca',
 ] as const;
@@ -354,7 +365,14 @@ export function createPracticeSession(
  * bundle order for a mock — a timed mock runs in its published
  * order, never in a mode order (Beginner/Advanced ordering is
  * practice-only). Timestamps are `unknown` (sentinels at build
- * time, real timestamps after read-back). */
+ * time, real timestamps after read-back). NOTE (Live Exam,
+ * design §3.5): `setKind` / `selectionReport` are DELIBERATELY
+ * ABSENT — the committed rules' session `hasOnly` list forbids
+ * them, and the attempt + history `hasOnly`/`onlyKeys` lists
+ * forbid them there too. The set kind is derived from the mock
+ * doc at display time (see `jobLiveExam.ts`); the selection
+ * report lives only in the variant-builder dry-run artifact
+ * and in the Live Exam page's in-memory state. */
 export interface JobMockSessionDoc {
   kind: 'mock';
   mockId: string;
@@ -1497,6 +1515,16 @@ export function validatePracticeSession(doc: unknown): string[] {
   if (sorted.join(',') !== Array.from({ length: ns.length }, (_, i) => i + 1).join(',')) {
     problems.push(`${label}: questionRefs n values must be exactly 1..${ns.length}`);
   }
+  // Live Exam (§3.4): within-attempt repetition is NEVER allowed
+  // — a ref list with a duplicate question ID is refused, fail
+  // fast, with an honest error. (The rules bind the session's
+  // refs to the manifest by whole-equality, so a duplicate
+  // could only arrive from a client-built set; the lib check
+  // catches it before any write.)
+  const questionIds = d.questionRefs.map((r) => (r as Record<string, unknown>).questionId);
+  if (new Set(questionIds).size !== questionIds.length) {
+    problems.push(`${label}: questionRefs must not contain a duplicate questionId`);
+  }
   if (!Number.isInteger(d.currentQuestion)
     || (d.currentQuestion as number) < 1
     || (d.currentQuestion as number) > d.questionRefs.length) {
@@ -1636,6 +1664,16 @@ export function validateMockSession(doc: unknown): string[] {
   const sorted = [...ns].sort((a, b) => a - b);
   if (sorted.join(',') !== Array.from({ length: ns.length }, (_, i) => i + 1).join(',')) {
     problems.push(`${label}: questionRefs n values must be exactly 1..${ns.length}`);
+  }
+  // Live Exam (§3.4): within-attempt repetition is NEVER allowed
+  // — a ref list with a duplicate question ID is refused, fail
+  // fast, with an honest error. (The rules bind the session's
+  // refs to the manifest by whole-equality, so a duplicate
+  // could only arrive from a client-built set; the lib check
+  // catches it before any write.)
+  const questionIds = d.questionRefs.map((r) => (r as Record<string, unknown>).questionId);
+  if (new Set(questionIds).size !== questionIds.length) {
+    problems.push(`${label}: questionRefs must not contain a duplicate questionId`);
   }
   if (!Number.isInteger(d.currentQuestion)
     || (d.currentQuestion as number) < 1

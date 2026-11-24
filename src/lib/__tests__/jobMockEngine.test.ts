@@ -235,6 +235,31 @@ describe('validateMockSession', () => {
     expect(validateMockSession({ ...s, answers: { '1': s.answers[1] } }).length).toBeGreaterThan(0);
     expect(validateMockSession(null).length).toBeGreaterThan(0);
   });
+
+  it('rejects a duplicate questionId in questionRefs (Live Exam §3.4 — within-attempt repetition is never allowed)', () => {
+    const s = makeSession();
+    const dup = {
+      ...s,
+      questionRefs: [
+        { bundleId: 'mock__full__bcs__1', n: 1, questionId: 'q-001' },
+        { bundleId: 'mock__full__bcs__1', n: 2, questionId: 'q-001' },
+        { bundleId: 'mock__full__bcs__1', n: 3, questionId: 'q-003' },
+      ],
+    };
+    expect(validateMockSession(dup)).toEqual(
+      expect.arrayContaining([expect.stringContaining('duplicate questionId')]),
+    );
+    // Distinct IDs still validate.
+    const ok = {
+      ...s,
+      questionRefs: [
+        { bundleId: 'mock__full__bcs__1', n: 1, questionId: 'q-001' },
+        { bundleId: 'mock__full__bcs__1', n: 2, questionId: 'q-002' },
+        { bundleId: 'mock__full__bcs__1', n: 3, questionId: 'q-003' },
+      ],
+    };
+    expect(validateMockSession(ok)).toEqual([]);
+  });
 });
 
 describe('patternFromRulesSnapshot', () => {

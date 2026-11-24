@@ -55,6 +55,7 @@ const JobCircularsPage = lazy(() => import('./pages/JobCircularsPage'));
 const JobCircularDetailPage = lazy(() => import('./pages/JobCircularDetailPage'));
 const JobCalendarPage = lazy(() => import('./pages/JobCalendarPage'));
 const JobNotificationsPage = lazy(() => import('./pages/JobNotificationsPage'));
+const JobLiveExamPage = lazy(() => import('./pages/JobLiveExamPage'));
 const JobGuidePage = lazy(() => import('./pages/JobGuidePage'));
 /* AdSense Part 1 (public content, F1 fix): static BCS English practice
    + sample lessons, visible WITHOUT login. No Firestore reads. */
@@ -440,6 +441,10 @@ export default function App() {
         <Route path="/jobs/circulars/:circularId" element={<JobCircularDetailPage />} />
         <Route path="/jobs/calendar" element={<JobCalendarPage />} />
         <Route path="/jobs/notifications" element={<JobNotificationsPage />} />
+        {/* Live Exam (design §6 item 12): MUST come before
+            /jobs/:exam/:tab — otherwise '/jobs/live-exam/:exam'
+            matches :exam='live-exam'. */}
+        <Route path="/jobs/live-exam/:exam" element={<JobLiveExamPage />} />
         {/* Step 16: guide pages MUST come before /jobs/:exam/:tab —
             otherwise '/jobs/viva' matches :exam='viva'. */}
         <Route path="/jobs/viva" element={<JobGuidePage kind="viva" />} />

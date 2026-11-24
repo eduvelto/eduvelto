@@ -19,6 +19,7 @@ import { useLanguage } from '../i18n/LanguageContext';
 import type { JobExamDef } from '../lib/jobExams';
 import { listPublishedMocks } from '../lib/jobMock';
 import { jobMockPatternSummary, type JobMockWithId } from '../lib/jobMocks';
+import { BANK_POST_OPTIONS } from '../lib/jobLiveExam';
 
 export default function JobMockTab({ def }: { def: JobExamDef }) {
   const { user } = useAuth();
@@ -60,10 +61,39 @@ export default function JobMockTab({ def }: { def: JobExamDef }) {
     );
   }
 
+  // Live Exam landing (design §6 item 13): the per-exam page
+  // (pattern line, variant list, lowest-overlap pick, per-exam
+  // report). For Bank the post selector lives here too — the
+  // pattern is a config choice per post, not new hubs.
+  const liveExamCard = (
+    <Reveal>
+      <Card style={{ marginBottom: 12 }}>
+        <div style={{ fontWeight: 700, color: '#142B3B', fontSize: 17 }}>{t({ bn: 'লাইভ পরীক্ষা', en: 'Live Exam' })}</div>
+        <p style={{ margin: '8px 0 12px', color: '#57616A', fontSize: 14, lineHeight: 1.7 }}>
+          {t({ bn: 'আসল ধরনে সময়ভিত্তিক পূর্ণ মক — আপনার আগের প্রচেষ্টার সাথে মিলিয়ে সবচেয়ে কম-মিল সেটটি বেছে দেওয়া হয়, আর ফলাফলে শুধু এই পরীক্ষার লাইভ পরীক্ষার প্রতিবেদন থাকে।', en: 'A timed full mock in the real pattern — the set with the least overlap with your previous attempts is picked for you, and the report covers only this exam’s Live Exams.' })}
+        </p>
+        {def.slug === 'bank' ? (
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, marginBottom: 12 }}>
+            {BANK_POST_OPTIONS.map((o) => (
+              <LinkButton key={o.slug} to={`/jobs/live-exam/bank?post=${o.slug}`}>
+                {lang === 'bn' ? o.labelBn : o.labelEn}
+              </LinkButton>
+            ))}
+          </div>
+        ) : null}
+        <LinkButton to={`/jobs/live-exam/${def.slug}`} variant="accent">
+          {t({ bn: 'লাইভ পরীক্ষা দেখুন →', en: 'See the Live Exam →' })}
+        </LinkButton>
+      </Card>
+    </Reveal>
+  );
+
   if (mocks.length === 0) {
     return (
-      <Reveal>
-        <Card>
+      <>
+        {liveExamCard}
+        <Reveal>
+          <Card>
           <div style={{ fontWeight: 700, color: '#142B3B', fontSize: 17 }}>{t({ bn: 'এখনো কোনো মক তৈরি হয়নি', en: 'No mock has been created yet' })}</div>
           <p style={{ margin: '8px 0 12px', color: '#57616A', fontSize: 14, lineHeight: 1.7 }}>
             {t({ bn: 'আসল ধরনে সময়ভিত্তিক পূর্ণ মক (নম্বর, সময়, নেগেটিভ মার্কিং) প্রশ্ন ব্যাংক প্রস্তুত হলে এখানে আসবে।', en: 'A timed full mock in the real pattern (marks, time, negative marking) will appear here once the question bank is ready.' })}
@@ -83,11 +113,13 @@ export default function JobMockTab({ def }: { def: JobExamDef }) {
           )}
         </Card>
       </Reveal>
+      </>
     );
   }
 
   return (
     <>
+      {liveExamCard}
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))', gap: 12 }}>
         {mocks.map((m, i) => (
           <Reveal key={m.docId} delayMs={i * 40}>

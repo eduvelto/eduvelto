@@ -64,12 +64,15 @@ import { jobTopicLabel } from '../lib/jobEngine';
 import { attemptTrend, groupAttemptsByExam, type JobAttemptSummary } from '../lib/jobAnalysis';
 import {
   accuracyOrNull,
+  arrangeNextPractice,
   computeStreakDays,
   dashboardAchievements,
   dashboardWeakTopics,
+  liveExamReport,
   perExamProgress,
   pickRecommendation,
   recentAttempts,
+  subjectHealth,
   todayStats,
   weekActivity,
   wrongAnswerSummary,
@@ -78,10 +81,15 @@ import {
 import {
   awardMissingJobAchievements,
   loadDashboardAttempts,
+  loadExamHistoryForDashboard,
+  loadLiveExamAttempts,
   loadPublishedBundlesForExams,
   verifyMockRetry,
   verifyPracticeBundle,
 } from '../lib/jobDashboardData';
+import { deriveNotebook } from '../lib/jobWrongAnswers';
+import { liveExamPatternLineBn, resolveLiveExamPattern } from '../lib/jobLiveExam';
+import type { ExposureHistory } from '../lib/jobBankSelection';
 import { revisionQueue, topicHealth, weeklyPlan } from '../lib/jobPlanner';
 import {
   circularDeadlineLine,
@@ -142,6 +150,11 @@ export default function JobSeekerDashboardPage() {
   // after the client sort) — shared by the P5 circulars,
   // calendar and notifications cards (one query, 15 docs).
   const [circulars, setCirculars] = useState<JobCircular[] | null>(null);
+  // Live Exam (design §6 item 18): the target exam's full-mock
+  // attempts + exposure history — one extra read each, only for
+  // the target exam, only when signed in. Null = not loaded yet.
+  const [liveExamAttempts, setLiveExamAttempts] = useState<JobAttemptSummary[] | null>(null);
+  const [liveExamHistory, setLiveExamHistory] = useState<ExposureHistory | null>(null);
 
   useEffect(() => {
     let alive = true;
@@ -173,6 +186,29 @@ export default function JobSeekerDashboardPage() {
           if (!alive) return;
           setAttempts(loaded);
           setCapped(wasCapped);
+          // Live Exam (design §6 item 18): the target exam's
+          // full-mock attempts + exposure history, for the P1
+          // Live Exam card. Best-effort — a failure leaves the
+          // card in its honest empty state, never an error.
+          if (profile?.targetExam) {
+            loadLiveExamAttempts(user.uid, profile.targetExam)
+              .then(({ attempts: live }) => {
+                if (alive) setLiveExamAttempts(live);
+              })
+              .catch(() => {
+                if (alive) setLiveExamAttempts([]);
+              });
+            loadExamHistoryForDashboard(user.uid, profile.targetExam)
+              .then((h) => {
+                if (alive) setLiveExamHistory(h);
+              })
+              .catch(() => {
+                if (alive) setLiveExamHistory(null);
+              });
+          } else {
+            setLiveExamAttempts([]);
+            setLiveExamHistory(null);
+          }
           // Bundles only for exams the student touches (attempts
           // + target exam) — never the whole catalog.
           const exams = [...new Set([...loaded.map((a) => a.examSlug), profile?.targetExam].filter(Boolean))] as string[];
@@ -214,6 +250,8 @@ export default function JobSeekerDashboardPage() {
       })();
     } else {
       setAttempts([]);
+      setLiveExamAttempts([]);
+      setLiveExamHistory(null);
     }
     return () => {
       alive = false;
@@ -339,6 +377,41 @@ export default function JobSeekerDashboardPage() {
     [attempts, plannerHealth, plannerQueue, publishedByExam, profile?.targetExam, profile?.dailyGoalQuestions, daily],
   );
   const mockAttempts = useMemo(() => (attempts ?? []).filter((a) => a.kind === 'mock'), [attempts]);
+  // Live Exam + dashboard (design §5): the target exam's
+  // per-exam report (full mocks only), the subject roll-up of
+  // the topic-level weak data, and the auto-arranged practice
+  // queue (§5.4 priority order). All pure, all from the same
+  // loaded attempts + published bundles.
+  const targetPattern = useMemo(
+    () => (profile?.targetExam ? resolveLiveExamPattern(profile.targetExam, null) : null),
+    [profile?.targetExam],
+  );
+  const liveExamReportData = useMemo(
+    () =>
+      liveExamAttempts && profile?.targetExam
+        ? liveExamReport(liveExamAttempts, profile.targetExam)
+        : null,
+    [liveExamAttempts, profile?.targetExam],
+  );
+  const subjectHealthRows = useMemo(() => (attempts ? subjectHealth(attempts) : []), [attempts]);
+  const notebook = useMemo(() => (attempts ? deriveNotebook(attempts) : []), [attempts]);
+  const arrangedPractice = useMemo(
+    () =>
+      attempts
+        ? arrangeNextPractice({
+            revisionItems: plannerQueue,
+            notebook,
+            weakTopics,
+            publishedByExam,
+            targetExamSlug: profile?.targetExam ?? null,
+            attempts,
+            dailyMock: daily ? { docId: daily.docId } : null,
+            liveExam: profile?.targetExam ? { examSlug: profile.targetExam } : null,
+            nowMs,
+          })
+        : [],
+    [attempts, plannerQueue, notebook, weakTopics, publishedByExam, profile?.targetExam, daily, nowMs],
+  );
   const mockTrends = useMemo(() => groupAttemptsByExam(mockAttempts), [mockAttempts]);
   const totalQuestions = (attempts ?? []).reduce((sum, a) => sum + a.answers.length, 0);
   const totalCorrect = (attempts ?? []).reduce((sum, a) => sum + a.correctCount, 0);
@@ -604,6 +677,102 @@ export default function JobSeekerDashboardPage() {
                   </LinkButton>
                 )}
               </>
+            )}
+          </Card>
+        </Reveal>
+
+        {/* Live Exam (design §6 item 18, P1): the target exam's
+            timed full mock — pattern line, the per-exam report
+            (full mocks only), and the link to the variant page.
+            No target exam ⇒ the honest prompt to pick one. */}
+        <Reveal delayMs={120}>
+          <Card>
+            <div style={{ fontWeight: 700, color: 'var(--heading)', fontSize: 17 }}>
+              {t({ bn: 'লাইভ পরীক্ষা', en: 'Live Exam' })}
+            </div>
+            {!targetExamDef ? (
+              <>
+                <p style={{ margin: '8px 0 10px', color: 'var(--muted)', fontSize: 14, lineHeight: 1.7 }}>
+                  {t({
+                    bn: 'লক্ষ্য পরীক্ষা বেছে নিলে তার লাইভ পরীক্ষা (আসল ধরনে সময়ভিত্তিক পূর্ণ মক) এখানে দেখাবে।',
+                    en: 'Pick a target exam and its Live Exam (a timed full mock in the real pattern) will show here.',
+                  })}
+                </p>
+                <LinkButton to="/profile" variant="outline">
+                  {t({ bn: 'লক্ষ্য পরীক্ষা বেছে নিন →', en: 'Pick a target exam →' })}
+                </LinkButton>
+              </>
+            ) : liveExamAttempts === null ? (
+              <p style={{ margin: '8px 0 0', color: 'var(--muted)', fontSize: 14 }}>{t({ bn: 'লোড হচ্ছে…', en: 'Loading…' })}</p>
+            ) : (
+              <>
+                <p style={{ margin: '8px 0 10px', color: 'var(--muted-ivory)', fontSize: 14, lineHeight: 1.7 }}>
+                  {targetPattern ? liveExamPatternLineBn(targetPattern) : ''}
+                  {liveExamReportData && liveExamReportData.attempts > 0 ? (
+                    <>
+                      {' · '}
+                      {t({
+                        bn: `${liveExamReportData.attempts}টি পূর্ণ মক · সেরা ${liveExamReportData.bestScore ?? 0}/${liveExamReportData.bestTotalMarks ?? 0}${liveExamReportData.partialAttempts > 0 ? ` · এর মধ্যে ${liveExamReportData.partialAttempts}টি আংশিক মক` : ''}`,
+                        en: `${liveExamReportData.attempts} full mock(s) · best ${liveExamReportData.bestScore ?? 0}/${liveExamReportData.bestTotalMarks ?? 0}${liveExamReportData.partialAttempts > 0 ? ` · including ${liveExamReportData.partialAttempts} partial mock(s)` : ''}`,
+                      })}
+                    </>
+                  ) : (
+                    <>
+                      {' · '}
+                      {t({ bn: 'এখনো কোনো পূর্ণ মক দেওয়া হয়নি', en: 'No full mock taken yet' })}
+                    </>
+                  )}
+                  {liveExamHistory ? (
+                    <>
+                      {' · '}
+                      {t({ bn: `এ পর্যন্ত ${liveExamHistory.recentQuestionIds.length}টি ভিন্ন প্রশ্ন দেখেছেন`, en: `You have seen ${liveExamHistory.recentQuestionIds.length} different question(s) so far` })}
+                    </>
+                  ) : null}
+                </p>
+                <LinkButton to={`/jobs/live-exam/${targetExamDef.slug}`} variant="accent">
+                  {t({ bn: 'লাইভ পরীক্ষা দেখুন →', en: 'See the Live Exam →' })}
+                </LinkButton>
+              </>
+            )}
+          </Card>
+        </Reveal>
+
+        {/* Re-practice queue (design §5.4, P1): the auto-arranged
+            order — due weak revision (max 2/day) → stale
+            wrong-answer re-practice → weakest-topic practice →
+            new-topic rotation → daily mock / Live Exam cards.
+            Items without a published set show WITHOUT a link —
+            never a dead link. */}
+        <Reveal delayMs={140}>
+          <Card>
+            <div style={{ fontWeight: 700, color: 'var(--heading)', fontSize: 17 }}>
+              {t({ bn: 'আজকের অনুশীলন তালিকা', en: "Today's practice list" })}
+            </div>
+            {attempts === null ? (
+              <p style={{ margin: '8px 0 0', color: 'var(--muted)', fontSize: 14 }}>{t({ bn: 'লোড হচ্ছে…', en: 'Loading…' })}</p>
+            ) : arrangedPractice.length === 0 ? (
+              <p style={{ margin: '8px 0 0', color: 'var(--muted)', fontSize: 14, lineHeight: 1.7 }}>
+                {t({
+                  bn: 'আজকের অনুশীলন তালিকা খালি — অনুশীলন শুরু করলে দুর্বল টপিক, ভুল উত্তর আর নতুন টপিক এখানে সাজিয়ে দেখাবে।',
+                  en: 'Today’s practice list is empty — once you start practising, weak topics, wrong answers and new topics will be arranged here.',
+                })}
+              </p>
+            ) : (
+              <ul style={{ margin: '8px 0 0', paddingLeft: 0, listStyle: 'none', fontSize: 14, lineHeight: 1.9 }}>
+                {arrangedPractice.map((item, i) => (
+                  <li key={`${item.kind}-${i}`} style={{ borderTop: i === 0 ? 'none' : '1px solid var(--border)', padding: '8px 0' }}>
+                    <div style={{ fontWeight: 700, color: 'var(--heading)' }}>{item.titleBn}</div>
+                    {item.detailBn ? (
+                      <div style={{ color: 'var(--muted-ivory)', fontSize: 13 }}>{item.detailBn}</div>
+                    ) : null}
+                    {item.to && item.ctaBn ? (
+                      <LinkButton to={item.to} variant="outline">
+                        {item.ctaBn} →
+                      </LinkButton>
+                    ) : null}
+                  </li>
+                ))}
+              </ul>
             )}
           </Card>
         </Reveal>
@@ -1047,6 +1216,75 @@ export default function JobSeekerDashboardPage() {
         </Card>
       </Reveal>
 
+      {/* Subject health (design §5.2, P3): the topic-level weak
+          data rolled up by subject — same thresholds as topics
+          (≥5 answered, accuracy <50%), and a subject is only
+          "weak" when the evidence spans ≥2 topics. */}
+      <Reveal>
+        <Card style={{ marginTop: 12 }}>
+          <div style={{ fontWeight: 700, color: 'var(--heading)', fontSize: 17 }}>
+            {t({ bn: 'দুর্বল বিষয়', en: 'Weak subjects' })}
+          </div>
+          {attempts === null ? (
+            <p style={{ margin: '8px 0 0', color: 'var(--muted)', fontSize: 14 }}>{t({ bn: 'লোড হচ্ছে…', en: 'Loading…' })}</p>
+          ) : attempts.length === 0 ? (
+            <p style={{ margin: '8px 0 0', color: 'var(--muted)', fontSize: 14, lineHeight: 1.7 }}>
+              {t({
+                bn: 'অনুশীলন শুরু হলে কোন বিষয়ে দুর্বল, তা এখানে দেখাবে। এখনো কোনো তথ্য নেই।',
+                en: 'Once you start practising, which subjects are weak will show here. There is no data yet.',
+              })}
+            </p>
+          ) : subjectHealthRows.length === 0 ? (
+            <p style={{ margin: '8px 0 0', color: 'var(--muted)', fontSize: 14, lineHeight: 1.7 }}>
+              {t({
+                bn: 'কোনো বিষয়েই দুর্বলতার যথেষ্ট তথ্য নেই — একটি বিষয়ে কমপক্ষে ৫টি প্রশ্নের উত্তর দিলে বিষয় এখানে আসবে।',
+                en: 'No subject has enough data to call weak yet — answer at least 5 questions in a subject for it to appear here.',
+              })}
+            </p>
+          ) : (
+            <ul style={{ margin: '8px 0 0', paddingLeft: 0, listStyle: 'none', fontSize: 14, lineHeight: 1.9 }}>
+              {subjectHealthRows.map((row) => (
+                <li key={row.subjectId} style={{ borderTop: '1px solid var(--border)', padding: '8px 0' }}>
+                  <div style={{ fontWeight: 700, color: 'var(--heading)' }}>
+                    {row.label}
+                    {' — '}
+                    <span style={{ fontWeight: 400, color: 'var(--muted-ivory)' }}>
+                      {t({ bn: `${row.correct}/${row.total}টি সঠিক · ${row.accuracy ?? 0}% · ${row.topics}টি টপিক`, en: `${row.correct}/${row.total} correct · ${row.accuracy ?? 0}% · ${row.topics} topic(s)` })}
+                      {' · '}
+                      {row.isWeak
+                        ? t({ bn: 'দুর্বল', en: 'Weak' })
+                        : row.sample === 'signal'
+                          ? t({ bn: 'দুর্বলতার সংকেত', en: 'Weakness signal' })
+                          : row.sample === 'early'
+                            ? t({ bn: 'প্রাথমিক ইঙ্গিত', en: 'Early indication' })
+                            : t({ bn: 'যথেষ্ট তথ্য নেই', en: 'Not enough data' })}
+                    </span>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          )}
+        </Card>
+      </Reveal>
+
+      {/* Syllabus state (design §5.1, P3): syllabus completion
+          is MISSING and unmeasurable today (0 subjects live) —
+          the card says "আসছে" and never shows a %. */}
+      <Reveal>
+        <Card style={{ marginTop: 12 }}>
+          <div style={{ fontWeight: 700, color: 'var(--heading)', fontSize: 17 }}>
+            {t({ bn: 'সিলেবাসের অগ্রগতি', en: 'Syllabus progress' })}
+          </div>
+          <p style={{ margin: '8px 0 10px', color: 'var(--muted)', fontSize: 14, lineHeight: 1.7 }}>
+            {t({
+              bn: 'সিলেবাসের তথ্য আসছে — কোনো বিষয়/টপিক এখনো যাচাই করে প্রকাশিত হয়নি, তাই অগ্রগতির শতাংশ দেখানো হচ্ছে না।',
+              en: 'Syllabus information is coming — no subject/topic has been verified and published yet, so no progress percentage is shown.',
+            })}
+          </p>
+          <Chip tone="gold">{t({ bn: 'শীঘ্রই আসছে', en: 'Coming soon' })}</Chip>
+        </Card>
+      </Reveal>
+
       {/* ============ P4 — দ্রুত প্রবেশ ============ */}
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: 12, marginBottom: 20, marginTop: 12 }}>
         {/* Wrong-answer notebook (design #11; Step 13 built the
@@ -1108,6 +1346,24 @@ export default function JobSeekerDashboardPage() {
               {t({
                 bn: 'প্রশ্ন, টপিক ও মক ফেভারিট করে রাখা যাবে — শীঘ্রই আসছে।',
                 en: 'You will be able to favourite questions, topics and mocks — coming soon.',
+              })}
+            </p>
+            <Chip tone="gold">{t({ bn: 'শীঘ্রই আসছে', en: 'Coming soon' })}</Chip>
+          </Card>
+        </Reveal>
+
+        {/* Written preparation (design §5.5, P4): written
+            progress is MISSING — a placeholder card only, no
+            counts, no %, no fake zero. */}
+        <Reveal delayMs={120}>
+          <Card>
+            <div style={{ fontWeight: 700, color: 'var(--heading)', fontSize: 17 }}>
+              {t({ bn: 'লিখিত প্রস্তুতি', en: 'Written preparation' })}
+            </div>
+            <p style={{ margin: '8px 0 10px', color: 'var(--muted)', fontSize: 14, lineHeight: 1.7 }}>
+              {t({
+                bn: 'লিখিত প্রস্তুতি আসছে — লিখিত পরীক্ষার প্রস্তুতি (বাংলা রচনা, ইংরেজি লেখা, অনুবাদ, গণিত সমাধান) এখনো তৈরি হয়নি।',
+                en: 'Written preparation is coming — written exam preparation (Bangla composition, English writing, translation, math solutions) is not built yet.',
               })}
             </p>
             <Chip tone="gold">{t({ bn: 'শীঘ্রই আসছে', en: 'Coming soon' })}</Chip>
@@ -1286,6 +1542,16 @@ export default function JobSeekerDashboardPage() {
                   </Link>
                   {' — '}
                   {t({ bn: targetExamDef.fullBn, en: targetExamDef.fullEn })}
+                </p>
+                {targetPattern ? (
+                  <p style={{ margin: '0 0 10px', color: 'var(--muted-ivory)', fontSize: 14, lineHeight: 1.7 }}>
+                    {liveExamPatternLineBn(targetPattern)}
+                  </p>
+                ) : null}
+                <p style={{ margin: '0 0 10px' }}>
+                  <LinkButton to={`/jobs/live-exam/${targetExamDef.slug}`} variant="accent">
+                    {t({ bn: 'পরের লাইভ পরীক্ষা →', en: 'Next Live Exam →' })}
+                  </LinkButton>
                 </p>
                 <LinkButton to="/profile" variant="outline">
                   {t({ bn: 'লক্ষ্য বদলান →', en: 'Change target →' })}

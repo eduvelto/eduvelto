@@ -160,13 +160,30 @@ describe('exam patterns', () => {
     expect(jobExamPattern('no-such-exam')).toBeNull();
   });
 
-  it('p6: exactly the four verified exams — no common, no invented', () => {
+  it('p6: exactly the verified exams — four hubs + two post-level Bank configs, no common, no invented', () => {
     expect(Object.keys(JOB_EXAM_PATTERNS).sort()).toEqual([
       'bank',
+      'bank-assistant-director',
+      'bank-senior-officer',
       'bcs',
       'ntrca',
       'primary-teacher',
     ]);
+  });
+
+  it('p6b: Bank post-level patterns resolve (Live Exam §0.1 — separate SO/AD splits)', () => {
+    const so = jobExamPattern('bank-senior-officer');
+    expect(so).not.toBeNull();
+    expect(so!.questionCount).toBe(100);
+    expect(so!.timeMinutes).toBe(60);
+    expect(so!.negativeMarking).toBe(0.25);
+    expect(so!.negativeMarkingVerified).toBe(true);
+    expect(so!.patternLabel).toBe('যাচাইকৃত ধরন');
+    const ad = jobExamPattern('bank-assistant-director');
+    expect(ad).not.toBeNull();
+    expect(ad!.questionCount).toBe(100);
+    expect(ad!.negativeMarking).toBe(0.25);
+    expect(ad!.scoringConfigVersion).toBe('v1');
   });
 
   it('p7: the result label is the binding practice label', () => {

@@ -44,11 +44,16 @@
 // a topicId alone.
 
 import {
+  attemptTrend,
   buildWrongAnswerList,
   perTopicAccuracy,
+  type AttemptTrend,
   type JobAttemptSummary,
 } from './jobAnalysis';
-import { jobTopicLabelBn, type JobAttemptAnswer } from './jobEngine';
+import { jobExamPattern, jobTopicLabelBn, type JobAttemptAnswer } from './jobEngine';
+import { canonicalSubjectFor, jobSubjectsForExam } from './jobContent';
+import type { RevisionItem } from './jobPlanner';
+import type { NotebookEntry } from './jobWrongAnswers';
 
 /** Accuracy as a percentage (1 decimal), or null when nothing
  * was answered — null is not 0%. */
@@ -508,4 +513,391 @@ export function wrongAnswerSummary(attempts: JobAttemptSummary[]): WrongAnswerSu
     }
   }
   return { distinctWrongQuestions: seen.size, recent };
+}
+
+/* ------------------------------------------------------------------ */
+/* Subject health (§5.2) — the subject-level roll-up of the           */
+/* topic-level weak/strong analysis. Same thresholds as topics        */
+/* (≥5 answered = 'early' 5–9 / 'signal' 10+, accuracy <50%),        */
+/* PLUS the subject rule: a subject is never called weak from a      */
+/* single topic's data — it needs ≥5 answered across ≥2 topics.      */
+/* ------------------------------------------------------------------ */
+
+/** Bangla label for a canonical subject, resolved from the
+ * verified pattern subjects (one source — never a second label
+ * table). Falls back to the raw subjectId. */
+const SUBJECT_LABEL_CACHE = new Map<string, string>();
+export function jobSubjectLabelBn(subjectId: string): string {
+  const cached = SUBJECT_LABEL_CACHE.get(subjectId);
+  if (cached) return cached;
+  for (const examSlug of ['bcs', 'bank', 'primary-teacher', 'ntrca']) {
+    for (const s of jobSubjectsForExam(examSlug)) {
+      if (canonicalSubjectFor(`${examSlug}__${s.slug}`) === subjectId) {
+        SUBJECT_LABEL_CACHE.set(subjectId, s.nameBn);
+        return s.nameBn;
+      }
+    }
+  }
+  return subjectId;
+}
+
+export interface DashboardSubjectHealth {
+  subjectId: string;
+  label: string;
+  correct: number;
+  wrong: number;
+  unanswered: number;
+  total: number;
+  accuracy: number;
+  /** Distinct topics that contributed answers. */
+  topics: number;
+  /** 'early' 5–9 answered, 'signal' 10+, 'not-enough-data' <5. */
+  sample: WeakTopicSample | 'not-enough-data';
+  mastery: 'weak' | 'moderate' | 'strong';
+  /** True only when the subject may be CALLED weak: accuracy
+   * <50% AND ≥5 answered AND ≥2 topics. A single-topic subject
+   * is never weak, however low its accuracy. */
+  isWeak: boolean;
+}
+
+/** Subject-level health across ALL of the student's attempts:
+ * the same per-topic stats grouped by `subjectId` (answers
+ * already carry it). Sorted weakest first (accuracy asc, then
+ * most wrong, then subjectId for determinism). */
+export function subjectHealth(attempts: JobAttemptSummary[]): DashboardSubjectHealth[] {
+  const map = new Map<string, { correct: number; wrong: number; unanswered: number; topics: Set<string> }>();
+  for (const a of attempts) {
+    for (const ans of a.answers) {
+      const s = map.get(ans.subjectId) ?? { correct: 0, wrong: 0, unanswered: 0, topics: new Set<string>() };
+      if (ans.selected === null) s.unanswered += 1;
+      else if (ans.correct) s.correct += 1;
+      else s.wrong += 1;
+      s.topics.add(ans.topicId);
+      map.set(ans.subjectId, s);
+    }
+  }
+  return [...map.entries()]
+    .map(([subjectId, s]) => {
+      const total = s.correct + s.wrong + s.unanswered;
+      const accuracy = total > 0 ? Math.round((s.correct / total) * 1000) / 10 : 0;
+      const sample: DashboardSubjectHealth['sample'] =
+        total < 5 ? 'not-enough-data' : total >= 10 ? 'signal' : 'early';
+      const mastery: DashboardSubjectHealth['mastery'] =
+        accuracy < 50 ? 'weak' : accuracy < 80 ? 'moderate' : 'strong';
+      return {
+        subjectId,
+        label: jobSubjectLabelBn(subjectId),
+        correct: s.correct,
+        wrong: s.wrong,
+        unanswered: s.unanswered,
+        total,
+        accuracy,
+        topics: s.topics.size,
+        sample,
+        mastery,
+        isWeak: accuracy < 50 && total >= 5 && s.topics.size >= 2,
+      };
+    })
+    .sort((a, b) => a.accuracy - b.accuracy || b.wrong - a.wrong || (a.subjectId < b.subjectId ? -1 : 1));
+}
+
+/* ------------------------------------------------------------------ */
+/* Live Exam performance report (§5.6) — per exam, across full       */
+/* mocks only. Cross-exam combined scores are FORBIDDEN (the        */
+/* header rule): every number here is one exam's full mocks. A       */
+/* partial mock (§2.3) is flagged so a 100Q partial score is never   */
+/* silently compared with a 200Q full score.                         */
+/* ------------------------------------------------------------------ */
+
+export interface LiveExamReportSubject {
+  subjectId: string;
+  label: string;
+  questions: number;
+  correct: number;
+  accuracy: number | null;
+}
+
+export interface LiveExamReport {
+  examSlug: string;
+  /** Full mocks of this exam in the loaded window. */
+  attempts: number;
+  /** True when the loader hit its 20-attempt cap (the page says so). */
+  capped: boolean;
+  bestScore: number | null;
+  bestTotalMarks: number | null;
+  bestPercentage: number | null;
+  latestScore: number | null;
+  latestTotalMarks: number | null;
+  latestPercentage: number | null;
+  trend: AttemptTrend;
+  perSubject: LiveExamReportSubject[];
+  weakestSubject: { subjectId: string; label: string; accuracy: number; total: number } | null;
+  /** Practice pass mark, ONLY where the pattern defines one. */
+  passPercent: number | null;
+  /** Full-exam question total (the verified pattern). */
+  fullTotal: number | null;
+  /** Attempts whose totalMarks is below the full total (partial mocks). */
+  partialAttempts: number;
+}
+
+/** Per-exam Live Exam report over STORED attempts (never
+ * recomputed from a republished bundle). `attempts` must already
+ * be the student's mock attempts (the data module loads them
+ * bounded); the exam filter + the full-mock filter live here. */
+export function liveExamReport(
+  attempts: JobAttemptSummary[],
+  examSlug: string,
+): LiveExamReport {
+  const hubSlug =
+    examSlug === 'bank-senior-officer' || examSlug === 'bank-assistant-director' ? 'bank' : examSlug;
+  const prefix = `full__${hubSlug}__`;
+  const full = attempts
+    .filter((a) => a.kind === 'mock' && a.examSlug === hubSlug && a.mockId !== null && a.mockId.startsWith(prefix))
+    .sort((a, b) => (b.submittedAtMillis ?? 0) - (a.submittedAtMillis ?? 0));
+  const pattern = jobExamPattern(examSlug) ?? jobExamPattern(hubSlug);
+  const fullTotal = pattern?.questionCount ?? null;
+  const partialAttempts = fullTotal === null ? 0 : full.filter((a) => a.totalMarks < fullTotal).length;
+  const trend = attemptTrend(full, 'মক', 'bn');
+  const best = full.length > 0 ? full.reduce((b, a) => (a.percentage > b.percentage ? a : b), full[0]) : null;
+  const latest = full[0] ?? null;
+  const subjectMap = new Map<string, { questions: number; correct: number; topics: Set<string> }>();
+  for (const a of full) {
+    for (const ans of a.answers) {
+      const s = subjectMap.get(ans.subjectId) ?? { questions: 0, correct: 0, topics: new Set<string>() };
+      s.questions += 1;
+      if (ans.correct) s.correct += 1;
+      s.topics.add(ans.topicId);
+      subjectMap.set(ans.subjectId, s);
+    }
+  }
+  const perSubject: LiveExamReportSubject[] = [...subjectMap.entries()]
+    .map(([subjectId, s]) => ({
+      subjectId,
+      label: jobSubjectLabelBn(subjectId),
+      questions: s.questions,
+      correct: s.correct,
+      accuracy: accuracyOrNull(s.correct, s.questions),
+    }))
+    .sort((a, b) => (a.accuracy ?? 100) - (b.accuracy ?? 100) || (a.subjectId < b.subjectId ? -1 : 1));
+  const weakest = perSubject.find(
+    (s) => s.accuracy !== null && s.accuracy < 50 && s.questions >= 5
+      && (subjectMap.get(s.subjectId)?.topics.size ?? 0) >= 2,
+  ) ?? null;
+  return {
+    examSlug: hubSlug,
+    attempts: full.length,
+    capped: full.length >= 20,
+    bestScore: best?.score ?? null,
+    bestTotalMarks: best?.totalMarks ?? null,
+    bestPercentage: best ? Math.max(0, best.percentage) : null,
+    latestScore: latest?.score ?? null,
+    latestTotalMarks: latest?.totalMarks ?? null,
+    latestPercentage: latest ? Math.max(0, latest.percentage) : null,
+    trend,
+    perSubject,
+    weakestSubject: weakest
+      ? { subjectId: weakest.subjectId, label: weakest.label, accuracy: weakest.accuracy ?? 0, total: weakest.questions }
+      : null,
+    passPercent: pattern?.passPercent ?? null,
+    fullTotal,
+    partialAttempts,
+  };
+}
+
+/* ------------------------------------------------------------------ */
+/* Re-practice + auto-arranged practice (§5.4)                         */
+/* ------------------------------------------------------------------ */
+
+/** Revision cap, mirroring `MAX_REVISION_PER_DAY` in
+ * `jobPlanner.ts` (kept as a local const to avoid a runtime
+ * import cycle — jobPlanner imports this module; the test
+ * asserts the two stay equal). */
+export const ARRANGE_MAX_REVISION_PER_DAY = 2;
+
+export interface RePracticePick {
+  topicId: string;
+  label: string;
+  /** Active notebook entries on this topic. */
+  activeCount: number;
+  oldestWrongAtMillis: number | null;
+  /** The oldest entry is older than 7 days — a stale mistake
+   * outranks a fresh revision (§5.4 step 2). */
+  stale7Days: boolean;
+}
+
+/** The next re-practice target: the OLDEST active notebook
+ * entry's topic (2-consecutive-correct removal already applied
+ * by `deriveNotebook`). Null when nothing is active. */
+export function pickRePractice(args: {
+  notebook: NotebookEntry[];
+  nowMs: number;
+}): RePracticePick | null {
+  const active = args.notebook.filter((e) => e.status === 'active');
+  if (active.length === 0) return null;
+  const sorted = [...active].sort(
+    (a, b) => (a.lastWrongAtMillis ?? 0) - (b.lastWrongAtMillis ?? 0) || (a.questionId < b.questionId ? -1 : 1),
+  );
+  const oldest = sorted[0];
+  const topicEntries = active.filter((e) => e.topicId === oldest.topicId);
+  const oldestMillis = Math.min(...topicEntries.map((e) => e.lastWrongAtMillis ?? args.nowMs));
+  return {
+    topicId: oldest.topicId,
+    label: jobTopicLabelBn(oldest.topicId),
+    activeCount: topicEntries.length,
+    oldestWrongAtMillis: oldestMillis,
+    stale7Days: oldestMillis < args.nowMs - 7 * 24 * 60 * 60 * 1000,
+  };
+}
+
+export type NextPracticeKind = 'revision' | 'wrong-answers' | 'weak-topic' | 'new-topic' | 'daily-mock' | 'live-exam';
+
+export interface NextPracticeItem {
+  kind: NextPracticeKind;
+  titleBn: string;
+  titleEn: string;
+  detailBn: string | null;
+  detailEn: string | null;
+  /** Link, or null when the item shows WITHOUT a link (a
+   * revision without a published set, or an info-only card). */
+  to: string | null;
+  ctaBn: string | null;
+  ctaEn: string | null;
+}
+
+/**
+ * Auto-arranged practice (§5.4) — the ordered queue that picks
+ * what to practise next. Priority order, each step taking what
+ * it needs and the rest falling through:
+ *   1. due revision, weakest first (max 2/day);
+ *   2. wrong-answer re-practice (when step 1 took <2, or the
+ *      oldest mistake is >7 days old);
+ *   3. weakest-topic practice;
+ *   4. new-topic practice (only when 1–3 produced nothing);
+ *   5. daily mock + Live Exam as dated cards (never as
+ *      "practice this now" items);
+ *   6. nothing eligible → [] (the page falls back honestly).
+ * Tie-breaks (deterministic): target exam first, lower accuracy
+ * first, older last-attempt first, topicId ascending last.
+ * Sample-size rule throughout: <5 answered is "not enough
+ * data" — such a topic appears in step 4 (new practice) but
+ * NEVER in steps 1–3 as a "weak" topic.
+ */
+export function arrangeNextPractice(args: {
+  revisionItems: RevisionItem[];
+  notebook: NotebookEntry[];
+  weakTopics: DashboardWeakTopic[];
+  publishedByExam: Map<string, PublishedBundleRef[]>;
+  targetExamSlug: string | null;
+  attempts: JobAttemptSummary[];
+  dailyMock: { docId: string } | null;
+  liveExam: { examSlug: string } | null;
+  nowMs: number;
+}): NextPracticeItem[] {
+  const { revisionItems, notebook, weakTopics, publishedByExam, targetExamSlug, attempts, dailyMock, liveExam, nowMs } = args;
+  const items: NextPracticeItem[] = [];
+
+  // 1. Due revision, weakest first (today + weak mastery only).
+  const dueWeak = revisionItems
+    .filter((r) => r.dueBucket === 'today' && r.mastery === 'weak')
+    .sort((a, b) => {
+      const aTarget = targetExamSlug !== null && a.examSlugs.includes(targetExamSlug) ? 0 : 1;
+      const bTarget = targetExamSlug !== null && b.examSlugs.includes(targetExamSlug) ? 0 : 1;
+      if (aTarget !== bTarget) return aTarget - bTarget;
+      if (a.accuracy !== b.accuracy) return a.accuracy - b.accuracy;
+      if (a.nextRevisionDay !== b.nextRevisionDay) return a.nextRevisionDay < b.nextRevisionDay ? -1 : 1;
+      return a.topicId < b.topicId ? -1 : 1;
+    })
+    .slice(0, ARRANGE_MAX_REVISION_PER_DAY);
+  for (const r of dueWeak) {
+    items.push({
+      kind: 'revision',
+      titleBn: `পুনরালোচনা — ${r.label}`,
+      titleEn: `Revision — ${r.labelEn}`,
+      detailBn: `সঠিক উত্তরের হার ${r.accuracy}% (${r.total}টি প্রশ্ন) — আজ পুনরালোচনার দিন।`,
+      detailEn: `Accuracy ${r.accuracy}% (${r.total} questions) — due for revision today.`,
+      to: r.bundleDocId ? `/jobs/practice/${r.bundleDocId}` : null,
+      ctaBn: r.bundleDocId ? 'পুনরালোচনা শুরু করুন →' : null,
+      ctaEn: r.bundleDocId ? 'Start revising →' : null,
+    });
+  }
+
+  // 2. Wrong-answer re-practice.
+  const rePractice = pickRePractice({ notebook, nowMs });
+  if (rePractice && (dueWeak.length < ARRANGE_MAX_REVISION_PER_DAY || rePractice.stale7Days)) {
+    items.push({
+      kind: 'wrong-answers',
+      titleBn: `ভুল-উত্তর পুনরাভ্যাস — ${rePractice.label}`,
+      titleEn: `Wrong-answer re-practice — ${rePractice.label}`,
+      detailBn: `${rePractice.activeCount}টি ভুল প্রশ্ন এখনো সক্রিয় — সবচেয়ে পুরোনো ভুল ${rePractice.stale7Days ? '৭ দিনের বেশি পুরোনো' : 'সাম্প্রতিক'}।`,
+      detailEn: `${rePractice.activeCount} wrong question(s) still active.`,
+      to: '/jobs/wrong-answers',
+      ctaBn: 'নোটবুক দেখুন →',
+      ctaEn: 'See the notebook →',
+    });
+  }
+
+  // 3. Weakest-topic practice (pickRecommendation as today).
+  const recommendation = pickRecommendation({ weakTopics, publishedByExam, targetExamSlug });
+  if (recommendation) {
+    items.push({
+      kind: 'weak-topic',
+      titleBn: `দুর্বল টপিক — ${recommendation.topicLabel}`,
+      titleEn: `Weakest topic — ${recommendation.topicLabel}`,
+      detailBn: `সঠিক উত্তরের হার ${recommendation.topicAccuracy}% (${recommendation.topicTotal}টি প্রশ্ন${recommendation.sample === 'signal' ? ', ১০+ প্রশ্নের ভিত্তিতে' : ', প্রাথমিক ইঙ্গিত'})।`,
+      detailEn: `Accuracy ${recommendation.topicAccuracy}% (${recommendation.topicTotal} questions).`,
+      to: `/jobs/practice/${recommendation.bundleDocId}`,
+      ctaBn: 'অনুশীলন শুরু করুন →',
+      ctaEn: 'Start practising →',
+    });
+  }
+
+  // 4. New-topic practice — only when 1–3 produced nothing.
+  if (items.length === 0 && targetExamSlug !== null) {
+    const attemptedTopics = new Set<string>();
+    for (const a of attempts) for (const ans of a.answers) attemptedTopics.add(ans.topicId);
+    const fresh = (publishedByExam.get(targetExamSlug) ?? [])
+      .filter((b) => b.topicId !== null && b.questionCount > 0 && !attemptedTopics.has(b.topicId))
+      .sort((a, b) => (a.topicId ?? '') < (b.topicId ?? '') ? -1 : 1);
+    const first = fresh[0];
+    if (first) {
+      items.push({
+        kind: 'new-topic',
+        titleBn: `নতুন টপিক — ${first.titleBn ?? jobTopicLabelBn(first.topicId ?? '')}`,
+        titleEn: `New topic — ${first.titleBn ?? first.topicId ?? ''}`,
+        detailBn: 'এই টপিকটি এখনো অনুশীলন করা হয়নি।',
+        detailEn: 'This topic has not been practised yet.',
+        to: `/jobs/practice/${first.docId}`,
+        ctaBn: 'অনুশীলন শুরু করুন →',
+        ctaEn: 'Start practising →',
+      });
+    }
+  }
+
+  // 5. Daily mock + Live Exam as dated cards (never auto-assigned
+  // as daily practice — a Live Exam is a dated event, not a drill).
+  if (dailyMock) {
+    items.push({
+      kind: 'daily-mock',
+      titleBn: 'আজকের দৈনিক মক',
+      titleEn: "Today's daily mock",
+      detailBn: 'আজকের মক — দৈনিক মক কার্ড থেকে শুরু করুন।',
+      detailEn: "Today's mock — start from the daily mock card.",
+      to: `/jobs/mock/${dailyMock.docId}`,
+      ctaBn: 'আজকের মক দেখুন →',
+      ctaEn: "See today's mock →",
+    });
+  }
+  if (liveExam) {
+    items.push({
+      kind: 'live-exam',
+      titleBn: 'লাইভ পরীক্ষা',
+      titleEn: 'Live Exam',
+      detailBn: 'লক্ষ্য পরীক্ষার লাইভ পরীক্ষার পাতা দেখুন — পূর্ণাঙ্গ/আংশিক মক ও ভ্যারিয়েন্ট এখানে।',
+      detailEn: 'See the target exam’s Live Exam page — full/partial mocks and variants are there.',
+      to: `/jobs/live-exam/${liveExam.examSlug}`,
+      ctaBn: 'লাইভ পরীক্ষা দেখুন →',
+      ctaEn: 'See the Live Exam →',
+    });
+  }
+  return items;
 }
