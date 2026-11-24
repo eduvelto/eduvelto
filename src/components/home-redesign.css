@@ -15,6 +15,9 @@
 .ev-rd-head h2 { margin: 0; font-size: 20px; color: var(--heading); }
 .ev-rd-head a { font-size: 14px; font-weight: 700; white-space: nowrap; }
 .ev-rd-sub { margin: 0 0 14px; font-size: 14px; line-height: 1.6; color: var(--muted-ivory); }
+/* Links inside body text must be underlined so they are distinguishable
+   from the surrounding text (Lighthouse link-in-text-block, 24 Nov 2026). */
+.ev-rd-sub a { text-decoration: underline; text-underline-offset: 2px; }
 
 /* ---------- hero search (desktop, inside hero) ---------- */
 .ev-rd-hero-search { display: none; }
