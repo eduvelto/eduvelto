@@ -72,18 +72,22 @@ const MORE_LINKS = [
   { to: '/privacy', bn: 'গোপনীয়তা নীতি', en: 'Privacy Policy' },
 ];
 
-const MENU_SECTIONS = [
+const MENU_SECTIONS: {
+  titleBn: string;
+  titleEn: string;
+  links: { to: string; bn: string; en: string; soon?: boolean }[];
+}[] = [
   {
     titleBn: 'চাকরি প্রস্তুতি', titleEn: 'Job Preparation',
     links: [
-      { to: '/jobs', bn: 'চাকরি প্রস্তুতি', en: 'Job Preparation', soon: true },
+      { to: '/jobs', bn: 'চাকরি প্রস্তুতি', en: 'Job Preparation' },
       { to: '/exam', bn: 'মডেল টেস্ট', en: 'Model Tests' },
     ],
   },
   {
     titleBn: 'ভর্তি প্রস্তুতি', titleEn: 'Admission Preparation',
     links: [
-      { to: '/admissions', bn: 'ভর্তি প্রস্তুতি', en: 'Admission Preparation', soon: true },
+      { to: '/admissions', bn: 'ভর্তি প্রস্তুতি', en: 'Admission Preparation' },
       { to: '/exam', bn: 'মডেল টেস্ট', en: 'Model Tests' },
     ],
   },
