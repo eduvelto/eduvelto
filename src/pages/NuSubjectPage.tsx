@@ -30,7 +30,7 @@ function NotFound(props: { group: NuGroupSlug }) {
   const { t } = useLanguage();
   // This component only renders for an unknown subject slug — keep the
   // not-found state out of the index with a distinct title + noindex.
-  useNotFoundMeta('বিষয় পাওয়া যায়নি — Eduvelto', true);
+  useNotFoundMeta(t({ bn: 'বিষয় পাওয়া যায়নি — Eduvelto', en: 'Subject not found — Eduvelto' }), true);
   return (
     <PageShell titleBn="বিষয় পাওয়া যায়নি" titleEn="Subject not found" hideHomeLink>
       <EmptyState

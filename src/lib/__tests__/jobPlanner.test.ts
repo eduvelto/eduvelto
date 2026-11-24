@@ -428,3 +428,54 @@ describe('goalSuggestion', () => {
     ).toBeNull();
   });
 });
+
+describe('English labels (24 Nov 2026 language system)', () => {
+  it('topicHealth carries the English topic label', () => {
+    const health = topicHealth(
+      [attempt({ id: 'a1', topicId: TENSE, correct: 2, total: 10, daysAgo: 0 })],
+      NOW_MS,
+    );
+    expect(health).toHaveLength(1);
+    expect(health[0].labelEn).toBe('English — Grammar — Tense');
+    expect(health[0].labelEn).toBe(health[0].label);
+  });
+
+  it('weekly plan items carry English labels + reasons', () => {
+    const attempts = [
+      attempt({ id: 'a1', topicId: TENSE, correct: 2, total: 10, daysAgo: 3 }),
+      attempt({ id: 'a2', topicId: VOICE, correct: 2, total: 10, daysAgo: 2 }),
+    ];
+    const health = topicHealth(attempts, NOW_MS);
+    const publishedByExam = new Map<string, Ref[]>([
+      [
+        'bcs',
+        [
+          bundle('topic__bcs__english__grammar__tense', TENSE, 'Tense'),
+          bundle('topic__bcs__english__grammar__voice', VOICE, 'Voice'),
+          bundle('topic__bcs__english__grammar__articles', 'bcs__english__grammar__articles', 'Articles'),
+        ],
+      ],
+    ]);
+    const queue = revisionQueue({ health, publishedByExam, targetExamSlug: 'bcs', nowMs: NOW_MS });
+    const week = weeklyPlan({
+      attempts,
+      health,
+      queue,
+      publishedByExam,
+      targetExamSlug: 'bcs',
+      dailyGoalQuestions: 10,
+      dailyMockDocId: 'daily__2026-11-22',
+      nowMs: NOW_MS,
+    });
+    const today = week.days[0];
+    const revision = today.items.find((i) => i.kind === 'revision');
+    expect(['English — Grammar — Tense', 'English — Grammar — Voice']).toContain(revision?.labelEn);
+    expect(revision?.reasonEn).toContain('Accuracy 20%');
+    const fresh = today.items.find((i) => i.kind === 'new-practice');
+    expect(fresh?.labelEn).toBe('English — Grammar — Articles');
+    expect(fresh?.reasonEn).toBe('Not attempted yet — new topic');
+    const mock = today.items.find((i) => i.kind === 'daily-mock');
+    expect(mock?.labelEn).toBe('Daily mock');
+    expect(mock?.reasonEn).toBe("Today's daily mock");
+  });
+});

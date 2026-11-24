@@ -68,6 +68,17 @@ const STATUS_BN: Record<NuQuestionStatus, string> = {
   withdrawn: 'প্রত্যাহার করা হয়েছে',
 };
 
+const STATUS_EN: Record<NuQuestionStatus, string> = {
+  draft: 'Draft',
+  submitted_for_review: 'Awaiting review',
+  under_review: 'Under review',
+  approved: 'Approved',
+  published: 'Published',
+  rejected: 'Rejected',
+  changes_requested: 'Changes requested',
+  withdrawn: 'Withdrawn',
+};
+
 const COMMON_SUBJECTS = nuSyllabusSubjects().filter((s) => !s.isGroupBlock);
 
 function errText(e: unknown): string {
@@ -76,7 +87,7 @@ function errText(e: unknown): string {
 }
 
 export default function AdminNuQuestionsPage() {
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
   const { user, profile } = useAuth();
   const [summary, setSummary] = useState<Record<NuQuestionStatus, number> & { total: number } | null>(null);
   const [queueStatus, setQueueStatus] = useState<NuQuestionStatus>('submitted_for_review');
@@ -285,7 +296,7 @@ export default function AdminNuQuestionsPage() {
           <p style={{ lineHeight: 1.9 }}>
             {NU_QUESTION_STATUSES.map((s) => (
               <span key={s} style={{ marginRight: 14 }}>
-                {STATUS_BN[s]}: <strong>{summary[s]}</strong>
+                {lang === 'bn' ? STATUS_BN[s] : STATUS_EN[s]}: <strong>{summary[s]}</strong>
               </span>
             ))}
           </p>
@@ -305,7 +316,7 @@ export default function AdminNuQuestionsPage() {
       >
         {NU_QUESTION_STATUSES.map((s) => (
           <option key={s} value={s}>
-            {STATUS_BN[s]}
+            {lang === 'bn' ? STATUS_BN[s] : STATUS_EN[s]}
           </option>
         ))}
       </select>
@@ -326,7 +337,7 @@ export default function AdminNuQuestionsPage() {
                   <strong>{q.questionText}</strong>
                   <br />
                   <span className="ev-muted-ivory">
-                    {STATUS_BN[q.status]} · {q.subjectId} · v{q.version}
+                    {lang === 'bn' ? STATUS_BN[q.status] : STATUS_EN[q.status]} · {q.subjectId} · v{q.version}
                   </span>
                 </button>
               </li>
@@ -339,7 +350,7 @@ export default function AdminNuQuestionsPage() {
         <Card>
           <h3 className="ev-section-h2">{selected.questionText}</h3>
           <p className="ev-muted-ivory">
-            {STATUS_BN[selected.status]} · {selected.subjectId} / {selected.chapterId} / {selected.topicId} · v
+            {lang === 'bn' ? STATUS_BN[selected.status] : STATUS_EN[selected.status]} · {selected.subjectId} / {selected.chapterId} / {selected.topicId} · v
             {selected.version} · {selected.difficulty} · {selected.sourceType}
             {selected.examYear ? ` · ${selected.examYear}` : ''}
           </p>
@@ -697,7 +708,7 @@ export default function AdminNuQuestionsPage() {
                     setGroups(e.target.checked ? [...groups, g] : groups.filter((x) => x !== g))
                   }
                 />{' '}
-                {g === 'humanities' ? 'মানবিক' : g === 'science' ? 'বিজ্ঞান' : 'ব্যবসায় শিক্ষা'}
+                {lang === 'bn' ? (g === 'humanities' ? 'মানবিক' : g === 'science' ? 'বিজ্ঞান' : 'ব্যবসায় শিক্ষা') : (g === 'humanities' ? 'Humanities' : g === 'science' ? 'Science' : 'Business Studies')}
               </label>
             ))}
           </fieldset>

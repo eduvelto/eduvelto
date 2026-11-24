@@ -41,8 +41,9 @@ export interface JobGuideItem {
     'viva-question' | 'viva-guide' | 'career-guide' | 'cv-guide'
   >;
   titleBn: string;
-  /** Short English title for the chrome only — the body stays Bangla
-   * (language rule: English changes nav tab labels only). */
+  /** Short English title for the chrome — the body stays Bangla by
+   * design (guide content is data, not UI chrome; language system
+   * 24 Nov 2026). */
   titleEn: string;
   introBn: string;
   sections: JobGuideSection[];

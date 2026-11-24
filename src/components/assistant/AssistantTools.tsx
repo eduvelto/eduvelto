@@ -134,25 +134,25 @@ export function CalculatorTool() {
     const n = (s: string) => Number(s);
     if (kind === 'emi') {
       const r = calcEmi(n(a), n(b), n(c));
-      if (!r.ok) return setErr(r.errorBn);
+      if (!r.ok) return setErr(t({ bn: r.errorBn, en: r.errorEn }));
       setOut(
         t({ bn: `মাসিক কিস্তি (EMI): ৳${fmt(r.value.emi)}\nমোট পরিশোধ: ৳${fmt(r.value.totalPayable)}\nমোট সুদ: ৳${fmt(r.value.totalInterest)}`, en: `Monthly instalment (EMI): ৳${fmt(r.value.emi)}\nTotal payable: ৳${fmt(r.value.totalPayable)}\nTotal interest: ৳${fmt(r.value.totalInterest)}` }),
       );
     } else if (kind === 'simple') {
       const r = calcSimpleInterest(n(a), n(b), n(c));
-      if (!r.ok) return setErr(r.errorBn);
+      if (!r.ok) return setErr(t({ bn: r.errorBn, en: r.errorEn }));
       setOut(t({ bn: `সুদ: ৳${fmt(r.value.interest)}\nমোট: ৳${fmt(r.value.total)}`, en: `Interest: ৳${fmt(r.value.interest)}\nTotal: ৳${fmt(r.value.total)}` }));
     } else if (kind === 'compound') {
       const r = calcCompoundInterest(n(a), n(b), n(c), n(d));
-      if (!r.ok) return setErr(r.errorBn);
+      if (!r.ok) return setErr(t({ bn: r.errorBn, en: r.errorEn }));
       setOut(t({ bn: `সুদ: ৳${fmt(r.value.interest)}\nমোট: ৳${fmt(r.value.total)}`, en: `Interest: ৳${fmt(r.value.interest)}\nTotal: ৳${fmt(r.value.total)}` }));
     } else if (kind === 'bmi') {
       const r = calcBmi(n(a), n(b));
-      if (!r.ok) return setErr(r.errorBn);
+      if (!r.ok) return setErr(t({ bn: r.errorBn, en: r.errorEn }));
       setOut(t({ bn: `BMI: ${fmt(r.value.bmi, 1)} (${r.value.categoryBn})\nএটি সাধারণ তথ্য — চিকিৎসা পরামর্শ নয়।`, en: `BMI: ${fmt(r.value.bmi, 1)} (${r.value.categoryEn})\nGeneral information only — not medical advice.` }));
     } else {
       const r = calcPercentage(n(a), n(b));
-      if (!r.ok) return setErr(r.errorBn);
+      if (!r.ok) return setErr(t({ bn: r.errorBn, en: r.errorEn }));
       setOut(t({ bn: `${fmt(r.value)}%`, en: `${fmt(r.value)}%` }));
     }
   }
@@ -260,19 +260,19 @@ export function ConverterTool() {
     const tl = toLabel ? labelOf(toLabel) : to;
     if (kind === 'length') {
       const r = convertLength(v, from, to);
-      if (!r.ok) return setErr(r.errorBn);
+      if (!r.ok) return setErr(t({ bn: r.errorBn, en: r.errorEn }));
       setOut(`${fmt(v, 4)} ${fl} = ${fmt(r.value, 4)} ${tl}`);
     } else if (kind === 'weight') {
       const r = convertWeight(v, from, to);
-      if (!r.ok) return setErr(r.errorBn);
+      if (!r.ok) return setErr(t({ bn: r.errorBn, en: r.errorEn }));
       setOut(`${fmt(v, 4)} ${fl} = ${fmt(r.value, 4)} ${tl}`);
     } else if (kind === 'temperature') {
       const r = convertTemperature(v, from as 'C' | 'F' | 'K', to as 'C' | 'F' | 'K');
-      if (!r.ok) return setErr(r.errorBn);
+      if (!r.ok) return setErr(t({ bn: r.errorBn, en: r.errorEn }));
       setOut(`${fmt(v, 4)} ${fl} = ${fmt(r.value, 4)} ${tl}`);
     } else {
       const r = convertCurrency(v, Number(rate));
-      if (!r.ok) return setErr(r.errorBn);
+      if (!r.ok) return setErr(t({ bn: r.errorBn, en: r.errorEn }));
       setOut(
         `${fmt(v, 4)} ${fl} = ${fmt(r.value, 2)} ${tl}\n${t({ bn: 'হারটি আপনি নিজে দিয়েছেন — দৈনিক বদলায়, ব্যাংক/এক্সচেঞ্জ থেকে যাচাই করুন।', en: 'You entered the rate yourself — it changes daily, check with a bank or exchange.' })}`,
       );
@@ -365,7 +365,7 @@ export function BudgetTool() {
       .filter((r) => r.label.trim() !== '' || r.amount.trim() !== '')
       .map((r) => ({ label: r.label, amount: Number(r.amount) }));
     const r = summarizeBudget(Number(income), expenses);
-    if (!r.ok) return setErr(r.errorBn);
+    if (!r.ok) return setErr(t({ bn: r.errorBn, en: r.errorEn }));
     const lines = [
       t({ bn: `মাসিক আয়: ৳${fmt(r.value.income)}`, en: `Monthly income: ৳${fmt(r.value.income)}` }),
       t({ bn: `মোট খরচ: ৳${fmt(r.value.totalExpenses)}`, en: `Total expenses: ৳${fmt(r.value.totalExpenses)}` }),
@@ -434,7 +434,7 @@ export function PlannerTool() {
     setErr(null);
     setOut(null);
     const r = buildDayPlan(rows);
-    if (!r.ok) return setErr(r.errorBn);
+    if (!r.ok) return setErr(t({ bn: r.errorBn, en: r.errorEn }));
     setOut(r.value.tasks.map((task) => `${task.time} — ${task.label}`).join('\n'));
   }
 
@@ -522,7 +522,7 @@ export function StudyPlanTool() {
     setErr(null);
     setOut(null);
     const r = buildStudyPlan(topic, 'bn');
-    if (!r.ok) return setErr(r.errorBn);
+    if (!r.ok) return setErr(t({ bn: r.errorBn, en: r.errorEn }));
     setOut(r.value);
   }
 

@@ -186,7 +186,7 @@ export default function FounderPage() {
     ogType: 'profile',
     ogImage: 'https://eduvelto.com/founder-photo.jpg',
     jsonLd: [PERSON_JSON_LD, PROFILE_PAGE_JSON_LD, ORGANIZATION_JSON_LD, BREADCRUMB_JSON_LD],
-  });
+  }, lang);
 
   return (
     <main style={{ fontFamily: 'system-ui, sans-serif' }}>

@@ -106,12 +106,12 @@ const CATEGORIES: ServiceCategory[] = [
 ];
 
 export default function LifeServicesPage() {
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
 
   return (
     <PageShell titleBn="সেবা নির্দেশিকা" titleEn="Services Directory" wide>
       {/* Visible breadcrumb (24 Nov 2026 SEO pass) — labels match the BreadcrumbList JSON-LD in lib/seo.ts. */}
-      <Breadcrumb items={[{ label: 'জীবন সেবা', to: '/life' }, { label: 'সেবা নির্দেশিকা' }]} />
+      <Breadcrumb items={[{ label: lang === 'bn' ? 'জীবন সেবা' : 'Life Services', to: '/life' }, { label: lang === 'bn' ? 'সেবা নির্দেশিকা' : 'Services Guide' }]} />
       <p>
         {t({
           bn: 'দৈনন্দিন জীবনে দরকারি সেবাগুলোর অফিসিয়াল লিংক এক জায়গায়। কোনো ফোন নম্বর বা ঠিকানা এখানে দেওয়া হয়নি — সঠিক ও হালনাগাদ যোগাযোগের তথ্য অফিসিয়াল সাইটেই পাবেন।',

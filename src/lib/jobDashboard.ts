@@ -84,6 +84,22 @@ export function dayLabelBn(dayKey: string, nowMs: number): string {
   }).format(new Date(Date.UTC(y, m - 1, d)));
 }
 
+/** Day label in the selected language: "Today" / "Yesterday" / "19 Nov"
+ * in English, "আজ" / "গতকাল" / "১৯ নভে" in Bangla. */
+export function dayLabel(dayKey: string, nowMs: number, lang: 'bn' | 'en'): string {
+  if (lang === 'bn') return dayLabelBn(dayKey, nowMs);
+  const today = dhakaDayKey(nowMs);
+  if (dayKey === today) return 'Today';
+  const yesterdayMs = nowMs - 24 * 60 * 60 * 1000;
+  if (dayKey === dhakaDayKey(yesterdayMs)) return 'Yesterday';
+  const [y, m, d] = dayKey.split('-').map(Number);
+  return new Intl.DateTimeFormat('en-GB', {
+    timeZone: 'Asia/Dhaka',
+    day: 'numeric',
+    month: 'short',
+  }).format(new Date(Date.UTC(y, m - 1, d)));
+}
+
 /** Consecutive days with at least one attempt, counting back
  * from today — or from yesterday when today has none yet (the
  * streak is still alive through yesterday). 0 when the student
@@ -131,6 +147,7 @@ export function todayStats(attempts: JobAttemptSummary[], nowMs: number): TodayS
 export interface DayActivity {
   dayKey: string;
   labelBn: string;
+  labelEn: string;
   sessions: number;
   questions: number;
 }
@@ -160,7 +177,7 @@ export function weekActivity(attempts: JobAttemptSummary[], nowMs: number): Week
   for (let i = 0; i < 7; i += 1) {
     const key = dhakaDayKey(nowMs - i * 24 * 60 * 60 * 1000);
     const s = byDay.get(key) ?? { sessions: 0, questions: 0 };
-    days.push({ dayKey: key, labelBn: dayLabelBn(key, nowMs), sessions: s.sessions, questions: s.questions });
+    days.push({ dayKey: key, labelBn: dayLabelBn(key, nowMs), labelEn: dayLabel(key, nowMs, 'en'), sessions: s.sessions, questions: s.questions });
     totalSessions += s.sessions;
     totalQuestions += s.questions;
   }
@@ -395,18 +412,24 @@ export function pickRecommendation(args: {
 /* topic-completion data exists to judge it by.                       */
 /* ------------------------------------------------------------------ */
 
-export const JOB_ACHIEVEMENT_BN: Record<string, { labelBn: string; ruleBn: string }> = {
+export const JOB_ACHIEVEMENTS: Record<string, { labelBn: string; ruleBn: string; labelEn: string; ruleEn: string }> = {
   'job_first-practice': {
     labelBn: 'প্রথম অনুশীলন শেষ',
     ruleBn: 'প্রথম অনুশীলন জমা দিলে',
+    labelEn: 'First practice completed',
+    ruleEn: 'When you submit your first practice',
   },
   'job_first-mock': {
     labelBn: 'প্রথম মক শেষ',
     ruleBn: 'প্রথম মক জমা দিলে',
+    labelEn: 'First mock completed',
+    ruleEn: 'When you submit your first mock',
   },
   'job_7-day-streak': {
     labelBn: '৭ দিনের ধারাবাহিকতা',
     ruleBn: 'টানা ৭ দিন অনুশীলন বা মক দিলে',
+    labelEn: '7-day streak',
+    ruleEn: 'When you practise or take a mock for 7 days in a row',
   },
 };
 
@@ -414,6 +437,8 @@ export interface DashboardAchievement {
   key: string;
   labelBn: string;
   ruleBn: string;
+  labelEn: string;
+  ruleEn: string;
 }
 
 /** Achievements earned from the student's own attempts. Pure
@@ -426,13 +451,13 @@ export function dashboardAchievements(
   const hasPractice = attempts.some((a) => a.kind === 'practice');
   const hasMock = attempts.some((a) => a.kind === 'mock');
   if (hasPractice) {
-    out.push({ key: 'job_first-practice', ...JOB_ACHIEVEMENT_BN['job_first-practice'] });
+    out.push({ key: 'job_first-practice', ...JOB_ACHIEVEMENTS['job_first-practice'] });
   }
   if (hasMock) {
-    out.push({ key: 'job_first-mock', ...JOB_ACHIEVEMENT_BN['job_first-mock'] });
+    out.push({ key: 'job_first-mock', ...JOB_ACHIEVEMENTS['job_first-mock'] });
   }
   if (streakDays >= 7) {
-    out.push({ key: 'job_7-day-streak', ...JOB_ACHIEVEMENT_BN['job_7-day-streak'] });
+    out.push({ key: 'job_7-day-streak', ...JOB_ACHIEVEMENTS['job_7-day-streak'] });
   }
   return out;
 }

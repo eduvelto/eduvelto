@@ -60,6 +60,16 @@
      fallback renders Bangla in the serif and Latin in Poppins. */
   --font-head: 'Noto Serif Bengali', 'Hind Siliguri', 'Poppins', system-ui, -apple-system, 'Segoe UI', sans-serif;
   --font-body: 'Hind Siliguri', 'Noto Sans Bengali', system-ui, -apple-system, 'Segoe UI', sans-serif;
+/* Language system (24 Nov 2026): when English is selected, Latin
+   type leads — Poppins/system-ui first — so English headings and
+   body text render in a proper English typeface instead of the
+   Bangla-first stacks. Bangla glyphs inside English UI (brand
+   names, the বাং toggle label) still fall back to the Bengali
+   fonts listed after. NOT RTL/LTR — both languages are LTR. */
+html[lang='en'] {
+  --font-head: 'Poppins', system-ui, -apple-system, 'Segoe UI', 'Noto Serif Bengali', 'Hind Siliguri', sans-serif;
+  --font-body: system-ui, -apple-system, 'Segoe UI', 'Hind Siliguri', 'Noto Sans Bengali', sans-serif;
+}
   /* Dark-mode tokens (22 Nov 2026): every value below has a dark twin
      in html[data-theme="dark"]; components use these names, never raw
      hex, so light mode is pixel-identical to before. */

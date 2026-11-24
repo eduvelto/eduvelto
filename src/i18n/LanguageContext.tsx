@@ -1,37 +1,33 @@
 // Eduvelto — language preference.
 //
-// OWNER RULE (22 Nov 2026, BINDING — supersedes the 21 Nov full-English
-// behaviour): the site keeps ONE language — Bangla. The Settings language
-// option (বাংলা / English) stays, but selecting English changes ONLY the
-// navigation TAB labels to English; EVERYTHING else stays Bangla
-// (headings, buttons, content, forms, toasts, labels).
+// OWNER RULE (24 Nov 2026, 07:27 — SUPERSEDES the 22 Nov 2026 tabs-only
+// rule): the whole site follows the user's selected language — Bangla or
+// English. Selecting English changes ALL UI text (headings, buttons,
+// navigation, menu, forms, toasts, labels, placeholders), not just the
+// navigation tab labels. Bangla is the default.
 //
 // How this is enforced — a single choke point, do not work around it:
-// - `lang` is the CONTENT language and is ALWAYS 'bn'. Every existing
+// - `lang` is the selected language ('bn' | 'en'). Every existing
 //   consumer (`t()`, `<T>`, and all direct `lang === 'bn' ? … : …`
-//   ternaries, date locales, number formats) therefore renders Bangla
-//   with no edits at those sites.
-// - `tabLang` is the user's selected language (the Settings choice). It
-//   is stored exactly as before — account preference `users.language`
-//   (firestore.rules already allow a user to update their own `language`
-//   field, so NO rules change was needed) + this browser's localStorage
-//   (`eduvelto-language`) as the logged-out-visitor fallback; when a
-//   user logs in, their account preference is adopted (cross-device).
-// - ONLY the tab-label path reads `tabLang`: `tTab()` and `<TabT>`,
-//   plus the header language toggle (it reads `tabLang` to show the
-//   target language and calls `setLanguage` to switch it).
-//   The complete English surface of the site is therefore the list of
-//   `tTab` / `<TabT>` call sites — audit it with:
-//   `grep -rn "tTab\|TabT\|tabLang" src/`
-//   (inventory: team/i18n-tabs-only-english-report.md).
-// - `document.documentElement.lang` stays 'bn': the page content IS
-//   Bangla; only a few tab labels switch.
+//   ternaries, date locales, number formats) therefore renders in the
+//   selected language with no edits at those sites.
+// - `tabLang` is kept as an alias of `lang` (the header toggle and the
+//   greeting bar read it; they now switch the whole site).
+// - Persistence, in priority order: `?lang=` URL param (shareable links,
+//   highest priority) → account preference `users.language` (adopted at
+//   login — survives logout/login and follows the user cross-device;
+//   firestore.rules already allow a user to update their own `language`
+//   field, so NO rules change was needed) → this browser's localStorage
+//   (`eduvelto-language`, the logged-out-visitor fallback) → `'bn'`.
+// - `t()` / `<T>` fall back to the Bangla string when an English string
+//   is missing or empty — never render blank.
+// - `document.documentElement.lang` follows `lang` (screen readers, SEO).
 // - Book / lesson / exam CONTENT keeps its own language per subject
 //   (English-department packs stay English-with-Bangla-explanation);
 //   book original names, author names and user-written content are
 //   NEVER translated. This context only switches the UI chrome.
-// - The English strings are NOT deleted — they still back the tab
-//   labels (and the Settings selector's own "English" option).
+//   The Quran ayah's Arabic original never changes; its translation
+//   follows the setting (see HeroGreeting).
 
 import { createContext, useCallback, useContext, useEffect, useState, type ReactNode } from 'react';
 import type { Lang } from './strings';
@@ -48,17 +44,37 @@ function readStored(): Lang | null {
   }
 }
 
+function readUrlLang(): Lang | null {
+  try {
+    const v = new URLSearchParams(window.location.search).get('lang');
+    return v === 'bn' || v === 'en' ? v : null;
+  } catch {
+    return null;
+  }
+}
+
+function writeUrlLang(next: Lang): void {
+  try {
+    const url = new URL(window.location.href);
+    url.searchParams.set('lang', next);
+    window.history.replaceState(null, '', url.toString());
+  } catch {
+    // Non-browser environment or blocked history: the in-memory +
+    // localStorage choice still applies.
+  }
+}
+
 export type LangEntry = { bn: string; en: string };
 
 export type LanguageState = {
-  /** Language the UI content renders in — always 'bn' (owner rule 22 Nov 2026). */
+  /** Language the UI renders in — the user's selected language. */
   lang: Lang;
-  /** The user's selected language — ONLY navigation tab labels follow it. */
+  /** Alias of `lang` (kept for the header toggle + greeting bar). */
   tabLang: Lang;
   setLanguage: (next: Lang) => void;
-  /** Pick the Bangla string — always, for every non-tab string. */
+  /** Pick the string in the selected language (Bangla fallback). */
   t: (entry: LangEntry) => string;
-  /** Pick the string in the user's selected language — tab labels ONLY. */
+  /** Alias of `t` (kept for tab-label callsites). */
   tTab: (entry: LangEntry) => string;
 };
 
@@ -72,20 +88,31 @@ export const LanguageContext = createContext<LanguageState>({
 
 export function LanguageProvider({ children }: { children: ReactNode }) {
   const { user, profile, saveProfile } = useAuth();
-  const [tabLang, setTabLangState] = useState<Lang>(() => readStored() ?? 'bn');
+  const [lang, setLangState] = useState<Lang>(() => {
+    const fromUrl = readUrlLang();
+    if (fromUrl) {
+      try {
+        window.localStorage.setItem(STORAGE_KEY, fromUrl);
+      } catch {
+        // ignore
+      }
+      return fromUrl;
+    }
+    return readStored() ?? 'bn';
+  });
 
-  // Content language — always Bangla (owner rule 22 Nov 2026).
-  const lang: Lang = 'bn';
+  // The selected language is also the tab language (alias, kept so the
+  // header toggle and the greeting bar keep working unchanged).
+  const tabLang: Lang = lang;
 
   // Account preference wins at login (cross-device): when a user signs
   // in, adopt their profile's language — so the choice survives
   // logout/login and follows them to another device. Logged out, the
-  // device choice (localStorage) is the only source. This drives the
-  // TAB labels only; all other UI stays Bangla (see header comment).
+  // device choice (localStorage / ?lang=) is the only source.
   useEffect(() => {
     if (!user || !profile) return;
     if (profile.language === 'bn' || profile.language === 'en') {
-      setTabLangState((current) => {
+      setLangState((current) => {
         if (current !== profile.language) {
           try {
             window.localStorage.setItem(STORAGE_KEY, profile.language);
@@ -100,22 +127,21 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
   }, [user?.uid, profile?.language]);
 
   // Screen readers and search engines see the active language.
-  // The page content is Bangla, so this stays 'bn' even when the user
-  // picked English (only tab labels switch).
   useEffect(() => {
     document.documentElement.lang = lang;
   }, [lang]);
 
   const setLanguage = useCallback(
     (next: Lang) => {
-      setTabLangState(next);
+      setLangState(next);
       try {
         window.localStorage.setItem(STORAGE_KEY, next);
       } catch {
         // Private mode / storage blocked: the in-memory choice still applies.
       }
+      writeUrlLang(next);
       if (user) {
-        // Fire-and-forget: the tabs already switched; the profile save only
+        // Fire-and-forget: the UI already switched; the profile save only
         // makes the choice follow the user to other devices.
         void saveProfile({ language: next }).catch(() => {});
       }
@@ -123,11 +149,15 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
     [user, saveProfile],
   );
 
-  // Non-tab strings: ALWAYS Bangla (owner rule 22 Nov 2026).
-  const t = useCallback((entry: LangEntry) => entry.bn, []);
+  // Selected language, falling back to Bangla when an English string is
+  // missing or empty — never render blank.
+  const t = useCallback(
+    (entry: LangEntry) => (lang === 'bn' ? entry.bn : entry.en || entry.bn),
+    [lang],
+  );
 
-  // Tab labels only: follow the user's selected language.
-  const tTab = useCallback((entry: LangEntry) => entry[tabLang], [tabLang]);
+  // Tab labels follow the selected language too (alias of `t`).
+  const tTab = t;
 
   return <LanguageContext.Provider value={{ lang, tabLang, setLanguage, t, tTab }}>{children}</LanguageContext.Provider>;
 }
@@ -137,15 +167,16 @@ export function useLanguage(): LanguageState {
 }
 
 /**
- * Render the Bangla text inside JSX — always, for every non-tab string
- * (owner rule 22 Nov 2026). For navigation tab labels use `<TabT>`.
+ * Render text in the selected language (Bangla fallback when the English
+ * string is missing). `<TabT>` is a back-compat alias with the same output.
  */
-export function T({ bn }: LangEntry) {
-  return <>{bn}</>;
+export function T({ bn, en }: LangEntry) {
+  const { lang } = useLanguage();
+  return <>{lang === 'bn' ? bn : en || bn}</>;
 }
 
-/** Render a navigation TAB label in the user's selected language. */
+/** Render a navigation TAB label in the selected language (alias of `<T>`). */
 export function TabT({ bn, en }: LangEntry) {
   const { tabLang } = useLanguage();
-  return <>{tabLang === 'bn' ? bn : en}</>;
+  return <>{tabLang === 'bn' ? bn : en || bn}</>;
 }
