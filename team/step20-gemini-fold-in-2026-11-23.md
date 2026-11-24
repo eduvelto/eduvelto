@@ -26,6 +26,8 @@ Gemini-only task but covers **both** consultations.
 1. **DEFER the service worker; ship v0.1.0 without registering it.** Gemini: defer
    to v0.1.1/v0.2.0. ChatGPT: defer, separate v0.2.0 milestone. This **decides**
    Phase 1's open R9 (fix-or-defer): **DEFER**. `dist/sw.js` stays built but unused.
+
+   **OWNER OVERRIDE 23 Nov 19:34 — offline CANCELLED ('offline dite hobe na', 'sob online'): no offline support at all; everything online-only. The v0.2.0 offline milestone is cancelled, not deferred. Do NOT register the service worker.**
 2. **Conditional GO / proceed** — do not block the release solely on offline support.
    Phase 1's own conclusion agrees (nothing failed; Phase 2/3 proceed subject to the
    owner's approvals).
