@@ -162,6 +162,12 @@ const SITEMAP_URLS = [
   '/opportunities/kaggle-learn',
   '/opportunities/google-skillshop',
   '/opportunities/upwork',
+  // Added 24 Nov 2026 (homepage redesign): Step 16 job guides + /install
+  // are real public pages on main — see sitemap.xml.
+  '/jobs/viva',
+  '/jobs/career',
+  '/jobs/cv',
+  '/install',
 ];
 
 describe('resolveRouteSeo — public routes', () => {
@@ -600,7 +606,13 @@ describe('resolveRouteSeo — SEO 50–100 pages (23 Nov 2026)', () => {
     for (const block of blocks) {
       const loc = block.match(/<loc>([^<]+)<\/loc>/)?.[1];
       expect(block, `no <lastmod> for ${loc}`).toContain('<lastmod>');
-      expect(block.match(/<lastmod>([^<]+)<\/lastmod>/)?.[1], loc).toBe('2026-11-23');
+      // lastmod is the sitemap's revision date for that URL: 2026-11-23
+      // for the 23 Nov revision, 2026-11-24 for URLs added by the
+      // 24 Nov 2026 homepage redesign. (Was a single pinned date
+      // before this revision added new URLs.)
+      expect(['2026-11-23', '2026-11-24']).toContain(
+        block.match(/<lastmod>([^<]+)<\/lastmod>/)?.[1],
+      );
     }
   });
 

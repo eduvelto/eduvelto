@@ -61,6 +61,7 @@ const OpportunityHubPage = lazy(() => import('./pages/OpportunityHubPage'));
 const OpportunityDetailPage = lazy(() => import('./pages/OpportunityDetailPage'));
 const OpportunityCvBuilderPage = lazy(() => import('./pages/OpportunityCvBuilderPage'));
 const OpportunityGuidePage = lazy(() => import('./pages/OpportunityGuidePage'));
+const SearchPage = lazy(() => import('./pages/SearchPage'));
 const RegisterPage = lazy(() => import('./pages/RegisterPage'));
 const RoleSetupPage = lazy(() => import('./pages/RoleSetupPage'));
 const LoginPage = lazy(() => import('./pages/LoginPage'));
@@ -297,6 +298,11 @@ export default function App() {
         <Suspense fallback={<main style={{ maxWidth: 720, margin: '0 auto', padding: '24px 16px' }}><p>{t(strings.common.loading)}</p></main>}>
         <Routes>
         <Route path="/" element={<HomePage />} />
+        {/* Global Search (homepage redesign, 24 Nov 2026): /search?q=…
+            searches books + jobs + opportunities + life services. The
+            page is deliberately NOT in seo.ts STATIC_ROUTES and is
+            disallowed in robots.txt — search result pages are noindex. */}
+        <Route path="/search" element={<SearchPage />} />
         {/* Four main sections (homepage redesign, 21 Nov 2026): /class is
             the real class index; /skills lands on the shared Coming Soon
             page until it is built (22 Nov 2026: /jobs moved to the real

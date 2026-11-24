@@ -1,41 +1,42 @@
-// Eduvelto — home, 4-section redesign (21 Nov 2026).
+// Eduvelto — home, redesign (24 Nov 2026, owner brief 24 Nov 07:25).
 //
-// Owner-approved mockups (desktop + mobile, "same arokom hobe"):
-// a light homepage built around the FOUR main sections — চাকরি প্রস্তুতি
-// (HIGHEST priority), ভর্তি প্রস্তুতি, শিক্ষা কার্যক্রম, দক্ষতা উন্নয়ন —
-// with a light header (see components/HeaderNav.tsx), a hero, a feature
-// strip / quick access, three panels (updates / progress / popular) and
-// a footer banner.
-//
-// Layout (desktop ≥769px): hero → 4 section cards → feature strip →
-// 3 panels (সাম্প্রতিক আপডেট / আপনার পড়াশোনার অগ্রগতি / জনপ্রিয় বিভাগ)
-// → footer banner.
-// Layout (mobile ≤768px): search bar → Bismillah hero greeting band → hero
-// → 4 cards 2×2 → দ্রুত অ্যাক্সেস → progress panel → জনপ্রিয় পরীক্ষা →
-// footer banner; bottom nav (HeaderNav + BottomNav).
+// Layout (desktop ≥769px and mobile ≤768px share one component):
+//   greeting band (v4 mount: OUTSIDE PageShell, see below) → hero +
+//   Global Search → top-banner ad → 4 hub cards (Education /
+//   Opportunity / AI / Life) → শিক্ষা কেন্দ্র grid → 4 section cards
+//   (চাকরি / ভর্তি / শিক্ষা / দক্ষতা — preserved verbatim from the
+//   21 Nov redesign) → Jobs section (preserved verbatim) → সুযোগ
+//   কেন্দ্র → AI টুলস ও সহায়তা → দৈনন্দিন সেবা → জনপ্রিয় বই →
+//   real-numbers stats → panels (আপডেট / অগ্রগতি / জনপ্রিয়) →
+//   founder message → footer banner.
 //
 // HONESTY — the mockups contain sample/fake content; NONE of it ships:
-//  - Updates panel: NO news items at all until a real, verified circular
-//    exists. It shows an honest empty state. The mockup's "BCS ৪৩তম" /
-//    "ঢাবি ভর্তি তারিখ" items are unverified and never used.
-//  - Progress ring: REAL signed-in user data only (lessons read + practice
-//    questions + quiz attempts from Firestore). Signed out → login prompt.
-//    Never a fake 78% / 85% / 90%.
-//  - Hero: NO stock photos from the mockups — CSS gradients + the
-//    Eduvelto wordmark only. No hotlinked images.
-//  - "ভিডিও লেসন", "সার্টিফিকেট", "র‍্যাংকিং" and "পড়ার রুটিন" do not
-//    exist yet → REMOVED from the homepage face (23 Nov 2026, AdSense
-//    cleanup), not shown as Coming Soon chips. They return when the
-//    features launch. /routine still exists as an honest placeholder
-//    page, linked from /about.
-//  - Section cards link to /jobs, /admissions, /class, /skills. /jobs
-//    (Job Preparation) and /admissions (Admission Preparation) are real
-//    sections, live since 22 Nov 2026; /class is real (class index);
-//    only /skills still lands on the shared Coming Soon page until it
-//    is built.
+//  - Hero: NO stock photos — CSS gradients + wordmark only. No
+//    suitable real/licensed student photo exists in brand-assets/
+//    (logos + founder photo only), so the gradient hero stays and
+//    the photo is reported incomplete, never faked with AI/stock.
+//  - Stats: REAL numbers only — book + opportunity counts are
+//    computed live from Firestore/seed; ২৩০৭ অধ্যায় / ২৩,৩৪৬ প্রশ্ন
+//    are the audit-verified counts (24 Nov 2026). No 10K+/5K+/1K+.
+//  - Popular Books: REAL library books only (sorted by question
+//    count — the section says so), text cards, never fake covers.
+//  - Updates: REAL dated items only (latest verified opportunity
+//    listings); empty state when there are none. No invented news.
+//  - AI panel: /ai-teacher is a SCRIPTED DEMO, not live AI — the
+//    panel says so. No "AI Chat" as a live feature; the 10 staging
+//    tools are not on main yet.
+//  - Class 1–5 / 6–8 have NO books: their tiles/dashboards show the
+//    honest not-ready state, never wrong-class books.
+//  - Testimonials: OMITTED — no real testimonial exists.
+//  - "Trending Courses": OMITTED — no courses system exists.
+//  - Tagline stays "শেখো, এগিয়ে যাও, স্বপ্ন গড়ো।" / "Learn • Grow •
+//    Achieve". "One Platform. Endless Possibilities." is a proposal
+//    only and is NOT used as the tagline.
+//  - Progress ring: REAL signed-in user data only. Never a fake %.
+//  - /skills still lands on the shared Coming Soon page until built.
 //  - One top-banner ad slot below the hero (ads placement plan 22 Nov
 //    2026). It renders nothing until AdSense is configured; the global
-//    bottom banner in App.tsx still applies. No invented counts anywhere.
+//    bottom banner in App.tsx still applies. No ads above the fold.
 
 import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
@@ -46,6 +47,10 @@ import { useAuth } from '../lib/auth';
 import { JobsSection } from '../components/JobCards';
 import { useLanguage } from '../i18n/LanguageContext';
 import { listQuizAttempts, listSubjectProgress } from '../lib/progress';
+import { getAllPublishedBooksCached, type Book } from '../lib/content';
+import { loadHubOpportunities } from '../lib/opportunitiesData';
+import type { Opportunity } from '../lib/opportunities';
+import '../components/home-redesign.css';
 
 function SearchIcon() {
   return (
@@ -88,6 +93,27 @@ function SkillsIcon({ size = 30 }: { size?: number }) {
     </svg>
   );
 }
+function GlobeIcon({ size = 30 }: { size?: number }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <circle cx="12" cy="12" r="9" />
+      <path d="M3 12h18" />
+      <path d="M12 3a13.5 13.5 0 0 1 3.5 9 13.5 13.5 0 0 1-3.5 9 13.5 13.5 0 0 1-3.5-9A13.5 13.5 0 0 1 12 3z" />
+    </svg>
+  );
+}
+function RobotIcon({ size = 30 }: { size?: number }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <rect x="5" y="8" width="14" height="11" rx="2" />
+      <path d="M12 8V4" />
+      <circle cx="12" cy="3" r="1" />
+      <circle cx="9" cy="13" r="1" fill="currentColor" />
+      <circle cx="15" cy="13" r="1" fill="currentColor" />
+      <path d="M9 17h6" />
+    </svg>
+  );
+}
 function QuizIcon({ size = 22 }: { size?: number }) {
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
@@ -124,9 +150,9 @@ function StarIcon({ size = 22 }: { size?: number }) {
   );
 }
 
-// The four sections. Card tints follow the mockups (green/blue/purple/
-// orange); button/text colours are darkened to AA contrast on white
-// (see team/homepage-redesign-report.md for the deviations).
+// The four sections — preserved verbatim from the 21 Nov redesign
+// (Job + Admission Preparation are live since 22 Nov 2026; /class
+// is real; only /skills still lands on the shared Coming Soon page).
 const SECTIONS = [
   {
     id: 'jobs',
@@ -192,16 +218,105 @@ const SECTIONS = [
   },
 ];
 
+// The four hubs (owner brief §4 + mockups). Every destination is
+// live EXCEPT the AI hub: /ai-teacher is a scripted demo, honestly
+// labelled "প্রদর্শনী" on the card — live AI chat does not exist yet.
+const HUBS = [
+  {
+    id: 'education',
+    to: '/class',
+    tint: 'ev-rd-hub-green',
+    icon: <CapIcon />,
+    titleBn: 'Education Hub',
+    titleEn: 'Education Hub',
+    descBn: 'শিক্ষা ও শেখার পূর্ণাঙ্গ ব্যবস্থা',
+    descEn: 'Complete learning system',
+    noteBn: '',
+    noteEn: '',
+  },
+  {
+    id: 'opportunity',
+    to: '/opportunities',
+    tint: 'ev-rd-hub-blue',
+    icon: <BriefcaseIcon />,
+    titleBn: 'Opportunity Hub',
+    titleEn: 'Opportunity Hub',
+    descBn: 'চাকরি ও ক্যারিয়ারের সুযোগ',
+    descEn: 'Jobs and career opportunities',
+    noteBn: '',
+    noteEn: '',
+  },
+  {
+    id: 'ai',
+    to: '/ai-teacher',
+    tint: 'ev-rd-hub-purple',
+    icon: <RobotIcon />,
+    titleBn: 'AI Life Assistant',
+    titleEn: 'AI Life Assistant',
+    descBn: 'আপনার ব্যক্তিগত AI সহকারী',
+    descEn: 'Your personal AI assistant',
+    noteBn: 'প্রদর্শনী — আসল AI চ্যাট এখনো চালু হয়নি',
+    noteEn: 'Demo — live AI chat not launched yet',
+  },
+  {
+    id: 'life',
+    to: '/life',
+    tint: 'ev-rd-hub-amber',
+    icon: <GlobeIcon />,
+    titleBn: 'Everyday Life Services',
+    titleEn: 'Everyday Life Services',
+    descBn: 'দৈনন্দিন প্রয়োজনীয় সেবা',
+    descEn: 'Everyday services you need',
+    noteBn: '',
+    noteEn: '',
+  },
+];
+
 // Feature strip (desktop) / quick access (mobile). ONLY live features
 // appear here — not-yet-live features are removed from the homepage
 // face entirely (23 Nov 2026, AdSense cleanup), never shown as Coming
 // Soon chips. Removed: Video Lessons, Study Routine (/routine is an
 // honest placeholder page, linked from /about), Ranking, Certificate.
-// They return when the features launch.
+// They return when the features launch. No "কোর্স" tile: no /courses
+// route or enrolment system exists (audit §9.2).
 const FEATURES = [
   { icon: <BookIcon size={22} />, bn: 'প্রশ্নব্যাংক', en: 'Question Bank', to: '/library' },
   { icon: <QuizIcon />, bn: 'মডেল টেস্ট', en: 'Model Tests', to: '/exam' },
   { icon: <ChartIcon />, bn: 'ফলাফল বিশ্লেষণ', en: 'Result Analysis', to: '/progress' },
+];
+
+// Mobile quick access (mockup §9.2): every icon has a live destination.
+const QUICK = [
+  { icon: <BookIcon size={22} />, bn: 'বই', en: 'Books', to: '/library' },
+  { icon: <QuizIcon />, bn: 'পরীক্ষা', en: 'Exams', to: '/exam' },
+  { icon: <BriefcaseIcon size={22} />, bn: 'ক্যারিয়ার', en: 'Career', to: '/opportunities/career-guidance' },
+  { icon: <ChartIcon />, bn: 'ক্যালকুলেটর', en: 'Calculator', to: '/life/calculators' },
+  { icon: <GlobeIcon size={22} />, bn: 'টুলস', en: 'Tools', to: '/life' },
+  { icon: <BookIcon size={22} />, bn: 'প্রশ্নব্যাংক', en: 'Question Bank', to: '/library' },
+  { icon: <ChartIcon />, bn: 'ফলাফল', en: 'Results', to: '/progress' },
+];
+
+// Everyday life services — the 9 live /life tools (LifeHubPage TOOLS).
+const LIFE_TOOLS = [
+  { to: '/life/budget', icon: '৳', bn: 'বাজেট পরিকল্পনা', en: 'Budget Planner' },
+  { to: '/life/calculators', icon: '🧮', bn: 'ক্যালকুলেটর', en: 'Calculators' },
+  { to: '/life/converters', icon: '⇄', bn: 'কনভার্টার', en: 'Converters' },
+  { to: '/life/planner', icon: '🗓', bn: 'দৈনন্দিন পরিকল্পনা', en: 'Daily Planner' },
+  { to: '/life/pdf-tools', icon: '📄', bn: 'পিডিএফ টুলস', en: 'PDF Tools' },
+  { to: '/life/health', icon: '✚', bn: 'স্বাস্থ্য', en: 'Health' },
+  { to: '/life/government', icon: '🏛', bn: 'সরকারি সেবা', en: 'Government Services' },
+  { to: '/life/travel', icon: '✈', bn: 'ভ্রমণ', en: 'Travel' },
+  { to: '/life/services', icon: '🗂', bn: 'সেবা নির্দেশিকা', en: 'Services Directory' },
+];
+
+// Opportunity tiles — every tile filters the live hub (?type= is
+// supported by OpportunityHubPage). Career guidance is a live guide.
+const OPP_TILES = [
+  { to: '/opportunities?type=job', icon: '💼', bn: 'চাকরি', en: 'Jobs' },
+  { to: '/opportunities?type=scholarship', icon: '🎓', bn: 'স্কলারশিপ', en: 'Scholarships' },
+  { to: '/opportunities?type=internship', icon: '🧑‍💼', bn: 'ইন্টার্নশিপ', en: 'Internships' },
+  { to: '/opportunities?type=freelance', icon: '💻', bn: 'ফ্রিল্যান্সিং', en: 'Freelancing' },
+  { to: '/opportunities/career-guidance', icon: '🧭', bn: 'ক্যারিয়ার গাইড', en: 'Career Guide' },
 ];
 
 const POPULAR = [
@@ -221,6 +336,26 @@ const POPULAR_MOBILE = [
   { bn: 'Engineering', to: '/admissions' },
   { bn: 'Agriculture', to: '/admissions' },
 ];
+
+// Audit-verified library totals (24 Nov 2026 audit, §8.10): the
+// live book list gives the book count, but chapter/question totals
+// are not stored on the Book rows — these constants are the verified
+// figures, never the mockup's invented numbers.
+const VERIFIED_CHAPTER_COUNT = 2307;
+const VERIFIED_QUESTION_COUNT = 23346;
+
+function bnNum(n: number): string {
+  return n.toLocaleString('bn-BD');
+}
+
+function formatBnDate(millis: number | null): string {
+  if (!millis) return '';
+  try {
+    return new Date(millis).toLocaleDateString('bn-BD', { day: 'numeric', month: 'long', year: 'numeric' });
+  } catch {
+    return '';
+  }
+}
 
 type ProgressData = {
   lessons: number;
@@ -268,6 +403,10 @@ export default function HomePage() {
   const [progress, setProgress] = useState<ProgressData | null>(null);
   const [progressLoading, setProgressLoading] = useState(false);
   const [progressError, setProgressError] = useState(false);
+  const [books, setBooks] = useState<Book[] | null>(null);
+  const [booksError, setBooksError] = useState(false);
+  const [opportunities, setOpportunities] = useState<Opportunity[] | null>(null);
+  const [opportunitiesError, setOpportunitiesError] = useState(false);
   const navigate = useNavigate();
 
   // Real progress only — signed in, from Firestore (progress + quiz
@@ -302,280 +441,582 @@ export default function HomePage() {
     };
   }, [user]);
 
+  // Public catalogue data for the new sections: the live published
+  // book list (one cached read, shared with the library) and the
+  // verified opportunity listings (Firestore Published, seed fallback
+  // — same source the hub itself renders).
+  useEffect(() => {
+    let live = true;
+    getAllPublishedBooksCached()
+      .then((list) => {
+        if (live) setBooks(list);
+      })
+      .catch(() => {
+        if (live) setBooksError(true);
+      });
+    loadHubOpportunities()
+      .then(({ items }) => {
+        if (live) setOpportunities(items);
+      })
+      .catch(() => {
+        if (live) setOpportunitiesError(true);
+      });
+    return () => {
+      live = false;
+    };
+  }, []);
+
   const accuracy = progress && progress.attempted > 0 ? Math.round((progress.correct / progress.attempted) * 100) : null;
   const hasProgress = progress !== null && (progress.lessons > 0 || progress.attempted > 0 || progress.quizAttempts > 0);
+
+  // Live education counts — computed from the fetched books, never
+  // hard-coded. educationType values are the loader's: Higher (অনার্স
+  // ও মাস্টার্স), Technical, HSC, Madrasa, SSC. Class 1–5 / 6–8 have
+  // no books (0) — the /class dashboards show the honest not-ready
+  // state for them.
+  const countByType = (type: string) => (books ?? []).filter((b) => b.educationType === type).length;
+  const honoursCount = (books ?? []).filter((b) => b.educationType === 'Higher' && b.program === 'Honours').length;
+  const mastersCount = (books ?? []).filter((b) => /master/i.test(b.program ?? '')).length;
+  const popularBooks = books ? [...books].sort((a, b) => b.questionCount - a.questionCount).slice(0, 8) : [];
+  const latestOpportunities = opportunities
+    ? [...opportunities].sort((a, b) => (b.publishedDateMillis ?? -1) - (a.publishedDateMillis ?? -1)).slice(0, 3)
+    : [];
+
+  const EDU_TILES: {
+    to: string;
+    icon: string;
+    bn: string;
+    en: string;
+    descBn: string;
+    descEn: string;
+    count: number | null;
+    notReady: boolean;
+  }[] = [
+    { to: '/class', icon: '📚', bn: 'Class 1–12', en: 'Class 1–12', descBn: 'সব শ্রেণি এক জায়গায়', descEn: 'All classes in one place', count: null, notReady: false },
+    { to: '/library?type=Madrasa', icon: '🕌', bn: 'Madrasa', en: 'Madrasa', descBn: 'মাদ্রাসা শিক্ষার বই', descEn: 'Madrasa education books', count: countByType('Madrasa'), notReady: false },
+    { to: '/library?type=Technical', icon: '⚙️', bn: 'Technical', en: 'Technical', descBn: 'কারিগরি শিক্ষার বই', descEn: 'Technical education books', count: countByType('Technical'), notReady: false },
+    { to: '/class/honours-masters', icon: '🎓', bn: 'Honours', en: 'Honours', descBn: 'অনার্সের বই', descEn: 'Honours books', count: honoursCount, notReady: false },
+    { to: '/class/honours-masters', icon: '🎓', bn: 'Masters', en: 'Masters', descBn: 'মাস্টার্সের বই', descEn: 'Masters books', count: mastersCount, notReady: false },
+    { to: '/library', icon: '📖', bn: 'Books', en: 'Books', descBn: 'ডিজিটাল লাইব্রেরি', descEn: 'Digital library', count: books ? books.length : null, notReady: false },
+    { to: '/library', icon: '▶️', bn: 'Lessons', en: 'Lessons', descBn: 'বইয়ের ভেতরে পাঠ', descEn: 'Lessons inside the books', count: null, notReady: false },
+    { to: '/exam', icon: '📝', bn: 'Exams', en: 'Exams', descBn: 'মডেল টেস্ট ও MCQ পরীক্ষা', descEn: 'Model tests and MCQ exams', count: null, notReady: false },
+  ];
 
   function runSearch(e: React.FormEvent) {
     e.preventDefault();
     const q = searchText.trim();
-    navigate(q ? `/library?q=${encodeURIComponent(q)}` : '/library');
+    navigate(q ? `/search?q=${encodeURIComponent(q)}` : '/search');
   }
 
   return (
     <>
-      {/* Hero greeting pill, v4 — OUTSIDE PageShell so it sits flush
-          directly below the nav (the shell's 28px top padding made the
-          white gap above the band) and spans the viewport, not the
-          shell's 1240px. Home-only: only HomePage mounts it. */}
+      {/* Hero greeting band, v4 mount (owner's FORMAL revised brief 24
+          Nov 2026 00:29) — OUTSIDE PageShell so it sits flush directly
+          below the nav and spans the viewport, not the shell's 1240px.
+          Home-only: only HomePage mounts it. One language at a time
+          (ar → en → bn); v4 owns this component — do not touch it. */}
       <HeroGreeting />
       <PageShell titleBn="হোম" titleEn="Home" wide hideHomeLink hideTitle maxWidth={1240}>
-      {/* Mobile search bar (≤768px, mockup). Desktop search lives in the header. */}
-      <form className="ev-home-msearch" onSubmit={runSearch} role="search">
-        <label htmlFor="ev-home-msearch" style={{ position: 'absolute', width: 1, height: 1, overflow: 'hidden', clip: 'rect(0 0 0 0)' }}>
-          {t({ bn: 'খুঁজুন', en: 'Search' })}
-        </label>
-        <input
-          id="ev-home-msearch"
-          type="search"
-          value={searchText}
-          onChange={(e) => setSearchText(e.target.value)}
-          placeholder={t({ bn: 'Search anything... (Ex: BCS, DU Admission, Math)', en: 'Search anything... (Ex: BCS, DU Admission, Math)' })}
-        />
-        <button type="submit" aria-label={t({ bn: 'খুঁজুন', en: 'Search' })}>
-          <SearchIcon />
-        </button>
-      </form>
+        {/* Mobile search bar (≤768px, mockup). Now a REAL global search:
+            it goes to /search, which searches books + jobs + opportunities
+            + life services — not book titles only. */}
+        <form className="ev-home-msearch" onSubmit={runSearch} role="search">
+          <label htmlFor="ev-home-msearch" style={{ position: 'absolute', width: 1, height: 1, overflow: 'hidden', clip: 'rect(0 0 0 0)' }}>
+            {t({ bn: 'খুঁজুন', en: 'Search' })}
+          </label>
+          <input
+            id="ev-home-msearch"
+            type="search"
+            value={searchText}
+            onChange={(e) => setSearchText(e.target.value)}
+            placeholder={t({ bn: 'বই, চাকরি, স্কলারশিপ, সেবা খুঁজুন…', en: 'Search books, jobs, scholarships, services…' })}
+          />
+          <button type="submit" aria-label={t({ bn: 'খুঁজুন', en: 'Search' })}>
+            <SearchIcon />
+          </button>
+        </form>
 
-      {/* Desktop hero (≥769px): light gradient + wordmark, NO photos. */}
-      <section className="ev-home-hero" aria-label={t({ bn: 'Eduvelto', en: 'Eduvelto' })}>
-        <p className="ev-home-hero-eyebrow">
-          <span>{t({ bn: 'সবার জন্য, সবসময়, সম্পূর্ণ শিক্ষা প্ল্যাটফর্ম', en: 'A complete education platform — for everyone, always' })}</span>
-        </p>
-        <h1 className="ev-home-wordmark" aria-label="Eduvelto — Learn • Grow • Achieve">
-          <span className="ev-home-wordmark-edu">Edu</span>
-          <span className="ev-home-wordmark-velto">velto</span>
-          <span className="ev-home-wordmark-tag">Learn • Grow • Achieve</span>
-        </h1>
-        <p className="ev-home-hero-line">{t({ bn: 'শেখো, প্রস্তুতি নাও, সফল হও...', en: 'Learn, prepare, succeed...' })}</p>
-        <p>
-          <span className="ev-home-hero-badge">{t({ bn: 'স্বপ্ন পূরণের পথে Eduvelto সাথেই আছে!', en: 'Eduvelto is with you on the path to your dreams!' })}</span>
-        </p>
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10, marginTop: 18 }}>
-          <Link to={user ? '/dashboard' : '/register'} className="ev-btn ev-btn-gold" style={{ textDecoration: 'none' }}>
-            {t({ bn: 'এখনই শুরু করুন →', en: 'Start now →' })}
-          </Link>
-          <Link to="/library" className="ev-btn" style={{ textDecoration: 'none', background: 'var(--card)', borderColor: 'var(--line-strong)' }}>
-            {t({ bn: 'লাইব্রেরি দেখুন', en: 'Browse library' })}
-          </Link>
-        </div>
-      </section>
-
-      {/* Top banner ad — home only (ads placement plan 22 Nov 2026).
-          Renders nothing until AdSense is configured; in preview it
-          shows a labelled placeholder. */}
-      <AdSlot placement="top-banner" />
-
-      {/* Four section cards (mockup). */}
-      <section aria-label={t({ bn: 'প্রধান বিভাগ', en: 'Main sections' })}>
-        <div className="ev-home-sections">
-          {SECTIONS.map((s) => (
-            <article key={s.id} className={`ev-home-card ${s.tint}`}>
-              {s.badgeBn ? (
-                <span className={`ev-home-card-badge${s.badgeMobileOnly ? ' ev-home-card-badge-mobile' : ''}`}>
-                  {t({ bn: s.badgeBn, en: s.badgeEn })}
-                </span>
-              ) : null}
-              <span className="ev-home-card-icon" aria-hidden="true">
-                {s.icon}
-              </span>
-              <h2>{t({ bn: s.titleBn, en: s.titleEn })}</h2>
-              <p>{t({ bn: s.descBn, en: s.descEn })}</p>
-              <Link to={s.to} className="ev-btn ev-home-card-cta">
-                {t({ bn: s.ctaBn, en: s.ctaEn })}
-              </Link>
-            </article>
-          ))}
-        </div>
-      </section>
-
-      {/* Feature strip (desktop) / quick access (mobile). */}
-      <section aria-label={t({ bn: 'ফিচার', en: 'Features' })}>
-        <div className="ev-home-strip">
-          {FEATURES.map((f) => (
-            <div key={f.bn} className="ev-home-strip-item">
-              <Link to={f.to} className="ev-home-strip-link">
-                <span aria-hidden="true">{f.icon}</span>
-                <span>{t({ bn: f.bn, en: f.en })}</span>
-              </Link>
-            </div>
-          ))}
-          <div className="ev-home-strip-item ev-home-strip-more">
-            <Link to="/about" className="ev-home-strip-link">
-              <span>{t({ bn: 'আরও ফিচার দেখুন →', en: 'See more features →' })}</span>
+        {/* Hero: light gradient + wordmark, NO photos (see file header). */}
+        <section className="ev-home-hero" aria-label={t({ bn: 'Eduvelto', en: 'Eduvelto' })}>
+          <p className="ev-home-hero-eyebrow">
+            <span>{t({ bn: 'সবার জন্য, সবসময়, সম্পূর্ণ শিক্ষা প্ল্যাটফর্ম', en: 'A complete education platform — for everyone, always' })}</span>
+          </p>
+          <h1 className="ev-home-wordmark" aria-label="Eduvelto — Learn • Grow • Achieve">
+            <span className="ev-home-wordmark-edu">Edu</span>
+            <span className="ev-home-wordmark-velto">velto</span>
+            <span className="ev-home-wordmark-tag">Learn • Grow • Achieve</span>
+          </h1>
+          <p className="ev-home-hero-line">{t({ bn: 'শেখো, প্রস্তুতি নাও, সফল হও...', en: 'Learn, prepare, succeed...' })}</p>
+          <p>
+            <span className="ev-home-hero-badge">{t({ bn: 'স্বপ্ন পূরণের পথে Eduvelto সাথেই আছে!', en: 'Eduvelto is with you on the path to your dreams!' })}</span>
+          </p>
+          {/* Desktop Global Search (mockup): the same real search as
+              the mobile box — books, jobs, opportunities, services. */}
+          <form className="ev-rd-hero-search" onSubmit={runSearch} role="search">
+            <label htmlFor="ev-rd-hero-search" style={{ position: 'absolute', width: 1, height: 1, overflow: 'hidden', clip: 'rect(0 0 0 0)' }}>
+              {t({ bn: 'বই, চাকরি, স্কলারশিপ, সেবা খুঁজুন', en: 'Search books, jobs, scholarships, services' })}
+            </label>
+            <input
+              id="ev-rd-hero-search"
+              type="search"
+              value={searchText}
+              onChange={(e) => setSearchText(e.target.value)}
+              placeholder={t({ bn: 'বই, চাকরি, স্কলারশিপ বা যেকোনো কিছু খুঁজুন…', en: 'Search books, jobs, scholarships or anything…' })}
+            />
+            <button type="submit">{t({ bn: 'খুঁজুন', en: 'Search' })}</button>
+          </form>
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10, marginTop: 18 }}>
+            <Link to={user ? '/dashboard' : '/register'} className="ev-btn ev-btn-gold" style={{ textDecoration: 'none' }}>
+              {t({ bn: 'এখনই শুরু করুন →', en: 'Start now →' })}
+            </Link>
+            <Link to="/about" className="ev-btn" style={{ textDecoration: 'none', background: 'var(--card)', borderColor: 'var(--line-strong)' }}>
+              {t({ bn: 'জানুন Eduvelto সম্পর্কে', en: 'About Eduvelto' })}
             </Link>
           </div>
-        </div>
+        </section>
 
-        <div className="ev-home-quick">
-          <div className="ev-home-panel-head">
-            <h2>{t({ bn: 'দ্রুত অ্যাক্সেস', en: 'Quick Access' })}</h2>
-            <Link to="/about">{t({ bn: 'সব দেখুন →', en: 'See all →' })}</Link>
+        {/* Top banner ad — home only (ads placement plan 22 Nov 2026).
+            Renders nothing until AdSense is configured; in preview it
+            shows a labelled placeholder. */}
+        <AdSlot placement="top-banner" />
+
+        {/* Four hub cards (owner brief §4 + mockups). */}
+        <section aria-label={t({ bn: 'Eduvelto-র প্রধান সেবা সমূহ', en: "Eduvelto's main services" })}>
+          <div className="ev-rd-hubs">
+            {HUBS.map((h) => (
+              <Link key={h.id} to={h.to} className={`ev-rd-hub ${h.tint}`}>
+                <span className="ev-rd-hub-icon" aria-hidden="true">
+                  {h.icon}
+                </span>
+                <h2>{t({ bn: h.titleBn, en: h.titleEn })}</h2>
+                <p>{t({ bn: h.descBn, en: h.descEn })}</p>
+                {h.noteBn ? <span className="ev-rd-hub-note">{t({ bn: h.noteBn, en: h.noteEn })}</span> : null}
+                <span className="ev-rd-hub-cta">{t({ bn: 'বিস্তারিত দেখুন →', en: 'See details →' })}</span>
+              </Link>
+            ))}
           </div>
-          <div className="ev-home-quick-grid">
+        </section>
+
+        {/* শিক্ষা কেন্দ্র — live categories with live counts. Class 1–5
+            and 6–8 have no books: the /class dashboards show the honest
+            not-ready state; no tile here claims stocked content. */}
+        <section className="ev-rd-section" aria-label={t({ bn: 'শিক্ষা কেন্দ্র', en: 'Education Hub' })}>
+          <div className="ev-rd-head">
+            <h2>{t({ bn: '📖 শিক্ষা কেন্দ্র', en: '📖 Education Hub' })}</h2>
+            <Link to="/class">{t({ bn: 'সব দেখুন →', en: 'See all →' })}</Link>
+          </div>
+          <p className="ev-rd-sub">
+            {t({
+              bn: 'শ্রেণি ১–১২, মাদ্রাসা, টেকনিক্যাল, অনার্স ও মাস্টার্স — লাইব্রেরির আসল বই ও পাঠ।',
+              en: 'Class 1–12, Madrasa, Technical, Honours & Masters — real books and lessons from the library.',
+            })}
+          </p>
+          <div className="ev-rd-edu-grid">
+            {EDU_TILES.map((tile) => (
+              <Link key={tile.bn} to={tile.to} className="ev-rd-edu-tile">
+                <span className="ev-rd-edu-icon" aria-hidden="true">
+                  {tile.icon}
+                </span>
+                <strong>{t({ bn: tile.bn, en: tile.en })}</strong>
+                <span>{t({ bn: tile.descBn, en: tile.descEn })}</span>
+                {!booksError && tile.count !== null && tile.count > 0 ? (
+                  <span className="ev-rd-edu-count">
+                    {lang === 'bn' ? `${bnNum(tile.count)}টি বই` : `${tile.count} books`}
+                  </span>
+                ) : null}
+                {tile.notReady ? (
+                  <span>{t({ bn: 'কনটেন্ট প্রস্তুত হচ্ছে', en: 'Content being prepared' })}</span>
+                ) : null}
+              </Link>
+            ))}
+          </div>
+          <p className="ev-rd-sub" style={{ marginTop: 10 }}>
+            {t({
+              bn: 'শ্রেণি ১–৫ ও ৬–৮-এর বই এখনো লাইব্রেরিতে আসেনি — সেগুলোর পাতায় সৎভাবে জানানো আছে।',
+              en: 'Class 1–5 and 6–8 books have not reached the library yet — their pages say so honestly.',
+            })}
+          </p>
+        </section>
+
+        {/* Four section cards — preserved verbatim (21 Nov redesign). */}
+        <section className="ev-rd-section" aria-label={t({ bn: 'প্রধান বিভাগ', en: 'Main sections' })}>
+          <div className="ev-home-sections">
+            {SECTIONS.map((s) => (
+              <article key={s.id} className={`ev-home-card ${s.tint}`}>
+                {s.badgeBn ? (
+                  <span className={`ev-home-card-badge${s.badgeMobileOnly ? ' ev-home-card-badge-mobile' : ''}`}>
+                    {t({ bn: s.badgeBn, en: s.badgeEn })}
+                  </span>
+                ) : null}
+                <span className="ev-home-card-icon" aria-hidden="true">
+                  {s.icon}
+                </span>
+                <h2>{t({ bn: s.titleBn, en: s.titleEn })}</h2>
+                <p>{t({ bn: s.descBn, en: s.descEn })}</p>
+                <Link to={s.to} className="ev-btn ev-home-card-cta">
+                  {t({ bn: s.ctaBn, en: s.ctaEn })}
+                </Link>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        {/* Feature strip (desktop) / quick access (mobile). */}
+        <section className="ev-rd-section" aria-label={t({ bn: 'ফিচার', en: 'Features' })}>
+          <div className="ev-home-strip">
             {FEATURES.map((f) => (
-              <div key={f.bn} className="ev-home-quick-tile">
-                <Link to={f.to} className="ev-home-quick-link">
+              <div key={f.bn} className="ev-home-strip-item">
+                <Link to={f.to} className="ev-home-strip-link">
                   <span aria-hidden="true">{f.icon}</span>
                   <span>{t({ bn: f.bn, en: f.en })}</span>
                 </Link>
               </div>
             ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Job Preparation — Step 5 regrouping (10 categories, tier
-          grouping removed) ported onto the redesigned homepage:
-          the old homepage's class-cards section is gone, so the
-          Jobs section sits here, after the feature strip and
-          before the panels. */}
-      <JobsSection />
-
-      {/* Three panels (desktop) / stacked panels (mobile). */}
-      <section className="ev-home-panels" aria-label={t({ bn: 'আপডেট, অগ্রগতি ও জনপ্রিয়', en: 'Updates, progress and popular' })}>
-        {/* সাম্প্রতিক আপডেট — honest empty state: no verified circular
-            exists yet, so nothing is listed. */}
-        <div className="ev-home-panel">
-          <div className="ev-home-panel-head">
-            <h2>
-              <StarIcon size={18} /> {t({ bn: 'সাম্প্রতিক আপডেট', en: 'Recent Updates' })}
-            </h2>
-          </div>
-          <p style={{ color: 'var(--muted-ivory)', margin: '6px 0 0', fontSize: 14, lineHeight: 1.7 }}>
-            {t({ bn: 'এখনো কোনো আপডেট নেই। নতুন নিয়োগ ও ভর্তি বিজ্ঞপ্তি প্রকাশিত হলে এখানে দেখা যাবে।', en: 'No updates yet. New job and admission circulars will appear here once published.' })}
-          </p>
-        </div>
-
-        {/* আপনার পড়াশোনার অগ্রগতি — real data only. */}
-        <div className="ev-home-panel">
-          <div className="ev-home-panel-head">
-            <h2>{t({ bn: 'আপনার পড়াশোনার অগ্রগতি', en: 'Your Study Progress' })}</h2>
-            {user && hasProgress ? <Link to="/progress">{t({ bn: 'বিস্তারিত →', en: 'Details →' })}</Link> : null}
-          </div>
-          {!user ? (
-            <div>
-              <p style={{ color: 'var(--muted-ivory)', margin: '6px 0 12px', fontSize: 14, lineHeight: 1.7 }}>
-                {t({ bn: 'লগইন করলে আপনার পড়াশোনার অগ্রগতি এখানে দেখা যাবে।', en: 'Log in to see your study progress here.' })}
-              </p>
-              <Link to="/login" className="ev-btn ev-btn-primary ev-btn-sm">
-                {t({ bn: 'লগইন করুন', en: 'Log in' })}
+            <div className="ev-home-strip-item ev-home-strip-more">
+              <Link to="/about" className="ev-home-strip-link">
+                <span>{t({ bn: 'আরও ফিচার দেখুন →', en: 'See more features →' })}</span>
               </Link>
             </div>
-          ) : progressLoading ? (
-            <p style={{ color: 'var(--muted-ivory)', margin: '6px 0 0', fontSize: 14 }}>{t({ bn: 'অগ্রগতি লোড হচ্ছে…', en: 'Loading progress…' })}</p>
-          ) : progressError ? (
-            <p style={{ color: 'var(--error)', margin: '6px 0 0', fontSize: 14 }}>
-              {t({ bn: 'অগ্রগতি লোড করা যায়নি — পাতাটি রিফ্রেশ করে আবার চেষ্টা করুন।', en: 'Could not load progress — please refresh and try again.' })}
-            </p>
-          ) : !hasProgress ? (
-            <div>
-              <p style={{ color: 'var(--muted-ivory)', margin: '6px 0 12px', fontSize: 14, lineHeight: 1.7 }}>
-                {t({ bn: 'এখনো কোনো অগ্রগতি নেই — পাঠ পড়ে বা কুইজ দিয়ে শুরু করুন।', en: 'No progress yet — start by reading a lesson or taking a quiz.' })}
-              </p>
-              <Link to="/library" className="ev-btn ev-btn-primary ev-btn-sm">
-                {t({ bn: 'লাইব্রেরি দেখুন', en: 'Browse library' })}
-              </Link>
-            </div>
-          ) : (
-            <div className="ev-home-progress-body">
-              {accuracy !== null ? (
-                <ProgressRing percent={accuracy} label={t({ bn: 'অনুশীলন প্রশ্নের সঠিক হার', en: 'Practice accuracy' })} />
-              ) : null}
-              <ul className="ev-home-progress-rows">
-                <li>
-                  <span>{t({ bn: 'পাঠ সম্পন্ন', en: 'Lessons completed' })}</span>
-                  <strong>
-                    {lang === 'bn' ? `${progress.lessons}টি` : `${progress.lessons}`}
-                  </strong>
-                </li>
-                <li>
-                  <span>{t({ bn: 'প্রশ্নের উত্তর', en: 'Questions answered' })}</span>
-                  <strong>
-                    {lang === 'bn' ? `${progress.attempted}টি` : `${progress.attempted}`}
-                    {progress.attempted > 0 ? ` (${t({ bn: 'সঠিক', en: 'correct' })} ${progress.correct})` : ''}
-                  </strong>
-                </li>
-                <li>
-                  <span>{t({ bn: 'কুইজ প্রচেষ্টা', en: 'Quiz attempts' })}</span>
-                  <strong>
-                    {lang === 'bn' ? `${progress.quizAttempts}টি` : `${progress.quizAttempts}`}
-                    {progress.avgQuiz !== null ? ` · ${t({ bn: 'গড়', en: 'avg' })} ${Math.round(progress.avgQuiz)}%` : ''}
-                  </strong>
-                </li>
-              </ul>
-            </div>
-          )}
-        </div>
+          </div>
 
-        {/* জনপ্রিয় বিভাগ (desktop) / জনপ্রিয় পরীক্ষা (mobile). */}
-        <div className="ev-home-panel">
-          <div className="ev-home-panel-head">
-            <h2 className="ev-home-popular-desktop">{t({ bn: 'জনপ্রিয় বিভাগ', en: 'Popular Categories' })}</h2>
-            <h2 className="ev-home-popular-mobile">{t({ bn: 'জনপ্রিয় পরীক্ষা', en: 'Popular Exams' })}</h2>
-            <Link to="/exam">{t({ bn: 'সব দেখুন →', en: 'See all →' })}</Link>
+          <div className="ev-home-quick">
+            <div className="ev-home-panel-head">
+              <h2>{t({ bn: 'দ্রুত অ্যাক্সেস', en: 'Quick Access' })}</h2>
+              <Link to="/about">{t({ bn: 'সব দেখুন →', en: 'See all →' })}</Link>
+            </div>
+            <div className="ev-home-quick-grid">
+              {QUICK.map((f) => (
+                <div key={`${f.bn}-${f.to}`} className="ev-home-quick-tile">
+                  <Link to={f.to} className="ev-home-quick-link">
+                    <span aria-hidden="true">{f.icon}</span>
+                    <span>{t({ bn: f.bn, en: f.en })}</span>
+                  </Link>
+                </div>
+              ))}
+            </div>
           </div>
-          <div className="ev-home-popular-grid">
-            {POPULAR.map((p) => (
-              <Link key={p.bn} to={p.to} className="ev-home-popular-tile">
-                {t({ bn: p.bn, en: p.en ?? p.bn })}
-              </Link>
-            ))}
-          </div>
-          <div className="ev-home-popular-row">
-            {POPULAR_MOBILE.map((p) => (
-              <Link key={p.bn} to={p.to} className="ev-home-popular-tile">
-                {t({ bn: p.bn, en: p.en ?? p.bn })}
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Founder message — founder-profile brand item (23 Nov 2026).
-          Copy is the owner-approved draft; photo + /founder link mirror
-          the About page founder section. No DOB/age, no private-tuition
-          line, no mock/AI-teacher claims. */}
-      <section
-        className="ev-card"
-        aria-label={t({ bn: 'প্রতিষ্ঠাতার বার্তা', en: "Founder's message" })}
-        style={{ display: 'flex', gap: 20, flexWrap: 'wrap', alignItems: 'flex-start', padding: 20, marginTop: 24, background: 'var(--card)' }}
-      >
-        <img
-          src="/founder-photo.jpg"
-          alt="Ali Hasan Mohammed Mizan, Founder & CEO, Eduvelto"
-          style={{ width: 120, height: 120, objectFit: 'cover', borderRadius: '50%', border: '3px solid #F1B308' }}
-        />
-        <div style={{ flex: '1 1 320px', minWidth: 260 }}>
-          <h2 style={{ margin: '0 0 8px', fontSize: 20 }}>{t({ bn: 'প্রতিষ্ঠাতার বার্তা', en: "Founder's message" })}</h2>
-          <p style={{ lineHeight: 1.7, margin: 0 }}>
+        {/* Job Preparation — Step 5 regrouping ported onto the
+            redesigned homepage, preserved verbatim. */}
+        <JobsSection />
+
+        {/* সুযোগ কেন্দ্র — real listings only (7 verified). Tiles filter
+            the live hub; the list below shows the latest listings with
+            their real dates. The circulars collection is empty, so no
+            circular is ever invented here. */}
+        <section className="ev-rd-section" aria-label={t({ bn: 'সুযোগ কেন্দ্র', en: 'Opportunity Hub' })}>
+          <div className="ev-rd-head">
+            <h2>{t({ bn: '💼 সুযোগ কেন্দ্র', en: '💼 Opportunity Hub' })}</h2>
+            <Link to="/opportunities">{t({ bn: 'সব দেখুন →', en: 'See all →' })}</Link>
+          </div>
+          <p className="ev-rd-sub">
             {t({
-              bn: 'আমি Eduvelto গড়েছি একটাই বিশ্বাস থেকে — মানসম্মত শিক্ষা বাংলাদেশের প্রত্যেক শিক্ষার্থীর জন্য বিনামূল্যে পৌঁছে দেওয়া উচিত। আমি নিজে একজন শিক্ষক ও শিক্ষার্থী — আমি জানি, ভালো পড়ার সুযোগ পেতে অনেকের কত কষ্ট হয়। তাই পাঠ, পরীক্ষা, ডিজিটাল লাইব্রেরি আর পড়ার পরিকল্পনা — সব এক জায়গায়, সম্পূর্ণ বিনামূল্যে। শেখো, এগিয়ে যাও, স্বপ্ন গড়ো।',
-              en: 'I built Eduvelto from a single belief: quality education should be free and within reach of every student in Bangladesh. I am a teacher and a student myself — I know how hard it can be to get a fair chance to learn. So lessons, exams, a digital library and smart study planning — all in one place, completely free. Learn, grow, achieve.',
+              bn: 'যাচাইকৃত চাকরি, স্কলারশিপ, ইন্টার্নশিপ ও ফ্রিল্যান্সিং সুযোগ — প্রতিটি অফিসিয়াল উৎস থেকে যাচাই করা।',
+              en: 'Verified jobs, scholarships, internships and freelancing opportunities — each verified from its official source.',
             })}
           </p>
-          <p style={{ margin: '12px 0 0', fontWeight: 600 }}>
-            {t({ bn: '— আলী হাসান মোহাম্মদ মিজান, প্রতিষ্ঠাতা ও CEO, Eduvelto', en: '— Ali Hasan Mohammed Mizan, Founder & CEO, Eduvelto' })}
-          </p>
-          <p style={{ margin: '8px 0 0' }}>
-            <Link to="/founder">{t({ bn: 'সম্পূর্ণ প্রতিষ্ঠাতা প্রোফাইল →', en: 'Full founder profile →' })}</Link>
-          </p>
-        </div>
-      </section>
+          <div className="ev-rd-opp-tiles">
+            {OPP_TILES.map((tile) => (
+              <Link key={tile.bn} to={tile.to} className="ev-rd-opp-tile">
+                <span aria-hidden="true">{tile.icon}</span>
+                {t({ bn: tile.bn, en: tile.en })}
+              </Link>
+            ))}
+          </div>
+          {opportunitiesError ? (
+            <p className="ev-rd-sub">
+              {t({ bn: 'সুযোগের তালিকা লোড করা যায়নি — সুযোগ হাব থেকে দেখুন।', en: 'Could not load the opportunity list — see the Opportunity Hub.' })}{' '}
+              <Link to="/opportunities">{t({ bn: 'সুযোগ হাব →', en: 'Opportunity Hub →' })}</Link>
+            </p>
+          ) : latestOpportunities.length > 0 ? (
+            <ul className="ev-rd-opp-list">
+              {latestOpportunities.map((o) => (
+                <li key={o.docId}>
+                  <Link to={`/opportunities/${o.docId}`}>{lang === 'bn' ? o.titleBn : o.titleEn}</Link>
+                  <span className="ev-rd-opp-meta">
+                    {lang === 'bn' ? o.organizationBn : o.organizationEn}
+                    {o.deadlineMillis ? ` · ${t({ bn: 'শেষ তারিখ', en: 'Deadline' })}: ${formatBnDate(o.deadlineMillis)}` : ''}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          ) : null}
+        </section>
 
-      {/* Footer banner (mockup). */}
-      <section className="ev-home-banner" aria-label={t({ bn: 'Eduvelto', en: 'Eduvelto' })}>
-        <span aria-hidden="true" style={{ color: 'var(--amber)' }}>
-          <TrophyIcon size={34} />
-        </span>
-        <div>
-          <h2>{t({ bn: 'Eduvelto — একটি প্ল্যাটফর্ম, অসীম সম্ভাবনা!', en: 'Eduvelto — one platform, endless possibilities!' })}</h2>
-          <p>{t({ bn: 'শিক্ষা হোক সহজ, প্রস্তুতি হোক স্মার্ট, সফলতা হোক নিশ্চিত।', en: 'Make learning easy, preparation smart, success certain.' })}</p>
-        </div>
-        <Link to={user ? '/dashboard' : '/register'} className="ev-btn ev-btn-gold ev-home-banner-cta">
-          {t({ bn: 'এখনই শুরু করুন →', en: 'Start now →' })}
-        </Link>
-      </section>
-    </PageShell>
+        {/* AI টুলস ও সহায়তা — honest: /ai-teacher is a scripted demo
+            (it says so on the page itself). Live AI chat is NOT
+            available yet; the panel never claims otherwise. */}
+        <section className="ev-rd-section" aria-label={t({ bn: 'AI টুলস ও সহায়তা', en: 'AI Tools & Assistance' })}>
+          <div className="ev-rd-ai">
+            <h2>{t({ bn: '🤖 AI টুলস ও সহায়তা', en: '🤖 AI Tools & Assistance' })}</h2>
+            <p>
+              {t({
+                bn: 'AI Teacher এখন একটি স্ক্রিপ্ট করা প্রদর্শনী — আসল AI চ্যাট এখনো চালু হয়নি। প্রদর্শনীটি দেখে নিন, আসল AI সহকারী এলে এখানেই জানানো হবে।',
+                en: 'AI Teacher is currently a scripted demo — live AI chat has not launched yet. Try the demo; when the real AI assistant arrives it will be announced here.',
+              })}
+            </p>
+            <div className="ev-rd-ai-actions">
+              <Link to="/ai-teacher" className="ev-btn ev-btn-primary">
+                {t({ bn: 'AI Teacher প্রদর্শনী দেখুন →', en: 'See the AI Teacher demo →' })}
+              </Link>
+              <Link to="/jobs/bcs/practice/english" className="ev-btn" style={{ textDecoration: 'none', background: 'var(--card)', borderColor: 'var(--line-strong)' }}>
+                {t({ bn: 'বিসিএস ইংরেজি অনুশীলন (ফ্রি)', en: 'BCS English practice (free)' })}
+              </Link>
+            </div>
+          </div>
+        </section>
+
+        {/* দৈনন্দিন সেবা সমূহ — the 9 live /life tools. */}
+        <section className="ev-rd-section" aria-label={t({ bn: 'দৈনন্দিন সেবা সমূহ', en: 'Everyday Services' })}>
+          <div className="ev-rd-head">
+            <h2>{t({ bn: '🛠 দৈনন্দিন সেবা সমূহ', en: '🛠 Everyday Services' })}</h2>
+            <Link to="/life">{t({ bn: 'সব দেখুন →', en: 'See all →' })}</Link>
+          </div>
+          <p className="ev-rd-sub">
+            {t({ bn: 'স্বাস্থ্য, ক্যালকুলেটর, ডকুমেন্টসহ দৈনন্দিন প্রয়োজনীয় সেবা — সব বিনামূল্যে।', en: 'Everyday services including health, calculators and documents — all free.' })}
+          </p>
+          <div className="ev-rd-life-grid">
+            {LIFE_TOOLS.map((tool) => (
+              <Link key={tool.to} to={tool.to} className="ev-rd-life-tile">
+                <span aria-hidden="true">{tool.icon}</span>
+                {t({ bn: tool.bn, en: tool.en })}
+              </Link>
+            ))}
+          </div>
+        </section>
+
+        {/* জনপ্রিয় বই — REAL library books only, sorted by question
+            count (the section says so). Text cards: no real covers
+            exist, so no fake covers are ever rendered. */}
+        <section className="ev-rd-section" aria-label={t({ bn: 'জনপ্রিয় বই', en: 'Popular Books' })}>
+          <div className="ev-rd-head">
+            <h2>{t({ bn: '🔥 জনপ্রিয় বই', en: '🔥 Popular Books' })}</h2>
+            <Link to="/library">{t({ bn: 'সব বই →', en: 'All books →' })}</Link>
+          </div>
+          <p className="ev-rd-sub">
+            {t({
+              bn: 'প্রশ্নসংখ্যা অনুযায়ী সাজানো — লাইব্রেরির আসল বই।',
+              en: 'Sorted by question count — real books from the library.',
+            })}
+          </p>
+          {booksError || !books || books.length === 0 ? (
+            <p className="ev-rd-sub">
+              {t({ bn: 'বইয়ের তালিকা লোড করা যায়নি — লাইব্রেরি থেকে দেখুন।', en: 'Could not load the book list — see the library.' })}{' '}
+              <Link to="/library">{t({ bn: 'লাইব্রেরি →', en: 'Library →' })}</Link>
+            </p>
+          ) : (
+            <div className="ev-rd-books">
+              {popularBooks.map((b) => (
+                <article key={b.id} className="ev-rd-book">
+                  <h3>
+                    <Link to={`/library/${b.id}`}>{b.title}</Link>
+                  </h3>
+                  <p>{[b.classLevel, b.department, b.subject].filter(Boolean).join(' · ')}</p>
+                  <span className="ev-rd-book-meta">
+                    {lang === 'bn'
+                      ? `${bnNum(b.chapterCount)}টি অধ্যায় · ${bnNum(b.questionCount)}টি প্রশ্ন`
+                      : `${b.chapterCount} chapters · ${b.questionCount} questions`}
+                  </span>
+                </article>
+              ))}
+            </div>
+          )}
+        </section>
+
+        {/* Stats — REAL numbers only (see file header). Hidden when
+            the book list did not load: an offline browser can resolve
+            the Firestore query from an empty local cache, which would
+            otherwise render a false "০ বই" (verified 24 Nov 2026). */}
+        {books && books.length > 0 && opportunities ? (
+          <section className="ev-rd-stats" aria-label={t({ bn: 'Eduvelto-র পরিসংখ্যান', en: 'Eduvelto in numbers' })}>
+            <div className="ev-rd-stat">
+              <strong>{bnNum(books.length)}</strong>
+              <span>{t({ bn: 'বই', en: 'Books' })}</span>
+            </div>
+            <div className="ev-rd-stat">
+              <strong>{bnNum(VERIFIED_CHAPTER_COUNT)}</strong>
+              <span>{t({ bn: 'অধ্যায়', en: 'Chapters' })}</span>
+            </div>
+            <div className="ev-rd-stat">
+              <strong>{bnNum(VERIFIED_QUESTION_COUNT)}</strong>
+              <span>{t({ bn: 'প্রশ্ন', en: 'Questions' })}</span>
+            </div>
+            <div className="ev-rd-stat">
+              <strong>{bnNum(opportunities.length)}</strong>
+              <span>{t({ bn: 'যাচাইকৃত সুযোগ', en: 'Verified opportunities' })}</span>
+            </div>
+          </section>
+        ) : null}
+
+        {/* Three panels (desktop) / stacked panels (mobile). */}
+        <section className="ev-home-panels ev-rd-section" aria-label={t({ bn: 'আপডেট, অগ্রগতি ও জনপ্রিয়', en: 'Updates, progress and popular' })}>
+          {/* সর্বশেষ আপডেট — REAL dated items only: the latest verified
+              opportunity listings. No verified circular exists yet, so
+              no circular is listed; when the list is empty the honest
+              empty state shows. */}
+          <div className="ev-home-panel">
+            <div className="ev-home-panel-head">
+              <h2>
+                <StarIcon size={18} /> {t({ bn: 'সর্বশেষ আপডেট', en: 'Latest Updates' })}
+              </h2>
+              <Link to="/opportunities">{t({ bn: 'সব দেখুন →', en: 'See all →' })}</Link>
+            </div>
+            {opportunitiesError ? (
+              <p style={{ color: 'var(--muted-ivory)', margin: '6px 0 0', fontSize: 14, lineHeight: 1.7 }}>
+                {t({ bn: 'আপডেট লোড করা যায়নি — সুযোগ হাব থেকে দেখুন।', en: 'Could not load updates — see the Opportunity Hub.' })}
+              </p>
+            ) : latestOpportunities.length > 0 ? (
+              <ul className="ev-rd-updates">
+                {latestOpportunities.map((o) => (
+                  <li key={o.docId}>
+                    <span className="ev-rd-update-date" aria-hidden="true">
+                      {o.publishedDateMillis ? formatBnDate(o.publishedDateMillis) : '—'}
+                    </span>
+                    <div>
+                      <Link to={`/opportunities/${o.docId}`}>{lang === 'bn' ? o.titleBn : o.titleEn}</Link>
+                      <span>{t({ bn: 'সুযোগ হাব', en: 'Opportunity Hub' })}</span>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <p style={{ color: 'var(--muted-ivory)', margin: '6px 0 0', fontSize: 14, lineHeight: 1.7 }}>
+                {t({ bn: 'এখনো কোনো আপডেট নেই। নতুন নিয়োগ ও ভর্তি বিজ্ঞপ্তি প্রকাশিত হলে এখানে দেখা যাবে।', en: 'No updates yet. New job and admission circulars will appear here once published.' })}
+              </p>
+            )}
+          </div>
+
+          {/* আপনার পড়াশোনার অগ্রগতি — real data only. */}
+          <div className="ev-home-panel">
+            <div className="ev-home-panel-head">
+              <h2>{t({ bn: 'আপনার পড়াশোনার অগ্রগতি', en: 'Your Study Progress' })}</h2>
+              {user && hasProgress ? <Link to="/progress">{t({ bn: 'বিস্তারিত →', en: 'Details →' })}</Link> : null}
+            </div>
+            {!user ? (
+              <div>
+                <p style={{ color: 'var(--muted-ivory)', margin: '6px 0 12px', fontSize: 14, lineHeight: 1.7 }}>
+                  {t({ bn: 'লগইন করলে আপনার পড়াশোনার অগ্রগতি এখানে দেখা যাবে।', en: 'Log in to see your study progress here.' })}
+                </p>
+                <Link to="/login" className="ev-btn ev-btn-primary ev-btn-sm">
+                  {t({ bn: 'লগইন করুন', en: 'Log in' })}
+                </Link>
+              </div>
+            ) : progressLoading ? (
+              <p style={{ color: 'var(--muted-ivory)', margin: '6px 0 0', fontSize: 14 }}>{t({ bn: 'অগ্রগতি লোড হচ্ছে…', en: 'Loading progress…' })}</p>
+            ) : progressError ? (
+              <p style={{ color: 'var(--error)', margin: '6px 0 0', fontSize: 14 }}>
+                {t({ bn: 'অগ্রগতি লোড করা যায়নি — পাতাটি রিফ্রেশ করে আবার চেষ্টা করুন।', en: 'Could not load progress — please refresh and try again.' })}
+              </p>
+            ) : !hasProgress ? (
+              <div>
+                <p style={{ color: 'var(--muted-ivory)', margin: '6px 0 12px', fontSize: 14, lineHeight: 1.7 }}>
+                  {t({ bn: 'এখনো কোনো অগ্রগতি নেই — পাঠ পড়ে বা কুইজ দিয়ে শুরু করুন।', en: 'No progress yet — start by reading a lesson or taking a quiz.' })}
+                </p>
+                <Link to="/library" className="ev-btn ev-btn-primary ev-btn-sm">
+                  {t({ bn: 'লাইব্রেরি দেখুন', en: 'Browse library' })}
+                </Link>
+              </div>
+            ) : (
+              <div className="ev-home-progress-body">
+                {accuracy !== null ? (
+                  <ProgressRing percent={accuracy} label={t({ bn: 'অনুশীলন প্রশ্নের সঠিক হার', en: 'Practice accuracy' })} />
+                ) : null}
+                <ul className="ev-home-progress-rows">
+                  <li>
+                    <span>{t({ bn: 'পাঠ সম্পন্ন', en: 'Lessons completed' })}</span>
+                    <strong>
+                      {lang === 'bn' ? `${progress.lessons}টি` : `${progress.lessons}`}
+                    </strong>
+                  </li>
+                  <li>
+                    <span>{t({ bn: 'প্রশ্নের উত্তর', en: 'Questions answered' })}</span>
+                    <strong>
+                      {lang === 'bn' ? `${progress.attempted}টি` : `${progress.attempted}`}
+                      {progress.attempted > 0 ? ` (${t({ bn: 'সঠিক', en: 'correct' })} ${progress.correct})` : ''}
+                    </strong>
+                  </li>
+                  <li>
+                    <span>{t({ bn: 'কুইজ প্রচেষ্টা', en: 'Quiz attempts' })}</span>
+                    <strong>
+                      {lang === 'bn' ? `${progress.quizAttempts}টি` : `${progress.quizAttempts}`}
+                      {progress.avgQuiz !== null ? ` · ${t({ bn: 'গড়', en: 'avg' })} ${Math.round(progress.avgQuiz)}%` : ''}
+                    </strong>
+                  </li>
+                </ul>
+              </div>
+            )}
+          </div>
+
+          {/* জনপ্রিয় বিভাগ (desktop) / জনপ্রিয় পরীক্ষা (mobile). */}
+          <div className="ev-home-panel">
+            <div className="ev-home-panel-head">
+              <h2 className="ev-home-popular-desktop">{t({ bn: 'জনপ্রিয় বিভাগ', en: 'Popular Categories' })}</h2>
+              <h2 className="ev-home-popular-mobile">{t({ bn: 'জনপ্রিয় পরীক্ষা', en: 'Popular Exams' })}</h2>
+              <Link to="/exam">{t({ bn: 'সব দেখুন →', en: 'See all →' })}</Link>
+            </div>
+            <div className="ev-home-popular-grid">
+              {POPULAR.map((p) => (
+                <Link key={p.bn} to={p.to} className="ev-home-popular-tile">
+                  {t({ bn: p.bn, en: p.en ?? p.bn })}
+                </Link>
+              ))}
+            </div>
+            <div className="ev-home-popular-row">
+              {POPULAR_MOBILE.map((p) => (
+                <Link key={p.bn} to={p.to} className="ev-home-popular-tile">
+                  {t({ bn: p.bn, en: p.en ?? p.bn })}
+                </Link>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Founder message — founder-profile brand item (23 Nov 2026).
+            Copy is the owner-approved draft; photo + /founder link mirror
+            the About page founder section. No DOB/age, no private-tuition
+            line, no mock/AI-teacher claims. */}
+        <section
+          className="ev-card"
+          aria-label={t({ bn: 'প্রতিষ্ঠাতার বার্তা', en: "Founder's message" })}
+          style={{ display: 'flex', gap: 20, flexWrap: 'wrap', alignItems: 'flex-start', padding: 20, marginTop: 24, background: 'var(--card)' }}
+        >
+          <img
+            src="/founder-photo.jpg"
+            alt="Ali Hasan Mohammed Mizan, Founder & CEO, Eduvelto"
+            style={{ width: 120, height: 120, objectFit: 'cover', borderRadius: '50%', border: '3px solid #F1B308' }}
+          />
+          <div style={{ flex: '1 1 320px', minWidth: 260 }}>
+            <h2 style={{ margin: '0 0 8px', fontSize: 20 }}>{t({ bn: 'প্রতিষ্ঠাতার বার্তা', en: "Founder's message" })}</h2>
+            <p style={{ lineHeight: 1.7, margin: 0 }}>
+              {t({
+                bn: 'আমি Eduvelto গড়েছি একটাই বিশ্বাস থেকে — মানসম্মত শিক্ষা বাংলাদেশের প্রত্যেক শিক্ষার্থীর জন্য বিনামূল্যে পৌঁছে দেওয়া উচিত। আমি নিজে একজন শিক্ষক ও শিক্ষার্থী — আমি জানি, ভালো পড়ার সুযোগ পেতে অনেকের কত কষ্ট হয়। তাই পাঠ, পরীক্ষা, ডিজিটাল লাইব্রেরি আর পড়ার পরিকল্পনা — সব এক জায়গায়, সম্পূর্ণ বিনামূল্যে। শেখো, এগিয়ে যাও, স্বপ্ন গড়ো।',
+                en: 'I built Eduvelto from a single belief: quality education should be free and within reach of every student in Bangladesh. I am a teacher and a student myself — I know how hard it can be to get a fair chance to learn. So lessons, exams, a digital library and smart study planning — all in one place, completely free. Learn, grow, achieve.',
+              })}
+            </p>
+            <p style={{ margin: '12px 0 0', fontWeight: 600 }}>
+              {t({ bn: '— আলী হাসান মোহাম্মদ মিজান, প্রতিষ্ঠাতা ও CEO, Eduvelto', en: '— Ali Hasan Mohammed Mizan, Founder & CEO, Eduvelto' })}
+            </p>
+            <p style={{ margin: '8px 0 0' }}>
+              <Link to="/founder">{t({ bn: 'সম্পূর্ণ প্রতিষ্ঠাতা প্রোফাইল →', en: 'Full founder profile →' })}</Link>
+            </p>
+          </div>
+        </section>
+
+        {/* Footer banner (mockup). */}
+        <section className="ev-home-banner" aria-label={t({ bn: 'Eduvelto', en: 'Eduvelto' })}>
+          <span aria-hidden="true" style={{ color: 'var(--amber)' }}>
+            <TrophyIcon size={34} />
+          </span>
+          <div>
+            <h2>{t({ bn: 'Eduvelto — একটি প্ল্যাটফর্ম, অসীম সম্ভাবনা!', en: 'Eduvelto — one platform, endless possibilities!' })}</h2>
+            <p>{t({ bn: 'শিক্ষা হোক সহজ, প্রস্তুতি হোক স্মার্ট, সফলতা হোক নিশ্চিত।', en: 'Make learning easy, preparation smart, success certain.' })}</p>
+          </div>
+          <Link to={user ? '/dashboard' : '/register'} className="ev-btn ev-btn-gold ev-home-banner-cta">
+            {t({ bn: 'এখনই শুরু করুন →', en: 'Start now →' })}
+          </Link>
+        </section>
+      </PageShell>
     </>
   );
 }
