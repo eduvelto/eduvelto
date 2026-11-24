@@ -119,6 +119,17 @@ const REAL_ROUTES = new Set([
   '/learn/reading-comprehension-strategies',
   '/learn/learning-with-phone',
   '/learn/asking-questions-class',
+  // Brand-SEO wave 13 (24 Nov 2026): the 7 wave-1 guide paths were
+  // never added to this allowlist, so no earlier pass could link to
+  // them (the routes are real — all 7 render and are in the sitemap).
+  // Adding them here unblocks the exam/AI/budget guide links.
+  '/learn/bcs-preparation-guide',
+  '/learn/bank-job-preparation',
+  '/learn/primary-teacher-preparation',
+  '/learn/ntrca-preparation',
+  '/learn/nu-admission-guide',
+  '/learn/what-is-ai',
+  '/learn/budget-planner-guide',
   '/ai-assistant',
   '/library',
   '/opportunities/cv-builder',
