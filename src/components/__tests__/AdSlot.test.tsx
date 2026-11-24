@@ -82,4 +82,30 @@ describe('AdSlot rendered HTML', () => {
     const topHtml = await renderSlot(PRODUCTION_HOST, 'top-banner');
     expect(topHtml).toBe('');
   });
+
+  it('accepts an onUnfilled callback without changing the rendered markup', async () => {
+    // Effects never run under renderToString, so the callback is never
+    // invoked here — this proves the prop is accepted and the markup
+    // is unchanged. The live collapse → callback → nav-drop behaviour
+    // is verified by the Playwright probe (local preview: real AdSense
+    // answers unfilled; live after deploy).
+    (globalThis as unknown as { window: unknown }).window = {
+      location: { hostname: PREVIEW_HOST },
+    };
+    vi.resetModules();
+    const mod = await import('../AdSlot');
+    const AdSlot = mod.default;
+    try {
+      const html = renderToString(
+        React.createElement(AdSlot, {
+          placement: 'bottom-banner' as AdPlacement,
+          onUnfilled: () => {},
+        }),
+      );
+      expect(html).toContain('data-ad-placement="bottom-banner"');
+      expect(html).toContain('বিজ্ঞাপনের স্থান');
+    } finally {
+      delete (globalThis as unknown as { window?: unknown }).window;
+    }
+  });
 });

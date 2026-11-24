@@ -1,4 +1,4 @@
-import { Suspense, lazy } from 'react';
+import { Suspense, lazy, useCallback, useEffect, useState } from 'react';
 import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
 import { strings } from './i18n/strings';
 import { useAuth } from './lib/auth';
@@ -6,6 +6,7 @@ import {
   adsActive,
   getBannerPlacementForPath,
   getBannerReservePx,
+  getBottomNavOffsetPx,
   isPreviewHost,
 } from './lib/adsConfig';
 import AdSlot from './components/AdSlot';
@@ -221,6 +222,25 @@ export default function App() {
   // its reserved space, or it would cover content in the preview.
   const bannerVisible =
     bannerPlacement !== null && (bannerLive || isPreviewHost());
+  // Bottom-nav offset follows the banner's ACTUAL state (owner 24 Nov
+  // 2026 07:14): when AdSense reports the bottom banner unfilled the
+  // slot collapses to nothing, so the nav must drop to the viewport
+  // bottom instead of floating bannerReservePx up over an empty gap
+  // with page content visible below it. The AdSlot reports the
+  // collapse via onUnfilled (below); a new banner placement remounts
+  // the slot, so the flag resets with it.
+  const [bottomBannerCollapsed, setBottomBannerCollapsed] = useState(false);
+  useEffect(() => {
+    setBottomBannerCollapsed(false);
+  }, [bannerPlacement]);
+  const handleBottomBannerUnfilled = useCallback(() => {
+    setBottomBannerCollapsed(true);
+  }, []);
+  const effectiveBannerReservePx = getBottomNavOffsetPx({
+    bannerVisible,
+    bannerReservePx,
+    bannerCollapsed: bottomBannerCollapsed,
+  });
   // Admin + CEO panels render their own shell (sidebar/top bar/bottom
   // nav) — the public header, footer and BottomNav are hidden there.
   const isAdminShell = location.pathname.startsWith('/admin') || location.pathname.startsWith('/ceo');
@@ -228,8 +248,8 @@ export default function App() {
     <div
       className="ev-app-shell"
       style={
-        bannerVisible
-          ? ({ '--ev-banner': `${bannerReservePx}px` } as React.CSSProperties)
+        effectiveBannerReservePx > 0
+          ? ({ '--ev-banner': `${effectiveBannerReservePx}px` } as React.CSSProperties)
           : undefined
       }
     >
@@ -464,9 +484,9 @@ export default function App() {
             হোম / আমার কোর্স / প্রগ্রেস / বেশি কিছু / মেনু, ≤768px. Sits
             above the bottom ad banner when one is live. Hidden on /admin* and /ceo* routes — the Admin Panel and CEO Panel render their own bottom nav. */}
         {isAdminShell ? null : (
-          <BottomNav bottomOffsetPx={bannerVisible ? bannerReservePx : 0} />
+          <BottomNav bottomOffsetPx={effectiveBannerReservePx} />
         )}
-        {bannerPlacement ? <AdSlot placement={bannerPlacement} /> : null}
+        {bannerPlacement ? <AdSlot placement={bannerPlacement} onUnfilled={handleBottomBannerUnfilled} /> : null}
         </>
       )}
     </div>

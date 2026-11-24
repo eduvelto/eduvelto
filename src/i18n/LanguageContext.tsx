@@ -62,7 +62,7 @@ export type LanguageState = {
   tTab: (entry: LangEntry) => string;
 };
 
-const LanguageContext = createContext<LanguageState>({
+export const LanguageContext = createContext<LanguageState>({
   lang: 'bn',
   tabLang: 'bn',
   setLanguage: () => {},

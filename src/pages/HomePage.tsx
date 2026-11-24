@@ -312,7 +312,13 @@ export default function HomePage() {
   }
 
   return (
-    <PageShell titleBn="হোম" titleEn="Home" wide hideHomeLink hideTitle maxWidth={1240}>
+    <>
+      {/* Hero greeting pill, v4 — OUTSIDE PageShell so it sits flush
+          directly below the nav (the shell's 28px top padding made the
+          white gap above the band) and spans the viewport, not the
+          shell's 1240px. Home-only: only HomePage mounts it. */}
+      <HeroGreeting />
+      <PageShell titleBn="হোম" titleEn="Home" wide hideHomeLink hideTitle maxWidth={1240}>
       {/* Mobile search bar (≤768px, mockup). Desktop search lives in the header. */}
       <form className="ev-home-msearch" onSubmit={runSearch} role="search">
         <label htmlFor="ev-home-msearch" style={{ position: 'absolute', width: 1, height: 1, overflow: 'hidden', clip: 'rect(0 0 0 0)' }}>
@@ -329,18 +335,6 @@ export default function HomePage() {
           <SearchIcon />
         </button>
       </form>
-
-      {/* Hero greeting band, v3 (owner's FORMAL revised brief 24 Nov
-          2026 00:29) — right below the navigation, above the hero:
-          Surah Al-Alaq's first ayah in THREE languages, one at a
-          time — Arabic → English → Bangla → Arabic. One line only,
-          half the old height, small gold border, deep Islamic green.
-          No Bismillah anywhere in the band. The top sticky greeting
-          bar was deleted in the same revision (the greeting appeared
-          twice); this band is the only greeting left. The old mobile
-          hero carousel is removed entirely; nothing replaces it below
-          the hero, the section cards simply move up. */}
-      <HeroGreeting />
 
       {/* Desktop hero (≥769px): light gradient + wordmark, NO photos. */}
       <section className="ev-home-hero" aria-label={t({ bn: 'Eduvelto', en: 'Eduvelto' })}>
@@ -582,5 +576,6 @@ export default function HomePage() {
         </Link>
       </section>
     </PageShell>
+    </>
   );
 }
