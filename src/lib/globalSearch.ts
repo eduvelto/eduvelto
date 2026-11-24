@@ -230,26 +230,49 @@ export interface GlobalSearchResults {
   services: SearchResult[];
   pages: SearchResult[];
   total: number;
+  /** True when the book list could not be loaded — static results only. */
+  booksFailed: boolean;
+}
+
+/** Static-only results (no network): jobs, opportunities, services,
+ * pages. Pure — the Search page renders these instantly while the
+ * book list loads (website audit, 24 Nov 2026 — cold search showed
+ * only a spinner for ~20s because everything waited on the 609-doc
+ * book read). */
+export function globalSearchStatic(rawQuery: string): GlobalSearchResults {
+  const query = rawQuery.trim();
+  const empty: GlobalSearchResults = {
+    query,
+    books: [],
+    jobs: [],
+    opportunities: [],
+    services: [],
+    pages: [],
+    total: 0,
+    booksFailed: false,
+  };
+  if (!query) return empty;
+  const stat = searchStatic(query);
+  const jobs = stat.filter((r) => r.kind === 'job');
+  const opportunities = stat.filter((r) => r.kind === 'opportunity');
+  const services = stat.filter((r) => r.kind === 'service');
+  const pages = stat.filter((r) => r.kind === 'page');
+  return { query, books: [], jobs, opportunities, services, pages, total: stat.length, booksFailed: false };
 }
 
 /** Full global search: static catalogue (sync) + books (one cached
  * Firestore read, same as LibraryPage). Empty query → empty result. */
 export async function globalSearch(rawQuery: string): Promise<GlobalSearchResults> {
-  const query = rawQuery.trim();
-  const empty: GlobalSearchResults = { query, books: [], jobs: [], opportunities: [], services: [], pages: [], total: 0 };
-  if (!query) return empty;
-  const stat = searchStatic(query);
-  let books: SearchResult[] = [];
+  const res = globalSearchStatic(rawQuery);
+  if (!res.query) return res;
   try {
-    books = searchBooks(await getAllPublishedBooksCached(), query);
+    res.books = searchBooks(await getAllPublishedBooksCached(), rawQuery);
   } catch {
     // Firestore unreachable (preview/offline) — static results still
     // render; the page shows a note instead of failing the search.
-    books = [];
+    res.booksFailed = true;
   }
-  const jobs = stat.filter((r) => r.kind === 'job');
-  const opportunities = stat.filter((r) => r.kind === 'opportunity');
-  const services = stat.filter((r) => r.kind === 'service');
-  const pages = stat.filter((r) => r.kind === 'page');
-  return { query, books, jobs, opportunities, services, pages, total: books.length + stat.length };
+  res.total =
+    res.books.length + res.jobs.length + res.opportunities.length + res.services.length + res.pages.length;
+  return res;
 }

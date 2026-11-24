@@ -82,7 +82,7 @@ export default function BookPage() {
           {chapters !== null && chapters.length === 0 && !user ? (
             <Card style={{ borderTop: '4px solid #F1B308' }}>
               <p style={{ margin: '0 0 8px' }}>
-                {t({ bn: 'এই বইয়ের পাঠ পড়তে লগইন করুন। প্রতিটি বইয়ের প্রথম পাঠটি অতিথি হিসেবে পড়া যায়।', en: 'Sign in to read this book. The first lesson of each book can be read as a guest.' })}
+                {t({ bn: 'এই বইয়ের পাঠ পড়তে লগইন করুন।', en: 'Sign in to read this book.' })}
               </p>
               <p style={{ margin: 0 }}>
                 <Link to="/login" state={back} style={{ fontWeight: 600 }}>{t({ bn: 'লগইন করুন', en: 'Sign in' })}</Link>

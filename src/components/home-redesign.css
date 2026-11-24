@@ -54,6 +54,10 @@ html[data-theme="dark"] .ev-rd-hub-blue { background: #12293d; border-color: #1d
 html[data-theme="dark"] .ev-rd-hub-purple { background: #2c1f3d; border-color: #463061; }
 html[data-theme="dark"] .ev-rd-hub-amber { background: #33270f; border-color: #4d3a17; }
 html[data-theme="dark"] .ev-rd-hub-teal { background: #123c38; border-color: #1d5750; }
+/* Website audit (24 Nov 2026): --teal-deep (#12766e) is not redefined
+   for dark mode, so the hub CTA text was low-contrast on dark cards.
+   --teal-text is the dark theme's brightened teal for text. */
+html[data-theme="dark"] .ev-rd-hub-cta { color: var(--teal-text); }
 
 /* ---------- education grid ---------- */
 .ev-rd-edu-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }

@@ -65,7 +65,6 @@ export const PERSON_JSON_LD = {
   sameAs: [
     'https://www.facebook.com/ahmmmizan',
     'https://www.youtube.com/@alihasanmdmizan',
-    'https://www.instagram.com/ahmmmizan',
     'https://www.tiktok.com/@ahmmizan',
   ],
 };
@@ -94,7 +93,7 @@ export const ORGANIZATION_JSON_LD = {
   logo: 'https://eduvelto.com/logo.png',
   slogan: 'Learn • Grow • Achieve',
   description:
-    'A Smarter World of Learning — a free Bangladeshi digital education and life services platform: a digital library, job and admission preparation with MCQ practice, career guidance and everyday life services, for students from Class 9 to Honours (SSC, HSC, Honours and Masters, plus Madrasa and Technical streams).',
+    'A Smarter World of Learning — a free Bangladeshi digital education and life services platform: a digital library, job and admission preparation with MCQ practice, career guidance and everyday life services, for students from Class 9 to Honours (SSC, HSC and Honours, plus Madrasa and Technical streams).',
   foundingDate: '2026',
   foundingLocation: {
     '@type': 'Place',
@@ -337,7 +336,7 @@ export default function FounderPage() {
         <p style={bodyP}>
           {t({
             bn: 'Eduvelto বাংলাদেশের শিক্ষার্থীদের জন্য একটি বিনামূল্যের ডিজিটাল শিক্ষা প্ল্যাটফর্ম — পাঠ, পরীক্ষা, ডিজিটাল লাইব্রেরি ও পড়ার পরিকল্পনা — শ্রেণি ৯ থেকে অনার্স পর্যন্ত, মাদ্রাসা ও কারিগরি ধারাসহ। শিক্ষার্থী, শিক্ষক ও অভিভাবকদের জন্য সম্পূর্ণ বিনামূল্যে: কোনো রেজিস্ট্রেশন ফি নেই, কোনো যাচাই ফি নেই, কখনোই না।',
-            en: 'Eduvelto is a free digital education platform for Bangladesh — lessons, exams, a digital library and study planning, for students from Class 9 to Honours — SSC, HSC, Honours and Masters, plus Madrasa and Technical streams. It is free for students, teachers and guardians: no registration fee and no verification fee, ever.',
+            en: 'Eduvelto is a free digital education platform for Bangladesh — lessons, exams, a digital library and study planning, for students from Class 9 to Honours — SSC, HSC and Honours, plus Madrasa and Technical streams. It is free for students, teachers and guardians: no registration fee and no verification fee, ever.',
           })}
         </p>
         <h3 style={{ fontSize: 16, margin: '20px 0 8px', color: 'var(--heading)' }}>
@@ -349,7 +348,7 @@ export default function FounderPage() {
             <StatusChip label={t({ bn: 'উপলব্ধ এখন', en: 'Available now' })} kind="live" />
           </li>
           <li>
-            <Link to="/exam">{t({ bn: 'পরীক্ষা — MCQ পরীক্ষা, ফলাফল ও অগ্রগতি পর্যবেক্ষণসহ', en: 'Exams — MCQ exams with results and progress tracking' })}</Link>{' '}
+            <Link to="/exam">{t({ bn: 'পরীক্ষা — ১,০১৪টি পরীক্ষা, ফলাফল ও অগ্রগতি পর্যবেক্ষণসহ', en: 'Exams — 1,014 exams with results and progress tracking' })}</Link>{' '}
             <StatusChip label={t({ bn: 'উপলব্ধ এখন', en: 'Available now' })} kind="live" />
           </li>
           <li>
@@ -366,7 +365,7 @@ export default function FounderPage() {
             {t({ bn: 'মালিকের অ্যাডমিন ড্যাশবোর্ড', en: 'Owner Admin Dashboard' })} <StatusChip label={t({ bn: 'উপলব্ধ এখন', en: 'Available now' })} kind="live" />
           </li>
           <li>
-            {t({ bn: 'স্বাস্থ্য পাতা (ওষুধ, রোগ, সুবিধা)', en: 'Health pages (medicines, diseases, facilities)' })}{' '}
+            <Link to="/health">{t({ bn: 'স্বাস্থ্য পাতা (ওষুধ, রোগ, সুবিধা)', en: 'Health pages (medicines, diseases, facilities)' })}</Link>{' '}
             <StatusChip label={t({ bn: 'উপলব্ধ এখন — সব কনটেন্ট পর্যালোচনাধীন', en: 'Available now — all content under review' })} kind="review" />
           </li>
         </ul>
@@ -480,11 +479,6 @@ export default function FounderPage() {
           <li>
             <a href="https://www.youtube.com/@alihasanmdmizan" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--link)' }}>
               {t({ bn: 'ইউটিউব — আলী হাসান মোহাম্মদ মিজান', en: 'YouTube — Ali Hasan Mohammed Mizan' })}
-            </a>
-          </li>
-          <li>
-            <a href="https://www.instagram.com/ahmmmizan" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--link)' }}>
-              {t({ bn: 'ইনস্টাগ্রাম — @ahmmmizan', en: 'Instagram — @ahmmmizan' })}
             </a>
           </li>
           <li>

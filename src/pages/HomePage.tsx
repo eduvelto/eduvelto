@@ -470,13 +470,27 @@ export default function HomePage() {
   // — same source the hub itself renders).
   useEffect(() => {
     let live = true;
-    getAllPublishedBooksCached()
-      .then((list) => {
-        if (live) setBooks(list);
-      })
-      .catch(() => {
-        if (live) setBooksError(true);
-      });
+    let retryTimer: ReturnType<typeof setTimeout> | undefined;
+    // One retry: the first attempt can fail transiently (cold
+    // Firestore / slow connection). The shared cache is cleared on
+    // rejection (content.ts), so the retry re-reads instead of
+    // replaying the same failure. Only after the retry fails does
+    // the widget show its error state.
+    const loadBooks = (attempt: number) => {
+      getAllPublishedBooksCached()
+        .then((list) => {
+          if (live) setBooks(list);
+        })
+        .catch(() => {
+          if (!live) return;
+          if (attempt === 0) {
+            retryTimer = setTimeout(() => loadBooks(1), 2000);
+          } else {
+            setBooksError(true);
+          }
+        });
+    };
+    loadBooks(0);
     loadHubOpportunities()
       .then(({ items }) => {
         if (live) setOpportunities(items);
@@ -486,6 +500,7 @@ export default function HomePage() {
       });
     return () => {
       live = false;
+      if (retryTimer) clearTimeout(retryTimer);
     };
   }, []);
 
@@ -565,7 +580,7 @@ export default function HomePage() {
           </p>
           <h1 className="ev-home-wordmark" aria-label="Eduvelto — Learn • Grow • Achieve">
             <span className="ev-home-wordmark-edu">Edu</span>
-            <span className="ev-home-wordmark-velto">velto</span>
+            <span className="ev-home-wordmark-velto">velto</span>{' '}
             <span className="ev-home-wordmark-tag">Learn • Grow • Achieve</span>
           </h1>
           <p className="ev-home-hero-line">{t({ bn: 'শেখো, প্রস্তুতি নাও, সফল হও...', en: 'Learn, prepare, succeed...' })}</p>
@@ -629,8 +644,8 @@ export default function HomePage() {
           </div>
           <p className="ev-rd-sub">
             {t({
-              bn: 'শ্রেণি ১–১২, মাদ্রাসা, টেকনিক্যাল, অনার্স ও মাস্টার্স — লাইব্রেরির আসল বই ও পাঠ।',
-              en: 'Class 1–12, Madrasa, Technical, Honours & Masters — real books and lessons from the library.',
+              bn: 'নবম–দশম, এইচএসসি, মাদ্রাসা, টেকনিক্যাল, অনার্স — লাইব্রেরির আসল বই ও পাঠ।',
+              en: 'Class 9–10, HSC, Madrasa, Technical, Honours — real books and lessons from the library.',
             })}
           </p>
           <div className="ev-rd-edu-grid">
@@ -833,9 +848,18 @@ export default function HomePage() {
               en: 'Sorted by question count — real books from the library.',
             })}
           </p>
-          {booksError || !books || books.length === 0 ? (
+          {booksError ? (
             <p className="ev-rd-sub">
               {t({ bn: 'বইয়ের তালিকা লোড করা যায়নি — লাইব্রেরি থেকে দেখুন।', en: 'Could not load the book list — see the library.' })}{' '}
+              <Link to="/library">{t({ bn: 'লাইব্রেরি →', en: 'Library →' })}</Link>
+            </p>
+          ) : !books ? (
+            <p className="ev-rd-sub">
+              {t({ bn: 'বইয়ের তালিকা লোড হচ্ছে…', en: 'Loading the book list…' })}
+            </p>
+          ) : books.length === 0 ? (
+            <p className="ev-rd-sub">
+              {t({ bn: 'এখনো কোনো বই নেই — লাইব্রেরি থেকে দেখুন।', en: 'No books yet — see the library.' })}{' '}
               <Link to="/library">{t({ bn: 'লাইব্রেরি →', en: 'Library →' })}</Link>
             </p>
           ) : (

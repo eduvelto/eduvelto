@@ -17,8 +17,8 @@ Allow: /about
 Allow: /founder
 Allow: /contact
 Allow: /privacy
-Allow: /health
-Allow: /ai-teacher
+# /ai-teacher is noindexed and out of the sitemap (scripted demo, no
+# crawlable content) — no Allow line for it (website audit, 24 Nov 2026).
 # New public lesson routes (23 Nov 2026, AdSense Part 1).
 # /jobs/bcs/practice/* is already allowed by "Allow: /jobs" above.
 Allow: /learn

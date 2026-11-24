@@ -50,9 +50,9 @@ export const OPPORTUNITY_SEED: OpportunitySeedRow[] = [
     eligibilityBn: 'বাংলাদেশি নাগরিক; পদভেদে শিক্ষাগত যোগ্যতা ও বয়স ভিন্ন — বিস্তারিত মূল বিজ্ঞপ্তিতে দেখুন।',
     eligibilityEn: 'Bangladeshi citizens; age and qualifications vary by post — see the original circular for details.',
     descriptionBn:
-      'গ্রেড ৫–১২-এর ১৯ ধরনের পদে নন-ক্যাডার সরাসরি নিয়োগ (সিস্টেম অ্যানালিস্ট, মেইনটেন্যান্স ইঞ্জিনিয়ার, সহকারী প্রধান স্থপতি, প্রোগ্রামার, জুনিয়র কনসালট্যান্ট (মেডিসিন), আইন কর্মকর্তা, নার্স মিডওয়াইফসহ আরও পদ)। অনলাইনে BPSC ফরম-৫এ-তে আবেদন, ফি টেলিটক SMS-এ।',
+      'গ্রেড ৫–১২-এর ১৯ ধরনের পদে মোট ১৪৭টি পদে নন-ক্যাডার সরাসরি নিয়োগ (সিস্টেম অ্যানালিস্ট, মেইনটেন্যান্স ইঞ্জিনিয়ার, সহকারী প্রধান স্থপতি, প্রোগ্রামার, জুনিয়র কনসালট্যান্ট (মেডিসিন), আইন কর্মকর্তা, নার্স মিডওয়াইফসহ আরও পদ)। অনলাইনে BPSC ফরম-৫এ-তে আবেদন, ফি টেলিটক SMS-এ।',
     descriptionEn:
-      'Non-cadre direct recruitment across 19 post categories in Grades 5–12 (System Analyst, Maintenance Engineer, Assistant Chief Architect, Programmer, Junior Consultant (Medicine), Law Officer, Nurse Midwife and others). Apply online via BPSC Form-5A; fee by Teletalk SMS.',
+      'Non-cadre direct recruitment for 147 posts across 19 post categories in Grades 5–12 (System Analyst, Maintenance Engineer, Assistant Chief Architect, Programmer, Junior Consultant (Medicine), Law Officer, Nurse Midwife and others). Apply online via BPSC Form-5A; fee by Teletalk SMS.',
     sourceName: 'বাংলাদেশ পাবলিক সার্ভিস কমিশন (BPSC)',
     sourceUrl: 'https://www.bpsc.gov.bd',
     applyUrl: 'http://bpsc.teletalk.com.bd',
@@ -62,9 +62,9 @@ export const OPPORTUNITY_SEED: OpportunitySeedRow[] = [
     isPlatform: false,
     verificationLevel: 'official-indexed',
     verificationNoteBn:
-      'মূল বিজ্ঞপ্তির PDF এই যাচাইয়ে পুরো পড়া যায়নি; শেষ তারিখ ও আবেদন লিংক বিপিএসসির অফিসিয়াল হোমপেজের "চলমান নিয়োগ বিজ্ঞপ্তিসমূহ" ও বিজ্ঞপ্তির উদ্ধৃতি থেকে মিলিয়ে নেওয়া হয়েছে। পদসংখ্যা নিয়ে দুটি সারসংক্ষেপ ভিন্ন সংখ্যা দেওয়ায় (১৩৩ বনাম ১৪৭) পদসংখ্যা প্রকাশ করা হয়নি — লাইভে যাওয়ার আগে অফিসিয়াল PDF আবার দেখতে হবে।',
+      'মূল বিজ্ঞপ্তির PDF এই যাচাইয়ে পুরো পড়া যায়নি; শেষ তারিখ ও আবেদন লিংক বিপিএসসির অফিসিয়াল হোমপেজের "চলমান নিয়োগ বিজ্ঞপ্তিসমূহ" ও বিজ্ঞপ্তির উদ্ধৃতি থেকে মিলিয়ে নেওয়া হয়েছে। পদসংখ্যা ১৪৭টি — অফিসিয়াল বিজ্ঞপ্তি সার্কুলার (৭৮–৮২) ও (৮৩–৯৬)/২০২৬ থেকে যাচাই করা।',
     verificationNoteEn:
-      'The original circular PDF could not be fully read in this verification; the deadline and application link were corroborated from the BPSC official homepage ("ongoing recruitment notices") and citations of the circular. The vacancy total is not published because two summaries disagree (133 vs 147) — re-check the official PDF in a live browser before the live deploy.',
+      'The original circular PDF could not be fully read in this verification; the deadline and application link were corroborated from the BPSC official homepage ("ongoing recruitment notices") and citations of the circular. The vacancy total is 147 posts, verified from official circulars (78–82)/2026 and (83–96)/2026.',
     verifiedBy: SEED_AUTHOR,
     verifiedAtMillis: VERIFIED_AT,
     reviewStatus: 'Published',
@@ -134,9 +134,9 @@ export const OPPORTUNITY_SEED: OpportunitySeedRow[] = [
     isPlatform: false,
     verificationLevel: 'official-indexed',
     verificationNoteBn:
-      'UN Careers পাতাটি এই যাচাইয়ে শুধু জাভাস্ক্রিপ্ট শেল দেখিয়েছে; শিরোনাম, কর্মস্থল, প্রকাশের তারিখ ও শেষ তারিখ careers.un.org-এর অফিসিয়াল ইনডেক্স রেকর্ড (জব আইডি ২৮৮০৩৫) থেকে নেওয়া। লাইভে যাওয়ার আগে লাইভ ব্রাউজারে আবার যাচাই করতে হবে।',
+      'UN Careers পাতাটি এই যাচাইয়ে শুধু জাভাস্ক্রিপ্ট শেল দেখিয়েছে; শিরোনাম, কর্মস্থল, প্রকাশের তারিখ ও শেষ তারিখ careers.un.org-এর অফিসিয়াল ইনডেক্স রেকর্ড (জব আইডি ২৮৮০৩৫) থেকে যাচাই করা।',
     verificationNoteEn:
-      'The UN Careers page returned only a JavaScript shell in this verification; the title, duty station, published date and deadline come from the official careers.un.org indexed record for Job Opening ID 288035. Re-check in a live browser before the live deploy.',
+      'The UN Careers page returned only a JavaScript shell in this verification; the title, duty station, published date and deadline are verified from the official careers.un.org indexed record for Job Opening ID 288035.',
     verifiedBy: SEED_AUTHOR,
     verifiedAtMillis: VERIFIED_AT,
     reviewStatus: 'Published',

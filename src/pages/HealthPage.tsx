@@ -5,7 +5,6 @@ import { db } from '../firebase';
 import { strings } from '../i18n/strings';
 import { useLanguage } from '../i18n/LanguageContext';
 import { PageShell } from '../components/PageShell';
-import { Skeleton } from '../components/ui';
 import { AccuracyNote, HealthDisclaimer } from '../components/HealthDisclaimer';
 
 // Eduvelto Health hub (Health v1). The 'health' feature flag in
@@ -27,8 +26,15 @@ const CARDS = [
 export default function HealthPage() {
   const h = strings.health;
   const { lang, t } = useLanguage();
+  // The feature flag defaults to enabled (missing document = enabled,
+  // and a failing read must not hide health info). The hub renders
+  // immediately; the flag is checked in the background and only swaps
+  // in the disabled message when the owner has explicitly turned the
+  // section off. Previously the whole hub waited behind a skeleton
+  // for this one settings read, so a slow connection saw an empty
+  // page (website audit, 24 Nov 2026 — Worker C's "/health is EMPTY"
+  // was that skeleton state, not a missing page).
   const [enabled, setEnabled] = useState(true);
-  const [checked, setChecked] = useState(false);
 
   useEffect(() => {
     let cancelled = false;
@@ -41,22 +47,12 @@ export default function HealthPage() {
         }
       } catch {
         // Flag read failing must not hide health info: default enabled.
-      } finally {
-        if (!cancelled) setChecked(true);
       }
     })();
     return () => {
       cancelled = true;
     };
   }, []);
-
-  if (!checked) {
-    return (
-      <PageShell titleBn={h.title.bn} titleEn={h.title.en}>
-        <Skeleton lines={4} />
-      </PageShell>
-    );
-  }
 
   if (!enabled) {
     return (

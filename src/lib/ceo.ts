@@ -3,7 +3,7 @@
 // HONESTY RULES (binding — the CEO mockups are full of fake sample
 // numbers: 1.28M users, 8.72M views, 520K tests, ৳2.48L revenue,
 // 24 team members, 12,842 verified content, "Platform Rank #1").
-// The real platform today: ~3 users, 609 books, 212 exams, ~20,970
+// The real platform today: ~4 users, 609 books, 1014 exams, 23,346
 // questions, ৳0 revenue, 1 staff account (the owner), 0 verified
 // teachers, no view/engagement/retention tracking, no team system on
 // main, no paid products. Every number on the CEO screens comes from
@@ -15,14 +15,14 @@
 import { collection, getCountFromServer, query, where } from 'firebase/firestore';
 import type { CollectionReference, Firestore, Query, DocumentData } from 'firebase/firestore';
 
-/** Last verified by the Step 2 loader run + live /library check, 21 Nov 2026. */
+/** Last verified by the website audit against the 24 Nov 2026 pre-deploy snapshot (7,105 docs) + live /library check, 24 Nov 2026. */
 export const LAST_VERIFIED_INVENTORY = {
   books: 609,
-  exams: 212,
-  questions: 20970,
+  exams: 1014,
+  questions: 23346,
   /** Human-readable source shown under every fallback value. */
-  checkedBn: '২১ নভেম্বর ২০২৬ যাচাই করা',
-  checkedEn: 'verified 21 Nov 2026',
+  checkedBn: '২৪ নভেম্বর ২০২৬ যাচাই করা',
+  checkedEn: 'verified 24 Nov 2026',
 } as const;
 
 export interface CeoCounts {
@@ -31,7 +31,7 @@ export interface CeoCounts {
   /** Live Published books count, or the last-verified 609. */
   books: number;
   booksLive: boolean;
-  /** Live Published quizzes count, or the last-verified 212. */
+  /** Live Published quizzes count, or the last-verified 1014. */
   exams: number;
   examsLive: boolean;
   /** Questions are inside quiz documents — no live count exists. */

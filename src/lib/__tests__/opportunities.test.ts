@@ -332,13 +332,19 @@ describe('seed integrity — the 7 verified listings (23 Nov 2026)', () => {
     }
   });
 
-  it('BPSC: deadline 30 Nov 2026, 6:00 PM Dhaka (datetime); no published date; official-indexed with a caveat', () => {
+  it('BPSC: deadline 30 Nov 2026, 6:00 PM Dhaka (datetime); no published date; official-indexed, 147 posts verified', () => {
     const o = seedOpportunities().find((x) => x.docId === 'bpsc-non-cadre-2026')!;
     expect(o.deadlineMillis).toBe(Date.UTC(2026, 10, 30, 12, 0, 0));
     expect(o.deadlinePrecision).toBe('datetime');
     expect(o.publishedDateMillis).toBeNull();
     expect(o.verificationLevel).toBe('official-indexed');
-    expect(o.verificationNoteBn).toContain('১৩৩ বনাম ১৪৭');
+    // Website audit, 24 Nov 2026: the 133-vs-147 disagreement is
+    // resolved — 147 posts, verified from circulars (78–82) and
+    // (83–96)/2026; the note no longer says to re-check before going live.
+    expect(o.verificationNoteBn).toContain('১৪৭টি');
+    expect(o.verificationNoteBn).not.toContain('১৩৩ বনাম ১৪৭');
+    expect(o.descriptionBn).toContain('১৪৭টি');
+    expect(o.descriptionEn).toContain('147 posts');
     expect(opportunityStatus(o, NOV_23)).toBe('open');
   });
 

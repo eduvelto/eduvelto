@@ -160,7 +160,7 @@ export default function AdminAds() {
       </p>
       <ul style={{ color: 'var(--ink)', fontSize: 15 }}>
         <li>{t({ bn: '✓ সাইট eduvelto.com-এ লাইভ — হ্যাঁ (২১ নভেম্বর ২০২৬ থেকে Connected)', en: '✓ Site live on eduvelto.com — yes (Connected since 21 Nov 2026)' })}</li>
-        <li>{t({ bn: '✓ আসল কনটেন্ট (পাঠ, বই, পরীক্ষা) — হ্যাঁ (৬০৯ বই, ২১২ পরীক্ষা লাইভ)', en: '✓ Real content (lessons, books, exams) — yes (609 books, 212 exams live)' })}</li>
+        <li>{t({ bn: '✓ আসল কনটেন্ট (পাঠ, বই, পরীক্ষা) — হ্যাঁ (৬০৯ বই, ১,০১৪ পরীক্ষা লাইভ)', en: '✓ Real content (lessons, books, exams) — yes (609 books, 1,014 exams live)' })}</li>
         <li>{t({ bn: '✓ গোপনীয়তা নীতি (Privacy Policy) — লাইভ', en: '✓ Privacy Policy — live' })}</li>
         <li>{t({ bn: '… সাইট Google-এর রিভিউতে আছে (২২ নভেম্বর ০৭:৪১ থেকে) — ফলাফলের অপেক্ষায়', en: '… Site is in Google review (since 22 Nov 07:41) — awaiting the result' })}</li>
       </ul>

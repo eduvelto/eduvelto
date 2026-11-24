@@ -581,7 +581,17 @@ export async function listPublishedDirectoryPage(
 // so navigating away and back does not re-pay the 609 reads.
 let allBooksCache: Promise<Book[]> | null = null;
 export function getAllPublishedBooksCached(): Promise<Book[]> {
-  if (!allBooksCache) allBooksCache = listPublishedBooks();
+  if (!allBooksCache) {
+    // A rejected first attempt must not poison the session cache:
+    // clear it so a later retry re-reads instead of replaying the
+    // same rejection forever (website audit, 24 Nov 2026 — the
+    // homepage Popular Books widget showed a permanent error after
+    // one transient Firestore failure).
+    allBooksCache = listPublishedBooks().catch((err: unknown) => {
+      allBooksCache = null;
+      throw err;
+    });
+  }
   return allBooksCache;
 }
 
