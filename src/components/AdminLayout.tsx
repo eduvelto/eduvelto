@@ -16,6 +16,7 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import { Link, NavLink, Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '../lib/auth';
 import { useLanguage } from '../i18n/LanguageContext';
+import { getEnrolledFactors, hasTotpFactor } from '../lib/ownerMfa';
 
 type NavLeaf = { to?: string; bn: string; en: string; soon?: boolean };
 type NavSection = { bn: string; en: string; icon: string; items: NavLeaf[] };
@@ -89,6 +90,7 @@ const NAV_SECTIONS: NavSection[] = [
       { to: '/admin/settings', bn: 'সাধারণ সেটিংস', en: 'General Settings' },
       { to: '/admin/settings', bn: 'SEO সেটিংস', en: 'SEO Settings' },
       { to: '/admin/settings', bn: 'নোটিফিকেশন', en: 'Notifications' },
+      { to: '/admin/security', bn: 'নিরাপত্তা (2FA)', en: 'Security (2FA)' },
     ],
   },
   {
@@ -191,9 +193,13 @@ function NavIcon({ icon }: { icon: string }) {
 
 export function AdminLayout() {
   const { lang, t } = useLanguage();
-  const { profile } = useAuth();
+  const { user, profile } = useAuth();
   const location = useLocation();
   const navigate = useNavigate();
+  // Owner 2FA banner (23 Nov 2026, staging): shown until a TOTP
+  // factor is enrolled. The guard (AdminGuard) blocks admin only
+  // AFTER enrollment, when a session lacks the second-factor claim.
+  const mfaEnrolled = user ? hasTotpFactor(getEnrolledFactors(user)) : true;
   const [collapsed, setCollapsed] = useState(false);
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [openSections, setOpenSections] = useState<Record<number, boolean>>({});
@@ -461,6 +467,29 @@ export function AdminLayout() {
           </Link>
         </header>
         <main className="ev-admin-main">
+          {!mfaEnrolled ? (
+            <div
+              role="alert"
+              style={{
+                background: '#fff7e0',
+                border: '1px solid #d9a441',
+                borderRadius: 8,
+                padding: '10px 14px',
+                marginBottom: 16,
+              }}
+            >
+              <strong>
+                {t({ bn: 'দ্বিতীয় ধাপ (2FA) এখনো চালু হয়নি', en: 'Two-step verification (2FA) is not enabled yet' })}
+              </strong>{' '}
+              {t({
+                bn: 'মালিকের অ্যাকাউন্টে এখনো অথেনটিকেটর যুক্ত হয়নি। ',
+                en: 'No authenticator is linked to the owner account yet. ',
+              })}
+              <Link to="/admin/security">
+                {t({ bn: 'নিরাপত্তা পাতায় গিয়ে চালু করুন →', en: 'Enable it on the Security page →' })}
+              </Link>
+            </div>
+          ) : null}
           <Outlet />
         </main>
       </div>

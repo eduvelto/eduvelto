@@ -48,10 +48,17 @@ import {
   signInWithRedirect,
   signOut as firebaseSignOut,
   updateProfile as updateAuthProfile,
+  type MultiFactorResolver,
   type User,
 } from 'firebase/auth';
 import { doc, updateDoc, serverTimestamp } from 'firebase/firestore';
 import { auth, db } from '../firebase';
+import {
+  clearMfaEnrolledThisSession,
+  getMfaResolver,
+  recordOwnerLogin,
+  resolveMfaSignIn,
+} from './ownerMfa';
 import {
   authErrorCode,
   ensureUserProfile,
@@ -61,6 +68,13 @@ import {
   type ProfileEdit,
   type UserProfile,
 } from './profile';
+
+export interface MfaHint {
+  uid: string;
+  displayName: string | null;
+  factorId: string;
+  enrollmentTime: string | null;
+}
 
 export interface AuthState {
   /** Firebase Auth user, null when signed out. */
@@ -77,6 +91,15 @@ export interface AuthState {
    * shown in small text under the friendly message so a failure can be
    * diagnosed from a screenshot alone. Null when there is no error. */
   errorCode: string | null;
+  /** Set when a password sign-in hit the second-factor challenge:
+   * the password was correct, but the owner must still enter the
+   * 6-digit authenticator code. Null otherwise. */
+  mfaPending: { hints: MfaHint[] } | null;
+  /** Complete a pending MFA sign-in with the authenticator code
+   * (optionally for one enrolled factor when several exist). */
+  completeMfaSignIn: (code: string, factorUid?: string) => Promise<void>;
+  /** Drop a pending MFA challenge and return to the password form. */
+  clearMfaPending: () => void;
   signUp: (
     displayName: string,
     email: string,
@@ -118,6 +141,12 @@ googleProvider.setCustomParameters({ prompt: 'select_account' });
  * sign-in auto-creates a student profile, as documented above. */
 let roleSetupHold = false;
 const ROLE_SETUP_HOLD_KEY = 'eduvelto-role-setup-hold';
+
+/** Pending MFA resolver (module-level, like roleSetupHold): set when a
+ * password sign-in is challenged for the second factor. The resolver
+ * object itself is not React state — only its hints are exposed via
+ * `mfaPending`. Cleared on success, cancel, and sign-out. */
+let mfaResolver: MultiFactorResolver | null = null;
 
 function readStoredHold(): boolean {
   try {
@@ -173,6 +202,19 @@ export function AuthProvider(props: { children: ReactNode }) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [errorCode, setErrorCode] = useState<string | null>(null);
+  const [mfaPending, setMfaPending] = useState<{ hints: MfaHint[] } | null>(null);
+  // UID whose owner login-history record was already written in this
+  // page session (once per session, like touchLastActive).
+  const ownerLoginRecordedUid = useRef<string | null>(null);
+
+  /** Best-effort owner login record (once per page session). Only the
+   * owner role is recorded — students/teachers never get a
+   * login-history entry. Never throws. */
+  async function maybeRecordOwnerLogin(uid: string, p: UserProfile | null): Promise<void> {
+    if (!db || !p || p.role !== 'owner' || ownerLoginRecordedUid.current === uid) return;
+    ownerLoginRecordedUid.current = uid;
+    await recordOwnerLogin(db, uid);
+  }
 
   /** Record a failure: friendly Bangla message + raw Firebase code. */
   function fail(e: unknown): void {
@@ -234,6 +276,7 @@ export function AuthProvider(props: { children: ReactNode }) {
         if (!u || !db) {
           touchedUid.current = null;
           creatingForUid.current = null;
+          ownerLoginRecordedUid.current = null;
           setUser(null);
           setProfile(null);
           setLoading(false);
@@ -251,6 +294,7 @@ export function AuthProvider(props: { children: ReactNode }) {
             const existing = await getUserProfile(db, u.uid);
             setProfile(existing);
             if (existing) await touchLastActive(u.uid);
+            if (existing) await maybeRecordOwnerLogin(u.uid, existing);
           } catch (e) {
             fail(e);
           } finally {
@@ -262,6 +306,7 @@ export function AuthProvider(props: { children: ReactNode }) {
           const { profile: p, created } = await ensureUserProfile(db, u);
           setProfile(p);
           if (!created) await touchLastActive(u.uid);
+          await maybeRecordOwnerLogin(u.uid, p);
         } catch (e) {
           fail(e);
         } finally {
@@ -315,15 +360,73 @@ export function AuthProvider(props: { children: ReactNode }) {
         setUser(u);
         setProfile(p);
         if (!created) await touchLastActive(u.uid);
+        await maybeRecordOwnerLogin(u.uid, p);
       } finally {
         creatingForUid.current = null;
       }
+    } catch (e) {
+      // Second-factor challenge: the password was right, but the
+      // account has TOTP enrolled. Do NOT throw and do NOT set an
+      // error — LoginPage switches to the authenticator-code step.
+      // A backup code can NOT complete this step (Firebase TOTP has
+      // no backup-code sign-in); the page says so plainly.
+      if (auth && authErrorCode(e) === 'auth/multi-factor-auth-required') {
+        const resolver = getMfaResolver(auth, e);
+        if (resolver) {
+          mfaResolver = resolver;
+          setMfaPending({
+            hints: resolver.hints.map((h) => ({
+              uid: h.uid,
+              displayName: h.displayName ?? null,
+              factorId: h.factorId,
+              enrollmentTime: h.enrollmentTime,
+            })),
+          });
+          return;
+        }
+      }
+      fail(e);
+      throw e;
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  /** Complete a pending MFA sign-in with the 6-digit authenticator
+   * code. On a wrong code Firebase throws auth/invalid-verification-code
+   * and the challenge STAYS pending so the owner can retry. */
+  async function completeMfaSignIn(code: string, factorUid?: string): Promise<void> {
+    if (!auth || !db || !mfaResolver) throw new Error('no-mfa-pending');
+    clearAuthError();
+    setLoading(true);
+    try {
+      await resolveMfaSignIn(mfaResolver, code, factorUid);
+      const u = auth.currentUser;
+      if (!u) throw new Error('not-signed-in');
+      creatingForUid.current = u.uid;
+      try {
+        const { profile: p, created } = await ensureUserProfile(db, u);
+        setUser(u);
+        setProfile(p);
+        if (!created) await touchLastActive(u.uid);
+        await maybeRecordOwnerLogin(u.uid, p);
+      } finally {
+        creatingForUid.current = null;
+      }
+      mfaResolver = null;
+      setMfaPending(null);
     } catch (e) {
       fail(e);
       throw e;
     } finally {
       setLoading(false);
     }
+  }
+
+  function clearMfaPending(): void {
+    mfaResolver = null;
+    setMfaPending(null);
+    clearAuthError();
   }
 
   /** Google sign-in via REDIRECT (not popup).
@@ -379,8 +482,12 @@ export function AuthProvider(props: { children: ReactNode }) {
     }
     touchedUid.current = null;
     creatingForUid.current = null;
+    ownerLoginRecordedUid.current = null;
     roleSetupHold = false;
     clearStoredHold();
+    mfaResolver = null;
+    setMfaPending(null);
+    clearMfaEnrolledThisSession();
     setUser(null);
     setProfile(null);
   }
@@ -415,6 +522,9 @@ export function AuthProvider(props: { children: ReactNode }) {
     suspended: profile?.isActive === false,
     error,
     errorCode,
+    mfaPending,
+    completeMfaSignIn,
+    clearMfaPending,
     signUp,
     signIn,
     signInWithGoogle,
