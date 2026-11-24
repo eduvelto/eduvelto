@@ -81,6 +81,8 @@ import {
   resolveRouteSeo,
   resolveFallbackSeo,
   ORGANIZATION_JSON_LD,
+  WEBSITE_JSON_LD,
+  ogLocaleForLang,
   SITE_URL,
   OG_IMAGE_URL,
   OG_IMAGE_WIDTH,
@@ -1589,5 +1591,21 @@ describe('brand-SEO wave 12: search-result length limits, all routes', () => {
         );
       }
     }
+  });
+});
+
+describe('SEO review (24 Nov 2026, owner order "SEO korco j sob review koro")', () => {
+  it('WebSite JSON-LD carries no SearchAction (IMP-32)', () => {
+    // Google deprecated the sitelinks search box (Nov 2024) and
+    // /search is robots-disallowed + noindex by design — the markup
+    // must not advertise a URL crawlers may not fetch.
+    expect(WEBSITE_JSON_LD).not.toHaveProperty('potentialAction');
+    expect(WEBSITE_JSON_LD['@type']).toBe('WebSite');
+    expect(WEBSITE_JSON_LD.url).toBe(SITE_URL);
+  });
+
+  it('og:locale follows the page language, with the other as alternate (IMP-34)', () => {
+    expect(ogLocaleForLang('bn')).toEqual({ locale: 'bn_BD', alternate: 'en_US' });
+    expect(ogLocaleForLang('en')).toEqual({ locale: 'en_US', alternate: 'bn_BD' });
   });
 });

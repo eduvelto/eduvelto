@@ -16,8 +16,9 @@
 //    (logos + founder photo only), so the gradient hero stays and
 //    the photo is reported incomplete, never faked with AI/stock.
 //  - Stats: REAL numbers only — book + opportunity counts are
-//    computed live from Firestore/seed; ২৩০৭ অধ্যায় / ২৩,৩৪৬ প্রশ্ন
-//    are the audit-verified counts (24 Nov 2026). No 10K+/5K+/1K+.
+//    computed live from Firestore/seed; ২৩০৭ অধ্যায় / ২৩,২৫৯ প্রশ্ন
+//    are the audit-verified counts (24 Nov 2026 backup: ২৩,৩৪৬,
+//    minus the 87 removed by the 25 Nov NCTB crons). No 10K+/5K+/1K+.
 //  - Popular Books: REAL library books only (sorted by question
 //    count — the section says so), text cards, never fake covers.
 //  - Updates: REAL dated items only (latest verified opportunity

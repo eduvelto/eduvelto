@@ -24,6 +24,13 @@
 @media (min-width: 769px) {
   .ev-rd-hero-search { display: flex; gap: 0; max-width: 640px; margin-top: 20px; background: var(--card); border: 1px solid var(--line-strong); border-radius: 999px; padding: 4px 4px 4px 18px; box-shadow: var(--shadow-sm); }
   .ev-rd-hero-search input { flex: 1; min-width: 0; border: 0; outline: 0; background: transparent; color: var(--ink); font-size: 15px; font-family: inherit; }
+  /* SEO review (24 Nov 2026): the hero search input killed its own
+     outline with no focus rule — keyboard users could not see focus
+     on the homepage's main search box (live probe: 14 Tabs, outline
+     "none"). Mirrors the header search rule below; the /search form,
+     mobile search and footer newsletter inputs already have theirs
+     (footer input keeps the browser default outline). */
+  .ev-rd-hero-search input:focus-visible { outline: 2px solid var(--teal-text); outline-offset: 2px; }
   .ev-rd-hero-search button { flex: none; border: 0; border-radius: 999px; padding: 10px 22px; background: var(--teal-deep); color: #fff; font-size: 15px; font-weight: 700; font-family: inherit; cursor: pointer; }
   .ev-rd-hero-search button:hover { background: var(--forest); }
 }
