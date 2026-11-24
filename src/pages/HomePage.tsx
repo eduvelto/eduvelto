@@ -510,11 +510,10 @@ export default function HomePage() {
 
   return (
     <>
-      {/* Hero greeting band, v4 mount (owner's FORMAL revised brief 24
-          Nov 2026 00:29) — OUTSIDE PageShell so it sits flush directly
-          below the nav and spans the viewport, not the shell's 1240px.
-          Home-only: only HomePage mounts it. One language at a time
-          (ar → en → bn); v4 owns this component — do not touch it. */}
+      {/* Hero greeting strip, v5 — OUTSIDE PageShell so it sits flush
+          directly below the nav (the shell's 28px top padding made the
+          white gap above the band) and spans the full viewport width,
+          not the shell's 1240px. Home-only: only HomePage mounts it. */}
       <HeroGreeting />
       <PageShell titleBn="হোম" titleEn="Home" wide hideHomeLink hideTitle maxWidth={1240}>
         {/* Mobile search bar (≤768px, mockup). Now a REAL global search:
