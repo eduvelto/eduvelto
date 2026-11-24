@@ -456,8 +456,9 @@ export default function App() {
         <Route path="/learn" element={<LearnHubPage />} />
         <Route path="/learn/bcs-english-tense" element={<PublicLessonPage lesson="tense" />} />
         <Route path="/learn/bcs-english-preposition" element={<PublicLessonPage lesson="preposition" />} />
-        {/* Brand-SEO wave 1 (24 Nov 2026): 10 public guides — explicit
-            routes, one per guide slug (see PublicGuidePage). */}
+        {/* Brand-SEO wave 1 (24 Nov 2026) + wave 2 (24 Nov 2026):
+            17 public guides — explicit routes, one per guide slug
+            (see PublicGuidePage). */}
         <Route path="/learn/bcs-preparation-guide" element={<PublicGuidePage guide="bcs-preparation-guide" />} />
         <Route path="/learn/bank-job-preparation" element={<PublicGuidePage guide="bank-job-preparation" />} />
         <Route path="/learn/primary-teacher-preparation" element={<PublicGuidePage guide="primary-teacher-preparation" />} />
@@ -468,6 +469,13 @@ export default function App() {
         <Route path="/learn/what-is-ai" element={<PublicGuidePage guide="what-is-ai" />} />
         <Route path="/learn/cv-writing-guide" element={<PublicGuidePage guide="cv-writing-guide" />} />
         <Route path="/learn/budget-planner-guide" element={<PublicGuidePage guide="budget-planner-guide" />} />
+        <Route path="/learn/revision-strategy" element={<PublicGuidePage guide="revision-strategy" />} />
+        <Route path="/learn/note-taking-guide" element={<PublicGuidePage guide="note-taking-guide" />} />
+        <Route path="/learn/time-management-students" element={<PublicGuidePage guide="time-management-students" />} />
+        <Route path="/learn/english-writing-basics" element={<PublicGuidePage guide="english-writing-basics" />} />
+        <Route path="/learn/online-safety-guide" element={<PublicGuidePage guide="online-safety-guide" />} />
+        <Route path="/learn/bangla-spelling-common-mistakes" element={<PublicGuidePage guide="bangla-spelling-common-mistakes" />} />
+        <Route path="/learn/computer-basics-students" element={<PublicGuidePage guide="computer-basics-students" />} />
         {/* Global Opportunity Hub (directive §3B): static guide
             routes MUST come before /opportunities/:oppId —
             otherwise '/opportunities/cv-builder' matches

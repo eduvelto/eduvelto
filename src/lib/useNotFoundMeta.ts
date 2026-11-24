@@ -14,12 +14,19 @@
 // `active` gates the effect: call it unconditionally at the top of the
 // component with the not-found condition (e.g. `!def`). When active is
 // false the effect does nothing at all.
+//
+// The restore titles MUST match the live home titles exactly
+// (seo.ts STATIC_ROUTES['/'] / index.html <title>): brand-SEO wave 1
+// removed "সেরা" from the Bangla home title and wave 2 removed
+// "Best" from the English one — a stale "সেরা"/"Best" here would put
+// the superlative back into document.title on every not-found
+// cleanup. A unit test (seo.test.ts, wave 2) pins the match.
 
 import { useEffect } from 'react';
 import { useLanguage } from '../i18n/LanguageContext';
 
-const HOME_FALLBACK_TITLE_BN = 'Eduvelto — বাংলাদেশের সেরা ফ্রি শিক্ষা প্ল্যাটফর্ম';
-const HOME_FALLBACK_TITLE_EN = "Eduvelto — Bangladesh's Best Free Education Platform";
+const HOME_FALLBACK_TITLE_BN = 'Eduvelto — বাংলাদেশের ফ্রি শিক্ষা প্ল্যাটফর্ম';
+const HOME_FALLBACK_TITLE_EN = "Eduvelto — Bangladesh's Free Education Platform";
 
 export function useNotFoundMeta(title: string, active: boolean): void {
   const { lang } = useLanguage();
