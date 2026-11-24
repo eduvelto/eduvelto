@@ -23,6 +23,16 @@ export default defineConfig({
       srcDir: 'src',
       filename: 'sw.ts',
       manifest: false,
+      // NO AUTO-REGISTRATION (app audit, 24 Nov 2026, owner brief item 8:
+      // the app is fully online-only, no service worker). With
+      // injectRegister: false the plugin does NOT inject registerSW.js
+      // into index.html; src/main.tsx registers the worker manually and
+      // ONLY in a browser (isNativeApp() gate). The Capacitor app must
+      // never precache the shell or serve the worker's offline page
+      // instead of its own Connection Required screen. Browser behaviour
+      // is unchanged: main.tsx calls registerSW({ immediate: true }),
+      // the same semantics as the old auto-registration.
+      injectRegister: false,
       workbox: {
         globPatterns: ['**/*.{js,css,html,ico,png,svg,woff2}'],
       },
