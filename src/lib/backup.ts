@@ -35,10 +35,11 @@
  *
  * WHAT IS IN THE FILE — and what is NOT:
  *   - Included: every top-level collection the owner can list-read
- *     (82 — see BACKUP_COLLECTIONS; 76 in Step 18 staging + 5 that
+ *     (84 — see BACKUP_COLLECTIONS; 76 in Step 18 staging + 5 that
  *     joined at the Step 18 merge: counters + the four Step 15
- *     admin collections + `config`, which joined at the forced-app-update
- *     merge, 23 Nov 2026).
+ *     admin collections = 81, then +2 at the forced-app-update
+ *     merge (`appVersion` + `config`), +1 at the homepage-redesign
+ *     merge (`newsletterSubscribers`), 24 Nov 2026).
  *     `settings` is read doc-by-doc (features + ads) because the rules
  *     have no collection-level match for it (Step 18, F-2). `config` is
  *     read doc-by-doc too (appVersion): its read rule is

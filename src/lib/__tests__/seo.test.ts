@@ -153,6 +153,13 @@ const SITEMAP_URLS = [
   '/learn/study-routine-job-seekers',
   '/learn/healthy-habits-students',
   '/learn/digital-skills-basics',
+  // Brand-SEO wave 4 (24 Nov 2026): 6 more public guides.
+  '/learn/exam-anxiety-management',
+  '/learn/presentation-skills',
+  '/learn/group-study-guide',
+  '/learn/english-vocabulary-building',
+  '/learn/effective-reading-habits',
+  '/learn/self-motivation-students',
   '/learn',
   '/admissions',
   '/admissions/national-university',
@@ -977,7 +984,7 @@ describe('resolveRouteSeo — SEO pass 24 Nov 2026 (owner order "SEO korba ajk 1
     }
   });
 
-  it('/learn hub emits an ItemList of its 23 guides + 2 lessons + the practice hub', () => {
+  it('/learn hub emits an ItemList of its 29 guides + 2 lessons + the practice hub', () => {
     const seo = resolveRouteSeo('/learn')!;
     const items = itemListOf(seo)['itemListElement'] as Array<Record<string, unknown>>;
     expect(items.map((i) => i['url'])).toEqual([
@@ -1004,6 +1011,12 @@ describe('resolveRouteSeo — SEO pass 24 Nov 2026 (owner order "SEO korba ajk 1
       `${SITE_URL}/learn/study-routine-job-seekers`,
       `${SITE_URL}/learn/healthy-habits-students`,
       `${SITE_URL}/learn/digital-skills-basics`,
+      `${SITE_URL}/learn/exam-anxiety-management`,
+      `${SITE_URL}/learn/presentation-skills`,
+      `${SITE_URL}/learn/group-study-guide`,
+      `${SITE_URL}/learn/english-vocabulary-building`,
+      `${SITE_URL}/learn/effective-reading-habits`,
+      `${SITE_URL}/learn/self-motivation-students`,
       `${SITE_URL}/learn/bcs-english-tense`,
       `${SITE_URL}/learn/bcs-english-preposition`,
       `${SITE_URL}/jobs/bcs/practice/english`,
@@ -1113,8 +1126,8 @@ describe('resolveRouteSeo — brand-SEO wave 1 (24 Nov 2026)', () => {
     }
   });
 
-  it('all 23 guides resolve with draft wording and Article JSON-LD', () => {
-    expect(PUBLIC_GUIDES).toHaveLength(23);
+  it('all 29 guides resolve with draft wording and Article JSON-LD', () => {
+    expect(PUBLIC_GUIDES).toHaveLength(29);
     for (const guide of PUBLIC_GUIDES) {
       const seo = resolveRouteSeo(guide.path);
       expect(seo, `no SEO for ${guide.path}`).not.toBeNull();
@@ -1292,8 +1305,8 @@ describe('resolveRouteSeo — English SEO (24 Nov 2026, language system)', () =>
 });
 
 describe('resolveRouteSeo — brand-SEO wave 2 (24 Nov 2026)', () => {
-  it('sitemap has 100 URLs (94 wave-2 + 6 wave-3 guides)', () => {
-    expect(SITEMAP_URLS.length).toBe(100);
+  it('sitemap has 106 URLs (100 wave-3 + 6 wave-4 guides)', () => {
+    expect(SITEMAP_URLS.length).toBe(106);
   });
 
   it('English home title drops "Best"; Bangla title is unchanged', () => {
@@ -1427,3 +1440,50 @@ describe('resolveRouteSeo — brand-SEO wave 3 (24 Nov 2026)', () => {
     }
   });
 });
+
+describe('resolveRouteSeo — brand-SEO wave 4 (24 Nov 2026)', () => {
+  it('all 6 wave-4 guide URLs are in the sitemap list', () => {
+    for (const path of [
+      '/learn/exam-anxiety-management',
+      '/learn/presentation-skills',
+      '/learn/group-study-guide',
+      '/learn/english-vocabulary-building',
+      '/learn/effective-reading-habits',
+      '/learn/self-motivation-students',
+    ]) {
+      expect(SITEMAP_URLS, path).toContain(path);
+    }
+  });
+
+  it('the 6 wave-4 guides resolve with draft wording, Article JSON-LD and real breadcrumbs', () => {
+    const wave4: Array<{ path: string; crumbBn: string; crumbEn: string }> = [
+      { path: '/learn/exam-anxiety-management', crumbBn: 'পরীক্ষার উদ্বেগ', crumbEn: 'Exam Anxiety' },
+      { path: '/learn/presentation-skills', crumbBn: 'উপস্থাপনা দক্ষতা', crumbEn: 'Presentation Skills' },
+      { path: '/learn/group-study-guide', crumbBn: 'দলগত পড়াশোনা', crumbEn: 'Group Study' },
+      { path: '/learn/english-vocabulary-building', crumbBn: 'ইংরেজি শব্দভান্ডার', crumbEn: 'English Vocabulary' },
+      { path: '/learn/effective-reading-habits', crumbBn: 'পড়ার অভ্যাস', crumbEn: 'Reading Habits' },
+      { path: '/learn/self-motivation-students', crumbBn: 'নিজেকে অনুপ্রাণিত রাখা', crumbEn: 'Self-Motivation' },
+    ];
+    for (const { path, crumbBn, crumbEn } of wave4) {
+      const seo = resolveRouteSeo(path);
+      expect(seo, `no SEO for ${path}`).not.toBeNull();
+      expect(seo!.description, path).toContain('খসড়া পাঠ');
+      expect(seo!.description, path).toContain('শিক্ষক যাচাইয়ের অপেক্ষায়');
+      expect(seo!.description, path).not.toContain('যাচাইকৃত');
+      expect(seo!.robots, path).toBeUndefined();
+      expect(jsonLdTypes(seo!)).toContain('Article');
+      const article = (seo!.jsonLd as Array<Record<string, unknown>>).find(
+        (o) => o['@type'] === 'Article',
+      )!;
+      expect(article['headline']).toBe(seo!.title);
+      expect(article['datePublished']).toBe('2026-11-24');
+      expect(article['inLanguage']).toBe('bn');
+      expect(breadcrumbNames(seo!)).toEqual(['হোম', 'পাঠ', crumbBn]);
+      const en = resolveRouteSeo(path, 'en')!;
+      expect(en.title, path).not.toMatch(/best/i);
+      expect(en.description, path).toContain('awaiting teacher review');
+      expect(breadcrumbNames(en)).toEqual(['Home', 'Lessons', crumbEn]);
+    }
+  });
+});
+
