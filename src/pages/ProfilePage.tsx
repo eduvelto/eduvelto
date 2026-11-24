@@ -675,22 +675,22 @@ export default function ProfilePage() {
                 <li>
                   {t({ bn: 'ক্যাটাগরি: ', en: 'Categories: ' })}
                   {draftOffer.enrolledCategories
-                    .map((s) => JOB_CATEGORIES.find((c) => c.slug === s)?.bn ?? s)
+                    .map((s) => (lang === 'bn' ? JOB_CATEGORIES.find((c) => c.slug === s)?.bn : JOB_CATEGORIES.find((c) => c.slug === s)?.en) ?? s)
                     .join(', ')}
                 </li>
               ) : null}
               {draftOffer.targetExam ? (
                 <li>
                   {t({ bn: 'লক্ষ্য পরীক্ষা: ', en: 'Target exam: ' })}
-                  {JOB_EXAMS.find((e) => e.slug === draftOffer.targetExam)?.bn ?? draftOffer.targetExam}
+                  {lang === 'bn' ? (JOB_EXAMS.find((e) => e.slug === draftOffer.targetExam)?.bn ?? draftOffer.targetExam) : (JOB_EXAMS.find((e) => e.slug === draftOffer.targetExam)?.en ?? draftOffer.targetExam)}
                 </li>
               ) : null}
               {draftOffer.dailyGoalQuestions != null || draftOffer.dailyGoalMinutes != null ? (
                 <li>
                   {t({ bn: 'দৈনিক লক্ষ্য: ', en: 'Daily goal: ' })}
-                  {draftOffer.dailyGoalQuestions != null ? `${draftOffer.dailyGoalQuestions} প্রশ্ন` : '—'}
+                  {draftOffer.dailyGoalQuestions != null ? t({ bn: `${draftOffer.dailyGoalQuestions} প্রশ্ন`, en: `${draftOffer.dailyGoalQuestions} questions` }) : '—'}
                   {' · '}
-                  {draftOffer.dailyGoalMinutes != null ? `${draftOffer.dailyGoalMinutes} মিনিট` : '—'}
+                  {draftOffer.dailyGoalMinutes != null ? t({ bn: `${draftOffer.dailyGoalMinutes} মিনিট`, en: `${draftOffer.dailyGoalMinutes} minutes` }) : '—'}
                 </li>
               ) : null}
             </ul>
