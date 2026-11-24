@@ -138,8 +138,11 @@ html[data-theme="dark"] .ev-rd-ai { background: linear-gradient(135deg, #2c1f3d 
   .ev-header-search input { width: 170px; border: 0; outline: 0; background: transparent; color: var(--ink); font-size: 14px; font-family: inherit; }
   .ev-header-search input:focus { width: 220px; }
   /* Wave 7 a11y: the input kills its own outline (line above), so give it an
-     explicit teal-deep focus ring — the header search sits on a light card. */
-  .ev-header-search input:focus-visible { outline: 2px solid #12766e; outline-offset: 2px; }
+     explicit focus ring. Wave 9: var(--teal-text), not hardcoded teal-deep —
+     #12766e measured 2.66:1 against the dark card (#1a2b38), below the 3:1
+     focus-indicator bar; --teal-text is #12766e in light (unchanged) and
+     #5cc8b8 in dark (~6.4:1). */
+  .ev-header-search input:focus-visible { outline: 2px solid var(--teal-text); outline-offset: 2px; }
   .ev-header-search button { flex: none; border: 0; border-radius: 999px; padding: 6px 12px; background: var(--teal-deep); color: #fff; font-size: 13px; font-weight: 700; font-family: inherit; cursor: pointer; }
 }
 
@@ -148,9 +151,11 @@ html[data-theme="dark"] .ev-rd-ai { background: linear-gradient(135deg, #2c1f3d 
 .ev-search-form { display: flex; gap: 0; max-width: 640px; background: var(--card); border: 1px solid var(--line-strong); border-radius: 999px; padding: 4px 4px 4px 18px; box-shadow: var(--shadow-sm); }
 .ev-search-form input { flex: 1; min-width: 0; border: 0; outline: 0; background: transparent; color: var(--ink); font-size: 15px; font-family: inherit; }
 /* Wave 7 a11y: the input kills its own outline (line above), so give it an
-   explicit teal-deep focus ring — the form sits on a light surface, and the
-   design system says focus ring is teal-deep on light surfaces. */
-.ev-search-form input:focus-visible, .ev-search-form button:focus-visible { outline: 2px solid #12766e; outline-offset: 2px; }
+   explicit focus ring. Wave 9: var(--teal-text), not hardcoded teal-deep —
+   #12766e measured 2.66:1 against the dark card (#1a2b38), below the 3:1
+   focus-indicator bar; --teal-text is #12766e in light (unchanged) and
+   #5cc8b8 in dark (~6.4:1). */
+.ev-search-form input:focus-visible, .ev-search-form button:focus-visible { outline: 2px solid var(--teal-text); outline-offset: 2px; }
 .ev-search-form button { flex: none; border: 0; border-radius: 999px; padding: 10px 22px; background: var(--teal-deep); color: #fff; font-size: 15px; font-weight: 700; font-family: inherit; cursor: pointer; }
 .ev-search-hint { font-size: 13.5px; line-height: 1.6; color: var(--muted-ivory); max-width: 640px; }
 .ev-search-count { font-size: 15px; font-weight: 700; color: var(--heading); margin: 18px 0 10px; }

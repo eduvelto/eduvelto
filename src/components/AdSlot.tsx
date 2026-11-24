@@ -17,11 +17,15 @@ import {
 // Three render states (see lib/adsConfig.ts getAdRenderState):
 // - 'ad': master switch ON + real AdSense IDs → the real <ins> unit,
 //   non-personalised ads requested (child safety: PERSONALISED_ADS is
-//   always false). Every real ad carries a plain "বিজ্ঞাপন" /
-//   "Advertisement" label above it (follows the selected language).
-//   it — clearly an ad, never styled like a Download / Next / Continue
-//   button. If AdSense reports the unit unfilled (data-ad-status), the
-//   whole slot collapses to nothing (no empty box, no blank strip).
+//   always false). Every real ad carries a plain "বিজ্ঞাপন
+//   (Advertisement)" label above it (the same bilingual string in
+//   both languages, so the ad is recognisable whatever language the
+//   page is in). The label is deliberately unstyled — small muted
+//   text, no background, no border, no padding that could read as a
+//   button — clearly an ad, never styled like a Download / Next /
+//   Continue button. If AdSense reports the unit unfilled
+//   (data-ad-status), the whole slot collapses to nothing (no empty
+//   box, no blank strip).
 // - 'placeholder': not live, but this is a preview host (Firebase
 //   preview channel / localhost) → a clearly labelled "বিজ্ঞাপনের স্থান
 //   · নমুনা" box, so placements can be verified without faking an ad.
@@ -98,7 +102,7 @@ const PLACEHOLDER_SIZE_LABEL: Record<AdPlacement, { bn: string; en: string }> = 
   mobile: { bn: 'মোবাইল · ৩২০×৫০', en: 'Mobile · 320×50' },
 };
 
-/** Plain-text "বিজ্ঞাপন" label above every REAL ad unit. Deliberately
+/** Plain-text "বিজ্ঞাপন (Advertisement)" label above every REAL ad unit. Deliberately
  *  unstyled — small muted text, no background, no border, no padding
  *  that could read as a button. An ad must never look like a Download /
  *  Next / Continue button (owner brief 23 Nov 2026 21:52). */
@@ -205,12 +209,15 @@ export default function AdSlot(props: {
     if (state !== 'ad') return;
     const ins = insRef.current;
     if (!ins) return;
-    // AdSense writes data-ad-status="filled" | "unfilled" on the <ins>
-    // once the request resolves. Collapse the slot when it says
-    // unfilled — no empty box, no blank strip (owner brief 23 Nov 2026
-    // 21:52). The observer is the only trigger: nothing is hidden
-    // before AdSense answers, so a slow fill is never mistaken for a
-    // miss. Auto ads' own units are Google-managed and collapse
+    // AdSense writes data-ad-status="filled" | "unfilled" |
+    // "unfill-optimized" on the <ins> once the request resolves.
+    // Collapse the slot ONLY when it says exactly "unfilled" — no
+    // empty box, no blank strip (owner brief 23 Nov 2026 21:52).
+    // "unfill-optimized" is AdSense's own collapsed/optimized
+    // rendering, NOT a miss, so the strict equality below leaves it
+    // alone on purpose. The observer is the only trigger: nothing is
+    // hidden before AdSense answers, so a slow fill is never mistaken
+    // for a miss. Auto ads' own units are Google-managed and collapse
     // themselves.
     const check = () => {
       if (ins.getAttribute('data-ad-status') === 'unfilled') {
@@ -311,8 +318,8 @@ export default function AdSlot(props: {
   }
 
   return (
-    <div className={wrapperClass} style={wrapperStyle} data-ad-placement={placement} aria-label={t({ bn: 'বিজ্ঞাপন', en: 'Advertisement' })}>
-      <div style={AD_LABEL_STYLE}>{t({ bn: 'বিজ্ঞাপন', en: 'Advertisement' })}</div>
+    <div className={wrapperClass} style={wrapperStyle} data-ad-placement={placement} aria-label={t({ bn: 'বিজ্ঞাপন (Advertisement)', en: 'বিজ্ঞাপন (Advertisement)' })}>
+      <div style={AD_LABEL_STYLE}>{t({ bn: 'বিজ্ঞাপন (Advertisement)', en: 'বিজ্ঞাপন (Advertisement)' })}</div>
       <ins
         ref={(el) => {
           insRef.current = el;
