@@ -24,6 +24,7 @@ import { AdminGuard } from './components/AdminGuard';
 import { RouteSeo } from './components/RouteSeo';
 import { NuQuestionWorkbenchGuard } from './components/NuQuestionWorkbenchGuard';
 import { T, useLanguage } from './i18n/LanguageContext';
+import { setupNativeBackButton } from './lib/nativeBackButton';
 // SCALE (10k users): route-level code splitting. Before this change the
 // first visit downloaded ALL 35 pages in one 909 kB bundle (admin pages
 // included, for every visitor). Now the first load is only the shell +
@@ -208,6 +209,18 @@ function ScrollToTop() {
   return null;
 }
 
+// ANDROID BACK BUTTON (owner bug report 24 Nov 2026 09:40): inside the
+// Capacitor app, back on any in-app page exited the whole app. The
+// native @capacitor/app plugin fires a backButton event; this component
+// registers the listener (lib/nativeBackButton.ts) — history.back() when
+// there is in-app history, App.exitApp() only on the home page. In a
+// normal browser setupNativeBackButton() is a no-op, so the browser back
+// button is untouched.
+function NativeBackButton() {
+  useEffect(() => setupNativeBackButton(), []);
+  return null;
+}
+
 export default function App() {
   const { t } = useLanguage();
   const { profile, suspended, signOut } = useAuth();
@@ -281,6 +294,7 @@ export default function App() {
       }
     >
       <ScrollToTop />
+      <NativeBackButton />
       {/* Light header (homepage redesign, 21 Nov 2026): Home pill + 4
           section dropdowns + search + dark-mode (Coming Soon) + auth.
           See components/HeaderNav.tsx. Hidden on /admin* and /ceo* —

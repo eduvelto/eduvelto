@@ -13,6 +13,7 @@
     "emulators": "JAVA_TOOL_OPTIONS=\"-Djava.net.preferIPv4Stack=true\" firebase emulators:start --only firestore,auth"
   },
   "dependencies": {
+    "@capacitor/app": "^8.1.2",
     "firebase": "11.10.0",
     "jspdf": "^4.2.1",
     "pdf-lib": "^1.17.1",
