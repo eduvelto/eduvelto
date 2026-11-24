@@ -326,7 +326,7 @@ export default function OwnerSecurityPage() {
       {loading ? <LoadingBox /> : null}
       {error ? <ErrorBox message={error} /> : null}
       {errorCode ? (
-        <p style={{ color: 'var(--error)', fontSize: 13, marginTop: -8 }}>ত্রুটি কোড: {errorCode}</p>
+        <p style={{ color: 'var(--error)', fontSize: 13, marginTop: -8 }}>{t({ bn: 'ত্রুটি কোড:', en: 'Error code:' })} {errorCode}</p>
       ) : null}
       {notice ? <p style={{ color: 'var(--heading)' }}>{notice}</p> : null}
 

@@ -45,7 +45,7 @@ function parseGpa(raw: string): number | null {
 }
 
 export default function MeritExplainer() {
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
   const [open, setOpen] = useState(false);
   const [group, setGroup] = useState<NuGroupSlug>('humanities');
   const [examScoreRaw, setExamScoreRaw] = useState('');
@@ -137,23 +137,23 @@ export default function MeritExplainer() {
             </label>
             <label style={{ display: 'block', fontSize: 14, color: 'var(--ink-soft)' }}>
               {t({ bn: 'অনুশীলন/মকের নম্বর (০–১০০)', en: 'Practice/mock score (0–100)' })}
-              <input inputMode="decimal" value={examScoreRaw} onChange={(e) => setExamScoreRaw(e.target.value)} placeholder="যেমন: ৭২" style={{ ...inputStyle, marginTop: 6 }} />
+              <input inputMode="decimal" value={examScoreRaw} onChange={(e) => setExamScoreRaw(e.target.value)} placeholder={lang === 'bn' ? 'যেমন: ৭২' : 'e.g. 72'} style={{ ...inputStyle, marginTop: 6 }} />
             </label>
             <label style={{ display: 'block', fontSize: 14, color: 'var(--ink-soft)' }}>
               {t({ bn: 'SSC GPA (০.০০–৫.০০)', en: 'SSC GPA (0.00–5.00)' })}
-              <input inputMode="decimal" value={sscGpaRaw} onChange={(e) => setSscGpaRaw(e.target.value)} placeholder="যেমন: ৪.৫০" style={{ ...inputStyle, marginTop: 6 }} />
+              <input inputMode="decimal" value={sscGpaRaw} onChange={(e) => setSscGpaRaw(e.target.value)} placeholder={lang === 'bn' ? 'যেমন: ৪.৫০' : 'e.g. 4.50'} style={{ ...inputStyle, marginTop: 6 }} />
             </label>
             <label style={{ display: 'block', fontSize: 14, color: 'var(--ink-soft)' }}>
               {t({ bn: 'HSC GPA (০.০০–৫.০০)', en: 'HSC GPA (0.00–5.00)' })}
-              <input inputMode="decimal" value={hscGpaRaw} onChange={(e) => setHscGpaRaw(e.target.value)} placeholder="যেমন: ৪.৭৫" style={{ ...inputStyle, marginTop: 6 }} />
+              <input inputMode="decimal" value={hscGpaRaw} onChange={(e) => setHscGpaRaw(e.target.value)} placeholder={lang === 'bn' ? 'যেমন: ৪.৭৫' : 'e.g. 4.75'} style={{ ...inputStyle, marginTop: 6 }} />
             </label>
             <label style={{ display: 'block', fontSize: 14, color: 'var(--ink-soft)' }}>
               {t({ bn: 'SSC সাল (২০২২/২০২৩)', en: 'SSC year (2022/2023)' })}
-              <input inputMode="numeric" value={sscYearRaw} onChange={(e) => setSscYearRaw(e.target.value)} placeholder="যেমন: ২০২২" style={{ ...inputStyle, marginTop: 6 }} />
+              <input inputMode="numeric" value={sscYearRaw} onChange={(e) => setSscYearRaw(e.target.value)} placeholder={lang === 'bn' ? 'যেমন: ২০২২' : 'e.g. 2022'} style={{ ...inputStyle, marginTop: 6 }} />
             </label>
             <label style={{ display: 'block', fontSize: 14, color: 'var(--ink-soft)' }}>
               {t({ bn: 'HSC সাল (২০২৪/২০২৫)', en: 'HSC year (2024/2025)' })}
-              <input inputMode="numeric" value={hscYearRaw} onChange={(e) => setHscYearRaw(e.target.value)} placeholder="যেমন: ২০২৪" style={{ ...inputStyle, marginTop: 6 }} />
+              <input inputMode="numeric" value={hscYearRaw} onChange={(e) => setHscYearRaw(e.target.value)} placeholder={lang === 'bn' ? 'যেমন: ২০২৪' : 'e.g. 2024'} style={{ ...inputStyle, marginTop: 6 }} />
             </label>
           </div>
           <p style={{ color: 'var(--muted-ivory)', fontSize: 13, lineHeight: 1.7 }}>
@@ -170,7 +170,7 @@ export default function MeritExplainer() {
                   {t({ bn: '১ · পরীক্ষার নম্বর', en: '1 · Exam score' })}
                 </strong>
                 <span style={{ fontSize: 28, fontWeight: 700, color: 'var(--heading)' }}>{estimate.examScore}</span>
-                <span style={{ color: 'var(--muted-ivory)' }}> / ১০০</span>
+                <span style={{ color: 'var(--muted-ivory)' }}>{lang === 'bn' ? ' / ১০০' : ' / 100'}</span>
                 <p style={{ margin: '8px 0 0', color: 'var(--muted-ivory)', fontSize: 13, lineHeight: 1.7 }}>
                   {t({
                     bn: 'পাস নম্বর ৩৫ — তুলনার জন্য মাত্র। এটি ভর্তির নিশ্চয়তা নয়।',
@@ -183,7 +183,7 @@ export default function MeritExplainer() {
                   {t({ bn: '২ · সম্ভাব্য মেধা স্কোর (আনুমানিক)', en: '2 · Estimated merit score' })}
                 </strong>
                 <span style={{ fontSize: 28, fontWeight: 700, color: 'var(--heading)' }}>{estimate.total}</span>
-                <span style={{ color: 'var(--muted-ivory)' }}> / ২০০</span>
+                <span style={{ color: 'var(--muted-ivory)' }}>{lang === 'bn' ? ' / ২০০' : ' / 200'}</span>
                 <ul style={{ margin: '8px 0 0', paddingLeft: 18, color: 'var(--ink-soft)', fontSize: 14, lineHeight: 1.8 }}>
                   <li>{t({ bn: `পরীক্ষা: ${estimate.examScore} / ১০০`, en: `Exam: ${estimate.examScore} / 100` })}</li>
                   <li>{t({ bn: `SSC GPA অংশ: ${estimate.sscPart} / ৪০`, en: `SSC GPA part: ${estimate.sscPart} / 40` })}</li>

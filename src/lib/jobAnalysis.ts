@@ -35,7 +35,7 @@
 //    it never invents a bundle or presents a drill as available
 //    when it is not.
 
-import { jobTopicLabelBn, type JobAttemptAnswer } from './jobEngine';
+import { jobTopicLabel, jobTopicLabelBn, type JobAttemptAnswer } from './jobEngine';
 
 /** The fields the analysis reads from a stored attempt doc.
 /// Defensive: a missing/odd field falls back honestly (0 / ''
@@ -119,7 +119,7 @@ export function attemptSummaryFromStored(
   };
 }
 
-/** "১ মিনিট ৩০ সেকেন্ড" / "৪৫ সেকেন্ড" — the existing
+/** "1 মিনিট 30 সেকেন্ড" / "45 সেকেন্ড" — the existing
  * result-page convention (Western digits, Bangla words). */
 export function formatDurationBn(totalSeconds: number): string {
   const s = Math.max(0, Math.round(totalSeconds));
@@ -128,6 +128,19 @@ export function formatDurationBn(totalSeconds: number): string {
   if (m === 0) return `${rest} সেকেন্ড`;
   if (rest === 0) return `${m} মিনিট`;
   return `${m} মিনিট ${rest} সেকেন্ড`;
+}
+
+/** Duration in the selected language: "1 min 30 sec" / "45 sec" in
+ * English, "1 মিনিট 30 সেকেন্ড" / "45 সেকেন্ড" in Bangla
+ * (formatDurationBn is the Bangla wrapper). */
+export function formatDuration(totalSeconds: number, lang: 'bn' | 'en'): string {
+  if (lang === 'bn') return formatDurationBn(totalSeconds);
+  const s = Math.max(0, Math.round(totalSeconds));
+  const m = Math.floor(s / 60);
+  const rest = s % 60;
+  if (m === 0) return `${rest} sec`;
+  if (rest === 0) return `${m} min`;
+  return `${m} min ${rest} sec`;
 }
 
 /* ------------------------------------------------------------------ */
@@ -139,8 +152,8 @@ export interface NegativeMarkingExplanation {
   disabled: boolean;
   /** Marks actually applied per wrong answer (0 when disabled). */
   penaltyPerWrong: number;
-  /** The formula in plain Bangla, e.g.
-   * "২টি সঠিক × ১ − ১টি ভুল × ০.৫ = ১.৫" — Western digits, the
+  /** The formula in plain language (Bangla by default), e.g.
+   * "2টি সঠিক × 1 − 1টি ভুল × 0.5 = 1.5" — Western digits, the
    * existing result-page convention. */
   formula: string;
   /** The cost line, e.g. "১টি ভুল উত্তরে ০.৫ নম্বর কাটা গেছে" —
@@ -158,6 +171,7 @@ export function marksPerQuestion(attempt: JobAttemptSummary): number {
 
 export function negativeMarkingExplanation(
   attempt: JobAttemptSummary,
+  lang: 'bn' | 'en' = 'bn',
 ): NegativeMarkingExplanation {
   const penalty = attempt.negativeMarkingUsed ?? null;
   const mpq = marksPerQuestion(attempt);
@@ -167,7 +181,10 @@ export function negativeMarkingExplanation(
     return {
       disabled: true,
       penaltyPerWrong: 0,
-      formula: `${attempt.correctCount}টি সঠিক × ${mpq} = ${attempt.score} নম্বর (নেগেটিভ মার্কিং বন্ধ)`,
+      formula:
+        lang === 'bn'
+          ? `${attempt.correctCount}টি সঠিক × ${mpq} = ${attempt.score} নম্বর (নেগেটিভ মার্কিং বন্ধ)`
+          : `${attempt.correctCount} correct × ${mpq} = ${attempt.score} marks (no negative marking)`,
       costLine: '',
     };
   }
@@ -176,11 +193,16 @@ export function negativeMarkingExplanation(
     disabled: false,
     penaltyPerWrong: p,
     formula:
-      `${attempt.correctCount}টি সঠিক × ${mpq} − ` +
-      `${attempt.wrongCount}টি ভুল × ${p} = ${attempt.score} নম্বর`,
+      lang === 'bn'
+        ? `${attempt.correctCount}টি সঠিক × ${mpq} − ` +
+          `${attempt.wrongCount}টি ভুল × ${p} = ${attempt.score} নম্বর`
+        : `${attempt.correctCount} correct × ${mpq} − ` +
+          `${attempt.wrongCount} wrong × ${p} = ${attempt.score} marks`,
     costLine:
       attempt.wrongCount > 0 && attempt.negativeDeduction > 0
-        ? `${attempt.wrongCount}টি ভুল উত্তরে ${attempt.negativeDeduction} নম্বর কাটা গেছে`
+        ? lang === 'bn'
+          ? `${attempt.wrongCount}টি ভুল উত্তরে ${attempt.negativeDeduction} নম্বর কাটা গেছে`
+          : `${attempt.negativeDeduction} marks deducted for ${attempt.wrongCount} wrong answer(s)`
         : '',
   };
 }
@@ -192,6 +214,7 @@ export function negativeMarkingExplanation(
 export interface TopicStat {
   topicId: string;
   label: string;
+  labelEn: string;
   correct: number;
   wrong: number;
   unanswered: number;
@@ -247,6 +270,7 @@ export function perTopicAccuracy(answers: JobAttemptAnswer[]): TopicStat[] {
       return {
         topicId,
         label: jobTopicLabelBn(topicId),
+        labelEn: jobTopicLabel(topicId, 'en'),
         correct: s.correct,
         wrong: s.wrong,
         unanswered: s.unanswered,
@@ -264,6 +288,7 @@ export function perTopicAccuracy(answers: JobAttemptAnswer[]): TopicStat[] {
 export interface SubjectTimeStat {
   subjectId: string;
   label: string;
+  labelEn: string;
   questions: number;
   timeSeconds: number;
   avgTimeSeconds: number;
@@ -283,6 +308,7 @@ export function perSubjectTime(answers: JobAttemptAnswer[]): SubjectTimeStat[] {
     .map(([subjectId, s]) => ({
       subjectId,
       label: jobTopicLabelBn(subjectId),
+      labelEn: jobTopicLabel(subjectId, 'en'),
       questions: s.questions,
       timeSeconds: s.timeSeconds,
       avgTimeSeconds: s.questions > 0 ? s.timeSeconds / s.questions : 0,
@@ -310,6 +336,11 @@ export const TOPIC_ACTION_BADGE_BN: Record<TopicActionBadge, string> = {
   concept: 'ধারণার ঘাটতি — এই টপিকটি আবার পড়ুন',
   speed: 'সময়ের ফাঁদ — ধীর প্রশ্নে ভুল হচ্ছে',
   careless: 'তাড়াহুড়ো — দ্রুত ভুলে নম্বর কাটা যাচ্ছে',
+};
+export const TOPIC_ACTION_BADGE_EN: Record<TopicActionBadge, string> = {
+  concept: 'Concept gap — read this topic again',
+  speed: 'Time trap — slow questions are going wrong',
+  careless: 'Rushing — quick mistakes are costing marks',
 };
 
 export function topicActionBadge(stat: TopicStat): TopicActionBadge | null {
@@ -339,6 +370,13 @@ export const ANSWER_TIME_BUCKET_BN: Record<AnswerTimeBucket, string> = {
   guessing: 'অনুমান / ধারণার ঘাটতি — দ্রুত, তবু ভুল',
   unanswered: 'উত্তর দেওয়া হয়নি',
 };
+export const ANSWER_TIME_BUCKET_EN: Record<AnswerTimeBucket, string> = {
+  mastered: 'Mastered — fast and correct',
+  'slow-sure': 'Slow but sure',
+  'time-trap': 'Time trap — slow, yet wrong',
+  guessing: 'Guessing / concept gap — fast, yet wrong',
+  unanswered: 'Not answered',
+};
 
 /** Classify one answer by correctness × time (Gemini #1,
  * adapted). Unanswered answers are their own bucket. */
@@ -366,9 +404,9 @@ export interface AttemptTrend {
   previousPercent: number | null;
   /** latest − previous, in display-% points; null with < 2. */
   deltaVsPrevious: number | null;
-  /** Plain-Bangla sentence, own-past only, e.g.
-   * "আগের মকের চেয়ে +৫%". Uses Western digits, the existing
-   * convention. */
+  /** Sentence in the requested language (see the lang param),
+   * own-past only, e.g. "আগের মকের চেয়ে +৫%". Uses Western
+   * digits, the existing convention. */
   sentence: string;
 }
 
@@ -378,7 +416,9 @@ export interface AttemptTrend {
 export function attemptTrend(
   attempts: JobAttemptSummary[],
   kindLabel: 'মক' | 'অনুশীলন',
+  lang: 'bn' | 'en' = 'bn',
 ): AttemptTrend {
+  const kindEn = kindLabel === 'মক' ? 'mock' : 'practice';
   if (attempts.length === 0) {
     return {
       count: 0,
@@ -386,7 +426,7 @@ export function attemptTrend(
       bestPercent: null,
       previousPercent: null,
       deltaVsPrevious: null,
-      sentence: `এখনো কোনো ${kindLabel} দেওয়া হয়নি — ${kindLabel} দিলে এখানে আপনার অগ্রগতি দেখাবে।`,
+      sentence: lang === 'bn' ? `এখনো কোনো ${kindLabel} দেওয়া হয়নি — ${kindLabel} দিলে এখানে আপনার অগ্রগতি দেখাবে।` : `No ${kindEn} taken yet — take one and your progress will show here.`,
     };
   }
   const percents = attempts.map((a) => displayPercentage(a.percentage));
@@ -399,7 +439,7 @@ export function attemptTrend(
       bestPercent: best,
       previousPercent: null,
       deltaVsPrevious: null,
-      sentence: `এটাই আপনার প্রথম ${kindLabel} — পরের ${kindLabel} দিলে তার সঙ্গে তুলনা এখানে দেখাবে।`,
+      sentence: lang === 'bn' ? `এটাই আপনার প্রথম ${kindLabel} — পরের ${kindLabel} দিলে তার সঙ্গে তুলনা এখানে দেখাবে।` : `This is your first ${kindEn} — the next one will be compared with it here.`,
     };
   }
   const previous = percents[1];
@@ -412,9 +452,13 @@ export function attemptTrend(
     previousPercent: previous,
     deltaVsPrevious: delta,
     sentence:
-      delta === 0
-        ? `আগের ${kindLabel}ের সমান — ${latest}%।`
-        : `আগের ${kindLabel}ের চেয়ে ${sign}${delta}% — সর্বশেষ ${latest}%, আগেরটি ${previous}%।`,
+      lang === 'en'
+        ? delta === 0
+          ? `Same as the previous ${kindEn} — ${latest}%.`
+          : `${sign}${delta}% vs the previous ${kindEn} — latest ${latest}%, previous ${previous}%.`
+        : delta === 0
+          ? `আগের ${kindLabel}ের সমান — ${latest}%।`
+          : `আগের ${kindLabel}ের চেয়ে ${sign}${delta}% — সর্বশেষ ${latest}%, আগেরটি ${previous}%।`,
   };
 }
 
@@ -425,6 +469,8 @@ export function attemptTrend(
 export interface TopicMastery {
   topicId: string;
   label: string;
+  /** English topic label (jobTopicLabel, same humanized name). */
+  labelEn: string;
   /** Accuracy on the FIRST attempt that touched this topic. */
   firstAccuracy: number;
   /** Accuracy on the LATEST attempt that touched this topic. */
@@ -455,6 +501,7 @@ export function topicMasteryOverTime(attempts: JobAttemptSummary[]): TopicMaster
     .map(([topicId, s]) => ({
       topicId,
       label: jobTopicLabelBn(topicId),
+      labelEn: jobTopicLabel(topicId, 'en'),
       firstAccuracy: s.first,
       latestAccuracy: s.latest,
       attemptsTouched: s.touched,
@@ -472,18 +519,18 @@ export interface TimeManagementSummary {
   avgTimePerQuestion: number;
   /** Total questions answered across all attempts. */
   totalQuestions: number;
-  slowestTopic: { topicId: string; label: string; avgTimeSeconds: number } | null;
-  fastestTopic: { topicId: string; label: string; avgTimeSeconds: number } | null;
+  slowestTopic: { topicId: string; label: string; labelEn: string; avgTimeSeconds: number } | null;
+  fastestTopic: { topicId: string; label: string; labelEn: string; avgTimeSeconds: number } | null;
   /** Unanswered counts, newest first (one per attempt). */
   unansweredTrend: number[];
-  /** Plain-Bangla sentence about the unanswered trend. */
+  /** Sentence about the unanswered trend, in the requested language. */
   unansweredSentence: string;
 }
 
 /** Time summary across attempts. Slowest/fastest topics need at
  * least 2 questions in the aggregated pool, so a single odd
  * question cannot crown a topic. */
-export function timeManagementSummary(attempts: JobAttemptSummary[]): TimeManagementSummary {
+export function timeManagementSummary(attempts: JobAttemptSummary[], lang: 'bn' | 'en' = 'bn'): TimeManagementSummary {
   const allAnswers = attempts.flatMap((a) => a.answers);
   const totalQuestions = allAnswers.length;
   const totalTime = allAnswers.reduce(
@@ -496,7 +543,25 @@ export function timeManagementSummary(attempts: JobAttemptSummary[]): TimeManage
   const fastest = topicStats.length > 0 ? [...topicStats].sort((a, b) => a.avgTimeSeconds - b.avgTimeSeconds)[0] : null;
   const unansweredTrend = attempts.map((a) => a.unansweredCount);
   let unansweredSentence: string;
-  if (attempts.length === 0) {
+  if (lang === 'en') {
+    if (attempts.length === 0) {
+      unansweredSentence = 'No mock or practice taken yet — the time analysis will show here.';
+    } else if (attempts.length === 1) {
+      const n = attempts[0].unansweredCount;
+      const kindEn = attempts[0].kind === 'mock' ? 'mock' : 'practice';
+      unansweredSentence = `In this ${kindEn}, ${n} ${n === 1 ? 'question was' : 'questions were'} left unanswered.`;
+    } else {
+      const latest = unansweredTrend[0];
+      const previous = unansweredTrend[1];
+      if (latest < previous) {
+        unansweredSentence = `Unanswered questions are falling — ${previous} in the previous one, ${latest} in the latest.`;
+      } else if (latest > previous) {
+        unansweredSentence = `Unanswered questions are rising — ${previous} in the previous one, ${latest} in the latest.`;
+      } else {
+        unansweredSentence = `Unanswered questions are unchanged — ${latest}.`;
+      }
+    }
+  } else if (attempts.length === 0) {
     unansweredSentence = 'এখনো কোনো মক/অনুশীলন দেওয়া হয়নি — সময়ের বিশ্লেষণ এখানে দেখাবে।';
   } else if (attempts.length === 1) {
     unansweredSentence = `এই ${attempts[0].kind === 'mock' ? 'মকে' : 'অনুশীলনে'} ${attempts[0].unansweredCount}টি প্রশ্নের উত্তর দেওয়া হয়নি।`;
@@ -515,10 +580,10 @@ export function timeManagementSummary(attempts: JobAttemptSummary[]): TimeManage
     avgTimePerQuestion,
     totalQuestions,
     slowestTopic: slowest
-      ? { topicId: slowest.topicId, label: slowest.label, avgTimeSeconds: slowest.avgTimeSeconds }
+      ? { topicId: slowest.topicId, label: slowest.label, labelEn: slowest.labelEn, avgTimeSeconds: slowest.avgTimeSeconds }
       : null,
     fastestTopic: fastest
-      ? { topicId: fastest.topicId, label: fastest.label, avgTimeSeconds: fastest.avgTimeSeconds }
+      ? { topicId: fastest.topicId, label: fastest.label, labelEn: fastest.labelEn, avgTimeSeconds: fastest.avgTimeSeconds }
       : null,
     unansweredTrend,
     unansweredSentence,
@@ -582,6 +647,12 @@ export const TOPIC_LEVEL_BN: Record<TopicLevel, string> = {
   weak: 'এই পরীক্ষায় দুর্বল',
   'small-sample': 'নমুনা ছোট — সিদ্ধান্ত নয়',
 };
+export const TOPIC_LEVEL_EN: Record<TopicLevel, string> = {
+  good: 'Good',
+  medium: 'Medium',
+  weak: 'Weak in this exam',
+  'small-sample': 'Small sample — not a verdict',
+};
 
 export function topicLevel(accuracy: number, total: number): TopicLevel {
   if (total < 3) return 'small-sample';
@@ -630,24 +701,35 @@ export function correctVsWrongTime(answers: JobAttemptAnswer[]): CorrectVsWrongT
  * observation generated from THIS attempt's actual data — the
  * weakest topic + what the wrong answers cost. Never a generic
  * motivational template, never an invented benchmark. */
-export function resultObservation(attempt: JobAttemptSummary): string {
+export function resultObservation(attempt: JobAttemptSummary, lang: 'bn' | 'en' = 'bn'): string {
   if (attempt.answers.length === 0 || attempt.unansweredCount === attempt.answers.length) {
-    return 'কোনো প্রশ্নের উত্তর দেওয়া হয়নি — পরেরবার অন্তত কিছু প্রশ্নের উত্তর দেওয়ার চেষ্টা করুন।';
+    return lang === 'bn'
+      ? 'কোনো প্রশ্নের উত্তর দেওয়া হয়নি — পরেরবার অন্তত কিছু প্রশ্নের উত্তর দেওয়ার চেষ্টা করুন।'
+      : 'No question was answered — next time, try to answer at least a few questions.';
   }
   if (attempt.wrongCount === 0) {
-    return 'কোনো ভুল উত্তর নেই — সব প্রশ্নের উত্তর সঠিক হয়েছে।';
+    return lang === 'bn'
+      ? 'কোনো ভুল উত্তর নেই — সব প্রশ্নের উত্তর সঠিক হয়েছে।'
+      : 'No wrong answers — every answered question was correct.';
   }
   const stats = perTopicAccuracy(attempt.answers).filter((s) => s.wrong > 0 && s.total >= 2);
   const weakest = stats.length > 0
     ? [...stats].sort((a, b) => a.accuracy - b.accuracy || b.wrong - a.wrong)[0]
     : null;
   const cost = attempt.negativeDeduction > 0
-    ? ` ভুল উত্তরে ${attempt.negativeDeduction} নম্বর কাটা গেছে।`
+    ? lang === 'bn'
+      ? ` ভুল উত্তরে ${attempt.negativeDeduction} নম্বর কাটা গেছে।`
+      : ` ${attempt.negativeDeduction} marks were deducted for wrong answers.`
     : '';
   if (!weakest) {
-    return `মোট ${attempt.wrongCount}টি ভুল উত্তর।${cost}`;
+    return lang === 'bn'
+      ? `মোট ${attempt.wrongCount}টি ভুল উত্তর।${cost}`
+      : `${attempt.wrongCount} wrong answer(s) in total.${cost}`;
   }
-  return `সবচেয়ে দুর্বল টপিক ${weakest.label} (${weakest.correct}/${weakest.total} সঠিক) — এটাই ১ম অগ্রাধিকার।${cost}`;
+  const weakestLabel = lang === 'bn' ? weakest.label : weakest.labelEn;
+  return lang === 'bn'
+    ? `সবচেয়ে দুর্বল টপিক ${weakest.label} (${weakest.correct}/${weakest.total} সঠিক) — এটাই ১ম অগ্রাধিকার।${cost}`
+    : `Weakest topic: ${weakestLabel} (${weakest.correct}/${weakest.total} correct) — this is the 1st priority.${cost}`;
 }
 
 /** Group attempts by exam (ChatGPT §2D): progress is only ever

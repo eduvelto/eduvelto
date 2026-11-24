@@ -25,6 +25,7 @@ import {
 import {
   circularApplicationStatus,
   CIRCULAR_STATUS_BN,
+  CIRCULAR_STATUS_EN,
   formatDhakaDate,
   toBanglaDigits,
   type JobCircular,
@@ -49,6 +50,13 @@ const REVIEW_BN: Record<string, string> = {
   verified: 'যাচাইকৃত',
   published: 'প্রকাশিত',
   rejected: 'বাতিল',
+};
+const REVIEW_EN: Record<string, string> = {
+  draft: 'Draft',
+  'in-review': 'In review',
+  verified: 'Verified',
+  published: 'Published',
+  rejected: 'Rejected',
 };
 
 export default function AdminJobCircularsPage() {
@@ -190,7 +198,7 @@ export default function AdminJobCircularsPage() {
                   <div style={{ display: 'flex', justifyContent: 'space-between', gap: 8, flexWrap: 'wrap' }}>
                     <strong style={{ fontSize: 15 }}>{c.postTitleBn}</strong>
                     <Chip tone={c.reviewStatus === 'published' ? 'blue' : c.reviewStatus === 'verified' ? 'gold' : 'outline'}>
-                      {REVIEW_BN[c.reviewStatus] ?? c.reviewStatus}
+                      {lang === 'bn' ? REVIEW_BN[c.reviewStatus] ?? c.reviewStatus : REVIEW_EN[c.reviewStatus] ?? c.reviewStatus}
                     </Chip>
                   </div>
                   <div style={{ fontSize: 13, marginTop: 4 }}>
@@ -198,7 +206,7 @@ export default function AdminJobCircularsPage() {
                     {c.circularNumber ? ` · ${t({ bn: 'স্মারক', en: 'Memo' })}: ${c.circularNumber}` : ''}
                   </div>
                   <div style={{ fontSize: 13, marginTop: 4 }}>
-                    {t({ bn: 'আবেদনের অবস্থা', en: 'Application status' })}: {CIRCULAR_STATUS_BN[status]}
+                    {t({ bn: 'আবেদনের অবস্থা', en: 'Application status' })}: {lang === 'bn' ? CIRCULAR_STATUS_BN[status] : CIRCULAR_STATUS_EN[status]}
                     {c.applicationDeadlineMillis !== null
                       ? ` · ${t({ bn: 'শেষ তারিখ', en: 'Deadline' })}: ${formatDhakaDate(c.applicationDeadlineMillis, lang, c.deadlinePrecision === 'datetime')}`
                       : ` · ${t({ bn: 'শেষ তারিখ: তথ্য পাওয়া যায়নি', en: 'Deadline: not available' })}`}

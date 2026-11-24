@@ -23,7 +23,7 @@
 // receipt-gated and only readable after submit) — the palette
 // shows answered / unanswered / marked-for-review only.
 //
-// LANGUAGE: all UI text is Bangla (one-language rule).
+// LANGUAGE: bilingual Bangla + English (24 Nov 2026 language system).
 
 import { useEffect, useRef, useState } from 'react';
 import { Link, useNavigate, useParams, useLocation } from 'react-router-dom';
@@ -31,6 +31,7 @@ import { loginState } from '../lib/loginReturn';
 import { PageShell } from '../components/PageShell';
 import { AlertBox, Button, Card, Chip, ProgressBar, Skeleton } from '../components/ui';
 import { useAuth } from '../lib/auth';
+import { useLanguage } from '../i18n/LanguageContext';
 import {
   buildMockAutosavePatch,
   type JobMockSessionDoc,
@@ -49,7 +50,7 @@ import {
   submitMockAttempt,
   type MockAttemptWithId,
 } from '../lib/jobMock';
-import { jobMockIdFromDocId, jobMockPatternSummaryBn, type JobMockWithId } from '../lib/jobMocks';
+import { jobMockIdFromDocId, jobMockPatternSummary, type JobMockWithId } from '../lib/jobMocks';
 import { jobExamBySlug } from '../lib/jobExams';
 import type { PracticeBundleWithId } from '../lib/jobPractice';
 import { useActiveClock } from '../lib/activeStudyTime';
@@ -73,6 +74,7 @@ export default function JobMockPage() {
   // Sections audit (24 Nov 2026): return here after sign-in.
   const back = loginState(location.pathname + location.search);
   const { user } = useAuth();
+  const { t, lang } = useLanguage();
   const navigate = useNavigate();
 
   const [phase, setPhase] = useState<Phase>('loading');
@@ -145,14 +147,14 @@ export default function JobMockPage() {
         const m = await loadPublishedMock(mockId);
         if (!alive) return;
         if (!m) {
-          setError('এই মকটি পাওয়া যায়নি — হয় ঠিকানাটি ভুল, নয় মকটি এখনো প্রকাশিত হয়নি।');
+          setError(t({ bn: 'এই মকটি পাওয়া যায়নি — হয় ঠিকানাটি ভুল, নয় মকটি এখনো প্রকাশিত হয়নি।', en: 'This mock was not found — either the address is wrong, or the mock is not published yet.' }));
           setPhase('error');
           return;
         }
         const b = await loadMockBundle(m.bundleId);
         if (!alive) return;
         if (!b || b.questions.length === 0) {
-          setError('এই মকের প্রশ্ন এখনো তৈরি হয়নি — শিক্ষক যাচাইয়ের পর প্রকাশিত হবে।');
+          setError(t({ bn: 'এই মকের প্রশ্ন এখনো তৈরি হয়নি — শিক্ষক যাচাইয়ের পর প্রকাশিত হবে।', en: 'This mock’s questions are not ready yet — they will be published after teacher review.' }));
           setPhase('error');
           return;
         }
@@ -169,7 +171,7 @@ export default function JobMockPage() {
         setPhase('intro');
       } catch (e) {
         if (!alive) return;
-        setError(e instanceof Error ? e.message : 'মক শুরু করা যায়নি — আবার চেষ্টা করুন।');
+        setError(e instanceof Error ? e.message : t({ bn: 'মক শুরু করা যায়নি — আবার চেষ্টা করুন।', en: 'The mock could not be started — please try again.' }));
         setPhase('error');
       }
     })();
@@ -204,7 +206,7 @@ export default function JobMockPage() {
       const started = await startMockSession(user.uid, mock, bundle);
       await enterExam(started.sessionId, started.session, started.startedAtMillis, mock.rulesSnapshot.timeMinutes, false);
     } catch (e) {
-      setStartError(e instanceof Error ? e.message : 'মক শুরু করা যায়নি — আবার চেষ্টা করুন।');
+      setStartError(e instanceof Error ? e.message : t({ bn: 'মক শুরু করা যায়নি — আবার চেষ্টা করুন।', en: 'The mock could not be started — please try again.' }));
       setStarting(false);
     }
   }
@@ -216,7 +218,7 @@ export default function JobMockPage() {
     try {
       await enterExam(resumable.sessionId, resumable.session, resumable.startedAtMillis, mock.rulesSnapshot.timeMinutes, true);
     } catch (e) {
-      setStartError(e instanceof Error ? e.message : 'আগের মকটি ফেরানো যায়নি — আবার চেষ্টা করুন।');
+      setStartError(e instanceof Error ? e.message : t({ bn: 'আগের মকটি ফেরানো যায়নি — আবার চেষ্টা করুন।', en: 'The previous mock could not be resumed — please try again.' }));
       setStarting(false);
     }
   }
@@ -237,7 +239,7 @@ export default function JobMockPage() {
       setAbandoningIntro(false);
       await doStart();
     } catch (e) {
-      setStartError(e instanceof Error ? e.message : 'আগের মক বাতিল করা যায়নি — আবার চেষ্টা করুন।');
+      setStartError(e instanceof Error ? e.message : t({ bn: 'আগের মক বাতিল করা যায়নি — আবার চেষ্টা করুন।', en: 'The previous mock could not be cancelled — please try again.' }));
       setAbandoningIntro(false);
     }
   }
@@ -329,7 +331,7 @@ export default function JobMockPage() {
 
   if (phase === 'loading') {
     return (
-      <PageShell titleBn="মক টেস্ট" titleEn="মক টেস্ট" wide>
+      <PageShell titleBn="মক টেস্ট" titleEn="Mock Test" wide>
         <Skeleton />
       </PageShell>
     );
@@ -337,13 +339,13 @@ export default function JobMockPage() {
 
   if (phase === 'signed-out') {
     return (
-      <PageShell titleBn="মক টেস্ট" titleEn="মক টেস্ট" wide>
+      <PageShell titleBn="মক টেস্ট" titleEn="Mock Test" wide>
         <Card>
-          <div style={{ fontWeight: 700, color: '#142B3B', fontSize: 17 }}>মক দিতে লগইন করুন</div>
+          <div style={{ fontWeight: 700, color: '#142B3B', fontSize: 17 }}>{t({ bn: 'মক দিতে লগইন করুন', en: 'Log in to take the mock' })}</div>
           <p style={{ margin: '8px 0 12px', color: MUTED, fontSize: 14, lineHeight: 1.7 }}>
-            মক টেস্ট শুধু লগইন করা শিক্ষার্থীদের জন্য — আপনার উত্তর ও সময় সংরক্ষিত হয়।
+            {t({ bn: 'মক টেস্ট শুধু লগইন করা শিক্ষার্থীদের জন্য — আপনার উত্তর ও সময় সংরক্ষিত হয়।', en: 'Mock tests are only for logged-in students — your answers and time are saved.' })}
           </p>
-          <Link to="/login" state={back} style={{ fontWeight: 600 }}>লগইন করুন →</Link>
+          <Link to="/login" state={back} style={{ fontWeight: 600 }}>{t({ bn: 'লগইন করুন →', en: 'Log in →' })}</Link>
         </Card>
       </PageShell>
     );
@@ -351,10 +353,10 @@ export default function JobMockPage() {
 
   if (phase === 'error' || !mock || !bundle) {
     return (
-      <PageShell titleBn="মক টেস্ট" titleEn="মক টেস্ট" wide>
-        <AlertBox tone="error">{error || 'মক শুরু করা যায়নি।'}</AlertBox>
+      <PageShell titleBn="মক টেস্ট" titleEn="Mock Test" wide>
+        <AlertBox tone="error">{error || t({ bn: 'মক শুরু করা যায়নি।', en: 'The mock could not be started.' })}</AlertBox>
         <p style={{ marginTop: 16 }}>
-          <Link to="/jobs" style={{ fontWeight: 600 }}>← সব পরীক্ষা দেখুন</Link>
+          <Link to="/jobs" style={{ fontWeight: 600 }}>{t({ bn: '← সব পরীক্ষা দেখুন', en: '← See all exams' })}</Link>
         </p>
       </PageShell>
     );
@@ -362,14 +364,14 @@ export default function JobMockPage() {
 
   if (phase === 'expired') {
     return (
-      <PageShell titleBn={mock.titleBn} titleEn={mock.titleBn} wide>
+      <PageShell titleBn={mock.titleBn} titleEn={mock.titleEn} wide>
         <AlertBox tone="error">
-          সময় শেষ হয়ে গেছে — এই সেশনটি আর জমা দেওয়া যাবে না। সময় বাড়ানো যায় না; নতুন করে মক শুরু করুন।
+          {t({ bn: 'সময় শেষ হয়ে গেছে — এই সেশনটি আর জমা দেওয়া যাবে না। সময় বাড়ানো যায় না; নতুন করে মক শুরু করুন।', en: 'Time is up — this session can no longer be submitted. Time cannot be extended; start a new mock.' })}
         </AlertBox>
         <p style={{ marginTop: 16 }}>
-          <Link to={`/jobs/mock/${mock.docId}`} style={{ fontWeight: 600 }}>নতুন করে মক শুরু করুন →</Link>
+          <Link to={`/jobs/mock/${mock.docId}`} style={{ fontWeight: 600 }}>{t({ bn: 'নতুন করে মক শুরু করুন →', en: 'Start a new mock →' })}</Link>
           {' · '}
-          <Link to={`/jobs/${mock.examSlug}/mocks`} style={{ fontWeight: 600 }}>← মক তালিকায় ফিরুন</Link>
+          <Link to={`/jobs/${mock.examSlug}/mocks`} style={{ fontWeight: 600 }}>{t({ bn: '← মক তালিকায় ফিরুন', en: '← Back to the mock list' })}</Link>
         </p>
       </PageShell>
     );
@@ -380,11 +382,11 @@ export default function JobMockPage() {
     // actually face — the bundle's real length, not the snapshot's
     // declared count (the manifest is the authority; the snapshot
     // can go stale when a definition is republished).
-    const patternSummary = jobMockPatternSummaryBn(mock.rulesSnapshot, bundle.questions.length);
+    const patternSummary = jobMockPatternSummary(mock.rulesSnapshot, bundle.questions.length, lang);
     const negative = mock.rulesSnapshot.negativeMarking;
     const scoringNotice =
       negative === null
-        ? 'এই পরীক্ষার নেগেটিভ মার্কিং এখনো বিজ্ঞপ্তি থেকে যাচাই হয়নি — তাই ভুল উত্তরে নম্বর কাটা হচ্ছে না। এই স্কোর অফিসিয়াল ধরনের স্কোর নয়।'
+        ? t({ bn: 'এই পরীক্ষার নেগেটিভ মার্কিং এখনো বিজ্ঞপ্তি থেকে যাচাই হয়নি — তাই ভুল উত্তরে নম্বর কাটা হচ্ছে না। এই স্কোর অফিসিয়াল ধরনের স্কোর নয়।', en: 'This exam’s negative marking has not been verified from the notice yet — so no marks are being cut for wrong answers. This score is not an official-type score.' })
         : null;
     // N2: the resumable line must not assert saved answers when
     // zero were answered — count what is actually stored.
@@ -392,48 +394,48 @@ export default function JobMockPage() {
       ? Object.values(resumable.session.answers).filter((a) => a.selected !== null).length
       : 0;
     return (
-      <PageShell titleBn={mock.titleBn} titleEn={mock.titleBn} wide maxWidth={1240}>
+      <PageShell titleBn={mock.titleBn} titleEn={mock.titleEn} wide maxWidth={1240}>
         <Card>
-          <div style={{ fontWeight: 700, color: '#142B3B', fontSize: 19 }}>{mock.titleBn}</div>
+          <div style={{ fontWeight: 700, color: '#142B3B', fontSize: 19 }}>{lang === 'bn' ? mock.titleBn : mock.titleEn}</div>
           <p style={{ margin: '8px 0', color: MUTED, fontSize: 15, lineHeight: 1.7 }}>{patternSummary}</p>
           {mock.rulesSnapshot.passPercent !== null ? (
             <p style={{ margin: '0 0 8px', color: MUTED, fontSize: 14 }}>
-              পাস নম্বর: {mock.rulesSnapshot.passPercent}% (অনুশীলন হিসাব — অফিসিয়াল পাস নয়)
+              {t({ bn: 'পাস নম্বর:', en: 'Pass mark:' })} {mock.rulesSnapshot.passPercent}% {t({ bn: '(অনুশীলন হিসাব — অফিসিয়াল পাস নয়)', en: '(practice calculation — not an official pass)' })}
             </p>
           ) : null}
           {scoringNotice ? <AlertBox tone="info">{scoringNotice}</AlertBox> : null}
           <AlertBox tone="info">
-            সময় শুরু হলে আর থামবে না — মাঝপথে চলে গেলে একই সেশন, একই সময়সীমা, একই প্রশ্নসেট নিয়ে ফিরে আসতে পারবেন। ইন্টারনেট ছাড়া জমা দেওয়া যাবে না; স্বয়ংক্রিয় জমা শুধু সংযোগ থাকলে হয়।
+            {t({ bn: 'সময় শুরু হলে আর থামবে না — মাঝপথে চলে গেলে একই সেশন, একই সময়সীমা, একই প্রশ্নসেট নিয়ে ফিরে আসতে পারবেন। ইন্টারনেট ছাড়া জমা দেওয়া যাবে না; স্বয়ংক্রিয় জমা শুধু সংযোগ থাকলে হয়।', en: 'Once time starts it never stops — if you leave midway, you can return to the same session, the same time limit, and the same question set. You cannot submit without internet; auto-submission only happens with a connection.' })}
           </AlertBox>
           {resumable ? (
             <div style={{ marginTop: 12 }}>
-              <div style={{ fontWeight: 700, color: '#142B3B' }}>চলমান মক আছে — আগের সেশনটি ফিরে পাবেন</div>
+              <div style={{ fontWeight: 700, color: '#142B3B' }}>{t({ bn: 'চলমান মক আছে — আগের সেশনটি ফিরে পাবেন', en: 'A mock is in progress — you will get the previous session back' })}</div>
               <p style={{ margin: '6px 0 12px', color: MUTED, fontSize: 14 }}>
-                {resumable.session.questionRefs.length}টি প্রশ্ন ·{' '}
+                {resumable.session.questionRefs.length}{lang === 'bn' ? 'টি প্রশ্ন' : ' questions'} ·{' '}
                 {resumableAnsweredCount > 0
-                  ? `${resumableAnsweredCount}টি উত্তর সংরক্ষিত আছে`
-                  : 'এখনো কোনো উত্তর দেওয়া হয়নি'}
+                  ? t({ bn: `${resumableAnsweredCount}টি উত্তর সংরক্ষিত আছে`, en: `${resumableAnsweredCount} answer(s) saved` })
+                  : t({ bn: 'এখনো কোনো উত্তর দেওয়া হয়নি', en: 'No answer given yet' })}
               </p>
               <Button variant="accent" disabled={starting || abandoningIntro} onClick={() => void doResume()}>
-                {starting && !abandoningIntro ? 'ফেরানো হচ্ছে…' : 'আগের মক চালিয়ে যান →'}
+                {starting && !abandoningIntro ? t({ bn: 'ফেরানো হচ্ছে…', en: 'Resuming…' }) : t({ bn: 'আগের মক চালিয়ে যান →', en: 'Continue the previous mock →' })}
               </Button>
               <span style={{ marginLeft: 8 }}>
                 <Button variant="outline" disabled={starting || abandoningIntro} onClick={() => setConfirmingAbandon(true)}>
-                  আগেরটি বাতিল করে নতুন শুরু করুন
+                  {t({ bn: 'আগেরটি বাতিল করে নতুন শুরু করুন', en: 'Cancel the previous one and start new' })}
                 </Button>
               </span>
               {confirmingAbandon ? (
                 <Card style={{ marginTop: 12 }}>
-                  <div style={{ fontWeight: 700, color: '#142B3B', fontSize: 15 }}>আগের মকটি বাতিল করবেন?</div>
+                  <div style={{ fontWeight: 700, color: '#142B3B', fontSize: 15 }}>{t({ bn: 'আগের মকটি বাতিল করবেন?', en: 'Cancel the previous mock?' })}</div>
                   <p style={{ margin: '8px 0 12px', color: MUTED, fontSize: 14, lineHeight: 1.7 }}>
-                    আগের সেশনের উত্তরগুলো মুছে যাবে — সেটি আর ফেরানো যাবে না। বাতিল করলে নতুন মক শুরু হবে।
+                    {t({ bn: 'আগের সেশনের উত্তরগুলো মুছে যাবে — সেটি আর ফেরানো যাবে না। বাতিল করলে নতুন মক শুরু হবে।', en: 'The previous session’s answers will be deleted — they cannot be recovered. Cancelling will start a new mock.' })}
                   </p>
                   <div style={{ display: 'flex', gap: 8 }}>
                     <Button variant="accent" disabled={abandoningIntro} onClick={() => void doAbandonAndStart()}>
-                      {abandoningIntro ? 'বাতিল হচ্ছে…' : 'হ্যাঁ, বাতিল করে নতুন শুরু করুন'}
+                      {abandoningIntro ? t({ bn: 'বাতিল হচ্ছে…', en: 'Cancelling…' }) : t({ bn: 'হ্যাঁ, বাতিল করে নতুন শুরু করুন', en: 'Yes, cancel and start new' })}
                     </Button>
                     <Button variant="outline" disabled={abandoningIntro} onClick={() => setConfirmingAbandon(false)}>
-                      ফিরে যান
+                      {t({ bn: 'ফিরে যান', en: 'Go back' })}
                     </Button>
                   </div>
                 </Card>
@@ -442,7 +444,7 @@ export default function JobMockPage() {
           ) : (
             <div style={{ marginTop: 12 }}>
               <Button variant="accent" disabled={starting} onClick={() => void doStart()}>
-                {starting ? 'শুরু হচ্ছে…' : 'মক শুরু করুন →'}
+                {starting ? t({ bn: 'শুরু হচ্ছে…', en: 'Starting…' }) : t({ bn: 'মক শুরু করুন →', en: 'Start the mock →' })}
               </Button>
             </div>
           )}
@@ -451,16 +453,16 @@ export default function JobMockPage() {
 
         {history.length > 0 ? (
           <Card style={{ marginTop: 16 }}>
-            <div style={{ fontWeight: 700, color: '#142B3B', fontSize: 17 }}>আগের ফলাফল</div>
+            <div style={{ fontWeight: 700, color: '#142B3B', fontSize: 17 }}>{t({ bn: 'আগের ফলাফল', en: 'Previous results' })}</div>
             <div style={{ display: 'grid', gap: 8, marginTop: 8 }}>
               {history.map((h) => (
                 <div key={h.docId} style={{ display: 'flex', justifyContent: 'space-between', gap: 8, flexWrap: 'wrap', fontSize: 14 }}>
                   <span>
-                    {typeof h.score === 'number' ? h.score : 0} / {typeof h.totalMarks === 'number' ? h.totalMarks : 0} নম্বর ·{' '}
-                    {typeof h.correctCount === 'number' ? h.correctCount : 0}টি সঠিক ·{' '}
-                    {typeof h.wrongCount === 'number' ? h.wrongCount : 0}টি ভুল
+                    {typeof h.score === 'number' ? h.score : 0} / {typeof h.totalMarks === 'number' ? h.totalMarks : 0} {t({ bn: 'নম্বর', en: 'marks' })} ·{' '}
+                    {typeof h.correctCount === 'number' ? h.correctCount : 0}{lang === 'bn' ? 'টি সঠিক' : ' correct'} ·{' '}
+                    {typeof h.wrongCount === 'number' ? h.wrongCount : 0}{lang === 'bn' ? 'টি ভুল' : ' wrong'}
                   </span>
-                  <Link to={`/jobs/result/${h.docId}`} style={{ fontWeight: 600 }}>ফলাফল দেখুন →</Link>
+                  <Link to={`/jobs/result/${h.docId}`} style={{ fontWeight: 600 }}>{t({ bn: 'ফলাফল দেখুন →', en: 'See the result →' })}</Link>
                 </div>
               ))}
             </div>
@@ -468,7 +470,7 @@ export default function JobMockPage() {
         ) : null}
 
         <p style={{ marginTop: 16 }}>
-          <Link to={`/jobs/${mock.examSlug}/mocks`} style={{ fontWeight: 600 }}>← মক তালিকায় ফিরুন</Link>
+          <Link to={`/jobs/${mock.examSlug}/mocks`} style={{ fontWeight: 600 }}>{t({ bn: '← মক তালিকায় ফিরুন', en: '← Back to the mock list' })}</Link>
         </p>
       </PageShell>
     );
@@ -477,8 +479,8 @@ export default function JobMockPage() {
   // ---- exam phase ----
   if (!session) {
     return (
-      <PageShell titleBn={mock.titleBn} titleEn={mock.titleBn} wide>
-        <AlertBox tone="error">সেশন পাওয়া যায়নি — আবার শুরু করুন।</AlertBox>
+      <PageShell titleBn={mock.titleBn} titleEn={mock.titleEn} wide>
+        <AlertBox tone="error">{t({ bn: 'সেশন পাওয়া যায়নি — আবার শুরু করুন।', en: 'Session not found — please start again.' })}</AlertBox>
       </PageShell>
     );
   }
@@ -486,8 +488,10 @@ export default function JobMockPage() {
   const total = bundle.questions.length;
   const answeredCount = Object.values(session.answers).filter((a) => a.selected !== null).length;
   // N1: the footer used to render the raw exam slug (e.g. 'bcs')
-  // — show the Bangla exam name instead.
-  const examNameBn = jobExamBySlug(mock.examSlug)?.bn ?? mock.examSlug;
+  // — show the exam name in the selected language instead.
+  const examName = jobExamBySlug(mock.examSlug);
+  const examNameBn = examName?.bn ?? mock.examSlug;
+  const examNameShown = lang === 'bn' ? examNameBn : (examName?.en ?? mock.examSlug);
   const markedCount = Object.values(session.answers).filter((a) => a.markedForReview).length;
   const orderedNs = session.questionRefs.map((r) => r.n);
   const currentN = session.currentQuestion;
@@ -500,12 +504,12 @@ export default function JobMockPage() {
   };
   const saveLabel =
     saveState === 'saving'
-      ? 'সংরক্ষণ হচ্ছে…'
+      ? t({ bn: 'সংরক্ষণ হচ্ছে…', en: 'Saving…' })
       : saveState === 'retrying'
-        ? 'সংরক্ষণ হয়নি — আবার চেষ্টা করা হচ্ছে…'
+        ? t({ bn: 'সংরক্ষণ হয়নি — আবার চেষ্টা করা হচ্ছে…', en: 'Not saved — retrying…' })
         : saveState === 'error'
-          ? 'সংরক্ষণ হয়নি — উত্তর বদলালে আবার চেষ্টা হবে'
-          : 'সংরক্ষিত';
+          ? t({ bn: 'সংরক্ষণ হয়নি — উত্তর বদলালে আবার চেষ্টা হবে', en: 'Not saved — it will retry when you change an answer' })
+          : t({ bn: 'সংরক্ষিত', en: 'Saved' });
   const timerUrgent = remaining !== null && remaining <= 5 * 60 * 1000;
 
   // Flush the ACTIVE seconds for the open question into the
@@ -602,7 +606,7 @@ export default function JobMockPage() {
         setPhase('expired');
         return;
       }
-      setSubmitError(e instanceof Error ? e.message : 'জমা দেওয়া যায়নি — আবার চেষ্টা করুন।');
+      setSubmitError(e instanceof Error ? e.message : t({ bn: 'জমা দেওয়া যায়নি — আবার চেষ্টা করুন।', en: 'Could not be submitted — please try again.' }));
       setSubmitting(false);
       setConfirming(false);
       autoSubmittedRef.current = false;
@@ -621,14 +625,14 @@ export default function JobMockPage() {
   }
 
   return (
-    <PageShell titleBn={mock.titleBn} titleEn={mock.titleBn} wide maxWidth={1240}>
+    <PageShell titleBn={mock.titleBn} titleEn={mock.titleEn} wide maxWidth={1240}>
       {/* Sticky top bar: timer + progress + autosave state. */}
       <div style={{ position: 'sticky', top: 0, zIndex: 5, background: '#fff', padding: '10px 0 8px', borderBottom: '1px solid #E3E8EF', marginBottom: 16 }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 12, flexWrap: 'wrap' }}>
-          <div style={{ fontWeight: 700, color: '#142B3B', fontSize: 16 }}>{mock.titleBn}</div>
+          <div style={{ fontWeight: 700, color: '#142B3B', fontSize: 16 }}>{lang === 'bn' ? mock.titleBn : mock.titleEn}</div>
           <div style={{ display: 'flex', gap: 8, alignItems: 'center', fontSize: 13, color: MUTED }}>
             <Chip tone={timerUrgent ? 'gold' : 'outline'}>
-              বাকি সময়: {remaining === null ? '—' : formatRemaining(remaining)}
+              {t({ bn: 'বাকি সময়:', en: 'Time left:' })} {remaining === null ? '—' : formatRemaining(remaining)}
             </Chip>
             <span>{saveLabel}</span>
           </div>
@@ -636,27 +640,27 @@ export default function JobMockPage() {
         <div style={{ marginTop: 8 }}>
           <ProgressBar value={total === 0 ? 0 : (answeredCount / total) * 100} />
           <div style={{ fontSize: 13, color: MUTED, marginTop: 4 }}>
-            {answeredCount}/{total}টি উত্তর দেওয়া হয়েছে
-            {markedCount > 0 ? ` · ${markedCount}টি পরে দেখব` : ''}
-            {expired ? ' · সময় শেষ' : ''}
+            {answeredCount}/{total}{lang === 'bn' ? 'টি উত্তর দেওয়া হয়েছে' : ' answered'}
+            {markedCount > 0 ? ` · ${markedCount}${lang === 'bn' ? 'টি পরে দেখব' : ' to review later'}` : ''}
+            {expired ? t({ bn: ' · সময় শেষ', en: ' · Time is up' }) : ''}
           </div>
         </div>
       </div>
 
       {mock.rulesSnapshot.negativeMarking === null ? (
         <AlertBox tone="info">
-          এই পরীক্ষার নেগেটিভ মার্কিং এখনো বিজ্ঞপ্তি থেকে যাচাই হয়নি — তাই ভুল উত্তরে নম্বর কাটা হচ্ছে না।
+          {t({ bn: 'এই পরীক্ষার নেগেটিভ মার্কিং এখনো বিজ্ঞপ্তি থেকে যাচাই হয়নি — তাই ভুল উত্তরে নম্বর কাটা হচ্ছে না।', en: 'This exam’s negative marking has not been verified from the notice yet — so no marks are being cut for wrong answers.' })}
         </AlertBox>
       ) : null}
       <p style={{ color: MUTED, fontSize: 13, margin: '0 0 16px' }}>
-        ইন্টারনেট ছাড়া জমা দেওয়া যাবে না — সময় থামবে না, সংযোগ ফিরলে জমা দিন। সময় শেষ হলে স্বয়ংক্রিয়ভাবে জমা দেওয়ার চেষ্টা হবে (সংযোগ থাকলে)।
+        {t({ bn: 'ইন্টারনেট ছাড়া জমা দেওয়া যাবে না — সময় থামবে না, সংযোগ ফিরলে জমা দিন। সময় শেষ হলে স্বয়ংক্রিয়ভাবে জমা দেওয়ার চেষ্টা হবে (সংযোগ থাকলে)।', en: 'You cannot submit without internet — time will not stop; submit once the connection returns. When time ends, it will try to submit automatically (if connected).' })}
       </p>
 
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: 16, alignItems: 'start' }}>
         <div>
           <Card>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8 }}>
-              <span style={{ fontWeight: 700, color: '#142B3B' }}>প্রশ্ন {currentQ.n} / {total}</span>
+              <span style={{ fontWeight: 700, color: '#142B3B' }}>{t({ bn: `প্রশ্ন ${currentQ.n} / ${total}`, en: `Question ${currentQ.n} / ${total}` })}</span>
               <button
                 type="button"
                 onClick={toggleMark}
@@ -671,7 +675,7 @@ export default function JobMockPage() {
                   fontWeight: 600,
                 }}
               >
-                {currentAnswer.markedForReview ? '★ পরে দেখব' : '☆ পরে দেখব'}
+                {currentAnswer.markedForReview ? t({ bn: '★ পরে দেখব', en: '★ Review later' }) : t({ bn: '☆ পরে দেখব', en: '☆ Review later' })}
               </button>
             </div>
             <p style={{ margin: '0 0 16px', fontSize: 17, lineHeight: 1.8, color: '#142B3B', fontWeight: 600 }}>
@@ -705,57 +709,57 @@ export default function JobMockPage() {
               })}
             </div>
             <p style={{ margin: '16px 0 0', color: MUTED, fontSize: 13 }}>
-              মকে উত্তর দেওয়ার সঙ্গে সঙ্গে সঠিক/ভুল দেখানো হয় না — ফলাফল ও ব্যাখ্যা জমা দেওয়ার পর দেখাবে।
+              {t({ bn: 'মকে উত্তর দেওয়ার সঙ্গে সঙ্গে সঠিক/ভুল দেখানো হয় না — ফলাফল ও ব্যাখ্যা জমা দেওয়ার পর দেখাবে।', en: 'In a mock, correct/wrong is not shown as you answer — results and explanations appear after submission.' })}
             </p>
           </Card>
 
           <div style={{ position: 'sticky', bottom: 0, zIndex: 5, background: '#fff', padding: '12px 0', borderTop: '1px solid #E3E8EF', marginTop: 16, display: 'flex', gap: 8, flexWrap: 'wrap' }}>
             <Button variant="outline" disabled={currentIdx <= 0} onClick={() => goTo(orderedNs[currentIdx - 1])}>
-              ← আগেরটি
+              {t({ bn: '← আগেরটি', en: '← Previous' })}
             </Button>
             <Button variant="outline" disabled={currentIdx >= total - 1} onClick={() => goTo(orderedNs[currentIdx + 1])}>
-              পরেরটি →
+              {t({ bn: 'পরেরটি →', en: 'Next →' })}
             </Button>
             <span style={{ flex: 1 }} />
             <Button variant="outline" disabled={abandoning} onClick={() => void doAbandon()}>
-              {abandoning ? 'বাতিল হচ্ছে…' : 'বাতিল করুন'}
+              {abandoning ? t({ bn: 'বাতিল হচ্ছে…', en: 'Cancelling…' }) : t({ bn: 'বাতিল করুন', en: 'Cancel' })}
             </Button>
             <Button variant="accent" onClick={() => setConfirming(true)}>
-              জমা দিন
+              {t({ bn: 'জমা দিন', en: 'Submit' })}
             </Button>
           </div>
 
           {confirming ? (
             <Card style={{ marginTop: 12 }}>
-              <div style={{ fontWeight: 700, color: '#142B3B', fontSize: 16 }}>জমা দিতে চান?</div>
+              <div style={{ fontWeight: 700, color: '#142B3B', fontSize: 16 }}>{t({ bn: 'জমা দিতে চান?', en: 'Submit?' })}</div>
               <p style={{ margin: '8px 0 12px', color: MUTED, fontSize: 14, lineHeight: 1.7 }}>
-                {answeredCount}/{total}টি উত্তর দেওয়া হয়েছে
-                {total - answeredCount > 0 ? ` — ${total - answeredCount}টি উত্তর দেওয়া হয়নি (০ নম্বর পাবে)` : ' — সব প্রশ্নের উত্তর দেওয়া হয়েছে'}।
-                জমা দিলে আর বদলানো যাবে না।
+                {answeredCount}/{total}{lang === 'bn' ? 'টি উত্তর দেওয়া হয়েছে' : ' answered'}
+                {total - answeredCount > 0 ? t({ bn: ` — ${total - answeredCount}টি উত্তর দেওয়া হয়নি (০ নম্বর পাবে)`, en: ` — ${total - answeredCount} unanswered (0 marks)` }) : t({ bn: ' — সব প্রশ্নের উত্তর দেওয়া হয়েছে', en: ' — all questions answered' })}।
+                {t({ bn: 'জমা দিলে আর বদলানো যাবে না।', en: 'Once submitted, answers cannot be changed.' })}
               </p>
               {submitError ? <AlertBox tone="error">{submitError}</AlertBox> : null}
               <div style={{ display: 'flex', gap: 8 }}>
                 <Button variant="accent" disabled={submitting} onClick={() => void doSubmit(false)}>
-                  {submitting ? 'জমা হচ্ছে…' : 'হ্যাঁ, জমা দিন'}
+                  {submitting ? t({ bn: 'জমা হচ্ছে…', en: 'Submitting…' }) : t({ bn: 'হ্যাঁ, জমা দিন', en: 'Yes, submit' })}
                 </Button>
                 <Button variant="outline" disabled={submitting} onClick={() => setConfirming(false)}>
-                  ফিরে যান
+                  {t({ bn: 'ফিরে যান', en: 'Go back' })}
                 </Button>
               </div>
             </Card>
           ) : null}
 
           <p style={{ marginTop: 16, color: MUTED, fontSize: 13 }}>
-            <Link to={`/jobs/${mock.examSlug}`} style={{ fontWeight: 600 }}>← {examNameBn} হাবে ফিরুন</Link>
-            {' · '}অগ্রগতি স্বয়ংক্রিয়ভাবে সংরক্ষিত হয় — মাঝপথে চলে গেলে পরে এসে এই মকেই আবার শুরু করলে আগের সেশনটি ফিরে পাবেন।
+            <Link to={`/jobs/${mock.examSlug}`} style={{ fontWeight: 600 }}>← {examNameShown} {t({ bn: 'হাবে ফিরুন', en: 'hub' })}</Link>
+            {' · '}{t({ bn: 'অগ্রগতি স্বয়ংক্রিয়ভাবে সংরক্ষিত হয় — মাঝপথে চলে গেলে পরে এসে এই মকেই আবার শুরু করলে আগের সেশনটি ফিরে পাবেন।', en: 'Progress is saved automatically — if you leave midway and come back to this mock later, you will get the previous session back.' })}
           </p>
         </div>
 
         <div>
           <Card>
-            <div style={{ fontWeight: 700, color: '#142B3B', marginBottom: 4 }}>প্রশ্ন-তালিকা</div>
+            <div style={{ fontWeight: 700, color: '#142B3B', marginBottom: 4 }}>{t({ bn: 'প্রশ্ন-তালিকা', en: 'Question list' })}</div>
             <p style={{ margin: '0 0 12px', color: MUTED, fontSize: 13 }}>
-              নীল = উত্তর দেওয়া হয়েছে · সাদা = উত্তর দেওয়া হয়নি · হলুদ চিহ্ন = পরে দেখব
+              {t({ bn: 'নীল = উত্তর দেওয়া হয়েছে · সাদা = উত্তর দেওয়া হয়নি · হলুদ চিহ্ন = পরে দেখব', en: 'Blue = answered · White = unanswered · Yellow mark = review later' })}
             </p>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(44px, 1fr))', gap: 8 }}>
               {orderedNs.map((n) => {
@@ -768,7 +772,7 @@ export default function JobMockPage() {
                     key={q.n}
                     type="button"
                     onClick={() => goTo(q.n)}
-                    aria-label={`প্রশ্ন ${q.n}`}
+                    aria-label={lang === 'bn' ? `প্রশ্ন ${q.n}` : `Question ${q.n}`}
                     style={{
                       height: 44,
                       borderRadius: 8,

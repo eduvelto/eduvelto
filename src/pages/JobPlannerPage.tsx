@@ -60,11 +60,22 @@ const MASTERY_BN: Record<string, string> = {
   strong: 'ভালো',
   retained: 'ধরে আছে',
 };
+const MASTERY_EN: Record<string, string> = {
+  weak: 'Weak',
+  moderate: 'Moderate',
+  strong: 'Good',
+  retained: 'Retained',
+};
 
 const MODE_BN: Record<EffortMode, string> = {
   light: 'হালকা দিন',
   standard: 'সাধারণ দিন',
   deep: 'গভীর প্রস্তুতি',
+};
+const MODE_EN: Record<EffortMode, string> = {
+  light: 'Light day',
+  standard: 'Standard day',
+  deep: 'Deep prep',
 };
 
 const KIND_BN: Record<string, string> = {
@@ -72,9 +83,14 @@ const KIND_BN: Record<string, string> = {
   'new-practice': 'নতুন অনুশীলন',
   'daily-mock': 'দৈনিক মক',
 };
+const KIND_EN: Record<string, string> = {
+  revision: 'Revision',
+  'new-practice': 'New practice',
+  'daily-mock': 'Daily mock',
+};
 
 function PlanItemRow({ item }: { item: PlanDayItem }) {
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
   return (
     <div
       style={{
@@ -90,16 +106,16 @@ function PlanItemRow({ item }: { item: PlanDayItem }) {
       </span>
       <div style={{ flex: 1, minWidth: 0 }}>
         <div style={{ fontWeight: 700, color: 'var(--heading)', fontSize: 15 }}>
-          {item.label}
+          {lang === 'bn' ? item.label : item.labelEn}
           {item.done ? (
-            <span style={{ color: 'var(--teal)', fontSize: 13, fontWeight: 600 }}> · সম্পন্ন</span>
+            <span style={{ color: 'var(--teal)', fontSize: 13, fontWeight: 600 }}>{t({ bn: ' · সম্পন্ন', en: ' · done' })}</span>
           ) : null}
           {item.slid ? (
-            <span style={{ color: 'var(--muted)', fontSize: 13, fontWeight: 400 }}> · আগের দিন থেকে এসেছে</span>
+            <span style={{ color: 'var(--muted)', fontSize: 13, fontWeight: 400 }}>{t({ bn: ' · আগের দিন থেকে এসেছে', en: ' · carried over from the previous day' })}</span>
           ) : null}
         </div>
         <div style={{ color: 'var(--muted)', fontSize: 13, lineHeight: 1.6, marginTop: 2 }}>
-          {KIND_BN[item.kind] ?? item.kind} · {item.reasonBn}
+          {lang === 'bn' ? KIND_BN[item.kind] ?? item.kind : KIND_EN[item.kind] ?? item.kind} · {lang === 'bn' ? item.reasonBn : item.reasonEn}
         </div>
         {item.to ? (
           <p style={{ margin: '8px 0 0' }}>
@@ -125,7 +141,7 @@ export default function JobPlannerPage() {
   const location = useLocation();
   // Sections audit (24 Nov 2026): return here after sign-in.
   const back = loginState(location.pathname + location.search);
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
   const [mode, setMode] = useState<EffortMode>('standard');
   const [attempts, setAttempts] = useState<JobAttemptSummary[] | null>(null);
   const [capped, setCapped] = useState(false);
@@ -317,7 +333,7 @@ export default function JobPlannerPage() {
             {t({ bn: 'আজকের পরিকল্পনা', en: "Today's plan" })}
           </div>
           {attempts === null ? (
-            <p style={{ margin: '8px 0 0', color: 'var(--muted)', fontSize: 14 }}>লোড হচ্ছে…</p>
+            <p style={{ margin: '8px 0 0', color: 'var(--muted)', fontSize: 14 }}>{t({ bn: 'লোড হচ্ছে…', en: 'Loading…' })}</p>
           ) : attempts.length === 0 ? (
             <p style={{ margin: '8px 0 10px', color: 'var(--muted)', fontSize: 14, lineHeight: 1.7 }}>
               {t({
@@ -351,7 +367,7 @@ export default function JobPlannerPage() {
                   fontSize: 14,
                 }}
               >
-                {MODE_BN[m]}
+                {lang === 'bn' ? MODE_BN[m] : MODE_EN[m]}
               </button>
             ))}
           </div>
@@ -404,9 +420,9 @@ export default function JobPlannerPage() {
             <Reveal key={day.dayKey}>
               <Card>
                 <div style={{ fontWeight: 700, color: 'var(--heading)', fontSize: 16 }}>
-                  {day.labelBn}
+                  {t({ bn: day.labelBn, en: day.labelEn })}
                   {day.isToday ? (
-                    <span style={{ color: 'var(--teal)', fontSize: 13, fontWeight: 600 }}> · আজ</span>
+                    <span style={{ color: 'var(--teal)', fontSize: 13, fontWeight: 600 }}>{t({ bn: ' · আজ', en: ' · Today' })}</span>
                   ) : null}
                 </div>
                 <p style={{ margin: '6px 0 0', color: 'var(--muted)', fontSize: 13, lineHeight: 1.6 }}>
@@ -434,7 +450,7 @@ export default function JobPlannerPage() {
                   {day.items.map((item, i) => (
                     <li key={`${item.kind}-${item.topicId ?? item.label}-${i}`}>
                       {item.done ? '✓ ' : ''}
-                      {item.label}
+                      {lang === 'bn' ? item.label : item.labelEn}
                       {item.kind === 'revision' ? ` (${t({ bn: 'রিভিশন', en: 'revision' })})` : ''}
                     </li>
                   ))}
@@ -464,7 +480,7 @@ export default function JobPlannerPage() {
               })}
             </p>
             {attempts === null ? (
-              <p style={{ margin: '12px 0 0', color: 'var(--muted)', fontSize: 14 }}>লোড হচ্ছে…</p>
+              <p style={{ margin: '12px 0 0', color: 'var(--muted)', fontSize: 14 }}>{t({ bn: 'লোড হচ্ছে…', en: 'Loading…' })}</p>
             ) : queue.length === 0 ? (
               <p style={{ margin: '12px 0 0', color: 'var(--muted)', fontSize: 14, lineHeight: 1.7 }}>
                 {attempts.length === 0
@@ -495,11 +511,11 @@ export default function JobPlannerPage() {
                           key={item.topicId}
                           style={{ padding: '8px 0', borderTop: '1px solid var(--border)', fontSize: 14, lineHeight: 1.7 }}
                         >
-                          <span style={{ fontWeight: 700, color: 'var(--heading)' }}>{item.label}</span>
+                          <span style={{ fontWeight: 700, color: 'var(--heading)' }}>{lang === 'bn' ? item.label : item.labelEn}</span>
                           <span style={{ color: 'var(--muted)' }}>
                             {' · '}
-                            {MASTERY_BN[item.mastery] ?? item.mastery} · {t({ bn: `সঠিক উত্তরের হার ${item.accuracy}%`, en: `accuracy ${item.accuracy}%` })}
-                            {` (${item.total}টি প্রশ্ন)`}
+                            {lang === 'bn' ? MASTERY_BN[item.mastery] ?? item.mastery : MASTERY_EN[item.mastery] ?? item.mastery} · {t({ bn: `সঠিক উত্তরের হার ${item.accuracy}%`, en: `accuracy ${item.accuracy}%` })}
+                            {t({ bn: ` (${item.total}টি প্রশ্ন)`, en: ` (${item.total} questions)` })}
                           </span>
                           {item.bundleDocId ? (
                             <span>

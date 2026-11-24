@@ -51,7 +51,7 @@ export default function InstallPage() {
   const { t } = useLanguage();
   const [deferredPrompt, setDeferredPrompt] = useState<BeforeInstallPromptEvent | null>(null);
   const [installed, setInstalled] = useState(isStandalone());
-  const [installResult, setInstallResult] = useState('');
+  const [installResult, setInstallResult] = useState<'installed' | 'cancelled' | ''>('');
   // Inside the Capacitor app there is nothing to install — the PWA
   // install listeners and steps below are browser-only.
   const inApp = isNativeApp();
@@ -69,7 +69,7 @@ export default function InstallPage() {
     const onInstalled = () => {
       setInstalled(true);
       setDeferredPrompt(null);
-      setInstallResult('ইনস্টল হয়েছে — হোম স্ক্রিন থেকে Eduvelto খুলুন।');
+      setInstallResult('installed');
     };
     window.addEventListener('beforeinstallprompt', onBeforeInstall);
     window.addEventListener('appinstalled', onInstalled);
@@ -85,9 +85,9 @@ export default function InstallPage() {
     const choice = await deferredPrompt.userChoice;
     if (choice.outcome === 'accepted') {
       setInstalled(true);
-      setInstallResult('ইনস্টল হয়েছে — হোম স্ক্রিন থেকে Eduvelto খুলুন।');
+      setInstallResult('installed');
     } else {
-      setInstallResult('ইনস্টল বাতিল হয়েছে — নিচের ধাপগুলো দিয়ে পরে ইনস্টল করতে পারবেন।');
+      setInstallResult('cancelled');
     }
     setDeferredPrompt(null);
   };
@@ -106,7 +106,7 @@ export default function InstallPage() {
           })}
         </p>
         <p>
-          <LinkButton to="/">হোমে ফিরুন →</LinkButton>
+          <LinkButton to="/">{t({ bn: 'হোমে ফিরুন →', en: 'Back to home →' })}</LinkButton>
         </p>
         <AppUpdateSection />
       </PageShell>
@@ -170,7 +170,9 @@ export default function InstallPage() {
       )}
       {installResult ? (
         <p role="status" style={{ lineHeight: 1.8 }}>
-          {installResult}
+          {installResult === 'installed'
+            ? t({ bn: 'ইনস্টল হয়েছে — হোম স্ক্রিন থেকে Eduvelto খুলুন।', en: 'Installed — open Eduvelto from your home screen.' })
+            : t({ bn: 'ইনস্টল বাতিল হয়েছে — নিচের ধাপগুলো দিয়ে পরে ইনস্টল করতে পারবেন।', en: 'Install cancelled — you can install later from the steps below.' })}
         </p>
       ) : null}
     </PageShell>

@@ -59,8 +59,8 @@ import { useLanguage } from '../i18n/LanguageContext';
 import { DAILY_MOCK, WEEKLY_MOCK_CYCLE, jobExamBySlug } from '../lib/jobExams';
 import { JOB_CATEGORIES } from '../lib/jobProfile';
 import { loadThisWeekWeeklyMock, loadTodayDailyMock } from '../lib/jobMock';
-import { jobMockPatternSummaryBn, type JobMockWithId } from '../lib/jobMocks';
-import { jobTopicLabelBn } from '../lib/jobEngine';
+import { jobMockPatternSummary, type JobMockWithId } from '../lib/jobMocks';
+import { jobTopicLabel } from '../lib/jobEngine';
 import { attemptTrend, groupAttemptsByExam, type JobAttemptSummary } from '../lib/jobAnalysis';
 import {
   accuracyOrNull,
@@ -503,7 +503,7 @@ export default function JobSeekerDashboardPage() {
               {t({ bn: 'পরবর্তী অনুশীলন', en: 'Next practice' })}
             </div>
             {attempts === null ? (
-              <p style={{ margin: '8px 0 0', color: 'var(--muted)', fontSize: 14 }}>লোড হচ্ছে…</p>
+              <p style={{ margin: '8px 0 0', color: 'var(--muted)', fontSize: 14 }}>{t({ bn: 'লোড হচ্ছে…', en: 'Loading…' })}</p>
             ) : recommendation ? (
               <>
                 <p style={{ margin: '8px 0 10px', color: 'var(--muted-ivory)', fontSize: 14, lineHeight: 1.7 }}>
@@ -565,7 +565,7 @@ export default function JobSeekerDashboardPage() {
               {t({ bn: 'চালিয়ে যান', en: 'Continue learning' })}
             </div>
             {attempts === null ? (
-              <p style={{ margin: '8px 0 0', color: 'var(--muted)', fontSize: 14 }}>লোড হচ্ছে…</p>
+              <p style={{ margin: '8px 0 0', color: 'var(--muted)', fontSize: 14 }}>{t({ bn: 'লোড হচ্ছে…', en: 'Loading…' })}</p>
             ) : !latestAttempt ? (
               <>
                 <p style={{ margin: '8px 0 10px', color: 'var(--muted)', fontSize: 14, lineHeight: 1.7 }}>
@@ -590,7 +590,7 @@ export default function JobSeekerDashboardPage() {
                   {t({ bn: 'ফলাফল দেখুন →', en: 'See the result →' })}
                 </LinkButton>
                 {continueRetry === null ? (
-                  <p style={{ margin: '8px 0 0', color: 'var(--muted)', fontSize: 14 }}>লোড হচ্ছে…</p>
+                  <p style={{ margin: '8px 0 0', color: 'var(--muted)', fontSize: 14 }}>{t({ bn: 'লোড হচ্ছে…', en: 'Loading…' })}</p>
                 ) : continueRetry === 'unavailable' ? (
                   <p style={{ margin: '8px 0 0', color: 'var(--muted)', fontSize: 14, lineHeight: 1.7 }}>
                     {t({
@@ -688,11 +688,11 @@ export default function JobSeekerDashboardPage() {
               {t({ bn: DAILY_MOCK.sizeBn, en: DAILY_MOCK.sizeEn })} · {t({ bn: DAILY_MOCK.timeBn, en: DAILY_MOCK.timeEn })}
             </p>
             {!mocksLoaded ? (
-              <p style={{ margin: 0, color: 'var(--muted)', fontSize: 14 }}>লোড হচ্ছে…</p>
+              <p style={{ margin: 0, color: 'var(--muted)', fontSize: 14 }}>{t({ bn: 'লোড হচ্ছে…', en: 'Loading…' })}</p>
             ) : daily ? (
               <>
                 <p style={{ margin: '0 0 10px', color: 'var(--muted-ivory)', fontSize: 14, lineHeight: 1.7 }}>
-                  {daily.titleBn} · {jobMockPatternSummaryBn(daily.rulesSnapshot)}
+                  {lang === 'bn' ? daily.titleBn : daily.titleEn} · {jobMockPatternSummary(daily.rulesSnapshot, undefined, lang)}
                 </p>
                 <LinkButton to={`/jobs/mock/${daily.docId}`} variant="accent">
                   {t({ bn: 'আজকের মক শুরু করুন →', en: "Start today's mock →" })}
@@ -732,11 +732,11 @@ export default function JobSeekerDashboardPage() {
               ))}
             </p>
             {!mocksLoaded ? (
-              <p style={{ margin: 0, color: '#68747B', fontSize: 14 }}>লোড হচ্ছে…</p>
+              <p style={{ margin: 0, color: '#68747B', fontSize: 14 }}>{t({ bn: 'লোড হচ্ছে…', en: 'Loading…' })}</p>
             ) : weekly ? (
               <>
                 <p style={{ margin: '0 0 10px', color: '#57616A', fontSize: 14, lineHeight: 1.7 }}>
-                  {weekly.titleBn} · {jobMockPatternSummaryBn(weekly.rulesSnapshot)}
+                  {lang === 'bn' ? weekly.titleBn : weekly.titleEn} · {jobMockPatternSummary(weekly.rulesSnapshot, undefined, lang)}
                 </p>
                 <LinkButton to={`/jobs/mock/${weekly.docId}`} variant="accent">
                   {t({ bn: 'এই সপ্তাহের মক শুরু করুন →', en: "Start this week's mock →" })}
@@ -766,7 +766,7 @@ export default function JobSeekerDashboardPage() {
             {t({ bn: 'আমার অগ্রগতি — সাম্প্রতিক কার্যকলাপ', en: 'My progress — recent activity' })}
           </div>
           {attempts === null ? (
-            <p style={{ margin: '8px 0 0', color: 'var(--muted)', fontSize: 14 }}>লোড হচ্ছে…</p>
+            <p style={{ margin: '8px 0 0', color: 'var(--muted)', fontSize: 14 }}>{t({ bn: 'লোড হচ্ছে…', en: 'Loading…' })}</p>
           ) : attempts.length === 0 ? (
             <p style={{ margin: '8px 0 0', color: 'var(--muted)', fontSize: 14, lineHeight: 1.7 }}>
               {t({
@@ -840,7 +840,7 @@ export default function JobSeekerDashboardPage() {
               {t({ bn: 'সাম্প্রতিক অনুশীলন', en: 'Recent practice' })}
             </div>
             {attempts === null ? (
-              <p style={{ margin: '8px 0 0', color: 'var(--muted)', fontSize: 14 }}>লোড হচ্ছে…</p>
+              <p style={{ margin: '8px 0 0', color: 'var(--muted)', fontSize: 14 }}>{t({ bn: 'লোড হচ্ছে…', en: 'Loading…' })}</p>
             ) : recent.length === 0 ? (
               <>
                 <p style={{ margin: '8px 0 10px', color: 'var(--muted)', fontSize: 14, lineHeight: 1.7 }}>
@@ -882,7 +882,7 @@ export default function JobSeekerDashboardPage() {
               {t({ bn: 'আমার ফলাফল', en: 'My results' })}
             </div>
             {attempts === null ? (
-              <p style={{ margin: '8px 0 0', color: 'var(--muted)', fontSize: 14 }}>লোড হচ্ছে…</p>
+              <p style={{ margin: '8px 0 0', color: 'var(--muted)', fontSize: 14 }}>{t({ bn: 'লোড হচ্ছে…', en: 'Loading…' })}</p>
             ) : mockAttempts.length === 0 ? (
               <>
                 <p style={{ margin: '8px 0 10px', color: 'var(--muted)', fontSize: 14, lineHeight: 1.7 }}>
@@ -899,7 +899,7 @@ export default function JobSeekerDashboardPage() {
               <>
                 <ul style={{ margin: '8px 0 10px', paddingLeft: 0, listStyle: 'none', fontSize: 14, lineHeight: 1.9 }}>
                   {mockTrends.map((g) => {
-                    const trend = attemptTrend(g.attempts, 'মক');
+                    const trend = attemptTrend(g.attempts, 'মক', lang);
                     const def = jobExamBySlug(g.examSlug);
                     return (
                       <li key={g.examSlug} style={{ borderTop: '1px solid var(--border)', padding: '6px 0' }}>
@@ -939,7 +939,7 @@ export default function JobSeekerDashboardPage() {
               {t({ bn: 'পড়াশোনার কার্যকলাপ', en: 'Study activity' })}
             </div>
             {attempts === null || !week || !today ? (
-              <p style={{ margin: '8px 0 0', color: 'var(--muted)', fontSize: 14 }}>লোড হচ্ছে…</p>
+              <p style={{ margin: '8px 0 0', color: 'var(--muted)', fontSize: 14 }}>{t({ bn: 'লোড হচ্ছে…', en: 'Loading…' })}</p>
             ) : attempts.length === 0 ? (
               <p style={{ margin: '8px 0 0', color: 'var(--muted)', fontSize: 14, lineHeight: 1.7 }}>
                 {t({
@@ -963,7 +963,7 @@ export default function JobSeekerDashboardPage() {
                 <ul style={{ margin: '0 0 10px', paddingLeft: 0, listStyle: 'none', fontSize: 13, lineHeight: 1.9, color: 'var(--muted-ivory)' }}>
                   {week.days.map((d) => (
                     <li key={d.dayKey} style={{ display: 'flex', justifyContent: 'space-between', borderTop: '1px solid var(--border)', padding: '3px 0' }}>
-                      <span>{d.labelBn}</span>
+                      <span>{t({ bn: d.labelBn, en: d.labelEn })}</span>
                       <span>{t({ bn: `${d.sessions}টি সেশন · ${d.questions}টি প্রশ্ন`, en: `${d.sessions} session(s) · ${d.questions} question(s)` })}</span>
                     </li>
                   ))}
@@ -987,7 +987,7 @@ export default function JobSeekerDashboardPage() {
             {t({ bn: 'দুর্বল টপিক', en: 'Weak topics' })}
           </div>
           {attempts === null ? (
-            <p style={{ margin: '8px 0 0', color: 'var(--muted)', fontSize: 14 }}>লোড হচ্ছে…</p>
+            <p style={{ margin: '8px 0 0', color: 'var(--muted)', fontSize: 14 }}>{t({ bn: 'লোড হচ্ছে…', en: 'Loading…' })}</p>
           ) : attempts.length === 0 ? (
             <p style={{ margin: '8px 0 0', color: 'var(--muted)', fontSize: 14, lineHeight: 1.7 }}>
               {t({
@@ -1016,10 +1016,10 @@ export default function JobSeekerDashboardPage() {
                   return (
                     <li key={w.topicId} style={{ borderTop: '1px solid var(--border)', padding: '8px 0' }}>
                       <div style={{ fontWeight: 700, color: 'var(--heading)' }}>
-                        {jobTopicLabelBn(w.topicId)}
+                        {jobTopicLabel(w.topicId, lang)}
                         {' — '}
                         <span style={{ fontWeight: 400, color: 'var(--muted-ivory)' }}>
-                          {w.correct}/{w.total}টি সঠিক · {w.accuracy}%
+                          {t({ bn: `${w.correct}/${w.total}টি সঠিক · ${w.accuracy}%`, en: `${w.correct}/${w.total} correct · ${w.accuracy}%` })}
                           {' · '}
                           {w.sample === 'signal'
                             ? t({ bn: 'দুর্বলতার সংকেত', en: 'Weakness signal' })
@@ -1058,7 +1058,7 @@ export default function JobSeekerDashboardPage() {
               {t({ bn: 'ভুল-উত্তর নোটবুক', en: 'Wrong-answer notebook' })}
             </div>
             {attempts === null || !wrongSummary ? (
-              <p style={{ margin: '8px 0 0', color: 'var(--muted)', fontSize: 14 }}>লোড হচ্ছে…</p>
+              <p style={{ margin: '8px 0 0', color: 'var(--muted)', fontSize: 14 }}>{t({ bn: 'লোড হচ্ছে…', en: 'Loading…' })}</p>
             ) : wrongSummary.distinctWrongQuestions === 0 ? (
               <p style={{ margin: '8px 0 0', color: 'var(--muted)', fontSize: 14, lineHeight: 1.7 }}>
                 {t({
@@ -1075,7 +1075,7 @@ export default function JobSeekerDashboardPage() {
                   {wrongSummary.recent.map((r) => (
                     <li key={r.questionId} style={{ borderTop: '1px solid var(--border)', padding: '6px 0' }}>
                       <Link to={`/jobs/result/${r.attemptDocId}`} style={{ fontWeight: 600 }}>
-                        {jobTopicLabelBn(r.topicId)}
+                        {jobTopicLabel(r.topicId, lang)}
                       </Link>
                       <span style={{ color: 'var(--muted)', fontSize: 13 }}>
                         {' · '}
@@ -1123,7 +1123,7 @@ export default function JobSeekerDashboardPage() {
               {t({ bn: 'রিভিশন সময়সূচি', en: 'Revision schedule' })}
             </div>
             {attempts === null ? (
-              <p style={{ margin: '8px 0 0', color: 'var(--muted)', fontSize: 14 }}>লোড হচ্ছে…</p>
+              <p style={{ margin: '8px 0 0', color: 'var(--muted)', fontSize: 14 }}>{t({ bn: 'লোড হচ্ছে…', en: 'Loading…' })}</p>
             ) : plannerQueue.length === 0 ? (
               <p style={{ margin: '8px 0 10px', color: 'var(--muted)', fontSize: 14, lineHeight: 1.7 }}>
                 {attempts.length === 0
@@ -1168,7 +1168,7 @@ export default function JobSeekerDashboardPage() {
               {t({ bn: 'প্ল্যানার', en: 'Planner' })}
             </div>
             {attempts === null ? (
-              <p style={{ margin: '8px 0 0', color: 'var(--muted)', fontSize: 14 }}>লোড হচ্ছে…</p>
+              <p style={{ margin: '8px 0 0', color: 'var(--muted)', fontSize: 14 }}>{t({ bn: 'লোড হচ্ছে…', en: 'Loading…' })}</p>
             ) : (
               <>
                 <p style={{ margin: '8px 0 10px', color: 'var(--muted-ivory)', fontSize: 14, lineHeight: 1.7 }}>
@@ -1195,7 +1195,7 @@ export default function JobSeekerDashboardPage() {
               {t({ bn: 'অর্জন', en: 'Achievements' })}
             </div>
             {attempts === null ? (
-              <p style={{ margin: '8px 0 0', color: 'var(--muted)', fontSize: 14 }}>লোড হচ্ছে…</p>
+              <p style={{ margin: '8px 0 0', color: 'var(--muted)', fontSize: 14 }}>{t({ bn: 'লোড হচ্ছে…', en: 'Loading…' })}</p>
             ) : achievements.length === 0 ? (
               <p style={{ margin: '8px 0 0', color: 'var(--muted)', fontSize: 14, lineHeight: 1.7 }}>
                 {t({
@@ -1207,8 +1207,8 @@ export default function JobSeekerDashboardPage() {
               <ul style={{ margin: '8px 0 0', paddingLeft: 20, fontSize: 14, lineHeight: 1.9, color: 'var(--heading)' }}>
                 {achievements.map((a) => (
                   <li key={a.key}>
-                    {a.labelBn}
-                    <span style={{ color: 'var(--muted)', fontSize: 13 }}> — {a.ruleBn}</span>
+                    {t({ bn: a.labelBn, en: a.labelEn })}
+                    <span style={{ color: 'var(--muted)', fontSize: 13 }}> — {t({ bn: a.ruleBn, en: a.ruleEn })}</span>
                   </li>
                 ))}
               </ul>

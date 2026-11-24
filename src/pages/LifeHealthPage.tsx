@@ -21,7 +21,7 @@ const SECTION_STYLE: React.CSSProperties = {
 };
 
 export default function LifeHealthPage() {
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
   const sources = LIFE_SOURCES.filter((s) =>
     ['who-diet', 'who-activity', 'who-hand-hygiene', 'cdc-sleep', 'dghs', 'emergency-999'].includes(s.id),
   );
@@ -29,7 +29,7 @@ export default function LifeHealthPage() {
   return (
     <PageShell titleBn="স্বাস্থ্য সচেতনতা" titleEn="Health Awareness">
       {/* Visible breadcrumb (24 Nov 2026 SEO pass) — labels match the BreadcrumbList JSON-LD in lib/seo.ts. */}
-      <Breadcrumb items={[{ label: 'জীবন সেবা', to: '/life' }, { label: 'স্বাস্থ্য সচেতনতা' }]} />
+      <Breadcrumb items={[{ label: lang === 'bn' ? 'জীবন সেবা' : 'Life Services', to: '/life' }, { label: lang === 'bn' ? 'স্বাস্থ্য সচেতনতা' : 'Health Awareness' }]} />
       <HealthDisclaimer />
       <p>
         {t({

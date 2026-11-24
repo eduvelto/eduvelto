@@ -60,7 +60,7 @@
 // capped, so a capped window is never presented as a
 // lifetime total.
 
-import { jobTopicLabelBn } from './jobEngine';
+import { jobTopicLabel, jobTopicLabelBn } from './jobEngine';
 import type { JobAttemptSummary } from './jobAnalysis';
 import type {
   JobBundleQuestion,
@@ -77,6 +77,12 @@ export const NOTEBOOK_LEARNING_STATE_BN: Record<NotebookLearningState, string> =
   new: 'নতুন ভুল',
   practising: 'আবার শিখছি',
   learned: 'শেখা হয়েছে',
+};
+
+export const NOTEBOOK_LEARNING_STATE_EN: Record<NotebookLearningState, string> = {
+  new: 'New mistake',
+  practising: 'Re-learning',
+  learned: 'Learned',
 };
 
 export type NotebookOutcome = 'wrong' | 'correct' | 'unanswered';
@@ -301,7 +307,7 @@ export function filterNotebook(
     if (filters.status === 'unanswered' && e.lastOutcome !== 'unanswered') return false;
     if (q) {
       const text = (texts?.get(e.questionId) ?? '').toLowerCase();
-      const hay = `${text} ${jobTopicLabelBn(e.topicId).toLowerCase()} ${e.questionId.toLowerCase()}`;
+      const hay = `${text} ${jobTopicLabelBn(e.topicId).toLowerCase()} ${jobTopicLabel(e.topicId, 'en').toLowerCase()} ${e.questionId.toLowerCase()}`;
       if (!hay.includes(q)) return false;
     }
     return true;
@@ -311,6 +317,8 @@ export function filterNotebook(
 export interface NotebookTopicGroup {
   topicId: string;
   label: string;
+  /** English topic label (jobTopicLabel, same humanized name). */
+  labelEn: string;
   subjectId: string;
   examSlugs: string[];
   entries: NotebookEntry[];
@@ -325,6 +333,7 @@ export function groupNotebookByTopic(entries: NotebookEntry[]): NotebookTopicGro
     const g = groups.get(e.topicId) ?? {
       topicId: e.topicId,
       label: jobTopicLabelBn(e.topicId),
+      labelEn: jobTopicLabel(e.topicId, 'en'),
       subjectId: e.subjectId,
       examSlugs: [],
       entries: [],

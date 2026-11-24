@@ -22,6 +22,7 @@ import {
   createPracticeSession,
   goToQuestion,
   jobExamPattern,
+  jobTopicLabel,
   jobTopicLabelBn,
   orderQuestionsForMode,
   patternFromRulesSnapshot,
@@ -952,5 +953,13 @@ describe('jobTopicLabelBn (Step 9 closure, D7)', () => {
     expect(jobTopicLabelBn('bcs')).toBe('Bcs');
     expect(jobTopicLabelBn('')).toBe('অজানা টপিক');
     expect(jobTopicLabelBn('____')).toBe('অজানা টপিক');
+  });
+});
+
+describe('language system (24 Nov 2026) — jobTopicLabel', () => {
+  it('renders the same humanized label in English, unknown-topic fallback in English', () => {
+    expect(jobTopicLabel('bcs__english__grammar__tense', 'en')).toBe('English — Grammar — Tense');
+    expect(jobTopicLabel('', 'en')).toBe('Unknown topic');
+    expect(jobTopicLabel('', 'bn')).toBe('অজানা টপিক');
   });
 });
