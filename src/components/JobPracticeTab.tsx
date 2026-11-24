@@ -51,7 +51,7 @@ export default function JobPracticeTab({ def }: { def: JobExamDef }) {
     return (
       <Reveal>
         <Card>
-          <p style={{ margin: 0, color: '#68747B', fontSize: 14 }}>{t({ bn: 'লোড হচ্ছে…', en: 'Loading…' })}</p>
+          <p style={{ margin: 0, color: '#57616A', fontSize: 14 }}>{t({ bn: 'লোড হচ্ছে…', en: 'Loading…' })}</p>
         </Card>
       </Reveal>
     );
@@ -62,7 +62,7 @@ export default function JobPracticeTab({ def }: { def: JobExamDef }) {
       <Reveal>
         <Card>
           <div style={{ fontWeight: 700, color: '#142B3B', fontSize: 17 }}>{t({ bn: 'অনুশীলন প্রশ্ন তৈরি হচ্ছে', en: 'Practice questions are being prepared' })}</div>
-          <p style={{ margin: '8px 0 12px', color: '#68747B', fontSize: 14, lineHeight: 1.7 }}>
+          <p style={{ margin: '8px 0 12px', color: '#57616A', fontSize: 14, lineHeight: 1.7 }}>
             {t({ bn: 'টপিকভিত্তিক MCQ (উত্তর ও ব্যাখ্যাসহ) শিক্ষক যাচাইয়ের পর প্রকাশিত হবে।', en: 'Topic-wise MCQs (with answers and explanations) will be published after teacher review.' })}
           </p>
           {!user ? (
@@ -90,7 +90,7 @@ export default function JobPracticeTab({ def }: { def: JobExamDef }) {
           <Reveal key={b.docId} delayMs={i * 40}>
             <Card>
               <div style={{ fontWeight: 700, color: '#142B3B', fontSize: 16 }}>{lang === 'bn' ? b.titleBn : b.titleEn}</div>
-              <p style={{ margin: '6px 0 10px', color: '#68747B', fontSize: 14, lineHeight: 1.7 }}>
+              <p style={{ margin: '6px 0 10px', color: '#57616A', fontSize: 14, lineHeight: 1.7 }}>
                 {t({ bn: `${b.questionCount}টি MCQ · ${b.kind === 'previous' ? 'বিগত প্রশ্নের সেট' : 'টপিকভিত্তিক অনুশীলন'} · টাইমার নেই`, en: `${b.questionCount} MCQs · ${b.kind === 'previous' ? 'Previous-question set' : 'Topic-wise practice'} · No timer` })}
               </p>
               <LinkButton to={`/jobs/practice/${b.docId}`} variant="accent">
@@ -102,7 +102,7 @@ export default function JobPracticeTab({ def }: { def: JobExamDef }) {
       </div>
       <Reveal>
         <Card style={{ marginTop: 12 }}>
-          <p style={{ margin: 0, color: '#68747B', fontSize: 14, lineHeight: 1.7 }}>
+          <p style={{ margin: 0, color: '#57616A', fontSize: 14, lineHeight: 1.7 }}>
             {t({ bn: 'অনুশীলনে প্রতিটি প্রশ্নের পরেই সঠিক/ভুল ও ব্যাখ্যা দেখাবে। ফলাফলে লেখা থাকবে “অনুশীলন ফলাফল — নিয়োগ পরীক্ষার ফল নয়”।', en: 'After every practice question you will see the correct/wrong mark and explanation. The result will say “Practice result — not a recruitment exam result”.' })}
           </p>
           <p style={{ margin: '12px 0 0' }}>

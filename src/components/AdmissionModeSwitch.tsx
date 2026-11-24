@@ -77,7 +77,7 @@ export default function AdmissionModeSwitch() {
       <p style={{ margin: '8px 0 0', color: 'var(--muted-ivory)', fontSize: 14, lineHeight: 1.7 }}>
         {t({ bn: NU_MODE_COPY[mode].descBn, en: NU_MODE_COPY[mode].descEn })}
       </p>
-      <p style={{ margin: '4px 0 0', color: 'var(--muted)', fontSize: 13 }}>
+      <p style={{ margin: '4px 0 0', color: 'var(--muted-ivory)', fontSize: 13 }}>
         {t({ bn: 'মোড যেকোনো সময় বদলানো যায় — অগ্রগতি মুছে যাবে না।', en: 'You can switch mode any time — your progress is kept.' })}
       </p>
     </div>

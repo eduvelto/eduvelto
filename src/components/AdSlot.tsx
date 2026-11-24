@@ -105,7 +105,7 @@ const PLACEHOLDER_SIZE_LABEL: Record<AdPlacement, { bn: string; en: string }> = 
 const AD_LABEL_STYLE: React.CSSProperties = {
   fontSize: 11,
   lineHeight: 1.4,
-  color: 'var(--muted)',
+  color: 'var(--muted-ivory)',
   textAlign: 'center',
   marginBottom: 2,
 };
@@ -117,7 +117,7 @@ function placeholderStyle(placement: AdPlacement): React.CSSProperties {
     background: 'linear-gradient(135deg, #fdf9ef 0%, #eff7f6 100%)',
     padding: '10px 14px',
     textAlign: 'center',
-    color: '#68747b',
+    color: '#57616a',
     fontSize: 13,
   };
   if (placement === 'bottom-banner') {

@@ -100,6 +100,7 @@ export const PUBLIC_GUIDES: PublicGuide[] = [
       { to: '/jobs', bn: 'চাকরির প্রস্তুতি', en: 'Job preparation' },
       { to: '/learn', bn: 'সব পাঠ', en: 'All lessons' },
       { to: '/about', bn: 'Eduvelto সম্পর্কে', en: 'About Eduvelto' },
+      { to: '/learn/how-to-use-job-practice', bn: 'চাকরির অনুশীলন ব্যবহার করা', en: 'How to use job practice' },
     ],
   },
   {
@@ -206,6 +207,7 @@ export const PUBLIC_GUIDES: PublicGuide[] = [
       { to: '/jobs', bn: 'চাকরির প্রস্তুতি', en: 'Job preparation' },
       { to: '/about', bn: 'Eduvelto সম্পর্কে', en: 'About Eduvelto' },
       { to: '/contact', bn: 'যোগাযোগ', en: 'Contact' },
+      { to: '/learn/how-to-use-free-library', bn: 'ফ্রি লাইব্রেরি ব্যবহার করা', en: 'How to use the free library' },
     ],
   },
   {
@@ -228,6 +230,7 @@ export const PUBLIC_GUIDES: PublicGuide[] = [
       { to: '/learn/bcs-english-preposition', bn: 'Preposition পাঠ', en: 'Preposition lesson' },
       { to: '/jobs/bcs/practice/english', bn: 'বিসিএস ইংরেজি অনুশীলন', en: 'BCS English practice' },
       { to: '/learn', bn: 'সব পাঠ', en: 'All lessons' },
+      { to: '/learn/spoken-english-practice', bn: 'ইংরেজিতে কথা বলার অনুশীলন', en: 'Spoken English practice' },
     ],
   },
   {
@@ -251,6 +254,7 @@ export const PUBLIC_GUIDES: PublicGuide[] = [
       { to: '/learn/cv-writing-guide', bn: 'CV লেখার গাইড', en: 'CV writing guide' },
       { to: '/learn', bn: 'সব পাঠ', en: 'All lessons' },
       { to: '/about', bn: 'Eduvelto সম্পর্কে', en: 'About Eduvelto' },
+      { to: '/learn/how-to-use-opportunity-hub', bn: 'অপরচুনিটি হাব ব্যবহার করা', en: 'How to use the Opportunity Hub' },
     ],
   },
   {
@@ -274,6 +278,7 @@ export const PUBLIC_GUIDES: PublicGuide[] = [
       { to: '/learn/english-grammar-basics', bn: 'ইংরেজি ব্যাকরণের মৌলিক বিষয়', en: 'English grammar basics' },
       { to: '/about', bn: 'Eduvelto সম্পর্কে', en: 'About Eduvelto' },
       { to: '/contact', bn: 'যোগাযোগ', en: 'Contact' },
+      { to: '/learn/how-to-use-ai-assistant', bn: 'AI লাইফ অ্যাসিস্ট্যান্ট ব্যবহার করা', en: 'How to use the AI Life Assistant' },
     ],
   },
   {
@@ -347,6 +352,7 @@ export const PUBLIC_GUIDES: PublicGuide[] = [
       { to: '/jobs', bn: 'চাকরির প্রস্তুতি', en: 'Job preparation' },
       { to: '/learn', bn: 'সব পাঠ', en: 'All lessons' },
       { to: '/learn/group-study-guide', bn: 'দলগত পড়াশোনা', en: 'Group study guide' },
+      { to: '/learn/how-to-use-free-library', bn: 'ফ্রি লাইব্রেরি ব্যবহার করা', en: 'How to use the free library' },
     ],
   },
   {
@@ -540,6 +546,7 @@ export const PUBLIC_GUIDES: PublicGuide[] = [
       { to: '/jobs/bcs/practice/english', bn: 'বিসিএস ইংরেজি অনুশীলন', en: 'BCS English practice' },
       { to: '/learn', bn: 'সব পাঠ', en: 'All lessons' },
       { to: '/about', bn: 'Eduvelto সম্পর্কে', en: 'About Eduvelto' },
+      { to: '/learn/how-to-use-job-practice', bn: 'চাকরির অনুশীলন ব্যবহার করা', en: 'How to use job practice' },
     ],
   },
   {
@@ -613,6 +620,7 @@ export const PUBLIC_GUIDES: PublicGuide[] = [
       { to: '/learn', bn: 'সব পাঠ', en: 'All lessons' },
       { to: '/about', bn: 'Eduvelto সম্পর্কে', en: 'About Eduvelto' },
       { to: '/learn/exam-anxiety-management', bn: 'পরীক্ষার উদ্বেগ সামলানো', en: 'Exam anxiety management' },
+      { to: '/learn/how-to-use-life-services', bn: 'লাইফ সার্ভিস ব্যবহার করা', en: 'How to use Everyday Life Services' },
     ],
   },
   {
@@ -636,6 +644,7 @@ export const PUBLIC_GUIDES: PublicGuide[] = [
       { to: '/learn/computer-basics-students', bn: 'কম্পিউটার ও ইন্টারনেটের মৌলিক ধারণা', en: 'Computer and internet basics for students' },
       { to: '/life', bn: 'লাইফ সার্ভিস', en: 'Life services' },
       { to: '/learn', bn: 'সব পাঠ', en: 'All lessons' },
+      { to: '/learn/how-to-use-ai-assistant', bn: 'AI লাইফ অ্যাসিস্ট্যান্ট ব্যবহার করা', en: 'How to use the AI Life Assistant' },
     ],
   },
   {

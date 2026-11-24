@@ -137,6 +137,9 @@ html[data-theme="dark"] .ev-rd-ai { background: linear-gradient(135deg, #2c1f3d 
   .ev-header-search { display: flex; align-items: center; gap: 0; border: 1px solid var(--line-strong); border-radius: 999px; background: var(--card); padding: 2px 2px 2px 12px; }
   .ev-header-search input { width: 170px; border: 0; outline: 0; background: transparent; color: var(--ink); font-size: 14px; font-family: inherit; }
   .ev-header-search input:focus { width: 220px; }
+  /* Wave 7 a11y: the input kills its own outline (line above), so give it an
+     explicit teal-deep focus ring — the header search sits on a light card. */
+  .ev-header-search input:focus-visible { outline: 2px solid #12766e; outline-offset: 2px; }
   .ev-header-search button { flex: none; border: 0; border-radius: 999px; padding: 6px 12px; background: var(--teal-deep); color: #fff; font-size: 13px; font-weight: 700; font-family: inherit; cursor: pointer; }
 }
 
@@ -144,6 +147,10 @@ html[data-theme="dark"] .ev-rd-ai { background: linear-gradient(135deg, #2c1f3d 
 .ev-search-title { margin: 4px 0 14px; font-size: 24px; color: var(--heading); }
 .ev-search-form { display: flex; gap: 0; max-width: 640px; background: var(--card); border: 1px solid var(--line-strong); border-radius: 999px; padding: 4px 4px 4px 18px; box-shadow: var(--shadow-sm); }
 .ev-search-form input { flex: 1; min-width: 0; border: 0; outline: 0; background: transparent; color: var(--ink); font-size: 15px; font-family: inherit; }
+/* Wave 7 a11y: the input kills its own outline (line above), so give it an
+   explicit teal-deep focus ring — the form sits on a light surface, and the
+   design system says focus ring is teal-deep on light surfaces. */
+.ev-search-form input:focus-visible, .ev-search-form button:focus-visible { outline: 2px solid #12766e; outline-offset: 2px; }
 .ev-search-form button { flex: none; border: 0; border-radius: 999px; padding: 10px 22px; background: var(--teal-deep); color: #fff; font-size: 15px; font-weight: 700; font-family: inherit; cursor: pointer; }
 .ev-search-hint { font-size: 13.5px; line-height: 1.6; color: var(--muted-ivory); max-width: 640px; }
 .ev-search-count { font-size: 15px; font-weight: 700; color: var(--heading); margin: 18px 0 10px; }
@@ -154,9 +161,9 @@ html[data-theme="dark"] .ev-rd-ai { background: linear-gradient(135deg, #2c1f3d 
 .ev-search-tab-active { background: var(--teal-deep); border-color: var(--teal-deep); color: #fff; }
 .ev-search-list { display: flex; flex-direction: column; gap: 10px; }
 .ev-search-result { border: 1px solid var(--line); border-radius: var(--radius-sm); background: var(--card); padding: 14px; }
-.ev-search-result h3 { margin: 6px 0 4px; font-size: 16px; }
-.ev-search-result h3 a { color: var(--heading); text-decoration: none; }
-.ev-search-result h3 a:hover { text-decoration: underline; }
+.ev-search-result h2 { margin: 6px 0 4px; font-size: 16px; }
+.ev-search-result h2 a { color: var(--heading); text-decoration: none; }
+.ev-search-result h2 a:hover { text-decoration: underline; }
 .ev-search-result p { margin: 0; font-size: 14px; line-height: 1.6; color: var(--muted-ivory); }
 .ev-search-kind { display: inline-block; font-size: 12px; font-weight: 700; color: var(--teal-deep); background: var(--teal-soft); border-radius: 999px; padding: 2px 10px; }
 .ev-search-meta { display: block; margin-top: 6px; font-size: 13px; font-weight: 700; color: var(--teal-deep); }
@@ -164,6 +171,10 @@ html[data-theme="dark"] .ev-rd-ai { background: linear-gradient(135deg, #2c1f3d 
 /* ---------- footer newsletter + socials ---------- */
 .ev-news-form { display: flex; gap: 0; max-width: 320px; margin-top: 10px; background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.25); border-radius: 999px; padding: 3px 3px 3px 14px; }
 .ev-news-form input { flex: 1; min-width: 0; border: 0; outline: 0; background: transparent; color: #fff; font-size: 14px; font-family: inherit; }
+/* Wave 7 a11y: the input kills its own outline (line above), so give it an
+   explicit amber focus ring — the form sits on the dark footer, and the
+   design system says focus ring is amber on dark surfaces. */
+.ev-news-form input:focus-visible, .ev-news-form button:focus-visible { outline: 2px solid #d9a441; outline-offset: 2px; }
 .ev-news-form input::placeholder { color: rgba(255, 255, 255, 0.6); }
 .ev-news-form button { flex: none; border: 0; border-radius: 999px; padding: 8px 16px; background: var(--amber); color: #142b3b; font-size: 14px; font-weight: 700; font-family: inherit; cursor: pointer; }
 .ev-news-form button:disabled { opacity: 0.6; cursor: wait; }

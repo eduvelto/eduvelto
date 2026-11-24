@@ -71,7 +71,7 @@ export default function JobModeSwitch() {
       <p style={{ margin: '8px 0 0', color: 'var(--muted-ivory)', fontSize: 14, lineHeight: 1.7 }}>
         {t({ bn: MODE_COPY[mode].descBn, en: MODE_COPY[mode].descEn })}
       </p>
-      <p style={{ margin: '4px 0 0', color: 'var(--muted)', fontSize: 13 }}>
+      <p style={{ margin: '4px 0 0', color: 'var(--muted-ivory)', fontSize: 13 }}>
         {t({ bn: 'মোড যেকোনো সময় বদলানো যায়।', en: 'You can switch mode any time.' })}
       </p>
     </div>

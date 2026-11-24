@@ -82,7 +82,7 @@ html[lang='en'] {
   --num-bg: #f2f4f2;
   --soon-bg: #fdf3d7;
   --ink-soft: #3a444b;
-  --success: #15803d;
+  --success: #166534;
   --purple: #7b1fa2;
   --card-subtle: #f8fafb;
   --error-text: #7a0013;
@@ -728,7 +728,10 @@ a:hover {
   grid-template-columns: 1.4fr 1fr 1fr;
   gap: 24px;
 }
-.ev-footer h3 {
+/* Wave 7 a11y: footer column headings are h2, not h3 — they are
+   top-level page sections; h3 skipped a level on pages with no h2
+   between the h1 and the footer (e.g. /search). Same size as before. */
+.ev-footer h2 {
   color: #fff;
   font-size: 15px;
   margin: 0 0 10px;
@@ -880,7 +883,7 @@ a:hover {
 }
 .ev-class-hero-coming {
   display: inline-block;
-  background: rgba(255, 255, 255, 0.22);
+  background: rgba(0, 0, 0, 0.28);
   color: #fff;
   font-size: 13px;
   font-weight: 600;

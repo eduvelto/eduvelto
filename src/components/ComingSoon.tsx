@@ -95,7 +95,7 @@ export function ComingSoonHero({ def }: { def: ClassLevelDef }) {
           style={{
             margin: '16px auto 0',
             maxWidth: 560,
-            color: '#68747B',
+            color: '#57616A',
             fontSize: 14,
             lineHeight: 1.7,
             background: 'rgba(255,255,255,0.65)',
