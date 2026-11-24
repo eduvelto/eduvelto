@@ -3640,96 +3640,59 @@ html[data-theme="dark"] .ev-header {
 }
 
 /* ------------------------------------------------------------------ */
-/* Homepage hero-band greeting, v4 (owner revisions 24 Nov 2026       */
-/* 07:11 + 07:14 — supersedes v3).                                     */
-/* Shape: a TIGHT SMALL PILL like the red "সর্বোচ্চ অগ্রাধিকার" badge  */
-/* on the home cards (badge: padding 3px 9px, radius 999px) — the      */
-/* text FILLS the pill; NOT a big rectangle, no white gap above: the   */
-/* pill is mounted OUTSIDE PageShell (HomePage returns it before the   */
-/* shell, whose 28px top padding made the gap), flush under the nav,   */
-/* width: fit-content so it hugs the widest line, centred.             */
-/* Colour: app BRAND palette (brand guide §2 — NO green anywhere):     */
-/* Deep Navy #0A1F44 base, gold #F5A623 accents. Dark mode: the navy   */
-/* lifts slightly (html[data-theme="dark"] override below).            */
-/* Language: TWO phases — Arabic, then the translation in the user's   */
-/* chosen language (header toggle's tabLang: Bangla by default,        */
-/* English when set to English). Arabic always stays, exact, harakat   */
-/* never distorted. Attribution follows the same language.             */
-/* NO Bismillah anywhere; exactly ONE line, one language at a time.    */
-/* Border animations (owner 07:14 — varied, dignified, never flashing  */
-/* or bouncing): (a) slowly FLOWING gold gradient border (10s, the     */
-/* border-box gradient slides one full tile per loop, seamless);       */
-/* (b) soft outer GLOW pulse on the pill (8s); (c) the thin gold       */
-/* sweep line (9s, kept from v3); plus the text glow pulse (6s, kept). */
-/* Reduced motion: ALL off (media query below) — static Arabic line    */
-/* only, no timer (see useHeroGreetingCycle).                           */
-/* Layout: the two lines share one grid cell, so the pill is exactly   */
-/* one line tall and never reflows when the phase changes. Only the    */
-/* active line is visible (slow 1.2s fade + slide). Attribution rides  */
-/* inside the translation line: hidden on mobile (the sentence alone   */
-/* fills the line), shown inline on desktop.                           */
+/* Homepage hero-band greeting, v5 (owner revision 24 Nov 2026       */
+/* 08:31 — SUPERSEDES v4).                                             */
+/* The owner rejected the v4 pill ("sundor dekacce na", the border    */
+/* "sundor lagtece na") and asked for NO border and NO decoration:    */
+/* just the translation, stylishly written, in Bangla when Bangla     */
+/* is the setting and in English when English. So v5 is a clean       */
+/* FULL-WIDTH strip directly below the nav: no pill, no rounded       */
+/* corners, no border, no gradient, no glow, no sweep, NO animation,  */
+/* NO timer, NO cycling, NO Arabic phase. One static line, white      */
+/* stylish text on the app brand navy. The line changes instantly     */
+/* when the header language toggle changes (React re-render).         */
+/* Kept: home-only, NO Bismillah, dark mode correct.                  */
+/* Layout: exactly one line, never a second line. The attribution     */
+/* rides inside the line: hidden on mobile (the sentence alone        */
+/* fills a 390px line), shown inline on desktop.                      */
 /* ------------------------------------------------------------------ */
 
 .ev-hero-greeting {
   --ev-greeting-bg: #0a1f44;
-  position: relative;
-  display: grid;
-  width: fit-content;
-  max-width: calc(100% - 16px);
-  margin: 0 auto;
-  padding: 6px 12px;
-  overflow: hidden;
-  border: 1px solid transparent;
-  border-radius: 999px;
-  background:
-    linear-gradient(var(--ev-greeting-bg), var(--ev-greeting-bg)) padding-box,
-    linear-gradient(90deg, #f5a623 0%, #7a5200 25%, #f1b308 50%, #7a5200 75%, #f5a623 100%) border-box;
-  background-size: 100% 100%, 200% 100%;
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12), 0 0 6px rgba(245, 166, 35, 0.15);
+  display: block;
+  width: 100%;
+  margin: 0;
+  padding: 8px 16px;
+  background: var(--ev-greeting-bg);
   text-align: center;
-  animation: ev-hero-greeting-border-flow 10s linear infinite, ev-hero-greeting-border-glow 8s ease-in-out infinite;
 }
 .ev-hero-greeting-line {
-  grid-area: 1 / 1;
-  min-width: 0;
-  overflow: hidden;
   margin: 0;
   font-weight: 700;
   color: #ffffff;
   line-height: 1.5;
   white-space: nowrap;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.45);
-  opacity: 0;
-  visibility: hidden;
-  transform: translateY(4px);
-  transition: opacity 1.2s ease, transform 1.2s ease, visibility 0s linear 1.2s;
-}
-/* Arabic: Amiri calligraphy — beautiful and accurate, already
-   loaded in index.html. No animation on the letters themselves.
-   28px mobile: the ayah is short (~232px), so it reads large and
-   fills the pill without coming near the one-line limit. */
-.ev-hero-greeting-line-ar {
-  font-family: 'Amiri', 'Traditional Arabic', 'Noto Naskh Arabic', serif;
-  font-size: 28px;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 /* English: Poppins — clear, stylish, mobile-friendly.
-   14px mobile: the verbatim sentence is 353px at 15px, so 14px
-   (~330px) is the largest size that fills the pill with room to
-   spare inside the 374px max width. letter-spacing 0. */
+   14px mobile: the verbatim sentence is ~330px, so it fills a
+   390px line with room to spare (15px measured ~353px — too
+   tight against the 358px content width). letter-spacing 0. */
 .ev-hero-greeting-line-en {
   font-family: 'Poppins', 'Hind Siliguri', system-ui, sans-serif;
   font-size: 14px;
   letter-spacing: 0;
 }
 /* Bangla: Noto Serif Bengali — stylish serif, clearly readable.
-   19px mobile: ~323px, fills the pill comfortably. */
+   19px mobile: ~323px, fills the line comfortably. */
 .ev-hero-greeting-line-bn {
   font-family: 'Noto Serif Bengali', 'Hind Siliguri', system-ui, serif;
   font-size: 19px;
   font-weight: 600;
 }
-/* Attribution rides inside the translation line. Hidden on mobile:
-   the sentence alone fills a 390px line, and one line is the hard
+/* Attribution rides inside the line. Hidden on mobile: the
+   sentence alone fills a 390px line, and one line is the hard
    requirement. Shown inline on desktop, where it fits. */
 .ev-hero-greeting-attr {
   display: none;
@@ -3738,71 +3701,14 @@ html[data-theme="dark"] .ev-header {
   font-weight: 600;
   color: rgba(255, 255, 255, 0.85);
 }
-.ev-hero-greeting-line[data-active="true"] {
-  opacity: 1;
-  visibility: visible;
-  transform: translateY(0);
-  transition: opacity 1.2s ease, transform 1.2s ease, visibility 0s;
-}
-/* Text glow pulse on the active line — the WHOLE line at once (one
-   text-shadow on the span), never per-letter: per-letter animation
-   on the Arabic line would distort letterforms, so it is forbidden
-   here. 6s, gentle. */
-.ev-hero-greeting-line[data-active="true"] .ev-hero-greeting-text {
-  animation: ev-hero-greeting-glow 6s ease-in-out infinite;
-}
-@keyframes ev-hero-greeting-glow {
-  0%, 100% { text-shadow: 0 0 6px rgba(217, 164, 65, 0.25), 0 1px 2px rgba(0, 0, 0, 0.45); }
-  50% { text-shadow: 0 0 16px rgba(217, 164, 65, 0.6), 0 1px 2px rgba(0, 0, 0, 0.45); }
-}
-/* (a) Flowing gold gradient border: the border-box gradient is 200%
-   wide and tiles seamlessly (both ends #f5a623), so sliding its
-   position 0% → 200% moves exactly one tile — a slow, endless flow
-   around the pill. 10s, linear. */
-@keyframes ev-hero-greeting-border-flow {
-  from { background-position: 0 0, 0% 0; }
-  to { background-position: 0 0, 200% 0; }
-}
-/* (b) Soft outer glow pulse on the pill itself. 8s, gentle. */
-@keyframes ev-hero-greeting-border-glow {
-  0%, 100% { box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12), 0 0 6px rgba(245, 166, 35, 0.15); }
-  50% { box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12), 0 0 18px rgba(245, 166, 35, 0.45); }
-}
-/* (c) Thin gold line along the bottom edge that slowly sweeps from
-   one side to the other, looping gently — the eye-catcher that never
-   touches the ayah text itself. 9s, slow. */
-.ev-hero-greeting-sweep {
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  width: 36%;
-  height: 2px;
-  pointer-events: none;
-  background: linear-gradient(90deg, transparent, #f5a623, transparent);
-  animation: ev-hero-greeting-sweep 9s linear infinite;
-}
-@keyframes ev-hero-greeting-sweep {
-  from { transform: translateX(-110%); }
-  to { transform: translateX(310%); }
-}
-/* Dark mode: lift the navy slightly so the pill still reads as a
-   distinct band on the dark page (--bg #0f1b24). Gold stays. */
+/* Dark mode: lift the navy slightly so the strip still reads as a
+   distinct band on the dark page (--bg #0f1b24). */
 html[data-theme="dark"] .ev-hero-greeting {
   --ev-greeting-bg: #0d2650;
 }
 @media (min-width: 641px) {
-  .ev-hero-greeting { padding: 8px 16px; }
-  .ev-hero-greeting-line-ar { font-size: 30px; }
+  .ev-hero-greeting { padding: 9px 16px; }
   .ev-hero-greeting-line-en { font-size: 20px; }
   .ev-hero-greeting-line-bn { font-size: 20px; }
   .ev-hero-greeting-attr { display: inline; font-size: 15px; }
-}
-@media (prefers-reduced-motion: reduce) {
-  .ev-hero-greeting,
-  .ev-hero-greeting *,
-  .ev-hero-greeting::before,
-  .ev-hero-greeting::after {
-    animation: none !important;
-    transition: none !important;
-  }
 }
