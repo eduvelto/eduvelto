@@ -13,6 +13,10 @@
 // use that for crumbs with no distinct route of their own
 // (e.g. "অনুশীলন" under /jobs/bcs/practice/english).
 // The aria-label follows the selected language.
+// REVISED 24 Nov 2026 (brand-SEO wave 8): hardcoded light text colours
+// (#57616A / #142B3B) replaced with design-system tokens
+// (muted-ivory / heading) — light values are identical, dark mode now
+// keeps AA contrast (was 1.2:1 / 2.76:1).
 
 import { Link } from 'react-router-dom';
 import { useLanguage } from '../i18n/LanguageContext';
@@ -22,7 +26,7 @@ export type BreadcrumbItem = { label: string; to?: string };
 export function Breadcrumb({ items }: { items: BreadcrumbItem[] }) {
   const { t } = useLanguage();
   return (
-    <nav aria-label={t({ bn: 'ব্রেডক্রাম্ব', en: 'Breadcrumb' })} style={{ margin: '0 0 12px', color: '#57616A', fontSize: 14 }}>
+    <nav aria-label={t({ bn: 'ব্রেডক্রাম্ব', en: 'Breadcrumb' })} style={{ margin: '0 0 12px', color: 'var(--muted-ivory)', fontSize: 14 }}>
       {items.map((item, i) => {
         const isCurrent = i === items.length - 1;
         return (
@@ -33,7 +37,7 @@ export function Breadcrumb({ items }: { items: BreadcrumbItem[] }) {
                 {item.label}
               </Link>
             ) : isCurrent ? (
-              <span style={{ color: '#142B3B', fontWeight: 600 }}>{item.label}</span>
+              <span style={{ color: 'var(--heading)', fontWeight: 600 }}>{item.label}</span>
             ) : (
               <span>{item.label}</span>
             )}

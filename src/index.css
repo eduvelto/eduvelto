@@ -155,6 +155,30 @@ html[data-theme="dark"] {
   --shadow-lg: 0 12px 28px rgba(0, 0, 0, 0.5);
 }
 
+/* ---- Dark-mode contrast fixes (24 Nov 2026, brand-SEO wave 8) ----
+   Three combinations pass in light mode but fail AA in dark mode
+   because BOTH sides of the pair change with the theme:
+   - .ev-header-btn-login: white text on var(--link) — in dark mode
+     --link lightens to #8ab4f8 (2.11:1). Keep the light-mode blues
+     (#1d4ed8 / #1e40af) as the button background in dark mode.
+   - .ev-btn-gold + .ev-step-num: var(--heading) text on var(--amber)
+     — in dark mode the heading lightens to #dce8ef while amber stays
+     light (1.5:1). Dark text #142b3b on amber is 7.1:1. */
+html[data-theme="dark"] .ev-header-btn-login {
+  background: #1d4ed8;
+  border-color: #1d4ed8;
+}
+html[data-theme="dark"] .ev-header-btn-login:hover {
+  background: #1e40af;
+  border-color: #1e40af;
+}
+html[data-theme="dark"] .ev-btn-gold {
+  color: #142b3b;
+}
+html[data-theme="dark"] .ev-step-num {
+  color: #142b3b;
+}
+
 *,
 *::before,
 *::after {
