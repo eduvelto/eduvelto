@@ -3,17 +3,19 @@
 // Owner-approved mobile mockup: হোম, আমার কোর্স, প্রগ্রেস, বেশি কিছু, মেনু.
 // This REPLACES the production bottom nav (Home, Books, Tests, Progress,
 // Profile). It is rendered on every page at ≤768px (see App.tsx) and the
-// 60px bottom clearance in App.tsx / index.css keeps it from covering
+// 76px bottom clearance in App.tsx / index.css keeps it from covering
 // content. The bar sits above the bottom ad banner when one is live
 // (bottomOffsetPx, same pattern as before). "বেশি কিছু" and "মেনু" open
-// bottom sheets instead of routing:
+// a right-side drawer instead of routing (owner 24 Nov 2026 09:38 —
+// the panel used to slide up from the bottom; it now enters from the
+// right and closes back to the right):
 //  - বেশি কিছু = secondary pages (Directory, Exams, Health, About,
 //    Founder, Contact, Privacy) + auth / Dashboard.
 //  - মেনু = the four main sections (Job / Admission / Academic / Skills)
 //    with their key destinations.
 // Sheets close on backdrop tap, Close button, or navigation.
 
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import { loginState } from '../lib/loginReturn';
 import { useAuth } from '../lib/auth';
@@ -113,18 +115,48 @@ export default function BottomNav(props: { bottomOffsetPx: number }) {
   // Sections audit (24 Nov 2026): return here after sign-in.
   const back = loginState(location.pathname + location.search);
   const [sheet, setSheet] = useState<Sheet>(null);
-
+  // Drawer close animation (owner 24 Nov 2026 09:38 — the panel must
+  // close back to the RIGHT, not vanish): while sheetClosing the drawer
+  // plays ev-sheet-out (200ms) and only then unmounts. Navigation
+  // closes instantly (the page itself changes, so no exit slide).
+  const [sheetClosing, setSheetClosing] = useState(false);
+  const sheetCloseTimer = useRef<number | null>(null);
+  const closeSheet = useCallback(() => {
+    if (sheet === null || sheetClosing) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      setSheet(null);
+      return;
+    }
+    setSheetClosing(true);
+    sheetCloseTimer.current = window.setTimeout(() => {
+      setSheet(null);
+      setSheetClosing(false);
+    }, 200);
+  }, [sheet, sheetClosing]);
   useEffect(() => {
+    if (sheetCloseTimer.current !== null) {
+      window.clearTimeout(sheetCloseTimer.current);
+      sheetCloseTimer.current = null;
+    }
+    setSheetClosing(false);
+    // Instant close on navigation — no exit slide while routing.
     setSheet(null);
   }, [location.pathname]);
+  useEffect(() => {
+    return () => {
+      if (sheetCloseTimer.current !== null) {
+        window.clearTimeout(sheetCloseTimer.current);
+      }
+    };
+  }, []);
 
   useEffect(() => {
     function onKey(e: KeyboardEvent) {
-      if (e.key === 'Escape') setSheet(null);
+      if (e.key === 'Escape') closeSheet();
     }
     if (sheet) document.addEventListener('keydown', onKey);
     return () => document.removeEventListener('keydown', onKey);
-  }, [sheet]);
+  }, [sheet, closeSheet]);
 
   const soonChip = <span className="ev-hnav-soon">{t({ bn: 'শীঘ্রই আসছে', en: 'Coming soon' })}</span>;
 
@@ -147,7 +179,11 @@ export default function BottomNav(props: { bottomOffsetPx: number }) {
           type="button"
           className={`ev-bottom-nav-link${sheet === 'more' ? ' ev-bottom-nav-link-active' : ''}`}
           aria-expanded={sheet === 'more'}
-          onClick={() => setSheet(sheet === 'more' ? null : 'more')}
+          onClick={() => {
+            if (sheetClosing) return;
+            if (sheet === 'more') closeSheet();
+            else setSheet('more');
+          }}
         >
           <GridIcon />
           <span>{tTab({ bn: 'বেশি কিছু', en: 'More' })}</span>
@@ -156,7 +192,11 @@ export default function BottomNav(props: { bottomOffsetPx: number }) {
           type="button"
           className={`ev-bottom-nav-link${sheet === 'menu' ? ' ev-bottom-nav-link-active' : ''}`}
           aria-expanded={sheet === 'menu'}
-          onClick={() => setSheet(sheet === 'menu' ? null : 'menu')}
+          onClick={() => {
+            if (sheetClosing) return;
+            if (sheet === 'menu') closeSheet();
+            else setSheet('menu');
+          }}
         >
           <MenuIcon />
           <span>{tTab({ bn: 'মেনু', en: 'Menu' })}</span>
@@ -164,9 +204,9 @@ export default function BottomNav(props: { bottomOffsetPx: number }) {
       </nav>
 
       {sheet ? (
-        <div className="ev-sheet-backdrop" onClick={() => setSheet(null)}>
+        <div className="ev-sheet-backdrop" onClick={closeSheet}>
           <div
-            className="ev-sheet"
+            className={sheetClosing ? 'ev-sheet ev-sheet-closing' : 'ev-sheet'}
             role="dialog"
             aria-modal="true"
             aria-label={sheet === 'more' ? t({ bn: 'বেশি কিছু', en: 'More' }) : t({ bn: 'মেনু', en: 'Menu' })}
@@ -176,7 +216,7 @@ export default function BottomNav(props: { bottomOffsetPx: number }) {
               <h2 style={{ fontSize: '1.05rem', margin: 0, color: 'var(--forest)' }}>
                 {sheet === 'more' ? t({ bn: 'বেশি কিছু', en: 'More' }) : t({ bn: 'মেনু', en: 'Menu' })}
               </h2>
-              <button type="button" className="ev-btn ev-btn-sm" onClick={() => setSheet(null)}>
+              <button type="button" className="ev-btn ev-btn-sm" onClick={closeSheet}>
                 ✕ {t({ bn: 'বন্ধ', en: 'Close' })}
               </button>
             </div>

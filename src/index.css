@@ -770,13 +770,19 @@ a:hover {
 
 /* App shell — reserves space for the fixed bottom nav (mobile) and the
    bottom ad banner (when live, via --ev-banner). The bar must never cover
-   content or buttons (PWA design-review must-fix). */
+   content or buttons (PWA design-review must-fix). The mobile reserve is
+   76px: the 60px nav (58px links + 2px top border) PLUS a 16px breathing
+   gap. The old 60px reserve left ZERO margin — at max scroll the
+   footer's bottom edge touched the nav's top edge (measured 0.4px
+   overlap at 360px, 24 Nov 2026), so on the owner's phone the last
+   content sat half-hidden behind the nav (owner 24 Nov 09:35:
+   "nicher bar tik hoini"). */
 .ev-app-shell {
   padding-bottom: var(--ev-banner, 0px);
 }
 @media (max-width: 768px) {
   .ev-app-shell {
-    padding-bottom: calc(60px + var(--ev-banner, 0px) + env(safe-area-inset-bottom, 0px));
+    padding-bottom: calc(76px + var(--ev-banner, 0px) + env(safe-area-inset-bottom, 0px));
   }
 }
 
@@ -2341,6 +2347,10 @@ a.ev-home-strip-link:hover {
     line-height: 1.2;
     text-decoration: none;
     cursor: pointer;
+    /* Labels never wrap: a wrapped label would grow the nav past its
+       60px height and eat into the shell's bottom clearance (the
+       24 Nov 2026 "nicher bar tik hoini" report). */
+    white-space: nowrap;
   }
   .ev-bottom-nav-link:hover {
     color: #fff;
@@ -2733,25 +2743,53 @@ a.ev-ceo-list-row:hover {
   }
 }
 
-/* Bottom sheets (বেশি কিছু / মেনু) — slide up above the bottom nav. */
+/* Right-side drawer (বেশি কিছু / মেনু) — slides in from the RIGHT edge.
+   Owner 24 Nov 2026 09:38: the panel used to slide up from the bottom;
+   it must enter from the right and close back to the right. Content,
+   items and behaviour are unchanged — only the entry direction. */
 .ev-sheet-backdrop {
   position: fixed;
   inset: 0;
-  z-index: 45;
+  /* z-index 80: MUST exceed the sticky header's 50. The drawer is
+     full-height, so its top sits under the header — at the old 45 the
+     header painted OVER the drawer's title + Close button and the
+     button was unclickable (caught by the fix probe, 24 Nov 2026).
+     Header dropdowns (60/70) live inside the header's own stacking
+     context, so 80 clears them too. */
+  z-index: 80;
   background: rgba(13, 30, 41, 0.5);
   display: flex;
-  align-items: flex-end;
-  justify-content: center;
+  align-items: stretch;
+  justify-content: flex-end;
 }
 .ev-sheet {
-  width: 100%;
-  max-width: 640px;
-  max-height: 70vh;
+  width: min(340px, 88vw);
+  max-width: 340px;
+  height: 100%;
+  max-height: 100%;
   overflow-y: auto;
-  border-radius: 18px 18px 0 0;
+  border-radius: 14px 0 0 14px;
   background: var(--card);
   padding: 18px 18px calc(20px + env(safe-area-inset-bottom, 0px));
-  box-shadow: 0 -8px 32px rgba(13, 30, 41, 0.25);
+  box-shadow: -8px 0 32px rgba(13, 30, 41, 0.25);
+  animation: ev-sheet-in 0.25s ease-out;
+}
+.ev-sheet-closing {
+  animation: ev-sheet-out 0.2s ease-in forwards;
+}
+@keyframes ev-sheet-in {
+  from { transform: translateX(100%); }
+  to { transform: translateX(0); }
+}
+@keyframes ev-sheet-out {
+  from { transform: translateX(0); }
+  to { transform: translateX(100%); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ev-sheet,
+  .ev-sheet-closing {
+    animation: none;
+  }
 }
 .ev-sheet-link {
   display: flex;
@@ -3665,9 +3703,15 @@ html[data-theme="dark"] .ev-header {
 /* stylish text on the app brand navy. The line changes instantly     */
 /* when the header language toggle changes (React re-render).         */
 /* Kept: home-only, NO Bismillah, dark mode correct.                  */
-/* Layout: exactly one line, never a second line. The attribution     */
-/* rides inside the line: hidden on mobile (the sentence alone        */
-/* fills a 390px line), shown inline on desktop.                      */
+/* Layout: the sentence WRAPS to a second line on narrow screens —
+   NEVER nowrap/ellipsis on this bar. The v5 one-line rule truncated
+   the sentence on the owner's phone (24 Nov 2026 09:35: "পড়ো তোমার
+   রবের নামে, যিনি সৃষ্টি করে..." — the 19px Bangla sentence measures
+   ~318px in the sandbox but renders wider on his phone's font, and
+   the one-line fit had zero margin; the English line at 14px measures
+   ~335px, wider than a 360px phone's 328px content width). A wrapped
+   second line is always better than a cut sentence. The attribution
+   rides inside the line: hidden on mobile, shown inline on desktop.  */
 /* ------------------------------------------------------------------ */
 
 .ev-hero-greeting {
@@ -3684,29 +3728,41 @@ html[data-theme="dark"] .ev-header {
   font-weight: 700;
   color: #ffffff;
   line-height: 1.5;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  /* Free wrapping (see the header comment): no white-space: nowrap,
+     no overflow: hidden, no text-overflow: ellipsis — ever. */
+  overflow-wrap: break-word;
+  /* v6 phase switch (owner 24 Nov 11:31 — ar → en → bn cycle): the
+     line re-mounts on every phase change (key={phase}), so this
+     gentle fade-in replays on each switch. Opacity only — the
+     Arabic letters and harakat are never distorted. */
+  animation: ev-greeting-fade-in 0.6s ease-out;
 }
-/* English: Poppins — clear, stylish, mobile-friendly.
-   14px mobile: the verbatim sentence is ~330px, so it fills a
-   390px line with room to spare (15px measured ~353px — too
-   tight against the 358px content width). letter-spacing 0. */
+@keyframes ev-greeting-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+/* Arabic: Amiri/Naskh serif — the ayah in its own script, rtl.
+   22px mobile (v3). */
+.ev-hero-greeting-line-ar {
+  font-family: 'Amiri', 'Traditional Arabic', 'Noto Naskh Arabic', serif;
+  font-size: 22px;
+}
+/* English: Poppins — clear, stylish, mobile-friendly. 14px mobile. */
 .ev-hero-greeting-line-en {
   font-family: 'Poppins', 'Hind Siliguri', system-ui, sans-serif;
   font-size: 14px;
   letter-spacing: 0;
 }
 /* Bangla: Noto Serif Bengali — stylish serif, clearly readable.
-   19px mobile: ~323px, fills the line comfortably. */
+   19px mobile. */
 .ev-hero-greeting-line-bn {
   font-family: 'Noto Serif Bengali', 'Hind Siliguri', system-ui, serif;
   font-size: 19px;
   font-weight: 600;
 }
-/* Attribution rides inside the line. Hidden on mobile: the
-   sentence alone fills a 390px line, and one line is the hard
-   requirement. Shown inline on desktop, where it fits. */
+/* Attribution rides inside the line. Hidden on mobile: the sentence
+   alone can fill (or wrap on) a narrow line. Shown inline on desktop,
+   where it fits. */
 .ev-hero-greeting-attr {
   display: none;
   font-family: 'Noto Serif Bengali', 'Hind Siliguri', system-ui, serif;
@@ -3721,7 +3777,15 @@ html[data-theme="dark"] .ev-hero-greeting {
 }
 @media (min-width: 641px) {
   .ev-hero-greeting { padding: 9px 16px; }
+  .ev-hero-greeting-line-ar { font-size: 24px; }
   .ev-hero-greeting-line-en { font-size: 20px; }
   .ev-hero-greeting-line-bn { font-size: 20px; }
   .ev-hero-greeting-attr { display: inline; font-size: 15px; }
+}
+/* Reduced motion: no fade, no cycle (the hook freezes the phase on
+   Arabic) — the static ayah shows instantly. */
+@media (prefers-reduced-motion: reduce) {
+  .ev-hero-greeting-line {
+    animation: none;
+  }
 }
