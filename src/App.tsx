@@ -183,6 +183,31 @@ function DashboardRedirect() {
 // Step 1: the header reflects the auth state, and a suspended account
 // (profile isActive === false) sees only the suspended screen — Auth
 // login still succeeds, but the app cannot be used (plan Step 1).
+// SCROLL RESTORATION (owner bug report 24 Nov 2026 07:58 — "kono button a
+// click korle nicher dikhe cole jai"): the app had NO scroll management at
+// all, so React Router kept the scroll position across navigations. When
+// the new page is data-backed (/library loads 609 books from Firestore)
+// the browser's scroll anchoring pins the viewport to the document
+// bottom while content grows — a tap on a content link (quick tile,
+// section card, sheet link) landed the user at the BOTTOM of the new
+// page (measured live 24 Nov: scrollY 53 -> 8222 = max scroll on
+// /library; 1500 -> 660 = max scroll on /exam). Taps on fixed-nav links
+// did not jump (no anchor in the scrolled content), which is why the bug
+// looked like "any button". Fix: reset scroll to the top on every route
+// change. The router is a plain BrowserRouter, so react-router's
+// <ScrollRestoration/> cannot be used (it needs a data router).
+// Back-button scroll positions are not restored by this — the standard
+// trade-off; landing at the top of a new page is the correct behaviour.
+// Non-navigating taps (sheet open/close, buttons) do not change the
+// pathname, so they are unaffected.
+function ScrollToTop() {
+  const { pathname } = useLocation();
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+  return null;
+}
+
 export default function App() {
   const { t } = useLanguage();
   const { profile, suspended, signOut } = useAuth();
@@ -255,6 +280,7 @@ export default function App() {
           : undefined
       }
     >
+      <ScrollToTop />
       {/* Light header (homepage redesign, 21 Nov 2026): Home pill + 4
           section dropdowns + search + dark-mode (Coming Soon) + auth.
           See components/HeaderNav.tsx. Hidden on /admin* and /ceo* —
