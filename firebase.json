@@ -263,6 +263,22 @@
       },
       {
         "destination": "/index.html",
+        "source": "/editorial-policy"
+      },
+      {
+        "destination": "/index.html",
+        "source": "/content-accuracy"
+      },
+      {
+        "destination": "/index.html",
+        "source": "/certificate-policy"
+      },
+      {
+        "destination": "/index.html",
+        "source": "/disclaimer"
+      },
+      {
+        "destination": "/index.html",
         "source": "/opportunities"
       },
       {
