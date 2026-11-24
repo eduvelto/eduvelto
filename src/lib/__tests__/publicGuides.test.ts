@@ -2,9 +2,10 @@
 // EXTENDED 24 Nov 2026, brand-SEO wave 2: 17 guides;
 // EXTENDED 24 Nov 2026, brand-SEO wave 3: 23 guides;
 // EXTENDED 24 Nov 2026, brand-SEO wave 4: 29 guides;
-// EXTENDED 24 Nov 2026, brand-SEO wave 5: 35 guides).
+// EXTENDED 24 Nov 2026, brand-SEO wave 5: 35 guides;
+// EXTENDED 24 Nov 2026, brand-SEO wave 10: 41 guides).
 //
-// The 35 guides are static public data, so the tests guard what
+// The 41 guides are static public data, so the tests guard what
 // matters most: exactly 35 guides with unique slugs/paths, 400–700
 // words each (pinned to the content pack's counts), every internal
 // link pointing at a real route, the draft status never claimed as
@@ -56,6 +57,13 @@ const EXPECTED_WORD_COUNTS: Record<string, number> = {
   'how-to-use-opportunity-hub': 402,
   'how-to-use-life-services': 409,
   'spoken-english-practice': 404,
+  // Brand-SEO wave 10 (24 Nov 2026): 6 new guides.
+  'goal-setting-students': 462,
+  'staying-focused-studying': 453,
+  'sleep-and-study': 428,
+  'reading-comprehension-strategies': 414,
+  'learning-with-phone': 413,
+  'asking-questions-class': 408,
 };
 
 const REAL_ROUTES = new Set([
@@ -104,6 +112,13 @@ const REAL_ROUTES = new Set([
   '/learn/how-to-use-opportunity-hub',
   '/learn/how-to-use-life-services',
   '/learn/spoken-english-practice',
+  // Brand-SEO wave 10 (24 Nov 2026): 6 new guide paths.
+  '/learn/goal-setting-students',
+  '/learn/staying-focused-studying',
+  '/learn/sleep-and-study',
+  '/learn/reading-comprehension-strategies',
+  '/learn/learning-with-phone',
+  '/learn/asking-questions-class',
   '/ai-assistant',
   '/library',
   '/opportunities/cv-builder',
@@ -115,11 +130,11 @@ const REAL_ROUTES = new Set([
 ]);
 
 describe('public guides', () => {
-  it('has exactly the 35 guides, with unique slugs, paths and titles', () => {
-    expect(PUBLIC_GUIDES).toHaveLength(35);
-    expect(new Set(PUBLIC_GUIDES.map((g) => g.slug)).size).toBe(35);
-    expect(new Set(PUBLIC_GUIDES.map((g) => g.path)).size).toBe(35);
-    expect(new Set(PUBLIC_GUIDES.map((g) => g.titleBn)).size).toBe(35);
+  it('has exactly the 41 guides, with unique slugs, paths and titles', () => {
+    expect(PUBLIC_GUIDES).toHaveLength(41);
+    expect(new Set(PUBLIC_GUIDES.map((g) => g.slug)).size).toBe(41);
+    expect(new Set(PUBLIC_GUIDES.map((g) => g.path)).size).toBe(41);
+    expect(new Set(PUBLIC_GUIDES.map((g) => g.titleBn)).size).toBe(41);
     for (const g of PUBLIC_GUIDES) {
       expect(g.path).toBe(`/learn/${g.slug}`);
       expect(publicGuideBySlug(g.slug)).toBe(g);
@@ -293,5 +308,39 @@ describe('public guides', () => {
       expect(text, `${slug} superlative`).not.toContain('সেরা');
       expect(g.titleEn, slug).not.toMatch(/best/i);
     }
+  });
+
+  it('wave-10 guides are general advice — no invented dates, years or fees', () => {
+    // Brand-SEO wave 10 (24 Nov 2026): the 6 new guides were written
+    // as general advice with no verifiable-facts claims, so they must
+    // contain no year (২০২x), no money (টাকা) and no superlative.
+    // Four candidates were SKIPPED, not written:
+    // viva-preparation-from-home (/jobs/viva + /opportunities/interview-prep
+    // already cover it); time-management-working-students (duplicates
+    // time-management-students + study-routine-job-seekers);
+    // exam-in-one-week (duplicates revision-strategy + exam-day-strategy
+    // + time-management-students); application-letter-guide (the AI
+    // Assistant letter builder covers it).
+    const wave10 = [
+      'goal-setting-students',
+      'staying-focused-studying',
+      'sleep-and-study',
+      'reading-comprehension-strategies',
+      'learning-with-phone',
+      'asking-questions-class',
+    ];
+    expect(wave10.length).toBe(6);
+    for (const slug of wave10) {
+      const g = publicGuideBySlug(slug)!;
+      const text = g.bodyBn.join(' ');
+      expect(text, `${slug} year`).not.toMatch(/২০২\d/);
+      expect(text, `${slug} fee`).not.toContain('টাকা');
+      expect(text, `${slug} superlative`).not.toContain('সেরা');
+      expect(g.titleEn, slug).not.toMatch(/best/i);
+    }
+    expect(publicGuideBySlug('viva-preparation-from-home')).toBeUndefined();
+    expect(publicGuideBySlug('time-management-working-students')).toBeUndefined();
+    expect(publicGuideBySlug('exam-in-one-week')).toBeUndefined();
+    expect(publicGuideBySlug('application-letter-guide')).toBeUndefined();
   });
 });

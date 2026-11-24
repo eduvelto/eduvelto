@@ -1258,6 +1258,66 @@ const STATIC_ROUTES: Record<string, RouteSeoEntry> = {
       'How to practise speaking English — speaking every day, mirror practice and not fearing mistakes. Draft lesson — awaiting teacher review.',
     crumbEn: 'Spoken English',
   },
+  '/learn/goal-setting-students': {
+    title: 'শিক্ষার্থীদের লক্ষ্য নির্ধারণ | Eduvelto',
+    description:
+      'শিক্ষার্থীদের লক্ষ্য নির্ধারণ কীভাবে করবেন — ছোট লক্ষ্য, পরিকল্পনা ও অগ্রগতি দেখা। খসড়া পাঠ — শিক্ষক যাচাইয়ের অপেক্ষায়।',
+    crumb: 'লক্ষ্য নির্ধারণ',
+    titleEn: 'Goal Setting for Students | Eduvelto',
+    descriptionEn:
+      'How students can set goals — small goals, planning and tracking progress. Draft lesson — awaiting teacher review.',
+    crumbEn: 'Goal Setting',
+  },
+  '/learn/staying-focused-studying': {
+    title: 'পড়ায় মনোযোগ ধরে রাখা | Eduvelto',
+    description:
+      'পড়ায় মনোযোগ ধরে রাখার উপায় — মনোযোগ নষ্ট হয় যেসব কারণে, সেগুলো সামলানো ও বিরতি নেওয়া। খসড়া পাঠ — শিক্ষক যাচাইয়ের অপেক্ষায়।',
+    crumb: 'মনোযোগ ধরে রাখা',
+    titleEn: 'Staying Focused While Studying | Eduvelto',
+    descriptionEn:
+      'How to stay focused while studying — handling distractions and taking breaks. Draft lesson — awaiting teacher review.',
+    crumbEn: 'Staying Focused',
+  },
+  '/learn/sleep-and-study': {
+    title: 'ঘুম ও পড়াশোনা | Eduvelto',
+    description:
+      'ঘুম ও পড়াশোনার সম্পর্ক — নিয়মিত ঘুমের অভ্যাস, পরীক্ষার আগের রাত ও বিশ্রাম। খসড়া পাঠ — শিক্ষক যাচাইয়ের অপেক্ষায়।',
+    crumb: 'ঘুম ও পড়াশোনা',
+    titleEn: 'Sleep and Study | Eduvelto',
+    descriptionEn:
+      'Sleep and study — regular sleep habits, the night before an exam and rest. Draft lesson — awaiting teacher review.',
+    crumbEn: 'Sleep and Study',
+  },
+  '/learn/reading-comprehension-strategies': {
+    title: 'পড়া বুঝে পড়ার কৌশল | Eduvelto',
+    description:
+      'পড়া বুঝে পড়ার কৌশল — প্রশ্ন করা, সারাংশ লেখা ও নিজের ভাষায় বোঝানো। খসড়া পাঠ — শিক্ষক যাচাইয়ের অপেক্ষায়।',
+    crumb: 'পড়া বুঝে পড়া',
+    titleEn: 'Reading Comprehension Strategies | Eduvelto',
+    descriptionEn:
+      'Reading comprehension strategies — asking questions, summarising and explaining in your own words. Draft lesson — awaiting teacher review.',
+    crumbEn: 'Reading Comprehension',
+  },
+  '/learn/learning-with-phone': {
+    title: 'ফোন দিয়ে পড়াশোনা | Eduvelto',
+    description:
+      'ফোন দিয়ে পড়াশোনা — নোট, সময় ধরে পড়া, ভিডিও দেখা ও মনোযোগ নষ্ট না করা। খসড়া পাঠ — শিক্ষক যাচাইয়ের অপেক্ষায়।',
+    crumb: 'ফোন দিয়ে পড়া',
+    titleEn: 'Learning with Your Phone | Eduvelto',
+    descriptionEn:
+      'Learning with your phone — notes, timed study, watching lessons and avoiding distractions. Draft lesson — awaiting teacher review.',
+    crumbEn: 'Learning with Phone',
+  },
+  '/learn/asking-questions-class': {
+    title: 'ক্লাসে প্রশ্ন করা | Eduvelto',
+    description:
+      'ক্লাসে প্রশ্ন করার উপায় — কখন প্রশ্ন করবেন, কীভাবে গুছিয়ে বলবেন ও ভয় কাটাবেন। খসড়া পাঠ — শিক্ষক যাচাইয়ের অপেক্ষায়।',
+    crumb: 'ক্লাসে প্রশ্ন করা',
+    titleEn: 'Asking Questions in Class | Eduvelto',
+    descriptionEn:
+      'How to ask questions in class — when to ask, how to phrase it and how to lose the fear. Draft lesson — awaiting teacher review.',
+    crumbEn: 'Asking Questions',
+  },
 };
 
 // ---------------------------------------------------------------------------
@@ -1737,7 +1797,7 @@ export function resolveRouteSeo(pathname: string, lang: 'bn' | 'en' = 'bn'): Seo
   }
   if (path === '/learn') {
     // ItemList (24 Nov 2026, SEO pass; EXTENDED brand-SEO wave 1,
-    // wave 2, wave 3, wave 4 and wave 5): the hub lists the 35 public guides, the
+    // wave 2, wave 3, wave 4, wave 5 and wave 10): the hub lists the 41 public guides, the
     // two real lessons and the BCS English practice hub — the same
     // links the page renders, in the same order.
     jsonLd.push({
@@ -1958,18 +2018,54 @@ export function resolveRouteSeo(pathname: string, lang: 'bn' | 'en' = 'bn'): Seo
         {
           '@type': 'ListItem',
           position: 36,
+          name: lang === 'bn' ? 'শিক্ষার্থীদের লক্ষ্য নির্ধারণ' : 'Goal Setting for Students',
+          url: `${SITE_URL}/learn/goal-setting-students`,
+        },
+        {
+          '@type': 'ListItem',
+          position: 37,
+          name: lang === 'bn' ? 'পড়ায় মনোযোগ ধরে রাখা' : 'Staying Focused While Studying',
+          url: `${SITE_URL}/learn/staying-focused-studying`,
+        },
+        {
+          '@type': 'ListItem',
+          position: 38,
+          name: lang === 'bn' ? 'ঘুম ও পড়াশোনা' : 'Sleep and Study',
+          url: `${SITE_URL}/learn/sleep-and-study`,
+        },
+        {
+          '@type': 'ListItem',
+          position: 39,
+          name: lang === 'bn' ? 'পড়া বুঝে পড়ার কৌশল' : 'Reading Comprehension Strategies',
+          url: `${SITE_URL}/learn/reading-comprehension-strategies`,
+        },
+        {
+          '@type': 'ListItem',
+          position: 40,
+          name: lang === 'bn' ? 'ফোন দিয়ে পড়াশোনা' : 'Learning with Your Phone',
+          url: `${SITE_URL}/learn/learning-with-phone`,
+        },
+        {
+          '@type': 'ListItem',
+          position: 41,
+          name: lang === 'bn' ? 'ক্লাসে প্রশ্ন করা' : 'Asking Questions in Class',
+          url: `${SITE_URL}/learn/asking-questions-class`,
+        },
+        {
+          '@type': 'ListItem',
+          position: 42,
           name: lang === 'bn' ? 'টেন্স — পাঠ' : 'Tense — Lesson',
           url: `${SITE_URL}/learn/bcs-english-tense`,
         },
         {
           '@type': 'ListItem',
-          position: 37,
+          position: 43,
           name: lang === 'bn' ? 'প্রিপোজিশন — পাঠ' : 'Preposition — Lesson',
           url: `${SITE_URL}/learn/bcs-english-preposition`,
         },
         {
           '@type': 'ListItem',
-          position: 38,
+          position: 44,
           name: lang === 'bn' ? 'বিসিএস ইংরেজি অনুশীলন' : 'BCS English Practice',
           url: `${SITE_URL}/jobs/bcs/practice/english`,
         },

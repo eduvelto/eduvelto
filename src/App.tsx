@@ -494,6 +494,12 @@ export default function App() {
         <Route path="/learn/how-to-use-opportunity-hub" element={<PublicGuidePage guide="how-to-use-opportunity-hub" />} />
         <Route path="/learn/how-to-use-life-services" element={<PublicGuidePage guide="how-to-use-life-services" />} />
         <Route path="/learn/spoken-english-practice" element={<PublicGuidePage guide="spoken-english-practice" />} />
+        <Route path="/learn/goal-setting-students" element={<PublicGuidePage guide="goal-setting-students" />} />
+        <Route path="/learn/staying-focused-studying" element={<PublicGuidePage guide="staying-focused-studying" />} />
+        <Route path="/learn/sleep-and-study" element={<PublicGuidePage guide="sleep-and-study" />} />
+        <Route path="/learn/reading-comprehension-strategies" element={<PublicGuidePage guide="reading-comprehension-strategies" />} />
+        <Route path="/learn/learning-with-phone" element={<PublicGuidePage guide="learning-with-phone" />} />
+        <Route path="/learn/asking-questions-class" element={<PublicGuidePage guide="asking-questions-class" />} />
         {/* Global Opportunity Hub (directive §3B): static guide
             routes MUST come before /opportunities/:oppId —
             otherwise '/opportunities/cv-builder' matches
