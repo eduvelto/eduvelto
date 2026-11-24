@@ -160,6 +160,13 @@ const SITEMAP_URLS = [
   '/learn/english-vocabulary-building',
   '/learn/effective-reading-habits',
   '/learn/self-motivation-students',
+  // Brand-SEO wave 5 (24 Nov 2026): 6 more public guides.
+  '/learn/how-to-use-free-library',
+  '/learn/how-to-use-job-practice',
+  '/learn/how-to-use-ai-assistant',
+  '/learn/how-to-use-opportunity-hub',
+  '/learn/how-to-use-life-services',
+  '/learn/spoken-english-practice',
   '/learn',
   '/admissions',
   '/admissions/national-university',
@@ -984,7 +991,7 @@ describe('resolveRouteSeo — SEO pass 24 Nov 2026 (owner order "SEO korba ajk 1
     }
   });
 
-  it('/learn hub emits an ItemList of its 29 guides + 2 lessons + the practice hub', () => {
+  it('/learn hub emits an ItemList of its 35 guides + 2 lessons + the practice hub', () => {
     const seo = resolveRouteSeo('/learn')!;
     const items = itemListOf(seo)['itemListElement'] as Array<Record<string, unknown>>;
     expect(items.map((i) => i['url'])).toEqual([
@@ -1017,6 +1024,12 @@ describe('resolveRouteSeo — SEO pass 24 Nov 2026 (owner order "SEO korba ajk 1
       `${SITE_URL}/learn/english-vocabulary-building`,
       `${SITE_URL}/learn/effective-reading-habits`,
       `${SITE_URL}/learn/self-motivation-students`,
+      `${SITE_URL}/learn/how-to-use-free-library`,
+      `${SITE_URL}/learn/how-to-use-job-practice`,
+      `${SITE_URL}/learn/how-to-use-ai-assistant`,
+      `${SITE_URL}/learn/how-to-use-opportunity-hub`,
+      `${SITE_URL}/learn/how-to-use-life-services`,
+      `${SITE_URL}/learn/spoken-english-practice`,
       `${SITE_URL}/learn/bcs-english-tense`,
       `${SITE_URL}/learn/bcs-english-preposition`,
       `${SITE_URL}/jobs/bcs/practice/english`,
@@ -1126,8 +1139,8 @@ describe('resolveRouteSeo — brand-SEO wave 1 (24 Nov 2026)', () => {
     }
   });
 
-  it('all 29 guides resolve with draft wording and Article JSON-LD', () => {
-    expect(PUBLIC_GUIDES).toHaveLength(29);
+  it('all 35 guides resolve with draft wording and Article JSON-LD', () => {
+    expect(PUBLIC_GUIDES).toHaveLength(35);
     for (const guide of PUBLIC_GUIDES) {
       const seo = resolveRouteSeo(guide.path);
       expect(seo, `no SEO for ${guide.path}`).not.toBeNull();
@@ -1305,8 +1318,8 @@ describe('resolveRouteSeo — English SEO (24 Nov 2026, language system)', () =>
 });
 
 describe('resolveRouteSeo — brand-SEO wave 2 (24 Nov 2026)', () => {
-  it('sitemap has 106 URLs (100 wave-3 + 6 wave-4 guides)', () => {
-    expect(SITEMAP_URLS.length).toBe(106);
+  it('sitemap has 112 URLs (106 wave-4 + 6 wave-5 guides)', () => {
+    expect(SITEMAP_URLS.length).toBe(112);
   });
 
   it('English home title drops "Best"; Bangla title is unchanged', () => {

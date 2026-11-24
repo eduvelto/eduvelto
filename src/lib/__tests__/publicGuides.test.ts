@@ -1,10 +1,11 @@
 // Eduvelto — public guides unit tests (24 Nov 2026, brand-SEO wave 1;
 // EXTENDED 24 Nov 2026, brand-SEO wave 2: 17 guides;
 // EXTENDED 24 Nov 2026, brand-SEO wave 3: 23 guides;
-// EXTENDED 24 Nov 2026, brand-SEO wave 4: 29 guides).
+// EXTENDED 24 Nov 2026, brand-SEO wave 4: 29 guides;
+// EXTENDED 24 Nov 2026, brand-SEO wave 5: 35 guides).
 //
-// The 29 guides are static public data, so the tests guard what
-// matters most: exactly 29 guides with unique slugs/paths, 400–700
+// The 35 guides are static public data, so the tests guard what
+// matters most: exactly 35 guides with unique slugs/paths, 400–700
 // words each (pinned to the content pack's counts), every internal
 // link pointing at a real route, the draft status never claimed as
 // verified/approved, and nothing from the pack's "Unverified — do
@@ -48,6 +49,13 @@ const EXPECTED_WORD_COUNTS: Record<string, number> = {
   'english-vocabulary-building': 433,
   'effective-reading-habits': 435,
   'self-motivation-students': 431,
+  // Brand-SEO wave 5 (24 Nov 2026): 6 new guides.
+  'how-to-use-free-library': 418,
+  'how-to-use-job-practice': 401,
+  'how-to-use-ai-assistant': 406,
+  'how-to-use-opportunity-hub': 402,
+  'how-to-use-life-services': 409,
+  'spoken-english-practice': 404,
 };
 
 const REAL_ROUTES = new Set([
@@ -88,14 +96,30 @@ const REAL_ROUTES = new Set([
   '/learn/english-vocabulary-building',
   '/learn/effective-reading-habits',
   '/learn/self-motivation-students',
+  // Brand-SEO wave 5 (24 Nov 2026): 6 new guide paths + the new
+  // link targets the wave-5 guides use.
+  '/learn/how-to-use-free-library',
+  '/learn/how-to-use-job-practice',
+  '/learn/how-to-use-ai-assistant',
+  '/learn/how-to-use-opportunity-hub',
+  '/learn/how-to-use-life-services',
+  '/learn/spoken-english-practice',
+  '/ai-assistant',
+  '/library',
+  '/opportunities/cv-builder',
+  '/opportunities/interview-prep',
+  '/opportunities/career-guidance',
+  '/life/calculators',
+  '/life/converters',
+  '/life/health',
 ]);
 
 describe('public guides', () => {
-  it('has exactly the 29 guides, with unique slugs, paths and titles', () => {
-    expect(PUBLIC_GUIDES).toHaveLength(29);
-    expect(new Set(PUBLIC_GUIDES.map((g) => g.slug)).size).toBe(29);
-    expect(new Set(PUBLIC_GUIDES.map((g) => g.path)).size).toBe(29);
-    expect(new Set(PUBLIC_GUIDES.map((g) => g.titleBn)).size).toBe(29);
+  it('has exactly the 35 guides, with unique slugs, paths and titles', () => {
+    expect(PUBLIC_GUIDES).toHaveLength(35);
+    expect(new Set(PUBLIC_GUIDES.map((g) => g.slug)).size).toBe(35);
+    expect(new Set(PUBLIC_GUIDES.map((g) => g.path)).size).toBe(35);
+    expect(new Set(PUBLIC_GUIDES.map((g) => g.titleBn)).size).toBe(35);
     for (const g of PUBLIC_GUIDES) {
       expect(g.path).toBe(`/learn/${g.slug}`);
       expect(publicGuideBySlug(g.slug)).toBe(g);
@@ -242,5 +266,32 @@ describe('public guides', () => {
     }
     expect(publicGuideBySlug('career-planning-basics')).toBeUndefined();
     expect(publicGuideBySlug('freelancing-basics-students')).toBeUndefined();
+  });
+
+  it('wave-5 guides are general advice — no invented dates, years or fees', () => {
+    // Brand-SEO wave 5 (24 Nov 2026): the 6 new guides were written
+    // as general advice with no verifiable-facts claims, so they must
+    // contain no year (২০২x), no money (টাকা) and no superlative.
+    // Nothing was skipped: all 6 briefed topics are new — no existing
+    // page covers how to use the library, job practice, AI assistant,
+    // opportunity hub or life services, and no guide covers spoken
+    // English practice (the writing/vocabulary guides differ).
+    const wave5 = [
+      'how-to-use-free-library',
+      'how-to-use-job-practice',
+      'how-to-use-ai-assistant',
+      'how-to-use-opportunity-hub',
+      'how-to-use-life-services',
+      'spoken-english-practice',
+    ];
+    expect(wave5.length).toBe(6);
+    for (const slug of wave5) {
+      const g = publicGuideBySlug(slug)!;
+      const text = g.bodyBn.join(' ');
+      expect(text, `${slug} year`).not.toMatch(/২০২\d/);
+      expect(text, `${slug} fee`).not.toContain('টাকা');
+      expect(text, `${slug} superlative`).not.toContain('সেরা');
+      expect(g.titleEn, slug).not.toMatch(/best/i);
+    }
   });
 });
