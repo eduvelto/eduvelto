@@ -3640,75 +3640,54 @@ html[data-theme="dark"] .ev-header {
 }
 
 /* ------------------------------------------------------------------ */
-/* Homepage hero-band greeting, v3 (owner's FORMAL revised brief     */
-/* 24 Nov 2026 00:29 — supersedes the 23:01 brief and the 00:22      */
-/* no-Arabic reading; Arabic IS included).                           */
-/* The top sticky greeting bar is DELETED (owner 00:22 — the          */
-/* Bismillah/ayah appeared twice on the homepage). This band,         */
-/* directly below the Navigation Menu, is the ONLY Welcome Bar.      */
-/* It carries Surah Al-Alaq's first ayah in THREE languages, one at  */
-/* a time — Arabic → English → Bangla → Arabic — exactly ONE line,   */
-/* never more than one language at once. NO Bismillah anywhere in    */
-/* the bar, no extra Arabic text, no "Assalamu Alaikum", no rotating  */
-/* welcome lines.                                                     */
-/* Design (brief 00:29 + owner additions 00:31–00:32): Premium Deep  */
-/* Islamic Green background with a subtle premium gradient; text     */
-/* FULLY WHITE, bold, clear; Arabic in Amiri (already loaded);       */
-/* English in Poppins, Bangla in Noto Serif Bengali — all stylish    */
-/* but clearly readable. Small premium height (~half the old hero     */
-/* band, ~60px); a small 1px gold border so the eye can see it.      */
-/* PALETTE HARMONY (owner 00:31): the green sits inside the app's    */
-/* own palette — Forest Navy #142b3b / --forest-deep #0d1e29 + Teal   */
-/* #168c82 / --teal-deep #12766e + Amber gold --amber #d9a441 (dark:  */
-/* #e8b64c). The gradient runs deep green → the app's --teal-deep    */
-/* at the right edge, and the border + sweep use var(--amber), so     */
-/* the gold matches the app's gold in BOTH light and dark mode.       */
-/* White bold text on the deep green is ~7:1 contrast; on the teal   */
-/* end ~5:1 — readable in both modes. The band carries its own       */
-/* background + border, so it reads identically on the light page    */
-/* (--bg #f4f1e9) and the dark page (--bg #0f1b24); dark mode is      */
-/* REAL in this app (lib/theme.tsx: OS preference + stored choice →  */
-/* data-theme on <html>; HeaderNav moon/sun toggle). No separate     */
-/* dark band colours are needed — verified by the Playwright          */
-/* dark-mode probe (see evidence).                                    */
-/* EYE-CATCHING ANIMATIONS (owner 00:31, parent-decided set) — all   */
-/* slow, respectful, no flashing, no fast movement; the ayah's       */
-/* dignity sets the ceiling, nothing louder is added (no bouncing,   */
-/* no flashing, no extra icons, no size pulsing):                     */
-/* (a) language change = soft fade + gentle upward slide of the      */
-/*     WHOLE line (transform on the line element only — the Arabic    */
-/*     letters and harakat are never transformed individually);       */
-/* (b) slow gold GLOW pulse on the text, whole line at once          */
-/*     (text-shadow on the active line's span, 6s);                   */
-/* (c) a thin gold line along the bottom edge that slowly sweeps     */
-/*     from one side to the other, looping gently (9s) — the          */
-/*     eye-catcher that never touches the ayah text itself.           */
-/* Reduced motion: ALL THREE off (media query below) — static        */
-/* Arabic line only, no timer (see useHeroGreetingCycle).             */
-/*                                                                      */
-/* Layout: the three lines share one grid cell, so the band is        */
-/* exactly one line tall and never reflows when the phase changes.    */
-/* Only the active line is visible (slow 1.2s fade + slide).          */
-/* Attribution ("সূরা আলাক, আয়াত ১।") rides inside the Bangla line:  */
-/* it fits on desktop beside the sentence, but on mobile (390px) the  */
-/* Bangla sentence alone fills the line, so the attribution span is   */
-/* hidden there — one line is the hard requirement, a second line is   */
-/* never allowed.                                                      */
+/* Homepage hero-band greeting, v4 (owner revisions 24 Nov 2026       */
+/* 07:11 + 07:14 — supersedes v3).                                     */
+/* Shape: a TIGHT SMALL PILL like the red "সর্বোচ্চ অগ্রাধিকার" badge  */
+/* on the home cards (badge: padding 3px 9px, radius 999px) — the      */
+/* text FILLS the pill; NOT a big rectangle, no white gap above: the   */
+/* pill is mounted OUTSIDE PageShell (HomePage returns it before the   */
+/* shell, whose 28px top padding made the gap), flush under the nav,   */
+/* width: fit-content so it hugs the widest line, centred.             */
+/* Colour: app BRAND palette (brand guide §2 — NO green anywhere):     */
+/* Deep Navy #0A1F44 base, gold #F5A623 accents. Dark mode: the navy   */
+/* lifts slightly (html[data-theme="dark"] override below).            */
+/* Language: TWO phases — Arabic, then the translation in the user's   */
+/* chosen language (header toggle's tabLang: Bangla by default,        */
+/* English when set to English). Arabic always stays, exact, harakat   */
+/* never distorted. Attribution follows the same language.             */
+/* NO Bismillah anywhere; exactly ONE line, one language at a time.    */
+/* Border animations (owner 07:14 — varied, dignified, never flashing  */
+/* or bouncing): (a) slowly FLOWING gold gradient border (10s, the     */
+/* border-box gradient slides one full tile per loop, seamless);       */
+/* (b) soft outer GLOW pulse on the pill (8s); (c) the thin gold       */
+/* sweep line (9s, kept from v3); plus the text glow pulse (6s, kept). */
+/* Reduced motion: ALL off (media query below) — static Arabic line    */
+/* only, no timer (see useHeroGreetingCycle).                           */
+/* Layout: the two lines share one grid cell, so the pill is exactly   */
+/* one line tall and never reflows when the phase changes. Only the    */
+/* active line is visible (slow 1.2s fade + slide). Attribution rides  */
+/* inside the translation line: hidden on mobile (the sentence alone   */
+/* fills the line), shown inline on desktop.                           */
 /* ------------------------------------------------------------------ */
 
 .ev-hero-greeting {
+  --ev-greeting-bg: #0a1f44;
   position: relative;
   display: grid;
-  margin: 10px 12px;
-  padding: 12px 10px;
+  width: fit-content;
+  max-width: calc(100% - 16px);
+  margin: 0 auto;
+  padding: 6px 12px;
   overflow: hidden;
+  border: 1px solid transparent;
+  border-radius: 999px;
   background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0) 45%),
-    linear-gradient(90deg, #062e22 0%, #0b3d2e 55%, #12766e 100%);
-  border: 1px solid var(--amber);
-  border-radius: 10px;
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.14), inset 0 -1px 0 rgba(0, 0, 0, 0.28);
+    linear-gradient(var(--ev-greeting-bg), var(--ev-greeting-bg)) padding-box,
+    linear-gradient(90deg, #f5a623 0%, #7a5200 25%, #f1b308 50%, #7a5200 75%, #f5a623 100%) border-box;
+  background-size: 100% 100%, 200% 100%;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12), 0 0 6px rgba(245, 166, 35, 0.15);
   text-align: center;
+  animation: ev-hero-greeting-border-flow 10s linear infinite, ev-hero-greeting-border-glow 8s ease-in-out infinite;
 }
 .ev-hero-greeting-line {
   grid-area: 1 / 1;
@@ -3717,7 +3696,7 @@ html[data-theme="dark"] .ev-header {
   margin: 0;
   font-weight: 700;
   color: #ffffff;
-  line-height: 1.6;
+  line-height: 1.5;
   white-space: nowrap;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.45);
   opacity: 0;
@@ -3727,30 +3706,30 @@ html[data-theme="dark"] .ev-header {
 }
 /* Arabic: Amiri calligraphy — beautiful and accurate, already
    loaded in index.html. No animation on the letters themselves.
-   22px mobile: the ayah is short (141px at 17px), so it reads
-   larger without coming near the one-line limit. */
+   28px mobile: the ayah is short (~232px), so it reads large and
+   fills the pill without coming near the one-line limit. */
 .ev-hero-greeting-line-ar {
   font-family: 'Amiri', 'Traditional Arabic', 'Noto Naskh Arabic', serif;
-  font-size: 22px;
+  font-size: 28px;
 }
 /* English: Poppins — clear, stylish, mobile-friendly.
-   13px mobile: the verbatim sentence is 353px at 15px and the
-   390px line area is 312px — 13px (~300px) is the largest size
-   that fits one line with room to spare. letter-spacing 0. */
+   14px mobile: the verbatim sentence is 353px at 15px, so 14px
+   (~330px) is the largest size that fills the pill with room to
+   spare inside the 374px max width. letter-spacing 0. */
 .ev-hero-greeting-line-en {
   font-family: 'Poppins', 'Hind Siliguri', system-ui, sans-serif;
-  font-size: 13px;
+  font-size: 14px;
   letter-spacing: 0;
 }
 /* Bangla: Noto Serif Bengali — stylish serif, clearly readable.
-   16px mobile: 272px, fits the 312px line area comfortably. */
+   19px mobile: ~323px, fills the pill comfortably. */
 .ev-hero-greeting-line-bn {
   font-family: 'Noto Serif Bengali', 'Hind Siliguri', system-ui, serif;
-  font-size: 16px;
+  font-size: 19px;
   font-weight: 600;
 }
-/* Attribution rides inside the Bangla line. Hidden on mobile: the
-   Bangla sentence alone fills a 390px line, and one line is the hard
+/* Attribution rides inside the translation line. Hidden on mobile:
+   the sentence alone fills a 390px line, and one line is the hard
    requirement. Shown inline on desktop, where it fits. */
 .ev-hero-greeting-attr {
   display: none;
@@ -3765,16 +3744,29 @@ html[data-theme="dark"] .ev-header {
   transform: translateY(0);
   transition: opacity 1.2s ease, transform 1.2s ease, visibility 0s;
 }
-/* (b) Slow gold GLOW pulse on the active line's text — the WHOLE
-   line at once (one text-shadow on the span), never per-letter:
-   per-letter animation on the Arabic line would distort
-   letterforms, so it is forbidden here. 6s, gentle. */
+/* Text glow pulse on the active line — the WHOLE line at once (one
+   text-shadow on the span), never per-letter: per-letter animation
+   on the Arabic line would distort letterforms, so it is forbidden
+   here. 6s, gentle. */
 .ev-hero-greeting-line[data-active="true"] .ev-hero-greeting-text {
   animation: ev-hero-greeting-glow 6s ease-in-out infinite;
 }
 @keyframes ev-hero-greeting-glow {
   0%, 100% { text-shadow: 0 0 6px rgba(217, 164, 65, 0.25), 0 1px 2px rgba(0, 0, 0, 0.45); }
   50% { text-shadow: 0 0 16px rgba(217, 164, 65, 0.6), 0 1px 2px rgba(0, 0, 0, 0.45); }
+}
+/* (a) Flowing gold gradient border: the border-box gradient is 200%
+   wide and tiles seamlessly (both ends #f5a623), so sliding its
+   position 0% → 200% moves exactly one tile — a slow, endless flow
+   around the pill. 10s, linear. */
+@keyframes ev-hero-greeting-border-flow {
+  from { background-position: 0 0, 0% 0; }
+  to { background-position: 0 0, 200% 0; }
+}
+/* (b) Soft outer glow pulse on the pill itself. 8s, gentle. */
+@keyframes ev-hero-greeting-border-glow {
+  0%, 100% { box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12), 0 0 6px rgba(245, 166, 35, 0.15); }
+  50% { box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12), 0 0 18px rgba(245, 166, 35, 0.45); }
 }
 /* (c) Thin gold line along the bottom edge that slowly sweeps from
    one side to the other, looping gently — the eye-catcher that never
@@ -3786,18 +3778,23 @@ html[data-theme="dark"] .ev-header {
   width: 36%;
   height: 2px;
   pointer-events: none;
-  background: linear-gradient(90deg, transparent, var(--amber), transparent);
+  background: linear-gradient(90deg, transparent, #f5a623, transparent);
   animation: ev-hero-greeting-sweep 9s linear infinite;
 }
 @keyframes ev-hero-greeting-sweep {
   from { transform: translateX(-110%); }
   to { transform: translateX(310%); }
 }
+/* Dark mode: lift the navy slightly so the pill still reads as a
+   distinct band on the dark page (--bg #0f1b24). Gold stays. */
+html[data-theme="dark"] .ev-hero-greeting {
+  --ev-greeting-bg: #0d2650;
+}
 @media (min-width: 641px) {
-  .ev-hero-greeting { margin: 12px 24px; padding: 16px 20px; }
-  .ev-hero-greeting-line-ar { font-size: 24px; }
-  .ev-hero-greeting-line-en { font-size: 18px; }
-  .ev-hero-greeting-line-bn { font-size: 18px; }
+  .ev-hero-greeting { padding: 8px 16px; }
+  .ev-hero-greeting-line-ar { font-size: 30px; }
+  .ev-hero-greeting-line-en { font-size: 20px; }
+  .ev-hero-greeting-line-bn { font-size: 20px; }
   .ev-hero-greeting-attr { display: inline; font-size: 15px; }
 }
 @media (prefers-reduced-motion: reduce) {

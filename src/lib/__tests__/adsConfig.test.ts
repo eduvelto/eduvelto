@@ -12,6 +12,7 @@ import {
   getAdRenderState,
   getBannerPlacementForPath,
   getBannerReservePx,
+  getBottomNavOffsetPx,
   getPageAdType,
   isInPageSlotAllowed,
   isPreviewHostname,
@@ -239,5 +240,44 @@ describe('getAdRenderState', () => {
     } finally {
       delete (globalThis as unknown as { window?: unknown }).window;
     }
+  });
+});
+
+describe('getBottomNavOffsetPx', () => {
+  it('sits the nav above the banner while the banner is rendered', () => {
+    expect(
+      getBottomNavOffsetPx({
+        bannerVisible: true,
+        bannerReservePx: 112,
+        bannerCollapsed: false,
+      }),
+    ).toBe(112);
+  });
+
+  it('drops the nav to the viewport bottom when the banner collapses (unfilled)', () => {
+    expect(
+      getBottomNavOffsetPx({
+        bannerVisible: true,
+        bannerReservePx: 112,
+        bannerCollapsed: true,
+      }),
+    ).toBe(0);
+  });
+
+  it('is 0 when no banner is placed at all', () => {
+    expect(
+      getBottomNavOffsetPx({
+        bannerVisible: false,
+        bannerReservePx: 112,
+        bannerCollapsed: false,
+      }),
+    ).toBe(0);
+    expect(
+      getBottomNavOffsetPx({
+        bannerVisible: false,
+        bannerReservePx: 0,
+        bannerCollapsed: false,
+      }),
+    ).toBe(0);
   });
 });

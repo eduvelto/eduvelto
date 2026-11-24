@@ -1,53 +1,92 @@
-// Eduvelto — homepage hero-band greeting, v3 (owner's FORMAL revised
-// brief 24 Nov 2026 00:29 — SUPERSEDES both the 23:01 brief and the
-// 00:22 no-Arabic reading; Arabic IS included).
+// Eduvelto — homepage hero-band greeting, v4 (owner revisions 24 Nov 2026
+// 07:11 + 07:14 — SUPERSEDES v3).
 //
-// The top sticky greeting bar is DELETED (App.tsx no longer mounts
-// GreetingBar; the component + CSS + tests are removed). This band,
-// directly below the Navigation Menu, is the ONLY Welcome Bar.
-//
-// The bar carries Surah Al-Alaq's first ayah in THREE languages, in
-// sequence — Arabic first, then English, then Bangla, then back to
-// Arabic. NEVER more than one language at once; exactly one language
-// and ONE LINE at a time. No Bismillah anywhere in the bar, no extra
-// Arabic text, no "Assalamu Alaikum", no rotating welcome lines.
+// v4 changes vs v3:
+// - SHAPE: a tight small pill like the red "সর্বোচ্চ অগ্রাধিকার" badge on
+//   the home cards (badge: padding 3px 9px, radius 999px) — the text
+//   FILLS the pill; NOT a big rectangle. The pill hugs the widest line
+//   (width: fit-content, centred) and sits flush directly below the nav
+//   — mounted OUTSIDE PageShell (HomePage returns it before the shell,
+//   whose 28px top padding made the white gap above the band).
+// - COLOUR: app BRAND palette (brand guide §2 — NO green anywhere):
+//   Deep Navy #0A1F44 base, gold #F5A623 accents. Dark mode matches.
+// - LANGUAGE: TWO phases — Arabic, then the translation in the user's
+//   chosen language (the header toggle's tabLang: Bangla by default,
+//   English when set to English). Arabic always stays, exact, harakat
+//   never distorted. The attribution follows the same language.
+// - BORDER ANIMATIONS (owner 07:14 — varied, dignified, never flashing
+//   or bouncing): slowly flowing gold gradient border + soft outer glow
+//   pulse + the shimmer sweep; the text glow is kept.
+// - Kept from v3: ONE band only, below the nav; NO Bismillah; exactly
+//   one language at a time, ONE LINE, never clipped; smooth fade/slide
+//   on change; reduced-motion static Arabic; responsive; Page Speed /
+//   SEO / Navigation / AdSense unharmed.
 //
 // Strings (brief 00:29 — verbatim, never re-translate or alter the
 // Arabic):
 import { useEffect, useState } from 'react';
+import { useLanguage } from '../i18n/LanguageContext';
+import type { Lang } from '../i18n/strings';
 
 export const HERO_GREETING_AR = 'اقْرَأْ بِاسْمِ رَبِّكَ الَّذِي خَلَقَ';
 export const HERO_GREETING_EN = 'Read in the name of your Lord who created.';
 export const HERO_GREETING_BN = 'পড়ো তোমার রবের নামে, যিনি সৃষ্টি করেছেন।';
-export const HERO_GREETING_ATTR = 'সূরা আলাক, আয়াত ১।';
+export const HERO_GREETING_ATTR_BN = 'সূরা আলাক, আয়াত ১।';
+export const HERO_GREETING_ATTR_EN = 'Surah Al-Alaq, Ayah 1.';
+// Back-compat: the Bangla attribution (default language).
+export const HERO_GREETING_ATTR = HERO_GREETING_ATTR_BN;
 
-// Attribution: rendered inside the Bangla line (see the component).
-// It fits on desktop beside the Bangla sentence; on mobile (390px)
-// the Bangla sentence alone already fills the line, so the
-// attribution span is hidden there by CSS (display: none under
-// 640px) — one line is the hard requirement, and a second line is
-// never allowed. See the deploy report for the measured fit.
-
-export type HeroGreetingPhase = 'ar' | 'en' | 'bn';
+export type HeroGreetingPhase = 'ar' | 'tr';
 
 /**
  * Dwell time per phase (ms). Arabic stays longest (8–10s) so the
- * verse can be read comfortably; English/Bangla ~6s each. Slow
- * gentle fades only (1.2s) — the Arabic letters and harakat are
- * never distorted, bent, or broken.
+ * verse can be read comfortably; the translation ~6s. Slow gentle
+ * fades only (1.2s) — the Arabic letters and harakat are never
+ * distorted, bent, or broken.
  */
 export const HERO_GREETING_PHASE_MS: Record<HeroGreetingPhase, number> = {
   ar: 9000,
-  en: 6000,
-  bn: 6000,
+  tr: 6000,
 };
 
 export function getNextHeroGreetingPhase(
   current: HeroGreetingPhase,
 ): HeroGreetingPhase {
-  if (current === 'ar') return 'en';
-  if (current === 'en') return 'bn';
+  if (current === 'ar') return 'tr';
   return 'ar';
+}
+
+export type HeroGreetingTranslation = {
+  text: string;
+  attr: string;
+  lang: Lang;
+  lineClass: string;
+};
+
+/**
+ * Pure selector: the translation phase shows the user's chosen
+ * language — the same `tabLang` the header language toggle reads and
+ * writes (localStorage `eduvelto-language`, account preference
+ * `users.language`; default 'bn' when nothing is stored). Arabic is
+ * untouched by this choice and always stays the first phase.
+ */
+export function getHeroGreetingTranslation(
+  tabLang: Lang,
+): HeroGreetingTranslation {
+  if (tabLang === 'en') {
+    return {
+      text: HERO_GREETING_EN,
+      attr: HERO_GREETING_ATTR_EN,
+      lang: 'en',
+      lineClass: 'ev-hero-greeting-line-en',
+    };
+  }
+  return {
+    text: HERO_GREETING_BN,
+    attr: HERO_GREETING_ATTR_BN,
+    lang: 'bn',
+    lineClass: 'ev-hero-greeting-line-bn',
+  };
 }
 
 function prefersReducedMotion(): boolean {
@@ -56,7 +95,7 @@ function prefersReducedMotion(): boolean {
 }
 
 /**
- * Three-phase machine: Arabic → English → Bangla → Arabic …
+ * Two-phase machine: Arabic → translation → Arabic …
  * Under reduced motion there is no timer: the phase is 'ar' forever,
  * so the Arabic line is shown statically and nothing cycles.
  */
@@ -76,16 +115,19 @@ export function useHeroGreetingCycle(): { phase: HeroGreetingPhase } {
 
 export default function HeroGreeting() {
   const { phase } = useHeroGreetingCycle();
+  // The translation follows the app's language setting (header toggle).
+  const { tabLang } = useLanguage();
+  const tr = getHeroGreetingTranslation(tabLang);
 
   return (
     <section
       className="ev-hero-greeting"
-      aria-label="Al-Alaq, verse 1 — in Arabic, English and Bangla"
+      aria-label="Al-Alaq, verse 1 — in Arabic and your language"
     >
-      {/* All three lines stay in the DOM; CSS shows only the active
+      {/* Both lines stay in the DOM; CSS shows only the active
           phase (opacity + visibility), so the switch is a pure fade
-          and the band never changes height or reflows. The inactive
-          lines are aria-hidden. */}
+          and the pill never changes height or reflows. The inactive
+          line is aria-hidden. */}
       <p
         className="ev-hero-greeting-line ev-hero-greeting-line-ar"
         data-active={phase === 'ar'}
@@ -96,25 +138,15 @@ export default function HeroGreeting() {
         <span className="ev-hero-greeting-text">{HERO_GREETING_AR}</span>
       </p>
       <p
-        className="ev-hero-greeting-line ev-hero-greeting-line-en"
-        data-active={phase === 'en'}
-        aria-hidden={phase !== 'en'}
-        lang="en"
+        className={`ev-hero-greeting-line ${tr.lineClass}`}
+        data-active={phase === 'tr'}
+        aria-hidden={phase !== 'tr'}
+        lang={tr.lang}
       >
-        <span className="ev-hero-greeting-text">{HERO_GREETING_EN}</span>
+        <span className="ev-hero-greeting-text">{tr.text}</span>
+        <span className="ev-hero-greeting-attr"> — {tr.attr}</span>
       </p>
-      <p
-        className="ev-hero-greeting-line ev-hero-greeting-line-bn"
-        data-active={phase === 'bn'}
-        aria-hidden={phase !== 'bn'}
-        lang="bn"
-      >
-        <span className="ev-hero-greeting-text">{HERO_GREETING_BN}</span>
-        <span className="ev-hero-greeting-attr"> — {HERO_GREETING_ATTR}</span>
-      </p>
-      {/* (c) Thin gold line along the bottom edge, sweeping slowly
-          side to side — the eye-catcher that never touches the ayah
-          text itself. Decorative only. */}
+      {/* Shimmer sweep along the bottom edge — decorative only. */}
       <span className="ev-hero-greeting-sweep" aria-hidden="true" />
     </section>
   );

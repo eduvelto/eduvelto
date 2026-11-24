@@ -163,7 +163,17 @@ function placeholderStyle(placement: AdPlacement): React.CSSProperties {
   return { ...base, margin: '12px 0' };
 }
 
-export default function AdSlot(props: { placement: AdPlacement; format?: 'auto' | 'fluid' }) {
+export default function AdSlot(props: {
+  placement: AdPlacement;
+  format?: 'auto' | 'fluid';
+  /**
+   * Called (once, with true) when AdSense reports this unit unfilled
+   * and the slot collapses to nothing. App.tsx passes it for the
+   * bottom banner only, so the mobile bottom nav drops to the viewport
+   * bottom instead of floating over the empty gap.
+   */
+  onUnfilled?: (unfilled: boolean) => void;
+}) {
   const { placement } = props;
   const pushedRef = useRef(false);
   const insRef = useRef<HTMLElement | null>(null);
@@ -200,13 +210,19 @@ export default function AdSlot(props: { placement: AdPlacement; format?: 'auto' 
     // miss. Auto ads' own units are Google-managed and collapse
     // themselves.
     const check = () => {
-      if (ins.getAttribute('data-ad-status') === 'unfilled') setUnfilled(true);
+      if (ins.getAttribute('data-ad-status') === 'unfilled') {
+        setUnfilled(true);
+        // Tell the layout (App.tsx) the banner is gone, so the mobile
+        // bottom nav drops to the viewport bottom instead of floating
+        // 112px up over an empty gap (owner 24 Nov 2026 07:14).
+        props.onUnfilled?.(true);
+      }
     };
     check();
     const obs = new MutationObserver(check);
     obs.observe(ins, { attributes: true, attributeFilter: ['data-ad-status'] });
     return () => obs.disconnect();
-  }, [state]);
+  }, [state, props.onUnfilled]);
 
   // Not live and not a preview host: render nothing at all.
   if (state === 'none') return null;

@@ -201,6 +201,26 @@ export function getBannerReservePx(placement: BannerPlacement | null): number {
 }
 
 /**
+ * Bottom-nav offset (px) for the mobile bottom nav: the nav sits above
+ * the bottom ad banner ONLY while the banner is actually rendered.
+ * When AdSense reports the banner unfilled the slot collapses to
+ * nothing (AdSlot returns null) — the nav must then sit at the very
+ * viewport bottom (offset 0), not float 112px up over an empty gap
+ * with page content visible below it (owner 24 Nov 2026 07:14: the nav
+ * rendered mid-page with card content below it on live, measured
+ * gapBelowNav 112px at every scroll position while no banner element
+ * existed in the DOM). Pure — unit-tested in adsConfig.test.ts.
+ */
+export function getBottomNavOffsetPx(args: {
+  bannerVisible: boolean;
+  bannerReservePx: number;
+  bannerCollapsed: boolean;
+}): number {
+  if (!args.bannerVisible || args.bannerCollapsed) return 0;
+  return args.bannerReservePx;
+}
+
+/**
  * Whether an IN-PAGE slot (anything that is not the layout's bottom
  * banner) may appear on a page of this type. Banner placements always
  * return false here — they are layout-level, decided by
