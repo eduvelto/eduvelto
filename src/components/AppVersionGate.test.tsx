@@ -11,6 +11,7 @@ import { describe, it, expect, vi, afterEach } from 'vitest';
 import { renderToStaticMarkup } from 'react-dom/server';
 import { MemoryRouter } from 'react-router-dom';
 import React from 'react';
+import { AppVersionBlockedScreen } from './AppVersionGate';
 import type { AppVersionConfig } from '../lib/appVersion';
 
 type GlobalWindow = { window?: unknown };
@@ -99,7 +100,6 @@ describe('AppVersionBlockedScreen', () => {
   it('renders the Bangla block message, release notes and a working download link', async () => {
     const html = await renderWith((m) =>
       React.createElement(m.AppVersionBlockedScreen, { config: forcedConfig }),
-    );
     );
     expect(html).toContain('নতুন ভার্সন এসেছে');
     expect(html).toContain('এই পুরোনো ভার্সনটি আর ব্যবহার করা যাবে না');
