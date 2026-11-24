@@ -88,7 +88,7 @@ function SectionTitle({ bn, en }: { bn: string; en: string }) {
 }
 
 function CurrencySection() {
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
   const [amount, setAmount] = useState('');
   const [from, setFrom] = useState('USD');
   const [to, setTo] = useState('BDT');
@@ -127,7 +127,7 @@ function CurrencySection() {
             inputMode="decimal"
             value={amount}
             onChange={(e) => setAmount(e.target.value)}
-            placeholder="১০০"
+            placeholder={lang === 'bn' ? '১০০' : '100'}
           />
         </div>
         <div>
@@ -245,7 +245,7 @@ const DEFAULT_UNITS: Record<UnitCategory, { from: string; to: string }> = {
 };
 
 function UnitSection() {
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
   const [category, setCategory] = useState<UnitCategory>('length');
   const [value, setValue] = useState('');
   const [from, setFrom] = useState('km');
@@ -299,7 +299,7 @@ function UnitSection() {
             inputMode="decimal"
             value={value}
             onChange={(e) => setValue(e.target.value)}
-            placeholder="১"
+            placeholder={lang === 'bn' ? '১' : '1'}
           />
         </div>
         <div>
@@ -346,11 +346,11 @@ function UnitSection() {
 }
 
 export default function LifeConvertersPage() {
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
   return (
     <PageShell titleBn="রূপান্তরকারী" titleEn="Converters">
       {/* Visible breadcrumb (24 Nov 2026 SEO pass) — labels match the BreadcrumbList JSON-LD in lib/seo.ts. */}
-      <Breadcrumb items={[{ label: 'জীবন সেবা', to: '/life' }, { label: 'কনভার্টার' }]} />
+      <Breadcrumb items={[{ label: lang === 'bn' ? 'জীবন সেবা' : 'Life Services', to: '/life' }, { label: lang === 'bn' ? 'কনভার্টার' : 'Converters' }]} />
       <p style={{ color: 'var(--muted)', margin: '0 0 8px' }}>
         {t({
           bn: 'মুদ্রা ও একক রূপান্তর — সব হিসাব আপনার ডিভাইসেই হয়, কোনো তথ্য কোথাও পাঠানো হয় না।',

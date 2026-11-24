@@ -40,15 +40,27 @@ const CATEGORY_BN: Record<string, string> = {
   ntrca: 'NTRCA',
   other_govt: 'অন্য সরকারি',
 };
+const CATEGORY_EN: Record<string, string> = {
+  bcs: 'BCS',
+  bank: 'Bank',
+  primary: 'Primary',
+  ntrca: 'NTRCA',
+  other_govt: 'Other government',
+};
 
 const STATUS_BN: Record<ApprovedDomainRow['status'], string> = {
   active: 'সক্রিয়',
   watch: 'নজরে',
   deprecated: 'বাতিল',
 };
+const STATUS_EN: Record<ApprovedDomainRow['status'], string> = {
+  active: 'Active',
+  watch: 'Watch',
+  deprecated: 'Deprecated',
+};
 
 export default function AdminJobDomainsPage() {
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
   const { user } = useAuth();
   const uid = user?.uid ?? '';
   const [rows, setRows] = useState<ApprovedDomainRow[] | null>(null);
@@ -196,7 +208,7 @@ export default function AdminJobDomainsPage() {
               <div style={{ display: 'flex', justifyContent: 'space-between', gap: 8, flexWrap: 'wrap' }}>
                 <strong style={{ fontSize: 15 }}>{r.domain}</strong>
                 <span style={{ fontSize: 13, color: 'var(--muted-ivory)' }}>
-                  {r.organizationBn} · {r.category || t({ bn: 'সব পরীক্ষা', en: 'All exams' })} · {STATUS_BN[r.status]}
+                  {r.organizationBn} · {r.category ? (lang === 'bn' ? CATEGORY_BN[r.category] ?? r.category : CATEGORY_EN[r.category] ?? r.category) : t({ bn: 'সব পরীক্ষা', en: 'All exams' })} · {lang === 'bn' ? STATUS_BN[r.status] : STATUS_EN[r.status]}
                 </span>
               </div>
               {r.notesBn ? <p style={{ fontSize: 13, margin: '6px 0' }}>{r.notesBn}</p> : null}
@@ -240,7 +252,7 @@ export default function AdminJobDomainsPage() {
       <ul style={{ fontSize: 14, lineHeight: 1.8 }}>
         {KNOWN_OFFICIAL_DOMAINS.map((d) => (
           <li key={d.domain}>
-            <strong>{d.domain}</strong> — {d.organizationBn} ({d.organizationEn}) · {CATEGORY_BN[d.category] ?? d.category}
+            <strong>{d.domain}</strong> — {d.organizationBn} ({d.organizationEn}) · {lang === 'bn' ? CATEGORY_BN[d.category] ?? d.category : CATEGORY_EN[d.category] ?? d.category}
             {d.status === 'watch' ? ` · ${t({ bn: 'নজরে', en: 'Watch' })}` : ''}
           </li>
         ))}

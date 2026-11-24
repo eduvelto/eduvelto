@@ -122,6 +122,7 @@ function bnNum(n: number): string {
  * "বিষয় তালিকা তৈরি হচ্ছে" copy.
  */
 function JobSubjectsTab({ def }: { def: JobExamDef }) {
+  const { t, lang } = useLanguage();
   const subjects = jobSubjectsForExam(def.slug);
   const source = subjects[0]?.syllabusSource ?? null;
 
@@ -129,10 +130,9 @@ function JobSubjectsTab({ def }: { def: JobExamDef }) {
     return (
       <Reveal>
         <Card>
-          <div style={{ fontWeight: 700, color: '#142B3B', fontSize: 17 }}>পরিসর ঠিক হচ্ছে</div>
+          <div style={{ fontWeight: 700, color: '#142B3B', fontSize: 17 }}>{t({ bn: 'পরিসর ঠিক হচ্ছে', en: 'Scope being decided' })}</div>
           <p style={{ margin: '8px 0 0', color: '#57616A', fontSize: 14, lineHeight: 1.8 }}>
-            কোন পদগুলো এর ভেতরে থাকবে, তা ঠিক হচ্ছে — সরকারি IT পদ, বেসরকারি IT চাকরি, নাকি পেশাগত সনদ? সিদ্ধান্ত হলে
-            বিজ্ঞপ্তি যাচাই করে তবে বিষয় তালিকা লেখা হবে। এখানে কোনো বিষয় তালিকা লেখা হয়নি।
+            {t({ bn: 'কোন পদগুলো এর ভেতরে থাকবে, তা ঠিক হচ্ছে — সরকারি IT পদ, বেসরকারি IT চাকরি, নাকি পেশাগত সনদ? সিদ্ধান্ত হলে বিজ্ঞপ্তি যাচাই করে তবে বিষয় তালিকা লেখা হবে। এখানে কোনো বিষয় তালিকা লেখা হয়নি।', en: 'Which posts belong here is being decided — government IT posts, private IT jobs, or professional certificates? Once decided, the subject list will be written only after verification from the circular. No subject list is written here.' })}
           </p>
         </Card>
       </Reveal>
@@ -142,10 +142,10 @@ function JobSubjectsTab({ def }: { def: JobExamDef }) {
   return (
     <>
       <Reveal>
-        <h2 className="ev-section-h2">বিষয়</h2>
+        <h2 className="ev-section-h2">{t({ bn: 'বিষয়', en: 'Subjects' })}</h2>
       </Reveal>
       {source ? (
-        <p style={{ color: '#68747B', margin: '0 0 16px', fontSize: 13 }}>উৎস: {source}</p>
+        <p style={{ color: '#68747B', margin: '0 0 16px', fontSize: 13 }}>{t({ bn: `উৎস: ${source}`, en: `Source: ${source}` })}</p>
       ) : null}
       <div
         style={{
@@ -158,13 +158,13 @@ function JobSubjectsTab({ def }: { def: JobExamDef }) {
         {subjects.map((s, i) => (
           <Reveal key={s.slug} delayMs={Math.min(i, 5) * 60}>
             <Card>
-              <div style={{ fontWeight: 700, color: '#142B3B', fontSize: 17 }}>{s.nameBn}</div>
+              <div style={{ fontWeight: 700, color: '#142B3B', fontSize: 17 }}>{lang === 'bn' ? s.nameBn : s.nameEn}</div>
               <p style={{ margin: '6px 0 10px', color: '#68747B', fontSize: 14 }}>
-                {s.marks !== null ? `${bnNum(s.marks)} নম্বর` : 'নম্বর যাচাই হয়নি'}
+                {s.marks !== null ? t({ bn: `${bnNum(s.marks)} নম্বর`, en: `${s.marks} marks` }) : t({ bn: 'নম্বর যাচাই হয়নি', en: 'Marks not verified' })}
               </p>
               <p style={{ margin: 0 }}>
                 <Link to={`/jobs/${def.slug}/subjects/${s.slug}`} style={{ fontWeight: 600 }}>
-                  বিষয়টি দেখুন →
+                  {t({ bn: 'বিষয়টি দেখুন →', en: 'See this subject →' })}
                 </Link>
               </p>
             </Card>
@@ -180,6 +180,7 @@ function JobSubjectsTab({ def }: { def: JobExamDef }) {
  * have taken mocks; the honest empty note only when they truly
  * have taken none. Signed-out visitors get the login prompt. */
 function JobHubResultsTab({ def }: { def: JobExamDef }) {
+  const { t } = useLanguage();
   const { user } = useAuth();
   const location = useLocation();
   // Sections audit (24 Nov 2026): return here after sign-in.
@@ -207,13 +208,13 @@ function JobHubResultsTab({ def }: { def: JobExamDef }) {
     return (
       <Reveal>
         <Card>
-          <div style={{ fontWeight: 700, color: '#142B3B', fontSize: 17 }}>ফলাফল দেখতে লগইন করুন</div>
+          <div style={{ fontWeight: 700, color: '#142B3B', fontSize: 17 }}>{t({ bn: 'ফলাফল দেখতে লগইন করুন', en: 'Log in to see results' })}</div>
           <p style={{ margin: '8px 0 12px', color: '#68747B', fontSize: 14, lineHeight: 1.7 }}>
-            ফলাফল শুধু লগইন করা শিক্ষার্থীরা দেখতে পারে।
+            {t({ bn: 'ফলাফল শুধু লগইন করা শিক্ষার্থীরা দেখতে পারে।', en: 'Results are only visible to logged-in students.' })}
           </p>
           <p style={{ margin: 0 }}>
             <Link to="/login" state={back} style={{ fontWeight: 600 }}>
-              লগইন করুন →
+              {t({ bn: 'লগইন করুন →', en: 'Log in →' })}
             </Link>
           </p>
         </Card>
@@ -225,7 +226,7 @@ function JobHubResultsTab({ def }: { def: JobExamDef }) {
     return (
       <Reveal>
         <Card>
-          <p style={{ margin: 0, color: '#68747B', fontSize: 14 }}>লোড হচ্ছে…</p>
+          <p style={{ margin: 0, color: '#68747B', fontSize: 14 }}>{t({ bn: 'লোড হচ্ছে…', en: 'Loading…' })}</p>
         </Card>
       </Reveal>
     );
@@ -235,13 +236,13 @@ function JobHubResultsTab({ def }: { def: JobExamDef }) {
     return (
       <Reveal>
         <Card>
-          <div style={{ fontWeight: 700, color: '#142B3B', fontSize: 17 }}>এখনো কোনো ফলাফল নেই</div>
+          <div style={{ fontWeight: 700, color: '#142B3B', fontSize: 17 }}>{t({ bn: 'এখনো কোনো ফলাফল নেই', en: 'No results yet' })}</div>
           <p style={{ margin: '8px 0 12px', color: '#68747B', fontSize: 14, lineHeight: 1.7 }}>
-            এখনো কোনো মক টেস্ট দেওয়া হয়নি — মক দিলে ফলাফল ও দুর্বল টপিকের বিশ্লেষণ এখানে দেখাবে।
+            {t({ bn: 'এখনো কোনো মক টেস্ট দেওয়া হয়নি — মক দিলে ফলাফল ও দুর্বল টপিকের বিশ্লেষণ এখানে দেখাবে।', en: 'No mock test has been taken yet — once you take a mock, results and weak-topic analysis will show here.' })}
           </p>
           <p style={{ margin: 0 }}>
             <Link to="/jobs/common" style={{ fontWeight: 600 }}>
-              কমন প্রস্তুতি দেখুন →
+              {t({ bn: 'কমন প্রস্তুতি দেখুন →', en: 'See common preparation →' })}
             </Link>
           </p>
         </Card>
@@ -256,12 +257,10 @@ function JobHubResultsTab({ def }: { def: JobExamDef }) {
           <Card>
             <div style={{ display: 'flex', justifyContent: 'space-between', gap: 8, flexWrap: 'wrap', fontSize: 14 }}>
               <span>
-                {typeof a.score === 'number' ? a.score : 0} / {typeof a.totalMarks === 'number' ? a.totalMarks : 0} নম্বর ·{' '}
-                {typeof a.correctCount === 'number' ? a.correctCount : 0}টি সঠিক ·{' '}
-                {typeof a.wrongCount === 'number' ? a.wrongCount : 0}টি ভুল
+                {t({ bn: `${typeof a.score === 'number' ? a.score : 0} / ${typeof a.totalMarks === 'number' ? a.totalMarks : 0} নম্বর · ${typeof a.correctCount === 'number' ? a.correctCount : 0}টি সঠিক · ${typeof a.wrongCount === 'number' ? a.wrongCount : 0}টি ভুল`, en: `${typeof a.score === 'number' ? a.score : 0} / ${typeof a.totalMarks === 'number' ? a.totalMarks : 0} marks · ${typeof a.correctCount === 'number' ? a.correctCount : 0} correct · ${typeof a.wrongCount === 'number' ? a.wrongCount : 0} wrong` })}
               </span>
               <Link to={`/jobs/result/${a.docId}`} style={{ fontWeight: 600 }}>
-                ফলাফল দেখুন →
+                {t({ bn: 'ফলাফল দেখুন →', en: 'See result →' })}
               </Link>
             </div>
           </Card>
@@ -272,7 +271,7 @@ function JobHubResultsTab({ def }: { def: JobExamDef }) {
 }
 
 export default function JobHubPage() {
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
   const { mode } = useJobMode();
   const { user } = useAuth();
   const location = useLocation();
@@ -283,7 +282,7 @@ export default function JobHubPage() {
   // Unknown exam slug: the honest "not found" card below must not be
   // indexed under the home fallback title — set a distinct title +
   // robots noindex while it shows (shared hook, restores on unmount).
-  useNotFoundMeta('পরীক্ষা পাওয়া যায়নি — Eduvelto', !def);
+  useNotFoundMeta(lang === 'bn' ? 'পরীক্ষা পাওয়া যায়নি — Eduvelto' : 'Exam not found — Eduvelto', !def);
   const activeTab: JobTabSlug = isJobTabSlug(tab) ? tab : 'home';
   const pattern = def ? EXAM_PATTERNS[def.slug] : undefined;
   // Step 6 — canonical subject list. Takes the raw param (not

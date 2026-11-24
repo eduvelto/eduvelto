@@ -32,6 +32,7 @@ import NuNoticeCard from '../components/NuNoticeCard';
 import {
   NU_DASHBOARD_ROUTE,
   NU_EXAM_DATE_BN,
+  NU_EXAM_DATE_EN,
   NU_HUB_ROUTE,
   NU_HUB_TABS,
   NU_HUB_TAB_LABELS,
@@ -65,7 +66,7 @@ function LoginPrompt() {
 }
 
 export default function NuHubPage() {
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
   const { user, profile } = useAuth();
   const { tab } = useParams<{ tab?: string }>();
   const activeTab: NuHubTab = tab === undefined ? 'home' : isNuHubTab(tab) ? tab : 'home';
@@ -143,7 +144,7 @@ export default function NuHubPage() {
               <li>{t({ bn: 'পাস নম্বর ৩৫ — তুলনার জন্য মাত্র, ফলাফলের রায় নয়।', en: 'Pass mark 35 — for comparison only, not a verdict on a result.' })}</li>
               <li>{t({ bn: 'মেধা মোট ২০০ = পরীক্ষা ১০০ + SSC GPA ৪০ + HSC GPA ৬০।', en: 'Merit total 200 = exam 100 + SSC GPA 40 + HSC GPA 60.' })}</li>
               <li>
-                {NU_EXAM_DATE_BN}
+                {t({ bn: NU_EXAM_DATE_BN, en: NU_EXAM_DATE_EN })}
               </li>
               <li>
                 {t({ bn: 'যোগ্যতার সারাংশ: ', en: 'Eligibility summary: ' })}
@@ -244,9 +245,13 @@ export default function NuHubPage() {
                 </p>
                 <p style={{ color: 'var(--muted-ivory)', fontSize: 14, margin: '0 0 12px' }}>
                   {t({ bn: 'যোগ্যতা: ', en: 'Eligibility: ' })}
-                  {g.slug === 'science'
-                    ? 'SSC GPA ২.২৫+, HSC GPA ২.০+, মোট GPA ৪.৭৫+'
-                    : 'SSC GPA ২.০+, HSC GPA ২.০+, মোট GPA ৪.৫+'}
+                  {lang === 'bn'
+                    ? g.slug === 'science'
+                      ? 'SSC GPA ২.২৫+, HSC GPA ২.০+, মোট GPA ৪.৭৫+'
+                      : 'SSC GPA ২.০+, HSC GPA ২.০+, মোট GPA ৪.৫+'
+                    : g.slug === 'science'
+                      ? 'SSC GPA 2.25+, HSC GPA 2.0+, total GPA 4.75+'
+                      : 'SSC GPA 2.0+, HSC GPA 2.0+, total GPA 4.5+'}
                 </p>
                 <LinkButton to={`${NU_HUB_ROUTE}/${g.slug}`} variant="accent">
                   {t({ bn: 'প্রস্তুতি শুরু করুন', en: 'Start preparing' })} →

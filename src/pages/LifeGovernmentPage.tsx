@@ -174,12 +174,12 @@ const DOCS: GovDoc[] = [
 ];
 
 export default function LifeGovernmentPage() {
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
 
   return (
     <PageShell titleBn="সরকারি সেবা ও প্রয়োজনীয় কাগজপত্র" titleEn="Government Services & Required Documents">
       {/* Visible breadcrumb (24 Nov 2026 SEO pass) — labels match the BreadcrumbList JSON-LD in lib/seo.ts. */}
-      <Breadcrumb items={[{ label: 'জীবন সেবা', to: '/life' }, { label: 'সরকারি সেবা' }]} />
+      <Breadcrumb items={[{ label: lang === 'bn' ? 'জীবন সেবা' : 'Life Services', to: '/life' }, { label: lang === 'bn' ? 'সরকারি সেবা' : 'Government Services' }]} />
       <p>
         {t({
           bn: 'NID, পাসপোর্ট, জন্ম নিবন্ধন ও ড্রাইভিং লাইসেন্সের আবেদন কীভাবে করবেন — তার সহজ নির্দেশিকা। সব তথ্য অফিসিয়াল পোর্টালের আলোকে দেওয়া; আবেদনের আগে সর্বশেষ নিয়ম অফিসিয়াল সাইটেই যাচাই করুন।',

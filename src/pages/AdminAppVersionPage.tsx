@@ -203,7 +203,7 @@ export default function AdminAppVersionPage() {
               style={{ ...inputStyle, minHeight: 80 }}
               value={releaseNotes}
               onChange={(e) => setReleaseNotes(e.target.value)}
-              placeholder="নতুন চ্যাপ্টার ও পরীক্ষা যোগ হয়েছে।"
+              placeholder={lang === 'bn' ? 'নতুন চ্যাপ্টার ও পরীক্ষা যোগ হয়েছে।' : 'New chapters and exams added.'}
               maxLength={2000}
             />
           </label>

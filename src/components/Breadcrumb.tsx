@@ -12,14 +12,17 @@
 // inline breadcrumbs do). Items without `to` render as plain text:
 // use that for crumbs with no distinct route of their own
 // (e.g. "অনুশীলন" under /jobs/bcs/practice/english).
+// The aria-label follows the selected language.
 
 import { Link } from 'react-router-dom';
+import { useLanguage } from '../i18n/LanguageContext';
 
 export type BreadcrumbItem = { label: string; to?: string };
 
 export function Breadcrumb({ items }: { items: BreadcrumbItem[] }) {
+  const { t } = useLanguage();
   return (
-    <nav aria-label="ব্রেডক্রাম্ব" style={{ margin: '0 0 12px', color: '#57616A', fontSize: 14 }}>
+    <nav aria-label={t({ bn: 'ব্রেডক্রাম্ব', en: 'Breadcrumb' })} style={{ margin: '0 0 12px', color: '#57616A', fontSize: 14 }}>
       {items.map((item, i) => {
         const isCurrent = i === items.length - 1;
         return (

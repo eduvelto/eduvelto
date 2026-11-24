@@ -90,7 +90,7 @@ const buttonStyle: CSSProperties = {
 };
 
 export default function LifeBudgetPage() {
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
   const [store, setStore] = useState<StoredBudget>(() => loadStored());
   const [month, setMonth] = useState<string>(currentMonth());
   const [type, setType] = useState<'income' | 'expense'>('expense');
@@ -190,7 +190,7 @@ export default function LifeBudgetPage() {
   return (
     <PageShell titleBn="বাজেট পরিকল্পনা" titleEn="Budget Planner" wide>
       {/* Visible breadcrumb (24 Nov 2026 SEO pass) — labels match the BreadcrumbList JSON-LD in lib/seo.ts. */}
-      <Breadcrumb items={[{ label: 'জীবন সেবা', to: '/life' }, { label: 'বাজেট প্ল্যানার' }]} />
+      <Breadcrumb items={[{ label: lang === 'bn' ? 'জীবন সেবা' : 'Life Services', to: '/life' }, { label: lang === 'bn' ? 'বাজেট প্ল্যানার' : 'Budget Planner' }]} />
       <p>
         {t({
           bn: 'মাসিক আয় ও ব্যয়ের হিসাব রাখুন, আর সঞ্চয়ের লক্ষ্যের অগ্রগতি দেখুন।',

@@ -10,7 +10,7 @@ import { EMERGENCY_NUMBERS, LIFE_SOURCES } from '../lib/lifeContent';
 // on the official operator sites linked below.
 
 export default function LifeTravelPage() {
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
   const travelSources = LIFE_SOURCES.filter((s) =>
     ['emergency-999', 'railway', 'biman', 'dghs'].includes(s.id),
   );
@@ -18,7 +18,7 @@ export default function LifeTravelPage() {
   return (
     <PageShell titleBn="ভ্রমণ ও দৈনন্দিন প্রয়োজন" titleEn="Travel & Daily Needs">
       {/* Visible breadcrumb (24 Nov 2026 SEO pass) — labels match the BreadcrumbList JSON-LD in lib/seo.ts. */}
-      <Breadcrumb items={[{ label: 'জীবন সেবা', to: '/life' }, { label: 'ভ্রমণ তথ্য' }]} />
+      <Breadcrumb items={[{ label: lang === 'bn' ? 'জীবন সেবা' : 'Life Services', to: '/life' }, { label: lang === 'bn' ? 'ভ্রমণ তথ্য' : 'Travel Info' }]} />
       <p>
         {t({
           bn: 'বাংলাদেশে ভ্রমণের আগে জরুরি নম্বরগুলো ফোনে সংরক্ষণ করুন। এই পাতায় কোনো ট্রেন বা বিমানের সময়সূচি ও ভাড়া দেওয়া হয়নি — তা অফিসিয়াল সাইটে যাচাই করে নিন।',

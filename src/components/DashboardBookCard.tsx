@@ -4,10 +4,12 @@
 // Visual-only — no data logic lives here.
 
 import { Link } from 'react-router-dom';
+import { useLanguage } from '../i18n/LanguageContext';
 import { Card, Chip } from './ui';
 import type { Book } from '../lib/content';
 
 export function DashboardBookCard({ book }: { book: Book }) {
+  const { t } = useLanguage();
   return (
     <Card hover>
       <Link
@@ -22,7 +24,7 @@ export function DashboardBookCard({ book }: { book: Book }) {
         {book.classLevel ? <Chip tone="gold">{book.classLevel}</Chip> : null}
       </div>
       <p style={{ margin: '10px 0 0', color: 'var(--muted)', fontSize: 14 }}>
-        {book.chapterCount}টি পাঠ · {book.questionCount}টি প্রশ্ন
+        {t({ bn: `${book.chapterCount}টি পাঠ · ${book.questionCount}টি প্রশ্ন`, en: `${book.chapterCount} lessons · ${book.questionCount} questions` })}
       </p>
     </Card>
   );

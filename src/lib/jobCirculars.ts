@@ -138,6 +138,23 @@ export const CHECKLIST_RESULT_BN: Record<ChecklistResult, string> = {
   na: 'প্রযোজ্য নয়',
 };
 
+export const VERIFICATION_CHECKLIST_EN: Record<VerificationChecklistItem, string> = {
+  orgConfirmed: 'Publishing organisation confirmed (official domain matches)',
+  sourceOpened: 'Original circular opened and read',
+  postCountChecked: 'Post count verified (choose “not mentioned” when absent)',
+  openingDateChecked: 'Application start date verified',
+  deadlineChecked: 'Application deadline verified (Asia/Dhaka)',
+  applyLinkChecked: 'Official application link verified',
+  amendmentsChecked: 'Amendments / deadline extensions verified',
+};
+
+export const CHECKLIST_RESULT_EN: Record<ChecklistResult, string> = {
+  pass: 'Pass',
+  fail: 'Fail',
+  uncertain: 'Uncertain',
+  na: 'Not applicable',
+};
+
 export interface VerificationChecklist {
   orgConfirmed: ChecklistResult | null;
   sourceOpened: ChecklistResult | null;
