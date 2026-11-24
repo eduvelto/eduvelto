@@ -108,7 +108,7 @@ export function ComingSoonHero({ def }: { def: ClassLevelDef }) {
         <LinkButton to="/exam" variant="outline">
           {t({ bn: 'পরীক্ষা দেখুন', en: 'See exams' })}
         </LinkButton>
-        <LinkButton to="/#select-class" variant="outline">
+        <LinkButton to="/class" variant="outline">
           {t({ bn: 'সব শ্রেণি', en: 'All classes' })}
         </LinkButton>
       </div>

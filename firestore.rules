@@ -2246,6 +2246,26 @@ service cloud.firestore {
       allow update, delete: if false;
     }
 
+    // ---------- newsletter subscribers (homepage redesign, 24 Nov 2026)
+    // Footer signup writes here. Anyone (signed out included) may
+    // subscribe with a validated email + fixed fields only; the
+    // address is readable by owner/admin only (export list for
+    // updates), never by other users; nobody may edit or delete
+    // through the client. No email is sent by subscribing yet — the
+    // form says the address is kept for Eduvelto updates.
+    match /newsletterSubscribers/{subscriberId} {
+      allow read: if isAdmin();
+      allow create: if onlyKeys(['email', 'source', 'status', 'createdAt'])
+        && request.resource.data.email is string
+        && request.resource.data.email.size() >= 4
+        && request.resource.data.email.size() <= 200
+        && request.resource.data.email.matches('^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$')
+        && request.resource.data.source == 'footer'
+        && request.resource.data.status == 'subscribed'
+        && request.resource.data.createdAt is timestamp;
+      allow update, delete: if false;
+    }
+
     // ---------- community posts / comments / questions / answers ----------
     // Create with reviewStatus forced to "Under Review". Authors edit only
     // their own while still unreviewed. Only Moderator/Admin publish/remove.

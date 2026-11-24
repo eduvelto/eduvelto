@@ -112,8 +112,11 @@ export const ORGANIZATION_JSON_LD = {
   ],
 };
 
-/** Shared WebSite structured data. No SearchAction — the site has no
- *  site-wide search index (the home search box filters local lists). */
+/** Shared WebSite structured data. SearchAction added 24 Nov 2026
+ * (homepage redesign): /search is now a real site-wide search over
+ * books, jobs, opportunities, life services and guide pages, so the
+ * search-box target is real. /search itself stays noindex (no
+ * STATIC_ROUTES entry; robots.txt disallows it). */
 export const WEBSITE_JSON_LD = {
   '@context': 'https://schema.org',
   '@type': 'WebSite',
@@ -124,6 +127,14 @@ export const WEBSITE_JSON_LD = {
   description: 'A Smarter World of Learning — a free digital education platform from Bangladesh.',
   inLanguage: ['bn', 'en'],
   publisher: { '@id': 'https://eduvelto.com#organization' },
+  potentialAction: {
+    '@type': 'SearchAction',
+    target: {
+      '@type': 'EntryPoint',
+      urlTemplate: 'https://eduvelto.com/search?q={search_term_string}',
+    },
+    'query-input': 'required name=search_term_string',
+  },
 };
 
 function setMetaByName(name: string, content: string): void {
@@ -287,6 +298,32 @@ const STATIC_ROUTES: Record<string, RouteSeoEntry> = {
     description:
       'যাচাইকৃত বিজ্ঞপ্তি ও মক পরীক্ষার তারিখের ক্যালেন্ডার — নিশ্চিত তারিখ এলে এখানে দেখাবে; অনুমান করা তারিখ কখনো দেখানো হয় না। Eduvelto।',
     crumb: 'ক্যালেন্ডার',
+  },
+  // Added 24 Nov 2026 (homepage redesign): the three Step 16 job
+  // guides are real public pages on main, so they join the sitemap.
+  '/jobs/viva': {
+    title: 'ভাইভা প্রস্তুতি — চাকরির ভাইভার নির্দেশিকা | Eduvelto',
+    description:
+      'চাকরির ভাইভা প্রস্তুতির নির্দেশিকা — সাধারণ প্রশ্ন, নিজের পরিচয়, শরীরী ভাষা ও ভাইভার দিনের চেকলিস্ট। সাধারণ নির্দেশনা, কোনো চাকরির নিশ্চয়তা নয়। Eduvelto।',
+    crumb: 'ভাইভা প্রস্তুতি',
+  },
+  '/jobs/career': {
+    title: 'ক্যারিয়ার পরিকল্পনা — চাকরির পথ বেছে নেওয়া | Eduvelto',
+    description:
+      'ক্যারিয়ার পরিকল্পনা — পেশা বেছে নেওয়া, দক্ষতার পথ, সরকারি–বেসরকারি–ফ্রিল্যান্সিংয়ের সৎ তুলনা। সাধারণ নির্দেশনা, কোনো অফিসিয়াল সিলেবাস নয়। Eduvelto।',
+    crumb: 'ক্যারিয়ার গাইড',
+  },
+  '/jobs/cv': {
+    title: 'সিভি লেখা — চাকরির সিভির নির্দেশিকা | Eduvelto',
+    description:
+      'চাকরির সিভি লেখার নির্দেশিকা — কী লিখবেন, কী লিখবেন না, নমুনা কাঠামো। সাধারণ নির্দেশনা; আপনার তথ্য ব্রাউজারের বাইরে যায় না। Eduvelto।',
+    crumb: 'সিভি লেখা',
+  },
+  '/install': {
+    title: 'Eduvelto অ্যাপ ইনস্টল করুন — ফোনে পড়ুন | Eduvelto',
+    description:
+      'Eduvelto অ্যাপ ইনস্টল ও আপডেট করুন — ফোনের হোম স্ক্রিন থেকে সরাসরি পড়ুন। অনলাইন-ভিত্তিক; অফলাইন পড়া সমর্থিত নয়। Eduvelto — সম্পূর্ণ ফ্রি।',
+    crumb: 'অ্যাপ ইনস্টল',
   },
   '/admissions': {
     title: 'ভর্তি প্রস্তুতি — বিশ্ববিদ্যালয় ভর্তি | Eduvelto',

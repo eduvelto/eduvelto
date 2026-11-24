@@ -19,11 +19,13 @@
      content yet (circular details — none published; job/NU topic
      pages — 0 job topics, NU topics are drafts), and placeholder
      pages (/skills, /social) are NOT listed. /jobs/viva, /jobs/career
-     and /jobs/cv live only on the unmerged Step 16 branch — NOT
-     listed until deployed. /jobs/primary is a soft 404 (catch-all
-     renders HomePage) — NOT listed; needs a firebase.json redirect
-     (follow-up, WEB-001). All URLs carry <lastmod> (audit SEO-007).
-     All URLs are canonical eduvelto.com URLs. -->
+     and /jobs/cv are listed since 24 Nov 2026 (homepage redesign):
+     Step 16 is on main now, so the three guides are real public
+     pages. /install is listed too (real public page). /jobs/primary
+     is a soft 404 (catch-all renders HomePage) — NOT listed; needs a
+     firebase.json redirect (follow-up, WEB-001). All URLs carry
+     <lastmod> (audit SEO-007). All URLs are canonical eduvelto.com
+     URLs. -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://eduvelto.com/</loc>
@@ -445,5 +447,29 @@
     <lastmod>2026-11-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/jobs/viva</loc>
+    <lastmod>2026-11-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/jobs/career</loc>
+    <lastmod>2026-11-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/jobs/cv</loc>
+    <lastmod>2026-11-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/install</loc>
+    <lastmod>2026-11-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
   </url>
 </urlset>

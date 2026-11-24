@@ -19,16 +19,20 @@
 // to work. The bell shows NO count badge (no real notification count
 // exists). Dark mode IS real since 22 Nov 2026 (lib/theme.tsx): the
 // moon icon toggles the theme and the choice persists per device.
-// Dropdown items that lead to unbuilt sections (/jobs, /admissions,
-// /skills) carry a "শীঘ্রই আসছে" chip and land on the shared
-// Coming Soon page; items that lead to working pages have no chip.
+// Dropdown items that lead to unbuilt sections (/skills) carry a
+// "শীঘ্রই আসছে" chip and land on the shared Coming Soon page; /jobs
+// and /admissions have been LIVE since 22 Nov 2026, so their chips
+// were removed (24 Nov 2026 homepage redesign). The header search is
+// a real input now (Global Search, /search) — it used to be a plain
+// link to /library.
 
 import { useEffect, useRef, useState } from 'react';
-import { Link, NavLink, useLocation } from 'react-router-dom';
+import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '../lib/auth';
 import { useTheme } from '../lib/theme';
 import { useLanguage } from '../i18n/LanguageContext';
 import type { Lang } from '../i18n/strings';
+import './home-redesign.css';
 
 type MenuItem = { to: string; bn: string; en: string; soon?: boolean };
 type Menu = { id: string; bn: string; en: string; icon: React.ReactNode; items: MenuItem[] };
@@ -166,11 +170,13 @@ const MENUS: Menu[] = [
     en: 'Job Preparation',
     icon: <BriefcaseIcon />,
     items: [
-      { to: '/jobs', bn: 'চাকরি প্রস্তুতি', en: 'Job Preparation', soon: true },
-      { to: '/jobs', bn: 'BCS প্রস্তুতি', en: 'BCS Preparation', soon: true },
-      { to: '/jobs', bn: 'ব্যাংক চাকরি', en: 'Bank Jobs', soon: true },
-      { to: '/jobs', bn: 'প্রাইমারি শিক্ষক', en: 'Primary Teacher', soon: true },
-      { to: '/jobs', bn: 'NTRCA প্রস্তুতি', en: 'NTRCA Preparation', soon: true },
+      // LIVE since 22 Nov 2026 — no "শীঘ্রই আসছে" chips (removed
+      // 24 Nov 2026 homepage redesign; the audit's P0-2).
+      { to: '/jobs', bn: 'চাকরি প্রস্তুতি', en: 'Job Preparation' },
+      { to: '/jobs', bn: 'BCS প্রস্তুতি', en: 'BCS Preparation' },
+      { to: '/jobs', bn: 'ব্যাংক চাকরি', en: 'Bank Jobs' },
+      { to: '/jobs', bn: 'প্রাইমারি শিক্ষক', en: 'Primary Teacher' },
+      { to: '/jobs', bn: 'NTRCA প্রস্তুতি', en: 'NTRCA Preparation' },
       { to: '/opportunities', bn: 'সুযোগ হাব', en: 'Opportunity Hub' },
       { to: '/exam', bn: 'মডেল টেস্ট', en: 'Model Tests' },
     ],
@@ -181,10 +187,12 @@ const MENUS: Menu[] = [
     en: 'Admission Preparation',
     icon: <CapIcon />,
     items: [
-      { to: '/admissions', bn: 'ভর্তি প্রস্তুতি', en: 'Admission Preparation', soon: true },
-      { to: '/admissions', bn: 'বিশ্ববিদ্যালয় ভর্তি', en: 'University Admission', soon: true },
-      { to: '/admissions', bn: 'মেডিকেল ভর্তি', en: 'Medical Admission', soon: true },
-      { to: '/admissions', bn: 'ইঞ্জিনিয়ারিং ভর্তি', en: 'Engineering Admission', soon: true },
+      // LIVE since 22 Nov 2026 — no "শীঘ্রই আসছে" chips (removed
+      // 24 Nov 2026 homepage redesign; the audit's P0-2).
+      { to: '/admissions', bn: 'ভর্তি প্রস্তুতি', en: 'Admission Preparation' },
+      { to: '/admissions', bn: 'বিশ্ববিদ্যালয় ভর্তি', en: 'University Admission' },
+      { to: '/admissions', bn: 'মেডিকেল ভর্তি', en: 'Medical Admission' },
+      { to: '/admissions', bn: 'ইঞ্জিনিয়ারিং ভর্তি', en: 'Engineering Admission' },
       { to: '/exam', bn: 'মডেল টেস্ট', en: 'Model Tests' },
     ],
   },
@@ -239,10 +247,21 @@ export default function HeaderNav() {
   const { user, profile, loading, signOut } = useAuth();
   const { theme, toggleTheme } = useTheme();
   const location = useLocation();
+  const navigate = useNavigate();
   const [menuOpen, setMenuOpen] = useState(false);
   const [openMenu, setOpenMenu] = useState<string | null>(null);
   const [bellNote, setBellNote] = useState(false);
+  const [headerQuery, setHeaderQuery] = useState('');
   const navRef = useRef<HTMLElement | null>(null);
+
+  // Header Global Search — a real input (24 Nov 2026 redesign). The
+  // magnifier used to be a plain link to /library; it now navigates
+  // to /search, which searches books + jobs + opportunities + services.
+  function runHeaderSearch(e: React.FormEvent) {
+    e.preventDefault();
+    const q = headerQuery.trim();
+    navigate(q ? `/search?q=${encodeURIComponent(q)}` : '/search');
+  }
 
   // Close every open menu on navigation.
   useEffect(() => {
@@ -377,9 +396,22 @@ export default function HeaderNav() {
         </span>
 
         <span className="ev-header-actions">
-          <Link to="/library" className="ev-header-icon-btn" aria-label={t({ bn: 'খুঁজুন', en: 'Search' })}>
-            <SearchIcon />
-          </Link>
+          <form className="ev-header-search" onSubmit={runHeaderSearch} role="search">
+            <label htmlFor="ev-header-search" style={{ position: 'absolute', width: 1, height: 1, overflow: 'hidden', clip: 'rect(0 0 0 0)' }}>
+              {t({ bn: 'খুঁজুন', en: 'Search' })}
+            </label>
+            <input
+              id="ev-header-search"
+              type="search"
+              value={headerQuery}
+              onChange={(e) => setHeaderQuery(e.target.value)}
+              placeholder={t({ bn: 'খুঁজুন…', en: 'Search…' })}
+              aria-label={t({ bn: 'বই, চাকরি, সুযোগ বা সেবা খুঁজুন', en: 'Search books, jobs, opportunities or services' })}
+            />
+            <button type="submit" aria-label={t({ bn: 'খুঁজুন', en: 'Search' })}>
+              <SearchIcon />
+            </button>
+          </form>
           <button
             type="button"
             className="ev-header-icon-btn"

@@ -53,5 +53,9 @@ Disallow: /quiz/
 Disallow: /books/
 Disallow: /lessons/
 Disallow: /subjects/
+# /search is a query page (homepage redesign, 24 Nov 2026) — search
+# result pages are noindex by design; RouteSeo gives /search the
+# noindex fallback (no STATIC_ROUTES entry).
+Disallow: /search
 
 Sitemap: https://eduvelto.com/sitemap.xml

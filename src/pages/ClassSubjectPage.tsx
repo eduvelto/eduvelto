@@ -83,7 +83,7 @@ export default function ClassSubjectPage() {
       <PageShell titleBn="শ্রেণি পাওয়া যায়নি" titleEn="Class not found" wide>
         <EmptyState bn="এই শ্রেণিটি খুঁজে পাওয়া যায়নি।" en="This class could not be found." />
         <p style={{ marginTop: 16 }}>
-          <Link to="/#select-class" style={{ fontWeight: 600 }}>
+          <Link to="/class" style={{ fontWeight: 600 }}>
             {t({ bn: '← সব শ্রেণি দেখুন', en: '← See all classes' })}
           </Link>
         </p>

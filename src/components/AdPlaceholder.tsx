@@ -76,7 +76,9 @@ function MegaphoneIcon() {
 export default function AdPlaceholder({ variant }: { variant: AdSlotVariant }) {
   const copy = COPY[variant];
   const { t } = useLanguage();
-  const ctaTo = variant === 'bottom-banner' ? '/#select-class' : '/contact';
+  // Dead-anchor fix (24 Nov 2026 homepage redesign): /#select-class
+  // matched no element anywhere in src/ — the class index is /class.
+  const ctaTo = variant === 'bottom-banner' ? '/class' : '/contact';
   return (
     <div className={`ev-ad ev-ad-${variant}`} role="complementary" aria-label={t({ bn: 'বিজ্ঞাপনের স্থান — নমুনা', en: 'Ad space placeholder' })}>
       <span className="ev-ad-label">{t({ bn: 'বিজ্ঞাপন · নমুনা', en: 'Ad · placeholder' })}</span>
