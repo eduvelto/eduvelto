@@ -750,6 +750,10 @@ const STATIC_ROUTES: Record<string, RouteSeoEntry> = {
     description:
       'Eduvelto-র AI সহায়ক — হিসাব, রূপান্তর, বাজেট, দিনের পরিকল্পনা, চিঠি-আবেদন-সিভি ও দরকারি বাক্য — এখনই বিনামূল্যে ব্যবহার করুন। লাইভ AI উত্তর শীঘ্রই আসছে।',
     crumb: 'AI সহায়ক',
+    titleEn: 'AI Assistant — Calculations, Letters and Everyday Tools | Eduvelto',
+    descriptionEn:
+      'Eduvelto’s AI Assistant — calculations, converters, budget, day planning, letters, applications, CVs and useful phrases — use it free right now. Live AI answers are coming soon.',
+    crumbEn: 'AI Assistant',
   },
   '/skills': {
     title: 'পেশাগত দক্ষতা — শীঘ্রই আসছে | Eduvelto',
