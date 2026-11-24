@@ -68,6 +68,7 @@
     "ignore": [
       "firebase.json",
       "**/.*",
+      "!**/.well-known/**",
       "**/node_modules/**"
     ],
     "public": "dist",
