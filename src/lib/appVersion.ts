@@ -1,10 +1,12 @@
 // Eduvelto — forced app update (owner brief 22 Nov 2026, BINDING).
 //
-// There is NO native app yet (Android/iOS 0%) — the "app" users download
-// is the PWA (Add to Home Screen). So the "download link" is the in-app
-// /install page (DEFAULT_DOWNLOAD_URL) — never invent a Play Store / APK
-// link. The PWA service worker auto-updates code on next visit, so
-// enforcement is a version check on app load, not a store mechanism.
+// The Android app EXISTS now (Capacitor APK, com.eduvelto.app — audit,
+// 24 Nov 2026; APKPure listing pending), so the "download link" is the
+// admin-set config/appVersion.downloadUrl — the APK host URL once the
+// owner publishes one — with /install as the fallback. Never invent a
+// Play Store / APK link. The PWA service worker auto-updates code on
+// next visit, so enforcement is a version check on app load, not a
+// store mechanism.
 //
 // How it works:
 // - The owner publishes a new version from /admin/app-version, which

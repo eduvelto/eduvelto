@@ -4,6 +4,7 @@ import { PDFDocument } from 'pdf-lib';
 import { useLanguage } from '../i18n/LanguageContext';
 import { PageShell } from '../components/PageShell';
 import { Breadcrumb } from '../components/Breadcrumb';
+import { downloadBlobInApp } from '../lib/nativeFileDownload';
 
 // Eduvelto PDF Tools (§3C) — genuinely working client-side PDF tools.
 // No server is involved: text-to-PDF and merge-PDF both run entirely in
@@ -17,7 +18,14 @@ import { Breadcrumb } from '../components/Breadcrumb';
 
 const BENGALI_RE = /[\u0980-\u09FF]/;
 
-function downloadBlob(blob: Blob, filename: string) {
+// IN-APP (audit, 24 Nov 2026): a stock Android WebView does not
+// download blob: URLs, so the anchor below silently does nothing
+// inside the app. Try the native path first (cache file + system share
+// sheet); the browser keeps the anchor download.
+async function downloadBlob(blob: Blob, filename: string) {
+  if (await downloadBlobInApp(blob, filename)) {
+    return;
+  }
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
   a.href = url;
@@ -57,7 +65,7 @@ function textToPdfLatin(text: string, filename: string) {
     });
     page += 1;
   }
-  doc.save(filename);
+  void downloadBlob(doc.output('blob'), filename);
 }
 
 /** Wrap paragraphs to canvas lines (word wrap + hard-split overlong words). Exported for unit tests. */
@@ -139,7 +147,7 @@ async function textToPdfBengali(text: string, filename: string) {
     if (start > 0) doc.addPage();
     doc.addImage(canvas.toDataURL('image/png'), 'PNG', 0, 0, 210, 297);
   }
-  doc.save(filename);
+  void downloadBlob(doc.output('blob'), filename);
 }
 
 export default function LifePdfToolsPage() {
@@ -207,7 +215,7 @@ export default function LifePdfToolsPage() {
         pages.forEach((page) => merged.addPage(page));
       }
       const out = await merged.save();
-      downloadBlob(new Blob([out.buffer as ArrayBuffer], { type: 'application/pdf' }), 'eduvelto-merged.pdf');
+      await downloadBlob(new Blob([out.buffer as ArrayBuffer], { type: 'application/pdf' }), 'eduvelto-merged.pdf');
       setMergeMsg(
         t({ bn: `${files.length}টি PDF একত্র করে ডাউনলোড হয়েছে।`, en: `${files.length} PDFs merged and downloaded.` }),
       );

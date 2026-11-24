@@ -1,5 +1,5 @@
 import { Suspense, lazy, useCallback, useEffect, useState } from 'react';
-import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
+import { Navigate, Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 import { strings } from './i18n/strings';
 import { useAuth } from './lib/auth';
 import {
@@ -21,10 +21,12 @@ import {
   useAppVersionGate,
 } from './components/AppVersionGate';
 import { AdminGuard } from './components/AdminGuard';
+import { AppLoadingScreen } from './components/AppLoadingScreen';
 import { RouteSeo } from './components/RouteSeo';
 import { NuQuestionWorkbenchGuard } from './components/NuQuestionWorkbenchGuard';
 import { T, useLanguage } from './i18n/LanguageContext';
 import { setupNativeBackButton } from './lib/nativeBackButton';
+import { setupPushNotifications } from './lib/pushNotifications';
 // SCALE (10k users): route-level code splitting. Before this change the
 // first visit downloaded ALL 35 pages in one 909 kB bundle (admin pages
 // included, for every visitor). Now the first load is only the shell +
@@ -166,7 +168,7 @@ const AdmissionsDashboardPage = lazy(() => import('./pages/AdmissionsDashboardPa
 // to /login.
 function DashboardRedirect() {
   const { user, profile, loading } = useAuth();
-  if (loading) return null;
+  if (loading) return <AppLoadingScreen />;
   if (!user) return <Navigate to="/login" replace />;
   if (!profile) return <Navigate to="/register/role" replace />;
   if (profile.role === 'owner' || profile.role === 'admin' || profile.role === 'moderator') {
@@ -218,6 +220,22 @@ function ScrollToTop() {
 // button is untouched.
 function NativeBackButton() {
   useEffect(() => setupNativeBackButton(), []);
+  return null;
+}
+
+// Push notifications, Phase A (app audit, 24 Nov 2026): registers for
+// push + subscribes to the 'eduvelto-announcements' topic once the
+// user is signed in, native-app only (lib/pushNotifications.ts). A
+// tap deep-links to notification data `link`. In a browser, or without
+// google-services.json in the wrapper, setupPushNotifications() is a
+// silent no-op.
+function NativePushNotifications() {
+  const { user } = useAuth();
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (!user) return () => undefined;
+    return setupPushNotifications(navigate);
+  }, [user, navigate]);
   return null;
 }
 
@@ -295,6 +313,7 @@ export default function App() {
     >
       <ScrollToTop />
       <NativeBackButton />
+      <NativePushNotifications />
       {/* Light header (homepage redesign, 21 Nov 2026): Home pill + 4
           section dropdowns + search + dark-mode (Coming Soon) + auth.
           See components/HeaderNav.tsx. Hidden on /admin* and /ceo* —

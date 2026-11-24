@@ -51,7 +51,10 @@ describe('InstallPage', () => {
     mockWindow(false);
     const html = renderWithRouter(<InstallPage />);
     expect(html).toContain('অ্যাপ ইনস্টল করুন');
-    expect(html).toContain('Play Store অ্যাপ নেই');
+    // Audit 24 Nov 2026: the intro no longer says "no Play Store app" —
+    // the Android APK exists (APKPure listing pending).
+    expect(html).toContain('Android অ্যাপ তৈরি হয়েছে');
+    expect(html).toContain('APKPure');
     expect(html).toContain('Android / কম্পিউটারে ইনস্টল');
     expect(html).not.toContain('ইতিমধ্যেই Eduvelto অ্যাপ ব্যবহার করছেন');
   });

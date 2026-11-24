@@ -1,11 +1,13 @@
 // /install — the app download + update tab (owner brief 22 Nov 2026).
 //
-// HONEST FACT: Eduvelto has NO native app (Android/iOS 0%) and NO Play
-// Store listing. The "app" IS the PWA — Add to Home Screen. This page
-// says that plainly instead of pretending a store app exists, and it is
-// the single persistent place where the download/update link lives
-// (linked from the footer, the Profile "অ্যাপ আপডেট" section, the update
-// notice bar, and the forced-update block screen).
+// FACT (updated 24 Nov 2026, app audit): the Eduvelto Android app
+// EXISTS as an APK (Capacitor wrapper, com.eduvelto.app) but has NO
+// store listing yet (APKPure listing pending). The "app" in a browser
+// IS the PWA — Add to Home Screen. This page says that plainly instead
+// of pretending a store app exists, and it is the single persistent
+// place where the download/update link lives (linked from the footer,
+// the Profile "অ্যাপ আপডেট" section, the update notice bar, and the
+// forced-update block screen).
 //
 // IN-APP (23 Nov 2026): inside the Capacitor Android app this page must
 // NOT show the PWA install steps — the user already HAS the app, and
@@ -115,8 +117,8 @@ export default function InstallPage() {
     <PageShell titleBn="অ্যাপ ইনস্টল করুন" titleEn="Install the app">
       <p style={{ lineHeight: 1.8 }}>
         {t({
-          bn: 'Eduvelto-র এখনো কোনো Play Store অ্যাপ নেই। এই PWA-ই অফিসিয়াল অ্যাপ — ফোনের হোম স্ক্রিনে যোগ করলেই অ্যাপের মতো চলবে, নতুন ভার্সন এলে এখান থেকেই আপডেট পাবেন।',
-          en: 'Eduvelto has no Play Store app yet. This PWA is the official app — add it to your home screen and it works like an app; new versions arrive here.',
+          bn: 'Eduvelto Android অ্যাপ তৈরি হয়েছে — শীঘ্রই APKPure থেকে ডাউনলোড করা যাবে। আপাতত এই PWA-ই অফিসিয়াল অ্যাপ — ফোনের হোম স্ক্রিনে যোগ করলেই অ্যাপের মতো চলবে, নতুন ভার্সন এলে এখান থেকেই আপডেট পাবেন।',
+          en: 'The Eduvelto Android app is ready — it will soon be downloadable from APKPure. For now, this PWA is the official app — add it to your home screen and it works like an app; new versions arrive here.',
         })}
       </p>
 

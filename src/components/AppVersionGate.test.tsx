@@ -4,11 +4,21 @@
 // in a plain Node vitest environment. MemoryRouter provides the router
 // context for the download <Link>.
 // Run: npx vitest run src/components/AppVersionGate.test.tsx
-import { describe, it, expect } from 'vitest';
+import { describe, it, expect, afterEach } from 'vitest';
 import { renderToStaticMarkup } from 'react-dom/server';
 import { MemoryRouter } from 'react-router-dom';
 import { AppVersionBlockedScreen, AppVersionUpdateBar, isGateExemptPath } from './AppVersionGate';
 import type { AppVersionConfig } from '../lib/appVersion';
+
+type GlobalWindow = { window?: unknown };
+
+function setWindow(win: unknown) {
+  (globalThis as unknown as GlobalWindow).window = win;
+}
+
+function clearWindow() {
+  delete (globalThis as unknown as GlobalWindow).window;
+}
 
 const forcedConfig: AppVersionConfig = {
   latestVersion: '0.2.0',
@@ -19,6 +29,16 @@ const forcedConfig: AppVersionConfig = {
 };
 
 describe('AppVersionBlockedScreen', () => {
+  const originalWindow = (globalThis as unknown as GlobalWindow).window;
+
+  afterEach(() => {
+    if (originalWindow === undefined) {
+      clearWindow();
+    } else {
+      setWindow(originalWindow);
+    }
+  });
+
   it('renders the Bangla block message, release notes and a working download link', () => {
     const html = renderToStaticMarkup(
       <MemoryRouter>
@@ -51,6 +71,37 @@ describe('AppVersionBlockedScreen', () => {
         />
       </MemoryRouter>,
     );
+    expect(html).toContain('href="https://example.com/app"');
+  });
+
+  it('in-app without a real download URL: honest message, no dead /install link', () => {
+    // Audit 24 Nov 2026 (F3): inside the app a button to /install is a
+    // dead end — the in-app /install view has no download link. The
+    // blocked screen must say so and offer the login escape hatch
+    // instead of a button that goes nowhere.
+    setWindow({ Capacitor: { isNativePlatform: () => true } });
+    const html = renderToStaticMarkup(
+      <MemoryRouter>
+        <AppVersionBlockedScreen config={forcedConfig} />
+      </MemoryRouter>,
+    );
+    expect(html).toContain('ডাউনলোড লিঙ্ক এখনো দেওয়া হয়নি');
+    expect(html).toContain('আপনি Eduvelto Android অ্যাপ ব্যবহার করছেন');
+    expect(html).not.toContain('নতুন ভার্সন ডাউনলোড করুন');
+    expect(html).not.toContain('href="/install"');
+    expect(html).toContain('href="/login"');
+  });
+
+  it('in-app with a real download URL: still shows the download button', () => {
+    setWindow({ Capacitor: { isNativePlatform: () => true } });
+    const html = renderToStaticMarkup(
+      <MemoryRouter>
+        <AppVersionBlockedScreen
+          config={{ ...forcedConfig, downloadUrl: 'https://example.com/app' }}
+        />
+      </MemoryRouter>,
+    );
+    expect(html).toContain('নতুন ভার্সন ডাউনলোড করুন');
     expect(html).toContain('href="https://example.com/app"');
   });
 });

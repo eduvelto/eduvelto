@@ -25,6 +25,7 @@ import {
   type AppVersionConfig,
 } from '../lib/appVersion';
 import { Button } from './ui';
+import { isNativeApp } from '../lib/isNativeApp';
 
 export function isGateExemptPath(pathname: string): boolean {
   return (
@@ -110,6 +111,16 @@ function DownloadButton(props: { config: AppVersionConfig | null; label: string 
  */
 export function AppVersionBlockedScreen(props: { config: AppVersionConfig | null }) {
   const { config } = props;
+  // IN-APP (audit, 24 Nov 2026): inside the Capacitor app, a download
+  // button to '/install' is a dead end — the in-app /install view has
+  // no download link by design, and Home returns to this blocked
+  // screen. So when no real download URL is configured, show an honest
+  // message + the login escape hatch instead of a button that goes
+  // nowhere. A real absolute downloadUrl still gets the button (it
+  // opens in the system browser).
+  const inApp = isNativeApp();
+  const downloadUrl = config?.downloadUrl ?? DEFAULT_DOWNLOAD_URL;
+  const hasRealDownload = !downloadUrl.startsWith('/');
   return (
     <div
       role="alert"
@@ -140,7 +151,10 @@ export function AppVersionBlockedScreen(props: { config: AppVersionConfig | null
         </div>
         <h1 style={{ fontSize: 26, margin: '16px 0 8px' }}>নতুন ভার্সন এসেছে</h1>
         <p style={{ fontSize: 17, lineHeight: 1.8, margin: '0 0 8px' }}>
-          এই পুরোনো ভার্সনটি আর ব্যবহার করা যাবে না। নতুন ভার্সন ডাউনলোড করুন।
+          এই পুরোনো ভার্সনটি আর ব্যবহার করা যাবে না।
+          {inApp && !hasRealDownload
+            ? null
+            : ' নতুন ভার্সন ডাউনলোড করুন।'}
         </p>
         {config?.releaseNotes ? (
           <p
@@ -163,9 +177,25 @@ export function AppVersionBlockedScreen(props: { config: AppVersionConfig | null
           আপনার ভার্সন: {APP_VERSION}
           {config ? ` · সর্বশেষ ভার্সন: ${config.latestVersion}` : ''}
         </p>
-        <DownloadButton config={config} label="নতুন ভার্সন ডাউনলোড করুন" />
+        {inApp && !hasRealDownload ? (
+          <>
+            <p style={{ fontSize: 16, lineHeight: 1.8, margin: '0 0 8px' }}>
+              নতুন ভার্সনের ডাউনলোড লিঙ্ক এখনো দেওয়া হয়নি — Eduvelto-র
+              অফিসিয়াল চ্যানেল থেকে নতুন APK পাওয়া যাবে।
+            </p>
+            <p style={{ fontSize: 15, margin: '0 0 20px' }}>
+              <Link to="/login" style={{ color: '#142B3B', fontWeight: 700 }}>
+                লগইন করুন →
+              </Link>
+            </p>
+          </>
+        ) : (
+          <DownloadButton config={config} label="নতুন ভার্সন ডাউনলোড করুন" />
+        )}
         <p style={{ fontSize: 13, color: '#57616A', margin: '16px 0 0', lineHeight: 1.7 }}>
-          Eduvelto-র এখনো কোনো Play Store অ্যাপ নেই — নতুন ভার্সন মানেই নতুন PWA (ফোনে Add to Home Screen করা অ্যাপ)।
+          {inApp
+            ? 'আপনি Eduvelto Android অ্যাপ ব্যবহার করছেন।'
+            : 'ব্রাউজারে নতুন ভার্সন মানেই নতুন PWA (ফোনে Add to Home Screen করা অ্যাপ)।'}
         </p>
       </div>
     </div>
