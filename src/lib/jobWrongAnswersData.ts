@@ -97,6 +97,8 @@ export interface NotebookExplanation {
   whyWrongText: string | null;
   /** Where the explanation came from, in plain words. */
   sourceBn: string;
+  /** English version of the source line. */
+  sourceEn: string;
 }
 
 const keyCache = new Map<string, JobQuestionKey | null>();
@@ -125,12 +127,12 @@ export async function loadNotebookExplanation(args: {
   selectedLetter: string | null;
 }): Promise<NotebookExplanation | null> {
   const topicBundleId = `topic__${args.topicId}`;
-  const candidates: Array<{ bundleId: string; sourceBn: string }> = [];
+  const candidates: Array<{ bundleId: string; sourceBn: string; sourceEn: string }> = [];
   if (args.sourceBundleKind === 'topic' || args.sourceBundleKind === 'previous') {
-    candidates.push({ bundleId: args.sourceBundleId, sourceBn: 'এই অনুশীলন সেটের ব্যাখ্যা' });
+    candidates.push({ bundleId: args.sourceBundleId, sourceBn: 'এই অনুশীলন সেটের ব্যাখ্যা', sourceEn: 'Explanation from this practice set' });
   }
   if (args.sourceBundleId !== topicBundleId) {
-    candidates.push({ bundleId: topicBundleId, sourceBn: 'এই টপিকের অনুশীলন সেটের ব্যাখ্যা' });
+    candidates.push({ bundleId: topicBundleId, sourceBn: 'এই টপিকের অনুশীলন সেটের ব্যাখ্যা', sourceEn: "Explanation from this topic's practice set" });
   }
   for (const c of candidates) {
     const key = await cachedKey(c.bundleId);
@@ -143,6 +145,7 @@ export async function loadNotebookExplanation(args: {
       whyWrongText:
         args.selectedLetter === null ? null : (a.whyWrong?.[args.selectedLetter] ?? null),
       sourceBn: c.sourceBn,
+      sourceEn: c.sourceEn,
     };
   }
   return null;

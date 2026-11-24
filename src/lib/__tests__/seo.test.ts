@@ -1135,3 +1135,125 @@ describe('resolveRouteSeo — brand-SEO wave 1 (24 Nov 2026)', () => {
     }
   });
 });
+
+describe('resolveRouteSeo — English SEO (24 Nov 2026, language system)', () => {
+  const BN = /[\u0980-\u09FF]/;
+
+  it('every sitemap URL resolves in English with no Bangla in title/description and a clean canonical', () => {
+    for (const path of SITEMAP_URLS) {
+      if (path === '/founder') continue;
+      const seo = resolveRouteSeo(path, 'en');
+      expect(seo, path).not.toBeNull();
+      expect(seo!.title, path).not.toMatch(BN);
+      expect(seo!.description, path).not.toMatch(BN);
+      expect(seo!.canonical, path).toBe(`${SITE_URL}${path === '/' ? '/' : path}`);
+      expect(seo!.canonical, path).not.toContain('?lang=');
+    }
+  });
+
+  it('English titles are unique across sitemap URLs', () => {
+    const titles = new Set<string>();
+    for (const path of SITEMAP_URLS) {
+      if (path === '/founder') continue;
+      const seo = resolveRouteSeo(path, 'en')!;
+      expect(titles.has(seo.title), `${path} duplicates title "${seo.title}"`).toBe(false);
+      titles.add(seo.title);
+    }
+  });
+
+  it('English copy keeps the honest caveats (no content for 1–5/6–8, drafts, coming soon)', () => {
+    expect(resolveRouteSeo('/class/class-1-5', 'en')!.description).toContain(
+      'have not reached the library yet',
+    );
+    expect(resolveRouteSeo('/class/class-6-8', 'en')!.description).toContain(
+      'have not reached the library yet',
+    );
+    expect(resolveRouteSeo('/learn/bcs-english-tense', 'en')!.description).toContain(
+      'awaiting teacher review',
+    );
+    expect(resolveRouteSeo('/ai-teacher', 'en')!.description).toContain('coming soon');
+    expect(resolveRouteSeo('/health/doctors', 'en')!.description).toContain('nobody is listed yet');
+  });
+
+  it('English copy never claims a #1 rank', () => {
+    for (const path of SITEMAP_URLS) {
+      if (path === '/founder') continue;
+      const seo = resolveRouteSeo(path, 'en')!;
+      expect(seo.title, path).not.toMatch(FORBIDDEN_RANK_CLAIM);
+      expect(seo.description, path).not.toMatch(FORBIDDEN_RANK_CLAIM);
+    }
+  });
+
+  it('dynamic pages resolve in English: exam, subject, NU subject, opportunity', () => {
+    const bcs = resolveRouteSeo('/jobs/bcs', 'en')!;
+    expect(bcs.title).toContain('BCS Preparation');
+    expect(bcs.title).toContain('Bangladesh Civil Service');
+    expect(bcs.description).toContain('BCS English MCQ practice is live');
+    const subj = resolveRouteSeo('/jobs/bcs/subjects/english', 'en')!;
+    expect(subj.title).toContain('English Language & Literature — BCS Preparation');
+    expect(subj.description).toContain('marks in the verified syllabus');
+    const nu = resolveRouteSeo('/admissions/national-university/science/subjects/english', 'en')!;
+    expect(nu.title).toContain('English — National University Admission Preparation (Science)');
+    expect(nu.description).toContain('verified from the circular');
+    const opp = resolveRouteSeo('/opportunities/bpsc-non-cadre-2026', 'en')!;
+    expect(opp.title).not.toMatch(BN);
+    expect(opp.description).toContain('verified from an official source');
+  });
+
+  it('English breadcrumbs start with Home and carry no Bangla', () => {
+    for (const path of [
+      '/jobs/bcs/practice/english',
+      '/jobs/bcs/practice/english/grammar',
+      '/learn/bcs-english-tense',
+      '/opportunities',
+      '/jobs/bcs/subjects/english',
+    ]) {
+      const names = breadcrumbNames(resolveRouteSeo(path, 'en')!);
+      expect(names[0], path).toBe('Home');
+      for (const name of names) expect(name, path).not.toMatch(BN);
+    }
+    expect(breadcrumbNames(resolveRouteSeo('/jobs/bcs/practice/english', 'en')!)).toEqual([
+      'Home',
+      'Job Preparation',
+      'BCS',
+      'Practice',
+      'English',
+    ]);
+  });
+
+  it('English ItemLists name exams and sections in English', () => {
+    const jobs = resolveRouteSeo('/jobs', 'en')!;
+    const list = (jobs.jsonLd as Array<Record<string, unknown>>).find(
+      (o) => o['@type'] === 'ItemList',
+    ) as Record<string, unknown>;
+    expect(list['name']).toBe('Job Preparation — Exams');
+    const items = list['itemListElement'] as Array<Record<string, unknown>>;
+    expect(items[0]['name']).toBe('BCS Preparation');
+    const practice = resolveRouteSeo('/jobs/bcs/practice/english', 'en')!;
+    const plist = (practice.jsonLd as Array<Record<string, unknown>>).find(
+      (o) => o['@type'] === 'ItemList',
+    ) as Record<string, unknown>;
+    expect(plist['name']).toBe('BCS English Practice');
+  });
+
+  it('resolveFallbackSeo returns the English home title with noindex', () => {
+    const fb = resolveFallbackSeo('/jobs/primary', 'en')!;
+    expect(fb.title).toBe("Eduvelto — Bangladesh's Best Free Education Platform");
+    expect(fb.title).not.toMatch(BN);
+    expect(fb.canonical).toBe(`${SITE_URL}/`);
+    expect(fb.robots).toBe('noindex, nofollow');
+    expect(resolveFallbackSeo('/founder', 'en')).toBeNull();
+  });
+
+  it('WebPage JSON-LD inLanguage follows the language', () => {
+    const webPage = (s: ResolvedSeo) =>
+      (s.jsonLd as Array<Record<string, unknown>>).find(
+        (o) => o['@type'] === 'WebPage',
+      ) as Record<string, unknown>;
+    const bn = resolveRouteSeo('/jobs', 'bn')!;
+    const en = resolveRouteSeo('/jobs', 'en')!;
+    expect(webPage(bn)['inLanguage']).toEqual(['bn']);
+    expect(webPage(en)['inLanguage']).toEqual(['en']);
+    expect(webPage(en)['name']).toBe(en.title);
+  });
+});

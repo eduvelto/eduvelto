@@ -12,6 +12,7 @@ import {
   computeStreakDays,
   dashboardAchievements,
   dashboardWeakTopics,
+  dayLabel,
   dayLabelBn,
   dhakaDayKey,
   perExamProgress,
@@ -299,5 +300,33 @@ describe('wrongAnswerSummary', () => {
     expect(s.distinctWrongQuestions).toBe(4);
     expect(s.recent.map((r) => r.questionId)).toEqual(['q-1', 'q-2', 'q-3']);
     expect(s.recent[0].attemptDocId).toBe('new');
+  });
+});
+
+describe('language system (24 Nov 2026) — English day labels', () => {
+  it('dayLabel renders Today/Yesterday/en-GB dates', () => {
+    expect(dayLabel('2026-11-22', NOW, 'en')).toBe('Today');
+    expect(dayLabel('2026-11-21', NOW, 'en')).toBe('Yesterday');
+    expect(dayLabel('2026-11-19', NOW, 'en')).toBe('19 Nov');
+    expect(dayLabel('2026-11-22', NOW, 'bn')).toBe('আজ');
+  });
+
+  it('weekActivity days carry labelEn', () => {
+    const week = weekActivity([], NOW);
+    expect(week.days[0].labelEn).toBe('Today');
+    expect(week.days[0].labelBn).toBe('আজ');
+  });
+
+  it('dashboardAchievements carry English labels and rules', () => {
+    const attempts = [
+      summary({ docId: 'p1', kind: 'practice', submittedAtMillis: NOW }),
+      summary({ docId: 'm1', kind: 'mock', submittedAtMillis: NOW - DAY }),
+    ];
+    const earned = dashboardAchievements(attempts, 7);
+    const first = earned.find((a) => a.key === 'job_first-practice')!;
+    expect(first.labelEn).toBe('First practice completed');
+    expect(first.ruleEn).toContain('first practice');
+    const streak = earned.find((a) => a.key === 'job_7-day-streak')!;
+    expect(streak.labelEn).toBe('7-day streak');
   });
 });

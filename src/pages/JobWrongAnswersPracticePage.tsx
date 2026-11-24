@@ -31,7 +31,8 @@
 // that leftover is the known limitation, recoverable via the
 // dashboard's discard flow; it never corrupts stored data.
 //
-// LANGUAGE: all UI text is Bangla (one-language rule).
+// LANGUAGE: UI text is Bangla + English via useLanguage().
+    // Question content stays in its source language.
 
 import { useEffect, useRef, useState } from 'react';
 import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
@@ -45,7 +46,7 @@ import {
   buildAutosavePatch,
   goToQuestion,
   jobExamPattern,
-  jobTopicLabelBn,
+  jobTopicLabel,
   sessionProgress,
   toggleMarkForReview,
   type JobPracticeSessionDoc,
@@ -81,7 +82,7 @@ const MARKED = '#8A6100';
 export default function JobWrongAnswersPracticePage() {
   const { topicId = '' } = useParams<{ topicId: string }>();
   const { user } = useAuth();
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
   const navigate = useNavigate();
   const location = useLocation();
   // Sections audit (24 Nov 2026): return here after sign-in.
@@ -96,8 +97,9 @@ export default function JobWrongAnswersPracticePage() {
   const [items, setItems] = useState<PlannedSessionItem[]>([]);
   const [preStreak, setPreStreak] = useState<Map<string, number>>(new Map());
   const [wrongCounts, setWrongCounts] = useState<Map<string, number>>(new Map());
-  const [droppedNote, setDroppedNote] = useState('');
-  const [noFreshNote, setNoFreshNote] = useState('');
+  const [droppedMissing, setDroppedMissing] = useState(0);
+  const [droppedCap, setDroppedCap] = useState(0);
+  const [noFreshLeft, setNoFreshLeft] = useState(false);
   const [sessionId, setSessionId] = useState('');
   const [session, setSession] = useState<JobPracticeSessionDoc | null>(null);
   const [startedAtMillis, setStartedAtMillis] = useState(0);
@@ -164,22 +166,22 @@ export default function JobWrongAnswersPracticePage() {
         ]);
         if (!alive) return;
         if (!b) {
-          setError('এই টপিকের অনুশীলন সেটটি পাওয়া যায়নি — হয় ঠিকানাটি ভুল, নয় সেটটি এখনো প্রকাশিত হয়নি।');
+          setError(t({ bn: 'এই টপিকের অনুশীলন সেটটি পাওয়া যায়নি — হয় ঠিকানাটি ভুল, নয় সেটটি এখনো প্রকাশিত হয়নি।', en: "This topic's practice set was not found — the address may be wrong, or the set has not been published yet." }));
           setPhase('error');
           return;
         }
         if (b.status !== 'published') {
-          setError('এই টপিকের অনুশীলন সেটটি এখনো প্রকাশিত হয়নি — শিক্ষক যাচাইয়ের পর প্রকাশিত হবে।');
+          setError(t({ bn: 'এই টপিকের অনুশীলন সেটটি এখনো প্রকাশিত হয়নি — শিক্ষক যাচাইয়ের পর প্রকাশিত হবে।', en: "This topic's practice set has not been published yet — it will be published after teacher review." }));
           setPhase('error');
           return;
         }
         if (b.kind !== 'topic') {
-          setError('এটি টপিক-ধরনের সেট নয় — ভুল-উত্তর অনুশীলন এখানে নয়।');
+          setError(t({ bn: 'এটি টপিক-ধরনের সেট নয় — ভুল-উত্তর অনুশীলন এখানে নয়।', en: 'This is not a topic-type set — wrong-answer practice does not run here.' }));
           setPhase('error');
           return;
         }
         if (!k) {
-          setError('এই সেটের উত্তর-চাবি পাওয়া যায়নি — অনুশীলন চালানো যাবে না।');
+          setError(t({ bn: 'এই সেটের উত্তর-চাবি পাওয়া যায়নি — অনুশীলন চালানো যাবে না।', en: "This set's answer key was not found — practice cannot run." }));
           setPhase('error');
           return;
         }
@@ -213,21 +215,9 @@ export default function JobWrongAnswersPracticePage() {
         setItems(planned.items);
         setPreStreak(new Map(wanted.map((e) => [e.questionId, e.consecutiveCorrect])));
         setWrongCounts(new Map(wanted.map((e) => [e.questionId, e.wrongCount])));
-        setDroppedNote(
-          [
-            planned.droppedMissing.length > 0
-              ? `${planned.droppedMissing.length}টি প্রশ্ন এই সেটে আর নেই বলে বাদ দেওয়া হয়েছে`
-              : '',
-            planned.droppedCap.length > 0
-              ? `${planned.droppedCap.length}টি প্রশ্ন সেশনের সীমার জন্য বাদ দেওয়া হয়েছে`
-              : '',
-          ].filter(Boolean).join(' · '),
-        );
-        setNoFreshNote(
-          planned.noFreshLeft
-            ? 'এই টপিকের সব প্রশ্নই আগে চেষ্টা করা হয়েছে — নতুন প্রশ্ন আর নেই, তাই শুধু ভুল প্রশ্নগুলোই আছে।'
-            : '',
-        );
+        setDroppedMissing(planned.droppedMissing.length);
+        setDroppedCap(planned.droppedCap.length);
+        setNoFreshLeft(planned.noFreshLeft);
         setSessionId(started.sessionId);
         sessionIdRef.current = started.sessionId;
         setSession(started.session);
@@ -238,7 +228,7 @@ export default function JobWrongAnswersPracticePage() {
         setPhase('ready');
       } catch (e) {
         if (!alive) return;
-        setError(e instanceof Error ? e.message : 'অনুশীলন শুরু করা যায়নি — আবার চেষ্টা করুন।');
+        setError(e instanceof Error ? e.message : t({ bn: 'অনুশীলন শুরু করা যায়নি — আবার চেষ্টা করুন।', en: 'Practice could not be started — please try again.' }));
         setPhase('error');
       }
     })();
@@ -280,7 +270,7 @@ export default function JobWrongAnswersPracticePage() {
 
   if (phase === 'loading') {
     return (
-      <PageShell titleBn="ভুল-উত্তর অনুশীলন" titleEn="ভুল-উত্তর অনুশীলন" wide>
+      <PageShell titleBn="ভুল-উত্তর অনুশীলন" titleEn="Wrong-Answer Practice" wide>
         <Skeleton />
       </PageShell>
     );
@@ -288,13 +278,13 @@ export default function JobWrongAnswersPracticePage() {
 
   if (phase === 'signed-out') {
     return (
-      <PageShell titleBn="ভুল-উত্তর অনুশীলন" titleEn="ভুল-উত্তর অনুশীলন" wide>
+      <PageShell titleBn="ভুল-উত্তর অনুশীলন" titleEn="Wrong-Answer Practice" wide>
         <Card>
-          <div style={{ fontWeight: 700, color: 'var(--heading)', fontSize: 17 }}>অনুশীলন করতে লগইন করুন</div>
+          <div style={{ fontWeight: 700, color: 'var(--heading)', fontSize: 17 }}>{t({ bn: 'অনুশীলন করতে লগইন করুন', en: 'Log in to practise' })}</div>
           <p style={{ margin: '8px 0 12px', color: 'var(--muted)', fontSize: 14, lineHeight: 1.7 }}>
-            অনুশীলন শুধু লগইন করা শিক্ষার্থীদের জন্য — আপনার উত্তর ও অগ্রগতি সংরক্ষিত হয়।
+            {t({ bn: 'অনুশীলন শুধু লগইন করা শিক্ষার্থীদের জন্য — আপনার উত্তর ও অগ্রগতি সংরক্ষিত হয়।', en: 'Practice is only for logged-in students — your answers and progress are saved.' })}
           </p>
-          <Link to="/login" state={back} style={{ fontWeight: 600 }}>লগইন করুন →</Link>
+          <Link to="/login" state={back} style={{ fontWeight: 600 }}>{t({ bn: 'লগইন করুন →', en: 'Log in →' })}</Link>
         </Card>
       </PageShell>
     );
@@ -302,13 +292,13 @@ export default function JobWrongAnswersPracticePage() {
 
   if (phase === 'empty') {
     return (
-      <PageShell titleBn="ভুল-উত্তর অনুশীলন" titleEn="ভুল-উত্তর অনুশীলন" wide>
+      <PageShell titleBn="ভুল-উত্তর অনুশীলন" titleEn="Wrong-Answer Practice" wide>
         <Card>
-          <div style={{ fontWeight: 700, color: 'var(--heading)', fontSize: 17 }}>এই টপিকে অনুশীলনের মতো ভুল প্রশ্ন নেই</div>
+          <div style={{ fontWeight: 700, color: 'var(--heading)', fontSize: 17 }}>{t({ bn: 'এই টপিকে অনুশীলনের মতো ভুল প্রশ্ন নেই', en: 'No wrong questions in this topic to practise' })}</div>
           <p style={{ margin: '8px 0 12px', color: 'var(--muted)', fontSize: 14, lineHeight: 1.7 }}>
-            হয় এই টপিকের ভুল প্রশ্নগুলো শেখা হয়ে গেছে, নয় এখনো এই টপিকে কোনো ভুল হয়নি।
+            {t({ bn: 'হয় এই টপিকের ভুল প্রশ্নগুলো শেখা হয়ে গেছে, নয় এখনো এই টপিকে কোনো ভুল হয়নি।', en: "Either this topic's wrong questions have been learned, or there has been no mistake in this topic yet." })}
           </p>
-          <Link to="/jobs/wrong-answers" style={{ fontWeight: 600 }}>← নোটবুকে ফিরুন</Link>
+          <Link to="/jobs/wrong-answers" style={{ fontWeight: 600 }}>{t({ bn: '← নোটবুকে ফিরুন', en: '← Back to the notebook' })}</Link>
         </Card>
       </PageShell>
     );
@@ -316,10 +306,10 @@ export default function JobWrongAnswersPracticePage() {
 
   if (phase === 'error' || !bundle || !subsetBundle || !subsetKey || !session) {
     return (
-      <PageShell titleBn="ভুল-উত্তর অনুশীলন" titleEn="ভুল-উত্তর অনুশীলন" wide>
-        <AlertBox tone="error">{error || 'অনুশীলন শুরু করা যায়নি।'}</AlertBox>
+      <PageShell titleBn="ভুল-উত্তর অনুশীলন" titleEn="Wrong-Answer Practice" wide>
+        <AlertBox tone="error">{error || t({ bn: 'অনুশীলন শুরু করা যায়নি।', en: 'Practice could not be started.' })}</AlertBox>
         <p style={{ marginTop: 16 }}>
-          <Link to="/jobs/wrong-answers" style={{ fontWeight: 600 }}>← নোটবুকে ফিরুন</Link>
+          <Link to="/jobs/wrong-answers" style={{ fontWeight: 600 }}>{t({ bn: '← নোটবুকে ফিরুন', en: '← Back to the notebook' })}</Link>
         </p>
       </PageShell>
     );
@@ -330,7 +320,7 @@ export default function JobWrongAnswersPracticePage() {
   const pattern = jobExamPattern(bundle.examSlug);
   const scoringNotice =
     pattern && !pattern.negativeMarkingVerified
-      ? 'এই পরীক্ষার নেগেটিভ মার্কিং এখনো বিজ্ঞপ্তি থেকে যাচাই হয়নি — তাই ভুল উত্তরে নম্বর কাটা হচ্ছে না। এই স্কোর অফিসিয়াল ধরনের স্কোর নয়।'
+      ? t({ bn: 'এই পরীক্ষার নেগেটিভ মার্কিং এখনো বিজ্ঞপ্তি থেকে যাচাই হয়নি — তাই ভুল উত্তরে নম্বর কাটা হচ্ছে না। এই স্কোর অফিসিয়াল ধরনের স্কোর নয়।', en: "This exam's negative marking has not been verified from the circular yet — so wrong answers do not lose marks. This score is not an official-style score." })
       : null;
   const currentN = session.currentQuestion;
   const orderedNs = session.questionRefs.map((r) => r.n);
@@ -421,44 +411,54 @@ export default function JobWrongAnswersPracticePage() {
         state: { fromWrongAnswers: true, clearedCount: justCleared.length, clearedQuestionIds: justCleared },
       });
     } catch (e) {
-      setSubmitError(e instanceof Error ? e.message : 'জমা দেওয়া যায়নি — আবার চেষ্টা করুন।');
+      setSubmitError(e instanceof Error ? e.message : t({ bn: 'জমা দেওয়া যায়নি — আবার চেষ্টা করুন।', en: 'Could not be submitted — please try again.' }));
       setSubmitting(false);
       setConfirming(false);
     }
   }
 
   const saveLabel =
-    saveState === 'saving' ? 'সংরক্ষণ হচ্ছে…' : saveState === 'error' ? 'সংরক্ষণ হয়নি — আবার চেষ্টা করা হবে' : 'সংরক্ষিত';
+    saveState === 'saving'
+      ? t({ bn: 'সংরক্ষণ হচ্ছে…', en: 'Saving…' })
+      : saveState === 'error'
+        ? t({ bn: 'সংরক্ষণ হয়নি — আবার চেষ্টা করা হবে', en: 'Not saved — will retry' })
+        : t({ bn: 'সংরক্ষিত', en: 'Saved' });
   const reviewCount = items.filter((i) => i.isReview).length;
   const freshCount = items.length - reviewCount;
 
   return (
-    <PageShell titleBn={`${jobTopicLabelBn(topicId)} — ভুল-উত্তর অনুশীলন`} titleEn={`${jobTopicLabelBn(topicId)} — ভুল-উত্তর অনুশীলন`} wide maxWidth={1240}>
+    <PageShell titleBn={`${jobTopicLabel(topicId, 'bn')} — ভুল-উত্তর অনুশীলন`} titleEn={`${jobTopicLabel(topicId, 'en')} — Wrong-Answer Practice`} wide maxWidth={1240}>
       <div style={{ position: 'sticky', top: 0, zIndex: 5, background: '#fff', padding: '10px 0 8px', borderBottom: '1px solid #E3E8EF', marginBottom: 16 }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 12, flexWrap: 'wrap' }}>
-          <div style={{ fontWeight: 700, color: 'var(--heading)', fontSize: 16 }}>{bundle.titleBn} — ভুল-উত্তর অনুশীলন</div>
+          <div style={{ fontWeight: 700, color: 'var(--heading)', fontSize: 16 }}>{t({ bn: `${bundle.titleBn} — ভুল-উত্তর অনুশীলন`, en: `${bundle.titleEn} — Wrong-Answer Practice` })}</div>
           <div style={{ display: 'flex', gap: 8, alignItems: 'center', fontSize: 13, color: 'var(--muted)' }}>
-            <Chip tone="outline">অনুশীলন — টাইমার নেই</Chip>
+            <Chip tone="outline">{t({ bn: 'অনুশীলন — টাইমার নেই', en: 'Practice — no timer' })}</Chip>
             <span>{saveLabel}</span>
           </div>
         </div>
         <div style={{ marginTop: 8 }}>
           <ProgressBar value={total === 0 ? 0 : (progress.answered / total) * 100} />
           <div style={{ fontSize: 13, color: 'var(--muted)', marginTop: 4 }}>
-            {progress.answered}/{total}টি উত্তর দেওয়া হয়েছে
-            {progress.marked > 0 ? ` · ${progress.marked}টি পরে দেখব` : ''}
-            {` · ${reviewCount}টি আগের ভুল প্রশ্ন${freshCount > 0 ? ` + ${freshCount}টি নতুন প্রশ্ন` : ''}`}
+            {t({ bn: `${progress.answered}/${total}টি উত্তর দেওয়া হয়েছে`, en: `${progress.answered}/${total} answered` })}
+            {progress.marked > 0 ? t({ bn: ` · ${progress.marked}টি পরে দেখব`, en: ` · ${progress.marked} to review later` }) : ''}
+            {t({ bn: ` · ${reviewCount}টি আগের ভুল প্রশ্ন${freshCount > 0 ? ` + ${freshCount}টি নতুন প্রশ্ন` : ''}`, en: ` · ${reviewCount} earlier wrong question${reviewCount === 1 ? '' : 's'}${freshCount > 0 ? ` + ${freshCount} new question${freshCount === 1 ? '' : 's'}` : ''}` })}
           </div>
         </div>
       </div>
 
       {scoringNotice ? <AlertBox tone="info">{scoringNotice}</AlertBox> : null}
-      {droppedNote ? <AlertBox tone="info">{droppedNote}।</AlertBox> : null}
-      {noFreshNote ? <AlertBox tone="info">{noFreshNote}</AlertBox> : null}
+      {droppedMissing > 0 || droppedCap > 0 ? (
+        <AlertBox tone="info">
+          {[
+            droppedMissing > 0 ? t({ bn: `${droppedMissing}টি প্রশ্ন এই সেটে আর নেই বলে বাদ দেওয়া হয়েছে`, en: `${droppedMissing} question${droppedMissing === 1 ? '' : 's'} dropped because ${droppedMissing === 1 ? 'it is' : 'they are'} no longer in this set` }) : '',
+            droppedCap > 0 ? t({ bn: `${droppedCap}টি প্রশ্ন সেশনের সীমার জন্য বাদ দেওয়া হয়েছে`, en: `${droppedCap} question${droppedCap === 1 ? '' : 's'} dropped for the session limit` }) : '',
+          ].filter(Boolean).join(' · ')}
+          {lang === 'bn' ? '।' : '.'}
+        </AlertBox>
+      ) : null}
+      {noFreshLeft ? <AlertBox tone="info">{t({ bn: 'এই টপিকের সব প্রশ্নই আগে চেষ্টা করা হয়েছে — নতুন প্রশ্ন আর নেই, তাই শুধু ভুল প্রশ্নগুলোই আছে।', en: 'Every question in this topic has been tried before — there are no new questions left, so only the wrong questions are here.' })}</AlertBox> : null}
       <p style={{ margin: '0 0 16px', color: 'var(--muted)', fontSize: 13, lineHeight: 1.7 }}>
-        এই সেশনে মূল ভুল প্রশ্নগুলোই আছে — একই প্রশ্ন বারবার মনে রাখা শেখা নয়; একই টপিকের নতুন প্রশ্নে নিয়মটি প্রয়োগ
-        করতে পারাই আসল শেখা। একটি প্রশ্ন নোটবুক থেকে সরবে যখন তা পরপর ২ বার সঠিক হবে — এই সেশনের সঠিক উত্তর সেই হিসাবেই
-        জমা হবে।
+        {t({ bn: 'এই সেশনে মূল ভুল প্রশ্নগুলোই আছে — একই প্রশ্ন বারবার মনে রাখা শেখা নয়; একই টপিকের নতুন প্রশ্নে নিয়মটি প্রয়োগ করতে পারাই আসল শেখা। একটি প্রশ্ন নোটবুক থেকে সরবে যখন তা পরপর ২ বার সঠিক হবে — এই সেশনের সঠিক উত্তর সেই হিসাবেই জমা হবে।', en: 'This session holds the original wrong questions — memorising the same question is not learning; applying the rule to a new question from the same topic is real learning. A question leaves the notebook when it is correct 2 times in a row — correct answers in this session count toward that.' })}
       </p>
 
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: 16, alignItems: 'start' }}>
@@ -466,10 +466,10 @@ export default function JobWrongAnswersPracticePage() {
           <Card>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8 }}>
               <span style={{ fontWeight: 700, color: 'var(--heading)' }}>
-                প্রশ্ন {currentIdx + 1} / {total}
+                {t({ bn: `প্রশ্ন ${currentIdx + 1} / ${total}`, en: `Question ${currentIdx + 1} / ${total}` })}
                 {' '}
                 <Chip tone={currentItem?.isReview ? 'gold' : 'blue'}>
-                  {currentItem?.isReview ? 'আগের ভুল প্রশ্ন' : 'নতুন প্রশ্ন'}
+                  {currentItem?.isReview ? t({ bn: 'আগের ভুল প্রশ্ন', en: 'Earlier wrong question' }) : t({ bn: 'নতুন প্রশ্ন', en: 'New question' })}
                 </Chip>
               </span>
               <button
@@ -486,16 +486,16 @@ export default function JobWrongAnswersPracticePage() {
                   fontWeight: 600,
                 }}
               >
-                {currentAnswer.markedForReview ? '★ পরে দেখব' : '☆ পরে দেখব'}
+                {currentAnswer.markedForReview ? t({ bn: '★ পরে দেখব', en: '★ Review later' }) : t({ bn: '☆ পরে দেখব', en: '☆ Review later' })}
               </button>
             </div>
             {currentItem?.isReview ? (
               <p style={{ margin: '0 0 8px', color: 'var(--muted)', fontSize: 13 }}>
-                এই প্রশ্নে আগে {wrongCounts.get(currentQ.questionId) ?? 1} বার ভুল হয়েছে।
+                {t({ bn: `এই প্রশ্নে আগে ${wrongCounts.get(currentQ.questionId) ?? 1} বার ভুল হয়েছে।`, en: `This question was answered wrong ${(wrongCounts.get(currentQ.questionId) ?? 1)} ${(wrongCounts.get(currentQ.questionId) ?? 1) === 1 ? 'time' : 'times'} before.` })}
               </p>
             ) : (
               <p style={{ margin: '0 0 8px', color: 'var(--muted)', fontSize: 13 }}>
-                এই টপিকের নতুন প্রশ্ন — নিয়মটি নতুন প্রশ্নে প্রয়োগ করে দেখুন।
+                {t({ bn: 'এই টপিকের নতুন প্রশ্ন — নিয়মটি নতুন প্রশ্নে প্রয়োগ করে দেখুন।', en: 'A new question from this topic — try applying the rule to it.' })}
               </p>
             )}
             <p style={{ margin: '0 0 16px', fontSize: 17, lineHeight: 1.8, color: 'var(--heading)', fontWeight: 600 }}>
@@ -533,8 +533,8 @@ export default function JobWrongAnswersPracticePage() {
                   >
                     <span style={{ fontWeight: 700, marginRight: 8 }}>{o.letter}.</span>
                     {o.text}
-                    {showCorrect ? <span style={{ float: 'right', color: CORRECT, fontWeight: 700 }}>✓ সঠিক</span> : null}
-                    {showWrong ? <span style={{ float: 'right', color: WRONG, fontWeight: 700 }}>✗ ভুল</span> : null}
+                    {showCorrect ? <span style={{ float: 'right', color: CORRECT, fontWeight: 700 }}>{t({ bn: '✓ সঠিক', en: '✓ Correct' })}</span> : null}
+                    {showWrong ? <span style={{ float: 'right', color: WRONG, fontWeight: 700 }}>{t({ bn: '✗ ভুল', en: '✗ Wrong' })}</span> : null}
                   </button>
                 );
               })}
@@ -543,52 +543,52 @@ export default function JobWrongAnswersPracticePage() {
             {isRevealed && keyAnswer ? (
               <div style={{ marginTop: 16, background: '#F4F7FA', borderRadius: 10, padding: '12px 14px' }}>
                 <div style={{ fontWeight: 700, color: isCorrect ? CORRECT : WRONG, marginBottom: 4 }}>
-                  {isCorrect ? 'সঠিক উত্তর!' : `সঠিক উত্তর: ${keyAnswer.correctLetter} — ${keyAnswer.correctText}`}
+                  {isCorrect ? t({ bn: 'সঠিক উত্তর!', en: 'Correct answer!' }) : t({ bn: `সঠিক উত্তর: ${keyAnswer.correctLetter} — ${keyAnswer.correctText}`, en: `Correct answer: ${keyAnswer.correctLetter} — ${keyAnswer.correctText}` })}
                 </div>
                 <p style={{ margin: 0, color: 'var(--heading)', fontSize: 14, lineHeight: 1.7 }}>
-                  ব্যাখ্যা: {keyAnswer.explanation}
+                  {t({ bn: 'ব্যাখ্যা:', en: 'Explanation:' })} {keyAnswer.explanation}
                 </p>
                 {!isCorrect && keyAnswer.whyWrong?.[currentAnswer.selected ?? ''] ? (
                   <p style={{ margin: '8px 0 0', color: 'var(--heading)', fontSize: 14, lineHeight: 1.7 }}>
-                    আপনার উত্তরটি কেন ভুল: {keyAnswer.whyWrong[currentAnswer.selected ?? '']}
+                    {t({ bn: 'আপনার উত্তরটি কেন ভুল:', en: 'Why your answer was wrong:' })} {keyAnswer.whyWrong[currentAnswer.selected ?? '']}
                   </p>
                 ) : null}
               </div>
             ) : (
               <p style={{ margin: '16px 0 0', color: 'var(--muted)', fontSize: 13 }}>
-                একটি অপশন বেছে নিলে সঙ্গে সঙ্গে সঠিক/ভুল ও ব্যাখ্যা দেখাবে।
+                {t({ bn: 'একটি অপশন বেছে নিলে সঙ্গে সঙ্গে সঠিক/ভুল ও ব্যাখ্যা দেখাবে।', en: 'Choosing an option shows the correct/wrong mark and explanation right away.' })}
               </p>
             )}
           </Card>
 
           <div style={{ position: 'sticky', bottom: 0, zIndex: 5, background: '#fff', padding: '12px 0', borderTop: '1px solid #E3E8EF', marginTop: 16, display: 'flex', gap: 8, flexWrap: 'wrap' }}>
             <Button variant="outline" disabled={currentIdx <= 0} onClick={() => goTo(orderedNs[currentIdx - 1])}>
-              ← আগেরটি
+              {t({ bn: '← আগেরটি', en: '← Previous' })}
             </Button>
             <Button variant="outline" disabled={currentIdx >= total - 1} onClick={() => goTo(orderedNs[currentIdx + 1])}>
-              পরেরটি →
+              {t({ bn: 'পরেরটি →', en: 'Next →' })}
             </Button>
             <span style={{ flex: 1 }} />
             <Button variant="accent" onClick={() => setConfirming(true)}>
-              জমা দিন
+              {t({ bn: 'জমা দিন', en: 'Submit' })}
             </Button>
           </div>
 
           {confirming ? (
             <Card style={{ marginTop: 12 }}>
-              <div style={{ fontWeight: 700, color: 'var(--heading)', fontSize: 16 }}>জমা দিতে চান?</div>
+              <div style={{ fontWeight: 700, color: 'var(--heading)', fontSize: 16 }}>{t({ bn: 'জমা দিতে চান?', en: 'Submit?' })}</div>
               <p style={{ margin: '8px 0 12px', color: 'var(--muted)', fontSize: 14, lineHeight: 1.7 }}>
-                {progress.answered}/{total}টি উত্তর দেওয়া হয়েছে
-                {total - progress.answered > 0 ? ` — ${total - progress.answered}টি উত্তর দেওয়া হয়নি (০ নম্বর পাবে)` : ' — সব প্রশ্নের উত্তর দেওয়া হয়েছে'}।
-                জমা দিলে আর বদলানো যাবে না।
+                {t({ bn: `${progress.answered}/${total}টি উত্তর দেওয়া হয়েছে`, en: `${progress.answered}/${total} answered` })}
+                {total - progress.answered > 0 ? t({ bn: ` — ${total - progress.answered}টি উত্তর দেওয়া হয়নি (০ নম্বর পাবে)`, en: ` — ${total - progress.answered} unanswered (scores 0)` }) : t({ bn: ' — সব প্রশ্নের উত্তর দেওয়া হয়েছে', en: ' — all questions answered' })}।
+                {t({ bn: 'জমা দিলে আর বদলানো যাবে না।', en: 'Once submitted, answers cannot be changed.' })}
               </p>
               {submitError ? <AlertBox tone="error">{submitError}</AlertBox> : null}
               <div style={{ display: 'flex', gap: 8 }}>
                 <Button variant="accent" disabled={submitting} onClick={() => void doSubmit()}>
-                  {submitting ? 'জমা হচ্ছে…' : 'হ্যাঁ, জমা দিন'}
+                  {submitting ? t({ bn: 'জমা হচ্ছে…', en: 'Submitting…' }) : t({ bn: 'হ্যাঁ, জমা দিন', en: 'Yes, submit' })}
                 </Button>
                 <Button variant="outline" disabled={submitting} onClick={() => setConfirming(false)}>
-                  ফিরে যান
+                  {t({ bn: 'ফিরে যান', en: 'Go back' })}
                 </Button>
               </div>
             </Card>
@@ -600,18 +600,18 @@ export default function JobWrongAnswersPracticePage() {
               onClick={() => void exitWithoutSubmitting()}
               style={{ background: 'none', border: 'none', color: 'var(--teal)', fontWeight: 600, cursor: 'pointer', padding: 0, fontSize: 13 }}
             >
-              ← বেরিয়ে যান (সেশনটি বাতিল হবে)
+              {t({ bn: '← বেরিয়ে যান (সেশনটি বাতিল হবে)', en: '← Leave (the session will be abandoned)' })}
             </button>
             {' · '}
-            <Link to="/jobs/wrong-answers" style={{ fontWeight: 600 }}>নোটবুকে ফিরুন</Link>
+            <Link to="/jobs/wrong-answers" style={{ fontWeight: 600 }}>{t({ bn: 'নোটবুকে ফিরুন', en: 'Back to the notebook' })}</Link>
           </p>
         </div>
 
         <div>
           <Card>
-            <div style={{ fontWeight: 700, color: 'var(--heading)', marginBottom: 4 }}>প্রশ্ন-তালিকা</div>
+            <div style={{ fontWeight: 700, color: 'var(--heading)', marginBottom: 4 }}>{t({ bn: 'প্রশ্ন-তালিকা', en: 'Question list' })}</div>
             <p style={{ margin: '0 0 12px', color: 'var(--muted)', fontSize: 13 }}>
-              সবুজ = সঠিক · লাল = ভুল · ধূসর = উত্তর দেওয়া হয়নি · হলুদ চিহ্ন = পরে দেখব
+              {t({ bn: 'সবুজ = সঠিক · লাল = ভুল · ধূসর = উত্তর দেওয়া হয়নি · হলুদ চিহ্ন = পরে দেখব', en: 'Green = correct · Red = wrong · Grey = unanswered · Yellow star = review later' })}
             </p>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(44px, 1fr))', gap: 8 }}>
               {orderedNs.map((n, idx) => {
@@ -626,7 +626,7 @@ export default function JobWrongAnswersPracticePage() {
                     key={q.n}
                     type="button"
                     onClick={() => goTo(q.n)}
-                    aria-label={`প্রশ্ন ${idx + 1}`}
+                    aria-label={t({ bn: `প্রশ্ন ${idx + 1}`, en: `Question ${idx + 1}` })}
                     style={{
                       height: 44,
                       borderRadius: 8,

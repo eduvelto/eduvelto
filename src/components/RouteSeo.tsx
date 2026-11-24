@@ -20,16 +20,18 @@
 // child simply does not mount.
 
 import { useLocation } from 'react-router-dom';
+import { useLanguage } from '../i18n/LanguageContext';
 import { resolveFallbackSeo, resolveRouteSeo, useSeo, type SeoData } from '../lib/seo';
 
-function SeoApplier({ seo }: { seo: SeoData }) {
-  useSeo(seo);
+function SeoApplier({ seo, lang }: { seo: SeoData; lang: 'bn' | 'en' }) {
+  useSeo(seo, lang);
   return null;
 }
 
 export function RouteSeo() {
   const location = useLocation();
-  const seo = resolveRouteSeo(location.pathname) ?? resolveFallbackSeo(location.pathname);
+  const { lang } = useLanguage();
+  const seo = resolveRouteSeo(location.pathname, lang) ?? resolveFallbackSeo(location.pathname, lang);
   if (!seo) return null;
-  return <SeoApplier seo={seo} />;
+  return <SeoApplier seo={seo} lang={lang} />;
 }

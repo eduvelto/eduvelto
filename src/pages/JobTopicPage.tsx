@@ -11,14 +11,14 @@
 // Unknown exam / subject / topic → the honest not-found state; the
 // raw URL slug is never rendered as a title.
 //
-// LANGUAGE: all UI text is Bangla (one-language rule). PageShell still
-// takes a titleEn prop — the canonical English subject name from the
-// lib is passed there (lib data, not a new content string); the
-// not-found title passes the Bangla string for both props.
+// LANGUAGE: UI text is Bangla + English via useLanguage(). PageShell
+// takes the canonical English subject name from the lib (lib data,
+// not a new content string) for titleEn.
 
 import { Link, useParams } from 'react-router-dom';
 import { PageShell } from '../components/PageShell';
 import { Card, Chip, Reveal } from '../components/ui';
+import { useLanguage } from '../i18n/LanguageContext';
 import { jobExamBySlug } from '../lib/jobExams';
 import { jobSubjectById } from '../lib/jobContent';
 
@@ -29,6 +29,7 @@ import { jobSubjectById } from '../lib/jobContent';
 interface JobTopicStub {
   slug: string;
   nameBn: string;
+  nameEn: string;
 }
 
 /**
@@ -43,6 +44,7 @@ function lookupJobTopic(_examSlug: string, _subjectSlug: string, _topicSlug: str
 }
 
 export default function JobTopicPage() {
+  const { t, lang } = useLanguage();
   const { exam = '', subject = '', topic = '' } = useParams<{ exam: string; subject: string; topic: string }>();
   const def = jobExamBySlug(exam);
   const subj = def ? jobSubjectById(`${exam}__${subject}`) : null;
@@ -50,20 +52,20 @@ export default function JobTopicPage() {
 
   if (!def || !subj) {
     return (
-      <PageShell titleBn="বিষয়টি পাওয়া যায়নি" titleEn="বিষয়টি পাওয়া যায়নি" wide>
+      <PageShell titleBn="বিষয়টি পাওয়া যায়নি" titleEn="Subject not found" wide>
         <Card>
-          <div style={{ fontWeight: 700, color: '#142B3B', fontSize: 17 }}>বিষয়টি পাওয়া যায়নি</div>
+          <div style={{ fontWeight: 700, color: '#142B3B', fontSize: 17 }}>{t({ bn: 'বিষয়টি পাওয়া যায়নি', en: 'Subject not found' })}</div>
           <p style={{ margin: '8px 0 12px', color: '#68747B', fontSize: 14, lineHeight: 1.7 }}>
-            এই ঠিকানার বিষয়টি খুঁজে পাওয়া যায়নি — হয় পরীক্ষা বা বিষয়ের নাম ভুল, নয় বিষয়টি এখনো প্রকাশিত হয়নি।
+            {t({ bn: 'এই ঠিকানার বিষয়টি খুঁজে পাওয়া যায়নি — হয় পরীক্ষা বা বিষয়ের নাম ভুল, নয় বিষয়টি এখনো প্রকাশিত হয়নি।', en: 'This subject could not be found at this address — either the exam or subject name is wrong, or the subject has not been published yet.' })}
           </p>
           <p style={{ margin: 0 }}>
             {def ? (
               <Link to={`/jobs/${def.slug}/subjects`} style={{ fontWeight: 600 }}>
-                ← বিষয় তালিকায় ফিরুন
+                {t({ bn: '← বিষয় তালিকায় ফিরুন', en: '← Back to the subject list' })}
               </Link>
             ) : (
               <Link to="/jobs" style={{ fontWeight: 600 }}>
-                ← সব পরীক্ষা দেখুন
+                {t({ bn: '← সব পরীক্ষা দেখুন', en: '← See all exams' })}
               </Link>
             )}
           </p>
@@ -75,39 +77,39 @@ export default function JobTopicPage() {
   return (
     <PageShell titleBn={subj.nameBn} titleEn={subj.nameEn} wide maxWidth={1240}>
       {/* Breadcrumb: hub ← subjects tab ← subject ← this topic. */}
-      <nav aria-label="ব্রেডক্রাম্ব" style={{ margin: '0 0 12px', color: '#57616A', fontSize: 14 }}>
+      <nav aria-label={t({ bn: 'ব্রেডক্রাম্ব', en: 'Breadcrumb' })} style={{ margin: '0 0 12px', color: '#57616A', fontSize: 14 }}>
         <Link to="/jobs" style={{ fontWeight: 600 }}>
-          চাকরির প্রস্তুতি
+          {t({ bn: 'চাকরির প্রস্তুতি', en: 'Job Preparation' })}
         </Link>
         {' › '}
         <Link to={`/jobs/${def.slug}`} style={{ fontWeight: 600 }}>
-          {def.bn}
+          {lang === 'bn' ? def.bn : def.en}
         </Link>
         {' › '}
         <Link to={`/jobs/${def.slug}/subjects`} style={{ fontWeight: 600 }}>
-          বিষয়
+          {t({ bn: 'বিষয়', en: 'Subjects' })}
         </Link>
         {' › '}
         <Link to={`/jobs/${def.slug}/subjects/${subj.slug}`} style={{ fontWeight: 600 }}>
-          {subj.nameBn}
+          {lang === 'bn' ? subj.nameBn : subj.nameEn}
         </Link>
         {' › '}
-        <span style={{ color: '#142B3B', fontWeight: 600 }}>টপিক</span>
+        <span style={{ color: '#142B3B', fontWeight: 600 }}>{t({ bn: 'টপিক', en: 'Topic' })}</span>
       </nav>
 
-      <h2 style={{ color: '#142B3B', fontSize: 24, margin: '0 0 4px' }}>{subj.nameBn}</h2>
-      <p style={{ color: '#68747B', margin: '0 0 20px', fontSize: 13 }}>উৎস: {subj.syllabusSource ?? 'যাচাই চলছে'}</p>
+      <h2 style={{ color: '#142B3B', fontSize: 24, margin: '0 0 4px' }}>{lang === 'bn' ? subj.nameBn : subj.nameEn}</h2>
+      <p style={{ color: '#68747B', margin: '0 0 20px', fontSize: 13 }}>{t({ bn: `উৎস: ${subj.syllabusSource ?? 'যাচাই চলছে'}`, en: `Source: ${subj.syllabusSource ?? 'Verification in progress'}` })}</p>
 
       {topicDef === null ? (
         <>
           {/* No topics exist in Step 6 — honest empty state. */}
           <Reveal>
             <Card style={{ marginBottom: 12 }}>
-              <div style={{ fontWeight: 700, color: '#142B3B', fontSize: 17 }}>এই টপিকটি এখনো তৈরি হয়নি</div>
+              <div style={{ fontWeight: 700, color: '#142B3B', fontSize: 17 }}>{t({ bn: 'এই টপিকটি এখনো তৈরি হয়নি', en: 'This topic has not been created yet' })}</div>
               <p style={{ margin: '8px 0 12px', color: '#68747B', fontSize: 14, lineHeight: 1.7 }}>
-                এই টপিকটি এখনো তৈরি হয়নি — অফিসিয়াল সিলেবাস থেকে যাচাই করে প্রকাশিত হবে।
+                {t({ bn: 'এই টপিকটি এখনো তৈরি হয়নি — অফিসিয়াল সিলেবাস থেকে যাচাই করে প্রকাশিত হবে।', en: 'This topic has not been created yet — it will be published after verification against the official syllabus.' })}
               </p>
-              <Chip tone="gold">শীঘ্রই আসছে</Chip>
+              <Chip tone="gold">{t({ bn: 'শীঘ্রই আসছে', en: 'Coming soon' })}</Chip>
             </Card>
           </Reveal>
 
@@ -115,11 +117,11 @@ export default function JobTopicPage() {
               in Step 7/8; no practice flow is built here. */}
           <Reveal delayMs={80}>
             <Card>
-              <div style={{ fontWeight: 700, color: '#142B3B', fontSize: 17 }}>অনুশীলন</div>
+              <div style={{ fontWeight: 700, color: '#142B3B', fontSize: 17 }}>{t({ bn: 'অনুশীলন', en: 'Practice' })}</div>
               <p style={{ margin: '8px 0 12px', color: '#68747B', fontSize: 14, lineHeight: 1.7 }}>
-                প্রশ্ন তৈরি হলে এখানে অনুশীলন শুরু করা যাবে — এখনো কোনো প্রশ্ন তৈরি হয়নি।
+                {t({ bn: 'প্রশ্ন তৈরি হলে এখানে অনুশীলন শুরু করা যাবে — এখনো কোনো প্রশ্ন তৈরি হয়নি।', en: 'Once questions are ready, practice will start here — no questions have been created yet.' })}
               </p>
-              <Chip tone="gold">শীঘ্রই আসছে</Chip>
+              <Chip tone="gold">{t({ bn: 'শীঘ্রই আসছে', en: 'Coming soon' })}</Chip>
             </Card>
           </Reveal>
         </>
@@ -128,18 +130,18 @@ export default function JobTopicPage() {
         // real topic. Lessons / practice plug in here.
         <Reveal>
           <Card>
-            <div style={{ fontWeight: 700, color: '#142B3B', fontSize: 17 }}>{topicDef.nameBn}</div>
+            <div style={{ fontWeight: 700, color: '#142B3B', fontSize: 17 }}>{lang === 'bn' ? topicDef.nameBn : topicDef.nameEn}</div>
             <p style={{ margin: '8px 0 12px', color: '#68747B', fontSize: 14, lineHeight: 1.7 }}>
-              এই টপিকের পাঠ ও অনুশীলন এখানে প্রকাশিত হবে।
+              {t({ bn: 'এই টপিকের পাঠ ও অনুশীলন এখানে প্রকাশিত হবে।', en: 'Lessons and practice for this topic will be published here.' })}
             </p>
-            <Chip tone="gold">শীঘ্রই আসছে</Chip>
+            <Chip tone="gold">{t({ bn: 'শীঘ্রই আসছে', en: 'Coming soon' })}</Chip>
           </Card>
         </Reveal>
       )}
 
       <p style={{ marginTop: 20 }}>
         <Link to={`/jobs/${def.slug}/subjects/${subj.slug}`} style={{ fontWeight: 600 }}>
-          ← {subj.nameBn} বিষয়ে ফিরুন
+          {t({ bn: `← ${subj.nameBn} বিষয়ে ফিরুন`, en: `← Back to ${subj.nameEn}` })}
         </Link>
       </p>
     </PageShell>

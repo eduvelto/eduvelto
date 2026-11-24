@@ -9,14 +9,14 @@
 // done (no fake numbers). Unknown exam or subject slug → the honest
 // not-found state; the raw URL slug is never rendered as a title.
 //
-// LANGUAGE: all UI text is Bangla (one-language rule). PageShell still
-// takes a titleEn prop — the canonical English subject name from the
-// lib is passed there (lib data, not a new content string); the
-// not-found title passes the Bangla string for both props.
+// LANGUAGE: UI text is Bangla + English via useLanguage(). PageShell
+// takes the canonical English subject name from the lib (lib data,
+// not a new content string) for titleEn.
 
 import { Link, useParams } from 'react-router-dom';
 import { PageShell } from '../components/PageShell';
 import { Card, Chip, Reveal } from '../components/ui';
+import { useLanguage } from '../i18n/LanguageContext';
 import { jobExamBySlug } from '../lib/jobExams';
 import { jobSubjectById } from '../lib/jobContent';
 
@@ -29,26 +29,27 @@ function bnNum(n: number): string {
 }
 
 export default function JobSubjectPage() {
+  const { t, lang } = useLanguage();
   const { exam = '', subject = '' } = useParams<{ exam: string; subject: string }>();
   const def = jobExamBySlug(exam);
   const subj = def ? jobSubjectById(`${exam}__${subject}`) : null;
 
   if (!def || !subj) {
     return (
-      <PageShell titleBn="বিষয়টি পাওয়া যায়নি" titleEn="বিষয়টি পাওয়া যায়নি" wide>
+      <PageShell titleBn="বিষয়টি পাওয়া যায়নি" titleEn="Subject not found" wide>
         <Card>
-          <div style={{ fontWeight: 700, color: '#142B3B', fontSize: 17 }}>বিষয়টি পাওয়া যায়নি</div>
+          <div style={{ fontWeight: 700, color: '#142B3B', fontSize: 17 }}>{t({ bn: 'বিষয়টি পাওয়া যায়নি', en: 'Subject not found' })}</div>
           <p style={{ margin: '8px 0 12px', color: '#68747B', fontSize: 14, lineHeight: 1.7 }}>
-            এই ঠিকানার বিষয়টি খুঁজে পাওয়া যায়নি — হয় পরীক্ষা বা বিষয়ের নাম ভুল, নয় বিষয়টি এখনো প্রকাশিত হয়নি।
+            {t({ bn: 'এই ঠিকানার বিষয়টি খুঁজে পাওয়া যায়নি — হয় পরীক্ষা বা বিষয়ের নাম ভুল, নয় বিষয়টি এখনো প্রকাশিত হয়নি।', en: 'This subject could not be found at this address — either the exam or subject name is wrong, or the subject has not been published yet.' })}
           </p>
           <p style={{ margin: 0 }}>
             {def ? (
               <Link to={`/jobs/${def.slug}/subjects`} style={{ fontWeight: 600 }}>
-                ← বিষয় তালিকায় ফিরুন
+                {t({ bn: '← বিষয় তালিকায় ফিরুন', en: '← Back to the subject list' })}
               </Link>
             ) : (
               <Link to="/jobs" style={{ fontWeight: 600 }}>
-                ← সব পরীক্ষা দেখুন
+                {t({ bn: '← সব পরীক্ষা দেখুন', en: '← See all exams' })}
               </Link>
             )}
           </p>
@@ -65,27 +66,27 @@ export default function JobSubjectPage() {
   return (
     <PageShell titleBn={subj.nameBn} titleEn={subj.nameEn} wide maxWidth={1240}>
       {/* Breadcrumb: hub ← subjects tab ← this subject. */}
-      <nav aria-label="ব্রেডক্রাম্ব" style={{ margin: '0 0 12px', color: '#57616A', fontSize: 14 }}>
+      <nav aria-label={t({ bn: 'ব্রেডক্রাম্ব', en: 'Breadcrumb' })} style={{ margin: '0 0 12px', color: '#57616A', fontSize: 14 }}>
         <Link to="/jobs" style={{ fontWeight: 600 }}>
-          চাকরির প্রস্তুতি
+          {t({ bn: 'চাকরির প্রস্তুতি', en: 'Job Preparation' })}
         </Link>
         {' › '}
         <Link to={`/jobs/${def.slug}`} style={{ fontWeight: 600 }}>
-          {def.bn}
+          {lang === 'bn' ? def.bn : def.en}
         </Link>
         {' › '}
         <Link to={`/jobs/${def.slug}/subjects`} style={{ fontWeight: 600 }}>
-          বিষয়
+          {t({ bn: 'বিষয়', en: 'Subjects' })}
         </Link>
         {' › '}
-        <span style={{ color: '#142B3B', fontWeight: 600 }}>{subj.nameBn}</span>
+        <span style={{ color: '#142B3B', fontWeight: 600 }}>{lang === 'bn' ? subj.nameBn : subj.nameEn}</span>
       </nav>
 
-      <h2 style={{ color: '#142B3B', fontSize: 24, margin: '0 0 4px' }}>{subj.nameBn}</h2>
+      <h2 style={{ color: '#142B3B', fontSize: 24, margin: '0 0 4px' }}>{lang === 'bn' ? subj.nameBn : subj.nameEn}</h2>
       <p style={{ color: '#57616A', margin: '0 0 8px', fontSize: 15 }}>
-        {def.bn} — {subj.marks !== null ? `${bnNum(subj.marks)} নম্বর` : 'নম্বর যাচাই হয়নি'}
+        {t({ bn: `${def.bn} — ${subj.marks !== null ? `${bnNum(subj.marks)} নম্বর` : 'নম্বর যাচাই হয়নি'}`, en: `${def.en} — ${subj.marks !== null ? `${subj.marks} marks` : 'Marks not verified'}` })}
       </p>
-      <p style={{ color: '#68747B', margin: '0 0 20px', fontSize: 13 }}>উৎস: {subj.syllabusSource ?? 'যাচাই চলছে'}</p>
+      <p style={{ color: '#68747B', margin: '0 0 20px', fontSize: 13 }}>{t({ bn: `উৎস: ${subj.syllabusSource ?? 'যাচাই চলছে'}`, en: `Source: ${subj.syllabusSource ?? 'Verification in progress'}` })}</p>
 
       {/* BCS English only (23 Nov 2026, AdSense Part 1): this is the
           one subject with live practice — link its practice hub.
@@ -93,12 +94,12 @@ export default function JobSubjectPage() {
       {exam === 'bcs' && subject === 'english' && (
         <Reveal>
           <Card>
-            <div style={{ fontWeight: 700, color: '#142B3B', fontSize: 17 }}>বিসিএস ইংরেজি অনুশীলন</div>
+            <div style={{ fontWeight: 700, color: '#142B3B', fontSize: 17 }}>{t({ bn: 'বিসিএস ইংরেজি অনুশীলন', en: 'BCS English practice' })}</div>
             <p style={{ margin: '8px 0 12px', color: '#68747B', fontSize: 14, lineHeight: 1.7 }}>
-              ব্যাকরণ, শব্দভান্ডার ও রিডিং — সম্পূর্ণ বিনামূল্যে।
+              {t({ bn: 'ব্যাকরণ, শব্দভান্ডার ও রিডিং — সম্পূর্ণ বিনামূল্যে।', en: 'Grammar, vocabulary and reading — completely free.' })}
             </p>
             <Link to="/jobs/bcs/practice/english" style={{ fontWeight: 600 }}>
-              ৩৫টি যাচাইকৃত প্রশ্নের অনুশীলন →
+              {t({ bn: '৩৫টি যাচাইকৃত প্রশ্নের অনুশীলন →', en: 'Practise the 35 verified questions →' })}
             </Link>
           </Card>
         </Reveal>
@@ -109,11 +110,11 @@ export default function JobSubjectPage() {
         <div style={{ flex: '1 1 520px', minWidth: 0 }}>
           <Reveal>
             <Card>
-              <div style={{ fontWeight: 700, color: '#142B3B', fontSize: 17 }}>টপিক</div>
+              <div style={{ fontWeight: 700, color: '#142B3B', fontSize: 17 }}>{t({ bn: 'টপিক', en: 'Topics' })}</div>
               <p style={{ margin: '8px 0 12px', color: '#68747B', fontSize: 14, lineHeight: 1.7 }}>
-                এই বিষয়ের টপিক তৈরি হচ্ছে — অফিসিয়াল সিলেবাস থেকে যাচাই করে প্রকাশিত হবে।
+                {t({ bn: 'এই বিষয়ের টপিক তৈরি হচ্ছে — অফিসিয়াল সিলেবাস থেকে যাচাই করে প্রকাশিত হবে।', en: 'Topics for this subject are being prepared — they will be published after verification against the official syllabus.' })}
               </p>
-              <Chip tone="gold">শীঘ্রই আসছে</Chip>
+              <Chip tone="gold">{t({ bn: 'শীঘ্রই আসছে', en: 'Coming soon' })}</Chip>
             </Card>
           </Reveal>
         </div>
@@ -124,12 +125,12 @@ export default function JobSubjectPage() {
         <div style={{ flex: '1 1 260px', maxWidth: 320 }}>
           <Reveal delayMs={80}>
             <Card>
-              <div style={{ fontWeight: 700, color: '#142B3B', fontSize: 17 }}>এই বিষয়ে আমার অগ্রগতি</div>
+              <div style={{ fontWeight: 700, color: '#142B3B', fontSize: 17 }}>{t({ bn: 'এই বিষয়ে আমার অগ্রগতি', en: 'My progress in this subject' })}</div>
               <p style={{ margin: '8px 0 4px', color: '#57616A', fontSize: 14, lineHeight: 1.7 }}>
-                শেষ করা টপিক: {bnNum(doneCount)}টি
+                {t({ bn: `শেষ করা টপিক: ${bnNum(doneCount)}টি`, en: `Completed topics: ${doneCount}` })}
               </p>
               <p style={{ margin: '0 0 10px', color: '#57616A', fontSize: 14, lineHeight: 1.7 }}>
-                মোট টপিক: {bnNum(topicCount)}টি
+                {t({ bn: `মোট টপিক: ${bnNum(topicCount)}টি`, en: `Total topics: ${topicCount}` })}
               </p>
               <div
                 aria-hidden="true"
@@ -138,7 +139,7 @@ export default function JobSubjectPage() {
                 <div style={{ width: '0%', height: '100%', background: '#12766E' }} />
               </div>
               <p style={{ margin: '10px 0 0', color: '#68747B', fontSize: 13, lineHeight: 1.7 }}>
-                এই বিষয়ে এখনো কোনো টপিক প্রকাশিত হয়নি, তাই অগ্রগতি ০।
+                {t({ bn: 'এই বিষয়ে এখনো কোনো টপিক প্রকাশিত হয়নি, তাই অগ্রগতি ০।', en: 'No topic has been published in this subject yet, so progress is 0.' })}
               </p>
             </Card>
           </Reveal>
@@ -147,7 +148,7 @@ export default function JobSubjectPage() {
 
       <p style={{ marginTop: 20 }}>
         <Link to={`/jobs/${def.slug}/subjects`} style={{ fontWeight: 600 }}>
-          ← সব বিষয় দেখুন
+          {t({ bn: '← সব বিষয় দেখুন', en: '← See all subjects' })}
         </Link>
       </p>
     </PageShell>

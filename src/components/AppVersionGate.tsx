@@ -5,9 +5,12 @@
 // See src/lib/appVersion.ts for the decision rules and the fail-open
 // guarantees.
 //
-// The block screen renders PLAIN Bangla text on purpose (no useLanguage
-// / t()): it must render even before any provider state is ready, and
-// the whole app is Bangla-first anyway.
+// The block screen renders through useLanguage (24 Nov 2026 language
+// system): LanguageProvider wraps <App/> in main.tsx, so the context IS
+// available here. The release notes themselves come from the server
+// (config.releaseNotes) and stay as the admin wrote them
+// (admin-authored Bangla — an English variant would need a releaseNotesEn
+// admin field; out of scope for the language system).
 //
 // Escape hatches — the gate NEVER blocks these paths, or a too-high
 // minVersion would lock the owner out of the only fix:
@@ -24,6 +27,7 @@ import {
   fetchAppVersionConfig,
   type AppVersionConfig,
 } from '../lib/appVersion';
+import { useLanguage } from '../i18n/LanguageContext';
 import { Button } from './ui';
 import { isNativeApp } from '../lib/isNativeApp';
 
@@ -121,6 +125,7 @@ export function AppVersionBlockedScreen(props: { config: AppVersionConfig | null
   const inApp = isNativeApp();
   const downloadUrl = config?.downloadUrl ?? DEFAULT_DOWNLOAD_URL;
   const hasRealDownload = !downloadUrl.startsWith('/');
+  const { t } = useLanguage();
   return (
     <div
       role="alert"
@@ -149,12 +154,12 @@ export function AppVersionBlockedScreen(props: { config: AppVersionConfig | null
         <div style={{ fontSize: 44, lineHeight: 1, color: '#D9A441' }} aria-hidden="true">
           ↓
         </div>
-        <h1 style={{ fontSize: 26, margin: '16px 0 8px' }}>নতুন ভার্সন এসেছে</h1>
+        <h1 style={{ fontSize: 26, margin: '16px 0 8px' }}>{t({ bn: 'নতুন ভার্সন এসেছে', en: 'A new version is available' })}</h1>
         <p style={{ fontSize: 17, lineHeight: 1.8, margin: '0 0 8px' }}>
-          এই পুরোনো ভার্সনটি আর ব্যবহার করা যাবে না।
+          {t({ bn: 'এই পুরোনো ভার্সনটি আর ব্যবহার করা যাবে না।', en: 'This old version can no longer be used.' })}
           {inApp && !hasRealDownload
             ? null
-            : ' নতুন ভার্সন ডাউনলোড করুন।'}
+            : t({ bn: ' নতুন ভার্সন ডাউনলোড করুন।', en: ' Download the new version.' })}
         </p>
         {config?.releaseNotes ? (
           <p
@@ -174,28 +179,27 @@ export function AppVersionBlockedScreen(props: { config: AppVersionConfig | null
           </p>
         ) : null}
         <p style={{ fontSize: 14, color: '#57616A', margin: '0 0 20px' }}>
-          আপনার ভার্সন: {APP_VERSION}
-          {config ? ` · সর্বশেষ ভার্সন: ${config.latestVersion}` : ''}
+          {t({ bn: 'আপনার ভার্সন:', en: 'Your version:' })} {APP_VERSION}
+          {config ? ` · ${t({ bn: 'সর্বশেষ ভার্সন:', en: 'Latest version:' })} ${config.latestVersion}` : ''}
         </p>
         {inApp && !hasRealDownload ? (
           <>
             <p style={{ fontSize: 16, lineHeight: 1.8, margin: '0 0 8px' }}>
-              নতুন ভার্সনের ডাউনলোড লিঙ্ক এখনো দেওয়া হয়নি — Eduvelto-র
-              অফিসিয়াল চ্যানেল থেকে নতুন APK পাওয়া যাবে।
+              {t({ bn: 'নতুন ভার্সনের ডাউনলোড লিঙ্ক এখনো দেওয়া হয়নি — Eduvelto-র অফিসিয়াল চ্যানেল থেকে নতুন APK পাওয়া যাবে।', en: "The download link for the new version has not been shared yet — the new APK will be available from Eduvelto's official channels." })}
             </p>
             <p style={{ fontSize: 15, margin: '0 0 20px' }}>
               <Link to="/login" style={{ color: '#142B3B', fontWeight: 700 }}>
-                লগইন করুন →
+                {t({ bn: 'লগইন করুন →', en: 'Log in →' })}
               </Link>
             </p>
           </>
         ) : (
-          <DownloadButton config={config} label="নতুন ভার্সন ডাউনলোড করুন" />
+          <DownloadButton config={config} label={t({ bn: 'নতুন ভার্সন ডাউনলোড করুন', en: 'Download the new version' })} />
         )}
         <p style={{ fontSize: 13, color: '#57616A', margin: '16px 0 0', lineHeight: 1.7 }}>
           {inApp
-            ? 'আপনি Eduvelto Android অ্যাপ ব্যবহার করছেন।'
-            : 'ব্রাউজারে নতুন ভার্সন মানেই নতুন PWA (ফোনে Add to Home Screen করা অ্যাপ)।'}
+            ? t({ bn: 'আপনি Eduvelto Android অ্যাপ ব্যবহার করছেন।', en: 'You are using the Eduvelto Android app.' })
+            : t({ bn: 'ব্রাউজারে নতুন ভার্সন মানেই নতুন PWA (ফোনে Add to Home Screen করা অ্যাপ)।', en: 'In a browser, a new version means a new PWA (the app you add to your home screen).' })}
         </p>
       </div>
     </div>
@@ -205,12 +209,13 @@ export function AppVersionBlockedScreen(props: { config: AppVersionConfig | null
 /** Small non-blocking bar when a newer (not forced) version exists. */
 export function AppVersionUpdateBar(props: { config: AppVersionConfig | null }) {
   const { config } = props;
+  const { t } = useLanguage();
   const [dismissed, setDismissed] = useState(false);
   if (dismissed || !config) return null;
   return (
     <div
       role="region"
-      aria-label="অ্যাপ আপডেট"
+      aria-label={t({ bn: 'অ্যাপ আপডেট', en: 'App update' })}
       style={{
         background: '#FFF6D6',
         borderBottom: '2px solid #D9A441',
@@ -225,12 +230,12 @@ export function AppVersionUpdateBar(props: { config: AppVersionConfig | null }) 
       }}
     >
       <span style={{ fontWeight: 700 }}>
-        নতুন ভার্সন এসেছে (v{config.latestVersion}) — আপনার ভার্সন v{APP_VERSION}।
+        {t({ bn: `নতুন ভার্সন এসেছে (v${config.latestVersion}) — আপনার ভার্সন v${APP_VERSION}।`, en: `A new version is available (v${config.latestVersion}) — your version is v${APP_VERSION}.` })}
       </span>
       <Link to="/install" style={{ color: '#142B3B', fontWeight: 700 }}>
-        আপডেট করুন →
+        {t({ bn: 'আপডেট করুন →', en: 'Update →' })}
       </Link>
-      <Button variant="ghost" size="sm" onClick={() => setDismissed(true)} aria-label="বন্ধ করুন">
+      <Button variant="ghost" size="sm" onClick={() => setDismissed(true)} aria-label={t({ bn: 'বন্ধ করুন', en: 'Close' })}>
         ✕
       </Button>
     </div>

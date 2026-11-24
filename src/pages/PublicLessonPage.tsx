@@ -48,8 +48,17 @@ function LessonBody({ lesson }: { lesson: PublicLesson }) {
           BreadcrumbList JSON-LD in lib/seo.ts for this route. */}
       <Breadcrumb
         items={[
-          { label: 'বিসিএস ইংরেজি', to: '/learn' },
-          { label: lesson.slug === 'tense' ? 'টেন্স' : 'প্রিপোজিশন' },
+          { label: lang === 'bn' ? 'বিসিএস ইংরেজি' : 'BCS English', to: '/learn' },
+          {
+            label:
+              lesson.slug === 'tense'
+                ? lang === 'bn'
+                  ? 'টেন্স'
+                  : 'Tense'
+                : lang === 'bn'
+                  ? 'প্রিপোজিশন'
+                  : 'Preposition',
+          },
         ]}
       />
       <AlertBox tone="info">
