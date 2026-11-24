@@ -1830,6 +1830,14 @@ a:hover {
     color: var(--heading);
     background: transparent;
   }
+  /* Wave 8: the mobile search input killed its own outline with no
+     focus rule (same defect class as Wave 7's three inputs). Ring uses
+     var(--teal-text) so it stays visible in both themes (#12766e on
+     light card, #5cc8b8 on dark card). */
+  .ev-home-msearch input:focus-visible {
+    outline: 2px solid var(--teal-text);
+    outline-offset: 2px;
+  }
   .ev-home-msearch button {
     flex: none;
     display: inline-flex;
