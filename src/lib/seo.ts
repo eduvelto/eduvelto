@@ -1521,16 +1521,21 @@ function jobExamEntry(slug: string, tab?: string): RouteSeoEntry | null {
   // Brand-SEO wave 12: titles must fit search-result length (<=60).
   // Keep the full exam name when it fits (BCS/Bank keep their pinned
   // full names); otherwise drop the middle full-name segment, and if
-  // still over (long exam + long tab), drop 'প্রস্তুতি' too.
+  // still over (long exam + long tab), drop 'প্রস্তুতি' too. A hub
+  // whose name cannot fit even then gets a short form here (like
+  // SUBJECT_SEO_SHORT below) — page copy keeps the full name.
+  const short = EXAM_SEO_SHORT[slug];
+  const nameBn = short?.bn ?? exam.bn;
+  const nameEn = short?.en ?? exam.en;
   const titleBnCandidates = [
-    `${exam.bn} প্রস্তুতি — ${exam.fullBn}${tabSuffix} | Eduvelto`,
-    `${exam.bn} প্রস্তুতি${tabSuffix} | Eduvelto`,
-    `${exam.bn}${tabSuffix} | Eduvelto`,
+    `${nameBn} প্রস্তুতি — ${exam.fullBn}${tabSuffix} | Eduvelto`,
+    `${nameBn} প্রস্তুতি${tabSuffix} | Eduvelto`,
+    `${nameBn}${tabSuffix} | Eduvelto`,
   ];
   const titleEnCandidates = [
-    `${exam.en} Preparation — ${exam.fullEn}${tabSuffixEn} | Eduvelto`,
-    `${exam.en} Preparation${tabSuffixEn} | Eduvelto`,
-    `${exam.en}${tabSuffixEn} | Eduvelto`,
+    `${nameEn} Preparation — ${exam.fullEn}${tabSuffixEn} | Eduvelto`,
+    `${nameEn} Preparation${tabSuffixEn} | Eduvelto`,
+    `${nameEn}${tabSuffixEn} | Eduvelto`,
   ];
   const titleBn = titleBnCandidates.find((t) => t.length <= 60) ?? titleBnCandidates[2];
   const titleEn = titleEnCandidates.find((t) => t.length <= 60) ?? titleEnCandidates[2];
@@ -1551,6 +1556,14 @@ function jobExamEntry(slug: string, tab?: string): RouteSeoEntry | null {
 const SUBJECT_SEO_SHORT: Record<string, { bn: string; en: string }> = {
   'bcs/geography': { bn: 'ভূগোল ও পরিবেশ', en: 'Geography & Environment' },
   'primary-teacher/general-knowledge': { bn: 'সাধারণ জ্ঞান', en: 'General Knowledge' },
+};
+
+/** Short <title> forms for exam hubs whose full name cannot fit
+ *  <=60 chars even on the shortest candidate (24 Nov 2026, Job
+ *  Preparation System: grade-11-20 + the 'previous' tab is 62
+ *  chars with the full name). Page copy keeps the full name. */
+const EXAM_SEO_SHORT: Record<string, { bn: string; en: string }> = {
+  'grade-11-20': { bn: 'সরকারি চাকরি (১১–২০ গ্রেড)', en: 'Govt Jobs (Grades 11–20)' },
 };
 
 function jobSubjectEntry(examSlug: string, subjectSlug: string): RouteSeoEntry | null {
@@ -1825,7 +1838,7 @@ export function resolveRouteSeo(pathname: string, lang: 'bn' | 'en' = 'bn'): Seo
   const jsonLd: unknown[] = [ORGANIZATION_JSON_LD, WEBSITE_JSON_LD, webPage, breadcrumbFor(path, crumbs, lang)];
   if (path === '/jobs') {
     // ItemList (23 Nov 2026, Gemini fold-in): the hub renders a real
-    // card grid of all 14 exam hubs — list them with their real URLs.
+    // card grid of all 15 exam hubs — list them with their real URLs.
     // Only the jobs hub gets an ItemList; other hub lists are dynamic
     // (circulars — empty live) or login-gated, so no list is emitted.
     jsonLd.push({

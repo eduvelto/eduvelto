@@ -1,7 +1,7 @@
 /**
  * Eduvelto — Job Preparation seed importer (Step 5 closure, P1-2).
  *
- * Applies team/job-categories-exams-seed.json (10 jobCategories + 14
+ * Applies team/job-categories-exams-seed.json (10 jobCategories + 15
  * jobExams) to a Firestore database — EMULATOR ONLY. The script
  * REFUSES any other target: there is no --live flag, no live code
  * path, and applying the seed to production needs a separate owner
@@ -26,7 +26,7 @@
  *     require of an Admin write);
  *   - schema + referential-integrity validation BEFORE any write
  *     (every exam's categoryId exists; every category's hubSlugs are
- *     real exams; the 14 hubs appear exactly once; order 1–10);
+ *     real exams; the 15 hubs appear exactly once; order 1–10);
  *   - ISO-string timestamps are converted to real Firestore
  *     Timestamps (createdAt set once, never overwritten on reseed;
  *     updatedAt refreshed on every real change);
@@ -57,7 +57,7 @@ export const JOB_CATEGORY_SLUGS = [
 export const JOB_EXAM_SLUGS = [
   'bcs', 'bank', 'primary-teacher', 'ntrca', 'dgfood', 'bpsc-non-cadre',
   'cag', 'bfsa', 'others', 'ministries', 'defence', 'autonomous',
-  'private-ngo', 'it-professional',
+  'private-ngo', 'it-professional', 'grade-11-20',
 ];
 export const DRAFT_REVIEW_STATES = ['Not Started', 'In Progress', 'Under Review'];
 export const PATTERN_STATUSES = [
@@ -137,7 +137,7 @@ export function validateSeed(seed) {
   const cats = seed.jobCategories ?? {};
   const exams = seed.jobExams ?? {};
   if (Object.keys(cats).length !== 10) problems.push(`expected 10 jobCategories, found ${Object.keys(cats).length}`);
-  if (Object.keys(exams).length !== 14) problems.push(`expected 14 jobExams, found ${Object.keys(exams).length}`);
+  if (Object.keys(exams).length !== 15) problems.push(`expected 15 jobExams, found ${Object.keys(exams).length}`);
   const orders = [];
   for (const [id, doc] of Object.entries(cats)) {
     const label = `jobCategories/${id}`;

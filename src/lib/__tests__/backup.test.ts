@@ -37,7 +37,7 @@ const REST_EXPORTER_PATH = resolve(
 /** Top-level collection matches in firestore.rules (first path segment). */
 function rulesCollections(): Set<string> {
   const out = new Set<string>();
-  for (const m of RULES_TEXT.matchAll(/^    match \/([A-Za-z]+)\/\{/gm)) out.add(m[1]);
+  for (const m of RULES_TEXT.matchAll(/^    match \/([A-Za-z0-9]+)\/\{/gm)) out.add(m[1]);
   return out;
 }
 
@@ -308,7 +308,7 @@ describe('Step 18 — scripted REST exporter parity (BRT-11)', () => {
       .split('\n')
       .filter((line) => !line.trim().startsWith('//'))
       .join('\n');
-    const scriptList = [...block.matchAll(/'([A-Za-z]+)'/g)].map((x) => x[1]);
+    const scriptList = [...block.matchAll(/'([A-Za-z0-9]+)'/g)].map((x) => x[1]);
     // The script reads with the owner CLI token (rules bypassed), so it
     // also covers the two collections the client cannot list-read
     // (follows, directMessages) — and nothing else. The ephemeral

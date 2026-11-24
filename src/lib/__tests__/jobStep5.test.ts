@@ -65,23 +65,24 @@ const SEED = JSON.parse(readFileSync(SEED_PATH, 'utf8')) as {
 };
 
 describe('category groups (Step 5 — Step 2 §0.4/§2.1)', () => {
-  it('has 10 groups in order 1–10, covering all 14 exams exactly once', () => {
+  it('has 10 groups in order 1–10, covering all 15 exams exactly once', () => {
     const groups = jobCategoryGroups();
     expect(groups).toHaveLength(10);
     expect(groups.map((g) => g.category.slug)).toEqual(JOB_CATEGORIES.map((c) => c.slug));
     const allSlugs = groups.flatMap((g) => g.exams.map((e) => e.slug));
-    expect(allSlugs).toHaveLength(14);
-    expect(new Set(allSlugs).size).toBe(14);
+    expect(allSlugs).toHaveLength(15);
+    expect(new Set(allSlugs).size).toBe(15);
     expect([...allSlugs].sort()).toEqual(JOB_EXAMS.map((e) => e.slug).sort());
   });
 
-  it('group 2 (govt) holds 4 hubs; group 9 (it-professional) holds 1', () => {
+  it('group 2 (govt) holds 5 hubs; group 9 (it-professional) holds 1', () => {
     const groups = jobCategoryGroups();
     expect(groups[1].exams.map((e) => e.slug)).toEqual([
       'ministries',
       'dgfood',
       'cag',
       'bfsa',
+      'grade-11-20',
     ]);
     expect(groups[8].exams.map((e) => e.slug)).toEqual(['it-professional']);
     expect(groups[0].exams.map((e) => e.slug)).toEqual(['bcs', 'bpsc-non-cadre']);
@@ -260,9 +261,9 @@ describe('pattern status + applicable cycle (Step 5 closure, P1-3/P1-8)', () => 
     }
   });
 
-  it('scopeStatus is defined for 13 exams, scope_pending for IT only', () => {
+  it('scopeStatus is defined for 14 exams, scope_pending for IT only', () => {
     const defined = JOB_EXAMS.filter((e) => e.scopeStatus === 'defined');
-    expect(defined).toHaveLength(13);
+    expect(defined).toHaveLength(14);
     expect(JOB_EXAMS.filter((e) => e.scopeStatus === 'scope_pending').map((e) => e.slug)).toEqual([
       'it-professional',
     ]);
@@ -297,9 +298,9 @@ describe('status vs reviewStatus (Step 5 closure, P1-1)', () => {
 });
 
 describe('seed JSON (Step 5 — team/job-categories-exams-seed.json, disk only)', () => {
-  it('holds 10 categories + 14 exams', () => {
+  it('holds 10 categories + 15 exams', () => {
     expect(Object.keys(SEED.jobCategories)).toHaveLength(10);
-    expect(Object.keys(SEED.jobExams)).toHaveLength(14);
+    expect(Object.keys(SEED.jobExams)).toHaveLength(15);
   });
 
   it('category docs match the canonical JOB_CATEGORIES (order 1–10, hubs, accents, status active)', () => {

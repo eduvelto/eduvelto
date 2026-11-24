@@ -814,8 +814,8 @@ describe('resolveRouteSeo — SEO 50–100 pages (23 Nov 2026)', () => {
     }
   });
 
-  it('/jobs emits an ItemList of exactly the 14 exam hubs; /jobs/bcs does not', () => {
-    expect(JOB_EXAMS.length).toBe(14);
+  it('/jobs emits an ItemList of exactly the 15 exam hubs; /jobs/bcs does not', () => {
+    expect(JOB_EXAMS.length).toBe(15);
     const jobs = resolveRouteSeo('/jobs')!;
     expect(jsonLdTypes(jobs)).toEqual([
       'Organization',
@@ -826,7 +826,7 @@ describe('resolveRouteSeo — SEO 50–100 pages (23 Nov 2026)', () => {
     ]);
     const itemList = (jobs.jsonLd as Array<Record<string, unknown>>)[4];
     const items = itemList['itemListElement'] as Array<Record<string, unknown>>;
-    expect(items.length).toBe(14);
+    expect(items.length).toBe(15);
     expect(items.map((i) => i['url'])).toEqual(
       JOB_EXAMS.map((e) => `${SITE_URL}/jobs/${e.slug}`),
     );

@@ -326,6 +326,36 @@ export const JOB_EXAMS: JobExamDef[] = [
     accentSoft: '#E8EDF3',
     accentDeep: '#152A45',
   },
+  // Job Preparation System (owner brief 24 Nov 2026 20:38) — Grades
+  // 11–20 hub. ONE hub slug for the whole grade band (design
+  // §1.1/§1.2); the six post families are pages under it, NOT exam
+  // slugs (Step 6 taxonomy is closed except for this one sanctioned
+  // hub). Grade does NOT determine the exam pattern — the recruiting
+  // authority, the recruitment rules, the nature of the post and the
+  // specific circular do — so this hub carries NO pattern of its own:
+  // patterns live on per-authority configs (GRADE_11_20_CONFIGS,
+  // below), and the hub starts with ZERO configs populated.
+  // Accent #365314 (deep lime, white text 8.73:1 — measured 24 Nov
+  // 2026 with the same relative-luminance check as the other
+  // accents; distinct hue from every existing accent).
+  // officialUrl null: no single official site (like private-ngo).
+  {
+    slug: 'grade-11-20',
+    bn: 'সরকারি চাকরি (১১–২০ গ্রেড)',
+    en: 'Government Jobs (Grades 11–20)',
+    fullBn: 'সরকারি চাকরি প্রস্তুতি — ১১তম থেকে ২০তম গ্রেড',
+    fullEn: 'Government Job Preparation — Grades 11–20',
+    orgBn: 'বিভিন্ন মন্ত্রণালয়, অধিদপ্তর ও সংস্থা',
+    orgEn: 'Various ministries, departments and organisations',
+    stepsBn: 'বিজ্ঞপ্তি অনুযায়ী',
+    stepsEn: 'As per circular',
+    officialUrl: null,
+    tier: 3,
+    scopeStatus: 'defined',
+    accent: '#365314',
+    accentSoft: '#EDF4E4',
+    accentDeep: '#243A10',
+  },
 ];
 
 export function jobExamBySlug(slug: string): JobExamDef | undefined {
@@ -586,6 +616,9 @@ export const JOB_PATTERN_STATUS: Record<string, { patternStatus: JobPatternStatu
   autonomous: { patternStatus: 'not_verified', applicableCycle: null },
   'private-ngo': { patternStatus: 'not_verified', applicableCycle: null },
   'it-professional': { patternStatus: 'scope_pending', applicableCycle: null },
+  // Grades 11–20 hub: no verified pattern of its own — patterns live
+  // on per-authority configs (GRADE_11_20_CONFIGS, below).
+  'grade-11-20': { patternStatus: 'not_verified', applicableCycle: null },
 };
 
 /** Pattern-verification status of any exam hub (config first, then the
@@ -792,6 +825,93 @@ export const JOB_RULES_CONFIGS: Record<string, JobRulesConfig> = {
 /** The verified rules config for an exam, or null (unverified — "unknown, verify against the circular"). */
 export function jobRulesConfig(slug: string): JobRulesConfig | null {
   return JOB_RULES_CONFIGS[slug] ?? null;
+}
+
+/* ------------------------------------------------------------------ */
+/* Grades 11–20 exam configs (design §1.4)                             */
+/* ------------------------------------------------------------------ */
+
+/**
+ * One config per VERIFIED pattern — never one per post title. A post
+ * family carries several configs when authorities differ (E-1: one
+ * pattern per post title would state false marks for other
+ * authorities). Null means unknown: any field the source does not
+ * establish stays null and renders as "যাচাই হয়নি" — never a
+ * guessed number. The 2026 draft standardisation figures are
+ * PROHIBITED here: no default pattern, no mark split, no duration
+ * from the draft proposal may appear in any config, in code, or in
+ * UI copy, until the final gazette is confirmed.
+ */
+export type Grade1120VerificationStatus = 'verified' | 'partially-verified' | 'not-verified';
+
+export type Grade1120SourceType =
+  | 'gazette'
+  | 'regulation'
+  | 'circular'
+  | 'exam-notice'
+  | 'practical-notice'
+  | 'teletalk-pdf'
+  | 'newspaper-secondary';
+
+export interface Grade1120ConfigStage {
+  kind: 'written' | 'practical' | 'viva';
+  format: 'mcq' | 'descriptive' | 'mcq-and-descriptive' | 'not-specified';
+  totalMarks: number | null;
+  durationMinutes: number | null;
+  passMark: number | null;
+  subjects?: Array<{ nameBn: string; nameEn: string; marks: number | null }>;
+  skill?: 'typing-bn' | 'typing-en' | 'computer' | 'shorthand' | 'driving' | 'trade';
+  practicalMarks?: number | null;
+  noteBn?: string;
+  noteEn?: string;
+}
+
+export interface Grade1120ExamConfig {
+  /** e.g. 'oa-typist__mopa-2020' — postFamily + authority + source year. */
+  configId: string;
+  postFamilySlug: string;
+  postFamilyBn: string;
+  postFamilyEn: string;
+  authorityId: string;
+  authorityBn: string;
+  authorityEn: string;
+  /** Only as the source states it; null when the source does not state it. */
+  gradeRange: string | null;
+  verificationStatus: Grade1120VerificationStatus;
+  source: {
+    /** Source hierarchy: Gazette → circular → exam notice → Teletalk PDF. */
+    type: Grade1120SourceType;
+    title: string;
+    url: string | null;
+    publicationDate: string | null;
+  };
+  verifiedAt: string | null;
+  verifiedBy: string | null;
+  applicableCircular: string | null;
+  /** In the source document's exact stage order. */
+  stages: Grade1120ConfigStage[];
+  /** 'v1', 'v2'… — attempts store it; a later config change never reinterprets an old result. */
+  scoringConfigVersion: string;
+  patternLabel: string;
+}
+
+/**
+ * Verified 11–20 configs. EMPTY in release 1 by design: a config
+ * is entered ONLY when its gazette / circular / exam notice has
+ * actually been opened and checked. The three gazette examples in
+ * the design doc (§1.4) are NOT pre-filled from the consultation
+ * summary — they enter only as configs carrying their own source.
+ */
+export const GRADE_11_20_CONFIGS: Grade1120ExamConfig[] = [];
+
+/** All configs for one post family (empty until a source is verified). */
+export function grade1120ConfigsForFamily(postFamilySlug: string): Grade1120ExamConfig[] {
+  return GRADE_11_20_CONFIGS.filter((c) => c.postFamilySlug === postFamilySlug);
+}
+
+/** Only a 'verified' config may drive a scored mock (§1.4). */
+export function grade1120ConfigCanDriveScoredMock(config: Grade1120ExamConfig): boolean {
+  return config.verificationStatus === 'verified';
 }
 
 /**

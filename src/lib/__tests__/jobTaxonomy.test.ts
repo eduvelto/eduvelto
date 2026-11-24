@@ -6,7 +6,7 @@
  * REAL APIs in jobProfile.ts / jobMode.ts (read 22 Nov 2026 — do not
  * assume the summary's paraphrase):
  *  (1) one canonical taxonomy — JOB_CATEGORIES (10) / TARGET_EXAM_SLUGS
- *      (14 incl. it-professional) / JOB_EXAMS (14 hubs — the
+ *      (15 incl. it-professional) / JOB_EXAMS (15 hubs — the
  *      it-professional hub was added in Step 5) / SELECTABLE_TARGET_EXAMS
  *      (13 — it-professional EXCLUDED in the Step 5 closure, P1-5,
  *      until its scope is defined, owner decision 13.8);
@@ -127,9 +127,9 @@ describe('canonical taxonomy (ChatGPT P1 — one source of truth)', () => {
     }
   });
 
-  it('TARGET_EXAM_SLUGS has exactly 14 slugs incl. it-professional', () => {
-    expect(TARGET_EXAM_SLUGS).toHaveLength(14);
-    expect(new Set(TARGET_EXAM_SLUGS).size).toBe(14);
+  it('TARGET_EXAM_SLUGS has exactly 15 slugs incl. it-professional', () => {
+    expect(TARGET_EXAM_SLUGS).toHaveLength(15);
+    expect(new Set(TARGET_EXAM_SLUGS).size).toBe(15);
     expect(TARGET_EXAM_SLUGS).toContain('it-professional');
     expect(TARGET_EXAM_SLUGS).toContain('bcs');
     expect(TARGET_EXAM_SLUGS).toContain('bank');
@@ -137,10 +137,10 @@ describe('canonical taxonomy (ChatGPT P1 — one source of truth)', () => {
     expect(TARGET_EXAM_SLUGS).toContain('ntrca');
   });
 
-  it('JOB_EXAMS has the 14 hubs — it-professional built in Step 5', () => {
-    expect(JOB_EXAMS).toHaveLength(14);
+  it('JOB_EXAMS has the 15 hubs — it-professional built in Step 5', () => {
+    expect(JOB_EXAMS).toHaveLength(15);
     const slugs = JOB_EXAMS.map((e) => e.slug);
-    expect(new Set(slugs).size).toBe(14);
+    expect(new Set(slugs).size).toBe(15);
     expect(slugs).toContain('it-professional');
     for (const slug of slugs) {
       expect((TARGET_EXAM_SLUGS as readonly string[]).includes(slug)).toBe(true);
@@ -159,8 +159,8 @@ describe('canonical taxonomy (ChatGPT P1 — one source of truth)', () => {
     }
   });
 
-  it('selectable target exams are 13 hubs — it-professional EXCLUDED (Step 5 closure, P1-5: scope undecided, owner decision 13.8)', () => {
-    expect(SELECTABLE_TARGET_EXAMS).toHaveLength(13);
+  it('selectable target exams are 14 hubs — it-professional EXCLUDED (Step 5 closure, P1-5: scope undecided, owner decision 13.8)', () => {
+    expect(SELECTABLE_TARGET_EXAMS).toHaveLength(14);
     expect(SELECTABLE_TARGET_EXAMS).not.toContain('it-professional');
     expect([...SELECTABLE_TARGET_EXAMS].sort()).toEqual(
       JOB_EXAMS.map((e) => e.slug)

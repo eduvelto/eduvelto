@@ -32,9 +32,12 @@ import { formatDhakaDate, toBanglaDigits } from '../lib/jobCirculars';
 import { jobExamBySlug } from '../lib/jobExams';
 import { listJobCorrections } from '../lib/jobReports';
 
+import { loadAdminJobsCounts } from '../lib/jobAdminJobs';
+
 export default function AdminJobsPage() {
   const { t, lang } = useLanguage();
   const [counts, setCounts] = useState<Awaited<ReturnType<typeof loadAdminCircularCounts>> | null>(null);
+  const [jobCounts, setJobCounts] = useState<Awaited<ReturnType<typeof loadAdminJobsCounts>> | null>(null);
   const [recent, setRecent] = useState<AdminCircularPage | null>(null);
   const [openCorrections, setOpenCorrections] = useState<number | null>(null);
   const [error, setError] = useState(false);
@@ -43,17 +46,20 @@ export default function AdminJobsPage() {
   useEffect(() => {
     let alive = true;
     setCounts(null);
+    setJobCounts(null);
     setRecent(null);
     setOpenCorrections(null);
     setError(false);
     Promise.all([
       loadAdminCircularCounts(),
+      loadAdminJobsCounts(),
       listAdminCirculars({ pageSize: 5 }),
       listJobCorrections({ status: 'pending', pageSize: 25 }).catch(() => [] as Awaited<ReturnType<typeof listJobCorrections>>),
     ])
-      .then(([c, r, corr]) => {
+      .then(([c, jc, r, corr]) => {
         if (!alive) return;
         setCounts(c);
+        setJobCounts(jc);
         setRecent(r);
         setOpenCorrections(corr.length);
       })
@@ -129,12 +135,68 @@ export default function AdminJobsPage() {
                 <div style={{ fontSize: 13 }}>{t({ bn: 'খোলা সংশোধনের অনুরোধ', en: 'Open correction requests' })}</div>
               </Card>
             </Link>
+            <Link to="/admin/jobs/questions" style={{ textDecoration: 'none' }}>
+              <Card>
+                <div style={{ fontSize: 28, fontWeight: 800 }}>
+                  {jobCounts === null ? '—' : n(jobCounts.questionsPublished, jobCounts.capped)}
+                </div>
+                <div style={{ fontSize: 13 }}>{t({ bn: 'প্রকাশিত MCQ প্রশ্ন', en: 'Published MCQ questions' })}</div>
+              </Card>
+            </Link>
+            <Link to="/admin/jobs/written" style={{ textDecoration: 'none' }}>
+              <Card>
+                <div style={{ fontSize: 28, fontWeight: 800 }}>
+                  {jobCounts === null ? '—' : n(jobCounts.writtenPublished, jobCounts.capped)}
+                </div>
+                <div style={{ fontSize: 13 }}>{t({ bn: 'প্রকাশিত লিখিত প্রশ্ন', en: 'Published written questions' })}</div>
+              </Card>
+            </Link>
+            <Link to="/admin/jobs/previous" style={{ textDecoration: 'none' }}>
+              <Card>
+                <div style={{ fontSize: 28, fontWeight: 800 }}>
+                  {jobCounts === null ? '—' : n(jobCounts.historicalVerified, jobCounts.capped)}
+                </div>
+                <div style={{ fontSize: 13 }}>{t({ bn: 'যাচাইকৃত বিগত প্রশ্ন', en: 'Verified previous questions' })}</div>
+              </Card>
+            </Link>
+            <Link to="/admin/jobs/approvals" style={{ textDecoration: 'none' }}>
+              <Card>
+                <div style={{ fontSize: 28, fontWeight: 800 }}>
+                  {jobCounts === null ? '—' : n(jobCounts.approvalsPending, jobCounts.capped)}
+                </div>
+                <div style={{ fontSize: 13 }}>{t({ bn: 'অনুমোদনের অপেক্ষায়', en: 'Awaiting approval' })}</div>
+              </Card>
+            </Link>
+            <Link to="/admin/jobs/schedule" style={{ textDecoration: 'none' }}>
+              <Card>
+                <div style={{ fontSize: 28, fontWeight: 800 }}>{t({ bn: 'সময়সূচি', en: 'Schedule' })}</div>
+                <div style={{ fontSize: 13 }}>{t({ bn: 'সাপ্তাহিক + দৈনিক মক', en: 'Weekly + daily mocks' })}</div>
+              </Card>
+            </Link>
+            <Link to="/admin/jobs/results" style={{ textDecoration: 'none' }}>
+              <Card>
+                <div style={{ fontSize: 28, fontWeight: 800 }}>{t({ bn: 'ফলাফল', en: 'Results' })}</div>
+                <div style={{ fontSize: 13 }}>{t({ bn: 'শুধু সমষ্টিগত তথ্য', en: 'Aggregates only' })}</div>
+              </Card>
+            </Link>
+            <Link to="/admin/jobs/subjects" style={{ textDecoration: 'none' }}>
+              <Card>
+                <div style={{ fontSize: 28, fontWeight: 800 }}>{t({ bn: 'বিষয়', en: 'Subjects' })}</div>
+                <div style={{ fontSize: 13 }}>{t({ bn: 'কভারেজ ম্যাট্রিক্স', en: 'Coverage matrix' })}</div>
+              </Card>
+            </Link>
+            <Link to="/admin/jobs/exams" style={{ textDecoration: 'none' }}>
+              <Card>
+                <div style={{ fontSize: 28, fontWeight: 800 }}>{t({ bn: 'পরীক্ষা', en: 'Exams' })}</div>
+                <div style={{ fontSize: 13 }}>{t({ bn: 'নতুন পরীক্ষা (গেটেড)', en: 'New exam (gated)' })}</div>
+              </Card>
+            </Link>
           </div>
-          {counts.capped ? (
+          {counts.capped || (jobCounts?.capped ?? false) ? (
             <p style={{ fontSize: 13, color: 'var(--muted-ivory)', marginTop: -4 }}>
               {t({
-                bn: 'সংখ্যাগুলো প্রথম ১০০টি বিজ্ঞপ্তি থেকে গোনা — এর বেশি থাকলে “+” দেখাবে।',
-                en: 'Counts are from the first 100 circulars — a “+” means there are more.',
+                bn: 'সংখ্যাগুলো প্রথম ১০০টি ডক থেকে গোনা — এর বেশি থাকলে “+” দেখাবে।',
+                en: 'Counts are from the first 100 docs — a “+” means there are more.',
               })}
             </p>
           ) : null}
@@ -145,6 +207,14 @@ export default function AdminJobsPage() {
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
             <Link to="/admin/jobs/circulars/new">{t({ bn: '＋ সার্কুলার যোগ করুন', en: '+ Add circular' })}</Link>
             <Link to="/admin/jobs/circulars?tab=pending">{t({ bn: 'যাচাইয়ের সারি', en: 'Verification queue' })}</Link>
+            <Link to="/admin/jobs/questions">{t({ bn: 'MCQ প্রশ্ন', en: 'MCQ questions' })}</Link>
+            <Link to="/admin/jobs/written">{t({ bn: 'লিখিত প্রশ্ন', en: 'Written questions' })}</Link>
+            <Link to="/admin/jobs/previous">{t({ bn: 'বিগত প্রশ্ন আমদানি', en: 'Previous-question import' })}</Link>
+            <Link to="/admin/jobs/approvals">{t({ bn: 'অনুমোদনের সারি', en: 'Approval queue' })}</Link>
+            <Link to="/admin/jobs/schedule">{t({ bn: 'সময়সূচি', en: 'Schedule' })}</Link>
+            <Link to="/admin/jobs/results">{t({ bn: 'ফলাফল', en: 'Results' })}</Link>
+            <Link to="/admin/jobs/subjects">{t({ bn: 'বিষয়', en: 'Subjects' })}</Link>
+            <Link to="/admin/jobs/exams">{t({ bn: 'নতুন পরীক্ষা', en: 'New exam' })}</Link>
             <Link to="/admin/jobs/reports">{t({ bn: 'রিপোর্ট দেখুন', en: 'See reports' })}</Link>
             <Link to="/admin/jobs/corrections">{t({ bn: 'সংশোধনের অনুরোধ', en: 'Correction requests' })}</Link>
             <Link to="/admin/jobs/domains">{t({ bn: 'অনুমোদিত ডোমেইন', en: 'Approved domains' })}</Link>

@@ -57,6 +57,19 @@ const JobCalendarPage = lazy(() => import('./pages/JobCalendarPage'));
 const JobNotificationsPage = lazy(() => import('./pages/JobNotificationsPage'));
 const JobLiveExamPage = lazy(() => import('./pages/JobLiveExamPage'));
 const JobGuidePage = lazy(() => import('./pages/JobGuidePage'));
+const JobPostFamilyPage = lazy(() => import('./pages/JobPostFamilyPage'));
+const JobTypingPage = lazy(() => import('./pages/JobTypingPage'));
+const JobWrittenIndexPage = lazy(() => import('./pages/JobWrittenIndexPage'));
+const JobWrittenQuestionPage = lazy(() => import('./pages/JobWrittenQuestionPage'));
+const JobModelTestPage = lazy(() => import('./pages/JobModelTestPage'));
+const AdminJobQuestionsPage = lazy(() => import('./pages/AdminJobQuestionsPage'));
+const AdminJobWrittenPage = lazy(() => import('./pages/AdminJobWrittenPage'));
+const AdminJobPreviousPage = lazy(() => import('./pages/AdminJobPreviousPage'));
+const AdminJobApprovalsPage = lazy(() => import('./pages/AdminJobApprovalsPage'));
+const AdminJobSchedulePage = lazy(() => import('./pages/AdminJobSchedulePage'));
+const AdminJobResultsPage = lazy(() => import('./pages/AdminJobResultsPage'));
+const AdminJobSubjectsPage = lazy(() => import('./pages/AdminJobSubjectsPage'));
+const AdminJobExamsPage = lazy(() => import('./pages/AdminJobExamsPage'));
 /* AdSense Part 1 (public content, F1 fix): static BCS English practice
    + sample lessons, visible WITHOUT login. No Firestore reads. */
 const PublicBcsEnglishPage = lazy(() => import('./pages/PublicBcsEnglishPage'));
@@ -445,6 +458,17 @@ export default function App() {
             /jobs/:exam/:tab — otherwise '/jobs/live-exam/:exam'
             matches :exam='live-exam'. */}
         <Route path="/jobs/live-exam/:exam" element={<JobLiveExamPage />} />
+        {/* Job Preparation System (owner brief 24 Nov 2026 20:38):
+            11–20 post-family pages, typing simulator, written
+            system and model tests MUST come before /jobs/:exam/:tab
+            — otherwise '/jobs/grade-11-20/posts/:postSlug' matches
+            :exam='grade-11-20', :tab='posts'. */}
+        <Route path="/jobs/grade-11-20/posts/:postSlug" element={<JobPostFamilyPage />} />
+        <Route path="/jobs/grade-11-20/typing" element={<JobTypingPage />} />
+        <Route path="/jobs/:exam/written" element={<JobWrittenIndexPage />} />
+        <Route path="/jobs/:exam/written/:questionId" element={<JobWrittenQuestionPage />} />
+        <Route path="/jobs/model-test" element={<JobModelTestPage />} />
+        <Route path="/jobs/model-test/:modelTestId" element={<JobModelTestPage />} />
         {/* Step 16: guide pages MUST come before /jobs/:exam/:tab —
             otherwise '/jobs/viva' matches :exam='viva'. */}
         <Route path="/jobs/viva" element={<JobGuidePage kind="viva" />} />
@@ -554,6 +578,17 @@ export default function App() {
           <Route path="jobs/reports" element={<AdminJobReportsPage />} />
           <Route path="jobs/corrections" element={<AdminJobCorrectionsPage />} />
           <Route path="jobs/domains" element={<AdminJobDomainsPage />} />
+          {/* Job Preparation System (24 Nov 2026): MCQ + written +
+              previous-question + approval + schedule + results +
+              subjects + exams admin (§5). */}
+          <Route path="jobs/questions" element={<AdminJobQuestionsPage />} />
+          <Route path="jobs/written" element={<AdminJobWrittenPage />} />
+          <Route path="jobs/previous" element={<AdminJobPreviousPage />} />
+          <Route path="jobs/approvals" element={<AdminJobApprovalsPage />} />
+          <Route path="jobs/schedule" element={<AdminJobSchedulePage />} />
+          <Route path="jobs/results" element={<AdminJobResultsPage />} />
+          <Route path="jobs/subjects" element={<AdminJobSubjectsPage />} />
+          <Route path="jobs/exams" element={<AdminJobExamsPage />} />
           <Route path="admissions" element={<AdminAdmissionsPage />} />
           <Route path="admissions/structure" element={<AdminNuStructurePage />} />
           <Route path="admissions/syllabus" element={<AdminNuSyllabusPage />} />

@@ -1,7 +1,7 @@
 {
   "_meta": {
-    "counts": "10 jobCategories, 14 jobExams (13 built + it-professional, Step 5)",
-    "date": "2026-11-22",
+    "counts": "10 jobCategories, 15 jobExams (13 built + it-professional, Step 5; grade-11-20 hub added 24 Nov 2026, Job Preparation System — 0 verified configs)",
+    "date": "2026-11-24",
     "source": "Step 3 §2.1/§2.2 schema; values copied from src/lib/jobProfile.ts (JOB_CATEGORIES) and src/lib/jobExams.ts (JOB_EXAMS, JOB_RULES_CONFIGS). No new facts invented.",
     "status": "DISK ONLY — never applied to the live database. The app still reads the hardcoded canonical config; this seed is the Firestore-ready form for the future read-path switch + admin UI. Apply only with separate approval, via an admin script (convert createdAt/updatedAt to serverTimestamp on apply; patternVerifiedAt stays null until a verification date is recorded).",
     "title": "Eduvelto Job Preparation — jobCategories + jobExams seed (Step 5)",
@@ -90,7 +90,8 @@
         "ministries",
         "dgfood",
         "cag",
-        "bfsa"
+        "bfsa",
+        "grade-11-20"
       ],
       "nameBn": "সরকারি চাকরি",
       "nameEn": "Government Jobs",
@@ -405,6 +406,34 @@
       "patternStatus": "not_verified",
       "applicableCycle": null,
       "scopeStatus": "defined"
+    },
+    "grade-11-20": {
+      "accent": "#365314",
+      "accentDeep": "#243A10",
+      "accentSoft": "#EDF4E4",
+      "applicableCycle": null,
+      "categoryId": "govt",
+      "createdAt": "2026-11-24T00:00:00.000Z",
+      "createdBy": "seed",
+      "fullBn": "সরকারি চাকরি প্রস্তুতি — ১১তম থেকে ২০তম গ্রেড",
+      "fullEn": "Government Job Preparation — Grades 11–20",
+      "nameBn": "সরকারি চাকরি (১১–২০ গ্রেড)",
+      "nameEn": "Government Jobs (Grades 11–20)",
+      "officialUrl": null,
+      "orgBn": "বিভিন্ন মন্ত্রণালয়, অধিদপ্তর ও সংস্থা",
+      "orgEn": "Various ministries, departments and organisations",
+      "patternStatus": "not_verified",
+      "reviewStatus": "Not Started",
+      "rulesConfig": null,
+      "rulesConfigHistory": [],
+      "scopeStatus": "defined",
+      "slug": "grade-11-20",
+      "status": "draft",
+      "stepsBn": "বিজ্ঞপ্তি অনুযায়ী",
+      "stepsEn": "As per circular",
+      "syllabusSource": null,
+      "tier": 3,
+      "updatedAt": "2026-11-24T00:00:00.000Z"
     },
     "bpsc-non-cadre": {
       "accent": "#9D174D",

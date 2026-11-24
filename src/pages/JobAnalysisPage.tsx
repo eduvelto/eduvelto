@@ -30,6 +30,14 @@ import { listJobAttempts } from '../lib/jobPractice';
 import { listMockAttempts } from '../lib/jobMock';
 import { jobExamBySlug } from '../lib/jobExams';
 import {
+  ANALYSIS_NOTICE,
+  LEVEL_C_LABEL,
+  MODEL_TEST_DISCLAIMER,
+  MODEL_TEST_KIND_LABEL,
+  MODEL_TEST_KINDS,
+  PRIORITY_NOT_PROBABILITY,
+} from '../lib/jobTopicAnalytics';
+import {
   attemptSummaryFromStored,
   attemptTrend,
   correctVsWrongTime,
@@ -320,6 +328,56 @@ export default function JobAnalysisPage() {
           </div>
         </>
       )}
+
+      {/* Historical analysis (§4.1 — three concepts kept apart).
+          This page is the student's OWN attempt analysis; the section
+          below is the historical analysis, at Evidence Level C for
+          every exam (0 verified previous questions): syllabus-based
+          priorities only, never a manufactured trend, never a
+          probability. */}
+      <Card style={{ marginTop: 16 }}>
+        <div style={{ fontWeight: 700, color: '#142B3B', fontSize: 17, marginBottom: 8 }}>
+          {t({ bn: 'বিগত প্রশ্নের বিশ্লেষণ', en: 'Previous-question analysis' })}
+        </div>
+        <p style={{ margin: '0 0 8px', color: MUTED, fontSize: 14, lineHeight: 1.7 }}>
+          {t({ bn: LEVEL_C_LABEL.bn, en: LEVEL_C_LABEL.en })}
+        </p>
+        <p style={{ margin: '0 0 8px', color: MUTED, fontSize: 14, lineHeight: 1.7 }}>
+          {t({ bn: ANALYSIS_NOTICE.bn, en: ANALYSIS_NOTICE.en })}
+        </p>
+        <p style={{ margin: '0 0 8px', color: MUTED, fontSize: 14, lineHeight: 1.7 }}>
+          {t({
+            bn: 'তিনটি জিনিস আলাদা: (১) বিগত পরীক্ষায় যা এসেছে — যাচাইকৃত গণনা মাত্র; (২) বেশি গুরুত্ব দিয়ে পড়ুন — একটি অগ্রাধিকার, সম্ভাবনা নয়; (৩) সম্ভাব্য প্রশ্নের মডেল টেস্ট — অনুশীলন পরীক্ষা, আসল প্রশ্নপত্রের পূর্বাভাস নয়।',
+            en: 'Three things, kept apart: (1) what actually appeared in past exams — verified counts only; (2) high-priority topics — a priority, not a probability; (3) probable-question model tests — practice tests, not predictions of the actual paper.',
+          })}
+        </p>
+        <p style={{ margin: '0 0 8px', color: MUTED, fontSize: 14, lineHeight: 1.7 }}>
+          {t({ bn: PRIORITY_NOT_PROBABILITY.bn, en: PRIORITY_NOT_PROBABILITY.en })}
+        </p>
+        <div style={{ display: 'grid', gap: 10, marginTop: 12 }}>
+          {MODEL_TEST_KINDS.map((kind) => (
+            <div key={kind} style={{ border: '1px solid #E3E8EF', borderRadius: 10, padding: '12px 14px' }}>
+              <div style={{ fontWeight: 700, color: '#142B3B', fontSize: 15 }}>
+                {t({ bn: MODEL_TEST_KIND_LABEL[kind].bn, en: MODEL_TEST_KIND_LABEL[kind].en })}
+              </div>
+              <p style={{ margin: '4px 0 8px', color: MUTED, fontSize: 14, lineHeight: 1.7 }}>
+                {t({ bn: MODEL_TEST_KIND_LABEL[kind].descBn, en: MODEL_TEST_KIND_LABEL[kind].descEn })}
+              </p>
+              <p style={{ margin: 0, color: MUTED, fontSize: 13 }}>
+                {t({ bn: 'এই ধরনের কোনো টেস্ট এখনো প্রকাশিত হয়নি।', en: 'No test of this type is published yet.' })}
+              </p>
+            </div>
+          ))}
+        </div>
+        <p style={{ margin: '12px 0 0', color: MUTED, fontSize: 13 }}>
+          {t({ bn: MODEL_TEST_DISCLAIMER.bn, en: MODEL_TEST_DISCLAIMER.en })}
+        </p>
+        <p style={{ margin: '8px 0 0' }}>
+          <Link to="/jobs/model-test" style={{ fontWeight: 600 }}>
+            {t({ bn: 'মডেল টেস্ট দেখুন →', en: 'See model tests →' })}
+          </Link>
+        </p>
+      </Card>
 
       <p style={{ marginTop: 20 }}>
         <Link to="/jobs/dashboard" style={{ fontWeight: 600 }}>{t({ bn: '← আমার চাকরির ড্যাশবোর্ড', en: '← My job dashboard' })}</Link>

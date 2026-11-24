@@ -21,7 +21,7 @@
 //
 // Step 6 handover (team/job-categories-exams-step5.md, P2-6) — the
 // constraints this file enforces:
-//   #1 canonical taxonomy only (14 hubs, no new exams/categories);
+//   #1 canonical taxonomy only (15 hubs, no new exams/categories);
 //   #2 no invented syllabuses (every subject carries syllabusSource);
 //   #3 null rulesConfig stays missing (the other 10 exams + IT get
 //      NO subjects — jobSubjectsForExam returns [] for them, never

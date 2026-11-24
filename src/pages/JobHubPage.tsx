@@ -34,6 +34,8 @@ import { JobNonAffiliationNote } from '../components/JobCards';
 import JobPracticeTab from '../components/JobPracticeTab';
 import JobMockTab from '../components/JobMockTab';
 import JobModeSwitch from '../components/JobModeSwitch';
+import JobGrade1120Hub from './JobGrade1120Hub';
+import JobPreviousAnalysis from '../components/JobPreviousAnalysis';
 import LoginWall from '../components/LoginWall';
 import { useLanguage, T } from '../i18n/LanguageContext';
 import { useAuth } from '../lib/auth';
@@ -400,6 +402,15 @@ export default function JobHubPage() {
       </div>
 
       {activeTab === 'home' ? (
+        def.slug === 'grade-11-20' ? (
+          // Grades 11–20 hub (design §1.2): the same shell (hero +
+          // non-affiliation + tab bar + mode switch above), with the
+          // hub-specific sections — legend, directory, family cards —
+          // instead of the generic pattern/elements body. The generic
+          // body would duplicate the model-test / previous sections
+          // the hub component already renders honestly.
+          <JobGrade1120Hub />
+        ) : (
         <>
           {/* Exam identity — official source; age limits, fees and exam
               dates are never written here. */}
@@ -786,6 +797,7 @@ export default function JobHubPage() {
             </Card>
           </Reveal>
         </>
+        )
       ) : !user && (activeTab === 'practice' || activeTab === 'mocks' || activeTab === 'results' || activeTab === 'progress') ? (
         // Exam data lives behind sign-in (auth-gating, live since
         // 22 Nov 2026): guests see the login wall here, never the
@@ -800,6 +812,28 @@ export default function JobHubPage() {
         <JobSubjectsTab def={def} />
       ) : activeTab === 'results' ? (
         <JobHubResultsTab def={def} />
+      ) : activeTab === 'previous' ? (
+        // Previous tab (design §3.1/§4.5): the existing TAB_EMPTY
+        // copy, reused verbatim, plus the Level C analysis panel —
+        // every exam is at Level C at 0 verified previous questions.
+        <>
+          <Reveal>
+            <Card>
+              <div style={{ fontWeight: 700, color: 'var(--heading)', fontSize: 17 }}>
+                {t({ bn: TAB_EMPTY.previous.bn, en: TAB_EMPTY.previous.en })}
+              </div>
+              <p style={{ margin: '8px 0 12px', color: 'var(--muted)', fontSize: 14, lineHeight: 1.7 }}>
+                {t({ bn: TAB_EMPTY.previous.noteBn, en: TAB_EMPTY.previous.noteEn })}
+              </p>
+              <p style={{ margin: 0 }}>
+                <Link to="/jobs/common" style={{ fontWeight: 600 }}>
+                  {t({ bn: 'কমন প্রস্তুতি দেখুন →', en: 'See common preparation →' })}
+                </Link>
+              </p>
+            </Card>
+          </Reveal>
+          <JobPreviousAnalysis examSlug={def.slug} />
+        </>
       ) : (
         <Reveal>
           <Card>

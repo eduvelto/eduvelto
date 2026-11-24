@@ -97,7 +97,7 @@ const LIFE_TOOLS: { to: string; bn: string; en: string; descBn: string; descEn: 
 ];
 
 const STATIC_PAGES: Omit<SearchResult, 'id'>[] = [
-  { kind: 'job', titleBn: 'চাকরি প্রস্তুতি', titleEn: 'Job Preparation', descBn: 'BCS, ব্যাংক, শিক্ষক নিয়োগসহ ১৪টি পরীক্ষার প্রস্তুতির কাঠামো', descEn: 'Preparation structure for 14 exams including BCS, Bank and teacher recruitment', to: '/jobs', metaBn: 'চাকরি প্রস্তুতি', metaEn: 'Job Preparation' },
+  { kind: 'job', titleBn: 'চাকরি প্রস্তুতি', titleEn: 'Job Preparation', descBn: 'BCS, ব্যাংক, শিক্ষক নিয়োগসহ ১৫টি পরীক্ষার প্রস্তুতির কাঠামো', descEn: 'Preparation structure for 15 exams including BCS, Bank and teacher recruitment', to: '/jobs', metaBn: 'চাকরি প্রস্তুতি', metaEn: 'Job Preparation' },
   { kind: 'job', titleBn: 'ভর্তি প্রস্তুতি', titleEn: 'Admission Preparation', descBn: 'বিশ্ববিদ্যালয়, মেডিকেল, ইঞ্জিনিয়ারিং ও জাতীয় বিশ্ববিদ্যালয় ভর্তি প্রস্তুতি', descEn: 'University, medical, engineering and National University admission preparation', to: '/admissions', metaBn: 'ভর্তি প্রস্তুতি', metaEn: 'Admission Preparation' },
   { kind: 'job', titleBn: 'জাতীয় বিশ্ববিদ্যালয় ভর্তি', titleEn: 'National University Admission', descBn: 'জাতীয় বিশ্ববিদ্যালয় অনার্স ভর্তি — মানবিক, বিজ্ঞান ও ব্যবসায় শিক্ষা', descEn: 'National University honours admission — humanities, science and business studies', to: '/admissions/national-university', metaBn: 'ভর্তি প্রস্তুতি', metaEn: 'Admission Preparation' },
   { kind: 'job', titleBn: 'মডেল টেস্ট', titleEn: 'Model Tests', descBn: 'MCQ পরীক্ষা — লগইন করে পরীক্ষা দিন', descEn: 'MCQ exams — sign in to take a test', to: '/exam', metaBn: 'পরীক্ষা', metaEn: 'Exam' },

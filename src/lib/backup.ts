@@ -209,6 +209,18 @@ export const BACKUP_COLLECTIONS: string[] = [
   'jobBankCoverage',
   'topicAnalytics',
   'historicalQuestions',
+  // Added 24 Nov 2026 (Job Preparation System: written system +
+  // 11–20 configs + model tests — the five new collections must be
+  // in every backup, or the written questions/submissions/feedback,
+  // the verified 11–20 configs and the published model tests are
+  // lost. All five are owner/moderator-readable under the rules, so
+  // the client export covers them; writtenSubmissions reads are
+  // owner-or-moderator, and the owner is a moderator.)
+  'writtenQuestions',
+  'writtenSubmissions',
+  'writtenFeedback',
+  'modelTests',
+  'grade1120Configs',
   // Added 23 Nov 2026 (Step 18: the NU admission content store.
   // Empty live today (the NU seed was never applied), but the same
   // silent-loss risk the moment a moderator publishes NU content).

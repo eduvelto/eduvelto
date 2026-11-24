@@ -234,7 +234,7 @@ describe('jobSubjectSyllabusReady (Step 6 guard)', () => {
     expect(jobSubjectSyllabusReady('')).toBe(false);
   });
 
-  it('covers all 14 hubs: exactly 4 ready, 10 not', () => {
+  it('covers all 15 hubs: exactly 4 ready, 11 not', () => {
     const ready = JOB_EXAMS.map((e) => e.slug).filter((s) => jobSubjectSyllabusReady(s));
     expect(ready.sort()).toEqual(['bank', 'bcs', 'ntrca', 'primary-teacher']);
   });

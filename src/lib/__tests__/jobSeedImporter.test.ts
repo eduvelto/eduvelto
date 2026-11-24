@@ -9,7 +9,7 @@
  *      duplicate order, unverified penalty in negativeMarking,
  *      verified patternStatus with an unverified penalty, missing
  *      patternStatus, subject-sum mismatch);
- *  (2) planSeedApply — empty DB ⇒ 24 toCreate; exact DB ⇒ 24
+ *  (2) planSeedApply — empty DB ⇒ 25 toCreate; exact DB ⇒ 25
  *      unchanged (idempotent); one changed doc ⇒ 1 toUpdate;
  *  (3) compareDoc — timestamp-only differences are 'unchanged';
  *  (4) seedDocFields — ISO createdAt preserved as a Date, updatedAt
@@ -149,21 +149,21 @@ describe('validateRulesConfig (P1-2/P1-4)', () => {
 });
 
 describe('planSeedApply + compareDoc (P1-2)', () => {
-  it('empty DB ⇒ 24 toCreate, nothing else', () => {
+  it('empty DB ⇒ 25 toCreate, nothing else', () => {
     const plan = planSeedApply({ jobCategories: {}, jobExams: {} }, SEED);
-    expect(plan.toCreate).toHaveLength(24);
+    expect(plan.toCreate).toHaveLength(25);
     expect(plan.toUpdate).toEqual([]);
     expect(plan.unchanged).toEqual([]);
   });
 
-  it('exact DB ⇒ 24 unchanged (idempotent — a re-run writes nothing)', () => {
+  it('exact DB ⇒ 25 unchanged (idempotent — a re-run writes nothing)', () => {
     const plan = planSeedApply(
       { jobCategories: SEED.jobCategories, jobExams: SEED.jobExams },
       SEED,
     );
     expect(plan.toCreate).toEqual([]);
     expect(plan.toUpdate).toEqual([]);
-    expect(plan.unchanged).toHaveLength(24);
+    expect(plan.unchanged).toHaveLength(25);
   });
 
   it('one changed doc ⇒ exactly 1 toUpdate', () => {
@@ -176,7 +176,7 @@ describe('planSeedApply + compareDoc (P1-2)', () => {
     expect(plan.toUpdate).toHaveLength(1);
     expect(plan.toUpdate[0].collection).toBe('jobExams');
     expect(plan.toUpdate[0].id).toBe('bcs');
-    expect(plan.unchanged).toHaveLength(23);
+    expect(plan.unchanged).toHaveLength(24);
   });
 
   it('compareDoc ignores timestamp-only differences', () => {

@@ -43,6 +43,11 @@ export interface HistoricalQuestion {
   verificationStatus: HistoricalVerificationStatus;
   verifiedAt?: unknown;
   verifiedBy?: string | null;
+  /** Pattern-level grouping (§4.2 level 5): a teacher/admin
+   * judgement recorded on the record (e.g. 'samash-identify-type'),
+   * NOT an algorithmic claim. An auto-suggested tag is a suggestion
+   * the verifier confirms or rejects. */
+  patternTag?: string | null;
   auditTrail: HistoricalAuditEntry[];
 }
 
@@ -193,5 +198,76 @@ export function validateHistoricalQuestion(doc: Record<string, unknown>): string
   if (!Array.isArray(doc.auditTrail)) {
     problems.push(`${label}: auditTrail must be a list`);
   }
+  if (doc.patternTag !== undefined && doc.patternTag !== null && typeof doc.patternTag !== 'string') {
+    problems.push(`${label}: patternTag must be a string or null`);
+  }
   return problems;
+}
+
+/* ------------------------------------------------------------------ */
+/* Import wizard (§3.3) — six-step gate                               */
+/* ------------------------------------------------------------------ */
+
+/**
+ * The six import steps, in order. The wizard BLOCKS Publish until
+ * the verifier step passes (second-eye rule: verifier ≠ author).
+ */
+export type HistoricalImportStep =
+  | 'source'
+  | 'transcribe'
+  | 'historical-record'
+  | 'verify'
+  | 'link-publish'
+  | 'correction';
+
+export const HISTORICAL_IMPORT_STEPS: HistoricalImportStep[] = [
+  'source',
+  'transcribe',
+  'historical-record',
+  'verify',
+  'link-publish',
+  'correction',
+];
+
+export interface HistoricalImportState {
+  /** Step completion, in HISTORICAL_IMPORT_STEPS order. */
+  completed: Partial<Record<HistoricalImportStep, boolean>>;
+  /** Who authored the transcription (never the verifier). */
+  authorUid: string | null;
+  /** Who verified it (never the author). */
+  verifierUid: string | null;
+  /** The duplicate decision (§3.2): same question in a different
+   * year is recurrence data, not a duplicate — the admin decides
+   * explicitly. */
+  duplicateDecision: 'distinct' | 'same-question-different-year' | 'duplicate' | null;
+}
+
+/** May this import publish? All steps through 'verify' must be
+ * complete, the verifier must differ from the author, and the
+ * duplicate decision must be made. Returns problem strings. */
+export function historicalImportPublishGate(state: HistoricalImportState): string[] {
+  const problems: string[] = [];
+  for (const step of ['source', 'transcribe', 'historical-record', 'verify'] as const) {
+    if (!state.completed[step]) {
+      problems.push(`historical import: step '${step}' is not complete — Publish is blocked`);
+    }
+  }
+  if (state.authorUid !== null && state.verifierUid !== null && state.authorUid === state.verifierUid) {
+    problems.push('historical import: verifier must not be the author (second-eye rule)');
+  }
+  if (state.verifierUid === null) {
+    problems.push('historical import: no verifier — the verify step needs a verifier');
+  }
+  if (state.duplicateDecision === null) {
+    problems.push('historical import: the duplicate decision is required (duplicate / same-question-different-year / distinct)');
+  }
+  return problems;
+}
+
+/** The wizard's current step: the first incomplete step. */
+export function historicalImportCurrentStep(state: HistoricalImportState): HistoricalImportStep {
+  for (const step of HISTORICAL_IMPORT_STEPS) {
+    if (!state.completed[step]) return step;
+  }
+  return 'correction';
 }

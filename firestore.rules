@@ -152,12 +152,13 @@ service cloud.firestore {
               'ntrca-teacher', 'defence-police', 'autonomous',
               'ngo-private', 'it-professional', 'other-competitive'];
     }
-    // The 14 exam hub slugs (same list as jobProfile.ts
+    // The 15 exam hub slugs (same list as jobProfile.ts
     // TARGET_EXAM_SLUGS).
     function jobExamSlugs() {
       return ['bcs', 'bank', 'primary-teacher', 'ntrca', 'dgfood',
               'bpsc-non-cadre', 'cag', 'bfsa', 'others', 'ministries',
-              'defence', 'autonomous', 'private-ngo', 'it-professional'];
+              'defence', 'autonomous', 'private-ngo', 'it-professional',
+              'grade-11-20'];
     }
     // The 23 CANONICAL subject doc IDs (Step 6 fold-in, ChatGPT P1-02):
     // subjects are derived from the verified rulesConfig, never
@@ -4634,6 +4635,69 @@ service cloud.firestore {
       allow create, update: if isModerator()
         && request.resource.data.verificationStatus in ['Verified', 'Partially verified', 'Unverified']
         && isStr(request.resource.data.sourceReference, 500);
+      allow delete: if isAdmin();
+    }
+
+    // ---------- job written system + 11–20 configs (24 Nov 2026,
+    // design §2.7/§1.4) — COMPACT by design: the compiled-rules
+    // margin was ~100 bytes at Step 17, so these blocks carry only
+    // the load-bearing checks (owner-only submissions, no update
+    // ever, published-only reads, moderator writes). The lib
+    // validators (jobWritten.ts / jobWrittenContent.ts) enforce the
+    // field-level rules the rules language cannot afford.
+    // writtenQuestions — students read Published only; Moderators
+    // read/write (second-eye + version+1 are lib + admin-UI
+    // enforced; a Published doc needs reviewStatus 'Published').
+    match /writtenQuestions/{questionId} {
+      allow read: if isModerator()
+        || (signedIn() && callerActive()
+            && resource.data.get('status', '') == 'published');
+      allow create, update: if isModerator()
+        && request.resource.data.status in ['draft', 'published']
+        && request.resource.data.reviewStatus in ['Not Started', 'In Progress', 'Under Review', 'Published', 'Rejected', 'Archived'];
+      allow delete: if isAdmin();
+    }
+    // writtenSubmissions — IMMUTABLE: create-only, never update.
+    // Only the owner reads their own writing (Moderators read for
+    // the teacher-review path). No submission text leaves the
+    // device without the student's consent (client-enforced).
+    match /writtenSubmissions/{submissionId} {
+      allow read: if isModerator()
+        || (signedIn() && resource.data.get('uid', '') == request.auth.uid);
+      allow create: if signedIn() && callerActive()
+        && request.resource.data.uid == request.auth.uid
+        && request.resource.data.status in ['submitted', 'self-checked'];
+      allow update, delete: if false;
+    }
+    // writtenFeedback — one doc per feedback event, linked to the
+    // exact immutable submission version. Owner reads their own
+    // (uid on the doc); Moderators read/write; students create
+    // 'self' feedback only.
+    match /writtenFeedback/{feedbackId} {
+      allow read: if isModerator()
+        || (signedIn() && resource.data.get('uid', '') == request.auth.uid);
+      allow create: if isModerator()
+        || (signedIn() && callerActive()
+            && request.resource.data.uid == request.auth.uid
+            && request.resource.data.evaluationType == 'self');
+      allow update: if isModerator();
+      allow delete: if isAdmin();
+    }
+    // modelTests — published tests are readable signed-in (a test
+    // is published when publishedAt is set); Moderators write.
+    match /modelTests/{modelTestId} {
+      allow read: if isModerator()
+        || (signedIn() && callerActive()
+            && resource.data.get('publishedAt', null) != null);
+      allow create, update: if isModerator();
+      allow delete: if isAdmin();
+    }
+    // grade1120Configs — the verified 11–20 pattern configs
+    // (§1.4). Signed-in read; Moderator writes (Admin-SDK import
+    // in release 1 — configs enter only with their source checked).
+    match /grade1120Configs/{configId} {
+      allow read: if signedIn();
+      allow create, update: if isModerator();
       allow delete: if isAdmin();
     }
 

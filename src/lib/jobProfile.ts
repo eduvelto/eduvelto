@@ -114,7 +114,7 @@ export const JOB_CATEGORIES: JobCategoryDef[] = [
     slug: 'govt',
     bn: 'সরকারি চাকরি',
     en: 'Government Jobs',
-    hubSlugs: ['ministries', 'dgfood', 'cag', 'bfsa'],
+    hubSlugs: ['ministries', 'dgfood', 'cag', 'bfsa', 'grade-11-20'],
     accent: '#3730A3',
     accentSoft: '#E8E9FB',
     accentDeep: '#312E81',
@@ -211,8 +211,9 @@ export const JOB_CATEGORIES: JobCategoryDef[] = [
   },
 ];
 
-/** The 14 hub slugs `targetExam` may hold as a KNOWN exam (Step 3
- * §3.1 — includes 'it-professional', whose hub exists since Step 5).
+/** The 15 hub slugs `targetExam` may hold as a KNOWN exam (Step 3
+ * §3.1 — includes 'it-professional', whose hub exists since Step 5,
+ * and 'grade-11-20', the Grades 11–20 hub added 24 Nov 2026).
  * Being a known hub is NOT the same as being selectable: see
  * SELECTABLE_TARGET_EXAMS. */
 export const TARGET_EXAM_SLUGS = [
@@ -230,12 +231,13 @@ export const TARGET_EXAM_SLUGS = [
   'autonomous',
   'private-ngo',
   'it-professional',
+  'grade-11-20',
 ] as const;
 
 export type TargetExamSlug = (typeof TARGET_EXAM_SLUGS)[number];
 
 /**
- * Exams the student may actually PICK as a target today: 13 of the 14
+ * Exams the student may actually PICK as a target today: 14 of the 15
  * hubs. 'it-professional' is EXCLUDED (Step 5 closure, P1-5 — ChatGPT
  * review): its scope is undecided (owner decision 13.8), so selecting
  * it as a target would imply a learning pathway Eduvelto cannot map
