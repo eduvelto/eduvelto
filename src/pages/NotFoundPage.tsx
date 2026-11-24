@@ -34,7 +34,7 @@ export default function NotFoundPage() {
   const { t } = useLanguage();
   const location = useLocation();
 
-  useNotFoundMeta(PAGE_TITLE, true);
+  useNotFoundMeta(t({ bn: PAGE_TITLE, en: 'Page not found — Eduvelto' }), true);
 
   return (
     <PageShell titleBn="এই পাতাটি খুঁজে পাওয়া যায়নি" titleEn="This page could not be found">

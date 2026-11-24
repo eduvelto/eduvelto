@@ -100,6 +100,8 @@ import {
  * label. Never 'verified', never 'নিয়োগ পরীক্ষার ফল'. */
 export const JOB_PRACTICE_RESULT_LABEL =
   'অনুশীলন ফলাফল — নিয়োগ পরীক্ষার ফল নয়';
+export const JOB_PRACTICE_RESULT_LABEL_EN =
+  'Practice result — not a recruitment exam result';
 
 /* ------------------------------------------------------------------ */
 /* Exam patterns (derived from JOB_RULES_CONFIGS — never re-typed)    */
@@ -947,6 +949,14 @@ export function weakTopicsFromAttemptAnswers(answers: JobAttemptAnswer[]): JobWe
  * read them. Malformed IDs fall back to the humanized last segment,
  * never to the raw slug; an empty ID is labelled unknown. */
 export function jobTopicLabelBn(topicId: string): string {
+  return jobTopicLabel(topicId, 'bn');
+}
+
+/** Topic label in the selected language. The label itself is the
+ * humanized English topic name in both languages (there is no
+ * Bangla topic-name source — see the note above); only the
+ * unknown-topic fallback differs by language. */
+export function jobTopicLabel(topicId: string, lang: 'bn' | 'en'): string {
   const humanize = (s: string): string =>
     s
       .split('-')
@@ -961,7 +971,7 @@ export function jobTopicLabelBn(topicId: string): string {
   if (parts.length === 3) return `${humanize(parts[1])} — ${humanize(parts[2])}`;
   if (parts.length === 2) return humanize(parts[1]);
   if (parts.length === 1) return humanize(parts[0]);
-  return 'অজানা টপিক';
+  return lang === 'bn' ? 'অজানা টপিক' : 'Unknown topic';
 }
 
 export interface ScoreMockAttemptInput {

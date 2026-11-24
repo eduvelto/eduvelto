@@ -453,21 +453,23 @@ export function canApproveCircular(
   uid: string,
   isOwner: boolean,
   overrideReason: string | null,
-): { allowed: boolean; reasonBn: string | null } {
+): { allowed: boolean; reasonBn: string | null; reasonEn: string | null } {
   const selfEdit = circular.authorId === uid || circular.lastEditedBy === uid;
-  if (!selfEdit) return { allowed: true, reasonBn: null };
+  if (!selfEdit) return { allowed: true, reasonBn: null, reasonEn: null };
   if (isOwner && overrideReason !== null && overrideReason.trim().length >= 10) {
-    return { allowed: true, reasonBn: null };
+    return { allowed: true, reasonBn: null, reasonEn: null };
   }
   if (isOwner) {
     return {
       allowed: false,
       reasonBn: 'আপনি এই বিজ্ঞপ্তির লেখক/সর্বশেষ সম্পাদক — নিজের কাজ নিজে অনুমোদন করতে কমপক্ষে ১০ অক্ষরের কারণ লিখুন (মালিকের ওভাররাইড)।',
+      reasonEn: 'You are this circular’s author / last editor — to approve your own work, write a reason of at least 10 characters (owner override).',
     };
   }
   return {
     allowed: false,
     reasonBn: 'আপনি এই বিজ্ঞপ্তির লেখক/সর্বশেষ সম্পাদক — নিজের কাজ নিজে অনুমোদন করা যায় না। অন্য যাচাইকারীকে দিন।',
+    reasonEn: 'You are this circular’s author / last editor — you cannot approve your own work. Give it to another verifier.',
   };
 }
 

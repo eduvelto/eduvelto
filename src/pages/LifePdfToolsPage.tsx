@@ -151,7 +151,7 @@ async function textToPdfBengali(text: string, filename: string) {
 }
 
 export default function LifePdfToolsPage() {
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
   const [text, setText] = useState('');
   const [pdfName, setPdfName] = useState('');
   const [textBusy, setTextBusy] = useState(false);
@@ -234,7 +234,7 @@ export default function LifePdfToolsPage() {
   return (
     <PageShell titleBn="PDF টুলস" titleEn="PDF Tools" wide>
       {/* Visible breadcrumb (24 Nov 2026 SEO pass) — labels match the BreadcrumbList JSON-LD in lib/seo.ts. */}
-      <Breadcrumb items={[{ label: 'জীবন সেবা', to: '/life' }, { label: 'PDF টুলস' }]} />
+      <Breadcrumb items={[{ label: lang === 'bn' ? 'জীবন সেবা' : 'Life Services', to: '/life' }, { label: lang === 'bn' ? 'PDF টুলস' : 'PDF Tools' }]} />
       <p style={{ color: 'var(--muted)' }}>
         {t({
           bn: 'দুটো ছোট PDF টুল — সব কাজ আপনার ব্রাউজারেই হয়। আপনার ফাইল বা লেখা কোথাও আপলোড হয় না, কোনো সার্ভারে যায় না।',

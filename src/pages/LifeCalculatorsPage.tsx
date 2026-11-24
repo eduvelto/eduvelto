@@ -90,7 +90,7 @@ function SectionTitle({ bn, en }: { bn: string; en: string }) {
 }
 
 function EmiSection() {
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
   const [principal, setPrincipal] = useState('');
   const [rate, setRate] = useState('');
   const [months, setMonths] = useState('');
@@ -126,7 +126,7 @@ function EmiSection() {
             inputMode="decimal"
             value={principal}
             onChange={(e) => setPrincipal(e.target.value)}
-            placeholder="১০০০০০"
+            placeholder={lang === 'bn' ? '১০০০০০' : '100000'}
           />
         </div>
         <div>
@@ -142,7 +142,7 @@ function EmiSection() {
             inputMode="decimal"
             value={rate}
             onChange={(e) => setRate(e.target.value)}
-            placeholder="১২"
+            placeholder={lang === 'bn' ? '১২' : '12'}
           />
         </div>
         <div>
@@ -158,7 +158,7 @@ function EmiSection() {
             inputMode="numeric"
             value={months}
             onChange={(e) => setMonths(e.target.value)}
-            placeholder="১২"
+            placeholder={lang === 'bn' ? '১২' : '12'}
           />
         </div>
       </div>
@@ -196,7 +196,7 @@ function EmiSection() {
 }
 
 function InterestSection() {
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
   const [principal, setPrincipal] = useState('');
   const [rate, setRate] = useState('');
   const [years, setYears] = useState('');
@@ -238,7 +238,7 @@ function InterestSection() {
             inputMode="decimal"
             value={principal}
             onChange={(e) => setPrincipal(e.target.value)}
-            placeholder="১০০০০"
+            placeholder={lang === 'bn' ? '১০০০০' : '10000'}
           />
         </div>
         <div>
@@ -254,7 +254,7 @@ function InterestSection() {
             inputMode="decimal"
             value={rate}
             onChange={(e) => setRate(e.target.value)}
-            placeholder="১০"
+            placeholder={lang === 'bn' ? '১০' : '10'}
           />
         </div>
         <div>
@@ -270,7 +270,7 @@ function InterestSection() {
             inputMode="decimal"
             value={years}
             onChange={(e) => setYears(e.target.value)}
-            placeholder="২"
+            placeholder={lang === 'bn' ? '২' : '2'}
           />
         </div>
         <div>
@@ -324,7 +324,7 @@ const PERCENTAGE_MODES: { id: PercentageMode; bn: string; en: string }[] = [
 ];
 
 function PercentageSection() {
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
   const [mode, setMode] = useState<PercentageMode>('of');
   const [a, setA] = useState('');
   const [b, setB] = useState('');
@@ -375,7 +375,7 @@ function PercentageSection() {
             inputMode="decimal"
             value={a}
             onChange={(e) => setA(e.target.value)}
-            placeholder="২০"
+            placeholder={lang === 'bn' ? '২০' : '20'}
           />
         </div>
         <div>
@@ -389,7 +389,7 @@ function PercentageSection() {
             inputMode="decimal"
             value={b}
             onChange={(e) => setB(e.target.value)}
-            placeholder="১৫০"
+            placeholder={lang === 'bn' ? '১৫০' : '150'}
           />
         </div>
       </div>
@@ -486,7 +486,7 @@ function AgeSection() {
 }
 
 function BmiSection() {
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
   const [weight, setWeight] = useState('');
   const [height, setHeight] = useState('');
   const w = parseNum(weight);
@@ -519,7 +519,7 @@ function BmiSection() {
             inputMode="decimal"
             value={weight}
             onChange={(e) => setWeight(e.target.value)}
-            placeholder="৬০"
+            placeholder={lang === 'bn' ? '৬০' : '60'}
           />
         </div>
         <div>
@@ -536,7 +536,7 @@ function BmiSection() {
             inputMode="decimal"
             value={height}
             onChange={(e) => setHeight(e.target.value)}
-            placeholder="১৬৫"
+            placeholder={lang === 'bn' ? '১৬৫' : '165'}
           />
         </div>
       </div>
@@ -590,11 +590,11 @@ function BmiSection() {
 }
 
 export default function LifeCalculatorsPage() {
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
   return (
     <PageShell titleBn="ক্যালকুলেটর" titleEn="Calculators">
       {/* Visible breadcrumb (24 Nov 2026 SEO pass) — labels match the BreadcrumbList JSON-LD in lib/seo.ts. */}
-      <Breadcrumb items={[{ label: 'জীবন সেবা', to: '/life' }, { label: 'ক্যালকুলেটর' }]} />
+      <Breadcrumb items={[{ label: lang === 'bn' ? 'জীবন সেবা' : 'Life Services', to: '/life' }, { label: lang === 'bn' ? 'ক্যালকুলেটর' : 'Calculators' }]} />
       <p style={{ color: 'var(--muted)', margin: '0 0 8px' }}>
         {t({
           bn: 'দৈনন্দিন হিসাব-নিকাশ — সব হিসাব আপনার ডিভাইসেই হয়, কোনো তথ্য কোথাও পাঠানো হয় না।',

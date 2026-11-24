@@ -9,8 +9,8 @@
 // syllabus, not a verified exam pattern, not a job guarantee.
 // No income figure is ever promised; the income guide names
 // scams explicitly and says what is realistic. No "Verified"
-// badge anywhere. Bodies stay Bangla (language rule: English
-// changes nav tab labels only).
+// badge anywhere. Bodies stay Bangla by design (guide content is
+// data, not UI chrome; language system 24 Nov 2026).
 
 export type OpportunityGuideKind = 'interview-prep' | 'career-guidance' | 'entrepreneurship' | 'income';
 

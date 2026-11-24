@@ -209,10 +209,10 @@ function Hub() {
           "অনুশীলন" has no distinct route of its own, so it is plain. */}
       <Breadcrumb
         items={[
-          { label: 'চাকরি প্রস্তুতি', to: '/jobs' },
-          { label: 'বিসিএস', to: '/jobs/bcs' },
-          { label: 'অনুশীলন' },
-          { label: 'ইংরেজি' },
+          { label: lang === 'bn' ? 'চাকরি প্রস্তুতি' : 'Job Preparation', to: '/jobs' },
+          { label: lang === 'bn' ? 'বিসিএস' : 'BCS', to: '/jobs/bcs' },
+          { label: lang === 'bn' ? 'অনুশীলন' : 'Practice' },
+          { label: lang === 'bn' ? 'ইংরেজি' : 'English' },
         ]}
       />
       <p style={{ fontSize: 16, lineHeight: 1.75 }}>
@@ -318,6 +318,11 @@ function CategoryPage({ category }: { category: PublicBcsCategory }) {
     vocabulary: 'শব্দভাণ্ডার',
     reading: 'রিডিং',
   };
+  const crumbEn: Record<PublicBcsCategory, string> = {
+    grammar: 'Grammar',
+    vocabulary: 'Vocabulary',
+    reading: 'Reading',
+  };
   return (
     <PageShell
       titleBn={`বিসিএস ইংরেজি — ${meta.nameBn}`}
@@ -327,11 +332,11 @@ function CategoryPage({ category }: { category: PublicBcsCategory }) {
       {/* Visible breadcrumb (24 Nov 2026 SEO pass). */}
       <Breadcrumb
         items={[
-          { label: 'চাকরি প্রস্তুতি', to: '/jobs' },
-          { label: 'বিসিএস', to: '/jobs/bcs' },
-          { label: 'অনুশীলন' },
-          { label: 'ইংরেজি', to: '/jobs/bcs/practice/english' },
-          { label: crumbBn[category] },
+          { label: lang === 'bn' ? 'চাকরি প্রস্তুতি' : 'Job Preparation', to: '/jobs' },
+          { label: lang === 'bn' ? 'বিসিএস' : 'BCS', to: '/jobs/bcs' },
+          { label: lang === 'bn' ? 'অনুশীলন' : 'Practice' },
+          { label: lang === 'bn' ? 'ইংরেজি' : 'English', to: '/jobs/bcs/practice/english' },
+          { label: lang === 'bn' ? crumbBn[category] : crumbEn[category] },
         ]}
       />
       <p style={{ margin: '0 0 16px' }}>
