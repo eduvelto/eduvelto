@@ -51,6 +51,13 @@ const REVIEW_BN: Record<string, string> = {
   published: 'প্রকাশিত',
   rejected: 'বাতিল',
 };
+const REVIEW_EN: Record<string, string> = {
+  draft: 'Draft',
+  'in-review': 'In review',
+  verified: 'Verified',
+  published: 'Published',
+  rejected: 'Rejected',
+};
 
 export default function AdminJobCircularsPage() {
   const { t, lang } = useLanguage();
@@ -191,7 +198,7 @@ export default function AdminJobCircularsPage() {
                   <div style={{ display: 'flex', justifyContent: 'space-between', gap: 8, flexWrap: 'wrap' }}>
                     <strong style={{ fontSize: 15 }}>{c.postTitleBn}</strong>
                     <Chip tone={c.reviewStatus === 'published' ? 'blue' : c.reviewStatus === 'verified' ? 'gold' : 'outline'}>
-                      {REVIEW_BN[c.reviewStatus] ?? c.reviewStatus}
+                      {lang === 'bn' ? REVIEW_BN[c.reviewStatus] ?? c.reviewStatus : REVIEW_EN[c.reviewStatus] ?? c.reviewStatus}
                     </Chip>
                   </div>
                   <div style={{ fontSize: 13, marginTop: 4 }}>
