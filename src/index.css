@@ -3731,6 +3731,21 @@ html[data-theme="dark"] .ev-header {
   /* Free wrapping (see the header comment): no white-space: nowrap,
      no overflow: hidden, no text-overflow: ellipsis — ever. */
   overflow-wrap: break-word;
+  /* v6 phase switch (owner 24 Nov 11:31 — ar → en → bn cycle): the
+     line re-mounts on every phase change (key={phase}), so this
+     gentle fade-in replays on each switch. Opacity only — the
+     Arabic letters and harakat are never distorted. */
+  animation: ev-greeting-fade-in 0.6s ease-out;
+}
+@keyframes ev-greeting-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+/* Arabic: Amiri/Naskh serif — the ayah in its own script, rtl.
+   22px mobile (v3). */
+.ev-hero-greeting-line-ar {
+  font-family: 'Amiri', 'Traditional Arabic', 'Noto Naskh Arabic', serif;
+  font-size: 22px;
 }
 /* English: Poppins — clear, stylish, mobile-friendly. 14px mobile. */
 .ev-hero-greeting-line-en {
@@ -3762,7 +3777,15 @@ html[data-theme="dark"] .ev-hero-greeting {
 }
 @media (min-width: 641px) {
   .ev-hero-greeting { padding: 9px 16px; }
+  .ev-hero-greeting-line-ar { font-size: 24px; }
   .ev-hero-greeting-line-en { font-size: 20px; }
   .ev-hero-greeting-line-bn { font-size: 20px; }
   .ev-hero-greeting-attr { display: inline; font-size: 15px; }
+}
+/* Reduced motion: no fade, no cycle (the hook freezes the phase on
+   Arabic) — the static ayah shows instantly. */
+@media (prefers-reduced-motion: reduce) {
+  .ev-hero-greeting-line {
+    animation: none;
+  }
 }

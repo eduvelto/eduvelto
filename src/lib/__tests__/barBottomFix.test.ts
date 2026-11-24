@@ -54,6 +54,22 @@ describe('bar + bottom-nav CSS contract (owner 24 Nov 2026)', () => {
     expect(block).toMatch(/overflow-wrap\s*:\s*break-word/);
   });
 
+  it('v6 cycle: gentle fade-in on phase switch + Arabic line class exist', () => {
+    // Owner 24 Nov 11:31 — the bar cycles ar → en → bn. The line
+    // re-mounts per phase (key={phase}); this fade is the ONLY
+    // animation on the bar (no sweep, no slide, no border).
+    const block = ruleBlock(CSS, '.ev-hero-greeting-line');
+    expect(block).toMatch(/animation\s*:\s*ev-greeting-fade-in/);
+    expect(stripComments(CSS)).toMatch(/@keyframes ev-greeting-fade-in/);
+    const arBlock = ruleBlock(CSS, '.ev-hero-greeting-line-ar');
+    expect(arBlock).toMatch(/font-size\s*:\s*22px/);
+    // Reduced motion: the fade is disabled (the hook freezes the
+    // phase on Arabic, so the static ayah shows instantly).
+    expect(stripComments(CSS)).toMatch(
+      /prefers-reduced-motion:\s*reduce[\s\S]*?\.ev-hero-greeting-line\s*\{[^}]*animation\s*:\s*none/,
+    );
+  });
+
   it('shell bottom clearance EXCEEDS the 60px nav height (breathing room)', () => {
     const blocks = allRuleBlocks(CSS, '.ev-app-shell');
     expect(blocks.length).toBeGreaterThanOrEqual(2);
