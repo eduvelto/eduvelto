@@ -1041,6 +1041,8 @@ export default function HomePage() {
           <img
             src="/founder-photo.jpg"
             alt="Ali Hasan Mohammed Mizan, Founder & CEO, Eduvelto"
+            loading="lazy"
+            decoding="async"
             style={{ width: 120, height: 120, objectFit: 'cover', borderRadius: '50%', border: '3px solid #F1B308' }}
           />
           <div style={{ flex: '1 1 320px', minWidth: 260 }}>
