@@ -20,9 +20,11 @@
 //    a fact. A unit test enforces this (see __tests__/seo.test.ts).
 //  - Only routes that really exist are listed. Auth/admin/app routes
 //    resolve to null and keep the static home fallback.
-//  - Content language is always Bangla (owner rule 22 Nov 2026), so
-//    titles/descriptions are Bangla-only; the language toggle changes
-//    navigation tab labels only.
+//  - SEO is per language (language system, 24 Nov 2026): every
+//    static route carries titleEn/descriptionEn/crumbEn; useSeo()
+//    emits the title/meta/canonical/hreflang for the selected
+//    language. Lesson/question/guide BODIES stay in their source
+//    language (content data, not UI chrome).
 //  - Founder name in structured data (owner 22 Nov 18:24): the
 //    Organization JSON-LD names Ali Hasan Mohammed Mizan, Founder &
 //    CEO (the Person on /founder carries the full profile incl. the

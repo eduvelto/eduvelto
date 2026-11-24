@@ -168,7 +168,7 @@ export function useLanguage(): LanguageState {
 
 /**
  * Render text in the selected language (Bangla fallback when the English
- * string is missing). For navigation tab labels use `<TabT>` (same output).
+ * string is missing). `<TabT>` is a back-compat alias with the same output.
  */
 export function T({ bn, en }: LangEntry) {
   const { lang } = useLanguage();

@@ -11,8 +11,9 @@
 // links). The header is shared chrome, so the new nav appears on every
 // page, not only the homepage. A language toggle button (globe icon +
 // "EN"/"বাং") sits at the top-right beside the profile on desktop and
-// mobile alike — it switches ONLY the navigation tab labels (owner
-// rule 22 Nov 2026); everything else stays Bangla.
+// mobile alike — it switches the WHOLE website between Bangla and
+// English (language system, 24 Nov 2026; supersedes the 22 Nov 2026
+// tabs-only rule).
 //
 // HONESTY: there is NO notifications system in this codebase — the bell
 // opens a small "শীঘ্রই আসছে / Coming soon" note instead of pretending
@@ -137,13 +138,13 @@ function LanguageIcon() {
 }
 
 /**
- * Header language toggle (owner rule 22 Nov 2026): an icon button at the
- * top-right, beside the profile, that switches ONLY the navigation tab
- * labels between Bangla and English. The visible label is the TARGET
- * language (EN when tabs are Bangla, বাং when tabs are English); the
- * button itself and everything else stays Bangla. It reads/writes the
- * same `tabLang` as the Settings language selector, so the two stay
- * in sync. Rendered twice (desktop actions + mobile actions) — CSS
+ * Header language toggle (language system, 24 Nov 2026 — SUPERSEDES
+ * the 22 Nov 2026 tabs-only rule): an icon button at the top-right,
+ * beside the profile, that switches the WHOLE website between Bangla
+ * and English. The visible label is the TARGET language (EN when the
+ * site is Bangla, বাং when the site is English). It reads/writes the
+ * same `lang` as the Settings language selector, so the two stay in
+ * sync. Rendered twice (desktop actions + mobile actions) — CSS
  * shows exactly one per viewport.
  */
 function LangToggleButton() {
@@ -153,8 +154,8 @@ function LangToggleButton() {
     <button
       type="button"
       className="ev-header-lang-btn"
-      aria-label={t({ bn: 'ট্যাবের ভাষা বদলান', en: 'Change tab language' })}
-      title={t({ bn: 'ট্যাবের ভাষা বদলান', en: 'Change tab language' })}
+      aria-label={t({ bn: 'ভাষা বদলান', en: 'Change language' })}
+      title={t({ bn: 'ভাষা বদলান', en: 'Change language' })}
       onClick={() => setLanguage(next)}
     >
       <LanguageIcon />
