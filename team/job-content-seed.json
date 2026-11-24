@@ -8,8 +8,8 @@
     "step6": "Step 6 defines SUBJECTS ONLY. Every doc is a draft (status draft, reviewStatus Not Started) with authorId/verifiedBy/verifiedAt null — nothing is Published and nothing is verified without teacher review (0 verified teachers today). NTRCA subjects carry applicableCycle 18th (last verified pattern); all others null.",
     "title": "Eduvelto Job Preparation — jobSubjects seed (Step 6)",
     "verifiedFiguresOnly": "Subjects exist ONLY for the 4 verified exams (BCS, Bank, Primary, NTRCA 18th). The other 10 exams have a null rulesConfig and it-professional has scope_pending (owner decision 13.8) — Step 6 defines NO subjects for them. Subject marks sum to each exam questionCount (BCS 200, Bank 100, Primary 90, NTRCA 100).",
-    "version": "2026-11-22.1",
-    "configVersion": "2026-11-22.1"
+    "version": "2026-11-24.1",
+    "configVersion": "2026-11-24.1"
   },
   "jobChapters": [],
   "jobLessons": [],
@@ -27,11 +27,11 @@
       "reviewStatus": "Not Started",
       "slug": "bangla",
       "status": "draft",
-      "syllabusSource": "BSCS বিজ্ঞপ্তি",
+      "syllabusSource": "BSCS Combined 11 Bank Officer (General) Circular 115/2025",
       "updatedAt": "2026-11-22T00:00:00.000Z",
       "verifiedAt": null,
       "verifiedBy": null,
-      "configVersion": "2026-11-22.1"
+      "configVersion": "2026-11-24.1"
     },
     "bank__computer": {
       "applicableCycle": null,
@@ -46,11 +46,11 @@
       "reviewStatus": "Not Started",
       "slug": "computer",
       "status": "draft",
-      "syllabusSource": "BSCS বিজ্ঞপ্তি",
+      "syllabusSource": "BSCS Combined 11 Bank Officer (General) Circular 115/2025",
       "updatedAt": "2026-11-22T00:00:00.000Z",
       "verifiedAt": null,
       "verifiedBy": null,
-      "configVersion": "2026-11-22.1"
+      "configVersion": "2026-11-24.1"
     },
     "bank__english": {
       "applicableCycle": null,
@@ -65,11 +65,11 @@
       "reviewStatus": "Not Started",
       "slug": "english",
       "status": "draft",
-      "syllabusSource": "BSCS বিজ্ঞপ্তি",
+      "syllabusSource": "BSCS Combined 11 Bank Officer (General) Circular 115/2025",
       "updatedAt": "2026-11-22T00:00:00.000Z",
       "verifiedAt": null,
       "verifiedBy": null,
-      "configVersion": "2026-11-22.1"
+      "configVersion": "2026-11-24.1"
     },
     "bank__general-knowledge": {
       "applicableCycle": null,
@@ -84,11 +84,11 @@
       "reviewStatus": "Not Started",
       "slug": "general-knowledge",
       "status": "draft",
-      "syllabusSource": "BSCS বিজ্ঞপ্তি",
+      "syllabusSource": "BSCS Combined 11 Bank Officer (General) Circular 115/2025",
       "updatedAt": "2026-11-22T00:00:00.000Z",
       "verifiedAt": null,
       "verifiedBy": null,
-      "configVersion": "2026-11-22.1"
+      "configVersion": "2026-11-24.1"
     },
     "bank__math": {
       "applicableCycle": null,
@@ -103,11 +103,11 @@
       "reviewStatus": "Not Started",
       "slug": "math",
       "status": "draft",
-      "syllabusSource": "BSCS বিজ্ঞপ্তি",
+      "syllabusSource": "BSCS Combined 11 Bank Officer (General) Circular 115/2025",
       "updatedAt": "2026-11-22T00:00:00.000Z",
       "verifiedAt": null,
       "verifiedBy": null,
-      "configVersion": "2026-11-22.1"
+      "configVersion": "2026-11-24.1"
     },
     "bcs__bangla": {
       "applicableCycle": null,
@@ -115,18 +115,18 @@
       "createdAt": "2026-11-22T00:00:00.000Z",
       "createdBy": "seed",
       "examSlug": "bcs",
-      "marks": 35,
+      "marks": 30,
       "nameBn": "বাংলা ভাষা ও সাহিত্য",
       "nameEn": "Bangla Language & Literature",
       "order": 1,
       "reviewStatus": "Not Started",
       "slug": "bangla",
       "status": "draft",
-      "syllabusSource": "BPSC বিজ্ঞপ্তি",
+      "syllabusSource": "BPSC ৫০তম BCS প্রিলিমিনারি সিলেবাস, ৯ ডিসেম্বর ২০২৫ (সরাসরি PDF যাচাইকৃত)",
       "updatedAt": "2026-11-22T00:00:00.000Z",
       "verifiedAt": null,
       "verifiedBy": null,
-      "configVersion": "2026-11-22.1"
+      "configVersion": "2026-11-24.1"
     },
     "bcs__bangladesh-affairs": {
       "applicableCycle": null,
@@ -134,18 +134,18 @@
       "createdAt": "2026-11-22T00:00:00.000Z",
       "createdBy": "seed",
       "examSlug": "bcs",
-      "marks": 30,
+      "marks": 25,
       "nameBn": "বাংলাদেশ বিষয়াবলি",
       "nameEn": "Bangladesh Affairs",
       "order": 3,
       "reviewStatus": "Not Started",
       "slug": "bangladesh-affairs",
       "status": "draft",
-      "syllabusSource": "BPSC বিজ্ঞপ্তি",
+      "syllabusSource": "BPSC ৫০তম BCS প্রিলিমিনারি সিলেবাস, ৯ ডিসেম্বর ২০২৫ (সরাসরি PDF যাচাইকৃত)",
       "updatedAt": "2026-11-22T00:00:00.000Z",
       "verifiedAt": null,
       "verifiedBy": null,
-      "configVersion": "2026-11-22.1"
+      "configVersion": "2026-11-24.1"
     },
     "bcs__computer-ict": {
       "applicableCycle": null,
@@ -160,11 +160,11 @@
       "reviewStatus": "Not Started",
       "slug": "computer-ict",
       "status": "draft",
-      "syllabusSource": "BPSC বিজ্ঞপ্তি",
+      "syllabusSource": "BPSC ৫০তম BCS প্রিলিমিনারি সিলেবাস, ৯ ডিসেম্বর ২০২৫ (সরাসরি PDF যাচাইকৃত)",
       "updatedAt": "2026-11-22T00:00:00.000Z",
       "verifiedAt": null,
       "verifiedBy": null,
-      "configVersion": "2026-11-22.1"
+      "configVersion": "2026-11-24.1"
     },
     "bcs__english": {
       "applicableCycle": null,
@@ -172,18 +172,18 @@
       "createdAt": "2026-11-22T00:00:00.000Z",
       "createdBy": "seed",
       "examSlug": "bcs",
-      "marks": 35,
+      "marks": 30,
       "nameBn": "ইংরেজি ভাষা ও সাহিত্য",
       "nameEn": "English Language & Literature",
       "order": 2,
       "reviewStatus": "Not Started",
       "slug": "english",
       "status": "draft",
-      "syllabusSource": "BPSC বিজ্ঞপ্তি",
+      "syllabusSource": "BPSC ৫০তম BCS প্রিলিমিনারি সিলেবাস, ৯ ডিসেম্বর ২০২৫ (সরাসরি PDF যাচাইকৃত)",
       "updatedAt": "2026-11-22T00:00:00.000Z",
       "verifiedAt": null,
       "verifiedBy": null,
-      "configVersion": "2026-11-22.1"
+      "configVersion": "2026-11-24.1"
     },
     "bcs__ethics": {
       "applicableCycle": null,
@@ -191,18 +191,18 @@
       "createdAt": "2026-11-22T00:00:00.000Z",
       "createdBy": "seed",
       "examSlug": "bcs",
-      "marks": 10,
+      "marks": 15,
       "nameBn": "নৈতিকতা, মূল্যবোধ ও সুশাসন",
       "nameEn": "Ethics, Values & Good Governance",
       "order": 10,
       "reviewStatus": "Not Started",
       "slug": "ethics",
       "status": "draft",
-      "syllabusSource": "BPSC বিজ্ঞপ্তি",
+      "syllabusSource": "BPSC ৫০তম BCS প্রিলিমিনারি সিলেবাস, ৯ ডিসেম্বর ২০২৫ (সরাসরি PDF যাচাইকৃত)",
       "updatedAt": "2026-11-22T00:00:00.000Z",
       "verifiedAt": null,
       "verifiedBy": null,
-      "configVersion": "2026-11-22.1"
+      "configVersion": "2026-11-24.1"
     },
     "bcs__general-science": {
       "applicableCycle": null,
@@ -217,11 +217,11 @@
       "reviewStatus": "Not Started",
       "slug": "general-science",
       "status": "draft",
-      "syllabusSource": "BPSC বিজ্ঞপ্তি",
+      "syllabusSource": "BPSC ৫০তম BCS প্রিলিমিনারি সিলেবাস, ৯ ডিসেম্বর ২০২৫ (সরাসরি PDF যাচাইকৃত)",
       "updatedAt": "2026-11-22T00:00:00.000Z",
       "verifiedAt": null,
       "verifiedBy": null,
-      "configVersion": "2026-11-22.1"
+      "configVersion": "2026-11-24.1"
     },
     "bcs__geography": {
       "applicableCycle": null,
@@ -236,11 +236,11 @@
       "reviewStatus": "Not Started",
       "slug": "geography",
       "status": "draft",
-      "syllabusSource": "BPSC বিজ্ঞপ্তি",
+      "syllabusSource": "BPSC ৫০তম BCS প্রিলিমিনারি সিলেবাস, ৯ ডিসেম্বর ২০২৫ (সরাসরি PDF যাচাইকৃত)",
       "updatedAt": "2026-11-22T00:00:00.000Z",
       "verifiedAt": null,
       "verifiedBy": null,
-      "configVersion": "2026-11-22.1"
+      "configVersion": "2026-11-24.1"
     },
     "bcs__international-affairs": {
       "applicableCycle": null,
@@ -248,18 +248,18 @@
       "createdAt": "2026-11-22T00:00:00.000Z",
       "createdBy": "seed",
       "examSlug": "bcs",
-      "marks": 20,
+      "marks": 25,
       "nameBn": "আন্তর্জাতিক বিষয়াবলি",
       "nameEn": "International Affairs",
       "order": 4,
       "reviewStatus": "Not Started",
       "slug": "international-affairs",
       "status": "draft",
-      "syllabusSource": "BPSC বিজ্ঞপ্তি",
+      "syllabusSource": "BPSC ৫০তম BCS প্রিলিমিনারি সিলেবাস, ৯ ডিসেম্বর ২০২৫ (সরাসরি PDF যাচাইকৃত)",
       "updatedAt": "2026-11-22T00:00:00.000Z",
       "verifiedAt": null,
       "verifiedBy": null,
-      "configVersion": "2026-11-22.1"
+      "configVersion": "2026-11-24.1"
     },
     "bcs__mathematical-reasoning": {
       "applicableCycle": null,
@@ -267,18 +267,18 @@
       "createdAt": "2026-11-22T00:00:00.000Z",
       "createdBy": "seed",
       "examSlug": "bcs",
-      "marks": 15,
+      "marks": 20,
       "nameBn": "গাণিতিক যুক্তি",
       "nameEn": "Mathematical Reasoning",
       "order": 8,
       "reviewStatus": "Not Started",
       "slug": "mathematical-reasoning",
       "status": "draft",
-      "syllabusSource": "BPSC বিজ্ঞপ্তি",
+      "syllabusSource": "BPSC ৫০তম BCS প্রিলিমিনারি সিলেবাস, ৯ ডিসেম্বর ২০২৫ (সরাসরি PDF যাচাইকৃত)",
       "updatedAt": "2026-11-22T00:00:00.000Z",
       "verifiedAt": null,
       "verifiedBy": null,
-      "configVersion": "2026-11-22.1"
+      "configVersion": "2026-11-24.1"
     },
     "bcs__mental-ability": {
       "applicableCycle": null,
@@ -293,11 +293,11 @@
       "reviewStatus": "Not Started",
       "slug": "mental-ability",
       "status": "draft",
-      "syllabusSource": "BPSC বিজ্ঞপ্তি",
+      "syllabusSource": "BPSC ৫০তম BCS প্রিলিমিনারি সিলেবাস, ৯ ডিসেম্বর ২০২৫ (সরাসরি PDF যাচাইকৃত)",
       "updatedAt": "2026-11-22T00:00:00.000Z",
       "verifiedAt": null,
       "verifiedBy": null,
-      "configVersion": "2026-11-22.1"
+      "configVersion": "2026-11-24.1"
     },
     "ntrca__bangla": {
       "applicableCycle": "18th",
@@ -316,7 +316,7 @@
       "updatedAt": "2026-11-22T00:00:00.000Z",
       "verifiedAt": null,
       "verifiedBy": null,
-      "configVersion": "2026-11-22.1"
+      "configVersion": "2026-11-24.1"
     },
     "ntrca__english": {
       "applicableCycle": "18th",
@@ -335,7 +335,7 @@
       "updatedAt": "2026-11-22T00:00:00.000Z",
       "verifiedAt": null,
       "verifiedBy": null,
-      "configVersion": "2026-11-22.1"
+      "configVersion": "2026-11-24.1"
     },
     "ntrca__general-knowledge": {
       "applicableCycle": "18th",
@@ -354,7 +354,7 @@
       "updatedAt": "2026-11-22T00:00:00.000Z",
       "verifiedAt": null,
       "verifiedBy": null,
-      "configVersion": "2026-11-22.1"
+      "configVersion": "2026-11-24.1"
     },
     "ntrca__math": {
       "applicableCycle": "18th",
@@ -373,7 +373,7 @@
       "updatedAt": "2026-11-22T00:00:00.000Z",
       "verifiedAt": null,
       "verifiedBy": null,
-      "configVersion": "2026-11-22.1"
+      "configVersion": "2026-11-24.1"
     },
     "primary-teacher__bangla": {
       "applicableCycle": null,
@@ -388,11 +388,11 @@
       "reviewStatus": "Not Started",
       "slug": "bangla",
       "status": "draft",
-      "syllabusSource": "সরকারি প্রাথমিক বিদ্যালয় শিক্ষক নিয়োগ বিধিমালা ২০২৫, ২৮ আগস্ট ২০২৫",
+      "syllabusSource": "সরকারি প্রাথমিক বিদ্যালয় শিক্ষক নিয়োগ বিধিমালা ২০২৫, ২৮ আগস্ট ২০২৫ (ধরন); −০.২৫ — ২০২৬ সালের জানুয়ারির পরীক্ষার নোটিশ/প্রবেশপত্র",
       "updatedAt": "2026-11-22T00:00:00.000Z",
       "verifiedAt": null,
       "verifiedBy": null,
-      "configVersion": "2026-11-22.1"
+      "configVersion": "2026-11-24.1"
     },
     "primary-teacher__english": {
       "applicableCycle": null,
@@ -407,11 +407,11 @@
       "reviewStatus": "Not Started",
       "slug": "english",
       "status": "draft",
-      "syllabusSource": "সরকারি প্রাথমিক বিদ্যালয় শিক্ষক নিয়োগ বিধিমালা ২০২৫, ২৮ আগস্ট ২০২৫",
+      "syllabusSource": "সরকারি প্রাথমিক বিদ্যালয় শিক্ষক নিয়োগ বিধিমালা ২০২৫, ২৮ আগস্ট ২০২৫ (ধরন); −০.২৫ — ২০২৬ সালের জানুয়ারির পরীক্ষার নোটিশ/প্রবেশপত্র",
       "updatedAt": "2026-11-22T00:00:00.000Z",
       "verifiedAt": null,
       "verifiedBy": null,
-      "configVersion": "2026-11-22.1"
+      "configVersion": "2026-11-24.1"
     },
     "primary-teacher__general-knowledge": {
       "applicableCycle": null,
@@ -426,11 +426,11 @@
       "reviewStatus": "Not Started",
       "slug": "general-knowledge",
       "status": "draft",
-      "syllabusSource": "সরকারি প্রাথমিক বিদ্যালয় শিক্ষক নিয়োগ বিধিমালা ২০২৫, ২৮ আগস্ট ২০২৫",
+      "syllabusSource": "সরকারি প্রাথমিক বিদ্যালয় শিক্ষক নিয়োগ বিধিমালা ২০২৫, ২৮ আগস্ট ২০২৫ (ধরন); −০.২৫ — ২০২৬ সালের জানুয়ারির পরীক্ষার নোটিশ/প্রবেশপত্র",
       "updatedAt": "2026-11-22T00:00:00.000Z",
       "verifiedAt": null,
       "verifiedBy": null,
-      "configVersion": "2026-11-22.1"
+      "configVersion": "2026-11-24.1"
     },
     "primary-teacher__math-science": {
       "applicableCycle": null,
@@ -445,11 +445,11 @@
       "reviewStatus": "Not Started",
       "slug": "math-science",
       "status": "draft",
-      "syllabusSource": "সরকারি প্রাথমিক বিদ্যালয় শিক্ষক নিয়োগ বিধিমালা ২০২৫, ২৮ আগস্ট ২০২৫",
+      "syllabusSource": "সরকারি প্রাথমিক বিদ্যালয় শিক্ষক নিয়োগ বিধিমালা ২০২৫, ২৮ আগস্ট ২০২৫ (ধরন); −০.২৫ — ২০২৬ সালের জানুয়ারির পরীক্ষার নোটিশ/প্রবেশপত্র",
       "updatedAt": "2026-11-22T00:00:00.000Z",
       "verifiedAt": null,
       "verifiedBy": null,
-      "configVersion": "2026-11-22.1"
+      "configVersion": "2026-11-24.1"
     }
   },
   "jobTopics": []

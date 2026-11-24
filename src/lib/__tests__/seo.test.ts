@@ -356,7 +356,12 @@ describe('resolveRouteSeo — public routes', () => {
     expect(bcs.description).toContain('যাচাইকৃত ধরন');
     expect(bcs.description).toContain('২০০ MCQ');
     const bank = resolveRouteSeo('/jobs/bank')!;
-    expect(bank.description).toContain('অযাচাইকৃত');
+    // 24 Nov 2026 audit: Bank −0.25 VERIFIED (Combined 11 Bank
+    // Officer Circular 115/2025 + BB AD Notice HRD-1 No. 38/2026) —
+    // the generic verified branch now renders it.
+    expect(bank.description).toContain('যাচাইকৃত ধরন');
+    expect(bank.description).toContain('১০০ MCQ');
+    expect(bank.description).toContain('−০.২৫');
     const ntrca = resolveRouteSeo('/jobs/ntrca')!;
     expect(ntrca.description).toContain('১৮তম');
     const primary = resolveRouteSeo('/jobs/primary-teacher')!;
@@ -382,10 +387,9 @@ describe('resolveRouteSeo — public routes', () => {
       expect(seo.description, path).not.toContain('যাচাইকৃত');
     }
     // Per-exam copy: "যাচাইকৃত ধরন" only when the patternStatus is
-    // 'verified' (BCS, Primary Teacher) or 'last_verified' (NTRCA,
-    // always with the "শেষ" qualifier). Anything else — Bank
-    // (not_verified as a whole config), the circular-based exams,
-    // IT (scope pending) — must not carry it.
+    // 'verified' (BCS, Bank, Primary Teacher) or 'last_verified'
+    // (NTRCA, always with the "শেষ" qualifier). Anything else — the
+    // circular-based exams, IT (scope pending) — must not carry it.
     for (const slug of [
       'bcs',
       'bank',

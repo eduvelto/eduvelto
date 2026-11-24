@@ -367,19 +367,19 @@ export interface ExamPattern {
 
 export const EXAM_PATTERNS: Partial<Record<string, ExamPattern>> = {
   bcs: {
-    titleBn: 'প্রিলিমিনারি — যাচাইকৃত ধরন',
-    titleEn: 'Preliminary — verified pattern',
+    titleBn: 'প্রিলিমিনারি — ৫০তম BCS সিলেবাস (৯ ডিসেম্বর ২০২৫)',
+    titleEn: 'Preliminary — 50th BCS syllabus (9 December 2025)',
     rows: [
-      { subjectBn: 'বাংলা ভাষা ও সাহিত্য', subjectEn: 'Bangla Language & Literature', marks: '৩৫' },
-      { subjectBn: 'ইংরেজি ভাষা ও সাহিত্য', subjectEn: 'English Language & Literature', marks: '৩৫' },
-      { subjectBn: 'বাংলাদেশ বিষয়াবলি', subjectEn: 'Bangladesh Affairs', marks: '৩০' },
-      { subjectBn: 'আন্তর্জাতিক বিষয়াবলি', subjectEn: 'International Affairs', marks: '২০' },
+      { subjectBn: 'বাংলা ভাষা ও সাহিত্য', subjectEn: 'Bangla Language & Literature', marks: '৩০' },
+      { subjectBn: 'ইংরেজি ভাষা ও সাহিত্য', subjectEn: 'English Language & Literature', marks: '৩০' },
+      { subjectBn: 'বাংলাদেশ বিষয়াবলি', subjectEn: 'Bangladesh Affairs', marks: '২৫' },
+      { subjectBn: 'আন্তর্জাতিক বিষয়াবলি', subjectEn: 'International Affairs', marks: '২৫' },
       { subjectBn: 'ভূগোল, পরিবেশ ও দুর্যোগ ব্যবস্থাপনা', subjectEn: 'Geography, Environment & Disaster Management', marks: '১০' },
       { subjectBn: 'সাধারণ বিজ্ঞান', subjectEn: 'General Science', marks: '১৫' },
       { subjectBn: 'কম্পিউটার ও তথ্যপ্রযুক্তি', subjectEn: 'Computer & ICT', marks: '১৫' },
-      { subjectBn: 'গাণিতিক যুক্তি', subjectEn: 'Mathematical Reasoning', marks: '১৫' },
+      { subjectBn: 'গাণিতিক যুক্তি', subjectEn: 'Mathematical Reasoning', marks: '২০' },
       { subjectBn: 'মানসিক দক্ষতা', subjectEn: 'Mental Ability', marks: '১৫' },
-      { subjectBn: 'নৈতিকতা, মূল্যবোধ ও সুশাসন', subjectEn: 'Ethics, Values & Good Governance', marks: '১০' },
+      { subjectBn: 'নৈতিকতা, মূল্যবোধ ও সুশাসন', subjectEn: 'Ethics, Values & Good Governance', marks: '১৫' },
     ],
     totalBn: 'মোট ২০০ নম্বর',
     totalEn: 'Total 200 marks',
@@ -387,12 +387,12 @@ export const EXAM_PATTERNS: Partial<Record<string, ExamPattern>> = {
     timeEn: '2 hours',
     negativeBn: 'ভুল উত্তরে ০.৫০ নম্বর কাটা যায়',
     negativeEn: '0.50 deducted per wrong answer',
-    noteBn: 'প্রিলিমিনারি শুধু বাছাই — এর নম্বর চূড়ান্ত নম্বরে যোগ হয় না। লিখিত: সাধারণ ক্যাডার ৯০০, টেকনিক্যাল/প্রফেশনাল ক্যাডার ১,১০০ নম্বর। ভাইভার নম্বর এখানে লেখা হয়নি — সূত্রে দ্বন্দ্ব আছে (২০০ বনাম ১০০); সর্বশেষ BPSC বিজ্ঞপ্তি দিয়ে যাচাই করে লেখা হবে।',
-    noteEn: 'Preliminary is screening only — its marks do not count toward the final total. Written: 900 (general cadre), 1,100 (technical/professional cadre). Viva marks are not written here — sources disagree (200 vs 100); they will be written after verification from the latest BPSC circular.',
+    noteBn: 'প্রিলিমিনারি শুধু বাছাই — এর নম্বর চূড়ান্ত নম্বরে যোগ হয় না। লিখিত: সাধারণ ক্যাডার ৯০০, টেকনিক্যাল/প্রফেশনাল ক্যাডার ১,১০০ নম্বর। ভাইভার নম্বর এখানে লেখা হয়নি — সূত্রে দ্বন্দ্ব আছে (২০০ বনাম ১০০); সর্বশেষ BPSC বিজ্ঞপ্তি দিয়ে যাচাই করে লেখা হবে। ধরন: ৫০তম BCS প্রিলিমিনারি সিলেবাস, BPSC, ৯ ডিসেম্বর ২০২৫ — BPSC-র অফিসিয়াল PDF সরাসরি যাচাইকৃত (২৪ নভেম্বর ২০২৬)।',
+    noteEn: 'Preliminary is screening only — its marks do not count toward the final total. Written: 900 (general cadre), 1,100 (technical/professional cadre). Viva marks are not written here — sources disagree (200 vs 100); they will be written after verification from the latest BPSC circular. Pattern: 50th BCS preliminary syllabus, BPSC, 9 December 2025 — verified directly from the official BPSC PDF (24 November 2026).',
   },
   bank: {
-    titleBn: 'প্রিলিমিনারি — যাচাইকৃত বিষয়বণ্টন (অফিসার, ক্যাশ) · নেগেটিভ মার্কিং অযাচাইকৃত',
-    titleEn: 'Preliminary — verified subject split (Officer, Cash) · negative marking unverified',
+    titleBn: 'প্রিলিমিনারি — যাচাইকৃত বিষয়বণ্টন (অফিসার, ক্যাশ) · নেগেটিভ মার্কিং −০.২৫ যাচাইকৃত',
+    titleEn: 'Preliminary — verified subject split (Officer, Cash) · negative marking −0.25 verified',
     rows: [
       { subjectBn: 'বাংলা', subjectEn: 'Bangla', marks: '২৫' },
       { subjectBn: 'ইংরেজি', subjectEn: 'English', marks: '২৫' },
@@ -404,10 +404,50 @@ export const EXAM_PATTERNS: Partial<Record<string, ExamPattern>> = {
     totalEn: 'Total 100 marks',
     timeBn: '১ ঘণ্টা',
     timeEn: '1 hour',
-    negativeBn: 'নেগেটিভ মার্কিং অযাচাইকৃত — বিজ্ঞপ্তি/প্রবেশপত্রে লেখা হারই চূড়ান্ত',
-    negativeEn: 'Negative marking unverified — the rate in the circular / admit card is final',
-    noteBn: 'পদভেদে ধরন ভিন্ন — সহকারী পরিচালকসহ কিছু পদের প্রিলিমিনারিতে ৪টি বিষয়ে ২৫ করে থাকে। প্রতিটি পদের পাতায় তার বিজ্ঞপ্তির ধরন লিখতে হবে। লিখিত: ২০০ নম্বর, ২ ঘণ্টা। ভাইভা: সাধারণত ২৫ নম্বর — বিজ্ঞপ্তি দিয়ে যাচাই করতে হবে। নেগেটিভ মার্কিং সাধারণত ০.২৫ ধরা হয়, তবে তা যাচাই হয়নি।',
-    noteEn: 'The pattern differs by post — some posts (e.g. Assistant Director) have 4 subjects of 25 each. Each post’s page must show its own circular’s pattern. Written: 200 marks, 2 hours. Viva: usually 25 marks — to be verified per circular. Negative marking is usually taken as 0.25, but that is not verified.',
+    negativeBn: 'ভুল উত্তরে ০.২৫ নম্বর কাটা যায় (২০২৫–২৬ সালের বিজ্ঞপ্তি অনুযায়ী যাচাইকৃত; হার বিজ্ঞপ্তি/প্রবেশপত্রে নির্ধারিত হয়)',
+    negativeEn: '0.25 deducted per wrong answer (verified for the 2025–26 circulars; the rate is set in each circular / admit card)',
+    noteBn: 'পদভেদে ধরন ভিন্ন — অফিসার/ক্যাশ: বাংলা ২৫, ইংরেজি ২৫, গণিত ২০, সাধারণ জ্ঞান ২০, কম্পিউটার ১০। সিনিয়র অফিসার ও সহকারী পরিচালক (বাংলাদেশ ব্যাংক): ইংরেজি ২০, বাংলা ২০, গণিত ২০, ব্যাংকিং জ্ঞান ১০, বিশ্লেষণী দক্ষতা ২০, আইসিটি ১০। লিখিত: ২০০ নম্বর, ২ ঘণ্টা। ভাইভা: সাধারণত ২৫ নম্বর — বিজ্ঞপ্তি দিয়ে যাচাই করতে হবে। নেগেটিভ মার্কিং −০.২৫ — ২০২৫–২৬ সালের বিজ্ঞপ্তি (Combined 11 Bank Officer Circular 115/2025; Bangladesh Bank AD Notice HRD-1 No. 38/2026, ৪ মে ২০২৬) দিয়ে যাচাইকৃত; প্রতিটি বিজ্ঞপ্তির হারই চূড়ান্ত।',
+    noteEn: 'The pattern differs by post — Officer/Cash: Bangla 25, English 25, Math 20, GK 20, Computer 10. Senior Officer and Assistant Director (Bangladesh Bank): English 20, Bangla 20, Math 20, Financial & Banking Knowledge 10, Analytical Skills 20, ICT 10. Written: 200 marks, 2 hours. Viva: usually 25 marks — to be verified per circular. Negative marking −0.25 — verified for the 2025–26 circulars (Combined 11 Bank Officer Circular 115/2025; Bangladesh Bank AD Notice HRD-1 No. 38/2026, 4 May 2026); each circular’s rate is final.',
+  },
+  'bank-senior-officer': {
+    titleBn: 'প্রিলিমিনারি — যাচাইকৃত ধরন (সিনিয়র অফিসার)',
+    titleEn: 'Preliminary — verified pattern (Senior Officer)',
+    rows: [
+      { subjectBn: 'ইংরেজি (ব্যাকরণ ও ভাষা)', subjectEn: 'English (Grammar & Language)', marks: '২০' },
+      { subjectBn: 'বাংলা (ব্যাকরণ ও ভাষা)', subjectEn: 'Bangla (Grammar & Language)', marks: '২০' },
+      { subjectBn: 'সাধারণ গণিত', subjectEn: 'General Mathematics', marks: '২০' },
+      { subjectBn: 'আর্থিক ও ব্যাংকিং জ্ঞান', subjectEn: 'Financial and Banking Knowledge', marks: '১০' },
+      { subjectBn: 'বিশ্লেষণী দক্ষতা', subjectEn: 'Analytical Skills', marks: '২০' },
+      { subjectBn: 'তথ্য ও যোগাযোগ প্রযুক্তির মৌলিক জ্ঞান', subjectEn: 'Basic Knowledge of ICT', marks: '১০' },
+    ],
+    totalBn: 'মোট ১০০ নম্বর',
+    totalEn: 'Total 100 marks',
+    timeBn: '১ ঘণ্টা',
+    timeEn: '1 hour',
+    negativeBn: 'ভুল উত্তরে ০.২৫ নম্বর কাটা যায় (২০২৫–২৬ সালের বিজ্ঞপ্তি অনুযায়ী যাচাইকৃত; হার বিজ্ঞপ্তি/প্রবেশপত্রে নির্ধারিত হয়)',
+    negativeEn: '0.25 deducted per wrong answer (verified for the 2025–26 circulars; the rate is set in each circular / admit card)',
+    noteBn: 'উৎস: BSCS Circulars 109/2025 + 348/2026; পরীক্ষা ৫ ডিসেম্বর ২০২৫ ও ১৩ নভেম্বর ২০২৬। লিখিত: ২০০ নম্বর, ২ ঘণ্টা। ভাইভা: সাধারণত ২৫ নম্বর — বিজ্ঞপ্তি দিয়ে যাচাই করতে হবে।',
+    noteEn: 'Source: BSCS Circulars 109/2025 + 348/2026; exams 5 December 2025 and 13 November 2026. Written: 200 marks, 2 hours. Viva: usually 25 marks — to be verified per circular.',
+  },
+  'bank-assistant-director': {
+    titleBn: 'প্রিলিমিনারি — যাচাইকৃত ধরন (সহকারী পরিচালক, বাংলাদেশ ব্যাংক)',
+    titleEn: 'Preliminary — verified pattern (Assistant Director, Bangladesh Bank)',
+    rows: [
+      { subjectBn: 'ইংরেজি (ব্যাকরণ ও ভাষা)', subjectEn: 'English (Grammar & Language)', marks: '২০' },
+      { subjectBn: 'বাংলা (ব্যাকরণ ও ভাষা)', subjectEn: 'Bangla (Grammar & Language)', marks: '২০' },
+      { subjectBn: 'সাধারণ গণিত', subjectEn: 'General Mathematics', marks: '২০' },
+      { subjectBn: 'আর্থিক ও ব্যাংকিং জ্ঞান', subjectEn: 'Financial and Banking Knowledge', marks: '১০' },
+      { subjectBn: 'বিশ্লেষণী দক্ষতা', subjectEn: 'Analytical Skill', marks: '২০' },
+      { subjectBn: 'আইসিটির মৌলিক জ্ঞান', subjectEn: 'Basic Knowledge on ICT', marks: '১০' },
+    ],
+    totalBn: 'মোট ১০০ নম্বর',
+    totalEn: 'Total 100 marks',
+    timeBn: '১ ঘণ্টা',
+    timeEn: '1 hour',
+    negativeBn: 'ভুল উত্তরে ০.২৫ নম্বর কাটা যায় (২০২৫–২৬ সালের বিজ্ঞপ্তি অনুযায়ী যাচাইকৃত; হার বিজ্ঞপ্তি/প্রবেশপত্রে নির্ধারিত হয়)',
+    negativeEn: '0.25 deducted per wrong answer (verified for the 2025–26 circulars; the rate is set in each circular / admit card)',
+    noteBn: 'উৎস: বাংলাদেশ ব্যাংক HRD-1 নোটিশ নং ৩৮/২০২৬, ৪ মে ২০২৬; পরীক্ষা ১৭ জুলাই ২০২৬। লিখিত: ২০০ নম্বর, ২ ঘণ্টা। ভাইভা: বিজ্ঞপ্তি অনুযায়ী।',
+    noteEn: 'Source: Bangladesh Bank HRD-1 Notice No. 38/2026, 4 May 2026; exam 17 July 2026. Written: 200 marks, 2 hours. Viva: per circular.',
   },
   'primary-teacher': {
     titleBn: 'লিখিত (MCQ) — বর্তমান ধরন (DPE ২০২৫ বিধি)',
@@ -424,8 +464,8 @@ export const EXAM_PATTERNS: Partial<Record<string, ExamPattern>> = {
     timeEn: '90 minutes',
     negativeBn: 'ভুল উত্তরে ০.২৫ নম্বর কাটা যায়',
     negativeEn: '0.25 deducted per wrong answer',
-    noteBn: 'পাস নম্বর ৫০% (৪৫)। ভাইভা ১০ নম্বর, পাস ৫০% (৫)। পুরোনো ধরন (৮০ MCQ + ২০ ভাইভা) বাতিল — এখন ৯০+১০ ধরনই বর্তমান। উৎস: সরকারি প্রাথমিক বিদ্যালয় শিক্ষক নিয়োগ বিধিমালা ২০২৫, ২৮ আগস্ট ২০২৫।',
-    noteEn: 'Pass mark 50% (45). Viva 10 marks, pass 50% (5). The old pattern (80 MCQ + 20 viva) is retired — the 90+10 pattern is current. Source: Government Primary School Teacher Recruitment Rules 2025, 28 August 2025.',
+    noteBn: 'পাস নম্বর ৫০% (৪৫)। ভাইভা ১০ নম্বর, পাস ৫০% (৫)। পুরোনো ধরন (৮০ MCQ + ২০ ভাইভা) বাতিল — এখন ৯০+১০ ধরনই বর্তমান। উৎস: সরকারি প্রাথমিক বিদ্যালয় শিক্ষক নিয়োগ বিধিমালা ২০২৫, ২৮ আগস্ট ২০২৫। −০.২৫ নেগেটিভ মার্কিং বিধিমালায় লেখা নেই — ২০২৬ সালের জানুয়ারির পরীক্ষার নোটিশ/প্রবেশপত্রের নির্দেশনায় আছে।',
+    noteEn: 'Pass mark 50% (45). Viva 10 marks, pass 50% (5). The old pattern (80 MCQ + 20 viva) is retired — the 90+10 pattern is current. Source: Government Primary School Teacher Recruitment Rules 2025, 28 August 2025. The −0.25 negative marking is not in the Rules — it comes from the January 2026 exam notice / admit-card instructions.',
   },
   ntrca: {
     titleBn: 'শেষ যাচাইকৃত ধরন (১৮তম পরীক্ষা) — "বর্তমান ধরন" নয়',
@@ -455,11 +495,19 @@ export const EXAM_PATTERNS: Partial<Record<string, ExamPattern>> = {
  * EXAM_PATTERNS above (subject marks converted from Bangla digits to
  * numbers; the unit test asserts each subject list sums to
  * questionCount, so a transcription slip is caught). Nothing here is a
- * new claim: BCS 200/2h/−0.50, Bank 100/1h (penalty NOT verified —
- * circular-dependent, so negativeMarking is null and the provisional
- * 0.25 sits in provisionalNegativeMarking, never driving a score),
- * Primary 90/90min/−0.25/pass 50% (45) DPE 2025, NTRCA 18th
- * 100/1h/−0.25/pass 40. BCS viva marks are NEVER written; NTRCA 19th
+ * new claim: BCS 200/2h/−0.50 in the 50th syllabus split
+ * (30/30/25/25/10/15/15/20/15/15, BPSC 9 Dec 2025, official PDF read
+ * directly 24 Nov 2026; scoringConfigVersion v2), Bank 100/1h with
+ * −0.25 VERIFIED for the 2025–26 circulars (Combined 11 Bank Officer
+ * Circular 115/2025 + Bangladesh Bank AD Notice HRD-1 No. 38/2026,
+ * 4 May 2026; scoringConfigVersion v1 — the per-circular caveat
+ * stays: the rate is set in each circular / admit card), Primary
+ * 90/90min/−0.25/pass 50% (45) DPE 2025 (the −0.25 itself comes
+ * from the Jan 2026 exam notice, not the Rules), NTRCA 18th
+ * 100/1h/−0.25/pass 40. Bank also has post-level configs
+ * ('bank-senior-officer', 'bank-assistant-director') — machine
+ * patterns for future post-level mocks/pages; the 'bank' hub still
+ * shows Officer/Cash. BCS viva marks are NEVER written; NTRCA 19th
  * is NEVER written. The same shape is the Firestore seed
  * (team/job-categories-exams-seed.json) and the rules' type checks.
  */
@@ -489,7 +537,9 @@ export interface JobRulesConfig {
    * under — the attempt stores this version, so a later config
    * change can never silently reinterpret an old result.
    * 'v1' = first verified config; 'v0-provisional' = no verified
-   * config yet (Bank); '18th-v1' = NTRCA 18th-cycle config. */
+   * config yet (kept for snapshots of unverified configs — no live
+   * exam uses it since 24 Nov 2026, when Bank became v1);
+   * '18th-v1' = NTRCA 18th-cycle config. */
   scoringConfigVersion: string;
   passMark: number | null;
   passPercent: number | null;
@@ -586,23 +636,25 @@ export const JOB_RULES_CONFIGS: Record<string, JobRulesConfig> = {
     negativeMarking: 0.5,
     provisionalNegativeMarking: null,
     negativeMarkingVerified: true,
-    scoringConfigVersion: 'v1',
+    // 50th BCS syllabus (BPSC, 9 Dec 2025) — official PDF read
+    // directly 24 Nov 2026; v1 was the pre-50th split.
+    scoringConfigVersion: 'v2',
     passMark: null,
     passPercent: null,
     subjects: [
-      { nameBn: 'বাংলা ভাষা ও সাহিত্য', nameEn: 'Bangla Language & Literature', marks: 35 },
-      { nameBn: 'ইংরেজি ভাষা ও সাহিত্য', nameEn: 'English Language & Literature', marks: 35 },
-      { nameBn: 'বাংলাদেশ বিষয়াবলি', nameEn: 'Bangladesh Affairs', marks: 30 },
-      { nameBn: 'আন্তর্জাতিক বিষয়াবলি', nameEn: 'International Affairs', marks: 20 },
+      { nameBn: 'বাংলা ভাষা ও সাহিত্য', nameEn: 'Bangla Language & Literature', marks: 30 },
+      { nameBn: 'ইংরেজি ভাষা ও সাহিত্য', nameEn: 'English Language & Literature', marks: 30 },
+      { nameBn: 'বাংলাদেশ বিষয়াবলি', nameEn: 'Bangladesh Affairs', marks: 25 },
+      { nameBn: 'আন্তর্জাতিক বিষয়াবলি', nameEn: 'International Affairs', marks: 25 },
       { nameBn: 'ভূগোল, পরিবেশ ও দুর্যোগ ব্যবস্থাপনা', nameEn: 'Geography, Environment & Disaster Management', marks: 10 },
       { nameBn: 'সাধারণ বিজ্ঞান', nameEn: 'General Science', marks: 15 },
       { nameBn: 'কম্পিউটার ও তথ্যপ্রযুক্তি', nameEn: 'Computer & ICT', marks: 15 },
-      { nameBn: 'গাণিতিক যুক্তি', nameEn: 'Mathematical Reasoning', marks: 15 },
+      { nameBn: 'গাণিতিক যুক্তি', nameEn: 'Mathematical Reasoning', marks: 20 },
       { nameBn: 'মানসিক দক্ষতা', nameEn: 'Mental Ability', marks: 15 },
-      { nameBn: 'নৈতিকতা, মূল্যবোধ ও সুশাসন', nameEn: 'Ethics, Values & Good Governance', marks: 10 },
+      { nameBn: 'নৈতিকতা, মূল্যবোধ ও সুশাসন', nameEn: 'Ethics, Values & Good Governance', marks: 15 },
     ],
-    patternSource: 'BPSC বিজ্ঞপ্তি',
-    patternVerifiedAt: null,
+    patternSource: 'BPSC ৫০তম BCS প্রিলিমিনারি সিলেবাস, ৯ ডিসেম্বর ২০২৫ (সরাসরি PDF যাচাইকৃত)',
+    patternVerifiedAt: '2026-11-24',
     patternLabel: 'verified',
     patternStatus: 'verified',
     applicableCycle: null,
@@ -611,16 +663,16 @@ export const JOB_RULES_CONFIGS: Record<string, JobRulesConfig> = {
     questionCount: 100,
     timeMinutes: 60,
     marksPerQuestion: 1,
-    // Step 5 closure, P1-4: the penalty is NOT verified, so it must
-    // NOT sit in `negativeMarking` (which drives scoring). The
-    // provisional 0.25 lives separately, clearly labelled provisional.
-    negativeMarking: null,
-    provisionalNegativeMarking: 0.25,
-    // Circular-dependent: "usually 0.25" — the circular/admit card is
-    // authoritative, so the flag stays false even though the pattern
-    // itself is verified (Step 3 §2.2).
-    negativeMarkingVerified: false,
-    scoringConfigVersion: 'v0-provisional',
+    // −0.25 VERIFIED 24 Nov 2026 for the 2025–26 circulars
+    // (Combined 11 Bank Officer Circular 115/2025 + Bangladesh Bank
+    // AD Notice HRD-1 No. 38/2026, 4 May 2026). It now drives
+    // scoring (v1); the provisional field is empty. The per-circular
+    // caveat stays: the rate is set in each circular / admit card,
+    // so a future circular must be checked before its exam is scored.
+    negativeMarking: 0.25,
+    provisionalNegativeMarking: null,
+    negativeMarkingVerified: true,
+    scoringConfigVersion: 'v1',
     passMark: null,
     passPercent: null,
     subjects: [
@@ -630,12 +682,62 @@ export const JOB_RULES_CONFIGS: Record<string, JobRulesConfig> = {
       { nameBn: 'সাধারণ জ্ঞান', nameEn: 'General Knowledge', marks: 20 },
       { nameBn: 'কম্পিউটারের মৌলিক জ্ঞান', nameEn: 'Basic Computer Knowledge', marks: 10 },
     ],
-    patternSource: 'BSCS বিজ্ঞপ্তি',
-    patternVerifiedAt: null,
+    patternSource: 'BSCS Combined 11 Bank Officer (General) Circular 115/2025',
+    patternVerifiedAt: '2026-11-24',
     patternLabel: 'verified',
-    // The subject pattern is verified, but the config as a whole is
-    // NOT authoritative for scoring until the penalty is verified.
-    patternStatus: 'not_verified',
+    patternStatus: 'verified',
+    applicableCycle: null,
+  },
+  // Post-level Bank patterns (24 Nov 2026 audit): one 'bank' config
+  // cannot hold three post patterns. These are machine-readable
+  // configs for future post-level mocks/pages — NOT exam hubs
+  // (JOB_EXAMS has no such slugs, so no hub renders them yet).
+  'bank-senior-officer': {
+    questionCount: 100,
+    timeMinutes: 60,
+    marksPerQuestion: 1,
+    negativeMarking: 0.25,
+    provisionalNegativeMarking: null,
+    negativeMarkingVerified: true,
+    scoringConfigVersion: 'v1',
+    passMark: null,
+    passPercent: null,
+    subjects: [
+      { nameBn: 'ইংরেজি (ব্যাকরণ ও ভাষা)', nameEn: 'English (Grammar & Language)', marks: 20 },
+      { nameBn: 'বাংলা (ব্যাকরণ ও ভাষা)', nameEn: 'Bangla (Grammar & Language)', marks: 20 },
+      { nameBn: 'সাধারণ গণিত', nameEn: 'General Mathematics', marks: 20 },
+      { nameBn: 'আর্থিক ও ব্যাংকিং জ্ঞান', nameEn: 'Financial and Banking Knowledge', marks: 10 },
+      { nameBn: 'বিশ্লেষণী দক্ষতা', nameEn: 'Analytical Skills', marks: 20 },
+      { nameBn: 'তথ্য ও যোগাযোগ প্রযুক্তির মৌলিক জ্ঞান', nameEn: 'Basic Knowledge of ICT', marks: 10 },
+    ],
+    patternSource: 'BSCS Circulars 109/2025 + 348/2026',
+    patternVerifiedAt: '2026-11-24',
+    patternLabel: 'verified',
+    patternStatus: 'verified',
+    applicableCycle: null,
+  },
+  'bank-assistant-director': {
+    questionCount: 100,
+    timeMinutes: 60,
+    marksPerQuestion: 1,
+    negativeMarking: 0.25,
+    provisionalNegativeMarking: null,
+    negativeMarkingVerified: true,
+    scoringConfigVersion: 'v1',
+    passMark: null,
+    passPercent: null,
+    subjects: [
+      { nameBn: 'ইংরেজি (ব্যাকরণ ও ভাষা)', nameEn: 'English (Grammar & Language)', marks: 20 },
+      { nameBn: 'বাংলা (ব্যাকরণ ও ভাষা)', nameEn: 'Bangla (Grammar & Language)', marks: 20 },
+      { nameBn: 'সাধারণ গণিত', nameEn: 'General Mathematics', marks: 20 },
+      { nameBn: 'আর্থিক ও ব্যাংকিং জ্ঞান', nameEn: 'Financial and Banking Knowledge', marks: 10 },
+      { nameBn: 'বিশ্লেষণী দক্ষতা', nameEn: 'Analytical Skill', marks: 20 },
+      { nameBn: 'আইসিটির মৌলিক জ্ঞান', nameEn: 'Basic Knowledge on ICT', marks: 10 },
+    ],
+    patternSource: 'Bangladesh Bank HRD-1 Notice No. 38/2026, 4 May 2026',
+    patternVerifiedAt: '2026-11-24',
+    patternLabel: 'verified',
+    patternStatus: 'verified',
     applicableCycle: null,
   },
   'primary-teacher': {
@@ -654,8 +756,11 @@ export const JOB_RULES_CONFIGS: Record<string, JobRulesConfig> = {
       { nameBn: 'গণিত ও দৈনন্দিন বিজ্ঞান', nameEn: 'Math & Everyday Science', marks: 20 },
       { nameBn: 'সাধারণ জ্ঞান (বাংলাদেশ ও আন্তর্জাতিক)', nameEn: 'General Knowledge (Bangladesh & International)', marks: 20 },
     ],
-    patternSource: 'সরকারি প্রাথমিক বিদ্যালয় শিক্ষক নিয়োগ বিধিমালা ২০২৫, ২৮ আগস্ট ২০২৫',
-    patternVerifiedAt: null,
+    // −0.25: NOT in the Rules (Schedule 2 is silent on the rate) —
+    // it comes from the Jan 2026 exam notice / admit-card
+    // instructions, verified 24 Nov 2026.
+    patternSource: 'সরকারি প্রাথমিক বিদ্যালয় শিক্ষক নিয়োগ বিধিমালা ২০২৫, ২৮ আগস্ট ২০২৫ (ধরন); −০.২৫ — ২০২৬ সালের জানুয়ারির পরীক্ষার নোটিশ/প্রবেশপত্র',
+    patternVerifiedAt: '2026-11-24',
     patternLabel: 'verified',
     patternStatus: 'verified',
     applicableCycle: null,

@@ -8,7 +8,8 @@
  *  (2) the machine-readable rulesConfig (Step 3 §2.2) — the 4 verified
  *      exams only, exact figures, subject lists summing to
  *      questionCount, cross-checked against EXAM_PATTERNS (Bangla-digit
- *      marks converted), Bank's negative-marking flag false;
+ *      marks converted); BCS is the 50th syllabus split (v2), Bank's
+ *      −0.25 is verified (v1);
  *  (3) the IT hub def (Step 2 §2.9 — scope undecided, no pattern);
  *  (4) the Firestore seed (team/job-categories-exams-seed.json) —
  *      schema-validated AND deep-matched against the canonical
@@ -106,6 +107,10 @@ describe('rulesConfig (Step 5 — Step 3 §2.2, verified figures only)', () => {
       negativeMarking: 0.5,
       provisionalNegativeMarking: null,
       negativeMarkingVerified: true,
+      // 50th BCS syllabus (BPSC, 9 Dec 2025) — official PDF read
+      // directly 24 Nov 2026; v1 was the pre-50th split.
+      scoringConfigVersion: 'v2',
+      patternVerifiedAt: '2026-11-24',
       passMark: null,
       passPercent: null,
       patternLabel: 'verified',
@@ -116,16 +121,18 @@ describe('rulesConfig (Step 5 — Step 3 §2.2, verified figures only)', () => {
       questionCount: 100,
       timeMinutes: 60,
       marksPerQuestion: 1,
-      // Step 5 closure, P1-4: the penalty is NOT verified, so it must
-      // NOT sit in negativeMarking — it lives in provisionalNegativeMarking.
-      negativeMarking: null,
-      provisionalNegativeMarking: 0.25,
-      // Circular-dependent: "usually 0.25" — flag stays false.
-      negativeMarkingVerified: false,
+      // −0.25 VERIFIED 24 Nov 2026 (Combined 11 Bank Officer
+      // Circular 115/2025 + Bangladesh Bank AD Notice HRD-1
+      // No. 38/2026, 4 May 2026) — it now drives scoring.
+      negativeMarking: 0.25,
+      provisionalNegativeMarking: null,
+      negativeMarkingVerified: true,
+      scoringConfigVersion: 'v1',
+      patternVerifiedAt: '2026-11-24',
       passMark: null,
       passPercent: null,
       patternLabel: 'verified',
-      patternStatus: 'not_verified',
+      patternStatus: 'verified',
       applicableCycle: null,
     });
     expect(JOB_RULES_CONFIGS['primary-teacher']).toMatchObject({
@@ -135,6 +142,9 @@ describe('rulesConfig (Step 5 — Step 3 §2.2, verified figures only)', () => {
       negativeMarking: 0.25,
       provisionalNegativeMarking: null,
       negativeMarkingVerified: true,
+      // −0.25 citation fixed 24 Nov 2026: Jan 2026 DPE exam notice /
+      // admit card (the Rules do not specify the rate).
+      patternVerifiedAt: '2026-11-24',
       passMark: 45,
       passPercent: 50,
       patternLabel: 'verified',
@@ -221,7 +231,7 @@ describe('IT hub def (Step 5 — Step 2 §2.9, scope undecided)', () => {
 describe('pattern status + applicable cycle (Step 5 closure, P1-3/P1-8)', () => {
   it('every exam has exactly one pattern status; null configs are explained, never silent', () => {
     expect(jobPatternStatus('bcs')).toBe('verified');
-    expect(jobPatternStatus('bank')).toBe('not_verified');
+    expect(jobPatternStatus('bank')).toBe('verified');
     expect(jobPatternStatus('primary-teacher')).toBe('verified');
     expect(jobPatternStatus('ntrca')).toBe('last_verified');
     expect(jobPatternStatus('it-professional')).toBe('scope_pending');
@@ -341,12 +351,14 @@ describe('seed JSON (Step 5 — team/job-categories-exams-seed.json, disk only)'
     }
   });
 
-  it('seed Bank config keeps the provisional penalty out of negativeMarking (P1-4)', () => {
+  it('seed Bank config carries the VERIFIED −0.25 penalty (24 Nov 2026 audit)', () => {
     const bank = SEED.jobExams.bank.rulesConfig as Record<string, unknown>;
-    expect(bank.negativeMarking).toBeNull();
-    expect(bank.provisionalNegativeMarking).toBe(0.25);
-    expect(bank.negativeMarkingVerified).toBe(false);
-    expect(bank.patternStatus).toBe('not_verified');
+    expect(bank.negativeMarking).toBe(0.25);
+    expect(bank.provisionalNegativeMarking).toBeNull();
+    expect(bank.negativeMarkingVerified).toBe(true);
+    expect(bank.patternStatus).toBe('verified');
+    expect(bank.scoringConfigVersion).toBe('v1');
+    expect(bank.patternVerifiedAt).toBe('2026-11-24');
   });
 
   it('seed rulesConfig equals JOB_RULES_CONFIGS for the 4 verified exams, null for the rest', () => {

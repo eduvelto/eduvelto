@@ -156,8 +156,8 @@ export default function JobsCommonPage() {
                 // D5: the Bank day was omitted from the negative-marking
                 // sentence, and the rotation is ~9 days for 9 topics,
                 // not "in a week" (front-ends audit, same finding).
-                bn: 'প্রতিদিন ভিন্ন টপিক — ৯টি কমন টপিক প্রায় ৯ দিনে ঘুরে আসে। নেগেটিভ মার্কিং ওই দিনের চক্রের পরীক্ষার নিয়মে হবে (BCS-র দিনে −০.৫০, প্রাথমিক/NTRCA-র দিনে −০.২৫; ব্যাংকের দিনে নেগেটিভ মার্কিং বন্ধ — বিজ্ঞপ্তি যাচাই বাকি)। প্রকাশের সময় এখনো ঠিক হয়নি।',
-                en: 'A different topic every day — the 9 common topics rotate through in about 9 days. Negative marking follows that day’s cycle exam (BCS day −0.50, Primary/NTRCA day −0.25; Bank day: negative marking off — circular verification pending). The publish time is not decided yet.',
+                bn: 'প্রতিদিন ভিন্ন টপিক — ৯টি কমন টপিক প্রায় ৯ দিনে ঘুরে আসে। নেগেটিভ মার্কিং ওই দিনের চক্রের পরীক্ষার নিয়মে হবে (BCS-র দিনে −০.৫০, ব্যাংক/প্রাথমিক/NTRCA-র দিনে −০.২৫)। প্রকাশের সময় এখনো ঠিক হয়নি।',
+                en: 'A different topic every day — the 9 common topics rotate through in about 9 days. Negative marking follows that day’s cycle exam (BCS day −0.50, Bank/Primary/NTRCA day −0.25). The publish time is not decided yet.',
               })}
             </p>
             {!mocksLoaded ? (

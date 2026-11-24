@@ -107,7 +107,7 @@ describe('negativeMarkingExplanation', () => {
     expect(e.costLine).toBe('1টি ভুল উত্তরে 0.5 নম্বর কাটা গেছে');
   });
 
-  it('penalty disabled (Bank): never shows a "−0", says the penalty is off', () => {
+  it('penalty disabled (null/0 penalty): never shows a "−0", says the penalty is off', () => {
     const e = negativeMarkingExplanation(
       attempt({ negativeMarkingUsed: 0, negativeDeduction: 0, score: 2, correctCount: 2, wrongCount: 1 }),
     );

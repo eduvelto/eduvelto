@@ -37,9 +37,11 @@
  * marksPerQuestion, negativeMarking, negativeMarkingVerified,
  * passPercent, scoringConfigVersion). A later config change never
  * changes a running mock's rules. The snapshot is a FAITHFUL
- * copy — Bank's negativeMarking stays null (unverified); the
- * engine interprets null as "disabled, 0" (Step 8 fold-in M1),
- * it is never scored as the provisional 0.25.
+ * copy — Bank's negativeMarking is now the verified 0.25
+ * (24 Nov 2026), so Bank mocks score −0.25 per wrong answer; a
+ * null penalty (an unverified config) is interpreted by the
+ * engine as "disabled, 0" (Step 8 fold-in M1), never scored as
+ * a provisional value.
  *
  * BUDGET: ৳0 — no paid service, no server. All dates use
  * Asia/Dhaka (the students' timezone).
@@ -61,8 +63,10 @@ export interface JobMockRulesSnapshot {
   questionCount: number;
   timeMinutes: number;
   marksPerQuestion: 1;
-  /** Null when the penalty is unverified (Bank) — the engine
-   * scores it as 0 (disabled), never the provisional value. */
+  /** Null when the penalty is unverified — the engine scores it
+   * as 0 (disabled), never a provisional value. (Bank's penalty
+   * is verified 0.25 since 24 Nov 2026, so live Bank snapshots
+   * carry 0.25.) */
   negativeMarking: number | null;
   negativeMarkingVerified: boolean;
   passPercent: number | null;
@@ -233,8 +237,10 @@ export function jobThisWeekCycleExam(nowMs: number = Date.now()): string {
  * `overrides` is for DAILY mocks only: the daily set is 20–30
  * questions in 20–30 minutes, not the exam's full pattern — the
  * Admin sets the daily questionCount/timeMinutes at creation.
- * The snapshot NEVER invents a penalty: Bank's negativeMarking
- * stays null (unverified) — the engine scores it as 0. */
+ * The snapshot NEVER invents a penalty: it copies the config's
+ * negativeMarking as-is — a null penalty (unverified config) is
+ * scored as 0 by the engine. Bank's penalty is verified 0.25
+ * since 24 Nov 2026, so live Bank snapshots carry 0.25. */
 export function buildJobMockRulesSnapshot(
   examSlug: string,
   overrides?: { questionCount?: number; timeMinutes?: number },
@@ -437,8 +443,8 @@ export function jobMockKindLabelBn(kind: JobMockKind): string {
 }
 
 /** One-line pattern summary from a snapshot (for the intro card
- * and the mock list). Bank shows the disabled-penalty note
- * (Step 8 fold-in M1) — never the provisional 0.25 as a rule. */
+ * and the mock list). A null/0 penalty shows the disabled-penalty
+ * note (Step 8 fold-in M1) — never a provisional value as a rule. */
 export function jobMockPatternSummaryBn(snapshot: JobMockRulesSnapshot, questionCountOverride?: number): string {
   return jobMockPatternSummary(snapshot, questionCountOverride, 'bn');
 }

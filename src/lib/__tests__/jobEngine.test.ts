@@ -121,16 +121,16 @@ describe('exam patterns', () => {
     expect(p!.patternLabel).toBe('যাচাইকৃত ধরন');
   });
 
-  it('p2: Bank is 100 MCQ / 1h / negative marking DISABLED (0, unverified), no pass percent', () => {
+  it('p2: Bank is 100 MCQ / 1h / −0.25 VERIFIED, no pass percent', () => {
     const p = jobExamPattern('bank');
     expect(p).not.toBeNull();
     expect(p!.questionCount).toBe(100);
     expect(p!.timeMinutes).toBe(60);
-    expect(p!.negativeMarking).toBe(0);
-    expect(p!.negativeMarkingVerified).toBe(false);
-    expect(p!.scoringConfigVersion).toBe('v0-provisional');
+    expect(p!.negativeMarking).toBe(0.25);
+    expect(p!.negativeMarkingVerified).toBe(true);
+    expect(p!.scoringConfigVersion).toBe('v1');
     expect(p!.passPercent).toBeNull();
-    expect(p!.patternLabel).toBe('নেগেটিভ মার্কিং বন্ধ — বিজ্ঞপ্তি যাচাই বাকি');
+    expect(p!.patternLabel).toBe('যাচাইকৃত ধরন');
   });
 
   it('p3: Primary is 90 MCQ / 90 min / −0.25 verified, pass 50%', () => {
@@ -380,7 +380,7 @@ describe('scoring', () => {
     expect(r.percentage).toBe(-25);
   });
 
-  it('c2b: Bank all-wrong — negative marking DISABLED, no deduction (Step 8 fold-in, finding 2)', () => {
+  it('c2b: Bank all-wrong — −0.25 per wrong (verified 24 Nov 2026)', () => {
     const { bundle, key } = makeBundle(2, ['t1']);
     const r = scorePracticeAttempt({
       bundle,
@@ -393,12 +393,12 @@ describe('scoring', () => {
       startedAtMillis: 0,
       submittedAtMillis: 60000,
     });
-    expect(r.score).toBe(0);
-    expect(r.negativeDeduction).toBe(0);
-    expect(r.negativeMarkingUsed).toBe(0);
-    expect(r.markingSchemeVersion).toBe('v0-provisional');
+    expect(r.score).toBe(-0.5);
+    expect(r.negativeDeduction).toBe(0.5);
+    expect(r.negativeMarkingUsed).toBe(0.25);
+    expect(r.markingSchemeVersion).toBe('v1');
     expect(r.wrongCount).toBe(2);
-    expect(r.percentage).toBe(0);
+    expect(r.percentage).toBe(-25);
   });
 
   it('c3: all-wrong with −0.50 (BCS) — deduction is 0.5 per wrong', () => {
@@ -419,7 +419,7 @@ describe('scoring', () => {
     expect(r.percentage).toBe(-50);
   });
 
-  it('c4: unanswered = 0 marks, not wrong', () => {
+  it('c4: unanswered = 0 marks, not wrong (Bank −0.25 on the one wrong answer)', () => {
     const { bundle, key } = makeBundle(4, ['t1']);
     const r = scorePracticeAttempt({
       bundle,
@@ -437,11 +437,14 @@ describe('scoring', () => {
     expect(r.correctCount).toBe(2);
     expect(r.wrongCount).toBe(1);
     expect(r.unansweredCount).toBe(1);
-    expect(r.score).toBe(2);
+    // 2 correct − 1 wrong × 0.25 (Bank penalty verified 24 Nov 2026).
+    expect(r.score).toBe(1.75);
+    expect(r.negativeDeduction).toBe(0.25);
+    expect(r.negativeMarkingUsed).toBe(0.25);
     expect(r.answers[3]).toMatchObject({ selected: null, correct: false, marks: 0 });
   });
 
-  it('c5: accuracy divides by ANSWERED only (unanswered excluded)', () => {
+  it('c5: accuracy divides by ANSWERED only (unanswered excluded); percentage is after the Bank −0.25', () => {
     const { bundle, key } = makeBundle(4, ['t1']);
     const r = scorePracticeAttempt({
       bundle,
@@ -457,7 +460,8 @@ describe('scoring', () => {
       submittedAtMillis: 60000,
     });
     expect(r.accuracy).toBeCloseTo(66.67, 2);
-    expect(r.percentage).toBe(50);
+    // Score 1.75 / 4 marks = 43.75% (2 correct − 1 wrong × 0.25).
+    expect(r.percentage).toBe(43.75);
   });
 
   it('c6: wrongQuestionIds + weakTopics ordered by wrong desc', () => {

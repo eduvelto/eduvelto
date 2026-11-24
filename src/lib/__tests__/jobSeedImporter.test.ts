@@ -96,7 +96,10 @@ describe('validateSeed (P1-2)', () => {
   it('rejects patternStatus verified with an unverified penalty', () => {
     const bad = cloneSeed();
     const bank = bad.jobExams.bank.rulesConfig as Record<string, unknown>;
+    // Bank's live seed is now verified on both fields, so the bad
+    // case must re-introduce the unverified penalty explicitly.
     bank.patternStatus = 'verified';
+    bank.negativeMarkingVerified = false;
     expect(validateSeed(bad)).toEqual(
       expect.arrayContaining([
         expect.stringMatching(/patternStatus 'verified' cannot carry an unverified penalty/),
@@ -117,7 +120,7 @@ describe('validateSeed (P1-2)', () => {
     const bcs = bad.jobExams.bcs.rulesConfig as Record<string, unknown>;
     (bcs.subjects as { marks: number }[])[0].marks = 36;
     expect(validateSeed(bad)).toEqual(
-      expect.arrayContaining([expect.stringMatching(/subject marks sum \(201\) != questionCount \(200\)/)]),
+      expect.arrayContaining([expect.stringMatching(/subject marks sum \(206\) != questionCount \(200\)/)]),
     );
   });
 });

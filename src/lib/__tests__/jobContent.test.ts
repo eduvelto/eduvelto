@@ -109,16 +109,16 @@ describe('subjects per exam (Step 6 — derived from verified rulesConfig)', () 
 
   it('BCS subject slugs and marks are exactly the canonical list', () => {
     expect(JOB_SUBJECTS.bcs.map((s) => [s.slug, s.marks])).toEqual([
-      ['bangla', 35],
-      ['english', 35],
-      ['bangladesh-affairs', 30],
-      ['international-affairs', 20],
+      ['bangla', 30],
+      ['english', 30],
+      ['bangladesh-affairs', 25],
+      ['international-affairs', 25],
       ['geography', 10],
       ['general-science', 15],
       ['computer-ict', 15],
-      ['mathematical-reasoning', 15],
+      ['mathematical-reasoning', 20],
       ['mental-ability', 15],
-      ['ethics', 10],
+      ['ethics', 15],
     ]);
   });
 
@@ -172,9 +172,9 @@ describe('jobSubjectById', () => {
       examSlug: 'bcs',
       nameBn: 'নৈতিকতা, মূল্যবোধ ও সুশাসন',
       nameEn: 'Ethics, Values & Good Governance',
-      marks: 10,
+      marks: 15,
       order: 10,
-      syllabusSource: 'BPSC বিজ্ঞপ্তি',
+      syllabusSource: 'BPSC ৫০তম BCS প্রিলিমিনারি সিলেবাস, ৯ ডিসেম্বর ২০২৫ (সরাসরি PDF যাচাইকৃত)',
     });
     expect(jobSubjectById('ntrca__math')).toMatchObject({
       slug: 'math',
@@ -320,7 +320,7 @@ describe('validateJobContentTaxonomy', () => {
     bad.bcs[0] = { ...bad.bcs[0], marks: 36 };
     expect(validateJobContentTaxonomyAgainst({ subjects: bad })).toEqual(
       expect.arrayContaining([
-        expect.stringMatching(/subject marks sum \(201\) != questionCount \(200\)/),
+        expect.stringMatching(/subject marks sum \(206\) != questionCount \(200\)/),
       ]),
     );
   });

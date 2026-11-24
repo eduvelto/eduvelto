@@ -1452,11 +1452,7 @@ function jobExamEntry(slug: string, tab?: string): RouteSeoEntry | null {
   // carries it. Verified facts stay: pattern, MCQ count, time,
   // negative marking, pass mark (pinned by seo.test.ts per exam).
   let body: string;
-  if (slug === 'bank' && cfg && cfg.questionCount !== null && cfg.timeMinutes !== null) {
-    // Subject pattern verified, penalty NOT verified (Step 5 closure):
-    // the config as a whole is not authoritative for scoring.
-    body = `ব্যাংক প্রিলিমিনারি — যাচাইকৃত বিষয়বণ্টন: ${bnDigits(cfg.questionCount)} MCQ, ${timeBn(cfg.timeMinutes)} (অফিসার, ক্যাশ); নেগেটিভ মার্কিং অযাচাইকৃত।`;
-  } else if (
+  if (
     cfg &&
     cfg.questionCount !== null &&
     cfg.timeMinutes !== null &&

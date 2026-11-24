@@ -109,8 +109,8 @@ const BCS_SNAPSHOT: JobMockRulesSnapshot = {
 };
 const BANK_SNAPSHOT: JobMockRulesSnapshot = {
   questionCount: 3, timeMinutes: 5, marksPerQuestion: 1,
-  negativeMarking: null, negativeMarkingVerified: false,
-  passPercent: null, scoringConfigVersion: 'v0-provisional',
+  negativeMarking: 0.25, negativeMarkingVerified: true,
+  passPercent: null, scoringConfigVersion: 'v1',
 };
 const NTRCA_SNAPSHOT: JobMockRulesSnapshot = {
   questionCount: 3, timeMinutes: 5, marksPerQuestion: 1,
@@ -238,8 +238,17 @@ describe('validateMockSession', () => {
 });
 
 describe('patternFromRulesSnapshot', () => {
-  it('Bank null penalty becomes 0 (disabled), never the provisional 0.25', () => {
-    const p = patternFromRulesSnapshot('bank', BANK_SNAPSHOT);
+  it('a null-penalty snapshot becomes 0 (disabled), never a provisional value', () => {
+    // The null → 0 mechanism is generic (an unverified config's
+    // penalty), NOT Bank's live state — Bank's penalty is verified
+    // 0.25 since 24 Nov 2026. Synthetic null snapshot on purpose.
+    const nullPenalty: JobMockRulesSnapshot = {
+      ...BANK_SNAPSHOT,
+      negativeMarking: null,
+      negativeMarkingVerified: false,
+      scoringConfigVersion: 'v0-provisional',
+    };
+    const p = patternFromRulesSnapshot('bank', nullPenalty);
     expect(p.negativeMarking).toBe(0);
     expect(p.negativeMarkingVerified).toBe(false);
     expect(p.scoringConfigVersion).toBe('v0-provisional');
@@ -282,15 +291,16 @@ describe('scoreMockAttempt', () => {
     ]);
   });
 
-  it('Bank snapshot scores a wrong answer as 0 (penalty disabled)', () => {
+  it('Bank snapshot scores −0.25 per wrong answer (verified 24 Nov 2026)', () => {
     const { bundle, key } = makeMockBundle();
     const r = scoreMockAttempt({
       bundle, key, answers: given, rulesSnapshot: BANK_SNAPSHOT,
       examSlug: 'bank', startedAtMillis: 1_000_000, submittedAtMillis: 1_050_000,
     });
-    expect(r.score).toBe(1);
-    expect(r.negativeDeduction).toBe(0);
-    expect(r.negativeMarkingUsed).toBe(0);
+    expect(r.score).toBe(0.75);
+    expect(r.negativeDeduction).toBe(0.25);
+    expect(r.negativeMarkingUsed).toBe(0.25);
+    expect(r.markingSchemeVersion).toBe('v1');
   });
 
   it('NTRCA snapshot pins markingSchemeVersion 18th-v1', () => {

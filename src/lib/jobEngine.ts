@@ -33,23 +33,18 @@
  * is preliminary topics only, no numbers), so there is no 'common'
  * pattern. Unknown slugs return null — never a guessed pattern.
  *
- * BANK PENALTY — DISABLED (Step 8 fold-in, ChatGPT findings 2 + 9,
- * preferred option): the Bank `negativeMarking` in the rulesConfig
- * is null (NOT verified — circular-dependent), so Bank practice
- * scores with NO negative marking at all (`negativeMarking: 0`,
- * `negativeMarkingVerified: false`, label 'নেগেটিভ মার্কিং বন্ধ —
- * বিজ্ঞপ্তি যাচাই বাকি'). The provisional 0.25 in
- * `provisionalNegativeMarking` is NEVER used for scoring — an
- * unverified marking scheme must never drive an authoritative-looking
- * score, and a disclaimer does not fix a wrong deduction. The UI
- * must say explicitly that Bank scoring awaits verification
- * (practice page before the session, result page with the result).
- * The attempt stores the marking actually applied
+ * BANK PENALTY — VERIFIED −0.25 (24 Nov 2026): the Bank
+ * `negativeMarking` in the rulesConfig is 0.25, verified for the
+ * 2025–26 circulars (Combined 11 Bank Officer Circular 115/2025 +
+ * Bangladesh Bank AD Notice HRD-1 No. 38/2026, 4 May 2026), so Bank
+ * practice now scores −0.25 per wrong answer
+ * (`negativeMarking: 0.25`, `negativeMarkingVerified: true`, label
+ * 'যাচাইকৃত ধরন', `scoringConfigVersion: 'v1'`). The per-circular
+ * caveat stays: the rate is set in each circular / admit card, so a
+ * future circular must be checked before its exam is scored. The
+ * attempt stores the marking actually applied
  * (`negativeMarkingUsed` + `markingSchemeVersion`) so a later
  * config change can never silently reinterpret an old result.
- * When the Bank circular is verified, set `negativeMarking: 0.25`
- * in the rulesConfig (and bump `scoringConfigVersion`) — this file
- * needs no other change.
  *
  * MARKING-SCHEME VERSIONING (Step 8 fold-in): every pattern carries
  * `scoringConfigVersion` (from the rulesConfig); every scored
@@ -113,11 +108,12 @@ export interface JobExamPattern {
   timeMinutes: number;
   /** Always 1 in the four verified patterns (1 mark per MCQ). */
   marksPerQuestion: 1;
-  /** 0 = no negative marking (Bank — unverified penalty disabled,
-   * Step 8 fold-in). 0.25 / 0.5 = the verified penalty. */
+  /** 0 = no negative marking (a config whose penalty is null, or
+   * a penalty of 0). 0.25 / 0.5 = the verified penalty. */
   negativeMarking: 0 | 0.25 | 0.5;
-  /** False ONLY for Bank (penalty unverified — disabled, not
-   * provisional-scored; see the header note). */
+  /** True when the penalty was verified against a circular; false
+   * when the penalty is unverified/disabled (never score a
+   * provisional penalty — see the header note). */
   negativeMarkingVerified: boolean;
   /** The scoring-config version this pattern was built from
    * (Step 8 fold-in, finding 9) — stored on every attempt. */
@@ -128,13 +124,11 @@ export interface JobExamPattern {
   patternLabel: string;
 }
 
-/** Bangla pattern labels — one per verified exam. Bank's label says
- * negative marking is OFF until the circular verifies it (Step 8
- * fold-in — the provisional 0.25 is never scored); NTRCA's says
+/** Bangla pattern labels — one per verified exam. NTRCA's says
  * 18th is the LAST verified pattern, not the current one. */
 const JOB_EXAM_PATTERN_LABELS: Record<string, string> = {
   bcs: 'যাচাইকৃত ধরন',
-  bank: 'নেগেটিভ মার্কিং বন্ধ — বিজ্ঞপ্তি যাচাই বাকি',
+  bank: 'যাচাইকৃত ধরন',
   'primary-teacher': 'যাচাইকৃত ধরন',
   ntrca: '১৮তম ধরন — শেষ যাচাইকৃত ধরন',
 };
@@ -157,9 +151,11 @@ function buildJobExamPattern(examSlug: string): JobExamPattern | null {
   ) {
     return null;
   }
-  // Bank: verified penalty is null — negative marking is DISABLED
-  // (0), never the provisional 0.25 (Step 8 fold-in, ChatGPT
-  // findings 2 + 9: an unverified scheme must never drive a score).
+  // A null penalty (unverified config) means negative marking is
+  // DISABLED (0) — never a provisional value (Step 8 fold-in,
+  // ChatGPT findings 2 + 9: an unverified scheme must never drive
+  // a score). Bank's penalty is now verified 0.25, so it flows
+  // through here as 0.25.
   const rawNegative = cfg.negativeMarking ?? 0;
   if (rawNegative !== 0 && rawNegative !== 0.25 && rawNegative !== 0.5) return null;
   const negative: 0 | 0.25 | 0.5 = rawNegative;
@@ -197,10 +193,11 @@ export function jobExamPattern(examSlug: string): JobExamPattern | null {
 /** Build an exam pattern from a mock's rulesSnapshot (Step 9).
  * The snapshot is the AUTHORITY for this mock — a later
  * rulesConfig change never re-scores it. The snapshot's
- * negativeMarking may be null (Bank — unverified): the pattern
- * then carries 0 (disabled), exactly like the live config path
- * (buildJobExamPattern). Throws unless the snapshot is a complete,
- * well-formed pattern (never guess a penalty or a duration). */
+ * negativeMarking may be null (a config whose penalty was never
+ * verified): the pattern then carries 0 (disabled), exactly like
+ * the live config path (buildJobExamPattern). Throws unless the
+ * snapshot is a complete, well-formed pattern (never guess a
+ * penalty or a duration). */
 export function patternFromRulesSnapshot(
   examSlug: string,
   snapshot: {

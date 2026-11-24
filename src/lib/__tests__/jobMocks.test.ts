@@ -4,8 +4,8 @@
  * Covers: mock-ID scheme (daily / weekly / full) + doc-ID builders
  * and their inverse, Dhaka dates + ISO weeks (incl. year-boundary
  * weeks), the weekly cycle exam, the rules-snapshot builder (all
- * four verified patterns — Bank's penalty stays null, never the
- * provisional 0.25; daily overrides), and validateJobMock (valid
+ * four verified patterns — Bank's penalty is the verified 0.25
+ * since 24 Nov 2026; daily overrides), and validateJobMock (valid
  * docs + the doc-ID / cycle / snapshot failures).
  */
 import { describe, it, expect } from 'vitest';
@@ -146,7 +146,7 @@ describe('Dhaka dates + ISO weeks', () => {
 });
 
 describe('rules-snapshot builder', () => {
-  it('BCS snapshot is the faithful 200Q/120min/−0.50 copy', () => {
+  it('BCS snapshot is the faithful 200Q/120min/−0.50 copy (50th syllabus, v2)', () => {
     expect(buildJobMockRulesSnapshot('bcs')).toEqual({
       questionCount: 200,
       timeMinutes: 120,
@@ -154,17 +154,17 @@ describe('rules-snapshot builder', () => {
       negativeMarking: 0.5,
       negativeMarkingVerified: true,
       passPercent: null,
-      scoringConfigVersion: 'v1',
+      scoringConfigVersion: 'v2',
     });
   });
 
-  it('Bank snapshot keeps negativeMarking NULL (unverified) — never the provisional 0.25', () => {
+  it('Bank snapshot carries the VERIFIED −0.25 penalty (24 Nov 2026 audit)', () => {
     const s = buildJobMockRulesSnapshot('bank');
-    expect(s.negativeMarking).toBeNull();
-    expect(s.negativeMarkingVerified).toBe(false);
+    expect(s.negativeMarking).toBe(0.25);
+    expect(s.negativeMarkingVerified).toBe(true);
     expect(s.questionCount).toBe(100);
     expect(s.timeMinutes).toBe(60);
-    expect(s.scoringConfigVersion).toBe('v0-provisional');
+    expect(s.scoringConfigVersion).toBe('v1');
   });
 
   it('Primary snapshot carries passPercent 50; NTRCA 40', () => {
@@ -283,9 +283,13 @@ describe('display helpers', () => {
     expect(jobMockKindLabelBn('full')).toBe('পূর্ণ মক');
   });
 
-  it('pattern summary shows the disabled-penalty note for Bank', () => {
+  it('pattern summary shows the verified penalty for Bank (−০.২৫), and the disabled note only for a null penalty', () => {
     const bank = buildJobMockRulesSnapshot('bank');
-    expect(jobMockPatternSummaryBn(bank)).toContain('নেগেটিভ মার্কিং বন্ধ');
+    expect(jobMockPatternSummaryBn(bank)).toContain('−০.২৫');
+    // Disabled note: synthetic null-penalty snapshot (no live exam
+    // has one since 24 Nov 2026 — Bank is verified 0.25).
+    const nullPenalty = { ...bank, negativeMarking: null, negativeMarkingVerified: false };
+    expect(jobMockPatternSummaryBn(nullPenalty)).toContain('নেগেটিভ মার্কিং বন্ধ');
     const bcs = buildJobMockRulesSnapshot('bcs');
     expect(jobMockPatternSummaryBn(bcs)).toContain('200টি MCQ');
     expect(jobMockPatternSummaryBn(bcs)).toContain('−০.৫০');

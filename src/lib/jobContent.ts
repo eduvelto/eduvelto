@@ -123,7 +123,7 @@ function buildSubjects(examSlug: string): JobSubjectDef[] {
  * the importer rejects any mismatch, so a stale seed can never be
  * applied against a newer config.
  */
-export const JOB_CONTENT_CONFIG_VERSION = '2026-11-22.1';
+export const JOB_CONTENT_CONFIG_VERSION = '2026-11-24.1';
 export const JOB_SUBJECTS: Record<string, JobSubjectDef[]> = Object.fromEntries(
   Object.keys(JOB_SUBJECT_SLUGS).map((examSlug) => [examSlug, buildSubjects(examSlug)]),
 );
@@ -159,13 +159,12 @@ export function jobSubjectById(subjectId: string): JobSubjectDef | null {
  * Step 6 guard (handover #4; cf. jobExamSyllabusReady in jobExams.ts):
  * true only when the exam has a defined scope AND a verified subject
  * list. True for the 4 verified exams (BCS, Bank, Primary Teacher,
- * NTRCA — Bank's subject list is verified even though its penalty is
- * provisional, so its patternStatus 'not_verified' is about scoring
- * authority, not about the subjects). False for it-professional
- * (scope_pending, owner decision 13.8), for the 9 other null-config
- * exams (defined scope but no verified subjects), and for unknown
- * slugs. The UI must show an honest empty state wherever this is
- * false — never an invented syllabus.
+ * NTRCA — Bank's penalty is verified 0.25 since 24 Nov 2026, so its
+ * patternStatus is 'verified' like the others). False for
+ * it-professional (scope_pending, owner decision 13.8), for the 9
+ * other null-config exams (defined scope but no verified subjects),
+ * and for unknown slugs. The UI must show an honest empty state
+ * wherever this is false — never an invented syllabus.
  */
 export function jobSubjectSyllabusReady(examSlug: string): boolean {
   return (

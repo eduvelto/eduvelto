@@ -183,7 +183,7 @@ describe('validateContentSeed (Step 6)', () => {
     bad.jobSubjects['bcs__bangla'].configVersion = '2026-11-21.9';
     expect(validateContentSeed(bad)).toEqual(
       expect.arrayContaining([
-        expect.stringMatching(/bcs__bangla.*configVersion '2026-11-21\.9' != seed version '2026-11-22\.1'/),
+        expect.stringMatching(/bcs__bangla.*configVersion '2026-11-21\.9' != seed version '2026-11-24\.1'/),
       ]),
     );
   });
