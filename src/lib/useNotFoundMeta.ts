@@ -16,10 +16,13 @@
 // false the effect does nothing at all.
 
 import { useEffect } from 'react';
+import { useLanguage } from '../i18n/LanguageContext';
 
-const HOME_FALLBACK_TITLE = 'Eduvelto — বাংলাদেশের সেরা ফ্রি শিক্ষা প্ল্যাটফর্ম';
+const HOME_FALLBACK_TITLE_BN = 'Eduvelto — বাংলাদেশের সেরা ফ্রি শিক্ষা প্ল্যাটফর্ম';
+const HOME_FALLBACK_TITLE_EN = "Eduvelto — Bangladesh's Best Free Education Platform";
 
 export function useNotFoundMeta(title: string, active: boolean): void {
+  const { lang } = useLanguage();
   useEffect(() => {
     if (!active) return;
     document.title = title;
@@ -41,7 +44,7 @@ export function useNotFoundMeta(title: string, active: boolean): void {
       } else {
         robots?.setAttribute('content', previous);
       }
-      document.title = HOME_FALLBACK_TITLE;
+      document.title = lang === 'bn' ? HOME_FALLBACK_TITLE_BN : HOME_FALLBACK_TITLE_EN;
     };
-  }, [active, title]);
+  }, [active, title, lang]);
 }
