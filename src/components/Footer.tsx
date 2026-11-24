@@ -151,6 +151,7 @@ export default function Footer() {
           <Link to="/health">{t({ bn: 'স্বাস্থ্য', en: 'Health' })}</Link>
           <Link to="/life">{t({ bn: 'জীবন সেবা', en: 'Life Services' })}</Link>
           <Link to="/ai-teacher">{t({ bn: 'AI Teacher (পরিকল্পনায় আছে)', en: 'AI Teacher (planned)' })}</Link>
+          <Link to="/ai-assistant">{t({ bn: 'AI সহায়ক', en: 'AI Assistant' })}</Link>
         </div>
         <div>
           <h3>{t({ bn: 'আপডেট পান', en: 'Get Updates' })}</h3>

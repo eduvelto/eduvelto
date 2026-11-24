@@ -1,0 +1,11 @@
+name = "eduvelto-ai-proxy"
+main = "src/index.ts"
+compatibility_date = "2026-11-23"
+
+# Free tier: 100,000 requests/day, no card required.
+# The Gemini API key is NEVER written here — set it as a secret:
+#   wrangler secret put GEMINI_API_KEY
+# (then deploy: wrangler deploy)
+
+[vars]
+MODEL = "gemini-2.5-flash"

@@ -168,6 +168,11 @@ const SITEMAP_URLS = [
   '/jobs/career',
   '/jobs/cv',
   '/install',
+  // Added 24 Nov 2026 (AI Life Assistant rebase): /ai-assistant resolves
+  // to real SEO in seo.ts and is listed in sitemap.xml. The health pages
+  // and /ai-teacher are NOT listed here — they are noindexed thin pages
+  // (AdSense F2) and the noindex test below asserts they stay OUT.
+  '/ai-assistant',
 ];
 
 describe('resolveRouteSeo — public routes', () => {
