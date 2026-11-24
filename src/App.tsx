@@ -456,9 +456,9 @@ export default function App() {
         <Route path="/learn" element={<LearnHubPage />} />
         <Route path="/learn/bcs-english-tense" element={<PublicLessonPage lesson="tense" />} />
         <Route path="/learn/bcs-english-preposition" element={<PublicLessonPage lesson="preposition" />} />
-        {/* Brand-SEO wave 1 (24 Nov 2026) + wave 2 (24 Nov 2026):
-            17 public guides — explicit routes, one per guide slug
-            (see PublicGuidePage). */}
+        {/* Brand-SEO wave 1 (24 Nov 2026) + wave 2 (24 Nov 2026) +
+            wave 3 (24 Nov 2026): 23 public guides — explicit routes,
+            one per guide slug (see PublicGuidePage). */}
         <Route path="/learn/bcs-preparation-guide" element={<PublicGuidePage guide="bcs-preparation-guide" />} />
         <Route path="/learn/bank-job-preparation" element={<PublicGuidePage guide="bank-job-preparation" />} />
         <Route path="/learn/primary-teacher-preparation" element={<PublicGuidePage guide="primary-teacher-preparation" />} />
@@ -476,6 +476,12 @@ export default function App() {
         <Route path="/learn/online-safety-guide" element={<PublicGuidePage guide="online-safety-guide" />} />
         <Route path="/learn/bangla-spelling-common-mistakes" element={<PublicGuidePage guide="bangla-spelling-common-mistakes" />} />
         <Route path="/learn/computer-basics-students" element={<PublicGuidePage guide="computer-basics-students" />} />
+        <Route path="/learn/exam-day-strategy" element={<PublicGuidePage guide="exam-day-strategy" />} />
+        <Route path="/learn/mcq-answering-techniques" element={<PublicGuidePage guide="mcq-answering-techniques" />} />
+        <Route path="/learn/memory-techniques-students" element={<PublicGuidePage guide="memory-techniques-students" />} />
+        <Route path="/learn/study-routine-job-seekers" element={<PublicGuidePage guide="study-routine-job-seekers" />} />
+        <Route path="/learn/healthy-habits-students" element={<PublicGuidePage guide="healthy-habits-students" />} />
+        <Route path="/learn/digital-skills-basics" element={<PublicGuidePage guide="digital-skills-basics" />} />
         {/* Global Opportunity Hub (directive §3B): static guide
             routes MUST come before /opportunities/:oppId —
             otherwise '/opportunities/cv-builder' matches

@@ -38,6 +38,10 @@
      time-management-students, english-writing-basics,
      online-safety-guide, bangla-spelling-common-mistakes,
      computer-basics-students).
+     REVISED 24 Nov 2026 (brand-SEO wave 3): 100 URLs — added 6
+     public guides (exam-day-strategy, mcq-answering-techniques,
+     memory-techniques-students, study-routine-job-seekers,
+     healthy-habits-students, digital-skills-basics).
      All URLs carry <lastmod> (audit SEO-007). All URLs are
      canonical eduvelto.com URLs. -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
@@ -313,6 +317,42 @@
   </url>
   <url>
     <loc>https://eduvelto.com/learn/computer-basics-students</loc>
+    <lastmod>2026-11-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/learn/exam-day-strategy</loc>
+    <lastmod>2026-11-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/learn/mcq-answering-techniques</loc>
+    <lastmod>2026-11-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/learn/memory-techniques-students</loc>
+    <lastmod>2026-11-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/learn/study-routine-job-seekers</loc>
+    <lastmod>2026-11-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/learn/healthy-habits-students</loc>
+    <lastmod>2026-11-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/learn/digital-skills-basics</loc>
     <lastmod>2026-11-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>

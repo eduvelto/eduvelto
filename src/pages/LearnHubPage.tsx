@@ -4,7 +4,8 @@
 // 24 Nov 2026 (brand-SEO wave 1): the hub now also lists the 10
 // public guides (src/lib/publicGuides.ts) — same static-data,
 // zero-Firestore pattern as the lessons. EXTENDED 24 Nov 2026
-// (brand-SEO wave 2): 17 guides now. Static data only
+// (brand-SEO wave 2): 17 guides now. EXTENDED 24 Nov 2026
+// (brand-SEO wave 3): 23 guides now. Static data only
 // (publicLessons.ts + publicGuides.ts) — zero Firestore reads, no
 // login. The lessons and guides are drafts awaiting teacher review —
 // the hub says so plainly, and each page carries its own draft label.
@@ -22,8 +23,8 @@ export default function LearnHubPage() {
     <PageShell titleBn="পাঠ ও গাইড" titleEn="Lessons and guides" wide maxWidth={1240}>
       <p style={{ color: '#57616A', margin: '0 0 20px', fontSize: 15, lineHeight: 1.7 }}>
         {t({
-          bn: 'বিনামূল্যে পাঠ ও গাইড — বিসিএস, ব্যাংক, প্রাথমিক শিক্ষক, NTRCA ও জাতীয় বিশ্ববিদ্যালয় ভর্তি প্রস্তুতি, ইংরেজি ব্যাকরণ, বৃত্তি, CV, বাজেট পরিকল্পনা, পুনরালোচনা, নোট, সময় ব্যবস্থাপনা, ইংরেজি লেখা, অনলাইন নিরাপত্তা, বাংলা বানান ও কম্পিউটার। পাঠ ও গাইডগুলো খসড়া হিসেবে দেওয়া আছে; শিক্ষক যাচাইয়ের পর চূড়ান্ত হবে।',
-          en: 'Free lessons and guides — BCS, bank, primary teacher, NTRCA and National University admission preparation, English grammar, scholarships, CV writing, budget planning, revision, note-taking, time management, English writing, online safety, Bangla spelling and computer basics. The lessons and guides are drafts awaiting teacher review.',
+          bn: 'বিনামূল্যে পাঠ ও গাইড — বিসিএস, ব্যাংক, প্রাথমিক শিক্ষক, NTRCA ও জাতীয় বিশ্ববিদ্যালয় ভর্তি প্রস্তুতি, ইংরেজি ব্যাকরণ, বৃত্তি, CV, বাজেট পরিকল্পনা, পুনরালোচনা, নোট, সময় ব্যবস্থাপনা, ইংরেজি লেখা, অনলাইন নিরাপত্তা, বাংলা বানান, কম্পিউটার, পরীক্ষার দিন, MCQ, মনে রাখা, চাকরিপ্রার্থীর রুটিন, সুস্থ অভ্যাস ও ডিজিটাল দক্ষতা। পাঠ ও গাইডগুলো খসড়া হিসেবে দেওয়া আছে; শিক্ষক যাচাইয়ের পর চূড়ান্ত হবে।',
+          en: 'Free lessons and guides — BCS, bank, primary teacher, NTRCA and National University admission preparation, English grammar, scholarships, CV writing, budget planning, revision, note-taking, time management, English writing, online safety, Bangla spelling, computer basics, exam day, MCQ techniques, memory techniques, job-seeker routine, healthy habits and digital skills. The lessons and guides are drafts awaiting teacher review.',
         })}
       </p>
 

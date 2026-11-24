@@ -1,8 +1,9 @@
 // Eduvelto — public guides unit tests (24 Nov 2026, brand-SEO wave 1;
-// EXTENDED 24 Nov 2026, brand-SEO wave 2: 17 guides).
+// EXTENDED 24 Nov 2026, brand-SEO wave 2: 17 guides;
+// EXTENDED 24 Nov 2026, brand-SEO wave 3: 23 guides).
 //
-// The 17 guides are static public data, so the tests guard what
-// matters most: exactly 17 guides with unique slugs/paths, 400–700
+// The 23 guides are static public data, so the tests guard what
+// matters most: exactly 23 guides with unique slugs/paths, 400–700
 // words each (pinned to the content pack's counts), every internal
 // link pointing at a real route, the draft status never claimed as
 // verified/approved, and nothing from the pack's "Unverified — do
@@ -32,6 +33,13 @@ const EXPECTED_WORD_COUNTS: Record<string, number> = {
   'online-safety-guide': 413,
   'bangla-spelling-common-mistakes': 406,
   'computer-basics-students': 420,
+  // Brand-SEO wave 3 (24 Nov 2026): 6 new guides.
+  'exam-day-strategy': 543,
+  'mcq-answering-techniques': 487,
+  'memory-techniques-students': 511,
+  'study-routine-job-seekers': 470,
+  'healthy-habits-students': 445,
+  'digital-skills-basics': 486,
 };
 
 const REAL_ROUTES = new Set([
@@ -58,14 +66,21 @@ const REAL_ROUTES = new Set([
   '/learn/bangla-spelling-common-mistakes',
   '/learn/computer-basics-students',
   '/life/planner',
+  // Brand-SEO wave 3 (24 Nov 2026): 6 new guide paths.
+  '/learn/exam-day-strategy',
+  '/learn/mcq-answering-techniques',
+  '/learn/memory-techniques-students',
+  '/learn/study-routine-job-seekers',
+  '/learn/healthy-habits-students',
+  '/learn/digital-skills-basics',
 ]);
 
 describe('public guides', () => {
-  it('has exactly the 17 guides, with unique slugs, paths and titles', () => {
-    expect(PUBLIC_GUIDES).toHaveLength(17);
-    expect(new Set(PUBLIC_GUIDES.map((g) => g.slug)).size).toBe(17);
-    expect(new Set(PUBLIC_GUIDES.map((g) => g.path)).size).toBe(17);
-    expect(new Set(PUBLIC_GUIDES.map((g) => g.titleBn)).size).toBe(17);
+  it('has exactly the 23 guides, with unique slugs, paths and titles', () => {
+    expect(PUBLIC_GUIDES).toHaveLength(23);
+    expect(new Set(PUBLIC_GUIDES.map((g) => g.slug)).size).toBe(23);
+    expect(new Set(PUBLIC_GUIDES.map((g) => g.path)).size).toBe(23);
+    expect(new Set(PUBLIC_GUIDES.map((g) => g.titleBn)).size).toBe(23);
     for (const g of PUBLIC_GUIDES) {
       expect(g.path).toBe(`/learn/${g.slug}`);
       expect(publicGuideBySlug(g.slug)).toBe(g);
@@ -157,5 +172,31 @@ describe('public guides', () => {
       expect(g.titleEn, slug).not.toMatch(/best/i);
     }
     expect(publicGuideBySlug('viva-preparation-guide')).toBeUndefined();
+  });
+
+  it('wave-3 guides are general advice — no invented dates, years or fees', () => {
+    // Brand-SEO wave 3 (24 Nov 2026): the 6 new guides were written
+    // as general advice with no verifiable-facts claims, so they must
+    // contain no year (২০২x), no money (টাকা) and no superlative.
+    // Money management was SKIPPED, not written: /learn/budget-planner-guide
+    // already covers student budgeting and /life/budget is the budget tool.
+    const wave3 = [
+      'exam-day-strategy',
+      'mcq-answering-techniques',
+      'memory-techniques-students',
+      'study-routine-job-seekers',
+      'healthy-habits-students',
+      'digital-skills-basics',
+    ];
+    expect(wave3.length).toBe(6);
+    for (const slug of wave3) {
+      const g = publicGuideBySlug(slug)!;
+      const text = g.bodyBn.join(' ');
+      expect(text, `${slug} year`).not.toMatch(/২০২\d/);
+      expect(text, `${slug} fee`).not.toContain('টাকা');
+      expect(text, `${slug} superlative`).not.toContain('সেরা');
+      expect(g.titleEn, slug).not.toMatch(/best/i);
+    }
+    expect(publicGuideBySlug('money-management-students')).toBeUndefined();
   });
 });

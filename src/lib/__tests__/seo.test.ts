@@ -146,6 +146,13 @@ const SITEMAP_URLS = [
   '/learn/online-safety-guide',
   '/learn/bangla-spelling-common-mistakes',
   '/learn/computer-basics-students',
+  // Brand-SEO wave 3 (24 Nov 2026): 6 more public guides.
+  '/learn/exam-day-strategy',
+  '/learn/mcq-answering-techniques',
+  '/learn/memory-techniques-students',
+  '/learn/study-routine-job-seekers',
+  '/learn/healthy-habits-students',
+  '/learn/digital-skills-basics',
   '/learn',
   '/admissions',
   '/admissions/national-university',
@@ -970,7 +977,7 @@ describe('resolveRouteSeo — SEO pass 24 Nov 2026 (owner order "SEO korba ajk 1
     }
   });
 
-  it('/learn hub emits an ItemList of its 17 guides + 2 lessons + the practice hub', () => {
+  it('/learn hub emits an ItemList of its 23 guides + 2 lessons + the practice hub', () => {
     const seo = resolveRouteSeo('/learn')!;
     const items = itemListOf(seo)['itemListElement'] as Array<Record<string, unknown>>;
     expect(items.map((i) => i['url'])).toEqual([
@@ -991,6 +998,12 @@ describe('resolveRouteSeo — SEO pass 24 Nov 2026 (owner order "SEO korba ajk 1
       `${SITE_URL}/learn/online-safety-guide`,
       `${SITE_URL}/learn/bangla-spelling-common-mistakes`,
       `${SITE_URL}/learn/computer-basics-students`,
+      `${SITE_URL}/learn/exam-day-strategy`,
+      `${SITE_URL}/learn/mcq-answering-techniques`,
+      `${SITE_URL}/learn/memory-techniques-students`,
+      `${SITE_URL}/learn/study-routine-job-seekers`,
+      `${SITE_URL}/learn/healthy-habits-students`,
+      `${SITE_URL}/learn/digital-skills-basics`,
       `${SITE_URL}/learn/bcs-english-tense`,
       `${SITE_URL}/learn/bcs-english-preposition`,
       `${SITE_URL}/jobs/bcs/practice/english`,
@@ -1100,8 +1113,8 @@ describe('resolveRouteSeo — brand-SEO wave 1 (24 Nov 2026)', () => {
     }
   });
 
-  it('all 17 guides resolve with draft wording and Article JSON-LD', () => {
-    expect(PUBLIC_GUIDES).toHaveLength(17);
+  it('all 23 guides resolve with draft wording and Article JSON-LD', () => {
+    expect(PUBLIC_GUIDES).toHaveLength(23);
     for (const guide of PUBLIC_GUIDES) {
       const seo = resolveRouteSeo(guide.path);
       expect(seo, `no SEO for ${guide.path}`).not.toBeNull();
@@ -1279,8 +1292,8 @@ describe('resolveRouteSeo — English SEO (24 Nov 2026, language system)', () =>
 });
 
 describe('resolveRouteSeo — brand-SEO wave 2 (24 Nov 2026)', () => {
-  it('sitemap has 94 URLs (87 wave-1 + 7 new guides)', () => {
-    expect(SITEMAP_URLS.length).toBe(94);
+  it('sitemap has 100 URLs (94 wave-2 + 6 wave-3 guides)', () => {
+    expect(SITEMAP_URLS.length).toBe(100);
   });
 
   it('English home title drops "Best"; Bangla title is unchanged', () => {
@@ -1347,6 +1360,52 @@ describe('resolveRouteSeo — brand-SEO wave 2 (24 Nov 2026)', () => {
       { path: '/learn/computer-basics-students', crumbBn: 'কম্পিউটারের মৌলিক ধারণা', crumbEn: 'Computer Basics' },
     ];
     for (const { path, crumbBn, crumbEn } of wave2) {
+      const seo = resolveRouteSeo(path);
+      expect(seo, `no SEO for ${path}`).not.toBeNull();
+      expect(seo!.description, path).toContain('খসড়া পাঠ');
+      expect(seo!.description, path).toContain('শিক্ষক যাচাইয়ের অপেক্ষায়');
+      expect(seo!.description, path).not.toContain('যাচাইকৃত');
+      expect(seo!.robots, path).toBeUndefined();
+      expect(jsonLdTypes(seo!)).toContain('Article');
+      const article = (seo!.jsonLd as Array<Record<string, unknown>>).find(
+        (o) => o['@type'] === 'Article',
+      )!;
+      expect(article['headline']).toBe(seo!.title);
+      expect(article['datePublished']).toBe('2026-11-24');
+      expect(article['inLanguage']).toBe('bn');
+      expect(breadcrumbNames(seo!)).toEqual(['হোম', 'পাঠ', crumbBn]);
+      const en = resolveRouteSeo(path, 'en')!;
+      expect(en.title, path).not.toMatch(/best/i);
+      expect(en.description, path).toContain('awaiting teacher review');
+      expect(breadcrumbNames(en)).toEqual(['Home', 'Lessons', crumbEn]);
+    }
+  });
+});
+
+describe('resolveRouteSeo — brand-SEO wave 3 (24 Nov 2026)', () => {
+  it('all 6 wave-3 guide URLs are in the sitemap list', () => {
+    for (const path of [
+      '/learn/exam-day-strategy',
+      '/learn/mcq-answering-techniques',
+      '/learn/memory-techniques-students',
+      '/learn/study-routine-job-seekers',
+      '/learn/healthy-habits-students',
+      '/learn/digital-skills-basics',
+    ]) {
+      expect(SITEMAP_URLS, path).toContain(path);
+    }
+  });
+
+  it('the 6 wave-3 guides resolve with draft wording, Article JSON-LD and real breadcrumbs', () => {
+    const wave3: Array<{ path: string; crumbBn: string; crumbEn: string }> = [
+      { path: '/learn/exam-day-strategy', crumbBn: 'পরীক্ষার দিনের কৌশল', crumbEn: 'Exam Day Strategy' },
+      { path: '/learn/mcq-answering-techniques', crumbBn: 'MCQ উত্তর দেওয়ার কৌশল', crumbEn: 'MCQ Answering Techniques' },
+      { path: '/learn/memory-techniques-students', crumbBn: 'মনে রাখার কৌশল', crumbEn: 'Memory Techniques' },
+      { path: '/learn/study-routine-job-seekers', crumbBn: 'চাকরিপ্রার্থীদের রুটিন', crumbEn: 'Job Seeker Routine' },
+      { path: '/learn/healthy-habits-students', crumbBn: 'সুস্থ অভ্যাস', crumbEn: 'Healthy Habits' },
+      { path: '/learn/digital-skills-basics', crumbBn: 'ডিজিটাল দক্ষতা', crumbEn: 'Digital Skills' },
+    ];
+    for (const { path, crumbBn, crumbEn } of wave3) {
       const seo = resolveRouteSeo(path);
       expect(seo, `no SEO for ${path}`).not.toBeNull();
       expect(seo!.description, path).toContain('খসড়া পাঠ');

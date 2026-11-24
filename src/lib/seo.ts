@@ -886,16 +886,16 @@ const STATIC_ROUTES: Record<string, RouteSeoEntry> = {
   '/learn': {
     title: 'পাঠ ও গাইড — ফ্রি প্রস্তুতি | Eduvelto',
     description:
-      'ফ্রি পাঠ ও গাইড — BCS, ব্যাংক, NTRCA, ভর্তি, ব্যাকরণ, বৃত্তি, CV, বাজেট, পুনরালোচনা, নোট, সময় ব্যবস্থাপনা, ইংরেজি লেখা, অনলাইন নিরাপত্তা, বাংলা বানান ও কম্পিউটার। খসড়া পাঠ, শিক্ষক যাচাইয়ের অপেক্ষায়; বিসিএস ইংরেজি — ৩৫টি যাচাইকৃত প্রশ্ন।',
+      'ফ্রি পাঠ ও গাইড — BCS, ব্যাংক, NTRCA, ভর্তি, ব্যাকরণ, বৃত্তি, CV, বাজেট, পুনরালোচনা, নোট, সময় ব্যবস্থাপনা, ইংরেজি লেখা, অনলাইন নিরাপত্তা, বাংলা বানান, কম্পিউটার, পরীক্ষার দিন, MCQ, মনে রাখা, চাকরিপ্রার্থীর রুটিন, সুস্থ অভ্যাস ও ডিজিটাল দক্ষতা। খসড়া পাঠ, শিক্ষক যাচাইয়ের অপেক্ষায়; বিসিএস ইংরেজি — ৩৫টি যাচাইকৃত প্রশ্ন।',
     crumb: 'পাঠ',
     titleEn: 'Lessons & Guides — Free Preparation | Eduvelto',
     descriptionEn:
-      'Free lessons and guides — BCS, bank, primary teacher, NTRCA and National University admission preparation, English grammar, scholarships, CV and budget planning, revision, note-taking, time management, English writing, online safety, Bangla spelling and computer basics — draft lessons awaiting teacher review; BCS English practice — 35 verified questions. Eduvelto.',
+      'Free lessons and guides — BCS, bank, primary teacher, NTRCA and National University admission preparation, English grammar, scholarships, CV and budget planning, revision, note-taking, time management, English writing, online safety, Bangla spelling, computer basics, exam day, MCQ techniques, memory techniques, job-seeker routine, healthy habits and digital skills — draft lessons awaiting teacher review; BCS English practice — 35 verified questions. Eduvelto.',
     crumbEn: 'Lessons',
   },
-  // Public guides (24 Nov 2026, brand-SEO wave 1; EXTENDED wave 2:
-  // 17 original static guides, no login, zero Firestore reads (see
-  // src/lib/publicGuides.ts). Every guide is a draft awaiting
+  // Public guides (24 Nov 2026, brand-SEO wave 1; EXTENDED wave 2
+  // and wave 3: 23 original static guides, no login, zero Firestore
+  // reads (see src/lib/publicGuides.ts). Every guide is a draft awaiting
   // teacher review — the description says so plainly, like the two
   // BCS English lessons above; never "যাচাইকৃত"/"অনুমোদিত".
   '/learn/bcs-preparation-guide': {
@@ -1071,6 +1071,72 @@ const STATIC_ROUTES: Record<string, RouteSeoEntry> = {
     descriptionEn:
       'Computer and internet basics for students — files and folders, word processing, browsers, email and looking after your body, in Eduvelto’s free guide. Draft lesson — awaiting teacher review.',
     crumbEn: 'Computer Basics',
+  },
+  // Public guides, wave 3 (24 Nov 2026, brand-SEO wave 3): 6 more
+  // original static guides — exam day, MCQ techniques, memory
+  // techniques, job-seeker routine, healthy habits and digital
+  // skills. Same draft treatment as waves 1–2. Money management
+  // was SKIPPED: /learn/budget-planner-guide already covers student
+  // budgeting and /life/budget is the budget tool.
+  '/learn/exam-day-strategy': {
+    title: 'পরীক্ষার দিনের কৌশল | Eduvelto',
+    description:
+      'পরীক্ষার দিন কী করবেন — আগের রাতের প্রস্তুতি, সকালের পরিকল্পনা, হলে গিয়ে শুরু করা ও উত্তর দেওয়ার নিয়ম নিয়ে Eduvelto-র ফ্রি গাইড। খসড়া পাঠ — শিক্ষক যাচাইয়ের অপেক্ষায়।',
+    crumb: 'পরীক্ষার দিনের কৌশল',
+    titleEn: 'Exam Day Strategy | Eduvelto',
+    descriptionEn:
+      'What to do on exam day — the night-before preparation, the morning plan, starting in the hall and answering rules, in Eduvelto’s free guide. Draft lesson — awaiting teacher review.',
+    crumbEn: 'Exam Day Strategy',
+  },
+  '/learn/mcq-answering-techniques': {
+    title: 'MCQ উত্তর দেওয়ার কৌশল | Eduvelto',
+    description:
+      'MCQ প্রশ্নের উত্তর দেওয়ার কৌশল — পুরো প্রশ্ন পড়া, সব অপশন দেখা, ভুল অপশন বাদ দেওয়া ও সময়ের হিসাব নিয়ে Eduvelto-র ফ্রি গাইড। খসড়া পাঠ — শিক্ষক যাচাইয়ের অপেক্ষায়।',
+    crumb: 'MCQ উত্তর দেওয়ার কৌশল',
+    titleEn: 'MCQ Answering Techniques | Eduvelto',
+    descriptionEn:
+      'Techniques for answering MCQ questions — reading the full question, checking every option, eliminating wrong options and managing time, in Eduvelto’s free guide. Draft lesson — awaiting teacher review.',
+    crumbEn: 'MCQ Answering Techniques',
+  },
+  '/learn/memory-techniques-students': {
+    title: 'মনে রাখার কৌশল | Eduvelto',
+    description:
+      'পড়া মনে রাখার কৌশল — বুঝে পড়া, সংযোগ তৈরি করা, নিজেকে যাচাই করা, নির্দিষ্ট সময় পর পর ঝালিয়ে নেওয়া ও অন্যকে শেখানো নিয়ে Eduvelto-র ফ্রি গাইড। খসড়া পাঠ — শিক্ষক যাচাইয়ের অপেক্ষায়।',
+    crumb: 'মনে রাখার কৌশল',
+    titleEn: 'Memory Techniques for Students | Eduvelto',
+    descriptionEn:
+      'Techniques for remembering what you study — understanding first, making connections, self-testing, spaced review and teaching others, in Eduvelto’s free guide. Draft lesson — awaiting teacher review.',
+    crumbEn: 'Memory Techniques',
+  },
+  '/learn/study-routine-job-seekers': {
+    title: 'চাকরিপ্রার্থীদের পড়ার রুটিন | Eduvelto',
+    description:
+      'চাকরিপ্রার্থীদের পড়ার রুটিন — কাজের পাশে পড়ার সময় বের করা, সপ্তাহের পরিকল্পনা, দুর্বল বিষয় ও প্রশ্ন সমাধান নিয়ে Eduvelto-র ফ্রি গাইড। খসড়া পাঠ — শিক্ষক যাচাইয়ের অপেক্ষায়।',
+    crumb: 'চাকরিপ্রার্থীদের রুটিন',
+    titleEn: 'Study Routine for Job Seekers | Eduvelto',
+    descriptionEn:
+      'A study routine for job seekers — finding study time beside work, a weekly plan, weak subjects and question practice, in Eduvelto’s free guide. Draft lesson — awaiting teacher review.',
+    crumbEn: 'Job Seeker Routine',
+  },
+  '/learn/healthy-habits-students': {
+    title: 'শিক্ষার্থীদের সুস্থ অভ্যাস | Eduvelto',
+    description:
+      'শিক্ষার্থীদের সুস্থ অভ্যাস — নিয়মিত ঘুম, খাওয়া, নড়াচড়া, চোখের যত্ন, ফোনের সময় নিয়ন্ত্রণ ও মনের চাপ সামলানো নিয়ে Eduvelto-র ফ্রি গাইড। খসড়া পাঠ — শিক্ষক যাচাইয়ের অপেক্ষায়।',
+    crumb: 'সুস্থ অভ্যাস',
+    titleEn: 'Healthy Habits for Students | Eduvelto',
+    descriptionEn:
+      'Healthy habits for students — regular sleep, meals, movement, eye care, controlling phone time and handling stress, in Eduvelto’s free guide. Draft lesson — awaiting teacher review.',
+    crumbEn: 'Healthy Habits',
+  },
+  '/learn/digital-skills-basics': {
+    title: 'ডিজিটাল দক্ষতার মৌলিক ধারণা | Eduvelto',
+    description:
+      'ডিজিটাল দক্ষতার মৌলিক ধারণা — টাইপ করা, লেখালেখি, স্প্রেডশিটে হিসাব, তথ্য খোঁজা, ইমেইল ও অনলাইনে ফরম পূরণ নিয়ে Eduvelto-র ফ্রি গাইড। খসড়া পাঠ — শিক্ষক যাচাইয়ের অপেক্ষায়।',
+    crumb: 'ডিজিটাল দক্ষতা',
+    titleEn: 'Digital Skills Basics for Students | Eduvelto',
+    descriptionEn:
+      'Digital skills basics for students — typing, word processing, spreadsheets, searching for information, email and filling in online forms, in Eduvelto’s free guide. Draft lesson — awaiting teacher review.',
+    crumbEn: 'Digital Skills',
   },
 };
 
@@ -1550,10 +1616,10 @@ export function resolveRouteSeo(pathname: string, lang: 'bn' | 'en' = 'bn'): Seo
     });
   }
   if (path === '/learn') {
-    // ItemList (24 Nov 2026, SEO pass; EXTENDED brand-SEO wave 1
-    // and wave 2): the hub lists the 17 public guides, the two real
-    // lessons and the BCS English practice hub — the same links the
-    // page renders, in the same order.
+    // ItemList (24 Nov 2026, SEO pass; EXTENDED brand-SEO wave 1,
+    // wave 2 and wave 3): the hub lists the 23 public guides, the
+    // two real lessons and the BCS English practice hub — the same
+    // links the page renders, in the same order.
     jsonLd.push({
       '@context': 'https://schema.org',
       '@type': 'ItemList',
@@ -1664,18 +1730,54 @@ export function resolveRouteSeo(pathname: string, lang: 'bn' | 'en' = 'bn'): Seo
         {
           '@type': 'ListItem',
           position: 18,
+          name: lang === 'bn' ? 'পরীক্ষার দিনের কৌশল' : 'Exam Day Strategy',
+          url: `${SITE_URL}/learn/exam-day-strategy`,
+        },
+        {
+          '@type': 'ListItem',
+          position: 19,
+          name: lang === 'bn' ? 'MCQ উত্তর দেওয়ার কৌশল' : 'MCQ Answering Techniques',
+          url: `${SITE_URL}/learn/mcq-answering-techniques`,
+        },
+        {
+          '@type': 'ListItem',
+          position: 20,
+          name: lang === 'bn' ? 'মনে রাখার কৌশল' : 'Memory Techniques for Students',
+          url: `${SITE_URL}/learn/memory-techniques-students`,
+        },
+        {
+          '@type': 'ListItem',
+          position: 21,
+          name: lang === 'bn' ? 'চাকরিপ্রার্থীদের পড়ার রুটিন' : 'Study Routine for Job Seekers',
+          url: `${SITE_URL}/learn/study-routine-job-seekers`,
+        },
+        {
+          '@type': 'ListItem',
+          position: 22,
+          name: lang === 'bn' ? 'শিক্ষার্থীদের সুস্থ অভ্যাস' : 'Healthy Habits for Students',
+          url: `${SITE_URL}/learn/healthy-habits-students`,
+        },
+        {
+          '@type': 'ListItem',
+          position: 23,
+          name: lang === 'bn' ? 'ডিজিটাল দক্ষতার মৌলিক ধারণা' : 'Digital Skills Basics for Students',
+          url: `${SITE_URL}/learn/digital-skills-basics`,
+        },
+        {
+          '@type': 'ListItem',
+          position: 24,
           name: lang === 'bn' ? 'টেন্স — পাঠ' : 'Tense — Lesson',
           url: `${SITE_URL}/learn/bcs-english-tense`,
         },
         {
           '@type': 'ListItem',
-          position: 19,
+          position: 25,
           name: lang === 'bn' ? 'প্রিপোজিশন — পাঠ' : 'Preposition — Lesson',
           url: `${SITE_URL}/learn/bcs-english-preposition`,
         },
         {
           '@type': 'ListItem',
-          position: 20,
+          position: 26,
           name: lang === 'bn' ? 'বিসিএস ইংরেজি অনুশীলন' : 'BCS English Practice',
           url: `${SITE_URL}/jobs/bcs/practice/english`,
         },
@@ -1720,8 +1822,8 @@ export function resolveRouteSeo(pathname: string, lang: 'bn' | 'en' = 'bn'): Seo
     });
   }
   if (PUBLIC_GUIDES.some((g) => g.path === path)) {
-    // Article (24 Nov 2026, brand-SEO wave 1; wave 2 keeps the
-    // same date — the 17 guides are article-length drafts awaiting
+    // Article (24 Nov 2026, brand-SEO wave 1; waves 2–3 keep the
+    // same date — the 23 guides are article-length drafts awaiting
     // teacher review, published 24 Nov 2026. Never claims review.
     jsonLd.push({
       '@context': 'https://schema.org',
