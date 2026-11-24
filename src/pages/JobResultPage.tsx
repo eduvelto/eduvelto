@@ -26,22 +26,28 @@
 // above is superseded: /jobs/wrong-answers/practice/:topicId
 // now runs a real subset session.
 //
-// LANGUAGE: all UI text is Bangla (one-language rule).
+// LANGUAGE: bilingual Bangla + English (24 Nov 2026 language system).
+// Translations use `tr` (not `t`) because the TopicStat callbacks
+// below already use `t` as their loop variable.
 
 import { useEffect, useState } from 'react';
 import { Link, useLocation, useParams, useSearchParams } from 'react-router-dom';
 import { PageShell } from '../components/PageShell';
 import { AlertBox, Card, LinkButton, ProgressBar, Skeleton } from '../components/ui';
 import { useAuth } from '../lib/auth';
-import { JOB_PRACTICE_RESULT_LABEL, jobTopicLabelBn } from '../lib/jobEngine';
+import { useLanguage } from '../i18n/LanguageContext';
+import { JOB_PRACTICE_RESULT_LABEL, JOB_PRACTICE_RESULT_LABEL_EN, jobTopicLabel } from '../lib/jobEngine';
 import {
   ANSWER_TIME_BUCKET_BN,
+  ANSWER_TIME_BUCKET_EN,
   TOPIC_ACTION_BADGE_BN,
+  TOPIC_ACTION_BADGE_EN,
   TOPIC_LEVEL_BN,
+  TOPIC_LEVEL_EN,
   attemptSummaryFromStored,
   classifyAnswerTime,
   correctVsWrongTime,
-  formatDurationBn,
+  formatDuration,
   isSlowAnswer,
   negativeMarkingExplanation,
   perSubjectTime,
@@ -84,6 +90,7 @@ const MUTED = '#68747B';
 
 export default function JobResultPage() {
   const { attemptId = '' } = useParams<{ attemptId: string }>();
+  const { t: tr, lang } = useLanguage();
   const [searchParams] = useSearchParams();
   const location = useLocation();
   const { user, profile } = useAuth();
@@ -168,7 +175,7 @@ export default function JobResultPage() {
 
   if (loading) {
     return (
-      <PageShell titleBn="ফলাফল" titleEn="ফলাফল" wide>
+      <PageShell titleBn="ফলাফল" titleEn="Result" wide>
         <Skeleton />
       </PageShell>
     );
@@ -176,13 +183,13 @@ export default function JobResultPage() {
 
   if (!user) {
     return (
-      <PageShell titleBn="ফলাফল" titleEn="ফলাফল" wide>
+      <PageShell titleBn="ফলাফল" titleEn="Result" wide>
         <Card>
-          <div style={{ fontWeight: 700, color: '#142B3B', fontSize: 17 }}>ফলাফল দেখতে লগইন করুন</div>
+          <div style={{ fontWeight: 700, color: '#142B3B', fontSize: 17 }}>{tr({ bn: 'ফলাফল দেখতে লগইন করুন', en: 'Log in to see the result' })}</div>
           <p style={{ margin: '8px 0 12px', color: MUTED, fontSize: 14, lineHeight: 1.7 }}>
-            ফলাফল শুধু লগইন করা শিক্ষার্থীরা দেখতে পারে।
+            {tr({ bn: 'ফলাফল শুধু লগইন করা শিক্ষার্থীরা দেখতে পারে।', en: 'Only logged-in students can see results.' })}
           </p>
-          <Link to="/login" style={{ fontWeight: 600 }}>লগইন করুন →</Link>
+          <Link to="/login" style={{ fontWeight: 600 }}>{tr({ bn: 'লগইন করুন →', en: 'Log in →' })}</Link>
         </Card>
       </PageShell>
     );
@@ -190,10 +197,10 @@ export default function JobResultPage() {
 
   if (notFound || !attempt) {
     return (
-      <PageShell titleBn="ফলাফল" titleEn="ফলাফল" wide>
-        <AlertBox tone="error">এই ফলাফলটি পাওয়া যায়নি — হয় ঠিকানাটি ভুল, নয় এটি আপনার ফলাফল নয়।</AlertBox>
+      <PageShell titleBn="ফলাফল" titleEn="Result" wide>
+        <AlertBox tone="error">{tr({ bn: 'এই ফলাফলটি পাওয়া যায়নি — হয় ঠিকানাটি ভুল, নয় এটি আপনার ফলাফল নয়।', en: 'This result was not found — either the address is wrong, or this is not your result.' })}</AlertBox>
         <p style={{ marginTop: 16 }}>
-          <Link to="/jobs" style={{ fontWeight: 600 }}>← সব পরীক্ষা দেখুন</Link>
+          <Link to="/jobs" style={{ fontWeight: 600 }}>{tr({ bn: '← সব পরীক্ষা দেখুন', en: '← See all exams' })}</Link>
         </p>
       </PageShell>
     );
@@ -233,7 +240,7 @@ export default function JobResultPage() {
   // of the key) — per-topic accuracy/time, the negative-marking
   // formula, and the weak-topic practice links.
   const summary = attemptSummaryFromStored(attemptId, attempt);
-  const marking = negativeMarkingExplanation(summary);
+  const marking = negativeMarkingExplanation(summary, lang);
   const topicStats = perTopicAccuracy(answers);
   const subjectTimes = perSubjectTime(answers);
   const cwTime = correctVsWrongTime(answers);
@@ -275,7 +282,7 @@ export default function JobResultPage() {
     const q: JobBundleQuestion | undefined = bundle
       ? jobBundleQuestionById(bundle.questions, a.questionId)
       : undefined;
-    return q?.questionText ?? `প্রশ্ন ${a.n}`;
+    return q?.questionText ?? (lang === 'bn' ? `প্রশ্ন ${a.n}` : `Question ${a.n}`);
   };
 
   const markedSet = new Set<number>();
@@ -306,43 +313,43 @@ export default function JobResultPage() {
   );
 
   return (
-    <PageShell titleBn="ফলাফল" titleEn="ফলাফল" wide maxWidth={1240}>
+    <PageShell titleBn="ফলাফল" titleEn="Result" wide maxWidth={1240}>
       {/* BINDING label — every result page carries it. */}
-      <AlertBox tone="info">{JOB_PRACTICE_RESULT_LABEL}</AlertBox>
+      <AlertBox tone="info">{lang === 'bn' ? JOB_PRACTICE_RESULT_LABEL : JOB_PRACTICE_RESULT_LABEL_EN}</AlertBox>
 
       {/* Step 13: just cleared from the wrong-answer notebook. */}
       {fromWrongAnswers && clearedCount > 0 ? (
         <AlertBox tone="ok">
-          নোটবুক থেকে সরানো হয়েছে — {clearedCount}টি প্রশ্ন পরপর ২ বার সঠিক হয়েছে।{' '}
+          {tr({ bn: `নোটবুক থেকে সরানো হয়েছে — ${clearedCount}টি প্রশ্ন পরপর ২ বার সঠিক হয়েছে।`, en: `${clearedCount} question(s) cleared from the notebook — correct twice in a row.` })}{' '}
           <Link to="/jobs/wrong-answers" style={{ fontWeight: 700 }}>
-            ভুল-উত্তর নোটবুক দেখুন →
+            {tr({ bn: 'ভুল-উত্তর নোটবুক দেখুন →', en: 'See the wrong-answer notebook →' })}
           </Link>
         </AlertBox>
       ) : null}
 
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: 16, marginTop: 16, alignItems: 'start' }}>
         <Card>
-          <div style={{ fontWeight: 700, color: '#142B3B', fontSize: 17 }}>সারাংশ</div>
+          <div style={{ fontWeight: 700, color: '#142B3B', fontSize: 17 }}>{tr({ bn: 'সারাংশ', en: 'Summary' })}</div>
           <div style={{ fontSize: 34, fontWeight: 800, color: '#142B3B', marginTop: 8 }}>
             {score}
-            <span style={{ fontSize: 16, color: MUTED, fontWeight: 600 }}> / {totalMarks} নম্বর</span>
+            <span style={{ fontSize: 16, color: MUTED, fontWeight: 600 }}> / {totalMarks} {tr({ bn: 'নম্বর', en: 'marks' })}</span>
           </div>
           <div style={{ marginTop: 8 }}>
             <ProgressBar value={displayPercentage} />
             <div style={{ fontSize: 13, color: MUTED, marginTop: 4 }}>{displayPercentage}%</div>
           </div>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8, marginTop: 12, fontSize: 14 }}>
-            <div><span style={{ color: CORRECT, fontWeight: 700 }}>✓ সঠিক:</span> {correctCount}টি</div>
-            <div><span style={{ color: WRONG, fontWeight: 700 }}>✗ ভুল:</span> {wrongCount}টি</div>
-            <div><span style={{ color: MUTED, fontWeight: 700 }}>○ উত্তর দেওয়া হয়নি:</span> {unansweredCount}টি</div>
-            <div><span style={{ fontWeight: 700 }}>নির্ভুলতা:</span> {accuracy}%</div>
+            <div><span style={{ color: CORRECT, fontWeight: 700 }}>✓ {tr({ bn: 'সঠিক:', en: 'Correct:' })}</span> {correctCount}{lang === 'bn' ? 'টি' : ''}</div>
+            <div><span style={{ color: WRONG, fontWeight: 700 }}>✗ {tr({ bn: 'ভুল:', en: 'Wrong:' })}</span> {wrongCount}{lang === 'bn' ? 'টি' : ''}</div>
+            <div><span style={{ color: MUTED, fontWeight: 700 }}>○ {tr({ bn: 'উত্তর দেওয়া হয়নি:', en: 'Unanswered:' })}</span> {unansweredCount}{lang === 'bn' ? 'টি' : ''}</div>
+            <div><span style={{ fontWeight: 700 }}>{tr({ bn: 'নির্ভুলতা:', en: 'Accuracy:' })}</span> {accuracy}%</div>
             {negativeMarkingDisabled ? (
-              <div><span style={{ fontWeight: 700 }}>নেগেটিভ মার্কিং:</span> বন্ধ — বিজ্ঞপ্তি যাচাই বাকি</div>
+              <div><span style={{ fontWeight: 700 }}>{tr({ bn: 'নেগেটিভ মার্কিং:', en: 'Negative marking:' })}</span> {tr({ bn: 'বন্ধ — বিজ্ঞপ্তি যাচাই বাকি', en: 'Off — notice verification pending' })}</div>
             ) : (
-              <div><span style={{ fontWeight: 700 }}>নেগেটিভ মার্কিংয়ে কাটা:</span> −{negativeDeduction}</div>
+              <div><span style={{ fontWeight: 700 }}>{tr({ bn: 'নেগেটিভ মার্কিংয়ে কাটা:', en: 'Deducted for negative marking:' })}</span> −{negativeDeduction}</div>
             )}
-            <div><span style={{ fontWeight: 700 }}>সময়:</span> {formatDurationBn(timeSpentSeconds)}{mockAllowedMinutes !== null ? ` (নির্ধারিত ${mockAllowedMinutes} মিনিট)` : ''}</div>
-            <div><span style={{ fontWeight: 700 }}>প্রশ্ন:</span> {answers.length}টি</div>
+            <div><span style={{ fontWeight: 700 }}>{tr({ bn: 'সময়:', en: 'Time:' })}</span> {formatDuration(timeSpentSeconds, lang)}{mockAllowedMinutes !== null ? (lang === 'bn' ? ` (নির্ধারিত ${mockAllowedMinutes} মিনিট)` : ` (allowed ${mockAllowedMinutes} min)`) : ''}</div>
+            <div><span style={{ fontWeight: 700 }}>{tr({ bn: 'প্রশ্ন:', en: 'Questions:' })}</span> {answers.length}{lang === 'bn' ? 'টি' : ''}</div>
           </div>
           {/* Step 10: score breakdown — the formula in plain
               Bangla + what the wrong answers actually cost
@@ -350,20 +357,20 @@ export default function JobResultPage() {
               question count, marking rule and time taken sit
               with it. */}
           <div style={{ marginTop: 12, background: '#F4F7FA', borderRadius: 8, padding: '10px 12px', fontSize: 14, lineHeight: 1.8 }}>
-            <div style={{ fontWeight: 700, color: '#142B3B' }}>নম্বর ভাঙন</div>
+            <div style={{ fontWeight: 700, color: '#142B3B' }}>{tr({ bn: 'নম্বর ভাঙন', en: 'Score breakdown' })}</div>
             <div>{marking.formula}</div>
             {marking.costLine ? <div style={{ color: WRONG, fontWeight: 600 }}>{marking.costLine}</div> : null}
             {/* ChatGPT §1: never show one percentage unexplained —
                 the marks % is after negative marking; the accuracy
                 % is correct ÷ attempted. */}
             <div style={{ color: MUTED }}>
-              নম্বর = নেগেটিভ মার্কিংয়ের পরের চূড়ান্ত নম্বর; সঠিক উত্তরের হার ({accuracy}%) = সঠিক ÷ উত্তর দেওয়া প্রশ্ন।
+              {tr({ bn: `নম্বর = নেগেটিভ মার্কিংয়ের পরের চূড়ান্ত নম্বর; সঠিক উত্তরের হার (${accuracy}%) = সঠিক ÷ উত্তর দেওয়া প্রশ্ন।`, en: `Score = final marks after negative marking; accuracy (${accuracy}%) = correct ÷ answered questions.` })}
             </div>
             {/* ChatGPT §3: the three-second summary, generated
                 from this attempt's actual data. */}
-            <div style={{ color: '#142B3B', fontWeight: 600 }}>{resultObservation(summary)}</div>
+            <div style={{ color: '#142B3B', fontWeight: 600 }}>{resultObservation(summary, lang)}</div>
             {negativeMarkingDisabled ? (
-              <div style={{ color: MUTED }}>নেগেটিভ মার্কিং বন্ধ — বিজ্ঞপ্তি যাচাই বাকি, তাই ভুল উত্তরে নম্বর কাটা হয়নি।</div>
+              <div style={{ color: MUTED }}>{tr({ bn: 'নেগেটিভ মার্কিং বন্ধ — বিজ্ঞপ্তি যাচাই বাকি, তাই ভুল উত্তরে নম্বর কাটা হয়নি।', en: 'Negative marking is off — notice verification pending, so no marks were cut for wrong answers.' })}</div>
             ) : null}
           </div>
           {/* Step 9: mock pass/fail from the mock doc's passPercent
@@ -371,26 +378,30 @@ export default function JobResultPage() {
           {isMockAttempt && mockPassPercent !== null ? (
             <div style={{ marginTop: 12, fontWeight: 700, color: mockPassed ? CORRECT : WRONG, fontSize: 15 }}>
               {mockPassed
-                ? `পাস করেছেন — পাস নম্বর ${mockPassPercent}% (অনুশীলন হিসাব)`
-                : `পাস হয়নি — পাস নম্বর ${mockPassPercent}% (অনুশীলন হিসাব)`}
+                ? lang === 'bn'
+                  ? `পাস করেছেন — পাস নম্বর ${mockPassPercent}% (অনুশীলন হিসাব)`
+                  : `Passed — pass mark ${mockPassPercent}% (practice calculation)`
+                : lang === 'bn'
+                  ? `পাস হয়নি — পাস নম্বর ${mockPassPercent}% (অনুশীলন হিসাব)`
+                  : `Not passed — pass mark ${mockPassPercent}% (practice calculation)`}
             </div>
           ) : null}
           {isModerator && ownerUid !== user.uid ? (
             <p style={{ margin: '12px 0 0', fontSize: 13, color: MUTED }}>
-              মডারেটর হিসেবে অন্য শিক্ষার্থীর ফলাফল দেখছেন।
+              {tr({ bn: 'মডারেটর হিসেবে অন্য শিক্ষার্থীর ফলাফল দেখছেন।', en: 'You are viewing another student’s result as a moderator.' })}
             </p>
           ) : null}
         </Card>
 
         <Card>
-          <div style={{ fontWeight: 700, color: '#142B3B', fontSize: 17 }}>দুর্বল টপিক</div>
+          <div style={{ fontWeight: 700, color: '#142B3B', fontSize: 17 }}>{tr({ bn: 'দুর্বল টপিক', en: 'Weak topics' })}</div>
           {weakTopics.length === 0 ? (
             <p style={{ margin: '8px 0 0', color: MUTED, fontSize: 14, lineHeight: 1.7 }}>
               {/* N5: the old copy led with "all correct" even for a
                   zero-answer attempt — distinguish the two cases. */}
               {unansweredCount === answers.length
-                ? 'কোনো প্রশ্নের উত্তর দেওয়া হয়নি — দুর্বল টপিক নির্ণয় করা যায়নি।'
-                : 'কোনো ভুল উত্তর নেই — সব প্রশ্নের উত্তর সঠিক হয়েছে।'}
+                ? tr({ bn: 'কোনো প্রশ্নের উত্তর দেওয়া হয়নি — দুর্বল টপিক নির্ণয় করা যায়নি।', en: 'No question was answered — weak topics could not be identified.' })
+                : tr({ bn: 'কোনো ভুল উত্তর নেই — সব প্রশ্নের উত্তর সঠিক হয়েছে।', en: 'No wrong answers — every answered question was correct.' })}
             </p>
           ) : (
             <ul style={{ margin: '8px 0 0', paddingLeft: 20, fontSize: 14, lineHeight: 1.9, color: '#142B3B' }}>
@@ -405,15 +416,15 @@ export default function JobResultPage() {
                         weak topic links to its practice entry point
                         (its own bundle for practice attempts, the
                         topic page for mocks) with an action badge. */}
-                    {jobTopicLabelBn(t.topicId)} — {t.wrong}/{t.total}টি ভুল
+                    {jobTopicLabel(t.topicId, lang)} — {t.wrong}/{t.total}{lang === 'bn' ? 'টি ভুল' : ' wrong'}
                     {badge ? (
                       <span style={{ display: 'block', fontSize: 13, color: '#8A6100', fontWeight: 600 }}>
-                        {TOPIC_ACTION_BADGE_BN[badge]}
+                        {(lang === 'bn' ? TOPIC_ACTION_BADGE_BN : TOPIC_ACTION_BADGE_EN)[badge]}
                       </span>
                     ) : null}
                     <span style={{ display: 'block', fontSize: 13 }}>
                       <Link to={link.to} style={{ fontWeight: 600 }}>
-                        এই টপিক অনুশীলন করুন →
+                        {tr({ bn: 'এই টপিক অনুশীলন করুন →', en: 'Practise this topic →' })}
                       </Link>
                     </span>
                   </li>
@@ -426,20 +437,20 @@ export default function JobResultPage() {
                 not the practice route. */}
             {isMockAttempt && mockDefinitionId ? (
               <LinkButton to={`/jobs/mock/${mockDefinitionId}`} variant="accent">
-                আবার মক দিন
+                {tr({ bn: 'আবার মক দিন', en: 'Retake mock' })}
               </LinkButton>
             ) : bundleId ? (
               <LinkButton to={`/jobs/practice/${bundleId}`} variant="accent">
-                আবার অনুশীলন করুন
+                {tr({ bn: 'আবার অনুশীলন করুন', en: 'Practise again' })}
               </LinkButton>
             ) : null}
             {examSlug ? (
               <LinkButton to={`/jobs/${examSlug}/results`} variant="outline">
-                ফলাফল ইতিহাস
+                {tr({ bn: 'ফলাফল ইতিহাস', en: 'Result history' })}
               </LinkButton>
             ) : null}
             <LinkButton to="/jobs/analysis" variant="outline">
-              বিস্তারিত বিশ্লেষণ দেখুন →
+              {tr({ bn: 'বিস্তারিত বিশ্লেষণ দেখুন →', en: 'See detailed analysis →' })}
             </LinkButton>
           </div>
         </Card>
@@ -450,29 +461,29 @@ export default function JobResultPage() {
           a text level (ভালো / মাঝারি / এই পরীক্ষায় দুর্বল) —
           never colour alone, never a permanent ability label. */}
       <Card style={{ marginTop: 16 }}>
-        <div style={{ fontWeight: 700, color: '#142B3B', fontSize: 17, marginBottom: 8 }}>টপিক অনুযায়ী ফলাফল</div>
+        <div style={{ fontWeight: 700, color: '#142B3B', fontSize: 17, marginBottom: 8 }}>{tr({ bn: 'টপিক অনুযায়ী ফলাফল', en: 'Results by topic' })}</div>
         {topicStats.length === 0 ? (
-          <p style={{ margin: 0, color: MUTED, fontSize: 14 }}>কোনো প্রশ্নের উত্তর দেওয়া হয়নি — টপিক অনুযায়ী ফলাফল নির্ণয় করা যায়নি।</p>
+          <p style={{ margin: 0, color: MUTED, fontSize: 14 }}>{tr({ bn: 'কোনো প্রশ্নের উত্তর দেওয়া হয়নি — টপিক অনুযায়ী ফলাফল নির্ণয় করা যায়নি।', en: 'No question was answered — results by topic could not be determined.' })}</p>
         ) : (
           <div style={{ overflowX: 'auto' }}>
             <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 14, lineHeight: 1.7 }}>
               <thead>
                 <tr style={{ textAlign: 'left', borderBottom: '2px solid #E3E8EF', color: MUTED }}>
-                  <th style={{ padding: '6px 8px' }}>টপিক</th>
-                  <th style={{ padding: '6px 8px' }}>সঠিক</th>
-                  <th style={{ padding: '6px 8px' }}>নির্ভুলতা</th>
-                  <th style={{ padding: '6px 8px' }}>স্তর</th>
-                  <th style={{ padding: '6px 8px' }}>সময়</th>
+                  <th style={{ padding: '6px 8px' }}>{tr({ bn: 'টপিক', en: 'Topic' })}</th>
+                  <th style={{ padding: '6px 8px' }}>{tr({ bn: 'সঠিক', en: 'Correct' })}</th>
+                  <th style={{ padding: '6px 8px' }}>{tr({ bn: 'নির্ভুলতা', en: 'Accuracy' })}</th>
+                  <th style={{ padding: '6px 8px' }}>{tr({ bn: 'স্তর', en: 'Level' })}</th>
+                  <th style={{ padding: '6px 8px' }}>{tr({ bn: 'সময়', en: 'Time' })}</th>
                 </tr>
               </thead>
               <tbody>
                 {topicStatsWeakestFirst.map((t) => (
                   <tr key={t.topicId} style={{ borderBottom: '1px solid #EEF1F5' }}>
-                    <td style={{ padding: '6px 8px', fontWeight: 600, color: '#142B3B' }}>{t.label}</td>
+                    <td style={{ padding: '6px 8px', fontWeight: 600, color: '#142B3B' }}>{lang === 'bn' ? t.label : t.labelEn}</td>
                     <td style={{ padding: '6px 8px' }}>{t.correct}/{t.total}</td>
                     <td style={{ padding: '6px 8px' }}>{t.accuracy}%</td>
-                    <td style={{ padding: '6px 8px' }}>{TOPIC_LEVEL_BN[topicLevel(t.accuracy, t.total)]}</td>
-                    <td style={{ padding: '6px 8px' }}>{formatDurationBn(t.timeSeconds)}</td>
+                    <td style={{ padding: '6px 8px' }}>{(lang === 'bn' ? TOPIC_LEVEL_BN : TOPIC_LEVEL_EN)[topicLevel(t.accuracy, t.total)]}</td>
+                    <td style={{ padding: '6px 8px' }}>{formatDuration(t.timeSeconds, lang)}</td>
                   </tr>
                 ))}
               </tbody>
@@ -483,19 +494,19 @@ export default function JobResultPage() {
 
       {subjectTimes.length > 1 ? (
         <Card style={{ marginTop: 16 }}>
-          <div style={{ fontWeight: 700, color: '#142B3B', fontSize: 17, marginBottom: 8 }}>বিষয় অনুযায়ী সময়</div>
+          <div style={{ fontWeight: 700, color: '#142B3B', fontSize: 17, marginBottom: 8 }}>{tr({ bn: 'বিষয় অনুযায়ী সময়', en: 'Time by subject' })}</div>
           {/* ChatGPT §2B: time on correct vs wrong answers — with
               the caveat that time alone is no judgement (a hard
               question honestly takes longer than an easy one). */}
           {cwTime.wrongCount > 0 && cwTime.correctCount > 0 ? (
             <p style={{ margin: '0 0 8px', color: '#142B3B', fontSize: 14, lineHeight: 1.7 }}>
-              ভুল উত্তরে গড়ে {Math.round(cwTime.avgWrongSeconds)} সেকেন্ড, সঠিক উত্তরে গড়ে {Math.round(cwTime.avgCorrectSeconds)} সেকেন্ড — তবে সময় একা বিচার নয়, কঠিন প্রশ্নে সময় বেশি লাগা স্বাভাবিক।
+              {tr({ bn: `ভুল উত্তরে গড়ে ${Math.round(cwTime.avgWrongSeconds)} সেকেন্ড, সঠিক উত্তরে গড়ে ${Math.round(cwTime.avgCorrectSeconds)} সেকেন্ড — তবে সময় একা বিচার নয়, কঠিন প্রশ্নে সময় বেশি লাগা স্বাভাবিক।`, en: `Wrong answers took ${Math.round(cwTime.avgWrongSeconds)} seconds on average, correct answers ${Math.round(cwTime.avgCorrectSeconds)} seconds — but time alone is no judgement; a hard question honestly takes longer.` })}
             </p>
           ) : null}
           <ul style={{ margin: 0, paddingLeft: 20, fontSize: 14, lineHeight: 1.9, color: '#142B3B' }}>
             {subjectTimes.map((s) => (
               <li key={s.subjectId}>
-                {s.label} — {formatDurationBn(s.timeSeconds)} ({s.questions}টি প্রশ্ন, গড় {Math.round(s.avgTimeSeconds)} সেকেন্ড/প্রশ্ন)
+                {tr({ bn: `${s.label} — ${formatDuration(s.timeSeconds, 'bn')} (${s.questions}টি প্রশ্ন, গড় ${Math.round(s.avgTimeSeconds)} সেকেন্ড/প্রশ্ন)`, en: `${s.labelEn} — ${formatDuration(s.timeSeconds, 'en')} (${s.questions} question(s), avg ${Math.round(s.avgTimeSeconds)} sec/question)` })}
               </li>
             ))}
           </ul>
@@ -505,38 +516,38 @@ export default function JobResultPage() {
       {/* Per-question review */}
       <div id="review">
       <Card style={{ marginTop: 16 }}>
-        <div style={{ fontWeight: 700, color: '#142B3B', fontSize: 17, marginBottom: 8 }}>প্রশ্ন-পর্যালোচনা</div>
+        <div style={{ fontWeight: 700, color: '#142B3B', fontSize: 17, marginBottom: 8 }}>{tr({ bn: 'প্রশ্ন-পর্যালোচনা', en: 'Question review' })}</div>
         {/* Step 9: a mock key opens only within 10 minutes of
             submit — after that the explanations hide, but the
             stored correct answers above still show. */}
         {isMockAttempt && !key ? (
           <p style={{ margin: '0 0 12px', color: MUTED, fontSize: 14, lineHeight: 1.7 }}>
-            উত্তরের ব্যাখ্যা এখন দেখা যাচ্ছে না — মকের চাবি শুধু জমা দেওয়ার ১০ মিনিটের মধ্যে খোলে। সঠিক উত্তর ও নম্বর সংরক্ষিত ফলাফল থেকে দেখানো হচ্ছে।
+            {tr({ bn: 'উত্তরের ব্যাখ্যা এখন দেখা যাচ্ছে না — মকের চাবি শুধু জমা দেওয়ার ১০ মিনিটের মধ্যে খোলে। সঠিক উত্তর ও নম্বর সংরক্ষিত ফলাফল থেকে দেখানো হচ্ছে।', en: 'Explanations are not visible right now — the mock key opens only within 10 minutes of submission. Correct answers and marks are shown from the saved result.' })}
           </p>
         ) : null}
         <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', marginBottom: 12 }}>
-          {filterButton('all', `সব (${answers.length})`)}
-          {filterButton('correct', `সঠিক (${correctCount})`)}
-          {filterButton('wrong', `ভুল (${wrongCount})`)}
-          {filterButton('unanswered', `উত্তর দেওয়া হয়নি (${unansweredCount})`)}
-          {filterButton('slow', `ধীর (${slowCount})`)}
+          {filterButton('all', tr({ bn: `সব (${answers.length})`, en: `All (${answers.length})` }))}
+          {filterButton('correct', tr({ bn: `সঠিক (${correctCount})`, en: `Correct (${correctCount})` }))}
+          {filterButton('wrong', tr({ bn: `ভুল (${wrongCount})`, en: `Wrong (${wrongCount})` }))}
+          {filterButton('unanswered', tr({ bn: `উত্তর দেওয়া হয়নি (${unansweredCount})`, en: `Unanswered (${unansweredCount})` }))}
+          {filterButton('slow', tr({ bn: `ধীর (${slowCount})`, en: `Slow (${slowCount})` }))}
           {/* Step 10 (Gemini #2): filter the review by topic, so a
               student never has to scroll 100 questions to re-find
               one topic's wrong answers. */}
           <select
             value={topicFilter}
             onChange={(e) => setTopicFilter(e.target.value)}
-            aria-label="টপিক অনুযায়ী দেখুন"
+            aria-label={tr({ bn: 'টপিক অনুযায়ী দেখুন', en: 'Filter by topic' })}
             style={{ border: '1px solid #C9D2E0', borderRadius: 8, padding: '6px 10px', fontWeight: 600, color: '#142B3B', background: '#fff', cursor: 'pointer' }}
           >
-            <option value="all">সব টপিক</option>
+            <option value="all">{tr({ bn: 'সব টপিক', en: 'All topics' })}</option>
             {topicStats.map((t) => (
-              <option key={t.topicId} value={t.topicId}>{t.label}</option>
+              <option key={t.topicId} value={t.topicId}>{lang === 'bn' ? t.label : t.labelEn}</option>
             ))}
           </select>
         </div>
         {filtered.length === 0 ? (
-          <p style={{ margin: 0, color: MUTED, fontSize: 14 }}>এই ফিল্টারে কোনো প্রশ্ন নেই।</p>
+          <p style={{ margin: 0, color: MUTED, fontSize: 14 }}>{tr({ bn: 'এই ফিল্টারে কোনো প্রশ্ন নেই।', en: 'No questions match this filter.' })}</p>
         ) : (
           <div style={{ display: 'grid', gap: 12 }}>
             {filtered.map((a) => {
@@ -545,27 +556,27 @@ export default function JobResultPage() {
               <div key={a.n} style={{ border: '1px solid #E3E8EF', borderRadius: 10, padding: '12px 14px' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', gap: 8, flexWrap: 'wrap' }}>
                   <span style={{ fontWeight: 700, color: '#142B3B' }}>
-                    প্রশ্ন {a.n}
-                    {markedSet.has(a.n) ? <span style={{ color: '#8A6100' }}> ★ পরে দেখব</span> : ''}
+                    {tr({ bn: `প্রশ্ন ${a.n}`, en: `Question ${a.n}` })}
+                    {markedSet.has(a.n) ? <span style={{ color: '#8A6100' }}>{tr({ bn: ' ★ পরে দেখব', en: ' ★ Review later' })}</span> : ''}
                   </span>
                   <span style={{ fontWeight: 700, color: a.selected === null ? MUTED : a.correct ? CORRECT : WRONG }}>
-                    {a.selected === null ? 'উত্তর দেওয়া হয়নি' : a.correct ? 'সঠিক' : 'ভুল'}
-                    {` · ${a.marks > 0 ? `+${a.marks}` : a.marks} নম্বর`}
+                    {a.selected === null ? tr({ bn: 'উত্তর দেওয়া হয়নি', en: 'Unanswered' }) : a.correct ? tr({ bn: 'সঠিক', en: 'Correct' }) : tr({ bn: 'ভুল', en: 'Wrong' })}
+                    {` · ${a.marks > 0 ? `+${a.marks}` : a.marks} ${lang === 'bn' ? 'নম্বর' : 'marks'}`}
                   </span>
                 </div>
                 <p style={{ margin: '8px 0', fontSize: 15, lineHeight: 1.7, color: '#142B3B' }}>{questionText(a)}</p>
                 <p style={{ margin: '4px 0', fontSize: 14, color: MUTED }}>
-                  আপনার উত্তর: {a.selected === null ? '—' : `${a.selected}`}
-                  {' · '}সঠিক উত্তর: {a.correctText ?? '—'}
+                  {tr({ bn: 'আপনার উত্তর:', en: 'Your answer:' })} {a.selected === null ? '—' : `${a.selected}`}
+                  {' · '}{tr({ bn: 'সঠিক উত্তর:', en: 'Correct answer:' })} {a.correctText ?? '—'}
                   {/* Step 10: time per question + its time×accuracy
                       bucket, visible inside the reviewed question
                       (Gemini #1/#2) — no tap needed to see it. */}
-                  {' · '}সময়: {formatDurationBn(a.timeSpentSeconds ?? 0)}
-                  {' · '}{ANSWER_TIME_BUCKET_BN[classifyAnswerTime(a, perAnswerAvgSeconds)]}
+                  {' · '}{tr({ bn: 'সময়:', en: 'Time:' })} {formatDuration(a.timeSpentSeconds ?? 0, lang)}
+                  {' · '}{(lang === 'bn' ? ANSWER_TIME_BUCKET_BN : ANSWER_TIME_BUCKET_EN)[classifyAnswerTime(a, perAnswerAvgSeconds)]}
                 </p>
                 {explanation ? (
                   <p style={{ margin: '4px 0 0', fontSize: 14, lineHeight: 1.7, color: '#142B3B' }}>
-                    ব্যাখ্যা: {explanation}
+                    {tr({ bn: 'ব্যাখ্যা:', en: 'Explanation:' })} {explanation}
                   </p>
                 ) : null}
               </div>
@@ -583,33 +594,33 @@ export default function JobResultPage() {
           the wrong questions are one anchor away, not a new
           feature (the Step 13 notebook owns the collection). */}
       <Card style={{ marginTop: 16 }}>
-        <div style={{ fontWeight: 700, color: '#142B3B', fontSize: 17, marginBottom: 8 }}>পরবর্তী পদক্ষেপ</div>
+        <div style={{ fontWeight: 700, color: '#142B3B', fontSize: 17, marginBottom: 8 }}>{tr({ bn: 'পরবর্তী পদক্ষেপ', en: 'Next step' })}</div>
         {weakestTopic ? (
           <>
             <p style={{ margin: '0 0 8px', color: '#142B3B', fontSize: 14, lineHeight: 1.7 }}>
-              ১ম অগ্রাধিকার: {weakestTopic.label} — {weakestTopic.wrong}/{weakestTopic.total}টি ভুল।
+              {tr({ bn: `১ম অগ্রাধিকার: ${weakestTopic.label} — ${weakestTopic.wrong}/${weakestTopic.total}টি ভুল।`, en: `1st priority: ${weakestTopic.labelEn} — ${weakestTopic.wrong}/${weakestTopic.total} wrong.` })}
             </p>
             <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
               <LinkButton to={weakTopicPracticeLink(summary, weakestTopic.topicId).to} variant="accent">
-                এই টপিক অনুশীলন করুন →
+                {tr({ bn: 'এই টপিক অনুশীলন করুন →', en: 'Practise this topic →' })}
               </LinkButton>
               <LinkButton to="#review" variant="outline">
-                ভুল প্রশ্নগুলো আবার দেখুন ↓
+                {tr({ bn: 'ভুল প্রশ্নগুলো আবার দেখুন ↓', en: 'Review the wrong questions again ↓' })}
               </LinkButton>
               <LinkButton to="/jobs/wrong-answers" variant="outline">
-                ভুল-উত্তর নোটবুক দেখুন →
+                {tr({ bn: 'ভুল-উত্তর নোটবুক দেখুন →', en: 'See the wrong-answer notebook →' })}
               </LinkButton>
             </div>
           </>
         ) : (
           <p style={{ margin: 0, color: MUTED, fontSize: 14, lineHeight: 1.7 }}>
-            এই পরীক্ষায় কোনো ভুল উত্তর নেই — পরের মক/অনুশীলনে নতুন টপিকে এগিয়ে যান।
+            {tr({ bn: 'এই পরীক্ষায় কোনো ভুল উত্তর নেই — পরের মক/অনুশীলনে নতুন টপিকে এগিয়ে যান।', en: 'No wrong answers in this exam — move on to a new topic in the next mock/practice.' })}
           </p>
         )}
       </Card>
 
       <p style={{ marginTop: 20 }}>
-        <Link to="/jobs" style={{ fontWeight: 600 }}>← সব পরীক্ষা দেখুন</Link>
+        <Link to="/jobs" style={{ fontWeight: 600 }}>{tr({ bn: '← সব পরীক্ষা দেখুন', en: '← See all exams' })}</Link>
       </p>
     </PageShell>
   );

@@ -12,11 +12,18 @@
  */
 import { describe, it, expect } from 'vitest';
 import {
+  ANSWER_TIME_BUCKET_BN,
+  ANSWER_TIME_BUCKET_EN,
+  TOPIC_ACTION_BADGE_BN,
+  TOPIC_ACTION_BADGE_EN,
+  TOPIC_LEVEL_BN,
+  TOPIC_LEVEL_EN,
   attemptSummaryFromStored,
   buildWrongAnswerList,
   classifyAnswerTime,
   correctVsWrongTime,
   displayPercentage,
+  formatDuration,
   formatDurationBn,
   groupAttemptsByExam,
   isSlowAnswer,
@@ -468,5 +475,40 @@ describe('attemptSummaryFromStored', () => {
     expect(s.answers).toEqual([]);
     expect(s.negativeMarkingUsed).toBeNull();
     expect(s.submittedAtMillis).toBeNull();
+  });
+});
+
+describe('language system (24 Nov 2026) — English variants', () => {
+  it('formatDuration renders English units', () => {
+    expect(formatDuration(45, 'en')).toBe('45 sec');
+    expect(formatDuration(120, 'en')).toBe('2 min');
+    expect(formatDuration(135, 'en')).toBe('2 min 15 sec');
+    expect(formatDuration(135, 'bn')).toBe('2 মিনিট 15 সেকেন্ড');
+  });
+
+  it('negativeMarkingExplanation renders the formula in English', () => {
+    const e = negativeMarkingExplanation(attempt(), 'en');
+    expect(e.formula).toBe('2 correct × 1 − 1 wrong × 0.5 = 1.5 marks');
+    expect(e.costLine).toBe('0.5 marks deducted for 1 wrong answer(s)');
+  });
+
+  it('resultObservation renders in English with the English topic label', () => {
+    const o = resultObservation(attempt(), 'en');
+    expect(o).toContain('English — Grammar — Tense');
+    expect(o).toContain('2/3 correct');
+    expect(o).toContain('1st priority');
+  });
+
+  it('perTopicAccuracy and perSubjectTime carry labelEn', () => {
+    const stats = perTopicAccuracy([answer(1)]);
+    expect(stats[0].labelEn).toBe('English — Grammar — Tense');
+    const bySubject = perSubjectTime([answer(1)]);
+    expect(bySubject[0].labelEn).toBe('English');
+  });
+
+  it('English label maps cover every Bangla key', () => {
+    expect(Object.keys(TOPIC_LEVEL_EN).sort()).toEqual(Object.keys(TOPIC_LEVEL_BN).sort());
+    expect(Object.keys(ANSWER_TIME_BUCKET_EN).sort()).toEqual(Object.keys(ANSWER_TIME_BUCKET_BN).sort());
+    expect(Object.keys(TOPIC_ACTION_BADGE_EN).sort()).toEqual(Object.keys(TOPIC_ACTION_BADGE_BN).sort());
   });
 });
