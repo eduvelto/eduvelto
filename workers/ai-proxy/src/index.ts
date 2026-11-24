@@ -64,14 +64,14 @@ export default {
     const valid = validateChatRequest(body);
     if (!valid.ok) return json({ error: 'invalid-request', detail: valid.error }, 400, origin);
 
-    const model = env.MODEL && env.MODEL.trim() !== '' ? env.MODEL : 'gemini-2.5-flash';
+    const model = env.MODEL && env.MODEL.trim() !== '' ? env.MODEL : 'gemini-3.5-flash-lite';
     let res: Response;
     try {
       res = await fetch(
-        `https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(model)}:generateContent?key=${encodeURIComponent(env.GEMINI_API_KEY)}`,
+        `https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(model)}:generateContent`,
         {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
+          headers: { 'Content-Type': 'application/json', 'x-goog-api-key': env.GEMINI_API_KEY },
           body: JSON.stringify(buildGeminiRequest(valid.value)),
           signal: AbortSignal.timeout(25000),
         },
