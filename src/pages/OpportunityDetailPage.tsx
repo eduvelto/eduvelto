@@ -54,8 +54,12 @@ export default function OpportunityDetailPage() {
   }, [oppId]);
 
   if (item === undefined) {
+    // Audit M17 (24 Nov 2026): hideTitle while loading — the loading
+    // shell must not put a generic "সুযোগ" h1 in the DOM (the
+    // probe sampled it before the real title arrived). The loaded
+    // branch below passes the real title as the PageShell h1.
     return (
-      <PageShell titleBn="সুযোগ" titleEn="Opportunity" wide>
+      <PageShell titleBn="সুযোগ" titleEn="Opportunity" wide hideTitle>
         <Skeleton height={180} />
       </PageShell>
     );

@@ -6,9 +6,10 @@ server-side secret and calls the Gemini API.
 
 ## Status
 
-STAGED, not deployed. The code is complete; activation needs two
-owner-side actions (below). Until then the site reports "AI not
-connected yet" and the deterministic tools keep working.
+DEPLOYED at `https://eduvelto-ai-proxy.eduvelto.workers.dev` (live since
+23 Nov 2026; the site build carries `VITE_AI_PROXY_URL`, so the chat UI
+reports "live"). A code change here needs `wrangler deploy` from the
+owner's Cloudflare account — this branch only prepares the code.
 
 ## What the proxy does
 

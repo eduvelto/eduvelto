@@ -455,7 +455,7 @@ export function circularDaysLeft(c: JobCircular, nowMs: number = Date.now()): nu
 /** Bangla status labels (ChatGPT glossary). */
 export const CIRCULAR_STATUS_BN: Record<CircularApplicationStatus, string> = {
   upcoming: 'শীঘ্রই আবেদন শুরু',
-  open: 'আবেদন চলছে',
+  open: 'আবেদন করা যাচ্ছে',
   'closing-soon': 'আবেদনের সময় শেষের পথে',
   closed: 'আবেদন শেষ',
   unknown: 'অজানা',
@@ -498,7 +498,7 @@ export function circularDeadlineLine(c: JobCircular, nowMs: number = Date.now())
   if (days !== null && days > 0) {
     return { bn: `আর ${toBanglaDigits(days)} দিন বাকি`, en: `${days} day${days === 1 ? '' : 's'} left` };
   }
-  return { bn: 'আবেদন চলছে', en: 'Applications open' };
+  return { bn: 'আবেদন করা যাচ্ছে', en: 'Applications open' };
 }
 
 /** Whether the Apply action may be shown (ChatGPT

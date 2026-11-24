@@ -50,9 +50,9 @@ export const OPPORTUNITY_SEED: OpportunitySeedRow[] = [
     eligibilityBn: 'বাংলাদেশি নাগরিক; পদভেদে শিক্ষাগত যোগ্যতা ও বয়স ভিন্ন — বিস্তারিত মূল বিজ্ঞপ্তিতে দেখুন।',
     eligibilityEn: 'Bangladeshi citizens; age and qualifications vary by post — see the original circular for details.',
     descriptionBn:
-      'গ্রেড ৫–১২-এর ১৯ ধরনের পদে মোট ১৪৭টি পদে নন-ক্যাডার সরাসরি নিয়োগ (সিস্টেম অ্যানালিস্ট, মেইনটেন্যান্স ইঞ্জিনিয়ার, সহকারী প্রধান স্থপতি, প্রোগ্রামার, জুনিয়র কনসালট্যান্ট (মেডিসিন), আইন কর্মকর্তা, নার্স মিডওয়াইফসহ আরও পদ)। অনলাইনে BPSC ফরম-৫এ-তে আবেদন, ফি টেলিটক SMS-এ।',
+      'গ্রেড ৫–১২-এর ১৯ ধরনের পদে মোট ১৪৭টি পদে নন-ক্যাডার সরাসরি নিয়োগ (সিস্টেম অ্যানালিস্ট, মেইনটেন্যান্স ইঞ্জিনিয়ার, সহকারী প্রধান স্থপতি, প্রোগ্রামার, জুনিয়র কনসালট্যান্ট (মেডিসিন), আইন কর্মকর্তা, নার্স মিডওয়াইফসহ আরও পদ)। অনলাইনে BPSC ফরম-৫এ-তে আবেদন, ফি টেলিটক SMS-এ। ফি জমার শেষ তারিখ: ৩ ডিসেম্বর ২০২৬, সন্ধ্যা ৬টা — User ID পাওয়ার ৭২ ঘণ্টার মধ্যে।',
     descriptionEn:
-      'Non-cadre direct recruitment for 147 posts across 19 post categories in Grades 5–12 (System Analyst, Maintenance Engineer, Assistant Chief Architect, Programmer, Junior Consultant (Medicine), Law Officer, Nurse Midwife and others). Apply online via BPSC Form-5A; fee by Teletalk SMS.',
+      'Non-cadre direct recruitment for 147 posts across 19 post categories in Grades 5–12 (System Analyst, Maintenance Engineer, Assistant Chief Architect, Programmer, Junior Consultant (Medicine), Law Officer, Nurse Midwife and others). Apply online via BPSC Form-5A; fee by Teletalk SMS. Fee payment deadline: 3 December 2026, 6:00 PM — within 72 hours of receiving the User ID.',
     sourceName: 'বাংলাদেশ পাবলিক সার্ভিস কমিশন (BPSC)',
     sourceUrl: 'https://www.bpsc.gov.bd',
     applyUrl: 'http://bpsc.teletalk.com.bd',
@@ -62,9 +62,9 @@ export const OPPORTUNITY_SEED: OpportunitySeedRow[] = [
     isPlatform: false,
     verificationLevel: 'official-indexed',
     verificationNoteBn:
-      'মূল বিজ্ঞপ্তির PDF এই যাচাইয়ে পুরো পড়া যায়নি; শেষ তারিখ ও আবেদন লিংক বিপিএসসির অফিসিয়াল হোমপেজের "চলমান নিয়োগ বিজ্ঞপ্তিসমূহ" ও বিজ্ঞপ্তির উদ্ধৃতি থেকে মিলিয়ে নেওয়া হয়েছে। পদসংখ্যা ১৪৭টি — অফিসিয়াল বিজ্ঞপ্তি সার্কুলার (৭৮–৮২) ও (৮৩–৯৬)/২০২৬ থেকে যাচাই করা।',
+      'মূল বিজ্ঞপ্তির PDF এই যাচাইয়ে পুরো পড়া যায়নি; শেষ তারিখ ও আবেদন লিংক বিপিএসসির অফিসিয়াল হোমপেজের "চলমান নিয়োগ বিজ্ঞপ্তিসমূহ" ও বিজ্ঞপ্তির উদ্ধৃতি থেকে মিলিয়ে নেওয়া হয়েছে। পদসংখ্যা ১৪৭টি — অফিসিয়াল বিজ্ঞপ্তি সার্কুলার (৭৮–৮২) ও (৮৩–৯৬)/২০২৬ থেকে যাচাই করা। ভিন্ন দুটি উদ্ধৃতিতে পদসংখ্যা ১৩৩ ও ১৩৪ বলে দেওয়া হয়েছে — তা ১৪৭-এর সঙ্গে মেলে না, তাই মূল বিজ্ঞপ্তির PDF থেকে সরাসরি গুনে নিশ্চিত করা এখনো বাকি।',
     verificationNoteEn:
-      'The original circular PDF could not be fully read in this verification; the deadline and application link were corroborated from the BPSC official homepage ("ongoing recruitment notices") and citations of the circular. The vacancy total is 147 posts, verified from official circulars (78–82)/2026 and (83–96)/2026.',
+      'The original circular PDF could not be fully read in this verification; the deadline and application link were corroborated from the BPSC official homepage ("ongoing recruitment notices") and citations of the circular. The vacancy total is 147 posts, verified from official circulars (78–82)/2026 and (83–96)/2026. Two other citations give 133 and 134 posts, which disagree with 147 — a direct count from the official circular PDF is still owed.',
     verifiedBy: SEED_AUTHOR,
     verifiedAtMillis: VERIFIED_AT,
     reviewStatus: 'Published',
@@ -122,9 +122,9 @@ export const OPPORTUNITY_SEED: OpportunitySeedRow[] = [
     eligibilityEn:
       'Enrolled in or recently graduated from a university programme; no work experience is generally required. The UN does not charge a fee at any stage of recruitment.',
     descriptionBn:
-      'পূর্ণকালীন অবৈতনিক ইন্টার্নশিপ, কমপক্ষে ৬ মাস, জানুয়ারি ২০২৭ থেকে — ইনফ্রাস্ট্রাকচার অ্যান্ড ফাইন্যান্সিং ফর রেজিলিয়েন্স ইউনিটে প্রতিবেদন, ইস্যু ব্রিফ, উপস্থাপনা, সভার কার্যবিবরণী ও সভা/ওয়েবিনার সহায়তা।',
+      'পূর্ণকালীন অবৈতনিক ইন্টার্নশিপ, কমপক্ষে ৬ মাস, জানুয়ারি ২০২৭ থেকে — ইনফ্রাস্ট্রাকচার অ্যান্ড ফাইন্যান্সিং ফর রেজিলিয়েন্স ইউনিটে প্রতিবেদন, ইস্যু ব্রিফ, উপস্থাপনা, সভার কার্যবিবরণী ও সভা/ওয়েবিনার সহায়তা। আবেদনের শেষ সময়: ৩০ নভেম্বর ২০২৬, রাত ১১:৫৯ নিউ ইয়র্ক সময়।',
     descriptionEn:
-      'Full-time, unpaid internship of at least 6 months starting January 2027, assisting the Infrastructure and Financing for Resilience Unit with reports, issue briefs, presentations, meeting minutes and meeting/webinar support.',
+      'Full-time, unpaid internship of at least 6 months starting January 2027, assisting the Infrastructure and Financing for Resilience Unit with reports, issue briefs, presentations, meeting minutes and meeting/webinar support. Application closing time: 30 November 2026, 11:59 PM New York time.',
     sourceName: 'UN Careers',
     sourceUrl: 'https://careers.un.org/jobSearchDescription/288035?language=en',
     applyUrl: 'https://careers.un.org/jobSearchDescription/288035?language=en',
@@ -158,9 +158,9 @@ export const OPPORTUNITY_SEED: OpportunitySeedRow[] = [
     eligibilityEn:
       'Citizen of and permanently resident in an eligible Commonwealth country; a first degree of at least upper second-class (2:1) honours standard (or a lower second-class degree plus a relevant postgraduate qualification) by September 2027; unable to afford UK study without the scholarship.',
     descriptionBn:
-      '২০২৭ সালের সেপ্টেম্বর/অক্টোবর থেকে যুক্তরাজ্যে সম্পূর্ণ অর্থায়নে মাস্টার্স — অনুমোদিত টিউশন ফি, যাতায়াত ভাড়া ও জীবনযাপন ভাতা। আবেদন করতে কোনো ফি লাগে না। CSC পোর্টালে আবেদনের পাশাপাশি অংশগ্রহণকারী বিশ্ববিদ্যালয়ে মাস্টার্স কোর্সে আলাদাভাবে ভর্তির আবেদন করতে হয়।',
+      '২০২৭ সালের সেপ্টেম্বর/অক্টোবর থেকে যুক্তরাজ্যে সম্পূর্ণ অর্থায়নে মাস্টার্স — অনুমোদিত টিউশন ফি, যাতায়াত ভাড়া ও জীবনযাপন ভাতা। আবেদন করতে কোনো ফি লাগে না। CSC পোর্টালে আবেদনের পাশাপাশি অংশগ্রহণকারী বিশ্ববিদ্যালয়ে মাস্টার্স কোর্সে আলাদাভাবে ভর্তির আবেদন করতে হয়। সুপারিশপত্রসহ সব কাগজপত্র একই সময়সীমার মধ্যে জমা দিতে হবে।',
     descriptionEn:
-      'Fully funded Master\u2019s study in the UK beginning September/October 2027, covering approved tuition fees, return airfare and a living stipend. The CSC does not charge to apply. Applicants must also apply separately for admission to an approved Master\u2019s course at a participating UK university.',
+      'Fully funded Master\u2019s study in the UK beginning September/October 2027, covering approved tuition fees, return airfare and a living stipend. The CSC does not charge to apply. Applicants must also apply separately for admission to an approved Master\u2019s course at a participating UK university. All supporting documents, including references, must be submitted within the same deadline.',
     sourceName: 'Commonwealth Scholarship Commission in the UK (CSC)',
     sourceUrl: 'https://cscuk.fcdo.gov.uk/scholarships/commonwealth-shared-scholarships-applications/',
     applyUrl: 'https://cscuk.fcdo.gov.uk/scholarships/commonwealth-shared-scholarships-applications/',

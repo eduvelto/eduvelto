@@ -1,7 +1,7 @@
 // Eduvelto — class index (homepage redesign, 21 Nov 2026).
 //
 // /class: the Academic Learning landing page. The new homepage's
-// "শিক্ষা কার্যক্রম" card links here; the five class-level cards (with
+// "শিক্ষা কার্যক্রম" card links here; the seven class-level cards (with
 // honest per-class book/subject counts) used to live on the homepage
 // itself and now live here, so the homepage stays a 4-section overview
 // as the owner-approved mockups show. Counts are counted from the live

@@ -241,7 +241,16 @@ export default function LibraryPage() {
           {error}
         </AlertBox>
       ) : null}
-      {loading && pages.length === 0 && !error && !levelEmpty ? <SkeletonCards count={4} /> : null}
+      {/* Audit m04 (24 Nov 2026): skeletons alone read as "not
+          built yet" — say plainly that the library is loading. */}
+      {loading && pages.length === 0 && !error && !levelEmpty ? (
+        <>
+          <p style={{ margin: '0 0 12px', color: 'var(--muted)', fontSize: 15 }} aria-live="polite">
+            {t({ bn: 'লাইব্রেরি লোড হচ্ছে…', en: 'Loading the library…' })}
+          </p>
+          <SkeletonCards count={4} />
+        </>
+      ) : null}
       {!loading && pages.length > 0 && pageBooks.length === 0 && pageIndex === 0 && !searching && !levelEmpty ? (
         <EmptyState bn="এই বাছাইয়ে কোনো বই পাওয়া যায়নি। ফিল্টার বদলে আবার চেষ্টা করুন।" en="No books match these filters. Try different filters." />
       ) : null}
@@ -421,8 +430,13 @@ export default function LibraryPage() {
       ) : null}
       {/* First in-feed ad slot (library list page). Renders nothing until AdSense is configured. */}
       <AdSlot placement="in-feed" />
+      {/* Audit m04 (24 Nov 2026): the old line read as "not built
+          yet" ("যোগ করা হবে"). While loading, say so; once the
+          books are in, say how many are shown. */}
       <p style={{ marginTop: 16, color: 'var(--muted)', fontSize: 14 }}>
-        {t({ bn: 'লাইব্রেরিতে বই, নোট ও প্রশ্নোত্তর যোগ করা হবে — নিচে স্ক্রল করলে আরও দেখা যাবে।', en: 'Books, notes and Q&A will be added to the library — scroll down to see more.' })}
+        {loading
+          ? t({ bn: 'লাইব্রেরি লোড হচ্ছে…', en: 'Loading the library…' })
+          : t({ bn: 'বই দেখানো হচ্ছে — নিচে স্ক্রল করলে আরও দেখা যাবে।', en: `Showing ${pageBooks.length} books — scroll down to see more.` })}
       </p>
       {/* Second in-feed ad slot, lower down the list — revealed on scroll. Renders nothing until AdSense is configured. */}
       <AdSlot placement="in-feed-2" />

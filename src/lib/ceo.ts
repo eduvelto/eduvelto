@@ -3,8 +3,9 @@
 // HONESTY RULES (binding — the CEO mockups are full of fake sample
 // numbers: 1.28M users, 8.72M views, 520K tests, ৳2.48L revenue,
 // 24 team members, 12,842 verified content, "Platform Rank #1").
-// The real platform today: ~4 users, 609 books, 1014 exams, 23,346
-// questions, ৳0 revenue, 1 staff account (the owner), 0 verified
+// The real platform today: ~4 users, 609 books, 1014 exams, 23,259
+// questions (effective after the 25 Nov 2026 NCTB crons — 23,346 in
+// the 24 Nov backup minus the 87 questions the crons remove), ৳0 revenue, 1 staff account (the owner), 0 verified
 // teachers, no view/engagement/retention tracking, no team system on
 // main, no paid products. Every number on the CEO screens comes from
 // a live count() attempt below, or from the LAST-VERIFIED constants
@@ -15,11 +16,16 @@
 import { collection, getCountFromServer, query, where } from 'firebase/firestore';
 import type { CollectionReference, Firestore, Query, DocumentData } from 'firebase/firestore';
 
-/** Last verified by the website audit against the 24 Nov 2026 pre-deploy snapshot (7,105 docs) + live /library check, 24 Nov 2026. */
+/** Last verified by the website audit against the 24 Nov 2026 pre-deploy snapshot (7,105 docs) + live /library check, 24 Nov 2026.
+ * `questions` is the POST-CRON figure (23,259), effective after the
+ * 25 Nov 2026 NCTB crons remove 87 questions from the 24 Nov backup
+ * total of 23,346 — see the M8 prepared script in
+ * full-site-audit-fixes-evidence/scripts/, which recomputes it from
+ * live data after the 15:30 cron. */
 export const LAST_VERIFIED_INVENTORY = {
   books: 609,
   exams: 1014,
-  questions: 23346,
+  questions: 23259,
   /** Human-readable source shown under every fallback value. */
   checkedBn: '২৪ নভেম্বর ২০২৬ যাচাই করা',
   checkedEn: 'verified 24 Nov 2026',

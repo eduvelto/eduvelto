@@ -188,6 +188,9 @@ const SITEMAP_URLS = [
   '/class/class-9-10',
   '/class/hsc',
   '/class/honours-masters',
+  // Audit M12 (24 Nov 2026): Technical + Madrasa have live books.
+  '/class/technical',
+  '/class/madrasa',
   '/about',
   '/founder',
   '/contact',
@@ -675,8 +678,8 @@ describe('resolveRouteSeo — SEO 50–100 pages (23 Nov 2026)', () => {
     ).toBeNull();
   });
 
-  it('all 5 class pages resolve; only the 3 with books are in the sitemap', () => {
-    expect(CLASS_LEVELS.length).toBe(5);
+  it('all 7 class pages resolve; only the 5 with books are in the sitemap', () => {
+    expect(CLASS_LEVELS.length).toBe(7);
     // Brand-SEO wave 1, F-06: class-1-5 / class-6-8 have no books
     // yet, so they are out of the sitemap (and noindexed) until
     // Classes 1–8 have real books — but they still resolve, live
@@ -684,7 +687,13 @@ describe('resolveRouteSeo — SEO 50–100 pages (23 Nov 2026)', () => {
     const sitemapClassSlugs = SITEMAP_URLS.filter((p) => p.startsWith('/class/')).map((p) =>
       p.replace('/class/', ''),
     );
-    expect(sitemapClassSlugs.sort()).toEqual(['class-9-10', 'honours-masters', 'hsc']);
+    expect(sitemapClassSlugs.sort()).toEqual([
+      'class-9-10',
+      'honours-masters',
+      'hsc',
+      'madrasa',
+      'technical',
+    ]);
     for (const level of CLASS_LEVELS) {
       const seo = resolveRouteSeo(`/class/${level.slug}`);
       expect(seo, `/class/${level.slug}`).not.toBeNull();
@@ -983,19 +992,23 @@ describe('resolveRouteSeo — AdSense Part 1 noindex + BCS English practice (23 
     ]);
   });
 
-  it('/jobs and /admissions copy now says BCS English practice is live; mocks still in preparation', () => {
+  it('/jobs copy now says BCS English practice is live; mocks still in preparation', () => {
+    for (const path of ['/jobs', '/jobs/common']) {
+      const seo = resolveRouteSeo(path)!;
+      expect(seo.description, path).toContain('বিসিএস ইংরেজি অনুশীলন এখন চালু');
+      expect(seo.description, path).toContain('মক পরীক্ষা এখনো প্রস্তুত হচ্ছে');
+    }
+    // Audit m22 (24 Nov 2026): the BCS sentence was irrelevant on
+    // admission pages — it must NOT appear there any more; the
+    // admission pages carry admission-specific live facts instead.
     for (const path of [
-      '/jobs',
-      '/jobs/common',
       '/admissions',
       '/admissions/national-university',
       '/admissions/national-university/humanities',
       '/admissions/national-university/science',
       '/admissions/national-university/business',
     ]) {
-      const seo = resolveRouteSeo(path)!;
-      expect(seo.description, path).toContain('বিসিএস ইংরেজি অনুশীলন এখন চালু');
-      expect(seo.description, path).toContain('মক পরীক্ষা এখনো প্রস্তুত হচ্ছে');
+      expect(resolveRouteSeo(path)!.description, path).not.toContain('বিসিএস ইংরেজি');
     }
     // And the collective pages still never claim a verified pattern.
     for (const path of ['/jobs', '/admissions', '/admissions/national-university']) {
@@ -1366,8 +1379,8 @@ describe('resolveRouteSeo — English SEO (24 Nov 2026, language system)', () =>
 });
 
 describe('resolveRouteSeo — brand-SEO wave 2 (24 Nov 2026)', () => {
-  it('sitemap has 118 URLs (112 wave-9 + 6 wave-10 guides)', () => {
-    expect(SITEMAP_URLS.length).toBe(118);
+  it('sitemap has 120 URLs (118 wave-9/10 + 2 audit-M12 class pages)', () => {
+    expect(SITEMAP_URLS.length).toBe(120);
   });
 
   it('English home title drops "Best"; Bangla title is unchanged', () => {

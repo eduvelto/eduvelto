@@ -41,6 +41,7 @@ import { useNotFoundMeta } from '../lib/useNotFoundMeta';
 import { useJobMode } from '../lib/jobMode';
 import { listMockAttempts, listPublishedMocks, type MockAttemptWithId } from '../lib/jobMock';
 import type { JobMockWithId } from '../lib/jobMocks';
+import { listPublishedPracticeBundles, type PracticeBundleWithId } from '../lib/jobPractice';
 import {
   EXAM_PATTERNS,
   JOB_ELEMENTS,
@@ -310,6 +311,35 @@ export default function JobHubPage() {
       alive = false;
     };
   }, [def?.slug]);
+  // Audit m03 (24 Nov 2026): the hero "কনটেন্ট তৈরি হচ্ছে" badge
+  // must not show on an exam that already has published content
+  // (BCS has 13 published practice bundles and no mocks — the old
+  // unconditional badge said "in preparation" anyway). Load the
+  // published practice bundles the same way as the mocks above;
+  // null = still loading, and the badge stays hidden until the
+  // load settles so it never flashes on a loaded exam.
+  const [publishedBundles, setPublishedBundles] = useState<PracticeBundleWithId[] | null>(null);
+  useEffect(() => {
+    if (!def) {
+      setPublishedBundles([]);
+      return;
+    }
+    let alive = true;
+    listPublishedPracticeBundles(def.slug)
+      .then((list) => {
+        if (alive) setPublishedBundles(list);
+      })
+      .catch(() => {
+        if (alive) setPublishedBundles([]);
+      });
+    return () => {
+      alive = false;
+    };
+  }, [def?.slug]);
+  const hasPublishedContent =
+    (publishedMocks !== null && publishedMocks.length > 0) ||
+    (publishedBundles !== null && publishedBundles.length > 0);
+  const contentLoadSettled = publishedMocks !== null && publishedBundles !== null;
 
   if (!def) {
     return (
@@ -361,9 +391,14 @@ export default function JobHubPage() {
             {t({ bn: def.stepsBn, en: def.stepsEn })}
           </p>
         </div>
-        <p style={{ margin: '12px 0 0' }}>
-          <span className="ev-class-hero-coming">{t({ bn: 'কনটেন্ট তৈরি হচ্ছে', en: 'Content in preparation' })}</span>
-        </p>
+        {/* Audit m03 (24 Nov 2026): show only when the load has
+            settled AND this exam really has no published content
+            (no mocks and no practice bundles). */}
+        {contentLoadSettled && !hasPublishedContent ? (
+          <p style={{ margin: '12px 0 0' }}>
+            <span className="ev-class-hero-coming">{t({ bn: 'কনটেন্ট তৈরি হচ্ছে', en: 'Content in preparation' })}</span>
+          </p>
+        ) : null}
       </section>
 
       {/* Non-affiliation (Step 5): Eduvelto is not affiliated with any

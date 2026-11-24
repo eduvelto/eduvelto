@@ -343,6 +343,13 @@ export default function ClassDashboardPage() {
   );
   const subjectStats: ClassSubjectStats[] | null = stats ? stats.subjects : null;
   const bookTotal = stats ? stats.bookCount : classBooks.length;
+  // Audit m23 (24 Nov 2026): AdSlots mount on thin no-books pages
+  // (/class/class-1-5, /class/class-6-8) and sit on an empty page.
+  // Suppress both slots once the level is CONFIRMED to have zero
+  // books — stats loaded (null = no stats doc, fall back to the
+  // loaded book list) and the total is 0. While stats are still
+  // loading (undefined) the slots render as before, so no flash.
+  const levelHasNoBooks = stats !== undefined && bookTotal === 0;
   const quizTotal = stats ? stats.quizCount : classQuizzes.length;
   const totalQuestions = useMemo(
     () => (stats ? stats.totalQuestions : classBooks.reduce((s, b) => s + (b.questionCount ?? 0), 0)),
@@ -448,8 +455,9 @@ export default function ClassDashboardPage() {
       </p>
 
       {/* Mobile Ad — top of the dashboard on small screens only
-          (ads placement plan 22 Nov 2026). */}
-      <AdSlot placement="mobile" />
+          (ads placement plan 22 Nov 2026). Suppressed on levels
+          confirmed to have no books (audit m23). */}
+      {levelHasNoBooks ? null : <AdSlot placement="mobile" />}
 
       {/* Class header band — colour identity + real counts. */}
       <section
@@ -698,7 +706,9 @@ export default function ClassDashboardPage() {
             </>
           ) : null}
         </div>
-        <AdSlot placement="sidebar" />
+        {/* Sidebar ad — suppressed on levels confirmed to have
+            no books (audit m23). */}
+        {levelHasNoBooks ? null : <AdSlot placement="sidebar" />}
       </div>
     </PageShell>
   );

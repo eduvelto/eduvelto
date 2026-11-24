@@ -200,10 +200,22 @@ export async function askAssistant(messages: ChatMessage[], opts: AskOptions = {
         messageEn: 'The answer took too long. Please try again.',
       };
     }
+    // Audit m02 (24 Nov 2026): only a genuine network failure
+    // (fetch itself throwing a TypeError) may blame the guest's
+    // connection. Anything else thrown here — e.g. an unreadable
+    // response body after an HTTP 200 — is a server-side failure,
+    // so it gets the server-error wording, never the internet one.
+    if (err instanceof TypeError) {
+      return {
+        kind: 'error',
+        messageBn: 'ইন্টারনেট সংযোগে সমস্যা হয়েছে। নিচের টুলগুলো ব্যবহার করুন — সেগুলো অফলাইনেও কাজ করে।',
+        messageEn: 'There is a connection problem. Use the tools below — they work offline too.',
+      };
+    }
     return {
       kind: 'error',
-      messageBn: 'ইন্টারনেট সংযোগে সমস্যা হয়েছে। নিচের টুলগুলো ব্যবহার করুন — সেগুলো অফলাইনেও কাজ করে।',
-      messageEn: 'There is a connection problem. Use the tools below — they work offline too.',
+      messageBn: 'AI সেবা এখন সাড়া দিচ্ছে না। নিচের টুলগুলো ব্যবহার করুন — সেগুলো সবসময় কাজ করে।',
+      messageEn: 'The AI service is not responding right now. Use the tools below — they always work.',
     };
   } finally {
     clearTimeout(timeout);

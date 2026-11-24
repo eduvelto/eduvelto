@@ -45,6 +45,16 @@ export const CLASS_LEVEL_GROUPS = [
     educationType: 'Higher',
     classLevels: ['1st Year', '2nd Year', '3rd Year', '4th Year'],
   },
+  {
+    slug: 'technical',
+    educationType: 'Technical',
+    classLevels: ['Ssc Vocational', 'Hsc Vocational', 'Bmt'],
+  },
+  {
+    slug: 'madrasa',
+    educationType: 'Madrasa',
+    classLevels: ['Alim', 'Dakhil', 'Fazil', 'Kamil'],
+  },
 ];
 
 export function classStatsDocId(slug) {

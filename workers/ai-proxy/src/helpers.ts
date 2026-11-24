@@ -53,6 +53,30 @@ export function mapProviderStatus(status: number): 'quota-exhausted' | 'provider
 }
 
 /**
+ * Is this upstream status worth ONE retry? Only transient failures:
+ * 429 (quota/rate-limit — the next minute may succeed) and 5xx
+ * (Gemini-side overload/temporary failure). 4xx other than 429 is a
+ * bad request that retrying will not fix; a timeout abort is not
+ * retried either — a 25 s upstream stall retried once would make the
+ * guest wait ~50 s for the same stall.
+ *
+ * Diagnosis (full-site audit M1, 24 Nov 2026): the same Worker code
+ * returned real replies at 18:50 on 24 Nov and then 502'd on all
+ * 3 audit tries (EN ×2 at ~25.9 s, i.e. upstream-timeout aborts;
+ * BN ×1 at 1.5 s, i.e. a fast upstream 5xx). The temperature
+ * hypothesis is therefore weak — the failure is intermittent and
+ * upstream-side — so the fix retries fast transient failures once
+ * instead of assuming the request shape was wrong. Removing
+ * `temperature` (below) is still correct: gemini-3.5-flash-lite
+ * documents custom temperature as unsupported, so sending it can
+ * only hurt.
+ */
+export function shouldRetryProviderStatus(status: number, attempt: number): boolean {
+  if (attempt !== 1) return false;
+  return status === 429 || status >= 500;
+}
+
+/**
  * System prompt: short, honest, Bangla-first. The model must not
  * claim to be human, must not give medical diagnoses or legal
  * verdicts, and must say when it does not know. No personal data is
@@ -84,7 +108,10 @@ export function buildGeminiRequest(req: ValidChatRequest): Record<string, unknow
   return {
     system_instruction: { parts: [{ text: buildSystemPrompt(req.lang) }] },
     contents: req.messages.map((m) => ({ role: m.role === 'assistant' ? 'model' : 'user', parts: [{ text: m.text }] })),
-    generationConfig: { temperature: 0.7, maxOutputTokens: 1024 },
+    // No `temperature`: gemini-3.5-flash-lite documents custom
+    // temperature as unsupported (audit M1, 24 Nov 2026). The model
+    // default applies. maxOutputTokens caps the reply length.
+    generationConfig: { maxOutputTokens: 1024 },
   };
 }
 

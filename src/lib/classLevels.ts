@@ -15,6 +15,8 @@
 // white text on each accent passes WCAG AA normal (measured 21 Nov 2026):
 // green #15803D 5.02:1, blue #1D4ED8 6.70:1, purple #7E22CE 6.98:1,
 // orange #C2410C 5.18:1, teal-deep #12766E 5.47:1.
+// Technical + Madrasa added by the full-site audit fix (24 Nov 2026):
+// slate #475569 7.58:1, rose #9D174D 7.88:1 (computed, same formula).
 
 import type { Book } from './content';
 import type { Quiz } from './exams';
@@ -103,6 +105,30 @@ export const CLASS_LEVELS: ClassLevelDef[] = [
     educationType: 'Higher',
     classLevels: ['1st Year', '2nd Year', '3rd Year', '4th Year'],
   },
+  {
+    slug: 'technical',
+    bn: 'কারিগরি',
+    en: 'Technical',
+    tagBn: 'কারিগরি শিক্ষা',
+    tagEn: 'Technical Education',
+    accent: '#475569',
+    accentSoft: '#EDF1F5',
+    accentDeep: '#1E293B',
+    educationType: 'Technical',
+    classLevels: ['Ssc Vocational', 'Hsc Vocational', 'Bmt'],
+  },
+  {
+    slug: 'madrasa',
+    bn: 'মাদ্রাসা',
+    en: 'Madrasa',
+    tagBn: 'মাদ্রাসা শিক্ষা',
+    tagEn: 'Madrasa Education',
+    accent: '#9D174D',
+    accentSoft: '#FBE8EF',
+    accentDeep: '#831843',
+    educationType: 'Madrasa',
+    classLevels: ['Alim', 'Dakhil', 'Fazil', 'Kamil'],
+  },
 ];
 
 export function classLevelBySlug(slug: string): ClassLevelDef | undefined {
@@ -138,7 +164,7 @@ export function subjectsForClass(books: Book[], def: ClassLevelDef): string[] {
 // appears as an option; selecting it shows an honest empty/coming-soon
 // state, never fake books.
 //
-// Option values: `level:<slug>` for the 5 class levels, the raw classLevel
+// Option values: `level:<slug>` for the 7 class levels, the raw classLevel
 // string for any extra value found in live data that no level covers
 // (e.g. Madrasa/Technical class levels) so nothing that exists today
 // disappears. `?class=` deep links accept both forms.
