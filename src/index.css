@@ -2351,6 +2351,16 @@ a.ev-home-strip-link:hover {
        60px height and eat into the shell's bottom clearance (the
        24 Nov 2026 "nicher bar tik hoini" report). */
     white-space: nowrap;
+    /* Equal cells (owner 24 Nov 12:28 screenshot): without flex the
+       five links bunched into the left half of the bar (measured
+       0–188px of a 360px nav on live, right half empty) and looked
+       cramped / running off the edges on his phone's wider font.
+       flex:1 shares the width (72px each at 360px); min-width:0
+       keeps a wide label inside its cell instead of pushing its
+       siblings off the viewport edge. The widest label
+       ("আমার কোর্স", ~56px in Hind Siliguri 12px) fits its cell. */
+    flex: 1 1 0;
+    min-width: 0;
   }
   .ev-bottom-nav-link:hover {
     color: #fff;

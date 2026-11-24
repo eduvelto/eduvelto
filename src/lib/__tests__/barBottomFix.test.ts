@@ -90,6 +90,18 @@ describe('bar + bottom-nav CSS contract (owner 24 Nov 2026)', () => {
     expect(block).toMatch(/min-height\s*:\s*58px/);
   });
 
+  it('bottom-nav links share the width equally (no bunching, no run-off)', () => {
+    // Owner 24 Nov 12:28 screenshot: without flex the five links
+    // bunched into the left half (0–188px of a 360px nav on live,
+    // right half empty) and looked cramped / running off the edges
+    // on his phone's wider font. Equal cells use the full width;
+    // min-width:0 keeps a wide label inside its cell instead of
+    // pushing siblings off the viewport edge.
+    const block = ruleBlock(CSS, '.ev-bottom-nav-link');
+    expect(block).toMatch(/flex\s*:\s*1/);
+    expect(block).toMatch(/min-width\s*:\s*0/);
+  });
+
   it('menu panel is a RIGHT-side drawer, not a bottom sheet', () => {
     const backdrop = ruleBlock(CSS, '.ev-sheet-backdrop');
     expect(backdrop).toMatch(/justify-content\s*:\s*flex-end/);
