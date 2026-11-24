@@ -117,9 +117,11 @@ function lessonDoc(id: string, overrides: Record<string, unknown> = {}) {
 describe('NU-6 syllabus rules (design §19.3.4)', () => {
   beforeAll(async () => {
     // Sanity: the emulator really loads THIS repo's rules file.
+    // (Rules compaction, 24 Nov 2026: the four NU collections share one
+    // wildcard match with a regex guard — the merged form is the check.)
     const rules = readFileSync(resolve(__dirname, '../firestore.rules'), 'utf8');
-    expect(rules).toContain('match /nuSubjects/{subjectId}');
-    expect(rules).toContain('match /nuLessons/{lessonId}');
+    expect(rules).toContain('match /{nuColl}/{docId}');
+    expect(rules).toContain("nuColl.matches('^nu(Subjects|Chapters|Topics|Lessons)$')");
     expect(rules).toContain('isValidNuSubject');
 
     env = await initializeTestEnvironment({ projectId: PROJECT_ID });

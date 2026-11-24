@@ -38,6 +38,38 @@ const REST_EXPORTER_PATH = resolve(
 function rulesCollections(): Set<string> {
   const out = new Set<string>();
   for (const m of RULES_TEXT.matchAll(/^    match \/([A-Za-z0-9]+)\/\{/gm)) out.add(m[1]);
+  // Wildcard-merged top-level collections (rules compaction, 24 Nov 2026):
+  // a `match /{var}/{docId}` block guards its allows with
+  // `var in ['collA', 'collB', ...]` — those names are real collections
+  // too. Parse the guard list so the drift check keeps proving coverage.
+  // The guard MUST be written exactly as `var in ['a', 'b']` on one line,
+  // OR (expression-limit fix, 24 Nov 2026) as the regex form
+  // `var.matches('^prefix(a|b)$')` on one line; if it is ever written
+  // differently, the stale-entry test below fails loudly instead of
+  // silently losing coverage.
+  for (const m of RULES_TEXT.matchAll(/^    match \/\{(\w+)\}\/\{\w+\} \{/gm)) {
+    const varName = m[1];
+    const blockStart = (m.index ?? 0) + m[0].length;
+    let depth = 1;
+    let i = blockStart;
+    while (i < RULES_TEXT.length && depth > 0) {
+      if (RULES_TEXT[i] === '{') depth++;
+      else if (RULES_TEXT[i] === '}') depth--;
+      i++;
+    }
+    const block = RULES_TEXT.slice(blockStart, i);
+    const guard = new RegExp(`\\b${varName} in \\[([^\\]]+)\\]`).exec(block);
+    if (guard) {
+      for (const name of guard[1].matchAll(/'([A-Za-z0-9]+)'/g)) out.add(name[1]);
+    } else {
+      // Regex-guard form: `var.matches('^prefix(a|b|c)$')` — the
+      // collections are prefix + each alternative.
+      const rx = new RegExp(`\\b${varName}\\.matches\\('\\^([A-Za-z0-9]+)\\(([^)]+)\\)\\$'\\)`).exec(block);
+      if (rx) {
+        for (const alt of rx[2].split('|')) out.add(rx[1] + alt);
+      }
+    }
+  }
   return out;
 }
 

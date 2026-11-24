@@ -113,6 +113,7 @@ service cloud.firestore {
 
     // ---------- validation helpers ----------
     function isStr(v, max) { return v is string && v.size() > 0 && v.size() <= max; }
+    function isReqStr(v) { return v is string && v.size() > 0; }
     function isOptStr(v, max) { return v == null || (v is string && v.size() <= max); }
     // changedKeys — extracted 23 Nov 2026 (rules-size refactor): the
     // diff().affectedKeys() expression appeared verbatim at 62 call
@@ -141,6 +142,12 @@ service cloud.firestore {
     function isVersionStr(v) { return v is string && v.matches('^[0-9]+(\\.[0-9]+){0,2}$'); }
     function isDraftStatus(s) { return s in ['Not Started', 'In Progress', 'Under Review']; }
     function isPublished(d) { return d.get('reviewStatus', '') == 'Published'; }
+    // S7: repeated allow-condition fragments, factored verbatim
+    // (compaction 24 Nov 2026 — same pattern as S1–S6 above).
+    function publishedOrMod() { return isPublished(resource.data) || isModerator(); }
+    function publishedAuthorRead() { return publishedOrMod() || (signedIn() && resource.data.authorId == uid()); }
+    function ownUnderReviewCreate() { return signedIn() && callerActive() && request.resource.data.authorId == uid() && request.resource.data.reviewStatus == 'Under Review'; }
+    function jobTeacherDraftUpdate() { return isTeacher() && resource.data.get('authorId', '') == uid() && isDraftStatus(resource.data.get('reviewStatus', '')) && isDraftStatus(request.resource.data.get('reviewStatus', '')) && resource.data.get('status', '') == 'draft' && request.resource.data.get('status', '') == 'draft'; }
 
     // ---------- Job exams (Step 5 closure — ChatGPT review P0/P1) ----------
     // The 10 canonical Job categories (same list as jobProfile.ts
@@ -160,6 +167,8 @@ service cloud.firestore {
               'defence', 'autonomous', 'private-ngo', 'it-professional',
               'grade-11-20'];
     }
+    // Exam-slug gate shared by the job validators (compaction 24 Nov 2026).
+    function jobExamSlugOk(d) { return d.get('examSlug', null) in jobExamSlugs() && d.get('examSlug', null) != 'it-professional'; }
     // The 23 CANONICAL subject doc IDs (Step 6 fold-in, ChatGPT P1-02):
     // subjects are derived from the verified rulesConfig, never
     // invented — so the rules allowlist the exact 23 IDs (same list as
@@ -305,12 +314,12 @@ service cloud.firestore {
     // (slug group-*). `&&` short-circuits, so the `.size()` / `.hasOnly()`
     // calls below only run after the `is list` / `is string` checks.
     function isValidNuSubject(data) {
-      return data.slug is string && data.slug.size() > 0
-        && data.nameBn is string && data.nameBn.size() > 0
-        && data.syllabusSource is string && data.syllabusSource.size() > 0
+      return isReqStr(data.slug)
+        && isReqStr(data.nameBn)
+        && isReqStr(data.syllabusSource)
         && data.status in ['draft', 'published']
-        && data.circularVersion is string && data.circularVersion.size() > 0
-        && data.createdBy is string && data.createdBy.size() > 0
+        && isReqStr(data.circularVersion)
+        && isReqStr(data.createdBy)
         && data.groupIds is list
         && data.groupIds.size() >= 1 && data.groupIds.size() <= 3
         && data.groupIds.hasOnly(['humanities', 'science', 'business'])
@@ -323,40 +332,34 @@ service cloud.firestore {
             && data.slug in ['bangla', 'english', 'general-knowledge']));
     }
     function isValidNuChapter(data) {
-      return data.subjectId is string && data.subjectId.size() > 0
-        && data.slug is string && data.slug.size() > 0
-        && data.nameBn is string && data.nameBn.size() > 0
+      return isReqStr(data.subjectId)
+        && isReqStr(data.slug)
+        && isReqStr(data.nameBn)
         && data.order is int && data.order >= 1
-        && data.syllabusSource is string && data.syllabusSource.size() > 0
+        && isReqStr(data.syllabusSource)
         && data.syllabusVerified is bool
         && data.status in ['draft', 'published']
-        && data.circularVersion is string && data.circularVersion.size() > 0
-        && data.createdBy is string && data.createdBy.size() > 0;
+        && isReqStr(data.circularVersion)
+        && isReqStr(data.createdBy);
     }
+    // A topic is a chapter plus its own chapterId + detailBn
+    // (compaction 24 Nov 2026 — the chapter checks are shared).
     function isValidNuTopic(data) {
-      return data.subjectId is string && data.subjectId.size() > 0
-        && data.chapterId is string && data.chapterId.size() > 0
-        && data.slug is string && data.slug.size() > 0
-        && data.nameBn is string && data.nameBn.size() > 0
-        && data.detailBn is string && data.detailBn.size() > 0
-        && data.order is int && data.order >= 1
-        && data.syllabusSource is string && data.syllabusSource.size() > 0
-        && data.syllabusVerified is bool
-        && data.status in ['draft', 'published']
-        && data.circularVersion is string && data.circularVersion.size() > 0
-        && data.createdBy is string && data.createdBy.size() > 0;
+      return isValidNuChapter(data)
+        && isReqStr(data.chapterId)
+        && isReqStr(data.detailBn);
     }
     function isValidNuLesson(data) {
-      return data.subjectId is string && data.subjectId.size() > 0
-        && data.chapterId is string && data.chapterId.size() > 0
-        && data.topicId is string && data.topicId.size() > 0
-        && data.slug is string && data.slug.size() > 0
-        && data.titleBn is string && data.titleBn.size() > 0
-        && data.bodyBn is string && data.bodyBn.size() > 0
+      return isReqStr(data.subjectId)
+        && isReqStr(data.chapterId)
+        && isReqStr(data.topicId)
+        && isReqStr(data.slug)
+        && isReqStr(data.titleBn)
+        && isReqStr(data.bodyBn)
         && data.order is int && data.order >= 1
         && data.status in ['draft', 'published']
-        && data.circularVersion is string && data.circularVersion.size() > 0
-        && data.createdBy is string && data.createdBy.size() > 0;
+        && isReqStr(data.circularVersion)
+        && isReqStr(data.createdBy);
     }
 
     // NU-7 (§11.2, §19.2.4, §19.6.1): the question shape. Mirrors
@@ -367,12 +370,12 @@ service cloud.firestore {
     // examYear is required ONLY for official_previous_year.
     function isValidNuQuestion(data) {
       return data.subjectId in ['bangla', 'english', 'general-knowledge']
-        && data.chapterId is string && data.chapterId.size() > 0
-        && data.topicId is string && data.topicId.size() > 0
+        && isReqStr(data.chapterId)
+        && isReqStr(data.topicId)
         && data.groupIds is list && data.groupIds.size() >= 1 && data.groupIds.size() <= 3
         && data.groupIds.toSet().size() == data.groupIds.size()
         && data.groupIds.toSet().hasOnly(['humanities', 'science', 'business'])
-        && data.questionText is string && data.questionText.size() > 0 && data.questionText.size() <= 2000
+        && isReqStr(data.questionText) && data.questionText.size() <= 2000
         && data.questionLang in ['bn', 'en']
         && data.options is list && data.options.size() == 4
         && data.options[0] is string && data.options[0].size() > 0
@@ -381,10 +384,10 @@ service cloud.firestore {
         && data.options[3] is string && data.options[3].size() > 0
         && data.options.toSet().size() == 4
         && data.difficulty in ['easy', 'medium', 'hard']
-        && data.explanation is string && data.explanation.size() > 0
+        && isReqStr(data.explanation)
         && data.sourceType in ['original_practice', 'official_previous_year', 'adapted_hsc', 'unverified_source', 'imported_academic']
-        && data.provenance is string && data.provenance.size() > 0
-        && data.circularVersion is string && data.circularVersion.size() > 0
+        && isReqStr(data.provenance)
+        && isReqStr(data.circularVersion)
         && data.version is int && data.version >= 1
         && data.status in ['draft', 'submitted_for_review', 'under_review', 'approved', 'published', 'rejected', 'changes_requested', 'withdrawn']
         && !('correctOptionIndex' in data)
@@ -396,11 +399,11 @@ service cloud.firestore {
     // NU-7 (§19.2.6): the draft correct answer. One doc per question
     // (id == questionId), version-locked to the question's version.
     function isValidNuQuestionDraftKey(data) {
-      return data.questionId is string && data.questionId.size() > 0
+      return isReqStr(data.questionId)
         && data.version is int && data.version >= 1
         && data.correctOptionIndex is int
         && data.correctOptionIndex >= 0 && data.correctOptionIndex <= 3
-        && data.createdBy is string && data.createdBy.size() > 0
+        && isReqStr(data.createdBy)
         && data.subjectId in ['bangla', 'english', 'general-knowledge']
         && data.groupIds is list && data.groupIds.size() >= 1
         && data.groupIds.toSet().hasOnly(['humanities', 'science', 'business']);
@@ -502,35 +505,34 @@ service cloud.firestore {
     //   * 'it-professional' is excluded: scopeStatus 'scope_pending'
     //     (Step 5 P1-5) + Step 6 handover constraint 4 — no syllabus
     //     may be built from it until the owner fixes its scope.
-    function jobContentStatesConsistent(d) {
-      return (d.get('status', '') == 'published') == (d.get('reviewStatus', '') == 'Published');
-    }
-    function isJobContentReviewState(s) {
-      return s in ['Not Started', 'In Progress', 'Under Review', 'Published'];
-    }
+    // (Compaction 24 Nov 2026: isJobContentReviewState /
+    // jobContentStatesConsistent were byte-identical to the Exam
+    // helpers below — one invariant, one definition. Call sites use
+    // isJobExamReviewState / jobExamStatesConsistent.)
     // Shared create-time facts: draft-only start, author pinned to
     // the caller (or absent), no verifier yet (a new draft has never
     // been verified — verifiedBy/verifiedAt must be absent or null,
     // so a creator cannot bake in a self-verification), timestamps
     // absent or real timestamps.
-    function jobContentCreateCommon(d) {
+    // Shared create-time core (compaction 24 Nov 2026): the
+    // question + content create-common checks are the same 10
+    // facts (P1-04 createdBy provenance, P1-05 no baked-in publish
+    // metadata). jobQuestionCreateCommon adds reviewerId +
+    // rejectionReason on top.
+    function jobCreateCommonCore(d) {
       return d.get('status', '') == 'draft'
         && d.get('reviewStatus', '') == 'Not Started'
         && (d.get('authorId', null) == null || d.get('authorId', null) == uid())
+        && (d.get('createdBy', null) == null || d.get('createdBy', null) == uid())
         && d.get('verifiedBy', null) == null
         && d.get('verifiedAt', null) == null
-        // Step 6 fold-in, ChatGPT P1-04: createdBy is provenance — it
-        // may be absent or the caller, never someone else (a teacher
-        // must not forge createdBy 'seed' or another UID). The seed
-        // itself is applied via the Admin SDK, which bypasses rules.
-        && (d.get('createdBy', null) == null || d.get('createdBy', null) == uid())
-        // Step 6 fold-in, ChatGPT P1-05: publication metadata may
-        // never be baked into a new draft — publishedAt / publishedBy
-        // do not exist in the Step 6 schema at all.
         && !('publishedAt' in d)
         && !('publishedBy' in d)
         && (isOptTs(d, 'createdAt'))
         && (isOptTs(d, 'updatedAt'));
+    }
+    function jobContentCreateCommon(d) {
+      return jobCreateCommonCore(d);
     }
     // SECOND-EYE RULE (Step 3 §2.7 / §3.4): the verifier is never the
     // author. verifiedBy may stay as it is, be cleared (a return), or
@@ -593,8 +595,7 @@ service cloud.firestore {
     // so re-validating the whole new doc is safe: pinned fields are
     // unchanged from an already-valid doc).
     function validJobSubject(d) {
-      return d.get('examSlug', null) in jobExamSlugs()
-        && d.get('examSlug', null) != 'it-professional'
+      return jobExamSlugOk(d)
         && isStr(d.get('nameBn', null), 100)
         && isStr(d.get('nameEn', null), 100)
         && d.get('order', null) is int && d.get('order', null) >= 1
@@ -612,26 +613,20 @@ service cloud.firestore {
         // subject may carry it too). It is outside every update
         // rule's affected-keys allowlist, so it is immutable once set.
         && (isOptStrNoMax(d, 'configVersion'))
-        && d.get('status', null) in ['draft', 'published']
-        && isJobContentReviewState(d.get('reviewStatus', null))
-        && jobContentStatesConsistent(d);
+        && jobContentStateOk(d);
     }
     function validJobChapter(d) {
-      return d.get('examSlug', null) in jobExamSlugs()
-        && d.get('examSlug', null) != 'it-professional'
+      return jobExamSlugOk(d)
         && isJobSubjectId(d.get('subjectId', null))
         && isStr(d.get('nameBn', null), 200)
         && isStr(d.get('nameEn', null), 200)
         && isOptStr(d.get('descriptionBn', null), 1000)
         && isOptStr(d.get('descriptionEn', null), 1000)
         && d.get('order', null) is int && d.get('order', null) >= 1
-        && d.get('status', null) in ['draft', 'published']
-        && isJobContentReviewState(d.get('reviewStatus', null))
-        && jobContentStatesConsistent(d);
+        && jobContentStateOk(d);
     }
     function validJobTopic(d) {
-      return d.get('examSlug', null) in jobExamSlugs()
-        && d.get('examSlug', null) != 'it-professional'
+      return jobExamSlugOk(d)
         && isJobSubjectId(d.get('subjectId', null))
         && isJobChapterId(d.get('chapterId', null))
         && isStr(d.get('nameBn', null), 200)
@@ -652,13 +647,10 @@ service cloud.firestore {
             || (d.get('questionTarget', null) is int && d.get('questionTarget', null) >= 0))
         && d.get('publishedQuestionCount', null) is int
         && d.get('publishedQuestionCount', null) >= 0
-        && d.get('status', null) in ['draft', 'published']
-        && isJobContentReviewState(d.get('reviewStatus', null))
-        && jobContentStatesConsistent(d);
+        && jobContentStateOk(d);
     }
     function validJobLesson(d) {
-      return d.get('examSlug', null) in jobExamSlugs()
-        && d.get('examSlug', null) != 'it-professional'
+      return jobExamSlugOk(d)
         && d.get('lessonType', null) in ['lesson', 'viva-question', 'viva-guide',
                                           'career-guide', 'cv-guide']
         // A 'lesson' lives under a topic: all three parent refs are
@@ -680,9 +672,7 @@ service cloud.firestore {
         && isStr(d.get('body', null), 100000)
         && isOptStr(d.get('bodyEn', null), 100000)
         && d.get('order', null) is int && d.get('order', null) >= 1
-        && d.get('status', null) in ['draft', 'published']
-        && isJobContentReviewState(d.get('reviewStatus', null))
-        && jobContentStatesConsistent(d);
+        && jobContentStateOk(d);
     }
 
     // ---------- Step 7: question bank + verification ----------
@@ -701,26 +691,15 @@ service cloud.firestore {
     // Publication state machine: status published ⟺ reviewStatus
     // 'Published'. 'Rejected'/'Archived' extend the Step 5/6
     // two-field vocabulary for the bank (see lib jobQuestions.ts).
-    function jobQuestionStatesConsistent(d) {
-      return (d.get('status', '') == 'published')
-          == (d.get('reviewStatus', '') == 'Published');
-    }
+    // (Compaction 24 Nov 2026: jobQuestionStatesConsistent was
+    // byte-identical to jobExamStatesConsistent — call sites use it.)
     // Facts every new bank question carries: created as a draft in
     // 'Not Started', no verifier, no rejection, no publish fields,
     // author is the caller when present.
     function jobQuestionCreateCommon(d) {
-      return d.get('status', '') == 'draft'
-        && d.get('reviewStatus', '') == 'Not Started'
-        && (d.get('authorId', null) == null || d.get('authorId', null) == uid())
-        && (d.get('createdBy', null) == null || d.get('createdBy', null) == uid())
-        && d.get('verifiedBy', null) == null
-        && d.get('verifiedAt', null) == null
+      return jobCreateCommonCore(d)
         && d.get('reviewerId', null) == null
-        && d.get('rejectionReason', null) == null
-        && !('publishedAt' in d)
-        && !('publishedBy' in d)
-        && (isOptTs(d, 'createdAt'))
-        && (isOptTs(d, 'updatedAt'));
+        && d.get('rejectionReason', null) == null;
     }
     // Second-eye rule (Step 7 fold-in, ChatGPT P1-01): a
     // publisher/verifier is never the author, AND the publisher
@@ -785,6 +764,12 @@ service cloud.firestore {
         && ((oldDoc.get('status', '') == 'published' && newDoc.get('status', '') == 'draft')
             || newDoc.get('version', 0) == oldDoc.get('version', 0));
     }
+    // S8: job-content state fragments, factored verbatim (compaction
+    // 24 Nov 2026). jobContentStateOk covers the exam/content
+    // 4-state vocabulary; jobQuestionStateOk the bank 7-state one.
+    function jobContentStateOk(d) { return d.get('status', null) in ['draft', 'published'] && isJobExamReviewState(d.get('reviewStatus', null)) && jobExamStatesConsistent(d); }
+    function jobQuestionStateOk(d) { return d.get('status', null) in ['draft', 'published'] && isJobQuestionReviewState(d.get('reviewStatus', null)) && jobExamStatesConsistent(d); }
+    function jobContentChecks() { return jobContentSecondEye(resource.data, request.resource.data) && jobContentPublishTransition(resource.data, request.resource.data); }
     // Field-shape of a bank question. Per-item option checks (each
     // option's letter + text) are NOT possible in rules — lists have
     // no indexing — so rules enforce the 4-option count and the lib
@@ -849,7 +834,7 @@ service cloud.firestore {
         && (d.get('duplicateReview', null) == null || d.get('duplicateReview', null) is map)
         && d.get('status', null) in ['draft', 'published']
         && isJobQuestionReviewState(d.get('reviewStatus', null))
-        && jobQuestionStatesConsistent(d)
+        && jobExamStatesConsistent(d)
         && d.get('version', null) is int && d.get('version', null) >= 1
         && d.get('schemaVersion', null) is int && d.get('schemaVersion', null) == 2
         && (isOptStrNoMax(d, 'legacyId'))
@@ -890,9 +875,7 @@ service cloud.firestore {
                 && d.get('sourceUrl', null) is string))
         && isStr(d.get('source', null), 500)
         && (isOptStrNoMax(d, 'sourceUrl'))
-        && d.get('status', null) in ['draft', 'published']
-        && isJobQuestionReviewState(d.get('reviewStatus', null))
-        && jobQuestionStatesConsistent(d)
+        && jobQuestionStateOk(d)
         && isStr(d.get('duplicateHash', null), 200)
         && d.get('version', null) is int && d.get('version', null) >= 1
         && (isOptStrNoMax(d, 'rejectionReason'))
@@ -927,9 +910,7 @@ service cloud.firestore {
         && d.get('questionCount', null) <= 200
         && d.get('questionCount', null) == d.get('questions', null).size()
         && d.get('sourceQuestionIds', null) is list
-        && d.get('status', null) in ['draft', 'published']
-        && isJobQuestionReviewState(d.get('reviewStatus', null))
-        && jobQuestionStatesConsistent(d)
+        && jobQuestionStateOk(d)
         && (isOptStrNoMax(d, 'configVersion'))
         // Step 8 fold-in (finding 5): the bundle generation an
         // attempt binds to — optional here (older bundles may lack
@@ -2355,11 +2336,8 @@ service cloud.firestore {
     // Create with reviewStatus forced to "Under Review". Authors edit only
     // their own while still unreviewed. Only Moderator/Admin publish/remove.
     match /posts/{postId} {
-      allow read: if isPublished(resource.data) || isModerator()
-        || (signedIn() && resource.data.authorId == uid());
-      allow create: if signedIn() && callerActive()
-        && request.resource.data.authorId == uid()
-        && request.resource.data.reviewStatus == 'Under Review'
+      allow read: if publishedAuthorRead();
+      allow create: if ownUnderReviewCreate()
         && isStr(request.resource.data.title, 200)
         && isStr(request.resource.data.body, 5000);
       allow update: if isModerator()
@@ -2369,20 +2347,14 @@ service cloud.firestore {
       allow delete: if isAdmin();
     }
     match /posts/{postId}/comments/{commentId} {
-      allow read: if isPublished(resource.data) || isModerator()
-        || (signedIn() && resource.data.authorId == uid());
-      allow create: if signedIn() && callerActive()
-        && request.resource.data.authorId == uid()
-        && request.resource.data.reviewStatus == 'Under Review'
+      allow read: if publishedAuthorRead();
+      allow create: if ownUnderReviewCreate()
         && isStr(request.resource.data.body, 1000);
       allow update, delete: if isModerator();
     }
     match /questions/{questionId} {
-      allow read: if isPublished(resource.data) || isModerator()
-        || (signedIn() && resource.data.authorId == uid());
-      allow create: if signedIn() && callerActive()
-        && request.resource.data.authorId == uid()
-        && request.resource.data.reviewStatus == 'Under Review'
+      allow read: if publishedAuthorRead();
+      allow create: if ownUnderReviewCreate()
         && isStr(request.resource.data.title, 200)
         && isStr(request.resource.data.body, 5000);
       allow update: if isModerator()
@@ -2392,11 +2364,8 @@ service cloud.firestore {
       allow delete: if isAdmin();
     }
     match /questions/{questionId}/answers/{answerId} {
-      allow read: if isPublished(resource.data) || isModerator()
-        || (signedIn() && resource.data.authorId == uid());
-      allow create: if signedIn() && callerActive()
-        && request.resource.data.authorId == uid()
-        && request.resource.data.reviewStatus == 'Under Review'
+      allow read: if publishedAuthorRead();
+      allow create: if ownUnderReviewCreate()
         && isStr(request.resource.data.body, 5000);
       // isAccepted may be set only by the question author or a moderator.
       // H2 (security audit 22 Nov 2026): the author may change ONLY
@@ -2733,17 +2702,13 @@ service cloud.firestore {
       allow delete: if false;
     }
     match /follows/{followId} {
-      allow read: if signedIn() && resource.data.followerId == uid();
+      allow read, delete: if signedIn() && resource.data.followerId == uid();
       allow create: if signedIn() && callerActive() && request.resource.data.followerId == uid();
-      allow delete: if signedIn() && resource.data.followerId == uid();
       allow update: if false;
     }
     match /socialPosts/{postId} {
-      allow read: if isPublished(resource.data) || isModerator()
-        || (signedIn() && resource.data.authorId == uid());
-      allow create: if signedIn() && callerActive()
-        && request.resource.data.authorId == uid()
-        && request.resource.data.reviewStatus == 'Under Review'
+      allow read: if publishedAuthorRead();
+      allow create: if ownUnderReviewCreate()
         && isStr(request.resource.data.body, 1000);
       allow update: if isModerator()
         || (signedIn() && callerActive() && resource.data.authorId == uid()
@@ -2752,15 +2717,13 @@ service cloud.firestore {
       allow delete: if isAdmin();
     }
     match /socialPosts/{postId}/comments/{commentId} {
-      allow read: if isPublished(resource.data) || isModerator();
-      allow create: if signedIn() && callerActive()
-        && request.resource.data.authorId == uid()
-        && request.resource.data.reviewStatus == 'Under Review'
+      allow read: if publishedOrMod();
+      allow create: if ownUnderReviewCreate()
         && isStr(request.resource.data.body, 500);
       allow update, delete: if isModerator();
     }
     match /studyGroups/{groupId} {
-      allow read: if isPublished(resource.data) || isModerator();
+      allow read: if publishedOrMod();
       allow create: if signedIn() && callerActive() && request.resource.data.reviewStatus == 'Under Review'
         && isStr(request.resource.data.name, 100) && isStr(request.resource.data.description, 500);
       allow update: if isModerator();
@@ -2774,12 +2737,11 @@ service cloud.firestore {
       allow delete: if isAdmin();
     }
     match /institutionPages/{pageId} {
-      allow read: if isPublished(resource.data) || isModerator();
-      allow create, update: if isAdmin();
-      allow delete: if isAdmin();
+      allow read: if publishedOrMod();
+      allow create, update, delete: if isAdmin();
     }
     match /notices/{noticeId} {
-      allow read: if isPublished(resource.data) || isModerator();
+      allow read: if publishedOrMod();
       allow create: if isModerator()
         && request.resource.data.reviewStatus == 'Under Review'
         && isStr(request.resource.data.title, 200) && isStr(request.resource.data.body, 2000);
@@ -2789,7 +2751,7 @@ service cloud.firestore {
 
     // ---------- games / competitions (Phase 3) ----------
     match /games/{gameId} {
-      allow read: if isPublished(resource.data) || isModerator();
+      allow read: if publishedOrMod();
       allow create: if contentCreate();
       allow update: if contentUpdate(resource.data);
       allow delete: if isAdmin();
@@ -2801,9 +2763,8 @@ service cloud.firestore {
       allow update, delete: if false;
     }
     match /competitions/{competitionId} {
-      allow read: if isPublished(resource.data) || isModerator();
-      allow create: if isModerator();
-      allow update: if isModerator();
+      allow read: if publishedOrMod();
+      allow create, update: if isModerator();
       allow delete: if isAdmin();
     }
     match /competitions/{competitionId}/entries/{userId} {
@@ -2825,33 +2786,34 @@ service cloud.firestore {
       allow write: if false;
     }
     match /achievements/{key} {
-      allow read: if isPublished(resource.data) || isModerator();
+      allow read: if publishedOrMod();
       allow write: if isAdmin();
     }
-    match /users/{userId}/userAchievements/{key} {
-      allow read: if isOwner(userId) || isAdmin();
-      allow create: if isOwner(userId) && callerActive();
+    // userAchievements + passportEntries share identical rules
+    // (compaction 24 Nov 2026): one wildcard match with a
+    // collection guard. The guard is load-bearing — no other
+    // /users/{userId}/* subcollection is granted anything here.
+    match /users/{userId}/{achColl}/{key} {
+      allow read: if achColl in ['userAchievements', 'passportEntries']
+        && (isOwner(userId) || isAdmin());
+      allow create: if achColl in ['userAchievements', 'passportEntries']
+        && isOwner(userId) && callerActive();
       allow update, delete: if false;
     }
     match /certificates/{certId} {
       allow read: if signedIn() && (resource.data.userId == uid() || isAdmin());
       allow write: if isModerator();
     }
-    match /users/{userId}/passportEntries/{entryId} {
-      allow read: if isOwner(userId) || isAdmin();
-      allow create: if isOwner(userId) && callerActive();
-      allow update, delete: if false;
-    }
 
     // ---------- career / opportunities (Phase 4) ----------
     match /careerPaths/{pathId} {
-      allow read: if isPublished(resource.data) || isModerator();
+      allow read: if publishedOrMod();
       allow create: if isVerifiedJobBankAuthor() && isDraftStatus(request.resource.data.reviewStatus);
       allow update: if contentUpdate(resource.data);
       allow delete: if isAdmin();
     }
     match /opportunities/{oppId} {
-      allow read: if isPublished(resource.data) || isModerator();
+      allow read: if publishedOrMod();
       allow create: if isModerator() && isDraftStatus(request.resource.data.reviewStatus);
       allow update: if isModerator();
       allow delete: if isAdmin();
@@ -2948,8 +2910,7 @@ service cloud.firestore {
       allow read: if signedIn() && (resource.data.studentId == uid() || isAdmin());
       allow create: if signedIn() && callerActive() && request.resource.data.studentId == uid()
         && request.resource.data.status == 'sent';
-      allow update: if isAdmin();
-      allow delete: if isAdmin();
+      allow update, delete: if isAdmin();
     }
 
     // ---------- gift catalogue / partnerships: empty / owner-only until funded ----------
@@ -3490,56 +3451,31 @@ service cloud.firestore {
     // Owner/Admin only. Published docs are never edited in place (a
     // correction is a new version, NU-7). Field checks mirror
     // lib/nuSyllabus.ts — the group-40 block stays ONE doc per group.
-    match /nuSubjects/{subjectId} {
-      allow read: if signedIn() && (resource.data.status == 'published' || isAdmin()
-        || (isVerifiedTeacher() && resource.data.createdBy == uid()));
-      allow create: if (isAdmin() || (isVerifiedTeacher() && request.resource.data.createdBy == uid()))
-        && request.resource.data.status == 'draft'
-        && isValidNuSubject(request.resource.data);
-      allow update: if adminOrOwnTeacher()
-        && resource.data.status != 'published'
-        && !(request.resource.data.status == 'published' && !isAdmin())
-        && sameCreator()
-        && isValidNuSubject(request.resource.data);
-      allow delete: if false;
+    // nuSubjects / nuChapters / nuTopics / nuLessons share identical
+    // rules except the validator (compaction 24 Nov 2026): one
+    // wildcard match with a collection guard. The guard is
+    // load-bearing — no other top-level collection is granted
+    // anything here — and the BRT-08 drift test parses it.
+    function validNuContent(coll, d) {
+      return coll == 'nuSubjects' ? isValidNuSubject(d)
+        : coll == 'nuChapters' ? isValidNuChapter(d)
+        : coll == 'nuTopics' ? isValidNuTopic(d)
+        : isValidNuLesson(d);
     }
-    match /nuChapters/{chapterId} {
-      allow read: if signedIn() && (resource.data.status == 'published' || isAdmin()
+    match /{nuColl}/{docId} {
+      allow read: if nuColl.matches('^nu(Subjects|Chapters|Topics|Lessons)$')
+        && signedIn() && (resource.data.status == 'published' || isAdmin()
         || (isVerifiedTeacher() && resource.data.createdBy == uid()));
-      allow create: if (isAdmin() || (isVerifiedTeacher() && request.resource.data.createdBy == uid()))
+      allow create: if nuColl.matches('^nu(Subjects|Chapters|Topics|Lessons)$')
+        && (isAdmin() || (isVerifiedTeacher() && request.resource.data.createdBy == uid()))
         && request.resource.data.status == 'draft'
-        && isValidNuChapter(request.resource.data);
-      allow update: if adminOrOwnTeacher()
+        && validNuContent(nuColl, request.resource.data);
+      allow update: if nuColl.matches('^nu(Subjects|Chapters|Topics|Lessons)$')
+        && adminOrOwnTeacher()
         && resource.data.status != 'published'
         && !(request.resource.data.status == 'published' && !isAdmin())
         && sameCreator()
-        && isValidNuChapter(request.resource.data);
-      allow delete: if false;
-    }
-    match /nuTopics/{topicId} {
-      allow read: if signedIn() && (resource.data.status == 'published' || isAdmin()
-        || (isVerifiedTeacher() && resource.data.createdBy == uid()));
-      allow create: if (isAdmin() || (isVerifiedTeacher() && request.resource.data.createdBy == uid()))
-        && request.resource.data.status == 'draft'
-        && isValidNuTopic(request.resource.data);
-      allow update: if adminOrOwnTeacher()
-        && resource.data.status != 'published'
-        && !(request.resource.data.status == 'published' && !isAdmin())
-        && sameCreator()
-        && isValidNuTopic(request.resource.data);
-      allow delete: if false;
-    }
-    match /nuLessons/{lessonId} {
-      allow read: if signedIn() && (resource.data.status == 'published' || isAdmin()
-        || (isVerifiedTeacher() && resource.data.createdBy == uid()));
-      allow create: if (isAdmin() || (isVerifiedTeacher() && request.resource.data.createdBy == uid()))
-        && request.resource.data.status == 'draft'
-        && isValidNuLesson(request.resource.data);
-      allow update: if adminOrOwnTeacher()
-        && resource.data.status != 'published'
-        && !(request.resource.data.status == 'published' && !isAdmin())
-        && sameCreator()
-        && isValidNuLesson(request.resource.data);
+        && validNuContent(nuColl, request.resource.data);
       allow delete: if false;
     }
 
@@ -3962,188 +3898,93 @@ service cloud.firestore {
     //     viva-guide / career-guide / cv-guide content is Step 16.
     //     lessonType is pinned on update, so a 'lesson' doc cannot be
     //     converted into Step 16 content by an update either.
-    match /jobSubjects/{subjectId} {
-      allow read: if signedIn() && resource.data.get('status', '') == 'published'
-        || (signedIn() && resource.data.get('authorId', '') == uid())
-        || isModerator();
-      // Step 6 fold-in, ChatGPT P1-02: subjects are canonical metadata
-      // derived from the verified rulesConfig — teachers and moderators
-      // NEVER create subjects (the 23 come from the seed, Admin SDK).
-      // Only Admin/Owner, and only one of the 23 canonical IDs. A
-      // `slug` field, when present, must agree with the doc ID.
-      allow create: if isAdmin()
-        && jobContentCreateCommon(request.resource.data)
-        && validJobSubject(request.resource.data)
-        && subjectId in canonicalJobSubjectIds()
-        && subjectId.matches('^' + request.resource.data.get('examSlug', '') + '__[a-z0-9-]+$')
-        && (request.resource.data.get('slug', null) == null
-            || subjectId == request.resource.data.get('examSlug', '') + '__' + request.resource.data.get('slug', ''));
-      allow update: if isTeacher()
-        && resource.data.get('authorId', '') == uid()
-        && isDraftStatus(resource.data.get('reviewStatus', ''))
-        && isDraftStatus(request.resource.data.get('reviewStatus', ''))
-        && resource.data.get('status', '') == 'draft'
-        && request.resource.data.get('status', '') == 'draft'
-        && changedKeys()
-             .hasOnly(['nameBn', 'nameEn', 'order', 'marks', 'syllabusSource',
-                       'reviewStatus', 'updatedAt'])
-        && validJobSubject(request.resource.data);
-      allow update: if isModerator()
-        && changedKeys()
-             .hasOnly(['nameBn', 'nameEn', 'order', 'marks', 'syllabusSource',
-                       'status', 'reviewStatus', 'verifiedBy', 'verifiedAt', 'updatedAt'])
-        // Step 5 P0-4, adapted: a Moderator may return/unpublish a
-        // Published doc, but may NOT silently edit its content — on a
-        // Published doc only the status/verifier fields may change.
-        && (resource.data.get('status', '') != 'published'
-            || changedKeys()
-                 .hasOnly(reviewKeys()))
-        && jobContentSecondEye(resource.data, request.resource.data)
-        && jobContentPublishTransition(resource.data, request.resource.data)
-        && validJobSubject(request.resource.data);
-      // Admin: same fields as the Moderator rule, but without the
-      // published-content guard — an Admin may fix a typo in a
-      // Published doc without unpublishing it first.
-      allow update: if isAdmin()
-        && changedKeys()
-             .hasOnly(['nameBn', 'nameEn', 'order', 'marks', 'syllabusSource',
-                       'status', 'reviewStatus', 'verifiedBy', 'verifiedAt', 'updatedAt'])
-        && jobContentSecondEye(resource.data, request.resource.data)
-        && jobContentPublishTransition(resource.data, request.resource.data)
-        && validJobSubject(request.resource.data);
-      allow delete: if isAdmin();
+    // jobSubjects / jobChapters / jobTopics / jobLessons share one
+    // structure (compaction 24 Nov 2026): one wildcard match with a
+    // collection guard. The guard is load-bearing — no other
+    // top-level collection is granted anything here — and the
+    // BRT-08 drift test parses it. The per-collection differences
+    // (validator, key lists, create actor, ID/parent checks) live in
+    // the jobContent* dispatchers; each allow below is the exact
+    // conjunction the four separate blocks enforced. Notes carried
+    // over: subjects are canonical metadata (Admin-only create, one
+    // of the 23 IDs, slug agrees with the doc ID); a Moderator may
+    // return/unpublish a Published doc but may NOT silently edit its
+    // content (P0-4 published-content guard); an Admin may fix a typo
+    // in a Published doc without unpublishing it first.
+    function validJobContent(coll, d) {
+      return coll == 'jobSubjects' ? validJobSubject(d)
+        : coll == 'jobChapters' ? validJobChapter(d)
+        : coll == 'jobTopics' ? validJobTopic(d)
+        : validJobLesson(d);
     }
-    match /jobChapters/{chapterId} {
-      allow read: if signedIn() && resource.data.get('status', '') == 'published'
-        || (signedIn() && resource.data.get('authorId', '') == uid())
-        || isModerator();
-      allow create: if isVerifiedJobBankAuthor()
-        && jobContentCreateCommon(request.resource.data)
-        && validJobChapter(request.resource.data)
-        && chapterId.matches('^' + request.resource.data.get('subjectId', '') + '__[a-z0-9-]+$')
-        // Step 6 fold-in, ChatGPT P0-04: the parent subject must belong
-        // to the same exam (no cross-exam reference) and must EXIST.
-        && request.resource.data.get('subjectId', '').matches('^' + request.resource.data.get('examSlug', '') + '__[a-z0-9-]+$')
-        && exists(/databases/$(database)/documents/jobSubjects/$(request.resource.data.get('subjectId', '')));
-      allow update: if isTeacher()
-        && resource.data.get('authorId', '') == uid()
-        && isDraftStatus(resource.data.get('reviewStatus', ''))
-        && isDraftStatus(request.resource.data.get('reviewStatus', ''))
-        && resource.data.get('status', '') == 'draft'
-        && request.resource.data.get('status', '') == 'draft'
-        && changedKeys()
-             .hasOnly(['nameBn', 'nameEn', 'descriptionBn', 'descriptionEn',
-                       'order', 'reviewStatus', 'updatedAt'])
-        && validJobChapter(request.resource.data);
-      allow update: if isModerator()
-        && changedKeys()
-             .hasOnly(['nameBn', 'nameEn', 'descriptionBn', 'descriptionEn',
-                       'order', 'status', 'reviewStatus', 'verifiedBy', 'verifiedAt', 'updatedAt'])
-        && (resource.data.get('status', '') != 'published'
-            || changedKeys()
-                 .hasOnly(reviewKeys()))
-        && jobContentSecondEye(resource.data, request.resource.data)
-        && jobContentPublishTransition(resource.data, request.resource.data)
-        && validJobChapter(request.resource.data);
-      allow update: if isAdmin()
-        && changedKeys()
-             .hasOnly(['nameBn', 'nameEn', 'descriptionBn', 'descriptionEn',
-                       'order', 'status', 'reviewStatus', 'verifiedBy', 'verifiedAt', 'updatedAt'])
-        && jobContentSecondEye(resource.data, request.resource.data)
-        && jobContentPublishTransition(resource.data, request.resource.data)
-        && validJobChapter(request.resource.data);
-      allow delete: if isAdmin();
+    function jobContentTeacherKeys(coll) {
+      return coll == 'jobSubjects' ? ['nameBn', 'nameEn', 'order', 'marks', 'syllabusSource', 'reviewStatus', 'updatedAt']
+        : coll == 'jobChapters' ? ['nameBn', 'nameEn', 'descriptionBn', 'descriptionEn', 'order', 'reviewStatus', 'updatedAt']
+        : coll == 'jobTopics' ? ['nameBn', 'nameEn', 'order', 'isCommon', 'commonExams', 'commonStatus', 'questionTarget', 'reviewStatus', 'updatedAt']
+        : ['titleBn', 'titleEn', 'body', 'bodyEn', 'order', 'reviewStatus', 'updatedAt'];
     }
-    match /jobTopics/{topicId} {
-      allow read: if signedIn() && resource.data.get('status', '') == 'published'
-        || (signedIn() && resource.data.get('authorId', '') == uid())
-        || isModerator();
-      allow create: if isVerifiedJobBankAuthor()
-        && jobContentCreateCommon(request.resource.data)
-        && validJobTopic(request.resource.data)
-        && topicId.matches('^' + request.resource.data.get('chapterId', '') + '__[a-z0-9-]+$')
-        // Step 6 fold-in, ChatGPT P0-04: the parent chapter must belong
-        // to the same subject (no cross-subject reference), the subject
-        // to the same exam, and the chapter must EXIST.
-        && request.resource.data.get('subjectId', '').matches('^' + request.resource.data.get('examSlug', '') + '__[a-z0-9-]+$')
-        && request.resource.data.get('chapterId', '').matches('^' + request.resource.data.get('subjectId', '') + '__[a-z0-9-]+$')
-        && exists(/databases/$(database)/documents/jobChapters/$(request.resource.data.get('chapterId', '')));
-      allow update: if isTeacher()
-        && resource.data.get('authorId', '') == uid()
-        && isDraftStatus(resource.data.get('reviewStatus', ''))
-        && isDraftStatus(request.resource.data.get('reviewStatus', ''))
-        && resource.data.get('status', '') == 'draft'
-        && request.resource.data.get('status', '') == 'draft'
-        && changedKeys()
-             .hasOnly(['nameBn', 'nameEn', 'order', 'isCommon', 'commonExams',
-                       'commonStatus', 'questionTarget', 'reviewStatus', 'updatedAt'])
-        && validJobTopic(request.resource.data);
-      allow update: if isModerator()
-        && changedKeys()
-             .hasOnly(['nameBn', 'nameEn', 'order', 'isCommon', 'commonExams',
-                       'commonStatus', 'questionTarget', 'publishedQuestionCount',
-                       'status', 'reviewStatus', 'verifiedBy', 'verifiedAt', 'updatedAt'])
-        && (resource.data.get('status', '') != 'published'
-            || changedKeys()
-                 .hasOnly(reviewKeys()))
-        && jobContentSecondEye(resource.data, request.resource.data)
-        && jobContentPublishTransition(resource.data, request.resource.data)
-        && validJobTopic(request.resource.data);
-      allow update: if isAdmin()
-        && changedKeys()
-             .hasOnly(['nameBn', 'nameEn', 'order', 'isCommon', 'commonExams',
-                       'commonStatus', 'questionTarget', 'publishedQuestionCount',
-                       'status', 'reviewStatus', 'verifiedBy', 'verifiedAt', 'updatedAt'])
-        && jobContentSecondEye(resource.data, request.resource.data)
-        && jobContentPublishTransition(resource.data, request.resource.data)
-        && validJobTopic(request.resource.data);
-      allow delete: if isAdmin();
+    function jobContentModKeys(coll) {
+      return coll == 'jobSubjects' ? ['nameBn', 'nameEn', 'order', 'marks', 'syllabusSource', 'status', 'reviewStatus', 'verifiedBy', 'verifiedAt', 'updatedAt']
+        : coll == 'jobChapters' ? ['nameBn', 'nameEn', 'descriptionBn', 'descriptionEn', 'order', 'status', 'reviewStatus', 'verifiedBy', 'verifiedAt', 'updatedAt']
+        : coll == 'jobTopics' ? ['nameBn', 'nameEn', 'order', 'isCommon', 'commonExams', 'commonStatus', 'questionTarget', 'publishedQuestionCount', 'status', 'reviewStatus', 'verifiedBy', 'verifiedAt', 'updatedAt']
+        : ['titleBn', 'titleEn', 'body', 'bodyEn', 'order', 'status', 'reviewStatus', 'verifiedBy', 'verifiedAt', 'updatedAt'];
     }
-    match /jobLessons/{lessonId} {
-      allow read: if signedIn() && resource.data.get('status', '') == 'published'
-        || (signedIn() && resource.data.get('authorId', '') == uid())
-        || isModerator();
-      allow create: if isVerifiedJobBankAuthor()
-        && jobContentCreateCommon(request.resource.data)
-        && request.resource.data.get('lessonType', '') == 'lesson'
-        && validJobLesson(request.resource.data)
-        // Step 6 fold-in, ChatGPT P0-04: the parent chain must be
-        // consistent (subject under this exam, chapter under this
-        // subject, topic under this chapter) and the topic must EXIST.
-        // The lesson doc ID stays auto-generated by design.
-        && request.resource.data.get('subjectId', '').matches('^' + request.resource.data.get('examSlug', '') + '__[a-z0-9-]+$')
-        && request.resource.data.get('chapterId', '').matches('^' + request.resource.data.get('subjectId', '') + '__[a-z0-9-]+$')
-        && request.resource.data.get('topicId', '').matches('^' + request.resource.data.get('chapterId', '') + '__[a-z0-9-]+$')
-        && exists(/databases/$(database)/documents/jobTopics/$(request.resource.data.get('topicId', '')));
-      allow update: if isTeacher()
-        && resource.data.get('authorId', '') == uid()
-        && isDraftStatus(resource.data.get('reviewStatus', ''))
-        && isDraftStatus(request.resource.data.get('reviewStatus', ''))
-        && resource.data.get('status', '') == 'draft'
-        && request.resource.data.get('status', '') == 'draft'
-        && changedKeys()
-             .hasOnly(['titleBn', 'titleEn', 'body', 'bodyEn', 'order',
-                       'reviewStatus', 'updatedAt'])
-        && validJobLesson(request.resource.data);
-      allow update: if isModerator()
-        && changedKeys()
-             .hasOnly(['titleBn', 'titleEn', 'body', 'bodyEn', 'order',
-                       'status', 'reviewStatus', 'verifiedBy', 'verifiedAt', 'updatedAt'])
-        && (resource.data.get('status', '') != 'published'
-            || changedKeys()
-                 .hasOnly(reviewKeys()))
-        && jobContentSecondEye(resource.data, request.resource.data)
-        && jobContentPublishTransition(resource.data, request.resource.data)
-        && validJobLesson(request.resource.data);
-      allow update: if isAdmin()
-        && changedKeys()
-             .hasOnly(['titleBn', 'titleEn', 'body', 'bodyEn', 'order',
-                       'status', 'reviewStatus', 'verifiedBy', 'verifiedAt', 'updatedAt'])
-        && jobContentSecondEye(resource.data, request.resource.data)
-        && jobContentPublishTransition(resource.data, request.resource.data)
-        && validJobLesson(request.resource.data);
-      allow delete: if isAdmin();
+    function jobContentIdOk(coll, docId, d) {
+      return coll == 'jobSubjects'
+        ? (docId in canonicalJobSubjectIds()
+           && docId.matches('^' + d.get('examSlug', '') + '__[a-z0-9-]+$')
+           && (d.get('slug', null) == null || docId == d.get('examSlug', '') + '__' + d.get('slug', '')))
+        : coll == 'jobChapters'
+        ? (docId.matches('^' + d.get('subjectId', '') + '__[a-z0-9-]+$')
+           && d.get('subjectId', '').matches('^' + d.get('examSlug', '') + '__[a-z0-9-]+$')
+           && exists(/databases/$(database)/documents/jobSubjects/$(d.get('subjectId', ''))))
+        : coll == 'jobTopics'
+        ? (docId.matches('^' + d.get('chapterId', '') + '__[a-z0-9-]+$')
+           && d.get('subjectId', '').matches('^' + d.get('examSlug', '') + '__[a-z0-9-]+$')
+           && d.get('chapterId', '').matches('^' + d.get('subjectId', '') + '__[a-z0-9-]+$')
+           && exists(/databases/$(database)/documents/jobChapters/$(d.get('chapterId', ''))))
+        : (d.get('lessonType', '') == 'lesson'
+           && d.get('subjectId', '').matches('^' + d.get('examSlug', '') + '__[a-z0-9-]+$')
+           && d.get('chapterId', '').matches('^' + d.get('subjectId', '') + '__[a-z0-9-]+$')
+           && d.get('topicId', '').matches('^' + d.get('chapterId', '') + '__[a-z0-9-]+$')
+           && exists(/databases/$(database)/documents/jobTopics/$(d.get('topicId', ''))));
     }
+    match /{jobColl}/{docId} {
+      allow read: if jobColl.matches('^job(Subjects|Chapters|Topics|Lessons)$')
+        && (signedIn() && resource.data.get('status', '') == 'published'
+        || (signedIn() && resource.data.get('authorId', '') == uid())
+        || isModerator());
+      allow create: if jobColl.matches('^job(Subjects|Chapters|Topics|Lessons)$')
+        && (jobColl == 'jobSubjects' ? isAdmin() : isVerifiedJobBankAuthor())
+        && jobContentCreateCommon(request.resource.data)
+        && validJobContent(jobColl, request.resource.data)
+        && jobContentIdOk(jobColl, docId, request.resource.data);
+      // One combined update (compaction 24 Nov 2026, expression-limit
+      // fix): the teacher / moderator / admin rules were three separate
+      // allows, each re-evaluating the collection guard — and the guard
+      // is evaluated for EVERY top-level write, because this wildcard
+      // match also matches jobQuestions (whose moderator-publish path
+      // sits ~30 expressions under Firestore's 1000-expression limit).
+      // Each disjunct is the full original condition minus the shared
+      // guard + validJobContent (evaluated once, after the disjunction);
+      // the moderator keeps the published-content guard, the admin does
+      // not — semantics unchanged, verified by the emulator suite.
+      allow update: if jobColl.matches('^job(Subjects|Chapters|Topics|Lessons)$')
+        && ((jobTeacherDraftUpdate()
+             && changedKeys().hasOnly(jobContentTeacherKeys(jobColl)))
+            || (isModerator()
+                && changedKeys().hasOnly(jobContentModKeys(jobColl))
+                && (resource.data.get('status', '') != 'published'
+                    || changedKeys().hasOnly(reviewKeys()))
+                && jobContentChecks())
+            || (isAdmin()
+                && changedKeys().hasOnly(jobContentModKeys(jobColl))
+                && jobContentChecks()))
+        && validJobContent(jobColl, request.resource.data);
+      allow delete: if jobColl.matches('^job(Subjects|Chapters|Topics|Lessons)$')
+        && isAdmin();
+    }
+
 
     // ---------- Step 9: full exam + model tests (jobExamDefinitions) ----------
     // jobExamDefinitions — the mock definition (Step 3 §2.10's
@@ -4193,8 +4034,7 @@ service cloud.firestore {
         && isStr(s.get('scoringConfigVersion', null), 100);
     }
     function validJobExamDefinition(d, mockId) {
-      return d.get('examSlug', null) in jobExamSlugs()
-        && d.get('examSlug', null) != 'it-professional'
+      return jobExamSlugOk(d)
         && isStr(d.get('titleBn', null), 200)
         && isStr(d.get('titleEn', null), 200)
         && d.get('kind', null) in ['daily', 'weekly', 'full']
@@ -4272,8 +4112,7 @@ service cloud.firestore {
     // point the definition at it — running sessions keep their
     // stored questionSetId and are unaffected.
     function validJobQuestionSetManifest(d) {
-      return d.get('examSlug', null) in jobExamSlugs()
-        && d.get('examSlug', null) != 'it-professional'
+      return jobExamSlugOk(d)
         && isStr(d.get('mockId', null), 200)
         && d.get('version', null) is int && d.get('version', 0) >= 1
         && d.get('questionCount', null) is int
@@ -5181,15 +5020,14 @@ service cloud.firestore {
         && (d.get('knownDeviceIds', null) == null || d.get('knownDeviceIds', null) is list);
     }
     match /ownerSecurity/{ownerId} {
-      allow get: if isOwnerRole() && isOwner(ownerId);
+      allow get, delete: if isOwnerRole() && isOwner(ownerId);
       allow list: if false;
       allow create, update: if isOwnerRole() && isOwner(ownerId)
         && isValidOwnerSecurityDoc(request.resource.data);
-      allow delete: if isOwnerRole() && isOwner(ownerId);
       // Append-only login history (update never: a record is written
       // once at sign-in and never edited).
       match /loginHistory/{entryId} {
-        allow get, list: if isOwnerRole() && isOwner(ownerId);
+        allow get, list, delete: if isOwnerRole() && isOwner(ownerId);
         allow create: if isOwnerRole() && isOwner(ownerId)
           && request.resource.data.keys().toSet().hasOnly(['createdAt', 'deviceId', 'userAgent', 'isNewDevice'])
           && request.resource.data.createdAt is timestamp
@@ -5198,18 +5036,16 @@ service cloud.firestore {
           && request.resource.data.userAgent.size() <= 300
           && request.resource.data.isNewDevice is bool;
         allow update: if false;
-        allow delete: if isOwnerRole() && isOwner(ownerId);
       }
       // Backup-code hashes: created at generation, deleted on consume
       // or regenerate. Never updated (a hash is immutable by design).
       match /backupCodes/{codeHash} {
-        allow get, list: if isOwnerRole() && isOwner(ownerId);
+        allow get, list, delete: if isOwnerRole() && isOwner(ownerId);
         allow create: if isOwnerRole() && isOwner(ownerId)
           && request.resource.data.keys().toSet().hasOnly(['salt', 'createdAt'])
           && isStr(request.resource.data.salt, 64)
           && request.resource.data.createdAt is timestamp;
         allow update: if false;
-        allow delete: if isOwnerRole() && isOwner(ownerId);
       }
     }
 
