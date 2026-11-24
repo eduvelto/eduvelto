@@ -344,7 +344,7 @@ export default function FounderPage() {
         </h3>
         <ul style={{ lineHeight: 2, paddingLeft: 20, margin: '0 0 12px' }}>
           <li>
-            <Link to="/library">{t({ bn: 'ডিজিটাল লাইব্রেরি — ৬০৯টি বই, ২,৩০৭টি অধ্যায়, ২৩,৩৪৬টি প্রশ্ন', en: 'Digital Library — 609 books, 2,307 chapters, 23,346 questions' })}</Link>{' '}
+            <Link to="/library">{t({ bn: 'ডিজিটাল লাইব্রেরি — ৬০৯টি বই, ২,৩০৭টি অধ্যায়, ২৩,২৫৯টি প্রশ্ন', en: 'Digital Library — 609 books, 2,307 chapters, 23,259 questions' })}</Link>{' '}
             <StatusChip label={t({ bn: 'উপলব্ধ এখন', en: 'Available now' })} kind="live" />
           </li>
           <li>

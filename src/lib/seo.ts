@@ -119,11 +119,12 @@ export const ORGANIZATION_JSON_LD = {
   ],
 };
 
-/** Shared WebSite structured data. SearchAction added 24 Nov 2026
- * (homepage redesign): /search is now a real site-wide search over
- * books, jobs, opportunities, life services and guide pages, so the
- * search-box target is real. /search itself stays noindex (no
- * STATIC_ROUTES entry; robots.txt disallows it). */
+/** Shared WebSite structured data. No SearchAction / potentialAction
+ * (SEO review IMP-32, 24 Nov 2026): Google deprecated the sitelinks
+ * search box (Nov 2024), and /search is robots-disallowed + noindex
+ * by design — the markup must not advertise a URL crawlers may not
+ * fetch. /search itself is a real site-wide search; only the
+ * structured-data pointer to it is removed. */
 export const WEBSITE_JSON_LD = {
   '@context': 'https://schema.org',
   '@type': 'WebSite',
@@ -134,14 +135,6 @@ export const WEBSITE_JSON_LD = {
   description: 'A Smarter World of Learning — a free digital education platform from Bangladesh.',
   inLanguage: ['bn', 'en'],
   publisher: { '@id': 'https://eduvelto.com#organization' },
-  potentialAction: {
-    '@type': 'SearchAction',
-    target: {
-      '@type': 'EntryPoint',
-      urlTemplate: 'https://eduvelto.com/search?q={search_term_string}',
-    },
-    'query-input': 'required name=search_term_string',
-  },
 };
 
 function setMetaByName(name: string, content: string): void {
@@ -191,6 +184,16 @@ function setLink(rel: string, hreflang: string, href: string): void {
   el.setAttribute('href', href);
 }
 
+/** OG locale pair for a page language (SEO review IMP-34, 24 Nov 2026):
+ * a share must carry the page's own locale, with the other language
+ * as the alternate — the static shell (bn_BD) was wrong on EN pages.
+ * Pure + exported for tests. */
+export function ogLocaleForLang(lang: 'bn' | 'en'): { locale: string; alternate: string } {
+  return lang === 'bn'
+    ? { locale: 'bn_BD', alternate: 'en_US' }
+    : { locale: 'en_US', alternate: 'bn_BD' };
+}
+
 export function useSeo(seo: SeoData, lang: 'bn' | 'en' = 'bn'): void {
   useEffect(() => {
     document.title = seo.title;
@@ -199,6 +202,12 @@ export function useSeo(seo: SeoData, lang: 'bn' | 'en' = 'bn'): void {
     setMetaByProperty('og:description', seo.description);
     setMetaByProperty('og:type', seo.ogType ?? 'website');
     setMetaByProperty('og:url', seo.canonical);
+    // OG locale follows the page language (IMP-34): setMetaByProperty
+    // updates the static shell tags in place (bn_BD + en_US alternate
+    // for the default bn home shell; swapped on EN pages).
+    const ogLocale = ogLocaleForLang(lang);
+    setMetaByProperty('og:locale', ogLocale.locale);
+    setMetaByProperty('og:locale:alternate', ogLocale.alternate);
     if (seo.ogImage) {
       setMetaByProperty('og:image', seo.ogImage);
       setMetaByProperty('og:image:width', String(OG_IMAGE_WIDTH));
