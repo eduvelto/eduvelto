@@ -7,7 +7,7 @@
 // exists, no invented courses, no fake counts.
 
 import { describe, expect, it } from 'vitest';
-import { buildStaticCatalogue, searchBooks, searchStatic } from '../globalSearch';
+import { buildStaticCatalogue, globalSearchStatic, searchBooks, searchStatic } from '../globalSearch';
 import type { Book } from '../content';
 
 const BOOKS: Book[] = [
@@ -121,5 +121,27 @@ describe('searchBooks', () => {
   it('returns nothing for an empty query and for no match', () => {
     expect(searchBooks(BOOKS, '')).toEqual([]);
     expect(searchBooks(BOOKS, 'quantum physics xyz')).toEqual([]);
+  });
+});
+
+describe('globalSearchStatic', () => {
+  it('returns static results with no books and booksFailed false', () => {
+    const r = globalSearchStatic('BCS');
+    expect(r.query).toBe('BCS');
+    expect(r.books).toEqual([]);
+    expect(r.booksFailed).toBe(false);
+    expect(r.jobs.length).toBeGreaterThan(0);
+    expect(r.total).toBe(r.jobs.length + r.opportunities.length + r.services.length + r.pages.length);
+    // Every static result links to a route that exists.
+    for (const hit of [...r.jobs, ...r.opportunities, ...r.services, ...r.pages]) {
+      expect(hit.to).toMatch(/^\//);
+    }
+  });
+
+  it('returns an empty result for an empty query', () => {
+    const r = globalSearchStatic('   ');
+    expect(r.query).toBe('');
+    expect(r.total).toBe(0);
+    expect(r.booksFailed).toBe(false);
   });
 });

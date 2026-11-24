@@ -117,7 +117,6 @@ export default function ClassSubjectPage() {
           {t({ bn: `← ${def.bn} — সব বিষয়`, en: `← ${def.en} — All subjects` })}
         </Link>
       </p>
-      <h2 style={{ color: 'var(--heading)', fontSize: 24, margin: '0 0 4px' }}>{subject}</h2>
       <p style={{ color: 'var(--muted-ivory)', margin: '0 0 20px' }}>
         {t({ bn: `${def.bn} — এই বিষয়ের শুধুমাত্র এই শ্রেণির বই`, en: `${def.en} — only this class's books for this subject` })}
       </p>

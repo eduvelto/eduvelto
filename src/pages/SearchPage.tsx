@@ -14,7 +14,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { PageShell } from '../components/PageShell';
 import { useLanguage } from '../i18n/LanguageContext';
-import { globalSearch, type GlobalSearchResults, type SearchKind, type SearchResult } from '../lib/globalSearch';
+import { globalSearch, globalSearchStatic, type GlobalSearchResults, type SearchKind, type SearchResult } from '../lib/globalSearch';
 
 type Tab = 'all' | 'book' | 'job' | 'opportunity' | 'service' | 'page';
 
@@ -49,6 +49,7 @@ export default function SearchPage() {
   const [results, setResults] = useState<GlobalSearchResults | null>(null);
   const [loading, setLoading] = useState(false);
   const [booksFailed, setBooksFailed] = useState(false);
+  const [booksLoading, setBooksLoading] = useState(false);
   const [tab, setTab] = useState<Tab>('all');
 
   useEffect(() => {
@@ -57,21 +58,32 @@ export default function SearchPage() {
     if (!q.trim()) {
       setResults(null);
       setLoading(false);
+      setBooksFailed(false);
+      setBooksLoading(false);
       return;
     }
     let live = true;
     setLoading(true);
     setBooksFailed(false);
+    // Static results first (no network): jobs, opportunities, services
+    // and pages render instantly; book results merge in when the cached
+    // book list resolves (website audit, 24 Nov 2026 — cold search
+    // showed only a spinner for ~20s while everything waited on the
+    // 609-doc book read).
+    setResults(globalSearchStatic(q));
+    setBooksLoading(true);
+    setLoading(false);
     globalSearch(q)
       .then((r) => {
         if (!live) return;
         setResults(r);
-        setLoading(false);
+        setBooksFailed(r.booksFailed);
+        setBooksLoading(false);
       })
       .catch(() => {
         if (!live) return;
         setBooksFailed(true);
-        setLoading(false);
+        setBooksLoading(false);
       });
     return () => {
       live = false;
@@ -147,6 +159,11 @@ export default function SearchPage() {
                   en: `${results.total} result${results.total === 1 ? '' : 's'} for “${results.query}”`,
                 })}
           </p>
+          {booksLoading ? (
+            <p className="ev-search-note">
+              {t({ bn: 'বইয়ের ফলাফল লোড হচ্ছে…', en: 'Loading book results…' })}
+            </p>
+          ) : null}
           {booksFailed ? (
             <p className="ev-search-note">
               {t({ bn: 'বইয়ের তালিকা লোড করা যায়নি — বই ছাড়া বাকি ফলাফল দেখানো হচ্ছে।', en: 'The book list could not be loaded — showing the other results without books.' })}

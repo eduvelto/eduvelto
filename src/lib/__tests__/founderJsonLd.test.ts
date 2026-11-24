@@ -34,12 +34,15 @@ describe('FounderPage JSON-LD — Organization vs Person', () => {
   });
 
   it('Person sameAs lists the founder personal profiles', () => {
+    // Website audit, 24 Nov 2026: Instagram @ahmmmizan is SUSPENDED
+    // (appeal exhausted 23 Nov 2026), so it is NOT listed as a live
+    // profile — restore it only if the account is ever reinstated.
     expect(PERSON_JSON_LD.sameAs).toEqual([
       'https://www.facebook.com/ahmmmizan',
       'https://www.youtube.com/@alihasanmdmizan',
-      'https://www.instagram.com/ahmmmizan',
       'https://www.tiktok.com/@ahmmizan',
     ]);
+    expect(PERSON_JSON_LD.sameAs).not.toContain('https://www.instagram.com/ahmmmizan');
   });
 
   it('Organization description matches the site-wide block — no Class 1–8 promise', () => {

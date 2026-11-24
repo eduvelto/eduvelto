@@ -458,7 +458,7 @@ export default function ClassDashboardPage() {
         aria-label={t(def)}
       >
         <div>
-          <h2
+          <h1
             style={{
               fontFamily: "'Poppins','Hind Siliguri',system-ui,sans-serif",
               fontSize: 26,
@@ -468,7 +468,7 @@ export default function ClassDashboardPage() {
             }}
           >
             {t({ bn: `${def.bn} — চলো, একসাথে শিখি!`, en: `${def.en} — Let's Learn Together!` })}
-          </h2>
+          </h1>
           <p style={{ margin: 0, color: 'rgba(255,255,255,0.92)', fontSize: 15 }}>
             {t({ bn: def.tagBn, en: def.tagEn })}
           </p>

@@ -8,7 +8,7 @@
 //
 // HONESTY (binding — the mockups are full of fake sample numbers):
 // - Stat cards show REAL values only: live users count, live-or-last-
-//   verified books (609) and exams (212), and questions (20,970, last
+//   verified books (609) and exams (1014), and questions (23,346, last
 //   verified). "Total Learning Sessions" and "Average Score" have no
 //   tracking at all, so those cards are REPLACED by Books and
 //   Questions — never faked.
