@@ -92,7 +92,9 @@ describe('HeroGreeting v5 rendered HTML', () => {
     expect(renderHero()).toContain('ev-hero-greeting-attr');
     expect(renderHeroAs('en')).toContain(HERO_GREETING_ATTR_EN);
     // The attribution is hidden on mobile by CSS (display: none under
-    // 641px) and shown inline on desktop — one line is the hard rule.
+    // 641px) and shown inline on desktop. The line WRAPS on narrow
+    // screens (owner 24 Nov 2026 09:35 — the v5 one-line rule truncated
+    // the sentence on his phone); the full sentence is always visible.
     // The live mobile/desktop split is verified by the Playwright probe.
   });
 
