@@ -440,12 +440,31 @@ export function jobMockKindLabelBn(kind: JobMockKind): string {
  * and the mock list). Bank shows the disabled-penalty note
  * (Step 8 fold-in M1) — never the provisional 0.25 as a rule. */
 export function jobMockPatternSummaryBn(snapshot: JobMockRulesSnapshot, questionCountOverride?: number): string {
+  return jobMockPatternSummary(snapshot, questionCountOverride, 'bn');
+}
+
+/** Mock pattern line in the selected language: "100টি MCQ · 60 মিনিট"
+ * in Bangla, "100 MCQs · 60 min" in English
+ * (jobMockPatternSummaryBn is the Bangla wrapper). */
+export function jobMockPatternSummary(
+  snapshot: JobMockRulesSnapshot,
+  questionCountOverride: number | undefined,
+  lang: 'bn' | 'en',
+): string {
   // Step 9 closure (N3): the snapshot count is the definition's
   // DECLARED count — the frozen manifest is the authority, and the
   // bundle is what the student actually faces. A caller that
   // already holds the bundle passes its real count so the intro
   // never promises N questions and runs M.
   const count = questionCountOverride ?? snapshot.questionCount;
+  if (lang === 'en') {
+    const base = `${count} MCQs · ${snapshot.timeMinutes} min`;
+    if (snapshot.negativeMarking === null || snapshot.negativeMarking === 0) {
+      return `${base} · No negative marking — notice verification pending`;
+    }
+    const neg = snapshot.negativeMarking === 0.5 ? '−0.50' : '−0.25';
+    return `${base} · ${neg} per wrong answer`;
+  }
   const base = `${count}টি MCQ · ${snapshot.timeMinutes} মিনিট`;
   if (snapshot.negativeMarking === null || snapshot.negativeMarking === 0) {
     return `${base} · নেগেটিভ মার্কিং বন্ধ — বিজ্ঞপ্তি যাচাই বাকি`;
