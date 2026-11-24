@@ -7,6 +7,14 @@
 // (linked from the footer, the Profile "অ্যাপ আপডেট" section, the update
 // notice bar, and the forced-update block screen).
 //
+// IN-APP (23 Nov 2026): inside the Capacitor Android app this page must
+// NOT show the PWA install steps — the user already HAS the app, and
+// the old "অ্যাপ ইনস্টল করুন" button linked back to /install (a loop).
+// When isNativeApp() is true the page renders the app view instead
+// ("আপনি ইতিমধ্যেই Eduvelto অ্যাপ ব্যবহার করছেন" + a Home button) and
+// the PWA copy below is untouched for browser visitors. No store URL
+// is named anywhere here — no listing exists yet.
+//
 // Android/Chrome fire `beforeinstallprompt` when the PWA is installable;
 // the page captures it and offers a real Install button. iOS Safari
 // never fires it, so iOS users get the Share → Add to Home Screen steps.
@@ -16,8 +24,9 @@
 import { useEffect, useState } from 'react';
 import { PageShell } from '../components/PageShell';
 import AppUpdateSection from '../components/AppUpdateSection';
-import { Button } from '../components/ui';
+import { Button, LinkButton } from '../components/ui';
 import { useLanguage } from '../i18n/LanguageContext';
+import { isNativeApp } from '../lib/isNativeApp';
 
 interface BeforeInstallPromptEvent extends Event {
   prompt: () => Promise<void>;
@@ -41,8 +50,12 @@ export default function InstallPage() {
   const [deferredPrompt, setDeferredPrompt] = useState<BeforeInstallPromptEvent | null>(null);
   const [installed, setInstalled] = useState(isStandalone());
   const [installResult, setInstallResult] = useState('');
+  // Inside the Capacitor app there is nothing to install — the PWA
+  // install listeners and steps below are browser-only.
+  const inApp = isNativeApp();
 
   useEffect(() => {
+    if (inApp) return;
     if (isStandalone()) {
       setInstalled(true);
       return;
@@ -62,7 +75,7 @@ export default function InstallPage() {
       window.removeEventListener('beforeinstallprompt', onBeforeInstall);
       window.removeEventListener('appinstalled', onInstalled);
     };
-  }, []);
+  }, [inApp]);
 
   const install = async () => {
     if (!deferredPrompt || typeof deferredPrompt.prompt !== 'function') return;
@@ -76,6 +89,27 @@ export default function InstallPage() {
     }
     setDeferredPrompt(null);
   };
+
+  // IN-APP VIEW: the user already has the app. No PWA install steps,
+  // no install button that would link back here (the old loop).
+  // AppUpdateSection renders its neutral in-app form here too (bundled
+  // version only, no "latest version" claim).
+  if (inApp) {
+    return (
+      <PageShell titleBn="Eduvelto অ্যাপ" titleEn="Eduvelto app">
+        <p style={{ lineHeight: 1.8 }}>
+          {t({
+            bn: 'আপনি ইতিমধ্যেই Eduvelto অ্যাপ ব্যবহার করছেন — আলাদা করে ইনস্টল করার কিছু নেই।',
+            en: 'You are already using the Eduvelto app — there is nothing else to install.',
+          })}
+        </p>
+        <p>
+          <LinkButton to="/">হোমে ফিরুন →</LinkButton>
+        </p>
+        <AppUpdateSection />
+      </PageShell>
+    );
+  }
 
   return (
     <PageShell titleBn="অ্যাপ ইনস্টল করুন" titleEn="Install the app">
