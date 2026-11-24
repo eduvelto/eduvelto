@@ -94,7 +94,7 @@ export const ORGANIZATION_JSON_LD = {
   logo: 'https://eduvelto.com/logo.png',
   slogan: 'Learn • Grow • Achieve',
   description:
-    'A Smarter World of Learning — a free digital education platform from Bangladesh, in Bangla and English, for students from Class 1 to Honours.',
+    'A Smarter World of Learning — a free Bangladeshi digital education and life services platform: a digital library, job and admission preparation with MCQ practice, career guidance and everyday life services, for students from Class 9 to Honours (SSC, HSC, Honours and Masters, plus Madrasa and Technical streams).',
   foundingDate: '2026',
   foundingLocation: {
     '@type': 'Place',
@@ -336,8 +336,8 @@ export default function FounderPage() {
         <h2 style={sectionH2}>{t({ bn: 'Eduvelto — কী আছে, কী আসছে', en: 'What Eduvelto offers' })}</h2>
         <p style={bodyP}>
           {t({
-            bn: 'Eduvelto বাংলাদেশের শিক্ষার্থীদের জন্য একটি বিনামূল্যের ডিজিটাল শিক্ষা প্ল্যাটফর্ম — পাঠ, পরীক্ষা, ডিজিটাল লাইব্রেরি ও পড়ার পরিকল্পনা, প্রথম শ্রেণি থেকে অনার্স পর্যন্ত। শিক্ষার্থী, শিক্ষক ও অভিভাবকদের জন্য সম্পূর্ণ বিনামূল্যে: কোনো রেজিস্ট্রেশন ফি নেই, কোনো যাচাই ফি নেই, কখনোই না।',
-            en: 'Eduvelto is a free digital education platform for Bangladesh — lessons, exams, a digital library and study planning, for students from Class 1 to Honours. It is free for students, teachers and guardians: no registration fee and no verification fee, ever.',
+            bn: 'Eduvelto বাংলাদেশের শিক্ষার্থীদের জন্য একটি বিনামূল্যের ডিজিটাল শিক্ষা প্ল্যাটফর্ম — পাঠ, পরীক্ষা, ডিজিটাল লাইব্রেরি ও পড়ার পরিকল্পনা — শ্রেণি ৯ থেকে অনার্স পর্যন্ত, মাদ্রাসা ও কারিগরি ধারাসহ। শিক্ষার্থী, শিক্ষক ও অভিভাবকদের জন্য সম্পূর্ণ বিনামূল্যে: কোনো রেজিস্ট্রেশন ফি নেই, কোনো যাচাই ফি নেই, কখনোই না।',
+            en: 'Eduvelto is a free digital education platform for Bangladesh — lessons, exams, a digital library and study planning, for students from Class 9 to Honours — SSC, HSC, Honours and Masters, plus Madrasa and Technical streams. It is free for students, teachers and guardians: no registration fee and no verification fee, ever.',
           })}
         </p>
         <h3 style={{ fontSize: 16, margin: '20px 0 8px', color: 'var(--heading)' }}>
@@ -345,11 +345,11 @@ export default function FounderPage() {
         </h3>
         <ul style={{ lineHeight: 2, paddingLeft: 20, margin: '0 0 12px' }}>
           <li>
-            <Link to="/library">{t({ bn: 'ডিজিটাল লাইব্রেরি — ৬০৯টি বই, ২,১০৯টি অধ্যায়, ২০,৯৭০টি প্রশ্ন', en: 'Digital Library — 609 books, 2,109 chapters, 20,970 questions' })}</Link>{' '}
+            <Link to="/library">{t({ bn: 'ডিজিটাল লাইব্রেরি — ৬০৯টি বই, ২,৩০৭টি অধ্যায়, ২৩,৩৪৬টি প্রশ্ন', en: 'Digital Library — 609 books, 2,307 chapters, 23,346 questions' })}</Link>{' '}
             <StatusChip label={t({ bn: 'উপলব্ধ এখন', en: 'Available now' })} kind="live" />
           </li>
           <li>
-            <Link to="/exam">{t({ bn: 'পরীক্ষা — ২১২টি পরীক্ষা, ফলাফল ও অগ্রগতি পর্যবেক্ষণসহ', en: 'Exams — 212 exams with results and progress tracking' })}</Link>{' '}
+            <Link to="/exam">{t({ bn: 'পরীক্ষা — MCQ পরীক্ষা, ফলাফল ও অগ্রগতি পর্যবেক্ষণসহ', en: 'Exams — MCQ exams with results and progress tracking' })}</Link>{' '}
             <StatusChip label={t({ bn: 'উপলব্ধ এখন', en: 'Available now' })} kind="live" />
           </li>
           <li>
@@ -360,7 +360,7 @@ export default function FounderPage() {
             <StatusChip label={t({ bn: 'উপলব্ধ এখন', en: 'Available now' })} kind="live" />
           </li>
           <li>
-            {t({ bn: 'PWA — ইনস্টল করা যায় এমন অ্যাপ, অফলাইনে চলে', en: 'PWA — installable app, works offline' })} <StatusChip label={t({ bn: 'উপলব্ধ এখন', en: 'Available now' })} kind="live" />
+            {t({ bn: 'PWA — ইনস্টল করা যায় এমন অ্যাপ (অনলাইন-ভিত্তিক)', en: 'PWA — installable app (online-only)' })} <StatusChip label={t({ bn: 'উপলব্ধ এখন', en: 'Available now' })} kind="live" />
           </li>
           <li>
             {t({ bn: 'মালিকের অ্যাডমিন ড্যাশবোর্ড', en: 'Owner Admin Dashboard' })} <StatusChip label={t({ bn: 'উপলব্ধ এখন', en: 'Available now' })} kind="live" />
@@ -406,8 +406,8 @@ export default function FounderPage() {
         <p style={bodyP}>
           <strong>{t({ bn: 'মিশন:', en: 'Mission:' })}</strong>{' '}
           {t({
-            bn: 'শেখার উপকরণ — বই, পাঠ, প্রশ্নব্যাংক, পরীক্ষা, ফলাফল ও অগ্রগতি পর্যবেক্ষণ — প্রথম শ্রেণি থেকে অনার্স পর্যন্ত, বাংলায় ও ইংরেজিতে, সবার জন্য উপলব্ধ করা।',
-            en: 'make learning resources — books, lessons, question banks, exams, results and progress tracking — available to everyone, in Bangla and English, from Class 1 to Honours.',
+            bn: 'শেখার উপকরণ — বই, পাঠ, প্রশ্নব্যাংক, পরীক্ষা, ফলাফল ও অগ্রগতি পর্যবেক্ষণ — শ্রেণি ৯ থেকে অনার্স পর্যন্ত, বাংলায় ও ইংরেজিতে, সবার জন্য উপলব্ধ করা।',
+            en: 'make learning resources — books, lessons, question banks, exams, results and progress tracking — available to everyone, in Bangla and English, from Class 9 to Honours.',
           })}
         </p>
         <p style={bodyP}>
@@ -441,8 +441,36 @@ export default function FounderPage() {
           {t({ bn: 'এখানে কোনো পুরস্কার বা আনুষ্ঠানিক সম্মান দাবি করা হয়নি — শুধু যাচাইকৃত মাইলফলকই তালিকাভুক্ত।', en: 'No awards or formal honours are claimed here — only verified milestones are listed.' })}
         </p>
 
-        {/* Social links */}
+        {/* Social links — Eduvelto's OFFICIAL links are the brand
+            profiles only (YouTube @EduveltoBD, Facebook
+            facebook.com/EduveltoBD, LinkedIn linkedin.com/company/
+            eduvelto — same three as the Organization JSON-LD sameAs).
+            The founder's personal profiles are listed separately
+            below, labelled as his own — never as Eduvelto's official
+            channels (24 Nov 2026, brand-SEO wave 1, trust draft §5). */}
         <h2 style={sectionH2}>{t({ bn: 'অফিসিয়াল লিংক', en: 'Official links' })}</h2>
+        <ul style={{ lineHeight: 2.2, paddingLeft: 20, margin: '0 0 12px', listStyle: 'none', paddingInlineStart: 0 }}>
+          <li>
+            <a href="https://www.youtube.com/@EduveltoBD" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--link)' }}>
+              {t({ bn: 'ইউটিউব — @EduveltoBD', en: 'YouTube — @EduveltoBD' })}
+            </a>
+          </li>
+          <li>
+            <a href="https://www.facebook.com/EduveltoBD" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--link)' }}>
+              {t({ bn: 'ফেসবুক — facebook.com/EduveltoBD', en: 'Facebook — facebook.com/EduveltoBD' })}
+            </a>
+          </li>
+          <li>
+            <a href="https://www.linkedin.com/company/eduvelto" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--link)' }}>
+              {t({ bn: 'লিংকডইন — linkedin.com/company/eduvelto', en: 'LinkedIn — linkedin.com/company/eduvelto' })}
+            </a>
+          </li>
+          <li>
+            <Link to="/" style={{ color: 'var(--link)' }}>Eduvelto — eduvelto.com</Link>
+          </li>
+        </ul>
+
+        <h2 style={sectionH2}>{t({ bn: 'প্রতিষ্ঠাতার ব্যক্তিগত লিংক', en: "Founder's personal profiles" })}</h2>
         <ul style={{ lineHeight: 2.2, paddingLeft: 20, margin: '0 0 12px', listStyle: 'none', paddingInlineStart: 0 }}>
           <li>
             <a href="https://www.facebook.com/ahmmmizan" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--link)' }}>
@@ -463,9 +491,6 @@ export default function FounderPage() {
             <a href="https://www.tiktok.com/@ahmmizan" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--link)' }}>
               {t({ bn: 'টিকটক — @ahmmizan', en: 'TikTok — @ahmmizan' })}
             </a>
-          </li>
-          <li>
-            <Link to="/" style={{ color: 'var(--link)' }}>Eduvelto — eduvelto.com</Link>
           </li>
         </ul>
 

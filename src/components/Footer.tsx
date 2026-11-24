@@ -146,6 +146,10 @@ export default function Footer() {
           <Link to="/why-eduvelto">{t({ bn: 'কেন Eduvelto', en: 'Why Eduvelto' })}</Link>
           <Link to="/privacy">{t({ bn: 'গোপনীয়তা নীতি', en: 'Privacy Policy' })}</Link>
           <Link to="/terms">{t({ bn: 'শর্তাবলী', en: 'Terms' })}</Link>
+          <Link to="/editorial-policy">{t({ bn: 'সম্পাদকীয় নীতি', en: 'Editorial Policy' })}</Link>
+          <Link to="/content-accuracy">{t({ bn: 'বিষয়বস্তুর নির্ভুলতা', en: 'Content Accuracy' })}</Link>
+          <Link to="/certificate-policy">{t({ bn: 'সার্টিফিকেট নীতি', en: 'Certificate Policy' })}</Link>
+          <Link to="/disclaimer">{t({ bn: 'দায়বর্জন', en: 'Disclaimer' })}</Link>
           <Link to="/contact">{t({ bn: 'যোগাযোগ', en: 'Contact' })}</Link>
           <Link to="/install">{t({ bn: 'অ্যাপ ইনস্টল / আপডেট', en: 'Install / update app' })}</Link>
           <Link to="/health">{t({ bn: 'স্বাস্থ্য', en: 'Health' })}</Link>

@@ -13,11 +13,15 @@
 // is guaranteed.
 //
 // HONESTY (22 Nov 2026, owner order: "Bangladesh number 1 education
-// channel" search must find Eduvelto):
-//  - No title/description here claims a verified "#1" rank. The
-//    framing is "সেরা ফ্রি শিক্ষা প্ল্যাটফর্ম" (best free platform) —
-//    an ambition, backed by the real free offer — never "১ নম্বর" as
-//    a fact. A unit test enforces this (see __tests__/seo.test.ts).
+// channel" search must find Eduvelto; REVISED 24 Nov 2026, brand-SEO
+// wave 1, F-01 — the "সেরা" framing was itself quoted back by
+// Google's AI Overview as self-promotion, so it is gone):
+//  - No title/description here claims "সেরা" (best), "best", or a
+//    verified "#1" rank. The homepage title/description state plainly
+//    what Eduvelto is — a free Bangladeshi education and life-services
+//    platform. /why-eduvelto keeps its ambition only as an explicit
+//    goal ("আমাদের লক্ষ্য — …আস্থার প্ল্যাটফর্ম হওয়া"), never as a
+//    rank. A unit test enforces this (see __tests__/seo.test.ts).
 //  - Only routes that really exist are listed. Auth/admin/app routes
 //    resolve to null and keep the static home fallback.
 //  - Content language is always Bangla (owner rule 22 Nov 2026), so
@@ -41,6 +45,7 @@ import { nuSyllabusSubjectBySlug } from './nuSyllabus';
 import { NU_GROUPS } from './nuProfile';
 import { OPPORTUNITY_SEED } from './opportunitySeed';
 import { isPublished } from './opportunities';
+import { PUBLIC_GUIDES } from './publicGuides';
 
 export type SeoData = {
   title: string;
@@ -84,7 +89,7 @@ export const ORGANIZATION_JSON_LD = {
   logo: LOGO_URL,
   slogan: 'Learn • Grow • Achieve',
   description:
-    'A Smarter World of Learning — a free digital education platform from Bangladesh, in Bangla and English, for students from Class 1 to Honours.',
+    'A Smarter World of Learning — a free Bangladeshi digital education and life services platform: a digital library, job and admission preparation with MCQ practice, career guidance and everyday life services, for students from Class 9 to Honours (SSC, HSC, Honours and Masters, plus Madrasa and Technical streams).',
   foundingDate: '2026',
   foundingLocation: {
     '@type': 'Place',
@@ -228,15 +233,15 @@ type RouteSeoEntry = { title: string; description: string; crumb: string };
 
 const STATIC_ROUTES: Record<string, RouteSeoEntry> = {
   '/': {
-    title: 'Eduvelto — বাংলাদেশের সেরা ফ্রি শিক্ষা প্ল্যাটফর্ম',
+    title: 'Eduvelto — বাংলাদেশের ফ্রি শিক্ষা প্ল্যাটফর্ম',
     description:
-      'বাংলাদেশের সেরা ফ্রি শিক্ষা প্ল্যাটফর্ম Eduvelto — BCS, ব্যাংক, প্রাথমিক শিক্ষক, NTRCA ও জাতীয় বিশ্ববিদ্যালয় ভর্তি প্রস্তুতি, MCQ পরীক্ষা ও ডিজিটাল লাইব্রেরি — সম্পূর্ণ বিনামূল্যে।',
+      'Eduvelto — বাংলাদেশের ফ্রি শিক্ষা ও জীবনসেবা প্ল্যাটফর্ম: BCS, ব্যাংক, প্রাথমিক শিক্ষক, NTRCA ও জাতীয় বিশ্ববিদ্যালয় ভর্তি প্রস্তুতি, MCQ পরীক্ষা ও ডিজিটাল লাইব্রেরি — সম্পূর্ণ বিনামূল্যে।',
     crumb: 'হোম',
   },
   '/why-eduvelto': {
-    title: 'কেন Eduvelto — বাংলাদেশের সেরা ফ্রি শিক্ষা প্ল্যাটফর্ম',
+    title: 'কেন Eduvelto — বাংলাদেশের ফ্রি শিক্ষা প্ল্যাটফর্ম',
     description:
-      'কেন Eduvelto বাংলাদেশের সেরা ফ্রি শিক্ষা প্ল্যাটফর্ম হতে চায় — ১০০% বিনামূল্যে BCS, ব্যাংক, প্রাথমিক শিক্ষক, NTRCA ও জাতীয় বিশ্ববিদ্যালয় ভর্তি প্রস্তুতি, MCQ পরীক্ষা ও ডিজিটাল লাইব্রেরি।',
+      'কেন Eduvelto বাংলাদেশের শিক্ষার্থীদের আস্থার ফ্রি শিক্ষা প্ল্যাটফর্ম হতে চায় — ১০০% বিনামূল্যে BCS, ব্যাংক, প্রাথমিক শিক্ষক, NTRCA ও জাতীয় বিশ্ববিদ্যালয় ভর্তি প্রস্তুতি, MCQ পরীক্ষা ও ডিজিটাল লাইব্রেরি।',
     crumb: 'কেন Eduvelto',
   },
   '/jobs': {
@@ -429,6 +434,34 @@ const STATIC_ROUTES: Record<string, RouteSeoEntry> = {
       'Eduvelto-র শর্তাবলী — সম্পূর্ণ বিনামূল্যের শিক্ষা প্ল্যাটফর্ম ব্যবহারের নিয়ম, অ্যাকাউন্ট ও লগইন, আর গোপনীয়তা।',
     crumb: 'শর্তাবলী',
   },
+  // Trust pages (24 Nov 2026, brand-SEO wave 1, F-08): the four
+  // policy pages Google expects — editorial policy, content
+  // accuracy, certificate policy (plain: no certificates of any
+  // kind) and disclaimer. Each has a real page + footer link.
+  '/editorial-policy': {
+    title: 'সম্পাদকীয় নীতি | Eduvelto',
+    description:
+      'Eduvelto-র বিষয়বস্তু কীভাবে তৈরি, যাচাই ও সংশোধন করা হয় — তার নীতি।',
+    crumb: 'সম্পাদকীয় নীতি',
+  },
+  '/content-accuracy': {
+    title: 'বিষয়বস্তুর নির্ভুলতা নীতি | Eduvelto',
+    description:
+      'Eduvelto-র তথ্য কতটা নির্ভরযোগ্য, "যাচাইকৃত" মানে কী এবং গুরুত্বপূর্ণ তারিখ ও ফি কোথায় যাচাই করবেন।',
+    crumb: 'বিষয়বস্তুর নির্ভুলতা',
+  },
+  '/certificate-policy': {
+    title: 'সার্টিফিকেট নীতি | Eduvelto',
+    description:
+      'Eduvelto কোনো সার্টিফিকেট দেয় না — অনুশীলন পরীক্ষার নম্বর শুধু নিজের মূল্যায়নের জন্য।',
+    crumb: 'সার্টিফিকেট নীতি',
+  },
+  '/disclaimer': {
+    title: 'দায়বর্জন | Eduvelto',
+    description:
+      'Eduvelto-র তথ্য শুধু শিক্ষামূলক — এটি পেশাদার পরামর্শ নয়। গুরুত্বপূর্ণ তথ্য অফিসিয়াল উৎস থেকে যাচাই করুন।',
+    crumb: 'দায়বর্জন',
+  },
   '/health': {
     title: 'স্বাস্থ্য — সচেতনতামূলক তথ্য | Eduvelto',
     description:
@@ -587,14 +620,80 @@ const STATIC_ROUTES: Record<string, RouteSeoEntry> = {
     crumb: 'প্রিপোজিশন',
   },
   // AdSense Part 1 (integration): /learn hub — the breadcrumb target
-  // for the two lesson pages. Today /learn holds only the BCS English
-  // lessons, so the crumb is 'বিসিএস ইংরেজি' (matches the lesson
-  // breadcrumbs pinned by seo.test.ts); revisit when more subjects land.
+  // for the two lesson pages. REVISED 24 Nov 2026 (brand-SEO wave 1):
+  // the hub now also lists the 10 public guides, so the title/crumb
+  // cover guides + lessons (the lesson breadcrumbs pinned by
+  // seo.test.ts still start with 'বিসিএস ইংরেজি' via STATIC_CRUMBS).
   '/learn': {
-    title: 'পাঠ — বিসিএস ইংরেজি | Eduvelto',
+    title: 'পাঠ ও গাইড — ফ্রি প্রস্তুতি | Eduvelto',
     description:
-      'বিসিএস ইংরেজি পাঠ — টেন্স ও প্রিপোজিশনের খসড়া পাঠ এবং ৩৫টি যাচাইকৃত প্রশ্নের অনুশীলন — সম্পূর্ণ বিনামূল্যে। Eduvelto।',
-    crumb: 'বিসিএস ইংরেজি',
+      'ফ্রি পাঠ ও গাইড — BCS, ব্যাংক, প্রাথমিক শিক্ষক, NTRCA ও জাতীয় বিশ্ববিদ্যালয় ভর্তি প্রস্তুতি, ইংরেজি ব্যাকরণ, বৃত্তি, CV ও বাজেট পরিকল্পনা — খসড়া পাঠ, শিক্ষক যাচাইয়ের অপেক্ষায়; বিসিএস ইংরেজি অনুশীলন — ৩৫টি যাচাইকৃত প্রশ্ন। Eduvelto।',
+    crumb: 'পাঠ',
+  },
+  // Public guides (24 Nov 2026, brand-SEO wave 1): 10 original
+  // static guides, no login, zero Firestore reads (see
+  // src/lib/publicGuides.ts). Every guide is a draft awaiting
+  // teacher review — the description says so plainly, like the two
+  // BCS English lessons above; never "যাচাইকৃত"/"অনুমোদিত".
+  '/learn/bcs-preparation-guide': {
+    title: 'বিসিএস প্রিলিমিনারি প্রস্তুতি গাইড | Eduvelto',
+    description:
+      'বিসিএস প্রিলিমিনারি পরীক্ষার প্রস্তুতি কীভাবে শুরু করবেন — পরীক্ষার ধরণ, পড়ার পরিকল্পনা ও সাধারণ ভুল নিয়ে Eduvelto-র ফ্রি গাইড। খসড়া পাঠ — শিক্ষক যাচাইয়ের অপেক্ষায়।',
+    crumb: 'বিসিএস প্রস্তুতি',
+  },
+  '/learn/bank-job-preparation': {
+    title: 'ব্যাংক চাকরির প্রস্তুতি গাইড | Eduvelto',
+    description:
+      'ব্যাংকে চাকরির পরীক্ষার প্রস্তুতি কীভাবে নেবেন — পরীক্ষার ধরণ, পড়ার পরিকল্পনা ও সাধারণ ভুল নিয়ে Eduvelto-র ফ্রি গাইড। খসড়া পাঠ — শিক্ষক যাচাইয়ের অপেক্ষায়।',
+    crumb: 'ব্যাংক চাকরি',
+  },
+  '/learn/primary-teacher-preparation': {
+    title: 'প্রাথমিক সহকারী শিক্ষক নিয়োগ প্রস্তুতি গাইড | Eduvelto',
+    description:
+      'প্রাথমিক সহকারী শিক্ষক নিয়োগ পরীক্ষার প্রস্তুতি কীভাবে নেবেন — পরীক্ষার ধরণ, পড়ার পরিকল্পনা ও সাধারণ ভুল নিয়ে Eduvelto-র ফ্রি গাইড। খসড়া পাঠ — শিক্ষক যাচাইয়ের অপেক্ষায়।',
+    crumb: 'প্রাথমিক শিক্ষক',
+  },
+  '/learn/ntrca-preparation': {
+    title: 'NTRCA শিক্ষক নিবন্ধন পরীক্ষার প্রস্তুতি গাইড | Eduvelto',
+    description:
+      'NTRCA শিক্ষক নিবন্ধন পরীক্ষার প্রস্তুতি কীভাবে নেবেন — পরীক্ষার ধরণ, পড়ার পরিকল্পনা ও সাধারণ ভুল নিয়ে Eduvelto-র ফ্রি গাইড। খসড়া পাঠ — শিক্ষক যাচাইয়ের অপেক্ষায়।',
+    crumb: 'NTRCA প্রস্তুতি',
+  },
+  '/learn/nu-admission-guide': {
+    title: 'জাতীয় বিশ্ববিদ্যালয় ভর্তি গাইড | Eduvelto',
+    description:
+      'জাতীয় বিশ্ববিদ্যালয়ে ভর্তি পরীক্ষার ধরণ, মেধাতালিকা ও প্রস্তুতি নিয়ে Eduvelto-র ফ্রি গাইড। ২০২৬–২৭ শিক্ষাবর্ষের বিজ্ঞপ্তি এখনো প্রকাশিত হয়নি। খসড়া পাঠ — শিক্ষক যাচাইয়ের অপেক্ষায়।',
+    crumb: 'জাতীয় বিশ্ববিদ্যালয় ভর্তি',
+  },
+  '/learn/english-grammar-basics': {
+    title: 'ইংরেজি ব্যাকরণের মৌলিক বিষয় — Parts of Speech ও Tense | Eduvelto',
+    description:
+      'ইংরেজি ব্যাকরণের মৌলিক বিষয় সহজ বাংলায় — Parts of Speech, Tense ও বাক্য গঠন, নিজের লেখা উদাহরণসহ। Eduvelto-র ফ্রি গাইড। খসড়া পাঠ — শিক্ষক যাচাইয়ের অপেক্ষায়।',
+    crumb: 'ইংরেজি ব্যাকরণ',
+  },
+  '/learn/scholarship-guide': {
+    title: 'বৃত্তি (স্কলারশিপ) গাইড — আবেদন, কাগজপত্র ও সময়সীমা | Eduvelto',
+    description:
+      'স্কলারশিপ কীভাবে কাজ করে, আবেদনের প্রস্তুতি ও কাগজপত্র — Commonwealth Shared Scholarships-এর উদাহরণসহ Eduvelto-র ফ্রি গাইড। খসড়া পাঠ — শিক্ষক যাচাইয়ের অপেক্ষায়।',
+    crumb: 'বৃত্তি গাইড',
+  },
+  '/learn/what-is-ai': {
+    title: 'AI কী? শিক্ষার্থীদের জন্য সহজ ব্যাখ্যা ও ব্যবহারের নিয়ম | Eduvelto',
+    description:
+      'AI বা কৃত্রিম বুদ্ধিমত্তা কী, পড়াশোনায় AI কীভাবে ব্যবহার করবেন, আর এর সীমা ও সততার নিয়ম — Eduvelto-র ফ্রি গাইড। খসড়া পাঠ — শিক্ষক যাচাইয়ের অপেক্ষায়।',
+    crumb: 'AI কী?',
+  },
+  '/learn/cv-writing-guide': {
+    title: 'CV লেখার গাইড — বাংলাদেশি চাকরির জন্য | Eduvelto',
+    description:
+      'বাংলাদেশে চাকরির জন্য ভালো CV কীভাবে লিখবেন — গঠন, প্রয়োজনীয় তথ্য ও সাধারণ ভুল নিয়ে Eduvelto-র ফ্রি গাইড। খসড়া পাঠ — শিক্ষক যাচাইয়ের অপেক্ষায়।',
+    crumb: 'CV লেখা',
+  },
+  '/learn/budget-planner-guide': {
+    title: 'শিক্ষার্থীর মাসিক বাজেট পরিকল্পনা গাইড | Eduvelto',
+    description:
+      'শিক্ষার্থী হিসেবে মাসের খরচ কীভাবে পরিকল্পনা করবেন — আয়, জরুরি খরচ ও সঞ্চয়ের সহজ নিয়ম নিয়ে Eduvelto-র ফ্রি গাইড। খসড়া পাঠ — শিক্ষক যাচাইয়ের অপেক্ষায়।',
+    crumb: 'মাসিক বাজেট',
   },
 };
 
@@ -626,6 +725,14 @@ const NOINDEX_STATIC = new Set([
   '/jobs/circulars',
   '/jobs/calendar',
   '/ai-teacher',
+  // Brand-SEO wave 1, F-06 (24 Nov 2026): /class/class-1-5 and
+  // /class/class-6-8 are thin (~118 words, no books yet) — they stay
+  // live for visitors with honest coming-soon content, but leave the
+  // sitemap and carry noindex until Classes 1–8 have real books.
+  // When books land, remove them from this set AND put them back in
+  // the sitemap in the same commit.
+  '/class/class-1-5',
+  '/class/class-6-8',
 ]);
 
 /** True for a subject page that must not be indexed: any job
@@ -980,29 +1087,90 @@ export function resolveRouteSeo(pathname: string): SeoData | null {
     });
   }
   if (path === '/learn') {
-    // ItemList (24 Nov 2026, SEO pass): the hub lists the two real
-    // lessons plus the BCS English practice hub — the same three
-    // links the page renders, in the same order.
+    // ItemList (24 Nov 2026, SEO pass; EXTENDED brand-SEO wave 1):
+    // the hub lists the 10 public guides, the two real lessons and
+    // the BCS English practice hub — the same links the page renders,
+    // in the same order.
     jsonLd.push({
       '@context': 'https://schema.org',
       '@type': 'ItemList',
-      name: 'বিসিএস ইংরেজি পাঠ',
+      name: 'পাঠ ও গাইড',
       itemListElement: [
         {
           '@type': 'ListItem',
           position: 1,
+          name: 'বিসিএস প্রিলিমিনারি প্রস্তুতি গাইড',
+          url: `${SITE_URL}/learn/bcs-preparation-guide`,
+        },
+        {
+          '@type': 'ListItem',
+          position: 2,
+          name: 'ব্যাংক চাকরির প্রস্তুতি গাইড',
+          url: `${SITE_URL}/learn/bank-job-preparation`,
+        },
+        {
+          '@type': 'ListItem',
+          position: 3,
+          name: 'প্রাথমিক সহকারী শিক্ষক নিয়োগ প্রস্তুতি গাইড',
+          url: `${SITE_URL}/learn/primary-teacher-preparation`,
+        },
+        {
+          '@type': 'ListItem',
+          position: 4,
+          name: 'NTRCA শিক্ষক নিবন্ধন পরীক্ষার প্রস্তুতি গাইড',
+          url: `${SITE_URL}/learn/ntrca-preparation`,
+        },
+        {
+          '@type': 'ListItem',
+          position: 5,
+          name: 'জাতীয় বিশ্ববিদ্যালয় ভর্তি গাইড',
+          url: `${SITE_URL}/learn/nu-admission-guide`,
+        },
+        {
+          '@type': 'ListItem',
+          position: 6,
+          name: 'ইংরেজি ব্যাকরণের মৌলিক বিষয়',
+          url: `${SITE_URL}/learn/english-grammar-basics`,
+        },
+        {
+          '@type': 'ListItem',
+          position: 7,
+          name: 'বৃত্তি (স্কলারশিপ) গাইড',
+          url: `${SITE_URL}/learn/scholarship-guide`,
+        },
+        {
+          '@type': 'ListItem',
+          position: 8,
+          name: 'AI কী? শিক্ষার্থীরা কীভাবে AI ব্যবহার করবে',
+          url: `${SITE_URL}/learn/what-is-ai`,
+        },
+        {
+          '@type': 'ListItem',
+          position: 9,
+          name: 'CV লেখার গাইড',
+          url: `${SITE_URL}/learn/cv-writing-guide`,
+        },
+        {
+          '@type': 'ListItem',
+          position: 10,
+          name: 'শিক্ষার্থী হিসেবে মাসিক বাজেট পরিকল্পনা',
+          url: `${SITE_URL}/learn/budget-planner-guide`,
+        },
+        {
+          '@type': 'ListItem',
+          position: 11,
           name: 'টেন্স — পাঠ',
           url: `${SITE_URL}/learn/bcs-english-tense`,
         },
         {
           '@type': 'ListItem',
-          position: 2,
+          position: 12,
           name: 'প্রিপোজিশন — পাঠ',
           url: `${SITE_URL}/learn/bcs-english-preposition`,
         },
         {
           '@type': 'ListItem',
-          position: 3,
+          position: 13,
           name: 'বিসিএস ইংরেজি অনুশীলন',
           url: `${SITE_URL}/jobs/bcs/practice/english`,
         },
@@ -1041,6 +1209,22 @@ export function resolveRouteSeo(pathname: string): SeoData | null {
       description: entry.description,
       inLanguage: 'bn',
       datePublished: '2026-11-23',
+      author: { '@id': 'https://eduvelto.com#organization' },
+      publisher: { '@id': 'https://eduvelto.com#organization' },
+      mainEntityOfPage: { '@id': `${canonical}#webpage` },
+    });
+  }
+  if (PUBLIC_GUIDES.some((g) => g.path === path)) {
+    // Article (24 Nov 2026, brand-SEO wave 1): same treatment as the
+    // lessons — the 10 guides are article-length drafts awaiting
+    // teacher review, published 24 Nov 2026. Never claims review.
+    jsonLd.push({
+      '@context': 'https://schema.org',
+      '@type': 'Article',
+      headline: entry.title,
+      description: entry.description,
+      inLanguage: 'bn',
+      datePublished: '2026-11-24',
       author: { '@id': 'https://eduvelto.com#organization' },
       publisher: { '@id': 'https://eduvelto.com#organization' },
       mainEntityOfPage: { '@id': `${canonical}#webpage` },

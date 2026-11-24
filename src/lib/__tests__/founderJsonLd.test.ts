@@ -41,4 +41,18 @@ describe('FounderPage JSON-LD — Organization vs Person', () => {
       'https://www.tiktok.com/@ahmmizan',
     ]);
   });
+
+  it('Organization description matches the site-wide block — no Class 1–8 promise', () => {
+    // Brand-SEO wave 1, F-02 (24 Nov 2026): both Organization
+    // blocks were promising "Class 1 to Honours" while Classes 1–8
+    // have no books. Both now state the true range (Class 9 to
+    // Honours) and must stay in sync — the trust worker's claim that
+    // a block linked personal accounts was WRONG: the Person block
+    // correctly carries the personal profiles, the Organization
+    // block carries only the three EduveltoBD brand profiles.
+    expect(ORGANIZATION_JSON_LD.description).toBe(SITE_ORG.description);
+    expect(ORGANIZATION_JSON_LD.description).not.toContain('Class 1');
+    expect(ORGANIZATION_JSON_LD.description).toContain('Class 9');
+    expect(ORGANIZATION_JSON_LD.description).toContain('Madrasa');
+  });
 });

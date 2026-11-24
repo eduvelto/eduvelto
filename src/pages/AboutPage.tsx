@@ -65,7 +65,7 @@ export default function AboutPage() {
         </div>
         <div className="ev-card ev-card-hover">
           <Link to="/library" style={{ fontWeight: 700, color: 'var(--heading)' }}>{t({ bn: 'ডিজিটাল লাইব্রেরি', en: 'Digital Library' })}</Link>
-          <p style={{ margin: '6px 0 0', color: 'var(--muted)', fontSize: 14 }}>{t({ bn: 'বই, প্রশ্নোত্তর ও সহজ ব্যাখ্যাসহ পরীক্ষার প্রস্তুতি (অনার্স, আলিম, এইচএসসি, এসএসসি ও কারিগরি)।', en: 'Exam preparation with books, Q&A and simple explanations (Honours, Alim, HSC, SSC and Technical).' })}</p>        </div>
+          <p style={{ margin: '6px 0 0', color: 'var(--muted)', fontSize: 14 }}>{t({ bn: 'বই, প্রশ্নোত্তর ও সহজ ব্যাখ্যাসহ পরীক্ষার প্রস্তুতি (শ্রেণি ৯–১০, এইচএসসি, অনার্স ও মাস্টার্স)।', en: 'Exam preparation with books, Q&A and simple explanations (Class 9–10, HSC, Honours and Masters).' })}</p>        </div>
         <div className="ev-card ev-card-hover">
           <Link to="/directory" style={{ fontWeight: 700, color: 'var(--heading)' }}>{t({ bn: 'শিক্ষা নির্দেশিকা', en: 'Education Directory' })}</Link>
           <p style={{ margin: '6px 0 0', color: 'var(--muted)', fontSize: 14 }}>{t({ bn: 'ধাপে ধাপে বিষয় ও বই খুঁজুন: শিক্ষার ধারা → বোর্ড → প্রোগ্রাম → শ্রেণি → বিষয়।', en: 'Find subjects and books step by step: education stream → board → programme → class → subject.' })}</p>
@@ -83,6 +83,40 @@ export default function AboutPage() {
           <p style={{ margin: '6px 0 0', color: 'var(--muted)', fontSize: 14 }}>{t({ bn: 'শিগগিরই আসছে।', en: 'Coming soon.' })}</p>
         </div>
       </div>
+
+      {/* Live counts + what Eduvelto is NOT (24 Nov 2026, brand-SEO
+          wave 1, trust draft §1): the counts are the live library
+          numbers (609 books / 2,307 chapters / 23,346 questions),
+          the 35 published BCS English questions and the 7 Opportunity
+          Hub listings. Classes 1–5 and 6–8 have no books yet — the
+          page says so plainly instead of implying full coverage. */}
+      <p style={{ marginTop: 20, lineHeight: 1.7 }}>
+        {t({
+          bn: 'আজ Eduvelto-তে আছে: ডিজিটাল লাইব্রেরিতে ৬০৯টি বই, ২,৩০৭টি অধ্যায় ও ২৩,৩৪৬টি প্রশ্ন; বিসিএস ইংরেজির ৩৫টি যাচাইকৃত প্রশ্ন; Opportunity Hub-এ ৭টি যাচাইকৃত সুযোগের তালিকা। শ্রেণি ৯–১০, এইচএসসি ও অনার্স–মাস্টার্সের বই লাইব্রেরিতে আছে; শ্রেণি ১–৫ ও ৬–৮-এর বই এখনো আসেনি — আসছে। সব পরীক্ষা MCQ-ভিত্তিক। পড়া ও পরীক্ষা দেওয়ার জন্য লগইন করতে হয়; লাইব্রেরি ও তথ্যভিত্তিক পাতা সবার জন্য উন্মুক্ত।',
+          en: 'Eduvelto today: a digital library of 609 books, 2,307 chapters and 23,346 questions; 35 verified BCS English questions; 7 verified Opportunity Hub listings. Books for Class 9–10, HSC and Honours–Masters are in the library; Class 1–5 and 6–8 books have not arrived yet — they are coming. All exams are MCQ-based. Reading and taking exams needs a login; the library and information pages are open to everyone.',
+        })}
+      </p>
+
+      <h2 style={{ fontFamily: "'Poppins','Hind Siliguri',system-ui,sans-serif", fontSize: 20, color: 'var(--heading)', margin: '28px 0 12px' }}>{t({ bn: 'Eduvelto কী নয়', en: 'What Eduvelto is not' })}</h2>
+      <ul style={{ lineHeight: 1.9, paddingLeft: 20, margin: 0 }}>
+        <li>{t({ bn: 'Eduvelto কোনো বিশ্ববিদ্যালয়, কলেজ বা শিক্ষা প্রতিষ্ঠান নয়।', en: 'Eduvelto is not a university, college or educational institution.' })}</li>
+        <li>{t({ bn: 'Eduvelto কোনো পরীক্ষা কর্তৃপক্ষের (BCS/BPSC, NTRCA, ব্যাংক বা জাতীয় বিশ্ববিদ্যালয়) সঙ্গে সম্পৃক্ত নয় — এটি শুধু পরীক্ষার প্রস্তুতিতে সাহায্য করে।', en: 'Eduvelto is not affiliated with any exam authority (BCS/BPSC, NTRCA, banks or National University) — it only helps with exam preparation.' })}</li>
+        <li>{t({ bn: 'Eduvelto কোনো সার্টিফিকেট, ডিপ্লোমা বা স্বীকৃত যোগ্যতা দেয় না। অনুশীলন পরীক্ষার নম্বর শুধু নিজের মূল্যায়নের জন্য।', en: 'Eduvelto issues no certificate, diploma or recognised qualification. Practice test scores are only for self-assessment.' })} <Link to="/certificate-policy">{t({ bn: 'সার্টিফিকেট নীতি', en: 'Certificate policy' })}</Link></li>
+        <li>{t({ bn: 'Eduvelto-র কোনো পেইড স্তর নেই — সবকিছু ১০০% বিনামূল্যে, চিরকাল। কোনো ফি, কোনো সাবস্ক্রিপশন নেই।', en: 'Eduvelto has no paid tier — everything is 100% free, forever. No fees, no subscription.' })}</li>
+      </ul>
+
+      <p style={{ marginTop: 20, lineHeight: 1.7 }}>
+        {t({ bn: 'আমাদের নীতি: ', en: 'Our policies: ' })}
+        <Link to="/editorial-policy">{t({ bn: 'সম্পাদকীয় নীতি', en: 'Editorial policy' })}</Link>
+        {' · '}
+        <Link to="/content-accuracy">{t({ bn: 'বিষয়বস্তুর নির্ভুলতা', en: 'Content accuracy' })}</Link>
+        {' · '}
+        <Link to="/disclaimer">{t({ bn: 'দায়বর্জন', en: 'Disclaimer' })}</Link>
+        {' · '}
+        <Link to="/privacy">{t({ bn: 'গোপনীয়তা নীতি', en: 'Privacy policy' })}</Link>
+        {' · '}
+        <Link to="/terms">{t({ bn: 'শর্তাবলি', en: 'Terms' })}</Link>
+      </p>
 
       <h2 style={{ fontFamily: "'Poppins','Hind Siliguri',system-ui,sans-serif", fontSize: 20, color: 'var(--heading)', margin: '28px 0 12px' }}>{t({ bn: 'প্রতিষ্ঠাতা', en: 'Founder' })}</h2>
       <section
