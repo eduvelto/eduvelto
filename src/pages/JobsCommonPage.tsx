@@ -42,8 +42,8 @@ import {
   jobExamBySlug,
 } from '../lib/jobExams';
 import { loadThisWeekWeeklyMock, loadTodayDailyMock, listMockAttempts, type MockAttemptWithId } from '../lib/jobMock';
-import { jobMockPatternSummaryBn, type JobMockWithId } from '../lib/jobMocks';
-import { jobTopicLabelBn, weakTopicsFromAttemptAnswers, type JobAttemptAnswer } from '../lib/jobEngine';
+import { jobMockPatternSummary, type JobMockWithId } from '../lib/jobMocks';
+import { jobTopicLabel, weakTopicsFromAttemptAnswers, type JobAttemptAnswer } from '../lib/jobEngine';
 
 /** Weekly full-mock pattern per cycle exam (design plan §4.2). */
 const WEEKLY_PATTERN: Record<string, { bn: string; en: string }> = {
@@ -157,11 +157,11 @@ export default function JobsCommonPage() {
               })}
             </p>
             {!mocksLoaded ? (
-              <p style={{ margin: 0, color: '#68747B', fontSize: 14 }}>লোড হচ্ছে…</p>
+              <p style={{ margin: 0, color: '#68747B', fontSize: 14 }}>{t({ bn: 'লোড হচ্ছে…', en: 'Loading…' })}</p>
             ) : daily ? (
               <>
                 <p style={{ margin: '0 0 10px', color: '#57616A', fontSize: 14, lineHeight: 1.7 }}>
-                  {daily.titleBn} · {jobMockPatternSummaryBn(daily.rulesSnapshot)}
+                  {lang === 'bn' ? daily.titleBn : daily.titleEn} · {jobMockPatternSummary(daily.rulesSnapshot, undefined, lang)}
                 </p>
                 {user ? (
                   <LinkButton to={`/jobs/mock/${daily.docId}`} variant="accent">
@@ -198,11 +198,11 @@ export default function JobsCommonPage() {
               ))}
             </ul>
             {!mocksLoaded ? (
-              <p style={{ margin: 0, color: '#68747B', fontSize: 14 }}>লোড হচ্ছে…</p>
+              <p style={{ margin: 0, color: '#68747B', fontSize: 14 }}>{t({ bn: 'লোড হচ্ছে…', en: 'Loading…' })}</p>
             ) : weekly ? (
               <>
                 <p style={{ margin: '0 0 10px', color: '#57616A', fontSize: 14, lineHeight: 1.7 }}>
-                  {weekly.titleBn} · {jobMockPatternSummaryBn(weekly.rulesSnapshot)}
+                  {lang === 'bn' ? weekly.titleBn : weekly.titleEn} · {jobMockPatternSummary(weekly.rulesSnapshot, undefined, lang)}
                 </p>
                 {user ? (
                   <LinkButton to={`/jobs/mock/${weekly.docId}`} variant="accent">
@@ -237,7 +237,7 @@ export default function JobsCommonPage() {
                 </Link>
               </p>
             ) : attempts === null ? (
-              <p style={{ margin: '8px 0 0', color: 'var(--muted)', fontSize: 14 }}>লোড হচ্ছে…</p>
+              <p style={{ margin: '8px 0 0', color: 'var(--muted)', fontSize: 14 }}>{t({ bn: 'লোড হচ্ছে…', en: 'Loading…' })}</p>
             ) : attempts.length === 0 ? (
               <p style={{ margin: '8px 0 0', color: 'var(--muted)', fontSize: 14, lineHeight: 1.7 }}>
                 {t({
@@ -256,7 +256,7 @@ export default function JobsCommonPage() {
                 {weakTopics.length > 0 ? (
                   <p style={{ margin: '0 0 10px', color: 'var(--muted)', fontSize: 14, lineHeight: 1.7 }}>
                     {t({ bn: 'দুর্বল টপিক: ', en: 'Weak topics: ' })}
-                    {weakTopics.map((w) => `${jobTopicLabelBn(w.topicId)} (${w.wrong}/${w.total} ভুল)`).join(' · ')}
+                    {weakTopics.map((w) => `${jobTopicLabel(w.topicId, lang)} (${w.wrong}/${w.total} ${lang === 'bn' ? 'ভুল' : 'wrong'})`).join(' · ')}
                   </p>
                 ) : null}
                 {latestAttempt ? (
