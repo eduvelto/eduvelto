@@ -49,12 +49,14 @@ import {
 import { listCircularHistory, type CircularHistoryEntry } from '../lib/jobCircularHistory';
 import {
   CHECKLIST_RESULT_BN,
+  CHECKLIST_RESULT_EN,
   emptyVerificationChecklist,
   firstBlockingChecklistItem,
   formatDhakaDate,
   isCircularVerified,
   isVerificationChecklistComplete,
   VERIFICATION_CHECKLIST_BN,
+  VERIFICATION_CHECKLIST_EN,
   VERIFICATION_CHECKLIST_ITEMS,
   type ChecklistResult,
   type JobCircular,
@@ -764,7 +766,7 @@ export default function AdminJobCircularEditPage() {
               {VERIFICATION_CHECKLIST_ITEMS.map((item) => (
                 <div key={item} style={{ borderTop: '1px solid var(--hatch-widget-border)', padding: '10px 0' }}>
                   <div style={{ fontWeight: 700, fontSize: 14 }}>
-                    {VERIFICATION_CHECKLIST_BN[item]}
+                    {lang === 'bn' ? VERIFICATION_CHECKLIST_BN[item] : VERIFICATION_CHECKLIST_EN[item]}
                   </div>
                   <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', marginTop: 6 }}>
                     {RESULT_OPTIONS.map((r) => (
@@ -782,7 +784,7 @@ export default function AdminJobCircularEditPage() {
                           cursor: 'pointer',
                         }}
                       >
-                        {CHECKLIST_RESULT_BN[r]}
+                        {lang === 'bn' ? CHECKLIST_RESULT_BN[r] : CHECKLIST_RESULT_EN[r]}
                       </button>
                     ))}
                   </div>
@@ -798,11 +800,11 @@ export default function AdminJobCircularEditPage() {
               ))}
               {!checklistComplete && blockingItem ? (
                 <p style={{ fontSize: 13, color: '#8a5a00', marginBottom: 0 }}>
-                  {t({ bn: 'অনুমোদন আটকে আছে', en: 'Approval is blocked' })}: {VERIFICATION_CHECKLIST_BN[blockingItem]}
+                  {t({ bn: 'অনুমোদন আটকে আছে', en: 'Approval is blocked' })}: {lang === 'bn' ? VERIFICATION_CHECKLIST_BN[blockingItem] : VERIFICATION_CHECKLIST_EN[blockingItem]}
                 </p>
               ) : null}
               {circular && !guard.allowed && guard.reasonBn ? (
-                <AlertBox tone="info">{guard.reasonBn}</AlertBox>
+                <AlertBox tone="info">{lang === 'bn' ? guard.reasonBn : guard.reasonEn}</AlertBox>
               ) : null}
               {circular && (circular.authorId === uid || circular.lastEditedBy === uid) && isOwner ? (
                 <>
@@ -898,7 +900,7 @@ export default function AdminJobCircularEditPage() {
               <ul style={{ margin: 0, paddingLeft: 18, fontSize: 13, lineHeight: 1.8 }}>
                 {VERIFICATION_CHECKLIST_ITEMS.map((item) => (
                   <li key={item}>
-                    {VERIFICATION_CHECKLIST_BN[item]}: {CHECKLIST_RESULT_BN[circular.verificationChecklist?.[item] ?? 'uncertain']}
+                    {lang === 'bn' ? VERIFICATION_CHECKLIST_BN[item] : VERIFICATION_CHECKLIST_EN[item]}: {lang === 'bn' ? CHECKLIST_RESULT_BN[circular.verificationChecklist?.[item] ?? 'uncertain'] : CHECKLIST_RESULT_EN[circular.verificationChecklist?.[item] ?? 'uncertain']}
                   </li>
                 ))}
               </ul>
