@@ -209,7 +209,7 @@ export function getBannerPlacementForPath(pathname: string): BannerPlacement | n
 
 /** Reserved content height (px) for a banner placement (0 = no banner).
  *  The full banner reserves 112px: ~90px desktop ad + the plain
- *  "বিজ্ঞাপন" label row (~16px) + spacing. The exam small banner
+ *  "বিজ্ঞাপন (Advertisement)" label row (~16px) + spacing. The exam small banner
  *  reserve is RETAINED (56px) although no route returns it any more. */
 export function getBannerReservePx(placement: BannerPlacement | null): number {
   if (placement === 'bottom-banner') return 112;
