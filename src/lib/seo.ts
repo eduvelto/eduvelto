@@ -263,11 +263,11 @@ const STATIC_ROUTES: Record<string, RouteSeoEntry> = {
   '/': {
     title: 'Eduvelto — বাংলাদেশের ফ্রি শিক্ষা প্ল্যাটফর্ম',
     description:
-      'Eduvelto — বাংলাদেশের ফ্রি শিক্ষা ও জীবনসেবা প্ল্যাটফর্ম: BCS, ব্যাংক, প্রাথমিক শিক্ষক, NTRCA ও জাতীয় বিশ্ববিদ্যালয় ভর্তি প্রস্তুতি, MCQ পরীক্ষা ও ডিজিটাল লাইব্রেরি — সম্পূর্ণ বিনামূল্যে।',
+      'Eduvelto — বাংলাদেশের ফ্রি শিক্ষা প্ল্যাটফর্ম: BCS, ব্যাংক, প্রাথমিক শিক্ষক, NTRCA ও ভর্তি প্রস্তুতি, MCQ পরীক্ষা ও ডিজিটাল লাইব্রেরি — সম্পূর্ণ ফ্রি।',
     crumb: 'হোম',
     titleEn: 'Eduvelto — Bangladesh\'s Free Education Platform',
     descriptionEn:
-      'Eduvelto, Bangladesh\'s free education platform — BCS, Bank, Primary Teacher, NTRCA and National University admission preparation, MCQ exams and a digital library — completely free.',
+      'Eduvelto — Bangladesh\'s free education platform: BCS, Bank, Primary Teacher, NTRCA and university admission, MCQ exams and a digital library, completely free.',
     crumbEn: 'Home',
   },
   '/why-eduvelto': {
@@ -277,7 +277,7 @@ const STATIC_ROUTES: Record<string, RouteSeoEntry> = {
     crumb: 'কেন Eduvelto',
     titleEn: 'Why Eduvelto — Bangladesh\'s Free Education Platform',
     descriptionEn:
-      'Why Eduvelto aims to be Bangladesh\'s trusted free education platform — 100% free BCS, Bank, Primary Teacher, NTRCA and National University admission preparation, MCQ exams and a digital library.',
+      'Why Eduvelto aims to be Bangladesh\'s trusted free education platform — BCS, Bank, NTRCA preparation, MCQ exams and a digital library, 100% free.',
     crumbEn: 'Why Eduvelto',
   },
   '/jobs': {
@@ -285,9 +285,9 @@ const STATIC_ROUTES: Record<string, RouteSeoEntry> = {
     description:
       'BCS, ব্যাংক ও NTRCA প্রস্তুতির কাঠামো — ধরন, সিলেবাস ও বিষয়ভিত্তিক প্রস্তুতি। বিসিএস ইংরেজি অনুশীলন এখন চালু; পূর্ণাঙ্গ মক পরীক্ষা এখনো প্রস্তুত হচ্ছে।',
     crumb: 'চাকরি প্রস্তুতি',
-    titleEn: 'Job Preparation — BCS, Bank, Primary Teacher, NTRCA | Eduvelto',
+    titleEn: 'Job Preparation — BCS, Bank, NTRCA | Eduvelto',
     descriptionEn:
-      'The structure for BCS, Bank, Primary Teacher and NTRCA exam preparation — exam patterns, syllabuses and subject-wise preparation. BCS English practice is live now; full mock exams are still being prepared. Eduvelto — completely free.',
+      'BCS, Bank, Primary Teacher, NTRCA preparation — patterns, syllabuses, subject-wise study. BCS English is live; full mocks coming soon. Free on Eduvelto.',
     crumbEn: 'Job Preparation',
   },
   '/jobs/common': {
@@ -297,7 +297,7 @@ const STATIC_ROUTES: Record<string, RouteSeoEntry> = {
     crumb: 'কমন বিষয়',
     titleEn: 'Common Subjects — Job Preparation | Eduvelto',
     descriptionEn:
-      'Common subjects for job exams — the preparation structure for Bangla, English, Mathematics and General Knowledge. BCS English practice is live now; full mock exams are still being prepared. Eduvelto.',
+      'Common job-exam subjects — Bangla, English, Mathematics and General Knowledge preparation. BCS English is live; full mocks are still being prepared.',
     crumbEn: 'Common Subjects',
   },
   '/jobs/circulars': {
@@ -315,9 +315,9 @@ const STATIC_ROUTES: Record<string, RouteSeoEntry> = {
     description:
       'যাচাইকৃত সুযোগ — চাকরি, ফ্রিল্যান্সিং, ইন্টার্নশিপ, স্কলারশিপ। প্রতিটি সুযোগ অফিসিয়াল উৎস থেকে যাচাই করা; শেষ তারিখ না জানা থাকলে অনুমান করা হয় না।',
     crumb: 'সুযোগ হাব',
-    titleEn: 'Opportunity Hub — Verified Jobs, Scholarships, Internships | Eduvelto',
+    titleEn: 'Opportunity Hub — Jobs, Scholarships, Internships | Eduvelto',
     descriptionEn:
-      'Verified opportunities — jobs, remote work, freelancing, internships, scholarships and free skill development. Every opportunity is verified from an official source; when a deadline is unknown it is never guessed. Eduvelto.',
+      'Verified opportunities — jobs, remote work, freelancing, internships, scholarships, all verified from official sources; unknown deadlines are never guessed.',
     crumbEn: 'Opportunity Hub',
   },
   '/opportunities/cv-builder': {
@@ -335,9 +335,9 @@ const STATIC_ROUTES: Record<string, RouteSeoEntry> = {
     description:
       'ইন্টারভিউ প্রস্তুতির সাধারণ নির্দেশনা — আগের প্রস্তুতি, সাধারণ প্রশ্ন, STAR পদ্ধতিতে উত্তর ও ইন্টারভিউর দিনের চেকলিস্ট। কোনো চাকরির নিশ্চয়তা নয়। Eduvelto।',
     crumb: 'ইন্টারভিউ প্রস্তুতি',
-    titleEn: 'Interview Preparation — Common Questions & the STAR Method | Eduvelto',
+    titleEn: 'Interview Preparation — Questions & STAR Method | Eduvelto',
     descriptionEn:
-      'General guidance for interview preparation — preparation beforehand, common questions, answering with the STAR method, and a checklist for interview day. No job guarantee. Eduvelto.',
+      'Interview preparation — common questions, answering with the STAR method, and a checklist for interview day. General guidance, no job guarantee.',
     crumbEn: 'Interview Preparation',
   },
   '/opportunities/career-guidance': {
@@ -345,9 +345,9 @@ const STATIC_ROUTES: Record<string, RouteSeoEntry> = {
     description:
       'ক্যারিয়ার গাইড — পেশা বেছে নেওয়া, দক্ষতার পথ, সরকারি–বেসরকারি–ফ্রিল্যান্সিংয়ের সৎ তুলনা। সাধারণ নির্দেশনা, কোনো অফিসিয়াল সিলেবাস নয়। Eduvelto।',
     crumb: 'ক্যারিয়ার গাইড',
-    titleEn: 'Career Guide — Choosing a Profession & Skill Paths | Eduvelto',
+    titleEn: 'Career Guide — Choosing a Profession | Eduvelto',
     descriptionEn:
-      'Career guide — choosing a profession, skill paths, and an honest comparison of government, private-sector and freelancing work. General guidance, not an official syllabus. Eduvelto.',
+      'Career guide — choosing a profession and skills, comparing government, private and freelancing work honestly. General guidance, not an official syllabus.',
     crumbEn: 'Career Guide',
   },
   '/opportunities/entrepreneurship': {
@@ -355,9 +355,9 @@ const STATIC_ROUTES: Record<string, RouteSeoEntry> = {
     description:
       'উদ্যোক্তা গাইড — আইডিয়া যাচাই, ছোট করে শুরু, লাভ-ক্ষতির হিসাব ও অনলাইনে সৎভাবে বিক্রি। সাধারণ নির্দেশনা, আয়ের কোনো প্রতিশ্রুতি নয়। Eduvelto।',
     crumb: 'উদ্যোক্তা গাইড',
-    titleEn: 'Entrepreneurship Guide — Validating Ideas & Keeping Accounts | Eduvelto',
+    titleEn: 'Entrepreneurship Guide — Ideas & Accounts | Eduvelto',
     descriptionEn:
-      'Entrepreneurship guide — validating an idea, starting small, tracking profit and loss, and selling honestly online. General guidance, no promise of income. Eduvelto.',
+      'Entrepreneurship guide — validating an idea, starting small, tracking profit and loss, and selling honestly online. General guidance, no promise of income.',
     crumbEn: 'Entrepreneurship Guide',
   },
   '/opportunities/income': {
@@ -365,9 +365,9 @@ const STATIC_ROUTES: Record<string, RouteSeoEntry> = {
     description:
       'বৈধ অনলাইন আয় — ফ্রিল্যান্সিং, ডিজিটাল পণ্য, কনটেন্ট ও অ্যাফিলিয়েটের বাস্তব চিত্র, প্রতারণা চেনার উপায় ও শুরুর ধাপ। আয়ের কোনো প্রতিশ্রুতি নয়। Eduvelto।',
     crumb: 'বৈধ অনলাইন আয়',
-    titleEn: 'Legitimate Online Income — Real Paths & Spotting Scams | Eduvelto',
+    titleEn: 'Legitimate Online Income — Real Paths & Scams | Eduvelto',
     descriptionEn:
-      'Legitimate online income — the real picture of freelancing, digital products, content and affiliate work, how to spot scams, and the first steps. No promise of income. Eduvelto.',
+      'Legitimate online income — freelancing, digital products, content and affiliate work, how to spot scams, and the first steps. No promise of income.',
     crumbEn: 'Legitimate Online Income',
   },
   '/jobs/calendar': {
@@ -389,7 +389,7 @@ const STATIC_ROUTES: Record<string, RouteSeoEntry> = {
     crumb: 'ভাইভা প্রস্তুতি',
     titleEn: 'Viva Preparation — Job Viva Guide | Eduvelto',
     descriptionEn:
-      'Guide to job viva preparation — common questions, introducing yourself, body language and a checklist for viva day. General guidance, no job guarantee. Eduvelto.',
+      'Guide to job viva preparation — common questions, introducing yourself, body language and a checklist for viva day. General guidance, no job guarantee.',
     crumbEn: 'Viva Preparation',
   },
   '/jobs/career': {
@@ -399,7 +399,7 @@ const STATIC_ROUTES: Record<string, RouteSeoEntry> = {
     crumb: 'ক্যারিয়ার গাইড',
     titleEn: 'Career Planning — Choosing Your Job Path | Eduvelto',
     descriptionEn:
-      'Career planning — choosing a profession, skill paths, and an honest comparison of government, private-sector and freelancing work. General guidance, not an official syllabus. Eduvelto.',
+      'Career planning — choosing a profession and skills, comparing government, private and freelancing work honestly. General guidance, not an official syllabus.',
     crumbEn: 'Career Guide',
   },
   '/jobs/cv': {
@@ -429,7 +429,7 @@ const STATIC_ROUTES: Record<string, RouteSeoEntry> = {
     crumb: 'ভর্তি প্রস্তুতি',
     titleEn: 'Admission Preparation — University Admission | Eduvelto',
     descriptionEn:
-      'The structure for university admission exam preparation — exam patterns and syllabuses, including National University honours. BCS English practice is live now; full mock exams are still being prepared. Eduvelto — completely free.',
+      'University admission preparation — patterns and syllabuses, including National University honours. BCS English is live; mocks coming soon. Free on Eduvelto.',
     crumbEn: 'Admission Preparation',
   },
   '/admissions/national-university': {
@@ -437,9 +437,9 @@ const STATIC_ROUTES: Record<string, RouteSeoEntry> = {
     description:
       'জাতীয় বিশ্ববিদ্যালয় অনার্স ১ম বর্ষ ভর্তি — ১০০ MCQ, ১ ঘণ্টা, নেগেটিভ মার্কিং নেই। বিসিএস ইংরেজি অনুশীলন এখন চালু; পূর্ণাঙ্গ মক পরীক্ষা এখনো প্রস্তুত হচ্ছে।',
     crumb: 'জাতীয় বিশ্ববিদ্যালয়',
-    titleEn: 'National University Admission Preparation — Honours 1st Year | Eduvelto',
+    titleEn: 'National University Admission — Honours 1st Year | Eduvelto',
     descriptionEn:
-      'Preparation structure for the National University Honours 1st Year admission test — format: 100 MCQ, 1 hour, no negative marking; Bangla, English, General Knowledge and group-based syllabus. BCS English practice is live now; full mock exams are still being prepared. Eduvelto.',
+      'National University Honours admission: 100 MCQ, 1 hour, no negative marking. Bangla, English, General Knowledge. BCS English live; mocks coming soon.',
     crumbEn: 'National University',
   },
   '/admissions/national-university/humanities': {
@@ -447,9 +447,9 @@ const STATIC_ROUTES: Record<string, RouteSeoEntry> = {
     description:
       'জাতীয় বিশ্ববিদ্যালয় ভর্তির মানবিক শাখা — বাংলা, ইংরেজি ও মানবিক সিলেবাস। বিসিএস ইংরেজি অনুশীলন এখন চালু; পূর্ণাঙ্গ মক পরীক্ষা এখনো প্রস্তুত হচ্ছে।',
     crumb: 'মানবিক শাখা',
-    titleEn: 'Humanities Group — National University Admission Preparation | Eduvelto',
+    titleEn: 'Humanities — National University Admission | Eduvelto',
     descriptionEn:
-      'Preparation structure for the Humanities group of the National University admission test — Bangla, English, General Knowledge and the Humanities group syllabus. BCS English practice is live now; full mock exams are still being prepared. Eduvelto.',
+      'Humanities group — National University admission: Bangla, English, General Knowledge and the Humanities syllabus. BCS English is live; mocks coming soon.',
     crumbEn: 'Humanities Group',
   },
   '/admissions/national-university/science': {
@@ -457,9 +457,9 @@ const STATIC_ROUTES: Record<string, RouteSeoEntry> = {
     description:
       'জাতীয় বিশ্ববিদ্যালয় ভর্তির বিজ্ঞান শাখা — বাংলা, ইংরেজি ও বিজ্ঞান সিলেবাস। বিসিএস ইংরেজি অনুশীলন এখন চালু; পূর্ণাঙ্গ মক পরীক্ষা এখনো প্রস্তুত হচ্ছে।',
     crumb: 'বিজ্ঞান শাখা',
-    titleEn: 'Science Group — National University Admission Preparation | Eduvelto',
+    titleEn: 'Science — National University Admission | Eduvelto',
     descriptionEn:
-      'Preparation structure for the Science group of the National University admission test — Bangla, English, General Knowledge and the Science group syllabus. BCS English practice is live now; full mock exams are still being prepared. Eduvelto.',
+      'Science group — National University admission: Bangla, English, General Knowledge and the Science syllabus. BCS English is live; mocks coming soon.',
     crumbEn: 'Science Group',
   },
   '/admissions/national-university/business': {
@@ -467,9 +467,9 @@ const STATIC_ROUTES: Record<string, RouteSeoEntry> = {
     description:
       'জাতীয় বিশ্ববিদ্যালয় ভর্তির ব্যবসায় শিক্ষা শাখা — বাংলা, ইংরেজি ও ব্যবসায় সিলেবাস। বিসিএস ইংরেজি অনুশীলন এখন চালু; পূর্ণাঙ্গ মক পরীক্ষা এখনো প্রস্তুত হচ্ছে।',
     crumb: 'ব্যবসায় শিক্ষা শাখা',
-    titleEn: 'Business Studies Group — National University Admission Preparation | Eduvelto',
+    titleEn: 'Business Studies — National University Admission | Eduvelto',
     descriptionEn:
-      'Preparation structure for the Business Studies group of the National University admission test — Bangla, English, General Knowledge and the Business group syllabus. BCS English practice is live now; full mock exams are still being prepared. Eduvelto.',
+      'Business Studies group — National University admission: Bangla, English, General Knowledge and the Business syllabus. BCS English is live; mocks coming soon.',
     crumbEn: 'Business Studies Group',
   },
   '/library': {
@@ -689,9 +689,9 @@ const STATIC_ROUTES: Record<string, RouteSeoEntry> = {
     description:
       'প্রতিদিনের বিনামূল্যের টুল — বাজেট, EMI ও সুদের হিসাব, মুদ্রা ও একক রূপান্তর, প্ল্যানার, PDF টুলস, স্বাস্থ্য ও সরকারি সেবার গাইড। Eduvelto।',
     crumb: 'জীবন সেবা',
-    titleEn: 'Everyday Life Services — Budget, Calculators & Guides | Eduvelto',
+    titleEn: 'Everyday Life Services — Budget & Calculators | Eduvelto',
     descriptionEn:
-      'Free everyday tools — budget, EMI and interest calculations, currency and unit conversion, planner, PDF tools, and health and government-service guides. Eduvelto.',
+      'Free everyday tools — budget, EMI and interest calculations, currency and unit conversion, planner, PDF tools, and health and government-service guides.',
     crumbEn: 'Life Services',
   },
   '/life/budget': {
@@ -709,7 +709,7 @@ const STATIC_ROUTES: Record<string, RouteSeoEntry> = {
     description:
       'EMI, সরল ও চক্রবৃদ্ধি সুদ, শতাংশ, বয়স ও BMI ক্যালকুলেটর — সূত্রসহ ফলাফল, সম্পূর্ণ বিনামূল্যে। Eduvelto।',
     crumb: 'ক্যালকুলেটর',
-    titleEn: 'Calculators — EMI, Interest, Percentage, Age & BMI | Eduvelto',
+    titleEn: 'EMI, Interest, Percentage, Age & BMI Calculators | Eduvelto',
     descriptionEn:
       'EMI, simple and compound interest, percentage, age and BMI calculators — results with formulas, completely free. Eduvelto.',
     crumbEn: 'Calculators',
@@ -751,7 +751,7 @@ const STATIC_ROUTES: Record<string, RouteSeoEntry> = {
     crumb: 'স্বাস্থ্য সচেতনতা',
     titleEn: 'Health Awareness — Food, Exercise & Sleep | Eduvelto',
     descriptionEn:
-      'General health awareness information — balanced food, physical activity, sleep and handwashing, and when to see a doctor. General information, not a substitute for a doctor. Eduvelto.',
+      'General health awareness — balanced food, activity, sleep and handwashing, and when to see a doctor. General information, not a substitute for a doctor.',
     crumbEn: 'Health Awareness',
   },
   '/life/government': {
@@ -759,7 +759,7 @@ const STATIC_ROUTES: Record<string, RouteSeoEntry> = {
     description:
       'জাতীয় পরিচয়পত্র, ই-পাসপোর্ট, জন্ম নিবন্ধন ও ড্রাইভিং লাইসেন্স — আবেদনের ধাপ, প্রয়োজনীয় কাগজপত্র ও অফিসিয়াল পোর্টালের লিংক। Eduvelto।',
     crumb: 'সরকারি সেবা',
-    titleEn: 'Government Services Guide — NID, Passport, Birth Registration | Eduvelto',
+    titleEn: 'NID, Passport & Birth Registration Guide | Eduvelto',
     descriptionEn:
       'National ID card, e-passport, birth registration and driving licence — application steps, required documents and links to the official portals. Eduvelto.',
     crumbEn: 'Government Services',
@@ -769,7 +769,7 @@ const STATIC_ROUTES: Record<string, RouteSeoEntry> = {
     description:
       'জরুরি নম্বর ৯৯৯ সহ প্রয়োজনীয় যোগাযোগ, জরুরি অবস্থায় করণীয়, ট্রেন-বিমান-বাস ভ্রমণের তথ্য ও ভ্রমণের আগের চেকলিস্ট। Eduvelto।',
     crumb: 'ভ্রমণ তথ্য',
-    titleEn: 'Travel Information — Emergency Numbers & Everyday Needs | Eduvelto',
+    titleEn: 'Travel Information — Emergency Numbers | Eduvelto',
     descriptionEn:
       'Essential contacts including emergency number 999, what to do in an emergency, train, flight and bus travel information, and a pre-travel checklist. Eduvelto.',
     crumbEn: 'Travel Information',
@@ -799,9 +799,9 @@ const STATIC_ROUTES: Record<string, RouteSeoEntry> = {
     description:
       'Eduvelto-র AI সহায়ক — হিসাব, রূপান্তর, বাজেট, দিনের পরিকল্পনা, চিঠি-আবেদন-সিভি ও দরকারি বাক্য — এখনই বিনামূল্যে ব্যবহার করুন। লাইভ AI উত্তর শীঘ্রই আসছে।',
     crumb: 'AI সহায়ক',
-    titleEn: 'AI Assistant — Calculations, Letters and Everyday Tools | Eduvelto',
+    titleEn: 'AI Assistant — Everyday Calculations & Letters | Eduvelto',
     descriptionEn:
-      'Eduvelto’s AI Assistant — calculations, converters, budget, day planning, letters, applications, CVs and useful phrases — use it free right now. Live AI answers are coming soon.',
+      'Eduvelto\'s AI Assistant — calculations, converters, budget, planning, letters, applications, CVs and phrases — free to use now. Live AI answers are coming soon.',
     crumbEn: 'AI Assistant',
   },
   '/skills': {
@@ -886,11 +886,11 @@ const STATIC_ROUTES: Record<string, RouteSeoEntry> = {
   '/learn': {
     title: 'পাঠ ও গাইড — ফ্রি প্রস্তুতি | Eduvelto',
     description:
-      'ফ্রি পাঠ ও গাইড — BCS, ব্যাংক, NTRCA, ভর্তি, ব্যাকরণ, বৃত্তি, CV, বাজেট, পুনরালোচনা, নোট, সময় ব্যবস্থাপনা, ইংরেজি লেখা, অনলাইন নিরাপত্তা, বাংলা বানান, কম্পিউটার, পরীক্ষার দিন, MCQ, মনে রাখা, চাকরিপ্রার্থীর রুটিন, সুস্থ অভ্যাস ও ডিজিটাল দক্ষতা। খসড়া পাঠ, শিক্ষক যাচাইয়ের অপেক্ষায়; বিসিএস ইংরেজি — ৩৫টি যাচাইকৃত প্রশ্ন।',
+      'ফ্রি পাঠ ও গাইড — চাকরি ও ভর্তি প্রস্তুতি, ইংরেজি, CV, পড়ার কৌশল ও জীবনদক্ষতা। খসড়া পাঠ, শিক্ষক যাচাইয়ের অপেক্ষায়; বিসিএস ইংরেজি — ৩৫টি যাচাইকৃত প্রশ্ন।',
     crumb: 'পাঠ',
     titleEn: 'Lessons & Guides — Free Preparation | Eduvelto',
     descriptionEn:
-      'Free lessons and guides — BCS, bank, primary teacher, NTRCA and National University admission preparation, English grammar, scholarships, CV and budget planning, revision, note-taking, time management, English writing, online safety, Bangla spelling, computer basics, exam day, MCQ techniques, memory techniques, job-seeker routine, healthy habits and digital skills — draft lessons awaiting teacher review; BCS English practice — 35 verified questions. Eduvelto.',
+      'Free lessons and guides — job preparation, English, CV and study techniques. Draft lessons awaiting teacher review; BCS English — 35 verified questions.',
     crumbEn: 'Lessons',
   },
   // Public guides (24 Nov 2026, brand-SEO wave 1; EXTENDED wave 2
@@ -1447,18 +1447,15 @@ function jobExamEntry(slug: string, tab?: string): RouteSeoEntry | null {
   // come from jobRulesConfig; anything unverified says so plainly.
   const cfg = jobRulesConfig(slug);
   const status = jobPatternStatus(slug);
-  // fullBn already ends with 'পরীক্ষা' for most exams ('…নিয়োগ
-  // পরীক্ষা') and with 'প্রস্তুতি' for IT/private-ngo — strip that
-  // trailing word before appending 'পরীক্ষার প্রস্তুতির কাঠামো', or
-  // the description reads 'পরীক্ষা পরীক্ষার' / 'প্রস্তুতি প্রস্তুতির'
-  // (copy nit found 23 Nov 2026 in the report audit).
-  const examBase = exam.fullBn.replace(/ (পরীক্ষা|প্রস্তুতি)$/, '');
-  const examBaseEn = exam.fullEn.replace(/ Exam$/, '');
+  // Brand-SEO wave 12: descriptions must fit <=160 chars, so the body
+  // no longer repeats the (already long) full exam name — the title
+  // carries it. Verified facts stay: pattern, MCQ count, time,
+  // negative marking, pass mark (pinned by seo.test.ts per exam).
   let body: string;
   if (slug === 'bank' && cfg && cfg.questionCount !== null && cfg.timeMinutes !== null) {
     // Subject pattern verified, penalty NOT verified (Step 5 closure):
     // the config as a whole is not authoritative for scoring.
-    body = `ব্যাংক প্রিলিমিনারি পরীক্ষার প্রস্তুতির কাঠামো — যাচাইকৃত বিষয়বণ্টন: ${bnDigits(cfg.questionCount)} MCQ, ${timeBn(cfg.timeMinutes)} (অফিসার, ক্যাশ); নেগেটিভ মার্কিং অযাচাইকৃত — বিজ্ঞপ্তি/প্রবেশপত্রে লেখা হারই চূড়ান্ত।`;
+    body = `ব্যাংক প্রিলিমিনারি — যাচাইকৃত বিষয়বণ্টন: ${bnDigits(cfg.questionCount)} MCQ, ${timeBn(cfg.timeMinutes)} (অফিসার, ক্যাশ); নেগেটিভ মার্কিং অযাচাইকৃত।`;
   } else if (
     cfg &&
     cfg.questionCount !== null &&
@@ -1467,7 +1464,7 @@ function jobExamEntry(slug: string, tab?: string): RouteSeoEntry | null {
   ) {
     const pattern =
       status === 'last_verified'
-        ? 'শেষ যাচাইকৃত ধরন (১৮তম পরীক্ষা)'
+        ? 'শেষ যাচাইকৃত ধরন (১৮তম)'
         : 'যাচাইকৃত ধরন';
     const neg =
       cfg.negativeMarking === null || cfg.negativeMarking === undefined
@@ -1477,18 +1474,18 @@ function jobExamEntry(slug: string, tab?: string): RouteSeoEntry | null {
       cfg.passMark !== null && cfg.passMark !== undefined
         ? `, পাস ${bnDigits(cfg.passMark)} নম্বর`
         : '';
-    body = `${examBase} পরীক্ষার প্রস্তুতির কাঠামো — ${pattern}: ${bnDigits(cfg.questionCount)} MCQ, ${timeBn(cfg.timeMinutes)}, ${neg}${pass}; বিষয়ভিত্তিক সিলেবাস।`;
+    body = `প্রস্তুতির কাঠামো — ${pattern}: ${bnDigits(cfg.questionCount)} MCQ, ${timeBn(cfg.timeMinutes)}, ${neg}${pass}।`;
   } else if (slug === 'it-professional') {
     // Scope undecided (owner decision 13.8) — Step 6 builds no syllabus.
-    body = `${examBase} পরীক্ষার প্রস্তুতির কাঠামো — পরিধি নির্ধারণ বাকি।`;
+    body = `প্রস্তুতির কাঠামো — পরিধি নির্ধারণ বাকি।`;
   } else {
-    body = `${examBase} পরীক্ষার প্রস্তুতির কাঠামো — পরীক্ষার ধরন যাচাই বাকি (সর্বশেষ বিজ্ঞপ্তি দেখে নিন)।`;
+    body = `প্রস্তুতির কাঠামো — পরীক্ষার ধরন যাচাই বাকি (সর্বশেষ বিজ্ঞপ্তি দেখে নিন)।`;
   }
   // English body — mirrors the Bangla chain above (same conditions,
   // same verified facts, Western digits).
   let bodyEn: string;
   if (slug === 'bank' && cfg && cfg.questionCount !== null && cfg.timeMinutes !== null) {
-    bodyEn = `Preparation structure for the Bank Preliminary exam — verified subject split: ${cfg.questionCount} MCQ, ${timeEn(cfg.timeMinutes)} (Officer, Cash); negative marking unverified — the rate in the circular/admit card is final.`;
+    bodyEn = `Bank Preliminary — verified split: ${cfg.questionCount} MCQ, ${timeEn(cfg.timeMinutes)} (Officer, Cash); negative marking unverified.`;
   } else if (
     cfg &&
     cfg.questionCount !== null &&
@@ -1507,11 +1504,11 @@ function jobExamEntry(slug: string, tab?: string): RouteSeoEntry | null {
       cfg.passMark !== null && cfg.passMark !== undefined
         ? `, pass ${cfg.passMark} marks`
         : '';
-    bodyEn = `${examBaseEn} exam preparation structure — ${patternEn}: ${cfg.questionCount} MCQ, ${timeEn(cfg.timeMinutes)}, ${negEn}${passEn}; subject-wise syllabus.`;
+    bodyEn = `${patternEn}: ${cfg.questionCount} MCQ, ${timeEn(cfg.timeMinutes)}, ${negEn}${passEn}.`;
   } else if (slug === 'it-professional') {
-    bodyEn = `${examBaseEn} exam preparation structure — scope not yet decided.`;
+    bodyEn = `Scope not yet decided.`;
   } else {
-    bodyEn = `${examBaseEn} exam preparation structure — exam pattern not yet verified (check the latest circular).`;
+    bodyEn = `Exam pattern not yet verified (check the latest circular).`;
   }
   // AdSense Part 1 (integration): BCS English practice is live — say
   // so for the BCS hub only; every other exam keeps the honest
@@ -1519,21 +1516,46 @@ function jobExamEntry(slug: string, tab?: string): RouteSeoEntry | null {
   // seo.test.ts ("never presents practice as live").
   const practiceNote =
     slug === 'bcs'
-      ? 'BCS English MCQ অনুশীলন চালু আছে (Grammar, Vocabulary, Reading); অন্যান্য বিষয়ের MCQ অনুশীলন ও মক টেস্ট শীঘ্রই আসছে।'
-      : 'MCQ অনুশীলন ও মক টেস্ট শীঘ্রই আসছে।';
+      ? 'BCS English অনুশীলন চালু; বাকি MCQ ও মক টেস্ট শীঘ্রই আসছে।'
+      : 'MCQ ও মক টেস্ট শীঘ্রই আসছে।';
   const practiceNoteEn =
     slug === 'bcs'
-      ? 'BCS English MCQ practice is live (Grammar, Vocabulary, Reading); MCQ practice and mock tests for other subjects are coming soon.'
-      : 'MCQ practice and mock tests are coming soon.';
+      ? 'BCS English MCQ practice is live; other MCQ and mock tests coming soon.'
+      : 'MCQ and mock tests coming soon.';
+  // Brand-SEO wave 12: titles must fit search-result length (<=60).
+  // Keep the full exam name when it fits (BCS/Bank keep their pinned
+  // full names); otherwise drop the middle full-name segment, and if
+  // still over (long exam + long tab), drop 'প্রস্তুতি' too.
+  const titleBnCandidates = [
+    `${exam.bn} প্রস্তুতি — ${exam.fullBn}${tabSuffix} | Eduvelto`,
+    `${exam.bn} প্রস্তুতি${tabSuffix} | Eduvelto`,
+    `${exam.bn}${tabSuffix} | Eduvelto`,
+  ];
+  const titleEnCandidates = [
+    `${exam.en} Preparation — ${exam.fullEn}${tabSuffixEn} | Eduvelto`,
+    `${exam.en} Preparation${tabSuffixEn} | Eduvelto`,
+    `${exam.en}${tabSuffixEn} | Eduvelto`,
+  ];
+  const titleBn = titleBnCandidates.find((t) => t.length <= 60) ?? titleBnCandidates[2];
+  const titleEn = titleEnCandidates.find((t) => t.length <= 60) ?? titleEnCandidates[2];
   return {
-    title: `${exam.bn} প্রস্তুতি — ${exam.fullBn}${tabSuffix} | Eduvelto`,
+    title: titleBn,
     description: `${body} ${practiceNote} Eduvelto-তে সম্পূর্ণ ফ্রি।`,
     crumb: exam.bn,
-    titleEn: `${exam.en} Preparation — ${exam.fullEn}${tabSuffixEn} | Eduvelto`,
-    descriptionEn: `${bodyEn} ${practiceNoteEn} Completely free on Eduvelto.`,
+    titleEn,
+    descriptionEn: `${bodyEn} ${practiceNoteEn} Free on Eduvelto.`,
     crumbEn: exam.en,
   };
 }
+
+/** Short <title> forms for the two subject names that cannot fit
+ *  <=60 chars even without 'প্রস্তুতি/Preparation' (brand-SEO wave
+ *  12). Page copy (heading, breadcrumb, description) keeps the
+ *  full name. */
+const SUBJECT_SEO_SHORT: Record<string, { bn: string; en: string }> = {
+  'bcs/geography': { bn: 'ভূগোল ও পরিবেশ', en: 'Geography & Environment' },
+  'primary-teacher/general-knowledge': { bn: 'সাধারণ জ্ঞান', en: 'General Knowledge' },
+};
 
 function jobSubjectEntry(examSlug: string, subjectSlug: string): RouteSeoEntry | null {
   const exam = jobExamBySlug(examSlug);
@@ -1554,19 +1576,44 @@ function jobSubjectEntry(examSlug: string, subjectSlug: string): RouteSeoEntry |
   if (examSlug === 'bcs' && subjectSlug === 'english') {
     return {
       title: `${subj.nameBn} — ${exam.bn} প্রস্তুতি | Eduvelto`,
-      description: `${exam.fullBn} ${subj.nameBn} — যাচাইকৃত সিলেবাসে ${bnDigits(subj.marks)} নম্বর। টপিকভিত্তিক MCQ অনুশীলন চালু আছে (Grammar, Vocabulary, Reading); মক টেস্ট শীঘ্রই আসছে। Eduvelto-তে সম্পূর্ণ ফ্রি।`,
+      description: `${subj.nameBn} — যাচাইকৃত সিলেবাসে ${bnDigits(subj.marks)} নম্বর। MCQ অনুশীলন চালু আছে; মক টেস্ট শীঘ্রই আসছে। Eduvelto-তে ফ্রি।`,
       crumb: subj.nameBn,
       titleEn: `${subj.nameEn} — ${exam.en} Preparation | Eduvelto`,
-      descriptionEn: `${exam.fullEn} ${subj.nameEn} — ${subj.marks} marks in the verified syllabus. Topic-wise MCQ practice is live (Grammar, Vocabulary, Reading); mock tests are coming soon. Completely free on Eduvelto.`,
+      descriptionEn: `${subj.nameEn} — ${subj.marks} marks in the verified syllabus. MCQ practice is live; mock tests coming soon. Free on Eduvelto.`,
       crumbEn: subj.nameEn,
     };
   }
+  // Brand-SEO wave 12: titles must fit <=60. Long subject names
+  // (BCS Geography, Primary General Knowledge) overflow with the
+  // full 'প্রস্তুতি/Preparation' form, so pick the first fitting
+  // candidate: full name + Preparation, full name without it, then
+  // the short name (parenthetical stripped, or the map below) with
+  // and without Preparation. The full name always stays in the
+  // breadcrumb + description + page heading.
+  const shortBn =
+    SUBJECT_SEO_SHORT[`${examSlug}/${subjectSlug}`]?.bn ?? subj.nameBn.replace(/\s*\(.*\)\s*$/, '');
+  const shortEn =
+    SUBJECT_SEO_SHORT[`${examSlug}/${subjectSlug}`]?.en ?? subj.nameEn.replace(/\s*\(.*\)\s*$/, '');
+  const titleBnCandidates = [
+    `${subj.nameBn} — ${exam.bn} প্রস্তুতি | Eduvelto`,
+    `${subj.nameBn} — ${exam.bn} | Eduvelto`,
+    `${shortBn} — ${exam.bn} প্রস্তুতি | Eduvelto`,
+    `${shortBn} — ${exam.bn} | Eduvelto`,
+  ];
+  const titleEnCandidates = [
+    `${subj.nameEn} — ${exam.en} Preparation | Eduvelto`,
+    `${subj.nameEn} — ${exam.en} | Eduvelto`,
+    `${shortEn} — ${exam.en} Preparation | Eduvelto`,
+    `${shortEn} — ${exam.en} | Eduvelto`,
+  ];
+  const titleBn = titleBnCandidates.find((t) => t.length <= 60) ?? titleBnCandidates[3];
+  const titleEn = titleEnCandidates.find((t) => t.length <= 60) ?? titleEnCandidates[3];
   return {
-    title: `${subj.nameBn} — ${exam.bn} প্রস্তুতি | Eduvelto`,
-    description: `${exam.fullBn} ${subj.nameBn} — যাচাইকৃত সিলেবাসে ${bnDigits(subj.marks)} নম্বর। টপিক ও অনুশীলন শীঘ্রই আসছে। Eduvelto-তে সম্পূর্ণ ফ্রি।`,
+    title: titleBn,
+    description: `${subj.nameBn} — যাচাইকৃত সিলেবাসে ${bnDigits(subj.marks)} নম্বর। টপিক ও অনুশীলন শীঘ্রই আসছে। Eduvelto-তে সম্পূর্ণ ফ্রি।`,
     crumb: subj.nameBn,
-    titleEn: `${subj.nameEn} — ${exam.en} Preparation | Eduvelto`,
-    descriptionEn: `${exam.fullEn} ${subj.nameEn} — ${subj.marks} marks in the verified syllabus. Topics and practice are coming soon. Completely free on Eduvelto.`,
+    titleEn,
+    descriptionEn: `${subj.nameEn} — ${subj.marks} marks in the verified syllabus. Topics and practice are coming soon. Free on Eduvelto.`,
     crumbEn: subj.nameEn,
   };
 }
@@ -1584,12 +1631,24 @@ function nuSubjectEntry(groupSlug: string, subjectSlug: string): RouteSeoEntry |
   // শাখা' — strip the trailing 'শাখা' before writing '…শাখার',
   // or the description reads 'শাখা শাখার' (copy nit, 23 Nov 2026).
   const groupShort = group.bn.replace(/ শাখা$/, '');
+  // Brand-SEO wave 12: titles must fit <=60. The old titles repeated
+  // the full 'জাতীয় বিশ্ববিদ্যালয় ভর্তি প্রস্তুতি' phrase (70–91
+  // chars). The group name (pinned by seo.test.ts) and subject stay;
+  // the university context lives in the breadcrumb + description.
+  // English keeps the group in parentheses when it fits; the longest
+  // subject (General Knowledge) drops it — the description still
+  // names the group.
+  const titleEnCandidates = [
+    `${subj.nameEn} — National University (${group.en}) | Eduvelto`,
+    `${subj.nameEn} — National University | Eduvelto`,
+  ];
+  const titleEn = titleEnCandidates.find((t) => t.length <= 60) ?? titleEnCandidates[1];
   return {
-    title: `${subj.nameBn} — জাতীয় বিশ্ববিদ্যালয় ভর্তি প্রস্তুতি (${group.bn}) | Eduvelto`,
+    title: `${subj.nameBn} — ${group.bn} | Eduvelto`,
     description: `${groupShort} শাখার ভর্তি পরীক্ষায় ${subj.nameBn} ${bnDigits(subj.marks)} নম্বর — বিজ্ঞপ্তি থেকে যাচাইকৃত। অধ্যায় ও টপিক খসড়া হিসেবে দেওয়া আছে। Eduvelto-তে সম্পূর্ণ ফ্রি।`,
     crumb: subj.nameBn,
-    titleEn: `${subj.nameEn} — National University Admission Preparation (${group.en}) | Eduvelto`,
-    descriptionEn: `In the ${group.en} group's admission test, ${subj.nameEn} carries ${subj.marks} marks — verified from the circular. Chapters and topics are given as drafts. Completely free on Eduvelto.`,
+    titleEn,
+    descriptionEn: `In the ${group.en} admission test, ${subj.nameEn} carries ${subj.marks} marks — verified from the circular. Chapters and topics are drafts. Free on Eduvelto.`,
     crumbEn: subj.nameEn,
   };
 }
@@ -1619,6 +1678,20 @@ function breadcrumbFor(path: string, crumbs: string[], lang: 'bn' | 'en' = 'bn')
   });
   return { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: items };
 }
+
+/** Short reworded titles for opportunity detail pages (brand-SEO wave
+ *  12): the seed titles are long display titles for the page itself;
+ *  only the <title> uses these short forms so it fits <=60 chars.
+ *  Page copy (hub cards, detail h1) is untouched. */
+const OPPORTUNITY_SEO_TITLES: Record<string, { bn: string; en: string }> = {
+  'bpsc-non-cadre-2026': { bn: 'বিপিএসসি নন-ক্যাডার নিয়োগ ২০২৬', en: 'BPSC Non-Cadre Recruitment 2026' },
+  'unicef-writer-editor-2026': { bn: 'রাইটার/এডিটর — ইউনিসেফ বাংলাদেশ', en: 'Writer/Editor — UNICEF Bangladesh' },
+  'undrr-intern-pm-2026': { bn: 'ইন্টার্ন — UNDRR, জেনেভা', en: 'Intern — UNDRR, Geneva' },
+  'commonwealth-shared-2027': { bn: 'কমনওয়েলথ শেয়ার্ড স্কলারশিপ ২০২৭/২৮', en: 'Commonwealth Shared Scholarships 2027/28' },
+  'kaggle-learn': { bn: 'Kaggle Learn — ফ্রি মাইক্রো-কোর্স', en: 'Kaggle Learn — Free Micro-Courses' },
+  'google-skillshop': { bn: 'Google Skillshop — ফ্রি প্রশিক্ষণ', en: 'Google Skillshop — Free Training' },
+  upwork: { bn: 'Upwork — ফ্রিল্যান্স মার্কেটপ্লেস', en: 'Upwork — Freelance Marketplace' },
+};
 
 /**
  * Resolve SEO for a pathname. Returns null for routes that must not
@@ -1689,13 +1762,19 @@ export function resolveRouteSeo(pathname: string, lang: 'bn' | 'en' = 'bn'): Seo
     if (oppMatch) {
       const seed = OPPORTUNITY_SEED.find((o) => o.docId === oppMatch[1]);
       if (seed && isPublished(seed)) {
-        const desc = seed.descriptionBn.length > 150 ? `${seed.descriptionBn.slice(0, 147)}…` : seed.descriptionBn;
-        const descEn = seed.descriptionEn.length > 150 ? `${seed.descriptionEn.slice(0, 147)}…` : seed.descriptionEn;
+        // Brand-SEO wave 12: description budgets leave room for the
+        // verification suffix — bn suffix is 37 chars (max body 123),
+        // en suffix 46 (max body 114) — so the total stays <=160.
+        const desc =
+          seed.descriptionBn.length > 123 ? `${seed.descriptionBn.slice(0, 122)}…` : seed.descriptionBn;
+        const descEn =
+          seed.descriptionEn.length > 114 ? `${seed.descriptionEn.slice(0, 113)}…` : seed.descriptionEn;
+        const short = OPPORTUNITY_SEO_TITLES[seed.docId];
         entry = {
-          title: `${seed.titleBn} | Eduvelto`,
+          title: `${short?.bn ?? seed.titleBn} | Eduvelto`,
           description: `${desc} — অফিসিয়াল উৎসে যাচাইকৃত। Eduvelto।`,
           crumb: seed.titleBn,
-          titleEn: `${seed.titleEn} | Eduvelto`,
+          titleEn: `${short?.en ?? seed.titleEn} | Eduvelto`,
           descriptionEn: `${descEn} — verified from an official source. Eduvelto.`,
           crumbEn: seed.titleEn,
         };
