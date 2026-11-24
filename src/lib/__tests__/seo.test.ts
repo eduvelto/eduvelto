@@ -401,6 +401,29 @@ describe('resolveRouteSeo — public routes', () => {
     expect(locs.sort()).toEqual(expected.sort());
   });
 
+  it('every sitemap URL is covered by a firebase.json hosting rewrite (24 Nov 2026)', () => {
+    // Caught live 24 Nov 2026: the 4 new policy pages were in the sitemap
+    // and in App.tsx but NOT in firebase.json rewrites, so Hosting served
+    // 404 for them while /learn/** guides (covered by a glob) worked.
+    // A sitemap URL that no rewrite covers is a live 404 for crawlers.
+    const raw = readFileSync(
+      fileURLToPath(new URL('../../../firebase.json', import.meta.url)),
+      'utf8',
+    );
+    const rewrites = (JSON.parse(raw).hosting.rewrites ?? []) as {
+      source: string;
+      destination: string;
+    }[];
+    const covered = (path: string) =>
+      rewrites.some(({ source }) =>
+        source.endsWith('/**')
+          ? path === source.slice(0, -3) || path.startsWith(`${source.slice(0, -3)}/`)
+          : path === source,
+      );
+    const uncovered = SITEMAP_URLS.filter((p) => p !== '/' && !covered(p));
+    expect(uncovered).toEqual([]);
+  });
+
   it('job hub tabs resolve with Bangla tab names, unknown tabs fall back', () => {
     const mocks = resolveRouteSeo('/jobs/bcs/mocks');
     expect(mocks).not.toBeNull();
