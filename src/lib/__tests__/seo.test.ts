@@ -4,8 +4,13 @@
  *
  * Guards the owner's order ("Bangladesh number 1 education channel"
  * search must find Eduvelto) WITHOUT letting a false claim slip in:
- *  (1) no title/description ever presents "#1" / "১ নম্বর" /
- *      "number 1" as a fact — the honest framing is "সেরা ফ্রি";
+ *  (1) no title/description ever presents a superlative or rank
+ *      as a fact — no "সেরা" / "best" / "#1" / "১ নম্বর" /
+ *      "number 1" anywhere in any title or description, in either
+ *      language (brand-SEO wave 1, F-01; wave 2 drops the last
+ *      "Best" from the English home and /why-eduvelto titles).
+ *      Ambition survives only as an explicitly-labelled goal
+ *      ("আমাদের লক্ষ্য…", "aims to be…"), never as a rank;
  *  (2) every sitemap URL resolves to real SEO (route exists);
  *  (3) auth/admin/app routes resolve to null (never indexed content);
  *  (4) /founder resolves to null (FounderPage owns its SEO);
@@ -133,6 +138,14 @@ const SITEMAP_URLS = [
   '/learn/what-is-ai',
   '/learn/cv-writing-guide',
   '/learn/budget-planner-guide',
+  // Brand-SEO wave 2 (24 Nov 2026): 7 more public guides.
+  '/learn/revision-strategy',
+  '/learn/note-taking-guide',
+  '/learn/time-management-students',
+  '/learn/english-writing-basics',
+  '/learn/online-safety-guide',
+  '/learn/bangla-spelling-common-mistakes',
+  '/learn/computer-basics-students',
   '/learn',
   '/admissions',
   '/admissions/national-university',
@@ -957,7 +970,7 @@ describe('resolveRouteSeo — SEO pass 24 Nov 2026 (owner order "SEO korba ajk 1
     }
   });
 
-  it('/learn hub emits an ItemList of its 10 guides + 2 lessons + the practice hub', () => {
+  it('/learn hub emits an ItemList of its 17 guides + 2 lessons + the practice hub', () => {
     const seo = resolveRouteSeo('/learn')!;
     const items = itemListOf(seo)['itemListElement'] as Array<Record<string, unknown>>;
     expect(items.map((i) => i['url'])).toEqual([
@@ -971,6 +984,13 @@ describe('resolveRouteSeo — SEO pass 24 Nov 2026 (owner order "SEO korba ajk 1
       `${SITE_URL}/learn/what-is-ai`,
       `${SITE_URL}/learn/cv-writing-guide`,
       `${SITE_URL}/learn/budget-planner-guide`,
+      `${SITE_URL}/learn/revision-strategy`,
+      `${SITE_URL}/learn/note-taking-guide`,
+      `${SITE_URL}/learn/time-management-students`,
+      `${SITE_URL}/learn/english-writing-basics`,
+      `${SITE_URL}/learn/online-safety-guide`,
+      `${SITE_URL}/learn/bangla-spelling-common-mistakes`,
+      `${SITE_URL}/learn/computer-basics-students`,
       `${SITE_URL}/learn/bcs-english-tense`,
       `${SITE_URL}/learn/bcs-english-preposition`,
       `${SITE_URL}/jobs/bcs/practice/english`,
@@ -1080,8 +1100,8 @@ describe('resolveRouteSeo — brand-SEO wave 1 (24 Nov 2026)', () => {
     }
   });
 
-  it('all 10 guides resolve with draft wording and Article JSON-LD', () => {
-    expect(PUBLIC_GUIDES).toHaveLength(10);
+  it('all 17 guides resolve with draft wording and Article JSON-LD', () => {
+    expect(PUBLIC_GUIDES).toHaveLength(17);
     for (const guide of PUBLIC_GUIDES) {
       const seo = resolveRouteSeo(guide.path);
       expect(seo, `no SEO for ${guide.path}`).not.toBeNull();
@@ -1238,7 +1258,7 @@ describe('resolveRouteSeo — English SEO (24 Nov 2026, language system)', () =>
 
   it('resolveFallbackSeo returns the English home title with noindex', () => {
     const fb = resolveFallbackSeo('/jobs/primary', 'en')!;
-    expect(fb.title).toBe("Eduvelto — Bangladesh's Best Free Education Platform");
+    expect(fb.title).toBe("Eduvelto — Bangladesh's Free Education Platform");
     expect(fb.title).not.toMatch(BN);
     expect(fb.canonical).toBe(`${SITE_URL}/`);
     expect(fb.robots).toBe('noindex, nofollow');
@@ -1255,5 +1275,96 @@ describe('resolveRouteSeo — English SEO (24 Nov 2026, language system)', () =>
     expect(webPage(bn)['inLanguage']).toEqual(['bn']);
     expect(webPage(en)['inLanguage']).toEqual(['en']);
     expect(webPage(en)['name']).toBe(en.title);
+  });
+});
+
+describe('resolveRouteSeo — brand-SEO wave 2 (24 Nov 2026)', () => {
+  it('sitemap has 94 URLs (87 wave-1 + 7 new guides)', () => {
+    expect(SITEMAP_URLS.length).toBe(94);
+  });
+
+  it('English home title drops "Best"; Bangla title is unchanged', () => {
+    const en = resolveRouteSeo('/', 'en')!;
+    expect(en.title).toBe("Eduvelto — Bangladesh's Free Education Platform");
+    expect(en.title).not.toMatch(/best/i);
+    expect(en.description).not.toMatch(/best/i);
+    const bn = resolveRouteSeo('/')!;
+    expect(bn.title).toBe('Eduvelto — বাংলাদেশের ফ্রি শিক্ষা প্ল্যাটফর্ম');
+  });
+
+  it('/why-eduvelto English title drops "Best" — its Bangla counterpart has no superlative', () => {
+    // The Bangla title/description carry no superlative ("আস্থার"
+    // = trusted, not "সেরা"), so the English title is fixed to
+    // match its strength instead of out-claiming it; the English
+    // description keeps the ambition only as a goal ("aims to be").
+    const bn = resolveRouteSeo('/why-eduvelto')!;
+    expect(bn.title).not.toContain('সেরা');
+    expect(bn.description).not.toContain('সেরা');
+    const en = resolveRouteSeo('/why-eduvelto', 'en')!;
+    expect(en.title).toBe("Why Eduvelto — Bangladesh's Free Education Platform");
+    expect(en.title).not.toMatch(/best/i);
+    expect(en.description).not.toMatch(/best/i);
+    expect(en.description).toContain('aims to be');
+  });
+
+  it('no English sitemap title or description contains "best" or "সেরা"', () => {
+    for (const path of SITEMAP_URLS) {
+      if (path === '/founder') continue;
+      const seo = resolveRouteSeo(path, 'en')!;
+      expect(seo.title, `title ${path}`).not.toMatch(/best/i);
+      expect(seo.description, `description ${path}`).not.toMatch(/best/i);
+      expect(seo.title, `title ${path}`).not.toContain('সেরা');
+      expect(seo.description, `description ${path}`).not.toContain('সেরা');
+    }
+  });
+
+  it('the not-found hook restores the live home titles, with no superlative', () => {
+    // Brand-SEO wave 2 catch: useNotFoundMeta.ts hardcoded the old
+    // "সেরা"/"Best" home titles as its cleanup restore values, so
+    // leaving a not-found page put the superlative back into
+    // document.title. The restore values must equal the live home
+    // titles in both languages.
+    const src = readFileSync(
+      fileURLToPath(new URL('../useNotFoundMeta.ts', import.meta.url)),
+      'utf8',
+    );
+    const bn = src.match(/HOME_FALLBACK_TITLE_BN = '([^']+)'/)?.[1];
+    const en = src.match(/HOME_FALLBACK_TITLE_EN = "([^"]+)"/)?.[1];
+    expect(bn).toBe(resolveRouteSeo('/')!.title);
+    expect(en).toBe(resolveRouteSeo('/', 'en')!.title);
+    expect(bn).not.toContain('সেরা');
+    expect(en).not.toMatch(/best/i);
+  });
+
+  it('the 7 wave-2 guides resolve with draft wording, Article JSON-LD and real breadcrumbs', () => {
+    const wave2: Array<{ path: string; crumbBn: string; crumbEn: string }> = [
+      { path: '/learn/revision-strategy', crumbBn: 'পুনরালোচনার কৌশল', crumbEn: 'Revision Strategy' },
+      { path: '/learn/note-taking-guide', crumbBn: 'নোট নেওয়ার কৌশল', crumbEn: 'Note-Taking Techniques' },
+      { path: '/learn/time-management-students', crumbBn: 'সময় ব্যবস্থাপনা', crumbEn: 'Time Management' },
+      { path: '/learn/english-writing-basics', crumbBn: 'ইংরেজি লেখা', crumbEn: 'English Writing' },
+      { path: '/learn/online-safety-guide', crumbBn: 'অনলাইন নিরাপত্তা', crumbEn: 'Online Safety' },
+      { path: '/learn/bangla-spelling-common-mistakes', crumbBn: 'বাংলা বানান', crumbEn: 'Bangla Spelling' },
+      { path: '/learn/computer-basics-students', crumbBn: 'কম্পিউটারের মৌলিক ধারণা', crumbEn: 'Computer Basics' },
+    ];
+    for (const { path, crumbBn, crumbEn } of wave2) {
+      const seo = resolveRouteSeo(path);
+      expect(seo, `no SEO for ${path}`).not.toBeNull();
+      expect(seo!.description, path).toContain('খসড়া পাঠ');
+      expect(seo!.description, path).toContain('শিক্ষক যাচাইয়ের অপেক্ষায়');
+      expect(seo!.description, path).not.toContain('যাচাইকৃত');
+      expect(seo!.robots, path).toBeUndefined();
+      expect(jsonLdTypes(seo!)).toContain('Article');
+      const article = (seo!.jsonLd as Array<Record<string, unknown>>).find(
+        (o) => o['@type'] === 'Article',
+      )!;
+      expect(article['headline']).toBe(seo!.title);
+      expect(article['datePublished']).toBe('2026-11-24');
+      expect(article['inLanguage']).toBe('bn');
+      expect(breadcrumbNames(seo!)).toEqual(['হোম', 'পাঠ', crumbBn]);
+      const en = resolveRouteSeo(path, 'en')!;
+      expect(en.title, path).not.toMatch(/best/i);
+      expect(en.description, path).toContain('awaiting teacher review');
+      expect(breadcrumbNames(en)).toEqual(['Home', 'Lessons', crumbEn]);
+    }
   });
 });

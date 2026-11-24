@@ -265,9 +265,9 @@ const STATIC_ROUTES: Record<string, RouteSeoEntry> = {
     description:
       'Eduvelto — বাংলাদেশের ফ্রি শিক্ষা ও জীবনসেবা প্ল্যাটফর্ম: BCS, ব্যাংক, প্রাথমিক শিক্ষক, NTRCA ও জাতীয় বিশ্ববিদ্যালয় ভর্তি প্রস্তুতি, MCQ পরীক্ষা ও ডিজিটাল লাইব্রেরি — সম্পূর্ণ বিনামূল্যে।',
     crumb: 'হোম',
-    titleEn: 'Eduvelto — Bangladesh\'s Best Free Education Platform',
+    titleEn: 'Eduvelto — Bangladesh\'s Free Education Platform',
     descriptionEn:
-      'Eduvelto, Bangladesh\'s best free education platform — BCS, Bank, Primary Teacher, NTRCA and National University admission preparation, MCQ exams and a digital library — completely free.',
+      'Eduvelto, Bangladesh\'s free education platform — BCS, Bank, Primary Teacher, NTRCA and National University admission preparation, MCQ exams and a digital library — completely free.',
     crumbEn: 'Home',
   },
   '/why-eduvelto': {
@@ -275,9 +275,9 @@ const STATIC_ROUTES: Record<string, RouteSeoEntry> = {
     description:
       'কেন Eduvelto — বাংলাদেশের আস্থার ফ্রি শিক্ষা প্ল্যাটফর্ম: BCS, ব্যাংক, NTRCA ও জাতীয় বিশ্ববিদ্যালয় ভর্তি, MCQ পরীক্ষা ও ডিজিটাল লাইব্রেরি — বিনামূল্যে।',
     crumb: 'কেন Eduvelto',
-    titleEn: 'Why Eduvelto — Bangladesh\'s Best Free Education Platform',
+    titleEn: 'Why Eduvelto — Bangladesh\'s Free Education Platform',
     descriptionEn:
-      'Why Eduvelto aims to be Bangladesh\'s best free education platform — 100% free BCS, Bank, Primary Teacher, NTRCA and National University admission preparation, MCQ exams and a digital library.',
+      'Why Eduvelto aims to be Bangladesh\'s trusted free education platform — 100% free BCS, Bank, Primary Teacher, NTRCA and National University admission preparation, MCQ exams and a digital library.',
     crumbEn: 'Why Eduvelto',
   },
   '/jobs': {
@@ -886,15 +886,15 @@ const STATIC_ROUTES: Record<string, RouteSeoEntry> = {
   '/learn': {
     title: 'পাঠ ও গাইড — ফ্রি প্রস্তুতি | Eduvelto',
     description:
-      'ফ্রি পাঠ ও গাইড — BCS, ব্যাংক, NTRCA, ভর্তি, ব্যাকরণ, বৃত্তি, CV ও বাজেট। খসড়া পাঠ, শিক্ষক যাচাইয়ের অপেক্ষায়; বিসিএস ইংরেজি — ৩৫টি যাচাইকৃত প্রশ্ন।',
+      'ফ্রি পাঠ ও গাইড — BCS, ব্যাংক, NTRCA, ভর্তি, ব্যাকরণ, বৃত্তি, CV, বাজেট, পুনরালোচনা, নোট, সময় ব্যবস্থাপনা, ইংরেজি লেখা, অনলাইন নিরাপত্তা, বাংলা বানান ও কম্পিউটার। খসড়া পাঠ, শিক্ষক যাচাইয়ের অপেক্ষায়; বিসিএস ইংরেজি — ৩৫টি যাচাইকৃত প্রশ্ন।',
     crumb: 'পাঠ',
     titleEn: 'Lessons & Guides — Free Preparation | Eduvelto',
     descriptionEn:
-      'Free lessons and guides — BCS, bank, primary teacher, NTRCA and National University admission preparation, English grammar, scholarships, CV and budget planning — draft lessons awaiting teacher review; BCS English practice — 35 verified questions. Eduvelto.',
+      'Free lessons and guides — BCS, bank, primary teacher, NTRCA and National University admission preparation, English grammar, scholarships, CV and budget planning, revision, note-taking, time management, English writing, online safety, Bangla spelling and computer basics — draft lessons awaiting teacher review; BCS English practice — 35 verified questions. Eduvelto.',
     crumbEn: 'Lessons',
   },
-  // Public guides (24 Nov 2026, brand-SEO wave 1): 10 original
-  // static guides, no login, zero Firestore reads (see
+  // Public guides (24 Nov 2026, brand-SEO wave 1; EXTENDED wave 2:
+  // 17 original static guides, no login, zero Firestore reads (see
   // src/lib/publicGuides.ts). Every guide is a draft awaiting
   // teacher review — the description says so plainly, like the two
   // BCS English lessons above; never "যাচাইকৃত"/"অনুমোদিত".
@@ -997,6 +997,80 @@ const STATIC_ROUTES: Record<string, RouteSeoEntry> = {
     descriptionEn:
       'How to plan a month’s expenses as a student — income, essential spending and simple saving rules, in Eduvelto’s free guide. Draft lesson — awaiting teacher review.',
     crumbEn: 'Monthly Budget',
+  },
+  // Public guides, wave 2 (24 Nov 2026, brand-SEO wave 2): 7 more
+  // original static guides — revision, note-taking, time
+  // management, English writing, online safety, Bangla spelling
+  // and computer basics. Same draft treatment as wave 1.
+  '/learn/revision-strategy': {
+    title: 'পরীক্ষার আগে পুনরালোচনার কৌশল | Eduvelto',
+    description:
+      'পরীক্ষার আগে পুনরালোচনা কীভাবে করবেন — পরিকল্পনা, নিজের নোট, নিজেকে যাচাই ও পরীক্ষার আগের রাতের নিয়ম নিয়ে Eduvelto-র ফ্রি গাইড। খসড়া পাঠ — শিক্ষক যাচাইয়ের অপেক্ষায়।',
+    crumb: 'পুনরালোচনার কৌশল',
+    titleEn: 'Revision Strategy Before Exams | Eduvelto',
+    descriptionEn:
+      'How to revise before an exam — planning, your own notes, self-testing and the night-before rules, in Eduvelto’s free guide. Draft lesson — awaiting teacher review.',
+    crumbEn: 'Revision Strategy',
+  },
+  '/learn/note-taking-guide': {
+    title: 'কার্যকর নোট নেওয়ার কৌশল | Eduvelto',
+    description:
+      'কার্যকর নোট কীভাবে নেবেন — নিজের ভাষায় লেখা, মূল ধারণা, চিহ্ন ও নিয়মিত ঝালিয়ে নেওয়া নিয়ে Eduvelto-র ফ্রি গাইড। খসড়া পাঠ — শিক্ষক যাচাইয়ের অপেক্ষায়।',
+    crumb: 'নোট নেওয়ার কৌশল',
+    titleEn: 'Effective Note-Taking Techniques | Eduvelto',
+    descriptionEn:
+      'How to take effective notes — writing in your own words, main ideas, marks and regular review, in Eduvelto’s free guide. Draft lesson — awaiting teacher review.',
+    crumbEn: 'Note-Taking Techniques',
+  },
+  '/learn/time-management-students': {
+    title: 'শিক্ষার্থীদের সময় ব্যবস্থাপনা | Eduvelto',
+    description:
+      'শিক্ষার্থী হিসেবে সময় কীভাবে ব্যবস্থাপনা করবেন — রুটিন, ছোট ভাগে পড়া, ফোন থেকে দূরে থাকা ও বিশ্রাম নিয়ে Eduvelto-র ফ্রি গাইড। খসড়া পাঠ — শিক্ষক যাচাইয়ের অপেক্ষায়।',
+    crumb: 'সময় ব্যবস্থাপনা',
+    titleEn: 'Time Management for Students | Eduvelto',
+    descriptionEn:
+      'How to manage time as a student — a routine, studying in short blocks, staying away from the phone and rest, in Eduvelto’s free guide. Draft lesson — awaiting teacher review.',
+    crumbEn: 'Time Management',
+  },
+  '/learn/english-writing-basics': {
+    title: 'ইংরেজি লেখার মৌলিক নিয়ম | Eduvelto',
+    description:
+      'ইংরেজি লেখার মৌলিক নিয়ম সহজ বাংলায় — ছোট বাক্য, Subject-Verb মিল, বড় হাতের অক্ষর, যতিচিহ্ন ও অনুচ্ছেদ, নিজের লেখা উদাহরণসহ। Eduvelto-র ফ্রি গাইড — খসড়া পাঠ, শিক্ষক যাচাইয়ের অপেক্ষায়।',
+    crumb: 'ইংরেজি লেখা',
+    titleEn: 'English Writing Basics | Eduvelto',
+    descriptionEn:
+      'The basics of English writing in simple Bangla — short sentences, subject-verb agreement, capital letters, punctuation and paragraphs, with original examples. Eduvelto’s free guide. Draft lesson — awaiting teacher review.',
+    crumbEn: 'English Writing',
+  },
+  '/learn/online-safety-guide': {
+    title: 'অনলাইনে নিরাপদ থাকার নিয়ম | Eduvelto',
+    description:
+      'অনলাইনে নিরাপদ থাকার নিয়ম — শক্তিশালী পাসওয়ার্ড, OTP না দেওয়া, অচেনা লিংক, ব্যক্তিগত তথ্য ও ভুয়া খবর নিয়ে Eduvelto-র ফ্রি গাইড। খসড়া পাঠ — শিক্ষক যাচাইয়ের অপেক্ষায়।',
+    crumb: 'অনলাইন নিরাপত্তা',
+    titleEn: 'Online Safety Guide for Students | Eduvelto',
+    descriptionEn:
+      'How to stay safe online — strong passwords, never sharing OTP codes, unknown links, personal information and fake news, in Eduvelto’s free guide. Draft lesson — awaiting teacher review.',
+    crumbEn: 'Online Safety',
+  },
+  '/learn/bangla-spelling-common-mistakes': {
+    title: 'বাংলা বানানের সাধারণ ভুল | Eduvelto',
+    description:
+      'বাংলা বানানের সাধারণ ভুল — কি-কী, ণ-ন, ষ-স ও আধুনিক বানানের নিয়ম, নিজের লেখা উদাহরণসহ। Eduvelto-র ফ্রি গাইড — খসড়া পাঠ, শিক্ষক যাচাইয়ের অপেক্ষায়।',
+    crumb: 'বাংলা বানান',
+    titleEn: 'Common Bangla Spelling Mistakes | Eduvelto',
+    descriptionEn:
+      'Common Bangla spelling mistakes and the simple rules that prevent them — question words, letter rules and modern spellings, with original examples. Eduvelto’s free guide. Draft lesson — awaiting teacher review.',
+    crumbEn: 'Bangla Spelling',
+  },
+  '/learn/computer-basics-students': {
+    title: 'কম্পিউটার ও ইন্টারনেটের মৌলিক ধারণা | Eduvelto',
+    description:
+      'কম্পিউটার ও ইন্টারনেটের মৌলিক ধারণা — ফাইল ও ফোল্ডার, লেখালেখি, ব্রাউজার, ইমেইল ও শরীরের যত্ন নিয়ে Eduvelto-র ফ্রি গাইড। খসড়া পাঠ — শিক্ষক যাচাইয়ের অপেক্ষায়।',
+    crumb: 'কম্পিউটারের মৌলিক ধারণা',
+    titleEn: 'Computer and Internet Basics for Students | Eduvelto',
+    descriptionEn:
+      'Computer and internet basics for students — files and folders, word processing, browsers, email and looking after your body, in Eduvelto’s free guide. Draft lesson — awaiting teacher review.',
+    crumbEn: 'Computer Basics',
   },
 };
 
@@ -1476,10 +1550,10 @@ export function resolveRouteSeo(pathname: string, lang: 'bn' | 'en' = 'bn'): Seo
     });
   }
   if (path === '/learn') {
-    // ItemList (24 Nov 2026, SEO pass; EXTENDED brand-SEO wave 1):
-    // the hub lists the 10 public guides, the two real lessons and
-    // the BCS English practice hub — the same links the page renders,
-    // in the same order.
+    // ItemList (24 Nov 2026, SEO pass; EXTENDED brand-SEO wave 1
+    // and wave 2): the hub lists the 17 public guides, the two real
+    // lessons and the BCS English practice hub — the same links the
+    // page renders, in the same order.
     jsonLd.push({
       '@context': 'https://schema.org',
       '@type': 'ItemList',
@@ -1548,18 +1622,60 @@ export function resolveRouteSeo(pathname: string, lang: 'bn' | 'en' = 'bn'): Seo
         {
           '@type': 'ListItem',
           position: 11,
+          name: lang === 'bn' ? 'পরীক্ষার আগে পুনরালোচনার কৌশল' : 'Revision Strategy Before Exams',
+          url: `${SITE_URL}/learn/revision-strategy`,
+        },
+        {
+          '@type': 'ListItem',
+          position: 12,
+          name: lang === 'bn' ? 'কার্যকর নোট নেওয়ার কৌশল' : 'Effective Note-Taking Techniques',
+          url: `${SITE_URL}/learn/note-taking-guide`,
+        },
+        {
+          '@type': 'ListItem',
+          position: 13,
+          name: lang === 'bn' ? 'শিক্ষার্থীদের সময় ব্যবস্থাপনা' : 'Time Management for Students',
+          url: `${SITE_URL}/learn/time-management-students`,
+        },
+        {
+          '@type': 'ListItem',
+          position: 14,
+          name: lang === 'bn' ? 'ইংরেজি লেখার মৌলিক নিয়ম' : 'English Writing Basics',
+          url: `${SITE_URL}/learn/english-writing-basics`,
+        },
+        {
+          '@type': 'ListItem',
+          position: 15,
+          name: lang === 'bn' ? 'অনলাইনে নিরাপদ থাকার নিয়ম' : 'Online Safety Guide for Students',
+          url: `${SITE_URL}/learn/online-safety-guide`,
+        },
+        {
+          '@type': 'ListItem',
+          position: 16,
+          name: lang === 'bn' ? 'বাংলা বানানের সাধারণ ভুল' : 'Common Bangla Spelling Mistakes',
+          url: `${SITE_URL}/learn/bangla-spelling-common-mistakes`,
+        },
+        {
+          '@type': 'ListItem',
+          position: 17,
+          name: lang === 'bn' ? 'কম্পিউটার ও ইন্টারনেটের মৌলিক ধারণা' : 'Computer and Internet Basics for Students',
+          url: `${SITE_URL}/learn/computer-basics-students`,
+        },
+        {
+          '@type': 'ListItem',
+          position: 18,
           name: lang === 'bn' ? 'টেন্স — পাঠ' : 'Tense — Lesson',
           url: `${SITE_URL}/learn/bcs-english-tense`,
         },
         {
           '@type': 'ListItem',
-          position: 12,
+          position: 19,
           name: lang === 'bn' ? 'প্রিপোজিশন — পাঠ' : 'Preposition — Lesson',
           url: `${SITE_URL}/learn/bcs-english-preposition`,
         },
         {
           '@type': 'ListItem',
-          position: 13,
+          position: 20,
           name: lang === 'bn' ? 'বিসিএস ইংরেজি অনুশীলন' : 'BCS English Practice',
           url: `${SITE_URL}/jobs/bcs/practice/english`,
         },
@@ -1604,8 +1720,8 @@ export function resolveRouteSeo(pathname: string, lang: 'bn' | 'en' = 'bn'): Seo
     });
   }
   if (PUBLIC_GUIDES.some((g) => g.path === path)) {
-    // Article (24 Nov 2026, brand-SEO wave 1): same treatment as the
-    // lessons — the 10 guides are article-length drafts awaiting
+    // Article (24 Nov 2026, brand-SEO wave 1; wave 2 keeps the
+    // same date — the 17 guides are article-length drafts awaiting
     // teacher review, published 24 Nov 2026. Never claims review.
     jsonLd.push({
       '@context': 'https://schema.org',
