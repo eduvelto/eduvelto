@@ -57,6 +57,19 @@
 
 import { JOB_SUBJECTS } from './jobContent';
 import { JOB_RULES_CONFIGS } from './jobExams';
+import {
+  cyrb53Hex,
+  duplicateHashV2For,
+  normalizeCentralBankText,
+  stemHashFor,
+  validateCentralBankQuestion,
+  type CentralBankQuestion,
+  type DuplicateCandidate,
+  type DuplicateReview,
+} from './jobCentralBank';
+
+/** Re-exported for the admin UI + verification queue (§4.4). */
+export type { CentralBankQuestion, DuplicateCandidate, DuplicateReview };
 
 /** Config version the Step 7 seed + docs were derived from (Step 6
  * P2-02 pattern — same version as the Step 6 content seed). */
@@ -141,6 +154,11 @@ export interface JobBundleQuestion {
   // difficulty (beginner easy→hard, advanced hard-first) without
   // ever reading the bank. Minimal metadata only.
   difficulty: 'easy' | 'medium' | 'hard';
+  /** Central-bank passage join (§1.4): for reading/comprehension
+   * questions the bundle holds the STEM ONLY and this field names
+   * the shared `jobPassages` doc the renderer joins at read time.
+   * Absent/null on every other question. */
+  passageId?: string | null;
 }
 
 /** Find one bundle question by its bank questionId — the result
@@ -284,6 +302,43 @@ export function jobQuestionDuplicateHash(
 }
 
 /* ------------------------------------------------------------------ */
+/* Duplicate hash v2 (design-central-bank.md §4.2 — central bank)     */
+/* ------------------------------------------------------------------ */
+
+/** v2 normalisation: NFKC + lowercase + Bangla-digit folding +
+ * strip whitespace/punctuation/symbols. (v1 did not fold Bangla
+ * digits — "২০২৫" and "2025" are the same token in v2.) */
+export function normalizeJobQuestionTextV2(text: string): string {
+  return normalizeCentralBankText(text);
+}
+
+/** Stem hash — near-duplicate candidate lookup (1 indexed read). */
+export function jobQuestionStemHash(stem: string): string {
+  return stemHashFor(stem);
+}
+
+/**
+ * Hash v2: cyrb53(normalisedStem + '|' + canonicalSubjectId + '|' +
+ * sortedOptions.join('|') + '|' + normalisedCorrectText). Options
+ * are a SET (sorted), so option order never hides a duplicate; the
+ * correct answer enters as TEXT, not the letter (v1 used the
+ * letter — order-dependent, so the same question with shuffled
+ * options hashed differently). The v1 `duplicateHash` field is KEPT
+ * on the 35 for continuity and is not recomputed for them.
+ */
+export function jobQuestionDuplicateHashV2(args: {
+  question: string;
+  subjectId: string;
+  options: JobQuestionOption[];
+  correctAnswer: 'A' | 'B' | 'C' | 'D';
+}): string {
+  return duplicateHashV2For(args);
+}
+
+/** Re-export of the shared cyrb53 (v1 and v2 use the same hash). */
+export { cyrb53Hex as jobQuestionCyrb53Hex };
+
+/* ------------------------------------------------------------------ */
 /* Validation (mirrors the rules — lib-side, for the admin UI + tests) */
 /* ------------------------------------------------------------------ */
 
@@ -388,6 +443,15 @@ export function validateJobQuestion(doc: Record<string, unknown>): string[] {
   return problems;
 }
 
+/** Validate a CENTRAL-BANK (v2) question doc — the §1.1 schema.
+ * Thin wrapper over `validateCentralBankQuestion` (jobCentralBank.ts),
+ * kept here so the bank API stays in one place. The v1 validator
+ * above is kept until the migration completes; v2 docs are NOT
+ * accepted by it and v1 docs are NOT accepted by this one. */
+export function validateJobQuestionV2(doc: Record<string, unknown>): string[] {
+  return validateCentralBankQuestion(doc);
+}
+
 /** Validate a bundle doc (student tier — must contain NO key
  * material). Mirrors `validJobQuestionBundle()` in the rules. */
 export function validateJobQuestionBundle(doc: Record<string, unknown>): string[] {
@@ -458,10 +522,23 @@ export function validateJobQuestionBundle(doc: Record<string, unknown>): string[
 export type JobQuestionActor = 'author' | 'moderator' | 'admin';
 
 /** Allowed reviewStatus moves from `from`, for `actor`. 'Published'
- * here means status published + reviewStatus Published together. */
+ * here means status published + reviewStatus Published together.
+ *
+ * `gates` (central bank §1.5/§4.3 — optional, defaults to the old
+ * behaviour when omitted): publishing from 'Under Review' is refused
+ * while unreviewed duplicate candidates exist, and requires an
+ * explicit content pass (`reviewContentPassed === true`). Pass
+ * `reviewContentPassed: false` explicitly (or
+ * `hasUnreviewedDuplicateCandidates: true`) to enforce the gate;
+ * omitting `gates` keeps the pre-central-bank behaviour so existing
+ * callers are unaffected. */
 export function jobQuestionAllowedMoves(
   from: JobQuestionReviewState,
   actor: JobQuestionActor,
+  gates?: {
+    reviewContentPassed?: boolean;
+    hasUnreviewedDuplicateCandidates?: boolean;
+  },
 ): JobQuestionReviewState[] {
   if (actor === 'author') {
     if (from === 'Not Started') return ['In Progress', 'Under Review'];
@@ -473,8 +550,13 @@ export function jobQuestionAllowedMoves(
     case 'Not Started':
     case 'In Progress':
       return ['Under Review', 'Rejected', 'Archived'];
-    case 'Under Review':
-      return ['Published', 'Rejected', 'Archived', 'Not Started'];
+    case 'Under Review': {
+      const moves: JobQuestionReviewState[] = ['Published', 'Rejected', 'Archived', 'Not Started'];
+      const publishBlocked =
+        gates?.hasUnreviewedDuplicateCandidates === true ||
+        gates?.reviewContentPassed === false;
+      return publishBlocked ? moves.filter((m) => m !== 'Published') : moves;
+    }
     case 'Published':
       return ['Not Started', 'Archived'];
     case 'Rejected':
@@ -494,9 +576,23 @@ export function jobQuestionAllowedMoves(
  * Throws unless EVERY question is Published (status + reviewStatus)
  * and carries a real explanation + 4 options. The bundle NEVER
  * contains correctLetter/explanation/correctText — the key doc holds
- * them. `meta` supplies kind/examSlug/topicId/mockId/titles. */
+ * them. `meta` supplies kind/examSlug/topicId/mockId/titles.
+ *
+ * Accepts BOTH shapes: legacy v1 questions (`questionText` /
+ * `correctLetter`) and central-bank v2 questions (`question` /
+ * `correctAnswer`, canonical subject/topic keys). For v2 questions
+ * the bundle stores the canonical topicId and the stem-only
+ * question text; when a question carries a `passageId`, the caller
+ * MUST supply `meta.passages` containing that passage (fail-closed
+ * — a bundle whose passage cannot be joined is unanswerable), and
+ * the bundle question carries the `passageId` so the renderer joins
+ * the passage at read time (§1.4, exception E-10). */
+export type JobBundleSourceQuestion =
+  | (JobQuestion & { id: string })
+  | (CentralBankQuestion & { id: string });
+
 export function buildJobBundle(
-  questions: Array<JobQuestion & { id: string }>,
+  questions: Array<JobBundleSourceQuestion>,
   meta: {
     bundleId: string;
     kind: JobBundleKind;
@@ -506,6 +602,9 @@ export function buildJobBundle(
     year?: number | null;
     titleBn: string;
     titleEn: string;
+    /** Passage registry ({passageId: {text}}) — required when any
+     * question carries a passageId. */
+    passages?: Record<string, { text: string }>;
   },
 ): { bundle: JobQuestionBundle; key: JobQuestionKey } {
   for (const q of questions) {
@@ -515,16 +614,28 @@ export function buildJobBundle(
     if (!q.explanation || q.options.length !== 4) {
       throw new Error(`buildJobBundle: question ${q.id} is incomplete (explanation + 4 options required)`);
     }
+    const passageId = (q as { passageId?: string | null }).passageId ?? null;
+    if (passageId !== null && (!meta.passages || !meta.passages[passageId])) {
+      throw new Error(`buildJobBundle: question ${q.id} needs passage '${passageId}' (supply meta.passages)`);
+    }
   }
-  const bundleQuestions: JobBundleQuestion[] = questions.map((q, i) => ({
-    n: i + 1,
-    questionId: q.id,
-    topicId: q.topicId,
-    subjectId: q.subjectId,
-    questionText: q.questionText,
-    options: q.options.map((o) => ({ letter: o.letter, text: o.text })),
-    difficulty: q.difficulty,
-  }));
+  const bundleQuestions: JobBundleQuestion[] = questions.map((q, i) => {
+    const isV2 = 'question' in q && !('questionText' in q);
+    const questionText = isV2
+      ? (q as CentralBankQuestion).question
+      : (q as JobQuestion).questionText;
+    const passageId = (q as { passageId?: string | null }).passageId ?? null;
+    return {
+      n: i + 1,
+      questionId: q.id,
+      topicId: q.topicId,
+      subjectId: q.subjectId,
+      questionText,
+      options: q.options.map((o) => ({ letter: o.letter, text: o.text })),
+      difficulty: q.difficulty,
+      ...(passageId !== null ? { passageId } : {}),
+    };
+  });
   const bundle: JobQuestionBundle = {
     kind: meta.kind,
     examSlug: meta.examSlug,
@@ -543,14 +654,20 @@ export function buildJobBundle(
   };
   const key: JobQuestionKey = {
     bundleId: meta.bundleId,
-    answers: questions.map((q, i) => ({
-      n: i + 1,
-      questionId: q.id,
-      correctLetter: q.correctLetter,
-      correctText: q.options.find((o) => o.letter === q.correctLetter)?.text ?? '',
-      explanation: q.explanation,
-      whyWrong: q.whyWrong ?? null,
-    })),
+    answers: questions.map((q, i) => {
+      const isV2 = 'question' in q && !('questionText' in q);
+      const correctLetter = isV2
+        ? (q as CentralBankQuestion).correctAnswer
+        : (q as JobQuestion).correctLetter;
+      return {
+        n: i + 1,
+        questionId: q.id,
+        correctLetter,
+        correctText: q.options.find((o) => o.letter === correctLetter)?.text ?? '',
+        explanation: q.explanation,
+        whyWrong: q.whyWrong ?? null,
+      };
+    }),
     configVersion: JOB_QUESTION_CONFIG_VERSION,
   };
   return { bundle, key };

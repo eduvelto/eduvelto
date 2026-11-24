@@ -22,6 +22,11 @@ import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import {
   JOB_EXAMS,
+  EXAM_KEYS,
+  VERIFIED_EXAM_KEYS,
+  VIRTUAL_EXAM_KEYS,
+  isExamKey,
+  isVirtualExamKey,
   EXAM_PATTERNS,
   JOB_RULES_CONFIGS,
   JOB_PATTERN_STATUS,
@@ -370,5 +375,31 @@ describe('seed JSON (Step 5 — team/job-categories-exams-seed.json, disk only)'
         expect(doc.rulesConfig).toBeNull();
       }
     }
+  });
+});
+
+describe('central bank exam keys (§1.2)', () => {
+  it('EXAM_KEYS is the 7 canonical keys (6 verified + grade_11_20 virtual)', () => {
+    expect(EXAM_KEYS).toEqual([
+      'bcs', 'bank', 'bank-senior-officer', 'bank-assistant-director',
+      'primary-teacher', 'ntrca', 'grade_11_20',
+    ]);
+    expect(VERIFIED_EXAM_KEYS).toEqual([
+      'bcs', 'bank', 'bank-senior-officer', 'bank-assistant-director',
+      'primary-teacher', 'ntrca',
+    ]);
+    expect(VIRTUAL_EXAM_KEYS).toEqual(['grade_11_20']);
+  });
+  it('grade_11_20 is virtual: no JOB_EXAMS entry and no rulesConfig entry', () => {
+    expect(isVirtualExamKey('grade_11_20')).toBe(true);
+    expect(isVirtualExamKey('bcs')).toBe(false);
+    expect(jobExamBySlug('grade_11_20')).toBeUndefined();
+    expect(jobRulesConfig('grade_11_20')).toBeNull();
+    expect('grade_11_20' in JOB_RULES_CONFIGS).toBe(false);
+    expect(isExamKey('grade_11_20')).toBe(true);
+    expect(isExamKey('dgfood')).toBe(false);
+  });
+  it('the verified keys are exactly the keys with a JOB_RULES_CONFIGS entry', () => {
+    expect(VERIFIED_EXAM_KEYS.slice().sort()).toEqual(Object.keys(JOB_RULES_CONFIGS).sort());
   });
 });

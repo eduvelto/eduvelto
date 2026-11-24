@@ -82,15 +82,13 @@ service cloud.firestore {
     // teacher whose verification lapses keeps READ on their own
     // drafts (isTeacher read rule) but can no longer edit them; a
     // Moderator may still verify/reject/publish the draft.
-    function callerVerificationStatus() {
-      return get(/databases/$(database)/documents/users/$(uid())).data.get('verificationStatus', '');
-    }
     // Single-get form (Step 17, 23 Nov 2026): callerActive() +
-    // callerRole() + callerVerificationStatus() each fetch the users
-    // doc separately (4 gets), which pushed the jobTopics/jobLessons
-    // creates over Firestore's 1000-expression evaluation limit.
-    // One fetch, then pure field reads — cheaper than the old
-    // isTeacher() gate (2 gets).
+    // callerRole() each fetch the users doc separately (4 gets),
+    // which pushed the jobTopics/jobLessons creates over
+    // Firestore's 1000-expression evaluation limit. One fetch,
+    // then pure field reads — cheaper than the old isTeacher()
+    // gate (2 gets). (callerVerificationStatus() was removed
+    // 24 Nov 2026 — defined but never called; ~200 bytes.)
     function isVerifiedJobBankAuthor() {
       return signedIn()
         && isVerifiedJobBankAuthorFor(get(/databases/$(database)/documents/users/$(uid())).data);
@@ -769,6 +767,14 @@ service cloud.firestore {
               && newDoc.get('reviewStatus', '') == 'Not Started'))
         && (newDoc.get('reviewStatus', '') != 'Published'
             || oldDoc.get('reviewStatus', '') == 'Under Review')
+        // Central Bank §4.3 gate 3: publish needs an EMPTY
+        // duplicateCandidates list — the review decision lives in
+        // duplicateReview; the list is cleared when reviewed (the
+        // lib validator enforces the same rule).
+        && (newDoc.get('reviewStatus', '') != 'Published'
+            || newDoc.get('duplicateCandidates', null) == null
+            || (newDoc.get('duplicateCandidates', null) is list
+                && newDoc.get('duplicateCandidates', null).size() == 0))
         && (newDoc.get('reviewStatus', '') != 'Rejected'
             || (newDoc.get('rejectionReason', null) is string
                 && newDoc.get('rejectionReason', '').size() >= 10))
@@ -783,8 +789,86 @@ service cloud.firestore {
     // no indexing — so rules enforce the 4-option count and the lib
     // validator (jobQuestions.ts) enforces the rest. Previous-year
     // questions need exam + year + source proof (Step 3 §2.7).
+    // Central Bank v2 shape (design-central-bank.md §1.1/§6.4).
+    // TRIMMED 24 Nov 2026 — the full version (ID regexes, the
+    // 15-subject enum, the exam-key vocabulary, the
+    // syllabusMappings key check) blew Firestore's 1000-expression
+    // evaluation limit on moderator updates (emulator-proved:
+    // cb-r14 hit it; cb-r12 passed by a hair). The dropped checks
+    // are enforced by the lib validator (jobCentralBank.ts) and
+    // cross-checked by the migration test (seed == lib) — the
+    // rules keep the checks that are cheap AND load-bearing:
+    // shape dispatch, verificationStatus consistency, the
+    // previous-year proof, the publish gate (in the transition),
+    // schemaVersion pinning. The subject-weights sum-check is
+    // likewise unimplementable in rules (no list iteration).
+    function validJobQuestionV2(d) {
+      return !('examSlug' in d) && !('chapterId' in d)
+        && !('questionText' in d) && !('correctLetter' in d)
+        && !('isPreviousYear' in d) && !('sourceUrl' in d)
+        && !('bundleId' in d)
+        && d.get('questionId', null) is string
+        && d.get('subjectId', null) is string
+        && d.get('topicId', null) is string
+        && (d.get('subtopicId', null) == null || d.get('subtopicId', null) is string)
+        && d.get('difficulty', null) in ['easy', 'medium', 'hard']
+        && d.get('questionType', null) == 'mcq'
+        && isStr(d.get('question', null), 2000)
+        && d.get('options', null) is list && d.get('options', null).size() == 4
+        && d.get('correctAnswer', null) in ['A', 'B', 'C', 'D']
+        && isStr(d.get('explanation', null), 2000)
+        && (d.get('whyWrong', null) == null || d.get('whyWrong', null) is map)
+        && d.get('examMappings', null) is list
+        && d.get('examMappings', null).size() >= 1
+        && d.get('syllabusMappings', null) is map
+        && d.get('verificationStatus', null) in ['draft', 'reviewed', 'verified', 'rejected', 'disputed']
+        && (d.get('verificationStatus', null) == 'verified')
+             == (d.get('status', null) == 'published')
+        && d.get('isActive', null) is bool
+        && d.get('origin', null) in ['admin-practice', 'verified-previous',
+             'ai-generated-practice', 'teacher-submitted', 'imported']
+        && d.get('source', null) is map
+        && d.get('source', null).get('type', null) in ['original-practice',
+             'previous-year', 'ai-generated', 'teacher-submitted', 'imported']
+        && (d.get('origin', null) == 'verified-previous')
+             == (d.get('source', null).get('type', null) == 'previous-year')
+        && (d.get('origin', null) != 'verified-previous'
+            || (d.get('examYear', null) is int
+                && d.get('examYear', null) >= 1900 && d.get('examYear', null) <= 2100
+                && d.get('source', null).get('url', null) is string))
+        && d.get('tags', null) is list
+        && (d.get('passageId', null) == null || d.get('passageId', null) is string)
+        && isStr(d.get('duplicateHash', null), 200)
+        && d.get('duplicateHashV2', null) is string
+        && d.get('duplicateHashV2', null).size() == 16
+        && (d.get('stemHash', null) == null || d.get('stemHash', null) is string)
+        && (d.get('duplicateOf', null) == null || d.get('duplicateOf', null) is string)
+        && (d.get('duplicateCandidates', null) == null
+            || d.get('duplicateCandidates', null) is list)
+        && (d.get('duplicateReview', null) == null || d.get('duplicateReview', null) is map)
+        && d.get('status', null) in ['draft', 'published']
+        && isJobQuestionReviewState(d.get('reviewStatus', null))
+        && jobQuestionStatesConsistent(d)
+        && d.get('version', null) is int && d.get('version', null) >= 1
+        && d.get('schemaVersion', null) is int && d.get('schemaVersion', null) == 2
+        && (isOptStrNoMax(d, 'legacyId'))
+        && (isOptStrNoMax(d, 'rejectionReason'))
+        && (isOptStrNoMax(d, 'reviewerId'))
+        && (isOptStrNoMax(d, 'configVersion'));
+    }
+    // Dispatch: v2 docs carry questionId; v1 docs do not. The
+    // legacy branch additionally rejects any v2 marker field, so
+    // a mixed-shape doc validates under NEITHER branch (§5.1:
+    // the migration window stays safe).
     function validJobQuestion(d) {
-      return d.get('examSlug', null) in jobExamSlugs()
+      return ('questionId' in d)
+        ? validJobQuestionV2(d) : validJobQuestionLegacy(d);
+    }
+    function validJobQuestionLegacy(d) {
+      return !('questionId' in d) && !('duplicateHashV2' in d)
+        && !('examMappings' in d) && !('syllabusMappings' in d)
+        && !('verificationStatus' in d) && !('schemaVersion' in d)
+        && d.get('examSlug', null) in jobExamSlugs()
         && d.get('examSlug', null) != 'it-professional'
         && isJobSubjectId(d.get('subjectId', null))
         && isJobChapterId(d.get('chapterId', null))
@@ -4353,9 +4437,13 @@ service cloud.firestore {
     match /jobQuestions/{questionId} {
       allow read: if isModerator()
         || (isTeacher() && resource.data.get('authorId', '') == uid());
-      // Create: verified teacher only, draft only — and ONLY the
-      // 29 fields the app writes (Step 7 fold-in, ChatGPT P1-03:
-      // no smuggled privileged/junk fields at creation).
+      // Create: verified teacher only, draft only — and ONLY
+      // the fields the app writes (Step 7 fold-in, ChatGPT P1-03:
+      // no smuggled privileged/junk fields at creation). The
+      // list is the UNION of the v1 and v2 (Central Bank) key
+      // sets; validJobQuestion() dispatches on 'questionId' and
+      // each branch rejects the other shape's marker fields, so
+      // a mixed-shape doc cannot be created.
       allow create: if isVerifiedJobBankAuthor()
         && onlyKeys(['examSlug', 'subjectId',
              'chapterId', 'topicId', 'questionText', 'options',
@@ -4364,7 +4452,13 @@ service cloud.firestore {
              'status', 'reviewStatus', 'reviewerId', 'verifiedBy',
              'verifiedAt', 'rejectionReason', 'duplicateHash',
              'duplicateOf', 'bundleId', 'version', 'configVersion',
-             'authorId', 'createdBy', 'createdAt', 'updatedAt'])
+             'authorId', 'createdBy', 'createdAt', 'updatedAt',
+             'questionId', 'question', 'correctAnswer',
+             'examMappings', 'syllabusMappings', 'verificationStatus',
+             'isActive', 'origin', 'tags', 'passageId',
+             'duplicateHashV2', 'stemHash', 'duplicateCandidates',
+             'duplicateReview', 'legacyId', 'schemaVersion',
+             'subtopicId', 'questionType', 'reviewContentPassed'])
         && jobQuestionCreateCommon(request.resource.data)
         && validJobQuestion(request.resource.data);
       // Author: own draft only, content fields only, may submit
@@ -4380,7 +4474,11 @@ service cloud.firestore {
              .hasOnly(['questionText', 'options', 'correctLetter',
                        'explanation', 'whyWrong', 'difficulty', 'source',
                        'sourceUrl', 'examYear', 'isPreviousYear',
-                       'duplicateHash', 'duplicateOf', 'reviewStatus', 'updatedAt'])
+                       'duplicateHash', 'duplicateOf', 'reviewStatus', 'updatedAt',
+                       'question', 'correctAnswer', 'examMappings',
+                       'syllabusMappings', 'origin', 'tags', 'passageId',
+                       'duplicateHashV2', 'stemHash', 'duplicateCandidates',
+                       'subtopicId', 'questionType'])
         && request.resource.data.get('version', 0) == resource.data.get('version', 0)
         && validJobQuestion(request.resource.data);
       // Moderator/Admin: verification + publication under the
@@ -4395,7 +4493,13 @@ service cloud.firestore {
                        'duplicateHash', 'duplicateOf', 'bundleId',
                        'status', 'reviewStatus', 'reviewerId',
                        'verifiedBy', 'verifiedAt', 'rejectionReason',
-                       'version', 'updatedAt'])
+                       'version', 'updatedAt',
+                       'question', 'correctAnswer', 'examMappings',
+                       'syllabusMappings', 'verificationStatus',
+                       'isActive', 'origin', 'tags', 'passageId',
+                       'duplicateHashV2', 'stemHash', 'duplicateCandidates',
+                       'duplicateReview', 'legacyId', 'schemaVersion',
+                       'subtopicId', 'questionType', 'reviewContentPassed'])
         && jobQuestionSecondEye(resource.data, request.resource.data)
         && jobQuestionTransition(resource.data, request.resource.data)
         && validJobQuestion(request.resource.data);
@@ -4456,6 +4560,80 @@ service cloud.firestore {
             || changedKeys()
                  .hasOnly(['titleBn', 'titleEn', 'status', 'reviewStatus',
                            'publishedAt', 'publishedBy', 'updatedAt']));
+      allow delete: if isAdmin();
+    }
+
+    // ---------- Central Bank new collections (design §6.4) ----------
+    // jobPassages — shared reading passages (§1.4/§5.3). Content,
+    // not answers: any signed-in user may read (the bundle render
+    // joins passageId at display time); only Moderators write.
+    match /jobPassages/{passageId} {
+      allow read: if signedIn();
+      allow create, update: if isModerator()
+        && isStr(request.resource.data.text, 5000)
+        && request.resource.data.questionIds is list
+        && onlyKeys(['text', 'questionIds', 'createdAt', 'updatedAt']);
+      allow delete: if isAdmin();
+    }
+    // jobExamSelectionRules — per-exam selection config (§3.3),
+    // copied from the verified JOB_RULES_CONFIGS. Readable by any
+    // signed-in user (the weights are public exam information);
+    // written by Moderators only. The weights-sum check (= the
+    // exam's questionCount) is unimplementable in rules language
+    // — the lib (jobBankSelection.ts) enforces it and the
+    // migration test cross-checks seed == lib.
+    match /jobExamSelectionRules/{examId} {
+      allow read: if signedIn();
+      allow create, update: if isModerator()
+        && (request.resource.data.totalQuestions == null
+            || (request.resource.data.totalQuestions is int
+                && request.resource.data.totalQuestions >= 1))
+        && request.resource.data.durationMinutes is int
+        && request.resource.data.negativeMarking is number
+        && request.resource.data.subjectWeights is list
+        && request.resource.data.verificationStatus in ['verified', 'last-verified', 'draft']
+        && isStr(request.resource.data.syllabusVersion, 200)
+        && isStr(request.resource.data.scoringConfigVersion, 200);
+      allow delete: if isAdmin();
+    }
+    // examQuestionPools — selection aid, NOT source of truth
+    // (§3.5). Written by the migration/selection scripts via the
+    // Admin SDK only: NO client write is allowed here, ever.
+    // Moderators may read a pool for debugging.
+    match /examQuestionPools/{poolId} {
+      allow read: if isModerator();
+      allow create, update, delete: if false;
+    }
+    // jobQuestionBankStats / jobBankCoverage / topicAnalytics —
+    // precomputed quality metrics (§7). Written by scripts via
+    // the Admin SDK only: no client write. Readable by any
+    // signed-in user (dashboards show them).
+    match /jobQuestionBankStats/{statId} {
+      allow read: if signedIn();
+      allow create, update, delete: if false;
+    }
+    match /jobBankCoverage/{rowId} {
+      allow read: if signedIn();
+      allow create, update, delete: if false;
+    }
+    match /topicAnalytics/{topicId} {
+      allow read: if signedIn();
+      allow create, update, delete: if false;
+    }
+    // historicalQuestions — the verified previous-year store
+    // (§6.3). A student reads ONLY a Verified record; Moderators
+    // read all. Writes are Moderator only (Admin-SDK import).
+    // The auditTrail is append-only by lib convention
+    // (appendHistoricalAuditTrail) — rules cannot prove list
+    // growth without iteration, so the trail is NOT enforced
+    // here; deletes are Admin only.
+    match /historicalQuestions/{historicalId} {
+      allow read: if isModerator()
+        || (signedIn() && callerActive()
+            && resource.data.get('verificationStatus', '') == 'Verified');
+      allow create, update: if isModerator()
+        && request.resource.data.verificationStatus in ['Verified', 'Partially verified', 'Unverified']
+        && isStr(request.resource.data.sourceReference, 500);
       allow delete: if isAdmin();
     }
 
@@ -4879,6 +5057,24 @@ service cloud.firestore {
         && validJobExamAuditLog(request.resource.data, userId);
       allow update: if false;
       allow delete: if isAdmin();
+    }
+
+    // users/{uid}/examHistory — per-student, per-exam exposure
+    // history for repetition control (§3.6). Owner-only, bounded
+    // to 500 question IDs (the lib merges with a 300–500 cap);
+    // lastAttemptNo only ever increases. Moderators read for
+    // support. No delete: history IS the repetition control.
+    match /users/{userId}/examHistory/{examId} {
+      allow read: if isOwner(userId) || isModerator();
+      allow create, update: if isOwner(userId) && callerActive()
+        && request.resource.data.recentQuestionIds is list
+        && request.resource.data.recentQuestionIds.size() <= 500
+        && request.resource.data.lastAttemptNo is int
+        && request.resource.data.lastAttemptNo >= 0
+        && (resource == null
+            || request.resource.data.lastAttemptNo >= resource.data.get('lastAttemptNo', 0))
+        && onlyKeys(['recentQuestionIds', 'lastAttemptNo', 'updatedAt']);
+      allow delete: if false;
     }
 
     // ---------- config/appVersion (forced app update, 22 Nov 2026) ----------

@@ -355,3 +355,147 @@ export function validateJobContentTaxonomyAgainst(
 export function validateJobContentTaxonomy(): string[] {
   return validateJobContentTaxonomyAgainst({ subjects: JOB_SUBJECTS });
 }
+
+/* ------------------------------------------------------------------ */
+/* Central Question Bank — canonical cross-exam keys (§2.1)           */
+/* (design-central-bank.md, 24 Nov 2026)                              */
+/* ------------------------------------------------------------------ */
+
+/**
+ * The 15 canonical cross-exam subject keys. The 23 exam-scoped
+ * subjects in JOB_SUBJECTS collapse to these: `bangla, english,
+ * math, general-knowledge, bangladesh-affairs, international-affairs,
+ * general-science, ict, mental-ability, geography, ethics,
+ * mathematical-reasoning, math-science, analytical-skills,
+ * financial-banking`. The bank's `subjectId` uses these keys; the
+ * exam-scoped form lives in `syllabusMappings`.
+ *
+ * Deliberately separate keys (exceptions E-5/E-6): `math` vs
+ * `mathematical-reasoning` vs `math-science` (different syllabus
+ * slices — merging them would select Primary everyday-science
+ * questions into a BCS reasoning mock), and `general-knowledge` vs
+ * `bangladesh-affairs` + `international-affairs` (BCS splits GK
+ * into two 25-mark subjects). Constitution & Administration is NOT
+ * a subject (E-7): its content sits inside `bangladesh-affairs`
+ * (constitution) and `ethics` (governance) as topics.
+ *
+ * `analytical-skills` and `financial-banking` come from the
+ * verified Bank SO/AD patterns (20/20/20/10/20/10); they have no
+ * exam-scoped entry in JOB_SUBJECTS yet (no subject slugs defined
+ * for the post-level configs) — they become mappable only through
+ * the post-level `syllabusMappings`, never by inventing a scoped
+ * subject here.
+ */
+export const JOB_BANK_SUBJECTS = [
+  'bangla',
+  'english',
+  'math',
+  'general-knowledge',
+  'bangladesh-affairs',
+  'international-affairs',
+  'general-science',
+  'ict',
+  'mental-ability',
+  'geography',
+  'ethics',
+  'mathematical-reasoning',
+  'math-science',
+  'analytical-skills',
+  'financial-banking',
+] as const;
+export type JobBankSubject = (typeof JOB_BANK_SUBJECTS)[number];
+
+export function isCanonicalBankSubject(id: unknown): id is JobBankSubject {
+  return typeof id === 'string' && (JOB_BANK_SUBJECTS as readonly string[]).includes(id);
+}
+
+/** Exam-scoped subject ID → canonical cross-exam key (§2.1 table).
+ * All 23 canonical subjects from JOB_SUBJECTS. Bank `computer` and
+ * BCS `computer-ict` both map to `ict` — the exam-scoped names
+ * differ per exam, and that difference lives in `syllabusMappings`. */
+const CANONICAL_SUBJECT_FOR_EXAM_SCOPED: Record<string, JobBankSubject> = {
+  'bcs__bangla': 'bangla',
+  'bcs__english': 'english',
+  'bcs__bangladesh-affairs': 'bangladesh-affairs',
+  'bcs__international-affairs': 'international-affairs',
+  'bcs__geography': 'geography',
+  'bcs__general-science': 'general-science',
+  'bcs__computer-ict': 'ict',
+  'bcs__mathematical-reasoning': 'mathematical-reasoning',
+  'bcs__mental-ability': 'mental-ability',
+  'bcs__ethics': 'ethics',
+  'bank__bangla': 'bangla',
+  'bank__english': 'english',
+  'bank__math': 'math',
+  'bank__general-knowledge': 'general-knowledge',
+  'bank__computer': 'ict',
+  'primary-teacher__bangla': 'bangla',
+  'primary-teacher__english': 'english',
+  'primary-teacher__math-science': 'math-science',
+  'primary-teacher__general-knowledge': 'general-knowledge',
+  'ntrca__bangla': 'bangla',
+  'ntrca__english': 'english',
+  'ntrca__math': 'math',
+  'ntrca__general-knowledge': 'general-knowledge',
+};
+
+/** Canonical cross-exam subject key for an exam-scoped subject ID,
+ * or null when the ID is not one of the 23 canonical subjects. */
+export function canonicalSubjectFor(examScopedSubjectId: string): JobBankSubject | null {
+  return CANONICAL_SUBJECT_FOR_EXAM_SCOPED[examScopedSubjectId] ?? null;
+}
+
+/** Exam-scoped topic ID → canonical topic ID: drop the exam prefix
+ * segment (`bcs__english__grammar__tense` →
+ * `english__grammar__tense`). Returns null for a malformed ID. */
+export function canonicalTopicIdFor(examScopedTopicId: string): string | null {
+  const parts = examScopedTopicId.split('__');
+  if (parts.length < 3 || parts.some((p) => p.length === 0)) return null;
+  return parts.slice(1).join('__');
+}
+
+/**
+ * The VERIFIED English topic list (§2.2) — the ONLY verified topic
+ * list in the system. Derived from the live 35 BCS English
+ * questions (Batch 1, 22 Nov 2026): Grammar 20 / Vocabulary 12 /
+ * Comprehension 3. Counts are the live question counts per topic
+ * (24 Nov backup). Literature topics (middle-english, elizabethan,
+ * …) are SPECIFIED in batch B1 but NOT verified until the owner
+ * reviews the sample batch — they are deliberately absent here.
+ * Every other subject has NO topic list — `jobChapters` /
+ * `jobTopics` / `jobLessons` are 0 docs; inventing one would
+ * violate the NCTB-first rule.
+ */
+export interface JobBankTopic {
+  /** Canonical topic ID, e.g. 'english__grammar__tense'. */
+  topicId: string;
+  /** Canonical chapter ID, e.g. 'english__grammar'. */
+  chapterId: string;
+  chapter: 'grammar' | 'vocabulary' | 'comprehension';
+  slug: string;
+  nameBn: string;
+  nameEn: string;
+  /** Live verified questions on this topic (24 Nov backup). */
+  count: number;
+}
+
+export const JOB_ENGLISH_TOPICS: JobBankTopic[] = [
+  { topicId: 'english__grammar__tense', chapterId: 'english__grammar', chapter: 'grammar', slug: 'tense', nameBn: 'Tense — কাল', nameEn: 'Tense', count: 3 },
+  { topicId: 'english__grammar__voice', chapterId: 'english__grammar', chapter: 'grammar', slug: 'voice', nameBn: 'Voice — বাচ্য', nameEn: 'Voice', count: 3 },
+  { topicId: 'english__grammar__narration', chapterId: 'english__grammar', chapter: 'grammar', slug: 'narration', nameBn: 'Narration — উক্তি', nameEn: 'Narration', count: 3 },
+  { topicId: 'english__grammar__preposition', chapterId: 'english__grammar', chapter: 'grammar', slug: 'preposition', nameBn: 'Preposition', nameEn: 'Preposition', count: 3 },
+  { topicId: 'english__grammar__right-form-of-verbs', chapterId: 'english__grammar', chapter: 'grammar', slug: 'right-form-of-verbs', nameBn: 'Right Form of Verbs — ক্রিয়ার সঠিক রূপ', nameEn: 'Right Form of Verbs', count: 3 },
+  { topicId: 'english__grammar__conditionals', chapterId: 'english__grammar', chapter: 'grammar', slug: 'conditionals', nameBn: 'Conditionals — শর্তমূলক বাক্য', nameEn: 'Conditionals', count: 3 },
+  { topicId: 'english__grammar__articles', chapterId: 'english__grammar', chapter: 'grammar', slug: 'articles', nameBn: 'Articles', nameEn: 'Articles', count: 2 },
+  { topicId: 'english__vocabulary__synonym', chapterId: 'english__vocabulary', chapter: 'vocabulary', slug: 'synonym', nameBn: 'Synonym — সমার্থক শব্দ', nameEn: 'Synonym', count: 3 },
+  { topicId: 'english__vocabulary__antonym', chapterId: 'english__vocabulary', chapter: 'vocabulary', slug: 'antonym', nameBn: 'Antonym — বিপরীতার্থক শব্দ', nameEn: 'Antonym', count: 2 },
+  { topicId: 'english__vocabulary__spelling', chapterId: 'english__vocabulary', chapter: 'vocabulary', slug: 'spelling', nameBn: 'Spelling — বানান', nameEn: 'Spelling', count: 2 },
+  { topicId: 'english__vocabulary__idiom', chapterId: 'english__vocabulary', chapter: 'vocabulary', slug: 'idiom', nameBn: 'Idiom — বাগধারা', nameEn: 'Idiom', count: 3 },
+  { topicId: 'english__vocabulary__one-word-substitution', chapterId: 'english__vocabulary', chapter: 'vocabulary', slug: 'one-word-substitution', nameBn: 'One Word Substitution — এক শব্দে প্রকাশ', nameEn: 'One Word Substitution', count: 2 },
+  { topicId: 'english__comprehension__reading', chapterId: 'english__comprehension', chapter: 'comprehension', slug: 'reading', nameBn: 'Reading Comprehension — পাঠ বোঝা', nameEn: 'Reading Comprehension', count: 3 },
+];
+
+/** The verified English topic list as a lookup by canonical topicId. */
+export function jobEnglishTopicById(topicId: string): JobBankTopic | undefined {
+  return JOB_ENGLISH_TOPICS.find((t) => t.topicId === topicId);
+}

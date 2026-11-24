@@ -197,6 +197,18 @@ export const BACKUP_COLLECTIONS: string[] = [
   'jobLessons',
   'jobExamDefinitions',
   'jobQuestionSetManifests',
+  // Added 24 Nov 2026 (Central Bank: the seven new collections
+  // must be in every backup, or the bank + its selection rules +
+  // pools + stats + history are lost — the same MF1 hole, one
+  // step later. examQuestionPools is moderator-read (owner is a
+  // moderator under the rules), so the client export covers it.)
+  'jobPassages',
+  'jobExamSelectionRules',
+  'examQuestionPools',
+  'jobQuestionBankStats',
+  'jobBankCoverage',
+  'topicAnalytics',
+  'historicalQuestions',
   // Added 23 Nov 2026 (Step 18: the NU admission content store.
   // Empty live today (the NU seed was never applied), but the same
   // silent-loss risk the moment a moderator publishes NU content).

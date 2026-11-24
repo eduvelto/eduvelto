@@ -1,0 +1,2305 @@
+{
+  "generatedAt": "2026-11-24T15:34:20.388Z",
+  "backupFile": "/home/hatch/workspace/eduorbit/backups/eduvelto-backup-20261124-014508.json",
+  "counts": {
+    "questions": 35,
+    "bundles": 13,
+    "keys": 13,
+    "subjects": 23,
+    "chapters": 3,
+    "topics": 13,
+    "passages": 1,
+    "selectionRules": 7,
+    "pools": 58,
+    "poolIdsByExam": {
+      "bcs": 58
+    },
+    "coverageRows": 35,
+    "statsDocs": 7
+  },
+  "perQuestionDiff": [
+    {
+      "id": "bcs-eng-001",
+      "added": [
+        "questionId",
+        "subtopicId",
+        "questionType",
+        "question",
+        "correctAnswer",
+        "examMappings",
+        "syllabusMappings",
+        "verificationStatus",
+        "isActive",
+        "origin",
+        "tags",
+        "passageId",
+        "duplicateHashV2",
+        "stemHash",
+        "duplicateCandidates",
+        "duplicateReview",
+        "reviewContentPassed",
+        "schemaVersion",
+        "legacyId"
+      ],
+      "removed": [
+        "examSlug",
+        "chapterId",
+        "bundleId",
+        "isPreviousYear",
+        "sourceUrl",
+        "questionText",
+        "correctLetter"
+      ],
+      "questionChanged": false,
+      "passageId": null,
+      "duplicateHashV2": "c814bb6780361509",
+      "stemHash": "733d42df9a3faaf0"
+    },
+    {
+      "id": "bcs-eng-002",
+      "added": [
+        "questionId",
+        "subtopicId",
+        "questionType",
+        "question",
+        "correctAnswer",
+        "examMappings",
+        "syllabusMappings",
+        "verificationStatus",
+        "isActive",
+        "origin",
+        "tags",
+        "passageId",
+        "duplicateHashV2",
+        "stemHash",
+        "duplicateCandidates",
+        "duplicateReview",
+        "reviewContentPassed",
+        "schemaVersion",
+        "legacyId"
+      ],
+      "removed": [
+        "examSlug",
+        "chapterId",
+        "bundleId",
+        "isPreviousYear",
+        "sourceUrl",
+        "questionText",
+        "correctLetter"
+      ],
+      "questionChanged": false,
+      "passageId": null,
+      "duplicateHashV2": "70d6bdb98ab1e697",
+      "stemHash": "1027d3df3da0a22f"
+    },
+    {
+      "id": "bcs-eng-003",
+      "added": [
+        "questionId",
+        "subtopicId",
+        "questionType",
+        "question",
+        "correctAnswer",
+        "examMappings",
+        "syllabusMappings",
+        "verificationStatus",
+        "isActive",
+        "origin",
+        "tags",
+        "passageId",
+        "duplicateHashV2",
+        "stemHash",
+        "duplicateCandidates",
+        "duplicateReview",
+        "reviewContentPassed",
+        "schemaVersion",
+        "legacyId"
+      ],
+      "removed": [
+        "examSlug",
+        "chapterId",
+        "bundleId",
+        "isPreviousYear",
+        "sourceUrl",
+        "questionText",
+        "correctLetter"
+      ],
+      "questionChanged": false,
+      "passageId": null,
+      "duplicateHashV2": "c58f7d046f90f72a",
+      "stemHash": "ee70b3f7515fb982"
+    },
+    {
+      "id": "bcs-eng-004",
+      "added": [
+        "questionId",
+        "subtopicId",
+        "questionType",
+        "question",
+        "correctAnswer",
+        "examMappings",
+        "syllabusMappings",
+        "verificationStatus",
+        "isActive",
+        "origin",
+        "tags",
+        "passageId",
+        "duplicateHashV2",
+        "stemHash",
+        "duplicateCandidates",
+        "duplicateReview",
+        "reviewContentPassed",
+        "schemaVersion",
+        "legacyId"
+      ],
+      "removed": [
+        "examSlug",
+        "chapterId",
+        "bundleId",
+        "isPreviousYear",
+        "sourceUrl",
+        "questionText",
+        "correctLetter"
+      ],
+      "questionChanged": false,
+      "passageId": null,
+      "duplicateHashV2": "8ffefb23bf88c0f5",
+      "stemHash": "14f681b8d8fec221"
+    },
+    {
+      "id": "bcs-eng-005",
+      "added": [
+        "questionId",
+        "subtopicId",
+        "questionType",
+        "question",
+        "correctAnswer",
+        "examMappings",
+        "syllabusMappings",
+        "verificationStatus",
+        "isActive",
+        "origin",
+        "tags",
+        "passageId",
+        "duplicateHashV2",
+        "stemHash",
+        "duplicateCandidates",
+        "duplicateReview",
+        "reviewContentPassed",
+        "schemaVersion",
+        "legacyId"
+      ],
+      "removed": [
+        "examSlug",
+        "chapterId",
+        "bundleId",
+        "isPreviousYear",
+        "sourceUrl",
+        "questionText",
+        "correctLetter"
+      ],
+      "questionChanged": false,
+      "passageId": null,
+      "duplicateHashV2": "faa8888603e81ef3",
+      "stemHash": "1a0b59203934cdc7"
+    },
+    {
+      "id": "bcs-eng-006",
+      "added": [
+        "questionId",
+        "subtopicId",
+        "questionType",
+        "question",
+        "correctAnswer",
+        "examMappings",
+        "syllabusMappings",
+        "verificationStatus",
+        "isActive",
+        "origin",
+        "tags",
+        "passageId",
+        "duplicateHashV2",
+        "stemHash",
+        "duplicateCandidates",
+        "duplicateReview",
+        "reviewContentPassed",
+        "schemaVersion",
+        "legacyId"
+      ],
+      "removed": [
+        "examSlug",
+        "chapterId",
+        "bundleId",
+        "isPreviousYear",
+        "sourceUrl",
+        "questionText",
+        "correctLetter"
+      ],
+      "questionChanged": false,
+      "passageId": null,
+      "duplicateHashV2": "4e248a74185b6597",
+      "stemHash": "a1ea419b64e30178"
+    },
+    {
+      "id": "bcs-eng-007",
+      "added": [
+        "questionId",
+        "subtopicId",
+        "questionType",
+        "question",
+        "correctAnswer",
+        "examMappings",
+        "syllabusMappings",
+        "verificationStatus",
+        "isActive",
+        "origin",
+        "tags",
+        "passageId",
+        "duplicateHashV2",
+        "stemHash",
+        "duplicateCandidates",
+        "duplicateReview",
+        "reviewContentPassed",
+        "schemaVersion",
+        "legacyId"
+      ],
+      "removed": [
+        "examSlug",
+        "chapterId",
+        "bundleId",
+        "isPreviousYear",
+        "sourceUrl",
+        "questionText",
+        "correctLetter"
+      ],
+      "questionChanged": false,
+      "passageId": null,
+      "duplicateHashV2": "00d58fa7e117e3c2",
+      "stemHash": "41518ac12b6f4bdd"
+    },
+    {
+      "id": "bcs-eng-008",
+      "added": [
+        "questionId",
+        "subtopicId",
+        "questionType",
+        "question",
+        "correctAnswer",
+        "examMappings",
+        "syllabusMappings",
+        "verificationStatus",
+        "isActive",
+        "origin",
+        "tags",
+        "passageId",
+        "duplicateHashV2",
+        "stemHash",
+        "duplicateCandidates",
+        "duplicateReview",
+        "reviewContentPassed",
+        "schemaVersion",
+        "legacyId"
+      ],
+      "removed": [
+        "examSlug",
+        "chapterId",
+        "bundleId",
+        "isPreviousYear",
+        "sourceUrl",
+        "questionText",
+        "correctLetter"
+      ],
+      "questionChanged": false,
+      "passageId": null,
+      "duplicateHashV2": "2fdb976a3b4fd456",
+      "stemHash": "e34fab72ec60d8ec"
+    },
+    {
+      "id": "bcs-eng-009",
+      "added": [
+        "questionId",
+        "subtopicId",
+        "questionType",
+        "question",
+        "correctAnswer",
+        "examMappings",
+        "syllabusMappings",
+        "verificationStatus",
+        "isActive",
+        "origin",
+        "tags",
+        "passageId",
+        "duplicateHashV2",
+        "stemHash",
+        "duplicateCandidates",
+        "duplicateReview",
+        "reviewContentPassed",
+        "schemaVersion",
+        "legacyId"
+      ],
+      "removed": [
+        "examSlug",
+        "chapterId",
+        "bundleId",
+        "isPreviousYear",
+        "sourceUrl",
+        "questionText",
+        "correctLetter"
+      ],
+      "questionChanged": false,
+      "passageId": null,
+      "duplicateHashV2": "042a62d9d99012c1",
+      "stemHash": "08b64cf4bcbdf9fa"
+    },
+    {
+      "id": "bcs-eng-010",
+      "added": [
+        "questionId",
+        "subtopicId",
+        "questionType",
+        "question",
+        "correctAnswer",
+        "examMappings",
+        "syllabusMappings",
+        "verificationStatus",
+        "isActive",
+        "origin",
+        "tags",
+        "passageId",
+        "duplicateHashV2",
+        "stemHash",
+        "duplicateCandidates",
+        "duplicateReview",
+        "reviewContentPassed",
+        "schemaVersion",
+        "legacyId"
+      ],
+      "removed": [
+        "examSlug",
+        "chapterId",
+        "bundleId",
+        "isPreviousYear",
+        "sourceUrl",
+        "questionText",
+        "correctLetter"
+      ],
+      "questionChanged": false,
+      "passageId": null,
+      "duplicateHashV2": "ae699b43364a7cce",
+      "stemHash": "156e27d9fcc3c1e8"
+    },
+    {
+      "id": "bcs-eng-011",
+      "added": [
+        "questionId",
+        "subtopicId",
+        "questionType",
+        "question",
+        "correctAnswer",
+        "examMappings",
+        "syllabusMappings",
+        "verificationStatus",
+        "isActive",
+        "origin",
+        "tags",
+        "passageId",
+        "duplicateHashV2",
+        "stemHash",
+        "duplicateCandidates",
+        "duplicateReview",
+        "reviewContentPassed",
+        "schemaVersion",
+        "legacyId"
+      ],
+      "removed": [
+        "examSlug",
+        "chapterId",
+        "bundleId",
+        "isPreviousYear",
+        "sourceUrl",
+        "questionText",
+        "correctLetter"
+      ],
+      "questionChanged": false,
+      "passageId": null,
+      "duplicateHashV2": "204eb3365afa38bc",
+      "stemHash": "5b305af1ee06d46c"
+    },
+    {
+      "id": "bcs-eng-012",
+      "added": [
+        "questionId",
+        "subtopicId",
+        "questionType",
+        "question",
+        "correctAnswer",
+        "examMappings",
+        "syllabusMappings",
+        "verificationStatus",
+        "isActive",
+        "origin",
+        "tags",
+        "passageId",
+        "duplicateHashV2",
+        "stemHash",
+        "duplicateCandidates",
+        "duplicateReview",
+        "reviewContentPassed",
+        "schemaVersion",
+        "legacyId"
+      ],
+      "removed": [
+        "examSlug",
+        "chapterId",
+        "bundleId",
+        "isPreviousYear",
+        "sourceUrl",
+        "questionText",
+        "correctLetter"
+      ],
+      "questionChanged": false,
+      "passageId": null,
+      "duplicateHashV2": "d20a0e30790ac2a3",
+      "stemHash": "084c8ae6d1c976d5"
+    },
+    {
+      "id": "bcs-eng-013",
+      "added": [
+        "questionId",
+        "subtopicId",
+        "questionType",
+        "question",
+        "correctAnswer",
+        "examMappings",
+        "syllabusMappings",
+        "verificationStatus",
+        "isActive",
+        "origin",
+        "tags",
+        "passageId",
+        "duplicateHashV2",
+        "stemHash",
+        "duplicateCandidates",
+        "duplicateReview",
+        "reviewContentPassed",
+        "schemaVersion",
+        "legacyId"
+      ],
+      "removed": [
+        "examSlug",
+        "chapterId",
+        "bundleId",
+        "isPreviousYear",
+        "sourceUrl",
+        "questionText",
+        "correctLetter"
+      ],
+      "questionChanged": false,
+      "passageId": null,
+      "duplicateHashV2": "3f550a11df54ce72",
+      "stemHash": "080da9cdca4b5803"
+    },
+    {
+      "id": "bcs-eng-014",
+      "added": [
+        "questionId",
+        "subtopicId",
+        "questionType",
+        "question",
+        "correctAnswer",
+        "examMappings",
+        "syllabusMappings",
+        "verificationStatus",
+        "isActive",
+        "origin",
+        "tags",
+        "passageId",
+        "duplicateHashV2",
+        "stemHash",
+        "duplicateCandidates",
+        "duplicateReview",
+        "reviewContentPassed",
+        "schemaVersion",
+        "legacyId"
+      ],
+      "removed": [
+        "examSlug",
+        "chapterId",
+        "bundleId",
+        "isPreviousYear",
+        "sourceUrl",
+        "questionText",
+        "correctLetter"
+      ],
+      "questionChanged": false,
+      "passageId": null,
+      "duplicateHashV2": "76b1bd0d2ce1c9a9",
+      "stemHash": "d3c4564b73074903"
+    },
+    {
+      "id": "bcs-eng-015",
+      "added": [
+        "questionId",
+        "subtopicId",
+        "questionType",
+        "question",
+        "correctAnswer",
+        "examMappings",
+        "syllabusMappings",
+        "verificationStatus",
+        "isActive",
+        "origin",
+        "tags",
+        "passageId",
+        "duplicateHashV2",
+        "stemHash",
+        "duplicateCandidates",
+        "duplicateReview",
+        "reviewContentPassed",
+        "schemaVersion",
+        "legacyId"
+      ],
+      "removed": [
+        "examSlug",
+        "chapterId",
+        "bundleId",
+        "isPreviousYear",
+        "sourceUrl",
+        "questionText",
+        "correctLetter"
+      ],
+      "questionChanged": false,
+      "passageId": null,
+      "duplicateHashV2": "466aa8a1cc08f5b2",
+      "stemHash": "4b4311eca32f3d96"
+    },
+    {
+      "id": "bcs-eng-016",
+      "added": [
+        "questionId",
+        "subtopicId",
+        "questionType",
+        "question",
+        "correctAnswer",
+        "examMappings",
+        "syllabusMappings",
+        "verificationStatus",
+        "isActive",
+        "origin",
+        "tags",
+        "passageId",
+        "duplicateHashV2",
+        "stemHash",
+        "duplicateCandidates",
+        "duplicateReview",
+        "reviewContentPassed",
+        "schemaVersion",
+        "legacyId"
+      ],
+      "removed": [
+        "examSlug",
+        "chapterId",
+        "bundleId",
+        "isPreviousYear",
+        "sourceUrl",
+        "questionText",
+        "correctLetter"
+      ],
+      "questionChanged": false,
+      "passageId": null,
+      "duplicateHashV2": "8140ce4091e0df04",
+      "stemHash": "32487c36ef308805"
+    },
+    {
+      "id": "bcs-eng-017",
+      "added": [
+        "questionId",
+        "subtopicId",
+        "questionType",
+        "question",
+        "correctAnswer",
+        "examMappings",
+        "syllabusMappings",
+        "verificationStatus",
+        "isActive",
+        "origin",
+        "tags",
+        "passageId",
+        "duplicateHashV2",
+        "stemHash",
+        "duplicateCandidates",
+        "duplicateReview",
+        "reviewContentPassed",
+        "schemaVersion",
+        "legacyId"
+      ],
+      "removed": [
+        "examSlug",
+        "chapterId",
+        "bundleId",
+        "isPreviousYear",
+        "sourceUrl",
+        "questionText",
+        "correctLetter"
+      ],
+      "questionChanged": false,
+      "passageId": null,
+      "duplicateHashV2": "06c7a52d55673e87",
+      "stemHash": "37a22fd42803e62b"
+    },
+    {
+      "id": "bcs-eng-018",
+      "added": [
+        "questionId",
+        "subtopicId",
+        "questionType",
+        "question",
+        "correctAnswer",
+        "examMappings",
+        "syllabusMappings",
+        "verificationStatus",
+        "isActive",
+        "origin",
+        "tags",
+        "passageId",
+        "duplicateHashV2",
+        "stemHash",
+        "duplicateCandidates",
+        "duplicateReview",
+        "reviewContentPassed",
+        "schemaVersion",
+        "legacyId"
+      ],
+      "removed": [
+        "examSlug",
+        "chapterId",
+        "bundleId",
+        "isPreviousYear",
+        "sourceUrl",
+        "questionText",
+        "correctLetter"
+      ],
+      "questionChanged": false,
+      "passageId": null,
+      "duplicateHashV2": "3e4c1625d576b3b8",
+      "stemHash": "888b175616933313"
+    },
+    {
+      "id": "bcs-eng-019",
+      "added": [
+        "questionId",
+        "subtopicId",
+        "questionType",
+        "question",
+        "correctAnswer",
+        "examMappings",
+        "syllabusMappings",
+        "verificationStatus",
+        "isActive",
+        "origin",
+        "tags",
+        "passageId",
+        "duplicateHashV2",
+        "stemHash",
+        "duplicateCandidates",
+        "duplicateReview",
+        "reviewContentPassed",
+        "schemaVersion",
+        "legacyId"
+      ],
+      "removed": [
+        "examSlug",
+        "chapterId",
+        "bundleId",
+        "isPreviousYear",
+        "sourceUrl",
+        "questionText",
+        "correctLetter"
+      ],
+      "questionChanged": false,
+      "passageId": null,
+      "duplicateHashV2": "cc795655d5c7df06",
+      "stemHash": "56bdcfc4a0290f5e"
+    },
+    {
+      "id": "bcs-eng-020",
+      "added": [
+        "questionId",
+        "subtopicId",
+        "questionType",
+        "question",
+        "correctAnswer",
+        "examMappings",
+        "syllabusMappings",
+        "verificationStatus",
+        "isActive",
+        "origin",
+        "tags",
+        "passageId",
+        "duplicateHashV2",
+        "stemHash",
+        "duplicateCandidates",
+        "duplicateReview",
+        "reviewContentPassed",
+        "schemaVersion",
+        "legacyId"
+      ],
+      "removed": [
+        "examSlug",
+        "chapterId",
+        "bundleId",
+        "isPreviousYear",
+        "sourceUrl",
+        "questionText",
+        "correctLetter"
+      ],
+      "questionChanged": false,
+      "passageId": null,
+      "duplicateHashV2": "9418ba643cff4bdd",
+      "stemHash": "5bb9721838214ce7"
+    },
+    {
+      "id": "bcs-eng-021",
+      "added": [
+        "questionId",
+        "subtopicId",
+        "questionType",
+        "question",
+        "correctAnswer",
+        "examMappings",
+        "syllabusMappings",
+        "verificationStatus",
+        "isActive",
+        "origin",
+        "tags",
+        "passageId",
+        "duplicateHashV2",
+        "stemHash",
+        "duplicateCandidates",
+        "duplicateReview",
+        "reviewContentPassed",
+        "schemaVersion",
+        "legacyId"
+      ],
+      "removed": [
+        "examSlug",
+        "chapterId",
+        "bundleId",
+        "isPreviousYear",
+        "sourceUrl",
+        "questionText",
+        "correctLetter"
+      ],
+      "questionChanged": false,
+      "passageId": null,
+      "duplicateHashV2": "656a38c12b34f6b5",
+      "stemHash": "35083025c70230a2"
+    },
+    {
+      "id": "bcs-eng-022",
+      "added": [
+        "questionId",
+        "subtopicId",
+        "questionType",
+        "question",
+        "correctAnswer",
+        "examMappings",
+        "syllabusMappings",
+        "verificationStatus",
+        "isActive",
+        "origin",
+        "tags",
+        "passageId",
+        "duplicateHashV2",
+        "stemHash",
+        "duplicateCandidates",
+        "duplicateReview",
+        "reviewContentPassed",
+        "schemaVersion",
+        "legacyId"
+      ],
+      "removed": [
+        "examSlug",
+        "chapterId",
+        "bundleId",
+        "isPreviousYear",
+        "sourceUrl",
+        "questionText",
+        "correctLetter"
+      ],
+      "questionChanged": false,
+      "passageId": null,
+      "duplicateHashV2": "4a15be2531cc0e6c",
+      "stemHash": "2ad3890672fa1e7d"
+    },
+    {
+      "id": "bcs-eng-023",
+      "added": [
+        "questionId",
+        "subtopicId",
+        "questionType",
+        "question",
+        "correctAnswer",
+        "examMappings",
+        "syllabusMappings",
+        "verificationStatus",
+        "isActive",
+        "origin",
+        "tags",
+        "passageId",
+        "duplicateHashV2",
+        "stemHash",
+        "duplicateCandidates",
+        "duplicateReview",
+        "reviewContentPassed",
+        "schemaVersion",
+        "legacyId"
+      ],
+      "removed": [
+        "examSlug",
+        "chapterId",
+        "bundleId",
+        "isPreviousYear",
+        "sourceUrl",
+        "questionText",
+        "correctLetter"
+      ],
+      "questionChanged": false,
+      "passageId": null,
+      "duplicateHashV2": "4f6c03d8646f53c9",
+      "stemHash": "29d3d0f2b696b012"
+    },
+    {
+      "id": "bcs-eng-024",
+      "added": [
+        "questionId",
+        "subtopicId",
+        "questionType",
+        "question",
+        "correctAnswer",
+        "examMappings",
+        "syllabusMappings",
+        "verificationStatus",
+        "isActive",
+        "origin",
+        "tags",
+        "passageId",
+        "duplicateHashV2",
+        "stemHash",
+        "duplicateCandidates",
+        "duplicateReview",
+        "reviewContentPassed",
+        "schemaVersion",
+        "legacyId"
+      ],
+      "removed": [
+        "examSlug",
+        "chapterId",
+        "bundleId",
+        "isPreviousYear",
+        "sourceUrl",
+        "questionText",
+        "correctLetter"
+      ],
+      "questionChanged": false,
+      "passageId": null,
+      "duplicateHashV2": "c7e6e767edf053f6",
+      "stemHash": "5b78fb20c6873444"
+    },
+    {
+      "id": "bcs-eng-025",
+      "added": [
+        "questionId",
+        "subtopicId",
+        "questionType",
+        "question",
+        "correctAnswer",
+        "examMappings",
+        "syllabusMappings",
+        "verificationStatus",
+        "isActive",
+        "origin",
+        "tags",
+        "passageId",
+        "duplicateHashV2",
+        "stemHash",
+        "duplicateCandidates",
+        "duplicateReview",
+        "reviewContentPassed",
+        "schemaVersion",
+        "legacyId"
+      ],
+      "removed": [
+        "examSlug",
+        "chapterId",
+        "bundleId",
+        "isPreviousYear",
+        "sourceUrl",
+        "questionText",
+        "correctLetter"
+      ],
+      "questionChanged": false,
+      "passageId": null,
+      "duplicateHashV2": "233042b5805d4fa1",
+      "stemHash": "719d5d2ce67d2ca9"
+    },
+    {
+      "id": "bcs-eng-026",
+      "added": [
+        "questionId",
+        "subtopicId",
+        "questionType",
+        "question",
+        "correctAnswer",
+        "examMappings",
+        "syllabusMappings",
+        "verificationStatus",
+        "isActive",
+        "origin",
+        "tags",
+        "passageId",
+        "duplicateHashV2",
+        "stemHash",
+        "duplicateCandidates",
+        "duplicateReview",
+        "reviewContentPassed",
+        "schemaVersion",
+        "legacyId"
+      ],
+      "removed": [
+        "examSlug",
+        "chapterId",
+        "bundleId",
+        "isPreviousYear",
+        "sourceUrl",
+        "questionText",
+        "correctLetter"
+      ],
+      "questionChanged": false,
+      "passageId": null,
+      "duplicateHashV2": "1ee8635d74e3f18d",
+      "stemHash": "d5b68950e157f705"
+    },
+    {
+      "id": "bcs-eng-027",
+      "added": [
+        "questionId",
+        "subtopicId",
+        "questionType",
+        "question",
+        "correctAnswer",
+        "examMappings",
+        "syllabusMappings",
+        "verificationStatus",
+        "isActive",
+        "origin",
+        "tags",
+        "passageId",
+        "duplicateHashV2",
+        "stemHash",
+        "duplicateCandidates",
+        "duplicateReview",
+        "reviewContentPassed",
+        "schemaVersion",
+        "legacyId"
+      ],
+      "removed": [
+        "examSlug",
+        "chapterId",
+        "bundleId",
+        "isPreviousYear",
+        "sourceUrl",
+        "questionText",
+        "correctLetter"
+      ],
+      "questionChanged": false,
+      "passageId": null,
+      "duplicateHashV2": "a64d6f96af0450c5",
+      "stemHash": "d5b68950e157f705"
+    },
+    {
+      "id": "bcs-eng-028",
+      "added": [
+        "questionId",
+        "subtopicId",
+        "questionType",
+        "question",
+        "correctAnswer",
+        "examMappings",
+        "syllabusMappings",
+        "verificationStatus",
+        "isActive",
+        "origin",
+        "tags",
+        "passageId",
+        "duplicateHashV2",
+        "stemHash",
+        "duplicateCandidates",
+        "duplicateReview",
+        "reviewContentPassed",
+        "schemaVersion",
+        "legacyId"
+      ],
+      "removed": [
+        "examSlug",
+        "chapterId",
+        "bundleId",
+        "isPreviousYear",
+        "sourceUrl",
+        "questionText",
+        "correctLetter"
+      ],
+      "questionChanged": false,
+      "passageId": null,
+      "duplicateHashV2": "157743a57a791292",
+      "stemHash": "b9313021340c9b68"
+    },
+    {
+      "id": "bcs-eng-029",
+      "added": [
+        "questionId",
+        "subtopicId",
+        "questionType",
+        "question",
+        "correctAnswer",
+        "examMappings",
+        "syllabusMappings",
+        "verificationStatus",
+        "isActive",
+        "origin",
+        "tags",
+        "passageId",
+        "duplicateHashV2",
+        "stemHash",
+        "duplicateCandidates",
+        "duplicateReview",
+        "reviewContentPassed",
+        "schemaVersion",
+        "legacyId"
+      ],
+      "removed": [
+        "examSlug",
+        "chapterId",
+        "bundleId",
+        "isPreviousYear",
+        "sourceUrl",
+        "questionText",
+        "correctLetter"
+      ],
+      "questionChanged": false,
+      "passageId": null,
+      "duplicateHashV2": "a1f2c61c14e31e9b",
+      "stemHash": "87bce5385ad5cd54"
+    },
+    {
+      "id": "bcs-eng-030",
+      "added": [
+        "questionId",
+        "subtopicId",
+        "questionType",
+        "question",
+        "correctAnswer",
+        "examMappings",
+        "syllabusMappings",
+        "verificationStatus",
+        "isActive",
+        "origin",
+        "tags",
+        "passageId",
+        "duplicateHashV2",
+        "stemHash",
+        "duplicateCandidates",
+        "duplicateReview",
+        "reviewContentPassed",
+        "schemaVersion",
+        "legacyId"
+      ],
+      "removed": [
+        "examSlug",
+        "chapterId",
+        "bundleId",
+        "isPreviousYear",
+        "sourceUrl",
+        "questionText",
+        "correctLetter"
+      ],
+      "questionChanged": false,
+      "passageId": null,
+      "duplicateHashV2": "75351d972b954675",
+      "stemHash": "af08957c6699034c"
+    },
+    {
+      "id": "bcs-eng-031",
+      "added": [
+        "questionId",
+        "subtopicId",
+        "questionType",
+        "question",
+        "correctAnswer",
+        "examMappings",
+        "syllabusMappings",
+        "verificationStatus",
+        "isActive",
+        "origin",
+        "tags",
+        "passageId",
+        "duplicateHashV2",
+        "stemHash",
+        "duplicateCandidates",
+        "duplicateReview",
+        "reviewContentPassed",
+        "schemaVersion",
+        "legacyId"
+      ],
+      "removed": [
+        "examSlug",
+        "chapterId",
+        "bundleId",
+        "isPreviousYear",
+        "sourceUrl",
+        "questionText",
+        "correctLetter"
+      ],
+      "questionChanged": false,
+      "passageId": null,
+      "duplicateHashV2": "695b036ac824ab73",
+      "stemHash": "e10f4e0c5b86112d"
+    },
+    {
+      "id": "bcs-eng-032",
+      "added": [
+        "questionId",
+        "subtopicId",
+        "questionType",
+        "question",
+        "correctAnswer",
+        "examMappings",
+        "syllabusMappings",
+        "verificationStatus",
+        "isActive",
+        "origin",
+        "tags",
+        "passageId",
+        "duplicateHashV2",
+        "stemHash",
+        "duplicateCandidates",
+        "duplicateReview",
+        "reviewContentPassed",
+        "schemaVersion",
+        "legacyId"
+      ],
+      "removed": [
+        "examSlug",
+        "chapterId",
+        "bundleId",
+        "isPreviousYear",
+        "sourceUrl",
+        "questionText",
+        "correctLetter"
+      ],
+      "questionChanged": false,
+      "passageId": null,
+      "duplicateHashV2": "84b4bbd446969a21",
+      "stemHash": "403cf0d0d58932bc"
+    },
+    {
+      "id": "bcs-eng-033",
+      "added": [
+        "questionId",
+        "subtopicId",
+        "questionType",
+        "question",
+        "correctAnswer",
+        "examMappings",
+        "syllabusMappings",
+        "verificationStatus",
+        "isActive",
+        "origin",
+        "tags",
+        "passageId",
+        "duplicateHashV2",
+        "stemHash",
+        "duplicateCandidates",
+        "duplicateReview",
+        "reviewContentPassed",
+        "schemaVersion",
+        "legacyId"
+      ],
+      "removed": [
+        "examSlug",
+        "chapterId",
+        "bundleId",
+        "isPreviousYear",
+        "sourceUrl",
+        "questionText",
+        "correctLetter"
+      ],
+      "questionChanged": true,
+      "passageId": "bcs-eng-passage-01",
+      "duplicateHashV2": "9cabbdbb6d00b3c0",
+      "stemHash": "a75f118f94150244"
+    },
+    {
+      "id": "bcs-eng-034",
+      "added": [
+        "questionId",
+        "subtopicId",
+        "questionType",
+        "question",
+        "correctAnswer",
+        "examMappings",
+        "syllabusMappings",
+        "verificationStatus",
+        "isActive",
+        "origin",
+        "tags",
+        "passageId",
+        "duplicateHashV2",
+        "stemHash",
+        "duplicateCandidates",
+        "duplicateReview",
+        "reviewContentPassed",
+        "schemaVersion",
+        "legacyId"
+      ],
+      "removed": [
+        "examSlug",
+        "chapterId",
+        "bundleId",
+        "isPreviousYear",
+        "sourceUrl",
+        "questionText",
+        "correctLetter"
+      ],
+      "questionChanged": true,
+      "passageId": "bcs-eng-passage-01",
+      "duplicateHashV2": "0696003093b31e16",
+      "stemHash": "86c07d316c160c14"
+    },
+    {
+      "id": "bcs-eng-035",
+      "added": [
+        "questionId",
+        "subtopicId",
+        "questionType",
+        "question",
+        "correctAnswer",
+        "examMappings",
+        "syllabusMappings",
+        "verificationStatus",
+        "isActive",
+        "origin",
+        "tags",
+        "passageId",
+        "duplicateHashV2",
+        "stemHash",
+        "duplicateCandidates",
+        "duplicateReview",
+        "reviewContentPassed",
+        "schemaVersion",
+        "legacyId"
+      ],
+      "removed": [
+        "examSlug",
+        "chapterId",
+        "bundleId",
+        "isPreviousYear",
+        "sourceUrl",
+        "questionText",
+        "correctLetter"
+      ],
+      "questionChanged": true,
+      "passageId": "bcs-eng-passage-01",
+      "duplicateHashV2": "186190d8b2009045",
+      "stemHash": "cc00ea35fab5bd6a"
+    }
+  ],
+  "duplicateReport": {
+    "exactDuplicates": 0,
+    "stemCollisions": [
+      {
+        "stemHash": "d5b68950e157f705",
+        "questionIds": [
+          "bcs-eng-026",
+          "bcs-eng-027"
+        ]
+      }
+    ],
+    "decisions": [
+      {
+        "questionIds": [
+          "bcs-eng-026",
+          "bcs-eng-027"
+        ],
+        "class": "near-stem",
+        "decision": "keep",
+        "reason": "Same stem, different target word/options — the stem collision is harmless here; naming the target word in the stem would risk giving the answer away (fixes.md O1, agreed)."
+      }
+    ]
+  },
+  "stats": {
+    "total": 35,
+    "verified": 35,
+    "reviewed": 0,
+    "draft": 0,
+    "active": 35,
+    "inactive": 0,
+    "perExam": {
+      "bcs": {
+        "verified": 35,
+        "reviewed": 0,
+        "draft": 0
+      }
+    },
+    "perSubject": {
+      "english": {
+        "total": 35,
+        "verified": 35
+      }
+    },
+    "perTopic": {
+      "english__grammar__tense": {
+        "total": 3,
+        "verified": 3
+      },
+      "english__grammar__voice": {
+        "total": 3,
+        "verified": 3
+      },
+      "english__grammar__narration": {
+        "total": 3,
+        "verified": 3
+      },
+      "english__grammar__articles": {
+        "total": 2,
+        "verified": 2
+      },
+      "english__grammar__preposition": {
+        "total": 3,
+        "verified": 3
+      },
+      "english__grammar__right-form-of-verbs": {
+        "total": 3,
+        "verified": 3
+      },
+      "english__grammar__conditionals": {
+        "total": 3,
+        "verified": 3
+      },
+      "english__vocabulary__synonym": {
+        "total": 3,
+        "verified": 3
+      },
+      "english__vocabulary__antonym": {
+        "total": 2,
+        "verified": 2
+      },
+      "english__vocabulary__spelling": {
+        "total": 2,
+        "verified": 2
+      },
+      "english__vocabulary__one-word-substitution": {
+        "total": 2,
+        "verified": 2
+      },
+      "english__vocabulary__idiom": {
+        "total": 3,
+        "verified": 3
+      },
+      "english__comprehension__reading": {
+        "total": 3,
+        "verified": 3
+      }
+    },
+    "difficulty": {
+      "easy": 10,
+      "medium": 19,
+      "hard": 6
+    },
+    "difficultyBySubject": {
+      "english": {
+        "easy": 10,
+        "medium": 19,
+        "hard": 6
+      }
+    },
+    "multiExamCount": 0,
+    "multiExamShare": 0,
+    "disputedCount": 0,
+    "outdatedCount": 0,
+    "aiGeneratedCount": 0,
+    "aiGeneratedVerifiedCount": 0,
+    "previousYearCount": 0,
+    "previousYearWithProofCount": 0,
+    "calculatedAt": "2026-11-24T15:34:20.388Z",
+    "bankVersion": "2026-11-24.1"
+  },
+  "statsByExam": {
+    "bcs": {
+      "total": 35,
+      "verified": 35,
+      "reviewed": 0,
+      "draft": 0,
+      "active": 35,
+      "inactive": 0,
+      "perExam": {
+        "bcs": {
+          "verified": 35,
+          "reviewed": 0,
+          "draft": 0
+        }
+      },
+      "perSubject": {
+        "english": {
+          "total": 35,
+          "verified": 35
+        }
+      },
+      "perTopic": {
+        "english__grammar__tense": {
+          "total": 3,
+          "verified": 3
+        },
+        "english__grammar__voice": {
+          "total": 3,
+          "verified": 3
+        },
+        "english__grammar__narration": {
+          "total": 3,
+          "verified": 3
+        },
+        "english__grammar__articles": {
+          "total": 2,
+          "verified": 2
+        },
+        "english__grammar__preposition": {
+          "total": 3,
+          "verified": 3
+        },
+        "english__grammar__right-form-of-verbs": {
+          "total": 3,
+          "verified": 3
+        },
+        "english__grammar__conditionals": {
+          "total": 3,
+          "verified": 3
+        },
+        "english__vocabulary__synonym": {
+          "total": 3,
+          "verified": 3
+        },
+        "english__vocabulary__antonym": {
+          "total": 2,
+          "verified": 2
+        },
+        "english__vocabulary__spelling": {
+          "total": 2,
+          "verified": 2
+        },
+        "english__vocabulary__one-word-substitution": {
+          "total": 2,
+          "verified": 2
+        },
+        "english__vocabulary__idiom": {
+          "total": 3,
+          "verified": 3
+        },
+        "english__comprehension__reading": {
+          "total": 3,
+          "verified": 3
+        }
+      },
+      "difficulty": {
+        "easy": 10,
+        "medium": 19,
+        "hard": 6
+      },
+      "difficultyBySubject": {
+        "english": {
+          "easy": 10,
+          "medium": 19,
+          "hard": 6
+        }
+      },
+      "multiExamCount": 0,
+      "multiExamShare": 0,
+      "disputedCount": 0,
+      "outdatedCount": 0,
+      "aiGeneratedCount": 0,
+      "aiGeneratedVerifiedCount": 0,
+      "previousYearCount": 0,
+      "previousYearWithProofCount": 0,
+      "calculatedAt": "2026-11-24T15:34:20.388Z",
+      "bankVersion": "2026-11-24.1"
+    },
+    "bank": {
+      "total": 0,
+      "verified": 0,
+      "reviewed": 0,
+      "draft": 0,
+      "active": 0,
+      "inactive": 0,
+      "perExam": {},
+      "perSubject": {},
+      "perTopic": {},
+      "difficulty": {
+        "easy": 0,
+        "medium": 0,
+        "hard": 0
+      },
+      "difficultyBySubject": {},
+      "multiExamCount": 0,
+      "multiExamShare": 0,
+      "disputedCount": 0,
+      "outdatedCount": 0,
+      "aiGeneratedCount": 0,
+      "aiGeneratedVerifiedCount": 0,
+      "previousYearCount": 0,
+      "previousYearWithProofCount": 0,
+      "calculatedAt": "2026-11-24T15:34:20.388Z",
+      "bankVersion": "2026-11-24.1"
+    },
+    "bank-senior-officer": {
+      "total": 0,
+      "verified": 0,
+      "reviewed": 0,
+      "draft": 0,
+      "active": 0,
+      "inactive": 0,
+      "perExam": {},
+      "perSubject": {},
+      "perTopic": {},
+      "difficulty": {
+        "easy": 0,
+        "medium": 0,
+        "hard": 0
+      },
+      "difficultyBySubject": {},
+      "multiExamCount": 0,
+      "multiExamShare": 0,
+      "disputedCount": 0,
+      "outdatedCount": 0,
+      "aiGeneratedCount": 0,
+      "aiGeneratedVerifiedCount": 0,
+      "previousYearCount": 0,
+      "previousYearWithProofCount": 0,
+      "calculatedAt": "2026-11-24T15:34:20.388Z",
+      "bankVersion": "2026-11-24.1"
+    },
+    "bank-assistant-director": {
+      "total": 0,
+      "verified": 0,
+      "reviewed": 0,
+      "draft": 0,
+      "active": 0,
+      "inactive": 0,
+      "perExam": {},
+      "perSubject": {},
+      "perTopic": {},
+      "difficulty": {
+        "easy": 0,
+        "medium": 0,
+        "hard": 0
+      },
+      "difficultyBySubject": {},
+      "multiExamCount": 0,
+      "multiExamShare": 0,
+      "disputedCount": 0,
+      "outdatedCount": 0,
+      "aiGeneratedCount": 0,
+      "aiGeneratedVerifiedCount": 0,
+      "previousYearCount": 0,
+      "previousYearWithProofCount": 0,
+      "calculatedAt": "2026-11-24T15:34:20.388Z",
+      "bankVersion": "2026-11-24.1"
+    },
+    "primary-teacher": {
+      "total": 0,
+      "verified": 0,
+      "reviewed": 0,
+      "draft": 0,
+      "active": 0,
+      "inactive": 0,
+      "perExam": {},
+      "perSubject": {},
+      "perTopic": {},
+      "difficulty": {
+        "easy": 0,
+        "medium": 0,
+        "hard": 0
+      },
+      "difficultyBySubject": {},
+      "multiExamCount": 0,
+      "multiExamShare": 0,
+      "disputedCount": 0,
+      "outdatedCount": 0,
+      "aiGeneratedCount": 0,
+      "aiGeneratedVerifiedCount": 0,
+      "previousYearCount": 0,
+      "previousYearWithProofCount": 0,
+      "calculatedAt": "2026-11-24T15:34:20.388Z",
+      "bankVersion": "2026-11-24.1"
+    },
+    "ntrca": {
+      "total": 0,
+      "verified": 0,
+      "reviewed": 0,
+      "draft": 0,
+      "active": 0,
+      "inactive": 0,
+      "perExam": {},
+      "perSubject": {},
+      "perTopic": {},
+      "difficulty": {
+        "easy": 0,
+        "medium": 0,
+        "hard": 0
+      },
+      "difficultyBySubject": {},
+      "multiExamCount": 0,
+      "multiExamShare": 0,
+      "disputedCount": 0,
+      "outdatedCount": 0,
+      "aiGeneratedCount": 0,
+      "aiGeneratedVerifiedCount": 0,
+      "previousYearCount": 0,
+      "previousYearWithProofCount": 0,
+      "calculatedAt": "2026-11-24T15:34:20.388Z",
+      "bankVersion": "2026-11-24.1"
+    }
+  },
+  "coverage": {
+    "bcs": [
+      {
+        "examId": "bcs",
+        "subjectId": "bangla",
+        "target": 30,
+        "verified": 0,
+        "reviewed": 0,
+        "draft": 0,
+        "coveragePct": null,
+        "missingTopics": [],
+        "thinTopics": [],
+        "hasVerifiedTopicList": false,
+        "lastCalculated": "2026-11-24T15:34:20.388Z"
+      },
+      {
+        "examId": "bcs",
+        "subjectId": "english",
+        "target": 30,
+        "verified": 35,
+        "reviewed": 0,
+        "draft": 0,
+        "coveragePct": 100,
+        "missingTopics": [],
+        "thinTopics": [
+          "english__grammar__articles",
+          "english__vocabulary__antonym",
+          "english__vocabulary__spelling",
+          "english__vocabulary__one-word-substitution"
+        ],
+        "hasVerifiedTopicList": true,
+        "lastCalculated": "2026-11-24T15:34:20.388Z"
+      },
+      {
+        "examId": "bcs",
+        "subjectId": "bangladesh-affairs",
+        "target": 25,
+        "verified": 0,
+        "reviewed": 0,
+        "draft": 0,
+        "coveragePct": null,
+        "missingTopics": [],
+        "thinTopics": [],
+        "hasVerifiedTopicList": false,
+        "lastCalculated": "2026-11-24T15:34:20.388Z"
+      },
+      {
+        "examId": "bcs",
+        "subjectId": "international-affairs",
+        "target": 25,
+        "verified": 0,
+        "reviewed": 0,
+        "draft": 0,
+        "coveragePct": null,
+        "missingTopics": [],
+        "thinTopics": [],
+        "hasVerifiedTopicList": false,
+        "lastCalculated": "2026-11-24T15:34:20.388Z"
+      },
+      {
+        "examId": "bcs",
+        "subjectId": "geography",
+        "target": 10,
+        "verified": 0,
+        "reviewed": 0,
+        "draft": 0,
+        "coveragePct": null,
+        "missingTopics": [],
+        "thinTopics": [],
+        "hasVerifiedTopicList": false,
+        "lastCalculated": "2026-11-24T15:34:20.388Z"
+      },
+      {
+        "examId": "bcs",
+        "subjectId": "general-science",
+        "target": 15,
+        "verified": 0,
+        "reviewed": 0,
+        "draft": 0,
+        "coveragePct": null,
+        "missingTopics": [],
+        "thinTopics": [],
+        "hasVerifiedTopicList": false,
+        "lastCalculated": "2026-11-24T15:34:20.388Z"
+      },
+      {
+        "examId": "bcs",
+        "subjectId": "ict",
+        "target": 15,
+        "verified": 0,
+        "reviewed": 0,
+        "draft": 0,
+        "coveragePct": null,
+        "missingTopics": [],
+        "thinTopics": [],
+        "hasVerifiedTopicList": false,
+        "lastCalculated": "2026-11-24T15:34:20.388Z"
+      },
+      {
+        "examId": "bcs",
+        "subjectId": "mathematical-reasoning",
+        "target": 20,
+        "verified": 0,
+        "reviewed": 0,
+        "draft": 0,
+        "coveragePct": null,
+        "missingTopics": [],
+        "thinTopics": [],
+        "hasVerifiedTopicList": false,
+        "lastCalculated": "2026-11-24T15:34:20.388Z"
+      },
+      {
+        "examId": "bcs",
+        "subjectId": "mental-ability",
+        "target": 15,
+        "verified": 0,
+        "reviewed": 0,
+        "draft": 0,
+        "coveragePct": null,
+        "missingTopics": [],
+        "thinTopics": [],
+        "hasVerifiedTopicList": false,
+        "lastCalculated": "2026-11-24T15:34:20.388Z"
+      },
+      {
+        "examId": "bcs",
+        "subjectId": "ethics",
+        "target": 15,
+        "verified": 0,
+        "reviewed": 0,
+        "draft": 0,
+        "coveragePct": null,
+        "missingTopics": [],
+        "thinTopics": [],
+        "hasVerifiedTopicList": false,
+        "lastCalculated": "2026-11-24T15:34:20.388Z"
+      }
+    ],
+    "bank": [
+      {
+        "examId": "bank",
+        "subjectId": "bangla",
+        "target": 25,
+        "verified": 0,
+        "reviewed": 0,
+        "draft": 0,
+        "coveragePct": null,
+        "missingTopics": [],
+        "thinTopics": [],
+        "hasVerifiedTopicList": false,
+        "lastCalculated": "2026-11-24T15:34:20.388Z"
+      },
+      {
+        "examId": "bank",
+        "subjectId": "english",
+        "target": 25,
+        "verified": 0,
+        "reviewed": 0,
+        "draft": 0,
+        "coveragePct": 0,
+        "missingTopics": [
+          "english__grammar__tense",
+          "english__grammar__voice",
+          "english__grammar__narration",
+          "english__grammar__preposition",
+          "english__grammar__right-form-of-verbs",
+          "english__grammar__conditionals",
+          "english__grammar__articles",
+          "english__vocabulary__synonym",
+          "english__vocabulary__antonym",
+          "english__vocabulary__spelling",
+          "english__vocabulary__idiom",
+          "english__vocabulary__one-word-substitution",
+          "english__comprehension__reading"
+        ],
+        "thinTopics": [],
+        "hasVerifiedTopicList": true,
+        "lastCalculated": "2026-11-24T15:34:20.388Z"
+      },
+      {
+        "examId": "bank",
+        "subjectId": "math",
+        "target": 20,
+        "verified": 0,
+        "reviewed": 0,
+        "draft": 0,
+        "coveragePct": null,
+        "missingTopics": [],
+        "thinTopics": [],
+        "hasVerifiedTopicList": false,
+        "lastCalculated": "2026-11-24T15:34:20.388Z"
+      },
+      {
+        "examId": "bank",
+        "subjectId": "general-knowledge",
+        "target": 20,
+        "verified": 0,
+        "reviewed": 0,
+        "draft": 0,
+        "coveragePct": null,
+        "missingTopics": [],
+        "thinTopics": [],
+        "hasVerifiedTopicList": false,
+        "lastCalculated": "2026-11-24T15:34:20.388Z"
+      },
+      {
+        "examId": "bank",
+        "subjectId": "ict",
+        "target": 10,
+        "verified": 0,
+        "reviewed": 0,
+        "draft": 0,
+        "coveragePct": null,
+        "missingTopics": [],
+        "thinTopics": [],
+        "hasVerifiedTopicList": false,
+        "lastCalculated": "2026-11-24T15:34:20.388Z"
+      }
+    ],
+    "bank-senior-officer": [
+      {
+        "examId": "bank-senior-officer",
+        "subjectId": "english",
+        "target": 20,
+        "verified": 0,
+        "reviewed": 0,
+        "draft": 0,
+        "coveragePct": 0,
+        "missingTopics": [
+          "english__grammar__tense",
+          "english__grammar__voice",
+          "english__grammar__narration",
+          "english__grammar__preposition",
+          "english__grammar__right-form-of-verbs",
+          "english__grammar__conditionals",
+          "english__grammar__articles",
+          "english__vocabulary__synonym",
+          "english__vocabulary__antonym",
+          "english__vocabulary__spelling",
+          "english__vocabulary__idiom",
+          "english__vocabulary__one-word-substitution",
+          "english__comprehension__reading"
+        ],
+        "thinTopics": [],
+        "hasVerifiedTopicList": true,
+        "lastCalculated": "2026-11-24T15:34:20.388Z"
+      },
+      {
+        "examId": "bank-senior-officer",
+        "subjectId": "bangla",
+        "target": 20,
+        "verified": 0,
+        "reviewed": 0,
+        "draft": 0,
+        "coveragePct": null,
+        "missingTopics": [],
+        "thinTopics": [],
+        "hasVerifiedTopicList": false,
+        "lastCalculated": "2026-11-24T15:34:20.388Z"
+      },
+      {
+        "examId": "bank-senior-officer",
+        "subjectId": "math",
+        "target": 20,
+        "verified": 0,
+        "reviewed": 0,
+        "draft": 0,
+        "coveragePct": null,
+        "missingTopics": [],
+        "thinTopics": [],
+        "hasVerifiedTopicList": false,
+        "lastCalculated": "2026-11-24T15:34:20.388Z"
+      },
+      {
+        "examId": "bank-senior-officer",
+        "subjectId": "financial-banking",
+        "target": 10,
+        "verified": 0,
+        "reviewed": 0,
+        "draft": 0,
+        "coveragePct": null,
+        "missingTopics": [],
+        "thinTopics": [],
+        "hasVerifiedTopicList": false,
+        "lastCalculated": "2026-11-24T15:34:20.388Z"
+      },
+      {
+        "examId": "bank-senior-officer",
+        "subjectId": "analytical-skills",
+        "target": 20,
+        "verified": 0,
+        "reviewed": 0,
+        "draft": 0,
+        "coveragePct": null,
+        "missingTopics": [],
+        "thinTopics": [],
+        "hasVerifiedTopicList": false,
+        "lastCalculated": "2026-11-24T15:34:20.388Z"
+      },
+      {
+        "examId": "bank-senior-officer",
+        "subjectId": "ict",
+        "target": 10,
+        "verified": 0,
+        "reviewed": 0,
+        "draft": 0,
+        "coveragePct": null,
+        "missingTopics": [],
+        "thinTopics": [],
+        "hasVerifiedTopicList": false,
+        "lastCalculated": "2026-11-24T15:34:20.388Z"
+      }
+    ],
+    "bank-assistant-director": [
+      {
+        "examId": "bank-assistant-director",
+        "subjectId": "english",
+        "target": 20,
+        "verified": 0,
+        "reviewed": 0,
+        "draft": 0,
+        "coveragePct": 0,
+        "missingTopics": [
+          "english__grammar__tense",
+          "english__grammar__voice",
+          "english__grammar__narration",
+          "english__grammar__preposition",
+          "english__grammar__right-form-of-verbs",
+          "english__grammar__conditionals",
+          "english__grammar__articles",
+          "english__vocabulary__synonym",
+          "english__vocabulary__antonym",
+          "english__vocabulary__spelling",
+          "english__vocabulary__idiom",
+          "english__vocabulary__one-word-substitution",
+          "english__comprehension__reading"
+        ],
+        "thinTopics": [],
+        "hasVerifiedTopicList": true,
+        "lastCalculated": "2026-11-24T15:34:20.388Z"
+      },
+      {
+        "examId": "bank-assistant-director",
+        "subjectId": "bangla",
+        "target": 20,
+        "verified": 0,
+        "reviewed": 0,
+        "draft": 0,
+        "coveragePct": null,
+        "missingTopics": [],
+        "thinTopics": [],
+        "hasVerifiedTopicList": false,
+        "lastCalculated": "2026-11-24T15:34:20.388Z"
+      },
+      {
+        "examId": "bank-assistant-director",
+        "subjectId": "math",
+        "target": 20,
+        "verified": 0,
+        "reviewed": 0,
+        "draft": 0,
+        "coveragePct": null,
+        "missingTopics": [],
+        "thinTopics": [],
+        "hasVerifiedTopicList": false,
+        "lastCalculated": "2026-11-24T15:34:20.388Z"
+      },
+      {
+        "examId": "bank-assistant-director",
+        "subjectId": "financial-banking",
+        "target": 10,
+        "verified": 0,
+        "reviewed": 0,
+        "draft": 0,
+        "coveragePct": null,
+        "missingTopics": [],
+        "thinTopics": [],
+        "hasVerifiedTopicList": false,
+        "lastCalculated": "2026-11-24T15:34:20.388Z"
+      },
+      {
+        "examId": "bank-assistant-director",
+        "subjectId": "analytical-skills",
+        "target": 20,
+        "verified": 0,
+        "reviewed": 0,
+        "draft": 0,
+        "coveragePct": null,
+        "missingTopics": [],
+        "thinTopics": [],
+        "hasVerifiedTopicList": false,
+        "lastCalculated": "2026-11-24T15:34:20.388Z"
+      },
+      {
+        "examId": "bank-assistant-director",
+        "subjectId": "ict",
+        "target": 10,
+        "verified": 0,
+        "reviewed": 0,
+        "draft": 0,
+        "coveragePct": null,
+        "missingTopics": [],
+        "thinTopics": [],
+        "hasVerifiedTopicList": false,
+        "lastCalculated": "2026-11-24T15:34:20.388Z"
+      }
+    ],
+    "primary-teacher": [
+      {
+        "examId": "primary-teacher",
+        "subjectId": "bangla",
+        "target": 25,
+        "verified": 0,
+        "reviewed": 0,
+        "draft": 0,
+        "coveragePct": null,
+        "missingTopics": [],
+        "thinTopics": [],
+        "hasVerifiedTopicList": false,
+        "lastCalculated": "2026-11-24T15:34:20.388Z"
+      },
+      {
+        "examId": "primary-teacher",
+        "subjectId": "english",
+        "target": 25,
+        "verified": 0,
+        "reviewed": 0,
+        "draft": 0,
+        "coveragePct": 0,
+        "missingTopics": [
+          "english__grammar__tense",
+          "english__grammar__voice",
+          "english__grammar__narration",
+          "english__grammar__preposition",
+          "english__grammar__right-form-of-verbs",
+          "english__grammar__conditionals",
+          "english__grammar__articles",
+          "english__vocabulary__synonym",
+          "english__vocabulary__antonym",
+          "english__vocabulary__spelling",
+          "english__vocabulary__idiom",
+          "english__vocabulary__one-word-substitution",
+          "english__comprehension__reading"
+        ],
+        "thinTopics": [],
+        "hasVerifiedTopicList": true,
+        "lastCalculated": "2026-11-24T15:34:20.388Z"
+      },
+      {
+        "examId": "primary-teacher",
+        "subjectId": "math-science",
+        "target": 20,
+        "verified": 0,
+        "reviewed": 0,
+        "draft": 0,
+        "coveragePct": null,
+        "missingTopics": [],
+        "thinTopics": [],
+        "hasVerifiedTopicList": false,
+        "lastCalculated": "2026-11-24T15:34:20.388Z"
+      },
+      {
+        "examId": "primary-teacher",
+        "subjectId": "general-knowledge",
+        "target": 20,
+        "verified": 0,
+        "reviewed": 0,
+        "draft": 0,
+        "coveragePct": null,
+        "missingTopics": [],
+        "thinTopics": [],
+        "hasVerifiedTopicList": false,
+        "lastCalculated": "2026-11-24T15:34:20.388Z"
+      }
+    ],
+    "ntrca": [
+      {
+        "examId": "ntrca",
+        "subjectId": "bangla",
+        "target": 25,
+        "verified": 0,
+        "reviewed": 0,
+        "draft": 0,
+        "coveragePct": null,
+        "missingTopics": [],
+        "thinTopics": [],
+        "hasVerifiedTopicList": false,
+        "lastCalculated": "2026-11-24T15:34:20.388Z"
+      },
+      {
+        "examId": "ntrca",
+        "subjectId": "english",
+        "target": 25,
+        "verified": 0,
+        "reviewed": 0,
+        "draft": 0,
+        "coveragePct": 0,
+        "missingTopics": [
+          "english__grammar__tense",
+          "english__grammar__voice",
+          "english__grammar__narration",
+          "english__grammar__preposition",
+          "english__grammar__right-form-of-verbs",
+          "english__grammar__conditionals",
+          "english__grammar__articles",
+          "english__vocabulary__synonym",
+          "english__vocabulary__antonym",
+          "english__vocabulary__spelling",
+          "english__vocabulary__idiom",
+          "english__vocabulary__one-word-substitution",
+          "english__comprehension__reading"
+        ],
+        "thinTopics": [],
+        "hasVerifiedTopicList": true,
+        "lastCalculated": "2026-11-24T15:34:20.388Z"
+      },
+      {
+        "examId": "ntrca",
+        "subjectId": "math",
+        "target": 25,
+        "verified": 0,
+        "reviewed": 0,
+        "draft": 0,
+        "coveragePct": null,
+        "missingTopics": [],
+        "thinTopics": [],
+        "hasVerifiedTopicList": false,
+        "lastCalculated": "2026-11-24T15:34:20.388Z"
+      },
+      {
+        "examId": "ntrca",
+        "subjectId": "general-knowledge",
+        "target": 25,
+        "verified": 0,
+        "reviewed": 0,
+        "draft": 0,
+        "coveragePct": null,
+        "missingTopics": [],
+        "thinTopics": [],
+        "hasVerifiedTopicList": false,
+        "lastCalculated": "2026-11-24T15:34:20.388Z"
+      }
+    ]
+  },
+  "readingBundleRebuild": {
+    "bundleId": "topic__bcs__english__comprehension__reading",
+    "bundleVersionFrom": 1,
+    "bundleVersionTo": 2,
+    "keyUnchanged": true,
+    "questions": [
+      {
+        "n": 1,
+        "questionId": "bcs-eng-033",
+        "topicId": "english__comprehension__reading",
+        "subjectId": "english",
+        "questionText": "How does Rahim go to school?",
+        "options": [
+          {
+            "letter": "A",
+            "text": "By bus"
+          },
+          {
+            "letter": "B",
+            "text": "By bicycle"
+          },
+          {
+            "letter": "C",
+            "text": "By boat"
+          },
+          {
+            "letter": "D",
+            "text": "On foot"
+          }
+        ],
+        "difficulty": "easy",
+        "passageId": "bcs-eng-passage-01"
+      },
+      {
+        "n": 2,
+        "questionId": "bcs-eng-034",
+        "topicId": "english__comprehension__reading",
+        "subjectId": "english",
+        "questionText": "Why do his students love him?",
+        "options": [
+          {
+            "letter": "A",
+            "text": "Because he explains lessons with simple examples"
+          },
+          {
+            "letter": "B",
+            "text": "Because he gives them money"
+          },
+          {
+            "letter": "C",
+            "text": "Because he is strict"
+          },
+          {
+            "letter": "D",
+            "text": "Because he gives them gifts"
+          }
+        ],
+        "difficulty": "medium",
+        "passageId": "bcs-eng-passage-01"
+      },
+      {
+        "n": 3,
+        "questionId": "bcs-eng-035",
+        "topicId": "english__comprehension__reading",
+        "subjectId": "english",
+        "questionText": "What does Rahim believe?",
+        "options": [
+          {
+            "letter": "A",
+            "text": "That money can change life"
+          },
+          {
+            "letter": "B",
+            "text": "That education can change the life of a poor child"
+          },
+          {
+            "letter": "C",
+            "text": "That village life is easy"
+          },
+          {
+            "letter": "D",
+            "text": "That children should work"
+          }
+        ],
+        "difficulty": "medium",
+        "passageId": "bcs-eng-passage-01"
+      }
+    ]
+  },
+  "problems": []
+}

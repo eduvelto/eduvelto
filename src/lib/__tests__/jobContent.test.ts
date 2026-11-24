@@ -37,6 +37,8 @@ import {
 } from '../jobExams';
 import {
   JOB_SUBJECTS,
+  JOB_BANK_SUBJECTS,
+  JOB_ENGLISH_TOPICS,
   JOB_CONTENT_COLLECTIONS,
   JOB_CONTENT_CONFIG_VERSION,
   JOB_CONTENT_REVIEW_STATES,
@@ -47,6 +49,10 @@ import {
   jobSubjectSyllabusReady,
   isJobContentReviewState,
   isDraftJobContentReviewState,
+  isCanonicalBankSubject,
+  canonicalSubjectFor,
+  canonicalTopicIdFor,
+  jobEnglishTopicById,
   validateJobContentTaxonomy,
   validateJobContentTaxonomyAgainst,
   type JobSubjectDef,
@@ -444,5 +450,49 @@ describe('content seed (team/job-content-seed.json)', () => {
     }
     expect(SEED._meta.status).toMatch(/DISK ONLY/);
     expect(SEED._meta.verifiedFiguresOnly).toMatch(/it-professional.*scope_pending/);
+  });
+});
+
+describe('central bank canonical keys (§2.1/§2.2)', () => {
+  it('(c51) JOB_BANK_SUBJECTS is the 15 canonical cross-exam keys', () => {
+    expect(JOB_BANK_SUBJECTS).toEqual([
+      'bangla', 'english', 'math', 'general-knowledge', 'bangladesh-affairs',
+      'international-affairs', 'general-science', 'ict', 'mental-ability',
+      'geography', 'ethics', 'mathematical-reasoning', 'math-science',
+      'analytical-skills', 'financial-banking',
+    ]);
+  });
+  it('(c52) all 23 exam-scoped subjects map to a canonical key', () => {
+    for (const [examSlug, list] of Object.entries(JOB_SUBJECTS)) {
+      for (const s of list) {
+        expect(canonicalSubjectFor(`${examSlug}__${s.slug}`)).not.toBeNull();
+      }
+    }
+    expect(canonicalSubjectFor('bcs__english')).toBe('english');
+    expect(canonicalSubjectFor('bcs__computer-ict')).toBe('ict');
+    expect(canonicalSubjectFor('bank__computer')).toBe('ict');
+    expect(canonicalSubjectFor('bcs__mathematical-reasoning')).toBe('mathematical-reasoning');
+    expect(canonicalSubjectFor('primary-teacher__math-science')).toBe('math-science');
+    expect(canonicalSubjectFor('bcs__no-such-subject')).toBeNull();
+  });
+  it('(c53) Constitution & Administration is NOT a subject (E-7)', () => {
+    expect(isCanonicalBankSubject('constitution')).toBe(false);
+    expect(isCanonicalBankSubject('constitution-administration')).toBe(false);
+    expect(isCanonicalBankSubject('english')).toBe(true);
+  });
+  it('(c54) canonicalTopicIdFor drops the exam prefix', () => {
+    expect(canonicalTopicIdFor('bcs__english__grammar__tense')).toBe('english__grammar__tense');
+    expect(canonicalTopicIdFor('bcs__english__comprehension__reading')).toBe('english__comprehension__reading');
+    expect(canonicalTopicIdFor('bad')).toBeNull();
+  });
+  it('(c55) JOB_ENGLISH_TOPICS is the verified 13-topic list, 35 questions', () => {
+    expect(JOB_ENGLISH_TOPICS).toHaveLength(13);
+    expect(JOB_ENGLISH_TOPICS.reduce((a, t) => a + t.count, 0)).toBe(35);
+    expect(JOB_ENGLISH_TOPICS.filter((t) => t.chapter === 'grammar')).toHaveLength(7);
+    expect(JOB_ENGLISH_TOPICS.filter((t) => t.chapter === 'vocabulary')).toHaveLength(5);
+    expect(JOB_ENGLISH_TOPICS.filter((t) => t.chapter === 'comprehension')).toHaveLength(1);
+    expect(JOB_ENGLISH_TOPICS.map((t) => t.topicId)).toContain('english__grammar__tense');
+    expect(JOB_ENGLISH_TOPICS.map((t) => t.topicId)).not.toContain('english__literature__middle-english');
+    expect(jobEnglishTopicById('english__vocabulary__spelling')?.count).toBe(2);
   });
 });

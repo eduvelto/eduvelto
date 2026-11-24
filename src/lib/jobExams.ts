@@ -794,6 +794,51 @@ export function jobRulesConfig(slug: string): JobRulesConfig | null {
   return JOB_RULES_CONFIGS[slug] ?? null;
 }
 
+/**
+ * Central-bank exam keys (design-central-bank.md §1.3) — the ONLY
+ * values `examMappings` may carry. 'bcs' / 'bank' / 'primary-teacher'
+ * / 'ntrca' are the verified hub exams; 'bank-senior-officer' and
+ * 'bank-assistant-director' are the verified post-level Bank configs
+ * (a question mapped to 'bank' is NOT automatically mapped to them —
+ * each post mapping is added explicitly); 'grade_11_20' is a VIRTUAL
+ * key — there is no JOB_EXAMS slug and no verified pattern for it
+ * yet, so selection rules for it stay 'draft' and nothing is served
+ * under it until the 11–20 hub + a verified post pattern exist.
+ * The other 9 JOB_EXAMS slugs are deliberately ABSENT: none has a
+ * verified pattern today, so they are rejected at write time.
+ */
+export const EXAM_KEYS = [
+  'bcs',
+  'bank',
+  'bank-senior-officer',
+  'bank-assistant-director',
+  'primary-teacher',
+  'ntrca',
+  'grade_11_20',
+] as const;
+export type ExamKey = (typeof EXAM_KEYS)[number];
+
+/** Keys with a verified rulesConfig (the six selection-rules docs). */
+export const VERIFIED_EXAM_KEYS = [
+  'bcs',
+  'bank',
+  'bank-senior-officer',
+  'bank-assistant-director',
+  'primary-teacher',
+  'ntrca',
+] as const;
+
+/** Virtual keys: accepted as mapping values, never selectable. */
+export const VIRTUAL_EXAM_KEYS = ['grade_11_20'] as const;
+
+export function isExamKey(v: unknown): v is ExamKey {
+  return typeof v === 'string' && (EXAM_KEYS as readonly string[]).includes(v);
+}
+
+export function isVirtualExamKey(v: unknown): boolean {
+  return typeof v === 'string' && (VIRTUAL_EXAM_KEYS as readonly string[]).includes(v);
+}
+
 /** The 8 hub tabs (design plan §1.4 — same pattern as class dashboards). */
 export const JOB_TABS = [
   { slug: 'home', bn: 'হোম', en: 'Home' },

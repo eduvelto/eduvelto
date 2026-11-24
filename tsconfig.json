@@ -27,6 +27,7 @@
     "emulator-tests",
     "scripts/apply-job-seed.d.mts",
     "scripts/apply-job-content-seed.d.mts",
-    "scripts/apply-job-question-seed.d.mts"
+    "scripts/apply-job-question-seed.d.mts",
+    "scripts/migrate-central-bank-v2.d.mts"
   ]
 }

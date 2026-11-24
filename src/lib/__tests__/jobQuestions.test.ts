@@ -14,8 +14,12 @@ import {
   JOB_QUESTION_CONFIG_VERSION,
   JOB_RECEIPT_WINDOW_MINUTES,
   jobQuestionDuplicateHash,
+  jobQuestionDuplicateHashV2,
+  jobQuestionStemHash,
   normalizeJobQuestionText,
+  normalizeJobQuestionTextV2,
   validateJobQuestion,
+  validateJobQuestionV2,
   validateJobQuestionBundle,
   jobQuestionAllowedMoves,
   buildJobBundle,
@@ -435,5 +439,168 @@ describe('review queue', () => {
   });
   it('(u50) the config version matches the Step 6 seed version', () => {
     expect(JOB_QUESTION_CONFIG_VERSION).toBe('2026-11-22.1');
+  });
+});
+
+describe('central bank v2 additions (§1.1/§1.4/§1.5/§4.2)', () => {
+  it('(u61) v2 normalisation folds Bangla digits (v1 did not)', () => {
+    expect(normalizeJobQuestionTextV2('২০২৫')).toBe('2025');
+    expect(normalizeJobQuestionText('২০২৫')).not.toBe('2025');
+  });
+  it('(u62) v2 hash is order-invariant and uses the correct TEXT', () => {
+    const base = {
+      question: 'Choose the correct sentence.',
+      subjectId: 'english',
+      options: [
+        { letter: 'A', text: 'He go to school every day.' },
+        { letter: 'B', text: 'He going to school every day.' },
+        { letter: 'C', text: 'He goes to school every day.' },
+        { letter: 'D', text: 'He gone to school every day.' },
+      ] as Array<{ letter: 'A' | 'B' | 'C' | 'D'; text: string }>,
+      correctAnswer: 'C' as const,
+    };
+    const shuffled = {
+      ...base,
+      options: [
+        { letter: 'A', text: 'He goes to school every day.' },
+        { letter: 'B', text: 'He go to school every day.' },
+        { letter: 'C', text: 'He going to school every day.' },
+        { letter: 'D', text: 'He gone to school every day.' },
+      ] as Array<{ letter: 'A' | 'B' | 'C' | 'D'; text: string }>,
+      correctAnswer: 'A' as const,
+    };
+    expect(jobQuestionDuplicateHashV2(base)).toBe(jobQuestionDuplicateHashV2(shuffled));
+    expect(jobQuestionDuplicateHashV2({ ...base, correctAnswer: 'A' as const })).not.toBe(
+      jobQuestionDuplicateHashV2(base),
+    );
+    expect(jobQuestionStemHash('Choose the correct sentence.')).toMatch(/^[0-9a-f]{16}$/);
+  });
+  it('(u63) validateJobQuestionV2 accepts a v2 doc and rejects a v1 doc', () => {
+    const v2 = {
+      questionId: 'q_english_0001',
+      subjectId: 'english',
+      topicId: 'english__grammar__tense',
+      subtopicId: null,
+      difficulty: 'medium',
+      questionType: 'mcq',
+      question: 'Choose the correct sentence.',
+      options: [
+        { letter: 'A', text: 'He go to school every day.' },
+        { letter: 'B', text: 'He going to school every day.' },
+        { letter: 'C', text: 'He goes to school every day.' },
+        { letter: 'D', text: 'He gone to school every day.' },
+      ],
+      correctAnswer: 'C',
+      explanation: 'ব্যাখ্যা।',
+      whyWrong: null,
+      examMappings: ['bcs'],
+      syllabusMappings: {
+        bcs: {
+          subjectId: 'bcs__english',
+          chapterId: 'bcs__english__grammar',
+          topicId: 'bcs__english__grammar__tense',
+          syllabusVersion: '50th-bcs-2025-12-09',
+          syllabusTopicId: 'english__grammar__tense',
+          verified: true,
+        },
+      },
+      verificationStatus: 'verified',
+      isActive: true,
+      origin: 'admin-practice',
+      source: { type: 'original-practice', reference: 'Batch 1', url: null },
+      examYear: null,
+      tags: ['english', 'english__grammar__tense', 'bcs'],
+      passageId: null,
+      duplicateHash: 'abcdef0123456789',
+      duplicateHashV2: jobQuestionDuplicateHashV2({
+        question: 'Choose the correct sentence.',
+        subjectId: 'english',
+        options: [
+          { letter: 'A', text: 'He go to school every day.' },
+          { letter: 'B', text: 'He going to school every day.' },
+          { letter: 'C', text: 'He goes to school every day.' },
+          { letter: 'D', text: 'He gone to school every day.' },
+        ],
+        correctAnswer: 'C',
+      }),
+      stemHash: jobQuestionStemHash('Choose the correct sentence.'),
+      duplicateOf: null,
+      authorId: null,
+      verifiedBy: 'nczNklmktsVrxg43UzcgdSm6v0j2',
+      verifiedAt: '2026-11-22T00:00:00.000Z',
+      version: 1,
+      configVersion: JOB_QUESTION_CONFIG_VERSION,
+      status: 'published',
+      reviewStatus: 'Published',
+    };
+    expect(validateJobQuestionV2(v2)).toEqual([]);
+    // The v1 validator does not accept v2 docs (and vice versa).
+    expect(validateJobQuestion(v2).length).toBeGreaterThan(0);
+    expect(validateJobQuestionV2(BASE_QUESTION).length).toBeGreaterThan(0);
+  });
+  it('(u64) buildJobBundle accepts v2 questions and joins passages (§1.4)', () => {
+    const v2q = {
+      questionId: 'bcs-eng-033',
+      subjectId: 'english',
+      topicId: 'english__comprehension__reading',
+      subtopicId: null,
+      difficulty: 'easy' as const,
+      questionType: 'mcq' as const,
+      question: 'How does Rahim go to school?',
+      options: [
+        { letter: 'A', text: 'By bus' },
+        { letter: 'B', text: 'By bicycle' },
+        { letter: 'C', text: 'By boat' },
+        { letter: 'D', text: 'On foot' },
+      ] as Array<{ letter: 'A' | 'B' | 'C' | 'D'; text: string }>,
+      correctAnswer: 'D' as const,
+      explanation: 'Passage-এ আছে — Rahim walks two kilometres to school।',
+      whyWrong: null,
+      examMappings: ['bcs'],
+      syllabusMappings: {},
+      verificationStatus: 'verified' as const,
+      isActive: true,
+      origin: 'admin-practice' as const,
+      source: { type: 'original-practice' as const, reference: 'Batch 1', url: null },
+      tags: ['english'],
+      passageId: 'bcs-eng-passage-01',
+      duplicateHash: 'abcdef0123456789',
+      duplicateHashV2: '0123456789abcdef',
+      version: 1,
+      configVersion: JOB_QUESTION_CONFIG_VERSION,
+      status: 'published' as const,
+      reviewStatus: 'Published' as const,
+      id: 'bcs-eng-033',
+    };
+    const meta = {
+      bundleId: 'topic__bcs__english__comprehension__reading',
+      kind: 'topic' as const,
+      examSlug: 'bcs',
+      topicId: 'english__comprehension__reading',
+      titleBn: 'পাঠ বোঝা — অনুশীলন',
+      titleEn: 'Reading Comprehension — Practice',
+    };
+    expect(() => buildJobBundle([v2q], meta)).toThrow(/needs passage/);
+    const { bundle, key } = buildJobBundle([v2q], {
+      ...meta,
+      passages: { 'bcs-eng-passage-01': { text: 'Rahim is a school teacher...' } },
+    });
+    expect(bundle.questions[0].questionText).toBe('How does Rahim go to school?');
+    expect(bundle.questions[0].passageId).toBe('bcs-eng-passage-01');
+    expect(bundle.questions[0].topicId).toBe('english__comprehension__reading');
+    expect(key.answers[0].correctLetter).toBe('D');
+    expect(key.answers[0].correctText).toBe('On foot');
+  });
+  it('(u65) the publish gate blocks on unreviewed duplicates or a missing content pass (§4.3/§1.5)', () => {
+    expect(jobQuestionAllowedMoves('Under Review', 'moderator')).toContain('Published');
+    expect(
+      jobQuestionAllowedMoves('Under Review', 'moderator', { hasUnreviewedDuplicateCandidates: true }),
+    ).not.toContain('Published');
+    expect(
+      jobQuestionAllowedMoves('Under Review', 'moderator', { reviewContentPassed: false }),
+    ).not.toContain('Published');
+    expect(
+      jobQuestionAllowedMoves('Under Review', 'moderator', { reviewContentPassed: true }),
+    ).toContain('Published');
   });
 });
