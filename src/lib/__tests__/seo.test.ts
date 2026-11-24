@@ -86,7 +86,7 @@ import {
   OG_IMAGE_WIDTH,
   OG_IMAGE_HEIGHT,
 } from '../seo';
-import { JOB_EXAMS, jobExamBySlug, jobPatternStatus } from '../jobExams';
+import { JOB_EXAMS, JOB_TABS, jobExamBySlug, jobPatternStatus } from '../jobExams';
 import { JOB_SUBJECTS, jobSubjectsForExam } from '../jobContent';
 import { NU_SYLLABUS_COMMON_SLUGS, nuSyllabusSubjectBySlug } from '../nuSyllabus';
 import { NU_GROUPS } from '../nuProfile';
@@ -240,10 +240,12 @@ describe('resolveRouteSeo — public routes', () => {
     expect(seo).not.toBeNull();
     // Exact strings (24 Nov 2026, brand-SEO wave 1, F-01): "সেরা"
     // was removed — Google's AI Overview quoted it back as
-    // self-promotion.
+    // self-promotion. Description reworded in brand-SEO wave 12
+    // (189 → 150 chars) to fit the <=160 limit; "জাতীয়
+    // বিশ্ববিদ্যালয়" and "জীবনসেবা" dropped, the rest kept.
     expect(seo!.title).toBe('Eduvelto — বাংলাদেশের ফ্রি শিক্ষা প্ল্যাটফর্ম');
     expect(seo!.description).toBe(
-      'Eduvelto — বাংলাদেশের ফ্রি শিক্ষা ও জীবনসেবা প্ল্যাটফর্ম: BCS, ব্যাংক, প্রাথমিক শিক্ষক, NTRCA ও জাতীয় বিশ্ববিদ্যালয় ভর্তি প্রস্তুতি, MCQ পরীক্ষা ও ডিজিটাল লাইব্রেরি — সম্পূর্ণ বিনামূল্যে।',
+      'Eduvelto — বাংলাদেশের ফ্রি শিক্ষা প্ল্যাটফর্ম: BCS, ব্যাংক, প্রাথমিক শিক্ষক, NTRCA ও ভর্তি প্রস্তুতি, MCQ পরীক্ষা ও ডিজিটাল লাইব্রেরি — সম্পূর্ণ ফ্রি।',
     );
     expect(seo!.title).not.toContain('সেরা');
     expect(seo!.description).not.toContain('সেরা');
@@ -607,7 +609,16 @@ describe('resolveRouteSeo — SEO 50–100 pages (23 Nov 2026)', () => {
       const subject = JOB_SUBJECTS[examSlug].find((s) => s.slug === subjectSlug)!;
       const seo = resolveRouteSeo(path);
       expect(seo, `no SEO for ${path}`).not.toBeNull();
-      expect(seo!.title, path).toContain(subject.nameBn);
+      // Brand-SEO wave 12: the title keeps the full subject name
+      // whenever it fits <=60; the two names that cannot fit even
+      // without 'প্রস্তুতি' use the short form (parenthetical
+      // stripped, or the wave-12 map) — the full name still stands
+      // in the breadcrumb, description and page heading.
+      const shortBn = subject.nameBn.replace(/\s*\(.*\)\s*$/, '');
+      expect(
+        seo!.title.includes(subject.nameBn) || seo!.title.includes(shortBn),
+        `${path} title lacks the subject name`,
+      ).toBe(true);
       expect(seo!.title, path).toContain(exam.bn);
       expect(subject.marks, `${path} marks must be verified`).not.toBeNull();
       expect(seo!.description, path).toContain(`${bnDigits(subject.marks!)} নম্বর`);
@@ -1285,7 +1296,11 @@ describe('resolveRouteSeo — English SEO (24 Nov 2026, language system)', () =>
     expect(subj.title).toContain('English Language & Literature — BCS Preparation');
     expect(subj.description).toContain('marks in the verified syllabus');
     const nu = resolveRouteSeo('/admissions/national-university/science/subjects/english', 'en')!;
-    expect(nu.title).toContain('English — National University Admission Preparation (Science)');
+    // Brand-SEO wave 12: the old pin ('English — National University
+    // Admission Preparation (Science)') was 61 chars before the
+    // ' | Eduvelto' suffix — itself over the <=60 title limit — so
+    // the title now keeps the university + group in short form.
+    expect(nu.title).toContain('English — National University (Science)');
     expect(nu.description).toContain('verified from the circular');
     const opp = resolveRouteSeo('/opportunities/bpsc-non-cadre-2026', 'en')!;
     expect(opp.title).not.toMatch(BN);
@@ -1533,3 +1548,46 @@ describe('resolveRouteSeo — brand-SEO wave 4 (24 Nov 2026)', () => {
   });
 });
 
+
+describe('brand-SEO wave 12: search-result length limits, all routes', () => {
+  // Wave 5 closed the trim for the 37 guide blocks; wave 12 closed it
+  // for every other route. This test enforces both, so a future copy
+  // change can never silently push a title past 60 chars or a
+  // description past 160 in either language. Path set mirrors the
+  // wave-12 scan: sitemap URLs (minus /founder, which returns null
+  // by design) + job exam tabs + job subjects + NU subjects +
+  // opportunity detail pages for published seeds.
+  function allTrimPaths(): string[] {
+    const paths = new Set<string>();
+    for (const p of SITEMAP_URLS) {
+      if (p !== '/founder') paths.add(p);
+    }
+    for (const exam of JOB_EXAMS) {
+      paths.add(`/jobs/${exam.slug}`);
+      for (const tab of JOB_TABS) paths.add(`/jobs/${exam.slug}/${tab.slug}`);
+    }
+    for (const { path } of allJobSubjectPaths()) paths.add(path);
+    for (const p of allNuSubjectPaths()) paths.add(p);
+    for (const seed of OPPORTUNITY_SEED) {
+      if (isPublished(seed)) paths.add(`/opportunities/${seed.docId}`);
+    }
+    return [...paths];
+  }
+
+  it('every route resolves with title <= 60 and description <= 160, bn + en', () => {
+    const paths = allTrimPaths();
+    expect(paths.length).toBeGreaterThan(200);
+    for (const path of paths) {
+      for (const lang of ['bn', 'en'] as const) {
+        const seo = resolveRouteSeo(path, lang);
+        expect(seo, `no SEO for ${path} (${lang})`).not.toBeNull();
+        expect(seo!.title.length, `${path} (${lang}) title ${seo!.title.length}: ${seo!.title}`).toBeLessThanOrEqual(
+          60,
+        );
+        expect(seo!.description.length, `${path} (${lang}) desc ${seo!.description.length}: ${seo!.description}`).toBeLessThanOrEqual(
+          160,
+        );
+      }
+    }
+  });
+});
