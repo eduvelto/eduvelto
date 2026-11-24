@@ -708,7 +708,7 @@ export default function AdminNuQuestionsPage() {
                     setGroups(e.target.checked ? [...groups, g] : groups.filter((x) => x !== g))
                   }
                 />{' '}
-                {g === 'humanities' ? 'মানবিক' : g === 'science' ? 'বিজ্ঞান' : 'ব্যবসায় শিক্ষা'}
+                {lang === 'bn' ? (g === 'humanities' ? 'মানবিক' : g === 'science' ? 'বিজ্ঞান' : 'ব্যবসায় শিক্ষা') : (g === 'humanities' ? 'Humanities' : g === 'science' ? 'Science' : 'Business Studies')}
               </label>
             ))}
           </fieldset>

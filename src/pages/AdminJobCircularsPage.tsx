@@ -25,6 +25,7 @@ import {
 import {
   circularApplicationStatus,
   CIRCULAR_STATUS_BN,
+  CIRCULAR_STATUS_EN,
   formatDhakaDate,
   toBanglaDigits,
   type JobCircular,
@@ -198,7 +199,7 @@ export default function AdminJobCircularsPage() {
                     {c.circularNumber ? ` · ${t({ bn: 'স্মারক', en: 'Memo' })}: ${c.circularNumber}` : ''}
                   </div>
                   <div style={{ fontSize: 13, marginTop: 4 }}>
-                    {t({ bn: 'আবেদনের অবস্থা', en: 'Application status' })}: {CIRCULAR_STATUS_BN[status]}
+                    {t({ bn: 'আবেদনের অবস্থা', en: 'Application status' })}: {lang === 'bn' ? CIRCULAR_STATUS_BN[status] : CIRCULAR_STATUS_EN[status]}
                     {c.applicationDeadlineMillis !== null
                       ? ` · ${t({ bn: 'শেষ তারিখ', en: 'Deadline' })}: ${formatDhakaDate(c.applicationDeadlineMillis, lang, c.deadlinePrecision === 'datetime')}`
                       : ` · ${t({ bn: 'শেষ তারিখ: তথ্য পাওয়া যায়নি', en: 'Deadline: not available' })}`}

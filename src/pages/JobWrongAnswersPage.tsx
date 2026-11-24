@@ -652,7 +652,7 @@ export default function JobWrongAnswersPage() {
                       {t({ bn: `পরপর ২ বার সঠিক · ${formatDate(entry.clearedAtMillis, lang)}`, en: `Correct 2 times in a row · ${formatDate(entry.clearedAtMillis, lang)}` })}
                       {' · '}
                       <Link to={`/jobs/result/${entry.lastWrongAttemptId}`} style={{ fontWeight: 600 }}>
-                        যেখানে ভুল হয়েছিল →
+                        {t({ bn: 'যেখানে ভুল হয়েছিল →', en: 'Where it went wrong →' })}
                       </Link>
                     </p>
                   </Card>

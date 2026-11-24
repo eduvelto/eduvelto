@@ -74,7 +74,7 @@ import {
   weekActivity,
   type PublishedBundleRef,
 } from './jobDashboard';
-import { jobTopicLabelBn } from './jobEngine';
+import { jobTopicLabel, jobTopicLabelBn } from './jobEngine';
 
 const DAY_MS = 24 * 60 * 60 * 1000;
 /** At most this many revision items the plan asks of one day. */
@@ -102,6 +102,7 @@ export function revisionIntervalDays(mastery: TopicMastery): number | null {
 export interface PlannerTopicHealth {
   topicId: string;
   label: string;
+  labelEn: string;
   correct: number;
   wrong: number;
   total: number;
@@ -157,6 +158,7 @@ export function topicHealth(attempts: JobAttemptSummary[], nowMs: number): Plann
       return {
         topicId: s.topicId,
         label: s.label,
+        labelEn: s.labelEn,
         correct: s.correct,
         wrong: s.wrong,
         total: s.total,
@@ -177,6 +179,7 @@ export type DueBucket = 'today' | 'tomorrow' | 'this-week' | 'later';
 export interface RevisionItem {
   topicId: string;
   label: string;
+  labelEn: string;
   mastery: Exclude<TopicMastery, 'not-enough-data'>;
   accuracy: number;
   total: number;
@@ -231,6 +234,7 @@ export function revisionQueue(args: {
     items.push({
       topicId: h.topicId,
       label: h.label,
+      labelEn: h.labelEn,
       mastery: h.mastery,
       accuracy: h.accuracy,
       total: h.total,
@@ -261,8 +265,12 @@ export interface PlanDayItem {
   topicId: string | null;
   /** Display label (topic / bundle title / "দৈনিক মক"). */
   label: string;
+  /** Display label in English. */
+  labelEn: string;
   /** Why this item is here, in plain Bangla. */
   reasonBn: string;
+  /** Why this item is here, in English. */
+  reasonEn: string;
   /** Practice link, guarded — null when no published set
    * exists (revision) or the mock is not published yet. */
   to: string | null;
@@ -391,12 +399,19 @@ export function weeklyPlan(args: {
         kind: 'revision',
         topicId: rev.topicId,
         label: rev.label,
+        labelEn: rev.labelEn,
         reasonBn:
           rev.mastery === 'weak'
             ? `সঠিক উত্তরের হার ${rev.accuracy}% — আবার দেখে নিন`
             : rev.mastery === 'moderate'
               ? `সঠিক উত্তরের হার ${rev.accuracy}% — ঝালিয়ে নিন`
               : `ধরে রাখার রিভিশন — সঠিক উত্তরের হার ${rev.accuracy}%`,
+        reasonEn:
+          rev.mastery === 'weak'
+            ? `Accuracy ${rev.accuracy}% — review again`
+            : rev.mastery === 'moderate'
+              ? `Accuracy ${rev.accuracy}% — brush up`
+              : `Retention revision — accuracy ${rev.accuracy}%`,
         to: rev.bundleDocId ? `/jobs/practice/${rev.bundleDocId}` : null,
         done,
         slid: rev.nextRevisionDay < dayKey,
@@ -411,7 +426,9 @@ export function weeklyPlan(args: {
         kind: 'new-practice',
         topicId: newBundle.topicId,
         label: newBundle.titleBn ?? jobTopicLabelBn(newBundle.topicId ?? ''),
+        labelEn: jobTopicLabel(newBundle.topicId ?? '', 'en'),
         reasonBn: 'এখনো চেষ্টা করা হয়নি — নতুন টপিক',
+        reasonEn: 'Not attempted yet — new topic',
         to: `/jobs/practice/${newBundle.docId}`,
         done,
         slid: false,
@@ -427,7 +444,9 @@ export function weeklyPlan(args: {
         kind: 'daily-mock',
         topicId: null,
         label: 'দৈনিক মক',
+        labelEn: 'Daily mock',
         reasonBn: dailyMockDocId ? 'আজকের দৈনিক মক' : 'আজকের মক এখনো প্রকাশিত হয়নি',
+        reasonEn: dailyMockDocId ? "Today's daily mock" : "Today's mock is not published yet",
         to: dailyMockDocId ? `/jobs/mock/${dailyMockDocId}` : null,
         done: mockDone,
         slid: false,
@@ -437,7 +456,9 @@ export function weeklyPlan(args: {
         kind: 'daily-mock',
         topicId: null,
         label: 'দৈনিক মক',
+        labelEn: 'Daily mock',
         reasonBn: 'সেদিনের মক সেদিন দেখাবে',
+        reasonEn: "That day's mock will appear that day",
         to: '/jobs/common',
         done: false,
         slid: false,

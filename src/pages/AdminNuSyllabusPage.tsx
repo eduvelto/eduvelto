@@ -32,6 +32,12 @@ const STATUS_BN: Record<NuSeedStatusRow['status'], string> = {
   missing: 'নেই — এখনো প্রয়োগ হয়নি',
   unreadable: 'পড়া যায়নি — আবার চেষ্টা করুন',
 };
+const STATUS_EN: Record<NuSeedStatusRow['status'], string> = {
+  matches: 'Matches ✓',
+  differs: 'Differs — does not match the seed',
+  missing: 'Missing — not applied yet',
+  unreadable: 'Unreadable — try again',
+};
 
 const COLLECTIONS = ['nuSubjects', 'nuChapters', 'nuTopics', 'nuLessons'] as const;
 
@@ -152,7 +158,7 @@ export default function AdminNuSyllabusPage() {
                           {loading
                             ? t({ bn: 'পড়া হচ্ছে…', en: 'Reading…' })
                             : row
-                              ? STATUS_BN[row.status]
+                              ? lang === 'bn' ? STATUS_BN[row.status] : STATUS_EN[row.status]
                               : t({ bn: 'অজানা', en: 'Unknown' })}
                         </td>
                       </tr>

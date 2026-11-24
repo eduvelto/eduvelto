@@ -62,7 +62,7 @@ function LoginPrompt() {
 }
 
 export default function NuHubPage() {
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
   const { user, profile } = useAuth();
   const { tab } = useParams<{ tab?: string }>();
   const activeTab: NuHubTab = tab === undefined ? 'home' : isNuHubTab(tab) ? tab : 'home';
@@ -241,9 +241,13 @@ export default function NuHubPage() {
                 </p>
                 <p style={{ color: 'var(--muted-ivory)', fontSize: 14, margin: '0 0 12px' }}>
                   {t({ bn: 'যোগ্যতা: ', en: 'Eligibility: ' })}
-                  {g.slug === 'science'
-                    ? 'SSC GPA ২.২৫+, HSC GPA ২.০+, মোট GPA ৪.৭৫+'
-                    : 'SSC GPA ২.০+, HSC GPA ২.০+, মোট GPA ৪.৫+'}
+                  {lang === 'bn'
+                    ? g.slug === 'science'
+                      ? 'SSC GPA ২.২৫+, HSC GPA ২.০+, মোট GPA ৪.৭৫+'
+                      : 'SSC GPA ২.০+, HSC GPA ২.০+, মোট GPA ৪.৫+'
+                    : g.slug === 'science'
+                      ? 'SSC GPA 2.25+, HSC GPA 2.0+, total GPA 4.75+'
+                      : 'SSC GPA 2.0+, HSC GPA 2.0+, total GPA 4.5+'}
                 </p>
                 <LinkButton to={`${NU_HUB_ROUTE}/${g.slug}`} variant="accent">
                   {t({ bn: 'প্রস্তুতি শুরু করুন', en: 'Start preparing' })} →

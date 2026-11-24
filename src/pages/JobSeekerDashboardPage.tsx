@@ -895,7 +895,7 @@ export default function JobSeekerDashboardPage() {
               <>
                 <ul style={{ margin: '8px 0 10px', paddingLeft: 0, listStyle: 'none', fontSize: 14, lineHeight: 1.9 }}>
                   {mockTrends.map((g) => {
-                    const trend = attemptTrend(g.attempts, 'মক');
+                    const trend = attemptTrend(g.attempts, 'মক', lang);
                     const def = jobExamBySlug(g.examSlug);
                     return (
                       <li key={g.examSlug} style={{ borderTop: '1px solid var(--border)', padding: '6px 0' }}>
