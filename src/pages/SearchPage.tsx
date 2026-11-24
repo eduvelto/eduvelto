@@ -31,9 +31,11 @@ function ResultCard({ r }: { r: SearchResult }) {
   return (
     <article className="ev-search-result">
       <span className="ev-search-kind">{t(KIND_LABEL[r.kind])}</span>
-      <h3>
+      {/* Wave 7 a11y: h2, not h3 — result cards are the top-level items
+          under the page h1; h3 here skipped a level (h1 -> h3). */}
+      <h2>
         <Link to={r.to}>{lang === 'bn' ? r.titleBn : r.titleEn}</Link>
-      </h3>
+      </h2>
       <p>{lang === 'bn' ? r.descBn : r.descEn}</p>
       <span className="ev-search-meta">{lang === 'bn' ? r.metaBn : r.metaEn}</span>
     </article>

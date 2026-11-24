@@ -72,7 +72,7 @@ export default function PublicGuidePage({ guide }: { guide: string }) {
           {data.warningBn}
         </AlertBox>
       ) : null}
-      <p style={{ fontSize: 14, color: 'var(--muted)', margin: '0 0 16px' }}>
+      <p style={{ fontSize: 14, color: 'var(--muted-ivory)', margin: '0 0 16px' }}>
         {lang === 'bn' ? 'Eduvelto — ফ্রি শিক্ষা প্ল্যাটফর্ম' : 'Eduvelto — Free education platform'}
       </p>
       {data.bodyBn.map((p, i) => (

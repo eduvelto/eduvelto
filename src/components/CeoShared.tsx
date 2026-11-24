@@ -48,7 +48,7 @@ export function CeoEmpty(props: { bn: string; en: string; nextBn?: string; nextE
         {lang === 'bn' ? props.bn : props.en}
       </p>
       {props.nextBn ? (
-        <p style={{ margin: '8px 0 0', color: '#68747B', fontSize: 14 }}>
+        <p style={{ margin: '8px 0 0', color: '#57616A', fontSize: 14 }}>
           {t({ bn: 'পরবর্তী পদক্ষেপ: ', en: 'Next step: ' })}
           {lang === 'bn' ? props.nextBn : props.nextEn}
         </p>

@@ -258,7 +258,7 @@ export function JobCard({ def, delayMs = 0 }: { def: JobExamDef; delayMs?: numbe
             <span
               style={{
                 display: 'inline-block',
-                background: 'rgba(255,255,255,0.22)',
+                background: 'rgba(0,0,0,0.28)',
                 color: '#fff',
                 fontSize: 13,
                 fontWeight: 600,
@@ -341,7 +341,7 @@ export function CommonPrepCard({ delayMs = 0 }: { delayMs?: number }) {
             <span
               style={{
                 display: 'inline-block',
-                background: 'rgba(255,255,255,0.22)',
+                background: 'rgba(0,0,0,0.28)',
                 color: '#fff',
                 fontSize: 13,
                 fontWeight: 600,

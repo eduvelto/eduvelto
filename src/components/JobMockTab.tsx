@@ -54,7 +54,7 @@ export default function JobMockTab({ def }: { def: JobExamDef }) {
     return (
       <Reveal>
         <Card>
-          <p style={{ margin: 0, color: '#68747B', fontSize: 14 }}>{t({ bn: 'লোড হচ্ছে…', en: 'Loading…' })}</p>
+          <p style={{ margin: 0, color: '#57616A', fontSize: 14 }}>{t({ bn: 'লোড হচ্ছে…', en: 'Loading…' })}</p>
         </Card>
       </Reveal>
     );
@@ -65,7 +65,7 @@ export default function JobMockTab({ def }: { def: JobExamDef }) {
       <Reveal>
         <Card>
           <div style={{ fontWeight: 700, color: '#142B3B', fontSize: 17 }}>{t({ bn: 'এখনো কোনো মক তৈরি হয়নি', en: 'No mock has been created yet' })}</div>
-          <p style={{ margin: '8px 0 12px', color: '#68747B', fontSize: 14, lineHeight: 1.7 }}>
+          <p style={{ margin: '8px 0 12px', color: '#57616A', fontSize: 14, lineHeight: 1.7 }}>
             {t({ bn: 'আসল ধরনে সময়ভিত্তিক পূর্ণ মক (নম্বর, সময়, নেগেটিভ মার্কিং) প্রশ্ন ব্যাংক প্রস্তুত হলে এখানে আসবে।', en: 'A timed full mock in the real pattern (marks, time, negative marking) will appear here once the question bank is ready.' })}
           </p>
           {!user ? (
@@ -93,7 +93,7 @@ export default function JobMockTab({ def }: { def: JobExamDef }) {
           <Reveal key={m.docId} delayMs={i * 40}>
             <Card>
               <div style={{ fontWeight: 700, color: '#142B3B', fontSize: 16 }}>{lang === 'bn' ? m.titleBn : m.titleEn}</div>
-              <p style={{ margin: '6px 0 10px', color: '#68747B', fontSize: 14, lineHeight: 1.7 }}>
+              <p style={{ margin: '6px 0 10px', color: '#57616A', fontSize: 14, lineHeight: 1.7 }}>
                 {jobMockPatternSummary(m.rulesSnapshot, undefined, lang)}
                 {m.rulesSnapshot.passPercent !== null ? t({ bn: ` · পাস ${m.rulesSnapshot.passPercent}%`, en: ` · Pass ${m.rulesSnapshot.passPercent}%` }) : ''}
               </p>
@@ -112,7 +112,7 @@ export default function JobMockTab({ def }: { def: JobExamDef }) {
       </div>
       <Reveal>
         <Card style={{ marginTop: 12 }}>
-          <p style={{ margin: 0, color: '#68747B', fontSize: 14, lineHeight: 1.7 }}>
+          <p style={{ margin: 0, color: '#57616A', fontSize: 14, lineHeight: 1.7 }}>
             {t({ bn: 'মক সময়ভিত্তিক — শুরু হলে সময় আর থামবে না। ফলাফলে লেখা থাকবে “অনুশীলন ফলাফল — নিয়োগ পরীক্ষার ফল নয়”।', en: 'Mocks are timed — once started, the clock does not stop. The result will say "Practice result — not a recruitment exam result".' })}
           </p>
           <p style={{ margin: '12px 0 0' }}>

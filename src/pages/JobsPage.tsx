@@ -147,7 +147,7 @@ export default function JobsPage() {
           </Card>
         </Reveal>
       </div>
-      <p style={{ margin: '-12px 0 24px', color: 'var(--muted)', fontSize: 13 }}>
+      <p style={{ margin: '-12px 0 24px', color: 'var(--muted-ivory)', fontSize: 13 }}>
         {t({
           bn: 'সাধারণ প্রস্তুতিমূলক নির্দেশনা — অফিসিয়াল সিলেবাস, প্রশ্নপ্যাটার্ন বা বিজ্ঞপ্তির বিকল্প নয়।',
           en: 'General preparatory guidance — not a substitute for an official syllabus, question pattern, or circular.',
