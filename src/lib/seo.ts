@@ -595,24 +595,40 @@ const STATIC_ROUTES: Record<string, RouteSeoEntry> = {
     description:
       'Eduvelto-র বিষয়বস্তু কীভাবে তৈরি, যাচাই ও সংশোধন করা হয় — তার নীতি।',
     crumb: 'সম্পাদকীয় নীতি',
+    titleEn: 'Editorial Policy | Eduvelto',
+    descriptionEn:
+      'Eduvelto’s policy on how content is created, reviewed and corrected.',
+    crumbEn: 'Editorial Policy',
   },
   '/content-accuracy': {
     title: 'বিষয়বস্তুর নির্ভুলতা নীতি | Eduvelto',
     description:
       'Eduvelto-র তথ্য কতটা নির্ভরযোগ্য, "যাচাইকৃত" মানে কী এবং গুরুত্বপূর্ণ তারিখ ও ফি কোথায় যাচাই করবেন।',
     crumb: 'বিষয়বস্তুর নির্ভুলতা',
+    titleEn: 'Content Accuracy Policy | Eduvelto',
+    descriptionEn:
+      'How reliable Eduvelto’s information is, what “verified” means, and where to check important dates and fees.',
+    crumbEn: 'Content Accuracy',
   },
   '/certificate-policy': {
     title: 'সার্টিফিকেট নীতি | Eduvelto',
     description:
       'Eduvelto কোনো সার্টিফিকেট দেয় না — অনুশীলন পরীক্ষার নম্বর শুধু নিজের মূল্যায়নের জন্য।',
     crumb: 'সার্টিফিকেট নীতি',
+    titleEn: 'Certificate Policy | Eduvelto',
+    descriptionEn:
+      'Eduvelto issues no certificates — practice test scores are for self-assessment only.',
+    crumbEn: 'Certificate Policy',
   },
   '/disclaimer': {
     title: 'দায়বর্জন | Eduvelto',
     description:
       'Eduvelto-র তথ্য শুধু শিক্ষামূলক — এটি পেশাদার পরামর্শ নয়। গুরুত্বপূর্ণ তথ্য অফিসিয়াল উৎস থেকে যাচাই করুন।',
     crumb: 'দায়বর্জন',
+    titleEn: 'Disclaimer | Eduvelto',
+    descriptionEn:
+      'Eduvelto’s information is educational only — it is not professional advice. Verify important information against official sources.',
+    crumbEn: 'Disclaimer',
   },
   '/health': {
     title: 'স্বাস্থ্য — সচেতনতামূলক তথ্য | Eduvelto',
