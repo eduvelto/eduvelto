@@ -26,6 +26,7 @@ import { useLanguage } from '../i18n/LanguageContext';
 import { addBookmark, isBookmarked, removeBookmark } from '../lib/bookmarks';
 import { markLessonComplete } from '../lib/progress';
 import type { Lesson } from '../lib/content';
+import { pickLessonAnswers } from '../lib/lessonAnswers';
 import AdSlot from './AdSlot';
 
 /** Lines before the first question marker — the lesson's own intro. */
@@ -154,7 +155,7 @@ export default function LessonReader(props: {
     const chunks: string[] = [lesson.title, lessonIntro(lesson.body)];
     for (const q of lesson.questions) {
       chunks.push(q.question);
-      const ans = q.answerBn || q.answer || q.correctText || q.explanation;
+      const ans = pickLessonAnswers(q).primary || q.explanation;
       if (ans) chunks.push(ans);
     }
     const texts = chunks.map(stripMd).filter(Boolean);
@@ -195,7 +196,7 @@ export default function LessonReader(props: {
     const isMcq = q.options.length > 0;
     const pick = picked[q.label];
     const show = revealed[q.label] === true;
-    const answerText = q.answerBn || q.answer || q.correctText;
+    const { primary: answerText, bangla: banglaText } = pickLessonAnswers(q);
     return (
       <li key={q.label} style={{ marginBottom: 20 }}>
         <p style={{ margin: '0 0 8px', lineHeight: 1.6 }}>
@@ -239,7 +240,8 @@ export default function LessonReader(props: {
                     </span>
                   )
                 ) : null}
-                {q.answerBn ? <span style={{ display: 'block', marginTop: 4 }}>{q.answerBn}</span> : null}
+                {answerText && answerText !== q.correctText ? <span style={{ display: 'block', marginTop: 4 }}>{answerText}</span> : null}
+                {banglaText ? <span style={{ display: 'block', marginTop: 4 }}>{banglaText}</span> : null}
                 {q.explanation ? <span style={{ display: 'block', marginTop: 4, color: 'var(--ink-soft)' }}>{q.explanation}</span> : null}
               </p>
             ) : null}
@@ -255,6 +257,11 @@ export default function LessonReader(props: {
             {show ? (
               <div style={{ marginTop: 8, padding: '12px', background: 'var(--card)', borderRadius: 6, lineHeight: 1.7 }}>
                 {answerText ? <p style={{ margin: '0 0 8px' }}>{answerText}</p> : null}
+                {banglaText ? (
+                  <p style={{ margin: '0 0 8px', color: 'var(--ink-soft)' }}>
+                    {t({ bn: 'বাংলায়:', en: 'In Bangla:' })} {banglaText}
+                  </p>
+                ) : null}
                 {q.explanation ? <p style={{ margin: 0, color: 'var(--ink-soft)' }}>{q.explanation}</p> : null}
                 {!answerText && !q.explanation ? <p style={{ margin: 0 }}>{t({ bn: 'উত্তর যোগ করা হয়নি।', en: 'No answer added yet.' })}</p> : null}
               </div>
