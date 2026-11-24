@@ -56,7 +56,16 @@ export default function BookPage() {
           {error}
         </AlertBox>
       ) : null}
-      {book === null && !error ? <Skeleton lines={3} /> : null}
+      {/* Audit m04: skeletons alone read as "not built yet" — say
+          plainly that the book is loading. */}
+      {book === null && !error ? (
+        <>
+          <p style={{ margin: '0 0 12px', color: 'var(--muted)', fontSize: 15 }} aria-live="polite">
+            {t({ bn: 'বইটি লোড হচ্ছে…', en: 'Loading the book…' })}
+          </p>
+          <Skeleton lines={3} />
+        </>
+      ) : null}
       {book ? (
         <>
           <Card style={{ marginBottom: 24, borderTop: '4px solid #F1B308' }}>
@@ -75,7 +84,14 @@ export default function BookPage() {
           <h2 style={{ fontFamily: "'Poppins','Hind Siliguri',system-ui,sans-serif", fontSize: 20, color: 'var(--heading)', margin: '0 0 12px' }}>
             {t({ bn: 'পাঠসমূহ', en: 'Lessons' })} ({chapters?.length ?? 0})
           </h2>
-          {chapters === null ? <SkeletonCards count={3} /> : null}
+          {chapters === null ? (
+            <>
+              <p style={{ margin: '0 0 12px', color: 'var(--muted)', fontSize: 15 }} aria-live="polite">
+                {t({ bn: 'পাঠ লোড হচ্ছে…', en: 'Loading the lessons…' })}
+              </p>
+              <SkeletonCards count={3} />
+            </>
+          ) : null}
           {chapters !== null && chapters.length === 0 && user ? (
             <p>{t({ bn: 'এই বইয়ের কোনো পাঠ এখনো প্রকাশিত হয়নি।', en: 'No lessons from this book are published yet.' })}</p>
           ) : null}

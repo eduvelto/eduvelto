@@ -197,8 +197,8 @@ const SECTIONS = [
     badgeMobileOnly: false,
     titleBn: 'শিক্ষা কার্যক্রম',
     titleEn: 'Academic Learning',
-    descBn: 'Class 1–12, Madrasa, Technical, Honours & Masters',
-    descEn: 'Class 1–12, Madrasa, Technical, Honours & Masters',
+    descBn: 'Class 9–10, HSC, Madrasa, Technical, Honours & Masters',
+    descEn: 'Class 9–10, HSC, Madrasa, Technical, Honours & Masters',
     ctaBn: 'পড়া শুরু করুন',
     ctaEn: 'Start Learning',
   },
@@ -361,8 +361,12 @@ const POPULAR_MOBILE = [
 // live book list gives the book count, but chapter/question totals
 // are not stored on the Book rows — these constants are the verified
 // figures, never the mockup's invented numbers.
+// VERIFIED_QUESTION_COUNT = 23,259 is effective AFTER the 25 Nov 2026
+// NCTB crons (15:00 2nd-paper + 15:30 MCQ rebuild): the 24 Nov backup
+// total is 23,346, and the crons remove 87 questions (39 exam-set +
+// 48 MCQ-set). Before those crons run, the live total is still 23,346.
 const VERIFIED_CHAPTER_COUNT = 2307;
-const VERIFIED_QUESTION_COUNT = 23346;
+const VERIFIED_QUESTION_COUNT = 23259;
 
 function bnNum(n: number): string {
   return n.toLocaleString('bn-BD');
@@ -530,7 +534,7 @@ export default function HomePage() {
     count: number | null;
     notReady: boolean;
   }[] = [
-    { to: '/class', icon: '📚', bn: 'Class 1–12', en: 'Class 1–12', descBn: 'সব শ্রেণি এক জায়গায়', descEn: 'All classes in one place', count: null, notReady: false },
+    { to: '/class', icon: '📚', bn: 'Class 9 – Honours', en: 'Class 9 – Honours', descBn: 'নবম থেকে অনার্স — সব শ্রেণি এক জায়গায়', descEn: 'Class 9 to Honours — all classes in one place', count: null, notReady: false },
     { to: '/library?type=Madrasa', icon: '🕌', bn: 'Madrasa', en: 'Madrasa', descBn: 'মাদ্রাসা শিক্ষার বই', descEn: 'Madrasa education books', count: countByType('Madrasa'), notReady: false },
     { to: '/library?type=Technical', icon: '⚙️', bn: 'Technical', en: 'Technical', descBn: 'কারিগরি শিক্ষার বই', descEn: 'Technical education books', count: countByType('Technical'), notReady: false },
     { to: '/class/honours-masters', icon: '🎓', bn: 'Honours', en: 'Honours', descBn: 'অনার্সের বই', descEn: 'Honours books', count: honoursCount, notReady: false },
@@ -576,7 +580,7 @@ export default function HomePage() {
         {/* Hero: light gradient + wordmark, NO photos (see file header). */}
         <section className="ev-home-hero" aria-label={t({ bn: 'Eduvelto', en: 'Eduvelto' })}>
           <p className="ev-home-hero-eyebrow">
-            <span>{t({ bn: 'সবার জন্য, সবসময়, সম্পূর্ণ শিক্ষা প্ল্যাটফর্ম', en: 'A complete education platform — for everyone, always' })}</span>
+            <span>{t({ bn: 'নবম শ্রেণি থেকে অনার্স — সম্পূর্ণ শিক্ষা প্ল্যাটফর্ম', en: 'A complete education platform — from Class 9 to Honours' })}</span>
           </p>
           <h1 className="ev-home-wordmark" aria-label="Eduvelto — Learn • Grow • Achieve">
             <span className="ev-home-wordmark-edu">Edu</span>
@@ -625,7 +629,7 @@ export default function HomePage() {
                 <span className="ev-rd-hub-icon" aria-hidden="true">
                   {h.icon}
                 </span>
-                <h2>{t({ bn: h.titleBn, en: h.titleEn })}</h2>
+                <h3>{t({ bn: h.titleBn, en: h.titleEn })}</h3>
                 <p>{t({ bn: h.descBn, en: h.descEn })}</p>
                 {h.noteBn ? <span className="ev-rd-hub-note">{t({ bn: h.noteBn, en: h.noteEn })}</span> : null}
                 <span className="ev-rd-hub-cta">{t({ bn: 'বিস্তারিত দেখুন →', en: 'See details →' })}</span>
@@ -694,7 +698,7 @@ export default function HomePage() {
                 <span className="ev-home-card-icon" aria-hidden="true">
                   {s.icon}
                 </span>
-                <h2>{t({ bn: s.titleBn, en: s.titleEn })}</h2>
+                <h3>{t({ bn: s.titleBn, en: s.titleEn })}</h3>
                 <p>{t({ bn: s.descBn, en: s.descEn })}</p>
                 <span className="ev-btn ev-home-card-cta">
                   {t({ bn: s.ctaBn, en: s.ctaEn })}

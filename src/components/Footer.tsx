@@ -132,7 +132,7 @@ export default function Footer() {
           </div>
         </div>
         <div>
-          <h2>{t({ bn: 'শিখুন', en: 'Learn' })}</h2>
+          <p className="ev-footer-heading">{t({ bn: 'শিখুন', en: 'Learn' })}</p>
           <Link to="/directory">{t({ bn: 'শিক্ষা নির্দেশিকা', en: 'Directory' })}</Link>
           <Link to="/library">{t({ bn: 'ডিজিটাল লাইব্রেরি', en: 'Library' })}</Link>
           <Link to="/admissions">{t({ bn: 'ভর্তি প্রস্তুতি', en: 'Admission Preparation' })}</Link>
@@ -141,7 +141,7 @@ export default function Footer() {
           <Link to="/progress">{t({ bn: 'আমার অগ্রগতি', en: 'My Progress' })}</Link>
         </div>
         <div>
-          <h2>{t({ bn: 'প্ল্যাটফর্ম', en: 'Platform' })}</h2>
+          <p className="ev-footer-heading">{t({ bn: 'প্ল্যাটফর্ম', en: 'Platform' })}</p>
           <Link to="/about">{t({ bn: 'আমাদের সম্পর্কে', en: 'About' })}</Link>
           <Link to="/why-eduvelto">{t({ bn: 'কেন Eduvelto', en: 'Why Eduvelto' })}</Link>
           <Link to="/privacy">{t({ bn: 'গোপনীয়তা নীতি', en: 'Privacy Policy' })}</Link>
@@ -158,7 +158,7 @@ export default function Footer() {
           <Link to="/ai-assistant">{t({ bn: 'AI সহায়ক', en: 'AI Assistant' })}</Link>
         </div>
         <div>
-          <h2>{t({ bn: 'আপডেট পান', en: 'Get Updates' })}</h2>
+          <p className="ev-footer-heading">{t({ bn: 'আপডেট পান', en: 'Get Updates' })}</p>
           <p style={{ margin: '0 0 4px', fontSize: 14, lineHeight: 1.7 }}>
             {t({ bn: 'নতুন সুযোগ ও আপডেটের খবর ইমেইলে পেতে সাবস্ক্রাইব করুন।', en: 'Subscribe to get news of new opportunities and updates by email.' })}
           </p>

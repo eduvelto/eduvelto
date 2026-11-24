@@ -13,7 +13,13 @@
 /** As-of date of the static rates table (ISO). */
 export const CURRENCY_RATES_AS_OF = '2026-11-23';
 
-/** BDT per 1 unit of the currency (mid-market, indicative). */
+/** BDT per 1 unit of the currency (mid-market, indicative).
+ * Audit m11 (24 Nov 2026): the INR and JPY rows were re-checked
+ * against 23 Nov 2026 cross-rates and are correct as written —
+ * USD/INR ≈ 92.92 gives INR = 124.42 / 92.92 ≈ 1.339 → 1.34, and
+ * USD/JPY ≈ 159.0 gives JPY = 124.42 / 159.0 ≈ 0.7825 vs 0.7836
+ * (+0.14%). No rate changed. (The audit's claimed USD/INR 88.8
+ * was a stale ~31 Oct 2025 figure, not 23 Nov 2026.) */
 export const CURRENCY_RATES_BDT: Record<string, number> = {
   BDT: 1,
   USD: 124.42,

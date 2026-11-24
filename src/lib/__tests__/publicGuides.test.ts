@@ -19,9 +19,9 @@ import { PUBLIC_GUIDES, publicGuideBySlug, publicGuideWordCount } from '../publi
 
 const EXPECTED_WORD_COUNTS: Record<string, number> = {
   'bcs-preparation-guide': 441,
-  'bank-job-preparation': 425,
+  'bank-job-preparation': 427,
   'primary-teacher-preparation': 409,
-  'ntrca-preparation': 435,
+  'ntrca-preparation': 451,
   'nu-admission-guide': 454,
   'english-grammar-basics': 425,
   'scholarship-guide': 423,
@@ -193,9 +193,10 @@ describe('public guides', () => {
     expect(text).not.toContain('২০২৬–২৭ শিক্ষাবর্ষের আবেদনের তারিখ');
   });
 
-  it('bank guide says plainly that negative marking is unverified', () => {
+  it('bank guide says plainly that negative marking −0.25 is verified for 2025–26 circulars', () => {
     const bank = publicGuideBySlug('bank-job-preparation')!;
-    expect(bank.bodyBn.join(' ')).toContain('নেগেটিভ মার্কিং (ভুল উত্তরে নম্বর কাটা) আছে কি না, তা এখনো যাচাই হয়নি');
+    expect(bank.bodyBn.join(' ')).toContain('নেগেটিভ মার্কিং −০.২৫ যাচাইকৃত — ২০২৫–২৬ সালের বিজ্ঞপ্তি অনুযায়ী');
+    expect(bank.bodyBn.join(' ')).not.toContain('এখনো যাচাই হয়নি');
   });
 
   it('scholarship guide claims only the verified Commonwealth deadline', () => {

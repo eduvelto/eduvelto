@@ -82,18 +82,41 @@ describe('askAssistant', () => {
     expect(r.kind).toBe('quota-exhausted');
   });
 
-  it('maps a 500 to error (caller falls back to the tools)', async () => {
+  it('maps a 500 to error with the server-error wording, never the internet wording (audit m02)', async () => {
     const fetchImpl = stubFetch({ status: 500, body: { error: 'provider-error' } });
     const r = await askAssistant(messages, { fetchImpl, proxyUrl: TEST_PROXY });
     expect(r.kind).toBe('error');
+    if (r.kind === 'error') {
+      expect(r.messageBn).toContain('AI সেবা এখন সাড়া দিচ্ছে না');
+      expect(r.messageBn).not.toContain('ইন্টারনেট সংযোগে');
+    }
   });
 
-  it('maps a network failure to error', async () => {
+  it('maps a network failure (TypeError) to error with the connection wording', async () => {
     const fetchImpl = vi.fn(async () => {
-      throw new Error('network down');
+      throw new TypeError('network down');
     }) as unknown as typeof fetch;
     const r = await askAssistant(messages, { fetchImpl, proxyUrl: TEST_PROXY });
     expect(r.kind).toBe('error');
+    if (r.kind === 'error') expect(r.messageBn).toContain('ইন্টারনেট সংযোগে');
+  });
+
+  it('maps an unreadable 200 body to the server-error wording, not the internet wording (audit m02)', async () => {
+    const fetchImpl = vi.fn(async () => {
+      return {
+        ok: true,
+        status: 200,
+        json: async () => {
+          throw new Error('bad json');
+        },
+      } as unknown as Response;
+    }) as unknown as typeof fetch;
+    const r = await askAssistant(messages, { fetchImpl, proxyUrl: TEST_PROXY });
+    expect(r.kind).toBe('error');
+    if (r.kind === 'error') {
+      expect(r.messageBn).toContain('AI সেবা এখন সাড়া দিচ্ছে না');
+      expect(r.messageBn).not.toContain('ইন্টারনেট সংযোগে');
+    }
   });
 
   it('rejects an empty reply body instead of showing it', async () => {

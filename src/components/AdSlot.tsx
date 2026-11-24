@@ -215,10 +215,14 @@ export default function AdSlot(props: {
     // empty box, no blank strip (owner brief 23 Nov 2026 21:52).
     // "unfill-optimized" is AdSense's own collapsed/optimized
     // rendering, NOT a miss, so the strict equality below leaves it
-    // alone on purpose. The observer is the only trigger: nothing is
-    // hidden before AdSense answers, so a slow fill is never mistaken
-    // for a miss. Auto ads' own units are Google-managed and collapse
+    // alone on purpose. Auto ads' own units are Google-managed and collapse
     // themselves.
+    // Audit m13 (24 Nov 2026): the observer was the only trigger,
+    // so a slot whose AdSense request never answered stayed an
+    // empty gap forever. After 5s with NO data-ad-status at all,
+    // treat it as unfilled and collapse (label included). A slow
+    // fill that answers within 5s is untouched; a fill that lands
+    // after the collapse never re-opens the slot.
     const check = () => {
       if (ins.getAttribute('data-ad-status') === 'unfilled') {
         setUnfilled(true);
@@ -231,7 +235,16 @@ export default function AdSlot(props: {
     check();
     const obs = new MutationObserver(check);
     obs.observe(ins, { attributes: true, attributeFilter: ['data-ad-status'] });
-    return () => obs.disconnect();
+    const timer = window.setTimeout(() => {
+      if (!ins.getAttribute('data-ad-status')) {
+        setUnfilled(true);
+        props.onUnfilled?.(true);
+      }
+    }, 5000);
+    return () => {
+      obs.disconnect();
+      window.clearTimeout(timer);
+    };
   }, [state, props.onUnfilled]);
 
   // Not live and not a preview host: render nothing at all.

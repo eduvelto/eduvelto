@@ -1,9 +1,10 @@
 // Eduvelto AI Life Assistant — hub page (/ai-assistant).
 //
 // What this page honestly is, today:
-//   - The chat box is NOT connected to any live AI yet. It says so
-//     plainly and stays disabled until a provider is connected
-//     (owner step: free Gemini key + free Cloudflare proxy).
+//   - The chat box IS connected to live AI when the build carries
+//     VITE_AI_PROXY_URL (getProviderStatus() returns 'ready' — the
+//     Worker at eduvelto-ai-proxy.eduvelto.workers.dev answers it).
+//     Without a proxy URL it says so plainly and stays disabled.
 //   - The 10 tools below work NOW, with zero AI, in the browser.
 //     Nothing is saved, nothing is sent anywhere, no login needed.
 //
