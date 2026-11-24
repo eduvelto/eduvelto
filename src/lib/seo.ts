@@ -2145,7 +2145,7 @@ export function resolveRouteSeo(pathname: string, lang: 'bn' | 'en' = 'bn'): Seo
  * feature/seo-50-100-pages, Gemini fold-in — soft-404 handling).
  *
  * The SPA catch-all renders HomePage for ANY unknown path with HTTP
- * 200 (WEB-001), so a junk URL like /jobs/primary or /class/class-9
+ * 200 (WEB-001), so a junk URL like /jobs/not-an-exam or /class/class-9
  * would otherwise keep the previous route's title/meta — or the
  * static home tags — and look indexable. This fallback gives such a
  * URL the HOME title/description/canonical (it IS rendering the

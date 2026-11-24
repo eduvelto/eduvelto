@@ -22,8 +22,8 @@
      and /jobs/cv are listed since 24 Nov 2026 (homepage redesign):
      Step 16 is on main now, so the three guides are real public
      pages. /install is listed too (real public page). /jobs/primary
-     is a soft 404 (catch-all renders HomePage) — NOT listed; needs a
-     firebase.json redirect (follow-up, WEB-001). EXTENDED 24 Nov 2026
+     301-redirects to /jobs/primary-teacher in firebase.json (WEB-001,
+     fixed 24 Nov 2026) — NOT listed as its own URL. EXTENDED 24 Nov 2026
      (AI Life Assistant rebase): 75 URLs — added /ai-assistant (real
      public page, 10 working tools). /search is NOT listed (noindex,
      robots.txt disallows it).

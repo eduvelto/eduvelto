@@ -11,7 +11,7 @@
 // Fallback (23 Nov 2026): when a path has no SEO entry and is NOT
 // /founder, RouteSeo applies resolveFallbackSeo — the HOME
 // title/description/canonical (the catch-all renders HomePage there)
-// plus robots noindex, nofollow — so junk URLs (/jobs/primary,
+// plus robots noindex, nofollow — so junk URLs (/jobs/not-an-exam,
 // unknown slugs) never look indexable. It never changes what the
 // user sees.
 //
