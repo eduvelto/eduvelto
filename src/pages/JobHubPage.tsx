@@ -35,6 +35,7 @@ import JobPracticeTab from '../components/JobPracticeTab';
 import JobMockTab from '../components/JobMockTab';
 import JobModeSwitch from '../components/JobModeSwitch';
 import JobGrade1120Hub from './JobGrade1120Hub';
+import SuggestionPdfCard from '../components/SuggestionPdfCard';
 import JobPreviousAnalysis from '../components/JobPreviousAnalysis';
 import LoginWall from '../components/LoginWall';
 import { useLanguage, T } from '../i18n/LanguageContext';
@@ -435,6 +436,10 @@ export default function JobHubPage() {
       <div style={{ margin: '0 0 20px' }}>
         <JobModeSwitch />
       </div>
+
+      {/* Phase 3 (25 Nov 2026): ৳149 suggestion-PDF card — UI-only
+          until verified content exists (sales gate in lib/orders.ts). */}
+      <SuggestionPdfCard examName={def.bn} />
 
       {activeTab === 'home' ? (
         def.slug === 'grade-11-20' ? (

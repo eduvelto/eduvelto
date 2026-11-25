@@ -182,6 +182,11 @@ export const BACKUP_COLLECTIONS: string[] = [
   // is lost. Public-read under the rules, so the client export
   // covers it.)
   'donations',
+  // Added 25 Nov 2026 (Phase 3: the orders collection must be in
+  // every backup, or the ৳149 suggestion-PDF orders are lost.
+  // Owner/admin-read under the rules, so the client export
+  // covers it.)
+  'orders',
   // Added 23 Nov 2026 (Step 15: the admin collections — reports,
   // corrections, the per-field audit trail and the approved-domain
   // list — must be in every backup, or the verification history

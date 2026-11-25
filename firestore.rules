@@ -2354,6 +2354,31 @@ service cloud.firestore {
       allow update, delete: if false;
     }
 
+    // ---------- orders (Phase 3, 25 Nov 2026 — ৳149 suggestion PDF)
+    // Signed-in ONLY: an order ties to a buyer account
+    // (userId == uid, caller must be active). Exactly
+    // {userId, productId, amount, trxId, status, createdAt}:
+    // productId is ALWAYS 'suggestion-pdf', amount is ALWAYS 149,
+    // status is ALWAYS 'pending' at create (only the owner changes
+    // it, off-client), TrxID 1–50 chars. NO public read — a buyer
+    // reads only their own orders; owner/admin read all (backup
+    // preflight included). Nobody may edit or delete through the
+    // client. SALES GATE: the UI keeps sales off until verified PDF
+    // content exists (see lib/orders.ts) — the rules only define
+    // what a valid order looks like when sales open.
+    match /orders/{orderId} {
+      allow read: if isAdmin() || (signedIn() && resource.data.userId == uid());
+      allow create: if signedIn() && callerActive()
+        && request.resource.data.userId == uid()
+        && onlyKeys(['userId', 'productId', 'amount', 'trxId', 'status', 'createdAt'])
+        && request.resource.data.productId == 'suggestion-pdf'
+        && request.resource.data.amount == 149
+        && request.resource.data.status == 'pending'
+        && isStr(request.resource.data.trxId, 50)
+        && request.resource.data.createdAt is timestamp;
+      allow update, delete: if false;
+    }
+
     // ---------- community posts / comments / questions / answers ----------
     // Create with reviewStatus forced to "Under Review". Authors edit only
     // their own while still unreviewed. Only Moderator/Admin publish/remove.

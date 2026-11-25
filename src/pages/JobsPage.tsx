@@ -14,6 +14,7 @@ import { Card, LinkButton, Reveal } from '../components/ui';
 import { CommonPrepCard, JobCategoryGroups, JobNonAffiliationNote } from '../components/JobCards';
 import JobModeSwitch from '../components/JobModeSwitch';
 import JobOnboarding from '../components/JobOnboarding';
+import SuggestionPdfCard from '../components/SuggestionPdfCard';
 import { useLanguage } from '../i18n/LanguageContext';
 
 export default function JobsPage() {
@@ -85,6 +86,10 @@ export default function JobsPage() {
           {t({ bn: 'আমার চাকরির ড্যাশবোর্ড →', en: 'My Job Dashboard →' })}
         </LinkButton>
       </p>
+
+      {/* Phase 3 (25 Nov 2026): ৳149 suggestion-PDF card — UI-only
+          until verified content exists (sales gate in lib/orders.ts). */}
+      <SuggestionPdfCard />
 
       {/* Step 5 — exam cards grouped by the 10 categories (Step 2
           §0.4/§2.1), not by tier. Same groups as the homepage Jobs

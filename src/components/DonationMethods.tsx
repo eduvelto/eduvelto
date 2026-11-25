@@ -38,9 +38,32 @@ async function copyText(text: string): Promise<boolean> {
   }
 }
 
-function MethodCard({ method }: { method: DonationMethod }) {
+/** Copy-to-clipboard button for a payment number (shared by the
+ *  Support page/modal and the suggestion-PDF order modal). */
+export function CopyNumberButton({ number }: { number: string }) {
   const { t } = useLanguage();
   const [copied, setCopied] = useState(false);
+  return (
+    <button
+      type="button"
+      className="ev-btn ev-btn-sm"
+      data-copy-number={number}
+      onClick={() => {
+        void copyText(number).then((ok) => {
+          setCopied(ok);
+          if (ok) window.setTimeout(() => setCopied(false), 2000);
+        });
+      }}
+    >
+      {copied
+        ? t({ bn: 'কপি হয়েছে ✓', en: 'Copied ✓' })
+        : t({ bn: 'নম্বর কপি করুন', en: 'Copy number' })}
+    </button>
+  );
+}
+
+function MethodCard({ method }: { method: DonationMethod }) {
+  const { t } = useLanguage();
   return (
     <div
       data-method={method.id}
@@ -63,21 +86,7 @@ function MethodCard({ method }: { method: DonationMethod }) {
           <p style={{ margin: '0 0 8px', fontSize: 18, fontWeight: 700, letterSpacing: 0.5 }}>
             {method.number}
           </p>
-          <button
-            type="button"
-            className="ev-btn ev-btn-sm"
-            data-copy-number={method.number}
-            onClick={() => {
-              void copyText(method.number as string).then((ok) => {
-                setCopied(ok);
-                if (ok) window.setTimeout(() => setCopied(false), 2000);
-              });
-            }}
-          >
-            {copied
-              ? t({ bn: 'কপি হয়েছে ✓', en: 'Copied ✓' })
-              : t({ bn: 'নম্বর কপি করুন', en: 'Copy number' })}
-          </button>
+          <CopyNumberButton number={method.number} />
         </>
       )}
     </div>
