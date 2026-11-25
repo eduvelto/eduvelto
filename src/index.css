@@ -3746,101 +3746,241 @@ html[data-theme="dark"] .ev-header {
 }
 
 /* ------------------------------------------------------------------ */
-/* Homepage hero-band greeting, v5 (owner revision 24 Nov 2026       */
-/* 08:31 — SUPERSEDES v4).                                             */
-/* The owner rejected the v4 pill ("sundor dekacce na", the border    */
-/* "sundor lagtece na") and asked for NO border and NO decoration:    */
-/* just the translation, stylishly written, in Bangla when Bangla     */
-/* is the setting and in English when English. So v5 is a clean       */
-/* FULL-WIDTH strip directly below the nav: no pill, no rounded       */
-/* corners, no border, no gradient, no glow, no sweep, NO animation,  */
-/* NO timer, NO cycling, NO Arabic phase. One static line, white      */
-/* stylish text on the app brand navy. The line changes instantly     */
-/* when the header language toggle changes (React re-render).         */
-/* Kept: home-only, NO Bismillah, dark mode correct.                  */
-/* Layout: the sentence WRAPS to a second line on narrow screens —
-   NEVER nowrap/ellipsis on this bar. The v5 one-line rule truncated
-   the sentence on the owner's phone (24 Nov 2026 09:35: "পড়ো তোমার
-   রবের নামে, যিনি সৃষ্টি করে..." — the 19px Bangla sentence measures
-   ~318px in the sandbox but renders wider on his phone's font, and
-   the one-line fit had zero margin; the English line at 14px measures
-   ~335px, wider than a 360px phone's 328px content width). A wrapped
-   second line is always better than a cut sentence. The attribution
-   rides inside the line: hidden on mobile, shown inline on desktop.  */
+/* Homepage announcement ticker (owner 25 Nov 2026 10:03).           */
+/* REPLACES the ayah bar (HeroGreeting, deleted the same day —        */
+/* owner: "takbe na"). Same spot: the FULL-WIDTH strip directly      */
+/* below the nav, no pill, no rounded corners, no border, no         */
+/* gradient, no glow. Navy band, white text (dark mode lifts the     */
+/* navy slightly, as the greeting did).                               */
+/* Content: OUR offers + the Surah Al-Alaq ayah 1 ONLY — never any   */
+/* other site's stats or claims. Respectful display: SLOW marquee    */
+/* (80s per copy), no flashing, pause on hover; the track moves      */
+/* with a rigid translateX only, so the Arabic letters/harakat are   */
+/* never distorted. Reduced motion: no animation — the items wrap    */
+/* statically. Items never truncate: white-space: nowrap per item,   */
+/* the track is 4 identical copies and the loop shifts by exactly    */
+/* one copy, so there is no gap at the seam.                          */
 /* ------------------------------------------------------------------ */
 
-.ev-hero-greeting {
-  --ev-greeting-bg: #0a1f44;
+.ev-announcement-ticker {
+  --ev-ticker-bg: #0a1f44;
   display: block;
   width: 100%;
   margin: 0;
-  padding: 8px 16px;
-  background: var(--ev-greeting-bg);
-  text-align: center;
-}
-.ev-hero-greeting-line {
-  margin: 0;
-  font-weight: 700;
+  padding: 8px 0;
+  overflow: hidden;
+  background: var(--ev-ticker-bg);
   color: #ffffff;
+}
+.ev-ticker-track {
+  display: flex;
+  width: max-content;
+  animation: ev-ticker-scroll 80s linear infinite;
+}
+.ev-announcement-ticker:hover .ev-ticker-track {
+  animation-play-state: paused;
+}
+@keyframes ev-ticker-scroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-25%); }
+}
+.ev-ticker-copy {
+  display: flex;
+  align-items: baseline;
+  flex-shrink: 0;
+}
+.ev-ticker-slot {
+  display: flex;
+  align-items: baseline;
+  flex-shrink: 0;
+}
+.ev-ticker-item {
+  padding: 0 10px;
+  font-weight: 700;
+  font-size: 15px;
   line-height: 1.5;
-  /* Free wrapping (see the header comment): no white-space: nowrap,
-     no overflow: hidden, no text-overflow: ellipsis — ever. */
-  overflow-wrap: break-word;
-  /* v6 phase switch (owner 24 Nov 11:31 — ar → en → bn cycle): the
-     line re-mounts on every phase change (key={phase}), so this
-     gentle fade-in replays on each switch. Opacity only — the
-     Arabic letters and harakat are never distorted. */
-  animation: ev-greeting-fade-in 0.6s ease-out;
+  color: #ffffff;
+  white-space: nowrap;
+  text-decoration: none;
 }
-@keyframes ev-greeting-fade-in {
-  from { opacity: 0; }
-  to { opacity: 1; }
+a.ev-ticker-item-offer:hover {
+  text-decoration: underline;
 }
-/* Arabic: Amiri/Naskh serif — the ayah in its own script, rtl.
-   22px mobile (v3). */
-.ev-hero-greeting-line-ar {
+/* Ayat item: Arabic in Amiri/Naskh serif, then the translation and
+   attribution in the page language. The Arabic span is its own
+   rtl run — never reshaped by the surrounding LTR flow. */
+.ev-ticker-ayat-ar {
   font-family: 'Amiri', 'Traditional Arabic', 'Noto Naskh Arabic', serif;
-  font-size: 22px;
-}
-/* English: Poppins — clear, stylish, mobile-friendly. 14px mobile. */
-.ev-hero-greeting-line-en {
-  font-family: 'Poppins', 'Hind Siliguri', system-ui, sans-serif;
-  font-size: 14px;
-  letter-spacing: 0;
-}
-/* Bangla: Noto Serif Bengali — stylish serif, clearly readable.
-   19px mobile. */
-.ev-hero-greeting-line-bn {
-  font-family: 'Noto Serif Bengali', 'Hind Siliguri', system-ui, serif;
   font-size: 19px;
-  font-weight: 600;
+  padding: 0 8px;
 }
-/* Attribution rides inside the line. Hidden on mobile: the sentence
-   alone can fill (or wrap on) a narrow line. Shown inline on desktop,
-   where it fits. */
-.ev-hero-greeting-attr {
-  display: none;
+.ev-ticker-ayat-text {
+  font-family: 'Noto Serif Bengali', 'Hind Siliguri', system-ui, serif;
+  font-weight: 600;
+  padding: 0 4px;
+}
+.ev-ticker-ayat-attr {
   font-family: 'Noto Serif Bengali', 'Hind Siliguri', system-ui, serif;
   font-size: 13px;
   font-weight: 600;
   color: rgba(255, 255, 255, 0.85);
+  padding: 0 4px;
+}
+.ev-ticker-sep {
+  color: rgba(255, 255, 255, 0.55);
+  padding: 0 6px;
 }
 /* Dark mode: lift the navy slightly so the strip still reads as a
    distinct band on the dark page (--bg #0f1b24). */
-html[data-theme="dark"] .ev-hero-greeting {
-  --ev-greeting-bg: #0d2650;
+html[data-theme="dark"] .ev-announcement-ticker {
+  --ev-ticker-bg: #0d2650;
 }
 @media (min-width: 641px) {
-  .ev-hero-greeting { padding: 9px 16px; }
-  .ev-hero-greeting-line-ar { font-size: 24px; }
-  .ev-hero-greeting-line-en { font-size: 20px; }
-  .ev-hero-greeting-line-bn { font-size: 20px; }
-  .ev-hero-greeting-attr { display: inline; font-size: 15px; }
+  .ev-announcement-ticker { padding: 9px 0; }
+  .ev-ticker-item { font-size: 16px; }
+  .ev-ticker-ayat-ar { font-size: 21px; }
+  .ev-ticker-ayat-attr { font-size: 14px; }
 }
-/* Reduced motion: no fade, no cycle (the hook freezes the phase on
-   Arabic) — the static ayah shows instantly. */
+/* Reduced motion: no scrolling at all — the items wrap statically
+   in a centered row (the track becomes a normal wrapping flex row). */
 @media (prefers-reduced-motion: reduce) {
-  .ev-hero-greeting-line {
+  .ev-ticker-track {
     animation: none;
+    width: 100%;
+    flex-wrap: wrap;
+    justify-content: center;
   }
+  .ev-ticker-copy:not(:first-child) {
+    display: none;
+  }
+}
+
+
+/* ------------------------------------------------------------------ */
+/* Question Maker landing page (A-Z design model, 25 Nov 2026 10:14 — */
+/* INSPIRATION only, never their text/branding/images/stats): warm    */
+/* cream hero, dark-green primary, gold highlight, two-column hero    */
+/* with a paper mockup. Scoped to /question-maker via .ev-qm-* so    */
+/* the rest of the site is untouched.                                  */
+/* ------------------------------------------------------------------ */
+.ev-qm-hero {
+  background: #fdf6e9;
+  border-radius: 16px;
+  padding: 24px 20px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+  margin-bottom: 16px;
+  border: 1px solid #f0e3c8;
+}
+@media (min-width: 768px) {
+  .ev-qm-hero {
+    grid-template-columns: 1.1fr 0.9fr;
+    align-items: center;
+    padding: 28px;
+  }
+}
+.ev-qm-eyebrow {
+  margin: 0 0 8px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: #14532d;
+  text-transform: uppercase;
+}
+.ev-qm-hero-copy {
+  font-size: 16px;
+  line-height: 1.7;
+  margin: 0 0 16px;
+}
+.ev-qm-hero-cta {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin: 0 0 12px;
+}
+.ev-qm-hero-cta .ev-btn-primary {
+  background: #14532d;
+  border-color: #14532d;
+  color: #fff;
+}
+.ev-qm-hero-cta .ev-btn-primary:hover {
+  background: #166534;
+}
+.ev-qm-gold {
+  color: #b45309;
+  font-weight: 700;
+}
+/* Paper mockup: a mini question paper (real verified sample
+   question), slightly tilted, with the free-PDF watermark hint. */
+.ev-qm-mockup {
+  position: relative;
+  background: var(--card);
+  border: 1px solid #e5e0d5;
+  border-radius: 10px;
+  box-shadow: 0 10px 24px rgba(20, 83, 45, 0.12);
+  padding: 18px 18px 14px;
+  transform: rotate(-1.2deg);
+  overflow: hidden;
+  font-size: 13px;
+  line-height: 1.6;
+}
+.ev-qm-mockup-title {
+  margin: 0 0 2px;
+  font-size: 15px;
+  font-weight: 700;
+  text-align: center;
+}
+.ev-qm-mockup-meta {
+  margin: 0 0 8px;
+  font-size: 12px;
+  color: #666;
+  text-align: center;
+}
+.ev-qm-mockup-rule {
+  border: none;
+  border-top: 1px solid #ddd;
+  margin: 0 0 10px;
+}
+.ev-qm-mockup-q {
+  margin: 0 0 4px;
+  font-weight: 600;
+}
+.ev-qm-mockup-o {
+  margin: 0 0 8px;
+  color: #444;
+  font-size: 12px;
+}
+.ev-qm-mockup-foot {
+  margin: 10px 0 0;
+  font-size: 11px;
+  font-weight: 700;
+  text-align: center;
+}
+.ev-qm-mockup-wm {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  font-size: 28px;
+  font-weight: 700;
+  color: rgba(0, 0, 0, 0.07);
+  transform: rotate(-28deg);
+  white-space: nowrap;
+}
+html[data-theme="dark"] .ev-qm-hero {
+  background: #1d2b1f;
+  border-color: #2c4632;
+}
+html[data-theme="dark"] .ev-qm-mockup {
+  border-color: #2a3438;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.4);
+}
+html[data-theme="dark"] .ev-qm-mockup-o {
+  color: #bbb;
+}
+html[data-theme="dark"] .ev-qm-mockup-meta {
+  color: #999;
 }

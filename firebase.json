@@ -82,6 +82,11 @@
         "source": "/jobs/primary/",
         "destination": "/jobs/primary-teacher",
         "type": 301
+      },
+      {
+        "source": "/whatsapp",
+        "destination": "https://wa.me/8801975225751",
+        "type": 302
       }
     ],
     "rewrites": [

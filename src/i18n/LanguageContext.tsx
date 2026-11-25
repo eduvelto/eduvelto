@@ -27,7 +27,7 @@
 //   book original names, author names and user-written content are
 //   NEVER translated. This context only switches the UI chrome.
 //   The Quran ayah's Arabic original never changes; its translation
-//   follows the setting (see HeroGreeting).
+//   follows the setting (see AnnouncementTicker).
 
 import { createContext, useCallback, useContext, useEffect, useState, type ReactNode } from 'react';
 import type { Lang } from './strings';

@@ -73,6 +73,26 @@ const AdminJobExamsPage = lazy(() => import('./pages/AdminJobExamsPage'));
 /* AdSense Part 1 (public content, F1 fix): static BCS English practice
    + sample lessons, visible WITHOUT login. No Firestore reads. */
 const PublicBcsEnglishPage = lazy(() => import('./pages/PublicBcsEnglishPage'));
+/* Question Paper Generator (Milestone 2.5, MVP 25 Nov 2026): routing-
+   agnostic page. Mounted at /question-paper-generator for now; the
+   parallel SSG branch restructures public routes to /:lang — on merge,
+   SSG lands first, then this route moves under the /:lang pattern. */
+const QuestionPaperGeneratorPage = lazy(() => import('./pages/QuestionPaperGeneratorPage'));
+/* Question Maker landing page (public SEO, Milestone 2.5): routing-
+   agnostic mount at /question-maker for now; the SSG branch moves
+   public routes under /:lang — SSG merges first, then this route
+   moves under that pattern. */
+const QuestionMakerLandingPage = lazy(() => import('./pages/QuestionMakerLandingPage'));
+/* Pricing page (public, PROPOSED ONLY — Turn 32) + OMR evaluator
+   (Turn 32): routing-agnostic mounts at /pricing and /omr-evaluator
+   for now; the SSG branch moves public routes under /:lang — SSG
+   merges first, then these routes move under that pattern. */
+const PricingPage = lazy(() => import('./pages/PricingPage'));
+const OmrEvaluatorPage = lazy(() => import('./pages/OmrEvaluatorPage'));
+/* Branded WhatsApp redirect (owner 25 Nov 10:19): eduvelto.com/whatsapp
+   hides the number; production is served by the firebase.json 302, this
+   route is the dev/preview fallback. */
+const WhatsappRedirectPage = lazy(() => import('./pages/WhatsappRedirectPage'));
 const PublicLessonPage = lazy(() => import('./pages/PublicLessonPage'));
 const LearnHubPage = lazy(() => import('./pages/LearnHubPage'));
 /* Brand-SEO wave 1 (24 Nov 2026): 10 static public guides + 4 trust
@@ -348,8 +368,9 @@ export default function App() {
           those panels render their own shell. */}
       {/* Top sticky greeting bar REMOVED (owner revision 24 Nov 2026):
           the Bismillah/ayah appeared in two places on the homepage.
-          The single greeting now lives only in the hero band below
-          the navigation (components/HeroGreeting.tsx). */}
+          The ayah bar itself was REMOVED 25 Nov 2026 (owner: "takbe
+          na") and replaced by the announcement ticker in the hero band
+          below the navigation (components/AnnouncementTicker.tsx). */}
       {isAdminShell ? null : <HeaderNav />}
       {/* Route-level SEO (22 Nov 2026, feature/seo-visibility): title,
           meta description, Open Graph, canonical + JSON-LD per public
@@ -482,6 +503,24 @@ export default function App() {
             unknown values show an honest not-found, never the raw slug. */}
         <Route path="/jobs/bcs/practice/english" element={<PublicBcsEnglishPage />} />
         <Route path="/jobs/bcs/practice/english/:category" element={<PublicBcsEnglishPage />} />
+        {/* Question Paper Generator (Milestone 2.5 MVP): routing-agnostic
+            mount at /question-paper-generator for now. Merge flag: the
+            SSG branch moves public routes under /:lang — SSG merges
+            first, then this route is rebased under that pattern. */}
+        <Route path="/question-paper-generator" element={<QuestionPaperGeneratorPage />} />
+        {/* Question Maker landing page (public SEO, Milestone 2.5):
+            routing-agnostic mount at /question-maker for now; merge
+            flag: SSG first, then rebase under the /:lang pattern. */}
+        <Route path="/question-maker" element={<QuestionMakerLandingPage />} />
+        {/* Pricing (public, proposed only) + OMR evaluator (Turn 32):
+            routing-agnostic mounts for now; merge flag: SSG first,
+            then rebase under the /:lang pattern. */}
+        <Route path="/pricing" element={<PricingPage />} />
+        <Route path="/omr-evaluator" element={<OmrEvaluatorPage />} />
+        {/* Branded WhatsApp redirect (owner 25 Nov 10:19): visitors see
+            only eduvelto.com/whatsapp; production redirect lives in
+            firebase.json (302), this route is the dev/preview fallback. */}
+        <Route path="/whatsapp" element={<WhatsappRedirectPage />} />
         <Route path="/learn" element={<LearnHubPage />} />
         <Route path="/learn/bcs-english-tense" element={<PublicLessonPage lesson="tense" />} />
         <Route path="/learn/bcs-english-preposition" element={<PublicLessonPage lesson="preposition" />} />
