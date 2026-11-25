@@ -173,8 +173,21 @@ export function readInitialData(): InitialData | null {
   if (typeof window === 'undefined') return null;
   consumed = true;
   let raw: unknown;
-  if (window.__INITIAL_DATA__ !== undefined) {
-    raw = window.__INITIAL_DATA__;
+  // WINDOW BRANCH — read before changing this (probe-found bug,
+  // 25 Nov 2026): an element with id="__INITIAL_DATA__" ALSO appears
+  // as window.__INITIAL_DATA__ (the HTML "named access on the window
+  // object" rule) — the <script> ELEMENT itself, not data. A bare
+  // `!== undefined` check is therefore ALWAYS true while the block
+  // is in the DOM, so the reader took the element as the payload,
+  // failed validation, removed the block, and every page fell back
+  // to the live fetch (which then failed offline). The window value
+  // is only trusted when it is a structurally valid payload; anything
+  // else (the named element, a malformed assignment) falls through
+  // to the DOM block below. A real assignment (own property, valid
+  // shape) still wins over the block.
+  const winVal = window.__INITIAL_DATA__;
+  if (isInitialData(winVal)) {
+    raw = winVal;
   } else if (typeof document !== 'undefined') {
     const el = document.getElementById('__INITIAL_DATA__');
     const text = el?.textContent;

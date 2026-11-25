@@ -25,6 +25,14 @@ export default function BookPage() {
   const [book, setBook] = useState<Book | null>(null);
   const [chapters, setChapters] = useState<Chapter[] | null>(null);
   const [error, setError] = useState('');
+  // __INITIAL_DATA__ (Phase 2b): captured ONCE at first render, like
+  // the hubs do — the reader is consume-once, so a later effect
+  // re-run (auth settling) must reuse the captured payload instead of
+  // falling through to the live fetch and wiping a good render with
+  // an error. The payload's chapters are the PUBLIC preview list, so
+  // no auth decision is needed to take it; the signed-in full-list
+  // fetch still happens in load() below.
+  const [initialBook] = useState(() => (bookId ? takeBookInitialData(bookId) : null));
 
   function load() {
     if (!bookId || authLoading) return;
@@ -35,8 +43,10 @@ export default function BookPage() {
     // carries the book + its public preview chapters — zero
     // Firestore reads. Signed-in users still fetch the FULL chapter
     // list (login-gated content the payload must never carry);
-    // guests read nothing at all.
-    const initial = takeBookInitialData(bookId);
+    // guests read nothing at all. The payload was captured at first
+    // render (see above), so a re-run reuses it instead of falling
+    // back to the live fetch.
+    const initial = initialBook;
     if (initial) {
       setBook(initial.book);
       setChapters(initial.chapters);
@@ -64,7 +74,7 @@ export default function BookPage() {
       });
   }
 
-  useEffect(load, [bookId, authLoading, user]);
+  useEffect(load, [bookId, authLoading, user, initialBook]);
 
   return (
     <PageShell titleBn={book ? book.title : 'বই'} titleEn={book ? book.title : 'Book'}>

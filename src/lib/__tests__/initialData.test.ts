@@ -109,6 +109,39 @@ describe('readInitialData', () => {
     expect(data?.kind).toBe('book');
   });
 
+  it('ignores a non-payload window.__INITIAL_DATA__ and reads the DOM block (named-property trap)', async () => {
+    // PROBE-FOUND BUG (25 Nov 2026): in a real browser, an element
+    // with id="__INITIAL_DATA__" ALSO appears as window.__INITIAL_DATA__
+    // (the HTML "named access on the window object" rule) — the
+    // <script> element itself, not data. A bare `!== undefined` check
+    // took the element as the payload, failed validation, and destroyed
+    // the block unread — every page fell back to the live fetch. The
+    // reader must only trust a structurally valid window value; a
+    // non-payload window value must fall through to the DOM block.
+    const fakeScriptElement = { tagName: 'SCRIPT', id: '__INITIAL_DATA__' };
+    setupDom({
+      pathname: '/bn/books/hons-211001',
+      jsonText: JSON.stringify(BOOK_PAYLOAD),
+      windowPayload: fakeScriptElement,
+    });
+    const mod = await loadReader();
+    const data = mod.readInitialData();
+    expect(data?.kind).toBe('book');
+    if (data?.kind === 'book') expect(data.book.id).toBe('hons-211001');
+  });
+
+  it('a valid window payload wins over the DOM block', async () => {
+    setupDom({
+      pathname: '/bn/books/hons-211001',
+      jsonText: JSON.stringify({ ...BOOK_PAYLOAD, book: { ...BOOK_PAYLOAD.book, id: 'hons-211003' } }),
+      windowPayload: BOOK_PAYLOAD,
+    });
+    const mod = await loadReader();
+    const data = mod.readInitialData();
+    if (data?.kind === 'book') expect(data.book.id).toBe('hons-211001');
+    else throw new Error('expected a book payload');
+  });
+
   it('returns null when the path does not match (stale payload)', async () => {
     setupDom({ pathname: '/bn/books/hons-211003', jsonText: JSON.stringify(BOOK_PAYLOAD) });
     const mod = await loadReader();
