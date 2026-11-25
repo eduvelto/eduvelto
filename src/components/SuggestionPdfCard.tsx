@@ -176,9 +176,15 @@ export default function SuggestionPdfCard({ examName }: { examName?: string }) {
   const { t } = useLanguage();
   const [modalOpen, setModalOpen] = useState(false);
   const salesOn = SUGGESTION_PDF_SALES_ENABLED;
+  // NOTE (25 Nov 2026): the data-suggestion-pdf-card marker sits on
+  // this plain div, NOT on <Card> — Card (ui.tsx) does not forward
+  // unknown props to the DOM, so a marker on <Card> never reaches
+  // the rendered page (caught by the Phase 3 rendered probe:
+  // the card rendered but the probe's [data-suggestion-pdf-card]
+  // locator found 0).
   return (
+    <div data-suggestion-pdf-card>
     <Card
-      data-suggestion-pdf-card
       style={{ marginBottom: 20, borderTop: '4px solid #F1B308' }}
     >
       <p style={{ margin: '0 0 4px', fontWeight: 700, fontSize: 17 }}>
@@ -210,5 +216,6 @@ export default function SuggestionPdfCard({ examName }: { examName?: string }) {
       </Button>
       {modalOpen && salesOn ? <OrderModal onClose={() => setModalOpen(false)} /> : null}
     </Card>
+    </div>
   );
 }

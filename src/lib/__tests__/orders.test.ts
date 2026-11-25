@@ -40,6 +40,16 @@ describe('suggestion-PDF sales gate', () => {
     // The card never claims a PDF is ready to download.
     expect(src).not.toContain('ডাউনলোড করুন');
   });
+
+  it('the probe marker is on a plain DOM div, not on <Card>', () => {
+    // Regression guard (25 Nov 2026): Card (ui.tsx) does not forward
+    // unknown props, so data-suggestion-pdf-card on <Card> never
+    // reaches the rendered page — the rendered probe found 0.
+    const src = readFileSync(resolve(__dirname, '../../components/SuggestionPdfCard.tsx'), 'utf8');
+    expect(src).toContain('<div data-suggestion-pdf-card>');
+    expect(src).not.toContain('<Card\n      data-suggestion-pdf-card');
+    expect(src).not.toContain('<Card data-suggestion-pdf-card');
+  });
 });
 
 describe('validateOrderInput (mirrors the firestore.rules orders create rule)', () => {
