@@ -26,6 +26,23 @@ if (!isNativeApp()) {
     .catch(() => undefined);
 }
 
+// hydrateRoot evaluation (Phase 2b, 25 Nov 2026 — DECIDED: keep
+// createRoot). With __INITIAL_DATA__ present the payload-fed first
+// render could in principle hydrate the prerendered HTML — but the
+// prerendered #root contains two things the client tree does not
+// produce: (a) the book-summary <section data-prerender> that
+// scripts/prerender.mjs prepends into #root, and (b) SSR loading /
+// skeleton states (renderToString runs no effects, so data pages
+// SSR-render their loading state) while the payload-fed client
+// renders real content immediately. hydrateRoot requires the client
+// render to match the server HTML exactly; both (a) and (b) would
+// mismatch, so React would discard the SSR DOM and client-render
+// anyway (losing the benefit) with hydration warnings. Adopting
+// hydrateRoot needs the summary block moved out of #root AND full
+// data-awaiting SSR — both out of scope for this task. The
+// __INITIAL_DATA__ benefit (zero reads, instant content after JS
+// loads) is delivered without hydration, and the prerendered
+// summary stays visible before JS loads.
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     {/* HelmetProvider (Phase 1, 25 Nov 2026): <SeoHead /> renders

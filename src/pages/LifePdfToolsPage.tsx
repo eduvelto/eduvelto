@@ -1,5 +1,4 @@
 import { useRef, useState } from 'react';
-import { jsPDF } from 'jspdf';
 import { PDFDocument } from 'pdf-lib';
 import { useLanguage } from '../i18n/LanguageContext';
 import { PageShell } from '../components/PageShell';
@@ -17,6 +16,18 @@ import { downloadBlobInApp } from '../lib/nativeFileDownload';
 // in as real, selectable PDF text. The page says this plainly.
 
 const BENGALI_RE = /[\u0980-\u09FF]/;
+
+// jspdf is loaded on demand (Phase 2b, Spark Optimization): the PDF
+// library is fetched only when the user actually downloads a PDF —
+// never on page visit. The page itself is already route-lazy
+// (App.tsx), so jspdf was never in the entry chunk; this removes it
+// from the page chunk too. (pdf-lib stays statically imported: the
+// merge tool needs it on the same click, and splitting it is a
+// separate, smaller win — noted as a follow-up, not done here.)
+async function loadJsPdf() {
+  const { jsPDF } = await import('jspdf');
+  return jsPDF;
+}
 
 // IN-APP (audit, 24 Nov 2026): a stock Android WebView does not
 // download blob: URLs, so the anchor below silently does nothing
@@ -49,7 +60,8 @@ function formatFileSize(bytes: number): string {
 }
 
 /** Latin-only text → real selectable PDF text, paginated on A4. */
-function textToPdfLatin(text: string, filename: string) {
+async function textToPdfLatin(text: string, filename: string) {
+  const jsPDF = await loadJsPdf();
   const doc = new jsPDF({ unit: 'mm', format: 'a4' });
   doc.setFont('helvetica', 'normal');
   doc.setFontSize(12);
@@ -108,6 +120,7 @@ export function wrapLines(ctx: CanvasRenderingContext2D, text: string, maxWidth:
 
 /** Text containing Bengali → canvas-rendered pages (correct shaping). */
 async function textToPdfBengali(text: string, filename: string) {
+  const jsPDF = await loadJsPdf();
   try {
     await document.fonts.load('22px "Hind Siliguri"');
     await document.fonts.ready;
@@ -175,7 +188,7 @@ export default function LifePdfToolsPage() {
       if (hasBengali) {
         await textToPdfBengali(text, filename);
       } else {
-        textToPdfLatin(text, filename);
+        await textToPdfLatin(text, filename);
       }
       setTextMsg(t({ bn: `PDF ডাউনলোড হয়েছে: ${filename}`, en: `PDF downloaded: ${filename}` }));
     } catch {
