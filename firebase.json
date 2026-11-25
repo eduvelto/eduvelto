@@ -256,6 +256,31 @@
         "type": 301
       },
       {
+        "source": "/question-maker",
+        "destination": "/bn/question-maker",
+        "type": 301
+      },
+      {
+        "source": "/question-paper-generator",
+        "destination": "/bn/question-paper-generator",
+        "type": 301
+      },
+      {
+        "source": "/pricing",
+        "destination": "/bn/pricing",
+        "type": 301
+      },
+      {
+        "source": "/omr-evaluator",
+        "destination": "/bn/omr-evaluator",
+        "type": 301
+      },
+      {
+        "source": "/custom-paper",
+        "destination": "/bn/custom-paper",
+        "type": 301
+      },
+      {
         "source": "/class/:rest*",
         "destination": "/bn/class/:rest*",
         "type": 301

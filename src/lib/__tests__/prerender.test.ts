@@ -49,6 +49,9 @@ describe('PRERENDER_STATIC_PATHS', () => {
     const sitemapPaths = readSitemapPaths();
     expect(sitemapPaths.length).toBe(143); // 137 + 6 (Day 1 audit fix, 26 Nov 2026)
     for (const p of sitemapPaths) {
+      // Every committed-sitemap URL is a prerendered static path
+      // (login-gated /exam + /progress stay OUT of the sitemap —
+      // Day 1 audit fix, 26 Nov 2026).
       expect(PRERENDER_STATIC_PATHS, `sitemap path missing from prerender list: ${p}`).toContain(p);
     }
     expect(PRERENDER_STATIC_PATHS).toContain('/books');
@@ -256,6 +259,16 @@ describe('buildSitemapXml / buildRobotsTxt', () => {
     expect(robots).toContain('Disallow: /login');
     expect(robots).toContain('Sitemap: https://eduvelto.com/sitemap.xml');
     expect(robots).not.toContain('Disallow: /books/');
+  });
+
+  it('disallows the login-gated /exam + /progress + /routine (not in the sitemap — Day 1 audit fix, 26 Nov 2026)', () => {
+    // /exam + /progress are login-gated and stay OUT of the sitemap
+    // (duplicate routes render them under /:lang too — no redirect),
+    // so robots.txt disallows them, as it does /routine.
+    const robots = buildRobotsTxt();
+    expect(robots).toContain('Disallow: /exam');
+    expect(robots).toContain('Disallow: /progress');
+    expect(robots).toContain('Disallow: /routine');
   });
 });
 

@@ -86,6 +86,17 @@ describe('legacyRedirectTarget', () => {
     expect(legacyRedirectTarget('/jobs/bcs', 'en')).toBe('/en/jobs/bcs');
   });
 
+  it('redirects the bare generator/pricing/OMR URLs to /bn/... (23:00 check, 25 Nov 2026)', () => {
+    // The bare URLs are linked from the homepage; firebase.json
+    // 301s them server-side and this is the client-side half of the
+    // same contract (see the firebaseHosting agreement test).
+    expect(legacyRedirectTarget('/question-maker')).toBe('/bn/question-maker');
+    expect(legacyRedirectTarget('/question-paper-generator')).toBe('/bn/question-paper-generator');
+    expect(legacyRedirectTarget('/pricing')).toBe('/bn/pricing');
+    expect(legacyRedirectTarget('/omr-evaluator')).toBe('/bn/omr-evaluator');
+    expect(legacyRedirectTarget('/custom-paper')).toBe('/bn/custom-paper');
+  });
+
   it('maps the old book hub /library to the canonical /books', () => {
     expect(legacyRedirectTarget('/library')).toBe('/bn/books');
     expect(legacyRedirectTarget('/library/hons-211001')).toBe('/bn/books/hons-211001');

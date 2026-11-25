@@ -4,6 +4,7 @@ import {
   ADSENSE_CLIENT_ID,
   AD_SLOT_IDS,
   PERSONALISED_ADS,
+  adSlotHasWidth,
   isBannerPlacement,
   type AdPlacement,
 } from '../lib/ads';
@@ -191,18 +192,39 @@ export default function AdSlot(props: {
   const state = getAdRenderState(placement);
 
   useEffect(() => {
-    if (state !== 'ad' || pushedRef.current) return;
-    loadAdsenseScript(ADSENSE_CLIENT_ID);
-    pushedRef.current = true;
-    try {
-      // Non-personalised ads requested (child safety). PERSONALISED_ADS is
-      // always false, so this always requests non-personalised ads.
-      (window.adsbygoogle = window.adsbygoogle || []).push(
-        PERSONALISED_ADS ? {} : { google_non_personalized_ads: 1 },
-      );
-    } catch {
-      // AdSense not ready yet; the unit stays empty rather than faking content.
-    }
+    if (state !== 'ad') return;
+    const ins = insRef.current;
+    if (!ins) return;
+    const push = () => {
+      if (pushedRef.current) return;
+      // 23:00 check (25 Nov 2026): adsbygoogle.push() throws an
+      // UNCAUGHT TagError ("No slot size for availableWidth=0")
+      // when the slot has zero width — the class dashboard mounts
+      // BOTH a mobile slot (display:none above 768px) and a sidebar
+      // slot (display:none below 1280px), so on every viewport one
+      // of them is hidden and its push throws. The try/catch below
+      // cannot catch it: the library throws asynchronously. Never
+      // push into a zero-width slot; wait until it gains width.
+      if (!adSlotHasWidth(ins)) return;
+      pushedRef.current = true;
+      loadAdsenseScript(ADSENSE_CLIENT_ID);
+      try {
+        // Non-personalised ads requested (child safety). PERSONALISED_ADS is
+        // always false, so this always requests non-personalised ads.
+        (window.adsbygoogle = window.adsbygoogle || []).push(
+          PERSONALISED_ADS ? {} : { google_non_personalized_ads: 1 },
+        );
+      } catch {
+        // AdSense not ready yet; the unit stays empty rather than faking content.
+      }
+    };
+    push();
+    if (pushedRef.current) return undefined;
+    // Hidden right now (zero width) — push the moment it gains width
+    // (e.g. the viewport crosses the 768px / 1280px breakpoint).
+    const ro = new ResizeObserver(() => push());
+    ro.observe(ins);
+    return () => ro.disconnect();
   }, [state]);
 
   useEffect(() => {
@@ -236,7 +258,12 @@ export default function AdSlot(props: {
     const obs = new MutationObserver(check);
     obs.observe(ins, { attributes: true, attributeFilter: ['data-ad-status'] });
     const timer = window.setTimeout(() => {
-      if (!ins.getAttribute('data-ad-status')) {
+      // A slot that is still zero-width is HIDDEN (responsive rule),
+      // not unfilled — leave it mounted so the push effect above can
+      // fire when it gains width; collapsing it would unmount the
+      // <ins> and the ResizeObserver with it (23:00 check, 25 Nov
+      // 2026 — the hidden mobile/sidebar slot must survive).
+      if (!ins.getAttribute('data-ad-status') && adSlotHasWidth(ins)) {
         setUnfilled(true);
         props.onUnfilled?.(true);
       }

@@ -101,4 +101,19 @@ describe('<SeoHead />', () => {
     });
     expect(noindex.meta).toContain('name="robots" content="noindex, nofollow"');
   });
+
+  it('omits hreflang for a bare canonical (/exam, /progress — app routes outside /:lang)', () => {
+    // 23:00 check (25 Nov 2026): /bn/exam + /en/exam redirect to
+    // the bare /exam, so hreflang alternates would point Google at
+    // redirects. A bare canonical carries the canonical link only.
+    const out = renderSeoHead({
+      title: 'পরীক্ষা — MCQ পরীক্ষা ও ফলাফল | Eduvelto',
+      description: 'পরীক্ষা — Eduvelto-তে আপনার MCQ পরীক্ষা ও কুইজ দিন।',
+      canonical: 'https://eduvelto.com/exam',
+      lang: 'bn',
+      jsonLd: [],
+    });
+    expect(out.link).toContain('rel="canonical" href="https://eduvelto.com/exam"');
+    expect(out.link).not.toContain('hrefLang=');
+  });
 });

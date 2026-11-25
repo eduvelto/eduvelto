@@ -292,7 +292,13 @@ describe('resolveRouteSeo — public routes', () => {
     for (const path of SITEMAP_URLS) {
       const seo = resolveRouteSeo(path);
       expect(seo, `no SEO for sitemap URL ${path}`).not.toBeNull();
-      expect(seo!.canonical).toBe(`${SITE_URL}/bn${path === '/' ? '' : path}`);
+      // Bare-canonical app routes (23:00 check, 25 Nov 2026):
+      // /exam + /progress canonicalise to the bare URL, not /bn/... .
+      const expectedCanonical =
+        path === '/exam' || path === '/progress'
+          ? `${SITE_URL}${path}`
+          : `${SITE_URL}/bn${path === '/' ? '' : path}`;
+      expect(seo!.canonical).toBe(expectedCanonical);
       expect(seo!.title.length).toBeGreaterThan(10);
       expect(seo!.description.length).toBeGreaterThan(40);
       expect(seo!.ogImage).toBe(
@@ -300,6 +306,23 @@ describe('resolveRouteSeo — public routes', () => {
         // approved founder photo (was hardcoded in useSeo).
         path === '/founder' ? `${SITE_URL}/founder-photo.jpg` : `${SITE_URL}/og-image.jpg`,
       );
+    }
+  });
+
+  it('bare-canonical app routes: /exam + /progress canonicalise bare, with no BreadcrumbList', () => {
+    // 23:00 check (25 Nov 2026): /bn/exam + /bn/progress redirect
+    // to the bare routes, so the bare URL is the canonical — never
+    // /bn/... — and there is no BreadcrumbList (its crumb item would
+    // point at the redirecting /bn/... URL). Both the bare and the
+    // lang-prefixed spellings resolve to the same entry.
+    for (const path of ['/exam', '/progress']) {
+      for (const spelling of [path, `/bn${path}`, `/en${path}`]) {
+        const seo = resolveRouteSeo(spelling);
+        expect(seo, `no SEO for ${spelling}`).not.toBeNull();
+        expect(seo!.canonical).toBe(`${SITE_URL}${path}`);
+        const types = (seo!.jsonLd ?? []).map((o) => (o as { '@type'?: string })['@type']);
+        expect(types).not.toContain('BreadcrumbList');
+      }
     }
   });
 
@@ -919,10 +942,11 @@ describe('resolveRouteSeo — non-content routes resolve to null', () => {
   });
 
   it('app-internal routes are not content', () => {
+    // /exam + /progress are NOT here any more (23:00 check, 25 Nov
+    // 2026): they are public pages in the sitemap now, with real SEO
+    // in seo.ts — see the bare-canonical test above.
     for (const path of [
-      '/exam',
       '/routine',
-      '/progress',
       '/directory',
       '/quiz/abc',
       '/books/abc/chapters/def',
@@ -1419,7 +1443,10 @@ describe('buildBookSummary (Phase 2, 25 Nov 2026)', () => {
 });
 
 describe('resolveRouteSeo — English SEO (24 Nov 2026, language system)', () => {
-  const BN = /[\u0980-\u09FF]/;
+  // Bangla block EXCEPT U+09F3 (৳, the Taka sign): English pricing
+  // copy uses ৳ too ('৳49/paper'), and it is a currency sign, not a
+  // Bangla word — the intent here is "no Bangla words in English SEO".
+  const BN = /[\u0980-\u09F2\u09F4-\u09FF]/;
 
   it('every sitemap URL resolves in English with no Bangla in title/description and a clean canonical', () => {
     for (const path of SITEMAP_URLS) {
@@ -1427,7 +1454,13 @@ describe('resolveRouteSeo — English SEO (24 Nov 2026, language system)', () =>
       expect(seo, path).not.toBeNull();
       expect(seo!.title, path).not.toMatch(BN);
       expect(seo!.description, path).not.toMatch(BN);
-      expect(seo!.canonical, path).toBe(`${SITE_URL}/en${path === '/' ? '' : path}`);
+      // Bare-canonical app routes (23:00 check, 25 Nov 2026): the
+      // canonical is the bare URL in English too, not /en/... .
+      const expectedCanonical =
+        path === '/exam' || path === '/progress'
+          ? `${SITE_URL}${path}`
+          : `${SITE_URL}/en${path === '/' ? '' : path}`;
+      expect(seo!.canonical, path).toBe(expectedCanonical);
       expect(seo!.canonical, path).not.toContain('?lang=');
     }
   });

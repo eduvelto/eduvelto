@@ -30,13 +30,15 @@
 // import this TS module).
 
 import { Helmet } from 'react-helmet-async';
-import { alternateLangUrl, hreflangUrls, type SupportedLang } from '../lib/langRouting';
+import { alternateLangUrl, hreflangUrls, stripLangPrefix, type SupportedLang } from '../lib/langRouting';
 import { OG_IMAGE_HEIGHT, OG_IMAGE_WIDTH, OG_IMAGE_URL, ogLocaleForLang } from '../lib/seo';
 
 export type SeoHeadProps = {
   title: string;
   description: string;
-  /** Absolute canonical URL, lang-prefixed (e.g. https://eduvelto.com/bn/jobs/bcs). */
+  /** Absolute canonical URL, lang-prefixed (e.g. https://eduvelto.com/bn/jobs/bcs) —
+   *  EXCEPT app routes (/exam, /progress), whose canonical is the bare URL
+   *  (23:00 check, 25 Nov 2026). */
   canonical: string;
   lang: SupportedLang;
   ogType?: string;
@@ -48,7 +50,12 @@ export type SeoHeadProps = {
 };
 
 export function SeoHead({ title, description, canonical, lang, ogType, ogImage, robots, jsonLd }: SeoHeadProps) {
-  const hreflang = hreflangUrls(canonical, lang);
+  // A bare canonical (/exam, /progress — app routes outside /:lang)
+  // has NO language variants: /bn/exam and /en/exam redirect to it,
+  // so emitting hreflang to those URLs would point Google at
+  // redirects. Omit the alternates for bare canonicals only.
+  const isBareCanonical = stripLangPrefix(new URL(canonical).pathname).lang === null;
+  const hreflang = isBareCanonical ? null : hreflangUrls(canonical, lang);
   const ogLocale = ogLocaleForLang(lang);
   const image = ogImage ?? OG_IMAGE_URL;
   return (
@@ -56,9 +63,11 @@ export function SeoHead({ title, description, canonical, lang, ogType, ogImage, 
       <title>{title}</title>
       <meta name="description" content={description} />
       <link rel="canonical" href={canonical} />
-      <link rel="alternate" hrefLang="bn" href={hreflang.bn} />
-      <link rel="alternate" hrefLang="en" href={hreflang.en} />
-      <link rel="alternate" hrefLang="x-default" href={hreflang.xDefault} />
+      {/* No fragment wrapper: react-helmet-async drops fragment
+          children, so each alternate is a direct conditional child. */}
+      {hreflang ? <link rel="alternate" hrefLang="bn" href={hreflang.bn} /> : null}
+      {hreflang ? <link rel="alternate" hrefLang="en" href={hreflang.en} /> : null}
+      {hreflang ? <link rel="alternate" hrefLang="x-default" href={hreflang.xDefault} /> : null}
       <meta property="og:title" content={title} />
       <meta property="og:description" content={description} />
       <meta property="og:type" content={ogType ?? 'website'} />
@@ -86,7 +95,10 @@ export function SeoHead({ title, description, canonical, lang, ogType, ogImage, 
 //  prerender tests and by any caller that needs the strings
 //  without rendering). Kept in sync with <SeoHead /> above. */
 export function seoHeadData(props: SeoHeadProps) {
-  const hreflang = hreflangUrls(props.canonical, props.lang);
+  // Same bare-canonical rule as <SeoHead /> above: no hreflang
+  // alternates for app routes whose canonical is the bare URL.
+  const isBareCanonical = stripLangPrefix(new URL(props.canonical).pathname).lang === null;
+  const hreflang = isBareCanonical ? null : hreflangUrls(props.canonical, props.lang);
   return {
     title: props.title,
     description: props.description,

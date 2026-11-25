@@ -302,3 +302,23 @@ export function adsEnabled(placement: AdPlacement): boolean {
   if (isBannerPlacement(placement)) return isPlacementConfigured(placement);
   return isPlacementConfigured(placement) && getPlacementEnabled(placement);
 }
+
+/** Width gate for the AdSense push (23:00 full-site check, 25 Nov
+ *  2026 — /bn/class/honours-masters, reproduced 3x).
+ *
+ *  `adsbygoogle.push()` throws an UNCAUGHT TagError — "No slot size
+ *  for availableWidth=0" — when the <ins> unit has zero available
+ *  width, and the throw happens asynchronously inside Google's
+ *  library, so a try/catch around push() cannot catch it. The class
+ *  dashboard mounts BOTH a `mobile` slot (display:none above 768px)
+ *  and a `sidebar` slot (display:none below 1280px), so on EVERY
+ *  viewport one of them is hidden at zero width and its push throws.
+ *  AdSlot must only push once this returns true, and must wait (via
+ *  ResizeObserver) while it returns false. Pure + exported for tests
+ *  (no DOM dependency beyond the measured rect). */
+export function adSlotHasWidth(
+  el: { getBoundingClientRect: () => { width: number } } | null | undefined,
+): boolean {
+  if (!el) return false;
+  return el.getBoundingClientRect().width > 0;
+}

@@ -332,6 +332,14 @@ type RouteSeoEntry = {
    *  defaults (ogType 'website', og-image.jpg). */
   ogType?: string;
   ogImage?: string;
+  /** 23:00 check (25 Nov 2026): app routes whose canonical is the
+   *  BARE URL — /exam and /progress live outside /:lang by standing
+   *  decision, so /bn/exam and /bn/progress REDIRECT to them and
+   *  must never be the canonical. A bare-canonical page has no
+   *  language variants, so SeoHead emits no hreflang for it and
+   *  resolveRouteSeo emits no BreadcrumbList (its crumb item would
+   *  point at the redirecting /bn/... URL). */
+  bareCanonical?: boolean;
 };
 
 const STATIC_ROUTES: Record<string, RouteSeoEntry> = {
@@ -1036,6 +1044,33 @@ const STATIC_ROUTES: Record<string, RouteSeoEntry> = {
       // English descriptions must carry no Bangla-block characters.)
       'Custom question paper — send your mark distribution on WhatsApp, we build it by hand and deliver the PDF. BDT 49/paper — 70% off all question papers. Eduvelto.',
     crumbEn: 'Custom Paper',
+  },
+  // App routes (23:00 check, 25 Nov 2026; routes fix 8fdd9d1):
+  // /exam and /progress are login-gated pages whose canonical is
+  // the bare URL (bareCanonical: true below). They render under both
+  // the bare path and /{bn,en}/... (App.tsx duplicate routes) —
+  // NOT in the sitemap (login-gated, robots-disallowed).
+  '/exam': {
+    title: 'পরীক্ষা — MCQ পরীক্ষা ও ফলাফল | Eduvelto',
+    description:
+      'পরীক্ষা — Eduvelto-তে আপনার MCQ পরীক্ষা ও কুইজ দিন, ফলাফল এক জায়গায় দেখুন — সম্পূর্ণ বিনামূল্যে।',
+    crumb: 'পরীক্ষা',
+    titleEn: 'Exam — MCQ Exams and Results | Eduvelto',
+    descriptionEn:
+      'Exam — take MCQ exams and quizzes on Eduvelto and see all your results in one place, completely free.',
+    crumbEn: 'Exam',
+    bareCanonical: true,
+  },
+  '/progress': {
+    title: 'অগ্রগতি — আপনার শেখার অগ্রগতি | Eduvelto',
+    description:
+      'অগ্রগতি — আপনার পড়াশোনার অগ্রগতি, সম্পন্ন অধ্যায় ও পরীক্ষার ফলাফল এক জায়গায় দেখুন — Eduvelto।',
+    crumb: 'অগ্রগতি',
+    titleEn: 'Progress — Your Learning Progress | Eduvelto',
+    descriptionEn:
+      'Progress — track your learning progress, completed chapters and exam results in one place — Eduvelto.',
+    crumbEn: 'Progress',
+    bareCanonical: true,
   },
   '/jobs/bcs/practice/english': {
     title: 'বিসিএস ইংরেজি অনুশীলন — ৩৫টি যাচাইকৃত প্রশ্ন | Eduvelto',    description:
@@ -2220,7 +2255,9 @@ export function resolveRouteSeo(pathname: string, lang: 'bn' | 'en' = 'bn'): Seo
   if (crumbs.length === 0)
     crumbs = (lang === 'bn' ? STATIC_CRUMBS[path] : STATIC_CRUMBS_EN[path]) ?? crumbsForStatic(path, lang);
 
-  const canonical = `${SITE_URL}/${lang}${path === '/' ? '' : path}`;
+  const canonical = entry.bareCanonical
+    ? `${SITE_URL}${path}`
+    : `${SITE_URL}/${lang}${path === '/' ? '' : path}`;
   const webPage = {
     '@context': 'https://schema.org',
     '@type': 'WebPage',
@@ -2234,6 +2271,9 @@ export function resolveRouteSeo(pathname: string, lang: 'bn' | 'en' = 'bn'): Seo
   // Founder (Phase 2, 25 Nov 2026): the generic WebPage is replaced
   // by the lang-aware ProfilePage + the Person — never both, or the
   // page would carry two objects with the same `#webpage` @id.
+  // Bare-canonical pages (/exam, /progress — 23:00 check, 25 Nov
+  // 2026) carry no BreadcrumbList: the crumb item would point at
+  // the redirecting /bn/... URL instead of the canonical bare URL.
   const jsonLd: unknown[] =
     path === '/founder'
       ? [
@@ -2250,7 +2290,9 @@ export function resolveRouteSeo(pathname: string, lang: 'bn' | 'en' = 'bn'): Seo
           PERSON_JSON_LD,
           breadcrumbFor(path, crumbs, lang),
         ]
-      : [ORGANIZATION_JSON_LD, WEBSITE_JSON_LD, webPage, breadcrumbFor(path, crumbs, lang)];
+      : entry.bareCanonical
+        ? [ORGANIZATION_JSON_LD, WEBSITE_JSON_LD, webPage]
+        : [ORGANIZATION_JSON_LD, WEBSITE_JSON_LD, webPage, breadcrumbFor(path, crumbs, lang)];
   if (path === '/jobs') {
     // ItemList (23 Nov 2026, Gemini fold-in): the hub renders a real
     // card grid of all 15 exam hubs — list them with their real URLs.

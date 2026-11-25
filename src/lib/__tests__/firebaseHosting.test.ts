@@ -46,6 +46,24 @@ describe('firebase.json hosting', () => {
     expect(redirects).toContainEqual({ source: '/class/:rest*', destination: '/bn/class/:rest*', type: 301 });
   });
 
+  it('301s the bare generator/pricing/OMR URLs to /bn/... (23:00 check, 25 Nov 2026)', () => {
+    // The bare URLs are linked from the homepage but returned HTTP
+    // 404 on direct load (no prerendered file, no redirect rule).
+    // The redirect is evaluated before the rewrites, so the direct
+    // load 301s instead of serving 404.html.
+    const redirects = hosting().redirects;
+    for (const source of ['/question-maker', '/question-paper-generator', '/pricing', '/omr-evaluator', '/custom-paper']) {
+      expect(redirects).toContainEqual({ source, destination: `/bn${source}`, type: 301 });
+    }
+    // The matching rewrites stay as belt-and-braces (same pattern as
+    // /about, /support, /install): the sitemap rewrite-coverage test
+    // requires a rewrite for every sitemap URL.
+    const rewrites = hosting().rewrites;
+    for (const source of ['/question-maker', '/question-paper-generator', '/pricing', '/omr-evaluator', '/custom-paper']) {
+      expect(rewrites).toContainEqual({ source, destination: '/index.html' });
+    }
+  });
+
   it('agrees with legacyRedirectTarget() on every exact legacy source', () => {
     // Exact (non-glob) redirect sources must produce exactly the
     // target the client-side mapping produces — one contract, two

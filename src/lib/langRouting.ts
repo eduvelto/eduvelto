@@ -14,8 +14,10 @@
 // - /app/* protected routes stay OUTSIDE /:lang (client-only,
 //   login-gated) by decision — as do /admin, /ceo, /login,
 //   /register, /profile, /dashboard, /student, /teacher, /guardian,
-//   /directory, /subjects, /quiz, /exam, /routine, /progress,
-//   /social. Those paths are never lang-prefixed and never redirect.
+//   /directory, /subjects, /quiz. /exam, /routine, /progress,
+//   /social are the same (bare canonical, never redirect) AND also
+//   render under /:lang as duplicate routes (App.tsx, 8fdd9d1) so
+//   /bn/exam etc. work instead of falling through to NotFound.
 // - Legacy public URLs (e.g. /jobs/bcs, /library/<id>) 301-redirect
 //   to /bn/... — in the browser via the LegacyRedirect routes in
 //   App.tsx, and on the server via firebase.json redirects (which
@@ -174,6 +176,16 @@ export const LEGACY_PUBLIC_SEGMENTS: readonly string[] = [
   'install',
   'ai-teacher',
   'ai-assistant',
+  // 23:00 check (25 Nov 2026): the generator/pricing/OMR pages are
+  // real lang-prefixed routes (/bn/...) whose BARE URLs are linked
+  // from the homepage — firebase.json 301s them, and this list is
+  // the client-side half of the same contract (see the
+  // firebaseHosting agreement test).
+  'question-maker',
+  'question-paper-generator',
+  'pricing',
+  'omr-evaluator',
+  'custom-paper',
 ];
 
 /** Short legacy aliases that never existed as routes but were used

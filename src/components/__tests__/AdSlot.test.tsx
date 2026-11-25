@@ -163,3 +163,19 @@ describe('AdSlot rendered HTML', () => {
     }
   });
 });
+
+describe('adSlotHasWidth — the push gate (23:00 check, 25 Nov 2026)', () => {
+  // Effects never run under renderToString, so the width gate itself
+  // is pinned here as a pure rule and the component wires it in (push
+  // only when true, ResizeObserver while false). The live path — a
+  // real push on the production host — is verified by the 23:00
+  // check's re-run after deploy, not by the local preview (preview
+  // hosts render the placeholder, never push).
+  it('is false for a zero-width (display:none) slot, true once it has width', async () => {
+    const { adSlotHasWidth } = await import('../../lib/ads');
+    expect(adSlotHasWidth(null)).toBe(false);
+    expect(adSlotHasWidth(undefined)).toBe(false);
+    expect(adSlotHasWidth({ getBoundingClientRect: () => ({ width: 0 }) })).toBe(false);
+    expect(adSlotHasWidth({ getBoundingClientRect: () => ({ width: 300 }) })).toBe(true);
+  });
+});
