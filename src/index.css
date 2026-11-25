@@ -752,12 +752,14 @@ a:hover {
   grid-template-columns: 1.4fr 1fr 1fr;
   gap: 24px;
 }
-/* Wave 7 a11y: footer column headings are h2, not h3 — they are
-   top-level page sections; h3 skipped a level on pages with no h2
-   between the h1 and the footer (e.g. /search). Same size as before. */
-.ev-footer h2 {
+/* Audit m15 (24 Nov 2026): footer column headings are <p>, not
+   h2 — a page must have exactly one h1 and footer headings are
+   not page sections, so they must not be headings at all. Same
+   size as before; the class keeps the visual style. */
+.ev-footer-heading {
   color: #fff;
   font-size: 15px;
+  font-weight: 700;
   margin: 0 0 10px;
 }
 .ev-footer a {
@@ -2020,7 +2022,7 @@ a:hover {
 .ev-home-card-skills .ev-home-card-icon {
   color: #c2410c;
 }
-.ev-home-card h2 {
+.ev-home-card h2, .ev-home-card h3 {
   margin: 0 0 6px;
   font-size: 19px;
   color: var(--heading);
@@ -2080,7 +2082,7 @@ a:hover {
   .ev-home-card {
     padding: 16px 14px;
   }
-  .ev-home-card h2 {
+  .ev-home-card h2, .ev-home-card h3 {
     font-size: 17px;
   }
   .ev-home-card p {

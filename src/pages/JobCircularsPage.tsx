@@ -42,7 +42,7 @@ import type { DocumentSnapshot } from 'firebase/firestore';
 
 const STATUS_FILTERS: Array<{ key: CircularApplicationStatus | null; bn: string; en: string }> = [
   { key: null, bn: 'সব অবস্থা', en: 'All statuses' },
-  { key: 'open', bn: 'আবেদন চলছে', en: 'Open' },
+  { key: 'open', bn: 'আবেদন করা যাচ্ছে', en: 'Open' },
   { key: 'closing-soon', bn: 'শিগগির শেষ হবে', en: 'Closing soon' },
   { key: 'closed', bn: 'আবেদন শেষ', en: 'Closed' },
   { key: 'unknown', bn: 'তথ্য পাওয়া যায়নি', en: 'Unknown' },

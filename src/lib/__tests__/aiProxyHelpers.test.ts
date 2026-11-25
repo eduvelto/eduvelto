@@ -5,6 +5,7 @@ import { describe, it, expect } from 'vitest';
 import {
   validateChatRequest,
   mapProviderStatus,
+  shouldRetryProviderStatus,
   buildSystemPrompt,
   buildGeminiRequest,
   parseGeminiReply,
@@ -61,6 +62,18 @@ describe('mapProviderStatus', () => {
   });
 });
 
+describe('shouldRetryProviderStatus (audit M1)', () => {
+  it('retries once on 429 and 5xx, never on 4xx or a second attempt', () => {
+    expect(shouldRetryProviderStatus(429, 1)).toBe(true);
+    expect(shouldRetryProviderStatus(500, 1)).toBe(true);
+    expect(shouldRetryProviderStatus(503, 1)).toBe(true);
+    expect(shouldRetryProviderStatus(400, 1)).toBe(false);
+    expect(shouldRetryProviderStatus(404, 1)).toBe(false);
+    expect(shouldRetryProviderStatus(429, 2)).toBe(false);
+    expect(shouldRetryProviderStatus(503, 2)).toBe(false);
+  });
+});
+
 describe('buildSystemPrompt', () => {
   it('says the assistant is an AI and must not invent answers (both languages)', () => {
     expect(buildSystemPrompt('bn')).toMatch(/তুমি AI/);
@@ -84,6 +97,13 @@ describe('buildGeminiRequest + parseGeminiReply', () => {
     expect(contents[0].role).toBe('user');
     expect(contents[1].role).toBe('model');
     expect((req.system_instruction as { parts: { text: string }[] }).parts[0].text).toContain('Eduvelto');
+  });
+
+  it('sends no temperature — gemini-3.5-flash-lite does not support a custom temperature (audit M1)', () => {
+    const req = buildGeminiRequest({ messages: [{ role: 'user', text: 'hi' }], lang: 'en', mode: 'chat' });
+    const config = req.generationConfig as Record<string, unknown>;
+    expect(config).not.toHaveProperty('temperature');
+    expect(config.maxOutputTokens).toBe(1024);
   });
 
   it('extracts reply text and returns null for empty/malformed replies', () => {

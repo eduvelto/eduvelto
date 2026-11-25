@@ -24,6 +24,13 @@
 @media (min-width: 769px) {
   .ev-rd-hero-search { display: flex; gap: 0; max-width: 640px; margin-top: 20px; background: var(--card); border: 1px solid var(--line-strong); border-radius: 999px; padding: 4px 4px 4px 18px; box-shadow: var(--shadow-sm); }
   .ev-rd-hero-search input { flex: 1; min-width: 0; border: 0; outline: 0; background: transparent; color: var(--ink); font-size: 15px; font-family: inherit; }
+  /* SEO review (24 Nov 2026): the hero search input killed its own
+     outline with no focus rule — keyboard users could not see focus
+     on the homepage's main search box (live probe: 14 Tabs, outline
+     "none"). Mirrors the header search rule below; the /search form,
+     mobile search and footer newsletter inputs already have theirs
+     (footer input keeps the browser default outline). */
+  .ev-rd-hero-search input:focus-visible { outline: 2px solid var(--teal-text); outline-offset: 2px; }
   .ev-rd-hero-search button { flex: none; border: 0; border-radius: 999px; padding: 10px 22px; background: var(--teal-deep); color: #fff; font-size: 15px; font-weight: 700; font-family: inherit; cursor: pointer; }
   .ev-rd-hero-search button:hover { background: var(--forest); }
 }
@@ -33,7 +40,7 @@
 .ev-rd-hub { display: flex; flex-direction: column; gap: 6px; border-radius: var(--radius); border: 1px solid var(--line); padding: 16px; text-decoration: none; color: var(--ink); background: var(--card); }
 .ev-rd-hub:hover { border-color: var(--line-strong); box-shadow: var(--shadow-sm); }
 .ev-rd-hub-icon { font-size: 30px; line-height: 1; }
-.ev-rd-hub h2 { margin: 0; font-size: 17px; color: var(--heading); }
+.ev-rd-hub h2, .ev-rd-hub h3 { margin: 0; font-size: 17px; color: var(--heading); }
 .ev-rd-hub p { margin: 0; font-size: 13.5px; line-height: 1.6; color: var(--muted-ivory); }
 .ev-rd-hub-cta { margin-top: auto; padding-top: 6px; font-size: 14px; font-weight: 700; color: var(--teal-text); }
 .ev-rd-hub-green { background: #e8f5e9; border-color: #c8e6c9; }
@@ -47,7 +54,7 @@
   /* Five hub cards since the sections audit (24 Nov 2026) added Job
      Preparation beside Education — one row of five on desktop. */
   .ev-rd-hubs { grid-template-columns: repeat(5, 1fr); gap: 16px; }
-  .ev-rd-hub h2 { font-size: 18px; }
+  .ev-rd-hub h2, .ev-rd-hub h3 { font-size: 18px; }
 }
 html[data-theme="dark"] .ev-rd-hub-green { background: #14352a; border-color: #1f4d3a; }
 html[data-theme="dark"] .ev-rd-hub-blue { background: #12293d; border-color: #1d3f5c; }

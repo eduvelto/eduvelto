@@ -6,9 +6,10 @@ server-side secret and calls the Gemini API.
 
 ## Status
 
-STAGED, not deployed. The code is complete; activation needs two
-owner-side actions (below). Until then the site reports "AI not
-connected yet" and the deterministic tools keep working.
+DEPLOYED at `https://eduvelto-ai-proxy.eduvelto.workers.dev` (live since
+23 Nov 2026; the site build carries `VITE_AI_PROXY_URL`, so the chat UI
+reports "live"). A code change here needs `wrangler deploy` from the
+owner's Cloudflare account — this branch only prepares the code.
 
 ## What the proxy does
 
@@ -19,10 +20,14 @@ connected yet" and the deterministic tools keep working.
 - Never logs or stores message text. Never asks for personal data.
 - Maps a Gemini 429 to HTTP 429 `{ error: "quota-exhausted" }` so the
   UI can say the free quota is used up, instead of inventing an answer.
-- Model: `gemini-2.5-flash` (Gemini free tier, no card). Change it in
+- Model: `gemini-3.5-flash-lite` (Gemini free tier, no card). Change it in
   `wrangler.toml` (`MODEL`) if the free-tier lineup changes.
 
 ## Owner steps to activate (owner only — Muse cannot do these)
+
+> Already done — the Worker is deployed and live since 23 Nov 2026
+> (see Status above). The steps below are the original activation
+> record, kept for key rotation or re-deployment — not a to-do list.
 
 1. **Gemini API key (free, no card):** go to Google AI Studio
    (aistudio.google.com), sign in with your Google account, open
@@ -47,7 +52,7 @@ connected yet" and the deterministic tools keep working.
 ## If the free quota ends
 
 The Gemini free tier is per-day (about 1,500 requests/day on
-2.5 Flash, varies by model). When it is used up, the Worker returns
+3.5 Flash Lite, varies by model). When it is used up, the Worker returns
 429 and the site shows — in Bangla and English — that the free
 quota for today is finished and to try again tomorrow. The tools
 keep working. No payment is ever taken: there is no card on file

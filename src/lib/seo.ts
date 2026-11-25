@@ -119,11 +119,12 @@ export const ORGANIZATION_JSON_LD = {
   ],
 };
 
-/** Shared WebSite structured data. SearchAction added 24 Nov 2026
- * (homepage redesign): /search is now a real site-wide search over
- * books, jobs, opportunities, life services and guide pages, so the
- * search-box target is real. /search itself stays noindex (no
- * STATIC_ROUTES entry; robots.txt disallows it). */
+/** Shared WebSite structured data. No SearchAction / potentialAction
+ * (SEO review IMP-32, 24 Nov 2026): Google deprecated the sitelinks
+ * search box (Nov 2024), and /search is robots-disallowed + noindex
+ * by design — the markup must not advertise a URL crawlers may not
+ * fetch. /search itself is a real site-wide search; only the
+ * structured-data pointer to it is removed. */
 export const WEBSITE_JSON_LD = {
   '@context': 'https://schema.org',
   '@type': 'WebSite',
@@ -134,14 +135,6 @@ export const WEBSITE_JSON_LD = {
   description: 'A Smarter World of Learning — a free digital education platform from Bangladesh.',
   inLanguage: ['bn', 'en'],
   publisher: { '@id': 'https://eduvelto.com#organization' },
-  potentialAction: {
-    '@type': 'SearchAction',
-    target: {
-      '@type': 'EntryPoint',
-      urlTemplate: 'https://eduvelto.com/search?q={search_term_string}',
-    },
-    'query-input': 'required name=search_term_string',
-  },
 };
 
 function setMetaByName(name: string, content: string): void {
@@ -191,6 +184,16 @@ function setLink(rel: string, hreflang: string, href: string): void {
   el.setAttribute('href', href);
 }
 
+/** OG locale pair for a page language (SEO review IMP-34, 24 Nov 2026):
+ * a share must carry the page's own locale, with the other language
+ * as the alternate — the static shell (bn_BD) was wrong on EN pages.
+ * Pure + exported for tests. */
+export function ogLocaleForLang(lang: 'bn' | 'en'): { locale: string; alternate: string } {
+  return lang === 'bn'
+    ? { locale: 'bn_BD', alternate: 'en_US' }
+    : { locale: 'en_US', alternate: 'bn_BD' };
+}
+
 export function useSeo(seo: SeoData, lang: 'bn' | 'en' = 'bn'): void {
   useEffect(() => {
     document.title = seo.title;
@@ -199,6 +202,12 @@ export function useSeo(seo: SeoData, lang: 'bn' | 'en' = 'bn'): void {
     setMetaByProperty('og:description', seo.description);
     setMetaByProperty('og:type', seo.ogType ?? 'website');
     setMetaByProperty('og:url', seo.canonical);
+    // OG locale follows the page language (IMP-34): setMetaByProperty
+    // updates the static shell tags in place (bn_BD + en_US alternate
+    // for the default bn home shell; swapped on EN pages).
+    const ogLocale = ogLocaleForLang(lang);
+    setMetaByProperty('og:locale', ogLocale.locale);
+    setMetaByProperty('og:locale:alternate', ogLocale.alternate);
     if (seo.ogImage) {
       setMetaByProperty('og:image', seo.ogImage);
       setMetaByProperty('og:image:width', String(OG_IMAGE_WIDTH));
@@ -273,7 +282,7 @@ const STATIC_ROUTES: Record<string, RouteSeoEntry> = {
   '/why-eduvelto': {
     title: 'কেন Eduvelto — বাংলাদেশের ফ্রি শিক্ষা প্ল্যাটফর্ম',
     description:
-      'কেন Eduvelto — বাংলাদেশের আস্থার ফ্রি শিক্ষা প্ল্যাটফর্ম: BCS, ব্যাংক, NTRCA ও জাতীয় বিশ্ববিদ্যালয় ভর্তি, MCQ পরীক্ষা ও ডিজিটাল লাইব্রেরি — বিনামূল্যে।',
+      'কেন Eduvelto — আস্থার প্ল্যাটফর্ম হওয়ার লক্ষ্যে: BCS, ব্যাংক, NTRCA ও জাতীয় বিশ্ববিদ্যালয় ভর্তি, MCQ পরীক্ষা ও ডিজিটাল লাইব্রেরি — বিনামূল্যে।',
     crumb: 'কেন Eduvelto',
     titleEn: 'Why Eduvelto — Bangladesh\'s Free Education Platform',
     descriptionEn:
@@ -303,11 +312,11 @@ const STATIC_ROUTES: Record<string, RouteSeoEntry> = {
   '/jobs/circulars': {
     title: 'চাকরির বিজ্ঞপ্তি — যাচাইকৃত সার্কুলার | Eduvelto',
     description:
-      'চাকরির বিজ্ঞপ্তি — যাচাইকৃত সার্কুলার, আবেদনের তারিখ ও অফিসিয়াল উৎস। নতুন বিজ্ঞপ্তি যাচাই হলে এখানে দেখাবে; অযাচাইকৃত তারিখ কখনো দেখানো হয় না।',
+      'চাকরির বিজ্ঞপ্তি — যাচাইকৃত ও অযাচাইকৃত বিজ্ঞপ্তি, আবেদনের তারিখ ও অফিসিয়াল উৎস। যাচাই না হলে তা লেখা থাকে; অযাচাইকৃত তারিখ কখনো দেখানো হয় না।',
     crumb: 'বিজ্ঞপ্তি',
     titleEn: 'Job Circulars — Verified Circulars & Application Dates | Eduvelto',
     descriptionEn:
-      'Job circulars — verified circulars, application dates and official sources. New circulars appear here once verified; unverified or estimated dates are never shown. Eduvelto.',
+      'Job circulars — verified and unverified notices, application dates and official sources. Unverified ones are marked as such; unverified dates are never shown. Eduvelto.',
     crumbEn: 'Circulars',
   },
   '/opportunities': {
@@ -315,7 +324,7 @@ const STATIC_ROUTES: Record<string, RouteSeoEntry> = {
     description:
       'যাচাইকৃত সুযোগ — চাকরি, ফ্রিল্যান্সিং, ইন্টার্নশিপ, স্কলারশিপ। প্রতিটি সুযোগ অফিসিয়াল উৎস থেকে যাচাই করা; শেষ তারিখ না জানা থাকলে অনুমান করা হয় না।',
     crumb: 'সুযোগ হাব',
-    titleEn: 'Opportunity Hub — Jobs, Scholarships, Internships | Eduvelto',
+    titleEn: 'Opportunity Hub — Verified Jobs & Scholarships | Eduvelto',
     descriptionEn:
       'Verified opportunities — jobs, remote work, freelancing, internships, scholarships, all verified from official sources; unknown deadlines are never guessed.',
     crumbEn: 'Opportunity Hub',
@@ -425,51 +434,51 @@ const STATIC_ROUTES: Record<string, RouteSeoEntry> = {
   '/admissions': {
     title: 'ভর্তি প্রস্তুতি — বিশ্ববিদ্যালয় ভর্তি | Eduvelto',
     description:
-      'বিশ্ববিদ্যালয় ভর্তি প্রস্তুতির কাঠামো — জাতীয় বিশ্ববিদ্যালয় অনার্সসহ ধরন ও সিলেবাস। বিসিএস ইংরেজি অনুশীলন এখন চালু; পূর্ণাঙ্গ মক পরীক্ষা এখনো প্রস্তুত হচ্ছে।',
+      'বিশ্ববিদ্যালয় ভর্তি প্রস্তুতির কাঠামো — জাতীয় বিশ্ববিদ্যালয় অনার্সসহ ধরন ও সিলেবাস। ভর্তি পরীক্ষার প্রশ্নের ধরন, নম্বর বণ্টন ও সময় এখানে দেখা যাবে।',
     crumb: 'ভর্তি প্রস্তুতি',
     titleEn: 'Admission Preparation — University Admission | Eduvelto',
     descriptionEn:
-      'University admission preparation — patterns and syllabuses, including National University honours. BCS English is live; mocks coming soon. Free on Eduvelto.',
+      'University admission preparation — patterns and syllabuses, including National University honours. Question patterns, marks and timing. Free on Eduvelto.',
     crumbEn: 'Admission Preparation',
   },
   '/admissions/national-university': {
     title: 'জাতীয় বিশ্ববিদ্যালয় ভর্তি — অনার্স ১ম বর্ষ | Eduvelto',
     description:
-      'জাতীয় বিশ্ববিদ্যালয় অনার্স ১ম বর্ষ ভর্তি — ১০০ MCQ, ১ ঘণ্টা, নেগেটিভ মার্কিং নেই। বিসিএস ইংরেজি অনুশীলন এখন চালু; পূর্ণাঙ্গ মক পরীক্ষা এখনো প্রস্তুত হচ্ছে।',
+      'জাতীয় বিশ্ববিদ্যালয় অনার্স ১ম বর্ষ ভর্তি — ১০০ MCQ, ১ ঘণ্টা, নেগেটিভ মার্কিং নেই। বাংলা, ইংরেজি ও সাধারণ জ্ঞান থেকে প্রশ্ন আসে।',
     crumb: 'জাতীয় বিশ্ববিদ্যালয়',
     titleEn: 'National University Admission — Honours 1st Year | Eduvelto',
     descriptionEn:
-      'National University Honours admission: 100 MCQ, 1 hour, no negative marking. Bangla, English, General Knowledge. BCS English live; mocks coming soon.',
+      'National University Honours admission: 100 MCQ, 1 hour, no negative marking. Bangla, English and General Knowledge questions.',
     crumbEn: 'National University',
   },
   '/admissions/national-university/humanities': {
     title: 'মানবিক শাখা — জাতীয় বিশ্ববিদ্যালয় ভর্তি | Eduvelto',
     description:
-      'জাতীয় বিশ্ববিদ্যালয় ভর্তির মানবিক শাখা — বাংলা, ইংরেজি ও মানবিক সিলেবাস। বিসিএস ইংরেজি অনুশীলন এখন চালু; পূর্ণাঙ্গ মক পরীক্ষা এখনো প্রস্তুত হচ্ছে।',
+      'জাতীয় বিশ্ববিদ্যালয় ভর্তির মানবিক শাখা — বাংলা, ইংরেজি ও মানবিক সিলেবাস।',
     crumb: 'মানবিক শাখা',
     titleEn: 'Humanities — National University Admission | Eduvelto',
     descriptionEn:
-      'Humanities group — National University admission: Bangla, English, General Knowledge and the Humanities syllabus. BCS English is live; mocks coming soon.',
+      'Humanities group — National University admission: Bangla, English, General Knowledge and the Humanities syllabus.',
     crumbEn: 'Humanities Group',
   },
   '/admissions/national-university/science': {
     title: 'বিজ্ঞান শাখা — জাতীয় বিশ্ববিদ্যালয় ভর্তি | Eduvelto',
     description:
-      'জাতীয় বিশ্ববিদ্যালয় ভর্তির বিজ্ঞান শাখা — বাংলা, ইংরেজি ও বিজ্ঞান সিলেবাস। বিসিএস ইংরেজি অনুশীলন এখন চালু; পূর্ণাঙ্গ মক পরীক্ষা এখনো প্রস্তুত হচ্ছে।',
+      'জাতীয় বিশ্ববিদ্যালয় ভর্তির বিজ্ঞান শাখা — বাংলা, ইংরেজি ও বিজ্ঞান সিলেবাস।',
     crumb: 'বিজ্ঞান শাখা',
     titleEn: 'Science — National University Admission | Eduvelto',
     descriptionEn:
-      'Science group — National University admission: Bangla, English, General Knowledge and the Science syllabus. BCS English is live; mocks coming soon.',
+      'Science group — National University admission: Bangla, English, General Knowledge and the Science syllabus.',
     crumbEn: 'Science Group',
   },
   '/admissions/national-university/business': {
     title: 'ব্যবসায় শিক্ষা — জাতীয় বিশ্ববিদ্যালয় ভর্তি | Eduvelto',
     description:
-      'জাতীয় বিশ্ববিদ্যালয় ভর্তির ব্যবসায় শিক্ষা শাখা — বাংলা, ইংরেজি ও ব্যবসায় সিলেবাস। বিসিএস ইংরেজি অনুশীলন এখন চালু; পূর্ণাঙ্গ মক পরীক্ষা এখনো প্রস্তুত হচ্ছে।',
+      'জাতীয় বিশ্ববিদ্যালয় ভর্তির ব্যবসায় শিক্ষা শাখা — বাংলা, ইংরেজি ও ব্যবসায় সিলেবাস।',
     crumb: 'ব্যবসায় শিক্ষা শাখা',
     titleEn: 'Business Studies — National University Admission | Eduvelto',
     descriptionEn:
-      'Business Studies group — National University admission: Bangla, English, General Knowledge and the Business syllabus. BCS English is live; mocks coming soon.',
+      'Business Studies group — National University admission: Bangla, English, General Knowledge and the Business syllabus.',
     crumbEn: 'Business Studies Group',
   },
   '/library': {
@@ -543,6 +552,30 @@ const STATIC_ROUTES: Record<string, RouteSeoEntry> = {
     descriptionEn:
       'Honours & Masters (higher education) — class-wise books, lessons and MCQ exams — completely free. Eduvelto.',
     crumbEn: 'Honours & Masters',
+  },
+  // Audit M12 (24 Nov 2026): Technical + Madrasa levels added —
+  // 72 Technical books and 35 Madrasa books are live in the library.
+  // No "MCQ পরীক্ষা" wording here: both levels have 0 MCQ quizzes
+  // (Technical 144 written, Madrasa 70 written) — "পরীক্ষা" only.
+  '/class/technical': {
+    title: 'কারিগরি — বই, পাঠ ও পরীক্ষা | Eduvelto',
+    description:
+      'কারিগরি শিক্ষা — শ্রেণিভিত্তিক বই, পাঠ ও পরীক্ষা — সম্পূর্ণ বিনামূল্যে। Eduvelto।',
+    crumb: 'কারিগরি',
+    titleEn: 'Technical — Books, Lessons & Exams | Eduvelto',
+    descriptionEn:
+      'Technical education — class-wise books, lessons and exams — completely free. Eduvelto.',
+    crumbEn: 'Technical',
+  },
+  '/class/madrasa': {
+    title: 'মাদ্রাসা — বই, পাঠ ও পরীক্ষা | Eduvelto',
+    description:
+      'মাদ্রাসা শিক্ষা — শ্রেণিভিত্তিক বই, পাঠ ও পরীক্ষা — সম্পূর্ণ বিনামূল্যে। Eduvelto।',
+    crumb: 'মাদ্রাসা',
+    titleEn: 'Madrasa — Books, Lessons & Exams | Eduvelto',
+    descriptionEn:
+      'Madrasa education — class-wise books, lessons and exams — completely free. Eduvelto.',
+    crumbEn: 'Madrasa',
   },
   '/about': {
     title: 'Eduvelto সম্পর্কে — বাংলাদেশের ফ্রি শিক্ষা প্ল্যাটফর্ম',
@@ -642,11 +675,11 @@ const STATIC_ROUTES: Record<string, RouteSeoEntry> = {
   '/health/medicines': {
     title: 'ঔষধ নির্দেশিকা — ব্যবহার ও সতর্কতা | Eduvelto',
     description:
-      'সাধারণ ঔষধের ব্যবহার, ধরন, পার্শ্বপ্রতিক্রিয়া ও সতর্কতা — শুধুমাত্র যাচাইকৃত উৎস থেকে। এখানে কোনো ডোজ দেওয়া হয় না; ডোজ শুধু ডাক্তারের পরামর্শে।',
+      'সাধারণ ঔষধের ব্যবহার, ধরন, পার্শ্বপ্রতিক্রিয়া ও সতর্কতা — যাচাইকৃত উৎস থেকে; অযাচাইকৃত তথ্য আলাদাভাবে চিহ্নিত। এখানে কোনো ডোজ দেওয়া হয় না; ডোজ শুধু ডাক্তারের পরামর্শে।',
     crumb: 'ঔষধ নির্দেশিকা',
     titleEn: 'Medicine Guide — Uses, Side Effects & Warnings | Eduvelto',
     descriptionEn:
-      'Uses, types, side effects and warnings for common medicines — from verified sources only. No dosages are given here; dosages only on a doctor’s advice. Eduvelto.',
+      'Uses, types, side effects and warnings for common medicines — from verified sources; unverified information is marked separately. No dosages are given here; dosages only on a doctor’s advice. Eduvelto.',
     crumbEn: 'Medicine Guide',
   },
   '/health/diseases': {
@@ -797,11 +830,11 @@ const STATIC_ROUTES: Record<string, RouteSeoEntry> = {
   '/ai-assistant': {
     title: 'AI সহায়ক — হিসাব, চিঠি ও দরকারি টুল | Eduvelto',
     description:
-      'Eduvelto-র AI সহায়ক — হিসাব, রূপান্তর, বাজেট, দিনের পরিকল্পনা, চিঠি-আবেদন-সিভি ও দরকারি বাক্য — এখনই বিনামূল্যে ব্যবহার করুন। লাইভ AI উত্তর শীঘ্রই আসছে।',
+      'Eduvelto-র AI সহায়ক — হিসাব, রূপান্তর, বাজেট, পরিকল্পনা ও চিঠি — এখনই বিনামূল্যে। লাইভ AI উত্তর এখন চালু। ব্যক্তিগত তথ্য লিখবেন না।',
     crumb: 'AI সহায়ক',
     titleEn: 'AI Assistant — Everyday Calculations & Letters | Eduvelto',
     descriptionEn:
-      'Eduvelto\'s AI Assistant — calculations, converters, budget, planning, letters, applications, CVs and phrases — free to use now. Live AI answers are coming soon.',
+      'Eduvelto\'s AI Assistant — calculations, converters, budget, planning and letters — free to use now. Live AI answers are on. Do not share personal information.',
     crumbEn: 'AI Assistant',
   },
   '/skills': {
@@ -2201,12 +2234,15 @@ export function resolveRouteSeo(pathname: string, lang: 'bn' | 'en' = 'bn'): Seo
     // Article (24 Nov 2026, brand-SEO wave 1; waves 2–5 keep the
     // same date — the 35 guides are article-length drafts awaiting
     // teacher review, published 24 Nov 2026. Never claims review.
+    // Audit m17: lang-aware headline/description/language, like
+    // the lessons branch just above — the EN page must not carry
+    // Bangla JSON-LD.
     jsonLd.push({
       '@context': 'https://schema.org',
       '@type': 'Article',
-      headline: entry.title,
-      description: entry.description,
-      inLanguage: 'bn',
+      headline: lang === 'bn' ? entry.title : entry.titleEn,
+      description: lang === 'bn' ? entry.description : entry.descriptionEn,
+      inLanguage: lang,
       datePublished: '2026-11-24',
       author: { '@id': 'https://eduvelto.com#organization' },
       publisher: { '@id': 'https://eduvelto.com#organization' },

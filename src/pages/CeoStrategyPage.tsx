@@ -12,7 +12,7 @@ import { CeoSectionHead, CeoSoonPill } from '../components/CeoShared';
 const FOCUS_AREAS = [
   { bn: 'চাকরি প্রস্তুতি', en: 'Job Preparation', subBn: '(বিসিএস, ব্যাংক, সরকারি চাকরি)', subEn: '(BCS, Bank, Govt. Jobs)', to: null as string | null, statusBn: 'রোডম্যাপ চলছে', statusEn: 'Roadmap in progress' },
   { bn: 'ভর্তি প্রস্তুতি', en: 'Admission Preparation', subBn: '(বিশ্ববিদ্যালয়, মেডিকেল, ইঞ্জিনিয়ারিং…)', subEn: '(University, Medical, Engineering…)', to: null, statusBn: 'রোডম্যাপ চলছে', statusEn: 'Roadmap in progress' },
-  { bn: 'শিক্ষা কার্যক্রম', en: 'Academic Learning', subBn: '(Class 1–12, Madrasa…)', subEn: '(Class 1–12, Madrasa…)', to: '/library', statusBn: 'চালু — লাইব্রেরি', statusEn: 'Live — Library' },
+  { bn: 'শিক্ষা কার্যক্রম', en: 'Academic Learning', subBn: '(Class 9 – Honours, Madrasa…)', subEn: '(Class 9 – Honours, Madrasa…)', to: '/library', statusBn: 'চালু — লাইব্রেরি', statusEn: 'Live — Library' },
   { bn: 'দক্ষতা উন্নয়ন', en: 'Professional Skills', subBn: '(ইংরেজি, কম্পিউটার…)', subEn: '(English, Computer…)', to: null, statusBn: 'পরিকল্পনায়', statusEn: 'Planned' },
 ] as const;
 

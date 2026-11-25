@@ -125,7 +125,7 @@ export const PUBLIC_LESSONS: PublicLesson[] = [
         headingBn: 'স্থান — in, on, at',
         headingEn: 'Place — in, on, at',
         bodyBn: [
-          'বড় জায়গার জন্য in, তলের ওপর কিছু থাকলে on, নির্দিষ্ট ঠিকানার জন্য at। in Dhaka, in Bangladesh — on the table, on the wall — at home, at school, at the station। He is at school মানে সে স্কুলে আছে; He is in school মানে সে স্কুলের ভেতরে আছে — দুটির অর্থ কাছাকাছি হলেও ব্যবহারের সূক্ষ্ম পার্থক্য আছে।',
+          'বড় জায়গার জন্য in, তলের ওপর কিছু থাকলে on, নির্দিষ্ট ঠিকানার জন্য at। in Dhaka, in Bangladesh — on the table, on the wall — at home, at school, at the station। He is at school মানে সে এখন স্কুলে আছে (সেখানে উপস্থিত); He is in school মানে সে স্কুলে পড়ে / স্কুলে ভর্তি আছে — দুটির অর্থ কাছাকাছি হলেও ব্যবহারের সূক্ষ্ম পার্থক্য আছে।',
         ],
         examples: [
           { en: 'The book is on the table.', bn: 'বইটি টেবিলের ওপরে আছে।' },

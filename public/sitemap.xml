@@ -44,603 +44,922 @@
      healthy-habits-students, digital-skills-basics).
      All URLs carry <lastmod> (audit SEO-007). All URLs are
      canonical eduvelto.com URLs. -->
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://eduvelto.com/</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/" />
     <lastmod>2026-11-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://eduvelto.com/why-eduvelto</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/why-eduvelto?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/why-eduvelto?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/why-eduvelto" />
     <lastmod>2026-11-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://eduvelto.com/jobs</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/jobs?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/jobs?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/jobs" />
     <lastmod>2026-11-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://eduvelto.com/jobs/bcs</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/jobs/bcs?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/jobs/bcs?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/jobs/bcs" />
     <lastmod>2026-11-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://eduvelto.com/jobs/bank</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/jobs/bank?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/jobs/bank?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/jobs/bank" />
     <lastmod>2026-11-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://eduvelto.com/jobs/primary-teacher</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/jobs/primary-teacher?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/jobs/primary-teacher?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/jobs/primary-teacher" />
     <lastmod>2026-11-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://eduvelto.com/jobs/ntrca</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/jobs/ntrca?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/jobs/ntrca?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/jobs/ntrca" />
     <lastmod>2026-11-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://eduvelto.com/jobs/common</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/jobs/common?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/jobs/common?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/jobs/common" />
     <lastmod>2026-11-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://eduvelto.com/jobs/dgfood</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/jobs/dgfood?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/jobs/dgfood?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/jobs/dgfood" />
     <lastmod>2026-11-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://eduvelto.com/jobs/bpsc-non-cadre</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/jobs/bpsc-non-cadre?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/jobs/bpsc-non-cadre?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/jobs/bpsc-non-cadre" />
     <lastmod>2026-11-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://eduvelto.com/jobs/cag</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/jobs/cag?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/jobs/cag?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/jobs/cag" />
     <lastmod>2026-11-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://eduvelto.com/jobs/bfsa</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/jobs/bfsa?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/jobs/bfsa?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/jobs/bfsa" />
     <lastmod>2026-11-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://eduvelto.com/jobs/others</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/jobs/others?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/jobs/others?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/jobs/others" />
     <lastmod>2026-11-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://eduvelto.com/jobs/ministries</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/jobs/ministries?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/jobs/ministries?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/jobs/ministries" />
     <lastmod>2026-11-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://eduvelto.com/jobs/defence</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/jobs/defence?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/jobs/defence?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/jobs/defence" />
     <lastmod>2026-11-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://eduvelto.com/jobs/autonomous</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/jobs/autonomous?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/jobs/autonomous?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/jobs/autonomous" />
     <lastmod>2026-11-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://eduvelto.com/jobs/private-ngo</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/jobs/private-ngo?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/jobs/private-ngo?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/jobs/private-ngo" />
     <lastmod>2026-11-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://eduvelto.com/jobs/it-professional</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/jobs/it-professional?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/jobs/it-professional?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/jobs/it-professional" />
     <lastmod>2026-11-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://eduvelto.com/jobs/bcs/subjects</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/jobs/bcs/subjects?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/jobs/bcs/subjects?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/jobs/bcs/subjects" />
     <lastmod>2026-11-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://eduvelto.com/jobs/bank/subjects</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/jobs/bank/subjects?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/jobs/bank/subjects?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/jobs/bank/subjects" />
     <lastmod>2026-11-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://eduvelto.com/jobs/primary-teacher/subjects</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/jobs/primary-teacher/subjects?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/jobs/primary-teacher/subjects?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/jobs/primary-teacher/subjects" />
     <lastmod>2026-11-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://eduvelto.com/jobs/ntrca/subjects</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/jobs/ntrca/subjects?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/jobs/ntrca/subjects?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/jobs/ntrca/subjects" />
     <lastmod>2026-11-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://eduvelto.com/jobs/bcs/subjects/english</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/jobs/bcs/subjects/english?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/jobs/bcs/subjects/english?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/jobs/bcs/subjects/english" />
     <lastmod>2026-11-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://eduvelto.com/jobs/bcs/practice/english</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/jobs/bcs/practice/english?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/jobs/bcs/practice/english?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/jobs/bcs/practice/english" />
     <lastmod>2026-11-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://eduvelto.com/jobs/bcs/practice/english/grammar</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/jobs/bcs/practice/english/grammar?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/jobs/bcs/practice/english/grammar?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/jobs/bcs/practice/english/grammar" />
     <lastmod>2026-11-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://eduvelto.com/jobs/bcs/practice/english/vocabulary</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/jobs/bcs/practice/english/vocabulary?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/jobs/bcs/practice/english/vocabulary?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/jobs/bcs/practice/english/vocabulary" />
     <lastmod>2026-11-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://eduvelto.com/jobs/bcs/practice/english/reading</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/jobs/bcs/practice/english/reading?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/jobs/bcs/practice/english/reading?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/jobs/bcs/practice/english/reading" />
     <lastmod>2026-11-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://eduvelto.com/learn/bcs-english-tense</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/learn/bcs-english-tense?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/learn/bcs-english-tense?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/learn/bcs-english-tense" />
     <lastmod>2026-11-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://eduvelto.com/learn/bcs-english-preposition</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/learn/bcs-english-preposition?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/learn/bcs-english-preposition?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/learn/bcs-english-preposition" />
     <lastmod>2026-11-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://eduvelto.com/learn/bcs-preparation-guide</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/learn/bcs-preparation-guide?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/learn/bcs-preparation-guide?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/learn/bcs-preparation-guide" />
     <lastmod>2026-11-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://eduvelto.com/learn/bank-job-preparation</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/learn/bank-job-preparation?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/learn/bank-job-preparation?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/learn/bank-job-preparation" />
     <lastmod>2026-11-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://eduvelto.com/learn/primary-teacher-preparation</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/learn/primary-teacher-preparation?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/learn/primary-teacher-preparation?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/learn/primary-teacher-preparation" />
     <lastmod>2026-11-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://eduvelto.com/learn/ntrca-preparation</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/learn/ntrca-preparation?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/learn/ntrca-preparation?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/learn/ntrca-preparation" />
     <lastmod>2026-11-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://eduvelto.com/learn/nu-admission-guide</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/learn/nu-admission-guide?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/learn/nu-admission-guide?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/learn/nu-admission-guide" />
     <lastmod>2026-11-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://eduvelto.com/learn/english-grammar-basics</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/learn/english-grammar-basics?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/learn/english-grammar-basics?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/learn/english-grammar-basics" />
     <lastmod>2026-11-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://eduvelto.com/learn/scholarship-guide</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/learn/scholarship-guide?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/learn/scholarship-guide?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/learn/scholarship-guide" />
     <lastmod>2026-11-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://eduvelto.com/learn/what-is-ai</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/learn/what-is-ai?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/learn/what-is-ai?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/learn/what-is-ai" />
     <lastmod>2026-11-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://eduvelto.com/learn/cv-writing-guide</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/learn/cv-writing-guide?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/learn/cv-writing-guide?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/learn/cv-writing-guide" />
     <lastmod>2026-11-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://eduvelto.com/learn/budget-planner-guide</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/learn/budget-planner-guide?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/learn/budget-planner-guide?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/learn/budget-planner-guide" />
     <lastmod>2026-11-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://eduvelto.com/learn/revision-strategy</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/learn/revision-strategy?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/learn/revision-strategy?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/learn/revision-strategy" />
     <lastmod>2026-11-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://eduvelto.com/learn/note-taking-guide</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/learn/note-taking-guide?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/learn/note-taking-guide?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/learn/note-taking-guide" />
     <lastmod>2026-11-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://eduvelto.com/learn/time-management-students</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/learn/time-management-students?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/learn/time-management-students?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/learn/time-management-students" />
     <lastmod>2026-11-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://eduvelto.com/learn/english-writing-basics</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/learn/english-writing-basics?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/learn/english-writing-basics?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/learn/english-writing-basics" />
     <lastmod>2026-11-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://eduvelto.com/learn/online-safety-guide</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/learn/online-safety-guide?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/learn/online-safety-guide?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/learn/online-safety-guide" />
     <lastmod>2026-11-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://eduvelto.com/learn/bangla-spelling-common-mistakes</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/learn/bangla-spelling-common-mistakes?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/learn/bangla-spelling-common-mistakes?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/learn/bangla-spelling-common-mistakes" />
     <lastmod>2026-11-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://eduvelto.com/learn/computer-basics-students</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/learn/computer-basics-students?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/learn/computer-basics-students?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/learn/computer-basics-students" />
     <lastmod>2026-11-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://eduvelto.com/learn/exam-day-strategy</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/learn/exam-day-strategy?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/learn/exam-day-strategy?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/learn/exam-day-strategy" />
     <lastmod>2026-11-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://eduvelto.com/learn/mcq-answering-techniques</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/learn/mcq-answering-techniques?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/learn/mcq-answering-techniques?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/learn/mcq-answering-techniques" />
     <lastmod>2026-11-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://eduvelto.com/learn/memory-techniques-students</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/learn/memory-techniques-students?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/learn/memory-techniques-students?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/learn/memory-techniques-students" />
     <lastmod>2026-11-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://eduvelto.com/learn/study-routine-job-seekers</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/learn/study-routine-job-seekers?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/learn/study-routine-job-seekers?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/learn/study-routine-job-seekers" />
     <lastmod>2026-11-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://eduvelto.com/learn/healthy-habits-students</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/learn/healthy-habits-students?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/learn/healthy-habits-students?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/learn/healthy-habits-students" />
     <lastmod>2026-11-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://eduvelto.com/learn/digital-skills-basics</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/learn/digital-skills-basics?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/learn/digital-skills-basics?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/learn/digital-skills-basics" />
     <lastmod>2026-11-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://eduvelto.com/learn/exam-anxiety-management</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/learn/exam-anxiety-management?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/learn/exam-anxiety-management?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/learn/exam-anxiety-management" />
     <lastmod>2026-11-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://eduvelto.com/learn/presentation-skills</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/learn/presentation-skills?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/learn/presentation-skills?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/learn/presentation-skills" />
     <lastmod>2026-11-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://eduvelto.com/learn/group-study-guide</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/learn/group-study-guide?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/learn/group-study-guide?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/learn/group-study-guide" />
     <lastmod>2026-11-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://eduvelto.com/learn/english-vocabulary-building</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/learn/english-vocabulary-building?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/learn/english-vocabulary-building?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/learn/english-vocabulary-building" />
     <lastmod>2026-11-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://eduvelto.com/learn/effective-reading-habits</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/learn/effective-reading-habits?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/learn/effective-reading-habits?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/learn/effective-reading-habits" />
     <lastmod>2026-11-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://eduvelto.com/learn/self-motivation-students</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/learn/self-motivation-students?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/learn/self-motivation-students?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/learn/self-motivation-students" />
     <lastmod>2026-11-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://eduvelto.com/learn/how-to-use-free-library</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/learn/how-to-use-free-library?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/learn/how-to-use-free-library?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/learn/how-to-use-free-library" />
     <lastmod>2026-11-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://eduvelto.com/learn/how-to-use-job-practice</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/learn/how-to-use-job-practice?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/learn/how-to-use-job-practice?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/learn/how-to-use-job-practice" />
     <lastmod>2026-11-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://eduvelto.com/learn/how-to-use-ai-assistant</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/learn/how-to-use-ai-assistant?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/learn/how-to-use-ai-assistant?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/learn/how-to-use-ai-assistant" />
     <lastmod>2026-11-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://eduvelto.com/learn/how-to-use-opportunity-hub</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/learn/how-to-use-opportunity-hub?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/learn/how-to-use-opportunity-hub?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/learn/how-to-use-opportunity-hub" />
     <lastmod>2026-11-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://eduvelto.com/learn/how-to-use-life-services</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/learn/how-to-use-life-services?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/learn/how-to-use-life-services?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/learn/how-to-use-life-services" />
     <lastmod>2026-11-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://eduvelto.com/learn/spoken-english-practice</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/learn/spoken-english-practice?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/learn/spoken-english-practice?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/learn/spoken-english-practice" />
     <lastmod>2026-11-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://eduvelto.com/learn/goal-setting-students</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/learn/goal-setting-students?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/learn/goal-setting-students?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/learn/goal-setting-students" />
     <lastmod>2026-11-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://eduvelto.com/learn/staying-focused-studying</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/learn/staying-focused-studying?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/learn/staying-focused-studying?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/learn/staying-focused-studying" />
     <lastmod>2026-11-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://eduvelto.com/learn/sleep-and-study</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/learn/sleep-and-study?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/learn/sleep-and-study?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/learn/sleep-and-study" />
     <lastmod>2026-11-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://eduvelto.com/learn/reading-comprehension-strategies</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/learn/reading-comprehension-strategies?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/learn/reading-comprehension-strategies?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/learn/reading-comprehension-strategies" />
     <lastmod>2026-11-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://eduvelto.com/learn/learning-with-phone</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/learn/learning-with-phone?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/learn/learning-with-phone?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/learn/learning-with-phone" />
     <lastmod>2026-11-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://eduvelto.com/learn/asking-questions-class</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/learn/asking-questions-class?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/learn/asking-questions-class?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/learn/asking-questions-class" />
     <lastmod>2026-11-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://eduvelto.com/learn</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/learn?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/learn?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/learn" />
     <lastmod>2026-11-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://eduvelto.com/admissions</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/admissions?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/admissions?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/admissions" />
     <lastmod>2026-11-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://eduvelto.com/admissions/national-university</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/admissions/national-university?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/admissions/national-university?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/admissions/national-university" />
     <lastmod>2026-11-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://eduvelto.com/admissions/national-university/humanities</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/admissions/national-university/humanities?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/admissions/national-university/humanities?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/admissions/national-university/humanities" />
     <lastmod>2026-11-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://eduvelto.com/admissions/national-university/science</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/admissions/national-university/science?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/admissions/national-university/science?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/admissions/national-university/science" />
     <lastmod>2026-11-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://eduvelto.com/admissions/national-university/business</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/admissions/national-university/business?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/admissions/national-university/business?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/admissions/national-university/business" />
     <lastmod>2026-11-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://eduvelto.com/library</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/library?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/library?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/library" />
     <lastmod>2026-11-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://eduvelto.com/class</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/class?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/class?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/class" />
     <lastmod>2026-11-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://eduvelto.com/class/class-9-10</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/class/class-9-10?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/class/class-9-10?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/class/class-9-10" />
     <lastmod>2026-11-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://eduvelto.com/class/hsc</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/class/hsc?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/class/hsc?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/class/hsc" />
     <lastmod>2026-11-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://eduvelto.com/class/honours-masters</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/class/honours-masters?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/class/honours-masters?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/class/honours-masters" />
     <lastmod>2026-11-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://eduvelto.com/class/technical</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/class/technical?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/class/technical?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/class/technical" />
+    <lastmod>2026-11-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/class/madrasa</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/class/madrasa?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/class/madrasa?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/class/madrasa" />
+    <lastmod>2026-11-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://eduvelto.com/about</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/about?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/about?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/about" />
     <lastmod>2026-11-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://eduvelto.com/founder</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/founder?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/founder?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/founder" />
     <lastmod>2026-11-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://eduvelto.com/contact</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/contact?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/contact?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/contact" />
     <lastmod>2026-11-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://eduvelto.com/privacy</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/privacy?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/privacy?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/privacy" />
     <lastmod>2026-11-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://eduvelto.com/terms</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/terms?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/terms?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/terms" />
     <lastmod>2026-11-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://eduvelto.com/editorial-policy</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/editorial-policy?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/editorial-policy?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/editorial-policy" />
     <lastmod>2026-11-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://eduvelto.com/content-accuracy</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/content-accuracy?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/content-accuracy?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/content-accuracy" />
     <lastmod>2026-11-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://eduvelto.com/certificate-policy</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/certificate-policy?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/certificate-policy?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/certificate-policy" />
     <lastmod>2026-11-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://eduvelto.com/disclaimer</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/disclaimer?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/disclaimer?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/disclaimer" />
     <lastmod>2026-11-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://eduvelto.com/life</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/life?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/life?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/life" />
     <lastmod>2026-11-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://eduvelto.com/life/budget</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/life/budget?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/life/budget?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/life/budget" />
     <lastmod>2026-11-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://eduvelto.com/life/calculators</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/life/calculators?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/life/calculators?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/life/calculators" />
     <lastmod>2026-11-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://eduvelto.com/life/converters</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/life/converters?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/life/converters?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/life/converters" />
     <lastmod>2026-11-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://eduvelto.com/life/planner</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/life/planner?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/life/planner?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/life/planner" />
     <lastmod>2026-11-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://eduvelto.com/life/pdf-tools</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/life/pdf-tools?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/life/pdf-tools?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/life/pdf-tools" />
     <lastmod>2026-11-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://eduvelto.com/life/health</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/life/health?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/life/health?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/life/health" />
     <lastmod>2026-11-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://eduvelto.com/life/government</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/life/government?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/life/government?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/life/government" />
     <lastmod>2026-11-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://eduvelto.com/life/travel</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/life/travel?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/life/travel?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/life/travel" />
     <lastmod>2026-11-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://eduvelto.com/life/services</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/life/services?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/life/services?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/life/services" />
     <lastmod>2026-11-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -648,108 +967,162 @@
 
   <url>
     <loc>https://eduvelto.com/opportunities</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/opportunities?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/opportunities?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/opportunities" />
     <lastmod>2026-11-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://eduvelto.com/opportunities/cv-builder</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/opportunities/cv-builder?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/opportunities/cv-builder?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/opportunities/cv-builder" />
     <lastmod>2026-11-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://eduvelto.com/opportunities/interview-prep</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/opportunities/interview-prep?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/opportunities/interview-prep?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/opportunities/interview-prep" />
     <lastmod>2026-11-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://eduvelto.com/ai-assistant</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/ai-assistant?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/ai-assistant?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/ai-assistant" />
     <lastmod>2026-11-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://eduvelto.com/opportunities/career-guidance</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/opportunities/career-guidance?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/opportunities/career-guidance?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/opportunities/career-guidance" />
     <lastmod>2026-11-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://eduvelto.com/opportunities/entrepreneurship</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/opportunities/entrepreneurship?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/opportunities/entrepreneurship?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/opportunities/entrepreneurship" />
     <lastmod>2026-11-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://eduvelto.com/opportunities/income</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/opportunities/income?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/opportunities/income?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/opportunities/income" />
     <lastmod>2026-11-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://eduvelto.com/opportunities/bpsc-non-cadre-2026</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/opportunities/bpsc-non-cadre-2026?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/opportunities/bpsc-non-cadre-2026?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/opportunities/bpsc-non-cadre-2026" />
     <lastmod>2026-11-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://eduvelto.com/opportunities/unicef-writer-editor-2026</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/opportunities/unicef-writer-editor-2026?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/opportunities/unicef-writer-editor-2026?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/opportunities/unicef-writer-editor-2026" />
     <lastmod>2026-11-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://eduvelto.com/opportunities/undrr-intern-pm-2026</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/opportunities/undrr-intern-pm-2026?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/opportunities/undrr-intern-pm-2026?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/opportunities/undrr-intern-pm-2026" />
     <lastmod>2026-11-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://eduvelto.com/opportunities/commonwealth-shared-2027</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/opportunities/commonwealth-shared-2027?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/opportunities/commonwealth-shared-2027?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/opportunities/commonwealth-shared-2027" />
     <lastmod>2026-11-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://eduvelto.com/opportunities/kaggle-learn</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/opportunities/kaggle-learn?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/opportunities/kaggle-learn?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/opportunities/kaggle-learn" />
     <lastmod>2026-11-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://eduvelto.com/opportunities/google-skillshop</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/opportunities/google-skillshop?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/opportunities/google-skillshop?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/opportunities/google-skillshop" />
     <lastmod>2026-11-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://eduvelto.com/opportunities/upwork</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/opportunities/upwork?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/opportunities/upwork?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/opportunities/upwork" />
     <lastmod>2026-11-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://eduvelto.com/jobs/viva</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/jobs/viva?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/jobs/viva?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/jobs/viva" />
     <lastmod>2026-11-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://eduvelto.com/jobs/career</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/jobs/career?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/jobs/career?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/jobs/career" />
     <lastmod>2026-11-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://eduvelto.com/jobs/cv</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/jobs/cv?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/jobs/cv?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/jobs/cv" />
     <lastmod>2026-11-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://eduvelto.com/install</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/install?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/install?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/install" />
     <lastmod>2026-11-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
