@@ -11,12 +11,14 @@
 // What this wrapper DOES (deterrence that makes a screenshot useless):
 //  1. The paper renders as rasterized pixels (canvas image) — no
 //     selectable / copyable text in the preview.
-//  2. Only a PARTIAL preview is ever shown (the parent renders the
-//     first questions + a locked-remainder box) — a screenshot captures
-//     only the visible head of the paper.
-//  3. A dense, non-removable repeating diagonal watermark overlay
-//     (`eduvelto.com` + the logged-in user's email/ID) covers the
-//     preview, so a leaked screenshot is traceable to an account.
+//  2. The FULL paper is shown in the preview (owner 25 Nov 19:03 —
+//     "question lukai rakte hobe na sob dekaw"): every question is
+//     visible; nothing is hidden behind a lock. The teacher reviews
+//     their own paper in full before downloading.
+//  3. ONE large centered watermark overlay (`eduvelto.com` + the
+//     logged-in user's email/ID) sits in the middle of the preview,
+//     so a leaked screenshot is traceable to an account (owner
+//     25 Nov 19:03 — the old dense repeating diagonal grid is gone).
 //  4. Right-click, text selection, drag/drop and copy are blocked on
 //     the preview.
 //  5. The preview blurs/blacks out (filter: blur(14px)) the moment the
@@ -30,9 +32,8 @@
 //
 // UX caution (owner spec): the blur applies ONLY to the paper preview
 // area, never the whole app, so legitimate tab-switching is not
-// punished. The partial-preview lock never blocks the teacher from
-// reviewing their own paper — the full paper is theirs after choosing
-// a download path (free watermarked or Pro clean).
+// punished. The full preview never blocks the teacher from reviewing
+// their own paper — the PDF download is for printing/sharing.
 
 import { useCallback, useEffect, useRef, useState, type ReactNode } from 'react';
 import { QPG_WATERMARK_TEXT } from '../lib/questionPaper';
@@ -107,12 +108,11 @@ export function ProtectedContentWrapper(props: {
   }, [obscureNow, reveal]);
 
   const watermark = `${QPG_WATERMARK_TEXT} • ${props.userLabel}`;
-  const rows = [0, 1, 2, 3, 4, 5, 6, 7];
-  const cols = [0, 1, 2, 3];
 
   return (
     <div
       ref={rootRef}
+      className="qpg-protected-root"
       onContextMenu={(e) => e.preventDefault()}
       onCopy={(e) => e.preventDefault()}
       onCut={(e) => e.preventDefault()}
@@ -137,37 +137,30 @@ export function ProtectedContentWrapper(props: {
       >
         {props.children}
       </div>
-      {/* Dense, non-removable repeating diagonal watermark overlay. */}
+      {/* ONE large centered watermark (owner 25 Nov 19:03 — "moddokane
+          1 ta boro kore takle hobe"). Exactly one element, in the
+          middle of the paper. The per-page canvases underneath carry
+          the same single mark baked in, so the overlay is hidden in
+          print (see question-paper-print.css). */}
       <div
         aria-hidden="true"
+        data-qpg-watermark="single"
+        className="qpg-watermark-single"
         style={{
           position: 'absolute',
-          inset: 0,
-          overflow: 'hidden',
+          left: '50%',
+          top: '50%',
+          transform: 'translate(-50%, -50%) rotate(-28deg)',
+          fontSize: 'clamp(20px, 5vw, 44px)',
+          fontWeight: 700,
+          color: 'rgba(0,0,0,0.10)',
+          whiteSpace: 'nowrap',
+          userSelect: 'none',
           pointerEvents: 'none',
           zIndex: 5,
         }}
       >
-        {rows.flatMap((r) =>
-          cols.map((c) => (
-            <span
-              key={`${r}-${c}`}
-              style={{
-                position: 'absolute',
-                left: `${c * 26 - 6}%`,
-                top: `${r * 13 + 4}%`,
-                transform: 'rotate(-28deg)',
-                fontSize: 13,
-                fontWeight: 700,
-                color: 'rgba(0,0,0,0.13)',
-                whiteSpace: 'nowrap',
-                userSelect: 'none',
-              }}
-            >
-              {watermark}
-            </span>
-          )),
-        )}
+        {watermark}
       </div>
       {obscured ? (
         <div
@@ -190,8 +183,8 @@ export function ProtectedContentWrapper(props: {
           প্রিভিউ লুকানো আছে — উইন্ডোতে ফিরে আসলে আবার দেখা যাবে।
         </div>
       ) : null}
-      <p style={{ fontSize: 12, color: '#666', margin: '8px 10px', userSelect: 'none' }}>
-        প্রিভিউ সুরক্ষিত — আংশিক দেখা যায়, বাকিটা ডাউনলোডের পর। স্ক্রিনশট পুরোপুরি আটকানো যায় না
+      <p className="qpg-protected-note" style={{ fontSize: 12, color: '#666', margin: '8px 10px', userSelect: 'none' }}>
+        প্রিভিউ সুরক্ষিত — পুরো পেপার দেখা যায়। স্ক্রিনশট পুরোপুরি আটকানো যায় না
         (অপারেটিং সিস্টেম ও মোবাইল ক্যামেরা কোনো ওয়েবসাইট আটকাতে পারে না); তাই প্রিভিউয়ে জলছাপ দেওয়া থাকে।
       </p>
     </div>

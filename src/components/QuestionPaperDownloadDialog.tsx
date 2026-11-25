@@ -5,7 +5,8 @@
 // download; no code path here can download the question bank).
 //
 //   Option 1 — Download Free (With Eduvelto Watermark), ৳0:
-//     rasterized canvas PDF, diagonal eduvelto.com watermark,
+//     rasterized canvas PDF, ONE large centered eduvelto.com
+//     watermark per page (owner 25 Nov 19:03),
 //     "Powered by Eduvelto.com" inside the question border. Counts
 //     against the 3/month free quota — Firestore qpgUsage for
 //     signed-in users (Phase 2, spec §5), the local demo counter
@@ -193,7 +194,10 @@ export function QuestionPaperDownloadDialog(props: {
         setFreeError(`এই মাসের ${rec.limit}টি ফ্রি পেপার শেষ — Pro নিলে আনলিমিটেড ডাউনলোড করা যাবে।`);
         return;
       }
-      await downloadWatermarkedPaperPdf(props.paper, { includeOmrSheet: props.includeOmrSheet });
+      await downloadWatermarkedPaperPdf(props.paper, {
+        includeOmrSheet: props.includeOmrSheet,
+        userLabel: props.uid,
+      });
       setUsage({ used: rec.used, limit: rec.limit, remaining: rec.remaining });
       setFreeDone(true);
     } catch (err) {

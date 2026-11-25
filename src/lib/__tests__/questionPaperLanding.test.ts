@@ -58,13 +58,30 @@ describe('print layout (A4, client-side)', () => {
     expect(PRINT_CSS).toContain('display: none !important');
   });
 
+  it('never splits a question across printed pages (owner 25 Nov 19:03)', () => {
+    expect(PRINT_CSS).toContain('.qpg-question-block');
+    expect(PRINT_CSS).toContain('.qpg-preview-page');
+    expect(PRINT_CSS).toContain('break-inside: avoid');
+    expect(PRINT_CSS).toContain('page-break-inside: avoid');
+    expect(PRINT_CSS).toContain('.qpg-section-heading');
+    expect(PRINT_CSS).toContain('break-after: avoid');
+    // The overlay watermark never prints — each page image carries
+    // its own baked-in mark.
+    expect(PRINT_CSS).toContain('.qpg-watermark-single');
+    // Printing prints the FULL preview now — the old scope note
+    // ("prints the PREVIEW (first questions)") is gone.
+    expect(PRINT_CSS).not.toContain('first questions');
+    expect(PRINT_CSS).toContain('FULL paper');
+  });
+
   it('the generator page wires the print area, footer and print button', () => {
     expect(GENERATOR_SRC).toContain('qpg-print-area');
     expect(GENERATOR_SRC).toContain('qpg-print-footer');
     expect(GENERATOR_SRC).toContain('window.print()');
     expect(GENERATOR_SRC).toContain('question-paper-print.css');
-    // The print button is honest: it prints the preview, not the full paper.
-    expect(GENERATOR_SRC).toContain('পুরো পেপার PDF ডাউনলোড করুন');
+    // The print button is honest: it prints the FULL paper preview
+    // (owner 25 Nov 19:03 — every question visible, nothing hidden).
+    expect(GENERATOR_SRC).toContain('প্রিন্ট করুন (পুরো পেপার');
   });
 });
 

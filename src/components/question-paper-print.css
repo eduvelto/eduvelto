@@ -1,21 +1,41 @@
 /* Eduvelto — Question Paper Generator: A4 print layout (25 Nov 2026).
  *
  * Client-side Print / Save as PDF for the generated paper preview.
- * The preview is a raster image (no selectable text); printing prints
- * that image. The print footer carries the credit line:
+ * The preview is raster images — one <img> per A4 page
+ * (.qpg-preview-page) — so printing prints the FULL paper, every
+ * question, with each page image kept whole on its own printed page
+ * (owner 25 Nov 19:03 — no question may ever split across pages).
+ * The print footer carries the credit line:
  * "Powered by Eduvelto.com — বাংলাদেশের ফ্রি শিক্ষা প্ল্যাটফর্ম".
- *
- * Honest scope: printing prints the PREVIEW (first questions) — the
- * full paper is the PDF download. The button on the page says so.
  *
  * The window-blur blackout (ProtectedContentWrapper) must NOT leak
  * into the printed page: opening the print dialog can fire a window
  * blur, so print CSS forces the content filter off and hides the
  * blackout overlay. Blur stays 14px on screen (owner instruction).
+ * The single centered watermark OVERLAY is also hidden in print —
+ * each preview page image already carries the same single mark
+ * baked in, so the overlay would only double it (and it spans the
+ * whole multi-page stack, so it could land on a page boundary).
  */
 
 .qpg-print-footer {
   display: none;
+}
+
+/* Never split a question across pages — print path as well as PDF.
+ * Applies to the paper DOM blocks (where a real DOM paper prints)
+ * and to each preview page image (one A4 page per image). Section
+ * headings stay with their first question. */
+.qpg-question-block,
+.qpg-omr-row,
+.qpg-preview-page {
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+
+.qpg-section-heading {
+  break-after: avoid;
+  page-break-after: avoid;
 }
 
 @media print {
@@ -39,11 +59,31 @@
     width: 100%;
   }
 
+  /* One preview page image per printed page — never split one. */
+  .qpg-preview-page {
+    break-inside: avoid;
+    page-break-inside: avoid;
+    display: block;
+    width: 100%;
+  }
+
   /* Never print a blurred/blacked-out preview. */
   .qpg-protected-content {
     filter: none !important;
   }
   .qpg-protected-obscured {
+    display: none !important;
+  }
+
+  /* The wrapper's border/overflow must not clip across pages, and
+   * the overlay watermark + helper note never print (each page
+   * image already carries its own baked-in watermark). */
+  .qpg-protected-root {
+    overflow: visible !important;
+    border: none !important;
+  }
+  .qpg-watermark-single,
+  .qpg-protected-note {
     display: none !important;
   }
 

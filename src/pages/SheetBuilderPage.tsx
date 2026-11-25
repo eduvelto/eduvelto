@@ -48,9 +48,8 @@ import {
 } from '../lib/qpgExercises';
 import { loadCachedProStatus } from '../lib/qpgFirestore';
 import { QPG_PRO_LOCKED, type QpgProStatus } from '../lib/qpgProOrders';
-import { renderPaperCanvas } from '../lib/questionPaperPdf';
+import { renderPaperCanvases } from '../lib/questionPaperPdf';
 
-const PREVIEW_QUESTIONS = 5;
 
 export default function SheetBuilderPage() {
   const { user } = useAuth();
@@ -66,7 +65,7 @@ export default function SheetBuilderPage() {
   const [timeMinutes, setTimeMinutes] = useState(10);
   const [title, setTitle] = useState('অধ্যায়ভিত্তিক শিট');
   const [paper, setPaper] = useState<QpgPaper | null>(null);
-  const [previewUrl, setPreviewUrl] = useState<string | null>(null);
+  const [previewUrls, setPreviewUrls] = useState<string[]>([]);
   const [buildError, setBuildError] = useState('');
   const [building, setBuilding] = useState(false);
   const [showDownload, setShowDownload] = useState(false);
@@ -101,7 +100,7 @@ export default function SheetBuilderPage() {
     setSubjectId(nextSubjects[0]?.id ?? '');
     setSelection({});
     setPaper(null);
-    setPreviewUrl(null);
+    setPreviewUrls([]);
   };
 
   const pickClass = (c: string) => {
@@ -110,14 +109,14 @@ export default function SheetBuilderPage() {
     setSubjectId(nextSubjects[0]?.id ?? '');
     setSelection({});
     setPaper(null);
-    setPreviewUrl(null);
+    setPreviewUrls([]);
   };
 
   const pickSubject = (s: string) => {
     setSubjectId(s);
     setSelection({});
     setPaper(null);
-    setPreviewUrl(null);
+    setPreviewUrls([]);
   };
 
   const chapterPool = useMemo(
@@ -137,14 +136,14 @@ export default function SheetBuilderPage() {
       if (result.reasonsBn.length > 0 && result.questions.length === 0) {
         setBuildError(result.reasonsBn.join(' '));
         setPaper(null);
-        setPreviewUrl(null);
+        setPreviewUrls([]);
         return;
       }
       const picked = result.questions.slice(0, Math.max(1, count));
       if (picked.length === 0) {
         setBuildError('এই নির্বাচনে যাচাইকৃত প্রশ্ন পাওয়া যায়নি।');
         setPaper(null);
-        setPreviewUrl(null);
+        setPreviewUrls([]);
         return;
       }
       const setup = defaultPaperSetup({
@@ -164,9 +163,11 @@ export default function SheetBuilderPage() {
         patternLabelBn: 'অধ্যায়ভিত্তিক শিট (কাস্টম)',
         patternLabelEn: 'Chapter sheet (custom)',
       });
-      const canvas = await renderPaperCanvas(built, { watermarked: true });
+      // Full-sheet preview (owner 25 Nov 19:03): every question
+      // visible, one image per A4 page — never a partial preview.
+      const canvases = await renderPaperCanvases(built, { watermarked: true });
       setPaper(built);
-      setPreviewUrl(canvas.toDataURL('image/png'));
+      setPreviewUrls(canvases.map((c) => c.toDataURL('image/png')));
     } catch (err) {
       setBuildError(`শিট তৈরি করা যায়নি: ${err instanceof Error ? err.message : 'অজানা ত্রুটি'}`);
     } finally {
@@ -345,18 +346,22 @@ export default function SheetBuilderPage() {
       </Card>
 
       {/* Preview + download */}
-      {paper && previewUrl ? (
+      {paper && previewUrls.length > 0 ? (
         <Card style={{ marginBottom: 16 }} className="qpg-print-area">
           <h2 style={{ margin: '0 0 8px', fontSize: 16 }}>
-            প্রিভিউ — প্রথম {Math.min(PREVIEW_QUESTIONS, paper.questions.length)}টি প্রশ্ন
+            প্রিভিউ — সব {paper.questions.length}টি প্রশ্ন
           </h2>
           <ProtectedContentWrapper userLabel={userLabel}>
-            <img
-              src={previewUrl}
-              alt="শিটের আংশিক প্রিভিউ"
-              style={{ display: 'block', width: '100%', height: 'auto' }}
-              draggable={false}
-            />
+            {previewUrls.map((url, i) => (
+              <img
+                key={i}
+                src={url}
+                alt={`শিটের প্রিভিউ — পাতা ${i + 1}`}
+                className="qpg-preview-page"
+                style={{ display: 'block', width: '100%', height: 'auto' }}
+                draggable={false}
+              />
+            ))}
           </ProtectedContentWrapper>
           <div style={{ marginTop: 12, display: 'flex', gap: 8, flexWrap: 'wrap' }}>
             <Button onClick={() => setShowDownload(true)}>ডাউনলোডের অপশন দেখুন</Button>
@@ -364,7 +369,7 @@ export default function SheetBuilderPage() {
               variant="outline"
               onClick={() => {
                 setPaper(null);
-                setPreviewUrl(null);
+                setPreviewUrls([]);
               }}
             >
               আবার সাজান

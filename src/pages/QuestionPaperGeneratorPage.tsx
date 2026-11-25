@@ -80,10 +80,8 @@ import {
   type QpgReportReason,
 } from '../lib/questionPaperUsage';
 import { loadVerifiedChapterQuestions } from '../lib/questionPaperCache';
-import { renderPaperCanvas } from '../lib/questionPaperPdf';
+import { renderPaperCanvases } from '../lib/questionPaperPdf';
 import '../components/question-paper-print.css';
-
-const PREVIEW_QUESTIONS = 5;
 
 const TYPE_OPTIONS: Array<{ id: QpgQuestionType; nameBn: string; nameEn: string }> = [
   { id: 'mcq', nameBn: 'MCQ (বহুনির্বাচনি)', nameEn: 'MCQ' },
@@ -197,7 +195,7 @@ export default function QuestionPaperGeneratorPage() {
 
   // --- Generated paper + preview ------------------------------------
   const [paper, setPaper] = useState<QpgPaper | null>(null);
-  const [previewUrl, setPreviewUrl] = useState<string | null>(null);
+  const [previewUrls, setPreviewUrls] = useState<string[]>([]);
   const [previewBusy, setPreviewBusy] = useState(false);
   const [previewError, setPreviewError] = useState('');
   const [showDownload, setShowDownload] = useState(false);
@@ -256,7 +254,7 @@ export default function QuestionPaperGeneratorPage() {
   const pickStream = (s: QpgStream) => {
     setStream(s);
     setPaper(null);
-    setPreviewUrl(null);
+    setPreviewUrls([]);
     if (s === 'general') {
       setClassId('honours');
       setSubjectId('english');
@@ -277,7 +275,7 @@ export default function QuestionPaperGeneratorPage() {
     setTopicIds([]);
     setSelectedIds([]);
     setPaper(null);
-    setPreviewUrl(null);
+    setPreviewUrls([]);
     setOverrides({});
   };
 
@@ -287,7 +285,7 @@ export default function QuestionPaperGeneratorPage() {
     setTopicIds([]);
     setSelectedIds([]);
     setPaper(null);
-    setPreviewUrl(null);
+    setPreviewUrls([]);
     setOverrides({});
   };
 
@@ -297,7 +295,7 @@ export default function QuestionPaperGeneratorPage() {
     setTopicIds([]);
     setSelectedIds([]);
     setPaper(null);
-    setPreviewUrl(null);
+    setPreviewUrls([]);
   };
 
   const applyCount = (n: number) => {
@@ -387,22 +385,19 @@ export default function QuestionPaperGeneratorPage() {
     }));
   };
 
+  /** Full-paper preview (owner 25 Nov 19:03 — "question lukai
+   *  rakte hobe na sob dekaw"): every question is rendered, one image
+   *  per A4 page, paginated between questions — never mid-question.
+   *  Copy-protection (wrapper) stays; only the hiding is gone. */
   const renderPreview = async (built: QpgPaper) => {
     setPreviewBusy(true);
     setPreviewError('');
     try {
-      const previewPaper: QpgPaper = {
-        ...built,
-        questions: built.questions.slice(0, PREVIEW_QUESTIONS),
-      };
-      const hidden = built.questions.length - previewPaper.questions.length;
-      const canvas = await renderPaperCanvas(previewPaper, {
+      const canvases = await renderPaperCanvases(built, {
         watermarked: true,
         userLabel,
-        previewMode: true,
-        hiddenCount: hidden,
       });
-      setPreviewUrl(canvas.toDataURL('image/png'));
+      setPreviewUrls(canvases.map((c) => c.toDataURL('image/png')));
     } catch (err) {
       setPreviewError(`প্রিভিউ তৈরি করা যায়নি: ${err instanceof Error ? err.message : 'অজানা ত্রুটি'}`);
     } finally {
@@ -570,7 +565,7 @@ export default function QuestionPaperGeneratorPage() {
                     setJobExamSlug(t.examSlug);
                     setJobSubjectEn(t.subjects[0].nameEn);
                     setPaper(null);
-                    setPreviewUrl(null);
+                    setPreviewUrls([]);
                     setOverrides({});
                   }}
                 >
@@ -605,7 +600,7 @@ export default function QuestionPaperGeneratorPage() {
                 onClick={() => {
                   setJobSubjectEn(s.nameEn);
                   setPaper(null);
-                  setPreviewUrl(null);
+                  setPreviewUrls([]);
                   setOverrides({});
                 }}
               >
@@ -1334,11 +1329,13 @@ export default function QuestionPaperGeneratorPage() {
         </Card>
       ) : null}
 
-      {/* Step 7 — Protected partial preview + download */}
+      {/* Step 7 — Protected FULL preview + download (owner 25 Nov 19:03:
+          every question visible; one image per A4 page, so the print
+          path also paginates between questions, never mid-question) */}
       {paper !== null ? (
         <Card style={{ marginBottom: 16 }} className="qpg-print-area">
           <h2 style={{ margin: '0 0 8px', fontSize: 16 }}>
-            ৭. প্রিভিউ (সুরক্ষিত — আংশিক) ও ডাউনলোড
+            ৭. প্রিভিউ (সুরক্ষিত — পুরো পেপার) ও ডাউনলোড
           </h2>
           <p style={{ fontSize: 13, color: '#555', margin: '0 0 10px' }}>
             {paper.setup.title} — {paper.questions.length}টি প্রশ্ন • পূর্ণমান {paper.setup.totalMarks} •{' '}
@@ -1346,14 +1343,18 @@ export default function QuestionPaperGeneratorPage() {
           </p>
           {previewBusy ? <p style={{ fontSize: 13 }}>প্রিভিউ তৈরি হচ্ছে…</p> : null}
           {previewError ? <AlertBox tone="error">{previewError}</AlertBox> : null}
-          {previewUrl ? (
+          {previewUrls.length > 0 ? (
             <ProtectedContentWrapper userLabel={userLabel}>
-              <img
-                src={previewUrl}
-                alt="প্রশ্নপত্রের আংশিক প্রিভিউ"
-                style={{ display: 'block', width: '100%', height: 'auto' }}
-                draggable={false}
-              />
+              {previewUrls.map((url, i) => (
+                <img
+                  key={i}
+                  src={url}
+                  alt={`প্রশ্নপত্রের প্রিভিউ — পাতা ${i + 1}`}
+                  className="qpg-preview-page"
+                  style={{ display: 'block', width: '100%', height: 'auto' }}
+                  draggable={false}
+                />
+              ))}
             </ProtectedContentWrapper>
           ) : null}
           <div style={{ marginTop: 12, display: 'flex', gap: 8, flexWrap: 'wrap' }}>
@@ -1369,14 +1370,13 @@ export default function QuestionPaperGeneratorPage() {
               Smartboard-এ খুলুন
             </Button>
             <Button variant="outline" onClick={() => window.print()}>
-              প্রিন্ট করুন (প্রিভিউ — প্রথম {Math.min(PREVIEW_QUESTIONS, paper.questions.length)}টি প্রশ্ন;
-              পুরো পেপার PDF ডাউনলোড করুন)
+              প্রিন্ট করুন (পুরো পেপার — সব {paper.questions.length}টি প্রশ্ন)
             </Button>
             <Button
               variant="outline"
               onClick={() => {
                 setPaper(null);
-                setPreviewUrl(null);
+                setPreviewUrls([]);
               }}
             >
               আবার সাজান

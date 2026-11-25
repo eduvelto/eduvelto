@@ -230,7 +230,8 @@ export const QPG_WHATSAPP_USERNAME = '@eduvelto';
  *  account as @eduvelto, NOT strictly proven from the page alone.
  *  Never displayed to visitors — the branded redirect hides it. */
 export const QPG_WHATSAPP_NUMBER = '+8801975225751';
-/** Diagonal watermark on every free page + preview overlay. */
+/** Single centered watermark on every free page + preview overlay
+ *  (owner 25 Nov 19:03 — one big mark in the middle, no diagonal grid). */
 export const QPG_WATERMARK_TEXT = 'eduvelto.com';
 /** FINAL border wording (owner 25 Nov 08:38 — SUPERSEDES the earlier
  *  free-PDF border phrase; that old phrase must appear NOWHERE in

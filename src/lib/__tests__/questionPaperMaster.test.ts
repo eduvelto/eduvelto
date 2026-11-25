@@ -25,7 +25,7 @@ import {
   parseOmrKey,
   validateOmrRun,
 } from '../omrEvaluator';
-import { drawQpgDiagonalWatermark } from '../questionPaperPdf';
+import { drawQpgCenteredWatermark } from '../questionPaperPdf';
 import {
   QPG_REPORT_REWARD_DAYS,
   validateQpgReport,
@@ -265,10 +265,10 @@ describe('OMR checking is FREE for everyone (owner 25 Nov 09:43)', () => {
   it('the printable sheet follows the paper tier — watermarked free, clean Pro', () => {
     // Free path accepts the sheet and watermarks it.
     expect(PDF_LIB_SRC).toContain('includeOmrSheet');
-    expect(PDF_LIB_SRC).toContain('renderOmrSheetCanvas(paper, { watermarked: true })');
-    expect(PDF_LIB_SRC).toContain('opts: { watermarked?: boolean }');
+    expect(PDF_LIB_SRC).toContain('renderOmrSheetCanvases(paper, { watermarked: true, userLabel: opts.userLabel })');
+    expect(PDF_LIB_SRC).toContain('watermarked?: boolean');
     // Pro (clean) path renders the sheet without the watermark flag.
-    expect(PDF_LIB_SRC).toContain('extra.push(await renderOmrSheetCanvas(paper));');
+    expect(PDF_LIB_SRC).toContain('extra.push(...(await renderOmrSheetCanvases(paper)));');
     // The sheet is no longer described as Pro-only.
     expect(PDF_LIB_SRC).not.toContain('the sheet is Pro-only');
   });
@@ -282,8 +282,9 @@ describe('OMR checking is FREE for everyone (owner 25 Nov 09:43)', () => {
   it('the download dialog passes the sheet choice into the free download', () => {
     expect(DIALOG_SRC).toContain('includeOmrSheet');
     expect(DIALOG_SRC).toContain(
-      'downloadWatermarkedPaperPdf(props.paper, { includeOmrSheet: props.includeOmrSheet })',
+      'downloadWatermarkedPaperPdf(props.paper, {',
     );
+    expect(DIALOG_SRC).toContain('userLabel: props.uid');
     expect(DIALOG_SRC).toContain('OMR যাচাই সম্পূর্ণ ফ্রি');
   });
 });
@@ -303,7 +304,7 @@ describe('__INITIAL_DATA__ (Spark rule: pre-rendered, zero Firestore reads)', ()
   });
 });
 
-describe('diagonal watermark resets html2canvas transform (bug 25 Nov 2026)', () => {
+describe('single centered watermark resets html2canvas transform (bug 25 Nov 2026)', () => {
   function fakeCanvas() {
     const calls: string[] = [];
     const ctx = {
@@ -324,6 +325,8 @@ describe('diagonal watermark resets html2canvas transform (bug 25 Nov 2026)', ()
       globalAlpha: 1,
       fillStyle: '',
       font: '',
+      textAlign: '',
+      textBaseline: '',
     };
     const canvas = {
       width: 1588,
@@ -333,16 +336,22 @@ describe('diagonal watermark resets html2canvas transform (bug 25 Nov 2026)', ()
     return { canvas, calls };
   }
 
-  it('resets to identity BEFORE the first fillText, then paints 35 eduvelto.com marks', () => {
+  it('resets to identity BEFORE the first fillText, then paints ONE eduvelto.com mark', () => {
     const { canvas, calls } = fakeCanvas();
-    drawQpgDiagonalWatermark(canvas);
+    drawQpgCenteredWatermark(canvas);
     const resetAt = calls.indexOf('setTransform(1,0,0,1,0,0)');
     expect(resetAt).toBeGreaterThanOrEqual(0);
     const firstFill = calls.findIndex((c) => c.startsWith('fillText:'));
     expect(firstFill).toBeGreaterThan(resetAt);
     const fills = calls.filter((c) => c.startsWith('fillText:'));
-    expect(fills).toHaveLength(35);
-    expect(new Set(fills)).toEqual(new Set(['fillText:eduvelto.com']));
+    expect(fills).toEqual(['fillText:eduvelto.com']);
+  });
+
+  it('adds the per-user label as a second, smaller line under the one mark', () => {
+    const { canvas, calls } = fakeCanvas();
+    drawQpgCenteredWatermark(canvas, 'guest');
+    const fills = calls.filter((c) => c.startsWith('fillText:'));
+    expect(fills).toEqual(['fillText:eduvelto.com', 'fillText:guest']);
   });
 
   it('is a no-op (no throw) when the 2d context is unavailable', () => {
@@ -351,7 +360,7 @@ describe('diagonal watermark resets html2canvas transform (bug 25 Nov 2026)', ()
       height: 100,
       getContext: () => null,
     } as unknown as HTMLCanvasElement;
-    expect(() => drawQpgDiagonalWatermark(canvas)).not.toThrow();
+    expect(() => drawQpgCenteredWatermark(canvas)).not.toThrow();
   });
 });
 
