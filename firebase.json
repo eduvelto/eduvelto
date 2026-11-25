@@ -122,7 +122,7 @@
       },
       {
         "source": "/support",
-        "destination": "/bn/contact",
+        "destination": "/bn/support",
         "type": 301
       },
       {
@@ -510,6 +510,10 @@
       {
         "destination": "/index.html",
         "source": "/contact"
+      },
+      {
+        "destination": "/index.html",
+        "source": "/support"
       },
       {
         "destination": "/index.html",

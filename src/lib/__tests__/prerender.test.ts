@@ -47,7 +47,7 @@ function readSitemapPaths(): string[] {
 describe('PRERENDER_STATIC_PATHS', () => {
   it('covers every committed-sitemap URL, plus the new /books hub', () => {
     const sitemapPaths = readSitemapPaths();
-    expect(sitemapPaths.length).toBe(136);
+    expect(sitemapPaths.length).toBe(137);
     for (const p of sitemapPaths) {
       expect(PRERENDER_STATIC_PATHS, `sitemap path missing from prerender list: ${p}`).toContain(p);
     }
@@ -55,7 +55,9 @@ describe('PRERENDER_STATIC_PATHS', () => {
     // /founder IS prerendered since Phase 2 (25 Nov 2026): its SEO
     // moved from FounderPage's client-side useSeo into seo.ts.
     expect(PRERENDER_STATIC_PATHS).toContain('/founder');
-    expect(PRERENDER_STATIC_PATHS).not.toContain('/support'); // no route yet (Phase 2)
+    // /support IS prerendered since Phase 3 (25 Nov 2026): it is a
+    // real route now (/bn/support) with its SEO in src/lib/seo.ts.
+    expect(PRERENDER_STATIC_PATHS).toContain('/support');
     expect(PRERENDER_STATIC_PATHS).not.toContain('/ai-teacher'); // noindexed by design
     expect(new Set(PRERENDER_STATIC_PATHS).size).toBe(PRERENDER_STATIC_PATHS.length);
   });

@@ -34,6 +34,7 @@ import { useAuth } from '../lib/auth';
 import { useTheme } from '../lib/theme';
 import { useLanguage } from '../i18n/LanguageContext';
 import { langSwitchTarget, langUrl } from '../lib/langRouting';
+import SupportButton from './SupportModal';
 import type { Lang } from '../i18n/strings';
 import './home-redesign.css';
 
@@ -252,6 +253,8 @@ const SECONDARY: MenuItem[] = [
   { to: '/about', bn: 'আমাদের সম্পর্কে', en: 'About' },
   { to: '/founder', bn: 'প্রতিষ্ঠাতা', en: 'Founder' },
   { to: '/contact', bn: 'যোগাযোগ', en: 'Contact' },
+  // Phase 3 (25 Nov 2026): Support Eduvelto — real page + quick modal.
+  { to: '/support', bn: 'Eduvelto-কে সহায়তা করুন', en: 'Support Eduvelto' },
   { to: '/privacy', bn: 'গোপনীয়তা নীতি', en: 'Privacy Policy' },
 ];
 
@@ -441,7 +444,11 @@ export default function HeaderNav() {
             {theme === 'dark' ? <SunIcon /> : <MoonIcon />}
           </button>
           {/* Language toggle — top-right, beside the profile (owner rule 22 Nov 2026). */}
-          <LangToggleButton />          {loading ? null : user ? (
+          <LangToggleButton />
+          {/* Phase 3 (25 Nov 2026): prominent gold Support button —
+              opens the quick donate modal (full page at /:lang/support). */}
+          <SupportButton />
+          {loading ? null : user ? (
             <>
               <NavLink to="/dashboard" className={({ isActive }) => `ev-navlink${isActive ? ' ev-navlink-active' : ''}`}>
                 {tTab({ bn: 'ড্যাশবোর্ড', en: 'Dashboard' })}

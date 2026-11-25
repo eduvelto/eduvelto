@@ -97,7 +97,9 @@ describe('legacyRedirectTarget', () => {
     expect(legacyRedirectTarget('/ntrca')).toBe('/bn/jobs/ntrca');
     expect(legacyRedirectTarget('/admission')).toBe('/bn/admissions');
     expect(legacyRedirectTarget('/guides')).toBe('/bn/guides');
-    expect(legacyRedirectTarget('/support')).toBe('/bn/contact');
+    // Phase 3 (25 Nov 2026): /support is a real page now — the old
+    // alias to /bn/contact is replaced by the /bn/support route.
+    expect(legacyRedirectTarget('/support')).toBe('/bn/support');
   });
 
   it('keeps the pre-existing /jobs/primary 301 target', () => {

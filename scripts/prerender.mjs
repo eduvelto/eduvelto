@@ -79,11 +79,12 @@
 //
 // PHASE 2 EXTENSION POINT — PRERENDER_STATIC_PATHS is the ONE list
 // to extend: add legal pages and guide detail pages there when
-// their routes exist. (/support has NO route yet, so it is NOT in
-// the list — it 301s to /bn/contact instead. /founder IS in the
-// list since Phase 2 (25 Nov 2026): its SEO moved from FounderPage's
-// client-side useSeo into src/lib/seo.ts. Guide detail pages ARE
-// covered: /learn/<slug> x41 + /guides/<slug> x15.)
+// their routes exist. /support IS in the list since Phase 3
+// (25 Nov 2026): it is a real route now (/bn/support) with its SEO
+// in src/lib/seo.ts. /founder IS in the list since Phase 2
+// (25 Nov 2026): its SEO moved from FounderPage's client-side
+// useSeo into src/lib/seo.ts. Guide detail pages ARE covered:
+// /learn/<slug> x41 + /guides/<slug> x15.)
 
 import { readFileSync, writeFileSync, mkdirSync, existsSync, copyFileSync } from 'node:fs';
 import { join, dirname } from 'node:path';
@@ -206,6 +207,7 @@ export const PRERENDER_STATIC_PATHS = [
   '/about',
   '/founder',
   '/contact',
+  '/support',
   '/privacy-policy',
   '/terms',
   '/editorial-policy',

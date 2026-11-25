@@ -175,6 +175,7 @@ const LifeTravelPage = lazy(() => import('./pages/LifeTravelPage'));
 const LifeServicesPage = lazy(() => import('./pages/LifeServicesPage'));
 const AboutPage = lazy(() => import('./pages/AboutPage'));
 const ContactPage = lazy(() => import('./pages/ContactPage'));
+const SupportPage = lazy(() => import('./pages/SupportPage'));
 // STAGING MERGE (scale #4): FounderPage added as lazy — the scale branch
 // was based on f112b5c (pre-founder) and had no /founder route at all;
 // main 054c230 + the live site do, so the route is restored here.
@@ -647,6 +648,9 @@ export default function App() {
         <Route path="why-eduvelto" element={<WhyEduveltoPage />} />
         <Route path="founder" element={<FounderPage />} />
         <Route path="contact" element={<ContactPage />} />
+        {/* Phase 3 (25 Nov 2026): real /:lang/support page — the
+            old /support 301 to /bn/contact is replaced. */}
+        <Route path="support" element={<SupportPage />} />
         <Route path="privacy-policy" element={<PrivacyPage />} />
         <Route path="terms" element={<TermsPage />} />
         {/* Brand-SEO wave 1 (24 Nov 2026, F-08): trust/policy pages

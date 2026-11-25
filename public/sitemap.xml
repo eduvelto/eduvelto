@@ -965,6 +965,15 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://eduvelto.com/support</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/support?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/support?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/support" />
+    <lastmod>2026-11-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://eduvelto.com/privacy-policy</loc>
     <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/privacy-policy?lang=bn" />
     <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/privacy-policy?lang=en" />

@@ -694,6 +694,20 @@ const STATIC_ROUTES: Record<string, RouteSeoEntry> = {
       'Contact Eduvelto — ahmmizan23@gmail.com. Write to learn more about the free education platform of Bangladesh.',
     crumbEn: 'Contact',
   },
+  // Phase 3 (25 Nov 2026): /support is a real page now — the old
+  // 301 to /bn/contact is replaced by the /bn/support route (see
+  // langRouting.ts + firebase.json). The page invites voluntary
+  // support for the 100% free site; it promises nothing in return.
+  '/support': {
+    title: 'Eduvelto-কে সহায়তা করুন — Eduvelto',
+    description:
+      'Eduvelto সম্পূর্ণ বিনামূল্যে — স্বেচ্ছায় সহায়তা করুন। বিকাশ/নগদে পাঠান, TrxID দিয়ে নাম লিখুন। আপনার সহায়তা ফ্রি শিক্ষা চালিয়ে যেতে সাহায্য করে।',
+    crumb: 'সহায়তা করুন',
+    titleEn: 'Support Eduvelto — Eduvelto',
+    descriptionEn:
+      'Eduvelto is completely free — support it voluntarily. Send via bKash/Nagad and record your name with the TrxID. Your support keeps free education going.',
+    crumbEn: 'Support',
+  },
   // Phase 2 (25 Nov 2026): canonical URL is /privacy-policy; the old
   // /privacy URL 301-redirects to it (see langRouting.ts).
   '/privacy-policy': {

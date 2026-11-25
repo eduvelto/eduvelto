@@ -216,6 +216,8 @@ const SITEMAP_URLS = [
   '/about',
   '/founder',
   '/contact',
+  // Phase 3 (25 Nov 2026): real /:lang/support page.
+  '/support',
   '/privacy-policy',
   '/terms',
   // Brand-SEO wave 1, F-08 (24 Nov 2026): 4 new trust pages.
@@ -1530,8 +1532,8 @@ describe('resolveRouteSeo — English SEO (24 Nov 2026, language system)', () =>
 });
 
 describe('resolveRouteSeo — brand-SEO wave 2 (24 Nov 2026)', () => {
-  it('sitemap has 136 URLs (120 wave-9/10 + audit-M12 + 16 Phase 2 guides)', () => {
-    expect(SITEMAP_URLS.length).toBe(136);
+  it('sitemap has 137 URLs (120 wave-9/10 + audit-M12 + 16 Phase 2 guides + /support, Phase 3)', () => {
+    expect(SITEMAP_URLS.length).toBe(137);
   });
 
   it('English home title drops "Best"; Bangla title is unchanged', () => {

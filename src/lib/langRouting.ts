@@ -142,6 +142,10 @@ export const LEGACY_PUBLIC_SEGMENTS: readonly string[] = [
   'why-eduvelto',
   'founder',
   'contact',
+  // Phase 3 (25 Nov 2026): /support is a real lang-prefixed route
+  // now (/bn/support), so 'support' lives here instead of in
+  // LEGACY_ALIASES below — same pattern as 'guides' in Phase 2.
+  'support',
   'privacy',
   'privacy-policy',
   'terms',
@@ -156,16 +160,15 @@ export const LEGACY_PUBLIC_SEGMENTS: readonly string[] = [
 
 /** Short legacy aliases that never existed as routes but were used
 //  in copy / bookmarks: they map to the real lang-prefixed page. */
-// /support has no route of its own — it lands on /contact, the
-//  closest real page (flagged in the Phase 1 report; Phase 2 may
-//  give /support its own page and re-point this alias).
+// /support is NOT an alias any more (Phase 3, 25 Nov 2026): it is a
+// real lang-prefixed route (/bn/support, the Support Eduvelto
+// page), so 'support' lives in LEGACY_PUBLIC_SEGMENTS above.
 export const LEGACY_ALIASES: Readonly<Record<string, string>> = {
   '/bcs': '/jobs/bcs',
   '/bank': '/jobs/bank',
   '/primary': '/jobs/primary-teacher',
   '/ntrca': '/jobs/ntrca',
   '/admission': '/admissions',
-  '/support': '/contact',
 };
 // /guides is NOT an alias any more (Phase 2, 25 Nov 2026): it is a
 // real lang-prefixed route (/bn/guides, the Study Guides hub), so

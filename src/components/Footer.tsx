@@ -18,6 +18,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useLanguage } from '../i18n/LanguageContext';
 import { isValidNewsletterEmail, subscribeNewsletter } from '../lib/newsletter';
+import SupportButton from './SupportModal';
 import './home-redesign.css';
 
 function FacebookIcon() {
@@ -118,6 +119,11 @@ export default function Footer() {
             <br />
             {t({ bn: 'বাংলাদেশের শিক্ষার্থীদের জন্য বিনামূল্যে ডিজিটাল শিক্ষা।', en: 'Free digital education for the students of Bangladesh.' })}
           </p>
+          {/* Phase 3 (25 Nov 2026): prominent Support Eduvelto button —
+              opens the quick donate modal (full page at /:lang/support). */}
+          <p style={{ margin: '14px 0 0' }}>
+            <SupportButton />
+          </p>
           {/* Social — verified Organization profiles only (seo.ts sameAs). */}
           <div className="ev-footer-socials">
             <a href="https://www.facebook.com/EduveltoBD" target="_blank" rel="noreferrer" aria-label="Eduvelto on Facebook">
@@ -151,6 +157,7 @@ export default function Footer() {
           <Link to="/certificate-policy">{t({ bn: 'সার্টিফিকেট নীতি', en: 'Certificate Policy' })}</Link>
           <Link to="/disclaimer">{t({ bn: 'দায়বর্জন', en: 'Disclaimer' })}</Link>
           <Link to="/contact">{t({ bn: 'যোগাযোগ', en: 'Contact' })}</Link>
+          <Link to="/support">{t({ bn: 'Eduvelto-কে সহায়তা করুন', en: 'Support Eduvelto' })}</Link>
           <Link to="/install">{t({ bn: 'অ্যাপ ইনস্টল / আপডেট', en: 'Install / update app' })}</Link>
           <Link to="/health">{t({ bn: 'স্বাস্থ্য', en: 'Health' })}</Link>
           <Link to="/life">{t({ bn: 'জীবন সেবা', en: 'Life Services' })}</Link>
