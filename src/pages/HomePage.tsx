@@ -1084,3 +1084,16 @@ export default function HomePage() {
     </>
   );
 }
+import HomeBookSearchResults from '../components/HomeBookSearchResults';
+        {/* Phase 4: instant live book results (mobile). The dropdown
+            only appears once ≥2 characters are typed; the compact
+            index loads lazily on first typing, 0 Firestore reads. */}
+        <div className="ev-home-live-results-mobile">
+          <HomeBookSearchResults query={searchText} books={books} />
+        </div>
+          {/* Phase 4: instant live book results (desktop hero). Same
+              lazy compact index as the mobile box — 0 Firestore reads
+              per keystroke; results link to the book pages only. */}
+          <div className="ev-home-live-results-desktop">
+            <HomeBookSearchResults query={searchText} books={books} />
+          </div>

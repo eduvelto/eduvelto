@@ -21,6 +21,17 @@
 
 /* ---------- hero search (desktop, inside hero) ---------- */
 .ev-rd-hero-search { display: none; }
+/* Phase 4: homepage live-search results — one instance per
+   breakpoint (the mobile and desktop search boxes are separate
+   forms, each hidden at the other breakpoint). */
+.ev-home-live-results-mobile { display: none; }
+@media (max-width: 768px) {
+  .ev-home-live-results-mobile { display: block; }
+}
+.ev-home-live-results-desktop { display: none; }
+@media (min-width: 769px) {
+  .ev-home-live-results-desktop { display: block; max-width: 640px; }
+}
 @media (min-width: 769px) {
   .ev-rd-hero-search { display: flex; gap: 0; max-width: 640px; margin-top: 20px; background: var(--card); border: 1px solid var(--line-strong); border-radius: 999px; padding: 4px 4px 4px 18px; box-shadow: var(--shadow-sm); }
   .ev-rd-hero-search input { flex: 1; min-width: 0; border: 0; outline: 0; background: transparent; color: var(--ink); font-size: 15px; font-family: inherit; }

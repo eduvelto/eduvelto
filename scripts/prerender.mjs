@@ -1118,6 +1118,31 @@ async function main() {
   writeFile(distDir, 'robots.txt', buildRobotsTxt());
   writeFile(distDir, 'sitemap.xml', buildSitemapXml(sitemapUrls));
 
+  // --- book search index (Phase 4, 25 Nov 2026) ---
+  // Regenerated from the SAME book list this run already loaded, so
+  // a deploy always serves a fresh index (the committed
+  // public/book-search-index.json is only the fallback for a build
+  // without prerender). Compact shape only: id + title + subject +
+  // classLevel — no chapter/question payloads, nothing login-gated.
+  // The fixture books are all Published (verified); the live-REST
+  // path returns public books only. Entries sorted by id, like the
+  // standalone generator (scripts/build-book-search-index.mjs).
+  const searchIndex = {
+    version: 1,
+    generatedAt: new Date().toISOString(),
+    count: books.length,
+    entries: books
+      .map((b) => ({
+        id: b.id,
+        title: b.title,
+        subject: typeof b.subject === 'string' ? b.subject : '',
+        classLevel: typeof b.classLevel === 'string' ? b.classLevel : '',
+      }))
+      .sort((a, b) => (a.id < b.id ? -1 : a.id > b.id ? 1 : 0)),
+  };
+  writeFile(distDir, 'book-search-index.json', `${JSON.stringify(searchIndex)}\n`);
+  console.log(`Book search index: ${searchIndex.count} entries -> dist/book-search-index.json`);
+
   console.log(`Rendered pages: ${rendered} (${PRERENDER_STATIC_PATHS.length} static paths x 2 langs + ${books.length} books x 2 langs)`);
   console.log(`Sitemap URLs: ${sitemapUrls.length * 2} (bn + en variants)`);
   console.log(`SSR render fallbacks (shell + head only): ${renderFallbacks}`);
