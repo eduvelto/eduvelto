@@ -18,6 +18,7 @@
 //   /login  — sign in, so the owner can reach the admin fix
 //   /admin/* — the owner lowers minVersion again from /admin/app-version
 import { useCallback, useEffect, useState } from 'react';
+import { stripLangPrefix } from '../lib/langRouting';
 import { Link, useLocation } from 'react-router-dom';
 import { db } from '../firebase';
 import {
@@ -32,12 +33,15 @@ import { Button } from './ui';
 import { isNativeApp } from '../lib/isNativeApp';
 
 export function isGateExemptPath(pathname: string): boolean {
+  // Phase 1 (25 Nov 2026): public routes live under /:lang — check the
+  // bare path, or /bn/install would be blocked by the update gate.
+  const path = stripLangPrefix(pathname).path;
   return (
-    pathname === '/install' ||
-    pathname.startsWith('/install/') ||
-    pathname === '/login' ||
-    pathname.startsWith('/login/') ||
-    pathname.startsWith('/admin')
+    path === '/install' ||
+    path.startsWith('/install/') ||
+    path === '/login' ||
+    path.startsWith('/login/') ||
+    path.startsWith('/admin')
   );
 }
 

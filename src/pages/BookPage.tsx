@@ -10,9 +10,12 @@ import { AlertBox, Card, Chip, Skeleton, SkeletonCards } from '../components/ui'
 import { getPublishedBook, listPublishedChapters, type Book, type Chapter } from '../lib/content';
 import { useAuth } from '../lib/auth';
 import { useLanguage } from '../i18n/LanguageContext';
+import { SeoHead } from '../components/SeoHead';
+import { bookSeoData } from '../lib/seo';
+import { langUrl } from '../lib/langRouting';
 
 export default function BookPage() {
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
   const { user, loading: authLoading } = useAuth();
   const location = useLocation();
   // Sections audit (24 Nov 2026): return here after sign-in.
@@ -46,8 +49,12 @@ export default function BookPage() {
 
   return (
     <PageShell titleBn={book ? book.title : 'বই'} titleEn={book ? book.title : 'Book'}>
+      {/* Phase 1 (25 Nov 2026): per-book SEO once the book loads — the
+          prerendered static page carries the same tags (see
+          scripts/prerender.mjs + bookSeoData in lib/seo.ts). */}
+      {book ? <SeoHead {...bookSeoData(book, lang)} lang={lang} /> : null}
       <p style={{ margin: '0 0 16px' }}>
-        <Link to="/library" style={{ fontWeight: 600 }}>
+        <Link to={langUrl('/books', lang)} style={{ fontWeight: 600 }}>
           {t({ bn: '← লাইব্রেরি', en: '← Library' })}
         </Link>
       </p>

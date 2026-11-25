@@ -32,13 +32,26 @@
 import { createContext, useCallback, useContext, useEffect, useState, type ReactNode } from 'react';
 import type { Lang } from './strings';
 import { useAuth } from '../lib/auth';
+import { isSupportedLang, parseLangSegment } from '../lib/langRouting';
 
 const STORAGE_KEY = 'eduvelto-language';
+
+export function getStoredLanguage(): Lang | null {
+  return readStored();
+}
 
 function readStored(): Lang | null {
   try {
     const v = window.localStorage.getItem(STORAGE_KEY);
     return v === 'bn' || v === 'en' ? v : null;
+  } catch {
+    return null;
+  }
+}
+
+function readPathLang(): Lang | null {
+  try {
+    return parseLangSegment(window.location.pathname);
   } catch {
     return null;
   }
@@ -72,6 +85,10 @@ export type LanguageState = {
   /** Alias of `lang` (kept for the header toggle + greeting bar). */
   tabLang: Lang;
   setLanguage: (next: Lang) => void;
+  /** Adopt the language from a /:lang URL navigation (LangLayout).
+   *  Sets state + localStorage only — it never rewrites the URL and
+   *  never saves the profile (the URL is already the choice). */
+  syncLanguageFromPath: (next: Lang) => void;
   /** Pick the string in the selected language (Bangla fallback). */
   t: (entry: LangEntry) => string;
   /** Alias of `t` (kept for tab-label callsites). */
@@ -82,6 +99,7 @@ export const LanguageContext = createContext<LanguageState>({
   lang: 'bn',
   tabLang: 'bn',
   setLanguage: () => {},
+  syncLanguageFromPath: () => {},
   t: (entry) => entry.bn,
   tTab: (entry) => entry.bn,
 });
@@ -89,6 +107,10 @@ export const LanguageContext = createContext<LanguageState>({
 export function LanguageProvider({ children }: { children: ReactNode }) {
   const { user, profile, saveProfile } = useAuth();
   const [lang, setLangState] = useState<Lang>(() => {
+    // Phase 1 (25 Nov 2026): the /:lang URL segment is the source of
+    // truth and outranks ?lang (kept for old shared links).
+    const fromPath = readPathLang();
+    if (fromPath) return fromPath;
     const fromUrl = readUrlLang();
     if (fromUrl) {
       try {
@@ -111,6 +133,10 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
   // device choice (localStorage / ?lang=) is the only source.
   useEffect(() => {
     if (!user || !profile) return;
+    // A /:lang URL already states the language — it wins over the
+    // profile (Phase 1). The profile is adopted only on legacy
+    // (unprefixed) URLs, e.g. right after sign-in from /login.
+    if (parseLangSegment(window.location.pathname)) return;
     if (profile.language === 'bn' || profile.language === 'en') {
       setLangState((current) => {
         if (current !== profile.language) {
@@ -130,6 +156,19 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     document.documentElement.lang = lang;
   }, [lang]);
+
+  const syncLanguageFromPath = useCallback((next: Lang) => {
+    if (!isSupportedLang(next)) return;
+    setLangState((current) => {
+      if (current === next) return current;
+      try {
+        window.localStorage.setItem(STORAGE_KEY, next);
+      } catch {
+        // ignore
+      }
+      return next;
+    });
+  }, []);
 
   const setLanguage = useCallback(
     (next: Lang) => {
@@ -159,7 +198,11 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
   // Tab labels follow the selected language too (alias of `t`).
   const tTab = t;
 
-  return <LanguageContext.Provider value={{ lang, tabLang, setLanguage, t, tTab }}>{children}</LanguageContext.Provider>;
+  return (
+    <LanguageContext.Provider value={{ lang, tabLang, setLanguage, syncLanguageFromPath, t, tTab }}>
+      {children}
+    </LanguageContext.Provider>
+  );
 }
 
 export function useLanguage(): LanguageState {

@@ -1,5 +1,5 @@
 import { Suspense, lazy, useCallback, useEffect, useState } from 'react';
-import { Navigate, Route, Routes, useLocation, useNavigate } from 'react-router-dom';
+import { Navigate, Outlet, Route, Routes, useLocation, useNavigate, useParams } from 'react-router-dom';
 import { loginState } from './lib/loginReturn';
 import { strings } from './i18n/strings';
 import { useAuth } from './lib/auth';
@@ -25,7 +25,8 @@ import { AdminGuard } from './components/AdminGuard';
 import { AppLoadingScreen } from './components/AppLoadingScreen';
 import { RouteSeo } from './components/RouteSeo';
 import { NuQuestionWorkbenchGuard } from './components/NuQuestionWorkbenchGuard';
-import { T, useLanguage } from './i18n/LanguageContext';
+import { T, getStoredLanguage, useLanguage } from './i18n/LanguageContext';
+import { legacyRedirectTarget, resolveRootLang } from './lib/langRouting';
 import { setupNativeBackButton } from './lib/nativeBackButton';
 import { setupPushNotifications } from './lib/pushNotifications';
 // SCALE (10k users): route-level code splitting. Before this change the
@@ -207,6 +208,55 @@ function DashboardRedirect() {
   return <Navigate to="/student" replace />;
 }
 
+
+// BILINGUAL ROUTING (Phase 1, 25 Nov 2026, SSG + bilingual):
+// public content lives under /:lang (bn | en). Root '/' redirects
+// (?lang > localStorage > user profile, default bn); legacy public
+// URLs redirect to /bn/... — in-app via LegacyRedirect below, and
+// for direct loads via the firebase.json 301s (which evaluate
+// BEFORE rewrites). /app, /admin, /ceo, /login, /register,
+// /profile, /dashboard, /student, /teacher, /guardian, /directory,
+// /subjects, /quiz, /exam, /routine, /progress and /social stay
+// OUTSIDE /:lang (client-only / login-gated) and never redirect.
+// ALL real pages stay live — nothing is commented out (Gemini's
+// draft App.tsx commented them all out; that must never happen).
+function RootRedirect() {
+  const location = useLocation();
+  const { profile } = useAuth();
+  const params = new URLSearchParams(location.search);
+  const lang = resolveRootLang({
+    queryLang: params.get('lang'),
+    storedLang: getStoredLanguage(),
+    profileLang: profile?.language ?? null,
+  });
+  params.delete('lang');
+  const suffix = params.toString() ? `?${params.toString()}` : '';
+  return <Navigate to={`/${lang}${suffix}`} replace />;
+}
+
+function LangLayout() {
+  const { lang } = useParams<{ lang: string }>();
+  const location = useLocation();
+  const { syncLanguageFromPath } = useLanguage();
+  useEffect(() => {
+    if (lang === 'bn' || lang === 'en') syncLanguageFromPath(lang);
+  }, [lang, syncLanguageFromPath]);
+  if (lang !== 'bn' && lang !== 'en') {
+    // A non-language first segment reached the :lang route (a legacy
+    // URL the static redirect routes did not outrank): send it
+    // through the legacy mapping, else to /bn + the same path.
+    const target = legacyRedirectTarget(location.pathname) ?? `/bn${location.pathname}`;
+    return <Navigate to={`${target}${location.search}`} replace />;
+  }
+  return <Outlet />;
+}
+
+function LegacyRedirect() {
+  const location = useLocation();
+  const target = legacyRedirectTarget(location.pathname) ?? '/bn';
+  return <Navigate to={`${target}${location.search}`} replace />;
+}
+
 // Routes mirror page-map.md + the Phase 2 route list.
 // /social is a DESIGN PROPOSAL only (blueprint §7): no live social
 // features, no messaging, until safety + moderation are ready.
@@ -385,19 +435,21 @@ export default function App() {
         ) : null}
         <Suspense fallback={<main style={{ maxWidth: 720, margin: '0 auto', padding: '24px 16px' }}><p>{t(strings.common.loading)}</p></main>}>
         <Routes>
-        <Route path="/" element={<HomePage />} />
+        <Route path="/" element={<RootRedirect />} />
+        <Route path=":lang" element={<LangLayout />}>
+        <Route index element={<HomePage />} />
         {/* Global Search (homepage redesign, 24 Nov 2026): /search?q=…
             searches books + jobs + opportunities + life services. The
             page is deliberately NOT in seo.ts STATIC_ROUTES and is
             disallowed in robots.txt — search result pages are noindex. */}
-        <Route path="/search" element={<SearchPage />} />
+        <Route path="search" element={<SearchPage />} />
         {/* Four main sections (homepage redesign, 21 Nov 2026): /class is
             the real class index; /skills lands on the shared Coming Soon
             page until it is built (22 Nov 2026: /jobs moved to the real
             JobsPage below — the old /jobs Coming Soon route shadowed it).
             /admissions is now the hub index (NU-5) — see the NU routes below. */}
-        <Route path="/class" element={<ClassIndexPage />} />
-        <Route path="/skills" element={<ComingSoonPage section="skills" />} />
+        <Route path="class" element={<ClassIndexPage />} />
+        <Route path="skills" element={<ComingSoonPage section="skills" />} />
         {/* NU admission (NU-5, design §5): index → NU hub (8 tabs) →
             group pages → candidate dashboard. The dashboard and the
             three STATIC group routes sit above the hub's `:tab` route
@@ -405,143 +457,228 @@ export default function App() {
             `/admissions/national-university/science` is the Science
             group page, never the "science" tab. NU-Q6 (final):
             the dashboard is `/admissions/dashboard`. */}
-        <Route path="/admissions" element={<AdmissionsIndexPage />} />
-        <Route path="/admissions/dashboard" element={<AdmissionsDashboardPage />} />
-        <Route path="/admissions/national-university" element={<NuHubPage />} />
-        <Route path="/admissions/national-university/humanities" element={<NuGroupPage group="humanities" />} />
-        <Route path="/admissions/national-university/science" element={<NuGroupPage group="science" />} />
-        <Route path="/admissions/national-university/business" element={<NuGroupPage group="business" />} />
+        <Route path="admissions" element={<AdmissionsIndexPage />} />
+        <Route path="admissions/dashboard" element={<AdmissionsDashboardPage />} />
+        <Route path="admissions/national-university" element={<NuHubPage />} />
+        <Route path="admissions/national-university/humanities" element={<NuGroupPage group="humanities" />} />
+        <Route path="admissions/national-university/science" element={<NuGroupPage group="science" />} />
+        <Route path="admissions/national-university/business" element={<NuGroupPage group="business" />} />
         {/* NU-6 (design §5.4): subject → chapter → topic pages. Five
             segments, so they never match the hub's 3-segment `:tab`
             route; a wrong group/subject/topic slug shows the page's
             own honest "not found" card. */}
-        <Route path="/admissions/national-university/:group/subjects/:subject" element={<NuSubjectPage />} />
-        <Route path="/admissions/national-university/:group/subjects/:subject/:topic" element={<NuTopicPage />} />
-        <Route path="/admissions/national-university/:tab" element={<NuHubPage />} />
+        <Route path="admissions/national-university/:group/subjects/:subject" element={<NuSubjectPage />} />
+        <Route path="admissions/national-university/:group/subjects/:subject/:topic" element={<NuTopicPage />} />
+        <Route path="admissions/national-university/:tab" element={<NuHubPage />} />
         {/* Class-wise navigation (stage 3): Select Class → Class Dashboard → Tab → Subject → Book → Chapter. */}
-        <Route path="/class/:slug/subjects/:dept" element={<ClassSubjectPage />} />
-        <Route path="/class/:slug/:tab" element={<ClassDashboardPage />} />
-        <Route path="/class/:slug" element={<ClassDashboardPage />} />
+        <Route path="class/:slug/subjects/:dept" element={<ClassSubjectPage />} />
+        <Route path="class/:slug/:tab" element={<ClassDashboardPage />} />
+        <Route path="class/:slug" element={<ClassDashboardPage />} />
         {/* Job Preparation (B-1.3): /jobs → hub index, /jobs/common, /jobs/dashboard, /jobs/:exam[/:tab]. /jobs/common and /jobs/dashboard must come before /jobs/:exam. Step 6 subject/topic pages are 4- and 5-segment routes (/jobs/:exam/subjects/:subject[/:topic]) — they cannot match the 3-segment /jobs/:exam/:tab route. */}
-        <Route path="/jobs" element={<JobsPage />} />
-        <Route path="/jobs/common" element={<JobsCommonPage />} />
-        <Route path="/jobs/dashboard" element={<JobSeekerDashboardPage />} />
-        <Route path="/jobs/:exam/subjects/:subject" element={<JobSubjectPage />} />
-        <Route path="/jobs/:exam/subjects/:subject/:topic" element={<JobTopicPage />} />
+        <Route path="jobs" element={<JobsPage />} />
+        <Route path="jobs/common" element={<JobsCommonPage />} />
+        <Route path="jobs/dashboard" element={<JobSeekerDashboardPage />} />
+        <Route path="jobs/:exam/subjects/:subject" element={<JobSubjectPage />} />
+        <Route path="jobs/:exam/subjects/:subject/:topic" element={<JobTopicPage />} />
         {/* Step 8: practice + result MUST come before /jobs/:exam/:tab
             — otherwise '/jobs/practice/:scope' matches :exam='practice'. */}
-        <Route path="/jobs/practice/:scope" element={<JobPracticePage />} />
+        <Route path="jobs/practice/:scope" element={<JobPracticePage />} />
         {/* Step 9: mock MUST come before /jobs/:exam/:tab for the
             same reason — otherwise '/jobs/mock/:mockId' matches
             :exam='mock'. */}
-        <Route path="/jobs/mock/:mockId" element={<JobMockPage />} />
-        <Route path="/jobs/result/:attemptId" element={<JobResultPage />} />
+        <Route path="jobs/mock/:mockId" element={<JobMockPage />} />
+        <Route path="jobs/result/:attemptId" element={<JobResultPage />} />
         {/* Step 10: analysis MUST come before /jobs/:exam/:tab
             — otherwise '/jobs/analysis' matches :exam='analysis'. */}
-        <Route path="/jobs/analysis" element={<JobAnalysisPage />} />
+        <Route path="jobs/analysis" element={<JobAnalysisPage />} />
         {/* Step 12: planner MUST come before /jobs/:exam/:tab
             — otherwise '/jobs/planner' matches :exam='planner'. */}
-        <Route path="/jobs/planner" element={<JobPlannerPage />} />
+        <Route path="jobs/planner" element={<JobPlannerPage />} />
         {/* Step 13: wrong-answer notebook + its re-practice
             session MUST come before /jobs/:exam/:tab — otherwise
             '/jobs/wrong-answers' matches :exam='wrong-answers'. */}
-        <Route path="/jobs/wrong-answers" element={<JobWrongAnswersPage />} />
-        <Route path="/jobs/wrong-answers/practice/:topicId" element={<JobWrongAnswersPracticePage />} />
+        <Route path="jobs/wrong-answers" element={<JobWrongAnswersPage />} />
+        <Route path="jobs/wrong-answers/practice/:topicId" element={<JobWrongAnswersPracticePage />} />
         {/* Step 14: circulars + calendar + notifications MUST come
             before /jobs/:exam/:tab — otherwise '/jobs/circulars'
             matches :exam='circulars'. */}
-        <Route path="/jobs/circulars" element={<JobCircularsPage />} />
-        <Route path="/jobs/circulars/:circularId" element={<JobCircularDetailPage />} />
-        <Route path="/jobs/calendar" element={<JobCalendarPage />} />
-        <Route path="/jobs/notifications" element={<JobNotificationsPage />} />
+        <Route path="jobs/circulars" element={<JobCircularsPage />} />
+        <Route path="jobs/circulars/:circularId" element={<JobCircularDetailPage />} />
+        <Route path="jobs/calendar" element={<JobCalendarPage />} />
+        <Route path="jobs/notifications" element={<JobNotificationsPage />} />
         {/* Live Exam (design §6 item 12): MUST come before
             /jobs/:exam/:tab — otherwise '/jobs/live-exam/:exam'
             matches :exam='live-exam'. */}
-        <Route path="/jobs/live-exam/:exam" element={<JobLiveExamPage />} />
+        <Route path="jobs/live-exam/:exam" element={<JobLiveExamPage />} />
         {/* Job Preparation System (owner brief 24 Nov 2026 20:38):
             11–20 post-family pages, typing simulator, written
             system and model tests MUST come before /jobs/:exam/:tab
             — otherwise '/jobs/grade-11-20/posts/:postSlug' matches
             :exam='grade-11-20', :tab='posts'. */}
-        <Route path="/jobs/grade-11-20/posts/:postSlug" element={<JobPostFamilyPage />} />
-        <Route path="/jobs/grade-11-20/typing" element={<JobTypingPage />} />
-        <Route path="/jobs/:exam/written" element={<JobWrittenIndexPage />} />
-        <Route path="/jobs/:exam/written/:questionId" element={<JobWrittenQuestionPage />} />
-        <Route path="/jobs/model-test" element={<JobModelTestPage />} />
-        <Route path="/jobs/model-test/:modelTestId" element={<JobModelTestPage />} />
+        <Route path="jobs/grade-11-20/posts/:postSlug" element={<JobPostFamilyPage />} />
+        <Route path="jobs/grade-11-20/typing" element={<JobTypingPage />} />
+        <Route path="jobs/:exam/written" element={<JobWrittenIndexPage />} />
+        <Route path="jobs/:exam/written/:questionId" element={<JobWrittenQuestionPage />} />
+        <Route path="jobs/model-test" element={<JobModelTestPage />} />
+        <Route path="jobs/model-test/:modelTestId" element={<JobModelTestPage />} />
         {/* Step 16: guide pages MUST come before /jobs/:exam/:tab —
             otherwise '/jobs/viva' matches :exam='viva'. */}
-        <Route path="/jobs/viva" element={<JobGuidePage kind="viva" />} />
-        <Route path="/jobs/career" element={<JobGuidePage kind="career" />} />
-        <Route path="/jobs/cv" element={<JobGuidePage kind="cv" />} />
+        <Route path="jobs/viva" element={<JobGuidePage kind="viva" />} />
+        <Route path="jobs/career" element={<JobGuidePage kind="career" />} />
+        <Route path="jobs/cv" element={<JobGuidePage kind="cv" />} />
         {/* AdSense Part 1 (public content, F1 fix): static BCS English
             practice (hub + 3 categories) and 2 sample lessons — public,
             no login, no Firestore. Placed with the other specific /jobs
             routes, before /jobs/:exam/:tab, by the file's convention.
             The :category param is validated inside PublicBcsEnglishPage;
             unknown values show an honest not-found, never the raw slug. */}
-        <Route path="/jobs/bcs/practice/english" element={<PublicBcsEnglishPage />} />
-        <Route path="/jobs/bcs/practice/english/:category" element={<PublicBcsEnglishPage />} />
-        <Route path="/learn" element={<LearnHubPage />} />
-        <Route path="/learn/bcs-english-tense" element={<PublicLessonPage lesson="tense" />} />
-        <Route path="/learn/bcs-english-preposition" element={<PublicLessonPage lesson="preposition" />} />
+        <Route path="jobs/bcs/practice/english" element={<PublicBcsEnglishPage />} />
+        <Route path="jobs/bcs/practice/english/:category" element={<PublicBcsEnglishPage />} />
+        <Route path="learn" element={<LearnHubPage />} />
+        <Route path="learn/bcs-english-tense" element={<PublicLessonPage lesson="tense" />} />
+        <Route path="learn/bcs-english-preposition" element={<PublicLessonPage lesson="preposition" />} />
         {/* Brand-SEO wave 1 (24 Nov 2026) + wave 2 (24 Nov 2026) +
             wave 3 (24 Nov 2026) + wave 4 (24 Nov 2026): 29 public guides — explicit routes,
             one per guide slug (see PublicGuidePage). */}
-        <Route path="/learn/bcs-preparation-guide" element={<PublicGuidePage guide="bcs-preparation-guide" />} />
-        <Route path="/learn/bank-job-preparation" element={<PublicGuidePage guide="bank-job-preparation" />} />
-        <Route path="/learn/primary-teacher-preparation" element={<PublicGuidePage guide="primary-teacher-preparation" />} />
-        <Route path="/learn/ntrca-preparation" element={<PublicGuidePage guide="ntrca-preparation" />} />
-        <Route path="/learn/nu-admission-guide" element={<PublicGuidePage guide="nu-admission-guide" />} />
-        <Route path="/learn/english-grammar-basics" element={<PublicGuidePage guide="english-grammar-basics" />} />
-        <Route path="/learn/scholarship-guide" element={<PublicGuidePage guide="scholarship-guide" />} />
-        <Route path="/learn/what-is-ai" element={<PublicGuidePage guide="what-is-ai" />} />
-        <Route path="/learn/cv-writing-guide" element={<PublicGuidePage guide="cv-writing-guide" />} />
-        <Route path="/learn/budget-planner-guide" element={<PublicGuidePage guide="budget-planner-guide" />} />
-        <Route path="/learn/revision-strategy" element={<PublicGuidePage guide="revision-strategy" />} />
-        <Route path="/learn/note-taking-guide" element={<PublicGuidePage guide="note-taking-guide" />} />
-        <Route path="/learn/time-management-students" element={<PublicGuidePage guide="time-management-students" />} />
-        <Route path="/learn/english-writing-basics" element={<PublicGuidePage guide="english-writing-basics" />} />
-        <Route path="/learn/online-safety-guide" element={<PublicGuidePage guide="online-safety-guide" />} />
-        <Route path="/learn/bangla-spelling-common-mistakes" element={<PublicGuidePage guide="bangla-spelling-common-mistakes" />} />
-        <Route path="/learn/computer-basics-students" element={<PublicGuidePage guide="computer-basics-students" />} />
-        <Route path="/learn/exam-day-strategy" element={<PublicGuidePage guide="exam-day-strategy" />} />
-        <Route path="/learn/mcq-answering-techniques" element={<PublicGuidePage guide="mcq-answering-techniques" />} />
-        <Route path="/learn/memory-techniques-students" element={<PublicGuidePage guide="memory-techniques-students" />} />
-        <Route path="/learn/study-routine-job-seekers" element={<PublicGuidePage guide="study-routine-job-seekers" />} />
-        <Route path="/learn/healthy-habits-students" element={<PublicGuidePage guide="healthy-habits-students" />} />
-        <Route path="/learn/digital-skills-basics" element={<PublicGuidePage guide="digital-skills-basics" />} />
-        <Route path="/learn/exam-anxiety-management" element={<PublicGuidePage guide="exam-anxiety-management" />} />
-        <Route path="/learn/presentation-skills" element={<PublicGuidePage guide="presentation-skills" />} />
-        <Route path="/learn/group-study-guide" element={<PublicGuidePage guide="group-study-guide" />} />
-        <Route path="/learn/english-vocabulary-building" element={<PublicGuidePage guide="english-vocabulary-building" />} />
-        <Route path="/learn/effective-reading-habits" element={<PublicGuidePage guide="effective-reading-habits" />} />
-        <Route path="/learn/self-motivation-students" element={<PublicGuidePage guide="self-motivation-students" />} />
-        <Route path="/learn/how-to-use-free-library" element={<PublicGuidePage guide="how-to-use-free-library" />} />
-        <Route path="/learn/how-to-use-job-practice" element={<PublicGuidePage guide="how-to-use-job-practice" />} />
-        <Route path="/learn/how-to-use-ai-assistant" element={<PublicGuidePage guide="how-to-use-ai-assistant" />} />
-        <Route path="/learn/how-to-use-opportunity-hub" element={<PublicGuidePage guide="how-to-use-opportunity-hub" />} />
-        <Route path="/learn/how-to-use-life-services" element={<PublicGuidePage guide="how-to-use-life-services" />} />
-        <Route path="/learn/spoken-english-practice" element={<PublicGuidePage guide="spoken-english-practice" />} />
-        <Route path="/learn/goal-setting-students" element={<PublicGuidePage guide="goal-setting-students" />} />
-        <Route path="/learn/staying-focused-studying" element={<PublicGuidePage guide="staying-focused-studying" />} />
-        <Route path="/learn/sleep-and-study" element={<PublicGuidePage guide="sleep-and-study" />} />
-        <Route path="/learn/reading-comprehension-strategies" element={<PublicGuidePage guide="reading-comprehension-strategies" />} />
-        <Route path="/learn/learning-with-phone" element={<PublicGuidePage guide="learning-with-phone" />} />
-        <Route path="/learn/asking-questions-class" element={<PublicGuidePage guide="asking-questions-class" />} />
+        <Route path="learn/bcs-preparation-guide" element={<PublicGuidePage guide="bcs-preparation-guide" />} />
+        <Route path="learn/bank-job-preparation" element={<PublicGuidePage guide="bank-job-preparation" />} />
+        <Route path="learn/primary-teacher-preparation" element={<PublicGuidePage guide="primary-teacher-preparation" />} />
+        <Route path="learn/ntrca-preparation" element={<PublicGuidePage guide="ntrca-preparation" />} />
+        <Route path="learn/nu-admission-guide" element={<PublicGuidePage guide="nu-admission-guide" />} />
+        <Route path="learn/english-grammar-basics" element={<PublicGuidePage guide="english-grammar-basics" />} />
+        <Route path="learn/scholarship-guide" element={<PublicGuidePage guide="scholarship-guide" />} />
+        <Route path="learn/what-is-ai" element={<PublicGuidePage guide="what-is-ai" />} />
+        <Route path="learn/cv-writing-guide" element={<PublicGuidePage guide="cv-writing-guide" />} />
+        <Route path="learn/budget-planner-guide" element={<PublicGuidePage guide="budget-planner-guide" />} />
+        <Route path="learn/revision-strategy" element={<PublicGuidePage guide="revision-strategy" />} />
+        <Route path="learn/note-taking-guide" element={<PublicGuidePage guide="note-taking-guide" />} />
+        <Route path="learn/time-management-students" element={<PublicGuidePage guide="time-management-students" />} />
+        <Route path="learn/english-writing-basics" element={<PublicGuidePage guide="english-writing-basics" />} />
+        <Route path="learn/online-safety-guide" element={<PublicGuidePage guide="online-safety-guide" />} />
+        <Route path="learn/bangla-spelling-common-mistakes" element={<PublicGuidePage guide="bangla-spelling-common-mistakes" />} />
+        <Route path="learn/computer-basics-students" element={<PublicGuidePage guide="computer-basics-students" />} />
+        <Route path="learn/exam-day-strategy" element={<PublicGuidePage guide="exam-day-strategy" />} />
+        <Route path="learn/mcq-answering-techniques" element={<PublicGuidePage guide="mcq-answering-techniques" />} />
+        <Route path="learn/memory-techniques-students" element={<PublicGuidePage guide="memory-techniques-students" />} />
+        <Route path="learn/study-routine-job-seekers" element={<PublicGuidePage guide="study-routine-job-seekers" />} />
+        <Route path="learn/healthy-habits-students" element={<PublicGuidePage guide="healthy-habits-students" />} />
+        <Route path="learn/digital-skills-basics" element={<PublicGuidePage guide="digital-skills-basics" />} />
+        <Route path="learn/exam-anxiety-management" element={<PublicGuidePage guide="exam-anxiety-management" />} />
+        <Route path="learn/presentation-skills" element={<PublicGuidePage guide="presentation-skills" />} />
+        <Route path="learn/group-study-guide" element={<PublicGuidePage guide="group-study-guide" />} />
+        <Route path="learn/english-vocabulary-building" element={<PublicGuidePage guide="english-vocabulary-building" />} />
+        <Route path="learn/effective-reading-habits" element={<PublicGuidePage guide="effective-reading-habits" />} />
+        <Route path="learn/self-motivation-students" element={<PublicGuidePage guide="self-motivation-students" />} />
+        <Route path="learn/how-to-use-free-library" element={<PublicGuidePage guide="how-to-use-free-library" />} />
+        <Route path="learn/how-to-use-job-practice" element={<PublicGuidePage guide="how-to-use-job-practice" />} />
+        <Route path="learn/how-to-use-ai-assistant" element={<PublicGuidePage guide="how-to-use-ai-assistant" />} />
+        <Route path="learn/how-to-use-opportunity-hub" element={<PublicGuidePage guide="how-to-use-opportunity-hub" />} />
+        <Route path="learn/how-to-use-life-services" element={<PublicGuidePage guide="how-to-use-life-services" />} />
+        <Route path="learn/spoken-english-practice" element={<PublicGuidePage guide="spoken-english-practice" />} />
+        <Route path="learn/goal-setting-students" element={<PublicGuidePage guide="goal-setting-students" />} />
+        <Route path="learn/staying-focused-studying" element={<PublicGuidePage guide="staying-focused-studying" />} />
+        <Route path="learn/sleep-and-study" element={<PublicGuidePage guide="sleep-and-study" />} />
+        <Route path="learn/reading-comprehension-strategies" element={<PublicGuidePage guide="reading-comprehension-strategies" />} />
+        <Route path="learn/learning-with-phone" element={<PublicGuidePage guide="learning-with-phone" />} />
+        <Route path="learn/asking-questions-class" element={<PublicGuidePage guide="asking-questions-class" />} />
         {/* Global Opportunity Hub (directive §3B): static guide
             routes MUST come before /opportunities/:oppId —
             otherwise '/opportunities/cv-builder' matches
             :oppId='cv-builder'. */}
-        <Route path="/opportunities" element={<OpportunityHubPage />} />
-        <Route path="/opportunities/cv-builder" element={<OpportunityCvBuilderPage />} />
-        <Route path="/opportunities/interview-prep" element={<OpportunityGuidePage kind="interview-prep" />} />
-        <Route path="/opportunities/career-guidance" element={<OpportunityGuidePage kind="career-guidance" />} />
-        <Route path="/opportunities/entrepreneurship" element={<OpportunityGuidePage kind="entrepreneurship" />} />
-        <Route path="/opportunities/income" element={<OpportunityGuidePage kind="income" />} />
-        <Route path="/opportunities/:oppId" element={<OpportunityDetailPage />} />
-        <Route path="/jobs/:exam/:tab" element={<JobHubPage />} />
-        <Route path="/jobs/:exam" element={<JobHubPage />} />
+        <Route path="opportunities" element={<OpportunityHubPage />} />
+        <Route path="opportunities/cv-builder" element={<OpportunityCvBuilderPage />} />
+        <Route path="opportunities/interview-prep" element={<OpportunityGuidePage kind="interview-prep" />} />
+        <Route path="opportunities/career-guidance" element={<OpportunityGuidePage kind="career-guidance" />} />
+        <Route path="opportunities/entrepreneurship" element={<OpportunityGuidePage kind="entrepreneurship" />} />
+        <Route path="opportunities/income" element={<OpportunityGuidePage kind="income" />} />
+        <Route path="opportunities/:oppId" element={<OpportunityDetailPage />} />
+        <Route path="jobs/:exam/:tab" element={<JobHubPage />} />
+        <Route path="jobs/:exam" element={<JobHubPage />} />
+        <Route path="library" element={<LibraryPage />} />
+        <Route path="library/:bookId" element={<BookPage />} />
+        <Route path="books" element={<LibraryPage />} />
+        <Route path="books/:bookId" element={<BookPage />} />
+        <Route path="books/:bookId/chapters/:chapterId" element={<ChapterPage />} />
+        <Route path="lessons/:lessonId" element={<LessonPage />} />
+        <Route path="install" element={<InstallPage />} />
+        <Route path="ai-teacher" element={<AiTeacherPage />} />
+        <Route path="ai-assistant" element={<AiAssistantPage />} />
+        <Route path="health" element={<HealthPage />} />
+        <Route path="health/medicines" element={<HealthMedicinesPage />} />
+        <Route path="health/diseases" element={<HealthDiseasesPage />} />
+        <Route path="health/doctors" element={<HealthDoctorsPage />} />
+        <Route path="health/hospitals" element={<HealthHospitalsPage />} />
+        <Route path="health/report" element={<HealthReportPage />} />
+        <Route path="life" element={<LifeHubPage />} />
+        <Route path="life/budget" element={<LifeBudgetPage />} />
+        <Route path="life/calculators" element={<LifeCalculatorsPage />} />
+        <Route path="life/converters" element={<LifeConvertersPage />} />
+        <Route path="life/planner" element={<LifePlannerPage />} />
+        <Route path="life/pdf-tools" element={<LifePdfToolsPage />} />
+        <Route path="life/health" element={<LifeHealthPage />} />
+        <Route path="life/government" element={<LifeGovernmentPage />} />
+        <Route path="life/travel" element={<LifeTravelPage />} />
+        <Route path="life/services" element={<LifeServicesPage />} />
+        <Route path="about" element={<AboutPage />} />
+        <Route path="why-eduvelto" element={<WhyEduveltoPage />} />
+        <Route path="founder" element={<FounderPage />} />
+        <Route path="contact" element={<ContactPage />} />
+        <Route path="privacy" element={<PrivacyPage />} />
+        <Route path="terms" element={<TermsPage />} />
+        {/* Brand-SEO wave 1 (24 Nov 2026, F-08): trust/policy pages
+            Google expects — editorial policy, content accuracy,
+            certificate policy (no certificates of any kind) and
+            disclaimer. All linked from the footer. */}
+        <Route path="editorial-policy" element={<EditorialPolicyPage />} />
+        <Route path="content-accuracy" element={<ContentAccuracyPage />} />
+        <Route path="certificate-policy" element={<CertificatePolicyPage />} />
+        <Route path="disclaimer" element={<DisclaimerPage />} />
+        <Route path="*" element={<NotFoundPage />} />
+        </Route>
+        {/* Legacy public URLs (Phase 1): client-side equivalent of the
+            firebase.json 301s — old links and bookmarks land on
+            /bn/... . Direct loads get the real 301 from Hosting. */}
+        <Route path="/bcs" element={<LegacyRedirect />} />
+        <Route path="/bank" element={<LegacyRedirect />} />
+        <Route path="/primary" element={<LegacyRedirect />} />
+        <Route path="/ntrca" element={<LegacyRedirect />} />
+        <Route path="/admission" element={<LegacyRedirect />} />
+        <Route path="/guides" element={<LegacyRedirect />} />
+        <Route path="/support" element={<LegacyRedirect />} />
+        <Route path="/class" element={<LegacyRedirect />} />
+        <Route path="/class/*" element={<LegacyRedirect />} />
+        <Route path="/skills" element={<LegacyRedirect />} />
+        <Route path="/admissions" element={<LegacyRedirect />} />
+        <Route path="/admissions/*" element={<LegacyRedirect />} />
+        <Route path="/jobs" element={<LegacyRedirect />} />
+        <Route path="/jobs/*" element={<LegacyRedirect />} />
+        <Route path="/learn" element={<LegacyRedirect />} />
+        <Route path="/learn/*" element={<LegacyRedirect />} />
+        <Route path="/opportunities" element={<LegacyRedirect />} />
+        <Route path="/opportunities/*" element={<LegacyRedirect />} />
+        <Route path="/library" element={<LegacyRedirect />} />
+        <Route path="/library/*" element={<LegacyRedirect />} />
+        <Route path="/books" element={<LegacyRedirect />} />
+        <Route path="/books/*" element={<LegacyRedirect />} />
+        <Route path="/lessons/*" element={<LegacyRedirect />} />
+        <Route path="/health" element={<LegacyRedirect />} />
+        <Route path="/health/*" element={<LegacyRedirect />} />
+        <Route path="/life" element={<LegacyRedirect />} />
+        <Route path="/life/*" element={<LegacyRedirect />} />
+        <Route path="/search" element={<LegacyRedirect />} />
+        <Route path="/about" element={<LegacyRedirect />} />
+        <Route path="/why-eduvelto" element={<LegacyRedirect />} />
+        <Route path="/founder" element={<LegacyRedirect />} />
+        <Route path="/contact" element={<LegacyRedirect />} />
+        <Route path="/privacy" element={<LegacyRedirect />} />
+        <Route path="/terms" element={<LegacyRedirect />} />
+        <Route path="/editorial-policy" element={<LegacyRedirect />} />
+        <Route path="/content-accuracy" element={<LegacyRedirect />} />
+        <Route path="/certificate-policy" element={<LegacyRedirect />} />
+        <Route path="/disclaimer" element={<LegacyRedirect />} />
+        <Route path="/install" element={<LegacyRedirect />} />
+        <Route path="/ai-teacher" element={<LegacyRedirect />} />
+        <Route path="/ai-assistant" element={<LegacyRedirect />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/register/role" element={<RoleSetupPage />} />
         <Route path="/login" element={<LoginPage />} />
@@ -554,10 +691,6 @@ export default function App() {
         <Route path="/teacher/register" element={<TeacherRegisterPage />} />
         <Route path="/directory" element={<DirectoryPage />} />
         <Route path="/subjects/:subjectId" element={<SubjectPage />} />
-        <Route path="/library" element={<LibraryPage />} />
-        <Route path="/library/:bookId" element={<BookPage />} />
-        <Route path="/books/:bookId/chapters/:chapterId" element={<ChapterPage />} />
-        <Route path="/lessons/:lessonId" element={<LessonPage />} />
         <Route path="/quiz/:quizId" element={<QuizPage />} />
         <Route path="/quiz/:quizId/result/:attemptId" element={<QuizResultPage />} />
         <Route path="/admin" element={<AdminGuard><AdminLayout /></AdminGuard>}>
@@ -613,43 +746,10 @@ export default function App() {
           <Route path="settings" element={<CeoSettingsPage />} />
           <Route path="approvals" element={<CeoApprovalsPage />} />
         </Route>
-        <Route path="/install" element={<InstallPage />} />
-        <Route path="/ai-teacher" element={<AiTeacherPage />} />
-        <Route path="/ai-assistant" element={<AiAssistantPage />} />
         <Route path="/exam" element={<ExamPage />} />
         <Route path="/routine" element={<RoutinePage />} />
         <Route path="/progress" element={<ProgressPage />} />
         <Route path="/social" element={<SocialPage />} />
-        <Route path="/health" element={<HealthPage />} />
-        <Route path="/health/medicines" element={<HealthMedicinesPage />} />
-        <Route path="/health/diseases" element={<HealthDiseasesPage />} />
-        <Route path="/health/doctors" element={<HealthDoctorsPage />} />
-        <Route path="/health/hospitals" element={<HealthHospitalsPage />} />
-        <Route path="/health/report" element={<HealthReportPage />} />
-        <Route path="/life" element={<LifeHubPage />} />
-        <Route path="/life/budget" element={<LifeBudgetPage />} />
-        <Route path="/life/calculators" element={<LifeCalculatorsPage />} />
-        <Route path="/life/converters" element={<LifeConvertersPage />} />
-        <Route path="/life/planner" element={<LifePlannerPage />} />
-        <Route path="/life/pdf-tools" element={<LifePdfToolsPage />} />
-        <Route path="/life/health" element={<LifeHealthPage />} />
-        <Route path="/life/government" element={<LifeGovernmentPage />} />
-        <Route path="/life/travel" element={<LifeTravelPage />} />
-        <Route path="/life/services" element={<LifeServicesPage />} />
-        <Route path="/about" element={<AboutPage />} />
-        <Route path="/why-eduvelto" element={<WhyEduveltoPage />} />
-        <Route path="/founder" element={<FounderPage />} />
-        <Route path="/contact" element={<ContactPage />} />
-        <Route path="/privacy" element={<PrivacyPage />} />
-        <Route path="/terms" element={<TermsPage />} />
-        {/* Brand-SEO wave 1 (24 Nov 2026, F-08): trust/policy pages
-            Google expects — editorial policy, content accuracy,
-            certificate policy (no certificates of any kind) and
-            disclaimer. All linked from the footer. */}
-        <Route path="/editorial-policy" element={<EditorialPolicyPage />} />
-        <Route path="/content-accuracy" element={<ContentAccuracyPage />} />
-        <Route path="/certificate-policy" element={<CertificatePolicyPage />} />
-        <Route path="/disclaimer" element={<DisclaimerPage />} />
         <Route path="*" element={<NotFoundPage />} />
         </Routes>
         </Suspense>

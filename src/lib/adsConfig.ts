@@ -55,6 +55,7 @@ import {
   adsEnabled,
   type AdPlacement,
 } from './ads';
+import { stripLangPrefix } from './langRouting';
 
 /**
  * Master activation switch. ON since 23 Nov 2026 by the owner's order
@@ -118,7 +119,12 @@ export type PageAdType =
  *  trailing slashes are ignored; unknown paths fall back to 'unknown'
  *  (which gets the normal banner — the '*' route renders HomePage). */
 export function getPageAdType(pathname: string): PageAdType {
-  const path = pathname.split('?')[0].replace(/\/+$/, '') || '/';
+  // Phase 1 (25 Nov 2026): public routes live under /:lang — classify
+  // the bare path, or /bn/jobs/mock/x would read as 'unknown' and get
+  // a banner DURING an exam, and /bn/ai-assistant would lose its
+  // no-ads rule.
+  const path =
+    stripLangPrefix(pathname.split('?')[0].replace(/\/+$/, '') || '/').path;
   const seg = path.split('/').filter(Boolean);
   if (path === '/') return 'home';
   if (

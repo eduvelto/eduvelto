@@ -33,6 +33,7 @@ import { loginState } from '../lib/loginReturn';
 import { useAuth } from '../lib/auth';
 import { useTheme } from '../lib/theme';
 import { useLanguage } from '../i18n/LanguageContext';
+import { langSwitchTarget, langUrl } from '../lib/langRouting';
 import type { Lang } from '../i18n/strings';
 import './home-redesign.css';
 
@@ -150,6 +151,8 @@ function LanguageIcon() {
  */
 function LangToggleButton() {
   const { tabLang, setLanguage, t } = useLanguage();
+  const location = useLocation();
+  const navigate = useNavigate();
   const next: Lang = tabLang === 'bn' ? 'en' : 'bn';
   return (
     <button
@@ -157,7 +160,15 @@ function LangToggleButton() {
       className="ev-header-lang-btn"
       aria-label={t({ bn: 'ভাষা বদলান', en: 'Change language' })}
       title={t({ bn: 'ভাষা বদলান', en: 'Change language' })}
-      onClick={() => setLanguage(next)}
+      onClick={() => {
+        setLanguage(next);
+        // Phase 1 (25 Nov 2026): the /:lang URL is the source of
+        // truth — move the same public page under the new prefix.
+        // Private routes have no prefix: there the state change
+        // alone applies and the URL is left alone.
+        const target = langSwitchTarget(location.pathname, next);
+        if (target) navigate(`${target}${location.search}`, { replace: true });
+      }}
     >
       <LanguageIcon />
       <span>{tabLang === 'bn' ? 'EN' : 'বাং'}</span>
@@ -245,7 +256,7 @@ const SECONDARY: MenuItem[] = [
 ];
 
 export default function HeaderNav() {
-  const { t, tTab } = useLanguage();
+  const { t, tTab, tabLang } = useLanguage();
   const { user, profile, loading, signOut } = useAuth();
   const { theme, toggleTheme } = useTheme();
   const location = useLocation();
@@ -301,7 +312,7 @@ export default function HeaderNav() {
 
   return (
     <header className="ev-header" ref={navRef}>
-      <Link to="/" style={{ display: 'inline-flex', alignItems: 'center', textDecoration: 'none', flex: 'none' }} aria-label={t({ bn: 'Eduvelto — হোম', en: 'Eduvelto — Home' })}>
+      <Link to={langUrl('/', tabLang)} style={{ display: 'inline-flex', alignItems: 'center', textDecoration: 'none', flex: 'none' }} aria-label={t({ bn: 'Eduvelto — হোম', en: 'Eduvelto — Home' })}>
         <img src={theme === 'dark' ? '/logo-white.png' : '/logo.png'} alt="Eduvelto" style={{ height: 44, width: 'auto', display: 'block' }} />
       </Link>
 
@@ -355,7 +366,7 @@ export default function HeaderNav() {
       </button>
 
       <nav aria-label={t({ bn: 'প্রধান মেনু', en: 'Main menu' })} id="ev-main-nav" className={`ev-header-nav${menuOpen ? ' ev-header-nav-open' : ''}`}>
-        <NavLink to="/" end className={({ isActive }) => `ev-hnav-home${isActive ? ' ev-hnav-home-active' : ''}`}>
+        <NavLink to={langUrl('/', tabLang)} end className={({ isActive }) => `ev-hnav-home${isActive ? ' ev-hnav-home-active' : ''}`}>
           <HomeIcon /> {tTab({ bn: 'হোম', en: 'Home' })}
         </NavLink>
         {MENUS.map((menu) => {

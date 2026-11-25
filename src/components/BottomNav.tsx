@@ -16,6 +16,7 @@
 // Sheets close on backdrop tap, Close button, or navigation.
 
 import { useCallback, useEffect, useRef, useState } from 'react';
+import { langUrl, stripLangPrefix } from '../lib/langRouting';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import { loginState } from '../lib/loginReturn';
 import { useAuth } from '../lib/auth';
@@ -109,7 +110,7 @@ const MENU_SECTIONS: {
 ];
 
 export default function BottomNav(props: { bottomOffsetPx: number }) {
-  const { t, tTab } = useLanguage();
+  const { t, tTab , tabLang } = useLanguage();
   const { user, profile, signOut } = useAuth();
   const location = useLocation();
   // Sections audit (24 Nov 2026): return here after sign-in.
@@ -163,12 +164,17 @@ export default function BottomNav(props: { bottomOffsetPx: number }) {
   return (
     <>
       <nav className="ev-bottom-nav" style={{ bottom: props.bottomOffsetPx }} aria-label={t({ bn: 'মোবাইল মেনু', en: 'Mobile menu' })}>
-        <NavLink to="/" end className={({ isActive }) => `ev-bottom-nav-link${isActive ? ' ev-bottom-nav-link-active' : ''}`}>
-          <HomeIcon active={location.pathname === '/'} />
+        <NavLink to={langUrl('/', tabLang)} end className={({ isActive }) => `ev-bottom-nav-link${isActive ? ' ev-bottom-nav-link-active' : ''}`}>
+          <HomeIcon active={stripLangPrefix(location.pathname).path === '/'} />
           <span>{tTab({ bn: 'হোম', en: 'Home' })}</span>
         </NavLink>
-        <NavLink to="/library" className={({ isActive }) => `ev-bottom-nav-link${isActive ? ' ev-bottom-nav-link-active' : ''}`}>
-          <CoursesIcon active={location.pathname.startsWith('/library') || location.pathname.startsWith('/book')} />
+        <NavLink to={langUrl('/books', tabLang)} className={({ isActive }) => `ev-bottom-nav-link${isActive ? ' ev-bottom-nav-link-active' : ''}`}>
+          <CoursesIcon
+            active={
+              stripLangPrefix(location.pathname).path.startsWith('/library') ||
+              stripLangPrefix(location.pathname).path.startsWith('/books')
+            }
+          />
           <span>{tTab({ bn: 'আমার কোর্স', en: 'My Courses' })}</span>
         </NavLink>
         <NavLink to="/progress" className={({ isActive }) => `ev-bottom-nav-link${isActive ? ' ev-bottom-nav-link-active' : ''}`}>
