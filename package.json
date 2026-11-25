@@ -11,7 +11,9 @@
     "test:rules": "JAVA_TOOL_OPTIONS=\"-Djava.net.preferIPv4Stack=true\" firebase emulators:exec --only firestore,auth \"vitest run emulator-tests/\"",
     "test:unit": "vitest run src/lib/__tests__/ --environment node",
     "emulators": "JAVA_TOOL_OPTIONS=\"-Djava.net.preferIPv4Stack=true\" firebase emulators:start --only firestore,auth",
-    "prerender": "vite build --ssr src/entry-server.tsx --outDir dist-ssr && node scripts/prerender.mjs"
+    "prerender": "vite build --ssr src/entry-server.tsx --outDir dist-ssr && node scripts/prerender.mjs",
+    "backup": "node scripts/backup-firestore.mjs",
+    "audit": "node scripts/audit-site.mjs"
   },
   "dependencies": {
     "@capacitor/app": "^8.1.2",

@@ -52,3 +52,6 @@ tsconfig.tsbuildinfo
 # and teacher's data (Step 18); it must travel by private link only.
 eduvelto-backup-*.json
 **/eduvelto-backup-*.json
+
+# Day 1 backup exports (gitignored: hold user data)
+backups/
