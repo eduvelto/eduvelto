@@ -21,6 +21,9 @@
 // fields. The rules are the enforcement; this only fails fast in
 // the UI with a readable message.
 
+import { addDoc, collection, getDocs, limit, orderBy, query, serverTimestamp } from 'firebase/firestore';
+import { db } from '../firebase';
+
 export const DONATIONS_COLLECTION = 'donations';
 
 /** The ONE owner-provided number, shared by bKash and Nagad. */
@@ -88,4 +91,61 @@ export function validateDonationInput(input: {
   if (trxId.length === 0) errors.push('trxid-required');
   else if (trxId.length > DONATION_TRXID_MAX) errors.push('trxid-too-long');
   return { ok: errors.length === 0, errors };
+}
+
+// ---------------------------------------------------------------------------
+// Firestore store (Commit 2). Same shape as lib/newsletter.ts: the
+// rules are the enforcement (public create with exactly the four
+// keys, public read for the wall, no update/delete); these helpers
+// only fail fast and return a reason instead of throwing.
+// ---------------------------------------------------------------------------
+
+export interface Supporter {
+  id: string;
+  name: string;
+  amount: number;
+  createdAtMillis: number | null;
+}
+
+/** Record a donation (Name + Amount + TrxID only — never a phone
+ *  number). Anyone may submit, signed in or not. */
+export async function submitDonation(input: DonationInput): Promise<{ ok: boolean; reason?: string }> {
+  const check = validateDonationInput(input);
+  if (!check.ok) return { ok: false, reason: check.errors[0] };
+  if (!db) return { ok: false, reason: 'unavailable' };
+  try {
+    await addDoc(collection(db, DONATIONS_COLLECTION), {
+      name: input.name.trim(),
+      amount: input.amount,
+      trxId: input.trxId.trim(),
+      createdAt: serverTimestamp(),
+    });
+    return { ok: true };
+  } catch {
+    return { ok: false, reason: 'unavailable' };
+  }
+}
+
+/** Public Supporters Wall — newest first. The returned rows carry
+ *  name + amount + date only; the TrxID is never included in the
+ *  returned objects, so the wall cannot leak it. */
+export async function listSupporters(limitCount = 50): Promise<Supporter[]> {
+  if (!db) return [];
+  try {
+    const snap = await getDocs(
+      query(collection(db, DONATIONS_COLLECTION), orderBy('createdAt', 'desc'), limit(limitCount)),
+    );
+    return snap.docs.map((d) => {
+      const data = d.data();
+      const createdAt = data.createdAt as { toMillis?: () => number } | null | undefined;
+      return {
+        id: d.id,
+        name: typeof data.name === 'string' ? data.name : '',
+        amount: typeof data.amount === 'number' ? data.amount : 0,
+        createdAtMillis: typeof createdAt?.toMillis === 'function' ? createdAt.toMillis() : null,
+      };
+    });
+  } catch {
+    return [];
+  }
 }

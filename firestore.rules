@@ -2332,6 +2332,28 @@ service cloud.firestore {
       allow update, delete: if false;
     }
 
+    // ---------- donations (Phase 3, 25 Nov 2026 — "Support Eduvelto")
+    // Anyone (signed out included) may record a donation with
+    // exactly {name, amount, trxId, createdAt} — name 1–100 chars,
+    // amount a positive number up to ৳10,000,000, TrxID 1–50 chars.
+    // No phone/email/extra field is accepted (a phone field is
+    // denied by onlyKeys). The wall is PUBLIC read (name + amount
+    // only — the UI never renders the TrxID). Nobody may edit or
+    // delete through the client; the owner removes spam from the
+    // console. No CAPTCHA/rate-limit exists on the free Spark plan
+    // — the fixed shape + fixed keys are the whole defence.
+    match /donations/{donationId} {
+      allow read: if true;
+      allow create: if onlyKeys(['name', 'amount', 'trxId', 'createdAt'])
+        && isStr(request.resource.data.name, 100)
+        && request.resource.data.amount is number
+        && request.resource.data.amount > 0
+        && request.resource.data.amount <= 10000000
+        && isStr(request.resource.data.trxId, 50)
+        && request.resource.data.createdAt is timestamp;
+      allow update, delete: if false;
+    }
+
     // ---------- community posts / comments / questions / answers ----------
     // Create with reviewStatus forced to "Under Review". Authors edit only
     // their own while still unreviewed. Only Moderator/Admin publish/remove.

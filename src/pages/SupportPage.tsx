@@ -16,6 +16,8 @@ import { PageShell } from '../components/PageShell';
 import { Card } from '../components/ui';
 import { useLanguage } from '../i18n/LanguageContext';
 import DonationMethods from '../components/DonationMethods';
+import DonationForm from '../components/DonationForm';
+import SupportersWall from '../components/SupportersWall';
 
 export default function SupportPage() {
   const { t } = useLanguage();
@@ -50,12 +52,28 @@ export default function SupportPage() {
             en: 'Keep the payment TrxID (transaction ID) — you will find it in the bKash/Nagad app.',
           })}
         </li>
+        <li>
+          {t({
+            bn: 'নিচের ফর্মে আপনার নাম, টাকার পরিমাণ ও TrxID লিখুন — আপনার নাম Supporters Wall-এ দেখা যাবে। ফোন নম্বর চাওয়া হয় না।',
+            en: 'Fill in the form below with your name, the amount and the TrxID — your name will appear on the Supporters Wall. No phone number is asked for.',
+          })}
+        </li>
       </ol>
 
       <h2 style={{ fontSize: 20, margin: '28px 0 10px' }}>
         {t({ bn: 'পেমেন্ট মাধ্যম', en: 'Payment methods' })}
       </h2>
       <DonationMethods />
+
+      <h2 style={{ fontSize: 20, margin: '28px 0 10px' }}>
+        {t({ bn: 'আপনার সহায়তা জানান', en: 'Record your support' })}
+      </h2>
+      <DonationForm />
+
+      <h2 style={{ fontSize: 20, margin: '28px 0 10px' }}>
+        {t({ bn: 'Supporters Wall', en: 'Supporters Wall' })}
+      </h2>
+      <SupportersWall />
 
       <Card style={{ marginTop: 28 }}>
         <p style={{ margin: 0, lineHeight: 1.7 }}>

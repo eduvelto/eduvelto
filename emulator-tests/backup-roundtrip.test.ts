@@ -267,10 +267,12 @@ describe('Step 18 — backup / recovery (emulator)', () => {
     // BACKUP_COLLECTIONS. Job Preparation System merge 24 Nov:
     // 93 → 98 — the five new collections (writtenQuestions,
     // writtenSubmissions, writtenFeedback, modelTests,
-    // grade1120Configs) joined BACKUP_COLLECTIONS.)
-    expect(preflight.total).toBe(98);
+    // grade1120Configs) joined BACKUP_COLLECTIONS. Phase 3
+    // (25 Nov 2026): 98 → 99 — the `donations` collection joined
+    // BACKUP_COLLECTIONS with the Supporters Wall.)
+    expect(preflight.total).toBe(99);
     expect(preflight.perCollection).toHaveLength(BACKUP_COLLECTIONS.length);
-    expect(preflight.readsPercent).toBeCloseTo(98 / 500, 5);
+    expect(preflight.readsPercent).toBeCloseTo(99 / 500, 5);
     const backup = await buildBackup(db, OWNER_UID);
     expect(validateBackup(backup).ok).toBe(true);
     expect(Object.keys(backup.data).sort()).toEqual([...BACKUP_COLLECTIONS].sort());

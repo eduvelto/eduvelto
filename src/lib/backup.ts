@@ -177,6 +177,11 @@ export const BACKUP_COLLECTIONS: string[] = [
   // subscribers list must be in every backup, or the subscriber
   // addresses are lost).
   'newsletterSubscribers',
+  // Added 25 Nov 2026 (Phase 3: the donations collection must be
+  // in every backup, or the Supporters Wall + every donor record
+  // is lost. Public-read under the rules, so the client export
+  // covers it.)
+  'donations',
   // Added 23 Nov 2026 (Step 15: the admin collections — reports,
   // corrections, the per-field audit trail and the approved-domain
   // list — must be in every backup, or the verification history
