@@ -69,6 +69,13 @@
 //   when chapter pages were login-gated).
 // - dist/sitemap.xml — canonical /bn + /en URLs only, with
 //   reciprocal hreflang (bn / en / x-default -> bn).
+// - __INITIAL_DATA__ (Phase 2b, 25 Nov 2026): book pages carry a
+//   JSON data block with the book + its public preview chapters;
+//   /books + /library carry page 1 (50 books); /class carries the
+//   five class stats. The client reads it first and renders with
+//   zero Firestore reads. The block is type="application/json"
+//   (CSP-safe — see src/lib/initialData.ts); never lesson/question
+//   content, never the whole library.
 //
 // PHASE 2 EXTENSION POINT — PRERENDER_STATIC_PATHS is the ONE list
 // to extend: add legal pages and guide detail pages there when
@@ -350,6 +357,13 @@ export function normalizeBooksFixture(data) {
       paperCode: typeof doc.paperCode === 'string' ? doc.paperCode : undefined,
       chapterCount: typeof doc.chapterCount === 'number' ? doc.chapterCount : undefined,
       questionCount: typeof doc.questionCount === 'number' ? doc.questionCount : undefined,
+      // Phase 2b (25 Nov 2026): the __INITIAL_DATA__ payload carries
+      // the fields the public pages render (bilingual flag, education
+      // type, credit/marks chips) — the book summary never needed them.
+      bilingual: typeof doc.bilingual === 'boolean' ? doc.bilingual : undefined,
+      educationType: typeof doc.educationType === 'string' ? doc.educationType : undefined,
+      credit: typeof doc.credit === 'number' ? doc.credit : undefined,
+      marks: typeof doc.marks === 'number' ? doc.marks : undefined,
     });
   }
   books.sort((a, b) => (a.id < b.id ? -1 : a.id > b.id ? 1 : 0));
@@ -366,6 +380,11 @@ function restInt(fields, key) {
   if (!v || typeof v.integerValue !== 'string') return undefined;
   const n = Number.parseInt(v.integerValue, 10);
   return Number.isFinite(n) ? n : undefined;
+}
+
+function restBool(fields, key) {
+  const v = fields?.[key];
+  return v && typeof v.booleanValue === 'boolean' ? v.booleanValue : undefined;
 }
 
 /** One Firestore REST document -> BookDoc (same shape as the
@@ -386,18 +405,110 @@ export function parseFirestoreRestDoc(doc) {
     paperCode: restString(fields, 'paperCode'),
     chapterCount: restInt(fields, 'chapterCount'),
     questionCount: restInt(fields, 'questionCount'),
+    bilingual: restBool(fields, 'bilingual'),
+    educationType: restString(fields, 'educationType'),
+    credit: restInt(fields, 'credit'),
+    marks: restInt(fields, 'marks'),
   };
 }
 
-/** Live REST read of the `books` collection (Spark, public read).
- *  Paged (pageSize 300). 429 fails fast — quota, retry later or
- *  use --books-file. Returns books sorted by id. */
-export async function fetchBooksFromRest(projectId, fetchImpl = fetch) {
-  const books = [];
+/** Normalise chapter docs from a fixture file. Accepts the 24 Nov
+ *  backup shape {data:{chapters:[...]}}, {chapters:[...]}, or a bare
+ *  array. Docs without id/bookId/title are SKIPPED (counted, never
+ *  invented). Sorted by (bookId, order, title) — the same order
+ *  listPublishedChapters() renders per book. */
+export function normalizeChaptersFixture(data) {
+  const raw = Array.isArray(data) ? data : (data?.data?.chapters ?? data?.chapters ?? []);
+  const chapters = [];
+  let skipped = 0;
+  for (const doc of raw) {
+    if (!doc || typeof doc.id !== 'string' || !doc.id || typeof doc.bookId !== 'string' || !doc.bookId || typeof doc.title !== 'string' || !doc.title) {
+      skipped += 1;
+      continue;
+    }
+    chapters.push({
+      id: doc.id,
+      bookId: doc.bookId,
+      title: doc.title,
+      part: typeof doc.part === 'string' ? doc.part : undefined,
+      set: typeof doc.set === 'number' ? doc.set : undefined,
+      order: typeof doc.order === 'number' ? doc.order : undefined,
+      questionCount: typeof doc.questionCount === 'number' ? doc.questionCount : undefined,
+      reviewStatus: typeof doc.reviewStatus === 'string' ? doc.reviewStatus : undefined,
+      isPreview: doc.isPreview === true,
+    });
+  }
+  chapters.sort((a, b) => (a.bookId < b.bookId ? -1 : a.bookId > b.bookId ? 1 : a.order - b.order || a.title.localeCompare(b.title)));
+  return { chapters, skipped };
+}
+
+/** One Firestore REST document -> ChapterDoc. Throws on a doc
+ *  without id/bookId/title. */
+export function parseChapterRestDoc(doc) {
+  const id = typeof doc?.name === 'string' ? doc.name.split('/').pop() : '';
+  const fields = doc?.fields ?? {};
+  const bookId = restString(fields, 'bookId');
+  const title = restString(fields, 'title');
+  if (!id || !bookId || !title) throw new Error(`REST chapter doc without id/bookId/title: ${doc?.name ?? '(no name)'}`);
+  return {
+    id,
+    bookId,
+    title,
+    part: restString(fields, 'part'),
+    set: restInt(fields, 'set'),
+    order: restInt(fields, 'order'),
+    questionCount: restInt(fields, 'questionCount'),
+    reviewStatus: restString(fields, 'reviewStatus'),
+    isPreview: restBool(fields, 'isPreview') === true,
+  };
+}
+
+/** Class-level book counts from the fixture books (Phase 2b).
+ *
+ *  MIRROR of CLASS_LEVELS in src/lib/classLevels.ts — the (slug,
+ *  educationType, classLevels) mapping that booksForClass() /
+ *  subjectsForClass() use. Update BOTH together; the test asserts
+ *  this builder agrees with the TS functions on the fixture, so a
+ *  drift fails the suite instead of shipping wrong counts.
+ *
+ *  Why book-derived, not loader stats: the loader writes only 5 of
+ *  7 classStats docs (verified 25 Nov 2026 — Technical with 72
+ *  books and Madrasa with 35 have NO stats doc), so a stats-based
+ *  payload would show 0 for two levels that have 107 books. Counts
+ *  computed from the same fixture books the prerender renders are
+ *  always self-consistent — and they are exactly what the page's
+ *  fallback (booksForClass over the live list) would compute. */
+export const CLASS_LEVEL_BOOK_FILTERS = [
+  { slug: 'class-1-5', educationType: null, classLevels: [] },
+  { slug: 'class-6-8', educationType: null, classLevels: [] },
+  { slug: 'class-9-10', educationType: 'SSC', classLevels: ['SSC'] },
+  { slug: 'hsc', educationType: 'HSC', classLevels: ['HSC'] },
+  { slug: 'honours-masters', educationType: 'Higher', classLevels: ['1st Year', '2nd Year', '3rd Year', '4th Year'] },
+  { slug: 'technical', educationType: 'Technical', classLevels: ['Ssc Vocational', 'Hsc Vocational', 'Bmt'] },
+  { slug: 'madrasa', educationType: 'Madrasa', classLevels: ['Alim', 'Dakhil', 'Fazil', 'Kamil'] },
+];
+
+/** Per-level {slug, bookCount, subjectCount} from a book list —
+ *  the booksForClass / subjectsForClass formulas (distinct sorted
+ *  departments). Levels with no educationType have no books (0/0). */
+export function buildClassLevelCounts(books) {
+  return CLASS_LEVEL_BOOK_FILTERS.map(({ slug, educationType, classLevels }) => {
+    if (!educationType) return { slug, bookCount: 0, subjectCount: 0 };
+    const levelBooks = books.filter((b) => b.educationType === educationType && classLevels.includes(b.classLevel));
+    const subjects = [...new Set(levelBooks.map((b) => b.department).filter(Boolean))].sort();
+    return { slug, bookCount: levelBooks.length, subjectCount: subjects.length };
+  });
+}
+
+/** Live REST read of one collection (Spark, public read). Paged
+ *  (pageSize 300). 429 fails fast — quota, retry later or use
+ *  --books-file; it never writes partial pages. */
+export async function fetchCollectionFromRest(projectId, collection, parseDoc, fetchImpl = fetch) {
+  const docs = [];
   let pageToken = '';
   for (;;) {
     const url =
-      `https://firestore.googleapis.com/v1/projects/${projectId}/databases/(default)/documents/books` +
+      `https://firestore.googleapis.com/v1/projects/${projectId}/databases/(default)/documents/${collection}` +
       `?pageSize=300${pageToken ? `&pageToken=${encodeURIComponent(pageToken)}` : ''}`;
     const res = await fetchImpl(url);
     if (res.status === 429) {
@@ -407,15 +518,31 @@ export async function fetchBooksFromRest(projectId, fetchImpl = fetch) {
       );
     }
     if (!res.ok) {
-      throw new Error(`Firestore REST ${res.status} reading books (project ${projectId}). Check the books read rule / project id.`);
+      throw new Error(`Firestore REST ${res.status} reading ${collection} (project ${projectId}). Check the read rule / project id.`);
     }
     const body = await res.json();
-    for (const doc of body.documents ?? []) books.push(parseFirestoreRestDoc(doc));
+    for (const doc of body.documents ?? []) docs.push(parseDoc(doc));
     if (!body.nextPageToken) break;
     pageToken = body.nextPageToken;
   }
+  return docs;
+}
+
+/** Live REST read of the `books` collection (Spark, public read).
+ *  Paged (pageSize 300). 429 fails fast — quota, retry later or
+ *  use --books-file. Returns books sorted by id. */
+export async function fetchBooksFromRest(projectId, fetchImpl = fetch) {
+  const books = await fetchCollectionFromRest(projectId, 'books', parseFirestoreRestDoc, fetchImpl);
   books.sort((a, b) => (a.id < b.id ? -1 : a.id > b.id ? 1 : 0));
   return books;
+}
+
+/** Live REST read of the `chapters` collection. Same 429 fail-fast.
+ *  Returns chapters sorted by (bookId, order, title). */
+export async function fetchChaptersFromRest(projectId, fetchImpl = fetch) {
+  const chapters = await fetchCollectionFromRest(projectId, 'chapters', parseChapterRestDoc, fetchImpl);
+  chapters.sort((a, b) => (a.bookId < b.bookId ? -1 : a.bookId > b.bookId ? 1 : a.order - b.order || a.title.localeCompare(b.title)));
+  return chapters;
 }
 
 // ---------------------------------------------------------------------------
@@ -592,6 +719,139 @@ export function buildBookSummaryHtml(book, lang) {
 
 /** Rewrite bare internal hrefs in rendered HTML to /{lang}/... .
  *  Only the segments in LINK_REWRITE_SEGMENTS are rewritten; asset
+ *  paths and already-prefixed hrefs are untouched. (The function
+ *  itself lives below the __INITIAL_DATA__ block.) */
+
+// ---------------------------------------------------------------------------
+// __INITIAL_DATA__ payload (Phase 2b, Firebase Spark Optimization,
+// 25 Nov 2026). The prerender embeds per-page data so the client
+// renders with ZERO Firestore reads when the payload is present.
+// The payload shape is defined in src/lib/initialData.ts — these
+// builders MUST stay in sync with it (initialData.test.ts feeds a
+// real prerender-built payload through the TS reader).
+//
+// CARRIER (CSP): firebase.json script-src is 'self' + ONE SHA-256
+// hash — NO 'unsafe-inline' — so a classic inline script
+// `window.__INITIAL_DATA__ = {...}` would be BLOCKED in production.
+// The payload is carried as a JSON data block
+// (<script id="__INITIAL_DATA__" type="application/json">), which
+// the browser never executes and CSP does not govern (same exemption
+// as the application/ld+json blocks). The client reader parses the
+// block (and also accepts a real window.__INITIAL_DATA__).
+//
+// PRIVACY: only data the page already renders publicly goes in.
+// Book pages carry the book + its PUBLIC preview chapters only
+// (Published + isPreview) — never the full chapter list, never
+// lesson/question content. Hub pages carry their first page only —
+// never the whole library.
+// ---------------------------------------------------------------------------
+
+/** JSON for an inline <script> block: escape anything that could
+ *  break out of the block (</script>, U+2028/2029). */
+export function safeJsonForInlineScript(value) {
+  return JSON.stringify(value)
+    .replace(/</g, '\\u003c')
+    .replace(/>/g, '\\u003e')
+    .replace(/&/g, '\\u0026')
+    .replace(/\u2028/g, '\\u2028')
+    .replace(/\u2029/g, '\\u2029');
+}
+
+/** The <script> data block carrying one page's payload. The HTML
+ *  comment names the global it feeds (window.__INITIAL_DATA__) so a
+ *  grep for the name finds the carrier. */
+export function buildInitialDataScriptTag(payload) {
+  return (
+    `<!-- window.__INITIAL_DATA__ (JSON data block; CSP-safe — a classic inline script would be blocked by the hash-only script-src) -->` +
+    `<script id="__INITIAL_DATA__" type="application/json">${safeJsonForInlineScript(payload)}</script>`
+  );
+}
+
+/** Insert the payload tag into a rendered page: right after the
+ *  #root close, before the theme script / bundle script. Returns
+ *  the HTML unchanged when the template shape is unexpected — the
+ *  payload is an optimisation, never a reason to fail the build. */
+export function insertInitialDataScript(html, tag) {
+  const rootMarker = '<div id="root">';
+  const rootIdx = html.indexOf(rootMarker);
+  if (rootIdx === -1) return html;
+  const marker = '</div>\n    <script>';
+  const idx = html.indexOf(marker, rootIdx);
+  if (idx === -1) return html;
+  const afterRootClose = idx + '</div>'.length;
+  return `${html.slice(0, afterRootClose)}\n    ${tag}${html.slice(afterRootClose)}`;
+}
+
+/** A book as carried in the payload: the fields the public pages
+ *  render. Undefined fields are dropped by JSON.stringify. */
+export function toPayloadBook(book) {
+  return {
+    id: book.id,
+    title: book.title,
+    subject: book.subject,
+    classLevel: book.classLevel,
+    board: book.board,
+    program: book.program,
+    department: book.department,
+    paperCode: book.paperCode,
+    chapterCount: book.chapterCount,
+    questionCount: book.questionCount,
+    bilingual: book.bilingual,
+    educationType: book.educationType,
+    credit: book.credit,
+    marks: book.marks,
+  };
+}
+
+export function toPayloadChapter(chapter) {
+  return {
+    id: chapter.id,
+    bookId: chapter.bookId,
+    title: chapter.title,
+    part: chapter.part,
+    set: chapter.set,
+    order: chapter.order,
+    questionCount: chapter.questionCount,
+    reviewStatus: chapter.reviewStatus,
+    isPreview: chapter.isPreview,
+  };
+}
+
+/** Book-page payload: the book + its PUBLIC preview chapters only. */
+export function buildBookPayload(path, book, previewChapters) {
+  return {
+    kind: 'book',
+    path,
+    book: toPayloadBook(book),
+    chapters: (previewChapters ?? []).map(toPayloadChapter),
+  };
+}
+
+/** Library-hub payload: the FIRST page (50 books, default filters,
+ *  document-ID order — the client re-sorts with compareBooks, the
+ *  same as the live fetch). lastDocId is the document-ID-order
+ *  cursor for the next page; hasMore is false only when the whole
+ *  published library fits on page 1. */
+export function buildLibraryPayload(path, books) {
+  const page = books.slice(0, 50);
+  return {
+    kind: 'library',
+    path,
+    books: page.map(toPayloadBook),
+    lastDocId: page.length > 0 ? page[page.length - 1].id : null,
+    hasMore: books.length > 50,
+  };
+}
+
+/** Class-index payload: per-level book/subject counts computed
+ *  from the same books the prerender renders (see
+ *  buildClassLevelCounts — the loader stats cover only 5 of 7
+ *  levels, so they are not used here). Always all seven levels. */
+export function buildClassIndexPayload(path, books) {
+  return { kind: 'class-index', path, levels: buildClassLevelCounts(books) };
+}
+/** Rewrite bare internal hrefs in rendered HTML to /{lang}/... .
+ *  Only the segments in LINK_REWRITE_SEGMENTS are rewritten; asset
  *  paths and already-prefixed hrefs are untouched. */
 export function rewriteInternalHrefs(html, lang) {
   const seg = LINK_REWRITE_SEGMENTS.join('|');
@@ -685,9 +945,10 @@ async function main() {
   // --- Book data (exactly one source; the script refuses to guess) ---
   let books;
   let booksSource;
+  let fixtureRaw = null;
   if (args.booksFile) {
-    const raw = JSON.parse(readFileSync(args.booksFile, 'utf8'));
-    const { books: list, skipped } = normalizeBooksFixture(raw);
+    fixtureRaw = JSON.parse(readFileSync(args.booksFile, 'utf8'));
+    const { books: list, skipped } = normalizeBooksFixture(fixtureRaw);
     books = list;
     booksSource = `fixture ${args.booksFile} (skipped ${skipped} docs without id/title)`;
   } else if (args.live) {
@@ -700,13 +961,41 @@ async function main() {
   }
   console.log(`Books: ${books.length} (${booksSource})`);
 
+  // --- Chapters (Phase 2b: __INITIAL_DATA__ book payloads, same
+  // source as the books — never a second source of truth) ---
+  let chapters = [];
+  if (fixtureRaw) {
+    const { chapters: list, skipped: chSkipped } = normalizeChaptersFixture(fixtureRaw);
+    chapters = list;
+    console.log(`Chapters: ${chapters.length} (skipped ${chSkipped} docs without id/bookId/title)`);
+  } else if (args.live) {
+    chapters = await fetchChaptersFromRest(args.project);
+    console.log(`Chapters: ${chapters.length} (live REST)`);
+  }
+
+  // Preview chapters per book (Published + isPreview only — the only
+  // chapters a signed-out visitor may see, so the only ones a book
+  // payload may carry). The 24 Nov fixture carries NO isPreview
+  // flags (verified 25 Nov 2026), so guest payloads honestly carry
+  // zero chapters until the loader sets isPreview on live rows.
+  const previewByBook = new Map();
+  let previewTotal = 0;
+  for (const ch of chapters) {
+    if (ch.reviewStatus === 'Published' && ch.isPreview === true) {
+      if (!previewByBook.has(ch.bookId)) previewByBook.set(ch.bookId, []);
+      previewByBook.get(ch.bookId).push(ch);
+      previewTotal += 1;
+    }
+  }
+  console.log(`Preview chapters in payloads: ${previewTotal}`);
+
   // --- Guide coverage check (warn, never fail the build on it) ---
   try {
     const guideSource = readFileSync(join(root, 'src/lib/publicGuides.ts'), 'utf8');
     const guidePaths = getGuidePaths(guideSource);
     const missing = guidePaths.filter((p) => !PRERENDER_STATIC_PATHS.includes(p));
     if (missing.length > 0) console.warn(`WARN: ${missing.length} guide(s) not in PRERENDER_STATIC_PATHS: ${missing.join(', ')}`);
-    else console.log(`Guides: ${guideSlugs.length} slugs, all covered by PRERENDER_STATIC_PATHS`);
+    else console.log(`Guides: ${guidePaths.length} paths, all covered by PRERENDER_STATIC_PATHS`);
   } catch (err) {
     console.warn(`WARN: could not verify guide coverage: ${err.message}`);
   }
@@ -729,7 +1018,7 @@ async function main() {
   const noindexWarnings = [];
   const sitemapUrls = [];
 
-  function buildPage({ url, lang, headOverride, prependHtml }) {
+  function buildPage({ url, lang, headOverride, prependHtml, initialData }) {
     let appHtml = '';
     let helmetHtml = '';
     try {
@@ -761,6 +1050,13 @@ async function main() {
     const outRootStart = out.indexOf(rootMarker);
     const outRootClose = out.indexOf(rootCloseMarker, outRootStart);
     out = out.slice(0, outRootStart + rootMarker.length) + '\n' + body + '\n    ' + out.slice(outRootClose);
+    // Phase 2b (25 Nov 2026): embed the page's __INITIAL_DATA__
+    // payload (JSON data block, CSP-safe) when one was built for
+    // this URL — the client reads it first and renders with zero
+    // Firestore reads. No payload = normal live fetch, as before.
+    if (initialData !== undefined && initialData !== null) {
+      out = insertInitialDataScript(out, buildInitialDataScriptTag(initialData));
+    }
     return out;
   }
 
@@ -773,7 +1069,15 @@ async function main() {
   for (const barePath of PRERENDER_STATIC_PATHS) {
     for (const lang of LANGS) {
       const url = withLangPrefix(barePath, lang);
-      const page = buildPage({ url, lang });
+      // Phase 2b: hub payloads. /books + /library carry page 1 (50
+      // books, default filters); /class carries the per-level
+      // book/subject counts. Every other static page needs no payload
+      // (no client Firestore reads on load) — its data is static or
+      // login-gated.
+      let initialData;
+      if (barePath === '/books' || barePath === '/library') initialData = buildLibraryPayload(url, books);
+      else if (barePath === '/class') initialData = buildClassIndexPayload(url, books);
+      const page = buildPage({ url, lang, initialData });
       writeFile(distDir, outPath(lang, barePath), page);
       rendered += 1;
     }
@@ -789,6 +1093,7 @@ async function main() {
         lang,
         headOverride: buildBookHead(book, lang),
         prependHtml: buildBookSummaryHtml(book, lang),
+        initialData: buildBookPayload(url, book, previewByBook.get(book.id) ?? []),
       });
       writeFile(distDir, outPath(lang, `/books/${book.id}`), page);
       rendered += 1;

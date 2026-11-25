@@ -14,15 +14,27 @@ import {
   buildBookHead,
   buildBookSummary,
   buildBookSummaryHtml,
+  buildClassIndexPayload,
+  buildClassLevelCounts,
+  buildInitialDataScriptTag,
+  buildLibraryPayload,
+  buildBookPayload,
   buildRobotsTxt,
   buildSitemapXml,
   fetchBooksFromRest,
+  fetchChaptersFromRest,
   getGuidePaths,
   getGuideSlugs,
+  insertInitialDataScript,
   normalizeBooksFixture,
+  normalizeChaptersFixture,
+  parseChapterRestDoc,
   parseFirestoreRestDoc,
   rewriteInternalHrefs,
+  safeJsonForInlineScript,
 } from '../../../scripts/prerender.mjs';
+import { CLASS_LEVELS, booksForClass, subjectsForClass } from '../classLevels';
+import type { Book } from '../content';
 import { bookSeoData, buildBookSummary as buildBookSummaryTs } from '../seo';
 
 const BACKUP_PATH = join(process.cwd(), '..', 'backups', 'eduvelto-backup-20261124-014508.json');
@@ -227,5 +239,209 @@ describe('buildSitemapXml / buildRobotsTxt', () => {
     expect(robots).toContain('Disallow: /login');
     expect(robots).toContain('Sitemap: https://eduvelto.com/sitemap.xml');
     expect(robots).not.toContain('Disallow: /books/');
+  });
+});
+
+// ---------------------------------------------------------------------------
+// Phase 2b — __INITIAL_DATA__ payload (25 Nov 2026).
+// ---------------------------------------------------------------------------
+
+describe('normalizeBooksFixture carries the payload fields', () => {
+  it('hons-211001 carries bilingual/educationType/credit/marks', () => {
+    const raw = JSON.parse(readFileSync(BACKUP_PATH, 'utf8'));
+    const { books } = normalizeBooksFixture(raw);
+    const first = books.find((b) => b.id === 'hons-211001');
+    expect(first?.bilingual).toBe(false);
+    expect(first?.educationType).toBe('Higher');
+    expect(first?.credit).toBe(4);
+    expect(first?.marks).toBe(100);
+    expect(books.filter((b) => b.bilingual === true).length).toBe(64);
+  });
+});
+
+describe('normalizeChaptersFixture (24 Nov backup)', () => {
+  it('loads all 2,307 real chapters, skips none', () => {
+    const raw = JSON.parse(readFileSync(BACKUP_PATH, 'utf8'));
+    const { chapters, skipped } = normalizeChaptersFixture(raw);
+    expect(chapters.length).toBe(2307);
+    expect(skipped).toBe(0);
+    expect(chapters.filter((c) => c.reviewStatus === 'Published').length).toBe(2305);
+    expect(chapters.filter((c) => c.reviewStatus === 'Under Review').length).toBe(2);
+    // The fixture carries NO isPreview flags (verified 25 Nov 2026):
+    // guest payloads honestly carry zero chapters until the loader
+    // sets isPreview on live rows.
+    expect(chapters.filter((c) => c.isPreview === true).length).toBe(0);
+    const hons = chapters.filter((c) => c.bookId === 'hons-211001');
+    expect(hons.map((c) => c.id)).toEqual(['hons-211001--part-a', 'hons-211001--part-b', 'hons-211001--part-c']);
+    expect(hons.map((c) => c.order)).toEqual([1, 2, 3]);
+  });
+
+  it('skips docs without id/bookId/title instead of inventing them', () => {
+    const { chapters, skipped } = normalizeChaptersFixture([
+      { id: 'c-1', bookId: 'b-1', title: 'Real Chapter' },
+      { id: 'no-book' },
+      { bookId: 'b-1', title: 'No id' },
+      null,
+    ]);
+    expect(chapters).toEqual([
+      { id: 'c-1', bookId: 'b-1', title: 'Real Chapter', isPreview: false },
+    ]);
+    expect(skipped).toBe(3);
+  });
+});
+
+describe('parseChapterRestDoc / fetchChaptersFromRest', () => {
+  it('parses a REST chapter document', () => {
+    const doc = {
+      name: 'projects/eduvelto/databases/(default)/documents/chapters/hons-211001--part-a',
+      fields: {
+        bookId: { stringValue: 'hons-211001' },
+        title: { stringValue: '10 Short Questions (1 mark each)' },
+        part: { stringValue: 'A' },
+        set: { integerValue: '1' },
+        order: { integerValue: '1' },
+        questionCount: { integerValue: '10' },
+        reviewStatus: { stringValue: 'Published' },
+        isPreview: { booleanValue: true },
+      },
+    };
+    expect(parseChapterRestDoc(doc)).toEqual({
+      id: 'hons-211001--part-a',
+      bookId: 'hons-211001',
+      title: '10 Short Questions (1 mark each)',
+      part: 'A',
+      set: 1,
+      order: 1,
+      questionCount: 10,
+      reviewStatus: 'Published',
+      isPreview: true,
+    });
+  });
+
+  it('fails fast on 429 instead of retrying into the quota', async () => {
+    const stubFetch = async () => ({ status: 429, ok: false, json: async () => ({}) });
+    await expect(fetchChaptersFromRest('eduvelto', stubFetch)).rejects.toThrow(/429/);
+  });
+});
+
+describe('buildClassLevelCounts (24 Nov backup)', () => {
+  it('counts all seven levels from the books (loader stats cover only five)', () => {
+    const raw = JSON.parse(readFileSync(BACKUP_PATH, 'utf8'));
+    const { books } = normalizeBooksFixture(raw);
+    const counts = buildClassLevelCounts(books);
+    expect(counts).toEqual([
+      { slug: 'class-1-5', bookCount: 0, subjectCount: 0 },
+      { slug: 'class-6-8', bookCount: 0, subjectCount: 0 },
+      { slug: 'class-9-10', bookCount: 26, subjectCount: 3 },
+      { slug: 'hsc', bookCount: 37, subjectCount: 3 },
+      { slug: 'honours-masters', bookCount: 439, subjectCount: 15 },
+      { slug: 'technical', bookCount: 72, subjectCount: 3 },
+      { slug: 'madrasa', bookCount: 35, subjectCount: 1 },
+    ]);
+    // The loader stats cover only 5 of 7 levels — Technical (72) and
+    // Madrasa (35) have no stats doc, so a stats-based payload would
+    // show a false zero for them. The book-derived counts cover all.
+    expect(counts.reduce((s, c) => s + c.bookCount, 0)).toBe(609);
+  });
+
+  it('agrees with the TS booksForClass / subjectsForClass formulas', () => {
+    // The .mjs mirror table (CLASS_LEVEL_BOOK_FILTERS) must stay in
+    // sync with CLASS_LEVELS — this cross-check fails the suite on
+    // drift instead of shipping wrong counts.
+    const raw = JSON.parse(readFileSync(BACKUP_PATH, 'utf8'));
+    const { books } = normalizeBooksFixture(raw);
+    const counts = buildClassLevelCounts(books);
+    const tsBooks = books as unknown as Book[];
+    expect(CLASS_LEVELS.map((d) => d.slug)).toEqual(counts.map((c) => c.slug));
+    for (const def of CLASS_LEVELS) {
+      const c = counts.find((x) => x.slug === def.slug);
+      expect(c?.bookCount, `${def.slug} bookCount`).toBe(booksForClass(tsBooks, def).length);
+      expect(c?.subjectCount, `${def.slug} subjectCount`).toBe(subjectsForClass(tsBooks, def).length);
+    }
+  });
+});
+
+describe('__INITIAL_DATA__ payload builders', () => {
+  it('buildBookPayload carries the book + preview chapters only', () => {
+    const raw = JSON.parse(readFileSync(BACKUP_PATH, 'utf8'));
+    const { books } = normalizeBooksFixture(raw);
+    const { chapters } = normalizeChaptersFixture(raw);
+    const book = books.find((b) => b.id === 'hons-211001');
+    const preview = chapters.filter(
+      (c) => c.bookId === 'hons-211001' && c.reviewStatus === 'Published' && c.isPreview === true,
+    );
+    expect(book).toBeDefined();
+    if (!book) throw new Error('fixture book hons-211001 missing');
+    const payload = buildBookPayload('/bn/books/hons-211001', book, preview);
+    expect(payload.kind).toBe('book');
+    expect(payload.path).toBe('/bn/books/hons-211001');
+    expect(payload.book.title).toBe(book?.title);
+    expect(payload.book.credit).toBe(4);
+    expect(payload.chapters).toEqual([]);
+    // No lesson/question content ever rides in a payload.
+    expect(JSON.stringify(payload)).not.toContain('questions');
+  });
+
+  it('buildLibraryPayload carries page 1 (50 books) + the id cursor', () => {
+    const raw = JSON.parse(readFileSync(BACKUP_PATH, 'utf8'));
+    const { books } = normalizeBooksFixture(raw);
+    const payload = buildLibraryPayload('/bn/books', books);
+    expect(payload.kind).toBe('library');
+    expect(payload.books).toHaveLength(50);
+    expect(payload.hasMore).toBe(true);
+    // Document-ID order: the 50th book by id is the cursor.
+    expect(payload.lastDocId).toBe('hons-212609');
+    // Never the whole library on one page.
+    expect(payload.books.length).toBeLessThan(books.length);
+  });
+
+  it('buildClassIndexPayload carries all seven levels', () => {
+    const raw = JSON.parse(readFileSync(BACKUP_PATH, 'utf8'));
+    const { books } = normalizeBooksFixture(raw);
+    const payload = buildClassIndexPayload('/bn/class', books);
+    expect(payload?.kind).toBe('class-index');
+    expect(payload?.levels).toHaveLength(7);
+    expect(payload?.levels.reduce((s, l) => s + l.bookCount, 0)).toBe(609);
+  });
+});
+
+describe('__INITIAL_DATA__ script tag (CSP-safe carrier)', () => {
+  it('safeJsonForInlineScript escapes </script> and U+2028/2029', () => {
+    const out = safeJsonForInlineScript({ t: 'a</script>b c d' });
+    expect(out).not.toContain('</script>');
+    expect(out).toContain('\\u003c/script\\u003e');
+    expect(out).toContain('\\u2028');
+    expect(out).toContain('\\u2029');
+    expect(JSON.parse(out)).toEqual({ t: 'a</script>b c d' });
+  });
+
+  it('the tag is a JSON data block, never an executable inline script', () => {
+    const tag = buildInitialDataScriptTag({
+      kind: 'book',
+      path: '/bn/books/hons-211001',
+      book: { id: 'hons-211001', title: 'T' },
+      chapters: [],
+    });
+    expect(tag).toContain('id="__INITIAL_DATA__"');
+    expect(tag).toContain('type="application/json"');
+    // No executable assignment: the hash-only script-src CSP would
+    // block `window.__INITIAL_DATA__ = ...` in production.
+    expect(tag).not.toContain('window.__INITIAL_DATA__ =');
+    expect(tag).toContain('hons-211001');
+  });
+
+  it('insertInitialDataScript places the tag after #root, before the bundle script', () => {
+    const html =
+      '<html><body><div id="root">\napp\n    </div>\n    <script>\ntheme\n</script>\n    <script type="module" src="/assets/index-abc.js"></script></body></html>';
+    const out = insertInitialDataScript(html, '<script id="__INITIAL_DATA__" type="application/json">{}</script>');
+    expect(out.indexOf('__INITIAL_DATA__')).toBeGreaterThan(out.indexOf('</div>'));
+    expect(out.indexOf('__INITIAL_DATA__')).toBeLessThan(out.indexOf('type="module"'));
+    expect(out).toContain('app');
+  });
+
+  it('insertInitialDataScript leaves unknown template shapes unchanged', () => {
+    expect(insertInitialDataScript('<html>no root here</html>', '<script id="x"></script>')).toBe(
+      '<html>no root here</html>',
+    );
   });
 });
