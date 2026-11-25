@@ -6,9 +6,14 @@
 // keys to the signed-in uid when available, otherwise 'guest'.
 //
 // Flow — academic tracks (General / Madrasah):
-//   Stream → Class → Subject → CHAPTER (single or multiple) → topics
-//   inside the chapter → type / count / difficulty → pick questions
-//   → editable paper setup → preview (partial, protected) → download.
+//   Stream → Class → Subject → CHAPTER (single or multiple, with
+//   select-all + live counter + topic drill-down) → LEVEL-AWARE step 2
+//   (primary = প্রান্তিক term; secondary = half-yearly/annual +
+//   MCQ/creative/combined; Honours = question kind only) → pick
+//   questions (all verified questions auto-selected; uncheck to
+//   remove — NO pre-generation marks/count/difficulty controls,
+//   pattern 3) → editable paper setup → preview (partial,
+//   protected) → download.
 // Flow — Track 3 (Job & Admission Coaching):
 //   Exam (verified pattern) → subject preset → section paper from
 //   available verified questions. Full mock is honestly GATED: the
@@ -41,8 +46,11 @@ import {
   QPG_NATURE_OPTIONS,
   QPG_PAPER_TEMPLATES,
   QPG_PRICE_CLAIM_BN,
+  QPG_PRIMARY_TERMS,
   QPG_PRO_MONTHLY_BDT,
   QPG_PRO_PER_PAPER_BDT,
+  QPG_SECONDARY_EXAM_KINDS,
+  QPG_SECONDARY_Q_KINDS,
   QPG_SET_CODES,
   QPG_SOURCE_OPTIONS,
   QPG_VERIFIED_POOL,
@@ -52,23 +60,28 @@ import {
   defaultPaperSetup,
   qpgChaptersFor,
   qpgClassesFor,
+  qpgLevelFor,
   qpgModelSectionQuestions,
   qpgModelTests,
   qpgSubjectsFor,
+  qpgTypeForQKind,
   replaceQpgQuestion,
+  saveQpgFlowPrefill,
   selectQpgQuestions,
   QPG_PENDING_TRACK3_EXAMS,
   QPG_STREAMS,
   type QpgChapter,
   type QpgCognitiveLevel,
-  type QpgDifficulty,
   type QpgModelTest,
   type QpgPaper,
   type QpgPaperSetup,
+  type QpgPrimaryTerm,
   type QpgQuestion,
   type QpgQuestionNature,
   type QpgQuestionSource,
   type QpgQuestionType,
+  type QpgSecondaryExamKind,
+  type QpgSecondaryQKind,
   type QpgSetCode,
   type QpgStream,
 } from '../lib/questionPaper';
@@ -82,22 +95,6 @@ import {
 import { loadVerifiedChapterQuestions } from '../lib/questionPaperCache';
 import { renderPaperCanvases } from '../lib/questionPaperPdf';
 import '../components/question-paper-print.css';
-
-const TYPE_OPTIONS: Array<{ id: QpgQuestionType; nameBn: string; nameEn: string }> = [
-  { id: 'mcq', nameBn: 'MCQ (বহুনির্বাচনি)', nameEn: 'MCQ' },
-  { id: 'cq', nameBn: 'সৃজনশীল (CQ)', nameEn: 'Creative (CQ)' },
-  { id: 'short', nameBn: 'সংক্ষিপ্ত প্রশ্ন', nameEn: 'Short question' },
-  { id: 'multi-completion', nameBn: 'বহুপদী (Multiple Completion)', nameEn: 'Multiple Completion' },
-  { id: 'situation-set', nameBn: 'অভিন্ন তথ্যভিত্তিক (Situation Set)', nameEn: 'Situation Set' },
-  { id: 'picture-based', nameBn: 'ছবিভিত্তিক প্রশ্ন', nameEn: 'Picture-based' },
-];
-
-const DIFFICULTY_OPTIONS: Array<{ id: QpgDifficulty; nameBn: string }> = [
-  { id: 'all', nameBn: 'সবগুলো' },
-  { id: 'easy', nameBn: 'সহজ' },
-  { id: 'medium', nameBn: 'মাঝারি' },
-  { id: 'hard', nameBn: 'কঠিন' },
-];
 
 function fieldStyle(): React.CSSProperties {
   return { width: '100%', padding: 8, boxSizing: 'border-box', marginTop: 4 };
@@ -150,14 +147,25 @@ export default function QuestionPaperGeneratorPage() {
   const [subjectId, setSubjectId] = useState('english');
   const [chapterIds, setChapterIds] = useState<string[]>(['bcs-english-batch1']);
   const [topicIds, setTopicIds] = useState<string[]>([]);
-  const [qType, setQType] = useState<QpgQuestionType>('mcq');
-  const [difficulty, setDifficulty] = useState<QpgDifficulty>('all');
+  // Level-aware step 2 (pattern 3): primary = term, secondary =
+  // exam kind + question kind, Honours = question kind only. The
+  // question TYPE is derived from these — there is no separate
+  // pre-generation type/count/difficulty control any more.
+  const level = qpgLevelFor(stream, classId);
+  const [term, setTerm] = useState<QpgPrimaryTerm>('first');
+  const [examKind, setExamKind] = useState<QpgSecondaryExamKind>('half-yearly');
+  const [qKind, setQKind] = useState<QpgSecondaryQKind>('mcq');
+  const qType: QpgQuestionType | 'all' =
+    level === 'primary' ? 'mcq' : qpgTypeForQKind(qKind);
   const [sourceFilter, setSourceFilter] = useState<QpgQuestionSource | 'any'>('any');
   const [cognitiveFilter, setCognitiveFilter] = useState<QpgCognitiveLevel | 'any'>('any');
   const [natureFilter, setNatureFilter] = useState<QpgQuestionNature | 'any'>('any');
-  const [count, setCount] = useState(10);
+  // All verified questions of the chosen chapters are selected by
+  // default (pattern 3: one-click generation); the teacher tunes by
+  // unchecking individual questions. The effect below re-selects
+  // all whenever the available list changes (chapter/topic/kind).
   const [selectedIds, setSelectedIds] = useState<string[]>(() =>
-    QPG_VERIFIED_POOL.slice(0, 10).map((q) => q.id),
+    QPG_VERIFIED_POOL.map((q) => q.id),
   );
   // Inline question editing (free, part of paper creation): teacher's
   // edits stored per question id; the paper renders the edited text.
@@ -228,11 +236,14 @@ export default function QuestionPaperGeneratorPage() {
           chapterIds,
           topicIds,
           type: qType,
-          difficulty,
+          // Pattern 3: no pre-generation difficulty control — the
+          // verified pool carries no difficulty tags yet, so 'all'
+          // is the only honest value (see selectQpgQuestions).
+          difficulty: 'all',
           // Request exactly what the chapters hold: the teacher's
-          // chosen count is applied separately via the picker
-          // (applyCount / selectedIds). Requesting an arbitrary large
-          // number here would print a bogus "shortfall" message.
+          // picks are the per-question checkboxes (selectedIds).
+          // Requesting an arbitrary large number here would print
+          // a bogus "shortfall" message.
           count: cachedPool.length,
           source: sourceFilter,
           cognitiveLevel: cognitiveFilter,
@@ -240,9 +251,18 @@ export default function QuestionPaperGeneratorPage() {
         },
         cachedPool,
       ),
-    [chapterIds, topicIds, qType, difficulty, cachedPool, sourceFilter, cognitiveFilter, natureFilter],
+    [chapterIds, topicIds, qType, cachedPool, sourceFilter, cognitiveFilter, natureFilter],
   );
   const availableQuestions = selection.questions;
+  // Pattern 3 — one-click generation: whenever the available list
+  // changes (chapter / topic / exam-kind / question-kind), select
+  // ALL of them; the teacher tunes by unchecking. Manual unchecks
+  // do not re-trigger this (the dep is the available-id list only).
+  const availableIdsKey = availableQuestions.map((q) => q.id).join(',');
+  useEffect(() => {
+    setSelectedIds(availableQuestions.map((q) => q.id));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [availableIdsKey]);
   const applyEdits = (q: QpgQuestion): QpgQuestion => edits[q.id] ?? q;
   const selectedQuestions = availableQuestions
     .filter((q) => selectedIds.includes(q.id))
@@ -255,6 +275,9 @@ export default function QuestionPaperGeneratorPage() {
     setStream(s);
     setPaper(null);
     setPreviewUrls([]);
+    setTerm('first');
+    setExamKind('half-yearly');
+    setQKind('mcq');
     if (s === 'general') {
       setClassId('honours');
       setSubjectId('english');
@@ -273,7 +296,9 @@ export default function QuestionPaperGeneratorPage() {
     setSubjectId('');
     setChapterIds([]);
     setTopicIds([]);
-    setSelectedIds([]);
+    setTerm('first');
+    setExamKind('half-yearly');
+    setQKind('mcq');
     setPaper(null);
     setPreviewUrls([]);
     setOverrides({});
@@ -283,7 +308,6 @@ export default function QuestionPaperGeneratorPage() {
     setSubjectId(id);
     setChapterIds([]);
     setTopicIds([]);
-    setSelectedIds([]);
     setPaper(null);
     setPreviewUrls([]);
     setOverrides({});
@@ -293,21 +317,13 @@ export default function QuestionPaperGeneratorPage() {
     const next = toggleIn(chapterIds, id);
     setChapterIds(next);
     setTopicIds([]);
-    setSelectedIds([]);
     setPaper(null);
     setPreviewUrls([]);
-  };
-
-  const applyCount = (n: number) => {
-    const safe = Math.max(1, Math.min(100, Math.floor(n) || 1));
-    setCount(safe);
-    setSelectedIds(availableQuestions.slice(0, safe).map((q) => q.id));
   };
 
   const toggleQuestion = (id: string) => {
     const next = toggleIn(selectedIds, id);
     setSelectedIds(next);
-    setCount(next.length);
   };
 
   /** Defaults for the paper-setup form, from the current selections. */
@@ -325,17 +341,35 @@ export default function QuestionPaperGeneratorPage() {
         setCode,
       });
     }
+    // Level-aware title (pattern 3): the exam kind / term chosen
+    // in step 5 names the paper; the section heading follows the
+    // question kind (CQ / combined / MCQ).
+    const termNameBn = QPG_PRIMARY_TERMS.find((t) => t.id === term)?.nameBn ?? 'প্রথম প্রান্তিক';
+    const examKindNameBn =
+      QPG_SECONDARY_EXAM_KINDS.find((t) => t.id === examKind)?.nameBn ?? 'অর্ধবার্ষিক পরীক্ষা';
+    const examTitle =
+      level === 'primary'
+        ? `${termNameBn} মূল্যায়ন — ${subjectLabel} (${classLabel})`
+        : level === 'secondary'
+          ? `${examKindNameBn} — ${subjectLabel} (${classLabel})`
+          : `প্রশ্নপত্র — ${subjectLabel} (${classLabel})`;
+    const sectionHeading =
+      qType === 'cq'
+        ? 'খ-বিভাগ: সৃজনশীল প্রশ্ন (CQ)'
+        : qType === 'all'
+          ? 'ক-বিভাগ: বহুনির্বাচনি ও সৃজনশীল প্রশ্ন'
+          : 'ক-বিভাগ: বহুনির্বাচনি প্রশ্ন (MCQ)';
     return defaultPaperSetup({
-      title: `প্রশ্নপত্র — ${subjectLabel} (${classLabel})`,
+      title: examTitle,
       subject: subjectLabel,
       classLabel,
       questionCount: Math.max(selectedQuestions.length, 1),
       marksPerQuestion: 1,
       timeMinutes: Math.max(30, selectedQuestions.length),
-      sectionHeading: 'ক-বিভাগ: বহুনির্বাচনি প্রশ্ন (MCQ)',
+      sectionHeading,
       setCode,
     });
-  }, [stream, jobExam, jobSubject, jobCount, jobAvailable.length, subjectLabel, classLabel, selectedQuestions.length, setCode]);
+  }, [stream, jobExam, jobSubject, jobCount, jobAvailable.length, subjectLabel, classLabel, selectedQuestions.length, setCode, level, term, examKind, qType]);
 
   const setup: QpgPaperSetup = { ...defaultSetup, ...overrides };
 
@@ -681,7 +715,9 @@ export default function QuestionPaperGeneratorPage() {
             {subjectId === '' ? <p style={{ fontSize: 13 }}>উপরে একটি বিষয় বেছে নিন।</p> : null}
           </Card>
 
-          {/* Step 4 — Chapter (multi-select) */}
+          {/* Step 4 — Chapter (multi-select, pattern 1: counts +
+              drill-down, select-all + live counter, next step gated
+              on >= 1 selection) */}
           {subjectId !== '' ? (
             <Card style={{ marginBottom: 16 }}>
               <h2 style={{ margin: '0 0 8px', fontSize: 16 }}>
@@ -693,96 +729,215 @@ export default function QuestionPaperGeneratorPage() {
                   প্রশ্ন এখানে যোগ হবে — ততদিন কোনো প্রশ্ন দেখানো হবে না।
                 </AlertBox>
               ) : (
-                chapters.map((ch) => (
-                  <label
-                    key={ch.id}
-                    style={{
-                      display: 'block', border: '1px solid #ddd', borderRadius: 8,
-                      padding: 10, marginBottom: 8, fontSize: 14, cursor: 'pointer',
-                    }}
-                  >
-                    <input
-                      type="checkbox"
-                      checked={chapterIds.includes(ch.id)}
-                      onChange={() => toggleChapter(ch.id)}
-                    />{' '}
-                    <strong>{ch.nameBn}</strong> — যাচাইকৃত {ch.verifiedCount}টি প্রশ্ন
-                    <div style={{ fontSize: 12, color: '#666', marginTop: 4 }}>{ch.sourceNoteBn}</div>
-                    <div style={{ marginTop: 6 }}>
-                      {ch.topics.map((t) => (
-                        <Chip key={t.id} tone={topicIds.includes(t.id) ? 'gold' : 'outline'}>
-                          {t.nameBn} ({t.verifiedCount})
-                        </Chip>
-                      ))}
+                <>
+                  <p style={{ fontSize: 13, margin: '0 0 10px' }}>
+                    নির্বাচিত: <strong>{chapterIds.length}/{chapters.length} অধ্যায়</strong>
+                    {chapterIds.length > 0
+                      ? ` — যাচাইকৃত ${chapters
+                          .filter((c) => chapterIds.includes(c.id))
+                          .reduce((sum, c) => sum + c.verifiedCount, 0)}টি প্রশ্ন`
+                      : ''}
+                    {' · '}
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={() => {
+                        setChapterIds(chapters.map((c) => c.id));
+                        setTopicIds([]);
+                        setPaper(null);
+                        setPreviewUrls([]);
+                      }}
+                    >
+                      সব নির্বাচন
+                    </Button>{' '}
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={() => {
+                        setChapterIds([]);
+                        setTopicIds([]);
+                        setPaper(null);
+                        setPreviewUrls([]);
+                      }}
+                    >
+                      সব বাতিল
+                    </Button>
+                  </p>
+                  {chapters.map((ch) => (
+                    <div
+                      key={ch.id}
+                      style={{
+                        border: '1px solid #ddd', borderRadius: 8,
+                        padding: 10, marginBottom: 8, fontSize: 14,
+                      }}
+                    >
+                      <label style={{ cursor: 'pointer' }}>
+                        <input
+                          type="checkbox"
+                          checked={chapterIds.includes(ch.id)}
+                          onChange={() => toggleChapter(ch.id)}
+                        />{' '}
+                        <strong>{ch.nameBn}</strong> — যাচাইকৃত {ch.verifiedCount}টি প্রশ্ন
+                      </label>
+                      <div style={{ fontSize: 12, color: '#666', marginTop: 4 }}>{ch.sourceNoteBn}</div>
+                      {ch.topics.length > 0 ? (
+                        <div style={{ marginTop: 6 }}>
+                          <div style={{ fontSize: 12, color: '#666', marginBottom: 4 }}>
+                            টপিক (অধ্যায়ের ভেতরে — আলাদা করে বাছা যায়):
+                          </div>
+                          <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
+                            {ch.topics.map((t) => (
+                              <Button
+                                key={t.id}
+                                variant={topicIds.includes(t.id) ? 'primary' : 'outline'}
+                                size="sm"
+                                onClick={() => setTopicIds(toggleIn(topicIds, t.id))}
+                              >
+                                {t.nameBn} ({t.verifiedCount})
+                              </Button>
+                            ))}
+                          </div>
+                        </div>
+                      ) : null}
                     </div>
-                  </label>
-                ))
+                  ))}
+                  <div style={{ marginTop: 10, display: 'flex', gap: 8, flexWrap: 'wrap', alignItems: 'center' }}>
+                    <Button
+                      disabled={chapterIds.length === 0}
+                      onClick={() => {
+                        document
+                          .getElementById('qpg-step-exam-kind')
+                          ?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                      }}
+                    >
+                      পরবর্তী ধাপ — পরীক্ষার ধরন বাছুন
+                    </Button>
+                    <Button
+                      variant="outline"
+                      disabled={chapterIds.length === 0}
+                      onClick={() => {
+                        saveQpgFlowPrefill({ stream, classId, subjectId, chapterIds });
+                        navigate('/sheet-builder');
+                      }}
+                    >
+                      এই অধ্যায়গুলো দিয়ে শিট বানান
+                    </Button>
+                  </div>
+                  {chapterIds.length === 0 ? (
+                    <p style={{ fontSize: 13, color: '#666', margin: '8px 0 0' }}>
+                      পরবর্তী ধাপে যেতে কমপক্ষে ১টি অধ্যায় বেছে নিন। একই অধ্যায় দিয়ে পরীক্ষার পেপার বা
+                      শিট — দুটোই বানানো যায়।
+                    </p>
+                  ) : (
+                    <p style={{ fontSize: 13, color: '#666', margin: '8px 0 0' }}>
+                      একই অধ্যায় দিয়ে পরীক্ষার পেপার বা শিট — দুটোই বানানো যায়।
+                    </p>
+                  )}
+                </>
               )}
-              {chapterIds.length > 0 ? (
-                <div style={{ marginTop: 10 }}>
-                  <strong style={{ fontSize: 13 }}>টপিক ফিল্টার (অধ্যায়ের ভেতরে):</strong>
-                  <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', marginTop: 6 }}>
-                    {chapters
-                      .filter((ch) => chapterIds.includes(ch.id))
-                      .flatMap((ch) => ch.topics)
-                      .map((t) => (
-                        <Button
-                          key={t.id}
-                          variant={topicIds.includes(t.id) ? 'primary' : 'outline'}
-                          size="sm"
-                          onClick={() => setTopicIds(toggleIn(topicIds, t.id))}
-                        >
-                          {t.nameBn} ({t.verifiedCount})
-                        </Button>
-                      ))}
+            </Card>
+          ) : null}
+
+          {/* Step 5 — Level-aware exam kind (pattern 3). Primary =
+              term only; secondary = exam kind + question kind;
+              Honours = question kind only. No marks / count /
+              difficulty input before generation. */}
+          {chapterIds.length > 0 ? (
+            <Card style={{ marginBottom: 16 }}>
+              <h2 id="qpg-step-exam-kind" style={{ margin: '0 0 8px', fontSize: 16 }}>
+                ৫. পরীক্ষার ধরন বেছে নিন
+                {level === 'primary'
+                  ? ' (প্রাথমিক — প্রান্তিক)'
+                  : level === 'secondary'
+                    ? ' (মাধ্যমিক — অর্ধবার্ষিক / বার্ষিক)'
+                    : ' (অনার্স — প্রশ্নের ধরন)'}
+              </h2>
+              {level === 'primary' ? (
+                <div>
+                  <p style={{ fontSize: 13, margin: '0 0 8px' }}>কোন প্রান্তিকের পরীক্ষা?</p>
+                  <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
+                    {QPG_PRIMARY_TERMS.map((t) => (
+                      <Button
+                        key={t.id}
+                        variant={term === t.id ? 'primary' : 'outline'}
+                        size="sm"
+                        onClick={() => setTerm(t.id)}
+                      >
+                        {t.nameBn}
+                      </Button>
+                    ))}
                   </div>
                 </div>
+              ) : null}
+              {level === 'secondary' ? (
+                <div>
+                  <p style={{ fontSize: 13, margin: '0 0 8px' }}>পরীক্ষা কোনটি?</p>
+                  <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', marginBottom: 12 }}>
+                    {QPG_SECONDARY_EXAM_KINDS.map((t) => (
+                      <Button
+                        key={t.id}
+                        variant={examKind === t.id ? 'primary' : 'outline'}
+                        size="sm"
+                        onClick={() => setExamKind(t.id)}
+                      >
+                        {t.nameBn}
+                      </Button>
+                    ))}
+                  </div>
+                  <p style={{ fontSize: 13, margin: '0 0 8px' }}>প্রশ্নের ধরন কোনটি?</p>
+                  <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
+                    {QPG_SECONDARY_Q_KINDS.map((t) => (
+                      <Button
+                        key={t.id}
+                        variant={qKind === t.id ? 'primary' : 'outline'}
+                        size="sm"
+                        onClick={() => setQKind(t.id)}
+                      >
+                        {t.nameBn}
+                      </Button>
+                    ))}
+                  </div>
+                </div>
+              ) : null}
+              {level === 'tertiary' ? (
+                <div>
+                  <p style={{ fontSize: 13, margin: '0 0 8px' }}>প্রশ্নের ধরন কোনটি?</p>
+                  <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
+                    {QPG_SECONDARY_Q_KINDS.map((t) => (
+                      <Button
+                        key={t.id}
+                        variant={qKind === t.id ? 'primary' : 'outline'}
+                        size="sm"
+                        onClick={() => setQKind(t.id)}
+                      >
+                        {t.nameBn}
+                      </Button>
+                    ))}
+                  </div>
+                </div>
+              ) : null}
+              {qKind !== 'mcq' && level !== 'primary' ? (
+                <AlertBox tone="info">
+                  যাচাইকৃত প্রশ্নভান্ডারে এখন শুধু MCQ আছে — সৃজনশীল / সমন্বিত বাছলেও আপাতত যাচাইকৃত MCQ
+                  দিয়েই পেপার হবে। যাচাইকৃত CQ প্যাক এলে এই ধরন পুরোপুরি চালু হবে; প্রশ্ন বানিয়ে ঘাটতি
+                  পূরণ করা হবে না।
+                </AlertBox>
               ) : null}
             </Card>
           ) : null}
 
-          {/* Step 5 — Type / count / difficulty + question picker */}
+          {/* Step 6 — Question picker (pattern 3: one-click — every
+              verified question is auto-selected; uncheck to remove.
+              No count / difficulty input before generation; tuning
+              happens here by ticking, and in the paper setup below). */}
           {chapterIds.length > 0 ? (
             <Card style={{ marginBottom: 16 }}>
-              <h2 style={{ margin: '0 0 8px', fontSize: 16 }}>৫. প্রশ্নের ধরন, সংখ্যা ও কাঠিন্য</h2>
-              <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', marginBottom: 10 }}>
-                {TYPE_OPTIONS.map((t) => (
-                  <Button
-                    key={t.id}
-                    variant={qType === t.id ? 'primary' : 'outline'}
-                    size="sm"
-                    onClick={() => setQType(t.id)}
-                  >
-                    {t.nameBn}
-                  </Button>
-                ))}
-              </div>
+              <h2 style={{ margin: '0 0 8px', fontSize: 16 }}>৬. প্রশ্ন বাছুন (যাচাইকৃত প্রশ্ন)</h2>
+              <p style={{ fontSize: 13, color: '#555', margin: '0 0 10px' }}>
+                এই অধ্যায়ের সব যাচাইকৃত প্রশ্ন আগেই নির্বাচিত — যেটা লাগবে না, তার টিক উঠিয়ে দিন।
+                নম্বর / কাঠিন্য আগেভাগে ঠিক করতে হয় না; পেপারের সেটআপ নিচে বদলানো যায়।
+              </p>
               <div style={{ display: 'flex', gap: 16, flexWrap: 'wrap', marginBottom: 10 }}>
-                <label style={{ fontSize: 13 }}>
-                  প্রশ্ন সংখ্যা
-                  <input
-                    type="number"
-                    min={1}
-                    max={100}
-                    value={count}
-                    onChange={(e) => applyCount(Number(e.target.value))}
-                    style={{ ...fieldStyle(), maxWidth: 100 }}
-                  />
-                </label>
-                <label style={{ fontSize: 13 }}>
-                  কাঠিন্য (Difficulty — সহজ/মধ্যম/কঠিন + Easy/Medium/Hard)
-                  <select
-                    value={difficulty}
-                    onChange={(e) => setDifficulty(e.target.value as QpgDifficulty)}
-                    style={{ ...fieldStyle(), maxWidth: 220 }}
-                  >
-                    {DIFFICULTY_OPTIONS.map((d) => (
-                      <option key={d.id} value={d.id}>
-                        {d.nameBn}
-                      </option>
-                    ))}
-                  </select>
-                </label>
                 <label style={{ fontSize: 13 }}>
                   উৎস (Source)
                   <select
@@ -849,17 +1004,16 @@ export default function QuestionPaperGeneratorPage() {
                       variant="outline"
                       size="sm"
                       onClick={() => {
-                        setSelectedIds(availableQuestions.slice(0, count).map((q) => q.id));
+                        setSelectedIds(availableQuestions.map((q) => q.id));
                       }}
                     >
-                      প্রথম {count}টি নিন
+                      সব নিন ({availableQuestions.length}টি)
                     </Button>
                     <Button
                       variant="outline"
                       size="sm"
                       onClick={() => {
                         setSelectedIds([]);
-                        setCount(0);
                       }}
                     >
                       সব বাতিল
@@ -1062,12 +1216,12 @@ export default function QuestionPaperGeneratorPage() {
         </>
       )}
 
-      {/* Step 6 — Paper setup (FREE, always editable) */}
+      {/* Step 7 — Paper setup (FREE, always editable) */}
       {(selectedQuestions.length > 0 || (stream === 'job_admission' && jobAvailable.length > 0)) &&
       paper === null ? (
         <Card style={{ marginBottom: 16 }}>
           <h2 style={{ margin: '0 0 4px', fontSize: 16 }}>
-            ৬. পেপারের লেখা ঠিক করুন (ফ্রি — সব লেখা বদলানো যায়)
+            ৭. পেপারের লেখা ঠিক করুন (ফ্রি — সব লেখা বদলানো যায়)
           </h2>
           <p style={{ fontSize: 13, color: '#555', margin: '0 0 12px' }}>
             শিক্ষকরা অনেক সময় সরাসরি পরীক্ষার পেপার বানান, শুধু মডেল টেস্ট নয় — তাই পেপারে কোনো লেখা
@@ -1329,13 +1483,13 @@ export default function QuestionPaperGeneratorPage() {
         </Card>
       ) : null}
 
-      {/* Step 7 — Protected FULL preview + download (owner 25 Nov 19:03:
+      {/* Step 8 — Protected FULL preview + download (owner 25 Nov 19:03:
           every question visible; one image per A4 page, so the print
           path also paginates between questions, never mid-question) */}
       {paper !== null ? (
         <Card style={{ marginBottom: 16 }} className="qpg-print-area">
           <h2 style={{ margin: '0 0 8px', fontSize: 16 }}>
-            ৭. প্রিভিউ (সুরক্ষিত — পুরো পেপার) ও ডাউনলোড
+            ৮. প্রিভিউ (সুরক্ষিত — পুরো পেপার) ও ডাউনলোড
           </h2>
           <p style={{ fontSize: 13, color: '#555', margin: '0 0 10px' }}>
             {paper.setup.title} — {paper.questions.length}টি প্রশ্ন • পূর্ণমান {paper.setup.totalMarks} •{' '}

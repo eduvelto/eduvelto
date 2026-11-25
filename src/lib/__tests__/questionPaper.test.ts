@@ -14,11 +14,16 @@ import {
   QPG_VERIFIED_CHAPTER_ID,
   QPG_VERIFIED_POOL,
   buildQpgPaper,
+  clearQpgFlowPrefill,
   defaultPaperSetup,
+  loadQpgFlowPrefill,
   qpgChaptersFor,
+  qpgLevelFor,
   qpgModelSectionQuestions,
   qpgModelTests,
+  qpgTypeForQKind,
   qpgVerifiedChapter,
+  saveQpgFlowPrefill,
   selectQpgQuestions,
 } from '../questionPaper';
 
@@ -211,7 +216,7 @@ describe('paper setup — free text, Pro layout', () => {
     expect(QPG_PRO_PLAN_AMOUNTS['coaching-3-12']).toBe(1500);
   });
 
-  it('every tier is exactly 30% of Eproshnobank (70% off) — the owner table, pair by pair', () => {
+  it('every tier is exactly 30% of the market price (70% off) — the owner table, pair by pair', () => {
     // The owner's table is authoritative (brief 25 Nov 09:34, arithmetic
     // verified there). NOTE: the brief says "nearest ৳10", but 249×0.3 =
     // 74.7 → ৳75 in the table — the table follows nearest ৳5 (74.7→75,
@@ -239,13 +244,61 @@ describe('paper setup — free text, Pro layout', () => {
     };
     expect(QPG_PRICE_TIERS).toHaveLength(Object.keys(expected).length);
     for (const t of QPG_PRICE_TIERS) {
-      expect([t.eduveltoBdt, t.eproshnobankBdt]).toEqual(expected[t.id]);
+      expect([t.eduveltoBdt, t.marketBdt]).toEqual(expected[t.id]);
       // Effective rule the table follows: 30%, nearest ৳5.
-      expect(t.eduveltoBdt).toBe(Math.round((t.eproshnobankBdt * 0.3) / 5) * 5);
+      expect(t.eduveltoBdt).toBe(Math.round((t.marketBdt * 0.3) / 5) * 5);
     }
   });
 
   it('the FINAL border wording is used — the old phrase appears nowhere in this module', () => {
     expect(QPG_BORDER_CREDIT).toBe('Powered by Eduvelto.com');
+  });
+});
+
+describe('level-aware step 2 (pattern 3, sprint 26 Nov 2026)', () => {
+  it('primary is Class 3–5 + Ebtedayi, secondary is 6–12 + Dakhil/Alim, Honours is tertiary', () => {
+    expect(qpgLevelFor('general', 'class-3')).toBe('primary');
+    expect(qpgLevelFor('general', 'class-5')).toBe('primary');
+    expect(qpgLevelFor('madrasah', 'ebtedayi')).toBe('primary');
+    expect(qpgLevelFor('general', 'class-6')).toBe('secondary');
+    expect(qpgLevelFor('general', 'class-12')).toBe('secondary');
+    expect(qpgLevelFor('madrasah', 'dakhil')).toBe('secondary');
+    expect(qpgLevelFor('madrasah', 'alim')).toBe('secondary');
+    expect(qpgLevelFor('general', 'honours')).toBe('tertiary');
+    expect(qpgLevelFor('job_admission', 'bcs')).toBe('job');
+  });
+
+  it('question-kind mapping: mcq -> mcq, creative -> cq, combined -> all (no type filter)', () => {
+    expect(qpgTypeForQKind('mcq')).toBe('mcq');
+    expect(qpgTypeForQKind('creative')).toBe('cq');
+    expect(qpgTypeForQKind('combined')).toBe('all');
+  });
+
+  it("combined ('all') selects the verified MCQs without the non-MCQ warning", () => {
+    const r = selectQpgQuestions({
+      chapterIds: [QPG_VERIFIED_CHAPTER_ID],
+      topicIds: [],
+      type: 'all',
+      difficulty: 'all',
+      count: 35,
+    });
+    expect(r.available).toBe(35);
+    expect(r.questions).toHaveLength(35);
+    expect(r.reasonsBn.join(' ')).not.toContain('শুধু MCQ আছে');
+  });
+});
+
+describe('two-flow prefill (pattern 2, sprint 26 Nov 2026)', () => {
+  it('prefill helpers are safe with no sessionStorage (node) — no throw, null/false', () => {
+    expect(
+      saveQpgFlowPrefill({
+        stream: 'general',
+        classId: 'honours',
+        subjectId: 'english',
+        chapterIds: [QPG_VERIFIED_CHAPTER_ID],
+      }),
+    ).toBe(false);
+    expect(loadQpgFlowPrefill()).toBeNull();
+    expect(() => clearQpgFlowPrefill()).not.toThrow();
   });
 });

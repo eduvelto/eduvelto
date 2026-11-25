@@ -19,6 +19,7 @@ import {
   resolveRootLang,
   stripLangPrefix,
   withLangPrefix,
+  withoutLangParam,
 } from '../langRouting';
 
 describe('stripLangPrefix / parseLangSegment', () => {
@@ -137,5 +138,22 @@ describe('getGuideSlugs', () => {
 
   it('returns [] when there are no slugs', () => {
     expect(getGuideSlugs('no slugs here')).toEqual([]);
+  });
+});
+
+describe('withoutLangParam (?lang= fix, 26 Nov 2026)', () => {
+  it('strips a lone ?lang= entirely', () => {
+    expect(withoutLangParam('?lang=en')).toBe('');
+    expect(withoutLangParam('?lang=bn')).toBe('');
+  });
+
+  it('keeps other params and drops only lang', () => {
+    expect(withoutLangParam('?lang=en&a=1')).toBe('?a=1');
+    expect(withoutLangParam('?a=1&lang=bn&b=2')).toBe('?a=1&b=2');
+  });
+
+  it('leaves a search without lang untouched', () => {
+    expect(withoutLangParam('?a=1')).toBe('?a=1');
+    expect(withoutLangParam('')).toBe('');
   });
 });

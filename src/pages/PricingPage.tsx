@@ -59,7 +59,7 @@ function TierTable(props: { titleBn: string; tiers: QpgPriceTier[] }) {
             <tr key={t.id} style={{ borderBottom: '1px solid #eee' }}>
               <td style={{ padding: '6px 4px' }}>{t.nameBn}</td>
               <td style={{ padding: '6px 4px' }}>
-                <s style={{ color: '#888' }}>৳{t.eproshnobankBdt.toLocaleString('en-IN')}</s>
+                <s style={{ color: '#888' }}>৳{t.marketBdt.toLocaleString('en-IN')}</s>
               </td>
               <td style={{ padding: '6px 4px' }}>
                 <Chip tone="gold">৭০% ছাড়ে</Chip>

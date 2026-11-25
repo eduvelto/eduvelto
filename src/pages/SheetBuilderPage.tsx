@@ -29,7 +29,9 @@ import { QuestionPaperDownloadDialog } from '../components/QuestionPaperDownload
 import {
   QPG_STREAMS,
   buildQpgPaper,
+  clearQpgFlowPrefill,
   defaultPaperSetup,
+  loadQpgFlowPrefill,
   qpgChaptersFor,
   qpgClassesFor,
   qpgSubjectsFor,
@@ -70,10 +72,37 @@ export default function SheetBuilderPage() {
   const [building, setBuilding] = useState(false);
   const [showDownload, setShowDownload] = useState(false);
   const [proStatus, setProStatus] = useState<QpgProStatus>(QPG_PRO_LOCKED);
+  // Two-flow prefill (pattern 2, sprint 26 Nov 2026): the generator
+  // hands over its stream/class/subject/chapters — this page scopes
+  // itself to those chapters (one-shot; cleared after reading).
+  const [prefilledChapterIds, setPrefilledChapterIds] = useState<string[] | null>(null);
+  const [prefillNote, setPrefillNote] = useState('');
+
+  useEffect(() => {
+    const prefill = loadQpgFlowPrefill();
+    if (!prefill) return;
+    clearQpgFlowPrefill();
+    if (!qpgClassesFor(prefill.stream).some((c) => c.id === prefill.classId)) return;
+    if (!qpgSubjectsFor(prefill.stream, prefill.classId).some((s) => s.id === prefill.subjectId)) return;
+    setStream(prefill.stream);
+    setClassId(prefill.classId);
+    setSubjectId(prefill.subjectId);
+    setSelection({});
+    setPaper(null);
+    setPreviewUrls([]);
+    setPrefilledChapterIds(prefill.chapterIds);
+    setPrefillNote(
+      `জেনারেটর থেকে আনা হয়েছে — ${prefill.chapterIds.length}টি অধ্যায়। শিট বানাতে নিচে অধ্যায় বেছে নিন।`,
+    );
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const classes = qpgClassesFor(stream);
   const subjects = qpgSubjectsFor(stream, classId);
-  const chapters = qpgChaptersFor(stream, classId, subjectId);
+  const chapters = useMemo(() => {
+    const all = qpgChaptersFor(stream, classId, subjectId);
+    return prefilledChapterIds ? all.filter((c) => prefilledChapterIds.includes(c.id)) : all;
+  }, [stream, classId, subjectId, prefilledChapterIds]);
 
   const selectedExerciseCount = qpgSelectedExerciseCount(selection);
 
@@ -101,6 +130,8 @@ export default function SheetBuilderPage() {
     setSelection({});
     setPaper(null);
     setPreviewUrls([]);
+    setPrefilledChapterIds(null);
+    setPrefillNote('');
   };
 
   const pickClass = (c: string) => {
@@ -110,6 +141,8 @@ export default function SheetBuilderPage() {
     setSelection({});
     setPaper(null);
     setPreviewUrls([]);
+    setPrefilledChapterIds(null);
+    setPrefillNote('');
   };
 
   const pickSubject = (s: string) => {
@@ -117,6 +150,8 @@ export default function SheetBuilderPage() {
     setSelection({});
     setPaper(null);
     setPreviewUrls([]);
+    setPrefilledChapterIds(null);
+    setPrefillNote('');
   };
 
   const chapterPool = useMemo(
@@ -214,6 +249,21 @@ export default function SheetBuilderPage() {
       {/* Step 2 — Chapters → exercises */}
       <Card style={{ marginBottom: 16 }}>
         <h2 style={{ margin: '0 0 8px', fontSize: 16 }}>২. অধ্যায় → অনুশীলনী</h2>
+        {prefillNote ? (
+          <AlertBox tone="info">
+            {prefillNote}{' '}
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => {
+                setPrefilledChapterIds(null);
+                setPrefillNote('');
+              }}
+            >
+              সব অধ্যায় দেখান
+            </Button>
+          </AlertBox>
+        ) : null}
         {chapters.length === 0 ? (
           <p style={{ fontSize: 13, margin: 0 }}>
             এই ক্লাস/বিষয়ের যাচাইকৃত অধ্যায় এখনো নেই — Class 3–8 + মাদ্রাসার বই সংগ্রহ ও যাচাই চলছে।

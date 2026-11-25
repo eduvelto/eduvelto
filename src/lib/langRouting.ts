@@ -99,6 +99,24 @@ export function alternateLangUrl(canonical: string, target: SupportedLang): stri
   }
 }
 
+/** Remove the legacy `lang` query param from a search string.
+//  withoutLangParam('?lang=en') -> ''; withoutLangParam('?lang=en&a=1')
+//  -> '?a=1'; withoutLangParam('?a=1') -> '?a=1'. The `?lang=` param
+//  is legacy-only (25 Nov 2026 ?lang= fix): the /:lang path segment
+//  is the only language carrier, and old ?lang= URLs redirect to
+//  clean paths (see LanguageContext + LegacyRedirect + LangLayout). */
+export function withoutLangParam(search: string): string {
+  try {
+    const params = new URLSearchParams(search);
+    if (!params.has('lang')) return search;
+    params.delete('lang');
+    const rest = params.toString();
+    return rest ? `?${rest}` : '';
+  } catch {
+    return search;
+  }
+}
+
 /** Root '/' redirect language. Priority (owner order for the root
 //  redirect): ?lang > localStorage > user profile, default 'bn'.
 //  NOTE: this differs deliberately from LanguageProvider's runtime

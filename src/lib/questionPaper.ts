@@ -135,7 +135,7 @@ export const QPG_CUSTOM_PAPER_THEIR_MAX_BDT = 200;
 export const QPG_PRICE_CLAIM_BN = 'সব প্রশ্নপত্রে ৭০% ছাড়ে';
 export const QPG_PRICE_CLAIM_EN = '70% off all question papers';
 
-/** One annual tier. `eduveltoBdt` is 30% of `eproshnobankBdt` —
+/** One annual tier. `eduveltoBdt` is 30% of `marketBdt` —
  *  the owner table is authoritative (brief 25 Nov 09:34). NOTE: the
  *  brief says "nearest ৳10", but 249×0.3 = 74.7 → ৳75 in the table,
  *  so the table effectively follows nearest ৳5; the table value ৳75
@@ -147,32 +147,32 @@ export interface QpgPriceTier {
   nameBn: string;
   nameEn: string;
   eduveltoBdt: number;
-  eproshnobankBdt: number;
+  marketBdt: number;
 }
 
 export const QPG_PRICE_TIERS: QpgPriceTier[] = [
   // Per-class annual, all subjects (1 yr).
-  { id: 'class-3', group: 'per-class', nameBn: '৩য় শ্রেণি — বার্ষিক, সব বিষয়', nameEn: 'Class 3 — annual, all subjects', eduveltoBdt: 150, eproshnobankBdt: 499 },
-  { id: 'class-4', group: 'per-class', nameBn: '৪র্থ শ্রেণি — বার্ষিক, সব বিষয়', nameEn: 'Class 4 — annual, all subjects', eduveltoBdt: 180, eproshnobankBdt: 599 },
-  { id: 'class-5', group: 'per-class', nameBn: '৫ম শ্রেণি — বার্ষিক, সব বিষয়', nameEn: 'Class 5 — annual, all subjects', eduveltoBdt: 210, eproshnobankBdt: 699 },
-  { id: 'class-6-8', group: 'per-class', nameBn: '৬ষ্ঠ / ৭ম / ৮ম শ্রেণি — বার্ষিক, সব বিষয়', nameEn: 'Class 6 / 7 / 8 — annual, all subjects', eduveltoBdt: 300, eproshnobankBdt: 999 },
-  { id: 'class-9-10', group: 'per-class', nameBn: '৯ম / ১০ম শ্রেণি — বার্ষিক, সব বিষয়', nameEn: 'Class 9 / 10 — annual, all subjects', eduveltoBdt: 450, eproshnobankBdt: 1499 },
-  { id: 'class-11-12', group: 'per-class', nameBn: '১১শ / ১২শ শ্রেণি — বার্ষিক, সব বিষয়', nameEn: 'Class 11 / 12 — annual, all subjects', eduveltoBdt: 390, eproshnobankBdt: 1299 },
+  { id: 'class-3', group: 'per-class', nameBn: '৩য় শ্রেণি — বার্ষিক, সব বিষয়', nameEn: 'Class 3 — annual, all subjects', eduveltoBdt: 150, marketBdt: 499 },
+  { id: 'class-4', group: 'per-class', nameBn: '৪র্থ শ্রেণি — বার্ষিক, সব বিষয়', nameEn: 'Class 4 — annual, all subjects', eduveltoBdt: 180, marketBdt: 599 },
+  { id: 'class-5', group: 'per-class', nameBn: '৫ম শ্রেণি — বার্ষিক, সব বিষয়', nameEn: 'Class 5 — annual, all subjects', eduveltoBdt: 210, marketBdt: 699 },
+  { id: 'class-6-8', group: 'per-class', nameBn: '৬ষ্ঠ / ৭ম / ৮ম শ্রেণি — বার্ষিক, সব বিষয়', nameEn: 'Class 6 / 7 / 8 — annual, all subjects', eduveltoBdt: 300, marketBdt: 999 },
+  { id: 'class-9-10', group: 'per-class', nameBn: '৯ম / ১০ম শ্রেণি — বার্ষিক, সব বিষয়', nameEn: 'Class 9 / 10 — annual, all subjects', eduveltoBdt: 450, marketBdt: 1499 },
+  { id: 'class-11-12', group: 'per-class', nameBn: '১১শ / ১২শ শ্রেণি — বার্ষিক, সব বিষয়', nameEn: 'Class 11 / 12 — annual, all subjects', eduveltoBdt: 390, marketBdt: 1299 },
   // Per subject (Class 6+) + subject-wise teacher (Class 6–10).
-  { id: 'per-subject', group: 'per-subject', nameBn: 'প্রতি বিষয় (৬ষ্ঠ শ্রেণি+)', nameEn: 'Per subject (Class 6+)', eduveltoBdt: 75, eproshnobankBdt: 249 },
-  { id: 'subject-teacher', group: 'per-subject', nameBn: 'বিষয়ভিত্তিক শিক্ষক (৬ষ্ঠ–১০ম শ্রেণি, প্রতি বিষয়)', nameEn: 'Subject-wise teacher (Class 6–10, per subject)', eduveltoBdt: 210, eproshnobankBdt: 699 },
+  { id: 'per-subject', group: 'per-subject', nameBn: 'প্রতি বিষয় (৬ষ্ঠ শ্রেণি+)', nameEn: 'Per subject (Class 6+)', eduveltoBdt: 75, marketBdt: 249 },
+  { id: 'subject-teacher', group: 'per-subject', nameBn: 'বিষয়ভিত্তিক শিক্ষক (৬ষ্ঠ–১০ম শ্রেণি, প্রতি বিষয়)', nameEn: 'Subject-wise teacher (Class 6–10, per subject)', eduveltoBdt: 210, marketBdt: 699 },
   // Bundles, all subjects (1 yr).
-  { id: 'bundle-3-5', group: 'bundle', nameBn: '৩য়–৫ম শ্রেণি — বার্ষিক, সব বিষয়', nameEn: 'Class 3–5 bundle — annual, all subjects', eduveltoBdt: 450, eproshnobankBdt: 1499 },
-  { id: 'bundle-6-8', group: 'bundle', nameBn: '৬ষ্ঠ–৮ম শ্রেণি — বার্ষিক, সব বিষয়', nameEn: 'Class 6–8 bundle — annual, all subjects', eduveltoBdt: 750, eproshnobankBdt: 2499 },
-  { id: 'bundle-3-8', group: 'bundle', nameBn: '৩য়–৮ম শ্রেণি — বার্ষিক, সব বিষয়', nameEn: 'Class 3–8 bundle — annual, all subjects', eduveltoBdt: 900, eproshnobankBdt: 2999 },
-  { id: 'bundle-6-10', group: 'bundle', nameBn: '৬ষ্ঠ–১০ম শ্রেণি — বার্ষিক, সব বিষয়', nameEn: 'Class 6–10 bundle — annual, all subjects', eduveltoBdt: 1050, eproshnobankBdt: 3499 },
-  { id: 'bundle-3-10', group: 'bundle', nameBn: '৩য়–১০ম শ্রেণি — বার্ষিক, সব বিষয়', nameEn: 'Class 3–10 bundle — annual, all subjects', eduveltoBdt: 1200, eproshnobankBdt: 3999 },
+  { id: 'bundle-3-5', group: 'bundle', nameBn: '৩য়–৫ম শ্রেণি — বার্ষিক, সব বিষয়', nameEn: 'Class 3–5 bundle — annual, all subjects', eduveltoBdt: 450, marketBdt: 1499 },
+  { id: 'bundle-6-8', group: 'bundle', nameBn: '৬ষ্ঠ–৮ম শ্রেণি — বার্ষিক, সব বিষয়', nameEn: 'Class 6–8 bundle — annual, all subjects', eduveltoBdt: 750, marketBdt: 2499 },
+  { id: 'bundle-3-8', group: 'bundle', nameBn: '৩য়–৮ম শ্রেণি — বার্ষিক, সব বিষয়', nameEn: 'Class 3–8 bundle — annual, all subjects', eduveltoBdt: 900, marketBdt: 2999 },
+  { id: 'bundle-6-10', group: 'bundle', nameBn: '৬ষ্ঠ–১০ম শ্রেণি — বার্ষিক, সব বিষয়', nameEn: 'Class 6–10 bundle — annual, all subjects', eduveltoBdt: 1050, marketBdt: 3499 },
+  { id: 'bundle-3-10', group: 'bundle', nameBn: '৩য়–১০ম শ্রেণি — বার্ষিক, সব বিষয়', nameEn: 'Class 3–10 bundle — annual, all subjects', eduveltoBdt: 1200, marketBdt: 3999 },
   // Coaching / institution, all subjects (1 yr).
-  { id: 'coaching-5-8', group: 'coaching', nameBn: 'কোচিং / প্রতিষ্ঠান ৫ম–৮ম শ্রেণি — বার্ষিক, সব বিষয়', nameEn: 'Coaching / institution Class 5–8 — annual, all subjects', eduveltoBdt: 810, eproshnobankBdt: 2699 },
-  { id: 'coaching-5-10', group: 'coaching', nameBn: 'কোচিং / প্রতিষ্ঠান ৫ম–১০ম শ্রেণি — বার্ষিক, সব বিষয়', nameEn: 'Coaching / institution Class 5–10 — annual, all subjects', eduveltoBdt: 1110, eproshnobankBdt: 3699 },
-  { id: 'coaching-3-10', group: 'coaching', nameBn: 'কোচিং / প্রতিষ্ঠান ৩য়–১০ম শ্রেণি — বার্ষিক, সব বিষয়', nameEn: 'Coaching / institution Class 3–10 — annual, all subjects', eduveltoBdt: 1200, eproshnobankBdt: 3999 },
-  { id: 'coaching-6-12', group: 'coaching', nameBn: 'কোচিং / প্রতিষ্ঠান ৬ষ্ঠ–১২শ শ্রেণি — বার্ষিক, সব বিষয়', nameEn: 'Coaching / institution Class 6–12 — annual, all subjects', eduveltoBdt: 1350, eproshnobankBdt: 4499 },
-  { id: 'coaching-3-12', group: 'coaching', nameBn: 'কোচিং / প্রতিষ্ঠান ৩য়–১২শ শ্রেণি — বার্ষিক, সব বিষয়', nameEn: 'Coaching / institution Class 3–12 — annual, all subjects', eduveltoBdt: 1500, eproshnobankBdt: 4999 },
+  { id: 'coaching-5-8', group: 'coaching', nameBn: 'কোচিং / প্রতিষ্ঠান ৫ম–৮ম শ্রেণি — বার্ষিক, সব বিষয়', nameEn: 'Coaching / institution Class 5–8 — annual, all subjects', eduveltoBdt: 810, marketBdt: 2699 },
+  { id: 'coaching-5-10', group: 'coaching', nameBn: 'কোচিং / প্রতিষ্ঠান ৫ম–১০ম শ্রেণি — বার্ষিক, সব বিষয়', nameEn: 'Coaching / institution Class 5–10 — annual, all subjects', eduveltoBdt: 1110, marketBdt: 3699 },
+  { id: 'coaching-3-10', group: 'coaching', nameBn: 'কোচিং / প্রতিষ্ঠান ৩য়–১০ম শ্রেণি — বার্ষিক, সব বিষয়', nameEn: 'Coaching / institution Class 3–10 — annual, all subjects', eduveltoBdt: 1200, marketBdt: 3999 },
+  { id: 'coaching-6-12', group: 'coaching', nameBn: 'কোচিং / প্রতিষ্ঠান ৬ষ্ঠ–১২শ শ্রেণি — বার্ষিক, সব বিষয়', nameEn: 'Coaching / institution Class 6–12 — annual, all subjects', eduveltoBdt: 1350, marketBdt: 4499 },
+  { id: 'coaching-3-12', group: 'coaching', nameBn: 'কোচিং / প্রতিষ্ঠান ৩য়–১২শ শ্রেণি — বার্ষিক, সব বিষয়', nameEn: 'Coaching / institution Class 3–12 — annual, all subjects', eduveltoBdt: 1500, marketBdt: 4999 },
 ];
 
 /** Pro plan ids: per-paper + monthly + every annual tier id. */
@@ -371,6 +371,58 @@ function generalBand(classId: string): string {
   return '11-12';
 }
 
+/** Level-aware step 2 (pattern 3, sprint 26 Nov 2026 — the
+ *  competitor's /create step 2 differs by level):
+ *  - primary (Class 3–5, Ebtedayi): term choice only — প্রথম /
+ *    দ্বিতীয় / তৃতীয় প্রান্তিক; no question-type choice.
+ *  - secondary (Class 6–12, Dakhil, Alim): exam kind (অর্ধবার্ষিক /
+ *    বার্ষিক) + question kind (MCQ / সৃজনশীল / সমন্বিত).
+ *  - tertiary (Honours): question kind only — Honours exams are
+ *    neither প্রান্তিক nor অর্ধবার্ষিক/বার্ষিক, so no exam-kind or
+ *    term choice is invented for them.
+ *  - job: the Job & Admission track has its own exam-preset flow. */
+export type QpgLevel = 'primary' | 'secondary' | 'tertiary' | 'job';
+
+export function qpgLevelFor(stream: QpgStream, classId: string): QpgLevel {
+  if (stream === 'job_admission') return 'job';
+  if (stream === 'madrasah') {
+    return classId === 'ebtedayi' ? 'primary' : 'secondary';
+  }
+  if (classId === 'honours') return 'tertiary';
+  const n = Number(classId.replace('class-', ''));
+  return n >= 3 && n <= 5 ? 'primary' : 'secondary';
+}
+
+export type QpgPrimaryTerm = 'first' | 'second' | 'third';
+export const QPG_PRIMARY_TERMS: Array<{ id: QpgPrimaryTerm; nameBn: string; nameEn: string }> = [
+  { id: 'first', nameBn: 'প্রথম প্রান্তিক', nameEn: 'First Term' },
+  { id: 'second', nameBn: 'দ্বিতীয় প্রান্তিক', nameEn: 'Second Term' },
+  { id: 'third', nameBn: 'তৃতীয় প্রান্তিক', nameEn: 'Third Term' },
+];
+
+export type QpgSecondaryExamKind = 'half-yearly' | 'annual';
+export const QPG_SECONDARY_EXAM_KINDS: Array<{ id: QpgSecondaryExamKind; nameBn: string; nameEn: string }> = [
+  { id: 'half-yearly', nameBn: 'অর্ধবার্ষিক পরীক্ষা', nameEn: 'Half-Yearly Exam' },
+  { id: 'annual', nameBn: 'বার্ষিক পরীক্ষা', nameEn: 'Annual Exam' },
+];
+
+export type QpgSecondaryQKind = 'mcq' | 'creative' | 'combined';
+export const QPG_SECONDARY_Q_KINDS: Array<{ id: QpgSecondaryQKind; nameBn: string; nameEn: string }> = [
+  { id: 'mcq', nameBn: 'বহুনির্বাচনি (MCQ)', nameEn: 'MCQ' },
+  { id: 'creative', nameBn: 'সৃজনশীল (Creative)', nameEn: 'Creative (CQ)' },
+  { id: 'combined', nameBn: 'সমন্বিত প্রশ্ন (সৃজনশীল + বহুনির্বাচনি)', nameEn: 'Combined (Creative + MCQ)' },
+];
+
+/** Map a level-aware question kind to the selection type filter.
+ *  'combined' means no type filter ('all') — the paper mixes MCQ
+ *  and CQ from the verified pool (MCQ-only today, so it honestly
+ *  yields MCQs until verified CQ packs exist). */
+export function qpgTypeForQKind(kind: QpgSecondaryQKind): QpgQuestionType | 'all' {
+  if (kind === 'creative') return 'cq';
+  if (kind === 'combined') return 'all';
+  return 'mcq';
+}
+
 export function qpgClassesFor(stream: QpgStream): QpgClassLevel[] {
   if (stream === 'general') return QPG_GENERAL_CLASSES;
   if (stream === 'madrasah') return QPG_MADRASAH_LEVELS;
@@ -489,13 +541,22 @@ export function qpgChaptersFor(stream: QpgStream, classId: string, subjectId: st
 }
 
 // ---------------------------------------------------------------------
-// Selection — chapter(s) → topics → type/count/difficulty
+// Selection — chapter(s) → topics → type/count
+//
+// Pattern 3 (sprint 26 Nov 2026): NO pre-generation marks / count /
+// difficulty controls — the teacher picks the level-aware exam +
+// question kind (step 2), then picks questions from the verified
+// pool. `count` here is only the pool-size request (the page asks
+// for everything the chapters hold and lets the teacher tick
+// questions on/off); `difficulty` stays 'all' until verified
+// questions actually carry difficulty tags.
 // ---------------------------------------------------------------------
 
 export interface QpgSelection {
   chapterIds: string[];
   topicIds: string[];
-  type: QpgQuestionType;
+  /** 'all' = combined paper (MCQ + CQ, no type filter). */
+  type: QpgQuestionType | 'all';
   difficulty: QpgDifficulty;
   /** Requested question count. */
   count: number;
@@ -612,7 +673,7 @@ export function selectQpgQuestions(
   if (sel.topicIds.length > 0) {
     filtered = filtered.filter((q) => sel.topicIds.includes(q.topicId));
   }
-  if (sel.type !== 'mcq') {
+  if (sel.type !== 'mcq' && sel.type !== 'all') {
     // The verified pool holds MCQs only today. CQ / Short /
     // Multiple-Completion / Situation-Set questions need verified packs
     // that do not exist yet — never fake them.
@@ -677,11 +738,70 @@ export function selectQpgQuestions(
       `This chapter has ${available} verified questions — ${shortfall} short of the ${requested} requested.`,
     );
   }
-  if (available === 0 && sel.type === 'mcq' && sel.difficulty === 'all') {
+  if (available === 0 && (sel.type === 'mcq' || sel.type === 'all') && sel.difficulty === 'all') {
     reasonsBn.push('এই অধ্যায়ের যাচাইকৃত প্রশ্ন এখনো তৈরি হয়নি।');
     reasonsEn.push('No verified questions exist for this chapter yet.');
   }
   return { questions, available, requested, shortfall, reasonsBn, reasonsEn };
+}
+
+// ---------------------------------------------------------------------
+// Two-flow prefill (pattern 2, sprint 26 Nov 2026): the SAME chapter
+// picker feeds (a) the exam paper and (b) the Sheet Builder. The
+// generator saves the teacher's stream/class/subject/chapters to
+// sessionStorage; the Sheet Builder reads it once on mount and
+// scopes itself to those chapters. Session-only — never persisted,
+// never sent anywhere.
+// ---------------------------------------------------------------------
+
+export const QPG_FLOW_PREFILL_KEY = 'eduvelto-qpg-flow-prefill';
+
+export interface QpgFlowPrefill {
+  stream: QpgStream;
+  classId: string;
+  subjectId: string;
+  chapterIds: string[];
+}
+
+export function saveQpgFlowPrefill(prefill: QpgFlowPrefill): boolean {
+  try {
+    if (typeof sessionStorage === 'undefined') return false;
+    sessionStorage.setItem(QPG_FLOW_PREFILL_KEY, JSON.stringify(prefill));
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+export function loadQpgFlowPrefill(): QpgFlowPrefill | null {
+  try {
+    if (typeof sessionStorage === 'undefined') return null;
+    const raw = sessionStorage.getItem(QPG_FLOW_PREFILL_KEY);
+    if (!raw) return null;
+    const parsed: unknown = JSON.parse(raw);
+    if (
+      typeof parsed !== 'object' ||
+      parsed === null ||
+      !['general', 'madrasah', 'job_admission'].includes((parsed as { stream?: unknown }).stream as string) ||
+      typeof (parsed as { classId?: unknown }).classId !== 'string' ||
+      typeof (parsed as { subjectId?: unknown }).subjectId !== 'string' ||
+      !Array.isArray((parsed as { chapterIds?: unknown }).chapterIds)
+    ) {
+      return null;
+    }
+    return parsed as QpgFlowPrefill;
+  } catch {
+    return null;
+  }
+}
+
+export function clearQpgFlowPrefill(): void {
+  try {
+    if (typeof sessionStorage === 'undefined') return;
+    sessionStorage.removeItem(QPG_FLOW_PREFILL_KEY);
+  } catch {
+    // ignore
+  }
 }
 
 // ---------------------------------------------------------------------

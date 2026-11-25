@@ -94,7 +94,7 @@ describe('(b) the preview shows ALL questions — nothing hidden', () => {
     expect(GENERATOR_SRC).not.toContain('hiddenCount');
     expect(GENERATOR_SRC).not.toContain('সুরক্ষিত — আংশিক');
     expect(GENERATOR_SRC).not.toContain('আংশিক প্রিভিউ');
-    expect(GENERATOR_SRC).toContain('৭. প্রিভিউ (সুরক্ষিত — পুরো পেপার)');
+    expect(GENERATOR_SRC).toContain('৮. প্রিভিউ (সুরক্ষিত — পুরো পেপার)');
     expect(GENERATOR_SRC).toContain('qpg-preview-page');
     expect(GENERATOR_SRC).toContain('প্রিন্ট করুন (পুরো পেপার');
   });

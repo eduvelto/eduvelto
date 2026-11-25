@@ -33,7 +33,7 @@ import { loginState } from '../lib/loginReturn';
 import { useAuth } from '../lib/auth';
 import { useTheme } from '../lib/theme';
 import { useLanguage } from '../i18n/LanguageContext';
-import { langSwitchTarget, langUrl } from '../lib/langRouting';
+import { langSwitchTarget, langUrl, withoutLangParam } from '../lib/langRouting';
 import SupportButton from './SupportModal';
 import type { Lang } from '../i18n/strings';
 import './home-redesign.css';
@@ -168,7 +168,9 @@ function LangToggleButton() {
         // Private routes have no prefix: there the state change
         // alone applies and the URL is left alone.
         const target = langSwitchTarget(location.pathname, next);
-        if (target) navigate(`${target}${location.search}`, { replace: true });
+        // ?lang= fix (26 Nov 2026): never carry a legacy ?lang=
+        // param into the new URL — the /:lang path is the carrier.
+        if (target) navigate(`${target}${withoutLangParam(location.search)}`, { replace: true });
       }}
     >
       <LanguageIcon />

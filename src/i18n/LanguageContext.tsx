@@ -13,12 +13,15 @@
 //   selected language with no edits at those sites.
 // - `tabLang` is kept as an alias of `lang` (the header toggle and the
 //   greeting bar read it; they now switch the whole site).
-// - Persistence, in priority order: `?lang=` URL param (shareable links,
-//   highest priority) → account preference `users.language` (adopted at
-//   login — survives logout/login and follows the user cross-device;
-//   firestore.rules already allow a user to update their own `language`
-//   field, so NO rules change was needed) → this browser's localStorage
-//   (`eduvelto-language`, the logged-out-visitor fallback) → `'bn'`.
+// - Persistence, in priority order: the /:lang URL segment (the ONLY
+//   language carrier in the URL — ?lang= fix, 26 Nov 2026: `?lang=` is
+//   legacy-only, adopted once from old shared links and then STRIPPED
+//   from the URL, never written) → account preference
+//   `users.language` (adopted at login — survives logout/login and
+//   follows the user cross-device; firestore.rules already allow a
+//   user to update their own `language` field, so NO rules change was
+//   needed) → this browser's localStorage (`eduvelto-language`, the
+//   logged-out-visitor fallback) → `'bn'`.
 // - `t()` / `<T>` fall back to the Bangla string when an English string
 //   is missing or empty — never render blank.
 // - `document.documentElement.lang` follows `lang` (screen readers, SEO).
@@ -32,7 +35,13 @@
 import { createContext, useCallback, useContext, useEffect, useState, type ReactNode } from 'react';
 import type { Lang } from './strings';
 import { useAuth } from '../lib/auth';
-import { isSupportedLang, parseLangSegment } from '../lib/langRouting';
+import {
+  isSupportedLang,
+  langSwitchTarget,
+  legacyRedirectTarget,
+  parseLangSegment,
+  withoutLangParam,
+} from '../lib/langRouting';
 
 const STORAGE_KEY = 'eduvelto-language';
 
@@ -66,14 +75,47 @@ function readUrlLang(): Lang | null {
   }
 }
 
-function writeUrlLang(next: Lang): void {
+/** ?lang= fix (26 Nov 2026): the language switch navigates to the
+ *  /:lang path — it NEVER writes ?lang= to the URL. On a public page
+ *  the same page is re-addressed under the new /:lang prefix
+ *  (replaceState, no extra history entry); on a private/app route,
+ *  which has no lang prefix, the path is left alone and any legacy
+ *  ?lang= param is stripped. Other query params and the hash are
+ *  preserved. */
+function navigateToLang(next: Lang): void {
   try {
-    const url = new URL(window.location.href);
-    url.searchParams.set('lang', next);
-    window.history.replaceState(null, '', url.toString());
+    const pathname = window.location.pathname ?? '/';
+    const search = window.location.search ?? '';
+    const hash = window.location.hash ?? '';
+    const target = langSwitchTarget(pathname, next);
+    const cleanSearch = withoutLangParam(search);
+    const nextUrl = target ? `${target}${cleanSearch}${hash}` : `${pathname}${cleanSearch}${hash}`;
+    const currentUrl = `${pathname}${search}${hash}`;
+    if (nextUrl !== currentUrl) {
+      window.history.replaceState(null, '', nextUrl);
+    }
   } catch {
     // Non-browser environment or blocked history: the in-memory +
     // localStorage choice still applies.
+  }
+}
+
+/** Strip a legacy ?lang= param from the current URL (in place, no
+ *  navigation). Used once at startup for old shared links — EXCEPT
+ *  on legacy public paths, where LegacyRedirect (App.tsx) consumes
+ *  the param to pick the redirect language first. */
+function stripLegacyLangParamAtStartup(): void {
+  try {
+    const pathname = window.location.pathname ?? '/';
+    if (pathname === '/') return; // RootRedirect strips it.
+    if (legacyRedirectTarget(pathname)) return; // LegacyRedirect consumes it.
+    const search = window.location.search ?? '';
+    const cleanSearch = withoutLangParam(search);
+    if (cleanSearch !== search) {
+      window.history.replaceState(null, '', `${pathname}${cleanSearch}${window.location.hash ?? ''}`);
+    }
+  } catch {
+    // ignore
   }
 }
 
@@ -110,7 +152,12 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
     // Phase 1 (25 Nov 2026): the /:lang URL segment is the source of
     // truth and outranks ?lang (kept for old shared links).
     const fromPath = readPathLang();
-    if (fromPath) return fromPath;
+    if (fromPath) {
+      // A legacy ?lang= on an already-prefixed URL is stripped at
+      // once — the path is the language now.
+      stripLegacyLangParamAtStartup();
+      return fromPath;
+    }
     const fromUrl = readUrlLang();
     if (fromUrl) {
       try {
@@ -118,6 +165,9 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
       } catch {
         // ignore
       }
+      // Old shared link: adopt the language, then strip the param
+      // (legacy paths are left for LegacyRedirect to consume).
+      stripLegacyLangParamAtStartup();
       return fromUrl;
     }
     return readStored() ?? 'bn';
@@ -178,7 +228,9 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
       } catch {
         // Private mode / storage blocked: the in-memory choice still applies.
       }
-      writeUrlLang(next);
+      // ?lang= fix (26 Nov 2026): navigate the /:lang path, never
+      // write ?lang= to the URL.
+      navigateToLang(next);
       if (user) {
         // Fire-and-forget: the UI already switched; the profile save only
         // makes the choice follow the user to other devices.

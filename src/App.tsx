@@ -280,6 +280,19 @@ function LangLayout() {
   useEffect(() => {
     if (lang === 'bn' || lang === 'en') syncLanguageFromPath(lang);
   }, [lang, syncLanguageFromPath]);
+  // ?lang= fix (26 Nov 2026): an old shared link to a prefixed URL
+  // (e.g. /bn/jobs/bcs?lang=en) redirects to the clean path — the
+  // /:lang segment is the only language carrier. Other params stay.
+  const params = new URLSearchParams(location.search);
+  if (params.has('lang')) {
+    params.delete('lang');
+    const suffix = params.toString() ? `?${params.toString()}` : '';
+    const target =
+      lang === 'bn' || lang === 'en'
+        ? `${location.pathname}${suffix}`
+        : (legacyRedirectTarget(location.pathname) ?? `/bn${location.pathname}`) + suffix;
+    return <Navigate to={target} replace />;
+  }
   if (lang !== 'bn' && lang !== 'en') {
     // A non-language first segment reached the :lang route (a legacy
     // URL the static redirect routes did not outrank): send it
@@ -292,8 +305,16 @@ function LangLayout() {
 
 function LegacyRedirect() {
   const location = useLocation();
-  const target = legacyRedirectTarget(location.pathname) ?? '/bn';
-  return <Navigate to={`${target}${location.search}`} replace />;
+  // ?lang= fix (26 Nov 2026): an old shared link (e.g.
+  // /jobs/bcs?lang=en) redirects to the clean /:lang path IN THAT
+  // language — the param is consumed here, never passed through.
+  const params = new URLSearchParams(location.search);
+  const queryLang = params.get('lang');
+  const lang = queryLang === 'bn' || queryLang === 'en' ? queryLang : 'bn';
+  params.delete('lang');
+  const suffix = params.toString() ? `?${params.toString()}` : '';
+  const target = legacyRedirectTarget(location.pathname, lang) ?? '/bn';
+  return <Navigate to={`${target}${suffix}`} replace />;
 }
 
 // Routes mirror page-map.md + the Phase 2 route list.
