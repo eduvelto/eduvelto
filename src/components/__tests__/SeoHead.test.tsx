@@ -10,22 +10,22 @@
 
 import { describe, expect, it } from 'vitest';
 import { renderToString } from 'react-dom/server';
-import { HelmetProvider } from 'react-helmet-async';
+import { HelmetProvider, type HelmetServerState } from 'react-helmet-async';
 import { SeoHead } from '../SeoHead';
 
 function renderSeoHead(props: Parameters<typeof SeoHead>[0]) {
-  const helmetContext: { helmet?: Record<string, { toString(): string }> } = {};
+  const helmetContext: { helmet?: HelmetServerState } = {};
   renderToString(
     <HelmetProvider context={helmetContext}>
       <SeoHead {...props} />
     </HelmetProvider>,
   );
-  const helmet = helmetContext.helmet ?? {};
+  const helmet = helmetContext.helmet;
   return {
-    title: helmet.title?.toString() ?? '',
-    meta: helmet.meta?.toString() ?? '',
-    link: helmet.link?.toString() ?? '',
-    script: helmet.script?.toString() ?? '',
+    title: helmet?.title.toString() ?? '',
+    meta: helmet?.meta.toString() ?? '',
+    link: helmet?.link.toString() ?? '',
+    script: helmet?.script.toString() ?? '',
   };
 }
 

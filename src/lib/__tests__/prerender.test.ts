@@ -91,9 +91,10 @@ describe('buildBookHead agrees with bookSeoData', () => {
     const raw = JSON.parse(readFileSync(BACKUP_PATH, 'utf8'));
     const { books } = normalizeBooksFixture(raw);
     const book = books.find((b) => b.id === 'hons-211001');
+    expect(book).toBeDefined();
     for (const lang of ['bn', 'en'] as const) {
-      const expected = bookSeoData(book, lang);
-      const head = buildBookHead(book, lang);
+      const expected = bookSeoData(book!, lang);
+      const head = buildBookHead(book!, lang);
       expect(head).toContain(`<title>${expected.title}</title>`);
       expect(head).toContain(`content="${expected.description}"`);
       expect(head).toContain(`rel="canonical" href="${expected.canonical}"`);
