@@ -51,11 +51,27 @@ export interface QpgProOrderDoc {
   amountBdt: number;
   paymentMethod: 'bkash' | 'nagad';
   trxId: string;
+  /** Last 3 digits of the sender's bKash/Nagad number (Phase 2:
+   *  the admin matches them against the payment in the app). */
+  senderLast3: string;
+  /** Optional own WhatsApp number, for the unlock notification. */
+  senderWhatsapp?: string;
+  /** Contribution coupon (§3) applied at checkout, if any. The
+   *  discount is verified by the admin at review, never self-applied. */
+  couponCode?: string;
   status: 'pending-review' | 'approved' | 'rejected';
+  /** 'onsite' = the on-site TrxID form; 'whatsapp' = the admin
+   *  created/linked the order from a WhatsApp message. */
+  source: 'onsite' | 'whatsapp';
   createdAt: string;
   decidedBy?: string;
   decidedAt?: string;
   decisionNote?: string;
+  /** Set by the admin at approval (unlock window). */
+  proStart?: string;
+  proEnd?: string;
+  /** Single-paper plan only: clean-download credits left. */
+  remainingUses?: number;
 }
 
 export type QpgReportReason =
@@ -114,7 +130,20 @@ export function validateQpgProOrder(doc: Partial<QpgProOrderDoc>): string[] {
   if (typeof doc.trxId !== 'string' || doc.trxId.trim().length < 6 || doc.trxId.trim().length > 30) {
     problems.push('trxId must be 6–30 characters');
   }
+  // Phase 2: the admin matches the sender's last 3 digits against
+  // the payment in the bKash/Nagad app — exactly 3 digits.
+  if (typeof doc.senderLast3 !== 'string' || !/^[0-9]{3}$/.test(doc.senderLast3.trim())) {
+    problems.push('senderLast3 must be exactly 3 digits');
+  }
   if (doc.status !== 'pending-review') problems.push('new orders must start as pending-review');
+  if (doc.source !== 'onsite' && doc.source !== 'whatsapp') {
+    problems.push('source must be onsite or whatsapp');
+  }
+  // Unlock window / credits are set by the ADMIN at approval — a new
+  // order must not carry them.
+  if (doc.proStart !== undefined || doc.proEnd !== undefined || doc.remainingUses !== undefined) {
+    problems.push('a new order must not carry proStart/proEnd/remainingUses (admin sets them on approval)');
+  }
   return problems;
 }
 

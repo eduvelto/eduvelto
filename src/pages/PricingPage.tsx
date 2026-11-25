@@ -78,7 +78,7 @@ export default function PricingPage() {
   const byGroup = (g: QpgPriceTier['group']) => data.pricing.filter((t) => t.group === g);
 
   return (
-    <PageShell titleBn="মূল্য — প্রশ্নপত্র জেনারেটর" titleEn="Pricing — Question Paper Generator" wide>
+    <PageShell titleBn="মূল্য — প্রশ্নপত্র জেনারেটর" titleEn="Pricing — Question Paper Generator" wide className="ev-qpg-theme">
       <AlertBox tone="info">
         {data.priceClaimBn} — প্রতিটি মূল্য Eproshnobank-এর সমতুল্য মূল্যের ৩০% (নিকটতম ৳১০-এ গোল করা)।
         কাটা দামটি Eproshnobank-এর মূল্য — আমাদের আগের দাম নয়। ফ্রি টিয়ার আপাতত থাকছে।

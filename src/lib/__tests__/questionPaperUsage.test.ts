@@ -62,7 +62,7 @@ describe('Pro order validation (branch-only Firestore shape)', () => {
     expect(
       validateQpgProOrder({
         uid: 'u1', plan: 'monthly', amountBdt: 199,
-        paymentMethod: 'bkash', trxId: 'ABC1234567', status: 'pending-review',
+        paymentMethod: 'bkash', trxId: 'ABC1234567', status: 'pending-review', senderLast3: '123', source: 'onsite',
       }),
     ).toEqual([]);
   });
@@ -70,7 +70,7 @@ describe('Pro order validation (branch-only Firestore shape)', () => {
   it('rejects a wrong amount for the plan', () => {
     const problems = validateQpgProOrder({
       uid: 'u1', plan: 'monthly', amountBdt: 49,
-      paymentMethod: 'bkash', trxId: 'ABC1234567', status: 'pending-review',
+      paymentMethod: 'bkash', trxId: 'ABC1234567', status: 'pending-review', senderLast3: '123', source: 'onsite',
     });
     expect(problems.join(' ')).toContain('199');
   });
@@ -79,7 +79,7 @@ describe('Pro order validation (branch-only Firestore shape)', () => {
     expect(
       validateQpgProOrder({
         uid: 'u1', plan: 'per-paper', amountBdt: 199,
-        paymentMethod: 'nagad', trxId: 'ABC', status: 'pending-review',
+        paymentMethod: 'nagad', trxId: 'ABC', status: 'pending-review', senderLast3: '123', source: 'onsite',
       }).length,
     ).toBeGreaterThan(0);
   });
@@ -88,13 +88,13 @@ describe('Pro order validation (branch-only Firestore shape)', () => {
     expect(
       validateQpgProOrder({
         uid: 'u1', plan: 'class-3', amountBdt: 150,
-        paymentMethod: 'bkash', trxId: 'ABC1234567', status: 'pending-review',
+        paymentMethod: 'bkash', trxId: 'ABC1234567', status: 'pending-review', senderLast3: '123', source: 'onsite',
       }),
     ).toEqual([]);
     expect(
       validateQpgProOrder({
         uid: 'u1', plan: 'coaching-3-12', amountBdt: 1500,
-        paymentMethod: 'nagad', trxId: 'ABC1234567', status: 'pending-review',
+        paymentMethod: 'nagad', trxId: 'ABC1234567', status: 'pending-review', senderLast3: '123', source: 'onsite',
       }),
     ).toEqual([]);
   });
@@ -103,7 +103,7 @@ describe('Pro order validation (branch-only Firestore shape)', () => {
     expect(
       validateQpgProOrder({
         uid: 'u1', plan: 'class-3', amountBdt: 150,
-        paymentMethod: 'bkash', trxId: 'ABC1234567', status: 'approved',
+        paymentMethod: 'bkash', trxId: 'ABC1234567', status: 'approved', senderLast3: '123', source: 'onsite',
       }).length,
     ).toBeGreaterThan(0);
   });

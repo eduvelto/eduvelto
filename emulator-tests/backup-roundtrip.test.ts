@@ -274,10 +274,13 @@ describe('Step 18 — backup / recovery (emulator)', () => {
     // BACKUP_COLLECTIONS with the ৳149 suggestion-PDF order flow.
     // Question Paper Generator MVP 25 Nov: 100 → 103 — the three new
     // collections (qpgUsage, qpgProOrders, qpgReports) joined
+    // BACKUP_COLLECTIONS. Question Paper Generator Phase 2 25 Nov:
+    // 103 → 107 — the four new collections (qpgBoards,
+    // qpgContributions, qpgContributorStats, qpgCustomOrders) joined
     // BACKUP_COLLECTIONS.)
-    expect(preflight.total).toBe(103);
+    expect(preflight.total).toBe(107);
     expect(preflight.perCollection).toHaveLength(BACKUP_COLLECTIONS.length);
-    expect(preflight.readsPercent).toBeCloseTo(103 / 500, 5);
+    expect(preflight.readsPercent).toBeCloseTo(107 / 500, 5);
     const backup = await buildBackup(db, OWNER_UID);
     expect(validateBackup(backup).ok).toBe(true);
     expect(Object.keys(backup.data).sort()).toEqual([...BACKUP_COLLECTIONS].sort());

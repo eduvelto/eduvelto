@@ -3986,3 +3986,68 @@ html[data-theme="dark"] .ev-qm-mockup-o {
 html[data-theme="dark"] .ev-qm-mockup-meta {
   color: #999;
 }
+
+/* ------------------------------------------------------------------ */
+/* Question Paper Generator Phase 2 theme (25 Nov 2026, spec §5):     */
+/* warm cream #fdf6e9, dark-green #14532d, gold #b45309 — the same     */
+/* palette as the /question-maker landing hero. Scoped to pages that  */
+/* pass className="ev-qpg-theme" to PageShell (generator builder,     */
+/* pricing, OMR, Sheet Builder, Smartboard, Contribute, My Orders)    */
+/* so the rest of the site is untouched. Theme only — no behavior or  */
+/* copy change.                                                        */
+/*                                                                     */
+/* How it works: PageShell's h1 and .ev-btn-primary read their colors */
+/* from var(--heading) / var(--forest), so overriding those variables */
+/* inside the scope recolors the title + primary buttons without      */
+/* touching shared components.                                         */
+/*                                                                     */
+/* GUARD (print/scan fidelity): the paper preview card                 */
+/* (.qpg-print-area) and the OMR bubble sheet stay BLACK-ON-WHITE —   */
+/* the theme never recolors them. The OMR sheet is rendered to canvas */
+/* for PDF export, never inline; the guard below keeps the preview    */
+/* card white in both themes.                                          */
+/* ------------------------------------------------------------------ */
+.ev-qpg-theme {
+  --qpg-cream: #fdf6e9;
+  --qpg-green: #14532d;
+  --qpg-gold: #b45309;
+  --heading: #14532d;
+  --forest: #14532d;
+  --forest-deep: #166534;
+  --amber: #b45309;
+  background: #fdf6e9;
+}
+.ev-qpg-theme h2 {
+  color: #14532d;
+}
+.ev-qpg-theme .ev-card {
+  border-color: #f0e3c8;
+}
+.ev-qpg-theme a {
+  color: #14532d;
+}
+/* Paper preview stays black-on-white, always — one rule, both
+   themes (print/scan fidelity, spec §5 GUARD). */
+.ev-qpg-theme .qpg-print-area {
+  background: #fff;
+  color: #000;
+}
+.ev-qpg-theme .qpg-print-area h2 {
+  color: #000;
+}
+html[data-theme="dark"] .ev-qpg-theme {
+  --heading: #a7d7b8;
+  --forest: #166534;
+  --forest-deep: #15803d;
+  --amber: #d97706;
+  background: #1d2b1f;
+}
+html[data-theme="dark"] .ev-qpg-theme h2 {
+  color: #a7d7b8;
+}
+html[data-theme="dark"] .ev-qpg-theme .ev-card {
+  border-color: #2c4632;
+}
+html[data-theme="dark"] .ev-qpg-theme a {
+  color: #a7d7b8;
+}

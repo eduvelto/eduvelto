@@ -81,7 +81,7 @@ export default function OmrEvaluatorPage() {
   };
 
   return (
-    <PageShell titleBn="OMR মূল্যায়ন" titleEn="OMR Evaluator" wide>
+    <PageShell titleBn="OMR মূল্যায়ন" titleEn="OMR Evaluator" wide className="ev-qpg-theme">
       <p style={{ fontSize: 14, lineHeight: 1.7 }}>
         <strong>সম্পূর্ণ ফ্রি — সবার জন্য, কোনো Pro লাগে না।</strong> ১০–১০০টি MCQ-এর উত্তরপত্র মূল্যায়ন
         করুন — যাচাই ১০০% ব্রাউজারেই হয়, সার্ভার খরচ শূন্য। মোবাইল ক্যামেরায় OMR স্ক্যান করা Phase 2-এ

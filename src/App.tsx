@@ -95,6 +95,15 @@ const OmrEvaluatorPage = lazy(() => import('./pages/OmrEvaluatorPage'));
    under /:lang — SSG merges first, then this route moves under that
    pattern. */
 const CustomPaperPage = lazy(() => import('./pages/CustomPaperPage'));
+/* Question Paper Generator Phase 2 (25 Nov 2026): Sheet Builder,
+   Smartboard (+ share view), Contribute, My Orders — same /:lang
+   pattern as the generator. Admin queues live under /admin. */
+const SheetBuilderPage = lazy(() => import('./pages/SheetBuilderPage'));
+const SmartboardPage = lazy(() => import('./pages/SmartboardPage'));
+const ContributePage = lazy(() => import('./pages/ContributePage'));
+const MyQpgOrdersPage = lazy(() => import('./pages/MyQpgOrdersPage'));
+const AdminQpgOrdersPage = lazy(() => import('./pages/AdminQpgOrdersPage'));
+const AdminQpgContributionsPage = lazy(() => import('./pages/AdminQpgContributionsPage'));
 /* Branded WhatsApp redirect (owner 25 Nov 10:19): eduvelto.com/whatsapp
    hides the number; production is served by the firebase.json 302, this
    route is the dev/preview fallback. */
@@ -578,6 +587,14 @@ export default function App() {
         {/* Custom paper service (owner 25 Nov 10:50): rebased under
             the /:lang pattern. */}
         <Route path="custom-paper" element={<CustomPaperPage />} />
+        {/* Question Paper Generator Phase 2 (25 Nov 2026): Sheet
+            Builder, Smartboard (+ share view), Contribute, My Orders
+            — same /:lang pattern as the generator. */}
+        <Route path="sheet-builder" element={<SheetBuilderPage />} />
+        <Route path="smartboard" element={<SmartboardPage />} />
+        <Route path="smartboard/:boardId" element={<SmartboardPage />} />
+        <Route path="contribute" element={<ContributePage />} />
+        <Route path="my-orders" element={<MyQpgOrdersPage />} />
         {/* Branded WhatsApp redirect (owner 25 Nov 10:19): visitors see
             only eduvelto.com/whatsapp; production redirect lives in
             firebase.json (302), this route is the dev/preview fallback. */}
@@ -794,6 +811,10 @@ export default function App() {
           <Route path="jobs/results" element={<AdminJobResultsPage />} />
           <Route path="jobs/subjects" element={<AdminJobSubjectsPage />} />
           <Route path="jobs/exams" element={<AdminJobExamsPage />} />
+          {/* Question Paper Generator Phase 2 (25 Nov 2026): TrxID /
+              custom-order review + contribution review queues. */}
+          <Route path="qpg-orders" element={<AdminQpgOrdersPage />} />
+          <Route path="qpg-contributions" element={<AdminQpgContributionsPage />} />
           <Route path="admissions" element={<AdminAdmissionsPage />} />
           <Route path="admissions/structure" element={<AdminNuStructurePage />} />
           <Route path="admissions/syllabus" element={<AdminNuSyllabusPage />} />

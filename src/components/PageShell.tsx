@@ -23,11 +23,14 @@ export function PageShell(props: {
   hideHomeLink?: boolean;
   /** Hide the generic page title (home page: the hero is the title). */
   hideTitle?: boolean;
+  /** Extra class on the <main> element — e.g. "ev-qpg-theme" for the
+   *  Question Paper Generator palette (Phase 2, spec §5). */
+  className?: string;
 }) {
   const { lang, t } = useLanguage();
   return (
     <main
-      className="ev-page"
+      className={`ev-page${props.className ? ` ${props.className}` : ''}`}
       style={{
         maxWidth: props.maxWidth ?? (props.wide ? 960 : 720),
         margin: '0 auto',
