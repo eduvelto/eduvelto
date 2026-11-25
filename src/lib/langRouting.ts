@@ -166,6 +166,10 @@ export const LEGACY_PUBLIC_SEGMENTS: readonly string[] = [
   // now (/bn/support), so 'support' lives here instead of in
   // LEGACY_ALIASES below — same pattern as 'guides' in Phase 2.
   'support',
+  // 7-day sprint, Day 6 (26 Nov 2026): /suggestions is a real
+  // lang-prefixed route now (/bn/suggestions, the Suggestion PDF
+  // Store) — same pattern as 'support' above.
+  'suggestions',
   'privacy',
   'privacy-policy',
   'terms',

@@ -144,6 +144,7 @@ export default function Footer() {
           <Link to="/admissions">{t({ bn: 'ভর্তি প্রস্তুতি', en: 'Admission Preparation' })}</Link>
           <Link to="/opportunities">{t({ bn: 'সুযোগ হাব', en: 'Opportunity Hub' })}</Link>
           <Link to="/exam">{t({ bn: 'পরীক্ষা', en: 'Exams' })}</Link>
+          <Link to="/suggestions">{t({ bn: 'সাজেশন PDF', en: 'Suggestion PDFs' })}</Link>
           <Link to="/progress">{t({ bn: 'আমার অগ্রগতি', en: 'My Progress' })}</Link>
         </div>
         <div>

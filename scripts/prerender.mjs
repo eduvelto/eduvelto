@@ -216,6 +216,10 @@ export const PRERENDER_STATIC_PATHS = [
   '/founder',
   '/contact',
   '/support',
+  // 7-day sprint, Day 6 (26 Nov 2026): the Suggestion PDF Store —
+  // a real public page now (/bn/suggestions) with its SEO in
+  // src/lib/seo.ts. Honest coming-soon page: no PDF for sale yet.
+  '/suggestions',
   '/privacy-policy',
   '/terms',
   '/editorial-policy',
@@ -299,6 +303,7 @@ export const LINK_REWRITE_SEGMENTS = [
   'admission',
   'guides',
   'support',
+  'suggestions',
 ];
 
 // ---------------------------------------------------------------------------

@@ -716,6 +716,21 @@ const STATIC_ROUTES: Record<string, RouteSeoEntry> = {
       'Eduvelto is completely free — support it voluntarily. Send via bKash/Nagad and record your name with the TrxID. Your support keeps free education going.',
     crumbEn: 'Support',
   },
+  // 7-day sprint, Day 6 (26 Nov 2026): /suggestions is a real page
+  // now — the Suggestion PDF Store (see langRouting.ts +
+  // firebase.json). HONEST coming-soon entry: no verified
+  // suggestion PDF exists yet, so it promises no PDF for sale —
+  // only that verified PDFs will appear here once ready.
+  '/suggestions': {
+    title: 'সাজেশন PDF — Eduvelto',
+    description:
+      'পরীক্ষার সাজেশন ও মডেল টেস্ট PDF — শীঘ্রই আসছে। এখনো কোনো PDF বিক্রির জন্য তৈরি নয়; বিষয়বস্তু যাচাই শেষ হলে এখান থেকেই অর্ডার করা যাবে।',
+    crumb: 'সাজেশন PDF',
+    titleEn: 'Suggestion PDFs — Eduvelto',
+    descriptionEn:
+      'Exam suggestion and model test PDFs — coming soon. No PDF is for sale yet; once content verification is done you will be able to order from here.',
+    crumbEn: 'Suggestion PDFs',
+  },
   // Phase 2 (25 Nov 2026): canonical URL is /privacy-policy; the old
   // /privacy URL 301-redirects to it (see langRouting.ts).
   '/privacy-policy': {

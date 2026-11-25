@@ -1,16 +1,17 @@
 // Eduvelto — donation payment-method cards (Phase 3, 25 Nov 2026,
-// feature/ssg-bilingual-support).
-//
-// Used by the Support page and the quick Support modal. bKash and
-// Nagad show the owner's real number (+8801754267001) with a
-// copy-to-clipboard button; Rocket and Bank Transfer are
-// coming-soon placeholders with NO number — they show "শীঘ্রই
-// আসছে" and have no copy button, so no number can ever be
-// invented for them. Copying is click-only (SSR-safe: no
-// navigator access at render time) with a textarea fallback
-// where clipboard.writeText is unavailable.
+// feature/ssg-bilingual-support; Day 6, 26 Nov 2026: the payment
+// number is NEVER rendered — visitors pay via the branded
+// eduvelto.com/whatsapp redirect, which shares the number on
+// WhatsApp. The number lives only in lib/donations.ts (owner
+// record) and never reaches the DOM, so it cannot be scraped.
+// Rocket and Bank Transfer are coming-soon placeholders with NO
+// number — they show "শীঘ্রই আসছে" and have no payment button,
+// so no number can ever be invented for them. Copying is
+// click-only (SSR-safe: no navigator access at render time) with
+// a textarea fallback where clipboard.writeText is unavailable.
 
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { DONATION_METHODS, type DonationMethod } from '../lib/donations';
 import { useLanguage } from '../i18n/LanguageContext';
 
@@ -38,8 +39,10 @@ async function copyText(text: string): Promise<boolean> {
   }
 }
 
-/** Copy-to-clipboard button for a payment number (shared by the
- *  Support page/modal and the suggestion-PDF order modal). */
+/** Copy-to-clipboard button for a payment number. Retained for
+ *  future verified payment flows — currently UNUSED: no rendered
+ *  component shows a payment number (Day 6, 26 Nov 2026 — payment
+ *  goes via the eduvelto.com/whatsapp redirect instead). */
 export function CopyNumberButton({ number }: { number: string }) {
   const { t } = useLanguage();
   const [copied, setCopied] = useState(false);
@@ -83,10 +86,15 @@ function MethodCard({ method }: { method: DonationMethod }) {
         </p>
       ) : (
         <>
-          <p style={{ margin: '0 0 8px', fontSize: 18, fontWeight: 700, letterSpacing: 0.5 }}>
-            {method.number}
+          <p style={{ margin: '0 0 8px', color: 'var(--muted)', fontSize: 14, lineHeight: 1.7 }}>
+            {t({
+              bn: 'পেমেন্টের নম্বর WhatsApp-এ জানিয়ে দেওয়া হবে।',
+              en: 'The payment number will be shared on WhatsApp.',
+            })}
           </p>
-          <CopyNumberButton number={method.number} />
+          <Link to="/whatsapp" className="ev-btn ev-btn-sm">
+            {t({ bn: 'WhatsApp-এ পেমেন্ট করুন', en: 'Pay via WhatsApp' })}
+          </Link>
         </>
       )}
     </div>
@@ -110,8 +118,8 @@ export default function DonationMethods({ compact = false }: { compact?: boolean
       </div>
       <p style={{ margin: '10px 0 0', color: 'var(--muted)', fontSize: 13, lineHeight: 1.6 }}>
         {t({
-          bn: 'বিকাশ ও নগদ — একই নম্বর। রকেট ও ব্যাংক ট্রান্সফার শীঘ্রই আসছে।',
-          en: 'bKash and Nagad share the same number. Rocket and Bank Transfer are coming soon.',
+          bn: 'বিকাশ ও নগদ — পেমেন্টের নম্বর WhatsApp-এ জানিয়ে দেওয়া হবে। রকেট ও ব্যাংক ট্রান্সফার শীঘ্রই আসছে।',
+          en: 'bKash and Nagad — the payment number will be shared on WhatsApp. Rocket and Bank Transfer are coming soon.',
         })}
       </p>
     </div>

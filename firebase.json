@@ -42,6 +42,10 @@
           {
             "key": "Strict-Transport-Security",
             "value": "max-age=31556926; includeSubDomains; preload"
+          },
+          {
+            "key": "Cross-Origin-Opener-Policy",
+            "value": "same-origin-allow-popups"
           }
         ],
         "source": "**"
@@ -123,6 +127,11 @@
       {
         "source": "/support",
         "destination": "/bn/support",
+        "type": 301
+      },
+      {
+        "source": "/suggestions",
+        "destination": "/bn/suggestions",
         "type": 301
       },
       {
@@ -564,6 +573,10 @@
       {
         "destination": "/index.html",
         "source": "/support"
+      },
+      {
+        "destination": "/index.html",
+        "source": "/suggestions"
       },
       {
         "destination": "/index.html",

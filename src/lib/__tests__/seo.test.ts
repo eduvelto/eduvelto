@@ -218,6 +218,10 @@ const SITEMAP_URLS = [
   '/contact',
   // Phase 3 (25 Nov 2026): real /:lang/support page.
   '/support',
+  // 7-day sprint, Day 6 (26 Nov 2026): real /:lang/suggestions
+  // page — the Suggestion PDF Store (coming soon, no PDF for
+  // sale yet). Sitemap grows 143 -> 144 URLs.
+  '/suggestions',
   '/privacy-policy',
   '/terms',
   // Brand-SEO wave 1, F-08 (24 Nov 2026): 4 new trust pages.
@@ -261,7 +265,8 @@ const SITEMAP_URLS = [
   '/ai-assistant',
   // Added 26 Nov 2026 (Day 1 audit fix): /books (library hub) + the 5
   // Question Paper Generator pages — all real public pages with SEO in
-  // seo.ts, now listed in public/sitemap.xml (137 -> 143 URLs).
+  // seo.ts, now listed in public/sitemap.xml (137 -> 143 URLs;
+  // Day 6 adds /suggestions below, 143 -> 144).
   '/books',
   '/question-maker',
   '/question-paper-generator',
@@ -1575,8 +1580,8 @@ describe('resolveRouteSeo — English SEO (24 Nov 2026, language system)', () =>
 });
 
 describe('resolveRouteSeo — brand-SEO wave 2 (24 Nov 2026)', () => {
-  it('sitemap has 143 URLs (120 wave-9/10 + audit-M12 + 16 Phase 2 guides + /support, Phase 3 + 6 Day 1 audit fix, 26 Nov 2026)', () => {
-    expect(SITEMAP_URLS.length).toBe(143);
+  it('sitemap has 144 URLs (120 wave-9/10 + audit-M12 + 16 Phase 2 guides + /support, Phase 3 + 6 Day 1 audit fix, 26 Nov 2026 + 1 Day 6 /suggestions store)', () => {
+    expect(SITEMAP_URLS.length).toBe(144);
   });
 
   it('English home title drops "Best"; Bangla title is unchanged', () => {

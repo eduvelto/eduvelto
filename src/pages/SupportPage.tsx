@@ -42,8 +42,15 @@ export default function SupportPage() {
       <ol style={{ lineHeight: 1.9, paddingLeft: 20 }}>
         <li>
           {t({
-            bn: 'নিচের বিকাশ বা নগদ নম্বরে আপনার সুবিধামতো টাকা পাঠান (Send Money)।',
-            en: 'Send any amount you like (Send Money) to the bKash or Nagad number below.',
+            bn: 'WhatsApp-এ মেসেজ করুন — পেমেন্টের বিকাশ/নগদ নম্বর সেখানে জানিয়ে দেওয়া হবে। ',
+            en: 'Message on WhatsApp — the bKash/Nagad payment number will be shared there. ',
+          })}
+          <Link to="/whatsapp" style={{ fontWeight: 700 }}>
+            {t({ bn: 'WhatsApp-এ যান', en: 'Go to WhatsApp' })}
+          </Link>
+          {t({
+            bn: ' — তারপর আপনার সুবিধামতো টাকা পাঠান (Send Money)।',
+            en: ' — then send any amount you like (Send Money).',
           })}
         </li>
         <li>

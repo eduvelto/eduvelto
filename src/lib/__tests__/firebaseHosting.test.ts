@@ -64,6 +64,16 @@ describe('firebase.json hosting', () => {
     }
   });
 
+  it('301s the bare /suggestions store URL to /bn/suggestions, with a rewrite (Day 6, 26 Nov 2026)', () => {
+    // Same pattern as the generator pages above: the bare URL is
+    // linked from the footer but would 404 on direct load without
+    // the redirect (evaluated before the rewrites) + the rewrite.
+    const redirects = hosting().redirects;
+    expect(redirects).toContainEqual({ source: '/suggestions', destination: '/bn/suggestions', type: 301 });
+    const rewrites = hosting().rewrites;
+    expect(rewrites).toContainEqual({ source: '/suggestions', destination: '/index.html' });
+  });
+
   it('agrees with legacyRedirectTarget() on every exact legacy source', () => {
     // Exact (non-glob) redirect sources must produce exactly the
     // target the client-side mapping produces — one contract, two

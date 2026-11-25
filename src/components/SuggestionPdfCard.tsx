@@ -17,7 +17,6 @@
 import { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { loginState } from '../lib/loginReturn';
-import { SUPPORT_BKASH_NAGAD_NUMBER } from '../lib/donations';
 import {
   ORDER_TRXID_MAX,
   SUGGESTION_PDF_SALES_ENABLED,
@@ -27,7 +26,6 @@ import {
 import { useAuth } from '../lib/auth';
 import { useLanguage } from '../i18n/LanguageContext';
 import { AlertBox, Button, Card } from './ui';
-import { CopyNumberButton } from './DonationMethods';
 
 const ERROR_TEXT: Record<OrderValidationError, { bn: string; en: string }> = {
   'signin-required': { bn: 'অর্ডার করতে লগইন করুন।', en: 'Please log in to order.' },
@@ -130,12 +128,15 @@ function OrderModal({ onClose }: { onClose: () => void }) {
           <>
             <p style={{ lineHeight: 1.7, margin: '14px 0 6px' }}>
               {t({
-                bn: 'বিকাশ বা নগদে ৳১৪৯ Send Money করুন, তারপর TrxID লিখুন।',
-                en: 'Send ৳149 via bKash or Nagad (Send Money), then enter the TrxID.',
+                bn: 'WhatsApp-এ মেসেজ করে পেমেন্টের নম্বর জেনে নিন, তারপর বিকাশ/নগদে ৳১৪৯ Send Money করুন ও TrxID লিখুন।',
+                en: 'Message on WhatsApp to get the payment number, then send ৳149 via bKash or Nagad (Send Money) and enter the TrxID.',
               })}
             </p>
-            <p style={{ margin: '0 0 6px', fontSize: 18, fontWeight: 700 }}>{SUPPORT_BKASH_NAGAD_NUMBER}</p>
-            <CopyNumberButton number={SUPPORT_BKASH_NAGAD_NUMBER} />
+            <p style={{ margin: '0 0 6px' }}>
+              <Link to="/whatsapp" style={{ fontWeight: 700 }}>
+                {t({ bn: 'WhatsApp-এ পেমেন্টের নম্বর জানুন →', en: 'Get the payment number on WhatsApp →' })}
+              </Link>
+            </p>
             <form
               onSubmit={(e) => {
                 e.preventDefault();

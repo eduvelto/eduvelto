@@ -47,7 +47,7 @@ function readSitemapPaths(): string[] {
 describe('PRERENDER_STATIC_PATHS', () => {
   it('covers every committed-sitemap URL, plus the new /books hub', () => {
     const sitemapPaths = readSitemapPaths();
-    expect(sitemapPaths.length).toBe(143); // 137 + 6 (Day 1 audit fix, 26 Nov 2026)
+    expect(sitemapPaths.length).toBe(144); // 137 + 6 (Day 1 audit fix, 26 Nov 2026) + 1 (Day 6: /suggestions store)
     for (const p of sitemapPaths) {
       // Every committed-sitemap URL is a prerendered static path
       // (login-gated /exam + /progress stay OUT of the sitemap —
@@ -61,6 +61,10 @@ describe('PRERENDER_STATIC_PATHS', () => {
     // /support IS prerendered since Phase 3 (25 Nov 2026): it is a
     // real route now (/bn/support) with its SEO in src/lib/seo.ts.
     expect(PRERENDER_STATIC_PATHS).toContain('/support');
+    // /suggestions IS prerendered since Day 6 (26 Nov 2026): the
+    // Suggestion PDF Store, a real route now (/bn/suggestions)
+    // with its SEO in src/lib/seo.ts.
+    expect(PRERENDER_STATIC_PATHS).toContain('/suggestions');
     expect(PRERENDER_STATIC_PATHS).not.toContain('/ai-teacher'); // noindexed by design
     expect(new Set(PRERENDER_STATIC_PATHS).size).toBe(PRERENDER_STATIC_PATHS.length);
   });

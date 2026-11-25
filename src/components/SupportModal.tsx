@@ -2,10 +2,10 @@
 // 25 Nov 2026, feature/ssg-bilingual-support).
 //
 // A prominent gold button (Navbar + Footer) that opens a quick
-// donate modal: the payment methods with copy buttons and a link
-// to the full /:lang/support page. The modal renders nothing while
-// closed (SSR/prerender-safe) and closes on Escape, on the overlay
-// click, or on the close button.
+// donate modal: the payment methods (WhatsApp payment — no number
+// shown) and a link to the full /:lang/support page. The modal
+// renders nothing while closed (SSR/prerender-safe) and closes on
+// Escape, on the overlay click, or on the close button.
 
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';

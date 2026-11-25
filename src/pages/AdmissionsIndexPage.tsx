@@ -13,6 +13,7 @@ import { PageShell } from '../components/PageShell';
 import { Card, Chip, LinkButton } from '../components/ui';
 import { useLanguage } from '../i18n/LanguageContext';
 import AdmissionModeSwitch from '../components/AdmissionModeSwitch';
+import SuggestionPdfCard from '../components/SuggestionPdfCard';
 import { NU_DASHBOARD_ROUTE, NU_HUB_ROUTE } from '../lib/nuStructure';
 
 const COMING_SOON_INSTITUTIONS: { bn: string; en: string }[] = [
@@ -92,6 +93,13 @@ export default function AdmissionsIndexPage() {
             </p>
           </Card>
         ))}
+      </div>
+
+      {/* 7-day sprint, Day 6 (26 Nov 2026): ৳149 suggestion-PDF card
+          — UI-only until verified content exists (sales gate in
+          lib/orders.ts); same placement as the Job hub card. */}
+      <div style={{ marginTop: 24 }}>
+        <SuggestionPdfCard />
       </div>
 
       <h2 style={{ fontSize: 19, color: 'var(--heading)', marginTop: 28 }}>
