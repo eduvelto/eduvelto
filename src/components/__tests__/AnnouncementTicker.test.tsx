@@ -77,12 +77,15 @@ describe('AnnouncementTicker content (owner 25 Nov 10:03)', () => {
 
   it('rotates OUR offers only, linked to our pages', async () => {
     const html = await renderTicker('bn');
-    expect(html).toContain('Eproshnobank-এর চেয়ে ৭০% ছাড়ে');
+    expect(html).toContain('সব প্রশ্নপত্রে ৭০% ছাড়ে');
     expect(html).toContain('মাসে ৩টা ফ্রি প্রশ্নপত্র');
     expect(html).toContain('OMR চেক সম্পূর্ণ ফ্রি');
     expect(html).toContain('href="/pricing"');
     expect(html).toContain('href="/question-maker"');
     expect(html).toContain('href="/omr-evaluator"');
+    // English mode: the same offer, still with no competitor named.
+    const htmlEn = await renderTicker('en');
+    expect(htmlEn).toContain('70% off all question papers');
   });
 
   it('never shows their stats, their brand, or any WhatsApp number', async () => {
@@ -94,6 +97,8 @@ describe('AnnouncementTicker content (owner 25 Nov 10:03)', () => {
       '500,000',
       'Proshnobanai',
       'proshnobanai',
+      'Eproshnobank',
+      'eproshnobank',
       '8801538264070',
       '8801754267001',
       '8801518926854',
@@ -103,7 +108,7 @@ describe('AnnouncementTicker content (owner 25 Nov 10:03)', () => {
     }
     // The data module itself carries no banned content either.
     expect(JSON.stringify(ANNOUNCEMENT_TICKER_ITEMS)).not.toMatch(
-      /১২,০০০|12,000|৫ লক্ষ|Proshnobanai|wa\.me|8801/,
+      /১২,০০০|12,000|৫ লক্ষ|Proshnobanai|Eproshnobank|wa\.me|8801/,
     );
   });
 

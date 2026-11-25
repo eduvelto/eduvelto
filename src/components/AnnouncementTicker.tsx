@@ -8,8 +8,11 @@
 // CONTENT — OUR features + OUR running offers + the ayat ONLY.
 // Never any other site's numbers or claims: their "১২,০০০+ শিক্ষক /
 // ৫ লক্ষ+ প্রশ্ন" stats are THEIRS, not ours, and appear nowhere.
-// The ৭০% claim is ours only with Eproshnobank named as the
-// reference price (see the 70% pricing rule, owner 25 Nov 09:34).
+// The ৭০% offer stands alone — NEVER name another website or
+// competitor in the ticker or banner (owner 25 Nov 17:11: no other
+// site's name here). The comparison price lives ONLY in the pricing
+// table, where their price is struck through and labelled as theirs
+// (70% pricing rule, owner 25 Nov 09:34).
 //
 // AYAT (Surah Al-Alaq, ayah 1) — exact strings supplied by the owner
 // 25 Nov 10:03; copy character for character, NEVER retype from
@@ -48,8 +51,8 @@ export const ANNOUNCEMENT_TICKER_ITEMS: AnnouncementTickerItem[] = [
   {
     id: 'discount-70',
     kind: 'offer',
-    bn: 'Eproshnobank-এর চেয়ে ৭০% ছাড়ে',
-    en: '70% off Eproshnobank',
+    bn: 'সব প্রশ্নপত্রে ৭০% ছাড়ে',
+    en: '70% off all question papers',
     href: '/pricing',
   },
   {
