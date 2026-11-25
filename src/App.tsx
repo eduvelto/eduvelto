@@ -721,6 +721,17 @@ export default function App() {
         <Route path="content-accuracy" element={<ContentAccuracyPage />} />
         <Route path="certificate-policy" element={<CertificatePolicyPage />} />
         <Route path="disclaimer" element={<DisclaimerPage />} />
+        {/* Locale-prefixed exam/progress/routine/social (25 Nov 2026):
+            these four pages were top-level routes only (/exam, /progress,
+            /routine, /social), so /bn/exam etc. fell through to the
+            :lang catch-all NotFound page. Same components, same
+            login-gated behaviour — now reachable under both /{lang}/ and
+            the legacy unprefixed paths. NOT prerendered, NOT in the
+            sitemap (login-gated, robots-disallowed — unchanged). */}
+        <Route path="exam" element={<ExamPage />} />
+        <Route path="progress" element={<ProgressPage />} />
+        <Route path="routine" element={<RoutinePage />} />
+        <Route path="social" element={<SocialPage />} />
         <Route path="*" element={<NotFoundPage />} />
         </Route>
         {/* Legacy public URLs (Phase 1): client-side equivalent of the
