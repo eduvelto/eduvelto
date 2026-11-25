@@ -2,14 +2,14 @@
 // koro sudnor kore sajiye" — make tabs on the home page and decorate
 // it beautifully).
 //
-// The tab bar organises the homepage's main content sections into five
-// tabs (Education, Job Preparation, Admission Preparation, Opportunity
-// Hub, AI & Services). The hero, ticker, search, hub cards, section
-// cards and feature strip stay above the tabs; the Daily Quiz, stats,
-// panels, founder message and footer banner stay below them, always
-// visible.
+// The tab bar organises the homepage's main content sections into six
+// tabs (Education, Question Maker, Job Preparation, Admission
+// Preparation, Opportunity Hub, AI & Services). The hero, ticker,
+// search, hub cards, section cards and feature strip stay above the
+// tabs; the Daily Quiz, stats, panels, founder message and footer
+// banner stay below them, always visible.
 //
-// All five panels render in the DOM (inactive ones hidden) so the
+// All six panels render in the DOM (inactive ones hidden) so the
 // prerendered/SEO content is unchanged — tabs only change what is
 // VISIBLE. Labels are bilingual via useLanguage. The tab bar scrolls
 // horizontally on mobile (no wrapping, no cramped buttons). Arrow
@@ -18,7 +18,7 @@
 import { useRef, type KeyboardEvent, type ReactNode } from 'react';
 import { useLanguage } from '../i18n/LanguageContext';
 
-export type HomeTabId = 'education' | 'jobs' | 'admissions' | 'opportunities' | 'services';
+export type HomeTabId = 'education' | 'question-maker' | 'jobs' | 'admissions' | 'opportunities' | 'services';
 
 export type HomeTabDef = {
   id: HomeTabId;
@@ -27,11 +27,15 @@ export type HomeTabDef = {
   en: string;
 };
 
-// The five tabs — only sections that really exist on the homepage.
+// The six tabs — only sections that really exist on the homepage.
 // No invented tabs, no invented content: every panel reuses the
-// homepage's own sections and links.
+// homepage's own sections and links. The question-maker tab (owner
+// 25 Nov 2026 18:26: "question banai j setar akta tab dite bolci j")
+// sits right after Education — the generator is the core education
+// tool — and links into the full generator at /question-maker.
 export const HOME_TABS: HomeTabDef[] = [
   { id: 'education', icon: '📖', bn: 'শিক্ষা', en: 'Education' },
+  { id: 'question-maker', icon: '📝', bn: 'প্রশ্নপত্র তৈরি', en: 'Question Maker' },
   { id: 'jobs', icon: '💼', bn: 'চাকরি প্রস্তুতি', en: 'Job Preparation' },
   { id: 'admissions', icon: '🎓', bn: 'ভর্তি প্রস্তুতি', en: 'Admission Preparation' },
   { id: 'opportunities', icon: '🌟', bn: 'সুযোগ কেন্দ্র', en: 'Opportunity Hub' },
@@ -80,8 +84,8 @@ export default function HomeTabs(props: {
       </div>
       <p className="ev-rd-sub">
         {t({
-          bn: 'শিক্ষা, চাকরি প্রস্তুতি, ভর্তি, সুযোগ আর সেবা — ট্যাবে ট্যাবে ঘুরে দেখুন।',
-          en: 'Education, job preparation, admission, opportunities and services — browse them tab by tab.',
+          bn: 'শিক্ষা, প্রশ্নপত্র তৈরি, চাকরি প্রস্তুতি, ভর্তি, সুযোগ আর সেবা — ট্যাবে ট্যাবে ঘুরে দেখুন।',
+          en: 'Education, question papers, job preparation, admission, opportunities and services — browse them tab by tab.',
         })}
       </p>
       <div className="ev-home-tabbar" role="tablist" aria-label={t({ bn: 'প্রধান বিভাগ', en: 'Main sections' })}>

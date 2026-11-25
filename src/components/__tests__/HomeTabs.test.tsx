@@ -1,9 +1,9 @@
 // Eduvelto — homepage tabs tests (owner 25 Nov 2026 17:40: "home page
-// a tab koro sudnor kore sajiye").
+// a tab koro sudnor kore sajiye"; 18:26: the question-maker tab).
 //
 // renderToString runs in plain node (no jsdom — the repo has none),
 // so window/document are faked per scenario, exactly like
-// AnnouncementTicker.test.tsx. Asserts: the five tabs (only sections
+// AnnouncementTicker.test.tsx. Asserts: the six tabs (only sections
 // that really exist), the default active tab, the controlled active
 // tab, the ARIA tab wiring, the arrow-key helper (pure function), the
 // tab CSS (pill bar, active teal, hidden panels, mobile scroll,
@@ -38,7 +38,7 @@ function setupWindow(stored: string | null) {
   };
 }
 
-type HomeTabId = 'education' | 'jobs' | 'admissions' | 'opportunities' | 'services';
+type HomeTabId = 'education' | 'question-maker' | 'jobs' | 'admissions' | 'opportunities' | 'services';
 
 async function renderTabs(stored: string | null, activeId: HomeTabId): Promise<string> {
   setupWindow(stored);
@@ -47,6 +47,7 @@ async function renderTabs(stored: string | null, activeId: HomeTabId): Promise<s
   const { default: HomeTabs, HOME_TABS } = await import('../HomeTabs');
   const panels = {
     education: React.createElement('div', null, 'EDU PANEL'),
+    'question-maker': React.createElement('div', null, 'QM PANEL'),
     jobs: React.createElement('div', null, 'JOBS PANEL'),
     admissions: React.createElement('div', null, 'ADMISSIONS PANEL'),
     opportunities: React.createElement('div', null, 'OPPORTUNITIES PANEL'),
@@ -62,23 +63,39 @@ async function renderTabs(stored: string | null, activeId: HomeTabId): Promise<s
 }
 
 describe('HomeTabs tabs (owner 25 Nov 17:40)', () => {
-  it('renders the five real sections as tabs, Bangla labels in bn mode', async () => {
+  it('renders the six real sections as tabs, Bangla labels in bn mode', async () => {
     const html = await renderTabs('bn', 'education');
     expect(html).toContain('শিক্ষা');
+    expect(html).toContain('প্রশ্নপত্র তৈরি');
     expect(html).toContain('চাকরি প্রস্তুতি');
     expect(html).toContain('ভর্তি প্রস্তুতি');
     expect(html).toContain('সুযোগ কেন্দ্র');
     expect(html).toContain('AI ও সেবা');
     expect(html).toContain('সবকিছু এক জায়গায়');
-    // All five panels render in the DOM (inactive ones hidden).
-    for (const panel of ['EDU PANEL', 'JOBS PANEL', 'ADMISSIONS PANEL', 'OPPORTUNITIES PANEL', 'SERVICES PANEL']) {
+    // All six panels render in the DOM (inactive ones hidden).
+    for (const panel of ['EDU PANEL', 'QM PANEL', 'JOBS PANEL', 'ADMISSIONS PANEL', 'OPPORTUNITIES PANEL', 'SERVICES PANEL']) {
       expect(html).toContain(panel);
     }
+  });
+
+  it('places the question-maker tab right after education', async () => {
+    setupWindow('bn');
+    vi.resetModules();
+    const { HOME_TABS } = await import('../HomeTabs');
+    expect(HOME_TABS.map((tab) => tab.id)).toEqual([
+      'education',
+      'question-maker',
+      'jobs',
+      'admissions',
+      'opportunities',
+      'services',
+    ]);
   });
 
   it('renders the English labels in en mode', async () => {
     const html = await renderTabs('en', 'education');
     expect(html).toContain('Education');
+    expect(html).toContain('Question Maker');
     expect(html).toContain('Job Preparation');
     expect(html).toContain('Admission Preparation');
     expect(html).toContain('Opportunity Hub');
@@ -90,14 +107,23 @@ describe('HomeTabs tabs (owner 25 Nov 17:40)', () => {
     const html = await renderTabs('bn', 'education');
     expect(html).toContain('id="ev-home-tab-education"');
     expect(html).toMatch(/id="ev-home-tab-education"[^>]*aria-selected="true"/);
-    for (const id of ['jobs', 'admissions', 'opportunities', 'services']) {
+    for (const id of ['question-maker', 'jobs', 'admissions', 'opportunities', 'services']) {
       expect(html).toMatch(new RegExp(`id="ev-home-tab-${id}"[^>]*aria-selected="false"`));
     }
-    // Education panel has no hidden attribute; the other four do.
+    // Education panel has no hidden attribute; the other five do.
     expect(html).not.toMatch(/id="ev-home-panel-education"[^>]*hidden/);
-    for (const id of ['jobs', 'admissions', 'opportunities', 'services']) {
+    for (const id of ['question-maker', 'jobs', 'admissions', 'opportunities', 'services']) {
       expect(html).toMatch(new RegExp(`id="ev-home-panel-${id}"[^>]*hidden`));
     }
+  });
+
+  it('controlled activeId switches to the question-maker tab and its panel', async () => {
+    const html = await renderTabs('bn', 'question-maker');
+    expect(html).toMatch(/id="ev-home-tab-question-maker"[^>]*aria-selected="true"/);
+    expect(html).toMatch(/id="ev-home-tab-education"[^>]*aria-selected="false"/);
+    expect(html).not.toMatch(/id="ev-home-panel-question-maker"[^>]*hidden/);
+    expect(html).toMatch(/id="ev-home-panel-education"[^>]*hidden/);
+    expect(html).toContain('QM PANEL');
   });
 
   it('controlled activeId switches the selected tab and the visible panel', async () => {
@@ -111,15 +137,15 @@ describe('HomeTabs tabs (owner 25 Nov 17:40)', () => {
   it('wires tabs to panels with roles, ids and aria attributes', async () => {
     const html = await renderTabs('bn', 'education');
     expect(html).toContain('role="tablist"');
-    expect(html.match(/role="tab"/g)?.length).toBe(5);
-    expect(html.match(/role="tabpanel"/g)?.length).toBe(5);
-    for (const id of ['education', 'jobs', 'admissions', 'opportunities', 'services']) {
+    expect(html.match(/role="tab"/g)?.length).toBe(6);
+    expect(html.match(/role="tabpanel"/g)?.length).toBe(6);
+    for (const id of ['education', 'question-maker', 'jobs', 'admissions', 'opportunities', 'services']) {
       expect(html).toContain(`aria-controls="ev-home-panel-${id}"`);
       expect(html).toContain(`aria-labelledby="ev-home-tab-${id}"`);
     }
     // Only the active tab is in the tab order (roving tabindex).
     expect(html.match(/tabindex="0"/g)?.length).toBe(1);
-    expect(html.match(/tabindex="-1"/g)?.length).toBe(4);
+    expect(html.match(/tabindex="-1"/g)?.length).toBe(5);
   });
 
   it('never names a competitor in the tab labels or heading', async () => {
@@ -135,8 +161,10 @@ describe('getNextTabId arrow-key navigation (pure)', () => {
     setupWindow('bn');
     vi.resetModules();
     const { HOME_TABS, getNextTabId } = await import('../HomeTabs');
-    expect(getNextTabId(HOME_TABS, 'education', 1)).toBe('jobs');
-    expect(getNextTabId(HOME_TABS, 'jobs', -1)).toBe('education');
+    expect(getNextTabId(HOME_TABS, 'education', 1)).toBe('question-maker');
+    expect(getNextTabId(HOME_TABS, 'question-maker', 1)).toBe('jobs');
+    expect(getNextTabId(HOME_TABS, 'question-maker', -1)).toBe('education');
+    expect(getNextTabId(HOME_TABS, 'jobs', -1)).toBe('question-maker');
     expect(getNextTabId(HOME_TABS, 'services', 1)).toBe('education');
     expect(getNextTabId(HOME_TABS, 'education', -1)).toBe('services');
     expect(getNextTabId(HOME_TABS, 'admissions', 1)).toBe('opportunities');

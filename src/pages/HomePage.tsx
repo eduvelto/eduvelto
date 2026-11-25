@@ -7,10 +7,11 @@
 //   (চাকরি / ভর্তি / শিক্ষা / দক্ষতা — preserved verbatim from the
 //   21 Nov redesign) → feature strip / quick access → TABS (25 Nov
 //   2026, owner: "home page a tab koro sudnor kore sajiye"): the
-//   main content sections live in five tabs — শিক্ষা (শিক্ষা কেন্দ্র
-//   + জনপ্রিয় বই), চাকরি প্রস্তুতি (Jobs section), ভর্তি প্রস্তুতি
+//   main content sections live in six tabs — শিক্ষা (শিক্ষা কেন্দ্র
+//   + জনপ্রিয় বই), প্রশ্নপত্র তৈরি (generator entry point, owner
+//   25 Nov 2026 18:26), চাকরি প্রস্তুতি (Jobs section), ভর্তি প্রস্তুতি
 //   (admission tiles), সুযোগ কেন্দ্র, AI ও সেবা (AI টুলস +
-//   দৈনন্দিন সেবা). All five panels render in the DOM (inactive ones
+//   দৈনন্দিন সেবা). All six panels render in the DOM (inactive ones
 //   hidden) so the prerendered content is unchanged. Below the tabs,
 //   always visible: Daily Quiz → real-numbers stats → panels
 //   (আপডেট / অগ্রগতি / জনপ্রিয়) → founder message → footer banner.
@@ -55,6 +56,7 @@ import { JobsSection } from '../components/JobCards';
 import DailyQuizWidget from '../components/DailyQuizWidget';
 import HomeBookSearchResults from '../components/HomeBookSearchResults';
 import HomeTabs, { HOME_TABS, type HomeTabId } from '../components/HomeTabs';
+import HomeQuestionMakerPanel from '../components/HomeQuestionMakerPanel';
 import { useLanguage } from '../i18n/LanguageContext';
 import { listQuizAttempts, listSubjectProgress } from '../lib/progress';
 import { getAllPublishedBooksCached, type Book } from '../lib/content';
@@ -567,10 +569,12 @@ export default function HomePage() {
     { to: '/exam', icon: '📝', bn: 'Exams', en: 'Exams', descBn: 'মডেল টেস্ট ও MCQ পরীক্ষা', descEn: 'Model tests and MCQ exams', count: null, notReady: false },
   ];
 
-  // Homepage tabs (owner 25 Nov 2026 17:40): the five tab panels.
+  // Homepage tabs (owner 25 Nov 2026 17:40): the six tab panels.
   // Each panel reuses the homepage's own sections verbatim — nothing
   // new is invented here except the admissions panel, which reuses the
-  // real /admissions destinations (ADMISSION_TILES above).
+  // real /admissions destinations (ADMISSION_TILES above), and the
+  // question-maker panel, which reuses the landing page's copy and
+  // pricing data (HomeQuestionMakerPanel).
   const homePanels = {
     education: (
       <>
@@ -666,6 +670,10 @@ export default function HomePage() {
 
       </>
     ),
+    // Question Maker tab (owner 25 Nov 2026 18:26) — entry point
+    // only: intro + real key points + CTA into the full generator
+    // at /question-maker. The builder itself is NOT embedded here.
+    'question-maker': <HomeQuestionMakerPanel />,
     // Job Preparation section — preserved verbatim (Step 5 regrouping).
     jobs: <JobsSection />,
     admissions: (
@@ -974,8 +982,9 @@ export default function HomePage() {
         </section>
 
         {/* Homepage tabs (owner 25 Nov 2026 17:40): the main content
-            sections live in five tabs — education, job preparation,
-            admission preparation, opportunity hub, AI & services.
+            sections live in six tabs — education, question maker,
+            job preparation, admission preparation, opportunity hub,
+            AI & services.
             Hero, ticker, search, hubs, section cards and the feature
             strip stay above; the Daily Quiz, stats, panels, founder
             message and footer banner stay below, always visible. */}
