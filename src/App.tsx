@@ -57,6 +57,7 @@ const JobCircularDetailPage = lazy(() => import('./pages/JobCircularDetailPage')
 const JobCalendarPage = lazy(() => import('./pages/JobCalendarPage'));
 const JobNotificationsPage = lazy(() => import('./pages/JobNotificationsPage'));
 const JobLiveExamPage = lazy(() => import('./pages/JobLiveExamPage'));
+const LiveExamPage = lazy(() => import('./pages/LiveExamPage'));
 const JobGuidePage = lazy(() => import('./pages/JobGuidePage'));
 const JobPostFamilyPage = lazy(() => import('./pages/JobPostFamilyPage'));
 const JobTypingPage = lazy(() => import('./pages/JobTypingPage'));
@@ -188,6 +189,7 @@ const InstallPage = lazy(() => import('./pages/InstallPage'));
 const AiTeacherPage = lazy(() => import('./pages/AiTeacherPage'));
 const AiAssistantPage = lazy(() => import('./pages/AiAssistantPage'));
 const ExamPage = lazy(() => import('./pages/ExamPage'));
+const MockExamPage = lazy(() => import('./pages/MockExamPage'));
 const RoutinePage = lazy(() => import('./pages/RoutinePage'));
 const ProgressPage = lazy(() => import('./pages/ProgressPage'));
 const SocialPage = lazy(() => import('./pages/SocialPage'));
@@ -750,6 +752,20 @@ export default function App() {
             the legacy unprefixed paths. NOT prerendered, NOT in the
             sitemap (login-gated, robots-disallowed — unchanged). */}
         <Route path="exam" element={<ExamPage />} />
+        {/* General Mock Exam hub + runner (7-day sprint, Day 5):
+            same locale-prefixed duplicate-routes pattern as /exam
+            — renders under /:lang/mock-exam AND bare /mock-exam
+            (NOT a redirect). Login-gated, not prerendered, not in
+            the sitemap. Runner bundle via ?bundle=<docId>&v=<n>. */}
+        <Route path="mock-exam" element={<MockExamPage />} />
+        {/* National Live Exam hub (7-day sprint, Day 5):
+            same locale-prefixed duplicate-routes pattern as /exam
+            and /mock-exam — renders under /:lang/live-exam AND
+            bare /live-exam (NOT a redirect). Public to view
+            (schedule + countdown); entry itself requires login
+            (the page gates it). Not prerendered, not in the
+            sitemap (schedule is dynamic). */}
+        <Route path="live-exam" element={<LiveExamPage />} />
         <Route path="progress" element={<ProgressPage />} />
         <Route path="routine" element={<RoutinePage />} />
         <Route path="social" element={<SocialPage />} />
@@ -872,6 +888,8 @@ export default function App() {
           <Route path="approvals" element={<CeoApprovalsPage />} />
         </Route>
         <Route path="/exam" element={<ExamPage />} />
+        <Route path="/mock-exam" element={<MockExamPage />} />
+        <Route path="/live-exam" element={<LiveExamPage />} />
         <Route path="/routine" element={<RoutinePage />} />
         <Route path="/progress" element={<ProgressPage />} />
         <Route path="/social" element={<SocialPage />} />
