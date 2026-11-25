@@ -865,6 +865,17 @@ const STATIC_ROUTES: Record<string, RouteSeoEntry> = {
       'Browser-based OMR evaluation — completely free for everyone. 10–100 MCQs, negative marking, instant score. Mobile camera scanning comes in Phase 2. Eduvelto.',
     crumbEn: 'OMR Evaluator',
   },
+  // Custom paper service (owner 25 Nov 10:50): human-made paper, ৳49.
+  '/custom-paper': {
+    title: 'কাস্টম প্রশ্নপত্র — আমরা বানিয়ে দিই | Eduvelto',
+    description:
+      'কাস্টম প্রশ্নপত্র — নম্বর বণ্টন + যা যা লাগবে লিখে WhatsApp-এ অর্ডার করুন, আমরা হাতে বানিয়ে PDF পাঠিয়ে দিই। ৳৪৯/পেপার — Eproshnobank-এর চেয়ে ৭০% ছাড়ে। Eduvelto।',
+    crumb: 'কাস্টম প্রশ্নপত্র',
+    titleEn: 'Custom Question Paper — We Make It For You | Eduvelto',
+    descriptionEn:
+      'Custom question paper — send your mark distribution and requirements on WhatsApp, we build it by hand and deliver the PDF. ৳49/paper — 70% off Eproshnobank. Eduvelto.',
+    crumbEn: 'Custom Paper',
+  },
   '/jobs/bcs/practice/english': {
     title: 'বিসিএস ইংরেজি অনুশীলন — ৩৫টি যাচাইকৃত প্রশ্ন | Eduvelto',    description:
       'বিসিএস ইংরেজি অনুশীলন — ৩৫টি যাচাইকৃত প্রশ্ন: ব্যাকরণ, শব্দভান্ডার ও রিডিং — সম্পূর্ণ বিনামূল্যে। পূর্ণাঙ্গ মক পরীক্ষা এখনো প্রস্তুত হচ্ছে। Eduvelto।',
@@ -1427,6 +1438,7 @@ const STATIC_CRUMBS: Record<string, string[]> = {
   '/question-paper-generator': ['প্রশ্নপত্র তৈরি', 'জেনারেটর'],
   '/pricing': ['মূল্য'],
   '/omr-evaluator': ['OMR মূল্যায়ন'],
+  '/custom-paper': ['প্রশ্নপত্র তৈরি', 'কাস্টম প্রশ্নপত্র'],
   '/jobs/bcs/practice/english': ['চাকরি প্রস্তুতি', 'বিসিএস', 'অনুশীলন', 'ইংরেজি'],
   '/jobs/bcs/practice/english/grammar': ['চাকরি প্রস্তুতি', 'বিসিএস', 'অনুশীলন', 'ইংরেজি', 'ব্যাকরণ'],
   '/jobs/bcs/practice/english/vocabulary': [
@@ -1447,6 +1459,7 @@ const STATIC_CRUMBS_EN: Record<string, string[]> = {
   '/question-paper-generator': ['Question Maker', 'Generator'],
   '/pricing': ['Pricing'],
   '/omr-evaluator': ['OMR Evaluator'],
+  '/custom-paper': ['Question Maker', 'Custom Paper'],
   '/jobs/bcs/practice/english': ['Job Preparation', 'BCS', 'Practice', 'English'],
   '/jobs/bcs/practice/english/grammar': ['Job Preparation', 'BCS', 'Practice', 'English', 'Grammar'],
   '/jobs/bcs/practice/english/vocabulary': [

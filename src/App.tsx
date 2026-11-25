@@ -89,6 +89,11 @@ const QuestionMakerLandingPage = lazy(() => import('./pages/QuestionMakerLanding
    merges first, then these routes move under that pattern. */
 const PricingPage = lazy(() => import('./pages/PricingPage'));
 const OmrEvaluatorPage = lazy(() => import('./pages/OmrEvaluatorPage'));
+/* Custom paper service (owner 25 Nov 10:50, "koro"): routing-agnostic
+   mount at /custom-paper for now; the SSG branch moves public routes
+   under /:lang — SSG merges first, then this route moves under that
+   pattern. */
+const CustomPaperPage = lazy(() => import('./pages/CustomPaperPage'));
 /* Branded WhatsApp redirect (owner 25 Nov 10:19): eduvelto.com/whatsapp
    hides the number; production is served by the firebase.json 302, this
    route is the dev/preview fallback. */
@@ -517,6 +522,10 @@ export default function App() {
             then rebase under the /:lang pattern. */}
         <Route path="/pricing" element={<PricingPage />} />
         <Route path="/omr-evaluator" element={<OmrEvaluatorPage />} />
+        {/* Custom paper service (owner 25 Nov 10:50): routing-agnostic
+            mount at /custom-paper for now; merge flag: SSG first, then
+            rebase under the /:lang pattern. */}
+        <Route path="/custom-paper" element={<CustomPaperPage />} />
         {/* Branded WhatsApp redirect (owner 25 Nov 10:19): visitors see
             only eduvelto.com/whatsapp; production redirect lives in
             firebase.json (302), this route is the dev/preview fallback. */}
