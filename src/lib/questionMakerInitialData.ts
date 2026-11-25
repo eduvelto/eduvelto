@@ -55,18 +55,22 @@ export const QUESTION_MAKER_INITIAL_DATA: QpgInitialData = {
   verifiedBatchLabelBn: 'BCS ইংরেজি ব্যাচ ১ (মালিক-যাচাইকৃত, ২২ নভেম্বর ২০২৬)',
 };
 
+// NOTE (merge 25 Nov 2026): this declaration MUST match the one in
+// src/lib/initialData.ts (`__INITIAL_DATA__?: unknown`) — interface
+// merging requires identical types. Use a local cast where a record
+// shape is needed; do not widen the global declaration.
 declare global {
   interface Window {
-    __INITIAL_DATA__?: Record<string, unknown>;
+    __INITIAL_DATA__?: unknown;
   }
 }
 
 /** Publish the build-time data to window.__INITIAL_DATA__ (idempotent). */
 export function publishQuestionMakerInitialData(): QpgInitialData {
   if (typeof window !== 'undefined') {
-    window.__INITIAL_DATA__ ??= {};
-    window.__INITIAL_DATA__['question-maker'] ??= QUESTION_MAKER_INITIAL_DATA;
-    window.__INITIAL_DATA__['pricing'] ??= QUESTION_MAKER_INITIAL_DATA;
+    const store = (window.__INITIAL_DATA__ ??= {}) as Record<string, unknown>;
+    store['question-maker'] ??= QUESTION_MAKER_INITIAL_DATA;
+    store['pricing'] ??= QUESTION_MAKER_INITIAL_DATA;
   }
   return QUESTION_MAKER_INITIAL_DATA;
 }
@@ -74,7 +78,8 @@ export function publishQuestionMakerInitialData(): QpgInitialData {
 /** Read a page's pre-rendered data (static fallback when absent). */
 export function getInitialData(pageKey: 'question-maker' | 'pricing'): QpgInitialData {
   if (typeof window !== 'undefined') {
-    const stored = window.__INITIAL_DATA__?.[pageKey] as QpgInitialData | undefined;
+    const raw = window.__INITIAL_DATA__ as Record<string, unknown> | undefined;
+    const stored = raw?.[pageKey] as QpgInitialData | undefined;
     if (stored && typeof stored.freeMonthlyLimit === 'number') return stored;
   }
   return QUESTION_MAKER_INITIAL_DATA;
