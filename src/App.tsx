@@ -623,7 +623,7 @@ export default function App() {
         <Route path="why-eduvelto" element={<WhyEduveltoPage />} />
         <Route path="founder" element={<FounderPage />} />
         <Route path="contact" element={<ContactPage />} />
-        <Route path="privacy" element={<PrivacyPage />} />
+        <Route path="privacy-policy" element={<PrivacyPage />} />
         <Route path="terms" element={<TermsPage />} />
         {/* Brand-SEO wave 1 (24 Nov 2026, F-08): trust/policy pages
             Google expects — editorial policy, content accuracy,
@@ -671,6 +671,7 @@ export default function App() {
         <Route path="/founder" element={<LegacyRedirect />} />
         <Route path="/contact" element={<LegacyRedirect />} />
         <Route path="/privacy" element={<LegacyRedirect />} />
+        <Route path="/privacy-policy" element={<LegacyRedirect />} />
         <Route path="/terms" element={<LegacyRedirect />} />
         <Route path="/editorial-policy" element={<LegacyRedirect />} />
         <Route path="/content-accuracy" element={<LegacyRedirect />} />

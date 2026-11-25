@@ -144,7 +144,7 @@ export default function Footer() {
           <p className="ev-footer-heading">{t({ bn: 'প্ল্যাটফর্ম', en: 'Platform' })}</p>
           <Link to="/about">{t({ bn: 'আমাদের সম্পর্কে', en: 'About' })}</Link>
           <Link to="/why-eduvelto">{t({ bn: 'কেন Eduvelto', en: 'Why Eduvelto' })}</Link>
-          <Link to="/privacy">{t({ bn: 'গোপনীয়তা নীতি', en: 'Privacy Policy' })}</Link>
+          <Link to="/privacy-policy">{t({ bn: 'গোপনীয়তা নীতি', en: 'Privacy Policy' })}</Link>
           <Link to="/terms">{t({ bn: 'শর্তাবলী', en: 'Terms' })}</Link>
           <Link to="/editorial-policy">{t({ bn: 'সম্পাদকীয় নীতি', en: 'Editorial Policy' })}</Link>
           <Link to="/content-accuracy">{t({ bn: 'বিষয়বস্তুর নির্ভুলতা', en: 'Content Accuracy' })}</Link>

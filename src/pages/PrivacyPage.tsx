@@ -1,11 +1,12 @@
 // Eduvelto — Privacy Policy (stage 3: class-wise homepage + mobile app).
 //
-// A real page (route /privacy, linked from the footer). Required BEFORE
-// any AdSense submission. Bangla + English, written for a free education
+// A real page (route /privacy-policy, linked from the footer; the old
+// /privacy URL 301-redirects to it — Phase 2, 25 Nov 2026). Required
+// BEFORE any AdSense submission. Bangla + English, written for a free education
 // platform for Bangladesh. It states what is collected (account +
 // learning progress), that student data is NEVER sold, the child-safety
 // and guardian rules, and that ads are non-personalised only.
-// Contact: ahmmizan23@gmail.com. Last updated 23 November 2026.
+// Contact: ahmmizan23@gmail.com. Last updated 25 November 2026.
 // NOTE: ads are NOT active on the site yet — the AdSense verification
 // script loads (index.html), but no ad unit renders until activation is
 // separately approved (Launch step 6). This policy already covers how ads
@@ -36,8 +37,8 @@ export default function PrivacyPage() {
     <PageShell titleBn="গোপনীয়তা নীতি" titleEn="Privacy Policy — Eduvelto" wide>
       <p style={{ color: 'var(--muted-ivory)', margin: '0 0 20px', lineHeight: 1.7 }}>
         {t({
-          bn: 'সর্বশেষ হালনাগাদ: ২৩ নভেম্বর ২০২৬। Eduvelto বাংলাদেশের শিক্ষার্থীদের জন্য একটি সম্পূর্ণ বিনামূল্যের শিক্ষা প্ল্যাটফর্ম। এই নীতিতে বলা আছে আমরা কী তথ্য সংগ্রহ করি, কেন করি, আর আপনার তথ্য কীভাবে সুরক্ষিত থাকে।',
-          en: 'Last updated: 23 November 2026. Eduvelto is a completely free education platform for students of Bangladesh. This policy explains what data we collect, why we collect it, and how your data stays protected.',
+          bn: 'সর্বশেষ হালনাগাদ: ২৫ নভেম্বর ২০২৬। Eduvelto বাংলাদেশের শিক্ষার্থীদের জন্য একটি সম্পূর্ণ বিনামূল্যের শিক্ষা প্ল্যাটফর্ম। এই নীতিতে বলা আছে আমরা কী তথ্য সংগ্রহ করি, কেন করি, আর আপনার তথ্য কীভাবে সুরক্ষিত থাকে।',
+          en: 'Last updated: 25 November 2026. Eduvelto is a completely free education platform for students of Bangladesh. This policy explains what data we collect, why we collect it, and how your data stays protected.',
         })}
       </p>
 
@@ -284,6 +285,13 @@ export default function PrivacyPage() {
               করা হবে না।
             </p>
             <p style={{ margin: '10px 0 0' }}>
+              <strong>DoubleClick DART কুকি:</strong> Google-এর বিজ্ঞাপন নেটওয়ার্ক
+              DoubleClick DART কুকি ব্যবহার করে — এই কুকির মাধ্যমে Google ও তার অংশীদাররা এই
+              সাইটে বা অন্য সাইটে আপনার আগের ভিজিটের ভিত্তিতে বিজ্ঞাপন দেখাতে পারে। আপনি{' '}
+              <a href="https://adssettings.google.com" target="_blank" rel="noreferrer">
+                Google Ads Settings
+              </a>{' '}
+              থেকে DART কুকির মাধ্যমে পার্সোনালাইজড বিজ্ঞাপন বন্ধ (opt out) করতে পারেন।
               বিজ্ঞাপন চালু হলে বিজ্ঞাপন-কুকি সম্পর্কে এই তিনটি কথা প্রযোজ্য হবে: (১)
               Google-সহ তৃতীয় পক্ষের বিজ্ঞাপনদাতারা এই সাইটে বা অন্য সাইটে আপনার আগের
               ভিজিটের ভিত্তিতে বিজ্ঞাপন দেখাতে কুকি ব্যবহার করে; (২) Google-এর
@@ -309,7 +317,15 @@ export default function PrivacyPage() {
               ads will be non-personalised, not targeted with your data.
             </p>
             <p style={{ margin: '10px 0 0' }}>
-              When ads start, these three points about advertising cookies will apply: (1)
+              <strong>DoubleClick DART cookie:</strong> Google&apos;s advertising network
+              uses the DoubleClick DART cookie — through this cookie, Google and its
+              partners can serve ads based on your prior visits to this site or other
+              sites. You can opt out of personalised advertising via the DART cookie
+              in{' '}
+              <a href="https://adssettings.google.com" target="_blank" rel="noreferrer">
+                Google Ads Settings
+              </a>
+              . When ads start, these three points about advertising cookies will apply: (1)
               third-party vendors, including Google, use cookies to serve ads based on a
               user's prior visits to this site or other sites; (2) Google's use of
               advertising cookies enables it and its partners to serve ads based on visits

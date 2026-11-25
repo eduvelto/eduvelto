@@ -142,6 +142,7 @@ export const LEGACY_PUBLIC_SEGMENTS: readonly string[] = [
   'founder',
   'contact',
   'privacy',
+  'privacy-policy',
   'terms',
   'editorial-policy',
   'content-accuracy',
@@ -213,6 +214,9 @@ export function legacyRedirectTarget(
   if (NON_REDIRECT_SEGMENTS.includes(seg)) return null;
   if (!LEGACY_PUBLIC_SEGMENTS.includes(seg)) return null;
   if (clean === '/jobs/primary') return withLangPrefix('/jobs/primary-teacher', lang);
+  // Phase 2 (25 Nov 2026): the privacy policy's canonical URL is
+  // /:lang/privacy-policy — the old /privacy URL 301s to it.
+  if (clean === '/privacy') return withLangPrefix('/privacy-policy', lang);
   if (clean === '/library') return withLangPrefix('/books', lang);
   const libBook = clean.match(/^\/library\/([^/]+)(\/.*)?$/);
   if (libBook) return withLangPrefix(`/books/${libBook[1]}${libBook[2] ?? ''}`, lang);

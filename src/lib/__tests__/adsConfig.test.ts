@@ -64,6 +64,7 @@ describe('getPageAdType', () => {
     expect(getPageAdType('/founder')).toBe('info');
     expect(getPageAdType('/contact')).toBe('info');
     expect(getPageAdType('/privacy')).toBe('info');
+    expect(getPageAdType('/privacy-policy')).toBe('info');
   });
 
   it('classifies auth and admin routes', () => {

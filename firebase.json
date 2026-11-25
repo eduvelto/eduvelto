@@ -212,7 +212,7 @@
       },
       {
         "source": "/privacy",
-        "destination": "/bn/privacy",
+        "destination": "/bn/privacy-policy",
         "type": 301
       },
       {
@@ -293,6 +293,11 @@
       {
         "source": "/life/:rest*",
         "destination": "/bn/life/:rest*",
+        "type": 301
+      },
+      {
+        "source": "/privacy-policy",
+        "destination": "/bn/privacy-policy",
         "type": 301
       }
     ],
@@ -496,6 +501,10 @@
       {
         "destination": "/index.html",
         "source": "/privacy"
+      },
+      {
+        "destination": "/index.html",
+        "source": "/privacy-policy"
       },
       {
         "destination": "/index.html",

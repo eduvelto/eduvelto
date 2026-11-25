@@ -614,7 +614,9 @@ const STATIC_ROUTES: Record<string, RouteSeoEntry> = {
       'Contact Eduvelto — ahmmizan23@gmail.com. Write to learn more about the free education platform of Bangladesh.',
     crumbEn: 'Contact',
   },
-  '/privacy': {
+  // Phase 2 (25 Nov 2026): canonical URL is /privacy-policy; the old
+  // /privacy URL 301-redirects to it (see langRouting.ts).
+  '/privacy-policy': {
     title: 'গোপনীয়তা নীতি — Eduvelto',
     description: 'Eduvelto-র গোপনীয়তা নীতি — আপনার তথ্য কীভাবে ব্যবহার হয়, তা জানুন।',
     crumb: 'গোপনীয়তা নীতি',

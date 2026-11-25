@@ -113,7 +113,7 @@ export default function AboutPage() {
         {' · '}
         <Link to="/disclaimer">{t({ bn: 'দায়বর্জন', en: 'Disclaimer' })}</Link>
         {' · '}
-        <Link to="/privacy">{t({ bn: 'গোপনীয়তা নীতি', en: 'Privacy policy' })}</Link>
+        <Link to="/privacy-policy">{t({ bn: 'গোপনীয়তা নীতি', en: 'Privacy policy' })}</Link>
         {' · '}
         <Link to="/terms">{t({ bn: 'শর্তাবলি', en: 'Terms' })}</Link>
       </p>

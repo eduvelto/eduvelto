@@ -232,7 +232,7 @@ export default function TermsPage() {
             ফলাফল, অগ্রগতি) শুধু আপনার পড়াশোনা দেখানো, অগ্রগতি সংরক্ষণ ও অ্যাকাউন্টের
             নিরাপত্তার জন্য ব্যবহার হয় — তথ্য Firebase-এর মাধ্যমে সংরক্ষিত ও সুরক্ষিত থাকে।
             শিক্ষার্থীর ব্যক্তিগত তথ্য কখনো বিক্রি করা হয় না। বিস্তারিত জানতে দেখুন{' '}
-            <Link to="/privacy">গোপনীয়তা নীতি</Link> — তথ্য কী সংগ্রহ করা হয়, কীভাবে ব্যবহার
+            <Link to="/privacy-policy">গোপনীয়তা নীতি</Link> — তথ্য কী সংগ্রহ করা হয়, কীভাবে ব্যবহার
             হয় আর কীভাবে সুরক্ষিত থাকে, তা সেখানেই লেখা আছে।
           </p>
         ) : (
@@ -241,7 +241,7 @@ export default function TermsPage() {
             (lessons, exams, results, progress) are used only to show your studies, save your
             progress, and keep your account secure — the data is stored and protected
             through Firebase. A student's personal data is never sold. For details, see the{' '}
-            <Link to="/privacy">Privacy Policy</Link> — what data is collected, how it is used,
+            <Link to="/privacy-policy">Privacy Policy</Link> — what data is collected, how it is used,
             and how it is protected is written there.
           </p>
         )}

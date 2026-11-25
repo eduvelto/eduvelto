@@ -176,7 +176,7 @@ export function getPageAdType(pathname: string): PageAdType {
     path === '/about' ||
     path === '/founder' ||
     path === '/contact' ||
-    path === '/privacy'
+    path === '/privacy' || path === '/privacy-policy'
   ) {
     return 'info';
   }

@@ -197,7 +197,7 @@ const SITEMAP_URLS = [
   '/about',
   '/founder',
   '/contact',
-  '/privacy',
+  '/privacy-policy',
   '/terms',
   // Brand-SEO wave 1, F-08 (24 Nov 2026): 4 new trust pages.
   '/editorial-policy',
@@ -753,9 +753,10 @@ describe('resolveRouteSeo — SEO 50–100 pages (23 Nov 2026)', () => {
       expect(block, `no <lastmod> for ${loc}`).toContain('<lastmod>');
       // lastmod is the sitemap's revision date for that URL: 2026-11-23
       // for the 23 Nov revision, 2026-11-24 for URLs added by the
-      // 24 Nov 2026 homepage redesign. (Was a single pinned date
-      // before this revision added new URLs.)
-      expect(['2026-11-23', '2026-11-24']).toContain(
+      // 24 Nov 2026 homepage redesign, 2026-11-25 for URLs added or
+      // changed by the 25 Nov 2026 Phase 2 build. (Was a single
+      // pinned date before this revision added new URLs.)
+      expect(['2026-11-23', '2026-11-24', '2026-11-25']).toContain(
         block.match(/<lastmod>([^<]+)<\/lastmod>/)?.[1],
       );
     }
