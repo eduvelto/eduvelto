@@ -671,8 +671,11 @@ async function main() {
       renderFallbacks += 1;
       console.warn(`WARN: SSR render failed for ${url}: ${err.message} — writing shell + head only.`);
     }
-    if (/name="robots" content="noindex/.test(helmetHtml)) noindexWarnings.push(url);
     const headTags = headOverride ?? helmetHtml;
+    // Check the FINAL head: book pages override the fallback helmet
+    // head (which carries noindex) with buildBookHead(), so testing
+    // helmetHtml here false-positived all 1,218 book pages.
+    if (/name="robots" content="noindex/.test(headTags)) noindexWarnings.push(url);
     // A failed render yields no helmet tags at all — then keep the
     // shell's static home head rather than shipping a title-less page.
     const headInner = headTags ? stripShellSeo(shellHeadInner) : shellHeadInner;

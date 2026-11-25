@@ -16,6 +16,11 @@ const DISMISS_KEY = 'eduvelto-install-dismissed';
 const DISMISS_DAYS = 7;
 
 function isStandalone(): boolean {
+  // SSR guard (Phase 1, 25 Nov 2026): this runs in a useState
+  // initializer during render, so on the server (no window) it
+  // must return false instead of throwing. Browser behaviour
+  // unchanged.
+  if (typeof window === 'undefined') return false;
   return (
     window.matchMedia('(display-mode: standalone)').matches ||
     (window.navigator as Navigator & { standalone?: boolean }).standalone === true
@@ -23,6 +28,7 @@ function isStandalone(): boolean {
 }
 
 function isIOS(): boolean {
+  if (typeof window === 'undefined') return false;
   const ua = window.navigator.userAgent;
   const iOSDevice = /iPad|iPhone|iPod/.test(ua);
   const iPadOS13Plus =

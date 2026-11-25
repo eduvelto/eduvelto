@@ -14,7 +14,12 @@ import { VitePWA } from 'vite-plugin-pwa';
 // load / refresh of any route even while online (verified 21 Nov 2026:
 // /health and /health/medicines showed "অফলাইনে আছেন" on an online
 // browser; the server itself returns HTTP 200 for those routes).
-export default defineConfig({
+// isSsrBuild (Phase 1, 25 Nov 2026): the SSR bundle (entry-server)
+// externalises React/Firebase, so manualChunks MUST NOT list them
+// there — Rollup fails the SSR build ("react cannot be included in
+// manualChunks because it is resolved as an external module").
+// The vendor split stays client-only.
+export default defineConfig(({ isSsrBuild }) => ({
   plugins: [
     react(),
     VitePWA({
@@ -39,6 +44,13 @@ export default defineConfig({
       devOptions: { enabled: false },
     }),
   ],
+  // SSR (Phase 1, 25 Nov 2026): react-helmet-async ships CJS, and
+  // Node ESM cannot take its named exports from the externalised
+  // CJS module ("Named export 'Helmet' not found") — bundle it
+  // into the SSR output instead.
+  ssr: {
+    noExternal: ['react-helmet-async'],
+  },
   build: {
     // SCALE (10k users): split the vendor code out of the app bundle so
     // repeat visits reuse the cached vendor chunk (React + Firebase change
@@ -49,11 +61,15 @@ export default defineConfig({
     // entry only.
     rollupOptions: {
       output: {
-        manualChunks: {
-          'vendor-react': ['react', 'react-dom', 'react-router-dom'],
-          'vendor-firebase': ['firebase/app', 'firebase/auth', 'firebase/firestore'],
-        },
+        ...(isSsrBuild
+          ? {}
+          : {
+              manualChunks: {
+                'vendor-react': ['react', 'react-dom', 'react-router-dom'],
+                'vendor-firebase': ['firebase/app', 'firebase/auth', 'firebase/firestore'],
+              },
+            }),
       },
     },
   },
-});
+}));

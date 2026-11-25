@@ -493,6 +493,20 @@ const STATIC_ROUTES: Record<string, RouteSeoEntry> = {
     descriptionEn: 'The Eduvelto digital library — books, lessons and Q&A by class and subject — completely free.',
     crumbEn: 'Library',
   },
+  // Phase 1 (25 Nov 2026): /books is the canonical library hub
+  // (book pages canonicalise to /books/:id; /library renders the
+  // same page as an alias). Same SEO as /library — one hub, one
+  // entry each, so the prerendered /bn/books + /en/books are
+  // indexable instead of falling back to noindex home SEO.
+  '/books': {
+    title: 'ডিজিটাল লাইব্রেরি — বিনামূল্যে বই ও প্রশ্নব্যাংক | Eduvelto',
+    description:
+      'Eduvelto ডিজিটাল লাইব্রেরি — শ্রেণি ও বিষয়ভিত্তিক বই, পাঠ ও প্রশ্নোত্তর — সম্পূর্ণ বিনামূল্যে।',
+    crumb: 'লাইব্রেরি',
+    titleEn: 'Digital Library — Free Books & Question Bank | Eduvelto',
+    descriptionEn: 'The Eduvelto digital library — books, lessons and Q&A by class and subject — completely free.',
+    crumbEn: 'Library',
+  },
   '/class': {
     title: 'শ্রেণিভিত্তিক পড়াশোনা — বই, পাঠ ও পরীক্ষা | Eduvelto',
     description:

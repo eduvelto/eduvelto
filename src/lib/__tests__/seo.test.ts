@@ -1640,6 +1640,13 @@ describe('resolveRouteSeo — bilingual /:lang canonicals (Phase 1, 25 Nov 2026)
     expect(resolveRouteSeo('/en', 'bn')!.canonical).toBe('https://eduvelto.com/en');
   });
 
+  it('/books (canonical library hub) resolves with the library SEO', () => {
+    const seo = resolveRouteSeo('/bn/books', 'bn')!;
+    expect(seo.canonical).toBe('https://eduvelto.com/bn/books');
+    expect(seo.title).toBe(resolveRouteSeo('/bn/library', 'bn')!.title);
+    expect(seo.robots).toBeUndefined();
+  });
+
   it('bare legacy paths still resolve, with the /bn canonical', () => {
     const seo = resolveRouteSeo('/jobs/bcs')!;
     expect(seo.canonical).toBe('https://eduvelto.com/bn/jobs/bcs');
