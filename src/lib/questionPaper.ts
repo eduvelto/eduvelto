@@ -92,23 +92,28 @@ export type QpgDifficulty = 'all' | 'easy' | 'medium' | 'hard';
  *  ৳999/year + ৳799-proposed + ৳1,499 coaching tiers, which were
  *  Gemini proposals).
  *
- *  RULE: every Eduvelto generator price = 30% of Eproshnobank's
- *  equivalent price — i.e. 70% OFF — rounded to the nearest ৳10.
- *  Free tier stays for now: ৳0, 3 papers/month, watermarked — the
- *  free trial IS the marketing (owner 25 Nov 09:38; SUPERSEDES the
- *  Turn 32 figure of 5/month). There is
- *  NO single all-in-one yearly tier — the per-class / bundle /
- *  coaching table below IS the pricing. Single Paper ৳49 and Teacher
- *  Monthly ৳199 have no Eproshnobank equivalent, so they show plain
- *  with no reference price.
+ *  RULE: every Eduvelto generator price = 30% of the equivalent
+ *  service's listed price — i.e. 70% OFF — rounded to the nearest
+ *  ৳10. (Price basis, recorded internally only: the reference figures
+ *  come from the competitor's published list; the competitor's name
+ *  is NEVER shown — see DISPLAY RULE.) Free tier stays for now: ৳0,
+ *  3 papers/month, watermarked — the free trial IS the marketing
+ *  (owner 25 Nov 09:38; SUPERSEDES the Turn 32 figure of 5/month).
+ *  There is NO single all-in-one yearly tier — the per-class /
+ *  bundle / coaching table below IS the pricing. Single Paper ৳49
+ *  and Teacher Monthly ৳199 have no reference price, so they show
+ *  plain with no reference price.
  *
- *  DISPLAY RULE (owner's marketing): each tier shows THEIR price as
- *  the main/original price (struck through), LABELED as Eproshnobank's
- *  price, then "৭০% ছাড়ে", then OUR price — e.g. "Eproshnobank ৳৯৯৯
- *  → ৭০% ছাড়ে → ৳৩০০". The reference price MUST be labeled as
- *  Eproshnobank's — NEVER presented as our own former price. The
- *  "৭০% ছাড়ে" claim is now true (our price is 30% of their listed
- *  price). NEVER use "৬ গুণ কম দামে" — theirs is 3.33× ours, not 6×. */
+ *  DISPLAY RULE (owner 25 Nov 17:28 — "onno kono jaigar nam likba
+ *  na", SUPERSEDES the 09:34 naming rule): NEVER name another
+ *  website/competitor anywhere on the site — not in the ticker, the
+ *  landing page, the pricing table, the SEO descriptions, or the
+ *  WhatsApp order text. Each tier shows the reference price as the
+ *  main/original price (struck through), LABELED generically as
+ *  "বাজার মূল্য" (market price of an equivalent service), then
+ *  "৭০% ছাড়ে", then OUR price — e.g. "৳৯৯৯ → ৭০% ছাড়ে → ৳৩০০".
+ *  The reference price MUST be labeled as market price — NEVER
+ *  presented as our own former price. NEVER use "৬ গুণ কম দামে". */
 export const QPG_FREE_MONTHLY_LIMIT = 3;
 export const QPG_PRO_PER_PAPER_BDT = 49;
 export const QPG_PRO_MONTHLY_BDT = 199;
@@ -120,14 +125,15 @@ export const QPG_PRO_MONTHLY_BDT = 199;
  *  single-paper price. PRICE HISTORY: the owner briefly overrode the
  *  PDF price to ৳29 at 10:52, then REVERSED at 10:53 ("tahole 49
  *  rhako") — ৳49 stands and the ৳29 override is cancelled; ৳29 must
- *  NOT appear anywhere. Display follows the standard rule: their
- *  price struck through, labelled Eproshnobank's, → "৭০% ছাড়ে" → ৳49. */
+ *  NOT appear anywhere. Display follows the standard rule: market
+ *  price struck through, labelled "বাজার মূল্য", → "৭০% ছাড়ে" → ৳49. */
 export const QPG_CUSTOM_PAPER_BDT = 49;
 export const QPG_CUSTOM_PAPER_THEIR_MIN_BDT = 150;
 export const QPG_CUSTOM_PAPER_THEIR_MAX_BDT = 200;
-/** The only honest price claim: "৭০% ছাড়ে" (70% off Eproshnobank). */
-export const QPG_PRICE_CLAIM_BN = 'Eproshnobank-এর চেয়ে ৭০% ছাড়ে';
-export const QPG_PRICE_CLAIM_EN = '70% off Eproshnobank';
+/** The only honest price claim: "৭০% ছাড়ে" (70% off the market
+ *  price of an equivalent service). Never names another website. */
+export const QPG_PRICE_CLAIM_BN = 'সব প্রশ্নপত্রে ৭০% ছাড়ে';
+export const QPG_PRICE_CLAIM_EN = '70% off all question papers';
 
 /** One annual tier. `eduveltoBdt` is 30% of `eproshnobankBdt` —
  *  the owner table is authoritative (brief 25 Nov 09:34). NOTE: the

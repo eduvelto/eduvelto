@@ -4,20 +4,23 @@
 // moves public routes under /:lang — SSG merges first, then this
 // route moves under that pattern; see App.tsx).
 //
-// RULE: every Eduvelto generator price = 30% of Eproshnobank's
-// equivalent price (৭০% ছাড়ে), rounded to the nearest ৳10. This table
-// SUPERSEDES all earlier tiers — the 09:19 50% table, and the
-// ৳999/year, ৳799-proposed and ৳1,499-coaching tiers (Gemini
+// RULE: every Eduvelto generator price = 30% of the equivalent
+// service's listed price (৭০% ছাড়ে), rounded to the nearest ৳10.
+// This table SUPERSEDES all earlier tiers — the 09:19 50% table, and
+// the ৳999/year, ৳799-proposed and ৳1,499-coaching tiers (Gemini
 // proposals) — they must NOT appear as Eduvelto prices anywhere;
-// ৳1,499 appears below ONLY as Eproshnobank's price for Class 9–10,
-// struck through and labeled. There is NO single all-in-one yearly
-// tier anymore.
+// ৳1,499 appears below ONLY as the struck-through market reference
+// price for Class 9–10. There is NO single all-in-one yearly tier
+// anymore.
 //
-// DISPLAY RULE (owner's marketing): each tier shows THEIR price as the
-// main/original price (struck through), LABELED as Eproshnobank's
-// price, then "৭০% ছাড়ে", then OUR price. The reference price MUST be
-// labeled as Eproshnobank's — NEVER as our own former price. NEVER use
-// the six-times-cheaper style claim (theirs is 3.33× ours, not 6×).
+// DISPLAY RULE (owner 25 Nov 17:28 — "onno kono jaigar nam likba na",
+// SUPERSEDES the 09:34 naming rule): NEVER name another website /
+// competitor anywhere on the site. Each tier shows the reference price
+// as the main/original price (struck through), LABELED generically as
+// "বাজার মূল্য" (market price of an equivalent service), then "৭০%
+// ছাড়ে", then OUR price. The reference price MUST be labeled as
+// market price — NEVER as our own former price. NEVER use the
+// six-times-cheaper style claim.
 //
 // Data comes from window.__INITIAL_DATA__ (pre-rendered at build time,
 // zero Firestore reads) — see src/lib/questionMakerInitialData.ts.
@@ -46,7 +49,7 @@ function TierTable(props: { titleBn: string; tiers: QpgPriceTier[] }) {
         <thead>
           <tr style={{ textAlign: 'left', borderBottom: '2px solid #ddd' }}>
             <th style={{ padding: '6px 4px' }}>প্যাকেজ</th>
-            <th style={{ padding: '6px 4px' }}>Eproshnobank-এর মূল্য</th>
+            <th style={{ padding: '6px 4px' }}>বাজার মূল্য</th>
             <th style={{ padding: '6px 4px' }}></th>
             <th style={{ padding: '6px 4px' }}>আমাদের মূল্য</th>
           </tr>
@@ -80,8 +83,8 @@ export default function PricingPage() {
   return (
     <PageShell titleBn="মূল্য — প্রশ্নপত্র জেনারেটর" titleEn="Pricing — Question Paper Generator" wide>
       <AlertBox tone="info">
-        {data.priceClaimBn} — প্রতিটি মূল্য Eproshnobank-এর সমতুল্য মূল্যের ৩০% (নিকটতম ৳১০-এ গোল করা)।
-        কাটা দামটি Eproshnobank-এর মূল্য — আমাদের আগের দাম নয়। ফ্রি টিয়ার আপাতত থাকছে।
+        {data.priceClaimBn} — প্রতিটি মূল্য সমতুল্য সেবার বাজার মূল্যের ৩০% (নিকটতম ৳১০-এ গোল করা)।
+        কাটা দামটি বাজার মূল্য — আমাদের আগের দাম নয়। ফ্রি টিয়ার আপাতত থাকছে।
       </AlertBox>
 
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: 12, marginTop: 16 }}>
@@ -111,7 +114,7 @@ export default function PricingPage() {
           <h2 style={{ margin: '0 0 4px', fontSize: 17 }}>কাস্টম প্রশ্নপত্র — আমরা বানিয়ে দিই</h2>
           <p style={{ fontSize: 14, lineHeight: 1.7, margin: '0 0 8px' }}>
             <s style={{ color: '#888' }}>
-              Eproshnobank-এর মূল্য ৳{QPG_CUSTOM_PAPER_THEIR_MIN_BDT}–{QPG_CUSTOM_PAPER_THEIR_MAX_BDT}
+              বাজার মূল্য ৳{QPG_CUSTOM_PAPER_THEIR_MIN_BDT}–{QPG_CUSTOM_PAPER_THEIR_MAX_BDT}
             </s>{' '}
             <Chip tone="gold">{QPG_PRICE_CLAIM_BN}</Chip>
           </p>

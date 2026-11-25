@@ -96,7 +96,7 @@ export default function CustomPaperPage() {
         <h2 style={{ margin: '0 0 4px', fontSize: 17 }}>কাস্টম প্রশ্নপত্র — ১ পেপার</h2>
         <p style={{ fontSize: 14, lineHeight: 1.7, margin: '0 0 8px' }}>
           <s style={{ color: '#888' }}>
-            Eproshnobank-এর মূল্য ৳{QPG_CUSTOM_PAPER_THEIR_MIN_BDT}–{QPG_CUSTOM_PAPER_THEIR_MAX_BDT}
+            বাজার মূল্য ৳{QPG_CUSTOM_PAPER_THEIR_MIN_BDT}–{QPG_CUSTOM_PAPER_THEIR_MAX_BDT}
           </s>{' '}
           <Chip tone="gold">{QPG_PRICE_CLAIM_BN}</Chip>{' '}
           <strong style={{ fontSize: 22 }}>৳{QPG_CUSTOM_PAPER_BDT}</strong>

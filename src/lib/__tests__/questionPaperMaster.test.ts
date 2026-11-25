@@ -211,7 +211,7 @@ describe('pricing truth (PRICING FINAL, owner 25 Nov 09:34)', () => {
   it('the table is the 70%-off table — our price is 30% of theirs, nearest ৳10', () => {
     expect(QUESTION_MAKER_INITIAL_DATA.pricing).toHaveLength(18);
     expect(QUESTION_MAKER_INITIAL_DATA.cheapestAnnualBdt).toBe(150);
-    expect(QUESTION_MAKER_INITIAL_DATA.priceClaimBn).toBe('Eproshnobank-এর চেয়ে ৭০% ছাড়ে');
+    expect(QUESTION_MAKER_INITIAL_DATA.priceClaimBn).toBe('সব প্রশ্নপত্রে ৭০% ছাড়ে');
     const ids = QUESTION_MAKER_INITIAL_DATA.pricing.map((t) => t.id);
     expect(ids).toContain('class-3');
     expect(ids).toContain('bundle-3-10');
@@ -226,8 +226,12 @@ describe('pricing truth (PRICING FINAL, owner 25 Nov 09:34)', () => {
   it('the pricing page renders the table from __INITIAL_DATA__ with the ৭০% ছাড়ে display rule', () => {
     expect(PRICING_SRC).toContain('data.pricing');
     expect(PRICING_SRC).toContain('৭০% ছাড়ে');
-    expect(PRICING_SRC).toContain('Eproshnobank-এর মূল্য');
+    expect(PRICING_SRC).toContain('বাজার মূল্য');
     expect(PRICING_SRC).toContain('data.priceClaimBn');
+    // NEVER name another website/competitor anywhere on the site
+    // (owner 25 Nov 17:28) — the reference price is "বাজার মূল্য".
+    expect(PRICING_SRC).not.toContain('Eproshnobank');
+    expect(PRICING_SRC).not.toContain('Proshnobanai');
     // NEVER "৬ গুণ কম দামে" — theirs is 3.33× ours, not 6×.
     expect(PRICING_SRC).not.toMatch(/৬ গুণ কম/);
     expect(PRICING_SRC).not.toContain('proYearlyBdt');
@@ -237,6 +241,9 @@ describe('pricing truth (PRICING FINAL, owner 25 Nov 09:34)', () => {
   it('no "৬ গুণ কম" claim appears on the landing page either', () => {
     expect(LANDING_SRC).not.toMatch(/৬ গুণ কম/);
     expect(LANDING_SRC).toContain('data.priceClaimBn');
+    // No competitor name on the landing page either (owner 25 Nov 17:28).
+    expect(LANDING_SRC).not.toContain('Eproshnobank');
+    expect(LANDING_SRC).not.toContain('Proshnobanai');
   });
 
   it('the pricing route resolves SEO', () => {

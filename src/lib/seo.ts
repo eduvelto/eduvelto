@@ -994,11 +994,11 @@ const STATIC_ROUTES: Record<string, RouteSeoEntry> = {
   '/pricing': {
     title: 'মূল্য — প্রশ্নপত্র জেনারেটর Pro | Eduvelto',
     description:
-      'মূল্য — ফ্রি ৳০ (মাসে ৩টি পেপার), প্রতি পেপার ৳৪৯, মাসিক ৳১৯৯, ক্লাসভিত্তিক বার্ষিক ৳১৫০ থেকে — Eproshnobank-এর চেয়ে ৭০% ছাড়ে। Eduvelto।',
+      'মূল্য — ফ্রি ৳০ (মাসে ৩টি পেপার), প্রতি পেপার ৳৪৯, মাসিক ৳১৯৯, ক্লাসভিত্তিক বার্ষিক ৳১৫০ থেকে — সব প্রশ্নপত্রে ৭০% ছাড়ে। Eduvelto।',
     crumb: 'মূল্য',
     titleEn: 'Pricing — Question Paper Generator Pro | Eduvelto',
     descriptionEn:
-      'Pricing — Free ৳0 (3 papers/month), per paper ৳49, monthly ৳199, class-based annual from ৳150 — 70% off Eproshnobank. Eduvelto.',
+      'Pricing — Free ৳0 (3 papers/month), per paper ৳49, monthly ৳199, class-based annual from ৳150 — 70% off all question papers. Eduvelto.',
     crumbEn: 'Pricing',
   },
   '/omr-evaluator': {
@@ -1015,11 +1015,11 @@ const STATIC_ROUTES: Record<string, RouteSeoEntry> = {
   '/custom-paper': {
     title: 'কাস্টম প্রশ্নপত্র — আমরা বানিয়ে দিই | Eduvelto',
     description:
-      'কাস্টম প্রশ্নপত্র — নম্বর বণ্টন + যা যা লাগবে লিখে WhatsApp-এ অর্ডার করুন, আমরা হাতে বানিয়ে PDF পাঠিয়ে দিই। ৳৪৯/পেপার — Eproshnobank-এর চেয়ে ৭০% ছাড়ে। Eduvelto।',
+      'কাস্টম প্রশ্নপত্র — নম্বর বণ্টন + যা যা লাগবে লিখে WhatsApp-এ অর্ডার করুন, আমরা হাতে বানিয়ে PDF পাঠিয়ে দিই। ৳৪৯/পেপার — সব প্রশ্নপত্রে ৭০% ছাড়ে। Eduvelto।',
     crumb: 'কাস্টম প্রশ্নপত্র',
     titleEn: 'Custom Question Paper — We Make It For You | Eduvelto',
     descriptionEn:
-      'Custom question paper — send your mark distribution and requirements on WhatsApp, we build it by hand and deliver the PDF. ৳49/paper — 70% off Eproshnobank. Eduvelto.',
+      'Custom question paper — send your mark distribution and requirements on WhatsApp, we build it by hand and deliver the PDF. ৳49/paper — 70% off all question papers. Eduvelto.',
     crumbEn: 'Custom Paper',
   },
   '/jobs/bcs/practice/english': {

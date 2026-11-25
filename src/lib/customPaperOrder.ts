@@ -81,7 +81,7 @@ export function buildCustomPaperOrderText(o: CustomPaperOrder): string {
     `প্রতিষ্ঠান: ${o.institutionName.trim() || '—'}`,
     `লাগবে: ${o.dateNeeded.trim()}`,
     `নির্দেশনা: ${o.instructions.trim() || '—'}`,
-    `মূল্য: ৳${QPG_CUSTOM_PAPER_BDT} (Eproshnobank ৳${QPG_CUSTOM_PAPER_THEIR_MIN_BDT}–${QPG_CUSTOM_PAPER_THEIR_MAX_BDT} → ৭০% ছাড়ে)`,
+    `মূল্য: ৳${QPG_CUSTOM_PAPER_BDT} (বাজার মূল্য ৳${QPG_CUSTOM_PAPER_THEIR_MIN_BDT}–${QPG_CUSTOM_PAPER_THEIR_MAX_BDT} → ৭০% ছাড়ে)`,
     `পেমেন্ট: বিকাশ/নগদ ${QPG_PAYMENT_NUMBER} নম্বরে ৳${QPG_CUSTOM_PAPER_BDT} পাঠিয়ে TrxID + শেষ ৩ ডিজিট জানাবেন।`,
   ];
   return lines.join('\n');
