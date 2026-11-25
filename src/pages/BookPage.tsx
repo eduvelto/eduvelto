@@ -11,7 +11,7 @@ import { getPublishedBook, listPublishedChapters, type Book, type Chapter } from
 import { useAuth } from '../lib/auth';
 import { useLanguage } from '../i18n/LanguageContext';
 import { SeoHead } from '../components/SeoHead';
-import { bookSeoData } from '../lib/seo';
+import { bookSeoData, buildBookSummary } from '../lib/seo';
 import { langUrl } from '../lib/langRouting';
 
 export default function BookPage() {
@@ -86,6 +86,14 @@ export default function BookPage() {
             </div>
             <p style={{ margin: '12px 0 0', color: 'var(--muted)' }}>
               {t({ bn: `${book.chapterCount}টি পাঠ · ${book.questionCount}টি প্রশ্ন`, en: `${book.chapterCount} lessons · ${book.questionCount} questions` })}
+            </p>
+            {/* Phase 2 (25 Nov 2026): the same auto-generated rich
+                summary paragraph the prerender script emits into
+                static HTML (buildBookSummary in lib/seo.ts, mirrored
+                in scripts/prerender.mjs) — from the book's own
+                metadata only, never invented. */}
+            <p style={{ margin: '12px 0 0', fontSize: 15, lineHeight: 1.7 }}>
+              {buildBookSummary(book, lang)}
             </p>
           </Card>
           <h2 style={{ fontFamily: "'Poppins','Hind Siliguri',system-ui,sans-serif", fontSize: 20, color: 'var(--heading)', margin: '0 0 12px' }}>

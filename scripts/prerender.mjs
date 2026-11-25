@@ -73,10 +73,10 @@
 // PHASE 2 EXTENSION POINT — PRERENDER_STATIC_PATHS is the ONE list
 // to extend: add legal pages and guide detail pages there when
 // their routes exist. (/support has NO route yet, so it is NOT in
-// the list — it 301s to /bn/contact instead; /founder is NOT
-// prerendered — FounderPage owns its SEO client-side via useSeo,
-// and prerendering it with the fallback noindex head would hide it
-// from Google. Guide detail pages ARE covered: /learn/<slug> x41.)
+// the list — it 301s to /bn/contact instead. /founder IS in the
+// list since Phase 2 (25 Nov 2026): its SEO moved from FounderPage's
+// client-side useSeo into src/lib/seo.ts. Guide detail pages ARE
+// covered: /learn/<slug> x41 + /guides/<slug> x15.)
 
 import { readFileSync, writeFileSync, mkdirSync, existsSync, copyFileSync } from 'node:fs';
 import { join, dirname } from 'node:path';
@@ -88,11 +88,12 @@ export const DEFAULT_PROJECT_ID = 'eduvelto';
 
 // ---------------------------------------------------------------------------
 // THE list. Phase 2 extends this constant (see header). Sourced from
-// the committed public/sitemap.xml (120 URLs) + '/books' (the new
+// the committed public/sitemap.xml (136 URLs) + '/books' (the new
 // canonical library hub alias; /library keeps rendering as an alias
-// and legacy /library 301s to /bn/books). '/founder' is deliberately
-// NOT here (see header). '/ai-teacher' is not here either — it is
-// noindexed + robots-disallowed by design.
+// and legacy /library 301s to /bn/books). '/founder' IS here since
+// Phase 2 (25 Nov 2026) — its SEO moved into src/lib/seo.ts.
+// '/ai-teacher' is not here either — it is noindexed +
+// robots-disallowed by design.
 // ---------------------------------------------------------------------------
 export const PRERENDER_STATIC_PATHS = [
   '/',
@@ -196,6 +197,7 @@ export const PRERENDER_STATIC_PATHS = [
   '/class/technical',
   '/class/madrasa',
   '/about',
+  '/founder',
   '/contact',
   '/privacy-policy',
   '/terms',
@@ -482,6 +484,7 @@ export function buildBookHead(book, lang) {
       url: canonical,
       name: book.title,
       inLanguage: ['bn', 'en'],
+      isAccessibleForFree: true,
       isPartOf: { '@id': 'https://eduvelto.com#website' },
       ...(book.subject ? { about: book.subject } : {}),
     },
@@ -521,6 +524,46 @@ export function buildBookHead(book, lang) {
   ].join('\n    ');
 }
 
+/** Rich book summary paragraph (Phase 2, 25 Nov 2026) — the plain-JS
+ *  mirror of buildBookSummary() in src/lib/seo.ts. The client-side
+ *  BookPage renders the TS version in the book Card; this version
+ *  goes into the prerendered HTML. Same formula, same text: only
+ *  fields present on the doc are used, counts omitted when absent,
+ *  never invented. The book's own title is never translated. */
+export function buildBookSummary(book, lang) {
+  const facts = [];
+  if (book.subject) facts.push(book.subject);
+  if (book.classLevel) facts.push(book.classLevel);
+  if (book.board) facts.push(book.board);
+  if (book.program) facts.push(book.program);
+  if (book.department && book.department !== book.subject) facts.push(book.department);
+  if (book.paperCode) facts.push(lang === 'bn' ? `কোড ${book.paperCode}` : `Code ${book.paperCode}`);
+  const hasChapters = typeof book.chapterCount === 'number';
+  const hasQuestions = typeof book.questionCount === 'number';
+  if (lang === 'bn') {
+    const lead = facts.length > 0 ? `${book.title} — ${facts.join(' · ')}। ` : `${book.title}। `;
+    let counts = '';
+    if (hasChapters && hasQuestions) {
+      counts = ` এই বইটিতে মোট ${book.chapterCount}টি অধ্যায় এবং অনুশীলনের জন্য ${book.questionCount}টি প্রশ্ন রয়েছে।`;
+    } else if (hasChapters) {
+      counts = ` এই বইটিতে মোট ${book.chapterCount}টি অধ্যায় রয়েছে।`;
+    } else if (hasQuestions) {
+      counts = ` এই বইটিতে অনুশীলনের জন্য মোট ${book.questionCount}টি প্রশ্ন রয়েছে।`;
+    }
+    return `${lead}এই বইটি Eduvelto ডিজিটাল লাইব্রেরিতে সম্পূর্ণ ফ্রিতে পড়ুন।${counts}`;
+  }
+  const lead = facts.length > 0 ? `${book.title} — ${facts.join(' · ')}. ` : `${book.title}. `;
+  let counts = '';
+  if (hasChapters && hasQuestions) {
+    counts = ` This book has ${book.chapterCount} chapters and ${book.questionCount} practice questions in total.`;
+  } else if (hasChapters) {
+    counts = ` This book has ${book.chapterCount} chapters in total.`;
+  } else if (hasQuestions) {
+    counts = ` This book has ${book.questionCount} practice questions in total.`;
+  }
+  return `${lead}Read this book completely free in the Eduvelto digital library.${counts}`;
+}
+
 /** Visible book summary prepended to the prerendered book page
  *  (crawlers + no-JS visitors see real content; the app replaces
  *  it once JavaScript loads). Only real doc fields are shown. */
@@ -541,6 +584,7 @@ export function buildBookSummaryHtml(book, lang) {
     `<section data-prerender="book-summary" style="max-width:720px;margin:0 auto;padding:24px 16px;font-family:system-ui,sans-serif">` +
     `<h1>${e(book.title)}</h1>` +
     (facts.length > 0 ? `<p>${facts.join(' · ')}</p>` : '') +
+    `<p>${e(buildBookSummary(book, lang))}</p>` +
     `<p><a href="/${lang}/books">${lang === 'bn' ? '← লাইব্রেরি' : '← Library'}</a></p>` +
     `</section>`
   );

@@ -9,16 +9,16 @@
 // Mounted once in App.tsx. On every route change it applies the SEO
 // for that route (title, meta description, Open Graph, canonical,
 // Organization + WebSite + WebPage + Breadcrumb JSON-LD) from
-// lib/seo.ts. Routes with no SEO entry (auth, admin, dashboards,
-// /founder) render nothing — /founder owns its own SEO via
-// FounderPage, and the others are not indexable content.
+// lib/seo.ts. Routes with no SEO entry (auth, admin, dashboards)
+// render nothing — they are not indexable content. /founder resolves
+// in lib/seo.ts since Phase 2 (25 Nov 2026) and carries ProfilePage
+// + Person JSON-LD instead of the generic WebPage.
 //
-// Fallback (23 Nov 2026): when a path has no SEO entry and is NOT
-// /founder, RouteSeo applies resolveFallbackSeo — the HOME
-// title/description/canonical (the catch-all renders HomePage there)
-// plus robots noindex, nofollow — so junk URLs (/jobs/not-an-exam,
-// unknown slugs) never look indexable. It never changes what the
-// user sees.
+// Fallback (23 Nov 2026): when a path has no SEO entry, RouteSeo
+// applies resolveFallbackSeo — the HOME title/description/canonical
+// (the catch-all renders HomePage there) plus robots noindex,
+// nofollow — so junk URLs (/jobs/not-an-exam, unknown slugs) never
+// look indexable. It never changes what the user sees.
 //
 // resolveRouteSeo() accepts both /:lang-prefixed and bare legacy
 // paths; a lang prefix in the URL is the source of truth for the

@@ -34,6 +34,7 @@ export function fetchBooksFromRest(
   fetchImpl?: (url: string) => Promise<{ status: number; ok: boolean; json: () => Promise<unknown> }>,
 ): Promise<PrerenderBook[]>;
 export function buildBookHead(book: PrerenderBook, lang: string): string;
+export function buildBookSummary(book: PrerenderBook, lang: string): string;
 export function buildBookSummaryHtml(book: PrerenderBook, lang: string): string;
 export function rewriteInternalHrefs(html: string, lang: string): string;
 export function buildSitemapXml(urls: Array<{ loc: string; bn: string; en: string }>): string;

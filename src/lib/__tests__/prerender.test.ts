@@ -12,6 +12,8 @@ import { join } from 'node:path';
 import {
   PRERENDER_STATIC_PATHS,
   buildBookHead,
+  buildBookSummary,
+  buildBookSummaryHtml,
   buildRobotsTxt,
   buildSitemapXml,
   fetchBooksFromRest,
@@ -21,7 +23,7 @@ import {
   parseFirestoreRestDoc,
   rewriteInternalHrefs,
 } from '../../../scripts/prerender.mjs';
-import { bookSeoData } from '../seo';
+import { bookSeoData, buildBookSummary as buildBookSummaryTs } from '../seo';
 
 const BACKUP_PATH = join(process.cwd(), '..', 'backups', 'eduvelto-backup-20261124-014508.json');
 
@@ -31,15 +33,16 @@ function readSitemapPaths(): string[] {
 }
 
 describe('PRERENDER_STATIC_PATHS', () => {
-  it('covers every committed-sitemap URL except /founder, plus the new /books hub', () => {
+  it('covers every committed-sitemap URL, plus the new /books hub', () => {
     const sitemapPaths = readSitemapPaths();
     expect(sitemapPaths.length).toBe(136);
     for (const p of sitemapPaths) {
-      if (p === '/founder') continue; // FounderPage owns its SEO client-side; not prerendered.
       expect(PRERENDER_STATIC_PATHS, `sitemap path missing from prerender list: ${p}`).toContain(p);
     }
     expect(PRERENDER_STATIC_PATHS).toContain('/books');
-    expect(PRERENDER_STATIC_PATHS).not.toContain('/founder');
+    // /founder IS prerendered since Phase 2 (25 Nov 2026): its SEO
+    // moved from FounderPage's client-side useSeo into seo.ts.
+    expect(PRERENDER_STATIC_PATHS).toContain('/founder');
     expect(PRERENDER_STATIC_PATHS).not.toContain('/support'); // no route yet (Phase 2)
     expect(PRERENDER_STATIC_PATHS).not.toContain('/ai-teacher'); // noindexed by design
     expect(new Set(PRERENDER_STATIC_PATHS).size).toBe(PRERENDER_STATIC_PATHS.length);
@@ -109,8 +112,33 @@ describe('buildBookHead agrees with bookSeoData', () => {
       expect(head).toContain('hreflang="en" href="https://eduvelto.com/en/books/hons-211001"');
       expect(head).toContain('hreflang="x-default" href="https://eduvelto.com/bn/books/hons-211001"');
       expect(head).toContain('"@type":"Book"');
+      expect(head).toContain('"isAccessibleForFree":true');
       expect(head).toContain('History and Culture of Bangladesh and Bengalees');
     }
+  });
+
+  it('prerendered summary HTML carries the same paragraph as lib/seo.ts', () => {
+    const raw = JSON.parse(readFileSync(BACKUP_PATH, 'utf8'));
+    const { books } = normalizeBooksFixture(raw);
+    const book = books.find((b) => b.id === 'hons-211001');
+    expect(book).toBeDefined();
+    for (const lang of ['bn', 'en'] as const) {
+      const html = buildBookSummaryHtml(book!, lang);
+      expect(html).toContain('data-prerender="book-summary"');
+      // The prerendered paragraph IS the client-side paragraph:
+      // same formula in src/lib/seo.ts (buildBookSummary) and here.
+      expect(html).toContain(buildBookSummaryTs(book!, lang));
+      expect(html).toContain(buildBookSummary(book!, lang));
+    }
+  });
+
+  it('buildBookSummary (mjs) agrees with buildBookSummary (seo.ts)', () => {
+    const book = { id: 'x-1', title: 'Bare Book', chapterCount: 5 };
+    expect(buildBookSummary(book, 'bn')).toBe(buildBookSummaryTs(book, 'bn'));
+    expect(buildBookSummary(book, 'en')).toBe(buildBookSummaryTs(book, 'en'));
+    expect(buildBookSummary({ id: 'x-2', title: 'No Counts' }, 'bn')).toBe(
+      buildBookSummaryTs({ id: 'x-2', title: 'No Counts' }, 'bn'),
+    );
   });
 
   it('omits counts it does not have', () => {

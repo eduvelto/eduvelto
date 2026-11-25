@@ -1,5 +1,11 @@
 // Eduvelto — Founder profile page (21 Nov 2026, identity/founder-profile).
 //
+// SEO moved to src/lib/seo.ts (Phase 2, 25 Nov 2026): the page no
+// longer owns its SEO client-side via useSeo — /founder resolves in
+// resolveRouteSeo (STATIC_ROUTES + Person/ProfilePage JSON-LD) and
+// is prerendered. PERSON_JSON_LD / PROFILE_PAGE_JSON_LD are
+// re-exported below so founderJsonLd.test.ts keeps passing.
+//
 // Dedicated personal profile for Ali Hasan Mohammed Mizan, Founder &
 // CEO of Eduvelto. STAGING ONLY — publication requires the owner's
 // approval of the full preview (preview-final-report.md).
@@ -31,57 +37,15 @@
 //   the page states plainly that none are claimed.
 
 import { Link } from 'react-router-dom';
-import { useSeo } from '../lib/seo';
 import { useLanguage } from '../i18n/LanguageContext';
 
 const DARK_NAVY = '#041742';
 const GOLD = '#F5A623';
 const STAR_GOLD = '#F1B308';
 
-const CANONICAL = 'https://eduvelto.com/founder';
-
-export const PERSON_JSON_LD = {
-  '@context': 'https://schema.org',
-  '@type': 'Person',
-  '@id': 'https://eduvelto.com/founder#person',
-  name: 'Ali Hasan Mohammed Mizan',
-  alternateName: ['আলী হাসান মোহাম্মদ মিজান', 'AHM Mizan'],
-  description:
-    'Founder and CEO of Eduvelto, a free digital education platform from Bangladesh. English teacher at Tahsinul Ummah International Madrasa since 2023. Honours 3rd year English, National University.',
-  birthDate: '2005-02-21',
-  image: 'https://eduvelto.com/founder-photo.jpg',
-  jobTitle: 'Founder & CEO, Eduvelto',
-  worksFor: { '@type': 'Organization', name: 'Eduvelto', url: 'https://eduvelto.com' },
-  alumniOf: [
-    { '@type': 'EducationalOrganization', name: 'National University, Bangladesh' },
-    { '@type': 'EducationalOrganization', name: "Cox's Bazar City College" },
-  ],
-  knowsLanguage: ['bn', 'en'],
-  homeLocation: {
-    '@type': 'Place',
-    address: { '@type': 'PostalAddress', addressCountry: 'BD', addressLocality: "Cox's Bazar" },
-  },
-  url: CANONICAL,
-  sameAs: [
-    'https://www.facebook.com/ahmmmizan',
-    'https://www.youtube.com/@alihasanmdmizan',
-    'https://www.tiktok.com/@ahmmizan',
-  ],
-};
-
-const PROFILE_PAGE_JSON_LD = {
-  '@context': 'https://schema.org',
-  '@type': 'ProfilePage',
-  '@id': 'https://eduvelto.com/founder#webpage',
-  url: CANONICAL,
-  name: 'Ali Hasan Mohammed Mizan — Founder & CEO, Eduvelto',
-  description:
-    'Official profile of Ali Hasan Mohammed Mizan, Founder & CEO of Eduvelto — biography, founder story, vision, and official links.',
-  inLanguage: ['bn', 'en'],
-  mainEntity: { '@id': 'https://eduvelto.com/founder#person' },
-  about: { '@type': 'Organization', name: 'Eduvelto', url: 'https://eduvelto.com' },
-  isPartOf: { '@type': 'WebSite', name: 'Eduvelto', url: 'https://eduvelto.com' },
-};
+// Person + ProfilePage JSON-LD live in src/lib/seo.ts now (Phase 2,
+// 25 Nov 2026) — re-exported here so existing imports keep working.
+export { PERSON_JSON_LD, PROFILE_PAGE_JSON_LD } from '../lib/seo';
 
 export const ORGANIZATION_JSON_LD = {
   '@context': 'https://schema.org',
@@ -112,15 +76,6 @@ export const ORGANIZATION_JSON_LD = {
     'https://www.youtube.com/@EduveltoBD',
     'https://www.linkedin.com/company/eduvelto',
     'https://www.facebook.com/EduveltoBD',
-  ],
-};
-
-const BREADCRUMB_JSON_LD = {
-  '@context': 'https://schema.org',
-  '@type': 'BreadcrumbList',
-  itemListElement: [
-    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://eduvelto.com/' },
-    { '@type': 'ListItem', position: 2, name: 'Founder', item: CANONICAL },
   ],
 };
 
@@ -172,20 +127,6 @@ const bodyP: React.CSSProperties = { lineHeight: 1.8, margin: '0 0 12px' };
 
 export default function FounderPage() {
   const { lang, t } = useLanguage();
-  useSeo({
-    title:
-      lang === 'bn'
-        ? 'আলী হাসান মোহাম্মদ মিজান — প্রতিষ্ঠাতা ও সিইও, Eduvelto'
-        : 'Ali Hasan Mohammed Mizan — Founder & CEO, Eduvelto',
-    description:
-      lang === 'bn'
-        ? 'আলী হাসান মোহাম্মদ মিজান Eduvelto-র প্রতিষ্ঠাতা ও সিইও — বাংলাদেশের শিক্ষার্থীদের জন্য বিনামূল্যের ডিজিটাল শিক্ষা প্ল্যাটফর্ম। ইংরেজি শিক্ষক, অনার্স শিক্ষার্থী ও প্রতিষ্ঠাতা।'
-        : 'Ali Hasan Mohammed Mizan is the Founder & CEO of Eduvelto, a free digital education platform from Bangladesh. English teacher, Honours student, and founder.',
-    canonical: CANONICAL,
-    ogType: 'profile',
-    ogImage: 'https://eduvelto.com/founder-photo.jpg',
-    jsonLd: [PERSON_JSON_LD, PROFILE_PAGE_JSON_LD, ORGANIZATION_JSON_LD, BREADCRUMB_JSON_LD],
-  }, lang);
 
   return (
     <main style={{ fontFamily: 'system-ui, sans-serif' }}>

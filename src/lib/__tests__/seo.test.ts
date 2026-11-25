@@ -45,8 +45,9 @@
  *      exactly; Class 1–5 / 6–8 honestly say content has not arrived
  *      yet, the other three never claim that.
  *  (13) resolveFallbackSeo noindexes junk URLs with the home
- *      title/description/canonical, and is null for /founder;
- *      resolveRouteSeo still returns null for unknown slugs.
+ *      title/description/canonical; resolveRouteSeo still returns
+ *      null for unknown slugs. /founder resolves since Phase 2
+ *      (25 Nov 2026) — its SEO moved into SeoHead data.
  *  (14) every sitemap <url> carries a <lastmod> (audit SEO-007).
  *  (15) forbidden-claim sweep over every sitemap URL + all 23 job +
  *      9 NU subject pages: no "#1" claim; practice/mock mentions
@@ -81,6 +82,7 @@ import {
   resolveRouteSeo,
   resolveFallbackSeo,
   bookSeoData,
+  buildBookSummary,
   ORGANIZATION_JSON_LD,
   WEBSITE_JSON_LD,
   ogLocaleForLang,
@@ -275,27 +277,29 @@ describe('resolveRouteSeo — public routes', () => {
     expect(seo!.canonical).toBe(`${SITE_URL}/bn`);
   });
 
-  it('every sitemap URL except /founder resolves to real SEO', () => {
+  it('every sitemap URL resolves to real SEO', () => {
     for (const path of SITEMAP_URLS) {
-      if (path === '/founder') continue;
       const seo = resolveRouteSeo(path);
       expect(seo, `no SEO for sitemap URL ${path}`).not.toBeNull();
       expect(seo!.canonical).toBe(`${SITE_URL}/bn${path === '/' ? '' : path}`);
       expect(seo!.title.length).toBeGreaterThan(10);
       expect(seo!.description.length).toBeGreaterThan(40);
-      expect(seo!.ogImage).toBe(`${SITE_URL}/og-image.jpg`);
+      expect(seo!.ogImage).toBe(
+        // /founder is the one exception: its og:image is the
+        // approved founder photo (was hardcoded in useSeo).
+        path === '/founder' ? `${SITE_URL}/founder-photo.jpg` : `${SITE_URL}/og-image.jpg`,
+      );
     }
   });
 
   it('every sitemap title is unique', () => {
     const titles = new Map<string, string>();
     for (const path of SITEMAP_URLS) {
-      if (path === '/founder') continue;
       const seo = resolveRouteSeo(path)!;
       expect(titles.has(seo.title), `duplicate title "${seo.title}" at ${path}`).toBe(false);
       titles.set(seo.title, path);
     }
-    expect(titles.size).toBe(SITEMAP_URLS.length - 1);
+    expect(titles.size).toBe(SITEMAP_URLS.length);
   });
 
   it('no title or description claims a verified #1 rank', () => {
@@ -740,7 +744,7 @@ describe('resolveRouteSeo — SEO 50–100 pages (23 Nov 2026)', () => {
     }
   });
 
-  it('resolveFallbackSeo noindexes junk URLs with the home canonical, never /founder', () => {
+  it('resolveFallbackSeo noindexes junk URLs with the home canonical', () => {
     const home = resolveRouteSeo('/')!;
     const junk = resolveFallbackSeo('/jobs/primary');
     expect(junk).not.toBeNull();
@@ -748,7 +752,10 @@ describe('resolveRouteSeo — SEO 50–100 pages (23 Nov 2026)', () => {
     expect(junk!.canonical).toBe(`${SITE_URL}/bn/`);
     expect(junk!.title).toBe(home.title);
     expect(junk!.description).toBe(home.description);
-    expect(resolveFallbackSeo('/founder')).toBeNull();
+    // /founder resolves in resolveRouteSeo since Phase 2, so the
+    // fallback is never applied to it — but the function itself no
+    // longer special-cases it either.
+    expect(resolveFallbackSeo('/founder')!.robots).toBe('noindex, nofollow');
     const login = resolveFallbackSeo('/login');
     expect(login).not.toBeNull();
     expect(login!.robots).toBe('noindex, nofollow');
@@ -781,7 +788,7 @@ describe('resolveRouteSeo — SEO 50–100 pages (23 Nov 2026)', () => {
 
   it('forbidden-claim sweep over every sitemap URL + all 23 job + 9 NU subject pages + 8 noindexed pages', () => {
     const swept = new Set([
-      ...SITEMAP_URLS.filter((p) => p !== '/founder'),
+      ...SITEMAP_URLS,
       ...allJobSubjectPaths().map((p) => p.path),
       ...allNuSubjectPaths(),
       // MERGE 23 Nov 2026 (AdSense Part 1 onto main 9a65524): the 8
@@ -804,12 +811,12 @@ describe('resolveRouteSeo — SEO 50–100 pages (23 Nov 2026)', () => {
     ]);
     // AdSense Part 1 (23 Nov 2026): subject pages are mostly OUT of
     // the sitemap now (noindexed thin pages) but are STILL swept —
-    // the sweep is the sitemap minus /founder, plus the 22 job
+    // the sweep is the sitemap, plus the 22 job
     // subject pages and 9 NU subject pages not in the sitemap
     // (BCS English is in both, counted once), plus the 8 noindexed
     // public pages above (none is in the sitemap or a subject path),
     // plus the 2 thin class pages.
-    expect(swept.size).toBe(SITEMAP_URLS.length + 40);
+    expect(swept.size).toBe(SITEMAP_URLS.length + 41);
     for (const path of swept) {
       const seo = resolveRouteSeo(path);
       expect(seo, `no SEO for swept path ${path}`).not.toBeNull();
@@ -873,8 +880,9 @@ describe('resolveRouteSeo — SEO 50–100 pages (23 Nov 2026)', () => {
 });
 
 describe('resolveRouteSeo — non-content routes resolve to null', () => {
-  it('founder is owned by FounderPage', () => {
-    expect(resolveRouteSeo('/founder')).toBeNull();
+  it('/founder resolves since Phase 2 (SEO moved into SeoHead data)', () => {
+    // FounderPage no longer owns its SEO client-side via useSeo.
+    expect(resolveRouteSeo('/founder')).not.toBeNull();
   });
 
   it('auth, admin, CEO and dashboards are not content', () => {
@@ -1278,6 +1286,91 @@ describe('resolveRouteSeo — brand-SEO wave 1 (24 Nov 2026)', () => {
     expect(items).toHaveLength(15);
   });
 
+describe('/founder SEO (Phase 2, 25 Nov 2026)', () => {
+  it('resolves in both languages with profile ogType + founder photo', () => {
+    const bn = resolveRouteSeo('/founder')!;
+    expect(bn.title).toBe('আলী হাসান মোহাম্মদ মিজান — প্রতিষ্ঠাতা ও সিইও, Eduvelto');
+    expect(bn.canonical).toBe('https://eduvelto.com/bn/founder');
+    expect(bn.ogType).toBe('profile');
+    expect(bn.ogImage).toBe('https://eduvelto.com/founder-photo.jpg');
+    expect(bn.robots).toBeUndefined();
+    const en = resolveRouteSeo('/founder', 'en')!;
+    expect(en.title).toBe('Ali Hasan Mohammed Mizan — Founder & CEO, Eduvelto');
+    expect(en.canonical).toBe('https://eduvelto.com/en/founder');
+    expect(en.ogType).toBe('profile');
+    expect(en.ogImage).toBe('https://eduvelto.com/founder-photo.jpg');
+  });
+
+  it('carries ProfilePage + Person JSON-LD, no generic WebPage, no duplicate #webpage @id', () => {
+    for (const lang of ['bn', 'en'] as const) {
+      const seo = resolveRouteSeo('/founder', lang)!;
+      const types = jsonLdTypes(seo);
+      expect(types).toContain('ProfilePage');
+      expect(types).toContain('Person');
+      expect(types).not.toContain('WebPage');
+      const ld = seo.jsonLd as Array<Record<string, unknown>>;
+      const ids = ld.map((o) => o['@id']).filter(Boolean);
+      expect(new Set(ids).size).toBe(ids.length);
+      const profile = ld.find((o) => o['@type'] === 'ProfilePage')!;
+      expect(profile['@id']).toBe(`${seo.canonical}#webpage`);
+      expect(profile['mainEntity']).toEqual({ '@id': 'https://eduvelto.com/founder#person' });
+      expect(profile['inLanguage']).toEqual([lang]);
+      expect(profile['name']).toBe(seo.title);
+      expect(profile['description']).toBe(seo.description);
+      const person = ld.find((o) => o['@type'] === 'Person')!;
+      expect(person['name']).toBe('Ali Hasan Mohammed Mizan');
+      expect(person['birthDate']).toBe('2005-02-21');
+      expect(person['sameAs']).not.toContain('https://www.instagram.com/ahmmmizan');
+    }
+  });
+
+  it('breadcrumb is Home > Founder in both languages', () => {
+    expect(breadcrumbNames(resolveRouteSeo('/founder')!)).toEqual(['হোম', 'প্রতিষ্ঠাতা']);
+    expect(breadcrumbNames(resolveRouteSeo('/founder', 'en')!)).toEqual(['Home', 'Founder']);
+  });
+});
+
+describe('buildBookSummary (Phase 2, 25 Nov 2026)', () => {
+  const BOOK = {
+    id: 'hons-211001',
+    title: 'History and Culture of Bangladesh and Bengalees (From Ancients to 2000 AD)',
+    subject: 'Bangla',
+    chapterCount: 3,
+    questionCount: 26,
+  };
+
+  it('builds the rich paragraph in both languages from real metadata', () => {
+    expect(buildBookSummary(BOOK, 'bn')).toBe(
+      'History and Culture of Bangladesh and Bengalees (From Ancients to 2000 AD) — Bangla। এই বইটি Eduvelto ডিজিটাল লাইব্রেরিতে সম্পূর্ণ ফ্রিতে পড়ুন। এই বইটিতে মোট 3টি অধ্যায় এবং অনুশীলনের জন্য 26টি প্রশ্ন রয়েছে।',
+    );
+    expect(buildBookSummary(BOOK, 'en')).toBe(
+      'History and Culture of Bangladesh and Bengalees (From Ancients to 2000 AD) — Bangla. Read this book completely free in the Eduvelto digital library. This book has 3 chapters and 26 practice questions in total.',
+    );
+  });
+
+  it('omits counts it does not have, never invents them', () => {
+    const bare = { id: 'x-1', title: 'Bare Book' };
+    expect(buildBookSummary(bare, 'bn')).toBe(
+      'Bare Book। এই বইটি Eduvelto ডিজিটাল লাইব্রেরিতে সম্পূর্ণ ফ্রিতে পড়ুন।',
+    );
+    expect(buildBookSummary(bare, 'en')).toBe(
+      'Bare Book. Read this book completely free in the Eduvelto digital library.',
+    );
+    const chaptersOnly = { ...bare, chapterCount: 5 };
+    expect(buildBookSummary(chaptersOnly, 'bn')).toContain('মোট 5টি অধ্যায় রয়েছে।');
+    expect(buildBookSummary(chaptersOnly, 'bn')).not.toContain('প্রশ্ন');
+    const questionsOnly = { ...bare, questionCount: 40 };
+    expect(buildBookSummary(questionsOnly, 'en')).toContain('40 practice questions in total.');
+    expect(buildBookSummary(questionsOnly, 'en')).not.toContain('chapters');
+  });
+
+  it('bookSeoData Book JSON-LD marks the book free', () => {
+    const ld = bookSeoData(BOOK, 'bn').jsonLd as Array<Record<string, unknown>>;
+    const book = ld.find((o) => o['@type'] === 'Book')!;
+    expect(book['isAccessibleForFree']).toBe(true);
+  });
+});
+
   it('the 4 trust pages resolve with the draft titles', () => {
     const expected: Record<string, { title: string; crumb: string }> = {
       '/editorial-policy': { title: 'সম্পাদকীয় নীতি | Eduvelto', crumb: 'সম্পাদকীয় নীতি' },
@@ -1304,7 +1397,6 @@ describe('resolveRouteSeo — brand-SEO wave 1 (24 Nov 2026)', () => {
 
   it('no sitemap title or description contains "সেরা" or "best"', () => {
     for (const path of SITEMAP_URLS) {
-      if (path === '/founder') continue;
       const seo = resolveRouteSeo(path)!;
       expect(seo.title, `title ${path}`).not.toContain('সেরা');
       expect(seo.description, `description ${path}`).not.toContain('সেরা');
@@ -1319,7 +1411,6 @@ describe('resolveRouteSeo — English SEO (24 Nov 2026, language system)', () =>
 
   it('every sitemap URL resolves in English with no Bangla in title/description and a clean canonical', () => {
     for (const path of SITEMAP_URLS) {
-      if (path === '/founder') continue;
       const seo = resolveRouteSeo(path, 'en');
       expect(seo, path).not.toBeNull();
       expect(seo!.title, path).not.toMatch(BN);
@@ -1332,7 +1423,6 @@ describe('resolveRouteSeo — English SEO (24 Nov 2026, language system)', () =>
   it('English titles are unique across sitemap URLs', () => {
     const titles = new Set<string>();
     for (const path of SITEMAP_URLS) {
-      if (path === '/founder') continue;
       const seo = resolveRouteSeo(path, 'en')!;
       expect(titles.has(seo.title), `${path} duplicates title "${seo.title}"`).toBe(false);
       titles.add(seo.title);
@@ -1355,7 +1445,6 @@ describe('resolveRouteSeo — English SEO (24 Nov 2026, language system)', () =>
 
   it('English copy never claims a #1 rank', () => {
     for (const path of SITEMAP_URLS) {
-      if (path === '/founder') continue;
       const seo = resolveRouteSeo(path, 'en')!;
       expect(seo.title, path).not.toMatch(FORBIDDEN_RANK_CLAIM);
       expect(seo.description, path).not.toMatch(FORBIDDEN_RANK_CLAIM);
@@ -1424,7 +1513,7 @@ describe('resolveRouteSeo — English SEO (24 Nov 2026, language system)', () =>
     expect(fb.title).not.toMatch(BN);
     expect(fb.canonical).toBe(`${SITE_URL}/en/`);
     expect(fb.robots).toBe('noindex, nofollow');
-    expect(resolveFallbackSeo('/founder', 'en')).toBeNull();
+    expect(resolveFallbackSeo('/founder', 'en')!.robots).toBe('noindex, nofollow');
   });
 
   it('WebPage JSON-LD inLanguage follows the language', () => {
@@ -1471,7 +1560,6 @@ describe('resolveRouteSeo — brand-SEO wave 2 (24 Nov 2026)', () => {
 
   it('no English sitemap title or description contains "best" or "সেরা"', () => {
     for (const path of SITEMAP_URLS) {
-      if (path === '/founder') continue;
       const seo = resolveRouteSeo(path, 'en')!;
       expect(seo.title, `title ${path}`).not.toMatch(/best/i);
       expect(seo.description, `description ${path}`).not.toMatch(/best/i);
@@ -1629,13 +1717,14 @@ describe('brand-SEO wave 12: search-result length limits, all routes', () => {
   // for every other route. This test enforces both, so a future copy
   // change can never silently push a title past 60 chars or a
   // description past 160 in either language. Path set mirrors the
-  // wave-12 scan: sitemap URLs (minus /founder, which returns null
-  // by design) + job exam tabs + job subjects + NU subjects +
-  // opportunity detail pages for published seeds.
+  // wave-12 scan: sitemap URLs + job exam tabs + job subjects +
+  // NU subjects + opportunity detail pages for published seeds.
+  // /founder is included since Phase 2 (25 Nov 2026) — it resolves
+  // in SeoHead data now, so its title/description must fit too.
   function allTrimPaths(): string[] {
     const paths = new Set<string>();
     for (const p of SITEMAP_URLS) {
-      if (p !== '/founder') paths.add(p);
+      paths.add(p);
     }
     for (const exam of JOB_EXAMS) {
       paths.add(`/jobs/${exam.slug}`);
@@ -1708,10 +1797,10 @@ describe('resolveRouteSeo — bilingual /:lang canonicals (Phase 1, 25 Nov 2026)
     expect(resolveRouteSeo('/learn')!.canonical).toBe('https://eduvelto.com/bn/learn');
   });
 
-  it('/founder still resolves to null under /:lang', () => {
-    expect(resolveRouteSeo('/bn/founder')).toBeNull();
-    expect(resolveRouteSeo('/en/founder')).toBeNull();
-    expect(resolveFallbackSeo('/bn/founder')).toBeNull();
+  it('/founder resolves under /:lang with lang-prefixed canonicals', () => {
+    expect(resolveRouteSeo('/bn/founder')!.canonical).toBe('https://eduvelto.com/bn/founder');
+    expect(resolveRouteSeo('/en/founder')!.canonical).toBe('https://eduvelto.com/en/founder');
+    expect(resolveFallbackSeo('/bn/founder')!.robots).toBe('noindex, nofollow');
   });
 
   it('fallback SEO on a lang-prefixed junk URL keeps the lang + noindex', () => {

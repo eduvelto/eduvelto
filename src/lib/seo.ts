@@ -139,6 +139,63 @@ export const WEBSITE_JSON_LD = {
   publisher: { '@id': 'https://eduvelto.com#organization' },
 };
 
+/** Founder Person structured data — moved here from FounderPage
+ *  (Phase 2, 25 Nov 2026) so /founder SEO lives in SeoHead data
+ *  and the page can be prerendered. Verbatim from the page: DOB
+ *  21 February 2005 is owner-approved for publication (21 Nov
+ *  07:24); birthplace is NOT approved (no birthPlace field);
+ *  sameAs lists the founder's PERSONAL profiles only — Instagram
+ *  @ahmmmizan is NOT listed (suspended 23 Nov 2026, appeal
+ *  exhausted; restore only if reinstated). */
+export const PERSON_JSON_LD = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  '@id': 'https://eduvelto.com/founder#person',
+  name: 'Ali Hasan Mohammed Mizan',
+  alternateName: ['আলী হাসান মোহাম্মদ মিজান', 'AHM Mizan'],
+  description:
+    'Founder and CEO of Eduvelto, a free digital education platform from Bangladesh. English teacher at Tahsinul Ummah International Madrasa since 2023. Honours 3rd year English, National University.',
+  birthDate: '2005-02-21',
+  image: 'https://eduvelto.com/founder-photo.jpg',
+  jobTitle: 'Founder & CEO, Eduvelto',
+  worksFor: { '@type': 'Organization', name: 'Eduvelto', url: 'https://eduvelto.com' },
+  alumniOf: [
+    { '@type': 'EducationalOrganization', name: 'National University, Bangladesh' },
+    { '@type': 'EducationalOrganization', name: "Cox's Bazar City College" },
+  ],
+  knowsLanguage: ['bn', 'en'],
+  homeLocation: {
+    '@type': 'Place',
+    address: { '@type': 'PostalAddress', addressCountry: 'BD', addressLocality: "Cox's Bazar" },
+  },
+  url: 'https://eduvelto.com/founder',
+  sameAs: [
+    'https://www.facebook.com/ahmmmizan',
+    'https://www.youtube.com/@alihasanmdmizan',
+    'https://www.tiktok.com/@ahmmizan',
+  ],
+};
+
+/** Founder ProfilePage structured data — moved here from
+ *  FounderPage (Phase 2, 25 Nov 2026). The English reference copy;
+ *  resolveRouteSeo overrides @id/url/name/description/inLanguage
+ *  per language, so the Bn page never carries English JSON-LD.
+ *  The @id here is the BARE founder URL; the resolver uses the
+ *  lang-prefixed canonical (#webpage) like every other page. */
+export const PROFILE_PAGE_JSON_LD = {
+  '@context': 'https://schema.org',
+  '@type': 'ProfilePage',
+  '@id': 'https://eduvelto.com/founder#webpage',
+  url: 'https://eduvelto.com/founder',
+  name: 'Ali Hasan Mohammed Mizan — Founder & CEO, Eduvelto',
+  description:
+    'Official profile of Ali Hasan Mohammed Mizan, Founder & CEO of Eduvelto — biography, founder story, vision, and official links.',
+  inLanguage: ['bn', 'en'],
+  mainEntity: { '@id': 'https://eduvelto.com/founder#person' },
+  about: { '@type': 'Organization', name: 'Eduvelto', url: 'https://eduvelto.com' },
+  isPartOf: { '@type': 'WebSite', name: 'Eduvelto', url: 'https://eduvelto.com' },
+};
+
 function setMetaByName(name: string, content: string): void {
   let el = document.querySelector<HTMLMetaElement>(`meta[name="${name}"]`);
   if (!el) {
@@ -258,8 +315,9 @@ export function useSeo(seo: SeoData, lang: 'bn' | 'en' = 'bn'): void {
 // (/quiz/, /books/, /lessons/, /exam, /progress, /directory, …)
 // resolve to null — they are disallowed in robots.txt and keep the
 // static home fallback, so they never present themselves as content.
-// /founder also resolves to null: FounderPage owns its SEO (Person +
-// ProfilePage JSON-LD) and must not be overwritten.
+// /founder resolves here too (Phase 2, 25 Nov 2026): its SEO moved
+// from FounderPage's client-side useSeo into this map + the Person /
+// ProfilePage JSON-LD above, so the page can be prerendered.
 // ---------------------------------------------------------------------------
 
 type RouteSeoEntry = {
@@ -269,6 +327,11 @@ type RouteSeoEntry = {
   titleEn: string;
   descriptionEn: string;
   crumbEn: string;
+  /** Phase 2 (25 Nov 2026): only /founder sets these — ogType
+   *  'profile' + founder-photo.jpg. Everything else keeps the
+   *  defaults (ogType 'website', og-image.jpg). */
+  ogType?: string;
+  ogImage?: string;
 };
 
 const STATIC_ROUTES: Record<string, RouteSeoEntry> = {
@@ -603,6 +666,23 @@ const STATIC_ROUTES: Record<string, RouteSeoEntry> = {
     descriptionEn:
       'Eduvelto is a free digital education platform for the students of Bangladesh — lessons, exams and a digital library in one place.',
     crumbEn: 'About Us',
+  },
+  // Founder profile (Phase 2, 25 Nov 2026): SEO moved here from
+  // FounderPage's client-side useSeo (title/description are that
+  // owner-approved copy). The Bn description is trimmed to fit the
+  // <=160-char search-result limit — the page copy is unchanged.
+  // ogType 'profile' + founder-photo.jpg (was hardcoded in useSeo).
+  '/founder': {
+    title: 'আলী হাসান মোহাম্মদ মিজান — প্রতিষ্ঠাতা ও সিইও, Eduvelto',
+    description:
+      'আলী হাসান মোহাম্মদ মিজান Eduvelto-র প্রতিষ্ঠাতা ও সিইও — বাংলাদেশের শিক্ষার্থীদের জন্য বিনামূল্যের ডিজিটাল শিক্ষা প্ল্যাটফর্ম। ইংরেজি শিক্ষক ও অনার্স শিক্ষার্থী',
+    crumb: 'প্রতিষ্ঠাতা',
+    titleEn: 'Ali Hasan Mohammed Mizan — Founder & CEO, Eduvelto',
+    descriptionEn:
+      'Ali Hasan Mohammed Mizan is the Founder & CEO of Eduvelto, a free digital education platform from Bangladesh. English teacher, Honours student, and founder.',
+    crumbEn: 'Founder',
+    ogType: 'profile',
+    ogImage: 'https://eduvelto.com/founder-photo.jpg',
   },
   '/contact': {
     title: 'যোগাযোগ — Eduvelto',
@@ -1921,8 +2001,9 @@ const OPPORTUNITY_SEO_TITLES: Record<string, { bn: string; en: string }> = {
 
 /**
  * Resolve SEO for a pathname. Returns null for routes that must not
- * present themselves as indexed content (/founder owns its own SEO;
- * auth/admin/app routes are not content pages).
+ * present themselves as indexed content (auth/admin/app routes are
+ * not content pages). /founder resolves here since Phase 2
+ * (25 Nov 2026) — its SEO moved from FounderPage's useSeo.
  */
 export function resolveRouteSeo(pathname: string, lang: 'bn' | 'en' = 'bn'): SeoData | null {
   // Phase 1 (25 Nov 2026): public routes live under /:lang. A lang
@@ -1932,7 +2013,6 @@ export function resolveRouteSeo(pathname: string, lang: 'bn' | 'en' = 'bn'): Seo
   const stripped = stripLangPrefix(pathname.replace(/\/+$/, '') || '/');
   if (stripped.lang) lang = stripped.lang;
   const path = stripped.path;
-  if (path === '/founder') return null;
 
   let entry: RouteSeoEntry | null = STATIC_ROUTES[path] ?? null;
   let crumbs: string[] = [];
@@ -2058,7 +2138,26 @@ export function resolveRouteSeo(pathname: string, lang: 'bn' | 'en' = 'bn'): Seo
     inLanguage: [lang],
     isPartOf: { '@id': 'https://eduvelto.com#website' },
   };
-  const jsonLd: unknown[] = [ORGANIZATION_JSON_LD, WEBSITE_JSON_LD, webPage, breadcrumbFor(path, crumbs, lang)];
+  // Founder (Phase 2, 25 Nov 2026): the generic WebPage is replaced
+  // by the lang-aware ProfilePage + the Person — never both, or the
+  // page would carry two objects with the same `#webpage` @id.
+  const jsonLd: unknown[] =
+    path === '/founder'
+      ? [
+          ORGANIZATION_JSON_LD,
+          WEBSITE_JSON_LD,
+          {
+            ...PROFILE_PAGE_JSON_LD,
+            '@id': `${canonical}#webpage`,
+            url: canonical,
+            name: lang === 'bn' ? entry.title : entry.titleEn,
+            description: lang === 'bn' ? entry.description : entry.descriptionEn,
+            inLanguage: [lang],
+          },
+          PERSON_JSON_LD,
+          breadcrumbFor(path, crumbs, lang),
+        ]
+      : [ORGANIZATION_JSON_LD, WEBSITE_JSON_LD, webPage, breadcrumbFor(path, crumbs, lang)];
   if (path === '/jobs') {
     // ItemList (23 Nov 2026, Gemini fold-in): the hub renders a real
     // card grid of all 15 exam hubs — list them with their real URLs.
@@ -2558,8 +2657,8 @@ export function resolveRouteSeo(pathname: string, lang: 'bn' | 'en' = 'bn'): Seo
     title: lang === 'bn' ? entry.title : entry.titleEn,
     description: lang === 'bn' ? entry.description : entry.descriptionEn,
     canonical,
-    ogType: 'website',
-    ogImage: OG_IMAGE_URL,
+    ogType: entry.ogType ?? 'website',
+    ogImage: entry.ogImage ?? OG_IMAGE_URL,
     // Noindex (23 Nov 2026, AdSense Part 1): thin/empty pages stay
     // live but must not be indexed. Absent = indexable.
     ...(NOINDEX_STATIC.has(path) || isNoindexedSubjectPage(path)
@@ -2580,13 +2679,11 @@ export function resolveRouteSeo(pathname: string, lang: 'bn' | 'en' = 'bn'): Seo
  * URL the HOME title/description/canonical (it IS rendering the
  * homepage) plus robots noindex, nofollow, so Google never indexes
  * the junk URL. RouteSeo applies it whenever resolveRouteSeo returns
- * null, EXCEPT /founder (FounderPage owns its own SEO and must not
- * be touched). It never changes what the user sees.
+ * null. It never changes what the user sees.
  */
 export function resolveFallbackSeo(pathname: string, lang: 'bn' | 'en' = 'bn'): SeoData | null {
   const stripped = stripLangPrefix(pathname.replace(/\/+$/, '') || '/');
   if (stripped.lang) lang = stripped.lang;
-  if (stripped.path === '/founder') return null;
   const home = STATIC_ROUTES['/'];
   return {
     title: lang === 'bn' ? home.title : home.titleEn,
@@ -2655,6 +2752,7 @@ export function bookSeoData(
       url: canonical,
       name: book.title,
       inLanguage: ['bn', 'en'],
+      isAccessibleForFree: true,
       isPartOf: { '@id': 'https://eduvelto.com#website' },
       ...(book.subject ? { about: book.subject } : {}),
     },
@@ -2670,4 +2768,50 @@ export function bookSeoData(
     },
   ];
   return { title, description, canonical, path, jsonLd };
+}
+
+// ---------------------------------------------------------------------------
+// Book summary paragraph (Phase 2, 25 Nov 2026).
+//
+// ONE formula, two renderers: the client-side BookPage renders this
+// text in the book Card, and the prerender script mirrors it in
+// plain JS (buildBookSummary in scripts/prerender.mjs) inside
+// buildBookSummaryHtml, so the prerendered and client-rendered
+// pages carry the SAME paragraph. Only fields present on the doc
+// are used — counts are omitted when absent, never invented.
+// The book's own title is never translated.
+// ---------------------------------------------------------------------------
+
+export function buildBookSummary(book: BookSeoDoc, lang: 'bn' | 'en' = 'bn'): string {
+  const facts: string[] = [];
+  if (book.subject) facts.push(book.subject);
+  if (book.classLevel) facts.push(book.classLevel);
+  if (book.board) facts.push(book.board);
+  if (book.program) facts.push(book.program);
+  if (book.department && book.department !== book.subject) facts.push(book.department);
+  if (book.paperCode) facts.push(lang === 'bn' ? `কোড ${book.paperCode}` : `Code ${book.paperCode}`);
+  const hasChapters = typeof book.chapterCount === 'number';
+  const hasQuestions = typeof book.questionCount === 'number';
+  if (lang === 'bn') {
+    const lead = facts.length > 0 ? `${book.title} — ${facts.join(' · ')}। ` : `${book.title}। `;
+    let counts = '';
+    if (hasChapters && hasQuestions) {
+      counts = ` এই বইটিতে মোট ${book.chapterCount}টি অধ্যায় এবং অনুশীলনের জন্য ${book.questionCount}টি প্রশ্ন রয়েছে।`;
+    } else if (hasChapters) {
+      counts = ` এই বইটিতে মোট ${book.chapterCount}টি অধ্যায় রয়েছে।`;
+    } else if (hasQuestions) {
+      counts = ` এই বইটিতে অনুশীলনের জন্য মোট ${book.questionCount}টি প্রশ্ন রয়েছে।`;
+    }
+    return `${lead}এই বইটি Eduvelto ডিজিটাল লাইব্রেরিতে সম্পূর্ণ ফ্রিতে পড়ুন।${counts}`;
+  }
+  const lead = facts.length > 0 ? `${book.title} — ${facts.join(' · ')}. ` : `${book.title}. `;
+  let counts = '';
+  if (hasChapters && hasQuestions) {
+    counts = ` This book has ${book.chapterCount} chapters and ${book.questionCount} practice questions in total.`;
+  } else if (hasChapters) {
+    counts = ` This book has ${book.chapterCount} chapters in total.`;
+  } else if (hasQuestions) {
+    counts = ` This book has ${book.questionCount} practice questions in total.`;
+  }
+  return `${lead}Read this book completely free in the Eduvelto digital library.${counts}`;
 }
