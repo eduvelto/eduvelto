@@ -5133,8 +5133,21 @@ service cloud.firestore {
     // exactly — PRICING FINAL (owner 25 Nov 09:34): per-paper 49 /
     // monthly 199 / annual tiers 150, 180, 210, 300, 450, 390, 75,
     // 210, 450, 750, 900, 1050, 1200, 810, 1110, 1200, 1350, 1500
-    // (30% of Eproshnobank, i.e. 70% off, rounded to the nearest ৳10).
+    // (30% of the reference price, i.e. 70% off, rounded to the
+    // nearest ৳10 — owner 25 Nov 17:28: no other website's name
+    // appears anywhere on the site).
     // Only a moderator may decide an order — and only the decide fields.
+    // Phase 2 (25 Nov 2026): the buyer also sends the last 3 digits
+    // of the sender's number (senderLast3, exactly 3 chars — the
+    // admin matches them in the bKash/Nagad app), the order source
+    // (onsite form vs WhatsApp-linked), and an optional contribution
+    // coupon (verified by the admin at review, never self-applied).
+    // The unlock window (proStart/proEnd) and the single-paper
+    // credit (remainingUses) are set by the moderator AT APPROVAL —
+    // a new order must not carry them (they are NOT in the create
+    // onlyKeys). The buyer may decrement remainingUses on their OWN
+    // approved single-paper order by exactly 1 (one clean download),
+    // only while > 0 and unexpired — the rules enforce the shape.
     match /qpgProOrders/{orderId} {
       allow read: if signedIn() && (resource.data.uid == uid() || isModerator());
       allow create: if signedIn() && callerActive()
@@ -5167,15 +5180,39 @@ service cloud.firestore {
         && request.resource.data.paymentMethod in ['bkash', 'nagad']
         && isStr(request.resource.data.trxId, 30)
         && request.resource.data.trxId.size() >= 6
+        && isStr(request.resource.data.senderLast3, 3)
+        && request.resource.data.senderLast3.size() == 3
+        && isOptStr(request.resource.data.get('senderWhatsapp', null), 20)
+        && isOptStr(request.resource.data.get('couponCode', null), 20)
+        && request.resource.data.source in ['onsite', 'whatsapp']
         && request.resource.data.status == 'pending-review'
         && request.resource.data.createdAt is timestamp
-        && onlyKeys(['uid', 'plan', 'amountBdt', 'paymentMethod', 'trxId', 'status', 'createdAt', 'decidedBy', 'decidedAt', 'decisionNote']);
+        && onlyKeys(['uid', 'plan', 'amountBdt', 'paymentMethod', 'trxId', 'senderLast3', 'senderWhatsapp', 'couponCode', 'status', 'source', 'createdAt']);
       allow update: if isModerator()
         && resource.data.status == 'pending-review'
         && request.resource.data.status in ['approved', 'rejected']
         && request.resource.data.decidedBy == uid()
         && request.resource.data.decidedAt is timestamp
-        && changedKeys().hasOnly(['status', 'decidedBy', 'decidedAt', 'decisionNote']);
+        && isOptTs(request.resource.data, 'proStart')
+        && isOptTs(request.resource.data, 'proEnd')
+        // An approval MUST carry the unlock window (and one credit
+        // for a single-paper order) — otherwise the buyer paid and
+        // got nothing. A rejection carries neither.
+        && (request.resource.data.status == 'rejected'
+          || (request.resource.data.proStart is timestamp
+            && request.resource.data.proEnd is timestamp
+            && (request.resource.data.plan != 'per-paper' || request.resource.data.remainingUses == 1)))
+        && changedKeys().hasOnly(['status', 'decidedBy', 'decidedAt', 'decisionNote', 'proStart', 'proEnd', 'remainingUses']);
+      // Buyer single-paper credit decrement (one clean download).
+      allow update: if signedIn() && callerActive()
+        && resource.data.uid == uid()
+        && resource.data.status == 'approved'
+        && resource.data.plan == 'per-paper'
+        && resource.data.remainingUses > 0
+        && resource.data.proEnd is timestamp
+        && resource.data.proEnd > request.time
+        && request.resource.data.remainingUses == resource.data.remainingUses - 1
+        && changedKeys().hasOnly(['remainingUses']);
       allow delete: if false;
     }
     // qpgReports/{reportId}: "Report Typo/Error" on a generator
@@ -5205,6 +5242,155 @@ service cloud.firestore {
         && request.resource.data.get('rewardStatus', 'none') in ['none', 'pending', 'granted']
         && request.resource.data.get('rewardDays', 7) == 7
         && changedKeys().hasOnly(['status', 'resolvedBy', 'resolvedAt', 'resolutionNote', 'rewardStatus', 'rewardDays', 'rewardGrantedAt', 'rewardExpiresAt']);
+      allow delete: if false;
+    }
+
+    // qpgBoards/{boardId}: Smartboard boards (Phase 2, spec §2).
+    // A board is a paper turned into slides + Canvas 2D annotations.
+    // Owner-only write; a share link (shareEnabled) grants READ-ONLY
+    // access to any signed-in user (spec §8.14 proposal: logged-in
+    // students only — never public). The owner is a moderator under
+    // the rules, so the backup export's owner list-read works (the
+    // isModerator() tail). Board use is free; PDF export + share link
+    // are Pro-gated in the UI (spec §8.13 proposal) — the rules are
+    // the outer bound, the Pro check is a product rule.
+    match /qpgBoards/{boardId} {
+      allow read: if signedIn() && (resource.data.ownerUid == uid() || isModerator() || resource.data.get('shareEnabled', false) == true);
+      allow create: if signedIn() && callerActive()
+        && request.resource.data.ownerUid == uid()
+        && isStr(request.resource.data.title, 200)
+        && isOptStr(request.resource.data.get('subject', null), 100)
+        && isOptStr(request.resource.data.get('classLabel', null), 100)
+        && isOptStr(request.resource.data.get('setCode', null), 10)
+        && request.resource.data.layout in ['separate', 'whole-paper']
+        && request.resource.data.paperRef is map
+        && request.resource.data.slides is list
+        && request.resource.data.slides.size() >= 1
+        && request.resource.data.slides.size() <= 120
+        && request.resource.data.shareEnabled == false
+        && request.resource.data.createdAt is timestamp
+        && request.resource.data.updatedAt is timestamp
+        && onlyKeys(['ownerUid', 'ownerName', 'title', 'subject', 'classLabel', 'setCode', 'layout', 'paperRef', 'slides', 'shareEnabled', 'createdAt', 'updatedAt']);
+      allow update: if signedIn() && callerActive()
+        && (resource.data.ownerUid == uid() || isModerator())
+        && request.resource.data.updatedAt is timestamp
+        && changedKeys().hasOnly(['title', 'subject', 'classLabel', 'setCode', 'layout', 'slides', 'shareEnabled', 'updatedAt']);
+      allow delete: if signedIn() && callerActive()
+        && (resource.data.ownerUid == uid() || isModerator());
+    }
+    // qpgContributions/{contributionId}: teacher question submissions
+    // (Phase 2, spec §3). DRAFT (pending_review) on create — never
+    // auto-published, never auto-verified, never auto-awarded. Only a
+    // moderator may decide (approve → points + coupon; reject →
+    // reason required). The contributor reads only their own
+    // submissions; the leaderboard reads qpgContributorStats, never
+    // this collection. A submission claiming to be a board question
+    // without a verifiable source is rejected at review (the client
+    // validator blocks a bare claim at submit).
+    match /qpgContributions/{contributionId} {
+      allow read: if signedIn() && (resource.data.contributorUid == uid() || isModerator());
+      allow create: if signedIn() && callerActive()
+        && request.resource.data.contributorUid == uid()
+        && isStr(request.resource.data.contributorName, 100)
+        && isOptStr(request.resource.data.get('institution', null), 200)
+        && request.resource.data.stream in ['general', 'madrasah']
+        && isStr(request.resource.data.classId, 100)
+        && isStr(request.resource.data.subjectId, 100)
+        && isStr(request.resource.data.chapterId, 200)
+        && isStr(request.resource.data.topic, 200)
+        && request.resource.data.type in ['mcq', 'cq', 'short', 'multi-completion', 'situation-set', 'picture-based']
+        && isStr(request.resource.data.questionText, 5000)
+        && request.resource.data.options is list
+        && request.resource.data.options.size() <= 4
+        && isStr(request.resource.data.explanation, 5000)
+        && isOptStr(request.resource.data.get('source', null), 500)
+        && request.resource.data.difficulty in ['easy', 'medium', 'hard']
+        && request.resource.data.cognitiveLevel in ['unspecified', 'knowledge', 'comprehension', 'application', 'higher']
+        && request.resource.data.nature in ['unspecified', 'mathematical', 'theoretical']
+        && request.resource.data.ownWordingConfirmed == true
+        && request.resource.data.status == 'pending_review'
+        && request.resource.data.createdAt is timestamp
+        && onlyKeys(['contributorUid', 'contributorName', 'institution', 'stream', 'classId', 'subjectId', 'chapterId', 'topic', 'type', 'questionText', 'options', 'correctAnswer', 'explanation', 'source', 'difficulty', 'cognitiveLevel', 'nature', 'ownWordingConfirmed', 'status', 'createdAt']);
+      allow update: if isModerator()
+        && resource.data.status == 'pending_review'
+        && request.resource.data.status in ['approved', 'rejected']
+        && request.resource.data.reviewedByUid == uid()
+        && request.resource.data.reviewedAt is timestamp
+        && (request.resource.data.status == 'approved'
+          || request.resource.data.get('rejectReason', null) in ['wrong-answer', 'copied-verbatim', 'already-exists', 'off-syllabus', 'low-quality', 'board-claim-unverified'])
+        && isOptTs(request.resource.data, 'couponExpiresAt')
+        && changedKeys().hasOnly(['status', 'reviewedByUid', 'reviewedAt', 'rejectReason', 'rejectNote', 'pointsAwarded', 'couponCode', 'couponExpiresAt', 'couponUsedAt', 'couponUsedOrderId']);
+      allow delete: if false;
+    }
+    // qpgContributorStats/{uid}: one doc per contributor (Phase 2,
+    // spec §3). Public-to-signed-in read (the leaderboard — names +
+    // institutions only, never phone/email). Created on first submit
+    // (totalSubmitted 1, everything else 0); the contributor only
+    // ever increments their own totalSubmitted by 1; the moderator
+    // updates approved/points/level/rejected at decision time.
+    match /qpgContributorStats/{statsUid} {
+      allow read: if signedIn();
+      allow create: if signedIn() && callerActive()
+        && statsUid == uid()
+        && request.resource.data.uid == uid()
+        && request.resource.data.totalSubmitted == 1
+        && request.resource.data.approved == 0
+        && request.resource.data.rejected == 0
+        && request.resource.data.points == 0
+        && request.resource.data.level == 'নবীন'
+        && request.resource.data.updatedAt is timestamp
+        && onlyKeys(['uid', 'displayName', 'institution', 'totalSubmitted', 'approved', 'rejected', 'points', 'level', 'updatedAt']);
+      // Contributor: only their own totalSubmitted +1 per submit.
+      allow update: if signedIn() && callerActive()
+        && statsUid == uid()
+        && resource.data.uid == uid()
+        && request.resource.data.totalSubmitted == resource.data.totalSubmitted + 1
+        && request.resource.data.updatedAt is timestamp
+        && changedKeys().hasOnly(['totalSubmitted', 'updatedAt']);
+      // Moderator: the decide write (approved/points/level/rejected).
+      allow update: if isModerator()
+        && request.resource.data.updatedAt is timestamp
+        && changedKeys().hasOnly(['totalSubmitted', 'approved', 'rejected', 'points', 'level', 'updatedAt']);
+      allow delete: if false;
+    }
+    // qpgCustomOrders/{orderId}: Firestore-backed custom-paper
+    // tracking (Phase 2, spec §6). TRACKING ONLY — fulfilment stays
+    // HUMAN (owner/team builds the paper by hand; no delivery time
+    // is promised). Buyer creates pending_payment at the fixed
+    // ৳49/paper; only a moderator moves the status forward
+    // (pending_payment → paid → building → delivered), one step at
+    // a time, never backwards.
+    match /qpgCustomOrders/{orderId} {
+      allow read: if signedIn() && (resource.data.uid == uid() || isModerator());
+      allow create: if signedIn() && callerActive()
+        && request.resource.data.uid == uid()
+        && isStr(request.resource.data.buyerName, 100)
+        && isOptStr(request.resource.data.get('buyerWhatsapp', null), 20)
+        && isStr(request.resource.data.className, 100)
+        && isStr(request.resource.data.subject, 100)
+        && isOptStr(request.resource.data.get('chapters', null), 1000)
+        && isOptStr(request.resource.data.get('questionTypes', null), 1000)
+        && request.resource.data.totalMarks is int
+        && request.resource.data.totalMarks > 0
+        && isOptStr(request.resource.data.get('markDistribution', null), 2000)
+        && isOptStr(request.resource.data.get('examTitle', null), 200)
+        && isOptStr(request.resource.data.get('institutionName', null), 200)
+        && isStr(request.resource.data.dateNeeded, 50)
+        && isOptStr(request.resource.data.get('instructions', null), 2000)
+        && request.resource.data.priceBdt == 49
+        && isOptStr(request.resource.data.get('trxId', null), 30)
+        && request.resource.data.status == 'pending_payment'
+        && request.resource.data.source in ['onsite', 'whatsapp']
+        && request.resource.data.submittedAt is timestamp
+        && onlyKeys(['uid', 'buyerName', 'buyerWhatsapp', 'className', 'subject', 'chapters', 'questionTypes', 'totalMarks', 'markDistribution', 'examTitle', 'institutionName', 'dateNeeded', 'instructions', 'priceBdt', 'trxId', 'status', 'source', 'submittedAt']);
+      allow update: if isModerator()
+        && ((resource.data.status == 'pending_payment' && request.resource.data.status == 'paid')
+          || (resource.data.status == 'paid' && request.resource.data.status == 'building')
+          || (resource.data.status == 'building' && request.resource.data.status == 'delivered'))
+        && request.resource.data.updatedByUid == uid()
+        && isOptTs(request.resource.data, 'paidAt')
+        && isOptTs(request.resource.data, 'deliveredAt')
+        && changedKeys().hasOnly(['status', 'updatedByUid', 'paidAt', 'deliveredAt']);
       allow delete: if false;
     }
 

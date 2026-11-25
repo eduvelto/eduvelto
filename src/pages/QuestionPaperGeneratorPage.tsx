@@ -23,13 +23,17 @@
 // watermark-free export, one-click Answer Key sheet. Institution NAME
 // as text is free; the custom LOGO image is Pro.
 
-import { useMemo, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useEffect, useMemo, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { PageShell } from '../components/PageShell';
 import { AlertBox, Button, Card, Chip } from '../components/ui';
 import { useAuth } from '../lib/auth';
+import { db } from '../firebase';
 import { ProtectedContentWrapper } from '../components/ProtectedContentWrapper';
 import { QuestionPaperDownloadDialog } from '../components/QuestionPaperDownloadDialog';
+import { getQpgUsage, loadCachedProStatus } from '../lib/qpgFirestore';
+import { QPG_PRO_LOCKED, type QpgProStatus } from '../lib/qpgProOrders';
+import { savePaperForSmartboard } from '../lib/qpgSmartboard';
 import {
   QPG_CHEAPEST_ANNUAL_BDT,
   QPG_COGNITIVE_OPTIONS,
@@ -103,9 +107,44 @@ function fieldStyle(): React.CSSProperties {
 
 export default function QuestionPaperGeneratorPage() {
   const { user } = useAuth();
+  const navigate = useNavigate();
   const uid = user?.uid ?? 'guest';
   const userLabel = user?.email ?? user?.uid ?? 'guest';
-  const usage = useMemo(() => getDemoUsage(uid), [uid]);
+  const isGuest = uid === 'guest';
+  // Free quota: Firestore qpgUsage for signed-in users (Phase 2,
+  // spec §5); guests keep the local demo counter, and the demo counter
+  // is also the fallback while the qpg rules are not yet deployed.
+  const [usage, setUsage] = useState(() => {
+    const d = getDemoUsage(uid);
+    return { used: d.used, limit: d.limit, remaining: d.remaining };
+  });
+  const [usageSource, setUsageSource] = useState<'firestore' | 'demo'>('demo');
+  // Pro status: one cached load per session (Phase 2, spec §5).
+  const [proStatus, setProStatus] = useState<QpgProStatus>(QPG_PRO_LOCKED);
+
+  useEffect(() => {
+    if (isGuest || !db) return;
+    let alive = true;
+    void getQpgUsage(db, uid)
+      .then((r) => {
+        if (!alive) return;
+        setUsage({ used: r.freeDownloads, limit: QPG_FREE_MONTHLY_LIMIT, remaining: Math.max(0, QPG_FREE_MONTHLY_LIMIT - r.freeDownloads) });
+        setUsageSource('firestore');
+      })
+      .catch(() => {
+        // Rules not deployed yet — keep the demo counter.
+      });
+    void loadCachedProStatus(db, uid)
+      .then((s) => {
+        if (alive) setProStatus(s);
+      })
+      .catch(() => {
+        // Rules not deployed yet — Pro stays locked, honestly.
+      });
+    return () => {
+      alive = false;
+    };
+  }, [isGuest, uid]);
 
   // --- Track + hierarchy state -------------------------------------
   const [stream, setStream] = useState<QpgStream>('general');
@@ -440,7 +479,7 @@ export default function QuestionPaperGeneratorPage() {
   };
 
   return (
-    <PageShell titleBn="প্রশ্নপত্র জেনারেটর" titleEn="Question Paper Generator" wide>
+    <PageShell titleBn="প্রশ্নপত্র জেনারেটর" titleEn="Question Paper Generator" wide className="ev-qpg-theme">
       <AlertBox tone="info">
         ডেমো (আজকের MVP): যাচাইকৃত প্রশ্ন মাত্র ৩৫টি — BCS ইংরেজি ব্যাচ ১ (মালিক-যাচাইকৃত, ২২ নভেম্বর
         ২০২৬)। Class 3–8 + মাদ্রাসার বই সংগ্রহ ও যাচাই চলছে; যাচাই শেষে অধ্যায়ভিত্তিক প্রশ্ন এখানে যোগ
@@ -448,9 +487,20 @@ export default function QuestionPaperGeneratorPage() {
         <Link to="/jobs/bcs/practice/english">যাচাইকৃত ৩৫টি প্রশ্ন দেখুন</Link>
       </AlertBox>
       <p style={{ fontSize: 13, color: '#555', margin: '12px 0 4px' }}>
-        ফ্রি: প্রতি মাসে {QPG_FREE_MONTHLY_LIMIT}টি পেপার (এই মাসে ব্যবহার {usage.used}/{usage.limit} — ডেমো
-        কোটা, স্থানীয়)। Pro: প্রতি পেপার ৳{QPG_PRO_PER_PAPER_BDT} অথবা ৳{QPG_PRO_MONTHLY_BDT}/মাস অথবা
+        ফ্রি: প্রতি মাসে {QPG_FREE_MONTHLY_LIMIT}টি পেপার (এই মাসে ব্যবহার {usage.used}/{usage.limit}
+        {usageSource === 'demo' ? ' — ডেমো কোটা, স্থানীয়' : ''})। Pro: প্রতি পেপার ৳{QPG_PRO_PER_PAPER_BDT} অথবা ৳{QPG_PRO_MONTHLY_BDT}/মাস অথবা
         ক্লাসভিত্তিক বার্ষিক ৳{QPG_CHEAPEST_ANNUAL_BDT} থেকে — {QPG_PRICE_CLAIM_BN}।{' '}
+      </p>
+      <p style={{ fontSize: 13, margin: '0 0 12px' }}>
+        <Link to="/sheet-builder">শিট বিল্ডার (অধ্যায় → অনুশীলনী)</Link>
+        {' · '}
+        <Link to="/smartboard">স্মার্টবোর্ড</Link>
+        {' · '}
+        <Link to="/contribute">প্রশ্ন জমা দিন</Link>
+        {' · '}
+        <Link to="/my-orders">আমার অর্ডার</Link>
+        {' · '}
+        <Link to="/custom-paper">কাস্টম পেপার (৳৪৯)</Link>
       </p>
 
       {/* Step 1 — Stream */}
@@ -1308,6 +1358,16 @@ export default function QuestionPaperGeneratorPage() {
           ) : null}
           <div style={{ marginTop: 12, display: 'flex', gap: 8, flexWrap: 'wrap' }}>
             <Button onClick={() => setShowDownload(true)}>Generate Question Paper — ডাউনলোডের অপশন দেখুন</Button>
+            <Button
+              variant="outline"
+              onClick={() => {
+                if (savePaperForSmartboard(paper)) {
+                  navigate('/smartboard');
+                }
+              }}
+            >
+              Smartboard-এ খুলুন
+            </Button>
             <Button variant="outline" onClick={() => window.print()}>
               প্রিন্ট করুন (প্রিভিউ — প্রথম {Math.min(PREVIEW_QUESTIONS, paper.questions.length)}টি প্রশ্ন;
               পুরো পেপার PDF ডাউনলোড করুন)
@@ -1333,6 +1393,7 @@ export default function QuestionPaperGeneratorPage() {
           paper={paper}
           uid={uid}
           includeOmrSheet={includeOmrSheet}
+          proStatus={proStatus}
           onClose={() => setShowDownload(false)}
         />
       ) : null}

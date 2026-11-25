@@ -135,13 +135,35 @@ describe('A-Z MVP adds wired in the generator + dialog', () => {
     expect(GENERATOR_SRC).toContain('এই প্রশ্নটি নিন');
   });
 
-  it('DOCX download (Pro, locked) exists in the dialog; docx loads dynamically only', () => {
+  it('DOCX download (Pro, derived status) exists in the dialog; docx loads dynamically only', () => {
     expect(DIALOG_SRC).toContain('Word (.docx) ডাউনলোড (Pro)');
     expect(DIALOG_SRC).toContain('এডিটেবল টেক্সট (.docx)');
     expect(DIALOG_SRC).toContain('downloadCleanPaperDocx');
-    expect(DIALOG_SRC).toContain('const proUnlocked = false');
+    expect(DIALOG_SRC).toContain('downloadCleanPaperPdf');
+    // Phase 2: Pro status is DERIVED from approved orders (cached
+    // per session), never hard-coded false.
+    expect(DIALOG_SRC).toContain('loadCachedProStatus');
+    expect(DIALOG_SRC).toContain('proStatus');
+    expect(DIALOG_SRC).not.toContain('const proUnlocked = false');
     expect(DOCX_SRC).toContain("await import('docx')");
     expect(DOCX_SRC).not.toMatch(/^import .* from 'docx'/m);
     expect(DOCX_SRC).toContain('proUnlocked');
+  });
+
+  it('TrxID form submits to Firestore (Phase 2); no time promise in the dialog', () => {
+    expect(DIALOG_SRC).toContain('submitQpgProOrder');
+    expect(DIALOG_SRC).toContain('senderLast3');
+    expect(DIALOG_SRC).toContain('TrxID জমা দিন');
+    expect(DIALOG_SRC).toContain('permission-denied');
+    // §8.2 undecided: no turnaround promise may appear in the UI.
+    expect(DIALOG_SRC).not.toContain('১২ ঘণ্টা');
+    expect(DIALOG_SRC).not.toContain('12 ঘণ্টা');
+  });
+
+  it('free quota uses Firestore qpgUsage for signed-in users (Phase 2)', () => {
+    expect(DIALOG_SRC).toContain('recordQpgFreeDownload');
+    expect(DIALOG_SRC).toContain('getQpgUsage');
+    // Guests still keep the local demo counter.
+    expect(DIALOG_SRC).toContain('recordDemoFreeDownload');
   });
 });

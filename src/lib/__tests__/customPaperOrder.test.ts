@@ -95,12 +95,13 @@ describe('custom paper page (/custom-paper)', () => {
     expect(PAGE_SRC).not.toContain('8801975225751');
     expect(PAGE_SRC).not.toContain('wa.me/8801975225751');
     expect(PAGE_SRC).not.toContain('wa.me/eduvelto');
-    // Human service, never automated; no Firestore storage in this
-    // build (the header comment says so explicitly — assert no actual
-    // Firestore API usage, not the word itself).
+    // Human service, never automated; Phase 2 (25 Nov 2026): a
+    // signed-in buyer's order is ALSO recorded in Firestore
+    // (qpgCustomOrders) for tracking — the WhatsApp text stays the
+    // primary channel, and guests still order via WhatsApp only.
     expect(PAGE_SRC).toContain('মানুষের সেবা');
-    expect(PAGE_SRC).toContain('NOT\n// stored in Firestore');
-    expect(PAGE_SRC).not.toMatch(/getFirestore|addDoc\(|setDoc\(|collection\(db|from '\.\.\/lib\/firebase'/);
+    expect(PAGE_SRC).toContain('submitQpgCustomOrder');
+    expect(PAGE_SRC).toContain('buildQpgCustomOrder');
   });
 
   it('is linked from the pricing page with the 70% display', () => {

@@ -84,11 +84,21 @@ describe('dark-mode CSS contract', () => {
     // match is `border-top-color` on the spinner, which the dark
     // override block handles).
     expect(css).not.toMatch(/(?<![\w-])color: var\(--forest\);/);
-    // Exactly one `background: #fff;` and one
+    // Exactly two `background: #fff;` and one
     // `border: 1px solid #e5e8e5;` remain: the Coming-Soon chip,
-    // which is deliberately hardcoded light (see the test below).
-    expect(css.match(/background: #fff;/g)?.length ?? 0).toBe(1);
+    // which is deliberately hardcoded light (see the test below),
+    // plus the QPG paper-preview guard (`.ev-qpg-theme
+    // .qpg-print-area`), which MUST stay black-on-white in both
+    // themes for print/scan fidelity (Phase 2, spec §5 GUARD).
+    expect(css.match(/background: #fff;/g)?.length ?? 0).toBe(2);
     expect(css.match(/border: 1px solid #e5e8e5;/g)?.length ?? 0).toBe(1);
+  });
+
+  it('keeps the QPG paper preview hardcoded white in both themes (print/scan fidelity)', () => {
+    expect(css).toContain('.ev-qpg-theme .qpg-print-area {');
+    expect(css).toMatch(/\.ev-qpg-theme \.qpg-print-area \{[^}]*background: #fff;/);
+    // No dark-mode override may recolor it.
+    expect(css).not.toMatch(/html\[data-theme="dark"\] \.ev-qpg-theme \.qpg-print-area \{/);
   });
 
   it('keeps the Coming-Soon chip hardcoded light (its parent tint is light in both themes)', () => {

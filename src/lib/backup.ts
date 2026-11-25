@@ -262,7 +262,7 @@ export const BACKUP_COLLECTIONS: string[] = [
   // Added 23 Nov 2026 (forced app update: the single config/appVersion
   // doc — latest/min version — must be in every backup, or a restore
   // would silently drop the forced-update gate. Read doc-by-doc, like
-  // settings: the read rule is `docId == 'appVersion'`, so a list/count
+  // settings: the read rule is docId == appVersion, so a list/count
   // over the collection is denied — see DOC_BY_DOC below.)
   'config',
   // Added 25 Nov 2026 (Question Paper Generator MVP, Milestone 2.5:
@@ -273,6 +273,10 @@ export const BACKUP_COLLECTIONS: string[] = [
   'qpgUsage',
   'qpgProOrders',
   'qpgReports',
+  'qpgBoards',
+  'qpgContributions',
+  'qpgContributorStats',
+  'qpgCustomOrders',
 ];
 
 /**

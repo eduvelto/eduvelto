@@ -9,14 +9,21 @@
 // the page builds the order text → the buyer copies it and sends it on
 // WhatsApp (eduvelto.com/whatsapp redirect — the raw number is never
 // shown) → pays ৳49/paper via bKash/Nagad + TrxID → the owner/team
-// builds the paper and delivers the PDF via WhatsApp. The order is NOT
-// stored in Firestore in this build (deliberate — a new collection
-// would deepen the BRT-11 donations drift before the merge; see the
-// MVP report §5). Firestore-backed order tracking is a Phase 2
-// follow-up. No delivery time is promised anywhere on this page.
+// builds the paper and delivers the PDF via WhatsApp. Phase 2
+// (25 Nov 2026): when the buyer is signed in, the order is ALSO
+// recorded in Firestore (qpgCustomOrders) so the buyer can track it
+// on /my-orders and the admin can move it through pending_payment →
+// paid → building → delivered. The WhatsApp text stays the primary
+// channel (guests and rule-not-deployed fall back to WhatsApp only).
+// No delivery time is promised anywhere on this page.
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { PageShell } from '../components/PageShell';
 import { AlertBox, Button, Card, Chip, LinkButton } from '../components/ui';
+import { useAuth } from '../lib/auth';
+import { db } from '../firebase';
+import { submitQpgCustomOrder } from '../lib/qpgFirestore';
+import { buildQpgCustomOrder } from '../lib/qpgCustomOrders';
 import {
   QPG_CUSTOM_PAPER_BDT,
   QPG_CUSTOM_PAPER_THEIR_MAX_BDT,
@@ -54,11 +61,14 @@ function Field(props: { label: string; children: React.ReactNode; hint?: string 
 }
 
 export default function CustomPaperPage() {
+  const { user } = useAuth();
+  const uid = user?.uid ?? 'guest';
   const [order, setOrder] = useState<CustomPaperOrder>(emptyCustomPaperOrder);
   const [problems, setProblems] = useState<string[]>([]);
   const [orderText, setOrderText] = useState('');
   const [copied, setCopied] = useState(false);
   const [copyError, setCopyError] = useState('');
+  const [tracked, setTracked] = useState(false);
 
   const set = <K extends keyof CustomPaperOrder>(key: K, value: CustomPaperOrder[K]) =>
     setOrder((o) => ({ ...o, [key]: value }));
@@ -68,11 +78,37 @@ export default function CustomPaperPage() {
     setProblems(found);
     setCopied(false);
     setCopyError('');
+    setTracked(false);
     if (found.length > 0) {
       setOrderText('');
       return;
     }
     setOrderText(buildCustomPaperOrderText(order));
+    // Phase 2 tracking (signed-in buyers only): record the order so
+    // its status is visible on /my-orders and in the admin queue.
+    // A failed write (rules not deployed yet) changes nothing — the
+    // WhatsApp text below is the real order either way.
+    if (uid !== 'guest' && db) {
+      const doc = buildQpgCustomOrder({
+        uid,
+        buyerName: order.buyerName,
+        buyerWhatsapp: order.buyerWhatsapp || undefined,
+        className: order.className,
+        subject: order.subject,
+        chapters: order.chapters,
+        questionTypes: order.questionTypes,
+        totalMarks: order.totalMarks,
+        markDistribution: order.markDistribution,
+        examTitle: order.examTitle,
+        institutionName: order.institutionName,
+        dateNeeded: order.dateNeeded,
+        instructions: order.instructions,
+        source: 'onsite',
+      });
+      void submitQpgCustomOrder(db, doc)
+        .then(() => setTracked(true))
+        .catch(() => undefined);
+    }
   };
 
   const onCopy = async () => {
@@ -243,6 +279,12 @@ export default function CustomPaperPage() {
             </a>
           </div>
           {copyError ? <p style={{ fontSize: 13, color: '#a00' }}>{copyError}</p> : null}
+          {tracked ? (
+            <p style={{ fontSize: 13, color: '#14532d' }}>
+              অর্ডারটি রেকর্ডে জমা হয়েছে — অবস্থা <Link to="/my-orders">আমার অর্ডার</Link> পাতায় দেখতে
+              পাবেন।
+            </p>
+          ) : null}
           <p style={{ fontSize: 13, color: '#555', lineHeight: 1.7 }}>
             কপি করা লেখাটি WhatsApp চ্যাটে পেস্ট করে পাঠান। অর্ডার পেলে টিম WhatsApp-এ নিশ্চিত করবে।
           </p>
