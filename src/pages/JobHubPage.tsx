@@ -574,9 +574,18 @@ export default function JobHubPage() {
                         : t({ bn: 'বেসিক প্রশ্ন (উত্তর ও ব্যাখ্যাসহ) অনুশীলন চালু হলে এখানে আসবে।', en: 'Basic questions (with answer and explanation) will appear here once practice runs.' })}
                     </p>
                     {def.slug === 'bcs' ? (
-                      <Link to="/jobs/bcs/practice/english" style={{ fontWeight: 600 }}>
-                        {t({ bn: 'BCS English অনুশীলন দেখুন →', en: 'See BCS English practice →' })}
-                      </Link>
+                      <>
+                        <Link to="/jobs/bcs/practice/english" style={{ fontWeight: 600 }}>
+                          {t({ bn: 'BCS English অনুশীলন দেখুন →', en: 'See BCS English practice →' })}
+                        </Link>
+                        <br />
+                        {/* Phase 4: Daily 5-Question Free Quiz lives on
+                            the homepage (#daily-quiz) — no login, same
+                            35 verified questions, practice only. */}
+                        <Link to="/#daily-quiz" style={{ fontWeight: 600 }}>
+                          {t({ bn: 'প্রতিদিনের ফ্রি কুইজ খেলুন →', en: 'Play the daily free quiz →' })}
+                        </Link>
+                      </>
                     ) : null}
                   </Card>
                 </Reveal>

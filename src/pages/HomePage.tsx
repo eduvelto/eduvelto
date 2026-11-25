@@ -47,6 +47,8 @@ import AdSlot from '../components/AdSlot';
 import HeroGreeting from '../components/HeroGreeting';
 import { useAuth } from '../lib/auth';
 import { JobsSection } from '../components/JobCards';
+import DailyQuizWidget from '../components/DailyQuizWidget';
+import HomeBookSearchResults from '../components/HomeBookSearchResults';
 import { useLanguage } from '../i18n/LanguageContext';
 import { listQuizAttempts, listSubjectProgress } from '../lib/progress';
 import { getAllPublishedBooksCached, type Book } from '../lib/content';
@@ -577,6 +579,12 @@ export default function HomePage() {
             <SearchIcon />
           </button>
         </form>
+        {/* Phase 4: instant live book results (mobile). The dropdown
+            only appears once ≥2 characters are typed; the compact
+            index loads lazily on first typing, 0 Firestore reads. */}
+        <div className="ev-home-live-results-mobile">
+          <HomeBookSearchResults query={searchText} books={books} />
+        </div>
 
         {/* Hero: light gradient + wordmark, NO photos (see file header). */}
         <section className="ev-home-hero" aria-label={t({ bn: 'Eduvelto', en: 'Eduvelto' })}>
@@ -607,6 +615,12 @@ export default function HomePage() {
             />
             <button type="submit">{t({ bn: 'খুঁজুন', en: 'Search' })}</button>
           </form>
+          {/* Phase 4: instant live book results (desktop hero). Same
+              lazy compact index as the mobile box — 0 Firestore reads
+              per keystroke; results link to the book pages only. */}
+          <div className="ev-home-live-results-desktop">
+            <HomeBookSearchResults query={searchText} books={books} />
+          </div>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10, marginTop: 18 }}>
             <Link to={user ? '/dashboard' : '/register'} className="ev-btn ev-btn-gold" style={{ textDecoration: 'none' }}>
               {t({ bn: 'এখনই শুরু করুন →', en: 'Start now →' })}
@@ -886,6 +900,11 @@ export default function HomePage() {
           )}
         </section>
 
+        {/* Phase 4: Daily 5-Question Free Quiz — no login. Draws
+            ONLY from the 35 verified public BCS English questions
+            (see src/lib/dailyQuiz.ts); never a real exam or a mock. */}
+        <DailyQuizWidget />
+
         {/* Stats — REAL numbers only (see file header). Hidden when
             the book list did not load: an offline browser can resolve
             the Firestore query from an empty local cache, which would
@@ -1084,16 +1103,3 @@ export default function HomePage() {
     </>
   );
 }
-import HomeBookSearchResults from '../components/HomeBookSearchResults';
-        {/* Phase 4: instant live book results (mobile). The dropdown
-            only appears once ≥2 characters are typed; the compact
-            index loads lazily on first typing, 0 Firestore reads. */}
-        <div className="ev-home-live-results-mobile">
-          <HomeBookSearchResults query={searchText} books={books} />
-        </div>
-          {/* Phase 4: instant live book results (desktop hero). Same
-              lazy compact index as the mobile box — 0 Firestore reads
-              per keystroke; results link to the book pages only. */}
-          <div className="ev-home-live-results-desktop">
-            <HomeBookSearchResults query={searchText} books={books} />
-          </div>
