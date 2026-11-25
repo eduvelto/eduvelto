@@ -1,11 +1,12 @@
 // Eduvelto — AnnouncementTicker tests (owner 25 Nov 2026 10:03:
 // the ticker REPLACES the ayah bar on the homepage, directly below
-// the Navigation Menu).
+// the Navigation Menu; owner 25 Nov 18:01: ALL real features in the
+// banner, and the ayat in Arabic ONLY).
 //
 // renderToString runs in plain node (no jsdom — the repo has none),
 // so window/document are faked per scenario, exactly like
-// LanguageContext.test.tsx. Asserts: the exact ayat strings, our
-// offers only (never their stats), the links, the 4-copy seamless
+// LanguageContext.test.tsx. Asserts: the exact Arabic-only ayat,
+// ALL our real features + our offers, the links, the 4-copy seamless
 // track, and the respectful-display CSS (slow marquee, reduced
 // motion stops it).
 import { describe, expect, it, vi } from 'vitest';
@@ -16,11 +17,8 @@ import { resolve } from 'node:path';
 import {
   ANNOUNCEMENT_TICKER_ITEMS,
   TICKER_AYAT_AR,
-  TICKER_AYAT_ATTR_BN,
-  TICKER_AYAT_ATTR_EN,
-  TICKER_AYAT_BN,
-  TICKER_AYAT_EN,
   TICKER_TRACK_COPIES,
+  type AnnouncementTickerItem,
 } from '../AnnouncementTicker';
 
 vi.mock('../../lib/auth', () => ({
@@ -28,6 +26,14 @@ vi.mock('../../lib/auth', () => ({
 }));
 
 const CSS_SRC = readFileSync(resolve(__dirname, '../../index.css'), 'utf8');
+
+// Removed 25 Nov 18:01 (Arabic-only ayat rule) — these strings must
+// appear NOWHERE in the rendered ticker, in either language.
+const REMOVED_AYAT_BN = 'পড়ো তোমার রবের নামে, যিনি সৃষ্টি করেছেন।';
+const REMOVED_AYAT_EN = 'Read in the name of your Lord who created.';
+const REMOVED_ATTR_BN = 'সূরা আলাক, আয়াত ১।';
+const REMOVED_ATTR_EN = 'Surah Al-Alaq, Ayah 1.';
+const REMOVED_AYAT_STRINGS = [REMOVED_AYAT_BN, REMOVED_AYAT_EN, REMOVED_ATTR_BN, REMOVED_ATTR_EN];
 
 function setupWindow(stored: string | null) {
   const store: Record<string, string> = {};
@@ -57,22 +63,35 @@ async function renderTicker(stored: string | null): Promise<string> {
   );
 }
 
-describe('AnnouncementTicker content (owner 25 Nov 10:03)', () => {
-  it('shows the exact Al-Alaq ayah 1 (Arabic + Bangla + attribution) in Bangla mode', async () => {
+function featureItems(): Extract<AnnouncementTickerItem, { kind: 'feature' }>[] {
+  return ANNOUNCEMENT_TICKER_ITEMS.filter(
+    (i): i is Extract<AnnouncementTickerItem, { kind: 'feature' }> => i.kind === 'feature',
+  );
+}
+
+describe('AnnouncementTicker content (owner 25 Nov 10:03 + 18:01)', () => {
+  it('shows the Al-Alaq ayah 1 in Arabic ONLY — no translation, no attribution', async () => {
     const html = await renderTicker('bn');
     expect(html).toContain(TICKER_AYAT_AR);
-    expect(html).toContain(TICKER_AYAT_BN);
-    expect(html).toContain(TICKER_AYAT_ATTR_BN);
     // The Arabic runs in its own rtl span — never reshaped by the LTR flow.
     expect(html).toContain('lang="ar"');
     expect(html).toContain('dir="rtl"');
+    // One ayat item per track copy, and its ONLY span is the Arabic one.
+    expect(html.match(/ev-ticker-item-ayat/g)?.length).toBe(TICKER_TRACK_COPIES);
+    expect(html).not.toContain('ev-ticker-ayat-text');
+    expect(html).not.toContain('ev-ticker-ayat-attr');
+    // No Bangla/English translation or attribution anywhere in the ticker.
+    for (const removed of REMOVED_AYAT_STRINGS) {
+      expect(html).not.toContain(removed);
+    }
   });
 
-  it('shows the English ayat + attribution in English mode', async () => {
+  it('is Arabic-only in English mode too', async () => {
     const html = await renderTicker('en');
     expect(html).toContain(TICKER_AYAT_AR);
-    expect(html).toContain(TICKER_AYAT_EN);
-    expect(html).toContain(TICKER_AYAT_ATTR_EN);
+    for (const removed of REMOVED_AYAT_STRINGS) {
+      expect(html).not.toContain(removed);
+    }
   });
 
   it('rotates OUR offers only, linked to our pages', async () => {
@@ -86,6 +105,27 @@ describe('AnnouncementTicker content (owner 25 Nov 10:03)', () => {
     // English mode: the same offer, still with no competitor named.
     const htmlEn = await renderTicker('en');
     expect(htmlEn).toContain('70% off all question papers');
+  });
+
+  it('rotates ALL our real features, each linked to its page', async () => {
+    const features = featureItems();
+    expect(features.length).toBe(12);
+    const html = await renderTicker('bn');
+    for (const f of features) {
+      expect(html).toContain(f.bn);
+      expect(html).toContain(`href="${f.href}"`);
+    }
+    // English mode: the same features in English.
+    const htmlEn = await renderTicker('en');
+    for (const f of features) {
+      expect(htmlEn).toContain(f.en);
+    }
+    // The library item carries the live counts (real numbers only).
+    expect(html).toContain('৬০৯টি বই');
+    expect(html).toContain('২,৩০৭টি অধ্যায়');
+    expect(html).toContain('২৩,২৫৯টি প্রশ্ন');
+    expect(htmlEn).toContain('609 books');
+    expect(htmlEn).toContain('23,259 questions');
   });
 
   it('never shows their stats, their brand, or any WhatsApp number', async () => {

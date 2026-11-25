@@ -193,6 +193,32 @@ html[data-theme="dark"] .ev-rd-ai { background: linear-gradient(135deg, #2c1f3d 
 
 /* ---------- footer newsletter + socials ---------- */
 .ev-news-form { display: flex; gap: 0; max-width: 320px; margin-top: 10px; background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.25); border-radius: 999px; padding: 3px 3px 3px 14px; }
+
+/* ---------- homepage tabs (25 Nov 2026, owner: "home page a tab koro
+   sudnor kore sajiye") — the main content sections live in five tabs
+   below the hero. Pill bar (same visual language as .ev-search-tab):
+   the active tab is solid teal, inactive tabs are plain. On mobile
+   the bar scrolls horizontally instead of wrapping or squeezing.
+   All panels render in the DOM (inactive ones hidden) so the
+   prerendered/SEO content is unchanged — tabs only change what is
+   visible. Panel switches fade in briefly; reduced motion disables it. */
+.ev-home-tabs { margin-top: 28px; }
+.ev-home-tabbar { display: flex; gap: 8px; padding: 6px; background: var(--card); border: 1px solid var(--line); border-radius: 999px; box-shadow: var(--shadow-sm); overflow-x: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+.ev-home-tabbar::-webkit-scrollbar { display: none; }
+.ev-home-tab { display: inline-flex; align-items: center; gap: 8px; flex: none; padding: 10px 18px; border: 1px solid transparent; border-radius: 999px; background: transparent; color: var(--ink); font-size: 15px; font-weight: 700; font-family: inherit; cursor: pointer; white-space: nowrap; }
+.ev-home-tab:hover { background: var(--teal-softer); }
+.ev-home-tab[aria-selected="true"] { background: var(--teal-deep); color: #fff; box-shadow: var(--shadow-sm); }
+.ev-home-tab:focus-visible { outline: 2px solid var(--teal-text); outline-offset: 2px; }
+.ev-home-tabpanel { margin-top: 18px; animation: ev-home-tab-fade 0.25s ease; }
+.ev-home-tabpanel[hidden] { display: none; }
+/* First section inside a panel sits flush under the tab bar (the
+   section's own 28px top margin would double the gap). */
+.ev-home-tabpanel .ev-rd-section:first-child { margin-top: 0; }
+@keyframes ev-home-tab-fade { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) {
+  .ev-home-tabpanel { animation: none; }
+}
+html[data-theme="dark"] .ev-home-tab:hover { background: rgba(92, 200, 184, 0.15); }
 .ev-news-form input { flex: 1; min-width: 0; border: 0; outline: 0; background: transparent; color: #fff; font-size: 14px; font-family: inherit; }
 /* Wave 7 a11y: the input kills its own outline (line above), so give it an
    explicit amber focus ring — the form sits on the dark footer, and the

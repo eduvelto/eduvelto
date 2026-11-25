@@ -5,10 +5,15 @@
 //   Global Search → top-banner ad → 4 hub cards (Education /
 //   Opportunity / AI / Life) → শিক্ষা কেন্দ্র grid → 4 section cards
 //   (চাকরি / ভর্তি / শিক্ষা / দক্ষতা — preserved verbatim from the
-//   21 Nov redesign) → Jobs section (preserved verbatim) → সুযোগ
-//   কেন্দ্র → AI টুলস ও সহায়তা → দৈনন্দিন সেবা → জনপ্রিয় বই →
-//   real-numbers stats → panels (আপডেট / অগ্রগতি / জনপ্রিয়) →
-//   founder message → footer banner.
+//   21 Nov redesign) → feature strip / quick access → TABS (25 Nov
+//   2026, owner: "home page a tab koro sudnor kore sajiye"): the
+//   main content sections live in five tabs — শিক্ষা (শিক্ষা কেন্দ্র
+//   + জনপ্রিয় বই), চাকরি প্রস্তুতি (Jobs section), ভর্তি প্রস্তুতি
+//   (admission tiles), সুযোগ কেন্দ্র, AI ও সেবা (AI টুলস +
+//   দৈনন্দিন সেবা). All five panels render in the DOM (inactive ones
+//   hidden) so the prerendered content is unchanged. Below the tabs,
+//   always visible: Daily Quiz → real-numbers stats → panels
+//   (আপডেট / অগ্রগতি / জনপ্রিয়) → founder message → footer banner.
 //
 // HONESTY — the mockups contain sample/fake content; NONE of it ships:
 //  - Hero: NO stock photos — CSS gradients + wordmark only. No
@@ -49,6 +54,7 @@ import { useAuth } from '../lib/auth';
 import { JobsSection } from '../components/JobCards';
 import DailyQuizWidget from '../components/DailyQuizWidget';
 import HomeBookSearchResults from '../components/HomeBookSearchResults';
+import HomeTabs, { HOME_TABS, type HomeTabId } from '../components/HomeTabs';
 import { useLanguage } from '../i18n/LanguageContext';
 import { listQuizAttempts, listSubjectProgress } from '../lib/progress';
 import { getAllPublishedBooksCached, type Book } from '../lib/content';
@@ -360,6 +366,17 @@ const POPULAR_MOBILE = [
   { bn: 'Agriculture', to: '/admissions' },
 ];
 
+// Admission tiles for the homepage ভর্তি প্রস্তুতি tab — the same real
+// /admissions destinations as POPULAR / POPULAR_MOBILE above; nothing
+// invented, every tile links to /admissions.
+const ADMISSION_TILES = [
+  { icon: '🎓', bn: 'DU ভর্তি', en: 'DU Admission', to: '/admissions' },
+  { icon: '🏥', bn: 'মেডিকেল ভর্তি', en: 'Medical Admission', to: '/admissions' },
+  { icon: '⚙️', bn: 'ইঞ্জিনিয়ারিং', en: 'Engineering', to: '/admissions' },
+  { icon: '🌾', bn: 'কৃষি', en: 'Agriculture', to: '/admissions' },
+  { icon: '📚', bn: 'অন্যান্য ভর্তি', en: 'Other Admissions', to: '/admissions' },
+];
+
 // Audit-verified library totals (24 Nov 2026 audit, §8.10): the
 // live book list gives the book count, but chapter/question totals
 // are not stored on the Book rows — these constants are the verified
@@ -430,6 +447,9 @@ export default function HomePage() {
   // Sections audit (24 Nov 2026): return here after sign-in.
   const back = loginState(location.pathname + location.search);
   const [searchText, setSearchText] = useState('');
+  // Homepage tabs (owner 25 Nov 2026 17:40): the main content sections
+  // live in five tabs below the hero; 'education' is the default.
+  const [activeTab, setActiveTab] = useState<HomeTabId>('education');
   const [progress, setProgress] = useState<ProgressData | null>(null);
   const [progressLoading, setProgressLoading] = useState(false);
   const [progressError, setProgressError] = useState(false);
@@ -547,6 +567,239 @@ export default function HomePage() {
     { to: '/exam', icon: '📝', bn: 'Exams', en: 'Exams', descBn: 'মডেল টেস্ট ও MCQ পরীক্ষা', descEn: 'Model tests and MCQ exams', count: null, notReady: false },
   ];
 
+  // Homepage tabs (owner 25 Nov 2026 17:40): the five tab panels.
+  // Each panel reuses the homepage's own sections verbatim — nothing
+  // new is invented here except the admissions panel, which reuses the
+  // real /admissions destinations (ADMISSION_TILES above).
+  const homePanels = {
+    education: (
+      <>
+        {/* শিক্ষা কেন্দ্র — live categories with live counts. Class 1–5
+            and 6–8 have no books: the /class dashboards show the honest
+            not-ready state; no tile here claims stocked content. */}
+        <section className="ev-rd-section" aria-label={t({ bn: 'শিক্ষা কেন্দ্র', en: 'Education Hub' })}>
+          <div className="ev-rd-head">
+            <h2>{t({ bn: '📖 শিক্ষা কেন্দ্র', en: '📖 Education Hub' })}</h2>
+            <Link to="/class">{t({ bn: 'সব দেখুন →', en: 'See all →' })}</Link>
+          </div>
+          <p className="ev-rd-sub">
+            {t({
+              bn: 'নবম–দশম, এইচএসসি, মাদ্রাসা, টেকনিক্যাল, অনার্স — লাইব্রেরির আসল বই ও পাঠ।',
+              en: 'Class 9–10, HSC, Madrasa, Technical, Honours — real books and lessons from the library.',
+            })}
+          </p>
+          <div className="ev-rd-edu-grid">
+            {EDU_TILES.map((tile) => (
+              <Link key={tile.bn} to={tile.to} className="ev-rd-edu-tile">
+                <span className="ev-rd-edu-icon" aria-hidden="true">
+                  {tile.icon}
+                </span>
+                <strong>{t({ bn: tile.bn, en: tile.en })}</strong>
+                <span>{t({ bn: tile.descBn, en: tile.descEn })}</span>
+                {!booksError && tile.count !== null && tile.count > 0 ? (
+                  <span className="ev-rd-edu-count">
+                    {lang === 'bn' ? `${bnNum(tile.count)}টি বই` : `${tile.count} books`}
+                  </span>
+                ) : null}
+                {tile.notReady ? (
+                  <span>{t({ bn: 'কনটেন্ট প্রস্তুত হচ্ছে', en: 'Content being prepared' })}</span>
+                ) : null}
+              </Link>
+            ))}
+          </div>
+          <p className="ev-rd-sub" style={{ marginTop: 10 }}>
+            {t({
+              bn: 'শ্রেণি ১–৫ ও ৬–৮-এর বই এখনো লাইব্রেরিতে আসেনি — সেগুলোর পাতায় সৎভাবে জানানো আছে।',
+              en: 'Class 1–5 and 6–8 books have not reached the library yet — their pages say so honestly.',
+            })}
+          </p>
+        </section>
+
+
+        {/* জনপ্রিয় বই — REAL library books only, sorted by question
+            count (the section says so). Text cards: no real covers
+            exist, so no fake covers are ever rendered. */}
+        <section className="ev-rd-section" aria-label={t({ bn: 'জনপ্রিয় বই', en: 'Popular Books' })}>
+          <div className="ev-rd-head">
+            <h2>{t({ bn: '🔥 জনপ্রিয় বই', en: '🔥 Popular Books' })}</h2>
+            <Link to="/library">{t({ bn: 'সব বই →', en: 'All books →' })}</Link>
+          </div>
+          <p className="ev-rd-sub">
+            {t({
+              bn: 'প্রশ্নসংখ্যা অনুযায়ী সাজানো — লাইব্রেরির আসল বই।',
+              en: 'Sorted by question count — real books from the library.',
+            })}
+          </p>
+          {booksError ? (
+            <p className="ev-rd-sub">
+              {t({ bn: 'বইয়ের তালিকা লোড করা যায়নি — লাইব্রেরি থেকে দেখুন।', en: 'Could not load the book list — see the library.' })}{' '}
+              <Link to="/library">{t({ bn: 'লাইব্রেরি →', en: 'Library →' })}</Link>
+            </p>
+          ) : !books ? (
+            <p className="ev-rd-sub">
+              {t({ bn: 'বইয়ের তালিকা লোড হচ্ছে…', en: 'Loading the book list…' })}
+            </p>
+          ) : books.length === 0 ? (
+            <p className="ev-rd-sub">
+              {t({ bn: 'এখনো কোনো বই নেই — লাইব্রেরি থেকে দেখুন।', en: 'No books yet — see the library.' })}{' '}
+              <Link to="/library">{t({ bn: 'লাইব্রেরি →', en: 'Library →' })}</Link>
+            </p>
+          ) : (
+            <div className="ev-rd-books">
+              {popularBooks.map((b) => (
+                <article key={b.id} className="ev-rd-book">
+                  <h3>
+                    <Link to={`/library/${b.id}`}>{b.title}</Link>
+                  </h3>
+                  <p>{[b.classLevel, b.department, b.subject].filter(Boolean).join(' · ')}</p>
+                  <span className="ev-rd-book-meta">
+                    {lang === 'bn'
+                      ? `${bnNum(b.chapterCount)}টি অধ্যায় · ${bnNum(b.questionCount)}টি প্রশ্ন`
+                      : `${b.chapterCount} chapters · ${b.questionCount} questions`}
+                  </span>
+                </article>
+              ))}
+            </div>
+          )}
+        </section>
+
+
+      </>
+    ),
+    // Job Preparation section — preserved verbatim (Step 5 regrouping).
+    jobs: <JobsSection />,
+    admissions: (
+      <>
+        <section className="ev-rd-section" aria-label={t({ bn: 'ভর্তি প্রস্তুতি', en: 'Admission Preparation' })}>
+          <div className="ev-rd-head">
+            <h2>{t({ bn: '🎓 ভর্তি প্রস্তুতি', en: '🎓 Admission Preparation' })}</h2>
+            <Link to="/admissions">{t({ bn: 'সব দেখুন →', en: 'See all →' })}</Link>
+          </div>
+          <p className="ev-rd-sub">
+            {t({
+              bn: 'বিশ্ববিদ্যালয়, মেডিকেল, ইঞ্জিনিয়ারিং, কৃষি ও অন্যান্য — ভর্তি পরীক্ষার প্রস্তুতি এক জায়গায়।',
+              en: 'University, Medical, Engineering, Agriculture and more — admission preparation in one place.',
+            })}
+          </p>
+          <div className="ev-rd-opp-tiles">
+            {ADMISSION_TILES.map((tile) => (
+              <Link key={tile.bn} to={tile.to} className="ev-rd-opp-tile">
+                <span aria-hidden="true">{tile.icon}</span>
+                {t({ bn: tile.bn, en: tile.en })}
+              </Link>
+            ))}
+          </div>
+          <div style={{ marginTop: 14 }}>
+            <Link to="/admissions" className="ev-btn ev-btn-primary">
+              {t({ bn: 'ভর্তি প্রস্তুতি নিন →', en: 'Prepare for admission →' })}
+            </Link>
+          </div>
+        </section>
+      </>
+    ),
+    opportunities: (
+      <>
+        {/* সুযোগ কেন্দ্র — real listings only (7 verified). Tiles filter
+            the live hub; the list below shows the latest listings with
+            their real dates. The circulars collection is empty, so no
+            circular is ever invented here. */}
+        <section className="ev-rd-section" aria-label={t({ bn: 'সুযোগ কেন্দ্র', en: 'Opportunity Hub' })}>
+          <div className="ev-rd-head">
+            <h2>{t({ bn: '💼 সুযোগ কেন্দ্র', en: '💼 Opportunity Hub' })}</h2>
+            <Link to="/opportunities">{t({ bn: 'সব দেখুন →', en: 'See all →' })}</Link>
+          </div>
+          <p className="ev-rd-sub">
+            {t({
+              bn: 'যাচাইকৃত চাকরি, স্কলারশিপ, ইন্টার্নশিপ ও ফ্রিল্যান্সিং সুযোগ — প্রতিটি অফিসিয়াল উৎস থেকে যাচাই করা।',
+              en: 'Verified jobs, scholarships, internships and freelancing opportunities — each verified from its official source.',
+            })}
+          </p>
+          <div className="ev-rd-opp-tiles">
+            {OPP_TILES.map((tile) => (
+              <Link key={tile.bn} to={tile.to} className="ev-rd-opp-tile">
+                <span aria-hidden="true">{tile.icon}</span>
+                {t({ bn: tile.bn, en: tile.en })}
+              </Link>
+            ))}
+          </div>
+          {opportunitiesError ? (
+            <p className="ev-rd-sub">
+              {t({ bn: 'সুযোগের তালিকা লোড করা যায়নি — সুযোগ হাব থেকে দেখুন।', en: 'Could not load the opportunity list — see the Opportunity Hub.' })}{' '}
+              <Link to="/opportunities">{t({ bn: 'সুযোগ হাব →', en: 'Opportunity Hub →' })}</Link>
+            </p>
+          ) : latestOpportunities.length > 0 ? (
+            <ul className="ev-rd-opp-list">
+              {latestOpportunities.map((o) => (
+                <li key={o.docId}>
+                  <Link to={`/opportunities/${o.docId}`}>{lang === 'bn' ? o.titleBn : o.titleEn}</Link>
+                  <span className="ev-rd-opp-meta">
+                    {lang === 'bn' ? o.organizationBn : o.organizationEn}
+                    {o.deadlineMillis ? ` · ${t({ bn: 'শেষ তারিখ', en: 'Deadline' })}: ${formatBnDate(o.deadlineMillis)}` : ''}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          ) : null}
+        </section>
+
+
+      </>
+    ),
+    services: (
+      <>
+        {/* AI টুলস ও সহায়তা — honest: the WORKING tools live at
+            /ai-assistant (calculators, letters, CV, budget — no fake AI).
+            /ai-teacher is a scripted demo (it says so on the page
+            itself). Live AI chat is NOT available yet; the panel never
+            claims otherwise. */}
+        <section className="ev-rd-section" aria-label={t({ bn: 'AI টুলস ও সহায়তা', en: 'AI Tools & Assistance' })}>
+          <div className="ev-rd-ai">
+            <h2>{t({ bn: '🤖 AI টুলস ও সহায়তা', en: '🤖 AI Tools & Assistance' })}</h2>
+            <p>
+              {t({
+                bn: 'AI সহায়ক এখনই ব্যবহার করতে পারেন — হিসাব, চিঠি-আবেদন, সিভি, বাজেট ও দরকারি টুল। AI Teacher (পড়াশোনার জন্য) এখনো একটি স্ক্রিপ্ট করা প্রদর্শনী — আসল AI চ্যাট এখনো চালু হয়নি।',
+                en: 'You can use the AI Assistant right now — calculators, letters and applications, CV, budget and daily tools. AI Teacher (for study) is still a scripted demo — live AI chat has not launched yet.',
+              })}
+            </p>
+            <div className="ev-rd-ai-actions">
+              <Link to="/ai-assistant" className="ev-btn ev-btn-primary">
+                {t({ bn: 'AI সহায়ক ব্যবহার করুন →', en: 'Use the AI Assistant →' })}
+              </Link>
+              <Link to="/ai-teacher" className="ev-btn" style={{ textDecoration: 'none', background: 'var(--card)', borderColor: 'var(--line-strong)' }}>
+                {t({ bn: 'AI Teacher প্রদর্শনী দেখুন', en: 'See the AI Teacher demo' })}
+              </Link>
+              <Link to="/jobs/bcs/practice/english" className="ev-btn" style={{ textDecoration: 'none', background: 'var(--card)', borderColor: 'var(--line-strong)' }}>
+                {t({ bn: 'বিসিএস ইংরেজি অনুশীলন (ফ্রি)', en: 'BCS English practice (free)' })}
+              </Link>
+            </div>
+          </div>
+        </section>
+
+
+        {/* দৈনন্দিন সেবা সমূহ — the 9 live /life tools. */}
+        <section className="ev-rd-section" aria-label={t({ bn: 'দৈনন্দিন সেবা সমূহ', en: 'Everyday Services' })}>
+          <div className="ev-rd-head">
+            <h2>{t({ bn: '🛠 দৈনন্দিন সেবা সমূহ', en: '🛠 Everyday Services' })}</h2>
+            <Link to="/life">{t({ bn: 'সব দেখুন →', en: 'See all →' })}</Link>
+          </div>
+          <p className="ev-rd-sub">
+            {t({ bn: 'স্বাস্থ্য, ক্যালকুলেটর, ডকুমেন্টসহ দৈনন্দিন প্রয়োজনীয় সেবা — সব বিনামূল্যে।', en: 'Everyday services including health, calculators and documents — all free.' })}
+          </p>
+          <div className="ev-rd-life-grid">
+            {LIFE_TOOLS.map((tool) => (
+              <Link key={tool.to} to={tool.to} className="ev-rd-life-tile">
+                <span aria-hidden="true">{tool.icon}</span>
+                {t({ bn: tool.bn, en: tool.en })}
+              </Link>
+            ))}
+          </div>
+        </section>
+
+
+      </>
+    ),
+  };
+
   function runSearch(e: React.FormEvent) {
     e.preventDefault();
     const q = searchText.trim();
@@ -655,47 +908,6 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* শিক্ষা কেন্দ্র — live categories with live counts. Class 1–5
-            and 6–8 have no books: the /class dashboards show the honest
-            not-ready state; no tile here claims stocked content. */}
-        <section className="ev-rd-section" aria-label={t({ bn: 'শিক্ষা কেন্দ্র', en: 'Education Hub' })}>
-          <div className="ev-rd-head">
-            <h2>{t({ bn: '📖 শিক্ষা কেন্দ্র', en: '📖 Education Hub' })}</h2>
-            <Link to="/class">{t({ bn: 'সব দেখুন →', en: 'See all →' })}</Link>
-          </div>
-          <p className="ev-rd-sub">
-            {t({
-              bn: 'নবম–দশম, এইচএসসি, মাদ্রাসা, টেকনিক্যাল, অনার্স — লাইব্রেরির আসল বই ও পাঠ।',
-              en: 'Class 9–10, HSC, Madrasa, Technical, Honours — real books and lessons from the library.',
-            })}
-          </p>
-          <div className="ev-rd-edu-grid">
-            {EDU_TILES.map((tile) => (
-              <Link key={tile.bn} to={tile.to} className="ev-rd-edu-tile">
-                <span className="ev-rd-edu-icon" aria-hidden="true">
-                  {tile.icon}
-                </span>
-                <strong>{t({ bn: tile.bn, en: tile.en })}</strong>
-                <span>{t({ bn: tile.descBn, en: tile.descEn })}</span>
-                {!booksError && tile.count !== null && tile.count > 0 ? (
-                  <span className="ev-rd-edu-count">
-                    {lang === 'bn' ? `${bnNum(tile.count)}টি বই` : `${tile.count} books`}
-                  </span>
-                ) : null}
-                {tile.notReady ? (
-                  <span>{t({ bn: 'কনটেন্ট প্রস্তুত হচ্ছে', en: 'Content being prepared' })}</span>
-                ) : null}
-              </Link>
-            ))}
-          </div>
-          <p className="ev-rd-sub" style={{ marginTop: 10 }}>
-            {t({
-              bn: 'শ্রেণি ১–৫ ও ৬–৮-এর বই এখনো লাইব্রেরিতে আসেনি — সেগুলোর পাতায় সৎভাবে জানানো আছে।',
-              en: 'Class 1–5 and 6–8 books have not reached the library yet — their pages say so honestly.',
-            })}
-          </p>
-        </section>
-
         {/* Four section cards — preserved verbatim (21 Nov redesign).
             Sections audit (24 Nov 2026): the WHOLE card is the link —
             the owner decided 21 Nov that clicking anywhere on a big card
@@ -761,146 +973,13 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* Job Preparation — Step 5 regrouping ported onto the
-            redesigned homepage, preserved verbatim. */}
-        <JobsSection />
-
-        {/* সুযোগ কেন্দ্র — real listings only (7 verified). Tiles filter
-            the live hub; the list below shows the latest listings with
-            their real dates. The circulars collection is empty, so no
-            circular is ever invented here. */}
-        <section className="ev-rd-section" aria-label={t({ bn: 'সুযোগ কেন্দ্র', en: 'Opportunity Hub' })}>
-          <div className="ev-rd-head">
-            <h2>{t({ bn: '💼 সুযোগ কেন্দ্র', en: '💼 Opportunity Hub' })}</h2>
-            <Link to="/opportunities">{t({ bn: 'সব দেখুন →', en: 'See all →' })}</Link>
-          </div>
-          <p className="ev-rd-sub">
-            {t({
-              bn: 'যাচাইকৃত চাকরি, স্কলারশিপ, ইন্টার্নশিপ ও ফ্রিল্যান্সিং সুযোগ — প্রতিটি অফিসিয়াল উৎস থেকে যাচাই করা।',
-              en: 'Verified jobs, scholarships, internships and freelancing opportunities — each verified from its official source.',
-            })}
-          </p>
-          <div className="ev-rd-opp-tiles">
-            {OPP_TILES.map((tile) => (
-              <Link key={tile.bn} to={tile.to} className="ev-rd-opp-tile">
-                <span aria-hidden="true">{tile.icon}</span>
-                {t({ bn: tile.bn, en: tile.en })}
-              </Link>
-            ))}
-          </div>
-          {opportunitiesError ? (
-            <p className="ev-rd-sub">
-              {t({ bn: 'সুযোগের তালিকা লোড করা যায়নি — সুযোগ হাব থেকে দেখুন।', en: 'Could not load the opportunity list — see the Opportunity Hub.' })}{' '}
-              <Link to="/opportunities">{t({ bn: 'সুযোগ হাব →', en: 'Opportunity Hub →' })}</Link>
-            </p>
-          ) : latestOpportunities.length > 0 ? (
-            <ul className="ev-rd-opp-list">
-              {latestOpportunities.map((o) => (
-                <li key={o.docId}>
-                  <Link to={`/opportunities/${o.docId}`}>{lang === 'bn' ? o.titleBn : o.titleEn}</Link>
-                  <span className="ev-rd-opp-meta">
-                    {lang === 'bn' ? o.organizationBn : o.organizationEn}
-                    {o.deadlineMillis ? ` · ${t({ bn: 'শেষ তারিখ', en: 'Deadline' })}: ${formatBnDate(o.deadlineMillis)}` : ''}
-                  </span>
-                </li>
-              ))}
-            </ul>
-          ) : null}
-        </section>
-
-        {/* AI টুলস ও সহায়তা — honest: the WORKING tools live at
-            /ai-assistant (calculators, letters, CV, budget — no fake AI).
-            /ai-teacher is a scripted demo (it says so on the page
-            itself). Live AI chat is NOT available yet; the panel never
-            claims otherwise. */}
-        <section className="ev-rd-section" aria-label={t({ bn: 'AI টুলস ও সহায়তা', en: 'AI Tools & Assistance' })}>
-          <div className="ev-rd-ai">
-            <h2>{t({ bn: '🤖 AI টুলস ও সহায়তা', en: '🤖 AI Tools & Assistance' })}</h2>
-            <p>
-              {t({
-                bn: 'AI সহায়ক এখনই ব্যবহার করতে পারেন — হিসাব, চিঠি-আবেদন, সিভি, বাজেট ও দরকারি টুল। AI Teacher (পড়াশোনার জন্য) এখনো একটি স্ক্রিপ্ট করা প্রদর্শনী — আসল AI চ্যাট এখনো চালু হয়নি।',
-                en: 'You can use the AI Assistant right now — calculators, letters and applications, CV, budget and daily tools. AI Teacher (for study) is still a scripted demo — live AI chat has not launched yet.',
-              })}
-            </p>
-            <div className="ev-rd-ai-actions">
-              <Link to="/ai-assistant" className="ev-btn ev-btn-primary">
-                {t({ bn: 'AI সহায়ক ব্যবহার করুন →', en: 'Use the AI Assistant →' })}
-              </Link>
-              <Link to="/ai-teacher" className="ev-btn" style={{ textDecoration: 'none', background: 'var(--card)', borderColor: 'var(--line-strong)' }}>
-                {t({ bn: 'AI Teacher প্রদর্শনী দেখুন', en: 'See the AI Teacher demo' })}
-              </Link>
-              <Link to="/jobs/bcs/practice/english" className="ev-btn" style={{ textDecoration: 'none', background: 'var(--card)', borderColor: 'var(--line-strong)' }}>
-                {t({ bn: 'বিসিএস ইংরেজি অনুশীলন (ফ্রি)', en: 'BCS English practice (free)' })}
-              </Link>
-            </div>
-          </div>
-        </section>
-
-        {/* দৈনন্দিন সেবা সমূহ — the 9 live /life tools. */}
-        <section className="ev-rd-section" aria-label={t({ bn: 'দৈনন্দিন সেবা সমূহ', en: 'Everyday Services' })}>
-          <div className="ev-rd-head">
-            <h2>{t({ bn: '🛠 দৈনন্দিন সেবা সমূহ', en: '🛠 Everyday Services' })}</h2>
-            <Link to="/life">{t({ bn: 'সব দেখুন →', en: 'See all →' })}</Link>
-          </div>
-          <p className="ev-rd-sub">
-            {t({ bn: 'স্বাস্থ্য, ক্যালকুলেটর, ডকুমেন্টসহ দৈনন্দিন প্রয়োজনীয় সেবা — সব বিনামূল্যে।', en: 'Everyday services including health, calculators and documents — all free.' })}
-          </p>
-          <div className="ev-rd-life-grid">
-            {LIFE_TOOLS.map((tool) => (
-              <Link key={tool.to} to={tool.to} className="ev-rd-life-tile">
-                <span aria-hidden="true">{tool.icon}</span>
-                {t({ bn: tool.bn, en: tool.en })}
-              </Link>
-            ))}
-          </div>
-        </section>
-
-        {/* জনপ্রিয় বই — REAL library books only, sorted by question
-            count (the section says so). Text cards: no real covers
-            exist, so no fake covers are ever rendered. */}
-        <section className="ev-rd-section" aria-label={t({ bn: 'জনপ্রিয় বই', en: 'Popular Books' })}>
-          <div className="ev-rd-head">
-            <h2>{t({ bn: '🔥 জনপ্রিয় বই', en: '🔥 Popular Books' })}</h2>
-            <Link to="/library">{t({ bn: 'সব বই →', en: 'All books →' })}</Link>
-          </div>
-          <p className="ev-rd-sub">
-            {t({
-              bn: 'প্রশ্নসংখ্যা অনুযায়ী সাজানো — লাইব্রেরির আসল বই।',
-              en: 'Sorted by question count — real books from the library.',
-            })}
-          </p>
-          {booksError ? (
-            <p className="ev-rd-sub">
-              {t({ bn: 'বইয়ের তালিকা লোড করা যায়নি — লাইব্রেরি থেকে দেখুন।', en: 'Could not load the book list — see the library.' })}{' '}
-              <Link to="/library">{t({ bn: 'লাইব্রেরি →', en: 'Library →' })}</Link>
-            </p>
-          ) : !books ? (
-            <p className="ev-rd-sub">
-              {t({ bn: 'বইয়ের তালিকা লোড হচ্ছে…', en: 'Loading the book list…' })}
-            </p>
-          ) : books.length === 0 ? (
-            <p className="ev-rd-sub">
-              {t({ bn: 'এখনো কোনো বই নেই — লাইব্রেরি থেকে দেখুন।', en: 'No books yet — see the library.' })}{' '}
-              <Link to="/library">{t({ bn: 'লাইব্রেরি →', en: 'Library →' })}</Link>
-            </p>
-          ) : (
-            <div className="ev-rd-books">
-              {popularBooks.map((b) => (
-                <article key={b.id} className="ev-rd-book">
-                  <h3>
-                    <Link to={`/library/${b.id}`}>{b.title}</Link>
-                  </h3>
-                  <p>{[b.classLevel, b.department, b.subject].filter(Boolean).join(' · ')}</p>
-                  <span className="ev-rd-book-meta">
-                    {lang === 'bn'
-                      ? `${bnNum(b.chapterCount)}টি অধ্যায় · ${bnNum(b.questionCount)}টি প্রশ্ন`
-                      : `${b.chapterCount} chapters · ${b.questionCount} questions`}
-                  </span>
-                </article>
-              ))}
-            </div>
-          )}
-        </section>
+        {/* Homepage tabs (owner 25 Nov 2026 17:40): the main content
+            sections live in five tabs — education, job preparation,
+            admission preparation, opportunity hub, AI & services.
+            Hero, ticker, search, hubs, section cards and the feature
+            strip stay above; the Daily Quiz, stats, panels, founder
+            message and footer banner stay below, always visible. */}
+        <HomeTabs tabs={HOME_TABS} activeId={activeTab} onActiveChange={setActiveTab} panels={homePanels} />
 
         {/* Phase 4: Daily 5-Question Free Quiz — no login. Draws
             ONLY from the 35 verified public BCS English questions

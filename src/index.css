@@ -3754,14 +3754,15 @@ html[data-theme="dark"] .ev-header {
 /* below the nav, no pill, no rounded corners, no border, no         */
 /* gradient, no glow. Navy band, white text (dark mode lifts the     */
 /* navy slightly, as the greeting did).                               */
-/* Content: OUR offers + the Surah Al-Alaq ayah 1 ONLY — never any   */
-/* other site's stats or claims. Respectful display: SLOW marquee    */
-/* (80s per copy), no flashing, pause on hover; the track moves      */
-/* with a rigid translateX only, so the Arabic letters/harakat are   */
-/* never distorted. Reduced motion: no animation — the items wrap    */
-/* statically. Items never truncate: white-space: nowrap per item,   */
-/* the track is 4 identical copies and the loop shifts by exactly    */
-/* one copy, so there is no gap at the seam.                          */
+/* Content: ALL our real features + our offers + the Surah Al-Alaq   */
+/* ayah 1 (Arabic only) ONLY — never any other site's stats or       */
+/* claims. Respectful display: SLOW marquee (80s per copy), no       */
+/* flashing, pause on hover; the track moves with a rigid translateX */
+/* only, so the Arabic letters/harakat are never distorted. Reduced  */
+/* motion: no animation — the items wrap statically. Items never     */
+/* truncate: white-space: nowrap per item, the track is 4 identical  */
+/* copies and the loop shifts by exactly one copy, so there is no    */
+/* gap at the seam.                                                   */
 /* ------------------------------------------------------------------ */
 
 .ev-announcement-ticker {
@@ -3805,28 +3806,17 @@ html[data-theme="dark"] .ev-header {
   white-space: nowrap;
   text-decoration: none;
 }
-a.ev-ticker-item-offer:hover {
+a.ev-ticker-item-offer:hover,
+a.ev-ticker-item-feature:hover {
   text-decoration: underline;
 }
-/* Ayat item: Arabic in Amiri/Naskh serif, then the translation and
-   attribution in the page language. The Arabic span is its own
-   rtl run — never reshaped by the surrounding LTR flow. */
+/* Ayat item: Arabic ONLY (owner 25 Nov 18:01) in Amiri/Naskh serif.
+   The Arabic span is its own rtl run — never reshaped by the
+   surrounding LTR flow. */
 .ev-ticker-ayat-ar {
   font-family: 'Amiri', 'Traditional Arabic', 'Noto Naskh Arabic', serif;
   font-size: 19px;
   padding: 0 8px;
-}
-.ev-ticker-ayat-text {
-  font-family: 'Noto Serif Bengali', 'Hind Siliguri', system-ui, serif;
-  font-weight: 600;
-  padding: 0 4px;
-}
-.ev-ticker-ayat-attr {
-  font-family: 'Noto Serif Bengali', 'Hind Siliguri', system-ui, serif;
-  font-size: 13px;
-  font-weight: 600;
-  color: rgba(255, 255, 255, 0.85);
-  padding: 0 4px;
 }
 .ev-ticker-sep {
   color: rgba(255, 255, 255, 0.55);
