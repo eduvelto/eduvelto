@@ -13,6 +13,7 @@ import { useAuth } from '../lib/auth';
 import { useLanguage } from '../i18n/LanguageContext';
 import { SeoHead } from '../components/SeoHead';
 import SuggestionPdfCard from '../components/SuggestionPdfCard';
+import HardcopyAffiliateSlot from '../components/HardcopyAffiliateSlot';
 import { bookSeoData, buildBookSummary } from '../lib/seo';
 import { langUrl } from '../lib/langRouting';
 
@@ -129,6 +130,10 @@ export default function BookPage() {
           {/* Phase 3 (25 Nov 2026): ৳149 suggestion-PDF card — UI-only
               until verified content exists (sales gate in lib/orders.ts). */}
           <SuggestionPdfCard examName={book.title} />
+          {/* Phase 3 (25 Nov 2026): "Buy Printed Hardcopy" affiliate
+              slot — placeholder only, no affiliate URL yet (see
+              HardcopyAffiliateSlot.tsx). */}
+          <HardcopyAffiliateSlot />
           <h2 style={{ fontFamily: "'Poppins','Hind Siliguri',system-ui,sans-serif", fontSize: 20, color: 'var(--heading)', margin: '0 0 12px' }}>
             {t({ bn: 'পাঠসমূহ', en: 'Lessons' })} ({chapters?.length ?? 0})
           </h2>
