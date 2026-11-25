@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
+import { HelmetProvider } from 'react-helmet-async';
 import './index.css';
 import App from './App';
 import { AuthProvider } from './lib/auth';
@@ -27,14 +28,19 @@ if (!isNativeApp()) {
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <BrowserRouter>
-      <AuthProvider>
-        <ThemeProvider>
-          <LanguageProvider>
-            <App />
-          </LanguageProvider>
-        </ThemeProvider>
-      </AuthProvider>
-    </BrowserRouter>
+    {/* HelmetProvider (Phase 1, 25 Nov 2026): <SeoHead /> renders
+        through react-helmet-async; the same provider wraps the SSR
+        entry (src/entry-server.tsx). */}
+    <HelmetProvider>
+      <BrowserRouter>
+        <AuthProvider>
+          <ThemeProvider>
+            <LanguageProvider>
+              <App />
+            </LanguageProvider>
+          </ThemeProvider>
+        </AuthProvider>
+      </BrowserRouter>
+    </HelmetProvider>
   </React.StrictMode>,
 );

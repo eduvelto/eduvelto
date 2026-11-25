@@ -10,7 +10,8 @@
     "preview": "vite preview",
     "test:rules": "JAVA_TOOL_OPTIONS=\"-Djava.net.preferIPv4Stack=true\" firebase emulators:exec --only firestore,auth \"vitest run emulator-tests/\"",
     "test:unit": "vitest run src/lib/__tests__/ --environment node",
-    "emulators": "JAVA_TOOL_OPTIONS=\"-Djava.net.preferIPv4Stack=true\" firebase emulators:start --only firestore,auth"
+    "emulators": "JAVA_TOOL_OPTIONS=\"-Djava.net.preferIPv4Stack=true\" firebase emulators:start --only firestore,auth",
+    "prerender": "vite build --ssr src/entry-server.tsx --outDir dist-ssr && node scripts/prerender.mjs"
   },
   "dependencies": {
     "@capacitor/app": "^8.1.2",
@@ -22,6 +23,7 @@
     "pdf-lib": "^1.17.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
+    "react-helmet-async": "^2.0.5",
     "react-router-dom": "^6.28.0"
   },
   "devDependencies": {

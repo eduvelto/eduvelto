@@ -1,5 +1,10 @@
 // Eduvelto — route-level SEO (22 Nov 2026, feature/seo-visibility;
-// fallback noindex added 23 Nov 2026, feature/seo-50-100-pages).
+// fallback noindex added 23 Nov 2026, feature/seo-50-100-pages;
+// REWRITTEN 25 Nov 2026, Phase 1 SSG + bilingual: the tags are now
+// rendered declaratively through <SeoHead /> (react-helmet-async)
+// instead of the imperative useSeo() DOM writes, so the SAME
+// component serves the browser and the SSR/prerender path
+// (src/entry-server.tsx reads the tags out of the helmet context).
 //
 // Mounted once in App.tsx. On every route change it applies the SEO
 // for that route (title, meta description, Open Graph, canonical,
@@ -15,23 +20,32 @@
 // unknown slugs) never look indexable. It never changes what the
 // user sees.
 //
-// The hook lives in a child component (SeoApplier) so the hook call
-// itself is never conditional: when there is no SEO for a route the
-// child simply does not mount.
+// resolveRouteSeo() accepts both /:lang-prefixed and bare legacy
+// paths; a lang prefix in the URL is the source of truth for the
+// page language (see src/lib/seo.ts).
 
 import { useLocation } from 'react-router-dom';
 import { useLanguage } from '../i18n/LanguageContext';
-import { resolveFallbackSeo, resolveRouteSeo, useSeo, type SeoData } from '../lib/seo';
-
-function SeoApplier({ seo, lang }: { seo: SeoData; lang: 'bn' | 'en' }) {
-  useSeo(seo, lang);
-  return null;
-}
+import { resolveFallbackSeo, resolveRouteSeo } from '../lib/seo';
+import { stripLangPrefix } from '../lib/langRouting';
+import { SeoHead } from './SeoHead';
 
 export function RouteSeo() {
   const location = useLocation();
   const { lang } = useLanguage();
   const seo = resolveRouteSeo(location.pathname, lang) ?? resolveFallbackSeo(location.pathname, lang);
   if (!seo) return null;
-  return <SeoApplier seo={seo} lang={lang} />;
+  const stripped = stripLangPrefix(location.pathname);
+  return (
+    <SeoHead
+      title={seo.title}
+      description={seo.description}
+      canonical={seo.canonical}
+      lang={stripped.lang ?? lang}
+      ogType={seo.ogType}
+      ogImage={seo.ogImage}
+      robots={seo.robots}
+      jsonLd={seo.jsonLd}
+    />
+  );
 }

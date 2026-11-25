@@ -48,6 +48,9 @@ import { NU_GROUPS } from './nuProfile';
 import { OPPORTUNITY_SEED } from './opportunitySeed';
 import { isPublished } from './opportunities';
 import { PUBLIC_GUIDES } from './publicGuides';
+import { SITE_URL, canonicalUrl, hreflangUrls, stripLangPrefix } from './langRouting';
+
+export { SITE_URL };
 
 export type SeoData = {
   title: string;
@@ -62,7 +65,6 @@ export type SeoData = {
   jsonLd?: unknown[];
 };
 
-export const SITE_URL = 'https://eduvelto.com';
 export const LOGO_URL = 'https://eduvelto.com/logo.png';
 /** Purpose-built 1200x630 social preview image (23 Nov 2026,
  *  feature/seo-50-100-pages, SEO-009): navy + approved white logo +
@@ -225,12 +227,13 @@ export function useSeo(seo: SeoData, lang: 'bn' | 'en' = 'bn'): void {
     if (seo.robots) setMetaByName('robots', seo.robots);
     else removeMetaByName('robots');
     setCanonical(seo.canonical);
-    // hreflang (24 Nov 2026, language system): the same page in
-    // each language, plus x-default. Canonical stays the clean
-    // URL — the ?lang= variants are alternate versions of it.
-    setLink('alternate', 'bn', `${seo.canonical}?lang=bn`);
-    setLink('alternate', 'en', `${seo.canonical}?lang=en`);
-    setLink('alternate', 'x-default', seo.canonical);
+    // hreflang (Phase 1, 25 Nov 2026, SSG + bilingual): reciprocal
+    // /bn + /en URLs, x-default -> the Bangla URL. The canonical
+    // itself is already lang-prefixed (see resolveRouteSeo).
+    const hreflang = hreflangUrls(seo.canonical, lang);
+    setLink('alternate', 'bn', hreflang.bn);
+    setLink('alternate', 'en', hreflang.en);
+    setLink('alternate', 'x-default', hreflang.xDefault);
 
     const scripts: HTMLScriptElement[] = [];
     for (const obj of seo.jsonLd ?? []) {
@@ -1710,13 +1713,13 @@ function crumbsForStatic(path: string, lang: 'bn' | 'en' = 'bn'): string[] {
 
 function breadcrumbFor(path: string, crumbs: string[], lang: 'bn' | 'en' = 'bn'): unknown {
   const items: unknown[] = [
-    { '@type': 'ListItem', position: 1, name: lang === 'bn' ? 'হোম' : 'Home', item: `${SITE_URL}/` },
+    { '@type': 'ListItem', position: 1, name: lang === 'bn' ? 'হোম' : 'Home', item: `${SITE_URL}/${lang}/` },
   ];
   const parts = path.split('/').filter(Boolean);
   let acc = '';
   crumbs.forEach((name, i) => {
     acc += `/${parts[i] ?? ''}`;
-    items.push({ '@type': 'ListItem', position: i + 2, name, item: `${SITE_URL}${acc}` });
+    items.push({ '@type': 'ListItem', position: i + 2, name, item: `${SITE_URL}/${lang}${acc}` });
   });
   return { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: items };
 }
@@ -1741,7 +1744,13 @@ const OPPORTUNITY_SEO_TITLES: Record<string, { bn: string; en: string }> = {
  * auth/admin/app routes are not content pages).
  */
 export function resolveRouteSeo(pathname: string, lang: 'bn' | 'en' = 'bn'): SeoData | null {
-  const path = pathname.replace(/\/+$/, '') || '/';
+  // Phase 1 (25 Nov 2026): public routes live under /:lang. A lang
+  // prefix in the URL is the source of truth for the page language;
+  // a bare legacy path keeps the passed lang (back-compat for the
+  // old ?lang= links + the sitemap-drift test).
+  const stripped = stripLangPrefix(pathname.replace(/\/+$/, '') || '/');
+  if (stripped.lang) lang = stripped.lang;
+  const path = stripped.path;
   if (path === '/founder') return null;
 
   let entry: RouteSeoEntry | null = STATIC_ROUTES[path] ?? null;
@@ -1857,7 +1866,7 @@ export function resolveRouteSeo(pathname: string, lang: 'bn' | 'en' = 'bn'): Seo
   if (crumbs.length === 0)
     crumbs = (lang === 'bn' ? STATIC_CRUMBS[path] : STATIC_CRUMBS_EN[path]) ?? crumbsForStatic(path, lang);
 
-  const canonical = `${SITE_URL}${path === '/' ? '/' : path}`;
+  const canonical = `${SITE_URL}/${lang}${path === '/' ? '' : path}`;
   const webPage = {
     '@context': 'https://schema.org',
     '@type': 'WebPage',
@@ -1882,7 +1891,7 @@ export function resolveRouteSeo(pathname: string, lang: 'bn' | 'en' = 'bn'): Seo
         '@type': 'ListItem',
         position: i + 1,
         name: lang === 'bn' ? `${exam.bn} প্রস্তুতি` : `${exam.en} Preparation`,
-        url: `${SITE_URL}/jobs/${exam.slug}`,
+        url: `${SITE_URL}/${lang}/jobs/${exam.slug}`,
       })),
     });
   }
@@ -1899,19 +1908,19 @@ export function resolveRouteSeo(pathname: string, lang: 'bn' | 'en' = 'bn'): Seo
           '@type': 'ListItem',
           position: 1,
           name: lang === 'bn' ? 'ব্যাকরণ অনুশীলন' : 'Grammar Practice',
-          url: `${SITE_URL}/jobs/bcs/practice/english/grammar`,
+          url: `${SITE_URL}/${lang}/jobs/bcs/practice/english/grammar`,
         },
         {
           '@type': 'ListItem',
           position: 2,
           name: lang === 'bn' ? 'শব্দভান্ডার অনুশীলন' : 'Vocabulary Practice',
-          url: `${SITE_URL}/jobs/bcs/practice/english/vocabulary`,
+          url: `${SITE_URL}/${lang}/jobs/bcs/practice/english/vocabulary`,
         },
         {
           '@type': 'ListItem',
           position: 3,
           name: lang === 'bn' ? 'রিডিং অনুশীলন' : 'Reading Practice',
-          url: `${SITE_URL}/jobs/bcs/practice/english/reading`,
+          url: `${SITE_URL}/${lang}/jobs/bcs/practice/english/reading`,
         },
       ],
     });
@@ -1930,265 +1939,265 @@ export function resolveRouteSeo(pathname: string, lang: 'bn' | 'en' = 'bn'): Seo
           '@type': 'ListItem',
           position: 1,
           name: lang === 'bn' ? 'বিসিএস প্রিলিমিনারি প্রস্তুতি গাইড' : 'BCS Preliminary Preparation Guide',
-          url: `${SITE_URL}/learn/bcs-preparation-guide`,
+          url: `${SITE_URL}/${lang}/learn/bcs-preparation-guide`,
         },
         {
           '@type': 'ListItem',
           position: 2,
           name: lang === 'bn' ? 'ব্যাংক চাকরির প্রস্তুতি গাইড' : 'Bank Job Preparation Guide',
-          url: `${SITE_URL}/learn/bank-job-preparation`,
+          url: `${SITE_URL}/${lang}/learn/bank-job-preparation`,
         },
         {
           '@type': 'ListItem',
           position: 3,
           name: lang === 'bn' ? 'প্রাথমিক সহকারী শিক্ষক নিয়োগ প্রস্তুতি গাইড' : 'Primary Assistant Teacher Recruitment Preparation Guide',
-          url: `${SITE_URL}/learn/primary-teacher-preparation`,
+          url: `${SITE_URL}/${lang}/learn/primary-teacher-preparation`,
         },
         {
           '@type': 'ListItem',
           position: 4,
           name: lang === 'bn' ? 'NTRCA শিক্ষক নিবন্ধন পরীক্ষার প্রস্তুতি গাইড' : 'NTRCA Teacher Registration Exam Preparation Guide',
-          url: `${SITE_URL}/learn/ntrca-preparation`,
+          url: `${SITE_URL}/${lang}/learn/ntrca-preparation`,
         },
         {
           '@type': 'ListItem',
           position: 5,
           name: lang === 'bn' ? 'জাতীয় বিশ্ববিদ্যালয় ভর্তি গাইড' : 'National University Admission Guide',
-          url: `${SITE_URL}/learn/nu-admission-guide`,
+          url: `${SITE_URL}/${lang}/learn/nu-admission-guide`,
         },
         {
           '@type': 'ListItem',
           position: 6,
           name: lang === 'bn' ? 'ইংরেজি ব্যাকরণের মৌলিক বিষয়' : 'English Grammar Basics',
-          url: `${SITE_URL}/learn/english-grammar-basics`,
+          url: `${SITE_URL}/${lang}/learn/english-grammar-basics`,
         },
         {
           '@type': 'ListItem',
           position: 7,
           name: lang === 'bn' ? 'বৃত্তি (স্কলারশিপ) গাইড' : 'Scholarship Guide',
-          url: `${SITE_URL}/learn/scholarship-guide`,
+          url: `${SITE_URL}/${lang}/learn/scholarship-guide`,
         },
         {
           '@type': 'ListItem',
           position: 8,
           name: lang === 'bn' ? 'AI কী? শিক্ষার্থীরা কীভাবে AI ব্যবহার করবে' : 'What Is AI? How Students Should Use AI',
-          url: `${SITE_URL}/learn/what-is-ai`,
+          url: `${SITE_URL}/${lang}/learn/what-is-ai`,
         },
         {
           '@type': 'ListItem',
           position: 9,
           name: lang === 'bn' ? 'CV লেখার গাইড' : 'CV Writing Guide',
-          url: `${SITE_URL}/learn/cv-writing-guide`,
+          url: `${SITE_URL}/${lang}/learn/cv-writing-guide`,
         },
         {
           '@type': 'ListItem',
           position: 10,
           name: lang === 'bn' ? 'শিক্ষার্থী হিসেবে মাসিক বাজেট পরিকল্পনা' : 'Monthly Budget Planning as a Student',
-          url: `${SITE_URL}/learn/budget-planner-guide`,
+          url: `${SITE_URL}/${lang}/learn/budget-planner-guide`,
         },
         {
           '@type': 'ListItem',
           position: 11,
           name: lang === 'bn' ? 'পরীক্ষার আগে পুনরালোচনার কৌশল' : 'Revision Strategy Before Exams',
-          url: `${SITE_URL}/learn/revision-strategy`,
+          url: `${SITE_URL}/${lang}/learn/revision-strategy`,
         },
         {
           '@type': 'ListItem',
           position: 12,
           name: lang === 'bn' ? 'কার্যকর নোট নেওয়ার কৌশল' : 'Effective Note-Taking Techniques',
-          url: `${SITE_URL}/learn/note-taking-guide`,
+          url: `${SITE_URL}/${lang}/learn/note-taking-guide`,
         },
         {
           '@type': 'ListItem',
           position: 13,
           name: lang === 'bn' ? 'শিক্ষার্থীদের সময় ব্যবস্থাপনা' : 'Time Management for Students',
-          url: `${SITE_URL}/learn/time-management-students`,
+          url: `${SITE_URL}/${lang}/learn/time-management-students`,
         },
         {
           '@type': 'ListItem',
           position: 14,
           name: lang === 'bn' ? 'ইংরেজি লেখার মৌলিক নিয়ম' : 'English Writing Basics',
-          url: `${SITE_URL}/learn/english-writing-basics`,
+          url: `${SITE_URL}/${lang}/learn/english-writing-basics`,
         },
         {
           '@type': 'ListItem',
           position: 15,
           name: lang === 'bn' ? 'অনলাইনে নিরাপদ থাকার নিয়ম' : 'Online Safety Guide for Students',
-          url: `${SITE_URL}/learn/online-safety-guide`,
+          url: `${SITE_URL}/${lang}/learn/online-safety-guide`,
         },
         {
           '@type': 'ListItem',
           position: 16,
           name: lang === 'bn' ? 'বাংলা বানানের সাধারণ ভুল' : 'Common Bangla Spelling Mistakes',
-          url: `${SITE_URL}/learn/bangla-spelling-common-mistakes`,
+          url: `${SITE_URL}/${lang}/learn/bangla-spelling-common-mistakes`,
         },
         {
           '@type': 'ListItem',
           position: 17,
           name: lang === 'bn' ? 'কম্পিউটার ও ইন্টারনেটের মৌলিক ধারণা' : 'Computer and Internet Basics for Students',
-          url: `${SITE_URL}/learn/computer-basics-students`,
+          url: `${SITE_URL}/${lang}/learn/computer-basics-students`,
         },
         {
           '@type': 'ListItem',
           position: 18,
           name: lang === 'bn' ? 'পরীক্ষার দিনের কৌশল' : 'Exam Day Strategy',
-          url: `${SITE_URL}/learn/exam-day-strategy`,
+          url: `${SITE_URL}/${lang}/learn/exam-day-strategy`,
         },
         {
           '@type': 'ListItem',
           position: 19,
           name: lang === 'bn' ? 'MCQ উত্তর দেওয়ার কৌশল' : 'MCQ Answering Techniques',
-          url: `${SITE_URL}/learn/mcq-answering-techniques`,
+          url: `${SITE_URL}/${lang}/learn/mcq-answering-techniques`,
         },
         {
           '@type': 'ListItem',
           position: 20,
           name: lang === 'bn' ? 'মনে রাখার কৌশল' : 'Memory Techniques for Students',
-          url: `${SITE_URL}/learn/memory-techniques-students`,
+          url: `${SITE_URL}/${lang}/learn/memory-techniques-students`,
         },
         {
           '@type': 'ListItem',
           position: 21,
           name: lang === 'bn' ? 'চাকরিপ্রার্থীদের পড়ার রুটিন' : 'Study Routine for Job Seekers',
-          url: `${SITE_URL}/learn/study-routine-job-seekers`,
+          url: `${SITE_URL}/${lang}/learn/study-routine-job-seekers`,
         },
         {
           '@type': 'ListItem',
           position: 22,
           name: lang === 'bn' ? 'শিক্ষার্থীদের সুস্থ অভ্যাস' : 'Healthy Habits for Students',
-          url: `${SITE_URL}/learn/healthy-habits-students`,
+          url: `${SITE_URL}/${lang}/learn/healthy-habits-students`,
         },
         {
           '@type': 'ListItem',
           position: 23,
           name: lang === 'bn' ? 'ডিজিটাল দক্ষতার মৌলিক ধারণা' : 'Digital Skills Basics for Students',
-          url: `${SITE_URL}/learn/digital-skills-basics`,
+          url: `${SITE_URL}/${lang}/learn/digital-skills-basics`,
         },
         {
           '@type': 'ListItem',
           position: 24,
           name: lang === 'bn' ? 'পরীক্ষার উদ্বেগ সামলানো' : 'Exam Anxiety Management',
-          url: `${SITE_URL}/learn/exam-anxiety-management`,
+          url: `${SITE_URL}/${lang}/learn/exam-anxiety-management`,
         },
         {
           '@type': 'ListItem',
           position: 25,
           name: lang === 'bn' ? 'উপস্থাপনা দক্ষতা' : 'Presentation Skills for Students',
-          url: `${SITE_URL}/learn/presentation-skills`,
+          url: `${SITE_URL}/${lang}/learn/presentation-skills`,
         },
         {
           '@type': 'ListItem',
           position: 26,
           name: lang === 'bn' ? 'দলগত পড়াশোনা' : 'Group Study Guide',
-          url: `${SITE_URL}/learn/group-study-guide`,
+          url: `${SITE_URL}/${lang}/learn/group-study-guide`,
         },
         {
           '@type': 'ListItem',
           position: 27,
           name: lang === 'bn' ? 'ইংরেজি শব্দভান্ডার গড়া' : 'English Vocabulary Building',
-          url: `${SITE_URL}/learn/english-vocabulary-building`,
+          url: `${SITE_URL}/${lang}/learn/english-vocabulary-building`,
         },
         {
           '@type': 'ListItem',
           position: 28,
           name: lang === 'bn' ? 'কার্যকর পড়ার অভ্যাস' : 'Effective Reading Habits',
-          url: `${SITE_URL}/learn/effective-reading-habits`,
+          url: `${SITE_URL}/${lang}/learn/effective-reading-habits`,
         },
         {
           '@type': 'ListItem',
           position: 29,
           name: lang === 'bn' ? 'নিজেকে অনুপ্রাণিত রাখা' : 'Self-Motivation for Students',
-          url: `${SITE_URL}/learn/self-motivation-students`,
+          url: `${SITE_URL}/${lang}/learn/self-motivation-students`,
         },
         {
           '@type': 'ListItem',
           position: 30,
           name: lang === 'bn' ? 'ফ্রি লাইব্রেরি ব্যবহার করা' : 'How to Use the Free Library',
-          url: `${SITE_URL}/learn/how-to-use-free-library`,
+          url: `${SITE_URL}/${lang}/learn/how-to-use-free-library`,
         },
         {
           '@type': 'ListItem',
           position: 31,
           name: lang === 'bn' ? 'চাকরির অনুশীলন ব্যবহার করা' : 'How to Use Job Practice',
-          url: `${SITE_URL}/learn/how-to-use-job-practice`,
+          url: `${SITE_URL}/${lang}/learn/how-to-use-job-practice`,
         },
         {
           '@type': 'ListItem',
           position: 32,
           name: lang === 'bn' ? 'AI লাইফ অ্যাসিস্ট্যান্ট ব্যবহার করা' : 'How to Use the AI Life Assistant',
-          url: `${SITE_URL}/learn/how-to-use-ai-assistant`,
+          url: `${SITE_URL}/${lang}/learn/how-to-use-ai-assistant`,
         },
         {
           '@type': 'ListItem',
           position: 33,
           name: lang === 'bn' ? 'অপরচুনিটি হাব ব্যবহার করা' : 'How to Use the Opportunity Hub',
-          url: `${SITE_URL}/learn/how-to-use-opportunity-hub`,
+          url: `${SITE_URL}/${lang}/learn/how-to-use-opportunity-hub`,
         },
         {
           '@type': 'ListItem',
           position: 34,
           name: lang === 'bn' ? 'লাইফ সার্ভিস ব্যবহার করা' : 'How to Use Everyday Life Services',
-          url: `${SITE_URL}/learn/how-to-use-life-services`,
+          url: `${SITE_URL}/${lang}/learn/how-to-use-life-services`,
         },
         {
           '@type': 'ListItem',
           position: 35,
           name: lang === 'bn' ? 'ইংরেজিতে কথা বলার অনুশীলন' : 'Spoken English Practice',
-          url: `${SITE_URL}/learn/spoken-english-practice`,
+          url: `${SITE_URL}/${lang}/learn/spoken-english-practice`,
         },
         {
           '@type': 'ListItem',
           position: 36,
           name: lang === 'bn' ? 'শিক্ষার্থীদের লক্ষ্য নির্ধারণ' : 'Goal Setting for Students',
-          url: `${SITE_URL}/learn/goal-setting-students`,
+          url: `${SITE_URL}/${lang}/learn/goal-setting-students`,
         },
         {
           '@type': 'ListItem',
           position: 37,
           name: lang === 'bn' ? 'পড়ায় মনোযোগ ধরে রাখা' : 'Staying Focused While Studying',
-          url: `${SITE_URL}/learn/staying-focused-studying`,
+          url: `${SITE_URL}/${lang}/learn/staying-focused-studying`,
         },
         {
           '@type': 'ListItem',
           position: 38,
           name: lang === 'bn' ? 'ঘুম ও পড়াশোনা' : 'Sleep and Study',
-          url: `${SITE_URL}/learn/sleep-and-study`,
+          url: `${SITE_URL}/${lang}/learn/sleep-and-study`,
         },
         {
           '@type': 'ListItem',
           position: 39,
           name: lang === 'bn' ? 'পড়া বুঝে পড়ার কৌশল' : 'Reading Comprehension Strategies',
-          url: `${SITE_URL}/learn/reading-comprehension-strategies`,
+          url: `${SITE_URL}/${lang}/learn/reading-comprehension-strategies`,
         },
         {
           '@type': 'ListItem',
           position: 40,
           name: lang === 'bn' ? 'ফোন দিয়ে পড়াশোনা' : 'Learning with Your Phone',
-          url: `${SITE_URL}/learn/learning-with-phone`,
+          url: `${SITE_URL}/${lang}/learn/learning-with-phone`,
         },
         {
           '@type': 'ListItem',
           position: 41,
           name: lang === 'bn' ? 'ক্লাসে প্রশ্ন করা' : 'Asking Questions in Class',
-          url: `${SITE_URL}/learn/asking-questions-class`,
+          url: `${SITE_URL}/${lang}/learn/asking-questions-class`,
         },
         {
           '@type': 'ListItem',
           position: 42,
           name: lang === 'bn' ? 'টেন্স — পাঠ' : 'Tense — Lesson',
-          url: `${SITE_URL}/learn/bcs-english-tense`,
+          url: `${SITE_URL}/${lang}/learn/bcs-english-tense`,
         },
         {
           '@type': 'ListItem',
           position: 43,
           name: lang === 'bn' ? 'প্রিপোজিশন — পাঠ' : 'Preposition — Lesson',
-          url: `${SITE_URL}/learn/bcs-english-preposition`,
+          url: `${SITE_URL}/${lang}/learn/bcs-english-preposition`,
         },
         {
           '@type': 'ListItem',
           position: 44,
           name: lang === 'bn' ? 'বিসিএস ইংরেজি অনুশীলন' : 'BCS English Practice',
-          url: `${SITE_URL}/jobs/bcs/practice/english`,
+          url: `${SITE_URL}/${lang}/jobs/bcs/practice/english`,
         },
       ],
     });
@@ -2279,15 +2288,90 @@ export function resolveRouteSeo(pathname: string, lang: 'bn' | 'en' = 'bn'): Seo
  * be touched). It never changes what the user sees.
  */
 export function resolveFallbackSeo(pathname: string, lang: 'bn' | 'en' = 'bn'): SeoData | null {
-  if (pathname.replace(/\/+$/, '') === '/founder') return null;
+  const stripped = stripLangPrefix(pathname.replace(/\/+$/, '') || '/');
+  if (stripped.lang) lang = stripped.lang;
+  if (stripped.path === '/founder') return null;
   const home = STATIC_ROUTES['/'];
   return {
     title: lang === 'bn' ? home.title : home.titleEn,
     description: lang === 'bn' ? home.description : home.descriptionEn,
-    canonical: `${SITE_URL}/`,
+    canonical: `${SITE_URL}/${lang}/`,
     ogType: 'website',
     ogImage: OG_IMAGE_URL,
     robots: 'noindex, nofollow',
     jsonLd: [],
   };
+}
+
+// ---------------------------------------------------------------------------
+// Book pages (Phase 1, 25 Nov 2026, SSG + bilingual).
+//
+// Book URLs use the Firestore document id — there is NO slug,
+// titleBn or titleEn field in the `books` collection (verified
+// against the 24 Nov 2026 backup: doc `id` + the single `title`
+// field). The canonical book URL is /{lang}/books/{id}.
+// bookSeoData() builds the same SeoHead props the prerender script
+// emits into static HTML (scripts/prerender.mjs mirrors these
+// formulas in plain JS). Only fields present on the doc are used —
+// counts are omitted when absent, never invented. The book's own
+// title is never translated.
+// ---------------------------------------------------------------------------
+
+export type BookSeoDoc = {
+  id: string;
+  title: string;
+  subject?: string;
+  classLevel?: string;
+  board?: string;
+  program?: string;
+  department?: string;
+  paperCode?: string;
+  chapterCount?: number;
+  questionCount?: number;
+};
+
+export function bookSeoData(
+  book: BookSeoDoc,
+  lang: 'bn' | 'en' = 'bn',
+): { title: string; description: string; canonical: string; path: string; jsonLd: unknown[] } {
+  const path = `/books/${book.id}`;
+  const title = `${book.title} | Eduvelto`;
+  const parts: string[] = [];
+  if (book.subject) parts.push(book.subject);
+  if (book.classLevel) parts.push(book.classLevel);
+  if (book.board) parts.push(book.board);
+  if (book.program) parts.push(book.program);
+  if (book.paperCode) parts.push(`Code ${book.paperCode}`);
+  if (typeof book.chapterCount === 'number') parts.push(`Chapters ${book.chapterCount}`);
+  if (typeof book.questionCount === 'number') parts.push(`Questions ${book.questionCount}`);
+  const description =
+    lang === 'bn'
+      ? `${book.title} — ${parts.length > 0 ? `${parts.join(' · ')}। ` : ''}Eduvelto ডিজিটাল লাইব্রেরির বই — সম্পূর্ণ ফ্রি।`
+      : `${book.title} — ${parts.length > 0 ? `${parts.join(' · ')}. ` : ''}A book in the Eduvelto digital library — completely free.`;
+  const canonical = canonicalUrl(path, lang);
+  const jsonLd: unknown[] = [
+    ORGANIZATION_JSON_LD,
+    WEBSITE_JSON_LD,
+    {
+      '@context': 'https://schema.org',
+      '@type': 'Book',
+      '@id': `${canonical}#book`,
+      url: canonical,
+      name: book.title,
+      inLanguage: ['bn', 'en'],
+      isPartOf: { '@id': 'https://eduvelto.com#website' },
+      ...(book.subject ? { about: book.subject } : {}),
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'WebPage',
+      '@id': `${canonical}#webpage`,
+      url: canonical,
+      name: title,
+      description,
+      inLanguage: [lang],
+      isPartOf: { '@id': 'https://eduvelto.com#website' },
+    },
+  ];
+  return { title, description, canonical, path, jsonLd };
 }

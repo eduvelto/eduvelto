@@ -80,6 +80,7 @@ import { fileURLToPath } from 'node:url';
 import {
   resolveRouteSeo,
   resolveFallbackSeo,
+  bookSeoData,
   ORGANIZATION_JSON_LD,
   WEBSITE_JSON_LD,
   ogLocaleForLang,
@@ -254,7 +255,7 @@ describe('resolveRouteSeo — public routes', () => {
     );
     expect(seo!.title).not.toContain('সেরা');
     expect(seo!.description).not.toContain('সেরা');
-    expect(seo!.canonical).toBe(`${SITE_URL}/`);
+    expect(seo!.canonical).toBe(`${SITE_URL}/bn`);
   });
 
   it('every sitemap URL except /founder resolves to real SEO', () => {
@@ -262,7 +263,7 @@ describe('resolveRouteSeo — public routes', () => {
       if (path === '/founder') continue;
       const seo = resolveRouteSeo(path);
       expect(seo, `no SEO for sitemap URL ${path}`).not.toBeNull();
-      expect(seo!.canonical).toBe(`${SITE_URL}${path === '/' ? '/' : path}`);
+      expect(seo!.canonical).toBe(`${SITE_URL}/bn${path === '/' ? '' : path}`);
       expect(seo!.title.length).toBeGreaterThan(10);
       expect(seo!.description.length).toBeGreaterThan(40);
       expect(seo!.ogImage).toBe(`${SITE_URL}/og-image.jpg`);
@@ -437,7 +438,7 @@ describe('resolveRouteSeo — public routes', () => {
     const seo = resolveRouteSeo('/terms');
     expect(seo).not.toBeNull();
     expect(seo!.title).toBe('শর্তাবলী — Eduvelto');
-    expect(seo!.canonical).toBe(`${SITE_URL}/terms`);
+    expect(seo!.canonical).toBe(`${SITE_URL}/bn/terms`);
     expect(seo!.description).toContain('বিনামূল্যের');
     expect(seo!.title).not.toMatch(FORBIDDEN_RANK_CLAIM);
     expect(seo!.description).not.toMatch(FORBIDDEN_RANK_CLAIM);
@@ -492,7 +493,7 @@ describe('resolveRouteSeo — public routes', () => {
     }[];
     const hit = redirects.find((r) => r.source === '/jobs/primary');
     expect(hit).toBeDefined();
-    expect(hit!.destination).toBe('/jobs/primary-teacher');
+    expect(hit!.destination).toBe('/bn/jobs/primary-teacher');
     expect(hit!.type).toBe(301);
   });
 
@@ -727,7 +728,7 @@ describe('resolveRouteSeo — SEO 50–100 pages (23 Nov 2026)', () => {
     const junk = resolveFallbackSeo('/jobs/primary');
     expect(junk).not.toBeNull();
     expect(junk!.robots).toBe('noindex, nofollow');
-    expect(junk!.canonical).toBe(`${SITE_URL}/`);
+    expect(junk!.canonical).toBe(`${SITE_URL}/bn/`);
     expect(junk!.title).toBe(home.title);
     expect(junk!.description).toBe(home.description);
     expect(resolveFallbackSeo('/founder')).toBeNull();
@@ -839,7 +840,7 @@ describe('resolveRouteSeo — SEO 50–100 pages (23 Nov 2026)', () => {
     const items = itemList['itemListElement'] as Array<Record<string, unknown>>;
     expect(items.length).toBe(15);
     expect(items.map((i) => i['url'])).toEqual(
-      JOB_EXAMS.map((e) => `${SITE_URL}/jobs/${e.slug}`),
+      JOB_EXAMS.map((e) => `${SITE_URL}/bn/jobs/${e.slug}`),
     );
     const bcs = resolveRouteSeo('/jobs/bcs')!;
     expect(jsonLdTypes(bcs)).toEqual(['Organization', 'WebSite', 'WebPage', 'BreadcrumbList']);
@@ -946,7 +947,7 @@ describe('resolveRouteSeo — AdSense Part 1 noindex + BCS English practice (23 
       expect(seo!.robots, path).toBeUndefined();
       expect(seo!.title.length, path).toBeGreaterThan(10);
       expect(seo!.description.length, path).toBeGreaterThan(40);
-      expect(seo!.canonical, path).toBe(`${SITE_URL}${path}`);
+      expect(seo!.canonical, path).toBe(`${SITE_URL}/bn${path}`);
       expect(SITEMAP_URLS, path).toContain(path);
     }
   });
@@ -969,9 +970,9 @@ describe('resolveRouteSeo — AdSense Part 1 noindex + BCS English practice (23 
     const itemList = (hub.jsonLd as Array<Record<string, unknown>>)[4];
     const items = itemList['itemListElement'] as Array<Record<string, unknown>>;
     expect(items.map((i) => i['url'])).toEqual([
-      `${SITE_URL}/jobs/bcs/practice/english/grammar`,
-      `${SITE_URL}/jobs/bcs/practice/english/vocabulary`,
-      `${SITE_URL}/jobs/bcs/practice/english/reading`,
+      `${SITE_URL}/bn/jobs/bcs/practice/english/grammar`,
+      `${SITE_URL}/bn/jobs/bcs/practice/english/vocabulary`,
+      `${SITE_URL}/bn/jobs/bcs/practice/english/reading`,
     ]);
   });
 
@@ -1052,50 +1053,50 @@ describe('resolveRouteSeo — SEO pass 24 Nov 2026 (owner order "SEO korba ajk 1
     const seo = resolveRouteSeo('/learn')!;
     const items = itemListOf(seo)['itemListElement'] as Array<Record<string, unknown>>;
     expect(items.map((i) => i['url'])).toEqual([
-      `${SITE_URL}/learn/bcs-preparation-guide`,
-      `${SITE_URL}/learn/bank-job-preparation`,
-      `${SITE_URL}/learn/primary-teacher-preparation`,
-      `${SITE_URL}/learn/ntrca-preparation`,
-      `${SITE_URL}/learn/nu-admission-guide`,
-      `${SITE_URL}/learn/english-grammar-basics`,
-      `${SITE_URL}/learn/scholarship-guide`,
-      `${SITE_URL}/learn/what-is-ai`,
-      `${SITE_URL}/learn/cv-writing-guide`,
-      `${SITE_URL}/learn/budget-planner-guide`,
-      `${SITE_URL}/learn/revision-strategy`,
-      `${SITE_URL}/learn/note-taking-guide`,
-      `${SITE_URL}/learn/time-management-students`,
-      `${SITE_URL}/learn/english-writing-basics`,
-      `${SITE_URL}/learn/online-safety-guide`,
-      `${SITE_URL}/learn/bangla-spelling-common-mistakes`,
-      `${SITE_URL}/learn/computer-basics-students`,
-      `${SITE_URL}/learn/exam-day-strategy`,
-      `${SITE_URL}/learn/mcq-answering-techniques`,
-      `${SITE_URL}/learn/memory-techniques-students`,
-      `${SITE_URL}/learn/study-routine-job-seekers`,
-      `${SITE_URL}/learn/healthy-habits-students`,
-      `${SITE_URL}/learn/digital-skills-basics`,
-      `${SITE_URL}/learn/exam-anxiety-management`,
-      `${SITE_URL}/learn/presentation-skills`,
-      `${SITE_URL}/learn/group-study-guide`,
-      `${SITE_URL}/learn/english-vocabulary-building`,
-      `${SITE_URL}/learn/effective-reading-habits`,
-      `${SITE_URL}/learn/self-motivation-students`,
-      `${SITE_URL}/learn/how-to-use-free-library`,
-      `${SITE_URL}/learn/how-to-use-job-practice`,
-      `${SITE_URL}/learn/how-to-use-ai-assistant`,
-      `${SITE_URL}/learn/how-to-use-opportunity-hub`,
-      `${SITE_URL}/learn/how-to-use-life-services`,
-      `${SITE_URL}/learn/spoken-english-practice`,
-      `${SITE_URL}/learn/goal-setting-students`,
-      `${SITE_URL}/learn/staying-focused-studying`,
-      `${SITE_URL}/learn/sleep-and-study`,
-      `${SITE_URL}/learn/reading-comprehension-strategies`,
-      `${SITE_URL}/learn/learning-with-phone`,
-      `${SITE_URL}/learn/asking-questions-class`,
-      `${SITE_URL}/learn/bcs-english-tense`,
-      `${SITE_URL}/learn/bcs-english-preposition`,
-      `${SITE_URL}/jobs/bcs/practice/english`,
+      `${SITE_URL}/bn/learn/bcs-preparation-guide`,
+      `${SITE_URL}/bn/learn/bank-job-preparation`,
+      `${SITE_URL}/bn/learn/primary-teacher-preparation`,
+      `${SITE_URL}/bn/learn/ntrca-preparation`,
+      `${SITE_URL}/bn/learn/nu-admission-guide`,
+      `${SITE_URL}/bn/learn/english-grammar-basics`,
+      `${SITE_URL}/bn/learn/scholarship-guide`,
+      `${SITE_URL}/bn/learn/what-is-ai`,
+      `${SITE_URL}/bn/learn/cv-writing-guide`,
+      `${SITE_URL}/bn/learn/budget-planner-guide`,
+      `${SITE_URL}/bn/learn/revision-strategy`,
+      `${SITE_URL}/bn/learn/note-taking-guide`,
+      `${SITE_URL}/bn/learn/time-management-students`,
+      `${SITE_URL}/bn/learn/english-writing-basics`,
+      `${SITE_URL}/bn/learn/online-safety-guide`,
+      `${SITE_URL}/bn/learn/bangla-spelling-common-mistakes`,
+      `${SITE_URL}/bn/learn/computer-basics-students`,
+      `${SITE_URL}/bn/learn/exam-day-strategy`,
+      `${SITE_URL}/bn/learn/mcq-answering-techniques`,
+      `${SITE_URL}/bn/learn/memory-techniques-students`,
+      `${SITE_URL}/bn/learn/study-routine-job-seekers`,
+      `${SITE_URL}/bn/learn/healthy-habits-students`,
+      `${SITE_URL}/bn/learn/digital-skills-basics`,
+      `${SITE_URL}/bn/learn/exam-anxiety-management`,
+      `${SITE_URL}/bn/learn/presentation-skills`,
+      `${SITE_URL}/bn/learn/group-study-guide`,
+      `${SITE_URL}/bn/learn/english-vocabulary-building`,
+      `${SITE_URL}/bn/learn/effective-reading-habits`,
+      `${SITE_URL}/bn/learn/self-motivation-students`,
+      `${SITE_URL}/bn/learn/how-to-use-free-library`,
+      `${SITE_URL}/bn/learn/how-to-use-job-practice`,
+      `${SITE_URL}/bn/learn/how-to-use-ai-assistant`,
+      `${SITE_URL}/bn/learn/how-to-use-opportunity-hub`,
+      `${SITE_URL}/bn/learn/how-to-use-life-services`,
+      `${SITE_URL}/bn/learn/spoken-english-practice`,
+      `${SITE_URL}/bn/learn/goal-setting-students`,
+      `${SITE_URL}/bn/learn/staying-focused-studying`,
+      `${SITE_URL}/bn/learn/sleep-and-study`,
+      `${SITE_URL}/bn/learn/reading-comprehension-strategies`,
+      `${SITE_URL}/bn/learn/learning-with-phone`,
+      `${SITE_URL}/bn/learn/asking-questions-class`,
+      `${SITE_URL}/bn/learn/bcs-english-tense`,
+      `${SITE_URL}/bn/learn/bcs-english-preposition`,
+      `${SITE_URL}/bn/jobs/bcs/practice/english`,
     ]);
   });
 
@@ -1268,7 +1269,7 @@ describe('resolveRouteSeo — English SEO (24 Nov 2026, language system)', () =>
       expect(seo, path).not.toBeNull();
       expect(seo!.title, path).not.toMatch(BN);
       expect(seo!.description, path).not.toMatch(BN);
-      expect(seo!.canonical, path).toBe(`${SITE_URL}${path === '/' ? '/' : path}`);
+      expect(seo!.canonical, path).toBe(`${SITE_URL}/en${path === '/' ? '' : path}`);
       expect(seo!.canonical, path).not.toContain('?lang=');
     }
   });
@@ -1366,7 +1367,7 @@ describe('resolveRouteSeo — English SEO (24 Nov 2026, language system)', () =>
     const fb = resolveFallbackSeo('/jobs/primary', 'en')!;
     expect(fb.title).toBe("Eduvelto — Bangladesh's Free Education Platform");
     expect(fb.title).not.toMatch(BN);
-    expect(fb.canonical).toBe(`${SITE_URL}/`);
+    expect(fb.canonical).toBe(`${SITE_URL}/en/`);
     expect(fb.robots).toBe('noindex, nofollow');
     expect(resolveFallbackSeo('/founder', 'en')).toBeNull();
   });
@@ -1624,5 +1625,75 @@ describe('SEO review (24 Nov 2026, owner order "SEO korco j sob review koro")', 
   it('og:locale follows the page language, with the other as alternate (IMP-34)', () => {
     expect(ogLocaleForLang('bn')).toEqual({ locale: 'bn_BD', alternate: 'en_US' });
     expect(ogLocaleForLang('en')).toEqual({ locale: 'en_US', alternate: 'bn_BD' });
+  });
+});
+
+describe('resolveRouteSeo — bilingual /:lang canonicals (Phase 1, 25 Nov 2026)', () => {
+  it('canonicals are lang-prefixed; a /:lang prefix is the language source of truth', () => {
+    const bn = resolveRouteSeo('/bn/jobs/bcs', 'bn')!;
+    expect(bn.canonical).toBe('https://eduvelto.com/bn/jobs/bcs');
+    const en = resolveRouteSeo('/en/jobs/bcs', 'bn')!;
+    expect(en.canonical).toBe('https://eduvelto.com/en/jobs/bcs');
+    expect(en.title).not.toMatch(/[\u0980-\u09FF]/);
+    // Home in each language.
+    expect(resolveRouteSeo('/bn', 'en')!.canonical).toBe('https://eduvelto.com/bn');
+    expect(resolveRouteSeo('/en', 'bn')!.canonical).toBe('https://eduvelto.com/en');
+  });
+
+  it('bare legacy paths still resolve, with the /bn canonical', () => {
+    const seo = resolveRouteSeo('/jobs/bcs')!;
+    expect(seo.canonical).toBe('https://eduvelto.com/bn/jobs/bcs');
+    expect(resolveRouteSeo('/learn')!.canonical).toBe('https://eduvelto.com/bn/learn');
+  });
+
+  it('/founder still resolves to null under /:lang', () => {
+    expect(resolveRouteSeo('/bn/founder')).toBeNull();
+    expect(resolveRouteSeo('/en/founder')).toBeNull();
+    expect(resolveFallbackSeo('/bn/founder')).toBeNull();
+  });
+
+  it('fallback SEO on a lang-prefixed junk URL keeps the lang + noindex', () => {
+    const fb = resolveFallbackSeo('/en/jobs/not-an-exam', 'en')!;
+    expect(fb.canonical).toBe('https://eduvelto.com/en/');
+    expect(fb.robots).toBe('noindex, nofollow');
+  });
+});
+
+describe('bookSeoData (Phase 1, 25 Nov 2026)', () => {
+  const book = {
+    id: 'hons-211001',
+    title: 'History and Culture of Bangladesh and Bengalees (From Ancients to 2000 AD)',
+    subject: 'Bangla',
+    classLevel: '1st Year',
+    board: 'National University',
+    program: 'Honours',
+    paperCode: '211001',
+    chapterCount: 3,
+    questionCount: 26,
+  };
+
+  it('canonical is /{lang}/books/{doc id}; title is the book title, never translated', () => {
+    const bn = bookSeoData(book, 'bn');
+    expect(bn.canonical).toBe('https://eduvelto.com/bn/books/hons-211001');
+    expect(bn.path).toBe('/books/hons-211001');
+    expect(bn.title).toBe(`${book.title} | Eduvelto`);
+    expect(bookSeoData(book, 'en').canonical).toBe('https://eduvelto.com/en/books/hons-211001');
+  });
+
+  it('emits Book + WebPage JSON-LD with only real fields', () => {
+    const { jsonLd } = bookSeoData(book, 'bn');
+    const types = (jsonLd as Array<Record<string, unknown>>).map((o) => o['@type']);
+    expect(types).toContain('Book');
+    expect(types).toContain('WebPage');
+    const bookLd = (jsonLd as Array<Record<string, unknown>>).find((o) => o['@type'] === 'Book')!;
+    expect(bookLd['name']).toBe(book.title);
+    expect(bookLd['about']).toBe('Bangla');
+  });
+
+  it('omits counts it does not have — never invents them', () => {
+    const bare = bookSeoData({ id: 'x-1', title: 'Bare Book' }, 'bn');
+    expect(bare.description).not.toContain('Chapters');
+    expect(bare.description).not.toContain('Questions');
+    expect(bare.canonical).toBe('https://eduvelto.com/bn/books/x-1');
   });
 });
