@@ -827,6 +827,11 @@ export interface QpgPaperSetup {
   timeMinutes: number;
   instructions: string;
   sectionHeading: string;
+  /** মানবণ্টন (pattern 4, sprint 27 Nov 2026): how many questions
+   *  of this section the student must answer — the rest print as
+   *  extra alternatives. Undefined (or >= question count) means
+   *  "answer all". */
+  answerCount?: number;
   /** Subject Code — part of the restored 8-field exam header (Turn 32).
    *  Free editable text; empty renders as "—". */
   subjectCode: string;
@@ -870,6 +875,8 @@ export function defaultPaperSetup(args: {
   sectionHeading: string;
   subjectCode?: string;
   setCode?: QpgPaperSetup['setCode'];
+  /** মানবণ্টন (pattern 4): "answer X of Y" — see QpgPaperSetup. */
+  answerCount?: number;
   /** Auto-fields (25 Nov 09:19): pre-filled, editable, resettable. */
   institutionAddress?: string;
   institutionMotto?: string;
@@ -888,6 +895,7 @@ export function defaultPaperSetup(args: {
     instructions:
       'সব প্রশ্নের উত্তর দাও। প্রতিটি সঠিক উত্তরের জন্য নির্ধারিত নম্বর পাবে। ভুল উত্তরের জন্য নম্বর কাটা যেতে পারে (প্রশ্নপত্রে উল্লেখ থাকলে)।',
     sectionHeading: args.sectionHeading,
+    answerCount: args.answerCount,
     subjectCode: args.subjectCode ?? '',
     setCode: args.setCode ?? '',
   };
@@ -1258,3 +1266,105 @@ export const QPG_PENDING_TRACK3_EXAMS: Array<{
       'Pattern not verified — no paper can be generated until the pattern is verified against the official circular.',
   },
 ];
+
+// ---------------------------------------------------------------------
+// Pre-built combined papers (pattern 6, sprint 27 Nov 2026): Class 8
+// scholarship bundles — 100 marks / 3 hours, sections droppable.
+// The STRUCTURE (subjects, sections, marks, time) is fixed and
+// honest; GENERATION stays gated on verified questions — today every
+// bundle holds 0 verified questions (the pool is BCS English only),
+// so each card shows the shortfall and its generate button stays
+// disabled. No questions are invented to fill a bundle.
+// ---------------------------------------------------------------------
+
+export interface QpgCombinedSection {
+  id: string;
+  headingBn: string;
+  headingEn: string;
+  /** Subject id in the general stream (see GENERAL_SUBJECTS_BY_BAND). */
+  subjectId: string;
+  marks: number;
+}
+
+export interface QpgCombinedPaper {
+  id: string;
+  nameBn: string;
+  nameEn: string;
+  classId: string;
+  totalMarks: number;
+  timeMinutes: number;
+  sections: QpgCombinedSection[];
+}
+
+export const QPG_COMBINED_PAPERS: QpgCombinedPaper[] = [
+  {
+    id: 'class-8-scholarship-bangla',
+    nameBn: 'বাংলা — সাহিত্য-কণিকা + আনন্দপাঠ + ব্যাকরণ ও নির্মিতি',
+    nameEn: 'Bangla — Literature + Supplementary Reader + Grammar',
+    classId: 'class-8',
+    totalMarks: 100,
+    timeMinutes: 180,
+    sections: [
+      { id: 'bangla-lit', headingBn: 'সাহিত্য-কণিকা (গদ্য ও কবিতা)', headingEn: 'Literature (Prose & Poetry)', subjectId: 'bangla', marks: 50 },
+      { id: 'bangla-grammar', headingBn: 'ব্যাকরণ ও নির্মিতি', headingEn: 'Grammar & Composition', subjectId: 'bangla', marks: 50 },
+    ],
+  },
+  {
+    id: 'class-8-scholarship-english',
+    nameBn: 'English — 1st Paper + 2nd Paper',
+    nameEn: 'English — 1st Paper + 2nd Paper',
+    classId: 'class-8',
+    totalMarks: 100,
+    timeMinutes: 180,
+    sections: [
+      { id: 'english-1st', headingBn: 'English 1st Paper', headingEn: 'English 1st Paper', subjectId: 'english', marks: 50 },
+      { id: 'english-2nd', headingBn: 'English 2nd Paper (Grammar & Composition)', headingEn: 'English 2nd Paper (Grammar & Composition)', subjectId: 'english', marks: 50 },
+    ],
+  },
+  {
+    id: 'class-8-scholarship-math',
+    nameBn: 'গণিত — বহুনির্বাচনী + সংক্ষিপ্ত-উত্তর + সৃজনশীল',
+    nameEn: 'Mathematics — MCQ + Short Answer + Creative',
+    classId: 'class-8',
+    totalMarks: 100,
+    timeMinutes: 180,
+    sections: [
+      { id: 'math-mcq', headingBn: 'বহুনির্বাচনী প্রশ্ন', headingEn: 'MCQ', subjectId: 'math', marks: 30 },
+      { id: 'math-short', headingBn: 'সংক্ষিপ্ত-উত্তর প্রশ্ন', headingEn: 'Short Answer', subjectId: 'math', marks: 20 },
+      { id: 'math-creative', headingBn: 'সৃজনশীল প্রশ্ন', headingEn: 'Creative', subjectId: 'math', marks: 50 },
+    ],
+  },
+  {
+    id: 'class-8-scholarship-science-bgs',
+    nameBn: 'বিজ্ঞান + বাংলাদেশ ও বিশ্বপরিচয় (৫০+৫০)',
+    nameEn: 'Science + Bangladesh & Global Studies (50+50)',
+    classId: 'class-8',
+    totalMarks: 100,
+    timeMinutes: 180,
+    sections: [
+      { id: 'science', headingBn: 'বিজ্ঞান', headingEn: 'Science', subjectId: 'science', marks: 50 },
+      { id: 'bgs', headingBn: 'বাংলাদেশ ও বিশ্বপরিচয়', headingEn: 'Bangladesh & Global Studies', subjectId: 'bgs', marks: 50 },
+    ],
+  },
+];
+
+/** Verified questions available for one combined-paper section today
+ *  (0 for every Class 8 subject — the pool holds BCS English only).
+ *  Section marks are the TARGET, never the availability. */
+export function qpgCombinedSectionAvailable(section: QpgCombinedSection): number {
+  return qpgChaptersFor('general', 'class-8', section.subjectId).reduce(
+    (sum, ch) => sum + ch.verifiedCount,
+    0,
+  );
+}
+
+/** A bundle is generatable only when every KEPT section has at least
+ *  one verified question. Today that is never true — the cards stay
+ *  honestly disabled until Class 8 packs are verified. */
+export function qpgCombinedPaperReady(
+  paper: QpgCombinedPaper,
+  droppedSectionIds: string[] = [],
+): boolean {
+  const kept = paper.sections.filter((s) => !droppedSectionIds.includes(s.id));
+  return kept.length > 0 && kept.every((s) => qpgCombinedSectionAvailable(s) > 0);
+}

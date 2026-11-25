@@ -83,6 +83,11 @@ export interface QpgPaperDomOptions {
   /** Footer line ("Eduvelto — শেখো, এগিয়ে যাও, স্বপ্ন গড়ো").
    *  Default true; pagination shows it on the last page only. */
   showFooter?: boolean;
+  /** Real render progress (Smart Generation Progress Screen, sprint
+   *  27 Nov 2026): called with (done, total) after pagination knows
+   *  the page count (done = 0) and after each page canvas is drawn.
+   *  Never faked — only fires from the actual render loop. */
+  onPageRendered?: (done: number, total: number) => void;
 }
 
 const FONT_STACK = "'Hind Siliguri','Noto Sans Bengali',system-ui,-apple-system,'Segoe UI',sans-serif";
@@ -188,6 +193,16 @@ export function buildPaperDom(paper: QpgPaper, opts: QpgPaperDomOptions): HTMLEl
       breakAfter: 'avoid', pageBreakAfter: 'avoid',
     } as Partial<CSSStyleDeclaration>, 'qpg-section-heading');
     root.appendChild(heading);
+    // মানবণ্টন (pattern 4): when the teacher says "answer X of Y",
+    // the paper states it under the section heading — the questions
+    // beyond X are the extra alternatives, printed on the paper.
+    if (setup.answerCount && setup.answerCount > 0 && setup.answerCount < paper.questions.length) {
+      root.appendChild(
+        el('div', `এই বিভাগের ${setup.answerCount}টি প্রশ্নের উত্তর দিতে হবে (মোট ${paper.questions.length}টি প্রশ্ন দেওয়া আছে)।`, {
+          fontSize: '13px', marginBottom: '10px',
+        } as Partial<CSSStyleDeclaration>, 'qpg-answer-count'),
+      );
+    }
   }
 
   // Reading passage (BCS Batch 1 reading questions need it to be answerable).
@@ -462,10 +477,12 @@ export async function renderPaperCanvases(
     // bundle (zero-bundle-bloat rule, owner 25 Nov 08:48).
     const { default: html2canvas } = await import('html2canvas');
     const canvases: HTMLCanvasElement[] = [];
+    opts.onPageRendered?.(0, doms.length);
     for (const dom of doms) {
       const shot = await html2canvas(dom, { scale: 2, backgroundColor: '#ffffff' });
       if (opts.watermarked) drawQpgCenteredWatermark(shot, opts.userLabel);
       canvases.push(shot);
+      opts.onPageRendered?.(canvases.length, doms.length);
     }
     return canvases;
   } finally {

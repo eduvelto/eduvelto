@@ -302,3 +302,50 @@ describe('two-flow prefill (pattern 2, sprint 26 Nov 2026)', () => {
     expect(() => clearQpgFlowPrefill()).not.toThrow();
   });
 });
+
+describe('pre-built combined papers (pattern 6, sprint 27 Nov 2026)', () => {
+  it('holds the 4 Class 8 scholarship bundles, 100 marks / 3 hours each', async () => {
+    const { QPG_COMBINED_PAPERS, qpgCombinedPaperReady, qpgCombinedSectionAvailable } =
+      await import('../questionPaper');
+    expect(QPG_COMBINED_PAPERS).toHaveLength(4);
+    for (const p of QPG_COMBINED_PAPERS) {
+      expect(p.classId).toBe('class-8');
+      expect(p.totalMarks).toBe(100);
+      expect(p.timeMinutes).toBe(180);
+      expect(p.sections.reduce((s, sec) => s + sec.marks, 0)).toBe(100);
+      // Honest gate: no Class 8 verified questions exist today, so
+      // no bundle is generatable — and no section reports any.
+      for (const sec of p.sections) {
+        expect(qpgCombinedSectionAvailable(sec)).toBe(0);
+      }
+      expect(qpgCombinedPaperReady(p)).toBe(false);
+      expect(qpgCombinedPaperReady(p, p.sections.map((s) => s.id))).toBe(false);
+    }
+  });
+});
+
+describe('মানবণ্টন answerCount (pattern 4, sprint 27 Nov 2026)', () => {
+  it('defaultPaperSetup carries an optional answerCount (answer X of Y)', () => {
+    const setup = defaultPaperSetup({
+      title: 'পরীক্ষা',
+      subject: 'English',
+      classLabel: 'অনার্স',
+      questionCount: 10,
+      marksPerQuestion: 1,
+      timeMinutes: 30,
+      sectionHeading: 'ক-বিভাগ',
+      answerCount: 8,
+    });
+    expect(setup.answerCount).toBe(8);
+    const plain = defaultPaperSetup({
+      title: 'পরীক্ষা',
+      subject: 'English',
+      classLabel: 'অনার্স',
+      questionCount: 10,
+      marksPerQuestion: 1,
+      timeMinutes: 30,
+      sectionHeading: 'ক-বিভাগ',
+    });
+    expect(plain.answerCount).toBeUndefined();
+  });
+});

@@ -42,6 +42,7 @@ import { savePaperForSmartboard } from '../lib/qpgSmartboard';
 import {
   QPG_CHEAPEST_ANNUAL_BDT,
   QPG_COGNITIVE_OPTIONS,
+  QPG_COMBINED_PAPERS,
   QPG_FREE_MONTHLY_LIMIT,
   QPG_NATURE_OPTIONS,
   QPG_PAPER_TEMPLATES,
@@ -60,6 +61,8 @@ import {
   defaultPaperSetup,
   qpgChaptersFor,
   qpgClassesFor,
+  qpgCombinedPaperReady,
+  qpgCombinedSectionAvailable,
   qpgLevelFor,
   qpgModelSectionQuestions,
   qpgModelTests,
@@ -208,6 +211,60 @@ export default function QuestionPaperGeneratorPage() {
   const [previewError, setPreviewError] = useState('');
   const [showDownload, setShowDownload] = useState(false);
 
+  // --- Smart Generation Progress Screen (UX feature, sprint 27 Nov
+  // --- 2026): label is 'Smart Engine', NEVER 'AI' (owner decision
+  // --- still owed — the label here is the task's instruction). Every
+  // --- step is a REAL client step, driven by actual callbacks —
+  // --- never a fake animation: selecting (the selection memo),
+  // --- building (buildQpgPaper), rendering (one callback per A4
+  // --- page canvas actually drawn). */
+  const [genProgress, setGenProgress] = useState<{
+    phase: 'selecting' | 'building' | 'rendering';
+    donePages: number;
+    totalPages: number;
+  } | null>(null);
+
+  // --- Post-generation মানবণ্টন editor (pattern 4) + 1-Click Swap
+  // --- on every paper question (UX feature): which paper question is
+  // --- picking a replacement right now.
+  const [paperReplacingId, setPaperReplacingId] = useState<string | null>(null);
+  // Editor fields — initialised from the paper whenever a (new)
+  // paper is built; "প্রয়োগ করুন" rebuilds + re-renders.
+  const [editTitle, setEditTitle] = useState('');
+  const [editSectionHeading, setEditSectionHeading] = useState('');
+  const [editInstructions, setEditInstructions] = useState('');
+  const [editTimeMinutes, setEditTimeMinutes] = useState(30);
+  const [editSectionCount, setEditSectionCount] = useState(0);
+  const [editMarksPerQ, setEditMarksPerQ] = useState(1);
+  const [editAnswerCount, setEditAnswerCount] = useState('');
+  useEffect(() => {
+    if (!paper) return;
+    setEditTitle(paper.setup.title);
+    setEditSectionHeading(paper.setup.sectionHeading);
+    setEditInstructions(paper.setup.instructions);
+    setEditTimeMinutes(paper.setup.timeMinutes);
+    setEditSectionCount(paper.questions.length);
+    setEditMarksPerQ(
+      paper.questions.length > 0
+        ? Math.max(1, Math.round(paper.setup.totalMarks / paper.questions.length))
+        : 1,
+    );
+    setEditAnswerCount(
+      paper.setup.answerCount && paper.setup.answerCount < paper.questions.length
+        ? String(paper.setup.answerCount)
+        : '',
+    );
+    setPaperReplacingId(null);
+  }, [paper?.id]);
+
+  // --- Topic-wise search (pattern 5): filters only the DISPLAYED
+  // --- picker list, never the selection itself.
+  const [searchText, setSearchText] = useState('');
+  // --- Pre-built combined papers (pattern 6): dropped sections per
+  // --- bundle (section checkboxes — the structure is editable even
+  // --- while generation stays gated on verified questions).
+  const [droppedSections, setDroppedSections] = useState<Record<string, string[]>>({});
+
   // --- Typo report ----------------------------------------------------
   const [reportFor, setReportFor] = useState<QpgQuestion | null>(null);
   const [reportReason, setReportReason] = useState<QpgReportReason>('typo');
@@ -267,6 +324,15 @@ export default function QuestionPaperGeneratorPage() {
   const selectedQuestions = availableQuestions
     .filter((q) => selectedIds.includes(q.id))
     .map(applyEdits);
+  // Topic-wise search (pattern 5): filters only the displayed picker
+  // list — the selection itself is untouched.
+  const displayedQuestions = searchText.trim()
+    ? availableQuestions.filter((q) =>
+        `${q.questionText} ${q.topicNameBn} ${q.topicNameEn}`
+          .toLowerCase()
+          .includes(searchText.trim().toLowerCase()),
+      )
+    : availableQuestions;
 
   const toggleIn = (list: string[], id: string) =>
     list.includes(id) ? list.filter((x) => x !== id) : [...list, id];
@@ -422,7 +488,9 @@ export default function QuestionPaperGeneratorPage() {
   /** Full-paper preview (owner 25 Nov 19:03 — "question lukai
    *  rakte hobe na sob dekaw"): every question is rendered, one image
    *  per A4 page, paginated between questions — never mid-question.
-   *  Copy-protection (wrapper) stays; only the hiding is gone. */
+   *  Copy-protection (wrapper) stays; only the hiding is gone.
+   *  The Smart Engine progress screen is driven by the REAL page
+   *  callbacks (onPageRendered): done/total are actual canvases. */
   const renderPreview = async (built: QpgPaper) => {
     setPreviewBusy(true);
     setPreviewError('');
@@ -430,10 +498,15 @@ export default function QuestionPaperGeneratorPage() {
       const canvases = await renderPaperCanvases(built, {
         watermarked: true,
         userLabel,
+        onPageRendered: (done, total) => {
+          setGenProgress({ phase: 'rendering', donePages: done, totalPages: total });
+        },
       });
       setPreviewUrls(canvases.map((c) => c.toDataURL('image/png')));
+      setGenProgress(null);
     } catch (err) {
       setPreviewError(`প্রিভিউ তৈরি করা যায়নি: ${err instanceof Error ? err.message : 'অজানা ত্রুটি'}`);
+      setGenProgress(null);
     } finally {
       setPreviewBusy(false);
     }
@@ -441,7 +514,9 @@ export default function QuestionPaperGeneratorPage() {
 
   const generateChapterPaper = () => {
     if (selectedQuestions.length === 0) return;
+    setGenProgress({ phase: 'selecting', donePages: 0, totalPages: 0 });
     const ordered = questionsForSet(selectedQuestions, seed, setCode);
+    setGenProgress({ phase: 'building', donePages: 0, totalPages: 0 });
     const built = buildQpgPaper({
       setup,
       questions: ordered,
@@ -458,7 +533,9 @@ export default function QuestionPaperGeneratorPage() {
   const generateModelSection = () => {
     const n = Math.min(jobCount, jobAvailable.length);
     if (n <= 0) return;
+    setGenProgress({ phase: 'selecting', donePages: 0, totalPages: 0 });
     const ordered = questionsForSet(jobAvailable.slice(0, n), seed, setCode);
+    setGenProgress({ phase: 'building', donePages: 0, totalPages: 0 });
     const built = buildQpgPaper({
       setup,
       questions: ordered,
@@ -471,6 +548,61 @@ export default function QuestionPaperGeneratorPage() {
     setPaper(built);
     rememberPaperKey(built);
     void renderPreview(built);
+  };
+
+  /** Post-generation rebuild (pattern 4): same paper, new questions
+   *  and/or setup — re-renders the preview with real progress. */
+  const rebuildPaper = (nextQuestions: QpgQuestion[], nextSetup: QpgPaperSetup) => {
+    if (!paper) return;
+    setGenProgress({ phase: 'building', donePages: 0, totalPages: 0 });
+    const built = buildQpgPaper({
+      setup: nextSetup,
+      questions: nextQuestions,
+      isCustomVariant: paper.isCustomVariant,
+      kind: paper.kind,
+      patternLabelBn: paper.patternLabelBn,
+      patternLabelEn: paper.patternLabelEn,
+    });
+    setPaper(built);
+    rememberPaperKey(built);
+    void renderPreview(built);
+  };
+
+  /** The verified pool the current paper draws extras from — the
+   *  academic chapter pool, or the Job subject pool for Track 3. */
+  const paperPool = stream === 'job_admission' ? jobAvailable : availableQuestions;
+  /** Auto extra-alternative questions (pattern 4): verified
+   *  questions from the same chapters NOT in the paper yet — offered
+   *  for adding / swapping, never invented. */
+  const paperExtras = paper
+    ? paperPool.filter((q) => !paper.questions.some((pq) => pq.id === q.id))
+    : [];
+
+  /** Apply the মানবণ্টন editor fields to the paper: section count
+   *  (trim from the end / extend from the extras), marks per
+   *  question (total auto = count × marks), answer-count, and the
+   *  editable texts. */
+  const applyPaperEdits = () => {
+    if (!paper) return;
+    const maxCount = paper.questions.length + paperExtras.length;
+    const wantCount = Math.max(1, Math.min(editSectionCount || paper.questions.length, maxCount));
+    let next = [...paper.questions];
+    if (wantCount < next.length) next = next.slice(0, wantCount);
+    else if (wantCount > next.length) next = [...next, ...paperExtras.slice(0, wantCount - next.length)];
+    const marksPerQ = Math.max(1, editMarksPerQ || 1);
+    const answerRaw =
+      editAnswerCount.trim() === ''
+        ? undefined
+        : Math.max(1, Math.min(next.length, Number(editAnswerCount) || next.length));
+    rebuildPaper(next, {
+      ...paper.setup,
+      title: editTitle,
+      sectionHeading: editSectionHeading,
+      instructions: editInstructions,
+      timeMinutes: Math.max(5, editTimeMinutes || 5),
+      totalMarks: next.length * marksPerQ,
+      answerCount: answerRaw,
+    });
   };
 
   /** Remember the last generated paper's Answer Key (session only) so
@@ -531,6 +663,68 @@ export default function QuestionPaperGeneratorPage() {
         {' · '}
         <Link to="/custom-paper">কাস্টম পেপার (৳৪৯)</Link>
       </p>
+
+      {/* Pre-built combined papers (pattern 6): Class 8 scholarship
+          bundles — 100 marks / 3 hours, sections droppable. Generation
+          stays gated on verified questions: today every section holds
+          0 verified questions, so the buttons stay disabled with the
+          honest reason — no questions are invented to fill a bundle. */}
+      <Card style={{ marginBottom: 16 }}>
+        <h2 style={{ margin: '0 0 4px', fontSize: 16 }}>
+          প্রস্তুত পেপার — Class 8 স্কলারশিপ বান্ডল (১০০ নম্বর · ৩ ঘণ্টা)
+        </h2>
+        <p style={{ fontSize: 13, color: '#555', margin: '0 0 12px' }}>
+          পুরো বান্ডল একবারে — সেকশন বাদ দিতে পারবেন (টিক উঠিয়ে দিন)। যাচাইকৃত প্রশ্ন এলে এখান থেকেই
+          পেপার বানানো যাবে; এখনো কোনো বান্ডলের যাচাইকৃত প্রশ্ন তৈরি হয়নি।
+        </p>
+        {QPG_COMBINED_PAPERS.map((bundle) => {
+          const dropped = droppedSections[bundle.id] ?? [];
+          const ready = qpgCombinedPaperReady(bundle, dropped);
+          return (
+            <div
+              key={bundle.id}
+              style={{ border: '1px solid #ddd', borderRadius: 8, padding: 12, marginBottom: 10 }}
+            >
+              <strong style={{ fontSize: 14 }}>{bundle.nameBn}</strong>
+              <div style={{ fontSize: 13, color: '#555', margin: '4px 0 8px' }}>
+                {bundle.totalMarks} নম্বর · {Math.floor(bundle.timeMinutes / 60)} ঘণ্টা · ৮ম শ্রেণি
+              </div>
+              {bundle.sections.map((sec) => {
+                const available = qpgCombinedSectionAvailable(sec);
+                const isDropped = dropped.includes(sec.id);
+                return (
+                  <label key={sec.id} style={{ display: 'block', fontSize: 13, marginBottom: 4 }}>
+                    <input
+                      type="checkbox"
+                      checked={!isDropped}
+                      onChange={() =>
+                        setDroppedSections((prev) => ({
+                          ...prev,
+                          [bundle.id]: isDropped
+                            ? (prev[bundle.id] ?? []).filter((x) => x !== sec.id)
+                            : [...(prev[bundle.id] ?? []), sec.id],
+                        }))
+                      }
+                    />{' '}
+                    {sec.headingBn} — {sec.marks} নম্বর · যাচাইকৃত {available}টি প্রশ্ন
+                  </label>
+                );
+              })}
+              <div style={{ marginTop: 8 }}>
+                <Button variant="outline" size="sm" disabled={!ready}>
+                  এই বান্ডল থেকে পেপার বানান
+                </Button>{' '}
+                {!ready ? (
+                  <span style={{ fontSize: 12, color: '#666' }}>
+                    যাচাইকৃত প্রশ্ন নেই (০টি) — Class 8-এর প্রশ্ন যাচাই শেষে এলে তৈরি করা যাবে। প্রশ্ন
+                    বানিয়ে ঘাটতি পূরণ করা হবে না।
+                  </span>
+                ) : null}
+              </div>
+            </div>
+          );
+        })}
+      </Card>
 
       {/* Step 1 — Stream */}
       <Card style={{ marginBottom: 16 }}>
@@ -937,6 +1131,21 @@ export default function QuestionPaperGeneratorPage() {
                 এই অধ্যায়ের সব যাচাইকৃত প্রশ্ন আগেই নির্বাচিত — যেটা লাগবে না, তার টিক উঠিয়ে দিন।
                 নম্বর / কাঠিন্য আগেভাগে ঠিক করতে হয় না; পেপারের সেটআপ নিচে বদলানো যায়।
               </p>
+              <label style={{ fontSize: 13, display: 'block', marginBottom: 10 }}>
+                টপিক / প্রশ্ন খুঁজুন (শুধু যাচাইকৃত প্রশ্নের ভেতরে)
+                <input
+                  type="text"
+                  value={searchText}
+                  onChange={(e) => setSearchText(e.target.value)}
+                  placeholder="যেমন: grammar, tense, vocabulary…"
+                  style={{ ...fieldStyle(), maxWidth: 320 }}
+                />
+              </label>
+              {searchText.trim() ? (
+                <p style={{ fontSize: 13, margin: '0 0 10px' }}>
+                  খুঁজে পাওয়া গেছে {displayedQuestions.length}টি প্রশ্ন।
+                </p>
+              ) : null}
               <div style={{ display: 'flex', gap: 16, flexWrap: 'wrap', marginBottom: 10 }}>
                 <label style={{ fontSize: 13 }}>
                   উৎস (Source)
@@ -1019,7 +1228,7 @@ export default function QuestionPaperGeneratorPage() {
                       সব বাতিল
                     </Button>
                   </div>
-                  {availableQuestions.map((q, i) => {
+                  {displayedQuestions.map((q, i) => {
                     const shown = applyEdits(q);
                     const isEditing = editingId === q.id;
                     return (
@@ -1209,6 +1418,11 @@ export default function QuestionPaperGeneratorPage() {
                     </div>
                     );
                   })}
+                  <p style={{ fontSize: 13, marginTop: 10 }}>
+                    নিজের প্রশ্ন ব্যাংকে যোগ করতে চান?{' '}
+                    <Link to="/contribute">যাচাইয়ের জন্য জমা দিন</Link> — অনুমোদিত প্রশ্ন আপনার
+                    প্রতিষ্ঠানের নামসহ ব্যাংকে আসে। যাচাই ছাড়া কোনো প্রশ্ন ব্যাংকে বা পেপারে আসে না।
+                  </p>
                 </div>
               ) : null}
             </Card>
@@ -1483,6 +1697,39 @@ export default function QuestionPaperGeneratorPage() {
         </Card>
       ) : null}
 
+      {/* Smart Generation Progress Screen (UX feature, sprint 27 Nov
+          2026): label 'Smart Engine', NEVER 'AI'. Every step is a
+          REAL client step — selecting / building / rendering — driven
+          by actual callbacks, never a fake animation. */}
+      {genProgress !== null ? (
+        <Card style={{ marginBottom: 16 }}>
+          <h2 style={{ margin: '0 0 8px', fontSize: 16 }}>Smart Engine — প্রশ্নপত্র তৈরি হচ্ছে</h2>
+          <ol style={{ fontSize: 14, margin: 0, paddingLeft: 20 }}>
+            <li>
+              {genProgress.phase === 'selecting' ? '⏳' : '✓'} যাচাইকৃত প্রশ্ন বাছাই
+              {genProgress.phase === 'selecting' ? ' — চলছে…' : ''}
+            </li>
+            <li>
+              {genProgress.phase === 'selecting'
+                ? '○'
+                : genProgress.phase === 'building'
+                  ? '⏳'
+                  : '✓'}{' '}
+              পেপার সাজানো
+              {genProgress.phase === 'building' ? ' — চলছে…' : ''}
+            </li>
+            <li>
+              {genProgress.phase === 'rendering' ? '⏳' : '○'} প্রিভিউ পাতা তৈরি
+              {genProgress.phase === 'rendering' && genProgress.totalPages > 0
+                ? ` — ${genProgress.donePages}/${genProgress.totalPages} পাতা`
+                : genProgress.phase === 'rendering'
+                  ? ' — পাতা গোনা হচ্ছে…'
+                  : ''}
+            </li>
+          </ol>
+        </Card>
+      ) : null}
+
       {/* Step 8 — Protected FULL preview + download (owner 25 Nov 19:03:
           every question visible; one image per A4 page, so the print
           path also paginates between questions, never mid-question) */}
@@ -1495,6 +1742,223 @@ export default function QuestionPaperGeneratorPage() {
             {paper.setup.title} — {paper.questions.length}টি প্রশ্ন • পূর্ণমান {paper.setup.totalMarks} •{' '}
             {paper.setup.timeMinutes} মিনিট • {paper.patternLabelBn}
           </p>
+
+          {/* Post-generation মানবণ্টন editor (pattern 4): per-section
+              marks/count, answer-count, editable texts, add/remove/
+              swap questions — every change rebuilds + re-renders. */}
+          <div style={{ border: '1px solid #ddd', borderRadius: 8, padding: 12, marginBottom: 12 }}>
+            <h3 style={{ margin: '0 0 4px', fontSize: 15 }}>
+              মানবণ্টন সম্পাদক — পেপার তৈরি হওয়ার পরেও বদলানো যায়
+            </h3>
+            <p style={{ fontSize: 12, color: '#666', margin: '0 0 10px' }}>
+              বিভাগের প্রশ্ন সংখ্যা / প্রতি প্রশ্নের নম্বর / উত্তর দিতে হবে — সব বদলানো যায়; পূর্ণমান
+              স্বয়ংক্রিয়ভাবে হিসাব হয় (প্রশ্ন × প্রতি প্রশ্নের নম্বর)। প্রশ্ন যোগ করা যায় শুধু
+              যাচাইকৃত অতিরিক্ত প্রশ্ন থেকে।
+            </p>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
+              <label style={{ fontSize: 13 }}>
+                পরীক্ষার শিরোনাম
+                <input
+                  type="text"
+                  value={editTitle}
+                  onChange={(e) => setEditTitle(e.target.value)}
+                  style={fieldStyle()}
+                />
+              </label>
+              <label style={{ fontSize: 13 }}>
+                বিভাগের শিরোনাম
+                <input
+                  type="text"
+                  value={editSectionHeading}
+                  onChange={(e) => setEditSectionHeading(e.target.value)}
+                  style={fieldStyle()}
+                />
+              </label>
+              <label style={{ fontSize: 13 }}>
+                এই বিভাগে প্রশ্ন সংখ্যা (সর্বোচ্চ {paper.questions.length + paperExtras.length}টি
+                যাচাইকৃত)
+                <input
+                  type="number"
+                  min={1}
+                  max={paper.questions.length + paperExtras.length}
+                  value={editSectionCount}
+                  onChange={(e) =>
+                    setEditSectionCount(
+                      Math.max(1, Math.min(paper.questions.length + paperExtras.length, Number(e.target.value) || 1)),
+                    )
+                  }
+                  style={fieldStyle()}
+                />
+              </label>
+              <label style={{ fontSize: 13 }}>
+                প্রতি প্রশ্নের নম্বর
+                <input
+                  type="number"
+                  min={1}
+                  value={editMarksPerQ}
+                  onChange={(e) => setEditMarksPerQ(Math.max(1, Number(e.target.value) || 1))}
+                  style={fieldStyle()}
+                />
+              </label>
+              <label style={{ fontSize: 13 }}>
+                উত্তর দিতে হবে (খালি = সবগুলোর উত্তর)
+                <input
+                  type="number"
+                  min={1}
+                  max={Math.max(1, editSectionCount)}
+                  value={editAnswerCount}
+                  onChange={(e) => setEditAnswerCount(e.target.value)}
+                  placeholder="সবগুলো"
+                  style={fieldStyle()}
+                />
+              </label>
+              <label style={{ fontSize: 13 }}>
+                সময় (মিনিট)
+                <input
+                  type="number"
+                  min={5}
+                  value={editTimeMinutes}
+                  onChange={(e) => setEditTimeMinutes(Math.max(5, Number(e.target.value) || 5))}
+                  style={fieldStyle()}
+                />
+              </label>
+            </div>
+            <p style={{ fontSize: 13, margin: '8px 0' }}>
+              পূর্ণমান (স্বয়ংক্রিয়): <strong>{editSectionCount * Math.max(1, editMarksPerQ || 1)}</strong>
+              {editAnswerCount.trim() !== ''
+                ? ` · উত্তর দিতে হবে ${editAnswerCount}টি (বাকিগুলো অতিরিক্ত বিকল্প হিসেবে ছাপা হবে)`
+                : ''}
+            </p>
+            <label style={{ fontSize: 13, display: 'block', marginBottom: 10 }}>
+              নির্দেশনা
+              <textarea
+                value={editInstructions}
+                onChange={(e) => setEditInstructions(e.target.value)}
+                rows={2}
+                style={fieldStyle()}
+              />
+            </label>
+            <Button onClick={applyPaperEdits}>প্রয়োগ করুন — প্রিভিউ আবার তৈরি করুন</Button>
+
+            <h4 style={{ margin: '14px 0 6px', fontSize: 14 }}>পেপারের প্রশ্ন (প্রতিটিতে বদলান / সরান)</h4>
+            {paper.questions.map((q, i) => {
+              const shown = applyEdits(q);
+              return (
+                <div
+                  key={q.id}
+                  style={{ border: '1px solid #eee', borderRadius: 8, padding: 8, marginBottom: 6 }}
+                >
+                  <div style={{ fontSize: 13 }}>
+                    <strong>{i + 1}.</strong> {shown.questionText}
+                  </div>
+                  <div style={{ marginTop: 4, display: 'flex', gap: 8, flexWrap: 'wrap' }}>
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      onClick={() => setPaperReplacingId(paperReplacingId === q.id ? null : q.id)}
+                    >
+                      {paperReplacingId === q.id ? 'বদলানো বাতিল' : 'বদলান'}
+                    </Button>
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      disabled={paper.questions.length <= 1}
+                      onClick={() => {
+                        const next = paper.questions.filter((x) => x.id !== q.id);
+                        rebuildPaper(next, {
+                          ...paper.setup,
+                          totalMarks: next.length * Math.max(1, editMarksPerQ || 1),
+                          answerCount:
+                            paper.setup.answerCount && paper.setup.answerCount > next.length
+                              ? next.length
+                              : paper.setup.answerCount,
+                        });
+                      }}
+                    >
+                      সরান
+                    </Button>
+                  </div>
+                  {paperReplacingId === q.id ? (
+                    <div style={{ marginTop: 6 }}>
+                      <p style={{ fontSize: 12, color: '#666', margin: '0 0 6px' }}>
+                        এই প্রশ্নের বদলে নিচের যাচাইকৃত প্রশ্নগুলোর একটি নিন — বাছলেই একই জায়গায়
+                        বদলে যাবে।
+                      </p>
+                      {paperExtras.slice(0, 5).map((c) => (
+                        <div
+                          key={c.id}
+                          style={{ display: 'flex', gap: 8, alignItems: 'center', marginBottom: 6 }}
+                        >
+                          <span style={{ fontSize: 13, flex: 1 }}>{c.questionText}</span>
+                          <Button
+                            size="sm"
+                            onClick={() => {
+                              const byId = new Map<string, QpgQuestion>();
+                              for (const pq of paperPool) byId.set(pq.id, pq);
+                              for (const pq of paper.questions) byId.set(pq.id, pq);
+                              const nextIds = replaceQpgQuestion(
+                                paper.questions.map((x) => x.id),
+                                q.id,
+                                c.id,
+                              );
+                              const next = nextIds
+                                .map((id) => byId.get(id))
+                                .filter((x): x is QpgQuestion => x !== undefined);
+                              setPaperReplacingId(null);
+                              rebuildPaper(next, paper.setup);
+                            }}
+                          >
+                            এই প্রশ্নটি নিন
+                          </Button>
+                        </div>
+                      ))}
+                      {paperExtras.length === 0 ? (
+                        <p style={{ fontSize: 13 }}>
+                          বদলানোর মতো আর কোনো যাচাইকৃত প্রশ্ন নেই।{' '}
+                          <Link to="/contribute">যাচাইয়ের জন্য নিজের প্রশ্ন জমা দিন</Link>।
+                        </p>
+                      ) : null}
+                    </div>
+                  ) : null}
+                </div>
+              );
+            })}
+
+            <h4 style={{ margin: '14px 0 6px', fontSize: 14 }}>
+              অতিরিক্ত বিকল্প (যাচাইকৃত — পেপারে নেই): {paperExtras.length}টি
+            </h4>
+            {paperExtras.length === 0 ? (
+              <p style={{ fontSize: 13 }}>
+                আর কোনো যাচাইকৃত অতিরিক্ত প্রশ্ন নেই — এই অধ্যায়ের সব যাচাইকৃত প্রশ্নই পেপারে আছে।{' '}
+                <Link to="/contribute">যাচাইয়ের জন্য নিজের প্রশ্ন জমা দিন</Link>।
+              </p>
+            ) : (
+              paperExtras.slice(0, 5).map((c) => (
+                <div
+                  key={c.id}
+                  style={{ display: 'flex', gap: 8, alignItems: 'center', marginBottom: 6 }}
+                >
+                  <span style={{ fontSize: 13, flex: 1 }}>{c.questionText}</span>
+                  <Button
+                    size="sm"
+                    onClick={() => {
+                      const next = [...paper.questions, c];
+                      rebuildPaper(next, {
+                        ...paper.setup,
+                        totalMarks: next.length * Math.max(1, editMarksPerQ || 1),
+                      });
+                    }}
+                  >
+                    যোগ করুন
+                  </Button>
+                </div>
+              ))
+            )}
+            {paperExtras.length > 5 ? (
+              <p style={{ fontSize: 12, color: '#666' }}>আরও {paperExtras.length - 5}টি অতিরিক্ত প্রশ্ন আছে।</p>
+            ) : null}
+          </div>
+
           {previewBusy ? <p style={{ fontSize: 13 }}>প্রিভিউ তৈরি হচ্ছে…</p> : null}
           {previewError ? <AlertBox tone="error">{previewError}</AlertBox> : null}
           {previewUrls.length > 0 ? (
