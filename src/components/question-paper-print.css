@@ -1,0 +1,65 @@
+/* Eduvelto — Question Paper Generator: A4 print layout (25 Nov 2026).
+ *
+ * Client-side Print / Save as PDF for the generated paper preview.
+ * The preview is a raster image (no selectable text); printing prints
+ * that image. The print footer carries the credit line:
+ * "Powered by Eduvelto.com — বাংলাদেশের ফ্রি শিক্ষা প্ল্যাটফর্ম".
+ *
+ * Honest scope: printing prints the PREVIEW (first questions) — the
+ * full paper is the PDF download. The button on the page says so.
+ *
+ * The window-blur blackout (ProtectedContentWrapper) must NOT leak
+ * into the printed page: opening the print dialog can fire a window
+ * blur, so print CSS forces the content filter off and hides the
+ * blackout overlay. Blur stays 14px on screen (owner instruction).
+ */
+
+.qpg-print-footer {
+  display: none;
+}
+
+@media print {
+  @page {
+    size: A4;
+    margin: 12mm;
+  }
+
+  /* Print only the paper preview area — hide the app chrome. */
+  body * {
+    visibility: hidden;
+  }
+  .qpg-print-area,
+  .qpg-print-area * {
+    visibility: visible;
+  }
+  .qpg-print-area {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+  }
+
+  /* Never print a blurred/blacked-out preview. */
+  .qpg-protected-content {
+    filter: none !important;
+  }
+  .qpg-protected-obscured {
+    display: none !important;
+  }
+
+  /* Print footer credit — visible only on paper. */
+  .qpg-print-footer {
+    display: block !important;
+    margin-top: 10mm;
+    padding-top: 3mm;
+    border-top: 1px solid #999;
+    text-align: center;
+    font-size: 11pt;
+    color: #333;
+  }
+
+  /* Buttons never print. */
+  .qpg-print-area button {
+    display: none !important;
+  }
+}

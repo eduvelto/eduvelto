@@ -967,9 +967,52 @@ const STATIC_ROUTES: Record<string, RouteSeoEntry> = {
   // unlike the other subject pages. Per-section question counts
   // are NOT claimed here — only the hub's verified total of ৩৫.
   // Full mocks are still in preparation — the hub says so plainly.
-  '/jobs/bcs/practice/english': {
-    title: 'বিসিএস ইংরেজি অনুশীলন — ৩৫টি যাচাইকৃত প্রশ্ন | Eduvelto',
+  // Question Paper Generator (Milestone 2.5, 25 Nov 2026): public SEO
+  // landing page + the generator tool itself. Honest counts only —
+  // the 35 verified BCS English questions, never a full mock claim.
+  '/question-maker': {
+    title: 'প্রশ্নপত্র তৈরি করুন — ফ্রি প্রশ্নপত্র জেনারেটর | Eduvelto',
     description:
+      'অধ্যায়ভিত্তিক প্রশ্নপত্র তৈরি করুন — সাধারণ (NCTB), মাদ্রাসা ও চাকরি-ভর্তি কোচিং। শুধু যাচাইকৃত প্রশ্ন দিয়ে, সম্পূর্ণ বিনামূল্যে (প্রতি মাসে ৩টি পেপার)। Eduvelto।',
+    crumb: 'প্রশ্নপত্র তৈরি',
+    titleEn: 'Make Question Papers — Free Question Paper Generator | Eduvelto',
+    descriptionEn:
+      'Create chapter-based question papers — General (NCTB), Madrasah, and Job & Admission Coaching. Verified questions only, completely free (3 papers/month). Eduvelto.',
+    crumbEn: 'Question Maker',
+  },
+  '/question-paper-generator': {
+    title: 'প্রশ্নপত্র জেনারেটর — অধ্যায়ভিত্তিক প্রশ্নপত্র বানান | Eduvelto',
+    description:
+      'শ্রেণি → বিষয় → অধ্যায় বেছে প্রশ্নপত্র বানান — যাচাইকৃত প্রশ্ন দিয়ে। ফ্রি ৩টি পেপার/মাস, জলছাপসহ PDF ডাউনলোড। Eduvelto।',
+    crumb: 'জেনারেটর',
+    titleEn: 'Question Paper Generator — Build Chapter-Based Papers | Eduvelto',
+    descriptionEn:
+      'Pick class → subject → chapter and build a question paper — verified questions only. Free 3 papers/month, watermarked PDF download. Eduvelto.',
+    crumbEn: 'Generator',
+  },
+  // Pricing (PRICING FINAL, owner 25 Nov 09:34) + OMR evaluator (Turn 32).
+  '/pricing': {
+    title: 'মূল্য — প্রশ্নপত্র জেনারেটর Pro | Eduvelto',
+    description:
+      'মূল্য — ফ্রি ৳০ (মাসে ৩টি পেপার), প্রতি পেপার ৳৪৯, মাসিক ৳১৯৯, ক্লাসভিত্তিক বার্ষিক ৳১৫০ থেকে — Eproshnobank-এর চেয়ে ৭০% ছাড়ে। Eduvelto।',
+    crumb: 'মূল্য',
+    titleEn: 'Pricing — Question Paper Generator Pro | Eduvelto',
+    descriptionEn:
+      'Pricing — Free ৳0 (3 papers/month), per paper ৳49, monthly ৳199, class-based annual from ৳150 — 70% off Eproshnobank. Eduvelto.',
+    crumbEn: 'Pricing',
+  },
+  '/omr-evaluator': {
+    title: 'OMR মূল্যায়ন — MCQ উত্তরপত্রের ফল | Eduvelto',
+    description:
+      'ব্রাউজারেই OMR মূল্যায়ন — সম্পূর্ণ ফ্রি, সবার জন্য। ১০–১০০টি MCQ, নেগেটিভ মার্কিং, সঙ্গে সঙ্গে স্কোর। মোবাইল ক্যামেরা স্ক্যান Phase 2-এ আসবে। Eduvelto।',
+    crumb: 'OMR মূল্যায়ন',
+    titleEn: 'OMR Evaluator — Score MCQ Answer Sheets | Eduvelto',
+    descriptionEn:
+      'Browser-based OMR evaluation — completely free for everyone. 10–100 MCQs, negative marking, instant score. Mobile camera scanning comes in Phase 2. Eduvelto.',
+    crumbEn: 'OMR Evaluator',
+  },
+  '/jobs/bcs/practice/english': {
+    title: 'বিসিএস ইংরেজি অনুশীলন — ৩৫টি যাচাইকৃত প্রশ্ন | Eduvelto',    description:
       'বিসিএস ইংরেজি অনুশীলন — ৩৫টি যাচাইকৃত প্রশ্ন: ব্যাকরণ, শব্দভান্ডার ও রিডিং — সম্পূর্ণ বিনামূল্যে। পূর্ণাঙ্গ মক পরীক্ষা এখনো প্রস্তুত হচ্ছে। Eduvelto।',
     crumb: 'ইংরেজি',
     titleEn: 'BCS English Practice — 35 Verified Questions | Eduvelto',
@@ -1691,6 +1734,10 @@ function isNoindexedSubjectPage(path: string): boolean {
  *  The /learn hub exists (AdSense Part 1 integration) — the first
  *  crumb ('বিসিএস ইংরেজি') points at it. */
 const STATIC_CRUMBS: Record<string, string[]> = {
+  '/question-maker': ['প্রশ্নপত্র তৈরি'],
+  '/question-paper-generator': ['প্রশ্নপত্র তৈরি', 'জেনারেটর'],
+  '/pricing': ['মূল্য'],
+  '/omr-evaluator': ['OMR মূল্যায়ন'],
   '/jobs/bcs/practice/english': ['চাকরি প্রস্তুতি', 'বিসিএস', 'অনুশীলন', 'ইংরেজি'],
   '/jobs/bcs/practice/english/grammar': ['চাকরি প্রস্তুতি', 'বিসিএস', 'অনুশীলন', 'ইংরেজি', 'ব্যাকরণ'],
   '/jobs/bcs/practice/english/vocabulary': [
@@ -1707,6 +1754,10 @@ const STATIC_CRUMBS: Record<string, string[]> = {
 
 /** English trails for STATIC_CRUMBS (24 Nov 2026, language system). */
 const STATIC_CRUMBS_EN: Record<string, string[]> = {
+  '/question-maker': ['Question Maker'],
+  '/question-paper-generator': ['Question Maker', 'Generator'],
+  '/pricing': ['Pricing'],
+  '/omr-evaluator': ['OMR Evaluator'],
   '/jobs/bcs/practice/english': ['Job Preparation', 'BCS', 'Practice', 'English'],
   '/jobs/bcs/practice/english/grammar': ['Job Preparation', 'BCS', 'Practice', 'English', 'Grammar'],
   '/jobs/bcs/practice/english/vocabulary': [

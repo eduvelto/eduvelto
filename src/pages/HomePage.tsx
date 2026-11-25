@@ -44,7 +44,7 @@ import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { loginState } from '../lib/loginReturn';
 import { PageShell } from '../components/PageShell';
 import AdSlot from '../components/AdSlot';
-import HeroGreeting from '../components/HeroGreeting';
+import AnnouncementTicker from '../components/AnnouncementTicker';
 import { useAuth } from '../lib/auth';
 import { JobsSection } from '../components/JobCards';
 import DailyQuizWidget from '../components/DailyQuizWidget';
@@ -555,11 +555,13 @@ export default function HomePage() {
 
   return (
     <>
-      {/* Hero greeting strip, v5 — OUTSIDE PageShell so it sits flush
-          directly below the nav (the shell's 28px top padding made the
-          white gap above the band) and spans the full viewport width,
-          not the shell's 1240px. Home-only: only HomePage mounts it. */}
-      <HeroGreeting />
+      {/* Announcement ticker (owner 25 Nov 2026 10:03) — REPLACES the
+          ayah bar (HeroGreeting, deleted): the scrolling banner sits
+          flush directly below the nav (the shell's 28px top padding
+          made the white gap above the band) and spans the full
+          viewport width, not the shell's 1240px. Home-only: only
+          HomePage mounts it. */}
+      <AnnouncementTicker />
       <PageShell titleBn="হোম" titleEn="Home" wide hideHomeLink hideTitle maxWidth={1240}>
         {/* Mobile search bar (≤768px, mockup). Now a REAL global search:
             it goes to /search, which searches books + jobs + opportunities

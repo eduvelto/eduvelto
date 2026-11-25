@@ -304,6 +304,11 @@
         "source": "/guides/:rest*",
         "destination": "/bn/guides/:rest*",
         "type": 301
+      },
+      {
+        "source": "/whatsapp",
+        "destination": "https://wa.me/8801975225751",
+        "type": 302
       }
     ],
     "rewrites": [

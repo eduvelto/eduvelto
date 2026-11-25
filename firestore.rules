@@ -5096,6 +5096,118 @@ service cloud.firestore {
       }
     }
 
+    // ---------- Question Paper Generator (Milestone 2.5, 25 Nov 2026) ----------
+    // BRANCH ONLY — these rules are NOT deployed in the MVP (no deploy,
+    // no live writes). The client enforces the free quota against a
+    // local demo stand-in today; these rules are the designed
+    // enforcement for the Firestore path. All three collections join
+    // BACKUP_COLLECTIONS (src/lib/backup.ts) + the REST exporter.
+    //
+    // qpgUsage/{uid}_{yyyyMM}: per-teacher per-month free downloads.
+    // The doc id embeds the owner uid + month; the data repeats them
+    // so the rules can check ownership without parsing the id.
+    match /qpgUsage/{usageId} {
+      allow read: if signedIn() && (resource.data.uid == uid() || isModerator());
+      allow create: if signedIn() && callerActive()
+        && request.resource.data.uid == uid()
+        && isStr(request.resource.data.month, 7)
+        && request.resource.data.freeDownloads == 0
+        && request.resource.data.updatedAt is timestamp
+        && onlyKeys(['uid', 'month', 'freeDownloads', 'updatedAt']);
+      // Owner may only increment the counter by exactly 1 (one free
+      // download); a moderator never writes usage. The 3/month cap is
+      // enforced client-side against the counter; the rules guarantee
+      // the counter itself cannot be forged down or jumped.
+      allow update: if signedIn() && callerActive()
+        && resource.data.uid == uid()
+        && request.resource.data.uid == uid()
+        && request.resource.data.month == resource.data.month
+        && request.resource.data.freeDownloads == resource.data.freeDownloads + 1
+        && request.resource.data.freeDownloads <= 3
+        && request.resource.data.updatedAt is timestamp
+        && changedKeys().hasOnly(['freeDownloads', 'updatedAt']);
+      allow delete: if false;
+    }
+    // qpgProOrders/{orderId}: bKash/Nagad TrxID upgrade orders.
+    // Created as pending-review ONLY; the amount must match the plan
+    // exactly — PRICING FINAL (owner 25 Nov 09:34): per-paper 49 /
+    // monthly 199 / annual tiers 150, 180, 210, 300, 450, 390, 75,
+    // 210, 450, 750, 900, 1050, 1200, 810, 1110, 1200, 1350, 1500
+    // (30% of Eproshnobank, i.e. 70% off, rounded to the nearest ৳10).
+    // Only a moderator may decide an order — and only the decide fields.
+    match /qpgProOrders/{orderId} {
+      allow read: if signedIn() && (resource.data.uid == uid() || isModerator());
+      allow create: if signedIn() && callerActive()
+        && request.resource.data.uid == uid()
+        && request.resource.data.plan in ['per-paper', 'monthly',
+          'class-3', 'class-4', 'class-5', 'class-6-8', 'class-9-10', 'class-11-12',
+          'per-subject', 'subject-teacher',
+          'bundle-3-5', 'bundle-6-8', 'bundle-3-8', 'bundle-6-10', 'bundle-3-10',
+          'coaching-5-8', 'coaching-5-10', 'coaching-3-10', 'coaching-6-12', 'coaching-3-12']
+        && ((request.resource.data.plan == 'per-paper' && request.resource.data.amountBdt == 49)
+          || (request.resource.data.plan == 'monthly' && request.resource.data.amountBdt == 199)
+          || (request.resource.data.plan == 'class-3' && request.resource.data.amountBdt == 150)
+          || (request.resource.data.plan == 'class-4' && request.resource.data.amountBdt == 180)
+          || (request.resource.data.plan == 'class-5' && request.resource.data.amountBdt == 210)
+          || (request.resource.data.plan == 'class-6-8' && request.resource.data.amountBdt == 300)
+          || (request.resource.data.plan == 'class-9-10' && request.resource.data.amountBdt == 450)
+          || (request.resource.data.plan == 'class-11-12' && request.resource.data.amountBdt == 390)
+          || (request.resource.data.plan == 'per-subject' && request.resource.data.amountBdt == 75)
+          || (request.resource.data.plan == 'subject-teacher' && request.resource.data.amountBdt == 210)
+          || (request.resource.data.plan == 'bundle-3-5' && request.resource.data.amountBdt == 450)
+          || (request.resource.data.plan == 'bundle-6-8' && request.resource.data.amountBdt == 750)
+          || (request.resource.data.plan == 'bundle-3-8' && request.resource.data.amountBdt == 900)
+          || (request.resource.data.plan == 'bundle-6-10' && request.resource.data.amountBdt == 1050)
+          || (request.resource.data.plan == 'bundle-3-10' && request.resource.data.amountBdt == 1200)
+          || (request.resource.data.plan == 'coaching-5-8' && request.resource.data.amountBdt == 810)
+          || (request.resource.data.plan == 'coaching-5-10' && request.resource.data.amountBdt == 1110)
+          || (request.resource.data.plan == 'coaching-3-10' && request.resource.data.amountBdt == 1200)
+          || (request.resource.data.plan == 'coaching-6-12' && request.resource.data.amountBdt == 1350)
+          || (request.resource.data.plan == 'coaching-3-12' && request.resource.data.amountBdt == 1500))
+        && request.resource.data.paymentMethod in ['bkash', 'nagad']
+        && isStr(request.resource.data.trxId, 30)
+        && request.resource.data.trxId.size() >= 6
+        && request.resource.data.status == 'pending-review'
+        && request.resource.data.createdAt is timestamp
+        && onlyKeys(['uid', 'plan', 'amountBdt', 'paymentMethod', 'trxId', 'status', 'createdAt', 'decidedBy', 'decidedAt', 'decisionNote']);
+      allow update: if isModerator()
+        && resource.data.status == 'pending-review'
+        && request.resource.data.status in ['approved', 'rejected']
+        && request.resource.data.decidedBy == uid()
+        && request.resource.data.decidedAt is timestamp
+        && changedKeys().hasOnly(['status', 'decidedBy', 'decidedAt', 'decisionNote']);
+      allow delete: if false;
+    }
+    // qpgReports/{reportId}: "Report Typo/Error" on a generator
+    // question. A report NEVER auto-publishes or auto-edits anything:
+    // only a moderator may decide it (decide fields only), and the
+    // question docs themselves are untouched by this flow.
+    // REWARD (Turn 32): a VALID correction earns 7 free Pro days —
+    // ONLY after admin validation, never automatic. A new report
+    // carries no reward (rewardStatus 'none'); only the moderator
+    // may move it to pending/granted, and rewardDays is always 7.
+    match /qpgReports/{reportId} {
+      allow read: if signedIn() && (resource.data.reporterId == uid() || isModerator());
+      allow create: if signedIn() && callerActive()
+        && request.resource.data.reporterId == uid()
+        && request.resource.data.status == 'open'
+        && request.resource.data.reason in ['typo', 'wrong-answer', 'wrong-explanation', 'unclear-question', 'other']
+        && request.resource.data.targetType == 'qpgQuestion'
+        && isStr(request.resource.data.questionId, 200)
+        && isStr(request.resource.data.chapterId, 200)
+        && isOptStr(request.resource.data.details, 2000)
+        && request.resource.data.createdAt is timestamp
+        && request.resource.data.get('rewardStatus', 'none') == 'none'
+        && onlyKeys(['reporterId', 'targetType', 'questionId', 'chapterId', 'reason', 'details', 'status', 'createdAt', 'resolvedBy', 'resolvedAt', 'resolutionNote', 'rewardStatus', 'rewardDays', 'rewardGrantedAt', 'rewardExpiresAt']);
+      allow update: if isModerator()
+        && resource.data.status in ['open', 'investigating']
+        && request.resource.data.status in ['open', 'investigating', 'resolved', 'dismissed']
+        && request.resource.data.get('rewardStatus', 'none') in ['none', 'pending', 'granted']
+        && request.resource.data.get('rewardDays', 7) == 7
+        && changedKeys().hasOnly(['status', 'resolvedBy', 'resolvedAt', 'resolutionNote', 'rewardStatus', 'rewardDays', 'rewardGrantedAt', 'rewardExpiresAt']);
+      allow delete: if false;
+    }
+
     // ---------- everything else: denied ----------
     match /{document=**} {
       allow read, write: if false;

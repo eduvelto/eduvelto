@@ -13,6 +13,12 @@
 // values). Behaviour (wrap, clearance, drawer slide) is verified by
 // the Playwright probe in bar-bottom-fix-evidence/.
 //
+// 25 Nov 2026: the ayah bar (HeroGreeting) was REMOVED by the owner
+// ("takbe na") and replaced by the announcement ticker
+// (AnnouncementTicker). The two greeting-bar tests below were rewritten
+// to the ticker's equivalent contract: items scroll whole instead of
+// truncating, the scroll is slow, and reduced motion stops it.
+//
 // Run: npx vitest run src/lib/__tests__/barBottomFix.test.ts
 import { describe, expect, it } from 'vitest';
 import { readFileSync } from 'node:fs';
@@ -44,29 +50,33 @@ function allRuleBlocks(css: string, selector: string): string[] {
 }
 
 describe('bar + bottom-nav CSS contract (owner 24 Nov 2026)', () => {
-  it('greeting line NEVER truncates: no nowrap, no hidden overflow, no ellipsis', () => {
-    const block = ruleBlock(CSS, '.ev-hero-greeting-line');
-    expect(block).not.toMatch(/white-space\s*:\s*nowrap/);
-    expect(block).not.toMatch(/overflow\s*:\s*hidden/);
+  it('ticker items NEVER truncate: no ellipsis — the marquee scrolls whole items', () => {
+    const block = ruleBlock(CSS, '.ev-ticker-item');
+    // Marquee items stay whole (nowrap) and scroll through; they are
+    // never cut with an ellipsis the way the old greeting line was
+    // on the owner's phone.
+    expect(block).toMatch(/white-space\s*:\s*nowrap/);
     expect(block).not.toMatch(/text-overflow\s*:\s*ellipsis/);
-    // Free wrapping is the fix: the sentence takes a second line on
-    // narrow screens instead of being cut.
-    expect(block).toMatch(/overflow-wrap\s*:\s*break-word/);
+    // The track scrolls (80s loop) instead of truncating.
+    const track = ruleBlock(CSS, '.ev-ticker-track');
+    expect(track).toMatch(/animation\s*:\s*ev-ticker-scroll 80s linear infinite/);
+    expect(stripComments(CSS)).toMatch(/@keyframes ev-ticker-scroll/);
   });
 
-  it('v6 cycle: gentle fade-in on phase switch + Arabic line class exist', () => {
-    // Owner 24 Nov 11:31 — the bar cycles ar → en → bn. The line
-    // re-mounts per phase (key={phase}); this fade is the ONLY
-    // animation on the bar (no sweep, no slide, no border).
-    const block = ruleBlock(CSS, '.ev-hero-greeting-line');
-    expect(block).toMatch(/animation\s*:\s*ev-greeting-fade-in/);
-    expect(stripComments(CSS)).toMatch(/@keyframes ev-greeting-fade-in/);
-    const arBlock = ruleBlock(CSS, '.ev-hero-greeting-line-ar');
-    expect(arBlock).toMatch(/font-size\s*:\s*22px/);
-    // Reduced motion: the fade is disabled (the hook freezes the
-    // phase on Arabic, so the static ayah shows instantly).
-    expect(stripComments(CSS)).toMatch(
-      /prefers-reduced-motion:\s*reduce[\s\S]*?\.ev-hero-greeting-line\s*\{[^}]*animation\s*:\s*none/,
+  it('ticker: slow scroll + Arabic item class exist + reduced motion stops it', () => {
+    // Owner 25 Nov 10:03 — the ticker replaces the ayah bar. Slow
+    // 80s loop, pause on hover, no flashing/fast movement; the
+    // Arabic ayat rides in its own class (Amiri/Naskh serif, rtl).
+    const track = ruleBlock(CSS, '.ev-ticker-track');
+    expect(track).toMatch(/animation\s*:\s*ev-ticker-scroll 80s linear infinite/);
+    const clean = stripComments(CSS);
+    expect(clean).toMatch(/@keyframes ev-ticker-scroll[\s\S]*?translateX\(-25%\)/);
+    const arBlock = ruleBlock(CSS, '.ev-ticker-ayat-ar');
+    expect(arBlock).toMatch(/font-family\s*:\s*'Amiri'/);
+    // Reduced motion: the scroll is disabled and a single static
+    // copy shows instead of four scrolling ones.
+    expect(clean).toMatch(
+      /prefers-reduced-motion:\s*reduce[\s\S]*?\.ev-ticker-track\s*\{[^}]*animation\s*:\s*none/,
     );
   });
 

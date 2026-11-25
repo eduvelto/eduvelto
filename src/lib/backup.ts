@@ -265,6 +265,14 @@ export const BACKUP_COLLECTIONS: string[] = [
   // settings: the read rule is `docId == 'appVersion'`, so a list/count
   // over the collection is denied — see DOC_BY_DOC below.)
   'config',
+  // Added 25 Nov 2026 (Question Paper Generator MVP, Milestone 2.5:
+  // the per-teacher monthly usage counter, the TrxID Pro orders and
+  // the typo/error reports must be in every backup, or the quota
+  // history, paid-order audit trail and verification reports are
+  // lost. Rules live in firestore.rules (branch only, not deployed).)
+  'qpgUsage',
+  'qpgProOrders',
+  'qpgReports',
 ];
 
 /**
