@@ -47,7 +47,7 @@ function readSitemapPaths(): string[] {
 describe('PRERENDER_STATIC_PATHS', () => {
   it('covers every committed-sitemap URL, plus the new /books hub', () => {
     const sitemapPaths = readSitemapPaths();
-    expect(sitemapPaths.length).toBe(137);
+    expect(sitemapPaths.length).toBe(143); // 137 + 6 (Day 1 audit fix, 26 Nov 2026)
     for (const p of sitemapPaths) {
       expect(PRERENDER_STATIC_PATHS, `sitemap path missing from prerender list: ${p}`).toContain(p);
     }
@@ -63,7 +63,10 @@ describe('PRERENDER_STATIC_PATHS', () => {
   });
 
   it('covers every guide path from PUBLIC_GUIDES (regex returns m[1])', () => {
-    const source = readFileSync(join(process.cwd(), 'src', 'lib', 'publicGuides.ts'), 'utf8');
+    // The guide slugs/paths live in publicGuideMeta.ts since the
+    // 25 Nov 2026 entry-chunk split (publicGuides.ts is only the
+    // join now — reading it here would find 0 slugs).
+    const source = readFileSync(join(process.cwd(), 'src', 'lib', 'publicGuideMeta.ts'), 'utf8');
     const slugs = getGuideSlugs(source);
     expect(slugs.length).toBe(56);
     for (const slug of slugs) expect(typeof slug).toBe('string');

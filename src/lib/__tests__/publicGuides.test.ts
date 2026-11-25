@@ -24,6 +24,46 @@ import {
   publicGuideWordCount,
   publicGuideWordCountEn,
 } from '../publicGuides';
+import { PUBLIC_GUIDE_BODIES } from '../publicGuideBodies';
+import { PUBLIC_GUIDE_META } from '../publicGuideMeta';
+
+describe('public guides — meta/body split (25 Nov 2026, entry-chunk budget)', () => {
+  it('meta + bodies cover the same 56 slugs as the joined PUBLIC_GUIDES', () => {
+    expect(PUBLIC_GUIDE_META).toHaveLength(56);
+    expect(Object.keys(PUBLIC_GUIDE_BODIES)).toHaveLength(56);
+    const slugs = PUBLIC_GUIDES.map((g) => g.slug);
+    expect(PUBLIC_GUIDE_META.map((m) => m.slug).sort()).toEqual([...slugs].sort());
+    expect(Object.keys(PUBLIC_GUIDE_BODIES).sort()).toEqual([...slugs].sort());
+    // The join is exact: every joined guide's meta fields equal the
+    // meta file's, and its body fields equal the bodies file's.
+    for (const g of PUBLIC_GUIDES) {
+      const meta = PUBLIC_GUIDE_META.find((m) => m.slug === g.slug)!;
+      expect({ slug: g.slug, path: g.path, titleBn: g.titleBn, titleEn: g.titleEn, updatedAt: g.updatedAt }).toEqual({
+        slug: meta.slug,
+        path: meta.path,
+        titleBn: meta.titleBn,
+        titleEn: meta.titleEn,
+        updatedAt: meta.updatedAt,
+      });
+      const body = PUBLIC_GUIDE_BODIES[g.slug];
+      expect(g.bodyBn).toEqual(body.bodyBn);
+      expect(g.bodyEn).toEqual(body.bodyEn);
+      expect(g.warningBn).toEqual(body.warningBn);
+      expect(g.warningEn).toEqual(body.warningEn);
+    }
+  });
+
+  it('the meta file carries NO body text (the split must stay split)', () => {
+    // seo.ts imports the meta file into the entry chunk — a body
+    // field here would silently re-inflate the entry past budget.
+    for (const m of PUBLIC_GUIDE_META) {
+      expect(m, m.slug).not.toHaveProperty('bodyBn');
+      expect(m, m.slug).not.toHaveProperty('bodyEn');
+      expect(m, m.slug).not.toHaveProperty('warningBn');
+      expect(m, m.slug).not.toHaveProperty('warningEn');
+    }
+  });
+});
 
 const EXPECTED_WORD_COUNTS: Record<string, number> = {
   'bcs-preparation-guide': 441,

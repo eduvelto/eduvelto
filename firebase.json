@@ -466,6 +466,26 @@
       },
       {
         "destination": "/index.html",
+        "source": "/question-maker"
+      },
+      {
+        "destination": "/index.html",
+        "source": "/question-paper-generator"
+      },
+      {
+        "destination": "/index.html",
+        "source": "/pricing"
+      },
+      {
+        "destination": "/index.html",
+        "source": "/omr-evaluator"
+      },
+      {
+        "destination": "/index.html",
+        "source": "/custom-paper"
+      },
+      {
+        "destination": "/index.html",
         "source": "/exam"
       },
       {

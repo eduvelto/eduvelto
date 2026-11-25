@@ -250,6 +250,15 @@ export const PRERENDER_STATIC_PATHS = [
   '/jobs/career',
   '/jobs/cv',
   '/install',
+  // Question Paper Generator pages (Day 1 audit fix, 26 Nov 2026):
+  // real public pages with SEO entries in src/lib/seo.ts — the live
+  // prerendered sitemap was missing them (23:00 check, 25 Nov).
+  // /books is already in this list above (library hub alias).
+  '/question-maker',
+  '/question-paper-generator',
+  '/pricing',
+  '/omr-evaluator',
+  '/custom-paper',
 ];
 
 /** Top-level segments whose bare hrefs get rewritten to /{lang}/...
@@ -1054,8 +1063,11 @@ async function main() {
   console.log(`Preview chapters in payloads: ${previewTotal}`);
 
   // --- Guide coverage check (warn, never fail the build on it) ---
+  // The guide slugs/paths live in src/lib/publicGuideMeta.ts since
+  // the 25 Nov 2026 entry-chunk split (publicGuides.ts is only the
+  // join now — reading it here would find 0 paths).
   try {
-    const guideSource = readFileSync(join(root, 'src/lib/publicGuides.ts'), 'utf8');
+    const guideSource = readFileSync(join(root, 'src/lib/publicGuideMeta.ts'), 'utf8');
     const guidePaths = getGuidePaths(guideSource);
     const missing = guidePaths.filter((p) => !PRERENDER_STATIC_PATHS.includes(p));
     if (missing.length > 0) console.warn(`WARN: ${missing.length} guide(s) not in PRERENDER_STATIC_PATHS: ${missing.join(', ')}`);

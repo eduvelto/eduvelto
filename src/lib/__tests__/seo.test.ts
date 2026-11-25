@@ -259,6 +259,15 @@ const SITEMAP_URLS = [
   // and /ai-teacher are NOT listed here — they are noindexed thin pages
   // (AdSense F2) and the noindex test below asserts they stay OUT.
   '/ai-assistant',
+  // Added 26 Nov 2026 (Day 1 audit fix): /books (library hub) + the 5
+  // Question Paper Generator pages — all real public pages with SEO in
+  // seo.ts, now listed in public/sitemap.xml (137 -> 143 URLs).
+  '/books',
+  '/question-maker',
+  '/question-paper-generator',
+  '/pricing',
+  '/omr-evaluator',
+  '/custom-paper',
 ];
 
 describe('resolveRouteSeo — public routes', () => {
@@ -780,9 +789,10 @@ describe('resolveRouteSeo — SEO 50–100 pages (23 Nov 2026)', () => {
       // lastmod is the sitemap's revision date for that URL: 2026-11-23
       // for the 23 Nov revision, 2026-11-24 for URLs added by the
       // 24 Nov 2026 homepage redesign, 2026-11-25 for URLs added or
-      // changed by the 25 Nov 2026 Phase 2 build. (Was a single
+      // changed by the 25 Nov 2026 Phase 2 build, 2026-11-26 for URLs
+      // added by the 26 Nov 2026 Day 1 audit fix. (Was a single
       // pinned date before this revision added new URLs.)
-      expect(['2026-11-23', '2026-11-24', '2026-11-25']).toContain(
+      expect(['2026-11-23', '2026-11-24', '2026-11-25', '2026-11-26']).toContain(
         block.match(/<lastmod>([^<]+)<\/lastmod>/)?.[1],
       );
     }
@@ -1532,8 +1542,8 @@ describe('resolveRouteSeo — English SEO (24 Nov 2026, language system)', () =>
 });
 
 describe('resolveRouteSeo — brand-SEO wave 2 (24 Nov 2026)', () => {
-  it('sitemap has 137 URLs (120 wave-9/10 + audit-M12 + 16 Phase 2 guides + /support, Phase 3)', () => {
-    expect(SITEMAP_URLS.length).toBe(137);
+  it('sitemap has 143 URLs (120 wave-9/10 + audit-M12 + 16 Phase 2 guides + /support, Phase 3 + 6 Day 1 audit fix, 26 Nov 2026)', () => {
+    expect(SITEMAP_URLS.length).toBe(143);
   });
 
   it('English home title drops "Best"; Bangla title is unchanged', () => {
@@ -1786,10 +1796,14 @@ describe('resolveRouteSeo — bilingual /:lang canonicals (Phase 1, 25 Nov 2026)
     expect(resolveRouteSeo('/en', 'bn')!.canonical).toBe('https://eduvelto.com/en');
   });
 
-  it('/books (canonical library hub) resolves with the library SEO', () => {
+  it('/books (canonical library hub) resolves with its own library-hub SEO', () => {
     const seo = resolveRouteSeo('/bn/books', 'bn')!;
     expect(seo.canonical).toBe('https://eduvelto.com/bn/books');
-    expect(seo.title).toBe(resolveRouteSeo('/bn/library', 'bn')!.title);
+    // /books has its OWN title since the 26 Nov 2026 Day 1 audit fix:
+    // the sitemap lists both /books and /library, and titles must be
+    // unique per URL — it no longer shares /library's title.
+    expect(seo.title).toBe('সব বই — ডিজিটাল লাইব্রেরি | Eduvelto');
+    expect(seo.title).not.toBe(resolveRouteSeo('/bn/library', 'bn')!.title);
     expect(seo.robots).toBeUndefined();
   });
 

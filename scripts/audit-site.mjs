@@ -49,11 +49,20 @@ const BANK_REPORT = resolve(REPO_ROOT, '..', 'sprint-1week-2026-11-25', 'bank-ch
 
 // Key canonical pages the sitemap and the preview check must cover.
 // (bn canonicals; the sitemap lists each page in both bn and en.)
+// NOTE (26 Nov 2026, Day 1 audit fix): /bn/search and /bn/health are
+// DELIBERATELY NOT here — they are noindex by design and must never
+// be in the sitemap. /search is robots-disallowed + noindex so gated
+// content never leaks to crawlers (src/pages/SearchPage.tsx header);
+// /health is noindex (empty/unverified, needs qualified review —
+// src/lib/seo.ts NOINDEX_STATIC). /bn/exam + /bn/progress are also
+// not here: they are login-gated (ExamPage/ProgressPage redirect to
+// /login) and robots-disallowed. The sitemap lists indexable public
+// pages only (see public/sitemap.xml header).
 const KEY_PAGES = [
   '/', '/bn/jobs', '/bn/books', '/bn/jobs/bcs', '/bn/jobs/bank',
   '/bn/jobs/primary-teacher', '/bn/jobs/ntrca', '/bn/admissions',
   '/bn/about', '/bn/privacy-policy', '/bn/terms', '/bn/contact',
-  '/bn/search', '/bn/class', '/bn/learn', '/bn/guides', '/bn/health',
+  '/bn/class', '/bn/learn', '/bn/guides',
 ];
 const ENTRY_BUDGET_KB = 200;
 

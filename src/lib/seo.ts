@@ -47,7 +47,7 @@ import { nuSyllabusSubjectBySlug } from './nuSyllabus';
 import { NU_GROUPS } from './nuProfile';
 import { OPPORTUNITY_SEED } from './opportunitySeed';
 import { isPublished } from './opportunities';
-import { PUBLIC_GUIDES } from './publicGuides';
+import { PUBLIC_GUIDE_META } from './publicGuideMeta';
 import { SITE_URL, canonicalUrl, hreflangUrls, stripLangPrefix } from './langRouting';
 
 export { SITE_URL };
@@ -558,16 +558,16 @@ const STATIC_ROUTES: Record<string, RouteSeoEntry> = {
   },
   // Phase 1 (25 Nov 2026): /books is the canonical library hub
   // (book pages canonicalise to /books/:id; /library renders the
-  // same page as an alias). Same SEO as /library — one hub, one
-  // entry each, so the prerendered /bn/books + /en/books are
-  // indexable instead of falling back to noindex home SEO.
+  // same page as an alias). /books carries its OWN title/description
+  // (26 Nov 2026, Day 1 audit fix): it must differ from /library's
+  // — the sitemap lists both, and titles must be unique per URL.
   '/books': {
-    title: 'ডিজিটাল লাইব্রেরি — বিনামূল্যে বই ও প্রশ্নব্যাংক | Eduvelto',
+    title: 'সব বই — ডিজিটাল লাইব্রেরি | Eduvelto',
     description:
-      'Eduvelto ডিজিটাল লাইব্রেরি — শ্রেণি ও বিষয়ভিত্তিক বই, পাঠ ও প্রশ্নোত্তর — সম্পূর্ণ বিনামূল্যে।',
+      'Eduvelto ডিজিটাল লাইব্রেরি — সব বই এক জায়গায়: শ্রেণি ও বিষয়ভিত্তিক বই, পাঠ ও প্রশ্নোত্তর — সম্পূর্ণ বিনামূল্যে।',
     crumb: 'লাইব্রেরি',
-    titleEn: 'Digital Library — Free Books & Question Bank | Eduvelto',
-    descriptionEn: 'The Eduvelto digital library — books, lessons and Q&A by class and subject — completely free.',
+    titleEn: 'All Books — Digital Library | Eduvelto',
+    descriptionEn: 'The Eduvelto digital library — all books in one place: books, lessons and Q&A by class and subject — completely free.',
     crumbEn: 'Library',
   },
   '/class': {
@@ -973,19 +973,27 @@ const STATIC_ROUTES: Record<string, RouteSeoEntry> = {
   '/question-maker': {
     title: 'প্রশ্নপত্র তৈরি করুন — ফ্রি প্রশ্নপত্র জেনারেটর | Eduvelto',
     description:
-      'অধ্যায়ভিত্তিক প্রশ্নপত্র তৈরি করুন — সাধারণ (NCTB), মাদ্রাসা ও চাকরি-ভর্তি কোচিং। শুধু যাচাইকৃত প্রশ্ন দিয়ে, সম্পূর্ণ বিনামূল্যে (প্রতি মাসে ৩টি পেপার)। Eduvelto।',
+      // (164 chars before — the wave-12 length test caps descriptions
+      // at 160; 'সম্পূর্ণ ' dropped, meaning unchanged.)
+      'অধ্যায়ভিত্তিক প্রশ্নপত্র তৈরি করুন — সাধারণ (NCTB), মাদ্রাসা ও চাকরি-ভর্তি কোচিং। শুধু যাচাইকৃত প্রশ্ন দিয়ে, বিনামূল্যে (প্রতি মাসে ৩টি পেপার)। Eduvelto।',
     crumb: 'প্রশ্নপত্র তৈরি',
-    titleEn: 'Make Question Papers — Free Question Paper Generator | Eduvelto',
+    titleEn: 'Make Question Papers — Free Generator | Eduvelto',
     descriptionEn:
-      'Create chapter-based question papers — General (NCTB), Madrasah, and Job & Admission Coaching. Verified questions only, completely free (3 papers/month). Eduvelto.',
+      // (163 chars before — the wave-12 length test caps descriptions
+      // at 160; 'completely ' dropped, meaning unchanged.)
+      'Create chapter-based question papers — General (NCTB), Madrasah, and Job & Admission Coaching. Verified questions only, free (3 papers/month). Eduvelto.',
     crumbEn: 'Question Maker',
   },
   '/question-paper-generator': {
-    title: 'প্রশ্নপত্র জেনারেটর — অধ্যায়ভিত্তিক প্রশ্নপত্র বানান | Eduvelto',
+    // BN title was 64 chars (wave-12 caps titles at 60);
+    // 'প্রশ্নপত্র বানান' dropped, meaning unchanged.
+    title: 'প্রশ্নপত্র জেনারেটর — অধ্যায়ভিত্তিক | Eduvelto',
     description:
       'শ্রেণি → বিষয় → অধ্যায় বেছে প্রশ্নপত্র বানান — যাচাইকৃত প্রশ্ন দিয়ে। ফ্রি ৩টি পেপার/মাস, জলছাপসহ PDF ডাউনলোড। Eduvelto।',
     crumb: 'জেনারেটর',
-    titleEn: 'Question Paper Generator — Build Chapter-Based Papers | Eduvelto',
+    // EN title was 64 chars (wave-12 caps titles at 60); 'Build'
+    // dropped, meaning unchanged.
+    titleEn: 'Question Paper Generator — Chapter-Based Papers | Eduvelto',
     descriptionEn:
       'Pick class → subject → chapter and build a question paper — verified questions only. Free 3 papers/month, watermarked PDF download. Eduvelto.',
     crumbEn: 'Generator',
@@ -998,7 +1006,10 @@ const STATIC_ROUTES: Record<string, RouteSeoEntry> = {
     crumb: 'মূল্য',
     titleEn: 'Pricing — Question Paper Generator Pro | Eduvelto',
     descriptionEn:
-      'Pricing — Free ৳0 (3 papers/month), per paper ৳49, monthly ৳199, class-based annual from ৳150 — 70% off all question papers. Eduvelto.',
+      // English descriptions must carry no Bangla-block characters
+      // (26 Nov 2026, Day 1 audit fix): ৳ (U+09F3) is in the Bengali
+      // block, so prices here use BDT instead.
+      'Pricing — Free BDT 0 (3 papers/month), per paper BDT 49, monthly BDT 199, class-based annual from BDT 150 — 70% off all question papers. Eduvelto.',
     crumbEn: 'Pricing',
   },
   '/omr-evaluator': {
@@ -1019,7 +1030,11 @@ const STATIC_ROUTES: Record<string, RouteSeoEntry> = {
     crumb: 'কাস্টম প্রশ্নপত্র',
     titleEn: 'Custom Question Paper — We Make It For You | Eduvelto',
     descriptionEn:
-      'Custom question paper — send your mark distribution and requirements on WhatsApp, we build it by hand and deliver the PDF. ৳49/paper — 70% off all question papers. Eduvelto.',
+      // (173 chars before — the wave-12 length test caps descriptions
+      // at 160; 'and requirements' dropped, meaning unchanged. ৳ is
+      // in the Bengali block, so the price here uses BDT instead —
+      // English descriptions must carry no Bangla-block characters.)
+      'Custom question paper — send your mark distribution on WhatsApp, we build it by hand and deliver the PDF. BDT 49/paper — 70% off all question papers. Eduvelto.',
     crumbEn: 'Custom Paper',
   },
   '/jobs/bcs/practice/english': {
@@ -2660,7 +2675,7 @@ export function resolveRouteSeo(pathname: string, lang: 'bn' | 'en' = 'bn'): Seo
       '@context': 'https://schema.org',
       '@type': 'ItemList',
       name: lang === 'bn' ? 'স্টাডি গাইড' : 'Study Guides',
-      itemListElement: PUBLIC_GUIDES.filter((g) => g.path.startsWith('/guides/')).map((g, i) => ({
+      itemListElement: PUBLIC_GUIDE_META.filter((g) => g.path.startsWith('/guides/')).map((g, i) => ({
         '@type': 'ListItem',
         position: i + 1,
         name: lang === 'bn' ? g.titleBn : g.titleEn,
@@ -2705,7 +2720,7 @@ export function resolveRouteSeo(pathname: string, lang: 'bn' | 'en' = 'bn'): Seo
       mainEntityOfPage: { '@id': `${canonical}#webpage` },
     });
   }
-  if (PUBLIC_GUIDES.some((g) => g.path === path)) {
+  if (PUBLIC_GUIDE_META.some((g) => g.path === path)) {
     // Article (24 Nov 2026, brand-SEO wave 1; waves 2–5 keep the
     // same date — the 41 guides are article-length drafts awaiting
     // teacher review, published 24 Nov 2026. Never claims review.
@@ -2716,7 +2731,7 @@ export function resolveRouteSeo(pathname: string, lang: 'bn' | 'en' = 'bn'): Seo
     // (isAccessibleForFree) and carry their own updatedAt as
     // datePublished/dateModified; the 41 older guides keep
     // 2026-11-24 and no dateModified.
-    const guide = PUBLIC_GUIDES.find((g) => g.path === path)!;
+    const guide = PUBLIC_GUIDE_META.find((g) => g.path === path)!;
     jsonLd.push({
       '@context': 'https://schema.org',
       '@type': 'Article',
