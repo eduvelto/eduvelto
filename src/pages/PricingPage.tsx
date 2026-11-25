@@ -29,7 +29,14 @@ import {
   getInitialData,
   publishQuestionMakerInitialData,
 } from '../lib/questionMakerInitialData';
-import { QPG_WHATSAPP_USERNAME, type QpgPriceTier } from '../lib/questionPaper';
+import {
+  QPG_CUSTOM_PAPER_BDT,
+  QPG_CUSTOM_PAPER_THEIR_MAX_BDT,
+  QPG_CUSTOM_PAPER_THEIR_MIN_BDT,
+  QPG_PRICE_CLAIM_BN,
+  QPG_WHATSAPP_USERNAME,
+  type QpgPriceTier,
+} from '../lib/questionPaper';
 
 function TierTable(props: { titleBn: string; tiers: QpgPriceTier[] }) {
   return (
@@ -99,6 +106,20 @@ export default function PricingPage() {
           <p style={{ fontSize: 14, lineHeight: 1.7, margin: 0 }}>
             আনলিমিটেড পেপার • জলছাপ ছাড়া PDF • লোগো • Answer Key শিট • লেআউট (ফন্ট/কলাম/স্পেসিং)
           </p>
+        </Card>
+        <Card>
+          <h2 style={{ margin: '0 0 4px', fontSize: 17 }}>কাস্টম প্রশ্নপত্র — আমরা বানিয়ে দিই</h2>
+          <p style={{ fontSize: 14, lineHeight: 1.7, margin: '0 0 8px' }}>
+            <s style={{ color: '#888' }}>
+              Eproshnobank-এর মূল্য ৳{QPG_CUSTOM_PAPER_THEIR_MIN_BDT}–{QPG_CUSTOM_PAPER_THEIR_MAX_BDT}
+            </s>{' '}
+            <Chip tone="gold">{QPG_PRICE_CLAIM_BN}</Chip>
+          </p>
+          <p style={{ fontSize: 22, fontWeight: 700, margin: '0 0 8px' }}>৳{QPG_CUSTOM_PAPER_BDT}/পেপার</p>
+          <p style={{ fontSize: 14, lineHeight: 1.7, margin: '0 0 12px' }}>
+            নম্বর বণ্টন + যা যা লাগবে লিখে WhatsApp-এ অর্ডার করুন — আমরা হাতে বানিয়ে PDF পাঠিয়ে দিই।
+          </p>
+          <LinkButton to="/custom-paper">অর্ডার করুন</LinkButton>
         </Card>
       </div>
 

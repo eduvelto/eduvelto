@@ -112,6 +112,19 @@ export type QpgDifficulty = 'all' | 'easy' | 'medium' | 'hard';
 export const QPG_FREE_MONTHLY_LIMIT = 3;
 export const QPG_PRO_PER_PAPER_BDT = 49;
 export const QPG_PRO_MONTHLY_BDT = 199;
+/** Done-for-you custom paper service (owner 25 Nov 10:50, "koro"):
+ *  the buyer orders on WhatsApp (mark distribution + requirements), a
+ *  HUMAN (owner/team) builds the paper — never automated — and the PDF
+ *  is delivered via WhatsApp at ৳49/paper. Price basis (70%-rule):
+ *  theirs ৳150–200/paper → 30% = ৳45–60, set at ৳49 to match the
+ *  single-paper price. PRICE HISTORY: the owner briefly overrode the
+ *  PDF price to ৳29 at 10:52, then REVERSED at 10:53 ("tahole 49
+ *  rhako") — ৳49 stands and the ৳29 override is cancelled; ৳29 must
+ *  NOT appear anywhere. Display follows the standard rule: their
+ *  price struck through, labelled Eproshnobank's, → "৭০% ছাড়ে" → ৳49. */
+export const QPG_CUSTOM_PAPER_BDT = 49;
+export const QPG_CUSTOM_PAPER_THEIR_MIN_BDT = 150;
+export const QPG_CUSTOM_PAPER_THEIR_MAX_BDT = 200;
 /** The only honest price claim: "৭০% ছাড়ে" (70% off Eproshnobank). */
 export const QPG_PRICE_CLAIM_BN = 'Eproshnobank-এর চেয়ে ৭০% ছাড়ে';
 export const QPG_PRICE_CLAIM_EN = '70% off Eproshnobank';
