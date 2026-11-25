@@ -72,19 +72,246 @@
       "**/node_modules/**"
     ],
     "public": "dist",
+    "cleanUrls": true,
     "redirects": [
       {
+        "source": "/",
+        "destination": "/bn",
+        "type": 301
+      },
+      {
         "source": "/jobs/primary",
-        "destination": "/jobs/primary-teacher",
+        "destination": "/bn/jobs/primary-teacher",
         "type": 301
       },
       {
         "source": "/jobs/primary/",
-        "destination": "/jobs/primary-teacher",
+        "destination": "/bn/jobs/primary-teacher",
+        "type": 301
+      },
+      {
+        "source": "/bcs",
+        "destination": "/bn/jobs/bcs",
+        "type": 301
+      },
+      {
+        "source": "/bank",
+        "destination": "/bn/jobs/bank",
+        "type": 301
+      },
+      {
+        "source": "/primary",
+        "destination": "/bn/jobs/primary-teacher",
+        "type": 301
+      },
+      {
+        "source": "/ntrca",
+        "destination": "/bn/jobs/ntrca",
+        "type": 301
+      },
+      {
+        "source": "/admission",
+        "destination": "/bn/admissions",
+        "type": 301
+      },
+      {
+        "source": "/guides",
+        "destination": "/bn/learn",
+        "type": 301
+      },
+      {
+        "source": "/support",
+        "destination": "/bn/contact",
+        "type": 301
+      },
+      {
+        "source": "/books/:id*",
+        "destination": "/bn/books/:id*",
+        "type": 301
+      },
+      {
+        "source": "/library/:id*",
+        "destination": "/bn/books/:id*",
+        "type": 301
+      },
+      {
+        "source": "/class",
+        "destination": "/bn/class",
+        "type": 301
+      },
+      {
+        "source": "/skills",
+        "destination": "/bn/skills",
+        "type": 301
+      },
+      {
+        "source": "/admissions",
+        "destination": "/bn/admissions",
+        "type": 301
+      },
+      {
+        "source": "/jobs",
+        "destination": "/bn/jobs",
+        "type": 301
+      },
+      {
+        "source": "/learn",
+        "destination": "/bn/learn",
+        "type": 301
+      },
+      {
+        "source": "/opportunities",
+        "destination": "/bn/opportunities",
+        "type": 301
+      },
+      {
+        "source": "/library",
+        "destination": "/bn/books",
+        "type": 301
+      },
+      {
+        "source": "/books",
+        "destination": "/bn/books",
+        "type": 301
+      },
+      {
+        "source": "/health",
+        "destination": "/bn/health",
+        "type": 301
+      },
+      {
+        "source": "/life",
+        "destination": "/bn/life",
+        "type": 301
+      },
+      {
+        "source": "/search",
+        "destination": "/bn/search",
+        "type": 301
+      },
+      {
+        "source": "/about",
+        "destination": "/bn/about",
+        "type": 301
+      },
+      {
+        "source": "/why-eduvelto",
+        "destination": "/bn/why-eduvelto",
+        "type": 301
+      },
+      {
+        "source": "/founder",
+        "destination": "/bn/founder",
+        "type": 301
+      },
+      {
+        "source": "/contact",
+        "destination": "/bn/contact",
+        "type": 301
+      },
+      {
+        "source": "/privacy",
+        "destination": "/bn/privacy",
+        "type": 301
+      },
+      {
+        "source": "/terms",
+        "destination": "/bn/terms",
+        "type": 301
+      },
+      {
+        "source": "/editorial-policy",
+        "destination": "/bn/editorial-policy",
+        "type": 301
+      },
+      {
+        "source": "/content-accuracy",
+        "destination": "/bn/content-accuracy",
+        "type": 301
+      },
+      {
+        "source": "/certificate-policy",
+        "destination": "/bn/certificate-policy",
+        "type": 301
+      },
+      {
+        "source": "/disclaimer",
+        "destination": "/bn/disclaimer",
+        "type": 301
+      },
+      {
+        "source": "/install",
+        "destination": "/bn/install",
+        "type": 301
+      },
+      {
+        "source": "/ai-teacher",
+        "destination": "/bn/ai-teacher",
+        "type": 301
+      },
+      {
+        "source": "/ai-assistant",
+        "destination": "/bn/ai-assistant",
+        "type": 301
+      },
+      {
+        "source": "/class/:rest*",
+        "destination": "/bn/class/:rest*",
+        "type": 301
+      },
+      {
+        "source": "/admissions/:rest*",
+        "destination": "/bn/admissions/:rest*",
+        "type": 301
+      },
+      {
+        "source": "/jobs/:rest*",
+        "destination": "/bn/jobs/:rest*",
+        "type": 301
+      },
+      {
+        "source": "/learn/:rest*",
+        "destination": "/bn/learn/:rest*",
+        "type": 301
+      },
+      {
+        "source": "/opportunities/:rest*",
+        "destination": "/bn/opportunities/:rest*",
+        "type": 301
+      },
+      {
+        "source": "/lessons/:rest*",
+        "destination": "/bn/lessons/:rest*",
+        "type": 301
+      },
+      {
+        "source": "/health/:rest*",
+        "destination": "/bn/health/:rest*",
+        "type": 301
+      },
+      {
+        "source": "/life/:rest*",
+        "destination": "/bn/life/:rest*",
         "type": 301
       }
     ],
     "rewrites": [
+      {
+        "destination": "/index.html",
+        "source": "/bn"
+      },
+      {
+        "destination": "/index.html",
+        "source": "/bn/**"
+      },
+      {
+        "destination": "/index.html",
+        "source": "/en"
+      },
+      {
+        "destination": "/index.html",
+        "source": "/en/**"
+      },
       {
         "destination": "/index.html",
         "source": "/class"
