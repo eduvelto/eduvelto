@@ -46,32 +46,43 @@
   .ev-rd-hero-search button:hover { background: var(--forest); }
 }
 
-/* ---------- hub cards (Education / Opportunity / AI / Life) ---------- */
-.ev-rd-hubs { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 20px; }
-.ev-rd-hub { display: flex; flex-direction: column; gap: 6px; border-radius: var(--radius); border: 1px solid var(--line); padding: 16px; text-decoration: none; color: var(--ink); background: var(--card); }
+/* ---------- hub cards (Education / Question Maker / Jobs / Opportunity / AI / Life) ---------- */
+/* Compact (25 Nov 2026, owner: "agola cuto kore sekane modde kane ata
+   bosiye daw" — make these smaller and put the question-maker in
+   there): 6 cards in one row on desktop, so padding/fonts/icon are
+   tighter than the old 5-card sizing. min-width: 0 is load-bearing:
+   without it the grid items cannot shrink below their longest word
+   and the row overflows horizontally on the owner's phone (seen
+   25 Nov 2026 — the row scrolled sideways with cards cut off). */
+.ev-rd-hubs { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 20px; }
+.ev-rd-hub { display: flex; flex-direction: column; gap: 5px; border-radius: var(--radius); border: 1px solid var(--line); padding: 12px; text-decoration: none; color: var(--ink); background: var(--card); min-width: 0; }
 .ev-rd-hub:hover { border-color: var(--line-strong); box-shadow: var(--shadow-sm); }
-.ev-rd-hub-icon { font-size: 30px; line-height: 1; }
-.ev-rd-hub h2, .ev-rd-hub h3 { margin: 0; font-size: 17px; color: var(--heading); }
-.ev-rd-hub p { margin: 0; font-size: 13.5px; line-height: 1.6; color: var(--muted-ivory); }
-.ev-rd-hub-cta { margin-top: auto; padding-top: 6px; font-size: 14px; font-weight: 700; color: var(--teal-text); }
+.ev-rd-hub-icon { font-size: 26px; line-height: 1; }
+.ev-rd-hub-icon svg { width: 26px; height: 26px; }
+.ev-rd-hub h2, .ev-rd-hub h3 { margin: 0; font-size: 15px; color: var(--heading); }
+.ev-rd-hub p { margin: 0; font-size: 12.5px; line-height: 1.5; color: var(--muted-ivory); }
+.ev-rd-hub-cta { margin-top: auto; padding-top: 6px; font-size: 13px; font-weight: 700; color: var(--teal-text); }
 .ev-rd-hub-green { background: #e8f5e9; border-color: #c8e6c9; }
 .ev-rd-hub-blue { background: #e3f2fd; border-color: #bbdefb; }
 .ev-rd-hub-purple { background: #f3e5f5; border-color: #e1bee7; }
 .ev-rd-hub-amber { background: #fff3e0; border-color: #ffe0b2; }
 /* Sections audit (24 Nov 2026): fifth hub card — Job Preparation. */
 .ev-rd-hub-teal { background: #e0f2f1; border-color: #b2dfdb; }
+/* Sixth hub card (25 Nov 2026, owner): Question Maker. */
+.ev-rd-hub-rose { background: #fce4ec; border-color: #f8bbd0; }
 .ev-rd-hub-note { display: inline-block; align-self: flex-start; font-size: 12px; font-weight: 700; color: var(--amber-dark-text); background: var(--amber-soft); border-radius: 999px; padding: 2px 10px; }
 @media (min-width: 769px) {
-  /* Five hub cards since the sections audit (24 Nov 2026) added Job
-     Preparation beside Education — one row of five on desktop. */
-  .ev-rd-hubs { grid-template-columns: repeat(5, 1fr); gap: 16px; }
-  .ev-rd-hub h2, .ev-rd-hub h3 { font-size: 18px; }
+  /* Six hub cards since the question-maker card (25 Nov 2026) joined
+     the five from the sections audit — one row of six on desktop. */
+  .ev-rd-hubs { grid-template-columns: repeat(6, 1fr); gap: 12px; }
+  .ev-rd-hub h2, .ev-rd-hub h3 { font-size: 16px; }
 }
 html[data-theme="dark"] .ev-rd-hub-green { background: #14352a; border-color: #1f4d3a; }
 html[data-theme="dark"] .ev-rd-hub-blue { background: #12293d; border-color: #1d3f5c; }
 html[data-theme="dark"] .ev-rd-hub-purple { background: #2c1f3d; border-color: #463061; }
 html[data-theme="dark"] .ev-rd-hub-amber { background: #33270f; border-color: #4d3a17; }
 html[data-theme="dark"] .ev-rd-hub-teal { background: #123c38; border-color: #1d5750; }
+html[data-theme="dark"] .ev-rd-hub-rose { background: #3d1f2b; border-color: #5c2e40; }
 /* Website audit (24 Nov 2026): --teal-deep (#12766e) is not redefined
    for dark mode, so the hub CTA text was low-contrast on dark cards.
    --teal-text is the dark theme's brightened teal for text. */

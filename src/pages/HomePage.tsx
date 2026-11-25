@@ -2,8 +2,8 @@
 //
 // Layout (desktop ≥769px and mobile ≤768px share one component):
 //   greeting band (v4 mount: OUTSIDE PageShell, see below) → hero +
-//   Global Search → top-banner ad → 4 hub cards (Education /
-//   Opportunity / AI / Life) → শিক্ষা কেন্দ্র grid → 4 section cards
+//   Global Search → top-banner ad → 6 hub cards (Education /
+//   Question Maker / Jobs / Opportunity / AI / Life) → শিক্ষা কেন্দ্র grid → 4 section cards
 //   (চাকরি / ভর্তি / শিক্ষা / দক্ষতা — preserved verbatim from the
 //   21 Nov redesign) → feature strip / quick access → TABS (25 Nov
 //   2026, owner: "home page a tab koro sudnor kore sajiye"): the
@@ -94,6 +94,16 @@ function BookIcon({ size = 30 }: { size?: number }) {
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
       <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
       <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />
+    </svg>
+  );
+}
+function DocIcon({ size = 30 }: { size?: number }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+      <path d="M14 2v6h6" />
+      <path d="M9 13h6" />
+      <path d="M9 17h6" />
     </svg>
   );
 }
@@ -230,7 +240,7 @@ const SECTIONS = [
   },
 ];
 
-// The four hubs (owner brief §4 + mockups). Every destination is
+// The six hubs (owner brief §4 + mockups). Every destination is
 // live. The AI hub opens the working /ai-assistant tools (AI Life
 // Assistant rebase, 24 Nov 2026); /ai-teacher is a scripted demo,
 // honestly labelled, linked from the assistant page and the AI panel —
@@ -245,6 +255,18 @@ const HUBS = [
     titleEn: 'Education Hub',
     descBn: 'শিক্ষা ও শেখার পূর্ণাঙ্গ ব্যবস্থা',
     descEn: 'Complete learning system',
+    noteBn: '',
+    noteEn: '',
+  },
+  {
+    id: 'question-maker',
+    to: '/question-maker',
+    tint: 'ev-rd-hub-rose',
+    icon: <DocIcon />,
+    titleBn: 'প্রশ্নপত্র তৈরি',
+    titleEn: 'Question Maker',
+    descBn: 'অধ্যায়ভিত্তিক প্রশ্নপত্র তৈরি — ফ্রি ৩টা/মাস, ৭০% ছাড়ে',
+    descEn: 'Chapter-wise question papers — 3 free/month, 70% off',
     noteBn: '',
     noteEn: '',
   },
@@ -899,7 +921,7 @@ export default function HomePage() {
             shows a labelled placeholder. */}
         <AdSlot placement="top-banner" />
 
-        {/* Four hub cards (owner brief §4 + mockups). */}
+        {/* Six hub cards (owner brief §4 + mockups). */}
         <section aria-label={t({ bn: 'Eduvelto-র প্রধান সেবা সমূহ', en: "Eduvelto's main services" })}>
           <div className="ev-rd-hubs">
             {HUBS.map((h) => (
