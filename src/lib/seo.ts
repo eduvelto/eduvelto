@@ -1369,6 +1369,171 @@ const STATIC_ROUTES: Record<string, RouteSeoEntry> = {
     descriptionEn:
       'How to ask questions in class — when to ask, how to phrase it and how to lose the fear. Draft lesson — awaiting teacher review.',
     crumbEn: 'Asking Questions',
+  },  // Study Guides blog (Phase 2, 25 Nov 2026): the 15 long-form
+  // bilingual guides in src/lib/publicGuides.ts (path /guides/<slug>).
+  // Same data file, same detail page, same Article JSON-LD as the
+  // /learn guides — NOT a parallel system. Every guide is a draft
+  // awaiting teacher review — the description says so plainly,
+  // never "যাচাইকৃত"/"অনুমোদিত".
+  '/guides': {
+    title: 'স্টাডি গাইড | Eduvelto',
+    description:
+      'বিসিএস, প্রাথমিক শিক্ষক, ব্যাংক, NTRCA, ভর্তি পরীক্ষা ও NCTB বই দিয়ে পড়ার বিস্তারিত গাইড — বাংলায় ও ইংরেজিতে, সম্পূর্ণ বিনামূল্যে।',
+    crumb: 'গাইড',
+    titleEn: 'Study Guides | Eduvelto',
+    descriptionEn:
+      'In-depth guides for BCS, primary teacher, bank, NTRCA, admission tests and NCTB study — in Bangla and English, completely free.',
+    crumbEn: 'Guides',
+  },
+  '/guides/bcs-bangla-preparation': {
+    title: 'বিসিএস বাংলা প্রস্তুতি — সাহিত্য ও ব্যাকরণ | Eduvelto',
+    description:
+      'বিসিএস প্রিলিমিনারিতে বাংলা ৩০ নম্বর — সাহিত্য ও ব্যাকরণের প্রস্তুতির গাইড। খসড়া পাঠ, শিক্ষক যাচাইয়ের অপেক্ষায়।',
+    crumb: 'বিসিএস বাংলা',
+    titleEn: 'BCS Bangla Preparation — Literature & Grammar | Eduvelto',
+    descriptionEn:
+      'Bangla carries 30 marks in the BCS Preliminary — a guide to preparing literature and grammar. Draft lesson — awaiting teacher review.',
+    crumbEn: 'BCS Bangla',
+  },
+  '/guides/bcs-english-preparation': {
+    title: 'বিসিএস ইংরেজি প্রস্তুতি — ব্যাকরণ ও শব্দভান্ডার | Eduvelto',
+    description:
+      'বিসিএস প্রিলিমিনারিতে ইংরেজি ৩০ নম্বর — ব্যাকরণ, শব্দভান্ডার ও পড়ে বোঝার প্রস্তুতির গাইড। খসড়া পাঠ, শিক্ষক যাচাইয়ের অপেক্ষায়।',
+    crumb: 'বিসিএস ইংরেজি',
+    titleEn: 'BCS English Preparation — Grammar & Vocabulary | Eduvelto',
+    descriptionEn:
+      'English carries 30 marks in the BCS Preliminary — a guide to grammar, vocabulary and reading. Draft lesson — awaiting teacher review.',
+    crumbEn: 'BCS English',
+  },
+  '/guides/bcs-math-mental-ability': {
+    title: 'বিসিএস গণিত ও মানসিক দক্ষতা প্রস্তুতি | Eduvelto',
+    description:
+      'বিসিএস প্রিলিমিনারিতে গাণিতিক যুক্তি ২০ ও মানসিক দক্ষতা ১৫ নম্বর — দুই অংশের প্রস্তুতির গাইড। খসড়া পাঠ, শিক্ষক যাচাইয়ের অপেক্ষায়।',
+    crumb: 'বিসিএস গণিত',
+    titleEn: 'BCS Maths & Mental Ability Preparation | Eduvelto',
+    descriptionEn:
+      'Mathematical Reasoning 20 and Mental Ability 15 in the BCS Preliminary — a guide to both. Draft lesson — awaiting teacher review.',
+    crumbEn: 'BCS Math & Mental Ability',
+  },
+  '/guides/bcs-science-ict-preparation': {
+    title: 'বিসিএস বিজ্ঞান ও আইসিটি প্রস্তুতি | Eduvelto',
+    description:
+      'বিসিএস প্রিলিমিনারিতে সাধারণ বিজ্ঞান ১৫ ও কম্পিউটার ও আইসিটি ১৫ নম্বর — দুই অংশের প্রস্তুতির গাইড। খসড়া পাঠ, শিক্ষক যাচাইয়ের অপেক্ষায়।',
+    crumb: 'বিসিএস বিজ্ঞান',
+    titleEn: 'BCS Science & ICT Preparation | Eduvelto',
+    descriptionEn:
+      'General Science 15 and Computer & ICT 15 in the BCS Preliminary — a guide to both. Draft lesson — awaiting teacher review.',
+    crumbEn: 'BCS Science & ICT',
+  },
+  '/guides/primary-bangla-english-preparation': {
+    title: 'প্রাথমিক শিক্ষক বাংলা ও ইংরেজি প্রস্তুতি | Eduvelto',
+    description:
+      'প্রাথমিক সহকারী শিক্ষক নিয়োগে বাংলা ২৫ ও ইংরেজি ২৫ নম্বর — দুই অংশের প্রস্তুতির গাইড। খসড়া পাঠ, শিক্ষক যাচাইয়ের অপেক্ষায়।',
+    crumb: 'প্রাথমিক বাংলা-ইংরেজি',
+    titleEn: 'Primary Teacher Bangla & English Preparation | Eduvelto',
+    descriptionEn:
+      'Bangla 25 and English 25 in the Primary Assistant Teacher exam — a guide to both. Draft lesson — awaiting teacher review.',
+    crumbEn: 'Primary Bangla & English',
+  },
+  '/guides/primary-math-gk-preparation': {
+    title: 'প্রাথমিক শিক্ষক গণিত ও সাধারণ জ্ঞান প্রস্তুতি | Eduvelto',
+    description:
+      'প্রাথমিক সহকারী শিক্ষক নিয়োগে গণিত ২০ ও সাধারণ জ্ঞান ২০ নম্বর — দুই অংশের প্রস্তুতির গাইড। খসড়া পাঠ, শিক্ষক যাচাইয়ের অপেক্ষায়।',
+    crumb: 'প্রাথমিক গণিত-জিকে',
+    titleEn: 'Primary Teacher Maths & GK Preparation | Eduvelto',
+    descriptionEn:
+      'Mathematics 20 and General Knowledge 20 in the Primary Assistant Teacher exam — a guide to both. Draft lesson — awaiting teacher review.',
+    crumbEn: 'Primary Math & GK',
+  },
+  '/guides/primary-viva-preparation': {
+    title: 'প্রাথমিক শিক্ষক ভাইভা প্রস্তুতি | Eduvelto',
+    description:
+      'প্রাথমিক সহকারী শিক্ষক নিয়োগের মৌখিক পরীক্ষা ১০ নম্বরের — ভাইভার প্রস্তুতির গাইড। খসড়া পাঠ, শিক্ষক যাচাইয়ের অপেক্ষায়।',
+    crumb: 'প্রাথমিক ভাইভা',
+    titleEn: 'Primary Teacher Viva Preparation | Eduvelto',
+    descriptionEn:
+      'The Primary Assistant Teacher viva is 10 marks — a guide to preparing for it. Draft lesson — awaiting teacher review.',
+    crumbEn: 'Primary Viva',
+  },
+  '/guides/bank-math-preparation': {
+    title: 'ব্যাংক চাকরির গণিত প্রস্তুতি | Eduvelto',
+    description:
+      'ব্যাংক নিয়োগ পরীক্ষায় গণিত ২০ নম্বর — ৬০ মিনিটের পরীক্ষায় গণিতে ভালো করার গাইড। খসড়া পাঠ, শিক্ষক যাচাইয়ের অপেক্ষায়।',
+    crumb: 'ব্যাংক গণিত',
+    titleEn: 'Bank Job Maths Preparation | Eduvelto',
+    descriptionEn:
+      'Mathematics carries 20 marks in bank recruitment exams — a guide to doing well in 60 minutes. Draft lesson — awaiting teacher review.',
+    crumbEn: 'Bank Math',
+  },
+  '/guides/bank-english-gk-preparation': {
+    title: 'ব্যাংক ইংরেজি ও সাধারণ জ্ঞান প্রস্তুতি | Eduvelto',
+    description:
+      'ব্যাংক নিয়োগ পরীক্ষায় ইংরেজি ২৫, সাধারণ জ্ঞান ২০ ও কম্পিউটার ১০ নম্বর — তিন অংশের প্রস্তুতির গাইড। খসড়া পাঠ, শিক্ষক যাচাইয়ের অপেক্ষায়।',
+    crumb: 'ব্যাংক ইংরেজি-জিকে',
+    titleEn: 'Bank English & GK Preparation | Eduvelto',
+    descriptionEn:
+      'English 25, General Knowledge 20 and Computer 10 in bank recruitment exams — a guide to all three. Draft lesson — awaiting teacher review.',
+    crumbEn: 'Bank English & GK',
+  },
+  '/guides/ntrca-written-exam-preparation': {
+    title: 'NTRCA লিখিত পরীক্ষার প্রস্তুতি | Eduvelto',
+    description:
+      'NTRCA শিক্ষক নিবন্ধনের লিখিত পরীক্ষা ১০০ নম্বর, ৩ ঘণ্টা — নিজের বিষয়ে লিখিত প্রস্তুতির গাইড। খসড়া পাঠ, শিক্ষক যাচাইয়ের অপেক্ষায়।',
+    crumb: 'NTRCA লিখিত',
+    titleEn: 'NTRCA Written Exam Preparation | Eduvelto',
+    descriptionEn:
+      'The NTRCA written exam is 100 marks in 3 hours — a guide to preparing it in your own subject. Draft lesson — awaiting teacher review.',
+    crumbEn: 'NTRCA Written',
+  },
+  '/guides/ntrca-viva-subject-preparation': {
+    title: 'NTRCA ভাইভা ও বিষয়ভিত্তিক প্রস্তুতি | Eduvelto',
+    description:
+      'NTRCA-র মৌখিক পরীক্ষা ২০ নম্বরের — ভাইভা ও নিজের বিষয়ের প্রস্তুতির গাইড। খসড়া পাঠ, শিক্ষক যাচাইয়ের অপেক্ষায়।',
+    crumb: 'NTRCA ভাইভা',
+    titleEn: 'NTRCA Viva & Subject Preparation | Eduvelto',
+    descriptionEn:
+      'The NTRCA viva is 20 marks — a guide to the viva and your own subject. Draft lesson — awaiting teacher review.',
+    crumbEn: 'NTRCA Viva',
+  },
+  '/guides/gst-admission-preparation': {
+    title: 'GST গুচ্ছ ভর্তি প্রস্তুতি গাইড | Eduvelto',
+    description:
+      'GST গুচ্ছভুক্ত বিশ্ববিদ্যালয়ে ভর্তির প্রস্তুতি — পাঠ্যবই-ভিত্তিক পড়া ও সময়-পরিকল্পনার গাইড। খসড়া পাঠ, শিক্ষক যাচাইয়ের অপেক্ষায়।',
+    crumb: 'GST ভর্তি',
+    titleEn: 'GST Cluster Admission Preparation Guide | Eduvelto',
+    descriptionEn:
+      'Preparing for admission to GST cluster universities — a guide to textbook study and time planning. Draft lesson — awaiting teacher review.',
+    crumbEn: 'GST Admission',
+  },
+  '/guides/du-admission-preparation': {
+    title: 'ঢাকা বিশ্ববিদ্যালয় ভর্তি প্রস্তুতি | Eduvelto',
+    description:
+      'ঢাকা বিশ্ববিদ্যালয়ে ভর্তির প্রস্তুতি — পাঠ্যবই-ভিত্তিক পড়া ও সময়-পরিকল্পনার গাইড। খসড়া পাঠ, শিক্ষক যাচাইয়ের অপেক্ষায়।',
+    crumb: 'ঢাবি ভর্তি',
+    titleEn: 'Dhaka University Admission Preparation | Eduvelto',
+    descriptionEn:
+      'Preparing for admission to the University of Dhaka — a guide to textbook study and time planning. Draft lesson — awaiting teacher review.',
+    crumbEn: 'DU Admission',
+  },
+  '/guides/nctb-books-study-method': {
+    title: 'NCTB বই দিয়ে পড়ার পদ্ধতি | Eduvelto',
+    description:
+      'NCTB-র পাঠ্যবই দিয়ে কীভাবে পড়বেন — অধ্যায় পড়া, নোট বানানো ও পুনরালোচনার গাইড। খসড়া পাঠ, শিক্ষক যাচাইয়ের অপেক্ষায়।',
+    crumb: 'NCTB বই',
+    titleEn: 'How to Study with NCTB Books | Eduvelto',
+    descriptionEn:
+      'How to study with NCTB textbooks — a guide to reading chapters, making notes and revising. Draft lesson — awaiting teacher review.',
+    crumbEn: 'NCTB Study Method',
+  },
+  '/guides/nctb-revision-before-exams': {
+    title: 'NCTB বই দিয়ে পরীক্ষার আগে পুনরালোচনা | Eduvelto',
+    description:
+      'পরীক্ষার আগে NCTB-র বই দিয়ে পুনরালোচনা — নোট, প্রশ্ন সমাধান ও সময়-পরিকল্পনার গাইড। খসড়া পাঠ, শিক্ষক যাচাইয়ের অপেক্ষায়।',
+    crumb: 'NCTB পুনরালোচনা',
+    titleEn: 'NCTB Revision Before Exams | Eduvelto',
+    descriptionEn:
+      'Revising with NCTB books before an exam — a guide to notes, question practice and time planning. Draft lesson — awaiting teacher review.',
+    crumbEn: 'NCTB Revision',
   },
 };
 
@@ -1943,7 +2108,8 @@ export function resolveRouteSeo(pathname: string, lang: 'bn' | 'en' = 'bn'): Seo
   }
   if (path === '/learn') {
     // ItemList (24 Nov 2026, SEO pass; EXTENDED brand-SEO wave 1,
-    // wave 2, wave 3, wave 4, wave 5 and wave 10): the hub lists the 41 public guides, the
+    // wave 2, wave 3, wave 4, wave 5 and wave 10; Phase 2, 25 Nov
+    // 2026: 56 guides): the hub lists the 56 public guides, the
     // two real lessons and the BCS English practice hub — the same
     // links the page renders, in the same order.
     jsonLd.push({
@@ -2200,22 +2366,129 @@ export function resolveRouteSeo(pathname: string, lang: 'bn' | 'en' = 'bn'): Seo
         {
           '@type': 'ListItem',
           position: 42,
+          name: lang === 'bn' ? 'বিসিএস বাংলা প্রস্তুতি — সাহিত্য ও ব্যাকরণ' : 'BCS Bangla Preparation — Literature & Grammar',
+          url: `${SITE_URL}/${lang}/guides/bcs-bangla-preparation`,
+        },
+        {
+          '@type': 'ListItem',
+          position: 43,
+          name: lang === 'bn' ? 'বিসিএস ইংরেজি প্রস্তুতি — ব্যাকরণ ও শব্দভান্ডার' : 'BCS English Preparation — Grammar & Vocabulary',
+          url: `${SITE_URL}/${lang}/guides/bcs-english-preparation`,
+        },
+        {
+          '@type': 'ListItem',
+          position: 44,
+          name: lang === 'bn' ? 'বিসিএস গণিত ও মানসিক দক্ষতা প্রস্তুতি' : 'BCS Maths & Mental Ability Preparation',
+          url: `${SITE_URL}/${lang}/guides/bcs-math-mental-ability`,
+        },
+        {
+          '@type': 'ListItem',
+          position: 45,
+          name: lang === 'bn' ? 'বিসিএস বিজ্ঞান ও আইসিটি প্রস্তুতি' : 'BCS Science & ICT Preparation',
+          url: `${SITE_URL}/${lang}/guides/bcs-science-ict-preparation`,
+        },
+        {
+          '@type': 'ListItem',
+          position: 46,
+          name: lang === 'bn' ? 'প্রাথমিক শিক্ষক বাংলা ও ইংরেজি প্রস্তুতি' : 'Primary Teacher Bangla & English Preparation',
+          url: `${SITE_URL}/${lang}/guides/primary-bangla-english-preparation`,
+        },
+        {
+          '@type': 'ListItem',
+          position: 47,
+          name: lang === 'bn' ? 'প্রাথমিক শিক্ষক গণিত ও সাধারণ জ্ঞান প্রস্তুতি' : 'Primary Teacher Maths & GK Preparation',
+          url: `${SITE_URL}/${lang}/guides/primary-math-gk-preparation`,
+        },
+        {
+          '@type': 'ListItem',
+          position: 48,
+          name: lang === 'bn' ? 'প্রাথমিক শিক্ষক ভাইভা প্রস্তুতি' : 'Primary Teacher Viva Preparation',
+          url: `${SITE_URL}/${lang}/guides/primary-viva-preparation`,
+        },
+        {
+          '@type': 'ListItem',
+          position: 49,
+          name: lang === 'bn' ? 'ব্যাংক চাকরির গণিত প্রস্তুতি' : 'Bank Job Maths Preparation',
+          url: `${SITE_URL}/${lang}/guides/bank-math-preparation`,
+        },
+        {
+          '@type': 'ListItem',
+          position: 50,
+          name: lang === 'bn' ? 'ব্যাংক ইংরেজি ও সাধারণ জ্ঞান প্রস্তুতি' : 'Bank English & GK Preparation',
+          url: `${SITE_URL}/${lang}/guides/bank-english-gk-preparation`,
+        },
+        {
+          '@type': 'ListItem',
+          position: 51,
+          name: lang === 'bn' ? 'NTRCA লিখিত পরীক্ষার প্রস্তুতি' : 'NTRCA Written Exam Preparation',
+          url: `${SITE_URL}/${lang}/guides/ntrca-written-exam-preparation`,
+        },
+        {
+          '@type': 'ListItem',
+          position: 52,
+          name: lang === 'bn' ? 'NTRCA ভাইভা ও বিষয়ভিত্তিক প্রস্তুতি' : 'NTRCA Viva & Subject Preparation',
+          url: `${SITE_URL}/${lang}/guides/ntrca-viva-subject-preparation`,
+        },
+        {
+          '@type': 'ListItem',
+          position: 53,
+          name: lang === 'bn' ? 'GST গুচ্ছ ভর্তি প্রস্তুতি গাইড' : 'GST Cluster Admission Preparation Guide',
+          url: `${SITE_URL}/${lang}/guides/gst-admission-preparation`,
+        },
+        {
+          '@type': 'ListItem',
+          position: 54,
+          name: lang === 'bn' ? 'ঢাকা বিশ্ববিদ্যালয় ভর্তি প্রস্তুতি' : 'Dhaka University Admission Preparation',
+          url: `${SITE_URL}/${lang}/guides/du-admission-preparation`,
+        },
+        {
+          '@type': 'ListItem',
+          position: 55,
+          name: lang === 'bn' ? 'NCTB বই দিয়ে পড়ার পদ্ধতি' : 'How to Study with NCTB Books',
+          url: `${SITE_URL}/${lang}/guides/nctb-books-study-method`,
+        },
+        {
+          '@type': 'ListItem',
+          position: 56,
+          name: lang === 'bn' ? 'NCTB বই দিয়ে পরীক্ষার আগে পুনরালোচনা' : 'NCTB Revision Before Exams',
+          url: `${SITE_URL}/${lang}/guides/nctb-revision-before-exams`,
+        },
+        {
+          '@type': 'ListItem',
+          position: 57,
           name: lang === 'bn' ? 'টেন্স — পাঠ' : 'Tense — Lesson',
           url: `${SITE_URL}/${lang}/learn/bcs-english-tense`,
         },
         {
           '@type': 'ListItem',
-          position: 43,
+          position: 58,
           name: lang === 'bn' ? 'প্রিপোজিশন — পাঠ' : 'Preposition — Lesson',
           url: `${SITE_URL}/${lang}/learn/bcs-english-preposition`,
         },
         {
           '@type': 'ListItem',
-          position: 44,
+          position: 59,
           name: lang === 'bn' ? 'বিসিএস ইংরেজি অনুশীলন' : 'BCS English Practice',
           url: `${SITE_URL}/${lang}/jobs/bcs/practice/english`,
         },
       ],
+    });
+  }
+  if (path === '/guides') {
+    // ItemList (Phase 2, 25 Nov 2026): the Study Guides hub lists
+    // the 15 long-form bilingual guides — built from the same data
+    // the page renders, in the same order, so the JSON-LD can never
+    // drift from the page.
+    jsonLd.push({
+      '@context': 'https://schema.org',
+      '@type': 'ItemList',
+      name: lang === 'bn' ? 'স্টাডি গাইড' : 'Study Guides',
+      itemListElement: PUBLIC_GUIDES.filter((g) => g.path.startsWith('/guides/')).map((g, i) => ({
+        '@type': 'ListItem',
+        position: i + 1,
+        name: lang === 'bn' ? g.titleBn : g.titleEn,
+        url: `${SITE_URL}/${lang}${g.path}`,
+      })),
     });
   }
   if (path === '/opportunities') {
@@ -2257,18 +2530,25 @@ export function resolveRouteSeo(pathname: string, lang: 'bn' | 'en' = 'bn'): Seo
   }
   if (PUBLIC_GUIDES.some((g) => g.path === path)) {
     // Article (24 Nov 2026, brand-SEO wave 1; waves 2–5 keep the
-    // same date — the 35 guides are article-length drafts awaiting
+    // same date — the 41 guides are article-length drafts awaiting
     // teacher review, published 24 Nov 2026. Never claims review.
     // Audit m17: lang-aware headline/description/language, like
     // the lessons branch just above — the EN page must not carry
     // Bangla JSON-LD.
+    // Phase 2 (25 Nov 2026): the 15 Study Guides are free
+    // (isAccessibleForFree) and carry their own updatedAt as
+    // datePublished/dateModified; the 41 older guides keep
+    // 2026-11-24 and no dateModified.
+    const guide = PUBLIC_GUIDES.find((g) => g.path === path)!;
     jsonLd.push({
       '@context': 'https://schema.org',
       '@type': 'Article',
       headline: lang === 'bn' ? entry.title : entry.titleEn,
       description: lang === 'bn' ? entry.description : entry.descriptionEn,
       inLanguage: lang,
-      datePublished: '2026-11-24',
+      isAccessibleForFree: true,
+      datePublished: guide.updatedAt ?? '2026-11-24',
+      ...(guide.updatedAt ? { dateModified: guide.updatedAt } : {}),
       author: { '@id': 'https://eduvelto.com#organization' },
       publisher: { '@id': 'https://eduvelto.com#organization' },
       mainEntityOfPage: { '@id': `${canonical}#webpage` },

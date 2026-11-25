@@ -3,9 +3,11 @@
 // EXTENDED 24 Nov 2026, brand-SEO wave 3: 23 guides;
 // EXTENDED 24 Nov 2026, brand-SEO wave 4: 29 guides;
 // EXTENDED 24 Nov 2026, brand-SEO wave 5: 35 guides;
-// EXTENDED 24 Nov 2026, brand-SEO wave 10: 41 guides).
+// EXTENDED 24 Nov 2026, brand-SEO wave 10: 41 guides;
+// EXTENDED 25 Nov 2026, Phase 2: 56 guides — the 15 bilingual
+// Study Guides at /guides/<slug>, 700+ words in Bangla AND English).
 //
-// The 41 guides are static public data, so the tests guard what
+// The 56 guides are static public data, so the tests guard what
 // matters most: exactly 35 guides with unique slugs/paths, 400–700
 // words each (pinned to the content pack's counts), every internal
 // link pointing at a real route, the draft status never claimed as
@@ -15,7 +17,13 @@
 // NU 2026–27 circular/dates/fees, no book/coaching names).
 
 import { describe, expect, it } from 'vitest';
-import { PUBLIC_GUIDES, publicGuideBySlug, publicGuideWordCount } from '../publicGuides';
+import {
+  PHASE2_GUIDES,
+  PUBLIC_GUIDES,
+  publicGuideBySlug,
+  publicGuideWordCount,
+  publicGuideWordCountEn,
+} from '../publicGuides';
 
 const EXPECTED_WORD_COUNTS: Record<string, number> = {
   'bcs-preparation-guide': 441,
@@ -138,16 +146,44 @@ const REAL_ROUTES = new Set([
   '/life/calculators',
   '/life/converters',
   '/life/health',
+  // Phase 2 (25 Nov 2026): the Study Guides hub + the 15 new guide
+  // paths + the link targets the new articles use.
+  '/guides',
+  '/guides/bcs-bangla-preparation',
+  '/guides/bcs-english-preparation',
+  '/guides/bcs-math-mental-ability',
+  '/guides/bcs-science-ict-preparation',
+  '/guides/primary-bangla-english-preparation',
+  '/guides/primary-math-gk-preparation',
+  '/guides/primary-viva-preparation',
+  '/guides/bank-math-preparation',
+  '/guides/bank-english-gk-preparation',
+  '/guides/ntrca-written-exam-preparation',
+  '/guides/ntrca-viva-subject-preparation',
+  '/guides/gst-admission-preparation',
+  '/guides/du-admission-preparation',
+  '/guides/nctb-books-study-method',
+  '/guides/nctb-revision-before-exams',
+  '/jobs/bcs',
+  '/jobs/bank',
+  '/jobs/primary-teacher',
+  '/jobs/ntrca',
+  '/jobs/viva',
+  '/books',
+  '/admissions',
 ]);
 
 describe('public guides', () => {
-  it('has exactly the 41 guides, with unique slugs, paths and titles', () => {
-    expect(PUBLIC_GUIDES).toHaveLength(41);
-    expect(new Set(PUBLIC_GUIDES.map((g) => g.slug)).size).toBe(41);
-    expect(new Set(PUBLIC_GUIDES.map((g) => g.path)).size).toBe(41);
-    expect(new Set(PUBLIC_GUIDES.map((g) => g.titleBn)).size).toBe(41);
+  it('has exactly the 56 guides, with unique slugs, paths and titles', () => {
+    expect(PUBLIC_GUIDES).toHaveLength(56);
+    expect(new Set(PUBLIC_GUIDES.map((g) => g.slug)).size).toBe(56);
+    expect(new Set(PUBLIC_GUIDES.map((g) => g.path)).size).toBe(56);
+    expect(new Set(PUBLIC_GUIDES.map((g) => g.titleBn)).size).toBe(56);
     for (const g of PUBLIC_GUIDES) {
-      expect(g.path).toBe(`/learn/${g.slug}`);
+      // Old guides live at /learn/<slug>; Phase 2 Study Guides at /guides/<slug>.
+      expect(g.path).toBe(
+        PHASE2_GUIDES.includes(g) ? `/guides/${g.slug}` : `/learn/${g.slug}`,
+      );
       expect(publicGuideBySlug(g.slug)).toBe(g);
     }
     expect(publicGuideBySlug('not-a-guide')).toBeUndefined();
@@ -155,10 +191,19 @@ describe('public guides', () => {
 
   it('every guide is 400–700 words (pinned to the content pack counts)', () => {
     for (const g of PUBLIC_GUIDES) {
+      if (PHASE2_GUIDES.includes(g)) continue; // Phase 2 guides: 700+ in both languages (next test).
       const words = publicGuideWordCount(g);
       expect(words, `${g.slug} words`).toBeGreaterThanOrEqual(400);
       expect(words, `${g.slug} words`).toBeLessThanOrEqual(700);
       expect(words, `${g.slug} words`).toBe(EXPECTED_WORD_COUNTS[g.slug]);
+    }
+  });
+
+  it('Phase 2 Study Guides are 700+ words in Bangla AND English', () => {
+    expect(PHASE2_GUIDES).toHaveLength(15);
+    for (const g of PHASE2_GUIDES) {
+      expect(publicGuideWordCount(g), `${g.slug} Bn words`).toBeGreaterThanOrEqual(700);
+      expect(publicGuideWordCountEn(g), `${g.slug} En words`).toBeGreaterThanOrEqual(700);
     }
   });
 
@@ -206,10 +251,23 @@ describe('public guides', () => {
     expect(text).toContain('এই পৃষ্ঠায় তারিখ ছাড়া আর কোনো শর্ত দাবি করা হচ্ছে না');
   });
 
-  it('only the NU guide has a warning box', () => {
+  it('only the NU guide and the two admission guides have a warning box', () => {
     for (const g of PUBLIC_GUIDES) {
-      if (g.slug === 'nu-admission-guide') expect(g.warningBn).toBeDefined();
-      else expect(g.warningBn).toBeUndefined();
+      if (
+        g.slug === 'nu-admission-guide' ||
+        g.slug === 'gst-admission-preparation' ||
+        g.slug === 'du-admission-preparation'
+      ) {
+        expect(g.warningBn).toBeDefined();
+      } else expect(g.warningBn).toBeUndefined();
+    }
+    // The admission warnings state plainly that no dates/fees/marks
+    // split are given — anything specific must come from the official
+    // circular.
+    for (const slug of ['gst-admission-preparation', 'du-admission-preparation']) {
+      const g = publicGuideBySlug(slug)!;
+      expect(g.warningEn).toBeDefined();
+      expect(g.warningBn).toContain('কোনো নির্দিষ্ট তারিখ, ফি বা নম্বর-বণ্টন দেওয়া হয়নি');
     }
   });
 
@@ -354,5 +412,105 @@ describe('public guides', () => {
     expect(publicGuideBySlug('time-management-working-students')).toBeUndefined();
     expect(publicGuideBySlug('exam-in-one-week')).toBeUndefined();
     expect(publicGuideBySlug('application-letter-guide')).toBeUndefined();
+  });
+});
+
+describe('Phase 2 Study Guides (25 Nov 2026)', () => {
+  const BCS_SLUGS = [
+    'bcs-bangla-preparation',
+    'bcs-english-preparation',
+    'bcs-math-mental-ability',
+    'bcs-science-ict-preparation',
+  ];
+
+  it('has the planned distribution: BCS 4, Primary 3, Bank 2, NTRCA 2, Admission 2, NCTB 2', () => {
+    const counts = new Map<string, number>();
+    for (const g of PHASE2_GUIDES) counts.set(g.category!, (counts.get(g.category!) ?? 0) + 1);
+    expect(Object.fromEntries(counts)).toEqual({
+      bcs: 4,
+      primary: 3,
+      bank: 2,
+      ntrca: 2,
+      admission: 2,
+      nctb: 2,
+    });
+  });
+
+  it('every new article carries category, both-language copy, read time, updatedAt and a needsReview list', () => {
+    for (const g of PHASE2_GUIDES) {
+      expect(g.category).toBeDefined();
+      expect(g.titleBn.length).toBeGreaterThan(0);
+      expect(g.titleEn.length).toBeGreaterThan(0);
+      expect(g.descriptionBn!.length).toBeGreaterThan(40);
+      expect(g.descriptionEn!.length).toBeGreaterThan(40);
+      expect(g.readTimeMinutes).toBe(6);
+      expect(g.updatedAt).toBe('2026-11-25');
+      expect(Array.isArray(g.needsReview)).toBe(true);
+      // Only the GST/DU articles rest on a deliberate omission
+      // (no verifiable dates/fees/marks split); the other 13 are
+      // fully verified against the patterns in the Phase 2 brief.
+      if (g.slug === 'gst-admission-preparation' || g.slug === 'du-admission-preparation') {
+        expect(g.needsReview!.length).toBeGreaterThan(0);
+      } else {
+        expect(g.needsReview).toEqual([]);
+      }
+    }
+  });
+
+  it('no new article makes a forbidden claim', () => {
+    const FORBIDDEN = ['আবেদন চলছে', '100% কমন', 'নিশ্চিত কমন'];
+    for (const g of PHASE2_GUIDES) {
+      const text = [
+        g.titleBn,
+        g.titleEn,
+        g.descriptionBn ?? '',
+        g.descriptionEn ?? '',
+        ...g.bodyBn,
+        ...(g.bodyEn ?? []),
+        g.warningBn ?? '',
+        g.warningEn ?? '',
+      ].join(' ');
+      for (const f of FORBIDDEN) {
+        expect(text, `${g.slug} contains ${f}`).not.toContain(f);
+      }
+    }
+  });
+
+  it('BCS articles state the verified 50th-syllabus split (30/30/25/25/10/15/15/20/15/15 = 200)', () => {
+    const BN_SPLIT =
+      'বিষয়ভিত্তিক নম্বর-বণ্টন এরকম: বাংলা ৩০, ইংরেজি ৩০, বাংলাদেশ বিষয়াবলি ২৫, আন্তর্জাতিক বিষয়াবলি ২৫, ভূগোল, পরিবেশ ও দুর্যোগ ব্যবস্থাপনা ১০, সাধারণ বিজ্ঞান ১৫, কম্পিউটার ও তথ্যপ্রযুক্তি ১৫, গাণিতিক যুক্তি ২০, মানসিক দক্ষতা ১৫, নৈতিকতা, মূল্যবোধ ও সুশাসন ১৫ — মোট ২০০ নম্বর।';
+    const EN_SPLIT =
+      'The subject-wise split is: Bangla 30, English 30, Bangladesh Affairs 25, International Affairs 25, Geography, Environment and Disaster Management 10, General Science 15, Computer and ICT 15, Mathematical Reasoning 20, Mental Ability 15, Ethics, Values and Good Governance 15 — 200 marks in total.';
+    for (const slug of BCS_SLUGS) {
+      const g = publicGuideBySlug(slug)!;
+      expect(g.bodyBn.join(' '), `${slug} Bn split`).toContain(BN_SPLIT);
+      expect(g.bodyEn!.join(' '), `${slug} En split`).toContain(EN_SPLIT);
+      // The old (wrong) 35/35/30/20 split must not appear.
+      expect(g.bodyBn.join(' ')).not.toContain('বাংলা ৩৫, ইংরেজি ৩৫');
+      expect(g.bodyEn!.join(' ')).not.toContain('Bangla 35, English 35');
+    }
+  });
+
+  it('Primary, Bank and NTRCA articles state their verified patterns', () => {
+    const primary = publicGuideBySlug('primary-bangla-english-preparation')!;
+    expect(primary.bodyBn.join(' ')).toContain('৯০টি প্রশ্ন থাকে, সময় ৯০ মিনিট');
+    expect(primary.bodyEn!.join(' ')).toContain('90 questions in 90 minutes');
+    const bank = publicGuideBySlug('bank-math-preparation')!;
+    expect(bank.bodyBn.join(' ')).toContain('১০০টি প্রশ্ন থাকে, সময় ৬০ মিনিট');
+    expect(bank.bodyEn!.join(' ')).toContain('100 questions in 60 minutes');
+    const ntrca = publicGuideBySlug('ntrca-written-exam-preparation')!;
+    expect(ntrca.bodyBn.join(' ')).toContain('লিখিত পরীক্ষা ১০০ নম্বরের, সময় ৩ ঘণ্টা');
+    expect(ntrca.bodyEn!.join(' ')).toContain('written examination is 100 marks in 3 hours');
+  });
+
+  it('no new article duplicates an existing guide topic (slug + title)', () => {
+    const oldSlugs = new Set(PUBLIC_GUIDES.filter((g) => !PHASE2_GUIDES.includes(g)).map((g) => g.slug));
+    const oldTitles = new Set(
+      PUBLIC_GUIDES.filter((g) => !PHASE2_GUIDES.includes(g)).map((g) => g.titleBn),
+    );
+    for (const g of PHASE2_GUIDES) {
+      expect(oldSlugs.has(g.slug)).toBe(false);
+      expect(oldTitles.has(g.titleBn)).toBe(false);
+    }
   });
 });

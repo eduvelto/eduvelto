@@ -677,6 +677,150 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://eduvelto.com/guides</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/guides?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/guides?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/guides" />
+    <lastmod>2026-11-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/guides/bcs-bangla-preparation</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/guides/bcs-bangla-preparation?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/guides/bcs-bangla-preparation?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/guides/bcs-bangla-preparation" />
+    <lastmod>2026-11-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/guides/bcs-english-preparation</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/guides/bcs-english-preparation?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/guides/bcs-english-preparation?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/guides/bcs-english-preparation" />
+    <lastmod>2026-11-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/guides/bcs-math-mental-ability</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/guides/bcs-math-mental-ability?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/guides/bcs-math-mental-ability?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/guides/bcs-math-mental-ability" />
+    <lastmod>2026-11-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/guides/bcs-science-ict-preparation</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/guides/bcs-science-ict-preparation?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/guides/bcs-science-ict-preparation?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/guides/bcs-science-ict-preparation" />
+    <lastmod>2026-11-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/guides/primary-bangla-english-preparation</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/guides/primary-bangla-english-preparation?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/guides/primary-bangla-english-preparation?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/guides/primary-bangla-english-preparation" />
+    <lastmod>2026-11-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/guides/primary-math-gk-preparation</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/guides/primary-math-gk-preparation?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/guides/primary-math-gk-preparation?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/guides/primary-math-gk-preparation" />
+    <lastmod>2026-11-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/guides/primary-viva-preparation</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/guides/primary-viva-preparation?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/guides/primary-viva-preparation?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/guides/primary-viva-preparation" />
+    <lastmod>2026-11-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/guides/bank-math-preparation</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/guides/bank-math-preparation?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/guides/bank-math-preparation?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/guides/bank-math-preparation" />
+    <lastmod>2026-11-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/guides/bank-english-gk-preparation</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/guides/bank-english-gk-preparation?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/guides/bank-english-gk-preparation?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/guides/bank-english-gk-preparation" />
+    <lastmod>2026-11-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/guides/ntrca-written-exam-preparation</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/guides/ntrca-written-exam-preparation?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/guides/ntrca-written-exam-preparation?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/guides/ntrca-written-exam-preparation" />
+    <lastmod>2026-11-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/guides/ntrca-viva-subject-preparation</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/guides/ntrca-viva-subject-preparation?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/guides/ntrca-viva-subject-preparation?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/guides/ntrca-viva-subject-preparation" />
+    <lastmod>2026-11-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/guides/gst-admission-preparation</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/guides/gst-admission-preparation?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/guides/gst-admission-preparation?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/guides/gst-admission-preparation" />
+    <lastmod>2026-11-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/guides/du-admission-preparation</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/guides/du-admission-preparation?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/guides/du-admission-preparation?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/guides/du-admission-preparation" />
+    <lastmod>2026-11-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/guides/nctb-books-study-method</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/guides/nctb-books-study-method?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/guides/nctb-books-study-method?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/guides/nctb-books-study-method" />
+    <lastmod>2026-11-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://eduvelto.com/guides/nctb-revision-before-exams</loc>
+    <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/guides/nctb-revision-before-exams?lang=bn" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/guides/nctb-revision-before-exams?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduvelto.com/guides/nctb-revision-before-exams" />
+    <lastmod>2026-11-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://eduvelto.com/learn</loc>
     <xhtml:link rel="alternate" hreflang="bn" href="https://eduvelto.com/learn?lang=bn" />
     <xhtml:link rel="alternate" hreflang="en" href="https://eduvelto.com/learn?lang=en" />

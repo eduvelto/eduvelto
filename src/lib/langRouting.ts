@@ -130,6 +130,7 @@ export const LEGACY_PUBLIC_SEGMENTS: readonly string[] = [
   'admissions',
   'jobs',
   'learn',
+  'guides',
   'opportunities',
   'library',
   'books',
@@ -164,9 +165,11 @@ export const LEGACY_ALIASES: Readonly<Record<string, string>> = {
   '/primary': '/jobs/primary-teacher',
   '/ntrca': '/jobs/ntrca',
   '/admission': '/admissions',
-  '/guides': '/learn',
   '/support': '/contact',
 };
+// /guides is NOT an alias any more (Phase 2, 25 Nov 2026): it is a
+// real lang-prefixed route (/bn/guides, the Study Guides hub), so
+// 'guides' lives in LEGACY_PUBLIC_SEGMENTS above instead.
 
 /** First segments that NEVER redirect: app / auth / admin routes
 //  stay exactly where they are. */

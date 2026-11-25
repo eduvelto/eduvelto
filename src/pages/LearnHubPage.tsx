@@ -25,7 +25,7 @@ import { PUBLIC_LESSONS } from '../lib/publicLessons';
 import { PUBLIC_GUIDES } from '../lib/publicGuides';
 
 export default function LearnHubPage() {
-  const { t } = useLanguage();
+  const { lang, t } = useLanguage();
   return (
     <PageShell titleBn="পাঠ ও গাইড" titleEn="Lessons and guides" wide maxWidth={1240}>
       <p style={{ color: 'var(--muted-ivory)', margin: '0 0 20px', fontSize: 15, lineHeight: 1.7 }}>
@@ -43,11 +43,11 @@ export default function LearnHubPage() {
           <Card key={guide.slug}>
             <div style={{ fontWeight: 700, color: 'var(--heading)', fontSize: 17 }}>
               <Link to={guide.path} style={{ fontWeight: 700 }}>
-                {guide.titleBn}
+                {lang === 'bn' ? guide.titleBn : guide.titleEn}
               </Link>
             </div>
             <p style={{ margin: '8px 0 0', color: 'var(--muted)', fontSize: 14, lineHeight: 1.7 }}>
-              {guide.bodyBn[0]}
+              {lang === 'bn' ? guide.bodyBn[0] : (guide.bodyEn?.[0] ?? guide.bodyBn[0])}
             </p>
             <p style={{ margin: '10px 0 0', color: 'var(--muted)', fontSize: 13 }}>
               {t({

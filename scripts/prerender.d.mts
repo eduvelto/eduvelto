@@ -24,6 +24,7 @@ export type PrerenderBook = {
 
 export function escapeHtml(value: unknown): string;
 export function getGuideSlugs(source: string): string[];
+export function getGuidePaths(source: string): string[];
 export function withLangPrefix(path: string, lang: string): string;
 export function canonicalUrl(path: string, lang: string): string;
 export function normalizeBooksFixture(data: unknown): { books: PrerenderBook[]; skipped: number };

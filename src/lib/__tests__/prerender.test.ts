@@ -15,6 +15,7 @@ import {
   buildRobotsTxt,
   buildSitemapXml,
   fetchBooksFromRest,
+  getGuidePaths,
   getGuideSlugs,
   normalizeBooksFixture,
   parseFirestoreRestDoc,
@@ -32,7 +33,7 @@ function readSitemapPaths(): string[] {
 describe('PRERENDER_STATIC_PATHS', () => {
   it('covers every committed-sitemap URL except /founder, plus the new /books hub', () => {
     const sitemapPaths = readSitemapPaths();
-    expect(sitemapPaths.length).toBe(120);
+    expect(sitemapPaths.length).toBe(136);
     for (const p of sitemapPaths) {
       if (p === '/founder') continue; // FounderPage owns its SEO client-side; not prerendered.
       expect(PRERENDER_STATIC_PATHS, `sitemap path missing from prerender list: ${p}`).toContain(p);
@@ -44,13 +45,19 @@ describe('PRERENDER_STATIC_PATHS', () => {
     expect(new Set(PRERENDER_STATIC_PATHS).size).toBe(PRERENDER_STATIC_PATHS.length);
   });
 
-  it('covers every /learn guide slug from PUBLIC_GUIDES (regex returns m[1])', () => {
+  it('covers every guide path from PUBLIC_GUIDES (regex returns m[1])', () => {
     const source = readFileSync(join(process.cwd(), 'src', 'lib', 'publicGuides.ts'), 'utf8');
     const slugs = getGuideSlugs(source);
-    expect(slugs.length).toBe(41);
+    expect(slugs.length).toBe(56);
     for (const slug of slugs) expect(typeof slug).toBe('string');
-    for (const slug of slugs) {
-      expect(PRERENDER_STATIC_PATHS, `guide not prerendered: ${slug}`).toContain(`/learn/${slug}`);
+    // Phase 2 (25 Nov 2026): the 15 Study Guides live at
+    // /guides/<slug>, not /learn/<slug> — the coverage check uses
+    // each guide's own path.
+    const paths = getGuidePaths(source);
+    expect(paths.length).toBe(56);
+    expect(new Set(paths).size).toBe(56);
+    for (const p of paths) {
+      expect(PRERENDER_STATIC_PATHS, `guide not prerendered: ${p}`).toContain(p);
     }
   });
 });

@@ -96,7 +96,7 @@ describe('legacyRedirectTarget', () => {
     expect(legacyRedirectTarget('/primary')).toBe('/bn/jobs/primary-teacher');
     expect(legacyRedirectTarget('/ntrca')).toBe('/bn/jobs/ntrca');
     expect(legacyRedirectTarget('/admission')).toBe('/bn/admissions');
-    expect(legacyRedirectTarget('/guides')).toBe('/bn/learn');
+    expect(legacyRedirectTarget('/guides')).toBe('/bn/guides');
     expect(legacyRedirectTarget('/support')).toBe('/bn/contact');
   });
 

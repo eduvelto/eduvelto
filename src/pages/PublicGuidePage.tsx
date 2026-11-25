@@ -10,6 +10,12 @@
 // teacher-reviewed. It is never labelled verified/approved.
 // The NU guide additionally carries its prominent warning (the
 // 2026–27 circular is not published yet) in an alert box.
+//
+// Phase 2 (25 Nov 2026): the 15 Study Guides (/guides/<slug>) carry
+// a full English body (bodyEn) — rendered when lang is en — plus a
+// read time and an updated date. Old /learn guides have Bn bodies
+// only and keep rendering them in both languages. The breadcrumb
+// hub follows the guide's own path (/guides or /learn).
 
 import { Link } from 'react-router-dom';
 import { PageShell, EmptyState } from '../components/PageShell';
@@ -46,13 +52,16 @@ export default function PublicGuidePage({ guide }: { guide: string }) {
       </PageShell>
     );
   }
+  const isGuidesBlog = data.path.startsWith('/guides/');
+  const body = lang === 'en' && data.bodyEn ? data.bodyEn : data.bodyBn;
+  const warning = lang === 'en' && data.warningEn ? data.warningEn : data.warningBn;
   return (
     <PageShell titleBn={data.titleBn} titleEn={data.titleEn}>
       {/* Visible breadcrumb — labels match the BreadcrumbList JSON-LD
           in lib/seo.ts for this route. */}
       <Breadcrumb
         items={[
-          { label: 'পাঠ', to: '/learn' },
+          { label: isGuidesBlog ? 'গাইড' : 'পাঠ', to: isGuidesBlog ? '/guides' : '/learn' },
           { label: data.crumbBn },
         ]}
       />
@@ -61,7 +70,7 @@ export default function PublicGuidePage({ guide }: { guide: string }) {
         <br />
         {lang === 'bn' ? DRAFT_NOTE_BN : DRAFT_NOTE_EN}
       </AlertBox>
-      {data.warningBn ? (
+      {warning ? (
         <AlertBox tone="info">
           <strong>
             {lang === 'bn'
@@ -69,13 +78,27 @@ export default function PublicGuidePage({ guide }: { guide: string }) {
               : 'Important warning — read this first:'}
           </strong>
           <br />
-          {data.warningBn}
+          {warning}
         </AlertBox>
       ) : null}
       <p style={{ fontSize: 14, color: 'var(--muted-ivory)', margin: '0 0 16px' }}>
         {lang === 'bn' ? 'Eduvelto — ফ্রি শিক্ষা প্ল্যাটফর্ম' : 'Eduvelto — Free education platform'}
+        {data.readTimeMinutes ? (
+          <>
+            {' · '}
+            {lang === 'bn'
+              ? `পড়ার সময়: প্রায় ${data.readTimeMinutes} মিনিট`
+              : `Reading time: about ${data.readTimeMinutes} minutes`}
+          </>
+        ) : null}
+        {data.updatedAt ? (
+          <>
+            {' · '}
+            {lang === 'bn' ? `হালনাগাদ: ${data.updatedAt}` : `Updated: ${data.updatedAt}`}
+          </>
+        ) : null}
       </p>
-      {data.bodyBn.map((p, i) => (
+      {body.map((p, i) => (
         <p key={i} style={{ fontSize: 16, lineHeight: 1.75 }}>
           {p}
         </p>

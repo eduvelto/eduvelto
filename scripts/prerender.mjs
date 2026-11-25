@@ -165,6 +165,22 @@ export const PRERENDER_STATIC_PATHS = [
   '/learn/reading-comprehension-strategies',
   '/learn/learning-with-phone',
   '/learn/asking-questions-class',
+  '/guides',
+  '/guides/bcs-bangla-preparation',
+  '/guides/bcs-english-preparation',
+  '/guides/bcs-math-mental-ability',
+  '/guides/bcs-science-ict-preparation',
+  '/guides/primary-bangla-english-preparation',
+  '/guides/primary-math-gk-preparation',
+  '/guides/primary-viva-preparation',
+  '/guides/bank-math-preparation',
+  '/guides/bank-english-gk-preparation',
+  '/guides/ntrca-written-exam-preparation',
+  '/guides/ntrca-viva-subject-preparation',
+  '/guides/gst-admission-preparation',
+  '/guides/du-admission-preparation',
+  '/guides/nctb-books-study-method',
+  '/guides/nctb-revision-before-exams',
   '/learn',
   '/admissions',
   '/admissions/national-university',
@@ -281,6 +297,20 @@ export function getGuideSlugs(source) {
     slugs.push(m[1]);
   }
   return slugs;
+}
+
+/** Guide paths from the PUBLIC_GUIDES source text. Phase 2 (25 Nov
+ *  2026): the 15 Study Guides live at /guides/<slug>, not
+ *  /learn/<slug> — the coverage check must use each guide's own
+ *  path, never assume /learn/. */
+export function getGuidePaths(source) {
+  const paths = [];
+  const re = /path:\s*'([^']+)'/g;
+  let m;
+  while ((m = re.exec(source)) !== null) {
+    paths.push(m[1]);
+  }
+  return paths;
 }
 
 export function withLangPrefix(path, lang) {
@@ -629,8 +659,8 @@ async function main() {
   // --- Guide coverage check (warn, never fail the build on it) ---
   try {
     const guideSource = readFileSync(join(root, 'src/lib/publicGuides.ts'), 'utf8');
-    const guideSlugs = getGuideSlugs(guideSource);
-    const missing = guideSlugs.filter((slug) => !PRERENDER_STATIC_PATHS.includes(`/learn/${slug}`));
+    const guidePaths = getGuidePaths(guideSource);
+    const missing = guidePaths.filter((p) => !PRERENDER_STATIC_PATHS.includes(p));
     if (missing.length > 0) console.warn(`WARN: ${missing.length} guide(s) not in PRERENDER_STATIC_PATHS: ${missing.join(', ')}`);
     else console.log(`Guides: ${guideSlugs.length} slugs, all covered by PRERENDER_STATIC_PATHS`);
   } catch (err) {

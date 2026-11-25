@@ -81,6 +81,10 @@ const LearnHubPage = lazy(() => import('./pages/LearnHubPage'));
    zero Firestore reads. Each guide route is explicit (slug prop),
    never derived from a raw URL slug. */
 const PublicGuidePage = lazy(() => import('./pages/PublicGuidePage'));
+/* Phase 2 (25 Nov 2026): Study Guides hub — /guides lists the 15
+   long-form bilingual guides; each has an explicit route below,
+   same pattern as the /learn guides (slug prop, never a raw URL). */
+const GuidesHubPage = lazy(() => import('./pages/GuidesHubPage'));
 const EditorialPolicyPage = lazy(() => import('./pages/EditorialPolicyPage'));
 const ContentAccuracyPage = lazy(() => import('./pages/ContentAccuracyPage'));
 const CertificatePolicyPage = lazy(() => import('./pages/CertificatePolicyPage'));
@@ -581,6 +585,26 @@ export default function App() {
         <Route path="learn/reading-comprehension-strategies" element={<PublicGuidePage guide="reading-comprehension-strategies" />} />
         <Route path="learn/learning-with-phone" element={<PublicGuidePage guide="learning-with-phone" />} />
         <Route path="learn/asking-questions-class" element={<PublicGuidePage guide="asking-questions-class" />} />
+        {/* Phase 2 (25 Nov 2026): Study Guides blog — /guides hub +
+            15 long-form bilingual guides, one explicit route per
+            slug (see PublicGuidePage). Same data file, same detail
+            component as the /learn guides; NOT a parallel system. */}
+        <Route path="guides" element={<GuidesHubPage />} />
+        <Route path="guides/bcs-bangla-preparation" element={<PublicGuidePage guide="bcs-bangla-preparation" />} />
+        <Route path="guides/bcs-english-preparation" element={<PublicGuidePage guide="bcs-english-preparation" />} />
+        <Route path="guides/bcs-math-mental-ability" element={<PublicGuidePage guide="bcs-math-mental-ability" />} />
+        <Route path="guides/bcs-science-ict-preparation" element={<PublicGuidePage guide="bcs-science-ict-preparation" />} />
+        <Route path="guides/primary-bangla-english-preparation" element={<PublicGuidePage guide="primary-bangla-english-preparation" />} />
+        <Route path="guides/primary-math-gk-preparation" element={<PublicGuidePage guide="primary-math-gk-preparation" />} />
+        <Route path="guides/primary-viva-preparation" element={<PublicGuidePage guide="primary-viva-preparation" />} />
+        <Route path="guides/bank-math-preparation" element={<PublicGuidePage guide="bank-math-preparation" />} />
+        <Route path="guides/bank-english-gk-preparation" element={<PublicGuidePage guide="bank-english-gk-preparation" />} />
+        <Route path="guides/ntrca-written-exam-preparation" element={<PublicGuidePage guide="ntrca-written-exam-preparation" />} />
+        <Route path="guides/ntrca-viva-subject-preparation" element={<PublicGuidePage guide="ntrca-viva-subject-preparation" />} />
+        <Route path="guides/gst-admission-preparation" element={<PublicGuidePage guide="gst-admission-preparation" />} />
+        <Route path="guides/du-admission-preparation" element={<PublicGuidePage guide="du-admission-preparation" />} />
+        <Route path="guides/nctb-books-study-method" element={<PublicGuidePage guide="nctb-books-study-method" />} />
+        <Route path="guides/nctb-revision-before-exams" element={<PublicGuidePage guide="nctb-revision-before-exams" />} />
         {/* Global Opportunity Hub (directive §3B): static guide
             routes MUST come before /opportunities/:oppId —
             otherwise '/opportunities/cv-builder' matches

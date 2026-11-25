@@ -42,6 +42,7 @@ describe('firebase.json hosting', () => {
     expect(redirects).toContainEqual({ source: '/library/:id*', destination: '/bn/books/:id*', type: 301 });
     expect(redirects).toContainEqual({ source: '/jobs/:rest*', destination: '/bn/jobs/:rest*', type: 301 });
     expect(redirects).toContainEqual({ source: '/learn/:rest*', destination: '/bn/learn/:rest*', type: 301 });
+    expect(redirects).toContainEqual({ source: '/guides/:rest*', destination: '/bn/guides/:rest*', type: 301 });
     expect(redirects).toContainEqual({ source: '/class/:rest*', destination: '/bn/class/:rest*', type: 301 });
   });
 
@@ -62,6 +63,8 @@ describe('firebase.json hosting', () => {
     expect(legacyRedirectTarget('/books/hons-211001/chapters/c1')).toBe('/bn/books/hons-211001/chapters/c1');
     expect(legacyRedirectTarget('/jobs/bcs/subjects/english')).toBe('/bn/jobs/bcs/subjects/english');
     expect(legacyRedirectTarget('/learn/bcs-preparation-guide')).toBe('/bn/learn/bcs-preparation-guide');
+    expect(legacyRedirectTarget('/guides/bcs-bangla-preparation')).toBe('/bn/guides/bcs-bangla-preparation');
+    expect(legacyRedirectTarget('/guides')).toBe('/bn/guides');
   });
 
   it('rewrites /bn, /bn/**, /en, /en/** to /index.html and keeps the legacy rewrites', () => {
@@ -71,6 +74,8 @@ describe('firebase.json hosting', () => {
     }
     // Spot-check the pre-existing enumerated rewrites survived.
     expect(rewrites).toContainEqual({ source: '/jobs', destination: '/index.html' });
+    expect(rewrites).toContainEqual({ source: '/guides', destination: '/index.html' });
+    expect(rewrites).toContainEqual({ source: '/guides/**', destination: '/index.html' });
     expect(rewrites).toContainEqual({ source: '/login', destination: '/index.html' });
     expect(rewrites).toContainEqual({ source: '/admin/**', destination: '/index.html' });
   });

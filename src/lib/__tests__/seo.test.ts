@@ -177,6 +177,23 @@ const SITEMAP_URLS = [
   '/learn/reading-comprehension-strategies',
   '/learn/learning-with-phone',
   '/learn/asking-questions-class',
+  // Phase 2 (25 Nov 2026): Study Guides blog — hub + 15 articles.
+  '/guides',
+  '/guides/bcs-bangla-preparation',
+  '/guides/bcs-english-preparation',
+  '/guides/bcs-math-mental-ability',
+  '/guides/bcs-science-ict-preparation',
+  '/guides/primary-bangla-english-preparation',
+  '/guides/primary-math-gk-preparation',
+  '/guides/primary-viva-preparation',
+  '/guides/bank-math-preparation',
+  '/guides/bank-english-gk-preparation',
+  '/guides/ntrca-written-exam-preparation',
+  '/guides/ntrca-viva-subject-preparation',
+  '/guides/gst-admission-preparation',
+  '/guides/du-admission-preparation',
+  '/guides/nctb-books-study-method',
+  '/guides/nctb-revision-before-exams',
   '/learn',
   '/admissions',
   '/admissions/national-university',
@@ -1050,7 +1067,7 @@ describe('resolveRouteSeo — SEO pass 24 Nov 2026 (owner order "SEO korba ajk 1
     }
   });
 
-  it('/learn hub emits an ItemList of its 41 guides + 2 lessons + the practice hub', () => {
+  it('/learn hub emits an ItemList of its 56 guides + 2 lessons + the practice hub', () => {
     const seo = resolveRouteSeo('/learn')!;
     const items = itemListOf(seo)['itemListElement'] as Array<Record<string, unknown>>;
     expect(items.map((i) => i['url'])).toEqual([
@@ -1095,6 +1112,21 @@ describe('resolveRouteSeo — SEO pass 24 Nov 2026 (owner order "SEO korba ajk 1
       `${SITE_URL}/bn/learn/reading-comprehension-strategies`,
       `${SITE_URL}/bn/learn/learning-with-phone`,
       `${SITE_URL}/bn/learn/asking-questions-class`,
+      `${SITE_URL}/bn/guides/bcs-bangla-preparation`,
+      `${SITE_URL}/bn/guides/bcs-english-preparation`,
+      `${SITE_URL}/bn/guides/bcs-math-mental-ability`,
+      `${SITE_URL}/bn/guides/bcs-science-ict-preparation`,
+      `${SITE_URL}/bn/guides/primary-bangla-english-preparation`,
+      `${SITE_URL}/bn/guides/primary-math-gk-preparation`,
+      `${SITE_URL}/bn/guides/primary-viva-preparation`,
+      `${SITE_URL}/bn/guides/bank-math-preparation`,
+      `${SITE_URL}/bn/guides/bank-english-gk-preparation`,
+      `${SITE_URL}/bn/guides/ntrca-written-exam-preparation`,
+      `${SITE_URL}/bn/guides/ntrca-viva-subject-preparation`,
+      `${SITE_URL}/bn/guides/gst-admission-preparation`,
+      `${SITE_URL}/bn/guides/du-admission-preparation`,
+      `${SITE_URL}/bn/guides/nctb-books-study-method`,
+      `${SITE_URL}/bn/guides/nctb-revision-before-exams`,
       `${SITE_URL}/bn/learn/bcs-english-tense`,
       `${SITE_URL}/bn/learn/bcs-english-preposition`,
       `${SITE_URL}/bn/jobs/bcs/practice/english`,
@@ -1204,8 +1236,8 @@ describe('resolveRouteSeo — brand-SEO wave 1 (24 Nov 2026)', () => {
     }
   });
 
-  it('all 41 guides resolve with draft wording and Article JSON-LD', () => {
-    expect(PUBLIC_GUIDES).toHaveLength(41);
+  it('all 56 guides resolve with draft wording and Article JSON-LD', () => {
+    expect(PUBLIC_GUIDES).toHaveLength(56);
     for (const guide of PUBLIC_GUIDES) {
       const seo = resolveRouteSeo(guide.path);
       expect(seo, `no SEO for ${guide.path}`).not.toBeNull();
@@ -1218,10 +1250,32 @@ describe('resolveRouteSeo — brand-SEO wave 1 (24 Nov 2026)', () => {
         (o) => o['@type'] === 'Article',
       )!;
       expect(article['headline']).toBe(seo!.title);
-      expect(article['datePublished']).toBe('2026-11-24');
       expect(article['inLanguage']).toBe('bn');
-      expect(breadcrumbNames(seo!)).toEqual(['হোম', 'পাঠ', guide.crumbBn]);
+      // Phase 2 (25 Nov 2026): the 15 Study Guides are free and
+      // carry their own updatedAt as datePublished/dateModified;
+      // the 41 older guides keep 2026-11-24 and no dateModified.
+      expect(article['isAccessibleForFree']).toBe(true);
+      expect(article['datePublished']).toBe(guide.updatedAt ?? '2026-11-24');
+      if (guide.updatedAt) expect(article['dateModified']).toBe(guide.updatedAt);
+      else expect(article).not.toHaveProperty('dateModified');
+      const hub = guide.path.startsWith('/guides/') ? 'গাইড' : 'পাঠ';
+      expect(breadcrumbNames(seo!)).toEqual(['হোম', hub, guide.crumbBn]);
     }
+  });
+
+  it('/guides hub emits an ItemList of its 15 Study Guides', () => {
+    const seo = resolveRouteSeo('/guides')!;
+    const list = (seo.jsonLd as Array<Record<string, unknown>>).find(
+      (o) => o['@type'] === 'ItemList',
+    )!;
+    expect(list, 'no ItemList in JSON-LD').toBeDefined();
+    const items = list['itemListElement'] as Array<Record<string, unknown>>;
+    expect(items.map((i) => i['url'])).toEqual(
+      PUBLIC_GUIDES.filter((g) => g.path.startsWith('/guides/')).map(
+        (g) => `${SITE_URL}/bn${g.path}`,
+      ),
+    );
+    expect(items).toHaveLength(15);
   });
 
   it('the 4 trust pages resolve with the draft titles', () => {
@@ -1387,8 +1441,8 @@ describe('resolveRouteSeo — English SEO (24 Nov 2026, language system)', () =>
 });
 
 describe('resolveRouteSeo — brand-SEO wave 2 (24 Nov 2026)', () => {
-  it('sitemap has 120 URLs (118 wave-9/10 + 2 audit-M12 class pages)', () => {
-    expect(SITEMAP_URLS.length).toBe(120);
+  it('sitemap has 136 URLs (120 wave-9/10 + audit-M12 + 16 Phase 2 guides)', () => {
+    expect(SITEMAP_URLS.length).toBe(136);
   });
 
   it('English home title drops "Best"; Bangla title is unchanged', () => {
