@@ -35,6 +35,8 @@
 
 import { type Book } from './content';
 
+export type { Book } from './content';
+
 /** One index row: the only fields the search needs. */
 export interface BookSearchEntry {
   id: string;
