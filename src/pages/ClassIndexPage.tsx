@@ -14,6 +14,7 @@ import { ClassCard } from '../components/ClassCards';
 import { SkeletonCards } from '../components/ui';
 import { listPublishedBooks, type Book } from '../lib/content';
 import { getAllClassStats, type ClassStats } from '../lib/classStats';
+import { takeClassIndexInitialData, type PayloadClassLevel } from '../lib/initialData';
 import { CLASS_LEVELS, booksForClass, subjectsForClass } from '../lib/classLevels';
 import { useLanguage } from '../i18n/LanguageContext';
 
@@ -21,10 +22,19 @@ export default function ClassIndexPage() {
   const { t } = useLanguage();
   const [books, setBooks] = useState<Book[] | null>(null);
   const [stats, setStats] = useState<ClassStats[] | null>(null);
+  // __INITIAL_DATA__ (Phase 2b): a prerendered /class page carries
+  // the per-level book/subject counts — zero Firestore reads.
+  // Consumed once, on mount.
+  const [initialLevels] = useState(() => takeClassIndexInitialData());
+  const [levels, setLevels] = useState<PayloadClassLevel[] | null>(null);
   const [error, setError] = useState(false);
 
   useEffect(() => {
     let live = true;
+    if (initialLevels) {
+      setLevels(initialLevels.levels);
+      return;
+    }
     // READ BUDGET (fix/read-usage): per-class counts come from the five
     // stats docs (5 reads, cached per session) instead of the whole
     // 609-book list. When stats are not written yet, fall back to the
@@ -51,9 +61,15 @@ export default function ClassIndexPage() {
     };
   }, []);
 
-  const loaded = stats !== null || books !== null;
+  const loaded = stats !== null || books !== null || levels !== null;
   const allBooks = books ?? [];
   const perClass = useMemo(() => {
+    if (levels) {
+      return CLASS_LEVELS.map((def) => {
+        const l = levels.find((x) => x.slug === def.slug);
+        return { def, books: l?.bookCount ?? 0, subjects: l?.subjectCount ?? 0 };
+      });
+    }
     if (stats) {
       return CLASS_LEVELS.map((def) => {
         const s = stats.find((x) => x.slug === def.slug);
@@ -65,7 +81,7 @@ export default function ClassIndexPage() {
       return { def, books: cb.length, subjects: subjectsForClass(allBooks, def).length };
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [books, stats]);
+  }, [books, stats, levels]);
   const totalBooks = perClass.reduce((s, c) => s + c.books, 0);
 
   return (

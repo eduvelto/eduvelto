@@ -8,6 +8,7 @@ import { PageShell } from '../components/PageShell';
 import AdSlot from '../components/AdSlot';
 import { AlertBox, Card, Chip, Skeleton, SkeletonCards } from '../components/ui';
 import { getPublishedBook, listPublishedChapters, type Book, type Chapter } from '../lib/content';
+import { takeBookInitialData } from '../lib/initialData';
 import { useAuth } from '../lib/auth';
 import { useLanguage } from '../i18n/LanguageContext';
 import { SeoHead } from '../components/SeoHead';
@@ -30,6 +31,24 @@ export default function BookPage() {
     setError('');
     setBook(null);
     setChapters(null);
+    // __INITIAL_DATA__ first (Phase 2b): a prerendered book page
+    // carries the book + its public preview chapters — zero
+    // Firestore reads. Signed-in users still fetch the FULL chapter
+    // list (login-gated content the payload must never carry);
+    // guests read nothing at all.
+    const initial = takeBookInitialData(bookId);
+    if (initial) {
+      setBook(initial.book);
+      setChapters(initial.chapters);
+      if (user) {
+        listPublishedChapters(bookId)
+          .then((ch) => setChapters(ch))
+          .catch(() => {
+            // Keep the preview list — the book itself already rendered.
+          });
+      }
+      return;
+    }
     // AUTH GATING (owner instruction 22 Nov 2026): a signed-out visitor
     // lists ONLY the book's preview chapter (isPreview). The book itself
     // (title, info, counts) stays public. The effect re-runs when auth

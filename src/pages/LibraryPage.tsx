@@ -24,7 +24,7 @@
 // and class dashboards initialise the filters.
 // (ui/premium-polish: filter card, book cards, skeletons, retry on error.)
 
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useLanguage } from '../i18n/LanguageContext';
 import { Link, useSearchParams } from 'react-router-dom';
 import { PageShell, EmptyState } from '../components/PageShell';
@@ -33,11 +33,14 @@ import AdSlot from '../components/AdSlot';
 import {
   getAllPublishedBooksCached,
   listPublishedBooksPage,
+  listPublishedBooksPageById,
+  sortBooks,
   PAGE_SIZE,
   type Book,
   type BookFilters,
   type PageResult,
 } from '../lib/content';
+import { takeLibraryInitialData } from '../lib/initialData';
 import {
   ALL_CLASS_LEVELS,
   EDUCATION_TYPES,
@@ -59,10 +62,30 @@ export default function LibraryPage() {
   // ?q= text search, ?type= education type, ?class= class/level, ?dept= department. Absent
   // params behave exactly as before (empty filters).
   const [params] = useSearchParams();
-  const [pages, setPages] = useState<PageResult<Book>[]>([]);
+  // __INITIAL_DATA__ (Phase 2b): a prerendered /books or /library
+  // page carries page 1 (50 books, default filters) — render it
+  // with zero Firestore reads. Only the DEFAULT view (no ?q= /
+  // ?type= / ?class= / ?dept=) may use it; any filter/search param
+  // falls back to the live fetch. Consumed once, on mount.
+  const [initialLibrary] = useState(() => {
+    const d = takeLibraryInitialData();
+    if (!d) return null;
+    if (params.get('q') || params.get('type') || params.get('class') || params.get('dept')) return null;
+    return d;
+  });
+  const [pages, setPages] = useState<PageResult<Book>[]>(() =>
+    initialLibrary
+      ? [{ items: sortBooks(initialLibrary.books), lastDoc: null, hasMore: initialLibrary.hasMore }]
+      : [],
+  );
   const [pageIndex, setPageIndex] = useState(0);
   const [error, setError] = useState('');
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(!initialLibrary);
+  // Document-ID cursor after a payload-seeded page (the payload
+  // carries lastDocId, not a snapshot). Updated after every
+  // id-cursor fetch so the Next chain keeps working.
+  const [nextIdCursor, setNextIdCursor] = useState<string | null>(initialLibrary?.lastDocId ?? null);
+  const seededRef = useRef(!!initialLibrary);
   const [query, setQuery] = useState(() => params.get('q') ?? '');
   const [typeFilter, setTypeFilter] = useState(() => params.get('type') ?? '');
   // `?class=` accepts a level slug (class-1-5, hsc, …) or a raw classLevel
@@ -119,6 +142,7 @@ export default function LibraryPage() {
       .then((first) => {
         setPages([first]);
         setPageIndex(0);
+        setNextIdCursor(null);
         setLoading(false);
       })
       .catch(() => {
@@ -132,6 +156,12 @@ export default function LibraryPage() {
   // Firestore right now (resource-exhausted), so the page shows
   // "showing X–Y" + Previous/Next only (see pagination-test-report §5).
   useEffect(() => {
+    // __INITIAL_DATA__ (Phase 2b): the first page is already seeded
+    // — skip the initial fetch once. Any later filter change fetches.
+    if (seededRef.current) {
+      seededRef.current = false;
+      return;
+    }
     if (levelEmpty) {
       setPages([]);
       setPageIndex(0);
@@ -207,8 +237,21 @@ export default function LibraryPage() {
     if (!currentPage || !currentPage.hasMore) return;
     setLoading(true);
     try {
-      const res = await loadPage(filters, currentPage.lastDoc);
-      setPages((p) => [...p, res]);
+      let next: PageResult<Book>;
+      if (currentPage.lastDoc) {
+        next = await loadPage(filters, currentPage.lastDoc);
+      } else if (nextIdCursor) {
+        // Payload-seeded page (or a page fetched by id cursor):
+        // resume by document id — the same orderBy(documentId())
+        // shape, no snapshot needed. hasMore mirrors the snapshot
+        // path (a full page means a next page may exist).
+        const res = await listPublishedBooksPageById(filters, nextIdCursor, PAGE_SIZE);
+        next = { items: res.items, lastDoc: null, hasMore: res.items.length === PAGE_SIZE };
+        setNextIdCursor(res.lastDocId);
+      } else {
+        return;
+      }
+      setPages((p) => [...p, next]);
       setPageIndex((i) => i + 1);
     } catch {
       setError(t({ bn: 'পরের পাতা লোড করা যায়নি — আবার চেষ্টা করুন।', en: 'Could not load the next page — please try again.' }));
