@@ -73,6 +73,7 @@ import {
 } from '../lib/qpgFirestore';
 import { downloadCleanPaperPdf, downloadWatermarkedPaperPdf } from '../lib/questionPaperPdf';
 import { downloadCleanPaperDocx } from '../lib/questionPaperDocx';
+import { compressLogoToDataUrl } from '../lib/questionPaperLogo';
 
 interface QpgUsageView {
   used: number;
@@ -117,6 +118,14 @@ export function QuestionPaperDownloadDialog(props: {
   const [submitting, setSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState('');
   const [submitDone, setSubmitDone] = useState(false);
+  /** Pro export options (Day 4 hardening, 26 Nov 2026): Answer Key
+   *  sheet on by default (the Pro PDF carries it unless the teacher
+   *  opts out); the institution logo lives only in this dialog's
+   *  memory — never uploaded anywhere. */
+  const [includeAnswerKey, setIncludeAnswerKey] = useState(true);
+  const [customLogoDataUrl, setCustomLogoDataUrl] = useState<string | null>(null);
+  const [logoName, setLogoName] = useState('');
+  const [logoError, setLogoError] = useState('');
 
   const proUnlocked = proStatus.proUnlocked;
 
@@ -237,7 +246,8 @@ export function QuestionPaperDownloadDialog(props: {
     try {
       await downloadCleanPaperPdf(props.paper, {
         proUnlocked,
-        includeAnswerKey: false,
+        customLogoDataUrl,
+        includeAnswerKey,
         includeOmrSheet: props.includeOmrSheet,
       });
       await consumeCreditIfNeeded();
@@ -252,7 +262,7 @@ export function QuestionPaperDownloadDialog(props: {
     setCleanError('');
     setCleanNote('');
     try {
-      await downloadCleanPaperDocx(props.paper, { proUnlocked, includeAnswerKey: false });
+      await downloadCleanPaperDocx(props.paper, { proUnlocked, includeAnswerKey });
       await consumeCreditIfNeeded();
     } catch (err) {
       setCleanError(err instanceof Error ? err.message : 'Word ডাউনলোড করা যায়নি।');
@@ -385,6 +395,15 @@ export function QuestionPaperDownloadDialog(props: {
               অনুমোদনের জন্য অপেক্ষা করুন।
             </AlertBox>
           )}
+          <label style={{ fontSize: 13, display: 'flex', gap: 6, alignItems: 'center', marginTop: 12 }}>
+            <input
+              type="checkbox"
+              checked={includeAnswerKey}
+              onChange={(e) => setIncludeAnswerKey(e.target.checked)}
+              disabled={!proUnlocked}
+            />{' '}
+            Answer Key শিট যুক্ত করুন (Pro PDF + Word-এর শেষে যুক্ত হবে)
+          </label>
           <div style={{ marginTop: 12, display: 'flex', gap: 8, flexWrap: 'wrap' }}>
             <Button disabled={!proUnlocked || cleanBusy} onClick={() => void onCleanPdfDownload()}>
               {cleanBusy ? 'PDF তৈরি হচ্ছে…' : 'পরিষ্কার PDF ডাউনলোড (Pro)'}
@@ -512,8 +531,44 @@ export function QuestionPaperDownloadDialog(props: {
                 </p>
                 <label style={{ fontSize: 13, display: 'block', marginBottom: 10 }}>
                   প্রতিষ্ঠানের লোগো আপলোড (Pro) 🔒
-                  <input type="file" accept="image/*" disabled={!proUnlocked} style={{ display: 'block', marginTop: 4 }} />
+                  <input
+                    type="file"
+                    accept="image/*"
+                    disabled={!proUnlocked}
+                    style={{ display: 'block', marginTop: 4 }}
+                    onChange={(e) => {
+                      const f = e.target.files?.[0];
+                      if (!f) return;
+                      void compressLogoToDataUrl(f).then((url) => {
+                        if (url) {
+                          setCustomLogoDataUrl(url);
+                          setLogoName(f.name);
+                          setLogoError('');
+                        } else {
+                          setCustomLogoDataUrl(null);
+                          setLogoName('');
+                          setLogoError('লোগোটি পড়া যায়নি বা ৫০KB-এর নিচে আনা যায়নি — অন্য ছবি চেষ্টা করুন।');
+                        }
+                      });
+                    }}
+                  />
                 </label>
+                {customLogoDataUrl ? (
+                  <p style={{ fontSize: 12, color: '#14532d', margin: '0 0 10px' }}>
+                    লোগো আপলোড হয়েছে: {logoName} — পরিষ্কার PDF-এ লোগো আসবে।{' '}
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setCustomLogoDataUrl(null);
+                        setLogoName('');
+                      }}
+                      style={{ background: 'none', border: 'none', padding: 0, color: '#a00', textDecoration: 'underline', cursor: 'pointer', fontSize: 12 }}
+                    >
+                      সরান
+                    </button>
+                  </p>
+                ) : null}
+                {logoError ? <p style={{ fontSize: 12, color: '#a00', margin: '0 0 10px' }}>{logoError}</p> : null}
                 <p style={{ fontSize: 12, color: '#666', margin: '0 0 10px' }}>
                   Pro-তে লোগো আপলোড করলে ছবিটি ব্রাউজারেই ৫০KB-এর নিচে কম্প্রেস হয়ে শুধু এই সেশনের মেমরিতে
                   থাকে — কোনো ফাইল সার্ভারে/স্টোরেজে যায় না।

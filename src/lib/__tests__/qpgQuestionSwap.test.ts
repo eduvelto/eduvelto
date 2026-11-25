@@ -1,0 +1,357 @@
+// 1-Click Question Swap (বদলান) — Day 4 hardening (sprint 26 Nov 2026).
+//
+// Regression guard for the old first-10 bug: the বদলান button used to
+// render only on the first 10 questions. It must exist on EVERY question
+// in BOTH places — (A) the chapter-picker list and (B) the post-generation
+// মানবণ্টন editor — and a swap must replace the question in place, rebuild
+// the paper, and re-render the preview.
+//
+// NOTE on method: this repo has no jsdom / @testing-library/react, so the
+// component cannot be render-tested here. The guard is therefore twofold,
+// following the established pattern in questionPaperMaster.test.ts:
+//   (1) source-level assertions on QuestionPaperGeneratorPage.tsx — the
+//       two render sites map the FULL lists with no index cap, and the
+//       swap handlers call replaceQpgQuestion + rebuildPaper;
+//   (2) functional tests of the underlying logic the JSX depends on —
+//       selection (selectQpgQuestions), the visibility predicate, the
+//       candidate filters, replaceQpgQuestion, and buildQpgPaper.
+// If anyone re-introduces an `i < 10` / `.slice(0, 10)` guard, (1) fails.
+// If the swap logic regresses, (2) fails.
+//
+// KNOWN LIMITATION pinned here, NOT silently changed (see the last
+// describe): the replacement pickers show only the first 5 candidates
+// (`.slice(0, 5)`). A swap is always possible from those 5, but a specific
+// valid candidate beyond the first 5 cannot be chosen through the UI.
+import { describe, it, expect } from 'vitest';
+import { readFileSync } from 'node:fs';
+import { resolve } from 'node:path';
+import {
+  QPG_VERIFIED_CHAPTER_ID,
+  QPG_VERIFIED_POOL,
+  buildQpgPaper,
+  defaultPaperSetup,
+  replaceQpgQuestion,
+  selectQpgQuestions,
+  type QpgQuestion,
+} from '../questionPaper';
+import { loadVerifiedChapterQuestions } from '../questionPaperCache';
+import { questionsForSet } from '../questionPaperSets';
+
+const GENERATOR_SRC = readFileSync(
+  resolve(__dirname, '../../pages/QuestionPaperGeneratorPage.tsx'),
+  'utf8',
+);
+
+// --- Mirrors of the JSX conditions in QuestionPaperGeneratorPage.tsx ---
+// (A) Picker: the বদলান button renders iff the question is selected:
+//     `{selectedIds.includes(q.id) ? (<Button …>বদলান</Button>) : null}`
+// (B) Editor: the বদলান button renders unconditionally for every
+//     question in `paper.questions.map(...)` — no gate at all.
+const pickerSwapShown = (selectedIds: string[], q: QpgQuestion): boolean =>
+  selectedIds.includes(q.id);
+const editorSwapShown = (_q: QpgQuestion): boolean => true;
+
+// (A) Picker candidates: verified pool questions from the chosen chapters
+// that are neither the question being replaced nor already selected.
+const pickerCandidates = (
+  available: QpgQuestion[],
+  q: QpgQuestion,
+  selectedIds: string[],
+): QpgQuestion[] => available.filter((c) => c.id !== q.id && !selectedIds.includes(c.id));
+
+// (B) Editor extras: verified pool questions not in the paper yet
+// (`paperExtras` in the page).
+const paperExtras = (pool: QpgQuestion[], paperQuestions: QpgQuestion[]): QpgQuestion[] =>
+  pool.filter((q) => !paperQuestions.some((pq) => pq.id === q.id));
+
+const countOccurrences = (src: string, needle: string): number =>
+  src.split(needle).length - 1;
+
+describe('1-click swap — no first-10 cap (source-level)', () => {
+  it('no slice(0, 10) / index cap anywhere in the generator page', () => {
+    expect(GENERATOR_SRC).not.toContain('slice(0, 10)');
+    expect(GENERATOR_SRC).not.toContain('slice(0,10)');
+    expect(GENERATOR_SRC).not.toContain('slice(0, 9)');
+    // Any "first 10 only" index guard, in any spelling.
+    expect(GENERATOR_SRC).not.toMatch(/\bi\s*<\s*10\b/);
+    expect(GENERATOR_SRC).not.toMatch(/\bi\s*<=\s*9\b/);
+    expect(GENERATOR_SRC).not.toMatch(/\bindex\s*<\s*10\b/);
+  });
+
+  it('exactly two বদলান buttons exist — picker + editor, no other list', () => {
+    // The button label ternary appears once per swap site.
+    expect(countOccurrences(GENERATOR_SRC, `'বদলানো বাতিল' : 'বদলান'`)).toBe(2);
+    // The "take this question" action appears once per replacement picker.
+    expect(countOccurrences(GENERATOR_SRC, 'এই প্রশ্নটি নিন')).toBe(2);
+  });
+
+  it('picker maps the FULL displayed list; swap gated only on selection', () => {
+    const mapAt = GENERATOR_SRC.indexOf('displayedQuestions.map((q, i) => {');
+    expect(mapAt).toBeGreaterThan(-1);
+    // displayedQuestions is the whole available list (or a search filter
+    // over it) — never sliced to a first-N window.
+    const defAt = GENERATOR_SRC.indexOf('const displayedQuestions = ');
+    expect(defAt).toBeGreaterThan(-1);
+    expect(GENERATOR_SRC.slice(defAt, defAt + 400)).not.toContain('.slice(');
+    // From the map to the swap button: the ONLY gate is selection.
+    const buttonAt = GENERATOR_SRC.indexOf('বদলান', mapAt);
+    const segment = GENERATOR_SRC.slice(mapAt, buttonAt);
+    expect(segment).toContain('selectedIds.includes(q.id)');
+    expect(segment).not.toMatch(/\bi\s*</);
+    expect(segment).not.toContain('.slice(');
+  });
+
+  it('editor maps ALL paper.questions; swap button is unconditional', () => {
+    const headingAt = GENERATOR_SRC.indexOf('পেপারের প্রশ্ন (প্রতিটিতে বদলান / সরান)');
+    expect(headingAt).toBeGreaterThan(-1);
+    const mapAt = GENERATOR_SRC.indexOf('paper.questions.map((q, i) => {', headingAt);
+    expect(mapAt).toBeGreaterThan(-1);
+    const buttonAt = GENERATOR_SRC.indexOf('বদলানো বাতিল', mapAt);
+    const segment = GENERATOR_SRC.slice(mapAt, buttonAt);
+    expect(segment).not.toContain('.slice(');
+    expect(segment).not.toMatch(/\bi\s*</);
+    expect(segment).toContain('setPaperReplacingId(');
+  });
+
+  it('both swap handlers call replaceQpgQuestion; editor rebuilds + re-renders', () => {
+    // Picker: swapping updates the selection in place.
+    expect(GENERATOR_SRC).toContain(
+      'setSelectedIds(replaceQpgQuestion(selectedIds, q.id, c.id))',
+    );
+    // Editor: swapping rebuilds the paper from the replaced id list.
+    expect(GENERATOR_SRC).toContain('replaceQpgQuestion(');
+    expect(GENERATOR_SRC).toContain('rebuildPaper(next, paper.setup)');
+    // rebuildPaper rebuilds with buildQpgPaper and re-renders the preview,
+    // so the preview updates after a swap.
+    const rebuildAt = GENERATOR_SRC.indexOf('const rebuildPaper = ');
+    expect(rebuildAt).toBeGreaterThan(-1);
+    const rebuildBody = GENERATOR_SRC.slice(rebuildAt, rebuildAt + 1200);
+    expect(rebuildBody).toContain('buildQpgPaper({');
+    expect(rebuildBody).toContain('renderPreview(built');
+  });
+});
+
+describe('selection: >10 verified questions reach the picker', () => {
+  it('the verified chapter yields all 35 questions — no first-10 truncation', () => {
+    const res = selectQpgQuestions(
+      {
+        chapterIds: [QPG_VERIFIED_CHAPTER_ID],
+        topicIds: [],
+        type: 'mcq',
+        difficulty: 'all',
+        count: QPG_VERIFIED_POOL.length,
+        source: 'any',
+      },
+      QPG_VERIFIED_POOL,
+    );
+    expect(res.questions).toHaveLength(35);
+    expect(res.available).toBe(35);
+    expect(res.questions.every((q) => q.verified === true)).toBe(true);
+    expect(res.questions.every((q) => q.chapterId === QPG_VERIFIED_CHAPTER_ID)).toBe(true);
+    // Honest limit: the pool carries NO difficulty tags — never invented.
+    expect(res.questions.every((q) => q.difficulty === 'unspecified')).toBe(true);
+  });
+
+  it('picker: every selected question gets বদলান — including #11, #16, #35', () => {
+    const res = selectQpgQuestions(
+      {
+        chapterIds: [QPG_VERIFIED_CHAPTER_ID],
+        topicIds: [],
+        type: 'mcq',
+        difficulty: 'all',
+        count: QPG_VERIFIED_POOL.length,
+        source: 'any',
+      },
+      QPG_VERIFIED_POOL,
+    );
+    const selectedIds = res.questions.map((q) => q.id);
+    expect(selectedIds).toHaveLength(35);
+    // Every position — 0-based 10, 15 and 34 are past the old first-10 cut.
+    for (let i = 0; i < res.questions.length; i++) {
+      expect(pickerSwapShown(selectedIds, res.questions[i])).toBe(true);
+    }
+    expect(pickerSwapShown(selectedIds, res.questions[10])).toBe(true);
+    expect(pickerSwapShown(selectedIds, res.questions[15])).toBe(true);
+    expect(pickerSwapShown(selectedIds, res.questions[34])).toBe(true);
+  });
+
+  it('picker: an unselected question has no বদলান (by design — swap replaces a pick)', () => {
+    const available = QPG_VERIFIED_POOL;
+    const selectedIds = available.slice(0, 15).map((q) => q.id);
+    // Selected past the old cut still gets the button…
+    expect(pickerSwapShown(selectedIds, available[12])).toBe(true);
+    // …an unselected one does not — it is added with the checkbox, and
+    // once it is in the paper the editor offers বদলান unconditionally.
+    expect(pickerSwapShown(selectedIds, available[20])).toBe(false);
+  });
+
+  it('editor: every paper question gets বদলান, unconditionally', () => {
+    const paperQuestions = QPG_VERIFIED_POOL.slice(0, 15);
+    for (let i = 0; i < paperQuestions.length; i++) {
+      expect(editorSwapShown(paperQuestions[i])).toBe(true);
+    }
+    expect(editorSwapShown(paperQuestions[12])).toBe(true);
+    expect(editorSwapShown(paperQuestions[14])).toBe(true);
+  });
+});
+
+describe('swap end-to-end: replace in place + rebuild', () => {
+  const ids15 = QPG_VERIFIED_POOL.slice(0, 15).map((q) => q.id);
+  const replacement = QPG_VERIFIED_POOL[20];
+
+  it('swaps in place past the first 10 — position, length and neighbours kept', () => {
+    const next = replaceQpgQuestion(ids15, ids15[12], replacement.id);
+    expect(next).toHaveLength(15);
+    expect(next[12]).toBe(replacement.id);
+    expect(next).not.toContain(ids15[12]);
+    expect(next.slice(0, 12)).toEqual(ids15.slice(0, 12));
+    expect(next.slice(13)).toEqual(ids15.slice(13));
+    // Pure: the input list is untouched.
+    expect(ids15[12]).toBe(QPG_VERIFIED_POOL[12].id);
+    expect(ids15).toHaveLength(15);
+  });
+
+  it('swaps at the first and last positions too', () => {
+    expect(replaceQpgQuestion(ids15, ids15[0], replacement.id)[0]).toBe(replacement.id);
+    const last = replaceQpgQuestion(ids15, ids15[14], replacement.id);
+    expect(last[14]).toBe(replacement.id);
+    expect(last).toHaveLength(15);
+  });
+
+  it('no-ops: old id not selected, new id already selected, same id', () => {
+    expect(replaceQpgQuestion(ids15, 'no-such-id', replacement.id)).toEqual(ids15);
+    expect(replaceQpgQuestion(ids15, ids15[12], ids15[3])).toEqual(ids15);
+    expect(replaceQpgQuestion(ids15, ids15[12], ids15[12])).toEqual(ids15);
+  });
+
+  it('rebuild: new paper carries the swap in place, answer key follows it', () => {
+    const setup = defaultPaperSetup({
+      title: 'মডেল টেস্ট',
+      subject: 'English',
+      classLabel: 'BCS',
+      questionCount: 15,
+      marksPerQuestion: 1,
+      timeMinutes: 15,
+      sectionHeading: 'ক-বিভাগ',
+    });
+    const before = buildQpgPaper({
+      setup,
+      questions: QPG_VERIFIED_POOL.slice(0, 15),
+      isCustomVariant: false,
+      kind: 'chapter-paper',
+      patternLabelBn: 'অধ্যায়ভিত্তিক প্রশ্নপত্র — যাচাইকৃত প্রশ্ন',
+      patternLabelEn: 'Chapter-based paper — verified questions',
+    });
+    const nextIds = replaceQpgQuestion(
+      before.questions.map((q) => q.id),
+      before.questions[12].id,
+      replacement.id,
+    );
+    const byId = new Map(QPG_VERIFIED_POOL.map((q) => [q.id, q]));
+    const nextQuestions = nextIds.map((id) => byId.get(id)!);
+    const after = buildQpgPaper({
+      setup: before.setup,
+      questions: nextQuestions,
+      isCustomVariant: before.isCustomVariant,
+      kind: before.kind,
+      patternLabelBn: before.patternLabelBn,
+      patternLabelEn: before.patternLabelEn,
+    });
+    // A new paper object (the preview re-renders from it), same setup.
+    expect(after.id).not.toBe(before.id);
+    expect(after.setup.totalMarks).toBe(before.setup.totalMarks);
+    expect(after.questions).toHaveLength(15);
+    expect(after.questions[12].id).toBe(replacement.id);
+    expect(after.questions[12].questionText).toBe(replacement.questionText);
+    // The answer key follows the NEW question at the SAME position.
+    expect(after.answerKey[12]).toBe(replacement.correctLetter);
+    expect(after.answerKey).toHaveLength(15);
+    expect(after.questions.slice(0, 12).map((q) => q.id)).toEqual(
+      before.questions.slice(0, 12).map((q) => q.id),
+    );
+  });
+
+  it('generation ordering (no set code) preserves the swapped position', () => {
+    const swapped = replaceQpgQuestion(ids15, ids15[12], replacement.id);
+    const byId = new Map(QPG_VERIFIED_POOL.map((q) => [q.id, q]));
+    const ordered = questionsForSet(swapped.map((id) => byId.get(id)!), 7, '');
+    expect(ordered.map((q) => q.id)).toEqual(swapped);
+  });
+});
+
+describe('swap candidates: verified-only, same-chapter, not already in the paper', () => {
+  it('picker candidates: 20 unselected verified same-chapter questions', () => {
+    const available = QPG_VERIFIED_POOL;
+    const selectedIds = available.slice(0, 15).map((q) => q.id);
+    const candidates = pickerCandidates(available, available[12], selectedIds);
+    expect(candidates).toHaveLength(20);
+    expect(candidates.every((c) => c.verified === true)).toBe(true);
+    expect(candidates.every((c) => c.chapterId === QPG_VERIFIED_CHAPTER_ID)).toBe(true);
+    expect(candidates.every((c) => !selectedIds.includes(c.id))).toBe(true);
+    expect(candidates.every((c) => c.id !== available[12].id)).toBe(true);
+  });
+
+  it('editor extras: 20 verified same-chapter questions not in the paper', () => {
+    const paperQuestions = QPG_VERIFIED_POOL.slice(0, 15);
+    const extras = paperExtras(QPG_VERIFIED_POOL, paperQuestions);
+    expect(extras).toHaveLength(20);
+    expect(extras.every((c) => c.verified === true)).toBe(true);
+    expect(extras.every((c) => c.chapterId === QPG_VERIFIED_CHAPTER_ID)).toBe(true);
+    expect(extras.every((c) => !paperQuestions.some((pq) => pq.id === c.id))).toBe(true);
+  });
+
+  it('chapter pool is verified-only at the source (cache-first, no Firestore)', () => {
+    const pool = loadVerifiedChapterQuestions({
+      stream: 'general',
+      classId: 'honours',
+      subjectId: 'english',
+      chapterId: QPG_VERIFIED_CHAPTER_ID,
+    });
+    expect(pool).toHaveLength(35);
+    expect(pool.every((q) => q.verified === true)).toBe(true);
+    expect(pool.every((q) => q.chapterId === QPG_VERIFIED_CHAPTER_ID)).toBe(true);
+  });
+
+  it('difficulty filter stays honest: a guessed difficulty yields nothing', () => {
+    const res = selectQpgQuestions(
+      {
+        chapterIds: [QPG_VERIFIED_CHAPTER_ID],
+        topicIds: [],
+        type: 'mcq',
+        difficulty: 'easy',
+        count: 35,
+        source: 'any',
+      },
+      QPG_VERIFIED_POOL,
+    );
+    expect(res.questions).toHaveLength(0);
+    expect(res.reasonsBn.join(' ')).toContain('কাঠিন্য');
+  });
+});
+
+describe('candidate cap .slice(0, 5) — documented limitation (left as-is)', () => {
+  it('source: exactly three .slice(0, 5) candidate caps in the generator page', () => {
+    // Picker candidates, editor candidates, extras "add" list.
+    expect(countOccurrences(GENERATOR_SRC, '.slice(0, 5)')).toBe(3);
+  });
+
+  it('only the first 5 of 20 valid candidates are shown — the rest are hidden, not gone', () => {
+    const available = QPG_VERIFIED_POOL;
+    const selectedIds = available.slice(0, 15).map((q) => q.id);
+    const candidates = pickerCandidates(available, available[12], selectedIds);
+    expect(candidates).toHaveLength(20);
+    const shown = candidates.slice(0, 5);
+    const hidden = candidates.slice(5);
+    expect(shown).toHaveLength(5);
+    expect(hidden).toHaveLength(15);
+    expect(hidden.every((c) => c.verified === true)).toBe(true);
+    // A swap IS still possible from the 5 shown…
+    const swapped = replaceQpgQuestion(selectedIds, available[12].id, shown[0].id);
+    expect(swapped[12]).toBe(shown[0].id);
+    // …but a specific valid candidate past the first 5 (e.g. hidden[0])
+    // cannot be chosen through the UI as it stands. That is the gap
+    // reported to the coordinator — the cap was deliberately NOT changed
+    // here, so this test pins the behaviour until a UX decision is made.
+    expect(hidden[0].id).not.toBe(shown[0].id);
+  });
+});

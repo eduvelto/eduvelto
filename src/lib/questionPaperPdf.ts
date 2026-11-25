@@ -157,7 +157,10 @@ export function buildPaperDom(paper: QpgPaper, opts: QpgPaperDomOptions): HTMLEl
     header.appendChild(
       el('div', `বিষয়: ${setup.subject}  •  শ্রেণি: ${setup.classLabel}  •  অধ্যায়: ${paper.chapterNameBn}`, { fontSize: '14px', marginTop: '4px' }),
     );
-    const metaLine = `তারিখ: ${setup.examDate}    •    পূর্ণমান: ${setup.totalMarks}    •    সময়: ${setup.timeMinutes} মিনিট    •    বিষয় কোড: ${setup.subjectCode.trim() || '—'}    •    সেট: ${setup.setCode || '—'}`;
+    // Seed (Day 4 hardening, 26 Nov 2026): printed only for set
+    // papers (ক/খ/গ/ঘ) — re-entering it rebuilds the identical set.
+    const seedPart = setup.setCode && setup.seed !== undefined ? `    •    Seed: ${setup.seed}` : '';
+    const metaLine = `তারিখ: ${setup.examDate}    •    পূর্ণমান: ${setup.totalMarks}    •    সময়: ${setup.timeMinutes} মিনিট    •    বিষয় কোড: ${setup.subjectCode.trim() || '—'}    •    সেট: ${setup.setCode || '—'}${seedPart}`;
     header.appendChild(el('div', metaLine, { fontSize: '13px', marginTop: '4px' }));
     header.appendChild(
       el('div', paper.isCustomVariant ? 'কাস্টম ভ্যারিয়েন্ট — প্রকৃত পরীক্ষার প্যাটার্ন নয়' : paper.patternLabelBn, {
@@ -167,7 +170,7 @@ export function buildPaperDom(paper: QpgPaper, opts: QpgPaperDomOptions): HTMLEl
   } else {
     header.appendChild(el('div', setup.title, { fontSize: '16px', fontWeight: '700', marginTop: '4px' }));
     header.appendChild(
-      el('div', `সেট: ${setup.setCode || '—'}  •  বিষয় কোড: ${setup.subjectCode.trim() || '—'}  •  (চলমান)`, {
+      el('div', `সেট: ${setup.setCode || '—'}${setup.setCode && setup.seed !== undefined ? `  •  Seed: ${setup.seed}` : ''}  •  বিষয় কোড: ${setup.subjectCode.trim() || '—'}  •  (চলমান)`, {
         fontSize: '12px', color: '#555555', marginTop: '2px',
       }),
     );
@@ -509,12 +512,24 @@ export function buildOmrBubbleSheetDom(
     fontFamily: FONT_STACK,
     padding: '40px 44px',
     boxSizing: 'border-box',
+    // position:relative (Day 4 fix, 26 Nov 2026): the continuation
+    // probe measures grid.offsetTop to compute the later-page budget.
+    // Without this, the grid's offsetParent is the shared off-screen
+    // host (which already holds the full-sheet probe), so contHead
+    // came back as ~1182px (probe height + header) instead of ~91px
+    // and laterBudget went NEGATIVE (-95px) — every page after the
+    // first held exactly ONE bubble row, so a 35-question sheet became
+    // 17 pages (19 + 1x16) instead of 2. The paper DOM already sets
+    // position:relative for the same reason; the OMR root was the only
+    // one missing it. No visual change (no absolutely-positioned
+    // children inside this root).
+    position: 'relative',
   } as Partial<CSSStyleDeclaration>);
   root.appendChild(
     el('div', 'OMR উত্তরপত্র (Bubble Sheet)', { fontSize: '18px', fontWeight: '700', textAlign: 'center' }),
   );
   root.appendChild(
-    el('div', `${paper.setup.title}  •  সেট: ${paper.setup.setCode || '—'}  •  বিষয় কোড: ${paper.setup.subjectCode.trim() || '—'}`, {
+    el('div', `${paper.setup.title}  •  সেট: ${paper.setup.setCode || '—'}${paper.setup.setCode && paper.setup.seed !== undefined ? `  •  Seed: ${paper.setup.seed}` : ''}  •  বিষয় কোড: ${paper.setup.subjectCode.trim() || '—'}`, {
       fontSize: '13px', textAlign: 'center', marginTop: '6px',
     }),
   );
@@ -624,13 +639,56 @@ async function canvasPagesToPdf(
 ): Promise<void> {
   const { jsPDF } = await import('jspdf');
   const pdf = new jsPDF({ unit: 'mm', format: 'a4', orientation: 'portrait' });
+  addCanvasPagesToPdf(pdf, canvases);
+  pdf.save(fileName);
+}
+
+/** Minimal structural type for the jsPDF instance the helpers below
+ *  write into. Kept structural (not `import type { jsPDF }`) so the
+ *  module has NO static jspdf import of any kind — the real class
+ *  still arrives only via dynamic import(). */
+type QpgPdfWriter = {
+  addPage(): void;
+  addImage(imageData: string, format: string, x: number, y: number, w: number, h: number): void;
+  setFontSize(size: number): void;
+  text(text: string, x: number, y: number): void;
+  save(fileName: string): void;
+};
+
+/** Append one canvas per A4 page to an open jsPDF document. */
+function addCanvasPagesToPdf(pdf: QpgPdfWriter, canvases: HTMLCanvasElement[]): void {
   const pageWidth = 210;
   canvases.forEach((c, i) => {
     if (i > 0) pdf.addPage();
     const img = c.toDataURL('image/png');
     pdf.addImage(img, 'PNG', 0, 0, pageWidth, (c.height / c.width) * pageWidth);
   });
-  pdf.save(fileName);
+}
+
+/** Append the Answer Key as pages of the SAME PDF (Day 4 hardening,
+ *  26 Nov 2026): the Pro download is ONE file — paper pages first,
+ *  then the key. The old code created a SECOND jsPDF and saved the
+ *  key as its own separate file, so the key was not "in" the Pro
+ *  PDF at all. Paginated: a new page starts when the next line would
+ *  pass y=280mm, so a 40+ question paper never runs off the page
+ *  (the old code wrote 32 + i*8 with no pagination). */
+function addAnswerKeyPagesToPdf(pdf: QpgPdfWriter, paper: QpgPaper): void {
+  pdf.addPage();
+  pdf.setFontSize(16);
+  pdf.text('Answer Key', 20, 20);
+  pdf.setFontSize(12);
+  let y = 32;
+  paper.questions.forEach((q, i) => {
+    if (y > 280) {
+      pdf.addPage();
+      pdf.setFontSize(16);
+      pdf.text('Answer Key (continued)', 20, 20);
+      pdf.setFontSize(12);
+      y = 32;
+    }
+    pdf.text(`${i + 1}. ${q.correctLetter}`, 20, y);
+    y += 8;
+  });
 }
 
 function safeFileName(paper: QpgPaper, suffix: string): string {
@@ -654,9 +712,10 @@ export async function downloadWatermarkedPaperPdf(
 }
 
 /** Clean Pro export — watermark-free, optional custom logo + Answer
- *  Key sheet + OMR Bubble Sheet (clean, per the tier rule). LOCKED in
- *  the MVP: throws unless proUnlocked is true, and nothing in the MVP
- *  ever passes true. */
+ *  Key sheet + OMR Bubble Sheet (clean, per the tier rule). The
+ *  Answer Key is pages INSIDE this one PDF (not a separate file).
+ *  LOCKED in the MVP: throws unless proUnlocked is true, and nothing
+ *  in the MVP ever passes true. */
 export async function downloadCleanPaperPdf(
   paper: QpgPaper,
   opts: {
@@ -677,16 +736,11 @@ export async function downloadCleanPaperPdf(
   if (opts.includeOmrSheet) {
     extra.push(...(await renderOmrSheetCanvases(paper)));
   }
-  await canvasPagesToPdf([...pages, ...extra], safeFileName(paper, 'pro-clean'));
+  const { jsPDF } = await import('jspdf');
+  const pdf = new jsPDF({ unit: 'mm', format: 'a4', orientation: 'portrait' });
+  addCanvasPagesToPdf(pdf, [...pages, ...extra]);
   if (opts.includeAnswerKey) {
-    const { jsPDF } = await import('jspdf');
-    const key = new jsPDF({ unit: 'mm', format: 'a4', orientation: 'portrait' });
-    key.setFontSize(16);
-    key.text('Answer Key', 20, 20);
-    key.setFontSize(12);
-    paper.questions.forEach((q, i) => {
-      key.text(`${i + 1}. ${q.correctLetter}`, 20, 32 + i * 8);
-    });
-    key.save(safeFileName(paper, 'answer-key'));
+    addAnswerKeyPagesToPdf(pdf, paper);
   }
+  pdf.save(safeFileName(paper, 'pro-clean'));
 }

@@ -837,6 +837,10 @@ export interface QpgPaperSetup {
   subjectCode: string;
   /** Set Code (ক/খ/গ/ঘ) — empty means a single-set paper. */
   setCode: '' | 'ক' | 'খ' | 'গ' | 'ঘ';
+  /** Set seed (Day 4 hardening, 26 Nov 2026) — the shuffle seed
+   *  for ক/খ/গ/ঘ papers. Printed on set papers so re-entering it
+   *  rebuilds the identical set. Undefined for single-set papers. */
+  seed?: number;
 }
 
 /** Auto Set Code Generator — the four set codes (Turn 32). */
@@ -875,6 +879,8 @@ export function defaultPaperSetup(args: {
   sectionHeading: string;
   subjectCode?: string;
   setCode?: QpgPaperSetup['setCode'];
+  /** Set seed (Day 4 hardening, 26 Nov 2026) — printed on set papers. */
+  seed?: number;
   /** মানবণ্টন (pattern 4): "answer X of Y" — see QpgPaperSetup. */
   answerCount?: number;
   /** Auto-fields (25 Nov 09:19): pre-filled, editable, resettable. */
@@ -898,6 +904,7 @@ export function defaultPaperSetup(args: {
     answerCount: args.answerCount,
     subjectCode: args.subjectCode ?? '',
     setCode: args.setCode ?? '',
+    seed: args.seed,
   };
 }
 

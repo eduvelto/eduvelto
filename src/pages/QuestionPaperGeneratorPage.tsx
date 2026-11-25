@@ -28,7 +28,7 @@
 // watermark-free export, one-click Answer Key sheet. Institution NAME
 // as text is free; the custom LOGO image is Pro.
 
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { PageShell } from '../components/PageShell';
 import { AlertBox, Button, Card, Chip } from '../components/ui';
@@ -96,7 +96,11 @@ import {
   type QpgReportReason,
 } from '../lib/questionPaperUsage';
 import { loadVerifiedChapterQuestions } from '../lib/questionPaperCache';
-import { renderPaperCanvases } from '../lib/questionPaperPdf';
+import {
+  waitGenProgressClose,
+  waitGenProgressPhase,
+} from '../lib/genProgressPacing';
+import { renderOmrSheetCanvases, renderPaperCanvases } from '../lib/questionPaperPdf';
 import '../components/question-paper-print.css';
 
 function fieldStyle(): React.CSSProperties {
@@ -182,7 +186,9 @@ export default function QuestionPaperGeneratorPage() {
   const [templateId, setTemplateId] = useState('');
   // Set shuffler: seed is fixed per session so the four sets rebuild
   // identically; setCode '' = single-set paper in original order.
-  const [seed] = useState(() => Math.floor(Math.random() * 1_000_000_000));
+  // Day 4: the seed is editable (setSeed) — a teacher who notes the
+  // seed can re-enter it and rebuild the exact same set later.
+  const [seed, setSeed] = useState(() => Math.floor(Math.random() * 1_000_000_000));
   const [setCode, setSetCode] = useState<'' | QpgSetCode>('');
   /** Attach the printable OMR Bubble Sheet — FREE toggle (owner
    *  25 Nov 09:43): the sheet follows the paper's tier, watermarked
@@ -223,6 +229,18 @@ export default function QuestionPaperGeneratorPage() {
     donePages: number;
     totalPages: number;
   } | null>(null);
+  // Generation run id: a newer run supersedes an older one, so a
+  // slow earlier render can never clear a newer run's progress
+  // screen or overwrite its preview.
+  const genRunRef = useRef(0);
+  // Day 4 pacing (26 Nov 2026): each phase is shown only AFTER its
+  // real work is done, then held for its minimum dwell (see
+  // ../lib/genProgressPacing) before the next phase starts, and the
+  // screen stays up for at least ~2s total. The awaits between the
+  // setGenProgress calls are what let React actually paint each
+  // phase — the Day 2 version set 'selecting' then 'building'
+  // synchronously, so React batched them and 'selecting' likely
+  // never painted. A phase never advances on a timer alone.
 
   // --- Post-generation মানবণ্টন editor (pattern 4) + 1-Click Swap
   // --- on every paper question (UX feature): which paper question is
@@ -405,6 +423,7 @@ export default function QuestionPaperGeneratorPage() {
         timeMinutes: Math.max(10, Math.round((jobExam.timeMinutes * Math.max(n, 1)) / jobExam.questionCount)),
         sectionHeading: 'ক-বিভাগ: বহুনির্বাচনি প্রশ্ন (MCQ)',
         setCode,
+        seed,
       });
     }
     // Level-aware title (pattern 3): the exam kind / term chosen
@@ -434,8 +453,9 @@ export default function QuestionPaperGeneratorPage() {
       timeMinutes: Math.max(30, selectedQuestions.length),
       sectionHeading,
       setCode,
+      seed,
     });
-  }, [stream, jobExam, jobSubject, jobCount, jobAvailable.length, subjectLabel, classLabel, selectedQuestions.length, setCode, level, term, examKind, qType]);
+  }, [stream, jobExam, jobSubject, jobCount, jobAvailable.length, subjectLabel, classLabel, selectedQuestions.length, setCode, seed, level, term, examKind, qType]);
 
   const setup: QpgPaperSetup = { ...defaultSetup, ...overrides };
 
@@ -491,32 +511,69 @@ export default function QuestionPaperGeneratorPage() {
    *  Copy-protection (wrapper) stays; only the hiding is gone.
    *  The Smart Engine progress screen is driven by the REAL page
    *  callbacks (onPageRendered): done/total are actual canvases. */
-  const renderPreview = async (built: QpgPaper) => {
+  const renderPreview = async (built: QpgPaper, startedAt: number, runId: number) => {
+    const isCurrent = () => genRunRef.current === runId;
     setPreviewBusy(true);
     setPreviewError('');
+    const renderStartedAt = Date.now();
+    setGenProgress({ phase: 'rendering', donePages: 0, totalPages: 0 });
     try {
       const canvases = await renderPaperCanvases(built, {
         watermarked: true,
         userLabel,
         onPageRendered: (done, total) => {
-          setGenProgress({ phase: 'rendering', donePages: done, totalPages: total });
+          if (isCurrent()) {
+            setGenProgress({ phase: 'rendering', donePages: done, totalPages: total });
+          }
         },
       });
+      // OMR attach (Day 4): when the toggle is on, the bubble sheet
+      // pages follow the paper pages in the SAME preview (watermarked,
+      // like the free PDF) — before this the toggle only affected
+      // downloads, so the preview showed no sheet at all.
+      if (includeOmrSheet) {
+        canvases.push(...(await renderOmrSheetCanvases(built, { watermarked: true, userLabel })));
+      }
+      if (!isCurrent()) return;
       setPreviewUrls(canvases.map((c) => c.toDataURL('image/png')));
-      setGenProgress(null);
+      // Close gate: the rendering phase keeps its dwell AND the
+      // screen stays up for at least ~2s total — only then clear.
+      await waitGenProgressClose(renderStartedAt, startedAt);
+      if (isCurrent()) setGenProgress(null);
     } catch (err) {
+      if (!isCurrent()) return;
       setPreviewError(`প্রিভিউ তৈরি করা যায়নি: ${err instanceof Error ? err.message : 'অজানা ত্রুটি'}`);
-      setGenProgress(null);
+      await waitGenProgressClose(renderStartedAt, startedAt);
+      if (isCurrent()) setGenProgress(null);
     } finally {
-      setPreviewBusy(false);
+      if (isCurrent()) setPreviewBusy(false);
     }
   };
 
-  const generateChapterPaper = () => {
+  // OMR attach (Day 4): flipping the toggle after a paper exists
+  // re-renders the preview so the bubble sheet appears / disappears
+  // without forcing a full regenerate.
+  useEffect(() => {
+    if (!paper) return;
+    const runId = ++genRunRef.current;
+    void renderPreview(paper, Date.now(), runId);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [includeOmrSheet]);
+
+  const generateChapterPaper = async () => {
     if (selectedQuestions.length === 0) return;
+    const runId = ++genRunRef.current;
+    const startedAt = Date.now();
+    const isCurrent = () => genRunRef.current === runId;
+    let phaseStartedAt = startedAt;
     setGenProgress({ phase: 'selecting', donePages: 0, totalPages: 0 });
+    // Real selecting work: order the verified selection for this set.
     const ordered = questionsForSet(selectedQuestions, seed, setCode);
+    await waitGenProgressPhase(phaseStartedAt);
+    if (!isCurrent()) return;
+    phaseStartedAt = Date.now();
     setGenProgress({ phase: 'building', donePages: 0, totalPages: 0 });
+    // Real building work: build the paper from the ordered questions.
     const built = buildQpgPaper({
       setup,
       questions: ordered,
@@ -527,15 +584,26 @@ export default function QuestionPaperGeneratorPage() {
     });
     setPaper(built);
     rememberPaperKey(built);
-    void renderPreview(built);
+    await waitGenProgressPhase(phaseStartedAt);
+    if (!isCurrent()) return;
+    await renderPreview(built, startedAt, runId);
   };
 
-  const generateModelSection = () => {
+  const generateModelSection = async () => {
     const n = Math.min(jobCount, jobAvailable.length);
     if (n <= 0) return;
+    const runId = ++genRunRef.current;
+    const startedAt = Date.now();
+    const isCurrent = () => genRunRef.current === runId;
+    let phaseStartedAt = startedAt;
     setGenProgress({ phase: 'selecting', donePages: 0, totalPages: 0 });
+    // Real selecting work: order the verified Job questions for this set.
     const ordered = questionsForSet(jobAvailable.slice(0, n), seed, setCode);
+    await waitGenProgressPhase(phaseStartedAt);
+    if (!isCurrent()) return;
+    phaseStartedAt = Date.now();
     setGenProgress({ phase: 'building', donePages: 0, totalPages: 0 });
+    // Real building work: build the section paper.
     const built = buildQpgPaper({
       setup,
       questions: ordered,
@@ -547,13 +615,22 @@ export default function QuestionPaperGeneratorPage() {
     });
     setPaper(built);
     rememberPaperKey(built);
-    void renderPreview(built);
+    await waitGenProgressPhase(phaseStartedAt);
+    if (!isCurrent()) return;
+    await renderPreview(built, startedAt, runId);
   };
 
   /** Post-generation rebuild (pattern 4): same paper, new questions
-   *  and/or setup — re-renders the preview with real progress. */
-  const rebuildPaper = (nextQuestions: QpgQuestion[], nextSetup: QpgPaperSetup) => {
+   *  and/or setup — re-renders the preview with real progress.
+   *  No 'selecting' phase here (the questions are already chosen);
+   *  the ~2s total is still guaranteed by the building dwell plus
+   *  the close gate in renderPreview. */
+  const rebuildPaper = async (nextQuestions: QpgQuestion[], nextSetup: QpgPaperSetup) => {
     if (!paper) return;
+    const runId = ++genRunRef.current;
+    const startedAt = Date.now();
+    const isCurrent = () => genRunRef.current === runId;
+    const phaseStartedAt = startedAt;
     setGenProgress({ phase: 'building', donePages: 0, totalPages: 0 });
     const built = buildQpgPaper({
       setup: nextSetup,
@@ -565,7 +642,9 @@ export default function QuestionPaperGeneratorPage() {
     });
     setPaper(built);
     rememberPaperKey(built);
-    void renderPreview(built);
+    await waitGenProgressPhase(phaseStartedAt);
+    if (!isCurrent()) return;
+    await renderPreview(built, startedAt, runId);
   };
 
   /** The verified pool the current paper draws extras from — the
@@ -1593,10 +1672,20 @@ export default function QuestionPaperGeneratorPage() {
                 ))}
               </select>
             </label>
+            <label style={{ fontSize: 13 }}>
+              সিড (Seed — একই seed-এ একই সেট আবার তৈরি হয়)
+              <input
+                type="number"
+                min={0}
+                value={seed}
+                onChange={(e) => setSeed(Math.max(0, Math.floor(Number(e.target.value) || 0)))}
+                style={fieldStyle()}
+              />
+            </label>
           </div>
           <p style={{ fontSize: 12, color: '#666', margin: '8px 0 0' }}>
-            সেট ক/খ/গ/ঘ: একই প্রশ্ন, প্রতিটি সেটে আলাদা ক্রম + মিলে যাওয়া Answer Key (seed {seed} — একই
-            seed-এ একই সেট আবার তৈরি হয়)। ইউনিক সেট: একই প্রশ্ন দিয়ে ভিন্ন ভিন্ন সেট তৈরি হয় — নতুন প্রশ্ন
+            সেট ক/খ/গ/ঘ: একই প্রশ্ন, প্রতিটি সেটে আলাদা ক্রম + মিলে যাওয়া Answer Key। Seed লিখে
+            রাখুন — একই seed বসালে একই সেট আবার তৈরি হয়। ইউনিক সেট: একই প্রশ্ন দিয়ে ভিন্ন ভিন্ন সেট তৈরি হয় — নতুন প্রশ্ন
             বানানো হয় না। Answer Key শিট আলাদা করে Pro-তে পাওয়া যায়।
           </p>
           <label style={{ fontSize: 13, display: 'block', marginTop: 12 }}>

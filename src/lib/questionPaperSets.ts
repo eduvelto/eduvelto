@@ -3,9 +3,11 @@
 // One paper, four sets (ক, খ, গ, ঘ): the same questions in a different
 // order per set, each with its own matching Answer Key. The shuffle is
 // DETERMINISTIC for a given seed (mulberry32) — the same seed always
-// rebuilds the same four sets, so a teacher can re-print Set খ a week
-// later and get the identical paper + key. The seed lives on the paper
-// (paper setup) and is shown on the paper itself.
+// rebuilds the same four sets. The seed is session state on the
+// generator page, shown there and re-enterable (Day 4) — and it is
+// ALSO stored on the paper setup (QpgPaperSetup.seed) and printed on
+// set papers, so a teacher who notes the seed can re-enter it and
+// re-print Set খ later with the identical paper + key.
 //
 // The per-set Answer Key is data on the paper (paper.answerKey). The
 // separate printable Answer Key SHEET export stays Pro-gated (tier
