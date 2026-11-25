@@ -47,13 +47,21 @@
 //     node scripts/prerender.mjs --books-file ~/workspace/eduorbit/backups/eduvelto-backup-20261124-014508.json
 //   or PRERENDER_BOOKS_FILE=<path>. Accepts the backup shape
 //   {metadata, data:{books:[...]}}, {books:[...]}, or a bare array.
-// - Live REST (Spark, no auth — books are public-read):
+// - Live REST (Spark, no auth — Published rows only, via runQuery):
 //     node scripts/prerender.mjs --live [--project eduvelto]
-//   Reads the `books` collection via the Firestore REST API,
-//   paged (pageSize 300). On HTTP 429 it FAILS FAST with a clear
-//   message (quota — retry after the reset, or use --books-file);
-//   it never writes partial book pages. NEVER run --live while
-//   429s persist (quota warning, 25 Nov 2026).
+//   Reads the `books` + `chapters` collections via the Firestore
+//   REST `documents:runQuery` endpoint with a
+//   `reviewStatus == 'Published'` filter (chapters additionally
+//   `isPreview == true`, per the gatedContentRead rule), paged
+//   (limit 300, offset). The plain `documents.list` endpoint 403s unauthenticated: the
+//   live rules allow a list only when the query guarantees
+//   contentRead() (isPublished OR moderator OR author) for every
+//   returned doc, and an unfiltered list cannot prove that (verified
+//   25 Nov 2026 — the 14:05 --live run 403'd on the list endpoint;
+//   the runQuery probe returned 200). On HTTP 429 it FAILS FAST
+//   with a clear message (quota — retry after the reset, or use
+//   --books-file); it never writes partial book pages. NEVER run
+//   --live while 429s persist (quota warning, 25 Nov 2026).
 //
 // OUTPUT (dist/):
 // - dist/{bn,en}/index.html + dist/{bn,en}/<path>/index.html for
@@ -502,17 +510,54 @@ export function buildClassLevelCounts(books) {
   });
 }
 
-/** Live REST read of one collection (Spark, public read). Paged
- *  (pageSize 300). 429 fails fast — quota, retry later or use
- *  --books-file; it never writes partial pages. */
-export async function fetchCollectionFromRest(projectId, collection, parseDoc, fetchImpl = fetch) {
+/** Live REST read of one collection (Spark, public read). Published
+ *  rows only, via `documents:runQuery` with a
+ *  `reviewStatus == 'Published'` filter — the plain `documents.list`
+ *  endpoint 403s unauthenticated, because the live rules allow a
+ *  list only when the query guarantees contentRead() (isPublished
+ *  OR moderator OR author) for every returned doc, and an
+ *  unfiltered list cannot prove that (25 Nov 2026: the --live run
+ *  403'd on the list endpoint; the runQuery probe returned 200).
+ *  `extraFieldFilters` (optional) adds further fieldFilters ANDed
+ *  with the Published filter — chapters pass `isPreview == true`,
+ *  because their rule is gatedContentRead() (contentRead AND
+ *  (signedIn OR isPreview)), so an unauthenticated chapters list
+ *  must guarantee isPreview too. Paged (limit 300, offset, ordered
+ *  by __name__ for stable pages). 429 fails fast — quota, retry
+ *  later or use --books-file; it never writes partial pages. */
+export async function fetchCollectionFromRest(projectId, collection, parseDoc, fetchImpl = fetch, extraFieldFilters = []) {
   const docs = [];
-  let pageToken = '';
+  let offset = 0;
+  const filters = [
+    {
+      fieldFilter: {
+        field: { fieldPath: 'reviewStatus' },
+        op: 'EQUAL',
+        value: { stringValue: 'Published' },
+      },
+    },
+    ...extraFieldFilters.map((f) => ({
+      fieldFilter: { field: { fieldPath: f.fieldPath }, op: f.op, value: f.value },
+    })),
+  ];
+  const where = filters.length === 1 ? filters[0] : { compositeFilter: { op: 'AND', filters } };
   for (;;) {
-    const url =
-      `https://firestore.googleapis.com/v1/projects/${projectId}/databases/(default)/documents/${collection}` +
-      `?pageSize=300${pageToken ? `&pageToken=${encodeURIComponent(pageToken)}` : ''}`;
-    const res = await fetchImpl(url);
+    const res = await fetchImpl(
+      `https://firestore.googleapis.com/v1/projects/${projectId}/databases/(default)/documents:runQuery`,
+      {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          structuredQuery: {
+            from: [{ collectionId: collection }],
+            where,
+            orderBy: [{ field: { fieldPath: '__name__' }, direction: 'ASCENDING' }],
+            limit: 300,
+            offset,
+          },
+        }),
+      },
+    );
     if (res.status === 429) {
       throw new Error(
         'Firestore REST returned 429 (quota exhausted — Spark 50k/day). ' +
@@ -522,16 +567,26 @@ export async function fetchCollectionFromRest(projectId, collection, parseDoc, f
     if (!res.ok) {
       throw new Error(`Firestore REST ${res.status} reading ${collection} (project ${projectId}). Check the read rule / project id.`);
     }
+    // runQuery returns a JSON array of {document, readTime} elements
+    // (a trailing readTime-only element is possible — skip it).
     const body = await res.json();
-    for (const doc of body.documents ?? []) docs.push(parseDoc(doc));
-    if (!body.nextPageToken) break;
-    pageToken = body.nextPageToken;
+    const page = Array.isArray(body) ? body : [];
+    let count = 0;
+    for (const el of page) {
+      if (el.document) {
+        docs.push(parseDoc(el.document));
+        count += 1;
+      }
+    }
+    if (count < 300) break;
+    offset += count;
   }
   return docs;
 }
 
 /** Live REST read of the `books` collection (Spark, public read).
- *  Paged (pageSize 300). 429 fails fast — quota, retry later or
+ *  Published rows only, via runQuery (see fetchCollectionFromRest).
+ *  Paged (limit 300, offset). 429 fails fast — quota, retry later or
  *  use --books-file. Returns books sorted by id. */
 export async function fetchBooksFromRest(projectId, fetchImpl = fetch) {
   const books = await fetchCollectionFromRest(projectId, 'books', parseFirestoreRestDoc, fetchImpl);
@@ -539,10 +594,17 @@ export async function fetchBooksFromRest(projectId, fetchImpl = fetch) {
   return books;
 }
 
-/** Live REST read of the `chapters` collection. Same 429 fail-fast.
- *  Returns chapters sorted by (bookId, order, title). */
+/** Live REST read of the `chapters` collection. Same runQuery +
+ *  429 fail-fast, PLUS an `isPreview == true` filter: chapters are
+ *  gated by gatedContentRead() (contentRead AND (signedIn OR
+ *  isPreview)), so an unauthenticated list must guarantee isPreview
+ *  as well. That is exactly what the script uses — only Published +
+ *  preview chapters go into book payloads. Returns chapters sorted
+ *  by (bookId, order, title). */
 export async function fetchChaptersFromRest(projectId, fetchImpl = fetch) {
-  const chapters = await fetchCollectionFromRest(projectId, 'chapters', parseChapterRestDoc, fetchImpl);
+  const chapters = await fetchCollectionFromRest(projectId, 'chapters', parseChapterRestDoc, fetchImpl, [
+    { fieldPath: 'isPreview', op: 'EQUAL', value: { booleanValue: true } },
+  ]);
   chapters.sort((a, b) => (a.bookId < b.bookId ? -1 : a.bookId > b.bookId ? 1 : a.order - b.order || a.title.localeCompare(b.title)));
   return chapters;
 }

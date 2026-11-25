@@ -187,26 +187,38 @@ describe('Firestore REST parsing', () => {
     await expect(fetchBooksFromRest('eduvelto', stubFetch)).rejects.toThrow(/429/);
   });
 
-  it('pages through REST results', async () => {
-    const page1 = {
-      documents: [
-        { name: 'projects/p/databases/(default)/documents/books/b-2', fields: { title: { stringValue: 'B2' } } },
-      ],
-      nextPageToken: 'tok',
-    };
-    const page2 = {
-      documents: [
-        { name: 'projects/p/databases/(default)/documents/books/b-1', fields: { title: { stringValue: 'B1' } } },
-      ],
-    };
-    const calls: string[] = [];
-    const stubFetch = async (url: string) => {
-      calls.push(url);
+  it('pages through REST results via runQuery (Published filter, offset)', async () => {
+    const doc = (id: string) => ({
+      name: `projects/p/databases/(default)/documents/books/${id}`,
+      fields: { title: { stringValue: id } },
+    });
+    // A full 300-doc page triggers the offset fetch; the last page is partial.
+    const page1 = Array.from({ length: 300 }, (_, i) => ({ document: doc(`b-${String(i).padStart(3, '0')}`) }));
+    const page2 = [{ document: doc('b-999') }];
+    const calls: Array<{ url: string; init: unknown }> = [];
+    const stubFetch = async (url: string, init: unknown) => {
+      calls.push({ url, init });
       return { status: 200, ok: true, json: async () => (calls.length === 1 ? page1 : page2) };
     };
     const books = await fetchBooksFromRest('eduvelto', stubFetch);
-    expect(books.map((b) => b.id)).toEqual(['b-1', 'b-2']);
-    expect(calls[1]).toContain('pageToken=tok');
+    expect(books.length).toBe(301);
+    expect(books[0].id).toBe('b-000');
+    expect(books[300].id).toBe('b-999');
+    expect(calls).toHaveLength(2);
+    for (const { url, init } of calls) {
+      // Regression guard for the 25 Nov 403: never the list endpoint.
+      expect(url).toContain(':runQuery');
+      expect(url).not.toContain('/documents/books?');
+      const body = JSON.parse((init as { body: string }).body);
+      expect(body.structuredQuery.from).toEqual([{ collectionId: 'books' }]);
+      expect(body.structuredQuery.where.fieldFilter).toEqual({
+        field: { fieldPath: 'reviewStatus' },
+        op: 'EQUAL',
+        value: { stringValue: 'Published' },
+      });
+      expect(body.structuredQuery.limit).toBe(300);
+    }
+    expect(JSON.parse((calls[1].init as { body: string }).body).structuredQuery.offset).toBe(300);
   });
 });
 
@@ -323,6 +335,52 @@ describe('parseChapterRestDoc / fetchChaptersFromRest', () => {
   it('fails fast on 429 instead of retrying into the quota', async () => {
     const stubFetch = async () => ({ status: 429, ok: false, json: async () => ({}) });
     await expect(fetchChaptersFromRest('eduvelto', stubFetch)).rejects.toThrow(/429/);
+  });
+
+  it('chapters query is a Published + isPreview composite filter (gatedContentRead)', async () => {
+    const page = [
+      {
+        document: {
+          name: 'projects/p/databases/(default)/documents/chapters/c-1',
+          fields: {
+            bookId: { stringValue: 'b-1' },
+            title: { stringValue: 'Ch 1' },
+            order: { integerValue: '1' },
+            reviewStatus: { stringValue: 'Published' },
+            isPreview: { booleanValue: true },
+          },
+        },
+      },
+    ];
+    let captured: unknown = null;
+    const stubFetch = async (_url: string, init: unknown) => {
+      captured = init;
+      return { status: 200, ok: true, json: async () => page };
+    };
+    const chapters = await fetchChaptersFromRest('eduvelto', stubFetch);
+    expect(chapters.map((c) => c.id)).toEqual(['c-1']);
+    const body = JSON.parse((captured as { body: string }).body);
+    expect(body.structuredQuery.where).toEqual({
+      compositeFilter: {
+        op: 'AND',
+        filters: [
+          {
+            fieldFilter: {
+              field: { fieldPath: 'reviewStatus' },
+              op: 'EQUAL',
+              value: { stringValue: 'Published' },
+            },
+          },
+          {
+            fieldFilter: {
+              field: { fieldPath: 'isPreview' },
+              op: 'EQUAL',
+              value: { booleanValue: true },
+            },
+          },
+        ],
+      },
+    });
   });
 });
 

@@ -64,15 +64,25 @@ export function fetchCollectionFromRest(
   projectId: string,
   collection: string,
   parseDoc: (doc: unknown) => unknown,
-  fetchImpl?: (url: string) => Promise<{ status: number; ok: boolean; json: () => Promise<unknown> }>,
+  fetchImpl?: (
+    url: string,
+    init?: { method?: string; headers?: Record<string, string>; body?: string },
+  ) => Promise<{ status: number; ok: boolean; json: () => Promise<unknown> }>,
+  extraFieldFilters?: Array<{ fieldPath: string; op: string; value: unknown }>,
 ): Promise<unknown[]>;
 export function fetchBooksFromRest(
   projectId: string,
-  fetchImpl?: (url: string) => Promise<{ status: number; ok: boolean; json: () => Promise<unknown> }>,
+  fetchImpl?: (
+    url: string,
+    init?: { method?: string; headers?: Record<string, string>; body?: string },
+  ) => Promise<{ status: number; ok: boolean; json: () => Promise<unknown> }>,
 ): Promise<PrerenderBook[]>;
 export function fetchChaptersFromRest(
   projectId: string,
-  fetchImpl?: (url: string) => Promise<{ status: number; ok: boolean; json: () => Promise<unknown> }>,
+  fetchImpl?: (
+    url: string,
+    init?: { method?: string; headers?: Record<string, string>; body?: string },
+  ) => Promise<{ status: number; ok: boolean; json: () => Promise<unknown> }>,
 ): Promise<PrerenderChapter[]>;
 export function safeJsonForInlineScript(value: unknown): string;
 export function buildInitialDataScriptTag(payload: InitialDataPayload): string;
