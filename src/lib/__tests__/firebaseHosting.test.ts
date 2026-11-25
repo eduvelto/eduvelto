@@ -53,8 +53,10 @@ describe('firebase.json hosting', () => {
     for (const rule of hosting().redirects) {
       if (rule.source.includes(':')) continue;
       if (rule.source === '/') continue; // root: RootRedirect, not legacyRedirectTarget
+      const target = legacyRedirectTarget(rule.source);
+      if (target === null) continue; // not a legacy source (e.g. /whatsapp 302 to wa.me)
       expect(rule.type).toBe(301);
-      expect(legacyRedirectTarget(rule.source)).toBe(rule.destination);
+      expect(target).toBe(rule.destination);
     }
   });
 

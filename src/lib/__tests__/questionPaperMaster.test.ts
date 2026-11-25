@@ -394,7 +394,9 @@ describe('payment-confirmation WhatsApp (owner 25 Nov 10:19, FINAL)', () => {
 
   it('the /whatsapp SPA route exists as the dev/preview fallback', () => {
     const appSrc = readFileSync(resolve(__dirname, '../../App.tsx'), 'utf8');
-    expect(appSrc).toContain('path="/whatsapp"');
+    // Merged under the /:lang pattern (relative path) — the pre-merge
+    // absolute mount was routing-agnostic only.
+    expect(appSrc).toContain('<Route path="whatsapp" element={<WhatsappRedirectPage />} />');
     expect(appSrc).toContain('WhatsappRedirectPage');
     const pageSrc = readFileSync(
       resolve(__dirname, '../../pages/WhatsappRedirectPage.tsx'),
