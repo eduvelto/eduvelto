@@ -36,8 +36,15 @@
 // ID registry. Source files on disk are NEVER modified.
 //
 // Validation (scripts/build_questions.py + scripts/check_bank.py rules):
-//   - exactly 4 options; correct_index an integer in 0..3
-//   - non-empty question + explanation; non-empty options
+//   MCQ: exactly 4 options; correct_index an integer in 0..3;
+//     non-empty question + explanation; non-empty options.
+//   CQ (creative question, type 'cq'): non-empty stimulus + exactly 4
+//     parts (ক/খ/গ/ঘ, marks 1/2/3/4 = 10), each with a question +
+//     answer outline; uniqueness by stimulus. CQs import into
+//     academicQuestionDrafts as questionType 'cq' (stimulus + parts +
+//     totalMarks 10; no options / correct answer). Added 26 Nov 2026 —
+//     before that the importer was MCQ-only and rejected all 360 CQs
+//     as 'bad options'.
 //   - a source citation present (syllabus_source | source |
 //     source_reference | file-level sources) — missing = REJECT
 //   - no banned phrase anywhere in question/explanation
@@ -128,6 +135,23 @@ const GENERIC_STEMS = new Set([
   'নিচের কোন বাক্যটি সঠিক',
   'সঠিক বাক্যটি কোনটি',
 ]);
+
+// CQ (creative question) structure (Day 3, 26 Nov 2026): a stimulus
+// (উদ্দীপক) + exactly 4 parts (ক/খ/গ/ঘ, marks 1/2/3/4 = 10), each with
+// a question + answer outline. CQs have NO `question` / `options` /
+// `correct_index` / `explanation` — those are MCQ-only fields.
+const CQ_PART_LABELS = ['ক', 'খ', 'গ', 'ঘ'];
+const CQ_PART_MARKS = [1, 2, 3, 4];
+
+function cqBlob(q) {
+  const bits = [String(q.stimulus ?? '')];
+  for (const p of Array.isArray(q.parts) ? q.parts : []) {
+    if (p && typeof p === 'object') {
+      bits.push(String(p.question ?? ''), String(p.answer_outline ?? ''));
+    }
+  }
+  return bits.join(' ');
+}
 
 const LETTERS = ['A', 'B', 'C', 'D'];
 
@@ -320,7 +344,7 @@ async function main() {
     warnings: [],
     unparseableFiles: [],
     headersAdded: 0,
-    variants: { canonical: 0, K: 0, I: 0 },
+    variants: { canonical: 0, K: 0, I: 0, cq: 0 },
   };
   for (const s of Object.keys(STREAM_DIRS)) {
     report.perStream[s] = { files: 0, questions: 0, valid: 0, rejected: 0, headersAdded: 0 };
@@ -403,10 +427,118 @@ async function main() {
           reject(`unregistered ID prefix: ${qid} is not in ID-NAMESPACES.md — file refused for this question`);
           continue;
         }
-        // ID collision: same ID, different question.
-        const qNorm = norm(q.question);
+        // CQ (creative question) items carry a stimulus + ক/খ/গ/ঘ parts
+        // instead of an MCQ question + 4 options (Day 3, 26 Nov 2026).
+        // The canonical text is the MCQ `question` or the CQ `stimulus`.
+        const isCQ = q.type === 'cq';
+        const qText = isCQ ? q.stimulus : q.question;
+        const qNorm = norm(qText);
+        // ID collision: same ID, different question (stimulus for CQs).
         if (seenIds.has(qid) && seenIds.get(qid) !== qNorm) {
           reject(`ID collision: ${qid} already used for a different question`);
+          continue;
+        }
+        if (isCQ) {
+          // CQ validation + import. The MCQ path below is untouched.
+          if (!q.stimulus || !String(q.stimulus).trim()) { reject('empty stimulus'); continue; }
+          if (!Array.isArray(q.parts) || q.parts.length !== 4) {
+            reject(`bad parts: expected exactly 4 parts (ক/খ/গ/ঘ), got ${Array.isArray(q.parts) ? q.parts.length : typeof q.parts}`);
+            continue;
+          }
+          let cqBad = null;
+          for (let i = 0; i < 4; i++) {
+            const p = q.parts[i];
+            if (!p || typeof p !== 'object') { cqBad = `bad part ${i}: not an object`; break; }
+            if (p.label !== CQ_PART_LABELS[i]) { cqBad = `bad part ${i}: label is ${JSON.stringify(p.label)}, expected ${JSON.stringify(CQ_PART_LABELS[i])}`; break; }
+            if (p.marks !== CQ_PART_MARKS[i]) { cqBad = `bad part ${CQ_PART_LABELS[i]}: marks is ${p.marks}, expected ${CQ_PART_MARKS[i]}`; break; }
+            if (!p.question || !String(p.question).trim()) { cqBad = `bad part ${CQ_PART_LABELS[i]}: empty question`; break; }
+            if (!p.answer_outline || !String(p.answer_outline).trim()) { cqBad = `bad part ${CQ_PART_LABELS[i]}: empty answer_outline`; break; }
+          }
+          if (cqBad) { reject(cqBad); continue; }
+          const totalMarks = q.parts.reduce((s, p) => s + (Number(p.marks) || 0), 0);
+          if (totalMarks !== 10) { reject(`bad parts: marks sum to ${totalMarks}, expected 10`); continue; }
+          const cqCitation = sourceCitation(q, fileSources);
+          if (!cqCitation || !String(cqCitation).trim()) { reject('missing source citation (syllabus_source / source / source_reference)'); continue; }
+          // CQs carry the NCTB book + chapter in `source` — that is their
+          // fact reference; no separate fact_reference warning.
+          const cqBanned = bannedHit(cqBlob(q));
+          if (cqBanned) { reject(`banned phrase: ${JSON.stringify(cqBanned)}`); continue; }
+          if (q.status && String(q.status).toUpperCase() !== 'NEEDS-REVIEW') {
+            reject(`status is ${JSON.stringify(q.status)}, not NEEDS-REVIEW`);
+            continue;
+          }
+          if (q.verified === true || q.isVerified === true) {
+            reject('question claims verified:true — drafts must never be verified');
+            continue;
+          }
+          // Exact-duplicate check by stimulus (the CQ content).
+          if (seenText.has(qNorm)) {
+            reject(`exact duplicate of ${seenText.get(qNorm)}`);
+            continue;
+          }
+          seenText.set(qNorm, qid);
+          seenIds.set(qid, qNorm);
+          // Build the CQ draft doc (draft-only, NEEDS-REVIEW, verified:false).
+          const cqWorker = workerForId(qid, registryText);
+          const cqDoc = {
+            questionId: qid,
+            stream,
+            exam: q.exam ?? q.class ?? data.exam ?? null,
+            subject: q.subject ?? data.subject ?? null,
+            subjectSlug: q.subjectSlug ?? null,
+            unit: q.unit ?? data.unit ?? null,
+            topic: q.chapter ?? q.topic ?? null,
+            chapter: q.chapter ?? null,
+            class: q.class ?? null,
+            difficulty: q.difficulty ?? 'medium',
+            questionType: 'cq',
+            question: q.stimulus,
+            stimulus: q.stimulus,
+            parts: q.parts.map((p) => ({ label: p.label, marks: p.marks, question: p.question, answer_outline: p.answer_outline })),
+            totalMarks: 10,
+            options: [],
+            correctAnswer: null,
+            correctText: null,
+            correct_index: null,
+            explanation: null,
+            source: { type: 'original-practice', reference: String(cqCitation) },
+            factReference: q.fact_reference ?? q.factReference ?? null,
+            tags: Array.isArray(q.tags) ? q.tags : [],
+            examMappings: q.exam ? [String(q.exam)] : (q.class ? [String(q.class)] : []),
+            verificationStatus: 'draft',
+            status: 'draft',
+            reviewStatus: 'NEEDS-REVIEW',
+            verified: false,
+            verifiedBy: null,
+            verifiedAt: null,
+            header: { ...effectiveHeader, worker: cqWorker },
+            importedFrom: rel,
+            importedAt: new Date().toISOString(),
+          };
+          report.variants.cq += 1;
+          report.totals.valid += 1;
+          report.perStream[stream].valid += 1;
+          fileRow.valid += 1;
+          if (DRY_RUN) {
+            report.totals.wouldImport += 1;
+            continue;
+          }
+          // --live: emulator only, draft collections only.
+          const cqCollection = DRAFT_COLLECTIONS[stream];
+          try {
+            if (await docExists(cqCollection, qid)) {
+              report.totals.skippedExisting += 1;
+              report.warnings.push({ file: rel, id: qid, warning: `already exists in ${cqCollection} — skipped, not overwritten` });
+              continue;
+            }
+            await createDoc(cqCollection, qid, cqDoc);
+            report.totals.imported += 1;
+          } catch (e) {
+            reject(`live write failed: ${e.message}`);
+            report.totals.valid -= 1;
+            report.perStream[stream].valid -= 1;
+            fileRow.valid -= 1;
+          }
           continue;
         }
         // (3) Validation — exactly 4 options.
@@ -535,7 +667,7 @@ async function main() {
     ? `Would import: ${total.wouldImport} (nothing written — dry-run)`
     : `Imported: ${total.imported} into draft collections, ${total.skippedExisting} already-existed (skipped)`);
   console.log(`Headers synthesised (files without one): ${report.headersAdded}`);
-  console.log(`Answer-key variants: canonical=${report.variants.canonical} K=${report.variants.K} I=${report.variants.I}`);
+  console.log(`Answer-key variants: canonical=${report.variants.canonical} K=${report.variants.K} I=${report.variants.I} CQ=${report.variants.cq}`);
   for (const [s, p] of Object.entries(report.perStream)) {
     console.log(`  ${s}: ${p.files} files, ${p.questions} qs, ${p.valid} valid, ${p.rejected} rejected, ${p.headersAdded} headers added`);
   }
