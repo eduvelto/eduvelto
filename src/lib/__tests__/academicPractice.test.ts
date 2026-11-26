@@ -134,9 +134,13 @@ describe('Academic practice SEO (resolveRouteSeo)', () => {
       );
       expect(c6Depth, `class-6 math-depth chapter (${lang})`).not.toBeNull();
       expect(c6Depth!.title).toContain('স্বাভাবিক সংখ্যা');
+      // Class 7 is live now (26 Nov 2026) — its subjects resolve too.
+      const c7Math = resolveRouteSeo('/learn/practice/class-7/math', lang);
+      expect(c7Math, `class-7 math (${lang})`).not.toBeNull();
+      expect(c7Math!.title).toContain('27');
       // Unknown slugs are not pages — never indexable.
       expect(resolveRouteSeo('/learn/practice/class-9/english', lang)).toBeNull();
-      expect(resolveRouteSeo('/learn/practice/class-7/math', lang)).toBeNull();
+      expect(resolveRouteSeo('/learn/practice/class-8/math', lang)).toBeNull();
       expect(resolveRouteSeo('/learn/practice/class-3/ict', lang)).toBeNull();
       expect(
         resolveRouteSeo('/learn/practice/class-3/english/acad-class-3-eng-unit-99', lang),
@@ -146,18 +150,20 @@ describe('Academic practice SEO (resolveRouteSeo)', () => {
 });
 
 describe('Academic practice first paint (renderToString)', () => {
-  it('hub lists the four classes with verified practice', async () => {
+  it('hub lists the five classes with verified practice', async () => {
     const html = await renderPractice('/bn/learn/practice');
     expect(html).toContain('অধ্যায়ভিত্তিক অনুশীলন');
     expect(html).toContain('৩য় শ্রেণি');
     expect(html).toContain('৪র্থ শ্রেণি');
     expect(html).toContain('৫ম শ্রেণি');
     expect(html).toContain('৬ষ্ঠ শ্রেণি');
+    expect(html).toContain('৭ম শ্রেণি');
     expect(html).toContain('/learn/practice/class-3/english');
     expect(html).toContain('/learn/practice/class-4/math');
     expect(html).toContain('/learn/practice/class-3/bangla');
     expect(html).toContain('/learn/practice/class-5/english');
     expect(html).toContain('/learn/practice/class-6/math-depth');
+    expect(html).toContain('/learn/practice/class-7/math-depth');
     expect(html).toContain('যাচাইকৃত প্রশ্ন');
   });
 
@@ -208,9 +214,16 @@ describe('Academic practice first paint (renderToString)', () => {
   });
 
   it('unknown subject shows the honest empty state', async () => {
-    const html = await renderPractice('/bn/learn/practice/class-7/math');
+    const html = await renderPractice('/bn/learn/practice/class-8/math');
     expect(html).toContain('যাচাই চলছে');
     expect(html).toContain('অনুশীলনের তালিকা');
+  });
+
+  it('a Class 7 subject page lists its chapters with counts', async () => {
+    const html = await renderPractice('/bn/learn/practice/class-7/math');
+    expect(html).toContain('১. মূলদ ও অমূলদ সংখ্যা');
+    expect(html).toContain('/learn/practice/class-7/math/acad-class-7-mat-chapter-1');
+    expect(html).toContain('৩টি প্রশ্ন');
   });
 
   it('a Class 6 subject page lists its chapters with counts', async () => {

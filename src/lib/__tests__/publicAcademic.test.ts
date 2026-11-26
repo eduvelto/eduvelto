@@ -1,11 +1,11 @@
 // Eduvelto — combined verified Academic pool tests (Education Hub,
 // 26 Nov 2026).
 //
-// The combined pool (Classes 3–6, twelve subjects) is the SINGLE
+// The combined pool (Classes 3–7, twelve subjects) is the SINGLE
 // verified source for both the Question Maker and the Education Hub
-// chapter practice. These tests pin that it holds ONLY the 810
+// chapter practice. These tests pin that it holds ONLY the 1,135
 // reviewed questions (Class 3: 160, Class 4: 152, Class 5: 165,
-// Class 6: 333), that the REJECTED items with no complete replacement
+// Class 6: 333, Class 7: 325), that the REJECTED items with no complete replacement
 // recorded are absent, and that the derived chapters + helpers return
 // honest empties for anything unverified.
 import { describe, it, expect } from 'vitest';
@@ -48,37 +48,50 @@ const PER_CLASS_SUBJECT: Record<string, { questions: number; chapters: number }>
   'class-6/math-depth': { questions: 39, chapters: 8 },
   'class-6/science': { questions: 27, chapters: 14 },
   'class-6/science-depth': { questions: 37, chapters: 14 },
+  'class-7/agriculture': { questions: 24, chapters: 6 },
+  'class-7/bangla': { questions: 26, chapters: 18 },
+  'class-7/bangla-grammar': { questions: 23, chapters: 9 },
+  'class-7/bgs': { questions: 26, chapters: 11 },
+  'class-7/english': { questions: 27, chapters: 9 },
+  'class-7/home-science': { questions: 30, chapters: 15 },
+  'class-7/ict': { questions: 20, chapters: 5 },
+  'class-7/islam': { questions: 25, chapters: 5 },
+  'class-7/math': { questions: 27, chapters: 11 },
+  'class-7/math-depth': { questions: 38, chapters: 11 },
+  'class-7/science': { questions: 26, chapters: 13 },
+  'class-7/science-depth': { questions: 33, chapters: 14 },
 };
 
-describe('combined verified Academic pool (Classes 3–6, twelve subjects)', () => {
-  it('holds exactly the 810 reviewed questions (160 + 152 + 165 + 333)', () => {
-    expect(PUBLIC_ACADEMIC_QUESTIONS).toHaveLength(810);
-    expect(new Set(PUBLIC_ACADEMIC_QUESTIONS.map((q) => q.id)).size).toBe(810);
+describe('combined verified Academic pool (Classes 3–7, twelve subjects)', () => {
+  it('holds exactly the 1,135 reviewed questions (160 + 152 + 165 + 333 + 325)', () => {
+    expect(PUBLIC_ACADEMIC_QUESTIONS).toHaveLength(1135);
+    expect(new Set(PUBLIC_ACADEMIC_QUESTIONS.map((q) => q.id)).size).toBe(1135);
     const byClass = (classId: string) =>
       PUBLIC_ACADEMIC_QUESTIONS.filter((q) => q.classId === classId);
     expect(byClass('class-3')).toHaveLength(160);
     expect(byClass('class-4')).toHaveLength(152);
     expect(byClass('class-5')).toHaveLength(165);
     expect(byClass('class-6')).toHaveLength(333);
+    expect(byClass('class-7')).toHaveLength(325);
     const bySubject = (subjectId: string) =>
       PUBLIC_ACADEMIC_QUESTIONS.filter((q) => q.subjectId === subjectId);
-    expect(bySubject('english')).toHaveLength(111);
-    expect(bySubject('bangla')).toHaveLength(100);
-    expect(bySubject('math')).toHaveLength(111);
-    expect(bySubject('science')).toHaveLength(106);
-    expect(bySubject('bgs')).toHaveLength(110);
-    expect(bySubject('islam')).toHaveLength(99);
-    expect(bySubject('bangla-grammar')).toHaveLength(24);
-    expect(bySubject('math-depth')).toHaveLength(39);
-    expect(bySubject('science-depth')).toHaveLength(37);
-    expect(bySubject('ict')).toHaveLength(21);
-    expect(bySubject('agriculture')).toHaveLength(24);
-    expect(bySubject('home-science')).toHaveLength(28);
+    expect(bySubject('english')).toHaveLength(138);
+    expect(bySubject('bangla')).toHaveLength(126);
+    expect(bySubject('math')).toHaveLength(138);
+    expect(bySubject('science')).toHaveLength(132);
+    expect(bySubject('bgs')).toHaveLength(136);
+    expect(bySubject('islam')).toHaveLength(124);
+    expect(bySubject('bangla-grammar')).toHaveLength(47);
+    expect(bySubject('math-depth')).toHaveLength(77);
+    expect(bySubject('science-depth')).toHaveLength(70);
+    expect(bySubject('ict')).toHaveLength(41);
+    expect(bySubject('agriculture')).toHaveLength(48);
+    expect(bySubject('home-science')).toHaveLength(58);
   });
 
   it('every question is MCQ with 4 distinct options, one valid correct letter, and an NCTB citation', () => {
     for (const q of PUBLIC_ACADEMIC_QUESTIONS) {
-      expect(['class-3', 'class-4', 'class-5', 'class-6']).toContain(q.classId);
+      expect(['class-3', 'class-4', 'class-5', 'class-6', 'class-7']).toContain(q.classId);
       expect([
         'english',
         'bangla',
@@ -102,7 +115,7 @@ describe('combined verified Academic pool (Classes 3–6, twelve subjects)', () 
       expect(['easy', 'medium', 'hard']).toContain(q.difficulty);
       expect(q.sourceNote).toContain('NCTB');
       expect(q.chapterId).toMatch(
-        /^acad-class-[3456]-(eng|ban|bgr|mat-depth|mat|sci-depth|sci|bgs|isl|ict|agr|hsc)-/,
+        /^acad-class-[34567]-(eng|ban|bgr|mat-depth|mat|sci-depth|sci|bgs|isl|ict|agr|hsc)-/,
       );
     }
   });
@@ -116,16 +129,37 @@ describe('combined verified Academic pool (Classes 3–6, twelve subjects)', () 
     expect(ids.has('ACAD-C6-ICT-012')).toBe(false); // ICT password — rebuild has no options
     expect(ids.has('ACAD-C6-ICT-024')).toBe(false); // ICT — rebuild has no options
     expect(ids.has('C6S-025')).toBe(false); // science-depth শোষণ — rebuild has no options
+    expect(ids.has('ACAD-C7-ICT-010')).toBe(false); // ICT — rebuild has no options
+    expect(ids.has('ACAD-C7-ICT-011')).toBe(false); // ICT — rebuild has no options
+    expect(ids.has('ACAD-C7-ICT-015')).toBe(false); // ICT — rebuild has no options
+    expect(ids.has('ACAD-C7-ICT-024')).toBe(false); // ICT — rebuild has no options
+    expect(ids.has('ACAD-C7-ICT-025')).toBe(false); // ICT — rebuild has no options
+    expect(ids.has('ACAD-C7-SCI-005')).toBe(false); // science — rebuild has no options
+    expect(ids.has('ACAD-C7-SCI-006')).toBe(false); // science — rebuild has no options
+    expect(ids.has('C7S-008')).toBe(false); // science-depth — rebuild has no explanation
+    expect(ids.has('C7S-024')).toBe(false); // science-depth — rebuild has no explanation
+    expect(ids.has('C7S-025')).toBe(false); // science-depth — rebuild has no explanation
+    expect(ids.has('C7S-028')).toBe(false); // science-depth — rebuild has no explanation
+    expect(ids.has('C7S-030')).toBe(false); // science-depth — rebuild has no explanation
   });
 
-  it('the two hard questions keep their reviewed difficulty (never silently downgraded)', () => {
+  it('the eight hard questions keep their reviewed difficulty (never silently downgraded)', () => {
     const hard = PUBLIC_ACADEMIC_QUESTIONS.filter((q) => q.difficulty === 'hard');
-    expect(hard).toHaveLength(2);
-    expect(hard.map((q) => q.id).sort()).toEqual(['ACAD-C3-MAT-017', 'C6M-025']);
+    expect(hard).toHaveLength(8);
+    expect(hard.map((q) => q.id).sort()).toEqual([
+      'ACAD-C3-MAT-017',
+      'C6M-025',
+      'C7M-004',
+      'C7M-008',
+      'C7M-016',
+      'C7M-020',
+      'C7M-024',
+      'C7M-028',
+    ]);
   });
 
-  it('derives 391 chapters with the right per-class/subject counts', () => {
-    expect(PUBLIC_ACADEMIC_CHAPTERS).toHaveLength(391);
+  it('derives 518 chapters with the right per-class/subject counts', () => {
+    expect(PUBLIC_ACADEMIC_CHAPTERS).toHaveLength(518);
     for (const [key, want] of Object.entries(PER_CLASS_SUBJECT)) {
       const [classId, subjectId] = key.split('/');
       const chapters = publicAcademicChaptersFor(classId, subjectId);
@@ -147,9 +181,9 @@ describe('combined verified Academic pool (Classes 3–6, twelve subjects)', () 
     }
   });
 
-  it('helpers: class/subject lists (30 rows) and honest empties', () => {
+  it('helpers: class/subject lists (42 rows) and honest empties', () => {
     const rows = publicAcademicClassSubjects();
-    expect(rows).toHaveLength(30);
+    expect(rows).toHaveLength(42);
     expect(rows).toContainEqual({
       classId: 'class-3',
       subjectId: 'bangla',
@@ -180,13 +214,34 @@ describe('combined verified Academic pool (Classes 3–6, twelve subjects)', () 
       questionCount: 24,
       chapterCount: 14,
     });
-    expect(publicAcademicChaptersFor('class-7', 'math')).toEqual([]);
+    expect(rows).toContainEqual({
+      classId: 'class-7',
+      subjectId: 'math-depth',
+      questionCount: 38,
+      chapterCount: 11,
+    });
+    expect(rows).toContainEqual({
+      classId: 'class-7',
+      subjectId: 'science',
+      questionCount: 26,
+      chapterCount: 13,
+    });
+    // Class 7 Science has no chapter 3 in the regular pool — its only
+    // two questions (SCI-005/006) are REJECTED with no complete
+    // replacement — but the depth pool does have a chapter 3.
+    expect(publicAcademicChaptersFor('class-7', 'science')).toHaveLength(13);
+    expect(
+      publicAcademicChaptersFor('class-7', 'science').map((c) => c.id),
+    ).not.toContain('acad-class-7-sci-chapter-3');
+    expect(publicAcademicChaptersFor('class-8', 'math')).toEqual([]);
     expect(publicAcademicChaptersFor('class-3', 'ict')).toEqual([]);
     expect(publicAcademicChaptersFor('class-9', 'english')).toEqual([]);
     expect(publicAcademicQuestionsForChapter('acad-class-3-mat-chapter-1')).toHaveLength(3);
     expect(publicAcademicQuestionsForChapter('acad-class-3-eng-unit-1')).toHaveLength(4);
     expect(publicAcademicQuestionsForChapter('acad-class-6-mat-depth-chapter-1')).toHaveLength(5);
     expect(publicAcademicQuestionsForChapter('acad-class-6-eng-lesson-27')).toHaveLength(1);
+    expect(publicAcademicQuestionsForChapter('acad-class-7-mat-depth-chapter-1')).toHaveLength(4);
+    expect(publicAcademicQuestionsForChapter('acad-class-7-eng-unit-5')).toHaveLength(4);
     expect(publicAcademicQuestionsForChapter('acad-class-3-eng-unit-99')).toEqual([]);
     expect(publicAcademicQuestionsForChapter('no-such-chapter')).toEqual([]);
   });

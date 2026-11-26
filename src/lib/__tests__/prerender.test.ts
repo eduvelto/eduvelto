@@ -528,7 +528,7 @@ describe('__INITIAL_DATA__ script tag (CSP-safe carrier)', () => {
 });
 
 describe('getAcademicPracticePaths — Education Hub (26 Nov 2026)', () => {
-  it('derives hub + subject + chapter paths from EVERY per-subject pool file (422: 1 hub + 30 subjects + 391 chapters)', () => {
+  it('derives hub + subject + chapter paths from EVERY per-subject pool file (561: 1 hub + 42 subjects + 518 chapters)', () => {
     // Same directory scan the prerender script uses. A hardcoded
     // 6-file list silently dropped the six Class 6 subject files
     // (BanglaGrammar, MathDepth, ScienceDepth, Ict, Agriculture,
@@ -545,7 +545,7 @@ describe('getAcademicPracticePaths — Education Hub (26 Nov 2026)', () => {
       .map((f) => readFileSync(join(process.cwd(), 'src', 'lib', f), 'utf8'))
       .join('\n');
     const paths = getAcademicPracticePaths(source);
-    expect(paths).toHaveLength(422);
+    expect(paths).toHaveLength(561);
     expect(paths[0]).toBe('/learn/practice');
     for (const s of [
       'bangla-grammar',
@@ -556,13 +556,25 @@ describe('getAcademicPracticePaths — Education Hub (26 Nov 2026)', () => {
       'home-science',
     ]) {
       expect(paths).toContain(`/learn/practice/class-6/${s}`);
+      expect(paths).toContain(`/learn/practice/class-7/${s}`);
     }
     expect(paths).toContain(
       '/learn/practice/class-6/math-depth/acad-class-6-mat-depth-chapter-1',
     );
     expect(paths).toContain('/learn/practice/class-6/ict/acad-class-6-ict-chapter-1');
     expect(paths).toContain('/learn/practice/class-6/english/acad-class-6-eng-lesson-27');
+    expect(paths).toContain('/learn/practice/class-7/english/acad-class-7-eng-unit-1');
+    expect(paths).toContain(
+      '/learn/practice/class-7/math-depth/acad-class-7-mat-depth-chapter-1',
+    );
+    // Class 7 Science has no regular chapter 3 (both its questions
+    // are REJECTED) — but the depth pool does, so only the depth
+    // chapter 3 path exists.
+    expect(paths).not.toContain('/learn/practice/class-7/science/acad-class-7-sci-chapter-3');
+    expect(paths).toContain(
+      '/learn/practice/class-7/science-depth/acad-class-7-sci-depth-chapter-3',
+    );
     // Unverified classes never get a path.
-    expect(paths.filter((p) => p.startsWith('/learn/practice/class-7'))).toEqual([]);
+    expect(paths.filter((p) => p.startsWith('/learn/practice/class-8'))).toEqual([]);
   });
 });
