@@ -132,8 +132,10 @@ describe('(6) Free export — rasterized, watermarked, dynamic imports only', ()
   });
 
   it('every free page carries the centered watermark + the border credit inside the question box', () => {
+    // Comparison fixes (26 Nov): the call gained showPageNumbers —
+    // the watermark contract is unchanged.
     expect(PDF_LIB_SRC).toContain(
-      'renderPaperCanvases(paper, { watermarked: true, userLabel: opts.userLabel })',
+      'renderPaperCanvases(paper, {\n    watermarked: true,\n    userLabel: opts.userLabel,\n    showPageNumbers: paper.setup.pageNumbers ?? false,',
     );
     expect(PDF_LIB_SRC).toContain('drawQpgCenteredWatermark(shot, opts.userLabel)');
     expect(PDF_LIB_SRC).toContain('QPG_BORDER_CREDIT');

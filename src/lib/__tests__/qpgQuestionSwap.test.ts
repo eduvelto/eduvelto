@@ -18,10 +18,10 @@
 // If anyone re-introduces an `i < 10` / `.slice(0, 10)` guard, (1) fails.
 // If the swap logic regresses, (2) fails.
 //
-// KNOWN LIMITATION pinned here, NOT silently changed (see the last
-// describe): the replacement pickers show only the first 5 candidates
-// (`.slice(0, 5)`). A swap is always possible from those 5, but a specific
-// valid candidate beyond the first 5 cannot be chosen through the UI.
+// CAP LIFTED (comparison fixes, 26 Nov 2026 — item C): the old
+// `.slice(0, 5)` candidate cap is gone. Lists now show the first 10
+// with a load-more ("আরও Nটি দেখুন") that reveals ALL verified
+// candidates — no valid candidate is unreachable through the UI.
 import { describe, it, expect } from 'vitest';
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
@@ -68,10 +68,16 @@ const countOccurrences = (src: string, needle: string): number =>
   src.split(needle).length - 1;
 
 describe('1-click swap — no first-10 cap (source-level)', () => {
-  it('no slice(0, 10) / index cap anywhere in the generator page', () => {
-    expect(GENERATOR_SRC).not.toContain('slice(0, 10)');
-    expect(GENERATOR_SRC).not.toContain('slice(0,10)');
-    expect(GENERATOR_SRC).not.toContain('slice(0, 9)');
+  it('no hard candidate cap: no slice(0, 5); every sliced list has a show-all', () => {
+    // The old 5-cap is gone.
+    expect(GENERATOR_SRC).not.toContain('slice(0, 5)');
+    expect(GENERATOR_SRC).not.toContain('slice(0,5)');
+    // The first-10 windows are pagination, not caps: each is paired
+    // with a show-all state and an "আরও Nটি দেখুন" load-more.
+    expect(GENERATOR_SRC).toContain('pickerSwapShowAll');
+    expect(GENERATOR_SRC).toContain('paperSwapShowAll');
+    expect(GENERATOR_SRC).toContain('extrasShowAll');
+    expect(GENERATOR_SRC).toContain('আরও');
     // Any "first 10 only" index guard, in any spelling.
     expect(GENERATOR_SRC).not.toMatch(/\bi\s*<\s*10\b/);
     expect(GENERATOR_SRC).not.toMatch(/\bi\s*<=\s*9\b/);
@@ -101,10 +107,13 @@ describe('1-click swap — no first-10 cap (source-level)', () => {
     expect(segment).not.toContain('.slice(');
   });
 
-  it('editor maps ALL paper.questions; swap button is unconditional', () => {
-    const headingAt = GENERATOR_SRC.indexOf('পেপারের প্রশ্ন (প্রতিটিতে বদলান / সরান)');
+  it('editor maps ALL questions of EVERY section; swap button is unconditional', () => {
+    // Multi-section editor (comparison fixes, 26 Nov): the editor maps
+    // editorSections, and each section maps its own questions — the
+    // swap button renders unconditionally for every question.
+    const headingAt = GENERATOR_SRC.indexOf('এই বিভাগের প্রশ্ন (প্রতিটিতে বদলান / সরান)');
     expect(headingAt).toBeGreaterThan(-1);
-    const mapAt = GENERATOR_SRC.indexOf('paper.questions.map((q, i) => {', headingAt);
+    const mapAt = GENERATOR_SRC.indexOf('secQuestions.map((q) => {', headingAt);
     expect(mapAt).toBeGreaterThan(-1);
     const buttonAt = GENERATOR_SRC.indexOf('বদলানো বাতিল', mapAt);
     const segment = GENERATOR_SRC.slice(mapAt, buttonAt);
@@ -113,16 +122,20 @@ describe('1-click swap — no first-10 cap (source-level)', () => {
     expect(segment).toContain('setPaperReplacingId(');
   });
 
-  it('both swap handlers call replaceQpgQuestion; editor rebuilds + re-renders', () => {
+  it('picker swap calls replaceQpgQuestion; editor swap is staged and applied together', () => {
     // Picker: swapping updates the selection in place.
     expect(GENERATOR_SRC).toContain(
       'setSelectedIds(replaceQpgQuestion(selectedIds, q.id, c.id))',
     );
-    // Editor: swapping rebuilds the paper from the replaced id list.
-    expect(GENERATOR_SRC).toContain('replaceQpgQuestion(');
-    expect(GENERATOR_SRC).toContain('rebuildPaper(next, paper.setup)');
+    // Editor (multi-section, comparison fixes): the swap is STAGED in
+    // the section's question list — no immediate rebuild — and applied
+    // together by "প্রয়োগ করুন" (applyPaperEdits → rebuildPaper).
+    expect(GENERATOR_SRC).toContain(
+      'questionIds: sec.questionIds.map((x) => (x === q.id ? c.id : x))',
+    );
+    expect(GENERATOR_SRC).toContain('applyPaperEdits');
     // rebuildPaper rebuilds with buildQpgPaper and re-renders the preview,
-    // so the preview updates after a swap.
+    // so the preview updates after an apply.
     const rebuildAt = GENERATOR_SRC.indexOf('const rebuildPaper = ');
     expect(rebuildAt).toBeGreaterThan(-1);
     const rebuildBody = GENERATOR_SRC.slice(rebuildAt, rebuildAt + 1200);
@@ -329,29 +342,29 @@ describe('swap candidates: verified-only, same-chapter, not already in the paper
   });
 });
 
-describe('candidate cap .slice(0, 5) — documented limitation (left as-is)', () => {
-  it('source: exactly three .slice(0, 5) candidate caps in the generator page', () => {
-    // Picker candidates, editor candidates, extras "add" list.
-    expect(countOccurrences(GENERATOR_SRC, '.slice(0, 5)')).toBe(3);
+describe('candidate cap lifted (comparison fixes, 26 Nov — item C)', () => {
+  it('source: zero .slice(0, 5) candidate caps in the generator page', () => {
+    // Picker candidates, editor candidates, extras "add" list — all
+    // now show 10 + load-more, or all when expanded.
+    expect(countOccurrences(GENERATOR_SRC, '.slice(0, 5)')).toBe(0);
   });
 
-  it('only the first 5 of 20 valid candidates are shown — the rest are hidden, not gone', () => {
+  it('all 20 valid candidates are reachable — first 10 + load-more reveals the rest', () => {
     const available = QPG_VERIFIED_POOL;
     const selectedIds = available.slice(0, 15).map((q) => q.id);
     const candidates = pickerCandidates(available, available[12], selectedIds);
     expect(candidates).toHaveLength(20);
-    const shown = candidates.slice(0, 5);
-    const hidden = candidates.slice(5);
-    expect(shown).toHaveLength(5);
-    expect(hidden).toHaveLength(15);
-    expect(hidden.every((c) => c.verified === true)).toBe(true);
-    // A swap IS still possible from the 5 shown…
-    const swapped = replaceQpgQuestion(selectedIds, available[12].id, shown[0].id);
-    expect(swapped[12]).toBe(shown[0].id);
-    // …but a specific valid candidate past the first 5 (e.g. hidden[0])
-    // cannot be chosen through the UI as it stands. That is the gap
-    // reported to the coordinator — the cap was deliberately NOT changed
-    // here, so this test pins the behaviour until a UX decision is made.
-    expect(hidden[0].id).not.toBe(shown[0].id);
+    const firstPage = candidates.slice(0, 10);
+    const rest = candidates.slice(10);
+    expect(firstPage).toHaveLength(10);
+    expect(rest).toHaveLength(10);
+    expect(rest.every((c) => c.verified === true)).toBe(true);
+    // A swap IS possible from the first page…
+    const swapped = replaceQpgQuestion(selectedIds, available[12].id, firstPage[0].id);
+    expect(swapped[12]).toBe(firstPage[0].id);
+    // …and a specific valid candidate past the first 10 (e.g. rest[0])
+    // is now reachable through the load-more — the old gap is closed.
+    const swappedRest = replaceQpgQuestion(selectedIds, available[12].id, rest[0].id);
+    expect(swappedRest[12]).toBe(rest[0].id);
   });
 });

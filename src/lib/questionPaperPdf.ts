@@ -45,7 +45,9 @@ import { PUBLIC_BCS_READING_PASSAGE } from './publicBcsEnglish';
 import {
   QPG_BORDER_CREDIT,
   QPG_WATERMARK_TEXT,
+  qpgPaperSections,
   type QpgPaper,
+  type QpgPaperSection,
 } from './questionPaper';
 
 /** A4 portrait ratio (height / width). */
@@ -74,20 +76,77 @@ export interface QpgPaperDomOptions {
   /** Pro custom logo (client-compressed <50KB data URL, in-memory
    *  only — never uploaded). Rendered in the header of a CLEAN export. */
   logoDataUrl?: string | null;
-  /** Question indices (into paper.questions) rendered on this page.
-   *  Default: every question. Pagination passes one page's indices. */
-  questionIndices?: number[];
+  /** Page items to render on this page (multi-section, comparison
+   *  fixes 26 Nov 2026). Default: every item of the paper. Each item
+   *  is one measured block — a question, or an empty-section notice
+   *  (a section with 0 questions renders its heading + an honest
+   *  note, never silently vanishes). */
+  pageItems?: QpgPaperPageItem[];
   /** Continuation page (page 2+): compact header, no instructions,
    *  section heading or reading passage — those live on page 1. */
   continuation?: boolean;
   /** Footer line ("Eduvelto — শেখো, এগিয়ে যাও, স্বপ্ন গড়ো").
    *  Default true; pagination shows it on the last page only. */
   showFooter?: boolean;
+  /** Page numbers (comparison fixes, 26 Nov 2026 — eProshnoBank has
+   *  a page-number toggle): when true, renderPaperCanvases draws
+   *  "পাতা N / মোট" on every page canvas. Free, off by default. */
+  showPageNumbers?: boolean;
   /** Real render progress (Smart Generation Progress Screen, sprint
    *  27 Nov 2026): called with (done, total) after pagination knows
    *  the page count (done = 0) and after each page canvas is drawn.
    *  Never faked — only fires from the actual render loop. */
   onPageRendered?: (done: number, total: number) => void;
+}
+
+/** One measured block of a paper, in render order. A question is a
+ *  block; an empty section (0 questions) is a block too, so its
+ *  heading + honest note paginate like a question and never split. */
+export type QpgPaperPageItem =
+  | { kind: 'question'; index: number }
+  | { kind: 'empty-section'; section: QpgPaperSection };
+
+/** The paper's items in render order: sections in order, each
+ *  section's questions in order; an empty section contributes one
+ *  empty-section item in its place. Single-section papers yield one
+ *  item per question (no empty-section items). */
+export function qpgPaperPageItems(paper: QpgPaper): QpgPaperPageItem[] {
+  const sections = qpgPaperSections(paper);
+  const byId = new Map(paper.questions.map((q, i) => [q.id, i]));
+  const items: QpgPaperPageItem[] = [];
+  for (const section of sections) {
+    if (section.questionIds.length === 0) {
+      items.push({ kind: 'empty-section', section });
+      continue;
+    }
+    for (const qid of section.questionIds) {
+      const index = byId.get(qid);
+      if (index !== undefined) items.push({ kind: 'question', index });
+    }
+  }
+  return items;
+}
+
+/** Which section a question (by paper index) belongs to, and whether
+ *  it is that section's first question (its heading rides with it). */
+function sectionOfQuestion(
+  paper: QpgPaper,
+  questionIndex: number,
+): { section: QpgPaperSection; isFirst: boolean } | null {
+  const sections = qpgPaperSections(paper);
+  const qid = paper.questions[questionIndex]?.id;
+  if (!qid) return null;
+  for (const section of sections) {
+    const at = section.questionIds.indexOf(qid);
+    if (at >= 0) return { section, isFirst: at === 0 };
+  }
+  return null;
+}
+
+/** True when the paper has 2+ sections (the multi-section builder).
+ *  Single-section papers keep the original standalone heading. */
+function isMultiSectionPaper(paper: QpgPaper): boolean {
+  return (paper.sections?.length ?? 0) > 1;
 }
 
 const FONT_STACK = "'Hind Siliguri','Noto Sans Bengali',system-ui,-apple-system,'Segoe UI',sans-serif";
@@ -189,7 +248,7 @@ export function buildPaperDom(paper: QpgPaper, opts: QpgPaperDomOptions): HTMLEl
     root.appendChild(ins);
   }
 
-  if (!opts.continuation) {
+  if (!opts.continuation && !isMultiSectionPaper(paper)) {
     // Keep the section heading with its first question (print rule).
     const heading = el('div', setup.sectionHeading, {
       fontSize: '15px', fontWeight: '700', marginBottom: '10px',
@@ -236,8 +295,30 @@ export function buildPaperDom(paper: QpgPaper, opts: QpgPaperDomOptions): HTMLEl
       borderBottom: '1px solid #999999', paddingBottom: '8px', marginBottom: '12px',
     }),
   );
-  const indices = opts.questionIndices ?? paper.questions.map((_q, i) => i);
-  indices.forEach((qi) => {
+  const items = opts.pageItems ?? qpgPaperPageItems(paper);
+  const multi = isMultiSectionPaper(paper);
+  items.forEach((item) => {
+    if (item.kind === 'empty-section') {
+      // Empty section: heading + honest note, as its own measured
+      // block (it paginates like a question and never splits).
+      const block = document.createElement('div');
+      block.className = 'qpg-question-block qpg-empty-section-block';
+      Object.assign(block.style, {
+        marginBottom: '14px', fontSize: '14px', lineHeight: '1.6',
+        breakInside: 'avoid', pageBreakInside: 'avoid',
+      } as Partial<CSSStyleDeclaration>);
+      block.appendChild(
+        el('div', item.section.headingBn, { fontSize: '15px', fontWeight: '700', marginBottom: '6px' }),
+      );
+      block.appendChild(
+        el('div', 'এই বিভাগের যাচাইকৃত প্রশ্ন এখনো তৈরি হয়নি।', {
+          fontSize: '13px', color: '#555555',
+        }),
+      );
+      container.appendChild(block);
+      return;
+    }
+    const qi = item.index;
     const q = paper.questions[qi];
     if (!q) return;
     const qBlock = document.createElement('div');
@@ -248,6 +329,30 @@ export function buildPaperDom(paper: QpgPaper, opts: QpgPaperDomOptions): HTMLEl
       marginBottom: '14px', fontSize: '14px', lineHeight: '1.6',
       breakInside: 'avoid', pageBreakInside: 'avoid',
     } as Partial<CSSStyleDeclaration>);
+    // Multi-section: the section heading rides INSIDE the first
+    // question block of its section (so it can never orphan at a
+    // page bottom), with the section's answer-count note under it.
+    if (multi) {
+      const sec = sectionOfQuestion(paper, qi);
+      if (sec?.isFirst) {
+        qBlock.appendChild(
+          el('div', sec.section.headingBn, {
+            fontSize: '15px', fontWeight: '700', marginBottom: '10px',
+          } as Partial<CSSStyleDeclaration>, 'qpg-section-heading'),
+        );
+        if (
+          sec.section.answerCount &&
+          sec.section.answerCount > 0 &&
+          sec.section.answerCount < sec.section.questionIds.length
+        ) {
+          qBlock.appendChild(
+            el('div', `এই বিভাগের ${sec.section.answerCount}টি প্রশ্নের উত্তর দিতে হবে (মোট ${sec.section.questionIds.length}টি প্রশ্ন দেওয়া আছে)।`, {
+              fontSize: '13px', marginBottom: '10px',
+            } as Partial<CSSStyleDeclaration>, 'qpg-answer-count'),
+          );
+        }
+      }
+    }
     qBlock.appendChild(el('div', `${qi + 1}. ${q.questionText}`, { fontWeight: '600' }));
     const qOpts = document.createElement('div');
     Object.assign(qOpts.style, {
@@ -427,6 +532,31 @@ export function drawQpgCenteredWatermark(canvas: HTMLCanvasElement, userLabel?: 
   ctx.restore();
 }
 
+/** Page number on a rendered page canvas (comparison fixes, 26 Nov
+ *  2026 — eProshnoBank has a page-number toggle). Drawn AFTER the
+ *  watermark, bottom-center, in the same identity-transform style
+ *  as the watermark (reset first — html2canvas leaves a leftover
+ *  transform; see drawQpgCenteredWatermark). Pure canvas text, so it
+ *  appears in preview AND both PDF exports. */
+export function drawQpgPageNumber(
+  canvas: HTMLCanvasElement,
+  pageNumber: number,
+  totalPages: number,
+): void {
+  const ctx = canvas.getContext('2d');
+  if (!ctx) return;
+  ctx.save();
+  ctx.setTransform(1, 0, 0, 1, 0, 0);
+  ctx.globalAlpha = 1;
+  ctx.fillStyle = '#555555';
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'bottom';
+  const size = Math.round(canvas.width / 48);
+  ctx.font = `${size}px sans-serif`;
+  ctx.fillText(`পাতা ${pageNumber} / ${totalPages}`, canvas.width / 2, canvas.height - Math.round(size * 0.6));
+  ctx.restore();
+}
+
 /** Render the paper to ONE canvas per A4 page (2x scale), paginated
  *  BETWEEN questions — never mid-question. Each page canvas gets the
  *  single centered watermark when watermarked. The preview and the
@@ -442,14 +572,18 @@ export async function renderPaperCanvases(
   document.body.appendChild(host);
   try {
     // Probe: measure the real block heights + fixed overheads.
-    const probe = buildPaperDom(paper, { ...opts, questionIndices: paper.questions.map((_q, i) => i) });
+    // Blocks are the paper's ITEMS in order (questions + any
+    // empty-section notices), so pagination groups items, never
+    // splits a question, and never orphans a section heading.
+    const allItems = qpgPaperPageItems(paper);
+    const probe = buildPaperDom(paper, { ...opts, pageItems: allItems });
     host.appendChild(probe);
     const m = measurePaperProbe(probe);
     // Continuation-page overhead: build a zero-question continuation
     // probe and measure where its container starts.
     const contProbe = buildPaperDom(paper, {
       ...opts,
-      questionIndices: [],
+      pageItems: [],
       continuation: true,
       showFooter: false,
     });
@@ -467,10 +601,12 @@ export async function renderPaperCanvases(
     const laterBudget =
       QPG_A4_PAGE_HEIGHT_PX - contHead - m.containerTopOverhead - m.containerBottomOverhead - m.footerHeight;
     const pages = paginateQpgBlocks(m.blockHeights, firstBudget, laterBudget);
-    const doms = buildVerifiedPageDoms(host, pages, (indices, pageIndex, isLast) =>
+    const doms = buildVerifiedPageDoms(host, pages, (blockPositions, pageIndex, isLast) =>
       buildPaperDom(paper, {
         ...opts,
-        questionIndices: indices,
+        pageItems: blockPositions
+          .map((pos) => allItems[pos])
+          .filter((item): item is QpgPaperPageItem => item !== undefined),
         continuation: pageIndex > 0,
         showFooter: isLast,
       }),
@@ -484,6 +620,7 @@ export async function renderPaperCanvases(
     for (const dom of doms) {
       const shot = await html2canvas(dom, { scale: 2, backgroundColor: '#ffffff' });
       if (opts.watermarked) drawQpgCenteredWatermark(shot, opts.userLabel);
+      if (opts.showPageNumbers) drawQpgPageNumber(shot, canvases.length + 1, doms.length);
       canvases.push(shot);
       opts.onPageRendered?.(canvases.length, doms.length);
     }
@@ -703,7 +840,11 @@ export async function downloadWatermarkedPaperPdf(
   paper: QpgPaper,
   opts: { includeOmrSheet?: boolean; userLabel?: string } = {},
 ): Promise<void> {
-  const pages = await renderPaperCanvases(paper, { watermarked: true, userLabel: opts.userLabel });
+  const pages = await renderPaperCanvases(paper, {
+    watermarked: true,
+    userLabel: opts.userLabel,
+    showPageNumbers: paper.setup.pageNumbers ?? false,
+  });
   const extra: HTMLCanvasElement[] = [];
   if (opts.includeOmrSheet) {
     extra.push(...(await renderOmrSheetCanvases(paper, { watermarked: true, userLabel: opts.userLabel })));
@@ -731,6 +872,7 @@ export async function downloadCleanPaperPdf(
   const pages = await renderPaperCanvases(paper, {
     watermarked: false,
     logoDataUrl: opts.customLogoDataUrl ?? null,
+    showPageNumbers: paper.setup.pageNumbers ?? false,
   });
   const extra: HTMLCanvasElement[] = [];
   if (opts.includeOmrSheet) {

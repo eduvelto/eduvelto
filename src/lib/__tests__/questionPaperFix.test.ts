@@ -187,8 +187,10 @@ describe('(c) ONE large centered watermark — not the dense diagonal', () => {
   });
 
   it('the free PDF still watermarks per page; the Pro PDF stays clean', () => {
+    // Comparison fixes (26 Nov): the calls gained showPageNumbers —
+    // the watermark contract is unchanged (free = watermarked, Pro = clean).
     expect(PDF_LIB_SRC).toContain(
-      'renderPaperCanvases(paper, { watermarked: true, userLabel: opts.userLabel })',
+      'renderPaperCanvases(paper, {\n    watermarked: true,\n    userLabel: opts.userLabel,\n    showPageNumbers: paper.setup.pageNumbers ?? false,',
     );
     expect(PDF_LIB_SRC).toContain('renderPaperCanvases(paper, {\n    watermarked: false,');
     expect(PDF_LIB_SRC).toContain('Powered by Eduvelto.com');

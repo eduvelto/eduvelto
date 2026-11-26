@@ -51,7 +51,7 @@ import {
   QPG_PRO_MONTHLY_BDT,
   QPG_PRO_PER_PAPER_BDT,
   QPG_SECONDARY_EXAM_KINDS,
-  QPG_SECONDARY_Q_KINDS,
+  QPG_SECTION_TYPES,
   QPG_SET_CODES,
   QPG_SOURCE_OPTIONS,
   QPG_VERIFIED_POOL,
@@ -63,9 +63,13 @@ import {
   qpgClassesFor,
   qpgCombinedPaperReady,
   qpgCombinedSectionAvailable,
+  qpgDefaultSectionHeading,
   qpgLevelFor,
   qpgModelSectionQuestions,
   qpgModelTests,
+  qpgMultiSectionTotalMarks,
+  qpgPaperSections,
+  qpgSecondaryQKindsFor,
   qpgSubjectsFor,
   qpgTypeForQKind,
   replaceQpgQuestion,
@@ -77,6 +81,7 @@ import {
   type QpgCognitiveLevel,
   type QpgModelTest,
   type QpgPaper,
+  type QpgPaperSection,
   type QpgPaperSetup,
   type QpgPrimaryTerm,
   type QpgQuestion,
@@ -85,9 +90,12 @@ import {
   type QpgQuestionType,
   type QpgSecondaryExamKind,
   type QpgSecondaryQKind,
+  type QpgSectionType,
   type QpgSetCode,
   type QpgStream,
 } from '../lib/questionPaper';
+import { qpgExercisesFor } from '../lib/qpgExercises';
+import { clearQpgDraft, loadQpgDraft, saveQpgDraft } from '../lib/questionPaperDraft';
 import { questionsForSet } from '../lib/questionPaperSets';
 import {
   QPG_REPORT_REASONS,
@@ -187,31 +195,52 @@ export default function QuestionPaperGeneratorPage() {
     };
   }, [isGuest, uid]);
 
+  // --- Draft autosave (comparison fixes, 26 Nov 2026 — D):
+  // --- the wizard state is restored from localStorage on mount
+  // --- (when a draft exists) and re-saved on every change, so a
+  // --- refresh / tab-close does not lose the teacher's work. The
+  // --- draft holds the wizard state only — never the paper itself.
+  const restoredDraft = useMemo(() => loadQpgDraft(), []);
+
   // --- Track + hierarchy state -------------------------------------
-  const [stream, setStream] = useState<QpgStream>('general');
-  const [classId, setClassId] = useState('honours');
-  const [subjectId, setSubjectId] = useState('english');
-  const [chapterIds, setChapterIds] = useState<string[]>(['bcs-english-batch1']);
-  const [topicIds, setTopicIds] = useState<string[]>([]);
+  const [stream, setStream] = useState<QpgStream>(restoredDraft?.stream ?? 'general');
+  const [classId, setClassId] = useState(restoredDraft?.classId ?? 'honours');
+  const [subjectId, setSubjectId] = useState(restoredDraft?.subjectId ?? 'english');
+  const [chapterIds, setChapterIds] = useState<string[]>(
+    restoredDraft?.chapterIds ?? ['bcs-english-batch1'],
+  );
+  const [topicIds, setTopicIds] = useState<string[]>(restoredDraft?.topicIds ?? []);
+  // Exercise sub-selection (comparison fixes, 26 Nov 2026 — A3):
+  // individual অনুশীলনী inside a chapter (Math first). Empty = whole
+  // chapter. Only chapters with a Phase B exercise list offer it.
+  const [exerciseIds, setExerciseIds] = useState<string[]>(restoredDraft?.exerciseIds ?? []);
   // Level-aware step 2 (pattern 3): primary = term, secondary =
   // exam kind + question kind, Honours = question kind only. The
   // question TYPE is derived from these — there is no separate
   // pre-generation type/count/difficulty control any more.
   const level = qpgLevelFor(stream, classId);
-  const [term, setTerm] = useState<QpgPrimaryTerm>('first');
-  const [examKind, setExamKind] = useState<QpgSecondaryExamKind>('half-yearly');
-  const [qKind, setQKind] = useState<QpgSecondaryQKind>('mcq');
+  const [term, setTerm] = useState<QpgPrimaryTerm>(restoredDraft?.term ?? 'first');
+  const [examKind, setExamKind] = useState<QpgSecondaryExamKind>(restoredDraft?.examKind ?? 'half-yearly');
+  const [qKind, setQKind] = useState<QpgSecondaryQKind>(restoredDraft?.qKind ?? 'mcq');
   const qType: QpgQuestionType | 'all' =
     level === 'primary' ? 'mcq' : qpgTypeForQKind(qKind);
-  const [sourceFilter, setSourceFilter] = useState<QpgQuestionSource | 'any'>('any');
-  const [cognitiveFilter, setCognitiveFilter] = useState<QpgCognitiveLevel | 'any'>('any');
-  const [natureFilter, setNatureFilter] = useState<QpgQuestionNature | 'any'>('any');
+  const [sourceFilter, setSourceFilter] = useState<QpgQuestionSource | 'any'>(
+    restoredDraft?.sourceFilter ?? 'any',
+  );
+  const [cognitiveFilter, setCognitiveFilter] = useState<QpgCognitiveLevel | 'any'>(
+    restoredDraft?.cognitiveFilter ?? 'any',
+  );
+  const [natureFilter, setNatureFilter] = useState<QpgQuestionNature | 'any'>(
+    restoredDraft?.natureFilter ?? 'any',
+  );
   // All verified questions of the chosen chapters are selected by
   // default (pattern 3: one-click generation); the teacher tunes by
   // unchecking individual questions. The effect below re-selects
   // all whenever the available list changes (chapter/topic/kind).
-  const [selectedIds, setSelectedIds] = useState<string[]>(() =>
-    QPG_VERIFIED_POOL.map((q) => q.id),
+  // A restored draft keeps its own picks (intersected with what is
+  // available now) — see the skip flag on that effect.
+  const [selectedIds, setSelectedIds] = useState<string[]>(
+    () => restoredDraft?.selectedIds ?? QPG_VERIFIED_POOL.map((q) => q.id),
   );
   // Inline question editing (free, part of paper creation): teacher's
   // edits stored per question id; the paper renders the edited text.
@@ -220,19 +249,25 @@ export default function QuestionPaperGeneratorPage() {
   // Per-question Replace (A-Z parity): which selected question is
   // picking a replacement right now.
   const [replacingId, setReplacingId] = useState<string | null>(null);
+  // Swap picker load-more (comparison fixes, 26 Nov 2026 — C): the
+  // 5-candidate cap is gone; the picker shows the first 10 and a
+  // "আরও দেখুন" button reveals the rest.
+  const [pickerSwapShowAll, setPickerSwapShowAll] = useState(false);
   // Paper template (A-Z parity): chosen before creating; pre-fills
   // the setup text fields (title / instructions / section heading).
-  const [templateId, setTemplateId] = useState('');
+  const [templateId, setTemplateId] = useState(restoredDraft?.templateId ?? '');
   // Set shuffler: seed is fixed per session so the four sets rebuild
   // identically; setCode '' = single-set paper in original order.
   // Day 4: the seed is editable (setSeed) — a teacher who notes the
   // seed can re-enter it and rebuild the exact same set later.
-  const [seed, setSeed] = useState(() => Math.floor(Math.random() * 1_000_000_000));
-  const [setCode, setSetCode] = useState<'' | QpgSetCode>('');
+  const [seed, setSeed] = useState(
+    () => restoredDraft?.seed ?? Math.floor(Math.random() * 1_000_000_000),
+  );
+  const [setCode, setSetCode] = useState<'' | QpgSetCode>(restoredDraft?.setCode ?? '');
   /** Attach the printable OMR Bubble Sheet — FREE toggle (owner
    *  25 Nov 09:43): the sheet follows the paper's tier, watermarked
    *  on free papers, clean on Pro papers. No separate OMR price. */
-  const [includeOmrSheet, setIncludeOmrSheet] = useState(false);
+  const [includeOmrSheet, setIncludeOmrSheet] = useState(restoredDraft?.includeOmrSheet ?? false);
 
   // --- Track 3 state -------------------------------------------------
   const modelTests = useMemo(() => qpgModelTests(), []);
@@ -244,7 +279,9 @@ export default function QuestionPaperGeneratorPage() {
   const jobAvailable = qpgModelSectionQuestions(jobExam.examSlug, jobSubject.nameEn);
 
   // --- Paper setup overrides (free, always editable) ----------------
-  const [overrides, setOverrides] = useState<Partial<QpgPaperSetup>>({});
+  const [overrides, setOverrides] = useState<Partial<QpgPaperSetup>>(
+    restoredDraft?.overrides ?? {},
+  );
   const setOverride = <K extends keyof QpgPaperSetup>(key: K, value: QpgPaperSetup[K]) => {
     setOverrides((prev) => ({ ...prev, [key]: value }));
   };
@@ -285,33 +322,49 @@ export default function QuestionPaperGeneratorPage() {
   // --- on every paper question (UX feature): which paper question is
   // --- picking a replacement right now.
   const [paperReplacingId, setPaperReplacingId] = useState<string | null>(null);
-  // Editor fields — initialised from the paper whenever a (new)
-  // paper is built; "প্রয়োগ করুন" rebuilds + re-renders.
+  // Paper-swap load-more (comparison fixes, 26 Nov 2026 — C).
+  const [paperSwapShowAll, setPaperSwapShowAll] = useState(false);
+  // Extras load-more (comparison fixes, 26 Nov 2026 — C).
+  const [extrasShowAll, setExtrasShowAll] = useState(false);
+  // Multi-section editor (comparison fixes, 26 Nov 2026 — G2+G3):
+  // the paper is edited as a list of sections — each with its own
+  // heading, type, marks per question and answer-count — instead of
+  // one flat section. Paper-level fields (title / instructions /
+  // time) stay above the sections. Editor fields are initialised
+  // from the paper whenever a (new) paper is built; "প্রয়োগ করুন"
+  // rebuilds + re-renders.
+  type EditorSection = {
+    id: string;
+    headingBn: string;
+    type: QpgSectionType;
+    questionIds: string[];
+    marksPerQuestion: number;
+    /** '' = answer all. */
+    answerCount: string;
+  };
   const [editTitle, setEditTitle] = useState('');
-  const [editSectionHeading, setEditSectionHeading] = useState('');
   const [editInstructions, setEditInstructions] = useState('');
   const [editTimeMinutes, setEditTimeMinutes] = useState(30);
-  const [editSectionCount, setEditSectionCount] = useState(0);
-  const [editMarksPerQ, setEditMarksPerQ] = useState(1);
-  const [editAnswerCount, setEditAnswerCount] = useState('');
+  const [editorSections, setEditorSections] = useState<EditorSection[]>([]);
   useEffect(() => {
     if (!paper) return;
     setEditTitle(paper.setup.title);
-    setEditSectionHeading(paper.setup.sectionHeading);
     setEditInstructions(paper.setup.instructions);
     setEditTimeMinutes(paper.setup.timeMinutes);
-    setEditSectionCount(paper.questions.length);
-    setEditMarksPerQ(
-      paper.questions.length > 0
-        ? Math.max(1, Math.round(paper.setup.totalMarks / paper.questions.length))
-        : 1,
-    );
-    setEditAnswerCount(
-      paper.setup.answerCount && paper.setup.answerCount < paper.questions.length
-        ? String(paper.setup.answerCount)
-        : '',
+    setEditorSections(
+      qpgPaperSections(paper).map((s) => ({
+        id: s.id,
+        headingBn: s.headingBn,
+        type: s.type,
+        questionIds: [...s.questionIds],
+        marksPerQuestion: s.marksPerQuestion,
+        answerCount:
+          s.answerCount && s.answerCount < s.questionIds.length ? String(s.answerCount) : '',
+      })),
     );
     setPaperReplacingId(null);
+    setPaperSwapShowAll(false);
+    setExtrasShowAll(false);
   }, [paper?.id]);
 
   // --- Topic-wise search (pattern 5): filters only the DISPLAYED
@@ -349,6 +402,7 @@ export default function QuestionPaperGeneratorPage() {
         {
           chapterIds,
           topicIds,
+          exerciseIds,
           type: qType,
           // Pattern 3: no pre-generation difficulty control — the
           // verified pool carries no difficulty tags yet, so 'all'
@@ -365,15 +419,24 @@ export default function QuestionPaperGeneratorPage() {
         },
         cachedPool,
       ),
-    [chapterIds, topicIds, qType, cachedPool, sourceFilter, cognitiveFilter, natureFilter],
+    [chapterIds, topicIds, exerciseIds, qType, cachedPool, sourceFilter, cognitiveFilter, natureFilter],
   );
   const availableQuestions = selection.questions;
   // Pattern 3 — one-click generation: whenever the available list
   // changes (chapter / topic / exam-kind / question-kind), select
   // ALL of them; the teacher tunes by unchecking. Manual unchecks
   // do not re-trigger this (the dep is the available-id list only).
+  // A restored draft keeps its own picks on the FIRST run (intersected
+  // with what is available now) — later runs select all as normal.
   const availableIdsKey = availableQuestions.map((q) => q.id).join(',');
+  const draftRestoreSkipRef = useRef(restoredDraft !== null);
   useEffect(() => {
+    if (draftRestoreSkipRef.current) {
+      draftRestoreSkipRef.current = false;
+      const availableSet = new Set(availableQuestions.map((q) => q.id));
+      setSelectedIds((prev) => prev.filter((id) => availableSet.has(id)));
+      return;
+    }
     setSelectedIds(availableQuestions.map((q) => q.id));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [availableIdsKey]);
@@ -411,6 +474,7 @@ export default function QuestionPaperGeneratorPage() {
       setChapterIds([]);
     }
     setTopicIds([]);
+    setExerciseIds([]);
     setOverrides({});
   };
 
@@ -419,6 +483,7 @@ export default function QuestionPaperGeneratorPage() {
     setSubjectId('');
     setChapterIds([]);
     setTopicIds([]);
+    setExerciseIds([]);
     setTerm('first');
     setExamKind('half-yearly');
     setQKind('mcq');
@@ -431,6 +496,7 @@ export default function QuestionPaperGeneratorPage() {
     setSubjectId(id);
     setChapterIds([]);
     setTopicIds([]);
+    setExerciseIds([]);
     setPaper(null);
     setPreviewUrls([]);
     setOverrides({});
@@ -440,9 +506,49 @@ export default function QuestionPaperGeneratorPage() {
     const next = toggleIn(chapterIds, id);
     setChapterIds(next);
     setTopicIds([]);
+    setExerciseIds([]);
     setPaper(null);
     setPreviewUrls([]);
   };
+
+  // Draft autosave (comparison fixes, 26 Nov 2026 — D): persist the
+  // wizard state to localStorage, debounced 300ms, on every change.
+  // The paper itself is never saved — only the wizard state.
+  const draftSaveTimer = useRef<number | null>(null);
+  useEffect(() => {
+    if (draftSaveTimer.current !== null) window.clearTimeout(draftSaveTimer.current);
+    draftSaveTimer.current = window.setTimeout(() => {
+      saveQpgDraft({
+        version: 'v1',
+        stream,
+        classId,
+        subjectId,
+        chapterIds,
+        topicIds,
+        exerciseIds,
+        term,
+        examKind,
+        qKind,
+        sourceFilter,
+        cognitiveFilter,
+        natureFilter,
+        selectedIds,
+        overrides,
+        templateId,
+        setCode,
+        seed,
+        includeOmrSheet,
+        savedAt: new Date().toISOString(),
+      });
+    }, 300);
+    return () => {
+      if (draftSaveTimer.current !== null) window.clearTimeout(draftSaveTimer.current);
+    };
+  }, [
+    stream, classId, subjectId, chapterIds, topicIds, exerciseIds, term, examKind, qKind,
+    sourceFilter, cognitiveFilter, natureFilter, selectedIds, overrides, templateId,
+    setCode, seed, includeOmrSheet,
+  ]);
 
   const toggleQuestion = (id: string) => {
     const next = toggleIn(selectedIds, id);
@@ -560,6 +666,7 @@ export default function QuestionPaperGeneratorPage() {
       const canvases = await renderPaperCanvases(built, {
         watermarked: true,
         userLabel,
+        showPageNumbers: built.setup.pageNumbers ?? false,
         onPageRendered: (done, total) => {
           if (isCurrent()) {
             setGenProgress({ phase: 'rendering', donePages: done, totalPages: total });
@@ -664,7 +771,11 @@ export default function QuestionPaperGeneratorPage() {
    *  No 'selecting' phase here (the questions are already chosen);
    *  the ~2s total is still guaranteed by the building dwell plus
    *  the close gate in renderPreview. */
-  const rebuildPaper = async (nextQuestions: QpgQuestion[], nextSetup: QpgPaperSetup) => {
+  const rebuildPaper = async (
+    nextQuestions: QpgQuestion[],
+    nextSetup: QpgPaperSetup,
+    nextSections?: QpgPaperSection[],
+  ) => {
     if (!paper) return;
     const runId = ++genRunRef.current;
     const startedAt = Date.now();
@@ -674,6 +785,7 @@ export default function QuestionPaperGeneratorPage() {
     const built = buildQpgPaper({
       setup: nextSetup,
       questions: nextQuestions,
+      sections: nextSections,
       isCustomVariant: paper.isCustomVariant,
       kind: paper.kind,
       patternLabelBn: paper.patternLabelBn,
@@ -689,38 +801,102 @@ export default function QuestionPaperGeneratorPage() {
   /** The verified pool the current paper draws extras from — the
    *  academic chapter pool, or the Job subject pool for Track 3. */
   const paperPool = stream === 'job_admission' ? jobAvailable : availableQuestions;
-  /** Auto extra-alternative questions (pattern 4): verified
-   *  questions from the same chapters NOT in the paper yet — offered
-   *  for adding / swapping, never invented. */
-  const paperExtras = paper
-    ? paperPool.filter((q) => !paper.questions.some((pq) => pq.id === q.id))
-    : [];
 
-  /** Apply the মানবণ্টন editor fields to the paper: section count
-   *  (trim from the end / extend from the extras), marks per
-   *  question (total auto = count × marks), answer-count, and the
-   *  editable texts. */
+  /** All questions the editor can reference (pool + paper), by id —
+   *  used to resolve a section's question ids in order. */
+  const paperQuestionById = useMemo(() => {
+    const m = new Map<string, QpgQuestion>();
+    for (const q of paperPool) m.set(q.id, q);
+    for (const q of paper?.questions ?? []) m.set(q.id, q);
+    return m;
+  }, [paperPool, paper]);
+
+  /** Apply the মানবণ্টন editor fields to the paper: per-section
+   *  heading / type / marks / answer-count, and the paper-level
+   *  title / instructions / time. The questions are the sections'
+   *  question ids in order; total marks are recomputed from the
+   *  sections (count × marks per question). A section with 0
+   *  questions stays in the paper (its heading + honest note print)
+   *  — it is a planned section, not a silent gap. */
   const applyPaperEdits = () => {
     if (!paper) return;
-    const maxCount = paper.questions.length + paperExtras.length;
-    const wantCount = Math.max(1, Math.min(editSectionCount || paper.questions.length, maxCount));
-    let next = [...paper.questions];
-    if (wantCount < next.length) next = next.slice(0, wantCount);
-    else if (wantCount > next.length) next = [...next, ...paperExtras.slice(0, wantCount - next.length)];
-    const marksPerQ = Math.max(1, editMarksPerQ || 1);
-    const answerRaw =
-      editAnswerCount.trim() === ''
-        ? undefined
-        : Math.max(1, Math.min(next.length, Number(editAnswerCount) || next.length));
-    rebuildPaper(next, {
-      ...paper.setup,
-      title: editTitle,
-      sectionHeading: editSectionHeading,
-      instructions: editInstructions,
-      timeMinutes: Math.max(5, editTimeMinutes || 5),
-      totalMarks: next.length * marksPerQ,
-      answerCount: answerRaw,
+    const byId = new Map<string, QpgQuestion>();
+    for (const q of paperPool) byId.set(q.id, q);
+    for (const q of paper.questions) byId.set(q.id, q);
+    const nextSections: QpgPaperSection[] = editorSections.map((sec) => {
+      const answerRaw =
+        sec.answerCount.trim() === ''
+          ? undefined
+          : Math.max(1, Math.min(sec.questionIds.length, Number(sec.answerCount) || sec.questionIds.length));
+      return {
+        id: sec.id,
+        headingBn: sec.headingBn.trim() || qpgDefaultSectionHeading(sec.type, 0),
+        type: sec.type,
+        questionIds: sec.questionIds.filter((id) => byId.has(id)),
+        marksPerQuestion: Math.max(1, sec.marksPerQuestion || 1),
+        answerCount: answerRaw,
+      };
     });
+    const nextQuestions: QpgQuestion[] = [];
+    for (const sec of nextSections) {
+      for (const id of sec.questionIds) {
+        const q = byId.get(id);
+        if (q) nextQuestions.push(applyEdits(q));
+      }
+    }
+    const first = nextSections[0];
+    rebuildPaper(
+      nextQuestions,
+      {
+        ...paper.setup,
+        title: editTitle,
+        sectionHeading: first?.headingBn ?? paper.setup.sectionHeading,
+        instructions: editInstructions,
+        timeMinutes: Math.max(5, editTimeMinutes || 5),
+        totalMarks: qpgMultiSectionTotalMarks(nextSections),
+        answerCount: first?.answerCount,
+      },
+      nextSections,
+    );
+  };
+
+  /** Extras of one section type — verified questions of that type
+   *  from the same chapters, not in the paper yet. Only MCQ has any
+   *  today; other types honestly show 0. */
+  const extrasForSectionType = (type: QpgSectionType): QpgQuestion[] => {
+    const questionType = QPG_SECTION_TYPES.find((t) => t.id === type)?.questionType ?? 'mcq';
+    const inPaper = new Set(paper?.questions.map((q) => q.id) ?? []);
+    return paperPool.filter((q) => q.type === questionType && !inPaper.has(q.id));
+  };
+
+  /** Update one editor section (heading / type / marks / answer-count). */
+  const updateEditorSection = (id: string, patch: Partial<EditorSection>) => {
+    setEditorSections((prev) => prev.map((s) => (s.id === id ? { ...s, ...patch } : s)));
+  };
+
+  /** Add a new empty section (default MCQ — the only type with
+   *  verified questions today; other types start empty and honest). */
+  const addEditorSection = () => {
+    setEditorSections((prev) => {
+      const type: QpgSectionType = 'mcq';
+      return [
+        ...prev,
+        {
+          id: `section-${Date.now().toString(36)}-${prev.length}`,
+          headingBn: qpgDefaultSectionHeading(type, prev.length),
+          type,
+          questionIds: [],
+          marksPerQuestion: 1,
+          answerCount: '',
+        },
+      ];
+    });
+  };
+
+  /** Remove a section (its questions leave the paper). At least one
+   *  section always remains. */
+  const removeEditorSection = (id: string) => {
+    setEditorSections((prev) => (prev.length <= 1 ? prev : prev.filter((s) => s.id !== id)));
   };
 
   /** Remember the last generated paper's Answer Key (session only) so
@@ -1037,7 +1213,8 @@ export default function QuestionPaperGeneratorPage() {
               {chapters.length === 0 ? (
                 <AlertBox tone="info">
                   এই অধ্যায়ের যাচাইকৃত প্রশ্ন এখনো তৈরি হয়নি। এই বিষয়ের NCTB বই যাচাই শেষে অধ্যায়ভিত্তিক
-                  প্রশ্ন এখানে যোগ হবে — ততদিন কোনো প্রশ্ন দেখানো হবে না।
+                  প্রশ্ন এখানে যোগ হবে — ততদিন কোনো প্রশ্ন দেখানো হবে না।{' '}
+                  <Link to="/library">বই দেখুন</Link> — লাইব্রেরিতে বইগুলো পড়া যায়।
                 </AlertBox>
               ) : (
                 <>
@@ -1048,6 +1225,8 @@ export default function QuestionPaperGeneratorPage() {
                           .filter((c) => chapterIds.includes(c.id))
                           .reduce((sum, c) => sum + c.verifiedCount, 0)}টি প্রশ্ন`
                       : ''}
+                    {' · '}
+                    <Link to="/library">বই দেখুন</Link>
                     {' · '}
                     <Button
                       variant="outline"
@@ -1110,6 +1289,40 @@ export default function QuestionPaperGeneratorPage() {
                           </div>
                         </div>
                       ) : null}
+                      {(() => {
+                        // Exercise sub-selection (comparison fixes, A3):
+                        // individual অনুশীলনী inside a chapter (Math
+                        // first, reusing the Sheet Builder's registry).
+                        // Shown only when Phase B has extracted this
+                        // chapter's exercise list; otherwise nothing
+                        // (the chapter-level selection still works).
+                        const exEntry = qpgExercisesFor(ch.id);
+                        if (!exEntry || exEntry.exercises.length === 0) return null;
+                        return (
+                          <div style={{ marginTop: 6 }}>
+                            <div style={{ fontSize: 12, color: '#666', marginBottom: 4 }}>
+                              অনুশীলনী (অধ্যায়ের ভেতরে — আলাদা করে বাছা যায়):
+                            </div>
+                            <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
+                              {exEntry.exercises.map((ex) => (
+                                <Button
+                                  key={ex.id}
+                                  variant={exerciseIds.includes(ex.id) ? 'primary' : 'outline'}
+                                  size="sm"
+                                  disabled={ex.verifiedCount === 0}
+                                  onClick={() => setExerciseIds(toggleIn(exerciseIds, ex.id))}
+                                >
+                                  অনুশীলনী {ex.numberBn} ({ex.verifiedCount})
+                                </Button>
+                              ))}
+                            </div>
+                            <p style={{ fontSize: 12, color: '#666', margin: '4px 0 0' }}>
+                              অনুশীলনী বাছলে শুধু সেই অনুশীলনীর যাচাইকৃত প্রশ্ন আসবে। যাচাইকৃত প্রশ্ন নেই
+                              এমন অনুশীলনী বন্ধ আছে।
+                            </p>
+                          </div>
+                        );
+                      })()}
                     </div>
                   ))}
                   <div style={{ marginTop: 10, display: 'flex', gap: 8, flexWrap: 'wrap', alignItems: 'center' }}>
@@ -1197,7 +1410,7 @@ export default function QuestionPaperGeneratorPage() {
                   </div>
                   <p style={{ fontSize: 13, margin: '0 0 8px' }}>প্রশ্নের ধরন কোনটি?</p>
                   <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
-                    {QPG_SECONDARY_Q_KINDS.map((t) => (
+                    {qpgSecondaryQKindsFor(subjectId).map((t) => (
                       <Button
                         key={t.id}
                         variant={qKind === t.id ? 'primary' : 'outline'}
@@ -1214,7 +1427,7 @@ export default function QuestionPaperGeneratorPage() {
                 <div>
                   <p style={{ fontSize: 13, margin: '0 0 8px' }}>প্রশ্নের ধরন কোনটি?</p>
                   <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
-                    {QPG_SECONDARY_Q_KINDS.map((t) => (
+                    {qpgSecondaryQKindsFor(subjectId).map((t) => (
                       <Button
                         key={t.id}
                         variant={qKind === t.id ? 'primary' : 'outline'}
@@ -1229,9 +1442,9 @@ export default function QuestionPaperGeneratorPage() {
               ) : null}
               {qKind !== 'mcq' && level !== 'primary' ? (
                 <AlertBox tone="info">
-                  যাচাইকৃত প্রশ্নভান্ডারে এখন শুধু MCQ আছে — সৃজনশীল / সমন্বিত বাছলেও আপাতত যাচাইকৃত MCQ
-                  দিয়েই পেপার হবে। যাচাইকৃত CQ প্যাক এলে এই ধরন পুরোপুরি চালু হবে; প্রশ্ন বানিয়ে ঘাটতি
-                  পূরণ করা হবে না।
+                  {qKind === 'combined'
+                    ? 'সমন্বিত বাছলে যাচাইকৃত MCQ দিয়েই পেপার হবে — যাচাইকৃত CQ প্যাক এলে সৃজনশীল প্রশ্নও আসবে। প্রশ্ন বানিয়ে ঘাটতি পূরণ করা হবে না।'
+                    : 'যাচাইকৃত প্রশ্নভান্ডারে এখন শুধু MCQ আছে — এই ধরনের (সৃজনশীল / রচনামূলক) যাচাইকৃত প্রশ্ন এখনো তৈরি হয়নি। যাচাইকৃত প্যাক এলে এই ধরন পুরোপুরি চালু হবে; প্রশ্ন বানিয়ে ঘাটতি পূরণ করা হবে না।'}
                 </AlertBox>
               ) : null}
             </Card>
@@ -1388,7 +1601,10 @@ export default function QuestionPaperGeneratorPage() {
                           <Button
                             variant="ghost"
                             size="sm"
-                            onClick={() => setReplacingId(replacingId === q.id ? null : q.id)}
+                            onClick={() => {
+                              setReplacingId(replacingId === q.id ? null : q.id);
+                              setPickerSwapShowAll(false);
+                            }}
                           >
                             {replacingId === q.id ? 'বদলানো বাতিল' : 'বদলান'}
                           </Button>
@@ -1461,28 +1677,54 @@ export default function QuestionPaperGeneratorPage() {
                         <div style={{ marginTop: 8, paddingLeft: 24 }}>
                           <p style={{ fontSize: 12, color: '#666', margin: '0 0 6px' }}>
                             এই প্রশ্নের বদলে নিচের যাচাইকৃত প্রশ্নগুলোর একটি নিন — বাছলেই একই জায়গায় বদলে
-                            যাবে (সংরক্ষিত হবে)।
+                            যাবে (সংরক্ষিত হবে)। বদলানোর মতো{' '}
+                            {
+                              availableQuestions.filter(
+                                (c) => c.id !== q.id && !selectedIds.includes(c.id),
+                              ).length
+                            }
+                            টি প্রশ্ন আছে।
                           </p>
-                          {availableQuestions
-                            .filter((c) => c.id !== q.id && !selectedIds.includes(c.id))
-                            .slice(0, 5)
-                            .map((c) => (
-                              <div
-                                key={c.id}
-                                style={{ display: 'flex', gap: 8, alignItems: 'center', marginBottom: 6 }}
-                              >
-                                <span style={{ fontSize: 13, flex: 1 }}>{c.questionText}</span>
-                                <Button
-                                  size="sm"
-                                  onClick={() => {
-                                    setSelectedIds(replaceQpgQuestion(selectedIds, q.id, c.id));
-                                    setReplacingId(null);
-                                  }}
-                                >
-                                  এই প্রশ্নটি নিন
-                                </Button>
-                              </div>
-                            ))}
+                          {(() => {
+                            // Swap picker (comparison fixes, C): no
+                            // hard 5-cap any more — first 10, then
+                            // "আরও দেখুন" reveals the rest.
+                            const candidates = availableQuestions.filter(
+                              (c) => c.id !== q.id && !selectedIds.includes(c.id),
+                            );
+                            const shown = pickerSwapShowAll ? candidates : candidates.slice(0, 10);
+                            return (
+                              <>
+                                {shown.map((c) => (
+                                  <div
+                                    key={c.id}
+                                    style={{ display: 'flex', gap: 8, alignItems: 'center', marginBottom: 6 }}
+                                  >
+                                    <span style={{ fontSize: 13, flex: 1 }}>{c.questionText}</span>
+                                    <Button
+                                      size="sm"
+                                      onClick={() => {
+                                        setSelectedIds(replaceQpgQuestion(selectedIds, q.id, c.id));
+                                        setReplacingId(null);
+                                        setPickerSwapShowAll(false);
+                                      }}
+                                    >
+                                      এই প্রশ্নটি নিন
+                                    </Button>
+                                  </div>
+                                ))}
+                                {candidates.length > 10 && !pickerSwapShowAll ? (
+                                  <Button
+                                    variant="outline"
+                                    size="sm"
+                                    onClick={() => setPickerSwapShowAll(true)}
+                                  >
+                                    আরও {candidates.length - 10}টি দেখুন
+                                  </Button>
+                                ) : null}
+                              </>
+                            );
+                          })()}
                           {availableQuestions.filter(
                             (c) => c.id !== q.id && !selectedIds.includes(c.id),
                           ).length === 0 ? (
@@ -1732,6 +1974,28 @@ export default function QuestionPaperGeneratorPage() {
             OMR Bubble Sheet সংযুক্ত করুন (ফ্রি — জলছাপসহ আসবে; Pro পেপারে পরিষ্কার আসে। OMR যাচাই
             সম্পূর্ণ ফ্রি — <Link to="/omr-evaluator">OMR মূল্যায়ন</Link> পাতায় যাচাই করুন।)
           </label>
+          <label style={{ fontSize: 13, display: 'block', marginTop: 8 }}>
+            <input
+              type="checkbox"
+              checked={setup.pageNumbers ?? false}
+              onChange={(e) => setOverride('pageNumbers', e.target.checked)}
+            />{' '}
+            পাতার নম্বর দেখান (প্রতি পাতায় “পাতা N / মোট” — ফ্রি)
+          </label>
+          <p style={{ fontSize: 12, color: '#666', margin: '8px 0 0' }}>
+            ড্রাফট স্বয়ংক্রিয়ভাবে সংরক্ষিত হয় — রিফ্রেশ করলেও এই সেটআপ হারাবে না।{' '}
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => {
+                clearQpgDraft();
+                setOverrides({});
+                setSelectedIds(availableQuestions.map((q) => q.id));
+              }}
+            >
+              ড্রাফট মুছে ফেলুন
+            </Button>
+          </p>
           <fieldset disabled style={{ border: '1px solid #ddd', borderRadius: 8, padding: 12, marginTop: 12 }}>
             <legend style={{ fontSize: 13, fontWeight: 700 }}>লেআউট (Pro — তালাবদ্ধ) 🔒</legend>
             <p style={{ fontSize: 12, color: '#666', margin: '0 0 8px' }}>
@@ -1867,17 +2131,19 @@ export default function QuestionPaperGeneratorPage() {
             {paper.setup.timeMinutes} মিনিট • {paper.patternLabelBn}
           </p>
 
-          {/* Post-generation মানবণ্টন editor (pattern 4): per-section
-              marks/count, answer-count, editable texts, add/remove/
-              swap questions — every change rebuilds + re-renders. */}
+          {/* Multi-section মানবণ্টন editor (comparison fixes, G2+G3):
+              the paper is a list of sections — each with its own
+              heading, type, marks and answer-count. All edits below
+              are staged and applied together by "প্রয়োগ করুন". */}
           <div style={{ border: '1px solid #ddd', borderRadius: 8, padding: 12, marginBottom: 12 }}>
             <h3 style={{ margin: '0 0 4px', fontSize: 15 }}>
               মানবণ্টন সম্পাদক — পেপার তৈরি হওয়ার পরেও বদলানো যায়
             </h3>
             <p style={{ fontSize: 12, color: '#666', margin: '0 0 10px' }}>
-              বিভাগের প্রশ্ন সংখ্যা / প্রতি প্রশ্নের নম্বর / উত্তর দিতে হবে — সব বদলানো যায়; পূর্ণমান
-              স্বয়ংক্রিয়ভাবে হিসাব হয় (প্রশ্ন × প্রতি প্রশ্নের নম্বর)। প্রশ্ন যোগ করা যায় শুধু
-              যাচাইকৃত অতিরিক্ত প্রশ্ন থেকে।
+              পেপারটি {editorSections.length}টি বিভাগে ভাগ করা — প্রতিটি বিভাগের শিরোনাম / ধরন / প্রতি
+              প্রশ্নের নম্বর / উত্তর দিতে হবে আলাদা করে বদলানো যায়; পূর্ণমান স্বয়ংক্রিয়ভাবে হিসাব হয়
+              (বিভাগের প্রশ্ন × প্রতি প্রশ্নের নম্বর)। প্রশ্ন যোগ করা যায় শুধু যাচাইকৃত অতিরিক্ত প্রশ্ন থেকে।
+              নিচের সব পরিবর্তন “প্রয়োগ করুন” চাপলে পেপারে আসবে।
             </p>
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
               <label style={{ fontSize: 13 }}>
@@ -1886,47 +2152,6 @@ export default function QuestionPaperGeneratorPage() {
                   type="text"
                   value={editTitle}
                   onChange={(e) => setEditTitle(e.target.value)}
-                  style={fieldStyle()}
-                />
-              </label>
-              <label style={{ fontSize: 13 }}>
-                বিভাগের শিরোনাম
-                <input
-                  type="text"
-                  value={editSectionHeading}
-                  onChange={(e) => setEditSectionHeading(e.target.value)}
-                  style={fieldStyle()}
-                />
-              </label>
-              <label style={{ fontSize: 13 }}>
-                এই বিভাগে প্রশ্ন সংখ্যা (সর্বোচ্চ {paper.questions.length + paperExtras.length}টি
-                যাচাইকৃত)
-                <ClearableNumberInput
-                  value={editSectionCount}
-                  min={1}
-                  max={paper.questions.length + paperExtras.length}
-                  onCommit={setEditSectionCount}
-                  style={fieldStyle()}
-                />
-              </label>
-              <label style={{ fontSize: 13 }}>
-                প্রতি প্রশ্নের নম্বর
-                <ClearableNumberInput
-                  value={editMarksPerQ}
-                  min={1}
-                  onCommit={setEditMarksPerQ}
-                  style={fieldStyle()}
-                />
-              </label>
-              <label style={{ fontSize: 13 }}>
-                উত্তর দিতে হবে (খালি = সবগুলোর উত্তর)
-                <input
-                  type="number"
-                  min={1}
-                  max={Math.max(1, editSectionCount)}
-                  value={editAnswerCount}
-                  onChange={(e) => setEditAnswerCount(e.target.value)}
-                  placeholder="সবগুলো"
                   style={fieldStyle()}
                 />
               </label>
@@ -1940,13 +2165,7 @@ export default function QuestionPaperGeneratorPage() {
                 />
               </label>
             </div>
-            <p style={{ fontSize: 13, margin: '8px 0' }}>
-              পূর্ণমান (স্বয়ংক্রিয়): <strong>{editSectionCount * Math.max(1, editMarksPerQ || 1)}</strong>
-              {editAnswerCount.trim() !== ''
-                ? ` · উত্তর দিতে হবে ${editAnswerCount}টি (বাকিগুলো অতিরিক্ত বিকল্প হিসেবে ছাপা হবে)`
-                : ''}
-            </p>
-            <label style={{ fontSize: 13, display: 'block', marginBottom: 10 }}>
+            <label style={{ fontSize: 13, display: 'block', marginTop: 10 }}>
               নির্দেশনা
               <textarea
                 value={editInstructions}
@@ -1955,53 +2174,198 @@ export default function QuestionPaperGeneratorPage() {
                 style={fieldStyle()}
               />
             </label>
-            <Button onClick={applyPaperEdits}>প্রয়োগ করুন — প্রিভিউ আবার তৈরি করুন</Button>
+            <p style={{ fontSize: 13, margin: '8px 0' }}>
+              পূর্ণমান (স্বয়ংক্রিয়):{' '}
+              <strong>
+                {editorSections.reduce(
+                  (sum, s) => sum + s.questionIds.length * Math.max(1, s.marksPerQuestion || 1),
+                  0,
+                )}
+              </strong>
+            </p>
 
-            <h4 style={{ margin: '14px 0 6px', fontSize: 14 }}>পেপারের প্রশ্ন (প্রতিটিতে বদলান / সরান)</h4>
-            {paper.questions.map((q, i) => {
-              const shown = applyEdits(q);
+            {editorSections.map((sec, si) => {
+              const secQuestions = sec.questionIds
+                .map((id) => paperQuestionById.get(id))
+                .filter((x): x is QpgQuestion => x !== undefined);
+              const secExtras = extrasForSectionType(sec.type);
+              const secShown = paperSwapShowAll ? secExtras : secExtras.slice(0, 10);
+              const totalQuestions = editorSections.reduce((n, s) => n + s.questionIds.length, 0);
               return (
                 <div
-                  key={q.id}
-                  style={{ border: '1px solid #eee', borderRadius: 8, padding: 8, marginBottom: 6 }}
+                  key={sec.id}
+                  style={{ border: '1px solid #ccc', borderRadius: 8, padding: 10, marginBottom: 10 }}
                 >
-                  <div style={{ fontSize: 13 }}>
-                    <strong>{i + 1}.</strong> {shown.questionText}
+                  <div style={{ display: 'flex', justifyContent: 'space-between', gap: 8, alignItems: 'center', marginBottom: 8 }}>
+                    <strong style={{ fontSize: 14 }}>বিভাগ {si + 1}</strong>
+                    {editorSections.length > 1 ? (
+                      <Button variant="ghost" size="sm" onClick={() => removeEditorSection(sec.id)}>
+                        বিভাগ সরান
+                      </Button>
+                    ) : null}
                   </div>
-                  <div style={{ marginTop: 4, display: 'flex', gap: 8, flexWrap: 'wrap' }}>
-                    <Button
-                      variant="ghost"
-                      size="sm"
-                      onClick={() => setPaperReplacingId(paperReplacingId === q.id ? null : q.id)}
-                    >
-                      {paperReplacingId === q.id ? 'বদলানো বাতিল' : 'বদলান'}
-                    </Button>
-                    <Button
-                      variant="ghost"
-                      size="sm"
-                      disabled={paper.questions.length <= 1}
-                      onClick={() => {
-                        const next = paper.questions.filter((x) => x.id !== q.id);
-                        rebuildPaper(next, {
-                          ...paper.setup,
-                          totalMarks: next.length * Math.max(1, editMarksPerQ || 1),
-                          answerCount:
-                            paper.setup.answerCount && paper.setup.answerCount > next.length
-                              ? next.length
-                              : paper.setup.answerCount,
-                        });
-                      }}
-                    >
-                      সরান
-                    </Button>
+                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
+                    <label style={{ fontSize: 13 }}>
+                      বিভাগের শিরোনাম
+                      <input
+                        type="text"
+                        value={sec.headingBn}
+                        onChange={(e) => updateEditorSection(sec.id, { headingBn: e.target.value })}
+                        style={fieldStyle()}
+                      />
+                    </label>
+                    <label style={{ fontSize: 13 }}>
+                      বিভাগের ধরন
+                      <select
+                        value={sec.type}
+                        onChange={(e) => {
+                          const nextType = e.target.value as QpgSectionType;
+                          updateEditorSection(sec.id, {
+                            type: nextType,
+                            headingBn: qpgDefaultSectionHeading(nextType, si),
+                            questionIds: [],
+                            answerCount: '',
+                          });
+                        }}
+                        style={fieldStyle()}
+                      >
+                        {QPG_SECTION_TYPES.map((t) => (
+                          <option key={t.id} value={t.id}>
+                            {t.nameBn}
+                          </option>
+                        ))}
+                      </select>
+                    </label>
+                    <label style={{ fontSize: 13 }}>
+                      প্রতি প্রশ্নের নম্বর
+                      <ClearableNumberInput
+                        value={sec.marksPerQuestion}
+                        min={1}
+                        onCommit={(n) => updateEditorSection(sec.id, { marksPerQuestion: n })}
+                        style={fieldStyle()}
+                      />
+                    </label>
+                    <label style={{ fontSize: 13 }}>
+                      উত্তর দিতে হবে (খালি = সবগুলোর উত্তর)
+                      <input
+                        type="number"
+                        min={1}
+                        max={Math.max(1, sec.questionIds.length)}
+                        value={sec.answerCount}
+                        onChange={(e) => updateEditorSection(sec.id, { answerCount: e.target.value })}
+                        placeholder="সবগুলো"
+                        style={fieldStyle()}
+                      />
+                    </label>
                   </div>
-                  {paperReplacingId === q.id ? (
-                    <div style={{ marginTop: 6 }}>
-                      <p style={{ fontSize: 12, color: '#666', margin: '0 0 6px' }}>
-                        এই প্রশ্নের বদলে নিচের যাচাইকৃত প্রশ্নগুলোর একটি নিন — বাছলেই একই জায়গায়
-                        বদলে যাবে।
-                      </p>
-                      {paperExtras.slice(0, 5).map((c) => (
+                  <p style={{ fontSize: 13, margin: '8px 0' }}>
+                    এই বিভাগে {sec.questionIds.length}টি প্রশ্ন •{' '}
+                    {sec.questionIds.length * Math.max(1, sec.marksPerQuestion || 1)} নম্বর
+                    {sec.answerCount.trim() !== ''
+                      ? ` • উত্তর দিতে হবে ${sec.answerCount}টি (বাকিগুলো অতিরিক্ত বিকল্প হিসেবে ছাপা হবে)`
+                      : ''}
+                  </p>
+                  <h4 style={{ margin: '10px 0 6px', fontSize: 14 }}>
+                    এই বিভাগের প্রশ্ন (প্রতিটিতে বদলান / সরান)
+                  </h4>
+                  {secQuestions.length === 0 ? (
+                    <p style={{ fontSize: 13 }}>
+                      এই বিভাগে এখনো কোনো প্রশ্ন নেই —{' '}
+                      {secExtras.length > 0
+                        ? 'নিচের যাচাইকৃত অতিরিক্ত প্রশ্ন থেকে যোগ করুন।'
+                        : 'এই ধরনের যাচাইকৃত প্রশ্ন এখনো তৈরি হয়নি।'}
+                    </p>
+                  ) : null}
+                  {secQuestions.map((q) => {
+                    const shown = applyEdits(q);
+                    const globalIndex = paper.questions.findIndex((x) => x.id === q.id) + 1;
+                    return (
+                      <div
+                        key={q.id}
+                        style={{ border: '1px solid #eee', borderRadius: 8, padding: 8, marginBottom: 6 }}
+                      >
+                        <div style={{ fontSize: 13 }}>
+                          <strong>{globalIndex}.</strong> {shown.questionText}
+                        </div>
+                        <div style={{ marginTop: 4, display: 'flex', gap: 8, flexWrap: 'wrap' }}>
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            onClick={() => {
+                              setPaperReplacingId(paperReplacingId === q.id ? null : q.id);
+                              setPaperSwapShowAll(false);
+                            }}
+                          >
+                            {paperReplacingId === q.id ? 'বদলানো বাতিল' : 'বদলান'}
+                          </Button>
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            disabled={totalQuestions <= 1}
+                            onClick={() => {
+                              updateEditorSection(sec.id, {
+                                questionIds: sec.questionIds.filter((x) => x !== q.id),
+                              });
+                            }}
+                          >
+                            সরান
+                          </Button>
+                        </div>
+                        {paperReplacingId === q.id ? (
+                          <div style={{ marginTop: 6 }}>
+                            <p style={{ fontSize: 12, color: '#666', margin: '0 0 6px' }}>
+                              এই প্রশ্নের বদলে নিচের যাচাইকৃত প্রশ্নগুলোর একটি নিন — বাছলেই একই জায়গায়
+                              বদলে যাবে। এই বিভাগের ধরন (
+                              {QPG_SECTION_TYPES.find((t) => t.id === sec.type)?.nameBn}) অনুযায়ী বদলানোর
+                              মতো {secExtras.length}টি প্রশ্ন আছে।
+                            </p>
+                            {secShown.map((c) => (
+                              <div
+                                key={c.id}
+                                style={{ display: 'flex', gap: 8, alignItems: 'center', marginBottom: 6 }}
+                              >
+                                <span style={{ fontSize: 13, flex: 1 }}>{c.questionText}</span>
+                                <Button
+                                  size="sm"
+                                  onClick={() => {
+                                    updateEditorSection(sec.id, {
+                                      questionIds: sec.questionIds.map((x) => (x === q.id ? c.id : x)),
+                                    });
+                                    setPaperReplacingId(null);
+                                    setPaperSwapShowAll(false);
+                                  }}
+                                >
+                                  এই প্রশ্নটি নিন
+                                </Button>
+                              </div>
+                            ))}
+                            {secExtras.length > 10 && !paperSwapShowAll ? (
+                              <Button variant="outline" size="sm" onClick={() => setPaperSwapShowAll(true)}>
+                                আরও {secExtras.length - 10}টি দেখুন
+                              </Button>
+                            ) : null}
+                            {secExtras.length === 0 ? (
+                              <p style={{ fontSize: 13 }}>
+                                বদলানোর মতো আর কোনো যাচাইকৃত প্রশ্ন নেই।{' '}
+                                <Link to="/contribute">যাচাইয়ের জন্য নিজের প্রশ্ন জমা দিন</Link>।
+                              </p>
+                            ) : null}
+                          </div>
+                        ) : null}
+                      </div>
+                    );
+                  })}
+                  <h4 style={{ margin: '10px 0 6px', fontSize: 14 }}>
+                    অতিরিক্ত বিকল্প (যাচাইকৃত — পেপারে নেই): {secExtras.length}টি
+                  </h4>
+                  {secExtras.length === 0 ? (
+                    <p style={{ fontSize: 13 }}>
+                      আর কোনো যাচাইকৃত অতিরিক্ত প্রশ্ন নেই — এই ধরনের সব যাচাইকৃত প্রশ্নই পেপারে আছে।{' '}
+                      <Link to="/contribute">যাচাইয়ের জন্য নিজের প্রশ্ন জমা দিন</Link>।
+                    </p>
+                  ) : (
+                    <>
+                      {(extrasShowAll ? secExtras : secExtras.slice(0, 10)).map((c) => (
                         <div
                           key={c.id}
                           style={{ display: 'flex', gap: 8, alignItems: 'center', marginBottom: 6 }}
@@ -2010,70 +2374,32 @@ export default function QuestionPaperGeneratorPage() {
                           <Button
                             size="sm"
                             onClick={() => {
-                              const byId = new Map<string, QpgQuestion>();
-                              for (const pq of paperPool) byId.set(pq.id, pq);
-                              for (const pq of paper.questions) byId.set(pq.id, pq);
-                              const nextIds = replaceQpgQuestion(
-                                paper.questions.map((x) => x.id),
-                                q.id,
-                                c.id,
-                              );
-                              const next = nextIds
-                                .map((id) => byId.get(id))
-                                .filter((x): x is QpgQuestion => x !== undefined);
-                              setPaperReplacingId(null);
-                              rebuildPaper(next, paper.setup);
+                              updateEditorSection(sec.id, {
+                                questionIds: [...sec.questionIds, c.id],
+                              });
                             }}
                           >
-                            এই প্রশ্নটি নিন
+                            যোগ করুন
                           </Button>
                         </div>
                       ))}
-                      {paperExtras.length === 0 ? (
-                        <p style={{ fontSize: 13 }}>
-                          বদলানোর মতো আর কোনো যাচাইকৃত প্রশ্ন নেই।{' '}
-                          <Link to="/contribute">যাচাইয়ের জন্য নিজের প্রশ্ন জমা দিন</Link>।
-                        </p>
+                      {secExtras.length > 10 && !extrasShowAll ? (
+                        <Button variant="outline" size="sm" onClick={() => setExtrasShowAll(true)}>
+                          আরও {secExtras.length - 10}টি দেখুন
+                        </Button>
                       ) : null}
-                    </div>
-                  ) : null}
+                    </>
+                  )}
                 </div>
               );
             })}
 
-            <h4 style={{ margin: '14px 0 6px', fontSize: 14 }}>
-              অতিরিক্ত বিকল্প (যাচাইকৃত — পেপারে নেই): {paperExtras.length}টি
-            </h4>
-            {paperExtras.length === 0 ? (
-              <p style={{ fontSize: 13 }}>
-                আর কোনো যাচাইকৃত অতিরিক্ত প্রশ্ন নেই — এই অধ্যায়ের সব যাচাইকৃত প্রশ্নই পেপারে আছে।{' '}
-                <Link to="/contribute">যাচাইয়ের জন্য নিজের প্রশ্ন জমা দিন</Link>।
-              </p>
-            ) : (
-              paperExtras.slice(0, 5).map((c) => (
-                <div
-                  key={c.id}
-                  style={{ display: 'flex', gap: 8, alignItems: 'center', marginBottom: 6 }}
-                >
-                  <span style={{ fontSize: 13, flex: 1 }}>{c.questionText}</span>
-                  <Button
-                    size="sm"
-                    onClick={() => {
-                      const next = [...paper.questions, c];
-                      rebuildPaper(next, {
-                        ...paper.setup,
-                        totalMarks: next.length * Math.max(1, editMarksPerQ || 1),
-                      });
-                    }}
-                  >
-                    যোগ করুন
-                  </Button>
-                </div>
-              ))
-            )}
-            {paperExtras.length > 5 ? (
-              <p style={{ fontSize: 12, color: '#666' }}>আরও {paperExtras.length - 5}টি অতিরিক্ত প্রশ্ন আছে।</p>
-            ) : null}
+            <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
+              <Button variant="outline" onClick={addEditorSection}>
+                + বিভাগ যোগ করুন
+              </Button>
+              <Button onClick={applyPaperEdits}>প্রয়োগ করুন — প্রিভিউ আবার তৈরি করুন</Button>
+            </div>
           </div>
 
           {previewBusy ? <p style={{ fontSize: 13 }}>প্রিভিউ তৈরি হচ্ছে…</p> : null}
