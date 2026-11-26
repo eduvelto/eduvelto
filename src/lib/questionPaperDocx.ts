@@ -17,7 +17,7 @@
 //
 // ZERO SERVER STORAGE: generation is 100% client-side; the .docx is
 // built in memory and downloaded via a blob URL. No server cost.
-import { QPG_BORDER_CREDIT, type QpgPaper } from './questionPaper';
+import { QPG_BORDER_CREDIT, qpgPaperSections, type QpgPaper } from './questionPaper';
 
 export interface QpgDocxOptions {
   /** Pro gate — must be true or the export throws. */
@@ -94,19 +94,45 @@ export async function buildPaperDocxDocument(
       }),
     );
   }
-  children.push(
-    new Paragraph({ text: s.sectionHeading, heading: HeadingLevel.HEADING_2 }),
-  );
-  paper.questions.forEach((q, i) => {
+  const sections = qpgPaperSections(paper);
+  const byId = new Map(paper.questions.map((q) => [q.id, q]));
+  // Question numbering is global across the paper (1..N), matching
+  // the answer key and the OMR sheet — sections only group them.
+  let globalIndex = 0;
+  for (const section of sections) {
     children.push(
-      new Paragraph({
-        children: [new TextRun({ text: `${i + 1}. ${q.questionText}`, bold: true })],
-      }),
+      new Paragraph({ text: section.headingBn, heading: HeadingLevel.HEADING_2 }),
     );
-    q.options.forEach((o) => {
-      children.push(new Paragraph({ text: `(${o.letter}) ${o.text}` }));
-    });
-  });
+    if (
+      section.answerCount &&
+      section.answerCount > 0 &&
+      section.answerCount < section.questionIds.length
+    ) {
+      children.push(
+        new Paragraph({
+          text: `এই বিভাগের ${section.answerCount}টি প্রশ্নের উত্তর দিতে হবে (মোট ${section.questionIds.length}টি প্রশ্ন দেওয়া আছে)।`,
+        }),
+      );
+    }
+    for (const qid of section.questionIds) {
+      const q = byId.get(qid);
+      if (!q) continue;
+      globalIndex += 1;
+      children.push(
+        new Paragraph({
+          children: [new TextRun({ text: `${globalIndex}. ${q.questionText}`, bold: true })],
+        }),
+      );
+      q.options.forEach((o) => {
+        children.push(new Paragraph({ text: `(${o.letter}) ${o.text}` }));
+      });
+    }
+    if (section.questionIds.length === 0) {
+      children.push(
+        new Paragraph({ text: 'এই বিভাগের যাচাইকৃত প্রশ্ন এখনো তৈরি হয়নি।' }),
+      );
+    }
+  }
   if (opts.includeAnswerKey) {
     children.push(
       new Paragraph({ text: 'Answer Key', heading: HeadingLevel.HEADING_2 }),

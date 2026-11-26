@@ -54,7 +54,51 @@ export type QpgQuestionType =
   /** অভিন্ন তথ্যভিত্তিক (Situation Set) — no verified questions yet. */
   | 'situation-set'
   /** ছবিভিত্তিক প্রশ্ন — no verified questions yet. */
-  | 'picture-based';
+  | 'picture-based'
+  /** রচনামূলক / লিখিত প্রশ্ন (written/essay) — no verified questions yet. */
+  | 'written';
+
+/** Section types for the multi-section builder (comparison fixes,
+ *  26 Nov 2026 — Proshnobanai primary papers are multi-section:
+ *  MCQ + short + essay + fill-in + যুক্তবর্ণ + শব্দার্থ). A section's
+ *  type is the question type its questions come from; 'fill-in-blanks'
+ *  / 'juktoborno' / 'shobdartho' have no verified questions yet, so
+ *  such sections honestly show 0 until packs are verified. */
+export type QpgSectionType =
+  | 'mcq'
+  | 'cq'
+  | 'short'
+  | 'fill-in-blanks'
+  | 'juktoborno'
+  | 'shobdartho'
+  | 'written';
+
+export const QPG_SECTION_TYPES: Array<{
+  id: QpgSectionType;
+  nameBn: string;
+  nameEn: string;
+  /** The question type this section draws from. */
+  questionType: QpgQuestionType;
+}> = [
+  { id: 'mcq', nameBn: 'বহুনির্বাচনি (MCQ)', nameEn: 'MCQ', questionType: 'mcq' },
+  { id: 'cq', nameBn: 'সৃজনশীল (CQ)', nameEn: 'Creative (CQ)', questionType: 'cq' },
+  { id: 'short', nameBn: 'সংক্ষিপ্ত প্রশ্ন', nameEn: 'Short Answer', questionType: 'short' },
+  { id: 'fill-in-blanks', nameBn: 'শূন্যস্থান পূরণ', nameEn: 'Fill in the Blanks', questionType: 'short' },
+  { id: 'juktoborno', nameBn: 'যুক্তবর্ণ', nameEn: 'Conjunct Letters', questionType: 'short' },
+  { id: 'shobdartho', nameBn: 'শব্দার্থ', nameEn: 'Word Meaning', questionType: 'short' },
+  { id: 'written', nameBn: 'রচনামূলক (লিখিত)', nameEn: 'Written / Essay', questionType: 'written' },
+];
+
+export function qpgSectionTypeById(id: QpgSectionType): (typeof QPG_SECTION_TYPES)[number] | undefined {
+  return QPG_SECTION_TYPES.find((t) => t.id === id);
+}
+
+/** Default heading for a new section of a given type. */
+export function qpgDefaultSectionHeading(type: QpgSectionType, index: number): string {
+  const label = qpgSectionTypeById(type)?.nameBn ?? 'বিভাগ';
+  const letter = ['ক', 'খ', 'গ', 'ঘ', 'ঙ', 'চ'][index] ?? '';
+  return letter ? `${letter}-বিভাগ: ${label}` : label;
+}
 
 /** Question source. HONESTY RULE (owner Turn 32 + 25 Nov 09:19): the
  *  Board Question / Repeated Board Question / Multiple Schools filters
@@ -406,20 +450,45 @@ export const QPG_SECONDARY_EXAM_KINDS: Array<{ id: QpgSecondaryExamKind; nameBn:
   { id: 'annual', nameBn: 'বার্ষিক পরীক্ষা', nameEn: 'Annual Exam' },
 ];
 
-export type QpgSecondaryQKind = 'mcq' | 'creative' | 'combined';
+export type QpgSecondaryQKind = 'mcq' | 'creative' | 'combined' | 'written';
 export const QPG_SECONDARY_Q_KINDS: Array<{ id: QpgSecondaryQKind; nameBn: string; nameEn: string }> = [
   { id: 'mcq', nameBn: 'বহুনির্বাচনি (MCQ)', nameEn: 'MCQ' },
   { id: 'creative', nameBn: 'সৃজনশীল (Creative)', nameEn: 'Creative (CQ)' },
   { id: 'combined', nameBn: 'সমন্বিত প্রশ্ন (সৃজনশীল + বহুনির্বাচনি)', nameEn: 'Combined (Creative + MCQ)' },
 ];
 
+/** Subject-adaptive question kinds (comparison fixes, 26 Nov 2026 —
+ *  Proshnobanai's Q-kind list changes per subject). Language subjects
+ *  (Bangla / English, Class 6+) also offer রচনামূলক (written/essay):
+ *  Bangla 2nd paper and English 2nd paper (writing) are written
+ *  exams, so a teacher building those papers needs the written kind.
+ *  Every other subject keeps the standard three. The verified pool
+ *  holds MCQs only today, so 'written' honestly yields 0 verified
+ *  questions until written packs are verified — the UI says so, and
+ *  never invents written questions. */
+export const QPG_WRITTEN_Q_KIND: { id: 'written'; nameBn: string; nameEn: string } = {
+  id: 'written',
+  nameBn: 'রচনামূলক (লিখিত)',
+  nameEn: 'Written / Essay',
+};
+
+export function qpgSecondaryQKindsFor(subjectId: string): Array<{ id: QpgSecondaryQKind; nameBn: string; nameEn: string }> {
+  if (subjectId === 'bangla' || subjectId === 'english') {
+    return [...QPG_SECONDARY_Q_KINDS, QPG_WRITTEN_Q_KIND];
+  }
+  return QPG_SECONDARY_Q_KINDS;
+}
+
 /** Map a level-aware question kind to the selection type filter.
  *  'combined' means no type filter ('all') — the paper mixes MCQ
  *  and CQ from the verified pool (MCQ-only today, so it honestly
- *  yields MCQs until verified CQ packs exist). */
+ *  yields MCQs until verified CQ packs exist). 'written' maps to the
+ *  'written' type, which has no verified questions yet — the
+ *  selection honestly returns 0 with a reason. */
 export function qpgTypeForQKind(kind: QpgSecondaryQKind): QpgQuestionType | 'all' {
   if (kind === 'creative') return 'cq';
   if (kind === 'combined') return 'all';
+  if (kind === 'written') return 'written';
   return 'mcq';
 }
 
@@ -463,6 +532,12 @@ export interface QpgQuestion {
   /** True when the teacher edited the text inline before export
    *  (paper creation — free). The paper renders the edited text. */
   edited?: boolean;
+  /** Exercise this question is mapped to (Phase B, see
+   *  ./qpgExercises). Set when a verified pack is mapped to its
+   *  exercises; undefined for unmapped questions (today: all 35 BCS
+   *  English MCQs). The exercise filter only matches questions that
+   *  carry the exercise's id — never guessed. */
+  exerciseId?: string;
   questionText: string;
   options: Array<{ letter: 'A' | 'B' | 'C' | 'D'; text: string }>;
   correctLetter: 'A' | 'B' | 'C' | 'D';
@@ -555,6 +630,13 @@ export function qpgChaptersFor(stream: QpgStream, classId: string, subjectId: st
 export interface QpgSelection {
   chapterIds: string[];
   topicIds: string[];
+  /** Exercise sub-selection (comparison fixes, 26 Nov 2026 —
+   *  Proshnobanai lets teachers pick individual অনুশীলনী inside a
+   *  chapter). Empty = no exercise filter (whole chapter). When set,
+   *  only questions mapped to one of these exercises are included —
+   *  no verified question carries an exerciseId today, so the result
+   *  is honestly 0 with a reason until Phase B mapping lands. */
+  exerciseIds?: string[];
   /** 'all' = combined paper (MCQ + CQ, no type filter). */
   type: QpgQuestionType | 'all';
   difficulty: QpgDifficulty;
@@ -673,15 +755,33 @@ export function selectQpgQuestions(
   if (sel.topicIds.length > 0) {
     filtered = filtered.filter((q) => sel.topicIds.includes(q.topicId));
   }
+  if (sel.exerciseIds && sel.exerciseIds.length > 0) {
+    // Exercise sub-selection: only questions mapped to one of the
+    // chosen exercises. No verified question carries an exerciseId
+    // today (Phase B mapping not done), so this honestly yields 0
+    // with a reason — never a silent gap, never guessed mapping.
+    const mapped = filtered.filter(
+      (q) => q.exerciseId !== undefined && sel.exerciseIds!.includes(q.exerciseId),
+    );
+    if (mapped.length === 0) {
+      reasonsBn.push(
+        'নির্বাচিত অনুশীলনীগুলোর যাচাইকৃত প্রশ্ন এখনো তৈরি হয়নি — Phase B যাচাই শেষে এখানে যোগ হবে। অনুশীলনী না বেছে পুরো অধ্যায় দিয়ে পেপার বানান।',
+      );
+      reasonsEn.push(
+        'No verified questions exist for the selected exercises yet — they join here once Phase B verification finishes. Build from the whole chapter instead.',
+      );
+    }
+    filtered = mapped;
+  }
   if (sel.type !== 'mcq' && sel.type !== 'all') {
     // The verified pool holds MCQs only today. CQ / Short /
-    // Multiple-Completion / Situation-Set questions need verified packs
-    // that do not exist yet — never fake them.
+    // Multiple-Completion / Situation-Set / Written questions need
+    // verified packs that do not exist yet — never fake them.
     reasonsBn.push(
-      'যাচাইকৃত প্রশ্নভান্ডারে এখন শুধু MCQ আছে — Creative (CQ) / সংক্ষিপ্ত / বহুপদী / অভিন্ন তথ্যভিত্তিক / ছবিভিত্তিক প্রশ্নের যাচাইকৃত প্যাক এখনো তৈরি হয়নি।',
+      'যাচাইকৃত প্রশ্নভান্ডারে এখন শুধু MCQ আছে — Creative (CQ) / সংক্ষিপ্ত / বহুপদী / অভিন্ন তথ্যভিত্তিক / ছবিভিত্তিক / রচনামূলক প্রশ্নের যাচাইকৃত প্যাক এখনো তৈরি হয়নি।',
     );
     reasonsEn.push(
-      'The verified pool holds MCQs only today — no verified Creative (CQ) / short / multiple-completion / situation-set / picture-based pack exists yet.',
+      'The verified pool holds MCQs only today — no verified Creative (CQ) / short / multiple-completion / situation-set / picture-based / written pack exists yet.',
     );
     filtered = [];
   }
@@ -841,6 +941,57 @@ export interface QpgPaperSetup {
    *  for ক/খ/গ/ঘ papers. Printed on set papers so re-entering it
    *  rebuilds the identical set. Undefined for single-set papers. */
   seed?: number;
+  /** Page numbers (comparison fixes, 26 Nov 2026 — eProshnoBank has
+   *  a page-number toggle): when true, every rendered page carries
+   *  "পাতা N / মোট" at the bottom. Free, default off. */
+  pageNumbers?: boolean;
+}
+
+/** One section of a multi-section paper (comparison fixes, 26 Nov
+ *  2026 — G2+G3: the primary-school pattern is a paper of sections,
+ *  e.g. MCQ + সংক্ষিপ্ত + রচনামূলক + শূন্যস্থান, each with its own
+ *  type, count, marks and answer-count). A section's questions are
+ *  listed by id; the paper's flat `questions` array is the
+ *  concatenation in section order (so OMR / answer key / export keep
+ *  working unchanged). */
+export interface QpgPaperSection {
+  id: string;
+  headingBn: string;
+  type: QpgSectionType;
+  questionIds: string[];
+  marksPerQuestion: number;
+  /** "Answer X of Y" for this section — the rest print as extra
+   *  alternatives. Undefined (or >= question count) = answer all. */
+  answerCount?: number;
+}
+
+/** Sections of a paper — the paper's own `sections` when it is a
+ *  multi-section paper, otherwise ONE synthetic section built from
+ *  the flat questions list (so single-section papers keep working
+ *  unchanged: the heading / marks / answer-count come from the
+ *  setup). */
+export function qpgPaperSections(paper: QpgPaper): QpgPaperSection[] {
+  if (paper.sections && paper.sections.length > 0) return paper.sections;
+  const marksPerQ =
+    paper.questions.length > 0
+      ? Math.max(1, Math.round(paper.setup.totalMarks / paper.questions.length))
+      : 1;
+  return [
+    {
+      id: 'section-1',
+      headingBn: paper.setup.sectionHeading,
+      type: 'mcq',
+      questionIds: paper.questions.map((q) => q.id),
+      marksPerQuestion: marksPerQ,
+      answerCount: paper.setup.answerCount,
+    },
+  ];
+}
+
+/** Total marks of a multi-section paper = sum over sections of
+ *  (questions × marks per question). Pure. */
+export function qpgMultiSectionTotalMarks(sections: QpgPaperSection[]): number {
+  return sections.reduce((sum, s) => sum + s.questionIds.length * Math.max(1, s.marksPerQuestion), 0);
 }
 
 /** Auto Set Code Generator — the four set codes (Turn 32). */
@@ -912,6 +1063,11 @@ export interface QpgPaper {
   id: string;
   setup: QpgPaperSetup;
   questions: QpgQuestion[];
+  /** Multi-section papers (comparison fixes, 26 Nov 2026): when
+   *  present, the paper's sections — each with its own heading, type,
+   *  marks and answer-count. `questions` is the concatenation in
+   *  section order. Absent = the original single-section paper. */
+  sections?: QpgPaperSection[];
   /** Answer key in paper order (correct letters) — drives the
    *  per-set keys and the OMR evaluator. */
   answerKey: Array<'A' | 'B' | 'C' | 'D'>;
@@ -932,6 +1088,7 @@ export interface QpgPaper {
 export function buildQpgPaper(args: {
   setup: QpgPaperSetup;
   questions: QpgQuestion[];
+  sections?: QpgPaperSection[];
   isCustomVariant: boolean;
   kind: QpgPaper['kind'];
   patternLabelBn: string;
@@ -941,6 +1098,7 @@ export function buildQpgPaper(args: {
     id: `qpg-${Date.now().toString(36)}-${Math.floor(Math.random() * 1296).toString(36)}`,
     setup: args.setup,
     questions: args.questions,
+    sections: args.sections,
     answerKey: args.questions.map((q) => q.correctLetter),
     chapterNameBn:
       [...new Set(args.questions.map((q) => q.chapterNameBn))].join(' • ') || '—',
