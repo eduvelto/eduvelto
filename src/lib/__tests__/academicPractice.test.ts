@@ -167,7 +167,7 @@ describe('Academic practice SEO (resolveRouteSeo)', () => {
 });
 
 describe('Academic practice first paint (renderToString)', () => {
-  it('hub lists the seven classes with verified practice', async () => {
+  it('hub lists the nine classes with verified practice', async () => {
     const html = await renderPractice('/bn/learn/practice');
     expect(html).toContain('অধ্যায়ভিত্তিক অনুশীলন');
     expect(html).toContain('৩য় শ্রেণি');
@@ -178,6 +178,8 @@ describe('Academic practice first paint (renderToString)', () => {
     expect(html).toContain('৮ম শ্রেণি');
     expect(html).toContain('৯ম শ্রেণি');
     expect(html).toContain('১০ম শ্রেণি');
+    expect(html).toContain('একাদশ শ্রেণি');
+    expect(html).toContain('দ্বাদশ শ্রেণি');
     expect(html).toContain('/learn/practice/class-3/english');
     expect(html).toContain('/learn/practice/class-4/math');
     expect(html).toContain('/learn/practice/class-3/bangla');
@@ -188,6 +190,9 @@ describe('Academic practice first paint (renderToString)', () => {
     expect(html).toContain('/learn/practice/class-9/math');
     expect(html).toContain('/learn/practice/class-9/bangla-1st');
     expect(html).toContain('/learn/practice/class-10/math');
+    expect(html).toContain('/learn/practice/class-11/physics');
+    expect(html).toContain('/learn/practice/class-11/islamic-history');
+    expect(html).toContain('/learn/practice/class-12/physics');
     expect(html).toContain('যাচাইকৃত প্রশ্ন');
   });
 
@@ -265,6 +270,32 @@ describe('Academic practice first paint (renderToString)', () => {
     const html = await renderPractice('/bn/learn/practice/class-10/math');
     expect(html).toContain('অধ্যায় ১: বাস্তব সংখ্যা');
     expect(html).toContain('/learn/practice/class-10/math/acad-class-9-mat-chapter-1');
+    expect(html).toContain('২টি প্রশ্ন');
+  });
+
+  it('a Class 11 subject page lists its chapters with counts', async () => {
+    const html = await renderPractice('/bn/learn/practice/class-11/physics');
+    expect(html).toContain('অধ্যায় ২: ভেক্টর (১ম পত্র)');
+    expect(html).toContain('/learn/practice/class-11/physics/acad-class-11-phy-p1-chapter-2');
+    expect(html).toContain('২টি প্রশ্ন');
+    expect(html).toContain('অধ্যায় ১: তাপগতিবিদ্যা (২য় পত্র)');
+    expect(html).toContain('/learn/practice/class-11/physics/acad-class-11-phy-p2-chapter-1');
+  });
+
+  it('a Class 11 chapter page renders the questions with options and 0/N progress', async () => {
+    const html = await renderPractice(
+      '/bn/learn/practice/class-11/physics/acad-class-11-phy-p1-chapter-2',
+    );
+    expect(html).toContain('অধ্যায় ২: ভেক্টর (১ম পত্র)');
+    expect(html).toContain('অগ্রগতি');
+    expect(html).toContain('০/২টি উত্তর দিয়েছেন');
+    expect(html).toContain('সঠিক: ০টি');
+  });
+
+  it('a Class 12 subject page lists the same chapters as Class 11', async () => {
+    const html = await renderPractice('/bn/learn/practice/class-12/physics');
+    expect(html).toContain('অধ্যায় ২: ভেক্টর (১ম পত্র)');
+    expect(html).toContain('/learn/practice/class-12/physics/acad-class-11-phy-p1-chapter-2');
     expect(html).toContain('২টি প্রশ্ন');
   });
 

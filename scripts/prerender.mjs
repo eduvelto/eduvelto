@@ -384,6 +384,21 @@ export function getAcademicPracticePaths(source) {
         paths.push(chapterPath10);
       }
     }
+    // Class 12 shares the Class 11 pool (same combined class-11-12
+    // draft set — there is NO separate Class 12 set): every class-11
+    // subject / chapter path also exists under class-12.
+    if (classId === 'class-11') {
+      const subjectPath12 = `/learn/practice/class-12/${subjectId}`;
+      const chapterPath12 = `${subjectPath12}/${chapterId}`;
+      if (!seen.has(subjectPath12)) {
+        seen.add(subjectPath12);
+        paths.push(subjectPath12);
+      }
+      if (!seen.has(chapterPath12)) {
+        seen.add(chapterPath12);
+        paths.push(chapterPath12);
+      }
+    }
   }
   return paths;
 }

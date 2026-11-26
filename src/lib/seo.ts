@@ -2226,8 +2226,9 @@ export function resolveRouteSeo(pathname: string, lang: 'bn' | 'en' = 'bn'): Seo
       if (!classId) {
         // Grand total = UNIQUE questions. Do NOT sum
         // publicAcademicClassSubjects() rows: Class 10 shares the
-        // Class 9 pool, so its rows repeat the same 557 questions and
-        // a sum would claim 2,501 instead of 1,944.
+        // Class 9 pool and Class 12 shares the Class 11 pool, so
+        // their rows repeat the same 557 + 374 questions and
+        // a sum would claim 3,249 instead of 2,318.
         const total = PUBLIC_ACADEMIC_QUESTIONS.length;
         entry = {
           title: 'অধ্যায়ভিত্তিক অনুশীলন — যাচাইকৃত প্রশ্ন | Eduvelto',

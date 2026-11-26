@@ -1,12 +1,13 @@
 // Eduvelto — combined verified Academic pool tests (Education Hub,
 // 26 Nov 2026).
 //
-// The combined pool (Classes 3–10, thirty-one subjects) is the SINGLE
+// The combined pool (Classes 3–12, thirty-five subjects) is the SINGLE
 // verified source for both the Question Maker and the Education Hub
-// chapter practice. These tests pin that it holds ONLY the 1,944
+// chapter practice. These tests pin that it holds ONLY the 2,318
 // reviewed questions (Class 3: 160, Class 4: 152, Class 5: 165,
-// Class 6: 333, Class 7: 325, Class 8: 252, Class 9: 557 — Class 10
-// shares the Class 9 pool, so no questions are stored under class-10),
+// Class 6: 333, Class 7: 325, Class 8: 252, Class 9: 557, Class 11: 374
+// — Class 10 shares the Class 9 pool and Class 12 shares the Class 11
+// pool, so no questions are stored under class-10 or class-12),
 // that the REJECTED items with no complete replacement
 // recorded are absent, and that the derived chapters + helpers return
 // honest empties for anything unverified.
@@ -98,12 +99,29 @@ const PER_CLASS_SUBJECT: Record<string, { questions: number; chapters: number }>
   'class-9/math-depth': { questions: 35, chapters: 17 },
   'class-9/physics': { questions: 23, chapters: 11 },
   'class-9/physics-depth': { questions: 31, chapters: 13 },
+  'class-11/accounting': { questions: 22, chapters: 12 },
+  'class-11/bangla': { questions: 21, chapters: 20 },
+  'class-11/biology': { questions: 24, chapters: 12 },
+  'class-11/chemistry': { questions: 24, chapters: 10 },
+  'class-11/civics': { questions: 21, chapters: 11 },
+  'class-11/economics': { questions: 22, chapters: 12 },
+  'class-11/english': { questions: 20, chapters: 15 },
+  'class-11/finance': { questions: 22, chapters: 12 },
+  'class-11/geography': { questions: 22, chapters: 12 },
+  'class-11/higher-math': { questions: 22, chapters: 12 },
+  'class-11/history': { questions: 22, chapters: 12 },
+  'class-11/ict': { questions: 22, chapters: 10 },
+  'class-11/islamic-history': { questions: 20, chapters: 11 },
+  'class-11/logic': { questions: 22, chapters: 12 },
+  'class-11/physics': { questions: 24, chapters: 13 },
+  'class-11/psychology': { questions: 22, chapters: 12 },
+  'class-11/statistics': { questions: 22, chapters: 12 },
 };
 
-describe('combined verified Academic pool (Classes 3–10, thirty-one subjects)', () => {
-  it('holds exactly the 1,944 reviewed questions (160 + 152 + 165 + 333 + 325 + 252 + 557)', () => {
-    expect(PUBLIC_ACADEMIC_QUESTIONS).toHaveLength(1944);
-    expect(new Set(PUBLIC_ACADEMIC_QUESTIONS.map((q) => q.id)).size).toBe(1944);
+describe('combined verified Academic pool (Classes 3–12, thirty-five subjects)', () => {
+  it('holds exactly the 2,318 reviewed questions (160 + 152 + 165 + 333 + 325 + 252 + 557 + 374)', () => {
+    expect(PUBLIC_ACADEMIC_QUESTIONS).toHaveLength(2318);
+    expect(new Set(PUBLIC_ACADEMIC_QUESTIONS.map((q) => q.id)).size).toBe(2318);
     const byClass = (classId: string) =>
       PUBLIC_ACADEMIC_QUESTIONS.filter((q) => q.classId === classId);
     expect(byClass('class-3')).toHaveLength(160);
@@ -116,10 +134,14 @@ describe('combined verified Academic pool (Classes 3–10, thirty-one subjects)'
     // Class 10 shares the Class 9 pool — no questions are stored
     // under class-10 (the lookup helpers map it to class-9).
     expect(byClass('class-10')).toHaveLength(0);
+    expect(byClass('class-11')).toHaveLength(374);
+    // Class 12 shares the Class 11 pool — no questions are stored
+    // under class-12 (the lookup helpers map it to class-11).
+    expect(byClass('class-12')).toHaveLength(0);
     const bySubject = (subjectId: string) =>
       PUBLIC_ACADEMIC_QUESTIONS.filter((q) => q.subjectId === subjectId);
-    expect(bySubject('english')).toHaveLength(158);
-    expect(bySubject('bangla')).toHaveLength(146);
+    expect(bySubject('english')).toHaveLength(178);
+    expect(bySubject('bangla')).toHaveLength(167);
     expect(bySubject('math')).toHaveLength(182);
     expect(bySubject('science')).toHaveLength(156);
     expect(bySubject('bgs')).toHaveLength(173);
@@ -127,37 +149,48 @@ describe('combined verified Academic pool (Classes 3–10, thirty-one subjects)'
     expect(bySubject('bangla-grammar')).toHaveLength(62);
     expect(bySubject('math-depth')).toHaveLength(150);
     expect(bySubject('science-depth')).toHaveLength(104);
-    expect(bySubject('ict')).toHaveLength(77);
+    expect(bySubject('ict')).toHaveLength(99);
     expect(bySubject('agriculture')).toHaveLength(62);
     expect(bySubject('home-science')).toHaveLength(74);
-    expect(bySubject('accounting')).toHaveLength(22);
+    expect(bySubject('accounting')).toHaveLength(44);
     expect(bySubject('bangla-1st')).toHaveLength(21);
     expect(bySubject('bangla-2nd')).toHaveLength(18);
-    expect(bySubject('biology')).toHaveLength(22);
+    expect(bySubject('biology')).toHaveLength(46);
     expect(bySubject('biology-depth')).toHaveLength(32);
     expect(bySubject('business')).toHaveLength(22);
-    expect(bySubject('finance')).toHaveLength(22);
-    expect(bySubject('chemistry')).toHaveLength(23);
+    expect(bySubject('finance')).toHaveLength(44);
+    expect(bySubject('chemistry')).toHaveLength(47);
     expect(bySubject('chemistry-depth')).toHaveLength(35);
-    expect(bySubject('civics')).toHaveLength(22);
-    expect(bySubject('history')).toHaveLength(21);
-    expect(bySubject('economics')).toHaveLength(22);
-    expect(bySubject('geography')).toHaveLength(20);
+    expect(bySubject('civics')).toHaveLength(43);
+    expect(bySubject('history')).toHaveLength(43);
+    expect(bySubject('economics')).toHaveLength(44);
+    expect(bySubject('geography')).toHaveLength(42);
     expect(bySubject('english-1st')).toHaveLength(22);
     expect(bySubject('english-2nd')).toHaveLength(21);
-    expect(bySubject('higher-math')).toHaveLength(18);
+    expect(bySubject('higher-math')).toHaveLength(40);
     expect(bySubject('higher-math-depth')).toHaveLength(19);
-    expect(bySubject('physics')).toHaveLength(23);
+    expect(bySubject('physics')).toHaveLength(47);
     expect(bySubject('physics-depth')).toHaveLength(31);
+    expect(bySubject('islamic-history')).toHaveLength(20);
+    expect(bySubject('logic')).toHaveLength(22);
+    expect(bySubject('psychology')).toHaveLength(22);
+    expect(bySubject('statistics')).toHaveLength(22);
   });
 
   it('every question is MCQ with 4 distinct options, one valid correct letter, and an NCTB citation', () => {
     // Two Class 9 Bangla 1st questions are verified against standard
     // literary references, NOT the NCTB book (the works are not in the
     // current NCTB সহপাঠ) — their sourceNote honestly has no 'NCTB'.
-    const NON_NCTB_SOURCE = new Set(['ACAD-5010', 'ACAD-5011']);
+    // One Class 11 English question is a general-knowledge item, NOT
+    // an English For Today lesson fact — its sourceNote honestly has
+    // no 'NCTB' either.
+    const NON_NCTB_SOURCE: Record<string, string> = {
+      'ACAD-5010': 'standard literary reference',
+      'ACAD-5011': 'standard literary reference',
+      'ACAD-7014': 'Standard nutrition reference',
+    };
     for (const q of PUBLIC_ACADEMIC_QUESTIONS) {
-      expect(['class-3', 'class-4', 'class-5', 'class-6', 'class-7', 'class-8', 'class-9']).toContain(q.classId);
+      expect(['class-3', 'class-4', 'class-5', 'class-6', 'class-7', 'class-8', 'class-9', 'class-11']).toContain(q.classId);
       expect([
         'english',
         'bangla',
@@ -190,6 +223,10 @@ describe('combined verified Academic pool (Classes 3–10, thirty-one subjects)'
         'higher-math-depth',
         'physics',
         'physics-depth',
+        'islamic-history',
+        'logic',
+        'psychology',
+        'statistics',
       ]).toContain(q.subjectId);
       expect(q.options).toHaveLength(4);
       expect(new Set(q.options.map((o) => o.text)).size).toBe(4);
@@ -198,14 +235,14 @@ describe('combined verified Academic pool (Classes 3–10, thirty-one subjects)'
       expect(q.questionText.trim().length).toBeGreaterThan(0);
       expect(q.explanation.trim().length).toBeGreaterThan(0);
       expect(['easy', 'medium', 'hard']).toContain(q.difficulty);
-      if (NON_NCTB_SOURCE.has(q.id)) {
+      if (NON_NCTB_SOURCE[q.id]) {
         expect(q.sourceNote).not.toContain('NCTB');
-        expect(q.sourceNote).toContain('standard literary reference');
+        expect(q.sourceNote).toContain(NON_NCTB_SOURCE[q.id]);
       } else {
         expect(q.sourceNote).toContain('NCTB');
       }
       expect(q.chapterId).toMatch(
-        /^acad-class-[3456789]-(eng|ban|bgr|mat-depth|mat|sci-depth|sci|bgs|isl|ict|agr|hsc|acc|ban-1st|ban-2nd|bio-depth|bio|bus|fin|che-depth|che|civ|his|eco|geo|eng-1st|eng-2nd|hmat-depth|hmat|phy-depth|phy)-/,
+        /^acad-class-(?:[3-9]|1[12])-(eng|ban|bgr|mat-depth|mat|sci-depth|sci|bgs|isl-his|isl|ict|agr|hsc|acc|ban-1st|ban-2nd|bio-depth|bio|bus|fin|che-depth|che|civ|his|eco|geo|eng-1st|eng-2nd|hmat-depth|hmat|phy-depth|phy|log|psy|sta)-/,
       );
     }
   });
@@ -252,18 +289,29 @@ describe('combined verified Academic pool (Classes 3–10, thirty-one subjects)'
     expect(ids.has('ACAD-0053')).toBe(false); // higher-math matrix determinant — REJECTED, HSC-level
     expect(ids.has('ACAD-5061')).toBe(false); // higher-math matrix determinant — REJECTED, HSC-level
     expect(ids.has('ACAD-5068')).toBe(false); // higher-math midpoint formula — REJECTED, not in Ch 11
+    expect(ids.has('ACAD-3069')).toBe(false); // islamic-history Ottoman founder — REJECTED, off-syllabus; replacement is new text, spot-check owed
+    expect(ids.has('ACAD-8069')).toBe(false); // islamic-history Mehmed II / Constantinople — REJECTED, off-syllabus; replacement is new text, spot-check owed
   });
 
-  it('the twenty-six hard questions keep their reviewed difficulty (never silently downgraded)', () => {
+  it('the thirty-five hard questions keep their reviewed difficulty (never silently downgraded)', () => {
     const hard = PUBLIC_ACADEMIC_QUESTIONS.filter((q) => q.difficulty === 'hard');
-    expect(hard).toHaveLength(26);
+    expect(hard).toHaveLength(35);
     expect(hard.map((q) => q.id).sort()).toEqual([
       'ACAD-0036',
       'ACAD-0059',
       'ACAD-1040',
       'ACAD-1048',
+      'ACAD-2015',
+      'ACAD-2076',
+      'ACAD-3003',
+      'ACAD-3026',
+      'ACAD-3030',
+      'ACAD-3085',
+      'ACAD-3087',
       'ACAD-5042',
       'ACAD-5063',
+      'ACAD-7018',
+      'ACAD-8011',
       'ACAD-C3-MAT-017',
       'C6M-025',
       'C7M-004',
@@ -287,8 +335,8 @@ describe('combined verified Academic pool (Classes 3–10, thirty-one subjects)'
     ]);
   });
 
-  it('derives 973 chapters with the right per-class/subject counts', () => {
-    expect(PUBLIC_ACADEMIC_CHAPTERS).toHaveLength(973);
+  it('derives 1,183 chapters with the right per-class/subject counts', () => {
+    expect(PUBLIC_ACADEMIC_CHAPTERS).toHaveLength(1183);
     for (const [key, want] of Object.entries(PER_CLASS_SUBJECT)) {
       const [classId, subjectId] = key.split('/');
       const chapters = publicAcademicChaptersFor(classId, subjectId);
@@ -310,9 +358,9 @@ describe('combined verified Academic pool (Classes 3–10, thirty-one subjects)'
     }
   });
 
-  it('helpers: class/subject lists (102 rows) and honest empties', () => {
+  it('helpers: class/subject lists (136 rows) and honest empties', () => {
     const rows = publicAcademicClassSubjects();
-    expect(rows).toHaveLength(102);
+    expect(rows).toHaveLength(136);
     expect(rows).toContainEqual({
       classId: 'class-3',
       subjectId: 'bangla',
@@ -404,6 +452,56 @@ describe('combined verified Academic pool (Classes 3–10, thirty-one subjects)'
       questionCount: 31,
       chapterCount: 13,
     });
+    // Class 11 is live now (26 Nov 2026) — 374 questions, 210 chapters.
+    expect(rows).toContainEqual({
+      classId: 'class-11',
+      subjectId: 'physics',
+      questionCount: 24,
+      chapterCount: 13,
+    });
+    expect(rows).toContainEqual({
+      classId: 'class-11',
+      subjectId: 'bangla',
+      questionCount: 21,
+      chapterCount: 20,
+    });
+    expect(rows).toContainEqual({
+      classId: 'class-11',
+      subjectId: 'islamic-history',
+      questionCount: 20,
+      chapterCount: 11,
+    });
+    expect(rows).toContainEqual({
+      classId: 'class-11',
+      subjectId: 'english',
+      questionCount: 20,
+      chapterCount: 15,
+    });
+    // Class 12 shares the Class 11 pool — same rows, same counts.
+    expect(rows).toContainEqual({
+      classId: 'class-12',
+      subjectId: 'physics',
+      questionCount: 24,
+      chapterCount: 13,
+    });
+    expect(rows).toContainEqual({
+      classId: 'class-12',
+      subjectId: 'bangla',
+      questionCount: 21,
+      chapterCount: 20,
+    });
+    expect(rows).toContainEqual({
+      classId: 'class-12',
+      subjectId: 'islamic-history',
+      questionCount: 20,
+      chapterCount: 11,
+    });
+    expect(rows).toContainEqual({
+      classId: 'class-12',
+      subjectId: 'english',
+      questionCount: 20,
+      chapterCount: 15,
+    });
     // Class 7 Science has no chapter 3 in the regular pool — its only
     // two questions (SCI-005/006) are REJECTED with no complete
     // replacement — but the depth pool does have a chapter 3.
@@ -421,12 +519,55 @@ describe('combined verified Academic pool (Classes 3–10, thirty-one subjects)'
     expect(publicAcademicChaptersFor('class-10', 'math')[0].classId).toBe('class-10');
     expect(publicAcademicChaptersFor('class-9', 'bangla-1st')).toHaveLength(21);
     expect(publicAcademicChaptersFor('class-10', 'bangla-1st')).toHaveLength(21);
-    // The honest empty moved to Class 11 (no verified questions yet).
+    // The honest empty moved to Class 11 subjects with no verified
+    // questions — there is no plain 'math' at HSC level (higher-math
+    // is the real subject), and no 'science' either.
     expect(publicAcademicChaptersFor('class-11', 'math')).toEqual([]);
-    expect(publicAcademicChaptersFor('class-11', 'english')).toEqual([]);
+    expect(publicAcademicChaptersFor('class-11', 'science')).toEqual([]);
+    expect(publicAcademicChaptersFor('class-12', 'math')).toEqual([]);
     expect(publicAcademicChaptersFor('class-3', 'ict')).toEqual([]);
     expect(publicAcademicChaptersFor('class-9', 'english')).toEqual([]);
     expect(publicAcademicChaptersFor('class-10', 'english')).toEqual([]);
+    // Class 11 is live now (26 Nov 2026) — 374 questions, 210 chapters.
+    expect(publicAcademicChaptersFor('class-11', 'physics')).toHaveLength(13);
+    expect(publicAcademicChaptersFor('class-11', 'bangla')).toHaveLength(20);
+    expect(publicAcademicChaptersFor('class-11', 'english')).toHaveLength(15);
+    expect(publicAcademicChaptersFor('class-11', 'islamic-history')).toHaveLength(11);
+    expect(publicAcademicChaptersFor('class-11', 'psychology')).toHaveLength(12);
+    // Class 12 shares the Class 11 pool — same chapters, relabelled.
+    expect(publicAcademicChaptersFor('class-12', 'physics')).toHaveLength(13);
+    expect(publicAcademicChaptersFor('class-12', 'physics').map((c) => c.id)).toEqual(
+      publicAcademicChaptersFor('class-11', 'physics').map((c) => c.id),
+    );
+    expect(publicAcademicChaptersFor('class-12', 'physics')[0].classId).toBe('class-12');
+    expect(publicAcademicChaptersFor('class-12', 'bangla')).toHaveLength(20);
+    expect(publicAcademicChaptersFor('class-12', 'english')).toHaveLength(15);
+    // Class 11/12 edge cases: Chemistry units 2/3/4 and Physics units
+    // 2/5 exist in BOTH papers with DIFFERENT titles, so the two
+    // papers' chapters are distinct — 10 Chemistry chapters
+    // (6 numbered + 4 topical), 13 Physics chapters (9 + 4).
+    expect(publicAcademicChaptersFor('class-11', 'chemistry')).toHaveLength(10);
+    const ch11cheP1 = publicAcademicChaptersFor('class-11', 'chemistry').find(
+      (c) => c.id === 'acad-class-11-che-p1-chapter-3',
+    );
+    const ch11cheP2 = publicAcademicChaptersFor('class-11', 'chemistry').find(
+      (c) => c.id === 'acad-class-11-che-p2-chapter-3',
+    );
+    expect(ch11cheP1).toBeDefined();
+    expect(ch11cheP2).toBeDefined();
+    expect(ch11cheP1!.name).not.toBe(ch11cheP2!.name);
+    // English has Units (not chapters) at HSC level — Unit 1, 6, 12.
+    const ch11eng = publicAcademicChaptersFor('class-11', 'english');
+    expect(ch11eng.some((c) => c.id === 'acad-class-11-eng-unit-1')).toBe(true);
+    expect(ch11eng.some((c) => c.id === 'acad-class-11-eng-unit-6')).toBe(true);
+    expect(ch11eng.some((c) => c.id === 'acad-class-11-eng-unit-12')).toBe(true);
+    // 'মানসিক স্বাস্থ্য' is ONE merged Psychology chapter (its two
+    // questions cite 1st and 2nd papers) — never two copies.
+    const ch11psy = publicAcademicChaptersFor('class-11', 'psychology');
+    expect(ch11psy.filter((c) => c.name.includes('মানসিক স্বাস্থ্য'))).toHaveLength(1);
+    expect(
+      ch11psy.find((c) => c.name.includes('মানসিক স্বাস্থ্য'))!.questionCount,
+    ).toBe(2);
     expect(publicAcademicQuestionsForChapter('acad-class-3-mat-chapter-1')).toHaveLength(3);
     expect(publicAcademicQuestionsForChapter('acad-class-3-eng-unit-1')).toHaveLength(4);
     expect(publicAcademicQuestionsForChapter('acad-class-6-mat-depth-chapter-1')).toHaveLength(5);

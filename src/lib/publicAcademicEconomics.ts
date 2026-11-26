@@ -1,10 +1,12 @@
-// Eduvelto — Academic Economics practice questions (Class 9),
-// verified against the Dakhil NCTB books (review 26 Nov 2026).
+// Eduvelto — Academic Economics practice questions (Classes 9 and 11),
+// verified against the NCTB books (review 26 Nov 2026; see the Class 9 / Class 11 notes below).
 //
-// Static data ONLY — zero Firestore reads. The 22 questions are the
-// Academic Class 9 Economics drafts AFTER review (see
-// review-academic-c9-economics-geography-verdicts.json and
-// review-academic-c9-fixes-applied.md in
+// Static data ONLY — zero Firestore reads. The 44 questions are the
+// Academic Class 9 and Class 11 Economics drafts AFTER review (see
+// review-academic-c9-economics-geography-verdicts.json,
+// review-academic-c9-fixes-applied.md,
+// review-academic-c11-12-economics-verdicts.json and
+// review-academic-c11-12-fixes-applied.md in
 // ~/workspace/eduorbit/sprint-1week-2026-11-25/).
 //
 // CAVEAT: the Class 9 review was verified against DAKHIL editions —
@@ -13,6 +15,13 @@
 // references + the SSC syllabus topic. Whether Class 9-10 content
 // serves the general SSC audience or the Dakhil audience is an owner
 // decision still owed (after his exams).
+//
+// Class 11 NOTE: the Class 11 questions were verified for fact
+// correctness + on-syllabus (review 26 Nov 2026) — NO HSC book
+// exists in the workspace, so VERIFIED here does NOT mean
+// book-confirmed. A teacher with the actual HSC books should
+// spot-check before publication, especially the re-cited chapters
+// (see review-academic-c11-12-fixes-applied.md).
 //
 // HONESTY: these are ORIGINAL practice questions written for the
 // NCTB lessons — NOT board / university / previous-year questions.
@@ -35,10 +44,16 @@
 // question ONCE under classId 'class-9', and publicAcademic.ts /
 // questionPaper.ts / scripts/prerender.mjs map 'class-10' to the
 // Class 9 pool for these subjects.
+// The Class 11
+// questions also serve Class 12 (same combined class-11-12 draft
+// set — there is NO separate Class 12 set): the pool holds each
+// question ONCE under classId 'class-11', and publicAcademic.ts /
+// questionPaper.ts / scripts/prerender.mjs map 'class-12' to the
+// Class 11 pool for these subjects.
 
 import { type PublicAcademicQuestion } from './publicAcademic';
 
-/** All verified Academic Economics questions, Class 9 (in draft order). */
+/** All verified Academic Economics questions, Classes 9 and 11 (in draft order). */
 export const PUBLIC_ACADEMIC_ECONOMICS_QUESTIONS: PublicAcademicQuestion[] = [
   {
     id: "ACAD-1091",
@@ -479,5 +494,445 @@ export const PUBLIC_ACADEMIC_ECONOMICS_QUESTIONS: PublicAcademicQuestion[] = [
     explanation: "উৎপাদনের উপাদান ৪টি: ভূমি, শ্রম, মূলধন ও সংগঠন।",
     difficulty: "medium",
     sourceNote: "NCTB অর্থনীতি — উৎপাদন",
+  },
+  {
+    id: "ACAD-3011",
+    classId: "class-11",
+    subjectId: "economics",
+    chapterId: "acad-class-11-eco-topic-1",
+    chapterName: "ব্যষ্টিক অর্থনীতি",
+    unitNumber: 1,
+    topicId: "topic-1",
+    questionText: "ব্যষ্টিক অর্থনীতি কী নিয়ে আলোচনা করে?",
+    options: [
+      { letter: "A", text: "জাতীয় আয়" },
+      { letter: "B", text: "বেকারত্ব" },
+      { letter: "C", text: "মুদ্রাস্ফীতি" },
+      { letter: "D", text: "একক ভোক্তা ও ফার্ম" }
+    ],
+    correctLetter: "D",
+    explanation: "ব্যষ্টিক অর্থনীতিতে একক ভোক্তা, ফার্ম ও বাজারের আচরণ আলোচিত হয়।",
+    difficulty: "easy",
+    sourceNote: "NCTB HSC অর্থনীতি ১ম পত্র — অধ্যায় ১",
+  },
+  {
+    id: "ACAD-3012",
+    classId: "class-11",
+    subjectId: "economics",
+    chapterId: "acad-class-11-eco-topic-2",
+    chapterName: "উপযোগ",
+    unitNumber: 2,
+    topicId: "topic-2",
+    questionText: "প্রান্তিক উপযোগ কখন শূন্য হয়?",
+    options: [
+      { letter: "A", text: "মোট উপযোগ শূন্য হলে" },
+      { letter: "B", text: "দাম শূন্য হলে" },
+      { letter: "C", text: "মোট উপযোগ সর্বোচ্চ হলে" },
+      { letter: "D", text: "কখনোই নয়" }
+    ],
+    correctLetter: "C",
+    explanation: "মোট উপযোগ সর্বোচ্চ হলে প্রান্তিক উপযোগ শূন্য হয়; এরপর তা ঋণাত্মক হয়।",
+    difficulty: "medium",
+    sourceNote: "NCTB HSC অর্থনীতি ১ম পত্র — উপযোগ অধ্যায়",
+  },
+  {
+    id: "ACAD-3013",
+    classId: "class-11",
+    subjectId: "economics",
+    chapterId: "acad-class-11-eco-topic-3",
+    chapterName: "উৎপাদন",
+    unitNumber: 3,
+    topicId: "topic-3",
+    questionText: "স্বল্পকালে কোন উপাদান স্থির থাকে?",
+    options: [
+      { letter: "A", text: "শ্রম" },
+      { letter: "B", text: "স্থায়ী উপাদান" },
+      { letter: "C", text: "বিদ্যুৎ" },
+      { letter: "D", text: "কাঁচামাল" }
+    ],
+    correctLetter: "B",
+    explanation: "স্বল্পকালে স্থায়ী উপাদান (যন্ত্রপাতি, ভবন) স্থির থাকে; পরিবর্তনশীল উপাদান বদলায়।",
+    difficulty: "medium",
+    sourceNote: "NCTB HSC অর্থনীতি ১ম পত্র — উৎপাদন অধ্যায়",
+  },
+  {
+    id: "ACAD-3014",
+    classId: "class-11",
+    subjectId: "economics",
+    chapterId: "acad-class-11-eco-topic-4",
+    chapterName: "বাজার কাঠামো",
+    unitNumber: 4,
+    topicId: "topic-4",
+    questionText: "পূর্ণ প্রতিযোগিতায় ফার্ম কী?",
+    options: [
+      { letter: "A", text: "দাম গ্রহীতা" },
+      { letter: "B", text: "দাম নির্ধারক" },
+      { letter: "C", text: "অলিগোপলি" },
+      { letter: "D", text: "একচেটিয়া" }
+    ],
+    correctLetter: "A",
+    explanation: "পূর্ণ প্রতিযোগিতায় অনেক ফার্ম থাকায় প্রতিটি ফার্ম বাজারদাম গ্রহণ করে।",
+    difficulty: "medium",
+    sourceNote: "NCTB HSC অর্থনীতি ১ম পত্র — বাজার কাঠামো",
+  },
+  {
+    id: "ACAD-3015",
+    classId: "class-11",
+    subjectId: "economics",
+    chapterId: "acad-class-11-eco-topic-5",
+    chapterName: "জাতীয় আয়",
+    unitNumber: 5,
+    topicId: "topic-5",
+    questionText: "GDP-তে কোনটি গণনা করা হয় না?",
+    options: [
+      { letter: "A", text: "চাল উৎপাদন" },
+      { letter: "B", text: "রপ্তানি" },
+      { letter: "C", text: "সরকারি সেবা" },
+      { letter: "D", text: "গৃহিণীর গৃহকর্ম" }
+    ],
+    correctLetter: "D",
+    explanation: "বাজারে লেনদেন হয় না বলে গৃহকর্ম GDP-তে ধরা হয় না।",
+    difficulty: "medium",
+    sourceNote: "NCTB HSC অর্থনীতি ১ম পত্র — জাতীয় আয়",
+  },
+  {
+    id: "ACAD-3016",
+    classId: "class-11",
+    subjectId: "economics",
+    chapterId: "acad-class-11-eco-topic-6",
+    chapterName: "মুদ্রা",
+    unitNumber: 6,
+    topicId: "topic-6",
+    questionText: "মুদ্রার প্রধান কাজ কী?",
+    options: [
+      { letter: "A", text: "শুধু অলংকার" },
+      { letter: "B", text: "বিনিময়ের মাধ্যম" },
+      { letter: "C", text: "শুধু কর" },
+      { letter: "D", text: "শুধু সঞ্চয়" }
+    ],
+    correctLetter: "B",
+    explanation: "মুদ্রা বিনিময়ের মাধ্যম, মূল্যের পরিমাপক ও সঞ্চয়ের বাহন।",
+    difficulty: "easy",
+    sourceNote: "NCTB HSC অর্থনীতি ১ম পত্র — অধ্যায় ১০ (মুদ্রা ও ব্যাংক)",
+  },
+  {
+    id: "ACAD-3017",
+    classId: "class-11",
+    subjectId: "economics",
+    chapterId: "acad-class-11-eco-topic-7",
+    chapterName: "বাংলাদেশের অর্থনীতি",
+    unitNumber: 7,
+    topicId: "topic-7",
+    questionText: "বাংলাদেশের অর্থনীতির প্রধান খাত কোনটি?",
+    options: [
+      { letter: "A", text: "কৃষি খাত" },
+      { letter: "B", text: "শিল্প খাত" },
+      { letter: "C", text: "সেবা খাত" },
+      { letter: "D", text: "খনিজ খাত" }
+    ],
+    correctLetter: "C",
+    explanation: "GDP-তে সেবা খাতের অবদান সবচেয়ে বেশি; কর্মসংস্থানে কৃষি এখনো বড়।",
+    difficulty: "medium",
+    sourceNote: "NCTB HSC অর্থনীতি ২য় পত্র — বাংলাদেশের অর্থনীতি",
+  },
+  {
+    id: "ACAD-3018",
+    classId: "class-11",
+    subjectId: "economics",
+    chapterId: "acad-class-11-eco-topic-8",
+    chapterName: "দারিদ্র্য",
+    unitNumber: 8,
+    topicId: "topic-8",
+    questionText: "দারিদ্র্য পরিমাপের সাধারণ সূচক কোনটি?",
+    options: [
+      { letter: "A", text: "GDP" },
+      { letter: "B", text: "মাথাপিছু আয় শুধু" },
+      { letter: "C", text: "রপ্তানি" },
+      { letter: "D", text: "দারিদ্র্য সীমার নিচে জনসংখ্যার হার" }
+    ],
+    correctLetter: "D",
+    explanation: "দারিদ্র্য সীমার নিচে বসবাসকারী জনসংখ্যার অনুপাতই দারিদ্র্যের প্রধান সূচক।",
+    difficulty: "medium",
+    sourceNote: "NCTB HSC অর্থনীতি ২য় পত্র — দারিদ্র্য অধ্যায়",
+  },
+  {
+    id: "ACAD-3019",
+    classId: "class-11",
+    subjectId: "economics",
+    chapterId: "acad-class-11-eco-topic-9",
+    chapterName: "রাজস্ব নীতি",
+    unitNumber: 9,
+    topicId: "topic-9",
+    questionText: "সরকারি ব্যয় বাড়ালে সামগ্রিক চাহিদা —",
+    options: [
+      { letter: "A", text: "কমে" },
+      { letter: "B", text: "একই থাকে" },
+      { letter: "C", text: "শূন্য হয়" },
+      { letter: "D", text: "বাড়ে" }
+    ],
+    correctLetter: "D",
+    explanation: "সম্প্রসারণমূলক রাজস্ব নীতিতে সরকারি ব্যয় বাড়লে চাহিদা ও উৎপাদন বাড়ে।",
+    difficulty: "medium",
+    sourceNote: "NCTB HSC অর্থনীতি ১ম পত্র — রাজস্ব নীতি",
+  },
+  {
+    id: "ACAD-3020",
+    classId: "class-11",
+    subjectId: "economics",
+    chapterId: "acad-class-11-eco-topic-10",
+    chapterName: "আন্তর্জাতিক বাণিজ্য",
+    unitNumber: 10,
+    topicId: "topic-10",
+    questionText: "তুলনামূলক সুবিধা তত্ত্বের প্রবক্তা কে?",
+    options: [
+      { letter: "A", text: "মার্শাল" },
+      { letter: "B", text: "ডেভিড রিকার্ডো" },
+      { letter: "C", text: "অ্যাডাম স্মিথ" },
+      { letter: "D", text: "কেইনস" }
+    ],
+    correctLetter: "B",
+    explanation: "ডেভিড রিকার্ডোর তুলনামূলক সুবিধা তত্ত্ব আন্তর্জাতিক বাণিজ্যের ভিত্তি।",
+    difficulty: "medium",
+    sourceNote: "NCTB HSC অর্থনীতি ২য় পত্র — আন্তর্জাতিক বাণিজ্য",
+  },
+  {
+    id: "ACAD-8001",
+    classId: "class-11",
+    subjectId: "economics",
+    chapterId: "acad-class-11-eco-topic-1",
+    chapterName: "ব্যষ্টিক অর্থনীতি",
+    unitNumber: 1,
+    topicId: "topic-1",
+    questionText: "সমষ্টিক অর্থনীতি কী নিয়ে আলোচনা করে?",
+    options: [
+      { letter: "A", text: "জাতীয় আয়, মুদ্রাস্ফীতি, বেকারত্ব" },
+      { letter: "B", text: "একক ফার্ম" },
+      { letter: "C", text: "একটি বাজার" },
+      { letter: "D", text: "একক ভোক্তা" }
+    ],
+    correctLetter: "A",
+    explanation: "সমষ্টিক অর্থনীতিতে পুরো অর্থনীতির মোট চলক (GDP, মুদ্রাস্ফীতি) আলোচিত হয়।",
+    difficulty: "medium",
+    sourceNote: "NCTB HSC অর্থনীতি ১ম পত্র — ব্যষ্টিক ও সমষ্টিক",
+  },
+  {
+    id: "ACAD-8002",
+    classId: "class-11",
+    subjectId: "economics",
+    chapterId: "acad-class-11-eco-topic-2",
+    chapterName: "উপযোগ",
+    unitNumber: 2,
+    topicId: "topic-2",
+    questionText: "ক্রমহ্রাসমান প্রান্তিক উপযোগ বিধি কে দেন?",
+    options: [
+      { letter: "A", text: "মার্শাল" },
+      { letter: "B", text: "গসেন" },
+      { letter: "C", text: "কেইনস" },
+      { letter: "D", text: "রিকার্ডো" }
+    ],
+    correctLetter: "B",
+    explanation: "গসেনের প্রথম সূত্রই ক্রমহ্রাসমান প্রান্তিক উপযোগ বিধি।",
+    difficulty: "medium",
+    sourceNote: "NCTB HSC অর্থনীতি ১ম পত্র — উপযোগ",
+  },
+  {
+    id: "ACAD-8003",
+    classId: "class-11",
+    subjectId: "economics",
+    chapterId: "acad-class-11-eco-topic-3",
+    chapterName: "উৎপাদন",
+    unitNumber: 3,
+    topicId: "topic-3",
+    questionText: "ক্রমহ্রাসমান প্রান্তিক উৎপাদন বিধি কখন প্রযোজ্য?",
+    options: [
+      { letter: "A", text: "স্বল্পকালে" },
+      { letter: "B", text: "কখনো নয়" },
+      { letter: "C", text: "সবসময়" },
+      { letter: "D", text: "দীর্ঘকালে" }
+    ],
+    correctLetter: "A",
+    explanation: "স্বল্পকালে স্থায়ী উপাদান স্থির থাকায় পরিবর্তনশীল উপাদান বাড়ালে প্রান্তিক উৎপাদন কমে।",
+    difficulty: "medium",
+    sourceNote: "NCTB HSC অর্থনীতি ১ম পত্র — উৎপাদন",
+  },
+  {
+    id: "ACAD-8004",
+    classId: "class-11",
+    subjectId: "economics",
+    chapterId: "acad-class-11-eco-topic-4",
+    chapterName: "বাজার কাঠামো",
+    unitNumber: 4,
+    topicId: "topic-4",
+    questionText: "একচেটিয়া বাজারে ফার্ম কয়টি?",
+    options: [
+      { letter: "A", text: "একটি" },
+      { letter: "B", text: "দুটি" },
+      { letter: "C", text: "কয়েকটি" },
+      { letter: "D", text: "অনেক" }
+    ],
+    correctLetter: "A",
+    explanation: "একচেটিয়ায় একটিমাত্র বিক্রেতা থাকে; সে দাম নির্ধারণ করে।",
+    difficulty: "medium",
+    sourceNote: "NCTB HSC অর্থনীতি ১ম পত্র — বাজার কাঠামো",
+  },
+  {
+    id: "ACAD-8005",
+    classId: "class-11",
+    subjectId: "economics",
+    chapterId: "acad-class-11-eco-topic-5",
+    chapterName: "জাতীয় আয়",
+    unitNumber: 5,
+    topicId: "topic-5",
+    questionText: "GNP ও GDP-এর পার্থক্য কী?",
+    options: [
+      { letter: "A", text: "কর" },
+      { letter: "B", text: "বিদেশে অর্জিত নিট আয়" },
+      { letter: "C", text: "জনসংখ্যা" },
+      { letter: "D", text: "মুদ্রাস্ফীতি" }
+    ],
+    correctLetter: "B",
+    explanation: "GNP = GDP + বিদেশ থেকে নিট আয়।",
+    difficulty: "medium",
+    sourceNote: "NCTB HSC অর্থনীতি ১ম পত্র — জাতীয় আয়",
+  },
+  {
+    id: "ACAD-8006",
+    classId: "class-11",
+    subjectId: "economics",
+    chapterId: "acad-class-11-eco-topic-6",
+    chapterName: "মুদ্রা",
+    unitNumber: 6,
+    topicId: "topic-6",
+    questionText: "কেন্দ্রীয় ব্যাংক মুদ্রা সরবরাহ কমাতে কী করে?",
+    options: [
+      { letter: "A", text: "কর কমায়" },
+      { letter: "B", text: "সরকারি ব্যয় বাড়ায়" },
+      { letter: "C", text: "ব্যাংক হার বাড়ায়" },
+      { letter: "D", text: "ব্যাংক হার কমায়" }
+    ],
+    correctLetter: "C",
+    explanation: "ব্যাংক হার বাড়ালে ঋণ কমে; মুদ্রা সরবরাহ সংকুচিত হয়।",
+    difficulty: "medium",
+    sourceNote: "NCTB HSC অর্থনীতি ১ম পত্র — অধ্যায় ১০ (মুদ্রা ও ব্যাংক)",
+  },
+  {
+    id: "ACAD-8007",
+    classId: "class-11",
+    subjectId: "economics",
+    chapterId: "acad-class-11-eco-topic-7",
+    chapterName: "বাংলাদেশের অর্থনীতি",
+    unitNumber: 7,
+    topicId: "topic-7",
+    questionText: "বাংলাদেশের GDP-তে কৃষি খাতের অবদান প্রায় কত?",
+    options: [
+      { letter: "A", text: "১০–১২%" },
+      { letter: "B", text: "৫%" },
+      { letter: "C", text: "৫০%" },
+      { letter: "D", text: "৪০%" }
+    ],
+    correctLetter: "A",
+    explanation: "বাংলাদেশ অর্থনৈতিক সমীক্ষা ২০২৫ (বিবিএস, ২০২৪-২৫ অর্থবছর, সাময়িক হিসাব) অনুযায়ী জিডিপিতে কৃষি খাতের অবদান ১০.৯৪%; সেবা খাত সবচেয়ে বড় (৫১.৬২%)।",
+    difficulty: "medium",
+    sourceNote: "NCTB HSC অর্থনীতি ২য় পত্র — বাংলাদেশের অর্থনীতি",
+  },
+  {
+    id: "ACAD-8008",
+    classId: "class-11",
+    subjectId: "economics",
+    chapterId: "acad-class-11-eco-topic-8",
+    chapterName: "দারিদ্র্য",
+    unitNumber: 8,
+    topicId: "topic-8",
+    questionText: "চরম দারিদ্র্য বলতে কী বোঝায়?",
+    options: [
+      { letter: "A", text: "শুধু স্বাস্থ্য খারাপ" },
+      { letter: "B", text: "শুধু আয় কম" },
+      { letter: "C", text: "মৌলিক চাহিদা মেটাতে না পারা" },
+      { letter: "D", text: "শুধু শিক্ষা কম" }
+    ],
+    correctLetter: "C",
+    explanation: "চরম দারিদ্র্যে খাদ্য, বস্ত্র, বাসস্থানের মতো মৌলিক চাহিদাই মেটে না।",
+    difficulty: "medium",
+    sourceNote: "NCTB HSC অর্থনীতি ২য় পত্র — দারিদ্র্য",
+  },
+  {
+    id: "ACAD-8009",
+    classId: "class-11",
+    subjectId: "economics",
+    chapterId: "acad-class-11-eco-topic-9",
+    chapterName: "রাজস্ব নীতি",
+    unitNumber: 9,
+    topicId: "topic-9",
+    questionText: "মন্দার সময় সরকার কী নীতি নেয়?",
+    options: [
+      { letter: "A", text: "সংকোচনমূলক নীতি" },
+      { letter: "B", text: "সম্প্রসারণমূলক রাজস্ব নীতি" },
+      { letter: "C", text: "কর বাড়ায়" },
+      { letter: "D", text: "কিছুই করে না" }
+    ],
+    correctLetter: "B",
+    explanation: "মন্দায় সরকার ব্যয় বাড়ায় ও কর কমায় — সম্প্রসারণমূলক নীতি।",
+    difficulty: "medium",
+    sourceNote: "NCTB HSC অর্থনীতি ১ম পত্র — রাজস্ব নীতি",
+  },
+  {
+    id: "ACAD-8010",
+    classId: "class-11",
+    subjectId: "economics",
+    chapterId: "acad-class-11-eco-topic-10",
+    chapterName: "আন্তর্জাতিক বাণিজ্য",
+    unitNumber: 10,
+    topicId: "topic-10",
+    questionText: "পরম সুবিধা তত্ত্বের প্রবক্তা কে?",
+    options: [
+      { letter: "A", text: "কেইনস" },
+      { letter: "B", text: "ডেভিড রিকার্ডো" },
+      { letter: "C", text: "মার্শাল" },
+      { letter: "D", text: "অ্যাডাম স্মিথ" }
+    ],
+    correctLetter: "D",
+    explanation: "অ্যাডাম স্মিথের পরম সুবিধা তত্ত্বের পর রিকার্ডো তুলনামূলক সুবিধা তত্ত্ব দেন।",
+    difficulty: "medium",
+    sourceNote: "NCTB HSC অর্থনীতি ২য় পত্র — আন্তর্জাতিক বাণিজ্য",
+  },
+  {
+    id: "ACAD-8011",
+    classId: "class-11",
+    subjectId: "economics",
+    chapterId: "acad-class-11-eco-topic-11",
+    chapterName: "ভোক্তার উদ্বৃত্ত",
+    unitNumber: 11,
+    topicId: "topic-11",
+    questionText: "ভোক্তার উদ্বৃত্ত কী?",
+    options: [
+      { letter: "A", text: "আয় − ব্যয়" },
+      { letter: "B", text: "প্রকৃত দাম − ব্যয়" },
+      { letter: "C", text: "দিতে ইচ্ছুক দাম − প্রকৃত দাম" },
+      { letter: "D", text: "বিক্রয় − ক্রয়" }
+    ],
+    correctLetter: "C",
+    explanation: "ভোক্তা যে দাম দিতে রাজি তার চেয়ে কম দামে পেলে পার্থক্যটুকুই উদ্বৃত্ত।",
+    difficulty: "hard",
+    sourceNote: "NCTB HSC অর্থনীতি ১ম পত্র — ভোক্তার উদ্বৃত্ত",
+  },
+  {
+    id: "ACAD-8012",
+    classId: "class-11",
+    subjectId: "economics",
+    chapterId: "acad-class-11-eco-topic-12",
+    chapterName: "অর্থনৈতিক উন্নয়ন",
+    unitNumber: 12,
+    topicId: "topic-12",
+    questionText: "মানব উন্নয়ন সূচক (HDI) কী মাপে?",
+    options: [
+      { letter: "A", text: "আয়, শিক্ষা ও স্বাস্থ্য" },
+      { letter: "B", text: "শুধু জনসংখ্যা" },
+      { letter: "C", text: "শুধু GDP" },
+      { letter: "D", text: "শুধু আয়" }
+    ],
+    correctLetter: "A",
+    explanation: "HDI-তে আয়, শিক্ষা ও আয়ুষ্কাল — তিনটি মাত্রা মাপা হয়।",
+    difficulty: "medium",
+    sourceNote: "NCTB HSC অর্থনীতি ২য় পত্র — অর্থনৈতিক উন্নয়ন",
   },
 ];

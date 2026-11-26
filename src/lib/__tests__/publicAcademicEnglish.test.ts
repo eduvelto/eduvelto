@@ -3,38 +3,46 @@
 //
 // The English pool is the SINGLE verified source for English practice
 // in both the Question Maker and the Education Hub chapter practice.
-// These tests pin that it holds ONLY the 158 reviewed questions
-// (150 VERIFIED + 8 NEEDS-FIX with fixes applied: Class 3 24V/4F,
+// These tests pin that it holds ONLY the 178 reviewed questions
+// (165 VERIFIED + 13 NEEDS-FIX with fixes applied: Class 3 24V/4F,
 // Class 4 26V/1F, Class 5 27V/1F, Class 6 27V/1F, Class 7 26V/1F,
-// Class 8 20V/0F), in the right chapters, with
+// Class 8 20V/0F, Class 11 15V/5F), in the right chapters, with
 // exactly one correct answer each. The combined-pool helpers live in
 // publicAcademic.test.ts.
 import { describe, it, expect } from 'vitest';
 import { PUBLIC_ACADEMIC_ENGLISH_QUESTIONS } from '../publicAcademicEnglish';
 
-describe('Academic verified pool — English (Classes 3–8)', () => {
-  it('holds exactly the 158 reviewed questions (150 VERIFIED + 8 fixed)', () => {
-    expect(PUBLIC_ACADEMIC_ENGLISH_QUESTIONS).toHaveLength(158);
-    expect(new Set(PUBLIC_ACADEMIC_ENGLISH_QUESTIONS.map((q) => q.id)).size).toBe(158);
+describe('Academic verified pool — English (Classes 3–8 and 11)', () => {
+  it('holds exactly the 178 reviewed questions (165 VERIFIED + 13 fixed)', () => {
+    expect(PUBLIC_ACADEMIC_ENGLISH_QUESTIONS).toHaveLength(178);
+    expect(new Set(PUBLIC_ACADEMIC_ENGLISH_QUESTIONS.map((q) => q.id)).size).toBe(178);
   });
 
   it('every question is MCQ with 4 distinct options and one valid correct letter', () => {
+    // One Class 11 English question is a general-knowledge item, NOT
+    // an English For Today lesson fact — its sourceNote honestly has
+    // no 'NCTB'.
     for (const q of PUBLIC_ACADEMIC_ENGLISH_QUESTIONS) {
       expect(q.subjectId).toBe('english');
-      expect(['class-3', 'class-4', 'class-5', 'class-6', 'class-7', 'class-8']).toContain(q.classId);
+      expect(['class-3', 'class-4', 'class-5', 'class-6', 'class-7', 'class-8', 'class-11']).toContain(q.classId);
       expect(q.options).toHaveLength(4);
       expect(new Set(q.options.map((o) => o.text)).size).toBe(4);
       expect(q.options.map((o) => o.letter)).toEqual(['A', 'B', 'C', 'D']);
       expect(['A', 'B', 'C', 'D']).toContain(q.correctLetter);
       expect(q.questionText.trim().length).toBeGreaterThan(0);
       expect(q.explanation.trim().length).toBeGreaterThan(0);
-      expect(['easy', 'medium']).toContain(q.difficulty);
+      expect(['easy', 'medium', 'hard']).toContain(q.difficulty);
       expect(q.sourceNote).toContain('English');
-      expect(q.sourceNote).toContain('NCTB');
+      if (q.id === 'ACAD-7014') {
+        expect(q.sourceNote).not.toContain('NCTB');
+        expect(q.sourceNote).toContain('Standard nutrition reference');
+      } else {
+        expect(q.sourceNote).toContain('NCTB');
+      }
     }
   });
 
-  it('covers 93 NCTB units: Class 3 has 7 units x 4, Class 4 has 18 units, Class 5 has 20 units, Class 6 has 28 lessons x 1, Class 7 has 9 units, Class 8 has 11 units', () => {
+  it('covers 108 NCTB units: Class 3 has 7 units x 4, Class 4 has 18 units, Class 5 has 20 units, Class 6 has 28 lessons x 1, Class 7 has 9 units, Class 8 has 11 units, Class 11 has 3 units + 12 topical chapters', () => {
     const byClass = (classId: string) =>
       PUBLIC_ACADEMIC_ENGLISH_QUESTIONS.filter((q) => q.classId === classId);
     expect(byClass('class-3')).toHaveLength(28);
@@ -43,11 +51,13 @@ describe('Academic verified pool — English (Classes 3–8)', () => {
     expect(byClass('class-6')).toHaveLength(28);
     expect(byClass('class-7')).toHaveLength(27);
     expect(byClass('class-8')).toHaveLength(20);
+    expect(byClass('class-11')).toHaveLength(20);
     const chapters = new Set(PUBLIC_ACADEMIC_ENGLISH_QUESTIONS.map((q) => q.chapterId));
-    expect(chapters.size).toBe(93);
+    expect(chapters.size).toBe(108);
     for (const id of chapters) {
       // Classes 3–5 use "Unit N", Class 6 uses "Lesson N", Classes 7–8 use "Unit N".
-      expect(id).toMatch(/^acad-class-[345]-eng-unit-\d+$|^acad-class-6-eng-lesson-\d+$|^acad-class-[78]-eng-unit-\d+$/);
+      // Class 11 uses "Unit N" for the three NCTB units and "Topic N" for topical chapters.
+      expect(id).toMatch(/^acad-class-[345]-eng-unit-\d+$|^acad-class-6-eng-lesson-\d+$|^acad-class-[78]-eng-unit-\d+$|^acad-class-11-eng-unit-\d+$|^acad-class-11-eng-topic-\d+$/);
     }
     const c3Chapters = new Set(byClass('class-3').map((q) => q.chapterId));
     expect(c3Chapters.size).toBe(7);
@@ -74,6 +84,14 @@ describe('Academic verified pool — English (Classes 3–8)', () => {
     }
     expect(byClass('class-8').filter((q) => q.chapterId === 'acad-class-8-eng-unit-10')).toHaveLength(1);
     expect(byClass('class-8').filter((q) => q.chapterId === 'acad-class-8-eng-unit-11')).toHaveLength(1);
+    // Class 11: 15 chapters — 3 NCTB units (Unit 1, 6, 12, one
+    // question each) + 12 topical chapters (17 questions).
+    const c11Chapters = new Set(byClass('class-11').map((q) => q.chapterId));
+    expect(c11Chapters.size).toBe(15);
+    expect(c11Chapters.has('acad-class-11-eng-unit-1')).toBe(true);
+    expect(c11Chapters.has('acad-class-11-eng-unit-6')).toBe(true);
+    expect(c11Chapters.has('acad-class-11-eng-unit-12')).toBe(true);
+    expect([...c11Chapters].filter((id) => id.includes('-topic-'))).toHaveLength(12);
   });
 
   it('the 8 NEEDS-FIX items carry their fixed content', () => {
@@ -132,8 +150,9 @@ describe('Academic verified pool — English (Classes 3–8)', () => {
       'class-6': { A: 7, B: 7, C: 7, D: 7 },
       'class-7': { A: 7, B: 7, C: 7, D: 6 },
       'class-8': { A: 5, B: 5, C: 5, D: 5 },
+      'class-11': { A: 5, B: 5, C: 5, D: 5 },
     };
-    for (const classId of ['class-3', 'class-4', 'class-5', 'class-6', 'class-7', 'class-8'] as const) {
+    for (const classId of ['class-3', 'class-4', 'class-5', 'class-6', 'class-7', 'class-8', 'class-11'] as const) {
       const counts: Record<string, number> = { A: 0, B: 0, C: 0, D: 0 };
       for (const q of PUBLIC_ACADEMIC_ENGLISH_QUESTIONS) {
         if (q.classId === classId) counts[q.correctLetter] += 1;

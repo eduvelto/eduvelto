@@ -1,18 +1,27 @@
-// Eduvelto — Academic Bangla practice questions (Classes 3–8),
+// Eduvelto — Academic Bangla practice questions (Classes 3–8 and 11),
 // verified against the NCTB books (review 26 Nov 2026).
 //
-// Static data ONLY — zero Firestore reads. The 146 questions are the
-// Academic Class 3–8 Bangla drafts AFTER review (see
+// Static data ONLY — zero Firestore reads. The 167 questions are the
+// Academic Class 3–8 and Class 11 Bangla drafts AFTER review (see
 // review-academic-c3-bangla-verdicts.json,
 // review-academic-c4-bangla-verdicts.json,
 // review-academic-c5-bangla-verdicts.json,
 // review-academic-c6-bangla-verdicts.json,
 // review-academic-c7-bangla-verdicts.json,
-// review-academic-c8-bangla-verdicts.json and
+// review-academic-c8-bangla-verdicts.json,
+// review-academic-c11-12-bangla-verdicts.json and
 // review-academic-c3-fixes-applied.md, review-academic-c4-fixes-applied.md,
 // review-academic-c5-fixes-applied.md, review-academic-c6-fixes-applied.md,
-// review-academic-c7-fixes-applied.md, review-academic-c8-fixes-applied.md in
+// review-academic-c7-fixes-applied.md, review-academic-c8-fixes-applied.md,
+// review-academic-c11-12-fixes-applied.md in
 // ~/workspace/eduorbit/sprint-1week-2026-11-25/).
+//
+// Class 11 NOTE: the Class 11 questions were verified for fact
+// correctness + on-syllabus (review 26 Nov 2026) — NO HSC book
+// exists in the workspace, so VERIFIED here does NOT mean
+// book-confirmed. A teacher with the actual HSC books should
+// spot-check before publication, especially the re-cited chapters
+// (see review-academic-c11-12-fixes-applied.md).
 //
 // HONESTY: these are ORIGINAL practice questions written for the
 // NCTB lessons — NOT board / university / previous-year questions.
@@ -35,7 +44,7 @@
 
 import { type PublicAcademicQuestion } from './publicAcademic';
 
-/** All verified Academic Bangla questions, in draft order (Class 3, then 4, then 5, then 6, then 7, then 8). */
+/** All verified Academic Bangla questions, in draft order (Class 3, then 4, then 5, then 6, then 7, then 8, then 11). */
 export const PUBLIC_ACADEMIC_BANGLA_QUESTIONS: PublicAcademicQuestion[] = [
   {
     id: "ACAD-C3-BAN-001",
@@ -2956,5 +2965,425 @@ export const PUBLIC_ACADEMIC_BANGLA_QUESTIONS: PublicAcademicQuestion[] = [
     explanation: "'নারী' কবিতায় বলা হয়েছে — নারী ও পুরুষের সমান মর্যাদা আছে।",
     difficulty: "medium",
     sourceNote: "সাহিত্য কণিকা, অষ্টম শ্রেণি (NCTB), কবিতা: নারী",
+  },
+  {
+    id: "ACAD-2001",
+    classId: "class-11",
+    subjectId: "bangla",
+    chapterId: "acad-class-11-ban-topic-1",
+    chapterName: "গদ্য — অপরিচিতা",
+    unitNumber: 1,
+    topicId: "topic-1",
+    questionText: "‘অপরিচিতা’ গল্পের লেখক কে?",
+    options: [
+      { letter: "A", text: "বঙ্কিমচন্দ্র চট্টোপাধ্যায়" },
+      { letter: "B", text: "রবীন্দ্রনাথ ঠাকুর" },
+      { letter: "C", text: "বিভূতিভূষণ বন্দ্যোপাধ্যায়" },
+      { letter: "D", text: "শরৎচন্দ্র চট্টোপাধ্যায়" }
+    ],
+    correctLetter: "B",
+    explanation: "‘অপরিচিতা’ রবীন্দ্রনাথ ঠাকুরের গল্প; অনুপম ও কল্যাণীর কাহিনি এর বিষয়।",
+    difficulty: "medium",
+    sourceNote: "NCTB সাহিত্যপাঠ, একাদশ-দ্বাদশ শ্রেণি — গদ্য: অপরিচিতা",
+  },
+  {
+    id: "ACAD-2002",
+    classId: "class-11",
+    subjectId: "bangla",
+    chapterId: "acad-class-11-ban-topic-2",
+    chapterName: "গদ্য — বিলাসী",
+    unitNumber: 2,
+    topicId: "topic-2",
+    questionText: "‘বিলাসী’ গল্পে বিলাসীর স্বামী কে?",
+    options: [
+      { letter: "A", text: "অনুপম" },
+      { letter: "B", text: "গদাধর" },
+      { letter: "C", text: "নিবারণ" },
+      { letter: "D", text: "মৃত্যুঞ্জয়" }
+    ],
+    correctLetter: "D",
+    explanation: "শরৎচন্দ্রের ‘বিলাসী’ গল্পে মৃত্যুঞ্জয় ও বিলাসীর প্রেম ও ত্যাগের কাহিনি বলা হয়েছে।",
+    difficulty: "medium",
+    sourceNote: "NCTB সাহিত্যপাঠ, একাদশ-দ্বাদশ শ্রেণি — গদ্য: বিলাসী",
+  },
+  {
+    id: "ACAD-2003",
+    classId: "class-11",
+    subjectId: "bangla",
+    chapterId: "acad-class-11-ban-topic-3",
+    chapterName: "কবিতা — সোনার তরী",
+    unitNumber: 3,
+    topicId: "topic-3",
+    questionText: "‘সোনার তরী’ কবিতার কবি কে?",
+    options: [
+      { letter: "A", text: "রবীন্দ্রনাথ ঠাকুর" },
+      { letter: "B", text: "জসীমউদ্দীন" },
+      { letter: "C", text: "জীবনানন্দ দাশ" },
+      { letter: "D", text: "কাজী নজরুল ইসলাম" }
+    ],
+    correctLetter: "A",
+    explanation: "‘সোনার তরী’ রবীন্দ্রনাথের কবিতা; জীবনের ক্ষণস্থায়িত্ব ও কর্মের স্থায়িত্ব এর ভাব।",
+    difficulty: "medium",
+    sourceNote: "NCTB সাহিত্যপাঠ, একাদশ-দ্বাদশ শ্রেণি — কবিতা: সোনার তরী",
+  },
+  {
+    id: "ACAD-2004",
+    classId: "class-11",
+    subjectId: "bangla",
+    chapterId: "acad-class-11-ban-topic-4",
+    chapterName: "কবিতা — বিদ্রোহী",
+    unitNumber: 4,
+    topicId: "topic-4",
+    questionText: "‘বিদ্রোহী’ কবিতার কবি কে?",
+    options: [
+      { letter: "A", text: "আল মাহমুদ" },
+      { letter: "B", text: "সুকান্ত ভট্টাচার্য" },
+      { letter: "C", text: "কাজী নজরুল ইসলাম" },
+      { letter: "D", text: "রবীন্দ্রনাথ ঠাকুর" }
+    ],
+    correctLetter: "C",
+    explanation: "‘বিদ্রোহী’ (১৯২২) নজরুলের বিখ্যাত কবিতা; শোষণের বিরুদ্ধে বিদ্রোহের ঘোষণা।",
+    difficulty: "easy",
+    sourceNote: "NCTB সাহিত্যপাঠ, একাদশ-দ্বাদশ শ্রেণি — কবিতা: বিদ্রোহী",
+  },
+  {
+    id: "ACAD-2005",
+    classId: "class-11",
+    subjectId: "bangla",
+    chapterId: "acad-class-11-ban-topic-5",
+    chapterName: "কবিতা — সুচেতনা",
+    unitNumber: 5,
+    topicId: "topic-5",
+    questionText: "‘সুচেতনা’ কবিতার কবি কে?",
+    options: [
+      { letter: "A", text: "বুদ্ধদেব বসু" },
+      { letter: "B", text: "সুধীন্দ্রনাথ দত্ত" },
+      { letter: "C", text: "জীবনানন্দ দাশ" },
+      { letter: "D", text: "অমিয় চক্রবর্তী" }
+    ],
+    correctLetter: "C",
+    explanation: "‘সুচেতনা’ জীবনানন্দ দাশের কবিতা; এটি ‘বনলতা সেন’ কাব্যগ্রন্থের অন্তর্গত এবং বর্তমান এইচএসসি পাঠ্যসূচির পদ্য তালিকায় আছে।",
+    difficulty: "medium",
+    sourceNote: "NCTB সাহিত্যপাঠ, একাদশ-দ্বাদশ শ্রেণি — কবিতা: সুচেতনা (এইচএসসি ২০২৭ পাঠ্যসূচি, পদ্য ০৫)",
+  },
+  {
+    id: "ACAD-2006",
+    classId: "class-11",
+    subjectId: "bangla",
+    chapterId: "acad-class-11-ban-topic-6",
+    chapterName: "নাটক — সিরাজউদ্দৌলা",
+    unitNumber: 6,
+    topicId: "topic-6",
+    questionText: "‘সিরাজউদ্দৌলা’ নাটকে সিরাজের প্রধান সেনাপতি কে ছিলেন?",
+    options: [
+      { letter: "A", text: "মীর জাফর" },
+      { letter: "B", text: "রায়দুর্লভ" },
+      { letter: "C", text: "জগৎশেঠ" },
+      { letter: "D", text: "উমিচাঁদ" }
+    ],
+    correctLetter: "A",
+    explanation: "মীর জাফর ছিলেন সিরাজের প্রধান সেনাপতি; পলাশীর যুদ্ধে তাঁর বিশ্বাসঘাতকতা নবাবের পরাজয়ের কারণ হয়।",
+    difficulty: "medium",
+    sourceNote: "NCTB সহপাঠ, একাদশ-দ্বাদশ শ্রেণি — নাটক: সিরাজউদ্দৌলা",
+  },
+  {
+    id: "ACAD-2007",
+    classId: "class-11",
+    subjectId: "bangla",
+    chapterId: "acad-class-11-ban-topic-7",
+    chapterName: "উপন্যাস — লালসালু",
+    unitNumber: 7,
+    topicId: "topic-7",
+    questionText: "‘লালসালু’ উপন্যাসে মজিদ কোন গ্রামে আসে?",
+    options: [
+      { letter: "A", text: "কাশীপুর" },
+      { letter: "B", text: "মহব্বতনগর" },
+      { letter: "C", text: "গোপালপুর" },
+      { letter: "D", text: "শ্যামপুর" }
+    ],
+    correctLetter: "B",
+    explanation: "মজিদ মহব্বতনগর গ্রামে এসে সালুর মাজারকে কেন্দ্র করে ধর্মীয় প্রভাব বিস্তার করে।",
+    difficulty: "medium",
+    sourceNote: "NCTB সহপাঠ, একাদশ-দ্বাদশ শ্রেণি — উপন্যাস: লালসালু",
+  },
+  {
+    id: "ACAD-2008",
+    classId: "class-11",
+    subjectId: "bangla",
+    chapterId: "acad-class-11-ban-topic-8",
+    chapterName: "ব্যাকরণ — সমাস",
+    unitNumber: 8,
+    topicId: "topic-8",
+    questionText: "'রাজধানী' কোন সমাস?",
+    options: [
+      { letter: "A", text: "তৎপুরুষ" },
+      { letter: "B", text: "বহুব্রীহি" },
+      { letter: "C", text: "দ্বিগু" },
+      { letter: "D", text: "কর্মধারয়" }
+    ],
+    correctLetter: "A",
+    explanation: "'রাজধানী' তৎপুরুষ সমাস (রাজার ধানী)।",
+    difficulty: "medium",
+    sourceNote: "NCTB HSC বাংলা ২য় পত্র — ব্যাকরণ: সমাস",
+  },
+  {
+    id: "ACAD-2009",
+    classId: "class-11",
+    subjectId: "bangla",
+    chapterId: "acad-class-11-ban-topic-9",
+    chapterName: "ব্যাকরণ — বাক্য শুদ্ধি",
+    unitNumber: 9,
+    topicId: "topic-9",
+    questionText: "কোন বাক্যটি শুদ্ধ?",
+    options: [
+      { letter: "A", text: "তিনি সভায় উপস্থিত ছিলাম।" },
+      { letter: "B", text: "তিনি সভায় উপস্থিত ছিল।" },
+      { letter: "C", text: "তিনি সভায় উপস্থিত আছিল।" },
+      { letter: "D", text: "তিনি সভায় উপস্থিত ছিলেন।" }
+    ],
+    correctLetter: "D",
+    explanation: "কর্তা ‘তিনি’ অনুযায়ী ক্রিয়া ‘ছিলেন’ শুদ্ধ।",
+    difficulty: "medium",
+    sourceNote: "NCTB HSC বাংলা ২য় পত্র — ব্যাকরণ: বাক্য শুদ্ধি",
+  },
+  {
+    id: "ACAD-2010",
+    classId: "class-11",
+    subjectId: "bangla",
+    chapterId: "acad-class-11-ban-topic-10",
+    chapterName: "প্রবন্ধ — যৌবনের গান",
+    unitNumber: 10,
+    topicId: "topic-10",
+    questionText: "‘যৌবনের গান’ প্রবন্ধের লেখক কে?",
+    options: [
+      { letter: "A", text: "প্রমথ চৌধুরী" },
+      { letter: "B", text: "মোতাহের হোসেন চৌধুরী" },
+      { letter: "C", text: "আবুল ফজল" },
+      { letter: "D", text: "কাজী নজরুল ইসলাম" }
+    ],
+    correctLetter: "D",
+    explanation: "‘যৌবনের গান’ নজরুলের প্রবন্ধ; যৌবনের শক্তি ও সম্ভাবনার জয়গান এতে আছে।",
+    difficulty: "easy",
+    sourceNote: "NCTB সাহিত্যপাঠ, একাদশ-দ্বাদশ শ্রেণি — প্রবন্ধ: যৌবনের গান",
+  },
+  {
+    id: "ACAD-7001",
+    classId: "class-11",
+    subjectId: "bangla",
+    chapterId: "acad-class-11-ban-topic-11",
+    chapterName: "গদ্য — মাসি-পিসি",
+    unitNumber: 11,
+    topicId: "topic-11",
+    questionText: "‘মাসি-পিসি’ গল্পের লেখক কে?",
+    options: [
+      { letter: "A", text: "মানিক বন্দ্যোপাধ্যায়" },
+      { letter: "B", text: "তারাশঙ্কর বন্দ্যোপাধ্যায়" },
+      { letter: "C", text: "বিভূতিভূষণ বন্দ্যোপাধ্যায়" },
+      { letter: "D", text: "শরৎচন্দ্র চট্টোপাধ্যায়" }
+    ],
+    correctLetter: "A",
+    explanation: "‘মাসি-পিসি’ মানিক বন্দ্যোপাধ্যায়ের গল্প; আহ্লাদীর জীবনসংগ্রাম এর বিষয়।",
+    difficulty: "medium",
+    sourceNote: "NCTB সাহিত্যপাঠ — গদ্য: মাসি-পিসি",
+  },
+  {
+    id: "ACAD-7002",
+    classId: "class-11",
+    subjectId: "bangla",
+    chapterId: "acad-class-11-ban-topic-12",
+    chapterName: "গদ্য — আহ্বান",
+    unitNumber: 12,
+    topicId: "topic-12",
+    questionText: "‘আহ্বান’ গল্পের লেখক কে?",
+    options: [
+      { letter: "A", text: "বিভূতিভূষণ বন্দ্যোপাধ্যায়" },
+      { letter: "B", text: "শরৎচন্দ্র চট্টোপাধ্যায়" },
+      { letter: "C", text: "মানিক বন্দ্যোপাধ্যায়" },
+      { letter: "D", text: "বনফুল" }
+    ],
+    correctLetter: "A",
+    explanation: "‘আহ্বান’ বিভূতিভূষণের গল্প; গ্রামের মানুষের সরল স্নেহ এর বিষয়।",
+    difficulty: "medium",
+    sourceNote: "NCTB সাহিত্যপাঠ — গদ্য: আহ্বান",
+  },
+  {
+    id: "ACAD-7003",
+    classId: "class-11",
+    subjectId: "bangla",
+    chapterId: "acad-class-11-ban-topic-13",
+    chapterName: "কবিতা — এই পৃথিবীতে এক স্থান আছে",
+    unitNumber: 13,
+    topicId: "topic-13",
+    questionText: "‘এই পৃথিবীতে এক স্থান আছে’ কবিতার কবি কে?",
+    options: [
+      { letter: "A", text: "সুকান্ত ভট্টাচার্য" },
+      { letter: "B", text: "রবীন্দ্রনাথ ঠাকুর" },
+      { letter: "C", text: "জীবনানন্দ দাশ" },
+      { letter: "D", text: "জসীমউদ্দীন" }
+    ],
+    correctLetter: "C",
+    explanation: "জীবনানন্দের কবিতায় বাংলার প্রকৃতির সৌন্দর্য ফুটে উঠেছে।",
+    difficulty: "medium",
+    sourceNote: "NCTB সাহিত্যপাঠ — কবিতা: এই পৃথিবীতে এক স্থান আছে",
+  },
+  {
+    id: "ACAD-7004",
+    classId: "class-11",
+    subjectId: "bangla",
+    chapterId: "acad-class-11-ban-topic-14",
+    chapterName: "কবিতা — তাহারেই পড়ে মনে",
+    unitNumber: 14,
+    topicId: "topic-14",
+    questionText: "‘তাহারেই পড়ে মনে’ কবিতার কবি কে?",
+    options: [
+      { letter: "A", text: "কামিনী রায়" },
+      { letter: "B", text: "সুফিয়া কামাল" },
+      { letter: "C", text: "আশাপূর্ণা দেবী" },
+      { letter: "D", text: "বেগম রোকেয়া" }
+    ],
+    correctLetter: "B",
+    explanation: "সুফিয়া কামালের কবিতায় বসন্তের স্মৃতি ও প্রিয়জনের অভাবের কথা আছে।",
+    difficulty: "medium",
+    sourceNote: "NCTB সাহিত্যপাঠ — কবিতা: তাহারেই পড়ে মনে",
+  },
+  {
+    id: "ACAD-7005",
+    classId: "class-11",
+    subjectId: "bangla",
+    chapterId: "acad-class-11-ban-topic-15",
+    chapterName: "কবিতা — ফেব্রুয়ারি ১৯৬৯",
+    unitNumber: 15,
+    topicId: "topic-15",
+    questionText: "‘ফেব্রুয়ারি ১৯৬৯’ কবিতার কবি কে?",
+    options: [
+      { letter: "A", text: "সৈয়দ শামসুল হক" },
+      { letter: "B", text: "শামসুর রাহমান" },
+      { letter: "C", text: "নির্মলেন্দু গুণ" },
+      { letter: "D", text: "আল মাহমুদ" }
+    ],
+    correctLetter: "B",
+    explanation: "শামসুর রাহমানের কবিতায় ঊনসত্তরের গণঅভ্যুত্থানের চেতনা আছে।",
+    difficulty: "medium",
+    sourceNote: "NCTB সাহিত্যপাঠ — কবিতা: ফেব্রুয়ারি ১৯৬৯",
+  },
+  {
+    id: "ACAD-7006",
+    classId: "class-11",
+    subjectId: "bangla",
+    chapterId: "acad-class-11-ban-topic-16",
+    chapterName: "প্রবন্ধ — সাহিত্যে খেলা",
+    unitNumber: 16,
+    topicId: "topic-16",
+    questionText: "‘সাহিত্যে খেলা’ প্রবন্ধের লেখক কে?",
+    options: [
+      { letter: "A", text: "আবুল ফজল" },
+      { letter: "B", text: "প্রমথ চৌধুরী" },
+      { letter: "C", text: "মোতাহের হোসেন চৌধুরী" },
+      { letter: "D", text: "গোলাম মোস্তফা" }
+    ],
+    correctLetter: "B",
+    explanation: "প্রমথ চৌধুরীর প্রবন্ধে সাহিত্যকে আনন্দের খেলা বলা হয়েছে।",
+    difficulty: "medium",
+    sourceNote: "NCTB সাহিত্যপাঠ — প্রবন্ধ: সাহিত্যে খেলা",
+  },
+  {
+    id: "ACAD-7007",
+    classId: "class-11",
+    subjectId: "bangla",
+    chapterId: "acad-class-11-ban-topic-17",
+    chapterName: "গদ্য — আমার পথ",
+    unitNumber: 17,
+    topicId: "topic-17",
+    questionText: "‘আমার পথ’ প্রবন্ধের লেখক কে?",
+    options: [
+      { letter: "A", text: "প্রমথ চৌধুরী" },
+      { letter: "B", text: "মোতাহের হোসেন চৌধুরী" },
+      { letter: "C", text: "কাজী নজরুল ইসলাম" },
+      { letter: "D", text: "রবীন্দ্রনাথ ঠাকুর" }
+    ],
+    correctLetter: "C",
+    explanation: "নজরুলের ‘আমার পথ’ প্রবন্ধে সত্য ও ন্যায়ের পথে চলার আহ্বান আছে।",
+    difficulty: "medium",
+    sourceNote: "NCTB সাহিত্যপাঠ — প্রবন্ধ: আমার পথ",
+  },
+  {
+    id: "ACAD-7008",
+    classId: "class-11",
+    subjectId: "bangla",
+    chapterId: "acad-class-11-ban-topic-18",
+    chapterName: "ব্যাকরণ — কারক",
+    unitNumber: 18,
+    topicId: "topic-18",
+    questionText: "‘বনে বাঘ থাকে’ — ‘বনে’ কোন কারক?",
+    options: [
+      { letter: "A", text: "করণ" },
+      { letter: "B", text: "অপাদান" },
+      { letter: "C", text: "কর্ম" },
+      { letter: "D", text: "অধিকরণ" }
+    ],
+    correctLetter: "D",
+    explanation: "যেখানে ক্রিয়া ঘটে তা অধিকরণ কারক।",
+    difficulty: "medium",
+    sourceNote: "NCTB HSC বাংলা ২য় পত্র — কারক",
+  },
+  {
+    id: "ACAD-7010",
+    classId: "class-11",
+    subjectId: "bangla",
+    chapterId: "acad-class-11-ban-topic-19",
+    chapterName: "ব্যাকরণ — সন্ধি",
+    unitNumber: 19,
+    topicId: "topic-19",
+    questionText: "‘নরেশ’ কোন সন্ধির উদাহরণ?",
+    options: [
+      { letter: "A", text: "স্বরসন্ধি" },
+      { letter: "B", text: "বিসর্গসন্ধি" },
+      { letter: "C", text: "ব্যঞ্জনসন্ধি" },
+      { letter: "D", text: "নিপাতনে সিদ্ধ" }
+    ],
+    correctLetter: "A",
+    explanation: "নর + ঈশ = নরেশ; অ + ঈ = এ হওয়ায় স্বরসন্ধি।",
+    difficulty: "medium",
+    sourceNote: "NCTB HSC বাংলা ২য় পত্র — সন্ধি",
+  },
+  {
+    id: "ACAD-7011",
+    classId: "class-11",
+    subjectId: "bangla",
+    chapterId: "acad-class-11-ban-topic-20",
+    chapterName: "রচনা — সারাংশ",
+    unitNumber: 20,
+    topicId: "topic-20",
+    questionText: "সারাংশ লেখার মূল নিয়ম কী?",
+    options: [
+      { letter: "A", text: "নিজের মত যোগ করা" },
+      { letter: "B", text: "পুরো রচনা তোলা" },
+      { letter: "C", text: "মূলভাব সংক্ষেপে লেখা" },
+      { letter: "D", text: "উদাহরণ বাড়ানো" }
+    ],
+    correctLetter: "C",
+    explanation: "সারাংশে মূলভাব সংক্ষেপে, নিজের ভাষায় লিখতে হয়।",
+    difficulty: "easy",
+    sourceNote: "NCTB HSC বাংলা ২য় পত্র — সারাংশ",
+  },
+  {
+    id: "ACAD-7012",
+    classId: "class-11",
+    subjectId: "bangla",
+    chapterId: "acad-class-11-ban-topic-6",
+    chapterName: "নাটক — সিরাজউদ্দৌলা",
+    unitNumber: 6,
+    topicId: "topic-6",
+    questionText: "‘সিরাজউদ্দৌলা’ নাটকের রচয়িতা কে?",
+    options: [
+      { letter: "A", text: "নূরুল মোমেন" },
+      { letter: "B", text: "সৈয়দ ওয়ালীউল্লাহ" },
+      { letter: "C", text: "মুনীর চৌধুরী" },
+      { letter: "D", text: "সিকান্দার আবু জাফর" }
+    ],
+    correctLetter: "D",
+    explanation: "‘সিরাজউদ্দৌলা’ সিকান্দার আবু জাফরের নাটক; বর্তমান NCTB সহপাঠের নির্ধারিত নাটক (২০২৪-২০২৫ পরিমার্জিত সংস্করণ)।",
+    difficulty: "medium",
+    sourceNote: "NCTB সহপাঠ, একাদশ-দ্বাদশ শ্রেণি — নাটক: সিরাজউদ্দৌলা",
   },
 ];

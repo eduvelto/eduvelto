@@ -1,10 +1,12 @@
-// Eduvelto — Academic History practice questions (Class 9),
-// verified against the Dakhil NCTB books (review 26 Nov 2026).
+// Eduvelto — Academic History practice questions (Classes 9 and 11),
+// verified against the NCTB books (review 26 Nov 2026; see the Class 9 / Class 11 notes below).
 //
-// Static data ONLY — zero Firestore reads. The 21 questions are the
-// Academic Class 9 History drafts AFTER review (see
-// review-academic-c9-civics-history-verdicts.json and
-// review-academic-c9-fixes-applied.md in
+// Static data ONLY — zero Firestore reads. The 43 questions are the
+// Academic Class 9 and Class 11 History drafts AFTER review (see
+// review-academic-c9-civics-history-verdicts.json,
+// review-academic-c9-fixes-applied.md,
+// review-academic-c11-12-history-verdicts.json and
+// review-academic-c11-12-fixes-applied.md in
 // ~/workspace/eduorbit/sprint-1week-2026-11-25/).
 //
 // CAVEAT: the Class 9 review was verified against DAKHIL editions —
@@ -13,6 +15,13 @@
 // references + the SSC syllabus topic. Whether Class 9-10 content
 // serves the general SSC audience or the Dakhil audience is an owner
 // decision still owed (after his exams).
+//
+// Class 11 NOTE: the Class 11 questions were verified for fact
+// correctness + on-syllabus (review 26 Nov 2026) — NO HSC book
+// exists in the workspace, so VERIFIED here does NOT mean
+// book-confirmed. A teacher with the actual HSC books should
+// spot-check before publication, especially the re-cited chapters
+// (see review-academic-c11-12-fixes-applied.md).
 //
 // HONESTY: these are ORIGINAL practice questions written for the
 // NCTB lessons — NOT board / university / previous-year questions.
@@ -35,10 +44,16 @@
 // question ONCE under classId 'class-9', and publicAcademic.ts /
 // questionPaper.ts / scripts/prerender.mjs map 'class-10' to the
 // Class 9 pool for these subjects.
+// The Class 11
+// questions also serve Class 12 (same combined class-11-12 draft
+// set — there is NO separate Class 12 set): the pool holds each
+// question ONCE under classId 'class-11', and publicAcademic.ts /
+// questionPaper.ts / scripts/prerender.mjs map 'class-12' to the
+// Class 11 pool for these subjects.
 
 import { type PublicAcademicQuestion } from './publicAcademic';
 
-/** All verified Academic History questions, Class 9 (in draft order). */
+/** All verified Academic History questions, Classes 9 and 11 (in draft order). */
 export const PUBLIC_ACADEMIC_HISTORY_QUESTIONS: PublicAcademicQuestion[] = [
   {
     id: "ACAD-1071",
@@ -459,5 +474,445 @@ export const PUBLIC_ACADEMIC_HISTORY_QUESTIONS: PublicAcademicQuestion[] = [
     explanation: "১৯৭০ সালের নির্বাচনে আওয়ামী লীগ জাতীয় পরিষদে ১৬৭টি আসনে জয়ী হয়।",
     difficulty: "medium",
     sourceNote: "NCTB বাংলাদেশের ইতিহাস — ১৯৭০ নির্বাচন",
+  },
+  {
+    id: "ACAD-3051",
+    classId: "class-11",
+    subjectId: "history",
+    chapterId: "acad-class-11-his-topic-1",
+    chapterName: "প্রাচীন সভ্যতা",
+    unitNumber: 1,
+    topicId: "topic-1",
+    questionText: "গ্রিক সভ্যতার কেন্দ্র কোন নগর?",
+    options: [
+      { letter: "A", text: "স্পার্টা শুধু" },
+      { letter: "B", text: "এথেন্স" },
+      { letter: "C", text: "আলেকজান্দ্রিয়া" },
+      { letter: "D", text: "রোম" }
+    ],
+    correctLetter: "B",
+    explanation: "এথেন্স গ্রিক সভ্যতা, গণতন্ত্র ও দর্শনের কেন্দ্র ছিল।",
+    difficulty: "medium",
+    sourceNote: "NCTB HSC ইতিহাস ১ম পত্র — প্রাচীন সভ্যতা",
+  },
+  {
+    id: "ACAD-3052",
+    classId: "class-11",
+    subjectId: "history",
+    chapterId: "acad-class-11-his-topic-2",
+    chapterName: "রোমান সাম্রাজ্য",
+    unitNumber: 2,
+    topicId: "topic-2",
+    questionText: "রোমান সাম্রাজ্যের প্রথম সম্রাট কে?",
+    options: [
+      { letter: "A", text: "নিরো" },
+      { letter: "B", text: "কনস্টানটাইন" },
+      { letter: "C", text: "জুলিয়াস সিজার" },
+      { letter: "D", text: "অগাস্টাস" }
+    ],
+    correctLetter: "D",
+    explanation: "অগাস্টাস (অক্টাভিয়ান) রোমান সাম্রাজ্যের প্রথম সম্রাট।",
+    difficulty: "medium",
+    sourceNote: "NCTB HSC ইতিহাস ১ম পত্র — রোমান সাম্রাজ্য",
+  },
+  {
+    id: "ACAD-3053",
+    classId: "class-11",
+    subjectId: "history",
+    chapterId: "acad-class-11-his-topic-3",
+    chapterName: "মধ্যযুগ",
+    unitNumber: 3,
+    topicId: "topic-3",
+    questionText: "সামন্ততন্ত্র কোন যুগের বৈশিষ্ট্য?",
+    options: [
+      { letter: "A", text: "আধুনিক যুগ" },
+      { letter: "B", text: "মধ্যযুগ" },
+      { letter: "C", text: "প্রাগৈতিহাসিক যুগ" },
+      { letter: "D", text: "প্রাচীন যুগ" }
+    ],
+    correctLetter: "B",
+    explanation: "মধ্যযুগের ইউরোপে সামন্ততন্ত্র ছিল প্রধান সামাজিক-অর্থনৈতিক ব্যবস্থা।",
+    difficulty: "medium",
+    sourceNote: "NCTB HSC ইতিহাস ১ম পত্র — মধ্যযুগ",
+  },
+  {
+    id: "ACAD-3054",
+    classId: "class-11",
+    subjectId: "history",
+    chapterId: "acad-class-11-his-topic-4",
+    chapterName: "নবজাগরণ",
+    unitNumber: 4,
+    topicId: "topic-4",
+    questionText: "নবজাগরণ (Renaissance) প্রথম শুরু হয় কোথায়?",
+    options: [
+      { letter: "A", text: "ইংল্যান্ড" },
+      { letter: "B", text: "ফ্রান্স" },
+      { letter: "C", text: "জার্মানি" },
+      { letter: "D", text: "ইতালি" }
+    ],
+    correctLetter: "D",
+    explanation: "চতুর্দশ শতকে ইতালিতে নবজাগরণ শুরু হয়; পরে সারা ইউরোপে ছড়ায়।",
+    difficulty: "medium",
+    sourceNote: "NCTB HSC ইতিহাস ১ম পত্র — নবজাগরণ",
+  },
+  {
+    id: "ACAD-3055",
+    classId: "class-11",
+    subjectId: "history",
+    chapterId: "acad-class-11-his-topic-5",
+    chapterName: "শিল্প বিপ্লব",
+    unitNumber: 5,
+    topicId: "topic-5",
+    questionText: "শিল্প বিপ্লব প্রথম শুরু হয় কোন দেশে?",
+    options: [
+      { letter: "A", text: "ইংল্যান্ড" },
+      { letter: "B", text: "জার্মানি" },
+      { letter: "C", text: "আমেরিকা" },
+      { letter: "D", text: "ফ্রান্স" }
+    ],
+    correctLetter: "A",
+    explanation: "অষ্টাদশ শতকে ইংল্যান্ডে বস্ত্রশিল্পে যন্ত্রের ব্যবহারে শিল্প বিপ্লব শুরু হয়।",
+    difficulty: "medium",
+    sourceNote: "NCTB HSC ইতিহাস ১ম পত্র — শিল্প বিপ্লব",
+  },
+  {
+    id: "ACAD-3056",
+    classId: "class-11",
+    subjectId: "history",
+    chapterId: "acad-class-11-his-topic-6",
+    chapterName: "ফরাসি বিপ্লব",
+    unitNumber: 6,
+    topicId: "topic-6",
+    questionText: "ফরাসি বিপ্লব কত সালে শুরু হয়?",
+    options: [
+      { letter: "A", text: "১৮৪৮" },
+      { letter: "B", text: "১৬৮৯" },
+      { letter: "C", text: "১৭৮৯" },
+      { letter: "D", text: "১৯১৭" }
+    ],
+    correctLetter: "C",
+    explanation: "১৭৮৯ সালে ফরাসি বিপ্লব শুরু হয়; ‘স্বাধীনতা, সাম্য, ভ্রাতৃত্ব’ এর মূলমন্ত্র।",
+    difficulty: "medium",
+    sourceNote: "NCTB HSC ইতিহাস ১ম পত্র — ফরাসি বিপ্লব",
+  },
+  {
+    id: "ACAD-3057",
+    classId: "class-11",
+    subjectId: "history",
+    chapterId: "acad-class-11-his-topic-7",
+    chapterName: "প্রথম বিশ্বযুদ্ধ",
+    unitNumber: 7,
+    topicId: "topic-7",
+    questionText: "প্রথম বিশ্বযুদ্ধের সূত্রপাত ঘটে অস্ট্রিয়ার যুবরাজকে হত্যার মাধ্যমে — হত্যাকাণ্ডটি ঘটে কোথায়?",
+    options: [
+      { letter: "A", text: "বার্লিন" },
+      { letter: "B", text: "সারায়েভো" },
+      { letter: "C", text: "প্যারিস" },
+      { letter: "D", text: "ভিয়েনা" }
+    ],
+    correctLetter: "B",
+    explanation: "১৯১৪ সালে সারায়েভোতে যুবরাজ ফ্রানৎস ফার্দিনান্দ হত্যার জেরে প্রথম বিশ্বযুদ্ধ শুরু হয়।",
+    difficulty: "medium",
+    sourceNote: "NCTB HSC ইতিহাস ২য় পত্র — প্রথম বিশ্বযুদ্ধ",
+  },
+  {
+    id: "ACAD-3058",
+    classId: "class-11",
+    subjectId: "history",
+    chapterId: "acad-class-11-his-topic-8",
+    chapterName: "দ্বিতীয় বিশ্বযুদ্ধ",
+    unitNumber: 8,
+    topicId: "topic-8",
+    questionText: "দ্বিতীয় বিশ্বযুদ্ধের সময় জার্মানির নেতা কে ছিলেন?",
+    options: [
+      { letter: "A", text: "উইনস্টন চার্চিল" },
+      { letter: "B", text: "জোসেফ স্তালিন" },
+      { letter: "C", text: "অ্যাডলফ হিটলার" },
+      { letter: "D", text: "বেনিতো মুসোলিনি" }
+    ],
+    correctLetter: "C",
+    explanation: "হিটলারের নেতৃত্বে জার্মানি ১৯৩৯ সালে পোল্যান্ড আক্রমণ করে দ্বিতীয় বিশ্বযুদ্ধ শুরু করে।",
+    difficulty: "medium",
+    sourceNote: "NCTB HSC ইতিহাস ২য় পত্র — দ্বিতীয় বিশ্বযুদ্ধ",
+  },
+  {
+    id: "ACAD-3059",
+    classId: "class-11",
+    subjectId: "history",
+    chapterId: "acad-class-11-his-topic-9",
+    chapterName: "বাংলার ইতিহাস",
+    unitNumber: 9,
+    topicId: "topic-9",
+    questionText: "স্বাধীন সুলতানি যুগে বাংলার রাজধানী কোথায় ছিল?",
+    options: [
+      { letter: "A", text: "গৌড়" },
+      { letter: "B", text: "মুর্শিদাবাদ" },
+      { letter: "C", text: "ঢাকা" },
+      { letter: "D", text: "সোনারগাঁও শুধু" }
+    ],
+    correctLetter: "A",
+    explanation: "স্বাধীন সুলতানি আমলে গৌড় বাংলার রাজধানী ছিল।",
+    difficulty: "medium",
+    sourceNote: "NCTB HSC ইতিহাস ২য় পত্র — বাংলার ইতিহাস",
+  },
+  {
+    id: "ACAD-3060",
+    classId: "class-11",
+    subjectId: "history",
+    chapterId: "acad-class-11-his-topic-10",
+    chapterName: "ভারত বিভাগ",
+    unitNumber: 10,
+    topicId: "topic-10",
+    questionText: "ভারত বিভক্ত হয় কত সালে?",
+    options: [
+      { letter: "A", text: "১৯৪৭" },
+      { letter: "B", text: "১৯৫২" },
+      { letter: "C", text: "১৯৭১" },
+      { letter: "D", text: "১৯৪২" }
+    ],
+    correctLetter: "A",
+    explanation: "১৯৪৭ সালের ১৪–১৫ আগস্ট ভারত ও পাকিস্তান নামে দুটি রাষ্ট্র সৃষ্টি হয়।",
+    difficulty: "medium",
+    sourceNote: "NCTB HSC ইতিহাস ২য় পত্র — ভারত বিভাগ",
+  },
+  {
+    id: "ACAD-8049",
+    classId: "class-11",
+    subjectId: "history",
+    chapterId: "acad-class-11-his-topic-1",
+    chapterName: "প্রাচীন সভ্যতা",
+    unitNumber: 1,
+    topicId: "topic-1",
+    questionText: "গণতন্ত্রের জন্ম হয় কোথায়?",
+    options: [
+      { letter: "A", text: "চীনে" },
+      { letter: "B", text: "প্রাচীন গ্রিসে" },
+      { letter: "C", text: "রোমে" },
+      { letter: "D", text: "মিসরে" }
+    ],
+    correctLetter: "B",
+    explanation: "খ্রিষ্টপূর্ব ৫ম শতকে এথেন্সে গণতন্ত্রের সূচনা হয়।",
+    difficulty: "medium",
+    sourceNote: "NCTB HSC ইতিহাস ১ম পত্র — প্রাচীন গ্রিস",
+  },
+  {
+    id: "ACAD-8050",
+    classId: "class-11",
+    subjectId: "history",
+    chapterId: "acad-class-11-his-topic-2",
+    chapterName: "রোমান সাম্রাজ্য",
+    unitNumber: 2,
+    topicId: "topic-2",
+    questionText: "রোমান আইনের ভিত্তি কী?",
+    options: [
+      { letter: "A", text: "কোড অব হাম্মুরাবি" },
+      { letter: "B", text: "ম্যাগনা কার্টা" },
+      { letter: "C", text: "কুরআন" },
+      { letter: "D", text: "টুয়েলভ টেবিলস" }
+    ],
+    correctLetter: "D",
+    explanation: "খ্রিষ্টপূর্ব ৪৫০ সালে টুয়েলভ টেবিলস রোমান আইনের ভিত্তি স্থাপন করে।",
+    difficulty: "medium",
+    sourceNote: "NCTB HSC ইতিহাস ১ম পত্র — রোমান সাম্রাজ্য",
+  },
+  {
+    id: "ACAD-8051",
+    classId: "class-11",
+    subjectId: "history",
+    chapterId: "acad-class-11-his-topic-3",
+    chapterName: "মধ্যযুগ",
+    unitNumber: 3,
+    topicId: "topic-3",
+    questionText: "ক্রুসেড কী?",
+    options: [
+      { letter: "A", text: "শুধু কৃষক বিদ্রোহ" },
+      { letter: "B", text: "শুধু বাণিজ্য যুদ্ধ" },
+      { letter: "C", text: "শুধু গৃহযুদ্ধ" },
+      { letter: "D", text: "খ্রিষ্টান-মুসলিম ধর্মযুদ্ধ" }
+    ],
+    correctLetter: "D",
+    explanation: "১১শ–১৩শ শতকে জেরুজালেম দখল নিয়ে ইউরোপীয় খ্রিষ্টানদের ধর্মযুদ্ধই ক্রুসেড।",
+    difficulty: "medium",
+    sourceNote: "NCTB HSC ইতিহাস ১ম পত্র — মধ্যযুগ",
+  },
+  {
+    id: "ACAD-8052",
+    classId: "class-11",
+    subjectId: "history",
+    chapterId: "acad-class-11-his-topic-4",
+    chapterName: "নবজাগরণ",
+    unitNumber: 4,
+    topicId: "topic-4",
+    questionText: "মুদ্রণযন্ত্র আবিষ্কার করেন কে?",
+    options: [
+      { letter: "A", text: "নিউটন" },
+      { letter: "B", text: "লিওনার্দো" },
+      { letter: "C", text: "গ্যালিলিও" },
+      { letter: "D", text: "গুটেনবার্গ" }
+    ],
+    correctLetter: "D",
+    explanation: "১৪৪০ সালের দিকে গুটেনবার্গের মুদ্রণযন্ত্র জ্ঞান ছড়াতে বিপ্লব ঘটায়।",
+    difficulty: "medium",
+    sourceNote: "NCTB HSC ইতিহাস ১ম পত্র — নবজাগরণ",
+  },
+  {
+    id: "ACAD-8053",
+    classId: "class-11",
+    subjectId: "history",
+    chapterId: "acad-class-11-his-topic-5",
+    chapterName: "শিল্প বিপ্লব",
+    unitNumber: 5,
+    topicId: "topic-5",
+    questionText: "বাষ্পীয় ইঞ্জিন উন্নত করেন কে?",
+    options: [
+      { letter: "A", text: "জেমস ওয়াট" },
+      { letter: "B", text: "এডমন্ড কার্টরাইট" },
+      { letter: "C", text: "জর্জ স্টিফেনসন" },
+      { letter: "D", text: "রিচার্ড আর্করাইট" }
+    ],
+    correctLetter: "A",
+    explanation: "জেমস ওয়াট বাষ্পীয় ইঞ্জিন উন্নত করে শিল্প বিপ্লবকে গতি দেন।",
+    difficulty: "medium",
+    sourceNote: "NCTB HSC ইতিহাস ১ম পত্র — শিল্প বিপ্লব",
+  },
+  {
+    id: "ACAD-8054",
+    classId: "class-11",
+    subjectId: "history",
+    chapterId: "acad-class-11-his-topic-6",
+    chapterName: "ফরাসি বিপ্লব",
+    unitNumber: 6,
+    topicId: "topic-6",
+    questionText: "ফরাসি বিপ্লবের সময় রাজা কে ছিলেন?",
+    options: [
+      { letter: "A", text: "ষোড়শ লুই" },
+      { letter: "B", text: "নেপোলিয়ন" },
+      { letter: "C", text: "পঞ্চদশ লুই" },
+      { letter: "D", text: "চতুর্দশ লুই" }
+    ],
+    correctLetter: "A",
+    explanation: "ষোড়শ লুইয়ের আমলে ১৭৮৯ সালে বিপ্লব শুরু হয়; ১৭৯৩ সালে তাঁর মৃত্যুদণ্ড হয়।",
+    difficulty: "medium",
+    sourceNote: "NCTB HSC ইতিহাস ১ম পত্র — ফরাসি বিপ্লব",
+  },
+  {
+    id: "ACAD-8055",
+    classId: "class-11",
+    subjectId: "history",
+    chapterId: "acad-class-11-his-topic-7",
+    chapterName: "প্রথম বিশ্বযুদ্ধ",
+    unitNumber: 7,
+    topicId: "topic-7",
+    questionText: "প্রথম বিশ্বযুদ্ধ শেষ হয় কোন চুক্তিতে?",
+    options: [
+      { letter: "A", text: "ভিয়েনা চুক্তি" },
+      { letter: "B", text: "প্যারিস চুক্তি" },
+      { letter: "C", text: "ভার্সাই চুক্তি" },
+      { letter: "D", text: "বার্লিন চুক্তি" }
+    ],
+    correctLetter: "C",
+    explanation: "১৯১৯ সালের ভার্সাই চুক্তিতে প্রথম বিশ্বযুদ্ধের আনুষ্ঠানিক সমাপ্তি হয়।",
+    difficulty: "medium",
+    sourceNote: "NCTB HSC ইতিহাস ২য় পত্র — প্রথম বিশ্বযুদ্ধ",
+  },
+  {
+    id: "ACAD-8056",
+    classId: "class-11",
+    subjectId: "history",
+    chapterId: "acad-class-11-his-topic-8",
+    chapterName: "দ্বিতীয় বিশ্বযুদ্ধ",
+    unitNumber: 8,
+    topicId: "topic-8",
+    questionText: "জাতিসংঘ প্রতিষ্ঠার উদ্দেশ্য কী?",
+    options: [
+      { letter: "A", text: "বিশ্বশান্তি রক্ষা" },
+      { letter: "B", text: "শুধু শিক্ষা" },
+      { letter: "C", text: "শুধু স্বাস্থ্য" },
+      { letter: "D", text: "শুধু বাণিজ্য" }
+    ],
+    correctLetter: "A",
+    explanation: "দ্বিতীয় বিশ্বযুদ্ধের পর ১৯৪৫ সালে শান্তি রক্ষার জন্য জাতিসংঘ গঠিত হয়।",
+    difficulty: "medium",
+    sourceNote: "NCTB HSC ইতিহাস ২য় পত্র — দ্বিতীয় বিশ্বযুদ্ধ",
+  },
+  {
+    id: "ACAD-8057",
+    classId: "class-11",
+    subjectId: "history",
+    chapterId: "acad-class-11-his-topic-9",
+    chapterName: "বাংলার ইতিহাস",
+    unitNumber: 9,
+    topicId: "topic-9",
+    questionText: "বাংলার নবাবি আমলের রাজধানী কোথায় ছিল?",
+    options: [
+      { letter: "A", text: "ঢাকা" },
+      { letter: "B", text: "মুর্শিদাবাদ" },
+      { letter: "C", text: "গৌড়" },
+      { letter: "D", text: "সোনারগাঁও" }
+    ],
+    correctLetter: "B",
+    explanation: "মুর্শিদকুলি খানের আমলে মুর্শিদাবাদ বাংলার রাজধানী হয়।",
+    difficulty: "medium",
+    sourceNote: "NCTB HSC ইতিহাস ২য় পত্র — বাংলার ইতিহাস",
+  },
+  {
+    id: "ACAD-8058",
+    classId: "class-11",
+    subjectId: "history",
+    chapterId: "acad-class-11-his-topic-10",
+    chapterName: "ভারত বিভাগ",
+    unitNumber: 10,
+    topicId: "topic-10",
+    questionText: "দেশভাগের পর পূর্ব বাংলা কোন রাষ্ট্রের অংশ হয়?",
+    options: [
+      { letter: "A", text: "নেপাল" },
+      { letter: "B", text: "ব্রিটেন" },
+      { letter: "C", text: "পাকিস্তান" },
+      { letter: "D", text: "ভারত" }
+    ],
+    correctLetter: "C",
+    explanation: "১৯৪৭ সালে পূর্ব বাংলা পাকিস্তানের প্রদেশ (পূর্ব পাকিস্তান) হয়।",
+    difficulty: "medium",
+    sourceNote: "NCTB HSC ইতিহাস ২য় পত্র — ভারত বিভাগ",
+  },
+  {
+    id: "ACAD-8059",
+    classId: "class-11",
+    subjectId: "history",
+    chapterId: "acad-class-11-his-topic-11",
+    chapterName: "রুশ বিপ্লব",
+    unitNumber: 11,
+    topicId: "topic-11",
+    questionText: "অক্টোবর রুশ বিপ্লব (বলশেভিক বিপ্লব) কত সালে হয়?",
+    options: [
+      { letter: "A", text: "১৯০৫" },
+      { letter: "B", text: "১৯২১" },
+      { letter: "C", text: "১৯১৭" },
+      { letter: "D", text: "১৯৪৫" }
+    ],
+    correctLetter: "C",
+    explanation: "১৯১৭ সালের অক্টোবর বিপ্লবে বলশেভিকরা রাশিয়ায় ক্ষমতা নেয়। (১৯০৫ সালের বিপ্লবও 'রুশ বিপ্লব' নামে পরিচিত, তাই প্রশ্নে 'অক্টোবর' যোগ করা হয়েছে।)",
+    difficulty: "medium",
+    sourceNote: "NCTB HSC ইতিহাস ২য় পত্র — রুশ বিপ্লব",
+  },
+  {
+    id: "ACAD-8060",
+    classId: "class-11",
+    subjectId: "history",
+    chapterId: "acad-class-11-his-topic-12",
+    chapterName: "আমেরিকার স্বাধীনতা",
+    unitNumber: 12,
+    topicId: "topic-12",
+    questionText: "আমেরিকার স্বাধীনতা ঘোষণা হয় কত সালে?",
+    options: [
+      { letter: "A", text: "১৭৫০" },
+      { letter: "B", text: "১৭৭৬" },
+      { letter: "C", text: "১৭৮৯" },
+      { letter: "D", text: "১৮০০" }
+    ],
+    correctLetter: "B",
+    explanation: "১৭৭৬ সালের ৪ জুলাই আমেরিকা স্বাধীনতা ঘোষণা করে।",
+    difficulty: "medium",
+    sourceNote: "NCTB HSC ইতিহাস ১ম পত্র — আমেরিকার স্বাধীনতা",
   },
 ];

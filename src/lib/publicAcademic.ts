@@ -1,4 +1,4 @@
-// Eduvelto — combined verified Academic pool (Classes 3–10, thirty-one subjects).
+// Eduvelto — combined verified Academic pool (Classes 3–12, thirty-five subjects).
 //
 // The SINGLE verified source for both the Question Maker (QPG) and the
 // Education Hub chapter practice: a question verified once appears in
@@ -18,7 +18,9 @@
 // publicAcademicGeography.ts, publicAcademicEnglish1st.ts,
 // publicAcademicEnglish2nd.ts, publicAcademicHigherMath.ts,
 // publicAcademicHigherMathDepth.ts, publicAcademicPhysics.ts,
-// publicAcademicPhysicsDepth.ts); this
+// publicAcademicPhysicsDepth.ts, publicAcademicIslamicHistory.ts,
+// publicAcademicLogic.ts, publicAcademicPsychology.ts,
+// publicAcademicStatistics.ts); this
 // file combines them and derives the chapters + lookup helpers from
 // the combined array, so a new verified batch adds its chapters,
 // counts, practice pages, SEO and sitemap entries automatically — no
@@ -32,6 +34,17 @@
 // classes get practice paths. Class 9 was verified against the
 // DAKHIL editions (no general NCTB Class 9-10 book set exists in the
 // workspace — owner decision on the audience still owed).
+//
+// CLASS 11 vs CLASS 12: Classes 11 and 12 share ONE combined draft set
+// (class-11-12-*.json — there is NO separate Class 12 set). The pool
+// holds each Class 11 question ONCE under classId 'class-11' (the pool
+// total counts unique questions once), and the lookup helpers below
+// map 'class-12' to the Class 11 pool for these subjects, so both
+// classes get practice paths. NO HSC book exists in the workspace —
+// VERIFIED for Class 11 means "fact correct per a standard reference +
+// topic within the cited HSC syllabus", NOT "confirmed against the book
+// lesson"; a teacher with the actual HSC books should spot-check
+// before publication, especially the re-cited chapters.
 //
 // HONESTY: these are ORIGINAL practice questions written for the NCTB
 // lessons — NOT board / university / previous-year questions. Every
@@ -50,7 +63,8 @@
 // ACAD-C8-BGS-003, ACAD-C8-BGS-005, ACAD-C8-BGS-019, ACAD-C8-BGS-020,
 // ACAD-C8-ICT-005, ACAD-C8-ICT-009, ACAD-C8-ICT-013, C8S-015,
 // C8S-029, C8S-031, C8S-033, C8S-034, ACAD-5108, ACAD-5096,
-// C910P-018, ACAD-0018, ACAD-0052, ACAD-0053, ACAD-5061, ACAD-5068) are NOT
+// C910P-018, ACAD-0018, ACAD-0052, ACAD-0053, ACAD-5061, ACAD-5068,
+// ACAD-3069, ACAD-8069) are NOT
 // in this pool and must never be shown to students.
 
 import { PUBLIC_ACADEMIC_ENGLISH_QUESTIONS } from './publicAcademicEnglish';
@@ -84,8 +98,12 @@ import { PUBLIC_ACADEMIC_HIGHER_MATH_QUESTIONS } from './publicAcademicHigherMat
 import { PUBLIC_ACADEMIC_HIGHER_MATH_DEPTH_QUESTIONS } from './publicAcademicHigherMathDepth';
 import { PUBLIC_ACADEMIC_PHYSICS_QUESTIONS } from './publicAcademicPhysics';
 import { PUBLIC_ACADEMIC_PHYSICS_DEPTH_QUESTIONS } from './publicAcademicPhysicsDepth';
+import { PUBLIC_ACADEMIC_ISLAMIC_HISTORY_QUESTIONS } from './publicAcademicIslamicHistory';
+import { PUBLIC_ACADEMIC_LOGIC_QUESTIONS } from './publicAcademicLogic';
+import { PUBLIC_ACADEMIC_PSYCHOLOGY_QUESTIONS } from './publicAcademicPsychology';
+import { PUBLIC_ACADEMIC_STATISTICS_QUESTIONS } from './publicAcademicStatistics';
 
-export type PublicAcademicClassId = 'class-3' | 'class-4' | 'class-5' | 'class-6' | 'class-7' | 'class-8' | 'class-9' | 'class-10';
+export type PublicAcademicClassId = 'class-3' | 'class-4' | 'class-5' | 'class-6' | 'class-7' | 'class-8' | 'class-9' | 'class-10' | 'class-11' | 'class-12';
 export type PublicAcademicSubjectId =
   | 'english'
   | 'bangla'
@@ -117,7 +135,11 @@ export type PublicAcademicSubjectId =
   | 'higher-math'
   | 'higher-math-depth'
   | 'physics'
-  | 'physics-depth';
+  | 'physics-depth'
+  | 'islamic-history'
+  | 'logic'
+  | 'psychology'
+  | 'statistics';
 
 export interface PublicAcademicQuestion {
   id: string;
@@ -131,7 +153,10 @@ export interface PublicAcademicQuestion {
   /** Topical tag inside the chapter (the draft's 3rd tag for Classes 3–8;
    *  chapter-based for Class 9 — 'chapter-N' for numbered chapters,
    *  'topic-N' for topical chapters — because the Class 9 drafts' tags[2]
-   *  slugs are not unique per topic). */
+   *  slugs are not unique per topic; same for Class 11, plus 'unit-N' for
+   *  the English Units and 'chapter-N-p2' for 2nd-paper numbered chapters,
+   *  because 1st- and 2nd-paper chapters share numbers with different
+   *  titles). */
   topicId: string;
   questionText: string;
   options: Array<{ letter: 'A' | 'B' | 'C' | 'D'; text: string }>;
@@ -142,9 +167,10 @@ export interface PublicAcademicQuestion {
   sourceNote: string;
 }
 
-/** All verified Academic questions (Classes 3–10, thirty-one subjects), in
- *  draft order within each subject file (Class 3, then 4, then 5, then 6, then 7, then 8, then 9).
- *  Class 10 shares the Class 9 questions (same combined draft set) — the
+/** All verified Academic questions (Classes 3–12, thirty-five subjects), in
+ *  draft order within each subject file (Class 3, then 4, then 5, then 6, then 7, then 8, then 9, then 11).
+ *  Class 10 shares the Class 9 questions (same combined draft set) and
+ *  Class 12 shares the Class 11 questions (same combined draft set) — the
  *  pool holds each question ONCE; see publicAcademicChaptersFor. */
 export const PUBLIC_ACADEMIC_QUESTIONS: PublicAcademicQuestion[] = [
   ...PUBLIC_ACADEMIC_ENGLISH_QUESTIONS,
@@ -178,6 +204,10 @@ export const PUBLIC_ACADEMIC_QUESTIONS: PublicAcademicQuestion[] = [
   ...PUBLIC_ACADEMIC_HIGHER_MATH_DEPTH_QUESTIONS,
   ...PUBLIC_ACADEMIC_PHYSICS_QUESTIONS,
   ...PUBLIC_ACADEMIC_PHYSICS_DEPTH_QUESTIONS,
+  ...PUBLIC_ACADEMIC_ISLAMIC_HISTORY_QUESTIONS,
+  ...PUBLIC_ACADEMIC_LOGIC_QUESTIONS,
+  ...PUBLIC_ACADEMIC_PSYCHOLOGY_QUESTIONS,
+  ...PUBLIC_ACADEMIC_STATISTICS_QUESTIONS,
 ];
 
 export interface PublicAcademicChapter {
@@ -225,8 +255,10 @@ export const PUBLIC_ACADEMIC_CHAPTERS: PublicAcademicChapter[] = (() => {
 
 /** Classes with verified practice questions (class + subject pairs).
  *  Class 10 shares the Class 9 pool (same combined draft set — no
- *  separate Class 10 set), so every class-9 row is repeated here as a
- *  class-10 row with the same counts. The pool total counts unique
+ *  separate Class 10 set) and Class 12 shares the Class 11 pool (same
+ *  combined draft set — no separate Class 12 set), so every class-9 row
+ *  is repeated here as a class-10 row and every class-11 row as a
+ *  class-12 row with the same counts. The pool total counts unique
  *  questions once; these rows are practice paths, not questions. */
 export function publicAcademicClassSubjects(): Array<{
   classId: PublicAcademicClassId;
@@ -258,25 +290,34 @@ export function publicAcademicClassSubjects(): Array<{
   for (const row of out.filter((x) => x.classId === 'class-9')) {
     out.push({ ...row, classId: 'class-10' });
   }
+  // Class 12 = Class 11 pool (same combined class-11-12 draft set).
+  for (const row of out.filter((x) => x.classId === 'class-11')) {
+    out.push({ ...row, classId: 'class-12' });
+  }
   return out;
 }
 
 /** Chapters (units / lessons) with verified questions for one class +
  *  subject. Any other class/subject returns [] — the UI shows the
  *  honest empty state, never filler. Class 10 resolves to the Class 9
- *  pool for these subjects (same combined draft set); the returned
- *  chapters carry classId 'class-10' so links and labels stay on the
- *  requested class. */
+ *  pool for these subjects (same combined draft set) and Class 12
+ *  resolves to the Class 11 pool (same combined draft set); the returned
+ *  chapters carry classId 'class-10' / 'class-12' so links and labels stay
+ *  on the requested class. */
 export function publicAcademicChaptersFor(
   classId: string,
   subjectId: string,
 ): PublicAcademicChapter[] {
-  const effectiveClassId = classId === 'class-10' ? 'class-9' : classId;
+  const effectiveClassId =
+    classId === 'class-10' ? 'class-9' : classId === 'class-12' ? 'class-11' : classId;
   const chapters = PUBLIC_ACADEMIC_CHAPTERS.filter(
     (c) => c.classId === effectiveClassId && c.subjectId === subjectId,
   );
   if (classId === 'class-10') {
     return chapters.map((c) => ({ ...c, classId: 'class-10' as PublicAcademicClassId }));
+  }
+  if (classId === 'class-12') {
+    return chapters.map((c) => ({ ...c, classId: 'class-12' as PublicAcademicClassId }));
   }
   return chapters;
 }

@@ -1,10 +1,12 @@
-// Eduvelto — Academic Biology practice questions (Class 9),
-// verified against the Dakhil NCTB books (review 26 Nov 2026).
+// Eduvelto — Academic Biology practice questions (Classes 9 and 11),
+// verified against the NCTB books (review 26 Nov 2026; see the Class 9 / Class 11 notes below).
 //
-// Static data ONLY — zero Firestore reads. The 22 questions are the
-// Academic Class 9 Biology drafts AFTER review (see
-// review-academic-c9-biology-verdicts.json and
-// review-academic-c9-fixes-applied.md in
+// Static data ONLY — zero Firestore reads. The 46 questions are the
+// Academic Class 9 and Class 11 Biology drafts AFTER review (see
+// review-academic-c9-biology-verdicts.json,
+// review-academic-c9-fixes-applied.md,
+// review-academic-c11-12-biology-verdicts.json and
+// review-academic-c11-12-fixes-applied.md in
 // ~/workspace/eduorbit/sprint-1week-2026-11-25/).
 //
 // CAVEAT: the Class 9 review was verified against DAKHIL editions —
@@ -13,6 +15,13 @@
 // references + the SSC syllabus topic. Whether Class 9-10 content
 // serves the general SSC audience or the Dakhil audience is an owner
 // decision still owed (after his exams).
+//
+// Class 11 NOTE: the Class 11 questions were verified for fact
+// correctness + on-syllabus (review 26 Nov 2026) — NO HSC book
+// exists in the workspace, so VERIFIED here does NOT mean
+// book-confirmed. A teacher with the actual HSC books should
+// spot-check before publication, especially the re-cited chapters
+// (see review-academic-c11-12-fixes-applied.md).
 //
 // HONESTY: these are ORIGINAL practice questions written for the
 // NCTB lessons — NOT board / university / previous-year questions.
@@ -35,10 +44,16 @@
 // question ONCE under classId 'class-9', and publicAcademic.ts /
 // questionPaper.ts / scripts/prerender.mjs map 'class-10' to the
 // Class 9 pool for these subjects.
+// The Class 11
+// questions also serve Class 12 (same combined class-11-12 draft
+// set — there is NO separate Class 12 set): the pool holds each
+// question ONCE under classId 'class-11', and publicAcademic.ts /
+// questionPaper.ts / scripts/prerender.mjs map 'class-12' to the
+// Class 11 pool for these subjects.
 
 import { type PublicAcademicQuestion } from './publicAcademic';
 
-/** All verified Academic Biology questions, Class 9 (in draft order). */
+/** All verified Academic Biology questions, Classes 9 and 11 (in draft order). */
 export const PUBLIC_ACADEMIC_BIOLOGY_QUESTIONS: PublicAcademicQuestion[] = [
   {
     id: "ACAD-0087",
@@ -479,5 +494,485 @@ export const PUBLIC_ACADEMIC_BIOLOGY_QUESTIONS: PublicAcademicQuestion[] = [
     explanation: "উৎপাদক (সবুজ উদ্ভিদ) খাদ্যশৃঙ্খলের ভিত্তি।",
     difficulty: "easy",
     sourceNote: "NCTB জীববিজ্ঞান — অধ্যায় ১২: জীবের পরিবেশ",
+  },
+  {
+    id: "ACAD-2055",
+    classId: "class-11",
+    subjectId: "biology",
+    chapterId: "acad-class-11-bio-p1-chapter-1",
+    chapterName: "অধ্যায় ১: কোষ ও এর গঠন (১ম পত্র)",
+    unitNumber: 1,
+    topicId: "chapter-1",
+    questionText: "উদ্ভিদকোষে নেই কোনটি?",
+    options: [
+      { letter: "A", text: "সেন্ট্রিওল (সাধারণত)" },
+      { letter: "B", text: "কোষপ্রাচীর" },
+      { letter: "C", text: "বড় কোষগহ্বর" },
+      { letter: "D", text: "ক্লোরোপ্লাস্ট" }
+    ],
+    correctLetter: "A",
+    explanation: "উচ্চশ্রেণির উদ্ভিদকোষে সাধারণত সেন্ট্রিওল থাকে না; প্রাণীকোষে থাকে।",
+    difficulty: "medium",
+    sourceNote: "NCTB HSC জীববিজ্ঞান ১ম পত্র — অধ্যায় ১: কোষ ও এর গঠন",
+  },
+  {
+    id: "ACAD-2056",
+    classId: "class-11",
+    subjectId: "biology",
+    chapterId: "acad-class-11-bio-p1-chapter-2",
+    chapterName: "অধ্যায় ২: কোষ বিভাজন (১ম পত্র)",
+    unitNumber: 2,
+    topicId: "chapter-2",
+    questionText: "মিয়োসিস কোথায় ঘটে?",
+    options: [
+      { letter: "A", text: "জননকোষে" },
+      { letter: "B", text: "মূলের অগ্রভাগে" },
+      { letter: "C", text: "দেহকোষে" },
+      { letter: "D", text: "পাতায়" }
+    ],
+    correctLetter: "A",
+    explanation: "মিয়োসিস জনন মাতৃকোষে ঘটে; এতে ক্রোমোজোম সংখ্যা অর্ধেক হয়।",
+    difficulty: "medium",
+    sourceNote: "NCTB HSC জীববিজ্ঞান ১ম পত্র — অধ্যায় ২: কোষ বিভাজন",
+  },
+  {
+    id: "ACAD-2057",
+    classId: "class-11",
+    subjectId: "biology",
+    chapterId: "acad-class-11-bio-p1-chapter-9",
+    chapterName: "অধ্যায় ৯: উদ্ভিদ শারীরতত্ত্ব (১ম পত্র)",
+    unitNumber: 9,
+    topicId: "chapter-9",
+    questionText: "প্রস্বেদন মূলত কোথা দিয়ে ঘটে?",
+    options: [
+      { letter: "A", text: "ফুল" },
+      { letter: "B", text: "পত্ররন্ধ্র" },
+      { letter: "C", text: "মূলরোম" },
+      { letter: "D", text: "কাণ্ড" }
+    ],
+    correctLetter: "B",
+    explanation: "পাতার পত্ররন্ধ্র (স্টোমাটা) দিয়ে জলীয় বাষ্প বের হওয়াই প্রস্বেদন।",
+    difficulty: "medium",
+    sourceNote: "NCTB HSC জীববিজ্ঞান ১ম পত্র — অধ্যায় ৯: উদ্ভিদ শারীরতত্ত্ব",
+  },
+  {
+    id: "ACAD-2058",
+    classId: "class-11",
+    subjectId: "biology",
+    chapterId: "acad-class-11-bio-topic-1",
+    chapterName: "মানব শারীরতত্ত্ব",
+    unitNumber: 11,
+    topicId: "topic-1",
+    questionText: "মানুষের হৃৎপিণ্ডের কোন প্রকোষ্ঠ থেকে ফুসফুসে রক্ত যায়?",
+    options: [
+      { letter: "A", text: "বাম নিলয়" },
+      { letter: "B", text: "বাম অলিন্দ" },
+      { letter: "C", text: "ডান অলিন্দ" },
+      { letter: "D", text: "ডান নিলয়" }
+    ],
+    correctLetter: "D",
+    explanation: "ডান নিলয় থেকে ফুসফুসীয় ধমনি দিয়ে কার্বন ডাইঅক্সাইডযুক্ত রক্ত ফুসফুসে যায়।",
+    difficulty: "medium",
+    sourceNote: "NCTB HSC জীববিজ্ঞান ২য় পত্র — মানব শারীরতত্ত্ব: রক্ত সংবহন",
+  },
+  {
+    id: "ACAD-2059",
+    classId: "class-11",
+    subjectId: "biology",
+    chapterId: "acad-class-11-bio-topic-2",
+    chapterName: "পরিপাক",
+    unitNumber: 12,
+    topicId: "topic-2",
+    questionText: "মানবদেহে প্রোটিন পরিপাক শুরু হয় কোথায়?",
+    options: [
+      { letter: "A", text: "যকৃতে" },
+      { letter: "B", text: "মুখে" },
+      { letter: "C", text: "পাকস্থলীতে" },
+      { letter: "D", text: "ক্ষুদ্রান্ত্রে" }
+    ],
+    correctLetter: "C",
+    explanation: "পাকস্থলীর পেপসিন প্রোটিন পরিপাক শুরু করে; মুখে শর্করা পরিপাক শুরু হয়।",
+    difficulty: "medium",
+    sourceNote: "NCTB HSC জীববিজ্ঞান ২য় পত্র — মানব শারীরতত্ত্ব: পরিপাক",
+  },
+  {
+    id: "ACAD-2060",
+    classId: "class-11",
+    subjectId: "biology",
+    chapterId: "acad-class-11-bio-topic-3",
+    chapterName: "জিনতত্ত্ব",
+    unitNumber: 13,
+    topicId: "topic-3",
+    questionText: "মানুষের দেহকোষে ক্রোমোজোম সংখ্যা কত?",
+    options: [
+      { letter: "A", text: "৪৮" },
+      { letter: "B", text: "৪৬" },
+      { letter: "C", text: "৪৪" },
+      { letter: "D", text: "২৩" }
+    ],
+    correctLetter: "B",
+    explanation: "মানুষের দেহকোষে ২৩ জোড়া = ৪৬টি ক্রোমোজোম; জননকোষে ২৩টি।",
+    difficulty: "medium",
+    sourceNote: "NCTB HSC জীববিজ্ঞান ২য় পত্র — জিনতত্ত্ব ও বিবর্তন",
+  },
+  {
+    id: "ACAD-2061",
+    classId: "class-11",
+    subjectId: "biology",
+    chapterId: "acad-class-11-bio-topic-4",
+    chapterName: "শ্বসন",
+    unitNumber: 14,
+    topicId: "topic-4",
+    questionText: "মানুষের শ্বাসনালির শেষ প্রান্তের বায়ুথলিকে কী বলে?",
+    options: [
+      { letter: "A", text: "ফ্যারিংস" },
+      { letter: "B", text: "ল্যারিংস" },
+      { letter: "C", text: "ব্রঙ্কাস" },
+      { letter: "D", text: "অ্যালভিওলাস" }
+    ],
+    correctLetter: "D",
+    explanation: "অ্যালভিওলাসে গ্যাসীয় বিনিময় ঘটে।",
+    difficulty: "medium",
+    sourceNote: "NCTB HSC জীববিজ্ঞান ২য় পত্র — মানব শারীরতত্ত্ব: শ্বসন",
+  },
+  {
+    id: "ACAD-2062",
+    classId: "class-11",
+    subjectId: "biology",
+    chapterId: "acad-class-11-bio-topic-5",
+    chapterName: "রেচন",
+    unitNumber: 15,
+    topicId: "topic-5",
+    questionText: "নেফ্রন কীসের গাঠনিক একক?",
+    options: [
+      { letter: "A", text: "ফুসফুস" },
+      { letter: "B", text: "বৃক্ক" },
+      { letter: "C", text: "যকৃৎ" },
+      { letter: "D", text: "অগ্ন্যাশয়" }
+    ],
+    correctLetter: "B",
+    explanation: "নেফ্রন বৃক্কের গাঠনিক ও কার্যকর একক।",
+    difficulty: "medium",
+    sourceNote: "NCTB HSC জীববিজ্ঞান ২য় পত্র — মানব শারীরতত্ত্ব: রেচন",
+  },
+  {
+    id: "ACAD-2063",
+    classId: "class-11",
+    subjectId: "biology",
+    chapterId: "acad-class-11-bio-topic-6",
+    chapterName: "স্নায়ুতন্ত্র",
+    unitNumber: 16,
+    topicId: "topic-6",
+    questionText: "স্নায়ুকোষের বার্তা বহনকারী অংশ কোনটি?",
+    options: [
+      { letter: "A", text: "সাইন্যাপ্স" },
+      { letter: "B", text: "অ্যাক্সন" },
+      { letter: "C", text: "ডেনড্রন" },
+      { letter: "D", text: "মায়েলিন" }
+    ],
+    correctLetter: "B",
+    explanation: "অ্যাক্সন স্নায়বিক বার্তা কোষদেহ থেকে পরবর্তী কোষে বহন করে।",
+    difficulty: "medium",
+    sourceNote: "NCTB HSC জীববিজ্ঞান ২য় পত্র — সমন্বয় ও নিয়ন্ত্রণ",
+  },
+  {
+    id: "ACAD-2064",
+    classId: "class-11",
+    subjectId: "biology",
+    chapterId: "acad-class-11-bio-p1-chapter-10",
+    chapterName: "অধ্যায় ১০: উদ্ভিদ প্রজনন (১ম পত্র)",
+    unitNumber: 10,
+    topicId: "chapter-10",
+    questionText: "দ্বিনিষেক কোন উদ্ভিদে ঘটে?",
+    options: [
+      { letter: "A", text: "গুপ্তবীজী" },
+      { letter: "B", text: "মস" },
+      { letter: "C", text: "ফার্ন" },
+      { letter: "D", text: "ব্যক্তবীজী" }
+    ],
+    correctLetter: "A",
+    explanation: "গুপ্তবীজী উদ্ভিদে দ্বিনিষেক ঘটে — একটি শুক্রাণু ডিম্বাণুকে, অপরটি গৌণ নিউক্লিয়াসকে নিষিক্ত করে।",
+    difficulty: "medium",
+    sourceNote: "NCTB HSC জীববিজ্ঞান ১ম পত্র — উদ্ভিদ প্রজনন",
+  },
+  {
+    id: "ACAD-2065",
+    classId: "class-11",
+    subjectId: "biology",
+    chapterId: "acad-class-11-bio-topic-7",
+    chapterName: "বাস্তুবিদ্যা",
+    unitNumber: 17,
+    topicId: "topic-7",
+    questionText: "খাদ্য শৃঙ্খলে শক্তি প্রবাহের দিক কেমন?",
+    options: [
+      { letter: "A", text: "দ্বিমুখী" },
+      { letter: "B", text: "চক্রাকার" },
+      { letter: "C", text: "একমুখী" },
+      { letter: "D", text: "অনিয়মিত" }
+    ],
+    correctLetter: "C",
+    explanation: "খাদ্য শৃঙ্খলে শক্তি উৎপাদক থেকে ভোক্তার দিকে একমুখী প্রবাহিত হয়; পুষ্টি চক্রাকারে ঘোরে।",
+    difficulty: "easy",
+    sourceNote: "NCTB HSC জীববিজ্ঞান ২য় পত্র — জীববৈচিত্র্য ও পরিবেশ",
+  },
+  {
+    id: "ACAD-2066",
+    classId: "class-11",
+    subjectId: "biology",
+    chapterId: "acad-class-11-bio-topic-8",
+    chapterName: "অণুজীব",
+    unitNumber: 18,
+    topicId: "topic-8",
+    questionText: "ভাইরাসের গঠনে কী থাকে?",
+    options: [
+      { letter: "A", text: "রাইবোসোম" },
+      { letter: "B", text: "কোষপ্রাচীর" },
+      { letter: "C", text: "নিউক্লিক অ্যাসিড ও প্রোটিন আবরণ" },
+      { letter: "D", text: "মাইটোকন্ড্রিয়া" }
+    ],
+    correctLetter: "C",
+    explanation: "ভাইরাস অকোষীয়; এতে DNA বা RNA এবং প্রোটিন আবরণ থাকে।",
+    difficulty: "medium",
+    sourceNote: "NCTB HSC জীববিজ্ঞান ১ম পত্র — অণুজীব",
+  },
+  {
+    id: "ACAD-7061",
+    classId: "class-11",
+    subjectId: "biology",
+    chapterId: "acad-class-11-bio-p1-chapter-1",
+    chapterName: "অধ্যায় ১: কোষ ও এর গঠন (১ম পত্র)",
+    unitNumber: 1,
+    topicId: "chapter-1",
+    questionText: "কোষের প্রোটিন তৈরির কারখানা কোনটি?",
+    options: [
+      { letter: "A", text: "রাইবোসোম" },
+      { letter: "B", text: "নিউক্লিয়াস" },
+      { letter: "C", text: "মাইটোকন্ড্রিয়া" },
+      { letter: "D", text: "লাইসোসোম" }
+    ],
+    correctLetter: "A",
+    explanation: "রাইবোসোমে অ্যামাইনো অ্যাসিড জোড়া লেগে প্রোটিন তৈরি হয়।",
+    difficulty: "medium",
+    sourceNote: "NCTB HSC জীববিজ্ঞান ১ম পত্র — কোষ ও এর গঠন",
+  },
+  {
+    id: "ACAD-7062",
+    classId: "class-11",
+    subjectId: "biology",
+    chapterId: "acad-class-11-bio-p1-chapter-2",
+    chapterName: "অধ্যায় ২: কোষ বিভাজন (১ম পত্র)",
+    unitNumber: 2,
+    topicId: "chapter-2",
+    questionText: "মাইটোসিসের কোন ধাপে ক্রোমোজোম বিষুবরেখায় সাজে?",
+    options: [
+      { letter: "A", text: "অ্যানাফেজ" },
+      { letter: "B", text: "মেটাফেজ" },
+      { letter: "C", text: "প্রোফেজ" },
+      { letter: "D", text: "টেলোফেজ" }
+    ],
+    correctLetter: "B",
+    explanation: "মেটাফেজে ক্রোমোজোম কোষের মাঝখানে সাজে; অ্যানাফেজে দুই মেরুতে যায়।",
+    difficulty: "medium",
+    sourceNote: "NCTB HSC জীববিজ্ঞান ১ম পত্র — কোষ বিভাজন",
+  },
+  {
+    id: "ACAD-7063",
+    classId: "class-11",
+    subjectId: "biology",
+    chapterId: "acad-class-11-bio-p1-chapter-9",
+    chapterName: "অধ্যায় ৯: উদ্ভিদ শারীরতত্ত্ব (১ম পত্র)",
+    unitNumber: 9,
+    topicId: "chapter-9",
+    questionText: "সালোকসংশ্লেষণে অক্সিজেন আসে কোথা থেকে?",
+    options: [
+      { letter: "A", text: "বাতাসের O₂ থেকে" },
+      { letter: "B", text: "মাটি থেকে" },
+      { letter: "C", text: "পানি থেকে" },
+      { letter: "D", text: "CO₂ থেকে" }
+    ],
+    correctLetter: "C",
+    explanation: "পানির অণু ভেঙে অক্সিজেন নির্গত হয়; CO₂ থেকে গ্লুকোজ তৈরি হয়।",
+    difficulty: "medium",
+    sourceNote: "NCTB HSC জীববিজ্ঞান ১ম পত্র — উদ্ভিদ শারীরতত্ত্ব",
+  },
+  {
+    id: "ACAD-7064",
+    classId: "class-11",
+    subjectId: "biology",
+    chapterId: "acad-class-11-bio-topic-1",
+    chapterName: "মানব শারীরতত্ত্ব",
+    unitNumber: 11,
+    topicId: "topic-1",
+    questionText: "মানুষের রক্তচাপ সাধারণত কত?",
+    options: [
+      { letter: "A", text: "১৬০/১০০ mmHg" },
+      { letter: "B", text: "১০০/৬০ mmHg" },
+      { letter: "C", text: "১২০/৮০ mmHg" },
+      { letter: "D", text: "১৪০/৯০ mmHg" }
+    ],
+    correctLetter: "C",
+    explanation: "সাধারণ রক্তচাপ ১২০/৮০ mmHg; ১৪০/৯০-এর বেশি হলে উচ্চ রক্তচাপ।",
+    difficulty: "medium",
+    sourceNote: "NCTB HSC জীববিজ্ঞান ২য় পত্র — মানব শারীরতত্ত্ব",
+  },
+  {
+    id: "ACAD-7065",
+    classId: "class-11",
+    subjectId: "biology",
+    chapterId: "acad-class-11-bio-topic-2",
+    chapterName: "পরিপাক",
+    unitNumber: 12,
+    topicId: "topic-2",
+    questionText: "পিত্তরস কোথায় তৈরি হয়?",
+    options: [
+      { letter: "A", text: "যকৃতে" },
+      { letter: "B", text: "ক্ষুদ্রান্ত্রে" },
+      { letter: "C", text: "পাকস্থলীতে" },
+      { letter: "D", text: "অগ্ন্যাশয়ে" }
+    ],
+    correctLetter: "A",
+    explanation: "যকৃতে পিত্ত তৈরি হয়ে পিত্তথলিতে জমা থাকে; এটি চর্বি হজমে সাহায্য করে।",
+    difficulty: "medium",
+    sourceNote: "NCTB HSC জীববিজ্ঞান ২য় পত্র — মানব শারীরতত্ত্ব: পরিপাক",
+  },
+  {
+    id: "ACAD-7066",
+    classId: "class-11",
+    subjectId: "biology",
+    chapterId: "acad-class-11-bio-topic-3",
+    chapterName: "জিনতত্ত্ব",
+    unitNumber: 13,
+    topicId: "topic-3",
+    questionText: "মেন্ডেলের প্রথম সূত্র কোনটি?",
+    options: [
+      { letter: "A", text: "প্রকটতা সূত্র" },
+      { letter: "B", text: "স্বাধীন বিন্যাস সূত্র" },
+      { letter: "C", text: "সহপ্রকটতা সূত্র" },
+      { letter: "D", text: "পৃথকীকরণ সূত্র" }
+    ],
+    correctLetter: "D",
+    explanation: "প্রথম সূত্র: জননকোষ সৃষ্টির সময় অ্যালিলদ্বয় পৃথক হয়।",
+    difficulty: "medium",
+    sourceNote: "NCTB HSC জীববিজ্ঞান ২য় পত্র — জিনতত্ত্ব",
+  },
+  {
+    id: "ACAD-7067",
+    classId: "class-11",
+    subjectId: "biology",
+    chapterId: "acad-class-11-bio-topic-4",
+    chapterName: "শ্বসন",
+    unitNumber: 14,
+    topicId: "topic-4",
+    questionText: "শ্বাসক্রিয়ায় ডায়াফ্রাম সংকুচিত হলে কী হয়?",
+    options: [
+      { letter: "A", text: "বুকের আয়তন কমে" },
+      { letter: "B", text: "কিছুই হয় না" },
+      { letter: "C", text: "বাতাস বের হয়" },
+      { letter: "D", text: "বুকের আয়তন বাড়ে ও বাতাস ঢোকে" }
+    ],
+    correctLetter: "D",
+    explanation: "ডায়াফ্রাম নিচে নামলে বুকের আয়তন বাড়ে; বাতাস ফুসফুসে ঢোকে (প্রশ্বাস)।",
+    difficulty: "medium",
+    sourceNote: "NCTB HSC জীববিজ্ঞান ২য় পত্র — মানব শারীরতত্ত্ব: শ্বসন",
+  },
+  {
+    id: "ACAD-7068",
+    classId: "class-11",
+    subjectId: "biology",
+    chapterId: "acad-class-11-bio-topic-5",
+    chapterName: "রেচন",
+    unitNumber: 15,
+    topicId: "topic-5",
+    questionText: "মূত্রে প্রধান বর্জ্য কোনটি?",
+    options: [
+      { letter: "A", text: "গ্লুকোজ" },
+      { letter: "B", text: "ইউরিয়া" },
+      { letter: "C", text: "অ্যামাইনো অ্যাসিড" },
+      { letter: "D", text: "প্রোটিন" }
+    ],
+    correctLetter: "B",
+    explanation: "যকৃতে অ্যামোনিয়া থেকে ইউরিয়া তৈরি হয়ে বৃক্ক দিয়ে মূত্রে বের হয়।",
+    difficulty: "medium",
+    sourceNote: "NCTB HSC জীববিজ্ঞান ২য় পত্র — মানব শারীরতত্ত্ব: রেচন",
+  },
+  {
+    id: "ACAD-7069",
+    classId: "class-11",
+    subjectId: "biology",
+    chapterId: "acad-class-11-bio-topic-6",
+    chapterName: "স্নায়ুতন্ত্র",
+    unitNumber: 16,
+    topicId: "topic-6",
+    questionText: "প্রতিবর্ত ক্রিয়া নিয়ন্ত্রণ করে কে?",
+    options: [
+      { letter: "A", text: "হৃৎপিণ্ড" },
+      { letter: "B", text: "গুরুমস্তিষ্ক" },
+      { letter: "C", text: "সুষুম্না কাণ্ড" },
+      { letter: "D", text: "লঘুমস্তিষ্ক" }
+    ],
+    correctLetter: "C",
+    explanation: "গরম কিছু ছুঁলে হাত সরানোর মতো প্রতিবর্ত ক্রিয়া সুষুম্না কাণ্ড নিয়ন্ত্রণ করে।",
+    difficulty: "medium",
+    sourceNote: "NCTB HSC জীববিজ্ঞান ২য় পত্র — সমন্বয় ও নিয়ন্ত্রণ",
+  },
+  {
+    id: "ACAD-7070",
+    classId: "class-11",
+    subjectId: "biology",
+    chapterId: "acad-class-11-bio-p1-chapter-10",
+    chapterName: "অধ্যায় ১০: উদ্ভিদ প্রজনন (১ম পত্র)",
+    unitNumber: 10,
+    topicId: "chapter-10",
+    questionText: "নিষেক ছাড়া বীজ তৈরি হলে তাকে কী বলে?",
+    options: [
+      { letter: "A", text: "স্বপরাগায়ণ" },
+      { letter: "B", text: "পরপরাগায়ণ" },
+      { letter: "C", text: "দ্বিনিষেক" },
+      { letter: "D", text: "অপোমিক্সিস" }
+    ],
+    correctLetter: "D",
+    explanation: "নিষেক ছাড়া বীজ তৈরি হওয়াকে অপোমিক্সিস বলে; এতে বীজ থেকে মাতৃ উদ্ভিদের অনুরূপ (ক্লোন) উদ্ভিদ জন্মে।",
+    difficulty: "medium",
+    sourceNote: "NCTB HSC জীববিজ্ঞান ১ম পত্র — অধ্যায় ১০: উদ্ভিদ প্রজনন",
+  },
+  {
+    id: "ACAD-7071",
+    classId: "class-11",
+    subjectId: "biology",
+    chapterId: "acad-class-11-bio-topic-7",
+    chapterName: "বাস্তুবিদ্যা",
+    unitNumber: 17,
+    topicId: "topic-7",
+    questionText: "খাদ্য শৃঙ্খলে শক্তির কত ভাগ পরের স্তরে যায়?",
+    options: [
+      { letter: "A", text: "প্রায় ৯০%" },
+      { letter: "B", text: "প্রায় ৫০%" },
+      { letter: "C", text: "প্রায় ১০০%" },
+      { letter: "D", text: "প্রায় ১০%" }
+    ],
+    correctLetter: "D",
+    explanation: "১০% সূত্র: প্রতি স্তরে শক্তির প্রায় ১০% পরের স্তরে যায়।",
+    difficulty: "medium",
+    sourceNote: "NCTB HSC জীববিজ্ঞান ২য় পত্র — জীববৈচিত্র্য ও পরিবেশ",
+  },
+  {
+    id: "ACAD-7072",
+    classId: "class-11",
+    subjectId: "biology",
+    chapterId: "acad-class-11-bio-topic-8",
+    chapterName: "অণুজীব",
+    unitNumber: 18,
+    topicId: "topic-8",
+    questionText: "দই তৈরিতে কোন ব্যাকটেরিয়া কাজ করে?",
+    options: [
+      { letter: "A", text: "ল্যাকটোব্যাসিলাস" },
+      { letter: "B", text: "স্ট্যাফাইলোকক্কাস" },
+      { letter: "C", text: "ই. কোলাই" },
+      { letter: "D", text: "সালমোনেলা" }
+    ],
+    correctLetter: "A",
+    explanation: "ল্যাকটোব্যাসিলাস দুধের ল্যাকটোজকে ল্যাকটিক অ্যাসিডে বদলে দই তৈরি করে।",
+    difficulty: "medium",
+    sourceNote: "NCTB HSC জীববিজ্ঞান ১ম পত্র — অণুজীব",
   },
 ];

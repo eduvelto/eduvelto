@@ -1,20 +1,29 @@
-// Eduvelto — Academic ICT practice questions (Classes 6–9),
+// Eduvelto — Academic ICT practice questions (Classes 6–9 and 11),
 // verified against the NCTB books (review 26 Nov 2026).
 //
-// Static data ONLY — zero Firestore reads. The 77 questions are the
-// Academic Classes 6–9 ICT drafts AFTER review (see
+// Static data ONLY — zero Firestore reads. The 99 questions are the
+// Academic Classes 6–9 and 11 ICT drafts AFTER review (see
 // review-academic-c6-ict-verdicts.json,
 // review-academic-c7-ict-verdicts.json,
 // review-academic-c8-ict-verdicts.json,
-// review-academic-c9-ict-verdicts.json and
+// review-academic-c9-ict-verdicts.json,
+// review-academic-c11-12-ict-verdicts.json and
 // review-academic-c6-fixes-applied.md,
 // review-academic-c7-fixes-applied.md,
 // review-academic-c8-fixes-applied.md,
-// review-academic-c9-fixes-applied.md in
+// review-academic-c9-fixes-applied.md,
+// review-academic-c11-12-fixes-applied.md in
 // ~/workspace/eduorbit/sprint-1week-2026-11-25/).
 //
 // Class 9 NOTE: the Class 9 questions were verified against the DAKHIL
 // editions — no general NCTB Class 9-10 book set exists in the workspace.
+//
+// Class 11 NOTE: the Class 11 questions were verified for fact
+// correctness + on-syllabus (review 26 Nov 2026) — NO HSC book
+// exists in the workspace, so VERIFIED here does NOT mean
+// book-confirmed. A teacher with the actual HSC books should
+// spot-check before publication, especially the re-cited chapters
+// (see review-academic-c11-12-fixes-applied.md).
 //
 // HONESTY: these are ORIGINAL practice questions written for the
 // NCTB lessons — NOT board / university / previous-year questions.
@@ -37,7 +46,7 @@
 
 import { type PublicAcademicQuestion } from './publicAcademic';
 
-/** All verified Academic ICT questions, in draft order (Class 6, then 7, then 8, then 9). */
+/** All verified Academic ICT questions, in draft order (Class 6, then 7, then 8, then 9, then 11). */
 export const PUBLIC_ACADEMIC_ICT_QUESTIONS: PublicAcademicQuestion[] = [
   {
     id: "ACAD-C6-ICT-001",
@@ -1578,5 +1587,445 @@ export const PUBLIC_ACADEMIC_ICT_QUESTIONS: PublicAcademicQuestion[] = [
     explanation: "হার্ডডিস্কে তথ্য স্থায়ীভাবে সংরক্ষণ করা হয়; বিদ্যুৎ বন্ধ হলেও তা মুছে যায় না।",
     difficulty: "medium",
     sourceNote: "NCTB তথ্য ও যোগাযোগ প্রযুক্তি — কম্পিউটার যন্ত্রাংশ",
+  },
+  {
+    id: "ACAD-2021",
+    classId: "class-11",
+    subjectId: "ict",
+    chapterId: "acad-class-11-ict-chapter-1",
+    chapterName: "অধ্যায় ১: তথ্য ও যোগাযোগ প্রযুক্তি",
+    unitNumber: 1,
+    topicId: "chapter-1",
+    questionText: "কম্পিউটার নেটওয়ার্কে একাধিক কম্পিউটার যুক্ত করার মূল উদ্দেশ্য কী?",
+    options: [
+      { letter: "A", text: "বিদ্যুৎ সাশ্রয়" },
+      { letter: "B", text: "শুধু ছবি তোলা" },
+      { letter: "C", text: "তথ্য আদান-প্রদান ও সম্পদ ভাগাভাগি" },
+      { letter: "D", text: "শুধু গেম খেলা" }
+    ],
+    correctLetter: "C",
+    explanation: "নেটওয়ার্কে তথ্য আদান-প্রদান ও প্রিন্টার-ইন্টারনেটের মতো সম্পদ ভাগ করে ব্যবহার করা যায়।",
+    difficulty: "easy",
+    sourceNote: "NCTB তথ্য ও যোগাযোগ প্রযুক্তি, একাদশ-দ্বাদশ শ্রেণি — অধ্যায় ১: তথ্য ও যোগাযোগ প্রযুক্তি",
+  },
+  {
+    id: "ACAD-2022",
+    classId: "class-11",
+    subjectId: "ict",
+    chapterId: "acad-class-11-ict-chapter-2",
+    chapterName: "অধ্যায় ২: যোগাযোগ ব্যবস্থা",
+    unitNumber: 2,
+    topicId: "chapter-2",
+    questionText: "MAN-এর পূর্ণরূপ কী?",
+    options: [
+      { letter: "A", text: "Metropolitan Area Network" },
+      { letter: "B", text: "Main Area Network" },
+      { letter: "C", text: "Medium Area Network" },
+      { letter: "D", text: "Metro Access Network" }
+    ],
+    correctLetter: "A",
+    explanation: "MAN = Metropolitan Area Network — একটি শহরজুড়ে বিস্তৃত নেটওয়ার্ক।",
+    difficulty: "medium",
+    sourceNote: "NCTB তথ্য ও যোগাযোগ প্রযুক্তি, একাদশ-দ্বাদশ শ্রেণি — অধ্যায় ২: যোগাযোগ ব্যবস্থা",
+  },
+  {
+    id: "ACAD-2023",
+    classId: "class-11",
+    subjectId: "ict",
+    chapterId: "acad-class-11-ict-chapter-3",
+    chapterName: "অধ্যায় ৩: সংখ্যা পদ্ধতি",
+    unitNumber: 3,
+    topicId: "chapter-3",
+    questionText: "(1011)₂ এর দশমিক মান কত?",
+    options: [
+      { letter: "A", text: "৭" },
+      { letter: "B", text: "৯" },
+      { letter: "C", text: "১৩" },
+      { letter: "D", text: "১১" }
+    ],
+    correctLetter: "D",
+    explanation: "1011₂ = 8 + 0 + 2 + 1 = 11।",
+    difficulty: "medium",
+    sourceNote: "NCTB তথ্য ও যোগাযোগ প্রযুক্তি, একাদশ-দ্বাদশ শ্রেণি — অধ্যায় ৩: সংখ্যা পদ্ধতি",
+  },
+  {
+    id: "ACAD-2024",
+    classId: "class-11",
+    subjectId: "ict",
+    chapterId: "acad-class-11-ict-chapter-3",
+    chapterName: "অধ্যায় ৩: সংখ্যা পদ্ধতি",
+    unitNumber: 3,
+    topicId: "chapter-3",
+    questionText: "AND গেটের আউটপুট ১ হয় কখন?",
+    options: [
+      { letter: "A", text: "যেকোনো একটি ইনপুট ১ হলে" },
+      { letter: "B", text: "কখনোই নয়" },
+      { letter: "C", text: "সব ইনপুট ১ হলে" },
+      { letter: "D", text: "সব ইনপুট ০ হলে" }
+    ],
+    correctLetter: "C",
+    explanation: "AND গেটে সব ইনপুট ১ হলেই আউটপুট ১ হয়।",
+    difficulty: "medium",
+    sourceNote: "NCTB তথ্য ও যোগাযোগ প্রযুক্তি, একাদশ-দ্বাদশ শ্রেণি — অধ্যায় ৩: সংখ্যা পদ্ধতি ও ডিজিটাল ডিভাইস (লজিক গেট)",
+  },
+  {
+    id: "ACAD-2025",
+    classId: "class-11",
+    subjectId: "ict",
+    chapterId: "acad-class-11-ict-chapter-5",
+    chapterName: "অধ্যায় ৫: প্রোগ্রামিং ভাষা",
+    unitNumber: 5,
+    topicId: "chapter-5",
+    questionText: "C ভাষায় প্রোগ্রাম শুরু হয় কোন ফাংশন দিয়ে?",
+    options: [
+      { letter: "A", text: "start()" },
+      { letter: "B", text: "run()" },
+      { letter: "C", text: "begin()" },
+      { letter: "D", text: "main()" }
+    ],
+    correctLetter: "D",
+    explanation: "C প্রোগ্রামের কার্যক্রম main() ফাংশন থেকে শুরু হয়।",
+    difficulty: "medium",
+    sourceNote: "NCTB তথ্য ও যোগাযোগ প্রযুক্তি, একাদশ-দ্বাদশ শ্রেণি — অধ্যায় ৫: প্রোগ্রামিং ভাষা",
+  },
+  {
+    id: "ACAD-2026",
+    classId: "class-11",
+    subjectId: "ict",
+    chapterId: "acad-class-11-ict-chapter-6",
+    chapterName: "অধ্যায় ৬: ডেটাবেজ",
+    unitNumber: 6,
+    topicId: "chapter-6",
+    questionText: "ডেটাবেজে তথ্য সাজানো হয় কোন আকারে?",
+    options: [
+      { letter: "A", text: "ভিডিও" },
+      { letter: "B", text: "গান" },
+      { letter: "C", text: "টেবিল" },
+      { letter: "D", text: "ছবি" }
+    ],
+    correctLetter: "C",
+    explanation: "রিলেশনাল ডেটাবেজে তথ্য সারি ও কলামবিশিষ্ট টেবিলে সাজানো থাকে।",
+    difficulty: "medium",
+    sourceNote: "NCTB তথ্য ও যোগাযোগ প্রযুক্তি, একাদশ-দ্বাদশ শ্রেণি — অধ্যায় ৬: ডেটাবেজ",
+  },
+  {
+    id: "ACAD-2027",
+    classId: "class-11",
+    subjectId: "ict",
+    chapterId: "acad-class-11-ict-topic-1",
+    chapterName: "ওয়েব",
+    unitNumber: 7,
+    topicId: "topic-1",
+    questionText: "কম্পিউটারে 'www' বলতে কী বোঝায়?",
+    options: [
+      { letter: "A", text: "Wide World Web" },
+      { letter: "B", text: "Web World Wide" },
+      { letter: "C", text: "World Web Window" },
+      { letter: "D", text: "World Wide Web" }
+    ],
+    correctLetter: "D",
+    explanation: "'www' বলতে World Wide Web বোঝায়।",
+    difficulty: "easy",
+    sourceNote: "NCTB তথ্য ও যোগাযোগ প্রযুক্তি, একাদশ-দ্বাদশ শ্রেণি — ওয়েব ডিজাইন",
+  },
+  {
+    id: "ACAD-2028",
+    classId: "class-11",
+    subjectId: "ict",
+    chapterId: "acad-class-11-ict-chapter-1",
+    chapterName: "অধ্যায় ১: তথ্য ও যোগাযোগ প্রযুক্তি",
+    unitNumber: 1,
+    topicId: "chapter-1",
+    questionText: "কোনটি একটি শক্তিশালী পাসওয়ার্ডের বৈশিষ্ট্য?",
+    options: [
+      { letter: "A", text: "সহজ শব্দ 'password'" },
+      { letter: "B", text: "শুধু জন্মতারিখ" },
+      { letter: "C", text: "শুধু নিজের নাম" },
+      { letter: "D", text: "বড় হাতের ও ছোট হাতের অক্ষর, সংখ্যা ও চিহ্নের মিশ্রণ" }
+    ],
+    correctLetter: "D",
+    explanation: "শক্তিশালী পাসওয়ার্ডে বড় ও ছোট অক্ষর, সংখ্যা ও বিশেষ চিহ্নের মিশ্রণ থাকে।",
+    difficulty: "medium",
+    sourceNote: "NCTB তথ্য ও যোগাযোগ প্রযুক্তি, একাদশ-দ্বাদশ শ্রেণি — অধ্যায় ১: তথ্য ও যোগাযোগ প্রযুক্তি: বিশ্ব ও বাংলাদেশ প্রেক্ষিত (সাইবার নিরাপত্তা)",
+  },
+  {
+    id: "ACAD-2029",
+    classId: "class-11",
+    subjectId: "ict",
+    chapterId: "acad-class-11-ict-topic-2",
+    chapterName: "ই-কমার্স",
+    unitNumber: 8,
+    topicId: "topic-2",
+    questionText: "অনলাইনে পণ্য কেনাবেচাকে কী বলে?",
+    options: [
+      { letter: "A", text: "ই-কমার্স" },
+      { letter: "B", text: "ই-মেইল" },
+      { letter: "C", text: "ই-বুক" },
+      { letter: "D", text: "ই-লার্নিং" }
+    ],
+    correctLetter: "A",
+    explanation: "ইন্টারনেটে পণ্য/সেবা কেনাবেচাই ই-কমার্স।",
+    difficulty: "easy",
+    sourceNote: "NCTB তথ্য ও যোগাযোগ প্রযুক্তি, একাদশ-দ্বাদশ শ্রেণি — ই-কমার্স",
+  },
+  {
+    id: "ACAD-2030",
+    classId: "class-11",
+    subjectId: "ict",
+    chapterId: "acad-class-11-ict-topic-3",
+    chapterName: "কৃত্রিম বুদ্ধিমত্তা",
+    unitNumber: 9,
+    topicId: "topic-3",
+    questionText: "কৃত্রিম বুদ্ধিমত্তার একটি উদাহরণ কোনটি?",
+    options: [
+      { letter: "A", text: "ভয়েস অ্যাসিস্ট্যান্ট" },
+      { letter: "B", text: "প্রিন্টার" },
+      { letter: "C", text: "মাউস" },
+      { letter: "D", text: "ক্যালকুলেটর" }
+    ],
+    correctLetter: "A",
+    explanation: "ভয়েস অ্যাসিস্ট্যান্ট কৃত্রিম বুদ্ধিমত্তা ব্যবহার করে ব্যবহারকারীর কথা বুঝে সাড়া দেয়।",
+    difficulty: "medium",
+    sourceNote: "NCTB তথ্য ও যোগাযোগ প্রযুক্তি, একাদশ-দ্বাদশ শ্রেণি — কৃত্রিম বুদ্ধিমত্তা",
+  },
+  {
+    id: "ACAD-7025",
+    classId: "class-11",
+    subjectId: "ict",
+    chapterId: "acad-class-11-ict-chapter-1",
+    chapterName: "অধ্যায় ১: তথ্য ও যোগাযোগ প্রযুক্তি",
+    unitNumber: 1,
+    topicId: "chapter-1",
+    questionText: "ক্লাউড স্টোরেজের একটি উদাহরণ কোনটি?",
+    options: [
+      { letter: "A", text: "Google Drive" },
+      { letter: "B", text: "Notepad" },
+      { letter: "C", text: "MS Word" },
+      { letter: "D", text: "Calculator" }
+    ],
+    correctLetter: "A",
+    explanation: "Google Drive ক্লাউড স্টোরেজের একটি উদাহরণ।",
+    difficulty: "medium",
+    sourceNote: "NCTB তথ্য ও যোগাযোগ প্রযুক্তি — ক্লাউড কম্পিউটিং",
+  },
+  {
+    id: "ACAD-7026",
+    classId: "class-11",
+    subjectId: "ict",
+    chapterId: "acad-class-11-ict-chapter-2",
+    chapterName: "অধ্যায় ২: যোগাযোগ ব্যবস্থা",
+    unitNumber: 2,
+    topicId: "chapter-2",
+    questionText: "PAN-এর পূর্ণরূপ কী?",
+    options: [
+      { letter: "A", text: "Private Area Network" },
+      { letter: "B", text: "Personal Area Network" },
+      { letter: "C", text: "Portable Area Network" },
+      { letter: "D", text: "Public Area Network" }
+    ],
+    correctLetter: "B",
+    explanation: "PAN-এর পূর্ণরূপ Personal Area Network।",
+    difficulty: "medium",
+    sourceNote: "NCTB তথ্য ও যোগাযোগ প্রযুক্তি — যোগাযোগ ব্যবস্থা",
+  },
+  {
+    id: "ACAD-7027",
+    classId: "class-11",
+    subjectId: "ict",
+    chapterId: "acad-class-11-ict-chapter-3",
+    chapterName: "অধ্যায় ৩: সংখ্যা পদ্ধতি",
+    unitNumber: 3,
+    topicId: "chapter-3",
+    questionText: "(1101)₂ এর দশমিক মান কত?",
+    options: [
+      { letter: "A", text: "১৫" },
+      { letter: "B", text: "৯" },
+      { letter: "C", text: "১৩" },
+      { letter: "D", text: "১১" }
+    ],
+    correctLetter: "C",
+    explanation: "1101₂ = 8 + 4 + 0 + 1 = 13।",
+    difficulty: "medium",
+    sourceNote: "NCTB তথ্য ও যোগাযোগ প্রযুক্তি — সংখ্যা পদ্ধতি",
+  },
+  {
+    id: "ACAD-7028",
+    classId: "class-11",
+    subjectId: "ict",
+    chapterId: "acad-class-11-ict-chapter-3",
+    chapterName: "অধ্যায় ৩: সংখ্যা পদ্ধতি",
+    unitNumber: 3,
+    topicId: "chapter-3",
+    questionText: "OR গেটের আউটপুট ০ হয় কখন?",
+    options: [
+      { letter: "A", text: "সব ইনপুট ০ হলে" },
+      { letter: "B", text: "সব ইনপুট ১ হলে" },
+      { letter: "C", text: "কখনোই নয়" },
+      { letter: "D", text: "যেকোনো একটি ইনপুট ১ হলে" }
+    ],
+    correctLetter: "A",
+    explanation: "OR গেটে যেকোনো একটি ইনপুট ১ হলেই আউটপুট ১ হয়।",
+    difficulty: "medium",
+    sourceNote: "NCTB তথ্য ও যোগাযোগ প্রযুক্তি — লজিক গেট",
+  },
+  {
+    id: "ACAD-7029",
+    classId: "class-11",
+    subjectId: "ict",
+    chapterId: "acad-class-11-ict-chapter-5",
+    chapterName: "অধ্যায় ৫: প্রোগ্রামিং ভাষা",
+    unitNumber: 5,
+    topicId: "chapter-5",
+    questionText: "C ভাষায় চলক ঘোষণার উদাহরণ কোনটি?",
+    options: [
+      { letter: "A", text: "declare age;" },
+      { letter: "B", text: "int age;" },
+      { letter: "C", text: "int = age;" },
+      { letter: "D", text: "age int;" }
+    ],
+    correctLetter: "B",
+    explanation: "C-তে চলক ঘোষণা: int age; — প্রথমে টাইপ, তারপর নাম।",
+    difficulty: "medium",
+    sourceNote: "NCTB তথ্য ও যোগাযোগ প্রযুক্তি — প্রোগ্রামিং ভাষা",
+  },
+  {
+    id: "ACAD-7030",
+    classId: "class-11",
+    subjectId: "ict",
+    chapterId: "acad-class-11-ict-chapter-6",
+    chapterName: "অধ্যায় ৬: ডেটাবেজ",
+    unitNumber: 6,
+    topicId: "chapter-6",
+    questionText: "ডেটাবেজের প্রধান কী (primary key) কী?",
+    options: [
+      { letter: "A", text: "শুধু সংখ্যা" },
+      { letter: "B", text: "প্রতিটি রেকর্ডকে চেনার অনন্য ক্ষেত্র" },
+      { letter: "C", text: "শুধু নাম" },
+      { letter: "D", text: "শুধু তারিখ" }
+    ],
+    correctLetter: "B",
+    explanation: "প্রাইমারি কী প্রতিটি রেকর্ডকে অনন্যভাবে চেনায়, যেমন রোল নম্বর।",
+    difficulty: "medium",
+    sourceNote: "NCTB তথ্য ও যোগাযোগ প্রযুক্তি — ডেটাবেজ",
+  },
+  {
+    id: "ACAD-7031",
+    classId: "class-11",
+    subjectId: "ict",
+    chapterId: "acad-class-11-ict-topic-1",
+    chapterName: "ওয়েব",
+    unitNumber: 7,
+    topicId: "topic-1",
+    questionText: "ওয়েবপেজে লিংক তৈরি করতে কোন ট্যাগ ব্যবহৃত হয়?",
+    options: [
+      { letter: "A", text: "<div>" },
+      { letter: "B", text: "<a>" },
+      { letter: "C", text: "<p>" },
+      { letter: "D", text: "<img>" }
+    ],
+    correctLetter: "B",
+    explanation: "<a> ট্যাগে href দিয়ে লিংক তৈরি করা হয়।",
+    difficulty: "medium",
+    sourceNote: "NCTB তথ্য ও যোগাযোগ প্রযুক্তি — ওয়েব ডিজাইন",
+  },
+  {
+    id: "ACAD-7032",
+    classId: "class-11",
+    subjectId: "ict",
+    chapterId: "acad-class-11-ict-chapter-1",
+    chapterName: "অধ্যায় ১: তথ্য ও যোগাযোগ প্রযুক্তি",
+    unitNumber: 1,
+    topicId: "chapter-1",
+    questionText: "ফায়ারওয়ালের কাজ কী?",
+    options: [
+      { letter: "A", text: "গতি বাড়ানো" },
+      { letter: "B", text: "অননুমোদিত প্রবেশ ঠেকানো" },
+      { letter: "C", text: "ভাইরাস তৈরি করা" },
+      { letter: "D", text: "তথ্য মুছে ফেলা" }
+    ],
+    correctLetter: "B",
+    explanation: "ফায়ারওয়াল নেটওয়ার্কে অননুমোদিত প্রবেশ ঠেকায়।",
+    difficulty: "medium",
+    sourceNote: "NCTB তথ্য ও যোগাযোগ প্রযুক্তি — নিরাপত্তা",
+  },
+  {
+    id: "ACAD-7033",
+    classId: "class-11",
+    subjectId: "ict",
+    chapterId: "acad-class-11-ict-topic-2",
+    chapterName: "ই-কমার্স",
+    unitNumber: 8,
+    topicId: "topic-2",
+    questionText: "ক্যাশ অন ডেলিভারি কী?",
+    options: [
+      { letter: "A", text: "টাকা না দেওয়া" },
+      { letter: "B", text: "পণ্য পেয়ে টাকা দেওয়া" },
+      { letter: "C", text: "শুধু কার্ডে দেওয়া" },
+      { letter: "D", text: "আগে টাকা দেওয়া" }
+    ],
+    correctLetter: "B",
+    explanation: "COD-তে পণ্য হাতে পেয়ে টাকা দেওয়া হয়।",
+    difficulty: "medium",
+    sourceNote: "NCTB তথ্য ও যোগাযোগ প্রযুক্তি — ই-কমার্স",
+  },
+  {
+    id: "ACAD-7034",
+    classId: "class-11",
+    subjectId: "ict",
+    chapterId: "acad-class-11-ict-topic-3",
+    chapterName: "কৃত্রিম বুদ্ধিমত্তা",
+    unitNumber: 9,
+    topicId: "topic-3",
+    questionText: "মেশিন লার্নিং কী?",
+    options: [
+      { letter: "A", text: "শুধু হিসাব করা" },
+      { letter: "B", text: "শুধু গেম খেলা" },
+      { letter: "C", text: "শুধু রোবট বানানো" },
+      { letter: "D", text: "তথ্য থেকে শিখে সিদ্ধান্ত নেওয়া" }
+    ],
+    correctLetter: "D",
+    explanation: "মেশিন লার্নিংয়ে কম্পিউটার তথ্য থেকে শিখে ভবিষ্যদ্বাণী করে।",
+    difficulty: "medium",
+    sourceNote: "NCTB তথ্য ও যোগাযোগ প্রযুক্তি — কৃত্রিম বুদ্ধিমত্তা",
+  },
+  {
+    id: "ACAD-7035",
+    classId: "class-11",
+    subjectId: "ict",
+    chapterId: "acad-class-11-ict-topic-4",
+    chapterName: "বাইনারি",
+    unitNumber: 10,
+    topicId: "topic-4",
+    questionText: "(12)₁₀ এর বাইনারি মান কত?",
+    options: [
+      { letter: "A", text: "1100" },
+      { letter: "B", text: "1110" },
+      { letter: "C", text: "1010" },
+      { letter: "D", text: "1001" }
+    ],
+    correctLetter: "A",
+    explanation: "12 = 8 + 4 = 1100₂।",
+    difficulty: "medium",
+    sourceNote: "NCTB তথ্য ও যোগাযোগ প্রযুক্তি — সংখ্যা পদ্ধতি",
+  },
+  {
+    id: "ACAD-7036",
+    classId: "class-11",
+    subjectId: "ict",
+    chapterId: "acad-class-11-ict-topic-5",
+    chapterName: "সফটওয়্যার",
+    unitNumber: 11,
+    topicId: "topic-5",
+    questionText: "ওপেন সোর্স সফটওয়্যারের উদাহরণ কোনটি?",
+    options: [
+      { letter: "A", text: "ফটোশপ" },
+      { letter: "B", text: "মাইক্রোসফট অফিস" },
+      { letter: "C", text: "লিনাক্স" },
+      { letter: "D", text: "উইন্ডোজ" }
+    ],
+    correctLetter: "C",
+    explanation: "লিনাক্স ওপেন সোর্স; এর সোর্স কোড সবার জন্য উন্মুক্ত।",
+    difficulty: "medium",
+    sourceNote: "NCTB তথ্য ও যোগাযোগ প্রযুক্তি — সফটওয়্যার",
   },
 ];

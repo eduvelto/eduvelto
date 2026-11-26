@@ -1,22 +1,31 @@
-// Eduvelto — Academic English practice questions (Classes 3–8),
+// Eduvelto — Academic English practice questions (Classes 3–8 and 11),
 // verified against the NCTB books (review 26 Nov 2026).
 //
-// Static data ONLY — zero Firestore reads. The 158 questions are the
-// Academic Class 3–8 English drafts AFTER review:
+// Static data ONLY — zero Firestore reads. The 178 questions are the
+// Academic Class 3–8 and Class 11 English drafts AFTER review:
 // 150 VERIFIED as-is + 8 NEEDS-FIX items fixed (see
 // review-academic-c3-english-verdicts.json,
 // review-academic-c4-english-verdicts.json,
 // review-academic-c5-english-verdicts.json,
 // review-academic-c6-english-verdicts.json,
 // review-academic-c7-english-verdicts.json,
-// review-academic-c8-english-verdicts.json and
+// review-academic-c8-english-verdicts.json,
+// review-academic-c11-12-english-verdicts.json and
 // review-academic-c3c5-fixes-applied.md,
 // review-academic-c4-fixes-applied.md,
 // review-academic-c5-fixes-applied.md,
 // review-academic-c6-fixes-applied.md,
 // review-academic-c7-fixes-applied.md,
-// review-academic-c8-fixes-applied.md in
+// review-academic-c8-fixes-applied.md,
+// review-academic-c11-12-fixes-applied.md in
 // ~/workspace/eduorbit/sprint-1week-2026-11-25/).
+//
+// Class 11 NOTE: the Class 11 questions were verified for fact
+// correctness + on-syllabus (review 26 Nov 2026) — NO HSC book
+// exists in the workspace, so VERIFIED here does NOT mean
+// book-confirmed. A teacher with the actual HSC books should
+// spot-check before publication, especially the re-cited chapters
+// (see review-academic-c11-12-fixes-applied.md).
 //
 // HONESTY: these are ORIGINAL practice questions written for the
 // NCTB lessons — NOT board / university / previous-year questions.
@@ -36,7 +45,7 @@
 
 import { type PublicAcademicQuestion } from './publicAcademic';
 
-/** All verified Academic English questions, in draft order (Class 3, then 4, then 5, then 6, then 7, then 8). */
+/** All verified Academic English questions, in draft order (Class 3, then 4, then 5, then 6, then 7, then 8, then 11). */
 export const PUBLIC_ACADEMIC_ENGLISH_QUESTIONS: PublicAcademicQuestion[] = [
   {
     id: "ACAD-C3-ENG-001",
@@ -3197,5 +3206,405 @@ export const PUBLIC_ACADEMIC_ENGLISH_QUESTIONS: PublicAcademicQuestion[] = [
     explanation: "Women played an important role in the Liberation War and uprisings.",
     difficulty: "medium",
     sourceNote: "English for Today, Class 8 (NCTB), Unit 11: Women's Role in Uprisings",
+  },
+  {
+    id: "ACAD-2011",
+    classId: "class-11",
+    subjectId: "english",
+    chapterId: "acad-class-11-eng-unit-1",
+    chapterName: "Unit One: People or Institutions Making History",
+    unitNumber: 1,
+    topicId: "unit-1",
+    questionText: "Nelson Mandela spent how many years in prison?",
+    options: [
+      { letter: "A", text: "27 years" },
+      { letter: "B", text: "10 years" },
+      { letter: "C", text: "30 years" },
+      { letter: "D", text: "18 years" }
+    ],
+    correctLetter: "A",
+    explanation: "Mandela was imprisoned for 27 years before becoming South Africa's first democratically elected president.",
+    difficulty: "medium",
+    sourceNote: "NCTB English For Today, Class 11-12 (rev. ed. 2020) — Unit One: People or Institutions Making History, Lesson 2: Nelson Mandela, from Apartheid Fighter to President",
+  },
+  {
+    id: "ACAD-2012",
+    classId: "class-11",
+    subjectId: "english",
+    chapterId: "acad-class-11-eng-topic-1",
+    chapterName: "Reading — Diaspora",
+    unitNumber: 13,
+    topicId: "topic-1",
+    questionText: "The word 'diaspora' mainly refers to —",
+    options: [
+      { letter: "A", text: "a kind of food" },
+      { letter: "B", text: "a river" },
+      { letter: "C", text: "a festival" },
+      { letter: "D", text: "people living away from their homeland" }
+    ],
+    correctLetter: "D",
+    explanation: "Diaspora means a community living outside its homeland, keeping ties with it.",
+    difficulty: "medium",
+    sourceNote: "NCTB English For Today, Class 11-12 — Unit: Diaspora",
+  },
+  {
+    id: "ACAD-2013",
+    classId: "class-11",
+    subjectId: "english",
+    chapterId: "acad-class-11-eng-topic-2",
+    chapterName: "Grammar — Modals",
+    unitNumber: 14,
+    topicId: "topic-2",
+    questionText: "Which sentence uses the modal 'should' correctly?",
+    options: [
+      { letter: "A", text: "You should to respect your elders." },
+      { letter: "B", text: "You should respects your elders." },
+      { letter: "C", text: "You should respecting your elders." },
+      { letter: "D", text: "You should respect your elders." }
+    ],
+    correctLetter: "D",
+    explanation: "After a modal (should), the base form of the verb is used.",
+    difficulty: "medium",
+    sourceNote: "NCTB HSC English 2nd Paper — Modals",
+  },
+  {
+    id: "ACAD-2014",
+    classId: "class-11",
+    subjectId: "english",
+    chapterId: "acad-class-11-eng-topic-3",
+    chapterName: "Grammar — Voice",
+    unitNumber: 15,
+    topicId: "topic-3",
+    questionText: "Change to active: 'The work was done by him.'",
+    options: [
+      { letter: "A", text: "He did the work." },
+      { letter: "B", text: "He is doing the work." },
+      { letter: "C", text: "He has done the work." },
+      { letter: "D", text: "He does the work." }
+    ],
+    correctLetter: "A",
+    explanation: "Past simple passive 'was done' becomes active past simple 'did'.",
+    difficulty: "medium",
+    sourceNote: "NCTB HSC English 2nd Paper — Voice",
+  },
+  {
+    id: "ACAD-2015",
+    classId: "class-11",
+    subjectId: "english",
+    chapterId: "acad-class-11-eng-topic-4",
+    chapterName: "Grammar — Narration",
+    unitNumber: 16,
+    topicId: "topic-4",
+    questionText: "She said, 'I shall come tomorrow.' (Indirect)",
+    options: [
+      { letter: "A", text: "She said that she would come the next day." },
+      { letter: "B", text: "She said that she shall come tomorrow." },
+      { letter: "C", text: "She said that she will come tomorrow." },
+      { letter: "D", text: "She told that she would come tomorrow." }
+    ],
+    correctLetter: "A",
+    explanation: "'Shall' becomes 'would' and 'tomorrow' becomes 'the next day' in indirect speech.",
+    difficulty: "hard",
+    sourceNote: "NCTB HSC English 2nd Paper — Narration",
+  },
+  {
+    id: "ACAD-2017",
+    classId: "class-11",
+    subjectId: "english",
+    chapterId: "acad-class-11-eng-unit-12",
+    chapterName: "Unit Twelve: Environment and Nature",
+    unitNumber: 12,
+    topicId: "unit-12",
+    questionText: "Which gas is mainly responsible for global warming?",
+    options: [
+      { letter: "A", text: "Hydrogen" },
+      { letter: "B", text: "Nitrogen" },
+      { letter: "C", text: "Carbon dioxide" },
+      { letter: "D", text: "Oxygen" }
+    ],
+    correctLetter: "C",
+    explanation: "Carbon dioxide is the main greenhouse gas driving global warming.",
+    difficulty: "easy",
+    sourceNote: "NCTB English For Today, Class 11-12 (rev. ed. 2020) — Unit Twelve: Environment and Nature",
+  },
+  {
+    id: "ACAD-2018",
+    classId: "class-11",
+    subjectId: "english",
+    chapterId: "acad-class-11-eng-topic-5",
+    chapterName: "Vocabulary",
+    unitNumber: 17,
+    topicId: "topic-5",
+    questionText: "The synonym of 'abundant' is —",
+    options: [
+      { letter: "A", text: "little" },
+      { letter: "B", text: "plentiful" },
+      { letter: "C", text: "scarce" },
+      { letter: "D", text: "rare" }
+    ],
+    correctLetter: "B",
+    explanation: "'Abundant' means existing in large quantities — plentiful.",
+    difficulty: "medium",
+    sourceNote: "NCTB English For Today, Class 11-12 — vocabulary",
+  },
+  {
+    id: "ACAD-2019",
+    classId: "class-11",
+    subjectId: "english",
+    chapterId: "acad-class-11-eng-topic-6",
+    chapterName: "Grammar — Articles",
+    unitNumber: 18,
+    topicId: "topic-6",
+    questionText: "___ earth moves round ___ sun.",
+    options: [
+      { letter: "A", text: "The, a" },
+      { letter: "B", text: "A, a" },
+      { letter: "C", text: "The, the" },
+      { letter: "D", text: "An, the" }
+    ],
+    correctLetter: "C",
+    explanation: "Unique objects (earth, sun) take 'the'.",
+    difficulty: "medium",
+    sourceNote: "NCTB HSC English 2nd Paper — Articles",
+  },
+  {
+    id: "ACAD-2020",
+    classId: "class-11",
+    subjectId: "english",
+    chapterId: "acad-class-11-eng-topic-7",
+    chapterName: "Writing — Graph description",
+    unitNumber: 19,
+    topicId: "topic-7",
+    questionText: "A graph description should mainly —",
+    options: [
+      { letter: "A", text: "present the main trends in data" },
+      { letter: "B", text: "copy every number" },
+      { letter: "C", text: "give personal opinions only" },
+      { letter: "D", text: "ignore the title" }
+    ],
+    correctLetter: "A",
+    explanation: "A good graph description highlights the main trends and key figures, not every number.",
+    difficulty: "easy",
+    sourceNote: "NCTB English For Today, Class 11-12 — writing: describing graphs",
+  },
+  {
+    id: "ACAD-7013",
+    classId: "class-11",
+    subjectId: "english",
+    chapterId: "acad-class-11-eng-topic-8",
+    chapterName: "Reading — Human rights",
+    unitNumber: 20,
+    topicId: "topic-8",
+    questionText: "The Universal Declaration of Human Rights was adopted in —",
+    options: [
+      { letter: "A", text: "1950" },
+      { letter: "B", text: "1960" },
+      { letter: "C", text: "1945" },
+      { letter: "D", text: "1948" }
+    ],
+    correctLetter: "D",
+    explanation: "The UN adopted the UDHR on 10 December 1948.",
+    difficulty: "medium",
+    sourceNote: "NCTB English For Today — Unit: Human rights",
+  },
+  {
+    id: "ACAD-7014",
+    classId: "class-11",
+    subjectId: "english",
+    chapterId: "acad-class-11-eng-topic-9",
+    chapterName: "Reading — Food",
+    unitNumber: 21,
+    topicId: "topic-9",
+    questionText: "Which food gives us the most energy?",
+    options: [
+      { letter: "A", text: "Water" },
+      { letter: "B", text: "Salt" },
+      { letter: "C", text: "Rice" },
+      { letter: "D", text: "Tea" }
+    ],
+    correctLetter: "C",
+    explanation: "Carbohydrate-rich foods like rice give the body energy.",
+    difficulty: "easy",
+    sourceNote: "Standard nutrition reference — carbohydrate-rich foods are the body's main energy source (general knowledge item; not a lesson fact from English For Today)",
+  },
+  {
+    id: "ACAD-7015",
+    classId: "class-11",
+    subjectId: "english",
+    chapterId: "acad-class-11-eng-topic-3",
+    chapterName: "Grammar — Voice",
+    unitNumber: 15,
+    topicId: "topic-3",
+    questionText: "Change to passive: 'He will do the work.'",
+    options: [
+      { letter: "A", text: "The work was done by him." },
+      { letter: "B", text: "The work will be done by him." },
+      { letter: "C", text: "The work will do by him." },
+      { letter: "D", text: "The work is done by him." }
+    ],
+    correctLetter: "B",
+    explanation: "Future passive: will be + past participle.",
+    difficulty: "medium",
+    sourceNote: "NCTB HSC English 2nd Paper — Voice",
+  },
+  {
+    id: "ACAD-7016",
+    classId: "class-11",
+    subjectId: "english",
+    chapterId: "acad-class-11-eng-topic-4",
+    chapterName: "Grammar — Narration",
+    unitNumber: 16,
+    topicId: "topic-4",
+    questionText: "He said to me, 'Are you ill?' (Indirect)",
+    options: [
+      { letter: "A", text: "He asked me if I was ill." },
+      { letter: "B", text: "He said me if I was ill." },
+      { letter: "C", text: "He asked me was I ill." },
+      { letter: "D", text: "He asked me that I was ill." }
+    ],
+    correctLetter: "A",
+    explanation: "Yes/no questions use 'if/whether' and the statement order in indirect speech.",
+    difficulty: "medium",
+    sourceNote: "NCTB HSC English 2nd Paper — Narration",
+  },
+  {
+    id: "ACAD-7018",
+    classId: "class-11",
+    subjectId: "english",
+    chapterId: "acad-class-11-eng-topic-10",
+    chapterName: "Grammar — Right form",
+    unitNumber: 22,
+    topicId: "topic-10",
+    questionText: "Fill in: The baby ___ when I came in.",
+    options: [
+      { letter: "A", text: "has cried" },
+      { letter: "B", text: "was crying" },
+      { letter: "C", text: "is crying" },
+      { letter: "D", text: "cry" }
+    ],
+    correctLetter: "B",
+    explanation: "A continuing past action uses past continuous: 'was crying'. 'Cry' is ungrammatical after the subject, and 'is crying' / 'has cried' are the wrong tense for a past-time frame.",
+    difficulty: "hard",
+    sourceNote: "NCTB HSC English 2nd Paper — Right form of verbs",
+  },
+  {
+    id: "ACAD-7019",
+    classId: "class-11",
+    subjectId: "english",
+    chapterId: "acad-class-11-eng-topic-11",
+    chapterName: "Grammar — Conditional",
+    unitNumber: 23,
+    topicId: "topic-11",
+    questionText: "Fill in: Had I known, I ___ come.",
+    options: [
+      { letter: "A", text: "shall have" },
+      { letter: "B", text: "would have" },
+      { letter: "C", text: "will" },
+      { letter: "D", text: "would" }
+    ],
+    correctLetter: "B",
+    explanation: "Third conditional: Had + past participle, would have + past participle.",
+    difficulty: "medium",
+    sourceNote: "NCTB HSC English 2nd Paper — Conditional",
+  },
+  {
+    id: "ACAD-7020",
+    classId: "class-11",
+    subjectId: "english",
+    chapterId: "acad-class-11-eng-topic-5",
+    chapterName: "Vocabulary",
+    unitNumber: 17,
+    topicId: "topic-5",
+    questionText: "The word 'benevolent' means —",
+    options: [
+      { letter: "A", text: "cruel" },
+      { letter: "B", text: "angry" },
+      { letter: "C", text: "kind" },
+      { letter: "D", text: "selfish" }
+    ],
+    correctLetter: "C",
+    explanation: "'Benevolent' means kind and generous.",
+    difficulty: "medium",
+    sourceNote: "NCTB English For Today — vocabulary",
+  },
+  {
+    id: "ACAD-7021",
+    classId: "class-11",
+    subjectId: "english",
+    chapterId: "acad-class-11-eng-topic-5",
+    chapterName: "Vocabulary",
+    unitNumber: 17,
+    topicId: "topic-5",
+    questionText: "The word 'frugal' means —",
+    options: [
+      { letter: "A", text: "wasteful" },
+      { letter: "B", text: "generous" },
+      { letter: "C", text: "rich" },
+      { letter: "D", text: "careful with money" }
+    ],
+    correctLetter: "D",
+    explanation: "'Frugal' means careful in spending; its opposite is 'extravagant'.",
+    difficulty: "medium",
+    sourceNote: "NCTB English For Today — vocabulary",
+  },
+  {
+    id: "ACAD-7022",
+    classId: "class-11",
+    subjectId: "english",
+    chapterId: "acad-class-11-eng-unit-6",
+    chapterName: "Unit Six: Adolescence",
+    unitNumber: 6,
+    topicId: "unit-6",
+    questionText: "Adolescence is the period of life between —",
+    options: [
+      { letter: "A", text: "birth and infancy" },
+      { letter: "B", text: "adulthood and old age" },
+      { letter: "C", text: "infancy and childhood" },
+      { letter: "D", text: "childhood and adulthood" }
+    ],
+    correctLetter: "D",
+    explanation: "Adolescence is the transitional stage of growth between childhood and adulthood (WHO definition), taught in English For Today, Unit Six: Adolescence, Lesson 1 'The Storm and Stress of Adolescence'.",
+    difficulty: "easy",
+    sourceNote: "NCTB English For Today, Class 11-12 (rev. ed. 2020) — Unit Six: Adolescence, Lesson 1: The Storm and Stress of Adolescence",
+  },
+  {
+    id: "ACAD-7023",
+    classId: "class-11",
+    subjectId: "english",
+    chapterId: "acad-class-11-eng-topic-6",
+    chapterName: "Grammar — Articles",
+    unitNumber: 18,
+    topicId: "topic-6",
+    questionText: "Fill in: ___ Quran is the holy book of the Muslims.",
+    options: [
+      { letter: "A", text: "An" },
+      { letter: "B", text: "A" },
+      { letter: "C", text: "The" },
+      { letter: "D", text: "No article" }
+    ],
+    correctLetter: "C",
+    explanation: "Holy books take 'the': the Quran, the Bible, the Gita.",
+    difficulty: "medium",
+    sourceNote: "NCTB HSC English 2nd Paper — Articles",
+  },
+  {
+    id: "ACAD-7024",
+    classId: "class-11",
+    subjectId: "english",
+    chapterId: "acad-class-11-eng-topic-12",
+    chapterName: "Writing — Application",
+    unitNumber: 24,
+    topicId: "topic-12",
+    questionText: "A job application should be —",
+    options: [
+      { letter: "A", text: "without a date" },
+      { letter: "B", text: "brief, polite and to the point" },
+      { letter: "C", text: "informal and joking" },
+      { letter: "D", text: "very long" }
+    ],
+    correctLetter: "B",
+    explanation: "A good application is brief, polite, dated and clearly states the purpose.",
+    difficulty: "easy",
+    sourceNote: "NCTB English For Today — writing: applications",
   },
 ];

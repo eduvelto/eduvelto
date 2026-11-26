@@ -1,10 +1,12 @@
-// Eduvelto — Academic Chemistry practice questions (Class 9),
-// verified against the Dakhil NCTB books (review 26 Nov 2026).
+// Eduvelto — Academic Chemistry practice questions (Classes 9 and 11),
+// verified against the NCTB books (review 26 Nov 2026; see the Class 9 / Class 11 notes below).
 //
-// Static data ONLY — zero Firestore reads. The 23 questions are the
-// Academic Class 9 Chemistry drafts AFTER review (see
-// review-academic-c9-chemistry-verdicts.json and
-// review-academic-c9-fixes-applied.md in
+// Static data ONLY — zero Firestore reads. The 47 questions are the
+// Academic Class 9 and Class 11 Chemistry drafts AFTER review (see
+// review-academic-c9-chemistry-verdicts.json,
+// review-academic-c9-fixes-applied.md,
+// review-academic-c11-12-chemistry-verdicts.json and
+// review-academic-c11-12-fixes-applied.md in
 // ~/workspace/eduorbit/sprint-1week-2026-11-25/).
 //
 // CAVEAT: the Class 9 review was verified against DAKHIL editions —
@@ -13,6 +15,13 @@
 // references + the SSC syllabus topic. Whether Class 9-10 content
 // serves the general SSC audience or the Dakhil audience is an owner
 // decision still owed (after his exams).
+//
+// Class 11 NOTE: the Class 11 questions were verified for fact
+// correctness + on-syllabus (review 26 Nov 2026) — NO HSC book
+// exists in the workspace, so VERIFIED here does NOT mean
+// book-confirmed. A teacher with the actual HSC books should
+// spot-check before publication, especially the re-cited chapters
+// (see review-academic-c11-12-fixes-applied.md).
 //
 // HONESTY: these are ORIGINAL practice questions written for the
 // NCTB lessons — NOT board / university / previous-year questions.
@@ -35,10 +44,16 @@
 // question ONCE under classId 'class-9', and publicAcademic.ts /
 // questionPaper.ts / scripts/prerender.mjs map 'class-10' to the
 // Class 9 pool for these subjects.
+// The Class 11
+// questions also serve Class 12 (same combined class-11-12 draft
+// set — there is NO separate Class 12 set): the pool holds each
+// question ONCE under classId 'class-11', and publicAcademic.ts /
+// questionPaper.ts / scripts/prerender.mjs map 'class-12' to the
+// Class 11 pool for these subjects.
 
 import { type PublicAcademicQuestion } from './publicAcademic';
 
-/** All verified Academic Chemistry questions, Class 9 (in draft order). */
+/** All verified Academic Chemistry questions, Classes 9 and 11 (in draft order). */
 export const PUBLIC_ACADEMIC_CHEMISTRY_QUESTIONS: PublicAcademicQuestion[] = [
   {
     id: "ACAD-0075",
@@ -499,5 +514,485 @@ export const PUBLIC_ACADEMIC_CHEMISTRY_QUESTIONS: PublicAcademicQuestion[] = [
     explanation: "সাধারণ চাপে বরফ ০°C-এ গলে।",
     difficulty: "easy",
     sourceNote: "NCTB রসায়ন — অধ্যায় ২: পদার্থের অবস্থা",
+  },
+  {
+    id: "ACAD-2043",
+    classId: "class-11",
+    subjectId: "chemistry",
+    chapterId: "acad-class-11-che-p1-chapter-2",
+    chapterName: "অধ্যায় ২: গুণগত রসায়ন (১ম পত্র)",
+    unitNumber: 2,
+    topicId: "chapter-2",
+    questionText: "কোন কণার আধান শূন্য?",
+    options: [
+      { letter: "A", text: "আলফা কণা" },
+      { letter: "B", text: "প্রোটন" },
+      { letter: "C", text: "নিউট্রন" },
+      { letter: "D", text: "ইলেকট্রন" }
+    ],
+    correctLetter: "C",
+    explanation: "নিউট্রন আধানহীন; প্রোটন ধনাত্মক, ইলেকট্রন ঋণাত্মক।",
+    difficulty: "medium",
+    sourceNote: "NCTB HSC রসায়ন ১ম পত্র — অধ্যায় ২: গুণগত রসায়ন (পরমাণুর গঠন: প্রোটন, নিউট্রন, ইলেকট্রন)",
+  },
+  {
+    id: "ACAD-2044",
+    classId: "class-11",
+    subjectId: "chemistry",
+    chapterId: "acad-class-11-che-p1-chapter-3",
+    chapterName: "অধ্যায় ৩: মৌলের পর্যায়বৃত্ত ধর্ম (১ম পত্র)",
+    unitNumber: 3,
+    topicId: "chapter-3",
+    questionText: "একই পর্যায়ে বাম থেকে ডানে গেলে পারমাণবিক ব্যাসার্ধ —",
+    options: [
+      { letter: "A", text: "একই থাকে" },
+      { letter: "B", text: "অনিয়মিত" },
+      { letter: "C", text: "কমে" },
+      { letter: "D", text: "বাড়ে" }
+    ],
+    correctLetter: "C",
+    explanation: "কার্যকর নিউক্লীয় আধান বাড়ায় একই পর্যায়ে বাম থেকে ডানে ব্যাসার্ধ কমে।",
+    difficulty: "medium",
+    sourceNote: "NCTB HSC রসায়ন ১ম পত্র — অধ্যায় ৩: মৌলের পর্যায়বৃত্ত ধর্ম",
+  },
+  {
+    id: "ACAD-2045",
+    classId: "class-11",
+    subjectId: "chemistry",
+    chapterId: "acad-class-11-che-p1-chapter-4",
+    chapterName: "অধ্যায় ৪: রাসায়নিক পরিবর্তন (১ম পত্র)",
+    unitNumber: 4,
+    topicId: "chapter-4",
+    questionText: "সাম্য ধ্রুবক K বড় হলে কী বোঝায়?",
+    options: [
+      { letter: "A", text: "উৎপাদ বেশি তৈরি হয়" },
+      { letter: "B", text: "বিক্রিয়ক বেশি থাকে" },
+      { letter: "C", text: "বিক্রিয়া ঘটে না" },
+      { letter: "D", text: "তাপ শোষিত হয়" }
+    ],
+    correctLetter: "A",
+    explanation: "K বড় মানে সাম্যাবস্থায় উৎপাদের পরিমাণ বেশি।",
+    difficulty: "medium",
+    sourceNote: "NCTB HSC রসায়ন ১ম পত্র — অধ্যায় ৪: রাসায়নিক পরিবর্তন",
+  },
+  {
+    id: "ACAD-2046",
+    classId: "class-11",
+    subjectId: "chemistry",
+    chapterId: "acad-class-11-che-p2-chapter-4",
+    chapterName: "অধ্যায় ৪: তড়িৎ রসায়ন (২য় পত্র)",
+    unitNumber: 4,
+    topicId: "chapter-4-p2",
+    questionText: "ড্যানিয়েল কোষে অ্যানোড কোনটি?",
+    options: [
+      { letter: "A", text: "লবণ সেতু" },
+      { letter: "B", text: "জিংক তড়িৎদ্বার" },
+      { letter: "C", text: "তামা তড়িৎদ্বার" },
+      { letter: "D", text: "ভোল্টমিটার" }
+    ],
+    correctLetter: "B",
+    explanation: "ড্যানিয়েল কোষে Zn অ্যানোড (জারণ) ও Cu ক্যাথোড (বিজারণ)।",
+    difficulty: "medium",
+    sourceNote: "NCTB HSC রসায়ন ২য় পত্র — অধ্যায় ৪: তড়িৎ রসায়ন (ড্যানিয়েল কোষ)",
+  },
+  {
+    id: "ACAD-2047",
+    classId: "class-11",
+    subjectId: "chemistry",
+    chapterId: "acad-class-11-che-p2-chapter-2",
+    chapterName: "অধ্যায় ২: জৈব রসায়ন (২য় পত্র)",
+    unitNumber: 2,
+    topicId: "chapter-2-p2",
+    questionText: "মিথেনের সংকেত কোনটি?",
+    options: [
+      { letter: "A", text: "C₂H₄" },
+      { letter: "B", text: "C₂H₆" },
+      { letter: "C", text: "CH₃OH" },
+      { letter: "D", text: "CH₄" }
+    ],
+    correctLetter: "D",
+    explanation: "মিথেন CH₄ — সরলতম অ্যালকেন।",
+    difficulty: "medium",
+    sourceNote: "NCTB HSC রসায়ন ২য় পত্র — অধ্যায় ২: জৈব রসায়ন",
+  },
+  {
+    id: "ACAD-2048",
+    classId: "class-11",
+    subjectId: "chemistry",
+    chapterId: "acad-class-11-che-topic-1",
+    chapterName: "অ্যালকোহল",
+    unitNumber: 5,
+    topicId: "topic-1",
+    questionText: "ইথানলের সংকেত কোনটি?",
+    options: [
+      { letter: "A", text: "C₂H₅OH" },
+      { letter: "B", text: "CH₃OH" },
+      { letter: "C", text: "C₃H₇OH" },
+      { letter: "D", text: "C₂H₄" }
+    ],
+    correctLetter: "A",
+    explanation: "ইথানল C₂H₅OH; মিথানল CH₃OH।",
+    difficulty: "medium",
+    sourceNote: "NCTB HSC রসায়ন ২য় পত্র — জৈব যৌগ",
+  },
+  {
+    id: "ACAD-2049",
+    classId: "class-11",
+    subjectId: "chemistry",
+    chapterId: "acad-class-11-che-p1-chapter-4",
+    chapterName: "অধ্যায় ৪: রাসায়নিক পরিবর্তন (১ম পত্র)",
+    unitNumber: 4,
+    topicId: "chapter-4",
+    questionText: "শক্তিশালী অ্যাসিড কোনটি?",
+    options: [
+      { letter: "A", text: "HCl" },
+      { letter: "B", text: "H₂CO₃" },
+      { letter: "C", text: "CH₃COOH" },
+      { letter: "D", text: "NH₄OH" }
+    ],
+    correctLetter: "A",
+    explanation: "HCl পানিতে সম্পূর্ণ আয়নিত হয় বলে শক্তিশালী অ্যাসিড; অ্যাসিটিক অ্যাসিড দুর্বল।",
+    difficulty: "medium",
+    sourceNote: "NCTB HSC রসায়ন ১ম পত্র — অধ্যায় ৪: রাসায়নিক পরিবর্তন (অ্যাসিড-ক্ষার ও pH)",
+  },
+  {
+    id: "ACAD-2050",
+    classId: "class-11",
+    subjectId: "chemistry",
+    chapterId: "acad-class-11-che-p2-chapter-3",
+    chapterName: "অধ্যায় ৩: পরিমাণগত রসায়ন (২য় পত্র)",
+    unitNumber: 3,
+    topicId: "chapter-3-p2",
+    questionText: "মোলার দ্রবণ কাকে বলে?",
+    options: [
+      { letter: "A", text: "১ কেজি দ্রবণে ১ মোল থাকলে" },
+      { letter: "B", text: "১ লিটার দ্রবণে ১ মোল দ্রব থাকলে" },
+      { letter: "C", text: "১ লিটার দ্রাবকে ১ মোল দ্রব থাকলে" },
+      { letter: "D", text: "১০০ মিলিতে ১ মোল থাকলে" }
+    ],
+    correctLetter: "B",
+    explanation: "১ লিটার দ্রবণে ১ মোল দ্রব দ্রবীভূত থাকলে তা ১ মোলার দ্রবণ।",
+    difficulty: "medium",
+    sourceNote: "NCTB HSC রসায়ন ২য় পত্র — অধ্যায় ৩: পরিমাণগত রসায়ন (মোলার দ্রবণ)",
+  },
+  {
+    id: "ACAD-2051",
+    classId: "class-11",
+    subjectId: "chemistry",
+    chapterId: "acad-class-11-che-topic-2",
+    chapterName: "পরিবেশ রসায়ন",
+    unitNumber: 6,
+    topicId: "topic-2",
+    questionText: "ওজোন স্তর ক্ষয়ের জন্য দায়ী যৌগ কোনটি?",
+    options: [
+      { letter: "A", text: "N₂" },
+      { letter: "B", text: "CFC" },
+      { letter: "C", text: "CO₂" },
+      { letter: "D", text: "CH₄" }
+    ],
+    correctLetter: "B",
+    explanation: "ক্লোরোফ্লুরোকার্বন (CFC) ওজোন স্তর ধ্বংস করে।",
+    difficulty: "easy",
+    sourceNote: "NCTB HSC রসায়ন ২য় পত্র — পরিবেশ রসায়ন",
+  },
+  {
+    id: "ACAD-2052",
+    classId: "class-11",
+    subjectId: "chemistry",
+    chapterId: "acad-class-11-che-topic-3",
+    chapterName: "অর্থনৈতিক রসায়ন",
+    unitNumber: 7,
+    topicId: "topic-3",
+    questionText: "ইউরিয়া সারের সংকেত কোনটি?",
+    options: [
+      { letter: "A", text: "NH₄NO₃" },
+      { letter: "B", text: "Ca₃(PO₄)₂" },
+      { letter: "C", text: "KCl" },
+      { letter: "D", text: "CO(NH₂)₂" }
+    ],
+    correctLetter: "D",
+    explanation: "ইউরিয়া CO(NH₂)₂ — নাইট্রোজেন সার হিসেবে ব্যবহৃত হয়।",
+    difficulty: "medium",
+    sourceNote: "NCTB HSC রসায়ন ২য় পত্র — অর্থনৈতিক রসায়ন",
+  },
+  {
+    id: "ACAD-2053",
+    classId: "class-11",
+    subjectId: "chemistry",
+    chapterId: "acad-class-11-che-p1-chapter-2",
+    chapterName: "অধ্যায় ২: গুণগত রসায়ন (১ম পত্র)",
+    unitNumber: 2,
+    topicId: "chapter-2",
+    questionText: "শিখা পরীক্ষায় সোডিয়াম কোন বর্ণ দেয়?",
+    options: [
+      { letter: "A", text: "লাল" },
+      { letter: "B", text: "সোনালি হলুদ" },
+      { letter: "C", text: "বেগুনি" },
+      { letter: "D", text: "সবুজ" }
+    ],
+    correctLetter: "B",
+    explanation: "সোডিয়াম শিখায় সোনালি হলুদ বর্ণ দেয়; পটাশিয়াম বেগুনি।",
+    difficulty: "medium",
+    sourceNote: "NCTB HSC রসায়ন ১ম পত্র — গুণগত রসায়ন",
+  },
+  {
+    id: "ACAD-2054",
+    classId: "class-11",
+    subjectId: "chemistry",
+    chapterId: "acad-class-11-che-p2-chapter-3",
+    chapterName: "অধ্যায় ৩: পরিমাণগত রসায়ন (২য় পত্র)",
+    unitNumber: 3,
+    topicId: "chapter-3-p2",
+    questionText: "টাইট্রেশনে সমাপ্তি বিন্দু বোঝা যায় কী দিয়ে?",
+    options: [
+      { letter: "A", text: "নির্দেশক" },
+      { letter: "B", text: "পিপেট" },
+      { letter: "C", text: "ফ্লাস্ক" },
+      { letter: "D", text: "ব্যুরেট" }
+    ],
+    correctLetter: "A",
+    explanation: "নির্দেশক (যেমন ফেনলফথ্যালিন) রং বদলে সমাপ্তি বিন্দু জানায়।",
+    difficulty: "medium",
+    sourceNote: "NCTB HSC রসায়ন ২য় পত্র — অধ্যায় ৩: পরিমাণগত রসায়ন (টাইট্রেশন)",
+  },
+  {
+    id: "ACAD-7049",
+    classId: "class-11",
+    subjectId: "chemistry",
+    chapterId: "acad-class-11-che-p1-chapter-2",
+    chapterName: "অধ্যায় ২: গুণগত রসায়ন (১ম পত্র)",
+    unitNumber: 2,
+    topicId: "chapter-2",
+    questionText: "কোন কণার ভর সবচেয়ে বেশি?",
+    options: [
+      { letter: "A", text: "ইলেকট্রন" },
+      { letter: "B", text: "প্রোটন" },
+      { letter: "C", text: "ফোটন" },
+      { letter: "D", text: "নিউট্রন" }
+    ],
+    correctLetter: "D",
+    explanation: "নিউট্রনের ভর প্রোটনের চেয়ে সামান্য বেশি; ইলেকট্রনের ভর প্রায় ১/১৮৩৬ ভাগ।",
+    difficulty: "medium",
+    sourceNote: "NCTB HSC রসায়ন ১ম পত্র — পরমাণুর গঠন",
+  },
+  {
+    id: "ACAD-7050",
+    classId: "class-11",
+    subjectId: "chemistry",
+    chapterId: "acad-class-11-che-p1-chapter-3",
+    chapterName: "অধ্যায় ৩: মৌলের পর্যায়বৃত্ত ধর্ম (১ম পত্র)",
+    unitNumber: 3,
+    topicId: "chapter-3",
+    questionText: "একই শ্রেণিতে ওপর থেকে নিচে গেলে ধাতব ধর্ম —",
+    options: [
+      { letter: "A", text: "একই থাকে" },
+      { letter: "B", text: "শূন্য হয়" },
+      { letter: "C", text: "কমে" },
+      { letter: "D", text: "বাড়ে" }
+    ],
+    correctLetter: "D",
+    explanation: "শ্রেণিতে নিচে গেলে আকার বাড়ায় ইলেকট্রন ত্যাগ সহজ হয়, ধাতব ধর্ম বাড়ে।",
+    difficulty: "medium",
+    sourceNote: "NCTB HSC রসায়ন ১ম পত্র — মৌলের পর্যায়বৃত্ত ধর্ম",
+  },
+  {
+    id: "ACAD-7051",
+    classId: "class-11",
+    subjectId: "chemistry",
+    chapterId: "acad-class-11-che-p1-chapter-4",
+    chapterName: "অধ্যায় ৪: রাসায়নিক পরিবর্তন (১ম পত্র)",
+    unitNumber: 4,
+    topicId: "chapter-4",
+    questionText: "লে শাতালিয়ের নীতি কী বলে?",
+    options: [
+      { letter: "A", text: "সাম্য কখনো বদলায় না" },
+      { letter: "B", text: "তাপ সবসময় বাড়ে" },
+      { letter: "C", text: "সাম্যাবস্থা পরিবর্তনকে প্রশমিত করার দিকে সরে যায়" },
+      { letter: "D", text: "চাপ সবসময় কমে" }
+    ],
+    correctLetter: "C",
+    explanation: "লে শাতালিয়ের নীতি: সাম্যাবস্থায় কোনো পরিবর্তন (চাপ, তাপমাত্রা বা ঘনমাত্রা) ঘটালে সাম্য সেই পরিবর্তনকে প্রশমিত করার দিকে সরে যায়।",
+    difficulty: "medium",
+    sourceNote: "NCTB HSC রসায়ন ১ম পত্র — অধ্যায় ৪: রাসায়নিক পরিবর্তন (লে শাতালিয়ের নীতি)",
+  },
+  {
+    id: "ACAD-7052",
+    classId: "class-11",
+    subjectId: "chemistry",
+    chapterId: "acad-class-11-che-p2-chapter-4",
+    chapterName: "অধ্যায় ৪: তড়িৎ রসায়ন (২য় পত্র)",
+    unitNumber: 4,
+    topicId: "chapter-4-p2",
+    questionText: "তড়িৎ বিশ্লেষণে ক্যাথোডে কী ঘটে?",
+    options: [
+      { letter: "A", text: "বিজারণ" },
+      { letter: "B", text: "প্রশমন" },
+      { letter: "C", text: "জারণ" },
+      { letter: "D", text: "দহন" }
+    ],
+    correctLetter: "A",
+    explanation: "ক্যাথোডে ইলেকট্রন গ্রহণ করে বিজারণ ঘটে; অ্যানোডে জারণ ঘটে।",
+    difficulty: "medium",
+    sourceNote: "NCTB HSC রসায়ন ২য় পত্র — অধ্যায় ৪: তড়িৎ রসায়ন (তড়িৎ বিশ্লেষণ)",
+  },
+  {
+    id: "ACAD-7053",
+    classId: "class-11",
+    subjectId: "chemistry",
+    chapterId: "acad-class-11-che-p2-chapter-2",
+    chapterName: "অধ্যায় ২: জৈব রসায়ন (২য় পত্র)",
+    unitNumber: 2,
+    topicId: "chapter-2-p2",
+    questionText: "বেনজিনের সংকেত কোনটি?",
+    options: [
+      { letter: "A", text: "CH₄" },
+      { letter: "B", text: "C₂H₆" },
+      { letter: "C", text: "C₆H₆" },
+      { letter: "D", text: "C₆H₁₂" }
+    ],
+    correctLetter: "C",
+    explanation: "বেনজিন C₆H₆ — একটি অ্যারোমেটিক যৌগ।",
+    difficulty: "medium",
+    sourceNote: "NCTB HSC রসায়ন ২য় পত্র — জৈব রসায়ন",
+  },
+  {
+    id: "ACAD-7054",
+    classId: "class-11",
+    subjectId: "chemistry",
+    chapterId: "acad-class-11-che-topic-4",
+    chapterName: "অ্যালডিহাইড",
+    unitNumber: 8,
+    topicId: "topic-4",
+    questionText: "ফরমালডিহাইডের সংকেত কোনটি?",
+    options: [
+      { letter: "A", text: "HCOOH" },
+      { letter: "B", text: "CH₃CHO" },
+      { letter: "C", text: "HCHO" },
+      { letter: "D", text: "CH₃OH" }
+    ],
+    correctLetter: "C",
+    explanation: "ফরমালডিহাইড HCHO; অ্যাসিটালডিহাইড CH₃CHO।",
+    difficulty: "medium",
+    sourceNote: "NCTB HSC রসায়ন ২য় পত্র — জৈব যৌগ",
+  },
+  {
+    id: "ACAD-7055",
+    classId: "class-11",
+    subjectId: "chemistry",
+    chapterId: "acad-class-11-che-p1-chapter-4",
+    chapterName: "অধ্যায় ৪: রাসায়নিক পরিবর্তন (১ম পত্র)",
+    unitNumber: 4,
+    topicId: "chapter-4",
+    questionText: "pH ৩-এর দ্রবণ কেমন?",
+    options: [
+      { letter: "A", text: "ক্ষারীয়" },
+      { letter: "B", text: "লবণাক্ত" },
+      { letter: "C", text: "প্রশম" },
+      { letter: "D", text: "অম্লীয়" }
+    ],
+    correctLetter: "D",
+    explanation: "pH ৭-এর কম হলে অম্লীয়; ৩ মানে বেশ অম্লীয়।",
+    difficulty: "medium",
+    sourceNote: "NCTB HSC রসায়ন ১ম পত্র — অ্যাসিড-ক্ষার",
+  },
+  {
+    id: "ACAD-7056",
+    classId: "class-11",
+    subjectId: "chemistry",
+    chapterId: "acad-class-11-che-p2-chapter-3",
+    chapterName: "অধ্যায় ৩: পরিমাণগত রসায়ন (২য় পত্র)",
+    unitNumber: 3,
+    topicId: "chapter-3-p2",
+    questionText: "দ্রাব্যতা কিসের ওপর নির্ভর করে?",
+    options: [
+      { letter: "A", text: "শুধু চাপ" },
+      { letter: "B", text: "শুধু আয়তন" },
+      { letter: "C", text: "তাপমাত্রা" },
+      { letter: "D", text: "শুধু রং" }
+    ],
+    correctLetter: "C",
+    explanation: "বেশিরভাগ কঠিনের দ্রাব্যতা তাপমাত্রা বাড়লে বাড়ে।",
+    difficulty: "medium",
+    sourceNote: "NCTB HSC রসায়ন ২য় পত্র — অধ্যায় ৩: পরিমাণগত রসায়ন (দ্রাব্যতা)",
+  },
+  {
+    id: "ACAD-7057",
+    classId: "class-11",
+    subjectId: "chemistry",
+    chapterId: "acad-class-11-che-topic-2",
+    chapterName: "পরিবেশ রসায়ন",
+    unitNumber: 6,
+    topicId: "topic-2",
+    questionText: "ওজোন স্তর কোথায় আছে?",
+    options: [
+      { letter: "A", text: "ট্রপোস্ফিয়ার" },
+      { letter: "B", text: "স্ট্র্যাটোস্ফিয়ার" },
+      { letter: "C", text: "মেসোস্ফিয়ার" },
+      { letter: "D", text: "থার্মোস্ফিয়ার" }
+    ],
+    correctLetter: "B",
+    explanation: "ওজোন স্তর স্ট্র্যাটোস্ফিয়ারে; এটি সূর্যের UV রশ্মি শোষণ করে।",
+    difficulty: "medium",
+    sourceNote: "NCTB HSC রসায়ন ২য় পত্র — পরিবেশ রসায়ন",
+  },
+  {
+    id: "ACAD-7058",
+    classId: "class-11",
+    subjectId: "chemistry",
+    chapterId: "acad-class-11-che-topic-3",
+    chapterName: "অর্থনৈতিক রসায়ন",
+    unitNumber: 7,
+    topicId: "topic-3",
+    questionText: "সিমেন্টের প্রধান উপাদান কোনটি?",
+    options: [
+      { letter: "A", text: "চুনাপাথর" },
+      { letter: "B", text: "বালি" },
+      { letter: "C", text: "কয়লা" },
+      { letter: "D", text: "লোহা" }
+    ],
+    correctLetter: "A",
+    explanation: "চুনাপাথর (CaCO₃) সিমেন্টের প্রধান কাঁচামাল।",
+    difficulty: "medium",
+    sourceNote: "NCTB HSC রসায়ন ২য় পত্র — অর্থনৈতিক রসায়ন",
+  },
+  {
+    id: "ACAD-7059",
+    classId: "class-11",
+    subjectId: "chemistry",
+    chapterId: "acad-class-11-che-p1-chapter-2",
+    chapterName: "অধ্যায় ২: গুণগত রসায়ন (১ম পত্র)",
+    unitNumber: 2,
+    topicId: "chapter-2",
+    questionText: "শিখা পরীক্ষায় পটাশিয়াম কোন বর্ণ দেয়?",
+    options: [
+      { letter: "A", text: "সোনালি হলুদ" },
+      { letter: "B", text: "সবুজ" },
+      { letter: "C", text: "লাল" },
+      { letter: "D", text: "বেগুনি" }
+    ],
+    correctLetter: "D",
+    explanation: "পটাশিয়াম বেগুনি, সোডিয়াম সোনালি হলুদ ও ক্যালসিয়াম ইট-লাল বর্ণ দেয়।",
+    difficulty: "medium",
+    sourceNote: "NCTB HSC রসায়ন ১ম পত্র — গুণগত রসায়ন",
+  },
+  {
+    id: "ACAD-7060",
+    classId: "class-11",
+    subjectId: "chemistry",
+    chapterId: "acad-class-11-che-p2-chapter-3",
+    chapterName: "অধ্যায় ৩: পরিমাণগত রসায়ন (২য় পত্র)",
+    unitNumber: 3,
+    topicId: "chapter-3-p2",
+    questionText: "মোলার ভর নির্ণয়ে কী লাগে?",
+    options: [
+      { letter: "A", text: "শুধু চাপ" },
+      { letter: "B", text: "পারমাণবিক ভর" },
+      { letter: "C", text: "শুধু আয়তন" },
+      { letter: "D", text: "শুধু তাপমাত্রা" }
+    ],
+    correctLetter: "B",
+    explanation: "যৌগের মোলার ভর = উপাদানগুলোর পারমাণবিক ভরের যোগফল।",
+    difficulty: "medium",
+    sourceNote: "NCTB HSC রসায়ন ২য় পত্র — অধ্যায় ৩: পরিমাণগত রসায়ন (মোলার ভর)",
   },
 ];

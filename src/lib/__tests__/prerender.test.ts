@@ -528,7 +528,7 @@ describe('__INITIAL_DATA__ script tag (CSP-safe carrier)', () => {
 });
 
 describe('getAcademicPracticePaths — Education Hub (26 Nov 2026)', () => {
-  it('derives hub + subject + chapter paths from EVERY per-subject pool file (1,399: 1 hub + 102 subjects + 1,296 chapters)', () => {
+  it('derives hub + subject + chapter paths from EVERY per-subject pool file (1,853: 1 hub + 136 subjects + 1,716 chapters)', () => {
     // Same directory scan the prerender script uses. A hardcoded
     // 6-file list silently dropped the six Class 6 subject files
     // (BanglaGrammar, MathDepth, ScienceDepth, Ict, Agriculture,
@@ -540,12 +540,12 @@ describe('getAcademicPracticePaths — Education Hub (26 Nov 2026)', () => {
           f.startsWith('publicAcademic') && f.endsWith('.ts') && f !== 'publicAcademic.ts',
       )
       .sort();
-    expect(files).toHaveLength(31);
+    expect(files).toHaveLength(35);
     const source = files
       .map((f) => readFileSync(join(process.cwd(), 'src', 'lib', f), 'utf8'))
       .join('\n');
     const paths = getAcademicPracticePaths(source);
-    expect(paths).toHaveLength(1399);
+    expect(paths).toHaveLength(1853);
     expect(paths[0]).toBe('/learn/practice');
     for (const s of [
       'bangla-grammar',
@@ -612,8 +612,43 @@ describe('getAcademicPracticePaths — Education Hub (26 Nov 2026)', () => {
     expect(paths).toContain('/learn/practice/class-10/ict/acad-class-9-ict-topic-1');
     expect(paths.filter((p) => p.startsWith('/learn/practice/class-9'))).toHaveLength(347);
     expect(paths.filter((p) => p.startsWith('/learn/practice/class-10'))).toHaveLength(347);
+    // Class 11 (26 Nov 2026): all seventeen subjects have paths,
+    // including the four new subjects (islamic-history, logic,
+    // psychology, statistics), the English Units, and the 1st/2nd
+    // paper chapter distinction (Chemistry and Physics units 2/3/4/5
+    // exist in both papers with different titles).
+    expect(paths).toContain('/learn/practice/class-11/physics');
+    expect(paths).toContain('/learn/practice/class-11/english/acad-class-11-eng-unit-1');
+    expect(paths).toContain('/learn/practice/class-11/english/acad-class-11-eng-unit-6');
+    expect(paths).toContain('/learn/practice/class-11/english/acad-class-11-eng-unit-12');
+    expect(paths).toContain('/learn/practice/class-11/islamic-history');
+    expect(paths).toContain('/learn/practice/class-11/logic');
+    expect(paths).toContain('/learn/practice/class-11/psychology');
+    expect(paths).toContain('/learn/practice/class-11/statistics');
+    expect(paths).toContain(
+      '/learn/practice/class-11/chemistry/acad-class-11-che-p1-chapter-3',
+    );
+    expect(paths).toContain(
+      '/learn/practice/class-11/chemistry/acad-class-11-che-p2-chapter-3',
+    );
+    expect(paths).toContain(
+      '/learn/practice/class-11/physics/acad-class-11-phy-p1-chapter-2',
+    );
+    expect(paths).toContain(
+      '/learn/practice/class-11/physics/acad-class-11-phy-p2-chapter-1',
+    );
+    expect(paths.filter((p) => p.startsWith('/learn/practice/class-11'))).toHaveLength(227);
+    // Class 12 shares the Class 11 pool — the same 227 paths exist
+    // under class-12 (same chapter IDs, no separate Class 12 set).
+    expect(paths).toContain('/learn/practice/class-12/physics');
+    expect(paths).toContain('/learn/practice/class-12/english/acad-class-11-eng-unit-1');
+    expect(paths).toContain('/learn/practice/class-12/islamic-history');
+    expect(paths).toContain(
+      '/learn/practice/class-12/chemistry/acad-class-11-che-p2-chapter-3',
+    );
+    expect(paths.filter((p) => p.startsWith('/learn/practice/class-12'))).toHaveLength(227);
     // Unverified classes never get a path — the honest empty moved to
-    // Class 11 (no verified questions yet).
-    expect(paths.filter((p) => p.startsWith('/learn/practice/class-11'))).toEqual([]);
+    // Honours (no verified practice questions yet).
+    expect(paths.filter((p) => p.startsWith('/learn/practice/honours'))).toEqual([]);
   });
 });

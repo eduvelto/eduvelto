@@ -1,10 +1,12 @@
-// Eduvelto — Academic Accounting practice questions (Class 9),
-// verified against the Dakhil NCTB books (review 26 Nov 2026).
+// Eduvelto — Academic Accounting practice questions (Classes 9 and 11),
+// verified against the NCTB books (review 26 Nov 2026; see the Class 9 / Class 11 notes below).
 //
-// Static data ONLY — zero Firestore reads. The 22 questions are the
-// Academic Class 9 Accounting drafts AFTER review (see
-// review-academic-c9-accounting-verdicts.json and
-// review-academic-c9-fixes-applied.md in
+// Static data ONLY — zero Firestore reads. The 44 questions are the
+// Academic Class 9 and Class 11 Accounting drafts AFTER review (see
+// review-academic-c9-accounting-verdicts.json,
+// review-academic-c9-fixes-applied.md,
+// review-academic-c11-12-accounting-verdicts.json and
+// review-academic-c11-12-fixes-applied.md in
 // ~/workspace/eduorbit/sprint-1week-2026-11-25/).
 //
 // CAVEAT: the Class 9 review was verified against DAKHIL editions —
@@ -13,6 +15,13 @@
 // references + the SSC syllabus topic. Whether Class 9-10 content
 // serves the general SSC audience or the Dakhil audience is an owner
 // decision still owed (after his exams).
+//
+// Class 11 NOTE: the Class 11 questions were verified for fact
+// correctness + on-syllabus (review 26 Nov 2026) — NO HSC book
+// exists in the workspace, so VERIFIED here does NOT mean
+// book-confirmed. A teacher with the actual HSC books should
+// spot-check before publication, especially the re-cited chapters
+// (see review-academic-c11-12-fixes-applied.md).
 //
 // HONESTY: these are ORIGINAL practice questions written for the
 // NCTB lessons — NOT board / university / previous-year questions.
@@ -35,10 +44,16 @@
 // question ONCE under classId 'class-9', and publicAcademic.ts /
 // questionPaper.ts / scripts/prerender.mjs map 'class-10' to the
 // Class 9 pool for these subjects.
+// The Class 11
+// questions also serve Class 12 (same combined class-11-12 draft
+// set — there is NO separate Class 12 set): the pool holds each
+// question ONCE under classId 'class-11', and publicAcademic.ts /
+// questionPaper.ts / scripts/prerender.mjs map 'class-12' to the
+// Class 11 pool for these subjects.
 
 import { type PublicAcademicQuestion } from './publicAcademic';
 
-/** All verified Academic Accounting questions, Class 9 (in draft order). */
+/** All verified Academic Accounting questions, Classes 9 and 11 (in draft order). */
 export const PUBLIC_ACADEMIC_ACCOUNTING_QUESTIONS: PublicAcademicQuestion[] = [
   {
     id: "ACAD-1031",
@@ -479,5 +494,445 @@ export const PUBLIC_ACADEMIC_ACCOUNTING_QUESTIONS: PublicAcademicQuestion[] = [
     explanation: "যার কাছে ব্যবসায়ের টাকা দেওয়ার বাকি আছে, তিনি পাওনাদার; দেনাদারের কাছে টাকা পাওয়া যাবে।",
     difficulty: "medium",
     sourceNote: "NCTB হিসাববিজ্ঞান — দেনা-পাওনা",
+  },
+  {
+    id: "ACAD-2077",
+    classId: "class-11",
+    subjectId: "accounting",
+    chapterId: "acad-class-11-acc-topic-1",
+    chapterName: "হিসাববিজ্ঞান নীতিমালা",
+    unitNumber: 1,
+    topicId: "topic-1",
+    questionText: "লেনদেন লিপিবদ্ধ করার পদ্ধতি কোনটি?",
+    options: [
+      { letter: "A", text: "দুতরফা দাখিলা" },
+      { letter: "B", text: "কোনো নীতি নেই" },
+      { letter: "C", text: "একতরফা দাখিলা" },
+      { letter: "D", text: "নগদ ভিত্তি শুধু" }
+    ],
+    correctLetter: "A",
+    explanation: "দুতরফা দাখিলা পদ্ধতিতে প্রতিটি লেনদেনের ডেবিট-ক্রেডিট সমানভাবে লেখা হয়।",
+    difficulty: "medium",
+    sourceNote: "NCTB HSC হিসাববিজ্ঞান ১ম পত্র — হিসাববিজ্ঞান পরিচিতি",
+  },
+  {
+    id: "ACAD-2078",
+    classId: "class-11",
+    subjectId: "accounting",
+    chapterId: "acad-class-11-acc-topic-2",
+    chapterName: "অবচয়",
+    unitNumber: 2,
+    topicId: "topic-2",
+    questionText: "সরলরৈখিক পদ্ধতিতে বার্ষিক অবচয় কীভাবে নির্ণয় হয়?",
+    options: [
+      { letter: "A", text: "ক্রয়মূল্য × সুদের হার" },
+      { letter: "B", text: "ক্রয়মূল্য ÷ আয়ুষ্কাল" },
+      { letter: "C", text: "বাজারমূল্য − ক্রয়মূল্য" },
+      { letter: "D", text: "(ক্রয়মূল্য − ভগ্নাবশেষ মূল্য) ÷ আয়ুষ্কাল" }
+    ],
+    correctLetter: "D",
+    explanation: "সরলরৈখিক পদ্ধতিতে অবচয় = (মূল্য − ভগ্নাবশেষ মূল্য) ÷ কার্যকর আয়ুষ্কাল।",
+    difficulty: "medium",
+    sourceNote: "NCTB HSC হিসাববিজ্ঞান ১ম পত্র — অবচয়",
+  },
+  {
+    id: "ACAD-2079",
+    classId: "class-11",
+    subjectId: "accounting",
+    chapterId: "acad-class-11-acc-topic-3",
+    chapterName: "অংশীদারি",
+    unitNumber: 3,
+    topicId: "topic-3",
+    questionText: "অংশীদারি চুক্তি না থাকলে মুনাফা কীভাবে বণ্টিত হয়?",
+    options: [
+      { letter: "A", text: "শুধু সক্রিয় অংশীদার পায়" },
+      { letter: "B", text: "সমানভাবে" },
+      { letter: "C", text: "মূলধনের অনুপাতে" },
+      { letter: "D", text: "সরকার ঠিক করে" }
+    ],
+    correctLetter: "B",
+    explanation: "চুক্তি না থাকলে অংশীদারি আইন অনুযায়ী মুনাফা সমানভাবে বণ্টিত হয়।",
+    difficulty: "medium",
+    sourceNote: "NCTB HSC হিসাববিজ্ঞান ২য় পত্র — অংশীদারি হিসাব",
+  },
+  {
+    id: "ACAD-2080",
+    classId: "class-11",
+    subjectId: "accounting",
+    chapterId: "acad-class-11-acc-topic-4",
+    chapterName: "যৌথ মূলধনী কোম্পানি",
+    unitNumber: 4,
+    topicId: "topic-4",
+    questionText: "শেয়ার ইস্যুতে অতিরিক্ত আদায়কে কী বলে?",
+    options: [
+      { letter: "A", text: "লভ্যাংশ" },
+      { letter: "B", text: "শেয়ার অধিহার" },
+      { letter: "C", text: "শেয়ার অবহার" },
+      { letter: "D", text: "সঞ্চিতি" }
+    ],
+    correctLetter: "B",
+    explanation: "অভিহিত মূল্যের বেশি দামে শেয়ার বিক্রি হলে অতিরিক্ত অংশ শেয়ার অধিহার।",
+    difficulty: "medium",
+    sourceNote: "NCTB HSC হিসাববিজ্ঞান ২য় পত্র — যৌথ মূলধনী কোম্পানির হিসাব",
+  },
+  {
+    id: "ACAD-2081",
+    classId: "class-11",
+    subjectId: "accounting",
+    chapterId: "acad-class-11-acc-topic-5",
+    chapterName: "আর্থিক বিবরণী বিশ্লেষণ",
+    unitNumber: 5,
+    topicId: "topic-5",
+    questionText: "চলতি অনুপাতের সূত্র কোনটি?",
+    options: [
+      { letter: "A", text: "মোট সম্পদ ÷ মোট দায়" },
+      { letter: "B", text: "মূলধন ÷ দায়" },
+      { letter: "C", text: "চলতি সম্পদ ÷ চলতি দায়" },
+      { letter: "D", text: "নিট মুনাফা ÷ বিক্রয়" }
+    ],
+    correctLetter: "C",
+    explanation: "চলতি অনুপাত = চলতি সম্পদ / চলতি দায়; এটি স্বল্পমেয়াদি সচ্ছলতা মাপে।",
+    difficulty: "medium",
+    sourceNote: "NCTB HSC হিসাববিজ্ঞান ২য় পত্র — আর্থিক বিবরণী বিশ্লেষণ",
+  },
+  {
+    id: "ACAD-2082",
+    classId: "class-11",
+    subjectId: "accounting",
+    chapterId: "acad-class-11-acc-topic-6",
+    chapterName: "উৎপাদন ব্যয়",
+    unitNumber: 6,
+    topicId: "topic-6",
+    questionText: "প্রত্যক্ষ কাঁচামাল + প্রত্যক্ষ শ্রম + প্রত্যক্ষ খরচ = ?",
+    options: [
+      { letter: "A", text: "কারখানা ব্যয়" },
+      { letter: "B", text: "বিক্রয় ব্যয়" },
+      { letter: "C", text: "মোট ব্যয়" },
+      { letter: "D", text: "মুখ্য ব্যয়" }
+    ],
+    correctLetter: "D",
+    explanation: "প্রত্যক্ষ ব্যয়গুলোর যোগফলই মুখ্য ব্যয় (prime cost)।",
+    difficulty: "medium",
+    sourceNote: "NCTB HSC হিসাববিজ্ঞান ২য় পত্র — উৎপাদন ব্যয় হিসাব",
+  },
+  {
+    id: "ACAD-2083",
+    classId: "class-11",
+    subjectId: "accounting",
+    chapterId: "acad-class-11-acc-topic-7",
+    chapterName: "নগদ প্রবাহ",
+    unitNumber: 7,
+    topicId: "topic-7",
+    questionText: "নগদ প্রবাহ বিবরণীতে কার্যক্রম কয় ভাগে ভাগ করা হয়?",
+    options: [
+      { letter: "A", text: "৫ ভাগে" },
+      { letter: "B", text: "২ ভাগে" },
+      { letter: "C", text: "৩ ভাগে" },
+      { letter: "D", text: "৪ ভাগে" }
+    ],
+    correctLetter: "C",
+    explanation: "পরিচালন, বিনিয়োগ ও অর্থায়ন — এই ৩ ভাগে নগদ প্রবাহ দেখানো হয়।",
+    difficulty: "medium",
+    sourceNote: "NCTB HSC হিসাববিজ্ঞান ২য় পত্র — নগদ প্রবাহ বিবরণী",
+  },
+  {
+    id: "ACAD-2084",
+    classId: "class-11",
+    subjectId: "accounting",
+    chapterId: "acad-class-11-acc-topic-8",
+    chapterName: "ব্যাংক সমন্বয়",
+    unitNumber: 8,
+    topicId: "topic-8",
+    questionText: "ব্যাংক সমন্বয় বিবরণী কেন তৈরি করা হয়?",
+    options: [
+      { letter: "A", text: "মুনাফা বাড়াতে" },
+      { letter: "B", text: "ঋণ নিতে" },
+      { letter: "C", text: "কর কমাতে" },
+      { letter: "D", text: "নগদান বই ও ব্যাংক বিবরণীর পার্থক্য মেলাতে" }
+    ],
+    correctLetter: "D",
+    explanation: "সময় ও লেনদেনের পার্থক্যে নগদান বই ও ব্যাংক বিবরণীর জের না মিললে সমন্বয় বিবরণী তৈরি হয়।",
+    difficulty: "medium",
+    sourceNote: "NCTB HSC হিসাববিজ্ঞান ১ম পত্র — ব্যাংক সমন্বয় বিবরণী",
+  },
+  {
+    id: "ACAD-2085",
+    classId: "class-11",
+    subjectId: "accounting",
+    chapterId: "acad-class-11-acc-topic-9",
+    chapterName: "কুঋণ",
+    unitNumber: 9,
+    topicId: "topic-9",
+    questionText: "আদায় হবে না এমন দেনাকে কী বলে?",
+    options: [
+      { letter: "A", text: "কুঋণ" },
+      { letter: "B", text: "অগ্রিম" },
+      { letter: "C", text: "দায়" },
+      { letter: "D", text: "সন্দেহজনক ঋণ" }
+    ],
+    correctLetter: "A",
+    explanation: "দেনাদারের কাছ থেকে যে পাওনা আর আদায় হবে না, তা কুঋণ হিসেবে লেখা হয়।",
+    difficulty: "easy",
+    sourceNote: "NCTB HSC হিসাববিজ্ঞান ১ম পত্র — কুঋণ ও সন্দেহজনক ঋণ",
+  },
+  {
+    id: "ACAD-2086",
+    classId: "class-11",
+    subjectId: "accounting",
+    chapterId: "acad-class-11-acc-topic-10",
+    chapterName: "মজুদ",
+    unitNumber: 10,
+    topicId: "topic-10",
+    questionText: "সমাপনী মজুদপণ্য আর্থিক অবস্থার বিবরণীতে কোথায় দেখানো হয়?",
+    options: [
+      { letter: "A", text: "চলতি সম্পদে" },
+      { letter: "B", text: "স্থায়ী সম্পদে" },
+      { letter: "C", text: "মূলধনে" },
+      { letter: "D", text: "দায়ে" }
+    ],
+    correctLetter: "A",
+    explanation: "সমাপনী মজুদ চলতি সম্পদ; আয় বিবরণীতে এটি বিক্রীত পণ্যের ব্যয় নির্ণয়ে ব্যবহৃত হয়।",
+    difficulty: "medium",
+    sourceNote: "NCTB HSC হিসাববিজ্ঞান ১ম পত্র — মজুদপণ্য",
+  },
+  {
+    id: "ACAD-7085",
+    classId: "class-11",
+    subjectId: "accounting",
+    chapterId: "acad-class-11-acc-topic-1",
+    chapterName: "হিসাববিজ্ঞান নীতিমালা",
+    unitNumber: 1,
+    topicId: "topic-1",
+    questionText: "চলমান প্রতিষ্ঠান ধারণা কী?",
+    options: [
+      { letter: "A", text: "প্রতিষ্ঠান বিক্রি হবে" },
+      { letter: "B", text: "প্রতিষ্ঠান অনির্দিষ্টকাল চলবে" },
+      { letter: "C", text: "প্রতিষ্ঠান ঋণ নেবে" },
+      { letter: "D", text: "প্রতিষ্ঠান বন্ধ হবে" }
+    ],
+    correctLetter: "B",
+    explanation: "চলমান প্রতিষ্ঠান ধারণায় ধরা হয় প্রতিষ্ঠান ভবিষ্যতেও চলবে; তাই সম্পদ ক্রয়মূল্যে দেখানো হয়।",
+    difficulty: "medium",
+    sourceNote: "NCTB HSC হিসাববিজ্ঞান ১ম পত্র — হিসাববিজ্ঞান নীতিমালা",
+  },
+  {
+    id: "ACAD-7086",
+    classId: "class-11",
+    subjectId: "accounting",
+    chapterId: "acad-class-11-acc-topic-2",
+    chapterName: "অবচয়",
+    unitNumber: 2,
+    topicId: "topic-2",
+    questionText: "ক্রমহ্রাসমান জের পদ্ধতিতে অবচয় ধরা হয় —",
+    options: [
+      { letter: "A", text: "বাজারমূল্যের ওপর" },
+      { letter: "B", text: "ভগ্নাবশেষ মূল্যের ওপর" },
+      { letter: "C", text: "ক্রয়মূল্যের ওপর" },
+      { letter: "D", text: "বইমূল্যের ওপর" }
+    ],
+    correctLetter: "D",
+    explanation: "ক্রমহ্রাসমান পদ্ধতিতে প্রতি বছর বইমূল্যের ওপর নির্দিষ্ট হারে অবচয় ধরা হয়।",
+    difficulty: "medium",
+    sourceNote: "NCTB HSC হিসাববিজ্ঞান ১ম পত্র — অবচয়",
+  },
+  {
+    id: "ACAD-7087",
+    classId: "class-11",
+    subjectId: "accounting",
+    chapterId: "acad-class-11-acc-topic-3",
+    chapterName: "অংশীদারি",
+    unitNumber: 3,
+    topicId: "topic-3",
+    questionText: "অংশীদারদের মূলধনের ওপর সুদ দেওয়া হয় কখন?",
+    options: [
+      { letter: "A", text: "চুক্তিতে থাকলে" },
+      { letter: "B", text: "সবসময়" },
+      { letter: "C", text: "কখনো নয়" },
+      { letter: "D", text: "সরকার বললে" }
+    ],
+    correctLetter: "A",
+    explanation: "চুক্তিতে না থাকলে মূলধনের ওপর সুদ দেওয়া হয় না।",
+    difficulty: "medium",
+    sourceNote: "NCTB HSC হিসাববিজ্ঞান ২য় পত্র — অংশীদারি হিসাব",
+  },
+  {
+    id: "ACAD-7088",
+    classId: "class-11",
+    subjectId: "accounting",
+    chapterId: "acad-class-11-acc-topic-4",
+    chapterName: "যৌথ মূলধনী কোম্পানি",
+    unitNumber: 4,
+    topicId: "topic-4",
+    questionText: "শেয়ার অবহার কী?",
+    options: [
+      { letter: "A", text: "অভিহিত মূল্যের বেশি বিক্রি" },
+      { letter: "B", text: "সঞ্চিতি" },
+      { letter: "C", text: "লভ্যাংশ" },
+      { letter: "D", text: "অভিহিত মূল্যের কমে শেয়ার বিক্রি" }
+    ],
+    correctLetter: "D",
+    explanation: "অভিহিত মূল্যের কম দামে শেয়ার বিক্রি হলে পার্থক্যটুকু শেয়ার অবহার।",
+    difficulty: "medium",
+    sourceNote: "NCTB HSC হিসাববিজ্ঞান ২য় পত্র — যৌথ মূলধনী কোম্পানি",
+  },
+  {
+    id: "ACAD-7089",
+    classId: "class-11",
+    subjectId: "accounting",
+    chapterId: "acad-class-11-acc-topic-5",
+    chapterName: "আর্থিক বিবরণী বিশ্লেষণ",
+    unitNumber: 5,
+    topicId: "topic-5",
+    questionText: "মোট মুনাফার হার নির্ণয়ের সূত্র কোনটি?",
+    options: [
+      { letter: "A", text: "নিট মুনাফা ÷ মোট সম্পদ" },
+      { letter: "B", text: "মূলধন ÷ বিক্রয়" },
+      { letter: "C", text: "মোট মুনাফা ÷ নিট বিক্রয় × ১০০" },
+      { letter: "D", text: "বিক্রয় ÷ ক্রয়" }
+    ],
+    correctLetter: "C",
+    explanation: "মোট মুনাফার হার = (মোট মুনাফা / নিট বিক্রয়) × ১০০।",
+    difficulty: "medium",
+    sourceNote: "NCTB HSC হিসাববিজ্ঞান ২য় পত্র — আর্থিক বিবরণী বিশ্লেষণ",
+  },
+  {
+    id: "ACAD-7090",
+    classId: "class-11",
+    subjectId: "accounting",
+    chapterId: "acad-class-11-acc-topic-6",
+    chapterName: "উৎপাদন ব্যয়",
+    unitNumber: 6,
+    topicId: "topic-6",
+    questionText: "কারখানা ব্যয়ে কী যোগ করলে উৎপাদন ব্যয় হয়?",
+    options: [
+      { letter: "A", text: "মুনাফা" },
+      { letter: "B", text: "প্রশাসনিক ব্যয়" },
+      { letter: "C", text: "মুখ্য ব্যয়" },
+      { letter: "D", text: "বিক্রয় ব্যয়" }
+    ],
+    correctLetter: "B",
+    explanation: "মুখ্য ব্যয় + কারখানা উপরি ব্যয় = কারখানা ব্যয়; তার সঙ্গে প্রশাসনিক ব্যয় যোগ করলে উৎপাদন ব্যয় হয়। মোট ব্যয় পেতে এর সঙ্গে বিক্রয় ও বণ্টন ব্যয় যোগ করতে হয়।",
+    difficulty: "medium",
+    sourceNote: "NCTB HSC হিসাববিজ্ঞান ২য় পত্র — উৎপাদন ব্যয় হিসাব",
+  },
+  {
+    id: "ACAD-7091",
+    classId: "class-11",
+    subjectId: "accounting",
+    chapterId: "acad-class-11-acc-topic-7",
+    chapterName: "নগদ প্রবাহ",
+    unitNumber: 7,
+    topicId: "topic-7",
+    questionText: "পরিচালন কার্যক্রমে নগদ প্রবাহের উদাহরণ কোনটি?",
+    options: [
+      { letter: "A", text: "যন্ত্র ক্রয়" },
+      { letter: "B", text: "পণ্য বিক্রয় থেকে প্রাপ্তি" },
+      { letter: "C", text: "শেয়ার বিক্রয়" },
+      { letter: "D", text: "ঋণ গ্রহণ" }
+    ],
+    correctLetter: "B",
+    explanation: "পণ্য বিক্রয়, সরবরাহকারীকে প্রদান — এগুলো পরিচালন কার্যক্রম।",
+    difficulty: "medium",
+    sourceNote: "NCTB HSC হিসাববিজ্ঞান ২য় পত্র — নগদ প্রবাহ বিবরণী",
+  },
+  {
+    id: "ACAD-7092",
+    classId: "class-11",
+    subjectId: "accounting",
+    chapterId: "acad-class-11-acc-topic-8",
+    chapterName: "ব্যাংক সমন্বয়",
+    unitNumber: 8,
+    topicId: "topic-8",
+    questionText: "ব্যাংক কর্তৃক সরাসরি আদায় করা টাকা নগদান বইয়ে —",
+    options: [
+      { letter: "A", text: "দ্বিগুণ করতে হয়" },
+      { letter: "B", text: "জমা করতে হয়" },
+      { letter: "C", text: "বাদ দিতে হয়" },
+      { letter: "D", text: "কিছু করতে হয় না" }
+    ],
+    correctLetter: "B",
+    explanation: "ব্যাংক সরাসরি আদায় করলে নগদান বইয়ে তা জমা (ডেবিট) করতে হয়।",
+    difficulty: "medium",
+    sourceNote: "NCTB HSC হিসাববিজ্ঞান ১ম পত্র — ব্যাংক সমন্বয় বিবরণী",
+  },
+  {
+    id: "ACAD-7093",
+    classId: "class-11",
+    subjectId: "accounting",
+    chapterId: "acad-class-11-acc-topic-9",
+    chapterName: "কুঋণ",
+    unitNumber: 9,
+    topicId: "topic-9",
+    questionText: "সন্দেহজনক ঋণ সঞ্চিতি কী?",
+    options: [
+      { letter: "A", text: "ভবিষ্যতে কুঋণের জন্য রাখা অর্থ" },
+      { letter: "B", text: "মুনাফা" },
+      { letter: "C", text: "নিশ্চিত কুঋণ" },
+      { letter: "D", text: "মূলধন" }
+    ],
+    correctLetter: "A",
+    explanation: "যে পাওনা আদায় অনিশ্চিত, তার জন্য সঞ্চিতি রাখা হয়।",
+    difficulty: "medium",
+    sourceNote: "NCTB HSC হিসাববিজ্ঞান ১ম পত্র — কুঋণ সঞ্চিতি",
+  },
+  {
+    id: "ACAD-7094",
+    classId: "class-11",
+    subjectId: "accounting",
+    chapterId: "acad-class-11-acc-topic-10",
+    chapterName: "মজুদ",
+    unitNumber: 10,
+    topicId: "topic-10",
+    questionText: "FIFO পদ্ধতিতে প্রথমে কী বিক্রি ধরা হয়?",
+    options: [
+      { letter: "A", text: "আগে কেনা মজুদ" },
+      { letter: "B", text: "দামি মজুদ" },
+      { letter: "C", text: "পরে কেনা মজুদ" },
+      { letter: "D", text: "সস্তা মজুদ" }
+    ],
+    correctLetter: "A",
+    explanation: "FIFO (First In First Out): আগে কেনা পণ্য আগে বিক্রি ধরা হয়।",
+    difficulty: "medium",
+    sourceNote: "NCTB HSC হিসাববিজ্ঞান ১ম পত্র — মজুদপণ্য",
+  },
+  {
+    id: "ACAD-7095",
+    classId: "class-11",
+    subjectId: "accounting",
+    chapterId: "acad-class-11-acc-topic-11",
+    chapterName: "অন্তর্বর্তী হিসাব",
+    unitNumber: 11,
+    topicId: "topic-11",
+    questionText: "অগ্রিম খরচ কোন ধরনের হিসাব?",
+    options: [
+      { letter: "A", text: "ব্যয়" },
+      { letter: "B", text: "দায়" },
+      { letter: "C", text: "সম্পদ" },
+      { letter: "D", text: "আয়" }
+    ],
+    correctLetter: "C",
+    explanation: "অগ্রিম খরচ ভবিষ্যতে সুবিধা দেবে বলে চলতি সম্পদ হিসেবে দেখানো হয়।",
+    difficulty: "medium",
+    sourceNote: "NCTB HSC হিসাববিজ্ঞান ১ম পত্র — সমন্বয় দাখিলা",
+  },
+  {
+    id: "ACAD-7096",
+    classId: "class-11",
+    subjectId: "accounting",
+    chapterId: "acad-class-11-acc-topic-12",
+    chapterName: "বোনাস শেয়ার",
+    unitNumber: 12,
+    topicId: "topic-12",
+    questionText: "বোনাস শেয়ার দেওয়া হয় —",
+    options: [
+      { letter: "A", text: "নতুন মূলধন থেকে" },
+      { letter: "B", text: "লভ্যাংশ নগদে দিয়ে" },
+      { letter: "C", text: "সঞ্চিতি থেকে" },
+      { letter: "D", text: "ঋণ থেকে" }
+    ],
+    correctLetter: "C",
+    explanation: "সঞ্চিত মুনাফা থেকে শেয়ারহোল্ডারদের বিনামূল্যে বোনাস শেয়ার দেওয়া হয়।",
+    difficulty: "medium",
+    sourceNote: "NCTB HSC হিসাববিজ্ঞান ২য় পত্র — যৌথ মূলধনী কোম্পানি",
   },
 ];

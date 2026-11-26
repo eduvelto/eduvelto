@@ -1,10 +1,12 @@
-// Eduvelto — Academic Geography and Environment practice questions (Class 9),
-// verified against the Dakhil NCTB books (review 26 Nov 2026).
+// Eduvelto — Academic Geography and Environment practice questions (Classes 9 and 11),
+// verified against the NCTB books (review 26 Nov 2026; see the Class 9 / Class 11 notes below).
 //
-// Static data ONLY — zero Firestore reads. The 20 questions are the
-// Academic Class 9 Geography and Environment drafts AFTER review (see
-// review-academic-c9-economics-geography-verdicts.json and
-// review-academic-c9-fixes-applied.md in
+// Static data ONLY — zero Firestore reads. The 42 questions are the
+// Academic Class 9 and Class 11 Geography and Environment drafts AFTER review (see
+// review-academic-c9-economics-geography-verdicts.json,
+// review-academic-c9-fixes-applied.md,
+// review-academic-c11-12-geography-verdicts.json and
+// review-academic-c11-12-fixes-applied.md in
 // ~/workspace/eduorbit/sprint-1week-2026-11-25/).
 //
 // CAVEAT: the Class 9 review was verified against DAKHIL editions —
@@ -13,6 +15,13 @@
 // references + the SSC syllabus topic. Whether Class 9-10 content
 // serves the general SSC audience or the Dakhil audience is an owner
 // decision still owed (after his exams).
+//
+// Class 11 NOTE: the Class 11 questions were verified for fact
+// correctness + on-syllabus (review 26 Nov 2026) — NO HSC book
+// exists in the workspace, so VERIFIED here does NOT mean
+// book-confirmed. A teacher with the actual HSC books should
+// spot-check before publication, especially the re-cited chapters
+// (see review-academic-c11-12-fixes-applied.md).
 //
 // HONESTY: these are ORIGINAL practice questions written for the
 // NCTB lessons — NOT board / university / previous-year questions.
@@ -35,10 +44,16 @@
 // question ONCE under classId 'class-9', and publicAcademic.ts /
 // questionPaper.ts / scripts/prerender.mjs map 'class-10' to the
 // Class 9 pool for these subjects.
+// The Class 11
+// questions also serve Class 12 (same combined class-11-12 draft
+// set — there is NO separate Class 12 set): the pool holds each
+// question ONCE under classId 'class-11', and publicAcademic.ts /
+// questionPaper.ts / scripts/prerender.mjs map 'class-12' to the
+// Class 11 pool for these subjects.
 
 import { type PublicAcademicQuestion } from './publicAcademic';
 
-/** All verified Academic Geography and Environment questions, Class 9 (in draft order). */
+/** All verified Academic Geography and Environment questions, Classes 9 and 11 (in draft order). */
 export const PUBLIC_ACADEMIC_GEOGRAPHY_QUESTIONS: PublicAcademicQuestion[] = [
   {
     id: "ACAD-1062",
@@ -439,5 +454,445 @@ export const PUBLIC_ACADEMIC_GEOGRAPHY_QUESTIONS: PublicAcademicQuestion[] = [
     explanation: "প্রাকৃতিক গ্যাস বাংলাদেশের প্রধান খনিজ সম্পদ; বিদ্যুৎ ও সার শিল্পে ব্যবহৃত হয়।",
     difficulty: "medium",
     sourceNote: "NCTB ভূগোল ও পরিবেশ — প্রাকৃতিক সম্পদ",
+  },
+  {
+    id: "ACAD-3041",
+    classId: "class-11",
+    subjectId: "geography",
+    chapterId: "acad-class-11-geo-topic-1",
+    chapterName: "ভূগোল",
+    unitNumber: 1,
+    topicId: "topic-1",
+    questionText: "ভূগোলের জনক কাকে বলা হয়?",
+    options: [
+      { letter: "A", text: "স্ট্রাবো" },
+      { letter: "B", text: "হেরোডোটাস" },
+      { letter: "C", text: "ইরাটসথেনিস" },
+      { letter: "D", text: "টলেমি" }
+    ],
+    correctLetter: "C",
+    explanation: "ইরাটসথেনিস প্রথম ‘Geography’ শব্দটি ব্যবহার করেন বলে তাঁকে ভূগোলের জনক বলা হয়।",
+    difficulty: "easy",
+    sourceNote: "NCTB HSC ভূগোল ১ম পত্র — ভূগোল পরিচিতি",
+  },
+  {
+    id: "ACAD-3042",
+    classId: "class-11",
+    subjectId: "geography",
+    chapterId: "acad-class-11-geo-topic-2",
+    chapterName: "পৃথিবীর গঠন",
+    unitNumber: 2,
+    topicId: "topic-2",
+    questionText: "ভূমিকম্পের উৎপত্তিস্থলকে কী বলে?",
+    options: [
+      { letter: "A", text: "চ্যুতি" },
+      { letter: "B", text: "তরঙ্গ" },
+      { letter: "C", text: "কেন্দ্র (Focus)" },
+      { letter: "D", text: "উপকেন্দ্র" }
+    ],
+    correctLetter: "C",
+    explanation: "ভূগর্ভে যেখানে ভূমিকম্পের উৎপত্তি হয় তা কেন্দ্র; ভূপৃষ্ঠে তার ঠিক ওপরের বিন্দু উপকেন্দ্র।",
+    difficulty: "medium",
+    sourceNote: "NCTB HSC ভূগোল ১ম পত্র — পৃথিবীর গঠন",
+  },
+  {
+    id: "ACAD-3043",
+    classId: "class-11",
+    subjectId: "geography",
+    chapterId: "acad-class-11-geo-topic-3",
+    chapterName: "জলবায়ু",
+    unitNumber: 3,
+    topicId: "topic-3",
+    questionText: "বাংলাদেশে সবচেয়ে বেশি বৃষ্টি হয় কোথায়?",
+    options: [
+      { letter: "A", text: "সিলেটের লালখান বাজার অঞ্চল" },
+      { letter: "B", text: "খুলনা" },
+      { letter: "C", text: "বরিশাল" },
+      { letter: "D", text: "রাজশাহী" }
+    ],
+    correctLetter: "A",
+    explanation: "সিলেটের লালখান বাজার অঞ্চলে বাংলাদেশের সবচেয়ে বেশি বৃষ্টিপাত হয়; রাজশাহীতে সবচেয়ে কম।",
+    difficulty: "medium",
+    sourceNote: "NCTB HSC ভূগোল ১ম পত্র — জলবায়ু",
+  },
+  {
+    id: "ACAD-3044",
+    classId: "class-11",
+    subjectId: "geography",
+    chapterId: "acad-class-11-geo-topic-4",
+    chapterName: "নদী",
+    unitNumber: 4,
+    topicId: "topic-4",
+    questionText: "বাংলাদেশের নদীগুলো কোন ধরনের?",
+    options: [
+      { letter: "A", text: "বদ্বীপীয়" },
+      { letter: "B", text: "মরু" },
+      { letter: "C", text: "পার্বত্য" },
+      { letter: "D", text: "হিমবাহ" }
+    ],
+    correctLetter: "A",
+    explanation: "বাংলাদেশ বদ্বীপ অঞ্চল; এর নদীগুলো বদ্বীপীয় প্রকৃতির।",
+    difficulty: "medium",
+    sourceNote: "NCTB HSC ভূগোল ২য় পত্র — বাংলাদেশের নদ-নদী",
+  },
+  {
+    id: "ACAD-3045",
+    classId: "class-11",
+    subjectId: "geography",
+    chapterId: "acad-class-11-geo-topic-5",
+    chapterName: "জনসংখ্যা",
+    unitNumber: 5,
+    topicId: "topic-5",
+    questionText: "জনসংখ্যার ঘনত্ব কীভাবে নির্ণয় করা হয়?",
+    options: [
+      { letter: "A", text: "মোট জনসংখ্যা ÷ মোট আয়তন" },
+      { letter: "B", text: "মোট জনসংখ্যা × আয়তন" },
+      { letter: "C", text: "জনসংখ্যা ÷ জন্মহার" },
+      { letter: "D", text: "জন্মহার − মৃত্যুহার" }
+    ],
+    correctLetter: "A",
+    explanation: "ঘনত্ব = মোট জনসংখ্যা / মোট আয়তন (প্রতি বর্গকিমিতে জনসংখ্যা)।",
+    difficulty: "medium",
+    sourceNote: "NCTB HSC ভূগোল ২য় পত্র — জনসংখ্যা",
+  },
+  {
+    id: "ACAD-3046",
+    classId: "class-11",
+    subjectId: "geography",
+    chapterId: "acad-class-11-geo-topic-6",
+    chapterName: "কৃষি",
+    unitNumber: 6,
+    topicId: "topic-6",
+    questionText: "বাংলাদেশের কোন জেলায় সবচেয়ে বেশি পাট উৎপাদিত হয়?",
+    options: [
+      { letter: "A", text: "কুষ্টিয়া" },
+      { letter: "B", text: "ফরিদপুর" },
+      { letter: "C", text: "যশোর" },
+      { letter: "D", text: "রংপুর" }
+    ],
+    correctLetter: "B",
+    explanation: "ফরিদপুর জেলায় সবচেয়ে বেশি পাট উৎপাদিত হয়।",
+    difficulty: "medium",
+    sourceNote: "NCTB HSC ভূগোল ২য় পত্র — কৃষি",
+  },
+  {
+    id: "ACAD-3047",
+    classId: "class-11",
+    subjectId: "geography",
+    chapterId: "acad-class-11-geo-topic-7",
+    chapterName: "শিল্প",
+    unitNumber: 7,
+    topicId: "topic-7",
+    questionText: "বাংলাদেশের প্রথম কাগজ কল কোথায়?",
+    options: [
+      { letter: "A", text: "নারায়ণগঞ্জ" },
+      { letter: "B", text: "খুলনা" },
+      { letter: "C", text: "চন্দ্রঘোনা" },
+      { letter: "D", text: "ঢাকা" }
+    ],
+    correctLetter: "C",
+    explanation: "চন্দ্রঘোনা কাগজ কল বাংলাদেশের প্রথম কাগজ শিল্প।",
+    difficulty: "medium",
+    sourceNote: "NCTB HSC ভূগোল ২য় পত্র — শিল্প",
+  },
+  {
+    id: "ACAD-3048",
+    classId: "class-11",
+    subjectId: "geography",
+    chapterId: "acad-class-11-geo-topic-8",
+    chapterName: "পরিবহন",
+    unitNumber: 8,
+    topicId: "topic-8",
+    questionText: "বাংলাদেশের ব্যস্ততম স্থলবন্দর কোনটি?",
+    options: [
+      { letter: "A", text: "সোনামসজিদ" },
+      { letter: "B", text: "বেনাপোল" },
+      { letter: "C", text: "হিলি" },
+      { letter: "D", text: "আখাউড়া" }
+    ],
+    correctLetter: "B",
+    explanation: "যশোরের বেনাপোল স্থলবন্দর দিয়ে ভারতের সঙ্গে সবচেয়ে বেশি বাণিজ্য হয়।",
+    difficulty: "easy",
+    sourceNote: "NCTB HSC ভূগোল ২য় পত্র — পরিবহন ও যোগাযোগ",
+  },
+  {
+    id: "ACAD-3049",
+    classId: "class-11",
+    subjectId: "geography",
+    chapterId: "acad-class-11-geo-topic-9",
+    chapterName: "দুর্যোগ",
+    unitNumber: 9,
+    topicId: "topic-9",
+    questionText: "ঘূর্ণিঝড়ের সতর্ক সংকেত কে দেয়?",
+    options: [
+      { letter: "A", text: "আবহাওয়া অধিদপ্তর" },
+      { letter: "B", text: "সেনাবাহিনী" },
+      { letter: "C", text: "ফায়ার সার্ভিস" },
+      { letter: "D", text: "পুলিশ" }
+    ],
+    correctLetter: "A",
+    explanation: "আবহাওয়া অধিদপ্তর ঘূর্ণিঝড়ের পূর্বাভাস ও সতর্ক সংকেত দেয়।",
+    difficulty: "medium",
+    sourceNote: "NCTB HSC ভূগোল ১ম পত্র — দুর্যোগ ব্যবস্থাপনা",
+  },
+  {
+    id: "ACAD-3050",
+    classId: "class-11",
+    subjectId: "geography",
+    chapterId: "acad-class-11-geo-topic-10",
+    chapterName: "মানচিত্র",
+    unitNumber: 10,
+    topicId: "topic-10",
+    questionText: "ভূ-বৈচিত্র্য দেখাতে কোন মানচিত্র ব্যবহৃত হয়?",
+    options: [
+      { letter: "A", text: "রাজনৈতিক মানচিত্র" },
+      { letter: "B", text: "ভূ-প্রাকৃতিক মানচিত্র" },
+      { letter: "C", text: "জলবায়ু মানচিত্র" },
+      { letter: "D", text: "জনসংখ্যা মানচিত্র" }
+    ],
+    correctLetter: "B",
+    explanation: "ভূ-প্রাকৃতিক মানচিত্রে পাহাড়, সমভূমি ও নদী দেখানো হয়।",
+    difficulty: "medium",
+    sourceNote: "NCTB HSC ভূগোল ১ম পত্র — মানচিত্র",
+  },
+  {
+    id: "ACAD-8037",
+    classId: "class-11",
+    subjectId: "geography",
+    chapterId: "acad-class-11-geo-topic-1",
+    chapterName: "ভূগোল",
+    unitNumber: 1,
+    topicId: "topic-1",
+    questionText: "মানবীয় ভূগোল কী নিয়ে আলোচনা করে?",
+    options: [
+      { letter: "A", text: "শুধু জলবায়ু" },
+      { letter: "B", text: "শুধু নদী" },
+      { letter: "C", text: "শুধু শিলা" },
+      { letter: "D", text: "মানুষ ও পরিবেশের সম্পর্ক" }
+    ],
+    correctLetter: "D",
+    explanation: "মানবীয় ভূগোলে জনসংখ্যা, বসতি, কৃষি ও শিল্প নিয়ে আলোচনা হয়।",
+    difficulty: "medium",
+    sourceNote: "NCTB HSC ভূগোল ১ম পত্র — ভূগোলের শাখা",
+  },
+  {
+    id: "ACAD-8038",
+    classId: "class-11",
+    subjectId: "geography",
+    chapterId: "acad-class-11-geo-topic-2",
+    chapterName: "পৃথিবীর গঠন",
+    unitNumber: 2,
+    topicId: "topic-2",
+    questionText: "প্লেট টেকটনিক তত্ত্ব অনুযায়ী ভূত্বক কী দিয়ে গঠিত?",
+    options: [
+      { letter: "A", text: "একটানা শিলা" },
+      { letter: "B", text: "শুধু পানি" },
+      { letter: "C", text: "শুধু বরফ" },
+      { letter: "D", text: "চলমান প্লেট" }
+    ],
+    correctLetter: "D",
+    explanation: "ভূত্বক কয়েকটি প্লেটে বিভক্ত; এদের চলাচলে ভূমিকম্প ও পর্বত সৃষ্টি হয়।",
+    difficulty: "medium",
+    sourceNote: "NCTB HSC ভূগোল ১ম পত্র — প্লেট টেকটনিক",
+  },
+  {
+    id: "ACAD-8039",
+    classId: "class-11",
+    subjectId: "geography",
+    chapterId: "acad-class-11-geo-topic-3",
+    chapterName: "জলবায়ু",
+    unitNumber: 3,
+    topicId: "topic-3",
+    questionText: "বাংলাদেশে কালবৈশাখী হয় কোন ঋতুতে?",
+    options: [
+      { letter: "A", text: "শরতে" },
+      { letter: "B", text: "বর্ষায়" },
+      { letter: "C", text: "শীতকালে" },
+      { letter: "D", text: "গ্রীষ্মের শুরুতে" }
+    ],
+    correctLetter: "D",
+    explanation: "চৈত্র-বৈশাখে (গ্রীষ্মের শুরুতে) কালবৈশাখী ঝড় হয়।",
+    difficulty: "medium",
+    sourceNote: "NCTB HSC ভূগোল ১ম পত্র — জলবায়ু",
+  },
+  {
+    id: "ACAD-8040",
+    classId: "class-11",
+    subjectId: "geography",
+    chapterId: "acad-class-11-geo-topic-4",
+    chapterName: "নদী",
+    unitNumber: 4,
+    topicId: "topic-4",
+    questionText: "বাংলাদেশের নদীগুলোর প্রধান উৎস কী?",
+    options: [
+      { letter: "A", text: "শুধু ভূগর্ভস্থ পানি" },
+      { letter: "B", text: "শুধু হ্রদ" },
+      { letter: "C", text: "হিমালয় ও মেঘালয়ের বৃষ্টি" },
+      { letter: "D", text: "শুধু সমুদ্র" }
+    ],
+    correctLetter: "C",
+    explanation: "হিমালয়-মেঘালয়ের বৃষ্টি ও হিমবাহের পানিতে বাংলাদেশের নদীগুলো প্রবাহিত।",
+    difficulty: "medium",
+    sourceNote: "NCTB HSC ভূগোল ২য় পত্র — নদ-নদী",
+  },
+  {
+    id: "ACAD-8041",
+    classId: "class-11",
+    subjectId: "geography",
+    chapterId: "acad-class-11-geo-topic-5",
+    chapterName: "জনসংখ্যা",
+    unitNumber: 5,
+    topicId: "topic-5",
+    questionText: "জনসংখ্যা বৃদ্ধির হার বেশি হলে কী হয়?",
+    options: [
+      { letter: "A", text: "সম্পদের ওপর চাপ বাড়ে" },
+      { letter: "B", text: "সম্পদ বাড়ে" },
+      { letter: "C", text: "দারিদ্র্য কমে" },
+      { letter: "D", text: "কিছুই হয় না" }
+    ],
+    correctLetter: "A",
+    explanation: "দ্রুত জনসংখ্যা বৃদ্ধিতে খাদ্য, শিক্ষা ও কর্মসংস্থানের ওপর চাপ বাড়ে।",
+    difficulty: "medium",
+    sourceNote: "NCTB HSC ভূগোল ২য় পত্র — জনসংখ্যা",
+  },
+  {
+    id: "ACAD-8042",
+    classId: "class-11",
+    subjectId: "geography",
+    chapterId: "acad-class-11-geo-topic-6",
+    chapterName: "কৃষি",
+    unitNumber: 6,
+    topicId: "topic-6",
+    questionText: "সবুজ বিপ্লব কী?",
+    options: [
+      { letter: "A", text: "শুধু বনায়ন" },
+      { letter: "B", text: "শুধু মাছ চাষ" },
+      { letter: "C", text: "শুধু পশুপালন" },
+      { letter: "D", text: "উচ্চফলনশীল বীজ ও সারের ব্যবহারে উৎপাদন বৃদ্ধি" }
+    ],
+    correctLetter: "D",
+    explanation: "সবুজ বিপ্লবে উচ্চফলনশীল বীজ, সার ও সেচে খাদ্য উৎপাদন বহুগুণ বাড়ে।",
+    difficulty: "medium",
+    sourceNote: "NCTB HSC ভূগোল ২য় পত্র — কৃষি",
+  },
+  {
+    id: "ACAD-8043",
+    classId: "class-11",
+    subjectId: "geography",
+    chapterId: "acad-class-11-geo-topic-7",
+    chapterName: "শিল্প",
+    unitNumber: 7,
+    topicId: "topic-7",
+    questionText: "বাংলাদেশের পাটকলগুলো প্রধানত কোথায়?",
+    options: [
+      { letter: "A", text: "সিলেট" },
+      { letter: "B", text: "রংপুর" },
+      { letter: "C", text: "কক্সবাজার" },
+      { letter: "D", text: "খুলনা ও নারায়ণগঞ্জ" }
+    ],
+    correctLetter: "D",
+    explanation: "খুলনা ও নারায়ণগঞ্জ অঞ্চলে পাটকলগুলো গড়ে উঠেছে।",
+    difficulty: "medium",
+    sourceNote: "NCTB HSC ভূগোল ২য় পত্র — শিল্প",
+  },
+  {
+    id: "ACAD-8044",
+    classId: "class-11",
+    subjectId: "geography",
+    chapterId: "acad-class-11-geo-topic-8",
+    chapterName: "পরিবহন",
+    unitNumber: 8,
+    topicId: "topic-8",
+    questionText: "বাংলাদেশের তৃতীয় সমুদ্রবন্দর কোনটি?",
+    options: [
+      { letter: "A", text: "মোংলা" },
+      { letter: "B", text: "পায়রা" },
+      { letter: "C", text: "চট্টগ্রাম" },
+      { letter: "D", text: "কক্সবাজার" }
+    ],
+    correctLetter: "B",
+    explanation: "বাংলাদেশের তৃতীয় সমুদ্রবন্দর পায়রা।",
+    difficulty: "medium",
+    sourceNote: "NCTB HSC ভূগোল ২য় পত্র — পরিবহন",
+  },
+  {
+    id: "ACAD-8045",
+    classId: "class-11",
+    subjectId: "geography",
+    chapterId: "acad-class-11-geo-topic-9",
+    chapterName: "দুর্যোগ",
+    unitNumber: 9,
+    topicId: "topic-9",
+    questionText: "ঘূর্ণিঝড়ের সময় সবচেয়ে বিপজ্জনক কী?",
+    options: [
+      { letter: "A", text: "বজ্রপাত" },
+      { letter: "B", text: "জলোচ্ছ্বাস" },
+      { letter: "C", text: "শিলাবৃষ্টি" },
+      { letter: "D", text: "বৃষ্টি" }
+    ],
+    correctLetter: "B",
+    explanation: "ঘূর্ণিঝড়ের জলোচ্ছ্বাসে উপকূল প্লাবিত হয়ে প্রাণহানি ঘটে।",
+    difficulty: "medium",
+    sourceNote: "NCTB HSC ভূগোল ১ম পত্র — দুর্যোগ",
+  },
+  {
+    id: "ACAD-8046",
+    classId: "class-11",
+    subjectId: "geography",
+    chapterId: "acad-class-11-geo-topic-10",
+    chapterName: "মানচিত্র",
+    unitNumber: 10,
+    topicId: "topic-10",
+    questionText: "টপোগ্রাফিক মানচিত্রে কী দেখানো হয়?",
+    options: [
+      { letter: "A", text: "ভূমির উচ্চতা ও আকৃতি" },
+      { letter: "B", text: "শুধু রাস্তা" },
+      { letter: "C", text: "শুধু জনসংখ্যা" },
+      { letter: "D", text: "শুধু রাজনৈতিক সীমানা" }
+    ],
+    correctLetter: "A",
+    explanation: "টপোগ্রাফিক মানচিত্রে সমোন্নতি রেখায় ভূমির উচ্চতা দেখানো হয়।",
+    difficulty: "medium",
+    sourceNote: "NCTB HSC ভূগোল ১ম পত্র — মানচিত্র",
+  },
+  {
+    id: "ACAD-8047",
+    classId: "class-11",
+    subjectId: "geography",
+    chapterId: "acad-class-11-geo-topic-11",
+    chapterName: "বসতি",
+    unitNumber: 11,
+    topicId: "topic-11",
+    questionText: "গ্রামীণ বসতি সাধারণত কেমন হয়?",
+    options: [
+      { letter: "A", text: "শুধু বাণিজ্যিক" },
+      { letter: "B", text: "ঘন ও শিল্পভিত্তিক" },
+      { letter: "C", text: "ছড়ানো ও কৃষিভিত্তিক" },
+      { letter: "D", text: "শুধু শহুরে" }
+    ],
+    correctLetter: "C",
+    explanation: "গ্রামীণ বসতি কৃষিকে কেন্দ্র করে ছড়ানোভাবে গড়ে ওঠে।",
+    difficulty: "medium",
+    sourceNote: "NCTB HSC ভূগোল ২য় পত্র — বসতি",
+  },
+  {
+    id: "ACAD-8048",
+    classId: "class-11",
+    subjectId: "geography",
+    chapterId: "acad-class-11-geo-topic-12",
+    chapterName: "ভূমি",
+    unitNumber: 12,
+    topicId: "topic-12",
+    questionText: "বাংলাদেশের মোট আয়তন প্রায় কত?",
+    options: [
+      { letter: "A", text: "২,০০,০০০ বর্গকিমি" },
+      { letter: "B", text: "১,৪৭,৫৭০ বর্গকিমি" },
+      { letter: "C", text: "৫০,০০০ বর্গকিমি" },
+      { letter: "D", text: "১,০০,০০০ বর্গকিমি" }
+    ],
+    correctLetter: "B",
+    explanation: "বাংলাদেশের আয়তন প্রায় ১,৪৭,৫৭০ বর্গকিলোমিটার।",
+    difficulty: "medium",
+    sourceNote: "NCTB HSC ভূগোল ২য় পত্র — বাংলাদেশের ভূমি",
   },
 ];

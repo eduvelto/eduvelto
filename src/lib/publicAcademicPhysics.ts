@@ -1,10 +1,12 @@
-// Eduvelto — Academic Physics practice questions (Class 9),
-// verified against the Dakhil NCTB books (review 26 Nov 2026).
+// Eduvelto — Academic Physics practice questions (Classes 9 and 11),
+// verified against the NCTB books (review 26 Nov 2026; see the Class 9 / Class 11 notes below).
 //
-// Static data ONLY — zero Firestore reads. The 23 questions are the
-// Academic Class 9 Physics drafts AFTER review (see
-// review-academic-c9-physics-verdicts.json and
-// review-academic-c9-fixes-applied.md in
+// Static data ONLY — zero Firestore reads. The 47 questions are the
+// Academic Class 9 and Class 11 Physics drafts AFTER review (see
+// review-academic-c9-physics-verdicts.json,
+// review-academic-c9-fixes-applied.md,
+// review-academic-c11-12-physics-verdicts.json and
+// review-academic-c11-12-fixes-applied.md in
 // ~/workspace/eduorbit/sprint-1week-2026-11-25/).
 //
 // CAVEAT: the Class 9 review was verified against DAKHIL editions —
@@ -13,6 +15,13 @@
 // references + the SSC syllabus topic. Whether Class 9-10 content
 // serves the general SSC audience or the Dakhil audience is an owner
 // decision still owed (after his exams).
+//
+// Class 11 NOTE: the Class 11 questions were verified for fact
+// correctness + on-syllabus (review 26 Nov 2026) — NO HSC book
+// exists in the workspace, so VERIFIED here does NOT mean
+// book-confirmed. A teacher with the actual HSC books should
+// spot-check before publication, especially the re-cited chapters
+// (see review-academic-c11-12-fixes-applied.md).
 //
 // HONESTY: these are ORIGINAL practice questions written for the
 // NCTB lessons — NOT board / university / previous-year questions.
@@ -35,10 +44,16 @@
 // question ONCE under classId 'class-9', and publicAcademic.ts /
 // questionPaper.ts / scripts/prerender.mjs map 'class-10' to the
 // Class 9 pool for these subjects.
+// The Class 11
+// questions also serve Class 12 (same combined class-11-12 draft
+// set — there is NO separate Class 12 set): the pool holds each
+// question ONCE under classId 'class-11', and publicAcademic.ts /
+// questionPaper.ts / scripts/prerender.mjs map 'class-12' to the
+// Class 11 pool for these subjects.
 
 import { type PublicAcademicQuestion } from './publicAcademic';
 
-/** All verified Academic Physics questions, Class 9 (in draft order). */
+/** All verified Academic Physics questions, Classes 9 and 11 (in draft order). */
 export const PUBLIC_ACADEMIC_PHYSICS_QUESTIONS: PublicAcademicQuestion[] = [
   {
     id: "ACAD-0064",
@@ -499,5 +514,485 @@ export const PUBLIC_ACADEMIC_PHYSICS_QUESTIONS: PublicAcademicQuestion[] = [
     explanation: "সমমেরু বিকর্ষণ করে, বিপরীত মেরু আকর্ষণ করে।",
     difficulty: "easy",
     sourceNote: "NCTB পদার্থবিজ্ঞান — অধ্যায় ১২: তড়িতের চৌম্বক ক্রিয়া",
+  },
+  {
+    id: "ACAD-2031",
+    classId: "class-11",
+    subjectId: "physics",
+    chapterId: "acad-class-11-phy-p1-chapter-2",
+    chapterName: "অধ্যায় ২: ভেক্টর (১ম পত্র)",
+    unitNumber: 2,
+    topicId: "chapter-2",
+    questionText: "দুটি ভেক্টরের ডট গুণফল কী দেয়?",
+    options: [
+      { letter: "A", text: "টেনসর" },
+      { letter: "B", text: "শূন্য সবসময়" },
+      { letter: "C", text: "স্কেলার রাশি" },
+      { letter: "D", text: "ভেক্টর রাশি" }
+    ],
+    correctLetter: "C",
+    explanation: "ডট গুণফলে স্কেলার পাওয়া যায়; ক্রস গুণফলে ভেক্টর পাওয়া যায়।",
+    difficulty: "medium",
+    sourceNote: "NCTB HSC পদার্থবিজ্ঞান ১ম পত্র — অধ্যায় ২: ভেক্টর",
+  },
+  {
+    id: "ACAD-2032",
+    classId: "class-11",
+    subjectId: "physics",
+    chapterId: "acad-class-11-phy-p1-chapter-3",
+    chapterName: "অধ্যায় ৩: গতিবিদ্যা (১ম পত্র)",
+    unitNumber: 3,
+    topicId: "chapter-3",
+    questionText: "প্রাসের সর্বোচ্চ উচ্চতায় বেগের উল্লম্ব উপাংশ কত?",
+    options: [
+      { letter: "A", text: "শূন্য" },
+      { letter: "B", text: "সর্বোচ্চ" },
+      { letter: "C", text: "আদি বেগের সমান" },
+      { letter: "D", text: "g-এর সমান" }
+    ],
+    correctLetter: "A",
+    explanation: "সর্বোচ্চ উচ্চতায় উল্লম্ব বেগ শূন্য হয়; অনুভূমিক উপাংশ থাকে।",
+    difficulty: "medium",
+    sourceNote: "NCTB HSC পদার্থবিজ্ঞান ১ম পত্র — অধ্যায় ৩: গতিবিদ্যা",
+  },
+  {
+    id: "ACAD-2033",
+    classId: "class-11",
+    subjectId: "physics",
+    chapterId: "acad-class-11-phy-p1-chapter-4",
+    chapterName: "অধ্যায় ৪: নিউটনীয় বলবিদ্যা (১ম পত্র)",
+    unitNumber: 4,
+    topicId: "chapter-4",
+    questionText: "নিউটনের দ্বিতীয় সূত্র থেকে ভরবেগের পরিবর্তনের হার কীসের সমান?",
+    options: [
+      { letter: "A", text: "সরণ" },
+      { letter: "B", text: "ক্ষমতা" },
+      { letter: "C", text: "প্রযুক্ত বল" },
+      { letter: "D", text: "বেগ" }
+    ],
+    correctLetter: "C",
+    explanation: "দ্বিতীয় সূত্র: ভরবেগের পরিবর্তনের হার প্রযুক্ত বলের সমানুপাতিক ও বলের দিকে ঘটে।",
+    difficulty: "easy",
+    sourceNote: "NCTB HSC পদার্থবিজ্ঞান ১ম পত্র — অধ্যায় ৪: নিউটনীয় বলবিদ্যা",
+  },
+  {
+    id: "ACAD-2034",
+    classId: "class-11",
+    subjectId: "physics",
+    chapterId: "acad-class-11-phy-p1-chapter-5",
+    chapterName: "অধ্যায় ৫: কাজ, শক্তি ও ক্ষমতা (১ম পত্র)",
+    unitNumber: 5,
+    topicId: "chapter-5",
+    questionText: "কোনো বস্তুর বেগ দ্বিগুণ হলে গতিশক্তি কত গুণ হয়?",
+    options: [
+      { letter: "A", text: "২ গুণ" },
+      { letter: "B", text: "অপরিবর্তিত" },
+      { letter: "C", text: "৪ গুণ" },
+      { letter: "D", text: "৮ গুণ" }
+    ],
+    correctLetter: "C",
+    explanation: "গতিশক্তি KE = ½mv²; বেগের সঙ্গে বর্গের সম্পর্কে বাড়ে, তাই দ্বিগুণ বেগে ৪ গুণ শক্তি।",
+    difficulty: "medium",
+    sourceNote: "NCTB HSC পদার্থবিজ্ঞান ১ম পত্র — অধ্যায় ৫: কাজ, শক্তি ও ক্ষমতা",
+  },
+  {
+    id: "ACAD-2035",
+    classId: "class-11",
+    subjectId: "physics",
+    chapterId: "acad-class-11-phy-p1-chapter-6",
+    chapterName: "অধ্যায় ৬: মহাকর্ষ ও অভিকর্ষ (১ম পত্র)",
+    unitNumber: 6,
+    topicId: "chapter-6",
+    questionText: "মহাকর্ষীয় ধ্রুবক G-এর মান কত?",
+    options: [
+      { letter: "A", text: "৬.৬৭ × ১০⁻¹¹ N·m²/kg²" },
+      { letter: "B", text: "৬.০২ × ১০²³" },
+      { letter: "C", text: "৯.৮ m/s²" },
+      { letter: "D", text: "৩ × ১০⁸ m/s" }
+    ],
+    correctLetter: "A",
+    explanation: "G = 6.67 × 10⁻¹¹ N·m²/kg² (সর্বজনীন মহাকর্ষীয় ধ্রুবক)।",
+    difficulty: "medium",
+    sourceNote: "NCTB HSC পদার্থবিজ্ঞান ১ম পত্র — অধ্যায় ৬: মহাকর্ষ ও অভিকর্ষ",
+  },
+  {
+    id: "ACAD-2036",
+    classId: "class-11",
+    subjectId: "physics",
+    chapterId: "acad-class-11-phy-p1-chapter-8",
+    chapterName: "অধ্যায় ৮: পর্যায়বৃত্ত গতি (১ম পত্র)",
+    unitNumber: 8,
+    topicId: "chapter-8",
+    questionText: "সরল দোলকের পর্যায়কাল কার ওপর নির্ভর করে?",
+    options: [
+      { letter: "A", text: "কার্যকর দৈর্ঘ্য ও অভিকর্ষজ ত্বরণ" },
+      { letter: "B", text: "ভর" },
+      { letter: "C", text: "সুতার রং" },
+      { letter: "D", text: "বিস্তার" }
+    ],
+    correctLetter: "A",
+    explanation: "T = 2π√(l/g); ভর ও বিস্তারের ওপর নির্ভর করে না।",
+    difficulty: "medium",
+    sourceNote: "NCTB HSC পদার্থবিজ্ঞান ১ম পত্র — অধ্যায় ৮: পর্যায়বৃত্ত গতি",
+  },
+  {
+    id: "ACAD-2037",
+    classId: "class-11",
+    subjectId: "physics",
+    chapterId: "acad-class-11-phy-p2-chapter-1",
+    chapterName: "অধ্যায় ১: তাপগতিবিদ্যা (২য় পত্র)",
+    unitNumber: 1,
+    topicId: "chapter-1-p2",
+    questionText: "তাপগতিবিদ্যার প্রথম সূত্র কী?",
+    options: [
+      { letter: "A", text: "শূন্যতম সূত্র" },
+      { letter: "B", text: "শক্তির সংরক্ষণশীলতা" },
+      { letter: "C", text: "এনট্রপি বৃদ্ধি" },
+      { letter: "D", text: "চাপের সূত্র" }
+    ],
+    correctLetter: "B",
+    explanation: "প্রথম সূত্র: ΔQ = ΔU + ΔW — শক্তি সৃষ্টি বা ধ্বংস হয় না, রূপান্তরিত হয়।",
+    difficulty: "medium",
+    sourceNote: "NCTB HSC পদার্থবিজ্ঞান ২য় পত্র — অধ্যায় ১: তাপগতিবিদ্যা",
+  },
+  {
+    id: "ACAD-2038",
+    classId: "class-11",
+    subjectId: "physics",
+    chapterId: "acad-class-11-phy-p2-chapter-2",
+    chapterName: "অধ্যায় ২: স্থির তড়িৎ (২য় পত্র)",
+    unitNumber: 2,
+    topicId: "chapter-2-p2",
+    questionText: "তড়িৎ প্রাবল্যের একক কী?",
+    options: [
+      { letter: "A", text: "N/C" },
+      { letter: "B", text: "A" },
+      { letter: "C", text: "V" },
+      { letter: "D", text: "C" }
+    ],
+    correctLetter: "A",
+    explanation: "তড়িৎ প্রাবল্য E = F/q; একক নিউটন/কুলম্ব (N/C)।",
+    difficulty: "medium",
+    sourceNote: "NCTB HSC পদার্থবিজ্ঞান ২য় পত্র — অধ্যায় ২: স্থির তড়িৎ",
+  },
+  {
+    id: "ACAD-2039",
+    classId: "class-11",
+    subjectId: "physics",
+    chapterId: "acad-class-11-phy-p2-chapter-5",
+    chapterName: "অধ্যায় ৫: তড়িৎচৌম্বকীয় আবেশ ও পরিবর্তী প্রবাহ (২য় পত্র)",
+    unitNumber: 5,
+    topicId: "chapter-5-p2",
+    questionText: "তড়িৎবাহী তারের চারপাশে কী সৃষ্টি হয়?",
+    options: [
+      { letter: "A", text: "আলো" },
+      { letter: "B", text: "চৌম্বক ক্ষেত্র" },
+      { letter: "C", text: "শব্দ" },
+      { letter: "D", text: "তড়িৎ ক্ষেত্র শুধু" }
+    ],
+    correctLetter: "B",
+    explanation: "তড়িৎ প্রবাহিত তারের চারপাশে চৌম্বক ক্ষেত্র সৃষ্টি হয় (ওরস্টেডের পরীক্ষা)।",
+    difficulty: "medium",
+    sourceNote: "NCTB HSC পদার্থবিজ্ঞান ২য় পত্র — তড়িৎ প্রবাহের চৌম্বক ক্রিয়া",
+  },
+  {
+    id: "ACAD-2040",
+    classId: "class-11",
+    subjectId: "physics",
+    chapterId: "acad-class-11-phy-topic-1",
+    chapterName: "আলোকবিজ্ঞান",
+    unitNumber: 9,
+    topicId: "topic-1",
+    questionText: "আলোর ব্যতিচারের শর্ত কী?",
+    options: [
+      { letter: "A", text: "উৎসদ্বয় সুসঙ্গত হতে হবে" },
+      { letter: "B", text: "অন্ধকার প্রয়োজন" },
+      { letter: "C", text: "যেকোনো আলোতেই হয়" },
+      { letter: "D", text: "দুটি উৎসের কম্পাঙ্ক ভিন্ন হতে হবে" }
+    ],
+    correctLetter: "A",
+    explanation: "ব্যতিচারের জন্য দুটি সুসঙ্গত (একই কম্পাঙ্ক ও ধ্রুব দশা-পার্থক্য) উৎস দরকার।",
+    difficulty: "medium",
+    sourceNote: "NCTB HSC পদার্থবিজ্ঞান ২য় পত্র — ভৌত আলোকবিজ্ঞান",
+  },
+  {
+    id: "ACAD-2041",
+    classId: "class-11",
+    subjectId: "physics",
+    chapterId: "acad-class-11-phy-topic-2",
+    chapterName: "আধুনিক পদার্থবিজ্ঞান",
+    unitNumber: 10,
+    topicId: "topic-2",
+    questionText: "আলোক তড়িৎ ক্রিয়া ব্যাখ্যা করেন কে?",
+    options: [
+      { letter: "A", text: "বোর" },
+      { letter: "B", text: "আইনস্টাইন" },
+      { letter: "C", text: "প্ল্যাঙ্ক" },
+      { letter: "D", text: "নিউটন" }
+    ],
+    correctLetter: "B",
+    explanation: "আইনস্টাইন আলোক তড়িৎ ক্রিয়ার ব্যাখ্যা দিয়ে ১৯২১ সালে নোবেল পান।",
+    difficulty: "medium",
+    sourceNote: "NCTB HSC পদার্থবিজ্ঞান ২য় পত্র — আধুনিক পদার্থবিজ্ঞান",
+  },
+  {
+    id: "ACAD-2042",
+    classId: "class-11",
+    subjectId: "physics",
+    chapterId: "acad-class-11-phy-topic-3",
+    chapterName: "পরমাণু",
+    unitNumber: 11,
+    topicId: "topic-3",
+    questionText: "হাইড্রোজেন পরমাণুর প্রথম কক্ষপথের ব্যাসার্ধ কত?",
+    options: [
+      { letter: "A", text: "০.০৫৩ Å" },
+      { letter: "B", text: "১.০ Å" },
+      { letter: "C", text: "৫.৩ Å" },
+      { letter: "D", text: "০.৫৩ Å" }
+    ],
+    correctLetter: "D",
+    explanation: "বোর ব্যাসার্ধ a₀ = 0.53 Å।",
+    difficulty: "medium",
+    sourceNote: "NCTB HSC পদার্থবিজ্ঞান ২য় পত্র — পরমাণুর মডেল",
+  },
+  {
+    id: "ACAD-7037",
+    classId: "class-11",
+    subjectId: "physics",
+    chapterId: "acad-class-11-phy-p1-chapter-2",
+    chapterName: "অধ্যায় ২: ভেক্টর (১ম পত্র)",
+    unitNumber: 2,
+    topicId: "chapter-2",
+    questionText: "দুটি ভেক্টরের লব্ধি সর্বোচ্চ হয় কখন?",
+    options: [
+      { letter: "A", text: "লম্ব হলে" },
+      { letter: "B", text: "বিপরীত দিকে থাকলে" },
+      { letter: "C", text: "৬০° কোণে থাকলে" },
+      { letter: "D", text: "একই দিকে থাকলে" }
+    ],
+    correctLetter: "D",
+    explanation: "একই দিকে থাকলে লব্ধি = যোগফল (সর্বোচ্চ); বিপরীত দিকে থাকলে পার্থক্য (সর্বনিম্ন)।",
+    difficulty: "medium",
+    sourceNote: "NCTB HSC পদার্থবিজ্ঞান ১ম পত্র — ভেক্টর",
+  },
+  {
+    id: "ACAD-7038",
+    classId: "class-11",
+    subjectId: "physics",
+    chapterId: "acad-class-11-phy-p1-chapter-3",
+    chapterName: "অধ্যায় ৩: গতিবিদ্যা (১ম পত্র)",
+    unitNumber: 3,
+    topicId: "chapter-3",
+    questionText: "সুষম বেগে চলমান বস্তুর ত্বরণ কত?",
+    options: [
+      { letter: "A", text: "বেগের সমান" },
+      { letter: "B", text: "অসীম" },
+      { letter: "C", text: "শূন্য" },
+      { letter: "D", text: "৯.৮ m/s²" }
+    ],
+    correctLetter: "C",
+    explanation: "সুষম বেগে বেগ বদলায় না, তাই ত্বরণ শূন্য।",
+    difficulty: "medium",
+    sourceNote: "NCTB HSC পদার্থবিজ্ঞান ১ম পত্র — গতিবিদ্যা",
+  },
+  {
+    id: "ACAD-7039",
+    classId: "class-11",
+    subjectId: "physics",
+    chapterId: "acad-class-11-phy-p1-chapter-4",
+    chapterName: "অধ্যায় ৪: নিউটনীয় বলবিদ্যা (১ম পত্র)",
+    unitNumber: 4,
+    topicId: "chapter-4",
+    questionText: "ভরবেগের সংজ্ঞা কোনটি?",
+    options: [
+      { letter: "A", text: "ভর × ত্বরণ" },
+      { letter: "B", text: "বল × সময়" },
+      { letter: "C", text: "ভর ÷ বেগ" },
+      { letter: "D", text: "ভর × বেগ" }
+    ],
+    correctLetter: "D",
+    explanation: "ভরবেগ p = mv; এর একক kg·m/s।",
+    difficulty: "medium",
+    sourceNote: "NCTB HSC পদার্থবিজ্ঞান ১ম পত্র — নিউটনীয় বলবিদ্যা",
+  },
+  {
+    id: "ACAD-7040",
+    classId: "class-11",
+    subjectId: "physics",
+    chapterId: "acad-class-11-phy-p1-chapter-5",
+    chapterName: "অধ্যায় ৫: কাজ, শক্তি ও ক্ষমতা (১ম পত্র)",
+    unitNumber: 5,
+    topicId: "chapter-5",
+    questionText: "১ kWh সমান কত জুল?",
+    options: [
+      { letter: "A", text: "১ × ১০⁶ J" },
+      { letter: "B", text: "১০০০ J" },
+      { letter: "C", text: "৩৬০০ J" },
+      { letter: "D", text: "৩.৬ × ১০⁶ J" }
+    ],
+    correctLetter: "D",
+    explanation: "১ kWh = ১০০০ W × ৩৬০০ s = ৩.৬ × ১০⁶ J।",
+    difficulty: "medium",
+    sourceNote: "NCTB HSC পদার্থবিজ্ঞান ১ম পত্র — কাজ, শক্তি ও ক্ষমতা",
+  },
+  {
+    id: "ACAD-7041",
+    classId: "class-11",
+    subjectId: "physics",
+    chapterId: "acad-class-11-phy-p1-chapter-6",
+    chapterName: "অধ্যায় ৬: মহাকর্ষ ও অভিকর্ষ (১ম পত্র)",
+    unitNumber: 6,
+    topicId: "chapter-6",
+    questionText: "পৃথিবীর কেন্দ্রে g-এর মান কত?",
+    options: [
+      { letter: "A", text: "৪.৯ m/s²" },
+      { letter: "B", text: "শূন্য" },
+      { letter: "C", text: "১৯.৬ m/s²" },
+      { letter: "D", text: "৯.৮ m/s²" }
+    ],
+    correctLetter: "B",
+    explanation: "কেন্দ্রে অভিকর্ষজ ত্বরণ শূন্য; মেরুতে সর্বোচ্চ, বিষুবরেখায় সর্বনিম্ন।",
+    difficulty: "medium",
+    sourceNote: "NCTB HSC পদার্থবিজ্ঞান ১ম পত্র — মহাকর্ষ ও অভিকর্ষ",
+  },
+  {
+    id: "ACAD-7042",
+    classId: "class-11",
+    subjectId: "physics",
+    chapterId: "acad-class-11-phy-p1-chapter-8",
+    chapterName: "অধ্যায় ৮: পর্যায়বৃত্ত গতি (১ম পত্র)",
+    unitNumber: 8,
+    topicId: "chapter-8",
+    questionText: "সরল ছন্দিত গতিতে ত্বরণ সর্বোচ্চ হয় কোথায়?",
+    options: [
+      { letter: "A", text: "মাঝখানে" },
+      { letter: "B", text: "প্রান্তীয় অবস্থানে" },
+      { letter: "C", text: "সাম্যাবস্থানে" },
+      { letter: "D", text: "সর্বত্র সমান" }
+    ],
+    correctLetter: "B",
+    explanation: "ত্বরণ সরণের সমানুপাতিক; প্রান্তে সরণ সর্বোচ্চ বলে ত্বরণও সর্বোচ্চ।",
+    difficulty: "medium",
+    sourceNote: "NCTB HSC পদার্থবিজ্ঞান ১ম পত্র — পর্যায়বৃত্ত গতি",
+  },
+  {
+    id: "ACAD-7043",
+    classId: "class-11",
+    subjectId: "physics",
+    chapterId: "acad-class-11-phy-topic-4",
+    chapterName: "তরঙ্গ",
+    unitNumber: 12,
+    topicId: "topic-4",
+    questionText: "তরঙ্গদৈর্ঘ্যের একক কী?",
+    options: [
+      { letter: "A", text: "জুল" },
+      { letter: "B", text: "হার্জ" },
+      { letter: "C", text: "সেকেন্ড" },
+      { letter: "D", text: "মিটার" }
+    ],
+    correctLetter: "D",
+    explanation: "তরঙ্গদৈর্ঘ্য দৈর্ঘ্য, তাই একক মিটার; কম্পাঙ্কের একক হার্জ।",
+    difficulty: "medium",
+    sourceNote: "NCTB HSC পদার্থবিজ্ঞান ১ম পত্র — তরঙ্গ",
+  },
+  {
+    id: "ACAD-7044",
+    classId: "class-11",
+    subjectId: "physics",
+    chapterId: "acad-class-11-phy-p2-chapter-2",
+    chapterName: "অধ্যায় ২: স্থির তড়িৎ (২য় পত্র)",
+    unitNumber: 2,
+    topicId: "chapter-2-p2",
+    questionText: "১ ভোল্ট সমান কত?",
+    options: [
+      { letter: "A", text: "১ নিউটন" },
+      { letter: "B", text: "১ অ্যাম্পিয়ার" },
+      { letter: "C", text: "১ ওহম" },
+      { letter: "D", text: "১ জুল/কুলম্ব" }
+    ],
+    correctLetter: "D",
+    explanation: "বিভব V = W/q; ১ V = ১ J/C।",
+    difficulty: "medium",
+    sourceNote: "NCTB HSC পদার্থবিজ্ঞান ২য় পত্র — তড়িৎ ক্ষেত্র",
+  },
+  {
+    id: "ACAD-7045",
+    classId: "class-11",
+    subjectId: "physics",
+    chapterId: "acad-class-11-phy-p2-chapter-5",
+    chapterName: "অধ্যায় ৫: তড়িৎচৌম্বকীয় আবেশ ও পরিবর্তী প্রবাহ (২য় পত্র)",
+    unitNumber: 5,
+    topicId: "chapter-5-p2",
+    questionText: "ট্রান্সফরমার কী কাজে লাগে?",
+    options: [
+      { letter: "A", text: "AC-কে DC করা" },
+      { letter: "B", text: "বিদ্যুৎ উৎপাদন" },
+      { letter: "C", text: "ভোল্টেজ বাড়ানো-কমানো" },
+      { letter: "D", text: "রোধ মাপা" }
+    ],
+    correctLetter: "C",
+    explanation: "ট্রান্সফরমার AC ভোল্টেজ বাড়ায় বা কমায়; DC-তে কাজ করে না।",
+    difficulty: "medium",
+    sourceNote: "NCTB HSC পদার্থবিজ্ঞান ২য় পত্র — অধ্যায় ৫: তড়িৎচৌম্বকীয় আবেশ ও পরিবর্তী প্রবাহ",
+  },
+  {
+    id: "ACAD-7046",
+    classId: "class-11",
+    subjectId: "physics",
+    chapterId: "acad-class-11-phy-topic-1",
+    chapterName: "আলোকবিজ্ঞান",
+    unitNumber: 9,
+    topicId: "topic-1",
+    questionText: "পূর্ণ অভ্যন্তরীণ প্রতিফলনের শর্ত কী?",
+    options: [
+      { letter: "A", text: "ঘন মাধ্যম থেকে লঘু মাধ্যমে যাওয়া ও আপতন কোণ সংকট কোণের বেশি হওয়া" },
+      { letter: "B", text: "যেকোনো আপতন কোণ" },
+      { letter: "C", text: "আলো সোজা যাওয়া" },
+      { letter: "D", text: "লঘু থেকে ঘন মাধ্যমে যাওয়া" }
+    ],
+    correctLetter: "A",
+    explanation: "ঘন থেকে লঘু মাধ্যমে আপতন কোণ সংকট কোণ ছাড়ালে আলো পুরোপুরি ফিরে আসে।",
+    difficulty: "medium",
+    sourceNote: "NCTB HSC পদার্থবিজ্ঞান ২য় পত্র — জ্যামিতিক আলোকবিজ্ঞান",
+  },
+  {
+    id: "ACAD-7047",
+    classId: "class-11",
+    subjectId: "physics",
+    chapterId: "acad-class-11-phy-topic-2",
+    chapterName: "আধুনিক পদার্থবিজ্ঞান",
+    unitNumber: 10,
+    topicId: "topic-2",
+    questionText: "প্ল্যাঙ্কের ধ্রুবকের মান কত?",
+    options: [
+      { letter: "A", text: "৯.১ × ১০⁻³¹ kg" },
+      { letter: "B", text: "৬.৬২৬ × ১০⁻³⁴ J·s" },
+      { letter: "C", text: "৩ × ১০⁸ m/s" },
+      { letter: "D", text: "১.৬ × ১০⁻¹⁹ C" }
+    ],
+    correctLetter: "B",
+    explanation: "প্ল্যাঙ্কের ধ্রুবক h = 6.626 × 10⁻³⁴ J·s।",
+    difficulty: "medium",
+    sourceNote: "NCTB HSC পদার্থবিজ্ঞান ২য় পত্র — আধুনিক পদার্থবিজ্ঞান",
+  },
+  {
+    id: "ACAD-7048",
+    classId: "class-11",
+    subjectId: "physics",
+    chapterId: "acad-class-11-phy-topic-3",
+    chapterName: "পরমাণু",
+    unitNumber: 11,
+    topicId: "topic-3",
+    questionText: "ইলেকট্রনের আধান কত?",
+    options: [
+      { letter: "A", text: "−৯.১ × ১০⁻³¹ C" },
+      { letter: "B", text: "১.৬ × ১০⁻¹⁹ C" },
+      { letter: "C", text: "−১.৬ × ১০⁻¹⁹ C" },
+      { letter: "D", text: "৬.০২ × ১০²³ C" }
+    ],
+    correctLetter: "C",
+    explanation: "ইলেকট্রনের আধান −1.6 × 10⁻¹⁹ C; প্রোটনের +1.6 × 10⁻¹⁹ C।",
+    difficulty: "medium",
+    sourceNote: "NCTB HSC পদার্থবিজ্ঞান ২য় পত্র — পরমাণুর মডেল",
   },
 ];
