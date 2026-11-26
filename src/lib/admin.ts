@@ -526,7 +526,7 @@ export async function getUserDetail(db: Firestore, targetUid: string): Promise<U
     getDocs(query(collection(db, 'posts'), where('authorId', '==', targetUid), limit(25))),
     getDocs(query(collection(db, 'questions'), where('authorId', '==', targetUid), limit(25))),
     getDocs(
-      query(collection(db, 'reports'), where('targetAuthorId', '==', targetUid), limit(25)),
+      query(collection(db, 'feedback'), where('targetAuthorId', '==', targetUid), limit(25)),
     ),
     getDocs(
       query(collection(db, 'supportMessages'), where('userId', '==', targetUid), limit(10)),
@@ -554,7 +554,9 @@ export async function getUserDetail(db: Firestore, targetUid: string): Promise<U
       createdAt: data.createdAt ?? null,
     };
   });
-  const reportsAbout: UserReportRow[] = reportsSnap.docs.map((d) => {
+  const reportsAbout: UserReportRow[] = reportsSnap.docs
+    .filter((d) => (d.data() as Record<string, unknown>).type === 'report')
+    .map((d) => {
     const data = d.data();
     return {
       id: d.id,

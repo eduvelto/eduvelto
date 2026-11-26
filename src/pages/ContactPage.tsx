@@ -2,16 +2,15 @@
 //
 // Official contact channels (provided + approved by the owner, 20 Nov
 // 2026) as mailto:/tel: links, plus a contact form. The form writes to
-// the `contactMessages` collection — readable only by owner/admin (see
-// firestore.rules), never updated or deleted from the client. Sending
+// the `feedback` collection (type 'contact') — readable only by
+// moderators (see firestore.rules), never updated or deleted from the client. Sending
 // needs a signed-in account; signed-out visitors use the email/phone
 // links instead. No private-tuition line anywhere (owner rule 22:54).
 
 import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { loginState } from '../lib/loginReturn';
-import { addDoc, collection, serverTimestamp } from 'firebase/firestore';
-import { db } from '../firebase';
+import { submitContactMessage } from '../lib/feedback';
 import { useAuth } from '../lib/auth';
 import { PageShell } from '../components/PageShell';
 import { AlertBox, Button } from '../components/ui';
@@ -30,7 +29,7 @@ export default function ContactPage() {
   const [error, setError] = useState('');
 
   async function submit() {
-    if (!user || !db) return;
+    if (!user) return;
     if (name.trim().length === 0 || message.trim().length === 0) {
       setError(t({ bn: 'নাম ও বার্তা দুটোই লিখুন।', en: 'Please write your name and your message.' }));
       return;
@@ -38,12 +37,11 @@ export default function ContactPage() {
     setStatus('sending');
     setError('');
     try {
-      await addDoc(collection(db, 'contactMessages'), {
-        userId: user.uid,
+      await submitContactMessage({
         name: name.trim(),
         email: email.trim() || null,
         message: message.trim(),
-        createdAt: serverTimestamp(),
+        reporterUid: user.uid,
       });
       setStatus('sent');
       setMessage('');
@@ -150,8 +148,8 @@ export default function ContactPage() {
       )}
       <p style={{ marginTop: 20, color: 'var(--ink-soft)', fontSize: 14, lineHeight: 1.6 }}>
         {t({
-          bn: 'আপনার বার্তা শুধুমাত্র Eduvelto-র মালিক ও অ্যাডমিনরা দেখতে পান।',
-          en: 'Your message is visible only to Eduvelto’s owner and admins.',
+          bn: 'আপনার বার্তা শুধুমাত্র Eduvelto-র মালিক, অ্যাডমিন ও মডারেটররা দেখতে পান।',
+          en: 'Your message is visible only to Eduvelto’s owner, admins and moderators.',
         })}
       </p>
     </PageShell>

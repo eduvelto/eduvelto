@@ -128,22 +128,24 @@ export const BACKUP_COLLECTIONS: string[] = [
   'jobQuestionBundles',
   'jobQuestionKeys',
   'quizKeys',
-  'reports',
-  'moderationQueue',
+  // Added 26 Nov 2026 (unified feedback: question-error reports +
+  // contact messages + general reports live in ONE `feedback`
+  // collection with a `type` field; the three old collections
+  // (questionReports, contactMessages, reports) and the dead
+  // social/gamification collections are gone — see firestore.rules).
+  'feedback',
   'teacherVerifications',
+  // studyPlans stays (26 Nov 2026): the owner-only study-plan rules
+  // block is LIVE (no writer yet), so the collection must stay in
+  // every backup — removing it broke the BRT-08 drift test.
   'studyPlans',
   'progressSummaries',
   // Added 22 Nov 2026 (pre-export full check: user bookmarks + progress
   // were silently missing from every backup).
   'bookmarks',
   'progress',
-  'socialPosts',
-  'studyGroups',
-  'institutionPages',
   'notices',
   'games',
-  'achievements',
-  'certificates',
   'opportunities',
   'careerPaths',
   // Added 22 Nov 2026 (pre-export full check: the health directory
@@ -155,17 +157,8 @@ export const BACKUP_COLLECTIONS: string[] = [
   // rewards data were silently missing from every backup).
   'adminActions',
   'settings',
-  'socialProfiles',
-  'friendships',
-  'groupMemberships',
-  'competitions',
   'leaderboardSnapshots',
   'parentLinks',
-  'parentInvites',
-  'giftCatalogue',
-  'giftRedemptions',
-  'partnerships',
-  'rewardBalances',
   // Added 23 Nov 2026 (public user IDs: the allocation counter
   // `counters/publicUserIds` must be in every backup, or a restore
   // would re-issue already-assigned IDs).
@@ -256,7 +249,6 @@ export const BACKUP_COLLECTIONS: string[] = [
   // Added 23 Nov 2026 (Step 18: admin/contact/health records that
   // hold real user data and were missing from every backup).
   'teacherChangeRequests',
-  'contactMessages',
   'doctors',
   'supportMessages',
   // Added 23 Nov 2026 (forced app update: the single config/appVersion

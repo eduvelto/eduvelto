@@ -45,6 +45,7 @@ const NAV_SECTIONS: NavSection[] = [
     icon: 'quiz',
     items: [
       { to: '/exam', bn: 'সব পরীক্ষা', en: 'All Exams' },
+      { to: '/admin/question-reports', bn: 'প্রশ্নের ভুল রিপোর্ট', en: 'Question Error Reports' },
       { bn: 'পরীক্ষার সেটিংস', en: 'Exam Settings', soon: true },
       { to: '/admin/analytics', bn: 'ফলাফল ও বিশ্লেষণ', en: 'Results & Analytics' },
     ],

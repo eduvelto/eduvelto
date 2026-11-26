@@ -277,10 +277,15 @@ describe('Step 18 — backup / recovery (emulator)', () => {
     // BACKUP_COLLECTIONS. Question Paper Generator Phase 2 25 Nov:
     // 103 → 107 — the four new collections (qpgBoards,
     // qpgContributions, qpgContributorStats, qpgCustomOrders) joined
-    // BACKUP_COLLECTIONS.)
-    expect(preflight.total).toBe(107);
+    // BACKUP_COLLECTIONS. Unified feedback 26 Nov 2026: 107 → 91 —
+    // the three feedback collections merged into one `feedback`
+    // (questionReports was never in the client list; contactMessages
+    // + reports left), and the 15 dead social/gamification +
+    // moderationQueue collections left with their rules blocks.
+    // studyPlans STAYS: its owner-only rules block is live.)
+    expect(preflight.total).toBe(91);
     expect(preflight.perCollection).toHaveLength(BACKUP_COLLECTIONS.length);
-    expect(preflight.readsPercent).toBeCloseTo(107 / 500, 5);
+    expect(preflight.readsPercent).toBeCloseTo(91 / 500, 5);
     const backup = await buildBackup(db, OWNER_UID);
     expect(validateBackup(backup).ok).toBe(true);
     expect(Object.keys(backup.data).sort()).toEqual([...BACKUP_COLLECTIONS].sort());

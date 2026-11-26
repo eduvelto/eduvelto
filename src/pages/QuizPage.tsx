@@ -13,6 +13,7 @@ import { PageShell, EmptyState } from '../components/PageShell';
 import { AlertBox, Button, Card, ProgressBar, Skeleton } from '../components/ui';
 import LoginWall from '../components/LoginWall';
 import { useAuth } from '../lib/auth';
+import QuestionReportButton from '../components/QuestionReportButton';
 import { useLanguage } from '../i18n/LanguageContext';
 import {
   getPublishedQuiz,
@@ -196,6 +197,7 @@ export default function QuizPage() {
               className="ev-textarea"
             />
           )}
+          <QuestionReportButton questionId={`${quiz.id}:q${q.n}`} questionText={q.question} />
         </Card>
       ))}
 

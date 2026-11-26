@@ -166,6 +166,7 @@ const AdminJobsPage = lazy(() => import('./pages/AdminJobsPage'));
 const AdminJobCircularsPage = lazy(() => import('./pages/AdminJobCircularsPage'));
 const AdminJobCircularEditPage = lazy(() => import('./pages/AdminJobCircularEditPage'));
 const AdminJobReportsPage = lazy(() => import('./pages/AdminJobReportsPage'));
+const AdminQuestionReportsPage = lazy(() => import('./pages/AdminQuestionReportsPage'));
 const AdminJobCorrectionsPage = lazy(() => import('./pages/AdminJobCorrectionsPage'));
 const AdminJobDomainsPage = lazy(() => import('./pages/AdminJobDomainsPage'));
 const AdminAdmissionsPage = lazy(() => import('./pages/AdminAdmissionsPage'));
@@ -856,6 +857,7 @@ export default function App() {
           <Route path="jobs/circulars/new" element={<AdminJobCircularEditPage />} />
           <Route path="jobs/circulars/:circularId" element={<AdminJobCircularEditPage />} />
           <Route path="jobs/reports" element={<AdminJobReportsPage />} />
+          <Route path="question-reports" element={<AdminQuestionReportsPage />} />
           <Route path="jobs/corrections" element={<AdminJobCorrectionsPage />} />
           <Route path="jobs/domains" element={<AdminJobDomainsPage />} />
           {/* Job Preparation System (24 Nov 2026): MCQ + written +

@@ -2302,15 +2302,6 @@ service cloud.firestore {
     // bounded fields). Only owner/admin may read messages; the client
     // can never update or delete one (append-only; admins reply from
     // the dashboard by creating a new record).
-    match /contactMessages/{messageId} {
-      allow read: if isAdmin();
-      allow create: if signedIn() && callerActive()
-        && request.resource.data.userId == uid()
-        && isStr(request.resource.data.name, 100)
-        && isStr(request.resource.data.message, 5000)
-        && isOptStr(request.resource.data.email, 200);
-      allow update, delete: if false;
-    }
 
     // ---------- newsletter subscribers (homepage redesign, 24 Nov 2026)
     // Footer signup writes here. Anyone (signed out included) may
@@ -2425,35 +2416,9 @@ service cloud.firestore {
     }
 
     // ---------- reports / moderationQueue ----------
-    match /reports/{reportId} {
-      allow read: if signedIn() && (resource.data.reporterId == uid() || isModerator());
-      // (Review 20 Nov 2026 — F16:) a report must name what was reported,
-      // or moderators cannot find the offending content. targetType /
-      // targetId / targetAuthorId are required.
-      allow create: if signedIn() && callerActive()
-        && request.resource.data.reporterId == uid()
-        && request.resource.data.status == 'open'
-        && request.resource.data.reason in ['spam', 'abuse', 'copyright', 'personal-info', 'other']
-        && request.resource.data.targetType in ['post', 'comment', 'socialPost', 'user', 'message']
-        && request.resource.data.targetId is string
-        && request.resource.data.targetAuthorId is string
-        && isOptStr(request.resource.data.details, 2000);
-      allow update: if isModerator();
-      allow delete: if false;
-    }
     // (Review 20 Nov 2026 — F17:) the queue used to be an unvalidated
     // free-for-all — any moderator could delete a genuine abuse report.
     // Queue items now have a shape, a status enum, and no delete.
-    match /moderationQueue/{itemId} {
-      allow read: if isModerator();
-      allow create: if isModerator()
-        && request.resource.data.reportId is string
-        && request.resource.data.status in ['open', 'reviewing', 'resolved', 'dismissed'];
-      allow update: if isModerator()
-        && request.resource.data.reportId is string
-        && request.resource.data.status in ['open', 'reviewing', 'resolved', 'dismissed'];
-      allow delete: if false;
-    }
 
     // ---------- teacherVerifications ----------
     // Applicant creates their own PENDING record only. Status, checkedBy and
@@ -2722,71 +2687,6 @@ service cloud.firestore {
     }
 
     // ---------- social (design gated: Phase 3, only after moderator + consent gates) ----------
-    match /socialProfiles/{userId} {
-      allow read: if isOwner(userId) || isModerator()
-        || (resource.data.isPublic == true && isPublished(resource.data));
-      allow create, update: if isOwner(userId)
-        && isOptStr(request.resource.data.bio, 300)
-        // A user may never make their own profile public: public visibility
-        // is Admin-approved only (age cannot be verified).
-        && request.resource.data.isPublic == false;
-      allow delete: if isAdmin();
-    }
-    match /friendships/{pairId} {
-      allow read: if signedIn()
-        && (resource.data.userA == uid() || resource.data.userB == uid() || isModerator());
-      allow create: if signedIn() && callerActive()
-        && (request.resource.data.userA == uid() || request.resource.data.userB == uid())
-        && request.resource.data.status == 'pending'
-        && request.resource.data.guardianApproved == false;
-      // Acceptance requires guardianApproved == true; only the recipient
-      // may accept, and nobody may set guardianApproved themselves —
-      // that field may only become true via a Moderator/Admin update.
-      allow update: if isModerator()
-        || (signedIn() && callerActive() && resource.data.userB == uid()
-            && request.resource.data.status in ['accepted', 'declined', 'blocked']
-            && request.resource.data.guardianApproved == resource.data.guardianApproved);
-      allow delete: if false;
-    }
-    match /follows/{followId} {
-      allow read, delete: if signedIn() && resource.data.followerId == uid();
-      allow create: if signedIn() && callerActive() && request.resource.data.followerId == uid();
-      allow update: if false;
-    }
-    match /socialPosts/{postId} {
-      allow read: if publishedAuthorRead();
-      allow create: if ownUnderReviewCreate()
-        && isStr(request.resource.data.body, 1000);
-      allow update: if isModerator()
-        || (signedIn() && callerActive() && resource.data.authorId == uid()
-            && resource.data.reviewStatus == 'Under Review'
-            && request.resource.data.reviewStatus == 'Under Review');
-      allow delete: if isAdmin();
-    }
-    match /socialPosts/{postId}/comments/{commentId} {
-      allow read: if publishedOrMod();
-      allow create: if ownUnderReviewCreate()
-        && isStr(request.resource.data.body, 500);
-      allow update, delete: if isModerator();
-    }
-    match /studyGroups/{groupId} {
-      allow read: if publishedOrMod();
-      allow create: if signedIn() && callerActive() && request.resource.data.reviewStatus == 'Under Review'
-        && isStr(request.resource.data.name, 100) && isStr(request.resource.data.description, 500);
-      allow update: if isModerator();
-      allow delete: if isAdmin();
-    }
-    match /groupMemberships/{membershipId} {
-      allow read: if signedIn() && (resource.data.userId == uid() || isModerator());
-      allow create: if ownCreate()
-        && request.resource.data.status == 'pending';
-      allow update: if isModerator();
-      allow delete: if isAdmin();
-    }
-    match /institutionPages/{pageId} {
-      allow read: if publishedOrMod();
-      allow create, update, delete: if isAdmin();
-    }
     match /notices/{noticeId} {
       allow read: if publishedOrMod();
       allow create: if isModerator()
@@ -2803,22 +2703,6 @@ service cloud.firestore {
       allow update: if contentUpdate(resource.data);
       allow delete: if isAdmin();
     }
-    match /users/{userId}/gameAttempts/{attemptId} {
-      allow read: if isOwner(userId) || isAdmin();
-      allow create: if isOwner(userId) && callerActive() && request.resource.data.gameId is string
-        && request.resource.data.score is number;
-      allow update, delete: if false;
-    }
-    match /competitions/{competitionId} {
-      allow read: if publishedOrMod();
-      allow create, update: if isModerator();
-      allow delete: if isAdmin();
-    }
-    match /competitions/{competitionId}/entries/{userId} {
-      allow read: if isOwner(userId) || isModerator();
-      allow create: if isOwner(userId) && callerActive() && request.resource.data.score is number;
-      allow update, delete: if false;
-    }
     match /leaderboardSnapshots/{snapshotId} {
       allow read: if true;
       allow write: if isModerator();
@@ -2828,28 +2712,16 @@ service cloud.firestore {
     // rewardBalances: NO direct client write to points, ever. The document
     // is read-only for the owner; balances are computed on read from the
     // user's own attempts until a safe server-side rule is proven in Phase 2.
-    match /rewardBalances/{userId} {
-      allow read: if isOwner(userId) || isAdmin();
-      allow write: if false;
-    }
-    match /achievements/{key} {
-      allow read: if publishedOrMod();
-      allow write: if isAdmin();
-    }
-    // userAchievements + passportEntries share identical rules
-    // (compaction 24 Nov 2026): one wildcard match with a
-    // collection guard. The guard is load-bearing — no other
-    // /users/{userId}/* subcollection is granted anything here.
+    // userAchievements only — passportEntries was never built, so the
+    // guard narrows to the one live collection (26 Nov 2026). The guard
+    // is load-bearing — no other /users/{userId}/* subcollection is
+    // granted anything here.
     match /users/{userId}/{achColl}/{key} {
-      allow read: if achColl in ['userAchievements', 'passportEntries']
+      allow read: if achColl == 'userAchievements'
         && (isOwner(userId) || isAdmin());
-      allow create: if achColl in ['userAchievements', 'passportEntries']
+      allow create: if achColl == 'userAchievements'
         && isOwner(userId) && callerActive();
       allow update, delete: if false;
-    }
-    match /certificates/{certId} {
-      allow read: if signedIn() && (resource.data.userId == uid() || isAdmin());
-      allow write: if isModerator();
     }
 
     // ---------- career / opportunities (Phase 4) ----------
@@ -2953,28 +2825,8 @@ service cloud.firestore {
              .hasOnly(['status', 'revokedAt', 'updatedAt']);
       allow delete: if isAdmin();
     }
-    match /parentInvites/{inviteId} {
-      allow read: if signedIn() && (resource.data.studentId == uid() || isAdmin());
-      allow create: if signedIn() && callerActive() && request.resource.data.studentId == uid()
-        && request.resource.data.status == 'sent';
-      allow update, delete: if isAdmin();
-    }
 
     // ---------- gift catalogue / partnerships: empty / owner-only until funded ----------
-    match /giftCatalogue/{giftId} {
-      allow read: if resource.data.status == 'available' || isAdmin();
-      allow write: if isAdmin();
-    }
-    match /giftRedemptions/{redemptionId} {
-      allow read: if signedIn() && (resource.data.userId == uid() || isAdmin());
-      allow create: if ownCreate()
-        && request.resource.data.status == 'requested';
-      allow update: if isAdmin();
-      allow delete: if false;
-    }
-    match /partnerships/{partnerId} {
-      allow read, write: if isAdmin();
-    }
 
     // ---------- adminActions (append-only audit log, spec §3) ----------
     // Admins/Owners record their own actions (actorId must be their own
@@ -3165,11 +3017,6 @@ service cloud.firestore {
     // 2 plan social section must be updated to match both.
     match /directMessages/{threadId} {
       allow read: if signedIn() && uid() in resource.data.get('participants', []);
-      allow create, update, delete: if false;
-    }
-    match /directMessages/{threadId}/messages/{messageId} {
-      allow read: if signedIn()
-        && uid() in get(/databases/$(database)/documents/directMessages/$(threadId)).data.get('participants', []);
       allow create, update, delete: if false;
     }
 
@@ -5254,6 +5101,74 @@ service cloud.firestore {
     // isModerator() tail). Board use is free; PDF export + share link
     // are Pro-gated in the UI (spec §8.13 proposal) — the rules are
     // the outer bound, the Pro check is a product rule.
+
+    // ---------- unified feedback (26 Nov 2026) ----------
+    // ONE collection replaces three: questionReports (question-error
+    // reports, Day 3) + contactMessages (Contact page) + reports
+    // (general moderation reports), distinguished by `type`.
+    // questionReports never shipped, so no migration was needed;
+    // contactMessages + reports were empty in the last good backup
+    // (24 Nov 2026) and write-only / read-only-in-admin, so their
+    // writers were repointed instead of migrated. Contact read
+    // widened from admin-only to moderator (one team queue).
+    function validFeedbackQuestionError(d) {
+      return d.get('status', '') == 'pending'
+        && d.get('errorType', '') in ['wrong-answer', 'wrong-explanation', 'typo', 'out-of-syllabus', 'other']
+        && isStr(d.get('questionId', null), 200)
+        && isStr(d.get('questionText', null), 200)
+        && isStr(d.get('description', null), 1000)
+        && d.get('flaggedForCorrection', null) == false
+        && d.get('decidedBy', null) == null
+        && d.get('decidedAt', null) == null
+        && d.get('decisionNote', null) == null
+        && onlyKeys(['type', 'reporterUid', 'status', 'questionId', 'questionText', 'errorType', 'description', 'flaggedForCorrection', 'decidedBy', 'decidedAt', 'decisionNote', 'createdAt', 'updatedAt']);
+    }
+    function validFeedbackContact(d) {
+      return d.get('status', '') == 'pending'
+        && isStr(d.get('name', null), 100)
+        && isStr(d.get('message', null), 5000)
+        && isOptStr(d.get('email', null), 200)
+        && onlyKeys(['type', 'reporterUid', 'status', 'name', 'message', 'email', 'createdAt', 'updatedAt']);
+    }
+    function validFeedbackReport(d) {
+      return d.get('status', '') == 'open'
+        && d.get('reason', '') in ['spam', 'abuse', 'copyright', 'personal-info', 'other']
+        && d.get('targetType', '') in ['post', 'comment', 'socialPost', 'user', 'message']
+        && d.get('targetId', null) is string
+        && d.get('targetAuthorId', null) is string
+        && isOptStr(d.get('details', null), 2000)
+        && onlyKeys(['type', 'reporterUid', 'status', 'reason', 'targetType', 'targetId', 'targetAuthorId', 'details', 'createdAt', 'updatedAt']);
+    }
+    function validFeedbackCreate(d) {
+      return (d.get('type', '') == 'question-error' && validFeedbackQuestionError(d))
+        || (d.get('type', '') == 'contact' && validFeedbackContact(d))
+        || (d.get('type', '') == 'report' && validFeedbackReport(d));
+    }
+    function validFeedbackQuestionErrorUpdate(old, d) {
+      return d.get('type', '') == old.get('type', '')
+        && old.get('status', '') == 'pending'
+        && d.get('status', '') in ['valid', 'invalid']
+        && d.get('flaggedForCorrection', null) == (d.get('status', '') == 'valid')
+        && d.get('decidedBy', null) == uid()
+        && d.get('decidedAt', null) is timestamp
+        && isOptStr(d.get('decisionNote', null), 500)
+        && changedKeys().hasOnly(['status', 'flaggedForCorrection', 'decidedBy', 'decidedAt', 'decisionNote', 'updatedAt']);
+    }
+    function validFeedbackUpdate(old, d) {
+      return (old.get('type', '') == 'question-error' && validFeedbackQuestionErrorUpdate(old, d))
+        || (old.get('type', '') == 'report' && d.get('type', '') == old.get('type', '') && d.get('reporterUid', null) == old.get('reporterUid', null));
+    }
+    match /feedback/{feedbackId} {
+      allow read: if isModerator()
+        || (signedIn() && resource.data.type == 'report' && resource.data.reporterUid == uid());
+      allow create: if signedIn() && callerActive()
+        && request.resource.data.reporterUid == uid()
+        && request.resource.data.createdAt is timestamp
+        && request.resource.data.updatedAt is timestamp
+        && validFeedbackCreate(request.resource.data);
+      allow update: if isModerator() && validFeedbackUpdate(resource.data, request.resource.data);
+      allow delete: if false;
+    }
     match /qpgBoards/{boardId} {
       allow read: if signedIn() && (resource.data.ownerUid == uid() || isModerator() || resource.data.get('shareEnabled', false) == true);
       allow create: if signedIn() && callerActive()

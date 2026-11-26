@@ -789,22 +789,28 @@ describe('Eduvelto security rules', () => {
   });
   it('(k9) a report without target fields is DENIED; with them ALLOWED', async () => {
     await assertFails(
-      addDoc(collection(asStudent1(), 'reports'), {
-        reporterId: 'student-1',
+      addDoc(collection(asStudent1(), 'feedback'), {
+        type: 'report',
+        reporterUid: 'student-1',
         status: 'open',
         reason: 'spam',
         details: 'No target named.',
+        createdAt: new Date(),
+        updatedAt: new Date(),
       }),
     );
     await assertSucceeds(
-      addDoc(collection(asStudent1(), 'reports'), {
-        reporterId: 'student-1',
+      addDoc(collection(asStudent1(), 'feedback'), {
+        type: 'report',
+        reporterUid: 'student-1',
         status: 'open',
         reason: 'spam',
         targetType: 'post',
         targetId: 'post-1',
         targetAuthorId: 'student-2',
         details: 'Spam post.',
+        createdAt: new Date(),
+        updatedAt: new Date(),
       }),
     );
   });

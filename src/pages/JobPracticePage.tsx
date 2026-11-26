@@ -58,6 +58,7 @@ import {
 import type { JobQuestionKey } from '../lib/jobQuestions';
 import { useJobMode } from '../lib/jobMode';
 import { useActiveClock } from '../lib/activeStudyTime';
+import QuestionReportButton from '../components/QuestionReportButton';
 
 type Phase = 'loading' | 'signed-out' | 'error' | 'ready';
 type SaveState = 'saved' | 'saving' | 'error';
@@ -477,6 +478,7 @@ export default function JobPracticePage() {
                 {t({ bn: 'একটি অপশন বেছে নিলে সঙ্গে সঙ্গে সঠিক/ভুল ও ব্যাখ্যা দেখাবে।', en: 'Choosing an option shows the correct/wrong mark and explanation right away.' })}
               </p>
             )}
+            <QuestionReportButton questionId={currentQ.questionId} questionText={currentQ.questionText} />
           </Card>
 
           {/* Sticky bottom bar: prev / palette jump / next / submit. */}

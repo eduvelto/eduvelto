@@ -55,6 +55,7 @@ import { jobExamBySlug } from '../lib/jobExams';
 import { SMALL_BANK_NOTICE_BN } from '../lib/jobRepetition';
 import type { PracticeBundleWithId } from '../lib/jobPractice';
 import { useActiveClock } from '../lib/activeStudyTime';
+import QuestionReportButton from '../components/QuestionReportButton';
 import { computeRemainingMillis, resolveExamClockOffsetMillis } from '../lib/mockTimer';
 
 type Phase = 'loading' | 'signed-out' | 'error' | 'intro' | 'ready' | 'expired';
@@ -727,6 +728,7 @@ export default function JobMockPage() {
             <p style={{ margin: '16px 0 0', color: MUTED, fontSize: 13 }}>
               {t({ bn: 'মকে উত্তর দেওয়ার সঙ্গে সঙ্গে সঠিক/ভুল দেখানো হয় না — ফলাফল ও ব্যাখ্যা জমা দেওয়ার পর দেখাবে।', en: 'In a mock, correct/wrong is not shown as you answer — results and explanations appear after submission.' })}
             </p>
+            <QuestionReportButton questionId={currentQ.questionId} questionText={currentQ.questionText} />
           </Card>
 
           <div style={{ position: 'sticky', bottom: 0, zIndex: 5, background: '#fff', padding: '12px 0', borderTop: '1px solid #E3E8EF', marginTop: 16, display: 'flex', gap: 8, flexWrap: 'wrap' }}>

@@ -3,8 +3,8 @@
  *
  * Covers: books / chapters / lessons / educationDirectory (Published-only
  * public reads; teacher creates drafts only; only Moderator/Admin can
- * publish) and contactMessages (signed-in create only, owner/admin read
- * only, append-only). Same conventions as rules.test.ts: the emulator
+ * publish) and feedback type 'contact' (signed-in create only,
+ * moderator read only, append-only). Same conventions as rules.test.ts: the emulator
  * loads firestore.rules from firebase.json at startup; this file only
  * sanity-checks the file exists. Run with `npm run test:rules` (runs the
  * whole emulator-tests/ directory). Uses its own project id so it never
@@ -69,11 +69,15 @@ async function seed() {
     await setDoc(doc(db, 'lessons', 'lesson-preview'), { ...published, bookId: 'book-published', chapterId: 'chapter-preview', body: 'Preview body.', isPreview: true });
     await setDoc(doc(db, 'educationDirectory', 'dir-published'), { ...published, bookId: 'book-published' });
     await setDoc(doc(db, 'educationDirectory', 'dir-draft'), { ...draft, bookId: 'book-published' });
-    await setDoc(doc(db, 'contactMessages', 'msg-1'), {
-      userId: 'student-1',
+    await setDoc(doc(db, 'feedback', 'msg-1'), {
+      type: 'contact',
+      reporterUid: 'student-1',
+      status: 'pending',
       name: 'Student One',
       email: 'student1@example.com',
       message: 'Hello, I need help.',
+      createdAt: new Date(),
+      updatedAt: new Date(),
     });
   });
 }
@@ -189,66 +193,89 @@ describe('Step 2 rules — books / chapters / lessons / directory', () => {
   });
 });
 
-describe('Step 2 rules — contactMessages', () => {
-  it('signed-in student creating their own message is ALLOWED', async () => {
+describe('Step 2 rules — feedback (contact type)', () => {
+  it('signed-in student creating their own contact message is ALLOWED', async () => {
     await assertSucceeds(
-      addDoc(collection(asStudent2(), 'contactMessages'), {
-        userId: 'student-2',
+      addDoc(collection(asStudent2(), 'feedback'), {
+        type: 'contact',
+        reporterUid: 'student-2',
+        status: 'pending',
         name: 'Student Two',
         email: 'student2@example.com',
         message: 'I have a question about the library.',
+        createdAt: new Date(),
+        updatedAt: new Date(),
       }),
     );
   });
-  it('student creating a message with someone else’s userId is DENIED', async () => {
+  it('student creating a contact message with someone else’s reporterUid is DENIED', async () => {
     await assertFails(
-      addDoc(collection(asStudent1(), 'contactMessages'), {
-        userId: 'student-2',
+      addDoc(collection(asStudent1(), 'feedback'), {
+        type: 'contact',
+        reporterUid: 'student-2',
+        status: 'pending',
         name: 'Student One',
         message: 'Impersonation attempt.',
+        createdAt: new Date(),
+        updatedAt: new Date(),
       }),
     );
   });
-  it('student creating a message with an empty message is DENIED', async () => {
+  it('student creating a contact message with an empty message is DENIED', async () => {
     await assertFails(
-      addDoc(collection(asStudent1(), 'contactMessages'), {
-        userId: 'student-1',
+      addDoc(collection(asStudent1(), 'feedback'), {
+        type: 'contact',
+        reporterUid: 'student-1',
+        status: 'pending',
         name: 'Student One',
         message: '',
+        createdAt: new Date(),
+        updatedAt: new Date(),
       }),
     );
   });
-  it('unauthenticated create of a message is DENIED', async () => {
+  it('unauthenticated create of a contact message is DENIED', async () => {
     await assertFails(
-      addDoc(collection(unauth(), 'contactMessages'), {
-        userId: 'student-1',
+      addDoc(collection(unauth(), 'feedback'), {
+        type: 'contact',
+        reporterUid: 'student-1',
+        status: 'pending',
         name: 'Nobody',
         message: 'Anonymous message.',
+        createdAt: new Date(),
+        updatedAt: new Date(),
       }),
     );
   });
-  it('suspended student creating a message is DENIED', async () => {
+  it('suspended student creating a contact message is DENIED', async () => {
     await assertFails(
-      addDoc(collection(asSuspended(), 'contactMessages'), {
-        userId: 'suspended-1',
+      addDoc(collection(asSuspended(), 'feedback'), {
+        type: 'contact',
+        reporterUid: 'suspended-1',
+        status: 'pending',
         name: 'Suspended',
         message: 'I am suspended.',
+        createdAt: new Date(),
+        updatedAt: new Date(),
       }),
     );
   });
-  it('student reading a message is DENIED', async () => {
-    await assertFails(getDoc(doc(asStudent1(), 'contactMessages', 'msg-1')));
+  it('student reading a contact message is DENIED', async () => {
+    await assertFails(getDoc(doc(asStudent1(), 'feedback', 'msg-1')));
   });
-  it('admin reading a message is ALLOWED', async () => {
-    await assertSucceeds(getDoc(doc(asAdmin(), 'contactMessages', 'msg-1')));
+  it('moderator reading a contact message is ALLOWED (read widened from admin-only, 26 Nov 2026)', async () => {
+    await assertSucceeds(getDoc(doc(asModerator(), 'feedback', 'msg-1')));
   });
-  it('owner reading a message is ALLOWED', async () => {
-    await assertSucceeds(getDoc(doc(asOwner(), 'contactMessages', 'msg-1')));
+  it('admin reading a contact message is ALLOWED', async () => {
+    await assertSucceeds(getDoc(doc(asAdmin(), 'feedback', 'msg-1')));
   });
-  it('student updating a message is DENIED', async () => {
-    await assertFails(updateDoc(doc(asStudent1(), 'contactMessages', 'msg-1'), { message: 'Edited.' }));
+  it('owner reading a contact message is ALLOWED', async () => {
+    await assertSucceeds(getDoc(doc(asOwner(), 'feedback', 'msg-1')));
   });
-  it('admin deleting a message is DENIED (append-only)', async () => {
-    await assertFails(deleteDoc(doc(asAdmin(), 'contactMessages', 'msg-1')));
+  it('student updating a contact message is DENIED', async () => {
+    await assertFails(updateDoc(doc(asStudent1(), 'feedback', 'msg-1'), { message: 'Edited.' }));
+  });
+  it('admin deleting a contact message is DENIED (append-only)', async () => {
+    await assertFails(deleteDoc(doc(asAdmin(), 'feedback', 'msg-1')));
   });
 });
