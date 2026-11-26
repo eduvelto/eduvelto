@@ -1,12 +1,14 @@
-// Eduvelto — Academic Bangla Grammar practice questions (Classes 6–7),
+// Eduvelto — Academic Bangla Grammar practice questions (Classes 6–8),
 // verified against the NCTB books (review 26 Nov 2026).
 //
-// Static data ONLY — zero Firestore reads. The 47 questions are the
-// Academic Classes 6–7 Bangla Grammar drafts AFTER review (see
+// Static data ONLY — zero Firestore reads. The 62 questions are the
+// Academic Classes 6–8 Bangla Grammar drafts AFTER review (see
 // review-academic-c6-bangla-grammar-verdicts.json,
-// review-academic-c7-bangla-grammar-verdicts.json and
+// review-academic-c7-bangla-grammar-verdicts.json,
+// review-academic-c8-bangla-grammar-verdicts.json and
 // review-academic-c6-fixes-applied.md,
-// review-academic-c7-fixes-applied.md in
+// review-academic-c7-fixes-applied.md,
+// review-academic-c8-fixes-applied.md in
 // ~/workspace/eduorbit/sprint-1week-2026-11-25/).
 //
 // HONESTY: these are ORIGINAL practice questions written for the
@@ -30,7 +32,7 @@
 
 import { type PublicAcademicQuestion } from './publicAcademic';
 
-/** All verified Academic Bangla Grammar questions, in draft order (Class 6, then 7). */
+/** All verified Academic Bangla Grammar questions, in draft order (Class 6, then 7, then 8). */
 export const PUBLIC_ACADEMIC_BANGLA_GRAMMAR_QUESTIONS: PublicAcademicQuestion[] = [
   {
     id: "ACAD-C6-GRA-001",
@@ -971,5 +973,305 @@ export const PUBLIC_ACADEMIC_BANGLA_GRAMMAR_QUESTIONS: PublicAcademicQuestion[] 
     explanation: "'ভালো' একটি বিশেষণ পদ — এটি গুণ বোঝায়।",
     difficulty: "medium",
     sourceNote: "বাংলা ব্যাকরণ ও নির্মিতি, সপ্তম শ্রেণি (NCTB), পাঠ ৫: শব্দ ও পদ",
+  },
+  {
+    id: "ACAD-C8-GRA-001",
+    classId: "class-8",
+    subjectId: "bangla-grammar",
+    chapterId: "acad-class-8-bgr-chapter-1-1",
+    chapterName: "১.১ ভাষা",
+    unitNumber: 1.1,
+    topicId: "language",
+    questionText: "সাধারণ কথায় 'ভাষা' বলতে কী বোঝায়?",
+    options: [
+      { letter: "A", text: "ইশারা ও অঙ্গভঙ্গি" },
+      { letter: "B", text: "মানুষের মুখ থেকে বেরিয়ে আসা অর্থপূর্ণ কতকগুলো আওয়াজ বা ধ্বনির সমষ্টি" },
+      { letter: "C", text: "ছবি ও নাচের মাধ্যমে ভাব প্রকাশ" },
+      { letter: "D", text: "পশু-পাখির ডাক" }
+    ],
+    correctLetter: "B",
+    explanation: "বই পৃ. ১: সাধারণ কথায় 'ভাষা' বলতে বোঝায়, মানুষের মুখ থেকে বেরিয়ে আসা অর্থপূর্ণ কতকগুলো আওয়াজ বা ধ্বনির সমষ্টি।",
+    difficulty: "easy",
+    sourceNote: "বাংলা ভাষার ব্যাকরণ ও নির্মিতি, অষ্টম শ্রেণি (NCTB), পাঠ ১.১: ভাষা",
+  },
+  {
+    id: "ACAD-C8-GRA-002",
+    classId: "class-8",
+    subjectId: "bangla-grammar",
+    chapterId: "acad-class-8-bgr-chapter-1-2",
+    chapterName: "১.২ মাতৃভাষা ও রাষ্ট্রভাষা",
+    unitNumber: 1.2,
+    topicId: "language",
+    questionText: "মাতৃভাষা কাকে বলে?",
+    options: [
+      { letter: "A", text: "বইয়ের ভাষা" },
+      { letter: "B", text: "মায়ের কাছ থেকে শেখা ভাষা" },
+      { letter: "C", text: "রাষ্ট্রের ভাষা" },
+      { letter: "D", text: "বিদেশি ভাষা" }
+    ],
+    correctLetter: "B",
+    explanation: "মাতৃভাষা হলো মায়ের কাছ থেকে শেখা ভাষা।",
+    difficulty: "medium",
+    sourceNote: "বাংলা ভাষার ব্যাকরণ ও নির্মিতি, অষ্টম শ্রেণি (NCTB), পাঠ ১.২: মাতৃভাষা ও রাষ্ট্রভাষা",
+  },
+  {
+    id: "ACAD-C8-GRA-003",
+    classId: "class-8",
+    subjectId: "bangla-grammar",
+    chapterId: "acad-class-8-bgr-chapter-1-3",
+    chapterName: "১.৩ সাধু ও চলিত রীতির পার্থক্য",
+    unitNumber: 1.3,
+    topicId: "sadhu-chalit",
+    questionText: "সাধু রীতির ক্রিয়াপদের উদাহরণ কোনটি?",
+    options: [
+      { letter: "A", text: "করতেছি" },
+      { letter: "B", text: "করবো" },
+      { letter: "C", text: "করিতেছি" },
+      { letter: "D", text: "করছি" }
+    ],
+    correctLetter: "C",
+    explanation: "সাধু রীতিতে ক্রিয়াপদের পূর্ণরূপ ব্যবহৃত হয়, যেমন 'করিতেছি'।",
+    difficulty: "medium",
+    sourceNote: "বাংলা ভাষার ব্যাকরণ ও নির্মিতি, অষ্টম শ্রেণি (NCTB), পাঠ ১.৩: সাধু ও চলিত রীতির পার্থক্য",
+  },
+  {
+    id: "ACAD-C8-GRA-004",
+    classId: "class-8",
+    subjectId: "bangla-grammar",
+    chapterId: "acad-class-8-bgr-chapter-2-1",
+    chapterName: "২.১ ধ্বনি ও বর্ণ",
+    unitNumber: 2.1,
+    topicId: "sound",
+    questionText: "বাংলা বর্ণমালায় ব্যঞ্জনবর্ণ কয়টি?",
+    options: [
+      { letter: "A", text: "২৫টি" },
+      { letter: "B", text: "১১টি" },
+      { letter: "C", text: "৩৯টি" },
+      { letter: "D", text: "৫০টি" }
+    ],
+    correctLetter: "C",
+    explanation: "বই পৃ. ১০: বাংলা ভাষায় ব্যঞ্জনবর্ণ ৩৯টি।",
+    difficulty: "medium",
+    sourceNote: "বাংলা ভাষার ব্যাকরণ ও নির্মিতি, অষ্টম শ্রেণি (NCTB), পাঠ ২.১: ধ্বনি ও বর্ণ",
+  },
+  {
+    id: "ACAD-C8-GRA-005",
+    classId: "class-8",
+    subjectId: "bangla-grammar",
+    chapterId: "acad-class-8-bgr-chapter-3-1",
+    chapterName: "৩.১ সন্ধি",
+    unitNumber: 3.1,
+    topicId: "sandhi",
+    questionText: "সন্ধি বলতে কী বোঝায়?",
+    options: [
+      { letter: "A", text: "দুটি ধ্বনির মিলন" },
+      { letter: "B", text: "দুটি বাক্যের মিলন" },
+      { letter: "C", text: "দুটি শব্দের বিচ্ছেদ" },
+      { letter: "D", text: "দুটি ভাষার মিলন" }
+    ],
+    correctLetter: "A",
+    explanation: "সন্ধি মানে দুটি ধ্বনির মিলন।",
+    difficulty: "medium",
+    sourceNote: "বাংলা ভাষার ব্যাকরণ ও নির্মিতি, অষ্টম শ্রেণি (NCTB), পাঠ ৩.১: সন্ধি",
+  },
+  {
+    id: "ACAD-C8-GRA-006",
+    classId: "class-8",
+    subjectId: "bangla-grammar",
+    chapterId: "acad-class-8-bgr-chapter-3-1",
+    chapterName: "৩.১ সন্ধি",
+    unitNumber: 3.1,
+    topicId: "sandhi",
+    questionText: "বিদ্যালয় শব্দের সন্ধি বিচ্ছেদ কোনটি?",
+    options: [
+      { letter: "A", text: "বিদ্যা + আলয়" },
+      { letter: "B", text: "বিদ্যা + আলো" },
+      { letter: "C", text: "বিদ্যা + লয়" },
+      { letter: "D", text: "বিদ্যা + লায়" }
+    ],
+    correctLetter: "A",
+    explanation: "বিদ্যা + আলয় = বিদ্যালয় — এটি স্বরসন্ধির উদাহরণ।",
+    difficulty: "medium",
+    sourceNote: "বাংলা ভাষার ব্যাকরণ ও নির্মিতি, অষ্টম শ্রেণি (NCTB), পাঠ ৩.১: সন্ধি",
+  },
+  {
+    id: "ACAD-C8-GRA-007",
+    classId: "class-8",
+    subjectId: "bangla-grammar",
+    chapterId: "acad-class-8-bgr-chapter-4",
+    chapterName: "৪. শব্দ ও পদ",
+    unitNumber: 4,
+    topicId: "word",
+    questionText: "বাংলা ব্যাকরণে পদ কত প্রকার?",
+    options: [
+      { letter: "A", text: "৮ প্রকার" },
+      { letter: "B", text: "৬ প্রকার" },
+      { letter: "C", text: "৪ প্রকার" },
+      { letter: "D", text: "৫ প্রকার" }
+    ],
+    correctLetter: "D",
+    explanation: "বাংলা ব্যাকরণে পদ ৫ প্রকার — বিশেষ্য, সর্বনাম, বিশেষণ, ক্রিয়া ও অব্যয়।",
+    difficulty: "medium",
+    sourceNote: "বাংলা ভাষার ব্যাকরণ ও নির্মিতি, অষ্টম শ্রেণি (NCTB), পাঠ ৪: শব্দ ও পদ",
+  },
+  {
+    id: "ACAD-C8-GRA-008",
+    classId: "class-8",
+    subjectId: "bangla-grammar",
+    chapterId: "acad-class-8-bgr-chapter-4-1",
+    chapterName: "৪.১ লিঙ্গান্তরের নিয়ম ও উদাহরণ",
+    unitNumber: 4.1,
+    topicId: "gender",
+    questionText: "‘বালক’-এর স্ত্রীবাচক রূপ কোনটি?",
+    options: [
+      { letter: "A", text: "বালিকা" },
+      { letter: "B", text: "মেয়ে" },
+      { letter: "C", text: "কন্যা" },
+      { letter: "D", text: "বালকী" }
+    ],
+    correctLetter: "A",
+    explanation: "‘বালক’ শব্দের স্ত্রীলিঙ্গ ‘বালিকা’।",
+    difficulty: "medium",
+    sourceNote: "বাংলা ভাষার ব্যাকরণ ও নির্মিতি, অষ্টম শ্রেণি (NCTB), পাঠ ৪.১: লিঙ্গান্তরের নিয়ম ও উদাহরণ",
+  },
+  {
+    id: "ACAD-C8-GRA-010",
+    classId: "class-8",
+    subjectId: "bangla-grammar",
+    chapterId: "acad-class-8-bgr-chapter-5",
+    chapterName: "৫. শব্দগঠন",
+    unitNumber: 5,
+    topicId: "word-formation",
+    questionText: "উপসর্গ কোথায় বসে?",
+    options: [
+      { letter: "A", text: "শব্দের বদলে বসে" },
+      { letter: "B", text: "শব্দের মাঝে বসে" },
+      { letter: "C", text: "শব্দের আগে বসে নতুন শব্দ গঠন করে" },
+      { letter: "D", text: "শব্দের পরে বসে" }
+    ],
+    correctLetter: "C",
+    explanation: "উপসর্গ শব্দের আগে বসে নতুন শব্দ গঠন করে, যেমন 'প্র' + 'কাশ' = প্রকাশ।",
+    difficulty: "medium",
+    sourceNote: "বাংলা ভাষার ব্যাকরণ ও নির্মিতি, অষ্টম শ্রেণি (NCTB), পাঠ ৫: শব্দগঠন",
+  },
+  {
+    id: "ACAD-C8-GRA-011",
+    classId: "class-8",
+    subjectId: "bangla-grammar",
+    chapterId: "acad-class-8-bgr-chapter-6",
+    chapterName: "৬. বাক্য",
+    unitNumber: 6,
+    topicId: "sentence",
+    questionText: "যে বাক্যে একটি মাত্র সমাপিকা ক্রিয়া থাকে, তাকে কী বলে?",
+    options: [
+      { letter: "A", text: "যৌগিক বাক্য" },
+      { letter: "B", text: "খণ্ড বাক্য" },
+      { letter: "C", text: "জটিল বাক্য" },
+      { letter: "D", text: "সরল বাক্য" }
+    ],
+    correctLetter: "D",
+    explanation: "যে বাক্যে একটি মাত্র সমাপিকা ক্রিয়া থাকে, তাকে সরল বাক্য বলে।",
+    difficulty: "medium",
+    sourceNote: "বাংলা ভাষার ব্যাকরণ ও নির্মিতি, অষ্টম শ্রেণি (NCTB), পাঠ ৬: বাক্য",
+  },
+  {
+    id: "ACAD-C8-GRA-012",
+    classId: "class-8",
+    subjectId: "bangla-grammar",
+    chapterId: "acad-class-8-bgr-chapter-7-1",
+    chapterName: "৭.১ বিরামচিহ্ন",
+    unitNumber: 7.1,
+    topicId: "punctuation",
+    questionText: "বিস্ময়বোধক বাক্যের শেষে কোন চিহ্ন বসে?",
+    options: [
+      { letter: "A", text: "দাঁড়ি" },
+      { letter: "B", text: "হাইফেন" },
+      { letter: "C", text: "সেমিকোলন" },
+      { letter: "D", text: "বিস্ময়চিহ্ন (!)" }
+    ],
+    correctLetter: "D",
+    explanation: "বিস্ময়বোধক বাক্যের শেষে বিস্ময়চিহ্ন (!) বসে।",
+    difficulty: "medium",
+    sourceNote: "বাংলা ভাষার ব্যাকরণ ও নির্মিতি, অষ্টম শ্রেণি (NCTB), পাঠ ৭.১: বিরামচিহ্ন",
+  },
+  {
+    id: "ACAD-C8-GRA-013",
+    classId: "class-8",
+    subjectId: "bangla-grammar",
+    chapterId: "acad-class-8-bgr-chapter-8",
+    chapterName: "৮. বানান",
+    unitNumber: 8,
+    topicId: "spelling",
+    questionText: "নিচের কোনটি সঠিক বানান?",
+    options: [
+      { letter: "A", text: "সিক্কা" },
+      { letter: "B", text: "শিক্ষাা" },
+      { letter: "C", text: "শিক্ষা" },
+      { letter: "D", text: "শিক্কা" }
+    ],
+    correctLetter: "C",
+    explanation: "বাংলা বানানে 'শিক্ষা' শব্দটি সঠিক বানান।",
+    difficulty: "medium",
+    sourceNote: "বাংলা ভাষার ব্যাকরণ ও নির্মিতি, অষ্টম শ্রেণি (NCTB), পাঠ ৮: বানান",
+  },
+  {
+    id: "ACAD-C8-GRA-014",
+    classId: "class-8",
+    subjectId: "bangla-grammar",
+    chapterId: "acad-class-8-bgr-chapter-9",
+    chapterName: "৯. অভিধান",
+    unitNumber: 9,
+    topicId: "dictionary",
+    questionText: "শব্দের অর্থ জানতে আমরা কী ব্যবহার করি?",
+    options: [
+      { letter: "A", text: "ব্যাকরণ" },
+      { letter: "B", text: "সাহিত্য" },
+      { letter: "C", text: "বর্ণমালা" },
+      { letter: "D", text: "অভিধান" }
+    ],
+    correctLetter: "D",
+    explanation: "শব্দের অর্থ জানতে অভিধান ব্যবহার করা হয়।",
+    difficulty: "medium",
+    sourceNote: "বাংলা ভাষার ব্যাকরণ ও নির্মিতি, অষ্টম শ্রেণি (NCTB), পাঠ ৯: অভিধান",
+  },
+  {
+    id: "ACAD-C8-GRA-015",
+    classId: "class-8",
+    subjectId: "bangla-grammar",
+    chapterId: "acad-class-8-bgr-chapter-4",
+    chapterName: "৪. শব্দ ও পদ",
+    unitNumber: 4,
+    topicId: "pronoun",
+    questionText: "'আমি' কোন ধরনের সর্বনাম?",
+    options: [
+      { letter: "A", text: "প্রশ্নসূচক সর্বনাম" },
+      { letter: "B", text: "ব্যক্তিবাচক সর্বনাম" },
+      { letter: "C", text: "সাকল্যবাচক সর্বনাম" },
+      { letter: "D", text: "নির্দেশক সর্বনাম" }
+    ],
+    correctLetter: "B",
+    explanation: "বই পৃ. ৩৬: ব্যক্তিবাচক সর্বনাম — আমি, আমরা, তুমি, তোমরা, সে, তারা, তিনি, এরা, ওরা ইত্যাদি।",
+    difficulty: "medium",
+    sourceNote: "বাংলা ভাষার ব্যাকরণ ও নির্মিতি, অষ্টম শ্রেণি (NCTB), পাঠ ৪: শব্দ ও পদ (৪.৪ সর্বনামের প্রকারভেদ)",
+  },
+  {
+    id: "ACAD-C8-GRA-016",
+    classId: "class-8",
+    subjectId: "bangla-grammar",
+    chapterId: "acad-class-8-bgr-nirmiti-1",
+    chapterName: "নির্মিতি: ভাব-সম্প্রসারণ",
+    unitNumber: 10,
+    topicId: "composition",
+    questionText: "ভাব-সম্প্রসারণে কী করা হয়?",
+    options: [
+      { letter: "A", text: "একটি ভাবকে বিস্তারিতভাবে ব্যাখ্যা করা" },
+      { letter: "B", text: "একটি ভাবকে সংক্ষিপ্ত করা" },
+      { letter: "C", text: "একটি ভাবকে নকল করা" },
+      { letter: "D", text: "একটি ভাবকে বাদ দেওয়া" }
+    ],
+    correctLetter: "A",
+    explanation: "ভাব-সম্প্রসারণে একটি ভাবকে বিস্তারিতভাবে ব্যাখ্যা করা হয়।",
+    difficulty: "medium",
+    sourceNote: "বাংলা ভাষার ব্যাকরণ ও নির্মিতি, অষ্টম শ্রেণি (NCTB), নির্মিতি: ভাব-সম্প্রসারণ",
   },
 ];

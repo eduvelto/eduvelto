@@ -25,7 +25,7 @@
 //   (7.1% of one full mock per main exam; 455+ missing). Full-mock
 //   generation is therefore GATED — the UI shows availability per
 //   exam/subject and refuses to invent questions to fill gaps.
-//   Academic Classes 3–7 add 1,135 verified questions (26 Nov 2026) —
+//   Academic Classes 3–8 add 1,387 verified questions (26 Nov 2026) —
 //   twelve subjects (Bangla, Bangla Grammar, English, Math, Math-depth,
 //   Science, Science-depth, BGS, Islam, ICT, Agriculture, Home Science).
 //   They count ONLY under their NCTB units, never under any job exam (see
@@ -380,9 +380,9 @@ const GENERAL_SUBJECTS_BY_BAND: Record<string, QpgSubject[]> = {
     { id: 'bgs', nameBn: 'বাংলাদেশ ও বিশ্বপরিচয়', nameEn: 'Bangladesh & Global Studies' },
     { id: 'ict', nameBn: 'তথ্য ও যোগাযোগ প্রযুক্তি', nameEn: 'ICT' },
     { id: 'religion', nameBn: 'ধর্ম ও নৈতিক শিক্ষা', nameEn: 'Religion & Moral Education' },
-    // Class 6–7 verified subjects (26 Nov 2026) — the pool holds
-    // verified questions for these in Classes 6–7 only; listing a
-    // subject never implies coverage for Class 8 (chaptersFor()
+    // Classes 6–8 verified subjects (26 Nov 2026) — the pool holds
+    // verified questions for these in Classes 6–8 only; listing a
+    // subject never implies coverage for Class 9 (chaptersFor()
     // is the source of truth, and that class honestly shows 0).
     { id: 'islam', nameBn: 'ইসলাম শিক্ষা', nameEn: 'Islam' },
     { id: 'bangla-grammar', nameBn: 'বাংলা ব্যাকরণ', nameEn: 'Bangla Grammar' },
@@ -626,8 +626,8 @@ function toQpgAcademicQuestion(q: PublicAcademicQuestion): QpgQuestion {
   };
 }
 
-/** The whole verified pool: 35 BCS English MCQs + 1,135 Academic
- *  (Classes 3–7, twelve subjects) MCQs = 1,170. One bank — the Question
+/** The whole verified pool: 35 BCS English MCQs + 1,387 Academic
+ *  (Classes 3–8, twelve subjects) MCQs = 1,422. One bank — the Question
  *  Maker and the Education Hub chapter practice draw from this same
  *  pool, so a question verified once appears in both places. BCS
  *  exam accounting counts ONLY the BCS chapter (see
@@ -1425,7 +1425,7 @@ export interface QpgModelTest {
  *  / NU English (reusing it there would mislabel its verification). */
 function verifiedAvailableFor(examSlug: string, subjectNameEn: string): number {
   if (examSlug === 'bcs' && subjectNameEn === 'English Language & Literature') {
-    // BCS only: Academic (Classes 3–7) questions are verified for their
+    // BCS only: Academic (Classes 3–8) questions are verified for their
     // NCTB units, NOT for BCS — they must never inflate the BCS count.
     return QPG_VERIFIED_POOL.filter((q) => q.chapterId === QPG_VERIFIED_CHAPTER_ID).length;
   }
@@ -1610,8 +1610,11 @@ export const QPG_COMBINED_PAPERS: QpgCombinedPaper[] = [
 ];
 
 /** Verified questions available for one combined-paper section today
- *  (0 for every Class 8 subject — no Class 8 questions are verified yet).
- *  Section marks are the TARGET, never the availability. */
+ *  (Class 8 Academic MCQs, verified 26 Nov 2026 — Bangla 20, English 20,
+ *  Math 22, Science 24, BGS 16). Section marks are the TARGET, never the
+ *  availability: a section can hold verified MCQs and still not be
+ *  generatable as a whole (e.g. its creative / short-answer marks need
+ *  question types the pool does not hold yet). */
 export function qpgCombinedSectionAvailable(section: QpgCombinedSection): number {
   return qpgChaptersFor('general', 'class-8', section.subjectId).reduce(
     (sum, ch) => sum + ch.verifiedCount,

@@ -28,11 +28,11 @@ import {
 } from '../questionPaper';
 
 describe('verified pool (MVP content)', () => {
-  it('holds the 35 owner-verified BCS English questions + 1,135 verified Academic (Classes 3–7, twelve subjects)', () => {
-    expect(QPG_VERIFIED_POOL).toHaveLength(1170);
-    expect(new Set(QPG_VERIFIED_POOL.map((q) => q.id)).size).toBe(1170);
+  it('holds the 35 owner-verified BCS English questions + 1,387 verified Academic (Classes 3–8, twelve subjects)', () => {
+    expect(QPG_VERIFIED_POOL).toHaveLength(1422);
+    expect(new Set(QPG_VERIFIED_POOL.map((q) => q.id)).size).toBe(1422);
     expect(QPG_VERIFIED_POOL.filter((q) => q.chapterId === QPG_VERIFIED_CHAPTER_ID)).toHaveLength(35);
-    expect(QPG_VERIFIED_POOL.filter((q) => q.chapterId.startsWith('acad-'))).toHaveLength(1135);
+    expect(QPG_VERIFIED_POOL.filter((q) => q.chapterId.startsWith('acad-'))).toHaveLength(1387);
   });
 
   it('every question is verified, MCQ, and linked to its chapter (BCS or an NCTB unit)', () => {
@@ -52,9 +52,9 @@ describe('verified pool (MVP content)', () => {
     expect(chapter.topics.reduce((a, t) => a + t.verifiedCount, 0)).toBe(35);
   });
 
-  it('Academic chapters exist for Classes 3–7 in all twelve subjects; other class/subjects stay empty', () => {
+  it('Academic chapters exist for Classes 3–8 in all twelve subjects; other class/subjects stay empty', () => {
     expect(qpgChaptersFor('general', 'class-9', 'english')).toEqual([]);
-    expect(qpgChaptersFor('general', 'class-8', 'math')).toEqual([]);
+    expect(qpgChaptersFor('general', 'class-9', 'math')).toEqual([]);
     expect(qpgChaptersFor('madrasah', 'dakhil', 'arabic')).toEqual([]);
     expect(qpgChaptersFor('general', 'honours', 'english')).toHaveLength(1);
     // Academic (26 Nov 2026): one chapter per NCTB unit / lesson with verified questions.
@@ -97,11 +97,22 @@ describe('verified pool (MVP content)', () => {
     const c7scidepth = qpgChaptersFor('general', 'class-7', 'science-depth');
     expect(c7scidepth).toHaveLength(14);
     expect(c7scidepth.reduce((a, c) => a + c.verifiedCount, 0)).toBe(33);
+    // Class 8 (26 Nov 2026): eleven English units, eleven Math chapters,
+    // fourteen Science-depth chapters — the pool now covers Class 8.
+    const c8eng = qpgChaptersFor('general', 'class-8', 'english');
+    expect(c8eng).toHaveLength(11);
+    expect(c8eng.reduce((a, c) => a + c.verifiedCount, 0)).toBe(20);
+    const c8mat = qpgChaptersFor('general', 'class-8', 'math');
+    expect(c8mat).toHaveLength(11);
+    expect(c8mat.reduce((a, c) => a + c.verifiedCount, 0)).toBe(22);
+    const c8scidepth = qpgChaptersFor('general', 'class-8', 'science-depth');
+    expect(c8scidepth).toHaveLength(14);
+    expect(c8scidepth.reduce((a, c) => a + c.verifiedCount, 0)).toBe(34);
     // Chapters are filtered by subject — a Math pick never shows English units.
     for (const c of c5mat) expect(c.subjectId).toBe('math');
     for (const c of c3eng) expect(c.subjectId).toBe('english');
-    // No Class 8 questions are verified yet, so the scholarship bundles stay gated.
-    expect(qpgChaptersFor('general', 'class-8', 'math')).toEqual([]);
+    // Class 9 still has no verified questions, so it stays honestly empty.
+    expect(qpgChaptersFor('general', 'class-9', 'math')).toEqual([]);
   });
 });
 
@@ -360,12 +371,26 @@ describe('pre-built combined papers (pattern 6, sprint 27 Nov 2026)', () => {
       expect(p.totalMarks).toBe(100);
       expect(p.timeMinutes).toBe(180);
       expect(p.sections.reduce((s, sec) => s + sec.marks, 0)).toBe(100);
-      // Honest gate: no Class 8 verified questions exist today, so
-      // no bundle is generatable — and no section reports any.
+      // Content gate (26 Nov 2026): Class 8 Academic MCQs are verified
+      // now, so every section reports its real verified count and the
+      // lib's ready flag is true — Bangla 20, English 20, Math 22,
+      // Science 24, BGS 16. NOTE: ready here means "verified questions
+      // exist per section", NOT "the bundle is generatable": the pool
+      // holds MCQs only, so the creative / short-answer marks cannot be
+      // filled yet, and the page button still has no generation handler
+      // — it stays disabled until bundle generation is built (see
+      // QuestionPaperGeneratorPage). Do not enable it on this flag alone.
+      const expected: Record<string, number> = {
+        bangla: 20,
+        english: 20,
+        math: 22,
+        science: 24,
+        bgs: 16,
+      };
       for (const sec of p.sections) {
-        expect(qpgCombinedSectionAvailable(sec)).toBe(0);
+        expect(qpgCombinedSectionAvailable(sec)).toBe(expected[sec.subjectId]);
       }
-      expect(qpgCombinedPaperReady(p)).toBe(false);
+      expect(qpgCombinedPaperReady(p)).toBe(true);
       expect(qpgCombinedPaperReady(p, p.sections.map((s) => s.id))).toBe(false);
     }
   });
