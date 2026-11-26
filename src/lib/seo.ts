@@ -49,6 +49,11 @@ import { OPPORTUNITY_SEED } from './opportunitySeed';
 import { isPublished } from './opportunities';
 import { PUBLIC_GUIDE_META } from './publicGuideMeta';
 import { SITE_URL, canonicalUrl, hreflangUrls, stripLangPrefix } from './langRouting';
+import {
+  publicAcademicChaptersFor,
+  publicAcademicClassSubjects,
+} from './publicAcademicEnglish';
+import { QPG_GENERAL_CLASSES, qpgSubjectsFor } from './questionPaper';
 
 export { SITE_URL };
 
@@ -2204,6 +2209,75 @@ export function resolveRouteSeo(pathname: string, lang: 'bn' | 'en' = 'bn'): Seo
       crumbs = lang === 'bn' ? ['চাকরি প্রস্তুতি', entry.crumb] : ['Job Preparation', entry.crumbEn];
       const tabName = tab ? JOB_TABS.find((t) => t.slug === tab)?.[lang] : undefined;
       if (tabName) crumbs.push(tabName);
+    }
+  }
+  if (!entry) {
+    // /learn/practice[/:classId/:subjectId[/:chapterId]] — Academic
+    // chapter practice (Education Hub, 26 Nov 2026). Dynamic SEO from
+    // the verified Academic pool: an unknown class/subject/chapter
+    // resolves to null (not a page — the UI shows the honest empty
+    // state, but it must never look indexable). New verified batches
+    // get SEO here automatically — no entry per chapter.
+    const practiceMatch = path.match(
+      /^\/learn\/practice(?:\/([^/]+)\/([^/]+)(?:\/([^/]+))?)?$/,
+    );
+    if (practiceMatch) {
+      const [, classId, subjectId, chapterId] = practiceMatch;
+      if (!classId) {
+        const total = publicAcademicClassSubjects().reduce(
+          (a, r) => a + r.questionCount,
+          0,
+        );
+        entry = {
+          title: 'অধ্যায়ভিত্তিক অনুশীলন — যাচাইকৃত প্রশ্ন | Eduvelto',
+          description: `NCTB পাঠের যাচাইকৃত প্রশ্ন দিয়ে অধ্যায়ভিত্তিক অনুশীলন — ${total}টি প্রশ্ন। উত্তর দিলেই সঠিক উত্তর ও ব্যাখ্যা। সম্পূর্ণ বিনামূল্যে। Eduvelto।`,
+          crumb: 'অনুশীলন',
+          titleEn: 'Chapter-wise Practice — Verified Questions | Eduvelto',
+          descriptionEn: `Chapter-wise practice with verified NCTB questions — ${total} questions. See the correct answer and explanation as soon as you answer. Completely free. Eduvelto.`,
+          crumbEn: 'Practice',
+        };
+        crumbs =
+          lang === 'bn' ? ['শিক্ষা কার্যক্রম', 'অনুশীলন'] : ['Academic Learning', 'Practice'];
+      } else {
+        const chapters = publicAcademicChaptersFor(classId, subjectId);
+        if (chapters.length === 0) return null;
+        const total = chapters.reduce((a, c) => a + c.questionCount, 0);
+        const cls = QPG_GENERAL_CLASSES.find((x) => x.id === classId);
+        const subj = qpgSubjectsFor('general', classId).find((x) => x.id === subjectId);
+        const classBn = cls?.nameBn ?? classId;
+        const classEn = cls?.nameEn ?? classId;
+        const subjBn = subj?.nameBn ?? subjectId;
+        const subjEn = subj?.nameEn ?? subjectId;
+        if (!chapterId) {
+          entry = {
+            title: `${classBn} ${subjBn} অনুশীলন — ${chapters.length}টি অধ্যায়, ${total}টি যাচাইকৃত প্রশ্ন | Eduvelto`,
+            description: `${classBn} ${subjBn} — ${chapters.length}টি অধ্যায়ে মোট ${total}টি যাচাইকৃত প্রশ্ন। অধ্যায় বেছে নিন, উত্তর দিন, সাথে সাথে সঠিক উত্তর ও ব্যাখ্যা দেখুন। সম্পূর্ণ বিনামূল্যে। Eduvelto।`,
+            crumb: `${classBn} ${subjBn}`,
+            titleEn: `${classEn} ${subjEn} Practice — ${chapters.length} chapters, ${total} verified questions | Eduvelto`,
+            descriptionEn: `${classEn} ${subjEn} — ${total} verified questions across ${chapters.length} chapters. Pick a chapter, answer, and see the correct answer and explanation right away. Completely free. Eduvelto.`,
+            crumbEn: `${classEn} ${subjEn}`,
+          };
+          crumbs =
+            lang === 'bn'
+              ? ['শিক্ষা কার্যক্রম', 'অনুশীলন', `${classBn} ${subjBn}`]
+              : ['Academic Learning', 'Practice', `${classEn} ${subjEn}`];
+        } else {
+          const ch = chapters.find((c) => c.id === chapterId);
+          if (!ch) return null;
+          entry = {
+            title: `${ch.name} — অনুশীলন (${ch.questionCount}টি প্রশ্ন) | Eduvelto`,
+            description: `${classBn} ${subjBn} — ${ch.name}: ${ch.questionCount}টি যাচাইকৃত প্রশ্ন। উত্তর দিলেই সঠিক উত্তর ও ব্যাখ্যা। সম্পূর্ণ বিনামূল্যে। Eduvelto।`,
+            crumb: ch.name,
+            titleEn: `${ch.name} — Practice (${ch.questionCount} questions) | Eduvelto`,
+            descriptionEn: `${classEn} ${subjEn} — ${ch.name}: ${ch.questionCount} verified questions. See the correct answer and explanation as soon as you answer. Completely free. Eduvelto.`,
+            crumbEn: ch.name,
+          };
+          crumbs =
+            lang === 'bn'
+              ? ['শিক্ষা কার্যক্রম', 'অনুশীলন', `${classBn} ${subjBn}`, ch.name]
+              : ['Academic Learning', 'Practice', `${classEn} ${subjEn}`, ch.name];
+        }
+      }
     }
   }
   if (!entry) {

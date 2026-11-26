@@ -67,6 +67,14 @@ const paperExtras = (pool: QpgQuestion[], paperQuestions: QpgQuestion[]): QpgQue
 const countOccurrences = (src: string, needle: string): number =>
   src.split(needle).length - 1;
 
+// The verified pool now holds BCS + Academic chapters (91 Q, 26 Nov 2026).
+// The swap picker's "available" list is the CHAPTER-filtered selection
+// (selection.questions in the page) — never the raw pool — so these
+// same-chapter tests use the BCS chapter slice, exactly as production does.
+const BCS_CHAPTER_POOL = QPG_VERIFIED_POOL.filter(
+  (q) => q.chapterId === QPG_VERIFIED_CHAPTER_ID,
+);
+
 describe('1-click swap — no first-10 cap (source-level)', () => {
   it('no hard candidate cap: no slice(0, 5); every sliced list has a show-all', () => {
     // The old 5-cap is gone.
@@ -294,7 +302,7 @@ describe('swap end-to-end: replace in place + rebuild', () => {
 
 describe('swap candidates: verified-only, same-chapter, not already in the paper', () => {
   it('picker candidates: 20 unselected verified same-chapter questions', () => {
-    const available = QPG_VERIFIED_POOL;
+    const available = BCS_CHAPTER_POOL;
     const selectedIds = available.slice(0, 15).map((q) => q.id);
     const candidates = pickerCandidates(available, available[12], selectedIds);
     expect(candidates).toHaveLength(20);
@@ -305,8 +313,8 @@ describe('swap candidates: verified-only, same-chapter, not already in the paper
   });
 
   it('editor extras: 20 verified same-chapter questions not in the paper', () => {
-    const paperQuestions = QPG_VERIFIED_POOL.slice(0, 15);
-    const extras = paperExtras(QPG_VERIFIED_POOL, paperQuestions);
+    const paperQuestions = BCS_CHAPTER_POOL.slice(0, 15);
+    const extras = paperExtras(BCS_CHAPTER_POOL, paperQuestions);
     expect(extras).toHaveLength(20);
     expect(extras.every((c) => c.verified === true)).toBe(true);
     expect(extras.every((c) => c.chapterId === QPG_VERIFIED_CHAPTER_ID)).toBe(true);
@@ -323,6 +331,32 @@ describe('swap candidates: verified-only, same-chapter, not already in the paper
     expect(pool).toHaveLength(35);
     expect(pool.every((q) => q.verified === true)).toBe(true);
     expect(pool.every((q) => q.chapterId === QPG_VERIFIED_CHAPTER_ID)).toBe(true);
+  });
+
+  it('Academic chapter swap candidates are Academic-only — no BCS leak from the grown pool', () => {
+    // The pool grew to 91 (35 BCS + 56 Academic, 26 Nov 2026). A Class 3
+    // paper's swap picker must offer only its own chapter's questions.
+    // Production passes the full chapter selection as `available` and the
+    // paper's ids as `selectedIds` — mirror that here.
+    const res = selectQpgQuestions(
+      {
+        chapterIds: ['acad-class-3-eng-unit-1'],
+        topicIds: [],
+        type: 'mcq',
+        difficulty: 'all',
+        count: 10,
+        source: 'any',
+      },
+      QPG_VERIFIED_POOL,
+    );
+    expect(res.questions).toHaveLength(4); // Unit 1 has 4 verified questions
+    const selectedIds = res.questions.slice(0, 2).map((q) => q.id);
+    const candidates = pickerCandidates(res.questions, res.questions[0], selectedIds);
+    expect(candidates).toHaveLength(2);
+    expect(candidates.every((c) => c.chapterId === 'acad-class-3-eng-unit-1')).toBe(true);
+    expect(candidates.every((c) => c.verified === true)).toBe(true);
+    const allAcad = QPG_VERIFIED_POOL.filter((q) => q.chapterId.startsWith('acad-'));
+    expect(allAcad).toHaveLength(56);
   });
 
   it('difficulty filter stays honest: a guessed difficulty yields nothing', () => {
@@ -350,7 +384,7 @@ describe('candidate cap lifted (comparison fixes, 26 Nov — item C)', () => {
   });
 
   it('all 20 valid candidates are reachable — first 10 + load-more reveals the rest', () => {
-    const available = QPG_VERIFIED_POOL;
+    const available = BCS_CHAPTER_POOL;
     const selectedIds = available.slice(0, 15).map((q) => q.id);
     const candidates = pickerCandidates(available, available[12], selectedIds);
     expect(candidates).toHaveLength(20);

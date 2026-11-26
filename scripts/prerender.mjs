@@ -346,6 +346,33 @@ export function getGuidePaths(source) {
   return paths;
 }
 
+/** Academic practice paths from the PUBLIC_ACADEMIC_ENGLISH_QUESTIONS
+ *  source text (Education Hub, 26 Nov 2026). Extracts the distinct
+ *  (classId, subjectId, chapterId) triples in file order and builds
+ *  the hub + subject + chapter paths. A future verified batch adds
+ *  its paths here automatically — no prerender-list edit per batch.
+ *  Never invents a path: only triples actually present in the pool. */
+export function getAcademicPracticePaths(source) {
+  const paths = ['/learn/practice'];
+  const seen = new Set(paths);
+  const re = /classId:\s*"([^"]+)",\s*subjectId:\s*"([^"]+)",\s*chapterId:\s*"([^"]+)"/g;
+  let m;
+  while ((m = re.exec(source)) !== null) {
+    const [, classId, subjectId, chapterId] = m;
+    const subjectPath = `/learn/practice/${classId}/${subjectId}`;
+    const chapterPath = `${subjectPath}/${chapterId}`;
+    if (!seen.has(subjectPath)) {
+      seen.add(subjectPath);
+      paths.push(subjectPath);
+    }
+    if (!seen.has(chapterPath)) {
+      seen.add(chapterPath);
+      paths.push(chapterPath);
+    }
+  }
+  return paths;
+}
+
 export function withLangPrefix(path, lang) {
   const bare = path.replace(/\/+$/, '') || '/';
   const stripped = bare.replace(/^\/(bn|en)(?=\/|$)/, '') || '/';
@@ -1081,6 +1108,21 @@ async function main() {
     console.warn(`WARN: could not verify guide coverage: ${err.message}`);
   }
 
+  // --- Academic practice paths (Education Hub, 26 Nov 2026) ---
+  // Derived from the verified Academic pool (publicAcademicEnglish.ts)
+  // — hub + subject + chapter paths. They join the static-pages loop
+  // below, so they are prerendered + sitemapped like every other
+  // public page. A future verified batch adds its paths automatically.
+  let academicPracticePaths = [];
+  try {
+    const academicSource = readFileSync(join(root, 'src/lib/publicAcademicEnglish.ts'), 'utf8');
+    academicPracticePaths = getAcademicPracticePaths(academicSource);
+    console.log(`Academic practice: ${academicPracticePaths.length} paths (hub + subjects + chapters)`);
+  } catch (err) {
+    console.warn(`WARN: could not derive Academic practice paths: ${err.message}`);
+  }
+  const staticPaths = [...PRERENDER_STATIC_PATHS, ...academicPracticePaths];
+
   // --- SSR renderer ---
   const { render } = await import(pathToFileURL(ssrEntryPath).href);
   const template = readFileSync(templatePath, 'utf8');
@@ -1147,7 +1189,9 @@ async function main() {
   }
 
   // --- Static pages (both langs) ---
-  for (const barePath of PRERENDER_STATIC_PATHS) {
+  // staticPaths = PRERENDER_STATIC_PATHS + the derived Academic
+  // practice paths (hub + subjects + chapters).
+  for (const barePath of staticPaths) {
     for (const lang of LANGS) {
       const url = withLangPrefix(barePath, lang);
       // Phase 2b: hub payloads. /books + /library carry page 1 (50

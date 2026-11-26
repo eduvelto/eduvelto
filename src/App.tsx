@@ -75,6 +75,7 @@ const AdminJobExamsPage = lazy(() => import('./pages/AdminJobExamsPage'));
 /* AdSense Part 1 (public content, F1 fix): static BCS English practice
    + sample lessons, visible WITHOUT login. No Firestore reads. */
 const PublicBcsEnglishPage = lazy(() => import('./pages/PublicBcsEnglishPage'));
+const AcademicPracticePage = lazy(() => import('./pages/AcademicPracticePage'));
 /* Question Paper Generator (Milestone 2.5, MVP 25 Nov 2026): routing-
    agnostic page. Mounted at /question-paper-generator for now; the
    parallel SSG branch restructures public routes to /:lang — on merge,
@@ -629,6 +630,17 @@ export default function App() {
             firebase.json (302), this route is the dev/preview fallback. */}
         <Route path="whatsapp" element={<WhatsappRedirectPage />} />
         <Route path="learn" element={<LearnHubPage />} />
+        {/* Academic chapter practice (Education Hub, 26 Nov 2026):
+            same verified bank as the Question Maker — hub, then one
+            subject's units, then one unit's interactive practice.
+            Params are validated inside AcademicPracticePage; an
+            unknown class/subject/chapter shows the honest empty state. */}
+        <Route path="learn/practice" element={<AcademicPracticePage />} />
+        <Route path="learn/practice/:classId/:subjectId" element={<AcademicPracticePage />} />
+        <Route
+          path="learn/practice/:classId/:subjectId/:chapterId"
+          element={<AcademicPracticePage />}
+        />
         <Route path="learn/bcs-english-tense" element={<PublicLessonPage lesson="tense" />} />
         <Route path="learn/bcs-english-preposition" element={<PublicLessonPage lesson="preposition" />} />
         {/* Brand-SEO wave 1 (24 Nov 2026) + wave 2 (24 Nov 2026) +
