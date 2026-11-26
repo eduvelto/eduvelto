@@ -1,12 +1,14 @@
-// Eduvelto — Academic English practice questions (Class 3 + Class 5),
+// Eduvelto — Academic English practice questions (Classes 3–5),
 // verified against the NCTB books (review 26 Nov 2026).
 //
-// Static data ONLY — zero Firestore reads. The 56 questions are the
-// Academic Class 3 + Class 5 English drafts AFTER review:
-// 51 VERIFIED as-is + 5 NEEDS-FIX items fixed (see
+// Static data ONLY — zero Firestore reads. The 83 questions are the
+// Academic Class 3–5 English drafts AFTER review:
+// 77 VERIFIED as-is + 6 NEEDS-FIX items fixed (see
 // review-academic-c3-english-verdicts.json,
+// review-academic-c4-english-verdicts.json,
 // review-academic-c5-english-verdicts.json and
-// review-academic-c3c5-fixes-applied.md in
+// review-academic-c3c5-fixes-applied.md,
+// review-academic-c4-fixes-applied.md in
 // ~/workspace/eduorbit/sprint-1week-2026-11-25/).
 //
 // HONESTY: these are ORIGINAL practice questions written for the
@@ -19,35 +21,15 @@
 // HOW NEW BATCHES JOIN: append the next verified batch's questions
 // to PUBLIC_ACADEMIC_ENGLISH_QUESTIONS below (same shape, same
 // generation script with the new draft + verdict files). Chapters,
-// counts and the practice pages are DERIVED from this array, so no
-// component or route change is needed when a batch is verified.
+// counts and the practice pages are DERIVED from the combined pool
+// in src/lib/publicAcademic.ts, so no component or route change is
+// needed when a batch is verified.
 // NEVER add a question whose verdict is not VERIFIED (or NEEDS-FIX
 // with the fix applied) — unverified drafts must never reach students.
 
-export type PublicAcademicClassId = 'class-3' | 'class-5';
-export type PublicAcademicSubjectId = 'english';
+import { type PublicAcademicQuestion } from './publicAcademic';
 
-export interface PublicAcademicQuestion {
-  id: string;
-  classId: PublicAcademicClassId;
-  subjectId: PublicAcademicSubjectId;
-  /** NCTB unit slug, e.g. 'acad-c3-eng-unit-1'. One chapter per unit. */
-  chapterId: string;
-  /** NCTB unit name, e.g. 'Unit 1: Greetings, Farewells, Introductions and Numbers'. */
-  chapterName: string;
-  unitNumber: number;
-  /** Topical tag inside the unit (the draft's 3rd tag), e.g. 'greetings'. */
-  topicId: string;
-  questionText: string;
-  options: Array<{ letter: 'A' | 'B' | 'C' | 'D'; text: string }>;
-  correctLetter: 'A' | 'B' | 'C' | 'D';
-  explanation: string;
-  difficulty: 'easy' | 'medium';
-  /** Book citation, e.g. 'English For Today, Class 3 (NCTB 2024), Unit 1: ...'. */
-  sourceNote: string;
-}
-
-/** All verified Academic English questions, in draft order (Class 3, then Class 5). */
+/** All verified Academic English questions, in draft order (Class 3, then 4, then 5). */
 export const PUBLIC_ACADEMIC_ENGLISH_QUESTIONS: PublicAcademicQuestion[] = [
   {
     id: "ACAD-C3-ENG-001",
@@ -610,6 +592,546 @@ export const PUBLIC_ACADEMIC_ENGLISH_QUESTIONS: PublicAcademicQuestion[] = [
     sourceNote: "English For Today, Class 3 (NCTB 2024), Unit 7: Save Our Planet, Requests and Numbers",
   },
   {
+    id: "ACAD-C4-ENG-001",
+    classId: "class-4",
+    subjectId: "english",
+    chapterId: "acad-class-4-eng-unit-1",
+    chapterName: "Unit 1: Introducing One Another",
+    unitNumber: 1,
+    topicId: "introductions",
+    questionText: "Choose the correct way to introduce yourself.",
+    options: [
+      { letter: "A", text: "Hello, me Rina." },
+      { letter: "B", text: "Hello, Rina me." },
+      { letter: "C", text: "Hello, I am Rina." },
+      { letter: "D", text: "Hello, am Rina." }
+    ],
+    correctLetter: "C",
+    explanation: "'Hello, I am Rina.' is a correct self-introduction.",
+    difficulty: "easy",
+    sourceNote: "English for Today, Class 4 (NCTB 2026), Unit 1: Introducing One Another",
+  },
+  {
+    id: "ACAD-C4-ENG-002",
+    classId: "class-4",
+    subjectId: "english",
+    chapterId: "acad-class-4-eng-unit-1",
+    chapterName: "Unit 1: Introducing One Another",
+    unitNumber: 1,
+    topicId: "introductions",
+    questionText: "Which question do we ask to know someone's name?",
+    options: [
+      { letter: "A", text: "Where do you live?" },
+      { letter: "B", text: "What is your name?" },
+      { letter: "C", text: "How old are you?" },
+      { letter: "D", text: "What is this?" }
+    ],
+    correctLetter: "B",
+    explanation: "We ask 'What is your name?' to know someone's name.",
+    difficulty: "medium",
+    sourceNote: "English for Today, Class 4 (NCTB 2026), Unit 1: Introducing One Another",
+  },
+  {
+    id: "ACAD-C4-ENG-003",
+    classId: "class-4",
+    subjectId: "english",
+    chapterId: "acad-class-4-eng-unit-2",
+    chapterName: "Unit 2: Have a Great Day",
+    unitNumber: 2,
+    topicId: "greetings",
+    questionText: "Which is a friendly wish?",
+    options: [
+      { letter: "A", text: "Be quiet!" },
+      { letter: "B", text: "Stop it!" },
+      { letter: "C", text: "Have a great day!" },
+      { letter: "D", text: "Go away!" }
+    ],
+    correctLetter: "C",
+    explanation: "'Have a great day!' is a friendly wish for the day.",
+    difficulty: "easy",
+    sourceNote: "English for Today, Class 4 (NCTB 2026), Unit 2: Have a Great Day",
+  },
+  {
+    id: "ACAD-C4-ENG-004",
+    classId: "class-4",
+    subjectId: "english",
+    chapterId: "acad-class-4-eng-unit-3",
+    chapterName: "Unit 3: My School Assembly",
+    unitNumber: 3,
+    topicId: "school",
+    questionText: "What do we do in the school assembly?",
+    options: [
+      { letter: "A", text: "Stand in lines and sing the national anthem." },
+      { letter: "B", text: "Play football." },
+      { letter: "C", text: "Sleep in class." },
+      { letter: "D", text: "Run and shout." }
+    ],
+    correctLetter: "A",
+    explanation: "In the school assembly we stand in lines and sing the national anthem.",
+    difficulty: "easy",
+    sourceNote: "English for Today, Class 4 (NCTB 2026), Unit 3: My School Assembly",
+  },
+  {
+    id: "ACAD-C4-ENG-005",
+    classId: "class-4",
+    subjectId: "english",
+    chapterId: "acad-class-4-eng-unit-4",
+    chapterName: "Unit 4: Enjoying Annual Sports",
+    unitNumber: 4,
+    topicId: "sports",
+    questionText: "Which is a sports activity?",
+    options: [
+      { letter: "A", text: "Running and jumping" },
+      { letter: "B", text: "Eating sweets" },
+      { letter: "C", text: "Sleeping" },
+      { letter: "D", text: "Watching TV" }
+    ],
+    correctLetter: "A",
+    explanation: "Running, jumping and playing games are sports activities.",
+    difficulty: "medium",
+    sourceNote: "English for Today, Class 4 (NCTB 2026), Unit 4: Enjoying Annual Sports",
+  },
+  {
+    id: "ACAD-C4-ENG-006",
+    classId: "class-4",
+    subjectId: "english",
+    chapterId: "acad-class-4-eng-unit-5",
+    chapterName: "Unit 5: The Little Doctor",
+    unitNumber: 5,
+    topicId: "occupations",
+    questionText: "Who treats sick people?",
+    options: [
+      { letter: "A", text: "farmer" },
+      { letter: "B", text: "teacher" },
+      { letter: "C", text: "driver" },
+      { letter: "D", text: "doctor" }
+    ],
+    correctLetter: "D",
+    explanation: "A doctor treats sick people.",
+    difficulty: "easy",
+    sourceNote: "English for Today, Class 4 (NCTB 2026), Unit 5: The Little Doctor",
+  },
+  {
+    id: "ACAD-C4-ENG-007",
+    classId: "class-4",
+    subjectId: "english",
+    chapterId: "acad-class-4-eng-unit-6",
+    chapterName: "Unit 6: Sounds and Numbers",
+    unitNumber: 6,
+    topicId: "sounds",
+    questionText: "Which word starts with the same sound as 'sun'?",
+    options: [
+      { letter: "A", text: "ball" },
+      { letter: "B", text: "dog" },
+      { letter: "C", text: "sand" },
+      { letter: "D", text: "cat" }
+    ],
+    correctLetter: "C",
+    explanation: "'Sun' and 'sand' both start with the /s/ sound.",
+    difficulty: "medium",
+    sourceNote: "English for Today, Class 4 (NCTB 2026), Unit 6: Sounds and Numbers",
+  },
+  {
+    id: "ACAD-C4-ENG-008",
+    classId: "class-4",
+    subjectId: "english",
+    chapterId: "acad-class-4-eng-unit-6",
+    chapterName: "Unit 6: Sounds and Numbers",
+    unitNumber: 6,
+    topicId: "numbers",
+    questionText: "What number comes after twenty-four?",
+    options: [
+      { letter: "A", text: "twenty-five" },
+      { letter: "B", text: "twenty-three" },
+      { letter: "C", text: "twenty-two" },
+      { letter: "D", text: "twenty-six" }
+    ],
+    correctLetter: "A",
+    explanation: "Counting: 21, 22, 23, 24, 25.",
+    difficulty: "easy",
+    sourceNote: "English for Today, Class 4 (NCTB 2026), Unit 6: Sounds and Numbers",
+  },
+  {
+    id: "ACAD-C4-ENG-009",
+    classId: "class-4",
+    subjectId: "english",
+    chapterId: "acad-class-4-eng-unit-7",
+    chapterName: "Unit 7: Telling the Time",
+    unitNumber: 7,
+    topicId: "time",
+    questionText: "The clock shows 7:00. What do we say?",
+    options: [
+      { letter: "A", text: "It is seven clock." },
+      { letter: "B", text: "It is seven o'clockes." },
+      { letter: "C", text: "It is seven o'clock." },
+      { letter: "D", text: "It seven o'clock." }
+    ],
+    correctLetter: "C",
+    explanation: "At 7:00 the short (hour) hand points to 7 and the long (minute) hand points to 12, so we say \"It is seven o'clock\".",
+    difficulty: "easy",
+    sourceNote: "English for Today, Class 4 (NCTB 2026), Unit 7: Telling the Time",
+  },
+  {
+    id: "ACAD-C4-ENG-010",
+    classId: "class-4",
+    subjectId: "english",
+    chapterId: "acad-class-4-eng-unit-7",
+    chapterName: "Unit 7: Telling the Time",
+    unitNumber: 7,
+    topicId: "time",
+    questionText: "Which question do we ask to know the time?",
+    options: [
+      { letter: "A", text: "What is your name?" },
+      { letter: "B", text: "Where do you live?" },
+      { letter: "C", text: "How old are you?" },
+      { letter: "D", text: "What is the time?" }
+    ],
+    correctLetter: "D",
+    explanation: "'What is the time?' is the question we ask to know the time.",
+    difficulty: "medium",
+    sourceNote: "English for Today, Class 4 (NCTB 2026), Unit 7: Telling the Time",
+  },
+  {
+    id: "ACAD-C4-ENG-011",
+    classId: "class-4",
+    subjectId: "english",
+    chapterId: "acad-class-4-eng-unit-8",
+    chapterName: "Unit 8: My Family",
+    unitNumber: 8,
+    topicId: "family",
+    questionText: "Your father's father is your ____.",
+    options: [
+      { letter: "A", text: "cousin" },
+      { letter: "B", text: "uncle" },
+      { letter: "C", text: "brother" },
+      { letter: "D", text: "grandfather" }
+    ],
+    correctLetter: "D",
+    explanation: "Your father's father is your grandfather.",
+    difficulty: "easy",
+    sourceNote: "English for Today, Class 4 (NCTB 2026), Unit 8: My Family",
+  },
+  {
+    id: "ACAD-C4-ENG-012",
+    classId: "class-4",
+    subjectId: "english",
+    chapterId: "acad-class-4-eng-unit-8",
+    chapterName: "Unit 8: My Family",
+    unitNumber: 8,
+    topicId: "family",
+    questionText: "Choose the correct sentence.",
+    options: [
+      { letter: "A", text: "There are five member in my family." },
+      { letter: "B", text: "There are five members in my family." },
+      { letter: "C", text: "There is five members in my family." },
+      { letter: "D", text: "There five members in my family." }
+    ],
+    correctLetter: "B",
+    explanation: "'There are five members in my family.' is correct.",
+    difficulty: "medium",
+    sourceNote: "English for Today, Class 4 (NCTB 2026), Unit 8: My Family",
+  },
+  {
+    id: "ACAD-C4-ENG-013",
+    classId: "class-4",
+    subjectId: "english",
+    chapterId: "acad-class-4-eng-unit-9",
+    chapterName: "Unit 9: Gardening",
+    unitNumber: 9,
+    topicId: "gardening",
+    questionText: "What do plants need to grow?",
+    options: [
+      { letter: "A", text: "Water, sunlight and soil" },
+      { letter: "B", text: "Only water" },
+      { letter: "C", text: "Only sunlight" },
+      { letter: "D", text: "Only soil" }
+    ],
+    correctLetter: "A",
+    explanation: "Plants need water, sunlight and soil to grow.",
+    difficulty: "easy",
+    sourceNote: "English for Today, Class 4 (NCTB 2026), Unit 9: Gardening",
+  },
+  {
+    id: "ACAD-C4-ENG-014",
+    classId: "class-4",
+    subjectId: "english",
+    chapterId: "acad-class-4-eng-unit-10",
+    chapterName: "Unit 10: A Letter to a Friend",
+    unitNumber: 10,
+    topicId: "letter",
+    questionText: "How does a friendly letter begin?",
+    options: [
+      { letter: "A", text: "Goodbye pen," },
+      { letter: "B", text: "Dear Rina," },
+      { letter: "C", text: "Dear table," },
+      { letter: "D", text: "Hello book," }
+    ],
+    correctLetter: "B",
+    explanation: "A letter starts with a greeting like 'Dear Rina,'.",
+    difficulty: "easy",
+    sourceNote: "English for Today, Class 4 (NCTB 2026), Unit 10: A Letter to a Friend",
+  },
+  {
+    id: "ACAD-C4-ENG-015",
+    classId: "class-4",
+    subjectId: "english",
+    chapterId: "acad-class-4-eng-unit-11",
+    chapterName: "Unit 11: A Holiday Trip",
+    unitNumber: 11,
+    topicId: "holiday",
+    questionText: "What is a holiday trip?",
+    options: [
+      { letter: "A", text: "A trip to school every day" },
+      { letter: "B", text: "A trip to the hospital" },
+      { letter: "C", text: "A journey for fun and rest" },
+      { letter: "D", text: "A journey to buy medicine" }
+    ],
+    correctLetter: "C",
+    explanation: "A holiday trip is a journey for fun and rest.",
+    difficulty: "medium",
+    sourceNote: "English for Today, Class 4 (NCTB 2026), Unit 11: A Holiday Trip",
+  },
+  {
+    id: "ACAD-C4-ENG-016",
+    classId: "class-4",
+    subjectId: "english",
+    chapterId: "acad-class-4-eng-unit-12",
+    chapterName: "Unit 12: Making Friends",
+    unitNumber: 12,
+    topicId: "friends",
+    questionText: "How can we make friends?",
+    options: [
+      { letter: "A", text: "Be rude." },
+      { letter: "B", text: "Be angry." },
+      { letter: "C", text: "Be selfish." },
+      { letter: "D", text: "Be kind and helpful." }
+    ],
+    correctLetter: "D",
+    explanation: "We should be kind and helpful to make friends.",
+    difficulty: "easy",
+    sourceNote: "English for Today, Class 4 (NCTB 2026), Unit 12: Making Friends",
+  },
+  {
+    id: "ACAD-C4-ENG-017",
+    classId: "class-4",
+    subjectId: "english",
+    chapterId: "acad-class-4-eng-unit-13",
+    chapterName: "Unit 13: Planning to Visit the Book Fair",
+    unitNumber: 13,
+    topicId: "book-fair",
+    questionText: "What can we do at a book fair?",
+    options: [
+      { letter: "A", text: "See and buy many books." },
+      { letter: "B", text: "Watch a film." },
+      { letter: "C", text: "Play cricket." },
+      { letter: "D", text: "Buy vegetables." }
+    ],
+    correctLetter: "A",
+    explanation: "At a book fair we can see and buy many books.",
+    difficulty: "easy",
+    sourceNote: "English for Today, Class 4 (NCTB 2026), Unit 13: Planning to Visit the Book Fair",
+  },
+  {
+    id: "ACAD-C4-ENG-018",
+    classId: "class-4",
+    subjectId: "english",
+    chapterId: "acad-class-4-eng-unit-14",
+    chapterName: "Unit 14: Poem: Tears of the Earth",
+    unitNumber: 14,
+    topicId: "poem",
+    questionText: "What is the poem 'Tears of the Earth' about?",
+    options: [
+      { letter: "A", text: "The Earth is sleeping." },
+      { letter: "B", text: "The Earth is happy." },
+      { letter: "C", text: "The Earth is sad because people harm it." },
+      { letter: "D", text: "The Earth is dancing." }
+    ],
+    correctLetter: "C",
+    explanation: "The poem 'Tears of the Earth' is about the Earth crying because of pollution and damage.",
+    difficulty: "medium",
+    sourceNote: "English for Today, Class 4 (NCTB 2026), Unit 14: Poem: Tears of the Earth",
+  },
+  {
+    id: "ACAD-C4-ENG-019",
+    classId: "class-4",
+    subjectId: "english",
+    chapterId: "acad-class-4-eng-unit-15",
+    chapterName: "Unit 15: Environment Pollution",
+    unitNumber: 15,
+    topicId: "pollution",
+    questionText: "Which action pollutes the environment?",
+    options: [
+      { letter: "A", text: "Planting trees" },
+      { letter: "B", text: "Throwing rubbish in rivers" },
+      { letter: "C", text: "Cleaning the classroom" },
+      { letter: "D", text: "Saving water" }
+    ],
+    correctLetter: "B",
+    explanation: "Throwing rubbish in rivers pollutes the environment.",
+    difficulty: "easy",
+    sourceNote: "English for Today, Class 4 (NCTB 2026), Unit 15: Environment Pollution",
+  },
+  {
+    id: "ACAD-C4-ENG-020",
+    classId: "class-4",
+    subjectId: "english",
+    chapterId: "acad-class-4-eng-unit-15",
+    chapterName: "Unit 15: Environment Pollution",
+    unitNumber: 15,
+    topicId: "pollution",
+    questionText: "What pollutes the air?",
+    options: [
+      { letter: "A", text: "Clean water" },
+      { letter: "B", text: "Green trees" },
+      { letter: "C", text: "Fresh air" },
+      { letter: "D", text: "Smoke from vehicles" }
+    ],
+    correctLetter: "D",
+    explanation: "Smoke from vehicles and factories pollutes the air.",
+    difficulty: "medium",
+    sourceNote: "English for Today, Class 4 (NCTB 2026), Unit 15: Environment Pollution",
+  },
+  {
+    id: "ACAD-C4-ENG-021",
+    classId: "class-4",
+    subjectId: "english",
+    chapterId: "acad-class-4-eng-unit-16",
+    chapterName: "Unit 16: Talking with a Nepalese Boy",
+    unitNumber: 16,
+    topicId: "nepal",
+    questionText: "The boy in the lesson comes from which country?",
+    options: [
+      { letter: "A", text: "Nepal" },
+      { letter: "B", text: "Bhutan" },
+      { letter: "C", text: "China" },
+      { letter: "D", text: "India" }
+    ],
+    correctLetter: "A",
+    explanation: "Nepal is a neighbouring country of Bangladesh, famous for the Himalayas.",
+    difficulty: "easy",
+    sourceNote: "English for Today, Class 4 (NCTB 2026), Unit 16: Talking with a Nepalese Boy",
+  },
+  {
+    id: "ACAD-C4-ENG-022",
+    classId: "class-4",
+    subjectId: "english",
+    chapterId: "acad-class-4-eng-unit-17",
+    chapterName: "Unit 17: The Land of Mountains",
+    unitNumber: 17,
+    topicId: "mountains",
+    questionText: "Which is the highest mountain in the world?",
+    options: [
+      { letter: "A", text: "Mount Fuji" },
+      { letter: "B", text: "Mount Everest" },
+      { letter: "C", text: "Mount Blanc" },
+      { letter: "D", text: "Mount Kilimanjaro" }
+    ],
+    correctLetter: "B",
+    explanation: "Mount Everest, the highest mountain in the world, is in the Himalayas in Nepal.",
+    difficulty: "medium",
+    sourceNote: "English for Today, Class 4 (NCTB 2026), Unit 17: The Land of Mountains",
+  },
+  {
+    id: "ACAD-C4-ENG-023",
+    classId: "class-4",
+    subjectId: "english",
+    chapterId: "acad-class-4-eng-unit-17",
+    chapterName: "Unit 17: The Land of Mountains",
+    unitNumber: 17,
+    topicId: "mountains",
+    questionText: "Which country is called the land of mountains?",
+    options: [
+      { letter: "A", text: "Nepal" },
+      { letter: "B", text: "Maldives" },
+      { letter: "C", text: "Bangladesh" },
+      { letter: "D", text: "Sri Lanka" }
+    ],
+    correctLetter: "A",
+    explanation: "Nepal is called the land of mountains because of the Himalayas.",
+    difficulty: "medium",
+    sourceNote: "English for Today, Class 4 (NCTB 2026), Unit 17: The Land of Mountains",
+  },
+  {
+    id: "ACAD-C4-ENG-024",
+    classId: "class-4",
+    subjectId: "english",
+    chapterId: "acad-class-4-eng-unit-18",
+    chapterName: "Unit 18: Caring for Others",
+    unitNumber: 18,
+    topicId: "caring",
+    questionText: "Which action shows caring for others?",
+    options: [
+      { letter: "A", text: "Hurting others" },
+      { letter: "B", text: "Ignoring a sick friend" },
+      { letter: "C", text: "Helping a sick friend" },
+      { letter: "D", text: "Laughing at others" }
+    ],
+    correctLetter: "C",
+    explanation: "Helping others is caring for them.",
+    difficulty: "easy",
+    sourceNote: "English for Today, Class 4 (NCTB 2026), Unit 18: Caring for Others",
+  },
+  {
+    id: "ACAD-C4-ENG-025",
+    classId: "class-4",
+    subjectId: "english",
+    chapterId: "acad-class-4-eng-unit-18",
+    chapterName: "Unit 18: Caring for Others",
+    unitNumber: 18,
+    topicId: "caring",
+    questionText: "What should we do for old people?",
+    options: [
+      { letter: "A", text: "Push them." },
+      { letter: "B", text: "Help old people cross the road." },
+      { letter: "C", text: "Shout at them." },
+      { letter: "D", text: "Leave them alone." }
+    ],
+    correctLetter: "B",
+    explanation: "We should help old people cross the road.",
+    difficulty: "medium",
+    sourceNote: "English for Today, Class 4 (NCTB 2026), Unit 18: Caring for Others",
+  },
+  {
+    id: "ACAD-C4-ENG-026",
+    classId: "class-4",
+    subjectId: "english",
+    chapterId: "acad-class-4-eng-unit-5",
+    chapterName: "Unit 5: The Little Doctor",
+    unitNumber: 5,
+    topicId: "doctor",
+    questionText: "Who helps sick people get better?",
+    options: [
+      { letter: "A", text: "A little teacher" },
+      { letter: "B", text: "A little farmer" },
+      { letter: "C", text: "A little driver" },
+      { letter: "D", text: "A little doctor" }
+    ],
+    correctLetter: "D",
+    explanation: "A little doctor helps sick people feel better.",
+    difficulty: "medium",
+    sourceNote: "English for Today, Class 4 (NCTB 2026), Unit 5: The Little Doctor",
+  },
+  {
+    id: "ACAD-C4-ENG-027",
+    classId: "class-4",
+    subjectId: "english",
+    chapterId: "acad-class-4-eng-unit-9",
+    chapterName: "Unit 9: Gardening",
+    unitNumber: 9,
+    topicId: "gardening",
+    questionText: "What should we do to help plants grow?",
+    options: [
+      { letter: "A", text: "Burn the plants." },
+      { letter: "B", text: "Water the plants." },
+      { letter: "C", text: "Cut the plants." },
+      { letter: "D", text: "Ignore the plants." }
+    ],
+    correctLetter: "B",
+    explanation: "We water plants so that they grow well.",
+    difficulty: "medium",
+    sourceNote: "English for Today, Class 4 (NCTB 2026), Unit 9: Gardening",
+  },
+  {
     id: "ACAD-C5-ENG-001",
     classId: "class-5",
     subjectId: "english",
@@ -1170,74 +1692,3 @@ export const PUBLIC_ACADEMIC_ENGLISH_QUESTIONS: PublicAcademicQuestion[] = [
     sourceNote: "English for Today, Class 5 (NCTB 2026), Unit 5: Student Council",
   },
 ];
-
-export interface PublicAcademicChapter {
-  id: string;
-  classId: PublicAcademicClassId;
-  subjectId: PublicAcademicSubjectId;
-  name: string;
-  unitNumber: number;
-  questionCount: number;
-  topics: Array<{ id: string; count: number }>;
-}
-
-/** Chapters (NCTB units) derived from the questions — a chapter
- *  exists only when it holds at least one verified question, so
- *  a future batch adds its chapters here automatically. */
-export const PUBLIC_ACADEMIC_CHAPTERS: PublicAcademicChapter[] = (() => {
-  const byId = new Map<string, PublicAcademicChapter>();
-  for (const q of PUBLIC_ACADEMIC_ENGLISH_QUESTIONS) {
-    let ch = byId.get(q.chapterId);
-    if (!ch) {
-      ch = {
-        id: q.chapterId,
-        classId: q.classId,
-        subjectId: q.subjectId,
-        name: q.chapterName,
-        unitNumber: q.unitNumber,
-        questionCount: 0,
-        topics: [],
-      };
-      byId.set(q.chapterId, ch);
-    }
-    ch.questionCount += 1;
-    const t = ch.topics.find((x) => x.id === q.topicId);
-    if (t) t.count += 1;
-    else ch.topics.push({ id: q.topicId, count: 1 });
-  }
-  return [...byId.values()].sort((a, b) =>
-    a.classId.localeCompare(b.classId) || a.unitNumber - b.unitNumber);
-})();
-
-/** Classes with verified practice questions (class + subject pairs). */
-export function publicAcademicClassSubjects(): Array<{
-  classId: PublicAcademicClassId;
-  subjectId: PublicAcademicSubjectId;
-  questionCount: number;
-  chapterCount: number;
-}> {
-  const out: Array<{ classId: PublicAcademicClassId; subjectId: PublicAcademicSubjectId; questionCount: number; chapterCount: number }> = [];
-  for (const ch of PUBLIC_ACADEMIC_CHAPTERS) {
-    const row = out.find((x) => x.classId === ch.classId && x.subjectId === ch.subjectId);
-    if (row) { row.questionCount += ch.questionCount; row.chapterCount += 1; }
-    else out.push({ classId: ch.classId, subjectId: ch.subjectId, questionCount: ch.questionCount, chapterCount: 1 });
-  }
-  return out;
-}
-
-/** Chapters (units) with verified questions for one class + subject.
- *  Any other class/subject returns [] — the UI shows the honest
- *  empty state, never filler. */
-export function publicAcademicChaptersFor(
-  classId: string,
-  subjectId: string,
-): PublicAcademicChapter[] {
-  return PUBLIC_ACADEMIC_CHAPTERS.filter(
-    (c) => c.classId === classId && c.subjectId === subjectId,
-  );
-}
-
-/** Verified questions for one chapter (unit), in draft order. */
-export function publicAcademicQuestionsForChapter(chapterId: string): PublicAcademicQuestion[] {
-  return PUBLIC_ACADEMIC_ENGLISH_QUESTIONS.filter((q) => q.chapterId === chapterId);
-}

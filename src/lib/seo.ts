@@ -52,7 +52,7 @@ import { SITE_URL, canonicalUrl, hreflangUrls, stripLangPrefix } from './langRou
 import {
   publicAcademicChaptersFor,
   publicAcademicClassSubjects,
-} from './publicAcademicEnglish';
+} from './publicAcademic';
 import { QPG_GENERAL_CLASSES, qpgSubjectsFor } from './questionPaper';
 
 export { SITE_URL };

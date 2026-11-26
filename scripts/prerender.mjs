@@ -346,8 +346,8 @@ export function getGuidePaths(source) {
   return paths;
 }
 
-/** Academic practice paths from the PUBLIC_ACADEMIC_ENGLISH_QUESTIONS
- *  source text (Education Hub, 26 Nov 2026). Extracts the distinct
+/** Academic practice paths from the PUBLIC_ACADEMIC_* pool sources
+ *  (Education Hub, 26 Nov 2026). Extracts the distinct
  *  (classId, subjectId, chapterId) triples in file order and builds
  *  the hub + subject + chapter paths. A future verified batch adds
  *  its paths here automatically — no prerender-list edit per batch.
@@ -1109,13 +1109,24 @@ async function main() {
   }
 
   // --- Academic practice paths (Education Hub, 26 Nov 2026) ---
-  // Derived from the verified Academic pool (publicAcademicEnglish.ts)
-  // — hub + subject + chapter paths. They join the static-pages loop
-  // below, so they are prerendered + sitemapped like every other
-  // public page. A future verified batch adds its paths automatically.
+  // Derived from the verified Academic pool (the six per-subject pool
+  // files in src/lib/publicAcademic*.ts) — hub + subject + chapter
+  // paths. They join the static-pages loop below, so they are
+  // prerendered + sitemapped like every other public page. A future
+  // verified batch adds its paths automatically.
   let academicPracticePaths = [];
   try {
-    const academicSource = readFileSync(join(root, 'src/lib/publicAcademicEnglish.ts'), 'utf8');
+    const academicFiles = [
+      'publicAcademicEnglish.ts',
+      'publicAcademicBangla.ts',
+      'publicAcademicMath.ts',
+      'publicAcademicScience.ts',
+      'publicAcademicBgs.ts',
+      'publicAcademicIslam.ts',
+    ];
+    const academicSource = academicFiles
+      .map((f) => readFileSync(join(root, 'src/lib', f), 'utf8'))
+      .join('\n');
     academicPracticePaths = getAcademicPracticePaths(academicSource);
     console.log(`Academic practice: ${academicPracticePaths.length} paths (hub + subjects + chapters)`);
   } catch (err) {

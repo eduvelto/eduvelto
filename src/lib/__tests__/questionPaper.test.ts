@@ -28,11 +28,11 @@ import {
 } from '../questionPaper';
 
 describe('verified pool (MVP content)', () => {
-  it('holds the 35 owner-verified BCS English questions + 56 verified Academic (Class 3/5 English)', () => {
-    expect(QPG_VERIFIED_POOL).toHaveLength(91);
-    expect(new Set(QPG_VERIFIED_POOL.map((q) => q.id)).size).toBe(91);
+  it('holds the 35 owner-verified BCS English questions + 477 verified Academic (Classes 3–5, six subjects)', () => {
+    expect(QPG_VERIFIED_POOL).toHaveLength(512);
+    expect(new Set(QPG_VERIFIED_POOL.map((q) => q.id)).size).toBe(512);
     expect(QPG_VERIFIED_POOL.filter((q) => q.chapterId === QPG_VERIFIED_CHAPTER_ID)).toHaveLength(35);
-    expect(QPG_VERIFIED_POOL.filter((q) => q.chapterId.startsWith('acad-'))).toHaveLength(56);
+    expect(QPG_VERIFIED_POOL.filter((q) => q.chapterId.startsWith('acad-'))).toHaveLength(477);
   });
 
   it('every question is verified, MCQ, and linked to its chapter (BCS or an NCTB unit)', () => {
@@ -52,20 +52,32 @@ describe('verified pool (MVP content)', () => {
     expect(chapter.topics.reduce((a, t) => a + t.verifiedCount, 0)).toBe(35);
   });
 
-  it('Academic chapters exist for Class 3 + Class 5 English; other class/subjects stay empty', () => {
+  it('Academic chapters exist for Classes 3–5 in all six subjects; other class/subjects stay empty', () => {
     expect(qpgChaptersFor('general', 'class-9', 'english')).toEqual([]);
-    expect(qpgChaptersFor('general', 'class-5', 'math')).toEqual([]);
+    expect(qpgChaptersFor('general', 'class-6', 'math')).toEqual([]);
     expect(qpgChaptersFor('madrasah', 'dakhil', 'arabic')).toEqual([]);
     expect(qpgChaptersFor('general', 'honours', 'english')).toHaveLength(1);
-    // Academic (26 Nov 2026): one chapter per NCTB unit with verified questions.
-    const c3 = qpgChaptersFor('general', 'class-3', 'english');
-    expect(c3).toHaveLength(7);
-    expect(c3.reduce((a, c) => a + c.verifiedCount, 0)).toBe(28);
-    const c5 = qpgChaptersFor('general', 'class-5', 'english');
-    expect(c5).toHaveLength(20);
-    expect(c5.reduce((a, c) => a + c.verifiedCount, 0)).toBe(28);
-    expect(qpgChaptersFor('general', 'class-4', 'english')).toEqual([]);
-    expect(qpgChaptersFor('general', 'class-3', 'bangla')).toEqual([]);
+    // Academic (26 Nov 2026): one chapter per NCTB unit / lesson with verified questions.
+    const c3eng = qpgChaptersFor('general', 'class-3', 'english');
+    expect(c3eng).toHaveLength(7);
+    expect(c3eng.reduce((a, c) => a + c.verifiedCount, 0)).toBe(28);
+    const c5eng = qpgChaptersFor('general', 'class-5', 'english');
+    expect(c5eng).toHaveLength(20);
+    expect(c5eng.reduce((a, c) => a + c.verifiedCount, 0)).toBe(28);
+    const c4eng = qpgChaptersFor('general', 'class-4', 'english');
+    expect(c4eng).toHaveLength(18);
+    expect(c4eng.reduce((a, c) => a + c.verifiedCount, 0)).toBe(27);
+    const c3ban = qpgChaptersFor('general', 'class-3', 'bangla');
+    expect(c3ban).toHaveLength(29);
+    expect(c3ban.reduce((a, c) => a + c.verifiedCount, 0)).toBe(29);
+    const c5mat = qpgChaptersFor('general', 'class-5', 'math');
+    expect(c5mat).toHaveLength(10);
+    expect(c5mat.reduce((a, c) => a + c.verifiedCount, 0)).toBe(30);
+    // Chapters are filtered by subject — a Math pick never shows English units.
+    for (const c of c5mat) expect(c.subjectId).toBe('math');
+    for (const c of c3eng) expect(c.subjectId).toBe('english');
+    // No Class 8 questions are verified yet, so the scholarship bundles stay gated.
+    expect(qpgChaptersFor('general', 'class-8', 'math')).toEqual([]);
   });
 });
 

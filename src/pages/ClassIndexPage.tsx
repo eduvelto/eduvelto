@@ -16,8 +16,41 @@ import { listPublishedBooks, type Book } from '../lib/content';
 import { getAllClassStats, type ClassStats } from '../lib/classStats';
 import { takeClassIndexInitialData, type PayloadClassLevel } from '../lib/initialData';
 import { CLASS_LEVELS, booksForClass, subjectsForClass } from '../lib/classLevels';
-import { publicAcademicClassSubjects } from '../lib/publicAcademicEnglish';
+import { publicAcademicClassSubjects } from '../lib/publicAcademic';
+import { QPG_GENERAL_CLASSES, qpgSubjectsFor } from '../lib/questionPaper';
 import { useLanguage } from '../i18n/LanguageContext';
+
+function toBnDigits(n: number): string {
+  return String(n).replace(/[0-9]/g, (d) => '০১২৩৪৫৬৭৮৯'[Number(d)]);
+}
+
+/** Practice coverage, one line per class: subjects with verified
+ *  practice + question total — derived from the verified pool and
+ *  the QPG's class/subject names, never hardcoded. */
+function academicPracticeSummary(lang: 'bn' | 'en'): string {
+  const byClass = new Map<string, { className: string; subjects: string[]; total: number }>();
+  for (const r of publicAcademicClassSubjects()) {
+    const cls = QPG_GENERAL_CLASSES.find((x) => x.id === r.classId);
+    const subj = qpgSubjectsFor('general', r.classId).find((x) => x.id === r.subjectId);
+    const row = byClass.get(r.classId) ?? {
+      className: lang === 'bn' ? cls?.nameBn ?? r.classId : cls?.nameEn ?? r.classId,
+      subjects: [],
+      total: 0,
+    };
+    row.subjects.push(
+      lang === 'bn' ? subj?.nameBn ?? r.subjectId : subj?.nameEn ?? r.subjectId,
+    );
+    row.total += r.questionCount;
+    byClass.set(r.classId, row);
+  }
+  return [...byClass.values()]
+    .map((row) =>
+      lang === 'bn'
+        ? `${row.className} (${row.subjects.join(', ')} — ${toBnDigits(row.total)}টি প্রশ্ন)`
+        : `${row.className} (${row.subjects.join(', ')} — ${row.total} questions)`,
+    )
+    .join(' • ');
+}
 
 export default function ClassIndexPage() {
   const { t } = useLanguage();
@@ -123,12 +156,8 @@ export default function ClassIndexPage() {
           </h2>
           <p style={{ fontSize: 15, lineHeight: 1.75, margin: '0 0 12px' }}>
             {t({
-              bn: `যাচাইকৃত প্রশ্ন দিয়ে অধ্যায়ভিত্তিক অনুশীলন করুন — উত্তর দিলেই সঠিক উত্তর ও ব্যাখ্যা দেখতে পাবেন। এখন আছে ${publicAcademicClassSubjects()
-                .map((r) => `${r.classId === 'class-3' ? '৩য়' : '৫ম'} শ্রেণি English (${r.questionCount}টি প্রশ্ন)`)
-                .join(' • ')}।`,
-              en: `Practise chapter by chapter with verified questions — see the correct answer and explanation as soon as you answer. Available now: ${publicAcademicClassSubjects()
-                .map((r) => `Class ${r.classId.replace('class-', '')} English (${r.questionCount} questions)`)
-                .join(' • ')}.`,
+              bn: `যাচাইকৃত প্রশ্ন দিয়ে অধ্যায়ভিত্তিক অনুশীলন করুন — উত্তর দিলেই সঠিক উত্তর ও ব্যাখ্যা দেখতে পাবেন। এখন আছে ${academicPracticeSummary('bn')}।`,
+              en: `Practise chapter by chapter with verified questions — see the correct answer and explanation as soon as you answer. Available now: ${academicPracticeSummary('en')}.`,
             })}
           </p>
           <Link to="/learn/practice" style={{ fontWeight: 600 }}>

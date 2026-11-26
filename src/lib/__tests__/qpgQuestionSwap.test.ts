@@ -334,7 +334,7 @@ describe('swap candidates: verified-only, same-chapter, not already in the paper
   });
 
   it('Academic chapter swap candidates are Academic-only — no BCS leak from the grown pool', () => {
-    // The pool grew to 91 (35 BCS + 56 Academic, 26 Nov 2026). A Class 3
+    // The pool grew to 512 (35 BCS + 477 Academic, 26 Nov 2026). A Class 3
     // paper's swap picker must offer only its own chapter's questions.
     // Production passes the full chapter selection as `available` and the
     // paper's ids as `selectedIds` — mirror that here.
@@ -356,7 +356,7 @@ describe('swap candidates: verified-only, same-chapter, not already in the paper
     expect(candidates.every((c) => c.chapterId === 'acad-class-3-eng-unit-1')).toBe(true);
     expect(candidates.every((c) => c.verified === true)).toBe(true);
     const allAcad = QPG_VERIFIED_POOL.filter((q) => q.chapterId.startsWith('acad-'));
-    expect(allAcad).toHaveLength(56);
+    expect(allAcad).toHaveLength(477);
   });
 
   it('difficulty filter stays honest: a guessed difficulty yields nothing', () => {

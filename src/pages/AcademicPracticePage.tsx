@@ -2,8 +2,8 @@
 //
 // Chapter-wise practice for the Education Hub, fed by the SAME verified
 // bank as the Question Maker (QPG): the static pool in
-// src/lib/publicAcademicEnglish.ts (Class 3 + Class 5 English, 56
-// verified questions). A question verified once appears in both places
+// src/lib/publicAcademic.ts (Classes 3–5, six subjects, 477 verified
+// questions). A question verified once appears in both places
 // — teachers generate papers from it in /question-maker, students
 // practise it here, chapter by chapter.
 //
@@ -26,13 +26,13 @@ import { Breadcrumb } from '../components/Breadcrumb';
 import { AlertBox, Card, Chip, LinkButton } from '../components/ui';
 import { useLanguage } from '../i18n/LanguageContext';
 import {
-  PUBLIC_ACADEMIC_ENGLISH_QUESTIONS,
+  PUBLIC_ACADEMIC_QUESTIONS,
   publicAcademicChaptersFor,
   publicAcademicClassSubjects,
   publicAcademicQuestionsForChapter,
   type PublicAcademicChapter,
   type PublicAcademicQuestion,
-} from '../lib/publicAcademicEnglish';
+} from '../lib/publicAcademic';
 import {
   QPG_GENERAL_CLASSES,
   qpgSubjectsFor,
@@ -221,7 +221,13 @@ function QuestionCard({
           </strong>
           <Chip tone="blue">{q.topicId}</Chip>
           <Chip tone={q.difficulty === 'easy' ? 'outline' : 'gold'}>
-            {lang === 'bn' ? (q.difficulty === 'easy' ? 'সহজ' : 'মাঝারি') : q.difficulty}
+            {lang === 'bn'
+              ? q.difficulty === 'easy'
+                ? 'সহজ'
+                : q.difficulty === 'medium'
+                  ? 'মাঝারি'
+                  : 'কঠিন'
+              : q.difficulty}
           </Chip>
         </div>
         <p style={{ fontSize: 16, lineHeight: 1.75, margin: '0 0 10px' }}>{q.questionText}</p>
@@ -487,5 +493,5 @@ export default function AcademicPracticePage() {
 }
 
 // Re-exported for tests / future callers: total verified Academic
-// questions in the pool (56 today — grows as batches are verified).
-export const ACADEMIC_PRACTICE_TOTAL = PUBLIC_ACADEMIC_ENGLISH_QUESTIONS.length;
+// questions in the pool (477 today — grows as batches are verified).
+export const ACADEMIC_PRACTICE_TOTAL = PUBLIC_ACADEMIC_QUESTIONS.length;

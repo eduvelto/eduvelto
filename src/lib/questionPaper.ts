@@ -25,9 +25,10 @@
 //   (7.1% of one full mock per main exam; 455+ missing). Full-mock
 //   generation is therefore GATED — the UI shows availability per
 //   exam/subject and refuses to invent questions to fill gaps.
-//   Academic Class 3 + Class 5 English add 56 verified questions
-//   (26 Nov 2026) — they count ONLY under their NCTB units, never
-//   under any job exam (see verifiedAvailableFor).
+//   Academic Classes 3–5 add 477 verified questions (26 Nov 2026) —
+//   six subjects (Bangla, English, Math, Science, BGS, Islam). They
+//   count ONLY under their NCTB units, never under any job exam (see
+//   verifiedAvailableFor).
 // - The Class 9 corrected MCQ packs (nctb-mcq-rebuild-evidence) are
 //   book-grounded but NEEDS-REVIEW — they are NOT in this pool until
 //   the owner (the English verifier) reviews them.
@@ -43,9 +44,9 @@ import {
 } from './publicBcsEnglish';
 import {
   PUBLIC_ACADEMIC_CHAPTERS,
-  PUBLIC_ACADEMIC_ENGLISH_QUESTIONS,
+  PUBLIC_ACADEMIC_QUESTIONS,
   type PublicAcademicQuestion,
-} from './publicAcademicEnglish';
+} from './publicAcademic';
 import { JOB_RULES_CONFIGS } from './jobExams';
 import { nuFullMockConfigSeed } from './nuExamConfig';
 
@@ -368,6 +369,7 @@ const GENERAL_SUBJECTS_BY_BAND: Record<string, QpgSubject[]> = {
     { id: 'math', nameBn: 'গণিত', nameEn: 'Mathematics' },
     { id: 'science', nameBn: 'বিজ্ঞান', nameEn: 'Science' },
     { id: 'bgs', nameBn: 'বাংলাদেশ ও বিশ্বপরিচয়', nameEn: 'Bangladesh & Global Studies' },
+    { id: 'islam', nameBn: 'ইসলাম শিক্ষা', nameEn: 'Islam' },
   ],
   '6-8': [
     { id: 'bangla', nameBn: 'বাংলা', nameEn: 'Bangla' },
@@ -613,15 +615,15 @@ function toQpgAcademicQuestion(q: PublicAcademicQuestion): QpgQuestion {
   };
 }
 
-/** The whole verified pool: 35 BCS English MCQs + 56 Academic
- *  (Class 3 + Class 5 English) MCQs = 91. One bank — the Question
+/** The whole verified pool: 35 BCS English MCQs + 477 Academic
+ *  (Classes 3–5, six subjects) MCQs = 512. One bank — the Question
  *  Maker and the Education Hub chapter practice draw from this same
  *  pool, so a question verified once appears in both places. BCS
  *  exam accounting counts ONLY the BCS chapter (see
  *  verifiedAvailableFor / qpgModelSectionQuestions). */
 export const QPG_VERIFIED_POOL: QpgQuestion[] = [
   ...PUBLIC_BCS_ENGLISH_QUESTIONS.map(toQpgQuestion),
-  ...PUBLIC_ACADEMIC_ENGLISH_QUESTIONS.map(toQpgAcademicQuestion),
+  ...PUBLIC_ACADEMIC_QUESTIONS.map(toQpgAcademicQuestion),
 ];
 
 export function qpgVerifiedChapter(): QpgChapter {
@@ -658,30 +660,33 @@ export function qpgChaptersFor(stream: QpgStream, classId: string, subjectId: st
   if (stream === 'general' && classId === 'honours' && subjectId === 'english') {
     return [qpgVerifiedChapter()];
   }
-  if (stream === 'general' && subjectId === 'english') {
-    return qpgAcademicChaptersFor(classId);
+  if (stream === 'general') {
+    return qpgAcademicChaptersFor(classId, subjectId);
   }
   return [];
 }
 
-/** Academic chapters (NCTB units) with verified questions, built from
- *  the Academic pool — one QpgChapter per unit. A class with no
- *  verified questions returns [] (honest empty state). As more
- *  Academic batches are verified and appended to
- *  PUBLIC_ACADEMIC_ENGLISH_QUESTIONS, their units appear here
- *  automatically — no code change per batch. */
-export function qpgAcademicChaptersFor(classId: string): QpgChapter[] {
-  return PUBLIC_ACADEMIC_CHAPTERS.filter((c) => c.classId === classId).map((c) => ({
+/** Academic chapters (NCTB units / lessons) with verified questions,
+ *  built from the Academic pool — one QpgChapter per unit / lesson,
+ *  for one class + subject. A class/subject with no verified
+ *  questions returns [] (honest empty state). As more Academic
+ *  batches are verified and appended to the per-subject pool files,
+ *  their units appear here automatically — no code change per batch. */
+export function qpgAcademicChaptersFor(classId: string, subjectId: string): QpgChapter[] {
+  const subj = qpgSubjectsFor('general', classId).find((x) => x.id === subjectId);
+  const subjBn = subj?.nameBn ?? subjectId;
+  const subjEn = subj?.nameEn ?? subjectId;
+  return PUBLIC_ACADEMIC_CHAPTERS.filter(
+    (c) => c.classId === classId && c.subjectId === subjectId,
+  ).map((c) => ({
     id: c.id,
     stream: 'general' as const,
     classId: c.classId,
     subjectId: c.subjectId,
     nameBn: c.name,
     nameEn: c.name,
-    sourceNoteBn:
-      'NCTB English For Today — যাচাইকৃত অনুশীলন প্রশ্ন (মূল পাঠভিত্তিক, বোর্ড প্রশ্ন নয়)।',
-    sourceNoteEn:
-      'NCTB English For Today — verified practice questions (lesson-based, not board questions).',
+    sourceNoteBn: `NCTB ${subjBn} — যাচাইকৃত অনুশীলন প্রশ্ন (মূল পাঠভিত্তিক, বোর্ড প্রশ্ন নয়)।`,
+    sourceNoteEn: `NCTB ${subjEn} — verified practice questions (lesson-based, not board questions).`,
     topics: c.topics.map((t) => ({
       id: t.id,
       nameBn: t.id,
@@ -1409,7 +1414,7 @@ export interface QpgModelTest {
  *  / NU English (reusing it there would mislabel its verification). */
 function verifiedAvailableFor(examSlug: string, subjectNameEn: string): number {
   if (examSlug === 'bcs' && subjectNameEn === 'English Language & Literature') {
-    // BCS only: Academic (Class 3/5) questions are verified for their
+    // BCS only: Academic (Classes 3–5) questions are verified for their
     // NCTB units, NOT for BCS — they must never inflate the BCS count.
     return QPG_VERIFIED_POOL.filter((q) => q.chapterId === QPG_VERIFIED_CHAPTER_ID).length;
   }
@@ -1517,9 +1522,9 @@ export const QPG_PENDING_TRACK3_EXAMS: Array<{
 // scholarship bundles — 100 marks / 3 hours, sections droppable.
 // The STRUCTURE (subjects, sections, marks, time) is fixed and
 // honest; GENERATION stays gated on verified questions — today every
-// bundle holds 0 verified questions (the pool is BCS English only),
-// so each card shows the shortfall and its generate button stays
-// disabled. No questions are invented to fill a bundle.
+// bundle holds 0 verified questions (no Class 8 questions are
+// verified yet), so each card shows the shortfall and its generate
+// button stays disabled. No questions are invented to fill a bundle.
 // ---------------------------------------------------------------------
 
 export interface QpgCombinedSection {
@@ -1594,7 +1599,7 @@ export const QPG_COMBINED_PAPERS: QpgCombinedPaper[] = [
 ];
 
 /** Verified questions available for one combined-paper section today
- *  (0 for every Class 8 subject — the pool holds BCS English only).
+ *  (0 for every Class 8 subject — no Class 8 questions are verified yet).
  *  Section marks are the TARGET, never the availability. */
 export function qpgCombinedSectionAvailable(section: QpgCombinedSection): number {
   return qpgChaptersFor('general', 'class-8', section.subjectId).reduce(
