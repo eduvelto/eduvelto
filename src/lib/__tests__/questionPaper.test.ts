@@ -28,16 +28,18 @@ import {
 } from '../questionPaper';
 
 describe('verified pool (MVP content)', () => {
-  it('holds exactly the 35 owner-verified BCS English questions', () => {
-    expect(QPG_VERIFIED_POOL).toHaveLength(35);
-    expect(new Set(QPG_VERIFIED_POOL.map((q) => q.id)).size).toBe(35);
+  it('holds the 35 owner-verified BCS English questions + 56 verified Academic (Class 3/5 English)', () => {
+    expect(QPG_VERIFIED_POOL).toHaveLength(91);
+    expect(new Set(QPG_VERIFIED_POOL.map((q) => q.id)).size).toBe(91);
+    expect(QPG_VERIFIED_POOL.filter((q) => q.chapterId === QPG_VERIFIED_CHAPTER_ID)).toHaveLength(35);
+    expect(QPG_VERIFIED_POOL.filter((q) => q.chapterId.startsWith('acad-'))).toHaveLength(56);
   });
 
-  it('every question is verified, MCQ, and linked to the chapter', () => {
+  it('every question is verified, MCQ, and linked to its chapter (BCS or an NCTB unit)', () => {
     for (const q of QPG_VERIFIED_POOL) {
       expect(q.verified).toBe(true);
       expect(q.type).toBe('mcq');
-      expect(q.chapterId).toBe(QPG_VERIFIED_CHAPTER_ID);
+      expect(q.chapterId === QPG_VERIFIED_CHAPTER_ID || q.chapterId.startsWith('acad-')).toBe(true);
       expect(q.options).toHaveLength(4);
       expect(['A', 'B', 'C', 'D']).toContain(q.correctLetter);
     }
@@ -50,11 +52,20 @@ describe('verified pool (MVP content)', () => {
     expect(chapter.topics.reduce((a, t) => a + t.verifiedCount, 0)).toBe(35);
   });
 
-  it('no other class/subject has verified chapters yet (honest empty state)', () => {
+  it('Academic chapters exist for Class 3 + Class 5 English; other class/subjects stay empty', () => {
     expect(qpgChaptersFor('general', 'class-9', 'english')).toEqual([]);
     expect(qpgChaptersFor('general', 'class-5', 'math')).toEqual([]);
     expect(qpgChaptersFor('madrasah', 'dakhil', 'arabic')).toEqual([]);
     expect(qpgChaptersFor('general', 'honours', 'english')).toHaveLength(1);
+    // Academic (26 Nov 2026): one chapter per NCTB unit with verified questions.
+    const c3 = qpgChaptersFor('general', 'class-3', 'english');
+    expect(c3).toHaveLength(7);
+    expect(c3.reduce((a, c) => a + c.verifiedCount, 0)).toBe(28);
+    const c5 = qpgChaptersFor('general', 'class-5', 'english');
+    expect(c5).toHaveLength(20);
+    expect(c5.reduce((a, c) => a + c.verifiedCount, 0)).toBe(28);
+    expect(qpgChaptersFor('general', 'class-4', 'english')).toEqual([]);
+    expect(qpgChaptersFor('general', 'class-3', 'bangla')).toEqual([]);
   });
 });
 

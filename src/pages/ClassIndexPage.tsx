@@ -11,11 +11,12 @@ import { useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { PageShell, EmptyState } from '../components/PageShell';
 import { ClassCard } from '../components/ClassCards';
-import { SkeletonCards } from '../components/ui';
+import { Card, SkeletonCards } from '../components/ui';
 import { listPublishedBooks, type Book } from '../lib/content';
 import { getAllClassStats, type ClassStats } from '../lib/classStats';
 import { takeClassIndexInitialData, type PayloadClassLevel } from '../lib/initialData';
 import { CLASS_LEVELS, booksForClass, subjectsForClass } from '../lib/classLevels';
+import { publicAcademicClassSubjects } from '../lib/publicAcademicEnglish';
 import { useLanguage } from '../i18n/LanguageContext';
 
 export default function ClassIndexPage() {
@@ -111,6 +112,29 @@ export default function ClassIndexPage() {
             </Link>
           </p>
         </>
+      ) : null}
+      {/* Chapter practice (Education Hub, 26 Nov 2026): the same
+          verified bank as the Question Maker, chapter by chapter.
+          Static — it shows even though Classes 3/5 have no books yet. */}
+      {loaded ? (
+        <Card style={{ marginTop: 24 }}>
+          <h2 style={{ fontSize: 18, margin: '0 0 6px' }}>
+            {t({ bn: 'অধ্যায়ভিত্তিক অনুশীলন', en: 'Chapter-wise Practice' })}
+          </h2>
+          <p style={{ fontSize: 15, lineHeight: 1.75, margin: '0 0 12px' }}>
+            {t({
+              bn: `যাচাইকৃত প্রশ্ন দিয়ে অধ্যায়ভিত্তিক অনুশীলন করুন — উত্তর দিলেই সঠিক উত্তর ও ব্যাখ্যা দেখতে পাবেন। এখন আছে ${publicAcademicClassSubjects()
+                .map((r) => `${r.classId === 'class-3' ? '৩য়' : '৫ম'} শ্রেণি English (${r.questionCount}টি প্রশ্ন)`)
+                .join(' • ')}।`,
+              en: `Practise chapter by chapter with verified questions — see the correct answer and explanation as soon as you answer. Available now: ${publicAcademicClassSubjects()
+                .map((r) => `Class ${r.classId.replace('class-', '')} English (${r.questionCount} questions)`)
+                .join(' • ')}.`,
+            })}
+          </p>
+          <Link to="/learn/practice" style={{ fontWeight: 600 }}>
+            {t({ bn: 'অনুশীলন শুরু করুন →', en: 'Start practising →' })}
+          </Link>
+        </Card>
       ) : null}
     </PageShell>
   );

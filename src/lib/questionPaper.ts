@@ -25,6 +25,9 @@
 //   (7.1% of one full mock per main exam; 455+ missing). Full-mock
 //   generation is therefore GATED — the UI shows availability per
 //   exam/subject and refuses to invent questions to fill gaps.
+//   Academic Class 3 + Class 5 English add 56 verified questions
+//   (26 Nov 2026) — they count ONLY under their NCTB units, never
+//   under any job exam (see verifiedAvailableFor).
 // - The Class 9 corrected MCQ packs (nctb-mcq-rebuild-evidence) are
 //   book-grounded but NEEDS-REVIEW — they are NOT in this pool until
 //   the owner (the English verifier) reviews them.
@@ -38,6 +41,11 @@ import {
   type PublicBcsQuestion,
   type PublicBcsTopic,
 } from './publicBcsEnglish';
+import {
+  PUBLIC_ACADEMIC_CHAPTERS,
+  PUBLIC_ACADEMIC_ENGLISH_QUESTIONS,
+  type PublicAcademicQuestion,
+} from './publicAcademicEnglish';
 import { JOB_RULES_CONFIGS } from './jobExams';
 import { nuFullMockConfigSeed } from './nuExamConfig';
 
@@ -579,15 +587,51 @@ function toQpgQuestion(q: PublicBcsQuestion): QpgQuestion {
   };
 }
 
-/** The whole verified pool: 35 BCS English MCQs. Nothing else. */
-export const QPG_VERIFIED_POOL: QpgQuestion[] = PUBLIC_BCS_ENGLISH_QUESTIONS.map(toQpgQuestion);
+/** Map one verified Academic question (NCTB unit) to the pool shape.
+ *  The Academic easy/medium difficulty lives in the Academic pool file
+ *  (the practice UI shows it); the QPG pool type carries 'unspecified'
+ *  until verified questions carry difficulty tags the QPG filters on. */
+function toQpgAcademicQuestion(q: PublicAcademicQuestion): QpgQuestion {
+  return {
+    id: q.id,
+    chapterId: q.chapterId,
+    chapterNameBn: q.chapterName,
+    topicId: q.topicId,
+    topicNameBn: q.topicId,
+    topicNameEn: q.topicId,
+    type: 'mcq',
+    difficulty: 'unspecified',
+    verified: true,
+    source: 'verified-batch',
+    cognitiveLevel: 'unspecified',
+    nature: 'unspecified',
+    questionText: q.questionText,
+    options: q.options,
+    correctLetter: q.correctLetter,
+    explanation: q.explanation,
+    sourceNote: q.sourceNote,
+  };
+}
+
+/** The whole verified pool: 35 BCS English MCQs + 56 Academic
+ *  (Class 3 + Class 5 English) MCQs = 91. One bank — the Question
+ *  Maker and the Education Hub chapter practice draw from this same
+ *  pool, so a question verified once appears in both places. BCS
+ *  exam accounting counts ONLY the BCS chapter (see
+ *  verifiedAvailableFor / qpgModelSectionQuestions). */
+export const QPG_VERIFIED_POOL: QpgQuestion[] = [
+  ...PUBLIC_BCS_ENGLISH_QUESTIONS.map(toQpgQuestion),
+  ...PUBLIC_ACADEMIC_ENGLISH_QUESTIONS.map(toQpgAcademicQuestion),
+];
 
 export function qpgVerifiedChapter(): QpgChapter {
   const topics: QpgChapterTopic[] = PUBLIC_BCS_TOPICS.map((t) => ({
     id: t.topic,
     nameBn: t.nameBn,
     nameEn: t.nameEn,
-    verifiedCount: QPG_VERIFIED_POOL.filter((q) => q.topicId === t.topic).length,
+    verifiedCount: QPG_VERIFIED_POOL.filter(
+      (q) => q.chapterId === QPG_VERIFIED_CHAPTER_ID && q.topicId === t.topic,
+    ).length,
   }));
   return {
     id: QPG_VERIFIED_CHAPTER_ID,
@@ -601,7 +645,9 @@ export function qpgVerifiedChapter(): QpgChapter {
     sourceNoteEn:
       'Owner-verified BCS English Batch 1 (35 questions, 22 Nov 2026). NCTB chapter packs join here once verified.',
     topics,
-    verifiedCount: QPG_VERIFIED_POOL.length,
+    verifiedCount: QPG_VERIFIED_POOL.filter(
+      (q) => q.chapterId === QPG_VERIFIED_CHAPTER_ID,
+    ).length,
   };
 }
 
@@ -612,7 +658,38 @@ export function qpgChaptersFor(stream: QpgStream, classId: string, subjectId: st
   if (stream === 'general' && classId === 'honours' && subjectId === 'english') {
     return [qpgVerifiedChapter()];
   }
+  if (stream === 'general' && subjectId === 'english') {
+    return qpgAcademicChaptersFor(classId);
+  }
   return [];
+}
+
+/** Academic chapters (NCTB units) with verified questions, built from
+ *  the Academic pool — one QpgChapter per unit. A class with no
+ *  verified questions returns [] (honest empty state). As more
+ *  Academic batches are verified and appended to
+ *  PUBLIC_ACADEMIC_ENGLISH_QUESTIONS, their units appear here
+ *  automatically — no code change per batch. */
+export function qpgAcademicChaptersFor(classId: string): QpgChapter[] {
+  return PUBLIC_ACADEMIC_CHAPTERS.filter((c) => c.classId === classId).map((c) => ({
+    id: c.id,
+    stream: 'general' as const,
+    classId: c.classId,
+    subjectId: c.subjectId,
+    nameBn: c.name,
+    nameEn: c.name,
+    sourceNoteBn:
+      'NCTB English For Today — যাচাইকৃত অনুশীলন প্রশ্ন (মূল পাঠভিত্তিক, বোর্ড প্রশ্ন নয়)।',
+    sourceNoteEn:
+      'NCTB English For Today — verified practice questions (lesson-based, not board questions).',
+    topics: c.topics.map((t) => ({
+      id: t.id,
+      nameBn: t.id,
+      nameEn: t.id,
+      verifiedCount: t.count,
+    })),
+    verifiedCount: c.questionCount,
+  }));
 }
 
 // ---------------------------------------------------------------------
@@ -1332,7 +1409,9 @@ export interface QpgModelTest {
  *  / NU English (reusing it there would mislabel its verification). */
 function verifiedAvailableFor(examSlug: string, subjectNameEn: string): number {
   if (examSlug === 'bcs' && subjectNameEn === 'English Language & Literature') {
-    return QPG_VERIFIED_POOL.length;
+    // BCS only: Academic (Class 3/5) questions are verified for their
+    // NCTB units, NOT for BCS — they must never inflate the BCS count.
+    return QPG_VERIFIED_POOL.filter((q) => q.chapterId === QPG_VERIFIED_CHAPTER_ID).length;
   }
   return 0;
 }
@@ -1404,7 +1483,8 @@ export function qpgModelTests(): QpgModelTest[] {
 /** Questions available for one model-test subject section today. */
 export function qpgModelSectionQuestions(examSlug: string, subjectNameEn: string): QpgQuestion[] {
   if (examSlug === 'bcs' && subjectNameEn === 'English Language & Literature') {
-    return [...QPG_VERIFIED_POOL];
+    // BCS only — Academic questions are not BCS questions.
+    return QPG_VERIFIED_POOL.filter((q) => q.chapterId === QPG_VERIFIED_CHAPTER_ID);
   }
   return [];
 }
