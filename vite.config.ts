@@ -38,15 +38,17 @@ export default defineConfig(({ isSsrBuild }) => ({
       // is unchanged: main.tsx calls registerSW({ immediate: true }),
       // the same semantics as the old auto-registration.
       injectRegister: false,
+      // Precache limit (26 Nov 2026, Class 9 pool): the entry chunk
+      // holds the whole verified Academic pool inline, so it grew
+      // past Workbox's 2 MiB default (2.26 MB at 1,944 questions)
+      // and the build failed. 5 MiB leaves headroom for the
+      // remaining planned pools (Class 11–12, Honours, Madrasa);
+      // revisit if the entry chunk approaches it.
+      injectManifest: {
+        maximumFileSizeToCacheInBytes: 5 * 1024 * 1024,
+      },
       workbox: {
         globPatterns: ['**/*.{js,css,html,ico,png,svg,woff2}'],
-        // Precache limit (26 Nov 2026, Class 9 pool): the entry chunk
-        // holds the whole verified Academic pool inline, so it grew
-        // past Workbox's 2 MiB default (2.26 MB at 1,944 questions)
-        // and the build failed. 5 MiB leaves headroom for the
-        // remaining planned pools (Class 11–12, Honours, Madrasa);
-        // revisit if the entry chunk approaches it.
-        maximumFileSizeToCacheInBytes: 5 * 1024 * 1024,
       },
       devOptions: { enabled: false },
     }),
