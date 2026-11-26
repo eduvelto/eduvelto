@@ -1,0 +1,453 @@
+// Eduvelto — Academic ICT practice questions (Class 6),
+// verified against the NCTB books (review 26 Nov 2026).
+//
+// Static data ONLY — zero Firestore reads. The 21 questions are the
+// Academic Class 6 ICT drafts AFTER review (see
+// review-academic-c6-ict-verdicts.json and
+// review-academic-c6-fixes-applied.md in
+// ~/workspace/eduorbit/sprint-1week-2026-11-25/).
+//
+// HONESTY: these are ORIGINAL practice questions written for the
+// NCTB lessons — NOT board / university / previous-year questions.
+// Every question was checked against its cited NCTB book lesson.
+// The draft files' `status` field still says NEEDS-REVIEW — the
+// verdict files are the review record, and this file contains ONLY
+// the verified questions (VERIFIED as-is + NEEDS-FIX / REJECTED
+// items with their fixes applied). The five REJECTED items with no
+// complete replacement recorded are NOT here (see the generation
+// script's EXCLUDED set).
+//
+// HOW NEW BATCHES JOIN: append the next verified batch's questions
+// to PUBLIC_ACADEMIC_ICT_QUESTIONS below (same shape, same generation
+// script with the new draft + verdict files). Chapters, counts and
+// the practice pages are DERIVED from the combined pool in
+// src/lib/publicAcademic.ts, so no component or route change is
+// needed when a batch is verified. NEVER add a question whose
+// verdict is not VERIFIED (or NEEDS-FIX / REJECTED with the fix
+// applied) — unverified drafts must never reach students.
+
+import { type PublicAcademicQuestion } from './publicAcademic';
+
+/** All verified Academic ICT questions, in draft order (Class 6). */
+export const PUBLIC_ACADEMIC_ICT_QUESTIONS: PublicAcademicQuestion[] = [
+  {
+    id: "ACAD-C6-ICT-001",
+    classId: "class-6",
+    subjectId: "ict",
+    chapterId: "acad-class-6-ict-chapter-1",
+    chapterName: "১. তথ্য ও যোগাযোগ প্রযুক্তি পরিচিতি",
+    unitNumber: 1,
+    topicId: "introduction",
+    questionText: "ICT-এর পূর্ণরূপ কী?",
+    options: [
+      { letter: "A", text: "তথ্য ও যোগাযোগ পরিবহন" },
+      { letter: "B", text: "তথ্য ও যোগাযোগ প্রকাশনা" },
+      { letter: "C", text: "তথ্য ও যোগাযোগ প্রযুক্তি" },
+      { letter: "D", text: "তথ্য ও যোগাযোগ পদ্ধতি" }
+    ],
+    correctLetter: "C",
+    explanation: "ICT মানে তথ্য ও যোগাযোগ প্রযুক্তি।",
+    difficulty: "easy",
+    sourceNote: "তথ্য ও যোগাযোগ প্রযুক্তি, ষষ্ঠ শ্রেণি (NCTB), অধ্যায় ১: তথ্য ও যোগাযোগ প্রযুক্তি পরিচিতি",
+  },
+  {
+    id: "ACAD-C6-ICT-002",
+    classId: "class-6",
+    subjectId: "ict",
+    chapterId: "acad-class-6-ict-chapter-1",
+    chapterName: "১. তথ্য ও যোগাযোগ প্রযুক্তি পরিচিতি",
+    unitNumber: 1,
+    topicId: "introduction",
+    questionText: "তথ্য প্রযুক্তি দিয়ে কী করা যায়?",
+    options: [
+      { letter: "A", text: "কিছুই করা যায় না" },
+      { letter: "B", text: "শুধু খেলা যায়" },
+      { letter: "C", text: "শুধু গান শোনা যায়" },
+      { letter: "D", text: "তথ্য সংগ্রহ, সংরক্ষণ ও আদান-প্রদান করা যায়" }
+    ],
+    correctLetter: "D",
+    explanation: "তথ্য প্রযুক্তি দিয়ে তথ্য সংগ্রহ, সংরক্ষণ ও আদান-প্রদান করা যায়।",
+    difficulty: "medium",
+    sourceNote: "তথ্য ও যোগাযোগ প্রযুক্তি, ষষ্ঠ শ্রেণি (NCTB), অধ্যায় ১: তথ্য ও যোগাযোগ প্রযুক্তি পরিচিতি",
+  },
+  {
+    id: "ACAD-C6-ICT-003",
+    classId: "class-6",
+    subjectId: "ict",
+    chapterId: "acad-class-6-ict-chapter-1",
+    chapterName: "১. তথ্য ও যোগাযোগ প্রযুক্তি পরিচিতি",
+    unitNumber: 1,
+    topicId: "computer",
+    questionText: "তথ্য প্রক্রিয়াকরণের যন্ত্র কোনটি?",
+    options: [
+      { letter: "A", text: "টেলিভিশন" },
+      { letter: "B", text: "কম্পিউটার" },
+      { letter: "C", text: "রেডিও" },
+      { letter: "D", text: "ঘড়ি" }
+    ],
+    correctLetter: "B",
+    explanation: "কম্পিউটার তথ্য প্রক্রিয়াকরণের একটি যন্ত্র।",
+    difficulty: "medium",
+    sourceNote: "তথ্য ও যোগাযোগ প্রযুক্তি, ষষ্ঠ শ্রেণি (NCTB), অধ্যায় ১: তথ্য ও যোগাযোগ প্রযুক্তি পরিচিতি",
+  },
+  {
+    id: "ACAD-C6-ICT-004",
+    classId: "class-6",
+    subjectId: "ict",
+    chapterId: "acad-class-6-ict-chapter-2",
+    chapterName: "২. তথ্য ও যোগাযোগ প্রযুক্তি সংশ্লিষ্ট যন্ত্রপাতি",
+    unitNumber: 2,
+    topicId: "hardware",
+    questionText: "নিচের কোনটি ইনপুট যন্ত্র?",
+    options: [
+      { letter: "A", text: "প্রিন্টার" },
+      { letter: "B", text: "মনিটর" },
+      { letter: "C", text: "স্পিকার" },
+      { letter: "D", text: "কীবোর্ড" }
+    ],
+    correctLetter: "D",
+    explanation: "কীবোর্ড একটি ইনপুট যন্ত্র।",
+    difficulty: "easy",
+    sourceNote: "তথ্য ও যোগাযোগ প্রযুক্তি, ষষ্ঠ শ্রেণি (NCTB), অধ্যায় ২: তথ্য ও যোগাযোগ প্রযুক্তি সংশ্লিষ্ট যন্ত্রপাতি",
+  },
+  {
+    id: "ACAD-C6-ICT-005",
+    classId: "class-6",
+    subjectId: "ict",
+    chapterId: "acad-class-6-ict-chapter-2",
+    chapterName: "২. তথ্য ও যোগাযোগ প্রযুক্তি সংশ্লিষ্ট যন্ত্রপাতি",
+    unitNumber: 2,
+    topicId: "hardware",
+    questionText: "নিচের কোনটি আউটপুট যন্ত্র?",
+    options: [
+      { letter: "A", text: "মনিটর" },
+      { letter: "B", text: "স্ক্যানার" },
+      { letter: "C", text: "মাউস" },
+      { letter: "D", text: "কীবোর্ড" }
+    ],
+    correctLetter: "A",
+    explanation: "মনিটর একটি আউটপুট যন্ত্র।",
+    difficulty: "easy",
+    sourceNote: "তথ্য ও যোগাযোগ প্রযুক্তি, ষষ্ঠ শ্রেণি (NCTB), অধ্যায় ২: তথ্য ও যোগাযোগ প্রযুক্তি সংশ্লিষ্ট যন্ত্রপাতি",
+  },
+  {
+    id: "ACAD-C6-ICT-006",
+    classId: "class-6",
+    subjectId: "ict",
+    chapterId: "acad-class-6-ict-chapter-2",
+    chapterName: "২. তথ্য ও যোগাযোগ প্রযুক্তি সংশ্লিষ্ট যন্ত্রপাতি",
+    unitNumber: 2,
+    topicId: "cpu",
+    questionText: "কম্পিউটারের কোন অংশ তথ্য প্রক্রিয়াকরণ করে?",
+    options: [
+      { letter: "A", text: "প্রসেসর" },
+      { letter: "B", text: "কীবোর্ড" },
+      { letter: "C", text: "মনিটর" },
+      { letter: "D", text: "প্রিন্টার" }
+    ],
+    correctLetter: "A",
+    explanation: "প্রসেসর কম্পিউটারের তথ্য প্রক্রিয়াকরণের কাজ করে।",
+    difficulty: "medium",
+    sourceNote: "তথ্য ও যোগাযোগ প্রযুক্তি, ষষ্ঠ শ্রেণি (NCTB), অধ্যায় ২: তথ্য ও যোগাযোগ প্রযুক্তি সংশ্লিষ্ট যন্ত্রপাতি",
+  },
+  {
+    id: "ACAD-C6-ICT-007",
+    classId: "class-6",
+    subjectId: "ict",
+    chapterId: "acad-class-6-ict-chapter-2",
+    chapterName: "২. তথ্য ও যোগাযোগ প্রযুক্তি সংশ্লিষ্ট যন্ত্রপাতি",
+    unitNumber: 2,
+    topicId: "hardware",
+    questionText: "নিচের কোনটি ইনপুট ও আউটপুট উভয় যন্ত্র?",
+    options: [
+      { letter: "A", text: "কীবোর্ড" },
+      { letter: "B", text: "টাচস্ক্রিন" },
+      { letter: "C", text: "মনিটর" },
+      { letter: "D", text: "মাউস" }
+    ],
+    correctLetter: "B",
+    explanation: "টাচস্ক্রিন ইনপুট ও আউটপুট উভয় কাজ করে; এতে স্পর্শ করে নির্দেশ দেওয়া যায় এবং ফলাফলও দেখা যায়।",
+    difficulty: "medium",
+    sourceNote: "তথ্য ও যোগাযোগ প্রযুক্তি, ষষ্ঠ শ্রেণি (NCTB), অধ্যায় ২: তথ্য ও যোগাযোগ প্রযুক্তি সংশ্লিষ্ট যন্ত্রপাতি",
+  },
+  {
+    id: "ACAD-C6-ICT-008",
+    classId: "class-6",
+    subjectId: "ict",
+    chapterId: "acad-class-6-ict-chapter-2",
+    chapterName: "২. তথ্য ও যোগাযোগ প্রযুক্তি সংশ্লিষ্ট যন্ত্রপাতি",
+    unitNumber: 2,
+    topicId: "hardware",
+    questionText: "কাগজে লেখা ছাপাতে কোন যন্ত্র ব্যবহার করা হয়?",
+    options: [
+      { letter: "A", text: "প্রিন্টার" },
+      { letter: "B", text: "কীবোর্ড" },
+      { letter: "C", text: "স্ক্যানার" },
+      { letter: "D", text: "মাউস" }
+    ],
+    correctLetter: "A",
+    explanation: "প্রিন্টার দিয়ে কাগজে লেখা বা ছবি ছাপা যায়।",
+    difficulty: "medium",
+    sourceNote: "তথ্য ও যোগাযোগ প্রযুক্তি, ষষ্ঠ শ্রেণি (NCTB), অধ্যায় ২: তথ্য ও যোগাযোগ প্রযুক্তি সংশ্লিষ্ট যন্ত্রপাতি",
+  },
+  {
+    id: "ACAD-C6-ICT-011",
+    classId: "class-6",
+    subjectId: "ict",
+    chapterId: "acad-class-6-ict-chapter-3",
+    chapterName: "৩. তথ্য ও যোগাযোগ প্রযুক্তির নিরাপদ ব্যবহার",
+    unitNumber: 3,
+    topicId: "safety",
+    questionText: "দীর্ঘক্ষণ কম্পিউটার ব্যবহার করলে কী হতে পারে?",
+    options: [
+      { letter: "A", text: "চোখের ক্ষতি হতে পারে — মাঝে মাঝে বিশ্রাম নিতে হয়" },
+      { letter: "B", text: "কোনো সমস্যা হয় না" },
+      { letter: "C", text: "স্বাস্থ্য ভালো হয়" },
+      { letter: "D", text: "চোখের ক্ষতি হয় না" }
+    ],
+    correctLetter: "A",
+    explanation: "কম্পিউটার দীর্ঘক্ষণ ব্যবহার করলে চোখের ক্ষতি হতে পারে — মাঝে মাঝে বিশ্রাম নিতে হয়।",
+    difficulty: "medium",
+    sourceNote: "তথ্য ও যোগাযোগ প্রযুক্তি, ষষ্ঠ শ্রেণি (NCTB), অধ্যায় ৩: তথ্য ও যোগাযোগ প্রযুক্তির নিরাপদ ব্যবহার",
+  },
+  {
+    id: "ACAD-C6-ICT-013",
+    classId: "class-6",
+    subjectId: "ict",
+    chapterId: "acad-class-6-ict-chapter-4",
+    chapterName: "৪. ওয়ার্ড প্রসেসিং",
+    unitNumber: 4,
+    topicId: "word-processing",
+    questionText: "ওয়ার্ড প্রসেসিং সফটওয়্যার দিয়ে কী করা যায়?",
+    options: [
+      { letter: "A", text: "খেলা যায়" },
+      { letter: "B", text: "ছবি আঁকা যায়" },
+      { letter: "C", text: "লেখা টাইপ ও সম্পাদনা করা যায়" },
+      { letter: "D", text: "গান শোনা যায়" }
+    ],
+    correctLetter: "C",
+    explanation: "ওয়ার্ড প্রসেসিং সফটওয়্যার দিয়ে লেখা টাইপ ও সম্পাদনা করা যায়।",
+    difficulty: "easy",
+    sourceNote: "তথ্য ও যোগাযোগ প্রযুক্তি, ষষ্ঠ শ্রেণি (NCTB), অধ্যায় ৪: ওয়ার্ড প্রসেসিং",
+  },
+  {
+    id: "ACAD-C6-ICT-014",
+    classId: "class-6",
+    subjectId: "ict",
+    chapterId: "acad-class-6-ict-chapter-4",
+    chapterName: "৪. ওয়ার্ড প্রসেসিং",
+    unitNumber: 4,
+    topicId: "word-processing",
+    questionText: "লেখা সংরক্ষণ করতে কোন কমান্ড ব্যবহার করা হয়?",
+    options: [
+      { letter: "A", text: "Delete" },
+      { letter: "B", text: "Print" },
+      { letter: "C", text: "Save" },
+      { letter: "D", text: "Close" }
+    ],
+    correctLetter: "C",
+    explanation: "লেখা সংরক্ষণ করতে Save কমান্ড ব্যবহার করা হয়।",
+    difficulty: "medium",
+    sourceNote: "তথ্য ও যোগাযোগ প্রযুক্তি, ষষ্ঠ শ্রেণি (NCTB), অধ্যায় ৪: ওয়ার্ড প্রসেসিং",
+  },
+  {
+    id: "ACAD-C6-ICT-015",
+    classId: "class-6",
+    subjectId: "ict",
+    chapterId: "acad-class-6-ict-chapter-4",
+    chapterName: "৪. ওয়ার্ড প্রসেসিং",
+    unitNumber: 4,
+    topicId: "word-processing",
+    questionText: "লেখার ভুল সংশোধন করাকে কী বলে?",
+    options: [
+      { letter: "A", text: "টাইপ করা" },
+      { letter: "B", text: "মুছে ফেলা" },
+      { letter: "C", text: "সম্পাদনা করা" },
+      { letter: "D", text: "ছাপা" }
+    ],
+    correctLetter: "C",
+    explanation: "লেখার ভুল সংশোধন করাকে সম্পাদনা বলে।",
+    difficulty: "medium",
+    sourceNote: "তথ্য ও যোগাযোগ প্রযুক্তি, ষষ্ঠ শ্রেণি (NCTB), অধ্যায় ৪: ওয়ার্ড প্রসেসিং",
+  },
+  {
+    id: "ACAD-C6-ICT-016",
+    classId: "class-6",
+    subjectId: "ict",
+    chapterId: "acad-class-6-ict-chapter-4",
+    chapterName: "৪. ওয়ার্ড প্রসেসিং",
+    unitNumber: 4,
+    topicId: "word-processing",
+    questionText: "লেখার আকার বড়-ছোট করতে কী পরিবর্তন করা হয়?",
+    options: [
+      { letter: "A", text: "পৃষ্ঠা বদলানো" },
+      { letter: "B", text: "ফন্ট সাইজ পরিবর্তন করা" },
+      { letter: "C", text: "লেখা মোছা" },
+      { letter: "D", text: "রং বদলানো" }
+    ],
+    correctLetter: "B",
+    explanation: "লেখার আকার বড়-ছোট করতে ফন্ট সাইজ পরিবর্তন করা হয়।",
+    difficulty: "medium",
+    sourceNote: "তথ্য ও যোগাযোগ প্রযুক্তি, ষষ্ঠ শ্রেণি (NCTB), অধ্যায় ৪: ওয়ার্ড প্রসেসিং",
+  },
+  {
+    id: "ACAD-C6-ICT-017",
+    classId: "class-6",
+    subjectId: "ict",
+    chapterId: "acad-class-6-ict-chapter-5",
+    chapterName: "৫. ইন্টারনেট পরিচিতি",
+    unitNumber: 5,
+    topicId: "internet",
+    questionText: "ইন্টারনেট কী?",
+    options: [
+      { letter: "A", text: "একটি কম্পিউটার" },
+      { letter: "B", text: "বিশ্বব্যাপী কম্পিউটার নেটওয়ার্ক" },
+      { letter: "C", text: "একটি বই" },
+      { letter: "D", text: "একটি টেলিভিশন" }
+    ],
+    correctLetter: "B",
+    explanation: "ইন্টারনেট হলো বিশ্বব্যাপী কম্পিউটার নেটওয়ার্ক।",
+    difficulty: "easy",
+    sourceNote: "তথ্য ও যোগাযোগ প্রযুক্তি, ষষ্ঠ শ্রেণি (NCTB), অধ্যায় ৫: ইন্টারনেট পরিচিতি",
+  },
+  {
+    id: "ACAD-C6-ICT-018",
+    classId: "class-6",
+    subjectId: "ict",
+    chapterId: "acad-class-6-ict-chapter-5",
+    chapterName: "৫. ইন্টারনেট পরিচিতি",
+    unitNumber: 5,
+    topicId: "internet",
+    questionText: "ইন্টারনেটে তথ্য খুঁজতে কী ব্যবহার করা হয়?",
+    options: [
+      { letter: "A", text: "ওয়ার্ড প্রসেসর" },
+      { letter: "B", text: "স্ক্যানার" },
+      { letter: "C", text: "প্রিন্টার" },
+      { letter: "D", text: "সার্চ ইঞ্জিন" }
+    ],
+    correctLetter: "D",
+    explanation: "ইন্টারনেটে তথ্য খুঁজতে সার্চ ইঞ্জিন ব্যবহার করা হয়।",
+    difficulty: "medium",
+    sourceNote: "তথ্য ও যোগাযোগ প্রযুক্তি, ষষ্ঠ শ্রেণি (NCTB), অধ্যায় ৫: ইন্টারনেট পরিচিতি",
+  },
+  {
+    id: "ACAD-C6-ICT-019",
+    classId: "class-6",
+    subjectId: "ict",
+    chapterId: "acad-class-6-ict-chapter-1",
+    chapterName: "১. তথ্য ও যোগাযোগ প্রযুক্তি পরিচিতি",
+    unitNumber: 1,
+    topicId: "internet",
+    questionText: "মোবাইল ফোনে যোগাযোগের একটি উপায় কোনটি?",
+    options: [
+      { letter: "A", text: "ই-মেইল" },
+      { letter: "B", text: "ফ্যাক্স" },
+      { letter: "C", text: "টেলিফোন" },
+      { letter: "D", text: "ডাকঘর" }
+    ],
+    correctLetter: "A",
+    explanation: "ই-মেইল দিয়ে ইন্টারনেটের মাধ্যমে চিঠি পাঠানো যায়।",
+    difficulty: "medium",
+    sourceNote: "তথ্য ও যোগাযোগ প্রযুক্তি, ষষ্ঠ শ্রেণি (NCTB), অধ্যায় ১: তথ্য ও যোগাযোগ প্রযুক্তি পরিচিতি",
+  },
+  {
+    id: "ACAD-C6-ICT-020",
+    classId: "class-6",
+    subjectId: "ict",
+    chapterId: "acad-class-6-ict-chapter-5",
+    chapterName: "৫. ইন্টারনেট পরিচিতি",
+    unitNumber: 5,
+    topicId: "internet",
+    questionText: "ওয়েবসাইট দেখতে কী ব্যবহার করা হয়?",
+    options: [
+      { letter: "A", text: "ব্রাউজার" },
+      { letter: "B", text: "ক্যালকুলেটর" },
+      { letter: "C", text: "প্রিন্টার" },
+      { letter: "D", text: "ওয়ার্ড প্রসেসর" }
+    ],
+    correctLetter: "A",
+    explanation: "ওয়েবসাইট দেখতে ব্রাউজার ব্যবহার করা হয়।",
+    difficulty: "medium",
+    sourceNote: "তথ্য ও যোগাযোগ প্রযুক্তি, ষষ্ঠ শ্রেণি (NCTB), অধ্যায় ৫: ইন্টারনেট পরিচিতি",
+  },
+  {
+    id: "ACAD-C6-ICT-021",
+    classId: "class-6",
+    subjectId: "ict",
+    chapterId: "acad-class-6-ict-chapter-5",
+    chapterName: "৫. ইন্টারনেট পরিচিতি",
+    unitNumber: 5,
+    topicId: "internet",
+    questionText: "ইন্টারনেটের একটি সুবিধা কী?",
+    options: [
+      { letter: "A", text: "কাউকে চিঠি লেখা যায় না" },
+      { letter: "B", text: "শুধু কাছের মানুষের সঙ্গে যোগাযোগ করা যায়" },
+      { letter: "C", text: "যোগাযোগ করা যায় না" },
+      { letter: "D", text: "দূরের মানুষের সঙ্গে যোগাযোগ করা যায়" }
+    ],
+    correctLetter: "D",
+    explanation: "ইন্টারনেটের মাধ্যমে দূরের মানুষের সঙ্গে যোগাযোগ করা যায়।",
+    difficulty: "easy",
+    sourceNote: "তথ্য ও যোগাযোগ প্রযুক্তি, ষষ্ঠ শ্রেণি (NCTB), অধ্যায় ৫: ইন্টারনেট পরিচিতি",
+  },
+  {
+    id: "ACAD-C6-ICT-022",
+    classId: "class-6",
+    subjectId: "ict",
+    chapterId: "acad-class-6-ict-chapter-1",
+    chapterName: "১. তথ্য ও যোগাযোগ প্রযুক্তি পরিচিতি",
+    unitNumber: 1,
+    topicId: "introduction",
+    questionText: "নিচের কোনটি যোগাযোগ প্রযুক্তির যন্ত্র?",
+    options: [
+      { letter: "A", text: "ঘড়ি" },
+      { letter: "B", text: "রেডিও" },
+      { letter: "C", text: "টেলিভিশন" },
+      { letter: "D", text: "মোবাইল ফোন" }
+    ],
+    correctLetter: "D",
+    explanation: "মোবাইল ফোন একটি যোগাযোগ প্রযুক্তির যন্ত্র।",
+    difficulty: "medium",
+    sourceNote: "তথ্য ও যোগাযোগ প্রযুক্তি, ষষ্ঠ শ্রেণি (NCTB), অধ্যায় ১: তথ্য ও যোগাযোগ প্রযুক্তি পরিচিতি",
+  },
+  {
+    id: "ACAD-C6-ICT-023",
+    classId: "class-6",
+    subjectId: "ict",
+    chapterId: "acad-class-6-ict-chapter-2",
+    chapterName: "২. তথ্য ও যোগাযোগ প্রযুক্তি সংশ্লিষ্ট যন্ত্রপাতি",
+    unitNumber: 2,
+    topicId: "hardware",
+    questionText: "হার্ডওয়্যার ও সফটওয়্যারের পার্থক্য কী?",
+    options: [
+      { letter: "A", text: "দুটোই একই" },
+      { letter: "B", text: "হার্ডওয়্যার যন্ত্রাংশ, সফটওয়্যার প্রোগ্রাম" },
+      { letter: "C", text: "হার্ডওয়্যার প্রোগ্রাম, সফটওয়্যার যন্ত্রাংশ" },
+      { letter: "D", text: "দুটোই যন্ত্রাংশ" }
+    ],
+    correctLetter: "B",
+    explanation: "হার্ডওয়্যার হলো কম্পিউটারের যন্ত্রাংশ; সফটওয়্যার হলো প্রোগ্রাম।",
+    difficulty: "medium",
+    sourceNote: "তথ্য ও যোগাযোগ প্রযুক্তি, ষষ্ঠ শ্রেণি (NCTB), অধ্যায় ২: তথ্য ও যোগাযোগ প্রযুক্তি সংশ্লিষ্ট যন্ত্রপাতি",
+  },
+  {
+    id: "ACAD-C6-ICT-025",
+    classId: "class-6",
+    subjectId: "ict",
+    chapterId: "acad-class-6-ict-chapter-4",
+    chapterName: "৪. ওয়ার্ড প্রসেসিং",
+    unitNumber: 4,
+    topicId: "word-processing",
+    questionText: "নতুন ডকুমেন্ট তৈরি করতে কোন কমান্ড ব্যবহার করা হয়?",
+    options: [
+      { letter: "A", text: "Print" },
+      { letter: "B", text: "Delete" },
+      { letter: "C", text: "New" },
+      { letter: "D", text: "Save" }
+    ],
+    correctLetter: "C",
+    explanation: "নতুন ডকুমেন্ট তৈরি করতে New কমান্ড ব্যবহার করা হয়।",
+    difficulty: "medium",
+    sourceNote: "তথ্য ও যোগাযোগ প্রযুক্তি, ষষ্ঠ শ্রেণি (NCTB), অধ্যায় ৪: ওয়ার্ড প্রসেসিং",
+  },
+];

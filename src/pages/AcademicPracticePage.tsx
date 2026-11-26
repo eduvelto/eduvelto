@@ -2,7 +2,7 @@
 //
 // Chapter-wise practice for the Education Hub, fed by the SAME verified
 // bank as the Question Maker (QPG): the static pool in
-// src/lib/publicAcademic.ts (Classes 3–5, six subjects, 477 verified
+// src/lib/publicAcademic.ts (Classes 3–6, twelve subjects, 810 verified
 // questions). A question verified once appears in both places
 // — teachers generate papers from it in /question-maker, students
 // practise it here, chapter by chapter.
@@ -493,5 +493,5 @@ export default function AcademicPracticePage() {
 }
 
 // Re-exported for tests / future callers: total verified Academic
-// questions in the pool (477 today — grows as batches are verified).
+// questions in the pool (810 today — grows as batches are verified).
 export const ACADEMIC_PRACTICE_TOTAL = PUBLIC_ACADEMIC_QUESTIONS.length;

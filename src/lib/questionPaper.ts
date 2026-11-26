@@ -25,9 +25,10 @@
 //   (7.1% of one full mock per main exam; 455+ missing). Full-mock
 //   generation is therefore GATED — the UI shows availability per
 //   exam/subject and refuses to invent questions to fill gaps.
-//   Academic Classes 3–5 add 477 verified questions (26 Nov 2026) —
-//   six subjects (Bangla, English, Math, Science, BGS, Islam). They
-//   count ONLY under their NCTB units, never under any job exam (see
+//   Academic Classes 3–6 add 810 verified questions (26 Nov 2026) —
+//   twelve subjects (Bangla, Bangla Grammar, English, Math, Math-depth,
+//   Science, Science-depth, BGS, Islam, ICT, Agriculture, Home Science).
+//   They count ONLY under their NCTB units, never under any job exam (see
 //   verifiedAvailableFor).
 // - The Class 9 corrected MCQ packs (nctb-mcq-rebuild-evidence) are
 //   book-grounded but NEEDS-REVIEW — they are NOT in this pool until
@@ -379,6 +380,16 @@ const GENERAL_SUBJECTS_BY_BAND: Record<string, QpgSubject[]> = {
     { id: 'bgs', nameBn: 'বাংলাদেশ ও বিশ্বপরিচয়', nameEn: 'Bangladesh & Global Studies' },
     { id: 'ict', nameBn: 'তথ্য ও যোগাযোগ প্রযুক্তি', nameEn: 'ICT' },
     { id: 'religion', nameBn: 'ধর্ম ও নৈতিক শিক্ষা', nameEn: 'Religion & Moral Education' },
+    // Class 6 verified subjects (26 Nov 2026) — the pool holds
+    // verified questions for these in Class 6 only; listing a
+    // subject never implies coverage for Classes 7–8 (chaptersFor()
+    // is the source of truth, and those classes honestly show 0).
+    { id: 'islam', nameBn: 'ইসলাম শিক্ষা', nameEn: 'Islam' },
+    { id: 'bangla-grammar', nameBn: 'বাংলা ব্যাকরণ', nameEn: 'Bangla Grammar' },
+    { id: 'math-depth', nameBn: 'গণিত (গভীর অনুশীলন)', nameEn: 'Mathematics (Depth)' },
+    { id: 'science-depth', nameBn: 'বিজ্ঞান (গভীর অনুশীলন)', nameEn: 'Science (Depth)' },
+    { id: 'agriculture', nameBn: 'কৃষিশিক্ষা', nameEn: 'Agriculture' },
+    { id: 'home-science', nameBn: 'গার্হস্থ্য বিজ্ঞান', nameEn: 'Home Science' },
   ],
   '9-10': [
     { id: 'bangla', nameBn: 'বাংলা', nameEn: 'Bangla' },
@@ -615,8 +626,8 @@ function toQpgAcademicQuestion(q: PublicAcademicQuestion): QpgQuestion {
   };
 }
 
-/** The whole verified pool: 35 BCS English MCQs + 477 Academic
- *  (Classes 3–5, six subjects) MCQs = 512. One bank — the Question
+/** The whole verified pool: 35 BCS English MCQs + 810 Academic
+ *  (Classes 3–6, twelve subjects) MCQs = 845. One bank — the Question
  *  Maker and the Education Hub chapter practice draw from this same
  *  pool, so a question verified once appears in both places. BCS
  *  exam accounting counts ONLY the BCS chapter (see
@@ -1414,7 +1425,7 @@ export interface QpgModelTest {
  *  / NU English (reusing it there would mislabel its verification). */
 function verifiedAvailableFor(examSlug: string, subjectNameEn: string): number {
   if (examSlug === 'bcs' && subjectNameEn === 'English Language & Literature') {
-    // BCS only: Academic (Classes 3–5) questions are verified for their
+    // BCS only: Academic (Classes 3–6) questions are verified for their
     // NCTB units, NOT for BCS — they must never inflate the BCS count.
     return QPG_VERIFIED_POOL.filter((q) => q.chapterId === QPG_VERIFIED_CHAPTER_ID).length;
   }

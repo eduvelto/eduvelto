@@ -28,11 +28,11 @@ import {
 } from '../questionPaper';
 
 describe('verified pool (MVP content)', () => {
-  it('holds the 35 owner-verified BCS English questions + 477 verified Academic (Classes 3–5, six subjects)', () => {
-    expect(QPG_VERIFIED_POOL).toHaveLength(512);
-    expect(new Set(QPG_VERIFIED_POOL.map((q) => q.id)).size).toBe(512);
+  it('holds the 35 owner-verified BCS English questions + 810 verified Academic (Classes 3–6, twelve subjects)', () => {
+    expect(QPG_VERIFIED_POOL).toHaveLength(845);
+    expect(new Set(QPG_VERIFIED_POOL.map((q) => q.id)).size).toBe(845);
     expect(QPG_VERIFIED_POOL.filter((q) => q.chapterId === QPG_VERIFIED_CHAPTER_ID)).toHaveLength(35);
-    expect(QPG_VERIFIED_POOL.filter((q) => q.chapterId.startsWith('acad-'))).toHaveLength(477);
+    expect(QPG_VERIFIED_POOL.filter((q) => q.chapterId.startsWith('acad-'))).toHaveLength(810);
   });
 
   it('every question is verified, MCQ, and linked to its chapter (BCS or an NCTB unit)', () => {
@@ -52,9 +52,9 @@ describe('verified pool (MVP content)', () => {
     expect(chapter.topics.reduce((a, t) => a + t.verifiedCount, 0)).toBe(35);
   });
 
-  it('Academic chapters exist for Classes 3–5 in all six subjects; other class/subjects stay empty', () => {
+  it('Academic chapters exist for Classes 3–6 in all twelve subjects; other class/subjects stay empty', () => {
     expect(qpgChaptersFor('general', 'class-9', 'english')).toEqual([]);
-    expect(qpgChaptersFor('general', 'class-6', 'math')).toEqual([]);
+    expect(qpgChaptersFor('general', 'class-7', 'math')).toEqual([]);
     expect(qpgChaptersFor('madrasah', 'dakhil', 'arabic')).toEqual([]);
     expect(qpgChaptersFor('general', 'honours', 'english')).toHaveLength(1);
     // Academic (26 Nov 2026): one chapter per NCTB unit / lesson with verified questions.
@@ -73,6 +73,17 @@ describe('verified pool (MVP content)', () => {
     const c5mat = qpgChaptersFor('general', 'class-5', 'math');
     expect(c5mat).toHaveLength(10);
     expect(c5mat.reduce((a, c) => a + c.verifiedCount, 0)).toBe(30);
+    // Class 6 (26 Nov 2026): eight Math chapters, and the new depth
+    // subjects resolve too.
+    const c6mat = qpgChaptersFor('general', 'class-6', 'math');
+    expect(c6mat).toHaveLength(8);
+    expect(c6mat.reduce((a, c) => a + c.verifiedCount, 0)).toBe(28);
+    const c6depth = qpgChaptersFor('general', 'class-6', 'math-depth');
+    expect(c6depth).toHaveLength(8);
+    expect(c6depth.reduce((a, c) => a + c.verifiedCount, 0)).toBe(39);
+    const c6ict = qpgChaptersFor('general', 'class-6', 'ict');
+    expect(c6ict).toHaveLength(5);
+    expect(c6ict.reduce((a, c) => a + c.verifiedCount, 0)).toBe(21);
     // Chapters are filtered by subject — a Math pick never shows English units.
     for (const c of c5mat) expect(c.subjectId).toBe('math');
     for (const c of c3eng) expect(c.subjectId).toBe('english');
