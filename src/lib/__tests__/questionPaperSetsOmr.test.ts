@@ -109,7 +109,10 @@ describe('set shuffler end-to-end (Day 4)', () => {
   it('the seed is editable in the generator so a noted seed rebuilds the same set', () => {
     expect(GENERATOR_SRC).toContain('const [seed, setSeed] = useState');
     expect(GENERATOR_SRC).toContain('সিড (Seed');
-    expect(GENERATOR_SRC).toContain('setSeed(');
+    // The seed field is a clearable number input wired to setSeed (26 Nov
+    // 2026 fix: the old snap-back onChange `setSeed(Math.max(0, ...))`
+    // could not be cleared to empty and re-typed).
+    expect(GENERATOR_SRC).toContain('onCommit={setSeed}');
   });
 });
 

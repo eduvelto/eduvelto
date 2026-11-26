@@ -101,10 +101,49 @@ import {
   waitGenProgressPhase,
 } from '../lib/genProgressPacing';
 import { renderOmrSheetCanvases, renderPaperCanvases } from '../lib/questionPaperPdf';
+import { commitClearableNumber } from '../lib/clearableNumber';
 import '../components/question-paper-print.css';
 
 function fieldStyle(): React.CSSProperties {
   return { width: '100%', padding: 8, boxSizing: 'border-box', marginTop: 4 };
+}
+
+/**
+ * Number input that can be cleared to empty and re-typed freely
+ * (26 Nov 2026 fix for the পূর্ণমান / সময় fields: the old
+ * `Math.max(min, Number(e.target.value) || min)` onChange snapped an
+ * emptied field straight back to the minimum, so the last character
+ * could never be deleted). The committed value always stays a valid
+ * number, clamped to [min, max]. While the user edits, the raw text
+ * lives in a draft, so deleting the last character does not snap the
+ * field back. On blur an empty/invalid draft is discarded and the
+ * field shows the committed value again. Validation is applied when
+ * committing and on blur — never by blocking deletion.
+ */
+function ClearableNumberInput(props: {
+  value: number;
+  min: number;
+  max?: number;
+  onCommit: (n: number) => void;
+  style?: React.CSSProperties;
+}) {
+  const [draft, setDraft] = useState<string | null>(null);
+  return (
+    <input
+      type="number"
+      min={props.min}
+      max={props.max}
+      value={draft ?? String(props.value)}
+      onChange={(e) => {
+        const raw = e.target.value;
+        setDraft(raw);
+        const next = commitClearableNumber(raw, props.min, props.max);
+        if (next !== undefined) props.onCommit(next);
+      }}
+      onBlur={() => setDraft(null)}
+      style={props.style}
+    />
+  );
 }
 
 export default function QuestionPaperGeneratorPage() {
@@ -925,12 +964,11 @@ export default function QuestionPaperGeneratorPage() {
               <label style={{ fontSize: 13 }}>
                 প্রশ্ন সংখ্যা (সর্বোচ্চ {jobAvailable.length}টি যাচাইকৃত; {jobExam.nameBn} প্যাটার্নে এই বিষয়ে{' '}
                 {jobSubject.marks}টি):
-                <input
-                  type="number"
+                <ClearableNumberInput
+                  value={jobCount}
                   min={1}
                   max={jobAvailable.length}
-                  value={jobCount}
-                  onChange={(e) => setJobCount(Math.max(1, Math.min(jobAvailable.length, Number(e.target.value) || 1)))}
+                  onCommit={setJobCount}
                   style={{ ...fieldStyle(), maxWidth: 120 }}
                 />
               </label>
@@ -1620,21 +1658,19 @@ export default function QuestionPaperGeneratorPage() {
             </label>
             <label style={{ fontSize: 13 }}>
               পূর্ণমান
-              <input
-                type="number"
-                min={1}
+              <ClearableNumberInput
                 value={setup.totalMarks}
-                onChange={(e) => setOverride('totalMarks', Math.max(1, Number(e.target.value) || 1))}
+                min={1}
+                onCommit={(n) => setOverride('totalMarks', n)}
                 style={fieldStyle()}
               />
             </label>
             <label style={{ fontSize: 13 }}>
               সময় (মিনিট)
-              <input
-                type="number"
-                min={5}
+              <ClearableNumberInput
                 value={setup.timeMinutes}
-                onChange={(e) => setOverride('timeMinutes', Math.max(5, Number(e.target.value) || 5))}
+                min={5}
+                onCommit={(n) => setOverride('timeMinutes', n)}
                 style={fieldStyle()}
               />
             </label>
@@ -1674,11 +1710,10 @@ export default function QuestionPaperGeneratorPage() {
             </label>
             <label style={{ fontSize: 13 }}>
               সিড (Seed — একই seed-এ একই সেট আবার তৈরি হয়)
-              <input
-                type="number"
-                min={0}
+              <ClearableNumberInput
                 value={seed}
-                onChange={(e) => setSeed(Math.max(0, Math.floor(Number(e.target.value) || 0)))}
+                min={0}
+                onCommit={setSeed}
                 style={fieldStyle()}
               />
             </label>
@@ -1866,26 +1901,20 @@ export default function QuestionPaperGeneratorPage() {
               <label style={{ fontSize: 13 }}>
                 এই বিভাগে প্রশ্ন সংখ্যা (সর্বোচ্চ {paper.questions.length + paperExtras.length}টি
                 যাচাইকৃত)
-                <input
-                  type="number"
+                <ClearableNumberInput
+                  value={editSectionCount}
                   min={1}
                   max={paper.questions.length + paperExtras.length}
-                  value={editSectionCount}
-                  onChange={(e) =>
-                    setEditSectionCount(
-                      Math.max(1, Math.min(paper.questions.length + paperExtras.length, Number(e.target.value) || 1)),
-                    )
-                  }
+                  onCommit={setEditSectionCount}
                   style={fieldStyle()}
                 />
               </label>
               <label style={{ fontSize: 13 }}>
                 প্রতি প্রশ্নের নম্বর
-                <input
-                  type="number"
-                  min={1}
+                <ClearableNumberInput
                   value={editMarksPerQ}
-                  onChange={(e) => setEditMarksPerQ(Math.max(1, Number(e.target.value) || 1))}
+                  min={1}
+                  onCommit={setEditMarksPerQ}
                   style={fieldStyle()}
                 />
               </label>
@@ -1903,11 +1932,10 @@ export default function QuestionPaperGeneratorPage() {
               </label>
               <label style={{ fontSize: 13 }}>
                 সময় (মিনিট)
-                <input
-                  type="number"
-                  min={5}
+                <ClearableNumberInput
                   value={editTimeMinutes}
-                  onChange={(e) => setEditTimeMinutes(Math.max(5, Number(e.target.value) || 5))}
+                  min={5}
+                  onCommit={setEditTimeMinutes}
                   style={fieldStyle()}
                 />
               </label>
