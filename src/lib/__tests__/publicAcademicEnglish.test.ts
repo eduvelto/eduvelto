@@ -3,24 +3,24 @@
 //
 // The English pool is the SINGLE verified source for English practice
 // in both the Question Maker and the Education Hub chapter practice.
-// These tests pin that it holds ONLY the 83 reviewed questions
-// (77 VERIFIED + 6 NEEDS-FIX with fixes applied: Class 3 24V/4F,
-// Class 4 26V/1F, Class 5 27V/1F), in the right chapters, with
+// These tests pin that it holds ONLY the 111 reviewed questions
+// (104 VERIFIED + 7 NEEDS-FIX with fixes applied: Class 3 24V/4F,
+// Class 4 26V/1F, Class 5 27V/1F, Class 6 27V/1F), in the right chapters, with
 // exactly one correct answer each. The combined-pool helpers live in
 // publicAcademic.test.ts.
 import { describe, it, expect } from 'vitest';
 import { PUBLIC_ACADEMIC_ENGLISH_QUESTIONS } from '../publicAcademicEnglish';
 
-describe('Academic verified pool — English (Classes 3–5)', () => {
-  it('holds exactly the 83 reviewed questions (77 VERIFIED + 6 fixed)', () => {
-    expect(PUBLIC_ACADEMIC_ENGLISH_QUESTIONS).toHaveLength(83);
-    expect(new Set(PUBLIC_ACADEMIC_ENGLISH_QUESTIONS.map((q) => q.id)).size).toBe(83);
+describe('Academic verified pool — English (Classes 3–6)', () => {
+  it('holds exactly the 111 reviewed questions (104 VERIFIED + 7 fixed)', () => {
+    expect(PUBLIC_ACADEMIC_ENGLISH_QUESTIONS).toHaveLength(111);
+    expect(new Set(PUBLIC_ACADEMIC_ENGLISH_QUESTIONS.map((q) => q.id)).size).toBe(111);
   });
 
   it('every question is MCQ with 4 distinct options and one valid correct letter', () => {
     for (const q of PUBLIC_ACADEMIC_ENGLISH_QUESTIONS) {
       expect(q.subjectId).toBe('english');
-      expect(['class-3', 'class-4', 'class-5']).toContain(q.classId);
+      expect(['class-3', 'class-4', 'class-5', 'class-6']).toContain(q.classId);
       expect(q.options).toHaveLength(4);
       expect(new Set(q.options.map((o) => o.text)).size).toBe(4);
       expect(q.options.map((o) => o.letter)).toEqual(['A', 'B', 'C', 'D']);
@@ -33,16 +33,18 @@ describe('Academic verified pool — English (Classes 3–5)', () => {
     }
   });
 
-  it('covers 45 NCTB units: Class 3 has 7 units x 4, Class 4 has 18 units, Class 5 has 20 units', () => {
+  it('covers 73 NCTB units: Class 3 has 7 units x 4, Class 4 has 18 units, Class 5 has 20 units, Class 6 has 28 lessons x 1', () => {
     const byClass = (classId: string) =>
       PUBLIC_ACADEMIC_ENGLISH_QUESTIONS.filter((q) => q.classId === classId);
     expect(byClass('class-3')).toHaveLength(28);
     expect(byClass('class-4')).toHaveLength(27);
     expect(byClass('class-5')).toHaveLength(28);
+    expect(byClass('class-6')).toHaveLength(28);
     const chapters = new Set(PUBLIC_ACADEMIC_ENGLISH_QUESTIONS.map((q) => q.chapterId));
-    expect(chapters.size).toBe(45);
+    expect(chapters.size).toBe(73);
     for (const id of chapters) {
-      expect(id).toMatch(/^acad-class-[345]-eng-unit-\d+$/);
+      // Classes 3–5 use "Unit N", Class 6 uses "Lesson N".
+      expect(id).toMatch(/^acad-class-[345]-eng-unit-\d+$|^acad-class-6-eng-lesson-\d+$/);
     }
     const c3Chapters = new Set(byClass('class-3').map((q) => q.chapterId));
     expect(c3Chapters.size).toBe(7);
@@ -51,9 +53,14 @@ describe('Academic verified pool — English (Classes 3–5)', () => {
     }
     expect(new Set(byClass('class-4').map((q) => q.chapterId)).size).toBe(18);
     expect(new Set(byClass('class-5').map((q) => q.chapterId)).size).toBe(20);
+    const c6Chapters = new Set(byClass('class-6').map((q) => q.chapterId));
+    expect(c6Chapters.size).toBe(28);
+    for (const id of c6Chapters) {
+      expect(byClass('class-6').filter((q) => q.chapterId === id)).toHaveLength(1);
+    }
   });
 
-  it('the 6 NEEDS-FIX items carry their fixed content', () => {
+  it('the 7 NEEDS-FIX items carry their fixed content', () => {
     const byId = new Map(PUBLIC_ACADEMIC_ENGLISH_QUESTIONS.map((q) => [q.id, q]));
     const q010 = byId.get('ACAD-C3-ENG-010')!;
     expect(q010.options.map((o) => o.text)).toEqual([
@@ -80,6 +87,15 @@ describe('Academic verified pool — English (Classes 3–5)', () => {
     const q009 = byId.get('ACAD-C4-ENG-009')!;
     expect(q009.explanation).toContain('7:00');
     expect(q009.explanation).toContain('short (hour) hand');
+    // Class 6's one NEEDS-FIX: 'Andre' is a POEM (Gwendolyn Brooks),
+    // not a story — the option and explanation now say poem.
+    const q024 = byId.get('ACAD-C6-ENG-024')!;
+    expect(q024.options.map((o) => o.text)).toContain(
+      'A poem about a boy who dreams of choosing his parents',
+    );
+    expect(q024.options.map((o) => o.text)).not.toContain('A story about a boy');
+    expect(q024.explanation).toContain('poem by Gwendolyn Brooks');
+    expect(q024.correctLetter).toBe('D');
   });
 
   it('correct answers are balanced after the shuffle (no letter above 7 per class)', () => {
@@ -87,8 +103,9 @@ describe('Academic verified pool — English (Classes 3–5)', () => {
       'class-3': { A: 7, B: 7, C: 7, D: 7 },
       'class-4': { A: 7, B: 7, C: 7, D: 6 },
       'class-5': { A: 7, B: 7, C: 7, D: 7 },
+      'class-6': { A: 7, B: 7, C: 7, D: 7 },
     };
-    for (const classId of ['class-3', 'class-4', 'class-5'] as const) {
+    for (const classId of ['class-3', 'class-4', 'class-5', 'class-6'] as const) {
       const counts: Record<string, number> = { A: 0, B: 0, C: 0, D: 0 };
       for (const q of PUBLIC_ACADEMIC_ENGLISH_QUESTIONS) {
         if (q.classId === classId) counts[q.correctLetter] += 1;

@@ -94,7 +94,7 @@
 // useSeo into src/lib/seo.ts. Guide detail pages ARE covered:
 // /learn/<slug> x41 + /guides/<slug> x15.)
 
-import { readFileSync, writeFileSync, mkdirSync, existsSync, copyFileSync } from 'node:fs';
+import { readFileSync, readdirSync, writeFileSync, mkdirSync, existsSync, copyFileSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 
@@ -1109,21 +1109,25 @@ async function main() {
   }
 
   // --- Academic practice paths (Education Hub, 26 Nov 2026) ---
-  // Derived from the verified Academic pool (the six per-subject pool
+  // Derived from the verified Academic pool (the per-subject pool
   // files in src/lib/publicAcademic*.ts) — hub + subject + chapter
   // paths. They join the static-pages loop below, so they are
-  // prerendered + sitemapped like every other public page. A future
-  // verified batch adds its paths automatically.
+  // prerendered + sitemapped like every other public page. The file
+  // list is SCANNED, never hardcoded: the six Class 6 subject files
+  // (BanglaGrammar, MathDepth, ScienceDepth, Ict, Agriculture,
+  // HomeScience) were silently missed by the old hardcoded 6-file
+  // list, so their 68 paths were neither prerendered nor sitemapped.
+  // A future verified batch adds its paths automatically.
+  // publicAcademic.ts itself is skipped — it is the combined
+  // re-export, and its triples are already in the per-subject files.
   let academicPracticePaths = [];
   try {
-    const academicFiles = [
-      'publicAcademicEnglish.ts',
-      'publicAcademicBangla.ts',
-      'publicAcademicMath.ts',
-      'publicAcademicScience.ts',
-      'publicAcademicBgs.ts',
-      'publicAcademicIslam.ts',
-    ];
+    const academicFiles = readdirSync(join(root, 'src/lib'))
+      .filter(
+        (f) =>
+          f.startsWith('publicAcademic') && f.endsWith('.ts') && f !== 'publicAcademic.ts',
+      )
+      .sort();
     const academicSource = academicFiles
       .map((f) => readFileSync(join(root, 'src/lib', f), 'utf8'))
       .join('\n');

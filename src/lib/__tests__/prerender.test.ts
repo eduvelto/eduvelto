@@ -7,7 +7,7 @@
 // pending the quota reset and is NOT exercised here.
 
 import { describe, expect, it } from 'vitest';
-import { readFileSync } from 'node:fs';
+import { readFileSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
 import {
   PRERENDER_STATIC_PATHS,
@@ -23,6 +23,7 @@ import {
   buildSitemapXml,
   fetchBooksFromRest,
   fetchChaptersFromRest,
+  getAcademicPracticePaths,
   getGuidePaths,
   getGuideSlugs,
   insertInitialDataScript,
@@ -523,5 +524,45 @@ describe('__INITIAL_DATA__ script tag (CSP-safe carrier)', () => {
     expect(insertInitialDataScript('<html>no root here</html>', '<script id="x"></script>')).toBe(
       '<html>no root here</html>',
     );
+  });
+});
+
+describe('getAcademicPracticePaths — Education Hub (26 Nov 2026)', () => {
+  it('derives hub + subject + chapter paths from EVERY per-subject pool file (422: 1 hub + 30 subjects + 391 chapters)', () => {
+    // Same directory scan the prerender script uses. A hardcoded
+    // 6-file list silently dropped the six Class 6 subject files
+    // (BanglaGrammar, MathDepth, ScienceDepth, Ict, Agriculture,
+    // HomeScience) — 68 paths were neither prerendered nor sitemapped.
+    // This pins the count so a future missed file fails loudly.
+    const files = readdirSync(join(process.cwd(), 'src', 'lib'))
+      .filter(
+        (f) =>
+          f.startsWith('publicAcademic') && f.endsWith('.ts') && f !== 'publicAcademic.ts',
+      )
+      .sort();
+    expect(files).toHaveLength(12);
+    const source = files
+      .map((f) => readFileSync(join(process.cwd(), 'src', 'lib', f), 'utf8'))
+      .join('\n');
+    const paths = getAcademicPracticePaths(source);
+    expect(paths).toHaveLength(422);
+    expect(paths[0]).toBe('/learn/practice');
+    for (const s of [
+      'bangla-grammar',
+      'math-depth',
+      'science-depth',
+      'ict',
+      'agriculture',
+      'home-science',
+    ]) {
+      expect(paths).toContain(`/learn/practice/class-6/${s}`);
+    }
+    expect(paths).toContain(
+      '/learn/practice/class-6/math-depth/acad-class-6-mat-depth-chapter-1',
+    );
+    expect(paths).toContain('/learn/practice/class-6/ict/acad-class-6-ict-chapter-1');
+    expect(paths).toContain('/learn/practice/class-6/english/acad-class-6-eng-lesson-27');
+    // Unverified classes never get a path.
+    expect(paths.filter((p) => p.startsWith('/learn/practice/class-7'))).toEqual([]);
   });
 });
