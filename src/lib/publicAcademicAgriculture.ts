@@ -1,12 +1,14 @@
-// Eduvelto — Academic Agriculture practice questions (Classes 6–7),
+// Eduvelto — Academic Agriculture practice questions (Classes 6–8),
 // verified against the NCTB books (review 26 Nov 2026).
 //
-// Static data ONLY — zero Firestore reads. The 48 questions are the
-// Academic Classes 6–7 Agriculture drafts AFTER review (see
+// Static data ONLY — zero Firestore reads. The 62 questions are the
+// Academic Classes 6–8 Agriculture drafts AFTER review (see
 // review-academic-c6-agriculture-verdicts.json,
-// review-academic-c7-agriculture-verdicts.json and
+// review-academic-c7-agriculture-verdicts.json,
+// review-academic-c8-agriculture-verdicts.json and
 // review-academic-c6-fixes-applied.md,
-// review-academic-c7-fixes-applied.md in
+// review-academic-c7-fixes-applied.md,
+// review-academic-c8-fixes-applied.md in
 // ~/workspace/eduorbit/sprint-1week-2026-11-25/).
 //
 // HONESTY: these are ORIGINAL practice questions written for the
@@ -30,7 +32,7 @@
 
 import { type PublicAcademicQuestion } from './publicAcademic';
 
-/** All verified Academic Agriculture questions, in draft order (Class 6, then 7). */
+/** All verified Academic Agriculture questions, in draft order (Class 6, then 7, then 8). */
 export const PUBLIC_ACADEMIC_AGRICULTURE_QUESTIONS: PublicAcademicQuestion[] = [
   {
     id: "ACAD-C6-AGR-001",
@@ -991,5 +993,285 @@ export const PUBLIC_ACADEMIC_AGRICULTURE_QUESTIONS: PublicAcademicQuestion[] = [
     explanation: "বন ধ্বংস করলে বন্যপ্রাণী বিলুপ্ত হতে পারে।",
     difficulty: "medium",
     sourceNote: "কৃষিশিক্ষা, সপ্তম শ্রেণি (NCTB), অধ্যায় ৬: বনায়ন",
+  },
+  {
+    id: "ACAD-C8-AGR-001",
+    classId: "class-8",
+    subjectId: "agriculture",
+    chapterId: "acad-class-8-agr-chapter-1",
+    chapterName: "১. বাংলাদেশের কৃষি ও আন্তর্জাতিক প্রেক্ষাপট",
+    unitNumber: 1,
+    topicId: "international",
+    questionText: "পাট ও পাটজাত দ্রব্য রপ্তানি করে বাংলাদেশ কী অর্জন করে?",
+    options: [
+      { letter: "A", text: "উল্লেখযোগ্য পরিমাণ বৈদেশিক মুদ্রা" },
+      { letter: "B", text: "শুধু খাদ্যশস্য" },
+      { letter: "C", text: "বিদেশি ঋণ" },
+      { letter: "D", text: "কোনো বৈদেশিক মুদ্রা নয়" }
+    ],
+    correctLetter: "A",
+    explanation: "বই পৃ. ১: 'পাট ও পাটজাত দ্রব্য রপ্তানি করে বাংলাদেশ উল্লেখযোগ্য পরিমাণ বৈদেশিক মুদ্রা অর্জন করছে।'",
+    difficulty: "medium",
+    sourceNote: "কৃষিশিক্ষা, অষ্টম শ্রেণি (NCTB), অধ্যায় ১: বাংলাদেশের কৃষি ও আন্তর্জাতিক প্রেক্ষাপট",
+  },
+  {
+    id: "ACAD-C8-AGR-002",
+    classId: "class-8",
+    subjectId: "agriculture",
+    chapterId: "acad-class-8-agr-chapter-1",
+    chapterName: "১. বাংলাদেশের কৃষি ও আন্তর্জাতিক প্রেক্ষাপট",
+    unitNumber: 1,
+    topicId: "international",
+    questionText: "বাংলাদেশ থেকে কোন কৃষিপণ্য রপ্তানি করা হয়?",
+    options: [
+      { letter: "A", text: "ধান ও গম" },
+      { letter: "B", text: "আলু ও ভুট্টা" },
+      { letter: "C", text: "পাট ও চা" },
+      { letter: "D", text: "তুলা ও রেশম" }
+    ],
+    correctLetter: "C",
+    explanation: "বাংলাদেশ থেকে পাট ও চা রপ্তানি করা হয়।",
+    difficulty: "medium",
+    sourceNote: "কৃষিশিক্ষা, অষ্টম শ্রেণি (NCTB), অধ্যায় ১: বাংলাদেশের কৃষি ও আন্তর্জাতিক প্রেক্ষাপট",
+  },
+  {
+    id: "ACAD-C8-AGR-003",
+    classId: "class-8",
+    subjectId: "agriculture",
+    chapterId: "acad-class-8-agr-chapter-3-lesson-6",
+    chapterName: "অধ্যায় ৩: কৃষি উপকরণ, পাঠ ৬: জমিতে সাশ্রয়ীরূপে সেচের ব্যবহার",
+    unitNumber: 3,
+    topicId: "technology",
+    questionText: "পানি বাঁচিয়ে সেচ দেওয়ার পদ্ধতি কোনটি?",
+    options: [
+      { letter: "A", text: "বন্যা সেচ" },
+      { letter: "B", text: "ড্রিপ সেচ" },
+      { letter: "C", text: "নলকূপ সেচ" },
+      { letter: "D", text: "খাল সেচ" }
+    ],
+    correctLetter: "B",
+    explanation: "ড্রিপ সেচে গাছের গোড়ায় ফোঁটা ফোঁটা পানি দেওয়া হয় — এতে পানি বাঁচে। বই পৃ. ৪২: 'ড্রিপ সেচ পদ্ধতি: এ পদ্ধতিতে পানি পাইপের মাধ্যমে গাছের মূলাঞ্চলে পৌঁছে দেওয়া হয়। এটা সবচেয়ে পানি সাশ্রয়ী পদ্ধতি।'",
+    difficulty: "medium",
+    sourceNote: "কৃষিশিক্ষা, অষ্টম শ্রেণি (NCTB), অধ্যায় ৩: কৃষি উপকরণ, পাঠ ৬: জমিতে সাশ্রয়ীরূপে সেচের ব্যবহার",
+  },
+  {
+    id: "ACAD-C8-AGR-004",
+    classId: "class-8",
+    subjectId: "agriculture",
+    chapterId: "acad-class-8-agr-chapter-2",
+    chapterName: "২. কৃষিপ্রযুক্তি",
+    unitNumber: 2,
+    topicId: "technology",
+    questionText: "শস্য পর্যায় বলতে কী বোঝায়?",
+    options: [
+      { letter: "A", text: "একই সময়ে শুধু একটি ফসল চাষ করা" },
+      { letter: "B", text: "একই জমিতে বারবার একই ফসল চাষ করা" },
+      { letter: "C", text: "জমি পতিত ফেলে রাখা" },
+      { letter: "D", text: "একই জমিতে বিভিন্ন সময়ে ভিন্ন ভিন্ন ফসল উৎপাদন করা" }
+    ],
+    correctLetter: "D",
+    explanation: "বই পৃ. ২৬: 'মাটির উর্বরতা বজায় রেখে এক খণ্ড জমিতে শস্য ঋতুর বিভিন্ন সময়ে ভিন্ন ভিন্ন ফসল উৎপাদন করার নাম শস্য পর্যায়।'",
+    difficulty: "medium",
+    sourceNote: "কৃষিশিক্ষা, অষ্টম শ্রেণি (NCTB), অধ্যায় ২: কৃষিপ্রযুক্তি",
+  },
+  {
+    id: "ACAD-C8-AGR-005",
+    classId: "class-8",
+    subjectId: "agriculture",
+    chapterId: "acad-class-8-agr-chapter-3",
+    chapterName: "৩. কৃষি উপকরণ",
+    unitNumber: 3,
+    topicId: "inputs",
+    questionText: "কম্পোস্ট সার কী থেকে তৈরি হয়?",
+    options: [
+      { letter: "A", text: "জৈব বর্জ্য থেকে" },
+      { letter: "B", text: "পাথর থেকে" },
+      { letter: "C", text: "রাসায়নিক পদার্থ থেকে" },
+      { letter: "D", text: "খনিজ থেকে" }
+    ],
+    correctLetter: "A",
+    explanation: "কম্পোস্ট সার জৈব বর্জ্য থেকে তৈরি হয়।",
+    difficulty: "medium",
+    sourceNote: "কৃষিশিক্ষা, অষ্টম শ্রেণি (NCTB), অধ্যায় ৩: কৃষি উপকরণ",
+  },
+  {
+    id: "ACAD-C8-AGR-006",
+    classId: "class-8",
+    subjectId: "agriculture",
+    chapterId: "acad-class-8-agr-chapter-3",
+    chapterName: "৩. কৃষি উপকরণ",
+    unitNumber: 3,
+    topicId: "inputs",
+    questionText: "জমিতে সার প্রয়োগের নিয়ম না মানলে কী হয়?",
+    options: [
+      { letter: "A", text: "মাটি আরও উর্বর হয়" },
+      { letter: "B", text: "ফলন বেড়ে যায়" },
+      { letter: "C", text: "মাটির উর্বরতা ও পরিবেশ নষ্ট হয়" },
+      { letter: "D", text: "কিছুই হয় না" }
+    ],
+    correctLetter: "C",
+    explanation: "বই পৃ. ৩৮: 'মাটি পরীক্ষা না করে সার ব্যবহার করলে... মাটির উর্বরতা ও পরিবেশ নষ্ট হয়।'",
+    difficulty: "medium",
+    sourceNote: "কৃষিশিক্ষা, অষ্টম শ্রেণি (NCTB), অধ্যায় ৩: কৃষি উপকরণ",
+  },
+  {
+    id: "ACAD-C8-AGR-007",
+    classId: "class-8",
+    subjectId: "agriculture",
+    chapterId: "acad-class-8-agr-chapter-4",
+    chapterName: "৪. কৃষি ও জলবায়ু",
+    unitNumber: 4,
+    topicId: "climate",
+    questionText: "উপকূলীয় এলাকার কৃষির একটি সমস্যা কী?",
+    options: [
+      { letter: "A", text: "রোদ" },
+      { letter: "B", text: "বৃষ্টি" },
+      { letter: "C", text: "কুয়াশা" },
+      { letter: "D", text: "লবণাক্ততা" }
+    ],
+    correctLetter: "D",
+    explanation: "লবণাক্ততা উপকূলীয় এলাকার কৃষির সমস্যা।",
+    difficulty: "medium",
+    sourceNote: "কৃষিশিক্ষা, অষ্টম শ্রেণি (NCTB), অধ্যায় ৪: কৃষি ও জলবায়ু",
+  },
+  {
+    id: "ACAD-C8-AGR-008",
+    classId: "class-8",
+    subjectId: "agriculture",
+    chapterId: "acad-class-8-agr-chapter-4",
+    chapterName: "৪. কৃষি ও জলবায়ু",
+    unitNumber: 4,
+    topicId: "climate",
+    questionText: "জলবায়ু পরিবর্তনের সঙ্গে খাপ খাইয়ে কী করা হচ্ছে?",
+    options: [
+      { letter: "A", text: "পুরনো জাতের ফসল চাষ করা" },
+      { letter: "B", text: "নতুন জাতের ফসল চাষ করা" },
+      { letter: "C", text: "কিছুই না করা" },
+      { letter: "D", text: "ফসল চাষ বন্ধ করা" }
+    ],
+    correctLetter: "B",
+    explanation: "জলবায়ু পরিবর্তনের সঙ্গে খাপ খাইয়ে নতুন জাতের ফসল চাষ করা হচ্ছে।",
+    difficulty: "medium",
+    sourceNote: "কৃষিশিক্ষা, অষ্টম শ্রেণি (NCTB), অধ্যায় ৪: কৃষি ও জলবায়ু",
+  },
+  {
+    id: "ACAD-C8-AGR-009",
+    classId: "class-8",
+    subjectId: "agriculture",
+    chapterId: "acad-class-8-agr-chapter-5",
+    chapterName: "৫. কৃষিজ উৎপাদন",
+    unitNumber: 5,
+    topicId: "production",
+    questionText: "মৎস্য চাষ সাধারণত কোথায় করা হয়?",
+    options: [
+      { letter: "A", text: "নদীতে" },
+      { letter: "B", text: "পুকুরে" },
+      { letter: "C", text: "খালে" },
+      { letter: "D", text: "সমুদ্রে" }
+    ],
+    correctLetter: "B",
+    explanation: "মৎস্য চাষে পুকুরে মাছ চাষ করা হয়।",
+    difficulty: "medium",
+    sourceNote: "কৃষিশিক্ষা, অষ্টম শ্রেণি (NCTB), অধ্যায় ৫: কৃষিজ উৎপাদন",
+  },
+  {
+    id: "ACAD-C8-AGR-010",
+    classId: "class-8",
+    subjectId: "agriculture",
+    chapterId: "acad-class-8-agr-chapter-5",
+    chapterName: "৫. কৃষিজ উৎপাদন",
+    unitNumber: 5,
+    topicId: "production",
+    questionText: "হাঁস-মুরগি পালন থেকে কী পাওয়া যায়?",
+    options: [
+      { letter: "A", text: "ডিম ও মাংস" },
+      { letter: "B", text: "চামড়া" },
+      { letter: "C", text: "দুধ" },
+      { letter: "D", text: "পশম" }
+    ],
+    correctLetter: "A",
+    explanation: "হাঁস-মুরগি পালন থেকে ডিম ও মাংস পাওয়া যায়।",
+    difficulty: "medium",
+    sourceNote: "কৃষিশিক্ষা, অষ্টম শ্রেণি (NCTB), অধ্যায় ৫: কৃষিজ উৎপাদন",
+  },
+  {
+    id: "ACAD-C8-AGR-011",
+    classId: "class-8",
+    subjectId: "agriculture",
+    chapterId: "acad-class-8-agr-chapter-5",
+    chapterName: "৫. কৃষিজ উৎপাদন",
+    unitNumber: 5,
+    topicId: "production",
+    questionText: "ফসল সংরক্ষণ করতে কেমন জায়গায় রাখতে হয়?",
+    options: [
+      { letter: "A", text: "ভেজা জায়গায়" },
+      { letter: "B", text: "পানিতে" },
+      { letter: "C", text: "শুকনো ও ঠান্ডা জায়গায়" },
+      { letter: "D", text: "রোদে" }
+    ],
+    correctLetter: "C",
+    explanation: "ফসল সংরক্ষণ করতে শুকনো ও ঠান্ডা জায়গায় রাখতে হয়।",
+    difficulty: "medium",
+    sourceNote: "কৃষিশিক্ষা, অষ্টম শ্রেণি (NCTB), অধ্যায় ৫: কৃষিজ উৎপাদন",
+  },
+  {
+    id: "ACAD-C8-AGR-012",
+    classId: "class-8",
+    subjectId: "agriculture",
+    chapterId: "acad-class-8-agr-chapter-6",
+    chapterName: "৬. বনায়ন",
+    unitNumber: 6,
+    topicId: "forestry",
+    questionText: "বনায়নের একটি সুফল কী?",
+    options: [
+      { letter: "A", text: "জলবায়ু পরিবর্তন রোধে সাহায্য করে" },
+      { letter: "B", text: "বন্যা বাড়ায়" },
+      { letter: "C", text: "খরা বাড়ায়" },
+      { letter: "D", text: "জলবায়ু পরিবর্তন বাড়ায়" }
+    ],
+    correctLetter: "A",
+    explanation: "বনায়ন জলবায়ু পরিবর্তন রোধে সাহায্য করে।",
+    difficulty: "medium",
+    sourceNote: "কৃষিশিক্ষা, অষ্টম শ্রেণি (NCTB), অধ্যায় ৬: বনায়ন",
+  },
+  {
+    id: "ACAD-C8-AGR-013",
+    classId: "class-8",
+    subjectId: "agriculture",
+    chapterId: "acad-class-8-agr-chapter-6",
+    chapterName: "৬. বনায়ন",
+    unitNumber: 6,
+    topicId: "forestry",
+    questionText: "বন থেকে আমরা কী পাই?",
+    options: [
+      { letter: "A", text: "শুধু কাঠ" },
+      { letter: "B", text: "শুধু পাতা" },
+      { letter: "C", text: "শুধু মধু" },
+      { letter: "D", text: "কাঠ, মধু ও ঔষধি গাছ" }
+    ],
+    correctLetter: "D",
+    explanation: "বন থেকে আমরা কাঠ, মধু ও ঔষধি গাছ পাই।",
+    difficulty: "medium",
+    sourceNote: "কৃষিশিক্ষা, অষ্টম শ্রেণি (NCTB), অধ্যায় ৬: বনায়ন",
+  },
+  {
+    id: "ACAD-C8-AGR-014",
+    classId: "class-8",
+    subjectId: "agriculture",
+    chapterId: "acad-class-8-agr-chapter-6",
+    chapterName: "৬. বনায়ন",
+    unitNumber: 6,
+    topicId: "forestry",
+    questionText: "বন্যপ্রাণী সংরক্ষণে কী করা জরুরি?",
+    options: [
+      { letter: "A", text: "বন পুড়িয়ে ফেলা" },
+      { letter: "B", text: "বন রক্ষা করা" },
+      { letter: "C", text: "বন বিক্রি করা" },
+      { letter: "D", text: "বন কেটে ফেলা" }
+    ],
+    correctLetter: "B",
+    explanation: "বন্যপ্রাণী সংরক্ষণে বন রক্ষা করা জরুরি।",
+    difficulty: "medium",
+    sourceNote: "কৃষিশিক্ষা, অষ্টম শ্রেণি (NCTB), অধ্যায় ৬: বনায়ন",
   },
 ];

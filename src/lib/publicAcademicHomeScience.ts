@@ -1,12 +1,14 @@
-// Eduvelto — Academic Home Science practice questions (Classes 6–7),
+// Eduvelto — Academic Home Science practice questions (Classes 6–8),
 // verified against the NCTB books (review 26 Nov 2026).
 //
-// Static data ONLY — zero Firestore reads. The 58 questions are the
-// Academic Classes 6–7 Home Science drafts AFTER review (see
+// Static data ONLY — zero Firestore reads. The 74 questions are the
+// Academic Classes 6–8 Home Science drafts AFTER review (see
 // review-academic-c6-home-science-verdicts.json,
-// review-academic-c7-home-science-verdicts.json and
+// review-academic-c7-home-science-verdicts.json,
+// review-academic-c8-home-science-verdicts.json and
 // review-academic-c6-fixes-applied.md,
-// review-academic-c7-fixes-applied.md in
+// review-academic-c7-fixes-applied.md,
+// review-academic-c8-fixes-applied.md in
 // ~/workspace/eduorbit/sprint-1week-2026-11-25/).
 //
 // HONESTY: these are ORIGINAL practice questions written for the
@@ -30,7 +32,7 @@
 
 import { type PublicAcademicQuestion } from './publicAcademic';
 
-/** All verified Academic Home Science questions, in draft order (Class 6, then 7). */
+/** All verified Academic Home Science questions, in draft order (Class 6, then 7, then 8). */
 export const PUBLIC_ACADEMIC_HOME_SCIENCE_QUESTIONS: PublicAcademicQuestion[] = [
   {
     id: "ACAD-C6-HSC-001",
@@ -1191,5 +1193,325 @@ export const PUBLIC_ACADEMIC_HOME_SCIENCE_QUESTIONS: PublicAcademicQuestion[] = 
     explanation: "গরমের দিনে হালকা সুতির পোশাক পরা উচিত।",
     difficulty: "medium",
     sourceNote: "গার্হস্থ্য বিজ্ঞান, সপ্তম শ্রেণি (NCTB), অধ্যায় ১৫: পোশাকের পরিপাট্য ও ব্যক্তিত্ব",
+  },
+  {
+    id: "ACAD-C8-HSC-001",
+    classId: "class-8",
+    subjectId: "home-science",
+    chapterId: "acad-class-8-hsc-chapter-1",
+    chapterName: "১. গৃহ সম্পদের সুষ্ঠু ব্যবহার",
+    unitNumber: 1,
+    topicId: "resources",
+    questionText: "গৃহ সম্পদের সুষ্ঠু ব্যবহার বলতে কী বোঝায়?",
+    options: [
+      { letter: "A", text: "সম্পদ জমিয়ে রাখা" },
+      { letter: "B", text: "সব সম্পদ খরচ করা" },
+      { letter: "C", text: "সম্পদ ফেলে দেওয়া" },
+      { letter: "D", text: "সম্পদ অপচয় না করে প্রয়োজনমতো ব্যবহার করা" }
+    ],
+    correctLetter: "D",
+    explanation: "গৃহ সম্পদের সুষ্ঠু ব্যবহার মানে সম্পদ অপচয় না করে প্রয়োজনমতো ব্যবহার করা।",
+    difficulty: "medium",
+    sourceNote: "গার্হস্থ্য বিজ্ঞান, অষ্টম শ্রেণি (NCTB), অধ্যায় ১: গৃহ সম্পদের সুষ্ঠু ব্যবহার",
+  },
+  {
+    id: "ACAD-C8-HSC-002",
+    classId: "class-8",
+    subjectId: "home-science",
+    chapterId: "acad-class-8-hsc-chapter-2",
+    chapterName: "২. গৃহ পরিবেশে নিরাপত্তা",
+    unitNumber: 2,
+    topicId: "safety",
+    questionText: "গৃহে নিরাপত্তার জন্য কী করা জরুরি?",
+    options: [
+      { letter: "A", text: "বৈদ্যুতিক তারের সুরক্ষা নিশ্চিত করা" },
+      { letter: "B", text: "খোলা তার ব্যবহার করা" },
+      { letter: "C", text: "আগুন জ্বালিয়ে রাখা" },
+      { letter: "D", text: "দরজা খোলা রাখা" }
+    ],
+    correctLetter: "A",
+    explanation: "গৃহে নিরাপত্তার জন্য বৈদ্যুতিক তারের সুরক্ষা জরুরি।",
+    difficulty: "medium",
+    sourceNote: "গার্হস্থ্য বিজ্ঞান, অষ্টম শ্রেণি (NCTB), অধ্যায় ২: গৃহ পরিবেশে নিরাপত্তা",
+  },
+  {
+    id: "ACAD-C8-HSC-003",
+    classId: "class-8",
+    subjectId: "home-science",
+    chapterId: "acad-class-8-hsc-chapter-3",
+    chapterName: "৩. গৃহে রোগীর শুশ্রূষা",
+    unitNumber: 3,
+    topicId: "patient-care",
+    questionText: "গৃহে রোগীর শুশ্রূষায় কী করা জরুরি?",
+    options: [
+      { letter: "A", text: "রোগীকে বেশি খাওয়ানো" },
+      { letter: "B", text: "রোগীর কথা না শোনা" },
+      { letter: "C", text: "পরিষ্কার-পরিচ্ছন্নতা ও সময়মতো ওষুধ দেওয়া" },
+      { letter: "D", text: "রোগীকে একা ফেলে রাখা" }
+    ],
+    correctLetter: "C",
+    explanation: "রোগীর শুশ্রূষায় পরিষ্কার-পরিচ্ছন্নতা ও সময়মতো ওষুধ দেওয়া জরুরি।",
+    difficulty: "medium",
+    sourceNote: "গার্হস্থ্য বিজ্ঞান, অষ্টম শ্রেণি (NCTB), অধ্যায় ৩: গৃহে রোগীর শুশ্রূষা",
+  },
+  {
+    id: "ACAD-C8-HSC-004",
+    classId: "class-8",
+    subjectId: "home-science",
+    chapterId: "acad-class-8-hsc-chapter-4",
+    chapterName: "৪. রোগ সম্পর্কে সতর্কতা",
+    unitNumber: 4,
+    topicId: "disease",
+    questionText: "সংক্রামক রোগ থেকে বাঁচতে কী করা উচিত?",
+    options: [
+      { letter: "A", text: "কিছুই না করা" },
+      { letter: "B", text: "নোংরা পানি পান করা" },
+      { letter: "C", text: "ভিড়ে ঘোরাফেরা করা" },
+      { letter: "D", text: "হাত ধোয়া ও পরিষ্কার থাকা" }
+    ],
+    correctLetter: "D",
+    explanation: "সংক্রামক রোগ থেকে বাঁচতে হাত ধোয়া ও পরিষ্কার থাকা জরুরি।",
+    difficulty: "medium",
+    sourceNote: "গার্হস্থ্য বিজ্ঞান, অষ্টম শ্রেণি (NCTB), অধ্যায় ৪: রোগ সম্পর্কে সতর্কতা",
+  },
+  {
+    id: "ACAD-C8-HSC-005",
+    classId: "class-8",
+    subjectId: "home-science",
+    chapterId: "acad-class-8-hsc-chapter-5",
+    chapterName: "৫. বিশেষ চাহিদাসম্পন্ন শিশু",
+    unitNumber: 5,
+    topicId: "special-children",
+    questionText: "বিশেষ চাহিদাসম্পন্ন শিশুর প্রতি আমাদের কী করা উচিত?",
+    options: [
+      { letter: "A", text: "তাদের নিয়ে হাসাহাসি করা" },
+      { letter: "B", text: "তাদের অবহেলা করা" },
+      { letter: "C", text: "তাদের প্রতি সহানুভূতি ও যত্ন দেখানো" },
+      { letter: "D", text: "তাদের এড়িয়ে চলা" }
+    ],
+    correctLetter: "C",
+    explanation: "বিশেষ চাহিদাসম্পন্ন শিশুর প্রতি সহানুভূতি ও যত্ন দেখানো উচিত।",
+    difficulty: "medium",
+    sourceNote: "গার্হস্থ্য বিজ্ঞান, অষ্টম শ্রেণি (NCTB), অধ্যায় ৫: বিশেষ চাহিদাসম্পন্ন শিশু",
+  },
+  {
+    id: "ACAD-C8-HSC-006",
+    classId: "class-8",
+    subjectId: "home-science",
+    chapterId: "acad-class-8-hsc-chapter-6",
+    chapterName: "৬. বিভিন্ন প্রতিকূল অবস্থা থেকে নিজেকে রক্ষা করা",
+    unitNumber: 6,
+    topicId: "safety",
+    questionText: "প্রতিকূল অবস্থা থেকে নিজেকে রক্ষা করতে কী করা উচিত?",
+    options: [
+      { letter: "A", text: "ঝুঁকি নেওয়া" },
+      { letter: "B", text: "সতর্ক থাকা ও প্রয়োজনে সাহায্য চাওয়া" },
+      { letter: "C", text: "কাউকে কিছু না বলা" },
+      { letter: "D", text: "ভয় পেয়ে লুকিয়ে থাকা" }
+    ],
+    correctLetter: "B",
+    explanation: "প্রতিকূল অবস্থায় নিজেকে রক্ষা করতে সতর্ক থাকা ও সাহায্য চাওয়া জরুরি।",
+    difficulty: "medium",
+    sourceNote: "গার্হস্থ্য বিজ্ঞান, অষ্টম শ্রেণি (NCTB), অধ্যায় ৬: বিভিন্ন প্রতিকূল অবস্থা থেকে নিজেকে রক্ষা করা",
+  },
+  {
+    id: "ACAD-C8-HSC-007",
+    classId: "class-8",
+    subjectId: "home-science",
+    chapterId: "acad-class-8-hsc-chapter-7",
+    chapterName: "৭. খাদ্য পরিকল্পনা",
+    unitNumber: 7,
+    topicId: "food-planning",
+    questionText: "খাদ্য পরিকল্পনায় কী বিবেচনা করতে হয়?",
+    options: [
+      { letter: "A", text: "শুধু নিজের পছন্দ দেখা" },
+      { letter: "B", text: "শুধু দাম দেখা" },
+      { letter: "C", text: "কিছুই না দেখা" },
+      { letter: "D", text: "পরিবারের সদস্যদের বয়স ও চাহিদা বিবেচনা করা" }
+    ],
+    correctLetter: "D",
+    explanation: "খাদ্য পরিকল্পনায় পরিবারের সদস্যদের বয়স ও চাহিদা বিবেচনা করতে হয়।",
+    difficulty: "medium",
+    sourceNote: "গার্হস্থ্য বিজ্ঞান, অষ্টম শ্রেণি (NCTB), অধ্যায় ৭: খাদ্য পরিকল্পনা",
+  },
+  {
+    id: "ACAD-C8-HSC-008",
+    classId: "class-8",
+    subjectId: "home-science",
+    chapterId: "acad-class-8-hsc-chapter-8",
+    chapterName: "৮. অপুষ্টি",
+    unitNumber: 8,
+    topicId: "malnutrition",
+    questionText: "অপুষ্টি বলতে কী বোঝায়?",
+    options: [
+      { letter: "A", text: "বেশি খাওয়া" },
+      { letter: "B", text: "শরীরে প্রয়োজনীয় পুষ্টির অভাব" },
+      { letter: "C", text: "বেশি ঘুমানো" },
+      { letter: "D", text: "কম ঘুমানো" }
+    ],
+    correctLetter: "B",
+    explanation: "অপুষ্টি মানে শরীরে প্রয়োজনীয় পুষ্টির অভাব।",
+    difficulty: "medium",
+    sourceNote: "গার্হস্থ্য বিজ্ঞান, অষ্টম শ্রেণি (NCTB), অধ্যায় ৮: অপুষ্টি",
+  },
+  {
+    id: "ACAD-C8-HSC-009",
+    classId: "class-8",
+    subjectId: "home-science",
+    chapterId: "acad-class-8-hsc-chapter-9",
+    chapterName: "৯. পরিবারের জন্য খাদ্য নির্বাচন, ক্রয় ও প্রস্তুতে সতর্কতা",
+    unitNumber: 9,
+    topicId: "food-selection",
+    questionText: "খাদ্য কেনার সময় কী করা উচিত?",
+    options: [
+      { letter: "A", text: "পচা খাদ্য কেনা" },
+      { letter: "B", text: "মেয়াদ ও মান যাচাই করে কেনা" },
+      { letter: "C", text: "মেয়াদ না দেখে কেনা" },
+      { letter: "D", text: "সস্তা দেখে কেনা" }
+    ],
+    correctLetter: "B",
+    explanation: "খাদ্য কেনার সময় মেয়াদ ও মান যাচাই করা উচিত।",
+    difficulty: "medium",
+    sourceNote: "গার্হস্থ্য বিজ্ঞান, অষ্টম শ্রেণি (NCTB), অধ্যায় ৯: পরিবারের জন্য খাদ্য নির্বাচন, ক্রয় ও প্রস্তুতে সতর্কতা",
+  },
+  {
+    id: "ACAD-C8-HSC-010",
+    classId: "class-8",
+    subjectId: "home-science",
+    chapterId: "acad-class-8-hsc-chapter-10",
+    chapterName: "১০. খাদ্য রান্না",
+    unitNumber: 10,
+    topicId: "cooking",
+    questionText: "রান্নার সময় কী খেয়াল রাখতে হয়?",
+    options: [
+      { letter: "A", text: "অতিরিক্ত সিদ্ধ করা" },
+      { letter: "B", text: "বেশি তেল দেওয়া" },
+      { letter: "C", text: "পুষ্টি যাতে নষ্ট না হয়, সেদিকে খেয়াল রাখা" },
+      { letter: "D", text: "বেশি লবণ দেওয়া" }
+    ],
+    correctLetter: "C",
+    explanation: "রান্নার সময় পুষ্টি যাতে নষ্ট না হয়, সেদিকে খেয়াল রাখতে হয়।",
+    difficulty: "medium",
+    sourceNote: "গার্হস্থ্য বিজ্ঞান, অষ্টম শ্রেণি (NCTB), অধ্যায় ১০: খাদ্য রান্না",
+  },
+  {
+    id: "ACAD-C8-HSC-011",
+    classId: "class-8",
+    subjectId: "home-science",
+    chapterId: "acad-class-8-hsc-chapter-11",
+    chapterName: "১১. সুতা তৈরি ও বুনন",
+    unitNumber: 11,
+    topicId: "yarn",
+    questionText: "সুতা কী থেকে তৈরি হয়?",
+    options: [
+      { letter: "A", text: "লোহা থেকে" },
+      { letter: "B", text: "তুলা, পাট, রেশম প্রভৃতি আঁশ থেকে" },
+      { letter: "C", text: "প্লাস্টিক থেকে" },
+      { letter: "D", text: "পাথর থেকে" }
+    ],
+    correctLetter: "B",
+    explanation: "সুতা তৈরি হয় তুলা, পাট, রেশম প্রভৃতি আঁশ থেকে।",
+    difficulty: "medium",
+    sourceNote: "গার্হস্থ্য বিজ্ঞান, অষ্টম শ্রেণি (NCTB), অধ্যায় ১১: সুতা তৈরি ও বুনন",
+  },
+  {
+    id: "ACAD-C8-HSC-012",
+    classId: "class-8",
+    subjectId: "home-science",
+    chapterId: "acad-class-8-hsc-chapter-12",
+    chapterName: "১২. পোশাক নির্বাচনে বিবেচ্য বিষয়",
+    unitNumber: 12,
+    topicId: "clothing",
+    questionText: "পোশাক নির্বাচনে কী বিবেচনা করতে হয়?",
+    options: [
+      { letter: "A", text: "ঋতু, বয়স ও উপলক্ষ" },
+      { letter: "B", text: "শুধু রং" },
+      { letter: "C", text: "শুধু দাম" },
+      { letter: "D", text: "শুধু ব্র্যান্ড" }
+    ],
+    correctLetter: "A",
+    explanation: "পোশাক নির্বাচনে ঋতু, বয়স ও উপলক্ষ বিবেচনা করতে হয়।",
+    difficulty: "medium",
+    sourceNote: "গার্হস্থ্য বিজ্ঞান, অষ্টম শ্রেণি (NCTB), অধ্যায় ১২: পোশাক নির্বাচনে বিবেচ্য বিষয়",
+  },
+  {
+    id: "ACAD-C8-HSC-013",
+    classId: "class-8",
+    subjectId: "home-science",
+    chapterId: "acad-class-8-hsc-chapter-13",
+    chapterName: "১৩. পোশাক ক্রয়ে বিবেচ্য বিষয়",
+    unitNumber: 13,
+    topicId: "clothing",
+    questionText: "পোশাক কেনার সময় কী করা উচিত?",
+    options: [
+      { letter: "A", text: "শুধু রং দেখা" },
+      { letter: "B", text: "শুধু দাম দেখা" },
+      { letter: "C", text: "কিছুই না দেখা" },
+      { letter: "D", text: "কাপড়ের মান ও সেলাই যাচাই করা" }
+    ],
+    correctLetter: "D",
+    explanation: "পোশাক কেনার সময় কাপড়ের মান ও সেলাই যাচাই করা উচিত।",
+    difficulty: "medium",
+    sourceNote: "গার্হস্থ্য বিজ্ঞান, অষ্টম শ্রেণি (NCTB), অধ্যায় ১৩: পোশাক ক্রয়ে বিবেচ্য বিষয়",
+  },
+  {
+    id: "ACAD-C8-HSC-014",
+    classId: "class-8",
+    subjectId: "home-science",
+    chapterId: "acad-class-8-hsc-chapter-14",
+    chapterName: "১৪. পোশাক তৈরি",
+    unitNumber: 14,
+    topicId: "clothing",
+    questionText: "পোশাক তৈরির প্রথম ধাপ কোনটি?",
+    options: [
+      { letter: "A", text: "মাপ নেওয়া" },
+      { letter: "B", text: "সেলাই করা" },
+      { letter: "C", text: "রং করা" },
+      { letter: "D", text: "ইস্ত্রি করা" }
+    ],
+    correctLetter: "A",
+    explanation: "পোশাক তৈরিতে মাপ নেওয়া প্রথম ধাপ।",
+    difficulty: "medium",
+    sourceNote: "গার্হস্থ্য বিজ্ঞান, অষ্টম শ্রেণি (NCTB), অধ্যায় ১৪: পোশাক তৈরি",
+  },
+  {
+    id: "ACAD-C8-HSC-015",
+    classId: "class-8",
+    subjectId: "home-science",
+    chapterId: "acad-class-8-hsc-chapter-2",
+    chapterName: "২. গৃহ পরিবেশে নিরাপত্তা",
+    unitNumber: 2,
+    topicId: "safety",
+    questionText: "গৃহে গ্যাসের গন্ধ পেলে কী করা উচিত?",
+    options: [
+      { letter: "A", text: "সুইচ অন করা" },
+      { letter: "B", text: "ঘরে বসে থাকা" },
+      { letter: "C", text: "দরজা-জানালা খুলে দেওয়া" },
+      { letter: "D", text: "আগুন জ্বালানো" }
+    ],
+    correctLetter: "C",
+    explanation: "গ্যাসের গন্ধ পেলে দরজা-জানালা খুলে দিতে হয়, আগুন জ্বালাতে নেই।",
+    difficulty: "medium",
+    sourceNote: "গার্হস্থ্য বিজ্ঞান, অষ্টম শ্রেণি (NCTB), অধ্যায় ২: গৃহ পরিবেশে নিরাপত্তা",
+  },
+  {
+    id: "ACAD-C8-HSC-016",
+    classId: "class-8",
+    subjectId: "home-science",
+    chapterId: "acad-class-8-hsc-chapter-8",
+    chapterName: "৮. অপুষ্টি",
+    unitNumber: 8,
+    topicId: "malnutrition",
+    questionText: "অপুষ্টি রোধে কী করা জরুরি?",
+    options: [
+      { letter: "A", text: "সুষম খাদ্য খাওয়া" },
+      { letter: "B", text: "খাবার কম খাওয়া" },
+      { letter: "C", text: "শুধু ভাত খাওয়া" },
+      { letter: "D", text: "মিষ্টি বেশি খাওয়া" }
+    ],
+    correctLetter: "A",
+    explanation: "অপুষ্টি রোধে সুষম খাদ্য খাওয়া জরুরি।",
+    difficulty: "medium",
+    sourceNote: "গার্হস্থ্য বিজ্ঞান, অষ্টম শ্রেণি (NCTB), অধ্যায় ৮: অপুষ্টি",
   },
 ];

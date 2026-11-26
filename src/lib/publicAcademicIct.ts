@@ -1,12 +1,14 @@
-// Eduvelto — Academic ICT practice questions (Classes 6–7),
+// Eduvelto — Academic ICT practice questions (Classes 6–8),
 // verified against the NCTB books (review 26 Nov 2026).
 //
-// Static data ONLY — zero Firestore reads. The 41 questions are the
-// Academic Classes 6–7 ICT drafts AFTER review (see
+// Static data ONLY — zero Firestore reads. The 56 questions are the
+// Academic Classes 6–8 ICT drafts AFTER review (see
 // review-academic-c6-ict-verdicts.json,
-// review-academic-c7-ict-verdicts.json and
+// review-academic-c7-ict-verdicts.json,
+// review-academic-c8-ict-verdicts.json and
 // review-academic-c6-fixes-applied.md,
-// review-academic-c7-fixes-applied.md in
+// review-academic-c7-fixes-applied.md,
+// review-academic-c8-fixes-applied.md in
 // ~/workspace/eduorbit/sprint-1week-2026-11-25/).
 //
 // HONESTY: these are ORIGINAL practice questions written for the
@@ -30,7 +32,7 @@
 
 import { type PublicAcademicQuestion } from './publicAcademic';
 
-/** All verified Academic ICT questions, in draft order (Class 6, then 7). */
+/** All verified Academic ICT questions, in draft order (Class 6, then 7, then 8). */
 export const PUBLIC_ACADEMIC_ICT_QUESTIONS: PublicAcademicQuestion[] = [
   {
     id: "ACAD-C6-ICT-001",
@@ -851,5 +853,305 @@ export const PUBLIC_ACADEMIC_ICT_QUESTIONS: PublicAcademicQuestion[] = [
     explanation: "কপিরাইট মানে লেখক বা স্রষ্টার অধিকার — তাঁর অনুমতি ছাড়া লেখা ব্যবহার করা যায় না।",
     difficulty: "medium",
     sourceNote: "তথ্য ও যোগাযোগ প্রযুক্তি, সপ্তম শ্রেণি (NCTB), অধ্যায় ৩: নিরাপদ ও নৈতিক ব্যবহার",
+  },
+  {
+    id: "ACAD-C8-ICT-001",
+    classId: "class-8",
+    subjectId: "ict",
+    chapterId: "acad-class-8-ict-chapter-1",
+    chapterName: "১. তথ্য ও যোগাযোগ প্রযুক্তির গুরুত্ব",
+    unitNumber: 1,
+    topicId: "importance",
+    questionText: "ICT কোন ক্ষেত্রে গুরুত্বপূর্ণ?",
+    options: [
+      { letter: "A", text: "কোনো ক্ষেত্রেই নয়" },
+      { letter: "B", text: "শিক্ষা, স্বাস্থ্য, ব্যবসা ও যোগাযোগে" },
+      { letter: "C", text: "শুধু বিনোদনে" },
+      { letter: "D", text: "শুধু খেলায়" }
+    ],
+    correctLetter: "B",
+    explanation: "ICT শিক্ষা, স্বাস্থ্য, ব্যবসা ও যোগাযোগে গুরুত্বপূর্ণ ভূমিকা রাখে।",
+    difficulty: "easy",
+    sourceNote: "তথ্য ও যোগাযোগ প্রযুক্তি, অষ্টম শ্রেণি (NCTB), অধ্যায় ১: তথ্য ও যোগাযোগ প্রযুক্তির গুরুত্ব",
+  },
+  {
+    id: "ACAD-C8-ICT-002",
+    classId: "class-8",
+    subjectId: "ict",
+    chapterId: "acad-class-8-ict-chapter-1",
+    chapterName: "১. তথ্য ও যোগাযোগ প্রযুক্তির গুরুত্ব",
+    unitNumber: 1,
+    topicId: "importance",
+    questionText: "সরকারি কাজে তথ্য ও যোগাযোগ প্রযুক্তি ব্যবহারের একটি উদ্দেশ্য কী?",
+    options: [
+      { letter: "A", text: "সেবা জনগণের দোরগোড়ায় পৌঁছে দেওয়া" },
+      { letter: "B", text: "শুধু শহরে ইন্টারনেট দেওয়া" },
+      { letter: "C", text: "শুধু কম্পিউটার বিক্রি করা" },
+      { letter: "D", text: "শুধু মোবাইল দেওয়া" }
+    ],
+    correctLetter: "A",
+    explanation: "সরকারি কাজে আইসিটির সবচেয়ে উল্লেখযোগ্য প্রয়োগ হলো নাগরিক সেবা জনগণের দোরগোড়ায় পৌঁছে দেওয়া (বই, ১ম অধ্যায়, পাঠ ৫)।",
+    difficulty: "medium",
+    sourceNote: "তথ্য ও যোগাযোগ প্রযুক্তি, অষ্টম শ্রেণি (NCTB), অধ্যায় ১: তথ্য ও যোগাযোগ প্রযুক্তির গুরুত্ব",
+  },
+  {
+    id: "ACAD-C8-ICT-003",
+    classId: "class-8",
+    subjectId: "ict",
+    chapterId: "acad-class-8-ict-chapter-2",
+    chapterName: "২. কম্পিউটার নেটওয়ার্ক",
+    unitNumber: 2,
+    topicId: "network",
+    questionText: "কম্পিউটার নেটওয়ার্ক বলতে কী বোঝায়?",
+    options: [
+      { letter: "A", text: "একটি মাউস" },
+      { letter: "B", text: "একটি কম্পিউটার" },
+      { letter: "C", text: "একটি প্রিন্টার" },
+      { letter: "D", text: "একাধিক কম্পিউটার পরস্পরের সঙ্গে যুক্ত থাকা" }
+    ],
+    correctLetter: "D",
+    explanation: "কম্পিউটার নেটওয়ার্ক মানে একাধিক কম্পিউটার পরস্পরের সঙ্গে যুক্ত থাকা।",
+    difficulty: "easy",
+    sourceNote: "তথ্য ও যোগাযোগ প্রযুক্তি, অষ্টম শ্রেণি (NCTB), অধ্যায় ২: কম্পিউটার নেটওয়ার্ক",
+  },
+  {
+    id: "ACAD-C8-ICT-004",
+    classId: "class-8",
+    subjectId: "ict",
+    chapterId: "acad-class-8-ict-chapter-5",
+    chapterName: "৫. শিক্ষা ও দৈনন্দিন জীবনে ইন্টারনেটের ব্যবহার",
+    unitNumber: 5,
+    topicId: "network",
+    questionText: "ইন্টারনেটের মাধ্যমে পাঠানো চিঠিকে কী বলে?",
+    options: [
+      { letter: "A", text: "ফ্যাক্স" },
+      { letter: "B", text: "ই-মেইল" },
+      { letter: "C", text: "টেলিগ্রাম" },
+      { letter: "D", text: "ডাকটিকিট" }
+    ],
+    correctLetter: "B",
+    explanation: "ইমেইল কথাটির মানে ইলেকট্রনিক মেইল বা বৈদ্যুতিন চিঠি (বই, ৫ম অধ্যায়, পৃ. ৭১)।",
+    difficulty: "medium",
+    sourceNote: "তথ্য ও যোগাযোগ প্রযুক্তি, অষ্টম শ্রেণি (NCTB), অধ্যায় ৫: শিক্ষা ও দৈনন্দিন জীবনে ইন্টারনেটের ব্যবহার (পাঠ ৪৭: ইমেইল)",
+  },
+  {
+    id: "ACAD-C8-ICT-006",
+    classId: "class-8",
+    subjectId: "ict",
+    chapterId: "acad-class-8-ict-chapter-2",
+    chapterName: "২. কম্পিউটার নেটওয়ার্ক",
+    unitNumber: 2,
+    topicId: "network",
+    questionText: "কম্পিউটারকে ইন্টারনেটের সঙ্গে যুক্ত করে কোন যন্ত্র?",
+    options: [
+      { letter: "A", text: "মডেম" },
+      { letter: "B", text: "কীবোর্ড" },
+      { letter: "C", text: "মনিটর" },
+      { letter: "D", text: "প্রিন্টার" }
+    ],
+    correctLetter: "A",
+    explanation: "মডেম কম্পিউটারকে ইন্টারনেটের সঙ্গে যুক্ত করে।",
+    difficulty: "medium",
+    sourceNote: "তথ্য ও যোগাযোগ প্রযুক্তি, অষ্টম শ্রেণি (NCTB), অধ্যায় ২: কম্পিউটার নেটওয়ার্ক",
+  },
+  {
+    id: "ACAD-C8-ICT-007",
+    classId: "class-8",
+    subjectId: "ict",
+    chapterId: "acad-class-8-ict-chapter-3",
+    chapterName: "৩. তথ্য ও যোগাযোগ প্রযুক্তির নিরাপদ ও নৈতিক ব্যবহার",
+    unitNumber: 3,
+    topicId: "safety",
+    questionText: "হ্যাকিং বলতে কী বোঝায়?",
+    options: [
+      { letter: "A", text: "ইন্টারনেটে পড়াশোনা করা" },
+      { letter: "B", text: "ই-মেইল পাঠানো" },
+      { letter: "C", text: "নিজের কম্পিউটার ব্যবহার করা" },
+      { letter: "D", text: "অন্যের কম্পিউটারে অবৈধভাবে প্রবেশ করা" }
+    ],
+    correctLetter: "D",
+    explanation: "হ্যাকিং মানে অন্যের কম্পিউটারে অবৈধভাবে প্রবেশ করা — এটি অপরাধ।",
+    difficulty: "easy",
+    sourceNote: "তথ্য ও যোগাযোগ প্রযুক্তি, অষ্টম শ্রেণি (NCTB), অধ্যায় ৩: তথ্য ও যোগাযোগ প্রযুক্তির নিরাপদ ও নৈতিক ব্যবহার",
+  },
+  {
+    id: "ACAD-C8-ICT-008",
+    classId: "class-8",
+    subjectId: "ict",
+    chapterId: "acad-class-8-ict-chapter-3",
+    chapterName: "৩. তথ্য ও যোগাযোগ প্রযুক্তির নিরাপদ ও নৈতিক ব্যবহার",
+    unitNumber: 3,
+    topicId: "safety",
+    questionText: "প্রতারণা বলতে কী বোঝায়?",
+    options: [
+      { letter: "A", text: "ইন্টারনেটে গান শোনা" },
+      { letter: "B", text: "ভুল পরিচয় ও ভুল তথ্য দিয়ে মানুষকে প্রতারিত করার চেষ্টা করা" },
+      { letter: "C", text: "সঠিক তথ্য দিয়ে সেবা দেওয়া" },
+      { letter: "D", text: "অনলাইনে কেনাকাটা" }
+    ],
+    correctLetter: "B",
+    explanation: "প্রতারণা মানে ভুল পরিচয় ও ভুল তথ্য দিয়ে সাধারণ মানুষকে প্রতারিত করার চেষ্টা করা — যেমন ইমেইলে লটারিতে অর্থ প্রাপ্তির ঘোষণা (বই, ৩য় অধ্যায়, পাঠ ১৯)।",
+    difficulty: "medium",
+    sourceNote: "তথ্য ও যোগাযোগ প্রযুক্তি, অষ্টম শ্রেণি (NCTB), অধ্যায় ৩: তথ্য ও যোগাযোগ প্রযুক্তির নিরাপদ ও নৈতিক ব্যবহার",
+  },
+  {
+    id: "ACAD-C8-ICT-010",
+    classId: "class-8",
+    subjectId: "ict",
+    chapterId: "acad-class-8-ict-chapter-4",
+    chapterName: "৪. স্প্রেডশিটের ব্যবহার",
+    unitNumber: 4,
+    topicId: "spreadsheet",
+    questionText: "স্প্রেডশিট দিয়ে কী করা যায়?",
+    options: [
+      { letter: "A", text: "হিসাব-নিকাশ ও তথ্য সাজানো যায়" },
+      { letter: "B", text: "গান শোনা যায়" },
+      { letter: "C", text: "খেলা যায়" },
+      { letter: "D", text: "ছবি আঁকা যায়" }
+    ],
+    correctLetter: "A",
+    explanation: "স্প্রেডশিট দিয়ে হিসাব-নিকাশ ও তথ্য সাজানো যায়।",
+    difficulty: "easy",
+    sourceNote: "তথ্য ও যোগাযোগ প্রযুক্তি, অষ্টম শ্রেণি (NCTB), অধ্যায় ৪: স্প্রেডশিটের ব্যবহার",
+  },
+  {
+    id: "ACAD-C8-ICT-011",
+    classId: "class-8",
+    subjectId: "ict",
+    chapterId: "acad-class-8-ict-chapter-4",
+    chapterName: "৪. স্প্রেডশিটের ব্যবহার",
+    unitNumber: 4,
+    topicId: "spreadsheet",
+    questionText: "স্প্রেডশিটে সারি ও কলামের ছেদস্থলকে কী বলে?",
+    options: [
+      { letter: "A", text: "সারি" },
+      { letter: "B", text: "শিট" },
+      { letter: "C", text: "সেল" },
+      { letter: "D", text: "কলাম" }
+    ],
+    correctLetter: "C",
+    explanation: "স্প্রেডশিটে সারি ও কলামের ছেদস্থলকে সেল বলে।",
+    difficulty: "medium",
+    sourceNote: "তথ্য ও যোগাযোগ প্রযুক্তি, অষ্টম শ্রেণি (NCTB), অধ্যায় ৪: স্প্রেডশিটের ব্যবহার",
+  },
+  {
+    id: "ACAD-C8-ICT-012",
+    classId: "class-8",
+    subjectId: "ict",
+    chapterId: "acad-class-8-ict-chapter-4",
+    chapterName: "৪. স্প্রেডশিটের ব্যবহার",
+    unitNumber: 4,
+    topicId: "spreadsheet",
+    questionText: "স্প্রেডশিটে যোগ করতে কোন ফাংশন ব্যবহার করা হয়?",
+    options: [
+      { letter: "A", text: "=ADD()" },
+      { letter: "B", text: "=TOTAL()" },
+      { letter: "C", text: "=PLUS()" },
+      { letter: "D", text: "=SUM()" }
+    ],
+    correctLetter: "D",
+    explanation: "স্প্রেডশিটে যোগ করতে =SUM() ফাংশন ব্যবহার করা হয়।",
+    difficulty: "medium",
+    sourceNote: "তথ্য ও যোগাযোগ প্রযুক্তি, অষ্টম শ্রেণি (NCTB), অধ্যায় ৪: স্প্রেডশিটের ব্যবহার",
+  },
+  {
+    id: "ACAD-C8-ICT-014",
+    classId: "class-8",
+    subjectId: "ict",
+    chapterId: "acad-class-8-ict-chapter-5",
+    chapterName: "৫. শিক্ষা ও দৈনন্দিন জীবনে ইন্টারনেটের ব্যবহার",
+    unitNumber: 5,
+    topicId: "internet",
+    questionText: "চিকিৎসায় ইন্টারনেটের একটি সুবিধা কী?",
+    options: [
+      { letter: "A", text: "বই ছাপানো" },
+      { letter: "B", text: "গান শোনা" },
+      { letter: "C", text: "দূর থেকে চিকিৎসা পরামর্শ পাওয়া" },
+      { letter: "D", text: "খেলাধুলা করা" }
+    ],
+    correctLetter: "C",
+    explanation: "ইন্টারনেটের মাধ্যমে দূর থেকে চিকিৎসা পরামর্শ (টেলিমেডিসিন) পাওয়া যায়।",
+    difficulty: "easy",
+    sourceNote: "তথ্য ও যোগাযোগ প্রযুক্তি, অষ্টম শ্রেণি (NCTB), অধ্যায় ৫: শিক্ষা ও দৈনন্দিন জীবনে ইন্টারনেটের ব্যবহার",
+  },
+  {
+    id: "ACAD-C8-ICT-015",
+    classId: "class-8",
+    subjectId: "ict",
+    chapterId: "acad-class-8-ict-chapter-5",
+    chapterName: "৫. শিক্ষা ও দৈনন্দিন জীবনে ইন্টারনেটের ব্যবহার",
+    unitNumber: 5,
+    topicId: "internet",
+    questionText: "অনলাইন ক্লাস বলতে কী বোঝায়?",
+    options: [
+      { letter: "A", text: "বই পড়ে শেখা" },
+      { letter: "B", text: "ইন্টারনেটের মাধ্যমে শেখা" },
+      { letter: "C", text: "খেলে শেখা" },
+      { letter: "D", text: "শিক্ষকের কাছে শেখা" }
+    ],
+    correctLetter: "B",
+    explanation: "অনলাইন ক্লাস বা অনলাইনে কোর্স মানে ইন্টারনেটের মাধ্যমে শেখা — করোনাকালে অনলাইন ক্লাসে পড়াশোনা চালিয়ে যাওয়া গেছে (বই, ৫ম অধ্যায়, পাঠ ৪৫)।",
+    difficulty: "medium",
+    sourceNote: "তথ্য ও যোগাযোগ প্রযুক্তি, অষ্টম শ্রেণি (NCTB), অধ্যায় ৫: শিক্ষা ও দৈনন্দিন জীবনে ইন্টারনেটের ব্যবহার",
+  },
+  {
+    id: "ACAD-C8-ICT-016",
+    classId: "class-8",
+    subjectId: "ict",
+    chapterId: "acad-class-8-ict-chapter-5",
+    chapterName: "৫. শিক্ষা ও দৈনন্দিন জীবনে ইন্টারনেটের ব্যবহার",
+    unitNumber: 5,
+    topicId: "internet",
+    questionText: "অনলাইনে কেনাকাটার সময় কী করা উচিত?",
+    options: [
+      { letter: "A", text: "অচেনা ওয়েবসাইটে টাকা দেওয়া" },
+      { letter: "B", text: "পাসওয়ার্ড শেয়ার করা" },
+      { letter: "C", text: "যেকোনো ওয়েবসাইট ব্যবহার করা" },
+      { letter: "D", text: "নির্ভরযোগ্য ওয়েবসাইট ব্যবহার করা" }
+    ],
+    correctLetter: "D",
+    explanation: "অনলাইনে কেনাকাটা করার সময় নির্ভরযোগ্য ওয়েবসাইট ব্যবহার করা উচিত।",
+    difficulty: "medium",
+    sourceNote: "তথ্য ও যোগাযোগ প্রযুক্তি, অষ্টম শ্রেণি (NCTB), অধ্যায় ৫: শিক্ষা ও দৈনন্দিন জীবনে ইন্টারনেটের ব্যবহার",
+  },
+  {
+    id: "ACAD-C8-ICT-017",
+    classId: "class-8",
+    subjectId: "ict",
+    chapterId: "acad-class-8-ict-chapter-1",
+    chapterName: "১. তথ্য ও যোগাযোগ প্রযুক্তির গুরুত্ব",
+    unitNumber: 1,
+    topicId: "importance",
+    questionText: "ICT যোগাযোগে কী ভূমিকা রাখে?",
+    options: [
+      { letter: "A", text: "দূরের মানুষের সঙ্গে সহজে যোগাযোগ করা যায়" },
+      { letter: "B", text: "যোগাযোগ বন্ধ হয়ে যায়" },
+      { letter: "C", text: "যোগাযোগ কঠিন হয়" },
+      { letter: "D", text: "কিছুই হয় না" }
+    ],
+    correctLetter: "A",
+    explanation: "ICT-এর মাধ্যমে দূরের মানুষের সঙ্গে সহজে যোগাযোগ করা যায়।",
+    difficulty: "medium",
+    sourceNote: "তথ্য ও যোগাযোগ প্রযুক্তি, অষ্টম শ্রেণি (NCTB), অধ্যায় ১: তথ্য ও যোগাযোগ প্রযুক্তির গুরুত্ব",
+  },
+  {
+    id: "ACAD-C8-ICT-018",
+    classId: "class-8",
+    subjectId: "ict",
+    chapterId: "acad-class-8-ict-chapter-2",
+    chapterName: "২. কম্পিউটার নেটওয়ার্ক",
+    unitNumber: 2,
+    topicId: "network",
+    questionText: "বিশ্বের সবচেয়ে বড় নেটওয়ার্ক কোনটি?",
+    options: [
+      { letter: "A", text: "ইন্টারনেট" },
+      { letter: "B", text: "LAN" },
+      { letter: "C", text: "WAN" },
+      { letter: "D", text: "ইনট্রানেট" }
+    ],
+    correctLetter: "A",
+    explanation: "ইন্টারনেট হলো বিশ্বের সবচেয়ে বড় নেটওয়ার্ক।",
+    difficulty: "medium",
+    sourceNote: "তথ্য ও যোগাযোগ প্রযুক্তি, অষ্টম শ্রেণি (NCTB), অধ্যায় ২: কম্পিউটার নেটওয়ার্ক",
   },
 ];

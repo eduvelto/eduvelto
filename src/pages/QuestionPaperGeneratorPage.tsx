@@ -959,17 +959,22 @@ export default function QuestionPaperGeneratorPage() {
       </p>
 
       {/* Pre-built combined papers (pattern 6): Class 8 scholarship
-          bundles — 100 marks / 3 hours, sections droppable. Generation
-          stays gated on verified questions: today every section holds
-          0 verified questions, so the buttons stay disabled with the
-          honest reason — no questions are invented to fill a bundle. */}
+          bundles — 100 marks / 3 hours, sections droppable. Verified
+          Class 8 MCQs arrived 26 Nov 2026, so each section shows its
+          real verified count — but bundle generation itself (the button
+          handler) is NOT built yet, so the button stays disabled with
+          the honest reason. Never enable it on the ready flag alone:
+          the pool holds MCQs only, and the creative / short-answer
+          marks cannot be filled from it. No questions are invented to
+          fill a bundle. */}
       <Card style={{ marginBottom: 16 }}>
         <h2 style={{ margin: '0 0 4px', fontSize: 16 }}>
           প্রস্তুত পেপার — Class 8 স্কলারশিপ বান্ডল (১০০ নম্বর · ৩ ঘণ্টা)
         </h2>
         <p style={{ fontSize: 13, color: '#555', margin: '0 0 12px' }}>
-          পুরো বান্ডল একবারে — সেকশন বাদ দিতে পারবেন (টিক উঠিয়ে দিন)। যাচাইকৃত প্রশ্ন এলে এখান থেকেই
-          পেপার বানানো যাবে; এখনো কোনো বান্ডলের যাচাইকৃত প্রশ্ন তৈরি হয়নি।
+          পুরো বান্ডল একবারে — সেকশন বাদ দিতে পারবেন (টিক উঠিয়ে দিন)। ৮ম শ্রেণির যাচাইকৃত প্রশ্ন
+          এসেছে, প্রতিটি সেকশনে যাচাইকৃত প্রশ্নের সংখ্যা দেখানো হচ্ছে; বান্ডল থেকে পেপার বানানো এখনো
+          চালু হয়নি।
         </p>
         {QPG_COMBINED_PAPERS.map((bundle) => {
           const dropped = droppedSections[bundle.id] ?? [];
@@ -1005,7 +1010,10 @@ export default function QuestionPaperGeneratorPage() {
                 );
               })}
               <div style={{ marginTop: 8 }}>
-                <Button variant="outline" size="sm" disabled={!ready}>
+                {/* No generation handler exists yet (26 Nov 2026): the
+                    button stays disabled even when `ready` is true.
+                    Enable it only together with the handler. */}
+                <Button variant="outline" size="sm" disabled>
                   এই বান্ডল থেকে পেপার বানান
                 </Button>{' '}
                 {!ready ? (
@@ -1013,7 +1021,11 @@ export default function QuestionPaperGeneratorPage() {
                     যাচাইকৃত প্রশ্ন নেই (০টি) — Class 8-এর প্রশ্ন যাচাই শেষে এলে তৈরি করা যাবে। প্রশ্ন
                     বানিয়ে ঘাটতি পূরণ করা হবে না।
                   </span>
-                ) : null}
+                ) : (
+                  <span style={{ fontSize: 12, color: '#666' }}>
+                    যাচাইকৃত প্রশ্ন এসেছে — তবে বান্ডল থেকে পেপার বানানো এখনো চালু হয়নি।
+                  </span>
+                )}
               </div>
             </div>
           );

@@ -1,16 +1,17 @@
-// Eduvelto — Academic Bangladesh & Global Studies practice questions (Classes 3–7),
+// Eduvelto — Academic Bangladesh & Global Studies practice questions (Classes 3–8),
 // verified against the NCTB books (review 26 Nov 2026).
 //
-// Static data ONLY — zero Firestore reads. The 136 questions are the
-// Academic Class 3–7 Bangladesh & Global Studies drafts AFTER review (see
+// Static data ONLY — zero Firestore reads. The 152 questions are the
+// Academic Class 3–8 Bangladesh & Global Studies drafts AFTER review (see
 // review-academic-c3-bgs-verdicts.json,
 // review-academic-c4-bgs-verdicts.json,
 // review-academic-c5-bgs-verdicts.json,
 // review-academic-c6-bgs-verdicts.json,
-// review-academic-c7-bgs-verdicts.json and
+// review-academic-c7-bgs-verdicts.json,
+// review-academic-c8-bgs-verdicts.json and
 // review-academic-c3-fixes-applied.md, review-academic-c4-fixes-applied.md,
 // review-academic-c5-fixes-applied.md, review-academic-c6-fixes-applied.md,
-// review-academic-c7-fixes-applied.md in
+// review-academic-c7-fixes-applied.md, review-academic-c8-fixes-applied.md in
 // ~/workspace/eduorbit/sprint-1week-2026-11-25/).
 //
 // HONESTY: these are ORIGINAL practice questions written for the
@@ -34,7 +35,7 @@
 
 import { type PublicAcademicQuestion } from './publicAcademic';
 
-/** All verified Academic Bangladesh & Global Studies questions, in draft order (Class 3, then 4, then 5, then 6, then 7). */
+/** All verified Academic Bangladesh & Global Studies questions, in draft order (Class 3, then 4, then 5, then 6, then 7, then 8). */
 export const PUBLIC_ACADEMIC_BGS_QUESTIONS: PublicAcademicQuestion[] = [
   {
     id: "ACAD-C3-BGS-001",
@@ -2755,5 +2756,325 @@ export const PUBLIC_ACADEMIC_BGS_QUESTIONS: PublicAcademicQuestion[] = [
     explanation: "মাদকাসক্তি একটি সামাজিক সমস্যা — এটি পরিবার ও সমাজের ক্ষতি করে।",
     difficulty: "medium",
     sourceNote: "বাংলাদেশ ও বিশ্বপরিচয়, সপ্তম শ্রেণি (NCTB), অধ্যায় ৮: বাংলাদেশের সামাজিক সমস্যা",
+  },
+  {
+    id: "ACAD-C8-BGS-001",
+    classId: "class-8",
+    subjectId: "bgs",
+    chapterId: "acad-class-8-bgs-chapter-1",
+    chapterName: "১. ঔপনিবেশিক যুগ ও বাংলার স্বাধীনতা সংগ্রাম",
+    unitNumber: 1,
+    topicId: "colonial",
+    questionText: "বাংলায় ব্রিটিশ শাসনের সূচনা হয় কোন ঘটনায়?",
+    options: [
+      { letter: "A", text: "১৯৭১ সালের মুক্তিযুদ্ধ" },
+      { letter: "B", text: "১৮৫৭ সালের সিপাহী বিদ্রোহ" },
+      { letter: "C", text: "১৭৫৭ সালের পলাশীর যুদ্ধ" },
+      { letter: "D", text: "১৯৪৭ সালের দেশভাগ" }
+    ],
+    correctLetter: "C",
+    explanation: "১৭৫৭ সালের পলাশীর যুদ্ধে বাংলায় ব্রিটিশ শাসনের সূচনা হয়।",
+    difficulty: "medium",
+    sourceNote: "বাংলাদেশ ও বিশ্বপরিচয়, অষ্টম শ্রেণি (NCTB), অধ্যায় ১: ঔপনিবেশিক যুগ ও বাংলার স্বাধীনতা সংগ্রাম",
+  },
+  {
+    id: "ACAD-C8-BGS-002",
+    classId: "class-8",
+    subjectId: "bgs",
+    chapterId: "acad-class-8-bgs-chapter-1",
+    chapterName: "১. ঔপনিবেশিক যুগ ও বাংলার স্বাধীনতা সংগ্রাম",
+    unitNumber: 1,
+    topicId: "colonial",
+    questionText: "সিপাহী বিদ্রোহ কত সালে হয়েছিল?",
+    options: [
+      { letter: "A", text: "১৭৫৭ সাল" },
+      { letter: "B", text: "১৮৫৭ সাল" },
+      { letter: "C", text: "১৯৪৭ সাল" },
+      { letter: "D", text: "১৯৭১ সাল" }
+    ],
+    correctLetter: "B",
+    explanation: "১৮৫৭ সালের সিপাহী বিদ্রোহ ব্রিটিশ শাসনের বিরুদ্ধে প্রথম বড় বিদ্রোহ।",
+    difficulty: "medium",
+    sourceNote: "বাংলাদেশ ও বিশ্বপরিচয়, অষ্টম শ্রেণি (NCTB), অধ্যায় ১: ঔপনিবেশিক যুগ ও বাংলার স্বাধীনতা সংগ্রাম",
+  },
+  {
+    id: "ACAD-C8-BGS-004",
+    classId: "class-8",
+    subjectId: "bgs",
+    chapterId: "acad-class-8-bgs-chapter-3",
+    chapterName: "৩. বাংলাদেশের মুক্তিযুদ্ধ ও গণতান্ত্রিক সংগ্রাম",
+    unitNumber: 3,
+    topicId: "liberation",
+    questionText: "মুক্তিযুদ্ধে মোট কয়টি সাব-সেক্টর ছিল?",
+    options: [
+      { letter: "A", text: "৩২টি" },
+      { letter: "B", text: "৬৪টি" },
+      { letter: "C", text: "৪০টি" },
+      { letter: "D", text: "১১টি" }
+    ],
+    correctLetter: "B",
+    explanation: "মুক্তিযুদ্ধে বাংলাদেশকে ১১টি সেক্টরে ভাগ করা হয়েছিল, আর সাব-সেক্টর ছিল মোট ৬৪টি।",
+    difficulty: "easy",
+    sourceNote: "বাংলাদেশ ও বিশ্বপরিচয়, অষ্টম শ্রেণি (NCTB), অধ্যায় ৩: বাংলাদেশের মুক্তিযুদ্ধ ও গণতান্ত্রিক সংগ্রাম",
+  },
+  {
+    id: "ACAD-C8-BGS-006",
+    classId: "class-8",
+    subjectId: "bgs",
+    chapterId: "acad-class-8-bgs-chapter-4",
+    chapterName: "৪. বাংলাদেশের অর্থনীতি",
+    unitNumber: 4,
+    topicId: "economy",
+    questionText: "বাংলাদেশের অর্থনীতির খাতগুলো কী কী?",
+    options: [
+      { letter: "A", text: "কৃষি, শিল্প ও সেবা" },
+      { letter: "B", text: "শুধু সেবা" },
+      { letter: "C", text: "শুধু কৃষি" },
+      { letter: "D", text: "শুধু শিল্প" }
+    ],
+    correctLetter: "A",
+    explanation: "বাংলাদেশের অর্থনীতিতে কৃষি, শিল্প ও সেবা — তিনটি খাতই গুরুত্বপূর্ণ।",
+    difficulty: "medium",
+    sourceNote: "বাংলাদেশ ও বিশ্বপরিচয়, অষ্টম শ্রেণি (NCTB), অধ্যায় ৪: বাংলাদেশের অর্থনীতি",
+  },
+  {
+    id: "ACAD-C8-BGS-007",
+    classId: "class-8",
+    subjectId: "bgs",
+    chapterId: "acad-class-8-bgs-chapter-5",
+    chapterName: "৫. বাংলাদেশ: রাষ্ট্র ও সরকার ব্যবস্থা",
+    unitNumber: 5,
+    topicId: "government",
+    questionText: "বাংলাদেশের সরকার ব্যবস্থা কেমন?",
+    options: [
+      { letter: "A", text: "সামরিক শাসন" },
+      { letter: "B", text: "রাজতন্ত্র" },
+      { letter: "C", text: "একনায়কতন্ত্র" },
+      { letter: "D", text: "সংসদীয় গণতন্ত্র" }
+    ],
+    correctLetter: "D",
+    explanation: "বাংলাদেশের সরকার ব্যবস্থা সংসদীয় গণতন্ত্র।",
+    difficulty: "easy",
+    sourceNote: "বাংলাদেশ ও বিশ্বপরিচয়, অষ্টম শ্রেণি (NCTB), অধ্যায় ৫: বাংলাদেশ: রাষ্ট্র ও সরকার ব্যবস্থা",
+  },
+  {
+    id: "ACAD-C8-BGS-008",
+    classId: "class-8",
+    subjectId: "bgs",
+    chapterId: "acad-class-8-bgs-chapter-5",
+    chapterName: "৫. বাংলাদেশ: রাষ্ট্র ও সরকার ব্যবস্থা",
+    unitNumber: 5,
+    topicId: "government",
+    questionText: "বাংলাদেশের জাতীয় সংসদে সাধারণ আসন কয়টি?",
+    options: [
+      { letter: "A", text: "২০০টি" },
+      { letter: "B", text: "৪০০টি" },
+      { letter: "C", text: "৩৫০টি" },
+      { letter: "D", text: "৩০০টি" }
+    ],
+    correctLetter: "D",
+    explanation: "বাংলাদেশের জাতীয় সংসদে ৩০০টি সাধারণ আসন আছে।",
+    difficulty: "medium",
+    sourceNote: "বাংলাদেশ ও বিশ্বপরিচয়, অষ্টম শ্রেণি (NCTB), অধ্যায় ৫: বাংলাদেশ: রাষ্ট্র ও সরকার ব্যবস্থা",
+  },
+  {
+    id: "ACAD-C8-BGS-009",
+    classId: "class-8",
+    subjectId: "bgs",
+    chapterId: "acad-class-8-bgs-chapter-6",
+    chapterName: "৬. বাংলাদেশের সাংস্কৃতিক পরিবর্তন",
+    unitNumber: 6,
+    topicId: "culture",
+    questionText: "সাংস্কৃতিক পরিবর্তন বলতে কী বোঝায়?",
+    options: [
+      { letter: "A", text: "সংস্কৃতি কখনো বদলায় না" },
+      { letter: "B", text: "সংস্কৃতি স্থির থাকে" },
+      { letter: "C", text: "সংস্কৃতি হারিয়ে যায়" },
+      { letter: "D", text: "সংস্কৃতি সময়ের সঙ্গে পরিবর্তিত হয়" }
+    ],
+    correctLetter: "D",
+    explanation: "সংস্কৃতি সময়ের সঙ্গে পরিবর্তিত হয় — নতুন ধারা যুক্ত হয়।",
+    difficulty: "medium",
+    sourceNote: "বাংলাদেশ ও বিশ্বপরিচয়, অষ্টম শ্রেণি (NCTB), অধ্যায় ৬: বাংলাদেশের সাংস্কৃতিক পরিবর্তন",
+  },
+  {
+    id: "ACAD-C8-BGS-010",
+    classId: "class-8",
+    subjectId: "bgs",
+    chapterId: "acad-class-8-bgs-chapter-7",
+    chapterName: "৭. সামাজিকীকরণ",
+    unitNumber: 7,
+    topicId: "socialization",
+    questionText: "সামাজিকীকরণের প্রথম মাধ্যম কোনটি?",
+    options: [
+      { letter: "A", text: "সিনেমা" },
+      { letter: "B", text: "বাজার" },
+      { letter: "C", text: "পরিবার" },
+      { letter: "D", text: "খেলার মাঠ" }
+    ],
+    correctLetter: "C",
+    explanation: "সামাজিকীকরণের প্রথম মাধ্যম পরিবার।",
+    difficulty: "easy",
+    sourceNote: "বাংলাদেশ ও বিশ্বপরিচয়, অষ্টম শ্রেণি (NCTB), অধ্যায় ৭: সামাজিকীকরণ",
+  },
+  {
+    id: "ACAD-C8-BGS-011",
+    classId: "class-8",
+    subjectId: "bgs",
+    chapterId: "acad-class-8-bgs-chapter-8",
+    chapterName: "৮. বাংলাদেশের বিভিন্ন নৃগোষ্ঠী",
+    unitNumber: 8,
+    topicId: "ethnic",
+    questionText: "নিচের কোনটি বাংলাদেশের বৃহত্তম নৃগোষ্ঠী?",
+    options: [
+      { letter: "A", text: "মারমা" },
+      { letter: "B", text: "সাঁওতাল" },
+      { letter: "C", text: "গারো" },
+      { letter: "D", text: "চাকমা" }
+    ],
+    correctLetter: "D",
+    explanation: "চাকমা বাংলাদেশের বৃহত্তম নৃগোষ্ঠী।",
+    difficulty: "medium",
+    sourceNote: "বাংলাদেশ ও বিশ্বপরিচয়, অষ্টম শ্রেণি (NCTB), অধ্যায় ৮: বাংলাদেশের বিভিন্ন নৃগোষ্ঠী",
+  },
+  {
+    id: "ACAD-C8-BGS-012",
+    classId: "class-8",
+    subjectId: "bgs",
+    chapterId: "acad-class-8-bgs-chapter-8",
+    chapterName: "৮. বাংলাদেশের বিভিন্ন নৃগোষ্ঠী",
+    unitNumber: 8,
+    topicId: "ethnic",
+    questionText: "বাংলাদেশের উত্তরাঞ্চলের একটি নৃগোষ্ঠী কোনটি?",
+    options: [
+      { letter: "A", text: "মারমা" },
+      { letter: "B", text: "সাঁওতাল" },
+      { letter: "C", text: "বাঙালি" },
+      { letter: "D", text: "চাকমা" }
+    ],
+    correctLetter: "B",
+    explanation: "সাঁওতাল বাংলাদেশের একটি প্রাচীন নৃগোষ্ঠী।",
+    difficulty: "medium",
+    sourceNote: "বাংলাদেশ ও বিশ্বপরিচয়, অষ্টম শ্রেণি (NCTB), অধ্যায় ৮: বাংলাদেশের বিভিন্ন নৃগোষ্ঠী",
+  },
+  {
+    id: "ACAD-C8-BGS-013",
+    classId: "class-8",
+    subjectId: "bgs",
+    chapterId: "acad-class-8-bgs-chapter-11",
+    chapterName: "১১. বাংলাদেশে জলবায়ু ও দুর্যোগ মোকাবিলা",
+    unitNumber: 11,
+    topicId: "social-problems",
+    questionText: "নিচের কোনটি পরিবেশ দূষণের কারণ?",
+    options: [
+      { letter: "A", text: "কলকারখানার ধোঁয়া" },
+      { letter: "B", text: "বৃষ্টির পানি" },
+      { letter: "C", text: "গাছ লাগানো" },
+      { letter: "D", text: "সূর্যের আলো" }
+    ],
+    correctLetter: "A",
+    explanation: "কলকারখানার ধোঁয়া বায়ু দূষণের একটি প্রধান কারণ।",
+    difficulty: "easy",
+    sourceNote: "বাংলাদেশ ও বিশ্বপরিচয়, অষ্টম শ্রেণি (NCTB), অধ্যায় ১১: বাংলাদেশে জলবায়ু ও দুর্যোগ মোকাবিলা",
+  },
+  {
+    id: "ACAD-C8-BGS-014",
+    classId: "class-8",
+    subjectId: "bgs",
+    chapterId: "acad-class-8-bgs-chapter-10",
+    chapterName: "১০. বাংলাদেশের জনসংখ্যা ও উন্নয়ন",
+    unitNumber: 10,
+    topicId: "population",
+    questionText: "জনসংখ্যা বেশি হলে কী হয়?",
+    options: [
+      { letter: "A", text: "সম্পদের চাপ কমে" },
+      { letter: "B", text: "কিছুই হয় না" },
+      { letter: "C", text: "উন্নয়ন বাড়ে" },
+      { letter: "D", text: "সম্পদের উপর চাপ বাড়ে" }
+    ],
+    correctLetter: "D",
+    explanation: "জনসংখ্যা বেশি হলে সম্পদের উপর চাপ বাড়ে।",
+    difficulty: "medium",
+    sourceNote: "বাংলাদেশ ও বিশ্বপরিচয়, অষ্টম শ্রেণি (NCTB), অধ্যায় ১০: বাংলাদেশের জনসংখ্যা ও উন্নয়ন",
+  },
+  {
+    id: "ACAD-C8-BGS-015",
+    classId: "class-8",
+    subjectId: "bgs",
+    chapterId: "acad-class-8-bgs-chapter-11",
+    chapterName: "১১. বাংলাদেশে জলবায়ু ও দুর্যোগ মোকাবিলা",
+    unitNumber: 11,
+    topicId: "disaster",
+    questionText: "বাংলাদেশের প্রধান প্রাকৃতিক দুর্যোগ কোনটি?",
+    options: [
+      { letter: "A", text: "খরা" },
+      { letter: "B", text: "বন্যা ও ঘূর্ণিঝড়" },
+      { letter: "C", text: "তুষারপাত" },
+      { letter: "D", text: "ভূমিকম্প" }
+    ],
+    correctLetter: "B",
+    explanation: "বন্যা ও ঘূর্ণিঝড় বাংলাদেশের প্রধান প্রাকৃতিক দুর্যোগ।",
+    difficulty: "medium",
+    sourceNote: "বাংলাদেশ ও বিশ্বপরিচয়, অষ্টম শ্রেণি (NCTB), অধ্যায় ১১: বাংলাদেশে জলবায়ু ও দুর্যোগ মোকাবিলা",
+  },
+  {
+    id: "ACAD-C8-BGS-016",
+    classId: "class-8",
+    subjectId: "bgs",
+    chapterId: "acad-class-8-bgs-chapter-11",
+    chapterName: "১১. বাংলাদেশে জলবায়ু ও দুর্যোগ মোকাবিলা",
+    unitNumber: 11,
+    topicId: "disaster",
+    questionText: "বন্যার সময় কী করা উচিত?",
+    options: [
+      { letter: "A", text: "নদীর ধারে যাওয়া" },
+      { letter: "B", text: "পানিতে সাঁতার কাটা" },
+      { letter: "C", text: "নিরাপদ উঁচু স্থানে আশ্রয় নেওয়া" },
+      { letter: "D", text: "বাড়িতে বসে থাকা" }
+    ],
+    correctLetter: "C",
+    explanation: "বন্যার সময় নিরাপদ উঁচু স্থানে আশ্রয় নেওয়া উচিত।",
+    difficulty: "medium",
+    sourceNote: "বাংলাদেশ ও বিশ্বপরিচয়, অষ্টম শ্রেণি (NCTB), অধ্যায় ১১: বাংলাদেশে জলবায়ু ও দুর্যোগ মোকাবিলা",
+  },
+  {
+    id: "ACAD-C8-BGS-017",
+    classId: "class-8",
+    subjectId: "bgs",
+    chapterId: "acad-class-8-bgs-chapter-12",
+    chapterName: "১২. বাংলাদেশের প্রাকৃতিক সম্পদ",
+    unitNumber: 12,
+    topicId: "resources",
+    questionText: "বাংলাদেশের কোন জেলায় চুনাপাথর পাওয়া যায়?",
+    options: [
+      { letter: "A", text: "কুমিল্লা" },
+      { letter: "B", text: "পটুয়াখালী" },
+      { letter: "C", text: "সুনামগঞ্জ" },
+      { letter: "D", text: "বরিশাল" }
+    ],
+    correctLetter: "C",
+    explanation: "সুনামগঞ্জের ছাতকে চুনাপাথর পাওয়া যায়; এটি সিমেন্ট শিল্পের কাঁচামাল।",
+    difficulty: "easy",
+    sourceNote: "বাংলাদেশ ও বিশ্বপরিচয়, অষ্টম শ্রেণি (NCTB), অধ্যায় ১২: বাংলাদেশের প্রাকৃতিক সম্পদ",
+  },
+  {
+    id: "ACAD-C8-BGS-018",
+    classId: "class-8",
+    subjectId: "bgs",
+    chapterId: "acad-class-8-bgs-chapter-12",
+    chapterName: "১২. বাংলাদেশের প্রাকৃতিক সম্পদ",
+    unitNumber: 12,
+    topicId: "resources",
+    questionText: "বাংলাদেশের সবচেয়ে বড় ম্যানগ্রোভ বন কোনটি?",
+    options: [
+      { letter: "A", text: "সুন্দরবন" },
+      { letter: "B", text: "লাউয়াছড়া বন" },
+      { letter: "C", text: "ভাওয়াল বন" },
+      { letter: "D", text: "মধুপুর বন" }
+    ],
+    correctLetter: "A",
+    explanation: "সুন্দরবন বাংলাদেশের একটি গুরুত্বপূর্ণ প্রাকৃতিক সম্পদ।",
+    difficulty: "medium",
+    sourceNote: "বাংলাদেশ ও বিশ্বপরিচয়, অষ্টম শ্রেণি (NCTB), অধ্যায় ১২: বাংলাদেশের প্রাকৃতিক সম্পদ",
   },
 ];

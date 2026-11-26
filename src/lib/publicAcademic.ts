@@ -1,4 +1,4 @@
-// Eduvelto — combined verified Academic pool (Classes 3–7, twelve subjects).
+// Eduvelto — combined verified Academic pool (Classes 3–8, twelve subjects).
 //
 // The SINGLE verified source for both the Question Maker (QPG) and the
 // Education Hub chapter practice: a question verified once appears in
@@ -27,7 +27,10 @@
 // ACAD-C6-ICT-010, ACAD-C6-ICT-012, ACAD-C6-ICT-024, C6S-025,
 // ACAD-C7-ICT-010, ACAD-C7-ICT-011, ACAD-C7-ICT-015, ACAD-C7-ICT-024,
 // ACAD-C7-ICT-025, ACAD-C7-SCI-005, ACAD-C7-SCI-006, C7S-008,
-// C7S-024, C7S-025, C7S-028, C7S-030) are NOT
+// C7S-024, C7S-025, C7S-028, C7S-030, ACAD-C8-GRA-009,
+// ACAD-C8-BGS-003, ACAD-C8-BGS-005, ACAD-C8-BGS-019, ACAD-C8-BGS-020,
+// ACAD-C8-ICT-005, ACAD-C8-ICT-009, ACAD-C8-ICT-013, C8S-015,
+// C8S-029, C8S-031, C8S-033, C8S-034) are NOT
 // in this pool and must never be shown to students.
 
 import { PUBLIC_ACADEMIC_ENGLISH_QUESTIONS } from './publicAcademicEnglish';
@@ -43,7 +46,7 @@ import { PUBLIC_ACADEMIC_ICT_QUESTIONS } from './publicAcademicIct';
 import { PUBLIC_ACADEMIC_AGRICULTURE_QUESTIONS } from './publicAcademicAgriculture';
 import { PUBLIC_ACADEMIC_HOME_SCIENCE_QUESTIONS } from './publicAcademicHomeScience';
 
-export type PublicAcademicClassId = 'class-3' | 'class-4' | 'class-5' | 'class-6' | 'class-7';
+export type PublicAcademicClassId = 'class-3' | 'class-4' | 'class-5' | 'class-6' | 'class-7' | 'class-8';
 export type PublicAcademicSubjectId =
   | 'english'
   | 'bangla'
@@ -78,8 +81,8 @@ export interface PublicAcademicQuestion {
   sourceNote: string;
 }
 
-/** All verified Academic questions (Classes 3–7, twelve subjects), in
- *  draft order within each subject file (Class 3, then 4, then 5, then 6, then 7). */
+/** All verified Academic questions (Classes 3–8, twelve subjects), in
+ *  draft order within each subject file (Class 3, then 4, then 5, then 6, then 7, then 8). */
 export const PUBLIC_ACADEMIC_QUESTIONS: PublicAcademicQuestion[] = [
   ...PUBLIC_ACADEMIC_ENGLISH_QUESTIONS,
   ...PUBLIC_ACADEMIC_BANGLA_QUESTIONS,

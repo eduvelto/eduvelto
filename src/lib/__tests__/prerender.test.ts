@@ -528,7 +528,7 @@ describe('__INITIAL_DATA__ script tag (CSP-safe carrier)', () => {
 });
 
 describe('getAcademicPracticePaths — Education Hub (26 Nov 2026)', () => {
-  it('derives hub + subject + chapter paths from EVERY per-subject pool file (561: 1 hub + 42 subjects + 518 chapters)', () => {
+  it('derives hub + subject + chapter paths from EVERY per-subject pool file (705: 1 hub + 54 subjects + 650 chapters)', () => {
     // Same directory scan the prerender script uses. A hardcoded
     // 6-file list silently dropped the six Class 6 subject files
     // (BanglaGrammar, MathDepth, ScienceDepth, Ict, Agriculture,
@@ -545,7 +545,7 @@ describe('getAcademicPracticePaths — Education Hub (26 Nov 2026)', () => {
       .map((f) => readFileSync(join(process.cwd(), 'src', 'lib', f), 'utf8'))
       .join('\n');
     const paths = getAcademicPracticePaths(source);
-    expect(paths).toHaveLength(561);
+    expect(paths).toHaveLength(705);
     expect(paths[0]).toBe('/learn/practice');
     for (const s of [
       'bangla-grammar',
@@ -557,6 +557,7 @@ describe('getAcademicPracticePaths — Education Hub (26 Nov 2026)', () => {
     ]) {
       expect(paths).toContain(`/learn/practice/class-6/${s}`);
       expect(paths).toContain(`/learn/practice/class-7/${s}`);
+      expect(paths).toContain(`/learn/practice/class-8/${s}`);
     }
     expect(paths).toContain(
       '/learn/practice/class-6/math-depth/acad-class-6-mat-depth-chapter-1',
@@ -574,7 +575,21 @@ describe('getAcademicPracticePaths — Education Hub (26 Nov 2026)', () => {
     expect(paths).toContain(
       '/learn/practice/class-7/science-depth/acad-class-7-sci-depth-chapter-3',
     );
+    // Class 8: all twelve subjects have paths, including the edge-case
+    // chapter ids (dotted grammar sub-number, Agriculture পাঠ-level
+    // chapter, unnumbered Bangla lesson).
+    expect(paths).toContain('/learn/practice/class-8/english/acad-class-8-eng-unit-1');
+    expect(paths).toContain(
+      '/learn/practice/class-8/math-depth/acad-class-8-mat-depth-chapter-1',
+    );
+    expect(paths).toContain(
+      '/learn/practice/class-8/bangla-grammar/acad-class-8-bgr-chapter-1-1',
+    );
+    expect(paths).toContain(
+      '/learn/practice/class-8/agriculture/acad-class-8-agr-chapter-3-lesson-6',
+    );
+    expect(paths).toContain('/learn/practice/class-8/bangla/acad-class-8-ban-lesson-1');
     // Unverified classes never get a path.
-    expect(paths.filter((p) => p.startsWith('/learn/practice/class-8'))).toEqual([]);
+    expect(paths.filter((p) => p.startsWith('/learn/practice/class-9'))).toEqual([]);
   });
 });
