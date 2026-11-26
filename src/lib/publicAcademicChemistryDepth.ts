@@ -1,0 +1,743 @@
+// Eduvelto — Academic Chemistry (Depth) practice questions (Class 9),
+// verified against the Dakhil NCTB books (review 26 Nov 2026).
+//
+// Static data ONLY — zero Firestore reads. The 35 questions are the
+// Academic Class 9 Chemistry (Depth) drafts AFTER review (see
+// review-academic-c9-chemistry-depth-verdicts.json and
+// review-academic-c9-fixes-applied.md in
+// ~/workspace/eduorbit/sprint-1week-2026-11-25/).
+//
+// CAVEAT: the Class 9 review was verified against DAKHIL editions —
+// no general NCTB Class 9-10 book set exists in the workspace. The
+// questions are verified against the Dakhil books + standard
+// references + the SSC syllabus topic. Whether Class 9-10 content
+// serves the general SSC audience or the Dakhil audience is an owner
+// decision still owed (after his exams).
+//
+// HONESTY: these are ORIGINAL practice questions written for the
+// NCTB lessons — NOT board / university / previous-year questions.
+// Every question was checked against its cited NCTB book lesson.
+// The draft files' `status` field still says NEEDS-REVIEW — the
+// verdict files are the review record, and this file contains ONLY
+// the verified questions (VERIFIED as-is + NEEDS-FIX items with
+// their fixes applied). Every question in this batch passed review — no question was skipped.
+//
+// HOW NEW BATCHES JOIN: append the next verified batch's questions
+// to PUBLIC_ACADEMIC_CHEMISTRY_DEPTH_QUESTIONS below (same shape, same generation
+// script with the new draft + verdict files). Chapters, counts and
+// the practice pages are DERIVED from the combined pool in
+// src/lib/publicAcademic.ts, so no component or route change is
+// needed when a batch is verified. NEVER add a question whose
+// verdict is not VERIFIED (or NEEDS-FIX with the fix applied) —
+// unverified drafts must never reach students. The Class 9
+// questions also serve Class 10 (same combined class-9-10 draft
+// set — there is NO separate Class 10 set): the pool holds each
+// question ONCE under classId 'class-9', and publicAcademic.ts /
+// questionPaper.ts / scripts/prerender.mjs map 'class-10' to the
+// Class 9 pool for these subjects.
+
+import { type PublicAcademicQuestion } from './publicAcademic';
+
+/** All verified Academic Chemistry (Depth) questions, Class 9 (in draft order). */
+export const PUBLIC_ACADEMIC_CHEMISTRY_DEPTH_QUESTIONS: PublicAcademicQuestion[] = [
+  {
+    id: "C910C-001",
+    classId: "class-9",
+    subjectId: "chemistry-depth",
+    chapterId: "acad-class-9-che-depth-chapter-1",
+    chapterName: "অধ্যায় ১: রসায়নের ধারণা",
+    unitNumber: 1,
+    topicId: "chapter-1",
+    questionText: "রসায়নের জনক কাকে বলা হয়?",
+    options: [
+      { letter: "A", text: "ডাল্টন" },
+      { letter: "B", text: "ল্যাভয়সিয়ে" },
+      { letter: "C", text: "মেন্ডেলিফ" },
+      { letter: "D", text: "জাবির ইবনে হাইয়ান" }
+    ],
+    correctLetter: "D",
+    explanation: "জাবির ইবনে হাইয়ানকে রসায়নের জনক বলা হয়; আধুনিক রসায়নের জনক ল্যাভয়সিয়ে।",
+    difficulty: "easy",
+    sourceNote: "NCTB রসায়ন, ৯ম-১০ম শ্রেণি (2026 সংস্করণ) — অধ্যায় ১: রসায়নের ধারণা",
+  },
+  {
+    id: "C910C-002",
+    classId: "class-9",
+    subjectId: "chemistry-depth",
+    chapterId: "acad-class-9-che-depth-chapter-1",
+    chapterName: "অধ্যায় ১: রসায়নের ধারণা",
+    unitNumber: 1,
+    topicId: "chapter-1",
+    questionText: "নিচের কোনটি মৌলিক পদার্থ?",
+    options: [
+      { letter: "A", text: "অক্সিজেন" },
+      { letter: "B", text: "পানি" },
+      { letter: "C", text: "কার্বন ডাই-অক্সাইড" },
+      { letter: "D", text: "লবণ" }
+    ],
+    correctLetter: "A",
+    explanation: "অক্সিজেন একটি মৌল; পানি, লবণ ও কার্বন ডাই-অক্সাইড যৌগ।",
+    difficulty: "medium",
+    sourceNote: "NCTB রসায়ন, ৯ম-১০ম শ্রেণি (2026 সংস্করণ) — অধ্যায় ১: রসায়নের ধারণা",
+  },
+  {
+    id: "C910C-003",
+    classId: "class-9",
+    subjectId: "chemistry-depth",
+    chapterId: "acad-class-9-che-depth-chapter-7",
+    chapterName: "অধ্যায় ৭: রাসায়নিক বিক্রিয়া",
+    unitNumber: 7,
+    topicId: "chapter-7",
+    questionText: "পদার্থের ভৌত পরিবর্তনের উদাহরণ কোনটি?",
+    options: [
+      { letter: "A", text: "লোহায় মরিচা ধরা" },
+      { letter: "B", text: "বরফ গলে পানি হওয়া" },
+      { letter: "C", text: "কাগজ পোড়া" },
+      { letter: "D", text: "দুধ থেকে দই হওয়া" }
+    ],
+    correctLetter: "B",
+    explanation: "বরফ গলনে নতুন পদার্থ তৈরি হয় না — ভৌত পরিবর্তন; বাকিগুলো রাসায়নিক পরিবর্তন।",
+    difficulty: "medium",
+    sourceNote: "NCTB রসায়ন, ৯ম-১০ম শ্রেণি (2026 সংস্করণ) — অধ্যায় ৭: রাসায়নিক বিক্রিয়া",
+  },
+  {
+    id: "C910C-004",
+    classId: "class-9",
+    subjectId: "chemistry-depth",
+    chapterId: "acad-class-9-che-depth-chapter-2",
+    chapterName: "অধ্যায় ২: পদার্থের অবস্থা",
+    unitNumber: 2,
+    topicId: "chapter-2",
+    questionText: "কঠিন, তরল ও গ্যাসীয় অবস্থার মধ্যে কণার গতিশক্তি সবচেয়ে বেশি কোথায়?",
+    options: [
+      { letter: "A", text: "কঠিন অবস্থায়" },
+      { letter: "B", text: "গ্যাসীয় অবস্থায়" },
+      { letter: "C", text: "সব অবস্থায় সমান" },
+      { letter: "D", text: "তরল অবস্থায়" }
+    ],
+    correctLetter: "B",
+    explanation: "গ্যাসের কণাগুলো সবচেয়ে বেশি গতিশীল; কঠিনের কণা প্রায় স্থির।",
+    difficulty: "easy",
+    sourceNote: "NCTB রসায়ন, ৯ম-১০ম শ্রেণি (2026 সংস্করণ) — অধ্যায় ২: পদার্থের অবস্থা",
+  },
+  {
+    id: "C910C-005",
+    classId: "class-9",
+    subjectId: "chemistry-depth",
+    chapterId: "acad-class-9-che-depth-chapter-2",
+    chapterName: "অধ্যায় ২: পদার্থের অবস্থা",
+    unitNumber: 2,
+    topicId: "chapter-2",
+    questionText: "ব্যাপন সবচেয়ে দ্রুত ঘটে কোন অবস্থায়?",
+    options: [
+      { letter: "A", text: "তরলে" },
+      { letter: "B", text: "কঠিনে" },
+      { letter: "C", text: "গ্যাসে" },
+      { letter: "D", text: "সব অবস্থায় সমান" }
+    ],
+    correctLetter: "C",
+    explanation: "গ্যাসের কণার গতি সবচেয়ে বেশি বলে ব্যাপন গ্যাসে দ্রুততম।",
+    difficulty: "medium",
+    sourceNote: "NCTB রসায়ন, ৯ম-১০ম শ্রেণি (2026 সংস্করণ) — অধ্যায় ২: পদার্থের অবস্থা",
+  },
+  {
+    id: "C910C-006",
+    classId: "class-9",
+    subjectId: "chemistry-depth",
+    chapterId: "acad-class-9-che-depth-chapter-2",
+    chapterName: "অধ্যায় ২: পদার্থের অবস্থা",
+    unitNumber: 2,
+    topicId: "chapter-2",
+    questionText: "শুষ্ক বরফ (কঠিন কার্বন ডাই-অক্সাইড) সরাসরি বাষ্পে পরিণত হয় — এই প্রক্রিয়াকে কী বলে?",
+    options: [
+      { letter: "A", text: "বাষ্পীভবন" },
+      { letter: "B", text: "গলন" },
+      { letter: "C", text: "উর্ধ্বপাতন" },
+      { letter: "D", text: "ঘনীভবন" }
+    ],
+    correctLetter: "C",
+    explanation: "কঠিন সরাসরি গ্যাসে পরিণত হওয়াকে উর্ধ্বপাতন (sublimation) বলে।",
+    difficulty: "medium",
+    sourceNote: "NCTB রসায়ন, ৯ম-১০ম শ্রেণি (2026 সংস্করণ) — অধ্যায় ২: পদার্থের অবস্থা",
+  },
+  {
+    id: "C910C-007",
+    classId: "class-9",
+    subjectId: "chemistry-depth",
+    chapterId: "acad-class-9-che-depth-chapter-3",
+    chapterName: "অধ্যায় ৩: পদার্থের গঠন",
+    unitNumber: 3,
+    topicId: "chapter-3",
+    questionText: "পরমাণুর ভরসংখ্যা বলতে কী বোঝায়?",
+    options: [
+      { letter: "A", text: "ইলেকট্রন সংখ্যা" },
+      { letter: "B", text: "প্রোটন সংখ্যা" },
+      { letter: "C", text: "প্রোটন + নিউট্রন সংখ্যা" },
+      { letter: "D", text: "নিউট্রন সংখ্যা" }
+    ],
+    correctLetter: "C",
+    explanation: "ভরসংখ্যা = প্রোটন সংখ্যা + নিউট্রন সংখ্যা।",
+    difficulty: "easy",
+    sourceNote: "NCTB রসায়ন, ৯ম-১০ম শ্রেণি (2026 সংস্করণ) — অধ্যায় ৩: পদার্থের গঠন",
+  },
+  {
+    id: "C910C-008",
+    classId: "class-9",
+    subjectId: "chemistry-depth",
+    chapterId: "acad-class-9-che-depth-chapter-3",
+    chapterName: "অধ্যায় ৩: পদার্থের গঠন",
+    unitNumber: 3,
+    topicId: "chapter-3",
+    questionText: "কার্বন-১২ পরমাণুতে নিউট্রন সংখ্যা কত?",
+    options: [
+      { letter: "A", text: "৬" },
+      { letter: "B", text: "৮" },
+      { letter: "C", text: "৪" },
+      { letter: "D", text: "১২" }
+    ],
+    correctLetter: "A",
+    explanation: "কার্বনের পারমাণবিক সংখ্যা ৬, ভরসংখ্যা ১২; নিউট্রন = ১২−৬ = ৬।",
+    difficulty: "medium",
+    sourceNote: "NCTB রসায়ন, ৯ম-১০ম শ্রেণি (2026 সংস্করণ) — অধ্যায় ৩: পদার্থের গঠন",
+  },
+  {
+    id: "C910C-009",
+    classId: "class-9",
+    subjectId: "chemistry-depth",
+    chapterId: "acad-class-9-che-depth-chapter-3",
+    chapterName: "অধ্যায় ৩: পদার্থের গঠন",
+    unitNumber: 3,
+    topicId: "chapter-3",
+    questionText: "আইসোটোপ বলতে কী বোঝায়?",
+    options: [
+      { letter: "A", text: "ভিন্ন মৌলের একই ভরসংখ্যার পরমাণু" },
+      { letter: "B", text: "একই মৌলের ভিন্ন ভরসংখ্যার পরমাণু" },
+      { letter: "C", text: "একই ইলেকট্রন সংখ্যার ভিন্ন পরমাণু" },
+      { letter: "D", text: "একই ভরসংখ্যার ভিন্ন মৌল" }
+    ],
+    correctLetter: "B",
+    explanation: "একই মৌলের যেসব পরমাণুর প্রোটন সংখ্যা সমান কিন্তু নিউট্রন সংখ্যা ভিন্ন, তারা পরস্পরের আইসোটোপ।",
+    difficulty: "medium",
+    sourceNote: "NCTB রসায়ন, ৯ম-১০ম শ্রেণি (2026 সংস্করণ) — অধ্যায় ৩: পদার্থের গঠন",
+  },
+  {
+    id: "C910C-010",
+    classId: "class-9",
+    subjectId: "chemistry-depth",
+    chapterId: "acad-class-9-che-depth-chapter-4",
+    chapterName: "অধ্যায় ৪: পর্যায় সারণি",
+    unitNumber: 4,
+    topicId: "chapter-4",
+    questionText: "আধুনিক পর্যায় সারণির জনক কে?",
+    options: [
+      { letter: "A", text: "ডাল্টন" },
+      { letter: "B", text: "থমসন" },
+      { letter: "C", text: "বোর" },
+      { letter: "D", text: "মেন্ডেলিফ" }
+    ],
+    correctLetter: "D",
+    explanation: "মেন্ডেলিফ ১৮৬৯ সালে পর্যায় সারণি প্রণয়ন করেন।",
+    difficulty: "easy",
+    sourceNote: "NCTB রসায়ন, ৯ম-১০ম শ্রেণি (2026 সংস্করণ) — অধ্যায় ৪: পর্যায় সারণি",
+  },
+  {
+    id: "C910C-011",
+    classId: "class-9",
+    subjectId: "chemistry-depth",
+    chapterId: "acad-class-9-che-depth-chapter-4",
+    chapterName: "অধ্যায় ৪: পর্যায় সারণি",
+    unitNumber: 4,
+    topicId: "chapter-4",
+    questionText: "পর্যায় সারণির ১৭ নম্বর শ্রেণির মৌলগুলোকে কী বলে?",
+    options: [
+      { letter: "A", text: "হ্যালোজেন" },
+      { letter: "B", text: "মৃৎক্ষার ধাতু" },
+      { letter: "C", text: "নিষ্ক্রিয় গ্যাস" },
+      { letter: "D", text: "ক্ষার ধাতু" }
+    ],
+    correctLetter: "A",
+    explanation: "১৭ নম্বর শ্রেণিতে ফ্লোরিন, ক্লোরিন, ব্রোমিন, আয়োডিন — হ্যালোজেন মৌল।",
+    difficulty: "medium",
+    sourceNote: "NCTB রসায়ন, ৯ম-১০ম শ্রেণি (2026 সংস্করণ) — অধ্যায় ৪: পর্যায় সারণি",
+  },
+  {
+    id: "C910C-012",
+    classId: "class-9",
+    subjectId: "chemistry-depth",
+    chapterId: "acad-class-9-che-depth-chapter-4",
+    chapterName: "অধ্যায় ৪: পর্যায় সারণি",
+    unitNumber: 4,
+    topicId: "chapter-4",
+    questionText: "একই পর্যায়ে বাম থেকে ডানে গেলে পারমাণবিক আকার কেমন হয়?",
+    options: [
+      { letter: "A", text: "একই থাকে" },
+      { letter: "B", text: "প্রথমে বাড়ে পরে কমে" },
+      { letter: "C", text: "বাড়ে" },
+      { letter: "D", text: "কমে" }
+    ],
+    correctLetter: "D",
+    explanation: "একই পর্যায়ে বাম থেকে ডানে প্রোটন বাড়ায় নিউক্লিয়াসের আকর্ষণ বাড়ে, আকার কমে।",
+    difficulty: "medium",
+    sourceNote: "NCTB রসায়ন, ৯ম-১০ম শ্রেণি (2026 সংস্করণ) — অধ্যায় ৪: পর্যায় সারণি",
+  },
+  {
+    id: "C910C-013",
+    classId: "class-9",
+    subjectId: "chemistry-depth",
+    chapterId: "acad-class-9-che-depth-chapter-5",
+    chapterName: "অধ্যায় ৫: রাসায়নিক বন্ধন",
+    unitNumber: 5,
+    topicId: "chapter-5",
+    questionText: "সোডিয়াম ক্লোরাইডে কোন ধরনের বন্ধন আছে?",
+    options: [
+      { letter: "A", text: "আয়নিক বন্ধন" },
+      { letter: "B", text: "ধাতব বন্ধন" },
+      { letter: "C", text: "হাইড্রোজেন বন্ধন" },
+      { letter: "D", text: "সমযোজী বন্ধন" }
+    ],
+    correctLetter: "A",
+    explanation: "Na⁺ ও Cl⁻ আয়নের মধ্যে স্থির বৈদ্যুতিক আকর্ষণে আয়নিক বন্ধন গঠিত হয়।",
+    difficulty: "easy",
+    sourceNote: "NCTB রসায়ন, ৯ম-১০ম শ্রেণি (2026 সংস্করণ) — অধ্যায় ৫: রাসায়নিক বন্ধন",
+  },
+  {
+    id: "C910C-014",
+    classId: "class-9",
+    subjectId: "chemistry-depth",
+    chapterId: "acad-class-9-che-depth-chapter-5",
+    chapterName: "অধ্যায় ৫: রাসায়নিক বন্ধন",
+    unitNumber: 5,
+    topicId: "chapter-5",
+    questionText: "পানির অণুতে কোন ধরনের বন্ধন আছে?",
+    options: [
+      { letter: "A", text: "ধাতব বন্ধন" },
+      { letter: "B", text: "ভ্যান ডার ওয়ালস বন্ধন" },
+      { letter: "C", text: "সমযোজী বন্ধন" },
+      { letter: "D", text: "আয়নিক বন্ধন" }
+    ],
+    correctLetter: "C",
+    explanation: "H ও O পরমাণু ইলেকট্রন শেয়ার করে সমযোজী বন্ধনে যুক্ত থাকে।",
+    difficulty: "medium",
+    sourceNote: "NCTB রসায়ন, ৯ম-১০ম শ্রেণি (2026 সংস্করণ) — অধ্যায় ৫: রাসায়নিক বন্ধন",
+  },
+  {
+    id: "C910C-015",
+    classId: "class-9",
+    subjectId: "chemistry-depth",
+    chapterId: "acad-class-9-che-depth-chapter-5",
+    chapterName: "অধ্যায় ৫: রাসায়নিক বন্ধন",
+    unitNumber: 5,
+    topicId: "chapter-5",
+    questionText: "অষ্টক নিয়ম অনুযায়ী পরমাণুর সর্ববহিঃস্থ স্তরে কয়টি ইলেকট্রন থাকলে তা স্থিতিশীল হয়?",
+    options: [
+      { letter: "A", text: "৮টি" },
+      { letter: "B", text: "৬টি" },
+      { letter: "C", text: "৪টি" },
+      { letter: "D", text: "২টি" }
+    ],
+    correctLetter: "A",
+    explanation: "সর্ববহিঃস্থ স্তরে ৮টি ইলেকট্রন থাকলে পরমাণু স্থিতিশীল হয় (অষ্টক নিয়ম)।",
+    difficulty: "medium",
+    sourceNote: "NCTB রসায়ন, ৯ম-১০ম শ্রেণি (2026 সংস্করণ) — অধ্যায় ৫: রাসায়নিক বন্ধন",
+  },
+  {
+    id: "C910C-016",
+    classId: "class-9",
+    subjectId: "chemistry-depth",
+    chapterId: "acad-class-9-che-depth-chapter-6",
+    chapterName: "অধ্যায় ৬: মোলের ধারণা ও রাসায়নিক গণনা",
+    unitNumber: 6,
+    topicId: "chapter-6",
+    questionText: "১ মোল পদার্থে কয়টি কণা থাকে?",
+    options: [
+      { letter: "A", text: "৬.০২৩ × ১০²³" },
+      { letter: "B", text: "৬.০২৩ × ১০²²" },
+      { letter: "C", text: "১ × ১০²³" },
+      { letter: "D", text: "৩.০১ × ১০²³" }
+    ],
+    correctLetter: "A",
+    explanation: "অ্যাভোগাড্রো সংখ্যা ৬.০২৩×১০²³; ১ মোলে এতটি কণা থাকে।",
+    difficulty: "easy",
+    sourceNote: "NCTB রসায়ন, ৯ম-১০ম শ্রেণি (2026 সংস্করণ) — অধ্যায় ৬: মোলের ধারণা ও রাসায়নিক গণনা",
+  },
+  {
+    id: "C910C-017",
+    classId: "class-9",
+    subjectId: "chemistry-depth",
+    chapterId: "acad-class-9-che-depth-chapter-6",
+    chapterName: "অধ্যায় ৬: মোলের ধারণা ও রাসায়নিক গণনা",
+    unitNumber: 6,
+    topicId: "chapter-6",
+    questionText: "পানির আণবিক ভর কত?",
+    options: [
+      { letter: "A", text: "২০" },
+      { letter: "B", text: "১৮" },
+      { letter: "C", text: "৩২" },
+      { letter: "D", text: "১৬" }
+    ],
+    correctLetter: "B",
+    explanation: "H₂O: ২×১ + ১৬ = ১৮।",
+    difficulty: "medium",
+    sourceNote: "NCTB রসায়ন, ৯ম-১০ম শ্রেণি (2026 সংস্করণ) — অধ্যায় ৬: মোলের ধারণা ও রাসায়নিক গণনা",
+  },
+  {
+    id: "C910C-018",
+    classId: "class-9",
+    subjectId: "chemistry-depth",
+    chapterId: "acad-class-9-che-depth-chapter-6",
+    chapterName: "অধ্যায় ৬: মোলের ধারণা ও রাসায়নিক গণনা",
+    unitNumber: 6,
+    topicId: "chapter-6",
+    questionText: "১৮ গ্রাম পানিতে কত মোল পানি আছে?",
+    options: [
+      { letter: "A", text: "১ মোল" },
+      { letter: "B", text: "০.৫ মোল" },
+      { letter: "C", text: "১৮ মোল" },
+      { letter: "D", text: "২ মোল" }
+    ],
+    correctLetter: "A",
+    explanation: "মোল = ভর ÷ আণবিক ভর = ১৮ ÷ ১৮ = ১ মোল।",
+    difficulty: "easy",
+    sourceNote: "NCTB রসায়ন, ৯ম-১০ম শ্রেণি (2026 সংস্করণ) — অধ্যায় ৬: মোলের ধারণা ও রাসায়নিক গণনা",
+  },
+  {
+    id: "C910C-019",
+    classId: "class-9",
+    subjectId: "chemistry-depth",
+    chapterId: "acad-class-9-che-depth-chapter-7",
+    chapterName: "অধ্যায় ৭: রাসায়নিক বিক্রিয়া",
+    unitNumber: 7,
+    topicId: "chapter-7",
+    questionText: "জারণ-বিজারণ বিক্রিয়ায় ইলেকট্রন ত্যাগকে কী বলে?",
+    options: [
+      { letter: "A", text: "প্রশমন" },
+      { letter: "B", text: "জারণ" },
+      { letter: "C", text: "দহন" },
+      { letter: "D", text: "বিজারণ" }
+    ],
+    correctLetter: "B",
+    explanation: "ইলেকট্রন ত্যাগ = জারণ; ইলেকট্রন গ্রহণ = বিজারণ।",
+    difficulty: "easy",
+    sourceNote: "NCTB রসায়ন, ৯ম-১০ম শ্রেণি (2026 সংস্করণ) — অধ্যায় ৭: রাসায়নিক বিক্রিয়া",
+  },
+  {
+    id: "C910C-020",
+    classId: "class-9",
+    subjectId: "chemistry-depth",
+    chapterId: "acad-class-9-che-depth-chapter-7",
+    chapterName: "অধ্যায় ৭: রাসায়নিক বিক্রিয়া",
+    unitNumber: 7,
+    topicId: "chapter-7",
+    questionText: "Zn + CuSO₄ → ZnSO₄ + Cu — এই বিক্রিয়াটি কোন ধরনের?",
+    options: [
+      { letter: "A", text: "বিয়োজন বিক্রিয়া" },
+      { letter: "B", text: "প্রতিস্থাপন বিক্রিয়া" },
+      { letter: "C", text: "সংযোজন বিক্রিয়া" },
+      { letter: "D", text: "প্রশমন বিক্রিয়া" }
+    ],
+    correctLetter: "B",
+    explanation: "জিংক কপারকে প্রতিস্থাপিত করে; এটি একক প্রতিস্থাপন বিক্রিয়া।",
+    difficulty: "medium",
+    sourceNote: "NCTB রসায়ন, ৯ম-১০ম শ্রেণি (2026 সংস্করণ) — অধ্যায় ৭: রাসায়নিক বিক্রিয়া",
+  },
+  {
+    id: "C910C-021",
+    classId: "class-9",
+    subjectId: "chemistry-depth",
+    chapterId: "acad-class-9-che-depth-chapter-7",
+    chapterName: "অধ্যায় ৭: রাসায়নিক বিক্রিয়া",
+    unitNumber: 7,
+    topicId: "chapter-7",
+    questionText: "বিক্রিয়ার হার বাড়াতে কোনটি ব্যবহৃত হয়?",
+    options: [
+      { letter: "A", text: "দ্রাবক" },
+      { letter: "B", text: "বিক্রিয়ক কমানো" },
+      { letter: "C", text: "নিরোধক" },
+      { letter: "D", text: "অনুঘটক (catalyst)" }
+    ],
+    correctLetter: "D",
+    explanation: "অনুঘটক নিজে অপরিবর্তিত থেকে বিক্রিয়ার হার বাড়ায়।",
+    difficulty: "medium",
+    sourceNote: "NCTB রসায়ন, ৯ম-১০ম শ্রেণি (2026 সংস্করণ) — অধ্যায় ৭: রাসায়নিক বিক্রিয়া",
+  },
+  {
+    id: "C910C-022",
+    classId: "class-9",
+    subjectId: "chemistry-depth",
+    chapterId: "acad-class-9-che-depth-chapter-8",
+    chapterName: "অধ্যায় ৮: রসায়ন ও শক্তি",
+    unitNumber: 8,
+    topicId: "chapter-8",
+    questionText: "তাপহারী (endothermic) বিক্রিয়ায় কী ঘটে?",
+    options: [
+      { letter: "A", text: "আলো নির্গত হয়" },
+      { letter: "B", text: "তাপ নির্গত হয়" },
+      { letter: "C", text: "তাপ শোষিত হয়" },
+      { letter: "D", text: "বিদ্যুৎ উৎপন্ন হয়" }
+    ],
+    correctLetter: "C",
+    explanation: "তাপহারী বিক্রিয়ায় পরিবেশ থেকে তাপ শোষিত হয়; তাপোৎপাদী বিক্রিয়ায় তাপ নির্গত হয়।",
+    difficulty: "easy",
+    sourceNote: "NCTB রসায়ন, ৯ম-১০ম শ্রেণি (2026 সংস্করণ) — অধ্যায় ৮: রসায়ন ও শক্তি",
+  },
+  {
+    id: "C910C-023",
+    classId: "class-9",
+    subjectId: "chemistry-depth",
+    chapterId: "acad-class-9-che-depth-chapter-8",
+    chapterName: "অধ্যায় ৮: রসায়ন ও শক্তি",
+    unitNumber: 8,
+    topicId: "chapter-8",
+    questionText: "জ্বালানির ক্যালরির মান (calorific value) বলতে কী বোঝায়?",
+    options: [
+      { letter: "A", text: "জ্বালানির ঘনত্ব" },
+      { letter: "B", text: "জ্বালানির স্ফুটনাঙ্ক" },
+      { letter: "C", text: "১ গ্রাম জ্বালানির ভর" },
+      { letter: "D", text: "১ কেজি জ্বালানি সম্পূর্ণ দহনে উৎপন্ন তাপ" }
+    ],
+    correctLetter: "D",
+    explanation: "ক্যালরির মান বেশি হলে জ্বালানি তত ভালো।",
+    difficulty: "medium",
+    sourceNote: "NCTB রসায়ন, ৯ম-১০ম শ্রেণি (2026 সংস্করণ) — অধ্যায় ৮: রসায়ন ও শক্তি",
+  },
+  {
+    id: "C910C-024",
+    classId: "class-9",
+    subjectId: "chemistry-depth",
+    chapterId: "acad-class-9-che-depth-chapter-8",
+    chapterName: "অধ্যায় ৮: রসায়ন ও শক্তি",
+    unitNumber: 8,
+    topicId: "chapter-8",
+    questionText: "তড়িৎবিশ্লেষণে ক্যাথোডে কী ঘটে?",
+    options: [
+      { letter: "A", text: "দহন" },
+      { letter: "B", text: "প্রশমন" },
+      { letter: "C", text: "বিজারণ" },
+      { letter: "D", text: "জারণ" }
+    ],
+    correctLetter: "C",
+    explanation: "ক্যাথোডে ধনাত্মক আয়ন ইলেকট্রন গ্রহণ করে — বিজারণ ঘটে।",
+    difficulty: "medium",
+    sourceNote: "NCTB রসায়ন, ৯ম-১০ম শ্রেণি (2026 সংস্করণ) — অধ্যায় ৮: রসায়ন ও শক্তি",
+  },
+  {
+    id: "C910C-025",
+    classId: "class-9",
+    subjectId: "chemistry-depth",
+    chapterId: "acad-class-9-che-depth-chapter-9",
+    chapterName: "অধ্যায় ৯: অম্ল-ক্ষারক সমতা",
+    unitNumber: 9,
+    topicId: "chapter-9",
+    questionText: "দুধে কোন অম্ল থাকে?",
+    options: [
+      { letter: "A", text: "সালফিউরিক অম্ল" },
+      { letter: "B", text: "সাইট্রিক অম্ল" },
+      { letter: "C", text: "অ্যাসিটিক অম্ল" },
+      { letter: "D", text: "ল্যাকটিক অম্ল" }
+    ],
+    correctLetter: "D",
+    explanation: "দুধে ল্যাকটিক অম্ল থাকে।",
+    difficulty: "easy",
+    sourceNote: "NCTB রসায়ন, ৯ম-১০ম শ্রেণি (2026 সংস্করণ) — অধ্যায় ৯: অম্ল-ক্ষারক সমতা",
+  },
+  {
+    id: "C910C-026",
+    classId: "class-9",
+    subjectId: "chemistry-depth",
+    chapterId: "acad-class-9-che-depth-chapter-9",
+    chapterName: "অধ্যায় ৯: অম্ল-ক্ষারক সমতা",
+    unitNumber: 9,
+    topicId: "chapter-9",
+    questionText: "pH = ৩ দ্রবণটি কেমন?",
+    options: [
+      { letter: "A", text: "নিরপেক্ষ" },
+      { letter: "B", text: "লবণাক্ত" },
+      { letter: "C", text: "ক্ষারীয়" },
+      { letter: "D", text: "অম্লীয়" }
+    ],
+    correctLetter: "D",
+    explanation: "pH ৭-এর কম হলে অম্লীয়; pH ৩ শক্তিশালী অম্লীয়।",
+    difficulty: "medium",
+    sourceNote: "NCTB রসায়ন, ৯ম-১০ম শ্রেণি (2026 সংস্করণ) — অধ্যায় ৯: অম্ল-ক্ষারক সমতা",
+  },
+  {
+    id: "C910C-027",
+    classId: "class-9",
+    subjectId: "chemistry-depth",
+    chapterId: "acad-class-9-che-depth-chapter-9",
+    chapterName: "অধ্যায় ৯: অম্ল-ক্ষারক সমতা",
+    unitNumber: 9,
+    topicId: "chapter-9",
+    questionText: "পাকস্থলীর অম্লতা কমাতে কোনটি ব্যবহৃত হয়?",
+    options: [
+      { letter: "A", text: "সালফিউরিক অম্ল" },
+      { letter: "B", text: "অ্যান্টাসিড (যেমন Mg(OH)₂)" },
+      { letter: "C", text: "ভিনেগার" },
+      { letter: "D", text: "লেবুর রস" }
+    ],
+    correctLetter: "B",
+    explanation: "অ্যান্টাসিড ক্ষারীয়; এটি পাকস্থলীর অতিরিক্ত HCl-কে প্রশমিত করে।",
+    difficulty: "medium",
+    sourceNote: "NCTB রসায়ন, ৯ম-১০ম শ্রেণি (2026 সংস্করণ) — অধ্যায় ৯: অম্ল-ক্ষারক সমতা",
+  },
+  {
+    id: "C910C-028",
+    classId: "class-9",
+    subjectId: "chemistry-depth",
+    chapterId: "acad-class-9-che-depth-chapter-10",
+    chapterName: "অধ্যায় ১০: খনিজ সম্পদ: ধাতু-অধাতু",
+    unitNumber: 10,
+    topicId: "chapter-10",
+    questionText: "নিচের কোনটি ধাতু?",
+    options: [
+      { letter: "A", text: "অক্সিজেন" },
+      { letter: "B", text: "সালফার" },
+      { letter: "C", text: "লোহা" },
+      { letter: "D", text: "কার্বন" }
+    ],
+    correctLetter: "C",
+    explanation: "লোহা ধাতু; সালফার, অক্সিজেন, কার্বন অধাতু।",
+    difficulty: "easy",
+    sourceNote: "NCTB রসায়ন, ৯ম-১০ম শ্রেণি (2026 সংস্করণ) — অধ্যায় ১০: খনিজ সম্পদ: ধাতু-অধাতু",
+  },
+  {
+    id: "C910C-029",
+    classId: "class-9",
+    subjectId: "chemistry-depth",
+    chapterId: "acad-class-9-che-depth-chapter-10",
+    chapterName: "অধ্যায় ১০: খনিজ সম্পদ: ধাতু-অধাতু",
+    unitNumber: 10,
+    topicId: "chapter-10",
+    questionText: "সবচেয়ে তড়িৎ সুপরিবাহী ধাতু কোনটি?",
+    options: [
+      { letter: "A", text: "রূপা (সিলভার)" },
+      { letter: "B", text: "অ্যালুমিনিয়াম" },
+      { letter: "C", text: "তামা" },
+      { letter: "D", text: "লোহা" }
+    ],
+    correctLetter: "A",
+    explanation: "রূপা সবচেয়ে ভালো তড়িৎ পরিবাহী; ব্যবহারিকভাবে তামা বেশি ব্যবহৃত হয়।",
+    difficulty: "medium",
+    sourceNote: "NCTB রসায়ন, ৯ম-১০ম শ্রেণি (2026 সংস্করণ) — অধ্যায় ১০: খনিজ সম্পদ: ধাতু-অধাতু",
+  },
+  {
+    id: "C910C-030",
+    classId: "class-9",
+    subjectId: "chemistry-depth",
+    chapterId: "acad-class-9-che-depth-chapter-10",
+    chapterName: "অধ্যায় ১০: খনিজ সম্পদ: ধাতু-অধাতু",
+    unitNumber: 10,
+    topicId: "chapter-10",
+    questionText: "লোহার মরিচা রোধে কোন পদ্ধতি ব্যবহৃত হয়?",
+    options: [
+      { letter: "A", text: "পানিতে ডুবিয়ে রাখা" },
+      { letter: "B", text: "অম্লে ডুবানো" },
+      { letter: "C", text: "গ্যালভানাইজিং (দস্তার প্রলেপ)" },
+      { letter: "D", text: "লবণ ছিটানো" }
+    ],
+    correctLetter: "C",
+    explanation: "গ্যালভানাইজিংয়ে লোহার ওপর দস্তার প্রলেপ দেওয়া হয়, যা মরিচা রোধ করে।",
+    difficulty: "medium",
+    sourceNote: "NCTB রসায়ন, ৯ম-১০ম শ্রেণি (2026 সংস্করণ) — অধ্যায় ১০: খনিজ সম্পদ: ধাতু-অধাতু",
+  },
+  {
+    id: "C910C-031",
+    classId: "class-9",
+    subjectId: "chemistry-depth",
+    chapterId: "acad-class-9-che-depth-chapter-11",
+    chapterName: "অধ্যায় ১১: খনিজ সম্পদ: জীবাশ্ম জ্বালানি",
+    unitNumber: 11,
+    topicId: "chapter-11",
+    questionText: "জীবাশ্ম জ্বালানির উদাহরণ কোনটি?",
+    options: [
+      { letter: "A", text: "জলবিদ্যুৎ" },
+      { letter: "B", text: "সৌরশক্তি" },
+      { letter: "C", text: "বায়ুশক্তি" },
+      { letter: "D", text: "কয়লা" }
+    ],
+    correctLetter: "D",
+    explanation: "কয়লা, পেট্রোলিয়াম ও প্রাকৃতিক গ্যাস জীবাশ্ম জ্বালানি; এগুলো অনবায়নযোগ্য।",
+    difficulty: "easy",
+    sourceNote: "NCTB রসায়ন, ৯ম-১০ম শ্রেণি (2026 সংস্করণ) — অধ্যায় ১১: খনিজ সম্পদ: জীবাশ্ম জ্বালানি",
+  },
+  {
+    id: "C910C-032",
+    classId: "class-9",
+    subjectId: "chemistry-depth",
+    chapterId: "acad-class-9-che-depth-chapter-11",
+    chapterName: "অধ্যায় ১১: খনিজ সম্পদ: জীবাশ্ম জ্বালানি",
+    unitNumber: 11,
+    topicId: "chapter-11",
+    questionText: "কয়লার প্রধান উপাদান কোনটি?",
+    options: [
+      { letter: "A", text: "অক্সিজেন" },
+      { letter: "B", text: "কার্বন" },
+      { letter: "C", text: "নাইট্রোজেন" },
+      { letter: "D", text: "হাইড্রোজেন" }
+    ],
+    correctLetter: "B",
+    explanation: "কয়লার প্রধান উপাদান কার্বন।",
+    difficulty: "medium",
+    sourceNote: "NCTB রসায়ন, ৯ম-১০ম শ্রেণি (2026 সংস্করণ) — অধ্যায় ১১: খনিজ সম্পদ: জীবাশ্ম জ্বালানি",
+  },
+  {
+    id: "C910C-033",
+    classId: "class-9",
+    subjectId: "chemistry-depth",
+    chapterId: "acad-class-9-che-depth-chapter-11",
+    chapterName: "অধ্যায় ১১: খনিজ সম্পদ: জীবাশ্ম জ্বালানি",
+    unitNumber: 11,
+    topicId: "chapter-11",
+    questionText: "পেট্রোলিয়াম পরিশোধনে কোন পদ্ধতি ব্যবহৃত হয়?",
+    options: [
+      { letter: "A", text: "আংশিক পাতন" },
+      { letter: "B", text: "বাষ্পীভবন" },
+      { letter: "C", text: "পরিস্রাবণ" },
+      { letter: "D", text: "ঘনীভবন" }
+    ],
+    correctLetter: "A",
+    explanation: "আংশিক পাতনে স্ফুটনাঙ্কের পার্থক্যে পেট্রোলিয়াম থেকে পেট্রোল, ডিজেল ইত্যাদি আলাদা করা হয়।",
+    difficulty: "medium",
+    sourceNote: "NCTB রসায়ন, ৯ম-১০ম শ্রেণি (2026 সংস্করণ) — অধ্যায় ১১: খনিজ সম্পদ: জীবাশ্ম জ্বালানি",
+  },
+  {
+    id: "C910C-034",
+    classId: "class-9",
+    subjectId: "chemistry-depth",
+    chapterId: "acad-class-9-che-depth-chapter-12",
+    chapterName: "অধ্যায় ১২: দৈনন্দিন জীবনে রসায়ন",
+    unitNumber: 12,
+    topicId: "chapter-12",
+    questionText: "লেবুর রসে কোন অ্যাসিড থাকে?",
+    options: [
+      { letter: "A", text: "সালফিউরিক অ্যাসিড" },
+      { letter: "B", text: "সাইট্রিক অ্যাসিড" },
+      { letter: "C", text: "নাইট্রিক অ্যাসিড" },
+      { letter: "D", text: "অ্যাসিটিক অ্যাসিড" }
+    ],
+    correctLetter: "B",
+    explanation: "লেবুর রসে সাইট্রিক অ্যাসিড থাকে।",
+    difficulty: "easy",
+    sourceNote: "NCTB রসায়ন, ৯ম-১০ম শ্রেণি (2026 সংস্করণ) — অধ্যায় ১২: দৈনন্দিন জীবনে রসায়ন",
+  },
+  {
+    id: "C910C-035",
+    classId: "class-9",
+    subjectId: "chemistry-depth",
+    chapterId: "acad-class-9-che-depth-chapter-12",
+    chapterName: "অধ্যায় ১২: দৈনন্দিন জীবনে রসায়ন",
+    unitNumber: 12,
+    topicId: "chapter-12",
+    questionText: "ওয়াশিং সোডার রাসায়নিক নাম কী?",
+    options: [
+      { letter: "A", text: "সোডিয়াম ক্লোরাইড" },
+      { letter: "B", text: "সোডিয়াম বাইকার্বনেট" },
+      { letter: "C", text: "সোডিয়াম কার্বনেট" },
+      { letter: "D", text: "ক্যালসিয়াম কার্বনেট" }
+    ],
+    correctLetter: "C",
+    explanation: "ওয়াশিং সোডার রাসায়নিক নাম সোডিয়াম কার্বনেট।",
+    difficulty: "medium",
+    sourceNote: "NCTB রসায়ন, ৯ম-১০ম শ্রেণি (2026 সংস্করণ) — অধ্যায় ১২: দৈনন্দিন জীবনে রসায়ন",
+  },
+];

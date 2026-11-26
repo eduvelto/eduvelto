@@ -528,7 +528,7 @@ describe('__INITIAL_DATA__ script tag (CSP-safe carrier)', () => {
 });
 
 describe('getAcademicPracticePaths — Education Hub (26 Nov 2026)', () => {
-  it('derives hub + subject + chapter paths from EVERY per-subject pool file (705: 1 hub + 54 subjects + 650 chapters)', () => {
+  it('derives hub + subject + chapter paths from EVERY per-subject pool file (1,399: 1 hub + 102 subjects + 1,296 chapters)', () => {
     // Same directory scan the prerender script uses. A hardcoded
     // 6-file list silently dropped the six Class 6 subject files
     // (BanglaGrammar, MathDepth, ScienceDepth, Ict, Agriculture,
@@ -540,12 +540,12 @@ describe('getAcademicPracticePaths — Education Hub (26 Nov 2026)', () => {
           f.startsWith('publicAcademic') && f.endsWith('.ts') && f !== 'publicAcademic.ts',
       )
       .sort();
-    expect(files).toHaveLength(12);
+    expect(files).toHaveLength(31);
     const source = files
       .map((f) => readFileSync(join(process.cwd(), 'src', 'lib', f), 'utf8'))
       .join('\n');
     const paths = getAcademicPracticePaths(source);
-    expect(paths).toHaveLength(705);
+    expect(paths).toHaveLength(1399);
     expect(paths[0]).toBe('/learn/practice');
     for (const s of [
       'bangla-grammar',
@@ -589,7 +589,31 @@ describe('getAcademicPracticePaths — Education Hub (26 Nov 2026)', () => {
       '/learn/practice/class-8/agriculture/acad-class-8-agr-chapter-3-lesson-6',
     );
     expect(paths).toContain('/learn/practice/class-8/bangla/acad-class-8-ban-lesson-1');
-    // Unverified classes never get a path.
-    expect(paths.filter((p) => p.startsWith('/learn/practice/class-9'))).toEqual([]);
+    // Class 9: all twenty-four subjects have paths, including the
+    // topical chapters (ICT has no canonical chapter titles, so its
+    // chapters are topic-keyed) and the depth subjects with their own
+    // titles (physics-depth Ch6 keeps its own wording).
+    expect(paths).toContain('/learn/practice/class-9/math');
+    expect(paths).toContain('/learn/practice/class-9/bangla-1st');
+    expect(paths).toContain('/learn/practice/class-9/physics-depth');
+    expect(paths).toContain('/learn/practice/class-9/math/acad-class-9-mat-chapter-1');
+    expect(paths).toContain('/learn/practice/class-9/ict/acad-class-9-ict-topic-1');
+    expect(paths).toContain(
+      '/learn/practice/class-9/bangla-1st/acad-class-9-ban-1st-topic-1',
+    );
+    expect(paths).toContain(
+      '/learn/practice/class-9/physics-depth/acad-class-9-phy-depth-chapter-6',
+    );
+    // Class 10 shares the Class 9 pool — the same paths exist under
+    // class-10 (same chapter IDs, no separate Class 10 set).
+    expect(paths).toContain('/learn/practice/class-10/math');
+    expect(paths).toContain('/learn/practice/class-10/bangla-1st');
+    expect(paths).toContain('/learn/practice/class-10/math/acad-class-9-mat-chapter-1');
+    expect(paths).toContain('/learn/practice/class-10/ict/acad-class-9-ict-topic-1');
+    expect(paths.filter((p) => p.startsWith('/learn/practice/class-9'))).toHaveLength(347);
+    expect(paths.filter((p) => p.startsWith('/learn/practice/class-10'))).toHaveLength(347);
+    // Unverified classes never get a path — the honest empty moved to
+    // Class 11 (no verified questions yet).
+    expect(paths.filter((p) => p.startsWith('/learn/practice/class-11'))).toEqual([]);
   });
 });

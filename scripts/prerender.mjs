@@ -369,6 +369,21 @@ export function getAcademicPracticePaths(source) {
       seen.add(chapterPath);
       paths.push(chapterPath);
     }
+    // Class 10 shares the Class 9 pool (same combined class-9-10 draft
+    // set — there is NO separate Class 10 set): every class-9 subject /
+    // chapter path also exists under class-10.
+    if (classId === 'class-9') {
+      const subjectPath10 = `/learn/practice/class-10/${subjectId}`;
+      const chapterPath10 = `${subjectPath10}/${chapterId}`;
+      if (!seen.has(subjectPath10)) {
+        seen.add(subjectPath10);
+        paths.push(subjectPath10);
+      }
+      if (!seen.has(chapterPath10)) {
+        seen.add(chapterPath10);
+        paths.push(chapterPath10);
+      }
+    }
   }
   return paths;
 }

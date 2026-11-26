@@ -25,14 +25,20 @@
 //   (7.1% of one full mock per main exam; 455+ missing). Full-mock
 //   generation is therefore GATED — the UI shows availability per
 //   exam/subject and refuses to invent questions to fill gaps.
-//   Academic Classes 3–8 add 1,387 verified questions (26 Nov 2026) —
-//   twelve subjects (Bangla, Bangla Grammar, English, Math, Math-depth,
-//   Science, Science-depth, BGS, Islam, ICT, Agriculture, Home Science).
+//   Academic Classes 3–10 add 1,944 verified questions (26 Nov 2026) —
+//   thirty-one subjects (Classes 3–8: Bangla, Bangla Grammar, English,
+//   Math, Math-depth, Science, Science-depth, BGS, Islam, ICT,
+//   Agriculture, Home Science; Class 9: Accounting, Bangla 1st/2nd,
+//   Biology (+depth), Business, Finance, Chemistry (+depth), Civics,
+//   History, Economics, Geography, English 1st/2nd, Higher Math
+//   (+depth), Islam, Math (+depth), Physics (+depth), BGS, ICT).
+//   Class 10 shares the Class 9 pool (same combined draft set).
 //   They count ONLY under their NCTB units, never under any job exam (see
 //   verifiedAvailableFor).
-// - The Class 9 corrected MCQ packs (nctb-mcq-rebuild-evidence) are
-//   book-grounded but NEEDS-REVIEW — they are NOT in this pool until
-//   the owner (the English verifier) reviews them.
+// - The Class 9 corrected MCQ packs (nctb-mcq-rebuild-evidence) were
+//   reviewed + fixed 26 Nov 2026 and ARE in this pool now (557 verified
+//   questions). Class 9 was verified against the DAKHIL editions (no
+//   general NCTB Class 9-10 book set exists in the workspace).
 // - "Published" reviewStatus is NOT verification (the all-books audit
 //   found 506 wrong books). Only `verified: true` questions are shown,
 //   by default and always in the MVP pool.
@@ -381,9 +387,10 @@ const GENERAL_SUBJECTS_BY_BAND: Record<string, QpgSubject[]> = {
     { id: 'ict', nameBn: 'তথ্য ও যোগাযোগ প্রযুক্তি', nameEn: 'ICT' },
     { id: 'religion', nameBn: 'ধর্ম ও নৈতিক শিক্ষা', nameEn: 'Religion & Moral Education' },
     // Classes 6–8 verified subjects (26 Nov 2026) — the pool holds
-    // verified questions for these in Classes 6–8 only; listing a
-    // subject never implies coverage for Class 9 (chaptersFor()
-    // is the source of truth, and that class honestly shows 0).
+    // verified questions for these in Classes 6–8; the shared ones
+    // (math, math-depth, bgs, ict, islam) also hold Class 9 questions
+    // (see the '9-10' band). Listing a subject never implies coverage
+    // for a class — chaptersFor() is the source of truth.
     { id: 'islam', nameBn: 'ইসলাম শিক্ষা', nameEn: 'Islam' },
     { id: 'bangla-grammar', nameBn: 'বাংলা ব্যাকরণ', nameEn: 'Bangla Grammar' },
     { id: 'math-depth', nameBn: 'গণিত (গভীর অনুশীলন)', nameEn: 'Mathematics (Depth)' },
@@ -392,14 +399,40 @@ const GENERAL_SUBJECTS_BY_BAND: Record<string, QpgSubject[]> = {
     { id: 'home-science', nameBn: 'গার্হস্থ্য বিজ্ঞান', nameEn: 'Home Science' },
   ],
   '9-10': [
-    { id: 'bangla', nameBn: 'বাংলা', nameEn: 'Bangla' },
-    { id: 'english', nameBn: 'English', nameEn: 'English' },
+    // Class 9 verified subjects (26 Nov 2026) — 557 questions, 323
+    // chapters. Bangla and English are two papers each at SSC level,
+    // so the band lists the papers, not the single subjects. 'science'
+    // and 'religion' stay listed but hold no Class 9 questions (the
+    // real subjects are physics/chemistry/biology and islam) — listing
+    // a subject never implies coverage; chaptersFor() is the source
+    // of truth. Class 10 shares the Class 9 pool (same combined
+    // draft set — no separate Class 10 set).
+    { id: 'bangla-1st', nameBn: 'বাংলা ১ম পত্র', nameEn: 'Bangla 1st Paper' },
+    { id: 'bangla-2nd', nameBn: 'বাংলা ২য় পত্র', nameEn: 'Bangla 2nd Paper' },
+    { id: 'english-1st', nameBn: 'English ১ম পত্র', nameEn: 'English 1st Paper' },
+    { id: 'english-2nd', nameBn: 'English ২য় পত্র', nameEn: 'English 2nd Paper' },
     { id: 'math', nameBn: 'গণিত', nameEn: 'Mathematics' },
+    { id: 'math-depth', nameBn: 'গণিত (গভীর অনুশীলন)', nameEn: 'Mathematics (Depth)' },
+    { id: 'higher-math', nameBn: 'উচ্চতর গণিত', nameEn: 'Higher Mathematics' },
+    { id: 'higher-math-depth', nameBn: 'উচ্চতর গণিত (গভীর অনুশীলন)', nameEn: 'Higher Mathematics (Depth)' },
+    { id: 'physics', nameBn: 'পদার্থবিজ্ঞান', nameEn: 'Physics' },
+    { id: 'physics-depth', nameBn: 'পদার্থবিজ্ঞান (গভীর অনুশীলন)', nameEn: 'Physics (Depth)' },
+    { id: 'chemistry', nameBn: 'রসায়ন', nameEn: 'Chemistry' },
+    { id: 'chemistry-depth', nameBn: 'রসায়ন (গভীর অনুশীলন)', nameEn: 'Chemistry (Depth)' },
+    { id: 'biology', nameBn: 'জীববিজ্ঞান', nameEn: 'Biology' },
+    { id: 'biology-depth', nameBn: 'জীববিজ্ঞান (গভীর অনুশীলন)', nameEn: 'Biology (Depth)' },
     { id: 'science', nameBn: 'বিজ্ঞান', nameEn: 'Science' },
     { id: 'bgs', nameBn: 'বাংলাদেশ ও বিশ্বপরিচয়', nameEn: 'Bangladesh & Global Studies' },
     { id: 'ict', nameBn: 'তথ্য ও যোগাযোগ প্রযুক্তি', nameEn: 'ICT' },
+    { id: 'islam', nameBn: 'ইসলাম শিক্ষা', nameEn: 'Islam' },
     { id: 'religion', nameBn: 'ধর্ম ও নৈতিক শিক্ষা', nameEn: 'Religion & Moral Education' },
     { id: 'accounting', nameBn: 'হিসাববিজ্ঞান', nameEn: 'Accounting' },
+    { id: 'business', nameBn: 'ব্যবসায় উদ্যোগ', nameEn: 'Business Entrepreneurship' },
+    { id: 'finance', nameBn: 'ফিন্যান্স ও ব্যাংকিং', nameEn: 'Finance and Banking' },
+    { id: 'civics', nameBn: 'পৌরনীতি ও নাগরিকতা', nameEn: 'Civics and Citizenship' },
+    { id: 'history', nameBn: 'ইতিহাস', nameEn: 'History' },
+    { id: 'economics', nameBn: 'অর্থনীতি', nameEn: 'Economics' },
+    { id: 'geography', nameBn: 'ভূগোল ও পরিবেশ', nameEn: 'Geography and Environment' },
   ],
   '11-12': [
     { id: 'bangla', nameBn: 'বাংলা', nameEn: 'Bangla' },
@@ -626,8 +659,8 @@ function toQpgAcademicQuestion(q: PublicAcademicQuestion): QpgQuestion {
   };
 }
 
-/** The whole verified pool: 35 BCS English MCQs + 1,387 Academic
- *  (Classes 3–8, twelve subjects) MCQs = 1,422. One bank — the Question
+/** The whole verified pool: 35 BCS English MCQs + 1,944 Academic
+ *  (Classes 3–10, thirty-one subjects) MCQs = 1,979. One bank — the Question
  *  Maker and the Education Hub chapter practice draw from this same
  *  pool, so a question verified once appears in both places. BCS
  *  exam accounting counts ONLY the BCS chapter (see
@@ -682,17 +715,21 @@ export function qpgChaptersFor(stream: QpgStream, classId: string, subjectId: st
  *  for one class + subject. A class/subject with no verified
  *  questions returns [] (honest empty state). As more Academic
  *  batches are verified and appended to the per-subject pool files,
- *  their units appear here automatically — no code change per batch. */
+ *  their units appear here automatically — no code change per batch.
+ *  Class 10 resolves to the Class 9 pool (same combined draft set —
+ *  no separate Class 10 set); the returned chapters carry classId
+ *  'class-10'. */
 export function qpgAcademicChaptersFor(classId: string, subjectId: string): QpgChapter[] {
   const subj = qpgSubjectsFor('general', classId).find((x) => x.id === subjectId);
   const subjBn = subj?.nameBn ?? subjectId;
   const subjEn = subj?.nameEn ?? subjectId;
+  const effectiveClassId = classId === 'class-10' ? 'class-9' : classId;
   return PUBLIC_ACADEMIC_CHAPTERS.filter(
-    (c) => c.classId === classId && c.subjectId === subjectId,
+    (c) => c.classId === effectiveClassId && c.subjectId === subjectId,
   ).map((c) => ({
     id: c.id,
     stream: 'general' as const,
-    classId: c.classId,
+    classId: classId,
     subjectId: c.subjectId,
     nameBn: c.name,
     nameEn: c.name,
@@ -1623,8 +1660,14 @@ export function qpgCombinedSectionAvailable(section: QpgCombinedSection): number
 }
 
 /** A bundle is generatable only when every KEPT section has at least
- *  one verified question. Today that is never true — the cards stay
- *  honestly disabled until Class 8 packs are verified. */
+ *  one verified question. NOTE: this flag means "verified questions
+ *  exist per section", NOT "generatable" — the pool holds MCQs only,
+ *  so creative / short-answer marks cannot be filled from it, and the
+ *  QPG page's bundle button has NO click handler yet. The button stays
+ *  disabled with honest copy until bundle generation is wired as its
+ *  own task — do NOT enable it on this flag alone. (Class 8 packs were
+ *  verified 26 Nov 2026, so the flag is true for the four Class 8
+ *  bundles; the button still stays disabled.) */
 export function qpgCombinedPaperReady(
   paper: QpgCombinedPaper,
   droppedSectionIds: string[] = [],
