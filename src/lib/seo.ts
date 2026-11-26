@@ -50,8 +50,8 @@ import { isPublished } from './opportunities';
 import { PUBLIC_GUIDE_META } from './publicGuideMeta';
 import { SITE_URL, canonicalUrl, hreflangUrls, stripLangPrefix } from './langRouting';
 import {
+  PUBLIC_ACADEMIC_QUESTIONS,
   publicAcademicChaptersFor,
-  publicAcademicClassSubjects,
 } from './publicAcademic';
 import { QPG_GENERAL_CLASSES, qpgSubjectsFor } from './questionPaper';
 
@@ -2224,10 +2224,11 @@ export function resolveRouteSeo(pathname: string, lang: 'bn' | 'en' = 'bn'): Seo
     if (practiceMatch) {
       const [, classId, subjectId, chapterId] = practiceMatch;
       if (!classId) {
-        const total = publicAcademicClassSubjects().reduce(
-          (a, r) => a + r.questionCount,
-          0,
-        );
+        // Grand total = UNIQUE questions. Do NOT sum
+        // publicAcademicClassSubjects() rows: Class 10 shares the
+        // Class 9 pool, so its rows repeat the same 557 questions and
+        // a sum would claim 2,501 instead of 1,944.
+        const total = PUBLIC_ACADEMIC_QUESTIONS.length;
         entry = {
           title: 'অধ্যায়ভিত্তিক অনুশীলন — যাচাইকৃত প্রশ্ন | Eduvelto',
           description: `NCTB পাঠের যাচাইকৃত প্রশ্ন দিয়ে অধ্যায়ভিত্তিক অনুশীলন — ${total}টি প্রশ্ন। উত্তর দিলেই সঠিক উত্তর ও ব্যাখ্যা। সম্পূর্ণ বিনামূল্যে। Eduvelto।`,
