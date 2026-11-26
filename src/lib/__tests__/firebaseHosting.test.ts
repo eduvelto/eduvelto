@@ -15,9 +15,22 @@ import { legacyRedirectTarget } from '../langRouting';
 type HostingRedirect = { source: string; destination: string; type: number };
 type HostingRewrite = { source: string; destination: string };
 
+type HostingHeader = { key: string; value: string };
+type HostingHeaderRule = { source: string; headers: HostingHeader[] };
+
 function hosting() {
   const raw = JSON.parse(readFileSync(join(process.cwd(), 'firebase.json'), 'utf8'));
-  return raw.hosting as { cleanUrls?: boolean; redirects: HostingRedirect[]; rewrites: HostingRewrite[] };
+  return raw.hosting as {
+    cleanUrls?: boolean;
+    redirects: HostingRedirect[];
+    rewrites: HostingRewrite[];
+    headers: HostingHeaderRule[];
+  };
+}
+
+function cacheControlOf(source: string): string | undefined {
+  const rule = hosting().headers.find((h) => h.source === source);
+  return rule?.headers.find((h) => h.key === 'Cache-Control')?.value;
 }
 
 describe('firebase.json hosting', () => {
@@ -115,5 +128,43 @@ describe('firebase.json hosting', () => {
     for (const p of ['/admin', '/admin/**', '/login', '/register', '/profile', '/dashboard']) {
       expect(sources).not.toContain(p);
     }
+  });
+});
+
+describe('firebase.json cache headers (bandwidth, 26 Nov 2026)', () => {
+  // Firebase Hosting is at 8.61/10 GB monthly transfer (Spark). The
+  // entry chunk is ~2.5 MB, so returning visitors and crawlers must
+  // NOT re-download it. `immutable` is safe ONLY for Vite's hashed
+  // assets under /assets/** (the hash changes when content changes).
+  // It must NEVER cover unhashed files: index.html, the service
+  // worker, or public/ files — those must revalidate.
+  it('gives hashed /assets/** a 1-year immutable cache', () => {
+    expect(cacheControlOf('/assets/**')).toBe('public, max-age=31536000, immutable');
+  });
+
+  it('is the ONLY immutable rule — nothing else is immutable', () => {
+    const immutable = hosting().headers.filter((h) =>
+      h.headers.some((x) => x.key === 'Cache-Control' && x.value.includes('immutable')),
+    );
+    expect(immutable.map((h) => h.source)).toEqual(['/assets/**']);
+  });
+
+  it('keeps the service worker revalidating (no-cache, after the js/css rule)', () => {
+    const rules = hosting().headers;
+    const jsIdx = rules.findIndex((h) => h.source === '**/*.@(js|css)');
+    const swIdx = rules.findIndex((h) => h.source === '/sw.js');
+    expect(jsIdx).toBeGreaterThanOrEqual(0);
+    expect(swIdx).toBeGreaterThan(jsIdx); // later rule wins for sw.js
+    expect(cacheControlOf('/sw.js')).toBe('no-cache');
+    expect(cacheControlOf('**/*.@(js|css)')).not.toContain('immutable');
+  });
+
+  it('keeps unhashed documents revalidating (html/json/xml/txt/webmanifest)', () => {
+    expect(cacheControlOf('**/*.@(html|json|xml|txt|webmanifest)')).toBe('no-cache');
+  });
+
+  it('does not set Cache-Control on the ** security-headers rule', () => {
+    const all = hosting().headers.find((h) => h.source === '**');
+    expect(all?.headers.map((x) => x.key)).not.toContain('Cache-Control');
   });
 });

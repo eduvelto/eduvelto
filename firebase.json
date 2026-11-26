@@ -54,7 +54,7 @@
         "headers": [
           {
             "key": "Cache-Control",
-            "value": "max-age=31536000"
+            "value": "public, max-age=31536000"
           }
         ],
         "source": "**/*.@(js|css)"
@@ -63,10 +63,37 @@
         "headers": [
           {
             "key": "Cache-Control",
-            "value": "max-age=86400"
+            "value": "public, max-age=86400"
           }
         ],
         "source": "**/*.@(png|jpg|jpeg|svg|webp|ico|woff|woff2)"
+      },
+      {
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "no-cache"
+          }
+        ],
+        "source": "**/*.@(html|json|xml|txt|webmanifest)"
+      },
+      {
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "no-cache"
+          }
+        ],
+        "source": "/sw.js"
+      },
+      {
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "public, max-age=31536000, immutable"
+          }
+        ],
+        "source": "/assets/**"
       }
     ],
     "ignore": [
