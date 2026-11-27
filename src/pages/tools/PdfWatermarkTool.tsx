@@ -5,12 +5,13 @@
 // which has no Bangla glyphs — Bangla letters become '?' in the PDF.
 // The UI states this plainly and shows the Latin-safe preview.
 
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { useLanguage } from '../../i18n/LanguageContext';
 import { Button } from '../../components/ui';
+import RewardedAdButton from '../../components/RewardedAdButton';
 import { getPdfPageCount, latinSafeText, stampPdfWatermark, type WatermarkPosition } from '../../lib/tools/pdfPageOps';
 import {
-  cardStyle, downloadStyle, errorStyle, gridStyle, headlineLabelStyle, headlineStyle,
+  cardStyle, errorStyle, gridStyle, headlineLabelStyle, headlineStyle,
   heroDescStyle, heroStyle, heroTitleStyle, inputStyle, isOverLimit, labelStyle,
   noteStyle, PrivacyNote, resultStyle, Tile, tileGridStyle, trustChipStyle,
 } from './toolShared';
@@ -24,7 +25,7 @@ const POSITIONS: { value: WatermarkPosition; bn: string; en: string }[] = [
 ];
 
 export function PdfWatermarkTool() {
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
   const [file, setFile] = useState<File | null>(null);
   const [pageCount, setPageCount] = useState<number | null>(null);
   const [text, setText] = useState('');
@@ -34,6 +35,7 @@ export function PdfWatermarkTool() {
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [resultUrl, setResultUrl] = useState<string | null>(null);
+  const downloadRef = useRef<HTMLAnchorElement | null>(null);
   const [resultBytes, setResultBytes] = useState(0);
 
   async function handleFile(next: File | null): Promise<void> {
@@ -140,7 +142,9 @@ export function PdfWatermarkTool() {
             <Tile label={t({ bn: 'অস্বচ্ছতা', en: 'Opacity' })} value={`${Math.round(Number(opacity) * 100)}%`} />
             <Tile label={t({ bn: 'নতুন ফাইলের আকার', en: 'New file size' })} value={`${(resultBytes / 1024).toFixed(1)} KB`} />
           </div>
-          <a href={resultUrl} download="watermarked.pdf" style={downloadStyle}>{t({ bn: 'নতুন পিডিএফ ডাউনলোড করুন', en: 'Download the new PDF' })}</a>
+          <a ref={downloadRef} href={resultUrl} download="watermarked.pdf" style={{ display: 'none' }} aria-hidden="true" tabIndex={-1} />
+          {/* Ads rollout B2 (27 Nov 2026): this download goes through RewardedAdButton — Free Download is live, the 30s Unlock stays disabled until AdSense approval (never a fake timer). */}
+          <RewardedAdButton lang={lang} onFreeDownload={() => downloadRef.current?.click()} />
         </div>
       ) : null}
     </section>

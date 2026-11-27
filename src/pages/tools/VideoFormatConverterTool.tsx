@@ -11,9 +11,10 @@
 // Real-browser re-encode check still owed before ship (Node has no
 // MediaRecorder).
 
-import { useState, type CSSProperties } from 'react';
+import { useRef, useState, type CSSProperties } from 'react';
 import { useLanguage } from '../../i18n/LanguageContext';
 import { Button } from '../../components/ui';
+import RewardedAdButton from '../../components/RewardedAdButton';
 import {
   convertVideo,
   detectSupportedFormatsInBrowser,
@@ -69,19 +70,6 @@ const errorStyle: CSSProperties = {
   marginTop: 14,
   color: '#b3261e',
   fontSize: 14,
-};
-
-const downloadStyle: CSSProperties = {
-  display: 'inline-block',
-  marginTop: 10,
-  minHeight: 44,
-  lineHeight: '44px',
-  padding: '0 18px',
-  borderRadius: 8,
-  background: 'var(--teal, #0b7285)',
-  color: '#fff',
-  fontWeight: 600,
-  textDecoration: 'none',
 };
 
 const previewStyle: CSSProperties = {
@@ -198,13 +186,14 @@ function loadRealVideo(file: Blob): Promise<HTMLVideoElement> {
 }
 
 export function VideoFormatConverterTool() {
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
   const [file, setFile] = useState<File | null>(null);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const [format, setFormat] = useState<VideoOutputFormat>('webm');
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [resultUrl, setResultUrl] = useState<string | null>(null);
+  const downloadRef = useRef<HTMLAnchorElement | null>(null);
   const [resultName, setResultName] = useState('');
   const [resultFormat, setResultFormat] = useState<VideoOutputFormat>('webm');
   const [copied, setCopied] = useState(false);
@@ -407,13 +396,9 @@ export function VideoFormatConverterTool() {
             </div>
           </div>
           <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', marginTop: 12, alignItems: 'center' }}>
-            <a href={resultUrl} download={resultName} style={{ ...downloadStyle, marginTop: 0 }}>
-              {t({
-                bn: 'রূপান্তরিত ভিডিও ডাউনলোড করুন',
-                en: 'Download the converted video',
-              })}
-              {resultFormat === 'mp4' ? ' (MP4)' : ' (WebM)'}
-            </a>
+            <a ref={downloadRef} href={resultUrl} download={resultName} style={{ display: 'none' }} aria-hidden="true" tabIndex={-1} />
+            {/* Ads rollout B2 (27 Nov 2026): this download goes through RewardedAdButton — Free Download is live, the 30s Unlock stays disabled until AdSense approval (never a fake timer). */}
+            <RewardedAdButton lang={lang} onFreeDownload={() => downloadRef.current?.click()} />
             <button
               type="button"
               className="ev-btn ev-btn-outline"

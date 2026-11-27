@@ -18,6 +18,7 @@
 import { useMemo, useState, type CSSProperties } from 'react';
 import { useLanguage } from '../../i18n/LanguageContext';
 import { calculateInvoice, lineTotal, type InvoiceItem } from '../../lib/tools/invoice';
+import RewardedAdButton from '../../components/RewardedAdButton';
 
 const inputStyle: CSSProperties = {
   width: '100%',
@@ -256,13 +257,14 @@ interface ItemRow {
 const EMPTY_ROW: ItemRow = { description: '', qty: '', price: '' };
 
 export function InvoiceGeneratorTool() {
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
   const [businessName, setBusinessName] = useState('');
   const [clientName, setClientName] = useState('');
   const [items, setItems] = useState<ItemRow[]>([{ ...EMPTY_ROW }]);
   const [taxPercent, setTaxPercent] = useState('0');
   const [pdfBusy, setPdfBusy] = useState(false);
   const [pdfError, setPdfError] = useState('');
+  const [invoiceBlob, setInvoiceBlob] = useState<Blob | null>(null);
   const [copied, setCopied] = useState(false);
 
   const taxV = parseAmount(taxPercent);
@@ -317,9 +319,20 @@ export function InvoiceGeneratorTool() {
     setTaxPercent('0');
   }
 
+  function downloadInvoice(): void {
+    if (!invoiceBlob) return;
+    const url = URL.createObjectURL(invoiceBlob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'invoice.pdf';
+    a.click();
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+  }
+
   async function downloadPdf(): Promise<void> {
     if (!result) return;
     setPdfError('');
+    setInvoiceBlob(null);
     setPdfBusy(true);
     try {
       const { jsPDF } = await import('jspdf');
@@ -349,7 +362,7 @@ export function InvoiceGeneratorTool() {
       y += 7;
       doc.text(`Grand total: ${fmtMoney(result.grandTotal)}`, 14, y);
       doc.text(takaInWords(result.grandTotal), 14, y + 7);
-      doc.save('invoice.pdf');
+      setInvoiceBlob(doc.output('blob'));
     } catch {
       setPdfError(
         t({ bn: 'পিডিএফ তৈরি করা যায়নি — আবার চেষ্টা করুন।', en: 'Could not create the PDF — please try again.' }),
@@ -492,9 +505,15 @@ export function InvoiceGeneratorTool() {
             <button type="button" className="ev-btn" onClick={downloadPdf} disabled={pdfBusy}>
               {pdfBusy
                 ? t({ bn: 'তৈরি হচ্ছে…', en: 'Creating…' })
-                : t({ bn: 'পিডিএফ নামান', en: 'Download PDF' })}
+                : t({ bn: 'PDF তৈরি করুন', en: 'Create PDF' })}
             </button>
           </div>
+          {invoiceBlob ? (
+            <div style={{ marginTop: 12 }}>
+              {/* Ads rollout B2 (27 Nov 2026): this download goes through RewardedAdButton — Free Download is live, the 30s Unlock stays disabled until AdSense approval (never a fake timer). */}
+              <RewardedAdButton lang={lang} onFreeDownload={downloadInvoice} />
+            </div>
+          ) : null}
           {pdfError ? (
             <p style={errorStyle} role="alert">
               {pdfError}

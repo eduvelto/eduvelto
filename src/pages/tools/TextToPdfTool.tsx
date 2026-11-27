@@ -6,12 +6,13 @@
 // PDF itself is English/Latin only — Bangla letters become '?' there.
 // The UI states this plainly and reports how many letters change.
 
-import { useMemo, useState } from 'react';
+import { useMemo, useRef, useState } from 'react';
 import { useLanguage } from '../../i18n/LanguageContext';
 import { Button } from '../../components/ui';
+import RewardedAdButton from '../../components/RewardedAdButton';
 import { buildTextPdf, sanitizeForPdf } from '../../lib/tools/textPdf';
 import {
-  cardStyle, downloadStyle, errorStyle, gridStyle, headlineLabelStyle, headlineStyle,
+  cardStyle, errorStyle, gridStyle, headlineLabelStyle, headlineStyle,
   heroDescStyle, heroStyle, heroTitleStyle, inputStyle, labelStyle,
   noteStyle, resultStyle, Tile, tileGridStyle, trustChipStyle,
 } from './toolShared';
@@ -19,13 +20,14 @@ import {
 const EXAMPLE_EN = 'Eduvelto — Free Education for Bangladesh\n\nWrite your notes, assignment or letter here. This tool turns plain text into a clean A4 PDF, right in your browser.\n\nTip: use English letters for the PDF. Bangla shows on screen, but the PDF font cannot draw Bangla letters.';
 
 export function TextToPdfTool() {
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
   const [title, setTitle] = useState('');
   const [text, setText] = useState('');
   const [fontSize, setFontSize] = useState('12');
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [resultUrl, setResultUrl] = useState<string | null>(null);
+  const downloadRef = useRef<HTMLAnchorElement | null>(null);
   const [resultBytes, setResultBytes] = useState(0);
   const [replaced, setReplaced] = useState(0);
 
@@ -114,7 +116,9 @@ export function TextToPdfTool() {
           {replaced > 0 ? (
             <p style={noteStyle}>{t({ bn: `PDF-এ ${replaced}টি অক্ষর "?" হয়েছে (বাংলা ফন্ট নেই বলে)।`, en: `${replaced} character(s) became "?" in the PDF (no Bangla font).` })}</p>
           ) : null}
-          <a href={resultUrl} download="text.pdf" style={downloadStyle}>{t({ bn: 'পিডিএফ ডাউনলোড করুন', en: 'Download the PDF' })}</a>
+          <a ref={downloadRef} href={resultUrl} download="text.pdf" style={{ display: 'none' }} aria-hidden="true" tabIndex={-1} />
+          {/* Ads rollout B2 (27 Nov 2026): this download goes through RewardedAdButton — Free Download is live, the 30s Unlock stays disabled until AdSense approval (never a fake timer). */}
+          <RewardedAdButton lang={lang} onFreeDownload={() => downloadRef.current?.click()} />
         </div>
       ) : null}
     </section>

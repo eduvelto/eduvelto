@@ -6,9 +6,10 @@
 // static import), so it stays out of the main bundle. Page selection
 // syntax: "1,3-5" — 1-based, bounds-checked against the real page count.
 
-import { useState, type CSSProperties } from 'react';
+import { useRef, useState, type CSSProperties } from 'react';
 import { useLanguage } from '../../i18n/LanguageContext';
 import { Button } from '../../components/ui';
+import RewardedAdButton from '../../components/RewardedAdButton';
 import { parsePageSelection, splitPdf } from '../../lib/tools/pdfSplitter';
 
 const inputStyle: CSSProperties = {
@@ -61,31 +62,19 @@ const errorStyle: CSSProperties = {
   fontSize: 14,
 };
 
-const downloadStyle: CSSProperties = {
-  display: 'inline-block',
-  marginTop: 10,
-  minHeight: 44,
-  lineHeight: '44px',
-  padding: '0 18px',
-  borderRadius: 8,
-  background: 'var(--teal, #0b7285)',
-  color: '#fff',
-  fontWeight: 600,
-  textDecoration: 'none',
-};
-
 function isPdfFile(file: File): boolean {
   return file.type === 'application/pdf' || file.name.toLowerCase().endsWith('.pdf');
 }
 
 export function PdfSplitterTool() {
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
   const [file, setFile] = useState<File | null>(null);
   const [pageCount, setPageCount] = useState<number | null>(null);
   const [selection, setSelection] = useState('');
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [resultUrl, setResultUrl] = useState<string | null>(null);
+  const downloadRef = useRef<HTMLAnchorElement | null>(null);
   const [resultPages, setResultPages] = useState<number[]>([]);
 
   async function handleFileChange(next: File | null): Promise<void> {
@@ -203,9 +192,9 @@ export function PdfSplitterTool() {
               {resultPages.join(', ')}
             </strong>
           </p>
-          <a href={resultUrl} download="split-pages.pdf" style={downloadStyle}>
-            {t({ bn: 'নতুন পিডিএফ ডাউনলোড করুন', en: 'Download the new PDF' })}
-          </a>
+          <a ref={downloadRef} href={resultUrl} download="split-pages.pdf" style={{ display: 'none' }} aria-hidden="true" tabIndex={-1} />
+          {/* Ads rollout B2 (27 Nov 2026): this download goes through RewardedAdButton — Free Download is live, the 30s Unlock stays disabled until AdSense approval (never a fake timer). */}
+          <RewardedAdButton lang={lang} onFreeDownload={() => downloadRef.current?.click()} />
           <p style={noteStyle}>
             {t({
               bn: 'পাতা ১ থেকে গোনা হয়; যেমন "1,3-5" মানে ১, ৩, ৪ ও ৫ নম্বর পাতা।',

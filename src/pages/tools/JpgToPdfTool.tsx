@@ -9,7 +9,7 @@ import RewardedAdButton from '../../components/RewardedAdButton';
 import { buildImagesPdf, type PdfImageInput } from '../../lib/tools/textPdf';
 import { fileToDataUrl } from '../../lib/tools/imageConvert';
 import {
-  cardStyle, downloadStyle, errorStyle, headlineLabelStyle, headlineStyle,
+  cardStyle, errorStyle, headlineLabelStyle, headlineStyle,
   heroDescStyle, heroStyle, heroTitleStyle, inputStyle, isOverLimit, labelStyle,
   noteStyle, PrivacyNote, resultStyle, Tile, tileGridStyle, trustChipStyle,
 } from './toolShared';
@@ -133,15 +133,9 @@ export function JpgToPdfTool() {
             <Tile label={t({ bn: 'ছবির মোট আকার', en: 'Total image size' })} value={`${(totalBytes / 1024 / 1024).toFixed(2)} MB`} />
             <Tile label={t({ bn: 'পিডিএফের আকার', en: 'PDF size' })} value={`${(resultBytes / 1024).toFixed(1)} KB`} />
           </div>
-          <a ref={downloadRef} href={resultUrl} download="images.pdf" style={images.length > 5 ? { display: 'none' } : downloadStyle}>{t({ bn: 'পিডিএফ ডাউনলোড করুন', en: 'Download the PDF' })}</a>
-          {images.length > 5 ? (
-            <>
-              <p style={noteStyle}>{t({ bn: '৫টির বেশি ছবির বাল্ক ডাউনলোড — নিচে বিনামূল্যে ডাউনলোড করুন।', en: 'Bulk download of more than 5 images — download free below.' })}</p>
-              <div style={{ marginTop: 10 }}>
-                <RewardedAdButton lang={lang} onFreeDownload={() => downloadRef.current?.click()} />
-              </div>
-            </>
-          ) : null}
+          <a ref={downloadRef} href={resultUrl} download="images.pdf" style={{ display: 'none' }} aria-hidden="true" tabIndex={-1} />
+          {/* Ads rollout B2 (27 Nov 2026): the PDF download goes through RewardedAdButton for every image count — the old >5-images-only gate was inconsistent. Free Download is live, the 30s Unlock stays disabled until AdSense approval. */}
+          <RewardedAdButton lang={lang} onFreeDownload={() => downloadRef.current?.click()} />
         </div>
       ) : null}
     </section>

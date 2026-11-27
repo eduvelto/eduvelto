@@ -2,18 +2,19 @@
 // Renders inside ToolsDetailPage's PageShell (no own h1 / Breadcrumb).
 // Logic in src/lib/tools/pdfPageOps.ts (pdf-lib, lazy). File stays on device.
 
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { useLanguage } from '../../i18n/LanguageContext';
 import { Button } from '../../components/ui';
+import RewardedAdButton from '../../components/RewardedAdButton';
 import { getPdfPageCount, reorderPdfPages } from '../../lib/tools/pdfPageOps';
 import {
-  cardStyle, downloadStyle, errorStyle, headlineLabelStyle, headlineStyle,
+  cardStyle, errorStyle, headlineLabelStyle, headlineStyle,
   heroDescStyle, heroStyle, heroTitleStyle, inputStyle, isOverLimit, labelStyle,
   noteStyle, PrivacyNote, resultStyle, Tile, tileGridStyle, trustChipStyle,
 } from './toolShared';
 
 export function PdfPageReorderTool() {
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
   const [file, setFile] = useState<File | null>(null);
   const [pageCount, setPageCount] = useState<number | null>(null);
   const [order, setOrder] = useState<number[]>([]);
@@ -21,6 +22,7 @@ export function PdfPageReorderTool() {
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [resultUrl, setResultUrl] = useState<string | null>(null);
+  const downloadRef = useRef<HTMLAnchorElement | null>(null);
   const [resultBytes, setResultBytes] = useState(0);
 
   async function handleFile(next: File | null): Promise<void> {
@@ -126,7 +128,9 @@ export function PdfPageReorderTool() {
             <Tile label={t({ bn: 'ঘোরানো পাতা', en: 'Rotated pages' })} value={Object.values(rotations).filter((r) => r !== 0).length} />
             <Tile label={t({ bn: 'নতুন ফাইলের আকার', en: 'New file size' })} value={`${(resultBytes / 1024).toFixed(1)} KB`} />
           </div>
-          <a href={resultUrl} download="reordered.pdf" style={downloadStyle}>{t({ bn: 'নতুন পিডিএফ ডাউনলোড করুন', en: 'Download the new PDF' })}</a>
+          <a ref={downloadRef} href={resultUrl} download="reordered.pdf" style={{ display: 'none' }} aria-hidden="true" tabIndex={-1} />
+          {/* Ads rollout B2 (27 Nov 2026): this download goes through RewardedAdButton — Free Download is live, the 30s Unlock stays disabled until AdSense approval (never a fake timer). */}
+          <RewardedAdButton lang={lang} onFreeDownload={() => downloadRef.current?.click()} />
         </div>
       ) : null}
     </section>

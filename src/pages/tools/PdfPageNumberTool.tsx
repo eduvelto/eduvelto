@@ -4,6 +4,7 @@
 import {useState, type CSSProperties } from 'react';
 import { useLanguage } from '../../i18n/LanguageContext';
 import {ToolHero, ButtonRow, inputStyle, labelStyle, cardStyle, noteStyle } from './toolUi';
+import RewardedAdButton from '../../components/RewardedAdButton';
 import { stampPdfPageNumbers, getPdfPageCount, latinSafeText, type PageNumberPosition, type PageNumberFormat } from '../../lib/tools/pdfPageOps';
 
 
@@ -43,7 +44,7 @@ const FORMATS: readonly { id: PageNumberFormat; bn: string; en: string }[] = [
 ];
 
 export function PdfPageNumberTool() {
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
   const [file, setFile] = useState<File | null>(null);
   const [pageCount, setPageCount] = useState(0);
   const [position, setPosition] = useState<PageNumberPosition>('bottom-center');
@@ -59,6 +60,7 @@ export function PdfPageNumberTool() {
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [done, setDone] = useState<string | null>(null);
+  const [resultBlob, setResultBlob] = useState<Blob | null>(null);
 
   const headerHasBangla = headerText !== '' && latinSafeText(headerText) !== headerText;
   const footerHasBangla = footerText !== '' && latinSafeText(footerText) !== footerText;
@@ -67,6 +69,7 @@ export function PdfPageNumberTool() {
     if (!selected) return;
     setError(null);
     setDone(null);
+    setResultBlob(null);
     if (selected.size > 50 * 1024 * 1024) { setError(t({ bn: 'ফাইলটি ৫০ MB-এর বেশি — ছোট ফাইল বাছুন।', en: 'The file is over 50 MB — choose a smaller file.' })); return; }
     try {
       const pages = await getPdfPageCount(selected);
@@ -81,6 +84,7 @@ export function PdfPageNumberTool() {
     if (!file) return;
     setError(null);
     setDone(null);
+    setResultBlob(null);
     setBusy(true);
     try {
       const blob = await stampPdfPageNumbers(file, {
@@ -95,9 +99,9 @@ export function PdfPageNumberTool() {
         headerText: headerText || undefined,
         footerText: footerText || undefined,
       });
-      downloadBlob('eduvelto-numbered.pdf', blob);
+      setResultBlob(blob);
       const numbered = skipFirst ? pageCount - 1 : pageCount;
-      setDone(t({ bn: `${numbered}টি পাতায় নম্বর বসানো হয়েছে। ডাউনলোড হয়েছে: eduvelto-numbered.pdf`, en: `Page numbers added to ${numbered} page(s). Downloaded: eduvelto-numbered.pdf` }));
+      setDone(t({ bn: `${numbered}টি পাতায় নম্বর বসানো হয়েছে। নিচে বিনামূল্যে ডাউনলোড করুন।`, en: `Page numbers added to ${numbered} page(s). Download it free below.` }));
     } catch (e) {
       setError(e instanceof Error ? e.message : t({ bn: 'নম্বর বসানো যায়নি — সেটিংস দেখে আবার চেষ্টা করুন।', en: 'Could not add page numbers — check the settings and try again.' }));
     } finally {
@@ -171,10 +175,16 @@ export function PdfPageNumberTool() {
           ) : null}
           <ButtonRow>
             <button type="button" style={{ minHeight: 44, padding: '0 22px', borderRadius: 8, border: 'none', background: 'var(--teal)', color: '#fff', fontWeight: 700, cursor: 'pointer' }} onClick={() => void handleStamp()} disabled={busy}>
-              {busy ? t({ bn: 'নম্বর বসানো হচ্ছে…', en: 'Adding numbers…' }) : t({ bn: 'নম্বর বসান ও ডাউনলোড করুন', en: 'Add numbers & download' })}
+              {busy ? t({ bn: 'নম্বর বসানো হচ্ছে…', en: 'Adding numbers…' }) : t({ bn: 'নম্বর বসান', en: 'Add numbers' })}
             </button>
           </ButtonRow>
           {done ? <p style={noteStyle} role="status">{done}</p> : null}
+          {done && resultBlob ? (
+            <div style={{ marginTop: 12 }}>
+              {/* Ads rollout B2 (27 Nov 2026): this download goes through RewardedAdButton — Free Download is live, the 30s Unlock stays disabled until AdSense approval (never a fake timer). */}
+              <RewardedAdButton lang={lang} onFreeDownload={() => downloadBlob('eduvelto-numbered.pdf', resultBlob)} />
+            </div>
+          ) : null}
         </>
       ) : null}
       <p style={noteStyle}>{t({ bn: 'নম্বর বসে ল্যাটিন সংখ্যায় (1, 2, 3)। প্রথম পাতা বাদ দিলে দ্বিতীয় পাতায় শুরুর নম্বর বসে। নিচের দিকে নম্বর বসালে আগে থেকে নিচে লেখা থাকলে ঢেকে যেতে পারে।', en: 'Numbers are stamped in Latin digits (1, 2, 3). When the first page is skipped, the second page shows the starting number. A bottom number can overlap text already at the bottom of a page.' })}</p>

@@ -3,6 +3,7 @@ import { useLanguage } from '../i18n/LanguageContext';
 import { PageShell } from '../components/PageShell';
 import { Breadcrumb } from '../components/Breadcrumb';
 import AdSlot from '../components/AdSlot';
+import RewardedAdButton from '../components/RewardedAdButton';
 import { downloadBlobInApp } from '../lib/nativeFileDownload';
 import { mergePdfs } from '../lib/tools/pdfPageOps';
 
@@ -60,8 +61,10 @@ function formatFileSize(bytes: number): string {
   return `${(bytes / (1024 * 1024)).toFixed(1)} MB`;
 }
 
-/** Latin-only text → real selectable PDF text, paginated on A4. */
-async function textToPdfLatin(text: string, filename: string) {
+/** Latin-only text → real selectable PDF text, paginated on A4. Returns
+ *  the PDF blob (ads rollout B2: the download goes through
+ *  RewardedAdButton; this helper no longer downloads by itself). */
+async function textToPdfLatin(text: string): Promise<Blob> {
   const jsPDF = await loadJsPdf();
   const doc = new jsPDF({ unit: 'mm', format: 'a4' });
   doc.setFont('helvetica', 'normal');
@@ -78,7 +81,7 @@ async function textToPdfLatin(text: string, filename: string) {
     });
     page += 1;
   }
-  void downloadBlob(doc.output('blob'), filename);
+  return doc.output('blob');
 }
 
 /** Wrap paragraphs to canvas lines (word wrap + hard-split overlong words). Exported for unit tests. */
@@ -119,8 +122,9 @@ export function wrapLines(ctx: CanvasRenderingContext2D, text: string, maxWidth:
   return out;
 }
 
-/** Text containing Bengali → canvas-rendered pages (correct shaping). */
-async function textToPdfBengali(text: string, filename: string) {
+/** Text containing Bengali → canvas-rendered pages (correct shaping).
+ *  Returns the PDF blob (ads rollout B2 — see textToPdfLatin). */
+async function textToPdfBengali(text: string): Promise<Blob> {
   const jsPDF = await loadJsPdf();
   try {
     await document.fonts.load('22px "Hind Siliguri"');
@@ -161,7 +165,7 @@ async function textToPdfBengali(text: string, filename: string) {
     if (start > 0) doc.addPage();
     doc.addImage(canvas.toDataURL('image/png'), 'PNG', 0, 0, 210, 297);
   }
-  void downloadBlob(doc.output('blob'), filename);
+  return doc.output('blob');
 }
 
 export default function LifePdfToolsPage() {
@@ -170,15 +174,18 @@ export default function LifePdfToolsPage() {
   const [pdfName, setPdfName] = useState('');
   const [textBusy, setTextBusy] = useState(false);
   const [textMsg, setTextMsg] = useState('');
+  const [textPdf, setTextPdf] = useState<{ blob: Blob; filename: string } | null>(null);
   const [files, setFiles] = useState<File[]>([]);
   const [mergeBusy, setMergeBusy] = useState(false);
   const [mergeMsg, setMergeMsg] = useState('');
+  const [mergedPdf, setMergedPdf] = useState<{ blob: Blob; filename: string } | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const hasBengali = BENGALI_RE.test(text);
 
   async function handleTextToPdf() {
     setTextMsg('');
+    setTextPdf(null);
     if (!text.trim()) {
       setTextMsg(t({ bn: 'প্রথমে কিছু লেখা লিখুন বা পেস্ট করুন।', en: 'First type or paste some text.' }));
       return;
@@ -186,12 +193,11 @@ export default function LifePdfToolsPage() {
     setTextBusy(true);
     try {
       const filename = safeFilename(pdfName, 'eduvelto-text.pdf');
-      if (hasBengali) {
-        await textToPdfBengali(text, filename);
-      } else {
-        await textToPdfLatin(text, filename);
-      }
-      setTextMsg(t({ bn: `PDF ডাউনলোড হয়েছে: ${filename}`, en: `PDF downloaded: ${filename}` }));
+      const blob = hasBengali
+        ? await textToPdfBengali(text)
+        : await textToPdfLatin(text);
+      setTextPdf({ blob, filename });
+      setTextMsg(t({ bn: `PDF তৈরি হয়েছে: ${filename} — নিচে বিনামূল্যে ডাউনলোড করুন।`, en: `PDF is ready: ${filename} — download it free below.` }));
     } catch {
       setTextMsg(
         t({ bn: 'PDF তৈরি করা যায়নি। আবার চেষ্টা করুন।', en: 'Could not create the PDF. Please try again.' }),
@@ -215,6 +221,7 @@ export default function LifePdfToolsPage() {
 
   async function handleMerge() {
     setMergeMsg('');
+    setMergedPdf(null);
     if (files.length < 2) {
       setMergeMsg(t({ bn: 'মার্জ করতে অন্তত ২টি PDF ফাইল লাগবে।', en: 'Merging needs at least 2 PDF files.' }));
       return;
@@ -224,9 +231,9 @@ export default function LifePdfToolsPage() {
       // Shared engine (27 Nov 2026): the hub merge now calls the same
       // mergePdfs() the standalone PDF Merger tool uses.
       const result = await mergePdfs(files.map((file) => ({ blob: file, name: file.name })));
-      await downloadBlob(result.blob, 'eduvelto-merged.pdf');
+      setMergedPdf({ blob: result.blob, filename: 'eduvelto-merged.pdf' });
       setMergeMsg(
-        t({ bn: `${files.length}টি PDF একত্র করে ডাউনলোড হয়েছে।`, en: `${files.length} PDFs merged and downloaded.` }),
+        t({ bn: `${files.length}টি PDF একত্র হয়েছে — নিচে বিনামূল্যে ডাউনলোড করুন।`, en: `${files.length} PDFs merged — download it free below.` }),
       );
     } catch {
       setMergeMsg(
@@ -298,9 +305,15 @@ export default function LifePdfToolsPage() {
           >
             {textBusy
               ? t({ bn: 'তৈরি হচ্ছে…', en: 'Creating…' })
-              : t({ bn: 'PDF ডাউনলোড করুন', en: 'Download PDF' })}
+              : t({ bn: 'PDF তৈরি করুন', en: 'Create PDF' })}
           </button>
         </div>
+        {textPdf ? (
+          <div style={{ marginTop: 12 }}>
+            {/* Ads rollout B2 (27 Nov 2026): this PDF download goes through RewardedAdButton (30s) — Free Download is live, the Unlock stays disabled until AdSense approval. The download itself still uses downloadBlob(), so the in-app native path is unchanged. */}
+            <RewardedAdButton lang={lang} onFreeDownload={() => void downloadBlob(textPdf.blob, textPdf.filename)} />
+          </div>
+        ) : null}
         {textMsg ? (
           <p role="status" style={{ margin: 0 }}>
             {textMsg}
@@ -366,9 +379,15 @@ export default function LifePdfToolsPage() {
           >
             {mergeBusy
               ? t({ bn: 'মার্জ হচ্ছে…', en: 'Merging…' })
-              : t({ bn: 'একত্র করে ডাউনলোড করুন', en: 'Merge and download' })}
+              : t({ bn: 'একত্র করুন', en: 'Merge' })}
           </button>
         </div>
+        {mergedPdf ? (
+          <div style={{ marginTop: 12 }}>
+            {/* Ads rollout B2 (27 Nov 2026): this PDF download goes through RewardedAdButton (30s) — Free Download is live, the Unlock stays disabled until AdSense approval. The download itself still uses downloadBlob(), so the in-app native path is unchanged. */}
+            <RewardedAdButton lang={lang} onFreeDownload={() => void downloadBlob(mergedPdf.blob, mergedPdf.filename)} />
+          </div>
+        ) : null}
         {mergeMsg ? (
           <p role="status" style={{ margin: 0 }}>
             {mergeMsg}

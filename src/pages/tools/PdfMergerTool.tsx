@@ -4,6 +4,7 @@
 import {useState, type CSSProperties } from 'react';
 import { useLanguage } from '../../i18n/LanguageContext';
 import {ToolHero, Tiles, ButtonRow, inputStyle, labelStyle, cardStyle, noteStyle } from './toolUi';
+import RewardedAdButton from '../../components/RewardedAdButton';
 import { mergePdfs, getPdfPageCount, parsePageSelection, type MergeFileInput } from '../../lib/tools/pdfPageOps';
 
 
@@ -45,11 +46,12 @@ function nextId(): string {
 }
 
 export function PdfMergerTool() {
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
   const [entries, setEntries] = useState<MergeEntry[]>([]);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [done, setDone] = useState<string | null>(null);
+  const [resultBlob, setResultBlob] = useState<Blob | null>(null);
 
   const totalPages = entries.reduce((a, e) => a + e.pages, 0);
   const totalBytes = entries.reduce((a, e) => a + e.file.size, 0);
@@ -58,6 +60,7 @@ export function PdfMergerTool() {
     if (!selected) return;
     setError(null);
     setDone(null);
+    setResultBlob(null);
     const pdfs = Array.from(selected).filter((f) => f.type === 'application/pdf' || f.name.toLowerCase().endsWith('.pdf'));
     if (pdfs.length < selected.length) {
       setError(t({ bn: 'শুধু PDF ফাইল যোগ করা হয়েছে; অন্য ফাইলগুলো বাদ দেওয়া হয়েছে।', en: 'Only PDF files were added; other files were skipped.' }));
@@ -102,6 +105,7 @@ export function PdfMergerTool() {
   async function handleMerge(): Promise<void> {
     setError(null);
     setDone(null);
+    setResultBlob(null);
     if (entries.length < 2) {
       setError(t({ bn: 'মার্জ করতে অন্তত ২টি PDF ফাইল লাগবে।', en: 'Merging needs at least 2 PDF files.' }));
       return;
@@ -122,8 +126,8 @@ export function PdfMergerTool() {
         inputs.push({ blob: e.file, name: e.file.name, pages, rotations });
       }
       const result = await mergePdfs(inputs);
-      downloadBlob('eduvelto-merged.pdf', result.blob);
-      setDone(t({ bn: `${entries.length}টি PDF একত্র হয়েছে — মোট ${result.totalPages} পাতা। ডাউনলোড হয়েছে: eduvelto-merged.pdf`, en: `${entries.length} PDFs merged — ${result.totalPages} pages in total. Downloaded: eduvelto-merged.pdf` }));
+      setResultBlob(result.blob);
+      setDone(t({ bn: `${entries.length}টি PDF একত্র হয়েছে — মোট ${result.totalPages} পাতা। নিচে বিনামূল্যে ডাউনলোড করুন।`, en: `${entries.length} PDFs merged — ${result.totalPages} pages in total. Download it free below.` }));
     } catch (e) {
       setError(e instanceof Error ? e.message : t({ bn: 'মার্জ করা যায়নি — ফাইলগুলো সঠিক PDF কি না দেখুন।', en: 'Could not merge — check the files are valid PDFs.' }));
     } finally {
@@ -171,10 +175,16 @@ export function PdfMergerTool() {
               {t({ bn: 'নাম অনুযায়ী সাজান (A–Z)', en: 'Sort by name (A–Z)' })}
             </button>
             <button type="button" style={{ minHeight: 44, padding: '0 22px', borderRadius: 8, border: 'none', background: 'var(--teal)', color: '#fff', fontWeight: 700, cursor: 'pointer' }} onClick={() => void handleMerge()} disabled={busy || entries.length < 2}>
-              {busy ? t({ bn: 'মার্জ হচ্ছে…', en: 'Merging…' }) : t({ bn: 'মার্জ করুন ও ডাউনলোড করুন', en: 'Merge & download' })}
+              {busy ? t({ bn: 'মার্জ হচ্ছে…', en: 'Merging…' }) : t({ bn: 'মার্জ করুন', en: 'Merge' })}
             </button>
           </ButtonRow>
           {done ? <p style={noteStyle} role="status">{done}</p> : null}
+          {done && resultBlob ? (
+            <div style={{ marginTop: 12 }}>
+              {/* Ads rollout B2 (27 Nov 2026): this download goes through RewardedAdButton — Free Download is live, the 30s Unlock stays disabled until AdSense approval (never a fake timer). */}
+              <RewardedAdButton lang={lang} onFreeDownload={() => downloadBlob('eduvelto-merged.pdf', resultBlob)} />
+            </div>
+          ) : null}
         </>
       ) : (
         <p style={noteStyle}>{t({ bn: 'ফাইল যোগ করলে এখানে তালিকা, পাতার সংখ্যা ও মোট আকার দেখা যাবে — মার্জ করার আগেই। পাতার পরিসর ফাঁকা রাখলে পুরো ফাইল নেওয়া হয়।', en: 'Add files to see the list, page counts and total size before merging. Leave the page range empty to take the whole file.' })}</p>

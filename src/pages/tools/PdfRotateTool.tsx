@@ -4,6 +4,7 @@
 import {useState, type CSSProperties } from 'react';
 import { useLanguage } from '../../i18n/LanguageContext';
 import {ToolHero, ButtonRow, inputStyle, labelStyle, cardStyle, noteStyle } from './toolUi';
+import RewardedAdButton from '../../components/RewardedAdButton';
 import { rotatePdfPages, getPdfPageCount } from '../../lib/tools/pdfPageOps';
 
 const resultStyle: CSSProperties = {
@@ -33,18 +34,20 @@ function downloadBlob(filename: string, blob: Blob): void {
 
 
 export function PdfRotateTool() {
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
   const [file, setFile] = useState<File | null>(null);
   const [pageCount, setPageCount] = useState(0);
   const [rotations, setRotations] = useState<Record<number, number>>({});
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [done, setDone] = useState<string | null>(null);
+  const [resultBlob, setResultBlob] = useState<Blob | null>(null);
 
   async function handleFile(selected: File | null): Promise<void> {
     if (!selected) return;
     setError(null);
     setDone(null);
+    setResultBlob(null);
     setRotations({});
     if (selected.size > 50 * 1024 * 1024) { setError(t({ bn: 'ফাইলটি ৫০ MB-এর বেশি — ছোট ফাইল বাছুন।', en: 'The file is over 50 MB — choose a smaller file.' })); return; }
     try {
@@ -106,6 +109,7 @@ export function PdfRotateTool() {
     if (!file) return;
     setError(null);
     setDone(null);
+    setResultBlob(null);
     if (rotatedCount === 0) {
       setError(t({ bn: 'অন্তত একটি পাতা ও একটি ঘূর্ণন বাছুন।', en: 'Choose at least one page and a rotation.' }));
       return;
@@ -113,8 +117,8 @@ export function PdfRotateTool() {
     setBusy(true);
     try {
       const blob = await rotatePdfPages(file, rotations);
-      downloadBlob('eduvelto-rotated.pdf', blob);
-      setDone(t({ bn: `${rotatedCount}টি পাতা ঘোরানো হয়েছে। ডাউনলোড হয়েছে: eduvelto-rotated.pdf`, en: `${rotatedCount} page(s) rotated. Downloaded: eduvelto-rotated.pdf` }));
+      setResultBlob(blob);
+      setDone(t({ bn: `${rotatedCount}টি পাতা ঘোরানো হয়েছে। নিচে বিনামূল্যে ডাউনলোড করুন।`, en: `${rotatedCount} page(s) rotated. Download it free below.` }));
     } catch (e) {
       setError(e instanceof Error ? e.message : t({ bn: 'ঘোরানো যায়নি — ফাইলটি সঠিক PDF কি না দেখুন।', en: 'Could not rotate — check the file is a valid PDF.' }));
     } finally {
@@ -164,10 +168,16 @@ export function PdfRotateTool() {
           </div>
           <ButtonRow>
             <button type="button" style={{ minHeight: 44, padding: '0 22px', borderRadius: 8, border: 'none', background: 'var(--teal)', color: '#fff', fontWeight: 700, cursor: 'pointer' }} onClick={() => void handleRotate()} disabled={busy || rotatedCount === 0}>
-              {busy ? t({ bn: 'ঘোরানো হচ্ছে…', en: 'Rotating…' }) : t({ bn: 'ঘোরান ও ডাউনলোড করুন', en: 'Rotate & download' })}
+              {busy ? t({ bn: 'ঘোরানো হচ্ছে…', en: 'Rotating…' }) : t({ bn: 'ঘোরান', en: 'Rotate' })}
             </button>
           </ButtonRow>
           {done ? <p style={noteStyle} role="status">{done}</p> : null}
+          {done && resultBlob ? (
+            <div style={{ marginTop: 12 }}>
+              {/* Ads rollout B2 (27 Nov 2026): this download goes through RewardedAdButton — Free Download is live, the 30s Unlock stays disabled until AdSense approval (never a fake timer). */}
+              <RewardedAdButton lang={lang} onFreeDownload={() => downloadBlob('eduvelto-rotated.pdf', resultBlob)} />
+            </div>
+          ) : null}
         </>
       ) : null}
       <p style={noteStyle}>{t({ bn: 'ঘূর্ণন মূল ফাইলে নয়, নতুন ফাইলে লেখা হয় — আপনার আসল PDF অপরিবর্তিত থাকে।', en: 'Rotation is written to a new file — your original PDF stays unchanged.' })}</p>

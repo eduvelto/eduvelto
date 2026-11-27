@@ -9,18 +9,19 @@
 import { useEffect, useRef, useState } from 'react';
 import { useLanguage } from '../../i18n/LanguageContext';
 import { Button } from '../../components/ui';
+import RewardedAdButton from '../../components/RewardedAdButton';
 import {
   checkProtectedPdf, isPdfFile, protectPdf, validateProtectOptions,
   PDF_PROTECT_MAX_MB, PDF_PROTECT_MIN_PASSWORD,
 } from '../../lib/tools/pdfPasswordProtector';
 import {
-  cardStyle, downloadStyle, errorStyle, headlineLabelStyle, headlineStyle,
+  cardStyle, errorStyle, headlineLabelStyle, headlineStyle,
   heroDescStyle, heroStyle, heroTitleStyle, inputStyle, isOverLimit, labelStyle,
   noteStyle, PrivacyNote, resultStyle, Tile, tileGridStyle, trustChipStyle,
 } from './toolShared';
 
 export function PdfPasswordProtectorTool() {
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
   const [file, setFile] = useState<File | null>(null);
   const [userPassword, setUserPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -28,6 +29,7 @@ export function PdfPasswordProtectorTool() {
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [resultUrl, setResultUrl] = useState<string | null>(null);
+  const downloadRef = useRef<HTMLAnchorElement | null>(null);
   const [resultBytes, setResultBytes] = useState(0);
   const [verified, setVerified] = useState<'idle' | 'checking' | 'ok' | 'wrong'>('idle');
   const urlRef = useRef<string | null>(null);
@@ -190,9 +192,11 @@ export function PdfPasswordProtectorTool() {
             />
           </div>
           {verified === 'ok' ? (
-            <a href={resultUrl} download={protectedName} style={downloadStyle}>
-              {t({ bn: 'সুরক্ষিত পিডিএফ ডাউনলোড করুন', en: 'Download the protected PDF' })}
-            </a>
+            <>
+              <a ref={downloadRef} href={resultUrl} download={protectedName} style={{ display: 'none' }} aria-hidden="true" tabIndex={-1} />
+              {/* Ads rollout B2 (27 Nov 2026): this download goes through RewardedAdButton — Free Download is live, the 30s Unlock stays disabled until AdSense approval (never a fake timer). */}
+              <RewardedAdButton lang={lang} onFreeDownload={() => downloadRef.current?.click()} />
+            </>
           ) : null}
         </div>
       ) : null}

@@ -6,9 +6,10 @@
 // and never promises a ratio. pdf-lib is loaded with a dynamic import()
 // only (never a static import), so it stays out of the main bundle.
 
-import { useState, type CSSProperties } from 'react';
+import { useRef, useState, type CSSProperties } from 'react';
 import { useLanguage } from '../../i18n/LanguageContext';
 import { Button } from '../../components/ui';
+import RewardedAdButton from '../../components/RewardedAdButton';
 import {
   PDF_COMPRESSION_LEVELS,
   PDF_COMPRESS_PRESETS,
@@ -61,19 +62,6 @@ const errorStyle: CSSProperties = {
   fontSize: 14,
 };
 
-const downloadStyle: CSSProperties = {
-  display: 'inline-block',
-  marginTop: 10,
-  minHeight: 44,
-  lineHeight: '44px',
-  padding: '0 18px',
-  borderRadius: 8,
-  background: 'var(--teal, #0b7285)',
-  color: '#fff',
-  fontWeight: 600,
-  textDecoration: 'none',
-};
-
 const chipStyle = (active: boolean): CSSProperties => ({
   minHeight: 40,
   padding: '8px 14px',
@@ -101,11 +89,12 @@ export function PdfCompressorTool({
   // state): the UI itself toggles this via the "Custom size" chip.
   initialTargetEnabled = false,
 }: { initialTargetEnabled?: boolean } = {}) {
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
   const [file, setFile] = useState<File | null>(null);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [resultUrl, setResultUrl] = useState<string | null>(null);
+  const downloadRef = useRef<HTMLAnchorElement | null>(null);
   const [originalBytes, setOriginalBytes] = useState(0);
   const [newBytes, setNewBytes] = useState(0);
   const [savedPercent, setSavedPercent] = useState(0);
@@ -404,9 +393,9 @@ export function PdfCompressorTool({
               })}
             </p>
           ) : null}
-          <a href={resultUrl} download="compressed.pdf" style={downloadStyle}>
-            {t({ bn: 'ছোট পিডিএফ ডাউনলোড করুন', en: 'Download the compressed PDF' })}
-          </a>
+          <a ref={downloadRef} href={resultUrl} download="compressed.pdf" style={{ display: 'none' }} aria-hidden="true" tabIndex={-1} />
+          {/* Ads rollout B2 (27 Nov 2026): this download goes through RewardedAdButton — Free Download is live, the 30s Unlock stays disabled until AdSense approval (never a fake timer). */}
+          <RewardedAdButton lang={lang} onFreeDownload={() => downloadRef.current?.click()} />
           <p style={noteStyle}>
             {t({
               bn: 'কতটা ছোট হবে তা ফাইলের ওপর নির্ভর করে — কোনো নির্দিষ্ট হার দেওয়ার প্রতিশ্রুতি দেওয়া হয় না।',

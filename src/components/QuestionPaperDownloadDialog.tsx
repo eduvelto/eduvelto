@@ -35,6 +35,8 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { AlertBox, Button, Card } from './ui';
+import { useLanguage } from '../i18n/LanguageContext';
+import RewardedAdButton from './RewardedAdButton';
 import { db } from '../firebase';
 import {
   QPG_CHEAPEST_ANNUAL_BDT,
@@ -94,6 +96,7 @@ export function QuestionPaperDownloadDialog(props: {
   proStatus?: QpgProStatus | null;
   onClose: () => void;
 }) {
+  const { lang } = useLanguage();
   const isGuest = props.uid === 'guest';
   const [usage, setUsage] = useState<QpgUsageView>(() => getDemoUsage(props.uid));
   /** 'firestore' once the real qpgUsage doc has been read; 'demo'
@@ -353,9 +356,24 @@ export function QuestionPaperDownloadDialog(props: {
           {freeDone ? (
             <AlertBox tone="ok">ফ্রি PDF ডাউনলোড হয়েছে। কোটা: {usage.used}/{usage.limit} ব্যবহৃত।</AlertBox>
           ) : (
-            <Button onClick={() => void onFreeDownload()} disabled={downloading || usage.remaining <= 0}>
-              {downloading ? 'PDF তৈরি হচ্ছে…' : 'Download Free (With Eduvelto Watermark)'}
-            </Button>
+            <>
+              {/* Ads rollout B2 (27 Nov 2026): the free watermarked PDF goes
+                  through RewardedAdButton (30s) — Free Download is live and
+                  counts against the 3/month quota exactly as before; the
+                  gate is disabled while generating or when the quota is
+                  exhausted, so it can never re-enable a blocked download.
+                  The Pro clean PDF / DOCX buttons below stay payment-gated
+                  only — NO rewarded gate on top of a payment gate. */}
+              <RewardedAdButton
+                lang={lang}
+                durationSeconds={30}
+                disabled={downloading || usage.remaining <= 0}
+                onFreeDownload={() => void onFreeDownload()}
+              />
+              {downloading ? (
+                <p style={{ fontSize: 13, margin: '8px 0 0' }}>PDF তৈরি হচ্ছে…</p>
+              ) : null}
+            </>
           )}
           {usage.remaining <= 0 && !freeDone ? (
             <p style={{ fontSize: 13, color: '#a33', margin: '8px 0 0' }}>
