@@ -103,7 +103,15 @@ describe('Supporters Wall — real donors only', () => {
   });
 });
 
-describe('donation number — never visible to visitors', () => {
+describe('donation number — never in source, modal shows it on owner order', () => {
+  // Rule as of 27 Nov 2026 20:43 (owner order): the numbers must
+  // never appear as LITERALS in visitor-facing component source
+  // (they come from lib/donations.ts data only), and the FULL
+  // support page still hides them. EXCEPTION: the support modal
+  // (compact) shows the bKash/Nagad number directly with a Copy
+  // Number button, and a "পেমেন্ট করে WhatsApp-এ জানান" button
+  // below — the owner explicitly ordered that. Bank Transfer was
+  // NOT added (owner dropped it 20:48); no bank number is in code.
   it('no visitor-facing component contains the numbers or a raw wa.me link', () => {
     for (const src of [SUPPORT_SRC, METHODS_SRC, CARD_SRC, STORE_SRC]) {
       for (const hidden of HIDDEN) {
@@ -119,5 +127,12 @@ describe('donation number — never visible to visitors', () => {
     for (const src of [METHODS_SRC, SUPPORT_SRC, CARD_SRC]) {
       expect(src).not.toContain('https://wa.me');
     }
+  });
+
+  it('the modal shows bKash + Nagad only, with number + copy + WhatsApp-notify', () => {
+    expect(METHODS_SRC).toContain("m.id === 'bkash' || m.id === 'nagad'");
+    expect(METHODS_SRC).toContain('<CopyNumberButton number={method.number} />');
+    expect(METHODS_SRC).toContain('পেমেন্ট করে WhatsApp-এ জানান');
+    expect(METHODS_SRC).toContain('Personal • Send Money');
   });
 });

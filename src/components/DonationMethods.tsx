@@ -1,14 +1,28 @@
 // Eduvelto — donation payment-method cards (Phase 3, 25 Nov 2026,
-// feature/ssg-bilingual-support; Day 6, 26 Nov 2026: the payment
-// number is NEVER rendered — visitors pay via the branded
-// eduvelto.com/whatsapp redirect, which shares the number on
-// WhatsApp. The number lives only in lib/donations.ts (owner
-// record) and never reaches the DOM, so it cannot be scraped.
-// Rocket and Bank Transfer are coming-soon placeholders with NO
-// number — they show "শীঘ্রই আসছে" and have no payment button,
-// so no number can ever be invented for them. Copying is
-// click-only (SSR-safe: no navigator access at render time) with
-// a textarea fallback where clipboard.writeText is unavailable.
+// feature/ssg-bilingual-support).
+//
+// History:
+// - Day 6, 26 Nov 2026: the payment number was NEVER rendered —
+//   visitors paid via the branded eduvelto.com/whatsapp redirect,
+//   which shares the number on WhatsApp. The number lived only in
+//   lib/donations.ts (owner record) and never reached the DOM, so
+//   it could not be scraped.
+// - 27 Nov 2026 20:43, OWNER ORDER (reverses Day 6 for the MODAL
+//   only): the support modal (compact) shows the bKash/Nagad
+//   number DIRECTLY with a one-click Copy Number button, plus a
+//   "পেমেন্ট করে WhatsApp-এ জানান" button below. Rocket is removed
+//   from the modal. Bank Transfer was NOT added — the owner dropped
+//   it 20:48 after the public-number risk discussion, so NO bank
+//   account number ever entered the code.
+// - The FULL /support page (non-compact) keeps the Day 6 behavior:
+//   no number rendered, payment via the /whatsapp redirect, and
+//   Rocket/Bank Transfer still shown as coming soon.
+// Copying is click-only (SSR-safe: no navigator access at render
+// time) with a textarea fallback where clipboard.writeText is
+// unavailable. The number itself always comes from
+// lib/donations.ts data (method.number) — the literal digits never
+// appear in this file's source (guarded by
+// suggestionsStore.test.ts).
 
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
@@ -39,10 +53,10 @@ async function copyText(text: string): Promise<boolean> {
   }
 }
 
-/** Copy-to-clipboard button for a payment number. Retained for
- *  future verified payment flows — currently UNUSED: no rendered
- *  component shows a payment number (Day 6, 26 Nov 2026 — payment
- *  goes via the eduvelto.com/whatsapp redirect instead). */
+/** Copy-to-clipboard button for a payment number. Used by the
+ *  support modal (compact): the number is shown directly there per
+ *  the owner's 27 Nov 2026 order. The full support page still
+ *  hides the number (Day 6 rule). */
 export function CopyNumberButton({ number }: { number: string }) {
   const { t } = useLanguage();
   const [copied, setCopied] = useState(false);
@@ -65,18 +79,49 @@ export function CopyNumberButton({ number }: { number: string }) {
   );
 }
 
+const cardStyle: React.CSSProperties = {
+  border: '1px solid var(--line)',
+  borderRadius: 12,
+  padding: '14px 16px',
+  background: 'var(--teal-soft)',
+};
+
+/** Modal card (compact): bKash / Nagad only — Personal account,
+ *  Send Money, the number shown directly, one-click copy. */
+function CompactMethodCard({ method }: { method: DonationMethod }) {
+  const { t } = useLanguage();
+  return (
+    <div data-method={method.id} style={cardStyle}>
+      <p style={{ margin: '0 0 4px', fontWeight: 700, fontSize: 16 }}>
+        {t({ bn: method.nameBn, en: method.nameEn })}
+      </p>
+      <p style={{ margin: '0 0 6px', color: 'var(--muted)', fontSize: 14 }}>
+        Personal • Send Money
+      </p>
+      {method.number ? (
+        <>
+          <p
+            style={{
+              margin: '0 0 10px',
+              fontWeight: 700,
+              fontSize: 17,
+              letterSpacing: 0.5,
+              wordBreak: 'break-all',
+            }}
+          >
+            {method.number}
+          </p>
+          <CopyNumberButton number={method.number} />
+        </>
+      ) : null}
+    </div>
+  );
+}
+
 function MethodCard({ method }: { method: DonationMethod }) {
   const { t } = useLanguage();
   return (
-    <div
-      data-method={method.id}
-      style={{
-        border: '1px solid var(--line)',
-        borderRadius: 12,
-        padding: '14px 16px',
-        background: 'var(--teal-soft)',
-      }}
-    >
+    <div data-method={method.id} style={cardStyle}>
       <p style={{ margin: '0 0 4px', fontWeight: 700, fontSize: 16 }}>
         {t({ bn: method.nameBn, en: method.nameEn })}
       </p>
@@ -103,12 +148,47 @@ function MethodCard({ method }: { method: DonationMethod }) {
 
 export default function DonationMethods({ compact = false }: { compact?: boolean }) {
   const { t } = useLanguage();
+  if (compact) {
+    // Modal: bKash + Nagad only (owner order 27 Nov 2026) — Rocket
+    // removed, no bank card. Number shown directly with copy.
+    const methods = DONATION_METHODS.filter((m) => m.id === 'bkash' || m.id === 'nagad');
+    return (
+      <div>
+        <div
+          style={{
+            display: 'grid',
+            gridTemplateColumns: '1fr 1fr',
+            gap: 12,
+          }}
+        >
+          {methods.map((m) => (
+            <CompactMethodCard key={m.id} method={m} />
+          ))}
+        </div>
+        <p style={{ margin: '12px 0 0' }}>
+          <Link
+            to="/whatsapp"
+            className="ev-btn"
+            style={{ display: 'block', textAlign: 'center' }}
+          >
+            {t({ bn: 'পেমেন্ট করে WhatsApp-এ জানান', en: 'Let us know on WhatsApp after paying' })}
+          </Link>
+        </p>
+        <p style={{ margin: '10px 0 0', color: 'var(--muted)', fontSize: 13, lineHeight: 1.6 }}>
+          {t({
+            bn: 'নম্বর কপি করে বিকাশ/নগদ অ্যাপ থেকে Send Money করুন, তারপর উপরের বাটনে WhatsApp-এ জানান।',
+            en: 'Copy the number, send money from the bKash/Nagad app, then let us know on WhatsApp above.',
+          })}
+        </p>
+      </div>
+    );
+  }
   return (
     <div>
       <div
         style={{
           display: 'grid',
-          gridTemplateColumns: compact ? '1fr 1fr' : 'repeat(auto-fill, minmax(220px, 1fr))',
+          gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))',
           gap: 12,
         }}
       >
