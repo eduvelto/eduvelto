@@ -133,6 +133,7 @@ const SearchPage = lazy(() => import('./pages/SearchPage'));
 const RegisterPage = lazy(() => import('./pages/RegisterPage'));
 const RoleSetupPage = lazy(() => import('./pages/RoleSetupPage'));
 const LoginPage = lazy(() => import('./pages/LoginPage'));
+const OfflinePage = lazy(() => import('./pages/OfflinePage'));
 const ProfilePage = lazy(() => import('./pages/ProfilePage'));
 const StudentDashboardPage = lazy(() => import('./pages/StudentDashboardPage'));
 const TeacherDashboardPage = lazy(() => import('./pages/TeacherDashboardPage'));
@@ -329,6 +330,26 @@ function LegacyRedirect() {
   const suffix = params.toString() ? `?${params.toString()}` : '';
   const target = legacyRedirectTarget(location.pathname, lang) ?? '/bn';
   return <Navigate to={`${target}${suffix}`} replace />;
+}
+
+// D-05 (QA 27 Nov 2026): /bn/login, /bn/register, /bn/register/role,
+// /bn/teacher/register and /bn/admission rendered the client-side 404
+// page — login/register/admission live OUTSIDE /:lang, so the prefixed
+// forms fell through to the :lang catch-all. These redirects (mounted
+// as :lang children, before the catch-all) send them to the real
+// routes, preserving the query string (?next= return-to included).
+// /bn/admission lands on the admissions hub in the same language
+// (bare /admission already 301s to /bn/admissions via firebase.json).
+function PrefixedAuthRedirect({ to }: { to: string }) {
+  const location = useLocation();
+  return <Navigate to={`${to}${location.search}`} replace />;
+}
+
+function PrefixedAdmissionRedirect() {
+  const { lang } = useParams<{ lang: string }>();
+  const location = useLocation();
+  const l = lang === 'bn' || lang === 'en' ? lang : 'bn';
+  return <Navigate to={`/${l}/admissions${location.search}`} replace />;
 }
 
 // Routes mirror page-map.md + the Phase 2 route list.
@@ -803,6 +824,15 @@ export default function App() {
         <Route path="progress" element={<ProgressPage />} />
         <Route path="routine" element={<RoutinePage />} />
         <Route path="social" element={<SocialPage />} />
+        {/* D-05 (QA 27 Nov 2026): lang-prefixed auth/admission URLs
+            redirect to the real top-level routes (see
+            PrefixedAuthRedirect above) instead of hitting the
+            catch-all 404. Query strings (?next=) are preserved. */}
+        <Route path="login" element={<PrefixedAuthRedirect to="/login" />} />
+        <Route path="register" element={<PrefixedAuthRedirect to="/register" />} />
+        <Route path="register/role" element={<PrefixedAuthRedirect to="/register/role" />} />
+        <Route path="teacher/register" element={<PrefixedAuthRedirect to="/teacher/register" />} />
+        <Route path="admission" element={<PrefixedAdmissionRedirect />} />
         <Route path="*" element={<NotFoundPage />} />
         </Route>
         {/* Legacy public URLs (Phase 1): client-side equivalent of the
@@ -856,6 +886,10 @@ export default function App() {
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/register/role" element={<RoleSetupPage />} />
         <Route path="/login" element={<LoginPage />} />
+        {/* D-04 (QA 27 Nov 2026): cleanUrls 308s /offline.html to
+            /offline — this route is the target, rendering the same
+            branded offline content the worker serves from precache. */}
+        <Route path="/offline" element={<OfflinePage />} />
         <Route path="/profile" element={<ProfilePage />} />
         <Route path="/profile/guardian-links" element={<GuardianLinksPage />} />
         <Route path="/dashboard" element={<DashboardRedirect />} />

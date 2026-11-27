@@ -66,7 +66,7 @@ export default function QuestionMakerLandingPage() {
         </div>
         <div className="ev-qm-mockup" aria-hidden="true">
           <span className="ev-qm-mockup-wm">eduvelto.com</span>
-          <p className="ev-qm-mockup-title">প্রশ্নপত্র — English (অনার্স)</p>
+          <p className="ev-qm-mockup-title">প্রশ্নপত্র — English (BCS)</p>
           <p className="ev-qm-mockup-meta">বিষয়: English • পূর্ণমান: 10 • সময়: 30 মিনিট • সেট: খ</p>
           <hr className="ev-qm-mockup-rule" />
           <p className="ev-qm-mockup-q">১. Choose the passive form of the sentence: ‘The cat chased the mouse.’</p>
@@ -118,7 +118,7 @@ export default function QuestionMakerLandingPage() {
           <strong>Pro:</strong> প্রতি পেপার ৳{data.proPerPaperBdt} অথবা ৳{data.proMonthlyBdt}/মাস অথবা
           ক্লাসভিত্তিক বার্ষিক ৳{data.cheapestAnnualBdt} থেকে — {data.priceClaimBn}। জলছাপ ছাড়া পরিষ্কার
           PDF, প্রতিষ্ঠানের লোগো, Answer Key শিট, ফন্ট / কলাম / স্পেসিং / লেআউট।{' '}
-          <Chip tone="gold">Pro আপগ্রেড এখন পর্যালোচনাধীন — ফ্রি ডাউনলোড আজই ব্যবহার করা যাবে</Chip>
+          <Chip tone="gold" className="ev-qm-chip-wrap">Pro আপগ্রেড এখন পর্যালোচনাধীন — ফ্রি ডাউনলোড আজই ব্যবহার করা যাবে</Chip>
         </p>
         <p style={{ fontSize: 14, lineHeight: 1.7, margin: 0 }}>
           পুরো প্রশ্ন ব্যাংক ডাউনলোড করা যায় না — শুধু তৈরি করা পেপারটিই ডাউনলোড করা যায়।

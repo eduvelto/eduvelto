@@ -1126,6 +1126,7 @@ export function buildRobotsTxt() {
     `Disallow: /exam\nDisallow: /routine\nDisallow: /progress\nDisallow: /directory\nDisallow: /quiz/\n` +
     `Disallow: /lessons/\nDisallow: /subjects/\nDisallow: /search\nDisallow: /bn/search\nDisallow: /en/search\n` +
     `Disallow: /ai-teacher\nDisallow: /bn/ai-teacher\nDisallow: /en/ai-teacher\n` +
+    `Disallow: /offline\n` +
     `\nSitemap: https://eduvelto.com/sitemap.xml\n`
   );
 }

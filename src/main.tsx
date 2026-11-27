@@ -11,7 +11,12 @@ import { isNativeApp } from './lib/isNativeApp';
 import { ErrorBoundary } from './components/ErrorBoundary';
 
 // Service worker registration is BROWSER-ONLY (app audit, 24 Nov 2026,
-// owner brief item 8: the app is fully online-only, no service worker).
+// owner brief item 8: the native app is fully online-only, no service
+// worker IN THE NATIVE APP). Browsers DO register the Workbox worker
+// (offline page only — no offline content; Firestore data is not
+// cached). D-04 (QA 27 Nov 2026): the old wording here ("the app is
+// fully online-only, no service worker") misled readers into thinking
+// no worker ships at all.
 // vite-plugin-pwa's auto-registration is disabled (injectRegister: false
 // in vite.config.ts); the browser registers here with the same
 // autoUpdate semantics as before (immediate takeover), while the

@@ -3955,8 +3955,17 @@ html[data-theme="dark"] .ev-announcement-ticker {
   text-align: center;
 }
 .ev-qm-mockup-wm {
+  /* D-03 (QA 27 Nov 2026): the watermark used to fill the whole mockup
+     (inset: 0) and rotate -28deg, so its bounding box measured 410 px on
+     a 390 px viewport and the page scrolled horizontally (scrollWidth
+     432). It now shrink-wraps its own text and rotates around its own
+     centre, so the rotated box (~195 px) stays inside the mockup. The
+     mockup itself clips anything left over (overflow: hidden above). */
   position: absolute;
-  inset: 0;
+  left: 50%;
+  top: 50%;
+  width: max-content;
+  max-width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -3964,8 +3973,26 @@ html[data-theme="dark"] .ev-announcement-ticker {
   font-size: 28px;
   font-weight: 700;
   color: rgba(0, 0, 0, 0.07);
-  transform: rotate(-28deg);
+  transform: translate(-50%, -50%) rotate(-28deg);
   white-space: nowrap;
+}
+@media (max-width: 480px) {
+  .ev-qm-mockup-wm {
+    font-size: 20px;
+  }
+  /* D-03: grid children must not force the hero wider than the viewport. */
+  .ev-qm-hero > * {
+    min-width: 0;
+  }
+}
+/* D-03 (QA 27 Nov 2026): the long gold "Pro review" chip on the
+   question-maker page is nowrap by default (.ev-chip) and measured
+   399 px on a 390 px viewport — it could not wrap and pushed the page
+   wide. Chips with this class wrap instead; the pill stays readable. */
+.ev-qm-chip-wrap {
+  white-space: normal;
+  overflow-wrap: break-word;
+  max-width: 100%;
 }
 html[data-theme="dark"] .ev-qm-hero {
   background: #1d2b1f;

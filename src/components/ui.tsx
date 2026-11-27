@@ -142,10 +142,10 @@ export function Card(props: { children: ReactNode; hover?: boolean; className?: 
   );
 }
 
-export function Chip(props: { children: ReactNode; tone?: 'blue' | 'gold' | 'navy' | 'outline' }) {
+export function Chip(props: { children: ReactNode; tone?: 'blue' | 'gold' | 'navy' | 'outline'; className?: string }) {
   const tone = props.tone ?? 'blue';
   const cls = tone === 'gold' ? 'ev-chip-gold' : tone === 'navy' ? 'ev-chip-navy' : tone === 'outline' ? 'ev-chip-outline' : '';
-  return <span className={`ev-chip ${cls}`.trim()}>{props.children}</span>;
+  return <span className={`ev-chip ${cls} ${props.className ?? ''}`.trim()}>{props.children}</span>;
 }
 
 /** Animated loading skeleton. `lines` renders stacked bars; `height` sets each bar. */
